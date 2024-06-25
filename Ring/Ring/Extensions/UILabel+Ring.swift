@@ -28,14 +28,14 @@ extension UILabel {
         attrString.addAttribute(NSAttributedString.Key.paragraphStyle,
                                 value: style,
                                 range: NSRange(location: 0, length: withText.utf16.count))
-        self.attributedText = attrString
+        attributedText = attrString
     }
 
     func ajustToTextSize() {
-        self.minimumScaleFactor = 0.5
-        self.numberOfLines = 0
-        self.adjustsFontSizeToFitWidth = true
-        self.textAlignment = .center
-        self.lineBreakMode = .byWordWrapping
+        minimumScaleFactor = 0.5
+        numberOfLines = 0
+        adjustsFontSizeToFitWidth = true
+        textAlignment = .center
+        lineBreakMode = .byWordWrapping
     }
 }

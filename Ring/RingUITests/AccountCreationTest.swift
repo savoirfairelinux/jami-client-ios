@@ -18,11 +18,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import XCTest
 import Embassy
+import XCTest
 
 final class AccountCreationTest: XCTestCase {
-
     let app = XCUIApplication()
     var nameServer: MockNameServer!
 
@@ -47,7 +46,8 @@ final class AccountCreationTest: XCTestCase {
         if !conversationWindow.exists {
             return
         }
-        let accountsButton = XCUIApplication().navigationBars.buttons[AccessibilityIdentifiers.openAccountsButton]
+        let accountsButton = XCUIApplication().navigationBars
+            .buttons[AccessibilityIdentifiers.openAccountsButton]
         accountsButton.tap()
         let addAccount = app.buttons[AccessibilityIdentifiers.addAccountButton]
         waitForElementToAppear(addAccount)

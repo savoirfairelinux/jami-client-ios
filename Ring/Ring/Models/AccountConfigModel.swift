@@ -104,7 +104,7 @@ class AccountConfigModel {
      - Returns: a boolean indicating the value of the configuration element.
      */
     func getBool(forConfigKeyModel configKeyModel: ConfigKeyModel) -> Bool {
-        return "true".caseInsensitiveCompare(self.get(withConfigKeyModel: configKeyModel))
+        return "true".caseInsensitiveCompare(get(withConfigKeyModel: configKeyModel))
             == ComparisonResult.orderedSame
     }
 
@@ -117,7 +117,7 @@ class AccountConfigModel {
      string in case of an issue.
      */
     func get(withConfigKeyModel configKeyModel: ConfigKeyModel) -> String {
-        let value: String? = self.configValues[configKeyModel]
+        let value: String? = configValues[configKeyModel]
         return value != nil ? value! : ""
     }
 
@@ -130,14 +130,14 @@ class AccountConfigModel {
 
      */
     func set(withConfigKeyModel configKeyModel: ConfigKeyModel, withValue value: String) {
-        self.configValues[configKeyModel] = value
+        configValues[configKeyModel] = value
     }
 }
 
 extension AccountConfigModel {
     func toDetails() -> [String: String]? {
         var details = [String: String]()
-        for (key, value) in self.configValues {
+        for (key, value) in configValues {
             details[key.key.rawValue] = value
         }
         return details

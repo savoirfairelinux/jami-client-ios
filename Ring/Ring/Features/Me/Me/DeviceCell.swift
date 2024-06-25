@@ -18,18 +18,18 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import Reusable
 import RxSwift
+import UIKit
 
 class DeviceCell: UITableViewCell, NibReusable {
-    @IBOutlet weak var deviceIdLabel: UILabel!
-    @IBOutlet weak var deviceNameLabel: UILabel!
-    @IBOutlet weak var removeDevice: UIButton!
+    @IBOutlet var deviceIdLabel: UILabel!
+    @IBOutlet var deviceNameLabel: UILabel!
+    @IBOutlet var removeDevice: UIButton!
     var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.disposeBag = DisposeBag()
+        disposeBag = DisposeBag()
     }
 }

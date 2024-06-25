@@ -21,19 +21,21 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import Reusable
-import RxSwift
 import RxCocoa
 import RxDataSources
+import RxSwift
+import UIKit
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBased {
     // MARK: - outlets
-    @IBOutlet private weak var settingsTable: SettingsTableView!
+
+    @IBOutlet private var settingsTable: SettingsTableView!
 
     // MARK: - members
+
     var viewModel: MeViewModel!
     private let disposeBag = DisposeBag()
     private var stretchyHeader: AccountHeader!
@@ -50,18 +52,19 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     var loadingViewPresenter = LoadingViewPresenter()
 
     // MARK: - functio
+
     override func viewDidLoad() {
-        self.view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = .systemGroupedBackground
         setupTableView()
-        self.addHeaderView()
+        addHeaderView()
         super.viewDidLoad()
-        self.applyL10n()
-        self.configureBindings()
-        self.calculateSipCredentialsMargin()
-        self.calculateConnectivityMargin()
-        self.adaptTableToKeyboardState(for: self.settingsTable,
-                                       with: self.disposeBag,
-                                       topOffset: self.stretchyHeader.minimumContentHeight)
+        applyL10n()
+        configureBindings()
+        calculateSipCredentialsMargin()
+        calculateConnectivityMargin()
+        adaptTableToKeyboardState(for: settingsTable,
+                                  with: disposeBag,
+                                  topOffset: stretchyHeader.minimumContentHeight)
         NotificationCenter
             .default
             .addObserver(self,
@@ -77,41 +80,46 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     @objc
-    private func preferredContentSizeChanged(_ notification: NSNotification) {
-        self.calculateSipCredentialsMargin()
-        self.calculateConnectivityMargin()
+    private func preferredContentSizeChanged(_: NSNotification) {
+        calculateSipCredentialsMargin()
+        calculateConnectivityMargin()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
-        self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium)]
-        self.configureNavigationBar(backgroundColor: .systemGroupedBackground)
+        navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
+        navigationController?.navigationBar
+            .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(
+                ofSize: 18,
+                weight: .medium
+            )]
+        configureNavigationBar(backgroundColor: .systemGroupedBackground)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.configureNavigationBar()
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+        configureNavigationBar()
+        navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow
+            .cgColor
     }
 
     func setupTableView() {
-        self.settingsTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        self.settingsTable.alwaysBounceHorizontal = false
+        settingsTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        settingsTable.alwaysBounceHorizontal = false
         if #available(iOS 15.0, *) {
             self.settingsTable.sectionHeaderTopPadding = 0
         }
     }
 
     func applyL10n() {
-        self.navigationItem.title = L10n.Global.accountSettings
-        self.profileName.placeholder = L10n.Global.name
+        navigationItem.title = L10n.Global.accountSettings
+        profileName.placeholder = L10n.Global.name
     }
 
     private func addHeaderView() {
         guard let nibViews = Bundle.main
-                .loadNibNamed("AccountHeader", owner: self, options: nil) else {
+                .loadNibNamed("AccountHeader", owner: self, options: nil)
+        else {
             supportEditProfile()
             return
         }
@@ -120,46 +128,49 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             return
         }
         headerView.backgroundColor = .systemGroupedBackground
-        self.stretchyHeader = headerView
+        stretchyHeader = headerView
         let point = CGPoint(x: 0, y: 120)
-        self.stretchyHeader.frame.origin = point
-        self.settingsTable.addSubview(self.stretchyHeader)
-        self.settingsTable.delegate = self
-        self.profileImageView = stretchyHeader.profileImageView
-        self.profileName = stretchyHeader.profileName
+        stretchyHeader.frame.origin = point
+        settingsTable.addSubview(stretchyHeader)
+        settingsTable.delegate = self
+        profileImageView = stretchyHeader.profileImageView
+        profileName = stretchyHeader.profileName
     }
 
     private func supportEditProfile() {
         // if loading grom nib failed add empty views requered by EditProfileViewController
         let image = UIImageView()
         let name = UITextField()
-        self.view.addSubview(image)
-        self.view.addSubview(name)
-        self.profileImageView = image
-        self.profileName = name
+        view.addSubview(image)
+        view.addSubview(name)
+        profileImageView = image
+        profileName = name
     }
 
     private func configureBindings() {
         let imageQrCode = UIImage(asset: Asset.qrCode) as UIImage?
         let qrCodeButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
         qrCodeButton.setImage(imageQrCode, for: .normal)
-        self.viewModel.isAccountSip
+        viewModel.isAccountSip
             .asObservable()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak qrCodeButton](isSip) in
+            .subscribe(onNext: { [weak qrCodeButton] isSip in
                 qrCodeButton?.isHidden = isSip
                 qrCodeButton?.isEnabled = !isSip
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         let qrCodeButtonItem = UIBarButtonItem(customView: qrCodeButton)
-        qrCodeButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.qrCodeItemTapped()
-            })
-            .disposed(by: self.disposeBag)
-        self.viewModel.showActionState.asObservable()
+        qrCodeButton.rx.tap.throttle(
+            Durations.halfSecond.toTimeInterval(),
+            scheduler: MainScheduler.instance
+        )
+        .subscribe(onNext: { [weak self] in
+            self?.qrCodeItemTapped()
+        })
+        .disposed(by: disposeBag)
+        viewModel.showActionState.asObservable()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self](action) in
+            .subscribe(onNext: { [weak self] action in
                 switch action {
                 case .noAction:
                     break
@@ -167,39 +178,47 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     self?.stopLoadingView()
                 case .showLoading:
                     self?.showLoadingView()
-                case .deviceRevokedWithSuccess(let deviceId):
+                case let .deviceRevokedWithSuccess(deviceId):
                     self?.showDeviceRevokedAlert(deviceId: deviceId)
-                case .deviceRevocationError(let deviceId, let errorMessage):
+                case let .deviceRevocationError(deviceId, errorMessage):
                     self?.showDeviceRevocationError(deviceId: deviceId, errorMessage: errorMessage)
                 case .usernameRegistered:
                     self?.stopLoadingView()
-                case .usernameRegistrationFailed(let errorMessage):
+                case let .usernameRegistrationFailed(errorMessage):
                     self?.showNameRegisterationFailed(error: errorMessage)
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.navigationItem.rightBarButtonItem = qrCodeButtonItem
+            .disposed(by: disposeBag)
+        navigationItem.rightBarButtonItem = qrCodeButtonItem
 
         // setup Table
-        self.settingsTable.estimatedRowHeight = 35
-        self.settingsTable.rowHeight = UITableView.automaticDimension
-        self.settingsTable.tableFooterView = UIView()
+        settingsTable.estimatedRowHeight = 35
+        settingsTable.rowHeight = UITableView.automaticDimension
+        settingsTable.tableFooterView = UIView()
 
         // Register cell
-        self.setUpDataSource()
-        self.settingsTable.register(cellType: DeviceCell.self)
+        setUpDataSource()
+        settingsTable.register(cellType: DeviceCell.self)
     }
 
     private func openBlockedList() {
-        self.viewModel.showBlockedContacts()
+        viewModel.showBlockedContacts()
     }
 
     private func showLoadingView() {
-        loadingViewPresenter.presentWithMessage(message: L10n.AccountPage.deviceRevocationProgress, presentingVC: self, animated: true)
+        loadingViewPresenter.presentWithMessage(
+            message: L10n.AccountPage.deviceRevocationProgress,
+            presentingVC: self,
+            animated: true
+        )
     }
 
     private func showNameRegistration() {
-        loadingViewPresenter.presentWithMessage(message: L10n.AccountPage.usernameRegistering, presentingVC: self, animated: true)
+        loadingViewPresenter.presentWithMessage(
+            message: L10n.AccountPage.usernameRegistering,
+            presentingVC: self,
+            animated: true
+        )
     }
 
     private func showDeviceRevocationError(deviceId: String, errorMessage: String) {
@@ -220,7 +239,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         }
     }
 
-    private func showDeviceRevokedAlert(deviceId: String) {
+    private func showDeviceRevokedAlert(deviceId _: String) {
         loadingViewPresenter.hide(animated: true) { [weak self] in
             guard let self = self else { return }
             let alert = UIAlertController(title: L10n.AccountPage.deviceRevocationSuccess,
@@ -254,19 +273,54 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         imageQRCode.clipsToBounds = true
         imageQRCode.translatesAutoresizingMaskIntoConstraints = false
         alert.view.addSubview(imageQRCode)
-        alert.view.addConstraint(NSLayoutConstraint(item: imageQRCode, attribute: .centerX, relatedBy: .equal, toItem: alert.view, attribute: .centerX, multiplier: 1, constant: 0))
-        alert.view.addConstraint(NSLayoutConstraint(item: imageQRCode, attribute: .centerY, relatedBy: .equal, toItem: alert.view, attribute: .top, multiplier: 1, constant: 0.0))
-        alert.view.addConstraint(NSLayoutConstraint(item: imageQRCode, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 270))
-        alert.view.addConstraint(NSLayoutConstraint(item: imageQRCode, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 270))
-        self.present(alert, animated: true, completion: {
+        alert.view.addConstraint(NSLayoutConstraint(
+            item: imageQRCode,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: alert.view,
+            attribute: .centerX,
+            multiplier: 1,
+            constant: 0
+        ))
+        alert.view.addConstraint(NSLayoutConstraint(
+            item: imageQRCode,
+            attribute: .centerY,
+            relatedBy: .equal,
+            toItem: alert.view,
+            attribute: .top,
+            multiplier: 1,
+            constant: 0.0
+        ))
+        alert.view.addConstraint(NSLayoutConstraint(
+            item: imageQRCode,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 1.0,
+            constant: 270
+        ))
+        alert.view.addConstraint(NSLayoutConstraint(
+            item: imageQRCode,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 1.0,
+            constant: 270
+        ))
+        present(alert, animated: true, completion: {
             alert.view.superview?.isUserInteractionEnabled = true
-            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(
+                target: self,
+                action: #selector(self.alertControllerBackgroundTapped)
+            ))
         })
     }
 
     @objc
     func alertControllerBackgroundTapped() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     func generateQRCode(from string: String) -> UIImage? {
@@ -285,446 +339,500 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     // swiftlint:disable cyclomatic_complexity
     // swiftlint:disable closure_body_length
     private func setUpDataSource() {
-
-        let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, SettingsSection.Item)
-            -> UITableViewCell = {
-                ( dataSource: TableViewSectionedDataSource<SettingsSection>,
-                  tableView: UITableView,
-                  indexPath: IndexPath,
-                  _: SettingsSection.Item) in
-                switch dataSource[indexPath] {
-                case .autoRegistration:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.AccountPage.autoRegistration
-                    cell.textLabel?.numberOfLines = 0
-                    let switchView = UISwitch()
-                    switchView.onTintColor = .jamiButtonDark
-                    cell.selectionStyle = .none
-                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                    cell.accessoryView = switchView
-                    self.viewModel.keepAliveEnabled
-                        .asObservable()
-                        .startWith(self.viewModel.keepAliveEnabled.value)
-                        .observe(on: MainScheduler.instance)
-                        .bind(to: switchView.rx.value)
-                        .disposed(by: cell.disposeBag)
-                    switchView.rx
-                        .isOn.changed
-                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
-                        .distinctUntilChanged()
-                        .asObservable()
-                        .subscribe(onNext: {[weak self] enable in
-                            self?.viewModel.enableKeepAlive(enable: enable)
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .enableSRTP:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.AccountPage.enableSRTP
-                    cell.textLabel?.numberOfLines = 0
-                    let switchView = UISwitch()
-                    switchView.onTintColor = .jamiButtonDark
-                    cell.selectionStyle = .none
-                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                    cell.accessoryView = switchView
-                    self.viewModel.SRTPEnabled
-                        .asObservable()
-                        .startWith(self.viewModel.SRTPEnabled.value)
-                        .observe(on: MainScheduler.instance)
-                        .bind(to: switchView.rx.value)
-                        .disposed(by: cell.disposeBag)
-                    switchView.rx
-                        .isOn.changed
-                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
-                        .distinctUntilChanged()
-                        .asObservable()
-                        .subscribe(onNext: {[weak self] enable in
-                            self?.viewModel.enableSRTP(enable: enable)
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .device(let device):
-                    let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeviceCell.self)
-                    cell.deviceIdLabel.text = device.deviceId
-                    cell.deviceIdLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-                    cell.textLabel?.numberOfLines = 0
-                    cell.deviceIdLabel.sizeToFit()
-                    if let deviceName = device.deviceName {
-                        cell.deviceNameLabel.text = deviceName
-                        cell.deviceNameLabel.font = UIFont.preferredFont(forTextStyle: .body)
-                        cell.deviceNameLabel.sizeToFit()
-                    }
-                    cell.selectionStyle = .none
-                    cell.removeDevice.isHidden = device.isCurrent
-                    cell.removeDevice.rx.tap
-                        .subscribe(onNext: { [weak self, device] in
-                            self?.confirmRevokeDeviceAlert(deviceID: device.deviceId)
-                        })
-                        .disposed(by: cell.disposeBag)
-                    cell.sizeToFit()
-                    return cell
-                case .linkNew:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.AccountPage.linkDeviceTitle
-                    cell.textLabel?.textColor = UIColor.jamiButtonDark
-                    cell.textLabel?.textAlignment = .center
-                    cell.textLabel?.numberOfLines = 0
-                    cell.selectionStyle = .none
-                    cell.sizeToFit()
-                    let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: self.settingsTable.frame.width, height: button.frame.height)
-                    button.frame.size = size
-                    cell.addSubview(button)
-                    button.rx.tap
-                        .subscribe(onNext: { [weak self] in
-                            self?.viewModel.linkDevice()
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .blockedList:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.AccountPage.blockedContacts
-                    cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-                    cell.textLabel?.numberOfLines = 0
-                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                    cell.selectionStyle = .none
-                    cell.sizeToFit()
-                    let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: self.settingsTable.frame.width, height: button.frame.height)
-                    button.frame.size = size
-                    cell.addSubview(button)
-                    button.rx.tap
-                        .subscribe(onNext: { [weak self] in
-                            self?.openBlockedList()
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .removeAccount:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.Global.removeAccount
-                    cell.textLabel?.textColor = UIColor.systemRed
-                    cell.textLabel?.textAlignment = .center
-                    cell.textLabel?.numberOfLines = 0
-                    cell.selectionStyle = .none
-                    cell.sizeToFit()
-                    let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: self.settingsTable.frame.width, height: 25)
-                    button.frame.size = size
-                    cell.addSubview(button)
-                    button.rx.tap
-                        .subscribe(onNext: { [weak self] in
-                            self?.confirmRemoveAccountAlert()
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .jamiUserName(let label):
-                    if !label.isEmpty {
-                        return self.configureCellWithEnableTextCopy(text: L10n.Global.username,
-                                                                    secondaryText: label,
-                                                                    style: .callout, accessibilityIdentifier: AccessibilityIdentifiers.accountRegisteredName)
-                    }
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.Global.registerAUsername
-                    cell.textLabel?.textColor = UIColor.jamiButtonDark
-                    cell.textLabel?.textAlignment = .center
-                    cell.textLabel?.numberOfLines = 0
-                    cell.sizeToFit()
-                    cell.selectionStyle = .none
-                    let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: self.settingsTable.frame.width, height: button.frame.height)
-                    button.frame.size = size
-                    cell.addSubview(button)
-                    button.rx.tap
-                        .subscribe(onNext: { [weak self] in
-                            self?.registerUsername()
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .jamiID(let label):
-                    return self.configureCellWithEnableTextCopy(text: "Jami ID",
-                                                                secondaryText: label,
-                                                                style: .footnote, accessibilityIdentifier: AccessibilityIdentifiers.accountJamiId)
-                case .ordinary(let label):
-                    let cell = UITableViewCell()
-                    cell.textLabel?.text = label
-                    cell.textLabel?.numberOfLines = 0
-                    cell.selectionStyle = .none
-                    return cell
-                case .shareAccountDetails:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.AccountPage.inviteFriends
-                    cell.textLabel?.textColor = UIColor.jamiButtonDark
-                    cell.textLabel?.textAlignment = .center
-                    cell.textLabel?.numberOfLines = 0
-                    cell.sizeToFit()
-                    cell.selectionStyle = .none
-                    let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: cell.contentView.bounds.width, height: button.frame.height)
-                    button.frame.size = size
-                    cell.contentView.addSubview(button)
-                    button.rx.tap
-                        .subscribe(onNext: { [weak self] in
-                            self?.shareAccountInfo()
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .changePassword:
-                    let cell = DisposableCell()
-                    let title = self.viewModel.hasPassword() ?
-                        L10n.AccountPage.changePassword : L10n.AccountPage.createPassword
-                    cell.textLabel?.text = title
-                    cell.textLabel?.textColor = UIColor.jamiButtonDark
-                    cell.textLabel?.textAlignment = .center
-                    cell.textLabel?.numberOfLines = 0
-                    cell.sizeToFit()
-                    cell.selectionStyle = .none
-                    let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: self.settingsTable.frame.width, height: button.frame.height)
-                    button.frame.size = size
-                    cell.addSubview(button)
-                    button.rx.tap
-                        .subscribe(onNext: { [weak self] in
-                            self?.changePassword(title: title)
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .notifications:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.AccountPage.enableNotifications
-                    cell.textLabel?.numberOfLines = 0
-                    let switchView = UISwitch()
-                    switchView.onTintColor = .jamiButtonDark
-                    cell.selectionStyle = .none
-                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                    cell.accessoryView = switchView
-                    self.viewModel.notificationsEnabledObservable
-                        .observe(on: MainScheduler.instance)
-                        .bind(to: switchView.rx.value)
-                        .disposed(by: cell.disposeBag)
-                    switchView.setOn(self.viewModel.notificationsEnabled, animated: false)
-                    switchView.rx
-                        .isOn.changed
-                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
-                        .distinctUntilChanged()
-                        .asObservable()
-                        .subscribe(onNext: {[weak self] value in
-                            self?.viewModel.enableNotifications(enable: value)
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .peerDiscovery:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.AccountPage.peerDiscovery
-                    cell.textLabel?.numberOfLines = 0
-                    let switchView = UISwitch()
-                    switchView.onTintColor = .jamiButtonDark
-                    cell.selectionStyle = .none
-                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                    cell.accessoryView = switchView
-                    self.viewModel.peerDiscoveryEnabled
-                        .asObservable()
-                        .startWith(self.viewModel.peerDiscoveryEnabled.value)
-                        .observe(on: MainScheduler.instance)
-                        .bind(to: switchView.rx.value)
-                        .disposed(by: cell.disposeBag)
-                    switchView.rx
-                        .isOn.changed
-                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
-                        .distinctUntilChanged()
-                        .asObservable()
-                        .subscribe(onNext: {[weak self] enable in
-                            self?.viewModel.enablePeerDiscovery(enable: enable)
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .proxy:
-                    let cell = DisposableCell(style: .value1, reuseIdentifier: self.sipAccountCredentialsCell)
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
-                    cell.selectionStyle = .none
-                    let text = UITextField()
-                    text.autocorrectionType = .no
-                    text.font = UIFont.preferredFont(forTextStyle: .callout)
-                    text.returnKeyType = .done
-                    text.text = self.viewModel.proxyAddress.value
-                    text.sizeToFit()
-                    text.rx.controlEvent(.editingDidEndOnExit)
-                        .observe(on: MainScheduler.instance)
-                        .subscribe(onNext: { [weak self] _ in
-                            guard let text = text.text else { return }
-                            self?.viewModel.changeProxy(proxyServer: text)
-                        })
-                        .disposed(by: cell.disposeBag)
-                    cell.textLabel?.text = "Proxy server"
-                    cell.textLabel?.sizeToFit()
-                    cell.sizeToFit()
-                    cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
-                    cell.detailTextLabel?.textColor = UIColor.clear
-                    var frame = CGRect(x: self.sipCredentialsMargin, y: 0,
-                                       width: self.view.frame.width - self.sipCredentialsMargin,
-                                       height: cell.frame.height)
-                    if self.view.frame.width - self.sipCredentialsMargin < text.frame.size.width {
-                        let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
-                        let size = text.frame.size
-                        frame.origin = origin
-                        frame.size = size
-                        cell.detailTextLabel?.text = self.viewModel.proxyAddress.value
-                    } else {
-                        cell.detailTextLabel?.text = ""
-                    }
-                    cell.detailTextLabel?.sizeToFit()
-                    text.frame = frame
-                    cell.contentView.addSubview(text)
-                    cell.sizeToFit()
-                    return cell
-                case .sipUserName(let value):
-                    let cell = self
-                        .configureSipCredentialsCell(cellType: .sipUserName(value: value),
-                                                     value: value)
-                    return cell
-                case .sipPassword(let value):
-                    let cell = self
-                        .configureSipCredentialsCell(cellType: .sipPassword(value: value),
-                                                     value: value)
-                    return cell
-                case .sipServer(let value):
-                    let cell = self
-                        .configureSipCredentialsCell(cellType: .sipServer(value: value),
-                                                     value: value)
-                    return cell
-                case .proxyServer(let value):
-                    let cell = self
-                        .configureSipCredentialsCell(cellType: .proxyServer(value: value),
-                                                     value: value)
-                    return cell
-                case .port(let value):
-                    let cell = self
-                        .configureSipCredentialsCell(cellType: .port(value: value),
-                                                     value: value)
-                    return cell
-                case .accountState(let state):
-                    let cell = DisposableCell(style: .value1, reuseIdentifier: self.accountStateCell)
-                    cell.textLabel?.text = L10n.Account.accountStatus
-                    cell.textLabel?.numberOfLines = 0
-                    cell.selectionStyle = .none
-                    cell.textLabel?.sizeToFit()
-                    cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
-                    cell.detailTextLabel?.text = state.value
-                    state.asObservable()
-                        .observe(on: MainScheduler.instance)
-                        .subscribe(onNext: { (status) in
-                            cell.detailTextLabel?.text = status
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .enableAccount:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.Account.enableAccount
-                    cell.textLabel?.numberOfLines = 0
-                    let switchView = UISwitch()
-                    switchView.onTintColor = .jamiButtonDark
-                    cell.selectionStyle = .none
-                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                    cell.accessoryView = switchView
-                    switchView.setOn(self.viewModel.accountEnabled.value,
-                                     animated: false)
-                    self.viewModel.accountEnabled
-                        .asObservable()
-                        .observe(on: MainScheduler.instance)
-                        .bind(to: switchView.rx.value)
-                        .disposed(by: cell.disposeBag)
-                    switchView.rx
-                        .isOn.changed
-                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
-                        .distinctUntilChanged()
-                        .asObservable()
-                        .subscribe(onNext: {[weak self] enable in
-                            self?.viewModel.enableAccount(enable: enable)
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .turnEnabled:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.AccountPage.turnEnabled
-                    cell.textLabel?.numberOfLines = 0
-                    let switchView = UISwitch()
-                    switchView.onTintColor = .jamiButtonDark
-                    cell.selectionStyle = .none
-                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                    cell.accessoryView = switchView
-                    self.viewModel.turnEnabled
-                        .asObservable()
-                        .startWith(self.viewModel.turnEnabled.value)
-                        .observe(on: MainScheduler.instance)
-                        .bind(to: switchView.rx.value)
-                        .disposed(by: cell.disposeBag)
-                    switchView.rx
-                        .isOn.changed
-                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
-                        .distinctUntilChanged()
-                        .asObservable()
-                        .subscribe(onNext: {[weak self] enable in
-                            self?.viewModel.enableTurn(enable: enable)
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .upnpEnabled:
-                    let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.AccountPage.upnpEnabled
-                    cell.textLabel?.numberOfLines = 0
-                    let switchView = UISwitch()
-                    switchView.onTintColor = .jamiButtonDark
-                    cell.selectionStyle = .none
-                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                    cell.accessoryView = switchView
-                    self.viewModel.upnpEnabled
-                        .asObservable()
-                        .startWith(self.viewModel.upnpEnabled.value)
-                        .observe(on: MainScheduler.instance)
-                        .bind(to: switchView.rx.value)
-                        .disposed(by: cell.disposeBag)
-                    switchView.rx
-                        .isOn.changed
-                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
-                        .distinctUntilChanged()
-                        .asObservable()
-                        .subscribe(onNext: {[weak self] enable in
-                            self?.viewModel.enableUpnp(enable: enable)
-                        })
-                        .disposed(by: cell.disposeBag)
-                    return cell
-                case .turnServer:
-                    let cell = self
-                        .configureTurnCell(cellType: .turnServer,
-                                           value: self.viewModel.turnServer.value)
-                    return cell
-                case .turnUsername:
-                    let cell = self
-                        .configureTurnCell(cellType: .turnUsername,
-                                           value: self.viewModel.turnUsername.value)
-                    return cell
-                case .turnPassword:
-                    let cell = self
-                        .configureTurnCell(cellType: .turnPassword,
-                                           value: self.viewModel.turnPassword.value)
-                    return cell
-                case .turnRealm:
-                    let cell = self
-                        .configureTurnCell(cellType: .turnRealm,
-                                           value: self.viewModel.turnRealm.value)
-                    return cell
-                case .donationCampaign:
-                    return self.createDonationNotificationCell()
-                case .donate:
-                    return self.createDonationCell()
+        let configureCell: (
+            TableViewSectionedDataSource,
+            UITableView,
+            IndexPath,
+            SettingsSection.Item
+        )
+        -> UITableViewCell = {
+            (dataSource: TableViewSectionedDataSource<SettingsSection>,
+             tableView: UITableView,
+             indexPath: IndexPath,
+             _: SettingsSection.Item) in
+            switch dataSource[indexPath] {
+            case .autoRegistration:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.AccountPage.autoRegistration
+                cell.textLabel?.numberOfLines = 0
+                let switchView = UISwitch()
+                switchView.onTintColor = .jamiButtonDark
+                cell.selectionStyle = .none
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                cell.accessoryView = switchView
+                self.viewModel.keepAliveEnabled
+                    .asObservable()
+                    .startWith(self.viewModel.keepAliveEnabled.value)
+                    .observe(on: MainScheduler.instance)
+                    .bind(to: switchView.rx.value)
+                    .disposed(by: cell.disposeBag)
+                switchView.rx
+                    .isOn.changed
+                    .debounce(
+                        Durations.switchThrottlingDuration.toTimeInterval(),
+                        scheduler: MainScheduler.instance
+                    )
+                    .distinctUntilChanged()
+                    .asObservable()
+                    .subscribe(onNext: { [weak self] enable in
+                        self?.viewModel.enableKeepAlive(enable: enable)
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .enableSRTP:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.AccountPage.enableSRTP
+                cell.textLabel?.numberOfLines = 0
+                let switchView = UISwitch()
+                switchView.onTintColor = .jamiButtonDark
+                cell.selectionStyle = .none
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                cell.accessoryView = switchView
+                self.viewModel.SRTPEnabled
+                    .asObservable()
+                    .startWith(self.viewModel.SRTPEnabled.value)
+                    .observe(on: MainScheduler.instance)
+                    .bind(to: switchView.rx.value)
+                    .disposed(by: cell.disposeBag)
+                switchView.rx
+                    .isOn.changed
+                    .debounce(
+                        Durations.switchThrottlingDuration.toTimeInterval(),
+                        scheduler: MainScheduler.instance
+                    )
+                    .distinctUntilChanged()
+                    .asObservable()
+                    .subscribe(onNext: { [weak self] enable in
+                        self?.viewModel.enableSRTP(enable: enable)
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case let .device(device):
+                let cell = tableView.dequeueReusableCell(
+                    for: indexPath,
+                    cellType: DeviceCell.self
+                )
+                cell.deviceIdLabel.text = device.deviceId
+                cell.deviceIdLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+                cell.textLabel?.numberOfLines = 0
+                cell.deviceIdLabel.sizeToFit()
+                if let deviceName = device.deviceName {
+                    cell.deviceNameLabel.text = deviceName
+                    cell.deviceNameLabel.font = UIFont.preferredFont(forTextStyle: .body)
+                    cell.deviceNameLabel.sizeToFit()
                 }
+                cell.selectionStyle = .none
+                cell.removeDevice.isHidden = device.isCurrent
+                cell.removeDevice.rx.tap
+                    .subscribe(onNext: { [weak self, device] in
+                        self?.confirmRevokeDeviceAlert(deviceID: device.deviceId)
+                    })
+                    .disposed(by: cell.disposeBag)
+                cell.sizeToFit()
+                return cell
+            case .linkNew:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.AccountPage.linkDeviceTitle
+                cell.textLabel?.textColor = UIColor.jamiButtonDark
+                cell.textLabel?.textAlignment = .center
+                cell.textLabel?.numberOfLines = 0
+                cell.selectionStyle = .none
+                cell.sizeToFit()
+                let button = UIButton(frame: cell.frame)
+                let size = CGSize(
+                    width: self.settingsTable.frame.width,
+                    height: button.frame.height
+                )
+                button.frame.size = size
+                cell.addSubview(button)
+                button.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.viewModel.linkDevice()
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .blockedList:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.AccountPage.blockedContacts
+                cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+                cell.textLabel?.numberOfLines = 0
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                cell.selectionStyle = .none
+                cell.sizeToFit()
+                let button = UIButton(frame: cell.frame)
+                let size = CGSize(
+                    width: self.settingsTable.frame.width,
+                    height: button.frame.height
+                )
+                button.frame.size = size
+                cell.addSubview(button)
+                button.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.openBlockedList()
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .removeAccount:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.Global.removeAccount
+                cell.textLabel?.textColor = UIColor.systemRed
+                cell.textLabel?.textAlignment = .center
+                cell.textLabel?.numberOfLines = 0
+                cell.selectionStyle = .none
+                cell.sizeToFit()
+                let button = UIButton(frame: cell.frame)
+                let size = CGSize(width: self.settingsTable.frame.width, height: 25)
+                button.frame.size = size
+                cell.addSubview(button)
+                button.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.confirmRemoveAccountAlert()
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case let .jamiUserName(label):
+                if !label.isEmpty {
+                    return self.configureCellWithEnableTextCopy(text: L10n.Global.username,
+                                                                secondaryText: label,
+                                                                style: .callout,
+                                                                accessibilityIdentifier: AccessibilityIdentifiers
+                                                                    .accountRegisteredName)
+                }
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.Global.registerAUsername
+                cell.textLabel?.textColor = UIColor.jamiButtonDark
+                cell.textLabel?.textAlignment = .center
+                cell.textLabel?.numberOfLines = 0
+                cell.sizeToFit()
+                cell.selectionStyle = .none
+                let button = UIButton(frame: cell.frame)
+                let size = CGSize(
+                    width: self.settingsTable.frame.width,
+                    height: button.frame.height
+                )
+                button.frame.size = size
+                cell.addSubview(button)
+                button.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.registerUsername()
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case let .jamiID(label):
+                return self.configureCellWithEnableTextCopy(text: "Jami ID",
+                                                            secondaryText: label,
+                                                            style: .footnote,
+                                                            accessibilityIdentifier: AccessibilityIdentifiers
+                                                                .accountJamiId)
+            case let .ordinary(label):
+                let cell = UITableViewCell()
+                cell.textLabel?.text = label
+                cell.textLabel?.numberOfLines = 0
+                cell.selectionStyle = .none
+                return cell
+            case .shareAccountDetails:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.AccountPage.inviteFriends
+                cell.textLabel?.textColor = UIColor.jamiButtonDark
+                cell.textLabel?.textAlignment = .center
+                cell.textLabel?.numberOfLines = 0
+                cell.sizeToFit()
+                cell.selectionStyle = .none
+                let button = UIButton(frame: cell.frame)
+                let size = CGSize(
+                    width: cell.contentView.bounds.width,
+                    height: button.frame.height
+                )
+                button.frame.size = size
+                cell.contentView.addSubview(button)
+                button.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.shareAccountInfo()
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .changePassword:
+                let cell = DisposableCell()
+                let title = self.viewModel.hasPassword() ?
+                    L10n.AccountPage.changePassword : L10n.AccountPage.createPassword
+                cell.textLabel?.text = title
+                cell.textLabel?.textColor = UIColor.jamiButtonDark
+                cell.textLabel?.textAlignment = .center
+                cell.textLabel?.numberOfLines = 0
+                cell.sizeToFit()
+                cell.selectionStyle = .none
+                let button = UIButton(frame: cell.frame)
+                let size = CGSize(
+                    width: self.settingsTable.frame.width,
+                    height: button.frame.height
+                )
+                button.frame.size = size
+                cell.addSubview(button)
+                button.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.changePassword(title: title)
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .notifications:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.AccountPage.enableNotifications
+                cell.textLabel?.numberOfLines = 0
+                let switchView = UISwitch()
+                switchView.onTintColor = .jamiButtonDark
+                cell.selectionStyle = .none
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                cell.accessoryView = switchView
+                self.viewModel.notificationsEnabledObservable
+                    .observe(on: MainScheduler.instance)
+                    .bind(to: switchView.rx.value)
+                    .disposed(by: cell.disposeBag)
+                switchView.setOn(self.viewModel.notificationsEnabled, animated: false)
+                switchView.rx
+                    .isOn.changed
+                    .debounce(
+                        Durations.switchThrottlingDuration.toTimeInterval(),
+                        scheduler: MainScheduler.instance
+                    )
+                    .distinctUntilChanged()
+                    .asObservable()
+                    .subscribe(onNext: { [weak self] value in
+                        self?.viewModel.enableNotifications(enable: value)
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .peerDiscovery:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.AccountPage.peerDiscovery
+                cell.textLabel?.numberOfLines = 0
+                let switchView = UISwitch()
+                switchView.onTintColor = .jamiButtonDark
+                cell.selectionStyle = .none
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                cell.accessoryView = switchView
+                self.viewModel.peerDiscoveryEnabled
+                    .asObservable()
+                    .startWith(self.viewModel.peerDiscoveryEnabled.value)
+                    .observe(on: MainScheduler.instance)
+                    .bind(to: switchView.rx.value)
+                    .disposed(by: cell.disposeBag)
+                switchView.rx
+                    .isOn.changed
+                    .debounce(
+                        Durations.switchThrottlingDuration.toTimeInterval(),
+                        scheduler: MainScheduler.instance
+                    )
+                    .distinctUntilChanged()
+                    .asObservable()
+                    .subscribe(onNext: { [weak self] enable in
+                        self?.viewModel.enablePeerDiscovery(enable: enable)
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .proxy:
+                let cell = DisposableCell(
+                    style: .value1,
+                    reuseIdentifier: self.sipAccountCredentialsCell
+                )
+                cell.backgroundColor = UIColor.jamiBackgroundColor
+                cell.selectionStyle = .none
+                let text = UITextField()
+                text.autocorrectionType = .no
+                text.font = UIFont.preferredFont(forTextStyle: .callout)
+                text.returnKeyType = .done
+                text.text = self.viewModel.proxyAddress.value
+                text.sizeToFit()
+                text.rx.controlEvent(.editingDidEndOnExit)
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onNext: { [weak self] _ in
+                        guard let text = text.text else { return }
+                        self?.viewModel.changeProxy(proxyServer: text)
+                    })
+                    .disposed(by: cell.disposeBag)
+                cell.textLabel?.text = "Proxy server"
+                cell.textLabel?.sizeToFit()
+                cell.sizeToFit()
+                cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+                cell.detailTextLabel?.textColor = UIColor.clear
+                var frame = CGRect(x: self.sipCredentialsMargin, y: 0,
+                                   width: self.view.frame.width - self.sipCredentialsMargin,
+                                   height: cell.frame.height)
+                if self.view.frame.width - self.sipCredentialsMargin < text.frame.size.width {
+                    let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
+                    let size = text.frame.size
+                    frame.origin = origin
+                    frame.size = size
+                    cell.detailTextLabel?.text = self.viewModel.proxyAddress.value
+                } else {
+                    cell.detailTextLabel?.text = ""
+                }
+                cell.detailTextLabel?.sizeToFit()
+                text.frame = frame
+                cell.contentView.addSubview(text)
+                cell.sizeToFit()
+                return cell
+            case let .sipUserName(value):
+                let cell = self
+                    .configureSipCredentialsCell(cellType: .sipUserName(value: value),
+                                                 value: value)
+                return cell
+            case let .sipPassword(value):
+                let cell = self
+                    .configureSipCredentialsCell(cellType: .sipPassword(value: value),
+                                                 value: value)
+                return cell
+            case let .sipServer(value):
+                let cell = self
+                    .configureSipCredentialsCell(cellType: .sipServer(value: value),
+                                                 value: value)
+                return cell
+            case let .proxyServer(value):
+                let cell = self
+                    .configureSipCredentialsCell(cellType: .proxyServer(value: value),
+                                                 value: value)
+                return cell
+            case let .port(value):
+                let cell = self
+                    .configureSipCredentialsCell(cellType: .port(value: value),
+                                                 value: value)
+                return cell
+            case let .accountState(state):
+                let cell = DisposableCell(
+                    style: .value1,
+                    reuseIdentifier: self.accountStateCell
+                )
+                cell.textLabel?.text = L10n.Account.accountStatus
+                cell.textLabel?.numberOfLines = 0
+                cell.selectionStyle = .none
+                cell.textLabel?.sizeToFit()
+                cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+                cell.detailTextLabel?.text = state.value
+                state.asObservable()
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onNext: { status in
+                        cell.detailTextLabel?.text = status
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .enableAccount:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.Account.enableAccount
+                cell.textLabel?.numberOfLines = 0
+                let switchView = UISwitch()
+                switchView.onTintColor = .jamiButtonDark
+                cell.selectionStyle = .none
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                cell.accessoryView = switchView
+                switchView.setOn(self.viewModel.accountEnabled.value,
+                                 animated: false)
+                self.viewModel.accountEnabled
+                    .asObservable()
+                    .observe(on: MainScheduler.instance)
+                    .bind(to: switchView.rx.value)
+                    .disposed(by: cell.disposeBag)
+                switchView.rx
+                    .isOn.changed
+                    .debounce(
+                        Durations.switchThrottlingDuration.toTimeInterval(),
+                        scheduler: MainScheduler.instance
+                    )
+                    .distinctUntilChanged()
+                    .asObservable()
+                    .subscribe(onNext: { [weak self] enable in
+                        self?.viewModel.enableAccount(enable: enable)
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .turnEnabled:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.AccountPage.turnEnabled
+                cell.textLabel?.numberOfLines = 0
+                let switchView = UISwitch()
+                switchView.onTintColor = .jamiButtonDark
+                cell.selectionStyle = .none
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                cell.accessoryView = switchView
+                self.viewModel.turnEnabled
+                    .asObservable()
+                    .startWith(self.viewModel.turnEnabled.value)
+                    .observe(on: MainScheduler.instance)
+                    .bind(to: switchView.rx.value)
+                    .disposed(by: cell.disposeBag)
+                switchView.rx
+                    .isOn.changed
+                    .debounce(
+                        Durations.switchThrottlingDuration.toTimeInterval(),
+                        scheduler: MainScheduler.instance
+                    )
+                    .distinctUntilChanged()
+                    .asObservable()
+                    .subscribe(onNext: { [weak self] enable in
+                        self?.viewModel.enableTurn(enable: enable)
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .upnpEnabled:
+                let cell = DisposableCell()
+                cell.textLabel?.text = L10n.AccountPage.upnpEnabled
+                cell.textLabel?.numberOfLines = 0
+                let switchView = UISwitch()
+                switchView.onTintColor = .jamiButtonDark
+                cell.selectionStyle = .none
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                cell.accessoryView = switchView
+                self.viewModel.upnpEnabled
+                    .asObservable()
+                    .startWith(self.viewModel.upnpEnabled.value)
+                    .observe(on: MainScheduler.instance)
+                    .bind(to: switchView.rx.value)
+                    .disposed(by: cell.disposeBag)
+                switchView.rx
+                    .isOn.changed
+                    .debounce(
+                        Durations.switchThrottlingDuration.toTimeInterval(),
+                        scheduler: MainScheduler.instance
+                    )
+                    .distinctUntilChanged()
+                    .asObservable()
+                    .subscribe(onNext: { [weak self] enable in
+                        self?.viewModel.enableUpnp(enable: enable)
+                    })
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .turnServer:
+                let cell = self
+                    .configureTurnCell(cellType: .turnServer,
+                                       value: self.viewModel.turnServer.value)
+                return cell
+            case .turnUsername:
+                let cell = self
+                    .configureTurnCell(cellType: .turnUsername,
+                                       value: self.viewModel.turnUsername.value)
+                return cell
+            case .turnPassword:
+                let cell = self
+                    .configureTurnCell(cellType: .turnPassword,
+                                       value: self.viewModel.turnPassword.value)
+                return cell
+            case .turnRealm:
+                let cell = self
+                    .configureTurnCell(cellType: .turnRealm,
+                                       value: self.viewModel.turnRealm.value)
+                return cell
+            case .donationCampaign:
+                return self.createDonationNotificationCell()
+            case .donate:
+                return self.createDonationCell()
             }
-
-        let settingsItemDataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: configureCell)
-        settingsItemDataSource.titleForHeaderInSection = { dataSource, sectionIndex in
-            return dataSource[sectionIndex].title
         }
-        self.viewModel.settings
-            .bind(to: self.settingsTable.rx.items(dataSource: settingsItemDataSource))
+
+        let settingsItemDataSource =
+            RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: configureCell)
+        settingsItemDataSource.titleForHeaderInSection = { dataSource, sectionIndex in
+            dataSource[sectionIndex].title
+        }
+        viewModel.settings
+            .bind(to: settingsTable.rx.items(dataSource: settingsItemDataSource))
             .disposed(by: disposeBag)
     }
 
@@ -736,8 +844,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.textLabel?.numberOfLines = 0
         cell.selectionStyle = .none
         cell.sizeToFit()
-        let button = UIButton.init(frame: cell.frame)
-        let size = CGSize(width: self.settingsTable.frame.width, height: button.frame.height)
+        let button = UIButton(frame: cell.frame)
+        let size = CGSize(width: settingsTable.frame.width, height: button.frame.height)
         button.frame.size = size
         cell.addSubview(button)
         button.rx.tap
@@ -756,7 +864,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.selectionStyle = .none
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         cell.accessoryView = switchView
-        self.viewModel.enableDonationCampaign
+        viewModel.enableDonationCampaign
             .asObservable()
             .observe(on: MainScheduler.instance)
             .startWith(viewModel.enableDonationCampaign.value)
@@ -764,15 +872,20 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: cell.disposeBag)
         switchView.rx.value
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (enabled) in
+            .subscribe(onNext: { [weak self] enabled in
                 self?.viewModel.togleEnableDonationCampaign(enable: enabled)
             })
             .disposed(by: cell.disposeBag)
         return cell
     }
 
-    func configureCellWithEnableTextCopy(text: String, secondaryText: String, style: UIFont.TextStyle, accessibilityIdentifier: String) -> DisposableCell {
-        let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
+    func configureCellWithEnableTextCopy(
+        text: String,
+        secondaryText: String,
+        style: UIFont.TextStyle,
+        accessibilityIdentifier: String
+    ) -> DisposableCell {
+        let cell = DisposableCell(style: .subtitle, reuseIdentifier: jamiIDCell)
         cell.selectionStyle = .none
         cell.textLabel?.text = text
         cell.textLabel?.sizeToFit()
@@ -801,10 +914,16 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         textView.actionsToRemove = [.paste, .cut, .lookUp, .delete]
         textView.inputView = UIView(frame: CGRect.zero)
         cell.contentView.addSubview(textView)
-        textView.topAnchor.constraint(equalTo: cell.detailTextLabel!.topAnchor, constant: 0).isActive = true
-        textView.leadingAnchor.constraint(equalTo: cell.detailTextLabel!.leadingAnchor, constant: 0).isActive = true
-        textView.bottomAnchor.constraint(equalTo: cell.detailTextLabel!.bottomAnchor, constant: 0).isActive = true
-        textView.trailingAnchor.constraint(equalTo: cell.detailTextLabel!.trailingAnchor, constant: 0).isActive = true
+        textView.topAnchor.constraint(equalTo: cell.detailTextLabel!.topAnchor, constant: 0)
+            .isActive = true
+        textView.leadingAnchor.constraint(equalTo: cell.detailTextLabel!.leadingAnchor, constant: 0)
+            .isActive = true
+        textView.bottomAnchor.constraint(equalTo: cell.detailTextLabel!.bottomAnchor, constant: 0)
+            .isActive = true
+        textView.trailingAnchor.constraint(
+            equalTo: cell.detailTextLabel!.trailingAnchor,
+            constant: 0
+        ).isActive = true
         textView.actionsToRemove = [.paste, .cut, .lookUp, .delete]
         textView.inputView = UIView(frame: CGRect.zero)
         cell.sizeToFit()
@@ -823,7 +942,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         textField.text = value
         textField.sizeToFit()
 
-        let style: UITableViewCell.CellStyle = self.settingsTable.frame.width - self.connectivityMargin - 40 < textField.frame.size.width ? .subtitle : .value1
+        let style: UITableViewCell.CellStyle = settingsTable.frame
+            .width - connectivityMargin - 40 < textField.frame.size.width ? .subtitle : .value1
 
         let cell = EditableDetailTableViewCell(style: style, reuseIdentifier: turnCell)
         cell.selectionStyle = .none
@@ -833,7 +953,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 self?.viewModel.updateTurnSettings()
             })
             .disposed(by: cell.disposeBag)
-        self.viewModel.turnEnabled
+        viewModel.turnEnabled
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { enabled in
@@ -844,22 +964,22 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         switch cellType {
         case .turnServer:
             textField.rx.text.orEmpty.distinctUntilChanged()
-                .bind(to: self.viewModel.turnServer)
+                .bind(to: viewModel.turnServer)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.AccountPage.turnServer
         case .turnUsername:
             textField.rx.text.orEmpty.distinctUntilChanged()
-                .bind(to: self.viewModel.turnUsername)
+                .bind(to: viewModel.turnUsername)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.AccountPage.turnUsername
         case .turnPassword:
             textField.rx.text.orEmpty.distinctUntilChanged()
-                .bind(to: self.viewModel.turnPassword)
+                .bind(to: viewModel.turnPassword)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.AccountPage.turnPassword
         case .turnRealm:
             textField.rx.text.orEmpty.distinctUntilChanged()
-                .bind(to: self.viewModel.turnRealm)
+                .bind(to: viewModel.turnRealm)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.AccountPage.turnRealm
         default:
@@ -873,8 +993,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         return cell
     }
 
-    @objc func handleContentSizeCategoryDidChange(notification: Notification) {
-        self.settingsTable.reloadData()
+    @objc func handleContentSizeCategoryDidChange(notification _: Notification) {
+        settingsTable.reloadData()
     }
 
     func configureSipCredentialsCell(cellType: SettingsSection.SectionRow,
@@ -882,7 +1002,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         let cell = DisposableCell(style: .value1, reuseIdentifier: sipAccountCredentialsCell)
         cell.selectionStyle = .none
         let textField = UITextField()
-        textField.tag = self.sipCredentialsTAG
+        textField.tag = sipCredentialsTAG
         textField.font = UIFont.preferredFont(forTextStyle: .callout)
         textField.returnKeyType = .done
         textField.text = value
@@ -896,17 +1016,17 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         switch cellType {
         case .port:
             textField.rx.text.orEmpty.distinctUntilChanged()
-                .bind(to: self.viewModel.port)
+                .bind(to: viewModel.port)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.Account.port
         case .proxyServer:
             textField.rx.text.orEmpty.distinctUntilChanged()
-                .bind(to: self.viewModel.proxyServer)
+                .bind(to: viewModel.proxyServer)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.Account.proxyServer
         case .sipServer:
             textField.rx.text.orEmpty.distinctUntilChanged()
-                .bind(to: self.viewModel.sipServer)
+                .bind(to: viewModel.sipServer)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.Account.sipServer
         case .sipPassword:
@@ -916,10 +1036,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             var insets = rightButton.contentEdgeInsets
             insets.right = 60
             rightButton.contentEdgeInsets = insets
-            self.viewModel.secureTextEntry
+            viewModel.secureTextEntry
                 .asObservable()
                 .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { (secure) in
+                .subscribe(onNext: { secure in
                     textField.isSecureTextEntry = secure
                     if secure {
                         rightButton.setImage(UIImage(asset: Asset.icHideInput),
@@ -948,7 +1068,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 .disposed(by: cell.disposeBag)
         case .sipUserName:
             textField.rx.text.orEmpty.distinctUntilChanged()
-                .bind(to: self.viewModel.sipUsername)
+                .bind(to: viewModel.sipUsername)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.Account.sipUsername
         default:
@@ -958,10 +1078,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.sizeToFit()
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         cell.detailTextLabel?.textColor = UIColor.clear
-        var frame = CGRect(x: self.sipCredentialsMargin, y: 0,
-                           width: self.settingsTable.frame.width - self.sipCredentialsMargin,
+        var frame = CGRect(x: sipCredentialsMargin, y: 0,
+                           width: settingsTable.frame.width - sipCredentialsMargin,
                            height: cell.frame.height)
-        if self.settingsTable.frame.width - self.sipCredentialsMargin < textField.frame.size.width {
+        if settingsTable.frame.width - sipCredentialsMargin < textField.frame.size.width {
             let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
             let size = textField.frame.size
             frame.origin = origin
@@ -1003,7 +1123,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         label.text = proxy
         label.sizeToFit()
         proxyLength = label.frame.size.width
-        sipCredentialsMargin = max(max(max(max(usernameLength, passwordLength), sipServerLength), portLength), proxyLength) + margin
+        sipCredentialsMargin = max(
+            max(max(max(usernameLength, passwordLength), sipServerLength), portLength),
+            proxyLength
+        ) + margin
     }
 
     func calculateConnectivityMargin() {
@@ -1032,18 +1155,17 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         connectivityMargin += 30
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if self.profileName.isFirstResponder {
+    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
+        if profileName.isFirstResponder {
             resetProfileName()
-            self.viewModel.updateSipSettings()
-            self.profileName.resignFirstResponder()
+            viewModel.updateSipSettings()
+            profileName.resignFirstResponder()
             return
         }
-        guard let activeField = self
-                .findActiveTextField(in: settingsTable) else { return }
+        guard let activeField = findActiveTextField(in: settingsTable) else { return }
         activeField.resignFirstResponder()
         if activeField.tag != sipCredentialsTAG { return }
-        self.viewModel.updateSipSettings()
+        viewModel.updateSipSettings()
     }
 
     let boothConfirmation = ConfirmationAlert()
@@ -1070,7 +1192,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 } else if textFields.count == 4,
                           let oldPassword = textFields[0].text, !oldPassword.isEmpty,
                           let password = textFields[2].text {
-                    let result = self?.viewModel.changePassword(oldPassword: oldPassword, newPassword: password)
+                    let result = self?.viewModel.changePassword(
+                        oldPassword: oldPassword,
+                        newPassword: password
+                    )
                     if result ?? true {
                         self?.stopLoadingView()
                         return
@@ -1083,12 +1208,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         }
         controller.addAction(actionCancel)
         controller.addAction(actionChange)
-        if self.viewModel.hasPassword() {
-            controller.addTextField {(textField) in
+        if viewModel.hasPassword() {
+            controller.addTextField { textField in
                 textField.placeholder = L10n.AccountPage.oldPasswordPlaceholder
                 textField.isSecureTextEntry = true
             }
-            controller.addTextField {(textField) in
+            controller.addTextField { textField in
                 textField.text = ""
                 textField.isUserInteractionEnabled = false
                 textField.textColor = UIColor.red
@@ -1099,12 +1224,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             }
         }
 
-        controller.addTextField {(textField) in
+        controller.addTextField { textField in
             textField.placeholder = L10n.AccountPage.newPasswordPlaceholder
             textField.isSecureTextEntry = true
         }
 
-        controller.addTextField {(textField) in
+        controller.addTextField { textField in
             textField.placeholder = L10n.AccountPage.newPasswordConfirmPlaceholder
             textField.isSecureTextEntry = true
         }
@@ -1113,23 +1238,23 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             if textFields.count == 4 {
                 Observable
                     .combineLatest(textFields[3].rx.text,
-                                   textFields[2].rx.text) {(text1, text2) -> Bool in
-                        return text1 == text2
+                                   textFields[2].rx.text) { text1, text2 -> Bool in
+                        text1 == text2
                     }
                     .bind(to: actionChange.rx.isEnabled)
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: disposeBag)
             } else {
                 Observable
                     .combineLatest(textFields[0].rx.text,
-                                   textFields[1].rx.text) {(text1, text2) -> Bool in
-                        return text1 == text2
+                                   textFields[1].rx.text) { text1, text2 -> Bool in
+                        text1 == text2
                     }
                     .bind(to: actionChange.rx.isEnabled)
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
-        self.present(controller, animated: true, completion: nil)
-        if self.viewModel.hasPassword() {
+        present(controller, animated: true, completion: nil)
+        if viewModel.hasPassword() {
             // remove border around text view
             controller.textFields?[1].superview?.backgroundColor = .clear
             controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
@@ -1167,11 +1292,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         controller.addAction(actionCancel)
         controller.addAction(actionRegister)
         // username textfield
-        controller.addTextField {(textField) in
+        controller.addTextField { textField in
             textField.placeholder = L10n.AccountPage.usernamePlaceholder
         }
         // error rext field
-        controller.addTextField {(textField) in
+        controller.addTextField { textField in
             textField.text = ""
             textField.isUserInteractionEnabled = false
             textField.textColor = UIColor.red
@@ -1181,23 +1306,24 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             textField.font = UIFont.systemFont(ofSize: 11, weight: .thin)
         }
         // password text field
-        if self.viewModel.hasPassword() {
-            controller.addTextField {(textField) in
+        if viewModel.hasPassword() {
+            controller.addTextField { textField in
                 textField.placeholder = L10n.AccountPage.passwordPlaceholder
                 textField.isSecureTextEntry = true
             }
         }
-        self.present(controller, animated: true, completion: nil)
-        self.viewModel.subscribeForNameLokup(disposeBug: nameRegistrationBag)
-        self.viewModel.usernameValidationState.asObservable()
+        present(controller, animated: true, completion: nil)
+        viewModel.subscribeForNameLokup(disposeBug: nameRegistrationBag)
+        viewModel.usernameValidationState.asObservable()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak controller] (state) in
+            .subscribe(onNext: { [weak controller] state in
                 // update name lookup message
                 guard let textFields = controller?.textFields,
                       textFields.count >= 2 else { return }
                 textFields[1].text = state.message
-                textFields[1].textColor = state.isAvailable ? UIColor.jamiSuccess : UIColor.jamiFailure
-            }, onError: { (_) in
+                textFields[1].textColor = state.isAvailable ? UIColor.jamiSuccess : UIColor
+                    .jamiFailure
+            }, onError: { _ in
             })
             .disposed(by: nameRegistrationBag)
         guard let textFields = controller.textFields else {
@@ -1206,20 +1332,21 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         if textFields.count < 2 {
             return
         }
-        textFields[0].rx.text.orEmpty.distinctUntilChanged().bind(to: self.viewModel.newUsername).disposed(by: nameRegistrationBag)
+        textFields[0].rx.text.orEmpty.distinctUntilChanged().bind(to: viewModel.newUsername)
+            .disposed(by: nameRegistrationBag)
         let userNameEmptyObservable = textFields[0]
-            .rx.text.map({text -> Bool in
+            .rx.text.map { text -> Bool in
                 if let text = text {
                     return text.isEmpty
                 }
                 return true
-            })
+            }
         // do not have a password could register when username not empty and valid
         if textFields.count == 2 {
             Observable
-                .combineLatest(self.viewModel
+                .combineLatest(viewModel
                                 .usernameValidationState.asObservable(),
-                               userNameEmptyObservable) {(state, usernameEmpty) -> Bool in
+                               userNameEmptyObservable) { state, usernameEmpty -> Bool in
                     if state.isAvailable && !usernameEmpty {
                         return true
                     }
@@ -1228,19 +1355,20 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 .bind(to: actionRegister.rx.isEnabled)
                 .disposed(by: nameRegistrationBag)
         } else if textFields.count == 3 {
-            // have a password. Could register when username not empty and valid and password not empty
+            // have a password. Could register when username not empty and valid and password not
+            // empty
             let passwordEmptyObservable = textFields[2]
-                .rx.text.map({text -> Bool in
+                .rx.text.map { text -> Bool in
                     if let text = text {
                         return text.isEmpty
                     }
                     return true
-                })
+                }
             Observable
-                .combineLatest(self.viewModel
+                .combineLatest(viewModel
                                 .usernameValidationState.asObservable(),
                                userNameEmptyObservable,
-                               passwordEmptyObservable) {(state, nameEmpty, passwordEmpty) -> Bool in
+                               passwordEmptyObservable) { state, nameEmpty, passwordEmpty -> Bool in
                     if state.isAvailable && !nameEmpty && !passwordEmpty {
                         return true
                     }
@@ -1278,24 +1406,24 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         alert.addAction(actionCancel)
         alert.addAction(actionConfirm)
 
-        if self.viewModel.hasPassword() {
-            alert.addTextField {(textField) in
+        if viewModel.hasPassword() {
+            alert.addTextField { textField in
                 textField.placeholder = L10n.AccountPage.revokeDevicePlaceholder
                 textField.isSecureTextEntry = true
             }
             if let textFields = alert.textFields {
                 textFields[0].rx.text
-                    .map({text in
+                    .map { text in
                         if let text = text {
                             return !text.isEmpty
                         }
                         return false
-                    })
+                    }
                     .bind(to: actionConfirm.rx.isEnabled)
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     func confirmRemoveAccountAlert() {
@@ -1310,14 +1438,15 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         }
         alert.addAction(actionCancel)
         alert.addAction(actionConfirm)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }
 
 extension MeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if let dataSourceProxy = tableView.dataSource as? RxTableViewDataSourceProxy,
-           let actualDataSource = dataSourceProxy.forwardToDelegate() as? RxTableViewSectionedReloadDataSource<SettingsSection> {
+           let actualDataSource = dataSourceProxy
+            .forwardToDelegate() as? RxTableViewSectionedReloadDataSource<SettingsSection> {
             let headerTitle = actualDataSource[section].title
             if headerTitle == nil || headerTitle == .some("") {
                 return 10
@@ -1326,17 +1455,17 @@ extension MeViewController: UITableViewDelegate {
         return 50
     }
 
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_: UITableView, viewForFooterInSection _: Int) -> UIView? {
         return nil
     }
 
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_: UITableView, heightForFooterInSection _: Int) -> CGFloat {
         return CGFloat.leastNonzeroMagnitude
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let navigationHeight = self.navigationController?.navigationBar.bounds.height
-        var size = self.view.bounds.size
+        let navigationHeight = navigationController?.navigationBar.bounds.height
+        var size = view.bounds.size
         let screenSize = UIScreen.main.bounds.size
         if let height = navigationHeight {
             // height for ihoneX
@@ -1350,54 +1479,59 @@ extension MeViewController: UITableViewDelegate {
         }
 
         // hide keebord if it was open when user performe scrolling
-        if self.stretchyHeader.frame.height < self.stretchyHeader.maximumContentHeight * 0.5 {
+        if stretchyHeader.frame.height < stretchyHeader.maximumContentHeight * 0.5 {
             resetProfileName()
-            self.profileName.resignFirstResponder()
+            profileName.resignFirstResponder()
         }
     }
 
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewDidStopScrolling()
+    func scrollViewDidEndDecelerating(_: UIScrollView) {
+        scrollViewDidStopScrolling()
     }
 
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-            self.scrollViewDidStopScrolling()
+            scrollViewDidStopScrolling()
         }
     }
 
     func shareAccountInfo() {
-        guard let content = self.viewModel.accountInfoToShare else { return }
+        guard let content = viewModel.accountInfoToShare else { return }
 
         let sourceView: UIView
         if UIDevice.current.userInterfaceIdiom == .phone {
-            sourceView = self.view
+            sourceView = view
         } else {
             sourceView = stretchyHeader
         }
 
-        SharedActionsPresenter.shareAccountInfo(onViewController: self, sourceView: sourceView, content: content)
+        SharedActionsPresenter.shareAccountInfo(
+            onViewController: self,
+            sourceView: sourceView,
+            content: content
+        )
     }
 
     private func scrollViewDidStopScrolling() {
-        var contentOffset = self.settingsTable.contentOffset
-        if self.stretchyHeader.frame.height <= self.stretchyHeader.minimumContentHeight {
+        var contentOffset = settingsTable.contentOffset
+        if stretchyHeader.frame.height <= stretchyHeader.minimumContentHeight {
             return
         }
-        let middle = (self.stretchyHeader.maximumContentHeight - self.stretchyHeader.minimumContentHeight) * 0.4
-        if self.stretchyHeader.frame.height > middle {
-            contentOffset.y = -self.stretchyHeader.maximumContentHeight
+        let middle = (stretchyHeader.maximumContentHeight - stretchyHeader.minimumContentHeight) *
+            0.4
+        if stretchyHeader.frame.height > middle {
+            contentOffset.y = -stretchyHeader.maximumContentHeight
         } else {
-            contentOffset.y = -self.stretchyHeader.minimumContentHeight
+            contentOffset.y = -stretchyHeader.minimumContentHeight
         }
-        self.settingsTable.setContentOffset(contentOffset, animated: true)
+        settingsTable.setContentOffset(contentOffset, animated: true)
     }
 
-    internal func stopLoadingView() {
+    func stopLoadingView() {
         loadingViewPresenter.hide(animated: false)
     }
 
-    internal func showLoadingViewWithoutText() {
+    func showLoadingViewWithoutText() {
         loadingViewPresenter.presentWithMessage(message: "", presentingVC: self, animated: true)
     }
 }

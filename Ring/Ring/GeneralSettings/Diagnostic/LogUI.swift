@@ -22,22 +22,28 @@ import SwiftUI
 import UIKit
 
 struct ShareSheet: UIViewControllerRepresentable {
-    typealias Callback = (_ activityType: UIActivity.ActivityType?, _ completed: Bool, _ returnedItems: [Any]?, _ error: Error?) -> Void
+    typealias Callback = (
+        _ activityType: UIActivity.ActivityType?,
+        _ completed: Bool,
+        _ returnedItems: [Any]?,
+        _ error: Error?
+    ) -> Void
 
     let activityItems: [Any]
     let callback: Callback? = nil
 
-    func makeUIViewController(context: Context) -> UIActivityViewController {
+    func makeUIViewController(context _: Context) -> UIActivityViewController {
         let controller = UIActivityViewController(
             activityItems: activityItems,
-            applicationActivities: nil)
+            applicationActivities: nil
+        )
         controller.completionWithItemsHandler = callback
         return controller
     }
 
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
-    }
+    func updateUIViewController(_: UIActivityViewController, context _: Context) {}
 }
+
 struct DocumentPicker: UIViewControllerRepresentable {
     @Binding var fileURL: URL
 
@@ -45,32 +51,39 @@ struct DocumentPicker: UIViewControllerRepresentable {
         return DocumentPickerCoordinator(fileURL: $fileURL)
     }
 
-    func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPicker>) -> UIDocumentPickerViewController {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPicker>)
+    -> UIDocumentPickerViewController {
         let controller: UIDocumentPickerViewController
         controller = UIDocumentPickerViewController(forOpeningContentTypes: [.folder])
         controller.delegate = context.coordinator
         return controller
     }
 
-    func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: UIViewControllerRepresentableContext<DocumentPicker>) {
-    }
+    func updateUIViewController(
+        _: UIDocumentPickerViewController,
+        context _: UIViewControllerRepresentableContext<DocumentPicker>
+    ) {}
 }
 
-class DocumentPickerCoordinator: NSObject, UIDocumentPickerDelegate, UINavigationControllerDelegate {
+class DocumentPickerCoordinator: NSObject, UIDocumentPickerDelegate,
+                                 UINavigationControllerDelegate {
     @Binding var fileURL: URL
 
     init(fileURL: Binding<URL>) {
         _fileURL = fileURL
     }
 
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+    func documentPicker(_: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         fileURL = url
     }
 }
 
 struct LogUI: View {
     @StateObject var model: LogUIViewModel
-    @SwiftUI.State private var filePath: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    @SwiftUI.State private var filePath: URL = FileManager.default.urls(
+        for: .documentDirectory,
+        in: .userDomainMask
+    ).first!
     @SwiftUI.State private var showButtons = false
 
     var body: some View {

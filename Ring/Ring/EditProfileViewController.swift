@@ -20,17 +20,19 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import Reusable
 import RxSwift
+import UIKit
 
-class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+class EditProfileViewController: UIViewController, UITextFieldDelegate,
+                                 UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     // MARK: - outlets
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var profileName: UITextField!
+
+    @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var profileName: UITextField!
 
     // MARK: - members
+
     var model: EditProfileViewModel!
     private let disposeBag = DisposeBag()
 
@@ -38,16 +40,16 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.model.profileImage
-            .bind(to: self.profileImageView.rx.image)
+        model.profileImage
+            .bind(to: profileImageView.rx.image)
             .disposed(by: disposeBag)
 
-        self.model.profileName
-            .bind(to: self.profileName.rx.text)
+        model.profileName
+            .bind(to: profileName.rx.text)
             .disposed(by: disposeBag)
 
         // Binds the keyboard Send button action to the ViewModel
-        self.profileName.rx.controlEvent(.editingDidEndOnExit)
+        profileName.rx.controlEvent(.editingDidEndOnExit)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.model.updateName(self.profileName.text!)
@@ -57,58 +59,74 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupUI()
+        setupUI()
     }
 
     func setupUI() {
-
         profileName.returnKeyType = .done
         profileName.autocorrectionType = .no
 
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageTapped(tapGestureRecognizer:))
+        )
         profileImageView.isUserInteractionEnabled = true
         profileImageView.addGestureRecognizer(tapGestureRecognizer)
     }
 
     func resetProfileName() {
-        self.profileName.text = self.model.name
+        profileName.text = model.name
     }
 
     @objc
-    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+    func imageTapped(tapGestureRecognizer _: UITapGestureRecognizer) {
+        let alert = UIAlertController(title: nil,
+                                      message: nil,
+                                      preferredStyle: .actionSheet)
 
-        let alert = UIAlertController.init(title: nil,
-                                           message: nil,
-                                           preferredStyle: .actionSheet)
-
-        let cameraAction = UIAlertAction(title: L10n.Alerts.profileTakePhoto, style: UIAlertAction.Style.default) { _ in
+        let cameraAction = UIAlertAction(
+            title: L10n.Alerts.profileTakePhoto,
+            style: UIAlertAction.Style.default
+        ) { _ in
             self.takePicture()
         }
 
-        let pictureAction = UIAlertAction(title: L10n.Alerts.profileUploadPhoto, style: UIAlertAction.Style.default) { _ in
+        let pictureAction = UIAlertAction(
+            title: L10n.Alerts.profileUploadPhoto,
+            style: UIAlertAction.Style.default
+        ) { _ in
             self.importPicture()
         }
 
-        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: UIAlertAction.Style.cancel)
+        let cancelAction = UIAlertAction(
+            title: L10n.Global.cancel,
+            style: UIAlertAction.Style.cancel
+        )
 
         alert.addAction(cameraAction)
         alert.addAction(pictureAction)
         alert.addAction(cancelAction)
-        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.sourceView = view
         alert.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
-        alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)
-        self.present(alert, animated: true, completion: nil)
+        alert.popoverPresentationController?.sourceRect = CGRect(
+            x: view.bounds.midX,
+            y: view.bounds.maxX,
+            width: 0,
+            height: 0
+        )
+        present(alert, animated: true, completion: nil)
     }
 
     func takePicture() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+        if UIImagePickerController
+            .isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerController.SourceType.camera
             imagePicker.cameraDevice = UIImagePickerController.CameraDevice.front
             imagePicker.allowsEditing = true
             imagePicker.modalPresentationStyle = .overFullScreen
-            self.present(imagePicker, animated: true, completion: nil)
+            present(imagePicker, animated: true, completion: nil)
         }
     }
 
@@ -118,12 +136,14 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         imagePicker.allowsEditing = true
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.modalPresentationStyle = .overFullScreen
-        self.present(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true, completion: nil)
     }
 
     // MARK: - Delegates
-    internal func imagePickerController(_ picker: UIImagePickerController,
-                                        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+
+    func imagePickerController(_: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController
+                                .InfoKey: Any]) {
         var image: UIImage?
 
         if let img = info[.editedImage] as? UIImage {
@@ -134,8 +154,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
         }
 
         guard let avatar = image?.resizeProfileImage() else { return }
-        self.model.updateImage(avatar)
-        self.profileImageView.image = avatar
+        model.updateImage(avatar)
+        profileImageView.image = avatar
         dismiss(animated: true, completion: nil)
     }
 }

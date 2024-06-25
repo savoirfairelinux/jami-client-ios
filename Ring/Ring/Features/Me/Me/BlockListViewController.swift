@@ -19,18 +19,18 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
-import RxCocoa
-import SwiftyBeaver
 import Reusable
+import RxCocoa
+import RxSwift
+import SwiftyBeaver
+import UIKit
 
 class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: BlockListViewModel!
     let disposeBag = DisposeBag()
     let cellIdentifier = "BannedContactCell"
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noBlockedContactLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var noBlockedContactLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,34 +38,39 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
         noBlockedContactLabel.backgroundColor = UIColor.jamiBackgroundColor
         noBlockedContactLabel.textColor = UIColor.jamiLabelColor
 
-        self.configureNavigationBar()
-        self.navigationItem.title = L10n.AccountPage.blockedContacts
+        configureNavigationBar()
+        navigationItem.title = L10n.AccountPage.blockedContacts
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupTableView()
+        setupTableView()
         noBlockedContactLabel.text = L10n.BlockListPage.noBlockedContacts
 
-        self.viewModel.contactListNotEmpty
+        viewModel.contactListNotEmpty
             .observe(on: MainScheduler.instance)
-            .bind(to: self.noBlockedContactLabel.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
-                                    NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor]
+            .bind(to: noBlockedContactLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        navigationController?.navigationBar
+            .titleTextAttributes = [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
+                NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor
+            ]
     }
 
     func setupTableView() {
-        self.tableView.rowHeight = 64.0
-        self.tableView.allowsSelection = false
+        tableView.rowHeight = 64.0
+        tableView.allowsSelection = false
 
         // Register cell
-        self.tableView.register(cellType: BannedContactCell.self)
-        self.viewModel
+        tableView.register(cellType: BannedContactCell.self)
+        viewModel
             .blockedContactsItems
             .observe(on: MainScheduler.instance)
-            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: BannedContactCell.self)) { [weak self] _, item, cell in
+            .bind(to: tableView.rx.items(
+                cellIdentifier: cellIdentifier,
+                cellType: BannedContactCell.self
+            )) { [weak self] _, item, cell in
                 cell.configureFromItem(item)
                 cell.unblockButton.rx.tap
                     .subscribe(onNext: { [weak self, weak item] in
@@ -78,6 +83,6 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func unbanContactTapped(withItem item: BannedContactItem) {
-        self.viewModel.unbanContact(contact: item.contact)
+        viewModel.unbanContact(contact: item.contact)
     }
 }

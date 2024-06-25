@@ -18,9 +18,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
 import Contacts
+import Foundation
 import RxSwift
+
 // swiftlint:disable identifier_name
 
 enum VCardFolders: String {
@@ -29,10 +30,10 @@ enum VCardFolders: String {
 }
 
 enum VCardFields: String {
-    case begin     = "BEGIN:VCARD"
+    case begin = "BEGIN:VCARD"
     case photoJPEG = "PHOTO;ENCODING=BASE64;TYPE=JPEG:"
-    case end       = "END:VCARD"
-    case fullName  = "FN:"
+    case end = "END:VCARD"
+    case fullName = "FN:"
     case telephone = "TEL;other:"
 }
 
@@ -55,8 +56,8 @@ enum ProfileType: String {
 protocol VCardSender {
     func sendChunk(callID: String, message: [String: String], accountId: String, from: String)
 }
-class VCardUtils {
 
+class VCardUtils {
     class func getName(from vCard: CNContact?) -> String {
         guard let vCard = vCard else {
             return ""
@@ -76,15 +77,22 @@ class VCardUtils {
         return name
     }
 
-    class func sendVCard(card: Profile, callID: String, accountID: String, sender: VCardSender, from: String) {
+    class func sendVCard(
+        card: Profile,
+        callID: String,
+        accountID: String,
+        sender: VCardSender,
+        from: String
+    ) {
         do {
             guard let vCardData = try VCardUtils.dataWithImageAndUUID(from: card),
-                  var vCardString = String(data: vCardData, encoding: String.Encoding.utf8) else {
+                  var vCardString = String(data: vCardData, encoding: String.Encoding.utf8)
+            else {
                 return
             }
             var vcardLength = vCardString.count
             let chunkSize = 1024
-            let idKey = UInt64.random(in: 0 ... 10000000)
+            let idKey = UInt64.random(in: 0 ... 10_000_000)
             let total = vcardLength / chunkSize + (((vcardLength % chunkSize) == 0) ? 0 : 1)
             var i = 1
             while vcardLength > 0 {
@@ -95,7 +103,7 @@ class VCardUtils {
                 let key = "x-ring/ring.profile.vcard;" + id + part + of
                 if vcardLength >= chunkSize {
                     let body = String(vCardString.prefix(chunkSize))
-                    let index = vCardString.index(vCardString.startIndex, offsetBy: (chunkSize))
+                    let index = vCardString.index(vCardString.startIndex, offsetBy: chunkSize)
                     vCardString = String(vCardString.suffix(from: index))
                     vcardLength = vCardString.count
                     chunk[key] = body
@@ -112,7 +120,6 @@ class VCardUtils {
     }
 
     class func dataWithImageAndUUID(from profile: Profile) throws -> Data? {
-
         // create vCard string
         let beginString = VCardFields.begin.rawValue + "\n"
         let name = (profile.alias ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
@@ -123,7 +130,7 @@ class VCardUtils {
 
         var vCardString = beginString + fullNameString + telephoneString
 
-        guard let image = profile.photo  else {
+        guard let image = profile.photo else {
             return (vCardString + endString).data(using: .utf8)
         }
         let vcardImageString = VCardFields.photoJPEG.rawValue + image + "\n"
@@ -133,7 +140,8 @@ class VCardUtils {
 
     class func parseToProfile(data: Data) -> Profile? {
         guard let encoding = data.stringUTF8OrUTF16Encoding,
-              let profileStr = String(data: data, encoding: encoding) else {
+              let profileStr = String(data: data, encoding: encoding)
+        else {
             return nil
         }
         let lines = profileStr.split(whereSeparator: \.isNewline)
@@ -178,7 +186,12 @@ class VCardUtils {
                 break
             }
 
-            let stringRead = String(bytesNoCopy: buffer, length: bytesRead, encoding: .utf8, freeWhenDone: false)
+            let stringRead = String(
+                bytesNoCopy: buffer,
+                length: bytesRead,
+                encoding: .utf8,
+                freeWhenDone: false
+            )
 
             if let lines = stringRead?.split(whereSeparator: \.isNewline) {
                 for line in lines where line.hasPrefix(VCardFields.fullName.rawValue) {

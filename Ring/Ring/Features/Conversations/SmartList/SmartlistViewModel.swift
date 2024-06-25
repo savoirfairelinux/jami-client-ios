@@ -21,26 +21,27 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
+import UIKit
 
 class SmartlistViewModel: Stateable, ViewModel {
-
     // MARK: - Rx Stateable
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
 
     let injectionBag: InjectionBag
     let conversationsModel: ConversationsViewModel
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
-        self.conversationsModel = ConversationsViewModel(injectionBag: injectionBag, stateSubject: self.stateSubject)
+        conversationsModel = ConversationsViewModel(
+            injectionBag: injectionBag,
+            stateSubject: stateSubject
+        )
     }
 
     func closeAllPlayers() {
-        self.conversationsModel.closeAllPlayers()
+        conversationsModel.closeAllPlayers()
     }
 }

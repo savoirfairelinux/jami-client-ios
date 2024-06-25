@@ -18,12 +18,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
+import UIKit
 
 class SmartListNavigationBar: UINavigationBar {
-
-    private struct Constants {
+    private enum Constants {
         static let topViewHeight: CGFloat = 50.0
         static let buttonSpacing: CGFloat = -22.0
         static let trailing: CGFloat = -15.0
@@ -63,7 +62,12 @@ class SmartListNavigationBar: UINavigationBar {
     override var frame: CGRect {
         didSet {
             if frame.size.height < customHeight && searchActive && usingCustomSize {
-                super.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: customHeight)
+                super.frame = CGRect(
+                    x: frame.origin.x,
+                    y: frame.origin.y,
+                    width: frame.size.width,
+                    height: customHeight
+                )
             } else {
                 super.frame = frame
             }
@@ -74,7 +78,6 @@ class SmartListNavigationBar: UINavigationBar {
 // MARK: - Private helpers
 
 private extension SmartListNavigationBar {
-
     func setupTopView() {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +85,7 @@ private extension SmartListNavigationBar {
 
         addSubview(view)
 
-        let guide = self.safeAreaLayoutGuide
+        let guide = safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: guide.topAnchor, constant: -5),
             view.heightAnchor.constraint(equalToConstant: Constants.topViewHeight),
@@ -117,9 +120,15 @@ private extension SmartListNavigationBar {
             topView.addSubview(button)
 
             if let prevBtn = previousButton {
-                button.trailingAnchor.constraint(equalTo: prevBtn.leadingAnchor, constant: Constants.buttonSpacing).isActive = true
+                button.trailingAnchor.constraint(
+                    equalTo: prevBtn.leadingAnchor,
+                    constant: Constants.buttonSpacing
+                ).isActive = true
             } else {
-                button.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: Constants.trailing).isActive = true
+                button.trailingAnchor.constraint(
+                    equalTo: topView.trailingAnchor,
+                    constant: Constants.trailing
+                ).isActive = true
             }
             button.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
             previousButton = button
@@ -130,12 +139,17 @@ private extension SmartListNavigationBar {
         for subview in subviews {
             let stringFromClass = NSStringFromClass(subview.classForCoder)
 
-            if stringFromClass.contains("UINavigationBarContentView") && searchActive {
+            if stringFromClass.contains("UINavigationBarContentView"), searchActive {
                 subview.frame = CGRect(x: 0, y: 0, width: frame.width, height: customHeight)
             }
 
-            if stringFromClass.contains("SearchBar") && searchActive {
-                subview.frame = CGRect(x: 0, y: 36, width: frame.width, height: subview.frame.height)
+            if stringFromClass.contains("SearchBar"), searchActive {
+                subview.frame = CGRect(
+                    x: 0,
+                    y: 36,
+                    width: frame.width,
+                    height: subview.frame.height
+                )
             }
         }
     }

@@ -19,9 +19,9 @@
  */
 
 import Foundation
-import SwiftyBeaver
-import RxSwift
 import RxRelay
+import RxSwift
+import SwiftyBeaver
 
 enum OutputPortType: Int {
     case builtinspk = 0
@@ -40,7 +40,7 @@ class AudioService {
     var isOutputToSpeaker = BehaviorRelay<Bool>(value: true)
 
     var enableSwitchAudio: Observable<Bool> {
-        return self.isHeadsetConnected.asObservable()
+        return isHeadsetConnected.asObservable()
     }
 
     init(withAudioAdapter audioAdapter: AudioAdapter) {
@@ -50,11 +50,14 @@ class AudioService {
     @objc
     private func audioRouteChangeListener(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
-              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt else {
+              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt
+        else {
             return
         }
         guard let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue),
-              reason == .newDeviceAvailable || reason == .oldDeviceUnavailable || reason == .categoryChange else {
+              reason == .newDeviceAvailable || reason == .oldDeviceUnavailable || reason ==
+                .categoryChange
+        else {
             return
         }
         overrideAudioRoute()
@@ -70,7 +73,8 @@ class AudioService {
             self,
             selector: #selector(audioRouteChangeListener(_:)),
             name: AVAudioSession.routeChangeNotification,
-            object: nil)
+            object: nil
+        )
     }
 
     func overrideAudioRoute() {
@@ -84,12 +88,13 @@ class AudioService {
             setAudioOutputDevice(port: OutputPortType.headphones)
             return
         }
-        let outputPort = isOutputToSpeaker.value ? OutputPortType.builtinspk : OutputPortType.receiver
+        let outputPort = isOutputToSpeaker.value ? OutputPortType.builtinspk : OutputPortType
+            .receiver
         setAudioOutputDevice(port: outputPort)
     }
 
     func switchSpeaker() {
-        guard let isSpeaker = self.speakerIsActive() else {
+        guard let isSpeaker = speakerIsActive() else {
             return
         }
         if isSpeaker {
@@ -125,9 +130,9 @@ class AudioService {
     func bluetoothAudioConnected() -> Bool {
         let outputs = AVAudioSession.sharedInstance().currentRoute.outputs
         for output in outputs {
-            if  output.portType == AVAudioSession.Port.bluetoothA2DP ||
-                    output.portType == AVAudioSession.Port.bluetoothHFP ||
-                    output.portType == AVAudioSession.Port.bluetoothLE {
+            if output.portType == AVAudioSession.Port.bluetoothA2DP ||
+                output.portType == AVAudioSession.Port.bluetoothHFP ||
+                output.portType == AVAudioSession.Port.bluetoothLE {
                 return true
             }
         }
@@ -150,14 +155,14 @@ class AudioService {
     }
 
     func setAudioOutputDevice(port: OutputPortType) {
-        self.audioAdapter.setAudioOutputDevice(port.rawValue)
+        audioAdapter.setAudioOutputDevice(port.rawValue)
     }
 
     func setAudioRingtoneDevice(port: OutputPortType) {
-        self.audioAdapter.setAudioRingtoneDevice(port.rawValue)
+        audioAdapter.setAudioRingtoneDevice(port.rawValue)
     }
 
     func startAudio() {
-        self.audioAdapter.startAudio()
+        audioAdapter.startAudio()
     }
 }

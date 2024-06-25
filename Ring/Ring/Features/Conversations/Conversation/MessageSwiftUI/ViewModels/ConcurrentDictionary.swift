@@ -24,20 +24,20 @@ class ConcurentDictionary {
     private var internalDictionary: [AnyHashable: Any]
 
     init(name: String, dictionary: [AnyHashable: Any]) {
-        self.queue = DispatchQueue(label: name, qos: .background, attributes: .concurrent)
-        self.internalDictionary = dictionary
+        queue = DispatchQueue(label: name, qos: .background, attributes: .concurrent)
+        internalDictionary = dictionary
     }
 
     func get(key: AnyHashable) -> Any? {
         var returnValue: Any?
-        queue.sync(flags: .barrier) {[weak self] in
+        queue.sync(flags: .barrier) { [weak self] in
             returnValue = self?.internalDictionary[key]
         }
         return returnValue
     }
 
     func set(value: Any, for key: AnyHashable) {
-        queue.sync(flags: .barrier) {[weak self] in
+        queue.sync(flags: .barrier) { [weak self] in
             self?.internalDictionary[key] = value
         }
     }
@@ -52,8 +52,9 @@ class ConcurentDictionary {
         return returnValue
     }
 
-    func filter(_ isIncluded: @escaping (Dictionary<AnyHashable, Any>.Element) throws -> Bool) rethrows -> [AnyHashable: Any]? {
-        return try? self.internalDictionary.filter(isIncluded)
+    func filter(_ isIncluded: @escaping (Dictionary<AnyHashable, Any>.Element) throws
+                    -> Bool) rethrows -> [AnyHashable: Any]? {
+        return try? internalDictionary.filter(isIncluded)
     }
 }
 

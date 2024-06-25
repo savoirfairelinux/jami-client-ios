@@ -24,25 +24,27 @@
 import UIKit
 
 class CopyableLabel: UILabel {
-
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.sharedInit()
+        sharedInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.sharedInit()
+        sharedInit()
     }
 
     func sharedInit() {
-        self.isUserInteractionEnabled = true
-        self.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(self.showMenu)))
+        isUserInteractionEnabled = true
+        addGestureRecognizer(UILongPressGestureRecognizer(
+            target: self,
+            action: #selector(showMenu)
+        ))
     }
 
     @objc
     func showMenu(_ recognizer: UILongPressGestureRecognizer) {
-        self.becomeFirstResponder()
+        becomeFirstResponder()
 
         let menu = UIMenuController.shared
 
@@ -58,7 +60,7 @@ class CopyableLabel: UILabel {
         }
     }
 
-    override func copy(_ sender: Any?) {
+    override func copy(_: Any?) {
         let board = UIPasteboard.general
 
         board.string = text
@@ -72,7 +74,7 @@ class CopyableLabel: UILabel {
         return true
     }
 
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+    override func canPerformAction(_ action: Selector, withSender _: Any?) -> Bool {
         return action == #selector(UIResponderStandardEditActions.copy)
     }
 }

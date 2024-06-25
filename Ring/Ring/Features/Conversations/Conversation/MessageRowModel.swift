@@ -1,5 +1,5 @@
 //
-//  TestMessageModel.swift
+//  MessageRowModel.swift
 //  Ring
 //
 //  Created by kateryna on 2022-09-26.
@@ -17,6 +17,7 @@ class MessageRowModel: ObservableObject {
             }
         }
     }
+
     var incoming = false
     var timeString: String?
     var getAvatar: ((String) -> Void)?
@@ -24,18 +25,17 @@ class MessageRowModel: ObservableObject {
     var messageId: String = ""
     var shouldDisplayAavatar = false {
         didSet {
-            if let getAvatar = self.getAvatar, self.shouldDisplayAavatar, !partisipantId.isEmpty {
+            if let getAvatar = getAvatar, shouldDisplayAavatar, !partisipantId.isEmpty {
                 getAvatar(partisipantId)
             }
         }
     }
 
     func fetchLastRead() {
-        if let getlastRead = self.getlastRead, !messageId.isEmpty {
+        if let getlastRead = getlastRead, !messageId.isEmpty {
             getlastRead(messageId)
         }
     }
 
     var getlastRead: ((String) -> Void)?
-
 }

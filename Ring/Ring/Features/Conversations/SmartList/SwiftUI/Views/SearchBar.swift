@@ -18,13 +18,21 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import Combine
 import SwiftUI
 import UIKit
-import Combine
 
 public extension View {
-    func navigationBarSearch(_ searchText: Binding<String>, isActive: Binding<Bool>, isSearchBarDisabled: Binding<Bool>) -> some View {
-        return overlay(SearchBar(text: searchText, isActive: isActive, isSearchBarDisabled: isSearchBarDisabled).frame(width: 0, height: 0))
+    func navigationBarSearch(
+        _ searchText: Binding<String>,
+        isActive: Binding<Bool>,
+        isSearchBarDisabled: Binding<Bool>
+    ) -> some View {
+        return overlay(SearchBar(
+            text: searchText,
+            isActive: isActive,
+            isSearchBarDisabled: isSearchBarDisabled
+        ).frame(width: 0, height: 0))
     }
 }
 
@@ -34,24 +42,28 @@ private struct SearchBar: UIViewControllerRepresentable {
     @Binding var isSearchBarDisabled: Bool // used to programaticly dismiss search controller
 
     init(text: Binding<String>, isActive: Binding<Bool>, isSearchBarDisabled: Binding<Bool>) {
-        self._text = text
-        self._isActive = isActive
-        self._isSearchBarDisabled = isSearchBarDisabled
+        _text = text
+        _isActive = isActive
+        _isSearchBarDisabled = isSearchBarDisabled
     }
 
-    func makeUIViewController(context: Context) -> SearchBarWrapperController {
+    func makeUIViewController(context _: Context) -> SearchBarWrapperController {
         return SearchBarWrapperController()
     }
 
     func updateUIViewController(_ controller: SearchBarWrapperController, context: Context) {
         controller.searchController = context.coordinator.searchController
-        if self.isSearchBarDisabled {
+        if isSearchBarDisabled {
             controller.searchController?.isActive = false
         }
     }
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(text: $text, isActive: $isActive, isSearchBarDisabled: $isSearchBarDisabled)
+        return Coordinator(
+            text: $text,
+            isActive: $isActive,
+            isSearchBarDisabled: $isSearchBarDisabled
+        )
     }
 
     class Coordinator: NSObject, UISearchResultsUpdating, UISearchControllerDelegate {
@@ -61,24 +73,32 @@ private struct SearchBar: UIViewControllerRepresentable {
         let searchController: UISearchController
 
         init(text: Binding<String>, isActive: Binding<Bool>, isSearchBarDisabled: Binding<Bool>) {
-            self._text = text
-            self._isActive = isActive
-            self._isSearchBarDisabled = isSearchBarDisabled
-            self.searchController = UISearchController(searchResultsController: nil)
+            _text = text
+            _isActive = isActive
+            _isSearchBarDisabled = isSearchBarDisabled
+            searchController = UISearchController(searchResultsController: nil)
 
             super.init()
 
             searchController.searchResultsUpdater = self
-            searchController.searchBar.searchTextField.addTarget(self, action: #selector(searchBarTextDidBeginEditing(_:)), for: .editingDidBegin)
-            searchController.searchBar.searchTextField.addTarget(self, action: #selector(searchBarTextDidEndEditing(_:)), for: .editingDidEnd)
+            searchController.searchBar.searchTextField.addTarget(
+                self,
+                action: #selector(searchBarTextDidBeginEditing(_:)),
+                for: .editingDidBegin
+            )
+            searchController.searchBar.searchTextField.addTarget(
+                self,
+                action: #selector(searchBarTextDidEndEditing(_:)),
+                for: .editingDidEnd
+            )
             searchController.hidesNavigationBarDuringPresentation = true
             searchController.obscuresBackgroundDuringPresentation = false
 
-            self.searchController.searchBar.text = self.text
+            searchController.searchBar.text = self.text
             searchController.delegate = self
         }
 
-        @objc private func searchBarTextDidBeginEditing(_ textField: UITextField) {
+        @objc private func searchBarTextDidBeginEditing(_: UITextField) {
             DispatchQueue.main.async {
                 withAnimation {
                     self.isSearchBarDisabled = false
@@ -87,7 +107,7 @@ private struct SearchBar: UIViewControllerRepresentable {
             }
         }
 
-        func didDismissSearchController(_ searchController: UISearchController) {
+        func didDismissSearchController(_: UISearchController) {
             DispatchQueue.main.async {
                 withAnimation {
                     self.isActive = false
@@ -95,7 +115,7 @@ private struct SearchBar: UIViewControllerRepresentable {
             }
         }
 
-        @objc private func searchBarTextDidEndEditing(_ textField: UITextField) {
+        @objc private func searchBarTextDidEndEditing(_: UITextField) {
             DispatchQueue.main.async {
                 withAnimation {
                     self.isActive = false
@@ -104,7 +124,8 @@ private struct SearchBar: UIViewControllerRepresentable {
         }
 
         func updateSearchResults(for searchController: UISearchController) {
-            // DispatchQueue.main.async is important to avoid "Modifying state during view update, this will cause undefined behavior." error
+            // DispatchQueue.main.async is important to avoid "Modifying state during view update,
+            // this will cause undefined behavior." error
             DispatchQueue.main.async {
                 guard let text = searchController.searchBar.text else { return }
                 self.text = text
@@ -117,13 +138,13 @@ private struct SearchBar: UIViewControllerRepresentable {
 
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            self.parent?.navigationItem.searchController = self.searchController
-            self.parent?.navigationItem.hidesSearchBarWhenScrolling = false
+            parent?.navigationItem.searchController = searchController
+            parent?.navigationItem.hidesSearchBarWhenScrolling = false
         }
 
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
-            self.parent?.navigationItem.searchController = self.searchController
+            parent?.navigationItem.searchController = searchController
         }
     }
 }

@@ -21,7 +21,6 @@
 import Foundation
 
 class LoadingViewPresenter {
-
     private weak var timer: Timer?
     private let timeout = 2.0
 
@@ -32,14 +31,24 @@ class LoadingViewPresenter {
         return loadingView
     }()
 
-    func presentWithMessage(message: String, presentingVC: UIViewController, animated flag: Bool, modalPresentationStyle: UIModalPresentationStyle = .overCurrentContext) {
+    func presentWithMessage(
+        message: String,
+        presentingVC: UIViewController,
+        animated flag: Bool,
+        modalPresentationStyle: UIModalPresentationStyle = .overCurrentContext
+    ) {
         loadingView.message = message
         loadingView.modalPresentationStyle = modalPresentationStyle
         loadingView.showLoadingView()
         presentingVC.present(loadingView, animated: flag)
     }
 
-    func showSuccessAllert(message: String, presentingVC: UIViewController, animated flag: Bool, modalPresentationStyle: UIModalPresentationStyle = .overCurrentContext) {
+    func showSuccessAllert(
+        message: String,
+        presentingVC: UIViewController,
+        animated flag: Bool,
+        modalPresentationStyle: UIModalPresentationStyle = .overCurrentContext
+    ) {
         loadingView.message = message
         loadingView.modalPresentationStyle = modalPresentationStyle
         loadingView.showSuccessView()
@@ -52,8 +61,9 @@ class LoadingViewPresenter {
     }
 
     // MARK: - Timer
+
     @objc
-    func timerHandler(_ timer: Timer) {
+    func timerHandler(_: Timer) {
         defer {
             stopTimer()
         }
@@ -62,7 +72,13 @@ class LoadingViewPresenter {
 
     func startTimer() {
         stopTimer()
-        timer = Timer.scheduledTimer(timeInterval: timeout, target: self, selector: #selector(timerHandler(_:)), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(
+            timeInterval: timeout,
+            target: self,
+            selector: #selector(timerHandler(_:)),
+            userInfo: nil,
+            repeats: false
+        )
     }
 
     func stopTimer() {
@@ -94,23 +110,23 @@ class LoadingView: UIViewController {
     }
 
     func showLoadingView() {
-        self.containerView.contentView.removeSubviews(recursive: true)
+        containerView.contentView.removeSubviews(recursive: true)
         let indicator = UIActivityIndicatorView()
         indicator.style = .large
         indicator.color = .black
         indicator.startAnimating()
         indicator.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: 60, height: 60))
-        self.addToContainerMessageAndView(viewToAdd: indicator)
+        addToContainerMessageAndView(viewToAdd: indicator)
     }
 
     func showSuccessView() {
-        self.containerView.contentView.removeSubviews(recursive: true)
+        containerView.contentView.removeSubviews(recursive: true)
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "checkmark")
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .jamiSuccess
         imageView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: 60, height: 60))
-        self.addToContainerMessageAndView(viewToAdd: imageView)
+        addToContainerMessageAndView(viewToAdd: imageView)
     }
 
     func addVibrancy() {
@@ -136,9 +152,12 @@ class LoadingView: UIViewController {
     }
 
     func addView(viewToAdd: UIView) {
-        containerView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: defaultSize, height: defaultSize))
+        containerView.frame = CGRect(
+            origin: CGPoint.zero,
+            size: CGSize(width: defaultSize, height: defaultSize)
+        )
         containerView.center = view.center
-        self.addVibrancy()
+        addVibrancy()
         containerView.contentView.addSubview(viewToAdd)
         viewToAdd.center = containerView.contentView.center
     }
@@ -160,7 +179,7 @@ class LoadingView: UIViewController {
 
     func addToContainerMessageAndView(viewToAdd: UIView) {
         if message.isEmpty {
-            self.addView(viewToAdd: viewToAdd)
+            addView(viewToAdd: viewToAdd)
             return
         }
         let messageLabel = createMessageView()
@@ -173,15 +192,19 @@ class LoadingView: UIViewController {
         let height = max(width, max(defaultSize, conteinerHeight))
         let updatedVerticalMargin = (height - textHeight - viewHeight) / 3
 
-        containerView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: height))
+        containerView.frame = CGRect(
+            origin: CGPoint.zero,
+            size: CGSize(width: width, height: height)
+        )
 
         containerView.center = view.center
 
-        self.addVibrancy()
+        addVibrancy()
         containerView.contentView.addSubview(messageLabel)
 
         let centerX = containerView.contentView.center.x
-        let indicatorCenterY = containerView.contentView.frame.height - (viewHeight * 0.5) - updatedVerticalMargin
+        let indicatorCenterY = containerView.contentView.frame
+            .height - (viewHeight * 0.5) - updatedVerticalMargin
         let textCenterY = (textHeight * 0.5) + updatedVerticalMargin
 
         messageLabel.center = CGPoint(
@@ -194,5 +217,4 @@ class LoadingView: UIViewController {
             y: indicatorCenterY
         )
     }
-
 }

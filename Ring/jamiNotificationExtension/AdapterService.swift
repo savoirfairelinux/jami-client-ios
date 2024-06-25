@@ -19,24 +19,24 @@
  */
 
 import Foundation
-import UIKit
 import MobileCoreServices
-import Photos
 import os
+import Photos
+import UIKit
 
 class AdapterService {
     enum InteractionAttributes: String {
         case interactionId = "id"
-        case type = "type"
-        case invited = "invited"
-        case fileId = "fileId"
-        case displayName = "displayName"
-        case body = "body"
-        case author = "author"
-        case timestamp = "timestamp"
+        case type
+        case invited
+        case fileId
+        case displayName
+        case body
+        case author
+        case timestamp
         case parent = "linearizedParent"
-        case action = "action"
-        case duration = "duration"
+        case action
+        case duration
     }
 
     enum InteractionType: String {
@@ -94,8 +94,13 @@ class AdapterService {
         Adapter.delegate = self
     }
 
-    func startAccountsWithListener(accountId: String, convId: String, loadAll: Bool, listener: @escaping (EventType, EventData) -> Void) {
-        self.eventHandler = listener
+    func startAccountsWithListener(
+        accountId: String,
+        convId: String,
+        loadAll: Bool,
+        listener: @escaping (EventType, EventData) -> Void
+    ) {
+        eventHandler = listener
         start(accountId: accountId, convId: convId, loadAll: loadAll)
     }
 
@@ -104,17 +109,25 @@ class AdapterService {
     }
 
     func pushNotificationReceived(accountId: String, data: [String: String]) {
-        self.adapter.pushNotificationReceived(accountId, message: data)
+        adapter.pushNotificationReceived(accountId, message: data)
     }
 
-    func decrypt(keyPath: String, accountId: String, messagesPath: String, value: [String: Any]) -> PeerConnectionRequestType {
-        if self.adapter == nil {
+    func decrypt(keyPath: String, accountId: String, messagesPath: String,
+                 value: [String: Any]) -> PeerConnectionRequestType {
+        if adapter == nil {
             return .unknown
         }
-        let result = adapter.decrypt(keyPath, accountId: accountId, treated: messagesPath, value: value)
+        let result = adapter.decrypt(
+            keyPath,
+            accountId: accountId,
+            treated: messagesPath,
+            value: value
+        )
         guard let peerId = result?.keys.first,
-              let type = result?.values.first else {
-            return .unknown}
+              let type = result?.values.first
+        else {
+            return .unknown
+        }
         /*
          Extracts the conversation ID from type formatted as "application/im-gitmessage-id/conversationId".
          This type is used for connections requests for messages.
@@ -140,16 +153,16 @@ class AdapterService {
     }
 
     func start(accountId: String, convId: String, loadAll: Bool) {
-        self.adapter.start(accountId, convId: convId, loadAll: loadAll)
+        adapter.start(accountId, convId: convId, loadAll: loadAll)
     }
 
     func removeDelegate() {
         Adapter.delegate = nil
-        self.adapter = nil
+        adapter = nil
     }
 
     func stop(accountId: String) {
-        self.adapter.stop(forAccountId: accountId)
+        adapter.stop(forAccountId: accountId)
         removeDelegate()
     }
 
@@ -161,14 +174,20 @@ class AdapterService {
         return adapter.nameServer(forAccountId: accountId)
     }
 
-    private func fileAlreadyDownloaded(fileName: String, accountId: String, conversationId: String) -> Bool {
-        guard let url = getFileUrlFor(fileName: fileName, accountId: accountId, conversationId: conversationId) else {
+    private func fileAlreadyDownloaded(fileName: String, accountId: String,
+                                       conversationId: String) -> Bool {
+        guard let url = getFileUrlFor(
+            fileName: fileName,
+            accountId: accountId,
+            conversationId: conversationId
+        ) else {
             return false
         }
         return FileManager.default.fileExists(atPath: url.path)
     }
 
-    private func getFileUrlFor(fileName: String, accountId: String, conversationId: String) -> URL? {
+    private func getFileUrlFor(fileName: String, accountId: String,
+                               conversationId: String) -> URL? {
         guard let documentsURL = Constants.documentsPath else {
             return nil
         }
@@ -181,18 +200,32 @@ class AdapterService {
 }
 
 extension AdapterService: AdapterDelegate {
-
     func didReceiveMessage(_ message: [String: String],
                            from senderAccount: String,
-                           messageId: String,
+                           messageId _: String,
                            to receiverAccountId: String) {
         guard let content = message["text/plain"],
-              let handler = self.eventHandler else { return }
-        handler(.message, EventData(accountId: receiverAccountId, jamiId: senderAccount, conversationId: "", content: content, groupTitle: ""))
+              let handler = eventHandler else { return }
+        handler(
+            .message,
+            EventData(
+                accountId: receiverAccountId,
+                jamiId: senderAccount,
+                conversationId: "",
+                content: content,
+                groupTitle: ""
+            )
+        )
     }
 
-    func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String) {
-        guard let handler = self.eventHandler,
+    func dataTransferEvent(
+        withFileId transferId: String,
+        withEventCode eventCode: Int,
+        accountId _: String,
+        conversationId _: String,
+        interactionId _: String
+    ) {
+        guard let handler = eventHandler,
               let data = loadingFiles[transferId],
               let code = DataTransferEventCode(rawValue: eventCode),
               code.isCompleted() else { return }
@@ -201,21 +234,25 @@ extension AdapterService: AdapterDelegate {
     }
 
     func conversationSyncCompleted(accountId: String) {
-        guard let handler = self.eventHandler else {
+        guard let handler = eventHandler else {
             return
         }
         handler(.syncCompleted, EventData(accountId: accountId))
     }
 
     func conversationCloned(accountId: String) {
-        guard let handler = self.eventHandler else {
+        guard let handler = eventHandler else {
             return
         }
         handler(.conversationCloned, EventData(accountId: accountId))
     }
 
-    func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String]) {
-        guard let handler = self.eventHandler else {
+    func receivedConversationRequest(
+        accountId: String,
+        conversationId: String,
+        metadata: [String: String]
+    ) {
+        guard let handler = eventHandler else {
             return
         }
         let contentMessage = L10n.Conversation.incomingRequest
@@ -228,39 +265,81 @@ extension AdapterService: AdapterDelegate {
             peerId = from
         }
         if !peerId.isEmpty || !groupTitle.isEmpty {
-            handler(.invitation, EventData(accountId: accountId, jamiId: peerId, conversationId: conversationId, content: contentMessage, groupTitle: groupTitle))
+            handler(
+                .invitation,
+                EventData(
+                    accountId: accountId,
+                    jamiId: peerId,
+                    conversationId: conversationId,
+                    content: contentMessage,
+                    groupTitle: groupTitle
+                )
+            )
         }
     }
 
     func newInteraction(conversationId: String, accountId: String, message: [String: String]) {
-        guard let handler = self.eventHandler else {
+        guard let handler = eventHandler else {
             return
         }
         guard let type = message[InteractionAttributes.type.rawValue],
-              let interactionType = InteractionType(rawValue: type) else {
+              let interactionType = InteractionType(rawValue: type)
+        else {
             return
         }
         let from = message[InteractionAttributes.author.rawValue] ?? ""
         let content = message[InteractionAttributes.body.rawValue] ?? ""
         switch interactionType {
         case .message:
-            handler(.message, EventData(accountId: accountId, jamiId: from, conversationId: conversationId, content: content, groupTitle: ""))
-        case.fileTransfer:
+            handler(
+                .message,
+                EventData(
+                    accountId: accountId,
+                    jamiId: from,
+                    conversationId: conversationId,
+                    content: content,
+                    groupTitle: ""
+                )
+            )
+        case .fileTransfer:
             guard let fileId = message[InteractionAttributes.fileId.rawValue],
-                  let url = self.getFileUrlFor(fileName: fileId, accountId: accountId, conversationId: conversationId) else {
+                  let url = getFileUrlFor(
+                    fileName: fileId,
+                    accountId: accountId,
+                    conversationId: conversationId
+                  )
+            else {
                 return
             }
-            let data = EventData(accountId: accountId, jamiId: from, conversationId: conversationId, content: url.path, groupTitle: "")
-            // check if the file has already been downloaded. If no, download the file if filesize is less than a downloading limit
-            if fileAlreadyDownloaded(fileName: fileId, accountId: accountId, conversationId: conversationId) {
+            let data = EventData(
+                accountId: accountId,
+                jamiId: from,
+                conversationId: conversationId,
+                content: url.path,
+                groupTitle: ""
+            )
+            // check if the file has already been downloaded. If no, download the file if filesize
+            // is less than a downloading limit
+            if fileAlreadyDownloaded(
+                fileName: fileId,
+                accountId: accountId,
+                conversationId: conversationId
+            ) {
                 handler(.fileTransferDone, data)
             } else {
                 guard let interactionId = message[InteractionAttributes.interactionId.rawValue],
                       let size = message["totalSize"],
-                      (Int(size) ?? (maxSizeForAutoaccept + 1)) <= maxSizeForAutoaccept else { return }
+                      (Int(size) ?? (maxSizeForAutoaccept + 1)) <= maxSizeForAutoaccept
+                else { return }
                 let path = ""
-                self.adapter.downloadFile(withFileId: fileId, accountId: accountId, conversationId: conversationId, interactionId: interactionId, withFilePath: path)
-                self.loadingFiles[fileId] = data
+                adapter.downloadFile(
+                    withFileId: fileId,
+                    accountId: accountId,
+                    conversationId: conversationId,
+                    interactionId: interactionId,
+                    withFilePath: path
+                )
+                loadingFiles[fileId] = data
                 handler(.fileTransferInProgress, data)
             }
         }

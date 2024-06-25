@@ -20,46 +20,46 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import Reusable
 import SwiftUI
+import UIKit
 
 // Constants
-struct SmartlistConstants {
+enum SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 70.0
     static let tableHeaderViewHeight: CGFloat = 30.0
 }
 
 class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
-
     var viewModel: SmartlistViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.addSwiftUI()
+        addSwiftUI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.viewModel.closeAllPlayers()
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        viewModel.closeAllPlayers()
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     func addSwiftUI() {
-        let contentView = UIHostingController(rootView: SmartListContainer(model: viewModel.conversationsModel))
+        let contentView =
+            UIHostingController(rootView: SmartListContainer(model: viewModel.conversationsModel))
         addChild(contentView)
         view.addSubview(contentView.view)
-        contentView.view.frame = self.view.bounds
+        contentView.view.frame = view.bounds
         contentView.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

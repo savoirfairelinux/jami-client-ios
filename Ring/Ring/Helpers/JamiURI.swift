@@ -44,12 +44,12 @@ class JamiURI {
 
     init(schema: URIType, infoHash: String, account: AccountModel) {
         self.schema = schema
-        self.parce(infoHash: infoHash, account: account)
+        parce(infoHash: infoHash, account: account)
     }
 
     init(schema: URIType, infoHash: String) {
         self.schema = schema
-        self.parce(infoHash: infoHash)
+        parce(infoHash: infoHash)
     }
 
     init(from uriString: String) {
@@ -58,24 +58,24 @@ class JamiURI {
             .replacingOccurrences(of: ">", with: "")
             .prefix(3)
         if prefix == URIType.sip.getString() {
-            self.schema = .sip
+            schema = .sip
         } else {
-            self.schema = .ring
+            schema = .ring
         }
-        self.parce(infoHash: uriString)
+        parce(infoHash: uriString)
     }
 
     private func parce(infoHash: String, account: AccountModel) {
-        self.parce(infoHash: infoHash)
-        if self.schema == .ring || self.userInfo.isEmpty {
+        parce(infoHash: infoHash)
+        if schema == .ring || userInfo.isEmpty {
             return
         }
-        if self.hostname.isEmpty {
-            self.hostname = account.details?
+        if hostname.isEmpty {
+            hostname = account.details?
                 .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountHostname)) ?? ""
         }
-        if self.port.isEmpty {
-            self.port = account.details?
+        if port.isEmpty {
+            port = account.details?
                 .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.localPort)) ?? ""
         }
     }
@@ -86,7 +86,7 @@ class JamiURI {
             .replacingOccurrences(of: "@ring.dht", with: "")
             .replacingOccurrences(of: "<", with: "")
             .replacingOccurrences(of: ">", with: "")
-        if self.schema == .ring {
+        if schema == .ring {
             userInfo = info
             return
         }

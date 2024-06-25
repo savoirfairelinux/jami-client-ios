@@ -18,8 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import SwiftUI
 import RxSwift
+import SwiftUI
 
 struct PlayerViewWrapper: UIViewRepresentable {
     typealias UIViewType = PlayerView
@@ -32,26 +32,26 @@ struct PlayerViewWrapper: UIViewRepresentable {
     let disposeBag = DisposeBag()
     let longGestureRecognizer = UILongPressGestureRecognizer()
 
-    func makeUIView(context: Context) -> PlayerView {
+    func makeUIView(context _: Context) -> PlayerView {
         let frame = CGRect(x: 0, y: 0, width: width, height: height)
         let player = PlayerView(frame: frame)
         player.withControls = withControls
         player.viewModel = viewModel
         longGestureRecognizer.rx
             .event
-            .filter({ event in
+            .filter { event in
                 event.state == UIGestureRecognizer.State.began
-            })
+            }
             .bind(onNext: { _ in
                 self.onLongGesture()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         longGestureRecognizer.minimumPressDuration = 0.2
         player.addGestureRecognizer(longGestureRecognizer)
         return player
     }
 
-    func updateUIView(_ uiView: PlayerView, context: Context) {
+    func updateUIView(_ uiView: PlayerView, context _: Context) {
         let newFrame = CGRect(x: 0, y: 0, width: width, height: height)
         uiView.frame = newFrame
         uiView.frameUpdated()
@@ -70,15 +70,30 @@ struct PlayerSwiftUI: View {
         ZStack(alignment: .center) {
             if colorScheme == .dark {
                 model.borderColor
-                    .frame(width: model.playerWidth * ratio + 2, height: model.playerHeight * ratio + 2)
-                    .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
+                    .frame(
+                        width: model.playerWidth * ratio + 2,
+                        height: model.playerHeight * ratio + 2
+                    )
+                    .conditionalModifier(
+                        MessageCornerRadius(model: model),
+                        apply: customCornerRadius == 0
+                    )
                     .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
             }
-            PlayerViewWrapper.init(viewModel: player, width: model.playerWidth * ratio, height: model.playerHeight * ratio, onLongGesture: onLongGesture, withControls: withControls)
-                .frame(height: model.playerHeight * ratio)
-                .frame(width: model.playerWidth * ratio)
-                .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
-                .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
+            PlayerViewWrapper(
+                viewModel: player,
+                width: model.playerWidth * ratio,
+                height: model.playerHeight * ratio,
+                onLongGesture: onLongGesture,
+                withControls: withControls
+            )
+            .frame(height: model.playerHeight * ratio)
+            .frame(width: model.playerWidth * ratio)
+            .conditionalModifier(
+                MessageCornerRadius(model: model),
+                apply: customCornerRadius == 0
+            )
+            .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
         }
     }
 }
@@ -97,7 +112,10 @@ struct ImageOrGifView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(minHeight: minHeight, maxHeight: maxHeight)
-                .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
+                .conditionalModifier(
+                    MessageCornerRadius(model: message),
+                    apply: customCornerRadius == 0
+                )
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
                 .onTapGesture {
                     // Add an empty onTapGesture to keep the table view scrolling smooth
@@ -107,7 +125,10 @@ struct ImageOrGifView: View {
             ScaledImageViewWrapper(imageToShow: image, maxHeight: maxHeight, maxWidth: maxHeight)
                 .scaledToFit()
                 .frame(maxHeight: maxHeight)
-                .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
+                .conditionalModifier(
+                    MessageCornerRadius(model: message),
+                    apply: customCornerRadius == 0
+                )
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
                 .onTapGesture {
                     // Add an empty onTapGesture to keep the table view scrolling smooth
@@ -125,10 +146,23 @@ struct MediaView: View {
     let withPlayerControls: Bool
     let cornerRadius: CGFloat
     var body: some View {
-        if let player = self.message.player {
-            PlayerSwiftUI(model: message, player: player, onLongGesture: onLongGesture, withControls: withPlayerControls, customCornerRadius: cornerRadius)
+        if let player = message.player {
+            PlayerSwiftUI(
+                model: message,
+                player: player,
+                onLongGesture: onLongGesture,
+                withControls: withPlayerControls,
+                customCornerRadius: cornerRadius
+            )
         } else if let image = message.finalImage {
-            ImageOrGifView(message: message, image: image, onLongGesture: onLongGesture, minHeight: minHeight, maxHeight: maxHeight, customCornerRadius: cornerRadius)
+            ImageOrGifView(
+                message: message,
+                image: image,
+                onLongGesture: onLongGesture,
+                minHeight: minHeight,
+                maxHeight: maxHeight,
+                customCornerRadius: cornerRadius
+            )
 
         } else {
             DefaultTransferView(model: message, onLongGesture: onLongGesture)

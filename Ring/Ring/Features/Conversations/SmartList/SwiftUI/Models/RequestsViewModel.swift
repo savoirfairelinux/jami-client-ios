@@ -18,11 +18,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
-import SwiftUI
 import Combine
-import RxSwift
+import Foundation
 import RxRelay
+import RxSwift
+import SwiftUI
 
 enum RequestStatus {
     case pending
@@ -62,7 +62,9 @@ enum RequestAction {
 }
 
 class RequestNameResolver: ObservableObject, Identifiable, Hashable {
-    var bestName: String = "" // Name to be shown in the request list. It is either the swarm title or the names of every participant in the conversation.
+    var bestName: String =
+        "" // Name to be shown in the request list. It is either the swarm title or the names of
+    // every participant in the conversation.
     let id: String
     /*
      Name to be shown in the requests widget title on the smartList.
@@ -79,16 +81,16 @@ class RequestNameResolver: ObservableObject, Identifiable, Hashable {
 
     init(request: RequestModel, nameService: NameService) {
         self.request = request
-        self.id = request.getIdentifier()
+        id = request.getIdentifier()
         self.nameService = nameService
-        self.setName()
+        setName()
     }
 
     private func setName() {
         if !request.name.isEmpty {
             updateNameOnMainThread(with: request.name)
             requestName.accept(request.name)
-            self.nameResolved.accept(true)
+            nameResolved.accept(true)
         } else {
             handleNoInvitationName()
         }
@@ -125,7 +127,8 @@ class RequestNameResolver: ObservableObject, Identifiable, Hashable {
     }
 
     private func initializeParticipantEntries() {
-        // Create a dictionary of participant IDs and names, so names can be updated when lookup is finished.
+        // Create a dictionary of participant IDs and names, so names can be updated when lookup is
+        // finished.
         for participant in request.participants {
             registeredNames[participant.jamiId] = ""
         }
@@ -140,11 +143,11 @@ class RequestNameResolver: ObservableObject, Identifiable, Hashable {
     private func lookupUserName(jamiId: String) {
         nameService.usernameLookupStatus.asObservable()
             .filter { lookupNameResponse in
-                return lookupNameResponse.address == jamiId
+                lookupNameResponse.address == jamiId
             }
             .take(1)
             .subscribe(onNext: { lookupNameResponse in
-                if lookupNameResponse.state == .found && !lookupNameResponse.name.isEmpty {
+                if lookupNameResponse.state == .found, !lookupNameResponse.name.isEmpty {
                     self.registeredNames[jamiId] = lookupNameResponse.name
                     self.updateNameFromRegistered()
                     self.nameResolved.accept(true)
@@ -181,10 +184,10 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
 
     init(request: RequestModel, nameResolver: RequestNameResolver) {
         self.nameResolver = nameResolver
-        self.id = request.getIdentifier()
+        id = request.getIdentifier()
         self.request = request
-        self.receivedDate = request.receivedDate.conversationTimestamp()
-        self.setAvatar()
+        receivedDate = request.receivedDate.conversationTimestamp()
+        setAvatar()
         self.nameResolver.nameResolved
             .startWith(self.nameResolver.nameResolved.value)
             .subscribe(onNext: { [weak self] resolved in
@@ -211,22 +214,28 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
         if let avatarData = nameResolver.request.avatar, let image = UIImage(data: avatarData) {
             return image
         } else if request.type == .contact {
-            return UIImage.createContactAvatar(username: nameResolver.bestName, size: CGSize(width: avatarSize, height: avatarSize))
+            return UIImage.createContactAvatar(
+                username: nameResolver.bestName,
+                size: CGSize(width: avatarSize, height: avatarSize)
+            )
         } else {
-            return UIImage.createSwarmAvatar(convId: nameResolver.request.conversationId, size: CGSize(width: avatarSize, height: avatarSize))
+            return UIImage.createSwarmAvatar(
+                convId: nameResolver.request.conversationId,
+                size: CGSize(width: avatarSize, height: avatarSize)
+            )
         }
     }
 
     func requestAccepted() {
-        self.status = .accepted
+        status = .accepted
     }
 
     func requestDiscarded() {
-        self.status = .refused
+        status = .refused
     }
 
     func requestBlocked() {
-        self.status = .banned
+        status = .banned
     }
 
     func hash(into hasher: inout Hasher) {
@@ -243,7 +252,9 @@ class RequestsViewModel: ObservableObject {
     @Published var requestNames = ""
     @Published var unreadRequests = 0
     @Published var requestViewOpened = false
-    var requestsNameResolvers = ThreadSafeArray<RequestNameResolver>(label: "com.requestsNameResolvers")// requests and resolved name
+    var requestsNameResolvers =
+        ThreadSafeArray<RequestNameResolver>(label: "com.requestsNameResolvers") // requests and
+    // resolved name
     var title = L10n.Smartlist.invitationReceived
 
     let requestsService: RequestsService
@@ -258,14 +269,14 @@ class RequestsViewModel: ObservableObject {
     var titleDisposeBag = DisposeBag()
 
     init(injectionBag: InjectionBag) {
-        self.requestsService = injectionBag.requestsService
-        self.conversationService = injectionBag.conversationsService
-        self.accountService = injectionBag.accountService
-        self.nameService = injectionBag.nameService
-        self.contactsService = injectionBag.contactsService
-        self.presenceService = injectionBag.presenceService
-        self.injectionBar = injectionBag
-        self.subscribeToNewRequests()
+        requestsService = injectionBag.requestsService
+        conversationService = injectionBag.conversationsService
+        accountService = injectionBag.accountService
+        nameService = injectionBag.nameService
+        contactsService = injectionBag.contactsService
+        presenceService = injectionBag.presenceService
+        injectionBar = injectionBag
+        subscribeToNewRequests()
     }
 
     func subscribeToNewRequests() {
@@ -280,7 +291,11 @@ class RequestsViewModel: ObservableObject {
             guard let self = self, let account = self.accountService.currentAccount else {
                 return []
             }
-            return self.filterRequestsNotInConversations(requests: requests, conversations: conversations, accountId: account.id)
+            return self.filterRequestsNotInConversations(
+                requests: requests,
+                conversations: conversations,
+                accountId: account.id
+            )
         }
 
         unhandledRequests
@@ -291,20 +306,25 @@ class RequestsViewModel: ObservableObject {
             .disposed(by: disposeBag)
     }
 
-    private func filterRequestsNotInConversations(requests: [RequestModel], conversations: [ConversationModel], accountId: String) -> [RequestModel] {
+    private func filterRequestsNotInConversations(
+        requests: [RequestModel],
+        conversations: [ConversationModel],
+        accountId: String
+    ) -> [RequestModel] {
         let conversationIds = Set(conversations.map { $0.id })
-        return requests.filter { $0.accountId == accountId && !conversationIds.contains($0.conversationId) }
+        return requests
+            .filter { $0.accountId == accountId && !conversationIds.contains($0.conversationId) }
     }
 
     private func processNewRequests(_ newRequests: [RequestModel]) {
-        let newItems = self.findNewRequests(from: newRequests)
-        let outdatedItems = self.findOutdatedRequests(comparedTo: newRequests)
+        let newItems = findNewRequests(from: newRequests)
+        let outdatedItems = findOutdatedRequests(comparedTo: newRequests)
 
-        self.removeOutdatedItems(outdatedItems)
-        self.addNewRequests(newItems)
-        self.sortRequestsByReceivedDate()
+        removeOutdatedItems(outdatedItems)
+        addNewRequests(newItems)
+        sortRequestsByReceivedDate()
 
-        self.updateUnreadCount()
+        updateUnreadCount()
         if requestsNameResolvers.count() == 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 guard let self = self else { return }
@@ -320,24 +340,26 @@ class RequestsViewModel: ObservableObject {
 
     private func findNewRequests(from newRequests: [RequestModel]) -> [RequestModel] {
         return newRequests.filter { newItem in
-            !self.requestsNameResolvers.contains { $0.request.getIdentifier() == newItem.getIdentifier() }
+            !self.requestsNameResolvers
+                .contains { $0.request.getIdentifier() == newItem.getIdentifier() }
         }
     }
 
-    private func findOutdatedRequests(comparedTo newRequests: [RequestModel]) -> [RequestNameResolver] {
-        return self.requestsNameResolvers.filter { oldItem in
+    private func findOutdatedRequests(comparedTo newRequests: [RequestModel])
+    -> [RequestNameResolver] {
+        return requestsNameResolvers.filter { oldItem in
             !newRequests.contains { $0.getIdentifier() == oldItem.request.getIdentifier() }
         }
     }
 
     private func removeOutdatedItems(_ items: [RequestNameResolver]) {
         let identifiers = Set(items.map { $0.request.getIdentifier() })
-        self.requestsNameResolvers.removeAll { identifiers.contains($0.request.getIdentifier()) }
-        self.markRowsForRemoval(with: identifiers)
+        requestsNameResolvers.removeAll { identifiers.contains($0.request.getIdentifier()) }
+        markRowsForRemoval(with: identifiers)
     }
 
     private func markRowsForRemoval(with identifiers: Set<String>) {
-        identifiers.forEach { identifier in
+        for identifier in identifiers {
             for row in requestsRow where row.request.getIdentifier() == identifier {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     row.markedToRemove = true
@@ -357,25 +379,32 @@ class RequestsViewModel: ObservableObject {
     }
 
     private func addNewRequests(_ newRequests: [RequestModel]) {
-        let newViewModels = newRequests.map { RequestNameResolver(request: $0, nameService: self.nameService) }
-        self.requestsNameResolvers.append(contentsOf: newViewModels)
+        let newViewModels = newRequests.map { RequestNameResolver(
+            request: $0,
+            nameService: self.nameService
+        )
+        }
+        requestsNameResolvers.append(contentsOf: newViewModels)
         if requestViewOpened {
             for nameResolver in newViewModels {
-                requestsRow.append(RequestRowViewModel(request: nameResolver.request, nameResolver: nameResolver))
+                requestsRow.append(RequestRowViewModel(
+                    request: nameResolver.request,
+                    nameResolver: nameResolver
+                ))
             }
         }
     }
 
     private func sortRequestsByReceivedDate() {
-        self.requestsNameResolvers.sort(by: { $0.request.receivedDate < $1.request.receivedDate })
+        requestsNameResolvers.sort(by: { $0.request.receivedDate < $1.request.receivedDate })
     }
 
     private func updateUnreadCount() {
-        self.unreadRequests = self.requestsNameResolvers.count()
+        unreadRequests = requestsNameResolvers.count()
     }
 
     private func observeRequestNames() {
-        self.titleDisposeBag = DisposeBag()
+        titleDisposeBag = DisposeBag()
 
         // Create a combined observable for request names
         Observable.combineLatest(requestsNameResolvers.map { $0.requestName.asObservable() })
@@ -385,14 +414,15 @@ class RequestsViewModel: ObservableObject {
                     self?.requestNames = combinedNames
                 }
             })
-            .disposed(by: self.titleDisposeBag)
+            .disposed(by: titleDisposeBag)
     }
 
     // MARK: - presenting requests list
 
     func presentRequests() {
         // When the list of requests is presented, maintain the same number of requests.
-        // Create rows from the current requests so that the list does not change as requests are processed.
+        // Create rows from the current requests so that the list does not change as requests are
+        // processed.
         generateRequestRows()
         requestViewOpened.toggle()
     }
@@ -400,7 +430,10 @@ class RequestsViewModel: ObservableObject {
     func generateRequestRows() {
         requestsRow = [RequestRowViewModel]()
         for nameResolver in requestsNameResolvers {
-            requestsRow.append(RequestRowViewModel(request: nameResolver.request, nameResolver: nameResolver))
+            requestsRow.append(RequestRowViewModel(
+                request: nameResolver.request,
+                nameResolver: nameResolver
+            ))
         }
     }
 
@@ -408,8 +441,13 @@ class RequestsViewModel: ObservableObject {
 
     func accept(requestRow: RequestRowViewModel) {
         processRequest(requestRow, action: .accept) {
-            if requestRow.request.isDialog(), let jamiId = requestRow.request.participants.first?.jamiId {
-                self.presenceService.subscribeBuddy(withAccountId: requestRow.request.accountId, withUri: jamiId, withFlag: true)
+            if requestRow.request.isDialog(),
+               let jamiId = requestRow.request.participants.first?.jamiId {
+                self.presenceService.subscribeBuddy(
+                    withAccountId: requestRow.request.accountId,
+                    withUri: jamiId,
+                    withFlag: true
+                )
             }
         }
     }
@@ -425,8 +463,13 @@ class RequestsViewModel: ObservableObject {
         }
     }
 
-    private func processRequest(_ requestRow: RequestRowViewModel, action: RequestAction, completion: (() -> Void)? = nil) {
-        let requestServiceAction = (action == .accept) ? requestsService.acceptConverversationRequest : requestsService.discardConverversationRequest
+    private func processRequest(
+        _ requestRow: RequestRowViewModel,
+        action: RequestAction,
+        completion: (() -> Void)? = nil
+    ) {
+        let requestServiceAction = (action == .accept) ? requestsService
+            .acceptConverversationRequest : requestsService.discardConverversationRequest
 
         requestServiceAction(requestRow.request.conversationId, requestRow.request.accountId)
             .subscribe(

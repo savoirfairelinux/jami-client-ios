@@ -18,22 +18,21 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
 class ScanViewModel: ViewModel, Stateable {
-
     // MARK: variables
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
 
     // MARK: functions
-    required init(with injectionBag: InjectionBag) {}
+
+    required init(with _: InjectionBag) {}
 
     func openConversation(jamiId: String) {
-        self.stateSubject.onNext(ConversationState.openConversation(jamiId: jamiId))
+        stateSubject.onNext(ConversationState.openConversation(jamiId: jamiId))
     }
 }

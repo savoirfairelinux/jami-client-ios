@@ -18,35 +18,35 @@
  */
 
 import Reusable
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
 import SwiftUI
+import UIKit
 
 class SwarmInfoViewController: UIViewController, ViewModelBased, StoryboardBased {
-
     var viewModel: SwarmInfoViewModel!
     let disposeBag = DisposeBag()
     var contentView: UIHostingController<SwarmInfoView>! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureNavigationBar(isTransparent: true)
-        guard let swarmInfo = self.viewModel.swarmInfo else { return }
-        let swiftUIVM = SwarmInfoVM(with: self.viewModel.injectionBag, swarmInfo: swarmInfo)
+        configureNavigationBar(isTransparent: true)
+        guard let swarmInfo = viewModel.swarmInfo else { return }
+        let swiftUIVM = SwarmInfoVM(with: viewModel.injectionBag, swarmInfo: swarmInfo)
         contentView = UIHostingController(rootView: SwarmInfoView(viewmodel: swiftUIVM))
         addChild(contentView)
         view.addSubview(contentView.view)
         setupConstraints()
         swiftUIVM.navBarColor
-            .subscribe(onNext: {[weak self] newColorValue in
+            .subscribe(onNext: { [weak self] newColorValue in
                 guard let self = self, let color = UIColor(hexString: newColorValue) else { return }
                 let isLight: Bool = color.isLight(threshold: 0.8) ?? true
-                self.navigationController?.navigationBar.tintColor = isLight ? UIColor.jamiMain : .white
+                self.navigationController?.navigationBar.tintColor = isLight ? UIColor
+                    .jamiMain : .white
             })
             .disposed(by: disposeBag)
         swiftUIVM.colorPickerStatus
-            .subscribe(onNext: {[weak self] statusValue in
+            .subscribe(onNext: { [weak self] statusValue in
                 guard let self = self else { return }
                 self.navigationItem.setHidesBackButton(statusValue, animated: true)
             })
@@ -55,8 +55,8 @@ class SwarmInfoViewController: UIViewController, ViewModelBased, StoryboardBased
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
-        self.configureNavigationBar()
+        navigationController?.navigationBar.tintColor = UIColor.jamiMain
+        configureNavigationBar()
     }
 
     func setupConstraints() {

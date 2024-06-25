@@ -21,14 +21,13 @@
  */
 
 import Foundation
-import RxSwift
-import RxCocoa
-import SwiftyBeaver
 import os
+import RxCocoa
+import RxSwift
+import SwiftyBeaver
 
 // swiftlint:disable type_body_length
 class ConversationsManager {
-
     let log = SwiftyBeaver.self
 
     private let conversationService: ConversationsService
@@ -48,6 +47,7 @@ class ConversationsManager {
     private var maxSizeForAutoaccept: Int {
         return UserDefaults.standard.integer(forKey: acceptTransferLimitKey) * 1024 * 1024
     }
+
     private let appState = BehaviorRelay<ServiceEventType>(value: .appEnterForeground)
 
     // swiftlint:disable cyclomatic_complexity
@@ -69,7 +69,7 @@ class ConversationsManager {
         self.locationSharingService = locationSharingService
         self.contactsService = contactsService
         self.callsProvider = callsProvider
-        self.requestService = requestsService
+        requestService = requestsService
         self.profileService = profileService
         ProfilesAdapter.delegate = self
 
@@ -80,34 +80,45 @@ class ConversationsManager {
          Conversation data should be cleaned to prevent reloading conversations
          that were updated from notifications
          */
-        self.cleanConversationData()
-        self.subscribeFileTransferEvents()
-        self.subscribeCallsEvents()
-        self.subscribeContactsEvents()
-        self.subscribeLocationSharingEvent()
-        self.subscribeCallsProviderEvents()
-        self.subscribeRequestEvents()
-        self.controlAccountsState()
+        cleanConversationData()
+        subscribeFileTransferEvents()
+        subscribeCallsEvents()
+        subscribeContactsEvents()
+        subscribeLocationSharingEvent()
+        subscribeCallsProviderEvents()
+        subscribeRequestEvents()
+        controlAccountsState()
     }
 
-    /// when application is not active, accounts also should be not active. Except when when handling incoming call.
+    /// when application is not active, accounts also should be not active. Except when when
+    /// handling incoming call.
     private func controlAccountsState() {
         /// subscribe to app state changes
-        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(appMovedForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appMovedToBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appMovedForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
         /// calls events
         let callProviderEvents = callsProvider.sharedResponseStream
-            .filter({ (event) in
-                return event.eventType == .callProviderCancelCall ||
+            .filter { event in
+                event.eventType == .callProviderCancelCall ||
                     event.eventType == .callProviderPreviewPendingCall
-            })
+            }
             .map { event in
                 event.eventType
             }
-        let callEndedEvents = self.callService.sharedResponseStream
-            .filter({ (event) in
-                return  event.eventType == .callEnded
-            })
+        let callEndedEvents = callService.sharedResponseStream
+            .filter { event in
+                event.eventType == .callEnded
+            }
             .map { event in
                 event.eventType
             }
@@ -133,7 +144,10 @@ class ConversationsManager {
                         guard let self = self,
                               let updatedConversations = self.getConversationData() else { return }
                         self.cleanConversationData()
-                        self.reloadConversationsAndRequests(updatedConversations: updatedConversations)
+                        self
+                            .reloadConversationsAndRequests(
+                                updatedConversations: updatedConversations
+                            )
                     }
                 case .callEnded, .callProviderCancelCall:
                     DispatchQueue.main.async {
@@ -147,7 +161,7 @@ class ConversationsManager {
                 }
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     /*
@@ -155,11 +169,11 @@ class ConversationsManager {
      the notification extension should handle incoming notifications unless there is a pending call.
      */
     func updateBackgroundState() {
-        if self.callsProvider.hasActiveCalls() { return }
+        if callsProvider.hasActiveCalls() { return }
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.updateCallScreenState(presenting: false)
         }
-        self.accountsService.setAccountsActive(active: false)
+        accountsService.setAccountsActive(active: false)
     }
 
     func cleanConversationData() {
@@ -177,43 +191,47 @@ class ConversationsManager {
     }
 
     func updateForegroundState() {
-        guard let updatedConversations = self.getConversationData() else {
-            self.accountsService.setAccountsActive(active: true)
+        guard let updatedConversations = getConversationData() else {
+            accountsService.setAccountsActive(active: true)
             return
         }
-        self.cleanConversationData()
+        cleanConversationData()
         // ask daemon to reload conversations and request from file
-        self.reloadConversationsAndRequests(updatedConversations: updatedConversations)
-        self.accountsService.setAccountsActive(active: true)
+        reloadConversationsAndRequests(updatedConversations: updatedConversations)
+        accountsService.setAccountsActive(active: true)
         // get requests from the daemon
-        self.updateRequests(updatedConversations: updatedConversations)
+        updateRequests(updatedConversations: updatedConversations)
         // get interactions from the daemon
-        self.reloadConversationMessages(updatedConversations: updatedConversations)
+        reloadConversationMessages(updatedConversations: updatedConversations)
     }
 
     func reloadConversationsAndRequests(updatedConversations: [[String: String]]) {
         for conversationData in updatedConversations {
-            if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
-                self.conversationService.reloadConversationsAndRequests(accountId: accountId)
+            if let accountId =
+                conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
+                conversationService.reloadConversationsAndRequests(accountId: accountId)
             }
         }
     }
 
     func updateRequests(updatedConversations: [[String: String]]) {
         for conversationData in updatedConversations {
-            if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
-                self.requestService.updateConversationsRequests(withAccount: accountId)
+            if let accountId =
+                conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
+                requestService.updateConversationsRequests(withAccount: accountId)
             }
         }
     }
 
     func reloadConversationMessages(updatedConversations: [[String: String]]) {
         for conversationData in updatedConversations {
-            if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue],
-               let currentAccountId = self.accountsService.currentAccount?.id,
-               let conversationId = conversationData[Constants.NotificationUserInfoKeys.conversationID.rawValue],
+            if let accountId =
+                conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue],
+               let currentAccountId = accountsService.currentAccount?.id,
+               let conversationId =
+                conversationData[Constants.NotificationUserInfoKeys.conversationID.rawValue],
                accountId == currentAccountId {
-                self.conversationService.updateConversationMessages(conversationId: conversationId)
+                conversationService.updateConversationMessages(conversationId: conversationId)
             }
         }
     }
@@ -229,22 +247,26 @@ class ConversationsManager {
     }
 
     private func subscribeRequestEvents() {
-        self.requestService.sharedResponseStream
-            .filter({ $0.eventType == ServiceEventType.requestAccepted })
+        requestService.sharedResponseStream
+            .filter { $0.eventType == ServiceEventType.requestAccepted }
             .subscribe(onNext: { [weak self] event in
                 guard let self = self,
                       let accountId: String = event.getEventInput(.accountId),
                       let conversationId: String = event.getEventInput(.conversationId),
                       let account = self.accountsService.getAccount(fromAccountId: accountId)
                 else { return }
-                self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
+                self.conversationService.conversationReady(
+                    conversationId: conversationId,
+                    accountId: accountId,
+                    accountURI: account.jamiId
+                )
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func subscribeContactsEvents() {
-        self.contactsService.sharedResponseStream
-            .filter({ $0.eventType == ServiceEventType.contactAdded })
+        contactsService.sharedResponseStream
+            .filter { $0.eventType == ServiceEventType.contactAdded }
             .subscribe(onNext: { [weak self] event in
                 guard let self = self,
                       let accountId: String = event.getEventInput(.accountId),
@@ -253,32 +275,41 @@ class ConversationsManager {
                       account.isJams,
                       let currentAccount = self.accountsService.currentAccount
                 else { return }
-                self.conversationService.saveJamsConversation(for: jamiId, accountId: accountId, refreshConversations: currentAccount.id == accountId)
+                self.conversationService.saveJamsConversation(
+                    for: jamiId,
+                    accountId: accountId,
+                    refreshConversations: currentAccount.id == accountId
+                )
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func subscribeCallsProviderEvents() {
         callsProvider.sharedResponseStream
-            .filter({serviceEvent in
+            .filter { serviceEvent in
                 guard serviceEvent.eventType == .callProviderAnswerCall ||
-                        serviceEvent.eventType == .callProviderCancelCall else {
+                        serviceEvent.eventType == .callProviderCancelCall
+                else {
                     return false
                 }
                 return true
-            })
+            }
             .subscribe(onNext: { [weak self] serviceEvent in
                 os_log("event from call provider")
                 guard let self = self,
                       let callUUID: String = serviceEvent
                         .getEventInput(ServiceEventInput.callUUID),
-                      let call = self.callService.callByUUID(UUID: callUUID) else {
+                      let call = self.callService.callByUUID(UUID: callUUID)
+                else {
                     return
                 }
                 if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
                     os_log("call provider answer call %@", call.callId)
                     if !self.callService.answerCall(call: call) {
-                        self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
+                        self.callsProvider.stopCall(
+                            callUUID: call.callUUID,
+                            participant: call.paricipantHash()
+                        )
                     }
                 } else {
                     os_log("call provider cancel call")
@@ -288,17 +319,18 @@ class ConversationsManager {
                         .disposed(by: self.disposeBag)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func subscribeLocationSharingEvent() {
-        self.locationSharingService
+        locationSharingService
             .locationServiceEventShared
-            .filter({ $0.eventType == ServiceEventType.sendLocation })
+            .filter { $0.eventType == ServiceEventType.sendLocation }
             .subscribe(onNext: { [weak self] event in
                 guard let self = self,
                       let currentAccount = self.accountsService.currentAccount,
-                      let (content, shouldTryToSave): (String, Bool) = event.getEventInput(ServiceEventInput.content),
+                      let (content, shouldTryToSave): (String, Bool) = event
+                        .getEventInput(ServiceEventInput.content),
                       let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                       let account = self.accountsService.getAccount(fromAccountId: accountId),
                       let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
@@ -317,25 +349,29 @@ class ConversationsManager {
                     })
                     .disposed(by: self.disposeBag)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func subscribeCallsEvents() {
-        self.callService.sharedResponseStream
-            .filter({ (event) in
-                return  event.eventType == .callEnded
-            })
+        callService.sharedResponseStream
+            .filter { event in
+                event.eventType == .callEnded
+            }
             .subscribe(onNext: { [weak self] event in
                 guard let self = self else { return }
                 guard let peerId: String = event.getEventInput(ServiceEventInput.peerUri),
-                      let uuidString: String = event.getEventInput(ServiceEventInput.callUUID) else { return }
-                self.callsProvider.stopCall(callUUID: UUID(uuidString: uuidString)!, participant: peerId.filterOutHost())
+                      let uuidString: String = event.getEventInput(ServiceEventInput.callUUID)
+                else { return }
+                self.callsProvider.stopCall(
+                    callUUID: UUID(uuidString: uuidString)!,
+                    participant: peerId.filterOutHost()
+                )
             })
             .disposed(by: disposeBag)
-        self.callService.newMessage
-            .filter({ (event) in
-                return  event.eventType == ServiceEventType.newIncomingMessage
-            })
+        callService.newMessage
+            .filter { event in
+                event.eventType == ServiceEventType.newIncomingMessage
+            }
             .subscribe(onNext: { [weak self] event in
                 guard let self = self else { return }
                 if self.accountsService.boothMode() {
@@ -344,7 +380,8 @@ class ConversationsManager {
                 guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                       let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
                 else { return }
-                guard let messageContent: String = event.getEventInput(ServiceEventInput.content) else { return }
+                guard let messageContent: String = event.getEventInput(ServiceEventInput.content)
+                else { return }
                 self.handleNewMessage(from: peerUri,
                                       to: accountId,
                                       messageId: "",
@@ -353,10 +390,10 @@ class ConversationsManager {
             })
             .disposed(by: disposeBag)
 
-        self.callService.newMessage
-            .filter({ (event) in
-                return  event.eventType == ServiceEventType.newOutgoingMessage
-            })
+        callService.newMessage
+            .filter { event in
+                event.eventType == ServiceEventType.newOutgoingMessage
+            }
             .subscribe(onNext: { [weak self] event in
                 guard let self = self else { return }
                 if self.accountsService.boothMode() {
@@ -381,13 +418,14 @@ class ConversationsManager {
             })
             .disposed(by: disposeBag)
     }
+
     private func subscribeFileTransferEvents() {
-        self.dataTransferService
+        dataTransferService
             .sharedResponseStream
-            .filter({ (event) in
-                return  event.eventType == ServiceEventType.dataTransferCreated ||
+            .filter { event in
+                event.eventType == ServiceEventType.dataTransferCreated ||
                     event.eventType == ServiceEventType.dataTransferChanged
-            })
+            }
             .subscribe(onNext: { [weak self] event in
                 guard let self = self else { return }
                 if self.accountsService.boothMode() {
@@ -395,10 +433,17 @@ class ConversationsManager {
                 }
                 guard let transferId: String = event.getEventInput(ServiceEventInput.transferId),
                       let accountId: String = event.getEventInput(ServiceEventInput.accountId),
-                      let conversationId: String = event.getEventInput(ServiceEventInput.conversationId),
+                      let conversationId: String = event
+                        .getEventInput(ServiceEventInput.conversationId),
                       let messageId: String = event.getEventInput(ServiceEventInput.messageId),
-                      let transferInfo = self.dataTransferService.dataTransferInfo(withId: transferId, accountId: accountId, conversationId: conversationId, isSwarm: !conversationId.isEmpty),
-                      let currentAccount = self.accountsService.currentAccount else {
+                      let transferInfo = self.dataTransferService.dataTransferInfo(
+                        withId: transferId,
+                        accountId: accountId,
+                        conversationId: conversationId,
+                        isSwarm: !conversationId.isEmpty
+                      ),
+                      let currentAccount = self.accountsService.currentAccount
+                else {
                     self.log.error("ConversationsManager: can't find transferInfo")
                     return
                 }
@@ -410,17 +455,23 @@ class ConversationsManager {
                                                      transferInfo: transferInfo,
                                                      accountId: transferInfo.accountId,
                                                      photoIdentifier: photoIdentifier,
-                                                     updateConversation: currentAccount.id == transferInfo.accountId,
-                                                     conversationId: conversationId, messageId: messageId)
+                                                     updateConversation: currentAccount
+                                                        .id == transferInfo.accountId,
+                                                     conversationId: conversationId,
+                                                     messageId: messageId)
                         .subscribe()
                         .disposed(by: self.disposeBag)
                 case .dataTransferChanged:
                     guard let eventCode: Int = event.getEventInput(ServiceEventInput.state),
-                          var dtEvent = NSDataTransferEventCode(rawValue: UInt32(eventCode)) else { return }
+                          var dtEvent = NSDataTransferEventCode(rawValue: UInt32(eventCode))
+                    else { return }
                     if conversationId.isEmpty {
                         dtEvent = transferInfo.lastEvent
                     }
-                    self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: dtEvent))")
+                    self.log
+                        .debug(
+                            "ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: dtEvent))"
+                        )
                     var status: DataTransferStatus = .unknown
                     switch dtEvent {
                     case .closed_by_host, .closed_by_peer:
@@ -439,7 +490,14 @@ class ConversationsManager {
                         break
                     }
                     let peer = !conversationId.isEmpty ? "" : transferInfo.peer
-                    self.conversationService.transferStatusChanged(status, for: transferId, conversationId: conversationId, interactionId: messageId, accountId: accountId, to: peer ?? "")
+                    self.conversationService.transferStatusChanged(
+                        status,
+                        for: transferId,
+                        conversationId: conversationId,
+                        interactionId: messageId,
+                        accountId: accountId,
+                        to: peer ?? ""
+                    )
                 default:
                     break
                 }
@@ -448,159 +506,280 @@ class ConversationsManager {
     }
 
     func prepareConversationsForAccount(accountId: String, accountURI: String) {
-        self.conversationService
+        conversationService
             .getConversationsForAccount(accountId: accountId, accountURI: accountURI)
     }
 
     // MARK: Message Adapter delegate
-    private func handleReceivedLocationUpdate(from peerId: String, to accountId: String, messageId: String, locationJSON content: String) {
-        guard let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
 
-        let type = AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() ? URIType.sip : URIType.ring
-        guard let peerUri = JamiURI.init(schema: type, infoHash: peerId, account: accountForMessage).uriString else { return }
+    private func handleReceivedLocationUpdate(
+        from peerId: String,
+        to accountId: String,
+        messageId: String,
+        locationJSON content: String
+    ) {
+        guard let accountForMessage = accountsService.getAccount(fromAccountId: accountId)
+        else { return }
+
+        let type = AccountModelHelper(withAccount: accountForMessage).isAccountSip() ? URIType
+            .sip : URIType.ring
+        guard let peerUri = JamiURI(schema: type, infoHash: peerId, account: accountForMessage)
+                .uriString else { return }
 
         // Tell the location sharing service
-        self.locationSharingService.handleReceivedLocationUpdate(from: peerUri, to: accountId, messageId: messageId, locationJSON: content)
+        locationSharingService.handleReceivedLocationUpdate(
+            from: peerUri,
+            to: accountId,
+            messageId: messageId,
+            locationJSON: content
+        )
     }
 
-    func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String, peerName: String?) {
-        guard let currentAccount = self.accountsService.currentAccount,
-              let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+    func handleNewMessage(
+        from peerUri: String,
+        to accountId: String,
+        messageId: String,
+        message content: String,
+        peerName _: String?
+    ) {
+        guard let currentAccount = accountsService.currentAccount,
+              let accountForMessage = accountsService.getAccount(fromAccountId: accountId)
+        else { return }
         let shouldUpdateConversationsList = currentAccount.id == accountForMessage.id
 
-        let type = AccountModelHelper.init(withAccount: accountForMessage)
+        let type = AccountModelHelper(withAccount: accountForMessage)
             .isAccountSip() ? URIType.sip : URIType.ring
-        guard let uriString = JamiURI.init(schema: type,
-                                           infoHash: peerUri,
-                                           account: accountForMessage).uriString else { return }
-        let message = self.conversationService.createMessage(withId: messageId,
-                                                             withContent: content,
-                                                             byAuthor: uriString,
-                                                             type: .text,
-                                                             incoming: true)
-        self.conversationService.saveMessage(message: message,
-                                             toConversationWith: uriString,
-                                             toAccountId: accountId,
-                                             shouldRefreshConversations: shouldUpdateConversationsList)
+        guard let uriString = JamiURI(schema: type,
+                                      infoHash: peerUri,
+                                      account: accountForMessage).uriString else { return }
+        let message = conversationService.createMessage(withId: messageId,
+                                                        withContent: content,
+                                                        byAuthor: uriString,
+                                                        type: .text,
+                                                        incoming: true)
+        conversationService.saveMessage(message: message,
+                                        toConversationWith: uriString,
+                                        toAccountId: accountId,
+                                        shouldRefreshConversations: shouldUpdateConversationsList)
             .subscribe()
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
-    func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
-                              to jamiId: String, in conversationId: String) {
-        guard let localJamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId else { return }
+    func messageStatusChanged(
+        _ status: MessageStatus,
+        for messageId: String,
+        from accountId: String,
+        to jamiId: String,
+        in conversationId: String
+    ) {
+        guard let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId
+        else { return }
         if localJamiId == jamiId {
             return
         }
-        self.conversationService.messageStatusChanged(status,
-                                                      for: messageId,
-                                                      from: accountId,
-                                                      to: jamiId,
-                                                      in: conversationId)
+        conversationService.messageStatusChanged(status,
+                                                 for: messageId,
+                                                 from: accountId,
+                                                 to: jamiId,
+                                                 in: conversationId)
     }
 
     func detectingMessageTyping(_ from: String, for accountId: String, status: Int) {
         conversationService.detectingMessageTyping(from, for: accountId, status: status)
     }
 
-    func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {
-        conversationService.conversationProfileUpdated(conversationId: conversationId, accountId: accountId, profile: profile)
+    func conversationProfileUpdated(
+        conversationId: String,
+        accountId: String,
+        profile: [String: String]
+    ) {
+        conversationService.conversationProfileUpdated(
+            conversationId: conversationId,
+            accountId: accountId,
+            profile: profile
+        )
     }
 
-    func conversationPreferencesUpdated(conversationId: String, accountId: String, preferences: [String: String]) {
-        conversationService.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId, preferences: preferences)
+    func conversationPreferencesUpdated(
+        conversationId: String,
+        accountId: String,
+        preferences: [String: String]
+    ) {
+        conversationService.conversationPreferencesUpdated(
+            conversationId: conversationId,
+            accountId: accountId,
+            preferences: preferences
+        )
     }
 }
 
-extension  ConversationsManager: MessagesAdapterDelegate {
-    func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: Int) {
+extension ConversationsManager: MessagesAdapterDelegate {
+    func conversationMemberEvent(
+        conversationId: String,
+        accountId: String,
+        memberUri: String,
+        event: Int
+    ) {
         guard let conversationEvent = ConversationMemberEvent(rawValue: event) else { return }
-        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+        guard let account = accountsService.getAccount(fromAccountId: accountId) else { return }
         /// check if we leave conversation on another device. In this case remove conversation
         if conversationEvent == .leave,
            account.jamiId == memberUri {
-            self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
+            conversationService.conversationRemoved(
+                conversationId: conversationId,
+                accountId: accountId
+            )
         } else {
-            self.conversationService.conversationMemberEvent(conversationId: conversationId, accountId: accountId, memberUri: memberUri, event: conversationEvent, accountURI: account.jamiId)
+            conversationService.conversationMemberEvent(
+                conversationId: conversationId,
+                accountId: accountId,
+                memberUri: memberUri,
+                event: conversationEvent,
+                accountURI: account.jamiId
+            )
         }
     }
 
     func didReceiveMessage(_ message: [String: String], from senderAccount: String,
                            messageId: String,
                            to receiverAccountId: String) {
-        if self.accountsService.boothMode() {
+        if accountsService.boothMode() {
             return
         }
         if let content = message[textPlainMIMEType] {
-            self.handleNewMessage(from: senderAccount,
-                                  to: receiverAccountId,
-                                  messageId: messageId,
-                                  message: content,
-                                  peerName: nil)
+            handleNewMessage(from: senderAccount,
+                             to: receiverAccountId,
+                             messageId: messageId,
+                             message: content,
+                             peerName: nil)
         } else if let content = message[geoLocationMIMEType] {
-            self.handleReceivedLocationUpdate(from: senderAccount,
-                                              to: receiverAccountId,
-                                              messageId: messageId,
-                                              locationJSON: content)
+            handleReceivedLocationUpdate(from: senderAccount,
+                                         to: receiverAccountId,
+                                         messageId: messageId,
+                                         locationJSON: content)
         }
     }
 
     func conversationReady(conversationId: String, accountId: String) {
-        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
+        guard let account = accountsService.getAccount(fromAccountId: accountId) else { return }
+        conversationService.conversationReady(
+            conversationId: conversationId,
+            accountId: accountId,
+            accountURI: account.jamiId
+        )
     }
 
-    func updateTransferInfoIfNeed(newMessage: MessageModel, conversationId: String, accountId: String) {
-        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+    func updateTransferInfoIfNeed(
+        newMessage: MessageModel,
+        conversationId: String,
+        accountId: String
+    ) {
+        guard let account = accountsService.getAccount(fromAccountId: accountId) else { return }
         if newMessage.type == .fileTransfer {
-            let progress = self.dataTransferService.getTransferProgress(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true)
-            newMessage.transferStatus = progress == 0 ? .awaiting : progress == newMessage.totalSize ? .success : .ongoing
+            let progress = dataTransferService.getTransferProgress(
+                withId: newMessage.daemonId,
+                accountId: accountId,
+                conversationId: conversationId,
+                isSwarm: true
+            )
+            newMessage.transferStatus = progress == 0 ? .awaiting : progress == newMessage
+                .totalSize ? .success : .ongoing
             if newMessage.transferStatus == .awaiting &&
-                (isDownloadingEnabled(for: newMessage.totalSize) || newMessage.authorId == account.jamiId) {
+                (isDownloadingEnabled(for: newMessage.totalSize) || newMessage.authorId == account
+                    .jamiId) {
                 var filename = ""
-                self.dataTransferService.downloadFile(withId: newMessage.daemonId,
-                                                      interactionID: newMessage.id,
-                                                      fileName: &filename, accountID: accountId,
-                                                      conversationID: conversationId)
+                dataTransferService.downloadFile(withId: newMessage.daemonId,
+                                                 interactionID: newMessage.id,
+                                                 fileName: &filename, accountID: accountId,
+                                                 conversationID: conversationId)
             }
         }
-
     }
 
     func messageLoaded(conversationId: String, accountId: String, messages: [[String: String]]) {
-        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+        guard let account = accountsService.getAccount(fromAccountId: accountId) else { return }
         // convert array of dictionaries to messages
         let messagesModels = messages.map { dictionary -> MessageModel in
             let newMessage = MessageModel(withInfo: dictionary, localJamiId: account.jamiId)
-            updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
+            updateTransferInfoIfNeed(
+                newMessage: newMessage,
+                conversationId: conversationId,
+                accountId: accountId
+            )
             return newMessage
         }
-        _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: true)
-
+        _ = conversationService.insertMessages(
+            messages: messagesModels,
+            accountId: accountId,
+            localJamiId: account.jamiId,
+            conversationId: conversationId,
+            fromLoaded: true
+        )
     }
 
-    func conversationLoaded(conversationId: String, accountId: String, messages: [SwarmMessageWrap], requestId: Int) {
-        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+    func conversationLoaded(
+        conversationId: String,
+        accountId: String,
+        messages: [SwarmMessageWrap],
+        requestId _: Int
+    ) {
+        guard let account = accountsService.getAccount(fromAccountId: accountId) else { return }
         // convert array of dictionaries to messages
         let messagesModels = messages.map { wrapInfo -> MessageModel in
             let newMessage = MessageModel(with: wrapInfo, localJamiId: account.jamiId)
-            updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
+            updateTransferInfoIfNeed(
+                newMessage: newMessage,
+                conversationId: conversationId,
+                accountId: accountId
+            )
             return newMessage
         }
-        _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: true)
+        _ = conversationService.insertMessages(
+            messages: messagesModels,
+            accountId: accountId,
+            localJamiId: account.jamiId,
+            conversationId: conversationId,
+            fromLoaded: true
+        )
     }
 
-    func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
-        self.conversationService.reactionAdded(conversationId: conversationId, accountId: accountId, messageId: messageId, reaction: reaction)
+    func reactionAdded(
+        conversationId: String,
+        accountId: String,
+        messageId: String,
+        reaction: [String: String]
+    ) {
+        conversationService.reactionAdded(
+            conversationId: conversationId,
+            accountId: accountId,
+            messageId: messageId,
+            reaction: reaction
+        )
     }
 
-    func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
-        self.conversationService.reactionRemoved(conversationId: conversationId, accountId: accountId, messageId: messageId, reactionId: reactionId)
+    func reactionRemoved(
+        conversationId: String,
+        accountId: String,
+        messageId: String,
+        reactionId: String
+    ) {
+        conversationService.reactionRemoved(
+            conversationId: conversationId,
+            accountId: accountId,
+            messageId: messageId,
+            reactionId: reactionId
+        )
     }
 
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap) {
-        guard let jamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId else { return }
-        self.conversationService.messageUpdated(conversationId: conversationId, accountId: accountId, message: message, localJamiId: jamiId)
+        guard let jamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId
+        else { return }
+        conversationService.messageUpdated(
+            conversationId: conversationId,
+            accountId: accountId,
+            message: message,
+            localJamiId: jamiId
+        )
     }
 
     func isDownloadingEnabled(for size: Int) -> Bool {
@@ -608,20 +787,28 @@ extension  ConversationsManager: MessagesAdapterDelegate {
             return false
         }
 
-        if maxSizeForAutoaccept == 0 { return true}
+        if maxSizeForAutoaccept == 0 { return true }
         return Int(size) <= maxSizeForAutoaccept
     }
 
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
-        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+        guard let account = accountsService.getAccount(fromAccountId: accountId) else { return }
         let newMessage = MessageModel(with: message, localJamiId: account.jamiId)
         if newMessage.type == .fileTransfer {
             newMessage.transferStatus = newMessage.incoming ? .awaiting : .success
         }
-        if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: false) {
+        if conversationService.insertMessages(
+            messages: [newMessage],
+            accountId: accountId,
+            localJamiId: account.jamiId,
+            conversationId: conversationId,
+            fromLoaded: false
+        ) {
             let incoming = message.body[MessageAttributes.author.rawValue] != account.jamiId
             if incoming {
-                if newMessage.transferStatus != .awaiting || !isDownloadingEnabled(for: newMessage.totalSize) {
+                if newMessage
+                    .transferStatus != .awaiting ||
+                    !isDownloadingEnabled(for: newMessage.totalSize) {
                     return
                 }
             } else {
@@ -630,51 +817,84 @@ extension  ConversationsManager: MessagesAdapterDelegate {
                 }
             }
             var filename = ""
-            self.dataTransferService.downloadFile(withId: newMessage.daemonId, interactionID: newMessage.id, fileName: &filename, accountID: accountId, conversationID: conversationId)
+            dataTransferService.downloadFile(
+                withId: newMessage.daemonId,
+                interactionID: newMessage.id,
+                fileName: &filename,
+                accountID: accountId,
+                conversationID: conversationId
+            )
         }
     }
 
     func conversationRemoved(conversationId: String, accountId: String) {
-        self.requestService.conversationRemoved(conversationId: conversationId, accountId: accountId)
-        self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
+        requestService.conversationRemoved(conversationId: conversationId, accountId: accountId)
+        conversationService.conversationRemoved(
+            conversationId: conversationId,
+            accountId: accountId
+        )
     }
 
     func conversationDeclined(conversationId: String, accountId: String) {
-        self.requestService.conversationRemoved(conversationId: conversationId, accountId: accountId)
-        self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
+        requestService.conversationRemoved(conversationId: conversationId, accountId: accountId)
+        conversationService.conversationRemoved(
+            conversationId: conversationId,
+            accountId: accountId
+        )
     }
 }
 
-extension  ConversationsManager: RequestsAdapterDelegate {
-    func incomingTrustRequestReceived(from jamiId: String, to accountId: String, conversationId: String, withPayload payload: Data, receivedDate: Date) {
-        guard let localJamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId else { return }
+extension ConversationsManager: RequestsAdapterDelegate {
+    func incomingTrustRequestReceived(
+        from jamiId: String,
+        to accountId: String,
+        conversationId: String,
+        withPayload payload: Data,
+        receivedDate: Date
+    ) {
+        guard let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId
+        else { return }
         if localJamiId == jamiId {
             // This is request from self. Should not display.
             return
         }
-        self.requestService.incomingTrustRequestReceived(from: jamiId, to: accountId, conversationId: conversationId, withPayload: payload, receivedDate: receivedDate)
+        requestService.incomingTrustRequestReceived(
+            from: jamiId,
+            to: accountId,
+            conversationId: conversationId,
+            withPayload: payload,
+            receivedDate: receivedDate
+        )
     }
 
-    func conversationRequestReceived(conversationId: String, accountId: String, metadata: [String: String]) {
-        guard let localJamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId,
+    func conversationRequestReceived(
+        conversationId: String,
+        accountId: String,
+        metadata: [String: String]
+    ) {
+        guard let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId,
               let peerUri = metadata["from"] else { return }
         if localJamiId == peerUri {
             // This is request from self. Should not display.
             return
         }
-        self.requestService.conversationRequestReceived(conversationId: conversationId, accountId: accountId, metadata: metadata)
-
+        requestService.conversationRequestReceived(
+            conversationId: conversationId,
+            accountId: accountId,
+            metadata: metadata
+        )
     }
 }
 
 extension ConversationsManager: ProfilesAdapterDelegate {
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
-        if let account = self.accountsService.getAccount(fromAccountId: accountId),
+        if let account = accountsService.getAccount(fromAccountId: accountId),
            account.jamiId == uri {
-            self.profileService.accountProfileUpdated(accountId: accountId)
+            profileService.accountProfileUpdated(accountId: accountId)
         } else {
-            self.profileService.profileReceived(contact: uri, withAccountId: accountId, path: path)
+            profileService.profileReceived(contact: uri, withAccountId: accountId, path: path)
         }
     }
 }
+
 // swiftlint:enable type_body_length

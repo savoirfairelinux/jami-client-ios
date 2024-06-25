@@ -20,22 +20,21 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import Reusable
 import RxSwift
+import UIKit
 
 class ContactRequestCell: UITableViewCell, NibReusable {
-
-    @IBOutlet weak var avatarView: UIView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var acceptButton: UIButton!
-    @IBOutlet weak var discardButton: UIButton!
-    @IBOutlet weak var banButton: UIButton!
-    @IBOutlet weak var buttonsContainer: UIStackView!
+    @IBOutlet var avatarView: UIView!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var acceptButton: UIButton!
+    @IBOutlet var discardButton: UIButton!
+    @IBOutlet var banButton: UIButton!
+    @IBOutlet var buttonsContainer: UIStackView!
     var deletable = false
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        self.backgroundColor = UIColor.jamiUITableViewCellSelection
+    override func setSelected(_: Bool, animated _: Bool) {
+        backgroundColor = UIColor.jamiUITableViewCellSelection
         UIView.animate(withDuration: 0.35, animations: {
             self.backgroundColor = UIColor.jamiUITableViewCellSelection.lighten(by: 5.0)
         })
@@ -46,11 +45,11 @@ class ContactRequestCell: UITableViewCell, NibReusable {
         drawBanButtonImage()
     }
 
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated _: Bool) {
         if highlighted {
-            self.backgroundColor = UIColor.jamiUITableViewCellSelection
+            backgroundColor = UIColor.jamiUITableViewCellSelection
         } else {
-            self.backgroundColor = UIColor.clear
+            backgroundColor = UIColor.clear
         }
     }
 
@@ -58,7 +57,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.disposeBag = DisposeBag()
+        disposeBag = DisposeBag()
     }
 
     func drawBanButtonImage() {
@@ -80,7 +79,9 @@ class ContactRequestCell: UITableViewCell, NibReusable {
         // avatar
         Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
                                                   item.userName.asObservable(),
-                                                  item.profileName.asObservable()) { profileImage, username, profileName in
+                                                  item.profileName
+                                                    .asObservable(
+                                                    )) { profileImage, username, profileName in
             if !profileName.isEmpty {
                 return (profileImage, profileName)
             }
@@ -88,26 +89,26 @@ class ContactRequestCell: UITableViewCell, NibReusable {
         }
         .startWith((item.profileImageData.value, item.userName.value))
         .observe(on: MainScheduler.instance)
-        .subscribe({ [weak self] profileData -> Void in
+        .subscribe { [weak self] profileData in
             guard let data = profileData.element?.1 else {
                 return
             }
-            self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
+            self?.avatarView.subviews.forEach { $0.removeFromSuperview() }
             self?.avatarView
                 .addSubview(
                     AvatarView(profileImageData: profileData.element?.0,
                                username: data,
-                               size: 50))
-            return
-        })
-        .disposed(by: self.disposeBag)
+                               size: 50)
+                )
+        }
+        .disposed(by: disposeBag)
 
         // name
         item.bestName
             .asObservable()
             .observe(on: MainScheduler.instance)
-            .bind(to: self.nameLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        self.selectionStyle = .none
+            .bind(to: nameLabel.rx.text)
+            .disposed(by: disposeBag)
+        selectionStyle = .none
     }
 }

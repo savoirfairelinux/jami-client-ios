@@ -18,49 +18,56 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
 import RxCocoa
+import RxSwift
 import SwiftyBeaver
 
 enum SerializableLocationTypes: String {
     case position = "Position"
     case stop = "Stop"
 }
+
 // swiftlint:enable redundant_string_enum_value
 
 struct SerializableLocation: Codable {
-    var type: String?   // position (optional) and stop
-    var lat: Double?    // position
-    var long: Double?   // position
-    var alt: Double?    // position
-    var time: Int64?     // position and stop
+    var type: String? // position (optional) and stop
+    var lat: Double? // position
+    var long: Double? // position
+    var alt: Double? // position
+    var time: Int64? // position and stop
     var bearing: Float? // position (optional)
-    var speed: Float?   // position (optional)
+    var speed: Float? // position (optional)
 }
 
 class LocationSharingInstanceDictionary<T: LocationSharingInstance> {
     private var instances: [String: T] = [:]
 
-    var isEmpty: Bool { return self.instances.isEmpty }
+    var isEmpty: Bool { return instances.isEmpty }
 
     private func key(_ accountId: String, _ contactUri: String) -> String {
         return accountId + contactUri.replacingOccurrences(of: "ring:", with: "")
     }
 
     func get(_ accountId: String, _ contactUri: String) -> T? {
-        return self.instances[key(accountId, contactUri.replacingOccurrences(of: "ring:", with: ""))]
+        return instances[key(accountId, contactUri.replacingOccurrences(of: "ring:", with: ""))]
     }
 
     func insertOrUpdate(_ instance: T) {
-        self.instances[key(instance.accountId, instance.contactUri.replacingOccurrences(of: "ring:", with: ""))] = instance
+        instances[key(
+            instance.accountId,
+            instance.contactUri.replacingOccurrences(of: "ring:", with: "")
+        )] = instance
     }
 
     func remove(_ accountId: String, _ contactUri: String) -> T? {
-        return self.instances.removeValue(forKey: key(accountId, contactUri.replacingOccurrences(of: "ring:", with: "")))
+        return instances.removeValue(forKey: key(
+            accountId,
+            contactUri.replacingOccurrences(of: "ring:", with: "")
+        ))
     }
 
     func asArray() -> [T] {
-        return self.instances.map({ $0.value })
+        return instances.map { $0.value }
     }
 }
 
@@ -75,7 +82,6 @@ class LocationSharingInstance {
 }
 
 class OutgoingLocationSharingInstance: LocationSharingInstance {
-
     private let locationSharingService: LocationSharingService
     let duration: TimeInterval
     var remainingTime: Int {
@@ -86,44 +92,53 @@ class OutgoingLocationSharingInstance: LocationSharingInstance {
 
     private var endSharingTimer: Timer?
 
-    init(locationSharingService: LocationSharingService, accountId: String, contactUri: String, duration: TimeInterval) {
+    init(
+        locationSharingService: LocationSharingService,
+        accountId: String,
+        contactUri: String,
+        duration: TimeInterval
+    ) {
         self.locationSharingService = locationSharingService
         self.duration = duration
         super.init(accountId: accountId, contactUri: contactUri)
 
-        self.endSharingTimer =
+        endSharingTimer =
             Timer.scheduledTimer(timeInterval: self.duration,
                                  target: self,
-                                 selector: #selector(self.endSharing),
+                                 selector: #selector(endSharing),
                                  userInfo: nil,
                                  repeats: false)
     }
 
     init(locationSharingService: LocationSharingService, accountId: String, contactUri: String) {
         self.locationSharingService = locationSharingService
-        self.duration = 0
+        duration = 0
         super.init(accountId: accountId, contactUri: contactUri)
     }
 
     @objc
-    private func endSharing(timer: Timer) {
-        self.locationSharingService.stopSharingLocation(accountId: self.accountId, contactUri: self.contactUri)
+    private func endSharing(timer _: Timer) {
+        locationSharingService.stopSharingLocation(accountId: accountId, contactUri: contactUri)
     }
 
     func invalidate() {
-        if let timer = self.endSharingTimer {
+        if let timer = endSharingTimer {
             timer.invalidate()
-            self.endSharingTimer = nil
+            endSharingTimer = nil
         }
     }
 }
 
 class IncomingLocationSharingInstance: LocationSharingInstance {
-
     var lastReceivedDate: Date
     var lastReceivedTimeStamp: Int64
 
-    init(accountId: String, contactUri: String, lastReceivedDate: Date, lastReceivedTimeStamp: Int64) {
+    init(
+        accountId: String,
+        contactUri: String,
+        lastReceivedDate: Date,
+        lastReceivedTimeStamp: Int64
+    ) {
         self.lastReceivedDate = lastReceivedDate
         self.lastReceivedTimeStamp = lastReceivedTimeStamp
         super.init(accountId: accountId, contactUri: contactUri)
@@ -131,7 +146,6 @@ class IncomingLocationSharingInstance: LocationSharingInstance {
 }
 
 class LocationSharingService: NSObject {
-
     private let incomingLocationSharingEndingDelay: TimeInterval = 10 * 60 // 10 mins
 
     private let log = SwiftyBeaver.self
@@ -143,11 +157,17 @@ class LocationSharingService: NSObject {
 
     // Sharing my location
     let currentLocation = BehaviorRelay<CLLocation?>(value: nil)
-    private let outgoingInstances = LocationSharingInstanceDictionary<OutgoingLocationSharingInstance>()
+    private let outgoingInstances =
+        LocationSharingInstanceDictionary<OutgoingLocationSharingInstance>()
 
     // Receiving my contact's location
-    let peerUriAndLocationReceived = BehaviorRelay<(String?, CLLocationCoordinate2D?, Int?)>(value: (nil, nil, nil))
-    private let incomingInstances = LocationSharingInstanceDictionary<IncomingLocationSharingInstance>()
+    let peerUriAndLocationReceived = BehaviorRelay<(
+        String?,
+        CLLocationCoordinate2D?,
+        Int?
+    )>(value: (nil, nil, nil))
+    private let incomingInstances =
+        LocationSharingInstanceDictionary<IncomingLocationSharingInstance>()
 
     var receivingService: Disposable?
 
@@ -158,23 +178,23 @@ class LocationSharingService: NSObject {
     init(dbManager: DBManager) {
         self.dbManager = dbManager
 
-        self.locationServiceEventStream.disposed(by: self.disposeBag)
-        self.locationServiceEventShared = self.locationServiceEventStream.share()
+        locationServiceEventStream.disposed(by: disposeBag)
+        locationServiceEventShared = locationServiceEventStream.share()
         super.init()
 
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.initialize()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        initialize()
     }
 
     private func initialize() {
-        self.currentLocation
+        currentLocation
             .throttle(Durations.tenSeconds.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] location in
                 guard let self = self, let location = location else { return }
                 self.doShareLocationAction(location)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     static func serializeLocation(location: SerializableLocation) -> String? {
@@ -186,60 +206,75 @@ class LocationSharingService: NSObject {
         }
     }
 
-    internal static func deserializeLocation(json: String) -> SerializableLocation? {
+    static func deserializeLocation(json: String) -> SerializableLocation? {
         do {
-            return try JSONDecoder().decode(SerializableLocation.self, from: json.data(using: .utf8)!)
+            return try JSONDecoder().decode(
+                SerializableLocation.self,
+                from: json.data(using: .utf8)!
+            )
         } catch {
             return nil
         }
     }
 
-    internal func triggerSendLocation(accountId: String, peerUri: String, content: String, shouldTryToSave: Bool) {
+    func triggerSendLocation(
+        accountId: String,
+        peerUri: String,
+        content: String,
+        shouldTryToSave: Bool
+    ) {
         var event = ServiceEvent(withEventType: .sendLocation)
         event.addEventInput(.accountId, value: accountId)
         event.addEventInput(.peerUri, value: peerUri)
         event.addEventInput(.content, value: (content, shouldTryToSave))
-        self.locationServiceEventStream.onNext(event)
+        locationServiceEventStream.onNext(event)
     }
 
-    internal func triggerStopSharing(accountId: String, peerUri: String, content: String) {
+    func triggerStopSharing(accountId: String, peerUri: String, content: String) {
         var event = ServiceEvent(withEventType: .stopLocationSharing)
         event.addEventInput(.accountId, value: accountId)
         event.addEventInput(.peerUri, value: peerUri)
         event.addEventInput(.content, value: content)
-        self.locationServiceEventStream.onNext(event)
+        locationServiceEventStream.onNext(event)
     }
 
     func getLocationServiceEventStream() -> PublishSubject<ServiceEvent> {
         return locationServiceEventStream
     }
 
-    func getOutgoingInstances() -> LocationSharingInstanceDictionary<OutgoingLocationSharingInstance> {
+    func getOutgoingInstances()
+    -> LocationSharingInstanceDictionary<OutgoingLocationSharingInstance> {
         return outgoingInstances
     }
 
-    func getIncomingInstances() -> LocationSharingInstanceDictionary<IncomingLocationSharingInstance> {
+    func getIncomingInstances()
+    -> LocationSharingInstanceDictionary<IncomingLocationSharingInstance> {
         return incomingInstances
     }
 }
 
 // MARK: Sharing my location
-extension LocationSharingService {
 
+extension LocationSharingService {
     func isAlreadySharing(accountId: String, contactUri: String) -> Bool {
-        return self.incomingInstances.get(accountId, contactUri) != nil
+        return incomingInstances.get(accountId, contactUri) != nil
     }
 
     func isAlreadySharingMyLocation(accountId: String, contactUri: String) -> Bool {
-        return self.outgoingInstances.get(accountId, contactUri) != nil
+        return outgoingInstances.get(accountId, contactUri) != nil
     }
 
     func getMyLocationSharingRemainedTime(accountId: String, contactUri: String) -> Int {
-        return Int(self.outgoingInstances.get(accountId, contactUri)?.remainingTime ?? 0)
+        return Int(outgoingInstances.get(accountId, contactUri)?.remainingTime ?? 0)
     }
 
-    func startSharingLocation(from accountId: String, to recipientUri: String, duration: TimeInterval? = nil) {
-        guard !self.isAlreadySharingMyLocation(accountId: accountId, contactUri: recipientUri) else { return }
+    func startSharingLocation(
+        from accountId: String,
+        to recipientUri: String,
+        duration: TimeInterval? = nil
+    ) {
+        guard !isAlreadySharingMyLocation(accountId: accountId, contactUri: recipientUri)
+        else { return }
 
         var instanceToInsert: OutgoingLocationSharingInstance!
         if let duration = duration {
@@ -253,14 +288,14 @@ extension LocationSharingService {
                                                                contactUri: recipientUri)
         }
 
-        self.outgoingInstances.insertOrUpdate(instanceToInsert)
+        outgoingInstances.insertOrUpdate(instanceToInsert)
 
         if let location = CLLocationManager().location {
-            self.currentLocation.accept(location)
+            currentLocation.accept(location)
         }
 
-        self.locationManager.startUpdatingLocation()
-        self.locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.startUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = true
     }
 
     private func doShareLocationAction(_ location: CLLocation) {
@@ -269,127 +304,159 @@ extension LocationSharingService {
                                                 long: location.coordinate.longitude,
                                                 alt: location.altitude,
                                                 time: Int64(Date().timeIntervalSince1970))
-        guard let jsonLocation = LocationSharingService.serializeLocation(location: serializable) else { return }
+        guard let jsonLocation = LocationSharingService.serializeLocation(location: serializable)
+        else { return }
 
         for instance in outgoingInstances.asArray() {
-            self.triggerSendLocation(accountId: instance.accountId,
-                                     peerUri: instance.contactUri,
-                                     content: jsonLocation,
-                                     shouldTryToSave: true)
+            triggerSendLocation(accountId: instance.accountId,
+                                peerUri: instance.contactUri,
+                                content: jsonLocation,
+                                shouldTryToSave: true)
         }
     }
 
     func stopSharingLocation(accountId: String, contactUri: String) {
-        self.outgoingInstances.get(accountId, contactUri)?.invalidate()
-        self.locationManager.allowsBackgroundLocationUpdates = false
-        _ = self.outgoingInstances.remove(accountId, contactUri)
+        outgoingInstances.get(accountId, contactUri)?.invalidate()
+        locationManager.allowsBackgroundLocationUpdates = false
+        _ = outgoingInstances.remove(accountId, contactUri)
 
-        if self.outgoingInstances.isEmpty {
-            self.locationManager.stopUpdatingLocation()
-            self.currentLocation.accept(nil)
+        if outgoingInstances.isEmpty {
+            locationManager.stopUpdatingLocation()
+            currentLocation.accept(nil)
         }
 
-        self.sendStopSharingLocationMessage(from: accountId, to: contactUri)
+        sendStopSharingLocationMessage(from: accountId, to: contactUri)
     }
 
     private func sendStopSharingLocationMessage(from accountId: String, to contactUri: String) {
         let serializable = SerializableLocation(type: SerializableLocationTypes.stop.rawValue,
                                                 time: Int64(Date().timeIntervalSince1970))
-        guard let jsonLocation = LocationSharingService.serializeLocation(location: serializable) else { return }
+        guard let jsonLocation = LocationSharingService.serializeLocation(location: serializable)
+        else { return }
 
-        self.triggerSendLocation(accountId: accountId,
-                                 peerUri: contactUri,
-                                 content: jsonLocation,
-                                 shouldTryToSave: false)
+        triggerSendLocation(accountId: accountId,
+                            peerUri: contactUri,
+                            content: jsonLocation,
+                            shouldTryToSave: false)
     }
 }
 
 // MARK: Receiving my contact's location
-extension LocationSharingService {
 
-    func handleReceivedLocationUpdate(from peerUri: String, to accountId: String, messageId: String, locationJSON content: String) {
-        guard let incomingData = LocationSharingService.deserializeLocation(json: content) else { return }
+extension LocationSharingService {
+    func handleReceivedLocationUpdate(
+        from peerUri: String,
+        to accountId: String,
+        messageId _: String,
+        locationJSON content: String
+    ) {
+        guard let incomingData = LocationSharingService.deserializeLocation(json: content)
+        else { return }
 
         if incomingInstances.isEmpty {
-            self.startReceivingService()
+            startReceivingService()
         }
 
-        if let incomingInstance = self.incomingInstances.get(accountId, peerUri) {
+        if let incomingInstance = incomingInstances.get(accountId, peerUri) {
             if let incomingTime = incomingData.time {
                 if incomingInstance.lastReceivedTimeStamp < incomingTime {
                     incomingInstance.lastReceivedDate = Date()
                     incomingInstance.lastReceivedTimeStamp = incomingTime
                 } else {
-                    return // ignore messages older than the newest we have (when receiving not in order)
+                    return // ignore messages older than the newest we have (when receiving not in
+                    // order)
                 }
             }
         } else {
             if let incomingTime = incomingData.time {
-                self.incomingInstances.insertOrUpdate(IncomingLocationSharingInstance(accountId: accountId,
-                                                                                      contactUri: peerUri,
-                                                                                      lastReceivedDate: Date(),
-                                                                                      lastReceivedTimeStamp: incomingTime))
+                incomingInstances.insertOrUpdate(IncomingLocationSharingInstance(
+                    accountId: accountId,
+                    contactUri: peerUri,
+                    lastReceivedDate: Date(),
+                    lastReceivedTimeStamp: incomingTime
+                ))
             }
         }
 
-        if incomingData.type == nil || incomingData.type == SerializableLocationTypes.position.rawValue {
+        if incomingData.type == nil || incomingData.type == SerializableLocationTypes.position
+            .rawValue {
             // TODO: altitude?
             if let incomingTime = incomingData.time {
-                let peerUriAndData = (peerUri, CLLocationCoordinate2D(latitude: incomingData.lat!, longitude: incomingData.long!), Int(incomingTime) / 60000)
-                self.peerUriAndLocationReceived.accept(peerUriAndData)
+                let peerUriAndData = (
+                    peerUri,
+                    CLLocationCoordinate2D(latitude: incomingData.lat!,
+                                           longitude: incomingData.long!),
+                    Int(incomingTime) / 60000
+                )
+                peerUriAndLocationReceived.accept(peerUriAndData)
             }
         } else if incomingData.type == SerializableLocationTypes.stop.rawValue {
-            self.stopReceivingLocation(accountId: accountId, contactUri: peerUri)
+            stopReceivingLocation(accountId: accountId, contactUri: peerUri)
         }
     }
 
     func stopReceivingLocation(accountId: String, contactUri: String) {
-        self.peerUriAndLocationReceived.accept((contactUri, nil, nil))
+        peerUriAndLocationReceived.accept((contactUri, nil, nil))
 
-        _ = self.incomingInstances.remove(accountId, contactUri)
+        _ = incomingInstances.remove(accountId, contactUri)
 
         if incomingInstances.isEmpty {
-            self.stopReceivingService()
+            stopReceivingService()
         }
 
-        self.triggerStopSharing(accountId: accountId, peerUri: contactUri, content: L10n.Notifications.locationSharingStopped)
+        triggerStopSharing(
+            accountId: accountId,
+            peerUri: contactUri,
+            content: L10n.Notifications.locationSharingStopped
+        )
     }
 
     func startReceivingService() {
-        self.stopReceivingService()
-        self.receivingService = Observable<Int>.interval(Durations.sixtySeconds.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe({ [weak self] _ in
-                guard let self = self else { return }
+        stopReceivingService()
+        receivingService = Observable<Int>.interval(
+            Durations.sixtySeconds.toTimeInterval(),
+            scheduler: MainScheduler.instance
+        )
+        .subscribe { [weak self] _ in
+            guard let self = self else { return }
 
-                for (instance) in self.incomingInstances.asArray() {
-                    let positiveTimeElapsed = -instance.lastReceivedDate.timeIntervalSinceNow
-                    if positiveTimeElapsed > self.incomingLocationSharingEndingDelay {
-                        self.stopReceivingLocation(accountId: instance.accountId, contactUri: instance.contactUri)
-                    }
+            for instance in self.incomingInstances.asArray() {
+                let positiveTimeElapsed = -instance.lastReceivedDate.timeIntervalSinceNow
+                if positiveTimeElapsed > self.incomingLocationSharingEndingDelay {
+                    self.stopReceivingLocation(
+                        accountId: instance.accountId,
+                        contactUri: instance.contactUri
+                    )
                 }
-            })
+            }
+        }
     }
 
     func stopReceivingService() {
-        self.receivingService?.dispose()
-        self.receivingService = nil
+        receivingService?.dispose()
+        receivingService = nil
     }
 }
 
 // MARK: CLLocationManagerDelegate
+
 extension LocationSharingService: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        self.currentLocation.accept(location)
-    }
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.log.debug("[LocationSharingService] didFailWithError: \(error)")
+        currentLocation.accept(location)
     }
 
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    func locationManager(_: CLLocationManager, didFailWithError error: Error) {
+        log.debug("[LocationSharingService] didFailWithError: \(error)")
+    }
+
+    func locationManager(
+        _: CLLocationManager,
+        didChangeAuthorization status: CLAuthorizationStatus
+    ) {
         if status == .notDetermined || status == .denied || status == .restricted {
             for instance in outgoingInstances.asArray() {
-                self.stopSharingLocation(accountId: instance.accountId, contactUri: instance.contactUri)
+                stopSharingLocation(accountId: instance.accountId, contactUri: instance.contactUri)
             }
         }
     }

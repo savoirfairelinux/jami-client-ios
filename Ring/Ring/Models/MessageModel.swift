@@ -21,20 +21,20 @@
 
 enum MessageAttributes: String {
     case interactionId = "id"
-    case type = "type"
-    case invited = "invited"
-    case fileId = "fileId"
-    case displayName = "displayName"
-    case body = "body"
-    case author = "author"
-    case uri = "uri"
-    case timestamp = "timestamp"
+    case type
+    case invited
+    case fileId
+    case displayName
+    case body
+    case author
+    case uri
+    case timestamp
     case parent = "linearizedParent"
-    case action = "action"
-    case duration = "duration"
+    case action
+    case duration
     case reply = "reply-to"
     case react = "react-to"
-    case totalSize = "totalSize"
+    case totalSize
 }
 
 enum MessageType: String {
@@ -42,8 +42,8 @@ enum MessageType: String {
     case fileTransfer = "application/data-transfer+json"
     case contact = "member"
     case call = "application/call-history+json"
-    case merge = "merge"
-    case initial = "initial"
+    case merge
+    case initial
     case profile = "application/update-profile"
 }
 
@@ -62,7 +62,7 @@ class MessageAction: Identifiable, Equatable, Hashable {
 
     init(withInfo info: [String: String]) {
         if let interactionId = info[MessageAttributes.interactionId.rawValue] {
-            self.id = interactionId
+            id = interactionId
         }
         if let content = info[MessageAttributes.body.rawValue] {
             self.content = content
@@ -83,12 +83,12 @@ class MessageAction: Identifiable, Equatable, Hashable {
 }
 
 public class MessageModel {
-
     var id: String = ""
     /// daemonId for dht messages, file transfer id for datatransfer
     var daemonId: String = ""
-    var receivedDate: Date = Date()
-    /// message to display for text, call and contact message. File name for swarm data transfer. file name with identifier from photo library for non swarm file transfer
+    var receivedDate: Date = .init()
+    /// message to display for text, call and contact message. File name for swarm data transfer.
+    /// file name with identifier from photo library for non swarm file transfer
     var content: String = ""
     /// jamiId for sender. For outgoing message authorId is empty
     var authorId: String = ""
@@ -106,24 +106,25 @@ public class MessageModel {
     var editions = Set<MessageAction>()
     var statusForParticipant = [String: MessageStatus]()
 
-    init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
-        self.daemonId = id
+    init(withId id: String, receivedDate: Date, content: String, authorURI: String,
+         incoming: Bool) {
+        daemonId = id
         self.receivedDate = receivedDate
         self.content = content
-        self.authorId = authorURI
+        authorId = authorURI
         self.incoming = incoming
     }
 
-    convenience init (with swarmMessage: SwarmMessageWrap, localJamiId: String) {
+    convenience init(with swarmMessage: SwarmMessageWrap, localJamiId: String) {
         self.init(withInfo: swarmMessage.body, localJamiId: localJamiId)
         for reaction in swarmMessage.reactions {
-            self.reactions.insert(MessageAction(withInfo: reaction))
+            reactions.insert(MessageAction(withInfo: reaction))
         }
         for edition in swarmMessage.editions {
-            self.editions.insert(MessageAction(withInfo: edition))
+            editions.insert(MessageAction(withInfo: edition))
         }
 
-        self.updateStatus(with: swarmMessage, localJamiId: localJamiId)
+        updateStatus(with: swarmMessage, localJamiId: localJamiId)
     }
 
     func updateStatus(with swarmMessage: SwarmMessageWrap, localJamiId: String) {
@@ -149,10 +150,10 @@ public class MessageModel {
     // swiftlint:disable:next cyclomatic_complexity
     init(withInfo info: [String: String], localJamiId: String) {
         if let interactionId = info[MessageAttributes.interactionId.rawValue] {
-            self.id = interactionId
+            id = interactionId
         }
         if let author = info[MessageAttributes.author.rawValue], author != localJamiId {
-            self.authorId = author
+            authorId = author
         }
         if let uri = info[MessageAttributes.uri.rawValue] {
             self.uri = uri
@@ -161,7 +162,7 @@ public class MessageModel {
            let messageType = MessageType(rawValue: type) {
             self.type = messageType
         }
-        if let content = info[MessageAttributes.body.rawValue], self.type == .text {
+        if let content = info[MessageAttributes.body.rawValue], type == .text {
             self.content = content
         }
         if let reply = info[MessageAttributes.reply.rawValue] {
@@ -170,9 +171,9 @@ public class MessageModel {
         if let react = info[MessageAttributes.react.rawValue] {
             self.react = react
         }
-        incoming = self.uri.isEmpty ? !self.authorId.isEmpty : self.uri != localJamiId
+        incoming = uri.isEmpty ? !authorId.isEmpty : uri != localJamiId
         if let parent = info[MessageAttributes.parent.rawValue] {
-            self.parentId = parent
+            parentId = parent
         }
         if let parents = info["parents"]?.components(separatedBy: ",").filter({ parentId in
             !parentId.isEmpty
@@ -185,10 +186,10 @@ public class MessageModel {
         }
         if let timestamp = info[MessageAttributes.timestamp.rawValue],
            let timestampDouble = Double(timestamp) {
-            let receivedDate = Date.init(timeIntervalSince1970: timestampDouble)
+            let receivedDate = Date(timeIntervalSince1970: timestampDouble)
             self.receivedDate = receivedDate
         }
-        switch self.type {
+        switch type {
         case .text:
             if let content = info[MessageAttributes.body.rawValue] {
                 self.content = content
@@ -197,58 +198,62 @@ public class MessageModel {
             if let duration = info[MessageAttributes.duration.rawValue],
                let durationDouble = Double(duration) {
                 if durationDouble < 0 {
-                    self.content = self.incoming ? L10n.Global.incomingCall : L10n.GeneratedMessage.outgoingCall
+                    content = incoming ? L10n.Global.incomingCall : L10n.GeneratedMessage
+                        .outgoingCall
                 } else {
                     let durationSeconds = durationDouble * 0.001
                     let time = Date.convertSecondsToTimeString(seconds: durationSeconds)
-                    self.content = self.incoming ? L10n.Global.incomingCall + " - " + time : L10n.GeneratedMessage.outgoingCall + " - " + time
+                    content = incoming ? L10n.Global.incomingCall + " - " + time : L10n
+                        .GeneratedMessage.outgoingCall + " - " + time
                 }
             } else {
-                self.content = self.incoming ? L10n.GeneratedMessage.missedIncomingCall : L10n.GeneratedMessage.missedOutgoingCall
+                content = incoming ? L10n.GeneratedMessage.missedIncomingCall : L10n
+                    .GeneratedMessage.missedOutgoingCall
             }
         case .contact:
             if let action = info[MessageAttributes.action.rawValue],
                let contactAction = ContactAction(rawValue: action) {
                 switch contactAction {
                 case .add:
-                    self.content = self.incoming ? L10n.GeneratedMessage.invitationReceived :
+                    content = incoming ? L10n.GeneratedMessage.invitationReceived :
                         L10n.GeneratedMessage.contactAdded
                 case .join:
-                    self.content = self.incoming ? L10n.GeneratedMessage.invitationAccepted : L10n.GeneratedMessage.youJoined
+                    content = incoming ? L10n.GeneratedMessage.invitationAccepted : L10n
+                        .GeneratedMessage.youJoined
                 case .remove:
-                    self.content = L10n.GeneratedMessage.contactLeftConversation
-                case.banned:
-                    self.content = L10n.GeneratedMessage.contactBanned
+                    content = L10n.GeneratedMessage.contactLeftConversation
+                case .banned:
+                    content = L10n.GeneratedMessage.contactBanned
                 case .unban:
-                    self.content = L10n.GeneratedMessage.contactReAdded
+                    content = L10n.GeneratedMessage.contactReAdded
                 }
             }
         case .fileTransfer:
             if let fileid = info[MessageAttributes.fileId.rawValue] {
-                self.daemonId = fileid
+                daemonId = fileid
             }
             if let displayName = info[MessageAttributes.displayName.rawValue] {
-                self.content = displayName
+                content = displayName
             }
         case .initial:
-            self.type = .initial
-            self.content = L10n.GeneratedMessage.swarmCreated
+            type = .initial
+            content = L10n.GeneratedMessage.swarmCreated
         default:
             break
         }
     }
 
     func updateFrom(info: [String: String]) {
-        if let content = info[MessageAttributes.body.rawValue], self.type == .text {
+        if let content = info[MessageAttributes.body.rawValue], type == .text {
             self.content = content
         }
         if let timestamp = info[MessageAttributes.timestamp.rawValue],
            let timestampDouble = Double(timestamp) {
-            let receivedDate = Date.init(timeIntervalSince1970: timestampDouble)
+            let receivedDate = Date(timeIntervalSince1970: timestampDouble)
             self.receivedDate = receivedDate
         }
         if let parent = info[MessageAttributes.parent.rawValue] {
-            self.parentId = parent
+            parentId = parent
         }
         if let parents = info["parents"]?.components(separatedBy: ",").filter({ parentId in
             !parentId.isEmpty
@@ -258,74 +263,75 @@ public class MessageModel {
     }
 
     func isReply() -> Bool {
-        return !self.reply.isEmpty
+        return !reply.isEmpty
     }
 
     func reactionAdded(reaction: [String: String]) {
-        self.reactions.insert(MessageAction(withInfo: reaction))
+        reactions.insert(MessageAction(withInfo: reaction))
     }
 
     func reactionRemoved(reactionId: String) {
-        if let reactionToRemove = self.reactions.first(where: { $0.id == reactionId }) {
-            self.reactions.remove(reactionToRemove)
+        if let reactionToRemove = reactions.first(where: { $0.id == reactionId }) {
+            reactions.remove(reactionToRemove)
         }
     }
 
     func isMessageDeleted() -> Bool {
-        return self.content.isEmpty && !self.editions.isEmpty
+        return content.isEmpty && !editions.isEmpty
     }
 
     func isMessageEdited() -> Bool {
-        return !self.editions.isEmpty
+        return !editions.isEmpty
     }
 
     func messageUpdated(message: SwarmMessageWrap, localJamiId: String) {
-        self.editions = Set<MessageAction>()
-        self.reactions = Set<MessageAction>()
-        self.updateFrom(info: message.body)
+        editions = Set<MessageAction>()
+        reactions = Set<MessageAction>()
+        updateFrom(info: message.body)
         for reaction in message.reactions {
-            self.reactions.insert(MessageAction(withInfo: reaction))
+            reactions.insert(MessageAction(withInfo: reaction))
         }
         for edition in message.editions {
-            self.editions.insert(MessageAction(withInfo: edition))
+            editions.insert(MessageAction(withInfo: edition))
         }
-        self.updateStatus(with: message, localJamiId: localJamiId)
+        updateStatus(with: message, localJamiId: localJamiId)
     }
 
-    func messageStatusUpdated(status: MessageStatus, messageId: String, jamiId: String) {
-        self.statusForParticipant[jamiId] = status
-        if status.rawValue <= MessageStatus.displayed.rawValue && self.status.rawValue < status.rawValue {
+    func messageStatusUpdated(status: MessageStatus, messageId _: String, jamiId: String) {
+        statusForParticipant[jamiId] = status
+        if status.rawValue <= MessageStatus.displayed.rawValue,
+           self.status.rawValue < status.rawValue {
             self.status = status
         }
     }
 
     func isSending() -> Bool {
-        guard !self.incoming else { return false }
+        guard !incoming else { return false }
 
-        switch self.type {
+        switch type {
         case .text:
-            return self.status == .sending
+            return status == .sending
         case .fileTransfer:
-            return ![.success, .canceled, .error].contains(self.transferStatus)
+            return ![.success, .canceled, .error].contains(transferStatus)
         default:
             return false
         }
     }
 
     func isDelivered() -> Bool {
-        guard !self.incoming else { return false }
+        guard !incoming else { return false }
 
-        switch self.type {
+        switch type {
         case .text:
-            return self.status == .sent || self.status == .displayed
+            return status == .sent || status == .displayed
         case .fileTransfer:
-            return [.success].contains(self.transferStatus)
+            return [.success].contains(transferStatus)
         default:
             return false
         }
     }
 
     func reactionsMessageIdsBySender(jamiId: String) -> [String] {
-        return Array(self.reactions.filter({ item in item.author == jamiId }).map({ item in item.id }))
+        return Array(reactions.filter { item in item.author == jamiId }.map { item in item.id })
     }
 }

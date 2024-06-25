@@ -18,8 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 class ParticipantProfileInfo {
     private let participantId: String
@@ -35,22 +35,22 @@ class ParticipantProfileInfo {
     let avatarSize = CGSize(width: 40, height: 40)
 
     init(injectionBag: InjectionBag, info: ConferenceParticipant) {
-        self.callsSercive = injectionBag.callService
-        self.profileService = injectionBag.profileService
-        self.accountService = injectionBag.accountService
-        self.participantId = info.uri?.filterOutHost() ?? ""
-        self.participantUserName = info.displayName
-        self.nameService = injectionBag.nameService
-        if self.isLocalCall() {
-            self.handleLocalParticipant()
+        callsSercive = injectionBag.callService
+        profileService = injectionBag.profileService
+        accountService = injectionBag.accountService
+        participantId = info.uri?.filterOutHost() ?? ""
+        participantUserName = info.displayName
+        nameService = injectionBag.nameService
+        if isLocalCall() {
+            handleLocalParticipant()
         } else {
-            self.handleRemoteParticipant()
+            handleRemoteParticipant()
         }
     }
 
     private func handleLocalParticipant() {
-        self.displayName.accept(L10n.Account.me)
-        guard let account = self.accountService.currentAccount else { return }
+        displayName.accept(L10n.Account.me)
+        guard let account = accountService.currentAccount else { return }
         profileService.getAccountProfile(accountId: account.id)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak self] profile in
@@ -58,19 +58,24 @@ class ParticipantProfileInfo {
                 self.handleProfile(profile)
             } onError: { [weak self] _ in
                 guard let self = self else { return }
-                self.avatar.accept(UIImage.defaultJamiAvatarFor(profileName: "", account: account, size: self.avatarSize.width))
+                self.avatar.accept(UIImage.defaultJamiAvatarFor(
+                    profileName: "",
+                    account: account,
+                    size: self.avatarSize.width
+                ))
             }
             .disposed(by: disposeBag)
     }
 
     private func handleRemoteParticipant() {
-        self.displayName.accept(self.participantUserName.isEmpty ? self.participantId : self.participantUserName)
-        guard let uriString = getParticipantURI(), let accountId = self.accountService.currentAccount?.id else { return }
-        self.fetchRemoteProfile(for: uriString, accountId: accountId)
+        displayName.accept(participantUserName.isEmpty ? participantId : participantUserName)
+        guard let uriString = getParticipantURI(),
+              let accountId = accountService.currentAccount?.id else { return }
+        fetchRemoteProfile(for: uriString, accountId: accountId)
     }
 
     private func getParticipantURI() -> String? {
-        guard let account = self.accountService.currentAccount else { return nil }
+        guard let account = accountService.currentAccount else { return nil }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         return JamiURI(schema: type, infoHash: participantId, account: account).uriString
     }
@@ -117,30 +122,34 @@ class ParticipantProfileInfo {
 
     private func handleProfileError() {
         if avatar.value == nil {
-            avatar.accept(self.createAvatar(for: self.participantUserName))
+            avatar.accept(createAvatar(for: participantUserName))
         }
-        if self.participantUserName.isEmpty {
-            lookupNameAsync(accountId: self.accountService.currentAccount?.id ?? "")
+        if participantUserName.isEmpty {
+            lookupNameAsync(accountId: accountService.currentAccount?.id ?? "")
         }
     }
 
     private func handleProfile(_ profile: Profile) {
-        guard let account = self.accountService.currentAccount else { return }
+        guard let account = accountService.currentAccount else { return }
         if let imageString = profile.photo, let image = imageString.createImage() {
             avatar.accept(image)
         }
-        if self.isLocalCall() {
+        if isLocalCall() {
             if avatar.value == nil {
-                avatar.accept(UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: avatarSize.width))
+                avatar.accept(UIImage.defaultJamiAvatarFor(
+                    profileName: profile.alias,
+                    account: account,
+                    size: avatarSize.width
+                ))
             }
-            self.displayName.accept(L10n.Account.me)
+            displayName.accept(L10n.Account.me)
         } else {
-            var displayName = self.participantUserName
+            var displayName = participantUserName
             if let name = profile.alias, !name.isEmpty {
                 displayName = name
             }
             if avatar.value == nil {
-                avatar.accept(self.createAvatar(for: displayName))
+                avatar.accept(createAvatar(for: displayName))
             }
             if displayName.isEmpty {
                 lookupNameAsync(accountId: account.id)
@@ -156,7 +165,7 @@ class ParticipantProfileInfo {
 
     func isLocalCall() -> Bool {
         if participantId.isEmpty { return true }
-        guard let account = self.accountService.currentAccount else { return false }
+        guard let account = accountService.currentAccount else { return false }
         return account.jamiId == participantId
     }
 }

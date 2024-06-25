@@ -19,12 +19,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import Contacts
 import Foundation
 import RxSwift
-import Contacts
 
 class EditProfileViewModel {
-
     let disposeBag = DisposeBag()
     let defaultImage = UIImage(named: "add_avatar")
     var image: UIImage?
@@ -33,7 +32,7 @@ class EditProfileViewModel {
     let accountService: AccountsService
 
     lazy var profileImage: Observable<UIImage?> = { [weak self] in
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             if let self = self, let account = self.accountService.currentAccount {
                 self.profileService.getAccountProfile(accountId: account.id)
                     .take(1)
@@ -42,9 +41,9 @@ class EditProfileViewModel {
                     })
                     .disposed(by: self.disposeBag)
             }
-        })
+        }
         return profileForCurrentAccount.share()
-            .map({ profile in
+            .map { profile in
                 if let photo = profile.photo,
                    let data = NSData(base64Encoded: photo,
                                      options: NSData.Base64DecodingOptions
@@ -53,15 +52,21 @@ class EditProfileViewModel {
                     self?.image = image
                     return image
                 }
-                return UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: self?.accountService.currentAccount, size: 70, withFontSize: 26, inset: 16)
-            })
+                return UIImage.defaultJamiAvatarFor(
+                    profileName: profile.alias,
+                    account: self?.accountService.currentAccount,
+                    size: 70,
+                    withFontSize: 26,
+                    inset: 16
+                )
+            }
     }()
 
     var profileForCurrentAccount = PublishSubject<Profile>()
 
     lazy var profileName: Observable<String?> = { [weak self] in
         return profileForCurrentAccount.share()
-            .map({ profile in
+            .map { profile in
                 guard let self = self else { return "" }
                 if let name = profile.alias, !name.isEmpty {
                     self.name = name
@@ -69,14 +74,15 @@ class EditProfileViewModel {
                 }
                 if let account = self.accountService.currentAccount {
                     let details = self.accountService.getAccountDetails(fromAccountId: account.id)
-                    let name = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .displayName))
+                    let name = details
+                        .get(withConfigKeyModel: ConfigKeyModel(withKey: .displayName))
                     if !name.isEmpty {
                         self.name = name
                         return name
                     }
                 }
                 return ""
-            })
+            }
     }()
 
     init(profileService: ProfilesService, accountService: AccountsService) {
@@ -88,42 +94,44 @@ class EditProfileViewModel {
                     self.updateProfileInfoFor(accountId: selectedAccount.id)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func updateProfileInfoFor(accountId: String) {
-        self.profileService.getAccountProfile(accountId: accountId)
+        profileService.getAccountProfile(accountId: accountId)
             .subscribe(onNext: { [weak self] profile in
                 self?.profileForCurrentAccount.onNext(profile)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func saveProfile() {
-        guard let account = self.accountService.currentAccount else { return }
+        guard let account = accountService.currentAccount else { return }
         var photo: String?
-        if let image = self.image, !image.isEqual(defaultImage),
+        if let image = image, !image.isEqual(defaultImage),
            let imageData = image.convertToData(ofMaxSize: 40000) {
             photo = imageData.base64EncodedString()
         }
-        let details = self.accountService.getAccountDetails(fromAccountId: account.id)
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName), withValue: self.name)
+        let details = accountService.getAccountDetails(fromAccountId: account.id)
+        details.set(
+            withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName),
+            withValue: name
+        )
         account.details = details
-        self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
-        let accountUri = AccountModelHelper.init(withAccount: account).uri ?? ""
-        self.profileService.updateAccountProfile(accountId: account.id,
-                                                 alias: self.name,
-                                                 photo: photo, accountURI: accountUri)
-
+        accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
+        let accountUri = AccountModelHelper(withAccount: account).uri ?? ""
+        profileService.updateAccountProfile(accountId: account.id,
+                                            alias: name,
+                                            photo: photo, accountURI: accountUri)
     }
 
     func updateImage(_ image: UIImage) {
         self.image = image
-        self.saveProfile()
+        saveProfile()
     }
 
     func updateName(_ name: String) {
         self.name = name
-        self.saveProfile()
+        saveProfile()
     }
 }

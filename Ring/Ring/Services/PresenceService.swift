@@ -18,9 +18,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import SwiftyBeaver
-import RxSwift
 import RxCocoa
+import RxSwift
+import SwiftyBeaver
 
 enum PresenceStatus: Int {
     case offline
@@ -29,11 +29,12 @@ enum PresenceStatus: Int {
 }
 
 class PresenceService {
-
     private let presenceAdapter: PresenceAdapter
     private let log = SwiftyBeaver.self
     private var contactPresence: [String: BehaviorRelay<PresenceStatus>]
-    private let presenceQueue = DispatchQueue(label: "com.presenceQueue", qos: .background) // used to protect access to contactPresence[]
+    private let presenceQueue = DispatchQueue(label: "com.presenceQueue",
+                                              qos: .background) // used to protect access to
+    // contactPresence[]
 
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
@@ -41,16 +42,16 @@ class PresenceService {
     private let disposeBag = DisposeBag()
 
     init(withPresenceAdapter presenceAdapter: PresenceAdapter) {
-        self.contactPresence = [String: BehaviorRelay<PresenceStatus>]()
+        contactPresence = [String: BehaviorRelay<PresenceStatus>]()
         self.presenceAdapter = presenceAdapter
-        self.responseStream.disposed(by: disposeBag)
-        self.sharedResponseStream = responseStream.share()
+        responseStream.disposed(by: disposeBag)
+        sharedResponseStream = responseStream.share()
         PresenceAdapter.delegate = self
     }
 
     func getSubscriptionsForContact(contactId: String) -> BehaviorRelay<PresenceStatus>? {
         var value: BehaviorRelay<PresenceStatus>?
-        presenceQueue.sync {[weak self] in
+        presenceQueue.sync { [weak self] in
             value = self?.contactPresence[contactId]
         }
         return value
@@ -71,11 +72,15 @@ class PresenceService {
                         withFlag flag: Bool) {
         presenceQueue.async { [weak self] in
             guard let self = self else { return }
-            if flag && self.contactPresence[uri] != nil {
+            if flag, self.contactPresence[uri] != nil {
                 // already subscribed
                 return
             }
-            self.presenceAdapter.subscribeBuddy(withURI: uri, withAccountId: accountId, withFlag: flag)
+            self.presenceAdapter.subscribeBuddy(
+                withURI: uri,
+                withAccountId: accountId,
+                withFlag: flag
+            )
             if !flag {
                 self.contactPresence[uri] = nil
                 return
@@ -97,13 +102,13 @@ class PresenceService {
 }
 
 extension PresenceService: PresenceAdapterDelegate {
-    func newBuddyNotification(withAccountId accountId: String,
+    func newBuddyNotification(withAccountId _: String,
                               withUri uri: String,
                               withStatus status: Int,
-                              withLineStatus lineStatus: String) {
-        presenceQueue.async {[weak self] in
+                              withLineStatus _: String) {
+        presenceQueue.async { [weak self] in
             guard let self = self else { return }
-            guard let presenceStatus = PresenceStatus(rawValue: status) else { return}
+            guard let presenceStatus = PresenceStatus(rawValue: status) else { return }
             if let presenceForContact = self.contactPresence[uri] {
                 presenceForContact.accept(presenceStatus)
                 return

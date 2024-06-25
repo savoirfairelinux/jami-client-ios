@@ -20,9 +20,9 @@
  */
 
 import Foundation
-import SwiftyBeaver
-import RxSwift
 import RxRelay
+import RxSwift
+import SwiftyBeaver
 import UIKit
 
 // swiftlint:disable identifier_name
@@ -60,7 +60,6 @@ enum Framerates: CGFloat {
 }
 
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
-
     let mediumCamera = "mediumCamera"
     let highResolutionCamera = "1280_720Camera"
 
@@ -79,9 +78,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     var permissionGranted = BehaviorRelay<Bool>(value: false)
 
-    lazy var permissionGrantedObservable: Observable<Bool> = {
-        return self.permissionGranted.asObservable()
-    }()
+    lazy var permissionGrantedObservable: Observable<Bool> = self.permissionGranted.asObservable()
 
     private let sessionQueue = DispatchQueue(label: "session queue")
     private let captureSession = AVCaptureSession()
@@ -128,20 +125,39 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     func observeSystemPressureChanges(captureDevice: AVCaptureDevice) {
         // Restore normal framerate.
-        setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.high.rawValue, useRange: true)
+        setFrameRateForDevice(
+            captureDevice: captureDevice,
+            framerate: Framerates.high.rawValue,
+            useRange: true
+        )
 
         // Observe system pressure.
-        systemPressureObservation = captureDevice.observe(\.systemPressureState, options: .new) { [weak self, weak captureDevice] _, change in
+        systemPressureObservation = captureDevice.observe(\.systemPressureState, options: .new) { [
+            weak self,
+            weak captureDevice
+        ] _, change in
             guard let self = self, let captureDevice = captureDevice else { return }
             guard let systemPressureState = change.newValue?.level else { return }
 
             switch systemPressureState {
             case .nominal:
-                self.setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.high.rawValue, useRange: true)
+                self.setFrameRateForDevice(
+                    captureDevice: captureDevice,
+                    framerate: Framerates.high.rawValue,
+                    useRange: true
+                )
             case .fair:
-                self.setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.medium.rawValue, useRange: false)
+                self.setFrameRateForDevice(
+                    captureDevice: captureDevice,
+                    framerate: Framerates.medium.rawValue,
+                    useRange: false
+                )
             case .serious, .critical:
-                self.setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.low.rawValue, useRange: false)
+                self.setFrameRateForDevice(
+                    captureDevice: captureDevice,
+                    framerate: Framerates.low.rawValue,
+                    useRange: false
+                )
             case .shutdown:
                 self.stopCapturing()
             default:
@@ -150,12 +166,15 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
 
-    func getDeviceInfo(forPosition position: AVCaptureDevice.Position, quality: AVCaptureSession.Preset) throws -> DeviceInfo {
-        guard self.permissionGranted.value else {
+    func getDeviceInfo(
+        forPosition position: AVCaptureDevice.Position,
+        quality: AVCaptureSession.Preset
+    ) throws -> DeviceInfo {
+        guard permissionGranted.value else {
             throw VideoError.needPermission
         }
-        self.captureSession.sessionPreset = quality
-        guard let captureDevice = self.selectCaptureDevice(withPosition: position) else {
+        captureSession.sessionPreset = quality
+        guard let captureDevice = selectCaptureDevice(withPosition: position) else {
             throw VideoError.selectDeviceFailed
         }
         let formatDescription = captureDevice.activeFormat.formatDescription
@@ -197,11 +216,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     func checkPermission() {
         switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
         case .authorized:
-            self.permissionGranted.accept(true)
+            permissionGranted.accept(true)
         case .notDetermined:
             requestPermission()
         default:
-            self.permissionGranted.accept(false)
+            permissionGranted.accept(false)
         }
     }
 
@@ -227,14 +246,14 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     private func performConfiguration(withPosition position: AVCaptureDevice.Position,
                                       withOrientation orientation: AVCaptureVideoOrientation) throws {
-        self.captureSession.beginConfiguration()
+        captureSession.beginConfiguration()
         defer { self.captureSession.commitConfiguration() }
 
         guard permissionGranted.value else {
             throw VideoError.needPermission
         }
 
-        self.captureSession.sessionPreset = quality
+        captureSession.sessionPreset = quality
 
         guard let captureDevice = selectCaptureDevice(withPosition: position) else {
             throw VideoError.selectDeviceFailed
@@ -250,25 +269,28 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
         let captureDeviceInput = try AVCaptureDeviceInput(device: captureDevice)
 
-        guard self.captureSession.canAddInput(captureDeviceInput) else {
+        guard captureSession.canAddInput(captureDeviceInput) else {
             throw VideoError.setupInputDeviceFailed
         }
-        self.captureSession.addInput(captureDeviceInput)
+        captureSession.addInput(captureDeviceInput)
 
         let videoOutput = AVCaptureVideoDataOutput()
         let types = videoOutput.availableVideoPixelFormatTypes
 
         if types.contains(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
-            let settings = [kCVPixelBufferPixelFormatTypeKey as NSString: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange]
+            let settings =
+                [
+                    kCVPixelBufferPixelFormatTypeKey as NSString: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange
+                ]
             videoOutput.videoSettings = settings as [String: Any]
         }
 
         videoOutput.setSampleBufferDelegate(self, queue: sessionQueue)
 
-        guard self.captureSession.canAddOutput(videoOutput) else {
+        guard captureSession.canAddOutput(videoOutput) else {
             throw VideoError.setupOutputDeviceFailed
         }
-        self.captureSession.addOutput(videoOutput)
+        captureSession.addOutput(videoOutput)
 
         guard let connection = videoOutput.connection(with: .video) else {
             throw VideoError.getConnectionFailed
@@ -286,7 +308,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func selectCaptureDevice(withPosition position: AVCaptureDevice.Position) -> AVCaptureDevice? {
-        let devices = AVCaptureDevice.DiscoverySession.init(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: position).devices
+        let devices = AVCaptureDevice.DiscoverySession(
+            deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera],
+            mediaType: AVMediaType.video,
+            position: position
+        ).devices
         return devices.first
     }
 
@@ -304,15 +330,15 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     private func performSwitchCamera(completable: @escaping (CompletableEvent) -> Void) {
-        self.captureSession.beginConfiguration()
+        captureSession.beginConfiguration()
         defer { self.captureSession.commitConfiguration() }
 
-        guard let currentCameraInput = self.captureSession.inputs.first as? AVCaptureDeviceInput else {
+        guard let currentCameraInput = captureSession.inputs.first as? AVCaptureDeviceInput else {
             completable(.error(VideoError.switchCameraFailed))
             return
         }
 
-        self.captureSession.removeInput(currentCameraInput)
+        captureSession.removeInput(currentCameraInput)
         guard let newCamera = selectNewCamera(currentCameraInput: currentCameraInput) else {
             completable(.error(VideoError.switchCameraFailed))
             return
@@ -323,8 +349,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
         do {
             let newVideoInput = try AVCaptureDeviceInput(device: newCamera)
-            if self.captureSession.canAddInput(newVideoInput) {
-                self.captureSession.addInput(newVideoInput)
+            if captureSession.canAddInput(newVideoInput) {
+                captureSession.addInput(newVideoInput)
             } else {
                 completable(.error(VideoError.switchCameraFailed))
                 return
@@ -354,7 +380,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let currentCameraOutput = captureSession.outputs.first,
               let connection = currentCameraOutput.connection(with: .video),
               connection.isVideoOrientationSupported,
-              connection.isVideoMirroringSupported else {
+              connection.isVideoMirroringSupported
+        else {
             return false
         }
 
@@ -363,6 +390,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     // MARK: Sample buffer to UIImage conversion
+
     private func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
         let ciImage = CIImage(cvPixelBuffer: imageBuffer)
@@ -370,7 +398,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         return UIImage(cgImage: cgImage)
     }
 
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+    func captureOutput(
+        _: AVCaptureOutput,
+        didOutput sampleBuffer: CMSampleBuffer,
+        from _: AVCaptureConnection
+    ) {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
         DispatchQueue.main.async { [weak self] in
@@ -382,7 +414,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 typealias RendererTuple = (sinkId: String, buffer: CMSampleBuffer?, running: Bool)
 
 class VideoService: FrameExtractorDelegate {
-
     private let videoAdapter: VideoAdapter
     private let camera = FrameExtractor()
 
@@ -408,46 +439,51 @@ class VideoService: FrameExtractorDelegate {
         self.videoAdapter = videoAdapter
         currentOrientation = camera.getOrientation
         VideoAdapter.videoDelegate = self
-        self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
+        hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
         camera.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(self.restoreDefaultDevice),
-                                               name: NSNotification.Name(rawValue: NotificationName.restoreDefaultVideoDevice.rawValue),
+        NotificationCenter.default.addObserver(self, selector: #selector(restoreDefaultDevice),
+                                               name: NSNotification
+                                                .Name(rawValue: NotificationName
+                                                        .restoreDefaultVideoDevice.rawValue),
                                                object: nil)
     }
 
     @objc
     func restoreDefaultDevice() {
-        let accelerated = self.videoAdapter.getEncodingAccelerated()
-        let device = self.videoAdapter.getDefaultDevice()
+        let accelerated = videoAdapter.getEncodingAccelerated()
+        let device = videoAdapter.getDefaultDevice()
         if accelerated && device == camera.mediumCamera {
-            self.videoAdapter.setDefaultDevice(camera.highResolutionCamera)
+            videoAdapter.setDefaultDevice(camera.highResolutionCamera)
         }
     }
 
     func setupInputs() {
-        self.camera.permissionGrantedObservable
+        camera.permissionGrantedObservable
             .subscribe(onNext: { granted in
                 if granted {
                     self.enumerateVideoInputDevices()
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         // Will trigger enumerateVideoInputDevices once permission is granted
         camera.checkPermission()
     }
 
     func getVideoSource() -> String {
-        return "camera://" + self.currentDeviceId
+        return "camera://" + currentDeviceId
     }
 
     func getCurrentVideoSource() -> String {
-        return self.videoAdapter.getDefaultDevice()
+        return videoAdapter.getDefaultDevice()
     }
 
     func enumerateVideoInputDevices() {
         do {
-            camera.configureSession(withPosition: AVCaptureDevice.Position.front, withOrientation: camera.getOrientation)
-            self.log.debug("Camera successfully configured")
+            camera.configureSession(
+                withPosition: AVCaptureDevice.Position.front,
+                withOrientation: camera.getOrientation
+            )
+            log.debug("Camera successfully configured")
             let highResolutionDevice: [String: String] = try camera
                 .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
                                quality: AVCaptureSession.Preset.high)
@@ -458,28 +494,28 @@ class VideoService: FrameExtractorDelegate {
                                         withDevInfo: mediumDevice)
             videoAdapter.addVideoDevice(withName: camera.highResolutionCamera,
                                         withDevInfo: highResolutionDevice)
-            let accelerated = self.videoAdapter.getEncodingAccelerated()
+            let accelerated = videoAdapter.getEncodingAccelerated()
             if accelerated {
-                self.videoAdapter.setDefaultDevice(camera.highResolutionCamera)
+                videoAdapter.setDefaultDevice(camera.highResolutionCamera)
             } else {
-                self.videoAdapter.setDefaultDevice(camera.mediumCamera)
+                videoAdapter.setDefaultDevice(camera.mediumCamera)
             }
-            self.currentDeviceId = self.videoAdapter.getDefaultDevice()
+            currentDeviceId = videoAdapter.getDefaultDevice()
         } catch let e as VideoError {
             self.log.error("Error during capture device enumeration: \(e)")
         } catch {
-            self.log.error("Unkonwn error configuring capture device")
+            log.error("Unkonwn error configuring capture device")
         }
     }
 
     func switchCamera() {
-        self.camera.switchCamera()
+        camera.switchCamera()
             .subscribe(onCompleted: {
                 print("camera switched")
             }, onError: { error in
                 print(error)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func setCameraOrientation(orientation: UIDeviceOrientation, forceUpdate: Bool = false) {
@@ -496,12 +532,12 @@ class VideoService: FrameExtractorDelegate {
         default:
             newOrientation = AVCaptureVideoOrientation.portrait
         }
-        if newOrientation == self.currentOrientation && !forceUpdate {
-            self.log.warning("no orientation change required")
+        if newOrientation == currentOrientation && !forceUpdate {
+            log.warning("no orientation change required")
             return
         }
-        self.angle = self.mapDeviceOrientation(orientation: newOrientation)
-        self.currentOrientation = newOrientation
+        angle = mapDeviceOrientation(orientation: newOrientation)
+        currentOrientation = newOrientation
     }
 
     func mapDeviceOrientation(orientation: AVCaptureVideoOrientation) -> Int {
@@ -518,14 +554,15 @@ class VideoService: FrameExtractorDelegate {
 
 extension VideoService: VideoAdapterDelegate {
     func switchInput(toDevice device: String, call: CallModel) {
-        self.requestMediaChange(call: call, mediaLabel: "video_0", source: device)
+        requestMediaChange(call: call, mediaLabel: "video_0", source: device)
     }
 
     func requestMediaChange(call: CallModel, mediaLabel: String, source: String) {
         var mediaList = call.mediaList
         let medias = mediaList.count
         var found = false
-        for index in 0..<medias where mediaList[index][MediaAttributeKey.label.rawValue] == mediaLabel {
+        for index in 0 ..< medias
+        where mediaList[index][MediaAttributeKey.label.rawValue] == mediaLabel {
             mediaList[index][MediaAttributeKey.enabled.rawValue] = "true"
             let muted = mediaList[index][MediaAttributeKey.muted.rawValue]
             // Use "muteSource" to represent a muted camera source.
@@ -535,7 +572,8 @@ extension VideoService: VideoAdapterDelegate {
             if !source.hasPrefix("camera://") {
                 device = "camera://" + source
             }
-            mediaList[index][MediaAttributeKey.source.rawValue] = muted == "true" ? device : mutedCamera
+            mediaList[index][MediaAttributeKey.source.rawValue] = muted == "true" ? device :
+                mutedCamera
             mediaList[index][MediaAttributeKey.muted.rawValue] = muted == "true" ? "false" : "true"
             found = true
             break
@@ -550,7 +588,11 @@ extension VideoService: VideoAdapterDelegate {
             media[MediaAttributeKey.label.rawValue] = mediaLabel
             mediaList.append(media)
         }
-        self.videoAdapter.requestMediaChange(call.callId, accountId: call.accountId, withMedia: mediaList)
+        videoAdapter.requestMediaChange(
+            call.callId,
+            accountId: call.accountId,
+            withMedia: mediaList
+        )
     }
 
     func setDecodingAccelerated(withState state: Bool) {
@@ -574,13 +616,20 @@ extension VideoService: VideoAdapterDelegate {
         videoAdapter.setEncodingAccelerated(state)
         hardwareAccelerationEnabledByUser = state
         if state {
-            self.videoAdapter.setDefaultDevice(camera.highResolutionCamera)
+            videoAdapter.setDefaultDevice(camera.highResolutionCamera)
         } else {
-            self.videoAdapter.setDefaultDevice(camera.mediumCamera)
+            videoAdapter.setDefaultDevice(camera.mediumCamera)
         }
     }
 
-    func decodingStarted(withsinkId sinkId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?, withaAccountId accountId: String, call: CallModel?) {
+    func decodingStarted(
+        withsinkId sinkId: String,
+        withWidth width: Int,
+        withHeight height: Int,
+        withCodec codec: String?,
+        withaAccountId _: String,
+        call: CallModel?
+    ) {
         if let codecId = codec, !codecId.isEmpty {
             // we do not support hardware acceleration with VP8 codec. In this case software
             // encoding will be used. Downgrate resolution if needed. After call finished
@@ -588,40 +637,45 @@ extension VideoService: VideoAdapterDelegate {
             let codec = VideoCodecs(rawValue: codecId) ?? VideoCodecs.unknown
             if let call = call,
                !supportHardware(codec: codec),
-               self.camera.quality == AVCaptureSession.Preset.high {
-                self.videoAdapter.setDefaultDevice(camera.mediumCamera)
-                self.switchInput(toDevice: "camera://" + camera.mediumCamera, call: call)
+               camera.quality == AVCaptureSession.Preset.high {
+                videoAdapter.setDefaultDevice(camera.mediumCamera)
+                switchInput(toDevice: "camera://" + camera.mediumCamera, call: call)
             }
         }
-        let hasListener = self.videoInputManager.hasListener(sinkId: sinkId)
-        videoAdapter.registerSinkTarget(withSinkId: sinkId, withWidth: width, withHeight: height, hasListeners: hasListener)
-        self.currentDeviceId = self.videoAdapter.getDefaultDevice()
+        let hasListener = videoInputManager.hasListener(sinkId: sinkId)
+        videoAdapter.registerSinkTarget(
+            withSinkId: sinkId,
+            withWidth: width,
+            withHeight: height,
+            hasListeners: hasListener
+        )
+        currentDeviceId = videoAdapter.getDefaultDevice()
         renderStarted.accept(sinkId)
     }
 
     func addListener(withsinkId sinkId: String) {
-        self.videoInputManager.addListener(sinkId: sinkId)
-        let hasListeners = self.videoInputManager.hasListener(sinkId: sinkId)
-        self.videoAdapter.setHasListeners(hasListeners, forSinkId: sinkId)
+        videoInputManager.addListener(sinkId: sinkId)
+        let hasListeners = videoInputManager.hasListener(sinkId: sinkId)
+        videoAdapter.setHasListeners(hasListeners, forSinkId: sinkId)
     }
 
     func hasListener(withsinkId sinkId: String) -> Bool {
-        return self.videoInputManager.hasListener(sinkId: sinkId)
+        return videoInputManager.hasListener(sinkId: sinkId)
     }
 
     func removeListener(withsinkId sinkId: String) {
-        self.videoInputManager.removeListener(sinkId: sinkId)
-        let hasListeners = self.videoInputManager.hasListener(sinkId: sinkId)
-        self.videoAdapter.setHasListeners(hasListeners, forSinkId: sinkId)
+        videoInputManager.removeListener(sinkId: sinkId)
+        let hasListeners = videoInputManager.hasListener(sinkId: sinkId)
+        videoAdapter.setHasListeners(hasListeners, forSinkId: sinkId)
     }
 
     func decodingStopped(withsinkId sinkId: String) {
-        self.videoInputManager.stop(sinkId: sinkId)
+        videoInputManager.stop(sinkId: sinkId)
         videoAdapter.removeSinkTarget(withSinkId: sinkId)
     }
 
     func writeFrame(withBuffer buffer: CVPixelBuffer?, sinkId: String, rotation: Int) {
-        self.videoInputManager.writeFrame(withBuffer: buffer, sinkId: sinkId, rotation: rotation)
+        videoInputManager.writeFrame(withBuffer: buffer, sinkId: sinkId, rotation: rotation)
     }
 
     func supportHardware(codec: VideoCodecs) -> Bool {
@@ -629,42 +683,43 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startCapture(withDevice device: String) {
-        self.log.debug("Capture started...")
-        if device == camera.highResolutionCamera && self.camera.quality == AVCaptureSession.Preset.medium {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.high)
-        } else if device == camera.mediumCamera && self.camera.quality == AVCaptureSession.Preset.high {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+        log.debug("Capture started...")
+        if device == camera.highResolutionCamera && camera.quality == AVCaptureSession.Preset
+            .medium {
+            camera.setQuality(quality: AVCaptureSession.Preset.high)
+        } else if device == camera.mediumCamera && camera.quality == AVCaptureSession.Preset.high {
+            camera.setQuality(quality: AVCaptureSession.Preset.medium)
         }
-        self.angle = self.mapDeviceOrientation(orientation: self.currentOrientation)
-        self.camera.startCapturing()
+        angle = mapDeviceOrientation(orientation: currentOrientation)
+        camera.startCapturing()
     }
 
     func startVideoCaptureBeforeCall() {
-        self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
-        self.camera.startCapturing()
+        hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
+        camera.startCapturing()
     }
 
     func startMediumCamera() {
-        self.videoAdapter.openVideoInput("camera://" + self.camera.mediumCamera)
+        videoAdapter.openVideoInput("camera://" + camera.mediumCamera)
     }
 
     func videRecordingFinished() {
-        if self.cameraPosition == .back {
-            self.switchCamera()
+        if cameraPosition == .back {
+            switchCamera()
         }
-        self.videoAdapter.closeVideoInput("camera://" + self.camera.mediumCamera)
-        self.stopAudioDevice()
+        videoAdapter.closeVideoInput("camera://" + camera.mediumCamera)
+        stopAudioDevice()
     }
 
     func stopCapture(withDevice device: String) {
         if !device.isEmpty && device != mutedCamera {
-            self.camera.stopCapturing()
+            camera.stopCapturing()
         }
     }
 
     func getImageOrienation() -> UIImage.Orientation {
         let shouldMirror = cameraPosition == AVCaptureDevice.Position.front
-        switch self.currentOrientation {
+        switch currentOrientation {
         case AVCaptureVideoOrientation.portrait:
             return shouldMirror ? UIImage.Orientation.leftMirrored :
                 UIImage.Orientation.left
@@ -684,17 +739,21 @@ extension VideoService: VideoAdapterDelegate {
 
     func captured(imageBuffer: CVImageBuffer?, image: UIImage) {
         if let cgImage = image.cgImage {
-            self.capturedVideoFrame
+            capturedVideoFrame
                 .onNext(UIImage(cgImage: cgImage,
                                 scale: 1.0,
-                                orientation: self.getImageOrienation()))
+                                orientation: getImageOrienation()))
         }
-        videoAdapter.writeOutgoingFrame(with: imageBuffer, angle: Int32(self.angle), videoInputId: self.getVideoSource())
+        videoAdapter.writeOutgoingFrame(
+            with: imageBuffer,
+            angle: Int32(angle),
+            videoInputId: getVideoSource()
+        )
     }
 
     func updateDevicePosition(position: AVCaptureDevice.Position) {
-        self.cameraPosition = position
-        self.angle = self.mapDeviceOrientation(orientation: self.currentOrientation)
+        cameraPosition = position
+        angle = mapDeviceOrientation(orientation: currentOrientation)
     }
 
     func stopAudioDevice() {
@@ -703,16 +762,16 @@ extension VideoService: VideoAdapterDelegate {
 
     func startLocalRecorder(audioOnly: Bool, path: String) -> String? {
         let device = audioOnly ? "" : "camera://" + camera.mediumCamera
-        self.currentDeviceId = camera.mediumCamera
-        return self.videoAdapter.startLocalRecording(device, path: path)
+        currentDeviceId = camera.mediumCamera
+        return videoAdapter.startLocalRecording(device, path: path)
     }
 
     func stopLocalRecorder(path: String) {
-        self.videoAdapter.stopLocalRecording(path)
+        videoAdapter.stopLocalRecording(path)
     }
 
     func getConferenceVideoSize(confId: String) -> CGSize {
-        return self.videoAdapter.getRenderSize(confId)
+        return videoAdapter.getRenderSize(confId)
     }
 }
 
@@ -733,35 +792,35 @@ enum PlayerInfo: String {
 
 extension VideoService {
     func createPlayer(path: String) -> String {
-        let player = self.videoAdapter.createMediaPlayer(path)
+        let player = videoAdapter.createMediaPlayer(path)
         return player ?? ""
     }
 
     func pausePlayer(playerId: String, pause: Bool) {
         if !pause {
-            self.addListener(withsinkId: playerId)
+            addListener(withsinkId: playerId)
         } else {
-            self.removeListener(withsinkId: playerId)
+            removeListener(withsinkId: playerId)
         }
-        self.videoAdapter.pausePlayer(playerId, pause: pause)
+        videoAdapter.pausePlayer(playerId, pause: pause)
     }
 
     func mutePlayerAudio(playerId: String, mute: Bool) {
-        self.videoAdapter.mutePlayerAudio(playerId, mute: mute)
+        videoAdapter.mutePlayerAudio(playerId, mute: mute)
     }
 
     func seekToTime(time: Int, playerId: String) {
-        self.videoAdapter.playerSeek(toTime: Int32(time), playerId: playerId)
+        videoAdapter.playerSeek(toTime: Int32(time), playerId: playerId)
     }
 
     func closePlayer(playerId: String) {
-        self.videoAdapter.closePlayer(playerId)
+        videoAdapter.closePlayer(playerId)
     }
 
     func fileOpened(for playerId: String, fileInfo: [String: String]) {
         let duration: String = fileInfo[PlayerInfo.duration.rawValue] ?? "0"
-        let audioStream: Int = Int(fileInfo[PlayerInfo.audio_stream.rawValue] ?? "-1") ?? -1
-        let videoStream: Int = Int(fileInfo[PlayerInfo.video_stream.rawValue] ?? "-1") ?? -1
+        let audioStream = Int(fileInfo[PlayerInfo.audio_stream.rawValue] ?? "-1") ?? -1
+        let videoStream = Int(fileInfo[PlayerInfo.video_stream.rawValue] ?? "-1") ?? -1
         let hasAudio = audioStream >= 0
         let hasVideo = videoStream >= 0
         let player = Player(playerId: playerId,
@@ -772,6 +831,6 @@ extension VideoService {
     }
 
     func getPlayerPosition(playerId: String) -> Int64 {
-        return self.videoAdapter.getPlayerPosition(playerId)
+        return videoAdapter.getPlayerPosition(playerId)
     }
 }

@@ -19,19 +19,18 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
-import RxCocoa
-import SwiftyBeaver
 import Reusable
+import RxCocoa
+import RxSwift
+import SwiftyBeaver
+import UIKit
 
 class ContactRequestsViewController: UIViewController, StoryboardBased, ViewModelBased {
-
     var viewModel: ContactRequestsViewModel!
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noInvitationsPlaceholder: UIView!
-    @IBOutlet weak var noRequestsLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var noInvitationsPlaceholder: UIView!
+    @IBOutlet var noRequestsLabel: UILabel!
 
     private let disposeBag = DisposeBag()
     private let cellIdentifier = "ContactRequestCell"
@@ -39,49 +38,52 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.jamiBackgroundColor
-        self.tableView.backgroundColor = UIColor.jamiBackgroundColor
+        view.backgroundColor = UIColor.jamiBackgroundColor
+        tableView.backgroundColor = UIColor.jamiBackgroundColor
         noInvitationsPlaceholder.backgroundColor = UIColor.jamiBackgroundColor
         noRequestsLabel.backgroundColor = UIColor.jamiBackgroundColor
         noRequestsLabel.textColor = UIColor.jamiLabelColor
-        self.configureNavigationBar()
-        self.tableView.rx.modelSelected(RequestItem.self)
-            .subscribe({ [weak self] item in
+        configureNavigationBar()
+        tableView.rx.modelSelected(RequestItem.self)
+            .subscribe { [weak self] item in
                 guard let self = self else { return }
                 if let request = item.element {
                     self.viewModel.showConversation(forItem: request)
                 }
-            })
+            }
             .disposed(by: disposeBag)
-        self.applyL10n()
+        applyL10n()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupTableView()
-        self.setupBindings()
+        setupTableView()
+        setupBindings()
     }
 
     func applyL10n() {
-        self.noRequestsLabel.text = L10n.Invitations.noInvitations
+        noRequestsLabel.text = L10n.Invitations.noInvitations
     }
 
     func setupTableView() {
-        self.tableView.estimatedRowHeight = 100.0
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.allowsSelection = true
-        self.tableView.tableFooterView = UIView()
+        tableView.estimatedRowHeight = 100.0
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.allowsSelection = true
+        tableView.tableFooterView = UIView()
 
         // Register cell
-        self.tableView.register(cellType: ContactRequestCell.self)
+        tableView.register(cellType: ContactRequestCell.self)
 
         // Set delegate to remove unsynced contact request
-        self.tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
         // Bind the TableView to the ViewModel
-        self.viewModel
+        viewModel
             .contactRequestItems
             .observe(on: MainScheduler.instance)
-            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: ContactRequestCell.self)) { [weak self] _, item, cell in
+            .bind(to: tableView.rx.items(
+                cellIdentifier: cellIdentifier,
+                cellType: ContactRequestCell.self
+            )) { [weak self] _, item, cell in
                 cell.configureFromItem(item)
 
                 // Accept button
@@ -112,22 +114,21 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     }
 
     func setupBindings() {
-
-        self.viewModel
+        viewModel
             .hasInvitations
             .observe(on: MainScheduler.instance)
-            .bind(to: self.noInvitationsPlaceholder.rx.isHidden)
-            .disposed(by: self.disposeBag)
+            .bind(to: noInvitationsPlaceholder.rx.isHidden)
+            .disposed(by: disposeBag)
 
-        self.viewModel
+        viewModel
             .hasInvitations
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] hasInvitation in
+            .subscribe(onNext: { [weak self] hasInvitation in
                 if !hasInvitation {
                     self?.view.isHidden = true
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func acceptButtonTapped(withItem item: RequestItem) {
@@ -137,7 +138,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             }, onCompleted: { [weak self] in
                 self?.log.info("Accept trust request done")
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func discardButtonTapped(withItem item: RequestItem) {
@@ -147,7 +148,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             }, onCompleted: { [weak self] in
                 self?.log.info("Discard trust request done")
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func banButtonTapped(withItem item: RequestItem) {
@@ -157,29 +158,40 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             }, onCompleted: { [weak self] in
                 self?.log.info("Ban trust request done")
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
+
     private func removeContactFromInvitationList(atIndex: IndexPath) {
-        let alert = UIAlertController(title: L10n.Alerts.confirmDeleteConversationTitle, message: L10n.Alerts.confirmDeleteConversation, preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction, style: .destructive) {[weak self] (_: UIAlertAction!) -> Void in
+        let alert = UIAlertController(
+            title: L10n.Alerts.confirmDeleteConversationTitle,
+            message: L10n.Alerts.confirmDeleteConversation,
+            preferredStyle: .alert
+        )
+        let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction,
+                                         style: .destructive) { [weak self] (_: UIAlertAction!) in
             guard let self = self else { return }
             if let reqToDelete: RequestItem = try? self.tableView.rx.model(at: atIndex) {
                 self.viewModel.deleteRequest(item: reqToDelete)
                 self.tableView.reloadData()
             }
         }
-        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
+        let cancelAction = UIAlertAction(title: L10n.Global.cancel,
+                                         style: .default) { (_: UIAlertAction!) in }
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }
-extension ContactRequestsViewController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+extension ContactRequestsViewController: UITableViewDelegate {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         if let cell = tableView.cellForRow(at: indexPath) as? ContactRequestCell {
             if cell.deletable {
-                let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self](_, _, _) in
+                let delete = UIContextualAction(style: .normal,
+                                                title: "Delete") { [weak self] _, _, _ in
                     guard let self = self else { return }
                     self.removeContactFromInvitationList(atIndex: indexPath)
                 }

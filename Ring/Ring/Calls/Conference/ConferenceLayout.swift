@@ -18,34 +18,34 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
+import UIKit
 
 class ConferenceLayout: UIView {
-    @IBOutlet private weak var conferenceLayoutWidthConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var conferenceLayoutHeightConstraint: NSLayoutConstraint!
-    private var participants: [ConferenceParticipant] = [ConferenceParticipant]()
+    @IBOutlet private var conferenceLayoutWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private var conferenceLayoutHeightConstraint: NSLayoutConstraint!
+    private var participants: [ConferenceParticipant] = .init()
     private let textSize: CGFloat = 16
     private let labelHight: CGFloat = 30
     private let controlSize: CGFloat = 25
     private let margin: CGFloat = 15
     private let minWidth: CGFloat = 50
-    private let conferenceLayoutHelper: ConferenceLayoutHelper = ConferenceLayoutHelper()
+    private let conferenceLayoutHelper: ConferenceLayoutHelper = .init()
     private var isCurrentModerator: Bool = false
     private let disposeBag = DisposeBag()
 
     func setUpWithVideoSize(size: CGSize) {
-        self.conferenceLayoutHelper.setVideoSize(size: size)
+        conferenceLayoutHelper.setVideoSize(size: size)
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.updateViewSize()
                 self?.layoutParticipantsViews()
             })
-            .disposed(by: self.disposeBag)
-        self.updateViewSize()
+            .disposed(by: disposeBag)
+        updateViewSize()
     }
 
     func setParticipants(participants: [ConferenceParticipant]?, isCurrentModerator: Bool) {
@@ -55,23 +55,23 @@ class ConferenceLayout: UIView {
             self.participants.removeAll()
         }
         self.isCurrentModerator = isCurrentModerator
-        self.layoutParticipantsViews()
+        layoutParticipantsViews()
     }
 
     private func updateViewSize() {
-        let width = self.conferenceLayoutHelper.getWidthConstraint()
-        let height = self.conferenceLayoutHelper.getHeightConstraint()
-        self.conferenceLayoutHeightConstraint.constant = height
-        self.conferenceLayoutWidthConstraint.constant = width
+        let width = conferenceLayoutHelper.getWidthConstraint()
+        let height = conferenceLayoutHelper.getHeightConstraint()
+        conferenceLayoutHeightConstraint.constant = height
+        conferenceLayoutWidthConstraint.constant = width
     }
 
     private func layoutParticipantsViews() {
-        self.removeSubviews(recursive: true)
-        self.addParticipantsViews()
+        removeSubviews(recursive: true)
+        addParticipantsViews()
     }
 
     private func addParticipantsViews() {
-        for participant in self.participants where participant.width != 0 && participant.height != 0 {
+        for participant in participants where participant.width != 0 && participant.height != 0 {
             self.addViewFor(participant: participant)
         }
     }
@@ -79,36 +79,49 @@ class ConferenceLayout: UIView {
     private func addViewFor(participant: ConferenceParticipant) {
         guard let uri = participant.uri else { return }
         let displayName = participant.displayName.isEmpty ? uri : participant.displayName
-        let widthRatio = self.conferenceLayoutHelper.getWidthRatio()
-        let heightRatio = self.conferenceLayoutHelper.getHeightRatio()
+        let widthRatio = conferenceLayoutHelper.getWidthRatio()
+        let heightRatio = conferenceLayoutHelper.getHeightRatio()
         let origX: CGFloat = participant.originX * widthRatio
         let origY: CGFloat = participant.originY * heightRatio
         let width: CGFloat = participant.width * widthRatio
         let height: CGFloat = participant.height * heightRatio
         // do not add labels when view width is too small
         if width < minWidth { return }
-        let background = UIView(frame: CGRect(x: origX, y: origY, width: width, height: self.labelHight))
-        background.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0.6), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
+        let background = UIView(frame: CGRect(x: origX, y: origY, width: width, height: labelHight))
+        background.applyGradient(
+            with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0.6), UIColor(
+                red: 0,
+                green: 0,
+                blue: 0,
+                alpha: 0
+            )],
+            gradient: .vertical
+        )
         var labelFrame = background.frame
-        labelFrame.origin.x += (self.margin * widthRatio)
-        labelFrame.size.width -= (self.margin * 2 * widthRatio)
+        labelFrame.origin.x += (margin * widthRatio)
+        labelFrame.size.width -= (margin * 2 * widthRatio)
         let label = UILabel(frame: labelFrame)
         label.text = displayName.filterOutHost()
         label.textColor = UIColor.white
         label.textAlignment = .center
-        label.font = label.font.withSize(self.textSize)
-        self.addSubview(background)
-        self.addSubview(label)
-        if !participant.isHandRaised || !self.isCurrentModerator {
+        label.font = label.font.withSize(textSize)
+        addSubview(background)
+        addSubview(label)
+        if !participant.isHandRaised || !isCurrentModerator {
             return
         }
-        let raisedHandImage = UIButton(frame: CGRect(x: origX + width - self.controlSize, y: origY + height - self.controlSize, width: self.controlSize, height: self.controlSize))
+        let raisedHandImage = UIButton(frame: CGRect(
+            x: origX + width - controlSize,
+            y: origY + height - controlSize,
+            width: controlSize,
+            height: controlSize
+        ))
         let image = UIImage(asset: Asset.raiseHand)?.withRenderingMode(.alwaysTemplate)
         raisedHandImage.setImage(image, for: .normal)
         raisedHandImage.tintColor = UIColor.white
         raisedHandImage.backgroundColor = UIColor.conferenceRaiseHand
         raisedHandImage.layer.cornerRadius = 4
         raisedHandImage.layer.maskedCorners = [.layerMinXMinYCorner]
-        self.addSubview(raisedHandImage)
+        addSubview(raisedHandImage)
     }
 }

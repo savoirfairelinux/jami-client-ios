@@ -19,28 +19,29 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import AMPopTip
 import Reusable
 import RxSwift
-import AMPopTip
+import UIKit
 
 class CreateProfileViewController: EditProfileViewController, StoryboardBased, ViewModelBased {
-
     // MARK: outlets
-    @IBOutlet weak var createYourAvatarLabel: UILabel!
-    @IBOutlet weak var infoView: UIView!
-    @IBOutlet weak var subtitle: UILabel!
-    @IBOutlet weak var arrow: UIImageView!
-    @IBOutlet weak var arrowHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var enterNameLabel: UILabel!
-    @IBOutlet weak var arrowYConstraint: NSLayoutConstraint!
-    @IBOutlet weak var skipButton: DesignableButton!
-    @IBOutlet weak var profileImageViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var infoProfileImage: UIImageView!
-    @IBOutlet weak var backgroundView: UIView!
+
+    @IBOutlet var createYourAvatarLabel: UILabel!
+    @IBOutlet var infoView: UIView!
+    @IBOutlet var subtitle: UILabel!
+    @IBOutlet var arrow: UIImageView!
+    @IBOutlet var arrowHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var enterNameLabel: UILabel!
+    @IBOutlet var arrowYConstraint: NSLayoutConstraint!
+    @IBOutlet var skipButton: DesignableButton!
+    @IBOutlet var profileImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var infoProfileImage: UIImageView!
+    @IBOutlet var backgroundView: UIView!
 
     // MARK: members
+
     private let disposeBag = DisposeBag()
     var viewModel: CreateProfileViewModel!
     let popTip = PopTip()
@@ -48,22 +49,26 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     let tapGesture = UITapGestureRecognizer()
 
     // MARK: functions
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.layoutIfNeeded()
-        self.configureWalkrhroughNavigationBar()
+        view.layoutIfNeeded()
+        configureWalkrhroughNavigationBar()
 
         // Style
-        self.skipButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        skipButton.applyGradient(
+            with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark],
+            gradient: .horizontal
+        )
         skipButton.titleLabel?.ajustToTextSize()
-        self.profileImageView.layer.shadowColor = UIColor.gray.cgColor
-        self.profileImageView.layer.shadowOpacity = 0.5
-        self.profileImageView.layer.shadowOffset = CGSize.zero
-        self.profileImageView.layer.shadowRadius = 4
-        self.infoProfileImage.layer.shadowColor = UIColor.gray.cgColor
-        self.infoProfileImage.layer.shadowOpacity = 0.5
-        self.infoProfileImage.layer.shadowOffset = CGSize.zero
-        self.infoProfileImage.layer.shadowRadius = 4
+        profileImageView.layer.shadowColor = UIColor.gray.cgColor
+        profileImageView.layer.shadowOpacity = 0.5
+        profileImageView.layer.shadowOffset = CGSize.zero
+        profileImageView.layer.shadowRadius = 4
+        infoProfileImage.layer.shadowColor = UIColor.gray.cgColor
+        infoProfileImage.layer.shadowOpacity = 0.5
+        infoProfileImage.layer.shadowOffset = CGSize.zero
+        infoProfileImage.layer.shadowRadius = 4
         adaptToSystemColor()
 
         // Animations
@@ -82,14 +87,14 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
                 })
                 self?.setShadowAnimation()
             }
-            usleep(400000)
+            usleep(400_000)
             DispatchQueue.main.async {
                 self.setShadowAnimation()
             }
         }
-        self.infoView.addGestureRecognizer(tapGesture)
+        infoView.addGestureRecognizer(tapGesture)
 
-        self.applyL10n()
+        applyL10n()
 
         // bind view model to view
         tapGesture.rx.event
@@ -99,19 +104,20 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
             .disposed(by: disposeBag)
 
         // Bind ViewModel to View
-        self.viewModel.skipButtonTitle.asObservable().bind(to: self.skipButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
+        viewModel.skipButtonTitle.asObservable().bind(to: skipButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
 
         // Bind View to ViewModel
-        self.profileName.rx.text.orEmpty.bind(to: self.viewModel.profileName).disposed(by: self.disposeBag)
+        profileName.rx.text.orEmpty.bind(to: viewModel.profileName).disposed(by: disposeBag)
 
-        if self.profileImageView.image != nil {
-            let imageObs: Observable<UIImage?> = self.profileImageView
+        if profileImageView.image != nil {
+            let imageObs: Observable<UIImage?> = profileImageView
                 .rx.observe(UIImage.self, "image")
-            imageObs.bind(to: self.viewModel.profilePhoto).disposed(by: self.disposeBag)
+            imageObs.bind(to: viewModel.profilePhoto).disposed(by: disposeBag)
         }
 
         // Bind View Actions to ViewModel
-        self.skipButton.rx.tap
+        skipButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 if let name = self.profileName.text {
@@ -119,29 +125,35 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
                 }
                 self.viewModel.proceedWithAccountCreationOrDeviceLink()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageTapped(tapGestureRecognizer:))
+        )
         infoProfileImage.isUserInteractionEnabled = true
         infoProfileImage.addGestureRecognizer(tapGestureRecognizer)
 
         // handle keyboard
-        self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
-        keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        adaptToKeyboardState(for: scrollView, with: disposeBag)
+        keyboardDismissTapRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard)
+        )
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.skipButton.updateGradientFrame()
                 self?.self.configureWalkrhroughNavigationBar()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func adaptToSystemColor() {
         view.backgroundColor = UIColor.jamiBackgroundColor
         backgroundView.backgroundColor = UIColor.jamiBackgroundColor
-        self.profileName.tintColor = UIColor.jamiSecondary
+        profileName.tintColor = UIColor.jamiSecondary
         scrollView.backgroundColor = UIColor.jamiBackgroundColor
         subtitle.textColor = UIColor.jamiTextSecondary
         enterNameLabel.textColor = UIColor.jamiTextSecondary
@@ -157,22 +169,22 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
     override func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         super.imageTapped(tapGestureRecognizer: tapGestureRecognizer)
-        self.dismissInfoView()
+        dismissInfoView()
     }
 
     @objc
     func dismissKeyboard() {
-        self.becomeFirstResponder()
+        becomeFirstResponder()
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
     @objc
-    func keyboardWillAppear(withNotification: NSNotification) {
-        self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
+    func keyboardWillAppear(withNotification _: NSNotification) {
+        view.addGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
     @objc
-    func keyboardWillDisappear(withNotification: NSNotification) {
+    func keyboardWillDisappear(withNotification _: NSNotification) {
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
@@ -181,11 +193,11 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
     }
 
     func applyL10n() {
-        self.navigationItem.title = L10n.CreateProfile.title
-        self.enterNameLabel.text = L10n.CreateProfile.enterNameLabel
-        self.profileName.placeholder = L10n.CreateProfile.enterNamePlaceholder
-        self.subtitle.text = L10n.CreateProfile.subtitle
-        self.createYourAvatarLabel.text = L10n.CreateProfile.createYourAvatar
+        navigationItem.title = L10n.CreateProfile.title
+        enterNameLabel.text = L10n.CreateProfile.enterNameLabel
+        profileName.placeholder = L10n.CreateProfile.enterNamePlaceholder
+        subtitle.text = L10n.CreateProfile.subtitle
+        createYourAvatarLabel.text = L10n.CreateProfile.createYourAvatar
     }
 
     func setShadowAnimation() {
@@ -198,7 +210,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         shadow2Animation.toValue = 0.5
         shadow2Animation.duration = 0.2
 
-        self.infoProfileImage.layer.add(shadow1Animation, forKey: shadow1Animation.keyPath)
+        infoProfileImage.layer.add(shadow1Animation, forKey: shadow1Animation.keyPath)
 
         DispatchQueue.global(qos: .background).async {
             DispatchQueue.main.async { [weak self] in
@@ -208,7 +220,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
                     self?.view.layoutIfNeeded()
                 })
             }
-            usleep(200000)
+            usleep(200_000)
             DispatchQueue.main.async {
                 self.infoProfileImage.layer.removeAllAnimations()
                 self.infoProfileImage.layer.add(shadow2Animation, forKey: shadow2Animation.keyPath)
@@ -223,8 +235,18 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        navigationItem.setHidesBackButton(true, animated: true)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillAppear(withNotification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillDisappear(withNotification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
 }

@@ -37,7 +37,7 @@ let avatarColors = [
     UIColor(hexString: "#ffc107")!, // Amber
     UIColor(hexString: "#ff5722")!, // Deep Orange
     UIColor(hexString: "#795548")!, // Brown
-    UIColor(hexString: "#607d8b")!  // Blue Grey
-];
+    UIColor(hexString: "#607d8b")!, // Blue Grey
+]
 
 let defaultAvatarColor = UIColor(hexString: "808080")!

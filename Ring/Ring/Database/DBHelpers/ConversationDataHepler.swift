@@ -43,7 +43,7 @@ final class ConversationDataHelper {
                                contactsMap: [Int64: String]) throws {
         let query = table.filter(accountProfileId != participantId)
         let items = try oldDB.prepare(query)
-        for item in  items {
+        for item in items {
             if let uri = contactsMap[item[participantId]] {
                 let query = table.insert(id <- item[id],
                                          participant <- "ring:" + uri)
@@ -78,7 +78,7 @@ final class ConversationDataHelper {
         }
     }
 
-    func delete (item: Conversation, dataBase: Connection) -> Bool {
+    func delete(item: Conversation, dataBase: Connection) -> Bool {
         let conversationId = item.id
         let query = table.filter(id == conversationId)
         do {
@@ -92,11 +92,12 @@ final class ConversationDataHelper {
         }
     }
 
-    func selectConversations (conversationId: Int64, dataBase: Connection) throws -> [Conversation]? {
+    func selectConversations(conversationId: Int64,
+                             dataBase: Connection) throws -> [Conversation]? {
         let query = table.filter(id == conversationId)
         var conversations = [Conversation]()
         let items = try dataBase.prepare(query)
-        for item in  items {
+        for item in items {
             conversations.append(Conversation(id: item[id], participant: item[participant]))
         }
         return conversations
@@ -111,7 +112,8 @@ final class ConversationDataHelper {
         return conversations
     }
 
-    func selectConversationsForProfile(profileUri: String, dataBase: Connection) throws -> [Conversation]? {
+    func selectConversationsForProfile(profileUri: String,
+                                       dataBase: Connection) throws -> [Conversation]? {
         var conversations = [Conversation]()
         let query = table.filter(participant == profileUri)
         do {

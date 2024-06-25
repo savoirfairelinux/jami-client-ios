@@ -21,24 +21,63 @@
 import Foundation
 
 class SharedActionsPresenter {
-
     class func showAboutJamiAlert(onViewController viewController: UIViewController) {
         let fullVersion: String = Constants.fullVersion ?? ""
 
         let versionName = Constants.versionName
-        let alert = UIAlertController(title: "\nJami\nversion: \(fullVersion)\n\(versionName)", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "\nJami\nversion: \(fullVersion)\n\(versionName)",
+            message: "",
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
         let image = UIImageView(image: UIImage(asset: Asset.jamiIcon))
         alert.view.addSubview(image)
         image.translatesAutoresizingMaskIntoConstraints = false
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerX, relatedBy: .equal, toItem: alert.view, attribute: .centerX, multiplier: 1, constant: 0))
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .centerY, relatedBy: .equal, toItem: alert.view, attribute: .top, multiplier: 1, constant: 0.0))
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 64.0))
-        alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 64.0))
+        alert.view.addConstraint(NSLayoutConstraint(
+            item: image,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: alert.view,
+            attribute: .centerX,
+            multiplier: 1,
+            constant: 0
+        ))
+        alert.view.addConstraint(NSLayoutConstraint(
+            item: image,
+            attribute: .centerY,
+            relatedBy: .equal,
+            toItem: alert.view,
+            attribute: .top,
+            multiplier: 1,
+            constant: 0.0
+        ))
+        alert.view.addConstraint(NSLayoutConstraint(
+            item: image,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 1.0,
+            constant: 64.0
+        ))
+        alert.view.addConstraint(NSLayoutConstraint(
+            item: image,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 1.0,
+            constant: 64.0
+        ))
         viewController.present(alert, animated: true, completion: nil)
     }
 
-    class func shareAccountInfo(onViewController viewController: UIViewController, sourceView: UIView, content: [Any]) {
+    class func shareAccountInfo(
+        onViewController viewController: UIViewController,
+        sourceView: UIView,
+        content: [Any]
+    ) {
         let title = L10n.AccountPage.contactMeOnJamiTitle
         let activityViewController = UIActivityViewController(activityItems: content,
                                                               applicationActivities: nil)

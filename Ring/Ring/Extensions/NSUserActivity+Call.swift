@@ -20,12 +20,13 @@
 
 import Foundation
 import Intents
+
 extension NSUserActivity {
     var startCallHandle: (hash: String, isVideo: Bool)? {
         guard let interaction = interaction else { return nil }
         let startVideoCallIntent = interaction.intent as? INStartVideoCallIntent
         let startAudioCallIntent = interaction.intent as? INStartAudioCallIntent
-        if startVideoCallIntent == nil && startAudioCallIntent == nil {
+        if startVideoCallIntent == nil, startAudioCallIntent == nil {
             return nil
         }
         let isVideo = startVideoCallIntent != nil ? true : false
@@ -34,18 +35,20 @@ extension NSUserActivity {
                 let intent = startVideoCallIntent,
                 let contact = intent.contacts?.first,
                 let handle = contact.personHandle,
-                let value = handle.value else {
+                let value = handle.value
+            else {
                 return nil
             }
-            return(value, true)
+            return (value, true)
         }
         guard
             let intent = startAudioCallIntent,
             let contact = intent.contacts?.first,
             let handle = contact.personHandle,
-            let value = handle.value else {
+            let value = handle.value
+        else {
             return nil
         }
-        return(value, false)
+        return (value, false)
     }
 }

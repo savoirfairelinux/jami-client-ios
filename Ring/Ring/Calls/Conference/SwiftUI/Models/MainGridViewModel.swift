@@ -39,10 +39,10 @@ struct Page: Equatable {
     init(columns: Int, rows: Int) {
         self.columns = columns
         self.rows = rows
-        let marginVertical: CGFloat = CGFloat(rows + 1) * padding
-        let marginHorizontal: CGFloat = CGFloat(columns - 1) * padding
-        self.width = (adaptiveScreenWidth - marginHorizontal) / CGFloat(columns)
-        self.height = (adaptiveScreenHeight - marginVertical) / CGFloat(rows)
+        let marginVertical = CGFloat(rows + 1) * padding
+        let marginHorizontal = CGFloat(columns - 1) * padding
+        width = (adaptiveScreenWidth - marginHorizontal) / CGFloat(columns)
+        height = (adaptiveScreenHeight - marginVertical) / CGFloat(rows)
     }
 }
 
@@ -60,12 +60,17 @@ class MainGridViewModel: ObservableObject {
         return UIDevice.current.orientation.isLandscape ? 3 : 4
     }
 
-    init () {
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+    init() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(rotated),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
     }
 
     func getPageLayoutForSinglePage(itemCount: Int) -> Page {
-        var columns: Int = Int(CGFloat(itemCount) / maxRows) + 1
+        var columns = Int(CGFloat(itemCount) / maxRows) + 1
         if columns == 0 {
             return Page(columns: 1, rows: 1)
         }
@@ -91,37 +96,46 @@ class MainGridViewModel: ObservableObject {
         }
 
         if numberOfFullLayouts > 0 {
-            var pages = Array(repeating: Page(columns: Int(maxColumn), rows: Int(maxRows)), count: numberOfFullLayouts)
-            let addedElements: CGFloat = CGFloat(numberOfFullLayouts) * maxCellsPerLayout
+            var pages = Array(
+                repeating: Page(columns: Int(maxColumn), rows: Int(maxRows)),
+                count: numberOfFullLayouts
+            )
+            let addedElements = CGFloat(numberOfFullLayouts) * maxCellsPerLayout
             let remaining = CGFloat(itemCount) - addedElements
 
             if remaining > 0 {
                 let numberOfRemainingLayouts = Int(ceil(remaining / minCellsPerLayout))
-                pages.append(contentsOf: Array(repeating: Page(columns: Int(maxColumn), rows: (Int(maxRows) - 1)), count: numberOfRemainingLayouts))
+                pages.append(contentsOf: Array(
+                    repeating: Page(columns: Int(maxColumn), rows: Int(maxRows) - 1),
+                    count: numberOfRemainingLayouts
+                ))
             }
             return pages
         } else {
             let numberOfLayouts = Int(ceil(CGFloat(itemCount) / minCellsPerLayout))
-            return Array(repeating: Page(columns: Int(maxColumn), rows: (Int(maxRows) - 1)), count: numberOfLayouts)
+            return Array(
+                repeating: Page(columns: Int(maxColumn), rows: Int(maxRows) - 1),
+                count: numberOfLayouts
+            )
         }
     }
 
     func isFirstPage(index: Int) -> Bool {
-        guard let firstPage = self.pages.first else { return true }
+        guard let firstPage = pages.first else { return true }
         let itemsCount = firstPage.columns * firstPage.rows
         return index < itemsCount
     }
 
     func updatedLayout(participantsCount: Int, firstParticipant: String) {
-        if self.count != participantsCount {
-            self.count = participantsCount
-            self.pages = getPages(itemCount: participantsCount)
+        if count != participantsCount {
+            count = participantsCount
+            pages = getPages(itemCount: participantsCount)
         }
         self.firstParticipant = firstParticipant
     }
 
     @objc
     func rotated() {
-        self.pages = getPages(itemCount: count)
+        pages = getPages(itemCount: count)
     }
 }

@@ -54,22 +54,22 @@ final class DBContainer {
     private let dbVersions = [1, 2]
 
     func removeDBForAccount(account: String, removeFolder: Bool) {
-        self.connectionsSemaphore.wait()
+        connectionsSemaphore.wait()
         connections[account] = nil
-        self.connectionsSemaphore.signal()
+        connectionsSemaphore.signal()
         if !removeFolder { return }
-        self.removeAccountFolder(accountId: account)
+        removeAccountFolder(accountId: account)
     }
 
     func removeDBForAccount(account: String) {
-        self.connectionsSemaphore.wait()
+        connectionsSemaphore.wait()
         connections[account] = nil
-        self.connectionsSemaphore.signal()
-        self.removeDBNamed(dbName: "\(account).db")
+        connectionsSemaphore.signal()
+        removeDBNamed(dbName: "\(account).db")
     }
 
     func forAccount(account: String) -> Connection? {
-        self.connectionsSemaphore.wait()
+        connectionsSemaphore.wait()
         defer {
             self.connectionsSemaphore.signal()
         }
@@ -128,9 +128,11 @@ final class DBContainer {
         return fileManager.fileExists(atPath: path)
     }
 
-    func contactProfilePath(accountId: String, profileURI: String, createifNotExists: Bool) -> String? {
+    func contactProfilePath(accountId: String, profileURI: String,
+                            createifNotExists: Bool) -> String? {
         guard let profilesFolder = contactsPath(accountId: accountId,
-                                                createIfNotExists: createifNotExists) else { return nil }
+                                                createIfNotExists: createifNotExists)
+        else { return nil }
         return profilesFolder + "\(profileURI.toBase64()).vcf"
     }
 
@@ -145,12 +147,20 @@ final class DBContainer {
     }
 
     func isContactProfileExists(accountId: String, profileURI: String) -> Bool {
-        guard let path = contactProfilePath(accountId: accountId, profileURI: profileURI, createifNotExists: false) else { return false }
+        guard let path = contactProfilePath(
+            accountId: accountId,
+            profileURI: profileURI,
+            createifNotExists: false
+        ) else { return false }
         return isFileExists(path: path)
     }
 
     func removeProfile(accountId: String, profileURI: String) {
-        guard let path = contactProfilePath(accountId: accountId, profileURI: profileURI, createifNotExists: false) else { return }
+        guard let path = contactProfilePath(
+            accountId: accountId,
+            profileURI: profileURI,
+            createifNotExists: false
+        ) else { return }
         do {
             try FileManager.default.removeItem(atPath: path)
         } catch _ as NSError {}
@@ -158,7 +168,7 @@ final class DBContainer {
 
     func isMigrationToDBv2Needed(for accountId: String) -> Bool {
         if !isDbExists(accountId: accountId) { return true }
-        guard let dbase = self.forAccount(account: accountId) else {
+        guard let dbase = forAccount(account: accountId) else {
             return true
         }
         let table = Table("profiles")
@@ -174,7 +184,8 @@ final class DBContainer {
         guard let dbPath = Constants.documentsPath else { return }
         let url = NSURL(fileURLWithPath: dbPath.path)
         guard let pathComponent = url
-                .appendingPathComponent("/" + dbName) else {
+                .appendingPathComponent("/" + dbName)
+        else {
             return
         }
         let filePath = pathComponent.path
@@ -205,7 +216,8 @@ final class DBContainer {
         if isDbExists(accountId: accountId) { return true }
         guard let dbPath = Constants.documentsPath else { return false }
         let url = NSURL(fileURLWithPath: dbPath.path)
-        guard let oldPath = url.appendingPathComponent("/" + "\(accountId).db") else { return false }
+        guard let oldPath = url.appendingPathComponent("/" + "\(accountId).db")
+        else { return false }
         guard let newPath = accountDbPath(accountId: accountId) else { return false }
         let fileManager = FileManager.default
         do {
@@ -217,7 +229,8 @@ final class DBContainer {
     }
 
     func removeContacts(accountId: String) {
-        guard let contacts = self.contactsPath(accountId: accountId, createIfNotExists: false) else { return }
+        guard let contacts = contactsPath(accountId: accountId, createIfNotExists: false)
+        else { return }
         let fileManager = FileManager.default
         do {
             try fileManager.removeItem(atPath: contacts)
@@ -225,7 +238,7 @@ final class DBContainer {
     }
 
     func removeAccountFolder(accountId: String) {
-        guard let account = self.accountFolderPath(accountId: accountId) else { return }
+        guard let account = accountFolderPath(accountId: accountId) else { return }
         let fileManager = FileManager.default
         do {
             try fileManager.removeItem(atPath: account)
@@ -233,8 +246,8 @@ final class DBContainer {
     }
 }
 
-extension Connection {
-    public var userVersion: Int? {
+public extension Connection {
+    var userVersion: Int? {
         get {
             if let version = try? scalar("PRAGMA user_version"),
                let intVersion = version as? Int64 { return Int(intVersion) }

@@ -17,16 +17,14 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-import RxSwift
 import RxCocoa
+import RxSwift
 
 class CreateSipAccountViewModel: Stateable, ViewModel {
-
     // MARK: - Rx Stateable
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
 
     var userName = BehaviorRelay<String>(value: "")
     var password = BehaviorRelay<String>(value: "")
@@ -34,13 +32,13 @@ class CreateSipAccountViewModel: Stateable, ViewModel {
     private let accountsService: AccountsService
 
     required init(with injectionBag: InjectionBag) {
-        self.accountsService = injectionBag.accountService
+        accountsService = injectionBag.accountService
     }
 
     func createSipaccount() {
-        let created = self.accountsService.addSipAccount(userName: userName.value,
-                                                         password: password.value,
-                                                         sipServer: sipServer.value)
+        let created = accountsService.addSipAccount(userName: userName.value,
+                                                    password: password.value,
+                                                    sipServer: sipServer.value)
         if created {
             DispatchQueue.main.async {
                 self.stateSubject.onNext(WalkthroughState.accountCreated)

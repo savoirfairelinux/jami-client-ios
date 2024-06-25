@@ -22,10 +22,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+// swiftlint:disable file_length
 import Foundation
-import RxSwift
-import RxRelay
 import RxCocoa
+import RxRelay
+import RxSwift
 import SwiftUI
 import SwiftyBeaver
 
@@ -81,29 +82,31 @@ enum MessagePanelState: State {
         default:
             return ""
         }
-
     }
 }
 
 // swiftlint:disable type_body_length
 class MessagesListVM: ObservableObject {
-
     // view properties
     var contextMenuModel = ContextMenuVM()
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
-    @Published var scrollToReplyTarget: String? // message id of a reply target that we should scroll
-    var temporaryReplyTarget: String? // used to keep a message id of a reply target that we should scroll if this message not loaded yet. ScrollToReplyTarget should be updated after messages loaded
+    @Published var scrollToReplyTarget: String? // message id of a reply target that we should
+    // scroll
+    var temporaryReplyTarget: String? // used to keep a message id of a reply target that we should
+    // scroll if this message not loaded yet. ScrollToReplyTarget should be updated after messages
+    // loaded
     @Published var swarmColor = UIColor.defaultSwarmColor {
         didSet {
-            self.messagesModels.forEach { message in
+            for message in messagesModels {
                 message.swarmColorUpdated(color: swarmColor)
             }
         }
     }
+
     @Published var atTheBottom = true {
         didSet {
-            lastMessageBeforeScroll = atTheBottom ? nil : self.messagesModels.first?.message.id
+            lastMessageBeforeScroll = atTheBottom ? nil : messagesModels.first?.message.id
             if atTheBottom {
                 withAnimation { [weak self] in
                     guard let self = self else { return }
@@ -112,22 +115,24 @@ class MessagesListVM: ObservableObject {
             }
         }
     }
+
     @Published var numberOfNewMessages: Int = 0
     @Published var screenTapped: Bool = false
     @Published var shouldShowMap: Bool = false
     @Published var coordinates = [LocationSharingAnnotation]()
-    @Published var locationSharingiewModel: LocationSharingViewModel = LocationSharingViewModel()
+    @Published var locationSharingiewModel: LocationSharingViewModel = .init()
     @Published var isTemporary: Bool = false
     @Published var name: String = "" {
         didSet {
             updateSyncMessageIfNeeded()
         }
     }
+
     @Published var isSyncing: Bool = false
     @Published var syncMessage = ""
     private let log = SwiftyBeaver.self
-    var contactAvatar: UIImage = UIImage()
-    var currentAccountAvatar: UIImage = UIImage()
+    var contactAvatar: UIImage = .init()
+    var currentAccountAvatar: UIImage = .init()
     var myContactsLocation: CLLocationCoordinate2D?
     var myCoordinate: CLLocationCoordinate2D?
     // jams
@@ -147,14 +152,10 @@ class MessagesListVM: ObservableObject {
 
     // state
     private let contextStateSubject = PublishSubject<State>()
-    lazy var contextMenuState: Observable<State> = {
-        return self.contextStateSubject.share()
-    }()
+    lazy var contextMenuState: Observable<State> = self.contextStateSubject.share()
 
     private let messagePanelStateSubject = PublishSubject<State>()
-    lazy var messagePanelState: Observable<State> = {
-        return self.messagePanelStateSubject.asObservable()
-    }()
+    lazy var messagePanelState: Observable<State> = self.messagePanelStateSubject.asObservable()
 
     var lastMessage = BehaviorRelay<String>(value: "")
     var lastMessageDate = BehaviorRelay<String>(value: "")
@@ -167,16 +168,27 @@ class MessagesListVM: ObservableObject {
     var lastMessageBeforeScroll: String?
 
     var loading = true // to avoid a new loading while previous one still executing
-    var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: BehaviorRelay<UIImage?>]())
-    var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: String]())
+    var avatars = ConcurentDictionary(
+        name: "com.AvatarsAccesDictionary",
+        dictionary: [String: BehaviorRelay<UIImage?>]()
+    )
+    var names = ConcurentDictionary(
+        name: "com.NamesAccesDictionary",
+        dictionary: [String: String]()
+    )
     // last read
     // dictionary of participant id and last read message Id
-    var lastReadMessageForParticipant = ConcurentDictionary(name: "com.ReadMessageForParticipantAccesDictionary",
-                                                            dictionary: [String: String]())
+    var lastReadMessageForParticipant = ConcurentDictionary(
+        name: "com.ReadMessageForParticipantAccesDictionary",
+        dictionary: [String: String]()
+    )
     // dictionary of message id and array of participants for whom the message is last read
     var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
                                        dictionary: [String: BehaviorRelay<[String: UIImage]?>]())
-    private let subscriptionQueue = DispatchQueue(label: "com.myapp.subscriptionQueue", qos: .userInitiated)
+    private let subscriptionQueue = DispatchQueue(
+        label: "com.myapp.subscriptionQueue",
+        qos: .userInitiated
+    )
     var lastDelivered: MessageContainerModel? {
         didSet {
             if let previous = oldValue {
@@ -190,43 +202,44 @@ class MessagesListVM: ObservableObject {
             }
         }
     }
+
     var conversation: ConversationModel! {
         didSet {
             subscriptionQueue.async { [weak self] in
                 guard let self = self else { return }
                 self.invalidateAndSetupConversationSubscriptions()
             }
-            self.updateColorPreference()
-            self.updateLastDisplayed()
+            updateColorPreference()
+            updateLastDisplayed()
         }
     }
 
     func invalidateAndSetupConversationSubscriptions() {
-        self.conversationDisposeBag = DisposeBag()
-        self.subscribeForNewMessages()
-        self.subscribeMessageUpdates()
-        self.subscribeReactions()
+        conversationDisposeBag = DisposeBag()
+        subscribeForNewMessages()
+        subscribeMessageUpdates()
+        subscribeReactions()
     }
 
-    init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
-        self.requestsService = injectionBag.requestsService
-        self.conversation = ConversationModel()
-        self.accountService = injectionBag.accountService
-        self.profileService = injectionBag.profileService
-        self.dataTransferService = injectionBag.dataTransferService
-        self.conversationService = injectionBag.conversationsService
-        self.contactsService = injectionBag.contactsService
-        self.nameService = injectionBag.nameService
+    init(injectionBag: InjectionBag, transferHelper: TransferHelper) {
+        requestsService = injectionBag.requestsService
+        conversation = ConversationModel()
+        accountService = injectionBag.accountService
+        profileService = injectionBag.profileService
+        dataTransferService = injectionBag.dataTransferService
+        conversationService = injectionBag.conversationsService
+        contactsService = injectionBag.contactsService
+        nameService = injectionBag.nameService
         self.transferHelper = transferHelper
-        self.locationSharingService = injectionBag.locationSharingService
-        self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject)
-        self.contextMenuModel.currentJamiAccountId = self.accountService.currentAccount?.jamiId
-        self.subscribeLocationEvents()
-        self.subscribeSwarmPreferences()
-        self.subscribeUserAvatarForLocationSharing()
-        self.subscribeReplyTarget()
-        self.subscribeMessagesActions()
-        self.subscribeContextMenu()
+        locationSharingService = injectionBag.locationSharingService
+        messagePanel = MessagePanelVM(messagePanelState: messagePanelStateSubject)
+        contextMenuModel.currentJamiAccountId = accountService.currentAccount?.jamiId
+        subscribeLocationEvents()
+        subscribeSwarmPreferences()
+        subscribeUserAvatarForLocationSharing()
+        subscribeReplyTarget()
+        subscribeMessagesActions()
+        subscribeContextMenu()
     }
 
     func subscribeScreenTapped(screenTapped: Observable<Bool>) {
@@ -235,26 +248,26 @@ class MessagesListVM: ObservableObject {
                 guard let self = self else { return }
                 self.screenTapped = event
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func subscribeBestName(bestName: Observable<String>) {
-        self.messagePanel.subscribeBestName(bestName: bestName)
+        messagePanel.subscribeBestName(bestName: bestName)
     }
 
     func updateSyncMessageIfNeeded() {
         if name.isEmpty { return }
-        self.syncMessage = L10n.Conversation.synchronizationMessage(name)
+        syncMessage = L10n.Conversation.synchronizationMessage(name)
     }
 
     func sendRequest() {
-        guard let conversation = self.conversation,
+        guard let conversation = conversation,
               let jamiId = conversation.getParticipants().first?.jamiId else { return }
         var avatar: String?
-        if let avatarData = self.jamsAvatarData {
+        if let avatarData = jamsAvatarData {
             avatar = String(data: avatarData, encoding: .utf8)
         }
-        self.requestsService
+        requestsService
             .sendContactRequest(to: jamiId,
                                 withAccountId: conversation.accountId,
                                 avatar: avatar,
@@ -264,25 +277,25 @@ class MessagesListVM: ObservableObject {
                     guard let self = self else { return }
                     self.isTemporary = false
                 }
-            }, onError: { [weak self] (_) in
+            }, onError: { [weak self] _ in
                 self?.log.error("error sending contact request")
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
-    func receiveReply(newMessage: MessageContainerModel, fromHistory: Bool) {
+    func receiveReply(newMessage: MessageContainerModel, fromHistory _: Bool) {
         let replyId = newMessage.message.reply
-        if let replyContentTarget = self.getReplyContentTarget(for: replyId) {
+        if let replyContentTarget = getReplyContentTarget(for: replyId) {
             newMessage.replyTarget.target = replyContentTarget
-        } else if let message = self.conversation.getMessage(messageId: replyId) {
+        } else if let message = conversation.getMessage(messageId: replyId) {
             newMessage.setReplyTarget(message: message)
         } else {
-            self.loadReplyTarget(newMessage: newMessage)
+            loadReplyTarget(newMessage: newMessage)
         }
     }
 
     private func getReplyContentTarget(for replyId: String) -> MessageContentVM? {
-        if let replyContent = self.getMessage(messageId: replyId) {
+        if let replyContent = getMessage(messageId: replyId) {
             return replyContent.messageContent
         }
         return nil
@@ -290,20 +303,24 @@ class MessagesListVM: ObservableObject {
 
     func loadReplyTarget(newMessage: MessageContainerModel) {
         let replyId = newMessage.message.reply
-        let result = self.conversationService.loadTargetReply(conversationId: self.conversation.id, accountId: self.conversation.accountId, target: replyId)
-        if case .messageFound(let message) = result {
+        let result = conversationService.loadTargetReply(
+            conversationId: conversation.id,
+            accountId: conversation.accountId,
+            target: replyId
+        )
+        if case let .messageFound(message) = result {
             newMessage.setReplyTarget(message: message)
         }
     }
 
     func getMessage(messageId: String) -> MessageContainerModel? {
-        return self.messagesModels.filter({ messageModel in
+        return messagesModels.filter { messageModel in
             messageModel.message.id == messageId
-        }).first
+        }.first
     }
 
     func targetReplyReceived(target: MessageModel) {
-        self.messagesModels.forEach { [weak self, weak target] messageModel in
+        messagesModels.forEach { [weak self, weak target] messageModel in
             guard let self = self, let target = target else { return }
             self.updateTargetReplyIfNeed(target: target, container: messageModel)
         }
@@ -318,7 +335,7 @@ class MessagesListVM: ObservableObject {
     }
 
     func subscribeLocationEvents() {
-        self.locationSharingService
+        locationSharingService
             .peerUriAndLocationReceived
             .subscribe(onNext: { [weak self] tuple in
                 guard let self = self else { return }
@@ -331,9 +348,9 @@ class MessagesListVM: ObservableObject {
                     self.updateCoordinatesList()
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.locationSharingService.currentLocation
+        locationSharingService.currentLocation
             .subscribe(onNext: { [weak self] myCurrentLocation in
                 guard let self = self else { return }
                 if let myCurrentLocation = myCurrentLocation {
@@ -343,78 +360,100 @@ class MessagesListVM: ObservableObject {
                 }
                 self.updateCoordinatesList()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func subscribeUserAvatarForLocationSharing() {
-        profileService.getAccountProfile(accountId: self.conversation.accountId)
+        profileService.getAccountProfile(accountId: conversation.accountId)
             .subscribe(onNext: { [weak self] profile in
                 guard let self = self else { return }
-                let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId)
-                let defaultAvatar = UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 16)
+                let account = self.accountService
+                    .getAccount(fromAccountId: self.conversation.accountId)
+                let defaultAvatar = UIImage.defaultJamiAvatarFor(
+                    profileName: profile.alias,
+                    account: account,
+                    size: 16
+                )
                 if let photo = profile.photo,
                    let data = NSData(base64Encoded: photo,
-                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                                     options: NSData.Base64DecodingOptions
+                                        .ignoreUnknownCharacters) as Data? {
                     self.currentAccountAvatar = UIImage(data: data) ?? defaultAvatar
                 } else {
                     self.currentAccountAvatar = defaultAvatar
                 }
                 self.updateCoordinatesList()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func subscribeReplyTarget() {
-        self.conversationService.replyTargets
+        conversationService.replyTargets
             .subscribe(onNext: { [weak self] targets in
                 guard let self = self else { return }
                 for target in targets {
                     self.targetReplyReceived(target: target)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func subscribeReactions() {
-        self.conversation.reactionsUpdated
+        conversation.reactionsUpdated
             .subscribe(onNext: { [weak self] messageId in
                 guard let self = self else { return }
                 self.reactionsUpdated(messageId: messageId)
             })
-            .disposed(by: self.conversationDisposeBag)
+            .disposed(by: conversationDisposeBag)
     }
 
     func subscribeContextMenu() {
-        self.contextMenuModel.sendEmojiUpdate
+        contextMenuModel.sendEmojiUpdate
             .subscribe(onNext: { [weak self] event in
                 if let self = self, !event.isEmpty {
                     switch event["action"] {
                     case ReactionCommand.apply.toString():
                         if let dat = event["data"], let mId = event["parentMessageId"] {
-                            self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: dat, parentId: mId)
+                            self.conversationService.sendEmojiReactionMessage(
+                                conversationId: self.conversation.id,
+                                accountId: self.conversation.accountId,
+                                message: dat,
+                                parentId: mId
+                            )
                         } else {
-                            self.log.error("[MessagesListVM] Invalid data provided while trying to add a reaction a message.")
+                            self.log
+                                .error(
+                                    "[MessagesListVM] Invalid data provided while trying to add a reaction a message."
+                                )
                         }
                     case ReactionCommand.revoke.toString():
                         if let rId = event["reactionId"] {
-                            self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: rId)
+                            self.conversationService.editSwarmMessage(
+                                conversationId: self.conversation.id,
+                                accountId: self.conversation.accountId,
+                                message: "",
+                                parentId: rId
+                            )
                         } else {
-                            self.log.error("[MessagesListVM] Invalid message ID provided while trying to revoke a reaction from a message.")
+                            self.log
+                                .error(
+                                    "[MessagesListVM] Invalid message ID provided while trying to revoke a reaction from a message."
+                                )
                         }
                     default: break
                     }
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func subscribeMessageUpdates() {
-        self.conversation.messageUpdated
+        conversation.messageUpdated
             .subscribe(onNext: { [weak self] messageId in
                 guard let self = self else { return }
                 self.messageUpdated(messageId: messageId)
             })
-            .disposed(by: self.conversationDisposeBag)
+            .disposed(by: conversationDisposeBag)
     }
 
     func subscribeForNewMessages() {
@@ -428,7 +467,10 @@ class MessagesListVM: ObservableObject {
                     return
                 }
                 var insertionCount = 0
-                for newMessage in messages.messages where self.insert(newMessage: newMessage, fromHistory: messages.fromHistory) == true {
+                for newMessage in messages.messages where self.insert(
+                    newMessage: newMessage,
+                    fromHistory: messages.fromHistory
+                ) == true {
                     insertionCount += 1
                 }
                 if insertionCount == 0 {
@@ -437,7 +479,7 @@ class MessagesListVM: ObservableObject {
                 self.computeSequencing()
                 self.updateNumberOfNewMessages()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                    guard let self = self else {return }
+                    guard let self = self else { return }
                     self.loading = false
                     // check if we have reply target to scroll to.
                     if let tempTarget = self.temporaryReplyTarget,
@@ -447,28 +489,27 @@ class MessagesListVM: ObservableObject {
                     }
                 }
             } onError: { _ in
-
             }
-            .disposed(by: self.conversationDisposeBag)
+            .disposed(by: conversationDisposeBag)
     }
 
     func messageUpdated(messageId: String) {
-        guard let message = self.getMessage(messageId: messageId) else { return }
-        self.updateLastRead(message: message)
-        self.updateLastDelivered(message: message)
+        guard let message = getMessage(messageId: messageId) else { return }
+        updateLastRead(message: message)
+        updateLastDelivered(message: message)
         message.messageUpdated()
-        self.computeSequencing()
+        computeSequencing()
     }
 
     func reactionsUpdated(messageId: String) {
-        guard let message = self.getMessage(messageId: messageId) else { return }
+        guard let message = getMessage(messageId: messageId) else { return }
         message.reactionsUpdated()
     }
 
     func scrolledToTargetReply() {
-        guard let messageId = self.scrollToReplyTarget else { return }
-        let message = self.getMessage(messageId: messageId)
-        self.scrollToReplyTarget = nil
+        guard let messageId = scrollToReplyTarget else { return }
+        let message = getMessage(messageId: messageId)
+        scrollToReplyTarget = nil
         if let message = message {
             message.startTargetReplyAnimation()
         }
@@ -476,11 +517,17 @@ class MessagesListVM: ObservableObject {
 
     private func updateCoordinatesList() {
         var coordinates = [LocationSharingAnnotation]()
-        if let myContactsLocation = self.myContactsLocation {
-            coordinates.append(LocationSharingAnnotation(coordinate: myContactsLocation, avatar: self.contactAvatar))
+        if let myContactsLocation = myContactsLocation {
+            coordinates.append(LocationSharingAnnotation(
+                coordinate: myContactsLocation,
+                avatar: contactAvatar
+            ))
         }
-        if let myLocation = self.myCoordinate {
-            coordinates.append(LocationSharingAnnotation(coordinate: myLocation, avatar: self.currentAccountAvatar))
+        if let myLocation = myCoordinate {
+            coordinates.append(LocationSharingAnnotation(
+                coordinate: myLocation,
+                avatar: currentAccountAvatar
+            ))
         }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -490,40 +537,43 @@ class MessagesListVM: ObservableObject {
     }
 
     private func insert(newMessage: MessageModel, fromHistory: Bool) -> Bool {
-        guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
+        guard let localJamiId = accountService.getAccount(fromAccountId: conversation.accountId)?
+                .jamiId
+        else {
             return false
         }
-        if self.messagesModels.contains(where: { messageModel in
+        if messagesModels.contains(where: { messageModel in
             messageModel.message.id == newMessage.id
         }) { return false }
         let isHistory = newMessage.isReply()
         let container =
             MessageContainerModel(message: newMessage,
-                                  contextMenuState: self.contextStateSubject,
+                                  contextMenuState: contextStateSubject,
                                   isHistory: isHistory,
-                                  localJamiId: localJamiId, preferencesColor: self.conversation.preferences.getColor())
-        self.subscribeMessage(container: container)
+                                  localJamiId: localJamiId,
+                                  preferencesColor: conversation.preferences.getColor())
+        subscribeMessage(container: container)
         if fromHistory {
-            self.messagesModels.append(container)
+            messagesModels.append(container)
         } else {
-            self.messagesModels.insert(container, at: 0)
+            messagesModels.insert(container, at: 0)
         }
-        self.updateLastRead(message: container)
-        self.updateLastDelivered(message: container)
+        updateLastRead(message: container)
+        updateLastDelivered(message: container)
         if newMessage.isReply() {
-            self.receiveReply(newMessage: container, fromHistory: fromHistory)
+            receiveReply(newMessage: container, fromHistory: fromHistory)
         }
 
-        if self.messagesModels.count > 1 && fromHistory {
+        if messagesModels.count > 1 && fromHistory {
             return true
         }
         lastMessageDisposeBag = DisposeBag()
-        self.lastMessageDate.accept(newMessage.receivedDate.conversationTimestamp())
+        lastMessageDate.accept(newMessage.receivedDate.conversationTimestamp())
         if newMessage.type != .contact {
-            self.lastMessage.accept(newMessage.content)
+            lastMessage.accept(newMessage.content)
         } else {
             container.contactViewModel.observableContent
-                .startWith( container.contactViewModel.observableContent.value)
+                .startWith(container.contactViewModel.observableContent.value)
                 .subscribe { [weak self] content in
                     guard let self = self else { return }
                     self.lastMessage.accept(content)
@@ -537,14 +587,18 @@ class MessagesListVM: ObservableObject {
     func getLastReadIndices() -> [Int]? {
         var lastReadIndices: [Int]?
 
-        let lastReadMessages = self.lastReadMessageForParticipant.values().compactMap({ $0 as? String }).filter({ !$0.isEmpty })
+        let lastReadMessages = lastReadMessageForParticipant.values().compactMap { $0 as? String }
+            .filter { !$0.isEmpty }
         lastReadIndices = lastReadMessages.compactMap { messageId in
             self.messagesModels.firstIndex { $0.id == messageId }
         }
         return lastReadIndices
     }
 
-    private func areDeliveredIndexesSmallerThanRead(deliveredMessageIndex: Int, lastReadIndices: [Int]?) -> Bool {
+    private func areDeliveredIndexesSmallerThanRead(
+        deliveredMessageIndex: Int,
+        lastReadIndices: [Int]?
+    ) -> Bool {
         guard let lastReadIndices = lastReadIndices else { return true }
         return lastReadIndices.allSatisfy { deliveredMessageIndex < $0 }
     }
@@ -559,11 +613,16 @@ class MessagesListVM: ObservableObject {
         // get indeces of last read messages
         let lastReadIndices = getLastReadIndices()
 
-        guard let index = self.messagesModels.firstIndex(where: { $0.id == message.id }) else { return }
+        guard let index = messagesModels.firstIndex(where: { $0.id == message.id }) else { return }
 
-        guard let lastDelivered = self.lastDelivered,
-              let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }) else {
-            if areDeliveredIndexesSmallerThanRead(deliveredMessageIndex: index, lastReadIndices: lastReadIndices) {
+        guard let lastDelivered = lastDelivered,
+              let lastDeliveredIndex = messagesModels
+                .firstIndex(where: { $0.id == lastDelivered.id })
+        else {
+            if areDeliveredIndexesSmallerThanRead(
+                deliveredMessageIndex: index,
+                lastReadIndices: lastReadIndices
+            ) {
                 self.lastDelivered = message
             }
             return
@@ -571,8 +630,12 @@ class MessagesListVM: ObservableObject {
 
         let newDeliveredIndex = min(index, lastDeliveredIndex)
 
-        // if read message is latest than delivered, remove indicator for read from previous delivered
-        if !areDeliveredIndexesSmallerThanRead(deliveredMessageIndex: newDeliveredIndex, lastReadIndices: lastReadIndices) {
+        // if read message is latest than delivered, remove indicator for read from previous
+        // delivered
+        if !areDeliveredIndexesSmallerThanRead(
+            deliveredMessageIndex: newDeliveredIndex,
+            lastReadIndices: lastReadIndices
+        ) {
             self.lastDelivered = nil
         } else if index < lastDeliveredIndex {
             // otherwise update last delivered message
@@ -581,12 +644,12 @@ class MessagesListVM: ObservableObject {
     }
 
     private func getMessageIndex(messageId: String) -> Int? {
-        return self.messagesModels.firstIndex(where: { $0.id == messageId })
+        return messagesModels.firstIndex(where: { $0.id == messageId })
     }
 
     private func updateLastRead(message: MessageContainerModel, participantId: String) {
         guard !message.message.incoming, message.message.status == .displayed,
-              let newIndex = self.getMessageIndex(messageId: message.id) else { return }
+              let newIndex = getMessageIndex(messageId: message.id) else { return }
         /*
          If there is no current last read message for the participant, set this
          message as the last read. Otherwise, check if the new message appears
@@ -594,31 +657,36 @@ class MessagesListVM: ObservableObject {
          and update it accordingly.
          */
 
-        guard let currentLastReadMessageId = self.lastReadMessageForParticipant.get(key: participantId) as? String,
-              let currentIndex = self.getMessageIndex(messageId: currentLastReadMessageId) else {
-            self.lastReadMessageForParticipant.set(value: message.id, for: participantId)
-            self.updateSubscriptionLastRead(messageId: message.id)
-            self.removeDeliveredStatusIfNeed()
+        guard let currentLastReadMessageId = lastReadMessageForParticipant
+                .get(key: participantId) as? String,
+              let currentIndex = getMessageIndex(messageId: currentLastReadMessageId)
+        else {
+            lastReadMessageForParticipant.set(value: message.id, for: participantId)
+            updateSubscriptionLastRead(messageId: message.id)
+            removeDeliveredStatusIfNeed()
             return
         }
 
         if newIndex < currentIndex {
-            self.lastReadMessageForParticipant.set(value: message.id, for: participantId)
+            lastReadMessageForParticipant.set(value: message.id, for: participantId)
             // remove last read indicator from previous last read message
-            self.updateSubscriptionLastRead(messageId: currentLastReadMessageId)
+            updateSubscriptionLastRead(messageId: currentLastReadMessageId)
             // add last read indicator to new last read message
-            self.updateSubscriptionLastRead(messageId: message.id)
+            updateSubscriptionLastRead(messageId: message.id)
         }
 
-        self.removeDeliveredStatusIfNeed()
+        removeDeliveredStatusIfNeed()
     }
 
     private func removeDeliveredStatusIfNeed() {
         // check if delivered status should be removed
-        guard let lastDelivered = self.lastDelivered,
-              let lastDeliveredIndex = self.getMessageIndex(messageId: lastDelivered.id)  else { return }
+        guard let lastDelivered = lastDelivered,
+              let lastDeliveredIndex = getMessageIndex(messageId: lastDelivered.id) else { return }
         let lastReadIndices = getLastReadIndices()
-        if !self.areDeliveredIndexesSmallerThanRead(deliveredMessageIndex: lastDeliveredIndex, lastReadIndices: lastReadIndices) {
+        if !areDeliveredIndexesSmallerThanRead(
+            deliveredMessageIndex: lastDeliveredIndex,
+            lastReadIndices: lastReadIndices
+        ) {
             self.lastDelivered = nil
         }
     }
@@ -632,17 +700,20 @@ class MessagesListVM: ObservableObject {
     // swiftlint:disable cyclomatic_complexity
     private func subscribeMessage(container: MessageContainerModel) {
         if container.message.type == .fileTransfer {
-            self.conversationService
+            conversationService
                 .sharedResponseStream
-                .filter({ [weak container] (transferEvent) in
+                .filter { [weak container] transferEvent in
                     guard let container = container,
-                          let transferId: String = transferEvent.getEventInput(ServiceEventInput.transferId) else { return false }
-                    return  transferEvent.eventType == ServiceEventType.dataTransferMessageUpdated &&
+                          let transferId: String = transferEvent
+                            .getEventInput(ServiceEventInput.transferId) else { return false }
+                    return transferEvent.eventType == ServiceEventType.dataTransferMessageUpdated &&
                         container.message.daemonId == transferId
-                })
+                }
                 .subscribe(onNext: { [weak container] transferEvent in
                     guard let container = container,
-                          let transferStatus: DataTransferStatus = transferEvent.getEventInput(ServiceEventInput.state) else {
+                          let transferStatus: DataTransferStatus = transferEvent
+                            .getEventInput(ServiceEventInput.state)
+                    else {
                         return
                     }
                     container.message.transferStatus = transferStatus
@@ -651,13 +722,14 @@ class MessagesListVM: ObservableObject {
                 .disposed(by: container.disposeBag)
         }
         container.messageInfoState.subscribe { [weak self, weak container] state in
-            guard let self = self, let container = container, let state = state as? MessageInfo else { return }
+            guard let self = self, let container = container,
+                  let state = state as? MessageInfo else { return }
             switch state {
-            case .updateAvatar(let jamiId, let message):
+            case let .updateAvatar(jamiId, message):
                 self.getAvatar(jamiId: jamiId, message: message, messageId: container.id)
-            case .updateRead(let messageId, let message):
+            case let .updateRead(messageId, message):
                 self.getLastRead(message: message, messageId: messageId)
-            case .updateDisplayname(let jamiId, let message):
+            case let .updateDisplayname(jamiId, message):
                 self.getName(jamiId: jamiId, message: message, messageId: container.id)
             }
         } onError: { _ in
@@ -666,77 +738,97 @@ class MessagesListVM: ObservableObject {
         container.messageTransferState.subscribe { [weak self] state in
             guard let self = self, let state = state as? TransferState else { return }
             switch state {
-            case .accept(let viewModel):
-                _ = self.transferHelper.acceptTransfer(conversation: self.conversation, message: viewModel.message)
-            case .cancel(let viewModel):
-                _ = self.transferHelper.cancelTransfer(conversation: self.conversation, message: viewModel.message)
-            case .getProgress(let viewModel):
-                if let progress = self.transferHelper.getTransferProgress(conversation: self.conversation, message: viewModel.message) {
+            case let .accept(viewModel):
+                _ = self.transferHelper.acceptTransfer(
+                    conversation: self.conversation,
+                    message: viewModel.message
+                )
+            case let .cancel(viewModel):
+                _ = self.transferHelper.cancelTransfer(
+                    conversation: self.conversation,
+                    message: viewModel.message
+                )
+            case let .getProgress(viewModel):
+                if let progress = self.transferHelper.getTransferProgress(
+                    conversation: self.conversation,
+                    message: viewModel.message
+                ) {
                     viewModel.updateProgress(progress: CGFloat(progress))
                 }
-            case .getSize(let viewModel):
-                if let size = self.transferHelper.getTransferSize(conversation: self.conversation, message: viewModel.message) {
+            case let .getSize(viewModel):
+                if let size = self.transferHelper.getTransferSize(
+                    conversation: self.conversation,
+                    message: viewModel.message
+                ) {
                     viewModel.updateFileSize(size: size)
                 }
-            case .getURL(let viewModel):
+            case let .getURL(viewModel):
                 if viewModel.url != nil { return }
-                let url = self.transferHelper.getFileURL(conversation: self.conversation, message: viewModel.message)
+                let url = self.transferHelper.getFileURL(
+                    conversation: self.conversation,
+                    message: viewModel.message
+                )
                 viewModel.updateFileURL(url: url)
-            case .getPlayer(let viewModel):
+            case let .getPlayer(viewModel):
                 if viewModel.player != nil { return }
-                viewModel.updatePlayer(player: self.transferHelper.getPlayer(conversation: self.conversation, message: viewModel.message))
+                viewModel.updatePlayer(player: self.transferHelper.getPlayer(
+                    conversation: self.conversation,
+                    message: viewModel.message
+                ))
             }
         } onError: { _ in
         }
         .disposed(by: container.disposeBag)
         container.listenerForInfoStateAdded()
     }
+
     // swiftlint:enable cyclomatic_complexity
 
     private func subscribeSwarmPreferences() {
-        self.conversationService
+        conversationService
             .sharedResponseStream
-            .filter({ [weak self] (event) -> Bool in
-                return event.eventType == ServiceEventType.conversationPreferencesUpdated &&
-                    event.getEventInput(ServiceEventInput.accountId) == self?.conversation.accountId &&
+            .filter { [weak self] event -> Bool in
+                event.eventType == ServiceEventType.conversationPreferencesUpdated &&
+                    event.getEventInput(ServiceEventInput.accountId) == self?.conversation
+                    .accountId &&
                     event.getEventInput(ServiceEventInput.conversationId) == self?.conversation.id
-            })
+            }
             .subscribe(onNext: { [weak self] _ in
                 self?.updateColorPreference()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func subscribeMessagesActions() {
-        self.contextMenuState
-            .subscribe(onNext: { [weak self] (state) in
+        contextMenuState
+            .subscribe(onNext: { [weak self] state in
                 guard let self = self, let state = state as? ContextMenu else { return }
                 switch state {
-                case .reply(message: let message):
+                case let .reply(message: message):
                     self.configureReply(message: message)
-                case .delete(message: let message):
+                case let .delete(message: message):
                     self.deleteMessage(message: message)
-                case .edit(message: let message):
+                case let .edit(message: message):
                     self.configureEdit(message: message)
-                case .scrollToReplyTarget(messageId: let messageId):
+                case let .scrollToReplyTarget(messageId: messageId):
                     self.scrollToTargetReply(messageId: messageId)
                 default:
                     break
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func updateColorPreference() {
-        guard let color = UIColor(hexString: self.conversation.preferences.color) else { return }
+        guard let color = UIColor(hexString: conversation.preferences.color) else { return }
         DispatchQueue.main.async { [weak self] in
             self?.swarmColor = color
         }
     }
 
     func configureReply(message: MessageContentVM) {
-        self.messagePanel.configureReplyTo(message: message)
-        self.updateUsernameForReply(message: message)
+        messagePanel.configureReplyTo(message: message)
+        updateUsernameForReply(message: message)
     }
 
     func scrollToTargetReply(messageId: String) {
@@ -744,17 +836,22 @@ class MessagesListVM: ObservableObject {
          If the required message is already loaded, simply scroll to it;
          otherwise,load conversation until the required message.
          */
-        if self.getMessage(messageId: messageId) != nil {
-            self.scrollToReplyTarget = messageId
-        } else if let from = self.messagesModels.last?.id {
-            self.temporaryReplyTarget = messageId
-            self.conversationService.loadMessagesUntil(messageId: messageId, conversationId: self.conversation.id, accountId: self.conversation.accountId, from: from)
-            self.loading = true
+        if getMessage(messageId: messageId) != nil {
+            scrollToReplyTarget = messageId
+        } else if let from = messagesModels.last?.id {
+            temporaryReplyTarget = messageId
+            conversationService.loadMessagesUntil(
+                messageId: messageId,
+                conversationId: conversation.id,
+                accountId: conversation.accountId,
+                from: from
+            )
+            loading = true
         }
     }
 
     func configureEdit(message: MessageContentVM) {
-        self.messagePanel.configureEdit(message: message)
+        messagePanel.configureEdit(message: message)
     }
 
     func deleteMessage(message: MessageContentVM) {
@@ -762,58 +859,68 @@ class MessagesListVM: ObservableObject {
             guard let self = self, let message = message else { return }
             guard let container = self.getMessage(messageId: message.message.id) else { return }
             if container.message.type == .text {
-                self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: message.message.id)
+                self.conversationService.editSwarmMessage(
+                    conversationId: self.conversation.id,
+                    accountId: self.conversation.accountId,
+                    message: "",
+                    parentId: message.message.id
+                )
             }
         }
     }
 
     func updateUsernameForReply(message: MessageContentVM) {
-        guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
+        guard let localJamiId = accountService.getAccount(fromAccountId: conversation.accountId)?
+                .jamiId
+        else {
             return
         }
         let jamiId = message.message.authorId
         if localJamiId == jamiId || jamiId.isEmpty {
-            self.messagePanel.updateUsername(name: L10n.Conversation.yourself, jamiId: jamiId)
+            messagePanel.updateUsername(name: L10n.Conversation.yourself, jamiId: jamiId)
             return
         }
-        if let name = self.names.get(key: jamiId) as? BehaviorRelay<String> {
-            self.messagePanel.updateUsername(name: name.value, jamiId: jamiId)
+        if let name = names.get(key: jamiId) as? BehaviorRelay<String> {
+            messagePanel.updateUsername(name: name.value, jamiId: jamiId)
         }
     }
 
     // MARK: last read message
 
     private func updateLastDisplayed() {
-        for participant in self.conversation.getParticipants() {
-            self.lastReadMessageForParticipant.set(value: participant.lastDisplayed, for: participant.jamiId)
+        for participant in conversation.getParticipants() {
+            lastReadMessageForParticipant.set(
+                value: participant.lastDisplayed,
+                for: participant.jamiId
+            )
         }
     }
 
     private func allLoaded() -> Bool {
-        guard let firstMessage = self.messagesModels.last else { return false }
+        guard let firstMessage = messagesModels.last else { return false }
         return firstMessage.message.parentId.isEmpty && firstMessage.message.parents.isEmpty
     }
 
     func loadMore() {
-        if self.loading || allLoaded() {
+        if loading || allLoaded() {
             return
         }
-        if let messageId = self.messagesModels.last?.id {
-            self.conversationService
-                .loadConversationMessages(conversationId: self.conversation.id,
-                                          accountId: self.conversation.accountId,
+        if let messageId = messagesModels.last?.id {
+            conversationService
+                .loadConversationMessages(conversationId: conversation.id,
+                                          accountId: conversation.accountId,
                                           from: messageId)
-            self.loading = true
+            loading = true
         }
     }
 
     func scrollToTheBottom() {
-        self.scrollToId = self.messagesModels.first?.message.id
+        scrollToId = messagesModels.first?.message.id
     }
 
     private func updateNumberOfNewMessages() {
-        guard let lastSeenMessage = self.lastMessageBeforeScroll else { return }
-        if let index = self.messagesModels.firstIndex(where: { messageModel in
+        guard let lastSeenMessage = lastMessageBeforeScroll else { return }
+        if let index = messagesModels.firstIndex(where: { messageModel in
             messageModel.id == lastSeenMessage
         }) {
             withAnimation { [weak self] in
@@ -827,24 +934,31 @@ class MessagesListVM: ObservableObject {
 
     private func computeSequencing() {
         var lastMessageTime: Date?
-        for (index, model) in self.messagesModels.enumerated().reversed() {
+        for (index, model) in messagesModels.enumerated().reversed() {
             let currentMessageTime = model.message.receivedDate
-            if index == self.messagesModels.count - 1 {
+            if index == messagesModels.count - 1 {
                 // always show first message's time
                 model.shouldShowTimeString = true
             } else if let last = lastMessageTime {
-                // only show time for new messages if beyond an arbitrary time frame from the previously shown time
-                let timeDifference = currentMessageTime.timeIntervalSinceReferenceDate - last.timeIntervalSinceReferenceDate
-                model.shouldShowTimeString = Int(timeDifference) < messageGroupingInterval ? false : true
+                // only show time for new messages if beyond an arbitrary time frame from the
+                // previously shown time
+                let timeDifference = currentMessageTime.timeIntervalSinceReferenceDate - last
+                    .timeIntervalSinceReferenceDate
+                model
+                    .shouldShowTimeString = Int(timeDifference) <
+                    messageGroupingInterval ? false : true
             } else {
                 model.shouldShowTimeString = false
             }
             lastMessageTime = currentMessageTime
         }
-        for (index, model) in self.messagesModels.enumerated() {
+        for (index, model) in messagesModels.enumerated() {
             model.sequencing = getMessageSequencing(forIndex: index)
-            model.shouldDisplayContactInfo = shouldDisplayContactInfo(message: model) && shouldDisplayContactInfoForConversation()
-            model.shouldDisplayContactInfoForConversation = shouldDisplayContactInfoForConversation()
+            model
+                .shouldDisplayContactInfo = shouldDisplayContactInfo(message: model) &&
+                shouldDisplayContactInfoForConversation()
+            model
+                .shouldDisplayContactInfoForConversation = shouldDisplayContactInfoForConversation()
         }
     }
 
@@ -862,25 +976,29 @@ class MessagesListVM: ObservableObject {
     }
 
     private func shouldDisplayContactInfo(message: MessageContainerModel) -> Bool {
-        return (message.sequencing == .firstOfSequence || message.sequencing == .singleMessage) && message.message.incoming && !message.message.isReply()
+        return (message.sequencing == .firstOfSequence || message.sequencing == .singleMessage) &&
+            message.message.incoming && !message.message.isReply()
     }
 
     private func shouldDisplayContactInfoForConversation() -> Bool {
         // do not show names for one to one conversation
-        return self.conversation.getParticipants().count > 1
+        return conversation.getParticipants().count > 1
     }
 
     private func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
-        let messageItem = self.messagesModels[index]
-        if self.messagesModels.count == 1 || index == self.messagesModels.count - 1 {
+        let messageItem = messagesModels[index]
+        if messagesModels.count == 1 || index == messagesModels.count - 1 {
             return .singleMessage
         }
-        let previousMessageItem = index + 1 < self.messagesModels.count ? self.messagesModels[index + 1] : nil
-        let nextMessageItem = index - 1 >= 0 ? self.messagesModels[index - 1] : nil
+        let previousMessageItem = index + 1 < messagesModels.count ? messagesModels[index + 1] : nil
+        let nextMessageItem = index - 1 >= 0 ? messagesModels[index - 1] : nil
 
         if nextMessageItem == nil {
             if let previousMessageItem = previousMessageItem {
-                let isNewSequence = messageItem.shouldShowTimeString || self.isBreakingSequence(message: previousMessageItem.message, secondMessage: messageItem.message)
+                let isNewSequence = messageItem.shouldShowTimeString || isBreakingSequence(
+                    message: previousMessageItem.message,
+                    secondMessage: messageItem.message
+                )
                 return isNewSequence ? .singleMessage : .lastOfSequence
             } else {
                 return .singleMessage
@@ -890,8 +1008,14 @@ class MessagesListVM: ObservableObject {
             return .singleMessage
         }
         if let next = nextMessageItem, let previous = previousMessageItem {
-            let isNewSequence = messageItem.shouldShowTimeString || self.isBreakingSequence(message: previous.message, secondMessage: messageItem.message)
-            let changingSequenceAfter = next.shouldShowTimeString || self.isBreakingSequence(message: next.message, secondMessage: messageItem.message)
+            let isNewSequence = messageItem.shouldShowTimeString || isBreakingSequence(
+                message: previous.message,
+                secondMessage: messageItem.message
+            )
+            let changingSequenceAfter = next.shouldShowTimeString || isBreakingSequence(
+                message: next.message,
+                secondMessage: messageItem.message
+            )
             if isNewSequence && changingSequenceAfter {
                 return .singleMessage
             }
@@ -911,7 +1035,7 @@ class MessagesListVM: ObservableObject {
     // MARK: participant information
 
     private func updateName(name: String, jamiId: String) {
-        if let nameObservable = self.names.get(key: jamiId) as? BehaviorRelay<String> {
+        if let nameObservable = names.get(key: jamiId) as? BehaviorRelay<String> {
             nameObservable.accept(name)
         }
     }
@@ -924,7 +1048,9 @@ class MessagesListVM: ObservableObject {
 
         // Update the last read avatars if applicable
         guard let lastReadMessageId = lastReadMessageForParticipant.get(key: jamiId) as? String,
-              let lastReadAvatars = lastRead.get(key: lastReadMessageId) as? BehaviorRelay<[String: UIImage]> else {
+              let lastReadAvatars = lastRead
+                .get(key: lastReadMessageId) as? BehaviorRelay<[String: UIImage]>
+        else {
             return
         }
         var value = lastReadAvatars.value
@@ -933,11 +1059,11 @@ class MessagesListVM: ObservableObject {
     }
 
     private func nameLookup(id: String) {
-        self.nameService.usernameLookupStatus
-            .filter({ lookupNameResponse in
-                return lookupNameResponse.address != nil &&
+        nameService.usernameLookupStatus
+            .filter { lookupNameResponse in
+                lookupNameResponse.address != nil &&
                     lookupNameResponse.address == id
-            })
+            }
             .asObservable()
             .take(1)
             .subscribe(onNext: { [weak self] lookupNameResponse in
@@ -951,14 +1077,15 @@ class MessagesListVM: ObservableObject {
                 // Create an avatar if it has not been set yet.
                 self.setAvatarIfNeededFor(jamiId: id, withDefault: true)
             })
-            .disposed(by: self.disposeBag)
-        self.nameService.lookupAddress(withAccount: self.conversation.accountId, nameserver: "", address: id)
+            .disposed(by: disposeBag)
+        nameService.lookupAddress(withAccount: conversation.accountId, nameserver: "", address: id)
     }
 
     private func getInformationForContact(id: String) {
-        DispatchQueue.global(qos: .background).async {[weak self] in
+        DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self = self else { return }
-            guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
+            guard let account = self.accountService
+                    .getAccount(fromAccountId: self.conversation.accountId) else { return }
             if self.contactsService.contact(withHash: id) == nil {
                 self.updateName(name: id, jamiId: id)
                 self.nameLookup(id: id)
@@ -994,59 +1121,67 @@ class MessagesListVM: ObservableObject {
     }
 
     private func setAvatarIfNeededFor(jamiId: String, withDefault: Bool) {
-        // Attempt to retrieve the observable avatar and proceed only if it's nil (no image set yet).
-        guard let observableAvatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?>,
+        // Attempt to retrieve the observable avatar and proceed only if it's nil (no image set
+        // yet).
+        guard let observableAvatar = avatars.get(key: jamiId) as? BehaviorRelay<UIImage?>,
               observableAvatar.value == nil else { return }
 
         // Retrieve the name associated with the jamiId, defaulting to an empty string if not found.
-        let name = (self.names.get(key: jamiId) as? BehaviorRelay<String>)?.value ?? ""
+        let name = (names.get(key: jamiId) as? BehaviorRelay<String>)?.value ?? ""
 
         // If the name is empty and a default avatar is not requested, exit early.
         if name.isEmpty && !withDefault { return }
 
-        let avatarImage = UIImage.createContactAvatar(username: name, size: CGSize(width: 30, height: 30))
-        self.updateAvatar(image: avatarImage, jamiId: jamiId)
+        let avatarImage = UIImage.createContactAvatar(
+            username: name,
+            size: CGSize(width: 30, height: 30)
+        )
+        updateAvatar(image: avatarImage, jamiId: jamiId)
     }
 
-    private func getAvatar(jamiId: String, message: AvatarImageObserver, messageId: String) {
+    private func getAvatar(jamiId: String, message: AvatarImageObserver, messageId _: String) {
         // check if we already have the avatar for a contact
-        if let avatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
+        if let avatar = avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
             message.subscribeToAvatarObservable(avatar)
             // check if we need avatar for local account
-        } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId, accountJamiId == jamiId {
-            message.subscribeToAvatarObservable(BehaviorRelay(value: self.currentAccountAvatar))
+        } else if let accountJamiId = accountService
+                    .getAccount(fromAccountId: conversation.accountId)?.jamiId,
+                  accountJamiId == jamiId {
+            message.subscribeToAvatarObservable(BehaviorRelay(value: currentAccountAvatar))
         } else {
             // create entrance for participant and start contact fetching
             let imageObservable = BehaviorRelay<UIImage?>(value: nil)
-            self.avatars.set(value: imageObservable, for: jamiId)
-            if let avatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
+            avatars.set(value: imageObservable, for: jamiId)
+            if let avatar = avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
                 message.subscribeToAvatarObservable(avatar)
             }
-            self.getInformationForContact(id: jamiId)
+            getInformationForContact(id: jamiId)
         }
     }
 
-    private func getName(jamiId: String, message: NameObserver, messageId: String) {
-        if let name = self.names.get(key: jamiId) as? BehaviorRelay<String> {
+    private func getName(jamiId: String, message: NameObserver, messageId _: String) {
+        if let name = names.get(key: jamiId) as? BehaviorRelay<String> {
             message.subscribeToNameObservable(name)
-        } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId, accountJamiId == jamiId {
+        } else if let accountJamiId = accountService
+                    .getAccount(fromAccountId: conversation.accountId)?.jamiId,
+                  accountJamiId == jamiId {
             message.subscribeToNameObservable(BehaviorRelay(value: L10n.Account.me))
         } else {
             let nameObservable = BehaviorRelay(value: "")
-            self.names.set(value: nameObservable, for: jamiId)
+            names.set(value: nameObservable, for: jamiId)
             message.subscribeToNameObservable(nameObservable)
-            self.getInformationForContact(id: jamiId)
+            getInformationForContact(id: jamiId)
         }
     }
 
     private func getLastRead(message: MessageReadObserver, messageId: String) {
-        if let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> {
+        if let lastReadAvatars = lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> {
             message.subscribeToReadObservable(lastReadAvatars)
         } else {
             let observableValue = BehaviorRelay(value: [String: UIImage]())
-            self.lastRead.set(value: observableValue, for: messageId)
+            lastRead.set(value: observableValue, for: messageId)
             message.subscribeToReadObservable(observableValue)
-            self.updateSubscriptionLastRead(messageId: messageId)
+            updateSubscriptionLastRead(messageId: messageId)
         }
     }
 
@@ -1054,31 +1189,33 @@ class MessagesListVM: ObservableObject {
         // get avatar images for last read
         var images = [String: UIImage]()
 
-        guard let participants = self.lastReadMessageForParticipant.filter({ participant in
+        guard let participants = lastReadMessageForParticipant.filter({ participant in
             if let id = participant.value as? String {
                 return id == messageId
             }
             return false
         }) as? [String: String], !participants.isEmpty else {
-            if let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> {
+            if let lastReadAvatars = lastRead
+                .get(key: messageId) as? BehaviorRelay<[String: UIImage]> {
                 lastReadAvatars.accept(images)
             }
             return
         }
 
-        if self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> == nil {
+        if lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> == nil {
             let observableValue = BehaviorRelay(value: [String: UIImage]())
-            self.lastRead.set(value: observableValue, for: messageId)
+            lastRead.set(value: observableValue, for: messageId)
         }
-        guard let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> else { return }
+        guard let lastReadAvatars = lastRead
+                .get(key: messageId) as? BehaviorRelay<[String: UIImage]> else { return }
         for participant in participants {
-            if let avatar = self.avatars.get(key: participant.key) as? UIImage {
+            if let avatar = avatars.get(key: participant.key) as? UIImage {
                 images[participant.key] = avatar
             } else {
                 images[participant.key] = UIImage()
                 let imageObservable = BehaviorRelay<UIImage?>(value: nil)
-                self.avatars.set(value: imageObservable, for: participant.key)
-                self.getInformationForContact(id: participant.key)
+                avatars.set(value: imageObservable, for: participant.key)
+                getInformationForContact(id: participant.key)
             }
         }
         lastReadAvatars.accept(images)
@@ -1086,11 +1223,11 @@ class MessagesListVM: ObservableObject {
 }
 
 // MARK: Location sharing
-extension MessagesListVM {
 
+extension MessagesListVM {
     func updateContacLocationSharingImage() {
-        if let jamiId = self.conversation.getParticipants().first?.jamiId {
-            if let avatar = self.avatars.get(key: jamiId) as? UIImage {
+        if let jamiId = conversation.getParticipants().first?.jamiId {
+            if let avatar = avatars.get(key: jamiId) as? UIImage {
                 DispatchQueue.main.async { [weak self] in
                     self?.contactAvatar = avatar
                     self?.updateCoordinatesList()
@@ -1100,42 +1237,48 @@ extension MessagesListVM {
     }
 
     func isAlreadySharingLocation() -> Bool {
-        return peerIsAlreadySharingLocation() || self.isAlreadySharingMyLocation()
+        return peerIsAlreadySharingLocation() || isAlreadySharingMyLocation()
     }
 
     func peerIsAlreadySharingLocation() -> Bool {
-        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
-        let accountId = self.conversation.accountId
-        return self.locationSharingService
+        guard let jamiId = conversation.getParticipants().first?.jamiId else { return true }
+        let accountId = conversation.accountId
+        return locationSharingService
             .isAlreadySharing(accountId: accountId,
                               contactUri: jamiId)
     }
 
     func isAlreadySharingMyLocation() -> Bool {
-        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
-        let accountId = self.conversation.accountId
-        return self.locationSharingService.isAlreadySharingMyLocation(accountId: accountId, contactUri: jamiId)
+        guard let jamiId = conversation.getParticipants().first?.jamiId else { return true }
+        let accountId = conversation.accountId
+        return locationSharingService.isAlreadySharingMyLocation(
+            accountId: accountId,
+            contactUri: jamiId
+        )
     }
 
     func startSendingLocation(duration: TimeInterval) {
-        guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        self.locationSharingService.startSharingLocation(from: account.id,
-                                                         to: jamiId,
-                                                         duration: duration)
+        guard let account = accountService.currentAccount,
+              let jamiId = conversation.getParticipants().first?.jamiId else { return }
+        locationSharingService.startSharingLocation(from: account.id,
+                                                    to: jamiId,
+                                                    duration: duration)
     }
 
     func stopSendingLocation() {
-        guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        self.locationSharingService.stopSharingLocation(accountId: account.id,
-                                                        contactUri: jamiId)
+        guard let account = accountService.currentAccount,
+              let jamiId = conversation.getParticipants().first?.jamiId else { return }
+        locationSharingService.stopSharingLocation(accountId: account.id,
+                                                   contactUri: jamiId)
     }
 
     func getMyLocationSharingRemainedTime() -> Int {
-        guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.getParticipants().first?.jamiId else { return 0}
-        return self.locationSharingService.getMyLocationSharingRemainedTime(accountId: account.id, contactUri: jamiId)
+        guard let account = accountService.currentAccount,
+              let jamiId = conversation.getParticipants().first?.jamiId else { return 0 }
+        return locationSharingService.getMyLocationSharingRemainedTime(
+            accountId: account.id,
+            contactUri: jamiId
+        )
     }
 
     func getMyLocationSharingRemainedTimeText() -> String {
@@ -1161,4 +1304,5 @@ extension MessagesListVM {
         }
     }
 }
+
 // swiftlint:enable type_body_length

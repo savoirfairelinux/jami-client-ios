@@ -20,19 +20,18 @@
 
 import Foundation
 
-struct DefaultsKeys {
+enum DefaultsKeys {
     static let donationStartDateKey = "DONATION_START_DATE_KEY"
     static let donationEndDateKey = "DONATION_END_DATE_KEY"
     static let donationCampaignEnabled = "DONATION_COMPAIGN_ENABLED"
 }
 
-struct DefaultValues {
+enum DefaultValues {
     static let donationStartDate = "27.11.2023"
     static let donationEndDate = "01.04.2024"
 }
 
 class PreferenceManager {
-
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
@@ -41,7 +40,8 @@ class PreferenceManager {
 
     static func registerDonationsDefaults() {
         guard let defaultStartDate = dateFormatter.date(from: DefaultValues.donationStartDate),
-              let defaultEndDate = dateFormatter.date(from: DefaultValues.donationEndDate) else {
+              let defaultEndDate = dateFormatter.date(from: DefaultValues.donationEndDate)
+        else {
             return
         }
 
@@ -54,7 +54,7 @@ class PreferenceManager {
          Force update as the end date could be set in the
          previous application run
          */
-        self.updateEndDonationsDate(date: defaultEndDate)
+        updateEndDonationsDate(date: defaultEndDate)
     }
 
     static func updateEndDonationsDate(date: Date) {

@@ -20,14 +20,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
 import Reusable
-import SwiftyBeaver
+import RxSwift
 import SwiftUI
+import SwiftyBeaver
+import UIKit
 
 class CallViewController: UIViewController, StoryboardBased, ViewModelBased, ContactPickerDelegate {
-
     var viewModel: CallViewModel!
     private var videoContainerViewModel: ContainerViewModel!
 
@@ -44,10 +43,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if self.viewModel.call != nil && !self.viewConfigured {
-            self.configureIncomingVideoView()
+        if viewModel.call != nil && !viewConfigured {
+            configureIncomingVideoView()
         }
-        self.setupBindings()
+        setupBindings()
         UIApplication.shared.isIdleTimerDisabled = true
     }
 
@@ -68,7 +67,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         setupVideoView()
     }
 
-    private func createContainerViewModel(with properties: ViewModelProperties) -> ContainerViewModel {
+    private func createContainerViewModel(with properties: ViewModelProperties)
+    -> ContainerViewModel {
         return ContainerViewModel(localId: properties.localId,
                                   delegate: self,
                                   injectionBag: viewModel.injectionBag,
@@ -107,7 +107,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
     func subscribeCallActions() {
         videoContainerViewModel.actionsState
-            .subscribe(onNext: { [weak self] (state) in
+            .subscribe(onNext: { [weak self] state in
                 guard let self = self, let state = state as? CallAction else { return }
                 self.handleCallAction(state)
             })
@@ -123,15 +123,15 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         case .pauseCall:
             viewModel.togglePauseCall()
         case .hangUpCall:
-            self.handleHangUpCall()
+            handleHangUpCall()
         case .addParticipant:
-            self.handleAddParticipant()
+            handleAddParticipant()
         case .switchCamera:
             viewModel.switchCamera()
         case .toggleSpeaker:
             viewModel.switchSpeaker()
         case .openConversation:
-            self.handleOpenConversation()
+            handleOpenConversation()
         case .showDialpad:
             viewModel.showDialpad()
         default:
@@ -166,68 +166,82 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     }
 
     func setupBindings() {
-        self.viewModel.dismisVC
+        viewModel.dismisVC
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] dismiss in
                 if dismiss {
                     self?.removeFromScreen()
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.callFailed
+            .disposed(by: disposeBag)
+        viewModel.callFailed
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] dismiss in
                 if dismiss {
                     self?.removeFromScreen()
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.viewModel.callStarted
+        viewModel.callStarted
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] started in
                 guard let self = self else { return }
-                if started && !self.viewConfigured {
+                if started, !self.viewConfigured {
                     self.configureIncomingVideoView()
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func removeFromScreen() {
-        if self.videoContainerViewModel != nil {
-            self.videoContainerViewModel.callStopped()
+        if videoContainerViewModel != nil {
+            videoContainerViewModel.callStopped()
         }
         UIDevice.current.isProximityMonitoringEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false
-        self.viewModel.callFinished()
-        self.dismiss(animated: false)
+        viewModel.callFinished()
+        dismiss(animated: false)
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        self.viewModel.setCameraOrientation(orientation: UIDevice.current.orientation)
+    override func viewWillTransition(
+        to size: CGSize,
+        with coordinator: UIViewControllerTransitionCoordinator
+    ) {
+        viewModel.setCameraOrientation(orientation: UIDevice.current.orientation)
         super.viewWillTransition(to: size, with: coordinator)
     }
 
     // MARK: ContactPickerDelegate
+
     func presentContactPicker(contactPickerVC: ContactPickerViewController) {
-        self.addChild(contactPickerVC)
-        let newFrame = CGRect(x: 0, y: self.view.frame.size.height * 0.3, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
-        let initialFrame = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
+        addChild(contactPickerVC)
+        let newFrame = CGRect(
+            x: 0,
+            y: view.frame.size.height * 0.3,
+            width: view.frame.size.width,
+            height: view.frame.size.height * 0.7
+        )
+        let initialFrame = CGRect(
+            x: 0,
+            y: view.frame.size.height,
+            width: view.frame.size.width,
+            height: view.frame.size.height * 0.7
+        )
         contactPickerVC.view.frame = initialFrame
-        self.view.addSubview(contactPickerVC.view)
+        view.addSubview(contactPickerVC.view)
         contactPickerVC.didMove(toParent: self)
         UIView.animate(withDuration: 0.2, animations: {
             contactPickerVC.view.frame = newFrame
-        }, completion: {  _ in
+        }, completion: { _ in
         })
     }
 }
 
 extension CallViewController: PictureInPictureManagerDelegate {
     func reopenCurrentCall() {
-        if self.navigationController?.topViewController != self {
-            self.viewModel.reopenCall(viewControler: self)
+        if navigationController?.topViewController != self {
+            viewModel.reopenCall(viewControler: self)
         }
     }
 }

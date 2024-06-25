@@ -25,12 +25,14 @@ extension Color: RawRepresentable {
             return
         }
         do {
-            let color = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UIColor ?? .black
+            let color = try NSKeyedUnarchiver
+                .unarchiveTopLevelObjectWithData(data) as? UIColor ?? .black
             self = Color(color)
         } catch {
             self = .black
         }
     }
+
     init?(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
@@ -50,10 +52,10 @@ extension Color: RawRepresentable {
             blue = CGFloat(rgb & 0x0000FF) / 255.0
 
         } else if length == 8 {
-            red = CGFloat((rgb & 0xFF000000) >> 24) / 255.0
-            green = CGFloat((rgb & 0x00FF0000) >> 16) / 255.0
-            blue = CGFloat((rgb & 0x0000FF00) >> 8) / 255.0
-            alpha = CGFloat(rgb & 0x000000FF) / 255.0
+            red = CGFloat((rgb & 0xFF00_0000) >> 24) / 255.0
+            green = CGFloat((rgb & 0x00FF_0000) >> 16) / 255.0
+            blue = CGFloat((rgb & 0x0000_FF00) >> 8) / 255.0
+            alpha = CGFloat(rgb & 0x0000_00FF) / 255.0
 
         } else {
             return nil
@@ -61,11 +63,16 @@ extension Color: RawRepresentable {
 
         self.init(red: red, green: green, blue: blue, opacity: alpha)
     }
+
     public func isLight(threshold: Float) -> Bool? {
-        let originalCGColor = self.cgColor
+        let originalCGColor = cgColor
         guard let originalCGColor = originalCGColor else { return nil }
 
-        let RGBCGColor = originalCGColor.converted(to: CGColorSpaceCreateDeviceRGB(), intent: .defaultIntent, options: nil)
+        let RGBCGColor = originalCGColor.converted(
+            to: CGColorSpaceCreateDeviceRGB(),
+            intent: .defaultIntent,
+            options: nil
+        )
         guard let components = RGBCGColor?.components else {
             return nil
         }
@@ -73,13 +80,17 @@ extension Color: RawRepresentable {
             return nil
         }
 
-        let brightness = Float(((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000)
-        return (brightness > threshold)
+        let brightness =
+            Float(((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000)
+        return brightness > threshold
     }
 
     public var rawValue: String {
         do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: UIColor(self), requiringSecureCoding: false) as Data
+            let data = try NSKeyedArchiver.archivedData(
+                withRootObject: UIColor(self),
+                requiringSecureCoding: false
+            ) as Data
             return data.base64EncodedString()
         } catch {
             return ""

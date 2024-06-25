@@ -18,9 +18,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import Reusable
 import RxSwift
+import UIKit
 
 enum PlayerMode {
     case fullScreen
@@ -28,7 +28,6 @@ enum PlayerMode {
 }
 
 class PlayerView: UIView {
-
     let MAXCONSTRAINT: CGFloat = 30
     let MINCONSTRAINT: CGFloat = 10
     let MAXTOPGRADIENTSIZE: CGFloat = 100
@@ -50,79 +49,79 @@ class PlayerView: UIView {
     }
 
     @IBOutlet var containerView: UIView!
-    @IBOutlet weak var incomingVideo: UIView!
-    @IBOutlet weak var togglePause: UIButton!
-    @IBOutlet weak var muteAudio: UIButton!
-    @IBOutlet weak var progressSlider: UISlider!
-    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet var incomingVideo: UIView!
+    @IBOutlet var togglePause: UIButton!
+    @IBOutlet var muteAudio: UIButton!
+    @IBOutlet var progressSlider: UISlider!
+    @IBOutlet var durationLabel: UILabel!
 
-    @IBOutlet weak var topGradient: UIView!
-    @IBOutlet weak var bottomGradient: UIView!
+    @IBOutlet var topGradient: UIView!
+    @IBOutlet var bottomGradient: UIView!
 
-    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet var backgroundView: UIView!
 
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var trailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var buttonsAllignmentConstraint: NSLayoutConstraint!
-    @IBOutlet weak var progressSliderLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomGradientViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var topGradientViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var playButtonCenterY: NSLayoutConstraint!
-    @IBOutlet weak var playButtonCenterX: NSLayoutConstraint!
+    @IBOutlet var topConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet var trailingConstraint: NSLayoutConstraint!
+    @IBOutlet var leadingConstraint: NSLayoutConstraint!
+    @IBOutlet var buttonsAllignmentConstraint: NSLayoutConstraint!
+    @IBOutlet var progressSliderLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomGradientViewHeight: NSLayoutConstraint!
+    @IBOutlet var topGradientViewHeight: NSLayoutConstraint!
+    @IBOutlet var playButtonCenterY: NSLayoutConstraint!
+    @IBOutlet var playButtonCenterX: NSLayoutConstraint!
 
-    @IBOutlet weak var toglePauseWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var toglePauseHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var toglePauseWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var toglePauseHeightConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var muteAudioWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var muteAudioHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var muteAudioWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var muteAudioHeightConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var imageLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var imageLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var imageTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet var imageTopConstraint: NSLayoutConstraint!
+    @IBOutlet var imageBottomConstraint: NSLayoutConstraint!
 
     var viewModel: PlayerViewModel!
-    var incomingVideoLayer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
+    var incomingVideoLayer: AVSampleBufferDisplayLayer = .init()
     let disposeBag = DisposeBag()
     var sliderDisposeBag = DisposeBag()
 
     var sizeMode: PlayerMode = .inConversationMessage {
         didSet {
-            self.sizeChanged()
+            sizeChanged()
         }
     }
 
-    @IBAction func startSeekFrame(_ sender: Any) {
+    @IBAction func startSeekFrame(_: Any) {
         sliderDisposeBag = DisposeBag()
-        self.viewModel.userStartSeeking()
+        viewModel.userStartSeeking()
         progressSlider.rx.value
-            .subscribe(onNext: { [weak self] (value) in
+            .subscribe(onNext: { [weak self] value in
                 self?.viewModel.seekTimeVariable.accept(Float(value))
             })
-            .disposed(by: self.sliderDisposeBag)
+            .disposed(by: sliderDisposeBag)
     }
 
-    @IBAction func stopSeekFrame(_ sender: UISlider) {
+    @IBAction func stopSeekFrame(_: UISlider) {
         sliderDisposeBag = DisposeBag()
-        self.viewModel.userStopSeeking()
+        viewModel.userStopSeeking()
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.commonInit()
+        commonInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.commonInit()
+        commonInit()
     }
 
     func commonInit() {
         Bundle.main.loadNibNamed("PlayerView", owner: self, options: nil)
         addSubview(containerView)
-        containerView.frame = self.bounds
+        containerView.frame = bounds
         let circleImage = makeCircleWith(size: CGSize(width: 15, height: 15),
                                          backgroundColor: UIColor.white)
         progressSlider.setThumbImage(circleImage, for: .normal)
@@ -130,18 +129,18 @@ class PlayerView: UIView {
     }
 
     func frameUpdated() {
-        if containerView.frame != self.bounds {
-            containerView.frame = self.bounds
+        if containerView.frame != bounds {
+            containerView.frame = bounds
             containerView.setNeedsDisplay()
             updateLayerSize()
         }
     }
 
     func updateLayerSize() {
-        if self.incomingVideoLayer.frame != self.containerView.bounds {
+        if incomingVideoLayer.frame != containerView.bounds {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
-            self.incomingVideoLayer.frame = self.containerView.bounds
+            incomingVideoLayer.frame = containerView.bounds
             CATransaction.commit()
         }
     }
@@ -161,16 +160,16 @@ class PlayerView: UIView {
 
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        if self.viewModel == nil { return }
+        if viewModel == nil { return }
         bindViews()
         viewModel.createPlayer()
     }
 
     func bindViews() {
-        self.incomingVideo.layer.addSublayer(self.incomingVideoLayer)
-        self.incomingVideoLayer.isOpaque = true
-        self.incomingVideoLayer.videoGravity = .resizeAspect
-        self.viewModel.playBackFrame
+        incomingVideo.layer.addSublayer(incomingVideoLayer)
+        incomingVideoLayer.isOpaque = true
+        incomingVideoLayer.videoGravity = .resizeAspect
+        viewModel.playBackFrame
             .subscribe(onNext: { [weak self] buffer in
                 guard let self = self else { return }
                 if let buffer = buffer {
@@ -180,22 +179,22 @@ class PlayerView: UIView {
                     }
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.playerPosition
+            .disposed(by: disposeBag)
+        viewModel.playerPosition
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] position in
                 self?.progressSlider.value = position
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.playerDuration
+            .disposed(by: disposeBag)
+        viewModel.playerDuration
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] duration in
                 let durationString = self?.durationString(microcec: duration) ?? ""
                 self?.durationLabel.text = durationString
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.pause
+            .disposed(by: disposeBag)
+        viewModel.pause
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] pause in
@@ -205,9 +204,9 @@ class PlayerView: UIView {
                 }
                 self?.togglePause.setImage(image, for: .normal)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.viewModel.audioMuted
+        viewModel.audioMuted
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] muted in
@@ -217,17 +216,20 @@ class PlayerView: UIView {
                 }
                 self?.muteAudio.setImage(image, for: .normal)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.viewModel.hasVideo
+        viewModel.hasVideo
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] hasVideo in
                 guard let self = self else { return }
                 self.muteAudio.isHidden = !hasVideo || !self.withControls
-                self.backgroundView.backgroundColor = hasVideo ? UIColor.placeholderText : UIColor.secondarySystemBackground
-                self.incomingVideo.backgroundColor = hasVideo ? UIColor.black : UIColor.secondarySystemBackground
-                let color = hasVideo ? UIColor.white : (UIColor.label.lighten(by: 50) ?? UIColor.label)
+                self.backgroundView.backgroundColor = hasVideo ? UIColor.placeholderText : UIColor
+                    .secondarySystemBackground
+                self.incomingVideo.backgroundColor = hasVideo ? UIColor.black : UIColor
+                    .secondarySystemBackground
+                let color = hasVideo ? UIColor
+                    .white : (UIColor.label.lighten(by: 50) ?? UIColor.label)
                 self.togglePause.tintColor = color
                 self.durationLabel.textColor = color
                 self.progressSlider.minimumTrackTintColor = color
@@ -239,24 +241,24 @@ class PlayerView: UIView {
                 self.progressSlider.setThumbImage(circleImage, for: .normal)
                 self.progressSlider.setThumbImage(circleImage, for: .highlighted)
             })
-            .disposed(by: self.disposeBag)
-        self.muteAudio.rx.tap
+            .disposed(by: disposeBag)
+        muteAudio.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.muteAudio()
             })
-            .disposed(by: self.disposeBag)
-        self.togglePause.rx.tap
+            .disposed(by: disposeBag)
+        togglePause.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.toglePause()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func durationString(microcec: Float) -> String {
         if microcec == 0 {
             return ""
         }
-        let durationInSec = Int(microcec / 1000000)
+        let durationInSec = Int(microcec / 1_000_000)
         let seconds = durationInSec % 60
         let minutes = (durationInSec / 60) % 60
         let hours = (durationInSec / 3600)
@@ -269,60 +271,92 @@ class PlayerView: UIView {
     }
 
     func sizeChanged() {
-        switch self.sizeMode {
+        switch sizeMode {
         case .fullScreen:
-            self.backgroundView.backgroundColor = UIColor.black
+            backgroundView.backgroundColor = UIColor.black
             let circleImage = makeCircleWith(size: CGSize(width: 15, height: 15),
                                              backgroundColor: UIColor.white)
-            self.progressSlider.setThumbImage(circleImage, for: .normal)
-            self.progressSlider.setThumbImage(circleImage, for: .highlighted)
+            progressSlider.setThumbImage(circleImage, for: .normal)
+            progressSlider.setThumbImage(circleImage, for: .highlighted)
             let topAjust: CGFloat = UIDevice.current.hasNotch ? 10 : -8
-            self.topConstraint.constant = MAXCONSTRAINT + topAjust
-            self.bottomConstraint.constant = MAXCONSTRAINT
-            self.trailingConstraint.constant = MAXCONSTRAINT
-            self.leadingConstraint.constant = MAXCONSTRAINT - 8
-            self.progressSliderLeadingConstraint.constant = MAXCONSTRAINT
-            self.toglePauseWidthConstraint.constant = MAXSIZE
-            self.toglePauseHeightConstraint.constant = MAXSIZE
-            self.muteAudioWidthConstraint.constant = MAXSIZE
-            self.muteAudioHeightConstraint.constant = MAXSIZE
-            self.bottomGradientViewHeight.constant = MAXBOTTOMGRADIENTSIZE
-            self.topGradientViewHeight.constant = MAXTOPGRADIENTSIZE
-            self.playButtonCenterY.constant = PLAYBUTTONBOTTOMCONSTRAINT
-            self.playButtonCenterX.priority = UILayoutPriority(rawValue: 999)
-            self.buttonsAllignmentConstraint.priority = UILayoutPriority(rawValue: 250)
-            self.topGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 1), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
-            self.bottomGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0), UIColor(red: 0, green: 0, blue: 0, alpha: 1)], gradient: .vertical)
-            self.topGradient.layoutIfNeeded()
-            self.bottomGradient.layoutIfNeeded()
-            self.bottomGradient.updateGradientFrame()
-            self.topGradient.updateGradientFrame()
+            topConstraint.constant = MAXCONSTRAINT + topAjust
+            bottomConstraint.constant = MAXCONSTRAINT
+            trailingConstraint.constant = MAXCONSTRAINT
+            leadingConstraint.constant = MAXCONSTRAINT - 8
+            progressSliderLeadingConstraint.constant = MAXCONSTRAINT
+            toglePauseWidthConstraint.constant = MAXSIZE
+            toglePauseHeightConstraint.constant = MAXSIZE
+            muteAudioWidthConstraint.constant = MAXSIZE
+            muteAudioHeightConstraint.constant = MAXSIZE
+            bottomGradientViewHeight.constant = MAXBOTTOMGRADIENTSIZE
+            topGradientViewHeight.constant = MAXTOPGRADIENTSIZE
+            playButtonCenterY.constant = PLAYBUTTONBOTTOMCONSTRAINT
+            playButtonCenterX.priority = UILayoutPriority(rawValue: 999)
+            buttonsAllignmentConstraint.priority = UILayoutPriority(rawValue: 250)
+            topGradient.applyGradient(
+                with: [UIColor(red: 0, green: 0, blue: 0, alpha: 1), UIColor(
+                    red: 0,
+                    green: 0,
+                    blue: 0,
+                    alpha: 0
+                )],
+                gradient: .vertical
+            )
+            bottomGradient.applyGradient(
+                with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0), UIColor(
+                    red: 0,
+                    green: 0,
+                    blue: 0,
+                    alpha: 1
+                )],
+                gradient: .vertical
+            )
+            topGradient.layoutIfNeeded()
+            bottomGradient.layoutIfNeeded()
+            bottomGradient.updateGradientFrame()
+            topGradient.updateGradientFrame()
         case .inConversationMessage:
             let circleImage = makeCircleWith(size: CGSize(width: 10, height: 10),
                                              backgroundColor: UIColor.white)
-            self.progressSlider.setThumbImage(circleImage, for: .normal)
-            self.progressSlider.setThumbImage(circleImage, for: .highlighted)
-            self.backgroundView.backgroundColor = UIColor.placeholderText
-            self.bottomGradientViewHeight.constant = MINBOTTOMGRADIENTSIZE
-            self.topGradientViewHeight.constant = MINTOPGRADIENTSIZE
-            self.topConstraint.constant = MINCONSTRAINT
-            self.bottomConstraint.constant = MINCONSTRAINT
-            self.trailingConstraint.constant = MINCONSTRAINT
-            self.leadingConstraint.constant = MINCONSTRAINT
-            self.progressSliderLeadingConstraint.constant = SLIDEBARLEADINGCONSTRAINT
-            self.toglePauseWidthConstraint.constant = MINSIZE
-            self.toglePauseHeightConstraint.constant = MINSIZE
-            self.muteAudioWidthConstraint.constant = MINSIZE
-            self.muteAudioHeightConstraint.constant = MINSIZE
-            self.playButtonCenterY.constant = 1
-            self.playButtonCenterX.priority = UILayoutPriority(rawValue: 250)
-            self.buttonsAllignmentConstraint.priority = UILayoutPriority(rawValue: 999)
-            self.topGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0.2), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
-            self.bottomGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0), UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)], gradient: .vertical)
-            self.topGradient.layoutIfNeeded()
-            self.bottomGradient.layoutIfNeeded()
-            self.bottomGradient.updateGradientFrame()
-            self.topGradient.updateGradientFrame()
+            progressSlider.setThumbImage(circleImage, for: .normal)
+            progressSlider.setThumbImage(circleImage, for: .highlighted)
+            backgroundView.backgroundColor = UIColor.placeholderText
+            bottomGradientViewHeight.constant = MINBOTTOMGRADIENTSIZE
+            topGradientViewHeight.constant = MINTOPGRADIENTSIZE
+            topConstraint.constant = MINCONSTRAINT
+            bottomConstraint.constant = MINCONSTRAINT
+            trailingConstraint.constant = MINCONSTRAINT
+            leadingConstraint.constant = MINCONSTRAINT
+            progressSliderLeadingConstraint.constant = SLIDEBARLEADINGCONSTRAINT
+            toglePauseWidthConstraint.constant = MINSIZE
+            toglePauseHeightConstraint.constant = MINSIZE
+            muteAudioWidthConstraint.constant = MINSIZE
+            muteAudioHeightConstraint.constant = MINSIZE
+            playButtonCenterY.constant = 1
+            playButtonCenterX.priority = UILayoutPriority(rawValue: 250)
+            buttonsAllignmentConstraint.priority = UILayoutPriority(rawValue: 999)
+            topGradient.applyGradient(
+                with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0.2), UIColor(
+                    red: 0,
+                    green: 0,
+                    blue: 0,
+                    alpha: 0
+                )],
+                gradient: .vertical
+            )
+            bottomGradient.applyGradient(
+                with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0), UIColor(
+                    red: 0,
+                    green: 0,
+                    blue: 0,
+                    alpha: 0.2
+                )],
+                gradient: .vertical
+            )
+            topGradient.layoutIfNeeded()
+            bottomGradient.layoutIfNeeded()
+            bottomGradient.updateGradientFrame()
+            topGradient.updateGradientFrame()
         }
     }
 
@@ -340,14 +374,14 @@ class PlayerView: UIView {
         let topConstraint: CGFloat = frame.origin.y
         let rightConstraint: CGFloat = self.frame.width - frame.origin.x - frame.size.width
         let bottomConstraint: CGFloat = self.frame.height - frame.origin.y - frame.size.height
-        self.imageLeadingConstraint.constant = leftConstraint
-        self.imageTrailingConstraint.constant = rightConstraint
-        self.imageTopConstraint.constant = topConstraint
-        self.imageBottomConstraint.constant = bottomConstraint
-        self.bottomGradient.alpha = 0
-        self.topGradient.alpha = 0
-        self.backgroundView.alpha = 0
-        self.layoutIfNeeded()
+        imageLeadingConstraint.constant = leftConstraint
+        imageTrailingConstraint.constant = rightConstraint
+        imageTopConstraint.constant = topConstraint
+        imageBottomConstraint.constant = bottomConstraint
+        bottomGradient.alpha = 0
+        topGradient.alpha = 0
+        backgroundView.alpha = 0
+        layoutIfNeeded()
         UIView.animate(withDuration: 0.2,
                        delay: 0.0,
                        options: [.curveEaseInOut],

@@ -19,10 +19,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
 import RxCocoa
 import RxDataSources
+import RxSwift
+import UIKit
 
 let hardareAccelerationKey = "HARDWARE_ACCELERATION_KEY"
 let automaticDownloadFilesKey = "AUTOMATIC_DOWNLOAD_FILES_KEY"
@@ -47,7 +47,7 @@ enum GeneralSettingsSection: SectionModelType {
 
     var items: [SectionRow] {
         switch self {
-        case .generalSettings(let items):
+        case let .generalSettings(items):
             return items
         }
     }
@@ -62,10 +62,9 @@ enum GeneralSettingsSection: SectionModelType {
 
 class GeneralSettingsViewModel: ViewModel, Stateable {
     // MARK: - Rx Stateable
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
 
     lazy var generalSettings: Observable<[GeneralSettingsSection]> = {
         var items: [GeneralSettingsSection.SectionRow] = [
@@ -107,25 +106,29 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
     let videoService: VideoService
 
     required init(with injectionBag: InjectionBag) {
-        self.videoService = injectionBag.videoService
+        videoService = injectionBag.videoService
         let accelerationEnabled = UserDefaults
             .standard.bool(forKey: hardareAccelerationKey)
-        let accelerationEnabledSettings = injectionBag.videoService.getDecodingAccelerated() && injectionBag.videoService.getEncodingAccelerated()
+        let accelerationEnabledSettings = injectionBag.videoService
+            .getDecodingAccelerated() && injectionBag.videoService.getEncodingAccelerated()
         if accelerationEnabled != accelerationEnabledSettings {
             injectionBag.videoService.setHardwareAccelerated(withState: accelerationEnabled)
         }
         hardwareAccelerationEnabled = BehaviorRelay<Bool>(value: accelerationEnabled)
 
-        let isAutomaticDownloadEnabled = UserDefaults.standard.bool(forKey: automaticDownloadFilesKey)
+        let isAutomaticDownloadEnabled = UserDefaults.standard
+            .bool(forKey: automaticDownloadFilesKey)
         automaticAcceptIncomingFiles = BehaviorRelay<Bool>(value: isAutomaticDownloadEnabled)
 
         let acceptTransferLimitValue = UserDefaults.standard.integer(forKey: acceptTransferLimitKey)
         acceptTransferLimit = BehaviorRelay<String>(value: String(acceptTransferLimitValue))
 
-        let isLocationSharingDurationLimited = UserDefaults.standard.bool(forKey: limitLocationSharingDurationKey)
+        let isLocationSharingDurationLimited = UserDefaults.standard
+            .bool(forKey: limitLocationSharingDurationKey)
         limitLocationSharingDuration = BehaviorRelay<Bool>(value: isLocationSharingDurationLimited)
 
-        let locationSharingDurationValue = UserDefaults.standard.integer(forKey: locationSharingDurationKey)
+        let locationSharingDurationValue = UserDefaults.standard
+            .integer(forKey: locationSharingDurationKey)
         locationSharingDuration = BehaviorRelay<Int>(value: locationSharingDurationValue)
         enableDonationCampaign = BehaviorRelay<Bool>(value: PreferenceManager.isCampaignEnabled())
     }
@@ -134,7 +137,7 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
         if hardwareAccelerationEnabled.value == enable {
             return
         }
-        self.videoService.setHardwareAccelerated(withState: enable)
+        videoService.setHardwareAccelerated(withState: enable)
         UserDefaults.standard.set(enable, forKey: hardareAccelerationKey)
         hardwareAccelerationEnabled.accept(enable)
     }
@@ -166,7 +169,7 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
     }
 
     func openLog() {
-        self.stateSubject.onNext(SettingsState.openLog)
+        stateSubject.onNext(SettingsState.openLog)
     }
 
     func togleEnableDonationCampaign(enable: Bool) {
@@ -197,6 +200,6 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
     }
 
     func hardwareAccelerationEnabledSettings() -> Bool {
-        return self.videoService.getDecodingAccelerated() && self.videoService.getEncodingAccelerated()
+        return videoService.getDecodingAccelerated() && videoService.getEncodingAccelerated()
     }
 }

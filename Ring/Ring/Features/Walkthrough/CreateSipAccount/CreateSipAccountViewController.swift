@@ -18,25 +18,25 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import Reusable
 import RxSwift
+import UIKit
 
 class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: CreateSipAccountViewModel!
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var cancelButton: DesignableButton!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var createAccountButton: DesignableButton!
-    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var userNameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var serverTextField: UITextField!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var passwordLabel: UILabel!
-    @IBOutlet weak var serverLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var cancelButton: DesignableButton!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet var createAccountButton: DesignableButton!
+    @IBOutlet var containerViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var userNameTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var serverTextField: UITextField!
+    @IBOutlet var userNameLabel: UILabel!
+    @IBOutlet var passwordLabel: UILabel!
+    @IBOutlet var serverLabel: UILabel!
 
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
@@ -45,35 +45,49 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
     let formHeight: CGFloat = 258
 
     override func viewDidLoad() {
-        self.applyL10n()
+        applyL10n()
         super.viewDidLoad()
         setupUI()
-        self.buindViewToViewModel()
-        self.userNameTextField.becomeFirstResponder()
-        self.configurePasswordField()
+        buindViewToViewModel()
+        userNameTextField.becomeFirstResponder()
+        configurePasswordField()
         createAccountButton.titleLabel?.ajustToTextSize()
         adaptToSystemColor()
 
-        self.adaptToWelcomeFormKeyboardState(for: self.scrollView, with: self.disposeBag)
+        adaptToWelcomeFormKeyboardState(for: scrollView, with: disposeBag)
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.setupUI()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillAppear(withNotification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillDisappear(withNotification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
         setupUI()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
     }
 
     func adaptToSystemColor() {
@@ -85,24 +99,24 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
     }
 
     func setContentInset(keyboardHeight: CGFloat = 0) {
-        self.containerViewBottomConstraint.constant = keyboardHeight
+        containerViewBottomConstraint.constant = keyboardHeight
     }
 
     @objc
     func keyboardWillAppear(withNotification notification: NSNotification) {
-        self.isKeyboardOpened = true
+        isKeyboardOpened = true
 
         if let userInfo = notification.userInfo,
            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
            ScreenHelper.welcomeFormPresentationStyle() != .fullScreen {
             let keyboardHeight = keyboardFrame.size.height
-            self.setContentInset(keyboardHeight: keyboardHeight)
+            setContentInset(keyboardHeight: keyboardHeight)
         }
     }
 
     @objc
-    func keyboardWillDisappear(withNotification: NSNotification) {
-        self.setContentInset()
+    func keyboardWillDisappear(withNotification _: NSNotification) {
+        setContentInset()
     }
 
     func setupUI() {
@@ -131,8 +145,10 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
 
         // Create a new constraint with the desired relationship
         let newConstraint: NSLayoutConstraint
-        if ScreenHelper.welcomeFormPresentationStyle() == .fullScreen || UIDevice.current.userInterfaceIdiom == .pad {
-            newConstraint = contentView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.height)
+        if ScreenHelper.welcomeFormPresentationStyle() == .fullScreen || UIDevice.current
+            .userInterfaceIdiom == .pad {
+            newConstraint = contentView.heightAnchor
+                .constraint(equalToConstant: UIScreen.main.bounds.size.height)
         } else {
             newConstraint = contentView.heightAnchor.constraint(equalToConstant: formHeight)
         }
@@ -155,9 +171,9 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
                 rightButton?.isHidden = text.isEmpty
                 rightButton?.isEnabled = !text.isEmpty
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         passwordTextField.rightViewMode = .always
-        let rightView = UIView(frame: CGRect( x: 0, y: 0, width: 50, height: 30))
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         rightView.addSubview(rightButton)
         passwordTextField.rightView = rightView
         rightButton.rx.tap
@@ -167,7 +183,7 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
                 isSecureTextEntry?
                     .onNext(self.passwordTextField.isSecureTextEntry)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         isSecureTextEntry.asObservable()
             .subscribe(onNext: { [weak rightButton] secure in
                 let image = secure ?
@@ -175,45 +191,45 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
                     UIImage(asset: Asset.icShowInput)
                 rightButton?.setImage(image, for: .normal)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func buindViewToViewModel() {
-        self.userNameTextField
+        userNameTextField
             .rx
             .text
             .orEmpty
             .throttle(Durations.threeSeconds.toTimeInterval(),
                       scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .bind(to: self.viewModel.userName)
-            .disposed(by: self.disposeBag)
-        self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
-        self.serverTextField.rx.text.orEmpty.bind(to: self.viewModel.sipServer).disposed(by: self.disposeBag)
-        self.createAccountButton.rx.tap
+            .bind(to: viewModel.userName)
+            .disposed(by: disposeBag)
+        passwordTextField.rx.text.orEmpty.bind(to: viewModel.password).disposed(by: disposeBag)
+        serverTextField.rx.text.orEmpty.bind(to: viewModel.sipServer).disposed(by: disposeBag)
+        createAccountButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 DispatchQueue.global(qos: .background).async {
                     self.viewModel.createSipaccount()
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.cancelButton.rx.tap
+            .disposed(by: disposeBag)
+        cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.dismiss(animated: true)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func applyL10n() {
-        self.createAccountButton.setTitle(L10n.Account.configure, for: .normal)
+        createAccountButton.setTitle(L10n.Account.configure, for: .normal)
         titleLabel.text = L10n.Account.sipAccount
-        self.userNameLabel.text = L10n.Global.enterUsername
-        self.passwordLabel.text = L10n.Global.enterPassword
-        self.serverLabel.text = L10n.Account.serverLabel
-        self.passwordTextField.placeholder = L10n.Global.password
-        self.userNameTextField.placeholder = L10n.Account.sipUsername
-        self.serverTextField.placeholder = L10n.Account.sipServer
+        userNameLabel.text = L10n.Global.enterUsername
+        passwordLabel.text = L10n.Global.enterPassword
+        serverLabel.text = L10n.Account.serverLabel
+        passwordTextField.placeholder = L10n.Global.password
+        userNameTextField.placeholder = L10n.Account.sipUsername
+        serverTextField.placeholder = L10n.Account.sipServer
     }
 }

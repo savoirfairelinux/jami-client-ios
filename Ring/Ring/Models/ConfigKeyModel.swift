@@ -146,10 +146,11 @@ struct ConfigKeyModel: Hashable {
      - Returns: true if the ConfigKeyModel is considered as TwoStates, false otherwise.
      */
     func isTwoState() -> Bool {
-        return twoStates.contains(self.key)
+        return twoStates.contains(key)
     }
 
     // MARK: Hashable
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(key)
     }

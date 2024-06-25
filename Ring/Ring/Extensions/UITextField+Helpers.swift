@@ -22,23 +22,28 @@ import Foundation
 
 extension UITextField {
     func setPadding(_ left: CGFloat, _ right: CGFloat) {
-        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: left, height: self.frame.size.height))
-        self.rightView = UIView(frame: CGRect(x: 0, y: 0, width: right, height: self.frame.size.height))
-        self.leftViewMode = .always
-        self.rightViewMode = .always
+        leftView = UIView(frame: CGRect(x: 0, y: 0, width: left, height: frame.size.height))
+        rightView = UIView(frame: CGRect(x: 0, y: 0, width: right, height: frame.size.height))
+        leftViewMode = .always
+        rightViewMode = .always
     }
 
     func addCloseToolbar() {
         let bar = UIToolbar()
-        let doneButton = UIBarButtonItem(title: L10n.Global.close, style: .plain, target: self, action: #selector(hideKeyboard))
+        let doneButton = UIBarButtonItem(
+            title: L10n.Global.close,
+            style: .plain,
+            target: self,
+            action: #selector(hideKeyboard)
+        )
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         bar.items = [spacer, doneButton]
         bar.sizeToFit()
-        self.inputAccessoryView = bar
+        inputAccessoryView = bar
     }
 
     @objc
     private func hideKeyboard() {
-        self.resignFirstResponder()
+        resignFirstResponder()
     }
 }

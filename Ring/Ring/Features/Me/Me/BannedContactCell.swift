@@ -18,40 +18,41 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import Reusable
 import RxSwift
+import UIKit
 
 class BannedContactCell: UITableViewCell, NibReusable {
-
-    @IBOutlet weak var fallbackAvatar: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var fallbackAvatarImage: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var unblockButton: UIButton!
+    @IBOutlet var fallbackAvatar: UILabel!
+    @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var fallbackAvatarImage: UIImageView!
+    @IBOutlet var userNameLabel: UILabel!
+    @IBOutlet var unblockButton: UIButton!
 
     var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.disposeBag = DisposeBag()
+        disposeBag = DisposeBag()
     }
 
     func configureFromItem(_ item: BannedContactItem) {
         // avatar
-        self.profileImageView.subviews.forEach({ $0.removeFromSuperview() })
-        self.profileImageView.addSubview(AvatarView(profileImageData: item.image,
-                                                    username: item.displayName ?? (item.contact.userName ?? item.contact.hash),
-                                                    size: 40))
+        profileImageView.subviews.forEach { $0.removeFromSuperview() }
+        profileImageView.addSubview(AvatarView(profileImageData: item.image,
+                                               username: item
+                                                .displayName ??
+                                                (item.contact.userName ?? item.contact.hash),
+                                               size: 40))
 
         if let displayName = item.displayName, !displayName.isEmpty {
-            self.userNameLabel.text = displayName
+            userNameLabel.text = displayName
         } else if let name = item.contact.userName, !name.isEmpty {
-            self.userNameLabel.text = name
+            userNameLabel.text = name
         } else {
-            self.userNameLabel.text = item.contact.hash
+            userNameLabel.text = item.contact.hash
         }
 
-        self.unblockButton.titleLabel?.text = L10n.AccountPage.unblockContact
+        unblockButton.titleLabel?.text = L10n.AccountPage.unblockContact
     }
 }

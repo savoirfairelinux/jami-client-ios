@@ -18,10 +18,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
-import SwiftyBeaver
 import Contacts
 import RxCocoa
+import RxSwift
+import SwiftyBeaver
 
 enum RecordingState {
     case initial
@@ -33,52 +33,41 @@ enum RecordingState {
 class SendFileViewModel: Stateable, ViewModel {
     // stateable
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
+
     private let recordingState = BehaviorRelay<RecordingState>(value: .initial)
 
-    lazy var hideVideoControls: Observable<Bool> = {
-        Observable.just(audioOnly)
-    }()
+    lazy var hideVideoControls: Observable<Bool> = Observable.just(audioOnly)
 
-    lazy var finished: Observable<Bool> = {
-        recordingState
-            .asObservable()
-            .map({ state in
-                state == .sent
-            })
-            .share()
-    }()
+    lazy var finished: Observable<Bool> = recordingState
+        .asObservable()
+        .map { state in
+            state == .sent
+        }
+        .share()
 
-    lazy var hideInfo: Driver<Bool> = {
-        recordingState
-            .asObservable()
-            .map({ [weak self] state in
-                state != .initial || !(self?.audioOnly ?? true)
-            })
-            .share()
-            .asDriver(onErrorJustReturn: false)
-    }()
+    lazy var hideInfo: Driver<Bool> = recordingState
+        .asObservable()
+        .map { [weak self] state in
+            state != .initial || !(self?.audioOnly ?? true)
+        }
+        .share()
+        .asDriver(onErrorJustReturn: false)
 
-    lazy var readyToSend: Driver<Bool> = {
-        recordingState
-            .asObservable()
-            .map({ state in
-                state == .recorded
-            })
-            .share()
-            .asDriver(onErrorJustReturn: false)
-    }()
+    lazy var readyToSend: Driver<Bool> = recordingState
+        .asObservable()
+        .map { state in
+            state == .recorded
+        }
+        .share()
+        .asDriver(onErrorJustReturn: false)
 
-    lazy var recording: Observable<Bool> = {
-        recordingState
-            .asObservable()
-            .map({ state in
-                state == .recording
-            })
-            .share()
-    }()
+    lazy var recording: Observable<Bool> = recordingState
+        .asObservable()
+        .map { state in
+            state == .recording
+        }
+        .share()
 
     lazy var recordDuration: Driver<String> = {
         let emptyString = Observable.just("")
@@ -87,9 +76,9 @@ class SendFileViewModel: Stateable, ViewModel {
             .take(until: self.recordingState
                     .asObservable()
                     .filter { state in
-                        return state == .recorded
+                        state == .recorded
                     })
-            .map({ interval -> String in
+            .map { interval -> String in
                 let seconds = interval % 60
                 let minutes = (interval / 60) % 60
                 let hours = (interval / 3600)
@@ -99,20 +88,20 @@ class SendFileViewModel: Stateable, ViewModel {
                 default:
                     return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
                 }
-            })
+            }
             .share()
         return self.recordingState
             .asObservable()
-            .filter({ state in
-                return (state == .recording || state == .recorded)
-            })
-            .flatMap({ (state) -> Observable<String>  in
+            .filter { state in
+                state == .recording || state == .recorded
+            }
+            .flatMap { state -> Observable<String> in
                 if state == .recording {
                     return durationTimer
                 } else {
                     return emptyString
                 }
-            })
+            }
             .asDriver(onErrorJustReturn: "")
     }()
 
@@ -125,9 +114,9 @@ class SendFileViewModel: Stateable, ViewModel {
     var conversation: ConversationModel!
 
     required init(with injectionBag: InjectionBag) {
-        self.videoService = injectionBag.videoService
-        self.accountService = injectionBag.accountService
-        self.fileTransferService = injectionBag.dataTransferService
+        videoService = injectionBag.videoService
+        accountService = injectionBag.accountService
+        fileTransferService = injectionBag.dataTransferService
         self.injectionBag = injectionBag
         if !audioOnly {
             videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
@@ -142,7 +131,7 @@ class SendFileViewModel: Stateable, ViewModel {
 
     func triggerRecording() {
         if recordingState.value == .recording {
-            self.stopRecording()
+            stopRecording()
             return
         }
         startRecording()
@@ -157,66 +146,71 @@ class SendFileViewModel: Stateable, ViewModel {
                 self?.playBackFrame.onNext(frame)
             })
             .disposed(by: playBackDisposeBag)
-        let dateFormatter: DateFormatter = DateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd_HH:mm:ss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         let random = String(UInt64.random(in: 0 ... 9999))
         let nameForRecordingFile = dateString + "_" + random
-        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile,
-                                                                          accountID: conversation.accountId,
-                                                                          conversationID: conversation.id,
-                                                                          isSwarm: self.conversation.isSwarm()) else { return }
-        guard let name = self.videoService
-                .startLocalRecorder(audioOnly: audioOnly, path: url.path) else {
+        guard let url = fileTransferService.getFilePathForRecordings(
+            forFile: nameForRecordingFile,
+            accountID: conversation.accountId,
+            conversationID: conversation.id,
+            isSwarm: conversation.isSwarm()
+        ) else { return }
+        guard let name = videoService
+                .startLocalRecorder(audioOnly: audioOnly, path: url.path)
+        else {
             return
         }
         recordingState.accept(.recording)
         fileName = name
     }
 
-    lazy var showPlayerControls: Observable<Bool> = {
-        return Observable
-            .combineLatest(playerReady.asObservable(),
-                           readyToSend.asObservable()) {(playerReady, fileReady) in
-                return (playerReady && fileReady)
-            }
-    }()
+    lazy var showPlayerControls: Observable<Bool> = Observable
+        .combineLatest(playerReady.asObservable(),
+                       readyToSend.asObservable()) { playerReady, fileReady in
+            playerReady && fileReady
+        }
 
     func stopRecording() {
-        self.videoService.stopLocalRecorder(path: fileName)
+        videoService.stopLocalRecorder(path: fileName)
         recordingState.accept(.recorded)
         // create player after delay so recording could be finished
-        DispatchQueue.main.asyncAfter(deadline: (.now() + 1)) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.createPlayer()
         }
     }
 
     let injectionBag: InjectionBag
 
-    lazy var incomingFrame: Observable<VideoFrameInfo> = {
-        return videoService.videoInputManager.frameSubject.asObservable()
-    }()
+    lazy var incomingFrame: Observable<VideoFrameInfo> = videoService.videoInputManager.frameSubject
+        .asObservable()
 
     func sendFile() {
         guard let fileUrl = URL(string: fileName) else {
             return
         }
         player?.closePlayer()
-        self.player = nil
+        player = nil
         let name = fileUrl.lastPathComponent
-        self.fileTransferService.sendFile(conversation: self.conversation, filePath: self.fileName, displayName: name, localIdentifier: nil)
-        self.videoService.videRecordingFinished()
-        self.recordingState.accept(.sent)
+        fileTransferService.sendFile(
+            conversation: conversation,
+            filePath: fileName,
+            displayName: name,
+            localIdentifier: nil
+        )
+        videoService.videRecordingFinished()
+        recordingState.accept(.sent)
     }
 
     func cancel() {
         if recordingState.value == .recording {
-            self.stopRecording()
+            stopRecording()
         }
         player?.closePlayer()
-        self.player = nil
-        self.videoService.videRecordingFinished()
+        player = nil
+        videoService.videRecordingFinished()
         recordingState.accept(.sent)
         if fileName.isEmpty {
             return
@@ -225,7 +219,7 @@ class SendFileViewModel: Stateable, ViewModel {
     }
 
     func switchCamera() {
-        self.videoService.switchCamera()
+        videoService.switchCamera()
     }
 
     // player
@@ -247,32 +241,32 @@ class SendFileViewModel: Stateable, ViewModel {
 
 extension SendFileViewModel {
     func userStartSeeking() {
-        self.player?.userStartSeeking()
+        player?.userStartSeeking()
     }
 
     func userStopSeeking() {
-        self.player?.userStopSeeking()
+        player?.userStopSeeking()
     }
 
     func toglePause() {
-        self.player?.toglePause()
+        player?.toglePause()
     }
 
     func muteAudio() {
-        self.player?.muteAudio()
+        player?.muteAudio()
     }
 
     func seekToTime(time: Int) {
-        self.player?.seekToTime(time: time)
+        player?.seekToTime(time: time)
     }
 
     func createPlayer() {
         player = PlayerViewModel(injectionBag: injectionBag, path: fileName)
         player?.createPlayer()
         player?.playerReady.asObservable()
-            .filter({ (ready) -> Bool in
-                return ready
-            })
+            .filter { ready -> Bool in
+                ready
+            }
             .take(1)
             .subscribe(onNext: { [weak self] ready in
                 self?.playerReady.accept(ready)
@@ -318,7 +312,7 @@ extension SendFileViewModel {
             .disposed(by: playBackDisposeBag)
 
         seekTimeVariable.asObservable()
-            .subscribe(onNext: { [weak self](position) in
+            .subscribe(onNext: { [weak self] position in
                 self?.player?.seekTimeVariable.accept(position)
             })
             .disposed(by: playBackDisposeBag)

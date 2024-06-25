@@ -18,42 +18,41 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 import Foundation
-import SwiftUI
 import RxSwift
+import SwiftUI
 
 class ParticipantRow: Identifiable, ObservableObject {
     @Published var id: String
-    @Published var imageDataFinal: UIImage = UIImage()
+    @Published var imageDataFinal: UIImage = .init()
     @Published var name: String = ""
 
     let disposeBag = DisposeBag()
 
     init(participantData: ParticipantInfo) {
-        self.id = participantData.jamiId
+        id = participantData.jamiId
         participantData.finalName
             .observe(on: MainScheduler.instance)
             .startWith(participantData.finalName.value)
-            .subscribe {[weak self] name in
+            .subscribe { [weak self] name in
                 guard let self = self else { return }
                 self.name = name
             } onError: { _ in
-
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         participantData.avatar
             .observe(on: MainScheduler.instance)
             .startWith(participantData.avatar.value)
-            .subscribe {[weak self] avatar in
+            .subscribe { [weak self] avatar in
                 guard let self = self, let avatar = avatar else { return }
                 self.imageDataFinal = avatar
             } onError: { _ in
-
             }
-            .disposed(by: self.disposeBag)
-
+            .disposed(by: disposeBag)
     }
+
     func match(string: String) -> Bool {
-        return name.lowercased().contains(string.lowercased()) || id.lowercased().contains(string.lowercased())
+        return name.lowercased().contains(string.lowercased()) || id.lowercased()
+            .contains(string.lowercased())
     }
 }

@@ -69,7 +69,12 @@ struct DraggablePositions {
     }
 
     func isHidden(_ position: CGPoint) -> Bool {
-        let hiddenPositions: [CGPoint] = [hiddenTopLeft, hiddenTopRight, hiddenBottomLeft, hiddenBottomRight]
+        let hiddenPositions: [CGPoint] = [
+            hiddenTopLeft,
+            hiddenTopRight,
+            hiddenBottomLeft,
+            hiddenBottomRight
+        ]
         return hiddenPositions.contains(position)
     }
 
@@ -141,8 +146,10 @@ struct DraggablePositions {
 }
 
 struct DragableCaptureView: View {
-
-    @SwiftUI.State private var location: CGPoint = CGPoint(x: adaptiveScreenWidth - width * 0.5 - marginHorizontal, y: marginVertical)
+    @SwiftUI.State private var location: CGPoint = .init(
+        x: adaptiveScreenWidth - width * 0.5 - marginHorizontal,
+        y: marginVertical
+    )
     @GestureState private var currentLocation: CGPoint?
     @GestureState private var startLocation: CGPoint?
     @SwiftUI.State private var positions = DraggablePositions()
@@ -172,7 +179,7 @@ struct DragableCaptureView: View {
                 self.location = newLocation
                 showIndicator = isOutsideHorizontalBounds
             }
-            .updating($startLocation) { (_, startLocation, _) in
+            .updating($startLocation) { _, startLocation, _ in
                 startLocation = startLocation ?? location
             }
             .onEnded { value in
@@ -196,7 +203,7 @@ struct DragableCaptureView: View {
 
     var currentDrag: some Gesture {
         DragGesture()
-            .updating($currentLocation) { (value, fingerLocation, _) in
+            .updating($currentLocation) { value, fingerLocation, _ in
                 fingerLocation = value.location
             }
     }
@@ -206,7 +213,8 @@ struct DragableCaptureView: View {
     }
 
     func isOutsideHorizontalBounds(_ point: CGPoint) -> Bool {
-        return point.x > adaptiveScreenWidth - (marginHorizontal * 1.5) || point.x < marginHorizontal * 1.5
+        return point.x > adaptiveScreenWidth - (marginHorizontal * 1.5) || point
+            .x < marginHorizontal * 1.5
     }
 
     func isTop(_ point: CGPoint) -> Bool {
@@ -225,7 +233,7 @@ struct DragableCaptureView: View {
                 .cornerRadius(15)
             ZStack(alignment: alignment) {
                 VisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))
-                    .opacity( hide ? 1 : 0)
+                    .opacity(hide ? 1 : 0)
                     .transition(.opacity)
                     .cornerRadius(15)
                 if showIndicator {
@@ -253,7 +261,8 @@ struct DragableCaptureView: View {
             let postion = positions.getToggledPosition(location)
             self.animatePositionChange(to: postion)
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+        .onReceive(NotificationCenter.default
+                    .publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
             togglePositionUpdate()
         }
     }
@@ -261,7 +270,7 @@ struct DragableCaptureView: View {
     func togglePositionUpdate() {
         let currentPosition = positions.toString(location)
         positions.update()
-        self.location = positions.fromString(name: currentPosition)
+        location = positions.fromString(name: currentPosition)
     }
 
     func animatePositionChange(to newPosition: CGPoint) {

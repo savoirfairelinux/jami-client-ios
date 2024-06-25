@@ -20,85 +20,98 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
-import RxCocoa
 import Reusable
+import RxCocoa
+import RxSwift
+import UIKit
 
 class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: WelcomeViewModel!
 
     typealias VMType = WelcomeViewModel
-    // MARK: outlets
-    @IBOutlet weak var welcomeTextLabel: UILabel!
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var joinJamiButton: DesignableButton!
-    @IBOutlet weak var linkAccountButton: DesignableButton!
-    @IBOutlet weak var importDeviceButton: DesignableButton!
-    @IBOutlet weak var importBackupButton: DesignableButton!
-    @IBOutlet weak var advancedFeaturesButton: DesignableButton!
-    @IBOutlet weak var connectJamiAcountManagerButton: DesignableButton!
-    @IBOutlet weak var configureSIPButton: DesignableButton!
 
-    @IBOutlet weak var aboutJamiButton: DesignableButton!
+    // MARK: outlets
+
+    @IBOutlet var welcomeTextLabel: UILabel!
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var joinJamiButton: DesignableButton!
+    @IBOutlet var linkAccountButton: DesignableButton!
+    @IBOutlet var importDeviceButton: DesignableButton!
+    @IBOutlet var importBackupButton: DesignableButton!
+    @IBOutlet var advancedFeaturesButton: DesignableButton!
+    @IBOutlet var connectJamiAcountManagerButton: DesignableButton!
+    @IBOutlet var configureSIPButton: DesignableButton!
+
+    @IBOutlet var aboutJamiButton: DesignableButton!
 
     // MARK: members
+
     private let disposeBag = DisposeBag()
 
     // MARK: functions
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
         containerView.accessibilityIdentifier = AccessibilityIdentifiers.welcomeWindow
-        self.applyL10n()
-        if self.viewModel.isAnimatable {
-            self.initialAnimation()
+        applyL10n()
+        if viewModel.isAnimatable {
+            initialAnimation()
         } else {
-            self.welcomeTextLabel.alpha = 1
-            self.joinJamiButton.alpha = 1
-            self.linkAccountButton.alpha = 1
-            self.advancedFeaturesButton.alpha = 1
+            welcomeTextLabel.alpha = 1
+            joinJamiButton.alpha = 1
+            linkAccountButton.alpha = 1
+            advancedFeaturesButton.alpha = 1
         }
 
         adaptSystemStyles()
 
         // Bind ViewModel to View
-        self.viewModel.welcomeText.bind(to: self.welcomeTextLabel.rx.text).disposed(by: self.disposeBag)
-        self.viewModel.createAccount.bind(to: self.joinJamiButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
-        self.viewModel.linkDevice.bind(to: self.importDeviceButton.rx.title(for: .normal)).disposed(by: self.disposeBag)
+        viewModel.welcomeText.bind(to: welcomeTextLabel.rx.text).disposed(by: disposeBag)
+        viewModel.createAccount.bind(to: joinJamiButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+        viewModel.linkDevice.bind(to: importDeviceButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
         configureSIPButton.setTitle(L10n.Account.createSipAccount, for: .normal)
-        if !self.viewModel.notCancelable {
+        if !viewModel.notCancelable {
             let cancelButton = UIButton(type: .custom)
             cancelButton.setTitleColor(.jamiButtonDark, for: .normal)
             cancelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 25)
             cancelButton.setTitle(L10n.Global.cancel, for: .normal)
             cancelButton.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
             let buttonItem = UIBarButtonItem(customView: cancelButton)
-            cancelButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-                .subscribe(onNext: { [weak self] in
-                    self?.viewModel.cancelWalkthrough()
-                })
-                .disposed(by: self.disposeBag)
-            self.navigationItem.leftBarButtonItem = buttonItem
+            cancelButton.rx.tap.throttle(
+                Durations.halfSecond.toTimeInterval(),
+                scheduler: MainScheduler.instance
+            )
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.cancelWalkthrough()
+            })
+            .disposed(by: disposeBag)
+            navigationItem.leftBarButtonItem = buttonItem
         }
         // Bind View Actions to ViewModel
         setupButtonActions()
 
         view.backgroundColor = UIColor.jamiBackgroundColor
-        self.welcomeTextLabel.textColor = UIColor.jamiLabelColor
+        welcomeTextLabel.textColor = UIColor.jamiLabelColor
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.configureWalkrhroughNavigationBar()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(
+        to size: CGSize,
+        with coordinator: UIViewControllerTransitionCoordinator
+    ) {
         super.viewWillTransition(to: size, with: coordinator)
-        self.presentedViewController?.modalPresentationStyle = ScreenHelper.welcomeFormPresentationStyle()
+        presentedViewController?.modalPresentationStyle = ScreenHelper
+            .welcomeFormPresentationStyle()
     }
 
     func applyL10n() {
@@ -117,27 +130,45 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func adaptSystemStyles() {
-        for button in [joinJamiButton, linkAccountButton, importDeviceButton, importBackupButton, advancedFeaturesButton, connectJamiAcountManagerButton, configureSIPButton] {
+        for button in [
+            joinJamiButton,
+            linkAccountButton,
+            importDeviceButton,
+            importBackupButton,
+            advancedFeaturesButton,
+            connectJamiAcountManagerButton,
+            configureSIPButton
+        ] {
             button?.titleLabel?.ajustToTextSize()
 
             // Set left and right padding
             let leftPadding: CGFloat = 5
             let rightPadding: CGFloat = 5
-            button?.contentEdgeInsets = UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right: rightPadding)
+            button?.contentEdgeInsets = UIEdgeInsets(
+                top: 0,
+                left: leftPadding,
+                bottom: 0,
+                right: rightPadding
+            )
         }
-        self.joinJamiButton.backgroundColor = .jamiButtonDark
-        self.linkAccountButton.backgroundColor = .jamiButtonDark
+        joinJamiButton.backgroundColor = .jamiButtonDark
+        linkAccountButton.backgroundColor = .jamiButtonDark
         aboutJamiButton.setTitleColor(.jamiButtonDark, for: [])
 
         if traitCollection.userInterfaceStyle == .dark {
-            self.joinJamiButton.setTitleColor(.black, for: [])
-            self.linkAccountButton.setTitleColor(.black, for: [])
+            joinJamiButton.setTitleColor(.black, for: [])
+            linkAccountButton.setTitleColor(.black, for: [])
         } else if traitCollection.userInterfaceStyle == .light {
-            self.joinJamiButton.setTitleColor(.white, for: [])
-            self.linkAccountButton.setTitleColor(.white, for: [])
+            joinJamiButton.setTitleColor(.white, for: [])
+            linkAccountButton.setTitleColor(.white, for: [])
         }
 
-        for button in [importDeviceButton, importBackupButton, connectJamiAcountManagerButton, configureSIPButton] {
+        for button in [
+            importDeviceButton,
+            importBackupButton,
+            connectJamiAcountManagerButton,
+            configureSIPButton
+        ] {
             button?.borderWidth = 1
             button?.borderColor = .jamiButtonDark
             button?.backgroundColor = .jamiButtonWithOpacity
@@ -147,29 +178,29 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     private func aboutJamiButtonDidTap() {
-        self.viewModel.openAboutJami()
+        viewModel.openAboutJami()
     }
 
     func setupButtonActions() {
-        self.joinJamiButton.rx.tap
+        joinJamiButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.proceedWithAccountCreation()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.importDeviceButton.rx.tap
+        importDeviceButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.proceedWithLinkDevice()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.aboutJamiButton.rx.tap
+        aboutJamiButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.aboutJamiButtonDidTap()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.linkAccountButton.rx.tap
+        linkAccountButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 if self.importDeviceButton.isHidden {
@@ -180,9 +211,9 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self.linkAccountButton.backgroundColor = .jamiButtonDark
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.advancedFeaturesButton.rx.tap
+        advancedFeaturesButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 if self.connectJamiAcountManagerButton.isHidden {
@@ -193,19 +224,19 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self.configureSIPButton.isHidden = true
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.connectJamiAcountManagerButton.rx.tap
+        connectJamiAcountManagerButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.linkToAccountManager()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.configureSIPButton.rx.tap
+        configureSIPButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.createSipAccount()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func initialAnimation() {
@@ -225,11 +256,16 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.tintColor = UIColor.jamiSecondary
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.view.layoutIfNeeded()
+        navigationController?.navigationBar.tintColor = UIColor.jamiSecondary
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        view.layoutIfNeeded()
     }
 }

@@ -18,9 +18,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import XCTest
 import CallKit
 @testable import Ring
+import XCTest
 
 final class CallProviderDelegateTests: XCTestCase {
     var callProviderService: CallsProviderService!
@@ -46,9 +46,15 @@ final class CallProviderDelegateTests: XCTestCase {
 
     func testStopCall_WhenPendingCallExists() {
         // Arrange
-        let expectation = self.expectation(description: "Should have no pending call and no system call")
+        let expectation = self
+            .expectation(description: "Should have no pending call and no system call")
         // Act
-        callProviderService.previewPendingCall(peerId: jamiId1, withVideo: false, displayName: "", completion: nil)
+        callProviderService.previewPendingCall(
+            peerId: jamiId1,
+            withVideo: false,
+            displayName: "",
+            completion: nil
+        )
         let unhandeledCall = callProviderService.getUnhandeledCall(peerId: jamiId1)
         XCTAssertNotNil(unhandeledCall)
         callProviderService.stopCall(callUUID: unhandeledCall!.uuid, participant: jamiId1)
@@ -61,7 +67,8 @@ final class CallProviderDelegateTests: XCTestCase {
 
     func testStopCall_WhenPendingCallDoesNotExists() {
         // Arrange
-        let expectation = self.expectation(description: "Should have no pending call and no system call")
+        let expectation = self
+            .expectation(description: "Should have no pending call and no system call")
         let account = AccountModel()
         let call = CallModel()
         call.participantUri = jamiId1
@@ -77,12 +84,18 @@ final class CallProviderDelegateTests: XCTestCase {
 
     func testHandleIncomingCall_PendingExists() {
         // Arrange
-        let expectation = self.expectation(description: "Should have no pending call and one system call")
+        let expectation = self
+            .expectation(description: "Should have no pending call and one system call")
         let account = AccountModel()
         let call = CallModel()
         call.participantUri = jamiId1
         // Act
-        callProviderService.previewPendingCall(peerId: jamiId1, withVideo: false, displayName: "", completion: nil)
+        callProviderService.previewPendingCall(
+            peerId: jamiId1,
+            withVideo: false,
+            displayName: "",
+            completion: nil
+        )
         callProviderService.handleIncomingCall(account: account, call: call)
         updateCalls(expectation: expectation, jamiId: jamiId1)
         waitForExpectations(timeout: 2, handler: nil)
@@ -93,7 +106,8 @@ final class CallProviderDelegateTests: XCTestCase {
 
     func testHandleIncomingCall_PendingDoesNotExists() {
         // Arrange
-        let expectation = self.expectation(description: "Should have no pending call and one system call")
+        let expectation = self
+            .expectation(description: "Should have no pending call and one system call")
         let account = AccountModel()
         let call = CallModel()
         call.participantUri = jamiId1
@@ -108,10 +122,21 @@ final class CallProviderDelegateTests: XCTestCase {
 
     func testPreviewPendingCall_WhenCalledTwice() {
         // Arrange
-        let expectation = self.expectation(description: "Should have one pending call and one system call")
+        let expectation = self
+            .expectation(description: "Should have one pending call and one system call")
         // Act
-        callProviderService.previewPendingCall(peerId: jamiId1, withVideo: false, displayName: "", completion: nil)
-        callProviderService.previewPendingCall(peerId: jamiId1, withVideo: false, displayName: "", completion: nil)
+        callProviderService.previewPendingCall(
+            peerId: jamiId1,
+            withVideo: false,
+            displayName: "",
+            completion: nil
+        )
+        callProviderService.previewPendingCall(
+            peerId: jamiId1,
+            withVideo: false,
+            displayName: "",
+            completion: nil
+        )
         updateCalls(expectation: expectation, jamiId: jamiId1)
         waitForExpectations(timeout: 2, handler: nil)
         // Assert
@@ -122,9 +147,15 @@ final class CallProviderDelegateTests: XCTestCase {
 
     func testPreviewPendingCall_WhenCalledOnce() {
         // Arrange
-        let expectation = self.expectation(description: "Should have one pending call and one system call")
+        let expectation = self
+            .expectation(description: "Should have one pending call and one system call")
         // Act
-        callProviderService.previewPendingCall(peerId: jamiId1, withVideo: false, displayName: "", completion: nil)
+        callProviderService.previewPendingCall(
+            peerId: jamiId1,
+            withVideo: false,
+            displayName: "",
+            completion: nil
+        )
         updateCalls(expectation: expectation, jamiId: jamiId1)
         waitForExpectations(timeout: 2, handler: nil)
         // Assert

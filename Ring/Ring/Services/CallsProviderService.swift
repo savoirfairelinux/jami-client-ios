@@ -33,7 +33,7 @@ class UnhandeledCall: Equatable, Hashable {
     let peerId: String
     var state: UnhandeledCallState = .awaiting
 
-    init (peerId: String) {
+    init(peerId: String) {
         self.peerId = peerId
     }
 
@@ -62,18 +62,19 @@ class CallsProviderService: NSObject {
     var jamiCallUUIDs = Set<UUID>()
 
     init(provider: CXProvider, controller: CXCallController) {
-        self.sharedResponseStream = responseStream.share()
+        sharedResponseStream = responseStream.share()
         self.provider = provider
-        self.callController = controller
+        callController = controller
         super.init()
         self.provider.setDelegate(self, queue: nil)
-        self.responseStream.disposed(by: disposeBag)
+        responseStream.disposed(by: disposeBag)
     }
 }
 
 extension CallsProviderService {
     func stopCall(callUUID: UUID, participant: String) {
-        // Remove call from pending unhandeled calls. Get pending call by jamiId, because uuid could be different for unhandeled call and for incoming call.
+        // Remove call from pending unhandeled calls. Get pending call by jamiId, because uuid could
+        // be different for unhandeled call and for incoming call.
         if let call = getUnhandeledCall(peerId: participant) {
             let unhandeledCallUUID = call.uuid
             unhandeledCalls.remove(call)
@@ -81,7 +82,7 @@ extension CallsProviderService {
             if unhandeledCallUUID != callUUID {
                 let endCallAction = CXEndCallAction(call: unhandeledCallUUID)
                 let transaction = CXTransaction(action: endCallAction)
-                self.requestTransaction(transaction)
+                requestTransaction(transaction)
             }
         } else if let call = getUnhandeledCall(UUID: callUUID) {
             unhandeledCalls.remove(call)
@@ -89,11 +90,11 @@ extension CallsProviderService {
         // Send request end call to CallKit.
         let endCallAction = CXEndCallAction(call: callUUID)
         let transaction = CXTransaction(action: endCallAction)
-        self.requestTransaction(transaction)
+        requestTransaction(transaction)
     }
 
     func hasActiveCalls() -> Bool {
-        let calls = self.callController.callObserver.calls
+        let calls = callController.callObserver.calls
         let jamiCalls = calls.filter { call in
             !call.hasEnded && isJamiCall(call)
         }
@@ -111,11 +112,13 @@ extension CallsProviderService {
             }
             call.callUUID = unhandeledCall.uuid
             if unhandeledCall.state != .awaiting {
-                // CallKit already received user action before call received from the daemon. Notify call view about the action
-                let serviceEventType: ServiceEventType = unhandeledCall.state == .answered ? .callProviderAnswerCall : .callProviderCancelCall
+                // CallKit already received user action before call received from the daemon. Notify
+                // call view about the action
+                let serviceEventType: ServiceEventType = unhandeledCall
+                    .state == .answered ? .callProviderAnswerCall : .callProviderCancelCall
                 var serviceEvent = ServiceEvent(withEventType: serviceEventType)
                 serviceEvent.addEventInput(.callUUID, value: call.callUUID.uuidString)
-                self.responseStream.onNext(serviceEvent)
+                responseStream.onNext(serviceEvent)
             }
         } else {
             reportIncomingCall(account: account, call: call, completion: nil)
@@ -126,13 +129,18 @@ extension CallsProviderService {
                                     completion: ((Error?) -> Void)?) {
         let update = CXCallUpdate()
         let isJamiAccount = account.type == AccountType.ring
-        guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
+        guard let handleInfo = getHandleInfo(account: account, call: call) else { return }
         let handleType = (isJamiAccount
-                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
+                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType
+            .generic : CXHandle.HandleType.phoneNumber
         update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
-        self.setUpCallUpdate(update: update, localizedCallerName: handleInfo.displayName, videoFlag: !call.isAudioOnly)
-        self.provider.reportNewIncomingCall(with: call.callUUID,
-                                            update: update) { [weak self] error in
+        setUpCallUpdate(
+            update: update,
+            localizedCallerName: handleInfo.displayName,
+            videoFlag: !call.isAudioOnly
+        )
+        provider.reportNewIncomingCall(with: call.callUUID,
+                                       update: update) { [weak self] error in
             if error == nil {
                 self?.jamiCallUUIDs.insert(call.callUUID)
             }
@@ -143,13 +151,18 @@ extension CallsProviderService {
     func updateRegisteredName(account: AccountModel, call: CallModel) {
         let update = CXCallUpdate()
         let isJamiAccount = account.type == AccountType.ring
-        guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
+        guard let handleInfo = getHandleInfo(account: account, call: call) else { return }
         let handleType = (isJamiAccount
-                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
+                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType
+            .generic : CXHandle.HandleType.phoneNumber
 
         update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
-        self.setUpCallUpdate(update: update, localizedCallerName: call.registeredName, videoFlag: !call.isAudioOnly)
-        self.provider.reportCall(with: call.callUUID, updated: update)
+        setUpCallUpdate(
+            update: update,
+            localizedCallerName: call.registeredName,
+            videoFlag: !call.isAudioOnly
+        )
+        provider.reportCall(with: call.callUUID, updated: update)
     }
 
     func previewPendingCall(peerId: String, withVideo: Bool, displayName: String,
@@ -157,16 +170,19 @@ extension CallsProviderService {
         let update = CXCallUpdate()
         let handleType = CXHandle.HandleType.phoneNumber
         update.remoteHandle = CXHandle(type: handleType, value: peerId)
-        self.setUpCallUpdate(update: update, localizedCallerName: displayName, videoFlag: withVideo)
+        setUpCallUpdate(update: update, localizedCallerName: displayName, videoFlag: withVideo)
 
         // Stop existing unhandeled call for jamiId
-        if let existingUnhandeledCall = self.getUnhandeledCall(peerId: peerId) {
-            self.stopCall(callUUID: existingUnhandeledCall.uuid, participant: existingUnhandeledCall.peerId)
+        if let existingUnhandeledCall = getUnhandeledCall(peerId: peerId) {
+            stopCall(
+                callUUID: existingUnhandeledCall.uuid,
+                participant: existingUnhandeledCall.peerId
+            )
         }
         let unhandeledCall = UnhandeledCall(peerId: peerId)
         unhandeledCalls.insert(unhandeledCall)
-        self.provider.reportNewIncomingCall(with: unhandeledCall.uuid,
-                                            update: update) { [weak self] error in
+        provider.reportNewIncomingCall(with: unhandeledCall.uuid,
+                                       update: update) { [weak self] error in
             if error == nil {
                 self?.jamiCallUUIDs.insert(unhandeledCall.uuid)
             }
@@ -175,9 +191,10 @@ extension CallsProviderService {
         let serviceEventType: ServiceEventType = .callProviderPreviewPendingCall
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.callUUID, value: unhandeledCall.uuid.uuidString)
-        self.responseStream.onNext(serviceEvent)
+        responseStream.onNext(serviceEvent)
         startTimer(callUUID: unhandeledCall.uuid)
     }
+
     func setUpCallUpdate(update: CXCallUpdate, localizedCallerName: String, videoFlag: Bool) {
         update.localizedCallerName = localizedCallerName
         update.hasVideo = videoFlag
@@ -188,9 +205,10 @@ extension CallsProviderService {
 
     func startCall(account: AccountModel, call: CallModel) {
         let isJamiAccount = account.type == AccountType.ring
-        guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
+        guard let handleInfo = getHandleInfo(account: account, call: call) else { return }
         let handleType = (isJamiAccount
-                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
+                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType
+            .generic : CXHandle.HandleType.phoneNumber
         let contactHandle = CXHandle(type: handleType, value: handleInfo.handle)
         let startCallAction = CXStartCallAction(call: call.callUUID, handle: contactHandle)
         startCallAction.isVideo = !call.isAudioOnly
@@ -200,14 +218,15 @@ extension CallsProviderService {
     }
 
     func stopAllUnhandeledCalls() {
-        unhandeledCalls.forEach { call in
+        for call in unhandeledCalls {
             stopCall(callUUID: call.uuid, participant: call.peerId)
         }
     }
 
-    func getHandleInfo(account: AccountModel, call: CallModel) -> (displayName: String, handle: String)? {
+    func getHandleInfo(account: AccountModel,
+                       call: CallModel) -> (displayName: String, handle: String)? {
         let type = account.type == AccountType.ring ? URIType.ring : URIType.sip
-        let uri = JamiURI.init(schema: type, infoHash: call.participantUri, account: account)
+        let uri = JamiURI(schema: type, infoHash: call.participantUri, account: account)
         guard var handle = uri.hash else { return nil }
         // for sip contact if account and contact have different host name add contact host name
         if account.type == AccountType.sip {
@@ -217,7 +236,8 @@ extension CallsProviderService {
                 handle = uri.userInfo + ":" + uri.hostname
             }
         }
-        let name = !call.displayName.isEmpty ? call.displayName : !call.registeredName.isEmpty ? call.registeredName : handle
+        let name = !call.displayName.isEmpty ? call.displayName : !call.registeredName
+            .isEmpty ? call.registeredName : handle
         let contactHandle = (account.type == AccountType.sip
                                 || call.registeredName.isEmpty) ? handle : call.registeredName
         if name == contactHandle {
@@ -227,19 +247,19 @@ extension CallsProviderService {
     }
 
     func getUnhandeledCall(UUID: UUID) -> UnhandeledCall? {
-        return self.unhandeledCalls.filter { call in
+        return unhandeledCalls.filter { call in
             call.uuid == UUID
         }.first
     }
 
     func getUnhandeledCall(peerId: String) -> UnhandeledCall? {
-        return self.unhandeledCalls.filter { call in
+        return unhandeledCalls.filter { call in
             call.peerId == peerId
         }.first
     }
 
     func getUnhandeledCalls(peerId: String) -> [UnhandeledCall]? {
-        return self.unhandeledCalls.filter { call in
+        return unhandeledCalls.filter { call in
             call.peerId == peerId
         }
     }
@@ -253,7 +273,9 @@ extension CallsProviderService {
             }
         }
     }
+
     // MARK: - Timer
+
     @objc
     func timerHandler(_ timer: Timer) {
         defer {
@@ -268,19 +290,26 @@ extension CallsProviderService {
 
     func startTimer(callUUID: UUID) {
         stopTimer()
-        timer = Timer.scheduledTimer(timeInterval: pendingCallTimeout, target: self, selector: #selector(timerHandler(_:)), userInfo: callUUID, repeats: false)
+        timer = Timer.scheduledTimer(
+            timeInterval: pendingCallTimeout,
+            target: self,
+            selector: #selector(timerHandler(_:)),
+            userInfo: callUUID,
+            repeats: false
+        )
     }
 
     func stopTimer() {
         timer?.invalidate()
     }
 }
-// MARK: - CXProviderDelegate
-extension CallsProviderService: CXProviderDelegate {
-    func providerDidReset(_ provider: CXProvider) {
-    }
 
-    func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
+// MARK: - CXProviderDelegate
+
+extension CallsProviderService: CXProviderDelegate {
+    func providerDidReset(_: CXProvider) {}
+
+    func provider(_: CXProvider, perform action: CXAnswerCallAction) {
         defer {
             action.fulfill()
         }
@@ -291,10 +320,10 @@ extension CallsProviderService: CXProviderDelegate {
         let serviceEventType: ServiceEventType = .callProviderAnswerCall
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)
-        self.responseStream.onNext(serviceEvent)
+        responseStream.onNext(serviceEvent)
     }
 
-    func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
+    func provider(_: CXProvider, perform action: CXEndCallAction) {
         defer {
             action.fulfill()
         }
@@ -306,14 +335,14 @@ extension CallsProviderService: CXProviderDelegate {
         let serviceEventType: ServiceEventType = .callProviderCancelCall
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)
-        self.responseStream.onNext(serviceEvent)
+        responseStream.onNext(serviceEvent)
     }
 
-    func provider(_ provider: CXProvider, perform action: CXStartCallAction) {
+    func provider(_: CXProvider, perform action: CXStartCallAction) {
         defer {
             action.fulfill()
         }
-        self.jamiCallUUIDs.insert(action.callUUID)
+        jamiCallUUIDs.insert(action.callUUID)
         /*
          To display correct name in call history create an update and report
          it to the provider.
@@ -322,12 +351,12 @@ extension CallsProviderService: CXProviderDelegate {
         update.remoteHandle = action.handle
         update.localizedCallerName = action.contactIdentifier
         update.hasVideo = action.isVideo
-        self.provider.reportCall(with: action.callUUID, updated: update)
+        provider.reportCall(with: action.callUUID, updated: update)
     }
 
-    func provider(_ provider: CXProvider, didActivate audioSession: AVAudioSession) {
+    func provider(_: CXProvider, didActivate _: AVAudioSession) {
         let serviceEventType: ServiceEventType = .audioActivated
         let serviceEvent = ServiceEvent(withEventType: serviceEventType)
-        self.responseStream.onNext(serviceEvent)
+        responseStream.onNext(serviceEvent)
     }
 }

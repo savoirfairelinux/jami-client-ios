@@ -19,9 +19,9 @@
  */
 
 import Foundation
-import SwiftUI
-import RxSwift
 import RxRelay
+import RxSwift
+import SwiftUI
 
 // swiftlint:disable type_body_length
 class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
@@ -31,10 +31,12 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     @Published var temporaryConversation: ConversationViewModel? {
         didSet { updateSearchStatusIfNeeded() }
     }
+
     // jams search  result
     @Published var jamsSearchResult = [ConversationViewModel]() {
         didSet { updateSearchStatusIfNeeded() }
     }
+
     @Published var publicDirectoryTitle = L10n.Smartlist.results
     @Published var searchingLabel = ""
     @Published var connectionState: ConnectionType = .none
@@ -45,9 +47,10 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     // all conversations
     var conversationViewModels = [ConversationViewModel]() {
         didSet {
-            self.updateConversations()
+            updateConversations()
         }
     }
+
     var disposeBag = DisposeBag()
     let conversationsService: ConversationsService
     let requestsService: RequestsService
@@ -57,34 +60,41 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     let injectionBag: InjectionBag
     var searchModel: JamiSearchViewModel?
     var requestsModel: RequestsViewModel
-    let jamiImage = UIImage(asset: Asset.jamiIcon)!.resizeImageWith(newSize: CGSize(width: 20, height: 20), opaque: false)!
+    let jamiImage = UIImage(asset: Asset.jamiIcon)!.resizeImageWith(
+        newSize: CGSize(width: 20, height: 20),
+        opaque: false
+    )!
 
     var accountsModel: AccountsViewModel
 
     init(injectionBag: InjectionBag, stateSubject: PublishSubject<State>) {
-        self.conversationsService = injectionBag.conversationsService
-        self.requestsService = injectionBag.requestsService
-        self.accountsService = injectionBag.accountService
-        self.contactsService = injectionBag.contactsService
-        self.accountsModel =
+        conversationsService = injectionBag.conversationsService
+        requestsService = injectionBag.requestsService
+        accountsService = injectionBag.accountService
+        contactsService = injectionBag.contactsService
+        accountsModel =
             AccountsViewModel(accountService: injectionBag.accountService,
                               profileService: injectionBag.profileService,
                               nameService: injectionBag.nameService,
                               stateSubject: stateSubject)
         self.injectionBag = injectionBag
         self.stateSubject = stateSubject
-        self.requestsModel = RequestsViewModel(injectionBag: injectionBag)
-        self.searchModel = JamiSearchViewModel(with: injectionBag, source: self, searchOnlyExistingConversations: false)
-        self.subscribeConversations()
-        self.subscribeSearch()
+        requestsModel = RequestsViewModel(injectionBag: injectionBag)
+        searchModel = JamiSearchViewModel(
+            with: injectionBag,
+            source: self,
+            searchOnlyExistingConversations: false
+        )
+        subscribeConversations()
+        subscribeSearch()
         injectionBag.networkService.connectionState
             .startWith(injectionBag.networkService.connectionState.value)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] state in
                 self?.connectionState = state
             })
-            .disposed(by: self.disposeBag)
-        self.accountsService.currentAccountChanged
+            .disposed(by: disposeBag)
+        accountsService.currentAccountChanged
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] account in
                 if let account = account {
@@ -95,14 +105,14 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                     }
                 }
             })
-            .disposed(by: self.disposeBag)
-        if let account = self.accountsService.currentAccount, account.isJams {
+            .disposed(by: disposeBag)
+        if let account = accountsService.currentAccount, account.isJams {
             publicDirectoryTitle = L10n.Smartlist.jamsResults
         }
     }
 
     func conversationFromTemporaryCreated(conversation: ConversationModel) {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             // If conversation created from temporary navigate back to smart list
             if self.presentedConversation.isTemporaryPresented() {
@@ -117,9 +127,9 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     }
 
     private func subscribeConversations() {
-        let conversationObservable = self.conversationsService.conversations
+        let conversationObservable = conversationsService.conversations
             .share()
-            .startWith(self.conversationsService.conversations.value)
+            .startWith(conversationsService.conversations.value)
         let conersationViewModels =
             conversationObservable.map { [weak self] conversations -> [ConversationViewModel] in
                 guard let self = self else { return [] }
@@ -133,11 +143,13 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                 // Map conversations to view models, updating existing ones or creating new
                 return conversations.compactMap { conversationModel in
                     // Check for existing conversation view model
-                    if let existing = self.conversationViewModels.first(where: { $0.conversation == conversationModel }) {
+                    if let existing = self.conversationViewModels
+                        .first(where: { $0.conversation == conversationModel }) {
                         return existing
                     }
                     // Check for temporary conversation
-                    else if let tempConversation = self.temporaryConversation, tempConversation.conversation == conversationModel {
+                    else if let tempConversation = self.temporaryConversation,
+                            tempConversation.conversation == conversationModel {
                         tempConversation.conversation = conversationModel
                         tempConversation.conversationCreated.accept(true)
                         self.conversationFromTemporaryCreated(conversation: conversationModel)
@@ -169,24 +181,27 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                     self.conversationViewModels = updatedViewModels
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         // Observe conversation removed
-        self.conversationsService.sharedResponseStream
-            .filter({ event in
-                event.eventType == .conversationRemoved && event.getEventInput(.accountId) == self.accountsService.currentAccount?.id
-            })
+        conversationsService.sharedResponseStream
+            .filter { event in
+                event.eventType == .conversationRemoved && event.getEventInput(.accountId) == self
+                    .accountsService.currentAccount?.id
+            }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] event in
                 guard let conversationId: String = event.getEventInput(.conversationId),
                       let accountId: String = event.getEventInput(.accountId) else { return }
-                guard let index = self?.conversationViewModels.firstIndex(where: { conversationModel in
-                    conversationModel.conversation.id == conversationId && conversationModel.conversation.accountId == accountId
-                }) else { return }
+                guard let index = self?.conversationViewModels
+                        .firstIndex(where: { conversationModel in
+                            conversationModel.conversation.id == conversationId && conversationModel
+                                .conversation.accountId == accountId
+                        }) else { return }
                 self?.conversationViewModels.remove(at: index)
                 self?.updateConversations()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func subscribeSearch() {
@@ -195,7 +210,8 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] conversations in
                 guard let self = self else { return }
-                let filteredConv = conversations.isEmpty && searchQuery.isEmpty ? nil : conversations
+                let filteredConv = conversations.isEmpty && searchQuery
+                    .isEmpty ? nil : conversations
                 // Add a delay before displaying the filtered conversation
                 // to avoid interference with the animation for the search results.
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
@@ -203,7 +219,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                     self.updateConversations(with: filteredConv)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         searchModel?
             .temporaryConversation
@@ -214,7 +230,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                     self.temporaryConversation = conversation
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         searchModel?
             .jamsTemporaryResults
@@ -225,7 +241,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                     self.jamsSearchResult = conversations
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         searchModel?
             .searchStatus
             .observe(on: MainScheduler.instance)
@@ -233,21 +249,23 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                 guard let self = self else { return }
                 self.updateSearchStatus(with: status)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func updateConversations(with filtered: [ConversationViewModel]? = nil) {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            // Use filtered conversations if provided; otherwise, fall back to all conversationViewModels
+            // Use filtered conversations if provided; otherwise, fall back to all
+            // conversationViewModels
             self.conversations = filtered ?? self.conversationViewModels
         }
     }
 
     func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
-        presentedConversation.updatePresentedConversation(conversationViewModel: conversationViewModel)
-        self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
-                                                                        conversationViewModel))
+        presentedConversation
+            .updatePresentedConversation(conversationViewModel: conversationViewModel)
+        stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
+                                                                    conversationViewModel))
     }
 
     func showConversationFromQRCode(jamiId: String) {
@@ -256,11 +274,15 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
 
         // Attempt to find an existing one-to-one conversation with the specified jamiId
         if let existingConversation = conversations.first(where: {
-            $0.conversation.type == .oneToOne && $0.conversation.getParticipants().first?.jamiId == jamiId
+            $0.conversation.type == .oneToOne && $0.conversation.getParticipants().first?
+                .jamiId == jamiId
         }) {
             // Update and show the existing conversation
-            presentedConversation.updatePresentedConversation(conversationViewModel: existingConversation)
-            stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: existingConversation))
+            presentedConversation
+                .updatePresentedConversation(conversationViewModel: existingConversation)
+            stateSubject
+                .onNext(ConversationState
+                            .conversationDetail(conversationViewModel: existingConversation))
             return
         }
 
@@ -268,15 +290,17 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
         let tempConversation = createTemporarySwarmConversation(with: jamiId, accountId: account.id)
         temporaryConversation = tempConversation
         presentedConversation.updatePresentedConversation(conversationViewModel: tempConversation)
-        stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: tempConversation))
+        stateSubject
+            .onNext(ConversationState.conversationDetail(conversationViewModel: tempConversation))
     }
 
-    private func createTemporarySwarmConversation(with hash: String, accountId: String) -> ConversationViewModel {
-        let uri = JamiURI.init(schema: URIType.ring, infoHash: hash)
+    private func createTemporarySwarmConversation(with hash: String,
+                                                  accountId: String) -> ConversationViewModel {
+        let uri = JamiURI(schema: URIType.ring, infoHash: hash)
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: accountId)
         conversation.type = .oneToOne
-        let newConversation = ConversationViewModel(with: self.injectionBag)
+        let newConversation = ConversationViewModel(with: injectionBag)
         newConversation.userName.accept(hash)
         newConversation.conversation = conversation
         newConversation.swiftUIModel.isTemporary = true
@@ -284,37 +308,39 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     }
 
     func showConversationIfExists(conversationId: String) {
-        if let conversation = self.conversations.first(where: { conv in
+        if let conversation = conversations.first(where: { conv in
             conv.conversation.id == conversationId
         }) {
-            self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: conversation))
+            stateSubject
+                .onNext(ConversationState.conversationDetail(conversationViewModel: conversation))
         }
     }
 
     func showDialpad() {
-        self.stateSubject.onNext(ConversationState.showDialpad(inCall: false))
+        stateSubject.onNext(ConversationState.showDialpad(inCall: false))
     }
 
     func isSipAccount() -> Bool {
-        guard let account = self.accountsService.currentAccount else { return false }
+        guard let account = accountsService.currentAccount else { return false }
         return account.type == .sip
     }
 
     func showSipConversation(withNumber number: String) {
-        guard let account = self.accountsService
-                .currentAccount else {
+        guard let account = accountsService
+                .currentAccount
+        else {
             return
         }
-        let uri = JamiURI.init(schema: URIType.sip,
-                               infoHash: number,
-                               account: account)
+        let uri = JamiURI(schema: URIType.sip,
+                          infoHash: number,
+                          account: account)
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: account.id,
                                              hash: number)
         conversation.type = .sip
-        let newConversation = ConversationViewModel(with: self.injectionBag)
+        let newConversation = ConversationViewModel(with: injectionBag)
         newConversation.conversation = conversation
-        self.stateSubject
+        stateSubject
             .onNext(ConversationState
                         .conversationDetail(conversationViewModel:
                                                 newConversation))
@@ -326,7 +352,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
         let conversationId = conversationViewModel.conversation.id
         if conversationViewModel.conversation.isCoredialog(),
            let participantId = conversationViewModel.conversation.getParticipants().first?.jamiId {
-            self.contactsService
+            contactsService
                 .removeContact(withId: participantId,
                                ban: false,
                                withAccountId: accountId)
@@ -337,9 +363,12 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                         .removeConversationFromDB(conversation: conversationViewModel.conversation,
                                                   keepConversation: false)
                 })
-                .disposed(by: self.disposeBag)
+                .disposed(by: disposeBag)
         } else {
-            self.conversationsService.removeConversation(conversationId: conversationId, accountId: accountId)
+            conversationsService.removeConversation(
+                conversationId: conversationId,
+                accountId: accountId
+            )
         }
     }
 
@@ -349,7 +378,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
         let conversationId = conversationViewModel.conversation.id
         if conversationViewModel.conversation.isCoredialog(),
            let participantId = conversationViewModel.conversation.getParticipants().first?.jamiId {
-            self.contactsService
+            contactsService
                 .removeContact(withId: participantId,
                                ban: true,
                                withAccountId: accountId)
@@ -360,13 +389,17 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                         .removeConversationFromDB(conversation: conversationViewModel.conversation,
                                                   keepConversation: false)
                 })
-                .disposed(by: self.disposeBag)
+                .disposed(by: disposeBag)
         } else {
-            self.conversationsService.removeConversation(conversationId: conversationId, accountId: accountId)
+            conversationsService.removeConversation(
+                conversationId: conversationId,
+                accountId: accountId
+            )
         }
     }
 
     // MARK: - PresentedConversation
+
     struct PresentedConversation {
         let temporaryConversationId = "temporary"
         var presentedId: String = ""
@@ -380,7 +413,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
         }
 
         func isTemporaryPresented() -> Bool {
-            return self.presentedId == temporaryConversationId
+            return presentedId == temporaryConversationId
         }
 
         func hasPresentedConversation() -> Bool {
@@ -388,13 +421,14 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
         }
 
         mutating func resetPresentedConversation() {
-            self.presentedId = ""
+            presentedId = ""
         }
     }
 
     var presentedConversation = PresentedConversation()
 
     // MARK: - Navigation
+
     enum Target {
         case smartList
         case newMessage
@@ -405,11 +439,12 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     @Published var navigationTarget: Target = .smartList
 
     // MARK: - Search
+
     func performSearch(query: String) {
         withAnimation {
             self.searchQuery = query
         }
-        if let searchModel = self.searchModel {
+        if let searchModel = searchModel {
             searchModel.searchBarText.accept(query)
         }
     }
@@ -428,7 +463,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     }
 
     private func updateSearchStatusIfNeeded() {
-        guard let account = self.accountsService.currentAccount else { return }
+        guard let account = accountsService.currentAccount else { return }
         if searchQuery.count > 2 || account.isJams {
             evaluateSearchResults()
         } else {
@@ -449,23 +484,23 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     // MARK: - menu settings
 
     func openSettings() {
-        self.stateSubject.onNext(ConversationState.showAccountSettings)
+        stateSubject.onNext(ConversationState.showAccountSettings)
     }
 
     func createSwarm() {
-        self.stateSubject.onNext(ConversationState.createSwarm)
+        stateSubject.onNext(ConversationState.createSwarm)
     }
 
     func scanQRCode() {
-        self.stateSubject.onNext(ConversationState.qrCode)
+        stateSubject.onNext(ConversationState.qrCode)
     }
 
     func showGeneralSettings() {
-        self.stateSubject.onNext(ConversationState.showGeneralSettings)
+        stateSubject.onNext(ConversationState.showGeneralSettings)
     }
 
     func openAboutJami() {
-        self.stateSubject.onNext(ConversationState.openAboutJami)
+        stateSubject.onNext(ConversationState.openAboutJami)
     }
 
     func donate() {
@@ -473,17 +508,18 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     }
 
     func createAccount() {
-        self.stateSubject.onNext(ConversationState.createNewAccount)
+        stateSubject.onNext(ConversationState.createNewAccount)
     }
 
     var accountInfoToShare: String {
-        return self.accountsService.accountInfoToShare?.joined(separator: "\n") ?? ""
+        return accountsService.accountInfoToShare?.joined(separator: "\n") ?? ""
     }
 
     func closeAllPlayers() {
-        self.conversationViewModels.forEach { conversationModel in
+        for conversationModel in conversationViewModels {
             conversationModel.closeAllPlayers()
         }
     }
 }
+
 // swiftlint:enable type_body_length

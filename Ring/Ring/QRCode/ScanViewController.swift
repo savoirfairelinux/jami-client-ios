@@ -18,29 +18,33 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Reusable
-import UIKit
-import AVFoundation
 import AudioToolbox
+import AVFoundation
+import Reusable
 import RxSwift
+import UIKit
 
-class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOutputObjectsDelegate, ViewModelBased {
+class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOutputObjectsDelegate,
+                          ViewModelBased {
     // MARK: outlets
-    @IBOutlet weak var header: UIView!
-    @IBOutlet weak var scanImage: UIImageView!
-    @IBOutlet weak var searchTitle: UILabel!
-    @IBOutlet weak var bottomMarginTitleConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomCloseButtonConstraint: NSLayoutConstraint!
+
+    @IBOutlet var header: UIView!
+    @IBOutlet var scanImage: UIImageView!
+    @IBOutlet var searchTitle: UILabel!
+    @IBOutlet var bottomMarginTitleConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomCloseButtonConstraint: NSLayoutConstraint!
     let disposeBag = DisposeBag()
     var onCodeScanned: ((String) -> Void)?
 
     // MARK: variables
+
     let systemSoundId: SystemSoundID = 1016
 
     typealias VMType = ScanViewModel
 
     var scannedQrCode: Bool = false
-    // captureSession manages capture activity and coordinates between input device and captures outputs
+    // captureSession manages capture activity and coordinates between input device and captures
+    // outputs
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var viewModel: ScanViewModel!
@@ -56,6 +60,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
     }()
 
     // MARK: functions
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         captureSession?.stopRunning()
@@ -71,19 +76,17 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
     override func viewDidLoad() {
         super.viewDidLoad()
         if UIDevice.current.hasNotch {
-            self.bottomMarginTitleConstraint.constant = 45
-            self.bottomCloseButtonConstraint.constant = 17
+            bottomMarginTitleConstraint.constant = 45
+            bottomCloseButtonConstraint.constant = 17
         } else {
-            self.bottomMarginTitleConstraint.constant = 35
-            self.bottomCloseButtonConstraint.constant = 25
+            bottomMarginTitleConstraint.constant = 35
+            bottomCloseButtonConstraint.constant = 25
         }
         // AVCaptureDevice allows us to reference a physical capture device (video in our case)
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
 
         if let captureDevice = captureDevice {
-
             do {
-
                 captureSession = AVCaptureSession()
 
                 // CaptureSession needs an input to capture Data from
@@ -96,7 +99,16 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
                 // We tell our Output the expected Meta-data type
                 captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-                captureMetadataOutput.metadataObjectTypes = [.code128, .qr, .ean13, .ean8, .code39, .upce, .aztec, .pdf417]
+                captureMetadataOutput.metadataObjectTypes = [
+                    .code128,
+                    .qr,
+                    .ean13,
+                    .ean8,
+                    .code39,
+                    .upce,
+                    .aztec,
+                    .pdf417
+                ]
 
                 // The videoPreviewLayer displays video in conjunction with the captureSession
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
@@ -106,20 +118,20 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 }
                 videoPreviewLayer?.videoGravity = .resizeAspectFill
                 videoPreviewLayer?.frame = view.bounds
-                self.searchTitle.text = L10n.Global.search
+                searchTitle.text = L10n.Global.search
                 view.layer.addSublayer(videoPreviewLayer!)
                 view.bringSubviewToFront(header)
-                view.bringSubviewToFront(self.scanImage)
+                view.bringSubviewToFront(scanImage)
                 DispatchQueue.global(qos: .background).async { [weak self] in
                     self?.captureSession?.startRunning()
                 }
             } catch { print("Error") }
         }
-        self.updateOrientation()
+        updateOrientation()
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 guard let self = self,
                       UIDevice.current.portraitOrLandscape else { return }
                 self.videoPreviewLayer?.frame = self.view.bounds
@@ -127,11 +139,11 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 self.view.layoutSubviews()
                 self.view.layer.layoutSublayers()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func updateOrientation() {
-        if self.videoPreviewLayer?.connection!.isVideoOrientationSupported ?? false {
+        if videoPreviewLayer?.connection!.isVideoOrientationSupported ?? false {
             let orientation: UIDeviceOrientation = UIDevice.current.orientation
             var cameraOrientation = AVCaptureVideoOrientation.portrait
             switch orientation {
@@ -144,27 +156,35 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             default:
                 cameraOrientation = AVCaptureVideoOrientation.portrait
             }
-            self.videoPreviewLayer?.connection?.videoOrientation = cameraOrientation
+            videoPreviewLayer?.connection?.videoOrientation = cameraOrientation
         }
     }
 
-    // the metadataOutput function informs our delegate (the ScanViewController) that the captureOutput emitted a new metaData Object
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-
-        if !self.scannedQrCode {
+    // the metadataOutput function informs our delegate (the ScanViewController) that the
+    // captureOutput emitted a new metaData Object
+    func metadataOutput(
+        _: AVCaptureMetadataOutput,
+        didOutput metadataObjects: [AVMetadataObject],
+        from _: AVCaptureConnection
+    ) {
+        if !scannedQrCode {
             if metadataObjects.isEmpty {
                 print("no objects returned")
                 return
             }
-            guard let metaDataObject = metadataObjects[0] as? AVMetadataMachineReadableCodeObject else { return }
+            guard let metaDataObject = metadataObjects[0] as? AVMetadataMachineReadableCodeObject
+            else { return }
             guard let stringCodeValue = metaDataObject.stringValue else {
                 return
             }
 
             view.addSubview(codeFrame)
 
-            // transformedMetaDataObject returns layer coordinates/height/width from visual properties
-            guard let metaDataCoordinates = videoPreviewLayer?.transformedMetadataObject(for: metaDataObject) else {
+            // transformedMetaDataObject returns layer coordinates/height/width from visual
+            // properties
+            guard let metaDataCoordinates = videoPreviewLayer?
+                    .transformedMetadataObject(for: metaDataObject)
+            else {
                 return
             }
 
@@ -172,9 +192,13 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             codeFrame.frame = metaDataCoordinates.bounds
 
             guard let jamiId = stringCodeValue.components(separatedBy: "http://").last else {
-                let alert = UIAlertController(title: L10n.Scan.badQrCode, message: "", preferredStyle: .alert)
+                let alert = UIAlertController(
+                    title: L10n.Scan.badQrCode,
+                    message: "",
+                    preferredStyle: .alert
+                )
                 alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                present(alert, animated: true, completion: nil)
                 return
             }
 
@@ -182,16 +206,20 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 AudioServicesPlayAlertSound(systemSoundId)
                 print("jamiId : " + jamiId)
                 onCodeScanned?(jamiId)
-                self.scannedQrCode = true
+                scannedQrCode = true
             } else {
-                let alert = UIAlertController(title: L10n.Scan.badQrCode, message: "", preferredStyle: .alert)
+                let alert = UIAlertController(
+                    title: L10n.Scan.badQrCode,
+                    message: "",
+                    preferredStyle: .alert
+                )
                 alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                present(alert, animated: true, completion: nil)
             }
         }
     }
 
-    @IBAction func closeScan(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func closeScan(_: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }

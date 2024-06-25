@@ -22,9 +22,9 @@
  */
 
 import Foundation
-import SwiftUI
-import RxSwift
 import LinkPresentation
+import RxSwift
+import SwiftUI
 
 enum TransferAction: Identifiable {
     var id: Self { self }
@@ -103,8 +103,8 @@ enum ContextualMenuItem: Identifiable {
 }
 
 // swiftlint:disable type_body_length
-class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
-
+class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerDelegate,
+                        MessageAppearanceProtocol, NameObserver {
     @Published var content = ""
     @Published var metadata: LPLinkMetadata?
 
@@ -119,7 +119,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
-    @Published var backgroundColor: Color = Color(.jamiMsgCellReceived)
+    @Published var backgroundColor: Color = .init(.jamiMsgCellReceived)
     @Published var finalImage: UIImage?
     @Published var messageDeleted = false
     @Published var messageEdited = false
@@ -138,7 +138,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     let cornerRadius: CGFloat = 15
     var textInset: CGFloat = 15
     var textVerticalInset: CGFloat = 10
-    var styling: MessageStyling = MessageStyling()
+    var styling: MessageStyling = .init()
 
     var message: MessageModel
     var isIncoming: Bool
@@ -149,15 +149,16 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     var imageSize: CGFloat {
         return maxImageSize * screenScale
     }
+
     var disposeBag = DisposeBag()
 
     private var sequencing: MessageSequencing = .unknown {
         didSet {
             guard !isHistory else { return }
-            self.corners = self.updatedCorners()
+            corners = updatedCorners()
             // text need to be updated to trigger view redrowing
-            let oldContent = self.content
-            self.content = oldContent
+            let oldContent = content
+            content = oldContent
         }
     }
 
@@ -184,80 +185,90 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     var infoState: PublishSubject<State>?
     var preferencesColor: UIColor
 
-    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, isHistory: Bool, preferencesColor: UIColor) {
+    required init(
+        message: MessageModel,
+        contextMenuState: PublishSubject<State>,
+        transferState: PublishSubject<State>,
+        isHistory: Bool,
+        preferencesColor: UIColor
+    ) {
         self.contextMenuState = contextMenuState
         self.transferState = transferState
         self.message = message
-        self.type = message.type
-        self.isIncoming = message.incoming
+        type = message.type
+        isIncoming = message.incoming
         self.isHistory = isHistory
         if self.isHistory {
             maxImageSize = 100
         }
-        self.content = message.content
-        self.transferStatus = message.transferStatus
+        content = message.content
+        transferStatus = message.transferStatus
         self.preferencesColor = preferencesColor
-        self.updateMessageStyle()
-        if self.type == .fileTransfer {
-            self.fileName = message.content
-            self.updateTransferInfo()
+        updateMessageStyle()
+        if type == .fileTransfer {
+            fileName = message.content
+            updateTransferInfo()
         }
-        self.updateMessageEditions()
-        self.fetchMetadata()
+        updateMessageEditions()
+        fetchMetadata()
     }
 
     func setInfoState(state: PublishSubject<State>) {
-        self.infoState = state
+        infoState = state
     }
 
     private func updateMessageStyle() {
-        self.updateBackgroundColor()
-        self.updateTextColor()
-        self.updateTextFont()
-        self.updateInset()
-        self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(red: 0.95, green: 0.95, blue: 0.95)
+        updateBackgroundColor()
+        updateTextColor()
+        updateTextFont()
+        updateInset()
+        editionColor = isIncoming ? styling.secondaryTextColor : Color(
+            red: 0.95,
+            green: 0.95,
+            blue: 0.95
+        )
     }
 
     private func updateTextColor() {
-        if self.isLink() {
-            let backgroundIsLightColor: Bool = self.backgroundColor.isLight(threshold: 0.8) ?? true
-            self.styling.textColor = backgroundIsLightColor ? .blue : .white
-        } else if !self.isIncoming && self.type != .contact {
-            self.styling.textColor = Color.white
+        if isLink() {
+            let backgroundIsLightColor: Bool = backgroundColor.isLight(threshold: 0.8) ?? true
+            styling.textColor = backgroundIsLightColor ? .blue : .white
+        } else if !isIncoming && type != .contact {
+            styling.textColor = Color.white
         } else {
-            self.styling.textColor = self.styling.defaultTextColor
+            styling.textColor = styling.defaultTextColor
         }
     }
 
     private func updateTextFont() {
-        if self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
-            self.styling.textFont = Font(UIFont.systemFont(ofSize: 38.0, weight: UIFont.Weight.medium))
+        if content.containsOnlyEmoji && !messageDeleted && !messageEdited {
+            styling.textFont = Font(UIFont.systemFont(ofSize: 38.0, weight: UIFont.Weight.medium))
         } else {
-            self.styling.textFont = self.styling.defaultTextFont
+            styling.textFont = styling.defaultTextFont
         }
     }
 
     private func updateBackgroundColor() {
-        if self.type == .contact || self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
-            self.backgroundColor = .clear
+        if type == .contact || content.containsOnlyEmoji && !messageDeleted && !messageEdited {
+            backgroundColor = .clear
         } else {
-            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
+            backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
         }
     }
 
     private func updateInset() {
-        if self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
-            self.textInset = 0
-            self.textVerticalInset = 2
+        if content.containsOnlyEmoji && !messageDeleted && !messageEdited {
+            textInset = 0
+            textVerticalInset = 2
         } else {
-            self.textInset = 15
-            self.textVerticalInset = 10
+            textInset = 15
+            textVerticalInset = 10
         }
     }
 
     func setSequencing(sequencing: MessageSequencing) {
         if self.sequencing != sequencing {
-            DispatchQueue.main.async {[weak self] in
+            DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.sequencing = sequencing
             }
@@ -267,16 +278,24 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     func setTransferStatus(transferStatus: DataTransferStatus) {
         if self.transferStatus != transferStatus {
             self.transferStatus = transferStatus
-            self.updateTransferInfo()
+            updateTransferInfo()
         }
     }
 
     private func updatedCorners() -> UIRectCorner {
         switch sequencing {
         case .firstOfSequence:
-            return isIncoming ? [.topLeft, .topRight, .bottomRight] : [.topLeft, .topRight, .bottomLeft]
+            return isIncoming ? [.topLeft, .topRight, .bottomRight] : [
+                .topLeft,
+                .topRight,
+                .bottomLeft
+            ]
         case .lastOfSequence:
-            return isIncoming ? [.topRight, .bottomLeft, .bottomRight] : [.topLeft, .bottomLeft, .bottomRight]
+            return isIncoming ? [.topRight, .bottomLeft, .bottomRight] : [
+                .topLeft,
+                .bottomLeft,
+                .bottomRight
+            ]
         case .middleOfSequence:
             return isIncoming ? [.topRight, .bottomRight] : [.topLeft, .bottomLeft]
         case .singleMessage, .unknown:
@@ -285,15 +304,15 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     private func isLink() -> Bool {
-        return self.type == .text &&
-            self.content.isValidURL &&
-            URL(string: self.content) != nil
+        return type == .text &&
+            content.isValidURL &&
+            URL(string: content) != nil
     }
 
     private func fetchMetadata() {
-        guard self.type == .text, self.content.isValidURL, let url = URL(string: self.content) else { return }
-        self.updateTextColor()
-        LPMetadataProvider().startFetchingMetadata(for: url) {(metaDataObj, error) in
+        guard type == .text, content.isValidURL, let url = URL(string: content) else { return }
+        updateTextColor()
+        LPMetadataProvider().startFetchingMetadata(for: url) { metaDataObj, error in
             DispatchQueue.main.async { [weak self, weak metaDataObj] in
                 guard let self = self else { return }
                 guard error == nil, let metaDataObj = metaDataObj else {
@@ -305,7 +324,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     private func updateMenuitems() {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if self.type == .text {
                 if self.isIncoming {
@@ -326,25 +345,25 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     // MARK: file transfer
 
     private func updateTransferInfo() {
-        self.updateTransferActions()
-        self.updateFileDescription()
-        self.updateMenuitems()
-        if self.fileSize == 0 {
-            self.transferState.onNext(TransferState.getSize(viewModel: self))
+        updateTransferActions()
+        updateFileDescription()
+        updateMenuitems()
+        if fileSize == 0 {
+            transferState.onNext(TransferState.getSize(viewModel: self))
         }
-        if self.transferStatus == .ongoing {
-            self.startProgressMonitor()
+        if transferStatus == .ongoing {
+            startProgressMonitor()
         } else {
-            self.stopProgressMonitor()
+            stopProgressMonitor()
         }
-        if self.transferStatus != .success {
+        if transferStatus != .success {
             return
         }
-        if self.player == nil {
-            self.transferState.onNext(TransferState.getPlayer(viewModel: self))
+        if player == nil {
+            transferState.onNext(TransferState.getPlayer(viewModel: self))
         }
-        if self.url == nil {
-            self.transferState.onNext(TransferState.getURL(viewModel: self))
+        if url == nil {
+            transferState.onNext(TransferState.getURL(viewModel: self))
         }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -367,12 +386,13 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     private func updateFileDescription() {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if self.fileSize == 0 {
                 self.fileInfo = self.transferStatus.description
             } else {
-                self.fileInfo = self.getFileSizeString(bytes: self.fileSize) + " - " + self.transferStatus.description
+                self.fileInfo = self.getFileSizeString(bytes: self.fileSize) + " - " + self
+                    .transferStatus.description
             }
         }
     }
@@ -393,14 +413,14 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             guard let self = self else { return }
             self.showProgress = true
         }
-        if self.dataTransferProgressUpdater != nil {
+        if dataTransferProgressUpdater != nil {
             return
         }
-        if self.message.incoming {
-            self.dataTransferProgressUpdater = Timer
+        if message.incoming {
+            dataTransferProgressUpdater = Timer
                 .scheduledTimer(timeInterval: 0.5,
                                 target: self,
-                                selector: #selector(self.updateProgressBar),
+                                selector: #selector(updateProgressBar),
                                 userInfo: nil,
                                 repeats: true)
         }
@@ -411,14 +431,14 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             guard let self = self else { return }
             self.showProgress = false
         }
-        guard let updater = self.dataTransferProgressUpdater else { return }
+        guard let updater = dataTransferProgressUpdater else { return }
         updater.invalidate()
-        self.dataTransferProgressUpdater = nil
+        dataTransferProgressUpdater = nil
     }
 
     @objc
-    func updateProgressBar(timer: Timer) {
-        self.transferState.onNext(TransferState.getProgress(viewModel: self))
+    func updateProgressBar(timer _: Timer) {
+        transferState.onNext(TransferState.getProgress(viewModel: self))
     }
 
     func extractedVideoFrame(with height: CGFloat) {
@@ -426,7 +446,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             guard let self = self else { return }
             if let player = self.player, let firstImage = player.firstFrame,
                let image = UIImage.createFrom(sampleBuffer: firstImage),
-               let frameSize = image.getNewSize(of: CGSize(width: self.maxDimension, height: self.maxDimension)) {
+               let frameSize = image.getNewSize(of: CGSize(
+                width: self.maxDimension,
+                height: self.maxDimension
+               )) {
                 self.playerHeight = frameSize.height
                 self.playerWidth = frameSize.width
             } else {
@@ -473,24 +496,24 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
                 self.updateMessageStyle()
             }
         }
-        if self.message.isMessageDeleted() {
-            self.requestName(jamiId: self.message.authorId)
+        if message.isMessageDeleted() {
+            requestName(jamiId: message.authorId)
         }
     }
 
     func updateUserName() {
-        if !self.message.authorId.isEmpty {
-            self.requestName(jamiId: self.message.authorId)
+        if !message.authorId.isEmpty {
+            requestName(jamiId: message.authorId)
         }
     }
 
     func updateUsername(name: String, jamiId: String) {
         guard message.authorId == jamiId, !name.isEmpty else { return }
-        self.username = name
+        username = name
     }
 
     func updateFileSize(size: Int64) {
-        self.fileSize = size
+        fileSize = size
     }
 
     func updateProgress(progress: CGFloat) {
@@ -510,7 +533,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
                 guard let self = self else { return }
                 self.scale = 1.3
             }
-            withAnimation(Animation.easeInOut(duration: 0.1).delay(0.3)) {[weak self] in
+            withAnimation(Animation.easeInOut(duration: 0.1).delay(0.3)) { [weak self] in
                 guard let self = self else { return }
                 self.scale = 1
             }
@@ -518,11 +541,11 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     func isGifImage() -> Bool {
-        return self.url?.pathExtension == "gif"
+        return url?.pathExtension == "gif"
     }
 
     func getImage(maxSize: CGFloat) -> UIImage? {
-        guard let url = self.url else { return nil }
+        guard let url = url else { return nil }
 
         // If maxSize is 0, load the biggest size possible for preview
         if maxSize == 0 {
@@ -530,17 +553,21 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         }
 
         // Return cached image if available
-        if let image = self.finalImage {
+        if let image = finalImage {
             return image
         }
 
         // Load and cache the image
-        self.finalImage = loadImage(from: url, withMaxSize: maxSize)
-        return self.finalImage
+        finalImage = loadImage(from: url, withMaxSize: maxSize)
+        return finalImage
     }
 
     private func loadImage(from url: URL, withMaxSize maxSize: CGFloat) -> UIImage? {
-        return isGifImage() ? UIImage.gifImageWithUrl(url, maxSize: maxSize) : UIImage.getImagefromURL(fileURL: url, maxSize: maxSize)
+        return isGifImage() ? UIImage.gifImageWithUrl(url, maxSize: maxSize) : UIImage
+            .getImagefromURL(
+                fileURL: url,
+                maxSize: maxSize
+            )
     }
 
     var maxDimension: CGFloat {
@@ -561,10 +588,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     // MARK: actions received from UI
 
     func onAppear() {
-        if self.type == .fileTransfer {
-            self.transferState.onNext(TransferState.getPlayer(viewModel: self))
-            self.transferState.onNext(TransferState.getURL(viewModel: self))
-            _ = getImage(maxSize: self.imageSize)
+        if type == .fileTransfer {
+            transferState.onNext(TransferState.getPlayer(viewModel: self))
+            transferState.onNext(TransferState.getURL(viewModel: self))
+            _ = getImage(maxSize: imageSize)
         }
         updateMenuitems()
     }
@@ -572,18 +599,18 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     func transferAction(action: TransferAction) {
         switch action {
         case .accept:
-            self.transferState.onNext(TransferState.accept(viewModel: self))
+            transferState.onNext(TransferState.accept(viewModel: self))
         case .cancel:
-            self.transferState.onNext(TransferState.cancel(viewModel: self))
+            transferState.onNext(TransferState.cancel(viewModel: self))
         }
     }
 
     func contextMenuSelect(item: ContextualMenuItem) {
         switch item {
         case .copy:
-            UIPasteboard.general.string = self.content
+            UIPasteboard.general.string = content
         case .preview:
-            self.contextMenuState.onNext(ContextMenu.preview(message: self))
+            contextMenuState.onNext(ContextMenu.preview(message: self))
         case .forward:
             forwardFile()
         case .share:
@@ -606,36 +633,36 @@ extension MessageContentVM {
     func deleteFile() {}
 
     func shareFile() {
-        guard let url = self.url else { return }
+        guard let url = url else { return }
         let item: Any? = url
         guard let item = item else {
             return
         }
-        self.contextMenuState.onNext(ContextMenu.share(items: [item]))
+        contextMenuState.onNext(ContextMenu.share(items: [item]))
     }
 
     func forwardFile() {
-        self.contextMenuState.onNext(ContextMenu.forward(message: self))
+        contextMenuState.onNext(ContextMenu.forward(message: self))
     }
 
     func reply() {
-        self.contextMenuState.onNext(ContextMenu.reply(message: self))
+        contextMenuState.onNext(ContextMenu.reply(message: self))
     }
 
     func saveFile() {
-        guard let fileURL = self.url else { return }
-        self.contextMenuState.onNext(ContextMenu.saveFile(url: fileURL))
+        guard let fileURL = url else { return }
+        contextMenuState.onNext(ContextMenu.saveFile(url: fileURL))
     }
 
     func delete() {
-        if self.message.type == .text {
-            self.contextMenuState.onNext(ContextMenu.delete(message: self))
+        if message.type == .text {
+            contextMenuState.onNext(ContextMenu.delete(message: self))
         }
     }
 
     func edit() {
-        if self.message.type == .text {
-            self.contextMenuState.onNext(ContextMenu.edit(message: self))
+        if message.type == .text {
+            contextMenuState.onNext(ContextMenu.edit(message: self))
         }
     }
 }

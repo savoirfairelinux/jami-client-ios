@@ -18,80 +18,80 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
 import Reusable
+import RxSwift
 import SwiftyBeaver
+import UIKit
 
 class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased {
-
     var viewModel: SendFileViewModel!
     private let disposeBag = DisposeBag()
     private let log = SwiftyBeaver.self
 
-    @IBOutlet weak var preview: UIImageView!
-    @IBOutlet weak var recordButton: UIButton!
-    @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var switchButton: UIButton!
-    @IBOutlet weak var placeholderButton: UIButton!
-    @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var placeholderLabel: UILabel!
-    @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var viewLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var viewRightConstraint: NSLayoutConstraint!
+    @IBOutlet var preview: UIImageView!
+    @IBOutlet var recordButton: UIButton!
+    @IBOutlet var sendButton: UIButton!
+    @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var switchButton: UIButton!
+    @IBOutlet var placeholderButton: UIButton!
+    @IBOutlet var timerLabel: UILabel!
+    @IBOutlet var infoLabel: UILabel!
+    @IBOutlet var placeholderLabel: UILabel!
+    @IBOutlet var viewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var viewLeftConstraint: NSLayoutConstraint!
+    @IBOutlet var viewRightConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var playerControls: UIView!
-    @IBOutlet weak var togglePause: UIButton!
-    @IBOutlet weak var muteAudio: UIButton!
-    @IBOutlet weak var progressSlider: UISlider!
-    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet var playerControls: UIView!
+    @IBOutlet var togglePause: UIButton!
+    @IBOutlet var muteAudio: UIButton!
+    @IBOutlet var progressSlider: UISlider!
+    @IBOutlet var durationLabel: UILabel!
 
     var sliderDisposeBag = DisposeBag()
 
-    @IBAction func startSeekFrame(_ sender: Any) {
+    @IBAction func startSeekFrame(_: Any) {
         sliderDisposeBag = DisposeBag()
-        self.viewModel.userStartSeeking()
+        viewModel.userStartSeeking()
         progressSlider.rx.value
-            .subscribe(onNext: { [weak self] (value) in
+            .subscribe(onNext: { [weak self] value in
                 self?.viewModel.seekTimeVariable.accept(Float(value))
             })
-            .disposed(by: self.sliderDisposeBag)
+            .disposed(by: sliderDisposeBag)
     }
 
-    @IBAction func stopSeekFrame(_ sender: UISlider) {
+    @IBAction func stopSeekFrame(_: UISlider) {
         sliderDisposeBag = DisposeBag()
-        self.viewModel.userStopSeeking()
+        viewModel.userStopSeeking()
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.applyL10()
-        let isAudio = self.viewModel.audioOnly
+        applyL10()
+        let isAudio = viewModel.audioOnly
         viewBottomConstraint.constant = isAudio ? 120 : 0
         viewLeftConstraint.constant = isAudio ? 20 : 0
         viewRightConstraint.constant = isAudio ? 20 : 0
-        self.bindViewsToViewModel()
+        bindViewsToViewModel()
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 guard let self = self,
                       UIDevice.current.portraitOrLandscape else { return }
                 self.viewModel
                     .setCameraOrientation(orientation: UIDevice.current.orientation)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func applyL10() {
-        self.sendButton.setTitle(L10n.DataTransfer.sendMessage, for: .normal)
-        self.cancelButton.setTitle(L10n.Global.cancel, for: .normal)
-        self.infoLabel.text = L10n.DataTransfer.infoMessage
+        sendButton.setTitle(L10n.DataTransfer.sendMessage, for: .normal)
+        cancelButton.setTitle(L10n.Global.cancel, for: .normal)
+        infoLabel.text = L10n.DataTransfer.infoMessage
     }
 
     func bindViewsToViewModel() {
-        self.viewModel.playBackFrame
+        viewModel.playBackFrame
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
                 if let image = frame {
@@ -100,58 +100,58 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                     }
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.cancelButton.rx.tap
+            .disposed(by: disposeBag)
+        cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.cancel()
             })
-            .disposed(by: self.disposeBag)
-        self.recordButton.rx.tap
+            .disposed(by: disposeBag)
+        recordButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.triggerRecording()
             })
-            .disposed(by: self.disposeBag)
-        self.sendButton.rx.tap
+            .disposed(by: disposeBag)
+        sendButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.sendFile()
             })
-            .disposed(by: self.disposeBag)
-        self.switchButton.rx.tap
+            .disposed(by: disposeBag)
+        switchButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.switchCamera()
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.hideVideoControls
+            .disposed(by: disposeBag)
+        viewModel.hideVideoControls
             .observe(on: MainScheduler.instance)
-            .bind(to: self.preview.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        self.viewModel.hideVideoControls
+            .bind(to: preview.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.hideVideoControls
             .observe(on: MainScheduler.instance)
-            .bind(to: self.placeholderButton.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        self.viewModel.readyToSend
+            .bind(to: placeholderButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.readyToSend
             .map { !$0 }
-            .drive(self.sendButton.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        self.viewModel.recording
+            .drive(sendButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.recording
             .map { !$0 }
-            .bind(to: self.timerLabel.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        self.viewModel.readyToSend
+            .bind(to: timerLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.readyToSend
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] ready in
                 let audioOnly: Bool = self?.viewModel.audioOnly ?? false
                 self?.switchButton.isHidden = ready || audioOnly
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.readyToSend
-            .drive(self.placeholderLabel.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        self.viewModel.recordDuration
-            .drive(self.timerLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        self.viewModel.finished
+            .disposed(by: disposeBag)
+        viewModel.readyToSend
+            .drive(placeholderLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.recordDuration
+            .drive(timerLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.finished
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] finished in
                 if finished {
@@ -159,8 +159,8 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                     self?.dismiss(animated: animated, completion: nil)
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.recording
+            .disposed(by: disposeBag)
+        viewModel.recording
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] recording in
                 if recording {
@@ -169,33 +169,33 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                     self?.recordButton.layer.removeAllAnimations()
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.hideInfo
-            .drive(self.infoLabel.rx.isHidden)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
+        viewModel.hideInfo
+            .drive(infoLabel.rx.isHidden)
+            .disposed(by: disposeBag)
         configurePlayerControls()
     }
 
     func configurePlayerControls() {
-        self.viewModel.showPlayerControls
+        viewModel.showPlayerControls
             .map { !$0 }
-            .bind(to: self.playerControls.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        self.viewModel.playerPosition
+            .bind(to: playerControls.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.playerPosition
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] position in
                 self?.progressSlider.value = position
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.playerDuration
+            .disposed(by: disposeBag)
+        viewModel.playerDuration
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] duration in
                 let durationString = self?.durationString(microcec: duration) ?? ""
                 self?.durationLabel.text = durationString
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.pause
+            .disposed(by: disposeBag)
+        viewModel.pause
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] pause in
@@ -205,8 +205,8 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                 }
                 self?.togglePause.setBackgroundImage(image, for: .normal)
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.audioMuted
+            .disposed(by: disposeBag)
+        viewModel.audioMuted
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] muted in
@@ -216,24 +216,24 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                 }
                 self?.muteAudio.setBackgroundImage(image, for: .normal)
             })
-            .disposed(by: self.disposeBag)
-        self.muteAudio.rx.tap
+            .disposed(by: disposeBag)
+        muteAudio.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.muteAudio()
             })
-            .disposed(by: self.disposeBag)
-        self.togglePause.rx.tap
+            .disposed(by: disposeBag)
+        togglePause.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.toglePause()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func durationString(microcec: Float) -> String {
         if microcec == 0 {
             return ""
         }
-        let durationInSec = Int(microcec / 1000000)
+        let durationInSec = Int(microcec / 1_000_000)
         let seconds = durationInSec % 60
         let minutes = (durationInSec / 60) % 60
         let hours = (durationInSec / 3600)

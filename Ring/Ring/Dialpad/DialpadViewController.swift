@@ -18,113 +18,119 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Reusable
-import UIKit
-import AVFoundation
 import AudioToolbox
+import AVFoundation
+import Reusable
 import RxSwift
+import UIKit
 
 class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: DialpadViewModel!
 
     var items = ["1", "2", "3", "4", "5", "6", "7", "8", "9", String("﹡"), "0", "#"]
 
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var placeCallButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var clearButton: UIButton!
-    @IBOutlet weak var labelTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var labelBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var numberLabel: UILabel!
+    @IBOutlet var placeCallButton: UIButton!
+    @IBOutlet var backButton: UIButton!
+    @IBOutlet var clearButton: UIButton!
+    @IBOutlet var labelTopConstraint: NSLayoutConstraint!
+    @IBOutlet var labelBottomConstraint: NSLayoutConstraint!
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.jamiBackgroundColor
         collectionView.backgroundColor = UIColor.jamiBackgroundColor
-        self.applyL10n()
+        applyL10n()
         let device = UIDevice.modelName
-        if device == "iPhone 5" || device == "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
+        if device == "iPhone 5" || device == "iPhone 5c" || device == "iPhone 5s" || device ==
+            "iPhone SE" {
             labelTopConstraint.constant = 15
             labelBottomConstraint.constant = 15
         }
-        self.viewModel.observableNumber
+        viewModel.observableNumber
             .asObservable()
             .observe(on: MainScheduler.instance)
             .bind(to: numberLabel.rx.text)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         placeCallButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.dismiss(animated: false)
                 self?.viewModel.startCall()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         backButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.dismiss(animated: true)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         clearButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 if self?.viewModel.phoneNumber.last != nil {
                     self?.viewModel.phoneNumber.removeLast()
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.observableNumber
+            .disposed(by: disposeBag)
+        viewModel.observableNumber
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { text in
                 self.clearButton.isHidden = text.isEmpty
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.playDefaultSound
+            .disposed(by: disposeBag)
+        viewModel.playDefaultSound
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { play in
                 if !play { return }
                 AudioServicesPlaySystemSound(1057)
             })
-            .disposed(by: self.disposeBag)
-        self.placeCallButton.isHidden = self.viewModel.inCallDialpad
+            .disposed(by: disposeBag)
+        placeCallButton.isHidden = viewModel.inCallDialpad
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.collectionView
+        collectionView
             .register(UICollectionViewCell.self,
                       forCellWithReuseIdentifier: "DialpadCellIdentifier")
     }
 
     func applyL10n() {
-        self.backButton.setTitle(L10n.Actions.backAction, for: .normal)
-        self.clearButton.setTitle(L10n.Actions.clearAction, for: .normal)
+        backButton.setTitle(L10n.Actions.backAction, for: .normal)
+        clearButton.setTitle(L10n.Actions.clearAction, for: .normal)
     }
 }
 
-extension DialpadViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension DialpadViewController: UICollectionViewDelegate, UICollectionViewDataSource,
+                                 UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return 12
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DialpadCellIdentifier", for: indexPath)
-        cell.contentView.subviews.forEach { (view) in
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "DialpadCellIdentifier",
+            for: indexPath
+        )
+        for view in cell.contentView.subviews {
             view.removeFromSuperview()
         }
         let originX = (cell.bounds.size.width - 70) * 0.5
-        let label = UILabel.init(frame: CGRect(x: originX, y: 0,
-                                               width: 70, height: 70))
+        let label = UILabel(frame: CGRect(x: originX, y: 0,
+                                          width: 70, height: 70))
         label.cornerRadius = 35
         label.backgroundColor = UIColor(red: 204, green: 204, blue: 204, alpha: 1)
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 25, weight: .light)
         label.textColor = UIColor.jamiSecondary
-        label.text = self.items[indexPath.item]
+        label.text = items[indexPath.item]
         if label.text == String("﹡") {
             label.font = UIFont.systemFont(ofSize: 35, weight: .light)
         }
@@ -134,24 +140,40 @@ extension DialpadViewController: UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.viewModel.numberPressed(number: self.items[indexPath.item])
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.numberPressed(number: items[indexPath.item])
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout _: UICollectionViewLayout,
+        sizeForItemAt _: IndexPath
+    ) -> CGSize {
         let width = collectionView.frame.width / 3
         return CGSize(width: width, height: 70)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(
+        _: UICollectionView,
+        layout _: UICollectionViewLayout,
+        insetForSectionAt _: Int
+    ) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _: UICollectionView,
+        layout _: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt _: Int
+    ) -> CGFloat {
         return 0
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _: UICollectionView,
+        layout _: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt _: Int
+    ) -> CGFloat {
         return 20
     }
 }

@@ -26,29 +26,42 @@ class MockNameServer: MockServer {
     let registeredNames = ["alice", "bob", "charlie"]
 
     init() {
-        super.init( app: { (environ, startResponse, sendBody) in
+        super.init(app: { environ, startResponse, sendBody in
             let respondWithError: (@escaping ((String, [(String, String)]) -> Void),
-                                   @escaping ((Data) -> Void), String) -> Void = { startResponse, sendBody, message in
-                                    startResponse("500 Internal Server Error", [("Content-Type", "text/plain")])
-                                    sendBody(Data(message.utf8))
-                                    sendBody(Data())
-                                   }
+                                   @escaping ((Data) -> Void), String)
+                -> Void = { startResponse, sendBody, message in
+                    startResponse(
+                        "500 Internal Server Error",
+                        [("Content-Type", "text/plain")]
+                    )
+                    sendBody(Data(message.utf8))
+                    sendBody(Data())
+                }
 
             let respondWithNotFound: (@escaping ((String, [(String, String)]) -> Void),
-                                      @escaping ((Data) -> Void)) -> Void = { startResponse, sendBody in
-                                        startResponse("404 Not Found", [("Content-Type", "text/plain")])
-                                        sendBody(Data("Not Found".utf8))
-                                        sendBody(Data())
-                                      }
+                                      @escaping ((Data) -> Void))
+                -> Void = { startResponse, sendBody in
+                    startResponse(
+                        "404 Not Found",
+                        [("Content-Type", "text/plain")]
+                    )
+                    sendBody(Data("Not Found".utf8))
+                    sendBody(Data())
+                }
 
-            let respondWithJSON: (@escaping ((String, [(String, String)]) -> Void), @escaping ((Data) -> Void), Data) -> Void = { startResponse, sendBody, jsonData in
+            let respondWithJSON: (
+                @escaping ((String, [(String, String)]) -> Void),
+                @escaping ((Data) -> Void),
+                Data
+            ) -> Void = { startResponse, sendBody, jsonData in
                 startResponse("200 OK", [("Content-Type", "application/json")])
                 sendBody(jsonData)
                 sendBody(Data())
             }
 
             guard let path = environ["PATH_INFO"] as? String,
-                  let method = environ["REQUEST_METHOD"] as? String else {
+                  let method = environ["REQUEST_METHOD"] as? String
+            else {
                 respondWithError(startResponse, sendBody, "Invalid request")
                 return
             }

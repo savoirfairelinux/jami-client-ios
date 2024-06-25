@@ -18,11 +18,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import Reusable
-import RxSwift
 import RxCocoa
 import RxDataSources
+import RxSwift
+import UIKit
 
 struct ContactActions {
     let title: String
@@ -31,11 +31,12 @@ struct ContactActions {
 
 class ContactViewModel: ViewModel, Stateable {
     private let disposeBag = DisposeBag()
+
     // MARK: - Rx Stateable
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
+
     private let contactService: ContactsService
     private let profileService: ProfilesService
     private let accountService: AccountsService
@@ -45,57 +46,98 @@ class ContactViewModel: ViewModel, Stateable {
         let jamiSettings =
             [SectionModel(model: "ProfileInfoCell",
                           items:
-                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
-                              ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
-                              ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon)])]
+                            [
+                                ContactActions(
+                                    title: L10n.ContactPage.startAudioCall,
+                                    image: Asset.callButton
+                                ),
+                                ContactActions(
+                                    title: L10n.ContactPage.startVideoCall,
+                                    image: Asset.videoRunning
+                                ),
+                                ContactActions(
+                                    title: L10n.ContactPage.sendMessage,
+                                    image: Asset.conversationIcon
+                                )
+                            ])]
         let sipSettings =
             [SectionModel(model: "ProfileInfoCell",
                           items:
-                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton)])]
+                            [ContactActions(
+                                title: L10n.ContactPage.startAudioCall,
+                                image: Asset.callButton
+                            )])]
         guard let account = self.accountService.currentAccount,
-              account.type == AccountType.ring else {
+              account.type == AccountType.ring
+        else {
             return Observable<[SectionModel<String, ContactActions>]>
                 .just(sipSettings)
         }
         return Observable<[SectionModel<String, ContactActions>]>
             .just(jamiSettings)
     }()
+
     var conversation: ConversationModel! {
         didSet {
-            guard let account = self.accountService
+            guard let account = accountService
                     .getAccount(fromAccountId: conversation.accountId),
                   let jamiId = conversation.getParticipants().first?.jamiId else { return }
-            if let contact = self.contactService.contact(withHash: jamiId) {
+            if let contact = contactService.contact(withHash: jamiId) {
                 if let name = contact.userName {
-                    self.userName.accept(name)
+                    userName.accept(name)
                 } else {
-                    self.userName.accept(jamiId)
+                    userName.accept(jamiId)
                 }
                 if account.type == AccountType.ring {
-                    self.tableSection = Observable<[SectionModel<String, ContactActions>]>
+                    tableSection = Observable<[SectionModel<String, ContactActions>]>
                         .just([SectionModel(model: "ProfileInfoCell",
                                             items:
-                                                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
-                                                  ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
-                                                  ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon),
-                                                  ContactActions(title: L10n.ContactPage.removeConversation, image: Asset.icConversationRemove),
-                                                  ContactActions(title: L10n.Global.blockContact, image: Asset.blockIcon)])])
+                                                [
+                                                    ContactActions(
+                                                        title: L10n.ContactPage.startAudioCall,
+                                                        image: Asset.callButton
+                                                    ),
+                                                    ContactActions(
+                                                        title: L10n.ContactPage.startVideoCall,
+                                                        image: Asset.videoRunning
+                                                    ),
+                                                    ContactActions(
+                                                        title: L10n.ContactPage.sendMessage,
+                                                        image: Asset.conversationIcon
+                                                    ),
+                                                    ContactActions(
+                                                        title: L10n.ContactPage.removeConversation,
+                                                        image: Asset.icConversationRemove
+                                                    ),
+                                                    ContactActions(
+                                                        title: L10n.Global.blockContact,
+                                                        image: Asset.blockIcon
+                                                    )
+                                                ])])
                 } else {
-                    self.tableSection = Observable<[SectionModel<String, ContactActions>]>
+                    tableSection = Observable<[SectionModel<String, ContactActions>]>
                         .just([SectionModel(model: "ProfileInfoCell",
                                             items:
-                                                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
-                                                  ContactActions(title: L10n.ContactPage.removeConversation, image: Asset.icConversationRemove)])])
+                                                [
+                                                    ContactActions(
+                                                        title: L10n.ContactPage.startAudioCall,
+                                                        image: Asset.callButton
+                                                    ),
+                                                    ContactActions(
+                                                        title: L10n.ContactPage.removeConversation,
+                                                        image: Asset.icConversationRemove
+                                                    )
+                                                ])])
                 }
             } else {
-                self.userName.accept(jamiId)
+                userName.accept(jamiId)
             }
-            if account.type == AccountType.ring && self.userName.value == jamiId {
-                self.nameService.usernameLookupStatus
-                    .filter({lookupNameResponse in
-                        return lookupNameResponse.address != nil &&
+            if account.type == AccountType.ring && userName.value == jamiId {
+                nameService.usernameLookupStatus
+                    .filter { lookupNameResponse in
+                        lookupNameResponse.address != nil &&
                             lookupNameResponse.address == jamiId
-                    })
+                    }
                     .subscribe(onNext: { [weak self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
                             self?.userName.accept(name)
@@ -104,17 +146,26 @@ class ContactViewModel: ViewModel, Stateable {
                         }
                     })
                     .disposed(by: disposeBag)
-                self.nameService.lookupAddress(withAccount: account.id, nameserver: "", address: jamiId)
+                nameService.lookupAddress(withAccount: account.id, nameserver: "", address: jamiId)
             }
             let schema: URIType = account.type == .sip ? .sip : .ring
-            guard let contactURI = JamiURI(schema: schema, infoHash: jamiId).uriString else { return }
-            var initialProfile = Profile(uri: jamiId, alias: "", photo: "", type: schema.getString())
-            if let profile = self.contactService.getProfile(uri: contactURI, accountId: conversation.accountId) {
+            guard let contactURI = JamiURI(schema: schema, infoHash: jamiId).uriString
+            else { return }
+            var initialProfile = Profile(
+                uri: jamiId,
+                alias: "",
+                photo: "",
+                type: schema.getString()
+            )
+            if let profile = contactService.getProfile(
+                uri: contactURI,
+                accountId: conversation.accountId
+            ) {
                 initialProfile = profile
             }
-            self.profileService.getProfile(uri: contactURI,
-                                           createIfNotexists: false,
-                                           accountId: conversation.accountId)
+            profileService.getProfile(uri: contactURI,
+                                      createIfNotexists: false,
+                                      accountId: conversation.accountId)
                 .startWith(initialProfile)
                 .subscribe(onNext: { [weak self] profile in
                     guard let self = self else { return }
@@ -122,44 +173,50 @@ class ContactViewModel: ViewModel, Stateable {
                         self.displayName.accept(alias)
                     }
                     if let photo = profile.photo,
-                       let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                       let data = NSData(
+                        base64Encoded: photo,
+                        options: NSData.Base64DecodingOptions.ignoreUnknownCharacters
+                       ) as Data? {
                         self.profileImageData.accept(data)
                     }
                 })
                 .disposed(by: disposeBag)
         }
     }
+
     var userName = BehaviorRelay<String>(value: "")
     var displayName = BehaviorRelay<String>(value: "")
-    lazy var titleName: Observable<String> = {
-        return Observable.combineLatest(userName.asObservable(),
-                                        displayName.asObservable()) {(userName, displayname) in
-            if displayname.isEmpty {
-                return userName
-            }
-            return displayname
+    lazy var titleName: Observable<String> = Observable.combineLatest(userName.asObservable(),
+                                                                      displayName.asObservable(
+                                                                      )) { userName, displayname in
+        if displayname.isEmpty {
+            return userName
         }
-    }()
+        return displayname
+    }
+
     var profileImageData = BehaviorRelay<Data?>(value: nil)
 
-    required init (with injectionBag: InjectionBag) {
-        self.contactService = injectionBag.contactsService
-        self.profileService = injectionBag.profileService
-        self.accountService = injectionBag.accountService
-        self.conversationService = injectionBag.conversationsService
-        self.nameService = injectionBag.nameService
+    required init(with injectionBag: InjectionBag) {
+        contactService = injectionBag.contactsService
+        profileService = injectionBag.profileService
+        accountService = injectionBag.accountService
+        conversationService = injectionBag.conversationsService
+        nameService = injectionBag.nameService
     }
+
     func startCall() {
-        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        self.stateSubject.onNext(ConversationState
-                                    .startCall(contactRingId: jamiId,
-                                               userName: self.userName.value))
+        guard let jamiId = conversation.getParticipants().first?.jamiId else { return }
+        stateSubject.onNext(ConversationState
+                                .startCall(contactRingId: jamiId,
+                                           userName: userName.value))
     }
+
     func startAudioCall() {
-        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        self.stateSubject.onNext(ConversationState
-                                    .startAudioCall(contactRingId: jamiId,
-                                                    userName: self.userName.value))
+        guard let jamiId = conversation.getParticipants().first?.jamiId else { return }
+        stateSubject.onNext(ConversationState
+                                .startAudioCall(contactRingId: jamiId,
+                                                userName: userName.value))
     }
 
     func deleteConversation() {
@@ -167,7 +224,7 @@ class ContactViewModel: ViewModel, Stateable {
         let conversationId = conversation.id
         if conversation.isCoredialog(),
            let participantId = conversation.getParticipants().first?.jamiId {
-            self.contactService
+            contactService
                 .removeContact(withId: participantId,
                                ban: false,
                                withAccountId: accountId)
@@ -181,11 +238,14 @@ class ContactViewModel: ViewModel, Stateable {
                     self.stateSubject.onNext(ConversationState
                                                 .returnToSmartList)
                 })
-                .disposed(by: self.disposeBag)
+                .disposed(by: disposeBag)
         } else {
-            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
-            self.stateSubject.onNext(ConversationState
-                                        .returnToSmartList)
+            conversationService.removeConversation(
+                conversationId: conversationId,
+                accountId: accountId
+            )
+            stateSubject.onNext(ConversationState
+                                    .returnToSmartList)
         }
     }
 
@@ -194,7 +254,7 @@ class ContactViewModel: ViewModel, Stateable {
         let conversationId = conversation.id
         if conversation.isCoredialog(),
            let participantId = conversation.getParticipants().first?.jamiId {
-            self.contactService
+            contactService
                 .removeContact(withId: participantId,
                                ban: true,
                                withAccountId: accountId)
@@ -208,11 +268,14 @@ class ContactViewModel: ViewModel, Stateable {
                     self.stateSubject.onNext(ConversationState
                                                 .returnToSmartList)
                 })
-                .disposed(by: self.disposeBag)
+                .disposed(by: disposeBag)
         } else {
-            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
-            self.stateSubject.onNext(ConversationState
-                                        .returnToSmartList)
+            conversationService.removeConversation(
+                conversationId: conversationId,
+                accountId: accountId
+            )
+            stateSubject.onNext(ConversationState
+                                    .returnToSmartList)
         }
     }
 }

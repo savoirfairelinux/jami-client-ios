@@ -18,13 +18,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import XCTest
-import RxSwift
 import CoreLocation
 @testable import Ring
+import RxSwift
+import XCTest
 
 class LocationSharingServiceTests: XCTestCase {
-
     private var locationSharingService: LocationSharingService!
     private var dbManager: DBManager!
     private var disposeBag: DisposeBag!
@@ -51,16 +50,26 @@ class LocationSharingServiceTests: XCTestCase {
     func testLocationSerialization() {
         // Test if the location serialization works as expected
 
-        let location = SerializableLocation(type: "Position", lat: 37.7749, long: -122.4194, alt: 56.078, time: 1681923)
+        let location = SerializableLocation(
+            type: "Position",
+            lat: 37.7749,
+            long: -122.4194,
+            alt: 56.078,
+            time: 1_681_923
+        )
         let serializedLocation = LocationSharingService.serializeLocation(location: location)
         XCTAssertNotNil(serializedLocation, "Serialization should return a non-nil String")
     }
 
     func testLocationDeserialization() {
         // Test if the location deserialization works as expected
-        let json = "{\"lat\":45.534305783044914,\"long\":-73.6208561630721,\"time\":1681923961249,\"type\":\"Position\"}"
+        let json =
+            "{\"lat\":45.534305783044914,\"long\":-73.6208561630721,\"time\":1681923961249,\"type\":\"Position\"}"
         let deserializedLocation = LocationSharingService.deserializeLocation(json: json)
-        XCTAssertNotNil(deserializedLocation, "Deserialization should return a non-nil SerializableLocation")
+        XCTAssertNotNil(
+            deserializedLocation,
+            "Deserialization should return a non-nil SerializableLocation"
+        )
     }
 
     func testSendLocationEvent() {
@@ -80,7 +89,12 @@ class LocationSharingServiceTests: XCTestCase {
             })
             .disposed(by: disposeBag)
 
-        locationSharingService.triggerSendLocation(accountId: accountId1, peerUri: jamiId1, content: "content", shouldTryToSave: true)
+        locationSharingService.triggerSendLocation(
+            accountId: accountId1,
+            peerUri: jamiId1,
+            content: "content",
+            shouldTryToSave: true
+        )
 
         waitForExpectations(timeout: 1, handler: nil)
     }
@@ -100,7 +114,11 @@ class LocationSharingServiceTests: XCTestCase {
             })
             .disposed(by: disposeBag)
 
-        locationSharingService.triggerStopSharing(accountId: "accountId", peerUri: "peerUri", content: "content")
+        locationSharingService.triggerStopSharing(
+            accountId: "accountId",
+            peerUri: "peerUri",
+            content: "content"
+        )
 
         waitForExpectations(timeout: 1, handler: nil)
     }
@@ -111,7 +129,12 @@ class LocationSharingServiceTests: XCTestCase {
         let messageId = "messageId"
         let content = "{\"type\":\"Position\",\"lat\":37.7749,\"long\":-122.4194,\"time\":10000}"
 
-        locationSharingService.handleReceivedLocationUpdate(from: peerUri, to: accountId, messageId: messageId, locationJSON: content)
+        locationSharingService.handleReceivedLocationUpdate(
+            from: peerUri,
+            to: accountId,
+            messageId: messageId,
+            locationJSON: content
+        )
 
         let peerUriAndData = locationSharingService.peerUriAndLocationReceived.value
         XCTAssertEqual(peerUriAndData.0, peerUri)
@@ -134,37 +157,61 @@ class LocationSharingServiceTests: XCTestCase {
 
     func testStartAndStopReceivingService() {
         locationSharingService.startReceivingService()
-        XCTAssertNotNil(locationSharingService.receivingService, "receivingService should not be nil after starting")
+        XCTAssertNotNil(
+            locationSharingService.receivingService,
+            "receivingService should not be nil after starting"
+        )
 
         locationSharingService.stopReceivingService()
-        XCTAssertNil(locationSharingService.receivingService, "receivingService should be nil after stopping")
+        XCTAssertNil(
+            locationSharingService.receivingService,
+            "receivingService should be nil after stopping"
+        )
     }
 
     func testIsAlreadySharing() {
         let accountId = "accountId"
         let contactUri = "contactUri"
 
-        XCTAssertFalse(locationSharingService.isAlreadySharing(accountId: accountId, contactUri: contactUri))
+        XCTAssertFalse(locationSharingService.isAlreadySharing(
+            accountId: accountId,
+            contactUri: contactUri
+        ))
 
-        locationSharingService.getIncomingInstances().insertOrUpdate(IncomingLocationSharingInstance(accountId: accountId,
-                                                                                                     contactUri: contactUri,
-                                                                                                     lastReceivedDate: Date(),
-                                                                                                     lastReceivedTimeStamp: 0))
+        locationSharingService.getIncomingInstances()
+            .insertOrUpdate(IncomingLocationSharingInstance(
+                accountId: accountId,
+                contactUri: contactUri,
+                lastReceivedDate: Date(),
+                lastReceivedTimeStamp: 0
+            ))
 
-        XCTAssertTrue(locationSharingService.isAlreadySharing(accountId: accountId, contactUri: contactUri))
+        XCTAssertTrue(locationSharingService.isAlreadySharing(
+            accountId: accountId,
+            contactUri: contactUri
+        ))
     }
 
     func testIsAlreadySharingMyLocation() {
         let accountId = "accountId"
         let contactUri = "contactUri"
 
-        XCTAssertFalse(locationSharingService.isAlreadySharingMyLocation(accountId: accountId, contactUri: contactUri))
+        XCTAssertFalse(locationSharingService.isAlreadySharingMyLocation(
+            accountId: accountId,
+            contactUri: contactUri
+        ))
 
-        locationSharingService.getOutgoingInstances().insertOrUpdate(OutgoingLocationSharingInstance(locationSharingService: locationSharingService,
-                                                                                                     accountId: accountId,
-                                                                                                     contactUri: contactUri))
+        locationSharingService.getOutgoingInstances()
+            .insertOrUpdate(OutgoingLocationSharingInstance(
+                locationSharingService: locationSharingService,
+                accountId: accountId,
+                contactUri: contactUri
+            ))
 
-        XCTAssertTrue(locationSharingService.isAlreadySharingMyLocation(accountId: accountId, contactUri: contactUri))
+        XCTAssertTrue(locationSharingService.isAlreadySharingMyLocation(
+            accountId: accountId,
+            contactUri: contactUri
+        ))
     }
 
     func testGetMyLocationSharingRemainedTime() {
@@ -172,12 +219,18 @@ class LocationSharingServiceTests: XCTestCase {
         let contactUri = "contactUri"
         let duration: TimeInterval = 300
 
-        locationSharingService.getOutgoingInstances().insertOrUpdate(OutgoingLocationSharingInstance(locationSharingService: locationSharingService,
-                                                                                                     accountId: accountId,
-                                                                                                     contactUri: contactUri,
-                                                                                                     duration: duration))
+        locationSharingService.getOutgoingInstances()
+            .insertOrUpdate(OutgoingLocationSharingInstance(
+                locationSharingService: locationSharingService,
+                accountId: accountId,
+                contactUri: contactUri,
+                duration: duration
+            ))
 
-        let remainedTime = locationSharingService.getMyLocationSharingRemainedTime(accountId: accountId, contactUri: contactUri)
+        let remainedTime = locationSharingService.getMyLocationSharingRemainedTime(
+            accountId: accountId,
+            contactUri: contactUri
+        )
         XCTAssertGreaterThanOrEqual(remainedTime, 0)
         XCTAssertLessThanOrEqual(remainedTime, Int(duration / 60))
     }
@@ -187,9 +240,15 @@ class LocationSharingServiceTests: XCTestCase {
         let contactUri = "contactUri"
 
         locationSharingService.startSharingLocation(from: accountId, to: contactUri)
-        XCTAssertTrue(locationSharingService.isAlreadySharingMyLocation(accountId: accountId, contactUri: contactUri))
+        XCTAssertTrue(locationSharingService.isAlreadySharingMyLocation(
+            accountId: accountId,
+            contactUri: contactUri
+        ))
 
         locationSharingService.stopSharingLocation(accountId: accountId, contactUri: contactUri)
-        XCTAssertFalse(locationSharingService.isAlreadySharingMyLocation(accountId: accountId, contactUri: contactUri))
+        XCTAssertFalse(locationSharingService.isAlreadySharingMyLocation(
+            accountId: accountId,
+            contactUri: contactUri
+        ))
     }
 }

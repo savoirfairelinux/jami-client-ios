@@ -20,32 +20,31 @@
  */
 
 class ProfileHeaderView: GSKStretchyHeaderView {
-
     @IBOutlet var avatarView: UIView!
     @IBOutlet var displayName: UILabel!
     @IBOutlet var userName: UILabel!
-    @IBOutlet weak var jamiID: CopyableLabel!
-    @IBOutlet weak var background: UIView!
+    @IBOutlet var jamiID: CopyableLabel!
+    @IBOutlet var background: UIView!
 
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        self.backgroundColor = UIColor.jamiBackgroundColor
-        self.background.backgroundColor = UIColor.jamiBackgroundColor
+        backgroundColor = UIColor.jamiBackgroundColor
+        background.backgroundColor = UIColor.jamiBackgroundColor
     }
 
     override func didChangeStretchFactor(_ stretchFactor: CGFloat) {
         var alpha = CGFloatTranslateRange(stretchFactor, 0.2, 0.7, 0, 1)
         alpha = max(0, min(1, alpha))
-        self.avatarView.alpha = alpha
-        self.displayName.alpha = alpha
-        self.userName.alpha = alpha
-        self.jamiID.alpha = alpha
+        avatarView.alpha = alpha
+        displayName.alpha = alpha
+        userName.alpha = alpha
+        jamiID.alpha = alpha
 
         var scale = CGFloatTranslateRange(stretchFactor, 0.1, 0.9, 0.6, 1)
         scale = max(0.4, min(1, scale))
-        self.avatarView.transform = CGAffineTransform(scaleX: scale, y: scale)
-        self.displayName.transform = CGAffineTransform(scaleX: scale, y: scale)
-        self.userName.transform = CGAffineTransform(scaleX: scale, y: scale)
-        self.jamiID.transform = CGAffineTransform(scaleX: scale, y: scale)
+        avatarView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        displayName.transform = CGAffineTransform(scaleX: scale, y: scale)
+        userName.transform = CGAffineTransform(scaleX: scale, y: scale)
+        jamiID.transform = CGAffineTransform(scaleX: scale, y: scale)
     }
 }

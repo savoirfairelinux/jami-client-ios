@@ -22,11 +22,11 @@ import Foundation
 import RxSwift
 
 /// Represent a navigation state. We mostly use it as an enum
-public protocol State {
-}
+public protocol State {}
 
 /// A Stateable exposes a navigation state on which StateableResponsive will be subscribed
 public protocol Stateable {
-    /// The state that will be emitted and catch by the StateableResponsive classes to process the navigation
+    /// The state that will be emitted and catch by the StateableResponsive classes to process the
+    /// navigation
     var state: Observable<State> { get }
 }

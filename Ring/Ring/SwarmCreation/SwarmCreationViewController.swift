@@ -18,13 +18,14 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import SwiftUI
 import Reusable
-import RxSwift
 import RxRelay
+import RxSwift
+import SwiftUI
+import UIKit
 
-class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardBased, UISearchResultsUpdating {
+class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardBased,
+                                   UISearchResultsUpdating {
     var viewModel: SwarmCreationViewModel!
     private let disposeBag = DisposeBag()
     let strSearchText = BehaviorRelay<String>(value: "")
@@ -39,20 +40,38 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
     }()
 
     override func viewDidLoad() {
-        self.navigationItem.title = L10n.Swarm.selectContacts
-        let backButton = UIBarButtonItem(title: L10n.Global.cancel, style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.title = L10n.Swarm.selectContacts
+        let backButton = UIBarButtonItem(
+            title: L10n.Global.cancel,
+            style: .plain,
+            target: self,
+            action: #selector(backButtonTapped)
+        )
 
-        self.navigationItem.leftBarButtonItem = backButton
+        navigationItem.leftBarButtonItem = backButton
 
-        let continueButton = UIBarButtonItem(title: L10n.Global.create, style: .plain, target: self, action: #selector(backButtonTapped))
+        let continueButton = UIBarButtonItem(
+            title: L10n.Global.create,
+            style: .plain,
+            target: self,
+            action: #selector(backButtonTapped)
+        )
 
-        self.navigationItem.rightBarButtonItem = continueButton
+        navigationItem.rightBarButtonItem = continueButton
         super.viewDidLoad()
-        guard let accountId = self.viewModel.currentAccount?.id else { return }
+        guard let accountId = viewModel.currentAccount?.id else { return }
 
-        let model = SwarmCreationUIModel(with: self.viewModel.injectionBag, accountId: accountId, strSearchText: strSearchText, swarmCreated: {[weak self] conversationId, accountId in
-            self?.viewModel.showConversation(withConversationId: conversationId, andWithAccountId: accountId)
-        })
+        let model = SwarmCreationUIModel(
+            with: viewModel.injectionBag,
+            accountId: accountId,
+            strSearchText: strSearchText,
+            swarmCreated: { [weak self] conversationId, accountId in
+                self?.viewModel.showConversation(
+                    withConversationId: conversationId,
+                    andWithAccountId: accountId
+                )
+            }
+        )
         let contentView = UIHostingController(rootView: SwarmCreationUI(list: model))
         addChild(contentView)
         view.addSubview(contentView.view)
@@ -61,30 +80,36 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
         contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         contentView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         contentView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        self.configureNavigationBar()
-        self.setupSearchBar()
+        configureNavigationBar()
+        setupSearchBar()
         continueButton.rx.tap
             .subscribe(onNext: { [weak model] in
                 guard let model = model else { return }
                 model.createTheSwarm()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
-        self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
-                                    NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor]
+        navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
+        navigationController?.navigationBar
+            .titleTextAttributes = [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
+                NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor
+            ]
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+        navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow
+            .cgColor
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(
+        to size: CGSize,
+        with coordinator: UIViewControllerTransitionCoordinator
+    ) {
         // Waiting for screen size change
         DispatchQueue.global(qos: .background).async {
             sleep(UInt32(0.5))
@@ -98,7 +123,7 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        self.searchController.sizeChanged(to: self.view.frame.size.width, totalItems: 0.0)
+        searchController.sizeChanged(to: view.frame.size.width, totalItems: 0.0)
         super.viewDidAppear(animated)
     }
 
@@ -111,13 +136,13 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
 
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
-        self.strSearchText.accept(searchText)
+        strSearchText.accept(searchText)
     }
 
     @objc
     func backButtonTapped() {
         // Handle the back action
         // For instance, pop the current view controller from the navigation stack
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }

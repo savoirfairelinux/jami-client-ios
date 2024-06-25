@@ -25,6 +25,7 @@ struct MessageStackView: View {
     var model: MessageStackVM {
         return messageModel.stackViewModel
     }
+
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
     var body: some View {

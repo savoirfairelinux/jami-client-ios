@@ -10,10 +10,10 @@ import Foundation
 
 extension Array where Element: Comparable {
     func isAscending() -> Bool {
-        return zip(self, self.dropFirst()).allSatisfy(<=)
+        return zip(self, dropFirst()).allSatisfy(<=)
     }
 
     func isDescending() -> Bool {
-        return zip(self, self.dropFirst()).allSatisfy(>=)
+        return zip(self, dropFirst()).allSatisfy(>=)
     }
 }

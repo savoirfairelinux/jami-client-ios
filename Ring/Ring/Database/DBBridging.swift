@@ -67,18 +67,18 @@ enum InteractionStatus: String {
 
 enum InteractionType: String {
     case invalid = "INVALID"
-    case text    = "TEXT"
-    case call    = "CALL"
+    case text = "TEXT"
+    case call = "CALL"
     case contact = "CONTACT"
 }
 
 final class DBBridging {
-
     let profileHepler: ProfileDataHelper
     let conversationHelper: ConversationDataHelper
     let interactionHepler: InteractionDataHelper
 
-    // used to create object to save to db. When inserting in table defaultID will be replaced by autoincrementedID
+    // used to create object to save to db. When inserting in table defaultID will be replaced by
+    // autoincrementedID
     let defaultID: Int64 = 1
 
     init(profileHepler: ProfileDataHelper, conversationHelper: ConversationDataHelper,

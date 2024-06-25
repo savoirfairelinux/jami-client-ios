@@ -19,9 +19,9 @@
  */
 
 import Foundation
-import SwiftUI
 import RxRelay
 import RxSwift
+import SwiftUI
 
 struct LogEntry: Identifiable {
     var id: String
@@ -29,7 +29,6 @@ struct LogEntry: Identifiable {
 }
 
 class LogUIViewModel: ObservableObject {
-
     @Published var showPicker = false
     @Published var showShare = false
     @Published var showErrorAlert = false
@@ -39,9 +38,10 @@ class LogUIViewModel: ObservableObject {
     var logEntries = [LogEntry]()
     var isViewDisplayed = false {
         didSet {
-            self.triggerUIUpdater()
+            triggerUIUpdater()
         }
     }
+
     var timer: Timer?
 
     var errorText = ""
@@ -55,30 +55,30 @@ class LogUIViewModel: ObservableObject {
     var shareFileURL: URL?
 
     init(injectionBag: InjectionBag) {
-        self.systemService = injectionBag.systemService
-        self.systemService.clearLog()
-        self.parceCurrentLog()
+        systemService = injectionBag.systemService
+        systemService.clearLog()
+        parceCurrentLog()
         openDocumentBrowser
             .asObservable()
             .subscribe(onNext: { [weak self] openBrowser in
                 guard let self = self else { return }
                 self.showPicker = openBrowser && !self.systemService.currentLog.isEmpty
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         openShareMenu
             .asObservable()
             .subscribe(onNext: { [weak self] openShare in
                 guard let self = self else { return }
-                guard openShare && !self.systemService.currentLog.isEmpty else { return }
+                guard openShare, !self.systemService.currentLog.isEmpty else { return }
                 if self.prepareFileToShare() {
                     self.showShare = true
                 } else {
                     self.showShareError()
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.systemService.isMonitoring
+            .disposed(by: disposeBag)
+        systemService.isMonitoring
             .asObservable()
             .observe(on: MainScheduler.instance)
             .startWith(systemService.isMonitoring.value)
@@ -86,9 +86,9 @@ class LogUIViewModel: ObservableObject {
                 guard let self = self else { return }
                 self.buttonTitle = monitoring ? L10n.LogView.stopLogging : L10n.LogView.startLogging
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.systemService.newMessage
+        systemService.newMessage
             .asObservable()
             .subscribe(onNext: { [weak self] newMessage in
                 guard let self = self else { return }
@@ -98,21 +98,21 @@ class LogUIViewModel: ObservableObject {
                     self.editButtonsVisible = !self.systemService.currentLog.isEmpty
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func insertNewLog(log: String) {
         if log.isEmpty { return }
         queue.sync(flags: .barrier) { [weak self] in
             guard let self = self else { return }
-            let id = "\(Int.random(in: 1..<10000))_" + log
+            let id = "\(Int.random(in: 1 ..< 10000))_" + log
             let newLog = LogEntry(id: id, content: String(log))
             self.logEntries.insert(newLog, at: 0)
         }
     }
 
     private func triggerUIUpdater() {
-        if self.systemService.isMonitoring.value && self.isViewDisplayed {
+        if systemService.isMonitoring.value && isViewDisplayed {
             startTimer()
         } else {
             stopTimer()
@@ -131,19 +131,26 @@ class LogUIViewModel: ObservableObject {
             }
         }
     }
+
     private func stopTimer() {
         timer?.invalidate()
         timer = nil
     }
 
     private func prepareFileToShare() -> Bool {
-        guard let doc = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard let doc = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+                .first
+        else {
             return false
         }
         let filename = getFileName()
         let finalURL = doc.appendingPathComponent(filename)
         do {
-            try self.systemService.currentLog.write(to: finalURL, atomically: true, encoding: String.Encoding.utf8)
+            try systemService.currentLog.write(
+                to: finalURL,
+                atomically: true,
+                encoding: String.Encoding.utf8
+            )
             shareFileURL = finalURL
         } catch {
             return false
@@ -152,7 +159,7 @@ class LogUIViewModel: ObservableObject {
     }
 
     private func getFileName() -> String {
-        let dateFormatter: DateFormatter = DateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd_HHmmss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
@@ -170,39 +177,39 @@ class LogUIViewModel: ObservableObject {
     }
 
     private func parceCurrentLog() {
-        let entries = self.systemService.currentLog.split(whereSeparator: \.isNewline)
-        self.logEntries = entries.reversed()
-            .filter({ entry in
+        let entries = systemService.currentLog.split(whereSeparator: \.isNewline)
+        logEntries = entries.reversed()
+            .filter { entry in
                 !entry.isEmpty
-            })
-            .map({ entry in
-                let id = "\(Int.random(in: 1..<10000))_" + entry
+            }
+            .map { entry in
+                let id = "\(Int.random(in: 1 ..< 10000))_" + entry
                 return LogEntry(id: id, content: String(entry))
-            })
-        editButtonsVisible = !self.systemService.currentLog.isEmpty
+            }
+        editButtonsVisible = !systemService.currentLog.isEmpty
     }
 
     func zoomIn() {
-        switch self.font {
+        switch font {
         case .callout:
-            self.font = .body
+            font = .body
         case .footnote:
-            self.font = .callout
+            font = .callout
         case .caption:
-            self.font = .footnote
+            font = .footnote
         default:
             break
         }
     }
 
     func zoomOut() {
-        switch self.font {
+        switch font {
         case .body:
-            self.font = .callout
+            font = .callout
         case .callout:
-            self.font = .footnote
+            font = .footnote
         case .footnote:
-            self.font = .caption
+            font = .caption
         default:
             break
         }
@@ -216,7 +223,11 @@ class LogUIViewModel: ObservableObject {
         }
         let finalUrl = path.appendingPathComponent(filename)
         do {
-            try self.systemService.currentLog.write(to: finalUrl, atomically: true, encoding: String.Encoding.utf8)
+            try systemService.currentLog.write(
+                to: finalUrl,
+                atomically: true,
+                encoding: String.Encoding.utf8
+            )
         } catch {
             path.stopAccessingSecurityScopedResource()
             showSaveError()
@@ -227,15 +238,15 @@ class LogUIViewModel: ObservableObject {
 
     func triggerLog() {
         systemService.triggerLog()
-        self.triggerUIUpdater()
+        triggerUIUpdater()
     }
 
     func clearLog() {
-        self.systemService.clearLog(force: true)
-        self.parceCurrentLog()
+        systemService.clearLog(force: true)
+        parceCurrentLog()
     }
 
     func copy() {
-        UIPasteboard.general.string = self.systemService.currentLog
+        UIPasteboard.general.string = systemService.currentLog
     }
 }

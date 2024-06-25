@@ -31,7 +31,8 @@ struct SmartListContentView: View {
     @SwiftUI.State var isShowingTopView: Bool = true
 
     var body: some View {
-        // Use ScrollView instead of List to prevent memory leaks when using a conversation model inside ForEach.
+        // Use ScrollView instead of List to prevent memory leaks when using a conversation model
+        // inside ForEach.
         ScrollView {
             VStack(alignment: .leading) {
                 publicDirectorySearchView
@@ -59,8 +60,10 @@ struct SmartListContentView: View {
         .transition(.opacity)
         .onAppear { [weak model] in
             guard let model = model else { return }
-            // If there was an active search before presenting the conversation, the search results should remain the same upon returning to the page.
-            if model.presentedConversation.hasPresentedConversation() && !model.searchQuery.isEmpty {
+            // If there was an active search before presenting the conversation, the search results
+            // should remain the same upon returning to the page.
+            if model.presentedConversation.hasPresentedConversation() && !model.searchQuery
+                .isEmpty {
                 isSearchBarActive = true
                 model.presentedConversation.resetPresentedConversation()
             }
@@ -95,7 +98,8 @@ struct SmartListContentView: View {
     }
 
     @ViewBuilder private var smartListTopView: some View {
-        if isShowingTopView && (requestsModel.unreadRequests > 0 || model.connectionState == .none) {
+        if isShowingTopView &&
+            (requestsModel.unreadRequests > 0 || model.connectionState == .none) {
             VStack {
                 if model.connectionState == .none {
                     networkSettingsButton()
@@ -159,9 +163,17 @@ struct SmartListContentView: View {
             VStack {
                 if isShowingTopView {
                     HStack {
-                        actionItem(icon: "qrcode", title: L10n.Smartlist.newContact, action: { isShowingScanner.toggle() })
+                        actionItem(
+                            icon: "qrcode",
+                            title: L10n.Smartlist.newContact,
+                            action: { isShowingScanner.toggle() }
+                        )
                         Spacer()
-                        actionItem(icon: "person.2", title: L10n.Smartlist.newSwarm, action: model.createSwarm)
+                        actionItem(
+                            icon: "person.2",
+                            title: L10n.Smartlist.newSwarm,
+                            action: model.createSwarm
+                        )
                     }
                     .hideRowSeparator()
                 }
@@ -173,7 +185,8 @@ struct SmartListContentView: View {
         }
     }
 
-    private func actionItem(icon: String, title: String, action: @escaping () -> Void) -> some View {
+    private func actionItem(icon: String, title: String,
+                            action: @escaping () -> Void) -> some View {
         HStack {
             Image(systemName: icon)
                 .resizable()

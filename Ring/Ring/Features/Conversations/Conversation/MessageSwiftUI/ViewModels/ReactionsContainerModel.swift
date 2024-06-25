@@ -18,8 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import SwiftUI
 import RxSwift
+import SwiftUI
 
 class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver, NameObserver {
     let jamiId: String
@@ -32,16 +32,16 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver
     var infoState: PublishSubject<State>?
 
     init(reaction: MessageAction) {
-        self.jamiId = reaction.author
-        self.username = self.jamiId
-        self.messageId = reaction.id
-        self.avatarImage = UIImage()
-        self.content[reaction.id] = reaction.content
+        jamiId = reaction.author
+        username = jamiId
+        messageId = reaction.id
+        avatarImage = UIImage()
+        content[reaction.id] = reaction.content
     }
 
     func addReaction(reaction: MessageAction) {
-        if self.content.keys.contains(reaction.id) { return }
-        self.content[reaction.id] = reaction.content
+        if content.keys.contains(reaction.id) { return }
+        content[reaction.id] = reaction.content
     }
 
     func toString() -> String {
@@ -49,7 +49,7 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver
     }
 
     func setInfoState(state: PublishSubject<State>) {
-        self.infoState = state
+        infoState = state
         requestAvatar(jamiId: jamiId)
         requestName(jamiId: jamiId)
     }
@@ -64,20 +64,20 @@ class ReactionsContainerModel: ObservableObject {
 
     init(message: MessageModel) {
         self.message = message
-        self.updateDisplayValue()
+        updateDisplayValue()
     }
 
     func setInfoState(state: PublishSubject<State>) {
-        self.infoState = state
-        reactionsRow.forEach { reaction in
+        infoState = state
+        for reaction in reactionsRow {
             reaction.setInfoState(state: state)
         }
     }
 
     func onAppear() {
-        if self.reactionsRowCreated { return }
-        self.reactionsRowCreated.toggle()
-        self.update()
+        if reactionsRowCreated { return }
+        reactionsRowCreated.toggle()
+        update()
     }
 
     func reactionsUpdated() {
@@ -91,50 +91,58 @@ class ReactionsContainerModel: ObservableObject {
     }
 
     private func updateDisplayValue() {
-        self.displayValue = self.toString()
+        displayValue = toString()
     }
 
     private func updateReaction(reaction: MessageAction) {
         if let existingReaction = getReaction(jamiId: reaction.author) {
             existingReaction.addReaction(reaction: reaction)
         } else {
-            self.addReaction(reaction: reaction)
+            addReaction(reaction: reaction)
         }
     }
 
     private func addReaction(reaction: MessageAction) {
         let reactionRow = ReactionsRowViewModel(reaction: reaction)
-        self.reactionsRow.append(reactionRow)
-        if let state = self.infoState {
+        reactionsRow.append(reactionRow)
+        if let state = infoState {
             reactionRow.setInfoState(state: state)
         }
     }
 
     private func update() {
-        self.reactionsRow = [ReactionsRowViewModel]()
-        self.message.reactions.forEach { reaction in
-            self.updateReaction(reaction: reaction)
+        reactionsRow = [ReactionsRowViewModel]()
+        for reaction in message.reactions {
+            updateReaction(reaction: reaction)
         }
     }
 
     private func getReaction(jamiId: String) -> ReactionsRowViewModel? {
-        return self.reactionsRow.filter({ reaction in
+        return reactionsRow.filter { reaction in
             reaction.jamiId == jamiId
-        }).first
+        }.first
     }
 
     private func toString() -> String {
-        let reactions = self.message.reactions.map { reaction in
+        let reactions = message.reactions.map { reaction in
             reaction.content
         }
 
-        return constructString(from: reactions, spaceBetweenCharacters: "  ", spaceBetweenCharAndCount: "")
+        return constructString(
+            from: reactions,
+            spaceBetweenCharacters: "  ",
+            spaceBetweenCharAndCount: ""
+        )
     }
 
-    private func constructString(from strings: [String], spaceBetweenCharacters: String, spaceBetweenCharAndCount: String) -> String {
+    private func constructString(
+        from strings: [String],
+        spaceBetweenCharacters: String,
+        spaceBetweenCharAndCount: String
+    ) -> String {
         let charCounts = Dictionary(strings.map { ($0, 1) }, uniquingKeysWith: +)
         let result = charCounts
-            .map { (str, count) in
+            .map { str, count in
                 count > 1 ? "\(str)\(spaceBetweenCharAndCount)\(count)" : str
             }
             .joined(separator: spaceBetweenCharacters)

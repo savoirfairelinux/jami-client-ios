@@ -72,7 +72,8 @@ struct UITextViewWrapper: UIViewRepresentable {
         let textView = UITextView()
         textView.isScrollEnabled = true
         textView.textAlignment = .left
-        textView.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .callout).pointSize)
+        textView.font = UIFont
+            .systemFont(ofSize: UIFont.preferredFont(forTextStyle: .callout).pointSize)
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         textView.backgroundColor = UIColor.secondarySystemBackground
         textView.layer.cornerRadius = 18
@@ -81,14 +82,18 @@ struct UITextViewWrapper: UIViewRepresentable {
         return textView
     }
 
-    func updateUIView(_ uiView: UITextView, context: Context) {
+    func updateUIView(_ uiView: UITextView, context _: Context) {
         uiView.text = text
 
         DispatchQueue.main.async {
             if self.isFocused && !uiView.isFirstResponder {
                 uiView.becomeFirstResponder()
             }
-            dynamicHeight = min(uiView.sizeThatFits(CGSize(width: uiView.frame.size.width, height: .infinity)).height, maxHeight)
+            dynamicHeight = min(
+                uiView.sizeThatFits(CGSize(width: uiView.frame.size.width, height: .infinity))
+                    .height,
+                maxHeight
+            )
         }
     }
 
@@ -100,11 +105,11 @@ struct UITextViewWrapper: UIViewRepresentable {
         var parent: UITextViewWrapper
 
         init(_ textViewWrapper: UITextViewWrapper) {
-            self.parent = textViewWrapper
+            parent = textViewWrapper
         }
 
         func textViewDidChange(_ textView: UITextView) {
-            self.parent.text = textView.text
+            parent.text = textView.text
         }
     }
 }

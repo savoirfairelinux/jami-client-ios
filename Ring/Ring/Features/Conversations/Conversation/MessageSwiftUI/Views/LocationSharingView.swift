@@ -22,7 +22,6 @@ import SwiftUI
 
 // swiftlint:disable closure_body_length
 struct LocationSharingView: View {
-
     @StateObject var model: MessagesListVM
     @SwiftUI.State private var forceUpdate = false
     @SwiftUI.State private var showCopyrightAlert = false
@@ -30,7 +29,10 @@ struct LocationSharingView: View {
     @Namespace private var animationNamespace
 
     var navigationBarHeight: CGFloat {
-        UINavigationController.navBarHeight() + ( UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0) + 80
+        UINavigationController
+            .navBarHeight() +
+            (UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame
+                .height ?? 0) + 80
     }
 
     var mapWidth: CGFloat {
@@ -38,7 +40,8 @@ struct LocationSharingView: View {
     }
 
     var mapHeight: CGFloat {
-        return model.locationSharingiewModel.isMapOpened ? (UIScreen.main.bounds.size.height - navigationBarHeight) : 150
+        return model.locationSharingiewModel
+            .isMapOpened ? (UIScreen.main.bounds.size.height - navigationBarHeight) : 150
     }
 
     var labelHeight: CGFloat {
@@ -72,17 +75,26 @@ struct LocationSharingView: View {
 
                 ZStack(alignment: .bottom) {
                     Group {
-                        var mapView: MapView? = MapView(annotations: $model.coordinates, showZoomButton: $model.locationSharingiewModel.isMapOpened)
+                        var mapView: MapView? = MapView(
+                            annotations: $model.coordinates,
+                            showZoomButton: $model.locationSharingiewModel.isMapOpened
+                        )
 
                         mapView
-                            .cornerRadius(model.locationSharingiewModel.isMapOpened ? 0 : viewCornerRadius)
+                            .cornerRadius(model.locationSharingiewModel
+                                            .isMapOpened ? 0 : viewCornerRadius)
                             .id(forceUpdate ? "uniqueID1" : "uniqueID2")
                             .onDisappear {
                                 mapView?.deinitView()
                                 mapView = nil
                             }
                     }
-                    .matchedGeometryEffect(id: "mapView", in: animationNamespace, anchor: .center, isSource: !model.locationSharingiewModel.isMapOpened)
+                    .matchedGeometryEffect(
+                        id: "mapView",
+                        in: animationNamespace,
+                        anchor: .center,
+                        isSource: !model.locationSharingiewModel.isMapOpened
+                    )
                     .zIndex(1)
 
                     createCopyrigtButton()
@@ -151,13 +163,18 @@ struct LocationSharingView: View {
         }
         .frame(width: mapWidth, height: mapHeight)
         .alert(isPresented: $showCopyrightAlert) {
-            Alert(title: Text("OpenStreetMap"), message: Text("Map data © OpenStreetMap contributors"), primaryButton: .default(Text("Open in Safari")) {
-                showCopyrightAlert = false
-                if let url = URL(string: "https://www.openstreetmap.org/copyright"),
-                   UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
-            }, secondaryButton: .cancel())
+            Alert(
+                title: Text("OpenStreetMap"),
+                message: Text("Map data © OpenStreetMap contributors"),
+                primaryButton: .default(Text("Open in Safari")) {
+                    showCopyrightAlert = false
+                    if let url = URL(string: "https://www.openstreetmap.org/copyright"),
+                       UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url)
+                    }
+                },
+                secondaryButton: .cancel()
+            )
         }
     }
 

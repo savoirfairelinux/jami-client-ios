@@ -19,7 +19,6 @@
  */
 
 @objc protocol AccountAdapterDelegate {
-
     func accountsChanged()
     func registrationStateChanged(with response: RegistrationResponse)
     func knownDevicesChanged(for account: String, devices: [String: String])

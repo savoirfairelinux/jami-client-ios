@@ -19,9 +19,9 @@
  */
 
 import Foundation
-import RxSwift
 import RxCocoa
 import RxDataSources
+import RxSwift
 
 enum ExportAccountResponse: Int {
     case success = 0
@@ -47,7 +47,6 @@ enum PinError {
 }
 
 enum GeneratingPinState {
-
     case initial
     case generatingPin
     case success(pin: String)
@@ -67,23 +66,18 @@ enum GeneratingPinState {
     }
 
     func isStateOfType(type: String) -> Bool {
-
-        return self.rawValue == type
+        return rawValue == type
     }
 }
 
 class LinkNewDeviceViewModel: ViewModel, Stateable {
-
     // MARK: - Rx Stateable
-    private let stateSubject = PublishSubject <State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
 
     private let generatingState = BehaviorRelay(value: GeneratingPinState.initial)
-    lazy var observableState: Observable <GeneratingPinState> = {
-        return self.generatingState.asObservable()
-    }()
+    lazy var observableState: Observable<GeneratingPinState> = self.generatingState.asObservable()
 
     lazy var hasPassord: Bool = {
         guard let currentAccount = self.accountService.currentAccount else { return true }
@@ -95,57 +89,68 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
     let disposeBag = DisposeBag()
 
     // MARK: L10n
+
     let linkDeviceTitleTitle = L10n.LinkDevice.title
     let explanationMessage = L10n.LinkDevice.explanationMessage
 
     required init(with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
-
+        accountService = injectionBag.accountService
     }
 
     func linkDevice(with password: String?) {
-        self.generatingState.accept(GeneratingPinState.generatingPin)
+        generatingState.accept(GeneratingPinState.generatingPin)
         guard let password = password else {
-            self.generatingState.accept(GeneratingPinState.error(error: PinError.passwordError))
+            generatingState.accept(GeneratingPinState.error(error: PinError.passwordError))
             return
         }
-        self.accountService.exportOnRing(withPassword: password)
+        accountService.exportOnRing(withPassword: password)
             .subscribe(onCompleted: {
                 if let account = self.accountService.currentAccount {
                     self.accountService.sharedResponseStream
-                        .filter({ exportComplitedEvent in
-                            return exportComplitedEvent.eventType == ServiceEventType.exportOnRingEnded
+                        .filter { exportComplitedEvent in
+                            exportComplitedEvent.eventType == ServiceEventType.exportOnRingEnded
                                 && exportComplitedEvent.getEventInput(.id) == account.id
-                        })
+                        }
                         .subscribe(onNext: { [weak self] exportComplitedEvent in
-                            if let self = self, let state: Int = exportComplitedEvent.getEventInput(.state) {
+                            if let self = self,
+                               let state: Int = exportComplitedEvent.getEventInput(.state) {
                                 switch state {
                                 case ExportAccountResponse.success.rawValue:
                                     if let pin: String = exportComplitedEvent.getEventInput(.pin) {
-                                        self.generatingState.accept(GeneratingPinState.success(pin: pin))
+                                        self.generatingState
+                                            .accept(GeneratingPinState.success(pin: pin))
                                     } else {
-                                        self.generatingState.accept(GeneratingPinState.error(error: PinError.defaultError))
+                                        self.generatingState
+                                            .accept(GeneratingPinState
+                                                        .error(error: PinError.defaultError))
                                     }
                                 case ExportAccountResponse.wrongPassword.rawValue:
-                                    self.generatingState.accept(GeneratingPinState.error(error: PinError.passwordError))
+                                    self.generatingState
+                                        .accept(GeneratingPinState
+                                                    .error(error: PinError.passwordError))
                                 case ExportAccountResponse.networkProblem.rawValue:
-                                    self.generatingState.accept(GeneratingPinState.error(error: PinError.networkError))
+                                    self.generatingState
+                                        .accept(GeneratingPinState
+                                                    .error(error: PinError.networkError))
                                 default:
-                                    self.generatingState.accept(GeneratingPinState.error(error: PinError.defaultError))
+                                    self.generatingState
+                                        .accept(GeneratingPinState
+                                                    .error(error: PinError.defaultError))
                                 }
                             }
                         })
                         .disposed(by: self.disposeBag)
                 } else {
-                    self.generatingState.accept(GeneratingPinState.error(error: PinError.defaultError))
+                    self.generatingState
+                        .accept(GeneratingPinState.error(error: PinError.defaultError))
                 }
             }, onError: { _ in
                 self.generatingState.accept(GeneratingPinState.error(error: PinError.passwordError))
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func refresh() {
-        self.generatingState.accept(GeneratingPinState.initial)
+        generatingState.accept(GeneratingPinState.initial)
     }
 }

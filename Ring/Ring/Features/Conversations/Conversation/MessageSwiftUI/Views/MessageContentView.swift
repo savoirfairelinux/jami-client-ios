@@ -21,7 +21,10 @@
 import SwiftUI
 
 class CustomLinkView: LPLinkView {
-    override var intrinsicContentSize: CGSize { CGSize(width: 0, height: super.intrinsicContentSize.height) }
+    override var intrinsicContentSize: CGSize { CGSize(
+        width: 0,
+        height: super.intrinsicContentSize.height
+    ) }
 }
 
 struct URLPreview: UIViewRepresentable {
@@ -30,21 +33,21 @@ struct URLPreview: UIViewRepresentable {
     var metadata: LPLinkMetadata
     var maxDimension: CGFloat
 
-    func makeUIView(context: Context) -> CustomLinkView {
+    func makeUIView(context _: Context) -> CustomLinkView {
         let view = CustomLinkView(metadata: metadata)
         view.frame = CGRect(x: 0, y: 0, width: maxDimension, height: maxDimension)
         view.contentMode = .scaleAspectFit
         return view
     }
 
-    func updateUIView(_ uiView: CustomLinkView, context: Context) {}
+    func updateUIView(_: CustomLinkView, context _: Context) {}
 }
 
 class ScaledImageView: UIImageView {
     var maxHeight: CGFloat = 300
     var maxWidth: CGFloat = 250
     override var intrinsicContentSize: CGSize {
-        if let imageSize = self.image?.size {
+        if let imageSize = image?.size {
             if imageSize.width < maxWidth && imageSize.height < maxHeight {
                 return imageSize
             }
@@ -62,14 +65,15 @@ struct ScaledImageViewWrapper: UIViewRepresentable {
     var maxHeight: CGFloat
     var maxWidth: CGFloat
 
-    func makeUIView(context: Context) -> ScaledImageView {
+    func makeUIView(context _: Context) -> ScaledImageView {
         let imageView = ScaledImageView()
         imageView.maxHeight = maxHeight
         imageView.maxWidth = maxWidth
         imageView.image = imageToShow
         return imageView
     }
-    func updateUIView(_ uiView: UIViewType, context: Context) {}
+
+    func updateUIView(_: UIViewType, context _: Context) {}
 }
 
 struct MessageTextStyle: ViewModifier {
@@ -86,14 +90,15 @@ struct MessageTextStyle: ViewModifier {
             .if(model.hasBorder) { view in
                 view.overlay(
                     CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
-                        .stroke(model.borderColor, lineWidth: 2))
+                        .stroke(model.borderColor, lineWidth: 2)
+                )
             }
             .modifier(MessageCornerRadius(model: model))
     }
 }
 
 struct MessageLongPress: ViewModifier {
-    var longPressCb: (() -> Void)
+    var longPressCb: () -> Void
 
     func body(content: Content) -> some View {
         content
@@ -123,7 +128,7 @@ struct MessageContentView: View {
     @SwiftUI.State private var messageWidth: CGFloat = 0
     @SwiftUI.State private var reactionsHeight: CGFloat = 20
     @SwiftUI.State private var reactionsWidth: CGFloat = 0
-    @SwiftUI.State private var emojiAlignment: Alignment = Alignment.bottomTrailing
+    @SwiftUI.State private var emojiAlignment: Alignment = .bottomTrailing
 
     var body: some View {
         ZStack(alignment: emojiAlignment) {
@@ -131,18 +136,23 @@ struct MessageContentView: View {
                 if messageModel.messageContent.isHistory {
                     renderReplyHistory()
                 }
-                MessageBubbleView(messageModel: messageModel, model: model, onLongPress: onLongPress)
-                    .onAppear {
-                        self.model.onAppear()
+                MessageBubbleView(
+                    messageModel: messageModel,
+                    model: model,
+                    onLongPress: onLongPress
+                )
+                .onAppear {
+                    self.model.onAppear()
+                }
+                .offset(y: messageModel.messageContent.isHistory ? -padding : 0)
+                .background(GeometryReader { preferences in
+                    Color.clear.onAppear {
+                        if preferences.size.width == 0 || preferences.size
+                            .height == 0 { return }
+                        self.messageWidth = preferences.size.width
+                        self.updateAlignment()
                     }
-                    .offset(y: messageModel.messageContent.isHistory ? -padding : 0)
-                    .background(GeometryReader { preferences in
-                        Color.clear.onAppear {
-                            if preferences.size.width == 0 || preferences.size.height == 0 { return }
-                            self.messageWidth = preferences.size.width
-                            self.updateAlignment()
-                        }
-                    })
+                })
             }
             .padding(.bottom, !messageModel.hasReactions() ? 0 : reactionsHeight - 6)
             if messageModel.hasReactions() {
@@ -159,7 +169,7 @@ struct MessageContentView: View {
     }
 
     private func updateAlignment() {
-        if self.messageWidth < self.reactionsWidth && model.message.incoming {
+        if messageWidth < reactionsWidth && model.message.incoming {
             emojiAlignment = Alignment.bottomLeading
         } else {
             emojiAlignment = Alignment.bottomTrailing

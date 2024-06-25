@@ -18,16 +18,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UserNotifications
-import UIKit
-import CallKit
-import Foundation
-import CoreFoundation
-import os
-import Darwin
-import Contacts
-import RxSwift
 import Atomics
+import CallKit
+import Contacts
+import CoreFoundation
+import Darwin
+import Foundation
+import os
+import RxSwift
+import UIKit
+import UserNotifications
 
 /*
  * This class is responsible for handling incoming notifications from the DHT proxy server.
@@ -93,10 +93,12 @@ func log(_ messages: String...) {
 }
 
 // MARK: AutoDispatchGroup helper
+
 class AutoDispatchGroup {
     private var taskIds = Set<String>()
     private let group = DispatchGroup()
-    private let tasksQueue = DispatchQueue(label: Constants.appIdentifier + ".AutoDispatchGroup.queue")
+    private let tasksQueue = DispatchQueue(label: Constants
+                                            .appIdentifier + ".AutoDispatchGroup.queue")
 
     func enter(id: String) {
         tasksQueue.sync {
@@ -136,7 +138,8 @@ class HTTPStreamHandler: NSObject, URLSessionDataDelegate {
     private var dataBuffer = Data()
     private var task: URLSessionDataTask?
     private var subject = PublishSubject<String>()
-    private let taskQueue = DispatchQueue(label: Constants.appIdentifier + ".HTTPStreamHandler.queue")
+    private let taskQueue = DispatchQueue(label: Constants
+                                            .appIdentifier + ".HTTPStreamHandler.queue")
 
     func invalidateAndCancelSession() {
         session.invalidateAndCancel()
@@ -180,14 +183,15 @@ class HTTPStreamHandler: NSObject, URLSessionDataDelegate {
     }
 
     // MARK: URLSessionDataDelegate
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+
+    func urlSession(_: URLSession, dataTask _: URLSessionDataTask, didReceive data: Data) {
         var receivedStrings = [String]()
         taskQueue.sync { [weak self] in
             guard let self = self else { return }
             self.dataBuffer.append(data)
             while let range = self.dataBuffer.range(of: "\n".data(using: .utf8)!) {
-                let lineData = self.dataBuffer.subdata(in: 0..<range.lowerBound)
-                self.dataBuffer.removeSubrange(0..<range.upperBound)
+                let lineData = self.dataBuffer.subdata(in: 0 ..< range.lowerBound)
+                self.dataBuffer.removeSubrange(0 ..< range.upperBound)
                 if let lineString = String(data: lineData, encoding: .utf8) {
                     receivedStrings.append(lineString)
                 }
@@ -198,20 +202,25 @@ class HTTPStreamHandler: NSObject, URLSessionDataDelegate {
         }
     }
 
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    func urlSession(_: URLSession, task _: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
-            self.subject.onError(error)
+            subject.onError(error)
         } else {
-            self.subject.onCompleted()
+            subject.onCompleted()
         }
     }
 }
 
 // MARK: NotificationService
-class NotificationService: UNNotificationServiceExtension {
-    typealias LocalNotification = (content: UNMutableNotificationContent, type: LocalNotificationType)
 
-    private static let localNotificationName = Notification.Name(Constants.appIdentifier + ".appActive.internal")
+class NotificationService: UNNotificationServiceExtension {
+    typealias LocalNotification = (
+        content: UNMutableNotificationContent,
+        type: LocalNotificationType
+    )
+
+    private static let localNotificationName = Notification
+        .Name(Constants.appIdentifier + ".appActive.internal")
 
     private let notificationTimeout = DispatchTimeInterval.seconds(25)
     private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
@@ -227,19 +236,22 @@ class NotificationService: UNNotificationServiceExtension {
     // The following objects are used to manage access to the Jami backend for synchronization
     private var accountIsActive = ManagedAtomic<Bool>(false)
     private var accountId: String = ""
-    private var adapterService: AdapterService = AdapterService(withAdapter: Adapter())
+    private var adapterService: AdapterService = .init(withAdapter: Adapter())
     private var jamiTaskId: String = ""
     private var idsToProcess: Set<String> = []
     private var processAll: Bool = false
-    private let taskPropertyQueue = DispatchQueue(label: Constants.appIdentifier + ".TaskProperty.queue")
+    private let taskPropertyQueue = DispatchQueue(label: Constants
+                                                    .appIdentifier + ".TaskProperty.queue")
     // The following describe scheduled events and will be synchronized with the DispatchQueue
     private var itemsToPresent = 0
     private var syncCompleted = false
     private var waitForCloning = false
 
     // A queue of pending local notifications, waiting for a name lookup
-    private let notificationQueue = DispatchQueue(label: Constants.appIdentifier + ".Notification.queue")
-    private var pendingLocalNotifications = [String: [LocalNotification]]() // local notification waiting for name lookup
+    private let notificationQueue = DispatchQueue(label: Constants
+                                                    .appIdentifier + ".Notification.queue")
+    private var pendingLocalNotifications =
+        [String: [LocalNotification]]() // local notification waiting for name lookup
     private var pendingCalls = [String: [AnyHashable: Any]]() // calls waiting for name lookup
     private var names = [String: String]() // map of peerId and best name
     private let thumbnailSize = 100
@@ -249,7 +261,10 @@ class NotificationService: UNNotificationServiceExtension {
     }
 
     // Entry point for processing incoming notification requests.
-    override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+    override func didReceive(
+        _ request: UNNotificationRequest,
+        withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void
+    ) {
         self.contentHandler = contentHandler
 
         Task {
@@ -263,12 +278,14 @@ class NotificationService: UNNotificationServiceExtension {
     private func processNotificationRequest(_ request: UNNotificationRequest) {
         let requestData = requestToDictionary(request: request)
         guard !requestData.isEmpty,
-              let accountId = requestData[NotificationField.accountId.rawValue] else {
+              let accountId = requestData[NotificationField.accountId.rawValue]
+        else {
             log("There was an error processing the notification request")
             return
         }
 
-        // Save notification data so that if the main app is active, the extension can let the app handle notification
+        // Save notification data so that if the main app is active, the extension can let the app
+        // handle notification
         saveDataIfNeeded(data: requestData)
         guard !appIsActive() else {
             log("App is in foreground")
@@ -287,31 +304,50 @@ class NotificationService: UNNotificationServiceExtension {
     }
 
     // Prepares for and starts the data stream based on notification data.
-    private func prepareAndStartStreaming(for request: UNNotificationRequest, with requestData: [String: String]) {
+    private func prepareAndStartStreaming(
+        for request: UNNotificationRequest,
+        with requestData: [String: String]
+    ) {
         guard let keyURL = getKeyURL(data: requestData),
               let treatedMessagesURL = getTreatedMessagesURL(data: requestData),
               let proxyURL = getProxyCaches(data: requestData),
-              let url = getRequestURL(data: requestData, path: proxyURL) else {
+              let url = getRequestURL(data: requestData, path: proxyURL)
+        else {
             return
         }
 
         // Transform the comma-separated ids string
         if let idsString = requestData["ids"] {
-            self.idsToProcess = Set(idsString.split(separator: ",").map { String($0) })
+            idsToProcess = Set(idsString.split(separator: ",").map { String($0) })
         }
-        self.processAll = self.idsToProcess.isEmpty
+        processAll = idsToProcess.isEmpty
 
-        startStreaming(from: url, for: request, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL)
+        startStreaming(
+            from: url,
+            for: request,
+            keyURL: keyURL,
+            treatedMessagesURL: treatedMessagesURL
+        )
     }
 
     // Starts streaming data from a specified URL and processes received lines.
-    private func startStreaming(from url: URL, for request: UNNotificationRequest, keyURL: URL, treatedMessagesURL: URL) {
+    private func startStreaming(
+        from url: URL,
+        for request: UNNotificationRequest,
+        keyURL: URL,
+        treatedMessagesURL: URL
+    ) {
         let taskId = UUID().uuidString
         autoDispatchGroup.enter(id: taskId)
 
         httpStreamHandler.startStreaming(from: url)
             .subscribe(onNext: { [weak self] line in
-                self?.processStreamLine(line, with: request, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL)
+                self?.processStreamLine(
+                    line,
+                    with: request,
+                    keyURL: keyURL,
+                    treatedMessagesURL: treatedMessagesURL
+                )
             }, onError: { [weak self] error in
                 log("Error streaming data: \(error)")
                 self?.autoDispatchGroup.leave(id: taskId)
@@ -322,12 +358,21 @@ class NotificationService: UNNotificationServiceExtension {
     }
 
     // Processes each line received from the data stream.
-    private func processStreamLine(_ line: String, with request: UNNotificationRequest, keyURL: URL, treatedMessagesURL: URL) {
+    private func processStreamLine(
+        _ line: String,
+        with request: UNNotificationRequest,
+        keyURL: URL,
+        treatedMessagesURL: URL
+    ) {
         do {
             guard let jsonData = line.data(using: .utf8),
-                  let map = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any],
+                  let map = try JSONSerialization.jsonObject(
+                    with: jsonData,
+                    options: .allowFragments
+                  ) as? [String: Any],
                   let id = map["id"] as? String,
-                  map["cypher"] != nil else {
+                  map["cypher"] != nil
+            else {
                 log("Line doesn't contain a valid schema")
                 return
             }
@@ -339,7 +384,12 @@ class NotificationService: UNNotificationServiceExtension {
 
             log("Processing ID: \(id)")
             idsToProcess.remove(id)
-            processMap(map: map, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL, userInfo: request.content.userInfo)
+            processMap(
+                map: map,
+                keyURL: keyURL,
+                treatedMessagesURL: treatedMessagesURL,
+                userInfo: request.content.userInfo
+            )
             if !processAll && idsToProcess.isEmpty {
                 log("All IDs processed; Canceling stream")
                 httpStreamHandler.cancelStreaming()
@@ -349,12 +399,22 @@ class NotificationService: UNNotificationServiceExtension {
         }
     }
 
-    private func processMap(map: [String: Any], keyURL: URL, treatedMessagesURL: URL, userInfo: [AnyHashable: Any]) {
-        let result = adapterService.decrypt(keyPath: keyURL.path, accountId: self.accountId, messagesPath: treatedMessagesURL.path, value: map)
+    private func processMap(
+        map: [String: Any],
+        keyURL: URL,
+        treatedMessagesURL: URL,
+        userInfo: [AnyHashable: Any]
+    ) {
+        let result = adapterService.decrypt(
+            keyPath: keyURL.path,
+            accountId: accountId,
+            messagesPath: treatedMessagesURL.path,
+            value: map
+        )
         log("Notification type: \(result)")
         switch result {
-        case .call(let peerId, let hasVideo):
-            ({ [weak self] (peerId, hasVideo) in
+        case let .call(peerId, hasVideo):
+            ({ [weak self] peerId, hasVideo in
                 guard let self = self else {
                     return
                 }
@@ -363,7 +423,11 @@ class NotificationService: UNNotificationServiceExtension {
                 info["hasVideo"] = hasVideo
                 let name = self.bestName(accountId: self.accountId, contactId: peerId)
                 // jami will be started. Set accounts to not active state
-                if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
+                if self.accountIsActive.compareExchange(
+                    expected: true,
+                    desired: false,
+                    ordering: .relaxed
+                ).original {
                     self.adapterService.stop(accountId: self.accountId)
                 }
                 if name.isEmpty {
@@ -376,12 +440,12 @@ class NotificationService: UNNotificationServiceExtension {
                 self.presentCall(info: info)
             })(peerId, "\(hasVideo)")
             return
-        case .gitMessage(let convId):
-            self.handleGitMessage(convId: convId, loadAll: convId.isEmpty) // async
+        case let .gitMessage(convId):
+            handleGitMessage(convId: convId, loadAll: convId.isEmpty) // async
         case .clone:
             // Should start daemon and wait until clone completed
-            self.taskPropertyQueue.sync { self.waitForCloning = true }
-            self.handleGitMessage(convId: "", loadAll: false) // async
+            taskPropertyQueue.sync { self.waitForCloning = true }
+            handleGitMessage(convId: "", loadAll: false) // async
         case .unknown:
             break
         }
@@ -397,9 +461,9 @@ class NotificationService: UNNotificationServiceExtension {
         if !isResubscribe {
             return false
         }
-        self.accountIsActive.store(true, ordering: .relaxed)
-        self.adapterService.startAccount(accountId: accountId, convId: "", loadAll: false)
-        self.adapterService.pushNotificationReceived(accountId: accountId, data: data)
+        accountIsActive.store(true, ordering: .relaxed)
+        adapterService.startAccount(accountId: accountId, convId: "", loadAll: false)
+        adapterService.pushNotificationReceived(accountId: accountId, data: data)
         // TODO: comment this a bit more
         // wait to proceed pushNotificationReceived
         sleep(5)
@@ -408,32 +472,55 @@ class NotificationService: UNNotificationServiceExtension {
 
     private func handleGitMessage(convId: String, loadAll: Bool) {
         // If the account is already active, return, otherwise we set it to active and continue
-        if self.accountIsActive.compareExchange(expected: false, desired: true, ordering: .relaxed).original {
+        if accountIsActive.compareExchange(expected: false, desired: true, ordering: .relaxed)
+            .original {
             return
         }
 
         jamiTaskId = UUID().uuidString
-        self.autoDispatchGroup.enter(id: jamiTaskId)
-        self.adapterService.startAccountsWithListener(accountId: self.accountId, convId: convId, loadAll: loadAll) { [weak self] event, eventData in
+        autoDispatchGroup.enter(id: jamiTaskId)
+        adapterService.startAccountsWithListener(
+            accountId: accountId,
+            convId: convId,
+            loadAll: loadAll
+        ) { [weak self] event, eventData in
             guard let self = self else {
                 return
             }
 
-            var notifConfig = NotificationConfig(from: eventData.jamiId, url: nil, body: eventData.content,
-                                                 conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
+            var notifConfig = NotificationConfig(
+                from: eventData.jamiId,
+                url: nil,
+                body: eventData.content,
+                conversationId: eventData.conversationId,
+                groupTitle: eventData.groupTitle
+            )
 
             switch event {
             case .message:
-                self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
+                self.conversationUpdated(
+                    conversationId: eventData.conversationId,
+                    accountId: self.accountId
+                )
                 self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
-                self.configureAndPresentNotification(config: notifConfig, type: LocalNotificationType.message)
+                self.configureAndPresentNotification(
+                    config: notifConfig,
+                    type: LocalNotificationType.message
+                )
             case .fileTransferDone:
-                self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
-                // If the content is a URL then we have already downloaded the file and can present the notification,
+                self.conversationUpdated(
+                    conversationId: eventData.conversationId,
+                    accountId: self.accountId
+                )
+                // If the content is a URL then we have already downloaded the file and can present
+                // the notification,
                 // otherwise we need to download the file first, so add it to the items to present
                 if let url = URL(string: eventData.content) {
                     notifConfig.url = url
-                    self.configureAndPresentNotification(config: notifConfig, type: LocalNotificationType.file)
+                    self.configureAndPresentNotification(
+                        config: notifConfig,
+                        type: LocalNotificationType.file
+                    )
                 } else {
                     self.taskPropertyQueue.sync { self.itemsToPresent -= 1 }
                     self.verifyTasksStatus()
@@ -444,12 +531,18 @@ class NotificationService: UNNotificationServiceExtension {
             case .fileTransferInProgress:
                 self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
             case .invitation:
-                self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
+                self.conversationUpdated(
+                    conversationId: eventData.conversationId,
+                    accountId: self.accountId
+                )
                 self.taskPropertyQueue.sync {
                     self.syncCompleted = true
                     self.itemsToPresent += 1
                 }
-                self.configureAndPresentNotification(config: notifConfig, type: LocalNotificationType.message)
+                self.configureAndPresentNotification(
+                    config: notifConfig,
+                    type: LocalNotificationType.message
+                )
             case .conversationCloned:
                 self.taskPropertyQueue.sync { self.waitForCloning = false }
                 self.verifyTasksStatus()
@@ -459,12 +552,12 @@ class NotificationService: UNNotificationServiceExtension {
 
     private func verifyTasksStatus() {
         // waiting for lookup
-        self.notificationQueue.sync {
+        notificationQueue.sync {
             if !pendingCalls.isEmpty || !pendingLocalNotifications.isEmpty {
                 return
             }
         }
-        self.taskPropertyQueue.sync {
+        taskPropertyQueue.sync {
             // We could finish in two cases:
             // 1. we did not start account we are not waiting for the signals from the daemon
             // 2. conversation synchronization completed and all files downloaded
@@ -476,13 +569,14 @@ class NotificationService: UNNotificationServiceExtension {
     }
 
     private func finish() {
-        if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
-            self.adapterService.stop(accountId: self.accountId)
+        if accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed)
+            .original {
+            adapterService.stop(accountId: accountId)
         } else {
-            self.adapterService.removeDelegate()
+            adapterService.removeDelegate()
         }
         // cleanup pending notifications
-        self.notificationQueue.sync {
+        notificationQueue.sync {
             if !self.pendingCalls.isEmpty, let info = self.pendingCalls.first?.value {
                 self.presentCall(info: info)
             } else {
@@ -494,9 +588,9 @@ class NotificationService: UNNotificationServiceExtension {
                 pendingLocalNotifications.removeAll()
             }
         }
-        self.httpStreamHandler.cancelStreaming()
+        httpStreamHandler.cancelStreaming()
         if let contentHandler = contentHandler {
-            contentHandler(self.bestAttemptContent)
+            contentHandler(bestAttemptContent)
         }
         log("Finished handling notification")
     }
@@ -509,11 +603,18 @@ class NotificationService: UNNotificationServiceExtension {
         }
         var appIsActive = false
         group.enter()
-        // post darwin notification and wait for the answer from the main app. If answer received app is active
-        self.listenToMainAppResponse { _ in
+        // post darwin notification and wait for the answer from the main app. If answer received
+        // app is active
+        listenToMainAppResponse { _ in
             appIsActive = true
         }
-        CFNotificationCenterPostNotification(notificationCenter, CFNotificationName(Constants.notificationReceived), nil, nil, true)
+        CFNotificationCenterPostNotification(
+            notificationCenter,
+            CFNotificationName(Constants.notificationReceived),
+            nil,
+            nil,
+            true
+        )
         // wait fro 300 milliseconds. If no answer from main app is received app is not active.
         _ = group.wait(timeout: .now() + 0.3)
 
@@ -525,7 +626,8 @@ class NotificationService: UNNotificationServiceExtension {
             return
         }
         var notificationData = [[String: String]]()
-        if let existingData = userDefaults.object(forKey: Constants.notificationData) as? [[String: String]] {
+        if let existingData = userDefaults
+            .object(forKey: Constants.notificationData) as? [[String: String]] {
             notificationData = existingData
         }
         notificationData.append(data)
@@ -534,9 +636,10 @@ class NotificationService: UNNotificationServiceExtension {
 
     private func conversationUpdated(conversationId: String, accountId: String) {
         var conversationData = [String: String]()
-        conversationData[Constants.NotificationUserInfoKeys.conversationID.rawValue] = conversationId
+        conversationData[Constants.NotificationUserInfoKeys.conversationID.rawValue] =
+            conversationId
         conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] = accountId
-        self.setUpdatedConversations(conversation: conversationData)
+        setUpdatedConversations(conversation: conversationData)
     }
 
     private func setUpdatedConversations(conversation: [String: String]) {
@@ -548,7 +651,8 @@ class NotificationService: UNNotificationServiceExtension {
             return
         }
         var conversationData = [[String: String]]()
-        if let existingData = userDefaults.object(forKey: Constants.updatedConversations) as? [[String: String]] {
+        if let existingData = userDefaults
+            .object(forKey: Constants.updatedConversations) as? [[String: String]] {
             conversationData = existingData
         }
         for data in conversationData
@@ -565,7 +669,8 @@ class NotificationService: UNNotificationServiceExtension {
         var dictionary = [String: String]()
         let userInfo = request.content.userInfo
         for key in userInfo.keys {
-            /// "aps" is a field added for alert notification type, so it could be received in the extension. This field is not needed by dht
+            /// "aps" is a field added for alert notification type, so it could be received in the
+            /// extension. This field is not needed by dht
             if String(describing: key) == NotificationField.aps.rawValue {
                 continue
             }
@@ -580,44 +685,49 @@ class NotificationService: UNNotificationServiceExtension {
 }
 
 // MARK: Name retrieval
+
 extension NotificationService {
     private func bestName(accountId: String, contactId: String) -> String {
-        if let name = self.names[contactId], !name.isEmpty {
+        if let name = names[contactId], !name.isEmpty {
             return name
         }
-        if let contactProfileName = self.contactProfileName(accountId: accountId, contactId: contactId),
+        if let contactProfileName = contactProfileName(accountId: accountId, contactId: contactId),
            !contactProfileName.isEmpty {
-            self.names[contactId] = contactProfileName
+            names[contactId] = contactProfileName
             return contactProfileName
         }
-        let registeredName = self.adapterService.getNameFor(address: contactId, accountId: accountId)
+        let registeredName = adapterService.getNameFor(address: contactId, accountId: accountId)
         if !registeredName.isEmpty {
-            self.names[contactId] = registeredName
+            names[contactId] = registeredName
         }
         return registeredName
     }
 
     private func startAddressLookup(address: String) {
-        var nameServer = self.adapterService.getNameServerFor(accountId: self.accountId)
+        var nameServer = adapterService.getNameServerFor(accountId: accountId)
         nameServer = ensureURLPrefix(urlString: nameServer)
         let urlString = nameServer + "/addr/" + address
         guard let url = URL(string: urlString) else {
-            self.lookupCompleted(address: address)
+            lookupCompleted(address: address)
             return
         }
         let defaultSession = URLSession(configuration: .default)
-        let task = defaultSession.dataTask(with: url) {[weak self](data, response, _) in
+        let task = defaultSession.dataTask(with: url) { [weak self] data, response, _ in
             guard let self = self else { return }
             var name: String?
             defer {
                 self.lookupCompleted(address: address)
             }
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
-                  let data = data else {
+                  let data = data
+            else {
                 return
             }
             do {
-                guard let map = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: String] else { return }
+                guard let map = try JSONSerialization.jsonObject(
+                    with: data,
+                    options: .allowFragments
+                ) as? [String: String] else { return }
                 if map["name"] != nil {
                     name = map["name"]
                     self.names[address] = name
@@ -638,7 +748,7 @@ extension NotificationService {
     }
 
     private func lookupCompleted(address: String) {
-        let name = self.names[address]
+        let name = names[address]
         for call in pendingCalls where call.key == address {
             var info = call.value
             if let name = name {
@@ -661,6 +771,7 @@ extension NotificationService {
 }
 
 // MARK: Paths and URLs
+
 extension NotificationService {
     private func getRequestURL(data: [String: String], proxyURL: URL) -> URL? {
         guard let key = data[NotificationField.key.rawValue] else {
@@ -671,11 +782,16 @@ extension NotificationService {
 
     private func getRequestURL(data: [String: String], path: URL) -> URL? {
         guard let key = data[NotificationField.key.rawValue],
-              let jsonData = NSData(contentsOf: path) as? Data else {
+              let jsonData = NSData(contentsOf: path) as? Data
+        else {
             return nil
         }
-        guard let map = try? JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: String],
-              var proxyAddress = map.first?.value else {
+        guard let map = try? JSONSerialization.jsonObject(
+            with: jsonData,
+            options: .allowFragments
+        ) as? [String: String],
+        var proxyAddress = map.first?.value
+        else {
             return nil
         }
 
@@ -686,23 +802,28 @@ extension NotificationService {
 
     private func getKeyURL(data: [String: String]) -> URL? {
         guard let documentsPath = Constants.documentsPath,
-              let accountId = data[NotificationField.accountId.rawValue] else {
+              let accountId = data[NotificationField.accountId.rawValue]
+        else {
             return nil
         }
-        return documentsPath.appendingPathComponent(accountId).appendingPathComponent("ring_device.key")
+        return documentsPath.appendingPathComponent(accountId)
+            .appendingPathComponent("ring_device.key")
     }
 
     private func getTreatedMessagesURL(data: [String: String]) -> URL? {
         guard let cachesPath = Constants.cachesPath,
-              let accountId = data[NotificationField.accountId.rawValue] else {
+              let accountId = data[NotificationField.accountId.rawValue]
+        else {
             return nil
         }
-        return cachesPath.appendingPathComponent(accountId).appendingPathComponent("treatedMessages")
+        return cachesPath.appendingPathComponent(accountId)
+            .appendingPathComponent("treatedMessages")
     }
 
     private func getProxyCaches(data: [String: String]) -> URL? {
         guard let cachesPath = Constants.cachesPath,
-              let accountId = data[NotificationField.accountId.rawValue] else {
+              let accountId = data[NotificationField.accountId.rawValue]
+        else {
             return nil
         }
         return cachesPath.appendingPathComponent(accountId).appendingPathComponent("dhtproxy")
@@ -711,7 +832,9 @@ extension NotificationService {
     private func contactProfileName(accountId: String, contactId: String) -> String? {
         guard let documents = Constants.documentsPath else { return nil }
         let uri = "ring:" + contactId
-        let path = documents.path + "/" + "\(accountId)" + "/profiles/" + "\(Data(uri.utf8).base64EncodedString()).vcf"
+        let path = documents
+            .path + "/" + "\(accountId)" + "/profiles/" +
+            "\(Data(uri.utf8).base64EncodedString()).vcf"
         if !FileManager.default.fileExists(atPath: path) { return nil }
 
         return VCardUtils.getNameFromVCard(filePath: path)
@@ -719,19 +842,26 @@ extension NotificationService {
 }
 
 // MARK: DarwinNotificationHandler
+
 extension NotificationService: DarwinNotificationHandler {
     func listenToMainAppResponse(completion: @escaping (Bool) -> Void) {
         let observer = Unmanaged.passUnretained(self).toOpaque()
         CFNotificationCenterAddObserver(notificationCenter,
-                                        observer, { (_, _, _, _, _) in
-                                            NotificationCenter.default.post(name: NotificationService.localNotificationName,
-                                                                            object: nil,
-                                                                            userInfo: nil)
+                                        observer, { _, _, _, _, _ in
+                                            NotificationCenter.default.post(
+                                                name: NotificationService.localNotificationName,
+                                                object: nil,
+                                                userInfo: nil
+                                            )
                                         },
                                         Constants.notificationAppIsActive,
                                         nil,
                                         .deliverImmediately)
-        NotificationCenter.default.addObserver(forName: NotificationService.localNotificationName, object: nil, queue: nil) { _ in
+        NotificationCenter.default.addObserver(
+            forName: NotificationService.localNotificationName,
+            object: nil,
+            queue: nil
+        ) { _ in
             completion(true)
         }
     }
@@ -739,31 +869,52 @@ extension NotificationService: DarwinNotificationHandler {
     func removeObserver() {
         let observer = Unmanaged.passUnretained(self).toOpaque()
         CFNotificationCenterRemoveEveryObserver(notificationCenter, observer)
-        NotificationCenter.default.removeObserver(self, name: NotificationService.localNotificationName, object: nil)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NotificationService.localNotificationName,
+            object: nil
+        )
     }
-
 }
 
 // MARK: Present and update notifications
+
 extension NotificationService {
-    private func createAttachment(identifier: String, image: UIImage, options: [NSObject: AnyObject]?) -> UNNotificationAttachment? {
+    private func createAttachment(
+        identifier: String,
+        image: UIImage,
+        options: [NSObject: AnyObject]?
+    ) -> UNNotificationAttachment? {
         let fileManager = FileManager.default
         let tmpSubFolderName = ProcessInfo.processInfo.globallyUniqueString
-        let tmpSubFolderURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tmpSubFolderName, isDirectory: true)
+        let tmpSubFolderURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(
+            tmpSubFolderName,
+            isDirectory: true
+        )
         do {
-            try fileManager.createDirectory(at: tmpSubFolderURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(
+                at: tmpSubFolderURL,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
             let imageFileIdentifier = identifier
             let fileURL = tmpSubFolderURL.appendingPathComponent(imageFileIdentifier)
             let imageData = image.jpegData(compressionQuality: 0.7)
             try imageData?.write(to: fileURL)
-            let imageAttachment = try UNNotificationAttachment.init(identifier: identifier, url: fileURL, options: options)
+            let imageAttachment = try UNNotificationAttachment(
+                identifier: identifier,
+                url: fileURL,
+                options: options
+            )
             return imageAttachment
         } catch {}
         return nil
     }
 
     func createThumbnailImage(fileURLString: String) -> UIImage? {
-        guard let escapedPath = fileURLString.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+        guard let escapedPath = fileURLString
+                .addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
+        else {
             return nil
         }
 
@@ -775,19 +926,26 @@ extension NotificationService {
         let size = CGSize(width: thumbnailSize, height: thumbnailSize)
 
         guard let imageSource = CGImageSourceCreateWithURL(fileURL as CFURL, nil),
-              let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
+              let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0,
+                                                                       nil) as? [CFString: Any],
               let pixelWidth = imageProperties[kCGImagePropertyPixelWidth] as? Int,
               let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as? Int,
               let downsampledImage = createDownsampledImage(imageSource: imageSource,
                                                             targetSize: size,
                                                             pixelWidth: pixelWidth,
-                                                            pixelHeight: pixelHeight) else {
+                                                            pixelHeight: pixelHeight)
+        else {
             return nil
         }
         return UIImage(cgImage: downsampledImage)
     }
 
-    func createDownsampledImage(imageSource: CGImageSource, targetSize: CGSize, pixelWidth: Int, pixelHeight: Int) -> CGImage? {
+    func createDownsampledImage(
+        imageSource: CGImageSource,
+        targetSize: CGSize,
+        pixelWidth _: Int,
+        pixelHeight _: Int
+    ) -> CGImage? {
         let maxDimension = max(targetSize.width, targetSize.height)
         let options: [CFString: Any] = [
             kCGImageSourceThumbnailMaxPixelSize: maxDimension,
@@ -797,13 +955,15 @@ extension NotificationService {
         return CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
     }
 
-    // A generic function that configures a notification with the given content and type, and returns the notification
-    private func configureNotification(config: NotificationConfig, type: LocalNotificationType) -> LocalNotification {
+    // A generic function that configures a notification with the given content and type, and
+    // returns the notification
+    private func configureNotification(config: NotificationConfig,
+                                       type: LocalNotificationType) -> LocalNotification {
         let content = UNMutableNotificationContent()
         content.sound = UNNotificationSound.default
         var data = [String: String]()
         data[Constants.NotificationUserInfoKeys.participantID.rawValue] = config.from
-        data[Constants.NotificationUserInfoKeys.accountID.rawValue] = self.accountId
+        data[Constants.NotificationUserInfoKeys.accountID.rawValue] = accountId
         data[Constants.NotificationUserInfoKeys.conversationID.rawValue] = config.conversationId
         content.userInfo = data
         switch type {
@@ -814,15 +974,19 @@ extension NotificationService {
                 let imageName = url.lastPathComponent
                 content.body = imageName
                 if let image = createThumbnailImage(fileURLString: url.path),
-                   let attachement = createAttachment(identifier: imageName, image: image, options: nil) {
-                    content.attachments = [ attachement ]
+                   let attachement = createAttachment(
+                    identifier: imageName,
+                    image: image,
+                    options: nil
+                   ) {
+                    content.attachments = [attachement]
                 }
             }
         }
         if !config.groupTitle.isEmpty {
             content.title = config.groupTitle
         } else {
-            content.title = self.bestName(accountId: self.accountId, contactId: config.from)
+            content.title = bestName(accountId: accountId, contactId: config.from)
         }
         if content.title.isEmpty {
             content.title = config.from
@@ -830,22 +994,32 @@ extension NotificationService {
         return (content, type)
     }
 
-    private func configureAndPresentNotification(config: NotificationConfig, type: LocalNotificationType) {
-        let notif = self.configureNotification(config: config, type: type)
+    private func configureAndPresentNotification(
+        config: NotificationConfig,
+        type: LocalNotificationType
+    ) {
+        let notif = configureNotification(config: config, type: type)
         // If the title is a URI, do a lookup and queue presentation
         if notif.content.title == config.from {
             enqueueNotificationForNameUpdate(notification: notif, peerId: config.from)
         } else {
-            self.presentLocalNotification(notification: notif)
+            presentLocalNotification(notification: notif)
         }
     }
 
     private func presentLocalNotification(notification: LocalNotification) {
         let content = notification.content
         setNotificationCount(notification: content)
-        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-        let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: notificationTrigger)
-        UNUserNotificationCenter.current().add(notificationRequest) { [weak self] (error) in
+        let notificationTrigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: 0.01,
+            repeats: false
+        )
+        let notificationRequest = UNNotificationRequest(
+            identifier: UUID().uuidString,
+            content: content,
+            trigger: notificationTrigger
+        )
+        UNUserNotificationCenter.current().add(notificationRequest) { [weak self] error in
             if let error = error {
                 log("Unable to Add Notification Request: (\(error), \(error.localizedDescription))")
             }
@@ -858,17 +1032,20 @@ extension NotificationService {
     private func presentCall(info: [AnyHashable: Any]) {
         // TODO: see if this should sync after daemon stop
         CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
-            log("NotificationService", "Did report voip notification, error: \(String(describing: error))")
+            log(
+                "NotificationService",
+                "Did report voip notification, error: \(String(describing: error))"
+            )
         })
-        self.notificationQueue.sync {
+        notificationQueue.sync {
             self.pendingCalls.removeAll()
             self.pendingLocalNotifications.removeAll()
         }
-        self.verifyTasksStatus()
+        verifyTasksStatus()
     }
 
     private func enqueueNotificationForNameUpdate(notification: LocalNotification, peerId: String) {
-        self.notificationQueue.sync {
+        notificationQueue.sync {
             if var pending = pendingLocalNotifications[peerId] {
                 pending.append(notification)
                 pendingLocalNotifications[peerId] = pending

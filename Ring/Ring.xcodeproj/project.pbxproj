@@ -2885,7 +2885,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug with lint\" ]; then\n export PATH=\"$PATH:/opt/homebrew/bin\"\n  if which swiftlint > /dev/null; then\n      swiftlint autocorrect > /dev/null\n      swiftlint lint --fix --format\n      swiftlint\n  else\n    echo \\\"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\\\"\n  fi\nfi;\n";
+			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug with lint\" ]; then\n  export PATH=\"$PATH:/opt/homebrew/bin\"\n  if which swiftformat > /dev/null; then\n    swiftformat . --maxwidth 100\n  else\n    echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\n  fi\n  if which swiftlint > /dev/null; then\n      swiftlint autocorrect > /dev/null\n      swiftlint lint --fix --format\n      swiftlint\n  else\n     echo \\\"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\\\"\n  fi\nfi;\n";
 		};
 		1ABE07C41F0D779F00D36361 /* ⚙️ SwiftGen Code Generation */ = {
 			isa = PBXShellScriptBuildPhase;

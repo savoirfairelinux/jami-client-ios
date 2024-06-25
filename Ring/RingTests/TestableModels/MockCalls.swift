@@ -25,7 +25,7 @@ class MocSystemCalls {
     var calls = [MockCall]()
 
     func reportCall(call: MockCall) {
-        self.calls.append(call)
+        calls.append(call)
     }
 
     func removeCall(uuid: UUID) {
@@ -37,13 +37,13 @@ class MocSystemCalls {
     }
 
     func getCalls(jamiId: String) -> [MockCall]? {
-        return self.calls.filter { call in
+        return calls.filter { call in
             call.jamiId == jamiId
         }
     }
 
     func getCalls() -> [MockCall] {
-        return self.calls
+        return calls
     }
 }
 
@@ -65,16 +65,19 @@ class MockCXProvider: CXProvider {
         super.init(configuration: CallsHelpers.providerConfiguration())
     }
 
-    override func reportNewIncomingCall(with UUID: UUID, update: CXCallUpdate, completion: ((Error?) -> Void)? = nil) {
+    override func reportNewIncomingCall(
+        with UUID: UUID,
+        update: CXCallUpdate,
+        completion _: ((Error?) -> Void)? = nil
+    ) {
         if let handle = update.remoteHandle {
             let call = MockCall(uuid: UUID, jamiId: handle.value)
-            self.systemCalls.reportCall(call: call)
+            systemCalls.reportCall(call: call)
         }
     }
 }
 
 class MockCallController: CXCallController {
-
     var systemCalls: MocSystemCalls
 
     init(systemCalls: MocSystemCalls) {
@@ -88,10 +91,10 @@ class MockCallController: CXCallController {
                 let uuid = startCallAction.callUUID
                 let jamiId = startCallAction.contactIdentifier!
                 let newCall = MockCall(uuid: uuid, jamiId: jamiId)
-                self.systemCalls.reportCall(call: newCall)
+                systemCalls.reportCall(call: newCall)
             } else if let endCallAction = action as? CXEndCallAction {
                 let uuid = endCallAction.callUUID
-                self.systemCalls.removeCall(uuid: uuid)
+                systemCalls.removeCall(uuid: uuid)
             }
         }
         completion(nil)

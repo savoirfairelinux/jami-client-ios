@@ -20,54 +20,48 @@
  */
 
 import Foundation
-import RxSwift
 import RxRelay
+import RxSwift
 
 class CreateProfileViewModel: Stateable, ViewModel {
-
     // MARK: - Rx Stateable
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
+
     var profileName = BehaviorRelay<String>(value: "")
     var profilePhoto = BehaviorRelay<UIImage?>(value: nil)
 
-    lazy var profileExists: Observable<Bool> = {
+    lazy var profileExists: Observable<Bool> = Observable.combineLatest(
+        self.profileName.asObservable(),
+        self.profilePhoto.asObservable()
+    ) { username, image -> Bool in
 
-        return Observable.combineLatest(self.profileName.asObservable(),
-                                        self.profilePhoto.asObservable()) {(username, image) -> Bool in
-
-            if !username.isEmpty {
-                return true
-            }
-
-            let defaultImage = UIImage(named: "ic_contact_picture")
-            if let image = image, !defaultImage!.isEqual(image) {
-                return true
-            }
-            return false
+        if !username.isEmpty {
+            return true
         }
-    }()
 
-    lazy var skipButtonTitle: Observable<String> = {
-        return profileExists
-            .map({ exists -> String in
-                if exists {
-                    return L10n.CreateProfile.profileCreated
-                }
-                return L10n.CreateProfile.skipCreateProfile
-            })
-            .startWith(L10n.CreateProfile.skipCreateProfile)
-    }()
+        let defaultImage = UIImage(named: "ic_contact_picture")
+        if let image = image, !defaultImage!.isEqual(image) {
+            return true
+        }
+        return false
+    }
+
+    lazy var skipButtonTitle: Observable<String> = profileExists
+        .map { exists -> String in
+            if exists {
+                return L10n.CreateProfile.profileCreated
+            }
+            return L10n.CreateProfile.skipCreateProfile
+        }
+        .startWith(L10n.CreateProfile.skipCreateProfile)
 
     let disposeBag = DisposeBag()
 
-    required init (with injectionBag: InjectionBag) {
-    }
+    required init(with _: InjectionBag) {}
 
     func proceedWithAccountCreationOrDeviceLink() {
-        self.stateSubject.onNext(WalkthroughState.accountCreated)
+        stateSubject.onNext(WalkthroughState.accountCreated)
     }
-
 }

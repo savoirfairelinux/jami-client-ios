@@ -22,7 +22,7 @@ import SwiftUI
 
 extension Button {
     func swarmButtonStyle() -> some View {
-        self.background(Color(UIColor.jamiButtonDark))
+        background(Color(UIColor.jamiButtonDark))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .padding(.all, 15.0)
     }

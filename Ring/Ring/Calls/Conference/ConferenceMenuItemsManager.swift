@@ -22,8 +22,10 @@ enum RoleInCall {
     case host
     case regular
 }
+
 class ConferenceMenuItemsManager {
-    func getMenuItemsForLocalCall(conference: CallModel?, active: Bool?, isHandRised: Bool) -> [MenuItem] {
+    func getMenuItemsForLocalCall(conference: CallModel?, active: Bool?,
+                                  isHandRised: Bool) -> [MenuItem] {
         var menu = [MenuItem]()
         guard let conference = conference else {
             return menu
@@ -53,7 +55,8 @@ class ConferenceMenuItemsManager {
         return menu
     }
 
-    func getMenuItemsForLocalCall(layout: CallLayout, active: Bool?, isHandRised: Bool) -> [MenuItem] {
+    func getMenuItemsForLocalCall(layout: CallLayout, active: Bool?,
+                                  isHandRised: Bool) -> [MenuItem] {
         var menu = [MenuItem]()
         guard let active = active else {
             return menu
@@ -81,10 +84,18 @@ class ConferenceMenuItemsManager {
     }
 
     // swiftlint:disable cyclomatic_complexity
-    func getMenuItemsFor(call: CallModel?, isHost: Bool, conference: CallModel?, active: Bool?, role: RoleInCall, isHandRised: Bool) -> [MenuItem] {
+    func getMenuItemsFor(
+        call: CallModel?,
+        isHost: Bool,
+        conference: CallModel?,
+        active: Bool?,
+        role: RoleInCall,
+        isHandRised: Bool
+    ) -> [MenuItem] {
         var menu = [MenuItem]()
         guard let conference = conference,
-              let call = call else {
+              let call = call
+        else {
             return menu
         }
         if call.state != CallState.current {
@@ -157,7 +168,13 @@ class ConferenceMenuItemsManager {
     }
 
     // swiftlint:disable cyclomatic_complexity
-    func getMenuItemsFor(isHost: Bool, layout: CallLayout, active: Bool, role: RoleInCall, isHandRised: Bool) -> [MenuItem] {
+    func getMenuItemsFor(
+        isHost: Bool,
+        layout: CallLayout,
+        active: Bool,
+        role: RoleInCall,
+        isHandRised: Bool
+    ) -> [MenuItem] {
         var menu = [MenuItem]()
         if isHandRised {
             menu.append(.lowerHand)

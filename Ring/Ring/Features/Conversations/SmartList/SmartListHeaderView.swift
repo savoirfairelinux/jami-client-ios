@@ -18,12 +18,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
+import UIKit
 
 class SmartListHeaderView: UIView {
-
-    @IBOutlet weak var conversationsSegmentControl: UISegmentedControl!
+    @IBOutlet var conversationsSegmentControl: UISegmentedControl!
 
     let conversationTitle = L10n.Smartlist.conversations
     let requestsTitle = L10n.Smartlist.invitations
@@ -43,9 +42,17 @@ class SmartListHeaderView: UIView {
         }
         conversationsSegmentControl.isHidden = false
         let attributedMessages = createAttributedString(text: conversationTitle, number: messages)
-        conversationsSegmentControl.setImage(getImageForSegment(attributedString: attributedMessages)?.withRenderingMode(.alwaysOriginal), forSegmentAt: 0)
+        conversationsSegmentControl.setImage(
+            getImageForSegment(attributedString: attributedMessages)?
+                .withRenderingMode(.alwaysOriginal),
+            forSegmentAt: 0
+        )
         let attributedRequests = createAttributedString(text: requestsTitle, number: requests)
-        conversationsSegmentControl.setImage(getImageForSegment(attributedString: attributedRequests)?.withRenderingMode(.alwaysOriginal), forSegmentAt: 1)
+        conversationsSegmentControl.setImage(
+            getImageForSegment(attributedString: attributedRequests)?
+                .withRenderingMode(.alwaysOriginal),
+            forSegmentAt: 1
+        )
     }
 
     func createAttributedString(text: String, number: Int) -> NSMutableAttributedString {
@@ -72,15 +79,24 @@ class SmartListHeaderView: UIView {
             .foregroundColor: UIColor.white
         ]
         let sizeOfString = numberString.size(withAttributes: attributes)
-        let roundedRectSize = CGSize(width: sizeOfString.width + horizontalPadding, height: sizeOfString.height + verticalPadding)
+        let roundedRectSize = CGSize(
+            width: sizeOfString.width + horizontalPadding,
+            height: sizeOfString.height + verticalPadding
+        )
 
         UIGraphicsBeginImageContextWithOptions(roundedRectSize, false, UIScreen.main.scale)
 
-        let roundedRectPath = UIBezierPath(roundedRect: CGRect(origin: .zero, size: roundedRectSize), cornerRadius: roundedRectSize.height / 2)
+        let roundedRectPath = UIBezierPath(
+            roundedRect: CGRect(origin: .zero, size: roundedRectSize),
+            cornerRadius: roundedRectSize.height / 2
+        )
         UIColor.jamiButtonDark.setFill()
         roundedRectPath.fill()
 
-        let stringOrigin = CGPoint(x: (roundedRectSize.width - sizeOfString.width) / 2, y: (roundedRectSize.height - sizeOfString.height) / 2)
+        let stringOrigin = CGPoint(
+            x: (roundedRectSize.width - sizeOfString.width) / 2,
+            y: (roundedRectSize.height - sizeOfString.height) / 2
+        )
         numberString.draw(at: stringOrigin, withAttributes: attributes)
 
         let roundedRectImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -96,14 +112,20 @@ class SmartListHeaderView: UIView {
 
     func getImageForSegment(attributedString: NSAttributedString) -> UIImage? {
         let size = attributedString.size()
-        let paddedSize = CGSize(width: size.width + horizontalPadding, height: size.height + verticalPadding)
+        let paddedSize = CGSize(
+            width: size.width + horizontalPadding,
+            height: size.height + verticalPadding
+        )
         UIGraphicsBeginImageContextWithOptions(paddedSize, false, UIScreen.main.scale)
 
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(UIColor.clear.cgColor)
         context?.fill(CGRect(origin: .zero, size: paddedSize))
 
-        attributedString.draw(in: CGRect(origin: CGPoint(x: horizontalPadding * 0.5, y: verticalPadding * 0.5), size: size))
+        attributedString.draw(in: CGRect(
+            origin: CGPoint(x: horizontalPadding * 0.5, y: verticalPadding * 0.5),
+            size: size
+        ))
 
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

@@ -100,25 +100,26 @@ Marianne Forget
 """
 
 public class Constants: NSObject {
-    @objc public static let notificationReceived = "com.savoirfairelinux.notificationExtension.receivedNotification" as CFString
-    @objc public static let notificationAppIsActive = "com.savoirfairelinux.jami.appActive" as CFString
+    @objc public static let notificationReceived =
+        "com.savoirfairelinux.notificationExtension.receivedNotification" as CFString
+    @objc public static let notificationAppIsActive =
+        "com.savoirfairelinux.jami.appActive" as CFString
     @objc public static let notificationData = "notificationData"
     @objc public static let updatedConversations = "updatedConversations"
     @objc public static let appGroupIdentifier = "group.com.savoirfairelinux.ring"
     @objc public static let notificationsCount = "notificationsCount"
     @objc public static let appIdentifier = "com.savoirfairelinux.jami"
 
-    @objc public static let documentsPath: URL? = {
-        return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?.appendingPathComponent("Documents")
-    }()
+    @objc public static let documentsPath: URL? = FileManager.default
+        .containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?
+        .appendingPathComponent("Documents")
 
-    @objc public static let cachesPath: URL? = {
-        return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?.appendingPathComponent("Library").appendingPathComponent("Caches")
-    }()
+    @objc public static let cachesPath: URL? = FileManager.default
+        .containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?
+        .appendingPathComponent("Library").appendingPathComponent("Caches")
 
-    @objc public static let versionNumber: String? = {
-        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-    }()
+    @objc public static let versionNumber: String? = Bundle.main
+        .infoDictionary?["CFBundleShortVersionString"] as? String
 
     @objc public static let buildNumber: String? = {
         let dateDefault = ""
@@ -127,15 +128,17 @@ public class Constants: NSObject {
         let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as? String ?? "Info.plist"
         if let infoPath = Bundle.main.path(forResource: bundleName, ofType: nil),
            let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
-           let infoDate = infoAttr[FileAttributeKey.creationDate] as? Date {
+           let infoDate = infoAttr[FileAttributeKey.creationDate] as? Date
+        {
             return dateFormatter.string(from: infoDate)
         }
         return dateDefault
     }()
 
     @objc public static let fullVersion: String? = {
-        if let versionNumber:String = Constants.versionNumber,
-           let buildNumber = Constants.buildNumber {
+        if let versionNumber: String = Constants.versionNumber,
+           let buildNumber = Constants.buildNumber
+        {
             return "\(versionNumber)(\(buildNumber))"
         }
         return nil

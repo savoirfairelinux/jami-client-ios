@@ -48,38 +48,57 @@ class TransferHelper {
     func closeAllPlayers() {
         let queue = DispatchQueue.global(qos: .default)
         queue.sync {
-            self.players.values.forEach { (player) in
+            for player in self.players.values {
                 player.closePlayer()
             }
             self.players.removeAll()
         }
     }
 
-    init (injectionBag: InjectionBag) {
-        self.dataTransferService = injectionBag.dataTransferService
+    init(injectionBag: InjectionBag) {
+        dataTransferService = injectionBag.dataTransferService
         self.injectionBag = injectionBag
     }
 
-    func acceptTransfer(conversation: ConversationModel, message: MessageModel) -> NSDataTransferError {
+    func acceptTransfer(conversation: ConversationModel,
+                        message: MessageModel) -> NSDataTransferError {
         var fileName = ""
-        self.dataTransferService.downloadFile(withId: message.daemonId, interactionID: message.id, fileName: &fileName, accountID: conversation.accountId, conversationID: conversation.id)
+        dataTransferService.downloadFile(
+            withId: message.daemonId,
+            interactionID: message.id,
+            fileName: &fileName,
+            accountID: conversation.accountId,
+            conversationID: conversation.id
+        )
         return .success
     }
 
-    func cancelTransfer(conversation: ConversationModel, message: MessageModel) -> NSDataTransferError {
-        return self.dataTransferService.cancelTransfer(withId: message.daemonId, accountId: conversation.accountId, conversationId: conversation.id)
+    func cancelTransfer(conversation: ConversationModel,
+                        message: MessageModel) -> NSDataTransferError {
+        return dataTransferService.cancelTransfer(
+            withId: message.daemonId,
+            accountId: conversation.accountId,
+            conversationId: conversation.id
+        )
     }
 
     func getTransferProgress(conversation: ConversationModel, message: MessageModel) -> Float? {
-        let progress = self.dataTransferService.getTransferProgress(withId: message.daemonId, accountId: conversation.accountId, conversationId: conversation.id, isSwarm: conversation.isSwarm())
+        let progress = dataTransferService.getTransferProgress(
+            withId: message.daemonId,
+            accountId: conversation.accountId,
+            conversationId: conversation.id,
+            isSwarm: conversation.isSwarm()
+        )
         return message.totalSize > 0 ? Float(progress) / Float(message.totalSize) : Float(progress)
     }
 
     func getTransferSize(conversation: ConversationModel, message: MessageModel) -> Int64? {
-        guard let info = self.dataTransferService.dataTransferInfo(withId: message.daemonId,
-                                                                   accountId: conversation.accountId,
-                                                                   conversationId: conversation.id,
-                                                                   isSwarm: conversation.isSwarm()) else { return nil }
+        guard let info = dataTransferService.dataTransferInfo(withId: message.daemonId,
+                                                              accountId: conversation
+                                                                .accountId,
+                                                              conversationId: conversation.id,
+                                                              isSwarm: conversation.isSwarm())
+        else { return nil }
         return info.totalSize
     }
 
@@ -87,25 +106,29 @@ class TransferHelper {
         if message.transferStatus != .success {
             return nil
         }
-        let transferInfo = self.getTransferFileData(content: message.content)
+        let transferInfo = getTransferFileData(content: message.content)
         if conversation.isSwarm() {
-            return self.dataTransferService.getFileUrlForSwarm(fileName: message.daemonId, accountID: conversation.accountId, conversationID: conversation.id)
+            return dataTransferService.getFileUrlForSwarm(
+                fileName: message.daemonId,
+                accountID: conversation.accountId,
+                conversationID: conversation.id
+            )
         }
         if message.incoming {
-            return self.dataTransferService
+            return dataTransferService
                 .getFileUrlNonSwarm(fileName: transferInfo.fileName,
                                     inFolder: Directories.downloads.rawValue,
                                     accountID: conversation.accountId,
                                     conversationID: conversation.id)
         }
 
-        let recorded = self.dataTransferService
+        let recorded = dataTransferService
             .getFileUrlNonSwarm(fileName: transferInfo.fileName,
                                 inFolder: Directories.recorded.rawValue,
                                 accountID: conversation.accountId,
                                 conversationID: conversation.id)
         guard recorded == nil, recorded?.path.isEmpty ?? true else { return recorded }
-        return self.dataTransferService
+        return dataTransferService
             .getFileUrlNonSwarm(fileName: transferInfo.fileName,
                                 inFolder: Directories.downloads.rawValue,
                                 accountID: conversation.accountId,
@@ -117,17 +140,17 @@ class TransferHelper {
             return nil
         }
 
-        if let playerModel = self.getPlayer(messageID: String(message.id)) {
+        if let playerModel = getPlayer(messageID: String(message.id)) {
             return playerModel
         }
-        let transferInfo = self.getTransferFileData(content: message.content)
+        let transferInfo = getTransferFileData(content: message.content)
         let name = conversation.isSwarm() ? message.daemonId : transferInfo.fileName
         guard let fileExtension = NSURL(fileURLWithPath: name).pathExtension else {
             return nil
         }
         if fileExtension.isMediaExtension() {
             if conversation.isSwarm() {
-                let path = self.dataTransferService
+                let path = dataTransferService
                     .getFileUrlForSwarm(fileName: message.daemonId,
                                         accountID: conversation.accountId,
                                         conversationID: conversation.id)
@@ -135,23 +158,24 @@ class TransferHelper {
                 if pathString.isEmpty {
                     return nil
                 }
-                let model = PlayerViewModel(injectionBag: self.injectionBag, path: pathString)
-                self.setPlayer(messageID: String(message.id), player: model)
+                let model = PlayerViewModel(injectionBag: injectionBag, path: pathString)
+                setPlayer(messageID: String(message.id), player: model)
                 return model
             }
             // first search for incoming video in downloads folder and for outgoing in recorded
-            let folderName = message.incoming ? Directories.downloads.rawValue : Directories.recorded.rawValue
-            var path = self.dataTransferService
+            let folderName = message.incoming ? Directories.downloads.rawValue : Directories
+                .recorded.rawValue
+            var path = dataTransferService
                 .getFileUrlNonSwarm(fileName: name,
                                     inFolder: folderName,
                                     accountID: conversation.accountId,
                                     conversationID: conversation.id)
             var pathString = path?.path ?? ""
-            if pathString.isEmpty && message.incoming {
+            if pathString.isEmpty, message.incoming {
                 return nil
             } else if pathString.isEmpty {
                 // try to search outgoing video in downloads folder
-                path = self.dataTransferService
+                path = dataTransferService
                     .getFileUrlNonSwarm(fileName: name,
                                         inFolder: Directories.downloads.rawValue,
                                         accountID: conversation.accountId,
@@ -161,8 +185,8 @@ class TransferHelper {
                     return nil
                 }
             }
-            let model = PlayerViewModel(injectionBag: self.injectionBag, path: pathString)
-            self.setPlayer(messageID: String(message.id), player: model)
+            let model = PlayerViewModel(injectionBag: injectionBag, path: pathString)
+            setPlayer(messageID: String(message.id), player: model)
             return model
         }
         return nil

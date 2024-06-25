@@ -17,17 +17,18 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-import UIKit
-import RxSwift
-import RxDataSources
 import RxCocoa
+import RxDataSources
+import RxSwift
+import UIKit
 
 struct AccountItem {
     let account: AccountModel
     let profileObservable: Observable<Profile>
 }
 
-final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerViewDelegate, RxPickerViewDataSourceType, SectionedViewDataSourceType {
+final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerViewDelegate,
+                                  RxPickerViewDataSourceType, SectionedViewDataSourceType {
     typealias Element = [AccountItem]
 
     private var items: [AccountItem] = []
@@ -36,23 +37,24 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
         return items[indexPath.row]
     }
 
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in _: UIPickerView) -> Int {
         return 1
     }
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_: UIPickerView, numberOfRowsInComponent _: Int) -> Int {
         return items.count
     }
 
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_: UIPickerView, rowHeightForComponent _: Int) -> CGFloat {
         return 60
     }
 
     func rowForAccountId(account: AccountModel) -> Int? {
-        return self.items.firstIndex { $0.account === account }
+        return items.firstIndex { $0.account === account }
     }
 
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+    func pickerView(_: UIPickerView, viewForRow row: Int, forComponent _: Int,
+                    reusing view: UIView?) -> UIView {
         let accountView: AccountItemView
         if let oldView = view as? AccountItemView {
             accountView = oldView
@@ -76,27 +78,32 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
         }(account)
         accountView.idLabel.text = jamiId
         profile
-            .map({ [weak self] accountProfile in
+            .map { [weak self] accountProfile in
                 if let photo = accountProfile.photo,
                    let data = NSData(base64Encoded: photo,
-                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?,
+                                     options: NSData.Base64DecodingOptions
+                                        .ignoreUnknownCharacters) as Data?,
                    let image = UIImage(data: data) {
                     return image
                 }
                 let account = self?.items[row].account
-                return UIImage.defaultJamiAvatarFor(profileName: accountProfile.alias, account: account, size: 30)
-            })
+                return UIImage.defaultJamiAvatarFor(
+                    profileName: accountProfile.alias,
+                    account: account,
+                    size: 30
+                )
+            }
             .bind(to: accountView.avatarView.rx.image)
             .disposed(by: DisposeBag())
 
         profile
-            .map({ accountProfile -> String in
+            .map { accountProfile -> String in
                 if let name = accountProfile.alias, !name.isEmpty {
                     return name
                 }
                 return jamiId
-            })
-            .subscribe(onNext: { [weak accountView] (name) in
+            }
+            .subscribe(onNext: { [weak accountView] name in
                 accountView?.idLabel.isHidden = name == jamiId
                 accountView?.nameLabel.text = name
             })
@@ -105,7 +112,7 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
     }
 
     func pickerView(_ pickerView: UIPickerView, observedEvent: Event<Element>) {
-        Binder(self) { (adapter, items) in
+        Binder(self) { adapter, items in
             adapter.items = items
             pickerView.reloadAllComponents()
         }.on(observedEvent)

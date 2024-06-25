@@ -24,7 +24,6 @@ import UIKit
 class AvatarView: UIView {
     init(image: UIImage,
          size: CGFloat = 32.0) {
-
         let frame = CGRect(x: 0, y: 0, width: size, height: size)
 
         super.init(frame: frame)
@@ -36,7 +35,7 @@ class AvatarView: UIView {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
         avatarImageView.clipsToBounds = true
         avatarImageView.contentMode = .scaleAspectFill
-        self.addSubview(avatarImageView)
+        addSubview(avatarImageView)
     }
 
     init(profileImageData: Data?,
@@ -44,7 +43,6 @@ class AvatarView: UIView {
          size: CGFloat = 32.0,
          offset: CGPoint = CGPoint(x: 0.0, y: 0.0),
          labelFontSize: CGFloat? = nil) {
-
         let frame = CGRect(x: 0, y: 0, width: size, height: size)
 
         super.init(frame: frame)
@@ -58,7 +56,7 @@ class AvatarView: UIView {
                 avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
                 avatarImageView.clipsToBounds = true
                 avatarImageView.contentMode = .scaleAspectFill
-                self.addSubview(avatarImageView)
+                addSubview(avatarImageView)
             }
         } else {
             // use fallback avatars
@@ -66,28 +64,38 @@ class AvatarView: UIView {
             var index: UInt64 = 0
             if scanner.scanHexInt64(&index) {
                 let fbaBGColor = avatarColors[Int(index)]
-                let circle = UIView(frame: CGRect(x: offset.x, y: offset.y, width: size, height: size))
-                circle.center = CGPoint.init(x: size / 2, y: self.center.y)
+                let circle = UIView(frame: CGRect(
+                    x: offset.x,
+                    y: offset.y,
+                    width: size,
+                    height: size
+                ))
+                circle.center = CGPoint(x: size / 2, y: center.y)
                 circle.layer.cornerRadius = size / 2
                 circle.backgroundColor = fbaBGColor
                 circle.clipsToBounds = true
-                self.addSubview(circle)
+                addSubview(circle)
                 if !username.isSHA1() && !username.isEmpty {
                     // use g-style fallback avatar
-                    let initialLabel: UILabel = UILabel.init(frame: CGRect.init(x: offset.x, y: offset.y, width: size, height: size))
+                    let initialLabel = UILabel(frame: CGRect(
+                        x: offset.x,
+                        y: offset.y,
+                        width: size,
+                        height: size
+                    ))
                     initialLabel.center = circle.center
                     initialLabel.text = username.prefixString().capitalized
                     let fontSize = (labelFontSize != nil) ? labelFontSize! : (size * 0.44)
                     initialLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .semibold)
                     initialLabel.textColor = UIColor.white
                     initialLabel.textAlignment = .center
-                    self.addSubview(initialLabel)
+                    addSubview(initialLabel)
                 } else {
                     // ringId only, so fallback fallback avatar
                     if let image = UIImage(asset: Asset.fallbackAvatar) {
                         (avatarImageView as UIImageView).image = image
                         avatarImageView.tintColor = UIColor.white
-                        self.addSubview(avatarImageView)
+                        addSubview(avatarImageView)
                     }
                 }
             }

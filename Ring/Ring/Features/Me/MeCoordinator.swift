@@ -38,8 +38,9 @@ class MeCoordinator: Coordinator, StateableResponsive {
     var presentingVC = [String: Bool]()
 
     var rootViewController: UIViewController {
-        return self.navigationViewController
+        return navigationViewController
     }
+
     var parentCoordinator: Coordinator?
 
     var childCoordinators = [Coordinator]()
@@ -50,13 +51,13 @@ class MeCoordinator: Coordinator, StateableResponsive {
 
     let stateSubject = PublishSubject<State>()
 
-    required init (with injectionBag: InjectionBag) {
+    required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
-        self.presentingVC[VCType.blockList.rawValue] = false
+        presentingVC[VCType.blockList.rawValue] = false
 
-        self.stateSubject
+        stateSubject
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (state) in
+            .subscribe(onNext: { [weak self] state in
                 guard let self = self, let state = state as? MeState else { return }
                 switch state {
                 case .linkNewDevice:
@@ -69,42 +70,47 @@ class MeCoordinator: Coordinator, StateableResponsive {
                     self.accountRemoved()
                 case .accountModeChanged:
                     self.accountModeChanged()
-                case .needAccountMigration(let accountId):
+                case let .needAccountMigration(accountId):
                     self.migrateAccount(accountId: accountId)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func needToOnboard() {
-        if let parent = self.parentCoordinator as? ConversationsCoordinator {
+        if let parent = parentCoordinator as? ConversationsCoordinator {
             parent.stateSubject.onNext(ConversationState.needToOnboard)
         }
     }
 
     func accountModeChanged() {
-        if let parent = self.parentCoordinator as? ConversationsCoordinator {
+        if let parent = parentCoordinator as? ConversationsCoordinator {
             parent.stateSubject.onNext(ConversationState.accountModeChanged)
         }
     }
 
     func migrateAccount(accountId: String) {
-        if let parent = self.parentCoordinator as? ConversationsCoordinator {
+        if let parent = parentCoordinator as? ConversationsCoordinator {
             parent.stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
         }
     }
 
     func accountRemoved() {
-        if let parent = self.parentCoordinator as? ConversationsCoordinator {
+        if let parent = parentCoordinator as? ConversationsCoordinator {
             parent.stateSubject.onNext(ConversationState.accountRemoved)
         }
     }
 
-    func start () {
-        let meViewController = MeViewController.instantiate(with: self.injectionBag)
-        meViewController.model = EditProfileViewModel(profileService: self.injectionBag.profileService,
-                                                      accountService: self.injectionBag.accountService)
-        self.present(viewController: meViewController, withStyle: .show, withAnimation: true, withStateable: meViewController.viewModel)
+    func start() {
+        let meViewController = MeViewController.instantiate(with: injectionBag)
+        meViewController.model = EditProfileViewModel(profileService: injectionBag.profileService,
+                                                      accountService: injectionBag.accountService)
+        present(
+            viewController: meViewController,
+            withStyle: .show,
+            withAnimation: true,
+            withStateable: meViewController.viewModel
+        )
     }
 
     func setNavigationController(controller: UINavigationController) {
@@ -112,20 +118,25 @@ class MeCoordinator: Coordinator, StateableResponsive {
     }
 
     private func showBlockedContacts() {
-        if let flag = self.presentingVC[VCType.blockList.rawValue], flag {
+        if let flag = presentingVC[VCType.blockList.rawValue], flag {
             return
         }
-        self.presentingVC[VCType.blockList.rawValue] = true
-        let blockedContactsViewController = BlockListViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: blockedContactsViewController,
-                     withStyle: .show,
-                     withAnimation: true,
-                     lockWhilePresenting: VCType.blockList.rawValue,
-                     disposeBag: self.disposeBag)
+        presentingVC[VCType.blockList.rawValue] = true
+        let blockedContactsViewController = BlockListViewController.instantiate(with: injectionBag)
+        present(viewController: blockedContactsViewController,
+                withStyle: .show,
+                withAnimation: true,
+                lockWhilePresenting: VCType.blockList.rawValue,
+                disposeBag: disposeBag)
     }
 
     private func showLinkDeviceWindow() {
-        let linkDeviceVC = LinkNewDeviceViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: linkDeviceVC, withStyle: .popup, withAnimation: false, disposeBag: self.disposeBag)
+        let linkDeviceVC = LinkNewDeviceViewController.instantiate(with: injectionBag)
+        present(
+            viewController: linkDeviceVC,
+            withStyle: .popup,
+            withAnimation: false,
+            disposeBag: disposeBag
+        )
     }
 }

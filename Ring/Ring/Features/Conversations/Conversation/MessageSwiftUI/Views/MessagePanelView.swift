@@ -26,7 +26,11 @@ struct MessageTopBaseView<Content>: View where Content: View {
     let content: Content
     let closeAction: () -> Void
 
-    init(model: MessagePanelVM, closeAction: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+    init(
+        model: MessagePanelVM,
+        closeAction: @escaping () -> Void,
+        @ViewBuilder content: () -> Content
+    ) {
         self.closeAction = closeAction
         self.content = content()
         self.model = model
@@ -83,9 +87,23 @@ struct ReplyViewInMessagePanel: View {
                 .frame(width: padding)
             if messageToReply.type == .fileTransfer {
                 if let player = messageToReply.player, player.hasVideo.value {
-                    PlayerSwiftUI(model: messageToReply, player: player, onLongGesture: {}, ratio: 0.4, withControls: false, customCornerRadius: 10)
+                    PlayerSwiftUI(
+                        model: messageToReply,
+                        player: player,
+                        onLongGesture: {},
+                        ratio: 0.4,
+                        withControls: false,
+                        customCornerRadius: 10
+                    )
                 } else if let image = messageToReply.finalImage {
-                    ImageOrGifView(message: messageToReply, image: image, onLongGesture: {}, minHeight: 20, maxHeight: 50, customCornerRadius: 10)
+                    ImageOrGifView(
+                        message: messageToReply,
+                        image: image,
+                        onLongGesture: {},
+                        minHeight: 20,
+                        maxHeight: 50,
+                        customCornerRadius: 10
+                    )
                 }
             } else if messageToReply.type == .text,
                       let metadata = messageToReply.metadata {
@@ -161,13 +179,23 @@ struct MessagePanelView: View {
             }
             HStack(alignment: .bottom, spacing: 1) {
                 Menu(content: menuContent, label: {
-                    MessagePanelImageButton(model: model, systemName: "plus.circle", width: defaultControlSize, height: defaultControlSize)
+                    MessagePanelImageButton(
+                        model: model,
+                        systemName: "plus.circle",
+                        width: defaultControlSize,
+                        height: defaultControlSize
+                    )
                 })
 
                 Button(action: {
                     self.model.sendPhoto()
                 }, label: {
-                    MessagePanelImageButton(model: model, systemName: "camera", width: 44, height: defaultControlSize)
+                    MessagePanelImageButton(
+                        model: model,
+                        systemName: "camera",
+                        width: 44,
+                        height: defaultControlSize
+                    )
                 })
 
                 Spacer()
@@ -197,7 +225,12 @@ struct MessagePanelView: View {
                             .frame(width: defaultControlSize, height: 40)
                             .padding(.bottom, 2)
                     } else {
-                        MessagePanelImageButton(model: model, systemName: "paperplane", width: defaultControlSize, height: defaultControlSize)
+                        MessagePanelImageButton(
+                            model: model,
+                            systemName: "paperplane",
+                            width: defaultControlSize,
+                            height: defaultControlSize
+                        )
                     }
                 })
                 .animation(.default, value: text.isEmpty)
@@ -218,27 +251,42 @@ struct MessagePanelView: View {
             Button(action: {
                 model.recordAudio()
             }) {
-                Label(MessagePanelState.recordAudio.toString(), systemImage: MessagePanelState.recordAudio.imageName())
+                Label(
+                    MessagePanelState.recordAudio.toString(),
+                    systemImage: MessagePanelState.recordAudio.imageName()
+                )
             }
             Button(action: {
                 model.recordVideo()
             }) {
-                Label(MessagePanelState.recordVido.toString(), systemImage: MessagePanelState.recordVido.imageName())
+                Label(
+                    MessagePanelState.recordVido.toString(),
+                    systemImage: MessagePanelState.recordVido.imageName()
+                )
             }
             Button(action: {
                 model.shareLocation()
             }) {
-                Label(MessagePanelState.shareLocation.toString(), systemImage: MessagePanelState.shareLocation.imageName())
+                Label(
+                    MessagePanelState.shareLocation.toString(),
+                    systemImage: MessagePanelState.shareLocation.imageName()
+                )
             }
             Button(action: {
                 model.sendFile()
             }) {
-                Label(MessagePanelState.sendFile.toString(), systemImage: MessagePanelState.sendFile.imageName())
+                Label(
+                    MessagePanelState.sendFile.toString(),
+                    systemImage: MessagePanelState.sendFile.imageName()
+                )
             }
             Button(action: {
                 model.openGalery()
             }) {
-                Label(MessagePanelState.openGalery.toString(), systemImage: MessagePanelState.openGalery.imageName())
+                Label(
+                    MessagePanelState.openGalery.toString(),
+                    systemImage: MessagePanelState.openGalery.imageName()
+                )
             }
         }
     }

@@ -20,9 +20,9 @@
  */
 
 import Contacts
-import SwiftyBeaver
-import RxSwift
 import RxRelay
+import RxSwift
+import SwiftyBeaver
 
 enum ContactServiceError: Error {
     case vCardSerializationFailed
@@ -32,7 +32,6 @@ enum ContactServiceError: Error {
 }
 
 class ContactsService {
-
     private let contactsAdapter: ContactsAdapter
     private let log = SwiftyBeaver.self
     private let disposeBag = DisposeBag()
@@ -47,8 +46,8 @@ class ContactsService {
 
     init(withContactsAdapter contactsAdapter: ContactsAdapter, dbManager: DBManager) {
         self.contactsAdapter = contactsAdapter
-        self.responseStream.disposed(by: disposeBag)
-        self.sharedResponseStream = responseStream.share()
+        responseStream.disposed(by: disposeBag)
+        sharedResponseStream = responseStream.share()
         self.dbManager = dbManager
         ContactsAdapter.delegate = self
     }
@@ -57,19 +56,19 @@ class ContactsService {
      Called when application starts and when  account changed
      */
     func loadContacts(withAccount account: AccountModel) {
-        if AccountModelHelper.init(withAccount: account).isAccountSip() {
-            self.loadSipContacts(withAccount: account)
+        if AccountModelHelper(withAccount: account).isAccountSip() {
+            loadSipContacts(withAccount: account)
             return
         }
         loadAndSaveJamiContacts(withAccount: account)
     }
 
     private func loadSipContacts(withAccount account: AccountModel) {
-        guard let profiles = self.dbManager
+        guard let profiles = dbManager
                 .getProfilesForAccount(accountId: account.id) else { return }
-        let contacts = profiles.map({ profile in
-            return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHash: profile.uri))
-        })
+        let contacts = profiles.map { profile in
+            ContactModel(withUri: JamiURI(schema: URIType.sip, infoHash: profile.uri))
+        }
         self.contacts.accept([])
         for contact in contacts where self.contacts.value.firstIndex(of: contact) == nil {
             var values = self.contacts.value
@@ -78,10 +77,11 @@ class ContactsService {
             self.log.debug("contact: \(String(describing: contact.userName))")
         }
     }
+
     private func loadAndSaveJamiContacts(withAccount account: AccountModel) {
-        self.loadJamiContacts(withAccountId: account.id)
+        loadJamiContacts(withAccountId: account.id)
         if account.isJams {
-            self.contacts.value.forEach { (contact) in
+            contacts.value.forEach { contact in
                 guard let uriString = contact.uriString else { return }
                 _ = dbManager.createConversationsFor(contactUri: uriString, accountId: account.id)
             }
@@ -90,11 +90,11 @@ class ContactsService {
 
     private func loadJamiContacts(withAccountId accountId: String) {
         // Load contacts from daemon
-        let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: accountId)
+        let contactsDictionaries = contactsAdapter.contacts(withAccountId: accountId)
 
         // Serialize them
         if let contacts = contactsDictionaries?.map({ contactDict in
-            return ContactModel(withDictionary: contactDict)
+            ContactModel(withDictionary: contactDict)
         }) {
             self.contacts.accept([])
             for contact in contacts where self.contacts.value.firstIndex(of: contact) == nil {
@@ -104,12 +104,13 @@ class ContactsService {
             }
         }
     }
+
     /**
      Create a conversations for a linked account. If a conversation is swarm, conversationReady signal will be received and conversation for contact should be removed from the db.
      */
     func saveContactsForLinkedAccount(accountId: String) {
         loadJamiContacts(withAccountId: accountId)
-        self.contacts.value.forEach { (contact) in
+        contacts.value.forEach { contact in
             guard let uriString = contact.uriString else { return }
             _ = dbManager.createConversationsFor(contactUri: uriString, accountId: accountId)
         }
@@ -118,14 +119,14 @@ class ContactsService {
     // MARK: contact getter
 
     func contact(withUri uri: String) -> ContactModel? {
-        guard let contact = self.contacts.value.filter({ $0.uriString == uri }).first else {
+        guard let contact = contacts.value.filter({ $0.uriString == uri }).first else {
             return nil
         }
         return contact
     }
 
     func contact(withHash hash: String) -> ContactModel? {
-        guard let contact = self.contacts.value.filter({ $0.hash == hash }).first else {
+        guard let contact = contacts.value.filter({ $0.hash == hash }).first else {
             return nil
         }
         return contact
@@ -133,7 +134,7 @@ class ContactsService {
 
     func contactExists(withHash hash: String, accountId: String) -> Bool {
         loadJamiContacts(withAccountId: accountId)
-        if let contact = self.contact(withHash: hash) {
+        if let contact = contact(withHash: hash) {
             return !contact.banned
         }
         return false
@@ -141,30 +142,35 @@ class ContactsService {
 
     // MARK: contacts management unban/remove
 
-    func removeContact(withId jamiId: String, ban: Bool, withAccountId accountId: String) -> Observable<Void> {
+    func removeContact(withId jamiId: String, ban: Bool,
+                       withAccountId accountId: String) -> Observable<Void> {
         return Observable.create { [weak self] observable in
-            guard let self = self else { return Disposables.create { } }
+            guard let self = self else { return Disposables.create {} }
             self.contactsAdapter.removeContact(withURI: jamiId, accountId: accountId, ban: ban)
             observable.on(.completed)
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
     func unbanContact(contact: ContactModel, account: AccountModel) {
-        self.contactsAdapter.addContact(withURI: contact.hash, accountId: account.id)
+        contactsAdapter.addContact(withURI: contact.hash, accountId: account.id)
         if let existingContact = self.contact(withUri: contact.uriString ?? "") {
             existingContact.banned = false
         } else {
-            var values = self.contacts.value
+            var values = contacts.value
             values.append(contact)
-            self.contacts.accept(values)
+            contacts.accept(values)
         }
     }
 
     func removeAllContacts(for accountId: String) {
         DispatchQueue.global(qos: .background).async {
             for contact in self.contacts.value {
-                self.contactsAdapter.removeContact(withURI: contact.hash, accountId: accountId, ban: false)
+                self.contactsAdapter.removeContact(
+                    withURI: contact.hash,
+                    accountId: accountId,
+                    ban: false
+                )
             }
             self.contacts.accept([])
             self.dbManager
@@ -175,14 +181,19 @@ class ContactsService {
     }
 
     // MARK: get contact profile
+
     func getProfileForUri(uri: String, accountId: String) -> Observable<Profile> {
-        return self.dbManager.profileObservable(for: uri, createIfNotExists: false, accountId: accountId)
+        return dbManager.profileObservable(for: uri, createIfNotExists: false, accountId: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
 
     func getProfile(uri: String, accountId: String) -> Profile? {
         do {
-            return try self.dbManager.getProfile(for: uri, createIfNotExists: false, accountId: accountId)
+            return try dbManager.getProfile(
+                for: uri,
+                createIfNotExists: false,
+                accountId: accountId
+            )
         } catch {
             return nil
         }
@@ -190,20 +201,19 @@ class ContactsService {
 }
 
 extension ContactsService: ContactsAdapterDelegate {
-
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool) {
         // update contact status
-        if let contact = self.contact(withUri: uri) {
+        if let contact = contact(withUri: uri) {
             if contact.confirmed != confirmed {
                 contact.confirmed = confirmed
             }
         }
         /// sync contacts with daemon contacts
         else {
-            let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: accountId)
+            let contactsDictionaries = contactsAdapter.contacts(withAccountId: accountId)
             // Serialize them
             if let contacts = contactsDictionaries?.map({ contactDict in
-                return ContactModel(withDictionary: contactDict)
+                ContactModel(withDictionary: contactDict)
             }) {
                 for contact in contacts where self.contacts.value.firstIndex(of: contact) == nil {
                     var values = self.contacts.value
@@ -216,19 +226,23 @@ extension ContactsService: ContactsAdapterDelegate {
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.accountId, value: accountId)
         serviceEvent.addEventInput(.peerUri, value: uri)
-        self.responseStream.onNext(serviceEvent)
+        responseStream.onNext(serviceEvent)
         log.debug("Contact added :\(uri)")
     }
 
     func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool) {
-        guard let contactToRemove = self.contacts.value.filter({ $0.hash == uri }).first else {
-            /// if contact was banned we need to add it to the contact list to keep track of banned contacts
-            if banned, let contactDetais = self.contactsAdapter.contactDetails(withURI: uri, accountId: accountId) {
+        guard let contactToRemove = contacts.value.filter({ $0.hash == uri }).first else {
+            /// if contact was banned we need to add it to the contact list to keep track of banned
+            /// contacts
+            if banned, let contactDetais = contactsAdapter.contactDetails(
+                withURI: uri,
+                accountId: accountId
+            ) {
                 let contact = ContactModel(withDictionary: contactDetais)
-                if self.contacts.value.firstIndex(of: contact) == nil {
-                    var values = self.contacts.value
+                if contacts.value.firstIndex(of: contact) == nil {
+                    var values = contacts.value
                     values.append(contact)
-                    self.contacts.accept(values)
+                    contacts.accept(values)
                 }
             }
             return
@@ -236,5 +250,4 @@ extension ContactsService: ContactsAdapterDelegate {
         contactToRemove.banned = banned
         log.debug("Contact removed :\(uri)")
     }
-
 }

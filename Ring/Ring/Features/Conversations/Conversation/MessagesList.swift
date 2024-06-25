@@ -17,7 +17,9 @@ struct MessagesList: View {
                     ForEach(list.messagesModels) { message in
                         MessageRow(messageModel: message, model: message.messageRow)
                             .onAppear { self.list.messagesAddedToScreen(messageId: message.id) }
-                            .onDisappear { self.list.messagesremovedFromScreen(messageId: message.id) }
+                            .onDisappear {
+                                self.list.messagesremovedFromScreen(messageId: message.id)
+                            }
                             .onTapGesture {
                                 self.list.messageTaped(message: message)
                             }
@@ -25,7 +27,6 @@ struct MessagesList: View {
                     Spacer()
                         .frame(height: 40)
                         .id("lastMessageOnScreen")
-
                 }
                 .listRowBackground(Color.clear)
                 .onChange(of: list.messagesCount, perform: { _ in

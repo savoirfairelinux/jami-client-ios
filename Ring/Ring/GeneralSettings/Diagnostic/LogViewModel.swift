@@ -21,7 +21,6 @@
 import Foundation
 
 class LogViewModel: ViewModel {
-
     let injectionBag: InjectionBag
 
     required init(with injectionBag: InjectionBag) {

@@ -22,7 +22,6 @@ import RxSwift
 import SwiftyBeaver
 
 class VideoManager {
-
     let log = SwiftyBeaver.self
     private let callService: CallsService
     private let videoService: VideoService
@@ -34,11 +33,11 @@ class VideoManager {
         self.callService = callService
         self.videoService = videoService
         VideoAdapter.decodingDelegate = self
-        self.subscribeCallsEvents()
+        subscribeCallsEvents()
     }
 
     private func subscribeCallsEvents() {
-        self.callService.sharedResponseStream
+        callService.sharedResponseStream
             .filter { event in
                 event.eventType == .callEnded
             }
@@ -48,7 +47,7 @@ class VideoManager {
                 guard calls.count <= 1 else { return }
                 self.videoService.stopCapture(withDevice: "camera://")
                 self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
-            } onError: {_ in
+            } onError: { _ in
             }
             .disposed(by: disposeBag)
     }
@@ -60,16 +59,24 @@ extension VideoManager: DecodingAdapterDelegate {
                          withHeight height: Int) {
         var accountId = ""
         var codecId: String?
-        let call = self.callService.call(callID: sinkId)
+        let call = callService.call(callID: sinkId)
         if let call = call,
-           let codec = self.callService.getVideoCodec(call: call) {
+           let codec = callService.getVideoCodec(call: call) {
             codecId = codec
             accountId = call.accountId
-            self.callService.callMediaUpdated(call: call)
+            callService.callMediaUpdated(call: call)
         }
-        self.videoService.decodingStarted(withsinkId: sinkId, withWidth: width, withHeight: height, withCodec: codecId, withaAccountId: accountId, call: call)
+        videoService.decodingStarted(
+            withsinkId: sinkId,
+            withWidth: width,
+            withHeight: height,
+            withCodec: codecId,
+            withaAccountId: accountId,
+            call: call
+        )
     }
+
     func decodingStopped(withSinkId sinkId: String) {
-        self.videoService.decodingStopped(withsinkId: sinkId)
+        videoService.decodingStopped(withsinkId: sinkId)
     }
 }

@@ -27,6 +27,7 @@ class ConferenceLayoutHelper {
     private var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
+
     private var screenHeight: CGFloat {
         return UIScreen.main.bounds.height
     }
@@ -42,31 +43,33 @@ class ConferenceLayoutHelper {
     }
 
     func setVideoSize(size: CGSize) {
-        self.videoWidth = size.width
-        self.videoHeight = size.height
+        videoWidth = size.width
+        videoHeight = size.height
     }
 
     func getWidthConstraint() -> CGFloat {
-        if UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft {
+        if UIDevice.current.orientation == .landscapeRight || UIDevice.current
+            .orientation == .landscapeLeft {
             return screenHeight * widthToHeightRatio
         }
         return screenWidth
     }
 
     func getHeightConstraint() -> CGFloat {
-        if UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft {
+        if UIDevice.current.orientation == .landscapeRight || UIDevice.current
+            .orientation == .landscapeLeft {
             return screenHeight
         }
         return screenWidth * heightToWidthRatio
     }
 
     func getHeightRatio() -> CGFloat {
-        guard self.videoHeight != 0 else { return 0 }
-        return self.getHeightConstraint() / self.videoHeight
+        guard videoHeight != 0 else { return 0 }
+        return getHeightConstraint() / videoHeight
     }
 
     func getWidthRatio() -> CGFloat {
-        guard self.videoWidth != 0 else { return 0 }
-        return self.getWidthConstraint() / self.videoWidth
+        guard videoWidth != 0 else { return 0 }
+        return getWidthConstraint() / videoWidth
     }
 }

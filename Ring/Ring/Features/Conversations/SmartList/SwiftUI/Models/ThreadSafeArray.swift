@@ -25,7 +25,7 @@ class ThreadSafeArray<T>: Sequence {
     private let accessQueue: DispatchQueue
 
     init(label: String) {
-        self.accessQueue = DispatchQueue(label: label, attributes: .concurrent)
+        accessQueue = DispatchQueue(label: label, attributes: .concurrent)
     }
 
     func append(_ element: T) {

@@ -18,36 +18,33 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
-import RxCocoa
 import Contacts
+import RxCocoa
+import RxSwift
 import SwiftyBeaver
 
 class RequestItem {
-
     let request: RequestModel
 
     let userName = BehaviorRelay(value: "")
     let profileName = BehaviorRelay(value: "")
     let profileImageData = BehaviorRelay<Data?>(value: nil)
-    lazy var bestName: Observable<String> = {
-        return Observable
-            .combineLatest(userName.asObservable(),
-                           profileName.asObservable()) {(userName, displayname) in
-                if displayname.isEmpty {
-                    return userName
-                }
-                return displayname
+    lazy var bestName: Observable<String> = Observable
+        .combineLatest(userName.asObservable(),
+                       profileName.asObservable()) { userName, displayname in
+            if displayname.isEmpty {
+                return userName
             }
-    }()
+            return displayname
+        }
 
     let disposeBag = DisposeBag()
 
-    init(withRequest request: RequestModel, profileService: ProfilesService,
-         contactService: ContactsService) {
+    init(withRequest request: RequestModel, profileService _: ProfilesService,
+         contactService _: ContactsService) {
         self.request = request
-        self.userName.accept(request.name)
-        self.profileImageData.accept(self.request.avatar)
-        self.profileName.accept(request.name)
+        userName.accept(request.name)
+        profileImageData.accept(self.request.avatar)
+        profileName.accept(request.name)
     }
 }

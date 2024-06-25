@@ -21,14 +21,23 @@
 import Foundation
 
 @objc protocol AdapterDelegate {
-
     func didReceiveMessage(_ message: [String: String],
                            from senderAccount: String,
                            messageId: String,
                            to receiverAccountId: String)
     func newInteraction(conversationId: String, accountId: String, message: [String: String])
-    func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String)
+    func dataTransferEvent(
+        withFileId transferId: String,
+        withEventCode eventCode: Int,
+        accountId: String,
+        conversationId: String,
+        interactionId: String
+    )
     func conversationSyncCompleted(accountId: String)
     func conversationCloned(accountId: String)
-    func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String])
+    func receivedConversationRequest(
+        accountId: String,
+        conversationId: String,
+        metadata: [String: String]
+    )
 }

@@ -23,9 +23,7 @@ import RxSwift
 
 class SwarmInfoViewModel: Stateable, ViewModel {
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
 
     var swarmInfo: SwarmInfoProtocol?
 

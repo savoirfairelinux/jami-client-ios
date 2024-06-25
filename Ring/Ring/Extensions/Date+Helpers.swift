@@ -36,7 +36,6 @@ extension Date {
         if hours > 0 {
             reminderSeconds = seconds.truncatingRemainder(dividingBy: 3600)
             string += String(format: "%02d", hours) + ":"
-
         }
         let min = Int(reminderSeconds / 60)
         let sec = reminderSeconds.truncatingRemainder(dividingBy: 60)
@@ -70,7 +69,7 @@ extension Date {
         } else if day == todayDay - 1 {
             dateString = L10n.Smartlist.yesterday
         } else if todayYear == year && todayWeekOfYear == weekOfYear {
-            dateString = self.dayOfWeek()
+            dateString = dayOfWeek()
         } else {
             dateString = dateFormatter.string(from: self)
         }

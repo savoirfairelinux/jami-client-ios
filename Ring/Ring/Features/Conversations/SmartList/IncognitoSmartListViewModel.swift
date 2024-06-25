@@ -18,16 +18,14 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataSource {
-
     // MARK: - Rx Stateable
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
 
     private let disposeBag = DisposeBag()
 
@@ -38,9 +36,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
     private let requestsService: RequestsService
     let conversationService: ConversationsService
 
-    lazy var currentAccount: AccountModel? = {
-        return self.accountService.currentAccount
-    }()
+    lazy var currentAccount: AccountModel? = self.accountService.currentAccount
 
     var searching = PublishSubject<Bool>()
 
@@ -48,61 +44,73 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
     var conversationViewModels = [ConversationViewModel]()
 
     func networkConnectionState() -> ConnectionType {
-        return self.networkService.connectionState.value
+        return networkService.connectionState.value
     }
 
     let injectionBag: InjectionBag
 
     required init(with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
-        self.networkService = injectionBag.networkService
-        self.contactService = injectionBag.contactsService
-        self.conversationService = injectionBag.conversationsService
-        self.requestsService = injectionBag.requestsService
+        accountService = injectionBag.accountService
+        networkService = injectionBag.networkService
+        contactService = injectionBag.contactsService
+        conversationService = injectionBag.conversationsService
+        requestsService = injectionBag.requestsService
         self.injectionBag = injectionBag
-        self.networkService.connectionStateObservable
+        networkService.connectionStateObservable
             .subscribe(onNext: { [weak self] value in
                 self?.connectionState.onNext(value)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
-    private var temporaryConversation = BehaviorRelay<ConversationViewModel?>(value: nil) // created when searching for a new contact
+    private var temporaryConversation =
+        BehaviorRelay<ConversationViewModel?>(value: nil) // created when searching for a new
+    // contact
 
     func enableBoothMode(enable: Bool, password: String) -> Bool {
-        guard let accountId = self.accountService.currentAccount?.id else {
+        guard let accountId = accountService.currentAccount?.id else {
             return false
         }
-        let result = self.accountService.setBoothMode(forAccount: accountId, enable: enable, password: password)
+        let result = accountService.setBoothMode(
+            forAccount: accountId,
+            enable: enable,
+            password: password
+        )
         if !result {
             return false
         }
-        self.contactService.removeAllContacts(for: accountId)
-        self.conversationService
+        contactService.removeAllContacts(for: accountId)
+        conversationService
             .getConversationsForAccount(accountId: accountId, accountURI: "")
-        self.stateSubject.onNext(ConversationState.accountModeChanged)
+        stateSubject.onNext(ConversationState.accountModeChanged)
         return true
     }
 
     func startCall(audioOnly: Bool) {
-        guard let conversation = self.temporaryConversation.value?.conversation,
+        guard let conversation = temporaryConversation.value?.conversation,
               let participantId = conversation.getParticipants().first?.jamiId,
-              let username = self.temporaryConversation.value?.userName.value else {
+              let username = temporaryConversation.value?.userName.value
+        else {
             return
         }
         if audioOnly {
-            self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: participantId, userName: username))
+            stateSubject.onNext(ConversationState.startAudioCall(
+                contactRingId: participantId,
+                userName: username
+            ))
             return
         }
-        self.stateSubject.onNext(ConversationState.startCall(contactRingId: participantId, userName: username))
+        stateSubject.onNext(ConversationState.startCall(
+            contactRingId: participantId,
+            userName: username
+        ))
     }
 }
 
 extension IncognitoSmartListViewModel: FilterConversationDelegate {
     func temporaryConversationCreated(conversation: ConversationViewModel?) {
-        self.temporaryConversation.accept(conversation)
+        temporaryConversation.accept(conversation)
     }
-    func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
 
-    }
+    func showConversation(withConversationViewModel _: ConversationViewModel) {}
 }

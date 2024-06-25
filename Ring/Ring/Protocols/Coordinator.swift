@@ -19,8 +19,8 @@
  */
 
 import Foundation
-import UIKit
 import RxSwift
+import UIKit
 
 /**
  Represents how a UIViewController should be displayed
@@ -40,7 +40,6 @@ public enum PresentationStyle {
 
 /// A Coordinator drives the navigation of a whole part of the application
 protocol Coordinator: AnyObject {
-
     /// the root View Controller to display
     var rootViewController: UIViewController { get }
 
@@ -51,27 +50,28 @@ protocol Coordinator: AnyObject {
     var parentCoordinator: Coordinator? { get set }
 
     /// flag to be setting to true during particular viewController is presenting
-    /// this property is added to prevent controller to be presenting multiple times, caused by UI lag
+    /// this property is added to prevent controller to be presenting multiple times, caused by UI
+    /// lag
     var presentingVC: [String: Bool] { get set }
 
     /// Initializes a new Coordinator with a dependancy injection bag
     ///
-    /// - Parameter injectionBag: The injection Bag that will be passed to every sub components that need it
-    init (with injectionBag: InjectionBag)
+    /// - Parameter injectionBag: The injection Bag that will be passed to every sub components that
+    /// need it
+    init(with injectionBag: InjectionBag)
 
     /// Nothing will happen until this function is called
     /// it bootstraps the initial UIViewController (after the rooViewController) that will
     /// be displayed by this Coordinator
-    func start ()
+    func start()
 }
 
 extension Coordinator {
-
     /// Adds a child coordinator so that there is a reference to it
     ///
     /// - Parameter childCoordinator: The coordinator on which we need to keep a reference
     func addChildCoordinator(childCoordinator: Coordinator) {
-        self.childCoordinators.append(childCoordinator)
+        childCoordinators.append(childCoordinator)
     }
 
     /// Removes a child coordinator that is no longer used
@@ -79,13 +79,14 @@ extension Coordinator {
     /// - Parameter childCoordinator: The coordinator we want to remove
     func removeChildCoordinator(childCoordinator: Coordinator?) {
         guard let child = childCoordinator else { return }
-        self.childCoordinators = self.childCoordinators.filter { $0 !== child }
+        childCoordinators = childCoordinators.filter { $0 !== child }
     }
 
     /// Present a view controller according to PresentationStyle
     ///
     /// - Parameters:
-    ///   - viewController: The ViewController we want to present (it will be presented by the rootViewController)
+    ///   - viewController: The ViewController we want to present (it will be presented by the
+    /// rootViewController)
     ///   - style: The presentation style (show, present or popup)
     ///   - animation: Wether the transition should be animated or not
     func present(viewController: UIViewController,
@@ -94,31 +95,32 @@ extension Coordinator {
                  lockWhilePresenting VCType: String? = nil,
                  disposeBag: DisposeBag) {
         switch style {
-        case .present: self.rootViewController.present(viewController,
-                                                       animated: animation,
-                                                       completion: nil)
+        case .present: rootViewController.present(viewController,
+                                                  animated: animation,
+                                                  completion: nil)
         case .popup:
             viewController.modalPresentationStyle = .overCurrentContext
             viewController.modalTransitionStyle = .coverVertical
-            self.rootViewController.present(viewController,
-                                            animated: animation,
-                                            completion: nil)
+            rootViewController.present(viewController,
+                                       animated: animation,
+                                       completion: nil)
         case .formModal:
             viewController.modalPresentationStyle = .formSheet
             viewController.modalTransitionStyle = .coverVertical
-            self.rootViewController.present(viewController,
-                                            animated: animation,
-                                            completion: nil)
+            rootViewController.present(viewController,
+                                       animated: animation,
+                                       completion: nil)
         case .show:
-            self.rootViewController.show(viewController, sender: nil)
+            rootViewController.show(viewController, sender: nil)
         case .appear:
             viewController.modalPresentationStyle = .overFullScreen
             viewController.modalTransitionStyle = .crossDissolve
-            self.rootViewController.present(viewController,
-                                            animated: animation,
-                                            completion: nil)
+            rootViewController.present(viewController,
+                                       animated: animation,
+                                       completion: nil)
         case .push:
-            if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
+            if let contoller: UINavigationController =
+                rootViewController as? UINavigationController {
                 // ensure we on the root view controller
                 contoller.popViewController(animated: false)
                 contoller.pushViewController(viewController, animated: false)
@@ -133,7 +135,7 @@ extension Coordinator {
                     self?.presentingVC[viewControllerType] = false
                 }, onCompleted: { [weak self] in
                     self?.presentingVC[viewControllerType] = false
-                }, onDisposed: {  [weak self] in
+                }, onDisposed: { [weak self] in
                     self?.presentingVC[viewControllerType] = false
                 })
                 .disposed(by: disposeBag)

@@ -18,8 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
+import UIKit
 
 class CustomSearchBar: UISearchBar {
     var rightButton = UIButton()
@@ -35,7 +35,8 @@ class CustomSearchBar: UISearchBar {
 
     var rightMargin: CGFloat {
         let orientation = UIDevice.current.orientation
-        let margin: CGFloat = UIDevice.current.hasNotch && (orientation == .landscapeRight || orientation == .landscapeLeft) ? -50 : 0
+        let margin: CGFloat = UIDevice.current
+            .hasNotch && (orientation == .landscapeRight || orientation == .landscapeLeft) ? -50 : 0
         return margin
     }
 
@@ -49,7 +50,8 @@ class CustomSearchBar: UISearchBar {
 
     var leftMargin: CGFloat {
         let orientation = UIDevice.current.orientation
-        let margin: CGFloat = UIDevice.current.hasNotch && (orientation == .landscapeRight || orientation == .landscapeLeft) ? 60 : 15
+        let margin: CGFloat = UIDevice.current
+            .hasNotch && (orientation == .landscapeRight || orientation == .landscapeLeft) ? 60 : 15
         return margin
     }
 
@@ -59,14 +61,21 @@ class CustomSearchBar: UISearchBar {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+
     init() {
         super.init(frame: CGRect.zero)
         if isRightToLeft {
             buttonView = UIView(frame: CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize))
         } else {
-            buttonView = UIView(frame: CGRect(x: self.frame.size.width - buttonSize, y: 0, width: buttonSize, height: buttonSize))
+            buttonView = UIView(frame: CGRect(
+                x: frame.size.width - buttonSize,
+                y: 0,
+                width: buttonSize,
+                height: buttonSize
+            ))
         }
     }
+
     func sizeChanged(to size: CGFloat, totalItems: CGFloat) {
         totalItem = totalItems
         var buttonFrame = buttonView.frame
@@ -76,9 +85,15 @@ class CustomSearchBar: UISearchBar {
         } else {
             buttonFrame.origin.x = size - (buttonSize * totalItems) + margin
         }
-        buttonView.frame = CGRect(x: buttonFrame.origin.x, y: buttonFrame.origin.y, width: (buttonSize * totalItems), height: buttonSize)
+        buttonView.frame = CGRect(
+            x: buttonFrame.origin.x,
+            y: buttonFrame.origin.y,
+            width: buttonSize * totalItems,
+            height: buttonSize
+        )
         if margin == 0 {
-            searchFieldTrailing.constant = rightButton.isHidden ? currentTrailingEditing : (currentTrailing * totalItems)
+            searchFieldTrailing.constant = rightButton
+                .isHidden ? currentTrailingEditing : (currentTrailing * totalItems)
         } else {
             searchFieldTrailing.constant += margin
         }
@@ -90,32 +105,48 @@ class CustomSearchBar: UISearchBar {
     }
 
     func configure(buttonImage: UIImage, position: CGFloat, buttonPressed: @escaping (() -> Void)) {
-        rightButton = UIButton(frame: CGRect(x: (buttonSize * position) - buttonSize, y: 0, width: buttonSize, height: buttonSize))
-        rightButton.imageEdgeInsets = UIEdgeInsets(top: 12, left: position == 2 ? 8 : 16, bottom: 12, right: position == 2 ? 16 : 8)
+        rightButton = UIButton(frame: CGRect(
+            x: (buttonSize * position) - buttonSize,
+            y: 0,
+            width: buttonSize,
+            height: buttonSize
+        ))
+        rightButton.imageEdgeInsets = UIEdgeInsets(
+            top: 12,
+            left: position == 2 ? 8 : 16,
+            bottom: 12,
+            right: position == 2 ? 16 : 8
+        )
         rightButton.setImage(buttonImage, for: .normal)
         rightButton.tintColor = UIColor.jamiMain
         buttonView.addSubview(rightButton)
-        self.addSubview(buttonView)
+        addSubview(buttonView)
         rightButton.translatesAutoresizingMaskIntoConstraints = true
-        self.searchTextField.translatesAutoresizingMaskIntoConstraints = false
-        searchFieldTrailing = self.searchTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: currentTrailing)
+        searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        searchFieldTrailing = searchTextField.trailingAnchor.constraint(
+            equalTo: trailingAnchor,
+            constant: currentTrailing
+        )
         searchFieldTrailing.isActive = true
-        searchFieldLeading = self.searchTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: leading)
+        searchFieldLeading = searchTextField.leadingAnchor.constraint(
+            equalTo: leadingAnchor,
+            constant: leading
+        )
         searchFieldLeading.isActive = true
-        self.searchTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 7).isActive = true
+        searchTextField.topAnchor.constraint(equalTo: topAnchor, constant: 7).isActive = true
         rightButton.rx.tap
             .subscribe(onNext: { buttonPressed() })
-            .disposed(by: self.disposeBag)
-        self.rx.textDidBeginEditing
+            .disposed(by: disposeBag)
+        rx.textDidBeginEditing
             .subscribe(onNext: { [weak self] in
                 self?.hideRightButton()
             })
-            .disposed(by: self.disposeBag)
-        self.rx.textDidEndEditing
+            .disposed(by: disposeBag)
+        rx.textDidEndEditing
             .subscribe(onNext: { [weak self] in
                 self?.showRightButton()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func hideRightButton() {

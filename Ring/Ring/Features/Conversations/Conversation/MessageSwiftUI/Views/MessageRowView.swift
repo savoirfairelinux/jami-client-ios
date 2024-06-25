@@ -26,7 +26,11 @@ struct CornerRadiusShape: Shape {
     var corners = UIRectCorner.allCorners
 
     func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let path = UIBezierPath(
+            roundedRect: rect,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
         return Path(path.cgPath)
     }
 }
@@ -45,7 +49,10 @@ struct CornerRadiusStyle: ViewModifier {
 // step 3 - crate a polymorphic view with same name as swiftUI's cornerRadius
 extension View {
     func cornerRadius(radius: CGFloat, corners: UIRectCorner) -> some View {
-        ModifiedContent(content: self, modifier: CornerRadiusStyle(radius: radius, corners: corners))
+        ModifiedContent(
+            content: self,
+            modifier: CornerRadiusStyle(radius: radius, corners: corners)
+        )
     }
 }
 
@@ -55,7 +62,8 @@ extension View {
     ///   - condition: The condition to evaluate.
     ///   - transform: The transform to apply to the source `View`.
     /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
-    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool,
+                                          transform: (Self) -> Content) -> some View {
         if condition {
             transform(self)
         } else {
@@ -99,12 +107,20 @@ struct MessageRowView: View {
                         Spacer()
                             .frame(width: model.leadingSpace)
                     }
-                    MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
+                    MessageStackView(
+                        messageModel: messageModel,
+                        onLongPress: onLongPress,
+                        showReactionsView: showReactionsView
+                    )
                 }.padding(.trailing, 50)
             } else {
                 HStack(alignment: .bottom, spacing: 2) {
                     Spacer()
-                    MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
+                    MessageStackView(
+                        messageModel: messageModel,
+                        onLongPress: onLongPress,
+                        showReactionsView: showReactionsView
+                    )
                     if model.showReciveIndicator {
                         Image("message_sent_indicator")
                             .resizable()
@@ -116,14 +132,13 @@ struct MessageRowView: View {
                     } else {
                         Spacer()
                             .frame(width: 13, height: 13)
-
                     }
                 }.padding(.leading, 50)
             }
             if let readImages = model.read, !readImages.isEmpty {
                 HStack(alignment: .top, spacing: -3) {
                     Spacer()
-                    ForEach(0..<readImages.count, id: \.self) { index in
+                    ForEach(0 ..< readImages.count, id: \.self) { index in
                         Image(uiImage: readImages[index])
                             .resizable()
                             .scaledToFill()

@@ -19,12 +19,11 @@
  */
 
 import Foundation
-import SwiftUI
 import RxRelay
+import SwiftUI
 import SwiftyBeaver
 
 class ContextMenuVM: ObservableObject {
-
     private let log = SwiftyBeaver.self
 
     var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
@@ -33,24 +32,31 @@ class ContextMenuVM: ObservableObject {
         didSet {
             menuItems = presentingMessage.model.menuItems
             actionsAnchor = presentingMessage.model.message.incoming ? .topLeading : .topTrailing
-            messsageAnchor = presentingMessage.model.message.incoming ? .bottomLeading : .bottomTrailing
+            messsageAnchor = presentingMessage.model.message
+                .incoming ? .bottomLeading : .bottomTrailing
             updateContextMenuSize()
             isOurMsg = !presentingMessage.model.message.incoming
-            myAuthoredReactionIds = presentingMessage.messageModel.message.reactionsMessageIdsBySender(jamiId: currentJamiAccountId!)
-            uniqueAuthoredReactions = Array(Set(presentingMessage.messageModel.reactionsModel.message.reactions.filter({ item in myAuthoredReactionIds.contains(item.id) }).map({ item in item.content })).subtracting(preferredUserReactions))
+            myAuthoredReactionIds = presentingMessage.messageModel.message
+                .reactionsMessageIdsBySender(jamiId: currentJamiAccountId!)
+            uniqueAuthoredReactions =
+                Array(Set(presentingMessage.messageModel.reactionsModel.message.reactions
+                            .filter { item in myAuthoredReactionIds.contains(item.id) }
+                            .map { item in item.content }).subtracting(preferredUserReactions))
         }
     }
-    var messageFrame: CGRect = CGRect.zero {
+
+    var messageFrame: CGRect = .zero {
         didSet {
             updateSizes()
         }
     }
 
-    var menuSize: CGSize = CGSize.zero {
+    var menuSize: CGSize = .zero {
         didSet {
             updateSizes()
         }
     }
+
     let itemHeight: CGFloat = 42
     let menuPadding: CGFloat = 15
     let minWidth: CGFloat = 220
@@ -72,7 +78,7 @@ class ContextMenuVM: ObservableObject {
         }
     }
 
-    // TODO remove this var and just use emojiBarHeight
+    // TODO: remove this var and just use emojiBarHeight
     var emojiVerticalPadding: CGFloat = 6
     var emojiBarHeight: CGFloat = 68
     var emojiBarMaxWidth: CGFloat = max(0, min(screenWidth - 20, 62 * 5))
@@ -82,21 +88,25 @@ class ContextMenuVM: ObservableObject {
     var isOurMsg: Bool?
 
     var shadowColor: UIColor {
-        return UITraitCollection.current.userInterfaceStyle == .light ? UIColor.tertiaryLabel : UIColor.black.withAlphaComponent(0.8)
+        return UITraitCollection.current.userInterfaceStyle == .light ? UIColor
+            .tertiaryLabel : UIColor.black.withAlphaComponent(0.8)
     }
 
     var currentJamiAccountId: String?
-    var myAuthoredReactionIds: [String] = [] // list of MessageIds for local user's authored reactions
+    var myAuthoredReactionIds: [String] =
+        [] // list of MessageIds for local user's authored reactions
     var preferredUserReactions: [String] = [
         0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
     ].map { String(UnicodeScalar($0)!) }
-    var uniqueAuthoredReactions: [String] = [] // a list of emojis (excluding defaults) that can be revoked via tap in emojibar
+    var uniqueAuthoredReactions: [String] =
+        [] // a list of emojis (excluding defaults) that can be revoked via tap in emojibar
     @Published var selectedEmoji: String = ""
     @Published var isEmojiPickerPresented: Bool = false
 
     func updateContextMenuSize() {
-        let height: CGFloat = CGFloat(menuItems.count) * itemHeight + menuPadding * 2
-        let fontAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]
+        let height = CGFloat(menuItems.count) * itemHeight + menuPadding * 2
+        let fontAttributes =
+            [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]
         var width = minWidth
         for item in menuItems {
             let size = (item.toString() as NSString).size(withAttributes: fontAttributes)
@@ -113,11 +123,15 @@ class ContextMenuVM: ObservableObject {
     func updateSizes() {
         if messageFrame == CGRect.zero || menuSize == CGSize.zero { return }
         let screenHeight = UIScreen.main.bounds.height
-        let navBarHeight = UINavigationController.navBarHeight() + ( UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0)
+        let navBarHeight = UINavigationController
+            .navBarHeight() +
+            (UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame
+                .height ?? 0)
         let messageOffsetY = messageFrame.origin.y
         let maxMessageHeight = screenHeight - (menuSize.height + navBarHeight + 80)
         messageHeight = min(maxMessageHeight, messageFrame.height)
-        let diff = screenHeight - (messageOffsetY + menuSize.height + navBarHeight + messageFrame.height)
+        let diff = screenHeight -
+            (messageOffsetY + menuSize.height + navBarHeight + messageFrame.height)
         let diffOffset = max(0, messageFrame.height - messageHeight)
         bottomOffset = diff < 0 ? diff + diffOffset : 0
         if presentingMessage.messageModel.message.incoming {
@@ -141,44 +155,71 @@ class ContextMenuVM: ObservableObject {
     }
 
     func sendReaction(value: String) {
-        if let msg = self.presentingMessage {
-            self.sendEmojiUpdate.accept(["messageId": msg.messageModel.id, "author": msg.messageModel.message.authorId, "data": value, "action": ReactionCommand.apply.toString()])
+        if let msg = presentingMessage {
+            sendEmojiUpdate.accept([
+                "messageId": msg.messageModel.id,
+                "author": msg.messageModel.message.authorId,
+                "data": value,
+                "action": ReactionCommand.apply.toString()
+            ])
         }
     }
 
     func handleUpdatedReaction() {
-        if let msg = self.presentingMessage, let author = self.currentJamiAccountId {
-            if let reactionMsg = self.getAuthoredReaction(withValue: self.selectedEmoji) {
+        if let msg = presentingMessage, let author = currentJamiAccountId {
+            if let reactionMsg = getAuthoredReaction(withValue: selectedEmoji) {
                 // revoke reaction
-                log.debug("[ContextMenu] Revoking reaction \(reactionMsg.content) for \(reactionMsg.author)")
-                self.sendEmojiUpdate.accept(["reactionId": reactionMsg.id, "action": ReactionCommand.revoke.toString()])
+                log
+                    .debug(
+                        "[ContextMenu] Revoking reaction \(reactionMsg.content) for \(reactionMsg.author)"
+                    )
+                sendEmojiUpdate.accept([
+                    "reactionId": reactionMsg.id,
+                    "action": ReactionCommand.revoke.toString()
+                ])
             } else { // add reaction
-                log.debug("[ContextMenu] Applying reaction \(self.selectedEmoji) for \(author)")
-                self.sendEmojiUpdate.accept(["parentMessageId": msg.messageModel.id, "author": author, "data": self.selectedEmoji, "action": ReactionCommand.apply.toString()])
+                log.debug("[ContextMenu] Applying reaction \(selectedEmoji) for \(author)")
+                sendEmojiUpdate.accept([
+                    "parentMessageId": msg.messageModel.id,
+                    "author": author,
+                    "data": selectedEmoji,
+                    "action": ReactionCommand.apply.toString()
+                ])
             }
         } else {
-            log.error("[ContextMenu] Failed to update reaction on invalid presented message or Jami Id.")
+            log
+                .error(
+                    "[ContextMenu] Failed to update reaction on invalid presented message or Jami Id."
+                )
         }
     }
 
     func localUserAuthoredReaction(emoji: String) -> Bool {
-        if let sender = self.currentJamiAccountId {
-            if let _ = self.presentingMessage.messageModel.message.reactions.first(where: { item in item.author == sender && item.content == emoji }) {
+        if let sender = currentJamiAccountId {
+            if let _ = presentingMessage.messageModel.message.reactions
+                .first(where: { item in item.author == sender && item.content == emoji }) {
                 return true
             } else {
                 return false
             }
         } else {
-            log.error("[ContextMenu] Jami account ID invaled while trying to read message reactions.")
+            log
+                .error(
+                    "[ContextMenu] Jami account ID invaled while trying to read message reactions."
+                )
             return false
         }
     }
 
     func getAuthoredReaction(withValue: String) -> MessageAction? {
-        if let sender = self.currentJamiAccountId {
-            return self.presentingMessage.messageModel.message.reactions.first(where: { item in item.author == sender && item.content == withValue })
+        if let sender = currentJamiAccountId {
+            return presentingMessage.messageModel.message.reactions
+                .first(where: { item in item.author == sender && item.content == withValue })
         } else {
-            log.error("[ContextMenu] Jami account ID invaled while trying to read message reactions.")
+            log
+                .error(
+                    "[ContextMenu] Jami account ID invaled while trying to read message reactions."
+                )
             return nil
         }
     }

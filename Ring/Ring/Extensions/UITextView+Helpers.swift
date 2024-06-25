@@ -20,11 +20,14 @@
 
 extension UITextView {
     func adjustHeightFromContentSize(minHeight: CGFloat = 0) {
-        let minWidth = self.frame.width
-        let newSize = self.sizeThatFits(CGSize(width: minWidth,
-                                               height: self.contentSize.height))
-        var newFrame = self.frame
-        newFrame.size = CGSize(width: max(newSize.width, minWidth), height: max(newSize.height, minHeight))
-        self.frame = newFrame
+        let minWidth = frame.width
+        let newSize = sizeThatFits(CGSize(width: minWidth,
+                                          height: contentSize.height))
+        var newFrame = frame
+        newFrame.size = CGSize(
+            width: max(newSize.width, minWidth),
+            height: max(newSize.height, minHeight)
+        )
+        frame = newFrame
     }
 }

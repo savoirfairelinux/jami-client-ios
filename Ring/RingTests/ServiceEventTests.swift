@@ -18,28 +18,27 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import XCTest
 @testable import Ring
+import XCTest
 
 /**
  A test class designed to validate that the ServiceEvent class is reacting properly.
  */
 class ServiceEventTests: XCTestCase {
-
     /// The ServiceEvent that will be used during the tests.
     private var event: ServiceEvent?
 
     override func setUp() {
         super.setUp()
-        self.event = ServiceEvent(withEventType: .accountsChanged)
+        event = ServiceEvent(withEventType: .accountsChanged)
     }
 
     /**
      Tests that the event is properly created and populated.
      */
     func testCreateEvent() {
-        XCTAssertNotNil(self.event)
-        XCTAssertTrue(self.event?.eventType == ServiceEventType.accountsChanged)
+        XCTAssertNotNil(event)
+        XCTAssertTrue(event?.eventType == ServiceEventType.accountsChanged)
     }
 
     /**
@@ -47,9 +46,9 @@ class ServiceEventTests: XCTestCase {
      */
     func testAddStringMetadata() {
         let testString = "Identifier"
-        self.event?.addEventInput(.id, value: testString)
+        event?.addEventInput(.id, value: testString)
 
-        let resultString: String = (self.event?.getEventInput(.id))!
+        let resultString: String = (event?.getEventInput(.id))!
         XCTAssertEqual(resultString, testString)
     }
 
@@ -58,9 +57,9 @@ class ServiceEventTests: XCTestCase {
      */
     func testAddIntMetadata() {
         let testInt = 1
-        self.event?.addEventInput(.id, value: testInt)
+        event?.addEventInput(.id, value: testInt)
 
-        let resultInt: Int = (self.event?.getEventInput(.id))!
+        let resultInt: Int = (event?.getEventInput(.id))!
         XCTAssertEqual(resultInt, testInt)
     }
 }

@@ -18,9 +18,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import Combine
 import SwiftUI
 import UIKit
-import Combine
 
 struct SmartListContainer: View {
     @ObservedObject var model: ConversationsViewModel
@@ -69,7 +69,7 @@ struct SmartListView: View {
     @SwiftUI.State private var isSearchBarActive = false // To track state initiated by the user
     let maxCoverBackgroundOpacity: CGFloat = 0.09
     let minCoverBackgroundOpacity: CGFloat = 0
-    @SwiftUI.State  var showingPicker = false
+    @SwiftUI.State var showingPicker = false
     // share account info
     @SwiftUI.State private var isSharing = false
     @SwiftUI.State private var isMenuOpen = false
@@ -160,7 +160,8 @@ struct SmartListView: View {
     }
 
     private func updateCoverBackgroundOpacity() {
-        coverBackgroundOpacity = showAccountList ? minCoverBackgroundOpacity : maxCoverBackgroundOpacity
+        coverBackgroundOpacity = showAccountList ? minCoverBackgroundOpacity :
+            maxCoverBackgroundOpacity
     }
 
     private func animateAccountListVisibility() {
@@ -271,7 +272,7 @@ struct SmartListView: View {
     }
 
     private var settingsButton: some View {
-        Button(action: {[weak model] in
+        Button(action: { [weak model] in
             isMenuOpen = false
             guard let model = model else { return }
             model.openSettings()
@@ -281,7 +282,7 @@ struct SmartListView: View {
     }
 
     private var generalSettingsButton: some View {
-        Button(action: {[weak model] in
+        Button(action: { [weak model] in
             isMenuOpen = false
             guard let model = model else { return }
             model.showGeneralSettings()
@@ -291,7 +292,7 @@ struct SmartListView: View {
     }
 
     private var donateButton: some View {
-        Button(action: {[weak model] in
+        Button(action: { [weak model] in
             isMenuOpen = false
             guard let model = model else { return }
             model.donate()
@@ -301,7 +302,7 @@ struct SmartListView: View {
     }
 
     private var aboutJamiButton: some View {
-        Button(action: {[weak model] in
+        Button(action: { [weak model] in
             isMenuOpen = false
             guard let model = model else { return }
             model.openAboutJami()
@@ -327,21 +328,31 @@ struct SearchableConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
     @Binding var isSearchBarActive: Bool
     @SwiftUI.State private var searchText = ""
-    @SwiftUI.State private var isSearchBarDisabled = false // To programmatically disable the search bar
+    @SwiftUI
+    .State private var isSearchBarDisabled = false // To programmatically disable the search bar
     @SwiftUI.State private var scrollViewOffset: CGFloat = 0
     var body: some View {
-        SmartListContentView(model: model, mode: model.navigationTarget, requestsModel: model.requestsModel, isSearchBarActive: $isSearchBarActive)
-            .navigationBarSearch(self.$searchText, isActive: $isSearchBarActive, isSearchBarDisabled: $isSearchBarDisabled)
-            .onChange(of: searchText) {[weak model] _ in
-                guard let model = model else { return }
-                model.performSearch(query: searchText.lowercased())
-            }
-            .onChange(of: model.conversationCreated) {[weak model] _ in
-                guard let model = model else { return }
-                if model.conversationCreated.isEmpty { return }
-                isSearchBarDisabled = true
-                searchText = ""
-            }
+        SmartListContentView(
+            model: model,
+            mode: model.navigationTarget,
+            requestsModel: model.requestsModel,
+            isSearchBarActive: $isSearchBarActive
+        )
+        .navigationBarSearch(
+            $searchText,
+            isActive: $isSearchBarActive,
+            isSearchBarDisabled: $isSearchBarDisabled
+        )
+        .onChange(of: searchText) { [weak model] _ in
+            guard let model = model else { return }
+            model.performSearch(query: searchText.lowercased())
+        }
+        .onChange(of: model.conversationCreated) { [weak model] _ in
+            guard let model = model else { return }
+            if model.conversationCreated.isEmpty { return }
+            isSearchBarDisabled = true
+            searchText = ""
+        }
     }
 }
 

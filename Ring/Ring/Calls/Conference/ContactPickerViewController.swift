@@ -18,12 +18,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
-import RxDataSources
-import RxCocoa
 import Reusable
+import RxCocoa
+import RxDataSources
+import RxSwift
 import SwiftyBeaver
+import UIKit
 
 enum ContactPickerType {
     case forConversation
@@ -34,15 +34,15 @@ protocol ContactPickerViewControllerDelegate: AnyObject {
     func contactPickerDismissed()
 }
 
-class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelBased, UITableViewDelegate, UIGestureRecognizerDelegate {
-
+class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelBased,
+                                   UITableViewDelegate, UIGestureRecognizerDelegate {
     private let log = SwiftyBeaver.self
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var topViewContainer: UIView!
-    @IBOutlet weak var topSpace: NSLayoutConstraint!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var doneButton: UIButton!
+    @IBOutlet var topViewContainer: UIView!
+    @IBOutlet var topSpace: NSLayoutConstraint!
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
 
     var viewModel: ContactPickerViewModel!
     private let disposeBag = DisposeBag()
@@ -53,12 +53,12 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupDataSources()
-        self.setupSearchBar()
-        self.setUPBlurBackground()
-        self.updateViewForCurrentMode()
-        self.setupTableViews()
-        self.viewModel
+        setupDataSources()
+        setupSearchBar()
+        setUPBlurBackground()
+        updateViewForCurrentMode()
+        setupTableViews()
+        viewModel
             .loading
             .observe(on: MainScheduler.instance)
             .bind(to: loadingIndicator.rx.isAnimating)
@@ -67,23 +67,27 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     private func setUPBlurBackground() {
         blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
         if blurEffect != nil {
-            blurEffect!.frame = self.view.bounds
-            self.view.insertSubview(blurEffect!, at: 0)
-            blurEffect!.topAnchor.constraint(equalTo: searchBar.topAnchor, constant: 0).isActive = true
-            blurEffect!.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-            blurEffect!.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-            blurEffect!.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+            blurEffect!.frame = view.bounds
+            view.insertSubview(blurEffect!, at: 0)
+            blurEffect!.topAnchor.constraint(equalTo: searchBar.topAnchor, constant: 0)
+                .isActive = true
+            blurEffect!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+                .isActive = true
+            blurEffect!.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0)
+                .isActive = true
+            blurEffect!.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+                .isActive = true
             blurEffect!.translatesAutoresizingMaskIntoConstraints = false
         }
     }
@@ -91,11 +95,16 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     @objc
     private func remove(gesture: UISwipeGestureRecognizer) {
         if gesture.direction != UISwipeGestureRecognizer.Direction.down { return }
-        self.removeView()
+        removeView()
     }
 
     func removeView() {
-        let initialFrame = CGRect(x: 0, y: self.view.frame.size.height * 2, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
+        let initialFrame = CGRect(
+            x: 0,
+            y: view.frame.size.height * 2,
+            width: view.frame.size.width,
+            height: view.frame.size.height * 0.7
+        )
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
             guard let self = self else { return }
             self.view.frame = initialFrame
@@ -113,52 +122,74 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     private func setupDataSources() {
-        switch self.type {
+        switch type {
         case .forCall:
-            let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ContactPickerSection.Item)
-                -> UITableViewCell = { [weak self]
-                    (   _: TableViewSectionedDataSource<ContactPickerSection>,
-                        tableView: UITableView,
-                        indexPath: IndexPath,
-                        item: ContactPickerSection.Item) in
+            let configureCell: (
+                TableViewSectionedDataSource,
+                UITableView,
+                IndexPath,
+                ContactPickerSection.Item
+            )
+            -> UITableViewCell = { [weak self]
+                (_: TableViewSectionedDataSource<ContactPickerSection>,
+                 tableView: UITableView,
+                 indexPath: IndexPath,
+                 item: ContactPickerSection.Item) in
 
-                    let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
-                    guard let self = self else { return cell }
-                    self.configureContactCell(cell: cell, contactItem: item)
-                    return cell
-                }
-            let contactDataSource = RxTableViewSectionedReloadDataSource<ContactPickerSection>(configureCell: configureCell)
-            self.viewModel.searchResultItems
-                .bind(to: self.tableView.rx.items(dataSource: contactDataSource))
+                let cell = tableView.dequeueReusableCell(
+                    for: indexPath,
+                    cellType: SmartListCell.self
+                )
+                guard let self = self else { return cell }
+                self.configureContactCell(cell: cell, contactItem: item)
+                return cell
+            }
+            let contactDataSource =
+                RxTableViewSectionedReloadDataSource<ContactPickerSection>(
+                    configureCell: configureCell
+                )
+            viewModel.searchResultItems
+                .bind(to: tableView.rx.items(dataSource: contactDataSource))
                 .disposed(by: disposeBag)
             contactDataSource.titleForHeaderInSection = { dataSource, index in
-                return dataSource.sectionModels[index].header
+                dataSource.sectionModels[index].header
             }
         case .forConversation:
-            let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationPickerSection.Item)
-                -> UITableViewCell = { [weak self]
-                    (   _: TableViewSectionedDataSource<ConversationPickerSection>,
-                        tableView: UITableView,
-                        indexPath: IndexPath,
-                        conversationItem: ConversationPickerSection.Item) in
+            let configureCell: (
+                TableViewSectionedDataSource,
+                UITableView,
+                IndexPath,
+                ConversationPickerSection.Item
+            )
+            -> UITableViewCell = { [weak self]
+                (_: TableViewSectionedDataSource<ConversationPickerSection>,
+                 tableView: UITableView,
+                 indexPath: IndexPath,
+                 conversationItem: ConversationPickerSection.Item) in
 
-                    let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
-                    guard let self = self else { return cell }
-                    self.configureConversationCell(cell: cell, info: conversationItem)
-                    return cell
-                }
-            let conversationsDataSource = RxTableViewSectionedReloadDataSource<ConversationPickerSection>(configureCell: configureCell)
-            self.viewModel.conversationsSearchResultItems
-                .bind(to: self.tableView.rx.items(dataSource: conversationsDataSource))
+                let cell = tableView.dequeueReusableCell(
+                    for: indexPath,
+                    cellType: SmartListCell.self
+                )
+                guard let self = self else { return cell }
+                self.configureConversationCell(cell: cell, info: conversationItem)
+                return cell
+            }
+            let conversationsDataSource =
+                RxTableViewSectionedReloadDataSource<ConversationPickerSection>(
+                    configureCell: configureCell
+                )
+            viewModel.conversationsSearchResultItems
+                .bind(to: tableView.rx.items(dataSource: conversationsDataSource))
                 .disposed(by: disposeBag)
         }
     }
 
     private func setupTableViews() {
-        self.tableView.rowHeight = 64.0
-        self.tableView.delegate = self
-        self.tableView.register(cellType: SmartListCell.self)
-        self.tableView.rx.itemSelected
+        tableView.rowHeight = 64.0
+        tableView.delegate = self
+        tableView.register(cellType: SmartListCell.self)
+        tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self,
                       let rowSelectionHandler = self.rowSelectionHandler else { return }
@@ -168,16 +199,16 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     private func setupSearchBar() {
-        self.searchBar.returnKeyType = .done
-        self.searchBar.autocapitalizationType = .none
-        self.searchBar.tintColor = UIColor.jamiMain
-        self.searchBar.placeholder = L10n.Smartlist.searchBarPlaceholder
-        self.searchBar.rx.text.orEmpty
+        searchBar.returnKeyType = .done
+        searchBar.autocapitalizationType = .none
+        searchBar.tintColor = UIColor.jamiMain
+        searchBar.placeholder = L10n.Smartlist.searchBarPlaceholder
+        searchBar.rx.text.orEmpty
             .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .bind(to: self.viewModel.search)
+            .bind(to: viewModel.search)
             .disposed(by: disposeBag)
-        self.searchBar.rx.searchButtonClicked
+        searchBar.rx.searchButtonClicked
             .subscribe(onNext: { [weak self] in
                 self?.searchBar.resignFirstResponder()
             })
@@ -187,53 +218,60 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     private func updateButtonsOnSelectionChange(cell: SmartListCell, indexPath: IndexPath) {
         if cell.selectionIndicator?.backgroundColor == UIColor.jamiTextBlue {
             cell.selectionIndicator?.backgroundColor = UIColor.clear
-            self.tableView.deselectRow(at: indexPath, animated: false)
+            tableView.deselectRow(at: indexPath, animated: false)
         } else {
             cell.selectionIndicator?.backgroundColor = UIColor.jamiTextBlue
         }
-        let title = self.tableView.indexPathsForSelectedRows?.isEmpty ?? true ? L10n.Global.cancel : L10n.DataTransfer.sendMessage
-        self.doneButton.setTitle(title, for: .normal)
+        let title = tableView.indexPathsForSelectedRows?.isEmpty ?? true ? L10n.Global.cancel : L10n
+            .DataTransfer.sendMessage
+        doneButton.setTitle(title, for: .normal)
     }
 
     private func updateViewForCurrentMode() {
-        self.topViewContainer.isHidden = self.type == .forCall
-        self.tableView.allowsMultipleSelection = self.type == .forConversation
-        switch self.type {
+        topViewContainer.isHidden = type == .forCall
+        tableView.allowsMultipleSelection = type == .forConversation
+        switch type {
         case .forCall:
-            self.searchBar.barTintColor = UIColor.jamiBackgroundSecondaryColor
-            let dismissGR = UISwipeGestureRecognizer(target: self, action: #selector(remove(gesture:)))
+            searchBar.barTintColor = UIColor.jamiBackgroundSecondaryColor
+            let dismissGR = UISwipeGestureRecognizer(
+                target: self,
+                action: #selector(remove(gesture:))
+            )
             dismissGR.direction = UISwipeGestureRecognizer.Direction.down
             dismissGR.delegate = self
             topSpace.constant = 0
-            self.searchBar.addGestureRecognizer(dismissGR)
-            self.rowSelectionHandler = { [weak self] row in
+            searchBar.addGestureRecognizer(dismissGR)
+            rowSelectionHandler = { [weak self] row in
                 guard let self = self else { return }
-                guard let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: row) else { return }
+                guard let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: row)
+                else { return }
                 self.viewModel.contactSelected(contacts: [contactToAdd])
                 self.removeView()
             }
         case .forConversation:
-            self.searchBar.backgroundImage = UIImage()
-            self.searchBar.backgroundColor = UIColor.clear
-            self.doneButton.setTitle(L10n.Global.cancel, for: .normal)
-            self.doneButton.setTitleColor(UIColor.jamiTextBlue, for: .normal)
+            searchBar.backgroundImage = UIImage()
+            searchBar.backgroundColor = UIColor.clear
+            doneButton.setTitle(L10n.Global.cancel, for: .normal)
+            doneButton.setTitleColor(UIColor.jamiTextBlue, for: .normal)
             topSpace.constant = 50
-            self.doneButton.rx.tap
+            doneButton.rx.tap
                 .subscribe(onNext: { [weak self] in
                     let paths = self?.tableView.indexPathsForSelectedRows
                     var conversationIds = [String]()
-                    paths?.forEach({ (path) in
+                    paths?.forEach { path in
                         guard let self = self else { return }
-                        if let conversationToAdd: SwarmInfo = try? self.tableView.rx.model(at: path) {
+                        if let conversationToAdd: SwarmInfo = try? self.tableView.rx
+                            .model(at: path) {
                             conversationIds.append(conversationToAdd.id)
                         }
-                    })
+                    }
                     self?.viewModel.conversationSelected(conversaionIds: conversationIds)
                     self?.removeView()
                 })
-                .disposed(by: self.disposeBag)
-            self.rowSelectionHandler = { [weak self] row in
-                guard let cell = self?.tableView.cellForRow(at: row) as? SmartListCell else { return }
+                .disposed(by: disposeBag)
+            rowSelectionHandler = { [weak self] row in
+                guard let cell = self?.tableView.cellForRow(at: row) as? SmartListCell
+                else { return }
                 self?.updateButtonsOnSelectionChange(cell: cell, indexPath: row)
             }
         }
@@ -241,7 +279,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
     func configureContactCell(cell: SmartListCell, contactItem:
                                 ConferencableItem) {
-        cell.selectionContainer?.isHidden = self.type == .forCall
+        cell.selectionContainer?.isHidden = type == .forCall
         cell.selectionIndicator?.backgroundColor = UIColor.clear
         cell.selectionIndicator?.borderColor = UIColor.jamiTextBlue
         if contactItem.contacts.count < 1 {
@@ -253,13 +291,13 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         cell.presenceIndicator?.isHidden = true
         cell.avatarView.isHidden = contactItem.contacts.count > 1
         let contacts = contactItem.contacts
-        contacts.forEach { contact in
+        for contact in contacts {
             contact.firstLine.asObservable()
                 .startWith(contact.firstLine.value)
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self, weak cell] _ in
                     self?.updateCell(cell: cell, contacts: contacts)
-                }, onError: { (_) in
+                }, onError: { _ in
                 })
                 .disposed(by: cell.disposeBag)
         }
@@ -295,21 +333,22 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         info.finalAvatar
             .asObservable()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak cell]  avatar in
+            .subscribe(onNext: { [weak cell] avatar in
                 guard let cell = cell else { return }
                 cell.avatarView
                     .addSubview(
-                        AvatarView(image: avatar, size: 40))
+                        AvatarView(image: avatar, size: 40)
+                    )
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         info.finalTitle
             .asObservable()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak cell]  title in
+            .subscribe(onNext: { [weak cell] title in
                 guard let cell = cell else { return }
                 cell.nameLabel.text = title
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         cell.lastMessagePreviewLabel?.isHidden = true
     }
 
@@ -317,10 +356,10 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         guard let cell = cell else { return }
         if contacts.count > 1 {
             var name = ""
-            contacts.forEach { contact in
+            for contact in contacts {
                 name += contact.firstLine.value
                 if contacts.last! == contact {
-                    return
+                    continue
                 }
                 name += " ,"
             }
@@ -334,12 +373,13 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
         contact.imageData
             .asObservable()
-            .subscribe(onNext: { [weak cell]  imageData in
+            .subscribe(onNext: { [weak cell] imageData in
                 cell?.avatarView
                     .addSubview(
                         AvatarView(profileImageData: imageData,
-                                   username: contact.firstLine.value, size: 40))
+                                   username: contact.firstLine.value, size: 40)
+                    )
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 }

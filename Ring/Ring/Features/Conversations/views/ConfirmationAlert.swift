@@ -67,11 +67,11 @@ class ConfirmationAlert {
         }
         alert.addAction(actionCancel)
         alert.addAction(actionConfirm)
-        alert.addTextField {(textField) in
+        alert.addTextField { textField in
             textField.placeholder = L10n.Global.enterPassword
             textField.isSecureTextEntry = true
         }
-        alert.addTextField {(textField) in
+        alert.addTextField { textField in
             textField.text = ""
             textField.isUserInteractionEnabled = false
             textField.textColor = UIColor.jamiLabelColor
@@ -84,12 +84,12 @@ class ConfirmationAlert {
 
         if let textFields = alert.textFields {
             textFields[0].rx.text
-                .map({text in
+                .map { text in
                     if let text = text {
                         return !text.isEmpty
                     }
                     return false
-                })
+                }
                 .bind(to: actionConfirm.rx.isEnabled)
                 .disposed(by: disposeBag)
         }

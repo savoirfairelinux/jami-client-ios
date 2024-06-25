@@ -62,32 +62,34 @@ class DaemonService {
     private let log = SwiftyBeaver.self
 
     /// Indicates whether the daemon is started or not.
-    internal private(set) var daemonStarted = false
+    private(set) var daemonStarted = false
 
     /// The DRingAdaptor making the c++ bridge between the deamon and the App Swift source code.
     private let dRingAdaptor: DRingAdapter
 
     // MARK: Initialization
+
     init(dRingAdaptor: DRingAdapter) {
         self.dRingAdaptor = dRingAdaptor
     }
 
     // MARK: Public API
+
     /**
      Starts the Ring daemon.
 
      - Throws: StartDaemonError
      */
     func startDaemon() throws {
-        guard !self.daemonStarted else {
+        guard !daemonStarted else {
             throw StartDaemonError.daemonAlreadyRunning
         }
 
         log.debug("Starting daemon...")
-        if self.dRingAdaptor.initDaemon() {
+        if dRingAdaptor.initDaemon() {
             log.debug("Daemon initialized.")
-            if self.dRingAdaptor.startDaemon() {
-                self.daemonStarted = true
+            if dRingAdaptor.startDaemon() {
+                daemonStarted = true
                 log.debug("Daemon started.")
             } else {
                 throw StartDaemonError.startFailure
@@ -103,19 +105,18 @@ class DaemonService {
      - Throws: StopDaemonError
      */
     func stopDaemon() throws {
-        guard self.daemonStarted else {
+        guard daemonStarted else {
             throw StopDaemonError.daemonNotRunning
         }
 
         log.debug("Stopping daemon...")
-        self.dRingAdaptor.fini()
-        self.daemonStarted = false
+        dRingAdaptor.fini()
+        daemonStarted = false
         log.debug("Daemon stopped.")
     }
 
     func connectivityChanged() {
         log.debug("connectivity changed")
-        self.dRingAdaptor.connectivityChanged()
+        dRingAdaptor.connectivityChanged()
     }
-
 }

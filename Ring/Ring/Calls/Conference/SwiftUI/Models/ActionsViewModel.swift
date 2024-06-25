@@ -32,23 +32,23 @@ class ButtonInfoWrapper: ObservableObject {
     var imageColor = Color.white
 
     init(info: ButtonInfo) {
-        self.background = info.background
-        self.stroke = info.stroke
-        self.name = info.name
-        self.action = info.action
-        self.isSystem = info.isSystem
-        self.imageColor = info.imageColor
-        self.disabled = info.disabled
+        background = info.background
+        stroke = info.stroke
+        name = info.name
+        action = info.action
+        isSystem = info.isSystem
+        imageColor = info.imageColor
+        disabled = info.disabled
     }
 
     func updateWith(info: ButtonInfo) {
-        self.background = info.background
-        self.stroke = info.stroke
-        self.name = info.name
-        self.action = info.action
-        self.isSystem = info.isSystem
-        self.imageColor = info.imageColor
-        self.disabled = info.disabled
+        background = info.background
+        stroke = info.stroke
+        name = info.name
+        action = info.action
+        isSystem = info.isSystem
+        imageColor = info.imageColor
+        disabled = info.disabled
     }
 }
 
@@ -102,11 +102,26 @@ enum CallAction: State {
         case .hangUpCall:
             return ButtonInfo(background: .red, stroke: .red, name: "phone.down", action: self)
         case .addParticipant:
-            return ButtonInfo(background: .clear, stroke: .white, name: "person.fill.badge.plus", action: self)
+            return ButtonInfo(
+                background: .clear,
+                stroke: .white,
+                name: "person.fill.badge.plus",
+                action: self
+            )
         case .switchCamera:
-            return ButtonInfo(background: .clear, stroke: .white, name: "arrow.triangle.2.circlepath.camera", action: self)
+            return ButtonInfo(
+                background: .clear,
+                stroke: .white,
+                name: "arrow.triangle.2.circlepath.camera",
+                action: self
+            )
         case .toggleSpeaker:
-            return ButtonInfo(background: .clear, stroke: .white, name: "speaker.wave.2", action: self)
+            return ButtonInfo(
+                background: .clear,
+                stroke: .white,
+                name: "speaker.wave.2",
+                action: self
+            )
         case .openConversation:
             return ButtonInfo(background: .clear, stroke: .white, name: "message", action: self)
         case .showDialpad:
@@ -119,25 +134,60 @@ enum CallAction: State {
     var alterButtonInfo: ButtonInfo {
         switch self {
         case .toggleAudio:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "mic.slash", action: self)
+            return ButtonInfo(
+                background: Color(UIColor.darkGray),
+                stroke: Color(UIColor.darkGray),
+                name: "mic.slash",
+                action: self
+            )
         case .toggleVideo:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "video.slash", action: self)
+            return ButtonInfo(
+                background: Color(UIColor.darkGray),
+                stroke: Color(UIColor.darkGray),
+                name: "video.slash",
+                action: self
+            )
         case .pauseCall:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "play", action: self)
+            return ButtonInfo(
+                background: Color(UIColor.darkGray),
+                stroke: Color(UIColor.darkGray),
+                name: "play",
+                action: self
+            )
         case .hangUpCall:
             return ButtonInfo(background: .red, stroke: .red, name: "phone.down", action: self)
         case .addParticipant:
-            return ButtonInfo(background: .clear, stroke: .white, name: "person.fill.badge.plus", action: self)
+            return ButtonInfo(
+                background: .clear,
+                stroke: .white,
+                name: "person.fill.badge.plus",
+                action: self
+            )
         case .switchCamera:
-            return ButtonInfo(background: .clear, stroke: .white, name: "arrow.triangle.2.circlepath.camera", action: self)
+            return ButtonInfo(
+                background: .clear,
+                stroke: .white,
+                name: "arrow.triangle.2.circlepath.camera",
+                action: self
+            )
         case .toggleSpeaker:
-            return ButtonInfo(background: .clear, stroke: .white, name: "speaker.wave.3", action: self)
+            return ButtonInfo(
+                background: .clear,
+                stroke: .white,
+                name: "speaker.wave.3",
+                action: self
+            )
         case .openConversation:
             return ButtonInfo(background: .clear, stroke: .white, name: "message", action: self)
         case .showDialpad:
             return ButtonInfo(background: .clear, stroke: .white, name: "dialpad", action: self)
         case .raiseHand:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "hand.raised", action: self)
+            return ButtonInfo(
+                background: Color(UIColor.darkGray),
+                stroke: Color(UIColor.darkGray),
+                name: "hand.raised",
+                action: self
+            )
         }
     }
 }
@@ -160,54 +210,45 @@ class ActionsViewModel {
 
     let disposeBag = DisposeBag()
 
-    lazy var callPaused: Observable<Bool> = {
-        return currentCall
-            .filter({ call in
-                (call.state == .hold ||
-                    call.state == .unhold ||
-                    call.state == .current)
-            })
-            .map({call in
-                if  call.state == .hold ||
-                        (call.state == .current && call.peerHolding) {
-                    return true
-                }
-                return false
-            })
-    }()
+    lazy var callPaused: Observable<Bool> = currentCall
+        .filter { call in
+            call.state == .hold ||
+                call.state == .unhold ||
+                call.state == .current
+        }
+        .map { call in
+            if call.state == .hold ||
+                (call.state == .current && call.peerHolding) {
+                return true
+            }
+            return false
+        }
 
-    lazy var callConnecting: Observable<Bool> = {
-        return currentCall
-            .map({call in
-                return call.state == .ringing ||
-                    call.state == .connecting
-            })
-    }()
+    lazy var callConnecting: Observable<Bool> = currentCall
+        .map { call in
+            call.state == .ringing ||
+                call.state == .connecting
+        }
 
-    lazy var videoButtonState: Observable<Bool> = {
-        return self.currentCall
-            .filter({ call in
-                call.state == .current || call.state == .unknown
-            })
-            .map({call in
-                let audioOnly = call.isAudioOnly
-                return call.videoMuted || audioOnly
-            })
-    }()
+    lazy var videoButtonState: Observable<Bool> = self.currentCall
+        .filter { call in
+            call.state == .current || call.state == .unknown
+        }
+        .map { call in
+            let audioOnly = call.isAudioOnly
+            return call.videoMuted || audioOnly
+        }
 
-    lazy var micButtonState: Observable<Bool> = {
-        return self.currentCall
-            .filter({ call in
-                call.state == .current || call.state == .unknown
-            })
-            .map({call in
-                return call.audioMuted
-            })
-    }()
+    lazy var micButtonState: Observable<Bool> = self.currentCall
+        .filter { call in
+            call.state == .current || call.state == .unknown
+        }
+        .map { call in
+            call.audioMuted
+        }
 
-    lazy var speakerButtonState: Observable<Bool> = {
-        return self.audioService.isOutputToSpeaker.asObservable()
-    }()
+    lazy var speakerButtonState: Observable<Bool> = self.audioService.isOutputToSpeaker
+        .asObservable()
 
     var firstLineButtons: [ButtonInfoWrapper]
 
@@ -215,57 +256,88 @@ class ActionsViewModel {
 
     var buttons: [ButtonInfoWrapper]
 
-    init(actionsState: PublishSubject<State>, currentCall: Observable<CallModel>, audioService: AudioService) {
+    init(
+        actionsState: PublishSubject<State>,
+        currentCall: Observable<CallModel>,
+        audioService: AudioService
+    ) {
         self.actionsState = actionsState
         self.currentCall = currentCall
         self.audioService = audioService
-        self.micButton = ButtonInfoWrapper(info: CallAction.toggleAudio.defaultButtonInfo)
-        self.videoButton = ButtonInfoWrapper(info: CallAction.toggleVideo.defaultButtonInfo)
-        self.stopCallButton = ButtonInfoWrapper(info: CallAction.hangUpCall.defaultButtonInfo)
-        self.switchCameraButton = ButtonInfoWrapper(info: CallAction.switchCamera.defaultButtonInfo)
-        self.speakerButton = ButtonInfoWrapper(info: CallAction.toggleSpeaker.defaultButtonInfo)
-        self.addParticipantButton = ButtonInfoWrapper(info: CallAction.addParticipant.defaultButtonInfo)
-        self.openConversationtButton = ButtonInfoWrapper(info: CallAction.openConversation.defaultButtonInfo)
-        self.pauseCallButton = ButtonInfoWrapper(info: CallAction.pauseCall.defaultButtonInfo)
-        self.micButton.disabled = true
-        self.videoButton.disabled = true
-        self.switchCameraButton.disabled = true
-        self.addParticipantButton.disabled = true
-        self.pauseCallButton.disabled = true
-        self.firstLineButtons = [speakerButton, micButton, stopCallButton, switchCameraButton, videoButton]
-        self.secondLineButtons = [pauseCallButton, addParticipantButton, openConversationtButton]
-        self.buttons = [stopCallButton, speakerButton, micButton, switchCameraButton, videoButton, pauseCallButton, addParticipantButton, openConversationtButton]
-        self.micButtonState
+        micButton = ButtonInfoWrapper(info: CallAction.toggleAudio.defaultButtonInfo)
+        videoButton = ButtonInfoWrapper(info: CallAction.toggleVideo.defaultButtonInfo)
+        stopCallButton = ButtonInfoWrapper(info: CallAction.hangUpCall.defaultButtonInfo)
+        switchCameraButton = ButtonInfoWrapper(info: CallAction.switchCamera.defaultButtonInfo)
+        speakerButton = ButtonInfoWrapper(info: CallAction.toggleSpeaker.defaultButtonInfo)
+        addParticipantButton = ButtonInfoWrapper(info: CallAction.addParticipant.defaultButtonInfo)
+        openConversationtButton = ButtonInfoWrapper(info: CallAction.openConversation
+                                                        .defaultButtonInfo)
+        pauseCallButton = ButtonInfoWrapper(info: CallAction.pauseCall.defaultButtonInfo)
+        micButton.disabled = true
+        videoButton.disabled = true
+        switchCameraButton.disabled = true
+        addParticipantButton.disabled = true
+        pauseCallButton.disabled = true
+        firstLineButtons = [
+            speakerButton,
+            micButton,
+            stopCallButton,
+            switchCameraButton,
+            videoButton
+        ]
+        secondLineButtons = [pauseCallButton, addParticipantButton, openConversationtButton]
+        buttons = [
+            stopCallButton,
+            speakerButton,
+            micButton,
+            switchCameraButton,
+            videoButton,
+            pauseCallButton,
+            addParticipantButton,
+            openConversationtButton
+        ]
+        micButtonState
             .observe(on: MainScheduler.instance)
-            .map { $0 ? CallAction.toggleAudio.alterButtonInfo : CallAction.toggleAudio.defaultButtonInfo }
+            .map {
+                $0 ? CallAction.toggleAudio.alterButtonInfo : CallAction.toggleAudio
+                    .defaultButtonInfo
+            }
             .subscribe(onNext: { [weak self] info in
                 self?.micButton.updateWith(info: info)
             })
-            .disposed(by: self.disposeBag)
-        self.videoButtonState
+            .disposed(by: disposeBag)
+        videoButtonState
             .observe(on: MainScheduler.instance)
-            .map { $0 ? CallAction.toggleVideo.alterButtonInfo : CallAction.toggleVideo.defaultButtonInfo }
+            .map {
+                $0 ? CallAction.toggleVideo.alterButtonInfo : CallAction.toggleVideo
+                    .defaultButtonInfo
+            }
             .subscribe(onNext: { [weak self] info in
                 self?.videoButton.updateWith(info: info)
             })
-            .disposed(by: self.disposeBag)
-        self.speakerButtonState
+            .disposed(by: disposeBag)
+        speakerButtonState
             .observe(on: MainScheduler.instance)
-            .map { $0 ? CallAction.toggleSpeaker.alterButtonInfo : CallAction.toggleSpeaker.defaultButtonInfo }
+            .map {
+                $0 ? CallAction.toggleSpeaker.alterButtonInfo : CallAction.toggleSpeaker
+                    .defaultButtonInfo
+            }
             .subscribe(onNext: { [weak self] info in
                 self?.speakerButton.updateWith(info: info)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.callPaused
+        callPaused
             .observe(on: MainScheduler.instance)
-            .map { $0 ? CallAction.pauseCall.alterButtonInfo : CallAction.pauseCall.defaultButtonInfo }
+            .map {
+                $0 ? CallAction.pauseCall.alterButtonInfo : CallAction.pauseCall.defaultButtonInfo
+            }
             .subscribe(onNext: { [weak self] info in
                 self?.pauseCallButton.updateWith(info: info)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.callConnecting
+        callConnecting
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] connecting in
                 self?.micButton.disabled = connecting
@@ -274,22 +346,46 @@ class ActionsViewModel {
                 self?.addParticipantButton.disabled = connecting
                 self?.pauseCallButton.disabled = connecting
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func updateItemRaiseHand(add: Bool) {
-        let added = self.raiseHandButton != nil
+        let added = raiseHandButton != nil
         if add == added {
             return
         }
         if add {
-            self.raiseHandButton = ButtonInfoWrapper(info: CallAction.raiseHand.defaultButtonInfo)
-            self.secondLineButtons = [pauseCallButton, addParticipantButton, openConversationtButton, raiseHandButton!]
-            self.buttons = [stopCallButton, speakerButton, micButton, switchCameraButton, videoButton, pauseCallButton, addParticipantButton, openConversationtButton, raiseHandButton!]
+            raiseHandButton = ButtonInfoWrapper(info: CallAction.raiseHand.defaultButtonInfo)
+            secondLineButtons = [
+                pauseCallButton,
+                addParticipantButton,
+                openConversationtButton,
+                raiseHandButton!
+            ]
+            buttons = [
+                stopCallButton,
+                speakerButton,
+                micButton,
+                switchCameraButton,
+                videoButton,
+                pauseCallButton,
+                addParticipantButton,
+                openConversationtButton,
+                raiseHandButton!
+            ]
         } else {
-            self.secondLineButtons = [pauseCallButton, addParticipantButton, openConversationtButton]
-            self.buttons = [stopCallButton, speakerButton, micButton, switchCameraButton, videoButton, pauseCallButton, addParticipantButton, openConversationtButton]
-            self.raiseHandButton = nil
+            secondLineButtons = [pauseCallButton, addParticipantButton, openConversationtButton]
+            buttons = [
+                stopCallButton,
+                speakerButton,
+                micButton,
+                switchCameraButton,
+                videoButton,
+                pauseCallButton,
+                addParticipantButton,
+                openConversationtButton
+            ]
+            raiseHandButton = nil
         }
     }
 
@@ -297,5 +393,4 @@ class ActionsViewModel {
         guard let action = action as? CallAction else { return }
         action.performAction(actionsState: actionsState)
     }
-
 }

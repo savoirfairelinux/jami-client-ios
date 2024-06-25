@@ -7,136 +7,184 @@ import UIKit
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-internal protocol StoryboardType {
-  static var storyboardName: String { get }
+protocol StoryboardType {
+    static var storyboardName: String { get }
 }
 
-internal extension StoryboardType {
-  static var storyboard: UIStoryboard {
-    return UIStoryboard(name: self.storyboardName, bundle: Bundle(for: BundleToken.self))
-  }
-}
-
-internal struct SceneType<T: Any> {
-  internal let storyboard: StoryboardType.Type
-  internal let identifier: String
-
-  internal func instantiate() -> T {
-    guard let controller = storyboard.storyboard.instantiateViewController(withIdentifier: identifier) as? T else {
-      fatalError("ViewController '\(identifier)' is not of the expected class \(T.self).")
+extension StoryboardType {
+    static var storyboard: UIStoryboard {
+        return UIStoryboard(name: storyboardName, bundle: Bundle(for: BundleToken.self))
     }
-    return controller
-  }
 }
 
-internal struct InitialSceneType<T: Any> {
-  internal let storyboard: StoryboardType.Type
+struct SceneType<T: Any> {
+    let storyboard: StoryboardType.Type
+    let identifier: String
 
-  internal func instantiate() -> T {
-    guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
-      fatalError("ViewController is not of the expected class \(T.self).")
+    func instantiate() -> T {
+        guard let controller = storyboard.storyboard
+            .instantiateViewController(withIdentifier: identifier) as? T
+        else {
+            fatalError("ViewController '\(identifier)' is not of the expected class \(T.self).")
+        }
+        return controller
     }
-    return controller
-  }
 }
 
-internal protocol SegueType: RawRepresentable { }
+struct InitialSceneType<T: Any> {
+    let storyboard: StoryboardType.Type
 
-internal extension UIViewController {
-  func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
-    performSegue(withIdentifier: segue.rawValue, sender: sender)
-  }
+    func instantiate() -> T {
+        guard let controller = storyboard.storyboard.instantiateInitialViewController() as? T else {
+            fatalError("ViewController is not of the expected class \(T.self).")
+        }
+        return controller
+    }
+}
+
+protocol SegueType: RawRepresentable {}
+
+extension UIViewController {
+    func perform<S: SegueType>(segue: S, sender: Any? = nil) where S.RawValue == String {
+        performSegue(withIdentifier: segue.rawValue, sender: sender)
+    }
 }
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
-internal enum StoryboardScene {
-  internal enum BlockListViewController: StoryboardType {
-    internal static let storyboardName = "BlockListViewController"
+enum StoryboardScene {
+    enum BlockListViewController: StoryboardType {
+        static let storyboardName = "BlockListViewController"
 
-    internal static let initialScene = InitialSceneType<Ring.BlockListViewController>(storyboard: BlockListViewController.self)
-  }
-  internal enum CallViewController: StoryboardType {
-    internal static let storyboardName = "CallViewController"
-
-    internal static let initialScene = InitialSceneType<Ring.CallViewController>(storyboard: CallViewController.self)
-  }
-
-    internal enum SwarmCreationViewController: StoryboardType {
-      internal static let storyboardName = "SwarmCreationViewController"
-
-      internal static let initialScene = InitialSceneType<Ring.SwarmCreationViewController>(storyboard: SwarmCreationViewController.self)
+        static let initialScene =
+            InitialSceneType<Ring.BlockListViewController>(storyboard: BlockListViewController.self)
     }
-  internal enum ContactRequestsViewController: StoryboardType {
-    internal static let storyboardName = "ContactRequestsViewController"
 
-    internal static let initialScene = InitialSceneType<Ring.ContactRequestsViewController>(storyboard: ContactRequestsViewController.self)
-  }
-  internal enum ContactViewController: StoryboardType {
-    internal static let storyboardName = "ContactViewController"
+    enum CallViewController: StoryboardType {
+        static let storyboardName = "CallViewController"
 
-    internal static let initialScene = InitialSceneType<Ring.ContactViewController>(storyboard: ContactViewController.self)
-  }
-  internal enum ConversationViewController: StoryboardType {
-    internal static let storyboardName = "ConversationViewController"
+        static let initialScene =
+            InitialSceneType<Ring.CallViewController>(storyboard: CallViewController.self)
+    }
 
-    internal static let initialScene = InitialSceneType<Ring.ConversationViewController>(storyboard: ConversationViewController.self)
-  }
-  internal enum CreateAccountViewController: StoryboardType {
-    internal static let storyboardName = "CreateAccountViewController"
+    enum SwarmCreationViewController: StoryboardType {
+        static let storyboardName = "SwarmCreationViewController"
 
-    internal static let initialScene = InitialSceneType<Ring.CreateAccountViewController>(storyboard: CreateAccountViewController.self)
-  }
-  internal enum CreateProfileViewController: StoryboardType {
-    internal static let storyboardName = "CreateProfileViewController"
+        static let initialScene =
+            InitialSceneType<Ring
+                .SwarmCreationViewController>(storyboard: SwarmCreationViewController
+                .self)
+    }
 
-    internal static let initialScene = InitialSceneType<Ring.CreateProfileViewController>(storyboard: CreateProfileViewController.self)
-  }
-  internal enum InitialLoadingViewController: StoryboardType {
-    internal static let storyboardName = "InitialLoadingViewController"
+    enum ContactRequestsViewController: StoryboardType {
+        static let storyboardName = "ContactRequestsViewController"
 
-    internal static let initialScene = InitialSceneType<Ring.InitialLoadingViewController>(storyboard: InitialLoadingViewController.self)
+        static let initialScene =
+            InitialSceneType<Ring
+                .ContactRequestsViewController>(storyboard: ContactRequestsViewController.self)
+    }
 
-    internal static let initialLoadingViewController = SceneType<Ring.InitialLoadingViewController>(storyboard: InitialLoadingViewController.self, identifier: "InitialLoadingViewController")
-  }
-  internal enum LaunchScreen: StoryboardType {
-    internal static let storyboardName = "LaunchScreen"
+    enum ContactViewController: StoryboardType {
+        static let storyboardName = "ContactViewController"
 
-    internal static let initialScene = InitialSceneType<UIViewController>(storyboard: LaunchScreen.self)
-  }
-  internal enum LinkDeviceViewController: StoryboardType {
-    internal static let storyboardName = "LinkDeviceViewController"
+        static let initialScene =
+            InitialSceneType<Ring.ContactViewController>(storyboard: ContactViewController.self)
+    }
 
-    internal static let initialScene = InitialSceneType<Ring.LinkDeviceViewController>(storyboard: LinkDeviceViewController.self)
-  }
-  internal enum LinkNewDeviceViewController: StoryboardType {
-    internal static let storyboardName = "LinkNewDeviceViewController"
+    enum ConversationViewController: StoryboardType {
+        static let storyboardName = "ConversationViewController"
 
-    internal static let initialScene = InitialSceneType<Ring.LinkNewDeviceViewController>(storyboard: LinkNewDeviceViewController.self)
-  }
-  internal enum MeViewController: StoryboardType {
-    internal static let storyboardName = "MeViewController"
+        static let initialScene =
+            InitialSceneType<Ring.ConversationViewController>(storyboard: ConversationViewController
+                .self)
+    }
 
-    internal static let initialScene = InitialSceneType<Ring.MeViewController>(storyboard: MeViewController.self)
-  }
-  internal enum ScanViewController: StoryboardType {
-    internal static let storyboardName = "ScanViewController"
+    enum CreateAccountViewController: StoryboardType {
+        static let storyboardName = "CreateAccountViewController"
 
-    internal static let initialScene = InitialSceneType<Ring.ScanViewController>(storyboard: ScanViewController.self)
-  }
-  internal enum SmartlistViewController: StoryboardType {
-    internal static let storyboardName = "SmartlistViewController"
+        static let initialScene =
+            InitialSceneType<Ring
+                .CreateAccountViewController>(storyboard: CreateAccountViewController
+                .self)
+    }
 
-    internal static let initialScene = InitialSceneType<Ring.SmartlistViewController>(storyboard: SmartlistViewController.self)
-  }
-  internal enum WelcomeViewController: StoryboardType {
-    internal static let storyboardName = "WelcomeViewController"
+    enum CreateProfileViewController: StoryboardType {
+        static let storyboardName = "CreateProfileViewController"
 
-    internal static let initialScene = InitialSceneType<Ring.WelcomeViewController>(storyboard: WelcomeViewController.self)
-  }
+        static let initialScene =
+            InitialSceneType<Ring
+                .CreateProfileViewController>(storyboard: CreateProfileViewController
+                .self)
+    }
+
+    enum InitialLoadingViewController: StoryboardType {
+        static let storyboardName = "InitialLoadingViewController"
+
+        static let initialScene =
+            InitialSceneType<Ring
+                .InitialLoadingViewController>(storyboard: InitialLoadingViewController
+                .self)
+
+        static let initialLoadingViewController = SceneType<Ring.InitialLoadingViewController>(
+            storyboard: InitialLoadingViewController.self,
+            identifier: "InitialLoadingViewController"
+        )
+    }
+
+    enum LaunchScreen: StoryboardType {
+        static let storyboardName = "LaunchScreen"
+
+        static let initialScene = InitialSceneType<UIViewController>(storyboard: LaunchScreen.self)
+    }
+
+    enum LinkDeviceViewController: StoryboardType {
+        static let storyboardName = "LinkDeviceViewController"
+
+        static let initialScene =
+            InitialSceneType<Ring.LinkDeviceViewController>(storyboard: LinkDeviceViewController
+                .self)
+    }
+
+    enum LinkNewDeviceViewController: StoryboardType {
+        static let storyboardName = "LinkNewDeviceViewController"
+
+        static let initialScene =
+            InitialSceneType<Ring
+                .LinkNewDeviceViewController>(storyboard: LinkNewDeviceViewController
+                .self)
+    }
+
+    enum MeViewController: StoryboardType {
+        static let storyboardName = "MeViewController"
+
+        static let initialScene =
+            InitialSceneType<Ring.MeViewController>(storyboard: MeViewController
+                .self)
+    }
+
+    enum ScanViewController: StoryboardType {
+        static let storyboardName = "ScanViewController"
+
+        static let initialScene =
+            InitialSceneType<Ring.ScanViewController>(storyboard: ScanViewController.self)
+    }
+
+    enum SmartlistViewController: StoryboardType {
+        static let storyboardName = "SmartlistViewController"
+
+        static let initialScene =
+            InitialSceneType<Ring.SmartlistViewController>(storyboard: SmartlistViewController.self)
+    }
+
+    enum WelcomeViewController: StoryboardType {
+        static let storyboardName = "WelcomeViewController"
+
+        static let initialScene =
+            InitialSceneType<Ring.WelcomeViewController>(storyboard: WelcomeViewController.self)
+    }
 }
 
-internal enum StoryboardSegue {
-}
+enum StoryboardSegue {}
+
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 
 private final class BundleToken {}

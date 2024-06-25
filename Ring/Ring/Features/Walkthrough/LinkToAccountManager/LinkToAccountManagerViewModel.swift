@@ -18,15 +18,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 class LinkToAccountManagerViewModel: Stateable, ViewModel {
-
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
 
     var userName = BehaviorRelay<String>(value: "")
     var password = BehaviorRelay<String>(value: "")
@@ -34,52 +31,58 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
     private let accountsService: AccountsService
     private let disposeBag = DisposeBag()
     private let accountCreationState = BehaviorRelay<AccountCreationState>(value: .unknown)
-    lazy var createState: Observable<AccountCreationState> = {
-        return self.accountCreationState.asObservable()
-    }()
+    lazy var createState: Observable<AccountCreationState> = self.accountCreationState
+        .asObservable()
 
-    lazy var canLink: Observable<Bool> = {
-        return Observable
-            .combineLatest(self.userName.asObservable(),
-                           self.password.asObservable(),
-                           self.manager.asObservable(),
-                           self.createState) {( name: String, password: String, manager: String, state: AccountCreationState) -> Bool in
-                return !name.isEmpty && !password.isEmpty && !manager.isEmpty && !state.isInProgress
-            }
-    }()
+    lazy var canLink: Observable<Bool> = Observable
+        .combineLatest(self.userName.asObservable(),
+                       self.password.asObservable(),
+                       self.manager.asObservable(),
+                       self.createState) { (
+            name: String,
+            password: String,
+            manager: String,
+            state: AccountCreationState
+        ) -> Bool in
+            !name.isEmpty && !password.isEmpty && !manager.isEmpty && !state.isInProgress
+        }
 
     required init(with injectionBag: InjectionBag) {
-        self.accountsService = injectionBag.accountService
+        accountsService = injectionBag.accountService
     }
 
     func linkToAccountManager() {
-        self.accountCreationState.accept(.started)
-        self.accountsService
+        accountCreationState.accept(.started)
+        accountsService
             .connectToAccountManager(username: userName.value,
                                      password: password.value,
                                      serverUri: manager.value,
                                      emableNotifications: true)
-            .subscribe(onNext: { [weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.accountCreationState.accept(.success)
                 self.enablePushNotifications(enable: true)
                 DispatchQueue.main.async {
                     self.stateSubject.onNext(WalkthroughState.accountCreated)
                 }
-            }, onError: { [weak self] (error) in
+            }, onError: { [weak self] error in
                 if let error = error as? AccountCreationError {
                     self?.accountCreationState.accept(.error(error: error))
                 } else {
-                    self?.accountCreationState.accept(.error(error: AccountCreationError.wrongCredentials))
+                    self?.accountCreationState
+                        .accept(.error(error: AccountCreationError.wrongCredentials))
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func enablePushNotifications(enable: Bool) {
         if !enable {
             return
         }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
+            object: nil
+        )
     }
 }

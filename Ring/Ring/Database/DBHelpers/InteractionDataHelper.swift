@@ -35,7 +35,6 @@ struct Interaction {
 }
 
 final class InteractionDataHelper {
-
     let table = Table("interactions")
     let id = Expression<Int64>("id")
     let author = Expression<String?>("author")
@@ -57,14 +56,15 @@ final class InteractionDataHelper {
     let authorId = Expression<Int64>("author_id")
     let conversationId = Expression<Int64>("conversation_id")
 
-    func migrateToDBForAccount (from oldDB: Connection,
-                                to newDB: Connection,
-                                accountProfileId: Int64,
-                                contactsMap: [Int64: String]) throws {
+    func migrateToDBForAccount(from oldDB: Connection,
+                               to newDB: Connection,
+                               accountProfileId _: Int64,
+                               contactsMap: [Int64: String]) throws {
         let items = try oldDB.prepare(table)
         for item in items {
-            let uri: String? = (contactsMap[item[authorId]] != nil) ? "ring:" + contactsMap[item[authorId]]! : nil
-            let migrationData = self.migrateMessageBody(body: item[body], type: item[type])
+            let uri: String? = (contactsMap[item[authorId]] != nil) ? "ring:" +
+                contactsMap[item[authorId]]! : nil
+            let migrationData = migrateMessageBody(body: item[body], type: item[type])
             let query = table.insert(id <- item[id],
                                      author <- uri,
                                      conversation <- item[conversationId],
@@ -89,20 +89,20 @@ final class InteractionDataHelper {
                 let time = String(durationString).convertToSeconds()
                 let messageBody = String(body.prefix(upTo: index))
                 if messageBody.contains(GeneratedMessageType.incomingCall.rawValue) {
-                    return(GeneratedMessage.incomingCall.toString(), time)
+                    return (GeneratedMessage.incomingCall.toString(), time)
                 } else {
-                    return(GeneratedMessage.outgoingCall.toString(), time)
+                    return (GeneratedMessage.outgoingCall.toString(), time)
                 }
             } else if body == GeneratedMessageType.missedIncomingCall.rawValue {
-                return(GeneratedMessage.missedIncomingCall.toString(), 0)
+                return (GeneratedMessage.missedIncomingCall.toString(), 0)
             } else {
-                return(GeneratedMessage.missedOutgoingCall.toString(), 0)
+                return (GeneratedMessage.missedOutgoingCall.toString(), 0)
             }
         case InteractionType.contact.rawValue:
             if body == GeneratedMessageType.contactAdded.rawValue {
-                return(GeneratedMessage.contactAdded.toString(), 0)
+                return (GeneratedMessage.contactAdded.toString(), 0)
             } else {
-                return(GeneratedMessage.invitationReceived.toString(), 0)
+                return (GeneratedMessage.invitationReceived.toString(), 0)
             }
         default:
             return (body, 0)
@@ -153,7 +153,7 @@ final class InteractionDataHelper {
         }
     }
 
-    func selectInteraction (interactionId: Int64, dataBase: Connection) throws -> Interaction? {
+    func selectInteraction(interactionId: Int64, dataBase: Connection) throws -> Interaction? {
         let query = table.filter(id == interactionId)
         let items = try dataBase.prepare(query)
         for item in items {
@@ -189,7 +189,8 @@ final class InteractionDataHelper {
         return interactions
     }
 
-    func selectInteractions(where predicat: Expression<Bool>, dataBase: Connection) throws -> [Interaction] {
+    func selectInteractions(where predicat: Expression<Bool>,
+                            dataBase: Connection) throws -> [Interaction] {
         let query = table.filter(predicat)
         var interactions = [Interaction]()
         let items = try dataBase.prepare(query)
@@ -208,12 +209,17 @@ final class InteractionDataHelper {
         return interactions
     }
 
-    func selectInteractionsForConversation(conv: Int64, dataBase: Connection) throws -> [Interaction]? {
-        return try self.selectInteractions(where: conversation == conv, dataBase: dataBase)
+    func selectInteractionsForConversation(conv: Int64,
+                                           dataBase: Connection) throws -> [Interaction]? {
+        return try selectInteractions(where: conversation == conv, dataBase: dataBase)
     }
 
-    func selectInteractionWithDaemonId(interactionDaemonID: String, dataBase: Connection) throws -> Interaction? {
-        let interactions = try self.selectInteractions(where: daemonId == interactionDaemonID, dataBase: dataBase)
+    func selectInteractionWithDaemonId(interactionDaemonID: String,
+                                       dataBase: Connection) throws -> Interaction? {
+        let interactions = try selectInteractions(
+            where: daemonId == interactionDaemonID,
+            dataBase: dataBase
+        )
 
         if interactions.isEmpty || interactions.count > 1 {
             return nil
@@ -222,7 +228,11 @@ final class InteractionDataHelper {
         return interactions.first
     }
 
-    func updateInteractionWithDaemonID(interactionDaemonID: String, interactionStatus: String, dataBase: Connection) -> Bool {
+    func updateInteractionWithDaemonID(
+        interactionDaemonID: String,
+        interactionStatus: String,
+        dataBase: Connection
+    ) -> Bool {
         let query = table.filter(daemonId == interactionDaemonID)
         do {
             if try dataBase.run(query.update(status <- interactionStatus)) > 0 {
@@ -235,7 +245,11 @@ final class InteractionDataHelper {
         }
     }
 
-    func updateInteractionStatusWithID(interactionID: Int64, interactionStatus: String, dataBase: Connection) -> Bool {
+    func updateInteractionStatusWithID(
+        interactionID: Int64,
+        interactionStatus: String,
+        dataBase: Connection
+    ) -> Bool {
         let query = table.filter(id == interactionID)
         do {
             if try dataBase.run(query.update(status <- interactionStatus)) > 0 {
@@ -248,7 +262,8 @@ final class InteractionDataHelper {
         }
     }
 
-    func updateInteractionContentWithID(daemonID: String, content: String, dataBase: Connection) -> Bool {
+    func updateInteractionContentWithID(daemonID: String, content: String,
+                                        dataBase: Connection) -> Bool {
         let query = table.filter(daemonId == daemonID)
         do {
             if try dataBase.run(query.update(body <- content)) > 0 {
@@ -269,7 +284,7 @@ final class InteractionDataHelper {
 
     func deleteAllInteractions(conv: Int64, dataBase: Connection) -> Bool {
         do {
-            return try self.deleteInteractions(where: conversation == conv, dataBase: dataBase)
+            return try deleteInteractions(where: conversation == conv, dataBase: dataBase)
         } catch {
             return false
         }
@@ -277,7 +292,7 @@ final class InteractionDataHelper {
 
     func delete(interactionId: Int64, dataBase: Connection) -> Bool {
         do {
-            return try self.deleteInteractions(where: id == interactionId, dataBase: dataBase)
+            return try deleteInteractions(where: id == interactionId, dataBase: dataBase)
         } catch {
             return false
         }

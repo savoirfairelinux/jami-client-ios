@@ -20,43 +20,44 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
 import Reusable
+import RxSwift
+import UIKit
 
 class ConversationCell: UITableViewCell, NibReusable {
-
-    @IBOutlet weak var myLocationSharingIcon: UIImageView!
-    @IBOutlet weak var locationSharingIcon: UIImageView!
-    @IBOutlet weak var avatarView: UIView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var newMessagesIndicator: UIView?
-    @IBOutlet weak var newMessagesLabel: UILabel?
-    @IBOutlet weak var lastMessageDateLabel: UILabel?
-    @IBOutlet weak var lastMessagePreviewLabel: UILabel?
-    @IBOutlet weak var presenceIndicator: UIView?
-    @IBOutlet weak var selectionIndicator: UIButton?
-    @IBOutlet weak var selectionContainer: UIView?
+    @IBOutlet var myLocationSharingIcon: UIImageView!
+    @IBOutlet var locationSharingIcon: UIImageView!
+    @IBOutlet var avatarView: UIView!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var newMessagesIndicator: UIView?
+    @IBOutlet var newMessagesLabel: UILabel?
+    @IBOutlet var lastMessageDateLabel: UILabel?
+    @IBOutlet var lastMessagePreviewLabel: UILabel?
+    @IBOutlet var presenceIndicator: UIView?
+    @IBOutlet var selectionIndicator: UIButton?
+    @IBOutlet var selectionContainer: UIView?
 
     var avatarSize: CGFloat { return 50 }
 
     var incomingLocationSharing = false
     var outgoingLocationSharing = false
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        let initialColor = selected ? UIColor.jamiUITableViewCellSelection : UIColor.jamiUITableViewCellSelection.lighten(by: 5.0)
-        let finalColor = selected ? UIColor.jamiUITableViewCellSelection.lighten(by: 5.0) : UIColor.clear
-        self.backgroundColor = initialColor
+    override func setSelected(_ selected: Bool, animated _: Bool) {
+        let initialColor = selected ? UIColor.jamiUITableViewCellSelection : UIColor
+            .jamiUITableViewCellSelection.lighten(by: 5.0)
+        let finalColor = selected ? UIColor.jamiUITableViewCellSelection.lighten(by: 5.0) : UIColor
+            .clear
+        backgroundColor = initialColor
         UIView.animate(withDuration: 0.35, animations: { [weak self] in
             self?.backgroundColor = finalColor
         })
     }
 
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated _: Bool) {
         if highlighted {
-            self.backgroundColor = UIColor.jamiUITableViewCellSelection
+            backgroundColor = UIColor.jamiUITableViewCellSelection
         } else {
-            self.backgroundColor = UIColor.clear
+            backgroundColor = UIColor.clear
         }
     }
 
@@ -64,9 +65,9 @@ class ConversationCell: UITableViewCell, NibReusable {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.disposeBag = DisposeBag()
-        self.incomingLocationSharing = false
-        self.outgoingLocationSharing = false
+        disposeBag = DisposeBag()
+        incomingLocationSharing = false
+        outgoingLocationSharing = false
     }
 
     override func didMoveToWindow() {
@@ -77,8 +78,8 @@ class ConversationCell: UITableViewCell, NibReusable {
     }
 
     func updateLocationSharingState() {
-        self.locationSharingIcon.isHidden = !self.incomingLocationSharing
-        self.myLocationSharingIcon.isHidden = !self.outgoingLocationSharing
+        locationSharingIcon.isHidden = !incomingLocationSharing
+        myLocationSharingIcon.isHidden = !outgoingLocationSharing
         if incomingLocationSharing {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 self?.locationSharingIcon.stopBlinking()
@@ -99,18 +100,18 @@ class ConversationCell: UITableViewCell, NibReusable {
                                                   item.bestName.asObservable()) { ($0, $1) }
             .startWith((item.profileImageData.value, item.userName.value))
             .observe(on: MainScheduler.instance)
-            .subscribe({ [weak self] profileData in
+            .subscribe { [weak self] profileData in
                 guard let data = profileData.element?.1 else { return }
 
-                self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
+                self?.avatarView.subviews.forEach { $0.removeFromSuperview() }
                 self?.avatarView.addSubview(AvatarView(profileImageData: profileData.element?.0,
                                                        username: data,
                                                        size: self?.avatarSize ?? 50))
-            })
-            .disposed(by: self.disposeBag)
+            }
+            .disposed(by: disposeBag)
 
         // presence
-        if self.presenceIndicator != nil {
+        if presenceIndicator != nil {
             item.contactPresence.asObservable()
                 .observe(on: MainScheduler.instance)
                 .startWith(item.contactPresence.value)
@@ -123,32 +124,34 @@ class ConversationCell: UITableViewCell, NibReusable {
                         self.presenceIndicator?.backgroundColor = .availablePresenceColor
                     }
                 })
-                .disposed(by: self.disposeBag)
+                .disposed(by: disposeBag)
         }
 
         // username
         item.bestName.asObservable()
             .observe(on: MainScheduler.instance)
-            .bind(to: self.nameLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        self.nameLabel.lineBreakMode = .byTruncatingTail
+            .bind(to: nameLabel.rx.text)
+            .disposed(by: disposeBag)
+        nameLabel.lineBreakMode = .byTruncatingTail
 
         // last message preview
-        if let lastMessage = self.lastMessagePreviewLabel {
+        if let lastMessage = lastMessagePreviewLabel {
             lastMessage.lineBreakMode = .byTruncatingTail
             item.lastMessageObservable
                 .observe(on: MainScheduler.instance)
                 .startWith(item.lastMessage)
                 .bind(to: lastMessage.rx.text)
-                .disposed(by: self.disposeBag)
+                .disposed(by: disposeBag)
         }
 
-        if let outgoingLocationSharingImage = Asset.localisationsSendBlack.image.withColor(.systemBlue) {
-            self.myLocationSharingIcon.image = outgoingLocationSharingImage
+        if let outgoingLocationSharingImage = Asset.localisationsSendBlack.image
+            .withColor(.systemBlue) {
+            myLocationSharingIcon.image = outgoingLocationSharingImage
         }
 
-        if let incomingLocationSharingImage = Asset.localisationsReceiveBlack.image.withColor(.label) {
-            self.locationSharingIcon.image = incomingLocationSharingImage
+        if let incomingLocationSharingImage = Asset.localisationsReceiveBlack.image
+            .withColor(.label) {
+            locationSharingIcon.image = incomingLocationSharingImage
         }
 
         item.showOutgoingLocationSharing
@@ -165,7 +168,7 @@ class ConversationCell: UITableViewCell, NibReusable {
                     self.myLocationSharingIcon.stopBlinking()
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         item.showIncomingLocationSharing
             .distinctUntilChanged()
@@ -181,7 +184,7 @@ class ConversationCell: UITableViewCell, NibReusable {
                     self.locationSharingIcon.stopBlinking()
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.selectionStyle = .none
+            .disposed(by: disposeBag)
+        selectionStyle = .none
     }
 }

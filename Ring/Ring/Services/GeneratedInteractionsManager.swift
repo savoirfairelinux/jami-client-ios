@@ -33,18 +33,23 @@ class GeneratedInteractionsManager {
     let callService: CallsService
     let disposeBag = DisposeBag()
 
-    init(accountService: AccountsService, requestsService: RequestsService, conversationService: ConversationsService, callService: CallsService) {
+    init(
+        accountService: AccountsService,
+        requestsService: RequestsService,
+        conversationService: ConversationsService,
+        callService: CallsService
+    ) {
         self.accountService = accountService
         self.requestsService = requestsService
         self.conversationService = conversationService
         self.callService = callService
-        self.subscribeToContactEvents()
-        self.subscribeToCallEvents()
+        subscribeToContactEvents()
+        subscribeToCallEvents()
     }
 
     // swiftlint:disable cyclomatic_complexity
     private func subscribeToContactEvents() {
-        self.requestsService
+        requestsService
             .sharedResponseStream
             .subscribe(onNext: { [weak self] contactRequestEvent in
                 guard let self = self else { return }
@@ -61,10 +66,11 @@ class GeneratedInteractionsManager {
                     return
                 }
 
-                let type = AccountModelHelper.init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
-                guard let uriString = JamiURI.init(schema: type,
-                                                   infoHash: jamiId,
-                                                   account: account).uriString else { return }
+                let type = AccountModelHelper(withAccount: account).isAccountSip() ? URIType
+                    .sip : URIType.ring
+                guard let uriString = JamiURI(schema: type,
+                                              infoHash: jamiId,
+                                              account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
                    currentAccount.id == account.id {
@@ -97,22 +103,27 @@ class GeneratedInteractionsManager {
 
     private func removeConversation(accountId: String,
                                     contactRingId: String,
-                                    shouldUpdateConversation: Bool) {
-
-        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: contactRingId, accontId: accountId) else {
+                                    shouldUpdateConversation _: Bool) {
+        guard let conversation = conversationService.getConversationForParticipant(
+            jamiId: contactRingId,
+            accontId: accountId
+        ) else {
             return
         }
         // remove conversation if it contain only contact messages
-        let messages = conversation.messages.filter({ $0.type != .contact })
+        let messages = conversation.messages.filter { $0.type != .contact }
 
         if !messages.isEmpty {
             return
         }
-        self.conversationService.removeConversationFromDB(conversation: conversation, keepConversation: false)
+        conversationService.removeConversationFromDB(
+            conversation: conversation,
+            keepConversation: false
+        )
     }
 
     private func subscribeToCallEvents() {
-        self.callService
+        callService
             .sharedResponseStream
             .subscribe(onNext: { [weak self] callEvent in
                 guard let self = self else { return }
@@ -127,14 +138,20 @@ class GeneratedInteractionsManager {
                     return
                 }
 
-                guard let account = self.accountService.getAccount(fromAccountId: accountID) else { return }
+                guard let account = self.accountService.getAccount(fromAccountId: accountID)
+                else { return }
 
                 if account.type != .sip {
                     // we should generate messages only for non swarm conversations
-                    guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId.filterOutHost(), accontId: accountID), !conversation.isSwarm() else { return }
+                    guard let conversation = self.conversationService.getConversationForParticipant(
+                        jamiId: jamiId.filterOutHost(),
+                        accontId: accountID
+                    ), !conversation.isSwarm() else { return }
                 } else {
                     // ensure sip conversation exists
-                    guard let uri = JamiURI.init(schema: .sip, infoHash: jamiId, account: account).uriString else {
+                    guard let uri = JamiURI(schema: .sip, infoHash: jamiId, account: account)
+                            .uriString
+                    else {
                         return
                     }
                     self.conversationService.createSipConversation(uri: uri, accountId: accountID)
@@ -149,17 +166,18 @@ class GeneratedInteractionsManager {
                 }
 
                 let type = AccountModelHelper
-                    .init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
-                guard let stringUri = JamiURI.init(schema: type,
-                                                   infoHash: jamiId,
-                                                   account: account).uriString else { return }
+                (withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
+                guard let stringUri = JamiURI(schema: type,
+                                              infoHash: jamiId,
+                                              account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
                    currentAccount.id == account.id {
                     shouldUpdateConversations = true
                 }
                 let message = callType == CallType.incoming.rawValue
-                    ? (time > 0) ? GeneratedMessage.incomingCall.toString() : GeneratedMessage.missedIncomingCall.toString() :
+                    ? (time > 0) ? GeneratedMessage.incomingCall.toString() : GeneratedMessage
+                    .missedIncomingCall.toString() :
                     (time > 0) ? GeneratedMessage.outgoingCall.toString() :
                     GeneratedMessage.missedOutgoingCall.toString()
                 self.conversationService

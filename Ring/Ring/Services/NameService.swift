@@ -36,7 +36,6 @@ enum UsernameValidationStatus {
 let registeredNamesKey = "REGISTERED_NAMES_KEY"
 
 class NameService {
-
     /// Logger
     private let log = SwiftyBeaver.self
 
@@ -63,17 +62,16 @@ class NameService {
 
     init(withNameRegistrationAdapter nameRegistrationAdapter: NameRegistrationAdapter) {
         self.nameRegistrationAdapter = nameRegistrationAdapter
-        self.sharedRegistrationStatus = registrationStatus.share()
+        sharedRegistrationStatus = registrationStatus.share()
 
-        self.userSearchResponseStream.disposed(by: self.disposeBag)
-        self.userSearchResponseShared = self.userSearchResponseStream.share()
+        userSearchResponseStream.disposed(by: disposeBag)
+        userSearchResponseShared = userSearchResponseStream.share()
 
         NameRegistrationAdapter.delegate = self
     }
 
     /// Make a username lookup request to the daemon
     func lookupName(withAccount account: String, nameserver: String, name: String) {
-
         let testServer: String = TestEnvironment.shared.nameServerURI ?? ""
 
         let nameserver = nameserver.isEmpty ? testServer : nameserver
@@ -88,12 +86,18 @@ class NameService {
 
             // Fire a delayed lookup...
             delayedLookupNameCall = DispatchWorkItem {
-                self.nameRegistrationAdapter.lookupName(withAccount: account, nameserver: nameserver, name: name)
+                self.nameRegistrationAdapter.lookupName(
+                    withAccount: account,
+                    nameserver: nameserver,
+                    name: name
+                )
             }
 
             if let lookup = delayedLookupNameCall {
-
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + lookupNameCallDelay, execute: lookup)
+                DispatchQueue.main.asyncAfter(
+                    deadline: DispatchTime.now() + lookupNameCallDelay,
+                    execute: lookup
+                )
             }
         }
     }
@@ -101,20 +105,25 @@ class NameService {
     /// Make an address lookup request to the daemon
     func lookupAddress(withAccount account: String, nameserver: String, address: String) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.nameRegistrationAdapter.lookupAddress(withAccount: account, nameserver: nameserver, address: address)
+            self?.nameRegistrationAdapter.lookupAddress(
+                withAccount: account,
+                nameserver: nameserver,
+                address: address
+            )
         }
     }
 
     /// Register the username into the the blockchain
     func registerName(withAccount account: String, password: String, name: String) {
-        self.nameRegistrationAdapter.registerName(withAccount: account, password: password, name: name)
+        nameRegistrationAdapter.registerName(withAccount: account, password: password, name: name)
     }
 
-    func registerNameObservable(withAccount account: String, password: String, name: String) -> Observable<Bool> {
+    func registerNameObservable(withAccount account: String, password: String,
+                                name: String) -> Observable<Bool> {
         let registerName: Single<Bool> =
-            Single.create(subscribe: { (single) -> Disposable in
+            Single.create(subscribe: { single -> Disposable in
                 let dispatchQueue = DispatchQueue(label: "nameRegistration", qos: .background)
-                dispatchQueue.async {[weak self] in
+                dispatchQueue.async { [weak self] in
                     guard let self = self else { return }
                     self.nameRegistrationAdapter
                         .registerName(withAccount: account,
@@ -122,20 +131,23 @@ class NameService {
                                       name: name)
                     single(.success(true))
                 }
-                return Disposables.create { }
+                return Disposables.create {}
             })
 
-        let filteredDaemonSignals = self.sharedRegistrationStatus
-            .filter({ (serviceEvent) -> Bool in
-                if serviceEvent.getEventInput(ServiceEventInput.accountId) != account { return false }
+        let filteredDaemonSignals = sharedRegistrationStatus
+            .filter { serviceEvent -> Bool in
+                if serviceEvent
+                    .getEventInput(ServiceEventInput.accountId) != account { return false }
                 if serviceEvent.eventType != .nameRegistrationEnded {
                     return false
                 }
                 return true
-            })
+            }
         return Observable
-            .combineLatest(registerName.asObservable(), filteredDaemonSignals.asObservable()) { (_, serviceEvent) -> Bool in
-                guard let status: NameRegistrationState = serviceEvent.getEventInput(ServiceEventInput.state)
+            .combineLatest(registerName.asObservable(),
+                           filteredDaemonSignals.asObservable()) { _, serviceEvent -> Bool in
+                guard let status: NameRegistrationState = serviceEvent
+                        .getEventInput(ServiceEventInput.state)
                 else { return false }
                 switch status {
                 case .success:
@@ -148,15 +160,14 @@ class NameService {
 
     /// Make a user search request to the daemon
     func searchUser(withAccount account: String, query: String) {
-        self.nameRegistrationAdapter.searchUser(withAccount: account, query: query)
+        nameRegistrationAdapter.searchUser(withAccount: account, query: query)
     }
 }
 
 // MARK: NameRegistrationAdapterDelegate
+
 extension NameService: NameRegistrationAdapterDelegate {
-
-    internal func registeredNameFound(with response: LookupNameResponse) {
-
+    func registeredNameFound(with response: LookupNameResponse) {
         if response.state == .notFound {
             usernameValidationStatus.onNext(.valid)
         } else if response.state == .found {
@@ -170,10 +181,11 @@ extension NameService: NameRegistrationAdapterDelegate {
         usernameLookupStatus.onNext(response)
     }
 
-    internal func nameRegistrationEnded(with response: NameRegistrationResponse) {
+    func nameRegistrationEnded(with response: NameRegistrationResponse) {
         if response.state == .success {
             var registeredNames = [String: String]()
-            if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey) as? [String: String] {
+            if let userNameData = UserDefaults.standard
+                .dictionary(forKey: registeredNamesKey) as? [String: String] {
                 registeredNames = userNameData
             }
             registeredNames[response.accountId] = response.name
@@ -185,24 +197,24 @@ extension NameService: NameRegistrationAdapterDelegate {
         var event = ServiceEvent(withEventType: .nameRegistrationEnded)
         event.addEventInput(.state, value: response.state)
         event.addEventInput(.accountId, value: response.accountId)
-        self.registrationStatus.onNext(event)
+        registrationStatus.onNext(event)
     }
 
-    internal func userSearchEnded(with response: UserSearchResponse) {
+    func userSearchEnded(with response: UserSearchResponse) {
         switch response.state {
         case .found:
-            self.userSearchResponseStream.onNext(response)
+            userSearchResponseStream.onNext(response)
         case .invalidName:
-            self.userSearchResponseStream.onNext(response)
-            self.log.warning("User search invalid name")
-        case.notFound:
-            self.userSearchResponseStream.onNext(response)
-            self.log.warning("User search not found")
+            userSearchResponseStream.onNext(response)
+            log.warning("User search invalid name")
+        case .notFound:
+            userSearchResponseStream.onNext(response)
+            log.warning("User search not found")
         case .error:
-            self.userSearchResponseStream.onNext(response)
-            self.log.error("User search error")
+            userSearchResponseStream.onNext(response)
+            log.error("User search error")
         @unknown default:
-            self.log.error("User search unknown default")
+            log.error("User search unknown default")
         }
     }
 }

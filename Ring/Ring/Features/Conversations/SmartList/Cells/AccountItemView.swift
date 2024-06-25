@@ -21,21 +21,20 @@
 import UIKit
 
 class AccountItemView: UIView {
-
     @IBOutlet var containerView: UIView!
-    @IBOutlet weak var avatarView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var needMigrateLabel: UILabel!
+    @IBOutlet var avatarView: UIImageView!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var idLabel: UILabel!
+    @IBOutlet var needMigrateLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.commonInit()
+        commonInit()
     }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        self.commonInit()
+        commonInit()
     }
 
     func commonInit() {

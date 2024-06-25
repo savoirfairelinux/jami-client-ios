@@ -22,12 +22,11 @@ import Foundation
 let enbleNotificationsKey = "EnableUserNotifications"
 
 class LocalNotificationsHelper {
-
     class func isEnabled() -> Bool {
         return UserDefaults.standard.bool(forKey: enbleNotificationsKey)
     }
 
-    class func setNotification (enable: Bool) {
+    class func setNotification(enable: Bool) {
         UserDefaults.standard.setValue(enable, forKey: enbleNotificationsKey)
     }
 }

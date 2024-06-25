@@ -24,7 +24,6 @@
  */
 
 final class SettingsTableView: UITableView {
-
     override var contentOffset: CGPoint {
         didSet {
             if contentOffset.x != 0 && !alwaysBounceHorizontal {
@@ -34,12 +33,12 @@ final class SettingsTableView: UITableView {
         }
     }
 
-    override func scrollRectToVisible(_ rect: CGRect, animated: Bool) {
+    override func scrollRectToVisible(_: CGRect, animated _: Bool) {
         // Don'd do anything here to prevent autoscrolling.
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        self.superview?.touchesBegan(touches, with: event)
+        superview?.touchesBegan(touches, with: event)
     }
 }

@@ -19,7 +19,6 @@
  */
 
 class BannedContactItem {
-
     let contact: ContactModel
     var image: Data?
     var displayName: String?

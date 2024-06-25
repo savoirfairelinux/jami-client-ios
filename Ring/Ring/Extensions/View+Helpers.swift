@@ -18,15 +18,15 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
         alignment: Alignment = .center,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-
+        @ViewBuilder placeholder: () -> Content
+    ) -> some View {
         ZStack(alignment: alignment) {
             self
 
@@ -38,27 +38,32 @@ extension View {
     }
 
     func menuItemStyle() -> some View {
-        self
-            .frame(width: 22, height: 22)
+        frame(width: 22, height: 22)
             .foregroundColor(Color(UIColor.jamiButtonLight))
     }
 
     func measureSize() -> some View {
-        self.modifier(MeasureSizeModifier())
+        modifier(MeasureSizeModifier())
     }
 
     func shadowForConversation() -> some View {
-        self.shadow(color: Color(UIColor.quaternaryLabel), radius: 2, x: 1, y: 2)
+        shadow(color: Color(UIColor.quaternaryLabel), radius: 2, x: 1, y: 2)
     }
 
-    public func border<S>(_ content: S, width: CGFloat = 1, cornerRadius: CGFloat) -> some View where S: ShapeStyle {
+    public func border<S>(_ content: S, width: CGFloat = 1, cornerRadius: CGFloat) -> some View
+    where S: ShapeStyle {
         let roundedRect = RoundedRectangle(cornerRadius: cornerRadius)
         return clipShape(roundedRect)
             .overlay(roundedRect.strokeBorder(content, lineWidth: width))
     }
 
     func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        UIApplication.shared.sendAction(
+            #selector(UIResponder.resignFirstResponder),
+            to: nil,
+            from: nil,
+            for: nil
+        )
     }
 
     func conditionalModifier<T: ViewModifier>(_ modifier: T, apply: Bool) -> some View {
@@ -72,7 +77,7 @@ extension View {
     }
 
     func conditionalCornerRadius(_ radius: CGFloat, apply: Bool) -> some View {
-        self.modifier(ConditionalCornerRadius(radius: radius, apply: apply))
+        modifier(ConditionalCornerRadius(radius: radius, apply: apply))
     }
 
     func applyMessageStyle(model: MessageContentVM) -> some View {
@@ -130,7 +135,7 @@ struct SlideTransition: ViewModifier {
 
 extension View {
     func applySlideTransition(directionUp: Bool) -> some View {
-        self.modifier(SlideTransition(directionUp: directionUp))
+        modifier(SlideTransition(directionUp: directionUp))
     }
 }
 
@@ -148,16 +153,18 @@ struct RowSeparatorHiddenModifier: ViewModifier {
 
 extension View {
     func hideRowSeparator() -> some View {
-        self.modifier(RowSeparatorHiddenModifier())
+        modifier(RowSeparatorHiddenModifier())
     }
 }
 
 extension Publishers {
     static var keyboardHeight: AnyPublisher<CGFloat, Never> {
-        let willShow = NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)
+        let willShow = NotificationCenter.default
+            .publisher(for: UIApplication.keyboardWillShowNotification)
             .map { $0.keyboardHeight }
 
-        let willHide = NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification)
+        let willHide = NotificationCenter.default
+            .publisher(for: UIApplication.keyboardWillHideNotification)
             .map { _ in CGFloat(0) }
 
         return MergeMany(willShow, willHide)

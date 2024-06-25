@@ -25,7 +25,8 @@ let avatarSize: CGFloat = 160
 
 var avatarOffset: CGFloat {
     if UIDevice.current.userInterfaceIdiom == .pad {
-        return UIDevice.current.orientation.isLandscape ? -(screenHeight / 3) + avatarSize : -(screenHeight / 2.5) + avatarSize
+        return UIDevice.current.orientation
+            .isLandscape ? -(screenHeight / 3) + avatarSize : -(screenHeight / 2.5) + avatarSize
     } else {
         return UIDevice.current.orientation.isLandscape ? 0 : -(screenHeight / 3) + avatarSize
     }
@@ -125,7 +126,12 @@ struct ContainerView: View {
                 initialAudioCallView()
             }
             ActionsView(maxHeight: $maxHeight, visible: $buttonsVisible) {
-                BottomSheetContentView(maxHeight: $maxHeight, model: model.actionsViewModel, participants: $model.participants, pending: $model.pending)
+                BottomSheetContentView(
+                    maxHeight: $maxHeight,
+                    model: model.actionsViewModel,
+                    participants: $model.participants,
+                    pending: $model.pending
+                )
             }
         }
         .background(Color.black)
@@ -159,8 +165,10 @@ struct ContainerView: View {
                 showInitialView = false
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-            let orientation = UIDevice.current.orientation.isLandscape ? "landscape" : "portrait"
+        .onReceive(NotificationCenter.default
+                    .publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            let orientation = UIDevice.current.orientation
+                .isLandscape ? "landscape" : "portrait"
             self.audioCallViewIdentifier = "audioCallView_" + orientation
         }
     }

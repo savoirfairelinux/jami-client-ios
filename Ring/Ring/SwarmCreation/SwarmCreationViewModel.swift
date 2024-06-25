@@ -18,28 +18,33 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
 class SwarmCreationViewModel: ViewModel, Stateable {
-
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
+
     let disposeBag = DisposeBag()
     let injectionBag: InjectionBag
 
     private let accountsService: AccountsService
-    var currentAccount: AccountModel? { self.accountsService.currentAccount }
+    var currentAccount: AccountModel? { accountsService.currentAccount }
 
     required init(with injectionBag: InjectionBag) {
-        self.accountsService = injectionBag.accountService
+        accountsService = injectionBag.accountService
         self.injectionBag = injectionBag
     }
 
-    func showConversation(withConversationId conversationId: String, andWithAccountId accountId: String) {
-        self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: false))
+    func showConversation(
+        withConversationId conversationId: String,
+        andWithAccountId accountId: String
+    ) {
+        stateSubject.onNext(ConversationState.openConversationForConversationId(
+            conversationId: conversationId,
+            accountId: accountId,
+            shouldOpenSmarList: false
+        ))
     }
 }

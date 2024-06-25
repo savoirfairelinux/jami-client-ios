@@ -18,11 +18,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import XCTest
 @testable import Ring
+import XCTest
 
 final class SwarmInfoTests: XCTestCase {
-
     var injectionBag: InjectionBag!
     var swarmInfo: SwarmInfo!
 
@@ -39,20 +38,32 @@ final class SwarmInfoTests: XCTestCase {
         let audioService = AudioService(withAudioAdapter: AudioAdapter())
         let systemService = SystemService(withSystemAdapter: SystemAdapter())
         let networkService = NetworkService()
-        let callsProvider: CallsProviderService = CallsProviderService(provider: CXProvider(configuration: CallsHelpers.providerConfiguration()), controller: CXCallController())
-        let callService: CallsService = CallsService(withCallsAdapter: CallsAdapter(), dbManager: dBManager)
-        let accountService: AccountsService = AccountsService(withAccountAdapter: AccountAdapter(), dbManager: dBManager)
-        let contactsService: ContactsService = ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: dBManager)
-        let profileService: ProfilesService =
+        let callsProvider = CallsProviderService(
+            provider: CXProvider(configuration: CallsHelpers.providerConfiguration()),
+            controller: CXCallController()
+        )
+        let callService = CallsService(withCallsAdapter: CallsAdapter(), dbManager: dBManager)
+        let accountService = AccountsService(
+            withAccountAdapter: AccountAdapter(),
+            dbManager: dBManager
+        )
+        let contactsService = ContactsService(
+            withContactsAdapter: ContactsAdapter(),
+            dbManager: dBManager
+        )
+        let profileService =
             ProfilesService(withProfilesAdapter: ProfilesAdapter(), dbManager: dBManager)
-        let dataTransferService: DataTransferService =
+        let dataTransferService =
             DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
                                 dbManager: dBManager)
-        let conversationsService: ConversationsService =
-            ConversationsService(withConversationsAdapter: ConversationsAdapter(), dbManager: dBManager)
-        let locationSharingService: LocationSharingService =
+        let conversationsService =
+            ConversationsService(
+                withConversationsAdapter: ConversationsAdapter(),
+                dbManager: dBManager
+            )
+        let locationSharingService =
             LocationSharingService(dbManager: dBManager)
-        let requestsService: RequestsService =
+        let requestsService =
             RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: dBManager)
 
         injectionBag = InjectionBag(withDaemonService: daemonService,
@@ -90,8 +101,12 @@ final class SwarmInfoTests: XCTestCase {
 
     func testHasParticipantWithRegisteredName_True() {
         // Arrange
-        let participant = createParticipant(jamiId: jamiId1, role: .admin, registeredName: registeredName1,
-                                            profileName: "")
+        let participant = createParticipant(
+            jamiId: jamiId1,
+            role: .admin,
+            registeredName: registeredName1,
+            profileName: ""
+        )
         swarmInfo.participants.accept([participant])
         // Act
         let result = swarmInfo.hasParticipantWithRegisteredName(name: registeredName1)
@@ -101,8 +116,12 @@ final class SwarmInfoTests: XCTestCase {
 
     func testHasParticipantWithRegisteredName_False() {
         // Arrange
-        let participant = createParticipant(jamiId: jamiId1, role: .admin, registeredName: registeredName1,
-                                            profileName: "")
+        let participant = createParticipant(
+            jamiId: jamiId1,
+            role: .admin,
+            registeredName: registeredName1,
+            profileName: ""
+        )
         swarmInfo.participants.accept([participant])
         // Act
         let result = swarmInfo.hasParticipantWithRegisteredName(name: registeredName2)
@@ -112,8 +131,12 @@ final class SwarmInfoTests: XCTestCase {
 
     func testContainsSearchQuery_QuerIsRegisteredName_True() {
         // Arrange
-        let participant = createParticipant(jamiId: jamiId1, role: .admin, registeredName: registeredName1,
-                                            profileName: "")
+        let participant = createParticipant(
+            jamiId: jamiId1,
+            role: .admin,
+            registeredName: registeredName1,
+            profileName: ""
+        )
         swarmInfo.participants.accept([participant])
         // Act
         let result = swarmInfo.contains(searchQuery: registeredName1)

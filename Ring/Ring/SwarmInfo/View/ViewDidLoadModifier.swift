@@ -19,7 +19,6 @@
 import SwiftUI
 
 struct ViewDidLoadModifier: ViewModifier {
-
     @SwiftUI.State private var didLoad = false
     private let action: (() -> Void)?
 
@@ -35,7 +34,6 @@ struct ViewDidLoadModifier: ViewModifier {
             }
         }
     }
-
 }
 
 extension View {

@@ -21,9 +21,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import CoreImage
 import Foundation
 import UIKit
-import CoreImage
 
 // swiftlint:disable identifier_name
 
@@ -37,7 +37,7 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
 
-        self.draw(in: CGRect(origin: CGPoint.zero, size: size), blendMode: .copy, alpha: 1.0)
+        draw(in: CGRect(origin: CGPoint.zero, size: size), blendMode: .copy, alpha: 1.0)
 
         context.setBlendMode(.copy)
         context.setFillColor(UIColor.clear.cgColor)
@@ -62,23 +62,32 @@ extension UIImage {
 
         guard let imageSource = CGImageSourceCreateWithURL(fileURL as CFURL, nil),
               let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options),
-              let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
-              let orientationRawValue = imageProperties[kCGImagePropertyOrientation] as? UInt32 else {
+              let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0,
+                                                                       nil) as? [CFString: Any],
+              let orientationRawValue = imageProperties[kCGImagePropertyOrientation] as? UInt32
+        else {
             return nil
         }
         let orientation = getImageOrientation(from: orientationRawValue)
 
-        return UIImage(cgImage: downsampledImage, scale: UIScreen.main.scale, orientation: orientation)
+        return UIImage(
+            cgImage: downsampledImage,
+            scale: UIScreen.main.scale,
+            orientation: orientation
+        )
     }
 
     func setRoundCorner(radius: CGFloat, offset: CGFloat) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(self.size, false, 0)
-        let bounds = CGRect(origin: .zero, size: self.size)
-        let path = UIBezierPath(roundedRect: bounds.insetBy(dx: offset, dy: offset), cornerRadius: radius)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        let bounds = CGRect(origin: .zero, size: size)
+        let path = UIBezierPath(
+            roundedRect: bounds.insetBy(dx: offset, dy: offset),
+            cornerRadius: radius
+        )
         let context = UIGraphicsGetCurrentContext()
         context?.saveGState()
         path.addClip()
-        self.draw(in: bounds)
+        draw(in: bounds)
         UIColor.jamiMsgBackground.setStroke()
         path.lineWidth = offset * 2
         path.stroke()
@@ -89,7 +98,7 @@ extension UIImage {
 
     // convenience function in UIImage extension to resize a given image
     func convert(toSize targetSize: CGSize, scale: CGFloat) -> UIImage {
-        let widthRatio  = targetSize.width / size.width
+        let widthRatio = targetSize.width / size.width
         let heightRatio = targetSize.height / size.height
 
         // Figure out what our orientation is, and use that to form the rectangle
@@ -103,7 +112,7 @@ extension UIImage {
         // This is the rect that we've calculated out and this is what is actually used below
         let imgRect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: newSize)
         UIGraphicsBeginImageContextWithOptions(newSize, false, scale)
-        self.draw(in: imgRect)
+        draw(in: imgRect)
         guard let copied = UIGraphicsGetImageFromCurrentImageContext() else {
             return self
         }
@@ -113,11 +122,11 @@ extension UIImage {
     }
 
     func convertToData(ofMaxSize maxSize: Int) -> Data? {
-        var imageData = self.jpegData(compressionQuality: 1)
+        var imageData = jpegData(compressionQuality: 1)
         var fileSize = imageData?.count ?? maxSize
         var i = 10
-        while fileSize > maxSize && i >= 0 {
-            imageData = self.jpegData(compressionQuality: CGFloat(0.1 * Double(i)))
+        while fileSize > maxSize, i >= 0 {
+            imageData = jpegData(compressionQuality: CGFloat(0.1 * Double(i)))
             fileSize = imageData?.count ?? maxSize
             i -= 1
         }
@@ -126,7 +135,10 @@ extension UIImage {
 
     func convertToDataForSwarm() -> Data? {
         let maxSize: CGFloat = 1000
-        let image = (self.size.width > maxSize || self.size.height > maxSize) ? self.convert(toSize: CGSize(width: 1000, height: 1000), scale: 1) : self
+        let image = (size.width > maxSize || size.height > maxSize) ? convert(
+            toSize: CGSize(width: 1000, height: 1000),
+            scale: 1
+        ) : self
         return image.convertToData(ofMaxSize: 40000)
     }
 
@@ -143,7 +155,7 @@ extension UIImage {
     }
 
     func resizeIntoRectangle(of size: CGSize) -> UIImage? {
-        if self.size.width < size.width && self.size.height < size.height {
+        if self.size.width < size.width, self.size.height < size.height {
             return self
         }
         if self.size.height == 0 {
@@ -157,10 +169,10 @@ extension UIImage {
             newHeight = newWidth / ratio
         } else if ratio < 1, ratio != 0 {
             // android image orientation bug?
-            if  self.imageOrientation == UIImage.Orientation.right ||
-                    self.imageOrientation == UIImage.Orientation.left ||
-                    self.imageOrientation == UIImage.Orientation.rightMirrored ||
-                    self.imageOrientation == UIImage.Orientation.leftMirrored {
+            if imageOrientation == UIImage.Orientation.right ||
+                imageOrientation == UIImage.Orientation.left ||
+                imageOrientation == UIImage.Orientation.rightMirrored ||
+                imageOrientation == UIImage.Orientation.leftMirrored {
                 newHeight *= ratio
             } else {
                 newWidth = newHeight * ratio
@@ -168,10 +180,10 @@ extension UIImage {
         }
 
         let newSize = CGSize(width: newWidth, height: newHeight)
-        guard let cgImage = self.cgImage else { return self.resizeImageWith(newSize: newSize) }
+        guard let cgImage = cgImage else { return resizeImageWith(newSize: newSize) }
         let bitsPerComponent = cgImage.bitsPerComponent
         let bytesPerRow = cgImage.bytesPerRow
-        guard let colorSpace = cgImage.colorSpace else { return self.resizeImageWith(newSize: newSize) }
+        guard let colorSpace = cgImage.colorSpace else { return resizeImageWith(newSize: newSize) }
         let bitmapInfo = cgImage.bitmapInfo
 
         guard let context = CGContext(data: nil,
@@ -180,19 +192,27 @@ extension UIImage {
                                       bitsPerComponent: bitsPerComponent,
                                       bytesPerRow: bytesPerRow,
                                       space: colorSpace,
-                                      bitmapInfo: bitmapInfo.rawValue) else { return self.resizeImageWith(newSize: newSize) }
+                                      bitmapInfo: bitmapInfo.rawValue)
+        else { return resizeImageWith(newSize: newSize) }
 
         context.interpolationQuality = .high
-        context.draw(cgImage, in: CGRect(origin: .zero, size: CGSize(width: newWidth, height: newHeight)))
-        let image = context.makeImage().flatMap { UIImage(cgImage: $0, scale: self.scale, orientation: self.imageOrientation) }
+        context.draw(
+            cgImage,
+            in: CGRect(origin: .zero, size: CGSize(width: newWidth, height: newHeight))
+        )
+        let image = context.makeImage().flatMap { UIImage(
+            cgImage: $0,
+            scale: self.scale,
+            orientation: self.imageOrientation
+        )
+        }
         if let newImage: UIImage = image {
             return newImage
         }
-        return self.resizeImageWith(newSize: newSize)
+        return resizeImageWith(newSize: newSize)
     }
 
     func getNewSize(of size: CGSize) -> CGSize? {
-
         if self.size.height == 0 {
             return nil
         }
@@ -211,37 +231,49 @@ extension UIImage {
     }
 
     func resizeImageWith(newSize: CGSize, opaque: Bool = true) -> UIImage? {
-        let aspectWidth = newSize.width / self.size.width
-        let aspectHeight = newSize.height / self.size.height
+        let aspectWidth = newSize.width / size.width
+        let aspectHeight = newSize.height / size.height
         let aspectRatio = min(aspectWidth, aspectHeight)
 
-        let scaledSize = CGSize(width: self.size.width * aspectRatio, height: self.size.height * aspectRatio)
+        let scaledSize = CGSize(width: size.width * aspectRatio, height: size.height * aspectRatio)
 
         UIGraphicsBeginImageContextWithOptions(scaledSize, opaque, 0)
-        self.draw(in: CGRect(origin: .zero, size: scaledSize))
+        draw(in: CGRect(origin: .zero, size: scaledSize))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
         return newImage
     }
 
-    func drawText(text: String, backgroundColor: UIColor, textColor: UIColor, size: CGSize, textFontSize: CGFloat? = nil) -> UIImage? {
-        // Setups up the font attributes that will be later used to dictate how the text should be drawn
+    func drawText(
+        text: String,
+        backgroundColor: UIColor,
+        textColor: UIColor,
+        size: CGSize,
+        textFontSize: CGFloat? = nil
+    ) -> UIImage? {
+        // Setups up the font attributes that will be later used to dictate how the text should be
+        // drawn
         let textFontSize = textFontSize == nil ? 20 : textFontSize
         let textFont = UIFont.systemFont(ofSize: textFontSize!, weight: .semibold)
         let textFontAttributes = [
             NSAttributedString.Key.font: textFont,
-            NSAttributedString.Key.foregroundColor: textColor]
+            NSAttributedString.Key.foregroundColor: textColor
+        ]
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         backgroundColor.setFill()
         UIRectFill(rect)
         // Put the image into a rectangle as large as the original image.
-        self.draw(in: rect)
+        draw(in: rect)
         // Our drawing bounds
         let textSize = text.size(withAttributes: [NSAttributedString.Key.font: textFont])
-        let textRect = CGRect(x: rect.size.width / 2 - textSize.width / 2, y: rect.size.height / 2 - textSize.height / 2,
-                              width: textSize.width, height: textSize.height)
+        let textRect = CGRect(
+            x: rect.size.width / 2 - textSize.width / 2,
+            y: rect.size.height / 2 - textSize.height / 2,
+            width: textSize.width,
+            height: textSize.height
+        )
         text.draw(in: textRect, withAttributes: textFontAttributes)
         let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -260,14 +292,14 @@ extension UIImage {
 
     func fillJamiBackgroundColor(inset: CGFloat) -> UIImage {
         let color = UIColor.jamiMain
-        return self.fillBackgroundColor(color: color, inset: inset)
+        return fillBackgroundColor(color: color, inset: inset)
     }
 
     func fillBackgroundColor(color: UIColor, inset: CGFloat) -> UIImage {
-        let newSize = CGSize(width: self.size.width + 2 * inset, height: self.size.height + 2 * inset)
-        let drawingRect = CGRect(x: inset, y: inset, width: self.size.width, height: self.size.height)
+        let newSize = CGSize(width: size.width + 2 * inset, height: size.height + 2 * inset)
+        let drawingRect = CGRect(x: inset, y: inset, width: size.width, height: size.height)
 
-        UIGraphicsBeginImageContextWithOptions(newSize, false, self.scale)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, scale)
 
         let context = UIGraphicsGetCurrentContext()
 
@@ -276,7 +308,7 @@ extension UIImage {
 
         UIColor.white.setFill()
 
-        self.withRenderingMode(.alwaysTemplate).draw(in: drawingRect)
+        withRenderingMode(.alwaysTemplate).draw(in: drawingRect)
 
         let imageWithBackground = UIGraphicsGetImageFromCurrentImageContext()
 
@@ -285,11 +317,22 @@ extension UIImage {
         return imageWithBackground ?? self
     }
 
-    class func defaultJamiAvatarFor(profileName: String?, account: AccountModel?, size: CGFloat, withFontSize fontSize: CGFloat = 14, inset: CGFloat = 4) -> UIImage {
+    class func defaultJamiAvatarFor(
+        profileName: String?,
+        account: AccountModel?,
+        size: CGFloat,
+        withFontSize fontSize: CGFloat = 14,
+        inset: CGFloat = 4
+    ) -> UIImage {
         func generateDefaultImage() -> UIImage {
-            let configuration = UIImage.SymbolConfiguration(pointSize: size, weight: .regular, scale: .medium)
+            let configuration = UIImage.SymbolConfiguration(
+                pointSize: size,
+                weight: .regular,
+                scale: .medium
+            )
             let defaultImage = UIImage(systemName: "person.fill", withConfiguration: configuration)
-            return defaultImage?.fillJamiBackgroundColor(inset: inset).circleMasked ?? defaultImage!.fillJamiBackgroundColor(inset: inset)
+            return defaultImage?.fillJamiBackgroundColor(inset: inset).circleMasked ?? defaultImage!
+                .fillJamiBackgroundColor(inset: inset)
         }
 
         func extractUsername(from profileName: String?, and account: AccountModel?) -> String? {
@@ -298,7 +341,8 @@ extension UIImage {
             } else if let accountName = account?.registeredName, !accountName.isEmpty {
                 return accountName
             } else if let accountID = account?.id,
-                      let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+                      let userNameData = UserDefaults.standard
+                        .dictionary(forKey: registeredNamesKey),
                       let accountName = userNameData[accountID] as? String, !accountName.isEmpty {
                 return accountName
             }
@@ -313,21 +357,26 @@ extension UIImage {
             let fbaBGColor = avatarColors[Int(index)]
 
             if !username.isSHA1() && !username.isEmpty {
-                return UIImage().drawText(text: username.prefixString().capitalized,
-                                          backgroundColor: fbaBGColor,
-                                          textColor: .white,
-                                          size: CGSize(width: size + 8, height: size + 8), textFontSize: fontSize)?.circleMasked
+                return UIImage().drawText(
+                    text: username.prefixString().capitalized,
+                    backgroundColor: fbaBGColor,
+                    textColor: .white,
+                    size: CGSize(width: size + 8, height: size + 8),
+                    textFontSize: fontSize
+                )?.circleMasked
             }
             return nil
         }
 
         let defaultImage = generateDefaultImage()
         guard let account = account else { return defaultImage }
-        guard let username = extractUsername(from: profileName, and: account) else { return defaultImage }
+        guard let username = extractUsername(from: profileName, and: account)
+        else { return defaultImage }
         return generateAvatar(from: username) ?? defaultImage
     }
 
-    class func mergeImages(image1: UIImage, image2: UIImage, spacing: CGFloat = 6, height: CGFloat) -> UIImage {
+    class func mergeImages(image1: UIImage, image2: UIImage, spacing: CGFloat = 6,
+                           height _: CGFloat) -> UIImage {
         let leftImage = image1.splitImage(keepLeft: true)
         let rightImage = image2.splitImage(keepLeft: false)
 
@@ -338,7 +387,12 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
 
         leftImage.draw(in: CGRect(x: 0, y: 0, width: leftImage.size.width, height: height))
-        rightImage.draw(in: CGRect(x: spacing + leftImage.size.width, y: 0, width: rightImage.size.width, height: height))
+        rightImage.draw(in: CGRect(
+            x: spacing + leftImage.size.width,
+            y: 0,
+            width: rightImage.size.width,
+            height: height
+        ))
 
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
@@ -347,16 +401,16 @@ extension UIImage {
     }
 
     func splitImage(keepLeft: Bool) -> UIImage {
-        let imgWidth = self.size.width / 2
-        let imgHeight = self.size.height
+        let imgWidth = size.width / 2
+        let imgHeight = size.height
 
         let left = CGRect(x: 0, y: 0, width: imgWidth, height: imgHeight)
         let right = CGRect(x: imgWidth, y: 0, width: imgWidth, height: imgHeight)
 
         if keepLeft {
-            return UIImage(cgImage: self.cgImage!.cropping(to: left)!)
+            return UIImage(cgImage: cgImage!.cropping(to: left)!)
         } else {
-            return UIImage(cgImage: self.cgImage!.cropping(to: right)!)
+            return UIImage(cgImage: cgImage!.cropping(to: right)!)
         }
     }
 
@@ -368,7 +422,12 @@ extension UIImage {
         if scanner.scanHexInt64(&index) {
             let fbaBGColor = avatarColors[Int(index)]
             if !username.isSHA1() && !username.isEmpty {
-                if let avatar = UIImage().drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: size) {
+                if let avatar = UIImage().drawText(
+                    text: username.prefixString().capitalized,
+                    backgroundColor: fbaBGColor,
+                    textColor: UIColor.white,
+                    size: size
+                ) {
                     return avatar
                 }
             } else {
@@ -378,7 +437,7 @@ extension UIImage {
         return image
     }
 
-    class func createSwarmAvatar(convId: String, size: CGSize) -> UIImage {
+    class func createSwarmAvatar(convId: String, size _: CGSize) -> UIImage {
         let image = UIImage(systemName: "person.2")!
         let scanner = Scanner(string: convId.toMD5HexString().prefixString())
         var index: UInt64 = 0
@@ -395,7 +454,12 @@ extension UIImage {
         if scanner.scanHexInt64(&index) {
             let fbaBGColor = avatarColors[Int(index)]
             if !username.isSHA1() && !username.isEmpty {
-                if let avatar = UIImage().drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: size) {
+                if let avatar = UIImage().drawText(
+                    text: username.prefixString().capitalized,
+                    backgroundColor: fbaBGColor,
+                    textColor: UIColor.white,
+                    size: size
+                ) {
                     return avatar
                 }
             } else {
@@ -449,10 +513,10 @@ extension UIImage {
     }
 
     func fillPartOfImage(frame: CGRect, with color: UIColor) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
         if let context = UIGraphicsGetCurrentContext() {
             let rect = CGRect(origin: .zero, size: size)
-            self.draw(in: rect)
+            draw(in: rect)
             context.setBlendMode(CGBlendMode.normal)
             context.setFillColor(color.cgColor)
             context.fill(frame)
@@ -483,13 +547,16 @@ extension UIImage {
         let squareImage = cropImage(to: squareRect) ?? self
         // Resize if the cropped square is larger than the max size
         if sideLength > Constants.MAX_PROFILE_IMAGE_SIZE {
-            return resizeImageWith(newSize: CGSize(width: Constants.MAX_PROFILE_IMAGE_SIZE, height: Constants.MAX_PROFILE_IMAGE_SIZE))
+            return resizeImageWith(newSize: CGSize(
+                width: Constants.MAX_PROFILE_IMAGE_SIZE,
+                height: Constants.MAX_PROFILE_IMAGE_SIZE
+            ))
         }
         return squareImage
     }
 
     func cropImage(to rect: CGRect) -> UIImage? {
-        guard let cgImage = self.cgImage?.cropping(to: rect) else { return nil }
+        guard let cgImage = cgImage?.cropping(to: rect) else { return nil }
         return UIImage(cgImage: cgImage)
     }
 }

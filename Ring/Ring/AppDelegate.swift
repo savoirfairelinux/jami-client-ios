@@ -22,12 +22,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import SwiftyBeaver
-import RxSwift
-import PushKit
 import ContactsUI
 import os
+import PushKit
+import RxSwift
+import SwiftyBeaver
+import UIKit
 
 // swiftlint:disable identifier_name type_body_length
 @UIApplicationMain
@@ -44,35 +44,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
     private let systemService = SystemService(withSystemAdapter: SystemAdapter())
     private let networkService = NetworkService()
-    private let callsProvider: CallsProviderService = CallsProviderService(provider: CXProvider(configuration: CallsHelpers.providerConfiguration()), controller: CXCallController())
+    private let callsProvider: CallsProviderService = .init(
+        provider: CXProvider(configuration: CallsHelpers.providerConfiguration()),
+        controller: CXCallController()
+    )
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
     private var videoManager: VideoManager?
-    private lazy var callService: CallsService = {
-        CallsService(withCallsAdapter: CallsAdapter(), dbManager: self.dBManager)
-    }()
-    private lazy var accountService: AccountsService = {
-        AccountsService(withAccountAdapter: AccountAdapter(), dbManager: self.dBManager)
-    }()
-    private lazy var contactsService: ContactsService = {
-        ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: self.dBManager)
-    }()
-    private lazy var profileService: ProfilesService = {
-        ProfilesService(withProfilesAdapter: ProfilesAdapter(), dbManager: self.dBManager)
-    }()
-    private lazy var dataTransferService: DataTransferService = {
-        DataTransferService(withDataTransferAdapter: DataTransferAdapter(),
-                            dbManager: self.dBManager)
-    }()
-    private lazy var conversationsService: ConversationsService = {
-        ConversationsService(withConversationsAdapter: ConversationsAdapter(), dbManager: self.dBManager)
-    }()
-    private lazy var locationSharingService: LocationSharingService = {
-        LocationSharingService(dbManager: self.dBManager)
-    }()
-    private lazy var requestsService: RequestsService = {
-        RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: self.dBManager)
-    }()
+    private lazy var callService: CallsService = .init(
+        withCallsAdapter: CallsAdapter(),
+        dbManager: self.dBManager
+    )
+
+    private lazy var accountService: AccountsService = .init(
+        withAccountAdapter: AccountAdapter(),
+        dbManager: self.dBManager
+    )
+
+    private lazy var contactsService: ContactsService = .init(
+        withContactsAdapter: ContactsAdapter(),
+        dbManager: self.dBManager
+    )
+
+    private lazy var profileService: ProfilesService = .init(
+        withProfilesAdapter: ProfilesAdapter(),
+        dbManager: self.dBManager
+    )
+
+    private lazy var dataTransferService: DataTransferService = .init(
+        withDataTransferAdapter: DataTransferAdapter(),
+        dbManager: self.dBManager
+    )
+
+    private lazy var conversationsService: ConversationsService = .init(
+        withConversationsAdapter: ConversationsAdapter(),
+        dbManager: self.dBManager
+    )
+
+    private lazy var locationSharingService: LocationSharingService =
+        .init(dbManager: self.dBManager)
+
+    private lazy var requestsService: RequestsService = .init(
+        withRequestsAdapter: RequestsAdapter(),
+        dbManager: self.dBManager
+    )
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
     /*
@@ -81,45 +96,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
      */
     private var presentingCallScreen = false
 
-    lazy var injectionBag: InjectionBag = {
-        return InjectionBag(withDaemonService: self.daemonService,
-                            withAccountService: self.accountService,
-                            withNameService: self.nameService,
-                            withConversationService: self.conversationsService,
-                            withContactsService: self.contactsService,
-                            withPresenceService: self.presenceService,
-                            withNetworkService: self.networkService,
-                            withCallService: self.callService,
-                            withVideoService: self.videoService,
-                            withAudioService: self.audioService,
-                            withDataTransferService: self.dataTransferService,
-                            withProfileService: self.profileService,
-                            withCallsProvider: self.callsProvider,
-                            withLocationSharingService: self.locationSharingService,
-                            withRequestsService: self.requestsService,
-                            withSystemService: self.systemService)
-    }()
-    private lazy var appCoordinator: AppCoordinator = {
-        return AppCoordinator(with: self.injectionBag)
-    }()
+    lazy var injectionBag: InjectionBag = .init(withDaemonService: self.daemonService,
+                                                withAccountService: self.accountService,
+                                                withNameService: self.nameService,
+                                                withConversationService: self.conversationsService,
+                                                withContactsService: self.contactsService,
+                                                withPresenceService: self.presenceService,
+                                                withNetworkService: self.networkService,
+                                                withCallService: self.callService,
+                                                withVideoService: self.videoService,
+                                                withAudioService: self.audioService,
+                                                withDataTransferService: self.dataTransferService,
+                                                withProfileService: self.profileService,
+                                                withCallsProvider: self.callsProvider,
+                                                withLocationSharingService: self
+                                                    .locationSharingService,
+                                                withRequestsService: self.requestsService,
+                                                withSystemService: self.systemService)
+
+    private lazy var appCoordinator: AppCoordinator = .init(with: self.injectionBag)
 
     private let log = SwiftyBeaver.self
 
     private let disposeBag = DisposeBag()
 
     private let center = CFNotificationCenterGetDarwinNotifyCenter()
-    private static let shouldHandleNotification = NSNotification.Name("com.savoirfairelinux.jami.shouldHandleNotification")
+    private static let shouldHandleNotification = NSNotification
+        .Name("com.savoirfairelinux.jami.shouldHandleNotification")
     private let backgrounTaskQueue = DispatchQueue(label: "backgrounTaskQueue")
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+    func application(
+        _: UIApplication,
+        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         // ignore sigpipe
         typealias SigHandler = @convention(c) (Int32) -> Void
         let SIG_IGN = unsafeBitCast(OpaquePointer(bitPattern: 1), to: SigHandler.self)
         signal(SIGPIPE, SIG_IGN)
         // swiftlint:enable nesting
 
-        self.window = UIWindow(frame: UIScreen.main.bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         if UserDefaults.standard.value(forKey: automaticDownloadFilesKey) == nil {
@@ -135,69 +151,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         log.removeAllDestinations()
         #endif
 
-        // move files from the app container to the group container, so it could be accessed by notification extension
-        if !self.moveDataToGroupContainer() {
-            self.window?.rootViewController = self.appCoordinator.rootViewController
-            self.window?.makeKeyAndVisible()
-            let alertController = UIAlertController(title: "There was an error starting Jami", message: "Please try again", preferredStyle: .alert)
+        // move files from the app container to the group container, so it could be accessed by
+        // notification extension
+        if !moveDataToGroupContainer() {
+            window?.rootViewController = appCoordinator.rootViewController
+            window?.makeKeyAndVisible()
+            let alertController = UIAlertController(
+                title: "There was an error starting Jami",
+                message: "Please try again",
+                preferredStyle: .alert
+            )
             let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default)
             alertController.addAction(okAction)
-            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+            window?.rootViewController?.present(alertController, animated: true, completion: nil)
             return true
         }
         PreferenceManager.registerDonationsDefaults()
 
-        self.addListenerForNotification()
+        addListenerForNotification()
 
         // starts the daemon
-        self.startDaemon()
+        startDaemon()
 
         // requests permission to use the camera
         // will enumerate and add devices once permission has been granted
-        self.videoService.setupInputs()
+        videoService.setupInputs()
 
-        self.audioService.connectAudioSignal()
+        audioService.connectAudioSignal()
 
         // Observe connectivity changes and reconnect DHT
-        self.networkService.connectionStateObservable
+        networkService.connectionStateObservable
             .skip(1)
             .subscribe(onNext: { _ in
                 self.daemonService.connectivityChanged()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         // start monitoring for network changes
-        self.networkService.monitorNetworkType()
+        networkService.monitorNetworkType()
 
-        self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
-                                                                requestsService: self.requestsService,
-                                                                conversationService: self.conversationsService,
-                                                                callService: self.callService)
+        interactionsManager = GeneratedInteractionsManager(accountService: accountService,
+                                                           requestsService: requestsService,
+                                                           conversationService: conversationsService,
+                                                           callService: callService)
 
         // load accounts during splashscreen
         // and ask the AppCoordinator to handle the first screen once loading is finished
-        self.conversationManager = ConversationsManager(with: self.conversationsService,
-                                                        accountsService: self.accountService,
-                                                        nameService: self.nameService,
-                                                        dataTransferService: self.dataTransferService,
-                                                        callService: self.callService,
-                                                        locationSharingService: self.locationSharingService, contactsService: self.contactsService,
-                                                        callsProvider: self.callsProvider, requestsService: self.requestsService, profileService: self.profileService)
-        self.videoManager = VideoManager(with: self.callService, videoService: self.videoService)
-        self.window?.rootViewController = self.appCoordinator.rootViewController
-        self.window?.makeKeyAndVisible()
+        conversationManager = ConversationsManager(with: conversationsService,
+                                                   accountsService: accountService,
+                                                   nameService: nameService,
+                                                   dataTransferService: dataTransferService,
+                                                   callService: callService,
+                                                   locationSharingService: locationSharingService,
+                                                   contactsService: contactsService,
+                                                   callsProvider: callsProvider,
+                                                   requestsService: requestsService,
+                                                   profileService: profileService)
+        videoManager = VideoManager(with: callService, videoService: videoService)
+        window?.rootViewController = appCoordinator.rootViewController
+        window?.makeKeyAndVisible()
 
         prepareVideoAcceleration()
         prepareAccounts()
-        self.voipRegistry.delegate = self
+        voipRegistry.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(registerNotifications),
-                                               name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
+                                               name: NSNotification
+                                                .Name(rawValue: NotificationName
+                                                        .enablePushNotifications.rawValue),
                                                object: nil)
-        self.clearBadgeNumber()
-        if let path = self.certificatePath() {
+        clearBadgeNumber()
+        if let path = certificatePath() {
             setenv("CA_ROOT_FILE", path, 1)
         }
-        self.window?.backgroundColor = UIColor.systemBackground
+        window?.backgroundColor = UIColor.systemBackground
         return true
     }
 
@@ -208,8 +234,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         guard let groupDocUrl = Constants.documentsPath,
               let groupCachesUrl = Constants.cachesPath,
-              let appDocURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
-              let appLibrURL = try? FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
+              let appDocURL = try? FileManager.default.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: false
+              ),
+              let appLibrURL = try? FileManager.default.url(
+                for: .libraryDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: false
+              )
+        else {
             return false
         }
         if FileManager.default.fileExists(atPath: groupDocUrl.path) {
@@ -243,10 +280,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
                                                name: AppDelegate.shouldHandleNotification,
                                                object: nil)
-        CFNotificationCenterAddObserver(self.center,
-                                        nil, { (_, _, _, _, _) in
-                                            // emit signal so notification could be handeled by daemon
-                                            NotificationCenter.default.post(name: AppDelegate.shouldHandleNotification, object: nil, userInfo: nil)
+        CFNotificationCenterAddObserver(center,
+                                        nil, { _, _, _, _, _ in
+                                            // emit signal so notification could be handeled by
+                                            // daemon
+                                            NotificationCenter.default.post(
+                                                name: AppDelegate.shouldHandleNotification,
+                                                object: nil,
+                                                userInfo: nil
+                                            )
                                         },
                                         Constants.notificationReceived,
                                         nil,
@@ -256,13 +298,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func certificatePath() -> String? {
         let fileName = "cacert"
         let filExtension = "pem"
-        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
-        let certPath = documentsURL.appendingPathComponent(fileName).appendingPathExtension(filExtension)
+        guard let documentsURL = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first else { return nil }
+        let certPath = documentsURL.appendingPathComponent(fileName)
+            .appendingPathExtension(filExtension)
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: certPath.path) {
             return certPath.path
         }
-        guard let certSource = Bundle.main.url(forResource: fileName, withExtension: filExtension) else {
+        guard let certSource = Bundle.main.url(forResource: fileName, withExtension: filExtension)
+        else {
             return nil
         }
         do {
@@ -274,15 +321,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func prepareAccounts() {
-        self.accountService
+        accountService
             .needMigrateCurrentAccount
             .subscribe(onNext: { account in
                 DispatchQueue.main.async {
                     self.appCoordinator.migrateAccount(accountId: account)
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.accountService.initialAccountsLoading()
+            .disposed(by: disposeBag)
+        accountService.initialAccountsLoading()
             .subscribe(onCompleted: {
                 // set selected account if exists
                 self.appCoordinator.start()
@@ -309,7 +356,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 } else {
                     self.unregisterNotifications()
                 }
-                if let selectedAccountId = UserDefaults.standard.string(forKey: self.accountService.selectedAccountID),
+                if let selectedAccountId = UserDefaults.standard
+                    .string(forKey: self.accountService.selectedAccountID),
                    let account = self.accountService.getAccount(fromAccountId: selectedAccountId) {
                     self.accountService.currentAccount = account
                 }
@@ -317,7 +365,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     self.log.error("Can't get current account!")
                     return
                 }
-                DispatchQueue.global(qos: .background).async {[weak self] in
+                DispatchQueue.global(qos: .background).async { [weak self] in
                     guard let self = self else { return }
                     self.reloadDataFor(account: currentAccount)
                 }
@@ -328,63 +376,87 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     self.appCoordinator.showDatabaseError()
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.accountService.currentWillChange
+        accountService.currentWillChange
             .subscribe(onNext: { account in
                 guard let currentAccount = account else { return }
                 self.conversationsService.clearConversationsData(accountId: currentAccount.id)
-                self.presenceService.subscribeBuddies(withAccount: currentAccount.id, withContacts: self.contactsService.contacts.value, subscribe: false)
+                self.presenceService.subscribeBuddies(
+                    withAccount: currentAccount.id,
+                    withContacts: self.contactsService.contacts.value,
+                    subscribe: false
+                )
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.accountService.currentAccountChanged
+        accountService.currentAccountChanged
             .subscribe(onNext: { account in
                 guard let currentAccount = account else { return }
                 self.reloadDataFor(account: currentAccount)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func updateCallScreenState(presenting: Bool) {
-        self.presentingCallScreen = presenting
+        presentingCallScreen = presenting
     }
 
     func reloadDataFor(account: AccountModel) {
-        self.requestsService.loadRequests(withAccount: account.id, accountURI: account.jamiId)
-        self.conversationManager?
+        requestsService.loadRequests(withAccount: account.id, accountURI: account.jamiId)
+        conversationManager?
             .prepareConversationsForAccount(accountId: account.id, accountURI: account.jamiId)
-        self.contactsService.loadContacts(withAccount: account)
-        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+        contactsService.loadContacts(withAccount: account)
+        presenceService.subscribeBuddies(
+            withAccount: account.id,
+            withContacts: contactsService.contacts.value,
+            subscribe: true
+        )
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        self.log.warning("entering background")
-        guard let account = self.accountService.currentAccount else { return }
-        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: false)
+    func applicationDidEnterBackground(_: UIApplication) {
+        log.warning("entering background")
+        guard let account = accountService.currentAccount else { return }
+        presenceService.subscribeBuddies(
+            withAccount: account.id,
+            withContacts: contactsService.contacts.value,
+            subscribe: false
+        )
     }
 
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        self.log.warning("entering foreground")
-        self.updateNotificationAvailability()
-        guard let account = self.accountService.currentAccount else { return }
-        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+    func applicationWillEnterForeground(_: UIApplication) {
+        log.warning("entering foreground")
+        updateNotificationAvailability()
+        guard let account = accountService.currentAccount else { return }
+        presenceService.subscribeBuddies(
+            withAccount: account.id,
+            withContacts: contactsService.contacts.value,
+            subscribe: true
+        )
     }
 
-    func applicationWillTerminate(_ application: UIApplication) {
-        self.callsProvider.stopAllUnhandeledCalls()
-        self.stopDaemon()
+    func applicationWillTerminate(_: UIApplication) {
+        callsProvider.stopAllUnhandeledCalls()
+        stopDaemon()
     }
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        self.clearBadgeNumber()
-        guard let account = self.accountService.currentAccount else { return }
-        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+    func applicationDidBecomeActive(_: UIApplication) {
+        clearBadgeNumber()
+        guard let account = accountService.currentAccount else { return }
+        presenceService.subscribeBuddies(
+            withAccount: account.id,
+            withContacts: contactsService.contacts.value,
+            subscribe: true
+        )
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        guard let account = self.accountService.currentAccount else { return }
-        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: false)
+    func applicationWillResignActive(_: UIApplication) {
+        guard let account = accountService.currentAccount else { return }
+        presenceService.subscribeBuddies(
+            withAccount: account.id,
+            withContacts: contactsService.contacts.value,
+            subscribe: false
+        )
     }
 
     func prepareVideoAcceleration() {
@@ -392,13 +464,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // means it was not disabled by user
         let keyExists = UserDefaults.standard.object(forKey: hardareAccelerationKey) != nil
         let enable = keyExists ? UserDefaults.standard.bool(forKey: hardareAccelerationKey) : true
-        self.videoService.setHardwareAccelerated(withState: enable)
+        videoService.setHardwareAccelerated(withState: enable)
     }
 
     // MARK: - Ring Daemon
+
     private func startDaemon() {
         do {
-            try self.daemonService.startDaemon()
+            try daemonService.startDaemon()
         } catch StartDaemonError.initializationFailure {
             log.error("Daemon failed to initialize.")
         } catch StartDaemonError.startFailure {
@@ -412,7 +485,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private func stopDaemon() {
         do {
-            try self.daemonService.stopDaemon()
+            try daemonService.stopDaemon()
         } catch StopDaemonError.daemonNotRunning {
             log.error("Daemon failed to stop because it was not already running.")
         } catch {
@@ -443,17 +516,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     @objc
     private func handleNotification() {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            // If the app is running in the background and there are no waiting calls, the extension should handle the notification.
-            if UIApplication.shared.applicationState == .background && !self.presentingCallScreen && !self.callsProvider.hasActiveCalls() {
+            // If the app is running in the background and there are no waiting calls, the extension
+            // should handle the notification.
+            if UIApplication.shared.applicationState == .background && !self
+                .presentingCallScreen && !self.callsProvider.hasActiveCalls() {
                 return
             }
             // emit signal that app is active for notification extension
-            CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFNotificationName(Constants.notificationAppIsActive), nil, nil, true)
+            CFNotificationCenterPostNotification(
+                CFNotificationCenterGetDarwinNotifyCenter(),
+                CFNotificationName(Constants.notificationAppIsActive),
+                nil,
+                nil,
+                true
+            )
 
             guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier),
-                  let notificationData = userDefaults.object(forKey: Constants.notificationData) as? [[String: String]] else {
+                  let notificationData = userDefaults
+                    .object(forKey: Constants.notificationData) as? [[String: String]]
+            else {
                 return
             }
             userDefaults.set([[String: String]](), forKey: Constants.notificationData)
@@ -465,33 +548,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     @objc
     private func registerNotifications() {
-        self.requestNotificationAuthorization()
+        requestNotificationAuthorization()
         DispatchQueue.main.async {
             UIApplication.shared.registerForRemoteNotifications()
         }
-        self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
+        voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
     }
 
     private func unregisterNotifications() {
         DispatchQueue.main.async {
             UIApplication.shared.unregisterForRemoteNotifications()
         }
-        self.voipRegistry.desiredPushTypes = nil
-        self.accountService.setPushNotificationToken(token: "")
+        voipRegistry.desiredPushTypes = nil
+        accountService.setPushNotificationToken(token: "")
     }
 
     private func requestNotificationAuthorization() {
         let application = UIApplication.shared
         DispatchQueue.main.async {
-            UNUserNotificationCenter.current().delegate = application.delegate as? UNUserNotificationCenterDelegate
+            UNUserNotificationCenter.current().delegate = application
+                .delegate as? UNUserNotificationCenterDelegate
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { (enable, _) in
-                if enable {
-                    LocalNotificationsHelper.setNotification(enable: true)
-                } else {
-                    LocalNotificationsHelper.setNotification(enable: false)
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: { enable, _ in
+                    if enable {
+                        LocalNotificationsHelper.setNotification(enable: true)
+                    } else {
+                        LocalNotificationsHelper.setNotification(enable: false)
+                    }
                 }
-            })
+            )
         }
     }
 
@@ -505,27 +592,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         center.removeAllDeliveredNotifications()
         center.removeAllPendingNotificationRequests()
     }
-
 }
 
 // MARK: notification actions
-extension AppDelegate {
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+extension AppDelegate {
+    func userNotificationCenter(
+        _: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
         let data = response.notification.request.content.userInfo
-        self.handleNotificationActions(data: data)
+        handleNotificationActions(data: data)
         completionHandler()
     }
 
     func handleNotificationActions(data: [AnyHashable: Any]) {
-        guard let accountId = data[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String,
-              let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
-        self.accountService.updateCurrentAccount(account: account)
-        if let conversationId = data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String {
-            self.conversationsService.updateConversationMessages(conversationId: conversationId)
-            self.appCoordinator.openConversation(conversationId: conversationId, accountId: accountId)
-        } else if let participantID = data[Constants.NotificationUserInfoKeys.participantID.rawValue] as? String {
-            self.appCoordinator.openConversation(participantID: participantID)
+        guard let accountId =
+                data[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String,
+              let account = accountService.getAccount(fromAccountId: accountId) else { return }
+        accountService.updateCurrentAccount(account: account)
+        if let conversationId =
+            data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String {
+            conversationsService.updateConversationMessages(conversationId: conversationId)
+            appCoordinator.openConversation(conversationId: conversationId, accountId: accountId)
+        } else if let participantID =
+                    data[Constants.NotificationUserInfoKeys.participantID.rawValue] as? String {
+            appCoordinator.openConversation(participantID: participantID)
         }
     }
 
@@ -533,37 +626,45 @@ extension AppDelegate {
         // if saved jami hash
         if hash.isSHA1() {
             let contactUri = JamiURI(schema: URIType.ring, infoHash: hash)
-            self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
+            findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
             return
         }
         // if saved jami registered name
-        self.nameService.usernameLookupStatus
+        nameService.usernameLookupStatus
             .observe(on: MainScheduler.instance)
-            .filter({ usernameLookupStatus in
+            .filter { usernameLookupStatus in
                 usernameLookupStatus.name == hash
-            })
+            }
             .take(1)
             .subscribe(onNext: { usernameLookupStatus in
                 if usernameLookupStatus.state == .found {
                     guard let address = usernameLookupStatus.address else { return }
                     let contactUri = JamiURI(schema: URIType.ring, infoHash: address)
-                    self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
+                    self.findAccountAndStartCall(
+                        uri: contactUri,
+                        isVideo: isVideo,
+                        type: AccountType.ring
+                    )
                 } else {
                     // if saved sip contact
                     let contactUri = JamiURI(schema: URIType.sip, infoHash: hash)
-                    self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.sip)
+                    self.findAccountAndStartCall(
+                        uri: contactUri,
+                        isVideo: isVideo,
+                        type: AccountType.sip
+                    )
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.nameService.lookupName(withAccount: "", nameserver: "", name: hash)
+            .disposed(by: disposeBag)
+        nameService.lookupName(withAccount: "", nameserver: "", name: hash)
     }
 
     func findAccountAndStartCall(uri: JamiURI, isVideo: Bool, type: AccountType) {
-        guard let currentAccount = self.accountService
+        guard let currentAccount = accountService
                 .currentAccount else { return }
         var hash = uri.hash ?? ""
         var uriString = uri.uriString ?? ""
-        for account in self.accountService.accounts where account.type == type {
+        for account in accountService.accounts where account.type == type {
             if type == AccountType.sip {
                 let conatactUri = JamiURI(schema: URIType.sip,
                                           infoHash: hash,
@@ -575,7 +676,7 @@ extension AppDelegate {
             self.contactsService
                 .getProfileForUri(uri: uriString,
                                   accountId: account.id)
-                .subscribe(onNext: { (profile) in
+                .subscribe(onNext: { profile in
                     if currentAccount != account {
                         self.accountService.currentAccount = account
                     }
@@ -588,10 +689,10 @@ extension AppDelegate {
         }
     }
 
-    func application(_ application: UIApplication,
+    func application(_: UIApplication,
                      continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        if self.accountService.boothMode() {
+                     restorationHandler _: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if accountService.boothMode() {
             return false
         }
         /*
@@ -600,30 +701,30 @@ extension AppDelegate {
          Othervise it was called from Contacts app.
          We need find contact and start a call
          */
-        if self.callsProvider.hasActiveCalls() { return false }
+        if callsProvider.hasActiveCalls() { return false }
         guard let handle = userActivity.startCallHandle else {
             return false
         }
-        self.findContactAndStartCall(hash: handle.hash, isVideo: handle.isVideo)
+        findContactAndStartCall(hash: handle.hash, isVideo: handle.isVideo)
         return true
     }
 }
 
 // MARK: user notifications
+
 extension AppDelegate {
-    func application(_ application: UIApplication,
-                     didRegisterForRemoteNotificationsWithDeviceToken
-                        deviceToken: Data) {
+    func application(_: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print(deviceTokenString)
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
-            self.accountService.setPushNotificationTopic(topic: bundleIdentifier)
+            accountService.setPushNotificationTopic(topic: bundleIdentifier)
         }
-        self.accountService.setPushNotificationToken(token: deviceTokenString)
+        accountService.setPushNotificationToken(token: deviceTokenString)
     }
 
     func application(
-        _ application: UIApplication,
+        _: UIApplication,
         didReceiveRemoteNotification userInfo: [AnyHashable: Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
@@ -635,22 +736,31 @@ extension AppDelegate {
                 dictionary[keyString] = valueString
             }
         }
-        self.accountService.pushNotificationReceived(data: dictionary)
+        accountService.pushNotificationReceived(data: dictionary)
         completionHandler(.newData)
     }
 }
 
 // MARK: PKPushRegistryDelegate
-extension AppDelegate: PKPushRegistryDelegate {
-    func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
-    }
 
-    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
-        self.updateCallScreenState(presenting: true)
+extension AppDelegate: PKPushRegistryDelegate {
+    func pushRegistry(_: PKPushRegistry, didUpdate _: PKPushCredentials, for _: PKPushType) {}
+
+    func pushRegistry(
+        _: PKPushRegistry,
+        didReceiveIncomingPushWith payload: PKPushPayload,
+        for _: PKPushType,
+        completion: @escaping () -> Void
+    ) {
+        updateCallScreenState(presenting: true)
         let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
         let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
         let displayName = payload.dictionaryPayload["displayName"] as? String ?? ""
-        callsProvider.previewPendingCall(peerId: peerId, withVideo: hasVideo.boolValue, displayName: displayName) { error in
+        callsProvider.previewPendingCall(
+            peerId: peerId,
+            withVideo: hasVideo.boolValue,
+            displayName: displayName
+        ) { error in
             if error != nil {
                 self.updateCallScreenState(presenting: false)
             }

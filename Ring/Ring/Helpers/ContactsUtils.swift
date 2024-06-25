@@ -20,8 +20,8 @@
 import Foundation
 
 class ContactsUtils {
-
-    class func getFinalNameFrom(registeredName: String, profileName: String, hash: String) -> String {
+    class func getFinalNameFrom(registeredName: String, profileName: String,
+                                hash: String) -> String {
         // priority: 1. profileName, 2. registeredName, 3. hash
         if registeredName.isEmpty && profileName.isEmpty {
             return hash
@@ -32,7 +32,8 @@ class ContactsUtils {
         return registeredName
     }
 
-    class func deserializeUser(dictionary: [String: String]) -> JamiSearchViewModel.JamsUserSearchModel? {
+    class func deserializeUser(dictionary: [String: String]) -> JamiSearchViewModel
+    .JamsUserSearchModel? {
         guard let username = dictionary["username"],
               let firstName = dictionary["firstName"],
               let lastName = dictionary["lastName"],
@@ -40,7 +41,10 @@ class ContactsUtils {
               let jamiId = dictionary["id"] ?? dictionary["jamiId"],
               let base64Encoded = dictionary["profilePicture"]
         else { return nil }
-        let imageData = NSData(base64Encoded: base64Encoded, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+        let imageData = NSData(
+            base64Encoded: base64Encoded,
+            options: NSData.Base64DecodingOptions.ignoreUnknownCharacters
+        ) as Data?
         return JamiSearchViewModel.JamsUserSearchModel(username: username,
                                                        firstName: firstName,
                                                        lastName: lastName,
@@ -48,5 +52,4 @@ class ContactsUtils {
                                                        jamiId: jamiId,
                                                        profilePicture: imageData)
     }
-
 }

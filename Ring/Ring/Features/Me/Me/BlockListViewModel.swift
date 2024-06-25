@@ -19,69 +19,62 @@
  */
 
 import Reusable
-import RxSwift
 import RxRelay
+import RxSwift
 
 class BlockListViewModel: ViewModel {
-
     let contactService: ContactsService
     let accountService: AccountsService
     let nameService: NameService
     let disposeBag = DisposeBag()
 
-    lazy var currentAccountId: String? = {
-        return self.accountService.currentAccount?.id
-    }()
+    lazy var currentAccountId: String? = self.accountService.currentAccount?.id
 
-    lazy var blockedContactsItems: Observable<[BannedContactItem]> = {
-        return self.contacts.asObservable().map({ [weak self] contacts in
+    lazy var blockedContactsItems: Observable<[BannedContactItem]> = self.contacts.asObservable()
+        .map { [weak self] contacts in
             var bannedItems = [BannedContactItem]()
             _ = contacts.filter { contact in contact.banned }
-                .map({ contact in
-                    let items = self?.initialItems.filter({ item in
-                        return item.contact.hash == contact.hash
-                    })
+                .map { contact in
+                    let items = self?.initialItems.filter { item in
+                        item.contact.hash == contact.hash
+                    }
                     if let first = items?.first {
                         bannedItems.append(first)
                     }
-                })
+                }
             return bannedItems
-        })
-    }()
+        }
 
-    lazy var contacts: BehaviorRelay<[ContactModel]> = {
-        return self.contactService.contacts
-    }()
+    lazy var contacts: BehaviorRelay<[ContactModel]> = self.contactService.contacts
 
-    lazy var contactListNotEmpty: Observable<Bool> = {
-        return self.contacts.asObservable()
-            .map({ contacts in
-                return contacts.filter { contact in contact.banned }
-            })
-            .map({ contacts in
-                return !contacts.isEmpty
-            })
-    }()
+    lazy var contactListNotEmpty: Observable<Bool> = self.contacts.asObservable()
+        .map { contacts in
+            contacts.filter { contact in contact.banned }
+        }
+        .map { contacts in
+            !contacts.isEmpty
+        }
 
     // create list of banned items with photo and name
     lazy var initialItems: [BannedContactItem] = {
         guard let accountId = currentAccountId else { return [BannedContactItem]() }
         return self.contactService.contacts.value
-            .filter({ contact in contact.banned })
+            .filter { contact in contact.banned }
             .map { contact in
                 var item = BannedContactItem(withContact: contact)
                 if let uri = contact.uriString {
                     self.contactService.getProfileForUri(uri: uri,
                                                          accountId: accountId)
                         .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                        .subscribe(onNext: { (profile) in
+                        .subscribe(onNext: { profile in
                             item.displayName = profile.alias
                             guard let photo = profile.photo else {
                                 return
                             }
                             guard let data = NSData(base64Encoded: photo,
                                                     options: NSData.Base64DecodingOptions
-                                                        .ignoreUnknownCharacters) as Data? else {
+                                                        .ignoreUnknownCharacters) as Data?
+                            else {
                                 return
                             }
                             item.image = data
@@ -90,32 +83,36 @@ class BlockListViewModel: ViewModel {
                 }
                 if contact.userName == nil || contact.userName! == "" {
                     self.nameService.usernameLookupStatus.single()
-                        .filter({ lookupNameResponse in
-                            return lookupNameResponse.address != nil &&
+                        .filter { lookupNameResponse in
+                            lookupNameResponse.address != nil &&
                                 lookupNameResponse.address == contact.hash
-                        })
-                        .subscribe(onNext: {lookupNameResponse in
+                        }
+                        .subscribe(onNext: { lookupNameResponse in
                             if let name = lookupNameResponse.name, !name.isEmpty {
                                 contact.userName = name
                             }
                         })
                         .disposed(by: self.disposeBag)
-                    self.nameService.lookupAddress(withAccount: accountId, nameserver: "", address: contact.hash)
+                    self.nameService.lookupAddress(
+                        withAccount: accountId,
+                        nameserver: "",
+                        address: contact.hash
+                    )
                 }
                 return item
             }
     }()
 
     required init(with injectionBag: InjectionBag) {
-        self.contactService = injectionBag.contactsService
-        self.accountService = injectionBag.accountService
-        self.nameService = injectionBag.nameService
+        contactService = injectionBag.contactsService
+        accountService = injectionBag.accountService
+        nameService = injectionBag.nameService
     }
 
     func unbanContact(contact: ContactModel) {
-        guard let account = self.accountService.currentAccount else {
+        guard let account = accountService.currentAccount else {
             return
         }
-        self.contactService.unbanContact(contact: contact, account: account)
+        contactService.unbanContact(contact: contact, account: account)
     }
 }

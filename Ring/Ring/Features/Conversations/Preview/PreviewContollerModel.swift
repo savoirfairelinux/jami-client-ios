@@ -21,10 +21,8 @@
 import RxSwift
 
 class PreviewControllerModel: ViewModel {
-
     var playerViewModel: PlayerViewModel?
     var image: UIImage?
 
-    required init (with injectionBag: InjectionBag) {
-    }
+    required init(with _: InjectionBag) {}
 }

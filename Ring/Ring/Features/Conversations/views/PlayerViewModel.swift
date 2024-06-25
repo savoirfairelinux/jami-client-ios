@@ -18,17 +18,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
-import RxCocoa
-import CoreVideo
 import AVFoundation
+import CoreVideo
+import RxCocoa
+import RxSwift
 
 protocol PlayerDelegate: AnyObject {
     func extractedVideoFrame(with height: CGFloat)
 }
 
 class PlayerViewModel {
-
     var hasVideo = BehaviorRelay<Bool>(value: true)
     var playerDuration = BehaviorRelay<Float>(value: 0)
     var playerPosition = PublishSubject<Float>()
@@ -51,32 +50,32 @@ class PlayerViewModel {
     private var progressTimer: Timer?
 
     init(injectionBag: InjectionBag, path: String) {
-        self.videoService = injectionBag.videoService
+        videoService = injectionBag.videoService
         filePath = path
     }
 
     func createPlayer() {
-        self.playerReady.accept(false)
+        playerReady.accept(false)
         let fname = "file://" + filePath
-        if !self.playerId.isEmpty {
+        if !playerId.isEmpty {
             if let frame = firstFrame {
-                self.playBackFrame.onNext(frame)
+                playBackFrame.onNext(frame)
             }
-            self.playerReady.accept(true)
+            playerReady.accept(true)
             return
         }
         invalidateTimer()
-        self.playerId = self.videoService.createPlayer(path: fname)
-        self.pause.accept(true)
-        self.playerPosition.onNext(0)
+        playerId = videoService.createPlayer(path: fname)
+        pause.accept(true)
+        playerPosition.onNext(0)
         // subscribe for frame playback
         // get first frame, pause player and seek back to first frame
-        self.playBackDisposeBag = DisposeBag()
-        self.incomingFrame.filter {  [weak self] (render) -> Bool in
+        playBackDisposeBag = DisposeBag()
+        incomingFrame.filter { [weak self] render -> Bool in
             render.sinkId == self?.playerId
         }
         .take(1)
-        .map({[weak self] (renderer) -> Observable<VideoFrameInfo>  in
+        .map { [weak self] renderer -> Observable<VideoFrameInfo> in
             self?.firstFrame = renderer.sampleBuffer
             self?.playerPosition.onNext(0)
             self?.toglePause()
@@ -91,26 +90,27 @@ class PlayerViewModel {
                     self?.delegate?.extractedVideoFrame(with: image.size.height)
                 }
             }
-            return self?.incomingFrame.filter {  [weak self] (render) -> Bool in
+            return self?.incomingFrame.filter { [weak self] render -> Bool in
                 render.sinkId == self?.playerId
             } ?? Observable.just(renderer)
-        })
+        }
         .merge()
-        .subscribe(onNext: {  [weak self] (renderer) in
+        .subscribe(onNext: { [weak self] renderer in
             self?.playBackFrame.onNext(renderer.sampleBuffer)
         })
-        .disposed(by: self.playBackDisposeBag)
+        .disposed(by: playBackDisposeBag)
 
         // subscribe for fileInfo
-        self.videoService.playerInfo
+        videoService.playerInfo
             .asObservable()
-            .filter {  [weak self] (player) -> Bool in
+            .filter { [weak self] player -> Bool in
                 self?.playerId.contains(player.playerId) ?? false
             }
             .take(1)
-            .subscribe(onNext: {  [weak self] player in
+            .subscribe(onNext: { [weak self] player in
                 guard let duration = Float(player.duration),
-                      duration > 0 else {
+                      duration > 0
+                else {
                     DispatchQueue.main.async {
                         self?.videoService.closePlayer(playerId: self?.playerId ?? "")
                     }
@@ -131,7 +131,7 @@ class PlayerViewModel {
                 // unpause player to get first video frame
                 self?.toglePause()
             })
-            .disposed(by: self.playBackDisposeBag)
+            .disposed(by: playBackDisposeBag)
     }
 
     func userStartSeeking() {
@@ -144,18 +144,18 @@ class PlayerViewModel {
     }
 
     func userStopSeeking() {
-        let time = Int(self.playerDuration.value * seekTimeVariable.value)
-        self.videoService.seekToTime(time: time, playerId: playerId)
+        let time = Int(playerDuration.value * seekTimeVariable.value)
+        videoService.seekToTime(time: time, playerId: playerId)
         pause.accept(false)
         videoService.pausePlayer(playerId: playerId, pause: pause.value)
         startTimer()
     }
 
     func invalidateTimer() {
-        if self.progressTimer != nil {
-            self.progressTimer?.invalidate()
+        if progressTimer != nil {
+            progressTimer?.invalidate()
         }
-        self.progressTimer = nil
+        progressTimer = nil
     }
 
     func startTimer() {
@@ -183,25 +183,24 @@ class PlayerViewModel {
         videoService.seekToTime(time: time, playerId: playerId)
     }
 
-    lazy var incomingFrame: Observable<VideoFrameInfo> = {
-        return videoService.videoInputManager.frameSubject.asObservable()
-    }()
+    lazy var incomingFrame: Observable<VideoFrameInfo> = videoService.videoInputManager.frameSubject
+        .asObservable()
 
     var currentTime: Int64 = 0
 
     @objc
-    func updateTimer(timer: Timer) {
-        let time = self.videoService.getPlayerPosition(playerId: self.playerId)
+    func updateTimer(timer _: Timer) {
+        let time = videoService.getPlayerPosition(playerId: playerId)
         if time < 0 {
             return
         }
-        let progress = Float(time) / self.playerDuration.value
-        self.playerPosition.onNext(progress)
+        let progress = Float(time) / playerDuration.value
+        playerPosition.onNext(progress)
         // if new time less than previous file is finished
         if time < currentTime {
             pause.accept(true)
-            if let image = self.firstFrame {
-                self.playBackFrame.onNext(image)
+            if let image = firstFrame {
+                playBackFrame.onNext(image)
             }
         }
         currentTime = time
@@ -212,7 +211,7 @@ class PlayerViewModel {
     }
 
     func closePlayer() {
-        self.invalidateTimer()
+        invalidateTimer()
         videoService.closePlayer(playerId: playerId)
     }
 }

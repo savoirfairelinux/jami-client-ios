@@ -26,9 +26,8 @@ class DesignableView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        if let layer = self.layer.sublayers?[0] as? CAGradientLayer {
-            layer.frame = self.frame
+        if let layer = layer.sublayers?[0] as? CAGradientLayer {
+            layer.frame = frame
         }
     }
-
 }

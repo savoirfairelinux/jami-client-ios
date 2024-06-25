@@ -19,9 +19,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import Combine
 import SwiftUI
 import UIKit
-import Combine
 
 struct Flipped: ViewModifier {
     func body(content: Content) -> some View {
@@ -77,7 +77,10 @@ struct MessagesListView: View {
                         }
                     }
                     .layoutPriority(1)
-                    .padding(.bottom, shouldHideActiveKeyboard ? keyboardHeight : messageContainerHeight - 30)
+                    .padding(
+                        .bottom,
+                        shouldHideActiveKeyboard ? keyboardHeight : messageContainerHeight - 30
+                    )
                     MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
                         .alignmentGuide(VerticalAlignment.center) { dimensions in
                             DispatchQueue.main.async {
@@ -86,16 +89,19 @@ struct MessagesListView: View {
                             return dimensions[VerticalAlignment.center]
                         }
                 }
-                .overlay(contextMenuPresentingState == .shouldPresent && model.contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
+                .overlay(contextMenuPresentingState == .shouldPresent && model.contextMenuModel
+                            .presentingMessage != nil ? makeOverlay() : nil)
                 // hide navigation bar when presenting context menu
                 .onChange(of: contextMenuPresentingState) { newValue in
                     let shouldHide = newValue == .shouldPresent
                     model.hideNavigationBar.accept(shouldHide)
                 }
                 // hide context menu overly when device is rotated
-                .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                .onReceive(NotificationCenter.default
+                            .publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
+                        if screenHeight != UIScreen.main.bounds.size
+                            .height && screenHeight != 0 {
                             screenHeight = UIScreen.main.bounds.size.height
                             contextMenuPresentingState = .dismissed
                             self.shouldHideActiveKeyboard = false
@@ -149,7 +155,10 @@ struct MessagesListView: View {
     }
 
     func makeOverlay() -> some View {
-        return ContextMenuView(model: model.contextMenuModel, presentingState: $contextMenuPresentingState)
+        return ContextMenuView(
+            model: model.contextMenuModel,
+            presentingState: $contextMenuPresentingState
+        )
     }
 
     private func createMessagesStackView() -> some View {
@@ -180,14 +189,14 @@ struct MessagesListView: View {
                         })
                 }
                 .listRowBackground(Color.clear)
-                .onReceive(model.$scrollToId, perform: { (scrollToId) in
+                .onReceive(model.$scrollToId, perform: { scrollToId in
                     guard scrollToId != nil else { return }
                     scrollView.scrollTo("lastMessage")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         model.scrollToId = nil
                     }
                 })
-                .onReceive(model.$scrollToReplyTarget, perform: { (scrollToReplyTarget) in
+                .onReceive(model.$scrollToReplyTarget, perform: { scrollToReplyTarget in
                     guard scrollToReplyTarget != nil else { return }
                     scrollView.scrollTo(scrollToReplyTarget)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -210,8 +219,8 @@ struct MessagesListView: View {
     }
 
     private func createMessageRowView(for message: MessageContainerModel) -> some View {
-        MessageRowView(messageModel: message, onLongPress: {(frame, message) in
-            if contextMenuPresentingState != .dismissed && contextMenuPresentingState != .none {
+        MessageRowView(messageModel: message, onLongPress: { frame, message in
+            if contextMenuPresentingState != .dismissed, contextMenuPresentingState != .none {
                 return
             }
             model.hideNavigationBar.accept(true)
@@ -226,7 +235,7 @@ struct MessagesListView: View {
                 hideKeyboardIfNeed()
             }
             contextMenuPresentingState = .shouldPresent
-        }, showReactionsView: {message in
+        }, showReactionsView: { message in
             reactionsForMessage = message
             showReactionsView.toggle()
         }, model: message.messageRow)
@@ -260,7 +269,7 @@ struct MessagesListView: View {
                         Circle()
                             .stroke(Color(model.swarmColor), lineWidth: 1)
                     )
-                    .background( VisualEffect(style: .regular, withVibrancy: false))
+                    .background(VisualEffect(style: .regular, withVibrancy: false))
                     .clipShape(Circle())
                     .foregroundColor(Color(model.swarmColor))
                     .frame(width: 45, height: 45)
@@ -320,8 +329,8 @@ struct MessagesListView: View {
             withAnimation {
                 self.shouldHideActiveKeyboard = true
             }
-            self.hideKeyboard()
-            self.isMessageBarFocused = false
+            hideKeyboard()
+            isMessageBarFocused = false
         }
     }
 

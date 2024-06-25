@@ -18,16 +18,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
+import UIKit
 
 class DisposableCell: UITableViewCell {
     var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.backgroundColor = .systemBackground
-        self.disposeBag = DisposeBag()
+        backgroundColor = .systemBackground
+        disposeBag = DisposeBag()
     }
 }
 
@@ -46,7 +46,7 @@ class EditableDetailTableViewCell: DisposableCell {
     private func setupTextField() {
         editableTextField.font = UIFont.preferredFont(forTextStyle: .callout)
         editableTextField.returnKeyType = .done
-        self.contentView.addSubview(editableTextField)
+        contentView.addSubview(editableTextField)
         detailTextLabel?.numberOfLines = 0
         detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         detailTextLabel?.textColor = .clear

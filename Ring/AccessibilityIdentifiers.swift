@@ -20,7 +20,7 @@
 
 import Foundation
 
-struct AccessibilityIdentifiers {
+enum AccessibilityIdentifiers {
     static let openAccountsButton = "accountsInformationIdentifier"
     static let addAccountButton = "addAccountButtonIdentifier"
     static let joinJamiButton = "joinJamiButtonIdentifier"

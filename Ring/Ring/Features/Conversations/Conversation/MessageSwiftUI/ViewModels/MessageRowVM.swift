@@ -25,7 +25,8 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObserver, AvatarImageObserver {
+class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObserver,
+                    AvatarImageObserver {
     @Published var avatarImage: UIImage?
     @Published var read: [UIImage]?
     @Published var timeString: String = ""
@@ -35,7 +36,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     @Published var readBorderColor: Color
     @Published var showSentIndicator: Bool = false
     @Published var showReciveIndicator: Bool = false
-    var styling: MessageStyling = MessageStyling()
+    var styling: MessageStyling = .init()
     var incoming: Bool
     var infoState: PublishSubject<State>?
     var centeredMessage: Bool
@@ -46,17 +47,17 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
 
     var shouldShowTimeString = false {
         didSet {
-            self.timeString = self.shouldShowTimeString ? self.getTimeLabelString() : ""
+            timeString = shouldShowTimeString ? getTimeLabelString() : ""
         }
     }
 
     var shouldDisplayAavatar = false {
         didSet {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
-            if self.shouldDisplayAavatar {
-                self.requestAvatar(jamiId: jamiId)
+            if shouldDisplayAavatar {
+                requestAvatar(jamiId: jamiId)
             } else {
-                self.avatarImage = nil
+                avatarImage = nil
             }
         }
     }
@@ -64,7 +65,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     func updateImage(image: UIImage, jamiId: String) {
         let localId = message.uri.isEmpty ? message.authorId : message.uri
         if jamiId == localId {
-            self.avatarImage = image
+            avatarImage = image
         }
     }
 
@@ -77,33 +78,37 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
 
     init(message: MessageModel) {
         self.message = message
-        self.incoming = message.incoming
-        self.centeredMessage = message.type == .contact || message.type == .initial
-        self.readBorderColor = Color(UIColor.systemBackground)
-        self.timeString = getTimeLabelString()
-        self.updateMessageStatus()
+        incoming = message.incoming
+        centeredMessage = message.type == .contact || message.type == .initial
+        readBorderColor = Color(UIColor.systemBackground)
+        timeString = getTimeLabelString()
+        updateMessageStatus()
     }
 
     func setInfoState(state: PublishSubject<State>) {
-        self.infoState = state
-        self.requestReadStatus(messageId: self.message.id)
+        infoState = state
+        requestReadStatus(messageId: message.id)
     }
 
     func getTimeLabelString() -> String {
-        let time = self.message.receivedDate
+        let time = message.receivedDate
         // get the current time
         let currentDateTime = Date()
 
         // prepare formatter
         let dateFormatter = DateFormatter()
 
-        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
+        if Calendar.current
+            .compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
             // age: [0, received the previous day[
             dateFormatter.dateFormat = "h:mma"
-        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
+        } else if Calendar.current
+                    .compare(currentDateTime, to: time, toGranularity: .weekOfYear) ==
+                    .orderedSame {
             // age: [received the previous day, received 7 days ago[
             dateFormatter.dateFormat = "E h:mma"
-        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
+        } else if Calendar.current
+                    .compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
             // age: [received 7 days ago, received the previous year[
             dateFormatter.dateFormat = "MMM d, h:mma"
         } else {
@@ -117,7 +122,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
 
     func setSequencing(sequencing: MessageSequencing) {
         if self.sequencing != sequencing {
-            DispatchQueue.main.async {[weak self] in
+            DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.sequencing = sequencing
             }
@@ -129,14 +134,14 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     }
 
     func updateMessageStatus() {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.showSentIndicator = self.message.isSending()
         }
     }
 
     func displayLastSent(state: Bool) {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.showReciveIndicator = state
         }

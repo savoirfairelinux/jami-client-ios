@@ -22,7 +22,7 @@ import SwiftUI
 
 extension Text {
     func swarmButtonTextStyle() -> some View {
-        self.frame(minWidth: 0, maxWidth: .infinity)
+        frame(minWidth: 0, maxWidth: .infinity)
             .font(.system(size: 18))
             .padding()
             .foregroundColor(.white)

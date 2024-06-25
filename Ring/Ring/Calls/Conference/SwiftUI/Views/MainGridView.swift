@@ -23,8 +23,7 @@ import SwiftUI
 struct ScrollOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGPoint = .zero
 
-    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
-    }
+    static func reduce(value _: inout CGPoint, nextValue _: () -> CGPoint) {}
 }
 
 struct MainGridView: View {
@@ -38,7 +37,7 @@ struct MainGridView: View {
      Redraw when participant order changes. This occurs when an active
      participant or a participant with an active voice is moved to the first page.
      */
-    @SwiftUI.State private var shouldRedraw: UUID = UUID()
+    @SwiftUI.State private var shouldRedraw: UUID = .init()
     @SwiftUI.State private var scrollDisabled = true
 
     var body: some View {
@@ -47,16 +46,20 @@ struct MainGridView: View {
                 LazyHStack(alignment: .top, spacing: 0) {
                     ForEach(model.pages.indices, id: \.self) { index in
                         let page = model.pages[index]
-                        PageSwiftUI(pageNumber: (index + 1),
+                        PageSwiftUI(pageNumber: index + 1,
                                     participants: participants,
-                                    page: page, isAnimatingTopMainGrid: $isAnimatingTopMainGrid, showMainGridView: $showMainGridView)
+                                    page: page, isAnimatingTopMainGrid: $isAnimatingTopMainGrid,
+                                    showMainGridView: $showMainGridView)
                             .clipped()
                     }
                 }
-                .background(Color.black.frame(width: 99999999))
+                .background(Color.black.frame(width: 99_999_999))
                 .background(GeometryReader { geometry in
                     Color.clear
-                        .preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .named("scroll")).origin)
+                        .preference(
+                            key: ScrollOffsetPreferenceKey.self,
+                            value: geometry.frame(in: .named("scroll")).origin
+                        )
                 })
                 .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
                     self.scrollPosition = value
@@ -96,7 +99,7 @@ struct PageSwiftUI: View {
     var body: some View {
         VStack(alignment: .center) {
             if page.rows > 0 {
-                ForEach(1...page.rows, id: \.self) { row in
+                ForEach(1 ... page.rows, id: \.self) { row in
                     ParticipantRowView(row: row,
                                        columns: page.columns,
                                        participants: participants,
@@ -121,7 +124,7 @@ struct ParticipantRowView: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            ForEach(0..<columns, id: \.self) { column in
+            ForEach(0 ..< columns, id: \.self) { column in
                 let index = getIndex(column: column, row: row)
                 if index < participants.count {
                     let participant = participants[index]

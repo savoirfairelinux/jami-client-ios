@@ -21,9 +21,10 @@
 import Foundation
 
 class ScreenHelper {
-
     class func currentOrientation() -> UIInterfaceOrientation {
-        guard let orientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation else {
+        guard let orientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?
+                .windowScene?.interfaceOrientation
+        else {
             return .unknown
         }
         return orientation

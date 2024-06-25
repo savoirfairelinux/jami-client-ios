@@ -19,28 +19,28 @@
  */
 
 import Reusable
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
 class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: MigrateAccountViewModel!
     let disposeBag = DisposeBag()
 
-    @IBOutlet weak var migrateButton: DesignableButton!
-    @IBOutlet weak var cancelButton: DesignableButton!
-    @IBOutlet weak var migrateOtherAccountButton: DesignableButton!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var removeAccountButton: DesignableButton!
-    @IBOutlet weak var displayNameLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var jamiIdLabel: UILabel!
-    @IBOutlet weak var registeredNameLabel: UILabel!
-    @IBOutlet weak var explanationLabel: UILabel!
-    @IBOutlet weak var avatarImage: UIImageView!
-    @IBOutlet weak var passwordContainer: UIStackView!
-    @IBOutlet weak var passwordField: DesignableTextField!
-    @IBOutlet weak var passwordExplanationLabel: UILabel!
+    @IBOutlet var migrateButton: DesignableButton!
+    @IBOutlet var cancelButton: DesignableButton!
+    @IBOutlet var migrateOtherAccountButton: DesignableButton!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var removeAccountButton: DesignableButton!
+    @IBOutlet var displayNameLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var jamiIdLabel: UILabel!
+    @IBOutlet var registeredNameLabel: UILabel!
+    @IBOutlet var explanationLabel: UILabel!
+    @IBOutlet var avatarImage: UIImageView!
+    @IBOutlet var passwordContainer: UIStackView!
+    @IBOutlet var passwordField: DesignableTextField!
+    @IBOutlet var passwordExplanationLabel: UILabel!
     var loadingViewPresenter = LoadingViewPresenter()
 
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
@@ -48,22 +48,34 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.layoutIfNeeded()
-        self.scrollView.alwaysBounceHorizontal = false
-        self.scrollView.alwaysBounceVertical = true
-        self.migrateButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        self.cancelButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        self.migrateOtherAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        self.bindViewToViewModel()
-        self.applyL10n()
+        view.layoutIfNeeded()
+        scrollView.alwaysBounceHorizontal = false
+        scrollView.alwaysBounceVertical = true
+        migrateButton.applyGradient(
+            with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark],
+            gradient: .horizontal
+        )
+        cancelButton.applyGradient(
+            with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark],
+            gradient: .horizontal
+        )
+        migrateOtherAccountButton.applyGradient(
+            with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark],
+            gradient: .horizontal
+        )
+        bindViewToViewModel()
+        applyL10n()
 
         // handle keyboard
-        self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
-        keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        adaptToKeyboardState(for: scrollView, with: disposeBag)
+        keyboardDismissTapRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard)
+        )
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 guard UIDevice.current.portraitOrLandscape else {
                     return
                 }
@@ -71,7 +83,7 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
                 self?.cancelButton.updateGradientFrame()
                 self?.migrateOtherAccountButton.updateGradientFrame()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         explanationLabel.textColor = UIColor.jamiLabelColor
         titleLabel.textColor = UIColor.jamiTextSecondary
         passwordExplanationLabel.textColor = UIColor.jamiLabelColor
@@ -82,17 +94,27 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillAppear(withNotification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillDisappear(withNotification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
 
     @objc
-    func keyboardWillAppear(withNotification: NSNotification) {
-        self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
+    func keyboardWillAppear(withNotification _: NSNotification) {
+        view.addGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
     @objc
-    func keyboardWillDisappear(withNotification: NSNotification) {
+    func keyboardWillDisappear(withNotification _: NSNotification) {
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
@@ -102,71 +124,71 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
 
     @objc
     func dismissKeyboard() {
-        self.isKeyboardOpened = false
-        self.becomeFirstResponder()
+        isKeyboardOpened = false
+        becomeFirstResponder()
         view.removeGestureRecognizer(keyboardDismissTapRecognizer)
     }
 
     func bindViewToViewModel() {
-        self.viewModel.profileImage
-            .bind(to: self.avatarImage.rx.image)
+        viewModel.profileImage
+            .bind(to: avatarImage.rx.image)
             .disposed(by: disposeBag)
 
-        self.viewModel.profileName
-            .bind(to: self.displayNameLabel.rx.text)
+        viewModel.profileName
+            .bind(to: displayNameLabel.rx.text)
             .disposed(by: disposeBag)
 
-        self.viewModel.profileName
-            .map({ (name) -> Bool in
-                return name.isEmpty
-            })
-            .bind(to: self.displayNameLabel.rx.isHidden)
+        viewModel.profileName
+            .map { name -> Bool in
+                name.isEmpty
+            }
+            .bind(to: displayNameLabel.rx.isHidden)
             .disposed(by: disposeBag)
 
-        self.viewModel.jamiId
-            .bind(to: self.jamiIdLabel.rx.text)
+        viewModel.jamiId
+            .bind(to: jamiIdLabel.rx.text)
             .disposed(by: disposeBag)
 
-        self.viewModel.jamiId
-            .map({ (jamiId) -> Bool in
-                return jamiId.isEmpty
-            })
-            .bind(to: self.jamiIdLabel.rx.isHidden)
+        viewModel.jamiId
+            .map { jamiId -> Bool in
+                jamiId.isEmpty
+            }
+            .bind(to: jamiIdLabel.rx.isHidden)
             .disposed(by: disposeBag)
 
-        self.viewModel.username
-            .bind(to: self.registeredNameLabel.rx.text)
+        viewModel.username
+            .bind(to: registeredNameLabel.rx.text)
             .disposed(by: disposeBag)
 
-        self.viewModel.hideMigrateAnotherAccountButton
-            .bind(to: self.migrateOtherAccountButton.rx.isHidden)
+        viewModel.hideMigrateAnotherAccountButton
+            .bind(to: migrateOtherAccountButton.rx.isHidden)
             .disposed(by: disposeBag)
 
-        self.viewModel.notCancelable
-            .bind(to: self.cancelButton.rx.isHidden)
+        viewModel.notCancelable
+            .bind(to: cancelButton.rx.isHidden)
             .disposed(by: disposeBag)
 
-        self.viewModel.username
-            .map({ (name) -> Bool in
-                return name.isEmpty
-            })
-            .bind(to: self.registeredNameLabel.rx.isHidden)
+        viewModel.username
+            .map { name -> Bool in
+                name.isEmpty
+            }
+            .bind(to: registeredNameLabel.rx.isHidden)
             .disposed(by: disposeBag)
         passwordContainer.isHidden = !viewModel.accountHasPassword()
 
         if viewModel.accountHasPassword() {
-            self.passwordField.rx.text.orEmpty
-                .bind(to: self.viewModel.password)
-                .disposed(by: self.disposeBag)
+            passwordField.rx.text.orEmpty
+                .bind(to: viewModel.password)
+                .disposed(by: disposeBag)
 
-            self.passwordField.rx.text.map({ !($0?.isEmpty ?? true) })
-                .bind(to: self.migrateButton.rx.isEnabled)
-                .disposed(by: self.disposeBag)
+            passwordField.rx.text.map { !($0?.isEmpty ?? true) }
+                .bind(to: migrateButton.rx.isEnabled)
+                .disposed(by: disposeBag)
         }
 
-        self.viewModel.migrationState.asObservable()
+        viewModel.migrationState.asObservable()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self](action) in
+            .subscribe(onNext: { [weak self] action in
                 switch action {
                 case .unknown:
                     break
@@ -180,10 +202,10 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
                     self?.dismiss(animated: false, completion: nil)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         // Bind View Actions to ViewModel
-        self.migrateButton.rx.tap
+        migrateButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 DispatchQueue.main.async {
                     self?.showLoadingView()
@@ -192,25 +214,25 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
                     self?.viewModel.migrateAccount()
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.removeAccountButton.rx.tap
+        removeAccountButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.removeAccount()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.cancelButton.rx.tap
+        cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.finishWithoutMigration()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.migrateOtherAccountButton.rx.tap
+        migrateOtherAccountButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.migrateAnotherAccount()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func applyL10n() {
@@ -229,8 +251,13 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
     private func stopLoadingView() {
         loadingViewPresenter.hide(animated: false)
     }
+
     private func showLoadingView() {
-        loadingViewPresenter.presentWithMessage(message: L10n.MigrateAccount.migrating, presentingVC: self, animated: true)
+        loadingViewPresenter.presentWithMessage(
+            message: L10n.MigrateAccount.migrating,
+            presentingVC: self,
+            animated: true
+        )
     }
 
     private func showMigrationError() {

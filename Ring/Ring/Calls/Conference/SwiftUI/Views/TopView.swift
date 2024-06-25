@@ -34,7 +34,7 @@ struct TopView: View {
                         ParticipantView(model: participant, width: width, height: height)
                     }
                 }
-                .background(Color.black.frame(width: 99999999))
+                .background(Color.black.frame(width: 99_999_999))
             }
         }
     }

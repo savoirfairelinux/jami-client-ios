@@ -49,7 +49,8 @@ enum CallState: String {
     }
 
     func isActive() -> Bool {
-        return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold || self == .unhold
+        return self == .incoming || self == .connecting || self == .ringing || self == .current ||
+            self == .hold || self == .unhold
     }
 }
 
@@ -101,16 +102,16 @@ enum CallLayout: Int32 {
 }
 
 public class CallModel {
-
     var callId: String = ""
-    var participantsCallId: Set<String> = Set<String>() {
+    var participantsCallId: Set<String> = .init() {
         didSet {
-            if self.participantsCallId.count <= 1 {
-                self.layout = .one
+            if participantsCallId.count <= 1 {
+                layout = .one
             }
         }
     }
-    var callUUID: UUID = UUID()
+
+    var callUUID: UUID = .init()
     var dateReceived: Date?
     var participantUri: String = ""
     var displayName: String = ""
@@ -126,7 +127,8 @@ public class CallModel {
     lazy var paricipantHash = {
         self.participantUri.filterOutHost()
     }
-    var mediaList: [[String: String]] = [[String: String]]()
+
+    var mediaList: [[String: String]] = .init()
 
     var stateValue = CallState.unknown.rawValue
     var callTypeValue = CallType.missed.rawValue
@@ -155,14 +157,17 @@ public class CallModel {
         }
     }
 
-    init() {
-    }
+    init() {}
 
-    init(withCallId callId: String, callDetails dictionary: [String: String], withMedia mediaList: [[String: String]]) {
+    init(
+        withCallId callId: String,
+        callDetails dictionary: [String: String],
+        withMedia mediaList: [[String: String]]
+    ) {
         self.callId = callId
 
         if let fromRingId = dictionary[CallDetailKey.peerNumberKey.rawValue] {
-            self.participantUri = fromRingId
+            participantUri = fromRingId
         }
 
         if let accountId = dictionary[CallDetailKey.accountIdKey.rawValue] {
@@ -177,40 +182,48 @@ public class CallModel {
             }
         }
 
-        self.update(withDictionary: dictionary, withMedia: mediaList)
-        self.participantsCallId.insert(callId)
+        update(withDictionary: dictionary, withMedia: mediaList)
+        participantsCallId.insert(callId)
     }
 
     func checkDeviceMediaMuted(media: [String: String]) -> Bool {
-        if media[MediaAttributeKey.sourceType.rawValue] != MediaAttributeValue.srcTypeFile.rawValue && media[MediaAttributeKey.sourceType.rawValue] != MediaAttributeValue.srcTypeDisplay.rawValue {
-            if media[MediaAttributeKey.muted.rawValue] == "true" || media[MediaAttributeKey.enabled.rawValue] == "false" {
+        if media[MediaAttributeKey.sourceType.rawValue] != MediaAttributeValue.srcTypeFile
+            .rawValue && media[MediaAttributeKey.sourceType.rawValue] != MediaAttributeValue
+            .srcTypeDisplay.rawValue {
+            if media[MediaAttributeKey.muted.rawValue] == "true" ||
+                media[MediaAttributeKey.enabled.rawValue] == "false" {
                 return true
             }
         }
         return false
     }
 
-    func update(withDictionary dictionary: [String: String], withMedia mediaList: [[String: String]]) {
-
-        if self.state == .current && self.dateReceived == nil {
-            self.dateReceived = Date()
+    func update(
+        withDictionary dictionary: [String: String],
+        withMedia mediaList: [[String: String]]
+    ) {
+        if state == .current, dateReceived == nil {
+            dateReceived = Date()
         }
 
         if !mediaList.isEmpty {
             self.mediaList = mediaList
         }
 
-        if let displayName = dictionary[CallDetailKey.displayNameKey.rawValue], !displayName.isEmpty {
+        if let displayName = dictionary[CallDetailKey.displayNameKey.rawValue],
+           !displayName.isEmpty {
             self.displayName = displayName
         }
 
-        if let registeredName = dictionary[CallDetailKey.registeredNameKey.rawValue], !registeredName.isEmpty {
+        if let registeredName = dictionary[CallDetailKey.registeredNameKey.rawValue],
+           !registeredName.isEmpty {
             self.registeredName = registeredName
         }
 
-        self.isAudioOnly = true
-        self.videoMuted = true
-        for (item) in self.mediaList where item[MediaAttributeKey.mediaType.rawValue] == MediaAttributeValue.video.rawValue {
+        isAudioOnly = true
+        videoMuted = true
+        for item in self.mediaList
+        where item[MediaAttributeKey.mediaType.rawValue] == MediaAttributeValue.video.rawValue {
             self.isAudioOnly = false
             if !checkDeviceMediaMuted(media: item) {
                 self.videoMuted = false
@@ -218,14 +231,16 @@ public class CallModel {
             }
         }
 
-        self.audioMuted = true
-        for (item) in self.mediaList where (item[MediaAttributeKey.mediaType.rawValue] == MediaAttributeValue.audio.rawValue && !checkDeviceMediaMuted(media: item)) {
+        audioMuted = true
+        for item in self.mediaList
+        where item[MediaAttributeKey.mediaType.rawValue] == MediaAttributeValue.audio
+            .rawValue && !checkDeviceMediaMuted(media: item) {
             self.audioMuted = false
             break
         }
 
         if let participantRingId = dictionary[CallDetailKey.peerNumberKey.rawValue] {
-            self.participantUri = participantRingId
+            participantUri = participantRingId
         }
 
         if let accountId = dictionary[CallDetailKey.accountIdKey.rawValue] {
@@ -238,19 +253,19 @@ public class CallModel {
     }
 
     func getDisplayName() -> String {
-        if !self.displayName.isEmpty {
-            return self.displayName
-        } else if !self.registeredName.isEmpty {
-            return self.registeredName
+        if !displayName.isEmpty {
+            return displayName
+        } else if !registeredName.isEmpty {
+            return registeredName
         }
-        return self.paricipantHash()
+        return paricipantHash()
     }
 
     func isExists() -> Bool {
-        return self.state != .over && self.state != .inactive && self.state != .failure && self.state != .busy
+        return state != .over && state != .inactive && state != .failure && state != .busy
     }
 
     func isActive() -> Bool {
-        return self.state == .connecting || self.state == .ringing || self.state == .current
+        return state == .connecting || state == .ringing || state == .current
     }
 }

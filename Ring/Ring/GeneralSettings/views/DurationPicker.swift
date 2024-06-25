@@ -28,6 +28,7 @@ class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
             setupPickerWithDuration()
         }
     }
+
     let maxHours: Int
     weak var viewModel: GeneralSettingsViewModel!
 
@@ -35,11 +36,11 @@ class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         self.maxHours = maxHours
         super.init(frame: .zero)
 
-        for index in 0...maxHours {
+        for index in 0 ... maxHours {
             hours.append(index)
         }
 
-        for index in 0...59 {
+        for index in 0 ... 59 {
             minutes.append(index)
         }
 
@@ -49,15 +50,16 @@ class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         setupPickerWithDuration()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in _: UIPickerView) -> Int {
         return 2 // for hours and minutes
     }
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
             return hours.count
         } else {
@@ -65,7 +67,7 @@ class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         }
     }
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             return "\(hours[row]) hours"
         } else {
@@ -73,7 +75,7 @@ class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         }
     }
 
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow _: Int, inComponent _: Int) {
         let hoursIndex = pickerView.selectedRow(inComponent: 0)
         let minutesIndex = pickerView.selectedRow(inComponent: 1)
         duration = hours[hoursIndex] * 60 + minutes[minutesIndex]
@@ -87,7 +89,7 @@ class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
     func setupPickerWithDuration() {
         let currentMinute = (duration % 60)
         let currentHour = (duration / 60)
-        self.selectRow(currentHour, inComponent: 0, animated: false)
-        self.selectRow(currentMinute, inComponent: 1, animated: false)
+        selectRow(currentHour, inComponent: 0, animated: false)
+        selectRow(currentMinute, inComponent: 1, animated: false)
     }
 }

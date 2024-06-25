@@ -19,8 +19,8 @@
  */
 
 import Foundation
-import RxSwift
 import RxRelay
+import RxSwift
 import SwiftUI
 
 class SwarmCreationUIModel: ObservableObject {
@@ -30,34 +30,38 @@ class SwarmCreationUIModel: ObservableObject {
     private let accountId: String
     private let conversationService: ConversationsService
     private var swarmInfo: SwarmInfoProtocol
-    var swarmCreated: ((_ conversationId: String, _ accountId: String) -> Void)
+    var swarmCreated: (_ conversationId: String, _ accountId: String) -> Void
 
     @Published var swarmName: String = ""
     @Published var swarmDescription: String = ""
     @Published var image: UIImage?
     @Published var selections: [String] = []
 
-    required init(with injectionBag: InjectionBag, accountId: String, strSearchText: BehaviorRelay<String>, swarmCreated: @escaping ((String, String) -> Void)) {
+    required init(
+        with injectionBag: InjectionBag,
+        accountId: String,
+        strSearchText: BehaviorRelay<String>,
+        swarmCreated: @escaping ((String, String) -> Void)
+    ) {
         self.swarmCreated = swarmCreated
-        self.conversationService = injectionBag.conversationsService
+        conversationService = injectionBag.conversationsService
         self.accountId = accountId
-        self.swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId)
+        swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId)
         // 1 member is administrtor so remove 1 from maximum limit
         strSearchText.subscribe { searchText in
             if !searchText.isEmpty {
                 let flatArr = self.filteredArray.compactMap { $0 }
-                self.participantsRows = flatArr.filter { (item) -> Bool in
-                    return item.match(string: searchText)
+                self.participantsRows = flatArr.filter { item -> Bool in
+                    item.match(string: searchText)
                 }
             } else {
                 self.participantsRows = self.filteredArray
             }
         } onError: { _ in
-
         }
         .disposed(by: disposeBag)
 
-        self.swarmInfo.contacts
+        swarmInfo.contacts
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] infos in
                 guard let self = self else { return }
@@ -68,9 +72,8 @@ class SwarmCreationUIModel: ObservableObject {
                     self.filteredArray.append(participant)
                 }
             } onError: { _ in
-
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         injectionBag
             .contactsService
             .contacts
@@ -80,15 +83,14 @@ class SwarmCreationUIModel: ObservableObject {
                 self.swarmInfo.addContacts(contacts: contacts)
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
-
+            .disposed(by: disposeBag)
     }
 
     func createTheSwarm() {
         var info = [String: String]()
-        let conversationId = self.conversationService.startConversation(accountId: accountId)
+        let conversationId = conversationService.startConversation(accountId: accountId)
 
-        if let image = self.image, let data = image.convertToDataForSwarm() {
+        if let image = image, let data = image.convertToDataForSwarm() {
             info[ConversationAttributes.avatar.rawValue] = data.base64EncodedString()
         }
         if !swarmName.isEmpty {
@@ -98,13 +100,20 @@ class SwarmCreationUIModel: ObservableObject {
             info[ConversationAttributes.description.rawValue] = swarmDescription
         }
         if !info.isEmpty {
-            self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: info)
+            conversationService.updateConversationInfos(
+                accountId: accountId,
+                conversationId: conversationId,
+                infos: info
+            )
         }
         for participant in selections {
-            self.conversationService.addConversationMember(accountId: accountId, conversationId: conversationId, memberId: participant)
-
+            conversationService.addConversationMember(
+                accountId: accountId,
+                conversationId: conversationId,
+                memberId: participant
+            )
         }
-        _ = self.swarmCreated(conversationId, accountId)
+        _ = swarmCreated(conversationId, accountId)
     }
 
     func getParticipant(id: String) -> ParticipantRow? {
@@ -118,15 +127,15 @@ class SwarmCreationUIModel: ObservableObject {
     var initialImage: UIImage?
 
     func takeCurrentDataSnapshot() {
-        initialSwarmName = self.swarmName
-        initialSwarmDescription = self.swarmDescription
-        initialImage = self.image
+        initialSwarmName = swarmName
+        initialSwarmDescription = swarmDescription
+        initialImage = image
     }
 
     func setDataToInitial() {
-        self.image = initialImage
-        self.swarmName = initialSwarmName
-        self.swarmDescription = initialSwarmName
+        image = initialImage
+        swarmName = initialSwarmName
+        swarmDescription = initialSwarmName
     }
 
     var hasProfileImage: Bool {

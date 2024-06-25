@@ -22,7 +22,6 @@ import Foundation
 import RxSwift
 
 class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
-
     @Published var placeholder = L10n.Conversation.messagePlaceholder
     @Published var defaultEmoji = "👍"
     @Published var messageToReply: MessageContentVM?
@@ -30,7 +29,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     @Published var isEdit: Bool = false
     @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""
-    var styling: MessageStyling = MessageStyling()
+    var styling: MessageStyling = .init()
 
     private let messagePanelState: PublishSubject<State>
 
@@ -52,7 +51,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
                 let placeholder = L10n.Conversation.messagePlaceholder + " " + name
                 self.placeholder = placeholder
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     // MARK: MessagePanelState
@@ -66,8 +65,11 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
             if trimmed.isEmpty {
                 return
             }
-            let parentId = self.messageToReply?.message.id ?? ""
-            messagePanelState.onNext(MessagePanelState.sendMessage(content: trimmed, parentId: parentId))
+            let parentId = messageToReply?.message.id ?? ""
+            messagePanelState.onNext(MessagePanelState.sendMessage(
+                content: trimmed,
+                parentId: parentId
+            ))
         }
     }
 
@@ -77,8 +79,10 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
             return
         }
         guard let message = messageToEdit else { return }
-        messagePanelState.onNext(MessagePanelState.editMessage(content: trimmed, messageId: message.message.id))
-
+        messagePanelState.onNext(MessagePanelState.editMessage(
+            content: trimmed,
+            messageId: message.message.id
+        ))
     }
 
     func openGalery() {

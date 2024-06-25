@@ -18,19 +18,20 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
-import SwiftUI
-import RxSwift
 import Combine
+import Foundation
+import RxSwift
+import SwiftUI
 
-class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver, NameObserver {
+class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver,
+                            NameObserver {
     @Published var username: String = "" {
         didSet {
             updateInReplyMessage()
         }
     }
 
-    var styling: MessageStyling = MessageStyling()
+    var styling: MessageStyling = .init()
 
     @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""
@@ -63,20 +64,26 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarI
             }
         }
     }
+
     var subscription: AnyCancellable?
 
     var contextMenuState: PublishSubject<State>
 
-    init(contextMenuState: PublishSubject<State>, localJamiId: String, replyAuthorJamiId: String, isIncoming: Bool) {
+    init(
+        contextMenuState: PublishSubject<State>,
+        localJamiId: String,
+        replyAuthorJamiId: String,
+        isIncoming: Bool
+    ) {
         self.localJamiId = localJamiId
         self.replyAuthorJamiId = replyAuthorJamiId
         self.isIncoming = isIncoming
-        self.alignment = isIncoming ? .leading : .trailing
+        alignment = isIncoming ? .leading : .trailing
         self.contextMenuState = contextMenuState
     }
 
     func setInfoState(state: PublishSubject<State>) {
-        self.infoState = state
+        infoState = state
     }
 
     private func replyIsIncoming() -> Bool {
@@ -91,14 +98,16 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarI
 
     private func updateUsernameForReply() {
         if replyIsIncoming() { return }
-        self.requestName(jamiId: replyAuthorJamiId)
+        requestName(jamiId: replyAuthorJamiId)
     }
 
     private func getInReplyMessage() -> String {
         let inReplyToSelf = L10n.Conversation.inReplyTo + " \(L10n.Account.me)"
         let inReplyToOther = L10n.Conversation.inReplyTo + " \(targetReplyUsername)"
-        let repliedByOtherToSelf = "\(username) " + L10n.Conversation.repliedTo + " \(L10n.Account.me)"
-        let repliedByOtherToOther = "\(username) " + L10n.Conversation.repliedTo + " \(targetReplyUsername)"
+        let repliedByOtherToSelf = "\(username) " + L10n.Conversation
+            .repliedTo + " \(L10n.Account.me)"
+        let repliedByOtherToOther = "\(username) " + L10n.Conversation
+            .repliedTo + " \(targetReplyUsername)"
 
         switch (replyIsIncoming(), targetReplyIsIncoming()) {
         case (true, true):
@@ -118,7 +127,7 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarI
 
     func scrollToReplyTarget() {
         if let target = target {
-            self.contextMenuState.onNext(ContextMenu.scrollToReplyTarget(messageId: target.message.id))
+            contextMenuState.onNext(ContextMenu.scrollToReplyTarget(messageId: target.message.id))
         }
     }
 }

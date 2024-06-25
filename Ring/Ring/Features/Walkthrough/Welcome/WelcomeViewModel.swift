@@ -23,14 +23,13 @@ import Foundation
 import RxSwift
 
 class WelcomeViewModel: Stateable, ViewModel {
-
     // MARK: - Rx Stateable
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
 
     // MARK: - Rx Singles for L10n
+
     let welcomeText = Observable<String>.of(L10n.Welcome.title)
     let createAccount = Observable<String>.of(L10n.CreateAccount.createAccountFormTitle)
     let linkDevice = Observable<String>.of(L10n.Welcome.linkDevice)
@@ -41,34 +40,33 @@ class WelcomeViewModel: Stateable, ViewModel {
 
     var isAnimatable = true
 
-    required init (with injectionBag: InjectionBag) {
-    }
+    required init(with _: InjectionBag) {}
 
     func proceedWithAccountCreation() {
-        self.stateSubject.onNext(WalkthroughState.welcomeDone(withType: .createAccount))
+        stateSubject.onNext(WalkthroughState.welcomeDone(withType: .createAccount))
     }
 
     func proceedWithLinkDevice() {
-        self.stateSubject.onNext(WalkthroughState.welcomeDone(withType: .linkDevice))
+        stateSubject.onNext(WalkthroughState.welcomeDone(withType: .linkDevice))
     }
 
     func cancelWalkthrough() {
-        self.stateSubject.onNext(WalkthroughState.walkthroughCanceled)
+        stateSubject.onNext(WalkthroughState.walkthroughCanceled)
     }
 
     func linkToAccountManager() {
-        self.stateSubject
+        stateSubject
             .onNext(WalkthroughState
                         .welcomeDone(withType: .linkToAccountManager))
     }
 
     func createSipAccount() {
-        self.stateSubject
+        stateSubject
             .onNext(WalkthroughState
                         .welcomeDone(withType: .createSipAccount))
     }
 
     func openAboutJami() {
-        self.stateSubject.onNext(WalkthroughState.aboutJami)
+        stateSubject.onNext(WalkthroughState.aboutJami)
     }
 }

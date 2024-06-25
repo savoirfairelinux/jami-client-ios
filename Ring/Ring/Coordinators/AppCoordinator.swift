@@ -20,8 +20,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
+import UIKit
 
 /// Represents Application global navigation state
 ///
@@ -49,137 +49,151 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     var presentingVC = [String: Bool]()
 
     // MARK: Coordinator
+
     var rootViewController: UIViewController {
-        return self.navigationController
+        return navigationController
     }
+
     var parentCoordinator: Coordinator?
 
     var childCoordinators = [Coordinator]()
+
     // MARK: -
 
     // MARK: StateableResponsive
+
     let disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
+
     // MARK: -
 
     // MARK: Private members
+
     private let navigationController = UINavigationController()
     let injectionBag: InjectionBag
 
     /// Initializer
     ///
     /// - Parameter injectionBag: the injected injectionBag
-    required init (with injectionBag: InjectionBag) {
+    required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
 
-        self.navigationController.setNavigationBarHidden(true, animated: false)
+        navigationController.setNavigationBarHidden(true, animated: false)
 
-        self.stateSubject
-            .subscribe(onNext: { [weak self] (state) in
+        stateSubject
+            .subscribe(onNext: { [weak self] state in
                 guard let self = self, let state = state as? AppState else { return }
                 switch state {
                 case .initialLoading:
                     self.showInitialLoading()
-                case .needToOnboard(let animated, let isFirstAccount):
+                case let .needToOnboard(animated, isFirstAccount):
                     self.showWalkthrough(animated: animated, isAccountFirst: isFirstAccount)
                 case .allSet:
                     self.showMainInterface()
                 case .addAccount:
                     self.showWalkthrough(animated: false, isAccountFirst: false)
-                case .needAccountMigration(let accountId):
+                case let .needAccountMigration(accountId):
                     self.migrateAccount(accountId: accountId)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     /// Starts the coordinator
-    func start () {
+    func start() {
         // ~ By default, always present the initial loading at start
-        self.stateSubject.onNext(AppState.initialLoading)
+        stateSubject.onNext(AppState.initialLoading)
         // ~ Dispatch to the proper screen
-        self.dispatchApplication()
+        dispatchApplication()
     }
 
     func migrateAccount(accountId: String) {
-        let migratonController = MigrateAccountViewController.instantiate(with: self.injectionBag)
+        let migratonController = MigrateAccountViewController.instantiate(with: injectionBag)
         migratonController.viewModel.accountToMigrate = accountId
-        self.present(viewController: migratonController, withStyle: .show,
-                     withAnimation: true,
-                     withStateable: migratonController.viewModel)
+        present(viewController: migratonController, withStyle: .show,
+                withAnimation: true,
+                withStateable: migratonController.viewModel)
     }
 
     /// Handles the switch between the three supported screens.
     private func dispatchApplication() {
-        if self.injectionBag.accountService.accounts.isEmpty {
-            self.stateSubject.onNext(AppState.needToOnboard(animated: true, isFirstAccount: true))
+        if injectionBag.accountService.accounts.isEmpty {
+            stateSubject.onNext(AppState.needToOnboard(animated: true, isFirstAccount: true))
         } else {
-            self.stateSubject.onNext(AppState.allSet)
+            stateSubject.onNext(AppState.allSet)
         }
     }
 
     /// Presents the initial loading interface as the root of the navigation
-    func showInitialLoading () {
+    func showInitialLoading() {
         let initialLoading = InitialLoadingViewController.instantiate()
-        self.navigationController.setViewControllers([initialLoading], animated: true)
+        navigationController.setViewControllers([initialLoading], animated: true)
     }
 
     func showDatabaseError() {
         let alertController = UIAlertController(title: L10n.Alerts.dbFailedTitle,
                                                 message: L10n.Alerts.dbFailedMessage,
                                                 preferredStyle: .alert)
-        self.present(viewController: alertController, withStyle: .present, withAnimation: false, disposeBag: self.disposeBag)
+        present(
+            viewController: alertController,
+            withStyle: .present,
+            withAnimation: false,
+            disposeBag: disposeBag
+        )
     }
 
     // MARK: - Private methods
 
     /// Presents the walkthrough as a popup with a fade effect
-    private func showWalkthrough (animated: Bool, isAccountFirst: Bool) {
-        let walkthroughCoordinator = WalkthroughCoordinator(with: self.injectionBag)
+    private func showWalkthrough(animated: Bool, isAccountFirst: Bool) {
+        let walkthroughCoordinator = WalkthroughCoordinator(with: injectionBag)
         walkthroughCoordinator.isAccountFirst = isAccountFirst
         walkthroughCoordinator.withAnimations = animated
         walkthroughCoordinator.start()
 
-        self.addChildCoordinator(childCoordinator: walkthroughCoordinator)
+        addChildCoordinator(childCoordinator: walkthroughCoordinator)
         let walkthroughViewController = walkthroughCoordinator.rootViewController
-        self.present(viewController: walkthroughViewController,
-                     withStyle: .appear,
-                     withAnimation: true,
-                     disposeBag: self.disposeBag)
+        present(viewController: walkthroughViewController,
+                withStyle: .appear,
+                withAnimation: true,
+                disposeBag: disposeBag)
 
         walkthroughViewController.rx.controllerWasDismissed
-            .subscribe(onNext: { [weak self, weak walkthroughCoordinator] (_) in
+            .subscribe(onNext: { [weak self, weak walkthroughCoordinator] _ in
                 walkthroughCoordinator?.stateSubject.dispose()
                 self?.removeChildCoordinator(childCoordinator: walkthroughCoordinator)
                 self?.dispatchApplication()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     /// Presents the main interface
-    private func showMainInterface () {
-
-        if !self.childCoordinators.isEmpty,
-           self.childCoordinators[0] as? ConversationsCoordinator != nil {
+    private func showMainInterface() {
+        if !childCoordinators.isEmpty,
+           childCoordinators[0] as? ConversationsCoordinator != nil {
             return
         }
-        let conversationsCoordinator = ConversationsCoordinator(with: self.injectionBag)
+        let conversationsCoordinator = ConversationsCoordinator(with: injectionBag)
         conversationsCoordinator.parentCoordinator = self
-        conversationsCoordinator.setNavigationController(controller: self.navigationController)
+        conversationsCoordinator.setNavigationController(controller: navigationController)
         conversationsCoordinator.start()
-        self.addChildCoordinator(childCoordinator: conversationsCoordinator)
+        addChildCoordinator(childCoordinator: conversationsCoordinator)
     }
 
     func openConversation(participantID: String) {
-        if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
+        if let conversationCoordinator = childCoordinators[0] as? ConversationsCoordinator {
             conversationCoordinator.pushConversation(participantId: participantID)
         }
     }
 
     func openConversation(conversationId: String, accountId: String) {
-        if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
-            conversationCoordinator.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: true)
+        if let conversationCoordinator = childCoordinators[0] as? ConversationsCoordinator {
+            conversationCoordinator.openConversation(
+                conversationId: conversationId,
+                accountId: accountId,
+                shouldOpenSmarList: true
+            )
         }
     }
 

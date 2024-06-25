@@ -19,9 +19,9 @@
  */
 
 import Foundation
+@testable import Ring
 import RxRelay
 import RxSwift
-@testable import Ring
 
 class TestableSwarmInfo: SwarmInfoProtocol {
     var avatar: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
@@ -34,9 +34,7 @@ class TestableSwarmInfo: SwarmInfoProtocol {
 
     var avatarHeight: CGFloat = 55
     var avatarSpacing: CGFloat = 2
-    lazy var id: String = {
-        return conversation?.id ?? ""
-    }()
+    lazy var id: String = conversation?.id ?? ""
 
     var finalTitle: Observable<String> = Observable.just("")
     var finalAvatar: Observable<UIImage> = Observable.just(UIImage())
@@ -48,19 +46,23 @@ class TestableSwarmInfo: SwarmInfoProtocol {
     let containsSearchQuery: Bool
     let hasParticipantWithRegisteredName: Bool
 
-    init(participants: [ParticipantInfo], containsSearchQuery: Bool, hasParticipantWithRegisteredName: Bool) {
+    init(
+        participants: [ParticipantInfo],
+        containsSearchQuery: Bool,
+        hasParticipantWithRegisteredName: Bool
+    ) {
         self.participants.accept(participants)
         self.containsSearchQuery = containsSearchQuery
         self.hasParticipantWithRegisteredName = hasParticipantWithRegisteredName
     }
 
-    func addContacts(contacts: [Ring.ContactModel]) {}
+    func addContacts(contacts _: [Ring.ContactModel]) {}
 
-    func hasParticipantWithRegisteredName(name: String) -> Bool {
+    func hasParticipantWithRegisteredName(name _: String) -> Bool {
         return hasParticipantWithRegisteredName
     }
-    func contains(searchQuery: String) -> Bool {
+
+    func contains(searchQuery _: String) -> Bool {
         return containsSearchQuery
     }
-
 }

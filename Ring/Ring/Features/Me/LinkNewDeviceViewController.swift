@@ -23,61 +23,64 @@ import Reusable
 import RxSwift
 
 class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
-
     var viewModel: LinkNewDeviceViewModel!
     let disposeBag = DisposeBag()
     var loadingViewPresenter = LoadingViewPresenter()
 
     override func viewDidLoad() {
-
-        self.view.backgroundColor = UIColor.white.withAlphaComponent(0.0)
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         super.viewDidLoad()
 
-        self.viewModel.observableState
+        viewModel.observableState
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (state) in
+            .subscribe(onNext: { [weak self] state in
                 switch state {
                 case .generatingPin:
                     self?.showProgress()
-                case .success(let pin):
+                case let .success(pin):
                     self?.hideHud()
                     self?.showSuccessAlert(pin: pin)
-                case .error(let pinError):
+                case let .error(pinError):
                     self?.hideHud()
                     self?.showErrorAlert(error: pinError.description)
                 default:
                     break
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.showInitialAlert()
+        showInitialAlert()
     }
 
     private func showProgress() {
-        loadingViewPresenter.presentWithMessage(message: L10n.LinkDevice.hudMessage, presentingVC: self, animated: true)
+        loadingViewPresenter.presentWithMessage(
+            message: L10n.LinkDevice.hudMessage,
+            presentingVC: self,
+            animated: true
+        )
     }
+
     private func hideHud() {
         loadingViewPresenter.hide(animated: false)
     }
 
     func showSuccessAlert(pin: String) {
         let alert = UIAlertController(title: pin,
-                                      message: self.viewModel.explanationMessage,
+                                      message: viewModel.explanationMessage,
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: L10n.Global.ok,
                                    style: .default) { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
         alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     func showInitialAlert() {
-        let alert = UIAlertController(title: self.viewModel.linkDeviceTitleTitle,
+        let alert = UIAlertController(title: viewModel.linkDeviceTitleTitle,
                                       message: nil,
                                       preferredStyle: .alert)
         let actionCancel =
@@ -87,7 +90,7 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
             }
         let actionLink =
             UIAlertAction(title: L10n.Global.ok,
-                          style: .default) {[weak self] _ in
+                          style: .default) { [weak self] _ in
                 guard let self = self else { return }
                 if !self.viewModel.hasPassord {
                     self.viewModel.linkDevice(with: "")
@@ -100,13 +103,13 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         alert.addAction(actionCancel)
         alert.addAction(actionLink)
 
-        if self.viewModel.hasPassord {
-            alert.addTextField { (textField) in
+        if viewModel.hasPassord {
+            alert.addTextField { textField in
                 textField.isSecureTextEntry = true
                 textField.placeholder = L10n.Global.enterPassword
             }
         }
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     func showErrorAlert(error: String) {
@@ -114,10 +117,10 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                                       message: error,
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: L10n.Global.ok,
-                                   style: .cancel) {[weak self] _ in
+                                   style: .cancel) { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
         alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }

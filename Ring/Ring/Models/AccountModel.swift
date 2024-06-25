@@ -35,6 +35,7 @@ enum AccountModelError: Error {
  */
 class AccountModel: Equatable {
     // MARK: Public members
+
     var id: String = ""
     var protectedDetails: AccountConfigModel? {
         willSet {
@@ -42,16 +43,16 @@ class AccountModel: Equatable {
                 if !newDetails
                     .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
                     .isEmpty {
-                    self.username = newDetails
+                    username = newDetails
                         .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
                 }
                 let accountType = newDetails
-                    .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType))
+                    .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountType))
                 if let type = AccountType(rawValue: accountType) {
                     self.type = type
                 }
-                self.enabled = newDetails
-                    .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountEnable))
+                enabled = newDetails
+                    .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountEnable))
                     .boolValue
                 let managerConfModel = ConfigKeyModel(withKey: .managerUri)
                 let isJams = !newDetails.get(withConfigKeyModel: managerConfModel).isEmpty
@@ -60,7 +61,11 @@ class AccountModel: Equatable {
         }
     }
 
-    let detailsQueue = DispatchQueue(label: "com.accountDetailsAccess", qos: .background, attributes: .concurrent)
+    let detailsQueue = DispatchQueue(
+        label: "com.accountDetailsAccess",
+        qos: .background,
+        attributes: .concurrent
+    )
 
     var details: AccountConfigModel? {
         get {
@@ -68,7 +73,7 @@ class AccountModel: Equatable {
         }
 
         set(newValue) {
-            detailsQueue.sync(flags: .barrier) {[weak self] in
+            detailsQueue.sync(flags: .barrier) { [weak self] in
                 self?.protectedDetails = newValue
             }
         }
@@ -86,7 +91,11 @@ class AccountModel: Equatable {
         }
     }
 
-    let volatileDetailsQueue = DispatchQueue(label: "com.accountVolatileDetailsAccess", qos: .background, attributes: .concurrent)
+    let volatileDetailsQueue = DispatchQueue(
+        label: "com.accountVolatileDetailsAccess",
+        qos: .background,
+        attributes: .concurrent
+    )
 
     var protectedVolatileDetails: AccountConfigModel? {
         willSet {
@@ -94,41 +103,47 @@ class AccountModel: Equatable {
                 if !newDetails
                     .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName))
                     .isEmpty {
-                    self.registeredName = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName))
+                    registeredName = newDetails
+                        .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName))
                 }
                 if let status = AccountState(rawValue:
                                                 newDetails.get(withConfigKeyModel:
-                                                                ConfigKeyModel(withKey: .accountRegistrationStatus))) {
+                                                                ConfigKeyModel(
+                                                                    withKey: .accountRegistrationStatus
+                                                                ))) {
                     self.status = status
                 }
             }
         }
     }
+
     var credentialDetails = [AccountCredentialsModel]()
     var devices = [DeviceModel]()
     var registeredName = ""
     var username = ""
     var jamiId: String {
-        return self.username.replacingOccurrences(of: "ring:", with: "")
+        return username.replacingOccurrences(of: "ring:", with: "")
     }
+
     var type = AccountType.ring
     var isJams = false
     var status = AccountState.unregistered
     var enabled = true
 
     // MARK: Init
+
     convenience init(withAccountId accountId: String) {
         self.init()
-        self.id = accountId
+        id = accountId
     }
 
     convenience init(withAccountId accountId: String,
                      details: AccountConfigModel,
                      volatileDetails: AccountConfigModel,
-                     credentials: [AccountCredentialsModel],
+                     credentials _: [AccountCredentialsModel],
                      devices: [DeviceModel]) throws {
         self.init()
-        self.id = accountId
+        id = accountId
         self.details = details
         self.volatileDetails = volatileDetails
         self.devices = devices
@@ -137,5 +152,4 @@ class AccountModel: Equatable {
     static func == (lhs: AccountModel, rhs: AccountModel) -> Bool {
         return lhs.id == rhs.id
     }
-
 }

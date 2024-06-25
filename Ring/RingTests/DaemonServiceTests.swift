@@ -18,8 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import XCTest
 @testable import Ring
+import XCTest
 
 /**
  A test class designed to validate that the daemon service runs as expected.
@@ -36,7 +36,7 @@ class DaemonServiceTests: XCTestCase {
      */
     func testStart() -> DaemonService {
         var hasStartError = false
-        let daemonService = DaemonService.init(dRingAdaptor: DRingAdapter())
+        let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
         do {
             try daemonService.startDaemon()
         } catch {
@@ -69,8 +69,8 @@ class DaemonServiceTests: XCTestCase {
      Tests that the Ring Daemon Service does not stop if it is not currently running.
      */
     func testDaemonNotRunningException() {
-        let daemonService = DaemonService.init(dRingAdaptor: DRingAdapter())
-        XCTAssertThrowsError(try daemonService.stopDaemon()) { (error) in
+        let daemonService = DaemonService(dRingAdaptor: DRingAdapter())
+        XCTAssertThrowsError(try daemonService.stopDaemon()) { error in
             XCTAssertEqual(error as? StopDaemonError, StopDaemonError.daemonNotRunning)
         }
     }
@@ -80,8 +80,8 @@ class DaemonServiceTests: XCTestCase {
      This test use a dedicated DRingAdaptor fixture.
      */
     func testDaemonFailToInit() {
-        let daemonService = DaemonService.init(dRingAdaptor: FixtureFailInitDRingAdapter())
-        XCTAssertThrowsError(try daemonService.startDaemon()) { (error) in
+        let daemonService = DaemonService(dRingAdaptor: FixtureFailInitDRingAdapter())
+        XCTAssertThrowsError(try daemonService.startDaemon()) { error in
             XCTAssertEqual(error as? StartDaemonError, StartDaemonError.initializationFailure)
         }
     }
@@ -91,8 +91,8 @@ class DaemonServiceTests: XCTestCase {
      This test use a dedicated DRingAdaptor fixture.
      */
     func testDaemonFailToStart() {
-        let daemonService = DaemonService.init(dRingAdaptor: FixtureFailStartDRingAdapter())
-        XCTAssertThrowsError(try daemonService.startDaemon()) { (error) in
+        let daemonService = DaemonService(dRingAdaptor: FixtureFailStartDRingAdapter())
+        XCTAssertThrowsError(try daemonService.startDaemon()) { error in
             XCTAssertEqual(error as? StartDaemonError, StartDaemonError.startFailure)
         }
     }

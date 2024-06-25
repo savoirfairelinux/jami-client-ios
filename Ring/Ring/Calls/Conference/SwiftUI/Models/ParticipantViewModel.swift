@@ -19,8 +19,8 @@
  */
 
 import Foundation
-import RxSwift
 import RxRelay
+import RxSwift
 import SwiftUI
 
 class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable {
@@ -32,10 +32,12 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
             }
         }
         didSet {
-            let mode = notActiveParticipant ? AVLayerVideoGravity.resizeAspectFill : AVLayerVideoGravity.resizeAspect
-            self.setAspectMode(mode: mode)
+            let mode = notActiveParticipant ? AVLayerVideoGravity
+                .resizeAspectFill : AVLayerVideoGravity.resizeAspect
+            setAspectMode(mode: mode)
         }
     }
+
     var audioMuted: Bool = false {
         willSet {
             DispatchQueue.main.async { [weak self] in
@@ -43,6 +45,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
             }
         }
     }
+
     var handRased: Bool = false {
         willSet {
             DispatchQueue.main.async { [weak self] in
@@ -50,6 +53,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
             }
         }
     }
+
     var voiceActive: Bool = false {
         willSet {
             DispatchQueue.main.async { [weak self] in
@@ -57,6 +61,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
             }
         }
     }
+
     var name = "" {
         willSet {
             DispatchQueue.main.async { [weak self] in
@@ -80,6 +85,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
             }
         }
     }
+
     @Published var conferenceActions: [ButtonInfoWrapper]
     @Published var avatar = UIImage()
     var mainDisplayLayer = AVSampleBufferDisplayLayer()
@@ -108,11 +114,12 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                 isVideoMuted = info.isVideoMuted
             }
 
-            if info.isModerator != self.isModerator {
-                self.isModerator = info.isModerator
+            if info.isModerator != isModerator {
+                isModerator = info.isModerator
             }
         }
     }
+
     let disposeBag = DisposeBag()
     var videoDisposeBag = DisposeBag()
     var id: String
@@ -121,18 +128,23 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
     let injectionBag: InjectionBag
     let profileInfo: ParticipantProfileInfo
 
-    init(info: ConferenceParticipant, injectionBag: InjectionBag, conferenceState: PublishSubject<State>, mode: AVLayerVideoGravity) {
-        self.id = info.sinkId
+    init(
+        info: ConferenceParticipant,
+        injectionBag: InjectionBag,
+        conferenceState: PublishSubject<State>,
+        mode: AVLayerVideoGravity
+    ) {
+        id = info.sinkId
         self.injectionBag = injectionBag
-        self.videoService = injectionBag.videoService
+        videoService = injectionBag.videoService
         self.conferenceState = conferenceState
-        self.gridDisplayLayer.videoGravity = .resizeAspectFill
+        gridDisplayLayer.videoGravity = .resizeAspectFill
         conferenceActions = [ButtonInfoWrapper]()
-        self.profileInfo = ParticipantProfileInfo(injectionBag: injectionBag, info: info)
-        self.setAspectMode(mode: mode)
-        self.profileInfo.avatar
+        profileInfo = ParticipantProfileInfo(injectionBag: injectionBag, info: info)
+        setAspectMode(mode: mode)
+        profileInfo.avatar
             .observe(on: MainScheduler.instance)
-            .startWith(self.profileInfo.avatar.value)
+            .startWith(profileInfo.avatar.value)
             .filter { $0 != nil }
             .subscribe(onNext: { [weak self] avatar in
                 if let avatar = avatar {
@@ -140,15 +152,15 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                 }
             })
             .disposed(by: disposeBag)
-        self.profileInfo.displayName
+        profileInfo.displayName
             .observe(on: MainScheduler.instance)
-            .startWith(self.profileInfo.displayName.value)
+            .startWith(profileInfo.displayName.value)
             .filter { !$0.isEmpty }
             .subscribe(onNext: { [weak self] name in
                 self?.name = name
             })
             .disposed(by: disposeBag)
-        self.subscribe()
+        subscribe()
     }
 
     func radians(from degrees: Int) -> CGFloat {
@@ -158,7 +170,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
     var currentRadiants: CGFloat = 0
 
     func setAspectMode(mode: AVLayerVideoGravity) {
-        self.mainDisplayLayer.videoGravity = mode
+        mainDisplayLayer.videoGravity = mode
     }
 
     static func == (lhs: ParticipantViewModel, rhs: ParticipantViewModel) -> Bool {
@@ -180,14 +192,14 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
     var videoRunning = BehaviorRelay<Bool>(value: false)
 
     func subscribe() {
-        self.videoService.addListener(withsinkId: self.id)
+        videoService.addListener(withsinkId: id)
         if !subscribed {
             subscribed = true
-            self.videoService.videoInputManager.frameSubject
-                .filter({ [weak self]  result in
+            videoService.videoInputManager.frameSubject
+                .filter { [weak self] result in
                     guard let self = self else { return false }
                     return result.sinkId == self.id
-                })
+                }
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] info in
                     guard let self = self else { return }
@@ -205,7 +217,9 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                             transform = transform.rotated(by: radiansValue)
                             self.gridDisplayLayer.setAffineTransform(transform)
                             self.mainDisplayLayer.setAffineTransform(transform)
-                            if let container = self.mainDisplayLayer.superlayer?.delegate as? UIView, container.bounds != self.mainDisplayLayer.frame {
+                            if let container = self.mainDisplayLayer.superlayer?
+                                .delegate as? UIView,
+                               container.bounds != self.mainDisplayLayer.frame {
                                 CATransaction.begin()
                                 CATransaction.setDisableActions(true)
                                 self.mainDisplayLayer.frame = container.bounds
@@ -217,51 +231,91 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                         self.videoRunning.accept(true)
                     }
                 })
-                .disposed(by: self.disposeBag)
+                .disposed(by: disposeBag)
         }
     }
 
     func unsubscribe() {
-        self.videoService.removeListener(withsinkId: self.id)
-        if !self.videoService.hasListener(withsinkId: self.id) {
+        videoService.removeListener(withsinkId: id)
+        if !videoService.hasListener(withsinkId: id) {
             subscribed = false
-            self.videoRunning.accept(false)
-            self.videoDisposeBag = DisposeBag()
+            videoRunning.accept(false)
+            videoDisposeBag = DisposeBag()
         }
     }
 
     func addItem(item: MenuItem) {
-        guard let info = self.info else { return }
+        guard let info = info else { return }
         switch item {
         case .minimize:
-            let button = ButtonInfo(background: .clear, stroke: .clear, name: "arrow.down.right.and.arrow.up.left", action: ParticipantAction.minimize(info: info))
+            let button = ButtonInfo(
+                background: .clear,
+                stroke: .clear,
+                name: "arrow.down.right.and.arrow.up.left",
+                action: ParticipantAction.minimize(info: info)
+            )
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .maximize:
-            let button = ButtonInfo(background: .clear, stroke: .clear, name: "arrow.up.left.and.arrow.down.right", action: ParticipantAction.maximize(info: info))
+            let button = ButtonInfo(
+                background: .clear,
+                stroke: .clear,
+                name: "arrow.up.left.and.arrow.down.right",
+                action: ParticipantAction.maximize(info: info)
+            )
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .setModerator:
-            let button = self.isModerator ? ButtonInfo(background: .clear, stroke: .clear, name: "crown", action: ParticipantAction.setModerator(info: info)) :
-                ButtonInfo(background: .clear, stroke: .clear, name: "crown.fill", action: ParticipantAction.setModerator(info: info))
+            let button = isModerator ? ButtonInfo(
+                background: .clear,
+                stroke: .clear,
+                name: "crown",
+                action: ParticipantAction.setModerator(info: info)
+            ) :
+            ButtonInfo(
+                background: .clear,
+                stroke: .clear,
+                name: "crown.fill",
+                action: ParticipantAction.setModerator(info: info)
+            )
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .muteAudio:
-            var button = self.audioMuted ? ButtonInfo(background: .clear, stroke: .clear, name: "mic.slash", action: ParticipantAction.muteAudio(info: info)) :
-                ButtonInfo(background: .clear, stroke: .clear, name: "mic", action: ParticipantAction.muteAudio(info: info))
-            button.imageColor = self.audioMuted ? .red : .white
+            var button = audioMuted ? ButtonInfo(
+                background: .clear,
+                stroke: .clear,
+                name: "mic.slash",
+                action: ParticipantAction.muteAudio(info: info)
+            ) :
+            ButtonInfo(
+                background: .clear,
+                stroke: .clear,
+                name: "mic",
+                action: ParticipantAction.muteAudio(info: info)
+            )
+            button.imageColor = audioMuted ? .red : .white
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .hangup:
-            let button = ButtonInfo(background: .clear, stroke: .clear, name: "slash.circle", action: ParticipantAction.hangup(info: info))
+            let button = ButtonInfo(
+                background: .clear,
+                stroke: .clear,
+                name: "slash.circle",
+                action: ParticipantAction.hangup(info: info)
+            )
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .lowerHand:
             let button =
-                ButtonInfo(background: .clear, stroke: .clear, name: "hand.raised", action: ParticipantAction.raseHand(info: info))
+                ButtonInfo(
+                    background: .clear,
+                    stroke: .clear,
+                    name: "hand.raised",
+                    action: ParticipantAction.raseHand(info: info)
+                )
             conferenceActions.append(ButtonInfoWrapper(info: button))
         }
     }
 
     func setActions(items: [MenuItem]) {
-        self.conferenceActions = [ButtonInfoWrapper]()
+        conferenceActions = [ButtonInfoWrapper]()
         for item in items {
-            self.addItem(item: item)
+            addItem(item: item)
         }
     }
 

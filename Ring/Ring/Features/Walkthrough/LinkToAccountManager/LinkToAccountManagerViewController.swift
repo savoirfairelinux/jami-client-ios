@@ -18,26 +18,26 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import Reusable
 import RxSwift
+import UIKit
 
 class LinkToAccountManagerViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: LinkToAccountManagerViewModel!
 
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var cancelButton: DesignableButton!
-    @IBOutlet weak var signInButton: DesignableButton!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var userNameTextField: UITextField!
-    @IBOutlet weak var accountManagerTextField: UITextField!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var passwordLabel: UILabel!
-    @IBOutlet weak var accountManagerLabel: UILabel!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet var cancelButton: DesignableButton!
+    @IBOutlet var signInButton: DesignableButton!
+    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var userNameTextField: UITextField!
+    @IBOutlet var accountManagerTextField: UITextField!
+    @IBOutlet var userNameLabel: UILabel!
+    @IBOutlet var passwordLabel: UILabel!
+    @IBOutlet var accountManagerLabel: UILabel!
 
-    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var containerViewBottomConstraint: NSLayoutConstraint!
     var isKeyboardOpened: Bool = false
     var disposeBag = DisposeBag()
     var loadingViewPresenter = LoadingViewPresenter()
@@ -47,45 +47,59 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        self.bindViewToViewModel()
-        self.applyL10()
-        self.view.layoutIfNeeded()
+        bindViewToViewModel()
+        applyL10()
+        view.layoutIfNeeded()
         configurePasswordField()
-        self.userNameTextField.becomeFirstResponder()
+        userNameTextField.becomeFirstResponder()
         signInButton.titleLabel?.ajustToTextSize()
 
-        self.adaptToWelcomeFormKeyboardState(for: self.scrollView, with: self.disposeBag)
+        adaptToWelcomeFormKeyboardState(for: scrollView, with: disposeBag)
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.setupUI()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         adaptToSystemColor()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillAppear(withNotification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillDisappear(withNotification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
         setupUI()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
     }
 
     func setupUI() {
         let welcomeFormPresentationStyle = ScreenHelper.welcomeFormPresentationStyle()
 
         if welcomeFormPresentationStyle == .fullScreen {
-            self.contentView.removeCorners()
-            self.view.backgroundColor = .secondarySystemBackground
+            contentView.removeCorners()
+            view.backgroundColor = .secondarySystemBackground
         } else {
-            self.contentView.roundTopCorners(radius: 12)
-            self.view.backgroundColor = .clear
+            contentView.roundTopCorners(radius: 12)
+            view.backgroundColor = .clear
         }
 
         DispatchQueue.main.async { [weak self] in
@@ -108,9 +122,9 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
                 rightButton?.isHidden = text.isEmpty
                 rightButton?.isEnabled = !text.isEmpty
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         passwordTextField.rightViewMode = .always
-        let rightView = UIView(frame: CGRect( x: 0, y: 0, width: 50, height: 30))
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         rightView.addSubview(rightButton)
         passwordTextField.rightView = rightView
         rightButton.rx.tap
@@ -120,7 +134,7 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
                 isSecureTextEntry?
                     .onNext(self.passwordTextField.isSecureTextEntry)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         isSecureTextEntry.asObservable()
             .subscribe(onNext: { [weak rightButton] secure in
                 let image = secure ?
@@ -128,7 +142,7 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
                     UIImage(asset: Asset.icShowInput)
                 rightButton?.setImage(image, for: .normal)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func setupConstraint() {
@@ -138,8 +152,10 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
 
         // Create a new constraint with the desired relationship
         let newConstraint: NSLayoutConstraint
-        if ScreenHelper.welcomeFormPresentationStyle() == .fullScreen || UIDevice.current.userInterfaceIdiom == .pad {
-            newConstraint = contentView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.height)
+        if ScreenHelper.welcomeFormPresentationStyle() == .fullScreen || UIDevice.current
+            .userInterfaceIdiom == .pad {
+            newConstraint = contentView.heightAnchor
+                .constraint(equalToConstant: UIScreen.main.bounds.size.height)
         } else {
             newConstraint = contentView.heightAnchor.constraint(equalToConstant: formHeight)
         }
@@ -152,85 +168,93 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
     }
 
     func setContentInset(keyboardHeight: CGFloat = 0) {
-        self.containerViewBottomConstraint.constant = keyboardHeight
+        containerViewBottomConstraint.constant = keyboardHeight
     }
 
     @objc
     func keyboardWillAppear(withNotification notification: NSNotification) {
-        self.isKeyboardOpened = true
+        isKeyboardOpened = true
 
         if let userInfo = notification.userInfo,
            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
            ScreenHelper.welcomeFormPresentationStyle() != .fullScreen {
             let keyboardHeight = keyboardFrame.size.height
-            self.setContentInset(keyboardHeight: keyboardHeight)
+            setContentInset(keyboardHeight: keyboardHeight)
         }
     }
 
     @objc
-    func keyboardWillDisappear(withNotification: NSNotification) {
-        self.setContentInset()
+    func keyboardWillDisappear(withNotification _: NSNotification) {
+        setContentInset()
     }
 
     func bindViewToViewModel() {
-        self.userNameTextField.rx.text.orEmpty
+        userNameTextField.rx.text.orEmpty
             .throttle(Durations.threeSeconds.toTimeInterval(), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .bind(to: self.viewModel.userName)
-            .disposed(by: self.disposeBag)
-        self.passwordTextField.rx.text.orEmpty
-            .bind(to: self.viewModel.password)
-            .disposed(by: self.disposeBag)
-        self.accountManagerTextField.rx.text.orEmpty
-            .bind(to: self.viewModel.manager).disposed(by: self.disposeBag)
-        self.signInButton.rx.tap
+            .bind(to: viewModel.userName)
+            .disposed(by: disposeBag)
+        passwordTextField.rx.text.orEmpty
+            .bind(to: viewModel.password)
+            .disposed(by: disposeBag)
+        accountManagerTextField.rx.text.orEmpty
+            .bind(to: viewModel.manager).disposed(by: disposeBag)
+        signInButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 DispatchQueue.global(qos: .background).async {
                     self.viewModel.linkToAccountManager()
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.cancelButton.rx.tap
+            .disposed(by: disposeBag)
+        cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.dismiss(animated: true)
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.createState
+            .disposed(by: disposeBag)
+        viewModel.createState
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (state) in
+            .subscribe(onNext: { [weak self] state in
                 switch state {
                 case .started:
                     self?.showLinkHUD()
                 case .success:
                     self?.hideHud()
-                case .error(let error):
+                case let .error(error):
                     self?.hideHud()
                     self?.showAccountCreationError(error: error)
                 default:
                     self?.hideHud()
                 }
-            }, onError: { [weak self] (error) in
+            }, onError: { [weak self] error in
                 self?.hideHud()
 
                 if let error = error as? AccountCreationError {
                     self?.showAccountCreationError(error: error)
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.canLink.bind(to: self.signInButton.rx.isEnabled)
-            .disposed(by: self.disposeBag)
-        self.viewModel.canLink
+            .disposed(by: disposeBag)
+        viewModel.canLink.bind(to: signInButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        viewModel.canLink
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] isEnabled in
-                self?.signInButton.setTitleColor(isEnabled ? .jamiButtonDark : .systemGray, for: .normal)
+                self?.signInButton.setTitleColor(
+                    isEnabled ? .jamiButtonDark : .systemGray,
+                    for: .normal
+                )
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func showLinkHUD() {
-        loadingViewPresenter.presentWithMessage(message: L10n.LinkToAccountManager.signIn, presentingVC: self, animated: false, modalPresentationStyle: .overFullScreen)
+        loadingViewPresenter.presentWithMessage(
+            message: L10n.LinkToAccountManager.signIn,
+            presentingVC: self,
+            animated: false,
+            modalPresentationStyle: .overFullScreen
+        )
     }
 
     private func hideHud() {
@@ -238,17 +262,17 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
     }
 
     private func showAccountCreationError(error: AccountCreationError) {
-        let alert = UIAlertController.init(title: error.title,
-                                           message: error.message,
-                                           preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: L10n.Global.ok, style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: error.title,
+                                      message: error.message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
     func applyL10() {
         signInButton.setTitle(L10n.LinkToAccountManager.signIn, for: .normal)
         titleLabel.text = L10n.LinkToAccountManager.signIn
-        self.navigationItem.title = L10n.LinkToAccountManager.signIn
+        navigationItem.title = L10n.LinkToAccountManager.signIn
         passwordTextField.placeholder = L10n.Global.password
         userNameTextField.placeholder = L10n.Global.username
         accountManagerTextField.placeholder = L10n.LinkToAccountManager.accountManagerPlaceholder

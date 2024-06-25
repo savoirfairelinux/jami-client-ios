@@ -19,17 +19,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import GSKStretchyHeaderView
 import Reusable
-import RxSwift
 import RxCocoa
 import RxDataSources
-import GSKStretchyHeaderView
+import RxSwift
+import UIKit
 
 class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
-
     var viewModel: ContactViewModel!
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
     private let disposeBag = DisposeBag()
     private let cellIdentifier = "ProfileInfoCell"
     private var stretchyHeader: ProfileHeaderView!
@@ -37,8 +36,8 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.addHeaderView()
-        self.setUpTableView()
+        addHeaderView()
+        setUpTableView()
         view.backgroundColor = UIColor.jamiBackgroundColor
         tableView.backgroundColor = UIColor.jamiBackgroundColor
         navigationItem.titleView = titleView
@@ -48,66 +47,68 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+        navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow
+            .cgColor
     }
 
     private func addHeaderView() {
         guard let nibViews = Bundle.main.loadNibNamed("ProfileHeaderView",
                                                       owner: self,
-                                                      options: nil) else {
+                                                      options: nil)
+        else {
             return
         }
         guard let headerView = nibViews.first as? ProfileHeaderView else {
             return
         }
-        self.stretchyHeader = headerView
-        self.tableView.addSubview(self.stretchyHeader)
-        self.tableView.delegate = self
-        self.configureHeaderViewBinding()
+        stretchyHeader = headerView
+        tableView.addSubview(stretchyHeader)
+        tableView.delegate = self
+        configureHeaderViewBinding()
     }
 
     private func configureHeaderViewBinding() {
-
         // avatar
-        Observable<(Data?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
-                                                  self.viewModel.displayName.asObservable()) { profileImage, username in
-            return (profileImage, username)
+        Observable<(Data?, String)>.combineLatest(viewModel.profileImageData.asObservable(),
+                                                  viewModel.displayName
+                                                    .asObservable()) { profileImage, username in
+            (profileImage, username)
         }
-        .startWith((self.viewModel.profileImageData.value, self.viewModel.userName.value))
+        .startWith((viewModel.profileImageData.value, viewModel.userName.value))
         .observe(on: MainScheduler.instance)
-        .subscribe({ [weak self] profileData -> Void in
+        .subscribe { [weak self] profileData in
             guard let data = profileData.element?.1 else { return }
             self?.stretchyHeader
                 .avatarView?.subviews
-                .forEach({ $0.removeFromSuperview() })
+                .forEach { $0.removeFromSuperview() }
             self?.stretchyHeader
                 .avatarView?.addSubview(
                     AvatarView(profileImageData:
                                 profileData.element?.0,
                                username: data,
                                size: 100,
-                               labelFontSize: 44))
+                               labelFontSize: 44)
+                )
             self?.titleView.avatarImage =
                 AvatarView(profileImageData: profileData.element?.0,
                            username: data,
                            size: 36)
-
-            return
-        })
-        .disposed(by: self.disposeBag)
+        }
+        .disposed(by: disposeBag)
 
         let maxLabelWidth = UIScreen.main.bounds.size.width * 0.90
-        self.stretchyHeader.jamiID.preferredMaxLayoutWidth = maxLabelWidth
-        self.stretchyHeader.userName.preferredMaxLayoutWidth = maxLabelWidth
-        self.stretchyHeader.displayName.preferredMaxLayoutWidth = maxLabelWidth
+        stretchyHeader.jamiID.preferredMaxLayoutWidth = maxLabelWidth
+        stretchyHeader.userName.preferredMaxLayoutWidth = maxLabelWidth
+        stretchyHeader.displayName.preferredMaxLayoutWidth = maxLabelWidth
 
-        self.viewModel.displayName.asDriver()
-            .drive(self.stretchyHeader.displayName.rx.text)
-            .disposed(by: self.disposeBag)
+        viewModel.displayName.asDriver()
+            .drive(stretchyHeader.displayName.rx.text)
+            .disposed(by: disposeBag)
 
-        self.viewModel.userName
+        viewModel.userName
             .observe(on: MainScheduler.instance)
             .asObservable()
             .subscribe(onNext: { username in
@@ -115,51 +116,59 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self.stretchyHeader.userName.text = username
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.stretchyHeader.jamiID.text = self.viewModel.conversation.hash
+        stretchyHeader.jamiID.text = viewModel.conversation.hash
 
-        self.viewModel.titleName
+        viewModel.titleName
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
                 self?.titleView.text = name
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func setUpTableView() {
-        self.tableView.rowHeight = 60.0
-        let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, SectionModel<String, ContactActions>.Item)
-            -> UITableViewCell = {
-                (dataSource: TableViewSectionedDataSource<SectionModel<String, ContactActions>>,
-                 tableView: UITableView,
-                 indexPath: IndexPath,
-                 conversationItem: SectionModel<String, ContactActions>.Item) in
+        tableView.rowHeight = 60.0
+        let configureCell: (
+            TableViewSectionedDataSource,
+            UITableView,
+            IndexPath,
+            SectionModel<String, ContactActions>.Item
+        )
+        -> UITableViewCell = {
+            (dataSource: TableViewSectionedDataSource<SectionModel<String, ContactActions>>,
+             tableView: UITableView,
+             indexPath: IndexPath,
+             conversationItem: SectionModel<String, ContactActions>.Item) in
 
-                let model = dataSource.sectionModels
-                if model[indexPath.section].model == self.cellIdentifier {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier)
-                    let image = UIImage(asset: conversationItem.image)
-                    let tintedImage = image?.withRenderingMode(.alwaysTemplate)
-                    cell?.imageView?.image = tintedImage
-                    cell?.imageView?.tintColor = UIColor.jamiSecondary
-                    cell?.textLabel?.text = conversationItem.title
-                    return cell!
-                }
-                return UITableViewCell()
+            let model = dataSource.sectionModels
+            if model[indexPath.section].model == self.cellIdentifier {
+                let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier)
+                let image = UIImage(asset: conversationItem.image)
+                let tintedImage = image?.withRenderingMode(.alwaysTemplate)
+                cell?.imageView?.image = tintedImage
+                cell?.imageView?.tintColor = UIColor.jamiSecondary
+                cell?.textLabel?.text = conversationItem.title
+                return cell!
             }
+            return UITableViewCell()
+        }
 
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, ContactActions>>(configureCell: configureCell)
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<
+                                                                String,
+                                                                ContactActions
+                                                              >>(configureCell: configureCell)
 
-        self.viewModel.tableSection
+        viewModel.tableSection
             .observe(on: MainScheduler.instance)
-            .bind(to: self.tableView.rx.items(dataSource: dataSource))
+            .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
-        self.tableView.rx.itemSelected
+        tableView.rx.itemSelected
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] indexPath in
-                if  self?.tableView.cellForRow(at: indexPath) != nil {
+                if self?.tableView.cellForRow(at: indexPath) != nil {
                     switch indexPath.row {
                     case 0:
                         self?.viewModel.startAudioCall()
@@ -177,37 +186,49 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                     self?.tableView.deselectRow(at: indexPath, animated: true)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func showDeleteConversationConfirmation() {
-        let alert = UIAlertController(title: L10n.Alerts.confirmDeleteConversationTitle, message: L10n.Alerts.confirmDeleteConversationFromContact, preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction, style: .destructive) { [weak self](_: UIAlertAction!) -> Void in
+        let alert = UIAlertController(
+            title: L10n.Alerts.confirmDeleteConversationTitle,
+            message: L10n.Alerts.confirmDeleteConversationFromContact,
+            preferredStyle: .alert
+        )
+        let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction,
+                                         style: .destructive) { [weak self] (_: UIAlertAction!) in
             self?.viewModel.deleteConversation()
         }
-        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
+        let cancelAction = UIAlertAction(title: L10n.Global.cancel,
+                                         style: .default) { (_: UIAlertAction!) in }
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     private func showBlockContactConfirmation() {
-        let alert = UIAlertController(title: L10n.Global.blockContact, message: L10n.Alerts.confirmBlockContact, preferredStyle: .alert)
-        let blockAction = UIAlertAction(title: L10n.Global.block, style: .destructive) { [weak self] (_: UIAlertAction!) -> Void in
+        let alert = UIAlertController(
+            title: L10n.Global.blockContact,
+            message: L10n.Alerts.confirmBlockContact,
+            preferredStyle: .alert
+        )
+        let blockAction = UIAlertAction(title: L10n.Global.block,
+                                        style: .destructive) { [weak self] (_: UIAlertAction!) in
             self?.viewModel.blockContact()
             _ = self?.navigationController?.popToRootViewController(animated: false)
         }
-        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
+        let cancelAction = UIAlertAction(title: L10n.Global.cancel,
+                                         style: .default) { (_: UIAlertAction!) in }
         alert.addAction(blockAction)
         alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }
 
 extension ContactViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let navigationHeight = self.navigationController?.navigationBar.bounds.height
-        var size = self.view.bounds.size
+        let navigationHeight = navigationController?.navigationBar.bounds.height
+        var size = view.bounds.size
         var titlViewThreshold: CGFloat = 0
         let screenSize = UIScreen.main.bounds.size
         if let height = navigationHeight {
@@ -225,24 +246,25 @@ extension ContactViewController: UITableViewDelegate {
         titleView.scrollViewDidScroll(scrollView, threshold: titlViewThreshold)
     }
 
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewDidStopScrolling()
+    func scrollViewDidEndDecelerating(_: UIScrollView) {
+        scrollViewDidStopScrolling()
     }
 
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-            self.scrollViewDidStopScrolling()
+            scrollViewDidStopScrolling()
         }
     }
 
     func scrollViewDidStopScrolling() {
-        var contentOffset = self.tableView.contentOffset
-        let middle = (self.stretchyHeader.maximumContentHeight - self.stretchyHeader.minimumContentHeight) * 0.4
-        if self.stretchyHeader.frame.height > middle {
-            contentOffset.y = -self.stretchyHeader.maximumContentHeight
+        var contentOffset = tableView.contentOffset
+        let middle = (stretchyHeader.maximumContentHeight - stretchyHeader.minimumContentHeight) *
+            0.4
+        if stretchyHeader.frame.height > middle {
+            contentOffset.y = -stretchyHeader.maximumContentHeight
         } else {
-            contentOffset.y = -self.stretchyHeader.minimumContentHeight
+            contentOffset.y = -stretchyHeader.minimumContentHeight
         }
-        self.tableView.setContentOffset(contentOffset, animated: true)
+        tableView.setContentOffset(contentOffset, animated: true)
     }
 }

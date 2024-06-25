@@ -20,12 +20,11 @@
  */
 
 class ContactModel: Equatable {
-
     var hash: String = ""
     var userName: String?
     var uriString: String?
     var confirmed: Bool = false
-    var added: Date = Date()
+    var added: Date = .init()
     var banned: Bool = false
     var type = URIType.ring
 
@@ -34,17 +33,17 @@ class ContactModel: Equatable {
     }
 
     init(withUri contactUri: JamiURI) {
-        self.uriString = contactUri.uriString
+        uriString = contactUri.uriString
         type = contactUri.schema
-        self.hash = contactUri.hash ?? ""
+        hash = contactUri.hash ?? ""
     }
 
     // only jami contacts
     init(withDictionary dictionary: [String: String]) {
         if let hash = dictionary["id"] {
             self.hash = hash
-            if let uriString = JamiURI.init(schema: URIType.ring,
-                                            infoHash: hash).uriString {
+            if let uriString = JamiURI(schema: URIType.ring,
+                                       infoHash: hash).uriString {
                 self.uriString = uriString
             }
         }

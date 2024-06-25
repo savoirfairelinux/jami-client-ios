@@ -19,22 +19,24 @@
  */
 
 import Foundation
-import SwiftUI
 import RxSwift
+import SwiftUI
 
 class MessageStackVM: MessageAppearanceProtocol, NameObserver {
     @Published var username = ""
     var horizontalAllignment: HorizontalAlignment {
-        self.message.incoming ? HorizontalAlignment.leading : HorizontalAlignment.trailing
+        message.incoming ? HorizontalAlignment.leading : HorizontalAlignment.trailing
     }
+
     var alignment: Alignment {
-        self.message.incoming ? Alignment.leading : Alignment.trailing
+        message.incoming ? Alignment.leading : Alignment.trailing
     }
+
     var message: MessageModel
 
     var infoState: PublishSubject<State>?
 
-    var styling: MessageStyling = MessageStyling()
+    var styling: MessageStyling = .init()
 
     var disposeBag = DisposeBag()
 
@@ -42,9 +44,9 @@ class MessageStackVM: MessageAppearanceProtocol, NameObserver {
         didSet {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             if shouldDisplayName {
-                self.requestName(jamiId: jamiId)
+                requestName(jamiId: jamiId)
             } else {
-                self.username = ""
+                username = ""
             }
         }
     }
@@ -54,7 +56,6 @@ class MessageStackVM: MessageAppearanceProtocol, NameObserver {
     }
 
     func setInfoState(state: PublishSubject<State>) {
-        self.infoState = state
+        infoState = state
     }
-
 }

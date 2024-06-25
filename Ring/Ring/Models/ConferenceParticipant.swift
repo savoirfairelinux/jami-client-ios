@@ -37,34 +37,34 @@ class ConferenceParticipant: Hashable {
     var recording: Bool = false
     var audioModeratorMuted: Bool = false
 
-    init (info: [String: String], onlyURIAndActive: Bool) {
-        self.uri = info["uri"]
+    init(info: [String: String], onlyURIAndActive: Bool) {
+        uri = info["uri"]
         if let participantActive = info["active"] {
-            self.isActive = participantActive == "true"
+            isActive = participantActive == "true"
         }
         if onlyURIAndActive {
             return
         }
         if let pointX = info["x"] {
-            self.originX = CGFloat((pointX as NSString).doubleValue)
+            originX = CGFloat((pointX as NSString).doubleValue)
         }
         if let pointY = info["y"] {
-            self.originY = CGFloat((pointY as NSString).doubleValue)
+            originY = CGFloat((pointY as NSString).doubleValue)
         }
         if let participantWidth = info["w"] {
-            self.width = CGFloat((participantWidth as NSString).doubleValue)
+            width = CGFloat((participantWidth as NSString).doubleValue)
         }
         if let participantHeight = info["h"] {
-            self.height = CGFloat((participantHeight as NSString).doubleValue)
+            height = CGFloat((participantHeight as NSString).doubleValue)
         }
         if let videoMuted = info["videoMuted"] {
-            self.isVideoMuted = videoMuted.boolValue
+            isVideoMuted = videoMuted.boolValue
         }
         if let audioLocalMuted = info["audioLocalMuted"] {
-            self.isAudioLocalyMuted = audioLocalMuted.boolValue
+            isAudioLocalyMuted = audioLocalMuted.boolValue
         }
         if let audioModeratorMuted = info["audioModeratorMuted"] {
-            self.isAudioMuted = audioModeratorMuted.boolValue
+            isAudioMuted = audioModeratorMuted.boolValue
         }
         if let isModerator = info["isModerator"] {
             self.isModerator = isModerator.boolValue

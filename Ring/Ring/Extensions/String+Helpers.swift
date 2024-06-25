@@ -25,14 +25,17 @@ import MobileCoreServices
 
 extension String {
     func createImage() -> UIImage? {
-        if let data = NSData(base64Encoded: self, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data {
+        if let data = NSData(
+            base64Encoded: self,
+            options: NSData.Base64DecodingOptions.ignoreUnknownCharacters
+        ) as? Data {
             return UIImage(data: data)
         }
         return nil
     }
 
     func toBool() -> Bool? {
-        switch self.lowercased() {
+        switch lowercased() {
         case "true", "yes", "1":
             return true
         case "false", "no", "0":
@@ -46,7 +49,7 @@ extension String {
         let sha1Regex = try? NSRegularExpression(pattern: "(ring:)?([0-9a-f]{40})", options: [])
         if sha1Regex?.firstMatch(in: self,
                                  options: NSRegularExpression.MatchingOptions.reportCompletion,
-                                 range: NSRange(location: 0, length: self.count)) != nil {
+                                 range: NSRange(location: 0, length: count)) != nil {
             return true
         }
         return false
@@ -54,22 +57,33 @@ extension String {
 
     var isPhoneNumber: Bool {
         do {
-            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.phoneNumber.rawValue)
-            let matches = detector.matches(in: self, options: [], range: NSRange(location: 0, length: self.count))
+            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.phoneNumber
+                                                .rawValue)
+            let matches = detector.matches(
+                in: self,
+                options: [],
+                range: NSRange(location: 0, length: count)
+            )
             guard let res = matches.first else { return false }
             return res.resultType == .phoneNumber &&
                 res.range.location == 0 &&
-                res.range.length == self.count
+                res.range.length == count
         } catch {
             return false
         }
     }
+
     var isValidURL: Bool {
         do {
-            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-            if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
+            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link
+                                                .rawValue)
+            if let match = detector.firstMatch(
+                in: self,
+                options: [],
+                range: NSRange(location: 0, length: utf16.count)
+            ) {
                 // it is a link, if the match covers the whole string
-                return match.range.length == self.utf16.count
+                return match.range.length == utf16.count
             } else {
                 return false
             }
@@ -79,11 +93,11 @@ extension String {
     }
 
     func toMD5HexString() -> String {
-        guard let messageData = self.data(using: .utf8) else { return "" }
+        guard let messageData = data(using: .utf8) else { return "" }
         var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))
 
-        digestData.withUnsafeMutableBytes { (digestBytes: UnsafeMutableRawBufferPointer) -> Void in
-            messageData.withUnsafeBytes { (messageBytes: UnsafeRawBufferPointer) -> Void in
+        digestData.withUnsafeMutableBytes { (digestBytes: UnsafeMutableRawBufferPointer) in
+            messageData.withUnsafeBytes { (messageBytes: UnsafeRawBufferPointer) in
                 CC_MD5(messageBytes.baseAddress,
                        CC_LONG(messageData.count),
                        digestBytes.bindMemory(to: UInt8.self).baseAddress)
@@ -94,11 +108,11 @@ extension String {
     }
 
     func prefixString() -> String {
-        return String(self.prefix(1))
+        return String(prefix(1))
     }
 
     func convertToSeconds() -> Int64 {
-        let hourMinSec: [String] = self.components(separatedBy: ":")
+        let hourMinSec: [String] = components(separatedBy: ":")
         switch hourMinSec.count {
         case 1:
             return Int64(Int(hourMinSec[0]) ?? 0)
@@ -106,7 +120,7 @@ extension String {
             return (Int64(hourMinSec[0]) ?? 0) * 60
                 + (Int64(hourMinSec[1]) ?? 0)
         case 3:
-            let sec: Int64 = Int64(hourMinSec[2]) ?? 0
+            let sec = Int64(hourMinSec[2]) ?? 0
             let min: Int64 = (Int64(hourMinSec[1]) ?? 0) * 60
             let hours: Int64 = (Int64(hourMinSec[0]) ?? 0) * 60 * 60
             return hours + min + sec
@@ -123,7 +137,8 @@ extension String {
         let uti = UTTypeCreatePreferredIdentifierForTag(
             kUTTagClassFilenameExtension,
             self as CFString,
-            nil)
+            nil
+        )
 
         var fileIsMedia = false
         if let value = uti?.takeRetainedValue(),
@@ -132,7 +147,8 @@ extension String {
             fileIsMedia = true
         }
         let mediaExtension = ["ogg", "webm"]
-        if mediaExtension.contains(where: { $0.compare(self, options: .caseInsensitive) == .orderedSame }) {
+        if mediaExtension
+            .contains(where: { $0.compare(self, options: .caseInsensitive) == .orderedSame }) {
             fileIsMedia = true
         }
         return fileIsMedia
@@ -142,7 +158,8 @@ extension String {
         let uti = UTTypeCreatePreferredIdentifierForTag(
             kUTTagClassFilenameExtension,
             self as CFString,
-            nil)
+            nil
+        )
 
         var fileIsImage = false
         if let value = uti?.takeRetainedValue(),
@@ -153,21 +170,21 @@ extension String {
     }
 
     func toBase64() -> String {
-        return Data(self.utf8).base64EncodedString()
+        return Data(utf8).base64EncodedString()
     }
 
     func filterOutHost() -> String {
-        return self.replacingOccurrences(of: "@ring.dht", with: "")
+        return replacingOccurrences(of: "@ring.dht", with: "")
     }
 
     func trimmedSipNumber() -> String {
-        return self.replacingOccurrences(of: "-", with: "")
+        return replacingOccurrences(of: "-", with: "")
             .replacingOccurrences(of: " ", with: "")
             .replacingOccurrences(of: "(", with: "")
             .replacingOccurrences(of: ")", with: "")
     }
 
     func containsCaseInsensitive(string: String) -> Bool {
-        return self.range(of: string, options: .caseInsensitive) != nil
+        return range(of: string, options: .caseInsensitive) != nil
     }
 }

@@ -26,7 +26,6 @@ enum SwarmSettingView: String {
 
 // swiftlint:disable closure_body_length
 public struct SwarmInfoView: View {
-
     @StateObject var viewmodel: SwarmInfoVM
     @SwiftUI.State private var selectedView: SwarmSettingView = .about
     @SwiftUI.State private var descriptionTextFieldInput: String = ""
@@ -86,9 +85,17 @@ public struct SwarmInfoView: View {
                         }
                         .sheet(item: $showingType) { type in
                             if type == .gallery {
-                                ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
+                                ImagePicker(
+                                    sourceType: .photoLibrary,
+                                    showingType: $showingType,
+                                    image: $image
+                                )
                             } else {
-                                ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
+                                ImagePicker(
+                                    sourceType: .camera,
+                                    showingType: $showingType,
+                                    image: $image
+                                )
                             }
                         }
                         .onChange(of: image) { _ in
@@ -118,7 +125,9 @@ public struct SwarmInfoView: View {
                         case .about:
                             Text(L10n.Swarm.about)
                         case .memberList:
-                            Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
+                            Text(
+                                "\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)"
+                            )
                         }
                     }
                 }
@@ -130,7 +139,11 @@ public struct SwarmInfoView: View {
 
                 switch selectedView {
                 case .about:
-                    SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
+                    SettingsView(
+                        viewmodel: viewmodel,
+                        id: viewmodel.swarmInfo.id,
+                        swarmType: viewmodel.swarmInfo.type.value.stringValue
+                    )
                 case .memberList:
                     MemberList(viewmodel: viewmodel)
                 }
@@ -154,18 +167,22 @@ public struct SwarmInfoView: View {
                             viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
                         }
                         .ignoresSafeArea()
-                    CustomColorPicker(selectedColor: $viewmodel.selectedColor, currentColor: $viewmodel.finalColor)
-                        .frame(height: 70)
-                        .background(Color.white)
-                        .onChange(of: viewmodel.finalColor) { _ in
-                            viewmodel.showColorSheet = false
-                            viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
-                        }
-                        .ignoresSafeArea()
+                    CustomColorPicker(
+                        selectedColor: $viewmodel.selectedColor,
+                        currentColor: $viewmodel.finalColor
+                    )
+                    .frame(height: 70)
+                    .background(Color.white)
+                    .onChange(of: viewmodel.finalColor) { _ in
+                        viewmodel.showColorSheet = false
+                        viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
+                    }
+                    .ignoresSafeArea()
                 }
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+        .onReceive(NotificationCenter.default
+                    .publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
             minimizedTopView = shouldMinimizeTop()
         }
         .onAppear(perform: {
@@ -175,20 +192,25 @@ public struct SwarmInfoView: View {
     }
 
     func shouldMinimizeTop() -> Bool {
-        return UIDevice.current.orientation.isLandscape && UIDevice.current.userInterfaceIdiom == .phone
+        return UIDevice.current.orientation.isLandscape && UIDevice.current
+            .userInterfaceIdiom == .phone
     }
 }
 
 private extension SwarmInfoView {
     var lightOrDarkColor: Color {
-        return Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiMain) : Color.white
+        return Color(hex: viewmodel.finalColor)?
+            .isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiMain) : Color.white
     }
 
     var placeholderColor: Color {
-        return viewmodel.finalColor == "#CDDC39" || viewmodel.finalColor == "#FFC107" ? Color.white.opacity(0.7) :
-            Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color.black.opacity(0.5) :
+        return viewmodel.finalColor == "#CDDC39" || viewmodel.finalColor == "#FFC107" ? Color.white
+            .opacity(0.7) :
+            Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color.black
+            .opacity(0.5) :
             Color.white.opacity(0.5)
     }
+
     var titleLabel: some View {
         Text(viewmodel.finalTitle)
             .font(Font.title3.weight(.semibold))
@@ -205,13 +227,14 @@ private extension SwarmInfoView {
             text: $titleTextFieldInput,
             onCommit: {
                 viewmodel.title = titleTextFieldInput
-            })
-            // Text color.
-            .foregroundColor(lightOrDarkColor)
-            // Cursor color.
-            .accentColor(lightOrDarkColor)
-            .font(Font.title3.weight(.semibold))
-            .multilineTextAlignment(.center)
+            }
+        )
+        // Text color.
+        .foregroundColor(lightOrDarkColor)
+        // Cursor color.
+        .accentColor(lightOrDarkColor)
+        .font(Font.title3.weight(.semibold))
+        .multilineTextAlignment(.center)
     }
 
     var descriptionLabel: some View {
@@ -230,15 +253,16 @@ private extension SwarmInfoView {
             text: $descriptionTextFieldInput,
             onCommit: {
                 viewmodel.description = descriptionTextFieldInput
-            })
-            .placeholder(when: descriptionTextFieldInput.isEmpty) {
-                Text(L10n.Swarm.addDescription).foregroundColor(placeholderColor)
             }
-            // Cursor color.
-            .accentColor(lightOrDarkColor)
-            // Text color.
-            .foregroundColor(lightOrDarkColor)
-            .font(.body)
-            .multilineTextAlignment(.center)
+        )
+        .placeholder(when: descriptionTextFieldInput.isEmpty) {
+            Text(L10n.Swarm.addDescription).foregroundColor(placeholderColor)
+        }
+        // Cursor color.
+        .accentColor(lightOrDarkColor)
+        // Text color.
+        .foregroundColor(lightOrDarkColor)
+        .font(.body)
+        .multilineTextAlignment(.center)
     }
 }

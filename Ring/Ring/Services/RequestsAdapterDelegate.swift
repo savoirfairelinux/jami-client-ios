@@ -24,5 +24,9 @@
                                       conversationId: String,
                                       withPayload payload: Data,
                                       receivedDate: Date)
-    func conversationRequestReceived(conversationId: String, accountId: String, metadata: [String: String])
+    func conversationRequestReceived(
+        conversationId: String,
+        accountId: String,
+        metadata: [String: String]
+    )
 }

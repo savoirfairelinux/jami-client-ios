@@ -19,15 +19,19 @@
 import SwiftUI
 
 struct MemberList: View {
-
     @StateObject var viewmodel: SwarmInfoVM
     @SwiftUI.State private var editMode = EditMode.inactive
 
     var body: some View {
         List {
             ForEach(viewmodel.swarmInfo.participants.value, id: \.self) {
-                MemberItem(image: $0.avatar.value, name: $0.finalName.value.isEmpty ? $0.jamiId : $0.finalName.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
-                    .deleteDisabled($0.role == .admin)
+                MemberItem(
+                    image: $0.avatar.value,
+                    name: $0.finalName.value.isEmpty ? $0.jamiId : $0.finalName.value,
+                    role: $0.role == .member ? "" : $0.role.stringValue,
+                    isInvited: $0.role == .invited
+                )
+                .deleteDisabled($0.role == .admin)
             }
             .onDelete(perform: viewmodel.isAdmin ? delete : nil)
             if #available(iOS 15.0, *) {

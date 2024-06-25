@@ -29,8 +29,9 @@ class GeneralSettingsCoordinator: Coordinator, StateableResponsive {
     var presentingVC: [String: Bool]
 
     var rootViewController: UIViewController {
-        return self.navigationViewController
+        return navigationViewController
     }
+
     var parentCoordinator: Coordinator?
 
     var childCoordinators = [Coordinator]()
@@ -41,24 +42,29 @@ class GeneralSettingsCoordinator: Coordinator, StateableResponsive {
 
     let stateSubject = PublishSubject<State>()
 
-    required init (with injectionBag: InjectionBag) {
+    required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
         presentingVC = [String: Bool]()
-        self.stateSubject
+        stateSubject
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (state) in
+            .subscribe(onNext: { [weak self] state in
                 guard let self = self, let state = state as? SettingsState else { return }
                 switch state {
                 case .openLog:
                     self.openLog()
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func start() {
-        let settingsViewController = GeneralSettingsViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: settingsViewController, withStyle: .show, withAnimation: true, withStateable: settingsViewController.viewModel)
+        let settingsViewController = GeneralSettingsViewController.instantiate(with: injectionBag)
+        present(
+            viewController: settingsViewController,
+            withStyle: .show,
+            withAnimation: true,
+            withStateable: settingsViewController.viewModel
+        )
     }
 
     func setNavigationController(controller: UINavigationController) {
@@ -66,7 +72,12 @@ class GeneralSettingsCoordinator: Coordinator, StateableResponsive {
     }
 
     func openLog() {
-        let logVC = LogViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: logVC, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
+        let logVC = LogViewController.instantiate(with: injectionBag)
+        present(
+            viewController: logVC,
+            withStyle: .show,
+            withAnimation: true,
+            disposeBag: disposeBag
+        )
     }
 }

@@ -22,7 +22,6 @@ import Foundation
 import RxRelay
 
 class SystemService: SystemAdapterDelegate {
-
     private let systemAdapter: SystemAdapter
     var newMessage = BehaviorRelay(value: "")
     var currentLog = ""

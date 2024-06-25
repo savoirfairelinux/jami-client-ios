@@ -103,12 +103,14 @@ enum ServiceEventInput {
  */
 struct ServiceEvent {
     // MARK: - Public members
+
     /**
      Identifies the event type.
      */
-    internal private(set) var eventType: ServiceEventType
+    private(set) var eventType: ServiceEventType
 
     // MARK: - Private members
+
     /**
      Contains all the metadata of the event.
      */
@@ -122,6 +124,7 @@ struct ServiceEvent {
     }
 
     // MARK: Core
+
     /**
      Allows to add an entry in the metadata of the event.
      */

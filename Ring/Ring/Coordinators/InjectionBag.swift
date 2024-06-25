@@ -23,7 +23,6 @@ import Foundation
 
 /// We can centralize in this bag every service that is to be used by every layer of the app
 class InjectionBag {
-
     let daemonService: DaemonService
     let accountService: AccountsService
     let nameService: NameService
@@ -41,26 +40,26 @@ class InjectionBag {
     let requestsService: RequestsService
     let systemService: SystemService
 
-    init (withDaemonService daemonService: DaemonService,
-          withAccountService accountService: AccountsService,
-          withNameService nameService: NameService,
-          withConversationService conversationService: ConversationsService,
-          withContactsService contactsService: ContactsService,
-          withPresenceService presenceService: PresenceService,
-          withNetworkService networkService: NetworkService,
-          withCallService callService: CallsService,
-          withVideoService videoService: VideoService,
-          withAudioService audioService: AudioService,
-          withDataTransferService dataTransferService: DataTransferService,
-          withProfileService profileService: ProfilesService,
-          withCallsProvider callsProvider: CallsProviderService,
-          withLocationSharingService locationSharingService: LocationSharingService,
-          withRequestsService requestsService: RequestsService,
-          withSystemService systemService: SystemService) {
+    init(withDaemonService daemonService: DaemonService,
+         withAccountService accountService: AccountsService,
+         withNameService nameService: NameService,
+         withConversationService conversationService: ConversationsService,
+         withContactsService contactsService: ContactsService,
+         withPresenceService presenceService: PresenceService,
+         withNetworkService networkService: NetworkService,
+         withCallService callService: CallsService,
+         withVideoService videoService: VideoService,
+         withAudioService audioService: AudioService,
+         withDataTransferService dataTransferService: DataTransferService,
+         withProfileService profileService: ProfilesService,
+         withCallsProvider callsProvider: CallsProviderService,
+         withLocationSharingService locationSharingService: LocationSharingService,
+         withRequestsService requestsService: RequestsService,
+         withSystemService systemService: SystemService) {
         self.daemonService = daemonService
         self.accountService = accountService
         self.nameService = nameService
-        self.conversationsService = conversationService
+        conversationsService = conversationService
         self.contactsService = contactsService
         self.presenceService = presenceService
         self.networkService = networkService

@@ -19,27 +19,29 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
+import AMPopTip
 import Reusable
 import RxSwift
-import AMPopTip
 import SwiftyBeaver
+import UIKit
 
 class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
-
     // MARK: outlets
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var cancelButton: DesignableButton!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var linkButton: DesignableButton!
-    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var pinTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var pinLabel: UILabel!
-    @IBOutlet weak var passwordLabel: UILabel!
+
+    @IBOutlet var messageLabel: UILabel!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet var cancelButton: DesignableButton!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var linkButton: DesignableButton!
+    @IBOutlet var containerViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var pinTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var pinLabel: UILabel!
+    @IBOutlet var passwordLabel: UILabel!
+
     // MARK: members
+
     private let disposeBag = DisposeBag()
     var viewModel: LinkDeviceViewModel!
     var isKeyboardOpened: Bool = false
@@ -52,6 +54,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     let log = SwiftyBeaver.self
 
     // MARK: functions
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Style
@@ -60,78 +63,91 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         adaptToSystemColor()
         configurePasswordField()
 
-        self.applyL10n()
+        applyL10n()
         setupUI()
-        self.pinTextField.becomeFirstResponder()
+        pinTextField.becomeFirstResponder()
 
         // bind view model to view
 
-        self.linkButton.rx.tap
-            .subscribe(onNext: { [weak self] (_) in
+        linkButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.linkDevice()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.cancelButton.rx.tap
+        cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.dismiss(animated: true)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         // handle linking state
-        self.viewModel.createState
+        viewModel.createState
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (state) in
+            .subscribe(onNext: { [weak self] state in
                 switch state {
                 case .started:
                     self?.showCreationHUD()
                 case .success:
                     self?.hideHud()
                     self?.showLinkedSuccess()
-                case .error(let error):
+                case let .error(error):
                     self?.hideHud()
                     self?.showAccountCreationError(error: error)
                 default:
                     self?.hideHud()
                 }
-            }, onError: { [weak self] (error) in
+            }, onError: { [weak self] error in
                 self?.hideHud()
 
                 if let error = error as? AccountCreationError {
                     self?.showAccountCreationError(error: error)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.viewModel.linkButtonEnabledState
+        viewModel.linkButtonEnabledState
             .subscribe(onNext: { [weak self] isEnabled in
                 DispatchQueue.main.async { [weak self] in
-                    self?.linkButton.setTitleColor(isEnabled ? .jamiButtonDark : .systemGray, for: .normal)
+                    self?.linkButton.setTitleColor(
+                        isEnabled ? .jamiButtonDark : .systemGray,
+                        for: .normal
+                    )
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.viewModel.linkButtonEnabledState.bind(to: self.linkButton.rx.isEnabled)
-            .disposed(by: self.disposeBag)
+        viewModel.linkButtonEnabledState.bind(to: linkButton.rx.isEnabled)
+            .disposed(by: disposeBag)
 
         // bind view to view model
-        self.pinTextField.rx.text.orEmpty.bind(to: self.viewModel.pin).disposed(by: self.disposeBag)
-        self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
+        pinTextField.rx.text.orEmpty.bind(to: viewModel.pin).disposed(by: disposeBag)
+        passwordTextField.rx.text.orEmpty.bind(to: viewModel.password).disposed(by: disposeBag)
 
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.setupUI()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillAppear(withNotification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillDisappear(withNotification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
         setupUI()
     }
 
@@ -164,11 +180,14 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
 
         // Create a new constraint with the desired relationship
         let newConstraint: NSLayoutConstraint
-        if ScreenHelper.welcomeFormPresentationStyle() == .fullScreen || UIDevice.current.userInterfaceIdiom == .pad {
-            newConstraint = contentView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.height)
+        if ScreenHelper.welcomeFormPresentationStyle() == .fullScreen || UIDevice.current
+            .userInterfaceIdiom == .pad {
+            newConstraint = contentView.heightAnchor
+                .constraint(equalToConstant: UIScreen.main.bounds.size.height)
         } else {
             var scrollViewHeight: CGFloat = formHeight
-            scrollViewHeight += messageLabelBottomPadding // The padding between the label and the fields
+            scrollViewHeight +=
+                messageLabelBottomPadding // The padding between the label and the fields
             scrollViewHeight += messageLabel.frame.height
 
             newConstraint = contentView.heightAnchor.constraint(equalToConstant: scrollViewHeight)
@@ -182,13 +201,13 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     }
 
     func adaptToSystemColor() {
-        self.pinTextField.tintColor = UIColor.jamiSecondary
-        self.passwordTextField.tintColor = UIColor.jamiSecondary
+        pinTextField.tintColor = UIColor.jamiSecondary
+        passwordTextField.tintColor = UIColor.jamiSecondary
         view.backgroundColor = .clear
     }
 
     func setContentInset(keyboardHeight: CGFloat = 0) {
-        self.containerViewBottomConstraint.constant = keyboardHeight
+        containerViewBottomConstraint.constant = keyboardHeight
     }
 
     func configurePasswordField() {
@@ -202,9 +221,9 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
                 rightButton?.isHidden = text.isEmpty
                 rightButton?.isEnabled = !text.isEmpty
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         passwordTextField.rightViewMode = .always
-        let rightView = UIView(frame: CGRect( x: 0, y: 0, width: 50, height: 30))
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         rightView.addSubview(rightButton)
         passwordTextField.rightView = rightView
         rightButton.rx.tap
@@ -214,7 +233,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
                 isSecureTextEntry?
                     .onNext(self.passwordTextField.isSecureTextEntry)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         isSecureTextEntry.asObservable()
             .subscribe(onNext: { [weak rightButton] secure in
                 let image = secure ?
@@ -222,24 +241,24 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
                     UIImage(asset: Asset.icShowInput)
                 rightButton?.setImage(image, for: .normal)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     @objc
     func keyboardWillAppear(withNotification notification: NSNotification) {
-        self.isKeyboardOpened = true
+        isKeyboardOpened = true
 
         if let userInfo = notification.userInfo,
            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
            ScreenHelper.welcomeFormPresentationStyle() != .fullScreen {
             let keyboardHeight = keyboardFrame.size.height
-            self.setContentInset(keyboardHeight: keyboardHeight)
+            setContentInset(keyboardHeight: keyboardHeight)
         }
     }
 
     @objc
-    func keyboardWillDisappear(withNotification: NSNotification) {
-        self.setContentInset()
+    func keyboardWillDisappear(withNotification _: NSNotification) {
+        setContentInset()
     }
 
     override var canBecomeFirstResponder: Bool {
@@ -247,21 +266,30 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     }
 
     private func applyL10n() {
-        self.linkButton.setTitle(L10n.LinkToAccount.linkButtonTitle, for: .normal)
-        self.pinLabel.text = L10n.LinkToAccount.pinLabel
-        self.passwordLabel.text = L10n.Global.enterPassword
-        self.pinTextField.placeholder = L10n.LinkToAccount.pinPlaceholder
-        self.passwordTextField.placeholder = L10n.Global.password
-        self.titleLabel.text = L10n.LinkToAccount.linkDeviceTitle
-        self.messageLabel.text = L10n.LinkToAccount.linkDeviceMessage
+        linkButton.setTitle(L10n.LinkToAccount.linkButtonTitle, for: .normal)
+        pinLabel.text = L10n.LinkToAccount.pinLabel
+        passwordLabel.text = L10n.Global.enterPassword
+        pinTextField.placeholder = L10n.LinkToAccount.pinPlaceholder
+        passwordTextField.placeholder = L10n.Global.password
+        titleLabel.text = L10n.LinkToAccount.linkDeviceTitle
+        messageLabel.text = L10n.LinkToAccount.linkDeviceMessage
     }
 
     private func showCreationHUD() {
-        loadingViewPresenter.presentWithMessage(message: L10n.CreateAccount.loading, presentingVC: self, animated: false, modalPresentationStyle: .overFullScreen)
+        loadingViewPresenter.presentWithMessage(
+            message: L10n.CreateAccount.loading,
+            presentingVC: self,
+            animated: false,
+            modalPresentationStyle: .overFullScreen
+        )
     }
 
     private func showLinkedSuccess() {
-        loadingViewPresenter.showSuccessAllert(message: L10n.Alerts.accountLinkedTitle, presentingVC: self, animated: true)
+        loadingViewPresenter.showSuccessAllert(
+            message: L10n.Alerts.accountLinkedTitle,
+            presentingVC: self,
+            animated: true
+        )
     }
 
     private func hideHud() {
@@ -269,10 +297,10 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     }
 
     private func showAccountCreationError(error: AccountCreationError) {
-        let alert = UIAlertController.init(title: error.title,
-                                           message: error.message,
-                                           preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: L10n.Global.ok, style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: error.title,
+                                      message: error.message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

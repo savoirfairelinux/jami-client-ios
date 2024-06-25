@@ -24,17 +24,15 @@ struct PlayerViewWrapper: UIViewRepresentable {
     var viewModel: PlayerViewModel
     var frame: CGRect
 
-    func makeUIView(context: Context) -> PlayerView {
+    func makeUIView(context _: Context) -> PlayerView {
         let player = PlayerView(frame: frame)
         player.viewModel = viewModel
         return player
     }
-    func updateUIView(_ uiView: PlayerView, context: Context) {
 
-    }
+    func updateUIView(_: PlayerView, context _: Context) {}
 
     typealias UIViewType = PlayerView
-
 }
 
 struct MessageContent: View {
@@ -44,10 +42,13 @@ struct MessageContent: View {
         VStack(alignment: .leading) {
             if model.type == .fileTransfer {
                 if let player = model.player {
-                    PlayerViewWrapper.init(viewModel: player, frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-                        .frame(minHeight: 200, maxHeight: 300)
-                        .frame(minWidth: 200, maxWidth: 300)
-                        .cornerRadius(20)
+                    PlayerViewWrapper(
+                        viewModel: player,
+                        frame: CGRect(x: 0, y: 0, width: 300, height: 300)
+                    )
+                    .frame(minHeight: 200, maxHeight: 300)
+                    .frame(minWidth: 200, maxWidth: 300)
+                    .cornerRadius(20)
 
                 } else if let image = model.image {
                     Image(uiImage: image)
@@ -113,7 +114,8 @@ struct MessageContent: View {
                     .if(model.hasBorder) { view in
                         view.overlay(
                             CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
-                                .stroke(model.borderColor, lineWidth: 2))
+                                .stroke(model.borderColor, lineWidth: 2)
+                        )
                     }
                     .if(!model.hasBorder) { view in
                         view.cornerRadius(radius: model.cornerRadius, corners: model.corners)

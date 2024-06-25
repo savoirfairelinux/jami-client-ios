@@ -31,7 +31,7 @@ struct RequestsIndicatorView: View {
     private let verticalPaddingForBadge: CGFloat = 20
     private let horizontalPaddingForBody: CGFloat = 20
     private let verticalTextPadding: CGFloat = 5
-    private let foregroundColor: Color = Color(UIColor.systemBackground)
+    private let foregroundColor: Color = .init(UIColor.systemBackground)
 
     var body: some View {
         HStack(spacing: horizontalPaddingForBody) {
@@ -100,9 +100,13 @@ struct RequestsView: View {
     private var requestsList: some View {
         ScrollView {
             ForEach(model.requestsRow) { request in
-                RequestsRowView(requestRow: request, nameResolver: request.nameResolver, listModel: model)
-                    .hideRowSeparator()
-                    .transition(.slide)
+                RequestsRowView(
+                    requestRow: request,
+                    nameResolver: request.nameResolver,
+                    listModel: model
+                )
+                .hideRowSeparator()
+                .transition(.slide)
             }
             .hideRowSeparator()
             .edgesIgnoringSafeArea(.all)
@@ -127,7 +131,7 @@ struct RequestsRowView: View {
     private let buttonPadding: CGFloat = 10
     private let dividerOpacity: Double = 0.2
     private let cornerRadius: CGFloat = 12
-    private let foregroundColor: Color = Color(UIColor.systemBackground)
+    private let foregroundColor: Color = .init(UIColor.systemBackground)
 
     var body: some View {
         VStack(spacing: 0) {
@@ -137,7 +141,8 @@ struct RequestsRowView: View {
             actionButtonsView
             Spacer().frame(height: requestRow.markedToRemove ? 30 : spacerHeight)
             Divider()
-                .background(Color(UIColor.systemBackground).opacity(requestRow.markedToRemove ? 0 : dividerOpacity))
+                .background(Color(UIColor.systemBackground)
+                                .opacity(requestRow.markedToRemove ? 0 : dividerOpacity))
         }
         .padding(.horizontal, spacerWidth)
         .background(backgroundView)
@@ -165,7 +170,10 @@ struct RequestsRowView: View {
     private var backgroundView: some View {
         Color.jamiRequestsColor
             .clipShape(RoundedRectangle(cornerRadius: 15))
-            .shadow(color: .black.opacity(requestRow.markedToRemove ? 0.9 : 0), radius: requestRow.markedToRemove ? 2 : 0)
+            .shadow(
+                color: .black.opacity(requestRow.markedToRemove ? 0.9 : 0),
+                radius: requestRow.markedToRemove ? 2 : 0
+            )
     }
 
     private func bounceAnimation() {

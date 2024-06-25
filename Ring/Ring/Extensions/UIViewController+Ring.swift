@@ -20,25 +20,23 @@
  */
 
 import Foundation
-import UIKit
 import RxSwift
+import UIKit
 
 // swiftlint:disable identifier_name
 
 extension UIViewController {
-
     /// Find the active UITextField if it exists
     ///
     /// - Parameters:
     ///     - view: The UIView to search into
     /// - Returns: The active UITextField (ie: isFirstResponder)
     func findActiveTextField(in view: UIView) -> UITextField? {
-
         guard !view.subviews.isEmpty else { return nil }
 
         for currentView in view.subviews {
-            if  let textfield = currentView as? UITextField,
-                textfield.isFirstResponder {
+            if let textfield = currentView as? UITextField,
+               textfield.isFirstResponder {
                 return textfield
             }
 
@@ -52,12 +50,12 @@ extension UIViewController {
 
     func findPathWithActiveTextField(in table: UITableView) -> IndexPath? {
         if table.numberOfSections <= 0 { return nil }
-        for i in 0..<table.numberOfSections {
+        for i in 0 ..< table.numberOfSections {
             if table.numberOfRows(inSection: i) == 0 { return nil }
-            for k in 0..<table.numberOfRows(inSection: i) {
+            for k in 0 ..< table.numberOfRows(inSection: i) {
                 let path = IndexPath(row: k, section: i)
                 if let row = table.cellForRow(at: path) {
-                    if self.findActiveTextField(in: row) != nil {
+                    if findActiveTextField(in: row) != nil {
                         return path
                     }
                 }
@@ -72,13 +70,17 @@ extension UIViewController {
     /// - Parameters:
     ///     - scrollView: The scrollView to adapt
     ///     - disposeBag: The RxSwift DisposeBag linked to the UIViewController life cycle
-    func adaptToKeyboardState (for scrollView: UIScrollView, with disposeBag: DisposeBag) {
-
+    func adaptToKeyboardState(for scrollView: UIScrollView, with disposeBag: DisposeBag) {
         NotificationCenter.keyboardHeight.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak scrollView] (height) in
+            .subscribe(onNext: { [weak self, weak scrollView] height in
                 guard let self = self, let scrollView = scrollView else { return }
                 let trueHeight = height > 0 ? height + 100 : 0.0
-                let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: trueHeight, right: 0.0)
+                let contentInsets = UIEdgeInsets(
+                    top: 0.0,
+                    left: 0.0,
+                    bottom: trueHeight,
+                    right: 0.0
+                )
 
                 scrollView.contentInset = contentInsets
 
@@ -96,16 +98,27 @@ extension UIViewController {
             .disposed(by: disposeBag)
     }
 
-    func adaptToWelcomeFormKeyboardState(for scrollView: UIScrollView, with disposeBag: DisposeBag) {
+    func adaptToWelcomeFormKeyboardState(for scrollView: UIScrollView,
+                                         with disposeBag: DisposeBag) {
         NotificationCenter.keyboardHeight.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak scrollView] (height) in
+            .subscribe(onNext: { [weak self, weak scrollView] height in
                 guard let self = self, let scrollView = scrollView else { return }
                 let trueHeight = height
                 if [.landscapeRight, .landscapeLeft].contains(ScreenHelper.currentOrientation()) {
-                    let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: trueHeight, right: 0.0)
+                    let contentInsets = UIEdgeInsets(
+                        top: 0.0,
+                        left: 0.0,
+                        bottom: trueHeight,
+                        right: 0.0
+                    )
                     scrollView.contentInset = contentInsets
                 } else {
-                    scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+                    scrollView.contentInset = UIEdgeInsets(
+                        top: 0.0,
+                        left: 0.0,
+                        bottom: 0.0,
+                        right: 0.0
+                    )
                 }
 
                 // If active text field is hidden by keyboard, scroll it so it's visible
@@ -114,7 +127,10 @@ extension UIViewController {
                     var aRect = self.view.frame
                     aRect.size.height -= trueHeight
 
-                    let activeFieldBottomPoint = CGPoint(x: activeField.frame.origin.x, y: activeField.frame.origin.y + activeField.frame.size.height + 10) // added 10 as padding
+                    let activeFieldBottomPoint = CGPoint(
+                        x: activeField.frame.origin.x,
+                        y: activeField.frame.origin.y + activeField.frame.size.height + 10
+                    ) // added 10 as padding
 
                     if !aRect.contains(activeFieldBottomPoint) {
                         scrollView.scrollRectToVisible(activeField.frame, animated: true)
@@ -124,14 +140,19 @@ extension UIViewController {
             .disposed(by: disposeBag)
     }
 
-    func adaptTableToKeyboardState (for tableView: UITableView, with disposeBag: DisposeBag, topOffset: CGFloat? = nil, bottomOffset: CGFloat? = nil) {
+    func adaptTableToKeyboardState(
+        for tableView: UITableView,
+        with disposeBag: DisposeBag,
+        topOffset _: CGFloat? = nil,
+        bottomOffset _: CGFloat? = nil
+    ) {
         NotificationCenter.keyboardHeight
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak tableView] (height) in
+            .subscribe(onNext: { [weak self, weak tableView] height in
                 guard let self = self, let tableView = tableView else { return }
                 let trueHeight = height > 0 ? height + 100 : 0.0
                 // reset insets if they were changed before
-                if tableView.contentInset.bottom > 0 && trueHeight <= 0 {
+                if tableView.contentInset.bottom > 0, trueHeight <= 0 {
                     var contentInsets = tableView.contentInset
                     contentInsets.bottom = 0
                     tableView.contentInset = contentInsets
@@ -156,7 +177,10 @@ extension UIViewController {
             .disposed(by: disposeBag)
     }
 
-    func configureNavigationBar(isTransparent: Bool = false, backgroundColor: UIColor = .systemBackground) {
+    func configureNavigationBar(
+        isTransparent: Bool = false,
+        backgroundColor: UIColor = .systemBackground
+    ) {
         let appearance = UINavigationBarAppearance()
         if isTransparent {
             appearance.configureWithTransparentBackground()
@@ -169,7 +193,7 @@ extension UIViewController {
         appearance.shadowColor = .clear
         appearance.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = UIColor.jamiButtonDark
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0
+        navigationController?.navigationBar.layer.shadowOpacity = 0
 
         // Apply the appearance configuration
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -183,17 +207,23 @@ extension UIViewController {
 
     func configureWalkrhroughNavigationBar() {
         let attrPortrait = [NSAttributedString.Key.foregroundColor: UIColor.jamiTextSecondary,
-                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: .thin)]
+                            NSAttributedString.Key.font: UIFont.systemFont(
+                                ofSize: 31,
+                                weight: .thin
+                            )]
         let attrLandscape = [NSAttributedString.Key.foregroundColor: UIColor.jamiTextSecondary,
-                             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .regular)]
+                             NSAttributedString.Key.font: UIFont.systemFont(
+                                ofSize: 20,
+                                weight: .regular
+                             )]
         let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
-        self.navigationController?
+        navigationController?
             .navigationBar.titleTextAttributes = isPortrait ?
             attrPortrait : attrLandscape
     }
 
     @objc
-    func resizeFrom(initialFrame: CGRect) {}
+    func resizeFrom(initialFrame _: CGRect) {}
 
     func addChildController(_ child: UIViewController, initialFrame: CGRect) {
         addChild(child)
@@ -210,9 +240,12 @@ extension UIViewController {
     }
 }
 
-extension UINavigationController {
-    public static func navBarHeight() -> CGFloat {
-        let nVc = UINavigationController(rootViewController: UIViewController(nibName: nil, bundle: nil))
+public extension UINavigationController {
+    static func navBarHeight() -> CGFloat {
+        let nVc = UINavigationController(rootViewController: UIViewController(
+            nibName: nil,
+            bundle: nil
+        ))
         let navBarHeight = nVc.navigationBar.frame.size.height
         return navBarHeight
     }

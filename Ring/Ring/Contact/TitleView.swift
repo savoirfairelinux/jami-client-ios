@@ -19,8 +19,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
+import UIKit
 
 // swiftlint:disable identifier_name
 
@@ -37,19 +37,22 @@ final class TitleView: UIView {
             containerView.alpha = alpha
         }
     }
-    var avatarImage: UIView = UIView() {
+
+    var avatarImage: UIView = .init() {
         didSet {
-            avatarView.subviews.forEach({ $0.removeFromSuperview() })
+            avatarView.subviews.forEach { $0.removeFromSuperview() }
             avatarView.addSubview(avatarImage)
-            self.layoutSubviews()
+            layoutSubviews()
         }
     }
+
     var text: String = "" {
         didSet {
             label.text = text
-            self.layoutSubviews()
+            layoutSubviews()
         }
     }
+
     // MARK: Initializers
 
     override init(frame: CGRect) {
@@ -63,7 +66,8 @@ final class TitleView: UIView {
         isUserInteractionEnabled = false
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -91,7 +95,12 @@ final class TitleView: UIView {
         }
 
         avatarView.frame = CGRect(x: 0, y: 0, width: sizeImage.width, height: sizeImage.height)
-        label.frame = CGRect(x: sizeImage.width + margin, y: 0, width: labelWidth, height: sizeImage.height)
+        label.frame = CGRect(
+            x: sizeImage.width + margin,
+            y: 0,
+            width: labelWidth,
+            height: sizeImage.height
+        )
         containerView.frame = CGRect(x: x, y: y, width: totalWidth, height: sizeImage.height)
     }
 

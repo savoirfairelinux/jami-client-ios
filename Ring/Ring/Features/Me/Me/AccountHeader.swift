@@ -21,10 +21,9 @@
 import GSKStretchyHeaderView
 
 class AccountHeader: GSKStretchyHeaderView {
-
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var profileName: UITextField!
-    @IBOutlet weak var background: UIView!
+    @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var profileName: UITextField!
+    @IBOutlet var background: UIView!
 
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
@@ -34,12 +33,12 @@ class AccountHeader: GSKStretchyHeaderView {
     override func didChangeStretchFactor(_ stretchFactor: CGFloat) {
         var alpha = CGFloatTranslateRange(stretchFactor, 0.2, 0.7, 0, 1)
         alpha = max(0, min(1, alpha))
-        self.profileImageView.alpha = alpha
-        self.profileName.alpha = alpha
+        profileImageView.alpha = alpha
+        profileName.alpha = alpha
 
         var scale = CGFloatTranslateRange(stretchFactor, 0.1, 0.9, 0.6, 1)
         scale = max(0.4, min(1, scale))
-        self.profileImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
-        self.profileName.transform = CGAffineTransform(scaleX: scale, y: scale)
+        profileImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        profileName.transform = CGAffineTransform(scaleX: scale, y: scale)
     }
 }

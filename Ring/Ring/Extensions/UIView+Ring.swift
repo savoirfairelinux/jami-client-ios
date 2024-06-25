@@ -28,69 +28,68 @@ private enum GradientAnchor {
 }
 
 extension UIView {
-
     @IBInspectable var cornerRadius: CGFloat {
         get {
-            return self.layer.cornerRadius
+            return layer.cornerRadius
         }
 
         set {
-            self.clipsToBounds = true
-            self.layer.cornerRadius = newValue
+            clipsToBounds = true
+            layer.cornerRadius = newValue
         }
     }
 
     @IBInspectable var roundedCorners: Bool {
         get {
-            return self.cornerRadius == self.frame.height / 2
+            return cornerRadius == frame.height / 2
         }
 
         set {
             if newValue {
-                self.cornerRadius = self.frame.height / 2
+                cornerRadius = frame.height / 2
             } else {
-                self.cornerRadius = 0
+                cornerRadius = 0
             }
         }
     }
 
     @IBInspectable var borderWidth: CGFloat {
         get {
-            return self.layer.borderWidth
+            return layer.borderWidth
         }
 
         set {
-            self.layer.borderWidth = newValue
+            layer.borderWidth = newValue
         }
     }
 
     @IBInspectable var borderColor: UIColor {
         get {
-            return UIColor(cgColor: self.layer.borderColor ?? UIColor.clear.cgColor)
+            return UIColor(cgColor: layer.borderColor ?? UIColor.clear.cgColor)
         }
 
         set {
-            self.layer.borderColor = newValue.cgColor
+            layer.borderColor = newValue.cgColor
         }
     }
 
     @IBInspectable var gradientStartColor: UIColor {
         get {
-            return self.retrieveGradientColor(for: .start)
+            return retrieveGradientColor(for: .start)
         }
 
         set {
-            self.applyGradientColor(for: .start, with: newValue)
+            applyGradientColor(for: .start, with: newValue)
         }
     }
 
     @IBInspectable var gradientEndColor: UIColor {
         get {
-            return self.retrieveGradientColor(for: .end)
+            return retrieveGradientColor(for: .end)
         }
 
         set {
-            self.applyGradientColor(for: .end, with: newValue)
+            applyGradientColor(for: .end, with: newValue)
         }
     }
 
@@ -98,31 +97,30 @@ extension UIView {
         if let layer = self.layer.sublayers?[0] as? CAGradientLayer {
             // reuse the gradient layer that has already been set
             if anchor == .start {
-                layer.colors = [color.cgColor, self.retrieveGradientColor(for: .end).cgColor]
+                layer.colors = [color.cgColor, retrieveGradientColor(for: .end).cgColor]
             } else {
-                layer.colors = [self.retrieveGradientColor(for: .start).cgColor, color.cgColor]
+                layer.colors = [retrieveGradientColor(for: .start).cgColor, color.cgColor]
             }
             return
         }
 
         let layer = CAGradientLayer()
-        layer.frame = CGRect(origin: .zero, size: self.frame.size)
+        layer.frame = CGRect(origin: .zero, size: frame.size)
         layer.startPoint = CGPoint(x: 0.5, y: 0)
         layer.endPoint = CGPoint(x: 0.5, y: 1)
 
         if anchor == .start {
-            layer.colors = [color.cgColor, self.retrieveGradientColor(for: .end).cgColor]
+            layer.colors = [color.cgColor, retrieveGradientColor(for: .end).cgColor]
         } else {
-            layer.colors = [self.retrieveGradientColor(for: .start).cgColor, color.cgColor]
+            layer.colors = [retrieveGradientColor(for: .start).cgColor, color.cgColor]
         }
-        layer.cornerRadius = self.cornerRadius
+        layer.cornerRadius = cornerRadius
 
         self.layer.addSublayer(layer)
-
     }
 
     private func retrieveGradientColor(for anchor: GradientAnchor) -> UIColor {
-        if let layer = self.layer.sublayers?[0] as? CAGradientLayer,
+        if let layer = layer.sublayers?[0] as? CAGradientLayer,
            let colors = layer.colors as? [CGColor] {
             if anchor == .start && !colors.isEmpty {
                 return UIColor(cgColor: colors[0])
@@ -146,46 +144,54 @@ extension UIView {
     }
 
     var isRightToLeft: Bool {
-        return self.effectiveUserInterfaceLayoutDirection == .rightToLeft
+        return effectiveUserInterfaceLayoutDirection == .rightToLeft
     }
 
     func applyGradient(with colours: [UIColor], locations: [NSNumber]? = nil) {
         let gradient = CAGradientLayer()
-        gradient.frame = self.bounds
+        gradient.frame = bounds
         gradient.colors = colours.map { $0.cgColor }
         gradient.locations = locations
-        self.layer.insertSublayer(gradient, at: 0)
+        layer.insertSublayer(gradient, at: 0)
     }
 
     func applyGradient(with colours: [UIColor], gradient orientation: GradientOrientation) {
         let gradient = CAGradientLayer()
-        gradient.frame = self.bounds
+        gradient.frame = bounds
         gradient.colors = colours.map { $0.cgColor }
         gradient.startPoint = orientation.startPoint
         gradient.endPoint = orientation.endPoint
-        self.layer.insertSublayer(gradient, at: 0)
+        layer.insertSublayer(gradient, at: 0)
     }
 
     func updateGradientFrame() {
-        let layers = self.layer.sublayers
+        let layers = layer.sublayers
         if let layer: CAGradientLayer = layers?[0] as? CAGradientLayer {
-            layer.frame = self.bounds
+            layer.frame = bounds
         }
     }
 
     func roundTopCorners(radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: radius, height: radius))
+        let path = UIBezierPath(
+            roundedRect: bounds,
+            byRoundingCorners: [.topLeft, .topRight],
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
         let mask = CAShapeLayer()
         mask.path = path.cgPath
-        mask.frame = self.bounds
+        mask.frame = bounds
         layer.mask = mask
     }
 
     func roundAllCorners(radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.bottomLeft, .bottomRight, .topRight, .topLeft], cornerRadii: CGSize(width: radius, height: radius))
+        let path = UIBezierPath(
+            roundedRect: bounds,
+            byRoundingCorners: [.bottomLeft, .bottomRight, .topRight, .topLeft],
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
         let mask = CAShapeLayer()
         mask.path = path.cgPath
-        mask.frame = self.bounds
+        mask.frame = bounds
         layer.mask = mask
     }
 
@@ -213,7 +219,7 @@ extension UIView {
     }
 
     func removeSubviews(recursive: Bool = false) {
-        self.subviews.forEach { (subview) in
+        for subview in subviews {
             if recursive {
                 subview.removeSubviews(recursive: recursive)
             }
@@ -222,15 +228,20 @@ extension UIView {
     }
 
     func setBorderPadding(left: CGFloat, right: CGFloat, top: CGFloat, bottom: CGFloat) {
-        let frame = self.bounds.inset(by: UIEdgeInsets(top: top, left: left, bottom: bottom, right: right))
-        let circlePath = UIBezierPath(roundedRect: frame, cornerRadius: self.cornerRadius)
+        let frame = bounds.inset(by: UIEdgeInsets(
+            top: top,
+            left: left,
+            bottom: bottom,
+            right: right
+        ))
+        let circlePath = UIBezierPath(roundedRect: frame, cornerRadius: cornerRadius)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = circlePath.cgPath
         shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.strokeColor = self.borderColor.cgColor
-        shapeLayer.lineWidth = self.borderWidth
-        self.layer.addSublayer(shapeLayer)
-        self.borderWidth = 0
+        shapeLayer.strokeColor = borderColor.cgColor
+        shapeLayer.lineWidth = borderWidth
+        layer.addSublayer(shapeLayer)
+        borderWidth = 0
     }
 }
 

@@ -18,14 +18,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
+import UIKit
 
 class DialpadViewModel: ViewModel, Stateable {
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
 
     private let callService: CallsService
 
@@ -42,14 +40,14 @@ class DialpadViewModel: ViewModel, Stateable {
     }
 
     required init(with injectionBag: InjectionBag) {
-        self.callService = injectionBag.callService
+        callService = injectionBag.callService
     }
 
     func numberPressed(number: String) {
-        self.phoneNumber += number
+        phoneNumber += number
         if inCallDialpad {
             let formatedNumber = number.replacingOccurrences(of: String("﹡"), with: "*")
-            self.callService.playDTMF(code: formatedNumber)
+            callService.playDTMF(code: formatedNumber)
         } else {
             playDefaultSound.onNext(true)
         }
@@ -60,7 +58,7 @@ class DialpadViewModel: ViewModel, Stateable {
             return
         }
         let name = phoneNumber.replacingOccurrences(of: String("﹡"), with: "*")
-        self.stateSubject.onNext(ConversationState
-                                    .startAudioCall(contactRingId: name, userName: name))
+        stateSubject.onNext(ConversationState
+                                .startAudioCall(contactRingId: name, userName: name))
     }
 }

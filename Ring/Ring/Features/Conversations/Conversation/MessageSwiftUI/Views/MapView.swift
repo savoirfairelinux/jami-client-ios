@@ -18,8 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct MapView: UIViewRepresentable {
     @Binding var annotations: [LocationSharingAnnotation]
@@ -28,10 +28,10 @@ struct MapView: UIViewRepresentable {
     private var locationManager: CLLocationManager?
 
     init(annotations: Binding<[LocationSharingAnnotation]>, showZoomButton: Binding<Bool>) {
-        self.button = UIButton(type: .custom)
-        self.locationManager = CLLocationManager()
-        self._annotations = annotations
-        self._showZoomButton = showZoomButton
+        button = UIButton(type: .custom)
+        locationManager = CLLocationManager()
+        _annotations = annotations
+        _showZoomButton = showZoomButton
     }
 
     func makeUIView(context: Context) -> MKMapView {
@@ -45,7 +45,10 @@ struct MapView: UIViewRepresentable {
         mapView.addOverlay(overlay, level: .aboveLabels)
 
         if showZoomButton {
-            button.frame = CGRect(origin: CGPoint(x: mapView.center.x, y: mapView.center.y), size: CGSize(width: 55, height: 55))
+            button.frame = CGRect(
+                origin: CGPoint(x: mapView.center.x, y: mapView.center.y),
+                size: CGSize(width: 55, height: 55)
+            )
             button.backgroundColor = .systemBackground
             button.layer.cornerRadius = 16
             button.setImage(UIImage(systemName: "location.fill"), for: [])
@@ -74,12 +77,13 @@ struct MapView: UIViewRepresentable {
         return mapView
     }
 
-    func updateUIView(_ view: MKMapView, context: Context) {
+    func updateUIView(_ view: MKMapView, context _: Context) {
         addPins(mapView: view)
     }
 
     func addPins(mapView: MKMapView) {
-        if mapView.annotations.compactMap({ $0.coordinate }) != annotations.compactMap({ $0.coordinate }) {
+        if mapView.annotations.compactMap({ $0.coordinate }) != annotations
+            .compactMap({ $0.coordinate }) {
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(annotations)
         }
@@ -104,8 +108,8 @@ struct MapView: UIViewRepresentable {
     }
 
     mutating func deinitView() {
-        self._annotations = .constant([])
-        self._showZoomButton = .constant(false)
+        _annotations = .constant([])
+        _showZoomButton = .constant(false)
         locationManager = nil
         button?.removeFromSuperview()
         if let button = button {
@@ -125,7 +129,7 @@ extension MapView {
             self.parent = parent
         }
 
-        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        func mapView(_: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if overlay is MKTileOverlay {
                 let renderer = MKTileOverlayRenderer(overlay: overlay)
                 return renderer
@@ -149,7 +153,12 @@ extension MapView {
             }
 
             let imageWidth = 35
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageWidth, height: imageWidth))
+            let imageView = UIImageView(frame: CGRect(
+                x: 0,
+                y: 0,
+                width: imageWidth,
+                height: imageWidth
+            ))
             imageView.image = customAnnotation.avatar
             imageView.layer.cornerRadius = imageView.layer.frame.size.width / 2
             imageView.layer.masksToBounds = true
@@ -174,7 +183,10 @@ extension MapView {
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         MapView(annotations: .init(projectedValue: .constant([
-            LocationSharingAnnotation(coordinate: CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417), avatar: UIImage())
+            LocationSharingAnnotation(
+                coordinate: CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417),
+                avatar: UIImage()
+            )
         ])), showZoomButton: .constant(true))
     }
 }

@@ -19,8 +19,8 @@
  */
 
 import Foundation
-import SwiftUI
 import RxSwift
+import SwiftUI
 
 protocol AccountProfileObserver: AnyObject {
     var avatar: UIImage { get set }
@@ -37,7 +37,11 @@ extension AccountProfileObserver {
         profileDisposeBag = DisposeBag()
         profileService.getAccountProfile(accountId: account.id)
             .subscribe(onNext: { [weak self] profile in
-                let avatar = profile.photo?.createImage() ?? UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 17)
+                let avatar = profile.photo?.createImage() ?? UIImage.defaultJamiAvatarFor(
+                    profileName: profile.alias,
+                    account: account,
+                    size: 17
+                )
                 DispatchQueue.main.async { [weak self] in
                     /*
                      Profile updates might be received in a different order than
@@ -67,7 +71,7 @@ extension AccountProfileObserver {
     }
 
     func updateBestName() {
-        self.bestName = profileName.isEmpty ? registeredName : profileName
+        bestName = profileName.isEmpty ? registeredName : profileName
     }
 }
 
@@ -84,7 +88,8 @@ class AccountRow: ObservableObject, Hashable, Identifiable, AccountProfileObserv
     @Published var registeredName: String = ""
     @Published var bestName: String = ""
     @Published var needMigrate: String?
-    var selectedAccount: String? // Not used. Added to conform to the AccountProfileObserver protocol.
+    var selectedAccount: String? // Not used. Added to conform to the AccountProfileObserver
+    // protocol.
 
     var dimensions = AccountRowSizes()
 
@@ -94,15 +99,15 @@ class AccountRow: ObservableObject, Hashable, Identifiable, AccountProfileObserv
     var account: AccountModel
 
     init(account: AccountModel, profileService: ProfilesService) {
-        self.id = account.id
-        self.selectedAccount = account.id
+        id = account.id
+        selectedAccount = account.id
         self.profileService = profileService
         self.account = account
         if account.status == .errorNeedMigration {
             needMigrate = L10n.Account.needMigration
         }
 
-        self.registeredName = resolveAccountName(from: account)
+        registeredName = resolveAccountName(from: account)
         updateProfileDetails(account: account)
     }
 
@@ -134,13 +139,18 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
     var profileDisposeBag = DisposeBag()
     let stateSubject: PublishSubject<State>
 
-    init(accountService: AccountsService, profileService: ProfilesService, nameService: NameService, stateSubject: PublishSubject<State>) {
+    init(
+        accountService: AccountsService,
+        profileService: ProfilesService,
+        nameService: NameService,
+        stateSubject: PublishSubject<State>
+    ) {
         self.accountService = accountService
         self.profileService = profileService
         self.nameService = nameService
         self.stateSubject = stateSubject
-        self.subscribeToCurrentAccountUpdates()
-        self.subscribeToRegisteredName()
+        subscribeToCurrentAccountUpdates()
+        subscribeToRegisteredName()
     }
 
     func subscribeToCurrentAccountUpdates() {
@@ -162,17 +172,19 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
     }
 
     func subscribeToRegisteredName() {
-        self.nameService.sharedRegistrationStatus
-            .filter({ (serviceEvent) -> Bool in
+        nameService.sharedRegistrationStatus
+            .filter { serviceEvent -> Bool in
                 guard let account = self.accountService.currentAccount else { return false }
                 guard serviceEvent.getEventInput(ServiceEventInput.accountId) == account.id,
                       serviceEvent.eventType == .nameRegistrationEnded,
-                      let status: NameRegistrationState = serviceEvent.getEventInput(ServiceEventInput.state),
-                      status == .success else {
+                      let status: NameRegistrationState = serviceEvent
+                        .getEventInput(ServiceEventInput.state),
+                      status == .success
+                else {
                     return false
                 }
                 return true
-            })
+            }
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 guard let account = self.accountService.currentAccount else { return }
@@ -182,18 +194,18 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
     }
 
     func getAccountsRows() {
-        accountsRows = self.accountService.accounts.map { accountModel in
-            return AccountRow(account: accountModel, profileService: self.profileService)
+        accountsRows = accountService.accounts.map { accountModel in
+            AccountRow(account: accountModel, profileService: self.profileService)
         }
     }
 
     func changeCurrentAccount(accountId: String) {
-        guard let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
+        guard let account = accountService.getAccount(fromAccountId: accountId) else { return }
         if accountService.needAccountMigration(accountId: accountId) {
-            self.stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
+            stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
             return
         }
-        self.accountService.updateCurrentAccount(account: account)
-        UserDefaults.standard.set(accountId, forKey: self.accountService.selectedAccountID)
+        accountService.updateCurrentAccount(account: account)
+        UserDefaults.standard.set(accountId, forKey: accountService.selectedAccountID)
     }
 }

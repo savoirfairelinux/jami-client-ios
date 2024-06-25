@@ -23,7 +23,7 @@ import SwiftUI
 struct AddMoreParticipantsInSwarm: View {
     @StateObject var viewmodel: SwarmInfoVM
     @SwiftUI.State var showAddMember = false
-    @SwiftUI.State private var addMorePeople: UIImage = UIImage(asset: Asset.addPeopleInSwarm)!
+    @SwiftUI.State private var addMorePeople: UIImage = .init(asset: Asset.addPeopleInSwarm)!
 
     var body: some View {
         Button(action: {
@@ -36,7 +36,9 @@ struct AddMoreParticipantsInSwarm: View {
                 .resizable()
                 .renderingMode(.template)
                 .aspectRatio(contentMode: .fill)
-                .foregroundColor(Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiButtonDark) : Color.white)
+                .foregroundColor(Color(hex: viewmodel.finalColor)?
+                                    .isLight(threshold: 0.8) ?? true ?
+                                    Color(UIColor.jamiButtonDark) : Color.white)
                 .frame(width: 30, height: 30, alignment: .center)
 
         })
@@ -49,7 +51,10 @@ struct AddMoreParticipantsInSwarm: View {
         }, content: {
             List {
                 ForEach(viewmodel.participantsRows) { contact in
-                    ParticipantListCell(participant: contact, isSelected: viewmodel.selections.contains(contact.id)) {
+                    ParticipantListCell(
+                        participant: contact,
+                        isSelected: viewmodel.selections.contains(contact.id)
+                    ) {
                         if viewmodel.selections.contains(contact.id) {
                             viewmodel.selections.removeAll(where: { $0 == contact.id })
                         } else {
@@ -68,8 +73,9 @@ struct AddMoreParticipantsInSwarm: View {
 
     func addMember() -> some View {
         return Button(action: {
-                        showAddMember = false
-                        viewmodel.addMember()}) {
+            showAddMember = false
+            viewmodel.addMember()
+        }) {
             Text(L10n.Swarm.addMember)
                 .swarmButtonTextStyle()
         }

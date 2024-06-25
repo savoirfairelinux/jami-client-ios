@@ -32,20 +32,20 @@ extension UIColor {
     }
 
     convenience init(hex: Int, alpha: CGFloat) {
-        self.init(red: (hex >> 16) & 0xff, green: (hex >> 8) & 0xff, blue: hex & 0xff, alpha: alpha)
+        self.init(red: (hex >> 16) & 0xFF, green: (hex >> 8) & 0xFF, blue: hex & 0xFF, alpha: alpha)
     }
 
     func lighten(by percentage: CGFloat = 30.0) -> UIColor? {
-        return self.adjust(by: abs(percentage) )
+        return adjust(by: abs(percentage))
     }
 
     func darker(by percentage: CGFloat) -> UIColor? {
-        return self.adjust(by: -1 * abs(percentage) )
+        return adjust(by: -1 * abs(percentage))
     }
 
     func adjust(by percentage: CGFloat = 30.0) -> UIColor? {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
-        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+        if getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
             return UIColor(red: min(red + percentage / 100, 1.0),
                            green: min(green + percentage / 100, 1.0),
                            blue: min(blue + percentage / 100, 1.0),
@@ -54,10 +54,15 @@ extension UIColor {
             return nil
         }
     }
-    func isLight(threshold: Float) -> Bool? {
-        let originalCGColor = self.cgColor
 
-        let RGBCGColor = originalCGColor.converted(to: CGColorSpaceCreateDeviceRGB(), intent: .defaultIntent, options: nil)
+    func isLight(threshold: Float) -> Bool? {
+        let originalCGColor = cgColor
+
+        let RGBCGColor = originalCGColor.converted(
+            to: CGColorSpaceCreateDeviceRGB(),
+            intent: .defaultIntent,
+            options: nil
+        )
         guard let components = RGBCGColor?.components else {
             return nil
         }
@@ -65,19 +70,21 @@ extension UIColor {
             return nil
         }
 
-        let brightness = Float(((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000)
-        return (brightness > threshold)
+        let brightness =
+            Float(((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000)
+        return brightness > threshold
     }
 
     public convenience init?(hexString: String) {
-        let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let hexString: String = hexString
+            .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)
         if hexString.hasPrefix("#") {
             scanner.currentIndex = hexString.dropFirst().startIndex
         }
         var color: UInt64 = 0
         scanner.scanHexInt64(&color)
-        let mask = 0x000000FF
+        let mask = 0x0000_00FF
         let r = Int(color >> 16) & mask
         let g = Int(color >> 8) & mask
         let b = Int(color) & mask
@@ -97,35 +104,44 @@ extension UIColor {
     static let jamiFormBackgroundColor = UIColor(named: "jamiFormBackgroundColor")!
     static let jamiMsgCellSent = UIColor(hex: 0x367BC1, alpha: 1.0)
     static var jamiMsgCellReceived: UIColor {
-        return UIColor(named: "background_msg_received") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
+        return UIColor(named: "background_msg_received") ??
+            UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
     }
 
     static var jamiTextBlue: UIColor {
-        return UIColor(named: "text_blue_color") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
+        return UIColor(named: "text_blue_color") ??
+            UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
     }
 
     static var jamiTextSecondary: UIColor {
-        return UIColor(named: "text_secondary_color") ?? UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        return UIColor(named: "text_secondary_color") ??
+            UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
     }
 
     static var jamiInputTextBackground: UIColor {
-        return UIColor(named: "background_input_text") ?? UIColor(red: 255, green: 255, blue: 255, alpha: 0.57)
+        return UIColor(named: "background_input_text") ??
+            UIColor(red: 255, green: 255, blue: 255, alpha: 0.57)
     }
 
     static let jamiMsgCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
     static let jamiMsgCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
 
     static var jamiMsgBackground: UIColor {
-        return UIColor(named: "message_background_color") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
+        return UIColor(named: "message_background_color") ??
+            UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
     }
 
     static var jamiMsgTextFieldBackground: UIColor {
-        return UIColor(named: "text_field_background_color") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 0)
+        return UIColor(named: "text_field_background_color") ??
+            UIColor(red: 252, green: 252, blue: 252, alpha: 0)
     }
+
     static let jamiMsgTextFieldBorder = UIColor(red: 220, green: 220, blue: 220, alpha: 1.0)
     static var jamiUITableViewCellSelection: UIColor {
-        return UIColor(named: "row_selected") ?? UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
+        return UIColor(named: "row_selected") ??
+            UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
     }
+
     static var jamiNavigationBarShadow: UIColor {
         return UIColor(named: "shadow_color") ?? UIColor.black
     }
@@ -141,10 +157,11 @@ extension UIColor {
     static var jamiLabelColor: UIColor {
         return UIColor.label
     }
+
     static let jamiCallPulse = UIColor(hex: 0x039FDF, alpha: 1.0)
     static let jamiDefaultAvatar = UIColor(hex: 0x039FDF, alpha: 1.0)
-    static let jamiSuccess = UIColor(hex: 0x00b20b, alpha: 1.0)
-    static let jamiFailure = UIColor(hex: 0xf00000, alpha: 1.0)
+    static let jamiSuccess = UIColor(hex: 0x00B20B, alpha: 1.0)
+    static let jamiFailure = UIColor(hex: 0xF00000, alpha: 1.0)
     static let jamiWarning = UIColor.orange
 
     static let defaultSwarm = "#00BCD4"

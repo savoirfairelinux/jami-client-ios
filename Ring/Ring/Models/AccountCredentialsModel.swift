@@ -78,9 +78,9 @@ class AccountCredentialsModel {
 
     func toDictionary() -> [String: String] {
         var dictionary = [String: String]()
-        dictionary[ConfigKey.accountUsername.rawValue] = self.username
-        dictionary[ConfigKey.accountPassword.rawValue] = self.password
-        dictionary[ConfigKey.accountRealm.rawValue] = self.accountRealm
+        dictionary[ConfigKey.accountUsername.rawValue] = username
+        dictionary[ConfigKey.accountPassword.rawValue] = password
+        dictionary[ConfigKey.accountRealm.rawValue] = accountRealm
         return dictionary
     }
 }

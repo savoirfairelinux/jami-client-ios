@@ -19,7 +19,6 @@
  */
 
 class DeviceModel {
-
     @objc dynamic var deviceId = ""
     @objc dynamic var deviceName: String?
     @objc dynamic var isCurrent = false

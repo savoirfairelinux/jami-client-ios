@@ -18,8 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import SwiftUI
 import MCEmojiPicker
+import SwiftUI
 
 enum ContextMenuPresentingState {
     case none
@@ -34,13 +34,13 @@ struct VisualEffect: UIViewRepresentable {
     @SwiftUI.State var style: UIBlurEffect.Style
     var withVibrancy: Bool
 
-    func makeUIView(context: Context) -> UIVisualEffectView {
+    func makeUIView(context _: Context) -> UIVisualEffectView {
         let blurEffect = UIBlurEffect(style: style)
         let effect = withVibrancy ? UIVibrancyEffect(blurEffect: blurEffect) : blurEffect
         return UIVisualEffectView(effect: effect)
     }
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-    }
+
+    func updateUIView(_: UIVisualEffectView, context _: Context) {}
 }
 
 struct ContextMenuView: View {
@@ -68,7 +68,10 @@ struct ContextMenuView: View {
                     // emoji picker if short message, otherwise see below
                     if model.isShortMsg {
                         makeWithSpacers(elementForAlignment: makeEmojiBar())
-                            .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
+                            .frame(
+                                width: UIScreen.main.bounds.size.width,
+                                alignment: model.isOurMsg! ? .trailing : .leading
+                            )
                         Spacer()
                             .frame(height: model.emojiVerticalPadding)
                     }
@@ -85,11 +88,18 @@ struct ContextMenuView: View {
                                 .frame(width: 10)
                         }
                     }
-                    .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
-                    // extra check for long messages to move reaction bar closer to the part of the screen where finger was last
+                    .frame(
+                        width: UIScreen.main.bounds.size.width,
+                        alignment: model.isOurMsg! ? .trailing : .leading
+                    )
+                    // extra check for long messages to move reaction bar closer to the part of the
+                    // screen where finger was last
                     if !model.isShortMsg {
                         makeWithSpacers(elementForAlignment: makeEmojiBar())
-                            .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
+                            .frame(
+                                width: UIScreen.main.bounds.size.width,
+                                alignment: model.isOurMsg! ? .trailing : .leading
+                            )
                     } else {
                         Spacer()
                             .frame(height: model.defaultVerticalPadding)
@@ -100,19 +110,27 @@ struct ContextMenuView: View {
                         makeWithSpacers(elementForAlignment: makeActions()
                                             .opacity(actionsOpacity)
                                             .scaleEffect(actionsScale, anchor: model.actionsAnchor)
-                                            .frame(width: model.menuSize.width)
-                        )
-                        .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
+                                            .frame(width: model.menuSize.width))
+                            .frame(
+                                width: UIScreen.main.bounds.size.width,
+                                alignment: model.isOurMsg! ? .trailing : .leading
+                            )
                     }
-                    .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
+                    .frame(
+                        width: UIScreen.main.bounds.size.width,
+                        alignment: model.isOurMsg! ? .trailing : .leading
+                    )
                 }
                 .padding(.trailing, 4)
             }
             .offset( // offset vstack
                 x: 0,
-                y: max(0, model.messageFrame.origin.y + messageOffsetDiff - (model.isShortMsg ? model.emojiBarHeight : 0))
+                y: max(
+                    0,
+                    model.messageFrame.origin
+                        .y + messageOffsetDiff - (model.isShortMsg ? model.emojiBarHeight : 0)
+                )
             )
-
         }
         .background(makeBackground())
         .onTapGesture {
@@ -151,7 +169,8 @@ struct ContextMenuView: View {
                 messageOffsetDiff = model.bottomOffset
                 cornerRadius = model.menuCornerRadius
             }
-            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(0.15)) {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2)
+                            .delay(0.15)) {
                 actionsScale = 1
             }
         })
@@ -166,7 +185,6 @@ struct ContextMenuView: View {
                         width: model.messageFrame.width,
                         height: model.messageFrame.height
                     )
-
             }
             .cornerRadius(cornerRadius)
             .scaleEffect(messageScale, anchor: model.messsageAnchor)
@@ -227,7 +245,8 @@ struct ContextMenuView: View {
                 VStack(spacing: 0) {
                     Button {
                         let shouldShowKeyboard = item == .copy || item == .deleteMessage
-                        let state: ContextMenuPresentingState = shouldShowKeyboard ? .willDismissWithAction : .willDismissWithTextEditingAction
+                        let state: ContextMenuPresentingState = shouldShowKeyboard ?
+                            .willDismissWithAction : .willDismissWithTextEditingAction
                         model.isEmojiPickerPresented = false
                         presentingState = state
                         model.presentingMessage.model.contextMenuSelect(item: item)
@@ -309,10 +328,10 @@ struct EmojiBarView: View {
         .offset(x: emojiPaletteButtonOffset)
         .onAppear(perform: {
             cxModel.selectedEmoji = ""
-            withAnimation(.easeOut(duration: 0.3).delay(0.1), {
+            withAnimation(.easeOut(duration: 0.3).delay(0.1)) {
                 emojiPaletteButtonOffset = 8
                 emojiPaletteButtonOpacity = 1
-            })
+            }
         })
         .onChange(of: cxModel.selectedEmoji, perform: { newValue in
             if newValue != "" {
@@ -388,7 +407,11 @@ struct EmojiBarItemView: View {
         VStack(alignment: .center) {
             Rectangle()
                 .fill(Color.clear)
-                .frame(width: enabledNotifierLength, height: enabledNotifierHeight, alignment: .center)
+                .frame(
+                    width: enabledNotifierLength,
+                    height: enabledNotifierHeight,
+                    alignment: .center
+                )
             Text(verbatim: emoji)
                 .font(.title2)
                 .opacity(elementOpacity)
@@ -400,7 +423,11 @@ struct EmojiBarItemView: View {
                     GeometryReader { geometry in
                         Color.clear.onAppear {
                             self.fontSize = geometry.size.width
-                            withAnimation(.spring(response: 0.4, dampingFraction: 0.3, blendDuration: 0.9).delay(delayIn + 0.5)) {
+                            withAnimation(.spring(
+                                response: 0.4,
+                                dampingFraction: 0.3,
+                                blendDuration: 0.9
+                            ).delay(delayIn + 0.5)) {
                                 self.enabledNotifierLength = round(12 + (fontSize / 6))
                                 self.enabledNotifierHeight = round(0.5 + (fontSize / 24))
                             }
@@ -410,25 +437,33 @@ struct EmojiBarItemView: View {
             Rectangle()
                 .fill(Color(cxModel.presentingMessage.model.preferencesColor))
                 .opacity(emojiActive ? elementOpacity : 0)
-                .frame(width: enabledNotifierLength, height: enabledNotifierHeight, alignment: .center)
+                .frame(
+                    width: enabledNotifierLength,
+                    height: enabledNotifierHeight,
+                    alignment: .center
+                )
                 .cornerRadius(8)
         }
         .simultaneousGesture(
-            // handles adding or removing the reaction from the ReactionRow for the displayed message
-            TapGesture().onEnded({ _ in
+            // handles adding or removing the reaction from the ReactionRow for the displayed
+            // message
+            TapGesture().onEnded { _ in
                 cxModel.selectedEmoji = emoji
-            }))
+            }
+        )
         .onAppear {
-            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(delayIn)) {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2)
+                            .delay(delayIn)) {
                 elementOpacity = 1
             }
-            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.3).delay(delayIn)) {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.3)
+                            .delay(delayIn)) {
                 elementRotation = Angle(degrees: elementRotation.degrees / -2)
             }
-            withAnimation(.spring(response: 0.2, dampingFraction: 0.3, blendDuration: 0.5).delay(delayIn + 0.3)) {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.3, blendDuration: 0.5)
+                            .delay(delayIn + 0.3)) {
                 elementRotation = Angle(degrees: 0)
             }
         }
     }
-
 }

@@ -56,14 +56,20 @@ struct SwipeActionsModifier: ViewModifier {
                 title: Text(L10n.Global.blockContact),
                 message: Text(L10n.Alerts.confirmBlockContact),
                 primaryButton: .default(Text(L10n.Global.cancel)),
-                secondaryButton: .destructive(Text(L10n.Global.block), action: { model.blockConversation(conversationViewModel: conversation) })
+                secondaryButton: .destructive(
+                    Text(L10n.Global.block),
+                    action: { model.blockConversation(conversationViewModel: conversation) }
+                )
             )
         case .delete:
             return Alert(
                 title: Text(L10n.Alerts.confirmDeleteConversationTitle),
                 message: Text(L10n.Alerts.confirmDeleteConversation),
                 primaryButton: .default(Text(L10n.Global.cancel)),
-                secondaryButton: .destructive(Text(L10n.Actions.deleteAction), action: { model.deleteConversation(conversationViewModel: conversation) })
+                secondaryButton: .destructive(
+                    Text(L10n.Actions.deleteAction),
+                    action: { model.deleteConversation(conversationViewModel: conversation) }
+                )
             )
         }
     }
@@ -71,7 +77,10 @@ struct SwipeActionsModifier: ViewModifier {
 
 extension View {
     @ViewBuilder
-    func conditionalSmartListSwipeActions(conversation: ConversationViewModel, model: ConversationsViewModel) -> some View {
+    func conditionalSmartListSwipeActions(
+        conversation: ConversationViewModel,
+        model: ConversationsViewModel
+    ) -> some View {
         if #available(iOS 15.0, *), model.navigationTarget == .smartList {
             self.modifier(SwipeActionsModifier(conversation: conversation, model: model))
         } else {
@@ -172,7 +181,7 @@ struct ConversationRowView: View {
                                 .fontWeight(.regular)
                                 .font(.footnote)
                                 .lineLimit(1)
-                            Text( model.lastMessage)
+                            Text(model.lastMessage)
                                 .font(.footnote)
                                 .lineLimit(1)
                         }

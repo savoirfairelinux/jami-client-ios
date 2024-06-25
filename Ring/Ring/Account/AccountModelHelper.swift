@@ -25,7 +25,6 @@ import SwiftyBeaver
  A structure exposing the fields and methods for an Account
  */
 struct AccountModelHelper {
-
     private static let ringIdPrefix = "ring:"
     private static let sipIdPrefix = "sip:"
 
@@ -41,7 +40,7 @@ struct AccountModelHelper {
 
      - Parameter account: the account to expose
      */
-    init (withAccount account: AccountModel) {
+    init(withAccount account: AccountModel) {
         self.account = account
     }
 
@@ -52,8 +51,9 @@ struct AccountModelHelper {
      */
     func isAccountSip() -> Bool {
         let sipString = AccountType.sip.rawValue
-        guard let accountType = self.account.details?
-                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType)) else {
+        guard let accountType = account.details?
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountType))
+        else {
             return false
         }
         return sipString.compare(accountType) == ComparisonResult.orderedSame
@@ -66,8 +66,9 @@ struct AccountModelHelper {
      */
     func isAccountRing() -> Bool {
         let ringString = AccountType.ring.rawValue
-        guard let accountType = self.account.details?
-                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType)) else {
+        guard let accountType = account.details?
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountType))
+        else {
             return false
         }
         return ringString.compare(accountType) == ComparisonResult.orderedSame
@@ -79,9 +80,9 @@ struct AccountModelHelper {
      - Returns: true if the account is enabled, false otherwise.
      */
     func isEnabled() -> Bool {
-        guard let details = self.account.details else { return false }
-        return (details
-                    .getBool(forConfigKeyModel: ConfigKeyModel.init(withKey: .accountEnable)))
+        guard let details = account.details else { return false }
+        return details
+            .getBool(forConfigKeyModel: ConfigKeyModel(withKey: .accountEnable))
     }
 
     /**
@@ -90,9 +91,9 @@ struct AccountModelHelper {
      - Returns: the registration state of the account as a String.
      */
     func getRegistrationState() -> String {
-        guard let details = self.account.volatileDetails else { return "" }
-        return (details
-                    .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountRegistrationStatus)))
+        guard let details = account.volatileDetails else { return "" }
+        return details
+            .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegistrationStatus))
     }
 
     /**
@@ -101,7 +102,7 @@ struct AccountModelHelper {
      - Returns: true if the account is considered as being in error, false otherwise.
      */
     func isInError() -> Bool {
-        let state = self.getRegistrationState()
+        let state = getRegistrationState()
         return (state.compare(AccountState.error.rawValue) == ComparisonResult.orderedSame) ||
             (state.compare(AccountState.errorAuth.rawValue) == ComparisonResult.orderedSame) ||
             (state.compare(AccountState.errorConfStun.rawValue) == ComparisonResult.orderedSame) ||
@@ -109,9 +110,12 @@ struct AccountModelHelper {
             (state.compare(AccountState.errorGeneric.rawValue) == ComparisonResult.orderedSame) ||
             (state.compare(AccountState.errorHost.rawValue) == ComparisonResult.orderedSame) ||
             (state.compare(AccountState.errorNetwork.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.errorNotAcceptable.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.errorServiceUnavailable.rawValue) == ComparisonResult.orderedSame) ||
-            (state.compare(AccountState.errorRequestTimeout.rawValue) == ComparisonResult.orderedSame)
+            (state.compare(AccountState.errorNotAcceptable.rawValue) == ComparisonResult
+                .orderedSame) ||
+            (state.compare(AccountState.errorServiceUnavailable.rawValue) == ComparisonResult
+                .orderedSame) ||
+            (state.compare(AccountState.errorRequestTimeout.rawValue) == ComparisonResult
+                .orderedSame)
     }
 
     /**
@@ -121,12 +125,13 @@ struct AccountModelHelper {
      credentials of the account.
      */
     mutating func setCredentials(_ credentials: [[String: String]]?) -> AccountModel {
-        self.account.credentialDetails.removeAll()
+        account.credentialDetails.removeAll()
         if credentials != nil {
-            for (credential) in credentials! {
+            for credential in credentials! {
                 do {
-                    let accountCredentialModel = try AccountCredentialsModel(withRawaData: credential)
-                    self.account.credentialDetails.append(accountCredentialModel)
+                    let accountCredentialModel =
+                        try AccountCredentialsModel(withRawaData: credential)
+                    account.credentialDetails.append(accountCredentialModel)
                 } catch CredentialsError.notEnoughData {
                     log.error("Not enough data to create a credential")
                 } catch {
@@ -134,13 +139,12 @@ struct AccountModelHelper {
                 }
             }
         }
-        return self.account
+        return account
     }
 
     var ringId: String? {
-
         let accountUsernameKey = ConfigKeyModel(withKey: ConfigKey.accountUsername)
-        let accountUsername = self.account.details?.get(withConfigKeyModel: accountUsernameKey)
+        let accountUsername = account.details?.get(withConfigKeyModel: accountUsernameKey)
         guard let userName = accountUsername else {
             return nil
         }
@@ -148,14 +152,14 @@ struct AccountModelHelper {
     }
 
     var uri: String? {
-        guard let details = self.account.details else { return nil }
-        if self.account.type == AccountType.sip {
+        guard let details = account.details else { return nil }
+        if account.type == AccountType.sip {
             let name = details
-                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountUsername))
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
             let server = details
-                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountHostname))
             let port = details
-                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .localPort))
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: .localPort))
             var uri: String
             if !name.isEmpty {
                 uri = AccountModelHelper.sipIdPrefix + name
@@ -171,17 +175,19 @@ struct AccountModelHelper {
             }
             return nil
         } else {
-            guard let ringId = self.ringId else { return nil }
+            guard let ringId = ringId else { return nil }
             return AccountModelHelper.ringIdPrefix.appending(ringId)
         }
     }
 
     var hasPassword: Bool {
-        let noPassword: String = self.account.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword)) ?? "false"
+        let noPassword: String = account.details?
+            .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword)) ??
+            "false"
         return noPassword == "true" ? true : false
     }
 
     static func uri(fromRingId ringId: String) -> String {
-        return self.ringIdPrefix.appending(ringId)
+        return ringIdPrefix.appending(ringId)
     }
 }

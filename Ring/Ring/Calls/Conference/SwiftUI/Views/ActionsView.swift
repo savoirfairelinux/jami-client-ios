@@ -29,7 +29,7 @@ enum MenuItem {
     case lowerHand
 }
 
-struct ActionsConstants {
+enum ActionsConstants {
     static let indicatorHeight: CGFloat = 5
     static let indicatorPadding: CGFloat = 20
 }
@@ -45,11 +45,11 @@ struct ContentHeightKey: PreferenceKey {
 struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
 
-    func makeUIView(context: Context) -> UIVisualEffectView {
+    func makeUIView(context _: Context) -> UIVisualEffectView {
         return UIVisualEffectView()
     }
 
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+    func updateUIView(_ uiView: UIVisualEffectView, context _: Context) {
         uiView.effect = effect
     }
 }
@@ -66,13 +66,14 @@ struct ActionsView<Content: View>: View {
     let overshootValue: CGFloat = 0
 
     init(maxHeight: Binding<CGFloat>, visible: Binding<Bool>, @ViewBuilder content: () -> Content) {
-        self._maxHeight = maxHeight
-        self._visible = visible
+        _maxHeight = maxHeight
+        _visible = visible
         self.content = content()
     }
 
     private var offset: CGFloat {
-        !visible ? maxHeight + overshootValue : expanded ? overshootValue : maxHeight + overshootValue - minHeight
+        !visible ? maxHeight + overshootValue : expanded ? overshootValue : maxHeight +
+            overshootValue - minHeight
     }
 
     @GestureState private var translation: CGFloat = 0
@@ -88,7 +89,11 @@ struct ActionsView<Content: View>: View {
                     self.content
                 }
             }
-            .frame(width: geometry.size.width, height: self.maxHeight + overshootValue, alignment: .top)
+            .frame(
+                width: geometry.size.width,
+                height: self.maxHeight + overshootValue,
+                alignment: .top
+            )
             .cornerRadius(radius: radius, corners: [.topLeft, .topRight])
             .frame(height: geometry.size.height, alignment: .bottom)
             .offset(y: max(self.offset + self.translation, 0))
@@ -158,7 +163,10 @@ struct BottomSheetContentView: View {
             }
         )
         .onPreferenceChange(ContentHeightKey.self) { newHeight in
-            maxHeight = min(maxButtonsWidgetHeight, newHeight + ActionsConstants.indicatorHeight + ActionsConstants.indicatorPadding * 2)
+            maxHeight = min(
+                maxButtonsWidgetHeight,
+                newHeight + ActionsConstants.indicatorHeight + ActionsConstants.indicatorPadding * 2
+            )
         }
     }
 

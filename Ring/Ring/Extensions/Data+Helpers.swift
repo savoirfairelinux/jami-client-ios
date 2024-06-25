@@ -24,10 +24,20 @@ extension Data {
     var stringUTF8OrUTF16Encoding: String.Encoding? {
         var string: NSString?
         let options: [StringEncodingDetectionOptionsKey: Any] =
-            [StringEncodingDetectionOptionsKey.suggestedEncodingsKey: [String.Encoding.utf8.rawValue, String.Encoding.utf16.rawValue],
-             StringEncodingDetectionOptionsKey.useOnlySuggestedEncodingsKey: 1]
-        guard case let value = NSString.stringEncoding(for: self, encodingOptions: options, convertedString: &string, usedLossyConversion: nil),
-              value != 0 else { return nil }
+            [
+                StringEncodingDetectionOptionsKey.suggestedEncodingsKey: [
+                    String.Encoding.utf8.rawValue,
+                    String.Encoding.utf16.rawValue
+                ],
+                StringEncodingDetectionOptionsKey.useOnlySuggestedEncodingsKey: 1
+            ]
+        guard case let value = NSString.stringEncoding(
+            for: self,
+            encodingOptions: options,
+            convertedString: &string,
+            usedLossyConversion: nil
+        ),
+        value != 0 else { return nil }
         return .init(rawValue: value)
     }
 }

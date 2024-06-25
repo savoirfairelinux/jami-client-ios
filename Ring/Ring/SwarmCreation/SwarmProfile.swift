@@ -135,7 +135,8 @@ struct SwarmProfile: View {
             )
         }
         .sheet(item: $imagePickerType) { type in
-            let sourceType: UIImagePickerController.SourceType = type == .picture ? .camera : .photoLibrary
+            let sourceType: UIImagePickerController
+                .SourceType = type == .picture ? .camera : .photoLibrary
             ImagePicker(sourceType: sourceType, showingType: $imagePickerType, image: $model.image)
         }
     }

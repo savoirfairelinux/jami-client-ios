@@ -21,19 +21,18 @@
 import Foundation
 
 class ConferenceActionsModel {
-
     let accountService: AccountsService
     let callService: CallsService
 
     private let menuItemsManager = ConferenceMenuItemsManager()
 
     init(injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
-        self.callService = injectionBag.callService
+        accountService = injectionBag.accountService
+        callService = injectionBag.callService
     }
 
     func isLocalCall(participantId: String) -> Bool {
-        guard let account = self.accountService.currentAccount else { return false }
+        guard let account = accountService.currentAccount else { return false }
         return account.jamiId == participantId
     }
 
@@ -42,7 +41,7 @@ class ConferenceActionsModel {
     }
 
     func isLocalModerator(info: ConferenceParticipant) -> Bool {
-        guard let account = self.accountService.currentAccount else { return false }
+        guard let account = accountService.currentAccount else { return false }
         return info.isModerator && info.uri == account.jamiId
     }
 
@@ -50,56 +49,96 @@ class ConferenceActionsModel {
         guard let uri = info.uri, !uri.isEmpty else {
             return true
         }
-        guard let account = self.accountService.currentAccount else { return false }
+        guard let account = accountService.currentAccount else { return false }
         return uri == account.jamiId
     }
 
     func getItemsForConferenceFor(participant: ConferenceParticipant,
                                   local: ConferenceParticipant,
-                                  conferenceId: String, layout: CallLayout) -> [MenuItem] {
+                                  conferenceId _: String, layout: CallLayout) -> [MenuItem] {
         guard let uri = participant.uri else { return [] }
         let active = participant.isActive
         let isHandRised = participant.isHandRaised
         // menu for local call
-        if self.isLocalCall(participantId: uri) || uri.isEmpty {
-            return menuItemsManager.getMenuItemsForLocalCall(layout: layout, active: active, isHandRised: isHandRised)
+        if isLocalCall(participantId: uri) || uri.isEmpty {
+            return menuItemsManager.getMenuItemsForLocalCall(
+                layout: layout,
+                active: active,
+                isHandRised: isHandRised
+            )
         }
         let isLocalModerator = local.isModerator
         let isLocalHost = local.sinkId.contains("host")
         let role: RoleInCall = isLocalHost ? .host : (isLocalModerator ? .moderator : .regular)
         let isParticipantHost = isHostCall(sinkId: participant.sinkId)
 
-        let items = menuItemsManager.getMenuItemsFor(isHost: isParticipantHost, layout: layout, active: active, role: role, isHandRised: isHandRised)
+        let items = menuItemsManager.getMenuItemsFor(
+            isHost: isParticipantHost,
+            layout: layout,
+            active: active,
+            role: role,
+            isHandRised: isHandRised
+        )
         return items
     }
 
     func setActiveParticipant(participantId: String, maximize: Bool, conferenceId: String) {
-        self.callService.setActiveParticipant(conferenceId: conferenceId, maximixe: maximize, jamiId: participantId)
+        callService.setActiveParticipant(
+            conferenceId: conferenceId,
+            maximixe: maximize,
+            jamiId: participantId
+        )
     }
 
     func muteParticipant(participantId: String, active: Bool, conferenceId: String,
                          device: String, streamId: String) {
-        guard let account = self.accountService.currentAccount else { return }
+        guard let account = accountService.currentAccount else { return }
         let jamiId = participantId.isEmpty ? account.jamiId : participantId
-        self.callService.muteStream(confId: conferenceId, participantId: jamiId, device: device, accountId: account.id, streamId: streamId, state: active)
+        callService.muteStream(
+            confId: conferenceId,
+            participantId: jamiId,
+            device: device,
+            accountId: account.id,
+            streamId: streamId,
+            state: active
+        )
     }
 
     func setModeratorParticipant(participantId: String, active: Bool, conferenceId: String) {
-        self.callService.setModeratorParticipant(confId: conferenceId, participantId: participantId, active: active)
+        callService.setModeratorParticipant(
+            confId: conferenceId,
+            participantId: participantId,
+            active: active
+        )
     }
 
     func hangupParticipant(participantId: String, device: String, conferenceId: String) {
-        self.callService.hangupParticipant(confId: conferenceId, participantId: participantId, device: device)
+        callService.hangupParticipant(
+            confId: conferenceId,
+            participantId: participantId,
+            device: device
+        )
     }
 
     func lowerHandFor(participantId: String, conferenceId: String, deviceId: String) {
-        guard let account = self.accountService.currentAccount else { return }
-        self.callService.setRaiseHand(confId: conferenceId, participantId: participantId, state: false, accountId: account.id, deviceId: deviceId)
+        guard let account = accountService.currentAccount else { return }
+        callService.setRaiseHand(
+            confId: conferenceId,
+            participantId: participantId,
+            state: false,
+            accountId: account.id,
+            deviceId: deviceId
+        )
     }
 
     func togleRaiseHand(state: Bool, conferenceId: String, deviceId: String) {
-        guard let account = self.accountService.currentAccount else { return }
-        self.callService.setRaiseHand(confId: conferenceId, participantId: account.jamiId, state: state, accountId: account.id, deviceId: deviceId)
+        guard let account = accountService.currentAccount else { return }
+        callService.setRaiseHand(
+            confId: conferenceId,
+            participantId: account.jamiId,
+            state: state,
+            accountId: account.id,
+            deviceId: deviceId
+        )
     }
-
 }

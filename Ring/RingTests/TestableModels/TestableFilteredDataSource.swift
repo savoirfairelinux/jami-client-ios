@@ -22,10 +22,9 @@ import Foundation
 @testable import Ring
 
 class TestableFilteredDataSource: FilterConversationDataSource {
-
     var conversationViewModels: [Ring.ConversationViewModel]
 
     init(conversations: [Ring.ConversationViewModel]) {
-        self.conversationViewModels = conversations
+        conversationViewModels = conversations
     }
 }

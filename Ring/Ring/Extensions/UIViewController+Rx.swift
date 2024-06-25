@@ -19,65 +19,67 @@
  */
 
 import Foundation
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
-extension Reactive where Base: UIViewController {
-    public var viewDidLoad: ControlEvent<Void> {
-        let source = self.sentMessage(#selector(Base.viewDidLoad)).map { _ in }
+public extension Reactive where Base: UIViewController {
+    var viewDidLoad: ControlEvent<Void> {
+        let source = sentMessage(#selector(Base.viewDidLoad)).map { _ in }
         return ControlEvent(events: source)
     }
 
-    public var viewWillAppear: ControlEvent<Bool> {
-        let source = self.sentMessage(#selector(Base.viewWillAppear)).map { $0.first as? Bool ?? false }
+    var viewWillAppear: ControlEvent<Bool> {
+        let source = sentMessage(#selector(Base.viewWillAppear)).map { $0.first as? Bool ?? false }
         return ControlEvent(events: source)
     }
 
-    public var viewDidAppear: ControlEvent<Bool> {
-        let source = self.sentMessage(#selector(Base.viewDidAppear)).map { $0.first as? Bool ?? false }
+    var viewDidAppear: ControlEvent<Bool> {
+        let source = sentMessage(#selector(Base.viewDidAppear)).map { $0.first as? Bool ?? false }
         return ControlEvent(events: source)
     }
 
-    public var viewWillDisappear: ControlEvent<Bool> {
-        let source = self.sentMessage(#selector(Base.viewWillDisappear)).map { $0.first as? Bool ?? false }
+    var viewWillDisappear: ControlEvent<Bool> {
+        let source = sentMessage(#selector(Base.viewWillDisappear))
+            .map { $0.first as? Bool ?? false }
         return ControlEvent(events: source)
     }
 
-    public var viewDidDisappear: ControlEvent<Bool> {
-        let source = self.sentMessage(#selector(Base.viewDidDisappear)).map { $0.first as? Bool ?? false }
+    var viewDidDisappear: ControlEvent<Bool> {
+        let source = sentMessage(#selector(Base.viewDidDisappear))
+            .map { $0.first as? Bool ?? false }
         return ControlEvent(events: source)
     }
 
-    public var viewWillLayoutSubviews: ControlEvent<Void> {
-        let source = self.sentMessage(#selector(Base.viewWillLayoutSubviews)).map { _ in }
+    var viewWillLayoutSubviews: ControlEvent<Void> {
+        let source = sentMessage(#selector(Base.viewWillLayoutSubviews)).map { _ in }
         return ControlEvent(events: source)
     }
 
-    public var viewDidLayoutSubviews: ControlEvent<Void> {
-        let source = self.sentMessage(#selector(Base.viewDidLayoutSubviews)).map { _ in }
+    var viewDidLayoutSubviews: ControlEvent<Void> {
+        let source = sentMessage(#selector(Base.viewDidLayoutSubviews)).map { _ in }
         return ControlEvent(events: source)
     }
 
-    public var willMoveToParentViewController: ControlEvent<UIViewController?> {
-        let source = self.sentMessage(#selector(Base.willMove)).map { $0.first as? UIViewController }
-        return ControlEvent(events: source)
-    }
-    public var didMoveToParentViewController: ControlEvent<UIViewController?> {
-        let source = self.sentMessage(#selector(Base.didMove)).map { $0.first as? UIViewController }
+    var willMoveToParentViewController: ControlEvent<UIViewController?> {
+        let source = sentMessage(#selector(Base.willMove)).map { $0.first as? UIViewController }
         return ControlEvent(events: source)
     }
 
-    public var didReceiveMemoryWarning: ControlEvent<Void> {
-        let source = self.sentMessage(#selector(Base.didReceiveMemoryWarning)).map { _ in }
+    var didMoveToParentViewController: ControlEvent<UIViewController?> {
+        let source = sentMessage(#selector(Base.didMove)).map { $0.first as? UIViewController }
         return ControlEvent(events: source)
     }
 
-    public var controllerWasDismissed: ControlEvent<Bool> {
+    var didReceiveMemoryWarning: ControlEvent<Void> {
+        let source = sentMessage(#selector(Base.didReceiveMemoryWarning)).map { _ in }
+        return ControlEvent(events: source)
+    }
 
-        let source = self.sentMessage(#selector(Base.viewWillDisappear))
+    var controllerWasDismissed: ControlEvent<Bool> {
+        let source = sentMessage(#selector(Base.viewWillDisappear))
             .filter { _ in
-                return self.base.isBeingDismissed
+                self.base.isBeingDismissed
             }
             .map { $0.first as? Bool ?? false }
 

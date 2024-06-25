@@ -19,9 +19,9 @@
  */
 
 import Foundation
-import SwiftUI
-import RxSwift
 import RxRelay
+import RxSwift
+import SwiftUI
 
 protocol AvatarImageObserver: AnyObject {
     var avatarImage: UIImage? { get set }
@@ -38,7 +38,7 @@ extension AvatarImageObserver {
         avatarObservable
             .startWith(avatarObservable.value)
             .subscribe(onNext: { [weak self] newImage in
-                DispatchQueue.main.async {[weak self] in
+                DispatchQueue.main.async { [weak self] in
                     self?.avatarImage = newImage
                 }
             })
@@ -46,7 +46,7 @@ extension AvatarImageObserver {
     }
 
     func requestAvatar(jamiId: String) {
-        DispatchQueue.global(qos: .background).async {[weak self] in
+        DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self = self else { return }
             self.infoState?.onNext(MessageInfo.updateAvatar(jamiId: jamiId, message: self))
         }
@@ -55,7 +55,7 @@ extension AvatarImageObserver {
 
 protocol MessageReadObserver: AnyObject {
     var read: [UIImage]? { get set }
-    var readDisposeBag: DisposeBag { get  set }
+    var readDisposeBag: DisposeBag { get set }
     var infoState: PublishSubject<State>? { get set }
 
     func subscribeToReadObservable(_ imagesObservable: BehaviorRelay<[String: UIImage]>)
@@ -68,9 +68,9 @@ extension MessageReadObserver {
         imagesObservable
             .startWith(imagesObservable.value)
             .subscribe(onNext: { [weak self] lastReadAvatars in
-                DispatchQueue.main.async {[weak self] in
+                DispatchQueue.main.async { [weak self] in
                     let values: [UIImage] = lastReadAvatars.map { value in
-                        return value.value
+                        value.value
                     }
                     let newValue = values.isEmpty ? nil : values
                     self?.read = newValue
@@ -80,7 +80,7 @@ extension MessageReadObserver {
     }
 
     func requestReadStatus(messageId: String) {
-        DispatchQueue.global(qos: .background).async {[weak self] in
+        DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self = self else { return }
             self.infoState?.onNext(MessageInfo.updateRead(messageId: messageId, message: self))
         }
@@ -101,7 +101,7 @@ extension NameObserver {
         nameObservable
             .startWith(nameObservable.value)
             .subscribe(onNext: { [weak self] newName in
-                DispatchQueue.main.async {[weak self] in
+                DispatchQueue.main.async { [weak self] in
                     self?.username = newName
                 }
             })
@@ -109,7 +109,7 @@ extension NameObserver {
     }
 
     func requestName(jamiId: String) {
-        DispatchQueue.global(qos: .background).async {[weak self] in
+        DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self = self else { return }
             self.infoState?.onNext(MessageInfo.updateDisplayname(jamiId: jamiId, message: self))
         }
@@ -117,8 +117,8 @@ extension NameObserver {
 }
 
 struct MessageStyling {
-    let defaultTextColor: Color = Color(UIColor.label)
-    let defaultSecondaryTextColor: Color = Color.secondary
+    let defaultTextColor: Color = .init(UIColor.label)
+    let defaultSecondaryTextColor: Color = .secondary
     let defaultTextFont: Font = Font.callout.weight(.regular)
     let defaultSecondaryFont: Font = Font.footnote.weight(.regular)
     var textColor: Color
@@ -127,10 +127,10 @@ struct MessageStyling {
     var secondaryFont: Font
 
     init() {
-        self.textColor = defaultTextColor
-        self.secondaryTextColor = defaultSecondaryTextColor
-        self.textFont = defaultTextFont
-        self.secondaryFont = defaultSecondaryFont
+        textColor = defaultTextColor
+        secondaryTextColor = defaultSecondaryTextColor
+        textFont = defaultTextFont
+        secondaryFont = defaultSecondaryFont
     }
 }
 

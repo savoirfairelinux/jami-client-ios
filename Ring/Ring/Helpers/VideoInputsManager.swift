@@ -28,7 +28,6 @@ struct VideoFrameInfo {
 }
 
 class VideoInputsManager {
-
     var listeners = [String: Int]()
 
     var frameSubject = PublishSubject<VideoFrameInfo>()
@@ -61,10 +60,15 @@ class VideoInputsManager {
     }
 
     func writeFrame(withBuffer buffer: CVPixelBuffer?, sinkId: String, rotation: Int) {
-        guard let sampleBuffer = self.createSampleBufferFrom(pixelBuffer: buffer) else {
-            return }
-        self.setSampleBufferAttachments(sampleBuffer)
-        let frameInfo = VideoFrameInfo(sampleBuffer: sampleBuffer, rotation: rotation, sinkId: sinkId)
+        guard let sampleBuffer = createSampleBufferFrom(pixelBuffer: buffer) else {
+            return
+        }
+        setSampleBufferAttachments(sampleBuffer)
+        let frameInfo = VideoFrameInfo(
+            sampleBuffer: sampleBuffer,
+            rotation: rotation,
+            sinkId: sinkId
+        )
         frameSubject.onNext(frameInfo)
     }
 
@@ -74,7 +78,11 @@ class VideoInputsManager {
         var timimgInfo = CMSampleTimingInfo()
         var formatDescription: CMFormatDescription?
         guard let pixelBuffer = pixelBuffer else { return nil }
-        CMVideoFormatDescriptionCreateForImageBuffer(allocator: kCFAllocatorDefault, imageBuffer: pixelBuffer, formatDescriptionOut: &formatDescription)
+        CMVideoFormatDescriptionCreateForImageBuffer(
+            allocator: kCFAllocatorDefault,
+            imageBuffer: pixelBuffer,
+            formatDescriptionOut: &formatDescription
+        )
 
         CMSampleBufferCreateReadyWithImageBuffer(
             allocator: kCFAllocatorDefault,
@@ -88,7 +96,10 @@ class VideoInputsManager {
     }
 
     func setSampleBufferAttachments(_ sampleBuffer: CMSampleBuffer) {
-        guard let attachments: CFArray = CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, createIfNecessary: true) else { return }
+        guard let attachments: CFArray = CMSampleBufferGetSampleAttachmentsArray(
+            sampleBuffer,
+            createIfNecessary: true
+        ) else { return }
         let dictionary = unsafeBitCast(CFArrayGetValueAtIndex(attachments, 0),
                                        to: CFMutableDictionary.self)
         let key = Unmanaged.passUnretained(kCMSampleAttachmentKey_DisplayImmediately).toOpaque()

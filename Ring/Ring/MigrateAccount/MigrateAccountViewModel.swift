@@ -18,9 +18,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
 enum AccountMigrationState {
     case unknown
@@ -31,12 +31,11 @@ enum AccountMigrationState {
 }
 
 class MigrateAccountViewModel: Stateable, ViewModel {
-
     // MARK: - Rx Stateable
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
+
     let accountService: AccountsService
     let profileService: ProfilesService
     let disposeBag = DisposeBag()
@@ -44,33 +43,32 @@ class MigrateAccountViewModel: Stateable, ViewModel {
     var accountToMigrate = ""
 
     // MARK: - view binding
+
     let password = BehaviorRelay<String>(value: "")
     let migrationState = BehaviorRelay<AccountMigrationState>(value: .unknown)
 
-    lazy var profileImage: Observable<UIImage?> = {
-        return self.profileService
-            .getAccountProfile(accountId: accountToMigrate)
-            .take(1)
-            .map({ profile in
-                if let photo = profile.photo,
-                   let data = NSData(base64Encoded: photo,
-                                     options: NSData.Base64DecodingOptions
-                                        .ignoreUnknownCharacters) as Data? {
-                    guard let image = UIImage(data: data) else {
-                        return UIImage(named: "fallback_avatar")
-                    }
-                    return image
+    lazy var profileImage: Observable<UIImage?> = self.profileService
+        .getAccountProfile(accountId: accountToMigrate)
+        .take(1)
+        .map { profile in
+            if let photo = profile.photo,
+               let data = NSData(base64Encoded: photo,
+                                 options: NSData.Base64DecodingOptions
+                                    .ignoreUnknownCharacters) as Data? {
+                guard let image = UIImage(data: data) else {
+                    return UIImage(named: "fallback_avatar")
                 }
-                return UIImage(named: "fallback_avatar")
-            })
-    }()
+                return image
+            }
+            return UIImage(named: "fallback_avatar")
+        }
 
     lazy var profileName: Observable<String> = {
         var displayName = ""
         let details = self.accountService
             .getAccountDetails(fromAccountId: accountToMigrate)
         let name = details
-            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .displayName))
+            .get(withConfigKeyModel: ConfigKeyModel(withKey: .displayName))
         if !name.isEmpty {
             displayName = name
         }
@@ -97,7 +95,8 @@ class MigrateAccountViewModel: Stateable, ViewModel {
 
     lazy var username: Observable<String> = {
         guard let account = self.accountService
-                .getAccount(fromAccountId: accountToMigrate) else {
+                .getAccount(fromAccountId: accountToMigrate)
+        else {
             return Observable.just("")
         }
         var username = ""
@@ -114,12 +113,12 @@ class MigrateAccountViewModel: Stateable, ViewModel {
     }()
 
     required init(with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
-        self.profileService = injectionBag.profileService
+        accountService = injectionBag.accountService
+        profileService = injectionBag.profileService
     }
 
     func accountHasPassword() -> Bool {
-        guard let account = self.accountService
+        guard let account = accountService
                 .getAccount(fromAccountId: registeredNamesKey) else { return true }
         return AccountModelHelper(withAccount: account).hasPassword
     }
@@ -127,10 +126,10 @@ class MigrateAccountViewModel: Stateable, ViewModel {
     // MARK: - Actions
 
     func migrateAccount() {
-        self.accountService
+        accountService
             .migrateAccount(account: accountToMigrate,
                             password: password.value)
-            .subscribe(onNext: { [weak self] (_) in
+            .subscribe(onNext: { [weak self] _ in
                 if let migratedAccount = self?.accountToMigrate,
                    let account = self?.accountService.getAccount(fromAccountId: migratedAccount),
                    let selectedAccounKey = self?.accountService.selectedAccountID {
@@ -142,34 +141,34 @@ class MigrateAccountViewModel: Stateable, ViewModel {
                     self?.migrationState.accept(AccountMigrationState.finished)
                     self?.stateSubject.onNext(AppState.allSet)
                 }
-            }, onError: { [weak self] (_) in
+            }, onError: { [weak self] _ in
                 DispatchQueue.main.async {
                     self?.migrationState.accept(AccountMigrationState.error)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func removeAccount() {
-        self.accountService.removeAccount(id: accountToMigrate)
-        if self.accountService.accounts.isEmpty {
-            self.migrationState.accept(AccountMigrationState.finished)
-            self.stateSubject.onNext(AppState.needToOnboard(animated: false,
-                                                            isFirstAccount: true))
+        accountService.removeAccount(id: accountToMigrate)
+        if accountService.accounts.isEmpty {
+            migrationState.accept(AccountMigrationState.finished)
+            stateSubject.onNext(AppState.needToOnboard(animated: false,
+                                                       isFirstAccount: true))
             return
         }
         finishWithoutMigration()
     }
 
     func finishWithoutMigration() {
-        if !self.accountService.hasValidAccount() {
+        if !accountService.hasValidAccount() {
             migrateAnotherAccount()
             return
         }
         // choose next available account
-        for account in self.accountService.accounts where
-            (account.id != accountToMigrate &&
-                account.status != .errorNeedMigration) {
+        for account in accountService.accounts where
+            account.id != accountToMigrate &&
+            account.status != .errorNeedMigration {
             UserDefaults.standard.set(account.id, forKey: self.accountService.selectedAccountID)
             self.accountService.currentAccount = account
             self.migrationState.accept(AccountMigrationState.finished)
@@ -178,8 +177,8 @@ class MigrateAccountViewModel: Stateable, ViewModel {
     }
 
     func migrateAnotherAccount() {
-        for account in self.accountService.accounts where
-            (account.id != accountToMigrate && account.status == .errorNeedMigration) {
+        for account in accountService.accounts where
+            account.id != accountToMigrate && account.status == .errorNeedMigration {
             self.migrationState.accept(AccountMigrationState.finished)
             self.stateSubject
                 .onNext(AppState.needAccountMigration(accountId: account.id))

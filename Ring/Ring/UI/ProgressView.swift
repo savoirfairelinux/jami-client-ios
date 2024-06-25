@@ -18,40 +18,38 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
 class ProgressView: UIView {
     var maximumValue: CGFloat = 100
 
-    var imageView: UIVisualEffectView = UIVisualEffectView()
+    var imageView: UIVisualEffectView = .init()
     var statusLabel = UILabel()
 
     var disposeBug = DisposeBag()
     var status = BehaviorRelay<DataTransferStatus>(value: .ongoing)
     var progressVariable = BehaviorRelay<CGFloat>(value: 0)
-    lazy var statusLabelValue: Observable<String> = {
-        return Observable
-            .merge( status.asObservable().map({ status in
-                switch status {
-                case .created, .awaiting, .unknown:
-                    return "0 %"
-                case .canceled:
-                    return L10n.DataTransfer.readableStatusCanceled
-                case .error:
-                    return L10n.DataTransfer.sendingFailed
-                default:
-                    return ""
-                }
-            }), progressVariable
-                .asObservable()
-                .map({ progressValue in
-                    return floor(progressValue)
-                        .description.dropLast(2)
-                        .description + " %"
-                }))
-    }()
+    lazy var statusLabelValue: Observable<String> = Observable
+        .merge(status.asObservable().map { status in
+            switch status {
+            case .created, .awaiting, .unknown:
+                return "0 %"
+            case .canceled:
+                return L10n.DataTransfer.readableStatusCanceled
+            case .error:
+                return L10n.DataTransfer.sendingFailed
+            default:
+                return ""
+            }
+        }, progressVariable
+            .asObservable()
+            .map { progressValue in
+                floor(progressValue)
+                    .description.dropLast(2)
+                    .description + " %"
+            })
 
     var target: CGFloat = 100
 
@@ -61,11 +59,11 @@ class ProgressView: UIView {
         get {
             return innerProgress / toAngleScaler
         }
-        set (newProgress) {
+        set(newProgress) {
             target = newProgress
             currentProgress += (target - currentProgress) * 0.1
             innerProgress = currentProgress * toAngleScaler
-            self.progressVariable.accept(newProgress)
+            progressVariable.accept(newProgress)
             setImage()
         }
     }
@@ -73,7 +71,7 @@ class ProgressView: UIView {
     // MARK: configure path
 
     private var startPoint: CGPoint {
-        return CGPoint(x: self.bounds.size.width * 0.5, y: 0)
+        return CGPoint(x: bounds.size.width * 0.5, y: 0)
     }
 
     private var toAngleScaler: CGFloat {
@@ -83,22 +81,22 @@ class ProgressView: UIView {
     private var innerProgress: CGFloat = 0.0
 
     var numberOfCornersInPath: Int {
-        return Int(floor((self.innerProgress + 45) / 90))
+        return Int(floor((innerProgress + 45) / 90))
     }
 
     var currentPoint: CGPoint? {
         let valueForSide = maximumValue / 4
         let startValue = valueForSide / 2
-        let widthValue = self.bounds.size.width / valueForSide
-        let hightValue = self.bounds.size.height / valueForSide
-        let value = floor((progress + startValue - 1 ) / valueForSide)
+        let widthValue = bounds.size.width / valueForSide
+        let hightValue = bounds.size.height / valueForSide
+        let value = floor((progress + startValue - 1) / valueForSide)
         switch value {
         case 0:
             return CGPoint(x: widthValue * (progress + startValue), y: 0)
         case 1:
-            return CGPoint(x: self.frame.width, y: hightValue * (progress - startValue))
+            return CGPoint(x: frame.width, y: hightValue * (progress - startValue))
         case 2:
-            return CGPoint(x: widthValue * (62.5 - progress), y: self.frame.height)
+            return CGPoint(x: widthValue * (62.5 - progress), y: frame.height)
         case 3:
             return CGPoint(x: 0, y: hightValue * (87.5 - progress))
         case 4:
@@ -109,24 +107,24 @@ class ProgressView: UIView {
     }
 
     func setImage() {
-        let ceneter = CGPoint(x: self.frame.width * 0.5, y: self.frame.height * 0.5)
-        let progresPath: UIBezierPath = UIBezierPath()
+        let ceneter = CGPoint(x: frame.width * 0.5, y: frame.height * 0.5)
+        let progresPath = UIBezierPath()
         progresPath.move(to: startPoint)
 
-        guard let point = self.currentPoint else { return }
+        guard let point = currentPoint else { return }
         switch numberOfCornersInPath {
         case 0:
             progresPath.addLine(to: CGPoint(x: 0, y: 0))
-            progresPath.addLine(to: CGPoint(x: 0, y: self.frame.height))
-            progresPath.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
-            progresPath.addLine(to: CGPoint(x: self.frame.width, y: 0))
+            progresPath.addLine(to: CGPoint(x: 0, y: frame.height))
+            progresPath.addLine(to: CGPoint(x: frame.width, y: frame.height))
+            progresPath.addLine(to: CGPoint(x: frame.width, y: 0))
         case 1:
             progresPath.addLine(to: CGPoint(x: 0, y: 0))
-            progresPath.addLine(to: CGPoint(x: 0, y: self.frame.height))
-            progresPath.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
+            progresPath.addLine(to: CGPoint(x: 0, y: frame.height))
+            progresPath.addLine(to: CGPoint(x: frame.width, y: frame.height))
         case 2:
             progresPath.addLine(to: CGPoint(x: 0, y: 0))
-            progresPath.addLine(to: CGPoint(x: 0, y: self.frame.height))
+            progresPath.addLine(to: CGPoint(x: 0, y: frame.height))
         case 3:
             progresPath.addLine(to: CGPoint(x: 0, y: 0))
         default:
@@ -138,37 +136,37 @@ class ProgressView: UIView {
         maskLayer.path = progresPath.cgPath
     }
 
-    let maskLayer = CAShapeLayer.init()
+    let maskLayer = CAShapeLayer()
 
     override func removeFromSuperview() {
-        self.disposeBug = DisposeBag()
-        self.progress = 0.00
-        self.target = 100
-        self.removeSubviews()
+        disposeBug = DisposeBag()
+        progress = 0.00
+        target = 100
+        removeSubviews()
         super.removeFromSuperview()
     }
 
     func configureViews() {
-        self.backgroundColor = UIColor.clear
-        self.layer.cornerRadius = 20
-        self.layer.masksToBounds = true
+        backgroundColor = UIColor.clear
+        layer.cornerRadius = 20
+        layer.masksToBounds = true
         let darkBlur = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        self.imageView = UIVisualEffectView(effect: darkBlur)
-        self.imageView.alpha = 0.9
-        self.imageView.frame = self.bounds
-        maskLayer.frame = self.bounds
-        self.imageView.layer.mask = maskLayer
-        self.addSubview(self.imageView)
-        statusLabel.frame = self.bounds
+        imageView = UIVisualEffectView(effect: darkBlur)
+        imageView.alpha = 0.9
+        imageView.frame = bounds
+        maskLayer.frame = bounds
+        imageView.layer.mask = maskLayer
+        addSubview(imageView)
+        statusLabel.frame = bounds
         statusLabel.textAlignment = .center
         statusLabel.textColor = UIColor.white
-        self.addSubview(statusLabel)
+        addSubview(statusLabel)
         disposeBug = DisposeBag()
-        self.statusLabelValue
+        statusLabelValue
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak statusLabel] (text) in
+            .subscribe(onNext: { [weak statusLabel] text in
                 statusLabel?.text = text
             })
-            .disposed(by: self.disposeBug)
+            .disposed(by: disposeBug)
     }
 }

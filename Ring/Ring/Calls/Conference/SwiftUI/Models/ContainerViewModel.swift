@@ -19,11 +19,10 @@
  */
 
 import Foundation
-import SwiftUI
 import RxSwift
+import SwiftUI
 
 class ContainerViewModel: ObservableObject {
-
     @Published var layout: CallLayout = .grid
     @Published var hasLocalVideo: Bool = false
     @Published var hasIncomingVideo: Bool = false
@@ -32,7 +31,7 @@ class ContainerViewModel: ObservableObject {
     @Published var callState = ""
 
     private var conferenceActionsModel: ConferenceActionsModel
-    var mainGridViewModel: MainGridViewModel = MainGridViewModel()
+    var mainGridViewModel: MainGridViewModel = .init()
     var actionsViewModel: ActionsViewModel
 
     var pipManager: PictureInPictureManager?
@@ -53,43 +52,51 @@ class ContainerViewModel: ObservableObject {
     let accountService: AccountsService
     let injectionBag: InjectionBag
 
-    lazy var capturedFrame: Observable<UIImage?> = {
-        return videoService.capturedVideoFrame.asObservable().map({ frame in
-            return frame
-        })
-    }()
+    lazy var capturedFrame: Observable<UIImage?> = videoService.capturedVideoFrame.asObservable()
+        .map { frame in
+            frame
+        }
 
     // state
     private let actionsStateSubject = PublishSubject<State>()
-    lazy var actionsState: Observable<State> = {
-        return self.actionsStateSubject.asObservable()
-    }()
+    lazy var actionsState: Observable<State> = self.actionsStateSubject.asObservable()
 
     private let conferenceStateSubject = PublishSubject<State>()
-    lazy var conferenceState: Observable<State> = {
-        return self.conferenceStateSubject.asObservable()
-    }()
+    lazy var conferenceState: Observable<State> = self.conferenceStateSubject.asObservable()
 
-    init(localId: String, delegate: PictureInPictureManagerDelegate, injectionBag: InjectionBag, currentCall: Observable<CallModel>, hasVideo: Bool, incoming: Bool, callId: String) {
-        self.hasLocalVideo = hasVideo
-        self.hasIncomingVideo = hasVideo
+    init(
+        localId: String,
+        delegate: PictureInPictureManagerDelegate,
+        injectionBag: InjectionBag,
+        currentCall: Observable<CallModel>,
+        hasVideo: Bool,
+        incoming: Bool,
+        callId: String
+    ) {
+        hasLocalVideo = hasVideo
+        hasIncomingVideo = hasVideo
         self.localId = localId
         self.callId = callId
         self.injectionBag = injectionBag
-        self.videoService = injectionBag.videoService
-        self.accountService = injectionBag.accountService
-        self.callService = injectionBag.callService
+        videoService = injectionBag.videoService
+        accountService = injectionBag.accountService
+        callService = injectionBag.callService
         self.currentCall = currentCall
-        self.callAnswered = incoming
-        if let call = self.callService.call(callID: callId), call.state == .current || call.state == .hold {
-            self.callAnswered = true
+        callAnswered = incoming
+        if let call = callService.call(callID: callId),
+           call.state == .current || call.state == .hold {
+            callAnswered = true
         }
 
-        self.actionsViewModel = ActionsViewModel(actionsState: self.actionsStateSubject, currentCall: currentCall, audioService: injectionBag.audioService)
-        self.conferenceActionsModel = ConferenceActionsModel(injectionBag: injectionBag)
+        actionsViewModel = ActionsViewModel(
+            actionsState: actionsStateSubject,
+            currentCall: currentCall,
+            audioService: injectionBag.audioService
+        )
+        conferenceActionsModel = ConferenceActionsModel(injectionBag: injectionBag)
 
-        self.pipManager = PictureInPictureManager(delegate: delegate)
-        self.capturedFrame
+        pipManager = PictureInPictureManager(delegate: delegate)
+        capturedFrame
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
                 if let image = frame {
@@ -98,37 +105,37 @@ class ContainerViewModel: ObservableObject {
                     }
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         currentCall
-            .filter({ call in
-                return call.state == .current
-            })
+            .filter { call in
+                call.state == .current
+            }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] call in
                 self?.callAnswered = true
                 self?.checkIfAudioOnly(call: call)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         currentCall
-            .filter({call in
-                return call.callType == .outgoing
-            })
+            .filter { call in
+                call.callType == .outgoing
+            }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] call in
                 self?.callState = call.state.toString()
                 self?.checkIfAudioOnly(call: call)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.callService.currentConferenceEvent
+        callService.currentConferenceEvent
             .observe(on: MainScheduler.instance)
             .asObservable()
             .filter(isRelevantConference)
             .subscribe(onNext: handleConferenceEvent)
             .disposed(by: disposeBag)
 
-        self.callService
+        callService
             .inConferenceCalls
             .asObservable()
             .observe(on: MainScheduler.instance)
@@ -136,10 +143,10 @@ class ContainerViewModel: ObservableObject {
                 guard let self = self else { return }
                 self.handlePendingCall(call)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.observeRaiseHand()
-        self.observeConferenceActions()
+        observeRaiseHand()
+        observeConferenceActions()
     }
 
     private func handlePendingCall(_ call: CallModel) {
@@ -149,8 +156,8 @@ class ContainerViewModel: ObservableObject {
         let confInfo = ConferenceParticipant(sinkId: call.callId, isActive: false)
         confInfo.uri = call.paricipantHash()
         confInfo.displayName = call.displayName
-        let pendingCall = PendingConferenceCall(info: confInfo, injectionBag: self.injectionBag)
-        self.pending.append(pendingCall)
+        let pendingCall = PendingConferenceCall(info: confInfo, injectionBag: injectionBag)
+        pending.append(pendingCall)
         subscribePendingCall(callId: call.callId, pending: pendingCall)
 
         DispatchQueue.main.async { [weak self] in
@@ -199,7 +206,8 @@ class ContainerViewModel: ObservableObject {
     }
 
     private func getCurrentCall(for callId: String) -> CallModel? {
-        guard let call = callService.call(callID: callId), call.state == .current else { return nil }
+        guard let call = callService.call(callID: callId),
+              call.state == .current else { return nil }
         self.callId = call.callId
         return call
     }
@@ -213,25 +221,25 @@ class ContainerViewModel: ObservableObject {
 
     func isHostCall(participantId: String) -> Bool {
         if let participant = participants.first(where: { $0.info?.uri == participantId }) {
-            return ((participant.info?.sinkId.contains("host")) != nil)
+            return (participant.info?.sinkId.contains("host")) != nil
         }
         return false
     }
 
     func checkIfAudioOnly(call: CallModel? = nil) {
-        if self.participants.count > 1 {
-            self.hasLocalVideo = false
+        if participants.count > 1 {
+            hasLocalVideo = false
             return
         }
         guard let call = call else { return }
         let audioOnly = call.isAudioOnly || call.videoMuted
-        self.hasLocalVideo = !audioOnly
+        hasLocalVideo = !audioOnly
     }
 
     func updateParticipantInfo(info: ConferenceParticipant) -> Bool {
         if let participant = participants.first(where: { $0.id == info.sinkId }) {
             participant.info = info
-            let menu = self.getItemsForConferenceMenu(sinkId: info.sinkId)
+            let menu = getItemsForConferenceMenu(sinkId: info.sinkId)
             participant.setActions(items: menu)
             return true
         }
@@ -239,20 +247,25 @@ class ContainerViewModel: ObservableObject {
     }
 
     func addParticipantInfo(info: ConferenceParticipant, mode: AVLayerVideoGravity) {
-        let participant = ParticipantViewModel(info: info, injectionBag: injectionBag, conferenceState: self.conferenceStateSubject, mode: mode)
-        let menu = self.getItemsForConferenceMenu(sinkId: info.sinkId)
+        let participant = ParticipantViewModel(
+            info: info,
+            injectionBag: injectionBag,
+            conferenceState: conferenceStateSubject,
+            mode: mode
+        )
+        let menu = getItemsForConferenceMenu(sinkId: info.sinkId)
         participant.setActions(items: menu)
-        self.participants.append(participant)
-        if self.participants.count == 1 {
+        participants.append(participant)
+        if participants.count == 1 {
             participant.videoRunning
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] hasVideo in
                     self?.hasIncomingVideo = hasVideo
                 })
-                .disposed(by: self.videoRunningBag)
+                .disposed(by: videoRunningBag)
         } else {
             videoRunningBag = DisposeBag()
-            self.hasIncomingVideo = true
+            hasIncomingVideo = true
         }
     }
 
@@ -265,18 +278,21 @@ class ContainerViewModel: ObservableObject {
             reorderParticipantsIfNeeded(participant: currentActiveParticipant)
         }
 
-        // Check if there is a new active voice participant and reorder the participants list if needed
-        if let currentVoiceActiveParticipant = getActiveVoiceParticipant(), currentVoiceActiveParticipant.id != activeVoiceParticipant {
+        // Check if there is a new active voice participant and reorder the participants list if
+        // needed
+        if let currentVoiceActiveParticipant = getActiveVoiceParticipant(),
+           currentVoiceActiveParticipant.id != activeVoiceParticipant
+        {
             activeVoiceParticipant = currentVoiceActiveParticipant.id
             reorderParticipantsIfNeeded(participant: currentVoiceActiveParticipant)
         }
         updateLayoutForConference()
-        if self.participants.count == 1 {
-            self.participants[0].setActions(items: [MenuItem]())
+        if participants.count == 1 {
+            participants[0].setActions(items: [MenuItem]())
         }
 
-        self.checkIfAudioOnly()
-        self.actionsViewModel.updateItemRaiseHand(add: self.participants.count > 1)
+        checkIfAudioOnly()
+        actionsViewModel.updateItemRaiseHand(add: participants.count > 1)
 
         DispatchQueue.main.async { [weak self] in
             self?.objectWillChange.send()
@@ -285,7 +301,10 @@ class ContainerViewModel: ObservableObject {
 
     func updateLayoutForConference() {
         let count = participants.count
-        mainGridViewModel.updatedLayout(participantsCount: count, firstParticipant: participants.first?.id ?? "")
+        mainGridViewModel.updatedLayout(
+            participantsCount: count,
+            firstParticipant: participants.first?.id ?? ""
+        )
         setCallLayout(layout: getNewLayout())
     }
 
@@ -299,12 +318,14 @@ class ContainerViewModel: ObservableObject {
             return .grid
         }
 
-        let participantsWithValidVideo = getParticipantsWithValidVideoSize(excluding: currentActiveParticipant)
+        let participantsWithValidVideo =
+            getParticipantsWithValidVideoSize(excluding: currentActiveParticipant)
         return participantsWithValidVideo.isEmpty ? .one : .oneWithSmal
     }
 
-    func getParticipantsWithValidVideoSize(excluding activeParticipant: ParticipantViewModel) -> [ParticipantViewModel] {
-        return self.participants.filter { participant in
+    func getParticipantsWithValidVideoSize(excluding activeParticipant: ParticipantViewModel)
+    -> [ParticipantViewModel] {
+        return participants.filter { participant in
             let hasValidWidth = participant.info?.width ?? 0 > 0
             let hasValidHeight = participant.info?.height ?? 0 > 0
             return hasValidWidth && hasValidHeight
@@ -312,7 +333,10 @@ class ContainerViewModel: ObservableObject {
         .filter { $0 != activeParticipant }
     }
 
-    private func updateParticipants(with participantsInfo: [ConferenceParticipant], mode: AVLayerVideoGravity) {
+    private func updateParticipants(
+        with participantsInfo: [ConferenceParticipant],
+        mode: AVLayerVideoGravity
+    ) {
         let filtered = participantsInfo.filter { participant in
             !participant.sinkId.isEmpty
         }
@@ -331,7 +355,8 @@ class ContainerViewModel: ObservableObject {
         for info in filtered {
             let baseId = extractBaseId(from: info.sinkId)
             // Check if a participant with the same base id exists
-            if let index = participants.firstIndex(where: { extractBaseId(from: $0.id) == baseId }) {
+            if let index = participants
+                .firstIndex(where: { extractBaseId(from: $0.id) == baseId }) {
                 participants[index].id = info.sinkId
             }
         }
@@ -352,8 +377,11 @@ class ContainerViewModel: ObservableObject {
         return String(components.first ?? "")
     }
 
-    private func reorderParticipantsIfNeeded(participant: ParticipantViewModel) {
-        guard let currentActiveParticipant = getActiveParticipant(), let index = participants.firstIndex(of: currentActiveParticipant), !mainGridViewModel.isFirstPage(index: index) else {
+    private func reorderParticipantsIfNeeded(participant _: ParticipantViewModel) {
+        guard let currentActiveParticipant = getActiveParticipant(),
+              let index = participants.firstIndex(of: currentActiveParticipant),
+              !mainGridViewModel.isFirstPage(index: index)
+        else {
             return
         }
 
@@ -385,20 +413,21 @@ class ContainerViewModel: ObservableObject {
     }
 
     func callStopped() {
-        self.pipManager?.callStopped()
-        self.pipManager = nil
+        pipManager?.callStopped()
+        pipManager = nil
     }
 
     func showPiP() {
-        self.pipManager?.showPiP()
+        pipManager?.showPiP()
     }
 
     func updatePipLayer(layer: AVSampleBufferDisplayLayer) {
-        self.pipManager?.updatePIP(layer: layer)
+        pipManager?.updatePIP(layer: layer)
     }
 
     func getConferenceParticipants() -> [ConferenceParticipant]? {
-        guard let participants = self.callService.getConferenceParticipants(for: self.callId) else { return nil }
+        guard let participants = callService.getConferenceParticipants(for: callId)
+        else { return nil }
         return participants.map { participant in
             participant.uri = participant.uri?.filterOutHost()
             return participant
@@ -406,27 +435,31 @@ class ContainerViewModel: ObservableObject {
     }
 
     func observeRaiseHand() {
-        self.actionsState
-            .subscribe(onNext: { [weak self] (state) in
+        actionsState
+            .subscribe(onNext: { [weak self] state in
                 guard let self = self, let state = state as? CallAction else { return }
                 switch state {
                 case .raiseHand:
                     guard let local = self.getLocal()?.info else { return }
-                    self.conferenceActionsModel.togleRaiseHand(state: !local.isHandRaised, conferenceId: self.callId, deviceId: local.device)
+                    self.conferenceActionsModel.togleRaiseHand(
+                        state: !local.isHandRaised,
+                        conferenceId: self.callId,
+                        deviceId: local.device
+                    )
                 default:
                     break
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func subscribePendingCall(callId: String, pending: PendingConferenceCall) {
-        self.callService
+        callService
             .currentCall(callId: callId)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] currentCall in
-                if currentCall.state != .ringing && currentCall.state != .connecting
-                    && currentCall.state != .unknown {
+                if currentCall.state != .ringing, currentCall.state != .connecting,
+                   currentCall.state != .unknown {
                     if let index = self?.pending.firstIndex(where: { model in
                         model.id == currentCall.callId
                     }) {
@@ -442,57 +475,88 @@ class ContainerViewModel: ObservableObject {
 }
 
 // MARK: - Conference Actions
-extension ContainerViewModel {
 
+extension ContainerViewModel {
     func getItemsForConferenceMenu(sinkId: String) -> [MenuItem] {
-        guard let participant = self.participants.filter({ participant in
+        guard let participant = participants.filter({ participant in
             participant.id == sinkId
         }).first,
         let local = getLocal(),
         let localInfo = local.info,
         let info = participant.info else { return [] }
-        return self.conferenceActionsModel.getItemsForConferenceFor(participant: info, local: localInfo, conferenceId: callId, layout: getNewLayout())
+        return conferenceActionsModel.getItemsForConferenceFor(
+            participant: info,
+            local: localInfo,
+            conferenceId: callId,
+            layout: getNewLayout()
+        )
     }
 
     func getHost() -> ParticipantViewModel? {
-        return self.participants.filter({ participant in
+        return participants.filter { participant in
             participant.id.contains("host")
-        }).first
+        }.first
     }
 
     func getLocal() -> ParticipantViewModel? {
-        guard let account = self.accountService.currentAccount else { return nil }
-        return self.participants.filter({ participant in
+        guard let account = accountService.currentAccount else { return nil }
+        return participants.filter { participant in
             guard let uri = participant.info?.uri, !uri.isEmpty else { return true }
             return uri == account.jamiId
-        }).first
+        }.first
     }
 
     func observeConferenceActions() {
-        self.conferenceState
-            .subscribe(onNext: { [weak self] (state) in
+        conferenceState
+            .subscribe(onNext: { [weak self] state in
                 guard let self = self, let state = state as? ParticipantAction else { return }
                 switch state {
-                case .hangup(let info):
+                case let .hangup(info):
                     guard let uri = info.uri else { return }
-                    self.conferenceActionsModel.hangupParticipant(participantId: uri, device: info.device, conferenceId: self.callId)
-                case .maximize(let info):
+                    self.conferenceActionsModel.hangupParticipant(
+                        participantId: uri,
+                        device: info.device,
+                        conferenceId: self.callId
+                    )
+                case let .maximize(info):
                     guard let uri = info.uri else { return }
-                    self.conferenceActionsModel.setActiveParticipant(participantId: uri, maximize: true, conferenceId: self.callId)
-                case .minimize(let info):
+                    self.conferenceActionsModel.setActiveParticipant(
+                        participantId: uri,
+                        maximize: true,
+                        conferenceId: self.callId
+                    )
+                case let .minimize(info):
                     guard let uri = info.uri else { return }
-                    self.conferenceActionsModel.setActiveParticipant(participantId: uri, maximize: false, conferenceId: self.callId)
-                case .setModerator(let info):
+                    self.conferenceActionsModel.setActiveParticipant(
+                        participantId: uri,
+                        maximize: false,
+                        conferenceId: self.callId
+                    )
+                case let .setModerator(info):
                     guard let uri = info.uri else { return }
-                    self.conferenceActionsModel.setModeratorParticipant(participantId: uri, active: !info.isModerator, conferenceId: self.callId)
-                case .muteAudio(let info):
+                    self.conferenceActionsModel.setModeratorParticipant(
+                        participantId: uri,
+                        active: !info.isModerator,
+                        conferenceId: self.callId
+                    )
+                case let .muteAudio(info):
                     guard let uri = info.uri else { return }
-                    self.conferenceActionsModel.muteParticipant(participantId: uri, active: !info.isAudioMuted, conferenceId: self.callId, device: info.device, streamId: info.sinkId)
-                case .raseHand(let info):
+                    self.conferenceActionsModel.muteParticipant(
+                        participantId: uri,
+                        active: !info.isAudioMuted,
+                        conferenceId: self.callId,
+                        device: info.device,
+                        streamId: info.sinkId
+                    )
+                case let .raseHand(info):
                     guard let uri = info.uri else { return }
-                    self.conferenceActionsModel.lowerHandFor(participantId: uri, conferenceId: self.callId, deviceId: info.device)
+                    self.conferenceActionsModel.lowerHandFor(
+                        participantId: uri,
+                        conferenceId: self.callId,
+                        deviceId: info.device
+                    )
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 }

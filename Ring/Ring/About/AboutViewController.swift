@@ -16,26 +16,28 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-import UIKit
-import SwiftUI
 import Reusable
+import SwiftUI
+import UIKit
 
 class AboutViewController: UIViewController, StoryboardBased {
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = L10n.Smartlist.aboutJami
-        self.configureNavigationBar(isTransparent: true)
+        navigationItem.title = L10n.Smartlist.aboutJami
+        configureNavigationBar(isTransparent: true)
         let swiftUIView = AboutSwiftUIView()
         let contentView = UIHostingController(rootView: swiftUIView)
         addChild(contentView)
-        contentView.view.frame = self.view.frame
-        self.view.addSubview(contentView.view)
+        contentView.view.frame = view.frame
+        view.addSubview(contentView.view)
         contentView.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        contentView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        contentView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-        contentView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        contentView.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+            .isActive = true
+        contentView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0)
+            .isActive = true
+        contentView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+            .isActive = true
         contentView.didMove(toParent: self)
     }
 }

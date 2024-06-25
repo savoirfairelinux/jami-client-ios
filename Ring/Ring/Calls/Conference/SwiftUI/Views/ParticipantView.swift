@@ -21,18 +21,17 @@
 import SwiftUI
 
 struct DisplayLayerView: UIViewRepresentable {
-
     @Binding var displayLayer: AVSampleBufferDisplayLayer
     @Binding var layerWidth: CGFloat
     @Binding var layerHeight: CGFloat
 
-    func makeUIView(context: Context) -> UIView {
+    func makeUIView(context _: Context) -> UIView {
         let view = UIView()
         view.layer.addSublayer(displayLayer)
         return view
     }
 
-    func updateUIView(_ uiView: UIView, context: Context) {
+    func updateUIView(_: UIView, context _: Context) {
         var frame = displayLayer.frame
         let size = CGSize(width: layerWidth, height: layerHeight)
         frame.origin = CGPoint.zero
@@ -97,13 +96,20 @@ struct ExpandableParticipantView: View {
                         .frame(width: layerWidth, height: layerHeight)
                         .offset(x: offsetX)
                 } else {
-                    DisplayLayerView(displayLayer: $model.mainDisplayLayer, layerWidth: $layerWidth, layerHeight: $layerHeight)
-                        .frame(width: layerWidth, height: layerHeight)
-                        .offset(x: offsetX)
+                    DisplayLayerView(
+                        displayLayer: $model.mainDisplayLayer,
+                        layerWidth: $layerWidth,
+                        layerHeight: $layerHeight
+                    )
+                    .frame(width: layerWidth, height: layerHeight)
+                    .offset(x: offsetX)
                 }
             }
             ParticipantInfoView(model: model)
-                .cornerRadius(radius: 5, corners: model.notActiveParticipant ? [.topRight] : [.allCorners])
+                .cornerRadius(
+                    radius: 5,
+                    corners: model.notActiveParticipant ? [.topRight] : [.allCorners]
+                )
                 .padding(model.notActiveParticipant ? 0 : 20)
         }
         .frame(width: layerWidth, height: layerHeight)
@@ -162,10 +168,14 @@ struct ParticipantView: View {
                         let size = min(width, height) - 10
                         Avatar(size: size, participant: model)
                     } else {
-                        DisplayLayerView(displayLayer: $model.gridDisplayLayer, layerWidth: $width, layerHeight: $height)
-                            .frame(width: width, height: height)
-                            .cornerRadius(15)
-                            .clipped()
+                        DisplayLayerView(
+                            displayLayer: $model.gridDisplayLayer,
+                            layerWidth: $width,
+                            layerHeight: $height
+                        )
+                        .frame(width: width, height: height)
+                        .cornerRadius(15)
+                        .clipped()
                     }
                 }
                 ParticipantInfoView(model: model)

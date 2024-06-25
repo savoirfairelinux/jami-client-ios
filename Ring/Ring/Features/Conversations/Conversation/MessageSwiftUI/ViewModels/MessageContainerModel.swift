@@ -38,15 +38,11 @@ class MessageContainerModel: Identifiable {
 
     // message info state
     private let infoSubject = PublishSubject<State>()
-    lazy var messageInfoState: Observable<State> = {
-        return self.infoSubject.asObservable()
-    }()
+    lazy var messageInfoState: Observable<State> = self.infoSubject.asObservable()
 
     // message transfer state
     private let transferSubject = PublishSubject<State>()
-    lazy var messageTransferState: Observable<State> = {
-        return self.transferSubject.asObservable()
-    }()
+    lazy var messageTransferState: Observable<State> = self.transferSubject.asObservable()
 
     var shouldShowTimeString: Bool = false {
         didSet {
@@ -71,34 +67,53 @@ class MessageContainerModel: Identifiable {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.messageRow.shouldDisplayContactInfoForConversation(state: self.shouldDisplayContactInfoForConversation)
+                self.messageRow
+                    .shouldDisplayContactInfoForConversation(state: self
+                                                                .shouldDisplayContactInfoForConversation)
             }
         }
     }
 
     var sequencing: MessageSequencing = .unknown {
         didSet {
-            self.messageContent.setSequencing(sequencing: sequencing)
-            self.messageRow.setSequencing(sequencing: sequencing)
+            messageContent.setSequencing(sequencing: sequencing)
+            messageRow.setSequencing(sequencing: sequencing)
         }
     }
 
     var preferencesColor: UIColor
 
-    init(message: MessageModel, contextMenuState: PublishSubject<State>, isHistory: Bool, localJamiId: String, preferencesColor: UIColor) {
-        self.id = message.id
+    init(
+        message: MessageModel,
+        contextMenuState: PublishSubject<State>,
+        isHistory: Bool,
+        localJamiId: String,
+        preferencesColor: UIColor
+    ) {
+        id = message.id
         self.message = message
         self.preferencesColor = preferencesColor
-        self.stackViewModel = MessageStackVM(message: message)
-        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, isHistory: isHistory, preferencesColor: preferencesColor)
-        self.messageRow = MessageRowVM(message: message)
-        self.contactViewModel = ContactMessageVM(message: message)
-        self.replyTarget = MessageReplyTargetVM(contextMenuState: contextMenuState, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
-        self.reactionsModel = ReactionsContainerModel(message: message)
+        stackViewModel = MessageStackVM(message: message)
+        messageContent = MessageContentVM(
+            message: message,
+            contextMenuState: contextMenuState,
+            transferState: transferSubject,
+            isHistory: isHistory,
+            preferencesColor: preferencesColor
+        )
+        messageRow = MessageRowVM(message: message)
+        contactViewModel = ContactMessageVM(message: message)
+        replyTarget = MessageReplyTargetVM(
+            contextMenuState: contextMenuState,
+            localJamiId: localJamiId,
+            replyAuthorJamiId: message.authorId,
+            isIncoming: message.incoming
+        )
+        reactionsModel = ReactionsContainerModel(message: message)
     }
 
     func listenerForInfoStateAdded() {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.stackViewModel.setInfoState(state: self.infoSubject)
             self.messageContent.setInfoState(state: self.infoSubject)
@@ -110,9 +125,15 @@ class MessageContainerModel: Identifiable {
     }
 
     func setReplyTarget(message: MessageModel) {
-        let target = MessageContentVM(message: message, contextMenuState: PublishSubject<State>(), transferState: self.transferSubject, isHistory: false, preferencesColor: preferencesColor)
-        target.setInfoState(state: self.infoSubject)
-        self.replyTarget.target = target
+        let target = MessageContentVM(
+            message: message,
+            contextMenuState: PublishSubject<State>(),
+            transferState: transferSubject,
+            isHistory: false,
+            preferencesColor: preferencesColor
+        )
+        target.setInfoState(state: infoSubject)
+        replyTarget.target = target
     }
 
     func updateTransferStatus(status: DataTransferStatus) {
@@ -121,7 +142,7 @@ class MessageContainerModel: Identifiable {
             self.messageContent.setTransferStatus(transferStatus: status)
         }
 
-        if let reply = self.replyTarget.target {
+        if let reply = replyTarget.target {
             DispatchQueue.main.async { [weak reply] in
                 guard let reply = reply else { return }
                 reply.setTransferStatus(transferStatus: status)
@@ -130,28 +151,28 @@ class MessageContainerModel: Identifiable {
     }
 
     func startTargetReplyAnimation() {
-        self.messageContent.startTargetReplyAnimation()
+        messageContent.startTargetReplyAnimation()
     }
 
     func swarmColorUpdated(color: UIColor) {
-        self.messageContent.swarmColorUpdated(color: color)
-        self.contactViewModel.swarmColorUpdated(color: color)
+        messageContent.swarmColorUpdated(color: color)
+        contactViewModel.swarmColorUpdated(color: color)
     }
 
     func reactionsUpdated() {
-        self.reactionsModel.reactionsUpdated()
+        reactionsModel.reactionsUpdated()
     }
 
     func messageUpdated() {
-        self.messageContent.updateMessageEditions()
-        self.messageRow.updateMessageStatus()
+        messageContent.updateMessageEditions()
+        messageRow.updateMessageStatus()
     }
 
     func displayLastSent(state: Bool) {
-        self.messageRow.displayLastSent(state: state)
+        messageRow.displayLastSent(state: state)
     }
 
     func hasReactions() -> Bool {
-        return !self.message.reactions.isEmpty
+        return !message.reactions.isEmpty
     }
 }

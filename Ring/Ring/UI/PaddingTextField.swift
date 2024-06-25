@@ -21,10 +21,12 @@
 import UIKit
 
 class PaddingTextField: UITextField {
-
     var padding: UIEdgeInsets
 
-    init(padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), frame: CGRect) {
+    init(
+        padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10),
+        frame: CGRect
+    ) {
         self.padding = padding
         super.init(frame: frame)
     }

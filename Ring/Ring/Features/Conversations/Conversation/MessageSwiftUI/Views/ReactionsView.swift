@@ -45,6 +45,10 @@ struct ReactionsView: View {
         .background(Color(UIColor.systemBackground))
         .cornerRadius(15)
         .shadowForConversation()
-        .frame(maxWidth: defailtSize, maxHeight: min(contentHeight, defailtSize), alignment: .center)
+        .frame(
+            maxWidth: defailtSize,
+            maxHeight: min(contentHeight, defailtSize),
+            alignment: .center
+        )
     }
 }

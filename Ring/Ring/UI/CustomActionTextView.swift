@@ -18,8 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import RxSwift
+import UIKit
 
 enum SupportedActions {
     case paste
@@ -51,7 +51,6 @@ class CustomActionTextView: UITextView {
     var actionsToRemove = [SupportedActions.none]
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-
         for actionToRemove in actionsToRemove where action == actionToRemove.toSelector() {
             return false
         }

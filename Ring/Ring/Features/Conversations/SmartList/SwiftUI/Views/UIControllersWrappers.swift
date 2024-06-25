@@ -18,9 +18,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import SwiftUI
 import AVFoundation
 import ContactsUI
+import SwiftUI
 
 struct ScanView: UIViewControllerRepresentable {
     var onCodeScanned: (String) -> Void
@@ -28,17 +28,15 @@ struct ScanView: UIViewControllerRepresentable {
 
     typealias UIViewControllerType = ScanViewController
 
-    func makeUIViewController(context: Context) -> ScanViewController {
-        let viewController = ScanViewController.instantiate(with: self.injectionBag)
+    func makeUIViewController(context _: Context) -> ScanViewController {
+        let viewController = ScanViewController.instantiate(with: injectionBag)
         viewController.onCodeScanned = onCodeScanned
         return viewController
     }
 
-    func updateUIViewController(_ uiViewController: ScanViewController, context: Context) {
-    }
+    func updateUIViewController(_: ScanViewController, context _: Context) {}
 
-    static func dismantleUIViewController(_ uiViewController: ScanViewController, coordinator: ()) {
-    }
+    static func dismantleUIViewController(_: ScanViewController, coordinator _: ()) {}
 }
 
 struct ContactPicker: UIViewControllerRepresentable {
@@ -51,7 +49,7 @@ struct ContactPicker: UIViewControllerRepresentable {
         return picker
     }
 
-    func updateUIViewController(_ uiViewController: CNContactPickerViewController, context: Context) {}
+    func updateUIViewController(_: CNContactPickerViewController, context _: Context) {}
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self, onSelectContact: onSelectContact)
@@ -75,9 +73,10 @@ struct ContactPicker: UIViewControllerRepresentable {
                                                   message: nil,
                                                   preferredStyle: .alert)
                     let cancelAction = UIAlertAction(title: L10n.Global.ok,
-                                                     style: .default) { (_: UIAlertAction!) -> Void in }
+                                                     style: .default) { (_: UIAlertAction!) in }
                     alert.addAction(cancelAction)
-                    if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+                    if let rootViewController = UIApplication.shared.windows.first?
+                        .rootViewController {
                         rootViewController.present(alert, animated: true, completion: nil)
                     }
                     self?.parent.presentationMode.wrappedValue.dismiss()
@@ -87,28 +86,36 @@ struct ContactPicker: UIViewControllerRepresentable {
                     self?.onSelectContact(phoneNumbers[0])
                 }
             } else {
-                self.presentNumberSelection(from: picker, with: phoneNumbers)
+                presentNumberSelection(from: picker, with: phoneNumbers)
             }
         }
 
-        private func presentNumberSelection(from picker: UIViewController, with numbers: [String]) {
+        private func presentNumberSelection(from _: UIViewController, with numbers: [String]) {
             DispatchQueue.main.async {
-                let alert = UIAlertController(title: L10n.Smartlist.selectOneNumber, message: nil, preferredStyle: .alert)
-                numbers.forEach { number in
+                let alert = UIAlertController(
+                    title: L10n.Smartlist.selectOneNumber,
+                    message: nil,
+                    preferredStyle: .alert
+                )
+                for number in numbers {
                     alert.addAction(UIAlertAction(title: number, style: .default, handler: { _ in
                         DispatchQueue.main.async {
                             self.onSelectContact(number)
                         }
                     }))
                 }
-                alert.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(
+                    title: L10n.Global.cancel,
+                    style: .cancel,
+                    handler: nil
+                ))
                 if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
                     rootViewController.present(alert, animated: true, completion: nil)
                 }
             }
         }
 
-        func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
+        func contactPickerDidCancel(_: CNContactPickerViewController) {
             DispatchQueue.main.async { [weak self] in
                 self?.parent.presentationMode.wrappedValue.dismiss()
             }

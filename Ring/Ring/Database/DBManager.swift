@@ -34,8 +34,9 @@ enum GeneratedMessage: Int {
     case unknown
 
     func toString() -> String {
-        return String(self.rawValue)
+        return String(rawValue)
     }
+
     init(from: String) {
         if let intValue = Int(from) {
             self = GeneratedMessage(rawValue: intValue) ?? .unknown
@@ -43,6 +44,7 @@ enum GeneratedMessage: Int {
             self = .unknown
         }
     }
+
     func toMessage(with duration: Int) -> String {
         let time = Date.convertSecondsToTimeString(seconds: Double(duration))
         switch self {
@@ -142,12 +144,12 @@ enum DBBridgingError: Error {
 }
 
 enum InteractionType: String {
-    case invalid    = "INVALID"
-    case text       = "TEXT"
-    case call       = "CALL"
-    case contact    = "CONTACT"
-    case iTransfer  = "INCOMING_DATA_TRANSFER"
-    case oTransfer  = "OUTGOING_DATA_TRANSFER"
+    case invalid = "INVALID"
+    case text = "TEXT"
+    case call = "CALL"
+    case contact = "CONTACT"
+    case iTransfer = "INCOMING_DATA_TRANSFER"
+    case oTransfer = "OUTGOING_DATA_TRANSFER"
 
     func toMessageType() -> MessageType {
         switch self {
@@ -170,14 +172,14 @@ typealias SavedMessageForConversation = (messageID: String, conversationID: Stri
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class DBManager {
-
     let profileHepler: ProfileDataHelper
     let conversationHelper: ConversationDataHelper
     let interactionHepler: InteractionDataHelper
     let dbConnections: DBContainer
     let disposeBag = DisposeBag()
 
-    // used to create object to save to db. When inserting in table defaultID will be replaced by autoincrementedID
+    // used to create object to save to db. When inserting in table defaultID will be replaced by
+    // autoincrementedID
     let defaultID: Int64 = 1
 
     init(profileHepler: ProfileDataHelper, conversationHelper: ConversationDataHelper,
@@ -189,24 +191,28 @@ class DBManager {
     }
 
     func isMigrationToDBv2Needed(accountId: String) -> Bool {
-        return self.dbConnections.isMigrationToDBv2Needed(for: accountId)
+        return dbConnections.isMigrationToDBv2Needed(for: accountId)
     }
 
     func migrateToDbVersion2(accountId: String, accountURI: String) -> Bool {
         if !accountURI.contains("ring:") {
-            self.dbConnections.createAccountfolder(for: accountId)
+            dbConnections.createAccountfolder(for: accountId)
         }
-        if !self.dbConnections.copyDbToAccountFolder(for: accountId) {
+        if !dbConnections.copyDbToAccountFolder(for: accountId) {
             return false
         }
-        guard let newDB = self.dbConnections.forAccount(account: accountId) else {
+        guard let newDB = dbConnections.forAccount(account: accountId) else {
             return false
         }
         // move profiles to vcards
         do {
             try newDB.transaction { [weak self] in
                 guard let self = self else { throw DataAccessError.databaseError }
-                if try !self.migrateAccountToVCard(for: accountId, accountURI: accountURI, dataBase: newDB) {
+                if try !self.migrateAccountToVCard(
+                    for: accountId,
+                    accountURI: accountURI,
+                    dataBase: newDB
+                ) {
                     throw DataAccessError.databaseError
                 }
                 if try !self.migrateProfilesToVCards(for: accountId, dataBase: newDB) {
@@ -224,9 +230,9 @@ class DBManager {
 
     func createDatabaseForAccount(accountId: String, createFolder: Bool = false) throws -> Bool {
         if createFolder {
-            self.dbConnections.createAccountfolder(for: accountId)
+            dbConnections.createAccountfolder(for: accountId)
         }
-        guard let newDB = self.dbConnections.forAccount(account: accountId) else {
+        guard let newDB = dbConnections.forAccount(account: accountId) else {
             return false
         }
         do {
@@ -241,51 +247,63 @@ class DBManager {
     }
 
     func migrateProfilesToVCards(for accountId: String, dataBase: Connection) throws -> Bool {
-        guard let profiles = try? self.profileHepler.selectAll(dataBase: dataBase) else {
+        guard let profiles = try? profileHepler.selectAll(dataBase: dataBase) else {
             return false
         }
         for profile in profiles {
-            if self.dbConnections.isContactProfileExists(accountId: accountId, profileURI: profile.uri) {
+            if dbConnections.isContactProfileExists(accountId: accountId, profileURI: profile.uri) {
                 continue
             }
-            guard let profilePath = self.dbConnections.contactProfilePath(accountId: accountId, profileURI: profile.uri, createifNotExists: true) else { return false }
-            try self.saveProfile(profile: profile, path: profilePath)
-            if !self.dbConnections.isContactProfileExists(accountId: accountId, profileURI: profile.uri) {
+            guard let profilePath = dbConnections.contactProfilePath(
+                accountId: accountId,
+                profileURI: profile.uri,
+                createifNotExists: true
+            ) else { return false }
+            try saveProfile(profile: profile, path: profilePath)
+            if !dbConnections
+                .isContactProfileExists(accountId: accountId, profileURI: profile.uri) {
                 return false
             }
         }
-        self.profileHepler.dropProfileTable(accountDb: dataBase)
+        profileHepler.dropProfileTable(accountDb: dataBase)
         return true
     }
 
-    func migrateAccountToVCard(for accountId: String, accountURI: String, dataBase: Connection) throws -> Bool {
-        if self.dbConnections.isAccountProfileExists(accountId: accountId) { return true }
-        guard let accountProfile = self.profileHepler.getAccountProfile(dataBase: dataBase) else {
-            return self.dbConnections.isAccountProfileExists(accountId: accountId)
+    func migrateAccountToVCard(for accountId: String, accountURI: String,
+                               dataBase: Connection) throws -> Bool {
+        if dbConnections.isAccountProfileExists(accountId: accountId) { return true }
+        guard let accountProfile = profileHepler.getAccountProfile(dataBase: dataBase) else {
+            return dbConnections.isAccountProfileExists(accountId: accountId)
         }
-        guard let path = self.dbConnections.accountProfilePath(accountId: accountId) else { return false }
+        guard let path = dbConnections.accountProfilePath(accountId: accountId)
+        else { return false }
         let type = accountURI.contains("ring:") ? URIType.ring : URIType.sip
-        let profile = Profile(uri: accountURI, alias: accountProfile.alias, photo: accountProfile.photo, type: type.getString())
-        try self.saveProfile(profile: profile, path: path)
-        if !self.dbConnections.isAccountProfileExists(accountId: accountId) {
+        let profile = Profile(
+            uri: accountURI,
+            alias: accountProfile.alias,
+            photo: accountProfile.photo,
+            type: type.getString()
+        )
+        try saveProfile(profile: profile, path: path)
+        if !dbConnections.isAccountProfileExists(accountId: accountId) {
             return false
         }
-        self.profileHepler.dropAccountTable(accountDb: dataBase)
+        profileHepler.dropAccountTable(accountDb: dataBase)
         return true
     }
 
     func removeDBForAccount(accountId: String, removeFolder: Bool) {
-        self.dbConnections.removeDBForAccount(account: accountId, removeFolder: removeFolder)
+        dbConnections.removeDBForAccount(account: accountId, removeFolder: removeFolder)
     }
 
     func createConversationsFor(contactUri: String, accountId: String) -> String {
-        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+        guard let dataBase = dbConnections.forAccount(account: accountId) else {
             return ""
         }
         do {
-            let result = try self.getConversationsFor(contactUri: contactUri,
-                                                      createIfNotExists: true,
-                                                      dataBase: dataBase, accountId: accountId)
+            let result = try getConversationsFor(contactUri: contactUri,
+                                                 createIfNotExists: true,
+                                                 dataBase: dataBase, accountId: accountId)
             return "\(result ?? -1)"
         } catch {}
         return ""
@@ -294,8 +312,8 @@ class DBManager {
     // swiftlint:disable:next function_parameter_count
     func saveMessage(for accountId: String, with contactUri: String,
                      message: MessageModel, incoming: Bool,
-                     interactionType: InteractionType, duration: Int) -> Observable<SavedMessageForConversation> {
-
+                     interactionType: InteractionType,
+                     duration: Int) -> Observable<SavedMessageForConversation> {
         // create completable which will be executed on background thread
         return Observable.create { [weak self] observable in
             do {
@@ -304,16 +322,23 @@ class DBManager {
                 }
                 try dataBase.transaction {
                     let author: String? = incoming ? contactUri : nil
-                    guard let conversationID = try self?.getConversationsFor(contactUri: contactUri,
-                                                                             createIfNotExists: true,
-                                                                             dataBase: dataBase, accountId: accountId) else {
+                    guard let conversationID = try self?.getConversationsFor(
+                        contactUri: contactUri,
+                        createIfNotExists: true,
+                        dataBase: dataBase,
+                        accountId: accountId
+                    ) else {
                         throw DBBridgingError.saveMessageFailed
                     }
                     let result = self?.addMessageTo(conversation: conversationID, author: author,
-                                                    interactionType: interactionType, message: message,
+                                                    interactionType: interactionType,
+                                                    message: message,
                                                     duration: duration, dataBase: dataBase)
                     if let messageID = result {
-                        let savedMessage = SavedMessageForConversation(messageID, String(conversationID))
+                        let savedMessage = SavedMessageForConversation(
+                            messageID,
+                            String(conversationID)
+                        )
                         observable.onNext(savedMessage)
                         observable.on(.completed)
                     } else {
@@ -323,7 +348,7 @@ class DBManager {
             } catch {
                 observable.on(.error(DBBridgingError.saveMessageFailed))
             }
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
@@ -341,11 +366,15 @@ class DBManager {
             } catch {
                 observable.on(.error(DBBridgingError.getConversationFailed))
             }
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
-    func updateMessageStatus(daemonID: String, withStatus status: InteractionStatus, accountId: String) -> Completable {
+    func updateMessageStatus(
+        daemonID: String,
+        withStatus status: InteractionStatus,
+        accountId: String
+    ) -> Completable {
         return Completable.create { [weak self] completable in
             if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 let success = self.interactionHepler
@@ -360,17 +389,22 @@ class DBManager {
             } else {
                 completable(.error(DBBridgingError.updateIntercationFailed))
             }
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
     func getProfilesForAccount(accountId: String) -> [Profile]? {
         var profiles = [Profile]()
         do {
-            guard let path = self.dbConnections.contactsPath(accountId: accountId,
-                                                             createIfNotExists: true) else { return nil }
+            guard let path = dbConnections.contactsPath(accountId: accountId,
+                                                        createIfNotExists: true)
+            else { return nil }
             guard let documentURL = URL(string: path) else { return nil }
-            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentURL, includingPropertiesForKeys: nil, options: [])
+            let directoryContents = try FileManager.default.contentsOfDirectory(
+                at: documentURL,
+                includingPropertiesForKeys: nil,
+                options: []
+            )
             for url in directoryContents {
                 if let profile = getProfileFromPath(path: url.path) {
                     profiles.append(profile)
@@ -386,7 +420,11 @@ class DBManager {
         return Completable.create { [weak self] completable in
             if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 let success = self.interactionHepler
-                    .updateInteractionContentWithID(daemonID: daemonID, content: name, dataBase: dataBase)
+                    .updateInteractionContentWithID(
+                        daemonID: daemonID,
+                        content: name,
+                        dataBase: dataBase
+                    )
                 if success {
                     completable(.completed)
                 } else {
@@ -395,16 +433,23 @@ class DBManager {
             } else {
                 completable(.error(DBBridgingError.updateIntercationFailed))
             }
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
-    func updateTransferStatus(daemonID: String, withStatus transferStatus: DataTransferStatus, accountId: String) -> Completable {
+    func updateTransferStatus(
+        daemonID: String,
+        withStatus transferStatus: DataTransferStatus,
+        accountId: String
+    ) -> Completable {
         return Completable.create { [weak self] completable in
             if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 let success = self.interactionHepler
                     .updateInteractionWithDaemonID(interactionDaemonID: daemonID,
-                                                   interactionStatus: InteractionStatus(status: transferStatus).rawValue,
+                                                   interactionStatus: InteractionStatus(
+                                                    status: transferStatus
+                                                   )
+                                                   .rawValue,
                                                    dataBase: dataBase)
                 if success {
                     completable(.completed)
@@ -414,18 +459,25 @@ class DBManager {
             } else {
                 completable(.error(DBBridgingError.updateIntercationFailed))
             }
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
-    func setMessagesAsRead(messagesIDs: [String], withStatus status: MessageStatus, accountId: String) -> Completable {
+    func setMessagesAsRead(
+        messagesIDs: [String],
+        withStatus status: MessageStatus,
+        accountId: String
+    ) -> Completable {
         return Completable.create { [weak self] completable in
             if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 var success = true
                 for messageId in messagesIDs {
                     if !self.interactionHepler
                         .updateInteractionStatusWithID(interactionID: Int64(messageId) ?? -1,
-                                                       interactionStatus: InteractionStatus(status: status).rawValue,
+                                                       interactionStatus: InteractionStatus(
+                                                        status: status
+                                                       )
+                                                       .rawValue,
                                                        dataBase: dataBase) {
                         success = false
                     }
@@ -438,7 +490,7 @@ class DBManager {
             } else {
                 completable(.error(DBBridgingError.saveMessageFailed))
             }
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
@@ -453,14 +505,16 @@ class DBManager {
             } else {
                 completable(.error(DBBridgingError.deleteMessageFailed))
             }
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
     func clearAllHistoryFor(accountId: String) -> Completable {
         return Completable.create { [weak self] completable in
             do {
-                guard let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) else {
+                guard let self = self,
+                      let dataBase = self.dbConnections.forAccount(account: accountId)
+                else {
                     throw DBBridgingError.deleteConversationFailed
                 }
                 try dataBase.transaction {
@@ -478,7 +532,7 @@ class DBManager {
             } catch {
                 completable(.error(DBBridgingError.deleteConversationFailed))
             }
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
@@ -487,22 +541,33 @@ class DBManager {
                          keepConversation: Bool) -> Completable {
         return Completable.create { [weak self] completable in
             do {
-                guard let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) else {
+                guard let self = self,
+                      let dataBase = self.dbConnections.forAccount(account: accountId)
+                else {
                     throw DBBridgingError.deleteConversationFailed
                 }
                 try dataBase.transaction {
-                    guard (try self.getProfile(for: participantUri, createIfNotExists: false, accountId: accountId)) != nil else {
+                    guard try (self.getProfile(
+                        for: participantUri,
+                        createIfNotExists: false,
+                        accountId: accountId
+                    )) != nil else {
                         throw DBBridgingError.deleteConversationFailed
                     }
-                    guard let conversationsId = try self.getConversationsFor(contactUri: participantUri,
-                                                                             createIfNotExists: true,
-                                                                             dataBase: dataBase, accountId: accountId) else {
+                    guard let conversationsId = try self.getConversationsFor(
+                        contactUri: participantUri,
+                        createIfNotExists: true,
+                        dataBase: dataBase,
+                        accountId: accountId
+                    ) else {
                         throw DBBridgingError.deleteConversationFailed
                     }
                     guard let interactions = try self.interactionHepler
                             .selectInteractionsForConversation(
                                 conv: conversationsId,
-                                dataBase: dataBase) else {
+                                dataBase: dataBase
+                            )
+                    else {
                         throw DBBridgingError.deleteConversationFailed
                     }
                     if !interactions.isEmpty {
@@ -515,8 +580,14 @@ class DBManager {
                         completable(.completed)
                     } else {
                         let successConversations = self.conversationHelper
-                            .deleteConversations(conversationID: conversationsId, dataBase: dataBase)
-                        self.dbConnections.removeProfile(accountId: accountId, profileURI: participantUri)
+                            .deleteConversations(
+                                conversationID: conversationsId,
+                                dataBase: dataBase
+                            )
+                        self.dbConnections.removeProfile(
+                            accountId: accountId,
+                            profileURI: participantUri
+                        )
                         if successConversations {
                             completable(.completed)
                         } else {
@@ -527,11 +598,12 @@ class DBManager {
             } catch {
                 completable(.error(DBBridgingError.deleteConversationFailed))
             }
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
-    func profileObservable(for profileUri: String, createIfNotExists: Bool, accountId: String) -> Observable<Profile> {
+    func profileObservable(for profileUri: String, createIfNotExists: Bool,
+                           accountId: String) -> Observable<Profile> {
         return Observable.create { observable in
             do {
                 if let profile = try self.getProfile(for: profileUri,
@@ -545,7 +617,7 @@ class DBManager {
             } catch {
                 observable.on(.error(DBBridgingError.getProfileFailed))
             }
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
@@ -553,77 +625,93 @@ class DBManager {
         return Observable.create { observable in
             guard let profile = self.accountProfile(for: accountId) else {
                 observable.on(.error(DBBridgingError.getProfileFailed))
-                return Disposables.create { }
+                return Disposables.create {}
             }
             observable.onNext(profile)
             observable.on(.completed)
-            return Disposables.create { }
+            return Disposables.create {}
         }
     }
 
     func accountProfile(for accountId: String) -> Profile? {
-        guard let path = self.dbConnections.accountProfilePath(accountId: accountId) else { return nil }
-        return self.getProfileFromPath(path: path)
+        guard let path = dbConnections.accountProfilePath(accountId: accountId) else { return nil }
+        return getProfileFromPath(path: path)
     }
 
     func accountVCard(for accountId: String) -> Profile? {
-        guard let path = self.dbConnections.accountProfilePath(accountId: accountId),
+        guard let path = dbConnections.accountProfilePath(accountId: accountId),
               let data = FileManager.default.contents(atPath: path) else { return nil }
         return VCardUtils.parseToProfile(data: data)
     }
 
-    func createOrUpdateRingProfile(profileUri: String, alias: String?, image: String?, accountId: String) -> Bool {
+    func createOrUpdateRingProfile(
+        profileUri: String,
+        alias: String?,
+        image: String?,
+        accountId: String
+    ) -> Bool {
         let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
         if type == ProfileType.sip {
-            self.dbConnections.createAccountfolder(for: accountId)
+            dbConnections.createAccountfolder(for: accountId)
         }
-        guard let path = self.dbConnections.contactProfilePath(accountId: accountId, profileURI: profileUri, createifNotExists: true) else { return false }
+        guard let path = dbConnections.contactProfilePath(
+            accountId: accountId,
+            profileURI: profileUri,
+            createifNotExists: true
+        ) else { return false }
 
         let profile = Profile(uri: profileUri, alias: alias, photo: image, type: type.rawValue)
 
         do {
-            try self.saveProfile(profile: profile, path: path)
+            try saveProfile(profile: profile, path: path)
         } catch {
             return false
         }
-        return self.dbConnections.isContactProfileExists(accountId: accountId, profileURI: profileUri)
+        return dbConnections.isContactProfileExists(accountId: accountId, profileURI: profileUri)
     }
 
-    func saveAccountProfile(alias: String?, photo: String?, accountId: String, accountURI: String) -> Bool {
+    func saveAccountProfile(alias: String?, photo: String?, accountId: String,
+                            accountURI: String) -> Bool {
         let type = accountURI.contains("ring") ? ProfileType.ring : ProfileType.sip
         if type == ProfileType.sip {
-            self.dbConnections.createAccountfolder(for: accountId)
+            dbConnections.createAccountfolder(for: accountId)
         }
-        guard let path = self.dbConnections.accountProfilePath(accountId: accountId) else { return false }
+        guard let path = dbConnections.accountProfilePath(accountId: accountId)
+        else { return false }
         let profile = Profile(uri: accountURI, alias: alias, photo: photo, type: type.rawValue)
         do {
-            try self.saveProfile(profile: profile, path: path)
-            return self.dbConnections.isAccountProfileExists(accountId: accountId)
+            try saveProfile(profile: profile, path: path)
+            return dbConnections.isAccountProfileExists(accountId: accountId)
         } catch {
             return false
         }
     }
 
     // MARK: Private functions
+
     private func buildConversationsForAccount(accountId: String) throws -> [ConversationModel] {
-        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+        guard let dataBase = dbConnections.forAccount(account: accountId) else {
             throw DBBridgingError.getConversationFailed
         }
         var conversationsToReturn = [ConversationModel]()
 
-        guard let conversations = try self.conversationHelper.selectAll(dataBase: dataBase),
-              !conversations.isEmpty else {
+        guard let conversations = try conversationHelper.selectAll(dataBase: dataBase),
+              !conversations.isEmpty
+        else {
             // if there is no conversation for account return empty list
             return conversationsToReturn
         }
         for conversationID in conversations.map({ $0.id }) {
-            guard let participants = try self.getParticipantsForConversation(conversationID: conversationID,
-                                                                             dataBase: dataBase),
-                  let participant = participants.first else {
+            guard let participants = try getParticipantsForConversation(
+                conversationID: conversationID,
+                dataBase: dataBase
+            ),
+            let participant = participants.first
+            else {
                 continue
             }
             let type = participant.contains("ring:") ? URIType.ring : URIType.sip
-            let uri = JamiURI.init(schema: type, infoHash: participant)
+            let uri = JamiURI(schema: type, infoHash: participant)
             let conversationModel = ConversationModel(withParticipantUri: uri,
                                                       accountId: accountId)
             if type == .sip {
@@ -631,17 +719,19 @@ class DBManager {
             }
             conversationModel.id = String(conversationID)
             var messages = [MessageModel]()
-            guard let interactions = try self.interactionHepler
+            guard let interactions = try interactionHepler
                     .selectInteractionsForConversation(
                         conv: conversationID,
-                        dataBase: dataBase) else {
+                        dataBase: dataBase
+                    )
+            else {
                 continue
             }
             var lastMessage: MessageModel?
             for interaction in interactions {
                 let author = interaction.author == participant
                     ? participant : ""
-                if let message = self.convertToMessage(interaction: interaction, author: author) {
+                if let message = convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
                     if let last = lastMessage {
                         if last.receivedDate < message.receivedDate {
@@ -660,13 +750,15 @@ class DBManager {
         return conversationsToReturn
     }
 
-    private func getParticipantsForConversation(conversationID: Int64, dataBase: Connection) throws -> [String]? {
-        guard let conversations = try self.conversationHelper
+    private func getParticipantsForConversation(conversationID: Int64,
+                                                dataBase: Connection) throws -> [String]? {
+        guard let conversations = try conversationHelper
                 .selectConversations(conversationId: conversationID,
-                                     dataBase: dataBase) else {
+                                     dataBase: dataBase)
+        else {
             return nil
         }
-        return conversations.map({ $0.participant })
+        return conversations.map { $0.participant }
     }
 
     private func convertToMessage(interaction: Interaction, author: String) -> MessageModel? {
@@ -679,7 +771,7 @@ class DBManager {
         }
         let content = (interaction.type == InteractionType.call.rawValue
                         || interaction.type == InteractionType.contact.rawValue) ?
-            GeneratedMessage.init(from: interaction.body).toMessage(with: Int(interaction.duration))
+            GeneratedMessage(from: interaction.body).toMessage(with: Int(interaction.duration))
             : interaction.body
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
         let message = MessageModel(withId: interaction.daemonID,
@@ -690,7 +782,7 @@ class DBManager {
         let isTransfer = interaction.type == InteractionType.iTransfer.rawValue ||
             interaction.type == InteractionType.oTransfer.rawValue
         message.type = InteractionType(rawValue: interaction.type)?.toMessageType() ?? .text
-        if let status: InteractionStatus = InteractionStatus(rawValue: interaction.status) {
+        if let status = InteractionStatus(rawValue: interaction.status) {
             if isTransfer {
                 message.transferStatus = status.toDataTransferStatus()
             } else {
@@ -714,11 +806,12 @@ class DBManager {
         }
         let timeInterval = message.receivedDate.timeIntervalSince1970
         let interaction = Interaction(id: defaultID, author: author,
-                                      conversation: conversationID, timestamp: Int64(timeInterval), duration: Int64(duration),
+                                      conversation: conversationID, timestamp: Int64(timeInterval),
+                                      duration: Int64(duration),
                                       body: message.content, type: interactionType.rawValue,
                                       status: status, daemonID: message.daemonId,
                                       incoming: message.incoming)
-        if let result = self.interactionHepler.insert(item: interaction, dataBase: dataBase) {
+        if let result = interactionHepler.insert(item: interaction, dataBase: dataBase) {
             return String(result)
         }
         return nil
@@ -728,25 +821,26 @@ class DBManager {
                     alias: String? = nil, photo: String? = nil) throws -> Profile? {
         let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
         if createIfNotExists && type == ProfileType.sip {
-            self.dbConnections.createAccountfolder(for: accountId)
+            dbConnections.createAccountfolder(for: accountId)
         }
-        guard let profilePath = self.dbConnections
+        guard let profilePath = dbConnections
                 .contactProfilePath(accountId: accountId,
                                     profileURI: profileUri,
                                     createifNotExists: createIfNotExists) else { return nil }
-        if self.dbConnections
+        if dbConnections
             .isContactProfileExists(accountId: accountId,
                                     profileURI: profileUri) || !createIfNotExists {
             return getProfileFromPath(path: profilePath)
         }
         let profile = Profile(uri: profileUri, alias: alias, photo: photo, type: type.rawValue)
-        try self.saveProfile(profile: profile, path: profilePath)
+        try saveProfile(profile: profile, path: profilePath)
         return getProfileFromPath(path: profilePath)
     }
 
     private func getProfileFromPath(path: String) -> Profile? {
         guard let data = FileManager.default.contents(atPath: path),
-              let profile = VCardUtils.parseToProfile(data: data) else {
+              let profile = VCardUtils.parseToProfile(data: data)
+        else {
             return nil
         }
         return profile
@@ -759,10 +853,10 @@ class DBManager {
     }
 
     func getConversationsFor(contactUri: String, accountId: String) throws -> Int64? {
-        guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
+        guard let dataBase = dbConnections.forAccount(account: accountId) else {
             throw DBBridgingError.getConversationFailed
         }
-        if let contactConversations = try self.conversationHelper
+        if let contactConversations = try conversationHelper
             .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase),
            let conv = contactConversations.first {
             return conv.id
@@ -770,9 +864,13 @@ class DBManager {
         return nil
     }
 
-    private func getConversationsFor(contactUri: String,
-                                     createIfNotExists: Bool, dataBase: Connection, accountId: String) throws -> Int64? {
-        if let contactConversations = try self.conversationHelper
+    private func getConversationsFor(
+        contactUri: String,
+        createIfNotExists: Bool,
+        dataBase: Connection,
+        accountId: String
+    ) throws -> Int64? {
+        if let contactConversations = try conversationHelper
             .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase),
            let conv = contactConversations.first {
             return conv.id
@@ -780,15 +878,15 @@ class DBManager {
         if !createIfNotExists {
             return nil
         }
-        let conversationID = Int64.random(in: 0...10000000)
+        let conversationID = Int64.random(in: 0 ... 10_000_000)
         do {
-            _ = try self.getProfile(for: contactUri, createIfNotExists: true, accountId: accountId)
+            _ = try getProfile(for: contactUri, createIfNotExists: true, accountId: accountId)
         } catch {}
         let conversationForContact = Conversation(conversationID, contactUri)
-        if !self.conversationHelper.insert(item: conversationForContact, dataBase: dataBase) {
+        if !conversationHelper.insert(item: conversationForContact, dataBase: dataBase) {
             return nil
         }
-        return try self.conversationHelper
+        return try conversationHelper
             .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase)?.first?.id
     }
 }

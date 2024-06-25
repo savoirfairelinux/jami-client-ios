@@ -42,7 +42,14 @@ struct MessageBubbleView: View {
                 if model.type == .call {
                     renderCallMessage()
                 } else if model.type == .fileTransfer {
-                    MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0)
+                    MediaView(
+                        message: model,
+                        onLongGesture: receivedLongPress(),
+                        minHeight: 50,
+                        maxHeight: 300,
+                        withPlayerControls: true,
+                        cornerRadius: 0
+                    )
                 } else if model.type == .text {
                     renderTextContent()
                 }

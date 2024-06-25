@@ -20,9 +20,9 @@
 
 import Foundation
 import Network
-import SwiftyBeaver
-import RxSwift
 import RxRelay
+import RxSwift
+import SwiftyBeaver
 
 enum ConnectionType {
     case none
@@ -30,14 +30,12 @@ enum ConnectionType {
 }
 
 class NetworkService {
-
     private let log = SwiftyBeaver.self
 
     var connectionState = BehaviorRelay<ConnectionType>(value: .none)
 
-    lazy var connectionStateObservable: Observable<ConnectionType> = {
-        return self.connectionState.asObservable()
-    }()
+    lazy var connectionStateObservable: Observable<ConnectionType> = self.connectionState
+        .asObservable()
 
     private var monitor: NWPathMonitor?
     private var lastStatus: NWPath.Status = .requiresConnection

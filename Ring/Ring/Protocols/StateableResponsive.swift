@@ -31,13 +31,13 @@ protocol StateableResponsive {
 }
 
 extension StateableResponsive where Self: Coordinator {
-
     /// Present a view controller according to PresentationStyle
     /// It also create a subscription between the stateable and the inner stateSubject
     /// so that a StateableResponsive can react to state updates
     ///
     /// - Parameters:
-    ///   - viewController: The ViewController we want to present (it will be presented by the rootViewController)
+    ///   - viewController: The ViewController we want to present (it will be presented by the
+    /// rootViewController)
     ///   - style: The presentation style (show, present or popup)
     ///   - animation: Wether the transition should be animated or not
     ///   - stateable: The stateable the will feed the inner stateSubject
@@ -46,15 +46,20 @@ extension StateableResponsive where Self: Coordinator {
                  withAnimation animation: Bool,
                  withStateable stateable: Stateable,
                  lockWhilePresenting VCType: String? = nil) {
-
         // present the view controller according to the presentation style
-        self.present(viewController: viewController, withStyle: style, withAnimation: animation, lockWhilePresenting: VCType, disposeBag: self.disposeBag)
+        present(
+            viewController: viewController,
+            withStyle: style,
+            withAnimation: animation,
+            lockWhilePresenting: VCType,
+            disposeBag: disposeBag
+        )
 
         // bind the stateable to the inner state subject
         stateable.state.take(until: viewController.rx.deallocated)
-            .subscribe(onNext: { [weak self] (state) in
+            .subscribe(onNext: { [weak self] state in
                 self?.stateSubject.onNext(state)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 }

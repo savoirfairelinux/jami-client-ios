@@ -25,26 +25,27 @@ import UIKit
 /// We assume that every application ViewModel should be aware of the injection bag
 /// it allows the factorize a ViewModelBased UIViewController instantiation
 protocol ViewModel: AnyObject {
-
     /// Initializes a new ViewModel with a dependancy injection bag
     ///
-    /// - Parameter injectionBag: The injection Bag that will be passed to every sub components that need it
+    /// - Parameter injectionBag: The injection Bag that will be passed to every sub components that
+    /// need it
     init(with injectionBag: InjectionBag)
 }
 
 protocol ViewModelBased: AnyObject {
     associatedtype VMType: ViewModel
 
-    /// The viewModel that will be automagically instantiated by instantiate(with injectionBag: InjectionBag)
+    /// The viewModel that will be automagically instantiated by instantiate(with injectionBag:
+    /// InjectionBag)
     var viewModel: VMType! { get set }
 }
 
 extension ViewModelBased where Self: UIViewController, Self: StoryboardBased {
-
     /// Initializes a new ViewModelBased UIViewController
     /// The associated ViewModel will be instantiated as well
     ///
-    /// - Parameter injectionBag: The injection Bag that will be passed to every sub components that need it
+    /// - Parameter injectionBag: The injection Bag that will be passed to every sub components that
+    /// need it
     /// - Returns: The ViewModelBased UIViewController with its inner ViewModel already instantiated
     static func instantiate(with injectionBag: InjectionBag) -> Self {
         let viewController = Self.instantiate()

@@ -23,15 +23,15 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import PhotosUI
-import RxSwift
-import Reusable
-import SwiftyBeaver
-import Photos
 import MobileCoreServices
-import SwiftUI
+import Photos
+import PhotosUI
+import Reusable
 import RxRelay
+import RxSwift
+import SwiftUI
+import SwiftyBeaver
+import UIKit
 
 enum ContextMenu: State {
     case preview(message: MessageContentVM)
@@ -56,8 +56,8 @@ class ConversationViewController: UIViewController,
                                   UIImagePickerControllerDelegate, UINavigationControllerDelegate,
                                   StoryboardBased, ViewModelBased, ContactPickerDelegate,
                                   PHPickerViewControllerDelegate {
-
     // MARK: StateableResponsive
+
     let disposeBag = DisposeBag()
 
     let log = SwiftyBeaver.self
@@ -67,49 +67,50 @@ class ConversationViewController: UIViewController,
     private var isLocationSharingDurationLimited: Bool {
         return UserDefaults.standard.bool(forKey: limitLocationSharingDurationKey)
     }
+
     private var locationSharingDuration: Int {
         return UserDefaults.standard.integer(forKey: locationSharingDurationKey)
     }
 
-    @IBOutlet weak var currentCallButton: UIButton!
-    @IBOutlet weak var currentCallLabel: UILabel!
-    @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var currentCallButton: UIButton!
+    @IBOutlet var currentCallLabel: UILabel!
+    @IBOutlet var scanButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var callButtonHeightConstraint: NSLayoutConstraint!
     var currentDocumentPickerMode: DocumentPickerMode = .none
 
     let tapAction = BehaviorRelay<Bool>(value: false)
     var screenTapRecognizer: UITapGestureRecognizer!
 
-    private lazy var locationManager: CLLocationManager = { return CLLocationManager() }()
+    private lazy var locationManager: CLLocationManager = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureNavigationBar()
-        self.setupUI()
-        self.setupBindings()
+        configureNavigationBar()
+        setupUI()
+        setupBindings()
         screenTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
-        self.view.addGestureRecognizer(screenTapRecognizer)
-        self.addSwiftUIView()
+        view.addGestureRecognizer(screenTapRecognizer)
+        addSwiftUIView()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0
-        self.viewModel.setMessagesAsRead()
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.layer.shadowOpacity = 0
+        viewModel.setMessagesAsRead()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
-                           displayName: self.viewModel.displayName.value,
-                           username: self.viewModel.userName.value)
-        self.updateNavigationBarShadow()
+        setupNavTitle(profileImageData: viewModel.profileImageData.value,
+                      displayName: viewModel.displayName.value,
+                      username: viewModel.userName.value)
+        updateNavigationBarShadow()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.viewModel.setMessagesAsRead()
+        viewModel.setMessagesAsRead()
     }
 
     @objc
@@ -118,12 +119,15 @@ class ConversationViewController: UIViewController,
     }
 
     private func addSwiftUIView() {
-        self.viewModel.swiftUIModel.hideNavigationBar
-            .subscribe(onNext: { [weak self] (hide) in
+        viewModel.swiftUIModel.hideNavigationBar
+            .subscribe(onNext: { [weak self] hide in
                 guard let self = self else { return }
                 if self.navigationItem.rightBarButtonItems?.isEmpty == hide { return }
                 if hide {
-                    self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+                    self.navigationController?.navigationBar.setBackgroundImage(
+                        UIImage(),
+                        for: .default
+                    )
                     self.navigationItem.titleView = UIView()
                     self.navigationItem.rightBarButtonItems = []
                     self.navigationItem.setHidesBackButton(true, animated: false)
@@ -136,19 +140,19 @@ class ConversationViewController: UIViewController,
                     self.updateNavigationBarShadow()
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
-        self.viewModel.swiftUIModel.subscribeScreenTapped(screenTapped: tapAction.asObservable())
+        viewModel.swiftUIModel.subscribeScreenTapped(screenTapped: tapAction.asObservable())
 
-        self.viewModel.swiftUIModel.messagePanelState
-            .subscribe(onNext: { [weak self] (state) in
+        viewModel.swiftUIModel.messagePanelState
+            .subscribe(onNext: { [weak self] state in
                 guard let self = self, let state = state as? MessagePanelState else { return }
                 switch state {
-                case .sendMessage(let content, let parentId):
+                case let .sendMessage(content, parentId):
                     self.viewModel.sendMessage(withContent: content, parentId: parentId)
                 case .sendPhoto:
                     self.takePicture()
-                case .editMessage(content: let content, messageId: let messageId):
+                case let .editMessage(content: content, messageId: messageId):
                     self.viewModel.editMessage(content: content, messageId: messageId)
                 case .openGalery:
                     self.selectItemsFromPhotoLibrary()
@@ -162,14 +166,14 @@ class ConversationViewController: UIViewController,
                     self.importDocument()
                 }
             })
-            .disposed(by: self.disposeBag)
-        self.viewModel.swiftUIModel.contextMenuState
-            .subscribe(onNext: { [weak self] (state) in
+            .disposed(by: disposeBag)
+        viewModel.swiftUIModel.contextMenuState
+            .subscribe(onNext: { [weak self] state in
                 guard let self = self, let state = state as? ContextMenu else { return }
                 switch state {
-                case .preview(let message):
+                case let .preview(message):
                     self.presentPreview(message: message)
-                case .forward(let message):
+                case let .forward(message):
                     /*
                      Remove the tap gesture to ensure the contact selector
                      can receive taps. The tap gesture should be re-added
@@ -177,30 +181,33 @@ class ConversationViewController: UIViewController,
                      */
                     self.view.removeGestureRecognizer(self.screenTapRecognizer)
                     self.viewModel.slectContactsToShareMessage(message: message)
-                case .share(let items):
+                case let .share(items):
                     self.presentActivityControllerWithItems(items: items)
-                case .saveFile(let url):
+                case let .saveFile(url):
                     self.saveFile(url: url)
                 default:
                     break
                 }
             })
-            .disposed(by: self.disposeBag)
-        let messageListView = MessagesListView(model: self.viewModel.swiftUIModel)
+            .disposed(by: disposeBag)
+        let messageListView = MessagesListView(model: viewModel.swiftUIModel)
         let swiftUIView = UIHostingController(rootView: messageListView)
         addChild(swiftUIView)
-        swiftUIView.view.frame = self.view.frame
-        self.view.addSubview(swiftUIView.view)
+        swiftUIView.view.frame = view.frame
+        view.addSubview(swiftUIView.view)
         swiftUIView.view.translatesAutoresizingMaskIntoConstraints = false
-        swiftUIView.view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        swiftUIView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        swiftUIView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-        swiftUIView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        swiftUIView.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        swiftUIView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+            .isActive = true
+        swiftUIView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0)
+            .isActive = true
+        swiftUIView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+            .isActive = true
         swiftUIView.didMove(toParent: self)
-        self.view.backgroundColor = UIColor.systemBackground
-        self.view.sendSubviewToBack(swiftUIView.view)
+        view.backgroundColor = UIColor.systemBackground
+        view.sendSubviewToBack(swiftUIView.view)
 
-        self.viewModel.lastMessageObservable
+        viewModel.lastMessageObservable
             .share()
             .asObservable()
             .observe(on: MainScheduler.instance)
@@ -208,7 +215,7 @@ class ConversationViewController: UIViewController,
                 guard let self = self else { return }
                 self.viewModel.messageDisplayed()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func importDocument() {
@@ -216,41 +223,50 @@ class ConversationViewController: UIViewController,
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.item])
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
-        self.present(documentPicker, animated: true, completion: nil)
+        present(documentPicker, animated: true, completion: nil)
     }
 
     private func showNoPermissionsAlert(title: String) {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (_: UIAlertAction!) -> Void in }
+        let okAction = UIAlertAction(title: "OK", style: .default) { (_: UIAlertAction!) in }
         alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     // MARK: photo library
 
     private func presentBackgroundRecordingAlert() {
-        let alert = UIAlertController(title: nil, message: L10n.DataTransfer.recordInBackgroundWarning, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: { [weak self] _ in
-            UserDefaults.standard.setValue(true, forKey: fileRecordingLimitationInBackgroundKey)
-            self?.recordVideoFile()
-        }))
-        self.present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(
+            title: nil,
+            message: L10n.DataTransfer.recordInBackgroundWarning,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(
+            title: L10n.Global.ok,
+            style: .default,
+            handler: { [weak self] _ in
+                UserDefaults.standard.setValue(true, forKey: fileRecordingLimitationInBackgroundKey)
+                self?.recordVideoFile()
+            }
+        ))
+        present(alert, animated: true, completion: nil)
     }
 
     private func canRecordVideoFile() -> Bool {
-        /*According to Apple, warning about camera performance in the background
+        /* According to Apple, warning about camera performance in the background
          should be presented for iPad devices running on versions lower than iOS 16
          */
         if #available(iOS 16.0, *) {
             return true
         }
 
-        return UIDevice.current.userInterfaceIdiom != .pad || UserDefaults.standard.bool(forKey: fileRecordingLimitationInBackgroundKey)
+        return UIDevice.current.userInterfaceIdiom != .pad || UserDefaults.standard
+            .bool(forKey: fileRecordingLimitationInBackgroundKey)
     }
 
     private func recordVideoFile() {
         if canRecordVideoFile() {
-            self.viewModel.recordVideoFile()
+            viewModel.recordVideoFile()
         } else {
             presentBackgroundRecordingAlert()
         }
@@ -268,64 +284,84 @@ class ConversationViewController: UIViewController,
     }
 
     func recordVideo() {
-        if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
-            if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
-                self.recordVideoFile()
+        if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus
+            .authorized {
+            if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus
+                .authorized {
+                recordVideoFile()
             } else {
-                AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { [weak self] (granted: Bool) -> Void in
+                AVCaptureDevice.requestAccess(
+                    for: AVMediaType.video,
+                    completionHandler: { [weak self] (granted: Bool) in
+                        guard let self = self else { return }
+                        if granted == true {
+                            self.recordVideoFile()
+                        } else {
+                            self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
+                        }
+                    }
+                )
+            }
+        } else {
+            AVCaptureDevice.requestAccess(
+                for: AVMediaType.audio,
+                completionHandler: { [weak self] (granted: Bool) in
                     guard let self = self else { return }
                     if granted == true {
-                        self.recordVideoFile()
+                        if AVCaptureDevice
+                            .authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus
+                            .authorized {
+                            self.recordVideoFile()
+                        } else {
+                            AVCaptureDevice.requestAccess(
+                                for: AVMediaType.video,
+                                completionHandler: { (granted: Bool) in
+                                    if granted == true {
+                                        self.recordVideoFile()
+                                    } else {
+                                        self
+                                            .showNoPermissionsAlert(title: L10n.Alerts
+                                                                        .noMediaPermissionsTitle)
+                                    }
+                                }
+                            )
+                        }
                     } else {
                         self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
                     }
-                })
-            }
-        } else {
-            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: {[weak self] (granted: Bool) -> Void in
-                guard let self = self else { return }
-                if granted == true {
-                    if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
-                        self.recordVideoFile()
-                    } else {
-                        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
-                            if granted == true {
-                                self.recordVideoFile()
-                            } else {
-                                self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
-                            }
-                        })
-                    }
-                } else {
-                    self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
                 }
-            })
+            )
         }
     }
 
     func recordAudio() {
-        if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
-            self.viewModel.recordAudioFile()
+        if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus
+            .authorized {
+            viewModel.recordAudioFile()
         } else {
-            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { [weak self] (granted: Bool) -> Void in
-                guard let self = self else { return }
-                if granted == true {
-                    self.viewModel.recordAudioFile()
-                } else {
-                    self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
+            AVCaptureDevice.requestAccess(
+                for: AVMediaType.audio,
+                completionHandler: { [weak self] (granted: Bool) in
+                    guard let self = self else { return }
+                    if granted == true {
+                        self.viewModel.recordAudioFile()
+                    } else {
+                        self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
+                    }
                 }
-            })
+            )
         }
     }
 
     func takePicture() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+        if UIImagePickerController
+            .isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerController.SourceType.camera
             imagePicker.cameraDevice = UIImagePickerController.CameraDevice.rear
             imagePicker.modalPresentationStyle = .overFullScreen
-            self.present(imagePicker, animated: false, completion: nil)
+            present(imagePicker, animated: false, completion: nil)
         }
     }
 
@@ -351,29 +387,42 @@ class ConversationViewController: UIViewController,
 
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
-        results.forEach { (result) in
+        for result in results {
             let imageFileName: String = result.itemProvider.suggestedName ?? "file"
             let provider = result.itemProvider
-            switch self.getAssetTypeFrom(itemProvider: provider) {
+            switch getAssetTypeFrom(itemProvider: provider) {
             case .gif:
-                provider.loadDataRepresentation(forTypeIdentifier: UTType.gif.identifier) { [weak self] (data, _) in
-                    guard let self = self,
-                          let data = data else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".gif", imageData: data)
-                }
+                provider
+                    .loadDataRepresentation(forTypeIdentifier: UTType.gif
+                                                .identifier) { [weak self] data, _ in
+                        guard let self = self,
+                              let data = data else { return }
+                        self.viewModel.sendAndSaveFile(
+                            displayName: imageFileName + ".gif",
+                            imageData: data
+                        )
+                    }
             case .image:
-                provider.loadObject(ofClass: UIImage.self) { [weak self] (object, _) in
+                provider.loadObject(ofClass: UIImage.self) { [weak self] object, _ in
                     guard let self = self,
                           let image = object as? UIImage,
                           let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".jpeg", imageData: imageData)
+                    self.viewModel.sendAndSaveFile(
+                        displayName: imageFileName + ".jpeg",
+                        imageData: imageData
+                    )
                 }
             case .video:
-                provider.loadDataRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] (data, _) in
-                    guard let self = self,
-                          let data = data else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".mov", imageData: data)
-                }
+                provider
+                    .loadDataRepresentation(forTypeIdentifier: UTType.movie
+                                                .identifier) { [weak self] data, _ in
+                        guard let self = self,
+                              let data = data else { return }
+                        self.viewModel.sendAndSaveFile(
+                            displayName: imageFileName + ".mov",
+                            imageData: data
+                        )
+                    }
             default:
                 break
             }
@@ -391,10 +440,11 @@ class ConversationViewController: UIViewController,
             return .unknown
         }
     }
-    // swiftlint:disable cyclomatic_complexity
-    internal func imagePickerController(_ picker: UIImagePickerController,
-                                        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
+    // swiftlint:disable cyclomatic_complexity
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController
+                                .InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
 
         var image: UIImage!
@@ -404,16 +454,17 @@ class ConversationViewController: UIViewController,
             if let img = info[.editedImage] as? UIImage {
                 image = img
             } else if let img = info[.originalImage] as? UIImage {
-                image = self.fixImageOrientation(image: img)
+                image = fixImageOrientation(image: img)
             }
             // copy image to tmp
             let imageFileName = "IMG.jpeg"
             guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-            self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
+            viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
             return
         }
         guard picker.sourceType == UIImagePickerController.SourceType.photoLibrary,
-              let phAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
+              let phAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset
+        else { return }
         let imageFileName = phAsset.value(forKey: "filename") as? String ?? "Unknown"
         // image from library
         if phAsset.mediaType == .image {
@@ -423,7 +474,7 @@ class ConversationViewController: UIViewController,
                 image = img
             }
             guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-            self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
+            viewModel.sendAndSaveFile(displayName: imageFileName, imageData: imageData)
             // self.viewModel.sendImageFromPhotoLibraty(image: image, imageName: imageFileName, localIdentifier: phAsset.localIdentifier)
             return
         }
@@ -432,15 +483,20 @@ class ConversationViewController: UIViewController,
             .default()
             .requestAVAsset(forVideo: phAsset,
                             options: PHVideoRequestOptions(),
-                            resultHandler: { (asset, _, _) -> Void in
+                            resultHandler: { asset, _, _ in
                                 guard let asset = asset as? AVURLAsset,
-                                      let videoData = NSData(contentsOf: asset.url) else {
+                                      let videoData = NSData(contentsOf: asset.url)
+                                else {
                                     return
                                 }
-                                self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: videoData as Data)
+                                self.viewModel.sendAndSaveFile(
+                                    displayName: imageFileName,
+                                    imageData: videoData as Data
+                                )
                             })
     }
 
+    // swiftlint:disable function_body_length
     func setupNavTitle(profileImageData: Data?, displayName: String? = nil, username: String?) {
         let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
         let imageSize = isPortrait ? CGFloat(36.0) : CGFloat(32.0)
@@ -449,26 +505,51 @@ class ConversationViewController: UIViewController,
         let maxNameLength = CGFloat(128.0)
         var userNameYOffset = CGFloat(9.0)
         var nameSize = CGFloat(18.0)
-        let navbarFrame = self.navigationController?.navigationBar.frame
+        let navbarFrame = navigationController?.navigationBar.frame
         let totalHeight = (44 + (navbarFrame?.origin.y ?? 0)) / 2
 
-        // Replace "< Home" with a back arrow while we are crunching everything to the left side of the bar for now.
-        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back_button")
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back_button")
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
-        self.navigationItem.setHidesBackButton(false, animated: false)
+        // Replace "< Home" with a back arrow while we are crunching everything to the left side of
+        // the bar for now.
+        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back_button")
+        navigationController?.navigationBar
+            .backIndicatorTransitionMaskImage = UIImage(named: "back_button")
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: UIBarButtonItem.Style.plain,
+            target: nil,
+            action: nil
+        )
+        navigationItem.setHidesBackButton(false, animated: false)
 
-        let titleView: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: totalHeight))
+        let titleView = UIView(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: view.frame.width - 32,
+            height: totalHeight
+        ))
 
-        let profileImageView = UIImageView(frame: CGRect(x: 0, y: imageOffsetY, width: imageSize, height: imageSize))
-        profileImageView.frame = CGRect.init(x: 0, y: 0, width: imageSize, height: imageSize)
-        profileImageView.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
+        let profileImageView = UIImageView(frame: CGRect(
+            x: 0,
+            y: imageOffsetY,
+            width: imageSize,
+            height: imageSize
+        ))
+        profileImageView.frame = CGRect(x: 0, y: 0, width: imageSize, height: imageSize)
+        profileImageView.center = CGPoint(x: imageSize / 2, y: titleView.center.y)
 
         if let profileName = displayName, !profileName.isEmpty {
-            profileImageView.addSubview(AvatarView(profileImageData: profileImageData, username: profileName, size: 30))
+            profileImageView.addSubview(AvatarView(
+                profileImageData: profileImageData,
+                username: profileName,
+                size: 30
+            ))
             titleView.addSubview(profileImageView)
         } else if let bestId = username {
-            profileImageView.addSubview(AvatarView(profileImageData: profileImageData, username: bestId, size: 30))
+            profileImageView.addSubview(AvatarView(
+                profileImageData: profileImageData,
+                username: bestId,
+                size: 30
+            ))
             titleView.addSubview(profileImageView)
         }
 
@@ -496,7 +577,12 @@ class ConversationViewController: UIViewController,
         }
 
         if let name = displayName, !name.isEmpty {
-            let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: dnlabelYOffset, width: maxNameLength, height: 20))
+            let dnlabel = UILabel(frame: CGRect(
+                x: imageSize + infoPadding,
+                y: dnlabelYOffset,
+                width: maxNameLength,
+                height: 20
+            ))
             dnlabel.text = name
             dnlabel.font = UIFont.systemFont(ofSize: nameSize)
             dnlabel.textColor = UIColor.jamiButtonDark
@@ -506,12 +592,12 @@ class ConversationViewController: UIViewController,
         }
 
         if isPortrait || displayName == nil || displayName == "" {
-            let frame = CGRect.init(x: imageSize + infoPadding,
-                                    y: userNameYOffset,
-                                    width: maxNameLength,
-                                    height: 24)
+            let frame = CGRect(x: imageSize + infoPadding,
+                               y: userNameYOffset,
+                               width: maxNameLength,
+                               height: 24)
 
-            let unlabel: UILabel = UILabel.init(frame: frame)
+            let unlabel = UILabel(frame: frame)
             unlabel.text = username
             unlabel.font = UIFont.systemFont(ofSize: nameSize)
             unlabel.textColor = UIColor.jamiButtonDark
@@ -521,70 +607,80 @@ class ConversationViewController: UIViewController,
         let tapGesture = UITapGestureRecognizer()
         titleView.addGestureRecognizer(tapGesture)
         tapGesture.rx.event
-            .throttle(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
+            .throttle(
+                Durations.switchThrottlingDuration.toTimeInterval(),
+                scheduler: MainScheduler.instance
+            )
             .bind(onNext: { [weak self] _ in
                 self?.contactTapped()
             })
             .disposed(by: disposeBag)
         titleView.backgroundColor = UIColor.clear
 
-        self.navigationItem.titleView = titleView
+        navigationItem.titleView = titleView
     }
 
     func contactTapped() {
-        self.viewModel.showContactInfo()
+        viewModel.showContactInfo()
     }
 
     private func setRightNavigationButtons() {
         // do not show call buttons for swarm with multiple participants
-        if self.viewModel.conversation.getParticipants().count > 1 {
+        if viewModel.conversation.getParticipants().count > 1 {
             return
         }
         let audioCallItem = UIBarButtonItem()
         audioCallItem.image = UIImage(asset: Asset.callButton)
-        audioCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.placeAudioOnlyCall()
-            })
-            .disposed(by: self.disposeBag)
+        audioCallItem.rx.tap.throttle(
+            Durations.halfSecond.toTimeInterval(),
+            scheduler: MainScheduler.instance
+        )
+        .subscribe(onNext: { [weak self] in
+            self?.placeAudioOnlyCall()
+        })
+        .disposed(by: disposeBag)
 
         let videoCallItem = UIBarButtonItem()
         videoCallItem.image = UIImage(asset: Asset.videoRunning)
-        videoCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.placeCall()
-            })
-            .disposed(by: self.disposeBag)
+        videoCallItem.rx.tap.throttle(
+            Durations.halfSecond.toTimeInterval(),
+            scheduler: MainScheduler.instance
+        )
+        .subscribe(onNext: { [weak self] in
+            self?.placeCall()
+        })
+        .disposed(by: disposeBag)
 
         // Items are from right to left
-        if self.viewModel.isAccountSip {
-            self.navigationItem.rightBarButtonItem = audioCallItem
+        if viewModel.isAccountSip {
+            navigationItem.rightBarButtonItem = audioCallItem
         } else {
-            self.navigationItem.rightBarButtonItems = [videoCallItem, audioCallItem]
+            navigationItem.rightBarButtonItems = [videoCallItem, audioCallItem]
         }
     }
 
     func setupUI() {
-        self.view.backgroundColor = UIColor.systemBackground
+        view.backgroundColor = UIColor.systemBackground
 
-        Observable<(Data?, String?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
-                                                           self.viewModel.displayName.asObservable(),
-                                                           self.viewModel.userName.asObservable()) { profileImage, displayName, username in
-            return (profileImage, displayName, username)
+        Observable<(Data?, String?, String)>.combineLatest(
+            viewModel.profileImageData.asObservable(),
+            viewModel.displayName.asObservable(),
+            viewModel.userName.asObservable()
+        ) { profileImage, displayName, username in
+            (profileImage, displayName, username)
         }
         .observe(on: MainScheduler.instance)
-        .subscribe({ [weak self] profileData -> Void in
+        .subscribe { [weak self] profileData in
             self?.setupNavTitle(profileImageData: profileData.element?.0,
                                 displayName: profileData.element?.1,
                                 username: profileData.element?.2)
-            return
-        })
-        .disposed(by: self.disposeBag)
+        }
+        .disposed(by: disposeBag)
 
-        self.setRightNavigationButtons()
-        self.viewModel.showCallButton
+        setRightNavigationButtons()
+        viewModel.showCallButton
             .observe(on: MainScheduler.instance)
-            .startWith(self.viewModel.haveCurrentCall())
+            .startWith(viewModel.haveCurrentCall())
             .subscribe(onNext: { [weak self] show in
                 if show {
                     DispatchQueue.main.async {
@@ -607,39 +703,39 @@ class ConversationViewController: UIViewController,
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.openCall()
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func placeCall() {
-        self.viewModel.startCall()
+        viewModel.startCall()
     }
 
     func placeAudioOnlyCall() {
-        self.viewModel.startAudioCall()
+        viewModel.startAudioCall()
     }
 
     func setupBindings() {
-        self.viewModel.shouldDismiss
+        viewModel.shouldDismiss
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] dismiss in
                 guard let self = self, dismiss else { return }
                 _ = self.navigationController?.popViewController(animated: true)
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func updateNavigationBarShadow() {
-        self.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
+        navigationController?.navigationBar.shadowImage = nil
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        navigationController?.navigationBar.layer.shadowOpacity = 0.1
     }
 
     // MARK: ContactPickerDelegate
 
     func presentContactPicker(contactPickerVC: ContactPickerViewController) {
-        self.addChild(contactPickerVC)
+        addChild(contactPickerVC)
         var statusBarHeight: CGFloat = 0
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let statusBarManager = windowScene.statusBarManager {
@@ -648,39 +744,49 @@ class ConversationViewController: UIViewController,
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
-        let newFrame = CGRect(x: 0, y: -statusBarHeight, width: screenWidth, height: screenHeight + statusBarHeight)
-        let initialFrame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: screenHeight + statusBarHeight)
+        let newFrame = CGRect(
+            x: 0,
+            y: -statusBarHeight,
+            width: screenWidth,
+            height: screenHeight + statusBarHeight
+        )
+        let initialFrame = CGRect(
+            x: 0,
+            y: screenHeight,
+            width: screenWidth,
+            height: screenHeight + statusBarHeight
+        )
         contactPickerVC.view.frame = initialFrame
-        self.view.addSubview(contactPickerVC.view)
+        view.addSubview(contactPickerVC.view)
         contactPickerVC.didMove(toParent: self)
         UIView.animate(withDuration: 0.2, animations: { [weak contactPickerVC] in
             guard let contactPickerVC = contactPickerVC else { return }
             contactPickerVC.view.frame = newFrame
-        }, completion: {  _ in
+        }, completion: { _ in
         })
     }
 }
 
 // MARK: Location sharing
-extension ConversationViewController {
 
+extension ConversationViewController {
     func startLocationSharing() {
-        if self.checkLocationAuthorization() && self.isNotAlreadySharingWithThisContact() {
-            if self.isLocationSharingDurationLimited {
-                self.viewModel.startSendingLocation(duration: TimeInterval(self.locationSharingDuration * 60))
+        if checkLocationAuthorization(), isNotAlreadySharingWithThisContact() {
+            if isLocationSharingDurationLimited {
+                viewModel.startSendingLocation(duration: TimeInterval(locationSharingDuration * 60))
             } else {
-                self.viewModel.startSendingLocation()
+                viewModel.startSendingLocation()
             }
         }
     }
 
     private func isNotAlreadySharingWithThisContact() -> Bool {
-        if self.viewModel.isAlreadySharingMyLocation() {
-            let alert = UIAlertController.init(title: L10n.Alerts.alreadylocationSharing,
-                                               message: nil,
-                                               preferredStyle: .alert)
+        if viewModel.isAlreadySharingMyLocation() {
+            let alert = UIAlertController(title: L10n.Alerts.alreadylocationSharing,
+                                          message: nil,
+                                          preferredStyle: .alert)
             alert.addAction(.init(title: L10n.Global.ok, style: UIAlertAction.Style.cancel))
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
 
             return false
         }
@@ -690,21 +796,31 @@ extension ConversationViewController {
     private func showGoToSettingsAlert(title: String) {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
 
-        alertController.addAction(UIAlertAction(title: L10n.Actions.goToSettings, style: .default, handler: { (_) in
-            if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, completionHandler: nil)
+        alertController.addAction(UIAlertAction(
+            title: L10n.Actions.goToSettings,
+            style: .default,
+            handler: { _ in
+                if let url = URL(string: UIApplication.openSettingsURLString),
+                   UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, completionHandler: nil)
+                }
             }
-        }))
+        ))
 
-        alertController.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(
+            title: L10n.Global.cancel,
+            style: .cancel,
+            handler: nil
+        ))
 
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
     private func checkLocationAuthorization() -> Bool {
         switch CLLocationManager().authorizationStatus {
         case .notDetermined: locationManager.requestWhenInUseAuthorization()
-        case .restricted, .denied: self.showGoToSettingsAlert(title: L10n.Alerts.noLocationPermissionsTitle)
+        case .restricted,
+             .denied: showGoToSettingsAlert(title: L10n.Alerts.noLocationPermissionsTitle)
         case .authorizedAlways, .authorizedWhenInUse: return true
         @unknown default: break
         }
@@ -714,26 +830,26 @@ extension ConversationViewController {
 
 extension ConversationViewController: ContactPickerViewControllerDelegate {
     func contactPickerDismissed() {
-        self.view.addGestureRecognizer(self.screenTapRecognizer)
-        self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
-                           displayName: self.viewModel.displayName.value,
-                           username: self.viewModel.userName.value)
-        self.updateNavigationBarShadow()
+        view.addGestureRecognizer(screenTapRecognizer)
+        setupNavTitle(profileImageData: viewModel.profileImageData.value,
+                      displayName: viewModel.displayName.value,
+                      username: viewModel.userName.value)
+        updateNavigationBarShadow()
     }
 }
 
 extension ConversationViewController: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    func documentPicker(_: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if currentDocumentPickerMode == .picking {
             if let url = urls.first, url.startAccessingSecurityScopedResource() {
                 let filePath = url.absoluteURL.path
-                self.log.debug("Successfully imported \(filePath)")
+                log.debug("Successfully imported \(filePath)")
                 let fileName = url.absoluteURL.lastPathComponent
                 do {
                     let data = try Data(contentsOf: url)
-                    self.viewModel.sendAndSaveFile(displayName: fileName, imageData: data)
+                    viewModel.sendAndSaveFile(displayName: fileName, imageData: data)
                 } catch {
-                    self.viewModel.sendFile(filePath: filePath, displayName: fileName)
+                    viewModel.sendFile(filePath: filePath, displayName: fileName)
                 }
                 url.stopAccessingSecurityScopedResource()
             }
@@ -743,8 +859,9 @@ extension ConversationViewController: UIDocumentPickerDelegate {
 }
 
 extension ConversationViewController: UIDocumentInteractionControllerDelegate {
-    internal func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
-        if let navigationController = self.navigationController {
+    func documentInteractionControllerViewControllerForPreview(_: UIDocumentInteractionController)
+    -> UIViewController {
+        if let navigationController = navigationController {
             return navigationController
         }
         return self
@@ -752,6 +869,7 @@ extension ConversationViewController: UIDocumentInteractionControllerDelegate {
 }
 
 // MARK: - Messages actions
+
 extension ConversationViewController {
     func saveFile(url: URL) {
         if url.pathExtension.isImageExtension() {
@@ -771,11 +889,20 @@ extension ConversationViewController {
     }
 
     func presentActivityControllerWithItems(items: [Any]) {
-        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
-        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)
-        self.present(activityViewController, animated: true, completion: nil)
+        let activityViewController = UIActivityViewController(
+            activityItems: items,
+            applicationActivities: nil
+        )
+        activityViewController.popoverPresentationController?.sourceView = view
+        activityViewController.popoverPresentationController?
+            .permittedArrowDirections = UIPopoverArrowDirection()
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(
+            x: view.bounds.midX,
+            y: view.bounds.maxX,
+            width: 0,
+            height: 0
+        )
+        present(activityViewController, animated: true, completion: nil)
     }
 
     func saveGIFOrImage(url: URL) {
@@ -792,16 +919,21 @@ extension ConversationViewController {
     }
 
     @objc
-    func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+    func image(_: UIImage, didFinishSavingWithError error: Error?,
+               contextInfo _: UnsafeRawPointer) {
         if let error = error {
-            self.showAlert(error: error)
+            showAlert(error: error)
         }
     }
 
     func showAlert(error: Error) {
-        let allert = UIAlertController(title: L10n.Conversation.errorSavingImage, message: error.localizedDescription, preferredStyle: .alert)
+        let allert = UIAlertController(
+            title: L10n.Conversation.errorSavingImage,
+            message: error.localizedDescription,
+            preferredStyle: .alert
+        )
         allert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(allert, animated: true)
+        present(allert, animated: true)
     }
 
     func saveFileToDocuments(fileURL: URL) {
@@ -814,11 +946,17 @@ extension ConversationViewController {
         let documentPicker = UIDocumentPickerViewController(forExporting: [fileURL], asCopy: true)
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
-        self.present(documentPicker, animated: true, completion: nil)
+        present(documentPicker, animated: true, completion: nil)
     }
 
     func presentPlayer(message: MessageContentVM) {
-        self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: nil, initialFrame: CGRect.zero, delegate: message)
+        viewModel.openFullScreenPreview(
+            parentView: self,
+            viewModel: message.player,
+            image: nil,
+            initialFrame: CGRect.zero,
+            delegate: message
+        )
     }
 
     func openDocument(url: URL) {
@@ -829,5 +967,6 @@ extension ConversationViewController {
         }
     }
 }
+
 // swiftlint:enable type_body_length
 // swiftlint:enable file_length

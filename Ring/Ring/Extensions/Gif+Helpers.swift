@@ -1,13 +1,13 @@
 //
-//  iOSDevCenters+GIF.swift
+//  Gif+Helpers.swift
 //  GIF-Swift
 //
 //  Created by iOSDevCenters on 11/12/15.
 //  Copyright © 2016 iOSDevCenters. All rights reserved.
 //
 
-import UIKit
 import ImageIO
+import UIKit
 
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
@@ -23,7 +23,6 @@ private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 extension UIImage {
-
     public class func gifImageWithUrl(_ url: URL, maxSize: CGFloat) -> UIImage? {
         guard let imageSource = CGImageSourceCreateWithURL(url as CFURL, nil) else {
             return nil
@@ -38,16 +37,22 @@ extension UIImage {
         let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
         let gifProperties: CFDictionary = unsafeBitCast(
             CFDictionaryGetValue(cfProperties,
-                                 Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque()),
-            to: CFDictionary.self)
+                                 Unmanaged.passUnretained(kCGImagePropertyGIFDictionary)
+                                    .toOpaque()),
+            to: CFDictionary.self
+        )
 
         var delayObject: AnyObject = unsafeBitCast(
             CFDictionaryGetValue(gifProperties,
-                                 Unmanaged.passUnretained(kCGImagePropertyGIFUnclampedDelayTime).toOpaque()),
-            to: AnyObject.self)
+                                 Unmanaged.passUnretained(kCGImagePropertyGIFUnclampedDelayTime)
+                                    .toOpaque()),
+            to: AnyObject.self
+        )
         if delayObject.doubleValue == 0 {
-            delayObject = unsafeBitCast(CFDictionaryGetValue(gifProperties,
-                                                             Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()), to: AnyObject.self)
+            delayObject = unsafeBitCast(CFDictionaryGetValue(
+                gifProperties,
+                Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()
+            ), to: AnyObject.self)
         }
 
         guard let delayDouble = delayObject as? Double else { return delay }
@@ -116,7 +121,7 @@ extension UIImage {
         var images = [CGImage]()
         var delays = [Int]()
 
-        for rang in 0..<count {
+        for rang in 0 ..< count {
             if let image = CGImageSourceCreateImageAtIndex(source, rang, options) {
                 images.append(image)
             }
@@ -141,11 +146,11 @@ extension UIImage {
 
         var frame: UIImage
         var frameCount: Int
-        for rang in 0..<count {
+        for rang in 0 ..< count {
             frame = UIImage(cgImage: images[Int(rang)])
             frameCount = Int(delays[Int(rang)] / gcd)
 
-            for _ in 0..<frameCount {
+            for _ in 0 ..< frameCount {
                 frames.append(frame)
             }
         }

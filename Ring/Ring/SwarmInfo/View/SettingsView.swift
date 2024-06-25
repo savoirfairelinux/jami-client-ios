@@ -19,7 +19,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-
     @StateObject var viewmodel: SwarmInfoVM
     @SwiftUI.State private var ignoreSwarm = true
     @SwiftUI.State private var shouldShowColorPannel = false
@@ -66,7 +65,8 @@ struct SettingsView: View {
                             .onTapGesture(perform: {
                                 withAnimation {
                                     viewmodel.showColorSheet.toggle()
-                                    viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
+                                    viewmodel
+                                        .hideShowBackButton(colorPicker: viewmodel.showColorSheet)
                                 }
                             })
                             .onChange(of: viewmodel.selectedColor, perform: { newValue in
@@ -101,6 +101,7 @@ struct SettingsView: View {
         }
     }
 }
+
 struct CustomColorPicker: View {
     @Binding var selectedColor: String
     @Binding var currentColor: String
@@ -118,6 +119,7 @@ struct CustomColorPicker: View {
         }
     }
 }
+
 struct CircleView: View {
     @SwiftUI.State var colorString: String
     @Binding var selectedColor: String

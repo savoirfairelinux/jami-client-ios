@@ -28,6 +28,7 @@ enum PhotoSheetType: Identifiable {
     case gallery
     case picture
 }
+
 struct ParticipantListCell: View {
     @StateObject var participant: ParticipantRow
     var isSelected: Bool
@@ -35,7 +36,7 @@ struct ParticipantListCell: View {
 
     @ViewBuilder
     var body: some View {
-        Button(action: self.action) {
+        Button(action: action) {
             HStack(alignment: .center, spacing: nil) {
                 Image(uiImage: participant.imageDataFinal)
                     .resizable()
@@ -69,7 +70,7 @@ struct SelectedParticipantItem: View {
 
     @ViewBuilder
     var body: some View {
-        Button(action: self.action) {
+        Button(action: action) {
             VStack(alignment: .center, spacing: nil) {
                 ZStack(alignment: .topTrailing) {
                     Image(uiImage: participant.imageDataFinal)
@@ -99,7 +100,7 @@ struct SelectedParticipantItem: View {
 struct SwarmCreationUI: View {
     @ObservedObject var list: SwarmCreationUIModel
     @SwiftUI.State private var showingType: PhotoSheetType?
-    @SwiftUI.State private var swarmImage: UIImage = UIImage(asset: Asset.editSwarmImage)!
+    @SwiftUI.State private var swarmImage: UIImage = .init(asset: Asset.editSwarmImage)!
     @SwiftUI.State private var isPresentingProfile = false
 
     var body: some View {
@@ -126,7 +127,10 @@ struct SwarmCreationUI: View {
             }
             List {
                 ForEach(list.participantsRows) { contact in
-                    ParticipantListCell(participant: contact, isSelected: list.selections.contains(contact.id)) {
+                    ParticipantListCell(
+                        participant: contact,
+                        isSelected: list.selections.contains(contact.id)
+                    ) {
                         if list.selections.contains(contact.id) {
                             list.selections.removeAll(where: { $0 == contact.id })
                         } else {
@@ -185,8 +189,9 @@ struct SwarmCreationUI: View {
 
     func createTheSwarmButtonView() -> some View {
         return Button(action: {
-                        self.hideKeyboard()
-                        list.createTheSwarm() }) {
+            self.hideKeyboard()
+            list.createTheSwarm()
+        }) {
             Text(L10n.Swarmcreation.createTheSwarm)
                 .swarmButtonTextStyle()
         }
@@ -204,16 +209,18 @@ struct ImagePicker: UIViewControllerRepresentable {
         return ImagePicker.Coordinator(self)
     }
 
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>)
+    -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
         picker.sourceType = sourceType
         return picker
     }
 
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
-
-    }
+    func updateUIViewController(
+        _: UIImagePickerController,
+        context _: UIViewControllerRepresentableContext<ImagePicker>
+    ) {}
 
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         let picker: ImagePicker
@@ -222,16 +229,19 @@ struct ImagePicker: UIViewControllerRepresentable {
             self.picker = picker
         }
 
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            self.picker.showingType = nil
+        func imagePickerControllerDidCancel(_: UIImagePickerController) {
+            picker.showingType = nil
         }
 
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        func imagePickerController(
+            _: UIImagePickerController,
+            didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+        ) {
             guard let image = info[.originalImage] as? UIImage else {
                 return
             }
-            self.picker.image = image
-            self.picker.showingType = nil
+            picker.image = image
+            picker.showingType = nil
         }
     }
 }

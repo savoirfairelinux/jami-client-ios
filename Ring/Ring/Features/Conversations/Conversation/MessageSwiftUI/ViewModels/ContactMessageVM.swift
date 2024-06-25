@@ -19,17 +19,19 @@
  */
 
 import Foundation
-import SwiftUI
-import RxSwift
 import RxRelay
+import RxSwift
+import SwiftUI
 
-class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver, NameObserver {
+class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver,
+                        NameObserver {
     @Published var avatarImage: UIImage?
     @Published var content: String {
         didSet {
-            self.observableContent.accept(content)
+            observableContent.accept(content)
         }
     }
+
     @Published var borderColor: Color
     @Published var backgroundColor: Color
     var disposeBag = DisposeBag()
@@ -37,33 +39,35 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImage
     let avatarSize: CGFloat = 15
     var inset: CGFloat
     var height: CGFloat
-    var styling: MessageStyling = MessageStyling()
+    var styling: MessageStyling = .init()
     var observableContent = BehaviorRelay<String>(value: "")
 
     var message: MessageModel
     var username = "" {
         didSet {
-            self.content = self.username.isEmpty ? self.message.content : self.username + " " + self.message.content
+            content = username.isEmpty ? message.content : username + " " + message.content
         }
     }
+
     var infoState: PublishSubject<State>?
 
     init(message: MessageModel) {
         self.message = message
-        self.backgroundColor = Color(UIColor.clear)
-        self.inset = message.type == .initial ? 0 : 7
-        self.height = message.type == .initial ? 25 : 45
-        self.borderColor = message.type == .initial ? Color(UIColor.clear) : Color(UIColor.secondaryLabel)
-        self.content = message.content
-        self.observableContent.accept(message.content)
+        backgroundColor = Color(UIColor.clear)
+        inset = message.type == .initial ? 0 : 7
+        height = message.type == .initial ? 25 : 45
+        borderColor = message
+            .type == .initial ? Color(UIColor.clear) : Color(UIColor.secondaryLabel)
+        content = message.content
+        observableContent.accept(message.content)
         if message.type != .initial {
-            self.styling.textFont = self.styling.secondaryFont
-            self.styling.textColor = self.styling.defaultSecondaryTextColor
+            styling.textFont = styling.secondaryFont
+            styling.textColor = styling.defaultSecondaryTextColor
         }
     }
 
     func setInfoState(state: PublishSubject<State>) {
-        self.infoState = state
+        infoState = state
         if message.type == .contact && message.incoming {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             requestAvatar(jamiId: jamiId)

@@ -18,15 +18,14 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
-extension Reactive where Base: UIView {
-
+public extension Reactive where Base: UIView {
     // show view with animation and hide without
-    public var isVisible: AnyObserver<Bool> {
-        return Binder(self.base) { view, hidden in
+    var isVisible: AnyObserver<Bool> {
+        return Binder(base) { view, hidden in
             if hidden == true {
                 view.isHidden = true
                 view.alpha = 0

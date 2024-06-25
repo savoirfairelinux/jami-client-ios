@@ -18,14 +18,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import XCTest
 @testable import Ring
+import XCTest
 
 /**
  A test class designed to validate that the AccountModel helper runs as expected.
  */
 class AccountModelHelperTests: XCTestCase {
-
     /// The account used for the tests.
     var account: AccountModel?
 
@@ -164,5 +163,4 @@ class AccountModelHelperTests: XCTestCase {
         modifiedAccount = helper.setCredentials(nil)
         XCTAssertEqual(modifiedAccount.credentialDetails.count, 0)
     }
-
 }

@@ -19,55 +19,64 @@
  */
 
 class OpenURLLabel: UILabel, UITextViewDelegate {
-
     func removeURLHandler() {
-        if let text = self.text {
-            self.attributedText = NSAttributedString(string: text)
+        if let text = text {
+            attributedText = NSAttributedString(string: text)
         }
     }
 
     func handleURLTap() {
-        guard let attributedString = self.attributedText,
-              let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue),
-              let text = self.text else { return }
+        guard let attributedString = attributedText,
+              let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link
+                                                    .rawValue),
+              let text = text else { return }
         let mutableString = NSMutableAttributedString()
         mutableString.append(attributedString)
-        let matches = detector.matches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count))
+        let matches = detector.matches(
+            in: text,
+            options: [],
+            range: NSRange(location: 0, length: text.utf16.count)
+        )
         for match in matches {
             guard let range = Range(match.range, in: text),
                   let url = URL(string: String(text[range])) else { continue }
             mutableString.addAttribute(.link, value: url, range: match.range)
         }
         if matches.isEmpty { return }
-        self.attributedText = mutableString
+        attributedText = mutableString
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         guard let touch = touches.first,
-              let attributedString = self.attributedText else { return }
+              let attributedString = attributedText else { return }
 
         let textStorage = NSTextStorage(attributedString: attributedString)
 
         let layoutManager = NSLayoutManager()
 
         let textContainer = NSTextContainer(size: CGSize.zero)
-        textContainer.lineBreakMode = self.lineBreakMode
+        textContainer.lineBreakMode = lineBreakMode
         textContainer.lineFragmentPadding = 0.0
 
         layoutManager.addTextContainer(textContainer)
         textStorage.addLayoutManager(layoutManager)
 
-        let labelSize = self.frame.size
+        let labelSize = frame.size
         textContainer.size.width = labelSize.width
 
         let locationOfTouchInLabel = touch.location(in: self)
 
-        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInLabel, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        let indexOfCharacter = layoutManager.characterIndex(
+            for: locationOfTouchInLabel,
+            in: textContainer,
+            fractionOfDistanceBetweenInsertionPoints: nil
+        )
         let attributes = attributedString.attributes(at: indexOfCharacter, effectiveRange: nil)
 
         guard let url = attributes[.link] as? URL else { return }
-        let urlString = url.absoluteString.contains("http") ? url.absoluteString : "http://\(url.absoluteString)"
+        let urlString = url.absoluteString.contains("http") ? url
+            .absoluteString : "http://\(url.absoluteString)"
         guard let prefixedUrl = URL(string: urlString) else { return }
         UIApplication.shared.open(prefixedUrl, completionHandler: nil)
     }

@@ -19,51 +19,47 @@
  */
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 class LinkDeviceViewModel: Stateable, ViewModel {
-
     // MARK: - Rx Stateable
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
+
     private let accountService: AccountsService
     private let contactService: ContactsService
     private let accountCreationState = BehaviorRelay<AccountCreationState>(value: .unknown)
-    lazy var createState: Observable<AccountCreationState> = {
-        return self.accountCreationState.asObservable()
-    }()
+    lazy var createState: Observable<AccountCreationState> = self.accountCreationState
+        .asObservable()
 
-    lazy var linkButtonEnabledState: Observable<Bool> = {
-        return self.pin.asObservable().map({ pin in
-            return !pin.isEmpty
-        })
-    }()
+    lazy var linkButtonEnabledState: Observable<Bool> = self.pin.asObservable().map { pin in
+        !pin.isEmpty
+    }
 
     let pin = BehaviorRelay<String>(value: "")
     let password = BehaviorRelay<String>(value: "")
     let disposeBag = DisposeBag()
 
-    required init (with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
-        self.contactService = injectionBag.contactsService
+    required init(with injectionBag: InjectionBag) {
+        accountService = injectionBag.accountService
+        contactService = injectionBag.contactsService
     }
 
-    func linkDevice () {
-        self.accountCreationState.accept(.started)
-        self.accountService
-            .linkToJamiAccount(withPin: self.pin.value,
-                               password: self.password.value,
+    func linkDevice() {
+        accountCreationState.accept(.started)
+        accountService
+            .linkToJamiAccount(withPin: pin.value,
+                               password: password.value,
                                enable: true)
-            .subscribe(onNext: { [weak self] (account) in
+            .subscribe(onNext: { [weak self] account in
                 guard let self = self else { return }
                 self.accountCreationState.accept(.success)
                 Observable<Int>.timer(Durations.alertFlashDuration.toTimeInterval(),
                                       period: nil,
                                       scheduler: MainScheduler.instance)
-                    .subscribe(onNext: { [weak self] (_) in
+                    .subscribe(onNext: { [weak self] _ in
                         guard let self = self else { return }
                         self.accountService.currentAccount = account
                         UserDefaults.standard
@@ -72,19 +68,23 @@ class LinkDeviceViewModel: Stateable, ViewModel {
                         self.stateSubject.onNext(WalkthroughState.deviceLinked)
                     })
                     .disposed(by: self.disposeBag)
-            }, onError: { [weak self] (error) in
+            }, onError: { [weak self] error in
                 if let error = error as? AccountCreationError {
                     self?.accountCreationState.accept(.error(error: error))
                 } else {
                     self?.accountCreationState.accept(.error(error: AccountCreationError.unknown))
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
+
     func enablePushNotifications(enable: Bool) {
         if !enable {
             return
         }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
+        NotificationCenter.default.post(
+            name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
+            object: nil
+        )
     }
 }

@@ -18,28 +18,43 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import XCTest
 @testable import Ring
+import XCTest
 
 final class ContactUtilsTests: XCTestCase {
-
     func testGetFinalName_FromHashOnly() {
-        let finalName = ContactsUtils.getFinalNameFrom(registeredName: "", profileName: "", hash: jamiId1)
+        let finalName = ContactsUtils.getFinalNameFrom(
+            registeredName: "",
+            profileName: "",
+            hash: jamiId1
+        )
         XCTAssertEqual(finalName, jamiId1)
     }
 
     func testGetFinalName_FromHashAndAlias() {
-        let finalName = ContactsUtils.getFinalNameFrom(registeredName: "", profileName: profileName1, hash: jamiId1)
+        let finalName = ContactsUtils.getFinalNameFrom(
+            registeredName: "",
+            profileName: profileName1,
+            hash: jamiId1
+        )
         XCTAssertEqual(finalName, profileName1)
     }
 
     func testGetFinalName_FromHashAndRegisteredName() {
-        let finalName = ContactsUtils.getFinalNameFrom(registeredName: registeredName1, profileName: "", hash: jamiId1)
+        let finalName = ContactsUtils.getFinalNameFrom(
+            registeredName: registeredName1,
+            profileName: "",
+            hash: jamiId1
+        )
         XCTAssertEqual(finalName, registeredName1)
     }
 
     func testGetFinalName_FromHashAndRegisteredNameAndAlias() {
-        let finalName = ContactsUtils.getFinalNameFrom(registeredName: registeredName1, profileName: profileName1, hash: jamiId1)
+        let finalName = ContactsUtils.getFinalNameFrom(
+            registeredName: registeredName1,
+            profileName: profileName1,
+            hash: jamiId1
+        )
         XCTAssertEqual(finalName, profileName1)
     }
 
@@ -56,7 +71,10 @@ final class ContactUtilsTests: XCTestCase {
                           "organization": organization,
                           "jamiId": jamiId,
                           "profilePicture": profilePicture]
-        let imageData = NSData(base64Encoded: profilePicture, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+        let imageData = NSData(
+            base64Encoded: profilePicture,
+            options: NSData.Base64DecodingOptions.ignoreUnknownCharacters
+        ) as Data?
         let userDetails = ContactsUtils.deserializeUser(dictionary: dictionary)
         XCTAssertEqual(userDetails?.username, userName)
         XCTAssertEqual(userDetails?.firstName, firstName)
@@ -65,5 +83,4 @@ final class ContactUtilsTests: XCTestCase {
         XCTAssertEqual(userDetails?.jamiId, jamiId)
         XCTAssertEqual(userDetails?.profilePicture, imageData)
     }
-
 }

@@ -25,7 +25,6 @@ protocol PictureInPictureManagerDelegate: AnyObject {
 }
 
 class PictureInPictureManager: NSObject, AVPictureInPictureControllerDelegate {
-
     var pipController: AVPictureInPictureController! = nil
     let delegate: PictureInPictureManagerDelegate
 
@@ -36,11 +35,15 @@ class PictureInPictureManager: NSObject, AVPictureInPictureControllerDelegate {
     func updatePIP(layer: AVSampleBufferDisplayLayer) {
         if #available(iOS 15.0, *) {
             guard AVPictureInPictureController.isPictureInPictureSupported() else { return }
-            let contentSource = AVPictureInPictureController.ContentSource(sampleBufferDisplayLayer: layer, playbackDelegate: self)
+            let contentSource = AVPictureInPictureController.ContentSource(
+                sampleBufferDisplayLayer: layer,
+                playbackDelegate: self
+            )
             if pipController == nil {
                 pipController = AVPictureInPictureController(contentSource: contentSource)
                 pipController.delegate = self
-                // Set requiresLinearPlayback to true to hide buttons from Picture in Picture except cancel and restoreView
+                // Set requiresLinearPlayback to true to hide buttons from Picture in Picture except
+                // cancel and restoreView
                 pipController.requiresLinearPlayback = true
                 pipController.canStartPictureInPictureAutomaticallyFromInline = true
                 // Hide the overlay text and controls except for the cancel and restore view buttons
@@ -50,12 +53,16 @@ class PictureInPictureManager: NSObject, AVPictureInPictureControllerDelegate {
             }
         }
     }
-    func pictureInPictureControllerWillStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        self.delegate.reopenCurrentCall()
+
+    func pictureInPictureControllerWillStopPictureInPicture(_: AVPictureInPictureController) {
+        delegate.reopenCurrentCall()
     }
 
-    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController,
-                                    restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
+    func pictureInPictureController(_: AVPictureInPictureController,
+                                    restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (
+                                        Bool
+                                    )
+                                    -> Void) {
         pipController.stopPictureInPicture()
         completionHandler(true)
     }
@@ -79,21 +86,28 @@ class PictureInPictureManager: NSObject, AVPictureInPictureControllerDelegate {
 }
 
 extension PictureInPictureManager: AVPictureInPictureSampleBufferPlaybackDelegate {
+    func pictureInPictureControllerDidStartPictureInPicture(_: AVPictureInPictureController) {}
+    func pictureInPictureController(_: AVPictureInPictureController, setPlaying _: Bool) {}
 
-    func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {}
-    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, setPlaying playing: Bool) {}
-
-    func pictureInPictureControllerTimeRangeForPlayback(_ pictureInPictureController: AVPictureInPictureController) -> CMTimeRange {
+    func pictureInPictureControllerTimeRangeForPlayback(_: AVPictureInPictureController)
+    -> CMTimeRange {
         return CMTimeRange(start: .zero, duration: CMTimeMake(value: 3600 * 24, timescale: 1))
     }
 
-    func pictureInPictureControllerIsPlaybackPaused(_ pictureInPictureController: AVPictureInPictureController) -> Bool {
+    func pictureInPictureControllerIsPlaybackPaused(_: AVPictureInPictureController) -> Bool {
         return false
     }
 
-    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, didTransitionToRenderSize newRenderSize: CMVideoDimensions) {}
+    func pictureInPictureController(
+        _: AVPictureInPictureController,
+        didTransitionToRenderSize _: CMVideoDimensions
+    ) {}
 
-    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, skipByInterval skipInterval: CMTime, completion completionHandler: @escaping () -> Void) {
+    func pictureInPictureController(
+        _: AVPictureInPictureController,
+        skipByInterval _: CMTime,
+        completion completionHandler: @escaping () -> Void
+    ) {
         completionHandler()
     }
 }

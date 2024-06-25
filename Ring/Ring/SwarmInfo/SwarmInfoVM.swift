@@ -16,27 +16,28 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-import UIKit
-import RxSwift
-import RxRelay
 import RxCocoa
+import RxRelay
+import RxSwift
+import UIKit
 
 class SwarmInfoVM: ObservableObject {
     @Published var participantsRows = [ParticipantRow]()
     @Published var selections: [String] = []
-    @Published var finalAvatar: UIImage = UIImage()
+    @Published var finalAvatar: UIImage = .init()
     @Published var finalTitle: String = ""
     @Published var finalColor: String = UIColor.defaultSwarm
-    @Published var selectedColor: String = String()
+    @Published var selectedColor: String = .init()
     @Published var showColorSheet = false
 
     private let disposeBag = DisposeBag()
     private var contactsSubscriptionsDisposeBag = DisposeBag()
+
     // MARK: - Rx Stateable
+
     private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+    lazy var state: Observable<State> = self.stateSubject.asObservable()
+
     let injectionBag: InjectionBag
     private let accountService: AccountsService
     private let nameService: NameService
@@ -53,6 +54,7 @@ class SwarmInfoVM: ObservableObject {
             }
         }
     }
+
     var title: String = "" {
         didSet {
             if shouldTriggerDescriptionDidSet {
@@ -60,27 +62,30 @@ class SwarmInfoVM: ObservableObject {
             }
         }
     }
+
     var isAdmin: Bool {
-        guard let accountId = self.conversation?.accountId,
-              let jamiId = accountService.getAccount(fromAccountId: accountId)?.jamiId else {
+        guard let accountId = conversation?.accountId,
+              let jamiId = accountService.getAccount(fromAccountId: accountId)?.jamiId
+        else {
             return false
         }
         let members = swarmInfo.participants.value
-        return members.filter({ $0.role == .admin }).contains(where: { $0.jamiId == jamiId })
+        return members.filter { $0.role == .admin }.contains(where: { $0.jamiId == jamiId })
     }
+
     private var shouldTriggerDescriptionDidSet: Bool = false
     var colorPickerStatus = BehaviorRelay<Bool>(value: false)
     var navBarColor = BehaviorRelay<String>(value: "")
 
     init(with injectionBag: InjectionBag, swarmInfo: SwarmInfoProtocol) {
         self.injectionBag = injectionBag
-        self.accountService = injectionBag.accountService
-        self.conversationService = injectionBag.conversationsService
-        self.nameService = injectionBag.nameService
-        self.profileService = injectionBag.profileService
-        self.contactsService = injectionBag.contactsService
+        accountService = injectionBag.accountService
+        conversationService = injectionBag.conversationsService
+        nameService = injectionBag.nameService
+        profileService = injectionBag.profileService
+        contactsService = injectionBag.contactsService
         self.swarmInfo = swarmInfo
-        self.conversation = swarmInfo.conversation
+        conversation = swarmInfo.conversation
         self.swarmInfo.finalAvatar
             .subscribe(onNext: { [weak self] newValue in
                 DispatchQueue.main.async {
@@ -121,10 +126,17 @@ class SwarmInfoVM: ObservableObject {
     func updateSwarmInfo() {
         if let conversationId = conversation?.id,
            let accountId = conversation?.accountId {
-            var conversationInfo = conversationService.getConversationInfo(conversationId: conversationId, accountId: accountId)
+            var conversationInfo = conversationService.getConversationInfo(
+                conversationId: conversationId,
+                accountId: accountId
+            )
             conversationInfo[ConversationAttributes.description.rawValue] = description
             conversationInfo[ConversationAttributes.title.rawValue] = title
-            self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
+            conversationService.updateConversationInfos(
+                accountId: accountId,
+                conversationId: conversationId,
+                infos: conversationInfo
+            )
         }
     }
 
@@ -132,26 +144,43 @@ class SwarmInfoVM: ObservableObject {
         guard let image = image, let data = image.convertToDataForSwarm() else { return }
         if let conversationId = conversation?.id,
            let accountId = conversation?.accountId {
-            var conversationInfo = conversationService.getConversationInfo(conversationId: conversationId, accountId: accountId)
+            var conversationInfo = conversationService.getConversationInfo(
+                conversationId: conversationId,
+                accountId: accountId
+            )
             conversationInfo[ConversationAttributes.avatar.rawValue] = data.base64EncodedString()
-            self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
-            self.finalAvatar = image
+            conversationService.updateConversationInfos(
+                accountId: accountId,
+                conversationId: conversationId,
+                infos: conversationInfo
+            )
+            finalAvatar = image
         }
     }
+
     func updateSwarmColor(selectedColor: String) {
         if let conversationId = conversation?.id,
            let accountId = conversation?.accountId {
-            let prefsInfo = conversationService.getConversationPreferences(accountId: accountId, conversationId: conversationId)
+            let prefsInfo = conversationService.getConversationPreferences(
+                accountId: accountId,
+                conversationId: conversationId
+            )
             guard var prefsInfo = prefsInfo else { return }
             prefsInfo[ConversationPreferenceAttributes.color.rawValue] = selectedColor
-            self.conversationService.updateConversationPrefs(accountId: accountId, conversationId: conversationId, prefs: prefsInfo)
+            conversationService.updateConversationPrefs(
+                accountId: accountId,
+                conversationId: conversationId,
+                prefs: prefsInfo
+            )
         }
     }
+
     func hideShowBackButton(colorPicker: Bool) {
         colorPickerStatus.accept(colorPicker)
     }
-    func updateContactList () {
-        self.swarmInfo.contacts
+
+    func updateContactList() {
+        swarmInfo.contacts
             .subscribe { [weak self] newValue in
                 guard let self = self else { return }
                 DispatchQueue.main.async {
@@ -163,7 +192,7 @@ class SwarmInfoVM: ObservableObject {
                 }
             } onError: { _ in
             }
-            .disposed(by: self.contactsSubscriptionsDisposeBag)
+            .disposed(by: contactsSubscriptionsDisposeBag)
         injectionBag
             .contactsService
             .contacts
@@ -173,40 +202,49 @@ class SwarmInfoVM: ObservableObject {
                 self.swarmInfo.addContacts(contacts: contacts)
             } onError: { _ in
             }
-            .disposed(by: self.contactsSubscriptionsDisposeBag)
+            .disposed(by: contactsSubscriptionsDisposeBag)
     }
 
     func removeExistingSubscription() {
-        self.contactsSubscriptionsDisposeBag = DisposeBag()
+        contactsSubscriptionsDisposeBag = DisposeBag()
     }
 
     func addMember() {
         for participant in selections {
             if let conversationId = conversation?.id,
                let accountId = conversation?.accountId {
-                self.conversationService.addConversationMember(accountId: accountId, conversationId: conversationId, memberId: participant)
+                conversationService.addConversationMember(
+                    accountId: accountId,
+                    conversationId: conversationId,
+                    memberId: participant
+                )
             }
         }
         selections.removeAll()
     }
+
     func removeMember(indexOffset: IndexSet) {
         let idDelete = indexOffset.map { swarmInfo.participants.value[$0].jamiId }
         if let conversationId = conversation?.id,
            let accountId = conversation?.accountId {
             _ = idDelete.compactMap { memberID in
                 print(memberID)
-                conversationService.removeConversationMember(accountId: accountId, conversationId: conversationId, memberId: memberID)
+                conversationService.removeConversationMember(
+                    accountId: accountId,
+                    conversationId: conversationId,
+                    memberId: memberID
+                )
             }
         }
     }
 
     func leaveSwarm() {
-        guard let conversation = self.conversation else { return }
+        guard let conversation = conversation else { return }
         let conversationId = conversation.id
         let accountId = conversation.accountId
         if conversation.isCoredialog(),
            let participantId = conversation.getParticipants().first?.jamiId {
-            self.contactsService
+            contactsService
                 .removeContact(withId: participantId,
                                ban: true,
                                withAccountId: accountId)
@@ -216,15 +254,15 @@ class SwarmInfoVM: ObservableObject {
                         .removeConversationFromDB(conversation: conversation,
                                                   keepConversation: false)
                 })
-                .disposed(by: self.disposeBag)
+                .disposed(by: disposeBag)
         } else {
-            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+            conversationService.removeConversation(
+                conversationId: conversationId,
+                accountId: accountId
+            )
         }
-        self.stateSubject.onNext(ConversationState.accountRemoved)
-
+        stateSubject.onNext(ConversationState.accountRemoved)
     }
 
-    func ignoreSwarm(isOn: Bool) {
-
-    }
+    func ignoreSwarm(isOn _: Bool) {}
 }

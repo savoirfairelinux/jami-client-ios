@@ -49,7 +49,7 @@ public enum Durations {
     }
 
     var milliseconds: Int {
-        return Int(self.value * 1000)
+        return Int(value * 1000)
     }
 
     func toTimeInterval() -> RxTimeInterval {
