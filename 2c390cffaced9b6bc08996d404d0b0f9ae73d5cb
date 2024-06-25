@@ -1,0 +1,268 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e778b4d_17ec6538",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "use a script to bring the copyright headers up to the current standard (e.g. 2024, no author list)",
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86852e5f_1fd897bc",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "I\u0027d add a comment here about why this is done",
+      "range": {
+        "startLine": 197,
+        "startChar": 8,
+        "endLine": 199,
+        "endChar": 59
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fef81b53_1baa3459",
+        "filename": "Ring/Ring/Features/Settings/Diagnostic/LogViewController.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "2024",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d340d9f_2e4c68b1",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSummaryView.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "adjust linting column limit for swift UI",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 134
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "361d818e_6da9fdeb",
+        "filename": "Ring/Ring/Features/Settings/Me/BlockedContactsView.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "lint?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "535739fa_84d7b764",
+        "filename": "Ring/Ring/Features/Settings/Me/LinkedDevicesView.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "file is long",
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a248457e_f0caff6c",
+        "filename": "Ring/Ring/Features/Settings/Me/ManageSipAccountView.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "fix page transition issue",
+      "range": {
+        "startLine": 51,
+        "startChar": 44,
+        "endLine": 51,
+        "endChar": 60
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47315de1_b46dbadc",
+        "filename": "Ring/Ring/Features/Settings/Me/ManageSipAccountView.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "hmm maybe a little longer to not hint to inexperienced users that they should use super short passwords (or specifically 3 characters long)",
+      "range": {
+        "startLine": 54,
+        "startChar": 100,
+        "endLine": 54,
+        "endChar": 103
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce0437d3_775181b7",
+        "filename": "Ring/Ring/Features/Settings/Me/NameRegistrationVM.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "speeling error",
+      "range": {
+        "startLine": 93,
+        "startChar": 9,
+        "endLine": 93,
+        "endChar": 30
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6442690e_bc2bce29",
+        "filename": "Ring/Ring/Features/Settings/SwiftUI/Model/AccountPage.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "??",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 2
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff7576e1_92ff5f02",
+        "filename": "Ring/Ring/Models/DeviceModel.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "off-topic: all these need to be adjusted at some point",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 27
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c7c41c1_0398a42a",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2024-06-25T19:16:09Z",
+      "side": 1,
+      "message": "rework this if it queries libjami too often",
+      "range": {
+        "startLine": 962,
+        "startChar": 9,
+        "endLine": 962,
+        "endChar": 30
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
