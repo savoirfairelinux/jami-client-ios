@@ -267,6 +267,8 @@
 		2677928A2AC2103300759110 /* SmartListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267792892AC2103300759110 /* SmartListHeaderView.swift */; };
 		2679E42C29328352007E4639 /* ConcurrentDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679E42B29328352007E4639 /* ConcurrentDictionary.swift */; };
 		267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267AD77D252B979F00047593 /* ConferenceParticipant.swift */; };
+		267B958E2C2AFF0F00353B01 /* libllhttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267B958D2C2AFEEA00353B01 /* libllhttp.a */; };
+		267B958F2C2AFFD700353B01 /* libllhttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267B958D2C2AFEEA00353B01 /* libllhttp.a */; };
 		267CC6FC29D5B27600505E56 /* Data+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE64229C8F58800D66D5E /* Data+Helpers.swift */; };
 		267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		267CFD6F2ACCDCD70066FE15 /* SmartListNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CFD6E2ACCDCD70066FE15 /* SmartListNavigationBar.swift */; };
@@ -915,6 +917,7 @@
 		267792892AC2103300759110 /* SmartListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListHeaderView.swift; path = Ring/Features/Conversations/SmartList/SmartListHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		2679E42B29328352007E4639 /* ConcurrentDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentDictionary.swift; sourceTree = "<group>"; };
 		267AD77D252B979F00047593 /* ConferenceParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceParticipant.swift; sourceTree = "<group>"; };
+		267B958D2C2AFEEA00353B01 /* libllhttp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libllhttp.a; path = ../fat/lib/libllhttp.a; sourceTree = "<group>"; };
 		267CFD6E2ACCDCD70066FE15 /* SmartListNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListNavigationBar.swift; sourceTree = "<group>"; };
 		2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerDelegate.swift; sourceTree = "<group>"; };
 		2685F90D2A1698B400BFCDA3 /* VideoInputsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInputsManager.swift; sourceTree = "<group>"; };
@@ -1267,6 +1270,7 @@
 				269DA06428D0D366007D51D6 /* libopus.a in Frameworks */,
 				269DA06128D0D366007D51D6 /* libjsoncpp.a in Frameworks */,
 				04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */,
+				267B958F2C2AFFD700353B01 /* libllhttp.a in Frameworks */,
 				04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */,
 				269DA07728D0D366007D51D6 /* libswresample.a in Frameworks */,
 				04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */,
@@ -1317,6 +1321,7 @@
 				26CA4C542AB23A8500AEF8F5 /* libupnp.a in Frameworks */,
 				269DA03328D0D2E5007D51D6 /* libjsoncpp.a in Frameworks */,
 				269DA02E28D0D2E5007D51D6 /* libgmp.a in Frameworks */,
+				267B958E2C2AFF0F00353B01 /* libllhttp.a in Frameworks */,
 				269DA07F28D0D5D0007D51D6 /* libgit2.a in Frameworks */,
 				269DA02B28D0D2E5007D51D6 /* libavformat.a in Frameworks */,
 				623196862BAE498900C2252C /* Atomics in Frameworks */,
@@ -1379,6 +1384,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				267B958D2C2AFEEA00353B01 /* libllhttp.a */,
 				26EB61382B7675FB00183FF4 /* Embassy.xcframework */,
 				26CA4C562AB23A9200AEF8F5 /* libxml2.2.tbd */,
 				26C4845B2A796D69005BC767 /* libdhtnet.a */,
