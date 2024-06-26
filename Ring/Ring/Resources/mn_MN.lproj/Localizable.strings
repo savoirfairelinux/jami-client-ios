@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "Нягтлан бодох бүртгэлийн тохируулалт";
-"global.advancedSettings" = "Алга зэргийн тохируулалт";
 "global.username" = "Хэрэглэгчийн нэр";
 "global.recommended" = "Зөвлөмж";
 "global.password" = "Хууль нууц үг";
-"global.registerAUsername" = "Хэрэглэгчийн нэрийг бүртгүүлэх";
-"global.enterPassword" = "Хууль нууц товчлуул";
-"global.enterUsername" = "Хэрэглэгчийн нэрийг оруул";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Цуцлах";
-"global.blockContact" = "Блок холбоо";
+"global.blockContact" = "Блок-тай холбоо тогтоох";
 "global.removeAccount" = "Хэтгэлээ устгах";
 "global.incomingCall" = "Цаашид ирсэн дуудлага";
 "global.ok" = "Зүгээр";
@@ -46,11 +45,17 @@
 "global.reply" = "Хариулт";
 "global.search" = "Танд хайж байна...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Мэдээллийг зохицуулах";
+"global.editing" = "Editing";
 "global.create" = "Бүтээгдэхүүнийг бүтээх";
+"global.edit" = "Харилцаажуулах";
+"global.remove" = "Уулгах";
+"global.call" = "Call";
+"global.video" = "Видео";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Зур QR код";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Урилга авсан";
 "swarm.admin" = "Захиргагч";
 "swarm.banned" = "Хөрөгдөл";
-"swarm.unknown" = "Үргэлжгүй";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "гишүүн нэмнэ";
 "swarm.confirmLeaveSwarm" = "Та энэ цувралсаа гарахыг хүсч байгаа гэдэгт итгэлтэй байна уу?";
 "swarm.Leave" = "Хойч яв";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Жэмид нэгдээрэй";
-"createAccount.chooseStrongPassword" = "Jami-ийн дансыг хамгаалахын тулд санагдашгүй хүчтэй нууц үг сонгох.";
-"createAccount.repeatPasswordPlaceholder" = "Хууль нууц товчлуул";
-"createAccount.passwordCharactersNumberError" = "6 тэмдэг хамгийн бага";
-"createAccount.passwordNotMatchingError" = "нууц үг нь тохиромжтой биш";
 "createAccount.lookingForUsernameAvailability" = "...хүхлэг байдлыг хайж байна...";
 "createAccount.invalidUsername" = "хэрэглэгчийн нэр хүчингүй";
 "createAccount.usernameAlreadyTaken" = "хэрэглэгчдийн нэр аль хэдийн авсан";
 "createAccount.usernameValid" = "хэрэглэгчийн нэр нь ашиглах боломжтой";
 "createAccount.loading" = "Татаж";
 "createAccount.waitCreateAccountTitle" = "Нэвтрүүлэг";
-"createAccount.ChooseAPassword" = "Миний дансыг шифрлэх";
-"createAccount.PasswordInformation" = "Орон нутгийн дансыг нууцлах нууц үг сонгох.";
-"createAccount.EnableNotifications" = "Хэвлэлт";
-"createAccount.Recommended" = "(Тэгвэл зөвлөж байна)";
 "createAccount.UsernameNotRegisteredTitle" = "Хүлжээний алдаа";
 "createAccount.UsernameNotRegisteredMessage" = "Хилсэл бий болсон боловч хэрэглэгчдийн нэр бүртгэгдээгүй";
 "createAccount.timeoutTitle" = "Хэтгэлэг үүсгэн байгуулагдсан";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Хөдөлмөрийг хуваалцахыг зогсоо";
 
 //Calls
-"calls.callItemTitle" = "Зураг";
 "calls.incomingCallInfo" = "Татай ярилцахыг хүсч байна";
 "calls.ringing" = "-Хэрэгтээ...";
 "calls.connecting" = "Байгууллага...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Мэдээлэл өгөх боломжтой";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сервер гараагүй";
 "accountPage.proxyDisabledAlertBody" = "Мэдээлэл хүлээн авахын тулд прокси-ийг идэвхжүүлнэ үү";
-"accountPage.revokeDeviceTitle" = "Халдааны сэргээлт";
-"accountPage.revokeDeviceMessage" = "Та энэ төхөөрөмжийг цуцлахыг хүсч байна уу?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Хуримтлал цуцлах";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Утасны цуцлах ажил дууссан";
-"accountPage.deviceRevocationProgress" = "-Хэрэв та...";
-"accountPage.deviceRevocationSuccess" = "Утасны хэрэгсэл цуцлагдлаа";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Бодоорой";
 "accountPage.deviceRevocationWrongPassword" = "Хатуу нууц үг";
 "accountPage.deviceRevocationUnknownDevice" = "Мэдээгүй төхөөрөмж";
 "accountPage.deviceRevocationError" = "Утасны хуримтлал дуусгах алдаа";
 "accountPage.linkDeviceTitle" = "Өөр төхөөрөмж холбох";
 "accountPage.other" = "Бусад";
-"accountPage.removeAccountMessage" = "\"Халгах\" товчлоор та энэ төхөөрөмжийн дансыг устгах болно! Энэ үйлдлийг сэргээж чадахгүй. Мөн таны бүртгэлтэй нэрийг алдсан болно.";
-"accountPage.removeAccountButton" = "Уулгах";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Жэми дээр намайг холбогдох!";
 "accountPage.contactMeOnJamiContant" = "Jami-ийн хуваарилалттай харилцааны платформын \"%s\" хэрэгслээр намайг хангаарай: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Тэтгэврийн";
 "accountPage.usernameRegistrationFailed" = "Тэнд бүртгэл алдаатай. Хууль нууц товчлуулъя.";
 "accountPage.createPassword" = "Хилдчилсэн данс";
-"accountPage.createPasswordExplanation" = "Таны Jami-ийн дансыг зөвхөн энэ төхөөрөмж дээр бүртгэж, дансныхаа ачкысыг хадгалах архив гэж үздэг.";
 "accountPage.changePassword" = "Хууль нууц товг өөрчлөх";
 "accountPage.oldPasswordPlaceholder" = "Эртний нууц үг оруулах";
 "accountPage.newPasswordPlaceholder" = "Шинэ нууц үг оруулах";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "UPnP-ийг ашигла";
 "accountPage.security" = "Аюулгүй байдал";
 "accountPage.enableSRTP" = "Хэвлэл мэдээллийн урсгалыг шифрлах (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Хууль нууц үгтэй дансыг нууцлах";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "бүртгэлийн хугацаа дуусах хугацаа (эдэв)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "TLS-ийн орж ирж буй мэдээллийн аюулгүй диалог шалгалтыг зогсоо";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Бусад холбогдсон төхөөрөмжүүд";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Хэрэглэгчийн нэр";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "Server";
 "account.port" = "Газар";
 "account.proxyServer" = "Төлөөлөгч";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "оролцохоор урьж байсан";
 "generatedMessage.invitationAccepted" = "ярилцлагад нэгдсэн";
 "generatedMessage.youJoined" = "Та яриадаа нэгдсэн.";
-"generatedMessage.contactBanned" = "- Би ч гэсэн";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "дахин нэмсэн";
 "generatedMessage.outgoingCall" = "Урьдчилсан дуудлага";
 "generatedMessage.missedOutgoingCall" = "Удахгүй дууссан";

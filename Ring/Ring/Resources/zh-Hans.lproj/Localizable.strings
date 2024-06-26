@@ -20,7 +20,6 @@
 
 // Global
 "global.accountSettings" = "帳號設定";
-"global.advancedSettings" = "進階設定";
 "global.username" = "使用者名稱";
 "global.recommended" = "建議";
 "global.password" = "密碼";
@@ -28,7 +27,7 @@
 "global.enterPassword" = "輸入密碼";
 "global.enterUsername" = "輸入使用者名稱";
 "global.cancel" = "取消";
-"global.blockContact" = "阻擋聯絡人";
+"global.blockContact" = "阻擋連絡人";
 "global.removeAccount" = "移除帳號";
 "global.incomingCall" = "來電";
 "global.ok" = "確定";
@@ -46,11 +45,17 @@
 "global.reply" = "回覆";
 "global.search" = "正在搜尋……";
 "global.donate" = "捐助";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "刪除訊息";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "编辑消息";
+"global.editing" = "Editing";
 "global.create" = "建立";
+"global.edit" = "編輯";
+"global.remove" = "移除";
+"global.call" = "Call";
+"global.video" = "視訊";
+"global.time" = "時間";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "不正確的 QR code";
@@ -77,7 +82,7 @@
 "swarm.invited" = "已邀请";
 "swarm.admin" = "管理员";
 "swarm.banned" = "已屏蔽";
-"swarm.unknown" = "无人";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "加入成员";
 "swarm.confirmLeaveSwarm" = "你确定你想离开这个群体吗?";
 "swarm.Leave" = "离开";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "加入 Jami";
-"createAccount.chooseStrongPassword" = "選擇您可以記住用來保護您的 Jami 帳號的強式密碼。";
-"createAccount.repeatPasswordPlaceholder" = "確認密碼";
-"createAccount.passwordCharactersNumberError" = "最小6個字元";
-"createAccount.passwordNotMatchingError" = "密碼不符合";
 "createAccount.lookingForUsernameAvailability" = "正在確認是否可用……";
 "createAccount.invalidUsername" = "無效的使用者名稱";
 "createAccount.usernameAlreadyTaken" = "使用者名稱已被使用";
 "createAccount.usernameValid" = "使用者名稱不可用";
 "createAccount.loading" = "正在載入";
 "createAccount.waitCreateAccountTitle" = "正在加入帳號";
-"createAccount.ChooseAPassword" = "加密我的帳號";
-"createAccount.PasswordInformation" = "選擇密碼來加密您的本機帳號。不要忘了它，否則您會無法復原您的帳號";
-"createAccount.EnableNotifications" = "通知";
-"createAccount.Recommended" = "（建議）";
 "createAccount.UsernameNotRegisteredTitle" = "網路錯誤";
 "createAccount.UsernameNotRegisteredMessage" = "帳號已建立，但未註冊使用者名稱";
 "createAccount.timeoutTitle" = "已建立帳號";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "停止分享";
 
 //Calls
-"calls.callItemTitle" = "通話";
 "calls.incomingCallInfo" = "想要與您交談";
 "calls.ringing" = "響鈴中……";
 "calls.connecting" = "正在連線……";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "啟用通知";
 "accountPage.proxyDisabledAlertTitle" = "代理伺服器已停用";
 "accountPage.proxyDisabledAlertBody" = "為了收到通知，請啟用代理伺服器";
-"accountPage.revokeDeviceTitle" = "撤銷裝置";
-"accountPage.revokeDeviceMessage" = "你想要撤銷此裝置嗎？這個動作無法復原。";
+"accountPage.removeDeviceTitle" = "移除裝置";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "撤銷";
 "accountPage.revokeDevicePlaceholder" = "輸入你的密碼";
 "accountPage.deviceRevoked" = "裝置撤銷完成";
-"accountPage.deviceRevocationProgress" = "正在撤銷……";
-"accountPage.deviceRevocationSuccess" = "裝置已撤銷";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "再試一次";
 "accountPage.deviceRevocationWrongPassword" = "不正確的密碼";
 "accountPage.deviceRevocationUnknownDevice" = "未知的裝置";
 "accountPage.deviceRevocationError" = "裝置撤銷錯誤";
 "accountPage.linkDeviceTitle" = "連結其他裝置";
 "accountPage.other" = "其他";
-"accountPage.removeAccountMessage" = "點選「移除」後，您將會在此裝置上移除此帳號！此動作不可復原。同時，您已註冊的名稱也將會遺失。";
-"accountPage.removeAccountButton" = "移除";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "在 Jami 上聯絡我";
 "accountPage.contactMeOnJamiContant" = "在 Jami 分散式通訊平臺 (https://jami.net) 上使用「%s」聯絡我";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "註冊";
 "accountPage.usernameRegistrationFailed" = "註冊失敗。請檢查密碼。";
 "accountPage.createPassword" = "加密账户";
-"accountPage.createPasswordExplanation" = "您的Jami帐户仅在此设备上注册,作为包含您的帐户密钥的档案库.";
 "accountPage.changePassword" = "變更密碼";
 "accountPage.oldPasswordPlaceholder" = "輸入舊密碼";
 "accountPage.newPasswordPlaceholder" = "輸入新密碼";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "使用 UPnP";
 "accountPage.security" = "安全性";
 "accountPage.enableSRTP" = "加密媒體串流 (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "介紹";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "個人檔案名稱";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "通过密码加密帐户";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "通知";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "註冊過期時間（秒）";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "禁用安全对话框检查输入 TLS 数据";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "此裝置";
+"accountPage.otherDevices" = "其他已連結的裝置";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "使用者名稱";
-"account.sipServer" = "SIP 伺服器";
+"account.sipServer" = "Server";
 "account.port" = "連接埠";
 "account.proxyServer" = "代理服務器";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "邀请加入";
 "generatedMessage.invitationAccepted" = "加入该对话";
 "generatedMessage.youJoined" = "你加入了谈话";
-"generatedMessage.contactBanned" = "被了";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "已重新添加";
 "generatedMessage.outgoingCall" = "撥出電話";
 "generatedMessage.missedOutgoingCall" = "未接去電";

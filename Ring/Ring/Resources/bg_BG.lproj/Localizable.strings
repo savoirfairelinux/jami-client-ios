@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Настройки на сметката";
-"global.advancedSettings" = "Разширени настройки";
 "global.username" = "Потребителско име";
 "global.recommended" = "Препоръчително";
 "global.password" = "Парола";
-"global.registerAUsername" = "Регистриране на потребителско име";
-"global.enterPassword" = "Въведете парола";
-"global.enterUsername" = "Введете потребителско име";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Отказ";
-"global.blockContact" = "Блокиране на контакт";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Премахване на профил";
 "global.incomingCall" = "Входящо обаждане";
-"global.ok" = "Добре";
+"global.ok" = "OK";
 "global.close" = "Затваряне";
 "global.share" = "Споделяне";
 "global.forward" = "Напред";
@@ -46,11 +45,17 @@
 "global.reply" = "Отговор";
 "global.search" = "Търсене...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Edit message";
+"global.editing" = "Editing";
 "global.create" = "Създаване";
+"global.edit" = "Edit";
+"global.remove" = "Remove";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Грешен QR-код";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Поканени";
 "swarm.admin" = "Администратор";
 "swarm.banned" = "Забранено";
-"swarm.unknown" = "Неизвестни";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Добавете член";
 "swarm.confirmLeaveSwarm" = "Сигурен ли си, че искаш да напуснеш роя?";
 "swarm.Leave" = "Излезте.";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Присъединете се към Джами.";
-"createAccount.chooseStrongPassword" = "Изберете сигурна парола, която ще запомните, за да е защитен профилът ви.";
-"createAccount.repeatPasswordPlaceholder" = "Потвърдете паролата";
-"createAccount.passwordCharactersNumberError" = "Най-малко 6 знака";
-"createAccount.passwordNotMatchingError" = "паролите не съвпадат";
 "createAccount.lookingForUsernameAvailability" = "проверяване дали е свободно…";
 "createAccount.invalidUsername" = "невалидно потребителско име";
 "createAccount.usernameAlreadyTaken" = "потребителското име вече е заето";
 "createAccount.usernameValid" = "име на потребителя е налично";
 "createAccount.loading" = "Натоварване";
 "createAccount.waitCreateAccountTitle" = "Добавяне на профил";
-"createAccount.ChooseAPassword" = "Криптиране на профил";
-"createAccount.PasswordInformation" = "Изберете парола, за да криптирате местния си профил. Не я забравяйте или няма да можете да възстановите профила си";
-"createAccount.EnableNotifications" = "Известия";
-"createAccount.Recommended" = "(Препоръчва се)";
 "createAccount.UsernameNotRegisteredTitle" = "Мрежова грешка";
 "createAccount.UsernameNotRegisteredMessage" = "Профилът бе създаден, но потребителското име не бе регистрирано";
 "createAccount.timeoutTitle" = "Профилът е създаден";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Спрете да споделяте";
 
 //Calls
-"calls.callItemTitle" = "Обаждане";
 "calls.incomingCallInfo" = "Иска да говори с теб.";
 "calls.ringing" = "Звъня...";
 "calls.connecting" = "Свързваме...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Включване на известията";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сървър деактивиран";
 "accountPage.proxyDisabledAlertBody" = "За да получите уведомления, моля, включете прокси";
-"accountPage.revokeDeviceTitle" = "Премахване на устройство";
-"accountPage.revokeDeviceMessage" = "Сигурен ли си, че искаш да отмениш устройството?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Отмяна на решението";
 "accountPage.revokeDevicePlaceholder" = "Въведете паролата си";
 "accountPage.deviceRevoked" = "Завършено оттегляне на устройството";
-"accountPage.deviceRevocationProgress" = "Отменя...";
-"accountPage.deviceRevocationSuccess" = "Устройството е отменено.";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Опитай пак.";
 "accountPage.deviceRevocationWrongPassword" = "Неправилен парол";
 "accountPage.deviceRevocationUnknownDevice" = "Неизвестно устройство";
 "accountPage.deviceRevocationError" = "Изключение на устройството";
 "accountPage.linkDeviceTitle" = "Свържете друго устройство";
 "accountPage.other" = "Други";
-"accountPage.removeAccountMessage" = "Ако изберете „Премахване“, ще премахнете този профил на това устройство! Това действие не може да бъде отменено. Също така, регистрираното ви име може да бъде загубено.";
-"accountPage.removeAccountButton" = "Премахване";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Свържете се с мен по Джами!";
 "accountPage.contactMeOnJamiContant" = "Свържете се с мен с помощта на \"%s\" на разпространените комуникационни платформи на Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Регистриране";
 "accountPage.usernameRegistrationFailed" = "Регистрацията не е успела, проверете паролата.";
 "accountPage.createPassword" = "Криптоварен акаунт";
-"accountPage.createPasswordExplanation" = "Вашият акаунт Jami е регистриран само на това устройство като архив, съдържащ ключовете на вашия акаунт.";
 "accountPage.changePassword" = "Промяна на парола";
 "accountPage.oldPasswordPlaceholder" = "Введете старата парола";
 "accountPage.newPasswordPlaceholder" = "Введете нов парол";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Използвайте UPnP";
 "accountPage.security" = "Сигурност";
 "accountPage.enableSRTP" = "Криптирайте медийните потоци (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Потребителско име";
-"account.sipServer" = "SIP сървър";
+"account.sipServer" = "Server";
 "account.port" = "Порт";
 "account.proxyServer" = "Посредник";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "беше поканена да се присъедини";
 "generatedMessage.invitationAccepted" = "Присъедини се към разговора.";
 "generatedMessage.youJoined" = "Присъедини се към разговора.";
-"generatedMessage.contactBanned" = "- Да, но беше ритна.";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "е добавен отново";
 "generatedMessage.outgoingCall" = "Изходящо обаждане";
 "generatedMessage.missedOutgoingCall" = "Пропуснато изходящо обаждане";

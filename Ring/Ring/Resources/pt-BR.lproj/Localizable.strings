@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Configurações da Conta";
-"global.advancedSettings" = "Configurações avançadas";
 "global.username" = "Nome de usuário";
 "global.recommended" = "Recomendado";
 "global.password" = "Senha";
-"global.registerAUsername" = "Registre um nome de usuário";
-"global.enterPassword" = "Digite a Senha";
-"global.enterUsername" = "Digite o nome de usuário";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Entre o nome de usuário";
 "global.cancel" = "Cancelar";
-"global.blockContact" = "Bloquear Contato";
+"global.blockContact" = "Bloquear contato";
 "global.removeAccount" = "Excluir a conta";
 "global.incomingCall" = "Chamada recebida";
-"global.ok" = "Ok";
+"global.ok" = "OK";
 "global.close" = "Fechar";
 "global.share" = "Compartilhar";
 "global.forward" = "Encaminhar";
@@ -46,11 +45,17 @@
 "global.reply" = "Responder";
 "global.search" = "Buscando...";
 "global.donate" = "Doar";
-"global.deleteMessage" = "Apagar mensagem";
-"global.deleteFile" = "Excluir arquivo do dispositivo";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Editar mensagem";
-"global.editing" = "Edição";
+"global.editing" = "Editing";
 "global.create" = "Criar";
+"global.edit" = "Editar";
+"global.remove" = "Remover";
+"global.call" = "Call";
+"global.video" = "Vídeo";
+"global.time" = "Tempo";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Código QR ilegível";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Convidado";
 "swarm.admin" = "Administrador";
 "swarm.banned" = "Banido";
-"swarm.unknown" = "Não conhecido";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Adicionar membro";
 "swarm.confirmLeaveSwarm" = "Tem certeza de que quer sair deste enxame?";
 "swarm.Leave" = "Sair";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Junte-se a Jami";
-"createAccount.chooseStrongPassword" = "Escolha uma senha forte, da qual se lembrará, para proteger sua conta Jami.";
-"createAccount.repeatPasswordPlaceholder" = "Confirmar senha";
-"createAccount.passwordCharactersNumberError" = "Pelo menos 6 caracteres";
-"createAccount.passwordNotMatchingError" = "as senhas não coincidem";
 "createAccount.lookingForUsernameAvailability" = "buscando disponibilidade…";
 "createAccount.invalidUsername" = "nome de usuário inválido";
 "createAccount.usernameAlreadyTaken" = "nome de usuário já existente";
 "createAccount.usernameValid" = "nome de usuário está disponível";
 "createAccount.loading" = "Carregando";
 "createAccount.waitCreateAccountTitle" = "Adicionando conta";
-"createAccount.ChooseAPassword" = "Criptografar minha conta";
-"createAccount.PasswordInformation" = "Escolha uma senha para criptografar sua conta local. Não se esqueça dessa senha. Sem ela você não poderá recuperar sua conta.";
-"createAccount.EnableNotifications" = "Notificações";
-"createAccount.Recommended" = "(Recomendado)";
 "createAccount.UsernameNotRegisteredTitle" = "Erro de rede";
 "createAccount.UsernameNotRegisteredMessage" = "A conta foi criada, mas o nome de usuário não foi registrado";
 "createAccount.timeoutTitle" = "Conta criada";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Parar de compartilhar";
 
 //Calls
-"calls.callItemTitle" = "Chamar";
 "calls.incomingCallInfo" = "quer conversar com você";
 "calls.ringing" = "Toque…";
 "calls.connecting" = "Conectando…";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Habilitar notificações";
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy desativado";
 "accountPage.proxyDisabledAlertBody" = "Para receber as notificações, favor ativar o proxy";
-"accountPage.revokeDeviceTitle" = "Revogar dispositivo";
-"accountPage.revokeDeviceMessage" = "Tem certeza de que deseja revogar esse dispositivo? Essa ação não pode ser desfeita.";
+"accountPage.removeDeviceTitle" = "Excluir o dispositivo";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Revogar";
 "accountPage.revokeDevicePlaceholder" = "Digite sua senha";
 "accountPage.deviceRevoked" = "Revogação de dispositivo completa";
-"accountPage.deviceRevocationProgress" = "Revogando…";
-"accountPage.deviceRevocationSuccess" = "Dispositivo foi revogado";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Tente novamente";
 "accountPage.deviceRevocationWrongPassword" = "Senha incorreta";
 "accountPage.deviceRevocationUnknownDevice" = "Dispositivo desconhecido";
 "accountPage.deviceRevocationError" = "Erro de revogação de dispositivo";
 "accountPage.linkDeviceTitle" = "Vincular outro dispositivo";
 "accountPage.other" = "Outro";
-"accountPage.removeAccountMessage" = "Ao clicar em \"Remover\", você removerá esta conta neste dispositivo! Esta ação não pode ser desfeita. Além disso, seu nome registrado pode ser perdido.";
-"accountPage.removeAccountButton" = "Remover";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Convidar amigos";
 "accountPage.contactMeOnJamiTitle" = "Entre em contato comigo no Jami!";
 "accountPage.contactMeOnJamiContant" = "Entre em contato comigo usando \"%s\" no Jami, plataforma de comunicação distribuída: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Registrar";
 "accountPage.usernameRegistrationFailed" = "O registro falhou. Por favor, verifique a senha.";
 "accountPage.createPassword" = "Criptografar a conta";
-"accountPage.createPasswordExplanation" = "Sua conta Jami é registrada somente nesse dispositivo como um arquivo que contém as chaves da sua conta. O acesso a esse arquivo pode ser protegido por uma senha.";
 "accountPage.changePassword" = "Mudar senha";
 "accountPage.oldPasswordPlaceholder" = "Digite a senha antiga";
 "accountPage.newPasswordPlaceholder" = "Digite a nova senha";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Usar UPnP";
 "accountPage.security" = "Segurança";
 "accountPage.enableSRTP" = "Encriptar fluxos de mídia (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Nome do perfil";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Criptografar conta com uma senha";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "Em outro dispositivo";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notificações";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Tempo de expiração de registro (segundos)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Desativar a verificação de diálogo seguro para dados TLS de entrada";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "Este dispositivo";
+"accountPage.otherDevices" = "Outro dispositivo conectado";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Nome de usuário";
-"account.sipServer" = "Servidor SIP";
+"account.sipServer" = "Server";
 "account.port" = "Porta";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configurar uma conta SIP";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "foi convidado a participar";
 "generatedMessage.invitationAccepted" = "juntou-se à conversa";
 "generatedMessage.youJoined" = "Você se juntou à conversa.";
-"generatedMessage.contactBanned" = "foi expulso";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "foi adicionado novamente";
 "generatedMessage.outgoingCall" = "Chamada efetuada";
 "generatedMessage.missedOutgoingCall" = "Chamadas efetuadas perdidas";

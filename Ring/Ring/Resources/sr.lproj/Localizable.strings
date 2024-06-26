@@ -20,13 +20,12 @@
 
 // Global
 "global.accountSettings" = "Podešavanja naloga";
-"global.advancedSettings" = "Napredna podešavanja";
 "global.username" = "Korisničko ime";
 "global.recommended" = "Preporučeno";
 "global.password" = "Šifra";
-"global.registerAUsername" = "Registruj korisničko ime";
-"global.enterPassword" = "Unesi lozinku";
-"global.enterUsername" = "Unesi korisničko ime";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Otkaži";
 "global.blockContact" = "Blokiraj kontakt";
 "global.removeAccount" = "Ukloni nalog";
@@ -46,11 +45,17 @@
 "global.reply" = "Odgovori";
 "global.search" = "Трагајући...";
 "global.donate" = "Doniraj";
-"global.deleteMessage" = "Izbriši poruku";
-"global.deleteFile" = "Izbriši datoteku sa uređaja";
-"global.editMessage" = "Уреди поруку";
-"global.editing" = "Уређивање";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Uredi poruku";
+"global.editing" = "Editing";
 "global.create" = "Napravi";
+"global.edit" = "Редактирање";
+"global.remove" = "Увајање";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Лош QR код";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Позвани";
 "swarm.admin" = "Администратор";
 "swarm.banned" = "Забранена";
-"swarm.unknown" = "Непознати";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Додајте члана";
 "swarm.confirmLeaveSwarm" = "Сигуран си да желиш да напустиш овај рог?";
 "swarm.Leave" = "Одлази";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Придружи се Џамију.";
-"createAccount.chooseStrongPassword" = "Изаберите јаку лозинку коју ћете се сетити да бисте заштитили свој рачун Џами.";
-"createAccount.repeatPasswordPlaceholder" = "Потврди лозинку";
-"createAccount.passwordCharactersNumberError" = "Minimalna dužina 6 karaktera";
-"createAccount.passwordNotMatchingError" = "лозинке не одговарају";
 "createAccount.lookingForUsernameAvailability" = "траже доступност...";
 "createAccount.invalidUsername" = "неважни кориснички назив";
 "createAccount.usernameAlreadyTaken" = "Име корисника већ преузето";
 "createAccount.usernameValid" = "корисничко име је доступно";
 "createAccount.loading" = "Натовар";
 "createAccount.waitCreateAccountTitle" = "Dodavanje naloga";
-"createAccount.ChooseAPassword" = "Шифрујте мој рачун";
-"createAccount.PasswordInformation" = "Изаберите лозинку за шифровање локалног рачуна. Не заборавите га или нећете моћи да повратите свој рачун";
-"createAccount.EnableNotifications" = "Уведомљења";
-"createAccount.Recommended" = "(Рекомендује се)";
 "createAccount.UsernameNotRegisteredTitle" = "Greška na mreži";
 "createAccount.UsernameNotRegisteredMessage" = "Уређење је створено, али корисничко име није регистровано";
 "createAccount.timeoutTitle" = "Утворено рачун";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Prestani sa deljenjem";
 
 //Calls
-"calls.callItemTitle" = "Позови";
 "calls.incomingCallInfo" = "Жели да разговара са тобом.";
 "calls.ringing" = "Звучи...";
 "calls.connecting" = "Сврзавање...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Omogući obaveštenja";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сервер је деактивисан";
 "accountPage.proxyDisabledAlertBody" = "Да бисте добили обавештења, молим вас да укључите прокси";
-"accountPage.revokeDeviceTitle" = "Opozvati uređaj";
-"accountPage.revokeDeviceMessage" = "Да ли сте сигурни да желите да повратите овај уређај?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Укренути";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Увршена повлачење уређаја";
-"accountPage.deviceRevocationProgress" = "Одбијање...";
-"accountPage.deviceRevocationSuccess" = "Улазак је укинут";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Покушај поново.";
 "accountPage.deviceRevocationWrongPassword" = "Неправилна лозинка";
 "accountPage.deviceRevocationUnknownDevice" = "Непознати уређај";
 "accountPage.deviceRevocationError" = "Грешка повлачења уређаја";
 "accountPage.linkDeviceTitle" = "Сврнути још један уређај";
 "accountPage.other" = "Други";
-"accountPage.removeAccountMessage" = "Klikom na „Ukloni“ uklonićete ovaj nalog na ovom uređaju! Ova radnja se ne može opozvati. Takođe, vaše registrovano ime može biti izgubljeno.";
-"accountPage.removeAccountButton" = "Увајање";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Контактирај ме на Џами!";
 "accountPage.contactMeOnJamiContant" = "Контактирајте ме користећи \"%s\" на дистрибуираниј комуникацијској платформи Џами: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Registruj se";
 "accountPage.usernameRegistrationFailed" = "Registracija nije uspela. Molimo proverite lozinku.";
 "accountPage.createPassword" = "Криптован рачун";
-"accountPage.createPasswordExplanation" = "Vaš Jami nalog je registrovan samo na ovom uređaju kao arhiva koja sadrži ključeve vašeg naloga. Pristup ovoj arhivi može biti zaštićen lozinkom.";
 "accountPage.changePassword" = "Променити лозинку";
 "accountPage.oldPasswordPlaceholder" = "Уведите стару лозинку";
 "accountPage.newPasswordPlaceholder" = "Унесите нову лозинку";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Користе UPnP";
 "accountPage.security" = "Bezbednost";
 "accountPage.enableSRTP" = "Šifruj medijski strim (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profil";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Шифровање рачуна са лозинком";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "Na drugom uređaju";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Уведомљења";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Време истека регистрације (секунда)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Деактивирајте безбедно проверење дијалога за долазеће ТЛС податке";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "Ovaj uređaj";
+"accountPage.otherDevices" = "Други повезани уређаји";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Име корисника";
-"account.sipServer" = "СИП сервер";
+"account.sipServer" = "Server";
 "account.port" = "Порт";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "позвана да се придружи";
 "generatedMessage.invitationAccepted" = "придружио се разговору";
 "generatedMessage.youJoined" = "Придружио си се разговору.";
-"generatedMessage.contactBanned" = "је убођен";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "додао је";
 "generatedMessage.outgoingCall" = "Poziva se";
 "generatedMessage.missedOutgoingCall" = "Propušten odlazeći poziv";

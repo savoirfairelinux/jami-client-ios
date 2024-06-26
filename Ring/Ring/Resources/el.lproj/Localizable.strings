@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Ρυθμίσεις λογαριασμού";
-"global.advancedSettings" = "Προχωρημένες ρυθμίσεις";
 "global.username" = "Όνομα χρήστη";
 "global.recommended" = "Προτεινόμενα";
 "global.password" = "Κωδικός";
-"global.registerAUsername" = "Καταχωρίστε ένα όνομα χρήστη";
-"global.enterPassword" = "Καταχώρηση συνθηματικού";
-"global.enterUsername" = "Εισάγετε όνομα χρήστη";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Ακύρωση";
-"global.blockContact" = "Κλειδί Επικοινωνίας";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Αποσύρουμε λογαριασμό";
 "global.incomingCall" = "Εισερχόμενη κλήση";
-"global.ok" = "Εντάξει";
+"global.ok" = "OK";
 "global.close" = "Κλείσιμο";
 "global.share" = "Κοινοποίηση";
 "global.forward" = "Επανάληψη";
@@ -46,11 +45,17 @@
 "global.reply" = "Απάντηση";
 "global.search" = "Γίνεται αναζήτηση...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Τροποποίηση μηνύματος";
+"global.editing" = "Editing";
 "global.create" = "Δημιουργία";
+"global.edit" = "Edit";
+"global.remove" = "Remove";
+"global.call" = "Call";
+"global.video" = "Βίντεο";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Κακό QR κωδικό";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Καλεσμένοι";
 "swarm.admin" = "Διαχειριστής";
 "swarm.banned" = "Απαγορεύεται";
-"swarm.unknown" = "Αγνοητό";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Προσθήκη Μέλη";
 "swarm.confirmLeaveSwarm" = "Είσαι σίγουρος ότι θέλεις να φύγεις από αυτό το σμήνος;";
 "swarm.Leave" = "Φύγε";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Δημιουργήστε λογαριασμό Jami";
-"createAccount.chooseStrongPassword" = "Επιλέξτε ένα ισχυρό κωδικό πρόσβασης που θα θυμάστε για να προστατεύσετε το λογαριασμό σας στο Jami.";
-"createAccount.repeatPasswordPlaceholder" = "Επιβεβαίωση κωδικού";
-"createAccount.passwordCharactersNumberError" = "το ελάχιστο 6 χαρακτήρες";
-"createAccount.passwordNotMatchingError" = "τα συνθηματικά δεν ταιριάζουν";
 "createAccount.lookingForUsernameAvailability" = "Ψάχνοντας διαθεσιμότητα...";
 "createAccount.invalidUsername" = "Μη έγκυρο όνομα χρήστη";
 "createAccount.usernameAlreadyTaken" = "Το όνομα χρήστη ήδη χρησιμοποιείται";
 "createAccount.usernameValid" = "Το όνομα χρήστη είναι διαθέσιμο";
 "createAccount.loading" = "Ανεβαίνει";
 "createAccount.waitCreateAccountTitle" = "Εισαγωγή λογαριασμού";
-"createAccount.ChooseAPassword" = "Κρυπτογράφησε το λογαριασμό μου.";
-"createAccount.PasswordInformation" = "Επιλέξτε κωδικό πρόσβασης για να κρυπτογραφήσετε το τοπικό σας λογαριασμό. Μην το ξεχάσετε αλλιώς δεν θα μπορέσετε να ανακτήσετε το λογαριασμό σας";
-"createAccount.EnableNotifications" = "Ειδοποιήσεις";
-"createAccount.Recommended" = "(Συμβούλευση)";
 "createAccount.UsernameNotRegisteredTitle" = "Σφάλμα δικτύου";
 "createAccount.UsernameNotRegisteredMessage" = "Δημιουργήθηκε λογαριασμός αλλά δεν καταχωρίστηκε όνομα χρήστη";
 "createAccount.timeoutTitle" = "Δημιουργήθηκε λογαριασμός";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Τερματισμός κοινοποίησης";
 
 //Calls
-"calls.callItemTitle" = "Κλήση";
 "calls.incomingCallInfo" = "Θέλει να σου μιλήσει.";
 "calls.ringing" = "- Ακούγεται...";
 "calls.connecting" = "Συνδέοντας...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Ενεργοποίηση των ειδοποιήσεων";
 "accountPage.proxyDisabledAlertTitle" = "Απασχολούνται οι διακομιστές αντιπροσωπευτικών";
 "accountPage.proxyDisabledAlertBody" = "Για να λάβετε ειδοποιήσεις, παρακαλώ ενεργοποιήστε το proxy";
-"accountPage.revokeDeviceTitle" = "Αφαίρεση συσκευής";
-"accountPage.revokeDeviceMessage" = "Είσαι σίγουρος ότι θέλεις να ανακαλέσεις την συσκευή;";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Απαλλαγή";
 "accountPage.revokeDevicePlaceholder" = "Εισαγωγή κωδικού πρόσβασης";
 "accountPage.deviceRevoked" = "Τελείωσε την ανάκληση της συσκευής";
-"accountPage.deviceRevocationProgress" = "Απακύρωση...";
-"accountPage.deviceRevocationSuccess" = "Η συσκευή ανακαλέστηκε.";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Δοκίμασε ξανά.";
 "accountPage.deviceRevocationWrongPassword" = "Λάθος κωδικό πρόσβασης";
 "accountPage.deviceRevocationUnknownDevice" = "Άγνωστη συσκευή";
 "accountPage.deviceRevocationError" = "Λάθος ανάκλησης συσκευής";
 "accountPage.linkDeviceTitle" = "Συνδέστε άλλη συσκευή";
 "accountPage.other" = "Άλλα";
-"accountPage.removeAccountMessage" = "Αν κάνετε κλικ στο \"Αφαίρεση\" θα αφαιρέσετε αυτό το λογαριασμό σε αυτή τη συσκευή!";
-"accountPage.removeAccountButton" = "Απομακρύνετε";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Επικοινωνήστε μαζί μου για την Τζάμι!";
 "accountPage.contactMeOnJamiContant" = "Επικοινωνήστε μαζί μου χρησιμοποιώντας το \"%s\" στην πλατφόρμα επικοινωνίας της Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Εγγραφή";
 "accountPage.usernameRegistrationFailed" = "Η εγγραφή απέτυχε. Παρακαλώ ελέγξτε το κωδικό πρόσβασης.";
 "accountPage.createPassword" = "Κρυπτογραφημένο λογαριασμό";
-"accountPage.createPasswordExplanation" = "Το λογαριασμό Jami σας καταχωρίζεται μόνο σε αυτή τη συσκευή ως αρχείο που περιέχει τα κλειδιά του λογαριασμού σας.";
 "accountPage.changePassword" = "Αλλαγή κωδικού";
 "accountPage.oldPasswordPlaceholder" = "Εισάγετε παλιό κωδικό πρόσβασης";
 "accountPage.newPasswordPlaceholder" = "Εισαγωγή νέου κωδικού";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Χρήση UPnP";
 "accountPage.security" = "Ασφάλεια";
 "accountPage.enableSRTP" = "Κρυπτογράφηση ροών μέσων (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Όνομα Χρήστη";
-"account.sipServer" = "Υπηρετή SIP";
+"account.sipServer" = "Server";
 "account.port" = "Θύρα";
 "account.proxyServer" = "Διαμεσολαβητής";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "καλέστηκε να συμμετάσχει";
 "generatedMessage.invitationAccepted" = "Συμμετείχε στη συζήτηση";
 "generatedMessage.youJoined" = "Εσύ συμμετείχες στη συζήτηση.";
-"generatedMessage.contactBanned" = "Τραβήχτηκε.";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "προστέθηκε ξανά";
 "generatedMessage.outgoingCall" = "Εξερχόμενη κλήση";
 "generatedMessage.missedOutgoingCall" = "Αναπάντητη εξερχόμενη κλήση";

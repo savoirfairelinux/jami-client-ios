@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Configuración de cuenta";
-"global.advancedSettings" = "La configuración avanzada";
 "global.username" = "Nombre d'usuariu";
 "global.recommended" = "Recomendáu";
 "global.password" = "Paez que la contraseña";
-"global.registerAUsername" = "Registrar un nome d' usuariu";
-"global.enterPassword" = "Entra contraseña";
-"global.enterUsername" = "Entra nome d' usuariu";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Cancelación";
-"global.blockContact" = "Bloquear el contautu";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "La cuenta ye retirada";
 "global.incomingCall" = "L'español";
-"global.ok" = "Bien, ye bien.";
+"global.ok" = "OK";
 "global.close" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
 "global.share" = "Compartir";
 "global.forward" = "Aforra";
@@ -46,11 +45,17 @@
 "global.reply" = "Respuesta";
 "global.search" = "Buscando...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Edit message";
+"global.editing" = "Editing";
 "global.create" = "Crear";
+"global.edit" = "Edit";
+"global.remove" = "Remove";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Un codiciu QR malo";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Convidaos";
 "swarm.admin" = "Administración";
 "swarm.banned" = "Prohibíu";
-"swarm.unknown" = "La so familia";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Aderir miembru";
 "swarm.confirmLeaveSwarm" = "¿Seguru que quieres salir de la masa?";
 "swarm.Leave" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Uníu a Jami";
-"createAccount.chooseStrongPassword" = "Escueye una contraseña fuerte que recordar pa protexer la so cuenta Jami.";
-"createAccount.repeatPasswordPlaceholder" = "Confirmar contraseña";
-"createAccount.passwordCharactersNumberError" = "Minimu de 6 caracteres";
-"createAccount.passwordNotMatchingError" = "Les contraseñes nun coinciden";
 "createAccount.lookingForUsernameAvailability" = "Buscando disponibilidá...";
 "createAccount.invalidUsername" = "Nombre d'usuariu inválidu";
 "createAccount.usernameAlreadyTaken" = "Nómase usuariu ya adoptáu";
 "createAccount.usernameValid" = "El nome d'usuariu ye disponible";
 "createAccount.loading" = "Carga";
 "createAccount.waitCreateAccountTitle" = "Contá adicional";
-"createAccount.ChooseAPassword" = "Encripta la mio cuenta";
-"createAccount.PasswordInformation" = "Escolla una contraseña pa cifrar la cuenta local.";
-"createAccount.EnableNotifications" = "Notificaciones";
-"createAccount.Recommended" = "(Recomendáu)";
 "createAccount.UsernameNotRegisteredTitle" = "Error de red";
 "createAccount.UsernameNotRegisteredMessage" = "Creóse una cuenta pero nun se rexistró'l nome d'usuariu";
 "createAccount.timeoutTitle" = "Creáu cuenta";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Pa evitar la compartición";
 
 //Calls
-"calls.callItemTitle" = "Llamada";
 "calls.incomingCallInfo" = "Quiere falar contigo.";
 "calls.ringing" = "El soníu...";
 "calls.connecting" = "La conexión...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Activu Notificaciones";
 "accountPage.proxyDisabledAlertTitle" = "El servidor proxy nun funciona";
 "accountPage.proxyDisabledAlertBody" = "Pa recibir notificaciones, por favor, activen proxy";
-"accountPage.revokeDeviceTitle" = "Dispositivu de revocación";
-"accountPage.revokeDeviceMessage" = "Esta acción nun podía ser revocada.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Revocación";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "La revocación del dispositivu completada";
-"accountPage.deviceRevocationProgress" = "Revocar...";
-"accountPage.deviceRevocationSuccess" = "El dispositivu foi revocáu";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Ensaiar otra vegada.";
 "accountPage.deviceRevocationWrongPassword" = "Paez incorrecta";
 "accountPage.deviceRevocationUnknownDevice" = "Dispositivu desconocíu";
 "accountPage.deviceRevocationError" = "Error de revocación del dispositivu";
 "accountPage.linkDeviceTitle" = "Enlazar otru dispositivu";
 "accountPage.other" = "Altres";
-"accountPage.removeAccountMessage" = "El so nome rexistráu puede perderse.";
-"accountPage.removeAccountButton" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "¡Contacta-me en Jami!";
 "accountPage.contactMeOnJamiContant" = "La so primer apaición foi nel estrenu de la so cuarta temporada en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, y en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, y en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en The Hollywood Revival, en The Hollywood Revival, en The Hollywood Revival, en The Hollywood Revival, en The CW.";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "El rexistru";
 "accountPage.usernameRegistrationFailed" = "La inscripción fallaron.";
 "accountPage.createPassword" = "Encriptación de cuenta";
-"accountPage.createPasswordExplanation" = "La so cuenta Jami ye rexistrada solamente nun dispositivu como un archivu que contenga les llaves de la so cuenta.";
 "accountPage.changePassword" = "Cambiar contraseña";
 "accountPage.oldPasswordPlaceholder" = "Introducir una contraseña vieya";
 "accountPage.newPasswordPlaceholder" = "Introducir una contraseña nueva";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Utiliza UPnP";
 "accountPage.security" = "Seguridá";
 "accountPage.enableSRTP" = "Encripta los fluxos de medios (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Nome d'usuariu";
-"account.sipServer" = "Servidor SIP";
+"account.sipServer" = "Server";
 "account.port" = "Portos";
 "account.proxyServer" = "El so nome ye";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "Foi convidáu a participar";
 "generatedMessage.invitationAccepted" = "Entra na conversación.";
 "generatedMessage.youJoined" = "Acompañó la conversación";
-"generatedMessage.contactBanned" = "Foi pateada";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "Foi añadida de nuevu";
 "generatedMessage.outgoingCall" = "L'escursión de salida";
 "generatedMessage.missedOutgoingCall" = "La llamada saliente perdida";

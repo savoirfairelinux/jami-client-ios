@@ -20,12 +20,11 @@
 
 // Global
 "global.accountSettings" = "Kontoinställningar";
-"global.advancedSettings" = "Avancerade inställningar";
 "global.username" = "Användarnamn";
 "global.recommended" = "Rekommendera";
 "global.password" = "Lösenord";
-"global.registerAUsername" = "Registrera ett användarnamn";
-"global.enterPassword" = "Ange lösenord";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
 "global.enterUsername" = "Ange användarnamn";
 "global.cancel" = "Avbryt";
 "global.blockContact" = "Blockera kontakt";
@@ -46,11 +45,17 @@
 "global.reply" = "Svara";
 "global.search" = "Söker...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Redigera meddelande";
+"global.editing" = "Editing";
 "global.create" = "Skapa";
+"global.edit" = "Redigera";
+"global.remove" = "Ta bort";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Tid";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Inbjudna";
 "swarm.admin" = "Administratör";
 "swarm.banned" = "Förbjudet";
-"swarm.unknown" = "Utrådda";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Lägg till medlem";
 "swarm.confirmLeaveSwarm" = "Är du säker på att du vill lämna den här svärmen?";
 "swarm.Leave" = "- Gå.";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Gå med Jami.";
-"createAccount.chooseStrongPassword" = "Välj ett starkt lösenord som du kommer ihåg, för att skydda ditt Jami-konto.";
-"createAccount.repeatPasswordPlaceholder" = "Bekräfta lösenord";
-"createAccount.passwordCharactersNumberError" = "6 tecken minimum";
-"createAccount.passwordNotMatchingError" = "Lösenorden stämmer inte";
 "createAccount.lookingForUsernameAvailability" = "söker tillgänglighet...";
 "createAccount.invalidUsername" = "Ogiltigt användarnamn";
 "createAccount.usernameAlreadyTaken" = "Användarnamnet är upptaget";
 "createAccount.usernameValid" = "användarnamnet är tillgängligt";
 "createAccount.loading" = "Läser in";
 "createAccount.waitCreateAccountTitle" = "Lägger till konto";
-"createAccount.ChooseAPassword" = "Kryptera mitt konto";
-"createAccount.PasswordInformation" = "Välj ett lösenord för att kryptera ditt lokala konto. Glöm inte bort det, för då kommer du inte att kunna återställa ditt konto.";
-"createAccount.EnableNotifications" = "Aviseringar";
-"createAccount.Recommended" = "(Rekommenderas)";
 "createAccount.UsernameNotRegisteredTitle" = "Nätverksfel";
 "createAccount.UsernameNotRegisteredMessage" = "Konto har skapats men användarnamn har inte registrerats";
 "createAccount.timeoutTitle" = "Konto skapat";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Sluta dela";
 
 //Calls
-"calls.callItemTitle" = "Samtal";
 "calls.incomingCallInfo" = "vill prata med dig";
 "calls.ringing" = "Ringer...";
 "calls.connecting" = "Ansluter...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Aktivera aviseringar";
 "accountPage.proxyDisabledAlertTitle" = "Proxyserver inaktiverad";
 "accountPage.proxyDisabledAlertBody" = "Aktivera proxy, för att ta emot aviseringar";
-"accountPage.revokeDeviceTitle" = "Återkalla enhet";
-"accountPage.revokeDeviceMessage" = "Vill du verkligen återkalla den här enheten? Åtgärden kan inte ångras.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Återkalla";
 "accountPage.revokeDevicePlaceholder" = "Ange ditt lösenord";
 "accountPage.deviceRevoked" = "Enheten har återkallats";
-"accountPage.deviceRevocationProgress" = "Återkallar...";
-"accountPage.deviceRevocationSuccess" = "Enheten återkallades";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Försök igen";
 "accountPage.deviceRevocationWrongPassword" = "Felaktigt lösenord";
 "accountPage.deviceRevocationUnknownDevice" = "Okänd enhet";
 "accountPage.deviceRevocationError" = "Kunde inte återkalla enheten";
 "accountPage.linkDeviceTitle" = "Koppla en annan enhet";
 "accountPage.other" = "Annat";
-"accountPage.removeAccountMessage" = "Genom att klicka \"Ta bort\" kommer du att ta bort detta konto från denna enhet. Denna åtgärd kan inte ångras. Ditt registrerade namn kan också förloras.";
-"accountPage.removeAccountButton" = "Ta bort";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Kontakta mig på Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontakta genom %s på Jami kommunikationsplattformen: https://jami.net ";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Registrera";
 "accountPage.usernameRegistrationFailed" = "Registrering misslyckade. Kontrollera lösenord. ";
 "accountPage.createPassword" = "Kryptat konto";
-"accountPage.createPasswordExplanation" = "Ditt Jami-konto registreras endast på den här enheten som ett arkiv som innehåller dina nycklar.";
 "accountPage.changePassword" = "Byt lösenord";
 "accountPage.oldPasswordPlaceholder" = "Ange gammalt lösenord";
 "accountPage.newPasswordPlaceholder" = "Ange nytt lösenord";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Använd UPnP";
 "accountPage.security" = "Säkerhet";
 "accountPage.enableSRTP" = "Kryptera mediaströmmar (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profil";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Kryptat konto med lösenord";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Aviseringar";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Tid för registrering går ut (sekunder)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Inaktivera säker dialogkontroll för inkommande TLS-data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "Denna enhet";
+"accountPage.otherDevices" = "Andra länkade enheter";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Användarnamn";
-"account.sipServer" = "SIP-server";
+"account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "blev inbjuden att ansluta sig";
 "generatedMessage.invitationAccepted" = "- Jag gick med i samtalet.";
 "generatedMessage.youJoined" = "Du gick med i samtalet.";
-"generatedMessage.contactBanned" = "- Jag fick sparken.";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "lagdes till";
 "generatedMessage.outgoingCall" = "Utgående samtal";
 "generatedMessage.missedOutgoingCall" = "Missat utgående samtal";

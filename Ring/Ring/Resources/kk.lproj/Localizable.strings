@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "Тіркелгі параметрлері";
-"global.advancedSettings" = "Жетілген параметрлер";
 "global.username" = "Пайдаланушы аты";
 "global.recommended" = "Ұсынылған";
 "global.password" = "Пароль";
-"global.registerAUsername" = "Пайдаланушы атауын тіркеңіз";
-"global.enterPassword" = "Парольді келтіріңіз";
-"global.enterUsername" = "Пайдаланушы атауын келтіріңіз";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Болдырмау";
-"global.blockContact" = "Байланыс блогы";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Тіркелгісін өшіру";
 "global.incomingCall" = "Келесі шақыру";
 "global.ok" = "Жарайды";
@@ -46,11 +45,17 @@
 "global.reply" = "Жауап беру";
 "global.search" = "іздеу...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Хатты өңдеу";
+"global.editing" = "Editing";
 "global.create" = "Жарату";
+"global.edit" = "Жасату";
+"global.remove" = "Алып тастау";
+"global.call" = "Call";
+"global.video" = "Видео";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Жаман QR код";
@@ -77,7 +82,7 @@
 "swarm.invited" = "шақырылған";
 "swarm.admin" = "Әкімші";
 "swarm.banned" = "Тыйылған";
-"swarm.unknown" = "Ашық";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Қауымшыны қосу";
 "swarm.confirmLeaveSwarm" = "Бұл тобырдан кетуіңізге сенімдісіз бе?";
 "swarm.Leave" = "Кетіңіздер";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Жамиге қосыл";
-"createAccount.chooseStrongPassword" = "Jami тіркелгіңізді қорғау үшін естен шығармайтын күшті парольді таңдаңыз.";
-"createAccount.repeatPasswordPlaceholder" = "Парольді растау";
-"createAccount.passwordCharactersNumberError" = "6 таңбадан кем емес";
-"createAccount.passwordNotMatchingError" = "парольдер сәйкес келмейді";
 "createAccount.lookingForUsernameAvailability" = "қолжетімділікті іздеу...";
 "createAccount.invalidUsername" = "жарамсыз пайдаланушы аты";
 "createAccount.usernameAlreadyTaken" = "пайдаланушы аты алынды";
 "createAccount.usernameValid" = "пайдаланушы атауы қол жетімді";
 "createAccount.loading" = "Жүктіру";
 "createAccount.waitCreateAccountTitle" = "Қосымша есеп";
-"createAccount.ChooseAPassword" = "Тіркелімді шифрлаңыз";
-"createAccount.PasswordInformation" = "Жергілікті тіркелгіңіздің шифрлауын үшін парольді таңдаңыз. Оны ұмытпаңыз, әйтпесе тіркелгіңіз қалпына келтірілмейді";
-"createAccount.EnableNotifications" = "Хабарламалар";
-"createAccount.Recommended" = "(Шақыру)";
 "createAccount.UsernameNotRegisteredTitle" = "Желі қатесі";
 "createAccount.UsernameNotRegisteredMessage" = "Тіркелгі құрылды, бірақ пайдаланушы аты тіркелмеген";
 "createAccount.timeoutTitle" = "Тіркелгі құрылды";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Ортақ қатынастарды тоқтату";
 
 //Calls
-"calls.callItemTitle" = "Зерттеу";
 "calls.incomingCallInfo" = "Сізбен сөйлесуді қалайды";
 "calls.ringing" = "Зыңғырады...";
 "calls.connecting" = "Қосылу...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Хабарламаларды рұқсат ету";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сервері рұқсат етілмеген";
 "accountPage.proxyDisabledAlertBody" = "Хабарламаларды алу үшін проксиді қосу";
-"accountPage.revokeDeviceTitle" = "Қайта шығару құрылғысы";
-"accountPage.revokeDeviceMessage" = "Бұл әрекет қайталанбайды.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Қайталану";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Құрылғыны қайтарып алу аяқталды";
-"accountPage.deviceRevocationProgress" = "Қайтарып алу...";
-"accountPage.deviceRevocationSuccess" = "Құрылғы алынып тасталды";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Тағы да тырысыңыз";
 "accountPage.deviceRevocationWrongPassword" = "Қате пароль";
 "accountPage.deviceRevocationUnknownDevice" = "Белгісіз құрылғы";
 "accountPage.deviceRevocationError" = "Құрылғыны қайтарып алу қатесі";
 "accountPage.linkDeviceTitle" = "Басқа құрылғыны қосу";
 "accountPage.other" = "Басқа";
-"accountPage.removeAccountMessage" = "\"Арту\" дегенді басу арқылы сіз осы құрылғыдағы осы тіркелгіңізді алып тастайсыз! Бұл әрекетті қайтарып алу мүмкін емес. Сондай-ақ, тіркелген атыңыз жоғалуы мүмкін.";
-"accountPage.removeAccountButton" = "Алып тастау";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Jami-де менімен байланысыңыз!";
 "accountPage.contactMeOnJamiContant" = "Jami таратушы байланыс платформасында \"%s\" арқылы маған хабарласыңыз: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Тіркеу";
 "accountPage.usernameRegistrationFailed" = "Тіркеу сәтсіз аяқталды.";
 "accountPage.createPassword" = "Шифрланған шот";
-"accountPage.createPasswordExplanation" = "Jami тіркелгіңіз осы құрылғыда ғана тіркеледі.";
 "accountPage.changePassword" = "Парольді өзгерту";
 "accountPage.oldPasswordPlaceholder" = "Ескі парольді келтіріңіз";
 "accountPage.newPasswordPlaceholder" = "Жаңа парольді келтіріңіз";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "UPnP- ды қолдану";
 "accountPage.security" = "Қауіпсіздік";
 "accountPage.enableSRTP" = "Кіпшелеу медиа ағындары (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Парольмен тіркелгілерді шифрлау";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Тіркеу мерзімі (секундтар)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "TLS деректері үшін қауіпсіз диалог тексеруін өшіру";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Басқа қосылған құрылғылар";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Пайдаланушы атауы";
-"account.sipServer" = "SIP сервері";
+"account.sipServer" = "Server";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "қосылуға шақырылды";
 "generatedMessage.invitationAccepted" = "әңгімеге қосылды";
 "generatedMessage.youJoined" = "Сіз әңгімеге қосылдыңыз";
-"generatedMessage.contactBanned" = "ұрылды";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "қайта қосылды";
 "generatedMessage.outgoingCall" = "Шығушы шақыру";
 "generatedMessage.missedOutgoingCall" = "Шығып жатқан шақыруды жоғалтқан";

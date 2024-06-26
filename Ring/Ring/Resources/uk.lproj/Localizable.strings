@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "Налаштування облікового запису";
-"global.advancedSettings" = "Розширені налаштування";
 "global.username" = "Ім’я";
 "global.recommended" = "Рекомендовано";
 "global.password" = "Пароль";
 "global.registerAUsername" = "Зареєструйте ім'я користувача";
-"global.enterPassword" = "Введіть пароль";
-"global.enterUsername" = "Введіть ім'я користувача";
+"global.enterPassword" = "Ввести пароль";
+"global.enterUsername" = "Ввести ім'я користувача";
 "global.cancel" = "Скасувати";
-"global.blockContact" = "Блок контакту";
+"global.blockContact" = "Заблокувати контакт";
 "global.removeAccount" = "Вилучити обліковий запис";
 "global.incomingCall" = "Вхідний виклик";
 "global.ok" = "Гаразд";
@@ -46,11 +45,17 @@
 "global.reply" = "Відповісти";
 "global.search" = "Пошук…";
 "global.donate" = "Донат";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Редагувати повідомлення";
+"global.editing" = "Editing";
 "global.create" = "Створити";
+"global.edit" = "Редагувати";
+"global.remove" = "Видалити";
+"global.call" = "Call";
+"global.video" = "Відео";
+"global.time" = "Час";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Неприйнятний QR-код";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Запрошено";
 "swarm.admin" = "Адміністратор";
 "swarm.banned" = "Заборонена";
-"swarm.unknown" = "Невідомі";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Додавати члена";
 "swarm.confirmLeaveSwarm" = "Ти впевнений, що хочеш покинути цей рій?";
 "swarm.Leave" = "Піти";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Приєднуйся до Jami";
-"createAccount.chooseStrongPassword" = "Оберіть сильний пароль, який ви запам'ятаєте, щоб захистити ваш обліковий запис Джамі.";
-"createAccount.repeatPasswordPlaceholder" = "Підтвердити пароль";
-"createAccount.passwordCharactersNumberError" = "мінімум 6 символів";
-"createAccount.passwordNotMatchingError" = "паролі не відповідають";
 "createAccount.lookingForUsernameAvailability" = "шукаючи доступність...";
 "createAccount.invalidUsername" = "недійсне ім'я користувача";
 "createAccount.usernameAlreadyTaken" = "Уживальне ім'я вже прийнято";
 "createAccount.usernameValid" = "користувацьке ім'я доступне";
 "createAccount.loading" = "Завантаження";
 "createAccount.waitCreateAccountTitle" = "Додавання облікового запису";
-"createAccount.ChooseAPassword" = "Зашифрувати свій обліковий запис";
-"createAccount.PasswordInformation" = "Виберіть пароль для шифрування локального рахунку. Не забудьте його, інакше ви не зможете відновити свій рахунок";
-"createAccount.EnableNotifications" = "За повідомленнями";
-"createAccount.Recommended" = "(Заповноважена)";
 "createAccount.UsernameNotRegisteredTitle" = "Збій мережі";
 "createAccount.UsernameNotRegisteredMessage" = "Уведено обліковий запис, але ім'я користувача не зареєстровано";
 "createAccount.timeoutTitle" = "Обліковий запис створено";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Зупинити поширення";
 
 //Calls
-"calls.callItemTitle" = "Дзвінок";
 "calls.incomingCallInfo" = "Хоче розмовляти з тобою";
 "calls.ringing" = "Звон...";
 "calls.connecting" = "З'єднавши...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Увімкнути оповіщення";
 "accountPage.proxyDisabledAlertTitle" = "Прокси-сервер відключений";
 "accountPage.proxyDisabledAlertBody" = "Щоб отримати повідомлення, будь ласка, включте прокси";
-"accountPage.revokeDeviceTitle" = "Відкликати пристрій";
-"accountPage.revokeDeviceMessage" = "Ви впевнені, що хочете скасувати цей пристрій?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Відкликати";
 "accountPage.revokeDevicePlaceholder" = "Введіть ваш пароль";
 "accountPage.deviceRevoked" = "Завершено скасування пристрою";
-"accountPage.deviceRevocationProgress" = "Відкликати...";
-"accountPage.deviceRevocationSuccess" = "Пристрій був відкликаний";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Попробуй ще раз.";
 "accountPage.deviceRevocationWrongPassword" = "Неправильний пароль";
 "accountPage.deviceRevocationUnknownDevice" = "Невідоме пристрої";
 "accountPage.deviceRevocationError" = "Помилка відкликання пристрою";
 "accountPage.linkDeviceTitle" = "Прив'язати інший пристрій";
 "accountPage.other" = "Інше";
-"accountPage.removeAccountMessage" = "Націкаючи на \"Вилучити\", ви видалите цей акаунт на цьому пристрої!";
-"accountPage.removeAccountButton" = "Видалити";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Запросити друзів";
 "accountPage.contactMeOnJamiTitle" = "Звініться зі мною на Джамі!";
 "accountPage.contactMeOnJamiContant" = "Зверніться до мене за допомогою \"%s\" на платформі спілкування, що поширюється Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Зареєструватися";
 "accountPage.usernameRegistrationFailed" = "Зареєстрація не вдалося. Прошу перевірити пароль.";
 "accountPage.createPassword" = "Зашифрований рахунок";
-"accountPage.createPasswordExplanation" = "Ваш акаунт Jami зареєстрований тільки на цьому пристрої як архів, що містить ключі вашого акаунту.";
 "accountPage.changePassword" = "Змінити пароль";
 "accountPage.oldPasswordPlaceholder" = "Введіть старий пароль";
 "accountPage.newPasswordPlaceholder" = "Введіть новий пароль";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Використовувати UPnP";
 "accountPage.security" = "Безпека";
 "accountPage.enableSRTP" = "Кодування потоку (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Профіль";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Зашифруйте обліковий запис паролем";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "На іншому пристрої";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "За повідомленнями";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Час закінчення реєстрації (секунди)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Відключити безпечний перевірка діалогу для вхідних даних TLS";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "Цей пристрій";
+"accountPage.otherDevices" = "Інші привʼязані пристрої";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Ім'я користувача";
-"account.sipServer" = "Сервер SIP";
+"account.sipServer" = "Server";
 "account.port" = "Порт";
 "account.proxyServer" = "Проксі";
 "account.createSipAccount" = "Налаштувати обліковий запис SIP";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "був запрошений приєднатися";
 "generatedMessage.invitationAccepted" = "приєднався до розмови";
 "generatedMessage.youJoined" = "Ти приєднався до розмови";
-"generatedMessage.contactBanned" = "був кинутий";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "було додано";
 "generatedMessage.outgoingCall" = "Вихідний виклик";
 "generatedMessage.missedOutgoingCall" = "Пропущений вихідний виклик";

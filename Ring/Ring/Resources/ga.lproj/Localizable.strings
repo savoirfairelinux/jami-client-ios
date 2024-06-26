@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "Cinntí cuntas";
-"global.advancedSettings" = "Cinntíocht Leathraithe";
 "global.username" = "Ainm úsáideora";
 "global.recommended" = "Moltar";
 "global.password" = "Pasfhocal";
-"global.registerAUsername" = "Ainm úsáideora a chlárú";
-"global.enterPassword" = "Cluiche Pasfhocal";
-"global.enterUsername" = "Ainm úsáideora a chur isteach";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Cealaigh";
-"global.blockContact" = "Contact bloc";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Crios cuntas";
 "global.incomingCall" = "Glacadh isteach";
 "global.ok" = "Ceart go leor";
@@ -46,11 +45,17 @@
 "global.reply" = "Freagra";
 "global.search" = "Ag lorg...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Teachtaireacht a eisiúint";
+"global.editing" = "Editing";
 "global.create" = "Cruthaigh";
+"global.edit" = "Edit";
+"global.remove" = "Cúlghairm";
+"global.call" = "Call";
+"global.video" = "Fhéile";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Cód QR olc";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Ceiliúradh";
 "swarm.admin" = "Rialtais";
 "swarm.banned" = "Ceadaítear";
-"swarm.unknown" = "Ní raibh a fhios acu";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Cuid a chur le Comhalta";
 "swarm.confirmLeaveSwarm" = "An bhfuil tú cinnte go bhfuil tú ag iarraidh a fhágáil an swarm?";
 "swarm.Leave" = "Téigh ar shiúl";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Téigh le Jami";
-"createAccount.chooseStrongPassword" = "Roghnaigh pasfhocal láidir a chuimhnigh tú chun do chuntas Jami a chosaint.";
-"createAccount.repeatPasswordPlaceholder" = "Pasfhocal a dhearbhú";
-"createAccount.passwordCharactersNumberError" = "6 carachtair ar a laghad";
-"createAccount.passwordNotMatchingError" = "Pasfhocail nach gcomhlíonann";
 "createAccount.lookingForUsernameAvailability" = "ag lorg ar fáil...";
 "createAccount.invalidUsername" = "ainm úsáideora neamhbhailí";
 "createAccount.usernameAlreadyTaken" = "ainm úsáideora a glacadh cheana féin";
 "createAccount.usernameValid" = "ainm úsáideora atá ar fáil";
 "createAccount.loading" = "Loading";
 "createAccount.waitCreateAccountTitle" = "Cunntas breise";
-"createAccount.ChooseAPassword" = "Cripteáil mo chuntas";
-"createAccount.PasswordInformation" = "Roghnaigh pasfhocal chun do chuntas áitiúil a chifráil. Ná déan dearmad air nó ní bheidh tú in ann do chuntas a aisghabháil";
-"createAccount.EnableNotifications" = "Feidhmeanna";
-"createAccount.Recommended" = "(A mholadh)";
 "createAccount.UsernameNotRegisteredTitle" = "Measáin";
 "createAccount.UsernameNotRegisteredMessage" = "Cruthaíodh cuntas ach níor chláraigh ainm úsáideora";
 "createAccount.timeoutTitle" = "Cunntas a chruthú";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Stop ag roinnt";
 
 //Calls
-"calls.callItemTitle" = "Glaoigh";
 "calls.incomingCallInfo" = "Tá sé ag iarraidh labhairt leat";
 "calls.ringing" = "Ag glaoch...";
 "calls.connecting" = "Ceangal...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Cuir in iúl fógraí";
 "accountPage.proxyDisabledAlertTitle" = "Seirbhísí Proxy A Díchíchíchumas";
 "accountPage.proxyDisabledAlertBody" = "Chun fógraí a fháil, déan iarracht proxy a chumasú";
-"accountPage.revokeDeviceTitle" = "Iarráid athchóirithe";
-"accountPage.revokeDeviceMessage" = "An bhfuil tú cinnte gur mhaith leat an gléas a tharraingt siar?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Athghairm";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "An t-údarú feiste críochnaithe";
-"accountPage.deviceRevocationProgress" = "A thabhairt ar ais...";
-"accountPage.deviceRevocationSuccess" = "An t-ordú a tharraingt siar";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Déan iarracht arís";
 "accountPage.deviceRevocationWrongPassword" = "Pasfhocal mícheart";
 "accountPage.deviceRevocationUnknownDevice" = "Seirbhísí";
 "accountPage.deviceRevocationError" = "Measúnú ar an gcluiche";
 "accountPage.linkDeviceTitle" = "Déan nasc le feiste eile";
 "accountPage.other" = "Cinntí";
-"accountPage.removeAccountMessage" = "Trí cliceáil ar \"Chilbh\" beidh tú a bhaint ar an cuntas seo ar an gléas seo! Ní féidir an gníomh seo a dhéanamh ar ais. Chomh maith leis sin, d'ainm cláraithe a chaillear.";
-"accountPage.removeAccountButton" = "Cúlghairm";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Déan teagmháil liom ar Jami!";
 "accountPage.contactMeOnJamiContant" = "Déan teagmháil liom ag baint úsáide as \"%s\" ar an ardán cumarsáide dáileadh Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Clár";
 "accountPage.usernameRegistrationFailed" = "Fág freagra ar 'An t-ainm atá ar an gcluiche'";
 "accountPage.createPassword" = "Cunntas criptithe";
-"accountPage.createPasswordExplanation" = "Tá do chuntas Jami cláraithe ach ar an gléas seo mar archiv a bhfuil do chléasanna ar do chuntas. Is féidir rochtain ar an gcuntas seo a chosaint le pasfhocal.";
 "accountPage.changePassword" = "Pasfhocal a athrú";
 "accountPage.oldPasswordPlaceholder" = "Cuir isteach an t-ardphasfhocal";
 "accountPage.newPasswordPlaceholder" = "Cluiche Pasfhocal nua";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Úsáid UPnP";
 "accountPage.security" = "Slándáil";
 "accountPage.enableSRTP" = "Criosadh srutháin meán (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Deiseanna eile a bhaineann le feistí";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Ainm úsáideora";
-"account.sipServer" = "Seirbhísí SIP";
+"account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Cláir";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "cuireadh a thabhairt isteach";
 "generatedMessage.invitationAccepted" = "chuaigh isteach sa comhrá";
 "generatedMessage.youJoined" = "Thosaigh tú ag caint";
-"generatedMessage.contactBanned" = "a bhí i gcúl";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "a chur le chéile";
 "generatedMessage.outgoingCall" = "Glacadh amach";
 "generatedMessage.missedOutgoingCall" = "Ag iarraidh glaoch a fháil";

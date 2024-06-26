@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "계정 설정";
-"global.advancedSettings" = "고급 설정";
 "global.username" = "사용자명";
 "global.recommended" = "추천";
 "global.password" = "암호";
-"global.registerAUsername" = "사용자 이름을 등록";
-"global.enterPassword" = "비밀번호 입력";
-"global.enterUsername" = "사용자 이름을 입력";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "취소";
-"global.blockContact" = "블록 연락처";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "계정을 삭제";
 "global.incomingCall" = "수신 전화";
 "global.ok" = "확인";
@@ -46,11 +45,17 @@
 "global.reply" = "답변";
 "global.search" = "찾아...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "메시지 편집";
+"global.editing" = "Editing";
 "global.create" = "생성하기";
+"global.edit" = "편집";
+"global.remove" = "제거";
+"global.call" = "Call";
+"global.video" = "비디오";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "나쁜 QR 코드";
@@ -77,7 +82,7 @@
 "swarm.invited" = "초대받았어";
 "swarm.admin" = "관리자";
 "swarm.banned" = "금지";
-"swarm.unknown" = "무인";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "회원 추가";
 "swarm.confirmLeaveSwarm" = "이 무리를 떠나고 싶다는 확신이 있나?";
 "swarm.Leave" = "떠나";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "자미에 합류해";
-"createAccount.chooseStrongPassword" = "자미 계정을 보호하기 위해 기억할 강력한 비밀번호를 선택하세요.";
-"createAccount.repeatPasswordPlaceholder" = "암호 확인";
-"createAccount.passwordCharactersNumberError" = "최소 6자";
-"createAccount.passwordNotMatchingError" = "비밀번호가 일치하지 않습니다";
 "createAccount.lookingForUsernameAvailability" = "가용성을 찾고 있습니다.";
 "createAccount.invalidUsername" = "유효하지 않은 사용자 이름";
 "createAccount.usernameAlreadyTaken" = "이미 사용 이름";
 "createAccount.usernameValid" = "사용자 이름 사용 가능";
 "createAccount.loading" = "로딩";
 "createAccount.waitCreateAccountTitle" = "추가 계좌";
-"createAccount.ChooseAPassword" = "내 계정을 암호화";
-"createAccount.PasswordInformation" = "로컬 계정을 암호화하기 위해 비밀번호를 선택하세요. 잊지 마세요. 그렇지 않으면 계정을 복구할 수 없습니다.";
-"createAccount.EnableNotifications" = "통지";
-"createAccount.Recommended" = "(상담)";
 "createAccount.UsernameNotRegisteredTitle" = "네트워크 오류";
 "createAccount.UsernameNotRegisteredMessage" = "계정 생성, 사용자 이름 등록되지 않았습니다";
 "createAccount.timeoutTitle" = "계정 생성";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "공유를 그만 두세요";
 
 //Calls
-"calls.callItemTitle" = "통화";
 "calls.incomingCallInfo" = "당신과 얘기하고 싶어";
 "calls.ringing" = "울리는 소리...";
 "calls.connecting" = "연결...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "통지 설정";
 "accountPage.proxyDisabledAlertTitle" = "프록시 서버 비활성화";
 "accountPage.proxyDisabledAlertBody" = "알림을 받기 위해 프록시를 활성화하십시오";
-"accountPage.revokeDeviceTitle" = "취소 장치";
-"accountPage.revokeDeviceMessage" = "이 장치를 취소하고 싶다고 확신하십니까?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "취소";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "장치 취소 완료";
-"accountPage.deviceRevocationProgress" = "취소...";
-"accountPage.deviceRevocationSuccess" = "기기는 취소되었습니다";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "다시 시도해봐";
 "accountPage.deviceRevocationWrongPassword" = "잘못된 비밀번호";
 "accountPage.deviceRevocationUnknownDevice" = "알려지지 않은 장치";
 "accountPage.deviceRevocationError" = "장치 취소 오류";
 "accountPage.linkDeviceTitle" = "다른 장치를 연결";
 "accountPage.other" = "다른";
-"accountPage.removeAccountMessage" = "\"Remove\"를 클릭하면 이 장치에서 이 계정을 삭제 할 수 있습니다! 이 동작은 취소 할 수 없습니다. 또한 등록된 이름도 손실 될 수 있습니다.";
-"accountPage.removeAccountButton" = "제거";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "자미에 연락해!";
 "accountPage.contactMeOnJamiContant" = "Jami 유통 통신 플랫폼에서 \"%s\"를 사용하여 연락하십시오: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "등록";
 "accountPage.usernameRegistrationFailed" = "등록이 실패했으니 비밀번호 확인해 주세요";
 "accountPage.createPassword" = "암호화된 계정";
-"accountPage.createPasswordExplanation" = "자미 계정은 이 장치에서만 계정 열쇠를 포함하는 아카이브로 등록되어 있습니다. 이 아카이브에 대한 접근은 비밀번호로 보호될 수 있습니다.";
 "accountPage.changePassword" = "비밀번호 변경";
 "accountPage.oldPasswordPlaceholder" = "오래된 비밀번호를 입력";
 "accountPage.newPasswordPlaceholder" = "새로운 비밀번호를 입력";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "UPnP를 사용";
 "accountPage.security" = "보안";
 "accountPage.enableSRTP" = "미디어 스트림을 암호화 (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "비밀번호로 계정을 암호화";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "등록 만료시간 (초)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "입력 TLS 데이터에 대한 보안 대화정 확인을 비활성화";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "다른 연결된 장치";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "사용자 이름";
-"account.sipServer" = "SIP 서버";
+"account.sipServer" = "Server";
 "account.port" = "포트";
 "account.proxyServer" = "프록시";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "참여하도록 초청되었습니다.";
 "generatedMessage.invitationAccepted" = "대화에 참여";
 "generatedMessage.youJoined" = "대화에 참여했지";
-"generatedMessage.contactBanned" = "발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "다시 추가되었습니다";
 "generatedMessage.outgoingCall" = "출력 전화";
 "generatedMessage.missedOutgoingCall" = "출력 전화가 빠진 것";

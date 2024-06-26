@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Kontode seaded";
-"global.advancedSettings" = "Täiendavad seadistused";
 "global.username" = "Kasutajanimi";
 "global.recommended" = "Soovitatav";
 "global.password" = "Salasõna";
-"global.registerAUsername" = "Registreeri kasutajanimi";
-"global.enterPassword" = "Sisesta salasõna";
-"global.enterUsername" = "Sisesta kasutajanimi";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Tühista";
-"global.blockContact" = "Blokeeri kontakt";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Eemalda kasutajakonto";
 "global.incomingCall" = "Sissetulev kõne";
-"global.ok" = "Sobib";
+"global.ok" = "OK";
 "global.close" = "Sulge";
 "global.share" = "Jaga";
 "global.forward" = "Edasta";
@@ -46,11 +45,17 @@
 "global.reply" = "Vasta";
 "global.search" = "Otsime...";
 "global.donate" = "Toeta meid";
-"global.deleteMessage" = "Kustuta sõnum";
-"global.deleteFile" = "Kustuta fail seadmest";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Muuda sõnumit";
-"global.editing" = "Muudame sõnumit";
+"global.editing" = "Editing";
 "global.create" = "Loo";
+"global.edit" = "Edit";
+"global.remove" = "Eemalda";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Vigane QR-kood";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Kutsutud";
 "swarm.admin" = "Peakasutaja";
 "swarm.banned" = "Ligipääs keelatud";
-"swarm.unknown" = "Teadmata olek";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Lisa liige";
 "swarm.confirmLeaveSwarm" = "Oled kindel, et tahad siit vestlusrühmast lahkuda?";
 "swarm.Leave" = "Jah, lahkun";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Liitu Jamiga";
-"createAccount.chooseStrongPassword" = "Vali tugev ja korralik salasõna, mida sa hästi mäletad, et kaitsta oma Jami kontot.";
-"createAccount.repeatPasswordPlaceholder" = "Korda salasõna";
-"createAccount.passwordCharactersNumberError" = "Vähemalt 6 tähemärki";
-"createAccount.passwordNotMatchingError" = "salasõnad ei klapi";
 "createAccount.lookingForUsernameAvailability" = "uurime kättesaadavust...";
 "createAccount.invalidUsername" = "vigane kasutajanimi";
 "createAccount.usernameAlreadyTaken" = "kasutajanimi on juba võetud";
 "createAccount.usernameValid" = "kasutajanimi on saadaval";
 "createAccount.loading" = "Laadime andmeid";
 "createAccount.waitCreateAccountTitle" = "Lisame kasutajakontot";
-"createAccount.ChooseAPassword" = "Krüpti minu kasutajakonto";
-"createAccount.PasswordInformation" = "Kohalikus seadmes asuva kasutajakonto krüptimiseks vali salasõna. Vältimaks ligipääsu kaotamist oma kasutajakontole palun ära unusta seda salasõna.";
-"createAccount.EnableNotifications" = "Teavitused";
-"createAccount.Recommended" = "(Soovitatav)";
 "createAccount.UsernameNotRegisteredTitle" = "Võrgu viga";
 "createAccount.UsernameNotRegisteredMessage" = "Kasutajakonto on nüüd loodud, kuid kasutajanimi jäi registreereerimata";
 "createAccount.timeoutTitle" = "Kasutajakonto on loodud";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Lõpeta jagamine";
 
 //Calls
-"calls.callItemTitle" = "Helista";
 "calls.incomingCallInfo" = "soovib sinuga rääkida";
 "calls.ringing" = "Heliseb...";
 "calls.connecting" = "Ühendame...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Võta teavitused kasutusele";
 "accountPage.proxyDisabledAlertTitle" = "Proksiserver pole kasutusel";
 "accountPage.proxyDisabledAlertBody" = "Teavituste saamiseks palun võta proksiserver kasutusele";
-"accountPage.revokeDeviceTitle" = "Eemalda seade";
-"accountPage.revokeDeviceMessage" = "Kas sa oled kindel, et soovid selle seadme eemaldada? Seda tegevust ei saa tagasi pöörata.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Eemalda";
 "accountPage.revokeDevicePlaceholder" = "Sisesta oma salasõna";
 "accountPage.deviceRevoked" = "Seadme eemaldamine on tehtud";
-"accountPage.deviceRevocationProgress" = "Eemaldame...";
-"accountPage.deviceRevocationSuccess" = "Seade on eemaldatud";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Proovi uuesti";
 "accountPage.deviceRevocationWrongPassword" = "Vigane salasõna";
 "accountPage.deviceRevocationUnknownDevice" = "Tundmatu seade";
 "accountPage.deviceRevocationError" = "Viga seadme eemaldamisel";
 "accountPage.linkDeviceTitle" = "Seo veel üks seade";
 "accountPage.other" = "Muud";
-"accountPage.removeAccountMessage" = "Kui klõpsite „Eemalda“, siis kustutate selle kasutajakonto selles seadmes! Seda tegevust ei saa tagasi pöörata. Lisaks võib juhtuda, et sinu registreeritud kasutajanimi läheb kaotsi.";
-"accountPage.removeAccountButton" = "Eemalda";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Kutsu sõpru";
 "accountPage.contactMeOnJamiTitle" = "Suhtle minuga Jami võrgus!";
 "accountPage.contactMeOnJamiContant" = "Kasutades „%s“ suhtle minuga hajutatud suhtlusvõrgus Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Registreeri";
 "accountPage.usernameRegistrationFailed" = "Registreerimine ei õnnestunud. Palun kontrolli, kas salasõna on õige.";
 "accountPage.createPassword" = "Krüpti minu kasutajakonto";
-"accountPage.createPasswordExplanation" = "Sinu Jami kasutajakonto on registreeritud vaid selles nutiseadmes ja olemuselt on tegemist arhiiviga, kus leiduvad sinu krüptovõtmed. Ligipääsu sellele arhiivile saad turvata salasõnaga.";
 "accountPage.changePassword" = "Muuda salasõna";
 "accountPage.oldPasswordPlaceholder" = "Sisesta vana salasõna";
 "accountPage.newPasswordPlaceholder" = "Sisesta uus salasõna";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Kasuta UPnP'd";
 "accountPage.security" = "Turvalisus";
 "accountPage.enableSRTP" = "Krüpti meediavood (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Kasutajanimi";
-"account.sipServer" = "SIP-server";
+"account.sipServer" = "Server";
 "account.port" = "SIP-serveri port";
 "account.proxyServer" = "Proksiserver";
 "account.createSipAccount" = "Seadista SIP-konto";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "sai ühinemiskutse";
 "generatedMessage.invitationAccepted" = "liitus vestlusega";
 "generatedMessage.youJoined" = "Sa liitusid vestlusega";
-"generatedMessage.contactBanned" = "müksati välja";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "lisati uuesti";
 "generatedMessage.outgoingCall" = "Väljuv kõne";
 "generatedMessage.missedOutgoingCall" = "Väljuv kõne jäi märkamata";

@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Cài đặt tài khoản";
-"global.advancedSettings" = "Thiết lập nâng cao";
 "global.username" = "Username";
 "global.recommended" = "Ưu tiên";
 "global.password" = "Mật khẩu";
 "global.registerAUsername" = "Đăng ký tên người dùng";
 "global.enterPassword" = "Nhập mật khẩu";
-"global.enterUsername" = "Nhập Username";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Hủy bỏ";
-"global.blockContact" = "Khóa liên lạc";
+"global.blockContact" = "Chặn liên hệ";
 "global.removeAccount" = "Xóa tài khoản";
 "global.incomingCall" = "Tiếp tục gọi";
-"global.ok" = "Ok";
+"global.ok" = "Được rồi";
 "global.close" = "Gần";
 "global.share" = "Chia sẻ";
 "global.forward" = "Tiếp tục";
@@ -46,11 +45,17 @@
 "global.reply" = "Trả lời";
 "global.search" = "Tìm kiếm...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "chỉnh sửa thông điệp";
+"global.editing" = "Editing";
 "global.create" = "Tạo";
+"global.edit" = "Đổi chỉnh";
+"global.remove" = "Tắt";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Mã QR xấu";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Được mời";
 "swarm.admin" = "Trình quản lý";
 "swarm.banned" = "Thiết bị cấm";
-"swarm.unknown" = "Không biết";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Thêm thành viên";
 "swarm.confirmLeaveSwarm" = "Em có chắc em muốn rời khỏi đám đông này không?";
 "swarm.Leave" = "Đi đi";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Tham gia Jami";
-"createAccount.chooseStrongPassword" = "Chọn mật khẩu mạnh mẽ mà bạn sẽ nhớ để bảo vệ tài khoản Jami của bạn.";
-"createAccount.repeatPasswordPlaceholder" = "Tiếp tục xác nhận mật khẩu";
-"createAccount.passwordCharactersNumberError" = "6 ký tự tối thiểu";
-"createAccount.passwordNotMatchingError" = "mật khẩu không phù hợp";
 "createAccount.lookingForUsernameAvailability" = "tìm kiếm khả năng sẵn sàng...";
 "createAccount.invalidUsername" = "Username không hợp lệ";
 "createAccount.usernameAlreadyTaken" = "Username đã được lấy";
 "createAccount.usernameValid" = "Username có sẵn";
 "createAccount.loading" = "Lái";
 "createAccount.waitCreateAccountTitle" = "Tài khoản bổ sung";
-"createAccount.ChooseAPassword" = "Mã hóa tài khoản của tôi";
-"createAccount.PasswordInformation" = "Chọn mật khẩu để mã hóa tài khoản địa phương của bạn. Đừng quên nó hoặc bạn sẽ không thể phục hồi tài khoản của mình";
-"createAccount.EnableNotifications" = "Thông báo";
-"createAccount.Recommended" = "(Phân đề nghị)";
 "createAccount.UsernameNotRegisteredTitle" = "Hầm mạng";
 "createAccount.UsernameNotRegisteredMessage" = "Tài khoản đã được tạo nhưng tên người dùng đã không được đăng ký";
 "createAccount.timeoutTitle" = "Tài khoản được tạo ra";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Ngừng chia sẻ";
 
 //Calls
-"calls.callItemTitle" = "Gọi";
 "calls.incomingCallInfo" = "muốn nói chuyện với anh";
 "calls.ringing" = "- Anh nghe thấy...";
 "calls.connecting" = "Kết nối...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Khả năng thông báo";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server bị vô hiệu hóa";
 "accountPage.proxyDisabledAlertBody" = "Để nhận thông báo, xin vui lòng bật proxy";
-"accountPage.revokeDeviceTitle" = "Thiết bị hủy bỏ";
-"accountPage.revokeDeviceMessage" = "Ông có chắc ông muốn hủy bỏ thiết bị này không?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Tháo lại";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Việc hủy bỏ thiết bị đã hoàn thành";
-"accountPage.deviceRevocationProgress" = "Tháo lại...";
-"accountPage.deviceRevocationSuccess" = "Thiết bị bị bị hủy bỏ";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Hãy thử lại.";
 "accountPage.deviceRevocationWrongPassword" = "Mật khẩu không đúng";
 "accountPage.deviceRevocationUnknownDevice" = "Thiết bị không rõ";
 "accountPage.deviceRevocationError" = "Trận lỗi hủy thiết bị";
 "accountPage.linkDeviceTitle" = "Kết nối một thiết bị khác";
 "accountPage.other" = "Các loại khác";
-"accountPage.removeAccountMessage" = "Bằng cách nhấp vào \"Tắt\" bạn sẽ xóa tài khoản này trên thiết bị này!";
-"accountPage.removeAccountButton" = "Tắt";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Liên hệ với tôi về Jami!";
 "accountPage.contactMeOnJamiContant" = "Liên hệ với tôi bằng cách sử dụng \"%s\" trên nền tảng truyền thông phân phối của Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Register";
 "accountPage.usernameRegistrationFailed" = "Đăng ký thất bại, xin vui lòng kiểm tra mật khẩu.";
 "accountPage.createPassword" = "Tài khoản mã hóa";
-"accountPage.createPasswordExplanation" = "Tài khoản Jami của bạn chỉ được đăng ký trên thiết bị này như một tệp chứa chìa khóa của tài khoản của bạn.";
 "accountPage.changePassword" = "Thay đổi mật khẩu";
 "accountPage.oldPasswordPlaceholder" = "Nhập mật khẩu cũ";
 "accountPage.newPasswordPlaceholder" = "Nhập mật khẩu mới";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Sử dụng UPnP";
 "accountPage.security" = "An ninh";
 "accountPage.enableSRTP" = "Các dòng truyền thông mã hóa (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Tương tự";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Mã hóa tài khoản với mật khẩu";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Thông báo";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Thời gian hết hạn đăng ký (thì giây)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Thiết lập kiểm tra đối thoại an toàn cho dữ liệu TLS nhập";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "Thiết bị này";
+"accountPage.otherDevices" = "Các thiết bị liên kết khác";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Tên người dùng";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "Server";
 "account.port" = "Cảng";
 "account.proxyServer" = "Tín hiệu";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "được mời tham gia";
 "generatedMessage.invitationAccepted" = "gia nhập cuộc trò chuyện";
 "generatedMessage.youJoined" = "Anh đã tham gia cuộc trò chuyện";
-"generatedMessage.contactBanned" = "bị đá";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "được thêm lại";
 "generatedMessage.outgoingCall" = "Tiếp tục gọi";
 "generatedMessage.missedOutgoingCall" = "Lỡ cuộc gọi ra ngoài";

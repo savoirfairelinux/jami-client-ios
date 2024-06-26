@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Nastavení účtu";
-"global.advancedSettings" = "Pokročilá nastavení";
 "global.username" = "Uživatelské jméno";
 "global.recommended" = "Doporučeno";
 "global.password" = "Heslo";
-"global.registerAUsername" = "Zaregistrovat uživatelské jméno";
-"global.enterPassword" = "Zadejte heslo";
-"global.enterUsername" = "Zadejte uživatelské jméno.";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Zrušit";
-"global.blockContact" = "Blokovat kontakt";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Odstranit účet";
 "global.incomingCall" = "Příchozí hovor";
-"global.ok" = "V pořádku";
+"global.ok" = "OK";
 "global.close" = "Zavřít";
 "global.share" = "Sdílet";
 "global.forward" = "Dopředu";
@@ -46,11 +45,17 @@
 "global.reply" = "Odpovědět";
 "global.search" = "Hledá se…";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Edit message";
+"global.editing" = "Editing";
 "global.create" = "Vytvořit";
+"global.edit" = "Edit";
+"global.remove" = "Remove";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Špatný kód QR";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Pozvaný";
 "swarm.admin" = "Správce";
 "swarm.banned" = "Zakázaný";
-"swarm.unknown" = "Neznámé";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Přidat člena";
 "swarm.confirmLeaveSwarm" = "Jste si jistí, že chcete opustit swarm?";
 "swarm.Leave" = "Opustit";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Připojit k Jami";
-"createAccount.chooseStrongPassword" = "K ochraně účtu Jami si zvolte silné heslo, které si dovedete zapamatovat.";
-"createAccount.repeatPasswordPlaceholder" = "Potvrdit heslo";
-"createAccount.passwordCharactersNumberError" = "Nejméně 6 znaků";
-"createAccount.passwordNotMatchingError" = "Hesla se neshodují";
 "createAccount.lookingForUsernameAvailability" = "Zjišťuje se dostupnost…";
 "createAccount.invalidUsername" = "Neplatné uživatelské jméno";
 "createAccount.usernameAlreadyTaken" = "Uživatelské jméno již zabráno";
 "createAccount.usernameValid" = "Uživatelské jméno není dostupné";
 "createAccount.loading" = "Nahrávání";
 "createAccount.waitCreateAccountTitle" = "Přidávám účet";
-"createAccount.ChooseAPassword" = "Šifrovat můj účet";
-"createAccount.PasswordInformation" = "Zvolte si heslo k zašifrování dat vašeho místního účtu. Nezapomeňte, že svůj účet nebudete moci obnovit.";
-"createAccount.EnableNotifications" = "Oznámení";
-"createAccount.Recommended" = "(doporučeno)";
 "createAccount.UsernameNotRegisteredTitle" = "Chyba sítě";
 "createAccount.UsernameNotRegisteredMessage" = "Účet byl vytvořen, ale uživatelské jméno nebylo registrováno.";
 "createAccount.timeoutTitle" = "Účet byl vytvořen.";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Přestat sdílet";
 
 //Calls
-"calls.callItemTitle" = "Volat";
 "calls.incomingCallInfo" = "chce s vámi mluvit";
 "calls.ringing" = "Vyzvání…";
 "calls.connecting" = "Spojuje se…";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Povolit oznámení";
 "accountPage.proxyDisabledAlertTitle" = "Server proxy zakázán";
 "accountPage.proxyDisabledAlertBody" = "Pro přijímání oznámení povolte, prosím, proxy";
-"accountPage.revokeDeviceTitle" = "Odebrat zařízení";
-"accountPage.revokeDeviceMessage" = "Opravdu chcete odebrat toto zařízení? Tento krok nelze vrátit zpět.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Odebrat";
 "accountPage.revokeDevicePlaceholder" = "Zadejte své heslo";
 "accountPage.deviceRevoked" = "Odebrání zařízení dokončeno";
-"accountPage.deviceRevocationProgress" = "Odebírá se...";
-"accountPage.deviceRevocationSuccess" = "Zařízení bylo odebráno!";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Zkusit znovu";
 "accountPage.deviceRevocationWrongPassword" = "Nesprávné heslo";
 "accountPage.deviceRevocationUnknownDevice" = "Neznámé zařízení";
 "accountPage.deviceRevocationError" = "Chyba při odebrání zařízení";
 "accountPage.linkDeviceTitle" = "Připojit další zařízení";
 "accountPage.other" = "Ostatní";
-"accountPage.removeAccountMessage" = "Kliknutím na „Odstranit“ odstraníte tento účet na tomto zařízení! Tento krok nelze vrátit zpět. Vámi zaregistrované jméno může být ztraceno!";
-"accountPage.removeAccountButton" = "Odstranit";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Spojte se se mnou přes Jami!";
 "accountPage.contactMeOnJamiContant" = "Spojte se se mnou pomocí „%s“ na rozptýleném komunikačním systému Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Zaregistrovat";
 "accountPage.usernameRegistrationFailed" = "Registrace selhala. Prosím zkontrolujte heslo.";
 "accountPage.createPassword" = "Šifrování účtu";
-"accountPage.createPasswordExplanation" = "Váš účet Jami je registrován pouze v tomto zařízení jako archiv obsahující klíče k vašemu účtu. Přístup k tomuto archivu může být chráněn heslem.";
 "accountPage.changePassword" = "Změnit heslo";
 "accountPage.oldPasswordPlaceholder" = "Zadejte staré heslo.";
 "accountPage.newPasswordPlaceholder" = "Zadejte nové heslo.";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Použít UPnP";
 "accountPage.security" = "Zabezpečení";
 "accountPage.enableSRTP" = "Šifrovat datový tok (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Uživatelské jméno";
-"account.sipServer" = "Server SIP";
+"account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "čeká se na spojení";
 "generatedMessage.invitationAccepted" = "Připojeno ke konverzaci";
 "generatedMessage.youJoined" = "Připojil jste se ke konverzaci";
-"generatedMessage.contactBanned" = "byl vyhozen";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "byl znovu přidán";
 "generatedMessage.outgoingCall" = "Odchozí hovor";
 "generatedMessage.missedOutgoingCall" = "Nepřijatý odchozí hovor";

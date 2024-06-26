@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "Mipangilio ya Akaunti";
-"global.advancedSettings" = "Mipangilio ya Juu";
 "global.username" = "Jina la mtumiaji";
 "global.recommended" = "Iliyopendekezwa";
 "global.password" = "Nambari";
-"global.registerAUsername" = "Sajili jina la mtumiaji";
-"global.enterPassword" = "Ingiza nywila";
-"global.enterUsername" = "Ingiza Jina la Mtumiaji";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Kughairi";
-"global.blockContact" = "Kuzuia Mawasiliano";
+"global.blockContact" = "Kuzuia mawasiliano";
 "global.removeAccount" = "Ondoa akaunti";
 "global.incomingCall" = "Kuwasiliana";
 "global.ok" = "Sawa";
@@ -46,11 +45,17 @@
 "global.reply" = "Jibu";
 "global.search" = "Kutafuta...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Hariri ujumbe";
+"global.editing" = "Editing";
 "global.create" = "Kujenga";
+"global.edit" = "Hariri";
+"global.remove" = "Ondoa";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Nambari mbaya ya QR";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Mwaliko";
 "swarm.admin" = "Msimamizi";
 "swarm.banned" = "Kuzuia";
-"swarm.unknown" = "Bila kujua";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Ongeza Mwanachama";
 "swarm.confirmLeaveSwarm" = "Je, una uhakika unataka kuondoka kundi hili?";
 "swarm.Leave" = "Ondoka";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Jiunge Jami";
-"createAccount.chooseStrongPassword" = "Chagua password yenye nguvu ambayo utakumbuka ili kulinda akaunti yako ya Jami.";
-"createAccount.repeatPasswordPlaceholder" = "Tathmini password";
-"createAccount.passwordCharactersNumberError" = "Kiwango cha chini cha herufi 6";
-"createAccount.passwordNotMatchingError" = "nywila hazifanani";
 "createAccount.lookingForUsernameAvailability" = "kutafuta upatikanaji...";
 "createAccount.invalidUsername" = "jina lisilofaa";
 "createAccount.usernameAlreadyTaken" = "jina la mtumiaji tayari imechukuliwa";
 "createAccount.usernameValid" = "jina la mtumiaji linapatikana";
 "createAccount.loading" = "Kubeba";
 "createAccount.waitCreateAccountTitle" = "Kuongeza akaunti";
-"createAccount.ChooseAPassword" = "Encrypt akaunti yangu";
-"createAccount.PasswordInformation" = "Chagua password ya kufungia akaunti yako ya ndani. Usisahau au huwezi kupata akaunti yako";
-"createAccount.EnableNotifications" = "Maarifa";
-"createAccount.Recommended" = "(Ilipendekezwa)";
 "createAccount.UsernameNotRegisteredTitle" = "Kosa la mtandao";
 "createAccount.UsernameNotRegisteredMessage" = "Akaunti iliundwa lakini jina la mtumiaji halikuandikishwa";
 "createAccount.timeoutTitle" = "Akaunti Iliyotengenezwa";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Acha kushiriki";
 
 //Calls
-"calls.callItemTitle" = "Piga simu";
 "calls.incomingCallInfo" = "anataka kuzungumza na wewe";
 "calls.ringing" = "Kupiga simu...";
 "calls.connecting" = "Kuunganisha...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Kuwezesha Matangazo";
 "accountPage.proxyDisabledAlertTitle" = "Seva ya Proxy Imelemazwa";
 "accountPage.proxyDisabledAlertBody" = "Ili kupokea taarifa, tafadhali kuwezesha proxy";
-"accountPage.revokeDeviceTitle" = "Kifaa cha kuondoa";
-"accountPage.revokeDeviceMessage" = "Je, una uhakika unataka kufuta kifaa hiki?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Kuondolewa";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Kukomesha kutengwa kwa kifaa";
-"accountPage.deviceRevocationProgress" = "Kukataza...";
-"accountPage.deviceRevocationSuccess" = "Kifaa ilifutwa";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Jaribu tena";
 "accountPage.deviceRevocationWrongPassword" = "Nambari isiyo sahihi";
 "accountPage.deviceRevocationUnknownDevice" = "Kifaa kisichojulikana";
 "accountPage.deviceRevocationError" = "Kosa la kurudia kifaa";
 "accountPage.linkDeviceTitle" = "Unganisha kifaa kingine";
 "accountPage.other" = "Vinginevyo";
-"accountPage.removeAccountMessage" = "Kwa kubonyeza \"Ondoa\" utaondoa akaunti hii kwenye kifaa hiki! hatua hii haiwezi kufanyika. Pia, jina lako kusajiliwa inaweza kupotea.";
-"accountPage.removeAccountButton" = "Ondoa";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Wasiliana nami juu ya Jami!";
 "accountPage.contactMeOnJamiContant" = "Wasiliana nami kwa kutumia \"%s\" kwenye jukwaa la mawasiliano la Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Kujiandikisha";
 "accountPage.usernameRegistrationFailed" = "Usajili umeshindwa Tafadhali angalia password.";
 "accountPage.createPassword" = "Akaunti ya encrypted";
-"accountPage.createPasswordExplanation" = "Akaunti yako ya Jami imeandikishwa tu kwenye kifaa hiki kama kumbukumbu inayojumuisha funguo za akaunti yako.";
 "accountPage.changePassword" = "Badilisha password";
 "accountPage.oldPasswordPlaceholder" = "Ingiza nenosiri la zamani";
 "accountPage.newPasswordPlaceholder" = "Ingiza nywila mpya";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Tumia UPnP";
 "accountPage.security" = "Usalama";
 "accountPage.enableSRTP" = "Encrypt media mito (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profaili";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Kuficha akaunti na password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Maarifa";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Muda wa kumalizika kwa usajili (sekunde)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable salama dialog kuangalia kwa ajili ya TLS data zinazoingia";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "Kifaa hiki";
+"accountPage.otherDevices" = "Vifaa vingine vilivyounganishwa";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Jina la mtumiaji";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "Server";
 "account.port" = "Bandari";
 "account.proxyServer" = "Wakala wa kuwakilisha";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "alialikwa kujiunga";
 "generatedMessage.invitationAccepted" = "alijiunga na mazungumzo";
 "generatedMessage.youJoined" = "Wewe kujiunga na mazungumzo";
-"generatedMessage.contactBanned" = "alipewa kick";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "aliongezwa tena";
 "generatedMessage.outgoingCall" = "Kuondoka simu";
 "generatedMessage.missedOutgoingCall" = "Kupoteza wito wa nje";
