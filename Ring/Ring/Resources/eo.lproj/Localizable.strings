@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Konto-sekcioj";
-"global.advancedSettings" = "Antaŭaj agordoj";
 "global.username" = "Uzantnomo";
 "global.recommended" = "Recomandita";
 "global.password" = "Pasvorto";
-"global.registerAUsername" = "Registru uzantnomon";
-"global.enterPassword" = "Entajpu Pasvorton";
-"global.enterUsername" = "Enigu uzantnomon";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Nuligi";
-"global.blockContact" = "Kontakto-bloko";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Forigu la konton";
 "global.incomingCall" = "Eniranta voko";
-"global.ok" = "Bone";
+"global.ok" = "OK";
 "global.close" = "Proksima";
 "global.share" = "Kunhavi";
 "global.forward" = "Antaŭen";
@@ -46,11 +45,17 @@
 "global.reply" = "Respondo";
 "global.search" = "Serĉante...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Redakti mesaĝon";
+"global.editing" = "Editing";
 "global.create" = "Krei";
+"global.edit" = "Edit";
+"global.remove" = "Remove";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Malbona QR-kodo";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Invitita";
 "swarm.admin" = "Administro";
 "swarm.banned" = "Malpermesita";
-"swarm.unknown" = "Nekonata";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Aldoni Membron";
 "swarm.confirmLeaveSwarm" = "Ĉu vi certas, ke vi volas forlasi tiun sorbon?";
 "swarm.Leave" = "Foriru";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Aliĝu al Jami";
-"createAccount.chooseStrongPassword" = "Elektu fortan pasvorton, kiun vi memorigos por protekti vian konto Jami.";
-"createAccount.repeatPasswordPlaceholder" = "Konfirmu pasvorton";
-"createAccount.passwordCharactersNumberError" = "6 signoj minimume";
-"createAccount.passwordNotMatchingError" = "pasvortoj ne kongruas";
 "createAccount.lookingForUsernameAvailability" = "serĉante haveblecon...";
 "createAccount.invalidUsername" = "nevalida uzantnomo";
 "createAccount.usernameAlreadyTaken" = "uzantnomo jam prenita";
 "createAccount.usernameValid" = "uzantnomo estas havebla";
 "createAccount.loading" = "Ŝarĝas";
 "createAccount.waitCreateAccountTitle" = "Aldonanta konton";
-"createAccount.ChooseAPassword" = "Enkodu mian konton";
-"createAccount.PasswordInformation" = "Elektu pasvorton por ĉifradi vian lokan konton. Ne forgesu ĝin aŭ vi ne povos reakiri vian konton";
-"createAccount.EnableNotifications" = "Notifikaĵoj";
-"createAccount.Recommended" = "(Recommendita)";
 "createAccount.UsernameNotRegisteredTitle" = "Reta eraro";
 "createAccount.UsernameNotRegisteredMessage" = "Konto estis kreita sed uzantnomo ne estis registrita";
 "createAccount.timeoutTitle" = "Konto kreita";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Ĉesu dividi";
 
 //Calls
-"calls.callItemTitle" = "Voko";
 "calls.incomingCallInfo" = "Li volas paroli kun vi.";
 "calls.ringing" = "Sonoras...";
 "calls.connecting" = "Konekti...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Ŝalti Sciigojn";
 "accountPage.proxyDisabledAlertTitle" = "Proxy-servilo malfunkciigita";
 "accountPage.proxyDisabledAlertBody" = "Por ricevi mesaĝojn, bonvolu aktivigi proxy";
-"accountPage.revokeDeviceTitle" = "Revoga aparato";
-"accountPage.revokeDeviceMessage" = "Ĉu vi certas, ke vi volas revoki tiun aparaton?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Revoĝo";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "La aparato estas nuligita";
-"accountPage.deviceRevocationProgress" = "Revokas...";
-"accountPage.deviceRevocationSuccess" = "La aparato estis revokita";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Provu denove.";
 "accountPage.deviceRevocationWrongPassword" = "Malĝusta pasvorto";
 "accountPage.deviceRevocationUnknownDevice" = "Nekonata aparato";
 "accountPage.deviceRevocationError" = "Eraro pri revokado de la aparato";
 "accountPage.linkDeviceTitle" = "Ligu alian aparaton";
 "accountPage.other" = "Alia";
-"accountPage.removeAccountMessage" = "Alklaku \"Forigu\" kaj vi forigos tiun konton de tiu aparato!";
-"accountPage.removeAccountButton" = "Forigi";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Kontaktu min pri Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontaktu min uzante \"%s\" sur la distribuita komunikada platformo de Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Registri";
 "accountPage.usernameRegistrationFailed" = "Registro malsukcesis. Bonvolu kontroli la pasvorton.";
 "accountPage.createPassword" = "Enkripti konto";
-"accountPage.createPasswordExplanation" = "Via konto Jami estas registrita nur sur ĉi tiu aparato kiel arkivo enhavanta la ŝlosilojn de via konto. Aliro al tiu arkivo povas esti protektita per pasvorto.";
 "accountPage.changePassword" = "Ŝanĝu pasvorton";
 "accountPage.oldPasswordPlaceholder" = "Enigu malnovan pasvorton";
 "accountPage.newPasswordPlaceholder" = "Enigu novan pasvorton";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Uzu UPnP";
 "accountPage.security" = "Sekuro";
 "accountPage.enableSRTP" = "Ĉifri aŭdvidfuojn (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Uzanto";
-"account.sipServer" = "SIP Servilo";
+"account.sipServer" = "Server";
 "account.port" = "Pordo";
 "account.proxyServer" = "Prokura Servilo";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "estis invitita al ligi";
 "generatedMessage.invitationAccepted" = "aliĝis al la konversacio";
 "generatedMessage.youJoined" = "Vi aliĝis al la konversacio.";
-"generatedMessage.contactBanned" = "estis piedbatita";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "estis aldonita";
 "generatedMessage.outgoingCall" = "Eliranta voko";
 "generatedMessage.missedOutgoingCall" = "Maltrafis forirantan telefonon";

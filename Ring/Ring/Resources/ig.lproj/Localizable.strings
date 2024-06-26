@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "Ntọala akaụntụ";
-"global.advancedSettings" = "Ntọala Dị Elu";
 "global.username" = "Aha njirimara";
 "global.recommended" = "A Na-atụ aro ya";
 "global.password" = "Paswọdu";
-"global.registerAUsername" = "Debanye aha njirimara";
-"global.enterPassword" = "Tinye paswọọdụ";
-"global.enterUsername" = "Tinye Aha njirimara";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Kagbụo";
-"global.blockContact" = "Kpọtụrụ ndị mmadụ";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Wepu akaụntụ";
 "global.incomingCall" = "N'ọhịa";
 "global.ok" = "Dị-mma";
@@ -46,11 +45,17 @@
 "global.reply" = "Zaa";
 "global.search" = "Ị na-achọ...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Dezie ozi";
+"global.editing" = "Editing";
 "global.create" = "Mepụta";
+"global.edit" = "Edit";
+"global.remove" = "Wepụ";
+"global.call" = "Call";
+"global.video" = "Vidio";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Usoro QR na-adịghị mma";
@@ -77,7 +82,7 @@
 "swarm.invited" = "A Kpọọrọ Ha";
 "swarm.admin" = "Onye nchịkwa";
 "swarm.banned" = "A machibidoro ya iwu";
-"swarm.unknown" = "Ndị a na- amaghị";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Tinye Onye so";
 "swarm.confirmLeaveSwarm" = "Ì ji n'aka na ị chọrọ ịhapụ ìgwè a?";
 "swarm.Leave" = "Hapụ ya";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Soro Jami";
-"createAccount.chooseStrongPassword" = "Họrọ paswọọdụ siri ike ị ga-echeta iji chebe akaụntụ Jami gị.";
-"createAccount.repeatPasswordPlaceholder" = "Nyochaa paswọọdụ";
-"createAccount.passwordCharactersNumberError" = "Ihe dịkarịa ala mkpụrụedemede 6";
-"createAccount.passwordNotMatchingError" = "paswọọdụ adịghị ekwekọ";
 "createAccount.lookingForUsernameAvailability" = "na-achọ nnweta...";
 "createAccount.invalidUsername" = "Aha njirimara na-adịghị mma";
 "createAccount.usernameAlreadyTaken" = "aha njirimara e weghaara";
 "createAccount.usernameValid" = "aha njirimara dị";
 "createAccount.loading" = "Ibu Ibu";
 "createAccount.waitCreateAccountTitle" = "Ihe ndekọ";
-"createAccount.ChooseAPassword" = "Encrypt m akaụntụ";
-"createAccount.PasswordInformation" = "Họrọ paswọọdụ iji zoo akaụntụ gị. Echefula ya ma ọ bụ ị gaghị enwe ike iweghachite akaụntụ gị";
-"createAccount.EnableNotifications" = "Nkwupụta";
-"createAccount.Recommended" = "(A na-atụ aro ya)";
 "createAccount.UsernameNotRegisteredTitle" = "Njehie netwọk";
 "createAccount.UsernameNotRegisteredMessage" = "E mepụtara akaụntụ ma aha njirimara edeghị aha";
 "createAccount.timeoutTitle" = "E Mepụtara Akaụntụ";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Kwụsị ịkekọrịta";
 
 //Calls
-"calls.callItemTitle" = "Kpọọ";
 "calls.incomingCallInfo" = "Ọ chọrọ ịgwa gị okwu";
 "calls.ringing" = "Ọ na-akpọ.";
 "calls.connecting" = "Ịkpọtụrụ...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Gbaa mbọ hụ na e nwere ihe ndị a na-eme.";
 "accountPage.proxyDisabledAlertTitle" = "Onye ọrụ nnọchi anya akwadoghị";
 "accountPage.proxyDisabledAlertBody" = "Iji nweta ọkwa, biko mee proxy";
-"accountPage.revokeDeviceTitle" = "Ngwaọrụ iwepụ";
-"accountPage.revokeDeviceMessage" = "Ị̀ ma na ị chọrọ ka e wepụ ihe a?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Ịtụgharị";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "E mechaa iwepụ ngwaọrụ";
-"accountPage.deviceRevocationProgress" = "Ịkpọghachite...";
-"accountPage.deviceRevocationSuccess" = "E kagbuola ngwaọrụ ahụ";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Gbalịa ọzọ.";
 "accountPage.deviceRevocationWrongPassword" = "Paswọọdụ ezighi ezi";
 "accountPage.deviceRevocationUnknownDevice" = "Ngwaọrụ a na-amaghị ama";
 "accountPage.deviceRevocationError" = "Njehie nke iwepụ ngwaọrụ";
 "accountPage.linkDeviceTitle" = "Jikọọ ngwaọrụ ọzọ";
 "accountPage.other" = "Ndị ọzọ";
-"accountPage.removeAccountMessage" = "Site na ịpị \"Iwepu\" ị ga-ewepụ akaụntụ a na ngwaọrụ a!";
-"accountPage.removeAccountButton" = "Wepụ";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Kpọtụrụ m na Jami!";
 "accountPage.contactMeOnJamiContant" = "Kpọtụrụ m site na iji \"%s\" na usoro nkwukọrịta nke Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Debanye aha";
 "accountPage.usernameRegistrationFailed" = "Ndebanye aha ahụ adaala, biko chọpụta paswọọdụ.";
 "accountPage.createPassword" = "Akụkọ e debere";
-"accountPage.createPasswordExplanation" = "Akaụntụ Jami gị edebanye aha naanị na ngwaọrụ a dị ka ihe nchekwa nke nwere igodo nke akaụntụ gị. Enwere ike iji paswọọdụ chebe ohere na ihe nchekwa a.";
 "accountPage.changePassword" = "Gbanwee paswọọdụ";
 "accountPage.oldPasswordPlaceholder" = "Tinye paswọọdụ ochie";
 "accountPage.newPasswordPlaceholder" = "Tinye paswọọdụ ọhụrụ";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Jiri UPnP";
 "accountPage.security" = "Nchebe";
 "accountPage.enableSRTP" = "Encrypt media iyi (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Oge ngwụcha ndebanye aha (sekọnd)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Gbanyụọ nchọpụta nkata nchekwa maka data TLS na-abata";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Ngwaọrụ ndị ọzọ jikọtara";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Aha onye ọrụ";
-"account.sipServer" = "Ihe Nlekọta SIP";
+"account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Onye nnọchianya";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "a kpọrọ ya ka o soro";
 "generatedMessage.invitationAccepted" = "sonyeere mkparịta ụka ahụ";
 "generatedMessage.youJoined" = "Ị sonyeere mkparịta ụka ahụ";
-"generatedMessage.contactBanned" = "a kụrụ ya";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "e gbakwunyere ya ọzọ";
 "generatedMessage.outgoingCall" = "N'imepụta oku";
 "generatedMessage.missedOutgoingCall" = "Ọ dịghị onye na-akpọ gị";

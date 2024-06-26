@@ -20,13 +20,12 @@
 
 // Global
 "global.accountSettings" = "ఖాతా సెట్టింగులు";
-"global.advancedSettings" = "అధునాతన సెట్టింగులు";
 "global.username" = "వాడుకరి పేరు";
 "global.recommended" = "సిఫార్సు";
 "global.password" = "పాస్వర్డ్";
-"global.registerAUsername" = "ఒక వినియోగదారు పేరును నమోదు చేయండి";
-"global.enterPassword" = "పాస్వర్డ్ను నమోదు చేయండి";
-"global.enterUsername" = "వాడుకరి పేరును నమోదు చేయండి";
+"global.registerAUsername" = "వినియోగదారు పేరును నమోదు చేయండి";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "రద్దు చేయి";
 "global.blockContact" = "బ్లాక్ కాంటాక్ట్";
 "global.removeAccount" = "ఖాతాను తొలగించు";
@@ -46,11 +45,17 @@
 "global.reply" = "జవాబు";
 "global.search" = "శోధన.";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "సందేశాన్ని సవరించు";
+"global.editing" = "Editing";
 "global.create" = "సృష్టించు";
+"global.edit" = "సవరించు";
+"global.remove" = "తొలగించు";
+"global.call" = "Call";
+"global.video" = "వీడియో";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "చెడ్డ QR కోడ్";
@@ -77,7 +82,7 @@
 "swarm.invited" = "ఆహ్వానించబడినవారు";
 "swarm.admin" = "నిర్వాహకుడు";
 "swarm.banned" = "నిషేధించబడింది";
-"swarm.unknown" = "తెలియని";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "సభ్యుడిని జోడించండి";
 "swarm.confirmLeaveSwarm" = "మీరు ఈ సమూహం వదిలి అనుకుంటున్నారా ఖచ్చితంగా?";
 "swarm.Leave" = "బయలుదేరండి";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "జామితో చేరండి";
-"createAccount.chooseStrongPassword" = "మీ జమీ ఖాతాను రక్షించడానికి మీరు గుర్తుంచుకోగల బలమైన పాస్వర్డ్ను ఎంచుకోండి.";
-"createAccount.repeatPasswordPlaceholder" = "పాస్వర్డ్ను నిర్ధారించు";
-"createAccount.passwordCharactersNumberError" = "6 అక్షరాలు";
-"createAccount.passwordNotMatchingError" = "పాస్వర్డ్లు సరిపోలవు";
 "createAccount.lookingForUsernameAvailability" = "లభ్యత కోసం చూస్తున్న.";
 "createAccount.invalidUsername" = "చెల్లని వాడుకరి పేరు";
 "createAccount.usernameAlreadyTaken" = "ఇప్పటికే తీసుకున్న వాడుకరి పేరు";
 "createAccount.usernameValid" = "వాడుకరి పేరు అందుబాటులో ఉంది";
 "createAccount.loading" = "లోడింగ్";
 "createAccount.waitCreateAccountTitle" = "ఖాతా జోడించడం";
-"createAccount.ChooseAPassword" = "నా ఖాతాను గుప్తీకరించండి";
-"createAccount.PasswordInformation" = "మీ స్థానిక ఖాతాను గుప్తీకరించడానికి పాస్వర్డ్ను ఎంచుకోండి. దాన్ని మర్చిపోవద్దు లేదా మీ ఖాతాను తిరిగి పొందలేరు";
-"createAccount.EnableNotifications" = "నోటిఫికేషన్లు";
-"createAccount.Recommended" = "(సిఫార్సు చేయబడింది)";
 "createAccount.UsernameNotRegisteredTitle" = "నెట్వర్క్ లోపం";
 "createAccount.UsernameNotRegisteredMessage" = "ఖాతా సృష్టించబడింది కాని వినియోగదారు పేరు నమోదు చేయబడలేదు";
 "createAccount.timeoutTitle" = "ఖాతా సృష్టించడం";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "భాగస్వామ్యం చేయడాన్ని ఆపండి";
 
 //Calls
-"calls.callItemTitle" = "కాల్";
 "calls.incomingCallInfo" = "మీతో మాట్లాడాలనుకుంటుంది";
 "calls.ringing" = "రింగ్.";
 "calls.connecting" = "కనెక్ట్.";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "నోటిఫికేషన్లను ప్రారంభించండి";
 "accountPage.proxyDisabledAlertTitle" = "ప్రాక్సీ సర్వర్ డిసేబుల్";
 "accountPage.proxyDisabledAlertBody" = "నోటిఫికేషన్లను స్వీకరించడానికి, దయచేసి ప్రాక్సీని ప్రారంభించండి";
-"accountPage.revokeDeviceTitle" = "ఉపకరణాన్ని రద్దు చేయడం";
-"accountPage.revokeDeviceMessage" = "మీరు ఈ పరికరాన్ని రద్దు చేయాలనుకుంటున్నారా అని మీకు ఖచ్చితంగా తెలుసా?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "రద్దు";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "పరికరం రద్దు పూర్తయింది";
-"accountPage.deviceRevocationProgress" = "- రద్దుచేయడం.";
-"accountPage.deviceRevocationSuccess" = "పరికరం రద్దు చేయబడింది";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "మళ్ళీ ప్రయత్నించండి";
 "accountPage.deviceRevocationWrongPassword" = "తప్పు పాస్వర్డ్";
 "accountPage.deviceRevocationUnknownDevice" = "తెలియని పరికరం";
 "accountPage.deviceRevocationError" = "పరికర రద్దు లోపం";
 "accountPage.linkDeviceTitle" = "మరొక పరికరమును లింక్ చేయండి";
 "accountPage.other" = "ఇతర";
-"accountPage.removeAccountMessage" = "\"Remove\" క్లిక్ చేయడం ద్వారా మీరు ఈ పరికరంలో ఈ ఖాతాను తొలగిస్తారు! ఈ చర్యను తిరస్కరించలేరు. అలాగే, మీ రిజిస్టర్డ్ పేరు కోల్పోవచ్చు.";
-"accountPage.removeAccountButton" = "తొలగించు";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Jami వద్ద నాకు సంప్రదించండి!";
 "accountPage.contactMeOnJamiContant" = "జామి పంపిణీ కమ్యూనికేషన్ ప్లాట్ఫామ్లో \"%s\" ను ఉపయోగించి నన్ను సంప్రదించండిః https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "నమోదు";
 "accountPage.usernameRegistrationFailed" = "నమోదు విఫలమైంది. దయచేసి పాస్వర్డ్ను తనిఖీ చేయండి.";
 "accountPage.createPassword" = "ఎన్క్రిప్ట్ ఖాతా";
-"accountPage.createPasswordExplanation" = "మీ జమీ ఖాతా ఈ పరికరంలో మాత్రమే మీ ఖాతా కీలను కలిగి ఉన్న ఆర్కైవ్గా నమోదు చేయబడుతుంది. ఈ ఆర్కైవ్కు ప్రాప్యత పాస్వర్డ్ ద్వారా రక్షించబడుతుంది.";
 "accountPage.changePassword" = "పాస్వర్డ్ మార్చు";
 "accountPage.oldPasswordPlaceholder" = "పాత పాస్వర్డ్ను నమోదు చేయండి";
 "accountPage.newPasswordPlaceholder" = "కొత్త పాస్వర్డ్ను నమోదు చేయండి";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "UPnP ను ఉపయోగించండి";
 "accountPage.security" = "భద్రత";
 "accountPage.enableSRTP" = "మీడియా స్ట్రీమ్లను (SRTP) గుప్తీకరించండి";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "ప్రొఫైల్";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "పాస్వర్డ్తో ఖాతాను గుప్తీకరించండి";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "నోటిఫికేషన్లు";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "నమోదు గడువు (సెకన్లు)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "ఇన్కమింగ్ TLS డేటా కోసం సురక్షిత డైలాగ్ తనిఖీని నిలిపివేయండి";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "ఈ పరికరం";
+"accountPage.otherDevices" = "ఇతర అనుసంధాన పరికరాలు";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "వాడుకరి పేరు";
-"account.sipServer" = "SIP సర్వర్";
+"account.sipServer" = "Server";
 "account.port" = "పోర్ట్";
 "account.proxyServer" = "ప్రాక్సీ";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "చేరడానికి ఆహ్వానించారు";
 "generatedMessage.invitationAccepted" = "సంభాషణలో చేరారు";
 "generatedMessage.youJoined" = "మీరు సంభాషణ చేరారు";
-"generatedMessage.contactBanned" = "కొట్టారు";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "తిరిగి జోడించబడింది";
 "generatedMessage.outgoingCall" = "బయటి కాల్";
 "generatedMessage.missedOutgoingCall" = "మిస్ అవుట్గోయింగ్ కాల్";

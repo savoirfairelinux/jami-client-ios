@@ -20,12 +20,11 @@
 
 // Global
 "global.accountSettings" = "Reglările contului";
-"global.advancedSettings" = "Reglări avansate";
 "global.username" = "Nume de utilizator";
 "global.recommended" = "Recomandat";
 "global.password" = "Parola";
-"global.registerAUsername" = "Înscrie un nume de utilizator";
-"global.enterPassword" = "Introdu parola";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
 "global.enterUsername" = "Introdu numele de utilizator";
 "global.cancel" = "Renunță";
 "global.blockContact" = "Blochează contactul";
@@ -46,11 +45,17 @@
 "global.reply" = "Răspunde";
 "global.search" = "Se caută...";
 "global.donate" = "Donează";
-"global.deleteMessage" = "Șterge mesajul";
-"global.deleteFile" = "Șterge fișierul din aparat";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Modifică mesajul";
-"global.editing" = "Modificare";
+"global.editing" = "Editing";
 "global.create" = "Creează";
+"global.edit" = "Modifică";
+"global.remove" = "Șterge";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Ora";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Invitat";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Blocat";
-"swarm.unknown" = "Necunoscut";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Adaugă un membru";
 "swarm.confirmLeaveSwarm" = "Sigur vrei să părăsești acest grup?";
 "swarm.Leave" = "Părăsește";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Folosește Jami";
-"createAccount.chooseStrongPassword" = "Alege o parolă complexă pe care să ți-o amintești, ca să protejezi contul tău Jami.";
-"createAccount.repeatPasswordPlaceholder" = "Confirmă parola";
-"createAccount.passwordCharactersNumberError" = "minimum 6 caractere";
-"createAccount.passwordNotMatchingError" = "parolele nu se potrivesc";
 "createAccount.lookingForUsernameAvailability" = "caut disponibilitatea...";
 "createAccount.invalidUsername" = "nume greșit";
 "createAccount.usernameAlreadyTaken" = "nume ales deja";
 "createAccount.usernameValid" = "nume disponibil";
 "createAccount.loading" = "Se încarcă";
 "createAccount.waitCreateAccountTitle" = "Se adaugă contul";
-"createAccount.ChooseAPassword" = "Cifrează contul meu";
-"createAccount.PasswordInformation" = "Alege o parolă pentru cifrarea contului tău local. Dacă o vei uita, nu vei mai avea acces la contul tău.";
-"createAccount.EnableNotifications" = "Notificări";
-"createAccount.Recommended" = "(Recomandat)";
 "createAccount.UsernameNotRegisteredTitle" = "Eroare de rețea";
 "createAccount.UsernameNotRegisteredMessage" = "Contul a fost creat, dar numele de utilizator nu a fost înscris";
 "createAccount.timeoutTitle" = "Cont creat";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Oprește distribuirea";
 
 //Calls
-"calls.callItemTitle" = "Apelează";
 "calls.incomingCallInfo" = "vrea să vorbească cu tine";
 "calls.ringing" = "Sună...";
 "calls.connecting" = "Se conectează...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Activează notificările";
 "accountPage.proxyDisabledAlertTitle" = "Serverul Proxy e dezactivat";
 "accountPage.proxyDisabledAlertBody" = "Activează serverul Proxy, ca să primești notificările";
-"accountPage.revokeDeviceTitle" = "Elimină aparatul";
-"accountPage.revokeDeviceMessage" = "Sigur vrei să elimini acest aparat? Această acțiune este ireversibilă!";
+"accountPage.removeDeviceTitle" = "Elimină aparatul";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Elimină";
 "accountPage.revokeDevicePlaceholder" = "Introdu parola";
 "accountPage.deviceRevoked" = "Eliminarea aparatului s-a terminat";
-"accountPage.deviceRevocationProgress" = "Se elimină...";
-"accountPage.deviceRevocationSuccess" = "Aparatul a fost eliminat";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Încearcă din nou";
 "accountPage.deviceRevocationWrongPassword" = "Parolă greșită";
 "accountPage.deviceRevocationUnknownDevice" = "Aparat necunoscut";
 "accountPage.deviceRevocationError" = "Eroare la eliminarea aparatului";
 "accountPage.linkDeviceTitle" = "Asociază alt aparat";
 "accountPage.other" = "Altele";
-"accountPage.removeAccountMessage" = "Făcînd clic pe „Șterge” vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
-"accountPage.removeAccountButton" = "Șterge";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invită prieteni";
 "accountPage.contactMeOnJamiTitle" = "Contactează-mă pe Jami!";
 "accountPage.contactMeOnJamiContant" = "Contactează-mă folosind „%s” pe platforma distribuită de comunicare Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Înscrie-te";
 "accountPage.usernameRegistrationFailed" = "Înscrierea a eșuat. Verifică parola.";
 "accountPage.createPassword" = "Cifrează contul";
-"accountPage.createPasswordExplanation" = "Contul tău Jami este înregistrat doar în acest aparat ca o arhivă care conține cheile contului tău. Accesul la această arhivă poate fi protejat cu o parolă.";
 "accountPage.changePassword" = "Schimbă parola";
 "accountPage.oldPasswordPlaceholder" = "Introdu parola veche";
 "accountPage.newPasswordPlaceholder" = "Introdu parola nouă";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Folosește UPnP";
 "accountPage.security" = "Protecție";
 "accountPage.enableSRTP" = "Cifrează fluxurile Media (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Numele profilului";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Cifrează contul cu o parolă";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "În alt aparat";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notificări";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Timp maxim de înscriere (secunde)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Dezactivează verificarea dialogului sigur pentru datele TLS primite";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "Acest aparat";
+"accountPage.otherDevices" = "Alte aparate asociate";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Nume de utilizator";
-"account.sipServer" = "Server SIP";
+"account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configurează un cont SIP";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "a fost invitat să participe";
 "generatedMessage.invitationAccepted" = "participă la conversație";
 "generatedMessage.youJoined" = "Participi la conversație";
-"generatedMessage.contactBanned" = "a fost dat afară";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "a fost reprimit";
 "generatedMessage.outgoingCall" = "Apel efectuat";
 "generatedMessage.missedOutgoingCall" = "Apel efectuat nepreluat";

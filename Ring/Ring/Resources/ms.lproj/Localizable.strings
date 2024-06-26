@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "അക്കൌണ്ട് ക്രമീകരണങ്ങൾ";
-"global.advancedSettings" = "വിപുലമായ ക്രമീകരണങ്ങൾ";
 "global.username" = "Nama pengguna";
 "global.recommended" = "ശുപാർശ";
 "global.password" = "Kara laluan";
-"global.registerAUsername" = "ഒരു ഉപയോക്തൃനാമം രജിസ്റ്റർ ചെയ്യുക";
-"global.enterPassword" = "പാസ്വേഡ് നൽകുക";
-"global.enterUsername" = "ഉപയോക്തൃനാമം നൽകുക";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Batal";
-"global.blockContact" = "ബന്ധം തടയുക";
+"global.blockContact" = "തടയൽ കോൺടാക്റ്റ്";
 "global.removeAccount" = "അക്കൌണ്ട് നീക്കം ചെയ്യുക";
 "global.incomingCall" = "Panggilan masuk";
 "global.ok" = "ശരി.";
@@ -46,11 +45,17 @@
 "global.reply" = "മറുപടി";
 "global.search" = "തിരയുന്ന...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "സന്ദേശം തിരുത്തുക";
+"global.editing" = "Editing";
 "global.create" = "സൃഷ്ടിക്കുക";
+"global.edit" = "പരിഷ്കരിക്കുക";
+"global.remove" = "Hapus";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "മോശം ക്യുആർ കോഡ്";
@@ -77,7 +82,7 @@
 "swarm.invited" = "ക്ഷണിച്ചവർ";
 "swarm.admin" = "അഡ്മിനിസ്ട്രേറ്റർ";
 "swarm.banned" = "നിരോധനം";
-"swarm.unknown" = "അജ്ഞാതമായ";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "അംഗം ചേർക്കുക";
 "swarm.confirmLeaveSwarm" = "ഈ കൂട്ടം വിട്ടുപോകാൻ നിനക്ക് ഉറപ്പുണ്ടോ?";
 "swarm.Leave" = "പോകൂ";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "ജാമിയിൽ ചേരുക";
-"createAccount.chooseStrongPassword" = "ജാമി അക്കൌണ്ട് സംരക്ഷിക്കുന്നതിനായി നിങ്ങള് ക്ക് ഓർമ്മയുണ്ടാകുന്ന ശക്തമായ പാസ്വേഡ് തിരഞ്ഞെടുക്കുക.";
-"createAccount.repeatPasswordPlaceholder" = "Sahkan kata laluan";
-"createAccount.passwordCharactersNumberError" = "Minimum 6 aksara";
-"createAccount.passwordNotMatchingError" = "പാസ്വേഡുകൾ യോജിക്കുന്നില്ല";
 "createAccount.lookingForUsernameAvailability" = "ലഭ്യമായതിനായി അന്വേഷിക്കുന്നു.";
 "createAccount.invalidUsername" = "അസാധുവായ ഉപയോക്തൃനാമം";
 "createAccount.usernameAlreadyTaken" = "ഇതിനകം ഉപയോഗിച്ച ഉപയോക്തൃനാമം";
 "createAccount.usernameValid" = "ഉപയോക്തൃനാമം ലഭ്യമാണ്";
 "createAccount.loading" = "ലോഡിംഗ്";
 "createAccount.waitCreateAccountTitle" = "Mencipta akaun";
-"createAccount.ChooseAPassword" = "എന്റെ അക്കൌണ്ട് എൻക്രിപ്റ്റ് ചെയ്യുക";
-"createAccount.PasswordInformation" = "നിങ്ങളുടെ പ്രാദേശിക അക്കൌണ്ട് എൻക്രിപ്റ്റ് ചെയ്യുന്നതിനുള്ള പാസ്വേഡ് തിരഞ്ഞെടുക്കുക. അത് മറക്കരുത് അല്ലെങ്കിൽ നിങ്ങളുടെ അക്കൌണ്ട് വീണ്ടെടുക്കാൻ കഴിയില്ല";
-"createAccount.EnableNotifications" = "അറിയിപ്പുകൾ";
-"createAccount.Recommended" = "(ശുപാർശ ചെയ്യുന്നു)";
 "createAccount.UsernameNotRegisteredTitle" = "Rangkaian gagal";
 "createAccount.UsernameNotRegisteredMessage" = "അക്കൌണ്ട് സൃഷ്ടിച്ചു, പക്ഷേ ഉപയോക്തൃനാമം രജിസ്റ്റർ ചെയ്തിട്ടില്ല";
 "createAccount.timeoutTitle" = "അക്കൌണ്ട് സൃഷ്ടിച്ചു";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "പങ്കിടുന്നത് അവസാനിപ്പിക്കുക";
 
 //Calls
-"calls.callItemTitle" = "Panggilan";
 "calls.incomingCallInfo" = "നിന്നോട് സംസാരിക്കാന് ആഗ്രഹിക്കുന്നു";
 "calls.ringing" = "- വിളിക്കുന്നു.";
 "calls.connecting" = "ബന്ധിപ്പിക്കുന്ന...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "അറിയിപ്പുകൾ പ്രവർത്തനക്ഷമമാക്കുക";
 "accountPage.proxyDisabledAlertTitle" = "പ്രോക്സി സെർവർ പ്രവർത്തനരഹിതമാക്കി";
 "accountPage.proxyDisabledAlertBody" = "അറിയിപ്പുകൾ സ്വീകരിക്കുന്നതിന്, ദയവായി പ്രോക്സി പ്രവർത്തനക്ഷമമാക്കുക";
-"accountPage.revokeDeviceTitle" = "പിൻവലിക്കൽ ഉപകരണം";
-"accountPage.revokeDeviceMessage" = "ഈ ഉപകരണം പിൻവലിക്കാൻ താങ്കൾക്ക് ഉറപ്പുണ്ടോ?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "റദ്ദാക്കൽ";
 "accountPage.revokeDevicePlaceholder" = "Masukkan kata laluan anda";
 "accountPage.deviceRevoked" = "ഉപകരണം പിൻവലിച്ചതിനു ശേഷം";
-"accountPage.deviceRevocationProgress" = "- പിൻവലിക്കുന്നു.";
-"accountPage.deviceRevocationSuccess" = "ഉപകരണം റദ്ദാക്കി";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "വീണ്ടും ശ്രമിക്കുക";
 "accountPage.deviceRevocationWrongPassword" = "തെറ്റായ പാസ്വേഡ്";
 "accountPage.deviceRevocationUnknownDevice" = "അജ്ഞാത ഉപകരണം";
 "accountPage.deviceRevocationError" = "ഉപകരണം പിൻവലിക്കുന്നതിൽ പിശക്";
 "accountPage.linkDeviceTitle" = "മറ്റൊരു ഉപകരണം ബന്ധിപ്പിക്കുക";
 "accountPage.other" = "Lain-lain";
-"accountPage.removeAccountMessage" = "\"അവള് നീക്കം ചെയ്യുക\" എന്നതിൽ ക്ലിക്ക് ചെയ്താല് ഈ ഉപകരണത്തിലെ ഈ അക്കൌണ്ട് നീക്കം ചെയ്യപ്പെടും! ഈ പ്രവർത്തനം തിരുത്താനാവില്ല. കൂടാതെ, നിങ്ങളുടെ രജിസ്റ്റർ ചെയ്ത പേര് നഷ്ടപ്പെടാം.";
-"accountPage.removeAccountButton" = "Hapus";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ജാമി എന്നിവിടങ്ങളിൽ എന്നെ ബന്ധപ്പെടുക!";
 "accountPage.contactMeOnJamiContant" = "ജാമി വിതരണം ചെയ്ത ആശയവിനിമയ പ്ലാറ്റ്ഫോമിലെ \"%s\" ഉപയോഗിച്ച് എന്നെ ബന്ധപ്പെടുകഃ https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Daftar";
 "accountPage.usernameRegistrationFailed" = "രജിസ്ട്രേഷൻ പരാജയപ്പെട്ടു. പാസ്വേഡ് പരിശോധിക്കുക.";
 "accountPage.createPassword" = "എൻക്രിപ്റ്റ് ചെയ്ത അക്കൌണ്ട്";
-"accountPage.createPasswordExplanation" = "നിങ്ങളുടെ ജാമി അക്കൌണ്ട് ഈ ഉപകരണത്തിൽ മാത്രമേ നിങ്ങളുടെ അക്കൌണ്ടിന്റെ കീകൾ അടങ്ങിയിരിക്കുന്ന ഒരു ആർക്കൈവായി രജിസ്റ്റർ ചെയ്തിട്ടുള്ളൂ. ഈ ആർക്കൈവിലേക്കുള്ള ആക്സസ് പാസ്വേഡ് ഉപയോഗിച്ച് സംരക്ഷിക്കാവുന്നതാണ്.";
 "accountPage.changePassword" = "പാസ്വേഡ് മാറ്റുക";
 "accountPage.oldPasswordPlaceholder" = "പഴയ പാസ്വേഡ് നൽകുക";
 "accountPage.newPasswordPlaceholder" = "പുതിയ പാസ്വേഡ് നൽകുക";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "UPnP ഉപയോഗിക്കുക";
 "accountPage.security" = "Penyulitan";
 "accountPage.enableSRTP" = "മീഡിയ സ്ട്രീമുകൾ എൻക്രിപ്റ്റ് ചെയ്യുക (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "പാസ്വേഡുള്ള അക്കൌണ്ട് എൻക്രിപ്റ്റ് ചെയ്യുക";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "രജിസ്ട്രേഷൻ കാലാവധി (സെക്കൻഡുകൾ)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "ഇൻകമിംഗ് TLS ഡാറ്റയ്ക്കായി സുരക്ഷിത ഡയലോഗ് പരിശോധന പ്രവർത്തനരഹിതമാക്കുക";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "ഈ ഉപകരണം";
+"accountPage.otherDevices" = "മറ്റ് ബന്ധിപ്പിച്ച ഉപകരണങ്ങൾ";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "ഉപയോക്തൃനാമം";
-"account.sipServer" = "SIP സെർവർ";
+"account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proksi";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "ചേരാൻ ക്ഷണിച്ചു";
 "generatedMessage.invitationAccepted" = "സംഭാഷണത്തില് പങ്കെടുത്തു";
 "generatedMessage.youJoined" = "നീ സംഭാഷണത്തില് പങ്കെടുത്തു";
-"generatedMessage.contactBanned" = "തല്ലി";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "വീണ്ടും ചേർത്തു";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
 "generatedMessage.missedOutgoingCall" = "നഷ്ടപ്പെട്ട വിളി";

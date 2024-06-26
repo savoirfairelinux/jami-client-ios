@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "ڤڠاجرن حساب";
-"global.advancedSettings" = "ڤڠاجرن ڤڠاجرن";
 "global.username" = "نام ڤڠڬونا";
 "global.recommended" = "مڠمبيل";
 "global.password" = "ڤاسر";
-"global.registerAUsername" = "مڠهادڤكن نام ڤڠڬونا";
-"global.enterPassword" = "ڤرودوق ڤرسودوق";
-"global.enterUsername" = "مڠڬوناكن نام ڤڠڬونا";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "ڤڠڬيل";
-"global.blockContact" = "ڤڠاجرن ڤڠاجرن";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "مڠمبيل ڤڠاجرن";
 "global.incomingCall" = "ڤڠاجين يڠ دڤرچايا?? ي";
-"global.ok" = "اوكيه";
+"global.ok" = "OK";
 "global.close" = "ڤرلو";
 "global.share" = "ڤڠاجين";
 "global.forward" = "ڤرلو";
@@ -46,11 +45,17 @@
 "global.reply" = "ڤرليندوڠ";
 "global.search" = "دالم ڤرچاي...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Edit message";
+"global.editing" = "Editing";
 "global.create" = "ڤڠڬونا";
+"global.edit" = "Edit";
+"global.remove" = "Remove";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "كود QR يڠ براوسيا";
@@ -77,7 +82,7 @@
 "swarm.invited" = "دجالنكن";
 "swarm.admin" = "ڤڠاره";
 "swarm.banned" = "ڤڠڬيلن";
-"swarm.unknown" = "يڠ تيدق دڤرچايا?? ي";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "ممبنتو ممبنتو";
 "swarm.confirmLeaveSwarm" = "آيا مطمئني که ميخواي از اين سور ترک کني؟";
 "swarm.Leave" = "برلالو";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "مڠڬوناكن Jami";
-"createAccount.chooseStrongPassword" = "ڤيليه ڤرسود يڠ ڤرنه دڤرچايا?? ي اونتوق ممڤرچايا?? ي کات Jami-توه.";
-"createAccount.repeatPasswordPlaceholder" = "ڤرليمن ڤرساتوان";
-"createAccount.passwordCharactersNumberError" = "6 ڤڠاجرن ڤد ڤد";
-"createAccount.passwordNotMatchingError" = "ڤاسور تيدق برتيندق";
 "createAccount.lookingForUsernameAvailability" = "اونتوق ممڤوڽاءي ڤرلو...";
 "createAccount.invalidUsername" = "نام ڤڠڬونا يڠ تيدق برمولا";
 "createAccount.usernameAlreadyTaken" = "نام ڤڠڬونا يڠ دڤرچايا?? ي";
 "createAccount.usernameValid" = "نام ڤڠڬونا دڤرلو";
 "createAccount.loading" = "ڤڠاجرن";
 "createAccount.waitCreateAccountTitle" = "ڤڠاجين";
-"createAccount.ChooseAPassword" = "كڤد ايكون ساي";
-"createAccount.PasswordInformation" = "ڤيليه ڤاسر اونتوق مڠهادڤي ايكون لوكالي. تيدق تيدق تيدق ممڤوڽاءي ايكون اتاو تيدق بوليه منريما ايكون اتاو";
-"createAccount.EnableNotifications" = "ڤمبلاجر";
-"createAccount.Recommended" = "(موصى به)";
 "createAccount.UsernameNotRegisteredTitle" = "خطأ شبكه";
 "createAccount.UsernameNotRegisteredMessage" = "ايكون دتولق نامو ڤڠڬونا تيدق دتولق";
 "createAccount.timeoutTitle" = "ايكون دڤرچايا?? ي";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "ڤرنه مڠمبيل";
 
 //Calls
-"calls.callItemTitle" = "ڤڠاجين";
 "calls.incomingCallInfo" = "بلياو برتوجو";
 "calls.ringing" = "...تڠه...";
 "calls.connecting" = "ارتباط...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "فعاليت اطلاعيه ها";
 "accountPage.proxyDisabledAlertTitle" = "ڤروكسي ڤرلو دڤرچايا?? ي";
 "accountPage.proxyDisabledAlertBody" = "اونتوق مڠهادڤي ڤرساتوان، كرجاسام ممبنتو ڤروكسي";
-"accountPage.revokeDeviceTitle" = "ڤڠڬيلن ڤڠڬيلن";
-"accountPage.revokeDeviceMessage" = "اكو يقيني اكو بررلو مڠمبيل ڤراڠت اين؟ ڤرودوک اين تيدق بوليه دڤرچايا?? ي.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "ڤڠاجرن";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "ڤمبلاجرن ڤڠڬونا";
-"accountPage.deviceRevocationProgress" = "ڤرنه دڤرچايا?? ي...";
-"accountPage.deviceRevocationSuccess" = "ڤڠڬوناڽ دڤرچايا?? ي";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "چيكرڽ جوڬ";
 "accountPage.deviceRevocationWrongPassword" = "ڤاسر يڠ تيدق برلاكو";
 "accountPage.deviceRevocationUnknownDevice" = "ڤڠڬونا يڠ تيدق دڤرچايا?? ي";
 "accountPage.deviceRevocationError" = "خطأ ڤمباچ ڤرودوک";
 "accountPage.linkDeviceTitle" = "منچيلكن ڤرودوک لاين";
 "accountPage.other" = "ڤڠاجين";
-"accountPage.removeAccountMessage" = "با كليك \"مڠحذف\" تومڤوان اكو ممبيل اكوڠ اين دالم ڤرودوک اين! اين اكشن تيدق دڤرچايا?? ي. جوڬ، نام يڠ دڤرجواڠكن تومڤوان اكوڠ تيدق دڤرچايا?? ي.";
-"accountPage.removeAccountButton" = "ڤرنه دڤرچايا?? ي";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "با من دري جامي تماس بگير!";
 "accountPage.contactMeOnJamiContant" = "منچاريکن ساي دڠن مڠݢوناکن \"%s\" دالم ڤرتوبوهن ڤمبلاجرن Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "ڤمباچ";
 "accountPage.usernameRegistrationFailed" = "ڤرجالنن تله دڤرچايا?? ي.";
 "accountPage.createPassword" = "حساب ڤڠڬيلن";
-"accountPage.createPasswordExplanation" = "ايكوتا Jami-تاو دڤرجواڠكن سهيڠڬ دالم ڤرودوک اين سباڬاي ارشيڤ يڠ ممڤوپا?? ي کليد ايكوتاڽ. ڤرودوک ايكوتا اين بوليه دڤرچايا?? ي دڠن ڤاسر.";
 "accountPage.changePassword" = "مڠهادڤي ڤرسود";
 "accountPage.oldPasswordPlaceholder" = "ممبري ڤرسود ڤريڠکت";
 "accountPage.newPasswordPlaceholder" = "مڠهادڤي ڤرسودن بارو";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "مڠڬوناكن UPnP";
 "accountPage.security" = "سيڠڬوڠ";
 "accountPage.enableSRTP" = "مڠمبيل ميديا سست (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "نام ڤڠڬونا";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "Server";
 "account.port" = "ڤڠوربان";
 "account.proxyServer" = "ڤروكسي";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "دتاهن اونتوق مڠڬوناكن";
 "generatedMessage.invitationAccepted" = "مڠمبيل ڤرساتوان";
 "generatedMessage.youJoined" = "تو اونتوق مڠاتاكن ڤڠاجرن";
-"generatedMessage.contactBanned" = "دڤرچاي";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "دڤرچايا?? ي";
 "generatedMessage.outgoingCall" = "ڤڠاجين يڠ برمولا";
 "generatedMessage.missedOutgoingCall" = "ڤڠاجرن يڠ تله دڤرچايا?? ي";

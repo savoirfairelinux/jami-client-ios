@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "Paskyros nustatymai";
-"global.advancedSettings" = "Išplėstiniai nustatymai";
 "global.username" = "Naudotojo vardas";
 "global.recommended" = "Rekomenduojama";
 "global.password" = "Slaptažodis";
-"global.registerAUsername" = "Užsiregistruokite naudotojo vardą";
-"global.enterPassword" = "Įveskite slaptažodį";
-"global.enterUsername" = "Įveskite naudotojo adresą";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Įveskite naudotojo vardą";
 "global.cancel" = "Atsisakyti";
-"global.blockContact" = "Užblokuoti adresatą";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Šalinti paskyrą";
 "global.incomingCall" = "Gaunamasis skambutis";
 "global.ok" = "Gerai";
@@ -46,11 +45,17 @@
 "global.reply" = "Atsakyti";
 "global.search" = "Ieškoma…";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Taisyti žinutę";
+"global.editing" = "Editing";
 "global.create" = "Sukurti";
+"global.edit" = "Taisa";
+"global.remove" = "Šalinti";
+"global.call" = "Call";
+"global.video" = "Vaizdas";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Pakviesti";
 "swarm.admin" = "Administratorius";
 "swarm.banned" = "Uždrausta";
-"swarm.unknown" = "Nepažįstamas";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Įrašyti narį";
 "swarm.confirmLeaveSwarm" = "Ar tikrai nori palikti šį sraudą?";
 "swarm.Leave" = "Išvykite.";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Prisijunkite prie Džami.";
-"createAccount.chooseStrongPassword" = "Pasirinkite stiprų slaptažodį, kurį prisiminsite, kad apsaugotumėte savo Jami paskyrą.";
-"createAccount.repeatPasswordPlaceholder" = "Patvirtinkite slaptažodį";
-"createAccount.passwordCharactersNumberError" = "Mažiausiai 6 simboliai";
-"createAccount.passwordNotMatchingError" = "slaptažodžiai nesutampa";
 "createAccount.lookingForUsernameAvailability" = "tikrinamas prieinamumas…";
 "createAccount.invalidUsername" = "neteisingas naudotojo vardas";
 "createAccount.usernameAlreadyTaken" = "naudotojo vardas jau užimtas";
 "createAccount.usernameValid" = "Naudotojo vardas prieinamas";
 "createAccount.loading" = "Įkeliama";
 "createAccount.waitCreateAccountTitle" = "Pridedama paskyra";
-"createAccount.ChooseAPassword" = "Šifruoti mano paskyrą";
-"createAccount.PasswordInformation" = "Pasirinkite slaptažodį, skirtą šifruoti jūsų vietinę paskyrą. Nepamirškite jo arba kitaip nebegalėsite atkurti savo paskyros";
-"createAccount.EnableNotifications" = "Pranešimai";
-"createAccount.Recommended" = "(Rekomenduojama)";
 "createAccount.UsernameNotRegisteredTitle" = "Tinklo klaida";
 "createAccount.UsernameNotRegisteredMessage" = "Paskyra buvo sukurta, bet naudotojo vardas nebuvo užregistruotas";
 "createAccount.timeoutTitle" = "Paskyra sukurta";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Nustokite dalintis";
 
 //Calls
-"calls.callItemTitle" = "Skambutis";
 "calls.incomingCallInfo" = "nori su jumis pakalbėti";
 "calls.ringing" = "- Žinau.";
 "calls.connecting" = "Jungiamasi…";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Įjungti pranešimus";
 "accountPage.proxyDisabledAlertTitle" = "Įgaliotasis serveris išjungtas";
 "accountPage.proxyDisabledAlertBody" = "Norėdami gauti pranešimus, įjunkite įgaliotąjį serverį";
-"accountPage.revokeDeviceTitle" = "Panaikinti įrenginį";
-"accountPage.revokeDeviceMessage" = "Ar tikrai norite panaikinti šį įrenginį? Šio veiksmo neįmanoma bus atšaukti.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Panaikinti";
 "accountPage.revokeDevicePlaceholder" = "Įveskite savo slaptažodį";
 "accountPage.deviceRevoked" = "Įrenginio panaikinimas užbaigtas";
-"accountPage.deviceRevocationProgress" = "Panaikinama...";
-"accountPage.deviceRevocationSuccess" = "Įrenginys buvo panaikintas";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Bandyk dar kartą.";
 "accountPage.deviceRevocationWrongPassword" = "Neteisingas slaptažodis";
 "accountPage.deviceRevocationUnknownDevice" = "Nežinomas įrenginys";
 "accountPage.deviceRevocationError" = "Įrenginio panaikinimo klaida";
 "accountPage.linkDeviceTitle" = "Susieti kitą įrenginį";
 "accountPage.other" = "Kita";
-"accountPage.removeAccountMessage" = "Spustelėję \"Šalinti\", pašalinsite šią paskyrą šiame įrenginyje! Šio veiksmo negalima bus atšaukti. Be to, galite prarasti savo registruotą vardą.";
-"accountPage.removeAccountButton" = "Šalinti";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Susisiekite su manimi Džimi!";
 "accountPage.contactMeOnJamiContant" = "Susisiekite su manimi naudojant \"%s\" Džami platintoje komunikacijos platformėje: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Registruoti";
 "accountPage.usernameRegistrationFailed" = "Registracija nesilaukė, prašome patikrinti slaptažodį.";
 "accountPage.createPassword" = "Šifruotas paskyras";
-"accountPage.createPasswordExplanation" = "Jūsų \"Jami\" paskyras yra registruotas tik šiame įrenginyje kaip archyvas, kuriame yra jūsų paskyros raktų.";
 "accountPage.changePassword" = "Pakeisti slaptažodį";
 "accountPage.oldPasswordPlaceholder" = "Įveskite seną slaptažodį";
 "accountPage.newPasswordPlaceholder" = "Įveskite naują slaptažodį";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Naudoti UPnP";
 "accountPage.security" = "Saugumas";
 "accountPage.enableSRTP" = "Šifruoti medija srautus (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profilio pavadinimas";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Užšifruoti paskyrą slaptažodžiu";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registracijos galiojimo pabaigos laikas (sekundų)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Išjungti saugų dialogų patikrinimą atvykstančių TLS duomenų";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Kiti susieti įrenginiai";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Naudotojo vardas";
-"account.sipServer" = "SIP serveris";
+"account.sipServer" = "Server";
 "account.port" = "Prievadas";
 "account.proxyServer" = "Įgaliotasis serveris";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "buvo pakviestas prisijungti";
 "generatedMessage.invitationAccepted" = "prisijungė prie pokalbio";
 "generatedMessage.youJoined" = "Tu prisijungėte prie pokalbio.";
-"generatedMessage.contactBanned" = "buvo iššaudytas";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "buvo pridėta";
 "generatedMessage.outgoingCall" = "Išsiunčiamasis skambutis";
 "generatedMessage.missedOutgoingCall" = "Praleistas išvykęs paskyras";

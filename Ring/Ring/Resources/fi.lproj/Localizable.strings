@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Tunnuksen asetukset";
-"global.advancedSettings" = "Lisäasetukset";
 "global.username" = "Käyttäjänimi";
 "global.recommended" = "Suositus";
 "global.password" = "Salasana";
-"global.registerAUsername" = "Rekisteröi käyttäjänimi";
-"global.enterPassword" = "Syötä salasana";
-"global.enterUsername" = "Anna käyttäjänimi";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Peruuta";
-"global.blockContact" = "Estä yhteystieto";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Poista tili";
 "global.incomingCall" = "Saapuva puhelu";
-"global.ok" = "Vahvista";
+"global.ok" = "OK";
 "global.close" = "Sulje";
 "global.share" = "Jako";
 "global.forward" = "Välitä";
@@ -46,11 +45,17 @@
 "global.reply" = "Vastaa";
 "global.search" = "Etsitään...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Ääritä viestiä";
+"global.editing" = "Editing";
 "global.create" = "Luo";
+"global.edit" = "Edit";
+"global.remove" = "Poista";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Kutsuttu";
 "swarm.admin" = "Hallinnoija";
 "swarm.banned" = "Kielletty";
-"swarm.unknown" = "Kylmä";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Lisää jäsen";
 "swarm.confirmLeaveSwarm" = "Oletko varma, että haluat lähteä?";
 "swarm.Leave" = "Lähdetään";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Liity Jamiin.";
-"createAccount.chooseStrongPassword" = "Valitse muistettava, vahva salasana jota käytät Jami-tunnuksen suojaamiseen.";
-"createAccount.repeatPasswordPlaceholder" = "Varmista salasana";
-"createAccount.passwordCharactersNumberError" = "Vähintään 6 merkkiä";
-"createAccount.passwordNotMatchingError" = "salasanat eivät täsmää";
 "createAccount.lookingForUsernameAvailability" = "etsitään saatavuutta…";
 "createAccount.invalidUsername" = "käyttäjätunnus ei kelpaa";
 "createAccount.usernameAlreadyTaken" = "käyttäjätunnus on jo varattu";
 "createAccount.usernameValid" = "Tunnus on saatavilla";
 "createAccount.loading" = "Ladataan";
 "createAccount.waitCreateAccountTitle" = "Lisätään tunnusta";
-"createAccount.ChooseAPassword" = "Salaa tilini";
-"createAccount.PasswordInformation" = "Valitse salasana paikallisen tilisi salaamiseksi. Älä unohda sitä, tai et voi palauttaa tiliäsi";
-"createAccount.EnableNotifications" = "Ilmoitukset";
-"createAccount.Recommended" = "(suositus)";
 "createAccount.UsernameNotRegisteredTitle" = "Verkkovirhe";
 "createAccount.UsernameNotRegisteredMessage" = "Tili luotiin, mutta käyttäjänimeä ei rekisteröity";
 "createAccount.timeoutTitle" = "Tili luotu";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Lopeta jakaminen";
 
 //Calls
-"calls.callItemTitle" = "Soita";
 "calls.incomingCallInfo" = "haluaa puhua kanssasi";
 "calls.ringing" = "Soi...";
 "calls.connecting" = "Yhdistää...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Ilmoitukset päälle";
 "accountPage.proxyDisabledAlertTitle" = "Välityspalvelin poistettu käytöstä";
 "accountPage.proxyDisabledAlertBody" = "Jotta voit vastaanottaa ilmoituksia, ota käyttöön";
-"accountPage.revokeDeviceTitle" = "Peruuta laite";
-"accountPage.revokeDeviceMessage" = "Haluatko varmasti peruuttaa tämän laitteen? Tätä toimintoa ei voitu kumota.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Peruuta";
 "accountPage.revokeDevicePlaceholder" = "Syötä salasanasi";
 "accountPage.deviceRevoked" = "Laitteen peruminen valmis";
-"accountPage.deviceRevocationProgress" = "Peruuttaminen...";
-"accountPage.deviceRevocationSuccess" = "Laite on peruttu";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Yritä uudestaan";
 "accountPage.deviceRevocationWrongPassword" = "Väärä salasana";
 "accountPage.deviceRevocationUnknownDevice" = "Tuntematon laite";
 "accountPage.deviceRevocationError" = "Laitteen peruuttamisvirhe";
 "accountPage.linkDeviceTitle" = "Linkitä toinen laite";
 "accountPage.other" = "Muu";
-"accountPage.removeAccountMessage" = "Painamalla \"Poista\"-painiketta poistat tämän tilin tästä laitteesta! Tätä toimintoa ei voi kumota. Rekisteröity nimesi voi myös kadota.";
-"accountPage.removeAccountButton" = "Poista";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Ota minuun yhteyttä Jamilla!";
 "accountPage.contactMeOnJamiContant" = "Ota minuun yhteyttä \"%s\" Jamin hajautetun viestintäalustan avulla:  https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Rekistöröi";
 "accountPage.usernameRegistrationFailed" = "Rekisteröinti epäonnistui. Tarkista salasana.";
 "accountPage.createPassword" = "Salaistettu tili";
-"accountPage.createPasswordExplanation" = "Jami-tilisi on rekisteröity vain tässä laitteessa arkistoon, jossa on tiliäsi avaimet.";
 "accountPage.changePassword" = "Vaihda salasana";
 "accountPage.oldPasswordPlaceholder" = "Anna vanha salasana";
 "accountPage.newPasswordPlaceholder" = "Anna uusi salasana";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Käytä UPnP";
 "accountPage.security" = "Turvallisuus";
 "accountPage.enableSRTP" = "Salattu mediavirta (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Käyttäjänimi";
-"account.sipServer" = "SIP-palvelin";
+"account.sipServer" = "Server";
 "account.port" = "Portti";
 "account.proxyServer" = "Välityspalvelin";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "oli kutsuttu liittymään";
 "generatedMessage.invitationAccepted" = "- Hän liittyi keskustelulle.";
 "generatedMessage.youJoined" = "Sinä liittyt keskustelulle.";
-"generatedMessage.contactBanned" = "- Hän sai potkut.";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "lisättiin uudelleen";
 "generatedMessage.outgoingCall" = "Lähtevä puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";

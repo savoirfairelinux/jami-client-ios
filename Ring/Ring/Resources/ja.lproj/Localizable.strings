@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "アカウント設定";
-"global.advancedSettings" = "詳細設定";
 "global.username" = "利用者名";
 "global.recommended" = "推奨";
 "global.password" = "暗証語";
-"global.registerAUsername" = "利用者名を登録";
-"global.enterPassword" = "パスワードを入力してください";
-"global.enterUsername" = "ユーザー名を入力してください";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "ユーザー名を入力";
 "global.cancel" = "キャンセル";
-"global.blockContact" = "連絡先をブロック";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "アカウントを削除";
 "global.incomingCall" = "着信";
 "global.ok" = "わかった";
@@ -46,11 +45,17 @@
 "global.reply" = "返信";
 "global.search" = "検索中…";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "メッセージ編集";
+"global.editing" = "Editing";
 "global.create" = "作成";
+"global.edit" = "編集";
+"global.remove" = "削除";
+"global.call" = "Call";
+"global.video" = "動画";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";
@@ -77,7 +82,7 @@
 "swarm.invited" = "招待された";
 "swarm.admin" = "管理者";
 "swarm.banned" = "禁止";
-"swarm.unknown" = "知らない";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "メンバーを追加";
 "swarm.confirmLeaveSwarm" = "この群れを離れたいのか?";
 "swarm.Leave" = "出て行こう";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Jamiに登録";
-"createAccount.chooseStrongPassword" = "あなたのJamiアカウントを守るために強固なパスワードを設定してください。また、このパスワードを忘れないでください。";
-"createAccount.repeatPasswordPlaceholder" = "暗証語の再入力";
-"createAccount.passwordCharactersNumberError" = "最低6文字";
-"createAccount.passwordNotMatchingError" = "暗証語が一致しません";
 "createAccount.lookingForUsernameAvailability" = "利用可能か確認しています…";
 "createAccount.invalidUsername" = "不正な利用者名";
 "createAccount.usernameAlreadyTaken" = "この利用者名は既に取得されています。";
 "createAccount.usernameValid" = "この利用者名は利用可能です";
 "createAccount.loading" = "読み込み中";
 "createAccount.waitCreateAccountTitle" = "アカウントを追加";
-"createAccount.ChooseAPassword" = "アカウントを暗号化";
-"createAccount.PasswordInformation" = "アカウントを暗号化する暗証語を選んでください。アカウントが復旧できなくなりますので，暗証語は大切にお控えください。";
-"createAccount.EnableNotifications" = "通知";
-"createAccount.Recommended" = "(推奨)";
 "createAccount.UsernameNotRegisteredTitle" = "ネットワークエラー";
 "createAccount.UsernameNotRegisteredMessage" = "アカウントは作成されましたが、ユーザー名がまだ登録されていません";
 "createAccount.timeoutTitle" = "アカウントを作成しました";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "共有を停止";
 
 //Calls
-"calls.callItemTitle" = "通話";
 "calls.incomingCallInfo" = "あなたと話したい";
 "calls.ringing" = "鳴ってる";
 "calls.connecting" = "接続中…";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "通知を有効化";
 "accountPage.proxyDisabledAlertTitle" = "プロキシサーバーが無効";
 "accountPage.proxyDisabledAlertBody" = "通知を有効にするため、プロキシを有効にしてください。";
-"accountPage.revokeDeviceTitle" = "デバイスを取り消し";
-"accountPage.revokeDeviceMessage" = "本当にこの端末を無効にしますか？この操作は取り消せません。";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "破棄";
 "accountPage.revokeDevicePlaceholder" = "パスワードを入力してください";
 "accountPage.deviceRevoked" = "デバイスの無効化が完了しました";
-"accountPage.deviceRevocationProgress" = "取り消し中...";
-"accountPage.deviceRevocationSuccess" = "無効なデバイス";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "もう一度やり直す";
 "accountPage.deviceRevocationWrongPassword" = "パスワードが一致しません";
 "accountPage.deviceRevocationUnknownDevice" = "未知のデバイス";
 "accountPage.deviceRevocationError" = "端末無効化エラー";
 "accountPage.linkDeviceTitle" = "別のデバイスをリンク";
 "accountPage.other" = "その他";
-"accountPage.removeAccountMessage" = "\"削除\"をクリックすると,このデバイス上のアカウントを削除します!このアクションは無効にできません.また,登録された名前も失われる可能性があります.";
-"accountPage.removeAccountButton" = "削除";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ジャミに連絡する!";
 "accountPage.contactMeOnJamiContant" = "広報プラットフォームの\"%s\"を使用して私に連絡してください: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "登録";
 "accountPage.usernameRegistrationFailed" = "登録失敗.パスワードを確認してください.";
 "accountPage.createPassword" = "暗号化アカウント";
-"accountPage.createPasswordExplanation" = "あなたのJamiアカウントは,このデバイスであなたのアカウントの鍵を含むアーカイブとしてのみ登録されています.このアーカイブへのアクセスはパスワードで保護できます.";
 "accountPage.changePassword" = "パスワードを変更";
 "accountPage.oldPasswordPlaceholder" = "現在のパスワードを入力";
 "accountPage.newPasswordPlaceholder" = "新しいパスワードを入力";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "UPnPを使用";
 "accountPage.security" = "セキュリティ";
 "accountPage.enableSRTP" = "メディアストリームを暗号化 (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "プロフィール名";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "パスワードでアカウントを暗号化する";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "登録期限 (秒)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "入力 TLS データに対するセキュア・ダイアログチェックを無効にする";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "接続された他の装置";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "ユーザー名";
-"account.sipServer" = "SIPサーバー";
+"account.sipServer" = "Server";
 "account.port" = "ポート番号";
 "account.proxyServer" = "プロキシ";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "加入するよう招待されました";
 "generatedMessage.invitationAccepted" = "話を参加した";
 "generatedMessage.youJoined" = "話を聞いてくれた";
-"generatedMessage.contactBanned" = "蹴られた";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "追加されました";
 "generatedMessage.outgoingCall" = "発信";
 "generatedMessage.missedOutgoingCall" = "不在発信";

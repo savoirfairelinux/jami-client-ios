@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "تنظیمات حساب";
-"global.advancedSettings" = "تنظیمات پیشرفته";
 "global.username" = "نام کاربری";
 "global.recommended" = "توصیه‌شده";
 "global.password" = "گذرواژه";
-"global.registerAUsername" = "ثبت یک نام‌کاربری";
-"global.enterPassword" = "گذرواژه را وارد کنید";
-"global.enterUsername" = "نام‌کاربری را وارد کنید";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "لغو";
-"global.blockContact" = "مسدود سازی مخاطب";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "حذف حساب";
 "global.incomingCall" = "تماس ورودی";
-"global.ok" = "خب";
+"global.ok" = "OK";
 "global.close" = "بستن";
 "global.share" = "اشتراک گذاری";
 "global.forward" = "ارسال کردن";
@@ -46,11 +45,17 @@
 "global.reply" = "پاسخ";
 "global.search" = "در حال جستجو...";
 "global.donate" = "اهدا کنید";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "پیام را ویرایش کنید";
+"global.editing" = "Editing";
 "global.create" = "ایجاد";
+"global.edit" = "Edit";
+"global.remove" = "حذف کن";
+"global.call" = "Call";
+"global.video" = "ویدیو";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
@@ -77,7 +82,7 @@
 "swarm.invited" = "دعوت شده";
 "swarm.admin" = "مدیر";
 "swarm.banned" = "ممنوع";
-"swarm.unknown" = "نامعلوم";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "عضو اضافه کنید";
 "swarm.confirmLeaveSwarm" = "مطمئنی می خوای از این سور خارج بشی؟";
 "swarm.Leave" = "از اينجا بريد";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "با جمی هم همراهی کن";
-"createAccount.chooseStrongPassword" = "برای محافظت از حساب جمی خود، گذرواژه‌ای قوی انتخاب کنید، که بتوانید آن را به خاطر بیاورید.";
-"createAccount.repeatPasswordPlaceholder" = "تأیید گذرواژه";
-"createAccount.passwordCharactersNumberError" = "کمینه ۶ کاراکتر";
-"createAccount.passwordNotMatchingError" = "گذرواژه‌ها یکسان نیستند";
 "createAccount.lookingForUsernameAvailability" = "بررسی در‌دسترس بودن…";
 "createAccount.invalidUsername" = "نام کاربری نامعتبر";
 "createAccount.usernameAlreadyTaken" = "نام کاربری قبلاً انتخاب شده";
 "createAccount.usernameValid" = "نام کاربری دردسترس است";
 "createAccount.loading" = "بارگذاری...";
 "createAccount.waitCreateAccountTitle" = "در حال افزودن حساب";
-"createAccount.ChooseAPassword" = "حساب من را رمزگذاری کن";
-"createAccount.PasswordInformation" = "برای رمزگذاری حساب محلی خود گذرواژه‌ای انتخاب کنید. آن را فراموش نکنید زیرا که قادر به بازیابی حساب خود نخواهید بود";
-"createAccount.EnableNotifications" = "اعلان‌ها";
-"createAccount.Recommended" = "(توصیه‌شده)";
 "createAccount.UsernameNotRegisteredTitle" = "خطای شبکه";
 "createAccount.UsernameNotRegisteredMessage" = "حساب ایجاد شده، اما نام‌کاربری ثبت نشده است";
 "createAccount.timeoutTitle" = "حساب کاربری ایجاد شد";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "توقف اشتراک‌گذاری";
 
 //Calls
-"calls.callItemTitle" = "برقراری تماس";
 "calls.incomingCallInfo" = "میخواهد با شما حرف بزند";
 "calls.ringing" = "در حال زنگ خوردن...";
 "calls.connecting" = "در حال اتصال...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "فعال سازی نوتیفیکیشن ها";
 "accountPage.proxyDisabledAlertTitle" = "سرور پروکسی غیرفعال شد";
 "accountPage.proxyDisabledAlertBody" = "برای دریافت نوتیفیکیشن ها، لطفا پروکسی را فعال کنید";
-"accountPage.revokeDeviceTitle" = "باطل کردن دستگاه";
-"accountPage.revokeDeviceMessage" = "اطمینان دارید که می‌خواهید دسترسی این دستگاه را باطل کنید؟ این عمل قابل برگشت نیست.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "باطل کردن";
 "accountPage.revokeDevicePlaceholder" = "گذرواژه‌تان را وارد کنید";
 "accountPage.deviceRevoked" = "ابطال دستگاه تکمیل شد";
-"accountPage.deviceRevocationProgress" = "در حال ابطال…";
-"accountPage.deviceRevocationSuccess" = "دسترسی دستگاه باطل شد";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "تلاش دوباره";
 "accountPage.deviceRevocationWrongPassword" = "گذرواژه ناصحیح";
 "accountPage.deviceRevocationUnknownDevice" = "دستگاه ناشناس";
 "accountPage.deviceRevocationError" = "خطا در ابطال دستگاه";
 "accountPage.linkDeviceTitle" = "پیوند یک دستگاه دیگر";
 "accountPage.other" = "دیگر";
-"accountPage.removeAccountMessage" = "با کلیک روی \"حذف\"، این حساب را در این دستگاه حذف خواهید کرد! این عمل قابل بازگشت نیست. همچنین، نام ثبت‌شده شما می تواند از‌ دست رود.";
-"accountPage.removeAccountButton" = "حذف کن";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "با من روی جمی در تماس باشید!";
 "accountPage.contactMeOnJamiContant" = "با استفاده از \"%s\" روی بستر ارتباط توزیع‌شده جمی، با من در تماس باشید: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "ثبت‌نام";
 "accountPage.usernameRegistrationFailed" = "انتقال ناموفق بود، لطفا گذرواژه را بررسی کنید.";
 "accountPage.createPassword" = "حساب رمزگذاری";
-"accountPage.createPasswordExplanation" = "حساب جمی شما فقط در این دستگاه به عنوان یک آرشیو ثبت شده که حاوی کلید حساب شما است. دسترسی به این آرشیو می تواند با رمز عبور محافظت شود.";
 "accountPage.changePassword" = "تغییر گذرواژه";
 "accountPage.oldPasswordPlaceholder" = "گذرواژه قدیمی را وارد کنید";
 "accountPage.newPasswordPlaceholder" = "گذرواژه جدید را وارد کنید";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "استفاده از UPnP";
 "accountPage.security" = "امنیت";
 "accountPage.enableSRTP" = "رمزگذاری جریان‌های مدیا (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "نام کاربر";
-"account.sipServer" = "سرور SIP";
+"account.sipServer" = "Server";
 "account.port" = "پرت";
 "account.proxyServer" = "پراکسی";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "دعوت شد که به";
 "generatedMessage.invitationAccepted" = "به حرف زدن پیوست";
 "generatedMessage.youJoined" = "تو هم به اين مکالمه پیوستي";
-"generatedMessage.contactBanned" = "و به دستش خورد";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "دوباره اضافه شد";
 "generatedMessage.outgoingCall" = "تماس خروجی";
 "generatedMessage.missedOutgoingCall" = "تماس خروجی بی پاسخ";

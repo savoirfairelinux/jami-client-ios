@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "Pengaturan Akun";
-"global.advancedSettings" = "Pengaturan Lanjutan";
 "global.username" = "Nama pengguna";
 "global.recommended" = "Rekomendasi";
 "global.password" = "Kata sandi";
-"global.registerAUsername" = "Daftarkan nama pengguna";
-"global.enterPassword" = "Masukkan kata sandi";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
 "global.enterUsername" = "Masukkan nama pengguna";
 "global.cancel" = "Batal";
-"global.blockContact" = "Blokir kontak";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Buang akun";
 "global.incomingCall" = "Panggilan masuk";
 "global.ok" = "Oke";
@@ -46,11 +45,17 @@
 "global.reply" = "Balas";
 "global.search" = "Mencari...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Edit pesan";
+"global.editing" = "Editing";
 "global.create" = "Buat";
+"global.edit" = "Edit";
+"global.remove" = "Hapus";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Kode QR yang buruk";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Diundang";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Dibanned";
-"swarm.unknown" = "Tidak diketahui";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Tambahkan Anggota";
 "swarm.confirmLeaveSwarm" = "Kau yakin kau ingin meninggalkan gerombolan ini?";
 "swarm.Leave" = "Keluar";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Gabung Jami";
-"createAccount.chooseStrongPassword" = "Gunakan kata sandi kuat dan mudah diingat untuk menjaga akun Jami anda.";
-"createAccount.repeatPasswordPlaceholder" = "Konfirmasi kata sandi";
-"createAccount.passwordCharactersNumberError" = "Minimum 6 karakter";
-"createAccount.passwordNotMatchingError" = "Kata sandi tidak cocok";
 "createAccount.lookingForUsernameAvailability" = "Memeriksa ketersediaan...";
 "createAccount.invalidUsername" = "Nama pengguna tidak valid";
 "createAccount.usernameAlreadyTaken" = "Nama pengguna sudah diambil";
 "createAccount.usernameValid" = "Nama pengguna tersedia";
 "createAccount.loading" = "Harap tunggu";
 "createAccount.waitCreateAccountTitle" = "Menambahkan akun";
-"createAccount.ChooseAPassword" = "Enkripsi akun saya";
-"createAccount.PasswordInformation" = "Pilih kata sandi untuk mengenkripsi akun lokal Anda. Jangan lupa atau Anda tidak akan bisa memulihkan akun Anda";
-"createAccount.EnableNotifications" = "Notifikasi";
-"createAccount.Recommended" = "(Direkomendasikan)";
 "createAccount.UsernameNotRegisteredTitle" = "Galat jaringan";
 "createAccount.UsernameNotRegisteredMessage" = "Akun telah dibuat tetapi nama pengguna tidak terdaftar";
 "createAccount.timeoutTitle" = "Akun Dibuat";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Berhenti berbagi";
 
 //Calls
-"calls.callItemTitle" = "Telepon";
 "calls.incomingCallInfo" = "ingin berbicara dengan Anda";
 "calls.ringing" = "Berdering...";
 "calls.connecting" = "Menghubungkan...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Aktifkan notifikasi";
 "accountPage.proxyDisabledAlertTitle" = "Server Proxy Dinonaktifkan";
 "accountPage.proxyDisabledAlertBody" = "Untuk menerima notifikasi, harap aktifkan proksi";
-"accountPage.revokeDeviceTitle" = "Hapus perangkat";
-"accountPage.revokeDeviceMessage" = "Apakah Anda yakin ingin mencabut perangkat ini? Tindakan ini tidak bisa dibatalkan.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Cabut";
 "accountPage.revokeDevicePlaceholder" = "Masukkan kata sandi anda";
 "accountPage.deviceRevoked" = "Pencabutan perangkat selesai";
-"accountPage.deviceRevocationProgress" = "Mencabut...";
-"accountPage.deviceRevocationSuccess" = "Perangkat telah dicabut";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Coba lagi";
 "accountPage.deviceRevocationWrongPassword" = "Kata sandi salah";
 "accountPage.deviceRevocationUnknownDevice" = "Perangkat tidak diketahui";
 "accountPage.deviceRevocationError" = "Pencabutan perangkat error";
 "accountPage.linkDeviceTitle" = "Tautkan perangkat lain";
 "accountPage.other" = "Lainnya";
-"accountPage.removeAccountMessage" = "Dengan mengklik \"Hapus\", Anda akan menghapus akun ini di perangkat ini! Tindakan ini tidak bisa dibatalkan. Selain itu, nama terdaftar Anda bisa hilang.";
-"accountPage.removeAccountButton" = "Hapus";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Hubungi saya di Jami!";
 "accountPage.contactMeOnJamiContant" = "Hubungi saya menggunakan \"%s\" pada platform komunikasi terdistribusi Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Daftar";
 "accountPage.usernameRegistrationFailed" = "Pendaftaran gagal. Silakan periksa kata sandi.";
 "accountPage.createPassword" = "Akun Enkripsi";
-"accountPage.createPasswordExplanation" = "Akun Jami Anda hanya terdaftar di perangkat ini sebagai arsip yang berisi kunci akun Anda. Akses ke arsip ini dapat dilindungi dengan kata sandi.";
 "accountPage.changePassword" = "Ubah kata sandi";
 "accountPage.oldPasswordPlaceholder" = "Masukkan kata sandi lama";
 "accountPage.newPasswordPlaceholder" = "Masukan kata sandi baru";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Gunakan UPnP";
 "accountPage.security" = "Keamanan";
 "accountPage.enableSRTP" = "Enkripsi media stream (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Waktu kedaluwarsa pendaftaran (detik)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Menonaktifkan pemeriksaan dialog aman untuk data TLS yang masuk";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Perangkat terkait lainnya";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Nama Pengguna";
-"account.sipServer" = "Peladen SIP";
+"account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proksi";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "diundang untuk bergabung";
 "generatedMessage.invitationAccepted" = "bergabung dengan percakapan";
 "generatedMessage.youJoined" = "Kau bergabung dalam percakapan";
-"generatedMessage.contactBanned" = "dipukul";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "ditambahkan kembali";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
 "generatedMessage.missedOutgoingCall" = "Panggilan keluar tidak terjawab";

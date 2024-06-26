@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Rregullime Llogarie";
-"global.advancedSettings" = "Rregullime të Mëtejshme";
 "global.username" = "Emër përdoruesi";
 "global.recommended" = "E rekomanduar";
 "global.password" = "Fjalëkalim";
-"global.registerAUsername" = "Regjistroni një emër përdoruesi";
-"global.enterPassword" = "Jepni Fjalëkalimin";
-"global.enterUsername" = "Jepni Emër Përdoruesi";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Jepni emër përdoruesi";
 "global.cancel" = "Anuloje";
-"global.blockContact" = "Bllokoje Kontaktin";
+"global.blockContact" = "Bllokojeni kontaktin";
 "global.removeAccount" = "Hiqe llogarinë";
 "global.incomingCall" = "Thirrje ardhëse";
-"global.ok" = "OK";
+"global.ok" = "Në rregull";
 "global.close" = "Mbylle";
 "global.share" = "Ndajeni me të tjerë";
 "global.forward" = "Përcille";
@@ -46,11 +45,17 @@
 "global.reply" = "Përgjigjuni";
 "global.search" = "Po kërkohet…";
 "global.donate" = "Dhuroni";
-"global.deleteMessage" = "Fshije Mesazhin";
-"global.deleteFile" = "Fshije Kartelën prej pajisjeje";
-"global.editMessage" = "Përpunoni Mesazh";
-"global.editing" = "Po përpunohet";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Përpunojeni mesazhin";
+"global.editing" = "Editing";
 "global.create" = "Krijoje";
+"global.edit" = "Përpunoni";
+"global.remove" = "Hiqe";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Kohë";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Ftuar";
 "swarm.admin" = "Përgjegjës";
 "swarm.banned" = "Dëbuar";
-"swarm.unknown" = "I panjohur";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Shtoni Anëtar";
 "swarm.confirmLeaveSwarm" = "Jeni i sigurt se doni të braktisni këtë zgjua?";
 "swarm.Leave" = "Braktise";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Bëhuni pjesë e Jami-t";
-"createAccount.chooseStrongPassword" = "Për të mbrojtur llogarinë tuaj Jami, zgjidhni fjalëkalim të fuqishëm që do ta mbani mend.";
-"createAccount.repeatPasswordPlaceholder" = "Ripohoni fjalëkalimin";
-"createAccount.passwordCharactersNumberError" = "Minimumi 6 shenja";
-"createAccount.passwordNotMatchingError" = "fjalëkalimet nuk përputhen";
 "createAccount.lookingForUsernameAvailability" = "po shihet për pasje…";
 "createAccount.invalidUsername" = "emër përdoruesi i pavlefshëm";
 "createAccount.usernameAlreadyTaken" = "emër përdoruesi tashmë i zënë";
 "createAccount.usernameValid" = "emri i përdoruesit është i lirë";
 "createAccount.loading" = "Po ngarkohet";
 "createAccount.waitCreateAccountTitle" = "Po shtohet llogaria";
-"createAccount.ChooseAPassword" = "Fshehtëzoje llogarinë time";
-"createAccount.PasswordInformation" = "Zgjidhni një fjalëkalim për të fshehtëzuar llogarinë tuaj vendore. Mos e harroni, përndryshe s’do të jeni në gjendje të rimerrni llogarinë tuaj";
-"createAccount.EnableNotifications" = "Njoftime";
-"createAccount.Recommended" = "(E këshilluar)";
 "createAccount.UsernameNotRegisteredTitle" = "Gabim rrjeti";
 "createAccount.UsernameNotRegisteredMessage" = "Llogaria u krijua, por emri i përdoruesit s’u regjistrua";
 "createAccount.timeoutTitle" = "Llogaria u Krijua";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Resht së dhëni";
 
 //Calls
-"calls.callItemTitle" = "Thirre";
 "calls.incomingCallInfo" = "dëshiron të flasë me ju";
 "calls.ringing" = "Po thirret…";
 "calls.connecting" = "Po lidhet…";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Aktivizoni Njoftime";
 "accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
 "accountPage.proxyDisabledAlertBody" = "Që të mund të merrni njoftime, ju lutemi, aktivizoni ndërmjetësin";
-"accountPage.revokeDeviceTitle" = "Shfuqizoje pajisjen";
-"accountPage.revokeDeviceMessage" = "Jeni i sigurt se doni të shfuqizohet kjo pajisje? Ky veprim s’mund të zhbëhet.";
+"accountPage.removeDeviceTitle" = "Hiqe pajisjen";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Shfuqizoje";
 "accountPage.revokeDevicePlaceholder" = "Jepni fjalëkalimin tuaj";
 "accountPage.deviceRevoked" = "Shfuqizimi i pajisjes u plotësua";
-"accountPage.deviceRevocationProgress" = "Po shfuqizohet…";
-"accountPage.deviceRevocationSuccess" = "Pajisja u shfuqizua";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Riprovoni";
 "accountPage.deviceRevocationWrongPassword" = "Fjalëkalim i pasaktë";
 "accountPage.deviceRevocationUnknownDevice" = "Pajisje e panjohur";
 "accountPage.deviceRevocationError" = "Gabim shfuqizimi pajisjeje";
 "accountPage.linkDeviceTitle" = "Lidhni një pajisje tjetër";
 "accountPage.other" = "Tjetër";
-"accountPage.removeAccountMessage" = "Duke klikuar “Hiqe”, do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Po ashtu, emri juaj i regjistruar mund të humbë.";
-"accountPage.removeAccountButton" = "Hiqe";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Ftoni shokë";
 "accountPage.contactMeOnJamiTitle" = "Lidhuni me mua në Jami!";
 "accountPage.contactMeOnJamiContant" = "Lidhuni me mua duke përdorur “%s” në platformën e komunikimeve të shpërndara Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Regjistrohuni";
 "accountPage.usernameRegistrationFailed" = "Regjistrimi dështoi. Ju lutemi, kontrolloni fjalëkalimin.";
 "accountPage.createPassword" = "Fshehtëzoje llogarinë";
-"accountPage.createPasswordExplanation" = "Llogaria juaj Jami regjistrohet vetëm në këtë pajisje, si një arkiv që përmban kyçet e llogarisë tuaj. Përdorimi i këtij arkivi mundet të mbrohet me fjalëkalim.";
 "accountPage.changePassword" = "Ndryshoni fjalëkalimin";
 "accountPage.oldPasswordPlaceholder" = "Jepni fjalëkalimin e vjetër";
 "accountPage.newPasswordPlaceholder" = "Jepni fjalëkalimin e ri";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Përdor UPnP";
 "accountPage.security" = "Siguri";
 "accountPage.enableSRTP" = "Fshehtëzo rrjedha media (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profil";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Emër profili";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Fshehtëzoni llogarinë me një fjalëkalim";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "Në pajisjen tjetër";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Njoftime";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Kohë skadimi regjistrimi (sekonda)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Çaktivizo kontroll dialogu të sigurt për të dhëna TLS ardhëse";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "Këtë pajisje";
+"accountPage.otherDevices" = "Të tjera pajisje të lidhura";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Emër Përdoruesi";
-"account.sipServer" = "Shërbyes SIP";
+"account.sipServer" = "Server";
 "account.port" = "Portë";
 "account.proxyServer" = "Ndërmjetës";
 "account.createSipAccount" = "Formësoni një llogari SIP";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "u ftua të marrë pjesë";
 "generatedMessage.invitationAccepted" = "hyri në bisedë";
 "generatedMessage.youJoined" = "Hytë në bisedë";
-"generatedMessage.contactBanned" = "u përzu";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "u rishtua";
 "generatedMessage.outgoingCall" = "Thirrje për";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";

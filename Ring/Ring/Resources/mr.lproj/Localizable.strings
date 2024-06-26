@@ -20,15 +20,14 @@
 
 // Global
 "global.accountSettings" = "खाते सेटिंग्ज";
-"global.advancedSettings" = "प्रगत सेटिंग्ज";
 "global.username" = "नाव";
 "global.recommended" = "शिफारस केलेले";
 "global.password" = "पासवर्ड";
-"global.registerAUsername" = "एक वापरकर्तानाव नोंदवा";
-"global.enterPassword" = "पासवर्ड प्रविष्ट करा";
-"global.enterUsername" = "वापरकर्तानाव प्रविष्ट करा";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "रद्द करा";
-"global.blockContact" = "संपर्क ब्लॉक";
+"global.blockContact" = "ब्लॉक संपर्क";
 "global.removeAccount" = "खाते हटवा";
 "global.incomingCall" = "येणारे कॉल";
 "global.ok" = "ठीक";
@@ -46,11 +45,17 @@
 "global.reply" = "उत्तर";
 "global.search" = "शोधत आहे.";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "संदेश संपादित करा";
+"global.editing" = "Editing";
 "global.create" = "तयार करा";
+"global.edit" = "संपादित करा";
+"global.remove" = "काढून टाका";
+"global.call" = "Call";
+"global.video" = "व्हिडिओ";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "खराब क्यूआर कोड";
@@ -77,7 +82,7 @@
 "swarm.invited" = "आमंत्रित केले";
 "swarm.admin" = "प्रशासक";
 "swarm.banned" = "बंदी";
-"swarm.unknown" = "नसलेले";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "सदस्य जोडा";
 "swarm.confirmLeaveSwarm" = "तुम्हाला खात्री आहे का की तुम्हाला या झुंडातून बाहेर पडायचं आहे?";
 "swarm.Leave" = "जा";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "जामीमध्ये सामील व्हा";
-"createAccount.chooseStrongPassword" = "आपल्या जामी खात्याचे संरक्षण करण्यासाठी तुम्हाला लक्षात राहणारे मजबूत संकेतशब्द निवडा.";
-"createAccount.repeatPasswordPlaceholder" = "पासवर्ड पुष्टी करा";
-"createAccount.passwordCharactersNumberError" = "किमान 6 वर्ण";
-"createAccount.passwordNotMatchingError" = "पासवर्ड जुळत नाहीत";
 "createAccount.lookingForUsernameAvailability" = "उपलब्धता शोधत आहे.";
 "createAccount.invalidUsername" = "अवैध वापरकर्तानाव";
 "createAccount.usernameAlreadyTaken" = "आधीच वापरकर्ता नाव";
 "createAccount.usernameValid" = "वापरकर्तानाव उपलब्ध आहे";
 "createAccount.loading" = "लोड";
 "createAccount.waitCreateAccountTitle" = "खाते जोडणे";
-"createAccount.ChooseAPassword" = "माझे खाते एन्क्रिप्ट करा";
-"createAccount.PasswordInformation" = "आपल्या स्थानिक खात्याचे एन्क्रिप्ट करण्यासाठी पासवर्ड निवडा. ते विसरू नका अन्यथा आपण आपले खाते पुनर्प्राप्त करू शकणार नाही";
-"createAccount.EnableNotifications" = "सूचना";
-"createAccount.Recommended" = "(शिफारस केली आहे)";
 "createAccount.UsernameNotRegisteredTitle" = "नेटवर्क त्रुटी";
 "createAccount.UsernameNotRegisteredMessage" = "खाते तयार केले परंतु वापरकर्तानाव नोंदणीकृत नाही";
 "createAccount.timeoutTitle" = "खाते तयार केले";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "सामायिक करणे बंद करा";
 
 //Calls
-"calls.callItemTitle" = "कॉल करा";
 "calls.incomingCallInfo" = "तुझ्याशी बोलायचं आहे";
 "calls.ringing" = "- गप्पा मारत आहे.";
 "calls.connecting" = "जोडणी.";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "सूचना सक्षम करा";
 "accountPage.proxyDisabledAlertTitle" = "प्रॉक्सी सर्व्हर निष्क्रिय";
 "accountPage.proxyDisabledAlertBody" = "सूचना प्राप्त करण्यासाठी, कृपया प्रॉक्सी सक्षम करा";
-"accountPage.revokeDeviceTitle" = "रद्द करण्याचे साधन";
-"accountPage.revokeDeviceMessage" = "तुम्हाला खात्री आहे का की तुम्हाला हे डिव्हाइस रद्द करायचे आहे?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "रद्द करणे";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "डिव्हाइस रद्द करणे पूर्ण";
-"accountPage.deviceRevocationProgress" = "रद्द करणे.";
-"accountPage.deviceRevocationSuccess" = "डिव्हाइस रद्द करण्यात आला";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "पुन्हा प्रयत्न करा";
 "accountPage.deviceRevocationWrongPassword" = "चुकीचा संकेतशब्द";
 "accountPage.deviceRevocationUnknownDevice" = "अज्ञात उपकरणे";
 "accountPage.deviceRevocationError" = "डिव्हाइस रद्द त्रुटी";
 "accountPage.linkDeviceTitle" = "दुसरे डिव्हाइस लिंक करा";
 "accountPage.other" = "इतर";
-"accountPage.removeAccountMessage" = "\"हटवा\" वर क्लिक केल्यास तुम्ही या डिव्हाइसवरील खाते हटवाल! ही क्रिया रद्द करता येत नाही. तसेच तुमचे नोंदणीकृत नाव हरवले जाऊ शकते.";
-"accountPage.removeAccountButton" = "काढून टाका";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "जमीवर संपर्क साधा!";
 "accountPage.contactMeOnJamiContant" = "जामीच्या वितरित संप्रेषण प्लॅटफॉर्मवर \"%s\" वापरून माझ्याशी संपर्क साधा: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "नोंदणी";
 "accountPage.usernameRegistrationFailed" = "नोंदणी अपयशी झाली आहे. कृपया पासवर्ड तपासा.";
 "accountPage.createPassword" = "कूटबद्ध खाते";
-"accountPage.createPasswordExplanation" = "तुमच्या अकाऊंटची चावी असलेल्या संग्रहण म्हणून तुमच्या अकाऊंटची नोंद केवळ या डिव्हाइसवर आहे. या संग्रहणाचा प्रवेश संकेतशब्दाने संरक्षित केला जाऊ शकतो.";
 "accountPage.changePassword" = "पासवर्ड बदला";
 "accountPage.oldPasswordPlaceholder" = "जुने संकेतशब्द प्रविष्ट करा";
 "accountPage.newPasswordPlaceholder" = "नवीन संकेतशब्द प्रविष्ट करा";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "UPnP वापरा";
 "accountPage.security" = "सुरक्षा";
 "accountPage.enableSRTP" = "एन्क्रिप्टेड मीडिया स्ट्रीम (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "पासवर्डसह खाते एन्क्रिप्ट करा";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "नोंदणीचा कालावधी (सेकंद)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "TLS डेटासाठी सुरक्षित संवाद तपासणी अक्षम करा";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "इतर जोडलेले उपकरणे";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "वापरकर्तानाव";
-"account.sipServer" = "SIP सर्व्हर";
+"account.sipServer" = "Server";
 "account.port" = "बंदर";
 "account.proxyServer" = "प्रॉक्सी";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "सहभागी होण्यासाठी आमंत्रित करण्यात आले होते";
 "generatedMessage.invitationAccepted" = "संभाषणात सहभागी झाले";
 "generatedMessage.youJoined" = "तुम्हीही या संभाषणाला सहभागी झालात";
-"generatedMessage.contactBanned" = "पाडले गेले";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "पुन्हा जोडले गेले";
 "generatedMessage.outgoingCall" = "बाहेरचा कॉल";
 "generatedMessage.missedOutgoingCall" = "गमावलेला प्रस्थान कॉल";

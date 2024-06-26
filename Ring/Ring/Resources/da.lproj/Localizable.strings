@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Kontoindstillinger";
-"global.advancedSettings" = "Avancerede indstillinger";
 "global.username" = "Brugernavn";
 "global.recommended" = "Anbefalet";
 "global.password" = "Adgangskode";
-"global.registerAUsername" = "Registrér et brugernavn";
-"global.enterPassword" = "Indtast kodeord";
-"global.enterUsername" = "Indtast Brugernavn";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Annuller";
-"global.blockContact" = "Bloker kontakt";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Fjern kontoen";
 "global.incomingCall" = "Indgående opkald";
-"global.ok" = "Ok";
+"global.ok" = "OK";
 "global.close" = "Luk";
 "global.share" = "Del";
 "global.forward" = "Fremad";
@@ -46,11 +45,17 @@
 "global.reply" = "Svar";
 "global.search" = "Søger…";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Redigere beskeden";
+"global.editing" = "Editing";
 "global.create" = "Opret";
+"global.edit" = "Edit";
+"global.remove" = "Remove";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Ugyldigt QR-kode";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Indbydes";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Banned";
-"swarm.unknown" = "Ukendt";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Tilføj medlem";
 "swarm.confirmLeaveSwarm" = "Er du sikker på, du vil forlade denne sværm?";
 "swarm.Leave" = "- Gå væk.";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Gå med Jami";
-"createAccount.chooseStrongPassword" = "Vælg et stærkt password, du vil huske for at beskytte din Jami-konto.";
-"createAccount.repeatPasswordPlaceholder" = "Bekræft adgangskode";
-"createAccount.passwordCharactersNumberError" = "Mindst 6 tegn";
-"createAccount.passwordNotMatchingError" = "kodeordene stemmer ikke overens";
 "createAccount.lookingForUsernameAvailability" = "- Jeg er ude efter tilgængelighed.";
 "createAccount.invalidUsername" = "ugyldigt brugernavn";
 "createAccount.usernameAlreadyTaken" = "brugernavn er allerede anvendt";
 "createAccount.usernameValid" = "brugernavn er tilgængelig";
 "createAccount.loading" = "Indlæser";
 "createAccount.waitCreateAccountTitle" = "Tilføjer konto";
-"createAccount.ChooseAPassword" = "Kryptér din konto";
-"createAccount.PasswordInformation" = "Vælg et kodeord for at kryptere din lokale bruger. Glem det ikke, da du ellers ikke vil kunne genskabe din konto.";
-"createAccount.EnableNotifications" = "Notifikationer";
-"createAccount.Recommended" = "(Anbefalet)";
 "createAccount.UsernameNotRegisteredTitle" = "Netværksfejl";
 "createAccount.UsernameNotRegisteredMessage" = "Kontoen blev oprettet men brugernavnet blev ikke registreret.";
 "createAccount.timeoutTitle" = "Konto Oprettet";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Stop deling";
 
 //Calls
-"calls.callItemTitle" = "Ring op";
 "calls.incomingCallInfo" = "vil tale med dig";
 "calls.ringing" = "Ringer...";
 "calls.connecting" = "Opretter forbindelse…";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Aktivér beskeder";
 "accountPage.proxyDisabledAlertTitle" = "Proxy-server deaktiveret";
 "accountPage.proxyDisabledAlertBody" = "Aktivér venligst proxy, for at modtage notifikationer";
-"accountPage.revokeDeviceTitle" = "Tilbagetræk enheden";
-"accountPage.revokeDeviceMessage" = "Er du sikker på du til fjerne adgangen for denne enheden? Denne handling kan ikke fortrydes.";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Tilbagekald";
 "accountPage.revokeDevicePlaceholder" = "Indtast din adgangskode";
 "accountPage.deviceRevoked" = "Enheden har fået fjernet sin adgang";
-"accountPage.deviceRevocationProgress" = "Fjerner adgang...";
-"accountPage.deviceRevocationSuccess" = "Enhedens adgang blev fjernet";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Prøv igen";
 "accountPage.deviceRevocationWrongPassword" = "Forkert adgangskode";
 "accountPage.deviceRevocationUnknownDevice" = "Ukendt enhed";
 "accountPage.deviceRevocationError" = "Fejl med tilbagekaldelse af udstyret";
 "accountPage.linkDeviceTitle" = "Tilknyt en anden enhed";
 "accountPage.other" = "Andre";
-"accountPage.removeAccountMessage" = "Hvis du klikker på \"Fjern\" fjerner du denne konto på denne enhed! Denne handling kan ikke gøres ugyldig.";
-"accountPage.removeAccountButton" = "Fjern";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Kontakt mig på Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontakt mig ved hjælp af \"%s\" på Jami distribueret kommunikationsplatform: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Registrér";
 "accountPage.usernameRegistrationFailed" = "Registrering mislykkedes.";
 "accountPage.createPassword" = "Kryptering af konto";
-"accountPage.createPasswordExplanation" = "Din Jami-konto er registreret kun på denne enhed som et arkiv, der indeholder nøglerne til din konto.";
 "accountPage.changePassword" = "Skift adgangskode";
 "accountPage.oldPasswordPlaceholder" = "Indtaster gammelt adgangskode";
 "accountPage.newPasswordPlaceholder" = "Indtaster nyt adgangskode";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Brug UPnP";
 "accountPage.security" = "Sikkerhed";
 "accountPage.enableSRTP" = "Krypter mediestrømme (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Brugernavn";
-"account.sipServer" = "SIP-server";
+"account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Stedfortræder";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "blev inviteret til at deltage";
 "generatedMessage.invitationAccepted" = "- Jeg er med i samtalen.";
 "generatedMessage.youJoined" = "Du er med i samtalen.";
-"generatedMessage.contactBanned" = "blev sparket";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "blev tilføjet";
 "generatedMessage.outgoingCall" = "Udgående opkald";
 "generatedMessage.missedOutgoingCall" = "Ubesvarede udgående opkald";

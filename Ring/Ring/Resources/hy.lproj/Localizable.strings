@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Հաշվեի կարգավորումները";
-"global.advancedSettings" = "Հրագաթնակետային կարգավորումներ";
 "global.username" = "Օգտագործողի անունը";
 "global.recommended" = "Հրჩევվում է";
 "global.password" = "Անձանագրություն";
-"global.registerAUsername" = "Գրանցեք օգտվողի անունը";
-"global.enterPassword" = "Գտեք գաղտնաբառ";
-"global.enterUsername" = "Գտեք օգտվողի անունը";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Արգելել";
-"global.blockContact" = "Բլոկային շփումը";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Հաշիվը հեռացնել";
 "global.incomingCall" = "Հեռախոսազանգ";
-"global.ok" = "Լավ, լավ։";
+"global.ok" = "Հանգիստ:";
 "global.close" = "Մոտակայքում";
 "global.share" = "Մասնակից";
 "global.forward" = "Առաջ";
@@ -46,11 +45,17 @@
 "global.reply" = "Պատասխանել";
 "global.search" = "Փնտրում եմ...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Տարբերել հաղորդագրությունը";
+"global.editing" = "Editing";
 "global.create" = "Ստեղծել";
+"global.edit" = "Edit";
+"global.remove" = "Հեռացնել";
+"global.call" = "Call";
+"global.video" = "Տեսանյութ";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Չար QR կոդ";
@@ -77,7 +82,7 @@
 "swarm.invited" = "հրավիրված";
 "swarm.admin" = "Վարչապետ";
 "swarm.banned" = "Արգելվում է";
-"swarm.unknown" = "Անհայտ";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Մասնակից ավելացնել";
 "swarm.confirmLeaveSwarm" = "Համոզված ես, որ ուզում ես լքել այս ցավը:";
 "swarm.Leave" = "Գնացեք";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Միացեք Ջամիին";
-"createAccount.chooseStrongPassword" = "Ընտրեք ուժեղ գաղտնաբառ, որը կհիշեք ձեր Ջամի հաշիվը պաշտպանելու համար:";
-"createAccount.repeatPasswordPlaceholder" = "Փաստաթուղթ հաստատել";
-"createAccount.passwordCharactersNumberError" = "6 տառերի նվազագույնը";
-"createAccount.passwordNotMatchingError" = "գաղտնաբառերը չեն համապատասխանում";
 "createAccount.lookingForUsernameAvailability" = "փնտրում է առկայություն...";
 "createAccount.invalidUsername" = "անվավեր օգտատերու անուն";
 "createAccount.usernameAlreadyTaken" = "օգտագործողի անունը արդեն վերցված է";
 "createAccount.usernameValid" = "օգտագործողի անունը հասանելի է";
 "createAccount.loading" = "Լեռնափոխադրում";
 "createAccount.waitCreateAccountTitle" = "Բաժին ավելացում";
-"createAccount.ChooseAPassword" = "Գլխավորագրեք իմ հաշիվը";
-"createAccount.PasswordInformation" = "Ընտրեք գաղտնաբառը ձեր տեղական հաշիվը կոդավորելու համար: Մի մոռացեք այն, այլապես դուք չեք կարողանա վերականգնել ձեր հաշիվը";
-"createAccount.EnableNotifications" = "Հրավերներ";
-"createAccount.Recommended" = "(Շնորհակալություն)";
 "createAccount.UsernameNotRegisteredTitle" = "Համացանցի սխալ";
 "createAccount.UsernameNotRegisteredMessage" = "Հաշիվ է ստեղծվել, բայց օգտատերերի անունը չի գրանցվել";
 "createAccount.timeoutTitle" = "Հաշիվ ստեղծվել";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Սեղմեք կիսումը";
 
 //Calls
-"calls.callItemTitle" = "Զանգահարել";
 "calls.incomingCallInfo" = "ուզում է խոսել քեզ հետ";
 "calls.ringing" = "Զանգում է...";
 "calls.connecting" = "Կապակցում...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Հրավերների հնարավորություն";
 "accountPage.proxyDisabledAlertTitle" = "Պրոքսի սերվերները անջատված են";
 "accountPage.proxyDisabledAlertBody" = "Հրավերներ ստանալու համար խնդրում ենք ակտիվացնել proxy- ը";
-"accountPage.revokeDeviceTitle" = "Վերադարձի սարք";
-"accountPage.revokeDeviceMessage" = "Դուք համոզված եք, որ ցանկանում եք վերացնել այս սարքը: Այս գործողությունը չի կարող չեղարկվել:";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Վերադարձ";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Հեռացման սարքը ավարտված է";
-"accountPage.deviceRevocationProgress" = "Վերադարձը...";
-"accountPage.deviceRevocationSuccess" = "Հեռացվել է սարքը";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Փորձեք նորից";
 "accountPage.deviceRevocationWrongPassword" = "Անհիմն գաղտնաբառ";
 "accountPage.deviceRevocationUnknownDevice" = "Անհայտ սարք";
 "accountPage.deviceRevocationError" = "սարքի հետադարձ անվավերացման սխալ";
 "accountPage.linkDeviceTitle" = "Կապակցեք այլ սարք";
 "accountPage.other" = "Մյուսներ";
-"accountPage.removeAccountMessage" = "\"Վերահղել\" կոճակը կլուծի այս հաշիվը այս սարքում! Այս գործողությունը չի կարող չեղարկվել:";
-"accountPage.removeAccountButton" = "Հեռացնել";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Կապվեք ինձ հետ Ջամիի մասին:";
 "accountPage.contactMeOnJamiContant" = "Կապվեք ինձ հետ՝ օգտագործելով \"%s\" Jami- ի տարածված հաղորդակցման հարթակում. https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Գրանցվել";
 "accountPage.usernameRegistrationFailed" = "Անվանումը ձախողվել է, խնդրում ենք ստուգել գաղտնաբառը:";
 "accountPage.createPassword" = "Գաղտնի հաշիվ";
-"accountPage.createPasswordExplanation" = "Ձեր Jami հաշիվը գրանցվում է միայն այս սարքում որպես արխիվ, որը պարունակում է ձեր հաշիվի բանալիները: Այս արխիվի մուտքը կարող է պաշտպանվել գաղտնաբառով:";
 "accountPage.changePassword" = "Փոխել գաղտնաբառը";
 "accountPage.oldPasswordPlaceholder" = "Ներբեռնեք հին գաղտնաբառը";
 "accountPage.newPasswordPlaceholder" = "Ներբեռնեք նոր գաղտնաբառ";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Օգտագործեք UPnP";
 "accountPage.security" = "Անվտանգություն";
 "accountPage.enableSRTP" = "ԶԼՄ-ների հոսքերը կոդավորեք (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "գրանցման ժամկետի ժամկետը (սեկոնդեր)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Անջատեք մուտքագրվող TLS տվյալների անվտանգ երկխոսության ստուգումը";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Կապակցված այլ սարքեր";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Օգտագործողի անունը";
-"account.sipServer" = "SIP սերվեր";
+"account.sipServer" = "Server";
 "account.port" = "Պորտ";
 "account.proxyServer" = "Պրոկսի";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "հրավիրվել է միանալ";
 "generatedMessage.invitationAccepted" = "միացել է զրույցին";
 "generatedMessage.youJoined" = "Դուք միացել եք զրույցին";
-"generatedMessage.contactBanned" = "նետվել է";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "վերանայվել է";
 "generatedMessage.outgoingCall" = "Արտաքին զանգ";
 "generatedMessage.missedOutgoingCall" = "Հեռացվող զանգը բացակայում է";

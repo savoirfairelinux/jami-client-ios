@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "إعدادت الحساب";
-"global.advancedSettings" = "إعدادات متقدمة";
 "global.username" = "اسم المستخدم";
 "global.recommended" = "موصى به";
 "global.password" = "كلمة السر";
-"global.registerAUsername" = "تسجيل اسم المستخدم";
-"global.enterPassword" = "أدخِل كلمة المرور";
-"global.enterUsername" = "إدخال اسم المستخدم";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "إلغاء الأمر";
-"global.blockContact" = "إغلاق الاتصال";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "إزالة الحساب";
 "global.incomingCall" = "مكالمة واردة";
-"global.ok" = "موافق";
+"global.ok" = "OK";
 "global.close" = "إغلاق";
 "global.share" = "مشاركة";
 "global.forward" = "للأمام";
@@ -46,11 +45,17 @@
 "global.reply" = "رد";
 "global.search" = "يتم البحث...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Edit message";
+"global.editing" = "Editing";
 "global.create" = "إنشاء";
+"global.edit" = "Edit";
+"global.remove" = "Remove";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "رمز QR غير صالح";
@@ -77,7 +82,7 @@
 "swarm.invited" = "مدعوة";
 "swarm.admin" = "المدير";
 "swarm.banned" = "ممنوع";
-"swarm.unknown" = "غير معروف";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "إضافة عضو";
 "swarm.confirmLeaveSwarm" = "هل أنت متأكد أنك تريد ترك هذه السلالة؟";
 "swarm.Leave" = "إرحل";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "انضموا إلى جامي";
-"createAccount.chooseStrongPassword" = "اختر كلمة مرور قوية ستذكرها لحماية حساب جامي";
-"createAccount.repeatPasswordPlaceholder" = "تأكيد كلمة المرور";
-"createAccount.passwordCharactersNumberError" = "6 محارف على الأقل";
-"createAccount.passwordNotMatchingError" = "كلمات المرور غير متطابقة";
 "createAccount.lookingForUsernameAvailability" = "تبحث عن إمكانية الوصول...";
 "createAccount.invalidUsername" = "اسم المستخدم غير صالح";
 "createAccount.usernameAlreadyTaken" = "هذا الاسم غير متوفر";
 "createAccount.usernameValid" = "اسم المستخدم متاح";
 "createAccount.loading" = "جاري التحميل";
 "createAccount.waitCreateAccountTitle" = "في طور إضافة حساب";
-"createAccount.ChooseAPassword" = "تشفير حسابي";
-"createAccount.PasswordInformation" = "اختر كلمة مرور لتشفير حسابك المحلي. لا تنسها وإلا لن تكون قادرًا على استعادة حسابك";
-"createAccount.EnableNotifications" = "الإشعارات";
-"createAccount.Recommended" = "(توصى بها)";
 "createAccount.UsernameNotRegisteredTitle" = "خطأ في الشبكة";
 "createAccount.UsernameNotRegisteredMessage" = "تم إنشاء حساب ولكن لم يتم تسجيل اسم المستخدم";
 "createAccount.timeoutTitle" = "حساب تم إنشاؤه";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "إيقاف المشاركة";
 
 //Calls
-"calls.callItemTitle" = "مكالمة";
 "calls.incomingCallInfo" = "يريد التحدث معك";
 "calls.ringing" = "... يرن";
 "calls.connecting" = "اتصال جاري...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "فعل الإخطارات";
 "accountPage.proxyDisabledAlertTitle" = "محطم خادم النظام الأساسي";
 "accountPage.proxyDisabledAlertBody" = "من أجل تلقي الإخطارات، يرجى تمكين النظام الأساسي";
-"accountPage.revokeDeviceTitle" = "إبطال جهاز";
-"accountPage.revokeDeviceMessage" = "هل أنت متأكد أنك تريد إلغاء هذا الجهاز؟";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "سحب";
 "accountPage.revokeDevicePlaceholder" = "أدخِل كلمة المرور";
 "accountPage.deviceRevoked" = "إعادة إلغاء الجهاز قد تم الانتهاء منها";
-"accountPage.deviceRevocationProgress" = "-تلغيّر";
-"accountPage.deviceRevocationSuccess" = "تم إلغاء الجهاز";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "حاول مرة أخرى";
 "accountPage.deviceRevocationWrongPassword" = "كلمة مرور خاطئة";
 "accountPage.deviceRevocationUnknownDevice" = "جهاز مجهول";
 "accountPage.deviceRevocationError" = "خطأ إلغاء الجهاز";
 "accountPage.linkDeviceTitle" = "اربط جهازاً آخر";
 "accountPage.other" = "آخر";
-"accountPage.removeAccountMessage" = "من خلال النقر على \"إزالة\" سوف تقوم بإزالة هذا الحساب على هذا الجهاز! لا يمكن إلغاء هذا الإجراء. أيضاً، يمكن أن يفقد اسمك المسجل.";
-"accountPage.removeAccountButton" = "احذف";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "اتصل بي عن (جامي)!";
 "accountPage.contactMeOnJamiContant" = "اتصل بي باستخدام \"%s\" على منصة الاتصالات الموزعة في جامي: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "سجل";
 "accountPage.usernameRegistrationFailed" = "التسجيل فشل، من فضلك تحقق من كلمة المرور";
 "accountPage.createPassword" = "تشفير الحساب";
-"accountPage.createPasswordExplanation" = "يتم تسجيل حساب جامي الخاص بك فقط على هذا الجهاز كملف يحتوي على مفاتيح حسابك. يمكن حماية الوصول إلى هذا الملف بواسطة كلمة مرور.";
 "accountPage.changePassword" = "تغيير كلمة المرور";
 "accountPage.oldPasswordPlaceholder" = "إدخال كلمة المرور القديمة";
 "accountPage.newPasswordPlaceholder" = "إدخال كلمة مرور جديدة";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "استخدم UPnP";
 "accountPage.security" = "تأمين";
 "accountPage.enableSRTP" = "نظام تشفير تدفق الوسائط ﴿SRTP﴾";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "اسم المستخدم";
-"account.sipServer" = "خادم SIP";
+"account.sipServer" = "Server";
 "account.port" = "منفذ عبور";
 "account.proxyServer" = "الوكيل";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "تم دعوته للانضمام";
 "generatedMessage.invitationAccepted" = "انضم إلى المحادثة";
 "generatedMessage.youJoined" = "لقد انضمت إلى المحادثة";
-"generatedMessage.contactBanned" = "لقد ركل";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "تم إعادة إضافة";
 "generatedMessage.outgoingCall" = "مكالمة صادرة";
 "generatedMessage.missedOutgoingCall" = "مكالمة صادرة فائتة";

@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Kontuaren ezarpenak";
-"global.advancedSettings" = "Jarriera aurreratuak";
 "global.username" = "Erabiltzaile-izena";
 "global.recommended" = "gomendatzen da";
 "global.password" = "Pasahitza";
-"global.registerAUsername" = "Izen-abizena erregistratzea";
-"global.enterPassword" = "Sartu pasahitza";
-"global.enterUsername" = "Sartu erabiltzaile izena";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Utzi";
-"global.blockContact" = "Kontaktuak blokeatu";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Kontua ezabatzeko";
 "global.incomingCall" = "Sarrera-deia";
-"global.ok" = "Ados";
+"global.ok" = "OK";
 "global.close" = "Itxi";
 "global.share" = "Partekatu";
 "global.forward" = "Aurrerantz";
@@ -46,11 +45,17 @@
 "global.reply" = "Erantzun";
 "global.search" = "Bilatzen ari naiz...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Eusko Jaurlaritzaren laguntzarekin egindako azpitituluak";
+"global.editing" = "Editing";
 "global.create" = "Sortu";
+"global.edit" = "Edit";
+"global.remove" = "Kendu";
+"global.call" = "Call";
+"global.video" = "Bideoa";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "QR kodea txarra";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Gonbidatuak";
 "swarm.admin" = "Administrazioa";
 "swarm.banned" = "Debekatuta";
-"swarm.unknown" = "Ez dakit zer den.";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Batzordea gehitu";
 "swarm.confirmLeaveSwarm" = "Ziur zaude ez duzula talde hau utzi nahi?";
 "swarm.Leave" = "Joan zaitezke?";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Jar zaitez Jami-rekin.";
-"createAccount.chooseStrongPassword" = "Aukeratu pasahitz sendoa, eta gogoratu zure kontuak Jami-n babesteko.";
-"createAccount.repeatPasswordPlaceholder" = "Berretsi pasahitza";
-"createAccount.passwordCharactersNumberError" = "6 karaktere gutxienez";
-"createAccount.passwordNotMatchingError" = "pasahitzak ez datoz bat";
 "createAccount.lookingForUsernameAvailability" = "-Eskaintza bila.";
 "createAccount.invalidUsername" = "erabiltzaile-izen baliogabea";
 "createAccount.usernameAlreadyTaken" = "erabiltzaile-izena hartuta dago";
 "createAccount.usernameValid" = "erabiltzaile izena eskura";
 "createAccount.loading" = "Kargatzen";
 "createAccount.waitCreateAccountTitle" = "Kontua gehitzen";
-"createAccount.ChooseAPassword" = "Nire kontua enkriptatu.";
-"createAccount.PasswordInformation" = "Aukeratu pasahitza zure kontuaren enkriptazioa egiteko. Ez ahaztu edo ezingo duzu zure kontua berreskuratu";
-"createAccount.EnableNotifications" = "Oharrak";
-"createAccount.Recommended" = "- Ez, ez.";
 "createAccount.UsernameNotRegisteredTitle" = "Sare errorea";
 "createAccount.UsernameNotRegisteredMessage" = "Kontua sortu zen, baina erabiltzaile izena ez zen erregistratu.";
 "createAccount.timeoutTitle" = "Kontua sortua";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Utzi partekatzeari";
 
 //Calls
-"calls.callItemTitle" = "Deitu.";
 "calls.incomingCallInfo" = "Zurekin hitz egin nahi du.";
 "calls.ringing" = "-Badakit.";
 "calls.connecting" = "Konektatzen...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Oharrak aktibatu";
 "accountPage.proxyDisabledAlertTitle" = "Proxy zerbitzaria desaktibatuta";
 "accountPage.proxyDisabledAlertBody" = "Jakinarazpenak jasotzeko, mesedez aktibatzen proxy";
-"accountPage.revokeDeviceTitle" = "Atzera egiteko gailua";
-"accountPage.revokeDeviceMessage" = "Ziur zaude gailu hau bertan behera utzi nahi duzula?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Atzera egitea";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Gailuaren erretiroa amaitu da";
-"accountPage.deviceRevocationProgress" = "-Askatuko dut...";
-"accountPage.deviceRevocationSuccess" = "Gailua bertan behera geratu da.";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Saiatu berriro.";
 "accountPage.deviceRevocationWrongPassword" = "Pasahitza okerra";
 "accountPage.deviceRevocationUnknownDevice" = "Ezagutzen ez den gailua";
 "accountPage.deviceRevocationError" = "Gailuaren baliogabetze akatsa";
 "accountPage.linkDeviceTitle" = "Beste gailu bat lotzeko.";
 "accountPage.other" = "Besteak";
-"accountPage.removeAccountMessage" = "\"Azabatu\" sakatzean, kontu hau ezabatuko duzu!";
-"accountPage.removeAccountButton" = "Kendu";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Jarri harremanetan Jami-rekin!";
 "accountPage.contactMeOnJamiContant" = "Jarri harremanetan nirekin Jami-ren komunikazio plataforma banatuan dagoen \"%s\" erabiliz: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Erregistratu";
 "accountPage.usernameRegistrationFailed" = "Erregistroak huts egin du.";
 "accountPage.createPassword" = "Kontu enkriptatua";
-"accountPage.createPasswordExplanation" = "Zure Jami kontua bakarrik erregistratzen da zure kontuan gakoak dituen artxibo gisa.";
 "accountPage.changePassword" = "Aldatu pasahitza";
 "accountPage.oldPasswordPlaceholder" = "Sartu pasahitza zaharra";
 "accountPage.newPasswordPlaceholder" = "Sartu pasahitz berria";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Erabili UPnP";
 "accountPage.security" = "Segurtasuna";
 "accountPage.enableSRTP" = "Kodeatu komunikabideak (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Erabiltzaile izena";
-"account.sipServer" = "SIP zerbitzaria";
+"account.sipServer" = "Server";
 "account.port" = "Ataka";
 "account.proxyServer" = "Proxya";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "Batera etortzeko gonbidatu zuten.";
 "generatedMessage.invitationAccepted" = "Elkarrizketan sartu nintzen.";
 "generatedMessage.youJoined" = "Elkarrizketan sartu zinen.";
-"generatedMessage.contactBanned" = "ostiko bat eman zidaten.";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "gehitu egin da.";
 "generatedMessage.outgoingCall" = "Irteera-deia";
 "generatedMessage.missedOutgoingCall" = "Galdutako irteera-deia";

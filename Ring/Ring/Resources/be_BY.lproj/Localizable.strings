@@ -20,18 +20,17 @@
 
 // Global
 "global.accountSettings" = "Налады ўліковых запісаў";
-"global.advancedSettings" = "Дасканалыя налады";
 "global.username" = "Назва карыстальніка";
 "global.recommended" = "Рэкамендуецца";
 "global.password" = "Пароль";
-"global.registerAUsername" = "Запішыце імя карыстальніка";
-"global.enterPassword" = "Увядзіце пароль";
-"global.enterUsername" = "Увесці імя карыстальніка";
+"global.registerAUsername" = "Register username";
+"global.enterPassword" = "Enter password";
+"global.enterUsername" = "Enter username";
 "global.cancel" = "Скасаваць";
-"global.blockContact" = "Блокі кантактаў";
+"global.blockContact" = "Block contact";
 "global.removeAccount" = "Знішчыць рахунак";
 "global.incomingCall" = "Паступны званок";
-"global.ok" = "Добра";
+"global.ok" = "OK";
 "global.close" = "Блізка";
 "global.share" = "Падзяліцца";
 "global.forward" = "Далей";
@@ -46,11 +45,17 @@
 "global.reply" = "Адказ";
 "global.search" = "Пашукаючы...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Delete message";
+"global.deleteFile" = "Delete file from device";
+"global.editMessage" = "Edit message";
+"global.editing" = "Editing";
 "global.create" = "Стварэнне";
+"global.edit" = "Edit";
+"global.remove" = "Remove";
+"global.call" = "Call";
+"global.video" = "Video";
+"global.time" = "Time";
+"global.editPassword" = "Edit password";
 
 // Scan
 "scan.badQrCode" = "Дрэнны QR-код";
@@ -77,7 +82,7 @@
 "swarm.invited" = "Запрашана";
 "swarm.admin" = "Адміністратар";
 "swarm.banned" = "Забараняецца";
-"swarm.unknown" = "Невядомыя";
+"swarm.unknown" = "Unknown";
 "swarm.addMember" = "Дадаць члена";
 "swarm.confirmLeaveSwarm" = "Ці ўпэўнены, што хочаш пакінуць гэты раман?";
 "swarm.Leave" = "Ад'ехаць";
@@ -169,20 +174,12 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Далучайцеся да Jami";
-"createAccount.chooseStrongPassword" = "Выберыце моцны пароль, які вы будзеце памятаць, каб абараніць свой рахунак Jami.";
-"createAccount.repeatPasswordPlaceholder" = "Пацвердзіць пароль";
-"createAccount.passwordCharactersNumberError" = "Мінімум 6 знакаў";
-"createAccount.passwordNotMatchingError" = "Паролі не адпавядаюць";
 "createAccount.lookingForUsernameAvailability" = "шукаючы даступнасць...";
 "createAccount.invalidUsername" = "недаступнае імя карыстальніка";
 "createAccount.usernameAlreadyTaken" = "Ужо прыняты імя карыстальніка";
 "createAccount.usernameValid" = "імя карыстальніка даступна";
 "createAccount.loading" = "Загрузка";
 "createAccount.waitCreateAccountTitle" = "Дададзены рахунак";
-"createAccount.ChooseAPassword" = "Зашыфруйце мой рахунак";
-"createAccount.PasswordInformation" = "Выберыце пароль для шыфравання вашага мясцовага ўліковага запісу. Не забывайце яго, інакш вы не зможаце аднавіць свой уліковы запіс";
-"createAccount.EnableNotifications" = "Паведамленні";
-"createAccount.Recommended" = "(Рэкамендуецца)";
 "createAccount.UsernameNotRegisteredTitle" = "Памылка сеткі";
 "createAccount.UsernameNotRegisteredMessage" = "Уліковы запіс быў створаны, але імя карыстальніка не было зарэгістравана";
 "createAccount.timeoutTitle" = "Створаны ўліковы запіс";
@@ -252,7 +249,6 @@
 "actions.stopLocationSharing" = "Спыніце дзяліцца";
 
 //Calls
-"calls.callItemTitle" = "Званкі";
 "calls.incomingCallInfo" = "хоча пагаварыць з вамі";
 "calls.ringing" = "Званочак...";
 "calls.connecting" = "Злучэнне...";
@@ -281,21 +277,20 @@
 "accountPage.enableNotifications" = "Уключыць паведамленні";
 "accountPage.proxyDisabledAlertTitle" = "Праксі сервер адключаны";
 "accountPage.proxyDisabledAlertBody" = "Каб атрымаць паведамленні, калі ласка, уключыце праксі";
-"accountPage.revokeDeviceTitle" = "Прылада адмены";
-"accountPage.revokeDeviceMessage" = "Ці вы ўпэўненыя, што хочаце адклікаць гэта прылада?";
+"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Адмена";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Завяршана адкліканне прылады";
-"accountPage.deviceRevocationProgress" = "Адмяняючы...";
-"accountPage.deviceRevocationSuccess" = "Прылада была адменена";
+"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Паспрабуйце яшчэ раз";
 "accountPage.deviceRevocationWrongPassword" = "Пароль недакладны";
 "accountPage.deviceRevocationUnknownDevice" = "Невядомы прыбор";
 "accountPage.deviceRevocationError" = "Памылка адкліку прылады";
 "accountPage.linkDeviceTitle" = "Звязаць іншае прылада";
 "accountPage.other" = "Іншыя";
-"accountPage.removeAccountMessage" = "Націснуўшы на \"Выдаліць\", вы выдаляеце гэты рахунак на гэтым прыладзе!";
-"accountPage.removeAccountButton" = "Выдаліць";
+"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Звяжыцеся са мной на Jami!";
 "accountPage.contactMeOnJamiContant" = "Звяжыцеся са мной з дапамогай \"%s\" на раскіданыя медыцынскія платформы Jami: https://jami.net";
@@ -306,7 +301,6 @@
 "accountPage.usernameRegisterAction" = "Рэгістрацыя";
 "accountPage.usernameRegistrationFailed" = "Рэгістрацыя не атрымалася. Калі ласка, праверце пароль.";
 "accountPage.createPassword" = "Зашыфраваны рахунак";
-"accountPage.createPasswordExplanation" = "Ваш рахунак Jami рэгіструецца толькі на гэтым прыладзе як архіў, які змяшчае ключы ад вашага рахунак. Доступ да гэтага архіва можа быць абаронены паролем.";
 "accountPage.changePassword" = "Змяніць пароль";
 "accountPage.oldPasswordPlaceholder" = "Увядзіце стары пароль";
 "accountPage.newPasswordPlaceholder" = "Увядзіце новы пароль";
@@ -329,10 +323,46 @@
 "accountPage.upnpEnabled" = "Выкарыстоўвайце UPnP";
 "accountPage.security" = "Бяспека";
 "accountPage.enableSRTP" = "Зашыфраваць медыя-патокі (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileName" = "Profile name";
+"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.appSettings" = "App settings";
+"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
+"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
+"accountPage.editSipExpirationTime" = "Expiration time";
+"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.thisDevice" = "This device";
+"accountPage.otherDevices" = "Other linked devices";
+"accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipUsername" = "Назва карыстальніка";
-"account.sipServer" = "SIP сервер";
+"account.sipServer" = "Server";
 "account.port" = "Порт";
 "account.proxyServer" = "Практыкаванне";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -396,7 +426,7 @@
 "generatedMessage.invitationReceived" = "быў запрошаны далучыцца";
 "generatedMessage.invitationAccepted" = "далучыўся да размовы";
 "generatedMessage.youJoined" = "Вы далучыліся да размовы";
-"generatedMessage.contactBanned" = "быў кінуты";
+"generatedMessage.contactBlocked" = "was kicked";
 "generatedMessage.contactReAdded" = "быў дададзены зноў";
 "generatedMessage.outgoingCall" = "Выходны званок";
 "generatedMessage.missedOutgoingCall" = "Адпусцілі выхадны званок";
