@@ -126,7 +126,8 @@ class ParticipantProfileInfo {
 
     private func handleProfile(_ profile: Profile) {
         guard let account = self.accountService.currentAccount else { return }
-        if let imageString = profile.photo, let image = imageString.createImage() {
+        // The view has a size of avatarSize.width. Create a larger image for better resolution.
+        if let imageString = profile.photo, let image = imageString.createImage(size: avatarSize.width * 2) {
             avatar.accept(image)
         }
         if self.isLocalCall() {
