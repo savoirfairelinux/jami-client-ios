@@ -30,6 +30,7 @@ protocol AccountProfileObserver: AnyObject {
     var profileDisposeBag: DisposeBag { get set }
     var profileService: ProfilesService { get }
     var selectedAccount: String? { get }
+    var avatarSize: CGFloat { get }
 }
 
 extension AccountProfileObserver {
@@ -37,7 +38,8 @@ extension AccountProfileObserver {
         profileDisposeBag = DisposeBag()
         profileService.getAccountProfile(accountId: account.id)
             .subscribe(onNext: { [weak self] profile in
-                let avatar = profile.photo?.createImage() ?? UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 17)
+                guard let self = self else { return }
+                let avatar = profile.photo?.createImage(size: self.avatarSize * 2) ?? UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 17)
                 DispatchQueue.main.async { [weak self] in
                     /*
                      Profile updates might be received in a different order than
@@ -84,6 +86,7 @@ class AccountRow: ObservableObject, Hashable, Identifiable, AccountProfileObserv
     @Published var registeredName: String = ""
     @Published var bestName: String = ""
     @Published var needMigrate: String?
+    var avatarSize: CGFloat
     var selectedAccount: String? // Not used. Added to conform to the AccountProfileObserver protocol.
 
     var dimensions = AccountRowSizes()
@@ -98,6 +101,7 @@ class AccountRow: ObservableObject, Hashable, Identifiable, AccountProfileObserv
         self.selectedAccount = account.id
         self.profileService = profileService
         self.account = account
+        self.avatarSize = self.dimensions.imageSize
         if account.status == .errorNeedMigration {
             needMigrate = L10n.Account.needMigration
         }
@@ -120,6 +124,7 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
     @Published var profileName: String = ""
     @Published var registeredName: String = ""
     @Published var bestName: String = ""
+    var avatarSize: CGFloat
     @Published var selectedAccount: String?
     @Published var accountsRows: [AccountRow] = []
 
@@ -139,6 +144,7 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
         self.profileService = profileService
         self.nameService = nameService
         self.stateSubject = stateSubject
+        self.avatarSize = self.dimensions.imageSize
         self.subscribeToCurrentAccountUpdates()
         self.subscribeToRegisteredName()
     }

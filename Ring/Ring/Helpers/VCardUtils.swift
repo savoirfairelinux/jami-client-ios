@@ -131,11 +131,27 @@ class VCardUtils {
         return vCardString.data(using: .utf8)
     }
 
-    class func parseToProfile(data: Data) -> Profile? {
-        guard let encoding = data.stringUTF8OrUTF16Encoding,
-              let profileStr = String(data: data, encoding: encoding) else {
-            return nil
+    class func parseDataToProfile(data: Data) -> Profile? {
+        guard let profileStr = String(data: data, encoding: .utf8) else { return nil }
+        let lines = profileStr.split(whereSeparator: \.isNewline)
+        var alias = "", avatar = "", profileUri = ""
+        for line in lines {
+            if line.starts(with: "PHOTO") {
+                avatar = line.components(separatedBy: ":").last ?? ""
+            }
+            if line.starts(with: "FN") {
+                alias = line.components(separatedBy: ":").last ?? ""
+            }
+            if line.starts(with: "TEL;other") {
+                profileUri = line.replacingOccurrences(of: "TEL;other:", with: "")
+            }
         }
+        let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
+        return Profile(uri: profileUri, alias: alias, photo: avatar, type: type.rawValue)
+    }
+
+    class func parseToProfile(filePath: String) -> Profile? {
+        guard let profileStr = try? String(contentsOfFile: filePath, encoding: .utf8) else { return nil}
         let lines = profileStr.split(whereSeparator: \.isNewline)
         var alias = "", avatar = "", profileUri = ""
         for line in lines {

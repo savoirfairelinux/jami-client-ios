@@ -25,11 +25,33 @@ import MobileCoreServices
 import CoreImage.CIFilterBuiltins
 
 extension String {
-    func createImage() -> UIImage? {
-        if let data = NSData(base64Encoded: self, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data {
-            return UIImage(data: data)
+
+    func createResizedImage(targetSize: CGSize) -> UIImage? {
+        guard let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else {
+            return nil
         }
-        return nil
+
+        let options: [CFString: Any] = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceThumbnailMaxPixelSize: max(targetSize.width, targetSize.height),
+            kCGImageSourceCreateThumbnailWithTransform: true
+        ]
+
+        guard let imageSource = CGImageSourceCreateWithData(data as CFData, nil),
+              let resizedImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary),
+              let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
+              let orientationRawValue = imageProperties[kCGImagePropertyOrientation] as? UInt32 else {
+            return nil
+        }
+
+        let orientation = getImageOrientation(from: orientationRawValue)
+
+        return UIImage(cgImage: resizedImage, scale: UIScreen.main.scale, orientation: orientation)
+    }
+
+    func createImage(size: CGFloat) -> UIImage? {
+        let scaledSize = UIScreen.main.scale * size
+        return createResizedImage(targetSize: CGSize(width: scaledSize, height: scaledSize))
     }
 
     func toBool() -> Bool? {
@@ -65,6 +87,7 @@ extension String {
             return false
         }
     }
+
     var isValidURL: Bool {
         do {
             let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
