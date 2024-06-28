@@ -35,6 +35,8 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
     let contact: ContactModel
     let id: String
 
+    let avatarSize: CGFloat = 55
+
     let disposeBag = DisposeBag()
 
     init(contact: ContactModel, account: AccountModel, injectionBag: InjectionBag) {
@@ -53,9 +55,11 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
         if let uri = contact.uriString {
             self.profileService.getProfile(uri: uri, createIfNotexists: false, accountId: account.id)
                 .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onNext: { (profile) in
+                .subscribe(onNext: { [weak self ](profile) in
+                    guard let self = self else { return }
+                    // The view size is avatarSize. Create a larger image for better resolution.
                     if let avatar = profile.photo,
-                       let image = avatar.createImage() {
+                       let image = avatar.createImage(size: self.avatarSize * 2) {
                         DispatchQueue.main.async { [weak self] in
                             guard let self = self else { return }
                             self.profileImage = image

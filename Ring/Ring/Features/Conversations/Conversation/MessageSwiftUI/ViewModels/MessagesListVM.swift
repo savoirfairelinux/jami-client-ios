@@ -352,10 +352,10 @@ class MessagesListVM: ObservableObject {
                 guard let self = self else { return }
                 let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId)
                 let defaultAvatar = UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 16)
+                // The view has a max size 50. Create a larger image for better resolution.
                 if let photo = profile.photo,
-                   let data = NSData(base64Encoded: photo,
-                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    self.currentAccountAvatar = UIImage(data: data) ?? defaultAvatar
+                   let image = photo.createImage(size: 100) {
+                    self.currentAccountAvatar = image
                 } else {
                     self.currentAccountAvatar = defaultAvatar
                 }
@@ -977,8 +977,9 @@ class MessagesListVM: ObservableObject {
                         self.updateName(name: profileName, jamiId: id)
                     }
                     // Set avatar
+                    // The view has a max size 50. Create a larger image for better resolution.
                     if let photo = profile.photo,
-                       let image = photo.createImage() {
+                       let image = photo.createImage(size: 100) {
                         self.updateAvatar(image: image, jamiId: id)
                     } else {
                         self.setAvatarIfNeededFor(jamiId: id, withDefault: false)

@@ -55,20 +55,8 @@ extension UIImage {
     }
 
     public class func getImagefromURL(fileURL: URL, maxSize: CGFloat) -> UIImage? {
-        let options: CFDictionary? = maxSize == 0 ? nil : [
-            kCGImageSourceThumbnailMaxPixelSize: maxSize,
-            kCGImageSourceCreateThumbnailFromImageAlways: true
-        ] as CFDictionary
-
-        guard let imageSource = CGImageSourceCreateWithURL(fileURL as CFURL, nil),
-              let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options),
-              let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
-              let orientationRawValue = imageProperties[kCGImagePropertyOrientation] as? UInt32 else {
-            return nil
-        }
-        let orientation = getImageOrientation(from: orientationRawValue)
-
-        return UIImage(cgImage: downsampledImage, scale: UIScreen.main.scale, orientation: orientation)
+        guard let imageSource = CGImageSourceCreateWithURL(fileURL as CFURL, nil) else { return nil }
+        return createResizedImage(imageSource: imageSource, size: maxSize)
     }
 
     func setRoundCorner(radius: CGFloat, offset: CGFloat) -> UIImage? {
@@ -515,4 +503,21 @@ func getImageOrientation(from orientationRawValue: UInt32) -> UIImage.Orientatio
     default:
         return .up
     }
+}
+
+func createResizedImage(imageSource: CGImageSource, size: CGFloat) -> UIImage? {
+    let options: CFDictionary? = size == 0 ? nil : [
+        kCGImageSourceThumbnailMaxPixelSize: size,
+        kCGImageSourceCreateThumbnailWithTransform: true,
+        kCGImageSourceCreateThumbnailFromImageAlways: true
+    ] as CFDictionary
+
+    guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options),
+          let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
+          let orientationRawValue = imageProperties[kCGImagePropertyOrientation] as? UInt32 else {
+        return nil
+    }
+    let orientation = getImageOrientation(from: orientationRawValue)
+
+    return UIImage(cgImage: downsampledImage, scale: UIScreen.main.scale, orientation: orientation)
 }

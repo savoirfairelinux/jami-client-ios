@@ -48,6 +48,8 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
 
     @Published var accountRemoved: Bool = false
 
+    let avatarSize: CGFloat = 100
+
     let disposeBag = DisposeBag()
 
     let accountService: AccountsService
@@ -132,16 +134,18 @@ extension AccountSummaryVM {
         self.profileService.getAccountProfile(accountId: account.id)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak self] profile in
+                guard let self = self else { return }
+                // The view size is avatarSize. Create a larger image for better resolution.
                 if let imageString = profile.photo,
-                   let image = imageString.createImage() {
-                    DispatchQueue.main.async {
+                   let image = imageString.createImage(size: self.avatarSize * 2) {
+                    DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
                         self.profileImage = image
                     }
                 }
 
                 if let name = profile.alias {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
                         self.profileName = name
                     }

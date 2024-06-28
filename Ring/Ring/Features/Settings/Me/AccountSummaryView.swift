@@ -147,6 +147,7 @@ struct AccountSummaryView: View {
                                 profileImage: model.profileImage,
                                 profileName: model.profileName,
                                 username: model.username,
+                                avatarSize: model.avatarSize,
                                 isPresented: $showEditPrpofile)
             }
         }

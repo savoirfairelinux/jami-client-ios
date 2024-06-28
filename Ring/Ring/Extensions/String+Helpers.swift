@@ -25,11 +25,17 @@ import MobileCoreServices
 import CoreImage.CIFilterBuiltins
 
 extension String {
-    func createImage() -> UIImage? {
-        if let data = NSData(base64Encoded: self, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data {
-            return UIImage(data: data)
+    func createResizedImage(targetSize: CGFloat) -> UIImage? {
+        guard let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else {
+            return nil
         }
-        return nil
+        guard let imageSource = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
+        return Ring.createResizedImage(imageSource: imageSource, size: targetSize)
+    }
+
+    func createImage(size: CGFloat) -> UIImage? {
+        let scaledSize = UIScreen.main.scale * size
+        return createResizedImage(targetSize: scaledSize)
     }
 
     func toBool() -> Bool? {
@@ -65,6 +71,7 @@ extension String {
             return false
         }
     }
+
     var isValidURL: Bool {
         do {
             let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
