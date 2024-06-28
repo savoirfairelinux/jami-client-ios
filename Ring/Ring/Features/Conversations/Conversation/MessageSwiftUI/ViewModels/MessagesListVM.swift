@@ -978,7 +978,7 @@ class MessagesListVM: ObservableObject {
                     }
                     // Set avatar
                     if let photo = profile.photo,
-                       let image = photo.createImage() {
+                       let image = photo.createImage(size: 20) {
                         self.updateAvatar(image: image, jamiId: id)
                     } else {
                         self.setAvatarIfNeededFor(jamiId: id, withDefault: false)

@@ -40,11 +40,50 @@ enum VCardFiles: String {
     case myProfile
 }
 
-struct Profile {
+class Profile {
     var uri: String
     var alias: String?
     var photo: String?
     var type: String
+
+    init(uri: String, alias: String?, photo: String?, type: String) {
+        self.uri = uri
+        self.alias = alias
+        self.photo = photo
+        self.type = type
+
+        // Increment the created count
+        Profile.createdCount += 1
+        // Add self to the instances array
+        Profile.instances.append(self)
+    }
+
+    // Method to get the number of profiles currently in memory
+    static func profilesInMemory() -> Int {
+        return instances.count
+    }
+
+    var memorySize: Int {
+        var size = MemoryLayout.size(ofValue: self)
+        size += uri.utf8.count
+        if let alias = alias {
+            size += alias.utf8.count
+        }
+        size += type.utf8.count
+        if let photo = photo {
+            size += photo.utf8.count
+        }
+        return size
+    }
+
+    static func totalMemorySize() -> Int {
+        return instances.compactMap { $0.memorySize }.reduce(0, +)
+    }
+
+    // Static counter for created profiles
+    static var createdCount = 0
+    // Array to hold weak references to profile instances
+    static var instances: [Profile] = []
 }
 
 enum ProfileType: String {
@@ -131,11 +170,12 @@ class VCardUtils {
         return vCardString.data(using: .utf8)
     }
 
-    class func parseToProfile(data: Data) -> Profile? {
-        guard let encoding = data.stringUTF8OrUTF16Encoding,
-              let profileStr = String(data: data, encoding: encoding) else {
-            return nil
-        }
+    class func parseToProfile(filePath: String) -> Profile? {
+        guard let profileStr = try? String(contentsOfFile: filePath, encoding: .utf8) else { return nil}
+        //        guard let encoding = data.stringUTF8OrUTF16Encoding,
+        //              let profileStr = String(data: data, encoding: encoding) else {
+        //            return nil
+        //        }
         let lines = profileStr.split(whereSeparator: \.isNewline)
         var alias = "", avatar = "", profileUri = ""
         for line in lines {
@@ -150,6 +190,7 @@ class VCardUtils {
             }
         }
         let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
+        // return nil
         return Profile(uri: profileUri, alias: alias, photo: avatar, type: type.rawValue)
     }
 

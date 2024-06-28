@@ -71,9 +71,8 @@ class ProfilesService {
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
         let uri = JamiURI(schema: URIType.ring, infoHash: uri)
         guard let uriString = uri.uriString,
-              let data = FileManager.default.contents(atPath: path),
-              var profile = VCardUtils.parseToProfile(data: data) else { return }
-        if let imageString = profile.photo, let image = imageString.createImage(),
+              var profile = VCardUtils.parseToProfile(filePath: path) else { return }
+        if let imageString = profile.photo, let image = imageString.createImage(size: 200),
            let resizedImage = image.resizeProfileImage() {
             let imageData = resizedImage.jpegData(compressionQuality: 1)
             if let base64String = imageData?.base64EncodedString() {
@@ -173,18 +172,18 @@ class ProfilesService {
         }
 
         // Create the vCard, save and db and emit a new event
-        if let profile = VCardUtils.parseToProfile(data: vCardData) {
-            guard let uri = JamiURI.init(schema: URIType.ring,
-                                         infoHash: ringID).uriString else {
-                return
-            }
-            _ = self.dbManager
-                .createOrUpdateRingProfile(profileUri: uri,
-                                           alias: profile.alias,
-                                           image: profile.photo,
-                                           accountId: accountId)
-            self.triggerProfileSignal(uri: uri, createIfNotexists: false, accountId: accountId)
-        }
+        //        if let profile = VCardUtils.parseToProfile(data: vCardData) {
+        //            guard let uri = JamiURI.init(schema: URIType.ring,
+        //                                         infoHash: ringID).uriString else {
+        //                return
+        //            }
+        //            _ = self.dbManager
+        //                .createOrUpdateRingProfile(profileUri: uri,
+        //                                           alias: profile.alias,
+        //                                           image: profile.photo,
+        //                                           accountId: accountId)
+        //            self.triggerProfileSignal(uri: uri, createIfNotexists: false, accountId: accountId)
+        //        }
     }
 
     private func triggerProfileSignal(uri: String, createIfNotexists: Bool, accountId: String) {

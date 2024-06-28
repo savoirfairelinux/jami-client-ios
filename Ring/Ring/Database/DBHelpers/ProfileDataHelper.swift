@@ -61,7 +61,7 @@ final class ProfileDataHelper {
         var profiles = [Profile]()
         let items = try dataBase.prepare(contactsProfileTable)
         for item in items {
-            profiles.append(Profile(uri: item[uri], alias: item[alias],
+            profiles.append(Profile(uri: item[uri], alias: item[alias]!,
                                     photo: item[photo], type: item[type]))
         }
         return profiles

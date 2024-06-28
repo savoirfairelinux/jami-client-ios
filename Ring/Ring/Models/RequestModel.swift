@@ -60,14 +60,14 @@ class RequestModel {
         self.type = type
         self.participants = [ConversationParticipant(jamiId: jamiId)]
         self.receivedDate = receivedDate
-        if let profile = VCardUtils.parseToProfile(data: payload) {
-            if let photo = profile.photo {
-                self.avatar = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data
-            }
-            if let name = profile.alias {
-                self.name = name
-            }
-        }
+        //        if let profile = VCardUtils.parseToProfile(data: payload) {
+        //            if let photo = profile.photo {
+        //                self.avatar = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data
+        //            }
+        //            if let name = profile.alias {
+        //                self.name = name
+        //            }
+        //        }
     }
 
     init(withDictionary dictionary: [String: String], accountId: String, type: RequestType) {
@@ -77,16 +77,16 @@ class RequestModel {
             guard let jamiId = dictionary[RequestKey.from.rawValue] else { return }
             self.participants = [ConversationParticipant(jamiId: jamiId)]
 
-            if let vCardString = dictionary[RequestKey.payload.rawValue],
-               let data = vCardString.data(using: String.Encoding.utf8), !data.isEmpty,
-               let profile = VCardUtils.parseToProfile(data: data) {
-                if let photo = profile.photo {
-                    self.avatar = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data
-                }
-                if let name = profile.alias {
-                    self.name = name
-                }
-            }
+            //            if let vCardString = dictionary[RequestKey.payload.rawValue],
+            //               let data = vCardString.data(using: String.Encoding.utf8), !data.isEmpty,
+            //               let profile = VCardUtils.parseToProfile(data: data) {
+            //                if let photo = profile.photo {
+            //                    self.avatar = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data
+            //                }
+            //                if let name = profile.alias {
+            //                    self.name = name
+            //                }
+            //            }
             if let receivedDateString = dictionary[RequestKey.received.rawValue],
                let timestamp = Double(receivedDateString) {
                 self.receivedDate = Date(timeIntervalSince1970: timestamp)

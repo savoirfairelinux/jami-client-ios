@@ -55,7 +55,7 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
                 .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { (profile) in
                     if let avatar = profile.photo,
-                       let image = avatar.createImage() {
+                       let image = avatar.createImage(size: 55) {
                         DispatchQueue.main.async { [weak self] in
                             guard let self = self else { return }
                             self.profileImage = image

@@ -567,9 +567,9 @@ class DBManager {
     }
 
     func accountVCard(for accountId: String) -> Profile? {
-        guard let path = self.dbConnections.accountProfilePath(accountId: accountId),
-              let data = FileManager.default.contents(atPath: path) else { return nil }
-        return VCardUtils.parseToProfile(data: data)
+        guard let path = self.dbConnections.accountProfilePath(accountId: accountId) else { return nil }
+        // let data = FileManager.default.contents(atPath: path) else { return nil }
+        return VCardUtils.parseToProfile(filePath: path)
     }
 
     func createOrUpdateRingProfile(profileUri: String, alias: String?, image: String?, accountId: String) -> Bool {
@@ -745,11 +745,12 @@ class DBManager {
     }
 
     private func getProfileFromPath(path: String) -> Profile? {
-        guard let data = FileManager.default.contents(atPath: path),
-              let profile = VCardUtils.parseToProfile(data: data) else {
-            return nil
-        }
-        return profile
+        return VCardUtils.parseToProfile(filePath: path)
+        //        guard let data = FileManager.default.contents(atPath: path),
+        //              let profile = VCardUtils.parseToProfile(filePath: path) else {
+        //            return nil
+        //        }
+        //        return profile
     }
 
     private func saveProfile(profile: Profile, path: String) throws {
