@@ -133,7 +133,7 @@ extension AccountSummaryVM {
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak self] profile in
                 if let imageString = profile.photo,
-                   let image = imageString.createImage() {
+                   let image = imageString.createImage(size: 200) {
                     DispatchQueue.main.async {
                         guard let self = self else { return }
                         self.profileImage = image

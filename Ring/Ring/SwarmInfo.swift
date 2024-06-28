@@ -320,7 +320,7 @@ class SwarmInfo: SwarmInfoProtocol {
         guard let conversation = self.conversation else { return }
         let info = self.conversationsService.getConversationInfo(conversationId: conversation.id, accountId: self.accountId)
         if let avatar = info[ConversationAttributes.avatar.rawValue] {
-            self.avatar.accept(avatar.createImage())
+            self.avatar.accept(avatar.createImage(size: self.avatarHeight * 2))
         }
         if let title = info[ConversationAttributes.title.rawValue] {
             self.title.accept(title)
@@ -374,7 +374,7 @@ class SwarmInfo: SwarmInfoProtocol {
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak participantInfo] profile in
                 guard let participantInfo = participantInfo else { return }
-                if let imageString = profile.photo, let image = imageString.createImage() {
+                if let imageString = profile.photo, let image = imageString.createImage(size: self.avatarHeight * 2) {
                     participantInfo.avatar.accept(image)
                     participantInfo.hasProfileAvatar = true
                 }
