@@ -71,15 +71,7 @@ class ProfilesService {
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
         let uri = JamiURI(schema: URIType.ring, infoHash: uri)
         guard let uriString = uri.uriString,
-              let data = FileManager.default.contents(atPath: path),
-              var profile = VCardUtils.parseToProfile(data: data) else { return }
-        if let imageString = profile.photo, let image = imageString.createImage(),
-           let resizedImage = image.resizeProfileImage() {
-            let imageData = resizedImage.jpegData(compressionQuality: 1)
-            if let base64String = imageData?.base64EncodedString() {
-                profile.photo = base64String
-            }
-        }
+              let profile = VCardUtils.parseToProfile(filePath: path) else { return }
         _ = self.dbManager
             .createOrUpdateRingProfile(profileUri: uriString,
                                        alias: profile.alias,
@@ -173,7 +165,7 @@ class ProfilesService {
         }
 
         // Create the vCard, save and db and emit a new event
-        if let profile = VCardUtils.parseToProfile(data: vCardData) {
+        if let profile = VCardUtils.parseDataToProfile(data: vCardData) {
             guard let uri = JamiURI.init(schema: URIType.ring,
                                          infoHash: ringID).uriString else {
                 return

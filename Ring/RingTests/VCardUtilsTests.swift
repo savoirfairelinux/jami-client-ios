@@ -61,7 +61,7 @@ final class VCardUtilsTests: XCTestCase {
         // Arrange
         let data = generateVCardStingWithNameAndImage().data(using: .utf8)!
         // Act
-        let profile = VCardUtils.parseToProfile(data: data)
+        let profile = VCardUtils.parseDataToProfile(data: data)
         // Assert
         XCTAssertEqual(profile?.alias, profileName1)
         XCTAssertEqual(profile?.photo, photo)

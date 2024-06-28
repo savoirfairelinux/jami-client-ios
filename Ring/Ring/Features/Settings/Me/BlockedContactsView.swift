@@ -41,7 +41,7 @@ struct BlockedContactRowView: View {
 
     var body: some View {
         HStack {
-            AvatarImageView(model: model, width: 55, height: 55)
+            AvatarImageView(model: model, width: model.avatarSize, height: model.avatarSize)
 
             Spacer()
                 .frame(width: 15)

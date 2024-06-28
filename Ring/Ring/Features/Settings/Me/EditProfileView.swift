@@ -23,18 +23,19 @@ import SwiftUI
 struct EditProfileView: View {
     @Binding var isPresented: Bool
     @StateObject var model: EditProfileVM
+    var avatarSize: CGFloat
 
-    init(injectionBag: InjectionBag, account: AccountModel, profileImage: UIImage?, profileName: String, username: String?, isPresented: Binding<Bool>) {
+    init(injectionBag: InjectionBag, account: AccountModel, profileImage: UIImage?, profileName: String, username: String?, avatarSize: CGFloat, isPresented: Binding<Bool>) {
         _model = StateObject(wrappedValue: EditProfileVM(injectionBag: injectionBag, account: account, profileImage: profileImage, profileName: profileName, username: username))
         _isPresented = isPresented
+        self.avatarSize = avatarSize
     }
+
     @SwiftUI.State private var profileImage: Image? = Image(systemName: "person.circle")
     @SwiftUI.State private var profileName: String = ""
 
     @SwiftUI.State private var showingImagePicker = false
     @SwiftUI.State private var imagePickerType: PhotoSheetType?
-
-    let avatarSize: CGFloat = 100
 
     var body: some View {
         NavigationView {
