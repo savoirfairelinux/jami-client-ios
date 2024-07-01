@@ -45,14 +45,14 @@
 "global.reply" = "Відповісти";
 "global.search" = "Пошук…";
 "global.donate" = "Донат";
-"global.deleteMessage" = "Delete message";
-"global.deleteFile" = "Delete file from device";
+"global.deleteMessage" = "Видалити повідомлення";
+"global.deleteFile" = "Видалити файл із пристрою";
 "global.editMessage" = "Редагувати повідомлення";
 "global.editing" = "Editing";
 "global.create" = "Створити";
 "global.edit" = "Редагувати";
 "global.remove" = "Видалити";
-"global.call" = "Call";
+"global.call" = "Дзвінок";
 "global.video" = "Відео";
 "global.time" = "Час";
 "global.editPassword" = "Edit password";
@@ -82,7 +82,7 @@
 "swarm.invited" = "Запрошено";
 "swarm.admin" = "Адміністратор";
 "swarm.banned" = "Заборонена";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "Невідомий";
 "swarm.addMember" = "Додавати члена";
 "swarm.confirmLeaveSwarm" = "Ти впевнений, що хочеш покинути цей рій?";
 "swarm.Leave" = "Піти";
@@ -290,7 +290,7 @@
 "accountPage.deviceRevocationError" = "Помилка відкликання пристрою";
 "accountPage.linkDeviceTitle" = "Прив'язати інший пристрій";
 "accountPage.other" = "Інше";
-"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
+"accountPage.removeAccountMessage" = "Якщо ваш обліковий запис не був заставлений на резервне запис або доданий до іншого пристрою, ваш обліковий запис і зареєстроване ім'я будуть незворотно втрачені.";
 "accountPage.inviteFriends" = "Запросити друзів";
 "accountPage.contactMeOnJamiTitle" = "Звініться зі мною на Джамі!";
 "accountPage.contactMeOnJamiContant" = "Зверніться до мене за допомогою \"%s\" на платформі спілкування, що поширюється Jami: https://jami.net";
@@ -326,17 +326,17 @@
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Профіль";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "Акаунт";
 "accountPage.profileName" = "Profile name";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "Керувати акаунтом";
 "accountPage.encryptAccount" = "Зашифруйте обліковий запис паролем";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "Паролі не збігаються";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
-"accountPage.linkedDevices" = "Linked devices";
+"accountPage.linkedDevices" = "Привʼязані пристрої";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
@@ -345,15 +345,15 @@
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "За повідомленнями";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "Дозвольте прийом покликів з невідомих контактів";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Час закінчення реєстрації (секунди)";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "Перевірка сервісних TLS сертифікат ";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
-"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsRequireTlsCertificate" = "Вимагати сертифікат безпеки для вхідних TLS з’єднань";
 "accountPage.tlsDisableSecureDlgCheck" = "Відключити безпечний перевірка діалогу для вхідних даних TLS";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
@@ -362,7 +362,7 @@
 "accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipServer" = "Server";
+"account.sipServer" = "Сервер";
 "account.port" = "Порт";
 "account.proxyServer" = "Проксі";
 "account.createSipAccount" = "Налаштувати обліковий запис SIP";
@@ -426,7 +426,7 @@
 "generatedMessage.invitationReceived" = "був запрошений приєднатися";
 "generatedMessage.invitationAccepted" = "приєднався до розмови";
 "generatedMessage.youJoined" = "Ти приєднався до розмови";
-"generatedMessage.contactBlocked" = "was kicked";
+"generatedMessage.contactBlocked" = "був кинутий";
 "generatedMessage.contactReAdded" = "було додано";
 "generatedMessage.outgoingCall" = "Вихідний виклик";
 "generatedMessage.missedOutgoingCall" = "Пропущений вихідний виклик";

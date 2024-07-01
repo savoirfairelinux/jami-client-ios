@@ -23,8 +23,8 @@
 "global.username" = "Nazwa użytkownika";
 "global.recommended" = "Zalecane";
 "global.password" = "Hasło";
-"global.registerAUsername" = "Register username";
-"global.enterPassword" = "Enter password";
+"global.registerAUsername" = "Zarejestruj nazwę użytkownika";
+"global.enterPassword" = "Wprowadź hasło";
 "global.enterUsername" = "Wpisz nazwę użytkownika";
 "global.cancel" = "Anuluj";
 "global.blockContact" = "Blokuj kontakt";
@@ -45,16 +45,16 @@
 "global.reply" = "Odpowiedz";
 "global.search" = "Szukanie...";
 "global.donate" = "Przekaż darowiznę";
-"global.deleteMessage" = "Delete message";
+"global.deleteMessage" = "Usuń wiadomość";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Edycja wiadomości";
 "global.editing" = "Editing";
 "global.create" = "Stwórz";
 "global.edit" = "Edytuj";
 "global.remove" = "Usuń";
-"global.call" = "Call";
+"global.call" = "Dzwoń";
 "global.video" = "Wideo";
-"global.time" = "Time";
+"global.time" = "Czas";
 "global.editPassword" = "Edit password";
 
 // Scan
@@ -82,7 +82,7 @@
 "swarm.invited" = "Zaproszone";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Zakazane";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "Nieznane";
 "swarm.addMember" = "Dodaj członka";
 "swarm.confirmLeaveSwarm" = "Jesteś pewna, że chcesz opuścić tę rzędę?";
 "swarm.Leave" = "Wyjdź";
@@ -290,7 +290,7 @@
 "accountPage.deviceRevocationError" = "Błąd odwoływania urządzenia";
 "accountPage.linkDeviceTitle" = "Połącz nowe urządzenie";
 "accountPage.other" = "Inne";
-"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
+"accountPage.removeAccountMessage" = "Jeśli twoje konto nie posiada kopii zapasowej lub nie jest obecne na innym urządzeniu, twoje konto oraz zarejestrowana nazwa zostaną bezpowrotnie utracone.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Skontaktuj się ze mną na Jami!";
 "accountPage.contactMeOnJamiContant" = "Skontaktuj się ze mną używając \"%s\" w rozproszonej platformie komunikacyjnej Jami: https://jami.net";
@@ -324,19 +324,19 @@
 "accountPage.security" = "Zabezpieczenia";
 "accountPage.enableSRTP" = "Szyfrowanie strumieni multimedialnych (SRTP)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
-"accountPage.profileHeader" = "Profile";
+"accountPage.profileHeader" = "Profil";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "Konto";
 "accountPage.profileName" = "Nazwa profilu";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "Zarządzaj kontem";
 "accountPage.encryptAccount" = "Szyfrowanie konta za pomocą hasła";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "Hasła nie pasują do siebie";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
-"accountPage.linkedDevices" = "Linked devices";
+"accountPage.linkedDevices" = "Połączone urządzenia";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
@@ -345,15 +345,15 @@
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "Powiadomienia";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "Zezwól na połączenia od nieznanych użytkowników";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Czas wygaśnięcia rejestracji (sekundy)";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "Weryfikuj certyfikaty TLS serwera";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
-"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsRequireTlsCertificate" = "Wymagamy certyfikat dla przychodzących połączeń TLS";
 "accountPage.tlsDisableSecureDlgCheck" = "Wyłącz bezpieczny kontrolę dialogu dla danych TLS wchodzących";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
@@ -362,7 +362,7 @@
 "accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipServer" = "Server";
+"account.sipServer" = "Serwer";
 "account.port" = "Port";
 "account.proxyServer" = "Pełnomocnik";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -426,7 +426,7 @@
 "generatedMessage.invitationReceived" = "Został zaproszony do przyłączenia się";
 "generatedMessage.invitationAccepted" = "Dołączyłem do rozmowy";
 "generatedMessage.youJoined" = "Dołączyłeś do rozmowy.";
-"generatedMessage.contactBlocked" = "was kicked";
+"generatedMessage.contactBlocked" = "- Wpadł na mnie.";
 "generatedMessage.contactReAdded" = "został ponownie dodany";
 "generatedMessage.outgoingCall" = "Połączenie wychodzące";
 "generatedMessage.missedOutgoingCall" = "Nieodebrane połączenie wychodzące";

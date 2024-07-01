@@ -24,7 +24,7 @@
 "global.recommended" = "பரிந்துரைக்கப்படுகிறது";
 "global.password" = "கடவுச்சொல்";
 "global.registerAUsername" = "பயனர்பெயரை பதிவு செய்யவும்";
-"global.enterPassword" = "Enter password";
+"global.enterPassword" = "கடவுச்சொல்லை உள்ளிடவும்";
 "global.enterUsername" = "Enter username";
 "global.cancel" = "ரத்துசெய்க";
 "global.blockContact" = "பிளாக் தொடர்பு";
@@ -45,14 +45,14 @@
 "global.reply" = "பதில்";
 "global.search" = "தேடுவது.";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete message";
+"global.deleteMessage" = "செய்தி நீக்கவும்";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "செய்தி திருத்தவும்";
 "global.editing" = "Editing";
 "global.create" = "உருவாக்கு";
 "global.edit" = "திருத்தவும்";
 "global.remove" = "நீக்கவும்";
-"global.call" = "Call";
+"global.call" = "அழைப்பு";
 "global.video" = "காணொளி";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
@@ -82,7 +82,7 @@
 "swarm.invited" = "அழைக்கப்பட்டவர்";
 "swarm.admin" = "நிர்வாகி";
 "swarm.banned" = "தடை செய்யப்பட்டது";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "அறியப்படாதது";
 "swarm.addMember" = "உறுப்பினர் சேர்க்கவும்";
 "swarm.confirmLeaveSwarm" = "நீங்கள் இந்த குளத்தில் இருந்து வெளியேற வேண்டும் என்று உறுதியாக இருக்கிறீர்களா?";
 "swarm.Leave" = "வெளியேறு";
@@ -290,7 +290,7 @@
 "accountPage.deviceRevocationError" = "சாதன மீறல் தவறு";
 "accountPage.linkDeviceTitle" = "மற்றொரு சாதனத்தை இணைக்கவும்";
 "accountPage.other" = "மற்றவை";
-"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
+"accountPage.removeAccountMessage" = "உங்கள் கணக்கு காப்புப்பிரதி எடுக்கப்படவில்லை அல்லது மற்றொரு சாதனத்தில் சேர்க்கப்படவில்லை என்றால், உங்கள் கணக்கு மற்றும் பதிவு செய்யப்பட்ட பெயர் திரும்பப்பெற முடியாத வகையில் இழக்கப்படும்.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ஜாமி மீது என்னை தொடர்பு!";
 "accountPage.contactMeOnJamiContant" = "ஜாமி விநியோகிக்கப்பட்ட தகவல் தொடர்பு தளத்தில் \"%s\" ஐப் பயன்படுத்தி என்னை தொடர்பு கொள்ளவும்ஃ https://jami.net";
@@ -326,17 +326,17 @@
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "சுயவிவரம்";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "கணக்கு";
 "accountPage.profileName" = "Profile name";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "கணக்கை நிர்வகிக்கவும்";
 "accountPage.encryptAccount" = "கடவுச்சொல்லுடன் கணக்கை குறியாக்கம் செய்யவும்";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "கடவுச்சொற்கள் பொருந்தாது";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
-"accountPage.linkedDevices" = "Linked devices";
+"accountPage.linkedDevices" = "இணைக்கப்பட்ட சாதனங்கள்";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
@@ -345,13 +345,13 @@
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "அறிவிப்புகள்";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "அறியப்படாத தொடர்புகளிலிருந்து வரும் அழைப்புகளை அனுமதிக்கவும்";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "பதிவு கால அவகாசம் (விநாடிகள்)";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "சேவையக TLS சான்றிதழ்களை சரிபார்க்கவும்";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
 "accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
 "accountPage.tlsDisableSecureDlgCheck" = "உள்வரும் TLS தரவுகளுக்கான பாதுகாப்பான உரையாடல் சோதனையை முடக்கு";
@@ -362,7 +362,7 @@
 "accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipServer" = "Server";
+"account.sipServer" = "சேவையகம்";
 "account.port" = "துறைமுகம்";
 "account.proxyServer" = "பிரதிநிதி";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -426,7 +426,7 @@
 "generatedMessage.invitationReceived" = "சேர அழைக்கப்பட்டார்";
 "generatedMessage.invitationAccepted" = "உரையாடலில் சேர்ந்து";
 "generatedMessage.youJoined" = "நீங்கள் உரையாடலில் சேர்ந்து";
-"generatedMessage.contactBlocked" = "was kicked";
+"generatedMessage.contactBlocked" = "அடித்த";
 "generatedMessage.contactReAdded" = "மீண்டும் சேர்க்கப்பட்டது";
 "generatedMessage.outgoingCall" = "வெளியேறும் அழைப்பு";
 "generatedMessage.missedOutgoingCall" = "தொலைபேசி அழைப்பு தவறியது";

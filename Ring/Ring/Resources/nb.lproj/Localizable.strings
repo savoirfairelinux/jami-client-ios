@@ -23,8 +23,8 @@
 "global.username" = "Brukernavn";
 "global.recommended" = "Anbefalt";
 "global.password" = "Passord";
-"global.registerAUsername" = "Register username";
-"global.enterPassword" = "Enter password";
+"global.registerAUsername" = "Registrer brukernavn";
+"global.enterPassword" = "Tast inn passord";
 "global.enterUsername" = "Skriv inn brukernavn";
 "global.cancel" = "Avbryt";
 "global.blockContact" = "Blokker kontakt";
@@ -45,16 +45,16 @@
 "global.reply" = "Svar";
 "global.search" = "Søker...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete message";
+"global.deleteMessage" = "Slett melding";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Redigere melding";
 "global.editing" = "Editing";
 "global.create" = "Opprett";
 "global.edit" = "Redigere";
 "global.remove" = "Slett";
-"global.call" = "Call";
+"global.call" = "Ring";
 "global.video" = "Video";
-"global.time" = "Time";
+"global.time" = "Tid";
 "global.editPassword" = "Edit password";
 
 // Scan
@@ -82,7 +82,7 @@
 "swarm.invited" = "Invitert";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Forbudt";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "Ukjent";
 "swarm.addMember" = "Legg til medlem";
 "swarm.confirmLeaveSwarm" = "Er du sikker på at du vil forlate denne sjarmen?";
 "swarm.Leave" = "Gå bort";
@@ -290,7 +290,7 @@
 "accountPage.deviceRevocationError" = "Feil ved tilbakekalling av enhet";
 "accountPage.linkDeviceTitle" = "Tilknytt ny enhet";
 "accountPage.other" = "Andre";
-"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
+"accountPage.removeAccountMessage" = "Hvis kontoen din ikke er sikkerhetskopiert eller lagt til en annen enhet, vil kontoen og registrert navn være uigenkallelig tapt.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Kontakt meg på Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontakt meg via \"%s\" på den distribuerte kommunikasjonsplattformen Jami: https://jami.net";
@@ -324,36 +324,36 @@
 "accountPage.security" = "Sikkerhet";
 "accountPage.enableSRTP" = "Krypter mediastrømmer (SRTP)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
-"accountPage.profileHeader" = "Profile";
+"accountPage.profileHeader" = "Profil";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "Konto";
 "accountPage.profileName" = "Profile name";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "Behandle konto";
 "accountPage.encryptAccount" = "Kryptere konto med passord";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "Passordene samsvarer ikke";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
-"accountPage.linkedDevices" = "Linked devices";
+"accountPage.linkedDevices" = "Tilknyttede enheter";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
 "accountPage.pinError" = "Failed to generate PIN";
-"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationTitle" = "Varsler";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "Tillat anrop fra ukjente kontakter";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Registreringstidspunktet for registrering (sekunder)";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "Verifiser tjener TLS sertifikater";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
-"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsRequireTlsCertificate" = "Krev sertifikat for innkommende TLS-forbindelser";
 "accountPage.tlsDisableSecureDlgCheck" = "Inaktivere sikker dialogkontroll for innkommende TLS-data";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
@@ -362,7 +362,7 @@
 "accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipServer" = "Server";
+"account.sipServer" = "Tjener";
 "account.port" = "Port";
 "account.proxyServer" = "Mellomtjener";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -426,7 +426,7 @@
 "generatedMessage.invitationReceived" = "ble invitert til å bli med";
 "generatedMessage.invitationAccepted" = "ble med i samtalen";
 "generatedMessage.youJoined" = "Du kom med i samtalen";
-"generatedMessage.contactBlocked" = "was kicked";
+"generatedMessage.contactBlocked" = "ble sparket";
 "generatedMessage.contactReAdded" = "ble lagt til";
 "generatedMessage.outgoingCall" = "Utgående samtale";
 "generatedMessage.missedOutgoingCall" = "Tapt utgående anrop";

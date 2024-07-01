@@ -45,14 +45,14 @@
 "global.reply" = "ตอบกลับ";
 "global.search" = "ค้นหา...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete message";
+"global.deleteMessage" = "ลบข้อความ";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "ปรับข้อความ";
 "global.editing" = "Editing";
 "global.create" = "สร้าง";
 "global.edit" = "ปรับแต่ง";
 "global.remove" = "ยกออก";
-"global.call" = "Call";
+"global.call" = "โทร";
 "global.video" = "วีดีโอ";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
@@ -82,7 +82,7 @@
 "swarm.invited" = "เรียก";
 "swarm.admin" = "ผู้บริหาร";
 "swarm.banned" = "ป้องกัน";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "ไม่ทราบ";
 "swarm.addMember" = "เพิ่มสมาชิก";
 "swarm.confirmLeaveSwarm" = "คุณแน่ใจนะว่าอยากออกจากกลุ่มนี้?";
 "swarm.Leave" = "ออกไป";
@@ -290,7 +290,7 @@
 "accountPage.deviceRevocationError" = "ความผิดพลาดในการยกเลิกอุปกรณ์";
 "accountPage.linkDeviceTitle" = "เชื่อมต่ออุปกรณ์อื่น";
 "accountPage.other" = "อื่นๆ";
-"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
+"accountPage.removeAccountMessage" = "ถ้าบัญชีของคุณไม่ได้ถูกสํารองหรือเพิ่มขึ้นในเครื่องอื่น บัญชีและชื่อที่ลงทะเบียนของคุณจะหายไปอย่างไม่ถูกลั้น";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ติดต่อฉันใน Jami!";
 "accountPage.contactMeOnJamiContant" = "ติดต่อฉันโดยใช้ \"%s\" บนโครงการสื่อสารกระจายของ Jami: https://jami.net";
@@ -326,17 +326,17 @@
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "ประวัติโดยย่อ";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "บัญชี";
 "accountPage.profileName" = "Profile name";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "จัดการบัญชี";
 "accountPage.encryptAccount" = "เคล็ดลับบัญชีด้วยรหัสผ่าน";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "รหัสผ่านไม่ตรงกัน";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
-"accountPage.linkedDevices" = "Linked devices";
+"accountPage.linkedDevices" = "อุปกรณ์ที่เชื่อมโยง";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
@@ -345,15 +345,15 @@
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "การแจ้งเตือน";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "อนุญาตสายเรียกเข้าจากผู้ติดต่อที่ไม่รู้จัก";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "เวลาหมดอายุการลงทะเบียน (วินาที)";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "ยืนยันการรับรอง TLS ของเซอร์เวอร์";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
-"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsRequireTlsCertificate" = "ต้องมีใบรับรองสำหรับการเชื่อมต่อ TLS ขาเข้า";
 "accountPage.tlsDisableSecureDlgCheck" = "ปิดการตรวจสอบการโต้ตอบที่ปลอดภัยสําหรับข้อมูล TLS ที่เข้ามา";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
@@ -362,7 +362,7 @@
 "accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipServer" = "Server";
+"account.sipServer" = "เซอร์เวอร์";
 "account.port" = "พอร์ต";
 "account.proxyServer" = "พอร์กส";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -426,7 +426,7 @@
 "generatedMessage.invitationReceived" = "ได้รับเชิญร่วม";
 "generatedMessage.invitationAccepted" = "เข้าร่วมการพูดคุย";
 "generatedMessage.youJoined" = "คุณเข้าร่วมการพูดคุย";
-"generatedMessage.contactBlocked" = "was kicked";
+"generatedMessage.contactBlocked" = "ถูกเตะ";
 "generatedMessage.contactReAdded" = "ได้เพิ่มขึ้นใหม่";
 "generatedMessage.outgoingCall" = "โทรออก";
 "generatedMessage.missedOutgoingCall" = "สายที่ไม่ได้รับ";

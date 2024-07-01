@@ -24,7 +24,7 @@
 "global.recommended" = "సిఫార్సు";
 "global.password" = "పాస్వర్డ్";
 "global.registerAUsername" = "వినియోగదారు పేరును నమోదు చేయండి";
-"global.enterPassword" = "Enter password";
+"global.enterPassword" = "పాస్వర్డ్ను నమోదు చేయండి";
 "global.enterUsername" = "Enter username";
 "global.cancel" = "రద్దు చేయి";
 "global.blockContact" = "బ్లాక్ కాంటాక్ట్";
@@ -45,14 +45,14 @@
 "global.reply" = "జవాబు";
 "global.search" = "శోధన.";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete message";
+"global.deleteMessage" = "సందేశాన్ని తొలగించు";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "సందేశాన్ని సవరించు";
 "global.editing" = "Editing";
 "global.create" = "సృష్టించు";
 "global.edit" = "సవరించు";
 "global.remove" = "తొలగించు";
-"global.call" = "Call";
+"global.call" = "కాల్";
 "global.video" = "వీడియో";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
@@ -82,7 +82,7 @@
 "swarm.invited" = "ఆహ్వానించబడినవారు";
 "swarm.admin" = "నిర్వాహకుడు";
 "swarm.banned" = "నిషేధించబడింది";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "తెలియని";
 "swarm.addMember" = "సభ్యుడిని జోడించండి";
 "swarm.confirmLeaveSwarm" = "మీరు ఈ సమూహం వదిలి అనుకుంటున్నారా ఖచ్చితంగా?";
 "swarm.Leave" = "బయలుదేరండి";
@@ -290,7 +290,7 @@
 "accountPage.deviceRevocationError" = "పరికర రద్దు లోపం";
 "accountPage.linkDeviceTitle" = "మరొక పరికరమును లింక్ చేయండి";
 "accountPage.other" = "ఇతర";
-"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
+"accountPage.removeAccountMessage" = "మీ ఖాతాను బ్యాకప్ చేయకపోతే లేదా మరొక పరికరానికి జోడించకపోతే, మీ ఖాతా మరియు నమోదు చేయబడిన పేరు తిరస్కరించలేని విధంగా కోల్పోతాయి.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Jami వద్ద నాకు సంప్రదించండి!";
 "accountPage.contactMeOnJamiContant" = "జామి పంపిణీ కమ్యూనికేషన్ ప్లాట్ఫామ్లో \"%s\" ను ఉపయోగించి నన్ను సంప్రదించండిః https://jami.net";
@@ -326,17 +326,17 @@
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "ప్రొఫైల్";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "ఖాతా";
 "accountPage.profileName" = "Profile name";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "ఖాతాను నిర్వహించండి";
 "accountPage.encryptAccount" = "పాస్వర్డ్తో ఖాతాను గుప్తీకరించండి";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "పాస్వర్డ్లు సరిపోలవు";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
-"accountPage.linkedDevices" = "Linked devices";
+"accountPage.linkedDevices" = "లింక్ చేయబడిన పరికరాలు";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
@@ -345,13 +345,13 @@
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "నోటిఫికేషన్లు";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "తెలియని పరిచయాల నుండి ఇన్కమింగ్ కాల్స్ అనుమతించు";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "నమోదు గడువు (సెకన్లు)";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "సర్వర్ TLS సర్టిఫికేట్లను ధృవీకరించండి";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
 "accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
 "accountPage.tlsDisableSecureDlgCheck" = "ఇన్కమింగ్ TLS డేటా కోసం సురక్షిత డైలాగ్ తనిఖీని నిలిపివేయండి";
@@ -362,7 +362,7 @@
 "accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipServer" = "Server";
+"account.sipServer" = "సర్వర్";
 "account.port" = "పోర్ట్";
 "account.proxyServer" = "ప్రాక్సీ";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -426,7 +426,7 @@
 "generatedMessage.invitationReceived" = "చేరడానికి ఆహ్వానించారు";
 "generatedMessage.invitationAccepted" = "సంభాషణలో చేరారు";
 "generatedMessage.youJoined" = "మీరు సంభాషణ చేరారు";
-"generatedMessage.contactBlocked" = "was kicked";
+"generatedMessage.contactBlocked" = "కొట్టారు";
 "generatedMessage.contactReAdded" = "తిరిగి జోడించబడింది";
 "generatedMessage.outgoingCall" = "బయటి కాల్";
 "generatedMessage.missedOutgoingCall" = "మిస్ అవుట్గోయింగ్ కాల్";

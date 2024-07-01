@@ -45,14 +45,14 @@
 "global.reply" = "Җавап";
 "global.search" = "Эзләү...";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete message";
+"global.deleteMessage" = "Хәбәрне бетерү";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Хәбәрне үзгәртү";
 "global.editing" = "Editing";
 "global.create" = "Ясау";
 "global.edit" = "Редакция";
 "global.remove" = "Ачтыр";
-"global.call" = "Call";
+"global.call" = "Чакырыгыз";
 "global.video" = "Видео";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
@@ -82,7 +82,7 @@
 "swarm.invited" = "Чакырылганнар";
 "swarm.admin" = "Администратор";
 "swarm.banned" = "Тыелган";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "Билгесез";
 "swarm.addMember" = "Учреждение әгъзасын өстәү";
 "swarm.confirmLeaveSwarm" = "Сез бу җәмәгатьчелекне калдырырга телисез икәненә ышанасызмы?";
 "swarm.Leave" = "Кит!";
@@ -290,7 +290,7 @@
 "accountPage.deviceRevocationError" = "Сөйләмнең кире кагу хатасы";
 "accountPage.linkDeviceTitle" = "Башка җайланманы тоташтыру";
 "accountPage.other" = "Башкалар";
-"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
+"accountPage.removeAccountMessage" = "Әгәр дә сезнең аккаунтыгыз икенче урынга куелмаса, сезнең аккаунтыгыз һәм теркәлгән исемегез кире кайтарылмаслык рәвештә юкка чыгачак.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Җәми белән элемтәгә керегез!";
 "accountPage.contactMeOnJamiContant" = "Jami таратылган коммуникация платформасында \"%s\" кулланып, миңа мөрәҗәгать итегез: https://jami.net";
@@ -326,17 +326,17 @@
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Профиль";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "Хисап";
 "accountPage.profileName" = "Profile name";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "Хисапны идарә итү";
 "accountPage.encryptAccount" = "Кулланма белән хисапны шифрлау";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "Парольләр туры килми";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
-"accountPage.linkedDevices" = "Linked devices";
+"accountPage.linkedDevices" = "Бәйләнешле җайланмалар";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
@@ -345,13 +345,13 @@
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "Билгеләүләр";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "Билгесез контактлардан керүче шалтыратуларга рөхсәт итү";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Теркәлү вакыты (секундлар)";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "Серверның TLS сертификатын тикшерү";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
 "accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
 "accountPage.tlsDisableSecureDlgCheck" = "Килгән TLS мәгълүматлары өчен куркынычсыз диалогны тикшерүне гамәлдән чыгару";
@@ -362,7 +362,7 @@
 "accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipServer" = "Server";
+"account.sipServer" = "Сервер";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -426,7 +426,7 @@
 "generatedMessage.invitationReceived" = "кушылырга чакырылды";
 "generatedMessage.invitationAccepted" = "сөйләшүгә кушылды";
 "generatedMessage.youJoined" = "Син сөйләшүгә кушылдың.";
-"generatedMessage.contactBlocked" = "was kicked";
+"generatedMessage.contactBlocked" = "мине бәреп төшерделәр";
 "generatedMessage.contactReAdded" = "яңадан кушылды";
 "generatedMessage.outgoingCall" = "Чыгышлы чакыру";
 "generatedMessage.missedOutgoingCall" = "Чыгышны югалткан чакыру";

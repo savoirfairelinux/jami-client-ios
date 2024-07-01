@@ -45,14 +45,14 @@
 "global.reply" = "回复";
 "global.search" = "正在搜索…";
 "global.donate" = "捐助";
-"global.deleteMessage" = "Delete message";
+"global.deleteMessage" = "删除消息";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "编辑消息";
 "global.editing" = "Editing";
 "global.create" = "建立";
 "global.edit" = "編輯";
 "global.remove" = "删除";
-"global.call" = "Call";
+"global.call" = "撥打";
 "global.video" = "影像";
 "global.time" = "时间";
 "global.editPassword" = "Edit password";
@@ -82,7 +82,7 @@
 "swarm.invited" = "已邀请";
 "swarm.admin" = "管理员";
 "swarm.banned" = "已屏蔽";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "未知";
 "swarm.addMember" = "加入成员";
 "swarm.confirmLeaveSwarm" = "你确定你想离开这个群体吗?";
 "swarm.Leave" = "离开";
@@ -290,7 +290,7 @@
 "accountPage.deviceRevocationError" = "设备吊销出错";
 "accountPage.linkDeviceTitle" = "关联另一台设备";
 "accountPage.other" = "其他";
-"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
+"accountPage.removeAccountMessage" = "如果您的账户尚未备份或添加到其他设备，您的账户和已注册名称将不可挽回地丢失。";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "在 Jami 上联系我！";
 "accountPage.contactMeOnJamiContant" = "在Jami分布式通信平台：https://jami.net 上使用“%s”与我联系";
@@ -326,17 +326,17 @@
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "個人檔案";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "帳號";
 "accountPage.profileName" = "個人檔案名稱";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "管理账户";
 "accountPage.encryptAccount" = "通过密码加密帐户";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "密码不匹配";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
-"accountPage.linkedDevices" = "Linked devices";
+"accountPage.linkedDevices" = "关联设备";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
@@ -345,15 +345,15 @@
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "通知";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "允许未知联系人的来电";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "注册过期时间（秒）";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "验证服务器 TLS 证书";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
-"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsRequireTlsCertificate" = "收到的 TLS 连接需要提供证书";
 "accountPage.tlsDisableSecureDlgCheck" = "禁用安全对话框检查输入 TLS 数据";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
@@ -362,7 +362,7 @@
 "accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipServer" = "Server";
+"account.sipServer" = "服务器";
 "account.port" = "埠";
 "account.proxyServer" = "代理";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -426,7 +426,7 @@
 "generatedMessage.invitationReceived" = "邀请加入";
 "generatedMessage.invitationAccepted" = "加入该对话";
 "generatedMessage.youJoined" = "你加入了谈话";
-"generatedMessage.contactBlocked" = "was kicked";
+"generatedMessage.contactBlocked" = "被了";
 "generatedMessage.contactReAdded" = "已重新添加";
 "generatedMessage.outgoingCall" = "撥出電話";
 "generatedMessage.missedOutgoingCall" = "未接去電";

@@ -24,7 +24,7 @@
 "global.recommended" = "ਸਿਫ਼ਾਰਸ਼ੀ";
 "global.password" = "ਪਾਸਵਰਡ";
 "global.registerAUsername" = "Register username";
-"global.enterPassword" = "Enter password";
+"global.enterPassword" = "ਪਾਸਵਰਡ ਦਾਖਲ ਕਰੋ";
 "global.enterUsername" = "Enter username";
 "global.cancel" = "ਰੱਦ ਕਰੋ";
 "global.blockContact" = "ਸੰਪਰਕ 'ਤੇ ਬੰਦਸ਼ ਲਗਾਓ";
@@ -45,7 +45,7 @@
 "global.reply" = "ਜਵਾਬ ਦਿਓ";
 "global.search" = "Searching…";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete message";
+"global.deleteMessage" = "ਸੁਨੇਹਾ ਮਿਟਾਓ";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Edit message";
 "global.editing" = "Editing";
@@ -82,7 +82,7 @@
 "swarm.invited" = "Invited";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Banned";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "ਅਣਪਛਾਤਾ";
 "swarm.addMember" = "Add Member";
 "swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
 "swarm.Leave" = "Leave";
@@ -324,16 +324,16 @@
 "accountPage.security" = "ਸੁਰੱਖਿਆ";
 "accountPage.enableSRTP" = "ਮੀਡੀਆ ਦੇ ਵਹਿਣਾਂ (SRTP) ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
-"accountPage.profileHeader" = "Profile";
+"accountPage.profileHeader" = "ਪ੍ਰੋਫ਼ਾਈਲ";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "ਖਾਤਾ";
 "accountPage.profileName" = "Profile name";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "ਖਾਤੇ ਦਾ ਪ੍ਰਬੰਧ ਕਰੋ";
 "accountPage.encryptAccount" = "Encrypt account with a password";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾਂਦੇ";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Linked devices";
@@ -345,7 +345,7 @@
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "Notifications";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "ਅਣਪਛਾਤੇ ਸੰਪਰਕਾਂ ਤੋਂ ਕਾਲਾਂ ਆਉਣ ਦਿਓ";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";

@@ -45,14 +45,14 @@
 "global.reply" = "Yanıtla";
 "global.search" = "Aranıyor…";
 "global.donate" = "Bağış";
-"global.deleteMessage" = "Delete message";
-"global.deleteFile" = "Delete file from device";
+"global.deleteMessage" = "İletiyi sil";
+"global.deleteFile" = "Dosyayı aygıttan sil";
 "global.editMessage" = "İletiyi düzenle";
 "global.editing" = "Editing";
 "global.create" = "Oluştur";
 "global.edit" = "Düzenle";
 "global.remove" = "Kaldır";
-"global.call" = "Call";
+"global.call" = "Çağrı";
 "global.video" = "Görüntü";
 "global.time" = "Zaman";
 "global.editPassword" = "Edit password";
@@ -82,7 +82,7 @@
 "swarm.invited" = "- davet edildi.";
 "swarm.admin" = "Yöneticisi";
 "swarm.banned" = "Yasaklanmış";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "Bilinmeyen";
 "swarm.addMember" = "Üye Ekle";
 "swarm.confirmLeaveSwarm" = "Bu swarm'ı terk etmek istiyor musun?";
 "swarm.Leave" = "Git.";
@@ -290,7 +290,7 @@
 "accountPage.deviceRevocationError" = "Aygıt iptal hatası";
 "accountPage.linkDeviceTitle" = "Diğer aygıtı bağla";
 "accountPage.other" = "Diğer";
-"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
+"accountPage.removeAccountMessage" = "Hesabın yedeklenmediyse veya başka bir aygıta eklenmediyse, hesabın ve kayıtlı adın geri alınamaz bir şekilde kaybolacaktır.";
 "accountPage.inviteFriends" = "Arkadaşlarını davet et";
 "accountPage.contactMeOnJamiTitle" = "Benimle Jami'de iletişime geç!";
 "accountPage.contactMeOnJamiContant" = "Jami dağıtık iletişim platformunda \"%s\" kullanarak benimle iletişime geç: https://jami.net";
@@ -326,17 +326,17 @@
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
 "accountPage.profileHeader" = "Profil";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "Hesap";
 "accountPage.profileName" = "Profil adı";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "Hesabı yönet";
 "accountPage.encryptAccount" = "Hesabı parola ile şifrele";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "Parolalar eşleşmedi";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
-"accountPage.linkedDevices" = "Linked devices";
+"accountPage.linkedDevices" = "Bağlı Aygıtlar";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
@@ -345,15 +345,15 @@
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "Bildirimler";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "Bilinmeyen kişilerden gelen çağrılara izin ver";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Kaydolma bitimi süresi (saniye)";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "Sunucu TLS sertifikalarını doğrula";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
-"accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
+"accountPage.tlsRequireTlsCertificate" = "Gelen TLS bağlantıları için sertifika iste";
 "accountPage.tlsDisableSecureDlgCheck" = "Gelen TLS verileri için güvenli iletişim kontrolünü devre dışı bırak";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
@@ -362,7 +362,7 @@
 "accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipServer" = "Server";
+"account.sipServer" = "Sunucu";
 "account.port" = "Delik";
 "account.proxyServer" = "Vekil";
 "account.createSipAccount" = "SIP hesabı yapılandır";
@@ -426,7 +426,7 @@
 "generatedMessage.invitationReceived" = "katılmak için davet edildi";
 "generatedMessage.invitationAccepted" = "görüşmeye katıldı";
 "generatedMessage.youJoined" = "Görüşme katıldın";
-"generatedMessage.contactBlocked" = "was kicked";
+"generatedMessage.contactBlocked" = "Tekmeledi";
 "generatedMessage.contactReAdded" = "Yeniden eklendi";
 "generatedMessage.outgoingCall" = "Giden çağrı";
 "generatedMessage.missedOutgoingCall" = "Cevapsız giden çağrı";

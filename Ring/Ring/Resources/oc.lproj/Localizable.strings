@@ -23,8 +23,8 @@
 "global.username" = "Nom d’utilizaire";
 "global.recommended" = "Recomandat";
 "global.password" = "Senhal";
-"global.registerAUsername" = "Register username";
-"global.enterPassword" = "Enter password";
+"global.registerAUsername" = "Registrar nom d' utilizaire";
+"global.enterPassword" = "Introducir la contraròtle";
 "global.enterUsername" = "Enter username";
 "global.cancel" = "Anullar";
 "global.blockContact" = "Blocar contacte";
@@ -45,14 +45,14 @@
 "global.reply" = "Respòsta";
 "global.search" = "Recèrca…";
 "global.donate" = "Donate";
-"global.deleteMessage" = "Delete message";
+"global.deleteMessage" = "Eliminar lo messatge";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Modificar messatge";
 "global.editing" = "Editing";
 "global.create" = "Crear";
 "global.edit" = "Modificar";
 "global.remove" = "Suprimir";
-"global.call" = "Call";
+"global.call" = "Sonar";
 "global.video" = "Vidèo";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
@@ -82,7 +82,7 @@
 "swarm.invited" = "Convèsse";
 "swarm.admin" = "Administracion";
 "swarm.banned" = "Proibit";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "Desconegut";
 "swarm.addMember" = "Ajustar Membre";
 "swarm.confirmLeaveSwarm" = "S'es segur que volètz quitter aquel enjòu?";
 "swarm.Leave" = "Partir";
@@ -290,7 +290,7 @@
 "accountPage.deviceRevocationError" = "Error de revocacion de l' aparelh";
 "accountPage.linkDeviceTitle" = "Ligam un autre dispositiu";
 "accountPage.other" = "Autre";
-"accountPage.removeAccountMessage" = "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.";
+"accountPage.removeAccountMessage" = "Se lo vòstre compte es pas estat copiat de contunh o ajustat a un autre dispositiu, lo vòstre compte e lo nom registrat seràn perduts irrevocablament.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Contactatz-me sus Jami !";
 "accountPage.contactMeOnJamiContant" = "Me contactar en utilizant \"%s\" sus la plataforma de comunicacion distribuida Jami: https://jami.net";
@@ -324,19 +324,19 @@
 "accountPage.security" = "Seguretat";
 "accountPage.enableSRTP" = "Encripar los flums de mèdia (SRTP)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
-"accountPage.profileHeader" = "Profile";
+"accountPage.profileHeader" = "Perfil";
 "accountPage.profileNameNotSelected" = "Name not selected";
-"accountPage.accountHeader" = "Account";
+"accountPage.accountHeader" = "Compte";
 "accountPage.profileName" = "Nom del perfil";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "Gestion de compte";
 "accountPage.encryptAccount" = "Encripar compte amb una contraròtle";
 "accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "Pas de contrasèlas correspondentas";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
-"accountPage.linkedDevices" = "Linked devices";
+"accountPage.linkedDevices" = "Dispositius ligats";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
@@ -345,13 +345,13 @@
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "Notificacions";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
+"accountPage.callsFromUnknownContacts" = "Permetre las cridas entremesas d'unes contactes desconeguts";
 "accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Temps d'expiracion de l'enregistrament (segons)";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "Verificar los certificats TLS del servidor";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
 "accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
 "accountPage.tlsDisableSecureDlgCheck" = "Desactivar la verificacion de dialòg segura per las donadas TLS entrant";
@@ -362,7 +362,7 @@
 "accountPage.accountIdentity" = "Account identity";
 
 //Account
-"account.sipServer" = "Server";
+"account.sipServer" = "Servidor";
 "account.port" = "Pòrt";
 "account.proxyServer" = "Servidor mandatari";
 "account.createSipAccount" = "Configure a SIP Account";
@@ -426,7 +426,7 @@
 "generatedMessage.invitationReceived" = "foguèt convidat a s'unir";
 "generatedMessage.invitationAccepted" = "s'uniguèt a la conversacion";
 "generatedMessage.youJoined" = "Vos unissètz a la conversacion";
-"generatedMessage.contactBlocked" = "was kicked";
+"generatedMessage.contactBlocked" = "es estat patit";
 "generatedMessage.contactReAdded" = "foguèt re-ajustat";
 "generatedMessage.outgoingCall" = "Apèl sortent";
 "generatedMessage.missedOutgoingCall" = "Sonada sortissenta mancada";
