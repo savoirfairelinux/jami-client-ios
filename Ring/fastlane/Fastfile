@@ -20,9 +20,13 @@ ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
 platform :ios do
   desc "Runs all the tests"
   lane :test do
+    server_address = "#{ENV["SERVER_ADDRESS"]}"
     scan(
       scheme: "Ring",
       sdk: "iphonesimulator"
+      environment: {
+        "SERVER_ADDRESS" => server_address
+      }
     )
   end
 
