@@ -79,6 +79,13 @@
             ReferencedContainer = "container:Ring.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "TEST_SERVER_ADDRESS"
+            value = "https://ns-test.jami.net"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

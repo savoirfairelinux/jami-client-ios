@@ -24,26 +24,33 @@ import Embassy
 final class AccountCreationTest: XCTestCase {
 
     let app = XCUIApplication()
-    var nameServer: MockNameServer!
 
-    override func setUp() {
+    override class func setUp() {
         super.setUp()
-        // Create and start name server
-        nameServer = MockNameServer()
-        app.launchEnvironment["SERVER_ADDRESS"] = "\(nameServer.localServer):\(nameServer.port)"
-        try! nameServer.start()
 
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
+        let app = XCUIApplication()
+
+        if let serverAddress = ProcessInfo.processInfo.environment["TEST_SERVER_ADDRESS"] {
+            app.launchEnvironment["SERVER_ADDRESS"] = serverAddress
+        } else {
+            app.launchEnvironment["SERVER_ADDRESS"] = "https://ns-test.jami.net"
+        }
         app.launch()
     }
 
-    override func tearDown() {
-        nameServer.stop()
+    override func setUp() {
+        super.setUp()
+        continueAfterFailure = false
     }
 
     func openWelcomeViewFromConversation() {
+        let welcomeWindow = app.otherElements[AccessibilityIdentifiers.welcomeWindow]
+        if welcomeWindow.exists && welcomeWindow.isHittable {
+            return
+        }
+
         let conversationWindow = app.otherElements[AccessibilityIdentifiers.conversationView]
+
         if !conversationWindow.exists {
             return
         }
@@ -64,6 +71,25 @@ final class AccountCreationTest: XCTestCase {
 
         let createAccountWindow = app.otherElements[AccessibilityIdentifiers.createAccountView]
         waitForElementToAppear(createAccountWindow)
+    }
+
+    func closeAccountCreationView() {
+        let cancelButton = app.buttons[AccessibilityIdentifiers.cancelCreatingAccount]
+        if !cancelButton.exists {
+            return
+        }
+        cancelButton.tap()
+        waitForSeconds(2)
+        // Verify that welcome view is presented
+        let welcomeWindow = app.otherElements[AccessibilityIdentifiers.welcomeWindow]
+        XCTAssertTrue(welcomeWindow.exists)
+    }
+
+    func getRandomName() -> String {
+        let randomInt = Int.random(in: 1...10000)
+
+        let nameToRegister = "test\(randomInt)"
+        return nameToRegister
     }
 
     func enterName(_ name: String) {
@@ -98,12 +124,13 @@ final class AccountCreationTest: XCTestCase {
 
         // Check the title of the navigation bar
         XCTAssertEqual(title.label, expectedText, "Navigation title is not correct")
+        closeAccountCreationView()
     }
 
     func testMessageOnValidName() {
         openAccountCreation()
+        let nameToRegister = getRandomName()
 
-        let nameToRegister = nameServer.getNotRegisteredName()
         enterName(nameToRegister)
         // wait for answer from name server
         waitForSeconds(1)
@@ -114,30 +141,14 @@ final class AccountCreationTest: XCTestCase {
         let expectedText = L10n.CreateAccount.usernameValid
 
         // Check the label's text
-        XCTAssertEqual(label.label, expectedText, "Explanation lable is not correct")
-    }
-
-    func testErrorMessageOnAlreadyRegisteredName() {
-        openAccountCreation()
-
-        let nameToRegister = nameServer.getRegisteredName()
-        enterName(nameToRegister)
-        // wait for answer from name server
-        waitForSeconds(1)
-
-        // Verify the text
-        let label = app.staticTexts[AccessibilityIdentifiers.createAccountErrorLabel]
-
-        let expectedText = L10n.CreateAccount.usernameAlreadyTaken
-
-        // Check the label's text
-        XCTAssertEqual(label.label, expectedText, "Explanation lable is not correct")
+        XCTAssertEqual(label.label, expectedText, "Explanation label is not correct")
+        closeAccountCreationView()
     }
 
     func testJoinButtonEnabledOnValidName() {
         openAccountCreation()
 
-        let nameToRegister = nameServer.getNotRegisteredName()
+        let nameToRegister = getRandomName()
         enterName(nameToRegister)
         // wait for answer from name server
         waitForSeconds(1)
@@ -145,6 +156,7 @@ final class AccountCreationTest: XCTestCase {
         // Verify the state of the "Join" button
         let joinButton = app.buttons[AccessibilityIdentifiers.joinButton]
         XCTAssertTrue(joinButton.isEnabled, "The Join button is not enabled")
+        closeAccountCreationView()
     }
 
     func testJoinButtonEnabledOnEmptyName() {
@@ -152,18 +164,38 @@ final class AccountCreationTest: XCTestCase {
         // Verify the state of the "Join" button
         let joinButton = app.buttons[AccessibilityIdentifiers.joinButton]
         XCTAssertTrue(joinButton.isEnabled, "The Join button is not enabled")
+        closeAccountCreationView()
     }
 
-    func testCreateButtonDisabledOnInvalidName() {
+    func testStateOnAlreadyRegisteredName() {
         openAccountCreation()
 
-        let nameToRegister = nameServer.getRegisteredName()
-        enterName(nameToRegister)
-
+        // 1 register name
+        let name = getRandomName()
+        enterName(name)
+        // wait for answer from name server
         waitForSeconds(1)
 
-        // Verify the state of the "Join" button
         let joinButton = app.buttons[AccessibilityIdentifiers.joinButton]
+        joinButton.tap()
+
+        let conversationWindow = app.otherElements[AccessibilityIdentifiers.conversationView]
+        waitForElementToAppear(conversationWindow, timeout: 5)
+        waitForSeconds(5)
+
+        // try to create account with registered name
+        openAccountCreation()
+
+        enterName(name)
+        waitForSeconds(1)
+
+        // Verify the error text
+        let label = app.staticTexts[AccessibilityIdentifiers.createAccountErrorLabel]
+        let expectedText = L10n.CreateAccount.usernameAlreadyTaken
+        XCTAssertEqual(label.label, expectedText, "Explanation label is not correct")
+
+        // Verify the state of the "Join" button
         XCTAssertFalse(joinButton.isEnabled, "The Join button is enabled")
+        closeAccountCreationView()
     }
 }
