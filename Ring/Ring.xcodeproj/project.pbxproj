@@ -412,9 +412,6 @@
 		26E081242BC07824001B4C18 /* RequestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081232BC07824001B4C18 /* RequestsViewModel.swift */; };
 		26E081262BC09534001B4C18 /* RequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081252BC09534001B4C18 /* RequestsView.swift */; };
 		26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB61332B75724000183FF4 /* AccountCreationTest.swift */; };
-		26EB61392B7675FB00183FF4 /* Embassy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EB61382B7675FB00183FF4 /* Embassy.xcframework */; };
-		26EB613A2B7675FB00183FF4 /* Embassy.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26EB61382B7675FB00183FF4 /* Embassy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		26EB613D2B76810200183FF4 /* MockServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB613C2B76810200183FF4 /* MockServer.swift */; };
 		26EEB19C2BD98CCA00B8B04B /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEB19B2BD98CCA00B8B04B /* SearchBar.swift */; };
 		26EEB19E2BDEDC0C00B8B04B /* UIControllersWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEB19D2BDEDC0C00B8B04B /* UIControllersWrappers.swift */; };
 		26EF35E728E3401800D97E14 /* ReplyHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35E628E3401800D97E14 /* ReplyHistory.swift */; };
@@ -584,7 +581,6 @@
 				44DFB3B1288704910023878C /* Reusable.xcframework in Embed Frameworks */,
 				44DFB3B7288704910023878C /* SQLite.xcframework in Embed Frameworks */,
 				44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */,
-				26EB613A2B7675FB00183FF4 /* Embassy.xcframework in Embed Frameworks */,
 				44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -1026,7 +1022,6 @@
 		26E081252BC09534001B4C18 /* RequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RequestsView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/RequestsView.swift; sourceTree = SOURCE_ROOT; };
 		26EB61332B75724000183FF4 /* AccountCreationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationTest.swift; sourceTree = "<group>"; };
 		26EB61382B7675FB00183FF4 /* Embassy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Embassy.xcframework; path = Carthage/Build/Embassy.xcframework; sourceTree = "<group>"; };
-		26EB613C2B76810200183FF4 /* MockServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServer.swift; sourceTree = "<group>"; };
 		26EEB19B2BD98CCA00B8B04B /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SearchBar.swift; sourceTree = SOURCE_ROOT; };
 		26EEB19D2BDEDC0C00B8B04B /* UIControllersWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControllersWrappers.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/UIControllersWrappers.swift; sourceTree = SOURCE_ROOT; };
 		26EF35E628E3401800D97E14 /* ReplyHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyHistory.swift; sourceTree = "<group>"; };
@@ -1218,7 +1213,6 @@
 				269DA07228D0D366007D51D6 /* libsecp256k1.a in Frameworks */,
 				649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */,
 				269DA07428D0D366007D51D6 /* libspeexdsp.a in Frameworks */,
-				26EB61392B7675FB00183FF4 /* Embassy.xcframework in Frameworks */,
 				269DA06C28D0D366007D51D6 /* libpjsip-simple.a in Frameworks */,
 				6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */,
 				26CA4C5A2AB23CCF00AEF8F5 /* libixml.a in Frameworks */,
@@ -2418,7 +2412,6 @@
 		26EB613B2B7680F100183FF4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				26EB613C2B76810200183FF4 /* MockServer.swift */,
 				2657CBA92B8595F80078D6B1 /* XCTestCase + Helpers.swift */,
 			);
 			path = Helpers;
@@ -3238,7 +3231,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26EB613D2B76810200183FF4 /* MockServer.swift in Sources */,
 				26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */,
 				2657CBAA2B8596290078D6B1 /* XCTestCase + Helpers.swift in Sources */,
 				04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */,
