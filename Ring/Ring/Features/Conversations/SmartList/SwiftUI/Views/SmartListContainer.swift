@@ -91,9 +91,12 @@ struct SmartListView: View {
 
                 NavigationLink(
                     destination: LazyView {
-                        AccountSummaryView(injectionBag: self.model.injectionBag,
-                                           account: self.model.accountsService.currentAccount!, stateSubject: model.stateSubject
-                        )
+                        if let account = self.model.accountsService.currentAccount {
+                            AccountSummaryView(injectionBag: self.model.injectionBag,
+                                               account: account, stateSubject: model.stateSubject)
+                        } else {
+                            EmptyView()
+                        }
                     },
                     isActive: $isNavigatingToSettings
                 ) {
@@ -378,7 +381,7 @@ struct CurrentAccountButton: View {
 struct LazyView<Content: View>: View {
     let build: () -> Content
 
-    init(_ build: @escaping () -> Content) {
+    init(@ViewBuilder _ build: @escaping () -> Content) {
         self.build = build
     }
 
