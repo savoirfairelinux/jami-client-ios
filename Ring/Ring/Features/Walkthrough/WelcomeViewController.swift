@@ -60,6 +60,8 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.advancedFeaturesButton.alpha = 1
         }
 
+        self.containerView.accessibilityIdentifier = AccessibilityIdentifiers.welcomeView
+
         adaptSystemStyles()
 
         // Bind ViewModel to View

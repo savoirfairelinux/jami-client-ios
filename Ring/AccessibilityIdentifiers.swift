@@ -28,6 +28,7 @@ struct AccessibilityIdentifiers {
     static let usernameTextField = "usernameTextField"
     static let joinButton = "joinButton"
     static let conversationView = "conversationView"
+    static let welcomeView = "welcomeView"
     static let accountRegisteredName = "accountRegisteredName"
     static let accountJamiId = "accountJamiId"
     static let cancelCreatingAccount = "cancelCreatingAccount"
