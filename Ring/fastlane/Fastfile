@@ -19,10 +19,12 @@ ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
 
 platform :ios do
   desc "Runs all the tests"
+  server="#{ENV["TEST_SERVER_ADDRESS"]}"
   lane :test do
     scan(
       scheme: "Ring",
-      sdk: "iphonesimulator"
+      sdk: "iphonesimulator",
+      xcargs: "TEST_SERVER_ADDRESS=server"
     )
   end
 
@@ -47,7 +49,7 @@ platform :ios do
   lane :beta do
     unlock_keychain
     api_key = app_store_connect_api_key(
-      key_id: "#{ENV["KEY_ID"]}",
+      key_id: c,
       issuer_id: "#{ENV["ISSUER_ID"]}",
       key_filepath: "#{ENV["KEY_FILEPATH"]}",
       in_house: false,
