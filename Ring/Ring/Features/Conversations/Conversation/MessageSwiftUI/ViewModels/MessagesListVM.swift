@@ -190,7 +190,8 @@ class MessagesListVM: ObservableObject {
             }
         }
     }
-    var conversation: ConversationModel! {
+
+    public private(set) var conversation: ConversationModel! {
         didSet {
             subscriptionQueue.async { [weak self] in
                 guard let self = self else { return }
@@ -201,8 +202,12 @@ class MessagesListVM: ObservableObject {
         }
     }
 
-    func invalidateAndSetupConversationSubscriptions() {
+    func updateConversation(conversation: ConversationModel) {
         self.conversationDisposeBag = DisposeBag()
+        self.conversation = conversation
+    }
+
+    func invalidateAndSetupConversationSubscriptions() {
         self.subscribeForNewMessages()
         self.subscribeMessageUpdates()
         self.subscribeReactions()
@@ -210,7 +215,6 @@ class MessagesListVM: ObservableObject {
 
     init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
         self.requestsService = injectionBag.requestsService
-        self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
         self.profileService = injectionBag.profileService
         self.dataTransferService = injectionBag.dataTransferService
@@ -347,10 +351,11 @@ class MessagesListVM: ObservableObject {
     }
 
     func subscribeUserAvatarForLocationSharing() {
-        profileService.getAccountProfile(accountId: self.conversation.accountId)
+        guard let account = self.accountService.currentAccount else { return }
+        profileService.getAccountProfile(accountId: account.id)
             .subscribe(onNext: { [weak self] profile in
                 guard let self = self else { return }
-                let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId)
+                let account = self.accountService.getAccount(fromAccountId: account.id)
                 let defaultAvatar = UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 16)
                 // The view has a max size 50. Create a larger image for better resolution.
                 if let photo = profile.photo,
@@ -376,7 +381,8 @@ class MessagesListVM: ObservableObject {
     }
 
     func subscribeReactions() {
-        self.conversation.reactionsUpdated
+        guard let conversation = self.conversation else { return }
+        conversation.reactionsUpdated
             .subscribe(onNext: { [weak self] messageId in
                 guard let self = self else { return }
                 self.reactionsUpdated(messageId: messageId)
@@ -409,7 +415,8 @@ class MessagesListVM: ObservableObject {
     }
 
     func subscribeMessageUpdates() {
-        self.conversation.messageUpdated
+        guard let conversation = self.conversation else { return }
+        conversation.messageUpdated
             .subscribe(onNext: { [weak self] messageId in
                 guard let self = self else { return }
                 self.messageUpdated(messageId: messageId)
@@ -418,6 +425,7 @@ class MessagesListVM: ObservableObject {
     }
 
     func subscribeForNewMessages() {
+        guard let conversation = self.conversation else { return }
         conversation.newMessages.share()
             .startWith(LoadedMessages(messages: conversation.messages, fromHistory: true))
             .observe(on: MainScheduler.instance)
@@ -728,7 +736,8 @@ class MessagesListVM: ObservableObject {
     }
 
     private func updateColorPreference() {
-        guard let color = UIColor(hexString: self.conversation.preferences.color) else { return }
+        guard let conversation = self.conversation else { return }
+        guard let color = UIColor(hexString: conversation.preferences.color) else { return }
         DispatchQueue.main.async { [weak self] in
             self?.swarmColor = color
         }
@@ -1105,8 +1114,9 @@ extension MessagesListVM {
     }
 
     func peerIsAlreadySharingLocation() -> Bool {
-        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
-        let accountId = self.conversation.accountId
+        guard let conversation = self.conversation else { return false }
+        guard let jamiId = conversation.getParticipants().first?.jamiId else { return true }
+        let accountId = conversation.accountId
         return self.locationSharingService
             .isAlreadySharing(accountId: accountId,
                               contactUri: jamiId)

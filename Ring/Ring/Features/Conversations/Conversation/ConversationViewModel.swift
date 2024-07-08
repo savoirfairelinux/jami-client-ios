@@ -80,7 +80,8 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     let injectionBag: InjectionBag
 
-    internal let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
+    var conversationDisposeBag = DisposeBag()
 
     func closeAllPlayers() {
         self.swiftUIModel.transferHelper.closeAllPlayers()
@@ -182,7 +183,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             .subscribe { [weak self] update in
                 guard let self = self, update else { return }
                 if self.conversation != nil {
-                    self.swiftUIModel.conversation = self.conversation
+                    self.swiftUIModel.updateConversation(conversation: self.conversation)
                 }
             } onError: { _ in
             }
@@ -213,10 +214,15 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         return swiftUIModel.lastMessageDate.asObservable()
     }
 
-    var conversation: ConversationModel! {
+    func updateConversation(conversation: ConversationModel) {
+        self.conversationDisposeBag = DisposeBag()
+        self.conversation = conversation
+    }
+
+    public private(set) var conversation: ConversationModel! {
         didSet {
             self.subscribeUnreadMessages()
-            self.swiftUIModel.conversation = conversation
+            self.swiftUIModel.updateConversation(conversation: conversation)
 
             guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
             if account.type == AccountType.sip {
@@ -288,7 +294,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 }
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: self.conversationDisposeBag)
     }
 
     func shouldCreateSwarmInfo() -> Bool {
@@ -302,14 +308,14 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 self?.profileImageData.accept(image.pngData())
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: self.conversationDisposeBag)
         self.swarmInfo!.finalTitle.share()
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] name in
                 self?.displayName.accept(name)
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: self.conversationDisposeBag)
     }
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {
@@ -329,7 +335,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 }
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: self.conversationDisposeBag)
     }
 
     func editMessage(content: String, messageId: String) {
@@ -523,7 +529,7 @@ extension ConversationViewModel {
                 .subscribe(onNext: { [weak self] _ in
                     self?.subscribePresence()
                 })
-                .disposed(by: self.disposeBag)
+                .disposed(by: self.conversationDisposeBag)
             self.presenceService.subscribeBuddy(withAccountId: self.conversation.accountId, withUri: self.conversation.getParticipants().first!.jamiId, withFlag: true)
         }
         self.contactPresence
@@ -532,7 +538,7 @@ extension ConversationViewModel {
                 self?.presence = presence
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: self.conversationDisposeBag)
     }
 
     private func subscribeUnreadMessages() {
@@ -543,7 +549,7 @@ extension ConversationViewModel {
                 self.unreadMessages = unreadMessages
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: self.conversationDisposeBag)
     }
 
     private func subscribePresence() {
@@ -575,7 +581,7 @@ extension ConversationViewModel {
                     self?.userName.accept(address)
                 }
             })
-            .disposed(by: disposeBag)
+            .disposed(by: conversationDisposeBag)
     }
 }
 
@@ -639,7 +645,7 @@ extension ConversationViewModel {
                     self.showOutgoingLocationSharing.accept(false)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: self.conversationDisposeBag)
     }
 }
 
