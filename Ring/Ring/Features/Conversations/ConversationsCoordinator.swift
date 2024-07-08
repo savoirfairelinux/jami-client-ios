@@ -188,7 +188,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: account.id)
         let newConversation = ConversationViewModel(with: self.injectionBag)
-        newConversation.conversation = conversation
+        newConversation.updateConversation(conversation: conversation)
         self.showConversation(withConversationViewModel: newConversation)
     }
 
@@ -301,7 +301,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             return
         }
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-        conversationViewModel.conversation = conversation
+        conversationViewModel.updateConversation(conversation: conversation)
         self.showConversation(withConversationViewModel: conversationViewModel)
     }
 
