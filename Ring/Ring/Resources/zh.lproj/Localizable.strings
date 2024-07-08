@@ -46,7 +46,7 @@
 "global.search" = "正在搜索…";
 "global.donate" = "捐助";
 "global.deleteMessage" = "删除消息";
-"global.deleteFile" = "Delete file from device";
+"global.deleteFile" = "从设备中删除文件";
 "global.editMessage" = "编辑消息";
 "global.editing" = "Editing";
 "global.create" = "建立";
@@ -103,7 +103,7 @@
 "smartlist.newContact" = "新連絡人";
 "smartlist.newSwarm" = "New Swarm";
 "smartlist.accounts" = "帳號";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "邀请已发送";
 "smartlist.noResults" = "无结果";
 "smartlist.noConversation" = "沒有對話";
 "smartlist.searchBarPlaceholder" = "輸入名字……";
@@ -118,7 +118,7 @@
 "smartlist.aboutJami" = "关于 Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "帳號";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "现在不要";
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
@@ -142,7 +142,7 @@
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "删除了一封邮件";
 
 //Invitations
 "invitations.noInvitations" = "沒有邀請";
@@ -150,7 +150,7 @@
 "invitations.accepted" = "accepted";
 "invitations.refused" = "refused";
 "invitations.banned" = "banned";
-"invitations.list" = "Invitations received";
+"invitations.list" = "邀请已发送";
 
 // Walkthrough
 
@@ -340,7 +340,7 @@
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
-"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationTitle" = "在其他设备上";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "通知";
@@ -445,7 +445,7 @@
 "generalSettings.limitLocationSharingDuration" = "限制位置共享的时间";
 "generalSettings.locationSharingDuration" = "位置股份持续时间";
 "generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.enableDonationCampaign" = "启用捐赠活动";
 
 //Log View
 "logView.title" = "诊断";

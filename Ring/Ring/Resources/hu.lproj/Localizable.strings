@@ -24,7 +24,7 @@
 "global.recommended" = "Ajánlott";
 "global.password" = "Jelszó";
 "global.registerAUsername" = "Felhasználónév bejegyeztetése";
-"global.enterPassword" = "Adja meg a jelszót";
+"global.enterPassword" = "Jelszó megadása";
 "global.enterUsername" = "Felhasználónév megadása";
 "global.cancel" = "Mégse";
 "global.blockContact" = "Kapcsolat letiltása";
@@ -294,7 +294,7 @@
 "accountPage.inviteFriends" = "Barátok és ismerősök meghívása";
 "accountPage.contactMeOnJamiTitle" = "Lépjen kapcsolatba velem a Jami-n!";
 "accountPage.contactMeOnJamiContant" = "Lépjen velem kapcsolatba a(z) „%s” használatával, a Jami elosztott kommunikációs platformon: https://jami.net";
-"accountPage.passwordPlaceholder" = "Adja meg a fiók jelszavát";
+"accountPage.passwordPlaceholder" = "Fiók jelszavának megadása";
 "accountPage.usernamePlaceholder" = "Kívánt felhasználónév megadása";
 "accountPage.registerNameErrorMessage" = "A kért felhasználónév nem áll rendelkezésre";
 "accountPage.usernameRegistering" = "Regisztráció…";
@@ -302,8 +302,8 @@
 "accountPage.usernameRegistrationFailed" = "Bejegyeztetés sikertelen. Kérjük, ellenőrizze a jelszót.";
 "accountPage.createPassword" = "Fiók titkosítása";
 "accountPage.changePassword" = "Jelszó megváltoztatása";
-"accountPage.oldPasswordPlaceholder" = "Adja meg a régi jelszót";
-"accountPage.newPasswordPlaceholder" = "Adja meg az új jelszót";
+"accountPage.oldPasswordPlaceholder" = "Jelenlegi jelszó megadása";
+"accountPage.newPasswordPlaceholder" = "Új jelszó megadása";
 "accountPage.newPasswordConfirmPlaceholder" = "Új jelszó megerősítése";
 "accountPage.changePasswordError" = "Helytelen jelszó";
 "accountPage.enableBoothMode" = "Fülke üzemmód engedélyezése";
