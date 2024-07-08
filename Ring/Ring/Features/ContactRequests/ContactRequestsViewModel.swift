@@ -190,7 +190,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         let name = item.profileName.value.isEmpty ? item.userName.value : item.profileName.value
         conversationViewModel.displayName.accept(name)
         conversationViewModel.profileImageData.accept(item.profileImageData.value)
-        conversationViewModel.conversation = conversation
+        conversationViewModel.updateConversation(conversation: conversation)
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: conversationViewModel))
     }
 }
