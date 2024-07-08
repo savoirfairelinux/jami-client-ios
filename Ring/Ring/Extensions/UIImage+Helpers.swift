@@ -512,12 +512,9 @@ func createResizedImage(imageSource: CGImageSource, size: CGFloat) -> UIImage? {
         kCGImageSourceCreateThumbnailFromImageAlways: true
     ] as CFDictionary
 
-    guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options),
-          let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
-          let orientationRawValue = imageProperties[kCGImagePropertyOrientation] as? UInt32 else {
+    guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options) else {
         return nil
     }
-    let orientation = getImageOrientation(from: orientationRawValue)
 
-    return UIImage(cgImage: downsampledImage, scale: UIScreen.main.scale, orientation: orientation)
+    return UIImage(cgImage: downsampledImage)
 }
