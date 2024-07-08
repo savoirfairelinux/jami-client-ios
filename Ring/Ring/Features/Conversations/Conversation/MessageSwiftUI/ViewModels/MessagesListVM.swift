@@ -194,18 +194,23 @@ class MessagesListVM: ObservableObject {
         didSet {
             subscriptionQueue.async { [weak self] in
                 guard let self = self else { return }
-                self.invalidateAndSetupConversationSubscriptions()
+                self.setupConversationSubscriptions()
             }
             self.updateColorPreference()
             self.updateLastDisplayed()
         }
     }
 
-    func invalidateAndSetupConversationSubscriptions() {
+    func setupConversationSubscriptions() {
         self.conversationDisposeBag = DisposeBag()
         self.subscribeForNewMessages()
         self.subscribeMessageUpdates()
         self.subscribeReactions()
+    }
+
+    func updateConversation(conversation: ConversationModel) {
+        self.conversationDisposeBag = DisposeBag()
+        self.conversation = conversation
     }
 
     init (injectionBag: InjectionBag, transferHelper: TransferHelper) {

@@ -138,14 +138,14 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                     }
                     // Check for temporary conversation
                     else if let tempConversation = self.temporaryConversation, tempConversation.conversation == conversationModel {
-                        tempConversation.conversation = conversationModel
+                        tempConversation.updateConversation(conversation: conversationModel)
                         tempConversation.conversationCreated.accept(true)
                         self.conversationFromTemporaryCreated(conversation: conversationModel)
                         return tempConversation
                     } else if let jamsConversation = self.jamsSearchResult.first(where: { jams in
                         jams.conversation == conversationModel
                     }) {
-                        jamsConversation.conversation = conversationModel
+                        jamsConversation.updateConversation(conversation: conversationModel)
                         jamsConversation.conversationCreated.accept(true)
                         self.conversationFromTemporaryCreated(conversation: conversationModel)
                         return jamsConversation
@@ -153,7 +153,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                     // Create new conversation view model
                     else {
                         let newViewModel = ConversationViewModel(with: self.injectionBag)
-                        newViewModel.conversation = conversationModel
+                        newViewModel.updateConversation(conversation: conversationModel)
                         return newViewModel
                     }
                 }
@@ -278,7 +278,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
         conversation.type = .oneToOne
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.userName.accept(hash)
-        newConversation.conversation = conversation
+        newConversation.updateConversation(conversation: conversation)
         newConversation.swiftUIModel.isTemporary = true
         return newConversation
     }
@@ -313,7 +313,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                                              hash: number)
         conversation.type = .sip
         let newConversation = ConversationViewModel(with: self.injectionBag)
-        newConversation.conversation = conversation
+        newConversation.updateConversation(conversation: conversation)
         self.stateSubject
             .onNext(ConversationState
                         .conversationDetail(conversationViewModel:

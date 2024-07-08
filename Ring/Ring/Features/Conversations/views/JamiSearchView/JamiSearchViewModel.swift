@@ -375,7 +375,7 @@ class JamiSearchViewModel {
         } else {
             newConversation.userName.accept(hash)
         }
-        newConversation.conversation = conversation
+        newConversation.updateConversation(conversation: conversation)
         newConversation.swiftUIModel.isTemporary = true
         return newConversation
     }
@@ -389,7 +389,7 @@ class JamiSearchViewModel {
         conversation.type = .sip
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.userName.accept(trimmed)
-        newConversation.conversation = conversation
+        newConversation.updateConversation(conversation: conversation)
         return newConversation
     }
 
