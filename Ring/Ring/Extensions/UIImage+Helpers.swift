@@ -482,29 +482,6 @@ extension UIImage {
     }
 }
 
-func getImageOrientation(from orientationRawValue: UInt32) -> UIImage.Orientation {
-    switch orientationRawValue {
-    case 1:
-        return .up
-    case 2:
-        return .upMirrored
-    case 3:
-        return .down
-    case 4:
-        return .downMirrored
-    case 5:
-        return .leftMirrored
-    case 6:
-        return .right
-    case 7:
-        return .rightMirrored
-    case 8:
-        return .left
-    default:
-        return .up
-    }
-}
-
 func createResizedImage(imageSource: CGImageSource, size: CGFloat) -> UIImage? {
     let options: CFDictionary? = size == 0 ? nil : [
         kCGImageSourceThumbnailMaxPixelSize: size,
@@ -512,12 +489,9 @@ func createResizedImage(imageSource: CGImageSource, size: CGFloat) -> UIImage? {
         kCGImageSourceCreateThumbnailFromImageAlways: true
     ] as CFDictionary
 
-    guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options),
-          let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
-          let orientationRawValue = imageProperties[kCGImagePropertyOrientation] as? UInt32 else {
+    guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options) else {
         return nil
     }
-    let orientation = getImageOrientation(from: orientationRawValue)
 
-    return UIImage(cgImage: downsampledImage, scale: UIScreen.main.scale, orientation: orientation)
+    return UIImage(cgImage: downsampledImage)
 }
