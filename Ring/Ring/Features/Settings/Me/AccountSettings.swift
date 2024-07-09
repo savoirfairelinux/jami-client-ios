@@ -41,6 +41,8 @@ class AccountSettings: ObservableObject {
     @Published var turnPassword = ""
     @Published var turnRealm = ""
 
+    @Published var proxyAddress = ""
+
     var notificationsPermitted: Bool = LocalNotificationsHelper.isEnabled()
     let accountService: AccountsService
     let account: AccountModel
@@ -103,6 +105,7 @@ class AccountSettings: ObservableObject {
 extension AccountSettings {
     private func setUPJamiParameters() {
         self.proxyEnabled = self.accountService.proxyEnabled(for: self.account.id)
+        self.proxyAddress = self.getStringState(for: ConfigKey.proxyServer)
         self.callsFromUnknownContacts = self.getBoolState(for: ConfigKey.dhtPublicIn)
         self.autoConnectOnLocalNetwork = self.getBoolState(for: ConfigKey.keepAliveEnabled)
         self.verifyNotificationPermissionStatus()
@@ -191,5 +194,9 @@ extension AccountSettings {
         if self.autoRegistrationEnabled == enable { return }
         self.accountService.enableKeepAlive(enable: enable, accountId: account.id)
         self.autoRegistrationEnabled = enable
+    }
+
+    func saveProxyAddress() {
+        self.accountService.setProxyAddress(accountID: account.id, proxy: self.proxyAddress)
     }
 }
