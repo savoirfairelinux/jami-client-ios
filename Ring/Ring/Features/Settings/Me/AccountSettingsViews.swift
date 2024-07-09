@@ -68,9 +68,19 @@ struct NotificationsSettingsView: View {
                     .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(L10n.AccountPage.notificationTitle)
+
+            if model.proxyEnabled {
+                Section {
+                    NavigationLink(destination: EditableFieldView(value: $model.proxyAddress, title: L10n.AccountPage.proxyPaceholder, placeholder: L10n.AccountPage.proxyPaceholder, onDisappearAction: {
+                        model.saveProxyAddress()
+                    })) {
+                        FieldRowView(label: L10n.AccountPage.proxyPaceholder, value: model.proxyAddress)
+                    }
+                }
+            }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(L10n.AccountPage.notificationTitle)
     }
 
     func notificationsFooterView() -> some View {
