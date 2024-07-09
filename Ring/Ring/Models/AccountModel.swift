@@ -101,6 +101,8 @@ class AccountModel: Equatable {
                                                                 ConfigKeyModel(withKey: .accountRegistrationStatus))) {
                     self.status = status
                 }
+                self.proxy = newDetails.get(withConfigKeyModel:
+                                                ConfigKeyModel(withKey: .proxyServer))
             }
         }
     }
@@ -115,6 +117,7 @@ class AccountModel: Equatable {
     var isJams = false
     var status = AccountState.unregistered
     var enabled = true
+    var proxy = ""
 
     // MARK: Init
     convenience init(withAccountId accountId: String) {

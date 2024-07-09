@@ -898,6 +898,9 @@ class AccountsService: AccountAdapterDelegate {
 
     func setProxyAddress(accountID: String, proxy: String) {
         let accountDetails = self.getAccountDetails(fromAccountId: accountID)
+        if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer)) == proxy {
+            return
+        }
         accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
         self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
     }
