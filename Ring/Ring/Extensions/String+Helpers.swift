@@ -83,8 +83,8 @@ extension String {
         guard let messageData = self.data(using: .utf8) else { return "" }
         var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))
 
-        digestData.withUnsafeMutableBytes { (digestBytes: UnsafeMutableRawBufferPointer) -> Void in
-            messageData.withUnsafeBytes { (messageBytes: UnsafeRawBufferPointer) -> Void in
+        digestData.withUnsafeMutableBytes { (digestBytes: UnsafeMutableRawBufferPointer) in
+            messageData.withUnsafeBytes { (messageBytes: UnsafeRawBufferPointer) in
                 CC_MD5(messageBytes.baseAddress,
                        CC_LONG(messageData.count),
                        digestBytes.bindMemory(to: UInt8.self).baseAddress)

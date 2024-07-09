@@ -276,7 +276,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
                   preferredStyle: .alert)
         let okAction =
             UIAlertAction(title: L10n.Global.ok,
-                          style: .default) { [weak self](_: UIAlertAction!) -> Void in
+                          style: .default) { [weak self](_: UIAlertAction!) in
                 self?.viewModel.finish()
             }
         alert.addAction(okAction)
@@ -290,7 +290,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
                   preferredStyle: .alert)
         let okAction =
             UIAlertAction(title: L10n.Global.ok,
-                          style: .default) { [weak self](_: UIAlertAction!) -> Void in
+                          style: .default) { [weak self](_: UIAlertAction!) in
                 self?.viewModel.finish()
             }
         alert.addAction(okAction)

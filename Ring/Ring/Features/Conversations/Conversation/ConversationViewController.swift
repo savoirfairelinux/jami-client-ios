@@ -221,7 +221,7 @@ class ConversationViewController: UIViewController,
 
     private func showNoPermissionsAlert(title: String) {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (_: UIAlertAction!) -> Void in }
+        let okAction = UIAlertAction(title: "OK", style: .default) { (_: UIAlertAction!) in }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }
@@ -272,7 +272,7 @@ class ConversationViewController: UIViewController,
             if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
                 self.recordVideoFile()
             } else {
-                AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { [weak self] (granted: Bool) -> Void in
+                AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { [weak self] (granted: Bool) in
                     guard let self = self else { return }
                     if granted == true {
                         self.recordVideoFile()
@@ -282,13 +282,13 @@ class ConversationViewController: UIViewController,
                 })
             }
         } else {
-            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: {[weak self] (granted: Bool) -> Void in
+            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: {[weak self] (granted: Bool) in
                 guard let self = self else { return }
                 if granted == true {
                     if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
                         self.recordVideoFile()
                     } else {
-                        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
+                        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) in
                             if granted == true {
                                 self.recordVideoFile()
                             } else {
@@ -307,7 +307,7 @@ class ConversationViewController: UIViewController,
         if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
             self.viewModel.recordAudioFile()
         } else {
-            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { [weak self] (granted: Bool) -> Void in
+            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { [weak self] (granted: Bool) in
                 guard let self = self else { return }
                 if granted == true {
                     self.viewModel.recordAudioFile()
@@ -432,7 +432,7 @@ class ConversationViewController: UIViewController,
             .default()
             .requestAVAsset(forVideo: phAsset,
                             options: PHVideoRequestOptions(),
-                            resultHandler: { (asset, _, _) -> Void in
+                            resultHandler: { (asset, _, _) in
                                 guard let asset = asset as? AVURLAsset,
                                       let videoData = NSData(contentsOf: asset.url) else {
                                     return
@@ -573,7 +573,7 @@ class ConversationViewController: UIViewController,
             return (profileImage, displayName, username)
         }
         .observe(on: MainScheduler.instance)
-        .subscribe({ [weak self] profileData -> Void in
+        .subscribe({ [weak self] profileData in
             self?.setupNavTitle(profileImageData: profileData.element?.0,
                                 displayName: profileData.element?.1,
                                 username: profileData.element?.2)
