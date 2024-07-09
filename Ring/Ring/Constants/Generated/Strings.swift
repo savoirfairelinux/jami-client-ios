@@ -179,8 +179,10 @@ internal enum L10n {
     internal static let passwordsDoNotMatch = L10n.tr("Localizable", "accountPage.passwordsDoNotMatch", fallback: "Passwords do not match")
     /// Password updated
     internal static let passwordUpdated = L10n.tr("Localizable", "accountPage.passwordUpdated", fallback: "Password updated")
-    /// Auto connect on local network
-    internal static let peerDiscovery = L10n.tr("Localizable", "accountPage.peerDiscovery", fallback: "Auto connect on local network")
+    /// Enable local peer discovery
+    internal static let peerDiscovery = L10n.tr("Localizable", "accountPage.peerDiscovery", fallback: "Enable local peer discovery")
+    /// Connect to other DHT nodes advertising on our local network
+    internal static let peerDiscoveryExplanation = L10n.tr("Localizable", "accountPage.peerDiscoveryExplanation", fallback: "Connect to other DHT nodes advertising on our local network")
     /// Failed to generate PIN
     internal static let pinError = L10n.tr("Localizable", "accountPage.pinError", fallback: "Failed to generate PIN")
     /// Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.
