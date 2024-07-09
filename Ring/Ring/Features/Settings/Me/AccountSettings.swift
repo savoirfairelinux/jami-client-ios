@@ -25,6 +25,7 @@ import RxSwift
 class AccountSettings: ObservableObject {
 
     @Published var proxyEnabled: Bool = false
+    @Published var proxyListEnabled: Bool = false
     @Published var callsFromUnknownContacts: Bool = false
     @Published var peerDiscovery: Bool = false
     @Published var showNotificationPermitionIssue: Bool = false
@@ -40,6 +41,9 @@ class AccountSettings: ObservableObject {
     @Published var turnUsername = ""
     @Published var turnPassword = ""
     @Published var turnRealm = ""
+
+    @Published var proxyAddress = ""
+    @Published var proxyListUrl = ""
 
     var notificationsPermitted: Bool = LocalNotificationsHelper.isEnabled()
     let accountService: AccountsService
@@ -103,6 +107,9 @@ class AccountSettings: ObservableObject {
 extension AccountSettings {
     private func setUPJamiParameters() {
         self.proxyEnabled = self.accountService.proxyEnabled(for: self.account.id)
+        self.proxyListUrl = self.getStringState(for: ConfigKey.dhtProxyListUrl)
+        self.proxyListEnabled = self.getBoolState(for: ConfigKey.proxyListEnabled)
+        self.proxyAddress = self.account.proxy
         self.callsFromUnknownContacts = self.getBoolState(for: ConfigKey.dhtPublicIn)
         self.peerDiscovery = self.getBoolState(for: ConfigKey.dhtPeerDiscovery)
         self.verifyNotificationPermissionStatus()
@@ -117,7 +124,16 @@ extension AccountSettings {
         self.callsFromUnknownContacts = enable
     }
 
-    func enablePeerdiscovery(enable: Bool) {
+    func enableProxyList(enable: Bool) {
+        if self.proxyListEnabled == enable {
+            return
+        }
+        let property = ConfigKeyModel(withKey: .proxyListEnabled)
+        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
+        self.proxyListEnabled = enable
+    }
+
+    func enablePeerDiscovery(enable: Bool) {
         if self.peerDiscovery == enable {
             return
         }
@@ -157,6 +173,15 @@ extension AccountSettings {
                 }
             })
             .disposed(by: self.disposeBag)
+    }
+
+    func saveProxyAddress() {
+        self.accountService.setProxyAddress(accountID: account.id, proxy: self.proxyAddress)
+    }
+
+    func saveProxyListUrl() {
+        let property = ConfigKeyModel(withKey: .dhtProxyListUrl)
+        self.accountService.setAccountProperty(property: property, value: self.proxyListUrl, accountId: account.id)
     }
 }
 

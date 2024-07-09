@@ -131,8 +131,8 @@ internal enum L10n {
     internal static let editSipExpirationTime = L10n.tr("Localizable", "accountPage.editSipExpirationTime", fallback: "Expiration time")
     /// Enable Booth Mode
     internal static let enableBoothMode = L10n.tr("Localizable", "accountPage.enableBoothMode", fallback: "Enable Booth Mode")
-    /// Enable Notifications
-    internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications", fallback: "Enable Notifications")
+    /// Enable notifications
+    internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications", fallback: "Enable notifications")
     /// Encrypt media streams (SRTP)
     internal static let enableSRTP = L10n.tr("Localizable", "accountPage.enableSRTP", fallback: "Encrypt media streams (SRTP)")
     /// Encrypt account with a password
@@ -203,6 +203,12 @@ internal enum L10n {
     internal static let proxyDisabledAlertBody = L10n.tr("Localizable", "accountPage.proxyDisabledAlertBody", fallback: "In order to receive notifications, please enable proxy")
     /// Proxy Server Disabled
     internal static let proxyDisabledAlertTitle = L10n.tr("Localizable", "accountPage.proxyDisabledAlertTitle", fallback: "Proxy Server Disabled")
+    /// Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.
+    internal static let proxyExplanation = L10n.tr("Localizable", "accountPage.proxyExplanation", fallback: "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.")
+    /// Proxy
+    internal static let proxyHeader = L10n.tr("Localizable", "accountPage.proxyHeader", fallback: "Proxy")
+    /// Proxy list URL
+    internal static let proxyListURL = L10n.tr("Localizable", "accountPage.proxyListURL", fallback: "Proxy list URL")
     /// Proxy address
     internal static let proxyPaceholder = L10n.tr("Localizable", "accountPage.proxyPaceholder", fallback: "Proxy address")
     /// Chosen username is not available
@@ -253,6 +259,8 @@ internal enum L10n {
     internal static let unlink = L10n.tr("Localizable", "accountPage.unlink", fallback: "Unlink")
     /// Use UPnP
     internal static let upnpEnabled = L10n.tr("Localizable", "accountPage.upnpEnabled", fallback: "Use UPnP")
+    /// Use proxy list
+    internal static let useProxyList = L10n.tr("Localizable", "accountPage.useProxyList", fallback: "Use proxy list")
     /// username: not registered
     internal static let usernameNotRegistered = L10n.tr("Localizable", "accountPage.usernameNotRegistered", fallback: "username: not registered")
     /// Enter desired username

@@ -41,9 +41,9 @@ struct CallSettingsView: View {
                     .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(L10n.Global.call)
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(L10n.Global.call)
     }
 }
 
@@ -68,9 +68,40 @@ struct NotificationsSettingsView: View {
                     .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(L10n.AccountPage.notificationTitle)
+
+            if model.proxyEnabled {
+                Section(header: Text(L10n.AccountPage.proxyHeader), footer: Text(L10n.AccountPage.proxyExplanation)) {
+                    HStack {
+                        Text(L10n.AccountPage.useProxyList)
+                        Spacer()
+                        Toggle("", isOn: Binding<Any>.customBinding(
+                            get: { model.proxyListEnabled },
+                            set: { newValue in model.enableProxyList(enable: newValue) }
+                        ))
+                        .labelsHidden()
+                        .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
+                    }
+                    if model.proxyListEnabled {
+                        NavigationLink(destination: EditableFieldView(value: $model.proxyListUrl, title: L10n.AccountPage.proxyListURL, placeholder: L10n.AccountPage.proxyListURL, onDisappearAction: {
+                            model.saveProxyListUrl()
+                        })) {
+                            FieldRowView(label: L10n.AccountPage.proxyListURL, value: model.proxyListUrl)
+                        }
+                    } else {
+                        NavigationLink(destination: EditableFieldView(value: $model.proxyAddress,
+                                                                      title: L10n.AccountPage.proxyPaceholder,
+                                                                      placeholder: L10n.AccountPage.proxyPaceholder,
+                                                                      onDisappearAction: {
+                            model.saveProxyAddress()
+                        })) {
+                            FieldRowView(label: L10n.AccountPage.proxyPaceholder, value: model.proxyAddress)
+                        }
+                    }
+                }
+            }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(L10n.AccountPage.notificationTitle)
     }
 
     func notificationsFooterView() -> some View {
@@ -129,7 +160,7 @@ struct ConnectivitySettingsView: View {
                         Spacer()
                         Toggle("", isOn: Binding<Any>.customBinding(
                             get: { model.peerDiscovery },
-                            set: { newValue in model.enablePeerdiscovery(enable: newValue) }
+                            set: { newValue in model.enablePeerDiscovery(enable: newValue) }
                         ))
                         .labelsHidden()
                         .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
