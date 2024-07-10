@@ -123,7 +123,7 @@ struct ConnectivitySettingsView: View {
                 }
 
             } else {
-                Section {
+                Section(footer: Text(L10n.AccountPage.peerDiscoveryExplanation)) {
                     HStack {
                         Text(L10n.AccountPage.peerDiscovery)
                         Spacer()

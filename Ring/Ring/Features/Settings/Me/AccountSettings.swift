@@ -104,7 +104,7 @@ extension AccountSettings {
     private func setUPJamiParameters() {
         self.proxyEnabled = self.accountService.proxyEnabled(for: self.account.id)
         self.callsFromUnknownContacts = self.getBoolState(for: ConfigKey.dhtPublicIn)
-        self.autoConnectOnLocalNetwork = self.getBoolState(for: ConfigKey.keepAliveEnabled)
+        self.autoConnectOnLocalNetwork = self.getBoolState(for: ConfigKey.dhtPeerDiscovery)
         self.verifyNotificationPermissionStatus()
         observeNotificationPermissionChanges()
     }
@@ -121,7 +121,7 @@ extension AccountSettings {
         if self.autoConnectOnLocalNetwork == enable {
             return
         }
-        self.accountService.enableKeepAlive(enable: enable, accountId: account.id)
+        self.accountService.enablePeerDiscovery(enable: enable, accountId: account.id)
         self.autoConnectOnLocalNetwork = enable
     }
 
