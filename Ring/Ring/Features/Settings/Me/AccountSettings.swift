@@ -26,7 +26,7 @@ class AccountSettings: ObservableObject {
 
     @Published var proxyEnabled: Bool = false
     @Published var callsFromUnknownContacts: Bool = false
-    @Published var autoConnectOnLocalNetwork: Bool = false
+    @Published var peerDiscovery: Bool = false
     @Published var showNotificationPermitionIssue: Bool = false
     @Published var upnpEnabled: Bool = false
     @Published var turnEnabled: Bool = false
@@ -104,7 +104,7 @@ extension AccountSettings {
     private func setUPJamiParameters() {
         self.proxyEnabled = self.accountService.proxyEnabled(for: self.account.id)
         self.callsFromUnknownContacts = self.getBoolState(for: ConfigKey.dhtPublicIn)
-        self.autoConnectOnLocalNetwork = self.getBoolState(for: ConfigKey.keepAliveEnabled)
+        self.peerDiscovery = self.getBoolState(for: ConfigKey.dhtPeerDiscovery)
         self.verifyNotificationPermissionStatus()
         observeNotificationPermissionChanges()
     }
@@ -117,12 +117,12 @@ extension AccountSettings {
         self.callsFromUnknownContacts = enable
     }
 
-    func enableAutoConnectOnLocalNetwork(enable: Bool) {
-        if self.autoConnectOnLocalNetwork == enable {
+    func enablePeerdiscovery(enable: Bool) {
+        if self.peerDiscovery == enable {
             return
         }
-        self.accountService.enableKeepAlive(enable: enable, accountId: account.id)
-        self.autoConnectOnLocalNetwork = enable
+        self.accountService.enablePeerDiscovery(enable: enable, accountId: account.id)
+        self.peerDiscovery = enable
     }
 
     func enableNotifications(enable: Bool) {

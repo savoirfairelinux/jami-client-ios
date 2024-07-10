@@ -123,13 +123,13 @@ struct ConnectivitySettingsView: View {
                 }
 
             } else {
-                Section {
+                Section(footer: Text(L10n.AccountPage.peerDiscoveryExplanation)) {
                     HStack {
                         Text(L10n.AccountPage.peerDiscovery)
                         Spacer()
                         Toggle("", isOn: Binding<Any>.customBinding(
-                            get: { model.autoConnectOnLocalNetwork },
-                            set: { newValue in model.enableAutoConnectOnLocalNetwork(enable: newValue) }
+                            get: { model.peerDiscovery },
+                            set: { newValue in model.enablePeerdiscovery(enable: newValue) }
                         ))
                         .labelsHidden()
                         .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
