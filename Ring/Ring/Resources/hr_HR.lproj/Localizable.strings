@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Ustavite proxy adresu";
 "accountPage.noProxyExplanationLabel" = "Vaš uređaj neće primati obavijesti kada je proxy isključen";
 "accountPage.proxyPaceholder" = "Proxy adresa";
-"accountPage.enableNotifications" = "Uključi obavijesti";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "U mogućnosti obavješćivanja";
 "accountPage.proxyDisabledAlertTitle" = "Proxy server isključen";
 "accountPage.proxyDisabledAlertBody" = "Da biste primili obavijesti, molimo vas da uključite proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "U režimu kabine povijest razgovora nije spisana i funkcionalnost jami ograničena odlaska pozive.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Nakon uključivanja stand modu, svi razgovori će biti uklonjeni.";
-"accountPage.peerDiscovery" = "Automatsko povezivanje na lokalnoj mreži";
+"accountPage.peerDiscovery" = "omogućiti lokalno otkrivanje vršnjaka";
+"accountPage.peerDiscoveryExplanation" = "Povežite se s drugim DHT čvorovima koji oglašavaju na našoj lokalnoj mreži";
 "accountPage.autoRegistration" = "Autoreski registr nakon isteka";
 "accountPage.connectivityHeader" = "Spojivost";
 "accountPage.turnEnabled" = "Aktiviraj TURN";

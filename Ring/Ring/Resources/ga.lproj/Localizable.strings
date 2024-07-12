@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "Cuir seoladh proxy ar fáil";
 "accountPage.noProxyExplanationLabel" = "Ní fhaigheann do ghléas fógraí nuair a bhíonn an proxy diúltaithe";
 "accountPage.proxyPaceholder" = "Seoladh Proxy";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Cuir in iúl fógraí";
 "accountPage.proxyDisabledAlertTitle" = "Seirbhísí Proxy A Díchíchíchumas";
 "accountPage.proxyDisabledAlertBody" = "Chun fógraí a fháil, déan iarracht proxy a chumasú";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "I modh booth, ní shábháil go bhfuil stair comhrá agus cumaíocht jami teoranta ag glaochanna amach. Nuair a chuireann tú ar chumas modh booth, déanfar do chuid comhráite go léir a bhaint.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Tar éis do modh booth a chumasú, déanfar do chuid comhráite go léir a bhaint.";
-"accountPage.peerDiscovery" = "Déan nasc uathoibríoch ar líonra áitiúil";
+"accountPage.peerDiscovery" = "Aibriú ar an gcloinneadh comhghleacaithe áitiúil";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "Údarás na hIarscríbhneacha";
 "accountPage.connectivityHeader" = "Conactivity";
 "accountPage.turnEnabled" = "Céadú TURN";

@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "Voer proxyadres in";
 "accountPage.noProxyExplanationLabel" = "Uw apparaat zal geen meldingen ontvangen wanneer de proxy uitgeschakeld is";
 "accountPage.proxyPaceholder" = "Proxyadres";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Meldingen inschakelen";
 "accountPage.proxyDisabledAlertTitle" = "Proxyserver uitgeschakeld";
 "accountPage.proxyDisabledAlertBody" = "Schakel de proxy in om meldingen te kunnen ontvangen";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "In de standmodus is de gesprekshistorie niet opgeslagen en de Jami-functionaliteit beperkt door uitgaande gesprekken te maken.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Nadat je de stand-modus hebt ingeschakeld, worden al je gesprekken verwijderd.";
-"accountPage.peerDiscovery" = "Automatisch verbinden op lokaal netwerk";
+"accountPage.peerDiscovery" = "Lokale verwanten ontdekken inschakelen";
+"accountPage.peerDiscoveryExplanation" = "Verbinden met andere DHT nodes die zich kenbaar maken binnen het LAN waar u zich bevind";
 "accountPage.autoRegistration" = "Auto-register na verval";
 "accountPage.connectivityHeader" = "Connectiviteit";
 "accountPage.turnEnabled" = "Toch de omschakeling";

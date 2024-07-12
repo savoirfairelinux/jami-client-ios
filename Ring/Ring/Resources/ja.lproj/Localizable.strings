@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "代理アドレスを入力する";
 "accountPage.noProxyExplanationLabel" = "お使いの端末のプロキシを無効にすると通知が受取れません";
 "accountPage.proxyPaceholder" = "プロキシアドレス";
-"accountPage.enableNotifications" = "通知を有効化";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "プロキシ";
+"accountPage.enableNotifications" = "通知を有効にする";
 "accountPage.proxyDisabledAlertTitle" = "プロキシサーバーが無効";
 "accountPage.proxyDisabledAlertBody" = "通知を有効にするため、プロキシを有効にしてください。";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "ブルースモードでは会話履歴が保存されず,Jami機能は出かけ通話によって制限されます.ブルースモードを有効にすると,すべての会話が削除されます.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "スタンドモードを有効にした後,すべての会話が削除されます.";
-"accountPage.peerDiscovery" = "局所通信網に自動的に接続";
+"accountPage.peerDiscovery" = "ローカルピアの探索を有効化";
+"accountPage.peerDiscoveryExplanation" = "ローカルネットワーク上の他のDHTノードに接続します";
 "accountPage.autoRegistration" = "期限切れ後自動登録";
 "accountPage.connectivityHeader" = "接続性";
 "accountPage.turnEnabled" = "ターンを有効にする";

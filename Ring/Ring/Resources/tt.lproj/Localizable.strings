@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Прокси адресны күрсәтү";
 "accountPage.noProxyExplanationLabel" = "Прокси эшләмәгәч, сезнең җайланмагыз хәбәрләр алмый";
 "accountPage.proxyPaceholder" = "Прокси адресы";
-"accountPage.enableNotifications" = "Билгеләүләрне кую";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Прокси";
+"accountPage.enableNotifications" = "Билгеләүләрне булдыру";
 "accountPage.proxyDisabledAlertTitle" = "Прокси серверны гамәлдән чыгару";
 "accountPage.proxyDisabledAlertBody" = "Билгеләүләрне кабул итү өчен проксины куюны сорагыз";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Буут режимында сөйләшү тарихы сакланып калмаган һәм Jami функциясе чикле булган, читтән баручы шалтыратулар ясаганда.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Бут режимын кушкач, барлык сөйләшүләрегез дә бетереләчәк.";
-"accountPage.peerDiscovery" = "Җирле челтәрдә автомат тоташтыру";
+"accountPage.peerDiscovery" = "Җирле яшьтәшләрне ачыклау мөмкинлеге";
+"accountPage.peerDiscoveryExplanation" = "Безнең җирле челтәрдә реклама ясаучы башка DHT узелларына тоташтырыгыз";
 "accountPage.autoRegistration" = "Вакыт узгач, автореестр";
 "accountPage.connectivityHeader" = "Бәйләнеш";
 "accountPage.turnEnabled" = "ТУРНны кую";

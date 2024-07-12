@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Jepni adresë ndërmjetësi";
 "accountPage.noProxyExplanationLabel" = "Pajisja juaj s’do të marrë njoftime kur ndërmjetësi të jetë çaktivizuar";
 "accountPage.proxyPaceholder" = "Adresë ndërmjetësi";
-"accountPage.enableNotifications" = "Aktivizoni Njoftime";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Ndërmjetës";
+"accountPage.enableNotifications" = "Aktivizo njoftime";
 "accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
 "accountPage.proxyDisabledAlertBody" = "Që të mund të merrni njoftime, ju lutemi, aktivizoni ndërmjetësin";
 "accountPage.removeDeviceTitle" = "Hiqe pajisjen";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Në mënyrën kabinë, historiku i bisedës s’ruhet dhe funksionet e Jami-t kufizohen në bërje thirrjesh. Kur aktivizoni mënyrën kabinë, krejt bisedat tuaja do të hiqen.";
 "accountPage.noBoothMode" = "Që të aktivizoni mënyrën Kabinë, së pari fshehtëzoni llogarinë tuaj.";
 "accountPage.boothModeAlertMessage" = "Pas aktivizimit të mënyrës Kabinë, krej bisedat tuaja do të hiqen.";
-"accountPage.peerDiscovery" = "Vetëlidhu në rrjet vendor";
+"accountPage.peerDiscovery" = "Aktivizo pikasje ortakësh vendorë";
+"accountPage.peerDiscoveryExplanation" = "Lidhu me nyje të tjera DHT që reklamohen në rrjetin tonë vendor";
 "accountPage.autoRegistration" = "Regjistrohu automatikisht pas skadimit";
 "accountPage.connectivityHeader" = "Aftësi lidhjeje";
 "accountPage.turnEnabled" = "Aktivizo TURN";

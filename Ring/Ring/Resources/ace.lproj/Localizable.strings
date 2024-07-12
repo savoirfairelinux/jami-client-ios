@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "ممبريكن ڤرودوكسي";
 "accountPage.noProxyExplanationLabel" = "جهازك لن يتلق إخطارات عندما يتم تعطيل الوكيل";
 "accountPage.proxyPaceholder" = "ڤرودوکسي";
-"accountPage.enableNotifications" = "فعاليت اطلاعيه ها";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Enable notifications";
 "accountPage.proxyDisabledAlertTitle" = "ڤروكسي ڤرلو دڤرچايا?? ي";
 "accountPage.proxyDisabledAlertBody" = "اونتوق مڠهادڤي ڤرساتوان، كرجاسام ممبنتو ڤروكسي";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "دالم مود بوته سياستن ڤرساتوان تيدق دڤرچايا?? ي دان ڤڠونجوڠ jami دڤرچايا?? ي دڠن ممبنتو ڤرساتوان يڠ برمولا.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "بعد از فعال کردن حالت كوتاه تمام مکالمه هاتون حذف ميشه";
-"accountPage.peerDiscovery" = "ڤڠاجين اوتوماتيك دالم نيترۏيك لوكالي";
+"accountPage.peerDiscovery" = "Enable local peer discovery";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "ڤرجالنن اوتوماتيك سهيڠڬ ڤڠڬيلن";
 "accountPage.connectivityHeader" = "ڤڠاجين";
 "accountPage.turnEnabled" = "فعالكن TURN";

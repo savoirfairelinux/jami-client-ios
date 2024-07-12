@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Nye adreesị nnọchiteanya";
 "accountPage.noProxyExplanationLabel" = "Ngwaọrụ gị agaghị enweta ọkwa mgbe a na-akwadoghị proxy";
 "accountPage.proxyPaceholder" = "Adreesị nnọchiteanya";
-"accountPage.enableNotifications" = "Gbaa mbọ hụ na e nwere ihe ndị a na-eme.";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Onye nnọchianya";
+"accountPage.enableNotifications" = "Mee ka ọkwa dị";
 "accountPage.proxyDisabledAlertTitle" = "Onye ọrụ nnọchi anya akwadoghị";
 "accountPage.proxyDisabledAlertBody" = "Iji nweta ọkwa, biko mee proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Na booth mode mkparịta ụka akụkọ ihe mere eme na-adịghị echekwara na jami ọrụ nanị site na-eme na-aga na oku. Mgbe ị na-enyere booth mode niile gị mkparịta ụka ga-ehichapụ.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Mgbe i mebisịrị ọnọdụ ụlọ, a ga-ewepụ mkparịta ụka gị niile.";
-"accountPage.peerDiscovery" = "Akpaghị aka jikọọ na netwọk mpaghara";
+"accountPage.peerDiscovery" = "Mee ka nchọpụta ndị ọgbọ dị n'ógbè ahụ";
+"accountPage.peerDiscoveryExplanation" = "Jikọọ na ndị ọzọ DHT ọnụ mgbasa ozi na anyị na netwọk mpaghara";
 "accountPage.autoRegistration" = "Nchịkọta akpaaka mgbe oge expired gasịrị";
 "accountPage.connectivityHeader" = "Njikọ";
 "accountPage.turnEnabled" = "Gbaa mbọ hụ na ị na-eme ka ọ dị mma";

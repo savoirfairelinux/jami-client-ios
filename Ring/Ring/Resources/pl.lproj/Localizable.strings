@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Dostarcz adres proxy";
 "accountPage.noProxyExplanationLabel" = "Twoje urządzenie nie będzie otrzymywać powiadomień, gdy proxy jest wyłączone";
 "accountPage.proxyPaceholder" = "Adres proxy";
-"accountPage.enableNotifications" = "Włącz notyfikacje";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Pełnomocnik";
+"accountPage.enableNotifications" = "Aktywuj powiadomienia";
 "accountPage.proxyDisabledAlertTitle" = "Serwer proxy wyłączony";
 "accountPage.proxyDisabledAlertBody" = "Włącz proxy, by otrzymywać powiadomienia";
 "accountPage.removeDeviceTitle" = "Usuń urządzenie";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "W trybie booth historia rozmowy nie jest zapisana i funkcjonalność jami ograniczona przez wykonywanie wychodzących połączeń.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Po włączeniu trybu kabiny wszystkie rozmowy zostaną usunięte.";
-"accountPage.peerDiscovery" = "Automatycznie łącz się w sieci lokalnej";
+"accountPage.peerDiscovery" = "Aktywuj wyszukiwanie lokalnych partnerów";
+"accountPage.peerDiscoveryExplanation" = "łączyć się z innymi węzłami DHT reklamującymi w naszej sieci lokalnej";
 "accountPage.autoRegistration" = "Automatyczna rejestracja po wygaśnięciu";
 "accountPage.connectivityHeader" = "Łączność";
 "accountPage.turnEnabled" = "Włącz TURN";

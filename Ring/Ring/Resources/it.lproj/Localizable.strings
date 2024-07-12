@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "Inserire indirizzo proxy";
 "accountPage.noProxyExplanationLabel" = "Il tuo dispositivo non riceverà notifiche quando il proxy è disabilitato";
 "accountPage.proxyPaceholder" = "Indirizzo proxy";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Attiva le notifiche";
 "accountPage.proxyDisabledAlertTitle" = "Server proxy disabilitato";
 "accountPage.proxyDisabledAlertBody" = "Attiva il proxy, per ricevere le notifiche";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "In Modalità Cabina la cronologia delle conversazioni non viene salvata e la funzionalità di Jami è limitata a fare chiamate. Se attivi la Modalità Cabina tutte le tue conversazioni saranno eliminate.";
 "accountPage.noBoothMode" = "Cifrare il proprio account prima di attivare la \"Modalità Cabina\".";
 "accountPage.boothModeAlertMessage" = "Dopo aver attivato la Modalità Cabina, tutte le tue conversazioni saranno eliminate.";
-"accountPage.peerDiscovery" = "Connessione automatica sulla rete locale";
+"accountPage.peerDiscovery" = "Attiva il rilevamento di utenti locali";
+"accountPage.peerDiscoveryExplanation" = "Connettiti ad altri nodi DHT nella tua rete locale.";
 "accountPage.autoRegistration" = "Registrazione automatica dopo la scadenza";
 "accountPage.connectivityHeader" = "Connessione";
 "accountPage.turnEnabled" = "Abilita TURN";

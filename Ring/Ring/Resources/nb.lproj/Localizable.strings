@@ -44,9 +44,9 @@
 "global.copy" = "Kopier";
 "global.reply" = "Svar";
 "global.search" = "Søker...";
-"global.donate" = "Donate";
+"global.donate" = "Doner";
 "global.deleteMessage" = "Slett melding";
-"global.deleteFile" = "Delete file from device";
+"global.deleteFile" = "Slett fil fra enheten";
 "global.editMessage" = "Redigere melding";
 "global.editing" = "Editing";
 "global.create" = "Opprett";
@@ -55,7 +55,7 @@
 "global.call" = "Ring";
 "global.video" = "Video";
 "global.time" = "Tid";
-"global.editPassword" = "Edit password";
+"global.editPassword" = "Endre passord";
 
 // Scan
 "scan.badQrCode" = "Ugyldig QR kode";
@@ -86,24 +86,24 @@
 "swarm.addMember" = "Legg til medlem";
 "swarm.confirmLeaveSwarm" = "Er du sikker på at du vil forlate denne sjarmen?";
 "swarm.Leave" = "Gå bort";
-"swarm.newSwarm" = "New swarm";
+"swarm.newSwarm" = "Ny sverm";
 "swarm.namePlaceholder" = "Swarm's navn";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.explanationText" = "Du kan legge til eller invitere medlemmer når som helst etter at svermen er opprettet";
+"swarm.customizeProfile" = "Tilpass svermens profil";
+"swarm.changePicture" = "Endre bilde til svermen";
+"swarm.customize" = "Tilpass sverm";
+"swarm.selectContacts" = "Velg kontakter";
 
 // Smartlist
 "smartlist.yesterday" = "Igår";
 "smartlist.results" = "Offentlig katalog";
 "smartlist.jamsResults" = "Søkeresultat";
 "smartlist.conversations" = "Samtaler";
-"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.noConversationsFound" = "Ingen samtaler samsvarer med søket ditt";
 "smartlist.newContact" = "Ny kontakt";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newSwarm" = "Ny sverm";
 "smartlist.accounts" = "Kontoer";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "Invitasjoner mottatt";
 "smartlist.noResults" = "Ingen resultater";
 "smartlist.noConversation" = "Ingen samtaler";
 "smartlist.searchBarPlaceholder" = "Tast inn navn...";
@@ -116,22 +116,22 @@
 "smartlist.selectOneNumber" = "Velg et av nummerne";
 "smartlist.invitations" = "Invitasjoner";
 "smartlist.aboutJami" = "Om Jami";
-"smartlist.inviteFriends" = "Invite friends";
+"smartlist.inviteFriends" = "Inviter venner";
 "smartlist.accounts" = "Kontoer";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.disableDonation" = "Ikke nå";
+"smartlist.donationExplanation" = "Hvis du liker å bruke Jami og tror på prosjektet vårt, vil du gi en donasjon?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "Ny melding";
 
 //Conversation
-"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsButton" = "Legg til kontakter";
 "conversation.addToContactsLabel" = "Legg til kontakter?";
-"conversation.notContactLabel" = "is not in your contact list";
-"conversation.messagePlaceholder" = "Write to";
+"conversation.notContactLabel" = "er ikke i kontaktlisten din";
+"conversation.messagePlaceholder" = "Skriv til";
 "conversation.explanationSendingLocationTo" = "Du deler for tiden din lokasjon med";
 "conversation.explanationReceivingLocationFrom" = "Du mottar for øyeblikket en live lokasjon fra";
-"conversation.errorSavingImage" = "Failed to save image to gallery";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.errorSavingImage" = "Klarte ikke å lagre bilde i galleriet";
+"conversation.receivedRequest" = "%@ sendte deg en samtaleforespørsel.";
 "conversation.incomingRequest" = "Sendt deg en forespørsel om en samtale.";
 "conversation.requestMessage" = "Hei\nVil du bli med i samtalen?";
 "conversation.sendRequest" = "Send vedkommende en kontaktforespørsel for å kunne snakke sammen.";
@@ -140,9 +140,9 @@
 "conversation.synchronizationMessage" = "Vi venter på  %@ tilkoblinger for å synkronisere samtalen.";
 "conversation.inReplyTo" = "I svar til";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.yourself" = "deg selv";
+"conversation.edited" = "redigert";
+"conversation.deletedMessage" = "slettet en melding";
 
 //Invitations
 "invitations.noInvitations" = "Ingen invitasjoner";
@@ -150,12 +150,12 @@
 "invitations.accepted" = "accepted";
 "invitations.refused" = "refused";
 "invitations.banned" = "banned";
-"invitations.list" = "Invitations received";
+"invitations.list" = "Invitasjoner mottatt";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
+"welcome.title" = "Del fritt og privat med Jami";
 "welcome.text" = "Jami er en gratis og universell kommunikasjonsplattform som ivaretar brukernes personvern og friheter";
 "welcome.haveAccount" = "Jeg har allerede en konto";
 "welcome.linkDevice" = "Import fra en annen enhet";
@@ -166,7 +166,7 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Hopp over";
 "createProfile.profileCreated" = "Neste";
-"createProfile.title" = "Personalize your profile";
+"createProfile.title" = "Tilpass din profil";
 "createProfile.enterNameLabel" = "Tast inn visningsnavn";
 "createProfile.enterNamePlaceholder" = "Tast inn navn";
 "createProfile.subtitle" = "Din profil vil bli delt med dine kontakter. Du kan endre dette når som helst.";
@@ -188,8 +188,8 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontotilknyttning";
 "linkToAccount.linkButtonTitle" = "Lenk";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Tilknytt enhet";
+"linkToAccount.linkDeviceMessage" = "Velg “Koble til en ny enhet” fra den andre Jami-appen for å vise QR-koden eller PIN-koden";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Skriv inn PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Angi mellomtjeneradresse";
 "accountPage.noProxyExplanationLabel" = "Din enhet vil ikke motta merknader når mellomtjener er deaktivert";
 "accountPage.proxyPaceholder" = "Mellomtjeneradresse";
-"accountPage.enableNotifications" = "Aktiver varsler";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Mellomtjener";
+"accountPage.enableNotifications" = "Skru på varsler";
 "accountPage.proxyDisabledAlertTitle" = "Mellomtjener deaktivert";
 "accountPage.proxyDisabledAlertBody" = "For å motta varsler, vennligst aktiver mellomtjener";
 "accountPage.removeDeviceTitle" = "Fjern enhet";
@@ -291,7 +295,7 @@
 "accountPage.linkDeviceTitle" = "Tilknytt ny enhet";
 "accountPage.other" = "Andre";
 "accountPage.removeAccountMessage" = "Hvis kontoen din ikke er sikkerhetskopiert eller lagt til en annen enhet, vil kontoen og registrert navn være uigenkallelig tapt.";
-"accountPage.inviteFriends" = "Invite friends";
+"accountPage.inviteFriends" = "Inviter venner";
 "accountPage.contactMeOnJamiTitle" = "Kontakt meg på Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontakt meg via \"%s\" på den distribuerte kommunikasjonsplattformen Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Tast inn kontopassord";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "I messemodus lagres ikke samtalelogg og jami funksjonaliteten begrenses ved utgående samtaler. Når du aktiverer messemodus vil alle dine samtaler bli slettet.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Etter å ha aktiver messemodus vil alle dine samtaler bli slettet.";
-"accountPage.peerDiscovery" = "Koble automatisk til lokalt nettverk";
+"accountPage.peerDiscovery" = "Tillat lokal node detektering";
+"accountPage.peerDiscoveryExplanation" = "Koble til andre DHT-noder som annonserer i vårt lokale nettverk";
 "accountPage.autoRegistration" = "Automatisk registrering etter utløp";
 "accountPage.connectivityHeader" = "Forbindelsesstatus";
 "accountPage.turnEnabled" = "Aktivere TURN";

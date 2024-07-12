@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Посочете адрес на прокси";
 "accountPage.noProxyExplanationLabel" = "Устройството не получава уведомления, когато проксито е деактивирано.";
 "accountPage.proxyPaceholder" = "Адрес на прокси";
-"accountPage.enableNotifications" = "Включване на известията";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Enable notifications";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сървър деактивиран";
 "accountPage.proxyDisabledAlertBody" = "За да получите уведомления, моля, включете прокси";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "В режим \"бух\" не е запазено историята на разговора и функциите на Jami са ограничени от изходящи обаждания.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "След като включите режим \"бух\", всички разговори ще бъдат премахнати.";
-"accountPage.peerDiscovery" = "Автоматично свързване на локалната мрежа";
+"accountPage.peerDiscovery" = "Enable local peer discovery";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "Авторегистър след изтичане на срока";
 "accountPage.connectivityHeader" = "Свързаност";
 "accountPage.turnEnabled" = "Осигуряване на TURN";

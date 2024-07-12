@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Angiv proxy-adresse";
 "accountPage.noProxyExplanationLabel" = "Din enhed modtager ikke notifikationer når proxy er deaktiveret";
 "accountPage.proxyPaceholder" = "Proxy-adresse";
-"accountPage.enableNotifications" = "Aktivér beskeder";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Enable notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy-server deaktiveret";
 "accountPage.proxyDisabledAlertBody" = "Aktivér venligst proxy, for at modtage notifikationer";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "I stand-modus er samtalehistorien ikke gemt og Jami-funktionen begrænset ved at foretage udgående opkald.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Efter at have aktiveret stand-modus, fjernes alle dine samtaler.";
-"accountPage.peerDiscovery" = "Automatisk forbindelse på lokalt netværk";
+"accountPage.peerDiscovery" = "Enable local peer discovery";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "Autorejser efter udløbet";
 "accountPage.connectivityHeader" = "Forbindelse";
 "accountPage.turnEnabled" = "Aktivere TURN";

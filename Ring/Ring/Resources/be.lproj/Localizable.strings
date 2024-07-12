@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Уключыце адрас праксі";
 "accountPage.noProxyExplanationLabel" = "Ваша прылада не атрымае паведамленняў, калі праксі адключаны";
 "accountPage.proxyPaceholder" = "Адрас практычнага аддзела";
-"accountPage.enableNotifications" = "Уключыць паведамленні";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Enable notifications";
 "accountPage.proxyDisabledAlertTitle" = "Праксі сервер адключаны";
 "accountPage.proxyDisabledAlertBody" = "Каб атрымаць паведамленні, калі ласка, уключыце праксі";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "У рэжыме кабіны гісторыя размоў не захаваная і функцыянальнасць Jami абмежаваны выхаду званкі.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Пасля таго, як вы ўключыце рэжым кабіны, усе вашыя размовы будуць выдаленыя.";
-"accountPage.peerDiscovery" = "Аўтаматычнае падключэнне ў мясцовай сетцы";
+"accountPage.peerDiscovery" = "Enable local peer discovery";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "Аўтамабільны рэгістр пасля заканчэння тэрміну";
 "accountPage.connectivityHeader" = "Злучнасць";
 "accountPage.turnEnabled" = "Уключыць ТУРН";

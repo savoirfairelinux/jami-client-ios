@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Anna välityspalvelimen osoite";
 "accountPage.noProxyExplanationLabel" = "Laite ei saa ilmoituksia, kun välityspalvelin on poistettu käytöstä";
 "accountPage.proxyPaceholder" = "Proxy osoite";
-"accountPage.enableNotifications" = "Ilmoitukset päälle";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Ota ilmoitukset käyttöön";
 "accountPage.proxyDisabledAlertTitle" = "Välityspalvelin poistettu käytöstä";
 "accountPage.proxyDisabledAlertBody" = "Jotta voit vastaanottaa ilmoituksia, ota käyttöön";
 "accountPage.removeDeviceTitle" = "Poista laite";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Kioskitilassa keskusteluhistoriaa ei tallenneta ja jamin toimintoja rajoitettu lähtevien puheluiden osalta. Kun otat kioskitilan käyttöön, kaikki keskustelusi poistetaan.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Kun kioskitila on otettu käyttöön, kaikki keskustelut poistetaan.";
-"accountPage.peerDiscovery" = "Automaattinen yhteys paikallisessa verkossa";
+"accountPage.peerDiscovery" = "Salli paikallisten vertaislaitteiden haku";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "Automaattinen rekisteröinti vanhentumisen jälkeen";
 "accountPage.connectivityHeader" = "Yhteydet";
 "accountPage.turnEnabled" = "Valitse TURN";

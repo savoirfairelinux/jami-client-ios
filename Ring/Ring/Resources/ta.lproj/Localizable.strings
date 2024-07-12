@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "பிரதி முகவரியை வழங்கவும்";
 "accountPage.noProxyExplanationLabel" = "ப்ராக்ஸி செயலிழக்கப்படும்போது உங்கள் சாதனம் அறிவிப்புகளை பெறாது";
 "accountPage.proxyPaceholder" = "பிரதிநிதி முகவரி";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "பிரதிநிதி";
 "accountPage.enableNotifications" = "அறிவிப்புகளை இயக்குதல்";
 "accountPage.proxyDisabledAlertTitle" = "ப்ராக்ஸி சேவையகம் செயலிழக்கப்பட்டது";
 "accountPage.proxyDisabledAlertBody" = "அறிவிப்புகளைப் பெற, ப்ராக்ஸி இயக்கு";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "ஸ்டேஷன் பயன்முறையில் உரையாடல் வரலாறு சேமிக்கப்படவில்லை மற்றும் ஜாமி செயல்பாடு புறப்படும் அழைப்புகளைச் செய்வதன் மூலம் வரையறுக்கப்பட்டுள்ளது. நீங்கள் ஸ்டேஷன் பயன்முறையை இயக்கும்போது உங்கள் உரையாடல்கள் அனைத்தும் நீக்கப்படும்.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "ஸ்டேஷன் பயன்முறையை இயக்கிய பிறகு உங்கள் உரையாடல்கள் அனைத்தும் நீக்கப்படும்.";
-"accountPage.peerDiscovery" = "உள்ளூர் நெட்வொர்க்கில் தானியங்கி இணைப்பு";
+"accountPage.peerDiscovery" = "உள்ளூர் சகாக்களைக் கண்டறிவதை இயக்குதல்";
+"accountPage.peerDiscoveryExplanation" = "எங்கள் உள்ளூர் நெட்வொர்க்கில் விளம்பரப்படுத்தும் மற்ற DHT முனைகளுடன் இணைக்கவும்";
 "accountPage.autoRegistration" = "காலாவதிக்குப் பிறகு தானியங்கி பதிவு";
 "accountPage.connectivityHeader" = "இணைப்பு";
 "accountPage.turnEnabled" = "TURN ஐ இயக்கு";

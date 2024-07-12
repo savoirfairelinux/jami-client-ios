@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Zadajte adresu proxy";
 "accountPage.noProxyExplanationLabel" = "Vaše zariadenie nebude dostávať upozornenia keď je proxy vypnutá";
 "accountPage.proxyPaceholder" = "Adresa proxy";
-"accountPage.enableNotifications" = "Povoliť upozornenia";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Umožniť oznámenie";
 "accountPage.proxyDisabledAlertTitle" = "Proxy server zakázaný";
 "accountPage.proxyDisabledAlertBody" = "Ak chcete dostávať upozornenia, povoľte prosím proxy.";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "V režime kabíny nie je uložená historika konverzácií a funkcia Jami je obmedzená výstupnými hovormi.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Po spustení režimu stanky sa všetky vaše konverzácie odstránia.";
-"accountPage.peerDiscovery" = "Automatické pripojenie v lokálnej sieti";
+"accountPage.peerDiscovery" = "Povoliť lokálne vyhľadávanie peerov";
+"accountPage.peerDiscoveryExplanation" = "Pripojiť k iným DHT uzlom na rovnakej lokálnej sieti";
 "accountPage.autoRegistration" = "Autoregistrácia po uplynutí platnosti";
 "accountPage.connectivityHeader" = "Pripojenie";
 "accountPage.turnEnabled" = "Aktivujte TURN";

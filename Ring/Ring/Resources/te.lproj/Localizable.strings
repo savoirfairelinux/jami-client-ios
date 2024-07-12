@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "ప్రాక్సీ చిరునామాను అందించండి";
 "accountPage.noProxyExplanationLabel" = "ప్రాక్సీ డిసేబుల్ అయినప్పుడు మీ పరికరం నోటిఫికేషన్లను అందుకోదు";
 "accountPage.proxyPaceholder" = "ప్రాక్సీ చిరునామా";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "ప్రాక్సీ";
 "accountPage.enableNotifications" = "నోటిఫికేషన్లను ప్రారంభించండి";
 "accountPage.proxyDisabledAlertTitle" = "ప్రాక్సీ సర్వర్ డిసేబుల్";
 "accountPage.proxyDisabledAlertBody" = "నోటిఫికేషన్లను స్వీకరించడానికి, దయచేసి ప్రాక్సీని ప్రారంభించండి";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "బూత్ మోడ్లో సంభాషణ చరిత్ర సేవ్ చేయబడలేదు మరియు అవుట్గోయింగ్ కాల్స్ చేయడం ద్వారా Jami కార్యాచరణ పరిమితం చేయబడింది. మీరు బూత్ మోడ్ను ప్రారంభించినప్పుడు మీ సంభాషణలు తొలగించబడతాయి.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "బూత్ మోడ్ను ప్రారంభించిన తర్వాత మీ సంభాషణలన్నీ తొలగించబడతాయి.";
-"accountPage.peerDiscovery" = "స్థానిక నెట్వర్క్లో ఆటో కనెక్ట్";
+"accountPage.peerDiscovery" = "స్థానిక సహచరుల అన్వేషణను ప్రారంభించండి";
+"accountPage.peerDiscoveryExplanation" = "మా స్థానిక నెట్వర్క్లో ప్రకటనలు చేసే ఇతర DHT నోడ్లకు కనెక్ట్ అవ్వండి";
 "accountPage.autoRegistration" = "గడువు ముగిసిన తర్వాత ఆటో రిజిస్టర్";
 "accountPage.connectivityHeader" = "కనెక్టివిటీ";
 "accountPage.turnEnabled" = "TURN ని ప్రారంభించండి";

@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Додайте прокси-адрес";
 "accountPage.noProxyExplanationLabel" = "Устрій не отримає повідомлення, коли прокси-прокси відключено.";
 "accountPage.proxyPaceholder" = "Адреса проксі";
-"accountPage.enableNotifications" = "Увімкнути оповіщення";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Проксі";
+"accountPage.enableNotifications" = "Дозволити сповіщення";
 "accountPage.proxyDisabledAlertTitle" = "Прокси-сервер відключений";
 "accountPage.proxyDisabledAlertBody" = "Щоб отримати повідомлення, будь ласка, включте прокси";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "У режимі кабіни історія розмов не збереглася і функціонал Jami обмежений виходячими дзвінками.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Після включення режиму \"бути\" всі ваші розмови будуть видалені.";
-"accountPage.peerDiscovery" = "Автополучається в локальній мережі";
+"accountPage.peerDiscovery" = "Отримати локальне відкриття однолітків";
+"accountPage.peerDiscoveryExplanation" = "З'єднатися з іншими вузлами DHT, які рекламують на нашій локальній мережі";
 "accountPage.autoRegistration" = "Автореєстр після закінчення терміну дії";
 "accountPage.connectivityHeader" = "З'єднання";
 "accountPage.turnEnabled" = "Включити TURN";

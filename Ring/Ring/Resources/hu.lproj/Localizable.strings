@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "Adja meg a meghatalmazott címet";
 "accountPage.noProxyExplanationLabel" = "A készüléke nem kap értesítéseket amikor a meghatalmazott le van tiltva";
 "accountPage.proxyPaceholder" = "Meghatalmazott cím";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Meghatalmazás";
 "accountPage.enableNotifications" = "Értesítések engedélyezése";
 "accountPage.proxyDisabledAlertTitle" = "Meghatalmazott-kiszolgáló letiltva";
 "accountPage.proxyDisabledAlertBody" = "Annak érdekében, hogy értesítéseket kaphasson kérjük, hogy engedélyezze a meghatalmazott használatát";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "A fülke üzemmódban a beszélgetési előzmények nem kerülnek mentésre, és a Jami funkcionalitása korlátozott a kimenő hívások kezdeményezésekor. Ha a fülke üzemmód engedélyezve van, az összes beszélgetés törlődik.";
 "accountPage.noBoothMode" = "A fülke üzemmód engedélyezéséhez először titkosítsa a fiókot.";
 "accountPage.boothModeAlertMessage" = "A fülke üzemmód engedélyezése után az összes beszélgetés eltávolításra kerül.";
-"accountPage.peerDiscovery" = "Ónműködő csatlakozás helyi hálózaton";
+"accountPage.peerDiscovery" = "Helyi partner felderítése engedélyezése";
+"accountPage.peerDiscoveryExplanation" = "Csatlakozás más DHT-csomópontokhoz, amelyek a helyi hálózaton hirdetnek";
 "accountPage.autoRegistration" = "Önműködő bejegyzése a lejárat után";
 "accountPage.connectivityHeader" = "Kapcsolódás";
 "accountPage.turnEnabled" = "TURN-kiszolgáló engedélyezése";

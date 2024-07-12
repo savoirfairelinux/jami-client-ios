@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "प्रॉक्सी पत्ता प्रविष्ट करा";
 "accountPage.noProxyExplanationLabel" = "प्रॉक्सी निष्क्रिय झाल्यावर तुमचे डिव्हाइस सूचना प्राप्त करणार नाही";
 "accountPage.proxyPaceholder" = "प्रॉक्सी पत्ता";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "प्रॉक्सी";
 "accountPage.enableNotifications" = "सूचना सक्षम करा";
 "accountPage.proxyDisabledAlertTitle" = "प्रॉक्सी सर्व्हर निष्क्रिय";
 "accountPage.proxyDisabledAlertBody" = "सूचना प्राप्त करण्यासाठी, कृपया प्रॉक्सी सक्षम करा";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "बूट मोडमध्ये संभाषण इतिहास जतन केला नाही आणि जामी कार्यक्षमता बाहेर जाणाऱ्या कॉलद्वारे मर्यादित आहे. जेव्हा तुम्ही बूट मोड सक्षम कराल तेव्हा सर्व संभाषणे हटविली जातील.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "बूथ मोड सक्षम केल्यानंतर तुमच्या सर्व संभाषणे हटविली जातील.";
-"accountPage.peerDiscovery" = "स्थानिक नेटवर्कवर स्वयंचलित कनेक्ट";
+"accountPage.peerDiscovery" = "स्थानिक सहकारी शोध सक्षम करा";
+"accountPage.peerDiscoveryExplanation" = "आमच्या स्थानिक नेटवर्कवर जाहिरात करणाऱ्या इतर डीएचटी नोड्सशी कनेक्ट व्हा";
 "accountPage.autoRegistration" = "कालावधी संपल्यानंतर ऑटो रजिस्टर";
 "accountPage.connectivityHeader" = "कनेक्टिव्हिटी";
 "accountPage.turnEnabled" = "टर्न सक्षम करा";
