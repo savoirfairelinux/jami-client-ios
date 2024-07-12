@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Foir una adreça proxy";
 "accountPage.noProxyExplanationLabel" = "Lo teu dispositiu recebís pas de notificacions quand lo proxy es desactivat";
 "accountPage.proxyPaceholder" = "Adressa proxy";
-"accountPage.enableNotifications" = "Activar las notificacions";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Servidor mandatari";
+"accountPage.enableNotifications" = "Abilitar las notificacions";
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy desactivat";
 "accountPage.proxyDisabledAlertBody" = "Per recebre de notificacions, activatz proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "En mòde de cabina l'istòria de conversacion es pas salvada e la foncionalitat jami limitada per far de trucas sortentas.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Après aver activat lo mòde de cabina totas las vosas conversas seràn eliminadas.";
-"accountPage.peerDiscovery" = "Connexion auto a la ret locala";
+"accountPage.peerDiscovery" = "Abilitar la descobèrta de pèiras localas";
+"accountPage.peerDiscoveryExplanation" = "Conectar a d'autres nòdes DHT publicitaris sus nòstra ret locala";
 "accountPage.autoRegistration" = "Registre automatic après l'expiracion";
 "accountPage.connectivityHeader" = "Connectivitat";
 "accountPage.turnEnabled" = "Abilitar TURN";

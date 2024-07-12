@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "إعطاء عنوان النظام الأساسي";
 "accountPage.noProxyExplanationLabel" = "جهازك لن يتلقى إشعارات عندما يتم تعطيل النظام الأولي";
 "accountPage.proxyPaceholder" = "عنوان النظام الأساسي";
-"accountPage.enableNotifications" = "فعل الإخطارات";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Enable notifications";
 "accountPage.proxyDisabledAlertTitle" = "محطم خادم النظام الأساسي";
 "accountPage.proxyDisabledAlertBody" = "من أجل تلقي الإخطارات، يرجى تمكين النظام الأساسي";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "في وضع الكشك لا يتم حفظ تاريخ المحادثات و وظائف jami محدودة من خلال إجراء المكالمات الخارجة. عندما تمكن من وضع الكشك سيتم إزالة جميع المحادثات الخاصة بك.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "بعد تمكين وضع الكشك سيتم إزالة جميع محادثاتك";
-"accountPage.peerDiscovery" = "الاتصال التلقائي على الشبكة المحلية";
+"accountPage.peerDiscovery" = "Enable local peer discovery";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "سجل السيارات بعد انتهاء الصلاحية";
 "accountPage.connectivityHeader" = "الاتصال";
 "accountPage.turnEnabled" = "تمكين TURN";

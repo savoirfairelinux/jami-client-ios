@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Vekil sunucu adresi sağlayın";
 "accountPage.noProxyExplanationLabel" = "Vekil sunucu devre dışı bırakıldığında aygıtınız bildirim almayacak";
 "accountPage.proxyPaceholder" = "Vekil sunucu adresi";
-"accountPage.enableNotifications" = "Bildirimleri Etkinleştir";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Vekil";
+"accountPage.enableNotifications" = "Bildirimleri etkinleştir";
 "accountPage.proxyDisabledAlertTitle" = "Vekil Sunucu Devre dışı";
 "accountPage.proxyDisabledAlertBody" = "Bildirimleri almak için lütfen vekil sunucuyu etkinleştirin";
 "accountPage.removeDeviceTitle" = "Aygıtı Kaldır";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Kabin kipinde konuşma geçmişiniz kaydedilmez ve jami'nin işlevleri giden aramalar ile kısıtlandırılır. Kabin kipini etkinleştirdiğinizde tüm konuşmalarınız kaldırılacaktır.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Kabin kipini etkinleştirdikten sonra tüm konuşmalarınız kaldırılacaktır.";
-"accountPage.peerDiscovery" = "Yerel ağda kendiliğinden bağlan";
+"accountPage.peerDiscovery" = "Yerel bağlantı bulmayı etkinleştir";
+"accountPage.peerDiscoveryExplanation" = "Yerel ağımızda tanıtılan diğer DHT düğümlerine bağlan";
 "accountPage.autoRegistration" = "Geçerlilik bittiğinde kendiliğinden kaydol";
 "accountPage.connectivityHeader" = "Bağlanabilirlik";
 "accountPage.turnEnabled" = "Dönüştürme etkinleştir";

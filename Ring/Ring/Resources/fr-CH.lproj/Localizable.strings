@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "Fournir l'adresse du nœud délégataire";
 "accountPage.noProxyExplanationLabel" = "Votre appareil ne recevra pas de notifications si le nœud délégataire est désactivé";
 "accountPage.proxyPaceholder" = "Adresse du nœud  DHT délégataire";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Activer les notifications";
 "accountPage.proxyDisabledAlertTitle" = "Nœud délégataire désactivé ";
 "accountPage.proxyDisabledAlertBody" = "Pour recevoir des notifications, veuillez activer le serveur mandataire ";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Dans le mode Kiosque, l'historique n'est pas sauvegardé et les fonctions de Jami sont limités à faire des appels. Si vous activez le mode Kiosque, toutes vos conversations seront supprimées.";
 "accountPage.noBoothMode" = "Pour activer le mode Kiosque, vous devez d'abord créer un mot de passe.";
 "accountPage.boothModeAlertMessage" = "Après avoir activé le mode Kiosque, toutes vos conversations seront supprimées.";
-"accountPage.peerDiscovery" = "Connexion automatique sur réseau local";
+"accountPage.peerDiscovery" = "Activer la découverte des utilisateurs locaux";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "Réenregistrement automatique après expiration";
 "accountPage.connectivityHeader" = "Connectivité";
 "accountPage.turnEnabled" = "Activer le relais TURN";

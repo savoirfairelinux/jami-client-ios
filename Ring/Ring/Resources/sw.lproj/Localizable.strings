@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Toa anwani ya proxy";
 "accountPage.noProxyExplanationLabel" = "Kifaa chako hakitapokea taarifa wakati proxy imelemazwa";
 "accountPage.proxyPaceholder" = "Anwani ya Wakala";
-"accountPage.enableNotifications" = "Kuwezesha Matangazo";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Wakala wa kuwakilisha";
+"accountPage.enableNotifications" = "Kuwezesha taarifa";
 "accountPage.proxyDisabledAlertTitle" = "Seva ya Proxy Imelemazwa";
 "accountPage.proxyDisabledAlertBody" = "Ili kupokea taarifa, tafadhali kuwezesha proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Katika hali ya jengo mazungumzo historia si kuhifadhiwa na utendaji jami mdogo kwa kufanya wito outgoing.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Baada ya kuamsha mode ya jengo mazungumzo yako yote itaondolewa.";
-"accountPage.peerDiscovery" = "Moja kwa moja kuunganisha kwenye mtandao wa ndani";
+"accountPage.peerDiscovery" = "Kuwezesha upatikanaji wa wenzao wa ndani";
+"accountPage.peerDiscoveryExplanation" = "Kuunganisha na nyingine DHT nodes matangazo kwenye mtandao wetu wa ndani";
 "accountPage.autoRegistration" = "Usajili wa magari baada ya kumalizika";
 "accountPage.connectivityHeader" = "Uunganisho";
 "accountPage.turnEnabled" = "Kuwezesha TURN";

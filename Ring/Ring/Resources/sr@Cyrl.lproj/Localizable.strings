@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "Устави прокси адресу";
 "accountPage.noProxyExplanationLabel" = "Улазак неће добити обавештења када је прокси онемогућен";
 "accountPage.proxyPaceholder" = "Прокси адреса";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Омогућивање обавештења";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сервер је деактивисан";
 "accountPage.proxyDisabledAlertBody" = "Да бисте добили обавештења, молим вас да укључите прокси";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "У режиму бух, историја разговора није спасана и функционалност Jami ограничена правећи исходяће позиве.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Након укључивања режима кабина, сви ваши разговори ће бити уклоњени.";
-"accountPage.peerDiscovery" = "Автоматска повезаност на локалној мрежи";
+"accountPage.peerDiscovery" = "Омогући откривање локалних парњака";
+"accountPage.peerDiscoveryExplanation" = "Повежите се са другим DHT чворовима који се оглашавају на нашој локалној мрежи";
 "accountPage.autoRegistration" = "Авторегистар након истека времена";
 "accountPage.connectivityHeader" = "Спрема";
 "accountPage.turnEnabled" = "Омогућивање ТУРН";

@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Envíe direutamente la dirección de proxy";
 "accountPage.noProxyExplanationLabel" = "El so dispositivu nun recibirá notificaciones cuando se desactiva'l proxy";
 "accountPage.proxyPaceholder" = "La dirección de proxy";
-"accountPage.enableNotifications" = "Activu Notificaciones";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Enable notifications";
 "accountPage.proxyDisabledAlertTitle" = "El servidor proxy nun funciona";
 "accountPage.proxyDisabledAlertBody" = "Pa recibir notificaciones, por favor, activen proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "En modo stand, el historial de conversaciones nun se guarda y la funcionalidá jami ye limitada por facer llamadas salientes.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "La so primer apaición foi nel estrenu de la cuarta temporada de la serie enllargar hasta un total de 12 episodios.[16] N'ochobre de 1998, la so primer apaición foi nel estrenu de la cuarta temporada de la serie enllargar hasta un total d'once episodios.[16]";
-"accountPage.peerDiscovery" = "Autónomu conexión na rede local";
+"accountPage.peerDiscovery" = "Enable local peer discovery";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "El rexistru automáticu dempués de la expiración";
 "accountPage.connectivityHeader" = "La conectividá";
 "accountPage.turnEnabled" = "Activu TURN";

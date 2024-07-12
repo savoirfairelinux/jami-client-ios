@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Forneça o endereço do proxy";
 "accountPage.noProxyExplanationLabel" = "Seu dispositivo não receberá notificações quando o proxy estiver desativado";
 "accountPage.proxyPaceholder" = "Endereço do proxy";
-"accountPage.enableNotifications" = "Habilitar notificações";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Ativar notificações";
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy desativado";
 "accountPage.proxyDisabledAlertBody" = "Para receber as notificações, favor ativar o proxy";
 "accountPage.removeDeviceTitle" = "Excluir o dispositivo";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "No modo de cabine, o histórico de conversas não é salvo e a funcionalidade do jami é limitada à realização de chamadas. Quando você ativar o modo de cabine, todas as suas conversas serão removidas.";
 "accountPage.noBoothMode" = "Para ativar o modo cabine, criptografe sua conta primeiro.";
 "accountPage.boothModeAlertMessage" = "Depois de ativar o modo de cabine, todas as suas conversas serão removidas.";
-"accountPage.peerDiscovery" = "Conexão automática na rede local";
+"accountPage.peerDiscovery" = "Ativar descoberta local de pares";
+"accountPage.peerDiscoveryExplanation" = "Conecte-se a outros nós DHT que anunciam em nossa rede local";
 "accountPage.autoRegistration" = "Registro automático após expiração";
 "accountPage.connectivityHeader" = "Conectividade";
 "accountPage.turnEnabled" = "Ativar TURN";

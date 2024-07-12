@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "Прокси хаягийг өгөө";
 "accountPage.noProxyExplanationLabel" = "Прокси-ийг идэвхгүй болгосон үед гар утасныхаа мэдэгдэл хүлээн авахгүй";
 "accountPage.proxyPaceholder" = "Прокси хаяг";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Төлөөлөгч";
 "accountPage.enableNotifications" = "Мэдээлэл өгөх боломжтой";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сервер гараагүй";
 "accountPage.proxyDisabledAlertBody" = "Мэдээлэл хүлээн авахын тулд прокси-ийг идэвхжүүлнэ үү";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Бут режимд ярианы түүх хадгалан үлдээгүй бөгөөд Jami-ийн функц-ийн үйл ажиллагааг гадаад дуудлага хийхээр хязгаарлагджээ. Бут режимд хангахдаа бүх яриаг нь хасна.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Бут режимыг идэвхжүүлсний дараа бүх яриагаа устгасан болно.";
-"accountPage.peerDiscovery" = "Орон нутгийн сүлжээний авто холболт";
+"accountPage.peerDiscovery" = "Орон нутгийн хамтын ажиллагааг хангах";
+"accountPage.peerDiscoveryExplanation" = "Манай орон нутгийн сүлжээний зар сурталчилгааны бусад DHT-ийн түймэрүүдтэй холбох";
 "accountPage.autoRegistration" = "Авто тэтгэврийн бүртгэл хугацаа дууссан дараа";
 "accountPage.connectivityHeader" = "Холбоотой байдал";
 "accountPage.turnEnabled" = "ТУРН-ыг идэвхжүүлнэ";

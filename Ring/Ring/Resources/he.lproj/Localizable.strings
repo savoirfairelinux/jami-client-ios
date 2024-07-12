@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "תורם כתובת פרוקסי";
 "accountPage.noProxyExplanationLabel" = "המכשיר שלך לא יקבל הודעות כאשר הפוקסי מופעל";
 "accountPage.proxyPaceholder" = "כתובת דווקא";
-"accountPage.enableNotifications" = "אפשרות של הודעות";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "אפשרות להודיע";
 "accountPage.proxyDisabledAlertTitle" = "שרת פרוקסי מופחת";
 "accountPage.proxyDisabledAlertBody" = "כדי לקבל הודעות, אנא פעל פרוקסי";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "במצב הקו לא נשמרת היסטוריית השיחה והפונקציונליות של ג'אמי מוגבלת על ידי שיחות יוצאות.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "לאחר שתפעיל את מצב הקו, כל השיחות שלך ימחקו.";
-"accountPage.peerDiscovery" = "חיבור אוטומטי ברשת מקומית";
+"accountPage.peerDiscovery" = "אפשרות גילוי עמיתי מקומי";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "רישום אוטומטי לאחר תקופת הגבלת הפסקות";
 "accountPage.connectivityHeader" = "קישור";
 "accountPage.turnEnabled" = "תפעיל TURN";

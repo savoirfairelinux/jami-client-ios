@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "ให้ที่อยู่ตัวแทน";
 "accountPage.noProxyExplanationLabel" = "อุปกรณ์ของคุณจะไม่รับแจ้งเมื่อ proxy ถูกปิด";
 "accountPage.proxyPaceholder" = "ที่อยู่ตัวแทน";
-"accountPage.enableNotifications" = "เปิดรับแจ้ง";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "พอร์กส";
+"accountPage.enableNotifications" = "เปิดให้มีการแจ้ง";
 "accountPage.proxyDisabledAlertTitle" = "พรอক্ซี่เซอร์เวอร์ปิด";
 "accountPage.proxyDisabledAlertBody" = "เพื่อรับแจ้งความโปรดเปิดตัวแทน";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "ในโหมดบูธ ประวัติการพูดคุยไม่ได้บันทึก และการทํางานของ Jami มีขัดขวางโดยการทําการโทรออก เมื่อคุณเปิดโหมดบูธทั้งหมดการพูดคุยของคุณจะถูกลบ";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "หลังจากเปิดโหมดบูธแล้ว การพูดคุยทั้งหมดของคุณจะถูกลบ";
-"accountPage.peerDiscovery" = "การเชื่อมต่ออัตโนมัติในเครือข่ายท้องถิ่น";
+"accountPage.peerDiscovery" = "เปิดใช้งานการค้นพบเพียร์ในพื้นที่";
+"accountPage.peerDiscoveryExplanation" = "เชื่อมต่อกับ DHT จอดอื่นที่ประกาศในเครือข่ายของเรา";
 "accountPage.autoRegistration" = "รีสเตอร์รถยนต์หลังหมดอายุ";
 "accountPage.connectivityHeader" = "การเชื่อมต่อ";
 "accountPage.turnEnabled" = "เปิด TURN";

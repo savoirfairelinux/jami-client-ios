@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Eman helbide proxy bat";
 "accountPage.noProxyExplanationLabel" = "Zure gailuak ez du jakinarazpenik jasoko proxy desaktibatuta dagoenean.";
 "accountPage.proxyPaceholder" = "Helbide proxy bat";
-"accountPage.enableNotifications" = "Oharrak aktibatu";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Oharrak ahalbidetu";
 "accountPage.proxyDisabledAlertTitle" = "Proxy zerbitzaria desaktibatuta";
 "accountPage.proxyDisabledAlertBody" = "Jakinarazpenak jasotzeko, mesedez aktibatzen proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Talde moduko elkarrizketa historia ez da gorde eta jami funtzionalitatea mugatuta irteten deiak eginez.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Kabina-moduan jarri ondoren, zure elkarrizketa guztiak ezabatuko dira.";
-"accountPage.peerDiscovery" = "Autokonta bat tokiko sarean";
+"accountPage.peerDiscovery" = "Bertako lagunen aurkikuntza ahalbidetu";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "Autokartze-registroa iraungitzearen ondoren";
 "accountPage.connectivityHeader" = "Lotura";
 "accountPage.turnEnabled" = "Jarri martxan";

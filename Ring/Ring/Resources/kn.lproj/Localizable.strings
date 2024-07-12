@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "ಪ್ರಾಕ್ಸಿ ವಿಳಾಸವನ್ನು ಒದಗಿಸಿ";
 "accountPage.noProxyExplanationLabel" = "ಪ್ರಾಕ್ಸಿ ನಿಷ್ಕ್ರಿಯಗೊಂಡಾಗ ನಿಮ್ಮ ಸಾಧನವು ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವೀಕರಿಸುವುದಿಲ್ಲ";
 "accountPage.proxyPaceholder" = "ಪ್ರಾಕ್ಸಿ ವಿಳಾಸ";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "ಪ್ರಾಕ್ಸಿ";
 "accountPage.enableNotifications" = "ಅಧಿಸೂಚನೆಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ";
 "accountPage.proxyDisabledAlertTitle" = "ಪ್ರಾಕ್ಸಿ ಸರ್ವರ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ";
 "accountPage.proxyDisabledAlertBody" = "ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವೀಕರಿಸಲು, ದಯವಿಟ್ಟು ಪ್ರಾಕ್ಸಿ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "ಬೂತ್ ಮೋಡ್ನಲ್ಲಿ ಸಂವಾದದ ಇತಿಹಾಸವನ್ನು ಉಳಿಸಲಾಗುವುದಿಲ್ಲ ಮತ್ತು ಹೊರಹೋಗುವ ಕರೆಗಳನ್ನು ಮಾಡುವ ಮೂಲಕ Jami ಕಾರ್ಯವನ್ನು ಸೀಮಿತಗೊಳಿಸಲಾಗುತ್ತದೆ. ನೀವು ಬೂತ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ ನಿಮ್ಮ ಎಲ್ಲಾ ಸಂಭಾಷಣೆಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "ಬೂತ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದ ನಂತರ ನಿಮ್ಮ ಎಲ್ಲಾ ಸಂಭಾಷಣೆಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ.";
-"accountPage.peerDiscovery" = "ಸ್ಥಳೀಯ ನೆಟ್ವರ್ಕ್ನಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತ ಸಂಪರ್ಕ";
+"accountPage.peerDiscovery" = "ಸ್ಥಳೀಯ ಸಹವರ್ತಿಗಳ ಪತ್ತೆ ಸಾಧ್ಯವಾಗುತ್ತದೆ";
+"accountPage.peerDiscoveryExplanation" = "ನಮ್ಮ ಸ್ಥಳೀಯ ಜಾಲದಲ್ಲಿ ಜಾಹೀರಾತು ನೀಡುವ ಇತರ ಡಿಎಚ್ಟಿ ಗ್ರಂಥಿಗಳೊಂದಿಗೆ ಸಂಪರ್ಕ ಸಾಧಿಸಿ";
 "accountPage.autoRegistration" = "ಅವಧಿ ಮುಗಿದ ನಂತರದ ಸ್ವಯಂ ನೋಂದಣಿ";
 "accountPage.connectivityHeader" = "ಸಂಪರ್ಕ";
 "accountPage.turnEnabled" = "TURN ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ";

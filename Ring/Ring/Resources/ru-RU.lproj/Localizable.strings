@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Укажите адрес прокси";
 "accountPage.noProxyExplanationLabel" = "Ваше устройство не будет получать уведомлений если прокси выключен";
 "accountPage.proxyPaceholder" = "Адрес прокси";
-"accountPage.enableNotifications" = "Включить Уведомления";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Прокси";
+"accountPage.enableNotifications" = "Включить уведомления";
 "accountPage.proxyDisabledAlertTitle" = "Прокси-сервер выключен";
 "accountPage.proxyDisabledAlertBody" = "Для получения уведомлений, пожалуйста, включите прокси";
 "accountPage.removeDeviceTitle" = "Удалить устройство";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "В режиме кабинки история разговоров не сохраняется, а функциональность Jami ограничена исходящими звонками. Когда вы включите режим кабинки, все ваши разговоры будут удалены.";
 "accountPage.noBoothMode" = "Для включения режима кабинки необходимо сначала защитить ваш аккаунт паролем.";
 "accountPage.boothModeAlertMessage" = "После включения режима кабинки все ваши разговоры будут удалены.";
-"accountPage.peerDiscovery" = "Автоматическое соединение в локальной сети";
+"accountPage.peerDiscovery" = "Включить обнаружение локальных пиров";
+"accountPage.peerDiscoveryExplanation" = "Подключаться к другим DHT узлам в локальной сети";
 "accountPage.autoRegistration" = "Автоматическая регистрация после истечения срока действия";
 "accountPage.connectivityHeader" = "Связь";
 "accountPage.turnEnabled" = "Включить TURN";

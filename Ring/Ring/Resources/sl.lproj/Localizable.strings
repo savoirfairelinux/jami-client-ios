@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Posredujte naslov posredniškega strežnika";
 "accountPage.noProxyExplanationLabel" = "Vaša naprava ne bo prejemala obvestil, če je posredniški strežnik onemogočen";
 "accountPage.proxyPaceholder" = "Naslov posredniškega strežnika";
-"accountPage.enableNotifications" = "Vklopi obveščanje";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Posredniški strežnik";
+"accountPage.enableNotifications" = "Omogoči obvestila";
 "accountPage.proxyDisabledAlertTitle" = "Posredniški strežnik je onemogočen";
 "accountPage.proxyDisabledAlertBody" = "Če želite prejemati obvestila, omogočite posredniški strežnik";
 "accountPage.removeDeviceTitle" = "Odstrani napravo";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "V načinu govorilnice se zgodvina pogovora ne shranjuje, funkcionalnost Jamija pa je omejena na odhodne klice. Ob vklopu tega načina se odstranijo vsi pogovori.";
 "accountPage.noBoothMode" = "Za vklop načina govorilnice morate najprej šifrirati svoj račun.";
 "accountPage.boothModeAlertMessage" = "Ob vklopu načina govorilnice bodo odstranjeni vsi vaši pogovori.";
-"accountPage.peerDiscovery" = "Samodejno povezovanje v krajevnem omrežju";
+"accountPage.peerDiscovery" = "Vklopi lokalno odkrivanje soležnikov";
+"accountPage.peerDiscoveryExplanation" = "Poveži se na druga vozlišča DHT, ki objavljajo na krajevnem omrežju.";
 "accountPage.autoRegistration" = "Samodejna registracija po izteku";
 "accountPage.connectivityHeader" = "Povezljivost";
 "accountPage.turnEnabled" = "Omogoči TURN";

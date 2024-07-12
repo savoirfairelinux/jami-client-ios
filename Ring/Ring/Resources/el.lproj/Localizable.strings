@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Παρέξτε διεύθυνση αντιπροσωπευτικού χαρακτήρα";
 "accountPage.noProxyExplanationLabel" = "Η συσκευή σας δεν θα λαμβάνει ειδοποιήσεις όταν το proxy είναι απενεργοποιημένο";
 "accountPage.proxyPaceholder" = "Δικαστική διεύθυνση";
-"accountPage.enableNotifications" = "Ενεργοποίηση των ειδοποιήσεων";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Enable notifications";
 "accountPage.proxyDisabledAlertTitle" = "Απασχολούνται οι διακομιστές αντιπροσωπευτικών";
 "accountPage.proxyDisabledAlertBody" = "Για να λάβετε ειδοποιήσεις, παρακαλώ ενεργοποιήστε το proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Στην κατάσταση του μπουθ, το ιστορικό συνομιλιών δεν έχει αποθηκευτεί και η λειτουργία του Jami περιορίζεται από τις εξόδους κλήσεων.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Αφού ενεργοποιήσεις τη λειτουργία του θάλαμου, όλες οι συνομιλίες σου θα αφαιρεθούν.";
-"accountPage.peerDiscovery" = "Αυτοσυνδέστε το τοπικό δίκτυο";
+"accountPage.peerDiscovery" = "Enable local peer discovery";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "Μητρώο αυτοκινήτου μετά την λήξη ισχύος";
 "accountPage.connectivityHeader" = "Συνδεσιμότητα";
 "accountPage.turnEnabled" = "Ενεργοποιήστε το ΤΕΡΝ";

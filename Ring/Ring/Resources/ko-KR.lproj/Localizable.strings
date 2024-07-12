@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "프록시 주소를 입력";
 "accountPage.noProxyExplanationLabel" = "프록시가 비활성화되면 장치가 알림을 받지 않습니다.";
 "accountPage.proxyPaceholder" = "프록시 주소는";
-"accountPage.enableNotifications" = "통지 설정";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "프록시";
+"accountPage.enableNotifications" = "알람 사용하기";
 "accountPage.proxyDisabledAlertTitle" = "프록시 서버 비활성화";
 "accountPage.proxyDisabledAlertBody" = "알림을 받기 위해 프록시를 활성화하십시오";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "부시 모드에서는 대화의 역사가 저장되지 않고, 출력 통화로 Jami 기능이 제한됩니다. 부시 모드를 활성화하면 모든 대화가 삭제됩니다.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "부시 모드를 활성화하면 모든 대화가 삭제됩니다.";
-"accountPage.peerDiscovery" = "로컬 네트워크에서 자동 연결";
+"accountPage.peerDiscovery" = "지역 동시 발견을 가능하게 합니다";
+"accountPage.peerDiscoveryExplanation" = "우리의 로컬 네트워크에 광고하는 다른 DHT 노드에 연결";
 "accountPage.autoRegistration" = "만료 후 자동 등록";
 "accountPage.connectivityHeader" = "연결성";
 "accountPage.turnEnabled" = "TURN를 활성화";

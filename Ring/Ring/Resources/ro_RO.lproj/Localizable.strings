@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "Introdu adresa proxy";
 "accountPage.noProxyExplanationLabel" = "Aparatul nu va primi notificări dacă Proxy e dezactivat";
 "accountPage.proxyPaceholder" = "Adresa Proxy";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Activează notificările";
 "accountPage.proxyDisabledAlertTitle" = "Serverul Proxy e dezactivat";
 "accountPage.proxyDisabledAlertBody" = "Activează serverul Proxy, ca să primești notificările";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "În „Modul Cabină” cronologia conversațiilor nu e salvată și Jami este limitat la efectuarea de apeluri. Dacă activezi „Modul Cabină”, toate conversațiile tale vor fi șterse.";
 "accountPage.noBoothMode" = "Cifrează-ți contul înainte de a activa „Modul Cabină”.";
 "accountPage.boothModeAlertMessage" = "După activarea modului cabină, toate conversațiile tale vor fi șterse.";
-"accountPage.peerDiscovery" = "Conectare automată la rețeaua locală";
+"accountPage.peerDiscovery" = "Activează descoperirea utilizatorilor locali";
+"accountPage.peerDiscoveryExplanation" = "Conectează-te la alte noduri DHT din rețeaua ta locală.";
 "accountPage.autoRegistration" = "Înscriere automată după expirare";
 "accountPage.connectivityHeader" = "Conectare";
 "accountPage.turnEnabled" = "Activează TURN";

@@ -274,7 +274,11 @@
 "accountPage.proxyAddressAlert" = "Provea dirección proxy";
 "accountPage.noProxyExplanationLabel" = "Tu dispositivo no recibirá notificaciones cuando el proxy esté deshabilitado";
 "accountPage.proxyPaceholder" = "Dirección proxy";
-"accountPage.enableNotifications" = "Habilitar notificaciones";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.enableNotifications" = "Enable notifications";
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy deshabilitado";
 "accountPage.proxyDisabledAlertBody" = "Para recibir notificaciones, por favor habilite el proxy";
 "accountPage.removeDeviceTitle" = "Eliminar dispositivo";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "En el modo de conversación reservada, el historial de conversaciones no se guarda y la funcionalidad de Jami se limita al realizar llamadas salientes. Cuando habilite el modo de conversación reservada, se eliminarán todas sus conversaciones.";
 "accountPage.noBoothMode" = "Para habilitar el modo Booth,  primero cifre su cuenta.";
 "accountPage.boothModeAlertMessage" = "Después de habilitar el modo de conversación reservada, se eliminarán todas sus conversaciones.";
-"accountPage.peerDiscovery" = "Conectarse automáticamente en red local";
+"accountPage.peerDiscovery" = "Enable local peer discovery";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "Registrar automáticamente luego de la expiración";
 "accountPage.connectivityHeader" = "Conectividad";
 "accountPage.turnEnabled" = "Habilitar TURN";

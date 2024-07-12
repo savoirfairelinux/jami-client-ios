@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "Masukkan alamat proksi";
 "accountPage.noProxyExplanationLabel" = "Perangkat Anda tidak akan menerima notifikasi ketika proxy dinonaktifkan";
 "accountPage.proxyPaceholder" = "Alamat proksi";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proksi";
 "accountPage.enableNotifications" = "Aktifkan notifikasi";
 "accountPage.proxyDisabledAlertTitle" = "Server Proxy Dinonaktifkan";
 "accountPage.proxyDisabledAlertBody" = "Untuk menerima notifikasi, harap aktifkan proksi";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "Dalam mode booth riwayat percakapan tidak disimpan dan fungsi jami dibatasi dengan melakukan panggilan keluar. Ketika Anda mengaktifkan mode booth semua percakapan Anda akan dihapus.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Setelah mengaktifkan mode booth, semua percakapan Anda akan dihapus.";
-"accountPage.peerDiscovery" = "Terhubung otomatis pada jaringan lokal";
+"accountPage.peerDiscovery" = "Mengaktifkan penemuan rekan lokal";
+"accountPage.peerDiscoveryExplanation" = "Terhubung ke node DHT lain yang beriklan di jaringan lokal kita";
 "accountPage.autoRegistration" = "Daftar otomatis setelah kedaluwarsa";
 "accountPage.connectivityHeader" = "Konektivitas";
 "accountPage.turnEnabled" = "Memungkinkan TURN";

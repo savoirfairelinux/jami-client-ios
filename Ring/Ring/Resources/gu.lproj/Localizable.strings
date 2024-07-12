@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "પ્રોક્સી સરનામું પ્રદાન કરો";
 "accountPage.noProxyExplanationLabel" = "પ્રોક્સી નિષ્ક્રિય હોય ત્યારે તમારું ઉપકરણ સૂચનાઓ પ્રાપ્ત કરશે નહીં";
 "accountPage.proxyPaceholder" = "પ્રોક્સી સરનામું";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "સૂચનાઓને સક્ષમ કરો";
 "accountPage.proxyDisabledAlertTitle" = "પ્રોક્સી સર્વર અક્ષમ";
 "accountPage.proxyDisabledAlertBody" = "સૂચનાઓ પ્રાપ્ત કરવા માટે, કૃપા કરીને પ્રોક્સી સક્ષમ કરો";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "બૂથ મોડમાં વાતચીત ઇતિહાસ સાચવવામાં આવ્યો નથી અને બહાર નીકળીને કોલ્સ કરીને જમા કાર્યક્ષમતા મર્યાદિત છે. જ્યારે તમે બૂથ મોડને સક્ષમ કરો છો ત્યારે તમારી બધી વાતચીત દૂર કરવામાં આવશે.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "બૂથ મોડને સક્ષમ કર્યા પછી તમારી બધી વાતચીત દૂર કરવામાં આવશે.";
-"accountPage.peerDiscovery" = "સ્થાનિક નેટવર્ક પર સ્વયંસંચાલિત કનેક્ટ";
+"accountPage.peerDiscovery" = "સ્થાનિક સમકક્ષ શોધને સક્ષમ કરો";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "સમાપ્તિ પછી ઓટો રજિસ્ટર";
 "accountPage.connectivityHeader" = "કનેક્ટિવિટી";
 "accountPage.turnEnabled" = "ટર્ન સક્ષમ કરો";

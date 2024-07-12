@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "تامین آدرس پروکسی";
 "accountPage.noProxyExplanationLabel" = "هنگامی که پروکسی غیرفعال است، دستگاه شما اعلان دریافت نمی‌کند";
 "accountPage.proxyPaceholder" = "آدرس پروکسی";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "فعال سازی نوتیفیکیشن ها";
 "accountPage.proxyDisabledAlertTitle" = "سرور پروکسی غیرفعال شد";
 "accountPage.proxyDisabledAlertBody" = "برای دریافت نوتیفیکیشن ها، لطفا پروکسی را فعال کنید";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "در حالت غرفه سابقه گفتگو ذخیره نمی‌شود و عملکرد جمی به برقراری تماس‌های خروجی محدود می‌شود. وقتی حالت غرفه را فعال کنید، تمامی گفتگو‌های شما حذف می‌شوند.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "بعد از فعال‌سازی حالت غرفه، تمامی گفتگوهای شما حذف می‌شوند.";
-"accountPage.peerDiscovery" = "اتصال خودکار در شبکه محلی";
+"accountPage.peerDiscovery" = "فعال‌سازی کاوش همتای محلی";
+"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
 "accountPage.autoRegistration" = "ثبت‌نام خودکار پس از انقضا";
 "accountPage.connectivityHeader" = "اتصال";
 "accountPage.turnEnabled" = "فعال کردن TURN";

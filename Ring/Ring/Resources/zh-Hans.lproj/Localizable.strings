@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "提供代理伺服器附加元件";
 "accountPage.noProxyExplanationLabel" = "您的裝置不會在代理伺服器停用時收到通知";
 "accountPage.proxyPaceholder" = "代理伺服器地址";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "代理服務器";
 "accountPage.enableNotifications" = "啟用通知";
 "accountPage.proxyDisabledAlertTitle" = "代理伺服器已停用";
 "accountPage.proxyDisabledAlertBody" = "為了收到通知，請啟用代理伺服器";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "在展示模式下，不會儲存對話歷史，Jami 的功能也僅限撥出通話。當您啟用展示模式時，您所有的對話都會被移除。";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "在啟用展示模式後，所有的對話都會被移除。";
-"accountPage.peerDiscovery" = "在區域網路上自動連線";
+"accountPage.peerDiscovery" = "啟用區域夥伴探索";
+"accountPage.peerDiscoveryExplanation" = "連線到我們的區域網路上發佈的其他 DHT 節點";
 "accountPage.autoRegistration" = "過期後自動註冊";
 "accountPage.connectivityHeader" = "連線";
 "accountPage.turnEnabled" = "启动TURN";

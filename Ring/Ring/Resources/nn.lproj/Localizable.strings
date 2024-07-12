@@ -274,6 +274,10 @@
 "accountPage.proxyAddressAlert" = "Gjev ut proxy-adress";
 "accountPage.noProxyExplanationLabel" = "Geremontet ditt får ikkje meldingar når proxy er deaktivert";
 "accountPage.proxyPaceholder" = "Adressen til representant";
+"accountPage.useProxyList" = "Use proxy list";
+"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.proxyHeader" = "Styrkemann";
 "accountPage.enableNotifications" = "Legg til bruk meldingar";
 "accountPage.proxyDisabledAlertTitle" = "Proxy server funksjonshemma";
 "accountPage.proxyDisabledAlertBody" = "For å motta meldingar, bed du aktivera proxy";
@@ -312,7 +316,8 @@
 "accountPage.boothModeExplanation" = "I stand-modus blir samtalshistoria ikkje lagd og funksjonaliteten til jami er begrenset av å gjera utgående samtal. Når du aktiverer stand-modus blir alle samtalene dine fjerna.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Etter at du har aktivert stand-modus, blir alle samtalene dine fjernt.";
-"accountPage.peerDiscovery" = "Auto-knytning på lokalt nettverk";
+"accountPage.peerDiscovery" = "Legg til lag for lokal peer-oppdaging";
+"accountPage.peerDiscoveryExplanation" = "Knyt deg til andre DHT-knodar som annonserer på nettverket vårt";
 "accountPage.autoRegistration" = "Autoregistrering etter utløpet";
 "accountPage.connectivityHeader" = "Konektivitet";
 "accountPage.turnEnabled" = "Legg til TURN";
