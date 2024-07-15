@@ -308,8 +308,8 @@ extension CallViewModel {
         return self.callService.accept(call: call)
     }
 
-    func placeCall(with uri: String, userName: String, account: AccountModel, isAudioOnly: Bool = false) {
-        self.callService.placeCall(withAccount: account,
+    func makeCall(with uri: String, userName: String, account: AccountModel, isAudioOnly: Bool = false) {
+        self.callService.makeCall(withAccount: account,
                                    toParticipantId: uri,
                                    userName: userName,
                                    videoSource: self.videoService.getVideoSource(),
