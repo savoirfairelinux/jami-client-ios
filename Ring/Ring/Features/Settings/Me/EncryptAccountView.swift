@@ -37,7 +37,7 @@ struct EncryptAccount: View {
             if model.hasPassword() {
                 PasswordFieldContainer(
                     text: $model.currentPassword,
-                    placeholder: L10n.AccountPage.oldPasswordPlaceholder)
+                    placeholder: L10n.AccountPage.currentPasswordPlaceholder)
                     .padding(.bottom, 20)
             }
 
