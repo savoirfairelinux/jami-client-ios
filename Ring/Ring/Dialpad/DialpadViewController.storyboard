@@ -119,7 +119,7 @@
                         <outlet property="labelBottomConstraint" destination="dLr-Ex-KLr" id="8mY-SV-tmE"/>
                         <outlet property="labelTopConstraint" destination="EnZ-3p-oDQ" id="KVv-Tm-YxC"/>
                         <outlet property="numberLabel" destination="Qyz-fr-4Un" id="4Km-wu-O5B"/>
-                        <outlet property="placeCallButton" destination="zjA-FJ-Fbj" id="GmN-PI-r2l"/>
+                        <outlet property="makeCallButton" destination="zjA-FJ-Fbj" id="GmN-PI-r2l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zm-Df-uRm" userLabel="First Responder" sceneMemberID="firstResponder"/>

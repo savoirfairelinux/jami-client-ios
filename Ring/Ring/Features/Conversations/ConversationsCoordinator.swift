@@ -105,7 +105,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 self.showIncomingCall(call: call)
             })
             .disposed(by: self.disposeBag)
-        self.callbackPlaceCall()
+        self.callbackMakeCall()
     }
 
     func needToOnboard() {

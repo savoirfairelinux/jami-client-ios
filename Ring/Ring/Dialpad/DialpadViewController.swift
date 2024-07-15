@@ -31,7 +31,7 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var placeCallButton: UIButton!
+    @IBOutlet weak var makeCallButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var clearButton: UIButton!
     @IBOutlet weak var labelTopConstraint: NSLayoutConstraint!
@@ -53,7 +53,7 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
             .observe(on: MainScheduler.instance)
             .bind(to: numberLabel.rx.text)
             .disposed(by: self.disposeBag)
-        placeCallButton.rx.tap
+        makeCallButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.dismiss(animated: false)
                 self?.viewModel.startCall()
@@ -86,7 +86,7 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
                 AudioServicesPlaySystemSound(1057)
             })
             .disposed(by: self.disposeBag)
-        self.placeCallButton.isHidden = self.viewModel.inCallDialpad
+        self.makeCallButton.isHidden = self.viewModel.inCallDialpad
     }
 
     override func viewWillAppear(_ animated: Bool) {

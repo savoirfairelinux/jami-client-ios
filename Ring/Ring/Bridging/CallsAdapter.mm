@@ -214,9 +214,9 @@ static id <CallsAdapterDelegate> _delegate;
     answerMediaChangeRequest(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
 }
 
-- (NSString*)placeCallWithAccountId:(NSString*)accountId toParticipantId:(NSString*)participantId withMedia:(NSArray*)mediaList {
+- (NSString*)makeCallWithAccountId:(NSString*)accountId toParticipantId:(NSString*)participantId withMedia:(NSArray*)mediaList {
     std::string callId;
-    callId = placeCallWithMedia(std::string([accountId UTF8String]), std::string([participantId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap:mediaList]);
+    callId = makeCallWithMedia(std::string([accountId UTF8String]), std::string([participantId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap:mediaList]);
     return [NSString stringWithUTF8String:callId.c_str()];
 }
 

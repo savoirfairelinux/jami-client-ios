@@ -31,7 +31,7 @@ enum CallServiceError: Error {
     case hangUpCallFailed
     case holdCallFailed
     case unholdCallFailed
-    case placeCallFailed
+    case makeCallFailed
 }
 
 enum ConferenceState: String {
@@ -254,7 +254,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
                                videSource: String,
                                isAudioOnly: Bool = false) -> Observable<CallModel> {
         let call = self.calls.value[callId]
-        let placeCall = self.placeCall(withAccount: account,
+        let makeCall = self.makeCall(withAccount: account,
                                        toParticipantId: contactId,
                                        userName: userName,
                                        videoSource: videSource,
@@ -262,7 +262,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
                                        withMedia: call?.mediaList ?? [[String: String]]())
             .asObservable()
             .publish()
-        placeCall
+        makeCall
             .subscribe(onNext: { (callModel) in
                 self.inConferenceCalls.onNext(callModel)
                 if let pending = self.pendingConferences[callId], !pending.isEmpty {
@@ -272,8 +272,8 @@ class CallsService: CallsAdapterDelegate, VCardSender {
                 }
             })
             .disposed(by: self.disposeBag)
-        placeCall.connect().disposed(by: self.disposeBag)
-        return placeCall
+        makeCall.connect().disposed(by: self.disposeBag)
+        return makeCall
     }
 
     func refuse(callId: String) -> Completable {
@@ -375,7 +375,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         })
     }
 
-    func placeCall(withAccount account: AccountModel,
+    func makeCall(withAccount account: AccountModel,
                    toParticipantId participantId: String,
                    userName: String,
                    videoSource: String,
@@ -411,7 +411,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         call.callType = .outgoing
         call.participantUri = participantId
         return Single<CallModel>.create(subscribe: { [weak self] single in
-            if let self = self, let callId = self.callsAdapter.placeCall(withAccountId: account.id,
+            if let self = self, let callId = self.callsAdapter.makeCall(withAccountId: account.id,
                                                                          toParticipantId: participantId,
                                                                          withMedia: mediaList), !callId.isEmpty,
                let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: account.id) {
@@ -426,7 +426,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
                 self.calls.accept(values)
                 single(.success(call))
             } else {
-                single(.failure(CallServiceError.placeCallFailed))
+                single(.failure(CallServiceError.makeCallFailed))
             }
             return Disposables.create { }
         })
