@@ -277,8 +277,8 @@
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
-"accountPage.proxyHeader" = "Proxy";
-"accountPage.enableNotifications" = "Enable notifications";
+"accountPage.proxyHeader" = "Prokura Servilo";
+"accountPage.enableNotifications" = "Aktivigu notifikojn";
 "accountPage.proxyDisabledAlertTitle" = "Proxy-servilo malfunkciigita";
 "accountPage.proxyDisabledAlertBody" = "Por ricevi mesaĝojn, bonvolu aktivigi proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -316,8 +316,8 @@
 "accountPage.boothModeExplanation" = "En la stand-modo konversacia historio ne estas savita kaj la funkcio de Jami limigita per farante elirantaj alvokojn. Kiam vi aktivigas stand-modo ĉiuj viaj konversacioj estos forigitaj.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Post aktivigo de la stand-modo ĉiuj viaj konversacioj estos forigitaj.";
-"accountPage.peerDiscovery" = "Enable local peer discovery";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscovery" = "Aktivigu lokan samseksan malkovron";
+"accountPage.peerDiscoveryExplanation" = "Konekti al aliaj DHT-nodoj reklamantaj en nia loka reto";
 "accountPage.autoRegistration" = "Aŭtorejestro post eksvalido";
 "accountPage.connectivityHeader" = "Konektiveco";
 "accountPage.turnEnabled" = "Aktivigu TURN";

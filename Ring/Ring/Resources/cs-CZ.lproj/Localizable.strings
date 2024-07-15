@@ -278,7 +278,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Proxy";
-"accountPage.enableNotifications" = "Enable notifications";
+"accountPage.enableNotifications" = "Povolit oznámení";
 "accountPage.proxyDisabledAlertTitle" = "Server proxy zakázán";
 "accountPage.proxyDisabledAlertBody" = "Pro přijímání oznámení povolte, prosím, proxy";
 "accountPage.removeDeviceTitle" = "Odstranit zařízení";
@@ -316,8 +316,8 @@
 "accountPage.boothModeExplanation" = "V režimu budky není historie konverzace ukládána a funkce Jami jsou omezeny na uskutečňování odchozích hovorů. Umožnění režimu budky odstraní všechny vaše konverzace.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Po umožnění režimu budky budou všechny vaše konverzace odstraněny.";
-"accountPage.peerDiscovery" = "Enable local peer discovery";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscovery" = "Povolit zjištění místních klientů";
+"accountPage.peerDiscoveryExplanation" = "Připojit se k ostatním uzlům DHT vysílajícím na naší místní síti";
 "accountPage.autoRegistration" = "Automatická registrace po vypršení platnosti";
 "accountPage.connectivityHeader" = "Připojení";
 "accountPage.turnEnabled" = "Povolit TURN";

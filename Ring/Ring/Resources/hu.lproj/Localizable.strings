@@ -274,9 +274,9 @@
 "accountPage.proxyAddressAlert" = "Adja meg a meghatalmazott címet";
 "accountPage.noProxyExplanationLabel" = "A készüléke nem kap értesítéseket amikor a meghatalmazott le van tiltva";
 "accountPage.proxyPaceholder" = "Meghatalmazott cím";
-"accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
-"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.useProxyList" = "Meghatalmazáslista használata";
+"accountPage.proxyListURL" = "Meghatalmazáslista URL-címe";
+"accountPage.proxyExplanation" = "Az értesítések meghatalmazáson keresztül kerülnek továbbításra. Használhatja az alapértelmezett meghatalmazást, megadhat egyéni meghatalmazási címet, vagy megadhat egy URL-címet a meghatalmazások listájával.";
 "accountPage.proxyHeader" = "Meghatalmazás";
 "accountPage.enableNotifications" = "Értesítések engedélyezése";
 "accountPage.proxyDisabledAlertTitle" = "Meghatalmazott-kiszolgáló letiltva";

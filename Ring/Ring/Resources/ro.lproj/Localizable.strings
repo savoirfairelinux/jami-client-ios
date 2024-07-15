@@ -274,9 +274,9 @@
 "accountPage.proxyAddressAlert" = "Introdu adresa proxy";
 "accountPage.noProxyExplanationLabel" = "Aparatul nu va primi notificări dacă Proxy e dezactivat";
 "accountPage.proxyPaceholder" = "Adresa Proxy";
-"accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
-"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.useProxyList" = "Folosește lista de proxy";
+"accountPage.proxyListURL" = "URL-ul listei de proxy";
+"accountPage.proxyExplanation" = "Notificările sînt transmise prin intermediul unui proxy. Poți utiliza proxy-ul prestabilit, introduce o adresă proxy personală sau furniza o adresă URL cu o listă de proxy.";
 "accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Activează notificările";
 "accountPage.proxyDisabledAlertTitle" = "Serverul Proxy e dezactivat";
@@ -353,7 +353,7 @@
 "accountPage.callsFromUnknownContacts" = "Primește apeluri necunoscute";
 "accountPage.accountSettingsExplanation" = "Aceste reglări se vor aplica numai acestui cont";
 "accountPage.appSettings" = "Reglări generale";
-"accountPage.appSettingsExplanation" = " Aceste reglări se vor aplica tuturor conturilor.";
+"accountPage.appSettingsExplanation" = "Aceste reglări se vor aplica tuturor conturilor";
 "accountPage.connectivityAndConfiguration" = "Conectare și configurare";
 "accountPage.sipExpirationTime" = "Timp maxim de înscriere (secunde)";
 "accountPage.tlsVerifyServerCertificates" = "Verifică certificatele TLS de server";

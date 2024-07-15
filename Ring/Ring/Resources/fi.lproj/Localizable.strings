@@ -277,7 +277,7 @@
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
-"accountPage.proxyHeader" = "Proxy";
+"accountPage.proxyHeader" = "Välityspalvelin";
 "accountPage.enableNotifications" = "Ota ilmoitukset käyttöön";
 "accountPage.proxyDisabledAlertTitle" = "Välityspalvelin poistettu käytöstä";
 "accountPage.proxyDisabledAlertBody" = "Jotta voit vastaanottaa ilmoituksia, ota käyttöön";
@@ -317,7 +317,7 @@
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Kun kioskitila on otettu käyttöön, kaikki keskustelut poistetaan.";
 "accountPage.peerDiscovery" = "Salli paikallisten vertaislaitteiden haku";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscoveryExplanation" = "Yhdistä muihin DHT-solmuihin, jotka ilmoittautuu paikallisessa verkossa";
 "accountPage.autoRegistration" = "Automaattinen rekisteröinti vanhentumisen jälkeen";
 "accountPage.connectivityHeader" = "Yhteydet";
 "accountPage.turnEnabled" = "Valitse TURN";

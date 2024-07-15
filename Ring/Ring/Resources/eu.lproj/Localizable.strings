@@ -277,7 +277,7 @@
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
-"accountPage.proxyHeader" = "Proxy";
+"accountPage.proxyHeader" = "Proxya";
 "accountPage.enableNotifications" = "Oharrak ahalbidetu";
 "accountPage.proxyDisabledAlertTitle" = "Proxy zerbitzaria desaktibatuta";
 "accountPage.proxyDisabledAlertBody" = "Jakinarazpenak jasotzeko, mesedez aktibatzen proxy";
@@ -317,7 +317,7 @@
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Kabina-moduan jarri ondoren, zure elkarrizketa guztiak ezabatuko dira.";
 "accountPage.peerDiscovery" = "Bertako lagunen aurkikuntza ahalbidetu";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscoveryExplanation" = "Gure sarean iragarki egiten duten beste DHT-ko korapiloekin konektatu.";
 "accountPage.autoRegistration" = "Autokartze-registroa iraungitzearen ondoren";
 "accountPage.connectivityHeader" = "Lotura";
 "accountPage.turnEnabled" = "Jarri martxan";

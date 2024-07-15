@@ -277,8 +277,8 @@
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
-"accountPage.proxyHeader" = "Proxy";
-"accountPage.enableNotifications" = "Enable notifications";
+"accountPage.proxyHeader" = "Intermediari";
+"accountPage.enableNotifications" = "Abilitar notificacions";
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy desactivat";
 "accountPage.proxyDisabledAlertBody" = "Per rebre notificacions, per favor, habiliteu el proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -316,8 +316,8 @@
 "accountPage.boothModeExplanation" = "En mode cabina no s'ha guardat el historial de conversa i la funcionalitat jami limitada per fer trucades sortents.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Després d'activar el mode cabina totes les converses seran eliminades.";
-"accountPage.peerDiscovery" = "Enable local peer discovery";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscovery" = "Activa el descobriment local de parells";
+"accountPage.peerDiscoveryExplanation" = "Connecta a altres nodes DHT anunciats en la nostra xarxa local";
 "accountPage.autoRegistration" = "Registre automàtic després de la expiració";
 "accountPage.connectivityHeader" = "Connectivitat";
 "accountPage.turnEnabled" = "Abilitar TURN";

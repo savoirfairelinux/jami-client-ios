@@ -277,7 +277,7 @@
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
-"accountPage.proxyHeader" = "Proxy";
+"accountPage.proxyHeader" = "Proksiserver";
 "accountPage.enableNotifications" = "Võta teavitused kasutusele";
 "accountPage.proxyDisabledAlertTitle" = "Proksiserver pole kasutusel";
 "accountPage.proxyDisabledAlertBody" = "Teavituste saamiseks palun võta proksiserver kasutusele";
@@ -317,7 +317,7 @@
 "accountPage.noBoothMode" = "Kioskirežiimi kasutamiseks palun esmalt krüpti oma kasutajakonto.";
 "accountPage.boothModeAlertMessage" = "Pärast kioskirežiimi aktiveerimist kustutatakse kõik sinu vestlused.";
 "accountPage.peerDiscovery" = "Võimalda kohalikus võrgus võrdõigusvõrgu sõlmede tuvastamist";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscoveryExplanation" = "Loo ühendus DHT-sõlmedega kohalikus võrgus";
 "accountPage.autoRegistration" = "Peale kehtivuse aegumist registreeri automaatselt uuesti";
 "accountPage.connectivityHeader" = "Ühenduvus";
 "accountPage.turnEnabled" = "Võta TURN-server kasutusele";

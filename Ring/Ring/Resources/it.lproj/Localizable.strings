@@ -274,9 +274,9 @@
 "accountPage.proxyAddressAlert" = "Inserire indirizzo proxy";
 "accountPage.noProxyExplanationLabel" = "Il tuo dispositivo non riceverà notifiche quando il proxy è disabilitato";
 "accountPage.proxyPaceholder" = "Indirizzo proxy";
-"accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
-"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.useProxyList" = "Usa lista dei proxy";
+"accountPage.proxyListURL" = "URL della lista proxy";
+"accountPage.proxyExplanation" = "Le notifiche vengono instradate attraverso un proxy. È possibile utilizzare il proxy predefinito, inserire un indirizzo proxy personale o fornire un URL con un elenco di proxy.";
 "accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Attiva le notifiche";
 "accountPage.proxyDisabledAlertTitle" = "Server proxy disabilitato";

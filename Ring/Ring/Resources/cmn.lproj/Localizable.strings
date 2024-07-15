@@ -277,8 +277,8 @@
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
-"accountPage.proxyHeader" = "Proxy";
-"accountPage.enableNotifications" = "Enable notifications";
+"accountPage.proxyHeader" = "代理服務器";
+"accountPage.enableNotifications" = "启用通知";
 "accountPage.proxyDisabledAlertTitle" = "代理服务器已禁用";
 "accountPage.proxyDisabledAlertBody" = "为了接受通知，请开启代理";
 "accountPage.removeDeviceTitle" = "移除设备";
@@ -316,8 +316,8 @@
 "accountPage.boothModeExplanation" = "话亭模式中，不会保存会话历史，且 jami 的功能会受限为外拨电话。启用话亭模式后，现有会话将全部被删除。";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "启用话亭模式后，您的现有会话都将被删除。";
-"accountPage.peerDiscovery" = "Enable local peer discovery";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscovery" = "启用本地对等方发现";
+"accountPage.peerDiscoveryExplanation" = "连接至在本地网络宣告的 DHT 节点";
 "accountPage.autoRegistration" = "过期后自动注册";
 "accountPage.connectivityHeader" = "连接性";
 "accountPage.turnEnabled" = "启动TURN";

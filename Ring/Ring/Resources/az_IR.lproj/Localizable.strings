@@ -277,8 +277,8 @@
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
-"accountPage.proxyHeader" = "Proxy";
-"accountPage.enableNotifications" = "Enable notifications";
+"accountPage.proxyHeader" = "پراکسی";
+"accountPage.enableNotifications" = "اطلاعلر ائدیرمک";
 "accountPage.proxyDisabledAlertTitle" = "پروکسی سرور معطل";
 "accountPage.proxyDisabledAlertBody" = "اطلاعلر آلماق اوچون لطفاً پروکسی فعال ات";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -316,8 +316,8 @@
 "accountPage.boothModeExplanation" = "بوخ مودوندا مکالمه تاریخ سی ساقلانیلمیر و Jami فعالیتلری چیخیشلار وئرمکله محدود اولور. بوخ مودوندا بوتون مکالمه لرین چئوریلیر.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "بوخ موودی فعال ائدن سونرا بوتون دانیشیقلارینیز آرادان آپاراجاق.";
-"accountPage.peerDiscovery" = "Enable local peer discovery";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscovery" = "یئرلی همتداشلار آچیقلاماسینی ائدیر";
+"accountPage.peerDiscoveryExplanation" = "یئرلی شبکه لریمیزده اعلان ائدن باشقا DHT گئجه لریله باغلی اول";
 "accountPage.autoRegistration" = "موتر ثبت ائتمه دن سونرا";
 "accountPage.connectivityHeader" = "ارتباط";
 "accountPage.turnEnabled" = "TURN فعال ائت";

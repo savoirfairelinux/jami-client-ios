@@ -278,7 +278,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Proxy";
-"accountPage.enableNotifications" = "Enable notifications";
+"accountPage.enableNotifications" = "Benachrichtigungen aktivieren";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Deaktiviert";
 "accountPage.proxyDisabledAlertBody" = "Um Benachrichtigungen zu erhalten, bitte Proxy aktivieren";
 "accountPage.removeDeviceTitle" = "Gerät entfernen";
@@ -316,8 +316,8 @@
 "accountPage.boothModeExplanation" = "Im Geheim-Modus wird der Gesprächsverlauf nicht gespeichert und die Jami-Funktionalität durch ausgehende Anrufe eingeschränkt. Wenn Sie den Geheim-Modus aktivieren, werden alle Ihre Gespräche entfernt.";
 "accountPage.noBoothMode" = "Um den Booth-Modus zu aktivieren, verschlüsseln Sie zunächst Ihr Konto.";
 "accountPage.boothModeAlertMessage" = "Nach der Aktivierung des Geheim-Modus werden alle Ihre Gespräche entfernt.";
-"accountPage.peerDiscovery" = "Enable local peer discovery";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscovery" = "Erlaube das Finden von lokalen Teilnehmern";
+"accountPage.peerDiscoveryExplanation" = "Verbinde zu anderen sich meldenden DHT Knoten in unserem lokalen Netzwerk";
 "accountPage.autoRegistration" = "Automatische Registrierung nach Ablauf";
 "accountPage.connectivityHeader" = "Verbindung";
 "accountPage.turnEnabled" = "TURN aktivieren";

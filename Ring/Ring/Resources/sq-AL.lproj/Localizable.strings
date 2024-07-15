@@ -274,9 +274,9 @@
 "accountPage.proxyAddressAlert" = "Jepni adresë ndërmjetësi";
 "accountPage.noProxyExplanationLabel" = "Pajisja juaj s’do të marrë njoftime kur ndërmjetësi të jetë çaktivizuar";
 "accountPage.proxyPaceholder" = "Adresë ndërmjetësi";
-"accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
-"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.useProxyList" = "Përdor listë ndërmjetësish";
+"accountPage.proxyListURL" = "URL liste ndërmjetësish";
+"accountPage.proxyExplanation" = "Njoftimet kalohen përmes një ndërmjetësi. Mund të përdorni ose ndërmjetësin parazgjedhje, të jepni një adresë ndërmjetësi vetjak, ose një URL me një listë ndërmjetësish.";
 "accountPage.proxyHeader" = "Ndërmjetës";
 "accountPage.enableNotifications" = "Aktivizo njoftime";
 "accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";

@@ -278,7 +278,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Proxy";
-"accountPage.enableNotifications" = "Enable notifications";
+"accountPage.enableNotifications" = "Benachrichtigungen einschalten";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -316,8 +316,8 @@
 "accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
-"accountPage.peerDiscovery" = "Enable local peer discovery";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscovery" = "Entdeckung lokaler Gesprächspartner erlauben";
+"accountPage.peerDiscoveryExplanation" = "Mit anderen DHT-Knoten verbinden, die im lokalen Netzwerk zugänglich sind";
 "accountPage.autoRegistration" = "Auto register after expiration";
 "accountPage.connectivityHeader" = "Connectivity";
 "accountPage.turnEnabled" = "Enable TURN";

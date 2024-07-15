@@ -277,8 +277,8 @@
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
-"accountPage.proxyHeader" = "Proxy";
-"accountPage.enableNotifications" = "Enable notifications";
+"accountPage.proxyHeader" = "Практыкаванне";
+"accountPage.enableNotifications" = "Дазволіць паведамленні";
 "accountPage.proxyDisabledAlertTitle" = "Праксі сервер адключаны";
 "accountPage.proxyDisabledAlertBody" = "Каб атрымаць паведамленні, калі ласка, уключыце праксі";
 "accountPage.removeDeviceTitle" = "Remove device";
@@ -316,8 +316,8 @@
 "accountPage.boothModeExplanation" = "У рэжыме кабіны гісторыя размоў не захаваная і функцыянальнасць Jami абмежаваны выхаду званкі.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Пасля таго, як вы ўключыце рэжым кабіны, усе вашыя размовы будуць выдаленыя.";
-"accountPage.peerDiscovery" = "Enable local peer discovery";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscovery" = "Дазволіць мясцовае адкрыццё аднагодкаў";
+"accountPage.peerDiscoveryExplanation" = "Падключыце да іншых вузлоў DHT рэкламы ў нашай мясцовай сеткі";
 "accountPage.autoRegistration" = "Аўтамабільны рэгістр пасля заканчэння тэрміну";
 "accountPage.connectivityHeader" = "Злучнасць";
 "accountPage.turnEnabled" = "Уключыць ТУРН";
