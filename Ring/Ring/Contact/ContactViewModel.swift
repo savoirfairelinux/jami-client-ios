@@ -47,7 +47,7 @@ class ContactViewModel: ViewModel, Stateable {
                           items:
                             [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
                               ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
-                              ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon)])]
+                              ContactActions(title: L10n.ContactPage.send, image: Asset.conversationIcon)])]
         let sipSettings =
             [SectionModel(model: "ProfileInfoCell",
                           items:
@@ -77,15 +77,15 @@ class ContactViewModel: ViewModel, Stateable {
                                             items:
                                                 [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
                                                   ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
-                                                  ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon),
-                                                  ContactActions(title: L10n.ContactPage.removeConversation, image: Asset.icConversationRemove),
+                                                  ContactActions(title: L10n.ContactPage.send, image: Asset.conversationIcon),
+                                                  ContactActions(title: L10n.ContactPage.leaveConversation, image: Asset.icConversationLeave),
                                                   ContactActions(title: L10n.Global.blockContact, image: Asset.blockIcon)])])
                 } else {
                     self.tableSection = Observable<[SectionModel<String, ContactActions>]>
                         .just([SectionModel(model: "ProfileInfoCell",
                                             items:
                                                 [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
-                                                  ContactActions(title: L10n.ContactPage.removeConversation, image: Asset.icConversationRemove)])])
+                                                  ContactActions(title: L10n.ContactPage.leaveConversation, image: Asset.icConversationLeave)])])
                 }
             } else {
                 self.userName.accept(jamiId)

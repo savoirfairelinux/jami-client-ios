@@ -60,7 +60,7 @@ internal enum Asset {
   internal static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icContactPicture = ImageAsset(name: "ic_contact_picture")
-  internal static let icConversationRemove = ImageAsset(name: "ic_conversation_remove")
+  internal static let icConversationLeave = ImageAsset(name: "ic_conversation_leave")
   internal static let icForward = ImageAsset(name: "ic_forward")
   internal static let icHideInput = ImageAsset(name: "ic_hide_input")
   internal static let icSave = ImageAsset(name: "ic_save")

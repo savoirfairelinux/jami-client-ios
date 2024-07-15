@@ -52,7 +52,7 @@
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pB-7e-B3j">
                                         <rect key="frame" x="414" y="31.5" width="0.0" height="27"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="ic_conversation_remove"/>
+                                        <state key="normal" image="ic_conversation_leave"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.7987211045" colorSpace="custom" customColorSpace="sRGB"/>
@@ -128,7 +128,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_conversation_remove" width="27" height="27"/>
+        <image name="ic_conversation_leave" width="27" height="27"/>
         <image name="ic_forward" width="27" height="27"/>
         <image name="ic_save" width="27" height="27"/>
         <image name="ic_share" width="24" height="24"/>
