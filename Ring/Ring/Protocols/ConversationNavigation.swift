@@ -60,7 +60,7 @@ protocol ConversationNavigation: AnyObject {
 extension ConversationNavigation where Self: Coordinator, Self: StateableResponsive {
 
     // swiftlint:disable cyclomatic_complexity
-    func callbackPlaceCall() {
+    func callbackMakeCall() {
         self.stateSubject
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ConversationState else { return }
@@ -264,7 +264,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                          withStyle: .appear,
                          withAnimation: false,
                          withStateable: callViewController.viewModel)
-            callViewController.viewModel.placeCall(with: contactRingId, userName: userName, account: account, isAudioOnly: isAudioOnly)
+            callViewController.viewModel.makeCall(with: contactRingId, userName: userName, account: account, isAudioOnly: isAudioOnly)
         }
     }
 }

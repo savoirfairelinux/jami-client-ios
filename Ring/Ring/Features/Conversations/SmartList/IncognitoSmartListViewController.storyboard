@@ -208,8 +208,8 @@
                         <outlet property="logoView" destination="Snl-Rn-2k3" id="0xv-XO-JFo"/>
                         <outlet property="networkAlertLabel" destination="X9t-3C-1Cp" id="ruo-Cn-5ax"/>
                         <outlet property="networkAlertView" destination="qeo-Fd-n47" id="C8H-FJ-Co6"/>
-                        <outlet property="placeAudioCall" destination="5PU-M8-7lD" id="DuF-do-s0o"/>
-                        <outlet property="placeVideoCall" destination="Z1C-QN-Ish" id="EGx-dE-zBT"/>
+                        <outlet property="makeAudioCall" destination="5PU-M8-7lD" id="DuF-do-s0o"/>
+                        <outlet property="makeVideoCall" destination="Z1C-QN-Ish" id="EGx-dE-zBT"/>
                         <outlet property="searchBarShadow" destination="RC3-OR-Sdo" id="oCc-BH-udN"/>
                         <outlet property="searchView" destination="46f-Ue-tcu" id="cja-31-Vaz"/>
                     </connections>

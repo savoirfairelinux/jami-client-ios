@@ -544,7 +544,7 @@ class ConversationViewController: UIViewController,
         audioCallItem.image = UIImage(asset: Asset.callButton)
         audioCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                self?.placeAudioOnlyCall()
+                self?.makeAudioOnlyCall()
             })
             .disposed(by: self.disposeBag)
 
@@ -552,7 +552,7 @@ class ConversationViewController: UIViewController,
         videoCallItem.image = UIImage(asset: Asset.videoRunning)
         videoCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                self?.placeCall()
+                self?.makeCall()
             })
             .disposed(by: self.disposeBag)
 
@@ -610,11 +610,11 @@ class ConversationViewController: UIViewController,
             .disposed(by: self.disposeBag)
     }
 
-    func placeCall() {
+    func makeCall() {
         self.viewModel.startCall()
     }
 
-    func placeAudioOnlyCall() {
+    func makeAudioOnlyCall() {
         self.viewModel.startAudioCall()
     }
 

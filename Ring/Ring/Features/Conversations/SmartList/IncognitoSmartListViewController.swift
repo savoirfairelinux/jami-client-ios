@@ -28,8 +28,8 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
 
     @IBOutlet weak var searchView: JamiSearchView!
 
-    @IBOutlet weak var placeVideoCall: DesignableButton!
-    @IBOutlet weak var placeAudioCall: DesignableButton!
+    @IBOutlet weak var makeVideoCall: DesignableButton!
+    @IBOutlet weak var makeAudioCall: DesignableButton!
     @IBOutlet weak var logoView: UIStackView!
     @IBOutlet weak var boothSwitch: UIButton!
     @IBOutlet weak var networkAlertLabel: UILabel!
@@ -57,8 +57,8 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: {[weak self](_) in
                 guard UIDevice.current.portraitOrLandscape else { return }
-                self?.placeVideoCall.updateGradientFrame()
-                self?.placeAudioCall.updateGradientFrame()
+                self?.makeVideoCall.updateGradientFrame()
+                self?.makeAudioCall.updateGradientFrame()
             })
             .disposed(by: self.disposeBag)
     }
@@ -77,16 +77,16 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
         self.navigationItem.title = ""
         self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
         boothSwitch.setTitle(L10n.AccountPage.disableBoothMode, for: .normal)
-        placeAudioCall.setTitle(L10n.Actions.startAudioCall, for: .normal)
-        placeVideoCall.setTitle(L10n.Actions.startVideoCall, for: .normal)
+        makeAudioCall.setTitle(L10n.Actions.startAudioCall, for: .normal)
+        makeVideoCall.setTitle(L10n.Actions.startVideoCall, for: .normal)
     }
 
     func setupUI() {
         view.backgroundColor = UIColor.jamiBackgroundSecondaryColor
-        self.placeVideoCall.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        self.placeAudioCall.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        placeVideoCall.titleLabel?.ajustToTextSize()
-        placeAudioCall.titleLabel?.ajustToTextSize()
+        self.makeVideoCall.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        self.makeAudioCall.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
+        makeVideoCall.titleLabel?.ajustToTextSize()
+        makeAudioCall.titleLabel?.ajustToTextSize()
         self.boothSwitch.setTitleColor(.jamiTextSecondary, for: .normal)
         self.searchView.editSearch
             .subscribe(onNext: {[weak self] (editing) in
@@ -95,13 +95,13 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
             })
             .disposed(by: disposeBag)
 
-        self.placeVideoCall.rx.tap
+        self.makeVideoCall.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.startCall(audioOnly: false)
             })
             .disposed(by: self.disposeBag)
 
-        self.placeAudioCall.rx.tap
+        self.makeAudioCall.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.startCall(audioOnly: true)
             })
