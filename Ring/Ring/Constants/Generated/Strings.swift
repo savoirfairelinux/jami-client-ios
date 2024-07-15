@@ -183,8 +183,8 @@ internal enum L10n {
     internal static let peerDiscovery = L10n.tr("Localizable", "accountPage.peerDiscovery", fallback: "Enable local peer discovery")
     /// Connect to other DHT nodes advertising on our local network
     internal static let peerDiscoveryExplanation = L10n.tr("Localizable", "accountPage.peerDiscoveryExplanation", fallback: "Connect to other DHT nodes advertising on our local network")
-    /// Failed to generate PIN
-    internal static let pinError = L10n.tr("Localizable", "accountPage.pinError", fallback: "Failed to generate PIN")
+    /// An error occurred while generating the PIN.
+    internal static let pinError = L10n.tr("Localizable", "accountPage.pinError", fallback: "An error occurred while generating the PIN.")
     /// Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.
     internal static let pinExplanationMessage = L10n.tr("Localizable", "accountPage.pinExplanationMessage", fallback: "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.")
     /// On another device
@@ -403,18 +403,18 @@ internal enum L10n {
     internal static let connecting = L10n.tr("Localizable", "calls.connecting", fallback: "Connecting…")
     /// Call with 
     internal static let currentCallWith = L10n.tr("Localizable", "calls.currentCallWith", fallback: "Call with ")
-    /// hang up
-    internal static let haghUp = L10n.tr("Localizable", "calls.haghUp", fallback: "hang up")
+    /// End call
+    internal static let haghUp = L10n.tr("Localizable", "calls.haghUp", fallback: "End call")
     /// wants to talk to you
     internal static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo", fallback: "wants to talk to you")
-    /// lower hand
-    internal static let lowerHand = L10n.tr("Localizable", "calls.lowerHand", fallback: "lower hand")
+    /// Lower hand
+    internal static let lowerHand = L10n.tr("Localizable", "calls.lowerHand", fallback: "Lower hand")
     /// maximize
     internal static let maximize = L10n.tr("Localizable", "calls.maximize", fallback: "maximize")
     /// minimize
     internal static let minimize = L10n.tr("Localizable", "calls.minimize", fallback: "minimize")
-    /// mute audio
-    internal static let muteAudio = L10n.tr("Localizable", "calls.muteAudio", fallback: "mute audio")
+    /// Mute audio
+    internal static let muteAudio = L10n.tr("Localizable", "calls.muteAudio", fallback: "Mute audio")
     /// unset moderator
     internal static let removeModerator = L10n.tr("Localizable", "calls.removeModerator", fallback: "unset moderator")
     /// Ringing…
@@ -422,19 +422,19 @@ internal enum L10n {
     /// set moderator
     internal static let setModerator = L10n.tr("Localizable", "calls.setModerator", fallback: "set moderator")
     /// unmute audio
-    internal static let unmuteAudio = L10n.tr("Localizable", "calls.unmuteAudio", fallback: "unmute audio")
+    internal static let unmuteAudio = L10n.tr("Localizable", "calls.unmuteAudio", fallback: "Unmute audio")
   }
   internal enum ContactPage {
     /// Clear Chat
     internal static let clearConversation = L10n.tr("Localizable", "contactPage.clearConversation", fallback: "Clear Chat")
-    /// Remove Conversation
-    internal static let removeConversation = L10n.tr("Localizable", "contactPage.removeConversation", fallback: "Remove Conversation")
-    /// Send Message
-    internal static let sendMessage = L10n.tr("Localizable", "contactPage.sendMessage", fallback: "Send Message")
-    /// Start Audio Call
-    internal static let startAudioCall = L10n.tr("Localizable", "contactPage.startAudioCall", fallback: "Start Audio Call")
-    /// Start Video Call
-    internal static let startVideoCall = L10n.tr("Localizable", "contactPage.startVideoCall", fallback: "Start Video Call")
+    /// Leave conversation
+    internal static let removeConversation = L10n.tr("Localizable", "contactPage.removeConversation", fallback: "Leave conversation")
+    /// Send
+    internal static let sendMessage = L10n.tr("Localizable", "contactPage.sendMessage", fallback: "Send")
+    /// Start audio call
+    internal static let startAudioCall = L10n.tr("Localizable", "contactPage.startAudioCall", fallback: "Start audio call")
+    /// Start video call
+    internal static let startVideoCall = L10n.tr("Localizable", "contactPage.startVideoCall", fallback: "Start video call")
   }
   internal enum Conversation {
     /// Add to Contacts
@@ -445,8 +445,8 @@ internal enum L10n {
     internal static let deletedMessage = L10n.tr("Localizable", "conversation.deletedMessage", fallback: "deleted a message")
     /// edited
     internal static let edited = L10n.tr("Localizable", "conversation.edited", fallback: "edited")
-    /// Failed to save image to gallery
-    internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "Failed to save image to gallery")
+    /// An error occurred while saving the image to the gallery.
+    internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "An error occurred while saving the image to the gallery.")
     /// You are currently receiving a live location from 
     internal static let explanationReceivingLocationFrom = L10n.tr("Localizable", "conversation.explanationReceivingLocationFrom", fallback: "You are currently receiving a live location from ")
     /// You are currently sharing your location with 
@@ -738,8 +738,8 @@ internal enum L10n {
     internal static let refused = L10n.tr("Localizable", "invitations.refused", fallback: "refused")
   }
   internal enum LinkDevice {
-    /// An error occurred during the export
-    internal static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError", fallback: "An error occurred during the export")
+    /// An error occurred while exporting the account.
+    internal static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError", fallback: "An error occurred while exporting the account.")
     /// To complete the process, you need to open Jami on the new device and choose the option "Link this device to an account." Your pin is valid for 10 minutes
     internal static let explanationMessage = L10n.tr("Localizable", "linkDevice.explanationMessage", fallback: "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes")
     /// Verifying
@@ -788,10 +788,10 @@ internal enum L10n {
   internal enum LogView {
     /// Open diagnostic log settings
     internal static let description = L10n.tr("Localizable", "logView.description", fallback: "Open diagnostic log settings")
-    /// Failed to save file
-    internal static let saveError = L10n.tr("Localizable", "logView.saveError", fallback: "Failed to save file")
-    /// Failed to share file
-    internal static let shareError = L10n.tr("Localizable", "logView.shareError", fallback: "Failed to share file")
+    /// An error occurred while saving the file.
+    internal static let saveError = L10n.tr("Localizable", "logView.saveError", fallback: "An error occurred while saving the file.")
+    /// An error occurred while sharing the file.
+    internal static let shareError = L10n.tr("Localizable", "logView.shareError", fallback: "An error occurred while sharing the file.")
     /// Start Logging
     internal static let startLogging = L10n.tr("Localizable", "logView.startLogging", fallback: "Start Logging")
     /// Stop Logging
@@ -800,16 +800,16 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "logView.title", fallback: "Diagnostics")
   }
   internal enum MigrateAccount {
-    /// Failed to migrate your account. You can retry or delete your account.
-    internal static let error = L10n.tr("Localizable", "migrateAccount.error", fallback: "Failed to migrate your account. You can retry or delete your account.")
+    /// An error occurred while migrating the account. Retry or delete the account.
+    internal static let error = L10n.tr("Localizable", "migrateAccount.error", fallback: "An error occurred while migrating the account. Retry or delete the account.")
     /// This account needs to be migrated
     internal static let explanation = L10n.tr("Localizable", "migrateAccount.explanation", fallback: "This account needs to be migrated")
     /// Migrate Another Account
     internal static let migrateAnother = L10n.tr("Localizable", "migrateAccount.migrateAnother", fallback: "Migrate Another Account")
     /// Migrate Account
     internal static let migrateButton = L10n.tr("Localizable", "migrateAccount.migrateButton", fallback: "Migrate Account")
-    /// Migrating...
-    internal static let migrating = L10n.tr("Localizable", "migrateAccount.migrating", fallback: "Migrating...")
+    /// Migrating…
+    internal static let migrating = L10n.tr("Localizable", "migrateAccount.migrating", fallback: "Migrating…")
     /// To proceed with the migration, you need to enter a password that was used for this account
     internal static let passwordExplanation = L10n.tr("Localizable", "migrateAccount.passwordExplanation", fallback: "To proceed with the migration, you need to enter a password that was used for this account")
     /// Account migration
@@ -876,8 +876,8 @@ internal enum L10n {
     internal static let results = L10n.tr("Localizable", "smartlist.results", fallback: "Public Directory")
     /// Search
     internal static let searchBar = L10n.tr("Localizable", "smartlist.searchBar", fallback: "Search")
-    /// Enter name...
-    internal static let searchBarPlaceholder = L10n.tr("Localizable", "smartlist.searchBarPlaceholder", fallback: "Enter name...")
+    /// Enter name…
+    internal static let searchBarPlaceholder = L10n.tr("Localizable", "smartlist.searchBarPlaceholder", fallback: "Enter name…")
     /// Select one of the numbers
     internal static let selectOneNumber = L10n.tr("Localizable", "smartlist.selectOneNumber", fallback: "Select one of the numbers")
     /// Yesterday
@@ -946,8 +946,8 @@ internal enum L10n {
     internal static let addADescription = L10n.tr("Localizable", "swarmcreation.addADescription", fallback: "Add a description")
     /// Create the swarm
     internal static let createTheSwarm = L10n.tr("Localizable", "swarmcreation.createTheSwarm", fallback: "Create the swarm")
-    /// Search for contact...
-    internal static let searchBar = L10n.tr("Localizable", "swarmcreation.searchBar", fallback: "Search for contact...")
+    /// Search for contact…
+    internal static let searchBar = L10n.tr("Localizable", "swarmcreation.searchBar", fallback: "Search for contact…")
   }
   internal enum Welcome {
     /// Connect to a Jami Account Manager Server
