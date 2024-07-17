@@ -61,6 +61,8 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
 
     var accountsModel: AccountsViewModel
 
+    var swiftUIModel: MessagesListVM?
+
     init(injectionBag: InjectionBag, stateSubject: PublishSubject<State>) {
         self.conversationsService = injectionBag.conversationsService
         self.requestsService = injectionBag.requestsService

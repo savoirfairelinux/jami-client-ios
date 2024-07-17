@@ -83,21 +83,57 @@ extension View {
 struct ConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
     @SwiftUI.State private var searchText = ""
+   // @SwiftUI.State var selectedCov: String? = ""
     var body: some View {
         ForEach(model.conversations) { [weak model] conversation in
-            ConversationRowView(model: conversation)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-                .onTapGesture { [weak conversation, weak model] in
-                    guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation)
-                }
-                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
-                .transition(.opacity)
+            NavigationLink {
+                MessagesListView(model: conversation.swiftUIModel)
+            } label: {
+                ConversationRowView(model: conversation, withSeparator: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+//                    .onTapGesture { [weak conversation, weak model] in
+//                        //selectedCov = conversation?.id
+//                        // guard let conversation = conversation, let model = model else { return }
+//                        // model.showConversation(withConversationViewModel: conversation)
+//                    }
+                    .transition(.opacity)
+                    .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+                    .transition(.opacity)
+            }
+//            NavigationLink(
+//                destination: LazyView {
+//                    if let account = self.model.accountsService.currentAccount {
+//                        MessagesListView(model: conversation.swiftUIModel)
+//                        //                        AccountSummaryView(injectionBag: self.model.injectionBag,
+//                        //                                           account: account, stateSubject: model.stateSubject)
+//                    } else {
+//                        EmptyView()
+//                    }
+//                },
+//                tag: conversation.id,
+//                selection: $selectedCov
+//            ) {
+//                ConversationRowView(model: conversation, withSeparator: true)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .contentShape(Rectangle())
+//                    .onTapGesture { [weak conversation, weak model] in
+//                        selectedCov = conversation?.id
+//                        // guard let conversation = conversation, let model = model else { return }
+//                        // model.showConversation(withConversationViewModel: conversation)
+//                    }
+//                    .transition(.opacity)
+//                    .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+//                    .transition(.opacity)
+//                // EmptyView()
+//            }
         }
         .hideRowSeparator()
         .navigationBarBackButtonHidden(true)
         .transition(.opacity)
+//        .onChange(of: selectedCov) { _ in
+//            updateLayerDimensions()
+//        }
     }
 }
 
@@ -120,18 +156,45 @@ struct TempConversationsView: View {
 
 struct JamsSearchResultView: View {
     @ObservedObject var model: ConversationsViewModel
+    @SwiftUI.State var selectedCov = ""
+    @SwiftUI.State var active = true
     var body: some View {
         ForEach(model.jamsSearchResult) { conversation in
-            ConversationRowView(model: conversation, withSeparator: true)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-                .onTapGesture { [weak conversation, weak model] in
-                    guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation)
-                }
-                .transition(.opacity)
-                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
-                .transition(.opacity)
+            NavigationLink(
+                destination: LazyView {
+                    if let account = self.model.accountsService.currentAccount {
+                        MessagesListView(model: conversation.swiftUIModel)
+                        //                        AccountSummaryView(injectionBag: self.model.injectionBag,
+                        //                                           account: account, stateSubject: model.stateSubject)
+                    } else {
+                        EmptyView()
+                    }
+                },
+                isActive: $active
+            ) {
+                ConversationRowView(model: conversation, withSeparator: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                    .onTapGesture { [weak conversation, weak model] in
+                       // selectedCov = conversation?.id
+                        // guard let conversation = conversation, let model = model else { return }
+                        // model.showConversation(withConversationViewModel: conversation)
+                    }
+                    .transition(.opacity)
+                    .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+                    .transition(.opacity)
+                // EmptyView()
+            }
+            //            ConversationRowView(model: conversation, withSeparator: true)
+            //                .frame(maxWidth: .infinity, alignment: .leading)
+            //                .contentShape(Rectangle())
+            //                .onTapGesture { [weak conversation, weak model] in
+            //                    guard let conversation = conversation, let model = model else { return }
+            //                    model.showConversation(withConversationViewModel: conversation)
+            //                }
+            //                .transition(.opacity)
+            //                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+            //                .transition(.opacity)
         }
     }
 }

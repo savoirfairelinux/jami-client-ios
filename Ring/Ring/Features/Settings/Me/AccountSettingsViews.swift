@@ -92,8 +92,8 @@ struct NotificationsSettingsView: View {
                                                                       title: L10n.AccountPage.proxyPaceholder,
                                                                       placeholder: L10n.AccountPage.proxyPaceholder,
                                                                       onDisappearAction: {
-                            model.saveProxyAddress()
-                        })) {
+                                                                        model.saveProxyAddress()
+                                                                      })) {
                             FieldRowView(label: L10n.AccountPage.proxyPaceholder, value: model.proxyAddress)
                         }
                     }

@@ -119,6 +119,15 @@ struct MessagesListView: View {
                 if model.isSyncing {
                     syncView()
                 }
+
+                HStack {
+                    Spacer()
+                    Text("chat")
+                    Spacer()
+                }
+                .padding()
+                .background(Color.blue)
+                .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
             }
             if showReactionsView {
                 if let reactions = reactionsForMessage {
@@ -146,6 +155,7 @@ struct MessagesListView: View {
                 model.screenTapped = false
             }
         })
+        .navigationBarBackButtonHidden()
     }
 
     func makeOverlay() -> some View {

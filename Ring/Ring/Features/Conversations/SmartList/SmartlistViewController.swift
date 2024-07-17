@@ -52,7 +52,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     func addSwiftUI() {
