@@ -179,7 +179,7 @@ class LinkedDevicesVM: ObservableObject {
             .filter { [weak self] deviceEvent in
                 guard let self = self else { return false }
                 return deviceEvent.eventType == ServiceEventType.deviceRevocationEnded &&
-                    deviceEvent.getEventInput(.id) == self.account.id
+                    deviceEvent.getEventInput(.accountId) == self.account.id
             }
             .subscribe(onNext: { [weak self] deviceEvent in
                 guard let self = self else { return }
