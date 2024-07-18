@@ -79,7 +79,7 @@ class AccountsService: AccountAdapterDelegate {
 
      - SeeAlso: `accounts`
      */
-    private var accountList: [AccountModel]
+    private(set) var accountList: [AccountModel]
 
     private let disposeBag = DisposeBag()
 
@@ -109,8 +109,6 @@ class AccountsService: AccountAdapterDelegate {
             accountList = newValue
         }
     }
-
-    var accountsObservable = BehaviorRelay<[AccountModel]>(value: [AccountModel]())
 
     let currentAccountChanged = PublishSubject<AccountModel?>()
     let currentWillChange = PublishSubject<AccountModel?>()
@@ -219,7 +217,6 @@ class AccountsService: AccountAdapterDelegate {
             }
         }
         self.reloadAccounts()
-        accountsObservable.accept(self.accountList)
         if selectedAccount != nil {
             let currentAccount = self.accountList.filter({ account in
                 return account == selectedAccount
@@ -259,17 +256,7 @@ class AccountsService: AccountAdapterDelegate {
 
     private func reloadAccounts() {
         for account in accountList {
-            account.details = self.getAccountDetails(fromAccountId: account.id)
-            account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: account.id)
-            account.devices = getKnownRingDevices(fromAccountId: account.id)
-
-            do {
-                let credentialDetails = try self.getAccountCredentials(fromAccountId: account.id)
-                account.credentialDetails.removeAll()
-                account.credentialDetails.append(contentsOf: credentialDetails)
-            } catch {
-                log.error("\(error)")
-            }
+            self.updateAccountDetails(account: account)
         }
     }
 
@@ -787,10 +774,10 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func removeAccountAndWaitForCompletion(id: String) -> Observable<Bool> {
-        let initialAccountCount = self.getAccountsId()?.count ?? 0
+        let initialAccountCount = self.accountList.count
 
-        let removeAccount: Single<Bool> = Single.create { single in
-            self.accountAdapter.removeAccount(id)
+        let removeAccount: Single<Bool> = Single.create { [weak self] single in
+            self?.accountAdapter.removeAccount(id)
             single(.success(true))
             return Disposables.create()
         }
@@ -800,8 +787,9 @@ class AccountsService: AccountAdapterDelegate {
 
         return Observable
             .combineLatest(removeAccount.asObservable(), accountsChangedSignal.asObservable())
-            .map { _ in
-                let currentAccountCount = self.getAccountsId()?.count ?? 0
+            .map { [weak self] _ in
+                guard let self = self else { return true }
+                let currentAccountCount = self.accountList.count
                 return currentAccountCount < initialAccountCount
             }
     }
@@ -809,10 +797,56 @@ class AccountsService: AccountAdapterDelegate {
     // MARK: - AccountAdapterDelegate
     func accountsChanged() {
         log.debug("Accounts changed.")
-        reloadAccounts()
+        let currentAccounts = self.accountList.map { $0.id }
 
+        guard let newAccounts = self.getAccountsId() else {
+            self.accountList = []
+            notifyAccountsChanged()
+            return
+        }
+
+        let removedAccounts = currentAccounts.filter { !newAccounts.contains($0) }
+        let addedAccounts = newAccounts.filter { !currentAccounts.contains($0) }
+
+        updateAccountList(removedAccounts: removedAccounts, addedAccounts: addedAccounts)
+
+        notifyAccountsChanged()
+    }
+
+    private func updateAccountList(removedAccounts: [String], addedAccounts: [String]) {
+        // Remove removed accounts
+        self.accountList.removeAll { account in
+            removedAccounts.contains(account.id)
+        }
+
+        // Add new accounts
+        for accountId in addedAccounts {
+            let newAccount = AccountModel(withAccountId: accountId)
+            self.updateAccountDetails(account: newAccount)
+            self.accountList.append(newAccount)
+        }
+    }
+
+    private func notifyAccountsChanged() {
         let event = ServiceEvent(withEventType: .accountsChanged)
         self.responseStream.onNext(event)
+    }
+
+    private func updateAccountDetails(account: AccountModel) {
+        account.details = self.getAccountDetails(fromAccountId: account.id)
+        account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: account.id)
+        account.devices = getKnownRingDevices(fromAccountId: account.id)
+        do {
+            let credentialDetails = try self.getAccountCredentials(fromAccountId: account.id)
+            account.credentialDetails.removeAll()
+            account.credentialDetails.append(contentsOf: credentialDetails)
+        } catch {
+            log.error("\(error)")
+        }
+    }
+
+    func setAccountList(_ accounts: [AccountModel]) {
+        self.accountList = accounts
     }
 
     func migrationEnded(for account: String, status: String) {
@@ -837,11 +871,42 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    func knownDevicesChanged(for account: String, devices: [String: String]) {
-        reloadAccounts()
+    func knownDevicesChanged(for accountId: String, devices: [String: String]) {
+        guard let account = self.getAccount(fromAccountId: accountId) else { return }
+
+        updateAccountDevices(account: account, devices: devices)
+
         var event = ServiceEvent(withEventType: .knownDevicesChanged)
         event.addEventInput(.accountId, value: account)
         self.responseStream.onNext(event)
+    }
+
+    private func updateAccountDevices(account: AccountModel, devices: [String: String]) {
+        let currentDevices = account.devices
+        removeOldDevices(currentDevices: &account.devices, devices: devices)
+        let currentDeviceId = AccountModelHelper(withAccount: account).getCurrentDevice()
+        addOrUpdateDevices(currentDevices: &account.devices, devices: devices, currentDeviceId: currentDeviceId)
+    }
+
+    private func removeOldDevices(currentDevices: inout [DeviceModel], devices: [String: String]) {
+        currentDevices.removeAll { device in
+            !devices.keys.contains(device.deviceId)
+        }
+    }
+
+    private func addOrUpdateDevices(currentDevices: inout [DeviceModel], devices: [String: String], currentDeviceId: String) {
+        for (deviceId, deviceName) in devices {
+            if let existingDevice = currentDevices.first(where: { $0.deviceId == deviceId }) {
+                // Update device name if it has changed
+                if existingDevice.deviceName != deviceName {
+                    existingDevice.deviceName = deviceName
+                }
+            } else {
+                // Add new device
+                let newDevice = DeviceModel(withDeviceId: deviceId, deviceName: deviceName, isCurrent: deviceId == currentDeviceId)
+                currentDevices.append(newDevice)
+            }
+        }
     }
 
     func exportOnRing(withPassword password: String) -> Completable {
@@ -869,7 +934,7 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func deviceRevocationEnded(for account: String, state: Int, deviceId: String) {
-        reloadAccounts()
+        // reloadAccounts()
         var event = ServiceEvent(withEventType: .deviceRevocationEnded)
         event.addEventInput(.id, value: account)
         event.addEventInput(.state, value: state)

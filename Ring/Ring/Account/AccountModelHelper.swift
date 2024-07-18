@@ -96,6 +96,17 @@ struct AccountModelHelper {
     }
 
     /**
+     Get current account device
+
+     - Returns: the  account device id as a String.
+     */
+    func getCurrentDevice() -> String {
+        guard let details = self.account.volatileDetails else { return "" }
+        return (details
+                    .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountDeviceId)))
+    }
+
+    /**
      Getter exposing the error state of the account.
 
      - Returns: true if the account is considered as being in error, false otherwise.
