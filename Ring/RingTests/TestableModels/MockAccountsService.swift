@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2016-2019 Savoir-faire Linux Inc.
- *
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Copyright (C) 2024 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,14 +15,13 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
+import Foundation
+@testable import Ring
 
-@objc
-protocol AccountAdapterDelegate {
+class MockAccountsService: AccountsService {
+    var mockAccountsId: [String]?
 
-    func accountsChanged()
-    func registrationStateChanged(with response: RegistrationResponse)
-    func knownDevicesChanged(for account: String, devices: [String: String])
-    func exportOnRingEnded(for account: String, state: Int, pin: String)
-    func deviceRevocationEnded(for account: String, state: Int, deviceId: String)
-    func migrationEnded(for account: String, status: String)
+    override func getAccountsId() -> [String]? {
+        return mockAccountsId
+    }
 }
