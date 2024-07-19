@@ -68,7 +68,7 @@ class EditProfileViewModel {
                     return name
                 }
                 if let account = self.accountService.currentAccount {
-                    let details = self.accountService.getAccountDetails(fromAccountId: account.id)
+                    guard var details = account.details else { return "" }
                     let name = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .displayName))
                     if !name.isEmpty {
                         self.name = name
@@ -106,7 +106,7 @@ class EditProfileViewModel {
            let imageData = image.convertToData(ofMaxSize: 40000) {
             photo = imageData.base64EncodedString()
         }
-        let details = self.accountService.getAccountDetails(fromAccountId: account.id)
+        guard var details = account.details else { return }
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName), withValue: self.name)
         account.details = details
         self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
