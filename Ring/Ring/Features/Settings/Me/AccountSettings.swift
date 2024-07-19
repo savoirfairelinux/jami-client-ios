@@ -73,20 +73,21 @@ class AccountSettings: ObservableObject {
 
     private func getBoolState(for key: ConfigKey) -> Bool {
         let property = ConfigKeyModel(withKey: key)
-        let stringValue = accountService.getCurrentStringValue(property: property, accountId: account.id)
+        let stringValue = AccountModelHelper(withAccount: self.account).getCurrentStringValue(property: property)
         return stringValue.boolValue
     }
 
     private func getStringState(for key: ConfigKey) -> String {
         let property = ConfigKeyModel(withKey: key)
-        return accountService.getCurrentStringValue(property: property, accountId: account.id)
+        return AccountModelHelper(withAccount: self.account).getCurrentStringValue(property: property)
     }
 
     func enableUpnp(enable: Bool) {
         if self.upnpEnabled == enable {
             return
         }
-        self.accountService.enableUpnp(enable: enable, accountId: account.id)
+        let property = ConfigKeyModel(withKey: ConfigKey.accountUpnpEnabled)
+        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
         self.upnpEnabled = enable
     }
 
@@ -94,7 +95,8 @@ class AccountSettings: ObservableObject {
         if self.turnEnabled == enable {
             return
         }
-        self.accountService.enableTurn(enable: enable, accountId: account.id)
+        let property = ConfigKeyModel(withKey: ConfigKey.turnEnable)
+        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
         self.turnEnabled = enable
     }
 
@@ -106,7 +108,7 @@ class AccountSettings: ObservableObject {
 // MARK: - Jami account
 extension AccountSettings {
     private func setUPJamiParameters() {
-        self.proxyEnabled = self.accountService.proxyEnabled(for: self.account.id)
+        self.proxyEnabled = self.getBoolState(for: .proxyEnabled)
         self.proxyListUrl = self.getStringState(for: ConfigKey.dhtProxyListUrl)
         self.proxyListEnabled = self.getBoolState(for: ConfigKey.proxyListEnabled)
         self.proxyAddress = self.account.proxy
@@ -120,7 +122,8 @@ extension AccountSettings {
         if self.callsFromUnknownContacts == enable {
             return
         }
-        self.accountService.enableCallsFromUnknownContacts(enable: enable, accountId: account.id)
+        let property = ConfigKeyModel(withKey: ConfigKey.dhtPublicIn)
+        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
         self.callsFromUnknownContacts = enable
     }
 
@@ -137,7 +140,8 @@ extension AccountSettings {
         if self.peerDiscovery == enable {
             return
         }
-        self.accountService.enablePeerDiscovery(enable: enable, accountId: account.id)
+        let property = ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery)
+        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
         self.peerDiscovery = enable
     }
 
@@ -149,8 +153,9 @@ extension AccountSettings {
         if !self.accountService.hasAccountWithProxyEnabled() && enable == true {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
         }
-        self.accountService.changeProxyStatus(accountID: account.id, enable: enable)
-        self.proxyEnabled = self.accountService.proxyEnabled(for: self.account.id)
+        let property = ConfigKeyModel(withKey: ConfigKey.proxyEnabled)
+        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
+        self.proxyEnabled = self.getBoolState(for: .proxyEnabled)
 
         // Unregister VOIP Push notifications if needed
         if !self.accountService.hasAccountWithProxyEnabled() {
@@ -176,7 +181,8 @@ extension AccountSettings {
     }
 
     func saveProxyAddress() {
-        self.accountService.setProxyAddress(accountID: account.id, proxy: self.proxyAddress)
+        let property = ConfigKeyModel(withKey: ConfigKey.proxyServer)
+        self.accountService.setAccountProperty(property: property, value: self.proxyAddress, accountId: account.id)
     }
 
     func saveProxyListUrl() {
@@ -195,7 +201,7 @@ extension AccountSettings {
 
     func getSRTPEnabled() -> Bool {
         let property = ConfigKeyModel(withKey: .srtpKeyExchange)
-        let stringValue = accountService.getCurrentStringValue(property: property, accountId: account.id)
+        let stringValue = AccountModelHelper(withAccount: self.account).getCurrentStringValue(property: property)
         return stringValue == "sdes"
     }
 
@@ -214,7 +220,8 @@ extension AccountSettings {
 
     func enableaAtoregister(enable: Bool) {
         if self.autoRegistrationEnabled == enable { return }
-        self.accountService.enableKeepAlive(enable: enable, accountId: account.id)
+        let property = ConfigKeyModel(withKey: ConfigKey.keepAliveEnabled)
+        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
         self.autoRegistrationEnabled = enable
     }
 }

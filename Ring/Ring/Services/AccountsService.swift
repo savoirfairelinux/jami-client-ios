@@ -860,6 +860,108 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    // MARK: Push Notifications
+
+    func setPushNotificationToken(token: String) {
+        self.accountAdapter.setPushNotificationToken(token)
+    }
+
+    func setPushNotificationTopic(topic: String) {
+        self.accountAdapter.setPushNotificationTopic(topic)
+    }
+
+    func pushNotificationReceived(data: [String: Any]) {
+        var notificationData = [String: String]()
+        for key in data.keys {
+            if let value = data[key] {
+                let valueString = String(describing: value)
+                let keyString = String(describing: key)
+                notificationData[keyString] = valueString
+            }
+        }
+        self.accountAdapter.pushNotificationReceived("", message: notificationData)
+    }
+
+    func setAccountsActive(active: Bool) {
+        self.accountAdapter.setAccountsActive(active)
+    }
+
+    func setAccountActive(active: Bool, accountId: String) {
+        self.accountAdapter.setAccountActive(accountId, active: active)
+    }
+}
+
+// MARK: - Private daemon wrappers
+extension AccountsService {
+
+    private func buildAccountFromDaemon(accountId id: String) throws -> AccountModel {
+        let accountModel = AccountModel(withAccountId: id)
+        accountModel.details = self.getAccountDetails(fromAccountId: id)
+        accountModel.volatileDetails = self.getVolatileAccountDetails(fromAccountId: id)
+        accountModel.devices = self.getKnownRingDevices(fromAccountId: id)
+        do {
+            let credentialDetails = try self.getAccountCredentials(fromAccountId: id)
+            accountModel.credentialDetails.removeAll()
+            accountModel.credentialDetails.append(contentsOf: credentialDetails)
+        } catch {
+            throw error
+        }
+        return accountModel
+    }
+}
+
+// MARK: - configurations settings
+extension AccountsService {
+
+    func hasAccountWithProxyEnabled() -> Bool {
+        for account in self.accounts {
+            let accountDetails = self.getAccountDetails(fromAccountId: account.id)
+            if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) == "true" {
+                return true
+            }
+        }
+        return false
+    }
+
+    func enableSRTP(enable: Bool, accountId: String) {
+        let newValue = enable ? "sdes" : ""
+        let property = ConfigKeyModel(withKey: ConfigKey.srtpKeyExchange)
+        self.setAccountProperty(property: property, value: newValue, accountId: accountId)
+    }
+
+    func setTurnSettings(accountId: String, server: String, username: String, password: String, realm: String) {
+        guard let account = self.getAccount(fromAccountId: accountId),
+              var details = account.details else { return }
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnServer), withValue: server)
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnUsername), withValue: username)
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnPassword), withValue: password)
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnRealm), withValue: realm)
+        self.setAccountDetails(forAccountId: accountId, withDetails: details)
+        account.details = details
+    }
+
+    func switchAccountPropertyTo(state: Bool, accountId: String, property: ConfigKeyModel) {
+        guard let account = self.getAccount(fromAccountId: accountId),
+              var accountDetails = account.details else { return }
+        guard accountDetails.get(withConfigKeyModel: property) != state.toString() else { return }
+        accountDetails.set(withConfigKeyModel: property, withValue: state.toString())
+        self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
+        account.details = accountDetails
+    }
+
+    func setAccountProperty(property: ConfigKeyModel, value: String, accountId: String) {
+        guard let account = self.getAccount(fromAccountId: accountId),
+              var accountDetails = account.details else { return }
+        if accountDetails.get(withConfigKeyModel: property) == value { return }
+        accountDetails.set(withConfigKeyModel: property, withValue: value)
+        self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
+        account.details = accountDetails
+    }
+}
+
+// MARK: - devices management
+extension AccountsService {
+
     func knownDevicesChanged(for accountId: String, devices: [String: String]) {
         print("[account]: \(accountId) - knownDevicesChanged, devices count: \(devices.count)")
         guard let account = self.getAccount(fromAccountId: accountId) else { return }
@@ -935,157 +1037,6 @@ class AccountsService: AccountAdapterDelegate {
         self.responseStream.onNext(event)
     }
 
-    // MARK: Push Notifications
-
-    func setPushNotificationToken(token: String) {
-        self.accountAdapter.setPushNotificationToken(token)
-    }
-
-    func setPushNotificationTopic(topic: String) {
-        self.accountAdapter.setPushNotificationTopic(topic)
-    }
-
-    func pushNotificationReceived(data: [String: Any]) {
-        var notificationData = [String: String]()
-        for key in data.keys {
-            if let value = data[key] {
-                let valueString = String(describing: value)
-                let keyString = String(describing: key)
-                notificationData[keyString] = valueString
-            }
-        }
-        self.accountAdapter.pushNotificationReceived("", message: notificationData)
-    }
-
-    func getCurrentProxyState(accountID: String) -> Bool {
-        var proxyEnabled = false
-        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-        if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) == "true" {
-            proxyEnabled = true
-        }
-        return proxyEnabled
-    }
-
-    func changeProxyStatus(accountID: String, enable: Bool) {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-        if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) != enable.toString() {
-            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled), withValue: enable.toString())
-            self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
-            var event = ServiceEvent(withEventType: .proxyEnabled)
-            event.addEventInput(.state, value: enable)
-            event.addEventInput(.accountId, value: accountID)
-            self.responseStream.onNext(event)
-        }
-    }
-
-    func setProxyAddress(accountID: String, proxy: String) {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-        if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer)) == proxy {
-            return
-        }
-        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
-        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
-    }
-
-    func hasAccountWithProxyEnabled() -> Bool {
-        for account in self.accounts {
-            let accountDetails = self.getAccountDetails(fromAccountId: account.id)
-            if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) == "true" {
-                return true
-            }
-        }
-        return false
-    }
-
-    func proxyEnabled(for accountId: String) -> Bool {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
-        if accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyEnabled)) == "true" {
-            return true
-        }
-        return false
-    }
-
-    func isJams(for accountId: String) -> Bool {
-        guard let account = self.getAccount(fromAccountId: accountId) else { return false }
-        return account.isJams
-    }
-
-    func enableAccount(enable: Bool, accountId: String) {
-        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.accountEnable))
-    }
-
-    func enablePeerDiscovery(enable: Bool, accountId: String) {
-        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery))
-    }
-
-    func enableTurn(enable: Bool, accountId: String) {
-        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.turnEnable))
-    }
-
-    func enableUpnp(enable: Bool, accountId: String) {
-        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.accountUpnpEnabled))
-    }
-
-    func enableSRTP(enable: Bool, accountId: String) {
-        let newValue = enable ? "sdes" : ""
-        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
-        let property = ConfigKeyModel(withKey: ConfigKey.srtpKeyExchange)
-        guard accountDetails.get(withConfigKeyModel: property) != newValue else { return }
-        accountDetails.set(withConfigKeyModel: property, withValue: newValue)
-        self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
-    }
-
-    func enableCallsFromUnknownContacts(enable: Bool, accountId: String) {
-        let newValue = "\(enable)"
-        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
-        let property = ConfigKeyModel(withKey: ConfigKey.dhtPublicIn)
-        guard accountDetails.get(withConfigKeyModel: property) != newValue else { return }
-        accountDetails.set(withConfigKeyModel: property, withValue: newValue)
-        self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
-    }
-
-    func getCurrentStringValue(property: ConfigKeyModel, accountId: String) -> String {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
-        return accountDetails.get(withConfigKeyModel: property)
-    }
-
-    func setTurnSettings(accountId: String, server: String, username: String, password: String, realm: String) {
-        let details = self.getAccountDetails(fromAccountId: accountId)
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnServer), withValue: server)
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnUsername), withValue: username)
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnPassword), withValue: password)
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnRealm), withValue: realm)
-        self.setAccountDetails(forAccountId: accountId, withDetails: details)
-    }
-
-    func enableKeepAlive(enable: Bool, accountId: String) {
-        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.keepAliveEnabled))
-    }
-
-    func switchAccountPropertyTo(state: Bool, accountId: String, property: ConfigKeyModel) {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
-        guard accountDetails.get(withConfigKeyModel: property) != state.toString() else { return }
-        accountDetails.set(withConfigKeyModel: property, withValue: state.toString())
-        self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
-    }
-
-    func setAccountProperty(property: ConfigKeyModel, value: String, accountId: String) {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
-        if accountDetails.get(withConfigKeyModel: property) == value { return }
-        accountDetails.set(withConfigKeyModel: property, withValue: value)
-        self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
-    }
-
-    func setAccountsActive(active: Bool) {
-        self.accountAdapter.setAccountsActive(active)
-    }
-
-    func setAccountActive(active: Bool, accountId: String) {
-        self.accountAdapter.setAccountActive(accountId, active: active)
-    }
-
-    // MARK: - observable account data
-
     func devicesObservable(account: AccountModel) -> Observable<[DeviceModel]> {
         let accountDevices: Observable<[DeviceModel]> = Observable.just(account.devices)
         let newDevice: Observable<[DeviceModel]> = self
@@ -1098,24 +1049,5 @@ class AccountsService: AccountAdapterDelegate {
                 return account.devices
             })
         return accountDevices.concat(newDevice)
-    }
-}
-
-// MARK: - Private daemon wrappers
-extension AccountsService {
-
-    private func buildAccountFromDaemon(accountId id: String) throws -> AccountModel {
-        let accountModel = AccountModel(withAccountId: id)
-        accountModel.details = self.getAccountDetails(fromAccountId: id)
-        accountModel.volatileDetails = self.getVolatileAccountDetails(fromAccountId: id)
-        accountModel.devices = self.getKnownRingDevices(fromAccountId: id)
-        do {
-            let credentialDetails = try self.getAccountCredentials(fromAccountId: id)
-            accountModel.credentialDetails.removeAll()
-            accountModel.credentialDetails.append(contentsOf: credentialDetails)
-        } catch {
-            throw error
-        }
-        return accountModel
     }
 }
