@@ -158,12 +158,7 @@ struct SmartListContentView: View {
         if !isSearchBarActive {
             VStack {
                 if isShowingTopView {
-                    HStack {
-                        actionItem(icon: "qrcode", title: L10n.Smartlist.newContact, action: { isShowingScanner.toggle() })
-                        Spacer()
-                        actionItem(icon: "person.2", title: L10n.Smartlist.newSwarm, action: model.createSwarm)
-                    }
-                    .hideRowSeparator()
+                    newChatOptions
                 }
             }
             .padding(.bottom)
@@ -171,6 +166,15 @@ struct SmartListContentView: View {
             .hideRowSeparator()
             .transition(.opacity)
         }
+    }
+
+    @ViewBuilder private var newChatOptions: some View {
+        HStack {
+            actionItem(icon: "qrcode", title: L10n.Smartlist.newContact, action: { isShowingScanner.toggle() })
+            Spacer()
+            actionItem(icon: "person.2", title: L10n.Smartlist.newSwarm, action: model.createSwarm)
+        }
+        .hideRowSeparator()
     }
 
     private func actionItem(icon: String, title: String, action: @escaping () -> Void) -> some View {
@@ -214,16 +218,22 @@ struct SmartListContentView: View {
     }
 
     @ViewBuilder private var publicDirectorySearchView: some View {
-        if isSearchBarActive && !model.searchQuery.isEmpty {
+        if isSearchBarActive {
             VStack(alignment: .leading) {
-                Text(model.publicDirectoryTitle)
-                    .fontWeight(.semibold)
-                    .hideRowSeparator()
-                    .padding(.top)
-                searchResultView
-                    .hideRowSeparator()
-                    .padding(.bottom)
-                    .padding(.top, 3)
+                if mode == .smartList && !model.isSipAccount() {
+                    newChatOptions
+                        .padding(.vertical, 10)
+                }
+                if !model.searchQuery.isEmpty {
+                    Text(model.publicDirectoryTitle)
+                        .fontWeight(.semibold)
+                        .hideRowSeparator()
+                        .padding(.top)
+                    searchResultView
+                        .hideRowSeparator()
+                        .padding(.bottom)
+                        .padding(.top, 3)
+                }
             }
         }
     }
