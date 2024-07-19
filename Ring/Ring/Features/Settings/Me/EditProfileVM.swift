@@ -47,7 +47,7 @@ class EditProfileVM: ObservableObject, AvatarViewDataModel {
            let imageData = image.convertToData(ofMaxSize: 40000) {
             photo = imageData.base64EncodedString()
         }
-        let details = self.accountService.getAccountDetails(fromAccountId: account.id)
+        guard var details = self.account.details else { return }
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName), withValue: self.profileName)
         account.details = details
         self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)

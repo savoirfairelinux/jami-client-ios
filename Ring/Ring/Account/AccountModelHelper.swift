@@ -107,6 +107,16 @@ struct AccountModelHelper {
     }
 
     /**
+     Get the account property
+
+     - Returns: the  account property as a String.
+     */
+    func getCurrentStringValue(property: ConfigKeyModel) -> String {
+        guard let details = self.account.details else { return "" }
+        return details.get(withConfigKeyModel: property)
+    }
+
+    /**
      Getter exposing the error state of the account.
 
      - Returns: true if the account is considered as being in error, false otherwise.
