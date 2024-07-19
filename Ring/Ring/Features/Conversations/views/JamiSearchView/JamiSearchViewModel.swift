@@ -266,7 +266,7 @@ class JamiSearchViewModel {
          already exists to get results with similar names. There why it is done before
          checking isConversationExists.
          */
-        if self.accountsService.isJams(for: currentAccount.id) {
+        if currentAccount.isJams {
             self.performLookup(searchQuery: searchQuery, accounId: currentAccount.id, isJams: true)
             return
         }
