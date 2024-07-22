@@ -46,7 +46,7 @@
 "global.search" = "Szukanie";
 "global.donate" = "Przekaż darowiznę";
 "global.deleteMessage" = "Usuń wiadomość";
-"global.deleteFile" = "Delete file from device";
+"global.deleteFile" = "Skasuj plik z urządzenia";
 "global.editMessage" = "Edycja wiadomości";
 "global.editing" = "Editing";
 "global.create" = "Stwórz";
@@ -119,7 +119,7 @@
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Konta";
 "smartlist.disableDonation" = "Nie w tej chwili";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.donationExplanation" = "Jeśli lubisz korzystać z Jami i wierzysz w naszą misję, czy mógłbyś przekazać darowiznę?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
@@ -142,7 +142,7 @@
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "skasował wiadomość";
 
 //Invitations
 "invitations.noInvitations" = "Brak zaproszeń";
@@ -345,7 +345,7 @@
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
-"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationTitle" = "Na innym urządzeniu";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "Powiadomienia";
@@ -450,7 +450,7 @@
 "generalSettings.limitLocationSharingDuration" = "Ogranicz czas trwania udostępniania lokalizacji";
 "generalSettings.locationSharingDuration" = "Okres trwania udziałów pozycyjnych";
 "generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.enableDonationCampaign" = "Włącz kampanię darowizn";
 
 //Log View
 "logView.title" = "Diagnostyka";
