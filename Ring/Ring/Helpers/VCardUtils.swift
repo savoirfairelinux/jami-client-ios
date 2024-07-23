@@ -132,16 +132,24 @@ class VCardUtils {
     }
 
     class func parseProfile(from string: String) -> Profile? {
-        let lines = string.split(whereSeparator: \.isNewline)
+        let lines = string.split(separator: "\n")
+
+        func parseLine(_ line: Substring) -> (key: Substring, value: Substring)? {
+            guard let colonIndex = line.firstIndex(of: ":") else { return nil }
+            let key = line[..<colonIndex]
+            let value = line[line.index(after: colonIndex)...]
+            return (key, value)
+        }
+
         var alias = "", avatar = "", profileUri = ""
         for line in lines {
-            if line.starts(with: "PHOTO") {
-                avatar = line.components(separatedBy: ":").last ?? ""
-            }
-            if line.starts(with: "FN") {
-                alias = line.components(separatedBy: ":").last ?? ""
-            }
-            if line.starts(with: "TEL;other") {
+            if line.starts(with: "PHOTO"),
+               let (_, value) = parseLine(line) {
+                avatar = String(value)
+            } else if line.starts(with: "FN"),
+                      let (_, value) = parseLine(line) {
+                alias = String(value)
+            } else if line.starts(with: "TEL;other") {
                 profileUri = line.replacingOccurrences(of: "TEL;other:", with: "")
             }
         }
@@ -155,7 +163,9 @@ class VCardUtils {
     }
 
     class func parseToProfile(filePath: String) -> Profile? {
-        guard let profileStr = try? String(contentsOfFile: filePath, encoding: .utf8) else { return nil }
+        guard let profileStr = try? String(contentsOfFile: filePath, encoding: .utf8) else {
+            return nil
+        }
         return parseProfile(from: profileStr)
     }
 
