@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,11 +22,12 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login" translatesAutoresizingMaskIntoConstraints="NO" id="5w4-lf-PEm">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jami_gnupackage" translatesAutoresizingMaskIntoConstraints="NO" id="kP1-oe-ZEx">
-                                <rect key="frame" x="-641.66666666666663" y="281" width="1658.3333333333333" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jamiIcon" translatesAutoresizingMaskIntoConstraints="NO" id="kP1-oe-ZEx">
+                                <rect key="frame" x="127.66666666666669" y="271" width="120" height="120"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="bZq-5y-hTA"/>
+                                    <constraint firstAttribute="width" constant="120" id="2yo-Xz-Mt6"/>
+                                    <constraint firstAttribute="height" constant="120" id="ao3-Lz-Kau"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -47,6 +48,6 @@
     </scenes>
     <resources>
         <image name="background_login" width="786" height="1704"/>
-        <image name="jami_gnupackage" width="1658.4000244140625" height="552.79998779296875"/>
+        <image name="jamiIcon" width="66.666664123535156" height="63.333332061767578"/>
     </resources>
 </document>
