@@ -142,16 +142,16 @@ class VCardUtils {
         }
 
         string.enumerateLines { line, _ in
-            guard let (key, value) = parseLine(line) else  { return }
+            guard let (key, value) = parseLine(line) else { return }
             switch true {
-                case key.hasPrefix("PHOTO"):
-                    avatar = String(value)
-                case key == "FN":
-                    alias = String(value)
-                case key == "TEL;other":
-                    profileUri = String(value)
-                default:
-                    break
+            case key.hasPrefix("PHOTO"):
+                avatar = String(value)
+            case key == "FN":
+                alias = String(value)
+            case key == "TEL;other":
+                profileUri = String(value)
+            default:
+                break
             }
         }
         let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip

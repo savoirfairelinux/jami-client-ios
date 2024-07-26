@@ -132,6 +132,25 @@ class AccountConfigModel {
     func set(withConfigKeyModel configKeyModel: ConfigKeyModel, withValue value: String) {
         self.configValues[configKeyModel] = value
     }
+
+    /**
+     Update values from dictionary.
+
+     The keys of the configuration elements must be known from Ring to be taken in account.
+
+     - Parameter details: an optional collection of configuration elements
+     */
+    func update(withDetails details: [String: String]) {
+        for (key, value) in details {
+            if let confKey = ConfigKey(rawValue: key) {
+                let configKeyModel = ConfigKeyModel(withKey: confKey)
+                configValues.updateValue(value, forKey: configKeyModel)
+            } else {
+                // ~ The key given in parameter is not known from Ring.
+                log.warning("Can't find key: \(key)")
+            }
+        }
+    }
 }
 
 extension AccountConfigModel {

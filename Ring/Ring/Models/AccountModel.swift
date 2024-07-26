@@ -141,4 +141,22 @@ class AccountModel: Equatable {
         return lhs.id == rhs.id
     }
 
+    func updateDetails(dictionary: [String: String]) {
+        let accountDetails = self.details
+        accountDetails?.update(withDetails: dictionary)
+        self.details = accountDetails
+    }
+
+    func updateVolatileDetails(dictionary: [String: String]) {
+        let volatileDetails = self.volatileDetails
+        volatileDetails?.update(withDetails: dictionary)
+        self.volatileDetails = volatileDetails
+    }
+
+    func setEnable(enable: Bool) {
+        let property = ConfigKeyModel(withKey: ConfigKey.accountEnable)
+        let accountDetails = self.details
+        accountDetails?.set(withConfigKeyModel: property, withValue: enable.toString())
+        self.details = accountDetails
+    }
 }
