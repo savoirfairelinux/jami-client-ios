@@ -84,4 +84,6 @@
                   newPassword:(NSString *)newPassword;
 - (void)setAccountsActive:(BOOL) active;
 
+- (void)enableAccount:(NSString *)accountId active:(BOOL)active;
+
 @end

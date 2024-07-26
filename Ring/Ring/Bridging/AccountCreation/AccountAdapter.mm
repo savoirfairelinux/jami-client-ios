@@ -183,6 +183,10 @@ static id <AccountAdapterDelegate> _delegate;
     return revokeDevice(std::string([accountID UTF8String]), std::string([deviceId UTF8String]), "password", std::string([password UTF8String]));
 }
 
+- (void)enableAccount:(NSString *)accountId active:(BOOL)active {
+    sendRegister(std::string([accountId UTF8String]), active);
+}
+
 #pragma mark -
 
 #pragma mark AccountAdapterDelegate

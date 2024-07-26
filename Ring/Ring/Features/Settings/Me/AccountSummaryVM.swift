@@ -161,8 +161,7 @@ extension AccountSummaryVM {
     func enableAccount(enable: Bool) {
         if self.accountEnabled == enable { return }
         accountEnabled = enable
-        let property = ConfigKeyModel(withKey: ConfigKey.accountEnable)
-        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
+        self.accountService.enableAccount(accountId: account.id, enable: enable)
     }
 
     func subscribeStatus() {
