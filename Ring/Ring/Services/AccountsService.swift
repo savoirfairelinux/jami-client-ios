@@ -34,11 +34,13 @@ enum DeviceRevocationState: Int {
     case unknownDevice = 2
 }
 
-enum AddAccountError: Error {
-    case templateNotConform
-    case unknownError
-    case noAccountFound
-}
+//enum AddAccountError: Error {
+//    case templateNotConform
+//    case unknownError
+//    case noAccountFound
+//    case networkError
+//    case authError
+//}
 
 enum NotificationName: String {
     case enablePushNotifications
@@ -263,247 +265,6 @@ class AccountsService: AccountAdapterDelegate {
         return self.dbManager.accountProfile(for: accountId)
     }
 
-    /// Adds a new Jami account.
-    ///
-    /// - Parameters:
-    ///   - username: an optional username for the new account
-    ///   - password: optional password for the new account
-    ///   - profileName: optional profile name for the new account
-    ///   - enable: state for push notifications
-    /// - Returns: an observable of an AccountModel: the created one
-    func addJamiAccount(username: String?, password: String, profileName: String, enable: Bool) -> Observable<AccountModel> {
-        // ~ Single asking the daemon to add a new account with the associated metadata
-        var newAccountId = ""
-        let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
-            do {
-                var details = try self.getJamiInitialAccountDetails()
-                if let username = username {
-                    details.updateValue(username, forKey: ConfigKey.accountRegisteredName.rawValue)
-                }
-                if !password.isEmpty {
-                    details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
-                }
-                if !profileName.isEmpty {
-                    details.updateValue(profileName, forKey: ConfigKey.displayName.rawValue)
-                }
-                details.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
-                if let testServer = TestEnvironment.shared.nameServerURI {
-                    details.updateValue(testServer, forKey: ConfigKey.ringNsURI.rawValue)
-                }
-
-                guard let accountId = self.accountAdapter.addAccount(details) else {
-                    throw AddAccountError.unknownError
-                }
-                newAccountId = accountId
-                let account = try self.buildAccountFromDaemon(accountId: accountId)
-                single(.success(account))
-            } catch {
-                single(.failure(error))
-            }
-            return Disposables.create {
-            }
-        })
-
-        // ~ Filter the daemon signals to isolate the "account created" one.
-        let filteredDaemonSignals = self.sharedResponseStream
-            .filter({ (serviceEvent) -> Bool in
-                if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId { return false }
-                if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
-                    throw AccountCreationError.generic
-                } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
-                    throw AccountCreationError.network
-                }
-                let isRegistrationStateChanged = serviceEvent.eventType == ServiceEventType.registrationStateChanged
-                let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
-                let notRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Unregistered
-                return isRegistrationStateChanged && (isRegistered || notRegistered)
-            })
-
-        // ~ Make sure that we have the correct account added in the daemon, and return it.
-        return Observable
-            .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, serviceEvent) -> AccountModel in
-                guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
-                    throw AddAccountError.unknownError
-                }
-                // create database for account
-                if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
-                    throw AddAccountError.unknownError
-                }
-                return accountModel
-            }
-            .take(1)
-            .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
-                guard let self = self else { return Observable.empty() }
-                self.currentAccount = accountModel
-                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
-                return self.getAccountObservable(accountId: accountModel.id)
-            })
-    }
-
-    private func getAccountObservable(accountId: String) -> Observable<AccountModel> {
-        return Observable<AccountModel>.create { [weak self] observer in
-            guard let self = self else {
-                observer.onError(AddAccountError.unknownError)
-                return Disposables.create()
-            }
-            if let account = self.getAccount(fromAccountId: accountId) {
-                observer.onNext(account)
-                observer.onCompleted()
-            } else {
-                observer.onError(AddAccountError.noAccountFound)
-            }
-            return Disposables.create()
-        }
-    }
-
-    func addSipAccount(userName: String,
-                       password: String,
-                       sipServer: String) -> Bool {
-        do {
-            var accountDetails = try self.getInitialAccountDetails(accountType: AccountType.sip.rawValue)
-            accountDetails.updateValue(userName, forKey: ConfigKey.accountUsername.rawValue)
-            accountDetails.updateValue(sipServer, forKey: ConfigKey.accountHostname.rawValue)
-            accountDetails.updateValue(password, forKey: ConfigKey.accountPassword.rawValue)
-            guard let account = self.accountAdapter.addAccount(accountDetails) else { return false }
-            _ = try self.dbManager.createDatabaseForAccount(accountId: account, createFolder: true)
-            guard let newAccount = self.getAccount(fromAccountId: account) else { return false }
-            let accountUri = AccountModelHelper.init(withAccount: newAccount).uri ?? ""
-            _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: account, accountURI: accountUri)
-            self.currentAccount = newAccount
-            UserDefaults.standard.set(account, forKey: self.selectedAccountID)
-            return true
-        } catch {
-            return false
-        }
-    }
-
-    func linkToJamiAccount(withPin pin: String, password: String, enable: Bool) -> Observable<AccountModel> {
-        var newAccountId = ""
-        // ~ Single asking the daemon to add a new account with the associated metadata
-        let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
-            do {
-                var details = try self.getJamiInitialAccountDetails()
-                details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
-                details.updateValue(pin, forKey: ConfigKey.archivePIN.rawValue)
-                details.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
-                guard let accountId = self.accountAdapter.addAccount(details) else {
-                    throw AddAccountError.unknownError
-                }
-                newAccountId = accountId
-                let account = try self.buildAccountFromDaemon(accountId: accountId)
-                single(.success(account))
-            } catch {
-                single(.failure(error))
-            }
-            return Disposables.create {
-            }
-        })
-        // ~ Filter the daemon signals to isolate the "account created" one.
-        let filteredDaemonSignals = self.sharedResponseStream.filter { (serviceEvent) -> Bool in
-            if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId { return false }
-            if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
-                throw AccountCreationError.linkError
-            } else if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
-                throw AccountCreationError.network
-            }
-            let isRegistrationStateChanged = serviceEvent.eventType == ServiceEventType.registrationStateChanged
-            let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
-            return isRegistrationStateChanged && isRegistered
-        }
-        // ~ Make sure that we have the correct account added in the daemon, and return it.
-        return Observable
-            .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, serviceEvent) -> AccountModel in
-                guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
-                    throw AddAccountError.unknownError
-                }
-                // create database for account
-                if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
-                    throw AddAccountError.unknownError
-                }
-                return accountModel
-            }
-            .take(1)
-            .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
-                guard let self = self else { return Observable.empty() }
-                self.currentAccount = accountModel
-                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
-                return self.getAccountObservable(accountId: accountModel.id)
-            })
-    }
-
-    enum ConnectAccountState: String {
-        case initializinzg
-        case created
-        case error
-        case networkError
-    }
-
-    func connectToAccountManager(username: String, password: String, serverUri: String, emableNotifications: Bool) -> Observable<AccountModel> {
-        let accountState = BehaviorRelay<ConnectAccountState>(value: ConnectAccountState.initializinzg)
-        let newAccountId = BehaviorRelay<String>(value: "")
-        self.sharedResponseStream
-            .subscribe(onNext: { (event) in
-                if event.getEventInput(ServiceEventInput.registrationState) == Initializing {
-                    return
-                }
-                if event.getEventInput(ServiceEventInput.registrationState) == ErrorNetwork {
-                    accountState.accept(ConnectAccountState.networkError)
-                    newAccountId.accept("")
-                } else if event.eventType == ServiceEventType.registrationStateChanged,
-                          event.getEventInput(ServiceEventInput.registrationState) == Registered {
-                    accountState.accept(ConnectAccountState.created)
-                } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric ||
-                            event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth ||
-                            event.getEventInput(ServiceEventInput.registrationState) == ErrorNeedMigration {
-                    accountState.accept(ConnectAccountState.error)
-                    newAccountId.accept("")
-                }
-            }, onError: { (_) in
-            })
-            .disposed(by: self.disposeBag)
-
-        let result = Observable
-            .combineLatest(accountState.asObservable()
-                            .filter({ (state) -> Bool in
-                                state != ConnectAccountState.initializinzg
-                            }),
-                           newAccountId.asObservable()) {(accountState, accountId) -> AccountModel in
-                if accountState == ConnectAccountState.networkError {
-                    throw AccountCreationError.network
-                } else if accountState == ConnectAccountState.error {
-                    throw AccountCreationError.wrongCredentials
-                } else if !accountId.isEmpty && accountState == ConnectAccountState.created {
-                    let account = try self.buildAccountFromDaemon(accountId: accountId)
-                    return account
-                } else {
-                    throw AddAccountError.unknownError
-                }
-            }
-            .take(1)
-            .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
-                guard let self = self else { return Observable.empty() }
-                self.currentAccount = accountModel
-                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
-                return self.getAccountObservable(accountId: accountModel.id)
-            })
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            do {
-                var details = try self.getJamiInitialAccountDetails()
-                details.updateValue(username, forKey: ConfigKey.managerUsername.rawValue)
-                details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
-                details.updateValue(emableNotifications.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
-                details.updateValue(serverUri, forKey: ConfigKey.managerUri.rawValue)
-                guard let accountId = self.accountAdapter.addAccount(details) else {
-                    throw AccountCreationError.wrongCredentials
-                }
-                newAccountId.accept(accountId)
-            } catch {
-            }
-        }
-        return result
-    }
-
     /**
      Gets an account from the list of accounts handled by the application.
 
@@ -638,7 +399,7 @@ class AccountsService: AccountAdapterDelegate {
         let details: NSMutableDictionary = accountAdapter.getAccountTemplate(accountType)
         var accountDetails = details as NSDictionary? as? [String: String] ?? nil
         if accountDetails == nil {
-            throw AddAccountError.templateNotConform
+            throw AccountCreationError.generic
         }
         accountDetails!.updateValue("oversip", forKey: ConfigKey.accountDTMFType.rawValue)
         accountDetails!.updateValue(accountType, forKey: ConfigKey.accountType.rawValue)
@@ -834,24 +595,29 @@ class AccountsService: AccountAdapterDelegate {
         self.responseStream.onNext(event)
     }
 
-    func registrationStateChanged(with response: RegistrationResponse) {
-        guard let account = self.getAccount(fromAccountId: response.accountId) else { return }
+    func registrationStateChanged(for accountId: String, state: String) {
+        guard let account = self.getAccount(fromAccountId: accountId) else { return }
         /*
          Detect when a new account is generated and keys are ready.
          During generation, an account gets the "INITIALIZING" status.
          When keys are generated, the status changes.
          */
-        if account.status == .initializing && response.state != Initializing {
+        guard let newState = AccountState(rawValue: state) else { return }
+        if account.status == .initializing && newState != .initializing {
             self.updateAccountDetails(account: account)
+            var event = ServiceEvent(withEventType: .accountAdded)
+            event.addEventInput(.accountId, value: account.id)
+            self.responseStream.onNext(event)
         }
-
+        
         var event = ServiceEvent(withEventType: .registrationStateChanged)
-        event.addEventInput(.registrationState, value: response.state)
-        event.addEventInput(.accountId, value: response.accountId)
+        event.addEventInput(.registrationState, value: state)
+        event.addEventInput(.accountId, value: accountId)
         self.responseStream.onNext(event)
+        // Check if need account migration.
         if let currentAccount = self.currentAccount,
-           response.state == ErrorNeedMigration,
-           response.accountId == currentAccount.id {
+           newState == .errorNeedMigration,
+           accountId == currentAccount.id {
             needMigrateCurrentAccount.onNext(currentAccount.id)
         }
     }
@@ -1093,5 +859,242 @@ extension AccountsService {
                 return account.devices
             })
         return accountDevices.concat(newDevice)
+    }
+}
+
+// MARK: - account creation
+extension AccountsService {
+    /// Adds a new Jami account.
+    ///
+    /// - Parameters:
+    ///   - username: an optional username for the new account
+    ///   - password: optional password for the new account
+    ///   - pin: pin to link another account
+    ///   - profileName: optional profile name for the new account
+    /// - Returns: an observable of an account id: the created one
+    func addJamiAccount(username: String?,
+                        password: String,
+                        pin: String,
+                        profileName: String) -> Observable<String> {
+        // Observable for initiating account creation
+        let accountCreationObservable = createJamiAccount(username: username,
+                                                          password: password,
+                                                          pin: pin,
+                                                          profileName: profileName)
+
+        // Observable for receiving account state updates
+        let accountStateObservable = accountCreationUpdates()
+
+        return Observable
+            .combineLatest(accountCreationObservable.asObservable(), accountStateObservable.asObservable())
+        // Filter to ensure that we are processing updates for the correct account ID
+            .filter { accountId, stateUpdate in
+                accountId == stateUpdate.accountId
+            }
+            .map { accountId, stateUpdate in
+                (accountId, stateUpdate.state)
+            }
+            .take(1)
+            .flatMap { [weak self] (accountId, state) -> Observable<String> in
+                guard let self = self else { return .error(AccountCreationError.unknown) }
+                if let error = self.handleAccountCreationCompletion(accountId: accountId, state: state) {
+                    return .error(error)
+                } else {
+                    return Observable.just(accountId)
+                }
+            }
+    }
+
+    /// connect to jams server
+    ///
+    /// - Parameters
+    ///   - username
+    ///   - password
+    ///   - serverUri
+    /// - Returns: an observable of an account id: the created one
+
+    func connectToAccountManager(username: String, password: String, serverUri: String) -> Observable<String> {
+        // Observable for initiating account creation
+        let accountCreationObservable = createJamsAccount(username: username,
+                                                          password: password,
+                                                          serverUri: serverUri)
+
+        // Observable for receiving account state updates
+        let accountStateObservable = accountCreationUpdates()
+
+        return Observable
+            .combineLatest(accountCreationObservable.asObservable(), accountStateObservable.asObservable())
+        // Filter to ensure that we are processing updates for the correct account ID
+            .filter { accountId, stateUpdate in
+                accountId == stateUpdate.accountId
+            }
+            .map { accountId, stateUpdate in
+                (accountId, stateUpdate.state)
+            }
+            .take(1)
+            .flatMap { [weak self] (accountId, state) -> Observable<String> in
+                guard let self = self else { return .error(AccountCreationError.unknown) }
+                if let error:AccountCreationError = self.handleAccountCreationCompletion(accountId: accountId, state: state) as? AccountCreationError {
+                    if error == AccountCreationError.network {
+                        return .error(error)
+                    } else {
+                        return .error(AccountCreationError.wrongCredentials)
+                    }
+                } else {
+                    return Observable.just(accountId)
+                }
+            }
+    }
+
+    func addSipAccount(userName: String,
+                       password: String,
+                       sipServer: String) -> Bool {
+        do {
+            var accountDetails = try self.getInitialAccountDetails(accountType: AccountType.sip.rawValue)
+            accountDetails.updateValue(userName, forKey: ConfigKey.accountUsername.rawValue)
+            accountDetails.updateValue(sipServer, forKey: ConfigKey.accountHostname.rawValue)
+            accountDetails.updateValue(password, forKey: ConfigKey.accountPassword.rawValue)
+            guard let account = self.accountAdapter.addAccount(accountDetails) else { return false }
+            _ = try self.dbManager.createDatabaseForAccount(accountId: account, createFolder: true)
+            guard let newAccount = self.getAccount(fromAccountId: account) else { return false }
+            let accountUri = AccountModelHelper.init(withAccount: newAccount).uri ?? ""
+            _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: account, accountURI: accountUri)
+            self.currentAccount = newAccount
+            UserDefaults.standard.set(account, forKey: self.selectedAccountID)
+            return true
+        } catch {
+            return false
+        }
+    }
+
+    private func handleAccountCreationCompletion(accountId: String, state: AccountCreationResult) -> Error? {
+        switch state {
+            case .authError:
+                return AccountCreationError.wrongCredentials
+            case .networkError:
+                return AccountCreationError.network
+            case .generalError, .unknown:
+                return AccountCreationError.unknown
+            case .created:
+                break
+        }
+
+        do {
+            // Create a database for the new account
+            guard try dbManager.createDatabaseForAccount(accountId: accountId) else {
+                return AccountCreationError.unknown
+            }
+        } catch {
+            return error
+        }
+
+        // Retrieve and set the current account
+        if let account = getAccount(fromAccountId: accountId) {
+            currentAccount = account
+        }
+        UserDefaults.standard.set(accountId, forKey: selectedAccountID)
+        return nil
+    }
+
+    private func createJamiAccount(username: String?, password: String, pin: String, profileName: String) -> Single<String> {
+        return Single.create { single in
+            do {
+                var details = try self.getJamiInitialAccountDetails()
+                if let username = username {
+                    details[ConfigKey.accountRegisteredName.rawValue] = username
+                }
+                if !password.isEmpty {
+                    details[ConfigKey.archivePassword.rawValue] = password
+                }
+                if !pin.isEmpty {
+                    details[ConfigKey.archivePIN.rawValue] = pin
+                }
+                if !profileName.isEmpty {
+                    details[ConfigKey.displayName.rawValue] = profileName
+                }
+                details[ConfigKey.proxyEnabled.rawValue] = "true"
+                if let testServer = TestEnvironment.shared.nameServerURI {
+                    details[ConfigKey.ringNsURI.rawValue] = testServer
+                }
+
+                guard let accountId = self.accountAdapter.addAccount(details) else {
+                    throw AccountCreationError.unknown
+                }
+                single(.success(accountId))
+            } catch {
+                single(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
+
+    private func createJamsAccount(username: String, password: String, serverUri: String) -> Single<String> {
+        return Single.create { single in
+            do {
+                var details = try self.getJamiInitialAccountDetails()
+                details.updateValue(username, forKey: ConfigKey.managerUsername.rawValue)
+                details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+                details.updateValue("true", forKey: ConfigKey.proxyEnabled.rawValue)
+                details.updateValue(serverUri, forKey: ConfigKey.managerUri.rawValue)
+                guard let accountId = self.accountAdapter.addAccount(details) else {
+                    throw AccountCreationError.wrongCredentials
+                }
+                single(.success(accountId))
+            } catch {
+                single(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
+
+    enum AccountCreationResult: String {
+        case created
+        case generalError
+        case authError
+        case networkError
+        case unknown
+    }
+
+    struct CreateAccountResponse {
+        var accountId: String
+        var state: AccountCreationResult
+
+        init(accountId: String = "", state: AccountCreationResult = .unknown) {
+            self.accountId = accountId
+            self.state = state
+        }
+    }
+
+    func accountCreationUpdates() -> Observable<CreateAccountResponse> {
+        return self.sharedResponseStream
+            .filter { serviceEvent in
+                return serviceEvent.eventType == .accountAdded || serviceEvent.eventType == .registrationStateChanged
+            }
+            .compactMap { event -> CreateAccountResponse? in
+                guard let accountId: String = event.getEventInput(ServiceEventInput.accountId) else {
+                    return nil
+                }
+
+                if event.eventType == .accountAdded {
+                    return CreateAccountResponse(accountId: accountId, state: .created)
+                }
+
+                guard let stateStr: String = event.getEventInput(ServiceEventInput.registrationState),
+                      let state = AccountState(rawValue: stateStr) else {
+                    return nil
+                }
+                if state.isNetworkError() {
+                    return CreateAccountResponse(accountId: accountId, state: .networkError)
+                }
+                else if state.isAuthError() {
+                    return CreateAccountResponse(accountId: accountId, state: .authError)
+                } else if state.isError() {
+                    return CreateAccountResponse(accountId: accountId, state: .generalError)
+                }
+                return nil
+            }
+            .filter { response in
+                return !response.accountId.isEmpty && response.state != .unknown
+            }
     }
 }

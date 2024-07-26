@@ -44,6 +44,25 @@ enum AccountState: String {
     case errorRequestTimeout = "Request Timeout"
     case errorNeedMigration = "ERROR_NEED_MIGRATION"
     case initializing = "INITIALIZING"
+
+    // check if error status
+    func isError() -> Bool {
+        return self == .error || self == .errorGeneric || self == .errorAuth
+            || self == .errorHost || self == .errorConfStun || self == .errorExistStun
+            || self == .errorServiceUnavailable || self == .errorNotAcceptable
+            || self == .errorRequestTimeout || self == .errorNeedMigration
+    }
+
+    // check if network error status
+    func isNetworkError() -> Bool {
+        return self == .errorNetwork || self == .errorHost || self == .errorServiceUnavailable
+            || self == .errorNotAcceptable || self == .errorRequestTimeout
+    }
+
+    // check if auth error status
+    func isAuthError() -> Bool {
+        return self == .errorAuth
+    }
 }
 
 /**

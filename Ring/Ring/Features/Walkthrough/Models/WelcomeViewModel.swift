@@ -72,21 +72,21 @@ extension WelcomeViewModel {
         self.accountService
             .addJamiAccount(username: name,
                             password: password,
-                            profileName: self.profileName,
-                            enable: true)
-            .subscribe(onNext: { [weak self] account in
-                self?.handleAccountCreationSuccess(account, username: name)
+                            pin: "",
+                            profileName: self.profileName)
+            .subscribe(onNext: { [weak self] accountId in
+                self?.handleAccountCreationSuccess(accountId, username: name)
             }, onError: { [weak self] error in
                 self?.handleAccountCreationError(error)
             })
             .disposed(by: disposeBag)
     }
 
-    private func handleAccountCreationSuccess(_ account: AccountModel, username: String) {
+    private func handleAccountCreationSuccess(_ accountId: String, username: String) {
         self.enablePushNotifications()
-        self.saveProfile(account: account)
+        self.saveProfile(accountId: accountId)
         if !username.isEmpty {
-            self.registerAccountName(for: account, username: username)
+            self.registerAccountName(for: accountId, username: username)
         } else {
             self.accountCreated()
         }
@@ -100,10 +100,10 @@ extension WelcomeViewModel {
         }
     }
 
-    private func registerAccountName(for account: AccountModel,
+    private func registerAccountName(for accountId: String,
                                      username: String) {
         let registerName = nameService
-            .registerNameObservable(withAccount: account.id,
+            .registerNameObservable(withAccount: accountId,
                                     password: "",
                                     name: username)
             .subscribe(onNext: { [weak self] registered in
@@ -157,7 +157,10 @@ extension WelcomeViewModel {
                   object: nil)
     }
 
-    private func saveProfile(account: AccountModel) {
+    private func saveProfile(accountId: String) {
+        guard let account = self.accountService.getAccount(fromAccountId: accountId) else {
+            return
+        }
         let photo = convertProfileImageToBase64()
 
         if photo == nil && profileName.isEmpty {
@@ -166,7 +169,7 @@ extension WelcomeViewModel {
         }
 
         let accountURI = AccountModelHelper(withAccount: account).uri ?? ""
-        profileService.updateAccountProfile(accountId: account.id,
+        profileService.updateAccountProfile(accountId: accountId,
                                             alias: profileName,
                                             photo: photo,
                                             accountURI: accountURI)
@@ -186,17 +189,18 @@ extension WelcomeViewModel {
     func linkDevice(pin: String, password: String) {
         self.creationState = .started
         self.accountService
-            .linkToJamiAccount(withPin: pin,
-                               password: password,
-                               enable: true)
-            .subscribe(onNext: { [weak self] (_) in
-                guard let self = self else { return }
-                self.enablePushNotifications()
-                self.accountCreated()
-            }, onError: { [weak self] (error) in
+            .addJamiAccount(username: "",
+                            password: password,
+                            pin: pin,
+                            profileName: self.profileName)
+            .subscribe(onNext: { [weak self] accountId in
+                                guard let self = self else { return }
+                                self.enablePushNotifications()
+                                self.accountCreated()
+            }, onError: { [weak self] error in
                 self?.handleAccountCreationError(error)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -209,8 +213,7 @@ extension WelcomeViewModel {
         self.accountService
             .connectToAccountManager(username: userName,
                                      password: password,
-                                     serverUri: server,
-                                     emableNotifications: true)
+                                     serverUri: server)
             .subscribe(onNext: { [weak self] (_) in
                 guard let self = self else { return }
                 self.enablePushNotifications()
