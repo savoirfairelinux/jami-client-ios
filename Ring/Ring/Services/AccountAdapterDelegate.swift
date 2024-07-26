@@ -20,11 +20,12 @@
 
 @objc
 protocol AccountAdapterDelegate {
-
     func accountsChanged()
     func registrationStateChanged(with response: RegistrationResponse)
     func knownDevicesChanged(for account: String, devices: [String: String])
     func exportOnRingEnded(for account: String, state: Int, pin: String)
     func deviceRevocationEnded(for account: String, state: Int, deviceId: String)
     func migrationEnded(for account: String, status: String)
+    func accountDetailsChanged(accountId: String, details: [String: String])
+    func accountVoaltileDetailsChanged(accountId: String, details: [String: String])
 }
