@@ -272,7 +272,7 @@ class AccountsService: AccountAdapterDelegate {
     func addJamiAccount(username: String?, password: String, enable: Bool) -> Observable<AccountModel> {
         // ~ Single asking the daemon to add a new account with the associated metadata
         var newAccountId = ""
-        let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
+        let createAccountSingle: Single<String> = Single.create(subscribe: { (single) -> Disposable in
             do {
                 var details = try self.getJamiInitialAccountDetails()
                 if let username = username {
@@ -290,8 +290,7 @@ class AccountsService: AccountAdapterDelegate {
                     throw AddAccountError.unknownError
                 }
                 newAccountId = accountId
-                let account = try self.buildAccountFromDaemon(accountId: accountId)
-                single(.success(account))
+                single(.success(accountId))
             } catch {
                 single(.failure(error))
             }
@@ -316,22 +315,24 @@ class AccountsService: AccountAdapterDelegate {
 
         // ~ Make sure that we have the correct account added in the daemon, and return it.
         return Observable
-            .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, serviceEvent) -> AccountModel in
-                guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
+            .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountId, serviceEvent) -> String in
+                guard accountId == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
                     throw AddAccountError.unknownError
                 }
                 // create database for account
-                if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
+                if try !self.dbManager.createDatabaseForAccount(accountId: accountId) {
                     throw AddAccountError.unknownError
                 }
-                return accountModel
+                return accountId
             }
             .take(1)
-            .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
+            .flatMap({ [weak self] (accountId) -> Observable<AccountModel> in
                 guard let self = self else { return Observable.empty() }
-                self.currentAccount = accountModel
-                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
-                return self.getAccountObservable(accountId: accountModel.id)
+                if let account = self.getAccount(fromAccountId: accountId) {
+                   self.currentAccount = account
+                }
+                UserDefaults.standard.set(accountId, forKey: self.selectedAccountID)
+                return self.getAccountObservable(accountId: accountId)
             })
     }
 
@@ -375,7 +376,7 @@ class AccountsService: AccountAdapterDelegate {
     func linkToJamiAccount(withPin pin: String, password: String, enable: Bool) -> Observable<AccountModel> {
         var newAccountId = ""
         // ~ Single asking the daemon to add a new account with the associated metadata
-        let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
+        let createAccountSingle: Single<String> = Single.create(subscribe: { (single) -> Disposable in
             do {
                 var details = try self.getJamiInitialAccountDetails()
                 details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
@@ -385,8 +386,7 @@ class AccountsService: AccountAdapterDelegate {
                     throw AddAccountError.unknownError
                 }
                 newAccountId = accountId
-                let account = try self.buildAccountFromDaemon(accountId: accountId)
-                single(.success(account))
+                single(.success(accountId))
             } catch {
                 single(.failure(error))
             }
@@ -407,20 +407,20 @@ class AccountsService: AccountAdapterDelegate {
         }
         // ~ Make sure that we have the correct account added in the daemon, and return it.
         return Observable
-            .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, serviceEvent) -> AccountModel in
-                guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
+            .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountId, serviceEvent) -> String in
+                guard accountId == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
                     throw AddAccountError.unknownError
                 }
                 // create database for account
-                if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
+                if try !self.dbManager.createDatabaseForAccount(accountId: accountId) {
                     throw AddAccountError.unknownError
                 }
-                return accountModel
+                return accountId
             }
             .take(1)
-            .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
+            .flatMap({ [weak self] (accountId) -> Observable<AccountModel> in
                 guard let self = self else { return Observable.empty() }
-                return self.getAccountObservable(accountId: accountModel.id)
+                return self.getAccountObservable(accountId: accountId)
             })
     }
 
@@ -460,24 +460,22 @@ class AccountsService: AccountAdapterDelegate {
                             .filter({ (state) -> Bool in
                                 state != ConnectAccountState.initializinzg
                             }),
-                           newAccountId.asObservable()) {(accountState, accountId) -> AccountModel in
+                           newAccountId.asObservable()) {(accountState, accountId) -> String in
                 if accountState == ConnectAccountState.networkError {
                     throw AccountCreationError.network
                 } else if accountState == ConnectAccountState.error {
                     throw AccountCreationError.wrongCredentials
                 } else if !accountId.isEmpty && accountState == ConnectAccountState.created {
-                    let account = try self.buildAccountFromDaemon(accountId: accountId)
-                    return account
+                    return accountId
                 } else {
                     throw AddAccountError.unknownError
                 }
             }
             .take(1)
-            .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
+            .flatMap({ [weak self] (accountId) -> Observable<AccountModel> in
                 guard let self = self else { return Observable.empty() }
-                self.currentAccount = accountModel
-                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
-                return self.getAccountObservable(accountId: accountModel.id)
+                UserDefaults.standard.set(accountId, forKey: self.selectedAccountID)
+                return self.getAccountObservable(accountId: accountId)
             })
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
