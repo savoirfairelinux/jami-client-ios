@@ -53,6 +53,25 @@ static id <AccountAdapterDelegate> _delegate;
         }
     }));
 
+    confHandlers.insert(exportable_callback<ConfigurationSignal::AccountDetailsChanged>([&](const std::string& account_id,
+                                                                                            const std::map<std::string, std::string>& details) {
+        if (AccountAdapter.delegate) {
+            auto accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSMutableDictionary* detailsDict = [Utils mapToDictionnary: details];
+            [AccountAdapter.delegate accountDetailsChangedWithAccountId: accountId details: detailsDict];
+        }
+    }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::VolatileDetailsChanged>([&](const std::string& account_id,
+                                                                                            const std::map<std::string, std::string>& details) {
+        if (AccountAdapter.delegate) {
+            auto accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSMutableDictionary* detailsDict = [Utils mapToDictionnary: details];
+            [AccountAdapter.delegate accountsChanged];
+            [AccountAdapter.delegate accountVoaltileDetailsChangedWithAccountId: accountId details: detailsDict];
+        }
+    }));
+
     confHandlers.insert(exportable_callback<ConfigurationSignal::RegistrationStateChanged>([&](const std::string& account_id, const std::string& state, int detailsCode, const std::string& detailsStr) {
         if (AccountAdapter.delegate) {
             RegistrationResponse* response = [RegistrationResponse new];

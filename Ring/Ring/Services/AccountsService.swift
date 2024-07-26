@@ -784,6 +784,19 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     // MARK: - AccountAdapterDelegate
+
+    func accountDetailsChanged(accountId: String, details: [String: String]) {
+        guard let account = self.getAccount(fromAccountId: accountId) else { return }
+        let accountDetails = AccountConfigModel(withDetails: details)
+        account.details = accountDetails
+    }
+
+    func accountVoaltileDetailsChanged(accountId: String, details: [String: String]) {
+        guard let account = self.getAccount(fromAccountId: accountId) else { return }
+        let volatileDetails = AccountConfigModel(withDetails: details)
+        account.volatileDetails = volatileDetails
+    }
+
     func accountsChanged() {
         log.debug("Accounts changed.")
         let currentAccounts = self.accountList.map { $0.id }
@@ -846,13 +859,20 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func registrationStateChanged(with response: RegistrationResponse) {
+        guard let account = self.getAccount(fromAccountId: response.accountId) else { return }
+        /*
+         Detect when a new account is generated and keys are ready.
+         During generation, an account gets the "INITIALIZING" status.
+         When keys are generated, the status changes.
+        */
+        if account.status == .initializing && response.state != Initializing {
+            self.updateAccountDetails(account: account)
+        }
+
         var event = ServiceEvent(withEventType: .registrationStateChanged)
         event.addEventInput(.registrationState, value: response.state)
         event.addEventInput(.accountId, value: response.accountId)
         self.responseStream.onNext(event)
-        if let account = self.getAccount(fromAccountId: response.accountId) {
-            account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: response.accountId)
-        }
         if let currentAccount = self.currentAccount,
            response.state == ErrorNeedMigration,
            response.accountId == currentAccount.id {
