@@ -259,48 +259,6 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    func boothMode() -> Bool {
-        return UserDefaults.standard.bool(forKey: boothModeEnabled)
-    }
-
-    func setBoothMode(forAccount accountId: String, enable: Bool, password: String) -> Bool {
-        let enabled = UserDefaults.standard.bool(forKey: boothModeEnabled)
-        if enabled == enable {
-            return true
-        }
-        if !accountAdapter.passwordIsValid(accountId, password: password) {
-            return false
-        }
-        UserDefaults.standard.set(enable, forKey: boothModeEnabled)
-        let details = self.getAccountDetails(fromAccountId: accountId)
-        details
-            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPublicIn),
-                 withValue: (!enable).toString())
-        setAccountDetails(forAccountId: accountId, withDetails: details)
-        return true
-    }
-
-    func changePassword(forAccount accountId: String, password: String, newPassword: String) -> Bool {
-        let result = accountAdapter.changeAccountPassword(accountId, oldPassword: password, newPassword: newPassword)
-        if !result {
-            return false
-        }
-        let details = self.getAccountDetails(fromAccountId: accountId)
-        details
-            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword),
-                 withValue: (!newPassword.isEmpty).toString())
-        setAccountDetails(forAccountId: accountId, withDetails: details)
-        return true
-    }
-
-    func setDeviceName(accountId: String, deviceName: String) {
-        let details = self.getAccountDetails(fromAccountId: accountId)
-        details
-            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountDeviceName),
-                 withValue: deviceName)
-        setAccountDetails(forAccountId: accountId, withDetails: details)
-    }
-
     func getAccountProfile(accountId: String) -> Profile? {
         return self.dbManager.accountProfile(for: accountId)
     }
@@ -913,7 +871,6 @@ class AccountsService: AccountAdapterDelegate {
 
 // MARK: - Private daemon wrappers
 extension AccountsService {
-
     private func buildAccountFromDaemon(accountId id: String) throws -> AccountModel {
         let accountModel = AccountModel(withAccountId: id)
         accountModel.details = self.getAccountDetails(fromAccountId: id)
@@ -932,6 +889,14 @@ extension AccountsService {
 
 // MARK: - configurations settings
 extension AccountsService {
+    func changePassword(forAccount accountId: String, password: String, newPassword: String) -> Bool {
+        return accountAdapter.changeAccountPassword(accountId, oldPassword: password, newPassword: newPassword)
+    }
+
+    func setDeviceName(accountId: String, deviceName: String) {
+        let property = ConfigKeyModel(withKey: ConfigKey.accountDeviceName)
+        self.setAccountProperty(property: property, value: deviceName, accountId: accountId)
+    }
 
     func hasAccountWithProxyEnabled() -> Bool {
         for account in self.accounts {
@@ -943,6 +908,27 @@ extension AccountsService {
         return false
     }
 
+    func boothMode() -> Bool {
+        return UserDefaults.standard.bool(forKey: boothModeEnabled)
+    }
+
+    func setBoothMode(forAccount accountId: String, enable: Bool, password: String) -> Bool {
+        let enabled = UserDefaults.standard.bool(forKey: boothModeEnabled)
+        if enabled == enable {
+            return true
+        }
+        if !accountAdapter.passwordIsValid(accountId, password: password) {
+            return false
+        }
+        UserDefaults.standard.set(enable, forKey: boothModeEnabled)
+        let details = self.getAccountDetails(fromAccountId: accountId)
+        details
+            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtPublicIn),
+                 withValue: (!enable).toString())
+        setAccountDetails(forAccountId: accountId, withDetails: details)
+        return true
+    }
+
     func enableSRTP(enable: Bool, accountId: String) {
         let newValue = enable ? "sdes" : ""
         let property = ConfigKeyModel(withKey: ConfigKey.srtpKeyExchange)
@@ -952,21 +938,30 @@ extension AccountsService {
     func setTurnSettings(accountId: String, server: String, username: String, password: String, realm: String) {
         guard let account = self.getAccount(fromAccountId: accountId),
               var details = account.details else { return }
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnServer), withValue: server)
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnUsername), withValue: username)
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnPassword), withValue: password)
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnRealm), withValue: realm)
-        self.setAccountDetails(forAccountId: accountId, withDetails: details)
-        account.details = details
+
+        let turnSettings: [ConfigKey: String] = [
+            .turnServer: server,
+            .turnUsername: username,
+            .turnPassword: password,
+            .turnRealm: realm
+        ]
+
+        var detailsToUpdate = [String: String]()
+
+        for (key, value) in turnSettings {
+            details.set(withConfigKeyModel: ConfigKeyModel(withKey: key), withValue: value)
+            detailsToUpdate[key.rawValue] = value
+        }
+
+        let changed = AccountConfigModel(withDetails: detailsToUpdate)
+        self.setAccountDetails(forAccountId: accountId, withDetails: changed)
     }
 
     func switchAccountPropertyTo(state: Bool, accountId: String, property: ConfigKeyModel) {
         guard let account = self.getAccount(fromAccountId: accountId),
               var accountDetails = account.details else { return }
         guard accountDetails.get(withConfigKeyModel: property) != state.toString() else { return }
-        accountDetails.set(withConfigKeyModel: property, withValue: state.toString())
-        self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
-        account.details = accountDetails
+        self.setAccountProperty(property: property, value: state.toString(), accountId: accountId)
     }
 
     func setAccountProperty(property: ConfigKeyModel, value: String, accountId: String) {
@@ -974,8 +969,10 @@ extension AccountsService {
               var accountDetails = account.details else { return }
         if accountDetails.get(withConfigKeyModel: property) == value { return }
         accountDetails.set(withConfigKeyModel: property, withValue: value)
-        self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
         account.details = accountDetails
+        let detailsToUpdate = [property.key.rawValue : value]
+        let changed = AccountConfigModel(withDetails: detailsToUpdate)
+        self.setAccountDetails(forAccountId: accountId, withDetails: changed)
     }
 }
 
