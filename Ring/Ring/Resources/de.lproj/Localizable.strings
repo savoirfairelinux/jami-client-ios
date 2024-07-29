@@ -48,7 +48,7 @@
 "global.deleteMessage" = "Nachricht löschen";
 "global.deleteFile" = "Datei vom Gerät löschen";
 "global.editMessage" = "Nachricht bearbeiten";
-"global.editing" = "Editing";
+"global.editing" = "Bearbeitung";
 "global.create" = "Erstellen";
 "global.edit" = "Bearbeiten";
 "global.remove" = "Entfernen";
@@ -274,9 +274,9 @@
 "accountPage.proxyAddressAlert" = "Proxy Adresse angeben";
 "accountPage.noProxyExplanationLabel" = "Ihr Gerät wird keine Benachrichtigungen erhalten, wenn Proxy deaktiviert ist";
 "accountPage.proxyPaceholder" = "Proxy Adresse";
-"accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
-"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.useProxyList" = "Proxy-Liste verwenden";
+"accountPage.proxyListURL" = "Proxy-Listen-URL";
+"accountPage.proxyExplanation" = "Benachrichtigungen werden über einen Proxy weitergeleitet. Sie können entweder den Standard-Proxy verwenden, eine benutzerdefinierte Proxy-Adresse eingeben oder eine URL mit einer Liste von Proxys angeben.";
 "accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Benachrichtigungen aktivieren";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Deaktiviert";
@@ -286,7 +286,7 @@
 "accountPage.revokeDeviceButton" = "Trennen";
 "accountPage.revokeDevicePlaceholder" = "Geben Sie Ihr Passwort ein";
 "accountPage.deviceRevoked" = "Trennung des Gerätes abgeschlossen";
-"accountPage.deviceRevocationProgress" = "Removing…";
+"accountPage.deviceRevocationProgress" = "Entfernen…";
 "accountPage.deviceRevocationSuccess" = "Gerät wurde getrennt";
 "accountPage.deviceRevocationTryAgain" = "Nochmal versuchen";
 "accountPage.deviceRevocationWrongPassword" = "Falsches Passwort";
@@ -353,7 +353,7 @@
 "accountPage.callsFromUnknownContacts" = "Erlaube eingehende Anrufe von unbekannten Kontakten";
 "accountPage.accountSettingsExplanation" = "Diese Einstellungen gelten nur für dieses Konto";
 "accountPage.appSettings" = "App-Einstellungen";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "Diese Einstellungen gelten für die gesamte Anwendung";
 "accountPage.connectivityAndConfiguration" = "Verbindungen und Konfigurationen";
 "accountPage.sipExpirationTime" = "Ablaufzeit der Registrierung (Sekunden)";
 "accountPage.tlsVerifyServerCertificates" = "Server-TLS-Zertifikate überprüfen";
@@ -361,7 +361,7 @@
 "accountPage.tlsRequireTlsCertificate" = "Ein Zertifikat für eingehende TLS-Verbindungen fordern";
 "accountPage.tlsDisableSecureDlgCheck" = "Sichere Dialogprüfung für eingehende TLS-Daten deaktivieren";
 "accountPage.editSipExpirationTime" = "Ablaufzeit";
-"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.selectSipExpirationTime" = "Zeit (in Sekunden) für den Ablauf der Registrierung festlegen";
 "accountPage.thisDevice" = "Dieses Gerät";
 "accountPage.otherDevices" = "andere verknüpfte Geräte";
 "accountPage.accountIdentity" = "Kontoidentität";

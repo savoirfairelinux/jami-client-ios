@@ -44,18 +44,18 @@
 "global.copy" = "Copia";
 "global.reply" = "Respon";
 "global.search" = "Buscant...";
-"global.donate" = "Donate";
+"global.donate" = "Donar";
 "global.deleteMessage" = "Esborra missatge";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Modificar missatge";
-"global.editing" = "Editing";
+"global.editing" = "Editant";
 "global.create" = "Crear";
 "global.edit" = "Edita";
 "global.remove" = "Eliminar";
 "global.call" = "Trucada";
 "global.video" = "Vídeo";
-"global.time" = "Time";
-"global.editPassword" = "Edit password";
+"global.time" = "Temps";
+"global.editPassword" = "Edita la contrasenya";
 
 // Scan
 "scan.badQrCode" = "Mal codi QR";
@@ -81,7 +81,7 @@
 "swarm.member" = "Membre";
 "swarm.invited" = "Invitats";
 "swarm.admin" = "Admins";
-"swarm.banned" = "Prohibida";
+"swarm.banned" = "Prohibit";
 "swarm.unknown" = "Desconegut";
 "swarm.addMember" = "Agrega Membre";
 "swarm.confirmLeaveSwarm" = "Tens la certeza que vols deixar aquest enjame?";
@@ -97,13 +97,13 @@
 // Smartlist
 "smartlist.yesterday" = "Ahir";
 "smartlist.results" = "Directori públic";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.jamsResults" = "Resultat de cerca";
 "smartlist.conversations" = "Converses";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "Nou contacte";
 "smartlist.newSwarm" = "New Swarm";
 "smartlist.accounts" = "Comptes";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "Invitacions rebudes";
 "smartlist.noResults" = "Sense resultats";
 "smartlist.noConversation" = "No hi ha converses.";
 "smartlist.searchBarPlaceholder" = "Introdueix el nom...";
@@ -116,18 +116,18 @@
 "smartlist.selectOneNumber" = "Seleccioneu un dels números";
 "smartlist.invitations" = "Invitacions";
 "smartlist.aboutJami" = "Sobre Jami...";
-"smartlist.inviteFriends" = "Invite friends";
+"smartlist.inviteFriends" = "Convida amics";
 "smartlist.accounts" = "Comptes";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.disableDonation" = "Ara no";
+"smartlist.donationExplanation" = "Si gaudeixes utilitzant el Jami i creus en la nostre missió, faries una donació?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "Nou missatge";
 
 //Conversation
-"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsButton" = "Afegeix als contactes";
 "conversation.addToContactsLabel" = "Afegir als contactes?";
 "conversation.notContactLabel" = "is not in your contact list";
-"conversation.messagePlaceholder" = "Write to";
+"conversation.messagePlaceholder" = "Escriu a";
 "conversation.explanationSendingLocationTo" = "Actualment estàs compartint la teva ubicació amb ";
 "conversation.explanationReceivingLocationFrom" = "Actualment estàs recebint una ubicació en directe de ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -140,17 +140,17 @@
 "conversation.synchronizationMessage" = "Esperem que %@ connectes per sincronizar la conversa.";
 "conversation.inReplyTo" = "En resposta a";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.yourself" = "tu mateix";
+"conversation.edited" = "editat";
+"conversation.deletedMessage" = "esborra un missatge";
 
 //Invitations
 "invitations.noInvitations" = "No hi ha invitacions";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
-"invitations.list" = "Invitations received";
+"invitations.pending" = "pendent";
+"invitations.accepted" = "acceptat";
+"invitations.refused" = "rebutjat";
+"invitations.banned" = "prohibit";
+"invitations.list" = "Invitacions rebudes";
 
 // Walkthrough
 
@@ -175,10 +175,10 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Unir-se a Jami";
 "createAccount.lookingForUsernameAvailability" = "buscant disponibilitat...";
-"createAccount.invalidUsername" = "nom d'usuari inválidu";
+"createAccount.invalidUsername" = "nom d'usuari invàlid";
 "createAccount.usernameAlreadyTaken" = "Nombre d'usuari ja pres";
 "createAccount.usernameValid" = "el nom d'usuari està disponible";
-"createAccount.loading" = "Carregament";
+"createAccount.loading" = "Carregant";
 "createAccount.waitCreateAccountTitle" = "S'està afegint el compte";
 "createAccount.UsernameNotRegisteredTitle" = "Error de xarxa";
 "createAccount.UsernameNotRegisteredMessage" = "Es va crear un compte però no s'ha registrat el nom d'usuari";
@@ -188,7 +188,7 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Enllaç de comptes";
 "linkToAccount.linkButtonTitle" = "Enllaç";
-"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceTitle" = "Enllaça Dispositiu";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introdueix PIN";
@@ -196,13 +196,13 @@
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Inscriure-se";
-"linkToAccountManager.accountManagerPlaceholder" = "URL de James";
+"linkToAccountManager.accountManagerPlaceholder" = "URL de JAMS";
 "linkToAccountManager.accountManagerLabel" = "Introdueix la URL JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "No es pot trobar el compte";
 "alerts.accountCannotBeFoundMessage" = "No es pot trobar la seva informació a la xarxa Jami.";
-"alerts.accountAddedTitle" = "Conta afegida";
+"alerts.accountAddedTitle" = "Compte afegit";
 "alerts.accountNoNetworkTitle" = "No es pot connectar a la xarxa";
 "alerts.accountNoNetworkMessage" = "No s'ha pogut afegir compte perquè Jami no ha pogut connectar a la xarxa distribuïda. Comprovi la connectivitat del seu dispositiu.";
 "alerts.accountDefaultErrorTitle" = "Error desconegut";
@@ -295,7 +295,7 @@
 "accountPage.linkDeviceTitle" = "Vincula un altre dispositiu";
 "accountPage.other" = "Altres";
 "accountPage.removeAccountMessage" = "Si el teu compte no ha estat copiat de seguretat o afegit a un altre dispositiu, el teu compte i nom registrat es perdran irrevocablement.";
-"accountPage.inviteFriends" = "Invite friends";
+"accountPage.inviteFriends" = "Convida amics";
 "accountPage.contactMeOnJamiTitle" = "Contacta amb mi en Jami!";
 "accountPage.contactMeOnJamiContant" = "Contacta amb mi utilitzant \"%s\" a la plataforma de comunicació distribuïda Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Introducir la contrasenya de compte";
