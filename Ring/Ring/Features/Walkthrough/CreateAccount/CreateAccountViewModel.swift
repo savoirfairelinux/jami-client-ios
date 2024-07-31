@@ -22,6 +22,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import SwiftUI
 
 enum PasswordValidationState {
     case validated
@@ -112,6 +113,7 @@ enum UsernameValidationState {
 }
 
 enum AccountCreationState {
+    case initial
     case unknown
     case started
     case success
@@ -205,7 +207,14 @@ extension AccountCreationError: LocalizedError {
 
 // swiftlint:disable opening_brace
 // swiftlint:disable closure_parameter_position
-class CreateAccountViewModel: Stateable, ViewModel {
+class CreateAccountViewModel: Stateable, ViewModel, ObservableObject {
+
+    @Published var nameRegistrationStatus = ""
+    @Published var joinButtonEnable = true
+    @Published var nameRegistrationStatusColor = Color.clear
+    @Published var creationState: AccountCreationState = .initial
+    var username = ""
+
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
@@ -214,8 +223,6 @@ class CreateAccountViewModel: Stateable, ViewModel {
     }()
 
     private let disposeBag = DisposeBag()
-
-    var notCancelable = true
 
     // MARK: L10n
     let createAccountTitle = L10n.CreateAccount.createAccountFormTitle
@@ -232,43 +239,43 @@ class CreateAccountViewModel: Stateable, ViewModel {
     lazy var createState: Observable<AccountCreationState> = {
         return self.accountCreationState.asObservable()
     }()
-    let username = BehaviorRelay<String>(value: "")
+   // let username = BehaviorRelay<String>(value: "")
     let password = BehaviorRelay<String>(value: "")
     let confirmPassword = BehaviorRelay<String>(value: "")
     let notificationSwitch = BehaviorRelay<Bool>(value: true)
     let nameRegistrationTimeout: CGFloat = 30
-    lazy var usernameValidationState = BehaviorRelay<UsernameValidationState>(value: .unknown)
-    lazy var canAskForAccountCreation: Observable<Bool> = {
-        return Observable.combineLatest(self.usernameValidationState.asObservable(),
-                                        self.username.asObservable(),
-                                        self.createState,
-                                        resultSelector:
-                                            { ( usernameValidationState: UsernameValidationState,
-                                                username: String,
-                                                creationState: AccountCreationState) -> Bool in
-
-                                                var canAsk = true
-
-                                                if !username.isEmpty {
-                                                    canAsk = canAsk && usernameValidationState.isAvailable && !username.isEmpty
-                                                }
-
-                                                canAsk = canAsk && !creationState.isInProgress
-
-                                                return canAsk
-                                            })
-    }()
+    var usernameValidationState = BehaviorRelay<UsernameValidationState>(value: .unknown)
+//    lazy var canAskForAccountCreation: Observable<Bool> = {
+//        return Observable.combineLatest(self.usernameValidationState.asObservable(),
+//                                        self.username.asObservable(),
+//                                        self.createState,
+//                                        resultSelector:
+//                                            { ( usernameValidationState: UsernameValidationState,
+//                                                username: String,
+//                                                creationState: AccountCreationState) -> Bool in
+//
+//                                                var canAsk = true
+//
+//                                                if !username.isEmpty {
+//                                                    canAsk = canAsk && usernameValidationState.isAvailable && !username.isEmpty
+//                                                }
+//
+//                                                canAsk = canAsk && !creationState.isInProgress
+//
+//                                                return canAsk
+//                                            })
+//    }()
 
     required init (with injectionBag: InjectionBag) {
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
 
-        // Loookup name request observer
-        self.username.asObservable()
-            .subscribe(onNext: { [weak self] username in
-                self?.nameService.lookupName(withAccount: "", nameserver: "", name: username)
-            })
-            .disposed(by: disposeBag)
+//        // Loookup name request observer
+//        self.username.asObservable()
+//            .subscribe(onNext: { [weak self] username in
+//                self?.nameService.lookupName(withAccount: "", nameserver: "", name: username)
+//            })
+//            .disposed(by: disposeBag)
 
         self.nameService.usernameValidationStatus.asObservable()
             .subscribe(onNext: { [weak self] (status) in
@@ -286,71 +293,107 @@ class CreateAccountViewModel: Stateable, ViewModel {
                 }
             })
             .disposed(by: self.disposeBag)
-    }
 
-    func createAccount() {
-        self.accountCreationState.accept(.started)
-
-        let username = self.username.value
-        let password = self.password.value
-
-        self.accountService
-            .addJamiAccount(username: username,
-                            password: password,
-                            enable: self.notificationSwitch.value)
-            .subscribe(onNext: { [weak self] (account) in
+        self.usernameValidationState
+            .subscribe(onNext: { [weak self] (status) in
                 guard let self = self else { return }
-                if username.isEmpty {
-                    self.accountCreationState.accept(.success)
-                    DispatchQueue.main.async {
-                        self.stateSubject.onNext(WalkthroughState.accountCreated)
-                    }
-                    return
-                }
-                let disposable = self.nameService.registerNameObservable(withAccount: account.id,
-                                                                         password: password,
-                                                                         name: username)
-                    .subscribe(onNext: { registered in
-                        if registered {
-                            self.accountCreationState.accept(.success)
-                            DispatchQueue.main.async {
-                                self.stateSubject
-                                    .onNext(WalkthroughState.accountCreated)
-                            }
-                        } else {
-                            self.accountCreationState.accept(.nameNotRegistered)
-                        }
-                    }, onError: { _ in
-                        self.accountCreationState.accept(.nameNotRegistered)
-                    })
-                DispatchQueue.main
-                    .asyncAfter(deadline: .now() + self.nameRegistrationTimeout) {
-                        disposable.dispose()
-                        if self.accountCreationState.value.isCompleted {
-                            return
-                        }
-                        self.accountCreationState.accept(.timeOut)
-                    }
-            }, onError: { [weak self] (error) in
-                guard let self = self else { return }
-                if let error = error as? AccountCreationError {
-                    self.accountCreationState.accept(.error(error: error))
-                } else {
-                    self.accountCreationState.accept(.error(error: AccountCreationError.unknown))
+                switch status {
+                    case .available(let message):
+                        self.nameRegistrationStatus = message
+                        self.nameRegistrationStatusColor = .green
+                    case .invalid(let message):
+                        self.nameRegistrationStatus = message
+                        self.nameRegistrationStatusColor = .red
+                    case .lookingForAvailibility(let message):
+                        self.nameRegistrationStatus = message
+                        self.nameRegistrationStatusColor = .black
+                    case .unavailable(let message):
+                        self.nameRegistrationStatus = message
+                        self.nameRegistrationStatusColor = .red
+                    case .unknown:
+                        self.nameRegistrationStatus = ""
+                        self.nameRegistrationStatusColor = .black
                 }
             })
             .disposed(by: self.disposeBag)
-        self.enablePushNotifications(enable: self.notificationSwitch.value)
+    }
+
+    func nameUpdated(name: String) {
+        if self.username == name { return }
+        self.username = name
+        self.nameService.lookupName(withAccount: "", nameserver: "", name: username)
+    }
+
+    func createAccount() {
+        creationState = .started
+
+        accountService
+            .addJamiAccount(username: username, password: "", enable: true)
+            .subscribe(onNext: { [weak self] account in
+                self?.handleAccountCreationSuccess(account)
+            }, onError: { [weak self] error in
+                self?.handleAccountCreationError(error)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func handleAccountCreationSuccess(_ account: AccountModel) {
+        enablePushNotifications()
+        if username.isEmpty {
+            updateCreationState(.success)
+            return
+        }
+        registerAccountName(for: account)
+    }
+
+    private func handleAccountCreationError(_ error: Error) {
+        if let error = error as? AccountCreationError {
+            creationState = .error(error: error)
+        } else {
+            creationState = .error(error: .unknown)
+        }
+    }
+
+    private func registerAccountName(for account: AccountModel) {
+        let registerName = nameService.registerNameObservable(withAccount: account.id, password: "", name: username)
+            .subscribe(onNext: { [weak self] registered in
+                self?.handleNameRegistrationResult(registered)
+            }, onError: { [weak self] _ in
+                self?.creationState = .nameNotRegistered
+            })
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + nameRegistrationTimeout) { [weak self] in
+            registerName.dispose()
+            self?.handleNameRegistrationTimeout()
+        }
+    }
+
+    private func handleNameRegistrationResult(_ registered: Bool) {
+        if registered {
+            updateCreationState(.success)
+        } else {
+            creationState = .nameNotRegistered
+        }
+    }
+
+    private func handleNameRegistrationTimeout() {
+        if !creationState.isCompleted {
+            creationState = .timeOut
+        }
+    }
+
+    private func accountCreated() {
+        creationState = .success
+        DispatchQueue.main.async {
+            stateSubject.onNext(.accountCreated)
+        }
     }
 
     func finish() {
         self.stateSubject.onNext(WalkthroughState.accountCreated)
     }
 
-    func enablePushNotifications(enable: Bool) {
-        if !enable {
-            return
-        }
+    func enablePushNotifications() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
     }
 }
