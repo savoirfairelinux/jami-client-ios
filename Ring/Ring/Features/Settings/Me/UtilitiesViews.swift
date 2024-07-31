@@ -267,11 +267,15 @@ struct FocusableTextField: UIViewRepresentable {
         }
 
         func textFieldDidBeginEditing(_ textField: UITextField) {
-            self.isFirstResponder = true
+            DispatchQueue.main.async { [weak self] in
+                self?.isFirstResponder = true
+            }
         }
 
         func textFieldDidEndEditing(_ textField: UITextField) {
-            self.isFirstResponder = false
+            DispatchQueue.main.async { [weak self] in
+                self?.isFirstResponder = false
+            }
         }
     }
 

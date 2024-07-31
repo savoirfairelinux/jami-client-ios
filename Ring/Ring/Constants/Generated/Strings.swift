@@ -692,6 +692,8 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "linkDevice.title", fallback: "Link a new device")
   }
   internal enum LinkToAccount {
+    /// A PIN is required to use an existing Jami account on this device
+    internal static let explanationMessage = L10n.tr("Localizable", "linkToAccount.explanationMessage", fallback: "A PIN is required to use an existing Jami account on this device")
     /// To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select "Link new device". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.
     internal static let explanationPinMessage = L10n.tr("Localizable", "linkToAccount.explanationPinMessage", fallback: "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.")
     /// Link
@@ -700,10 +702,14 @@ internal enum L10n {
     internal static let linkDeviceMessage = L10n.tr("Localizable", "linkToAccount.linkDeviceMessage", fallback: "Choose “Link a new device” from the other Jami app to show the QR code or PIN")
     /// Link Device
     internal static let linkDeviceTitle = L10n.tr("Localizable", "linkToAccount.linkDeviceTitle", fallback: "Link Device")
+    /// Fill if the account password is encrypted
+    internal static let passwordExplanation = L10n.tr("Localizable", "linkToAccount.passwordExplanation", fallback: "Fill if the account password is encrypted")
     /// Enter PIN
     internal static let pinLabel = L10n.tr("Localizable", "linkToAccount.pinLabel", fallback: "Enter PIN")
     /// PIN
     internal static let pinPlaceholder = L10n.tr("Localizable", "linkToAccount.pinPlaceholder", fallback: "PIN")
+    /// Scan QR Code
+    internal static let scanQRCode = L10n.tr("Localizable", "linkToAccount.scanQRCode", fallback: "Scan QR Code")
     /// Account linking
     internal static let waitLinkToAccountTitle = L10n.tr("Localizable", "linkToAccount.waitLinkToAccountTitle", fallback: "Account linking")
   }
