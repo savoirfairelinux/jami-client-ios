@@ -51,36 +51,6 @@ class LinkDeviceViewModel: Stateable, ViewModel {
         self.contactService = injectionBag.contactsService
     }
 
-    func linkDevice () {
-        self.accountCreationState.accept(.started)
-        self.accountService
-            .linkToJamiAccount(withPin: self.pin.value,
-                               password: self.password.value,
-                               enable: true)
-            .subscribe(onNext: { [weak self] (account) in
-                guard let self = self else { return }
-                self.accountCreationState.accept(.success)
-                Observable<Int>.timer(Durations.alertFlashDuration.toTimeInterval(),
-                                      period: nil,
-                                      scheduler: MainScheduler.instance)
-                    .subscribe(onNext: { [weak self] (_) in
-                        guard let self = self else { return }
-                        self.accountService.currentAccount = account
-                        UserDefaults.standard
-                            .set(account.id, forKey: self.accountService.selectedAccountID)
-                        self.enablePushNotifications(enable: true)
-                        self.stateSubject.onNext(WalkthroughState.deviceLinked)
-                    })
-                    .disposed(by: self.disposeBag)
-            }, onError: { [weak self] (error) in
-                if let error = error as? AccountCreationError {
-                    self?.accountCreationState.accept(.error(error: error))
-                } else {
-                    self?.accountCreationState.accept(.error(error: AccountCreationError.unknown))
-                }
-            })
-            .disposed(by: self.disposeBag)
-    }
     func enablePushNotifications(enable: Bool) {
         if !enable {
             return
