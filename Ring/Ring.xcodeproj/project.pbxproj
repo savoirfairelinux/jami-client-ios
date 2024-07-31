@@ -422,6 +422,7 @@
 		26EF35E928E3847100D97E14 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35E828E3847100D97E14 /* MessageContentView.swift */; };
 		26EF35EB28E38DA200D97E14 /* MessageContentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */; };
 		26EF35EF29075A5300D97E14 /* MessageStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EE29075A5300D97E14 /* MessageStackView.swift */; };
+		26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F5442C2C5815770069A7A4 /* WelcomeView.swift */; };
 		26FDF4192C1101C2009D036B /* JamiBaseUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF4182C1101C2009D036B /* JamiBaseUITest.swift */; };
 		26FDF43D2C1353A9009D036B /* AccountSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF43C2C1353A9009D036B /* AccountSummaryView.swift */; };
 		26FDF43F2C1353BA009D036B /* AccountSummaryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF43E2C1353BA009D036B /* AccountSummaryVM.swift */; };
@@ -1036,6 +1037,7 @@
 		26EF35E828E3847100D97E14 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
 		26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentVM.swift; sourceTree = "<group>"; };
 		26EF35EE29075A5300D97E14 /* MessageStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStackView.swift; sourceTree = "<group>"; };
+		26F5442C2C5815770069A7A4 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-release.entitlements"; sourceTree = "<group>"; };
 		26FDF4182C1101C2009D036B /* JamiBaseUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiBaseUITest.swift; sourceTree = "<group>"; };
 		26FDF43C2C1353A9009D036B /* AccountSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryView.swift; sourceTree = "<group>"; };
@@ -1938,6 +1940,7 @@
 		1A0C4EBD1F1D48DD00550433 /* Walkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				26F5442B2C5815640069A7A4 /* swiftUI */,
 				0E6D9596240710CA00996A28 /* LinkToAccountManager */,
 				0E6F545422403ABC00ECC3CE /* CreateSipAccount */,
 				1A0C4ED51F1D49D800550433 /* Welcome */,
@@ -2436,6 +2439,14 @@
 				26FDF4182C1101C2009D036B /* JamiBaseUITest.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		26F5442B2C5815640069A7A4 /* swiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				26F5442C2C5815770069A7A4 /* WelcomeView.swift */,
+			);
+			path = swiftUI;
 			sourceTree = "<group>";
 		};
 		26FDF4392C135384009D036B /* SwiftUI */ = {
@@ -3125,6 +3136,7 @@
 				265DFB0B292FD41100834B97 /* MessageSwiftUIViews.swift in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
 				26625BB92BA9FEFC009D2DDB /* SmartListContentView.swift in Sources */,
+				26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */,
 				26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */,
 				268C87FD2C1E6C7600593D7C /* SettingsSummaryView.swift in Sources */,
 				0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */,
