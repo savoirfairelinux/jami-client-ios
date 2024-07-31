@@ -27,7 +27,7 @@ protocol StateableResponsive {
     var stateSubject: PublishSubject<State> { get }
 
     /// The Rx bag that will be used for stateSubject subscriptions
-    var disposeBag: DisposeBag { get }
+    var disposeBag: DisposeBag { get set }
 }
 
 extension StateableResponsive where Self: Coordinator {
@@ -50,10 +50,20 @@ extension StateableResponsive where Self: Coordinator {
         // present the view controller according to the presentation style
         self.present(viewController: viewController, withStyle: style, withAnimation: animation, lockWhilePresenting: VCType, disposeBag: self.disposeBag)
 
+        viewController.rx.deallocated
+            .subscribe(onNext: { [weak self] in
+                self?.disposeBag = DisposeBag()
+            })
+            .disposed(by: disposeBag)
+
         // bind the stateable to the inner state subject
-        stateable.state.take(until: viewController.rx.deallocated)
+        stateable.state
+            .take(until: viewController.rx.deallocated)
             .subscribe(onNext: { [weak self] (state) in
                 self?.stateSubject.onNext(state)
+            }, onCompleted: {
+                // Handle the completion event here
+                print("*******Subscription completed")
             })
             .disposed(by: self.disposeBag)
     }

@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,235 +12,26 @@
         <!--Welcome View Controller-->
         <scene sceneID="Rk0-Pb-xfs">
             <objects>
-                <viewController id="a7M-11-Me2" customClass="WelcomeViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ev1-K9-ko3">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="a7M-11-Me2" customClass="WelcomeViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fad-yU-MNg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login" translatesAutoresizingMaskIntoConstraints="NO" id="WKh-ia-14i">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbh-6j-wmS">
-                                <rect key="frame" x="0.0" y="50" width="375" height="658"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ka9-wr-QQv">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="415"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jami_gnupackage" translatesAutoresizingMaskIntoConstraints="NO" id="2Pc-uJ-SAI">
-                                                <rect key="frame" x="-641.66666666666663" y="50" width="1658.3333333333333" height="65"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="65" id="Mlo-yj-dOM"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
-                                                <rect key="frame" x="110.33333333333333" y="165" width="154.66666666666669" height="24"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="Welcome to jami !">
-                                                        <attributes>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" metaFont="system" size="20"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="CTB-bR-Knj">
-                                                <rect key="frame" x="37.666666666666657" y="239" width="300" height="166"/>
-                                                <subviews>
-                                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
-                                                        <accessibility key="accessibilityConfiguration" identifier="Join Jami"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="FEf-kf-jCs"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                                                        <state key="normal" title="Create a Ring account">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="12"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </button>
-                                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-gs-fOJ" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="58" width="300" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="YW4-Sc-61P"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                                                        <state key="normal" title="Link this device to an account">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="12"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wd6-vQ-gaH" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="112" width="300" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="xto-yX-yFM"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                                                        <state key="normal" title="Connect to a JAMS server">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="12"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="py3-Pp-IIC" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="112" width="300" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="GuU-S6-A6D"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                                                        <state key="normal" title="Connect to a JAMS server">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="12"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </button>
-                                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHN-iS-Mdb" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="116" width="300" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="o1x-x5-0z2"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <state key="normal" title="create Sip account">
-                                                            <color key="titleColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="12"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S02-sh-I3j" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="170" width="300" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="sAy-MH-owv"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <state key="normal" title="create Sip account">
-                                                            <color key="titleColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="12"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ki3-CT-J1m" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="170" width="300" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="xdN-0S-pdc"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <state key="normal" title="create Sip account">
-                                                            <color key="titleColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="12"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </button>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="lFX-dh-3CE"/>
-                                                </constraints>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="top" secondItem="ka9-wr-QQv" secondAttribute="top" constant="50" id="2hZ-9k-9aa"/>
-                                            <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="2Pc-uJ-SAI" secondAttribute="centerX" id="BrK-Ku-djd"/>
-                                            <constraint firstItem="CTB-bR-Knj" firstAttribute="centerX" secondItem="ka9-wr-QQv" secondAttribute="centerX" id="EN2-7d-QMm"/>
-                                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerX" secondItem="ka9-wr-QQv" secondAttribute="centerX" id="FLm-J1-PSJ"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CTB-bR-Knj" secondAttribute="trailing" constant="30" id="HMv-8n-gxi"/>
-                                            <constraint firstAttribute="bottom" secondItem="CTB-bR-Knj" secondAttribute="bottom" constant="10" id="Lju-1b-sgn"/>
-                                            <constraint firstItem="E4b-Zv-unB" firstAttribute="top" secondItem="2Pc-uJ-SAI" secondAttribute="bottom" constant="50" id="jYr-kA-NLP"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E4b-Zv-unB" secondAttribute="trailing" constant="35" id="lwR-AZ-cXx"/>
-                                            <constraint firstItem="CTB-bR-Knj" firstAttribute="top" secondItem="E4b-Zv-unB" secondAttribute="bottom" constant="50" id="mPU-JJ-xSF"/>
-                                            <constraint firstItem="E4b-Zv-unB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ka9-wr-QQv" secondAttribute="leading" constant="35" id="xBc-Kv-P49"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ka9-wr-QQv" secondAttribute="trailing" id="Lu6-4V-r6O"/>
-                                    <constraint firstAttribute="bottom" secondItem="ka9-wr-QQv" secondAttribute="bottom" id="O4F-Jr-R5F"/>
-                                    <constraint firstItem="ka9-wr-QQv" firstAttribute="width" secondItem="Vbh-6j-wmS" secondAttribute="width" id="Rcw-rb-QZM"/>
-                                    <constraint firstItem="ka9-wr-QQv" firstAttribute="leading" secondItem="Vbh-6j-wmS" secondAttribute="leading" id="dle-bH-uby"/>
-                                    <constraint firstItem="ka9-wr-QQv" firstAttribute="top" secondItem="Vbh-6j-wmS" secondAttribute="top" id="vZ7-kW-y3N"/>
-                                </constraints>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-3h-vlx" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="116" y="718" width="143" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="b69-oL-WqW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="create Sip account">
-                                    <color key="titleColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WqX-82-wLu">
+                                <rect key="frame" x="149.33333333333334" y="388.66666666666669" width="76.666666666666657" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="1aJ-6z-De7"/>
+                        <viewLayoutGuide key="safeArea" id="suJ-2W-4qo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="WKh-ia-14i" firstAttribute="top" secondItem="Ev1-K9-ko3" secondAttribute="top" id="5vk-rm-tgp"/>
-                            <constraint firstItem="1aJ-6z-De7" firstAttribute="bottom" secondItem="IWW-3h-vlx" secondAttribute="bottom" constant="10" id="CPo-7T-PUo"/>
-                            <constraint firstItem="IWW-3h-vlx" firstAttribute="centerX" secondItem="1aJ-6z-De7" secondAttribute="centerX" id="DSc-Tr-BZc"/>
-                            <constraint firstAttribute="bottom" secondItem="WKh-ia-14i" secondAttribute="bottom" id="FIY-ya-kOW"/>
-                            <constraint firstItem="IWW-3h-vlx" firstAttribute="top" secondItem="Vbh-6j-wmS" secondAttribute="bottom" constant="10" id="MNp-Gc-3RR"/>
-                            <constraint firstItem="Vbh-6j-wmS" firstAttribute="top" secondItem="1aJ-6z-De7" secondAttribute="top" id="OVd-qb-k4N"/>
-                            <constraint firstItem="CTB-bR-Knj" firstAttribute="centerY" secondItem="1aJ-6z-De7" secondAttribute="centerY" priority="100" id="Vey-an-e0p"/>
-                            <constraint firstItem="Vbh-6j-wmS" firstAttribute="trailing" secondItem="1aJ-6z-De7" secondAttribute="trailing" id="Y9l-22-OaU"/>
-                            <constraint firstItem="WKh-ia-14i" firstAttribute="leading" secondItem="Ev1-K9-ko3" secondAttribute="leading" id="fJs-yL-UfK"/>
-                            <constraint firstAttribute="trailing" secondItem="WKh-ia-14i" secondAttribute="trailing" id="fV4-nX-zRz"/>
-                            <constraint firstItem="Vbh-6j-wmS" firstAttribute="leading" secondItem="1aJ-6z-De7" secondAttribute="leading" id="xxq-fG-Gzj"/>
+                            <constraint firstItem="WqX-82-wLu" firstAttribute="centerY" secondItem="fad-yU-MNg" secondAttribute="centerY" id="EKM-LQ-hdQ"/>
+                            <constraint firstItem="WqX-82-wLu" firstAttribute="centerX" secondItem="fad-yU-MNg" secondAttribute="centerX" id="lQ2-K1-Kcm"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="aboutJamiButton" destination="IWW-3h-vlx" id="sSJ-Rq-YzZ"/>
-                        <outlet property="advancedFeaturesButton" destination="kHN-iS-Mdb" id="Zil-kV-3gy"/>
-                        <outlet property="configureSIPButton" destination="ki3-CT-J1m" id="aVq-rF-U7h"/>
-                        <outlet property="connectJamiAcountManagerButton" destination="S02-sh-I3j" id="ual-XS-H9Z"/>
-                        <outlet property="containerView" destination="ka9-wr-QQv" id="qqf-d9-fwj"/>
-                        <outlet property="importBackupButton" destination="py3-Pp-IIC" id="bWR-Tw-165"/>
-                        <outlet property="importDeviceButton" destination="Wd6-vQ-gaH" id="TfO-Xg-8Yk"/>
-                        <outlet property="joinJamiButton" destination="bu0-90-MB5" id="8ed-UA-GJh"/>
-                        <outlet property="linkAccountButton" destination="QLK-gs-fOJ" id="RYz-cf-ypx"/>
-                        <outlet property="welcomeTextLabel" destination="E4b-Zv-unB" id="wD6-ix-018"/>
+                        <outlet property="cancel" destination="WqX-82-wLu" id="8D5-o4-gIC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c0E-9z-Cxj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -249,35 +39,7 @@
             <point key="canvasLocation" x="536.79999999999995" y="28.817733990147783"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="IWW-3h-vlx">
-            <size key="intrinsicContentSize" width="143" height="33"/>
-        </designable>
-        <designable name="QLK-gs-fOJ">
-            <size key="intrinsicContentSize" width="226" height="33"/>
-        </designable>
-        <designable name="S02-sh-I3j">
-            <size key="intrinsicContentSize" width="143" height="33"/>
-        </designable>
-        <designable name="Wd6-vQ-gaH">
-            <size key="intrinsicContentSize" width="199" height="33"/>
-        </designable>
-        <designable name="bu0-90-MB5">
-            <size key="intrinsicContentSize" width="168" height="33"/>
-        </designable>
-        <designable name="kHN-iS-Mdb">
-            <size key="intrinsicContentSize" width="143" height="33"/>
-        </designable>
-        <designable name="ki3-CT-J1m">
-            <size key="intrinsicContentSize" width="143" height="33"/>
-        </designable>
-        <designable name="py3-Pp-IIC">
-            <size key="intrinsicContentSize" width="199" height="33"/>
-        </designable>
-    </designables>
     <resources>
-        <image name="background_login" width="786" height="1704"/>
-        <image name="jami_gnupackage" width="1658.4000244140625" height="552.79998779296875"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
