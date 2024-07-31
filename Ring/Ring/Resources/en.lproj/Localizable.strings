@@ -190,9 +190,12 @@
 "linkToAccount.linkButtonTitle" = "Link";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Enter PIN";
+"linkToAccount.scanQRCode" = "Scan QR Code";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";

@@ -22,6 +22,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import SwiftUI
 
 enum PasswordValidationState {
     case validated
@@ -49,7 +50,7 @@ enum PasswordValidationState {
 enum UsernameValidationState {
     case unknown
     case available(message: String)
-    case lookingForAvailibility(message: String)
+    case lookingForAvailability(message: String)
     case invalid(message: String)
     case unavailable(message: String)
 
@@ -73,7 +74,7 @@ enum UsernameValidationState {
 
     var isVerifying: Bool {
         switch self {
-        case .lookingForAvailibility:
+        case .lookingForAvailability:
             return true
         default:
             return false
@@ -86,7 +87,7 @@ enum UsernameValidationState {
             return ""
         case .available(let message):
             return message
-        case .lookingForAvailibility(let message):
+        case .lookingForAvailability(let message):
             return message
         case .invalid(let message):
             return message
@@ -101,7 +102,7 @@ enum UsernameValidationState {
             return .clear
         case .available:
             return .jamiSuccess
-        case .lookingForAvailibility:
+        case .lookingForAvailability:
             return .clear
         case .invalid:
             return .jamiFailure
@@ -112,6 +113,7 @@ enum UsernameValidationState {
 }
 
 enum AccountCreationState {
+    case initial
     case unknown
     case started
     case success
@@ -203,154 +205,56 @@ extension AccountCreationError: LocalizedError {
     }
 }
 
-// swiftlint:disable opening_brace
-// swiftlint:disable closure_parameter_position
-class CreateAccountViewModel: Stateable, ViewModel {
-
-    // MARK: - Rx Stateable
-    private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+class CreateAccountViewModel: ObservableObject, ViewModel {
+    @Published var isJoinButtonDisabled = false
+    @Published var usernameValidationState: UsernameValidationState = .unknown
+    @Published var username: String = ""
 
     private let disposeBag = DisposeBag()
-
-    var notCancelable = true
-
-    // MARK: L10n
-    let createAccountTitle = L10n.CreateAccount.createAccountFormTitle
-    let createAccountButton = L10n.Welcome.createAccount
-    let usernameTitle = L10n.Global.username
-    let recommended = L10n.Global.recommended
-
-    // MARK: - Low level services
-    private let accountService: AccountsService
     private let nameService: NameService
 
-    // MARK: - Rx Variables for UI binding
-    private let accountCreationState = BehaviorRelay<AccountCreationState>(value: .unknown)
-    lazy var createState: Observable<AccountCreationState> = {
-        return self.accountCreationState.asObservable()
-    }()
-    let username = BehaviorRelay<String>(value: "")
-    let password = BehaviorRelay<String>(value: "")
-    let confirmPassword = BehaviorRelay<String>(value: "")
-    let notificationSwitch = BehaviorRelay<Bool>(value: true)
-    let nameRegistrationTimeout: CGFloat = 30
-    lazy var usernameValidationState = BehaviorRelay<UsernameValidationState>(value: .unknown)
-    lazy var canAskForAccountCreation: Observable<Bool> = {
-        return Observable.combineLatest(self.usernameValidationState.asObservable(),
-                                        self.username.asObservable(),
-                                        self.createState,
-                                        resultSelector:
-                                            { ( usernameValidationState: UsernameValidationState,
-                                                username: String,
-                                                creationState: AccountCreationState) -> Bool in
-
-                                                var canAsk = true
-
-                                                if !username.isEmpty {
-                                                    canAsk = canAsk && usernameValidationState.isAvailable && !username.isEmpty
-                                                }
-
-                                                canAsk = canAsk && !creationState.isInProgress
-
-                                                return canAsk
-                                            })
-    }()
-
-    required init (with injectionBag: InjectionBag) {
-        self.accountService = injectionBag.accountService
+    required init(with injectionBag: InjectionBag) {
         self.nameService = injectionBag.nameService
+        bindUsernameValidationStatus()
+    }
 
-        // Loookup name request observer
-        self.username.asObservable()
-            .subscribe(onNext: { [weak self] username in
-                self?.nameService.lookupName(withAccount: "", nameserver: "", name: username)
+    private func bindUsernameValidationStatus() {
+        nameService.usernameValidationStatus.asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] status in
+                guard let self = self else { return }
+                self.updateValidationState(with: status)
+                self.updateJoinButtonAvailability()
             })
             .disposed(by: disposeBag)
-
-        self.nameService.usernameValidationStatus.asObservable()
-            .subscribe(onNext: { [weak self] (status) in
-                switch status {
-                case .lookingUp:
-                    self?.usernameValidationState.accept(.lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability))
-                case .invalid:
-                    self?.usernameValidationState.accept(.invalid(message: L10n.CreateAccount.invalidUsername))
-                case .alreadyTaken:
-                    self?.usernameValidationState.accept(.unavailable(message: L10n.CreateAccount.usernameAlreadyTaken))
-                case .valid:
-                    self?.usernameValidationState.accept(.available(message: L10n.CreateAccount.usernameValid))
-                default:
-                    self?.usernameValidationState.accept(.unknown)
-                }
-            })
-            .disposed(by: self.disposeBag)
     }
 
-    func createAccount() {
-        self.accountCreationState.accept(.started)
-
-        let username = self.username.value
-        let password = self.password.value
-
-        self.accountService
-            .addJamiAccount(username: username,
-                            password: password,
-                            enable: self.notificationSwitch.value)
-            .subscribe(onNext: { [weak self] (account) in
-                guard let self = self else { return }
-                if username.isEmpty {
-                    self.accountCreationState.accept(.success)
-                    DispatchQueue.main.async {
-                        self.stateSubject.onNext(WalkthroughState.accountCreated)
-                    }
-                    return
-                }
-                let disposable = self.nameService.registerNameObservable(withAccount: account.id,
-                                                                         password: password,
-                                                                         name: username)
-                    .subscribe(onNext: { registered in
-                        if registered {
-                            self.accountCreationState.accept(.success)
-                            DispatchQueue.main.async {
-                                self.stateSubject
-                                    .onNext(WalkthroughState.accountCreated)
-                            }
-                        } else {
-                            self.accountCreationState.accept(.nameNotRegistered)
-                        }
-                    }, onError: { _ in
-                        self.accountCreationState.accept(.nameNotRegistered)
-                    })
-                DispatchQueue.main
-                    .asyncAfter(deadline: .now() + self.nameRegistrationTimeout) {
-                        disposable.dispose()
-                        if self.accountCreationState.value.isCompleted {
-                            return
-                        }
-                        self.accountCreationState.accept(.timeOut)
-                    }
-            }, onError: { [weak self] (error) in
-                guard let self = self else { return }
-                if let error = error as? AccountCreationError {
-                    self.accountCreationState.accept(.error(error: error))
-                } else {
-                    self.accountCreationState.accept(.error(error: AccountCreationError.unknown))
-                }
-            })
-            .disposed(by: self.disposeBag)
-        self.enablePushNotifications(enable: self.notificationSwitch.value)
-    }
-
-    func finish() {
-        self.stateSubject.onNext(WalkthroughState.accountCreated)
-    }
-
-    func enablePushNotifications(enable: Bool) {
-        if !enable {
-            return
+    private func updateValidationState(with status: UsernameValidationStatus) {
+        switch status {
+            case .lookingUp:
+                usernameValidationState = .lookingForAvailability(message: L10n.CreateAccount.lookingForUsernameAvailability)
+            case .invalid:
+                usernameValidationState = .invalid(message: L10n.CreateAccount.invalidUsername)
+            case .alreadyTaken:
+                usernameValidationState = .unavailable(message: L10n.CreateAccount.usernameAlreadyTaken)
+            case .valid:
+                usernameValidationState = .available(message: L10n.CreateAccount.usernameValid)
+            default:
+                usernameValidationState = .unknown
         }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue), object: nil)
+    }
+
+    private func updateJoinButtonAvailability() {
+        isJoinButtonDisabled = username.isEmpty || !usernameValidationState.isAvailable
+    }
+
+    func usernameUpdated(to newUsername: String) {
+        guard username != newUsername else { return }
+        username = newUsername
+        if username.isEmpty {
+            isJoinButtonDisabled = false
+        } else {
+            nameService.lookupName(withAccount: "", nameserver: "", name: username)
+        }
     }
 }
