@@ -204,7 +204,7 @@ struct AlertFieldStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(.horizontal)
-            .padding(.vertical, 5)
+            .padding(.vertical, 12)
             .background(Color(UIColor.systemBackground))
             .cornerRadius(8)
     }
@@ -267,11 +267,15 @@ struct FocusableTextField: UIViewRepresentable {
         }
 
         func textFieldDidBeginEditing(_ textField: UITextField) {
-            self.isFirstResponder = true
+            DispatchQueue.main.async { [weak self] in
+                self?.isFirstResponder = true
+            }
         }
 
         func textFieldDidEndEditing(_ textField: UITextField) {
-            self.isFirstResponder = false
+            DispatchQueue.main.async { [weak self] in
+                self?.isFirstResponder = false
+            }
         }
     }
 
@@ -283,6 +287,9 @@ struct FocusableTextField: UIViewRepresentable {
         let textField = UITextField(frame: .zero)
         textField.delegate = context.coordinator
         textField.placeholder = placeholder
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+        textField.spellCheckingType = .no
         return textField
     }
 
