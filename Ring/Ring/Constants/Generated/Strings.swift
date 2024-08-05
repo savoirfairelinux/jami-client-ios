@@ -458,12 +458,30 @@ internal enum L10n {
   internal enum CreateAccount {
     /// Join Jami
     internal static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle", fallback: "Join Jami")
+    /// Creating account
+    internal static let creatingAccount = L10n.tr("Localizable", "createAccount.creatingAccount", fallback: "Creating account")
+    /// Customize
+    internal static let customize = L10n.tr("Localizable", "createAccount.customize", fallback: "Customize")
+    /// Encrypt
+    internal static let encrypt = L10n.tr("Localizable", "createAccount.encrypt", fallback: "Encrypt")
+    /// A Jami account is created and stored locally only on this device, as an archive containing your account keys. Access to this archive can optionally be protected by a password.
+    internal static let encryptExplanation = L10n.tr("Localizable", "createAccount.encryptExplanation", fallback: "A Jami account is created and stored locally only on this device, as an archive containing your account keys. Access to this archive can optionally be protected by a password.")
+    /// Encryption enabled
+    internal static let encryptionEnabled = L10n.tr("Localizable", "createAccount.encryptionEnabled", fallback: "Encryption enabled")
+    /// Encrypt account with password
+    internal static let encryptTitle = L10n.tr("Localizable", "createAccount.encryptTitle", fallback: "Encrypt account with password")
     /// invalid username
     internal static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername", fallback: "invalid username")
     /// Loading
     internal static let loading = L10n.tr("Localizable", "createAccount.loading", fallback: "Loading")
     /// looking for availability…
     internal static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability", fallback: "looking for availability…")
+    /// You can choose a username to help others more easily find and reach you on Jami.
+    internal static let nameExplanation = L10n.tr("Localizable", "createAccount.nameExplanation", fallback: "You can choose a username to help others more easily find and reach you on Jami.")
+    /// New account
+    internal static let newAccount = L10n.tr("Localizable", "createAccount.newAccount", fallback: "New account")
+    /// Configure an existing SIP account
+    internal static let sipConfigure = L10n.tr("Localizable", "createAccount.sipConfigure", fallback: "Configure an existing SIP account")
     /// Username registration in progress... It could take a few moments.
     internal static let timeoutMessage = L10n.tr("Localizable", "createAccount.timeoutMessage", fallback: "Username registration in progress... It could take a few moments.")
     /// Account Created
@@ -598,6 +616,8 @@ internal enum L10n {
     internal static let blockContact = L10n.tr("Localizable", "global.blockContact", fallback: "Block contact")
     /// Call
     internal static let call = L10n.tr("Localizable", "global.call", fallback: "Call")
+    /// Camera access is disabled. Please enable it in settings.
+    internal static let cameraDisabled = L10n.tr("Localizable", "global.cameraDisabled", fallback: "Camera access is disabled. Please enable it in settings.")
     /// Cancel
     internal static let cancel = L10n.tr("Localizable", "global.cancel", fallback: "Cancel")
     /// Close
@@ -692,6 +712,8 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "linkDevice.title", fallback: "Link a new device")
   }
   internal enum LinkToAccount {
+    /// A PIN is required to use an existing Jami account on this device
+    internal static let explanationMessage = L10n.tr("Localizable", "linkToAccount.explanationMessage", fallback: "A PIN is required to use an existing Jami account on this device")
     /// To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select "Link new device". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.
     internal static let explanationPinMessage = L10n.tr("Localizable", "linkToAccount.explanationPinMessage", fallback: "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.")
     /// Link
@@ -700,10 +722,14 @@ internal enum L10n {
     internal static let linkDeviceMessage = L10n.tr("Localizable", "linkToAccount.linkDeviceMessage", fallback: "Choose “Link a new device” from the other Jami app to show the QR code or PIN")
     /// Link Device
     internal static let linkDeviceTitle = L10n.tr("Localizable", "linkToAccount.linkDeviceTitle", fallback: "Link Device")
+    /// Fill if the account password is encrypted
+    internal static let passwordExplanation = L10n.tr("Localizable", "linkToAccount.passwordExplanation", fallback: "Fill if the account password is encrypted")
     /// Enter PIN
     internal static let pinLabel = L10n.tr("Localizable", "linkToAccount.pinLabel", fallback: "Enter PIN")
     /// PIN
     internal static let pinPlaceholder = L10n.tr("Localizable", "linkToAccount.pinPlaceholder", fallback: "PIN")
+    /// Scan QR Code
+    internal static let scanQRCode = L10n.tr("Localizable", "linkToAccount.scanQRCode", fallback: "Scan QR Code")
     /// Account linking
     internal static let waitLinkToAccountTitle = L10n.tr("Localizable", "linkToAccount.waitLinkToAccountTitle", fallback: "Account linking")
   }
@@ -712,8 +738,14 @@ internal enum L10n {
     internal static let accountManagerLabel = L10n.tr("Localizable", "linkToAccountManager.accountManagerLabel", fallback: "Enter JAMS URL")
     /// JAMS URL
     internal static let accountManagerPlaceholder = L10n.tr("Localizable", "linkToAccountManager.accountManagerPlaceholder", fallback: "JAMS URL")
+    /// Enter JAMS credentials
+    internal static let enterCredentials = L10n.tr("Localizable", "linkToAccountManager.enterCredentials", fallback: "Enter JAMS credentials")
+    /// Enter the Jami Account Management Server (JAMS) URL
+    internal static let jamsExplanation = L10n.tr("Localizable", "linkToAccountManager.jamsExplanation", fallback: "Enter the Jami Account Management Server (JAMS) URL")
     /// Sign In
     internal static let signIn = L10n.tr("Localizable", "linkToAccountManager.signIn", fallback: "Sign In")
+    /// JAMS Account
+    internal static let title = L10n.tr("Localizable", "linkToAccountManager.title", fallback: "JAMS Account")
   }
   internal enum LogView {
     /// Open diagnostic log settings
