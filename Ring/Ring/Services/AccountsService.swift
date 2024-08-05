@@ -267,9 +267,11 @@ class AccountsService: AccountAdapterDelegate {
     ///
     /// - Parameters:
     ///   - username: an optional username for the new account
-    ///   - password: the required password for the new account
+    ///   - password: optional password for the new account
+    ///   - profileName: optional profile name for the new account
+    ///   - enable: state for push notifications
     /// - Returns: an observable of an AccountModel: the created one
-    func addJamiAccount(username: String?, password: String, enable: Bool) -> Observable<AccountModel> {
+    func addJamiAccount(username: String?, password: String, profileName: String, enable: Bool) -> Observable<AccountModel> {
         // ~ Single asking the daemon to add a new account with the associated metadata
         var newAccountId = ""
         let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
@@ -280,6 +282,9 @@ class AccountsService: AccountAdapterDelegate {
                 }
                 if !password.isEmpty {
                     details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+                }
+                if !profileName.isEmpty {
+                    details.updateValue(profileName, forKey: ConfigKey.displayName.rawValue)
                 }
                 details.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
                 if let testServer = TestEnvironment.shared.nameServerURI {
@@ -420,6 +425,8 @@ class AccountsService: AccountAdapterDelegate {
             .take(1)
             .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
                 guard let self = self else { return Observable.empty() }
+                self.currentAccount = accountModel
+                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
                 return self.getAccountObservable(accountId: accountModel.id)
             })
     }
