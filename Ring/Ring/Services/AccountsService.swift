@@ -760,12 +760,22 @@ class AccountsService: AccountAdapterDelegate {
         account.updateVolatileDetails(dictionary: details)
     }
 
-    func accountsChanged() {
-        log.debug("Accounts changed.")
-        let currentAccounts = self.accountList.map { $0.id }
+    private let accountListLock = NSLock()
 
-        guard let newAccounts = self.getAccountsId() else {
-            self.accountList = []
+    func accountsChanged() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            self.handleAccountsChanged()
+        }
+    }
+
+    func handleAccountsChanged() {
+        log.debug("Accounts changed.")
+
+        let currentAccounts = accountList.map { $0.id }
+
+        guard let newAccounts = getAccountsId() else {
+            updateAccountList(removedAccounts: currentAccounts, addedAccounts: [])
             notifyAccountsChanged()
             return
         }
@@ -774,21 +784,24 @@ class AccountsService: AccountAdapterDelegate {
         let addedAccounts = newAccounts.filter { !currentAccounts.contains($0) }
 
         updateAccountList(removedAccounts: removedAccounts, addedAccounts: addedAccounts)
-
         notifyAccountsChanged()
     }
 
     private func updateAccountList(removedAccounts: [String], addedAccounts: [String]) {
-        // Remove removed accounts
-        self.accountList.removeAll { account in
-            removedAccounts.contains(account.id)
+        let newAccounts = createAndFetchNewAccounts(from: addedAccounts)
+        accountListLock.lock()
+        defer { accountListLock.unlock() }
+        accountList.removeAll { removedAccounts.contains($0.id) }
+        for newAccount in newAccounts where !accountList.contains(where: { $0.id == newAccount.id }) {
+            accountList.append(newAccount)
         }
+    }
 
-        // Add new accounts
-        for accountId in addedAccounts {
+    private func createAndFetchNewAccounts(from addedAccounts: [String]) -> [AccountModel] {
+        return addedAccounts.map { accountId in
             let newAccount = AccountModel(withAccountId: accountId)
-            self.updateAccountDetails(account: newAccount)
-            self.accountList.append(newAccount)
+            updateAccountDetails(account: newAccount)
+            return newAccount
         }
     }
 
@@ -866,7 +879,10 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func setAccountsActive(active: Bool) {
-        self.accountAdapter.setAccountsActive(active)
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            self.accountAdapter.setAccountsActive(active)
+        }
     }
 
     func setAccountActive(active: Bool, accountId: String) {
