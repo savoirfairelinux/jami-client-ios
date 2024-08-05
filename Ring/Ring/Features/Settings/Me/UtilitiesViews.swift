@@ -204,7 +204,7 @@ struct AlertFieldStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(.horizontal)
-            .padding(.vertical, 5)
+            .padding(.vertical, 12)
             .background(Color(UIColor.systemBackground))
             .cornerRadius(8)
     }
@@ -220,6 +220,7 @@ struct PasswordFieldView: View {
     @Binding var text: String
     @SwiftUI.State private var isVisible: Bool = false
     var placeholder: String
+    var identifier: String = ""
 
     var body: some View {
         HStack {
@@ -227,9 +228,11 @@ struct PasswordFieldView: View {
                 if isVisible {
                     TextField(placeholder, text: $text)
                         .textContentType(.password)
+                        .accessibilityIdentifier(identifier)
                 } else {
                     SecureField(placeholder, text: $text)
                         .textContentType(.password)
+                        .accessibilityIdentifier(identifier)
                 }
             }
             .disableAutocorrection(true)
@@ -252,6 +255,7 @@ struct FocusableTextField: UIViewRepresentable {
     @Binding var text: String
     @Binding var isFirstResponder: Bool
     var placeholder: String = ""
+    var identifier: String = ""
 
     class Coordinator: NSObject, UITextFieldDelegate {
         @Binding var text: String
@@ -267,11 +271,15 @@ struct FocusableTextField: UIViewRepresentable {
         }
 
         func textFieldDidBeginEditing(_ textField: UITextField) {
-            self.isFirstResponder = true
+            DispatchQueue.main.async { [weak self] in
+                self?.isFirstResponder = true
+            }
         }
 
         func textFieldDidEndEditing(_ textField: UITextField) {
-            self.isFirstResponder = false
+            DispatchQueue.main.async { [weak self] in
+                self?.isFirstResponder = false
+            }
         }
     }
 
@@ -283,6 +291,10 @@ struct FocusableTextField: UIViewRepresentable {
         let textField = UITextField(frame: .zero)
         textField.delegate = context.coordinator
         textField.placeholder = placeholder
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+        textField.spellCheckingType = .no
+        textField.accessibilityIdentifier = identifier
         return textField
     }
 
