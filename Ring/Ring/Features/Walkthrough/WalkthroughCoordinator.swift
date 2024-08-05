@@ -75,12 +75,10 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
                 case .welcomeDone(let walkthroughType):
                     self.showAddAccount(with: walkthroughType)
                 case .accountCreated, .deviceLinked:
-                    if self.rootViewController.presentedViewController != nil {
-                        self.rootViewController.dismiss(animated: true) { [weak self] in // dismiss the pop up form modal view
-                            self?.rootViewController.dismiss(animated: true) // dismiss the welcome view and check for user account state
-                        }
-                    }
+                    self.navigationViewController.setViewControllers([], animated:false)
+                    self.rootViewController.dismiss(animated: true)
                 case .walkthroughCanceled:
+                    self.navigationViewController.setViewControllers([], animated:false)
                     self.rootViewController.dismiss(animated: true)
                 case .aboutJami:
                     self.openAboutJami()
@@ -96,26 +94,25 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
     }
 
     func start () {
-        let welcomeViewController = WelcomeViewController.instantiate(with: self.injectionBag)
-        welcomeViewController.viewModel.notCancelable = isAccountFirst
-        welcomeViewController.viewModel.isAnimatable = withAnimations
-        self.present(viewController: welcomeViewController, withStyle: .show, withAnimation: false, withStateable: welcomeViewController.viewModel)
+        let presentedController = WelcomeViewController.instantiate(with: self.injectionBag)
+        presentedController.viewModel.notCancelable = isAccountFirst
+        self.present(viewController: presentedController, withStyle: .show, withAnimation: false, withStateable: presentedController.viewModel)
     }
 
     private func showAddAccount (with walkthroughType: WalkthroughType) {
-        switch walkthroughType {
-        case .createAccount:
-            let createAccountViewController = CreateAccountViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: createAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: createAccountViewController.viewModel)
-        case .createSipAccount:
-            let sipAccountViewController = CreateSipAccountViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: sipAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: sipAccountViewController.viewModel)
-        case .linkDevice:
-            let linkDeviceViewController = LinkDeviceViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: linkDeviceViewController, withStyle: .formModal, withAnimation: true, withStateable: linkDeviceViewController.viewModel)
-        case .linkToAccountManager:
-            let linkToManagerViewController = LinkToAccountManagerViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: linkToManagerViewController, withStyle: .formModal, withAnimation: true, withStateable: linkToManagerViewController.viewModel)
-        }
+//        switch walkthroughType {
+//        case .createAccount:
+//            let createAccountViewController = CreateAccountViewController.instantiate(with: self.injectionBag)
+//            self.present(viewController: createAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: createAccountViewController.viewModel)
+//        case .createSipAccount:
+//            let sipAccountViewController = CreateSipAccountViewController.instantiate(with: self.injectionBag)
+//            self.present(viewController: sipAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: sipAccountViewController.viewModel)
+//        case .linkDevice:
+//            let linkDeviceViewController = LinkDeviceViewController.instantiate(with: self.injectionBag)
+//            self.present(viewController: linkDeviceViewController, withStyle: .formModal, withAnimation: true, withStateable: linkDeviceViewController.viewModel)
+//        case .linkToAccountManager:
+//            let linkToManagerViewController = LinkToAccountManagerViewController.instantiate(with: self.injectionBag)
+//            self.present(viewController: linkToManagerViewController, withStyle: .formModal, withAnimation: true, withStateable: linkToManagerViewController.viewModel)
+//        }
     }
 }
