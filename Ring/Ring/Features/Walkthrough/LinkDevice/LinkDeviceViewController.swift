@@ -66,11 +66,11 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
 
         // bind view model to view
 
-        self.linkButton.rx.tap
-            .subscribe(onNext: { [weak self] (_) in
-                self?.viewModel.linkDevice()
-            })
-            .disposed(by: self.disposeBag)
+//        self.linkButton.rx.tap
+//            .subscribe(onNext: { [weak self] (_) in
+//                self?.viewModel.linkDevice()
+//            })
+//            .disposed(by: self.disposeBag)
 
         self.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
