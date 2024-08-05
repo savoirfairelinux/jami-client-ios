@@ -73,7 +73,7 @@ final class AccountsServiceTest: XCTestCase {
         setupInitialAccounts(initialAccountIds: initialAccountIds)
         accountService.mockAccountsId = newAccountIds
 
-        accountService.accountsChanged()
+        accountService.handleAccountsChanged()
 
         XCTAssertEqual(accountService.accountList.count, 2)
         XCTAssertTrue(accountService.accountList.contains(where: { $0.id == account2 }))
@@ -87,7 +87,7 @@ final class AccountsServiceTest: XCTestCase {
         setupInitialAccounts(initialAccountIds: initialAccountIds)
         accountService.mockAccountsId = newAccountIds
 
-        accountService.accountsChanged()
+        accountService.handleAccountsChanged()
 
         XCTAssertEqual(accountService.accountList.count, 3)
         XCTAssertTrue(accountService.accountList.contains(where: { $0.id == account2 }))
@@ -101,7 +101,7 @@ final class AccountsServiceTest: XCTestCase {
         setupInitialAccounts(initialAccountIds: initialAccountIds)
         accountService.mockAccountsId = newAccountIds
 
-        accountService.accountsChanged()
+        accountService.handleAccountsChanged()
 
         XCTAssertEqual(accountService.accountList.count, 3)
         XCTAssertTrue(accountService.accountList.contains { $0.id == account1 })
@@ -114,7 +114,7 @@ final class AccountsServiceTest: XCTestCase {
         setupInitialAccounts(initialAccountIds: initialAccountIds)
         accountService.mockAccountsId = nil
 
-        accountService.accountsChanged()
+        accountService.handleAccountsChanged()
 
         XCTAssertEqual(accountService.accountList.count, 0)
     }
@@ -137,7 +137,7 @@ final class AccountsServiceTest: XCTestCase {
             })
             .disposed(by: disposeBag)
 
-        accountService.accountsChanged()
+        accountService.handleAccountsChanged()
 
         wait(for: [expectation], timeout: 1.0)
     }
@@ -306,7 +306,7 @@ final class AccountsServiceTest: XCTestCase {
         accountService.mockAccountsId = (500...1500).map { "\($0)" }
 
         measure {
-            accountService.accountsChanged()
+            accountService.handleAccountsChanged()
         }
     }
 
