@@ -76,11 +76,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<Ring.ConversationViewController>(storyboard: ConversationViewController.self)
   }
-  internal enum CreateAccountViewController: StoryboardType {
-    internal static let storyboardName = "CreateAccountViewController"
-
-    internal static let initialScene = InitialSceneType<Ring.CreateAccountViewController>(storyboard: CreateAccountViewController.self)
-  }
   internal enum CreateProfileViewController: StoryboardType {
     internal static let storyboardName = "CreateProfileViewController"
 
@@ -97,11 +92,6 @@ internal enum StoryboardScene {
     internal static let storyboardName = "LaunchScreen"
 
     internal static let initialScene = InitialSceneType<UIViewController>(storyboard: LaunchScreen.self)
-  }
-  internal enum LinkDeviceViewController: StoryboardType {
-    internal static let storyboardName = "LinkDeviceViewController"
-
-    internal static let initialScene = InitialSceneType<Ring.LinkDeviceViewController>(storyboard: LinkDeviceViewController.self)
   }
 
   internal enum ScanViewController: StoryboardType {
