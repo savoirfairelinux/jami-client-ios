@@ -67,7 +67,6 @@ class CreateProfileViewModel: Stateable, ViewModel {
     }
 
     func proceedWithAccountCreationOrDeviceLink() {
-        self.stateSubject.onNext(WalkthroughState.accountCreated)
     }
 
 }
