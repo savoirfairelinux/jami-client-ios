@@ -420,6 +420,8 @@ class AccountsService: AccountAdapterDelegate {
             .take(1)
             .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
                 guard let self = self else { return Observable.empty() }
+                self.currentAccount = accountModel
+                UserDefaults.standard.set(accountModel.id, forKey: self.selectedAccountID)
                 return self.getAccountObservable(accountId: accountModel.id)
             })
     }
