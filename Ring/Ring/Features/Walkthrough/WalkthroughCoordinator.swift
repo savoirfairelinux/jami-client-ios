@@ -34,17 +34,8 @@ public enum WalkthroughType {
 }
 
 /// Represents walkthrough navigation state
-///
-/// - welcomeDone: user has made the WalkthroughType choice (first page)
-/// - profileCreated: profile has been created
-/// - accountCreated: account has finish creating
-/// - deviceLinked: linking has finished
 public enum WalkthroughState: State {
-    case welcomeDone(withType: WalkthroughType)
-    case accountCreated
-    case deviceLinked
-    case walkthroughCanceled
-    case aboutJami
+    case completed
 }
 
 /// This Coordinator drives the walkthrough navigation (welcome / profile / creation or link)
@@ -72,18 +63,9 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? WalkthroughState else { return }
                 switch state {
-                case .welcomeDone(let walkthroughType):
-                    self.showAddAccount(with: walkthroughType)
-                case .accountCreated, .deviceLinked:
-                    if self.rootViewController.presentedViewController != nil {
-                        self.rootViewController.dismiss(animated: true) { [weak self] in // dismiss the pop up form modal view
-                            self?.rootViewController.dismiss(animated: true) // dismiss the welcome view and check for user account state
-                        }
-                    }
-                case .walkthroughCanceled:
+                case .completed:
+                    self.navigationViewController.setViewControllers([], animated: false)
                     self.rootViewController.dismiss(animated: true)
-                case .aboutJami:
-                    self.openAboutJami()
                 }
             })
             .disposed(by: self.disposeBag)
@@ -96,26 +78,8 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
     }
 
     func start () {
-        let welcomeViewController = WelcomeViewController.instantiate(with: self.injectionBag)
-        welcomeViewController.viewModel.notCancelable = isAccountFirst
-        welcomeViewController.viewModel.isAnimatable = withAnimations
-        self.present(viewController: welcomeViewController, withStyle: .show, withAnimation: false, withStateable: welcomeViewController.viewModel)
-    }
-
-    private func showAddAccount (with walkthroughType: WalkthroughType) {
-        switch walkthroughType {
-        case .createAccount:
-            let createAccountViewController = CreateAccountViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: createAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: createAccountViewController.viewModel)
-        case .createSipAccount:
-            let sipAccountViewController = CreateSipAccountViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: sipAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: sipAccountViewController.viewModel)
-        case .linkDevice:
-            let linkDeviceViewController = LinkDeviceViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: linkDeviceViewController, withStyle: .formModal, withAnimation: true, withStateable: linkDeviceViewController.viewModel)
-        case .linkToAccountManager:
-            let linkToManagerViewController = LinkToAccountManagerViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: linkToManagerViewController, withStyle: .formModal, withAnimation: true, withStateable: linkToManagerViewController.viewModel)
-        }
+        let presentedController = WelcomeViewController.instantiate(with: self.injectionBag)
+        presentedController.viewModel.notCancelable = isAccountFirst
+        self.present(viewController: presentedController, withStyle: .show, withAnimation: false, withStateable: presentedController.viewModel)
     }
 }
