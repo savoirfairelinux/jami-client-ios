@@ -40,7 +40,7 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
     }
 
     func openWelcomeViewFromConversation() {
-        let welcomeWindow = app.otherElements[AccessibilityIdentifiers.welcomeWindow]
+        let welcomeWindow = app.images[AccessibilityIdentifiers.welcomeWindow]
         if welcomeWindow.exists && welcomeWindow.isHittable {
             return
         }
@@ -62,9 +62,9 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
 
     func openAccountCreation() {
         openWelcomeViewFromConversation()
-        app.scrollViews.otherElements.buttons[AccessibilityIdentifiers.joinJamiButton].tap()
+        app.buttons[AccessibilityIdentifiers.joinJamiButton].tap()
 
-        let createAccountWindow = app.otherElements[AccessibilityIdentifiers.createAccountView]
+        let createAccountWindow = app.staticTexts[AccessibilityIdentifiers.createAccountTitle]
         waitForElementToAppear(createAccountWindow)
     }
 
@@ -76,7 +76,7 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
         cancelButton.tap()
         waitForSeconds(2)
         // Verify that welcome view is presented
-        let welcomeWindow = app.otherElements[AccessibilityIdentifiers.welcomeWindow]
+        let welcomeWindow = app.images[AccessibilityIdentifiers.welcomeWindow]
         XCTAssertTrue(welcomeWindow.exists)
     }
 
@@ -88,10 +88,11 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
     }
 
     func enterName(_ name: String) {
-        app.textFields[AccessibilityIdentifiers.usernameTextField].tap()
+        let usernameField = app.textFields[AccessibilityIdentifiers.usernameTextField]
+        usernameField.tap()
 
         // Directly insert the not registered name into the text field
-        app.textFields[AccessibilityIdentifiers.usernameTextField].typeText(name)
+        usernameField.typeText(name)
     }
 
     func testCancelJoinJami() {
@@ -99,7 +100,7 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
 
         // Verify the state of the "Cancel" button
         let cancelButton = app.buttons[AccessibilityIdentifiers.cancelCreatingAccount]
-        XCTAssertTrue(cancelButton.isEnabled, "The Join button is not enabled")
+        XCTAssertTrue(cancelButton.isEnabled, "Cancel button is not enabled")
         cancelButton.tap()
 
         // Verify that account creation view dismissed
@@ -108,14 +109,14 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
         XCTAssertFalse(createAccountWindow.exists)
 
         // Verify that welcome view is presented
-        let welcomeWindow = app.otherElements[AccessibilityIdentifiers.welcomeWindow]
+        let welcomeWindow = app.images[AccessibilityIdentifiers.welcomeWindow]
         XCTAssertTrue(welcomeWindow.exists)
     }
 
     func testJoinTitle() {
         openAccountCreation()
         let title = app.staticTexts[AccessibilityIdentifiers.createAccountTitle]
-        let expectedText = L10n.CreateAccount.createAccountFormTitle
+        let expectedText = L10n.CreateAccount.newAccount
 
         // Check the title of the navigation bar
         XCTAssertEqual(title.label, expectedText, "Navigation title is not correct")
