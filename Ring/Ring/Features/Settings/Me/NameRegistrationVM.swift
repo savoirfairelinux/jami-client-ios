@@ -97,7 +97,7 @@ class NameRegistrationVM: ObservableObject {
                     guard let self = self else { return }
                     switch status {
                     case .lookingUp:
-                        self.usernameValidationState = .lookingForAvailibility(message: L10n.CreateAccount.lookingForUsernameAvailability)
+                        self.usernameValidationState = .lookingForAvailability(message: L10n.CreateAccount.lookingForUsernameAvailability)
                     case .invalid:
                         self.usernameValidationState = .invalid(message: L10n.CreateAccount.invalidUsername)
                     case .alreadyTaken:

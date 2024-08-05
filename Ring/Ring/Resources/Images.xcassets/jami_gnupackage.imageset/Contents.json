@@ -3,6 +3,16 @@
     {
       "filename" : "logo-jami.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "logo-jami-standard-coul-white.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {
