@@ -44,18 +44,18 @@
 "global.copy" = "Kopírovať";
 "global.reply" = "Odpovedať";
 "global.search" = "Vyhľadávanie...";
-"global.donate" = "Donate";
+"global.donate" = "Prispejte";
 "global.deleteMessage" = "Vymazať správu";
-"global.deleteFile" = "Delete file from device";
+"global.deleteFile" = "Vymazať zo zariadenia";
 "global.editMessage" = "Zobraziť správu";
-"global.editing" = "Editing";
+"global.editing" = "Upravuje sa";
 "global.create" = "Vytvoriť";
 "global.edit" = "Upraviť";
 "global.remove" = "Odstrániť";
 "global.call" = "Volať";
 "global.video" = "Video";
 "global.time" = "Čas";
-"global.editPassword" = "Edit password";
+"global.editPassword" = "Zmeniť heslo";
 
 // Scan
 "scan.badQrCode" = "Zlý QR kód";
@@ -86,24 +86,24 @@
 "swarm.addMember" = "Pridať člena";
 "swarm.confirmLeaveSwarm" = "Si si istý, že chceš opustiť tento hŕst?";
 "swarm.Leave" = "Odchádzam";
-"swarm.newSwarm" = "New swarm";
+"swarm.newSwarm" = "Nová skupina";
 "swarm.namePlaceholder" = "Názov šarmu";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.explanationText" = "Po vytvorení skupiny môžete kedykoľvek pridať alebo pozvať členov";
+"swarm.customizeProfile" = "Upraviť profil skupiny";
+"swarm.changePicture" = "Zmeniť fotku skupiny";
+"swarm.customize" = "Upraviť skupinu";
+"swarm.selectContacts" = "Vybrať kontakty";
 
 // Smartlist
 "smartlist.yesterday" = "Včera";
 "smartlist.results" = "Verejný zoznam";
 "smartlist.jamsResults" = "Výsledky vyhľadávania";
 "smartlist.conversations" = "Konverzácie";
-"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.noConversationsFound" = "Vášmu vyhľadávaniu nezodpovedajú žiadne konverzácie";
 "smartlist.newContact" = "Nový kontakt";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newSwarm" = "Nová skupina";
 "smartlist.accounts" = "Účty";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "Prijaté pozvania";
 "smartlist.noResults" = "Žiadne výsledky";
 "smartlist.noConversation" = "Žiadne konverzácie";
 "smartlist.searchBarPlaceholder" = "Zadajte meno...";
@@ -116,22 +116,22 @@
 "smartlist.selectOneNumber" = "Vyberte jedno z čísel";
 "smartlist.invitations" = "Pozvánky";
 "smartlist.aboutJami" = "O programe Jami";
-"smartlist.inviteFriends" = "Invite friends";
+"smartlist.inviteFriends" = "Pozvať priateľov";
 "smartlist.accounts" = "Účty";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
-"smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.disableDonation" = "Teraz nie";
+"smartlist.donationExplanation" = "Ak radi používate Jami a veríte v naše poslanie, prispeli by ste nám?";
+"smartlist.inSynchronization" = "konverzácia sa synchronizuje";
+"smartlist.newMessage" = "Nová správa";
 
 //Conversation
-"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsButton" = "Pridať do kontaktov";
 "conversation.addToContactsLabel" = "Pridať do kontaktov?";
-"conversation.notContactLabel" = "is not in your contact list";
-"conversation.messagePlaceholder" = "Write to";
+"conversation.notContactLabel" = "nie je vo vašom zozname kontaktov";
+"conversation.messagePlaceholder" = "Písať";
 "conversation.explanationSendingLocationTo" = "V súčasnosti zdieľate svoju polohu s ";
 "conversation.explanationReceivingLocationFrom" = "Momentálne dostávate živú lokalitu od ";
-"conversation.errorSavingImage" = "Failed to save image to gallery";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.errorSavingImage" = "Obrázok sa nepodarilo uložiť do galérie";
+"conversation.receivedRequest" = "%@ vám poslal žiadosť o konverzáciu. ";
 "conversation.incomingRequest" = "Poslal som vám žiadosť o rozhovor.";
 "conversation.requestMessage" = "Ahoj, chcela by si sa pripojiť k rozhovore?";
 "conversation.sendRequest" = "Posielajte mu/jej kontaktnú žiadosť, aby mohli spolu vymieňať";
@@ -139,34 +139,34 @@
 "conversation.synchronizationTitle" = "Prijal si žiadosť o rozhovor.";
 "conversation.synchronizationMessage" = "Čakajú na %@ pripojenia na synchronizáciu konverzácie.";
 "conversation.inReplyTo" = "V odpovedi na";
-"conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.repliedTo" = "Odpovedať";
+"conversation.yourself" = "seba";
+"conversation.edited" = "upravené";
+"conversation.deletedMessage" = "odstránil správu";
 
 //Invitations
 "invitations.noInvitations" = "Žiadne pozvánky";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
-"invitations.list" = "Invitations received";
+"invitations.pending" = "čakajúce";
+"invitations.accepted" = "prijaté";
+"invitations.refused" = "odmietnuté";
+"invitations.banned" = "zakázané";
+"invitations.list" = "Prijaté pozvania";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
+"welcome.title" = "Zdieľajte, voľne a súkromne s Jami";
 "welcome.text" = "Jami je slobodná a univerzálna komunikačná platforma, ktorá zachováva súkromie a slobodu používateľov.";
 "welcome.haveAccount" = "Už mám účet.";
 "welcome.linkDevice" = "Import z iného zariadenia";
 "welcome.linkBackup" = "Importovať zo zálohovaného archívu";
 "welcome.createAccount" = "Pridať";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.connectToManager" = "Pripojte sa k serveru Jami Account Manager";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Preskočiť";
 "createProfile.profileCreated" = "Ďalej";
-"createProfile.title" = "Personalize your profile";
+"createProfile.title" = "Prispôsobte si svoj profil";
 "createProfile.enterNameLabel" = "Zadajte meno na zobrazenie";
 "createProfile.enterNamePlaceholder" = "Zadajte meno";
 "createProfile.subtitle" = "Váš profil bude zdieľaný s vašimi kontaktami. Môžete to kedykoľvek zmeniť.";
@@ -188,11 +188,11 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Prepájanie účtu";
 "linkToAccount.linkButtonTitle" = "Prepojiť";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Prepojiť zariadenie";
+"linkToAccount.linkDeviceMessage" = "Ak chcete zobraziť QR kód alebo PIN, vyberte „Prepojiť nové zariadenie“ z inej aplikácie Jami";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Zadajte PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Ak chcete vygenerovať kód PIN, prejdite do nastavení správy účtu na zariadení obsahujúcom účet, ktorý chcete prepojiť. Vyberte možnosť „Pripojiť nové zariadenie“. Na vyplnenie tohto formulára dostanete potrebný PIN. PIN je platný len 10 minút.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Prihlásiť sa";
@@ -210,7 +210,7 @@
 "alerts.profileTakePhoto" = "Zhotoviť fotografiu";
 "alerts.profileUploadPhoto" = "Nahrať fotografiu";
 "alerts.accountLinkedTitle" = "Prepájanie účtu";
-"alerts.dbFailedTitle" = "An error happened when launching Jami";
+"alerts.dbFailedTitle" = "Pri spúšťaní Jami sa vyskytla chyba";
 "alerts.dbFailedMessage" = "Zavrite a znovu otvorte aplikáciu";
 "alerts.confirmBlockContact" = "Naozaj chcete zablokovať tento kontakt? Bude trvalo vymazaná aj história konverzácie s týmto kontaktom.";
 "alerts.confirmDeleteConversation" = "Naozaj chcete natrvalo vymazať túto konverzáciu?";
@@ -274,20 +274,20 @@
 "accountPage.proxyAddressAlert" = "Zadajte adresu proxy";
 "accountPage.noProxyExplanationLabel" = "Vaše zariadenie nebude dostávať upozornenia keď je proxy vypnutá";
 "accountPage.proxyPaceholder" = "Adresa proxy";
-"accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
-"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.useProxyList" = "Použiť zoznam proxy";
+"accountPage.proxyListURL" = "URL zoznamu proxy";
+"accountPage.proxyExplanation" = "Upozornenia sú smerované cez proxy. Môžete použiť predvolený server proxy, zadať vlastnú adresu servera proxy alebo poskytnúť adresu URL so zoznamom serverov proxy";
 "accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Umožniť oznámenie";
 "accountPage.proxyDisabledAlertTitle" = "Proxy server zakázaný";
 "accountPage.proxyDisabledAlertBody" = "Ak chcete dostávať upozornenia, povoľte prosím proxy.";
-"accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.removeDeviceTitle" = "Odstrániť zariadenie";
+"accountPage.revokeDeviceMessage" = "Naozaj chcete odstrániť toto zariadenie? Túto akciu nie je možné vrátiť späť.";
 "accountPage.revokeDeviceButton" = "Odobrať";
 "accountPage.revokeDevicePlaceholder" = "Zadajte vaše heslo";
 "accountPage.deviceRevoked" = "Odobratie zariadenia dokončené";
-"accountPage.deviceRevocationProgress" = "Removing…";
-"accountPage.deviceRevocationSuccess" = "Device removed";
+"accountPage.deviceRevocationProgress" = "Odstraňuje sa…";
+"accountPage.deviceRevocationSuccess" = "Zariadenie bolo odstránené";
 "accountPage.deviceRevocationTryAgain" = "Skúste znova";
 "accountPage.deviceRevocationWrongPassword" = "Nesprávne heslo";
 "accountPage.deviceRevocationUnknownDevice" = "Neznáme zariadenie";
@@ -295,12 +295,12 @@
 "accountPage.linkDeviceTitle" = "Prepojiť ďalšie zariadenie";
 "accountPage.other" = "Iné";
 "accountPage.removeAccountMessage" = "Ak sa váš účet nezachytal alebo nebol pridaný do iného zariadenia, váš účet a registrované meno sa nepovratne stratia.";
-"accountPage.inviteFriends" = "Invite friends";
+"accountPage.inviteFriends" = "Pozvať priateľov";
 "accountPage.contactMeOnJamiTitle" = "Kontaktujte ma na Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontaktujete ma pomocou \"%s\" na distribuovanej komunikačnej platforme Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Zadajte heslo k účtu";
 "accountPage.usernamePlaceholder" = "Zadajte želané používateľské meno";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "Zvolené používateľské meno nie je dostupné";
 "accountPage.usernameRegistering" = "Registruje sa";
 "accountPage.usernameRegisterAction" = "Registrovať";
 "accountPage.usernameRegistrationFailed" = "Registrácia zlyhala. Skontrolujte prosím heslo.";
@@ -312,9 +312,9 @@
 "accountPage.changePasswordError" = "Nespraviteľné heslo";
 "accountPage.enableBoothMode" = "Umožniť režim kabíny";
 "accountPage.disableBoothMode" = "Zmazať režim kabíny";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Prosím zadajte heslo svojho účtu";
 "accountPage.boothModeExplanation" = "V režime kabíny nie je uložená historika konverzácií a funkcia Jami je obmedzená výstupnými hovormi.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
+"accountPage.noBoothMode" = "Ak chcete aktivovať režim Booth, najskôr zašifrujte svoj účet.";
 "accountPage.boothModeAlertMessage" = "Po spustení režimu stanky sa všetky vaše konverzácie odstránia.";
 "accountPage.peerDiscovery" = "Povoliť lokálne vyhľadávanie peerov";
 "accountPage.peerDiscoveryExplanation" = "Pripojiť k iným DHT uzlom na rovnakej lokálnej sieti";
@@ -328,52 +328,52 @@
 "accountPage.upnpEnabled" = "Používať UPnP";
 "accountPage.security" = "Bezpečnosť";
 "accountPage.enableSRTP" = "Zašifrovať mediálne streamy (SRTP)";
-"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.registerNameExplanation" = "Zaregistrujte si používateľské meno, aby vás ostatní mohli ľahšie nájsť a kontaktovať na Jami.";
 "accountPage.profileHeader" = "Profil";
-"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.profileNameNotSelected" = "Meno nie je vybraté";
 "accountPage.accountHeader" = "Účet";
 "accountPage.profileName" = "Profilové meno";
-"accountPage.profileNamePlaceholder" = "Enter profile name";
-"accountPage.editProfile" = "Edit Profile";
+"accountPage.profileNamePlaceholder" = "Zadajte názov profilu";
+"accountPage.editProfile" = "Upraviť profil";
 "accountPage.manageAccount" = "Spravovať účet";
 "accountPage.encryptAccount" = "Zšifrovať účet heslom";
-"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordExplanation" = "Váš účet Jami je uložený iba lokálne v tomto zariadení ako archív obsahujúci vaše kľúče účtu. Prístup do tohto archívu môže byť chránený heslom.";
 "accountPage.passwordsDoNotMatch" = "Heslá sa nezhodujú";
-"accountPage.passwordCreated" = "Password created";
-"accountPage.passwordUpdated" = "Password updated";
+"accountPage.passwordCreated" = "Heslo vytvorené";
+"accountPage.passwordUpdated" = "Heslo aktualizované";
 "accountPage.linkedDevices" = "Prepojené zariadenia";
-"accountPage.unlink" = "Unlink";
-"accountPage.generatingPin" = "Generating PIN…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
-"accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
-"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.unlink" = "Odpojiť";
+"accountPage.generatingPin" = "Generuje sa kód PIN…";
+"accountPage.passwordForPin" = "Tento účet je zašifrovaný heslom, zadajte heslo na vygenerovanie PIN kódu";
+"accountPage.pinExplanationTitle" = "Na inom zariadení";
+"accountPage.pinExplanationMessage" = "Nainštalujte a spustite Jami, vyberte import z iného zariadenia a naskenujte QR kód alebo ručne zadajte PIN.";
+"accountPage.pinError" = "Kód PIN sa nepodarilo vygenerovať";
 "accountPage.notificationTitle" = "Upozornenia";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
+"accountPage.notificationError" = "Upozornenia pre Jami sú vypnuté. Povoľte ich v nastaveniach zariadenia";
 "accountPage.callsFromUnknownContacts" = "Povoliť prichádzajúce hovory od neznámych kontaktov";
-"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
-"accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
-"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.accountSettingsExplanation" = "Tieto nastavenia budú platiť iba pre tento účet";
+"accountPage.appSettings" = "Nastavenia aplikácie";
+"accountPage.appSettingsExplanation" = "Tieto nastavenia budú platiť pre celú aplikáciu";
+"accountPage.connectivityAndConfiguration" = "Konektivita a konfigurácie";
 "accountPage.sipExpirationTime" = "Čas uplynutia platnosti registrácie (sekundy)";
 "accountPage.tlsVerifyServerCertificates" = "Overenie certifikátov TLS serverov";
-"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Overte certifikáty TLS klienta";
 "accountPage.tlsRequireTlsCertificate" = "Vyžadovať certifikáty pre prichádzajúce TLS pripojenia";
 "accountPage.tlsDisableSecureDlgCheck" = "Znechytávajte zabezpečený dialógový overenie pre prichádzajúce údaje TLS";
-"accountPage.editSipExpirationTime" = "Expiration time";
-"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.editSipExpirationTime" = "Čas expirácie";
+"accountPage.selectSipExpirationTime" = "Nastavte čas (v sekundách) do vypršania platnosti registrácie";
 "accountPage.thisDevice" = "Toto zariadenie";
 "accountPage.otherDevices" = "Ostatné prepojené zariadenia";
-"accountPage.accountIdentity" = "Account identity";
+"accountPage.accountIdentity" = "Identita účtu";
 
 //Account
 "account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Configure a SIP Account";
+"account.createSipAccount" = "Nakonfigurujte účet SIP";
 "account.sipAccount" = "SIP Účet";
-"account.configure" = "Configure";
-"account.advancedFeatures" = "Advanced Features";
+"account.configure" = "Konfigurovať";
+"account.advancedFeatures" = "Pokročilé funkcie";
 "account.serverLabel" = "Zadajte adresu";
 "account.portLabel" = "Zadajte číslo portu";
 "account.accountStatus" = "Status účtu";
@@ -392,8 +392,8 @@
 //Link New Device
 "linkDevice.title" = "Prepojiť nové zariadenie";
 "linkDevice.passwordError" = "Heslo, ktoré ste zadali, neodomyká tento účet";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
+"linkDevice.networkError" = "Počas exportu sa vyskytla sieťová chyba";
+"linkDevice.defaultError" = "Počas exportu sa vyskytla chyba";
 "linkDevice.explanationMessage" = "Na dokončenie procesu je potrebné otvoriť aplikáciu Jami na novom zariadení a zvoliť možnosť \"Prepojiť toto zariadenie s účtom\". Váš PIN bude funkčný po dobu 10 minút.";
 "linkDevice.hudMessage" = "Overovanie";
 
@@ -412,7 +412,7 @@
 "dataTransfer.readableStatusCanceled" = "Zrušené";
 "dataTransfer.sendingFailed" = "Odoslanie zlyhalo";
 "dataTransfer.readableStatusSuccess" = "Dokončiť";
-"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
+"dataTransfer.recordInBackgroundWarning" = "Nahrávanie videa počas multitaskingu s viacerými aplikáciami môže viesť k nižšej kvalite videí. Ak chcete dosiahnuť najlepšie výsledky, nahrávajte, keď nevykonávate multitasking";
 
 //Notifications
 "notifications.missedCall" = "Zmeškaný hovor";
@@ -426,7 +426,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
+"generatedMessage.contactAdded" = "Dostali ste pozvánku";
 "generatedMessage.swarmCreated" = "Vytvorený hŕstok";
 "generatedMessage.invitationReceived" = "bol pozvaný k tomu, aby sa pripojil";
 "generatedMessage.invitationAccepted" = "Pripojil sa k rozhovore";
@@ -449,8 +449,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(v MB, 0 = neobmedzené)";
 "generalSettings.limitLocationSharingDuration" = "Obmedzenie trvania zdieľania umiestnenia";
 "generalSettings.locationSharingDuration" = "Dĺžka trvania podielu pozícií";
-"generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.donationCampaign" = "Darcovská kampaň";
+"generalSettings.enableDonationCampaign" = "Povoliť darcovskú kampaň";
 
 //Log View
 "logView.title" = "Diagnostika";
@@ -470,13 +470,13 @@
 "migrateAccount.migrateAnother" = "Migrovať ďalší účet";
 
 //About Jami
-"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
-"aboutJami.declaration2" = "to learn more.";
-"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
-"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.declaration1" = "Jami, balík GNU, je softvér pre univerzálnu a distribuovanú komunikáciu typu peer-to-peer, ktorý rešpektuje slobodu a súkromie svojich používateľov. Navštíviť";
+"aboutJami.declaration2" = "Navštívte, aby ste sa dozvedeli viac";
+"aboutJami.noWarranty1" = "Tento program je dodávaný bez akejkoľvek záruky.";
+"aboutJami.noWarranty2" = "Podrobnosti nájdete vo verzii 3 alebo novšej.";
 "aboutJami.contribute" = "Prispejte";
 "aboutJami.feedback" = "Spätná väzba";
-"aboutJami.createdBy" = "Created by";
-"aboutJami.artworkBy" = "Artwork by";
+"aboutJami.createdBy" = "Vytvoril";
+"aboutJami.artworkBy" = "Ilustrácia od";
 
 

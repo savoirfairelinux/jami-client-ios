@@ -317,7 +317,7 @@
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Despois de activar o modo de cabina todas as súas conversacións serán eliminadas.";
 "accountPage.peerDiscovery" = "Activar o descubrimento de pares locais";
-"accountPage.peerDiscoveryExplanation" = "Connect to other DHT nodes advertising on our local network";
+"accountPage.peerDiscoveryExplanation" = "Conectar a outros nodos DHT que se anuncian na túa rede local";
 "accountPage.autoRegistration" = "Registro automático despois da caducidade";
 "accountPage.connectivityHeader" = "Conectividade";
 "accountPage.turnEnabled" = "Activar TURN";
