@@ -142,15 +142,57 @@ class AccountModel: Equatable {
     }
 
     func updateDetails(dictionary: [String: String]) {
-        let accountDetails = self.details
-        accountDetails?.update(withDetails: dictionary)
-        self.details = accountDetails
+        let newDetails = AccountConfigModel(withDetails: dictionary)
+        self.updateFromDetails(details: newDetails)
+        detailsQueue.sync(flags: .barrier) { [weak self] in
+            guard let self = self else { return }
+            self.protectedDetails?.update(withDetails: dictionary)
+        }
     }
 
     func updateVolatileDetails(dictionary: [String: String]) {
-        let volatileDetails = self.volatileDetails
-        volatileDetails?.update(withDetails: dictionary)
-        self.volatileDetails = volatileDetails
+        let newDetails = AccountConfigModel(withDetails: dictionary)
+        self.updateFromVolatileDetails(details: newDetails)
+        volatileDetailsQueue.sync(flags: .barrier) { [weak self] in
+            guard let self = self else { return }
+            self.protectedVolatileDetails?.update(withDetails: dictionary)
+        }
+    }
+
+    private func updateFromDetails(details: AccountConfigModel) {
+        if !details
+            .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
+            .isEmpty {
+            self.username = details
+                .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountUsername))
+        }
+        let accountType = details
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType))
+        if let type = AccountType(rawValue: accountType) {
+            self.type = type
+        }
+        self.enabled = details
+            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountEnable))
+            .boolValue
+        let managerConfModel = ConfigKeyModel(withKey: .managerUri)
+        let isJams = !details.get(withConfigKeyModel: managerConfModel).isEmpty
+        self.isJams = isJams
+    }
+
+    private func updateFromVolatileDetails(details: AccountConfigModel) {
+        if !details
+            .get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName))
+            .isEmpty {
+            self.registeredName = details.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName))
+        }
+        if let status = AccountState(rawValue:
+                                        details.get(withConfigKeyModel:
+                                                        ConfigKeyModel(withKey: .accountRegistrationStatus))) {
+            self.status = status
+        }
+        self.proxy = details.get(withConfigKeyModel:
+                                        ConfigKeyModel(withKey: .proxyServer))
+
     }
 
     func setEnable(enable: Bool) {

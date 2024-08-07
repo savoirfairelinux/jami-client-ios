@@ -67,7 +67,6 @@ static id <AccountAdapterDelegate> _delegate;
         if (AccountAdapter.delegate) {
             auto accountId = [NSString stringWithUTF8String:account_id.c_str()];
             NSMutableDictionary* detailsDict = [Utils mapToDictionnary: details];
-            [AccountAdapter.delegate accountsChanged];
             [AccountAdapter.delegate accountVoaltileDetailsChangedWithAccountId: accountId details: detailsDict];
         }
     }));
