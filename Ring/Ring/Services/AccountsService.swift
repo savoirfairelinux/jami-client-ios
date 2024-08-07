@@ -756,26 +756,29 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func accountVoaltileDetailsChanged(accountId: String, details: [String: String]) {
+       // if let status = details["Account.active"], !status { return }
         guard let account = self.getAccount(fromAccountId: accountId) else { return }
         account.updateVolatileDetails(dictionary: details)
     }
 
     func accountsChanged() {
         log.debug("Accounts changed.")
-        let currentAccounts = self.accountList.map { $0.id }
+        DispatchQueue.global(qos: .background).async {
+            let currentAccounts = self.accountList.map { $0.id }
 
-        guard let newAccounts = self.getAccountsId() else {
-            self.accountList = []
-            notifyAccountsChanged()
-            return
+            guard let newAccounts = self.getAccountsId() else {
+                self.accountList = []
+                self.notifyAccountsChanged()
+                return
+            }
+
+            let removedAccounts = currentAccounts.filter { !newAccounts.contains($0) }
+            let addedAccounts = newAccounts.filter { !currentAccounts.contains($0) }
+
+            self.updateAccountList(removedAccounts: removedAccounts, addedAccounts: addedAccounts)
+
+            self.notifyAccountsChanged()
         }
-
-        let removedAccounts = currentAccounts.filter { !newAccounts.contains($0) }
-        let addedAccounts = newAccounts.filter { !currentAccounts.contains($0) }
-
-        updateAccountList(removedAccounts: removedAccounts, addedAccounts: addedAccounts)
-
-        notifyAccountsChanged()
     }
 
     private func updateAccountList(removedAccounts: [String], addedAccounts: [String]) {
@@ -866,7 +869,9 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func setAccountsActive(active: Bool) {
-        self.accountAdapter.setAccountsActive(active)
+        DispatchQueue.global(qos: .background).async {
+            self.accountAdapter.setAccountsActive(active)
+        }
     }
 
     func setAccountActive(active: Bool, accountId: String) {
