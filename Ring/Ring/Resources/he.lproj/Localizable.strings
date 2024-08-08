@@ -56,6 +56,7 @@
 "global.video" = "וידאו";
 "global.time" = "זמן";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "קוד QR גרוע";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "חשבון נוצר אבל שם משתמש לא נרשם";
 "createAccount.timeoutTitle" = "חשבון נוצר";
 "createAccount.timeoutMessage" = "רישום שם משתמש בתהליך... זה יכול לקחת כמה רגעים.";
+"createAccount.sipConfigure" = "להגדיר חשבון SIP קיים";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "אתה יכול לבחור שם משתמש כדי לעזור לאחרים למצוא אותך בקלות יותר ולקשר אליך על ג'מי.";
+"createAccount.newAccount" = "חשבון חדש";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "מוצפן";
+"createAccount.customize" = "אישית";
+"createAccount.encryptTitle" = "לחשוף חשבון עם סיסמה";
+"createAccount.encryptExplanation" = "חשבון ג'אמי נוצר ומוחסן מקומית רק במכשיר זה, כאריכיון המכיל את מפתחות החשבון שלך. גישה לאריכיון זה יכולה להיות מוגנת בחירה באמצעות סיסמה.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "חיבור חשבונות";
 "linkToAccount.linkButtonTitle" = "קישור";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "מספר זיהוי אישי";
 "linkToAccount.pinLabel" = "הכניס את סימן PIN";
+"linkToAccount.scanQRCode" = "Scan QR Code";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "כניסה";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "דואר URL של JAMS";
 "linkToAccountManager.accountManagerLabel" = "הכניס את URL JAMS";
+"linkToAccountManager.jamsExplanation" = "הכניס את כתובת ה-JAMS (Jami Account Management Server)";
+"linkToAccountManager.enterCredentials" = "הכניסה של תעודות אישור JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "לא מצליח למצוא חשבון";

@@ -56,6 +56,7 @@
 "global.video" = "Βίντεο";
 "global.time" = "Ώρα";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Κακό QR κωδικό";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Δημιουργήθηκε λογαριασμός αλλά δεν καταχωρίστηκε όνομα χρήστη";
 "createAccount.timeoutTitle" = "Δημιουργήθηκε λογαριασμός";
 "createAccount.timeoutMessage" = "Η εγγραφή του ονόματος χρήστη είναι σε εξέλιξη... μπορεί να πάρει λίγες στιγμές.";
+"createAccount.sipConfigure" = "Προγραμματισμός ενός υπάρχοντος λογαριασμού SIP";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Encrypt";
+"createAccount.customize" = "Προσαρμογή";
+"createAccount.encryptTitle" = "Κρυπτογράφηση λογαριασμού με κωδικό";
+"createAccount.encryptExplanation" = "Ένα λογαριασμό Jami δημιουργείται και αποθηκεύεται τοπικά μόνο σε αυτή τη συσκευή, ως αρχείο που περιέχει τα κλειδιά του λογαριασμού σας.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Σύνδεση λογαριασμού";
 "linkToAccount.linkButtonTitle" = "Σύνδεσμος";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Εισάγετε PIN";
+"linkToAccount.scanQRCode" = "Σάρωση QR κώδικα";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Εισαγγελέστε";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "Η διεύθυνση URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Εισάγετε το URL JAMS";
+"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.enterCredentials" = "Εισάγετε τα στοιχεία πιστοποίησης JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Μη δυνατή η εύρεση λογαριασμού";

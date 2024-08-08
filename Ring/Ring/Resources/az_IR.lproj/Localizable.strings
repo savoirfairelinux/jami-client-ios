@@ -56,6 +56,7 @@
 "global.video" = "ویدئو";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "سيخين QR کد";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "حساب یارادیلمیش، آمما ایستیفاده چی آدینی ثبت ائتمه میش";
 "createAccount.timeoutTitle" = "حساب یارادیلدی";
 "createAccount.timeoutMessage" = "آدين ثبت ائتمه سي بير نئچه لحظه ني آلاجاق.";
+"createAccount.sipConfigure" = "Configure an existing SIP account";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Encrypt";
+"createAccount.customize" = "Customize";
+"createAccount.encryptTitle" = "Encrypt account with password";
+"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device, as an archive containing your account keys. Access to this archive can optionally be protected by a password.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "حساب باغلاماسی";
 "linkToAccount.linkButtonTitle" = "لینک";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN یئری";
+"linkToAccount.scanQRCode" = "Scan QR Code";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "آندا یاز";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL یئری";
+"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.enterCredentials" = "Enter JAMS credentials";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "حساب تاپميرام";

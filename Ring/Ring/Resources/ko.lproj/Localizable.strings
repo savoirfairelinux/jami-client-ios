@@ -56,6 +56,7 @@
 "global.video" = "비디오";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "나쁜 QR 코드";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "계정 생성, 사용자 이름 등록되지 않았습니다";
 "createAccount.timeoutTitle" = "계정 생성";
 "createAccount.timeoutMessage" = "사용자 이름 등록이 진행중인 것인데 몇 분 걸릴 수도 있습니다.";
+"createAccount.sipConfigure" = "기존 SIP 계정을 구성";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "다른 사람들이 더 쉽게 Jami에서 당신을 찾아서 연락할 수 있도록 사용자 이름을 선택할 수 있습니다.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "암호화";
+"createAccount.customize" = "사용자 정의";
+"createAccount.encryptTitle" = "비밀번호로 계정을 암호화";
+"createAccount.encryptExplanation" = "자미 계정은 이 장치에서만 로컬로 생성되고 저장됩니다. 계정 키를 포함하는 아카이브로. 이 아카이브에 대한 액세스에는 비밀번호가 선택적으로 보호될 수 있습니다.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "계좌 연결";
 "linkToAccount.linkButtonTitle" = "연결";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN를 입력";
+"linkToAccount.scanQRCode" = "QR 코드를 스캔";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "로그인";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL를 입력";
+"linkToAccountManager.jamsExplanation" = "Jami 계정 관리 서버 (JAMS) URL를 입력하세요";
+"linkToAccountManager.enterCredentials" = "JAMS 자격증 입력";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "계산을 찾을 수 없어요";

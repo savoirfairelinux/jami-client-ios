@@ -56,6 +56,7 @@
 "global.video" = "Bideoa";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "QR kodea txarra";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Kontua sortu zen, baina erabiltzaile izena ez zen erregistratu.";
 "createAccount.timeoutTitle" = "Kontua sortua";
 "createAccount.timeoutMessage" = "Erabiltzaile izena erregistratzeko prozesuan... minutu batzuk beharko dira.";
+"createAccount.sipConfigure" = "SIP kontu bat konfiguratzea";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Erabiltzaile izena aukeratu dezakezu besteek Jami-n aurkitzeko eta zurekin harremanetan jartzeko.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Enkriptatua";
+"createAccount.customize" = "Egokitu";
+"createAccount.encryptTitle" = "Kontua pasahitzarekin enkriptatu";
+"createAccount.encryptExplanation" = "Jami kontua sortu eta tokiko tokian gordetzen da soilik gailu honetan, zure kontuaren giltzak dituen artxibo gisa.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontua estekatzen";
 "linkToAccount.linkButtonTitle" = "Esteka";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN-a";
 "linkToAccount.pinLabel" = "Sartu PIN-a";
+"linkToAccount.scanQRCode" = "Eskaneatu QR kodea";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sarrera";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS-eko URLa";
 "linkToAccountManager.accountManagerLabel" = "Sartu JAMS-eko URLa";
+"linkToAccountManager.jamsExplanation" = "Sartu Jami Kontuen Gunearen Zerbitzariaren (JAMS) URLa";
+"linkToAccountManager.enterCredentials" = "Sartu JAMS-eko identifikazio-orriak";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Ezin da kontua aurkitu";

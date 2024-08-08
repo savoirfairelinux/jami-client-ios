@@ -56,6 +56,7 @@
 "global.video" = "Vídeo";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Mal código QR";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Creou conta pero non rexistrou o nome de usuario";
 "createAccount.timeoutTitle" = "Creación de conta";
 "createAccount.timeoutMessage" = "O rexistro do nome de usuario está en marcha... pode levar uns momentos.";
+"createAccount.sipConfigure" = "Configurar unha conta SIP existente";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Podes escoller un nome de usuario para axudar aos demais a atopar e chegar a ti en Jami.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Encriptación";
+"createAccount.customize" = "Personalizar";
+"createAccount.encryptTitle" = "Cifra a conta cun contrasinal";
+"createAccount.encryptExplanation" = "Unha conta Jami é creada e almacenada localmente só neste dispositivo, como un arquivo que contén as chaves da súa conta.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Ligando conta";
 "linkToAccount.linkButtonTitle" = "Ligar";
 "linkToAccount.linkDeviceTitle" = "Ligar Dispositivo";
 "linkToAccount.linkDeviceMessage" = "Escolle \"Ligar un novo dispositivo\" na outra app Jami para mostrar o código QR ou PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Escribe o PIN";
+"linkToAccount.scanQRCode" = "Escanear código QR";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Conectar";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL do JAMS";
 "linkToAccountManager.accountManagerLabel" = "Introduce URL JAMS";
+"linkToAccountManager.jamsExplanation" = "Introduza a URL do servidor de xestión de contas Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Introduce credenciais JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Non se atopou a conta";

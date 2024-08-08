@@ -56,6 +56,7 @@
 "global.video" = "Видео";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Лош QR код";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Налог је креиран, али корисничко име није регистровано";
 "createAccount.timeoutTitle" = "Налог је направљен";
 "createAccount.timeoutMessage" = "Регистрација корисника у току... може трајати неколико тренутака.";
+"createAccount.sipConfigure" = "Конфигурирање постојећег СИП рачуна";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Можете изабрати корисничко име да бисте помогли другима да вас лакше пронађу и дођу до вас на Џами.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Шифровано";
+"createAccount.customize" = "Прилагоди";
+"createAccount.encryptTitle" = "Шифрујте налог лозинком";
+"createAccount.encryptExplanation" = "Јами рачун се ствара и чува локално само на овом уређају, као архив који садржи кључеве вашег рачун.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Повезивање налога";
 "linkToAccount.linkButtonTitle" = "Веза";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Унеси PIN";
+"linkToAccount.scanQRCode" = "Скенирај QR код";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Пријави се";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "ЈАМС URL";
 "linkToAccountManager.accountManagerLabel" = "Унесите JAMS URL";
+"linkToAccountManager.jamsExplanation" = "Уведите URL сервера за управљање рачунима Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Унесите идентификације JAMS-а";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Ne može se pronaći nalog";

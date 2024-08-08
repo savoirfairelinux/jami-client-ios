@@ -56,6 +56,7 @@
 "global.video" = "காணொளி";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "கெட்ட QR குறியீடு";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "கணக்கு உருவாக்கப்பட்டது ஆனால் பயனர் பெயர் பதிவு செய்யப்படவில்லை";
 "createAccount.timeoutTitle" = "கணக்கு உருவாக்கப்பட்டது";
 "createAccount.timeoutMessage" = "பயனர் பெயர் பதிவு நடந்து வருகிறது... அது சில நிமிடங்கள் ஆகலாம்.";
+"createAccount.sipConfigure" = "ஏற்கனவே உள்ள SIP கணக்கை உள்ளமைத்தல்";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "ஜாமி மீது உங்களை எளிதாகக் கண்டுபிடித்து அடைய உதவும் பயனர் பெயரை நீங்கள் தேர்வு செய்யலாம்.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "குறியாக்கம்";
+"createAccount.customize" = "தனிப்பயனாக்க";
+"createAccount.encryptTitle" = "கடவுச்சொல் கொண்ட கணக்கை குறியாக்கம் செய்யவும்";
+"createAccount.encryptExplanation" = "இந்த சாதனத்தில் மட்டுமே ஒரு ஜாமி கணக்கு உருவாக்கப்பட்டு சேமிக்கப்படுகிறது, உங்கள் கணக்கு விசைகளைக் கொண்ட ஒரு காப்பகமாக. இந்த காப்பகத்திற்கான அணுகலை விருப்பமாக கடவுச்சொல் மூலம் பாதுகாக்கலாம்.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "கணக்கு இணைப்பு";
 "linkToAccount.linkButtonTitle" = "இணைப்பு";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN ஐ உள்ளிடவும்";
+"linkToAccount.scanQRCode" = "QR குறியீட்டை ஸ்கேன் செய்யவும்";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "பதிவு செய்யவும்";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL ஐ உள்ளிடவும்";
+"linkToAccountManager.jamsExplanation" = "Jami கணக்கு மேலாண்மை சேவையக (JAMS) URL ஐ உள்ளிடவும்";
+"linkToAccountManager.enterCredentials" = "JAMS சான்றிதழ்களை உள்ளிடவும்";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "கணக்கு கண்டுபிடிக்க முடியவில்லை";

@@ -56,6 +56,7 @@
 "global.video" = "વિડિઓ";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "ખરાબ QR કોડ";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "એકાઉન્ટ બનાવવામાં આવ્યું હતું પરંતુ વપરાશકર્તા નામ નોંધાયેલ નથી";
 "createAccount.timeoutTitle" = "એકાઉન્ટ બનાવ્યું";
 "createAccount.timeoutMessage" = "વપરાશકર્તા નામ નોંધણી ચાલી રહી છે... તે થોડી ક્ષણો લાગી શકે છે.";
+"createAccount.sipConfigure" = "હાલની SIP ખાતાની રૂપરેખાંકન";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "તમે બીજાઓને જેમી પર વધુ સરળતાથી શોધવામાં અને તમારો સંપર્ક કરવામાં મદદ કરવા માટે વપરાશકર્તા નામ પસંદ કરી શકો છો.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "એન્ક્રિપ્ટ";
+"createAccount.customize" = "કસ્ટમાઇઝ કરો";
+"createAccount.encryptTitle" = "પાસવર્ડ સાથે એકાઉન્ટ એન્ક્રિપ્ટ";
+"createAccount.encryptExplanation" = "એક Jami એકાઉન્ટ ફક્ત આ ઉપકરણ પર જ બનાવવામાં આવે છે અને સંગ્રહિત થાય છે, જેમાં તમારા એકાઉન્ટ કીઓ શામેલ છે. આ આર્કાઇવની ઍક્સેસ વૈકલ્પિક રીતે પાસવર્ડ દ્વારા સુરક્ષિત કરી શકાય છે.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ખાતાની લિંકિંગ";
 "linkToAccount.linkButtonTitle" = "લિંક";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "પિન";
 "linkToAccount.pinLabel" = "PIN દાખલ કરો";
+"linkToAccount.scanQRCode" = "QR કોડ સ્કેન કરો";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "સાઇન ઇન કરો";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL દાખલ કરો";
+"linkToAccountManager.jamsExplanation" = "Jami એકાઉન્ટ મેનેજમેન્ટ સર્વર (JAMS) URL દાખલ કરો";
+"linkToAccountManager.enterCredentials" = "JAMS ઓળખપત્રો દાખલ કરો";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "એકાઉન્ટ શોધી શકતો નથી";

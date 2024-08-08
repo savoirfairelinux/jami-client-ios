@@ -56,6 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Čas";
 "global.editPassword" = "Zmeniť heslo";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Zlý QR kód";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Účet bol vytvorený, ale používateľské meno nebolo zaregistrované";
 "createAccount.timeoutTitle" = "Účet vytvorený";
 "createAccount.timeoutMessage" = "Prebieha registrácia používateľského mena... Chvíľu to potrvá.";
+"createAccount.sipConfigure" = "Konfigurácia existujúceho účtu SIP";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Môžete si vybrať uživatelské meno, ktoré pomôže iným ľahko nájsť a dostať sa k vám na Jami.";
+"createAccount.newAccount" = "Nový účet";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Zšifrované";
+"createAccount.customize" = "Priemyselné";
+"createAccount.encryptTitle" = "Zšifrovať účet pomocou hesla";
+"createAccount.encryptExplanation" = "Účet Jami sa vytvára a ukladá len na tomto zariadení ako archív obsahujúci kľúče vášho účtu.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Prepájanie účtu";
 "linkToAccount.linkButtonTitle" = "Prepojiť";
 "linkToAccount.linkDeviceTitle" = "Pripojiť zariadenie";
 "linkToAccount.linkDeviceMessage" = "Ak chcete zobraziť QR kód alebo PIN, vyberte „Prepojiť nové zariadenie“ z inej aplikácie Jami";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Zadajte PIN";
+"linkToAccount.scanQRCode" = "Nasnímať QR kód";
 "linkToAccount.explanationPinMessage" = "Ak chcete vygenerovať kód PIN, prejdite do nastavení správy účtu na zariadení obsahujúcom účet, ktorý chcete prepojiť. Vyberte možnosť „Pripojiť nové zariadenie“. Na vyplnenie tohto formulára dostanete potrebný PIN. PIN je platný len 10 minút.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Prihlásiť sa";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Vložte URL JAMS";
+"linkToAccountManager.jamsExplanation" = "Vložte URL Servera správy účtu Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Vložte údaje JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Účet sa nedá nájsť";

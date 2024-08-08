@@ -56,6 +56,7 @@
 "global.video" = "Відео";
 "global.time" = "Час";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Неприйнятний QR-код";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Уведено обліковий запис, але ім'я користувача не зареєстровано";
 "createAccount.timeoutTitle" = "Обліковий запис створено";
 "createAccount.timeoutMessage" = "Запис користувача може зайняти кілька хвилин.";
+"createAccount.sipConfigure" = "Дозволити сповіщення";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Ви можете вибрати ім'я користувача, щоб іншим було легше знайти вас і зв'язатися з вами в Jami.";
+"createAccount.newAccount" = "Новий аккаунт";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Зашифровано";
+"createAccount.customize" = "Натомість";
+"createAccount.encryptTitle" = "Зашифрувати мій профіль за допомогою пароля";
+"createAccount.encryptExplanation" = "Обліковий запис Jami створено та жбережено локально лише на цьому пристрої у вигляді архіву, що містить ключі вашого облікового запису. Доступ до цього архіву може бути захищений паролем за бажанням.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Поєднання облікових записів";
 "linkToAccount.linkButtonTitle" = "Зв'язати";
 "linkToAccount.linkDeviceTitle" = "Повʼязати пристрій";
 "linkToAccount.linkDeviceMessage" = "Виберіть «Підключити новий пристрій» у іншій програмі Jami, щоб показати QR-код або PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN-код";
 "linkToAccount.pinLabel" = "Ввести PIN-код";
+"linkToAccount.scanQRCode" = "Сканування QR коду";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Підпишіться";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Введіть URL JAMS";
+"linkToAccountManager.jamsExplanation" = "Уведіть URL сервера керування обліковими записами Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Введіть ідентифікацію JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не можу знайти обліковий запис";

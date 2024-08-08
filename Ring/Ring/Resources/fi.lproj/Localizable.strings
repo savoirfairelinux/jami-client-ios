@@ -56,6 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Aika";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Tili luotiin, mutta käyttäjänimeä ei rekisteröity";
 "createAccount.timeoutTitle" = "Tili luotu";
 "createAccount.timeoutMessage" = "Käyttäjätunnuksen rekisteröinti käynnissä... Se voi kestää hetken.";
+"createAccount.sipConfigure" = "Määritä olemassa oleva SIP-tunnus.";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Voit valita käyttäjänimen auttaaksesi muita löytämään ja tavoittamaan sinua Jami:llä.";
+"createAccount.newAccount" = "Uusi tunnus";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Salaistettu";
+"createAccount.customize" = "Säännön mukauttaminen";
+"createAccount.encryptTitle" = "Salaa tunnus salasanalla";
+"createAccount.encryptExplanation" = "Jami-tilin luodaan ja tallennetaan paikallisesti vain tässä laitteessa, arkistoina, joka sisältää tiliasi avaimet.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Tilin linkittäminen";
 "linkToAccount.linkButtonTitle" = "Yhdistä";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Syötä PIN-koodi";
+"linkToAccount.scanQRCode" = "Skannaa QR-koodi";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Kirjaudu sisään";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS verkko-osoite";
 "linkToAccountManager.accountManagerLabel" = "Kirjoita JAMS URL";
+"linkToAccountManager.jamsExplanation" = "Kirjoita Jami Account Management Serverin (JAMS) URL:";
+"linkToAccountManager.enterCredentials" = "Kirjoita JAMS-luottoluokit";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Tiliä ei löydy";

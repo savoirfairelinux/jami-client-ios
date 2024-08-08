@@ -56,6 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Zeit";
 "global.editPassword" = "Passwort bearbeiten";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "QR-Code ungültig";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Konto wurde erstellt, aber der Benutzername wurde nicht registriert";
 "createAccount.timeoutTitle" = "Konto erstellt";
 "createAccount.timeoutMessage" = "Registrierung des Benutzernamens läuft..... Es könnte einige Augenblicke dauern.";
+"createAccount.sipConfigure" = "Ein vorhandenes SIP-Konto konfigurieren";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Encrypt";
+"createAccount.customize" = "Customize";
+"createAccount.encryptTitle" = "Konto mit Passwort verschlüsseln";
+"createAccount.encryptExplanation" = "Ein Jami-Konto wird nur auf diesem Gerät als Archiv mit Ihren Kontoschlüsseln erstellt und lokal gespeichert. Der Zugriff auf dieses Archiv kann optional durch ein Passwort geschützt werden.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontenverknüpfung";
 "linkToAccount.linkButtonTitle" = "Link";
 "linkToAccount.linkDeviceTitle" = "Gerät verknüpfen";
 "linkToAccount.linkDeviceMessage" = "Wählen Sie in der anderen Jami-App „Neues Gerät verknüpfen“, um den QR-Code oder die PIN anzuzeigen";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN eingeben";
+"linkToAccount.scanQRCode" = "Scan QR Code";
 "linkToAccount.explanationPinMessage" = "Um den PIN-Code zu generieren, gehen Sie zu den Kontoverwaltungseinstellungen auf dem Gerät, das das Konto enthält, mit dem Sie eine Verknüpfung herstellen möchten. Wählen Sie „Neues Gerät verknüpfen“. Sie erhalten die zum Ausfüllen dieses Formulars erforderliche PIN. Die PIN ist nur 10 Minuten gültig.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Einloggen";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL eingeben";
+"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.enterCredentials" = "Geben Sie die JAMS-Anmeldeinformationen ein";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kann Konto nicht finden";

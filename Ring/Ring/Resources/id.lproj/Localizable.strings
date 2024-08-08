@@ -56,6 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Kode QR yang buruk";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Akun telah dibuat tetapi nama pengguna tidak terdaftar";
 "createAccount.timeoutTitle" = "Akun Dibuat";
 "createAccount.timeoutMessage" = "Pendaftaran nama pengguna sedang berlangsung... Harap tunggu.";
+"createAccount.sipConfigure" = "Konfigurasikan akun SIP yang ada.";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Anda dapat memilih nama pengguna untuk membantu orang lain lebih mudah menemukan dan menghubungi Anda di Jami.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Enkripsi";
+"createAccount.customize" = "Sesuaikan";
+"createAccount.encryptTitle" = "Enkripsi akun dengan kata sandi";
+"createAccount.encryptExplanation" = "Akun Jami dibuat dan disimpan secara lokal hanya pada perangkat ini, sebagai arsip yang berisi kunci akun Anda. Akses ke arsip ini secara opsional dapat dilindungi oleh kata sandi.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Penautan akun";
 "linkToAccount.linkButtonTitle" = "Tautan";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Masukkan PIN";
+"linkToAccount.scanQRCode" = "Pindai QR Code";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Masuk";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Masukkan URL JAMS";
+"linkToAccountManager.jamsExplanation" = "Masukkan URL Server Manajemen Akun Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Masukkan kredensial JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Akun tidak ditemukan";

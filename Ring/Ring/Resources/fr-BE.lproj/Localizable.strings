@@ -56,6 +56,7 @@
 "global.video" = "Vidéo";
 "global.time" = "Heure";
 "global.editPassword" = "Modifier le mot de passe";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Code QR incorrect";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Le compte a été créé mais le nom d'utilisateur n'a pas été enregistré";
 "createAccount.timeoutTitle" = "Compte créé";
 "createAccount.timeoutMessage" = "L'enregistrement du nom d'utilisateur est en cours... Cela peut prendre quelque temps.";
+"createAccount.sipConfigure" = "Configurez un compte SIP existant.";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Vous pouvez choisir un nom d'utilisateur pour aider les autres à vous trouver et à vous joindre plus facilement sur Jami.";
+"createAccount.newAccount" = "Nouveau compte";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Chiffrer";
+"createAccount.customize" = "Paramétrer";
+"createAccount.encryptTitle" = "Chiffrer le compte avec un mot de passe";
+"createAccount.encryptExplanation" = "Un compte Jami est créé et stocké localement uniquement sur cet appareil, sous la forme d'une archive contenant les clés de votre compte. L'accès à cette archive peut éventuellement être protégé par un mot de passe.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Association du compte";
 "linkToAccount.linkButtonTitle" = "Lier";
 "linkToAccount.linkDeviceTitle" = "Associer un nouvel appareil";
 "linkToAccount.linkDeviceMessage" = "Allez sur \"Associer un nouvel appareil\" sur l'autre appareil pour voir le code QR ou le NIP";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "NIP";
 "linkToAccount.pinLabel" = "Entrer le NIP";
+"linkToAccount.scanQRCode" = "Numériser le code QR";
 "linkToAccount.explanationPinMessage" = "Pour générer le code PIN, accédez aux paramètres de gestion du compte sur l'appareil contenant le compte que vous souhaitez lier. Sélectionnez \"Lier un nouvel appareil\". Vous recevrez le code PIN nécessaire pour remplir ce formulaire. Le code PIN n'est valable que pendant 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Connexion";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL de JAMS";
 "linkToAccountManager.accountManagerLabel" = "Saisir l'URL du serveur JAMS";
+"linkToAccountManager.jamsExplanation" = "Entrer l'adresse du serveur JAMS";
+"linkToAccountManager.enterCredentials" = "Entrer les paramètres de connexion JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Impossible de trouver le compte";

@@ -56,6 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Masa";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "മോശം ക്യുആർ കോഡ്";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "അക്കൌണ്ട് സൃഷ്ടിച്ചു, പക്ഷേ ഉപയോക്തൃനാമം രജിസ്റ്റർ ചെയ്തിട്ടില്ല";
 "createAccount.timeoutTitle" = "അക്കൌണ്ട് സൃഷ്ടിച്ചു";
 "createAccount.timeoutMessage" = "ഉപയോക്തൃനാമം രജിസ്റ്റർ ചെയ്യുന്നതിനുള്ള നടപടിക്രമം... കുറച്ച് നിമിഷങ്ങൾ എടുത്തേക്കാം.";
+"createAccount.sipConfigure" = "നിലവിലുള്ള SIP അക്കൌണ്ട് ക്രമീകരിക്കുക";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "ജാമി എന്ന സ്ഥലത്ത് നിങ്ങളെ കണ്ടെത്താനും എത്തിപ്പെടാനും മറ്റുള്ളവരെ സഹായിക്കുന്നതിന് നിങ്ങൾക്ക് ഒരു ഉപയോക്തൃനാമം തിരഞ്ഞെടുക്കാം.";
+"createAccount.newAccount" = "Akaun baharu";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "എൻക്രിപ്റ്റ് ചെയ്തവ";
+"createAccount.customize" = "ക്രമീകരിക്കുക";
+"createAccount.encryptTitle" = "പാസ്വേഡ് ഉപയോഗിച്ച് അക്കൌണ്ട് എൻക്രിപ്റ്റ് ചെയ്യുക";
+"createAccount.encryptExplanation" = "നിങ്ങളുടെ അക്കൌണ്ട് കീകൾ അടങ്ങുന്ന ഒരു ആർക്കൈവായി ഈ ഉപകരണത്തിൽ മാത്രമേ ജാമി അക്കൌണ്ട് സൃഷ്ടിക്കുകയും സംഭരിക്കുകയും ചെയ്യൂ. ഈ ആർക്കൈവിലേക്കുള്ള ആക്സസ് ഒരു പാസ്വേഡ് ഉപയോഗിച്ച് സംരക്ഷിക്കാവുന്നതാണ്.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "അക്കൌണ്ട് ബന്ധിപ്പിക്കൽ";
 "linkToAccount.linkButtonTitle" = "ലിങ്ക്";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "പി. ഐ. എൻ.";
 "linkToAccount.pinLabel" = "Masukkan PIN";
+"linkToAccount.scanQRCode" = "Imbas kod QR";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "സൈൻ ഇൻ ചെയ്യുക";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "ജെയിംസ് URL";
 "linkToAccountManager.accountManagerLabel" = "ജെയിംസ് URL നൽകുക";
+"linkToAccountManager.jamsExplanation" = "ജാമി അക്കൌണ്ട് മാനേജ്മെന്റ് സെർവർ (ജാമിസ്) URL നൽകുക";
+"linkToAccountManager.enterCredentials" = "ജെയിംസ് ക്രെഡൻഷ്യലുകൾ നൽകുക";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Akaun tidak ditemui";

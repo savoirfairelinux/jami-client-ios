@@ -56,6 +56,7 @@
 "global.video" = "Vidio";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Usoro QR na-adịghị mma";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "E mepụtara akaụntụ ma aha njirimara edeghị aha";
 "createAccount.timeoutTitle" = "E Mepụtara Akaụntụ";
 "createAccount.timeoutMessage" = "Ndebanye aha onye ọrụ na-aga n'ihu... ọ pụrụ iwe oge ole na ole.";
+"createAccount.sipConfigure" = "Hazie akaụntụ SIP dị adị";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Ị nwere ike ịhọrọ aha njirimara iji nyere ndị ọzọ aka ịchọta gị na Jami.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Ejiri ya mee ihe";
+"createAccount.customize" = "Nhazi";
+"createAccount.encryptTitle" = "Encrypt akaụntụ na paswọọdụ";
+"createAccount.encryptExplanation" = "A na-eke ma chekwaa akaụntụ Jami na mpaghara naanị na ngwaọrụ a, dị ka ihe nchekwa nke nwere igodo akaụntụ gị. Enwere ike ịnweta ihe nchekwa a site na paswọọdụ.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Njikọ akaụntụ";
 "linkToAccount.linkButtonTitle" = "Njikọ";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Tinye PIN";
+"linkToAccount.scanQRCode" = "Scan QR Code";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Banye";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Tinye URL JAMS";
+"linkToAccountManager.jamsExplanation" = "Tinye URL nke Jami Account Management Server (JAMS)";
+"linkToAccountManager.enterCredentials" = "Tinye akwụkwọ JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Enweghị m ike ịchọta akaụntụ";

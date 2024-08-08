@@ -56,6 +56,7 @@
 "global.video" = "ویدیو";
 "global.time" = "زمان";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "حساب ایجاد شده، اما نام‌کاربری ثبت نشده است";
 "createAccount.timeoutTitle" = "حساب کاربری ایجاد شد";
 "createAccount.timeoutMessage" = "در حال ثبت نام‌کاربری... ممکن است چند لحظه طول بکشد.";
+"createAccount.sipConfigure" = "پیکربندی یک حساب SIP موجود";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "شما می توانید یک نام کاربری را انتخاب کنید تا به دیگران کمک کنید تا به راحتی شما را در Jami پیدا کنند و به شما برسند.";
+"createAccount.newAccount" = "حساب جدید";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "رمزگذاری شده";
+"createAccount.customize" = "تنظیم";
+"createAccount.encryptTitle" = "رمزگذاری حساب با گذرواژه";
+"createAccount.encryptExplanation" = "یک حساب Jami فقط در این دستگاه ایجاد و ذخیره می شود، به عنوان یک آرکائیو حاوی کلید حساب شما. دسترسی به این آرکائیو می تواند به صورت اختیاری با یک رمز عبور محافظت شود.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "پیوند دادن حسابها";
 "linkToAccount.linkButtonTitle" = "پیوند";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "کد پین";
 "linkToAccount.pinLabel" = "پین را وارد کنید";
+"linkToAccount.scanQRCode" = "اسکن کد QR";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "ورود";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "آدرس JAMS";
 "linkToAccountManager.accountManagerLabel" = "آدرس JAMS را وارد کنید.";
+"linkToAccountManager.jamsExplanation" = "URL سرور مدیریت حساب Jami (JAMS) را وارد کنید";
+"linkToAccountManager.enterCredentials" = "اطلاعات JAMS را وارد کنید";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "نمی‌توان حساب را پیدا کرد";

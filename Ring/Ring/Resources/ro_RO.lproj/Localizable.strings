@@ -56,6 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Ora";
 "global.editPassword" = "Schimbă parola";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Contul a fost creat, dar numele de utilizator nu a fost înscris";
 "createAccount.timeoutTitle" = "Cont creat";
 "createAccount.timeoutMessage" = "Înscriere în curs a numelui de utilizator... Poate dura câteva clipe.";
+"createAccount.sipConfigure" = "Configurează un cont SIP existent";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Poți alege un nume de utilizator pentru a fi ușor de găsit și de contactat pe Jami.";
+"createAccount.newAccount" = "Cont nou";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Cifrează";
+"createAccount.customize" = "Personalizează";
+"createAccount.encryptTitle" = "Cifrează contul cu o parolă";
+"createAccount.encryptExplanation" = "Un cont Jami este creat și stocat local numai în acest aparat, sub forma unei arhive care conține cheile contului tău. Accesul la această arhivă poate fi protejat facultativ cu o parolă.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asocierea contului";
 "linkToAccount.linkButtonTitle" = "Asociază";
 "linkToAccount.linkDeviceTitle" = "Asociază aparatul";
 "linkToAccount.linkDeviceMessage" = "Alege „Asociază alt aparat” din cealaltă aplicație Jami pentru a afișa codul QR sau PIN-ul.";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introdu PIN-ul";
+"linkToAccount.scanQRCode" = "Scanează codul QR";
 "linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. Alege „Asociază alt aparat” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Introdu URL-ul JAMS";
+"linkToAccountManager.jamsExplanation" = "Introdu URL-ul Serverului de Administrare a Conturilor Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Introdu datele de autentificare JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nu pot găsi contul";

@@ -56,6 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Tid";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Konto har skapats men användarnamn har inte registrerats";
 "createAccount.timeoutTitle" = "Konto skapat";
 "createAccount.timeoutMessage" = "Registrering av användarnamn pågår... det kan ta en stund.";
+"createAccount.sipConfigure" = "Konfigurera ett befintligt SIP-konto";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Du kan välja ett användarnamn för att hjälpa andra att lättare hitta och nå dig på Jami.";
+"createAccount.newAccount" = "Nytt konto";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Krypterat";
+"createAccount.customize" = "Anpassning";
+"createAccount.encryptTitle" = "Kryptera kontot med lösenord";
+"createAccount.encryptExplanation" = "Ett Jami-konto skapas och lagras lokalt endast på den här enheten, som ett arkiv som innehåller dina kontonäcklar. Tillgång till detta arkiv kan alternativt skyddas med ett lösenord.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontokoppling";
 "linkToAccount.linkButtonTitle" = "Länka";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN-kod";
 "linkToAccount.pinLabel" = "Ange PIN-kod";
+"linkToAccount.scanQRCode" = "Skanna QR-kod";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Logga in";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Ange JAMS URL";
+"linkToAccountManager.jamsExplanation" = "Ange Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.enterCredentials" = "Ange JAMS-uppgifter";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan inte hitta kontot";

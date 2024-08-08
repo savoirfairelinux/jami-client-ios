@@ -56,6 +56,7 @@
 "global.video" = "Видео";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Зур QR код";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Хилсэл бий болсон боловч хэрэглэгчдийн нэр бүртгэгдээгүй";
 "createAccount.timeoutTitle" = "Хэтгэлэг үүсгэн байгуулагдсан";
 "createAccount.timeoutMessage" = "Хэрэглэгчийн нэр бүртгэл явагдаж байна.";
+"createAccount.sipConfigure" = "Одоогоор байгаа SIP дансыг тохируулна";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Та бусад хүмүүст Джами дээр таныг илүү хялбар олж, хүрэхэд туслах хэрэглэгч нэрийг сонгож болно.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Хөгжилт";
+"createAccount.customize" = "Хувьцааж авах";
+"createAccount.encryptTitle" = "Хууль нууц үгтэй дансыг нууцлах";
+"createAccount.encryptExplanation" = "Jami-ийн дансыг зөвхөн энэ төхөөрөмж дээр архивын хэлбэрээр хадгалж, орон нутгаар бий болгодог.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Нягтлан бодох бүртгэлийн холбоо";
 "linkToAccount.linkButtonTitle" = "Зэвсэглэл";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "ПИН код";
 "linkToAccount.pinLabel" = "PIN-ийг оруул";
+"linkToAccount.scanQRCode" = "QR код сканируулна";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Та бүртгэнэ";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL-ийг оруул";
+"linkToAccountManager.jamsExplanation" = "Jami Акаунтын удирдлагын сервер (JAMS) URL-ийг оруул";
+"linkToAccountManager.enterCredentials" = "JAMS-ийн итгэлийг оруулна";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Хэтгэлэг олж чадахгүй";

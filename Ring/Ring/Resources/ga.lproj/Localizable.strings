@@ -56,6 +56,7 @@
 "global.video" = "Fhéile";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Cód QR olc";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Cruthaíodh cuntas ach níor chláraigh ainm úsáideora";
 "createAccount.timeoutTitle" = "Cunntas a chruthú";
 "createAccount.timeoutMessage" = "Is féidir leis an clárú ainm úsáideora a bheith i mbun... d'fhéadfadh sé cúpla nóiméad a ghlacadh.";
+"createAccount.sipConfigure" = "Cinntíonn cuntas SIP atá ann cheana féin";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Is féidir leat ainm úsáideora a roghnú chun cabhrú le daoine eile teacht ar do shon agus teagmháil a dhéanamh leat níos éasca ar Jami.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Criosáilte";
+"createAccount.customize" = "Custaimáil";
+"createAccount.encryptTitle" = "Criosadh cuntas le pasfhocal";
+"createAccount.encryptExplanation" = "Cruthaítear cuntas Jami agus stóráiltear go háitiúil ach ar an bhfeiste seo, mar archive a bhfuil do chléas cuntas ann. Is féidir rochtain ar an archive seo a chosaint le pasfhocal de rogha.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Cúlra nasc";
 "linkToAccount.linkButtonTitle" = "Líon";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Cuir PIN isteach";
+"linkToAccount.scanQRCode" = "Scan QR Code";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Clóscríobh isteach";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Cuir isteach URL JAMS";
+"linkToAccountManager.jamsExplanation" = "Cuir isteach URL Seirbhís Bainistíochta Cuntais Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Cuir isteach na cáipéisí JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Ní féidir a fháil cuntas";

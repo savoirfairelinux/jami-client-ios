@@ -56,6 +56,7 @@
 "global.video" = "Wideo";
 "global.time" = "Czas";
 "global.editPassword" = "Edytuj hasło";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Niepoprawny kod QR";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Konto zostało stworzone, ale nazwa użytkownika nie została zarejestrowana";
 "createAccount.timeoutTitle" = "Konto Stworzone";
 "createAccount.timeoutMessage" = "Rejestrowanie nazwy użytkownika w toku... To może zająć chwilę";
+"createAccount.sipConfigure" = "Konfiguruj istniejące konto SIP";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Możesz wybrać nazwisko użytkownika, aby pomóc innym łatwiej znaleźć i dotrzeć do ciebie na Jami.";
+"createAccount.newAccount" = "Nowe konto";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Z szyfrowanym";
+"createAccount.customize" = "/Przezwyczajenie";
+"createAccount.encryptTitle" = "Zaszyfruj konto przy pomocy hasła";
+"createAccount.encryptExplanation" = "Konto Jami jest tworzone i przechowywane lokalnie tylko na tym urządzeniu, jako archiwum zawierającym klucze do konta.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Łączenie konta";
 "linkToAccount.linkButtonTitle" = "Połącz";
 "linkToAccount.linkDeviceTitle" = "Link do urządzenia";
 "linkToAccount.linkDeviceMessage" = "Wybierz „Połącz nowe urządzenie” z drugiej aplikacji Jami, aby wyświetlić kod QR lub PIN.";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Wprowadź PIN";
+"linkToAccount.scanQRCode" = "Zeskanuj kod QR";
 "linkToAccount.explanationPinMessage" = "Aby wygenerować kod PIN, przejdź do ustawień zarządzania kontem na urządzeniu zawierającym konto, z którym chcesz się połączyć. Wybierz opcję „Połącz nowe urządzenie”. Otrzymasz kod PIN niezbędny do wypełnienia formularza. Kod PIN jest ważny tylko przez 10 minut.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Zaloguj się";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Wprowadź JAMS URL";
+"linkToAccountManager.jamsExplanation" = "Wprowadź adres URL serwera zarządzania kontami Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Wprowadź dokumenty JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nie można znaleźć konta";

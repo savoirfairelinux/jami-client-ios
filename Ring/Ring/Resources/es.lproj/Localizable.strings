@@ -56,6 +56,7 @@
 "global.video" = "Vídeo";
 "global.time" = "Hora";
 "global.editPassword" = "Edit password";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Código QR incorrecto";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "Registrado";
 "createAccount.timeoutTitle" = "Cuenta creada";
 "createAccount.timeoutMessage" = "Registro de nombre de usuario en proceso... Puede tomar unos instantes.";
+"createAccount.sipConfigure" = "Configurar una cuenta SIP existente";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.newAccount" = "New account";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Encrypt";
+"createAccount.customize" = "Personalizar";
+"createAccount.encryptTitle" = "Cifrar cuenta con contraseña";
+"createAccount.encryptExplanation" = "Una cuenta Jami es creada y guardada sólo en este dispositivo, al igual que un archivo que contiene las llaves de tu cuenta. El acceso a este archivo puede ser protegido por una contraseña.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asociación de la cuenta";
 "linkToAccount.linkButtonTitle" = "Conexión";
 "linkToAccount.linkDeviceTitle" = "Enlazar dispositivo";
 "linkToAccount.linkDeviceMessage" = "Elija \"Enlazar un nuevo dispositivo\" desde otra aplicación Jami para mostrar el código QR o el PIN";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Ingresa tu PIN";
+"linkToAccount.scanQRCode" = "Escanear código QR";
 "linkToAccount.explanationPinMessage" = "Para generar el código PIN, ve a la configuración de administración de la cuenta en el dispositivo que contiene la cuenta que deseas vincular. Selecciona \"Vincular nuevo dispositivo\". Recibirás el PIN necesario para completar este formulario. El PIN solo es válido durante 10 minutos.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Iniciar sesión";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL del JAMS";
 "linkToAccountManager.accountManagerLabel" = "Ingresa la URL del JAMS";
+"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.enterCredentials" = "Ingresar credenciales del JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Error al encontrar la cuenta";

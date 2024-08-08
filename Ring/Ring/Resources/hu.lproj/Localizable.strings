@@ -56,6 +56,7 @@
 "global.video" = "Videó";
 "global.time" = "Idő";
 "global.editPassword" = "Jelszó megváltoztatása";
+"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
@@ -184,20 +185,35 @@
 "createAccount.UsernameNotRegisteredMessage" = "A fiók létrehozva de a felhasználónevét nincs bejegyzett";
 "createAccount.timeoutTitle" = "Fiók létrehozva";
 "createAccount.timeoutMessage" = "Felhasználónév bejegyeztetése folyamatban van, kis türelmet…";
+"createAccount.sipConfigure" = "Meglévő SIP-fiók beállítása";
+"createAccount.creatingAccount" = "Creating account";
+"createAccount.nameExplanation" = "Regisztráljon felhasználónevet, hogy mások könnyebben megtalálják és elérjék Önt a Jamin.";
+"createAccount.newAccount" = "Új fiók";
+"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encrypt" = "Titkosítás";
+"createAccount.customize" = "Testreszabás";
+"createAccount.encryptTitle" = "Fiók titkosítása jelszóval";
+"createAccount.encryptExplanation" = "A Jami-fiók csak ezen az eszközön jön létre és tárolódik helyileg, a fiókkulcsokat tartalmazó archívumként. Az archívumhoz való hozzáférés opcionálisan jelszóval védhető.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Fiók összekapcsolása";
 "linkToAccount.linkButtonTitle" = "Kapcsolat";
 "linkToAccount.linkDeviceTitle" = "Eszköz összekapcsolása";
 "linkToAccount.linkDeviceMessage" = "Válassza az „Új eszköz összekapcsolása” lehetőséget a másik Jami alkalmazásban a QR- vagy PIN-kód megjelenítéséhez";
+"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN-kód";
 "linkToAccount.pinLabel" = "PIN-kód megadása";
+"linkToAccount.scanQRCode" = "QR-kód beolvasása";
 "linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához lépjen a fiókkezelési beállításokhoz azon az eszközön, amelyen az összekapcsolni kívánt fiók található. Válassza az „Új eszköz összekapcsolása” lehetőséget. Megkapja az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
+"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Bejelentkezés";
+"linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL-je";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL-címe megadása";
+"linkToAccountManager.jamsExplanation" = "Jami-fiókkezelő kiszolgáló (JAMS) URL-cím megadása";
+"linkToAccountManager.enterCredentials" = "Adja meg a JAMS hitelesítő adatait";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "A fiók nem található";
