@@ -271,15 +271,11 @@ struct FocusableTextField: UIViewRepresentable {
         }
 
         func textFieldDidBeginEditing(_ textField: UITextField) {
-            DispatchQueue.main.async { [weak self] in
-                self?.isFirstResponder = true
-            }
+            self.isFirstResponder = true
         }
 
         func textFieldDidEndEditing(_ textField: UITextField) {
-            DispatchQueue.main.async { [weak self] in
-                self?.isFirstResponder = false
-            }
+            self.isFirstResponder = false
         }
     }
 
@@ -300,11 +296,11 @@ struct FocusableTextField: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
-
-        if isFirstResponder && !uiView.isFirstResponder {
-            uiView.becomeFirstResponder()
-        } else if !isFirstResponder && uiView.isFirstResponder {
-            uiView.resignFirstResponder()
+        // wait untill view shows
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            if uiView.window != nil, !uiView.isFirstResponder {
+                uiView.becomeFirstResponder()
+            }
         }
     }
 }
@@ -368,7 +364,7 @@ struct EditableFieldView: View {
     @Binding var value: String
     var title: String
     var placeholder: String
-    @SwiftUI.State private var isTextFieldFocused = false
+    @SwiftUI.State private var isTextFieldFocused = true
     var onDisappearAction: () -> Void // Closure to handle save action on disappear
 
     var body: some View {
@@ -378,12 +374,6 @@ struct EditableFieldView: View {
             }
         }
         .navigationTitle(L10n.Global.edit + " \(title)")
-        .onAppear {
-            // Delay focusing the text field to ensure the view is fully loaded and visible
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.isTextFieldFocused = true
-            }
-        }
         .onDisappear {
             onDisappearAction() // Call the action when the view disappears
         }
