@@ -40,7 +40,7 @@ struct LinkToAccountView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor.systemGroupedBackground)
-            .ignoresSafeArea()
+                        .ignoresSafeArea()
         )
     }
 
@@ -122,11 +122,11 @@ struct LinkToAccountView: View {
                          isHighlighted: animatableScanSwitch,
                          transitionEdge: .trailing,
                          action: {
-                notAnimatableScanSwitch = true
-                withAnimation {
-                    animatableScanSwitch = true
-                }
-            })
+                            notAnimatableScanSwitch = true
+                            withAnimation {
+                                animatableScanSwitch = true
+                            }
+                         })
 
             Spacer()
 
@@ -135,11 +135,11 @@ struct LinkToAccountView: View {
                          isHighlighted: !animatableScanSwitch,
                          transitionEdge: .leading,
                          action: {
-                notAnimatableScanSwitch = false
-                withAnimation {
-                    animatableScanSwitch = false
-                }
-            })
+                            notAnimatableScanSwitch = false
+                            withAnimation {
+                                animatableScanSwitch = false
+                            }
+                         })
         }
     }
 
@@ -198,8 +198,8 @@ struct LinkToAccountView: View {
         }, label: {
             Text(L10n.LinkToAccount.linkButtonTitle)
                 .foregroundColor(pin.isEmpty ?
-                                 Color(UIColor.secondaryLabel) :
-                        .jamiColor)
+                                    Color(UIColor.secondaryLabel) :
+                                    .jamiColor)
         })
         .disabled(pin.isEmpty )
     }

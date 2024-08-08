@@ -70,13 +70,13 @@ struct WelcomeView: View {
             case .jamiAccount:
                 CreateAccountView(injectionBag: model.injectionBag,
                                   dismissAction: {
-                    activeView = nil
-                }, createAction: { [weak model] (name, password, profileName, profileImage)  in
-                    activeView = nil
-                    guard let model = model else { return }
-                    model.setProfileInfo(profileName: profileName, profileImage: profileImage)
-                    model.createAccount(name: name, password: password)
-                })
+                                    activeView = nil
+                                  }, createAction: { [weak model] (name, password, profileName, profileImage)  in
+                                    activeView = nil
+                                    guard let model = model else { return }
+                                    model.setProfileInfo(profileName: profileName, profileImage: profileImage)
+                                    model.createAccount(name: name, password: password)
+                                  })
             case .linkDevice:
                 LinkToAccountView(dismissAction: {
                     activeView = nil
@@ -134,9 +134,9 @@ struct WelcomeView: View {
             .alertWithOkButton(title: error.title,
                                message: error.message,
                                action: { [weak model] in
-                guard let model = model else { return }
-                model.creationState = .initial
-            })
+                                guard let model = model else { return }
+                                model.creationState = .initial
+                               })
         })
     }
 
@@ -270,11 +270,11 @@ struct ButtonsView: View {
         VStack(spacing: 12) {
             button(L10n.CreateAccount.createAccountFormTitle,
                    action: {
-                withAnimation {
-                    activeView = .jamiAccount
-                }
-            })
-            .accessibilityIdentifier(AccessibilityIdentifiers.joinJamiButton)
+                    withAnimation {
+                        activeView = .jamiAccount
+                    }
+                   })
+                .accessibilityIdentifier(AccessibilityIdentifiers.joinJamiButton)
 
             button(L10n.Welcome.haveAccount, action: {
                 withAnimation {
