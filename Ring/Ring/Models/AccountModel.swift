@@ -191,7 +191,7 @@ class AccountModel: Equatable {
             self.status = status
         }
         self.proxy = details.get(withConfigKeyModel:
-                                        ConfigKeyModel(withKey: .proxyServer))
+                                    ConfigKeyModel(withKey: .proxyServer))
 
     }
 

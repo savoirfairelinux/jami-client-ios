@@ -44,7 +44,7 @@ struct JamsConnectView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor.systemGroupedBackground)
-            .ignoresSafeArea()
+                        .ignoresSafeArea()
         )
     }
 
@@ -76,8 +76,8 @@ struct JamsConnectView: View {
         }, label: {
             Text(L10n.LinkToAccountManager.signIn)
                 .foregroundColor(signInDisabled ?
-                                 Color(UIColor.secondaryLabel) :
-                        .jamiColor)
+                                    Color(UIColor.secondaryLabel) :
+                                    .jamiColor)
         })
         .disabled(signInDisabled)
     }
@@ -90,8 +90,8 @@ struct JamsConnectView: View {
     private var serverView: some View {
         let placeholder = L10n.LinkToAccountManager.accountManagerPlaceholder
         return WalkthroughFocusableTextView(text: $server,
-                                     isTextFieldFocused: $isTextFieldFocused,
-                                     placeholder: placeholder)
+                                            isTextFieldFocused: $isTextFieldFocused,
+                                            placeholder: placeholder)
     }
 
     private var passwordView: some View {

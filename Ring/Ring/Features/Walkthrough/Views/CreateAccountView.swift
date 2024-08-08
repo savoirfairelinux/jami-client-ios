@@ -194,8 +194,8 @@ struct CreateAccountView: View {
         }, label: {
             Text(L10n.Global.create)
                 .foregroundColor(model.isJoinButtonDisabled ?
-                                 Color(UIColor.secondaryLabel) :
-                        .jamiColor)
+                                    Color(UIColor.secondaryLabel) :
+                                    .jamiColor)
         })
         .disabled(model.isJoinButtonDisabled)
         .accessibilityIdentifier(AccessibilityIdentifiers.joinButton)
@@ -208,10 +208,10 @@ struct CreateAccountView: View {
             }
         }, label: {
             Text(encryptionEnabled ?
-                 L10n.AccountPage.changePassword :
+                    L10n.AccountPage.changePassword :
                     L10n.CreateAccount.encrypt)
-            .foregroundColor(.jamiColor)
-            .padding()
+                .foregroundColor(.jamiColor)
+                .padding()
         })
     }
 
@@ -247,12 +247,12 @@ struct CreateAccountView: View {
         VStack {
             PasswordFieldView(text: $password,
                               placeholder: L10n.Global.enterPassword)
-            .textFieldStyleInAlert()
-            
+                .textFieldStyleInAlert()
+
             PasswordFieldView(text: $passwordConfirm,
                               placeholder: L10n.Global.enterPassword)
-            .textFieldStyleInAlert()
-            
+                .textFieldStyleInAlert()
+
             if passwordsDoNotMatch {
                 Text(L10n.AccountPage.passwordsDoNotMatch)
                     .foregroundColor(.red)

@@ -41,7 +41,7 @@ struct SIPConfigurationView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor.systemGroupedBackground)
-            .ignoresSafeArea()
+                        .ignoresSafeArea()
         )
     }
 
@@ -90,6 +90,6 @@ struct SIPConfigurationView: View {
     private var passwordView: some View {
         WalkthroughPasswordView(text: $password,
                                 placeholder: L10n.Global.password)
-        .padding(.bottom)
+            .padding(.bottom)
     }
 }
