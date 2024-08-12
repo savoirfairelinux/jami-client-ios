@@ -208,8 +208,12 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private func requestPermission() {
         sessionQueue.suspend()
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self] granted in
-            self?.permissionGranted.accept(granted)
+            /*
+             SessionQueue should be resumed first,
+             before permissionGranted triggers device enumeration.
+             */
             self?.sessionQueue.resume()
+            self?.permissionGranted.accept(granted)
         }
     }
 
