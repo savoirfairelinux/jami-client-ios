@@ -440,10 +440,10 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         if accountID.isEmpty || callID.isEmpty {
             return
         }
-        guard let profile = self.dbManager.accountVCard(for: accountID) else { return }
-        let jamiId = profile.uri
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self = self else { return }
+            guard let profile = self.dbManager.accountVCard(for: accountID) else { return }
+            let jamiId = profile.uri
             VCardUtils.sendVCard(card: profile,
                                  callID: callID,
                                  accountID: accountID,
