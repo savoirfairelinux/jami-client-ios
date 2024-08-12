@@ -30,7 +30,7 @@ extension AppDelegate {
             var disposeBag = DisposeBag()
             let dispatchGroup = DispatchGroup()
             dispatchGroup.enter()
-            self.accountService.addJamiAccount(username: "", password: "", pin: "", profileName: "")
+            self.accountService.addJamiAccount(username: "", password: "", pin: "", arhivePath: "", profileName: "")
                 .take(1)
                 .subscribe(onNext: { accountId in
                     accountIdSetter(accountId)

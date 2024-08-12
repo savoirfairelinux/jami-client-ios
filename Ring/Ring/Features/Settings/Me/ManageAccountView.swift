@@ -40,6 +40,13 @@ struct ManageAccountView: View {
                             Text(L10n.AccountPage.encryptAccount)
                         }
                     }
+
+                    NavigationLink(destination: BackupAccount(account: model.account, accountService: model.accountService)
+                        .background(Color(UIColor.systemGroupedBackground))) {
+                            HStack {
+                                Text("Backup account")
+                            }
+                        }
                 }
 
                 Section {
