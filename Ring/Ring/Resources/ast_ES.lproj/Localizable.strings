@@ -185,15 +185,15 @@
 "createAccount.UsernameNotRegisteredMessage" = "Creóse una cuenta pero nun se rexistró'l nome d'usuariu";
 "createAccount.timeoutTitle" = "Creáu cuenta";
 "createAccount.timeoutMessage" = "El rexistru del nome d'usuariu en cursu... podría tardar unos momentos.";
-"createAccount.sipConfigure" = "Configure an existing SIP account";
+"createAccount.sipConfigure" = "Configurar una cuenta SIP esistente";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.nameExplanation" = "Puede escoger un nome d'usuariu pa ayudar a otros a atopar y llegar más fácilmente a Jami.";
 "createAccount.newAccount" = "New account";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
-"createAccount.customize" = "Customize";
-"createAccount.encryptTitle" = "Encrypt account with password";
-"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device, as an archive containing your account keys. Access to this archive can optionally be protected by a password.";
+"createAccount.encrypt" = "Encriptáu";
+"createAccount.customize" = "Permiguar";
+"createAccount.encryptTitle" = "Encripta la cuenta con contraseña";
+"createAccount.encryptExplanation" = "La so direición de la páxina web ye la siguiente:";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "La vinculación de cuentas";
@@ -203,7 +203,7 @@
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "El PIN";
 "linkToAccount.pinLabel" = "Entra PIN";
-"linkToAccount.scanQRCode" = "Scan QR Code";
+"linkToAccount.scanQRCode" = "Archiváu dende l' oxetivu";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 "linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
@@ -212,8 +212,8 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "La dirección de la páxina web de James";
 "linkToAccountManager.accountManagerLabel" = "Entra URL de JAMS";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
-"linkToAccountManager.enterCredentials" = "Enter JAMS credentials";
+"linkToAccountManager.jamsExplanation" = "Introducióse la URL del servidor de xestión de cuentas Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Introdució les credenciales de JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nun puedo atopar cuenta";

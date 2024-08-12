@@ -185,14 +185,14 @@
 "createAccount.UsernameNotRegisteredMessage" = "Kontoen blev oprettet men brugernavnet blev ikke registreret.";
 "createAccount.timeoutTitle" = "Konto Oprettet";
 "createAccount.timeoutMessage" = "Registrering af brugernavn er i gang, det kan tage et par minutter.";
-"createAccount.sipConfigure" = "Configure an existing SIP account";
+"createAccount.sipConfigure" = "Konfigurere en eksisterende SIP-konto";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.nameExplanation" = "Du kan vælge et brugernavn for at hjælpe andre med at finde og nå dig på Jami.";
 "createAccount.newAccount" = "New account";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
-"createAccount.customize" = "Customize";
-"createAccount.encryptTitle" = "Encrypt account with password";
+"createAccount.encrypt" = "Kryptograferet";
+"createAccount.customize" = "Tilpasning";
+"createAccount.encryptTitle" = "Krypter konto med kodeord";
 "createAccount.encryptExplanation" = "En Jami-konto oprettes og opbevares lokalt kun på denne enhed, som et arkiv med dine konto nøgler.";
 
 //Link To Account form
@@ -203,7 +203,7 @@
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Indtast PIN-kode";
-"linkToAccount.scanQRCode" = "Scan QR Code";
+"linkToAccount.scanQRCode" = "Scan QR-kode";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 "linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
@@ -212,7 +212,7 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Indtaster JAMS URL";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.jamsExplanation" = "Indtaster Jami Account Management Server (JAMS) URL";
 "linkToAccountManager.enterCredentials" = "Indtaster JAMS-oplysninger";
 
 //Alerts

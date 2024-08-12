@@ -185,15 +185,15 @@
 "createAccount.UsernameNotRegisteredMessage" = "Профилът бе създаден, но потребителското име не бе регистрирано";
 "createAccount.timeoutTitle" = "Профилът е създаден";
 "createAccount.timeoutMessage" = "Регистрацията на потребителското име е в ход ... Може да отнеме няколко минути.";
-"createAccount.sipConfigure" = "Configure an existing SIP account";
+"createAccount.sipConfigure" = "Конфигуриране на съществуващ SIP акаунт";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
-"createAccount.newAccount" = "New account";
+"createAccount.nameExplanation" = "Можете да изберете потребителско име, за да помогнете на другите да ви намерят по-лесно и да ви достигнат на Jami.";
+"createAccount.newAccount" = "Нов акаунт";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
-"createAccount.customize" = "Customize";
-"createAccount.encryptTitle" = "Encrypt account with password";
-"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device, as an archive containing your account keys. Access to this archive can optionally be protected by a password.";
+"createAccount.encrypt" = "Криптоварен";
+"createAccount.customize" = "Настройка";
+"createAccount.encryptTitle" = "Криптирайте профила с парола";
+"createAccount.encryptExplanation" = "Аккаунт Jami се създава и съхранява локално само на това устройство като архив, съдържащ ключовете на вашия акаунт.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Свързване на профил";
@@ -203,7 +203,7 @@
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "ПИН";
 "linkToAccount.pinLabel" = "Въведете ПИН";
-"linkToAccount.scanQRCode" = "Scan QR Code";
+"linkToAccount.scanQRCode" = "Сканиране на QR-код";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 "linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
@@ -212,8 +212,8 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Введете URL на JAMS";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
-"linkToAccountManager.enterCredentials" = "Enter JAMS credentials";
+"linkToAccountManager.jamsExplanation" = "Введете URL на сървъра за управление на сметките на Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Введете идентификационните данни на JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Профилът не бе открит";

@@ -56,7 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Kohë";
 "global.editPassword" = "Përpunoni fjalëkalim";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Përdorimi i kamerës është çaktivizuar. Ju lutemi, aktivizojeni, që nga rregullimet.";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -186,10 +186,10 @@
 "createAccount.timeoutTitle" = "Llogaria u Krijua";
 "createAccount.timeoutMessage" = "Regjistrim përdoruesi në kryerje e sipër… Mund të dojë pak çaste.";
 "createAccount.sipConfigure" = "Formësoni një llogari SIP ekzistuese";
-"createAccount.creatingAccount" = "Creating account";
+"createAccount.creatingAccount" = "Po krijohet llogari";
 "createAccount.nameExplanation" = "Mund të zgjidhni një emër përdoruesi, për t’i ndihmuar të tjerët t’ju gjejnë dhe të komunikojmë më lehtë me ju në Jami.";
 "createAccount.newAccount" = "Llogari e re";
-"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encryptionEnabled" = "Fshehtëzim i aktivizuar";
 "createAccount.encrypt" = "Fshehtëzoje";
 "createAccount.customize" = "Përshtateni";
 "createAccount.encryptTitle" = "Fshehtëzojeni llogarinë me fjalëkalim";
@@ -200,16 +200,16 @@
 "linkToAccount.linkButtonTitle" = "Lidhje";
 "linkToAccount.linkDeviceTitle" = "Lidhni Pajisje";
 "linkToAccount.linkDeviceMessage" = "Zgjidhni “Lidhni një pajisje të re”, që nga aplikacioni tjetër Jami, që të shfaqet kodi QR, ose PIN-i";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
+"linkToAccount.explanationMessage" = "Lypset një PIN, që të përdoret një llogari ekzistuese Jami në këtë pajisje";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Jepni PIN-in";
 "linkToAccount.scanQRCode" = "Skanoni Kodin QR";
 "linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja për administrim llogarish, te pajisja që përmban llogarinë që doni të lidhni. Përzgjidhni “Lidhni pajisje të re”. Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+"linkToAccount.passwordExplanation" = "Plotësoje, nëse fjalëkalimi i llogarisë është i fshehtëzuar";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Hyni";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "Llogari JAMS";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAM-i";
 "linkToAccountManager.accountManagerLabel" = "Jepni URL JAMS-i";
 "linkToAccountManager.jamsExplanation" = "Jepni URL Shërbyesi Administrimi Llogarish Jami (JAMS)";

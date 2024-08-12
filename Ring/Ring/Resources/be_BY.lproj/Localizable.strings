@@ -185,15 +185,15 @@
 "createAccount.UsernameNotRegisteredMessage" = "Уліковы запіс быў створаны, але імя карыстальніка не было зарэгістравана";
 "createAccount.timeoutTitle" = "Створаны ўліковы запіс";
 "createAccount.timeoutMessage" = "Падчас рэгістрацыі карыстальніка можа заняцца некалькі хвілін.";
-"createAccount.sipConfigure" = "Configure an existing SIP account";
+"createAccount.sipConfigure" = "Канфігуруйце існуючы SIP-акаўнт";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.nameExplanation" = "Вы можаце выбраць імя карыстальніка, каб дапамагчы іншым лёгка знайсці і дасягнуць вас на Jami.";
 "createAccount.newAccount" = "New account";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
-"createAccount.customize" = "Customize";
-"createAccount.encryptTitle" = "Encrypt account with password";
-"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device, as an archive containing your account keys. Access to this archive can optionally be protected by a password.";
+"createAccount.encrypt" = "Зашыфравана";
+"createAccount.customize" = "Падстасаваць";
+"createAccount.encryptTitle" = "Зашыфраваць рахунак з паролем";
+"createAccount.encryptExplanation" = "Уліковы запіс Jami ствараецца і захоўваецца толькі на гэтым прыладзе, як архіў, які змяшчае ключы ад вашага ўліковага запісу.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Звязванне рахункаў";
@@ -212,8 +212,8 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Уведайце URL JAMS";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
-"linkToAccountManager.enterCredentials" = "Enter JAMS credentials";
+"linkToAccountManager.jamsExplanation" = "Уведайце URL сервера кіравання рахункамі Jami (JAMS)";
+"linkToAccountManager.enterCredentials" = "Увесці даведнікі JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не магу знайсці рахунак";

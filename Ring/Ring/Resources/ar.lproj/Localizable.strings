@@ -185,15 +185,15 @@
 "createAccount.UsernameNotRegisteredMessage" = "تم إنشاء حساب ولكن لم يتم تسجيل اسم المستخدم";
 "createAccount.timeoutTitle" = "حساب تم إنشاؤه";
 "createAccount.timeoutMessage" = "تسجيل اسم المستخدم في مراحل... قد يستغرق بضع دقائق.";
-"createAccount.sipConfigure" = "Configure an existing SIP account";
+"createAccount.sipConfigure" = "إعداد حساب SIP موجود";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
-"createAccount.newAccount" = "New account";
+"createAccount.nameExplanation" = "يمكنك اختيار اسم مستخدم لمساعدة الآخرين على إيجادك و الوصول إليك بسهولة على جامي.";
+"createAccount.newAccount" = "حساب جديد";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
-"createAccount.customize" = "Customize";
-"createAccount.encryptTitle" = "Encrypt account with password";
-"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device, as an archive containing your account keys. Access to this archive can optionally be protected by a password.";
+"createAccount.encrypt" = "تشفير";
+"createAccount.customize" = "تخصيص";
+"createAccount.encryptTitle" = "تشفير الحساب بكلمة مرور";
+"createAccount.encryptExplanation" = "يتم إنشاء حساب جامي وتخزينه محليا فقط على هذا الجهاز ، كملف يحتوي على مفاتيح حسابك. يمكن الوصول إلى هذا الملف بشكل اخيار حماية بواسطة كلمة مرور.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ربط الحساب";
@@ -203,7 +203,7 @@
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "رمز الأمان";
 "linkToAccount.pinLabel" = "أدخِل رمز الأمان";
-"linkToAccount.scanQRCode" = "Scan QR Code";
+"linkToAccount.scanQRCode" = "مسح رمز الإستجابة السريعة";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 "linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
@@ -212,8 +212,8 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "عنوان JAMS";
 "linkToAccountManager.accountManagerLabel" = "أدخل عنوان JAMS";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
-"linkToAccountManager.enterCredentials" = "Enter JAMS credentials";
+"linkToAccountManager.jamsExplanation" = "أدخل عنوان عنوان (JAMS) لخادم إدارة الحسابات Jami";
+"linkToAccountManager.enterCredentials" = "إدخال إثباتات JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "لا يستطيع  العثور على الحساب";

@@ -187,7 +187,7 @@
 "createAccount.timeoutMessage" = "Kasutajanime registreerimine on töös... See võib võtta paar hetke.";
 "createAccount.sipConfigure" = "Seadista olemasolev SIP-konto";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.nameExplanation" = "Selleks, et teised kasutajad saaksid sind kergemini Jami võrgus leida, võid valide endale kasutajanime.";
 "createAccount.newAccount" = "New account";
 "createAccount.encryptionEnabled" = "Encryption enabled";
 "createAccount.encrypt" = "Krüpti";

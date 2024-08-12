@@ -187,10 +187,10 @@
 "createAccount.timeoutMessage" = "Η εγγραφή του ονόματος χρήστη είναι σε εξέλιξη... μπορεί να πάρει λίγες στιγμές.";
 "createAccount.sipConfigure" = "Προγραμματισμός ενός υπάρχοντος λογαριασμού SIP";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
-"createAccount.newAccount" = "New account";
+"createAccount.nameExplanation" = "Μπορείτε να επιλέξετε ένα όνομα χρήστη για να βοηθήσετε τους άλλους να σας βρουν και να σας φτάσουν πιο εύκολα στο Jami.";
+"createAccount.newAccount" = "Νέος Λογαριασμός";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
+"createAccount.encrypt" = "Κρυπτογράφηση";
 "createAccount.customize" = "Προσαρμογή";
 "createAccount.encryptTitle" = "Κρυπτογράφηση λογαριασμού με κωδικό";
 "createAccount.encryptExplanation" = "Ένα λογαριασμό Jami δημιουργείται και αποθηκεύεται τοπικά μόνο σε αυτή τη συσκευή, ως αρχείο που περιέχει τα κλειδιά του λογαριασμού σας.";
@@ -212,7 +212,7 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "Η διεύθυνση URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Εισάγετε το URL JAMS";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.jamsExplanation" = "Εισάγετε το URL του Servers Management Account Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "Εισάγετε τα στοιχεία πιστοποίησης JAMS";
 
 //Alerts

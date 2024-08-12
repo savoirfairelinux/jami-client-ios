@@ -185,14 +185,14 @@
 "createAccount.UsernameNotRegisteredMessage" = "অ্যাকাউন্ট তৈরি করা হয়েছে কিন্তু ব্যবহারকারীর নাম নিবন্ধিত হয়নি";
 "createAccount.timeoutTitle" = "অ্যাকাউন্ট তৈরি করা হয়েছে";
 "createAccount.timeoutMessage" = "ব্যবহারকারীর নাম নিবন্ধন চলছে... কয়েক মিনিট সময় লাগবে।";
-"createAccount.sipConfigure" = "Configure an existing SIP account";
+"createAccount.sipConfigure" = "একটি বিদ্যমান SIP অ্যাকাউন্ট কনফিগার করুন";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.nameExplanation" = "আপনি অন্যদের সহজেই জামিতে আপনার কাছে পৌঁছাতে সাহায্য করার জন্য একটি ব্যবহারকারীর নাম নির্বাচন করতে পারেন।";
 "createAccount.newAccount" = "New account";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
-"createAccount.customize" = "Customize";
-"createAccount.encryptTitle" = "Encrypt account with password";
+"createAccount.encrypt" = "এনক্রিপ্ট করা";
+"createAccount.customize" = "কাস্টমাইজ করুন";
+"createAccount.encryptTitle" = "পাসওয়ার্ড দিয়ে অ্যাকাউন্ট এনক্রিপ্ট করুন";
 "createAccount.encryptExplanation" = "একটি জামি অ্যাকাউন্ট শুধুমাত্র এই ডিভাইসে স্থানীয়ভাবে তৈরি এবং সংরক্ষণ করা হয়, আপনার অ্যাকাউন্টের কীগুলি ধারণকারী একটি সংরক্ষণাগার হিসাবে। এই সংরক্ষণাগারটিতে অ্যাক্সেস একটি পাসওয়ার্ড দ্বারা বেছে নেওয়া যেতে পারে।";
 
 //Link To Account form
@@ -203,7 +203,7 @@
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "পিন";
 "linkToAccount.pinLabel" = "পিন লিখুন";
-"linkToAccount.scanQRCode" = "Scan QR Code";
+"linkToAccount.scanQRCode" = "QR কোড স্ক্যান করুন";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 "linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
@@ -212,7 +212,7 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL লিখুন";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.jamsExplanation" = "জামি অ্যাকাউন্ট ম্যানেজমেন্ট সার্ভার (জেএএমএস) URL লিখুন";
 "linkToAccountManager.enterCredentials" = "JAMS এর শংসাপত্র লিখুন";
 
 //Alerts

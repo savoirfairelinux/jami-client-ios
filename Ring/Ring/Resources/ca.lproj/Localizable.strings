@@ -185,14 +185,14 @@
 "createAccount.UsernameNotRegisteredMessage" = "Es va crear un compte però no s'ha registrat el nom d'usuari";
 "createAccount.timeoutTitle" = "Creació d'un compte";
 "createAccount.timeoutMessage" = "L'inscripció de nom d'usuari en curs... podria prendre uns minuts.";
-"createAccount.sipConfigure" = "Configure an existing SIP account";
+"createAccount.sipConfigure" = "Configurar un compte SIP existent";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
-"createAccount.newAccount" = "New account";
+"createAccount.nameExplanation" = "Pots triar un nom d'usuari per ajudar els altres a trobar-te i arribar-te més fàcilment a Jami.";
+"createAccount.newAccount" = "Nou compte";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
-"createAccount.customize" = "Customize";
-"createAccount.encryptTitle" = "Encrypt account with password";
+"createAccount.encrypt" = "Encriptat";
+"createAccount.customize" = "Personalitzar";
+"createAccount.encryptTitle" = "Xifra el compte amb una constrassenya";
 "createAccount.encryptExplanation" = "Un compte Jami es crea i emmagatzemat localment només en aquest dispositiu, com un arxiu que conté les claus del seu compte.";
 
 //Link To Account form
@@ -212,7 +212,7 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL de JAMS";
 "linkToAccountManager.accountManagerLabel" = "Introdueix la URL JAMS";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.jamsExplanation" = "Introdueix la URL del servidor de gestió de comptes Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "Introducir credencials de JAMS";
 
 //Alerts

@@ -56,7 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Ora";
 "global.editPassword" = "Schimbă parola";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Accesul la cameră este dezactivat. Activează-l din reglări.";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
@@ -186,10 +186,10 @@
 "createAccount.timeoutTitle" = "Cont creat";
 "createAccount.timeoutMessage" = "Înscriere în curs a numelui de utilizator... Poate dura câteva clipe.";
 "createAccount.sipConfigure" = "Configurează un cont SIP existent";
-"createAccount.creatingAccount" = "Creating account";
+"createAccount.creatingAccount" = "Se creează contul";
 "createAccount.nameExplanation" = "Poți alege un nume de utilizator pentru a fi ușor de găsit și de contactat pe Jami.";
 "createAccount.newAccount" = "Cont nou";
-"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encryptionEnabled" = "Cifrare activată";
 "createAccount.encrypt" = "Cifrează";
 "createAccount.customize" = "Personalizează";
 "createAccount.encryptTitle" = "Cifrează contul cu o parolă";
@@ -200,16 +200,16 @@
 "linkToAccount.linkButtonTitle" = "Asociază";
 "linkToAccount.linkDeviceTitle" = "Asociază aparatul";
 "linkToAccount.linkDeviceMessage" = "Alege „Asociază alt aparat” din cealaltă aplicație Jami pentru a afișa codul QR sau PIN-ul.";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
+"linkToAccount.explanationMessage" = "Este necesar un cod PIN pentru a utiliza un cont Jami existent cu acest aparat";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introdu PIN-ul";
 "linkToAccount.scanQRCode" = "Scanează codul QR";
 "linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. Alege „Asociază alt aparat” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+"linkToAccount.passwordExplanation" = "Se completează dacă acest cont are parolă";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "Cont JAMS";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Introdu URL-ul JAMS";
 "linkToAccountManager.jamsExplanation" = "Introdu URL-ul Serverului de Administrare a Conturilor Jami (JAMS)";

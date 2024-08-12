@@ -185,15 +185,15 @@
 "createAccount.UsernameNotRegisteredMessage" = "ايكون دتولق نامو ڤڠڬونا تيدق دتولق";
 "createAccount.timeoutTitle" = "ايكون دڤرچايا?? ي";
 "createAccount.timeoutMessage" = "ڤرجالنن نام ڤڠڬونا دالم ڤرڬرقن... اكن مڠڬوناكن ببراڤ كتيک.";
-"createAccount.sipConfigure" = "Configure an existing SIP account";
+"createAccount.sipConfigure" = "ڤڠاجرن اکاون SIP يڠ موجود";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.nameExplanation" = "توڠڬوڠكن نام ڤڠڬونا اونتوق مڠونجوڠكن اورڠ لاين باڬي ممڤوپا?? ي دان ممڤوپا?? ي توڠڬوڠجوق دجامي.";
 "createAccount.newAccount" = "New account";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
-"createAccount.customize" = "Customize";
-"createAccount.encryptTitle" = "Encrypt account with password";
-"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device, as an archive containing your account keys. Access to this archive can optionally be protected by a password.";
+"createAccount.encrypt" = "ڤڠڬيلن";
+"createAccount.customize" = "تخصيص";
+"createAccount.encryptTitle" = "ايكوڤد ايكون دڠن ڤرسود";
+"createAccount.encryptExplanation" = "اکاونت Jami دڤرچايا?? ي دان دڤرچايا?? ي دالم لوکالي يڠ دڤرچايا?? ي، سباڬاي ارشيڤ يڠ مڠمبيل کليد اکاونت. ڤرچايا?? ن ارکايڤ اين بوليه دڤرچايا?? ي دڠن ڤاسر.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ڤڠاجرن حساب";
@@ -212,8 +212,8 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "ڤرلو مڠهادڤي URL JAMS";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
-"linkToAccountManager.enterCredentials" = "Enter JAMS credentials";
+"linkToAccountManager.jamsExplanation" = "مڠڬوناكن URL Jami Account Management Server (JAMS)";
+"linkToAccountManager.enterCredentials" = "ڤرلو ممبريكن كريديتاسي JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "نميتونم حساب پيدا کنم";

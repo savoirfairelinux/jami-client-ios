@@ -185,14 +185,14 @@
 "createAccount.UsernameNotRegisteredMessage" = "Účet byl vytvořen, ale uživatelské jméno nebylo registrováno.";
 "createAccount.timeoutTitle" = "Účet byl vytvořen.";
 "createAccount.timeoutMessage" = "Probíhá registrace uživatelského jména... Může to chvíli trvat.";
-"createAccount.sipConfigure" = "Configure an existing SIP account";
+"createAccount.sipConfigure" = "Nastavit existující účet SIP.";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
-"createAccount.newAccount" = "New account";
+"createAccount.nameExplanation" = "Můžete si zvolit uživatelské jméno, aby vás ostatní mohli na Jami snáze najít a zastihnout.";
+"createAccount.newAccount" = "Nový účet";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
-"createAccount.customize" = "Customize";
-"createAccount.encryptTitle" = "Encrypt account with password";
+"createAccount.encrypt" = "Šifrování";
+"createAccount.customize" = "Upravit";
+"createAccount.encryptTitle" = "Šifrovat účet heslem";
 "createAccount.encryptExplanation" = "Účet Jami je vytvořen a uložen lokálně pouze v tomto zařízení jako archiv obsahující klíče k účtu. Přístup k tomuto archivu může být volitelně chráněn heslem.";
 
 //Link To Account form
@@ -203,7 +203,7 @@
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Zadejte PIN";
-"linkToAccount.scanQRCode" = "Scan QR Code";
+"linkToAccount.scanQRCode" = "Skenovat kód QR";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 "linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
 
@@ -212,7 +212,7 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Zadejte adresu URL služby JAMS";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.jamsExplanation" = "Zadejte adresu URL serveru pro správu účtů Jami (JAMS).";
 "linkToAccountManager.enterCredentials" = "Zadejte pověření JAMS";
 
 //Alerts

@@ -187,7 +187,7 @@
 "createAccount.timeoutMessage" = "Registro de nombre de usuario en curso ... Podría tomar unos minutos.";
 "createAccount.sipConfigure" = "Configurar una cuenta SIP existente";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.nameExplanation" = "Podés elegir un nombre de usuario que ayudará a que otras personas te encuentren más fácilmente en Jami.";
 "createAccount.newAccount" = "Cuenta nueva";
 "createAccount.encryptionEnabled" = "Encryption enabled";
 "createAccount.encrypt" = "Encriptar";

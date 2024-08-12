@@ -56,7 +56,7 @@
 "global.video" = "Wideo";
 "global.time" = "Czas";
 "global.editPassword" = "Edytuj hasło";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Dostęp do kamery jest wyłączony. Włącz go w ustawieniach.";
 
 // Scan
 "scan.badQrCode" = "Niepoprawny kod QR";
@@ -186,10 +186,10 @@
 "createAccount.timeoutTitle" = "Konto Stworzone";
 "createAccount.timeoutMessage" = "Rejestrowanie nazwy użytkownika w toku... To może zająć chwilę";
 "createAccount.sipConfigure" = "Konfiguruj istniejące konto SIP";
-"createAccount.creatingAccount" = "Creating account";
+"createAccount.creatingAccount" = "Tworzenie konta";
 "createAccount.nameExplanation" = "Możesz wybrać nazwę użytkownika, aby ułatwić innym znalezienie i dotarcie do Ciebie na Jami.";
 "createAccount.newAccount" = "Nowe konto";
-"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encryptionEnabled" = "Włączone szyfrowanie";
 "createAccount.encrypt" = "Z szyfrowanym";
 "createAccount.customize" = "/Przezwyczajenie";
 "createAccount.encryptTitle" = "Zaszyfruj konto przy pomocy hasła";
@@ -200,16 +200,16 @@
 "linkToAccount.linkButtonTitle" = "Połącz";
 "linkToAccount.linkDeviceTitle" = "Link do urządzenia";
 "linkToAccount.linkDeviceMessage" = "Wybierz „Połącz nowe urządzenie” z drugiej aplikacji Jami, aby wyświetlić kod QR lub PIN.";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
+"linkToAccount.explanationMessage" = "Kod PIN jest wymagany do korzystania z istniejącego konta Jami na tym urządzeniu.";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Wprowadź PIN";
 "linkToAccount.scanQRCode" = "Zeskanuj kod QR";
 "linkToAccount.explanationPinMessage" = "Aby wygenerować kod PIN, przejdź do ustawień zarządzania kontem na urządzeniu zawierającym konto, z którym chcesz się połączyć. Wybierz opcję „Połącz nowe urządzenie”. Otrzymasz kod PIN niezbędny do wypełnienia formularza. Kod PIN jest ważny tylko przez 10 minut.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+"linkToAccount.passwordExplanation" = "Wypełnij, jeśli hasło do konta jest zaszyfrowane";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Zaloguj się";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "Konto JAMS";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Wprowadź JAMS URL";
 "linkToAccountManager.jamsExplanation" = "Wprowadź adres URL serwera zarządzania kontami Jami (JAMS)";

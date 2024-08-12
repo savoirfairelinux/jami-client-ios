@@ -187,7 +187,7 @@
 "createAccount.timeoutMessage" = "Registro de nombre de usuario en curso ... Podría tomar unos minutos.";
 "createAccount.sipConfigure" = "Configurar una cuenta SIP existente";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.nameExplanation" = "Podés elegir un nombre de usuario que ayudará a que otras personas te encuentren más fácilmente en Jami.";
 "createAccount.newAccount" = "Cuenta nueva";
 "createAccount.encryptionEnabled" = "Encryption enabled";
 "createAccount.encrypt" = "Cifrar";
@@ -212,7 +212,7 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL del JAMS";
 "linkToAccountManager.accountManagerLabel" = "Ingresá la URL del JAMS";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.jamsExplanation" = "Ingresar la URL del JAMS (Jami Account Management Server)";
 "linkToAccountManager.enterCredentials" = "Ingresar credenciales del JAMS";
 
 //Alerts

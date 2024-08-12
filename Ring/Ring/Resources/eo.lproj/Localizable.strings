@@ -187,10 +187,10 @@
 "createAccount.timeoutMessage" = "La registrado de uzantnomo daŭras kelkajn momentojn.";
 "createAccount.sipConfigure" = "Konfiguru ekzistantan SIP-konto";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
-"createAccount.newAccount" = "New account";
+"createAccount.nameExplanation" = "Vi povas elekti uzan nomon por helpi aliajn pli facile trovi kaj atingi vin sur Jami.";
+"createAccount.newAccount" = "Nova konto";
 "createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Encrypt";
+"createAccount.encrypt" = "Enkripti";
 "createAccount.customize" = "Personaligi";
 "createAccount.encryptTitle" = "Enkriptu konton kun pasvorto";
 "createAccount.encryptExplanation" = "Konto Jami estas kreita kaj stokita loka nur sur ĉi tiu aparato, kiel arkivo enhavanta viajn kontoklojn. Aliro al tiu arkivo povas esti laŭvola protektita per pasvorto.";
@@ -212,7 +212,7 @@
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Enigu la JAMS-urelon";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.jamsExplanation" = "Enigu la URL-adreson de la Servilo de Administrado de Kontoj Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "Enigu la identigilojn de JAMS";
 
 //Alerts
