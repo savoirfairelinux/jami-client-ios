@@ -60,6 +60,7 @@ struct CreateAccountView: View {
                     footerView
                     buttons
                 }
+                .frame(maxWidth: 500)
                 .sheet(isPresented: $showProfileView) {
                     ProfileView(isPresented: $showProfileView,
                                 initialName: profileName,
