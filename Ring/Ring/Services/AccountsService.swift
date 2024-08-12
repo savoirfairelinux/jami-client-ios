@@ -501,6 +501,15 @@ class AccountsService: AccountAdapterDelegate {
             }
     }
 
+    func exportToFileWithPassword(accountId: String,
+                      destinationPath: String,
+                      password: String) -> Bool {
+        self.accountAdapter.exportToFile(withAccountId: accountId,
+                                         destinationPath: destinationPath,
+                                         scheme: "password",
+                                         password: password)
+    }
+
     // MARK: - AccountAdapterDelegate
 
     func accountDetailsChanged(accountId: String, details: [String: String]) {
@@ -869,11 +878,13 @@ extension AccountsService {
     func addJamiAccount(username: String?,
                         password: String,
                         pin: String,
+                        arhivePath: String,
                         profileName: String) -> Observable<String> {
         // Observable for initiating account creation
         let accountCreationObservable = createJamiAccount(username: username,
                                                           password: password,
-                                                          pin: pin,
+                                                          pin: pin, 
+                                                          arhivePath: arhivePath,
                                                           profileName: profileName)
 
         return handleAccountCreation(isJams: false, createAccount: accountCreationObservable)
@@ -973,7 +984,11 @@ extension AccountsService {
         return nil
     }
 
-    private func createJamiAccount(username: String?, password: String, pin: String, profileName: String) -> Single<String> {
+    private func createJamiAccount(username: String?,
+                                   password: String,
+                                   pin: String,
+                                   arhivePath: String,
+                                   profileName: String) -> Single<String> {
         return Single.create { single in
             do {
                 var details = try self.getJamiInitialAccountDetails()
@@ -985,6 +1000,9 @@ extension AccountsService {
                 }
                 if !pin.isEmpty {
                     details[ConfigKey.archivePIN.rawValue] = pin
+                }
+                if !arhivePath.isEmpty {
+                    details[ConfigKey.archivePath.rawValue] = arhivePath
                 }
                 if !profileName.isEmpty {
                     details[ConfigKey.displayName.rawValue] = profileName
