@@ -60,6 +60,7 @@ struct CreateAccountView: View {
                     footerView
                     buttons
                 }
+                .frame(maxWidth: 500)
                 .sheet(isPresented: $showProfileView) {
                     ProfileView(isPresented: $showProfileView,
                                 initialName: profileName,
@@ -251,7 +252,7 @@ struct CreateAccountView: View {
                 .textFieldStyleInAlert()
 
             PasswordFieldView(text: $passwordConfirm,
-                              placeholder: L10n.Global.enterPassword)
+                              placeholder: L10n.Global.confirmPassword)
                 .textFieldStyleInAlert()
 
             if passwordsDoNotMatch {
