@@ -360,6 +360,10 @@
 		269DA09F28E244F1007D51D6 /* MessagesListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09E28E244F1007D51D6 /* MessagesListVM.swift */; };
 		26A072F92959F461006D8163 /* ContextMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072F82959F461006D8163 /* ContextMenuView.swift */; };
 		26A072FD295A7145006D8163 /* ContextMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072FC295A7145006D8163 /* ContextMenuVM.swift */; };
+		26A34ED52C6E83D500A41DD4 /* ImportFromArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED42C6E83D500A41DD4 /* ImportFromArchiveView.swift */; };
+		26A34ED82C6EAE9A00A41DD4 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED72C6EAE9A00A41DD4 /* DocumentPicker.swift */; };
+		26A34EDA2C6EB7C800A41DD4 /* BackupAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED92C6EB7C800A41DD4 /* BackupAccount.swift */; };
+		26A34EDC2C6EBCD600A41DD4 /* BackupAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34EDB2C6EBCD600A41DD4 /* BackupAccountModel.swift */; };
 		26A5CE3B26BD00E700E147EA /* Array+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5CE3826BD00E700E147EA /* Array+Helper.swift */; };
 		26A88C07266FFFC800888EED /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A88C06266FFFC800888EED /* NotificationService.swift */; };
 		26A88C0B266FFFC800888EED /* jamiNotificationExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -929,6 +933,10 @@
 		269DA09E28E244F1007D51D6 /* MessagesListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListVM.swift; sourceTree = "<group>"; };
 		26A072F82959F461006D8163 /* ContextMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuView.swift; sourceTree = "<group>"; };
 		26A072FC295A7145006D8163 /* ContextMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuVM.swift; sourceTree = "<group>"; };
+		26A34ED42C6E83D500A41DD4 /* ImportFromArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromArchiveView.swift; sourceTree = "<group>"; };
+		26A34ED72C6EAE9A00A41DD4 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
+		26A34ED92C6EB7C800A41DD4 /* BackupAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupAccount.swift; sourceTree = "<group>"; };
+		26A34EDB2C6EBCD600A41DD4 /* BackupAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupAccountModel.swift; sourceTree = "<group>"; };
 		26A5CE3826BD00E700E147EA /* Array+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Helper.swift"; sourceTree = "<group>"; };
 		26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = jamiNotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		26A88C06266FFFC800888EED /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -1579,6 +1587,7 @@
 		043866341D22D04E00E06CE2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				26A34ED62C6EAE8B00A41DD4 /* SwiftUIViews */,
 				BB06BD8429D4C1210064F0FC /* DurationPicker.swift */,
 				1A2D18DC1F29192D00B2C785 /* MessableBubble.swift */,
 				0273C3071E0C68BF00CF00BA /* DesignableButton.swift */,
@@ -2355,6 +2364,14 @@
 			name = AccountSummary;
 			sourceTree = "<group>";
 		};
+		26A34ED62C6EAE8B00A41DD4 /* SwiftUIViews */ = {
+			isa = PBXGroup;
+			children = (
+				26A34ED72C6EAE9A00A41DD4 /* DocumentPicker.swift */,
+			);
+			path = SwiftUIViews;
+			sourceTree = "<group>";
+		};
 		26A88C05266FFFC800888EED /* jamiNotificationExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -2403,6 +2420,7 @@
 				2692557B2C5D24FA00F85A1E /* SIPConfigurationView.swift */,
 				2692557D2C5D53A300F85A1E /* Views.swift */,
 				26C4D07D2C62730100B1218C /* ProfileView.swift */,
+				26A34ED42C6E83D500A41DD4 /* ImportFromArchiveView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2427,6 +2445,7 @@
 				268C87F52C1CC78100593D7C /* LinkedDevicesVM.swift */,
 				267B95692C20C99A00353B01 /* EditProfileVM.swift */,
 				267B95892C2478F100353B01 /* SipAccountDetailModel.swift */,
+				26A34EDB2C6EBCD600A41DD4 /* BackupAccountModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2445,6 +2464,7 @@
 				267B958B2C24793500353B01 /* ManageSipAccountView.swift */,
 				267B95F82C2B5FB000353B01 /* LinkDeviceView.swift */,
 				267B95FA2C2B5FFA00353B01 /* RevocationView.swift */,
+				26A34ED92C6EB7C800A41DD4 /* BackupAccount.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2897,6 +2917,7 @@
 				0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */,
 				4430A671236CBC7A00747177 /* ContactPickerViewModel.swift in Sources */,
 				621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */,
+				26A34EDA2C6EB7C800A41DD4 /* BackupAccount.swift in Sources */,
 				267B956C2C233DD800353B01 /* AccountSettings.swift in Sources */,
 				264002462A9ECE6300949B2F /* PendingConferenceCall.swift in Sources */,
 				260AE62529B65A4B00D66D5E /* ContactsUtils.swift in Sources */,
@@ -2923,6 +2944,7 @@
 				26A5CE3B26BD00E700E147EA /* Array+Helper.swift in Sources */,
 				26600A992BEA855900EFCFD1 /* ThreadSafeArray.swift in Sources */,
 				1DF75ABE296E07890055EA87 /* Text+Helpers.swift in Sources */,
+				26A34ED82C6EAE9A00A41DD4 /* DocumentPicker.swift in Sources */,
 				BB06BD8529D4C1210064F0FC /* DurationPicker.swift in Sources */,
 				268C87F62C1CC78100593D7C /* LinkedDevicesVM.swift in Sources */,
 				0ECB4E2822B2D4840097CD7B /* CallsProviderService.swift in Sources */,
@@ -2948,6 +2970,7 @@
 				1A2D18A61F27F7A400B2C785 /* UIViewController+Rx.swift in Sources */,
 				26BC15EE29302B00003FC8D1 /* ContactMessageVM.swift in Sources */,
 				268C87F02C1BA78E00593D7C /* UtilitiesViews.swift in Sources */,
+				26A34ED52C6E83D500A41DD4 /* ImportFromArchiveView.swift in Sources */,
 				BB3B0A412971AEE30083CAD8 /* LocationSharingView.swift in Sources */,
 				267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */,
 				268C87EC2C1BA28A00593D7C /* ManageAccountView.swift in Sources */,
@@ -3071,6 +3094,7 @@
 				642AD48424EC64CE00521127 /* CopyableLabel.swift in Sources */,
 				269255782C5B18DB00F85A1E /* LinkToAccountView.swift in Sources */,
 				261190B42A2928D000CAE7F8 /* ParticipantViewModel.swift in Sources */,
+				26A34EDC2C6EBCD600A41DD4 /* BackupAccountModel.swift in Sources */,
 				264EA8802977082A00B6FB6F /* LogUIViewModel.swift in Sources */,
 				264EA8842977085C00B6FB6F /* LogUI.swift in Sources */,
 				268C88012C1E6E7900593D7C /* AccountSettingsViews.swift in Sources */,

@@ -501,6 +501,15 @@ class AccountsService: AccountAdapterDelegate {
             }
     }
 
+    func exportToFileWithPassword(accountId: String,
+                      destinationPath: String,
+                      password: String) -> Bool {
+        self.accountAdapter.exportToFile(withAccountId: accountId,
+                                         destinationPath: destinationPath,
+                                         scheme: "password",
+                                         password: password)
+    }
+
     // MARK: - AccountAdapterDelegate
 
     func accountDetailsChanged(accountId: String, details: [String: String]) {
@@ -588,28 +597,30 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func registrationStateChanged(for accountId: String, state: String) {
-        guard let account = self.getAccount(fromAccountId: accountId) else { return }
-        /*
-         Detect when a new account is generated and keys are ready.
-         During generation, an account gets the "INITIALIZING" status.
-         When keys are generated, the status changes.
-         */
-        guard let newState = AccountState(rawValue: state) else { return }
-        if account.status == .initializing && newState != .initializing {
-            self.updateAccountDetails(account: account)
-            if !newState.isError() {
-                var event = ServiceEvent(withEventType: .accountAdded)
-                event.addEventInput(.accountId, value: account.id)
-                self.responseStream.onNext(event)
+        if let account = self.getAccount(fromAccountId: accountId) {
+            /*
+             Detect when a new account is generated and keys are ready.
+             During generation, an account gets the "INITIALIZING" status.
+             When keys are generated, the status changes.
+             */
+            if let newState = AccountState(rawValue: state) {
+                if account.status == .initializing && newState != .initializing {
+                    self.updateAccountDetails(account: account)
+                    if !newState.isError() {
+                        var event = ServiceEvent(withEventType: .accountAdded)
+                        event.addEventInput(.accountId, value: account.id)
+                        self.responseStream.onNext(event)
+                    }
+                }
             }
         }
-
         var event = ServiceEvent(withEventType: .registrationStateChanged)
         event.addEventInput(.registrationState, value: state)
         event.addEventInput(.accountId, value: accountId)
         self.responseStream.onNext(event)
         // Check if need account migration.
         if let currentAccount = self.currentAccount,
+           let newState = AccountState(rawValue: state),
            newState == .errorNeedMigration,
            accountId == currentAccount.id {
             needMigrateCurrentAccount.onNext(currentAccount.id)
@@ -869,11 +880,13 @@ extension AccountsService {
     func addJamiAccount(username: String?,
                         password: String,
                         pin: String,
+                        arhivePath: String,
                         profileName: String) -> Observable<String> {
         // Observable for initiating account creation
         let accountCreationObservable = createJamiAccount(username: username,
                                                           password: password,
                                                           pin: pin,
+                                                          arhivePath: arhivePath,
                                                           profileName: profileName)
 
         return handleAccountCreation(isJams: false, createAccount: accountCreationObservable)
@@ -922,7 +935,8 @@ extension AccountsService {
         let creationStatus = accountCreationStatusObservable()
 
         return Observable
-            .combineLatest(createAccount.asObservable(), creationStatus.asObservable())
+            .combineLatest(createAccount.asObservable(),
+                           creationStatus.asObservable())
             .filter { accountId, creationStatus in
                 accountId == creationStatus.accountId
             }
@@ -973,36 +987,45 @@ extension AccountsService {
         return nil
     }
 
-    private func createJamiAccount(username: String?, password: String, pin: String, profileName: String) -> Single<String> {
-        return Single.create { single in
-            do {
-                var details = try self.getJamiInitialAccountDetails()
-                if let username = username {
-                    details[ConfigKey.accountRegisteredName.rawValue] = username
+    private func createJamiAccount(username: String?,
+                                   password: String,
+                                   pin: String,
+                                   arhivePath: String,
+                                   profileName: String) -> Single<String> {
+        return Single.deferred {
+            return Single.create { single in
+                do {
+                    var details = try self.getJamiInitialAccountDetails()
+                    if let username = username {
+                        details[ConfigKey.accountRegisteredName.rawValue] = username
+                    }
+                    if !password.isEmpty {
+                        details[ConfigKey.archivePassword.rawValue] = password
+                    }
+                    if !pin.isEmpty {
+                        details[ConfigKey.archivePIN.rawValue] = pin
+                    }
+                    if !arhivePath.isEmpty {
+                        details[ConfigKey.archivePath.rawValue] = arhivePath
+                    }
+                    if !profileName.isEmpty {
+                        details[ConfigKey.displayName.rawValue] = profileName
+                    }
+                    details[ConfigKey.proxyEnabled.rawValue] = "true"
+                    if let testServer = TestEnvironment.shared.nameServerURI {
+                        details[ConfigKey.ringNsURI.rawValue] = testServer
+                    }
+                    guard let accountId = self.accountAdapter.addAccount(details) else {
+                        throw AccountCreationError.unknown
+                    }
+                    single(.success(accountId))
+                } catch {
+                    single(.failure(error))
                 }
-                if !password.isEmpty {
-                    details[ConfigKey.archivePassword.rawValue] = password
-                }
-                if !pin.isEmpty {
-                    details[ConfigKey.archivePIN.rawValue] = pin
-                }
-                if !profileName.isEmpty {
-                    details[ConfigKey.displayName.rawValue] = profileName
-                }
-                details[ConfigKey.proxyEnabled.rawValue] = "true"
-                if let testServer = TestEnvironment.shared.nameServerURI {
-                    details[ConfigKey.ringNsURI.rawValue] = testServer
-                }
-
-                guard let accountId = self.accountAdapter.addAccount(details) else {
-                    throw AccountCreationError.unknown
-                }
-                single(.success(accountId))
-            } catch {
-                single(.failure(error))
+                return Disposables.create()
             }
-            return Disposables.create()
         }
+        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
 
     private func createJamsAccount(username: String, password: String, serverUri: String) -> Single<String> {
@@ -1056,5 +1079,6 @@ extension AccountsService {
             .compactMap { response in
                 return !response.accountId.isEmpty ? response : nil
             }
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
 }

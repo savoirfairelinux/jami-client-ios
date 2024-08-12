@@ -21,6 +21,7 @@ import SwiftUI
 enum ActiveView: Identifiable {
     case jamiAccount
     case linkDevice
+    case fromArchive
     case jamsAccount
     case sipAccount
     case aboutJami
@@ -108,6 +109,16 @@ struct WelcomeView: View {
                 })
             case .aboutJami:
                 AboutSwiftUIView()
+                case .fromArchive:
+                    ImportFromArchiveView(injectionBag: model.injectionBag,
+                                          dismissAction: {
+                        activeView = nil
+                    }, createAction: {[weak model] url, password in
+                        activeView = nil
+                        guard let model = model else { return }
+                        model.importFromArchive(path: url, password: password)
+                    })
+
             }
         }
     }
@@ -286,6 +297,11 @@ struct ButtonsView: View {
                 expandedbutton(L10n.Welcome.linkDevice, action: {
                     withAnimation {
                         activeView = .linkDevice
+                    }
+                })
+                expandedbutton(L10n.Welcome.linkBackup, action: {
+                    withAnimation {
+                        activeView = .fromArchive
                     }
                 })
             }

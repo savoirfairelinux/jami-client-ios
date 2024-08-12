@@ -232,4 +232,14 @@ static id <AccountAdapterDelegate> _delegate;
     }
 }
 
+- (BOOL)exportToFileWithAccountId:(NSString *)accountId
+              destinationPath:(NSString *)destinationPath
+                       scheme:(NSString *)scheme
+                     password:(NSString *)password {
+    return exportToFile(std::string([accountId UTF8String]),
+                        std::string([destinationPath UTF8String]),
+                        std::string([scheme UTF8String]),
+                        std::string([password UTF8String]));
+}
+
 @end
