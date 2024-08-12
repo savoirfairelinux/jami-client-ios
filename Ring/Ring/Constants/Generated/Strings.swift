@@ -272,6 +272,9 @@ internal enum L10n {
     /// Registration failed. Please check password.
     internal static let usernameRegistrationFailed = L10n.tr("Localizable", "accountPage.usernameRegistrationFailed", fallback: "Registration failed. Please check password.")
   }
+
+    internal enum BackupAccount {
+    }
   internal enum Actions {
     /// Back
     internal static let backAction = L10n.tr("Localizable", "actions.backAction", fallback: "Back")

@@ -21,6 +21,7 @@ import SwiftUI
 enum ActiveView: Identifiable {
     case jamiAccount
     case linkDevice
+    case fromArchive
     case jamsAccount
     case sipAccount
     case aboutJami
@@ -108,6 +109,13 @@ struct WelcomeView: View {
                 })
             case .aboutJami:
                 AboutSwiftUIView()
+                case .fromArchive:
+                    ImportFromArchiveView(injectionBag: model.injectionBag) {
+
+                    } createAction: { url, password in
+                        model.importFromArchive(path: url, password: password)
+                    }
+
             }
         }
     }
@@ -286,6 +294,11 @@ struct ButtonsView: View {
                 expandedbutton(L10n.Welcome.linkDevice, action: {
                     withAnimation {
                         activeView = .linkDevice
+                    }
+                })
+                expandedbutton("Import from an archive backup", action: {
+                    withAnimation {
+                        activeView = .fromArchive
                     }
                 })
             }

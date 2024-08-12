@@ -73,6 +73,7 @@ extension WelcomeViewModel {
             .addJamiAccount(username: name,
                             password: password,
                             pin: "",
+                            arhivePath: "",
                             profileName: self.profileName)
             .subscribe(onNext: { [weak self] accountId in
                 self?.handleAccountCreationSuccess(accountId, username: name)
@@ -191,7 +192,8 @@ extension WelcomeViewModel {
         self.accountService
             .addJamiAccount(username: "",
                             password: password,
-                            pin: pin,
+                            pin: pin, 
+                            arhivePath: "",
                             profileName: self.profileName)
             .subscribe(onNext: { [weak self] accountId in
                                 guard let self = self else { return }
@@ -199,6 +201,33 @@ extension WelcomeViewModel {
                                 self.accountCreated()
             }, onError: { [weak self] error in
                 self?.handleAccountCreationError(error)
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - import account
+extension WelcomeViewModel {
+    func importFromArchive(path: URL, password: String) {
+        guard path.startAccessingSecurityScopedResource() else {
+            //showSaveError()
+            return
+        }
+        self.creationState = .started
+        self.accountService
+            .addJamiAccount(username: "",
+                            password: password,
+                            pin: "",
+                            arhivePath: path.absoluteURL.path,
+                            profileName: self.profileName)
+            .subscribe(onNext: { [weak self] accountId in
+                guard let self = self else { return }
+                self.enablePushNotifications()
+                self.accountCreated()
+                path.stopAccessingSecurityScopedResource()
+            }, onError: { [weak self] error in
+                self?.handleAccountCreationError(error)
+                path.stopAccessingSecurityScopedResource()
             })
             .disposed(by: disposeBag)
     }
