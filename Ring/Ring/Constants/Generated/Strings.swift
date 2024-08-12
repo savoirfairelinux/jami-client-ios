@@ -366,6 +366,32 @@ internal enum L10n {
     /// Open gallery
     internal static let uploadPhoto = L10n.tr("Localizable", "alerts.uploadPhoto", fallback: "Open gallery")
   }
+  internal enum BackupAccount {
+    /// Select a name for archive.
+    internal static let archiveName = L10n.tr("Localizable", "backupAccount.archiveName", fallback: "Select a name for archive.")
+    /// Archive name
+    internal static let archiveNamePlaceholder = L10n.tr("Localizable", "backupAccount.archiveNamePlaceholder", fallback: "Archive name")
+    /// Backup
+    internal static let backupButton = L10n.tr("Localizable", "backupAccount.backupButton", fallback: "Backup")
+    /// Creating backup
+    internal static let creating = L10n.tr("Localizable", "backupAccount.creating", fallback: "Creating backup")
+    /// Open Backup Location
+    internal static let documentPickerButton = L10n.tr("Localizable", "backupAccount.documentPickerButton", fallback: "Open Backup Location")
+    /// Access to the selected location was denied.
+    internal static let errorAccessDenied = L10n.tr("Localizable", "backupAccount.errorAccessDenied", fallback: "Access to the selected location was denied.")
+    /// The export operation failed.
+    internal static let errorFailed = L10n.tr("Localizable", "backupAccount.errorFailed", fallback: "The export operation failed.")
+    /// The selected file path is invalid. Please choose a different location.
+    internal static let errorWrongLocation = L10n.tr("Localizable", "backupAccount.errorWrongLocation", fallback: "The selected file path is invalid. Please choose a different location.")
+    /// This Jami account exists only on this device. The account will be lost if this device is lost or the application is uninstalled. It is recommended to make a backup of this account.
+    internal static let explanation = L10n.tr("Localizable", "backupAccount.explanation", fallback: "This Jami account exists only on this device. The account will be lost if this device is lost or the application is uninstalled. It is recommended to make a backup of this account.")
+    /// Backup created
+    internal static let exportSuccess = L10n.tr("Localizable", "backupAccount.exportSuccess", fallback: "Backup created")
+    /// Enter the password that was used to encrypt the account.
+    internal static let passwordRequest = L10n.tr("Localizable", "backupAccount.passwordRequest", fallback: "Enter the password that was used to encrypt the account.")
+    /// Backup account
+    internal static let title = L10n.tr("Localizable", "backupAccount.title", fallback: "Backup account")
+  }
   internal enum BlockListPage {
     /// No blocked contacts
     internal static let noBlockedContacts = L10n.tr("Localizable", "blockListPage.noBlockedContacts", fallback: "No blocked contacts")

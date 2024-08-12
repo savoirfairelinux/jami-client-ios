@@ -382,6 +382,20 @@
 "accountPage.otherDevices" = "Other linked devices";
 "accountPage.accountIdentity" = "Account identity";
 
+//Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "Backup account";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password that was used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open Backup Location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
+
 //Account
 "account.sipServer" = "Server";
 "account.port" = "Port";
