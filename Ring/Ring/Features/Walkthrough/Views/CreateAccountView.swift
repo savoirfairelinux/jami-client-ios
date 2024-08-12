@@ -203,6 +203,7 @@ struct CreateAccountView: View {
 
     private var encryptButton: some View {
         Button(action: {
+            isTextFieldFocused = false
             withAnimation {
                 showEncryptView = true
             }

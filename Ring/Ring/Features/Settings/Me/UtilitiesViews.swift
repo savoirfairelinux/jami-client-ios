@@ -271,10 +271,12 @@ struct FocusableTextField: UIViewRepresentable {
         }
 
         func textFieldDidBeginEditing(_ textField: UITextField) {
+            if self.isFirstResponder { return }
             self.isFirstResponder = true
         }
 
         func textFieldDidEndEditing(_ textField: UITextField) {
+            if !self.isFirstResponder { return }
             self.isFirstResponder = false
         }
     }
@@ -296,9 +298,21 @@ struct FocusableTextField: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
-        // wait untill view shows
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            if uiView.window != nil, !uiView.isFirstResponder {
+        /*
+         No need to wait to resign the first responder.
+         Ensure the state is not updated directly in updateUIView.
+         */
+        if !isFirstResponder && uiView.isFirstResponder {
+            DispatchQueue.main.async {  [weak uiView] in
+                guard let uiView = uiView else { return }
+                uiView.resignFirstResponder()
+            }
+            return
+        }
+        // Wait untill view shows.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak uiView] in
+            guard let uiView = uiView else { return }
+            if uiView.window != nil, !uiView.isFirstResponder, isFirstResponder {
                 uiView.becomeFirstResponder()
             }
         }
