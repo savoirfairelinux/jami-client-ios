@@ -366,6 +366,32 @@ internal enum L10n {
     /// Open gallery
     internal static let uploadPhoto = L10n.tr("Localizable", "alerts.uploadPhoto", fallback: "Open gallery")
   }
+  internal enum BackupAccount {
+    /// Select a name for the archive.
+    internal static let archiveName = L10n.tr("Localizable", "backupAccount.archiveName", fallback: "Select a name for the archive.")
+    /// Archive name
+    internal static let archiveNamePlaceholder = L10n.tr("Localizable", "backupAccount.archiveNamePlaceholder", fallback: "Archive name")
+    /// Backup
+    internal static let backupButton = L10n.tr("Localizable", "backupAccount.backupButton", fallback: "Backup")
+    /// Creating backup
+    internal static let creating = L10n.tr("Localizable", "backupAccount.creating", fallback: "Creating backup")
+    /// Open backup location
+    internal static let documentPickerButton = L10n.tr("Localizable", "backupAccount.documentPickerButton", fallback: "Open backup location")
+    /// Access to the selected location was denied.
+    internal static let errorAccessDenied = L10n.tr("Localizable", "backupAccount.errorAccessDenied", fallback: "Access to the selected location was denied.")
+    /// The export operation failed.
+    internal static let errorFailed = L10n.tr("Localizable", "backupAccount.errorFailed", fallback: "The export operation failed.")
+    /// The selected file path is invalid. Please choose a different location.
+    internal static let errorWrongLocation = L10n.tr("Localizable", "backupAccount.errorWrongLocation", fallback: "The selected file path is invalid. Please choose a different location.")
+    /// This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.
+    internal static let explanation = L10n.tr("Localizable", "backupAccount.explanation", fallback: "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.")
+    /// Backup created
+    internal static let exportSuccess = L10n.tr("Localizable", "backupAccount.exportSuccess", fallback: "Backup created")
+    /// Enter the password used to encrypt the account.
+    internal static let passwordRequest = L10n.tr("Localizable", "backupAccount.passwordRequest", fallback: "Enter the password used to encrypt the account.")
+    /// Backup account
+    internal static let title = L10n.tr("Localizable", "backupAccount.title", fallback: "Backup account")
+  }
   internal enum BlockListPage {
     /// No blocked contacts
     internal static let noBlockedContacts = L10n.tr("Localizable", "blockListPage.noBlockedContacts", fallback: "No blocked contacts")
@@ -683,6 +709,18 @@ internal enum L10n {
     /// Video
     internal static let video = L10n.tr("Localizable", "global.video", fallback: "Video")
   }
+  internal enum ImportFromArchive {
+    /// Import
+    internal static let buttonTitle = L10n.tr("Localizable", "importFromArchive.buttonTitle", fallback: "Import")
+    /// Import a Jami account from a local archive file.
+    internal static let explanation = L10n.tr("Localizable", "importFromArchive.explanation", fallback: "Import a Jami account from a local archive file.")
+    /// If the account is encrypted with a password, please enter it below.
+    internal static let passwordExplanation = L10n.tr("Localizable", "importFromArchive.passwordExplanation", fallback: "If the account is encrypted with a password, please enter it below.")
+    /// Select archive file
+    internal static let selectArchiveButton = L10n.tr("Localizable", "importFromArchive.selectArchiveButton", fallback: "Select archive file")
+    /// Import from archive
+    internal static let title = L10n.tr("Localizable", "importFromArchive.title", fallback: "Import from archive")
+  }
   internal enum Invitations {
     /// accepted
     internal static let accepted = L10n.tr("Localizable", "invitations.accepted", fallback: "accepted")
@@ -722,8 +760,6 @@ internal enum L10n {
     internal static let linkDeviceMessage = L10n.tr("Localizable", "linkToAccount.linkDeviceMessage", fallback: "Choose “Link a new device” from the other Jami app to show the QR code or PIN")
     /// Link Device
     internal static let linkDeviceTitle = L10n.tr("Localizable", "linkToAccount.linkDeviceTitle", fallback: "Link Device")
-    /// Fill if the account password is encrypted
-    internal static let passwordExplanation = L10n.tr("Localizable", "linkToAccount.passwordExplanation", fallback: "Fill if the account password is encrypted")
     /// Enter PIN
     internal static let pinLabel = L10n.tr("Localizable", "linkToAccount.pinLabel", fallback: "Enter PIN")
     /// PIN

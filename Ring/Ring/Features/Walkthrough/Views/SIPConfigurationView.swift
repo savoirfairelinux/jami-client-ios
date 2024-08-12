@@ -38,6 +38,7 @@ struct SIPConfigurationView: View {
                 passwordView
             }
             .padding(.horizontal)
+            .frame(maxWidth: 500)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor.systemGroupedBackground)
