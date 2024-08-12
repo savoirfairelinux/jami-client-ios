@@ -73,6 +73,7 @@ extension WelcomeViewModel {
             .addJamiAccount(username: name,
                             password: password,
                             pin: "",
+                            arhivePath: "",
                             profileName: self.profileName)
             .subscribe(onNext: { [weak self] accountId in
                 self?.handleAccountCreationSuccess(accountId, username: name)
@@ -192,6 +193,7 @@ extension WelcomeViewModel {
             .addJamiAccount(username: "",
                             password: password,
                             pin: pin,
+                            arhivePath: "",
                             profileName: self.profileName)
             .subscribe(onNext: { [weak self] accountId in
                                 guard let self = self else { return }
@@ -199,6 +201,54 @@ extension WelcomeViewModel {
                                 self.accountCreated()
             }, onError: { [weak self] error in
                 self?.handleAccountCreationError(error)
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - import account
+extension WelcomeViewModel {
+    func importFromArchive(path: URL, password: String) {
+        guard path.startAccessingSecurityScopedResource() else {
+            self.setState(state: .error(error: .unknown))
+            return
+        }
+
+        self.creationState = .started
+
+        func stopResourceAccess() {
+            path.stopAccessingSecurityScopedResource()
+        }
+
+        /*
+         Set a timer to ensure stopAccessingSecurityScopedResource
+         is called, in case the operation does not complete.
+         */
+        let stopTimer: Timer? = Timer.scheduledTimer(withTimeInterval: 60.0,
+                                             repeats: false) { _ in
+            stopResourceAccess()
+        }
+
+        self.accountService
+            .addJamiAccount(username: "",
+                            password: password,
+                            pin: "",
+                            arhivePath: path.absoluteURL.path,
+                            profileName: self.profileName)
+            .subscribe(onNext: { [weak self] accountId in
+                guard let self = self else { return }
+                self.enablePushNotifications()
+                self.accountCreated()
+                stopResourceAccess()
+                if let timer = stopTimer, timer.isValid {
+                    timer.invalidate()
+                }
+            }, onError: { [weak self] error in
+                self?.handleAccountCreationError(error)
+                stopResourceAccess()
+                if let timer = stopTimer, timer.isValid {
+                    timer.invalidate()
+                }
             })
             .disposed(by: disposeBag)
     }

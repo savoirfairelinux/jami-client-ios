@@ -62,6 +62,7 @@ enum ConfigKey: String {
     case presenceEnabled = "Account.presenceEnabled"
     case archivePassword = "Account.archivePassword"
     case archivePIN = "Account.archivePIN"
+    case archivePath = "Account.archivePath"
     case displayName = "Account.displayName"
     case ethAccount = "ETH.account"
     case tlsListenerPort = "TLS.listenerPort"

@@ -85,5 +85,9 @@
 - (void)setAccountsActive:(BOOL) active;
 
 - (void)enableAccount:(NSString *)accountId active:(BOOL)active;
+- (BOOL)exportToFileWithAccountId:(NSString *)accountId
+              destinationPath:(NSString *)destinationPath
+                       scheme:(NSString *)scheme
+                     password:(NSString *)password;
 
 @end

@@ -86,7 +86,7 @@ struct LinkToAccountView: View {
             HStack {
                 Text(L10n.LinkToAccount.pinPlaceholder + ":")
                 Text(pin)
-                    .foregroundColor(.green)
+                    .foregroundColor(Color(UIColor.jamiSuccess))
             }
             .padding()
         }
@@ -177,10 +177,11 @@ struct LinkToAccountView: View {
 
     private var passwordView: some View {
         VStack {
-            Text(L10n.LinkToAccount.passwordExplanation)
+            Text(L10n.ImportFromArchive.passwordExplanation)
+                .multilineTextAlignment(.center)
             WalkthroughPasswordView(text: $password, placeholder: L10n.Global.password)
-                .padding(.vertical)
         }
+        .padding(.vertical)
     }
 
     private var cancelButton: some View {

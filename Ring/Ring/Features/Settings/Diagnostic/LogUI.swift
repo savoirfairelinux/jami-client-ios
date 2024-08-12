@@ -38,39 +38,10 @@ struct ShareSheet: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
     }
 }
-struct DocumentPicker: UIViewControllerRepresentable {
-    @Binding var fileURL: URL
-
-    func makeCoordinator() -> DocumentPickerCoordinator {
-        return DocumentPickerCoordinator(fileURL: $fileURL)
-    }
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPicker>) -> UIDocumentPickerViewController {
-        let controller: UIDocumentPickerViewController
-        controller = UIDocumentPickerViewController(forOpeningContentTypes: [.folder])
-        controller.delegate = context.coordinator
-        return controller
-    }
-
-    func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: UIViewControllerRepresentableContext<DocumentPicker>) {
-    }
-}
-
-class DocumentPickerCoordinator: NSObject, UIDocumentPickerDelegate, UINavigationControllerDelegate {
-    @Binding var fileURL: URL
-
-    init(fileURL: Binding<URL>) {
-        _fileURL = fileURL
-    }
-
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        fileURL = url
-    }
-}
 
 struct LogUI: View {
     @StateObject var model: LogUIViewModel
-    @SwiftUI.State private var filePath: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    @SwiftUI.State private var filePath: URL?
     @SwiftUI.State private var showButtons = false
 
     init(injectiomBag: InjectionBag) {
@@ -123,7 +94,7 @@ struct LogUI: View {
         .navigationBarItems(trailing: trailingBarItems)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $model.showPicker) {
-            DocumentPicker(fileURL: $filePath)
+            DocumentPicker(fileURL: $filePath, type: .directory)
         }
         .sheet(isPresented: $model.showShare) {
             ShareSheet(activityItems: [model.shareFileURL!])
@@ -140,6 +111,7 @@ struct LogUI: View {
             }
         })
         .onChange(of: filePath) { _ in
+            guard let filePath = filePath else { return }
             model.saveLogTo(path: filePath)
         }
     }
