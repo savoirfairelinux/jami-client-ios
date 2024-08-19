@@ -56,6 +56,7 @@
 "global.video" = "ویدیو";
 "global.time" = "زمان";
 "global.editPassword" = "Edit password";
+"global.confirmPassword" = "تأیید گذرواژه";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "جمی یک بستر ارتباطی رایگان و جهانی است، که حریم خصوصی و آزادی کاربران را حفظ می‌کند";
 "welcome.haveAccount" = "من قبلاً حسابي دارم";
 "welcome.linkDevice" = "واردات از دستگاه دیگری";
-"welcome.linkBackup" = "وارد کردن از پشتیبان بایگانی‌شده";
+"welcome.linkBackup" = "وارد کردن از یک پشتیبان آرشیو";
 "welcome.createAccount" = "پیوستن";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "پین را وارد کنید";
 "linkToAccount.scanQRCode" = "اسکن کد QR";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "واردات";
+"importFromArchive.selectArchiveButton" = "فایل آرشیو را انتخاب کنید";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "ورود";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "این دستگاه";
 "accountPage.otherDevices" = "دیگر دستگاه های پیوند داده شده";
 "accountPage.accountIdentity" = "Account identity";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "پشتیبان‌گیری حساب";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "سرور";

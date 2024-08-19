@@ -56,6 +56,7 @@
 "global.video" = "Wideo";
 "global.time" = "Czas";
 "global.editPassword" = "Edytuj hasło";
+"global.confirmPassword" = "Potwierdź hasło";
 "global.cameraDisabled" = "Dostęp do kamery jest wyłączony. Włącz go w ustawieniach.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "Ring jest wolnym oprogramowaniem do uniwersalnej komunikacji, respektującym wolności i prywatność swoich użytkowników";
 "welcome.haveAccount" = "Mam już konto.";
 "welcome.linkDevice" = "Importuje się z innego urządzenia";
-"welcome.linkBackup" = "Importuj z archiwum kopii zapasowej";
+"welcome.linkBackup" = "Importuj z archiwum";
 "welcome.createAccount" = "Dołączył się";
 "welcome.connectToManager" = "Połącz się z serwerem Jami Account Manager";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "Wprowadź PIN";
 "linkToAccount.scanQRCode" = "Zeskanuj kod QR";
 "linkToAccount.explanationPinMessage" = "Aby wygenerować kod PIN, przejdź do ustawień zarządzania kontem na urządzeniu zawierającym konto, z którym chcesz się połączyć. Wybierz opcję „Połącz nowe urządzenie”. Otrzymasz kod PIN niezbędny do wypełnienia formularza. Kod PIN jest ważny tylko przez 10 minut.";
-"linkToAccount.passwordExplanation" = "Wypełnij, jeśli hasło do konta jest zaszyfrowane";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "Importuj";
+"importFromArchive.selectArchiveButton" = "Wybierz plik archiwum";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Zaloguj się";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "To urządzenie";
 "accountPage.otherDevices" = "Inne, połączone urządzenia";
 "accountPage.accountIdentity" = "Identyfikacja konta";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "Wykonaj kopię zapasową";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "Serwer";

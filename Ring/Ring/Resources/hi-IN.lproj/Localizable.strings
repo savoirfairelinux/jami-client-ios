@@ -56,6 +56,7 @@
 "global.video" = "वीडियो";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.confirmPassword" = "पासवर्ड की पुष्टि करें";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "जामी एक मुक्त और सार्वभौमिक संचार मंच है जो उपयोगकर्ताओं की गोपनीयता और स्वतंत्रता को संरक्षित करता है";
 "welcome.haveAccount" = "मेरे पास पहले से ही एक खाता है";
 "welcome.linkDevice" = "दूसरे उपकरण से आयात";
-"welcome.linkBackup" = "संग्रह बैकअप से आयात";
+"welcome.linkBackup" = "एक संग्रह बैकअप से आयात";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "पिन दर्ज करें";
 "linkToAccount.scanQRCode" = "QR कोड स्कैन करें";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "आयात";
+"importFromArchive.selectArchiveButton" = "संग्रह फ़ाइल का चयन करें";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "साइन इन करें";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "यह उपकरण";
 "accountPage.otherDevices" = "अन्य लिंक किए गए उपकरण";
 "accountPage.accountIdentity" = "Account identity";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "बैकअप खाता";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "सर्वर";

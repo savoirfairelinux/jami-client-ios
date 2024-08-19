@@ -56,6 +56,7 @@
 "global.video" = "ভিডিও";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.confirmPassword" = "পাসওয়ার্ড নিশ্চিত করুন";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "জামি একটি মুক্ত ও সর্বজনীন যোগাযোগ প্ল্যাটফর্ম যা ব্যবহারকারীদের গোপনীয়তা ও স্বাধীনতা রক্ষা করে";
 "welcome.haveAccount" = "আমার একটা একাউন্ট আছে";
 "welcome.linkDevice" = "অন্য ডিভাইস থেকে আমদানি";
-"welcome.linkBackup" = "সংরক্ষণাগার ব্যাকআপ থেকে আমদানি";
+"welcome.linkBackup" = "একটি সংরক্ষণাগার ব্যাকআপ থেকে আমদানি";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "পিন লিখুন";
 "linkToAccount.scanQRCode" = "QR কোড স্ক্যান করুন";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "আমদানি";
+"importFromArchive.selectArchiveButton" = "আর্কাইভ ফাইল নির্বাচন করুন";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "সাইন ইন করুন";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "এই ডিভাইস";
 "accountPage.otherDevices" = "অন্যান্য সংযুক্ত ডিভাইস";
 "accountPage.accountIdentity" = "Account identity";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "ব্যাকআপ অ্যাকাউন্ট";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "সার্ভার";

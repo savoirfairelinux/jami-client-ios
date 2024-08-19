@@ -56,6 +56,7 @@
 "global.video" = "വീഡിയോ";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.confirmPassword" = "പാസ്വേഡ് സ്ഥിരീകരിക്കുക";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "ജാമി എന്നത് സ്വതന്ത്രവും സാർവത്രികവുമായ ഒരു ആശയവിനിമയ പ്ലാറ്റ്ഫോമാണ്, അത് ഉപയോക്താക്കളുടെ സ്വകാര്യതയും സ്വാതന്ത്ര്യവും സംരക്ഷിക്കുന്നു";
 "welcome.haveAccount" = "എനിക്ക് ഒരു അക്കൌണ്ട് ഉണ്ട്";
 "welcome.linkDevice" = "മറ്റൊരു ഉപകരണത്തിൽ നിന്നും ഇറക്കുമതി ചെയ്യുക";
-"welcome.linkBackup" = "ആർക്കൈവ് ബാക്കപ്പ് നിന്നും ഇറക്കുമതി ചെയ്യുക";
+"welcome.linkBackup" = "ഒരു ആർക്കൈവ് ബാക്കപ്പ് നിന്നും ഇറക്കുമതി ചെയ്യുക";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "പിൻ നൽകുക";
 "linkToAccount.scanQRCode" = "ക്യുആർ കോഡ് സ്കാൻ ചെയ്യുക";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "ഇറക്കുമതി";
+"importFromArchive.selectArchiveButton" = "ആർക്കൈവ് ഫയൽ തിരഞ്ഞെടുക്കുക";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "സൈൻ ഇൻ ചെയ്യുക";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "ഈ ഉപകരണം";
 "accountPage.otherDevices" = "മറ്റ് ബന്ധിപ്പിച്ച ഉപകരണങ്ങൾ";
 "accountPage.accountIdentity" = "Account identity";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "ബാക്കപ്പ് അക്കൌണ്ട്";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "സെർവർ";

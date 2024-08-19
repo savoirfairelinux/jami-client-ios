@@ -56,6 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Ora";
 "global.editPassword" = "Schimbă parola";
+"global.confirmPassword" = "Confirmă parola";
 "global.cameraDisabled" = "Accesul la cameră este dezactivat. Activează-l din reglări.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "Jami este o platformă de comunicare liberă și universală care păstrează libertățile și intimitatea.";
 "welcome.haveAccount" = "Am deja un cont";
 "welcome.linkDevice" = "Importă din alt aparat";
-"welcome.linkBackup" = "Importă din copia de rezervă";
+"welcome.linkBackup" = "Importă dintr-o copie de rezervă";
 "welcome.createAccount" = "Participă";
 "welcome.connectToManager" = "Conectează-te la Serverul de Administrare a Conturilor Jami";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "Introdu PIN-ul";
 "linkToAccount.scanQRCode" = "Scanează codul QR";
 "linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. Alege „Asociază alt aparat” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
-"linkToAccount.passwordExplanation" = "Se completează dacă acest cont are parolă";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "Importă";
+"importFromArchive.selectArchiveButton" = "Alege fișierul arhivei";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "Acest aparat";
 "accountPage.otherDevices" = "Alte aparate asociate";
 "accountPage.accountIdentity" = "Identitatea contului";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "Copie de rezervă a contului";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "Server";

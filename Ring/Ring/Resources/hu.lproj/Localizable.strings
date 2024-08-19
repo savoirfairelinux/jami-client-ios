@@ -56,6 +56,7 @@
 "global.video" = "Videó";
 "global.time" = "Idő";
 "global.editPassword" = "Jelszó megváltoztatása";
+"global.confirmPassword" = "Jelszó megerősítése";
 "global.cameraDisabled" = "A kamera hozzáférése le vannak tiltva. Kérjük, engedélyezze a kamera hozzáférését Jami számára az eszközbeállításokban, hogy minden funkció működőképes legyen.";
 
 // Scan
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "PIN-kód megadása";
 "linkToAccount.scanQRCode" = "QR-kód beolvasása";
 "linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához lépjen a fiókkezelési beállításokhoz azon az eszközön, amelyen az összekapcsolni kívánt fiók található. Válassza az „Új eszköz összekapcsolása” lehetőséget. Megkapja az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
-"linkToAccount.passwordExplanation" = "Adja meg, ha a fiók jelszóval titkosított";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "Importálás";
+"importFromArchive.selectArchiveButton" = "Archívfájl kijelölése";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Bejelentkezés";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "Ez az eszköz";
 "accountPage.otherDevices" = "Egyéb kapcsolódó eszközök";
 "accountPage.accountIdentity" = "Fiókazonosító";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "Fiók biztonsági mentése";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "Kiszolgáló";

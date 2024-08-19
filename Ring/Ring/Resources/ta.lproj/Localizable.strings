@@ -56,6 +56,7 @@
 "global.video" = "காணொளி";
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
+"global.confirmPassword" = "கடவுச்சொல்லை உறுதிப்படுத்தவும்";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "ஜாமி என்பது பயனர்களின் தனியுரிமையும் சுதந்திரமும் பாதுகாக்கப்படும் இலவச மற்றும் உலகளாவிய தகவல் தொடர்பு தளமாகும்";
 "welcome.haveAccount" = "எனக்கு ஏற்கனவே ஒரு கணக்கு இருக்கிறது";
 "welcome.linkDevice" = "மற்றொரு சாதனத்திலிருந்து இறக்குமதி";
-"welcome.linkBackup" = "காப்புரிமை காப்புரிமை இருந்து இறக்குமதி";
+"welcome.linkBackup" = "ஒரு காப்புரிமை காப்புரிமை இருந்து இறக்குமதி";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "PIN ஐ உள்ளிடவும்";
 "linkToAccount.scanQRCode" = "QR குறியீட்டை ஸ்கேன் செய்யவும்";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "இறக்குமதி";
+"importFromArchive.selectArchiveButton" = "காப்பக கோப்புகளைத் தேர்ந்தெடுக்கவும்";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "பதிவு செய்யவும்";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "இந்த சாதனம்";
 "accountPage.otherDevices" = "இணைக்கப்பட்ட பிற சாதனங்கள்";
 "accountPage.accountIdentity" = "Account identity";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "காப்பு கணக்கு";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "சேவையகம்";

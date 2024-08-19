@@ -56,6 +56,7 @@
 "global.video" = "Vidéo";
 "global.time" = "Durée";
 "global.editPassword" = "Modifier le mot de passe";
+"global.confirmPassword" = "Confirmer le mot de passe";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "Jami est un logiciel libre de communication universel qui protège la vie privée et les libertés de ses utilisateurs.";
 "welcome.haveAccount" = "J'ai déjà un compte";
 "welcome.linkDevice" = "Importer d'un autre appareil";
-"welcome.linkBackup" = "Importer à partir d'une sauvegarde";
+"welcome.linkBackup" = "Importer à partir d'un fichier archive";
 "welcome.createAccount" = "Rejoindre";
 "welcome.connectToManager" = "Se connecter à un serveur JAMS";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "Entrer votre NIP";
 "linkToAccount.scanQRCode" = "Scanner un code QR";
 "linkToAccount.explanationPinMessage" = "Pour générer le code PIN, accédez aux paramètres de gestion du compte sur l'appareil contenant le compte que vous souhaitez lier. Sélectionnez \"Lier un nouvel appareil\". Vous recevrez le code PIN nécessaire pour remplir ce formulaire. Le code PIN n'est valable que pendant 10 minutes.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "Importer";
+"importFromArchive.selectArchiveButton" = "Choisir un fichier archive";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Connexion";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "Cet appareil";
 "accountPage.otherDevices" = "Autres appareils liés";
 "accountPage.accountIdentity" = "Identité du compte";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "Sauvegarder le compte";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "Serveur";

@@ -56,6 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Čas";
 "global.editPassword" = "Zmeniť heslo";
+"global.confirmPassword" = "Potvrďte heslo";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "Jami je slobodná a univerzálna komunikačná platforma, ktorá zachováva súkromie a slobodu používateľov.";
 "welcome.haveAccount" = "Už mám účet.";
 "welcome.linkDevice" = "Import z iného zariadenia";
-"welcome.linkBackup" = "Importovať zo zálohovaného archívu";
+"welcome.linkBackup" = "Import z zálohovacej archívy";
 "welcome.createAccount" = "Pridať";
 "welcome.connectToManager" = "Pripojte sa k serveru Jami Account Manager";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "Zadajte PIN";
 "linkToAccount.scanQRCode" = "Nasnímať QR kód";
 "linkToAccount.explanationPinMessage" = "Ak chcete vygenerovať kód PIN, prejdite do nastavení správy účtu na zariadení obsahujúcom účet, ktorý chcete prepojiť. Vyberte možnosť „Pripojiť nové zariadenie“. Na vyplnenie tohto formulára dostanete potrebný PIN. PIN je platný len 10 minút.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "Dovoz";
+"importFromArchive.selectArchiveButton" = "Vyberte súbor archívu";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Prihlásiť sa";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "Toto zariadenie";
 "accountPage.otherDevices" = "Ostatné prepojené zariadenia";
 "accountPage.accountIdentity" = "Identita účtu";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "Zálohovať účet";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "Server";
