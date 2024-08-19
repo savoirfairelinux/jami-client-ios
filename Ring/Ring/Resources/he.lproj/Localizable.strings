@@ -56,6 +56,7 @@
 "global.video" = "וידאו";
 "global.time" = "זמן";
 "global.editPassword" = "Edit password";
+"global.confirmPassword" = "אישור סיסמה";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "ג'אמי היא פלטפורמה חופשית ויקונביסלית לשיחה שמטרת הפרטיות והחופש של המשתמשים";
 "welcome.haveAccount" = "יש לי חשבון.";
 "welcome.linkDevice" = "ייבוא ממכשיר אחר";
-"welcome.linkBackup" = "ייבוא מאחזת תיק";
+"welcome.linkBackup" = "ייבוא מאחסן גיבוי";
 "welcome.createAccount" = "הצטרף";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "הכניס את סימן PIN";
 "linkToAccount.scanQRCode" = "Scan QR Code";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "יבוא";
+"importFromArchive.selectArchiveButton" = "בחר תיק ארכיון";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "כניסה";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "המכשיר הזה";
 "accountPage.otherDevices" = "מכשירים קשורים אחרים";
 "accountPage.accountIdentity" = "Account identity";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "חשבון גיבוי";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "סרוויר";

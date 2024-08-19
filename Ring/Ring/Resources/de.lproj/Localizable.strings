@@ -56,6 +56,7 @@
 "global.video" = "Video";
 "global.time" = "Zeit";
 "global.editPassword" = "Passwort bearbeiten";
+"global.confirmPassword" = "Passwort bestätigen";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "Jami ist eine freie und universelle Kommunikationsplattform und respektiert die Freiheiten und Privatsphäre der Benutzer. ";
 "welcome.haveAccount" = "Ich habe bereits einen Account";
 "welcome.linkDevice" = "Von einem anderen Gerät importieren";
-"welcome.linkBackup" = "Backuparchiv importieren";
+"welcome.linkBackup" = "Import aus einer Archivsicherung";
 "welcome.createAccount" = "Beitreten";
 "welcome.connectToManager" = "Verbindung zu einem Jami Account Manager-Server herstellen";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "PIN eingeben";
 "linkToAccount.scanQRCode" = "QR-Code scannen";
 "linkToAccount.explanationPinMessage" = "Um den PIN-Code zu generieren, gehen Sie zu den Kontoverwaltungseinstellungen auf dem Gerät, das das Konto enthält, mit dem Sie eine Verknüpfung herstellen möchten. Wählen Sie „Neues Gerät verknüpfen“. Sie erhalten die zum Ausfüllen dieses Formulars erforderliche PIN. Die PIN ist nur 10 Minuten gültig.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "Import";
+"importFromArchive.selectArchiveButton" = "Archivdatei auswählen";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Einloggen";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "Dieses Gerät";
 "accountPage.otherDevices" = "andere verknüpfte Geräte";
 "accountPage.accountIdentity" = "Kontoidentität";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "Konto sichern";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "Server";

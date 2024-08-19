@@ -56,6 +56,7 @@
 "global.video" = "Видео";
 "global.time" = "Време";
 "global.editPassword" = "Edit password";
+"global.confirmPassword" = "Потвърдете паролата";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -160,7 +161,7 @@
 "welcome.text" = "Jami е свободна и универсална комуникационна платформа, която запазва личния живот и свободите на потребителите";
 "welcome.haveAccount" = "Вече имам сметка.";
 "welcome.linkDevice" = "Внос от друго устройство";
-"welcome.linkBackup" = "Импорт от архивния резерв";
+"welcome.linkBackup" = "Импорт от архивен резерв";
 "welcome.createAccount" = "Присъединяване";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -205,7 +206,13 @@
 "linkToAccount.pinLabel" = "Въведете ПИН";
 "linkToAccount.scanQRCode" = "Сканиране на QR-код";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "Внасяне";
+"importFromArchive.selectArchiveButton" = "Изберете архив файл";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Вписване";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "Това устройство";
 "accountPage.otherDevices" = "Други свързани устройства";
 "accountPage.accountIdentity" = "Account identity";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "Резервен профил";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "Сервер";

@@ -56,7 +56,8 @@
 "global.video" = "Vídeo";
 "global.time" = "Tempo";
 "global.editPassword" = "Editar palavra-passe";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.confirmPassword" = "Confirmar palavra-passe";
+"global.cameraDisabled" = "O acesso à câmara está desativado. Ative-o nas configurações.";
 
 // Scan
 "scan.badQrCode" = "Código QR inválido";
@@ -160,7 +161,7 @@
 "welcome.text" = "O Jami é uma plataforma de comunicação universal que preserva a privacidade e liberdades dos utilizadores";
 "welcome.haveAccount" = "Já tenho uma conta";
 "welcome.linkDevice" = "Importar de outro dispositivo";
-"welcome.linkBackup" = "Importar do arquivo de cópia de segurança";
+"welcome.linkBackup" = "Importar de um arquivo de cópia de segurança";
 "welcome.createAccount" = "Aderir";
 "welcome.connectToManager" = "Conectar a um servidor do Gestor de Contas Jami";
 
@@ -186,10 +187,10 @@
 "createAccount.timeoutTitle" = "Conta criada";
 "createAccount.timeoutMessage" = "A registar o nome de utilizador… Pode demorar um pouco.";
 "createAccount.sipConfigure" = "Configurar uma conta existente de SIP";
-"createAccount.creatingAccount" = "Creating account";
+"createAccount.creatingAccount" = "Criar conta";
 "createAccount.nameExplanation" = "Pode escolher um nome de utilizador para ajudar os outros a encontrá-lo e a contactá-lo mais facilmente no Jami.";
 "createAccount.newAccount" = "Criar conta";
-"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encryptionEnabled" = "Encriptação ativada";
 "createAccount.encrypt" = "Encriptar";
 "createAccount.customize" = "Personalizar";
 "createAccount.encryptTitle" = "Encriptar a conta com uma palavra-passe";
@@ -200,16 +201,22 @@
 "linkToAccount.linkButtonTitle" = "Vincular";
 "linkToAccount.linkDeviceTitle" = "Vincular dispositivo";
 "linkToAccount.linkDeviceMessage" = "Escolha “Vincular um novo dispositivo” na outra aplicação Jami para mostrar o código QR ou o PIN";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
+"linkToAccount.explanationMessage" = "É necessário um PIN para utilizar uma conta Jami existente neste dispositivo";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introduza o PIN";
 "linkToAccount.scanQRCode" = "Digitalizar código QR";
 "linkToAccount.explanationPinMessage" = "Para gerar o código PIN, aceda às definições de gestão da conta no dispositivo que contém a conta à qual pretende ligar. Selecione \"Vincular um novo dispositivo\". Receberá o PIN necessário para preencher este formulário. O PIN só é válido durante 10 minutos.";
-"linkToAccount.passwordExplanation" = "Fill if the account password is encrypted";
+
+// Import from Archive
+"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.title" = "Import from archive";
+"importFromArchive.buttonTitle" = "Importar";
+"importFromArchive.selectArchiveButton" = "Selecionar ficheiro de arquivo";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Iniciar sessão";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "Conta JAMS";
 "linkToAccountManager.accountManagerPlaceholder" = "URL de JAMS";
 "linkToAccountManager.accountManagerLabel" = "Insira o URL JAMS";
 "linkToAccountManager.jamsExplanation" = "Digite o URL do servidor de gestão de conta Jami (JAMS)";
@@ -290,9 +297,9 @@
 "accountPage.proxyAddressAlert" = "Forneça o endereço do proxy";
 "accountPage.noProxyExplanationLabel" = "O seu dispositivo não irá receber notificações quando o proxy estiver desativado";
 "accountPage.proxyPaceholder" = "Endereço do proxy";
-"accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
-"accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
+"accountPage.useProxyList" = "Usar lista de proxies";
+"accountPage.proxyListURL" = "URL da lista de proxies";
+"accountPage.proxyExplanation" = "As notificações são encaminhadas através de um proxy. Pode utilizar o proxy predefinido, introduzir um endereço proxy personalizado ou fornecer um URL com uma lista de proxies.";
 "accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Ativar notificações";
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy desativado";
@@ -381,6 +388,20 @@
 "accountPage.thisDevice" = "Este dispositivo";
 "accountPage.otherDevices" = "Outros dispositivos conectados";
 "accountPage.accountIdentity" = "Identidade da conta";
+
+// Backup Account
+"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.title" = "Fazer uma cópia de segurança da conta";
+"backupAccount.creating" = "Creating backup";
+"backupAccount.archiveName" = "Select a name for the archive.";
+"backupAccount.archiveNamePlaceholder" = "Archive name";
+"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.backupButton" = "Backup";
+"backupAccount.documentPickerButton" = "Open backup location";
+"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
+"backupAccount.errorFailed" = "The export operation failed.";
 
 //Account
 "account.sipServer" = "Servidor";
