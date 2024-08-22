@@ -122,7 +122,7 @@ class ConversationsManager {
                 case .appEnterBackground:
                     self.updateBackgroundState()
                 case .appEnterForeground:
-                    DispatchQueue.global(qos: .background).async { [weak self] in
+                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                         guard let self = self else { return }
                         self.updateForegroundState()
                     }
