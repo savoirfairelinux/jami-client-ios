@@ -177,7 +177,7 @@ extension WelcomeViewModel {
     }
 
     private func convertProfileImageToBase64() -> String? {
-        guard let image = profileImage,
+        guard let image = profileImage?.fixOrientation(),
               let imageData = image.convertToData(ofMaxSize: 40000) else {
             return nil
         }
