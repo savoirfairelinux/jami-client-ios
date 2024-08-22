@@ -43,7 +43,7 @@ class EditProfileVM: ObservableObject, AvatarViewDataModel {
 
     func updateProfile() {
         var photo: String?
-        if let image = self.profileImage,
+        if let image = self.profileImage?.fixOrientation(),
            let imageData = image.convertToData(ofMaxSize: 40000) {
             photo = imageData.base64EncodedString()
         }
