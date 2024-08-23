@@ -133,7 +133,8 @@ class ConversationsManager {
                         guard let self = self,
                               let updatedConversations = self.getConversationData() else { return }
                         self.cleanConversationData()
-                        self.reloadConversationsAndRequests(updatedConversations: updatedConversations)
+                        let accountIds = extractAccountIds(from: updatedConversations)
+                        self.reloadConversationsAndRequests(accountIds: accountIds)
                     }
                 case .callEnded, .callProviderCancelCall:
                     DispatchQueue.main.async {
@@ -183,27 +184,34 @@ class ConversationsManager {
         }
         self.cleanConversationData()
         // ask daemon to reload conversations and request from file
-        self.reloadConversationsAndRequests(updatedConversations: updatedConversations)
+        let accountIds = extractAccountIds(from: updatedConversations)
+        self.reloadConversationsAndRequests(accountIds: accountIds)
         self.accountsService.setAccountsActive(active: true)
         // get requests from the daemon
-        self.updateRequests(updatedConversations: updatedConversations)
+        self.updateRequests(accountIds: accountIds)
         // get interactions from the daemon
         self.reloadConversationMessages(updatedConversations: updatedConversations)
     }
 
-    func reloadConversationsAndRequests(updatedConversations: [[String: String]]) {
-        for conversationData in updatedConversations {
+    func extractAccountIds(from conversations: [[String: String]]) -> Set<String> {
+        var accountIds = Set<String>()
+        for conversationData in conversations {
             if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
-                self.conversationService.reloadConversationsAndRequests(accountId: accountId)
+                accountIds.insert(accountId)
             }
+        }
+        return accountIds
+    }
+
+    func reloadConversationsAndRequests(accountIds: Set<String>) {
+        for accountId in accountIds {
+            self.conversationService.reloadConversationsAndRequests(accountId: accountId)
         }
     }
 
-    func updateRequests(updatedConversations: [[String: String]]) {
-        for conversationData in updatedConversations {
-            if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
-                self.requestService.updateConversationsRequests(withAccount: accountId)
-            }
+    func updateRequests(accountIds: Set<String>) {
+        for accountId in accountIds {
+            self.requestService.updateConversationsRequests(withAccount: accountId)
         }
     }
 
