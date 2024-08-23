@@ -192,18 +192,30 @@ class ConversationsManager {
     }
 
     func reloadConversationsAndRequests(updatedConversations: [[String: String]]) {
+        var uniqueAccountIds = Set<String>()
+
         for conversationData in updatedConversations {
             if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
-                self.conversationService.reloadConversationsAndRequests(accountId: accountId)
+                uniqueAccountIds.insert(accountId)
             }
+        }
+
+        for accountId in uniqueAccountIds {
+            self.conversationService.reloadConversationsAndRequests(accountId: accountId)
         }
     }
 
     func updateRequests(updatedConversations: [[String: String]]) {
+        var uniqueAccountIds = Set<String>()
+
         for conversationData in updatedConversations {
             if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
-                self.requestService.updateConversationsRequests(withAccount: accountId)
+                uniqueAccountIds.insert(accountId)
             }
+        }
+
+        for accountId in uniqueAccountIds {
+            self.requestService.updateConversationsRequests(withAccount: accountId)
         }
     }
 
