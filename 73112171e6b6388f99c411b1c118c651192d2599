@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67ebb6f7_9cc5b7c0",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-08-26T23:40:47Z",
+      "side": 1,
+      "message": "Can you please provide a code pointer to files which have this variable/constant? Thank you",
+      "range": {
+        "startLine": 280,
+        "startChar": 7,
+        "endLine": 280,
+        "endChar": 13
+      },
+      "revId": "73112171e6b6388f99c411b1c118c651192d2599",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
