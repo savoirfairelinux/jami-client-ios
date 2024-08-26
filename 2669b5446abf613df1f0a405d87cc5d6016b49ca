@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30f8eb5b_c5ee947e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-08-26T13:26:00Z",
+      "side": 1,
+      "message": "Ring/Ring/Constants/Generated/Strings.swift is a generated file and should not be modified. Any modifications will be overridden during the first run. Ring/Ring/Resources/en.lproj/Localizable.strings is the source file used by SwiftGen to generate strings.",
+      "revId": "2669b5446abf613df1f0a405d87cc5d6016b49ca",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
