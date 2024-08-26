@@ -208,9 +208,9 @@
 "linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához lépjen a fiókkezelési beállításokhoz azon az eszközön, amelyen az összekapcsolni kívánt fiók található. Válassza az „Új eszköz összekapcsolása” lehetőséget. Megkapja az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
-"importFromArchive.title" = "Import from archive";
+"importFromArchive.explanation" = "Jami-fiók importálása a helyi archívfájlból.";
+"importFromArchive.passwordExplanation" = "Ha a fiók jelszóval van titkosítva, kérjük, írja be a következő mezőt.";
+"importFromArchive.title" = "Importálás az archívumból";
 "importFromArchive.buttonTitle" = "Importálás";
 "importFromArchive.selectArchiveButton" = "Archívfájl kijelölése";
 
@@ -390,18 +390,18 @@
 "accountPage.accountIdentity" = "Fiókazonosító";
 
 // Backup Account
-"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.explanation" = "Ez a Jami-fiók csak ezen az eszközön létezik. A fiók elveszik, ha ez az eszköz elveszik, vagy az alkalmazást eltávolítják. Javasoljuk, hogy készítsen biztonsági másolatot erről a fiókról.";
 "backupAccount.title" = "Fiók biztonsági mentése";
-"backupAccount.creating" = "Creating backup";
-"backupAccount.archiveName" = "Select a name for the archive.";
-"backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
-"backupAccount.backupButton" = "Backup";
-"backupAccount.documentPickerButton" = "Open backup location";
-"backupAccount.exportSuccess" = "Backup created";
-"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
-"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.creating" = "Biztonsági másolat készítése";
+"backupAccount.archiveName" = "Fiókarchívumnév megadása.";
+"backupAccount.archiveNamePlaceholder" = "Fiókarchívumnév";
+"backupAccount.passwordRequest" = "Adja meg a fiók titkosításához használt jelszót.";
+"backupAccount.backupButton" = "Biztonsági mentés";
+"backupAccount.documentPickerButton" = "Biztonsági mentés helyének megnyitása";
+"backupAccount.exportSuccess" = "Biztonsági másolat létrehozva";
+"backupAccount.errorWrongLocation" = "A fájl elérési útja érvénytelen. Válasszon egy másik helyet.";
+"backupAccount.errorAccessDenied" = "A kijelölt helyhez való hozzáférés megtagadva.";
+"backupAccount.errorFailed" = "Hiba történt a fiók exportálása közben.";
 
 //Account
 "account.sipServer" = "Kiszolgáló";

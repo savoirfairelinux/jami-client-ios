@@ -208,9 +208,9 @@
 "linkToAccount.explanationPinMessage" = "Per generare il codice PIN, accedere alle impostazioni di gestione dell'account sul dispositivo che contiene l'account che si desidera utilizzare. Seleziona \"Associa un altro dispositivo\". Otterrai il PIN necessario per completare questo modulo. Il PIN è valido solo per 10 minuti.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
-"importFromArchive.title" = "Import from archive";
+"importFromArchive.explanation" = "Importa l'account Jami dal file di archivio locale.";
+"importFromArchive.passwordExplanation" = "Se l'account è cifrato con una password, compilare il seguente campo.";
+"importFromArchive.title" = "Importa dall'archivio";
 "importFromArchive.buttonTitle" = "Importa";
 "importFromArchive.selectArchiveButton" = "Seleziona file di archivio";
 
@@ -390,18 +390,18 @@
 "accountPage.accountIdentity" = "Identità dell'account";
 
 // Backup Account
-"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.explanation" = "Questo account Jami esiste solo in questo dispositivo. L'account andrà perso se il dispositivo viene smarrito o se l'applicazione viene disinstallata. Si consiglia di fare una copia dell'account.";
 "backupAccount.title" = "Backup account";
-"backupAccount.creating" = "Creating backup";
-"backupAccount.archiveName" = "Select a name for the archive.";
-"backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.creating" = "Creazione del backup";
+"backupAccount.archiveName" = "Seleziona un nome per l'archivio.";
+"backupAccount.archiveNamePlaceholder" = "Nome dell'archivio";
+"backupAccount.passwordRequest" = "Inserire la password utilizzata per cifrare l'account.";
 "backupAccount.backupButton" = "Backup";
-"backupAccount.documentPickerButton" = "Open backup location";
-"backupAccount.exportSuccess" = "Backup created";
-"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
-"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.documentPickerButton" = "Apri la posizione del backup";
+"backupAccount.exportSuccess" = "Backup creato";
+"backupAccount.errorWrongLocation" = "Il percorso del file selezionato non è valido. Scegliere un altro percorso.";
+"backupAccount.errorAccessDenied" = "L'accesso alla posizione selezionata è stato negato.";
+"backupAccount.errorFailed" = "L'esportazione non è riuscita.";
 
 //Account
 "account.sipServer" = "Server";
