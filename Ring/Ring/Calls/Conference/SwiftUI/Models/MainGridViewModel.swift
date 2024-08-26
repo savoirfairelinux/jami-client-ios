@@ -22,11 +22,19 @@ import Foundation
 import SwiftUI
 
 var adaptiveScreenWidth: CGFloat {
-    return UIDevice.current.orientation.isLandscape ? screenHeight : screenWidth
+    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+        return screenWidth
+    }
+
+    return windowScene.interfaceOrientation.isLandscape ? screenHeight : screenWidth
 }
 
 var adaptiveScreenHeight: CGFloat {
-    return UIDevice.current.orientation.isLandscape ? screenWidth : screenHeight
+    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+        return screenHeight
+    }
+
+    return windowScene.interfaceOrientation.isLandscape ? screenWidth : screenHeight
 }
 
 struct Page: Equatable {
