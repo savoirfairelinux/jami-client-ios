@@ -208,9 +208,9 @@
 "linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. Alege „Asociază alt aparat” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
-"importFromArchive.title" = "Import from archive";
+"importFromArchive.explanation" = "Importă contul Jami din fișierul arhivei.";
+"importFromArchive.passwordExplanation" = "Dacă acest cont este cifrat cu o parolă, completează următorul spațiu.";
+"importFromArchive.title" = "Importă din arhivă";
 "importFromArchive.buttonTitle" = "Importă";
 "importFromArchive.selectArchiveButton" = "Alege fișierul arhivei";
 
@@ -390,18 +390,18 @@
 "accountPage.accountIdentity" = "Identitatea contului";
 
 // Backup Account
-"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.explanation" = "Acest cont Jami există doar în acest aparat. Contul va fi pierdut dacă acest aparat este pierdut sau dacă aplicația este dezinstalată. Se recomandă efectuarea unei copii de rezervă a acestui cont.";
 "backupAccount.title" = "Copie de rezervă a contului";
-"backupAccount.creating" = "Creating backup";
-"backupAccount.archiveName" = "Select a name for the archive.";
-"backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
-"backupAccount.backupButton" = "Backup";
-"backupAccount.documentPickerButton" = "Open backup location";
-"backupAccount.exportSuccess" = "Backup created";
-"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
-"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.creating" = "Se creează copia de rezervă";
+"backupAccount.archiveName" = "Alege un nume pentru arhivă.";
+"backupAccount.archiveNamePlaceholder" = "Numele arhivei";
+"backupAccount.passwordRequest" = "Introdu parola folosită pentru cifrarea contului.";
+"backupAccount.backupButton" = "Copie de rezervă";
+"backupAccount.documentPickerButton" = "Deschide locul copiei de rezervă";
+"backupAccount.exportSuccess" = "Copie de rezervă creată";
+"backupAccount.errorWrongLocation" = "Calea fișierului ales nu este valabilă. Alege alt loc.";
+"backupAccount.errorAccessDenied" = "Nu a fost permis accesul la locul ales.";
+"backupAccount.errorFailed" = "Exportarea nu a reușit.";
 
 //Account
 "account.sipServer" = "Server";
@@ -507,10 +507,10 @@
 "migrateAccount.migrateAnother" = "Transferă alt cont";
 
 //About Jami
-"aboutJami.declaration1" = "Jami, un pachet GNU, este un program pentru comunicare distribuită și universală care respectă libertatea și intimitatea utilizatorilor săi. Vezi";
+"aboutJami.declaration1" = "Jami, un pachet GNU, este un program pentru comunicare distribuită și universală care respectă libertatea și intimitatea utilizatorilor săi. A se vedea";
 "aboutJami.declaration2" = "pentru a afla mai multe.";
-"aboutJami.noWarranty1" = "Acest program nu oferă absolut nicio garanție. Vezi";
-"aboutJami.noWarranty2" = "versiunea 3 sau ulterioară pentru detalii.";
+"aboutJami.noWarranty1" = "Acest program nu oferă absolut nicio garanție. A se vedea";
+"aboutJami.noWarranty2" = "versiunea 3 sau ulterioară.";
 "aboutJami.contribute" = "Contribuie";
 "aboutJami.feedback" = "Părere";
 "aboutJami.createdBy" = "Creat de";

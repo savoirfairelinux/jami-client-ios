@@ -57,7 +57,7 @@
 "global.time" = "Durée";
 "global.editPassword" = "Modifier le mot de passe";
 "global.confirmPassword" = "Confirmer le mot de passe";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "L'accès à votre caméra est désactivé. Veuillez l'activer dans les paramètres.";
 
 // Scan
 "scan.badQrCode" = "Code QR incorrect";
@@ -187,10 +187,10 @@
 "createAccount.timeoutTitle" = "Compte créé";
 "createAccount.timeoutMessage" = "L'enregistrement du nom d'utilisateur est en cours... Cela peut prendre quelque temps.";
 "createAccount.sipConfigure" = "Configurez un compte SIP existant.";
-"createAccount.creatingAccount" = "Creating account";
+"createAccount.creatingAccount" = "Création du compte";
 "createAccount.nameExplanation" = "Vous pouvez choisir un nom d'utilisateur pour aider les autres à vous trouver et à vous joindre plus facilement sur Jami.";
 "createAccount.newAccount" = "Nouveau compte";
-"createAccount.encryptionEnabled" = "Encryption enabled";
+"createAccount.encryptionEnabled" = "Encryptions activés.";
 "createAccount.encrypt" = "Chiffrer";
 "createAccount.customize" = "Paramétrer";
 "createAccount.encryptTitle" = "Chiffrer le compte avec un mot de passe";
@@ -201,22 +201,22 @@
 "linkToAccount.linkButtonTitle" = "Lier";
 "linkToAccount.linkDeviceTitle" = "Associer un nouvel appareil";
 "linkToAccount.linkDeviceMessage" = "Allez sur \"Associer un nouvel appareil\" sur l'autre appareil pour voir le code QR ou le NIP";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
+"linkToAccount.explanationMessage" = "Un NIP est nécessaire pour utiliser ce compte Jami sur cet appareil";
 "linkToAccount.pinPlaceholder" = "NIP";
 "linkToAccount.pinLabel" = "Entrer votre NIP";
 "linkToAccount.scanQRCode" = "Scanner un code QR";
 "linkToAccount.explanationPinMessage" = "Pour générer le code PIN, accédez aux paramètres de gestion du compte sur l'appareil contenant le compte que vous souhaitez lier. Sélectionnez \"Lier un nouvel appareil\". Vous recevrez le code PIN nécessaire pour remplir ce formulaire. Le code PIN n'est valable que pendant 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
-"importFromArchive.title" = "Import from archive";
+"importFromArchive.explanation" = "Importer un compte Jami à partir d'un fichier d'archives local.";
+"importFromArchive.passwordExplanation" = "Si le compte est chiffré avec un mot de passe, veuillez compléter le champ suivant.";
+"importFromArchive.title" = "Importer à partir d'une sauvegarde";
 "importFromArchive.buttonTitle" = "Importer";
 "importFromArchive.selectArchiveButton" = "Choisir un fichier archive";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Connexion";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "Compte JAMS";
 "linkToAccountManager.accountManagerPlaceholder" = "URL de JAMS";
 "linkToAccountManager.accountManagerLabel" = "Saisir l'URL du serveur JAMS";
 "linkToAccountManager.jamsExplanation" = "Entrer l'adresse du serveur JAMS";
@@ -390,18 +390,18 @@
 "accountPage.accountIdentity" = "Identité du compte";
 
 // Backup Account
-"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.explanation" = "Ce compte Jami n'existe que sur cet appareil.\nLe compte sera perdu si cet appareil est perdu ou si l'application est désinstallée. Il est recommandé de faire une sauvegarde de ce compte.";
 "backupAccount.title" = "Sauvegarder le compte";
-"backupAccount.creating" = "Creating backup";
-"backupAccount.archiveName" = "Select a name for the archive.";
-"backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
-"backupAccount.backupButton" = "Backup";
-"backupAccount.documentPickerButton" = "Open backup location";
-"backupAccount.exportSuccess" = "Backup created";
-"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
-"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.creating" = "Création d'une sauvegarde";
+"backupAccount.archiveName" = "Choisir le nom de cette archive";
+"backupAccount.archiveNamePlaceholder" = "Nom de l'archive";
+"backupAccount.passwordRequest" = "Entrer le mot de passe pour encrypter ce compte";
+"backupAccount.backupButton" = "Sauvegarde";
+"backupAccount.documentPickerButton" = "Ouvrir l'emplacement de l'archive";
+"backupAccount.exportSuccess" = "La sauvegarde a été créée";
+"backupAccount.errorWrongLocation" = "Le chemin d'accès au fichier est invalide. Veuillez choisir un autre chemin.";
+"backupAccount.errorAccessDenied" = "L'accès à ce chemin d'accès est refusé.";
+"backupAccount.errorFailed" = "L'exportation a échoué";
 
 //Account
 "account.sipServer" = "Serveur";

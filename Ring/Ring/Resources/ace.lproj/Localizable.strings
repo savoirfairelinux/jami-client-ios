@@ -211,8 +211,8 @@
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
 "importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
 "importFromArchive.title" = "Import from archive";
-"importFromArchive.buttonTitle" = "Import";
-"importFromArchive.selectArchiveButton" = "Select archive file";
+"importFromArchive.buttonTitle" = "ڤڠاجرن";
+"importFromArchive.selectArchiveButton" = "ڤيليهن ڤمباچ ارشيڤ";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "ڤمباچ ڤرنه";

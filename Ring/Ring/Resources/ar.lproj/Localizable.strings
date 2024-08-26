@@ -56,7 +56,7 @@
 "global.video" = "شريط";
 "global.time" = "الوقت";
 "global.editPassword" = "Edit password";
-"global.confirmPassword" = "Confirm password";
+"global.confirmPassword" = "تأكيد كلمة المرور";
 "global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
 
 // Scan
@@ -211,8 +211,8 @@
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
 "importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
 "importFromArchive.title" = "Import from archive";
-"importFromArchive.buttonTitle" = "Import";
-"importFromArchive.selectArchiveButton" = "Select archive file";
+"importFromArchive.buttonTitle" = "استيراد";
+"importFromArchive.selectArchiveButton" = "حدد ملف الأرشيف";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "تسجيل الدخول";

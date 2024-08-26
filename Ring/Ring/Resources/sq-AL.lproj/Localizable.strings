@@ -208,9 +208,9 @@
 "linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja për administrim llogarish, te pajisja që përmban llogarinë që doni të lidhni. Përzgjidhni “Lidhni pajisje të re”. Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
-"importFromArchive.title" = "Import from archive";
+"importFromArchive.explanation" = "Importoni një llogari Jami që nga një kartelë vendore arkivi.";
+"importFromArchive.passwordExplanation" = "Nëse llogaria është fshehtëzuar me një fjalëkalim, ju lutemi, jepeni më poshtë.";
+"importFromArchive.title" = "Importo prej arkive";
 "importFromArchive.buttonTitle" = "Importoje";
 "importFromArchive.selectArchiveButton" = "Përzgjidhni kartelë arkiv";
 
@@ -390,18 +390,18 @@
 "accountPage.accountIdentity" = "Identitet llogarie";
 
 // Backup Account
-"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.explanation" = "Kjo llogari Jami ekziston vetëm në këtë pajisje. Llogaria do të humbë, nëse humbet kjo pajisje, ose nëse çinstalohet aplikacioni. Rekomandohet të bëni një kopjeruajtje të kësaj llogarie.";
 "backupAccount.title" = "Kopjeruaje llogarinë";
-"backupAccount.creating" = "Creating backup";
-"backupAccount.archiveName" = "Select a name for the archive.";
-"backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
-"backupAccount.backupButton" = "Backup";
-"backupAccount.documentPickerButton" = "Open backup location";
-"backupAccount.exportSuccess" = "Backup created";
-"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
-"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.creating" = "Po krijohet kopjeruajtje";
+"backupAccount.archiveName" = "Përzgjidhni një emër për arkivin.";
+"backupAccount.archiveNamePlaceholder" = "Emër arkivi";
+"backupAccount.passwordRequest" = "Jepni fjalëkalimin e përdorur për të fshehtëzuar llogarinë.";
+"backupAccount.backupButton" = "Kopjeruajtje";
+"backupAccount.documentPickerButton" = "Hap vendndodhje kopjeruajtjeje";
+"backupAccount.exportSuccess" = "Kopjeruajtja u krijua";
+"backupAccount.errorWrongLocation" = "Shtegu i përzgjedhur është i pavlefshëm. Ju lutemi, zgjidhni një tjetër vendndodhje.";
+"backupAccount.errorAccessDenied" = "Hyrja te vendndodhja e përzgjedhur s’u pranua.";
+"backupAccount.errorFailed" = "Akti i eksportimit dështoi.";
 
 //Account
 "account.sipServer" = "Shërbyes";
