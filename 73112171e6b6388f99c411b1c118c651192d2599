@@ -22,6 +22,30 @@
       },
       "revId": "73112171e6b6388f99c411b1c118c651192d2599",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "456b7d10_8c8ed0ec",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-08-27T01:28:54Z",
+      "side": 1,
+      "message": "It is not used and could be removed.",
+      "parentUuid": "67ebb6f7_9cc5b7c0",
+      "range": {
+        "startLine": 280,
+        "startChar": 7,
+        "endLine": 280,
+        "endChar": 13
+      },
+      "revId": "73112171e6b6388f99c411b1c118c651192d2599",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
