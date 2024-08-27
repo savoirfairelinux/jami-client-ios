@@ -118,6 +118,30 @@
       },
       "revId": "1da59bc620a79af191ba38fb4bac51aa16033439",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "672c928e_3a36d057",
+        "filename": "Ring/Ring/Constants/Generated/Images.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-08-27T19:23:38Z",
+      "side": 1,
+      "message": "Seems like an Apple device is required to search for SF Symbols. Thank you",
+      "parentUuid": "ba30881a_f337474f",
+      "range": {
+        "startLine": 63,
+        "startChar": 62,
+        "endLine": 63,
+        "endChar": 83
+      },
+      "revId": "1da59bc620a79af191ba38fb4bac51aa16033439",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
