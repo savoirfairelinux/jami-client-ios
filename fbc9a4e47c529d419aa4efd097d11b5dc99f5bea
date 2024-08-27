@@ -87,6 +87,40 @@
       },
       "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4422aa20_7753ec1a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 13
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-08-27T20:30:00Z",
+      "side": 1,
+      "message": "For this alert, the title \u0027An unknown error occurred.\u0027 and the message \u0027An error occurred while creating the account.\u0027 are repetitive. Maybe we still could use \u0027The account couldn\u0027t be created.\u0027 for alert message instead?\"",
+      "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "355964c9_ecb6df56",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 13
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-08-27T20:30:00Z",
+      "side": 1,
+      "message": "password is not necessary related to the username. It is for an account. Maybe \"Wrong password. Please double-check entered values and try again.\"?",
+      "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
