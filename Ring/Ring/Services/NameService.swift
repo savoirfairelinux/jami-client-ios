@@ -110,28 +110,22 @@ class NameService {
         self.nameRegistrationAdapter.registerName(withAccount: account, password: password, name: name)
     }
 
-    func registerNameObservable(withAccount account: String, password: String, name: String) -> Observable<Bool> {
+    func registerNameObservable(accountId: String, password: String, name: String) -> Observable<Bool> {
         let registerName: Single<Bool> =
             Single.create(subscribe: { (single) -> Disposable in
-                let dispatchQueue = DispatchQueue(label: "nameRegistration", qos: .background)
-                dispatchQueue.async {[weak self] in
-                    guard let self = self else { return }
-                    self.nameRegistrationAdapter
-                        .registerName(withAccount: account,
-                                      password: password,
-                                      name: name)
-                    single(.success(true))
-                }
+                self.nameRegistrationAdapter
+                    .registerName(withAccount: accountId,
+                                  password: password,
+                                  name: name)
+                single(.success(true))
                 return Disposables.create { }
             })
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
 
         let filteredDaemonSignals = self.sharedRegistrationStatus
             .filter({ (serviceEvent) -> Bool in
-                if serviceEvent.getEventInput(ServiceEventInput.accountId) != account { return false }
-                if serviceEvent.eventType != .nameRegistrationEnded {
-                    return false
-                }
-                return true
+                return serviceEvent.getEventInput(ServiceEventInput.accountId) == accountId &&
+                    serviceEvent.eventType == .nameRegistrationEnded
             })
         return Observable
             .combineLatest(registerName.asObservable(), filteredDaemonSignals.asObservable()) { (_, serviceEvent) -> Bool in

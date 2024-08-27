@@ -109,15 +109,15 @@ struct WelcomeView: View {
                 })
             case .aboutJami:
                 AboutSwiftUIView()
-                case .fromArchive:
-                    ImportFromArchiveView(injectionBag: model.injectionBag,
-                                          dismissAction: {
-                        activeView = nil
-                    }, createAction: {[weak model] url, password in
-                        activeView = nil
-                        guard let model = model else { return }
-                        model.importFromArchive(path: url, password: password)
-                    })
+            case .fromArchive:
+                ImportFromArchiveView(injectionBag: model.injectionBag,
+                                      dismissAction: {
+                                        activeView = nil
+                                      }, createAction: {[weak model] url, password in
+                                        activeView = nil
+                                        guard let model = model else { return }
+                                        model.importFromArchive(path: url, password: password)
+                                      })
 
             }
         }

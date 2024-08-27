@@ -29,14 +29,12 @@ class NameRegistrationVM: ObservableObject {
 
     var nameRegisteredCb: (() -> Void)
 
-    var nameRegistrationCompleted: Bool = false
+    @Published var state: RegistrationState = .initial
 
     @Published var registerButtonAvailable: Bool = false
-    @Published var showErrorAlert: Bool = false
-    @Published var errorAlertMessage: String = ""
     @Published var name = "" {
         didSet {
-            if !name.isEmpty {
+            if !name.isEmpty && name != oldValue {
                 self.nameService.lookupName(withAccount: "", nameserver: "", name: name)
             }
         }
@@ -52,6 +50,28 @@ class NameRegistrationVM: ObservableObject {
         }
     }
 
+    enum RegistrationState: Equatable {
+        case initial
+        case started
+        case success
+        case error(title: String, message: String)
+
+        static func == (lhs: RegistrationState, rhs: RegistrationState) -> Bool {
+            switch (lhs, rhs) {
+            case (.started, .started):
+                return true
+            case (.initial, .initial):
+                return true
+            case (.success, .success):
+                return true
+            case ( .error, .error):
+                return true
+            default:
+                return false
+            }
+        }
+    }
+
     init(injectionBag: InjectionBag, account: AccountModel, nameRegisteredCb: @escaping (() -> Void)) {
         self.account = account
         self.nameService = injectionBag.nameService
@@ -64,30 +84,32 @@ class NameRegistrationVM: ObservableObject {
     }
 
     func registerUsername() {
+        self.state = .started
         self.nameService
-            .registerNameObservable(withAccount: self.account.id,
+            .registerNameObservable(accountId: self.account.id,
                                     password: self.password,
                                     name: self.name)
             .subscribe(onNext: { [weak self] registered in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    if registered {
-                        self.nameRegisteredCb()
-                    } else {
-                        self.errorAlertMessage = L10n.AccountPage.usernameRegistrationFailed
-                        self.showErrorAlert = true
-                    }
-                    self.nameRegistrationCompleted = true
-                }
+                self?.handleRegistrationResult(registered: registered)
             }, onError: { [weak self] _ in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.errorAlertMessage = L10n.AccountPage.usernameRegistrationFailed
-                    self.showErrorAlert = true
-                    self.nameRegistrationCompleted = true
-                }
+                self?.handleRegistrationResult(registered: false)
             })
             .disposed(by: self.disposeBag)
+    }
+
+    private func handleRegistrationResult(registered: Bool) {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            if registered {
+                self.state = .success
+                self.nameRegisteredCb()
+            } else {
+                self.state = .error(
+                    title: L10n.AccountPage.usernameRegistrationFailedTitle,
+                    message: L10n.AccountPage.usernameRegistrationFailed
+                )
+            }
+        }
     }
 
     func subscribeForNameLookup() {

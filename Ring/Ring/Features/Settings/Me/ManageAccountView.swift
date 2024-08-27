@@ -42,11 +42,11 @@ struct ManageAccountView: View {
                     }
 
                     NavigationLink(destination: BackupAccount(account: model.account, accountService: model.accountService)
-                        .background(Color(UIColor.systemGroupedBackground))) {
-                            HStack {
-                                Text(L10n.BackupAccount.title)
-                            }
+                                    .background(Color(UIColor.systemGroupedBackground))) {
+                        HStack {
+                            Text(L10n.BackupAccount.title)
                         }
+                    }
                 }
 
                 Section {
