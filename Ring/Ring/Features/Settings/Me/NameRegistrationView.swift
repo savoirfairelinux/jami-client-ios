@@ -44,6 +44,8 @@ struct NameRegistrationView: View {
                 .multilineTextAlignment(.center)
             VStack {
                 TextField(L10n.AccountPage.usernamePlaceholder, text: $model.name)
+                    .autocorrectionDisabled(true)
+                    .autocapitalization(.none)
                     .textFieldStyleInAlert()
 
                 if model.usernameValidationState.isVerifying {
@@ -72,7 +74,9 @@ struct NameRegistrationView: View {
                     model.registerUsername()
                 }, label: {
                     Text( L10n.AccountPage.usernameRegisterAction)
-                        .foregroundColor(Color.jamiColor)
+                        .foregroundColor(!model.registerButtonAvailable ?
+                                         Color(UIColor.secondaryLabel) :
+                                .jamiColor)
                 })
                 .disabled(!model.registerButtonAvailable)
             }

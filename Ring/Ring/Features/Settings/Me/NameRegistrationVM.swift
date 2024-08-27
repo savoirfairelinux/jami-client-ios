@@ -118,7 +118,7 @@ class NameRegistrationVM: ObservableObject {
             return
         }
         if self.hasPassword() {
-            registerButtonAvailable = self.password.isEmpty
+            registerButtonAvailable = !self.password.isEmpty
         } else {
             registerButtonAvailable = true
         }
