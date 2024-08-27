@@ -48,11 +48,11 @@ enum AccountState: String {
     // check if error status
     func isError() -> Bool {
         return self == .error || self == .errorGeneric
-        || self == .errorAuth || self == .errorHost
-        || self == .errorConfStun || self == .errorExistStun
-        || self == .errorServiceUnavailable || self == .errorNotAcceptable
-        || self == .errorRequestTimeout || self == .errorNeedMigration
-        || self == .errorNetwork
+            || self == .errorAuth || self == .errorHost
+            || self == .errorConfStun || self == .errorExistStun
+            || self == .errorServiceUnavailable || self == .errorNotAcceptable
+            || self == .errorRequestTimeout || self == .errorNeedMigration
+            || self == .errorNetwork
     }
 
     // check if network error status

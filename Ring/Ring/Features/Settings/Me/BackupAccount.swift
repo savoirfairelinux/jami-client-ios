@@ -25,7 +25,7 @@ struct BackupAccount: View {
     private let horizontalPadding: CGFloat = 10
     private let verticalPadding: CGFloat = 12
     @SwiftUI.State private var presentDocumentPicker = false
-    @SwiftUI.State private var filePath: URL? = nil
+    @SwiftUI.State private var filePath: URL?
     @SwiftUI.State private var fileName: String = ""
     @SwiftUI.State private var password = ""
 
@@ -54,14 +54,14 @@ struct BackupAccount: View {
     @ViewBuilder
     private func contentBasedOnModelState() -> some View {
         switch model.state {
-            case .loading:
-                loadingView()
-            case .error(let message):
-                errorView(message)
-            case .success(let message):
-                successView(message)
-            case .idle:
-                mainContentView()
+        case .loading:
+            loadingView()
+        case .error(let message):
+            errorView(message)
+        case .success(let message):
+            successView(message)
+        case .idle:
+            mainContentView()
         }
     }
 
@@ -80,24 +80,24 @@ struct BackupAccount: View {
 
     @ViewBuilder
     private func errorView(_ message: String) -> some View {
-            Text(message)
-                .foregroundColor(Color(UIColor.jamiFailure))
-                .transition(.scale)
+        Text(message)
+            .foregroundColor(Color(UIColor.jamiFailure))
+            .transition(.scale)
     }
 
     @ViewBuilder
     private func successView(_ message: String) -> some View {
-            VStack {
-                Image(systemName: "checkmark")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 40)
-                    .foregroundColor(Color(UIColor.jamiSuccess))
-                Text(message)
-                    .font(.title)
-                    .foregroundColor(Color(UIColor.jamiSuccess))
-            }
-            .transition(.scale)
+        VStack {
+            Image(systemName: "checkmark")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 40)
+                .foregroundColor(Color(UIColor.jamiSuccess))
+            Text(message)
+                .font(.title)
+                .foregroundColor(Color(UIColor.jamiSuccess))
+        }
+        .transition(.scale)
     }
 
     @ViewBuilder

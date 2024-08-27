@@ -326,7 +326,8 @@
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Register";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration Failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Encrypt account";
 "accountPage.changePassword" = "Change password";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";

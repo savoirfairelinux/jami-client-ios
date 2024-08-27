@@ -502,8 +502,8 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func exportToFileWithPassword(accountId: String,
-                      destinationPath: String,
-                      password: String) -> Bool {
+                                  destinationPath: String,
+                                  password: String) -> Bool {
         self.accountAdapter.exportToFile(withAccountId: accountId,
                                          destinationPath: destinationPath,
                                          scheme: "password",
@@ -959,8 +959,8 @@ extension AccountsService {
     }
 
     private func completeCreation(accountId: String,
-                                                 isJams: Bool,
-                                                 errorCode: String?) -> Error? {
+                                  isJams: Bool,
+                                  errorCode: String?) -> Error? {
         if let errorCode = errorCode, let status = AccountState(rawValue: errorCode) {
             if status.isNetworkError() {
                 return AccountCreationError.network

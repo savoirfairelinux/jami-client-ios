@@ -28,7 +28,7 @@ struct DocumentPicker: UIViewControllerRepresentable {
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<DocumentPicker>) -> UIDocumentPickerViewController {
         let controller =
-        UIDocumentPickerViewController(forOpeningContentTypes: [type])
+            UIDocumentPickerViewController(forOpeningContentTypes: [type])
         controller.allowsMultipleSelection = false
         controller.delegate = context.coordinator
         return controller

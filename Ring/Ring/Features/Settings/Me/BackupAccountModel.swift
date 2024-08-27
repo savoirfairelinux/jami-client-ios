@@ -33,12 +33,12 @@ class BackupAccountModel: ObservableObject {
 
         var displayMessage: String {
             switch self {
-                case .invalidFilePath:
-                    return L10n.BackupAccount.errorWrongLocation
-                case .unableToAccessFile:
-                    return L10n.BackupAccount.errorAccessDenied
-                case .exportFailed:
-                    return L10n.BackupAccount.errorFailed
+            case .invalidFilePath:
+                return L10n.BackupAccount.errorWrongLocation
+            case .unableToAccessFile:
+                return L10n.BackupAccount.errorAccessDenied
+            case .exportFailed:
+                return L10n.BackupAccount.errorFailed
             }
         }
     }

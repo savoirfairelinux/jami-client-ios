@@ -37,26 +37,26 @@ struct ImportFromArchiveView: View {
     }
 
     var body: some View {
-            VStack {
-                header
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 15) {
-                        Text(L10n.ImportFromArchive.explanation)
-                            .multilineTextAlignment(.center)
-                        selectFileButton
-                            .padding(.vertical)
-                        Text(L10n.ImportFromArchive.passwordExplanation)
-                            .multilineTextAlignment(.center)
-                        WalkthroughPasswordView(text: $password,
-                                                placeholder: L10n.Global.password)
+        VStack {
+            header
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 15) {
+                    Text(L10n.ImportFromArchive.explanation)
+                        .multilineTextAlignment(.center)
+                    selectFileButton
+                        .padding(.vertical)
+                    Text(L10n.ImportFromArchive.passwordExplanation)
+                        .multilineTextAlignment(.center)
+                    WalkthroughPasswordView(text: $password,
+                                            placeholder: L10n.Global.password)
                         .padding(.bottom)
-                    }
-                    .frame(maxWidth: 500)
                 }
-                .sheet(isPresented: $pickerPresented) {
-                    DocumentPicker(fileURL: $selectedFileURL, type: .item)
-                }
-                .padding(.horizontal)
+                .frame(maxWidth: 500)
+            }
+            .sheet(isPresented: $pickerPresented) {
+                DocumentPicker(fileURL: $selectedFileURL, type: .item)
+            }
+            .padding(.horizontal)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor.systemGroupedBackground).ignoresSafeArea())
@@ -83,12 +83,11 @@ struct ImportFromArchiveView: View {
         }, label: {
             Text(L10n.ImportFromArchive.buttonTitle)
                 .foregroundColor(selectedFileURL == nil ?
-                                 Color(UIColor.secondaryLabel) :
-                        .jamiColor)
+                                    Color(UIColor.secondaryLabel) :
+                                    .jamiColor)
         })
         .disabled(selectedFileURL == nil)
     }
-
 
     private var cancelButton: some View {
         Button(action: {

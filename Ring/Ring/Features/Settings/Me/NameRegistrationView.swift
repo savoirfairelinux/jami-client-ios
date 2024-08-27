@@ -33,9 +33,65 @@ struct NameRegistrationView: View {
 
     var body: some View {
         CustomAlert(content: { createNameRegistrationView() })
+            .onChange(of: model.state) { _ in
+                if model.state != .success { return }
+                withAnimation {
+                    showAccountRegistration = false
+                }
+            }
     }
 
+    @ViewBuilder
     func createNameRegistrationView() -> some View {
+        switch model.state {
+        case .initial:
+            initialView()
+        case .started:
+            loadingView()
+        case .error(let title, let message):
+            errorView(title: title, message: message)
+        case .success:
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    func errorView(title: String, message: String) -> some View {
+        VStack(spacing: padding) {
+            Text(title)
+                .font(.headline)
+            Text(message)
+                .multilineTextAlignment(.center)
+            HStack {
+                Spacer()
+                Button(action: {
+                    withAnimation {
+                        showAccountRegistration = false
+                    }
+                }, label: {
+                    Text(L10n.Global.ok)
+                        .foregroundColor(.jamiColor)
+                        .padding(.horizontal)
+                })
+            }
+        }
+    }
+
+    @ViewBuilder
+    func loadingView() -> some View {
+        VStack(spacing: padding) {
+            Text(L10n.AccountPage.usernameRegistering)
+                .font(.headline)
+                .padding()
+            SwiftUI.ProgressView()
+                .progressViewStyle(CircularProgressViewStyle())
+                .scaleEffect(2)
+                .padding(.bottom, 30)
+        }
+        .padding()
+    }
+
+    func initialView() -> some View {
         VStack(spacing: padding) {
             Text(L10n.Global.registerAUsername)
                 .font(.headline)
@@ -75,22 +131,10 @@ struct NameRegistrationView: View {
                 }, label: {
                     Text( L10n.AccountPage.usernameRegisterAction)
                         .foregroundColor(!model.registerButtonAvailable ?
-                                         Color(UIColor.secondaryLabel) :
-                                .jamiColor)
+                                            Color(UIColor.secondaryLabel) :
+                                            .jamiColor)
                 })
                 .disabled(!model.registerButtonAvailable)
-            }
-        }
-        .alert(isPresented: $model.showErrorAlert) {
-            Alert(title: Text(""),
-                  message: Text(model.errorAlertMessage),
-                  dismissButton: .default(Text(L10n.Global.ok)))
-        }
-        .onChange(of: model.nameRegistrationCompleted) { _ in
-            if model.nameRegistrationCompleted {
-                withAnimation {
-                    showAccountRegistration = false
-                }
             }
         }
     }

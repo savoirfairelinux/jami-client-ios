@@ -111,7 +111,7 @@ extension WelcomeViewModel {
                                      username: String,
                                      password: String) {
         let registerName = nameService
-            .registerNameObservable(withAccount: accountId,
+            .registerNameObservable(accountId: accountId,
                                     password: password,
                                     name: username)
             .subscribe(onNext: { [weak self] registered in
@@ -202,10 +202,10 @@ extension WelcomeViewModel {
                             pin: pin,
                             arhivePath: "",
                             profileName: self.profileName)
-            .subscribe(onNext: { [weak self] accountId in
-                                guard let self = self else { return }
-                                self.enablePushNotifications()
-                                self.accountCreated()
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.enablePushNotifications()
+                self.accountCreated()
             }, onError: { [weak self] error in
                 self?.handleAccountCreationError(error)
             })
@@ -232,7 +232,7 @@ extension WelcomeViewModel {
          is called, in case the operation does not complete.
          */
         let stopTimer: Timer? = Timer.scheduledTimer(withTimeInterval: 60.0,
-                                             repeats: false) { _ in
+                                                     repeats: false) { _ in
             stopResourceAccess()
         }
 
@@ -242,7 +242,7 @@ extension WelcomeViewModel {
                             pin: "",
                             arhivePath: path.absoluteURL.path,
                             profileName: self.profileName)
-            .subscribe(onNext: { [weak self] accountId in
+            .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.enablePushNotifications()
                 self.accountCreated()
