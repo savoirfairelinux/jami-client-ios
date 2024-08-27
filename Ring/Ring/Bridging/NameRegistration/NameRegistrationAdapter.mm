@@ -99,7 +99,7 @@ static id <NameRegistrationAdapterDelegate> _delegate;
 }
 
 - (void)registerNameWithAccount:(NSString*)account password:(NSString*)password name:(NSString*)name {
-    registerName(std::string([account UTF8String]), std::string([name UTF8String]), std::string([password UTF8String]));
+    registerName(std::string([account UTF8String]), std::string([name UTF8String]), "password", std::string([password UTF8String]));
 }
 
 - (void)searchUserWithAccount:(NSString*)account query:(NSString*)query {

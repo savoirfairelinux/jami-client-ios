@@ -76,18 +76,24 @@ extension WelcomeViewModel {
                             arhivePath: "",
                             profileName: self.profileName)
             .subscribe(onNext: { [weak self] accountId in
-                self?.handleAccountCreationSuccess(accountId, username: name)
+                self?.handleAccountCreationSuccess(accountId,
+                                                   username: name,
+                                                   password: password)
             }, onError: { [weak self] error in
                 self?.handleAccountCreationError(error)
             })
             .disposed(by: disposeBag)
     }
 
-    private func handleAccountCreationSuccess(_ accountId: String, username: String) {
+    private func handleAccountCreationSuccess(_ accountId: String,
+                                              username: String,
+                                              password: String) {
         self.enablePushNotifications()
         self.saveProfile(accountId: accountId)
         if !username.isEmpty {
-            self.registerAccountName(for: accountId, username: username)
+            self.registerAccountName(for: accountId,
+                                     username: username,
+                                     password: password)
         } else {
             self.accountCreated()
         }
@@ -102,10 +108,11 @@ extension WelcomeViewModel {
     }
 
     private func registerAccountName(for accountId: String,
-                                     username: String) {
+                                     username: String,
+                                     password: String) {
         let registerName = nameService
             .registerNameObservable(withAccount: accountId,
-                                    password: "",
+                                    password: password,
                                     name: username)
             .subscribe(onNext: { [weak self] registered in
                 self?.handleNameRegistrationResult(registered)
