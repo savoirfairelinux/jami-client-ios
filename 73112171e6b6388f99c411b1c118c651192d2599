@@ -46,6 +46,30 @@
       },
       "revId": "73112171e6b6388f99c411b1c118c651192d2599",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d202d438_ebe48a98",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-08-27T01:46:17Z",
+      "side": 1,
+      "message": "Done. Removed.",
+      "parentUuid": "456b7d10_8c8ed0ec",
+      "range": {
+        "startLine": 280,
+        "startChar": 7,
+        "endLine": 280,
+        "endChar": 13
+      },
+      "revId": "73112171e6b6388f99c411b1c118c651192d2599",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
