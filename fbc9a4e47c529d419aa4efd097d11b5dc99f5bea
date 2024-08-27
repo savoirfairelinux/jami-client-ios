@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8cc4aab_7b88acea",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 13
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-08-27T21:23:20Z",
+      "side": 1,
+      "message": "Error messages across Qt and Android have been homogenized to `An error occurred while {verb} the {noun}.`\n\n[Informal] contractions `n\u0027t` has been changed to `not`.\n\nInstead of changing the message, should the title be changed from \u0027An unknown error occurred.\u0027 to `Account error`? If it is a title in a dialog, then should there be *no* full-stop `.`?\n\nThank you",
+      "parentUuid": "4422aa20_7753ec1a",
+      "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "355964c9_ecb6df56",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 13
@@ -119,6 +137,24 @@
       "writtenOn": "2024-08-27T20:30:00Z",
       "side": 1,
       "message": "password is not necessary related to the username. It is for an account. Maybe \"Wrong password. Please double-check entered values and try again.\"?",
+      "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5bcf1b1_3c9af4bc",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 13
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-08-27T21:23:20Z",
+      "side": 1,
+      "message": "Changed to `Incorrect password. Please try again with the correct password.` Is this okay?",
+      "parentUuid": "355964c9_ecb6df56",
       "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
