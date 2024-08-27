@@ -124,6 +124,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06b186e9_dd0fd5e6",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 13
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-08-27T21:27:28Z",
+      "side": 1,
+      "message": "Changed to `Account error`. Is this okay?",
+      "parentUuid": "e8cc4aab_7b88acea",
+      "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "355964c9_ecb6df56",
