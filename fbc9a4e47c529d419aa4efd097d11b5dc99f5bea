@@ -211,6 +211,24 @@
       "parentUuid": "f5bcf1b1_3c9af4bc",
       "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d42717_362be495",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 13
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-08-28T21:43:33Z",
+      "side": 1,
+      "message": "Is `verify` used like confirm (i.e. a second time entering something)?\n\n1. Visit https://learn.microsoft.com/en-us/globalization/reference/microsoft-language-resources#ui-strings\n2. Click \"Microsoft UI String Search\"\n3. Enter `Incorrect password. Please try again with the correct password.` in \"Search source string\"\n\nFrench translation provided is \"Mot de passe incorrecte. Veuillez réessayer avec le mot de passe correct.\"",
+      "parentUuid": "afd4ee44_bfea95ec",
+      "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
