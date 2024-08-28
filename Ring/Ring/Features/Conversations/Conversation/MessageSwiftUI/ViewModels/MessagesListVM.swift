@@ -436,6 +436,15 @@ class MessagesListVM: ObservableObject {
                 }
                 self.computeSequencing()
                 self.updateNumberOfNewMessages()
+                if let messageId = self.messagesModels.last?.id,
+                   self.loadingRequested {
+                    self.conversationService
+                        .loadConversationMessages(conversationId: self.conversation.id,
+                                                  accountId: self.conversation.accountId,
+                                                  from: messageId)
+                    self.loadingRequested = false
+                    self.loading = true
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
                     guard let self = self else {return }
                     self.loading = false
@@ -794,6 +803,8 @@ class MessagesListVM: ObservableObject {
         return firstMessage.message.parentId.isEmpty && firstMessage.message.parents.isEmpty
     }
 
+    var loadingRequested = false
+
     func loadMore() {
         if self.loading || allLoaded() {
             return
@@ -804,6 +815,8 @@ class MessagesListVM: ObservableObject {
                                           accountId: self.conversation.accountId,
                                           from: messageId)
             self.loading = true
+        } else {
+            loadingRequested = true
         }
     }
 
