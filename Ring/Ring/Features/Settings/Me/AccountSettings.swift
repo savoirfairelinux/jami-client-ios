@@ -45,6 +45,8 @@ class AccountSettings: ObservableObject {
     @Published var proxyAddress = ""
     @Published var proxyListUrl = ""
 
+    @Published var bootstrap = ""
+
     var notificationsPermitted: Bool = LocalNotificationsHelper.isEnabled()
     let accountService: AccountsService
     let account: AccountModel
@@ -110,6 +112,7 @@ extension AccountSettings {
     private func setUPJamiParameters() {
         self.proxyEnabled = self.getBoolState(for: .proxyEnabled)
         self.proxyListUrl = self.getStringState(for: ConfigKey.dhtProxyListUrl)
+        self.bootstrap = self.getStringState(for: ConfigKey.accountHostname)
         self.proxyListEnabled = self.getBoolState(for: ConfigKey.proxyListEnabled)
         self.proxyAddress = self.account.proxy
         self.callsFromUnknownContacts = self.getBoolState(for: ConfigKey.dhtPublicIn)
@@ -183,6 +186,11 @@ extension AccountSettings {
     func saveProxyAddress() {
         let property = ConfigKeyModel(withKey: ConfigKey.proxyServer)
         self.accountService.setAccountProperty(property: property, value: self.proxyAddress, accountId: account.id)
+    }
+
+    func saveBootstrap() {
+        let property = ConfigKeyModel(withKey: ConfigKey.accountHostname)
+        self.accountService.setAccountProperty(property: property, value: self.bootstrap, accountId: account.id)
     }
 
     func saveProxyListUrl() {

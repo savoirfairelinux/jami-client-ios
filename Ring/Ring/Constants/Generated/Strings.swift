@@ -85,6 +85,8 @@ internal enum L10n {
     internal static let boothModeAlertMessage = L10n.tr("Localizable", "accountPage.boothModeAlertMessage", fallback: "After enabling booth mode all your conversations will be removed.")
     /// In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.
     internal static let boothModeExplanation = L10n.tr("Localizable", "accountPage.boothModeExplanation", fallback: "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.")
+    /// Bootstrap
+    internal static let bootstrap = L10n.tr("Localizable", "accountPage.bootstrap", fallback: "Bootstrap")
     /// Allow incoming calls from unknown contacts
     internal static let callsFromUnknownContacts = L10n.tr("Localizable", "accountPage.callsFromUnknownContacts", fallback: "Allow incoming calls from unknown contacts")
     /// Change password
@@ -121,6 +123,8 @@ internal enum L10n {
     internal static let deviceRevoked = L10n.tr("Localizable", "accountPage.deviceRevoked", fallback: "Device revocation completed")
     /// Devices
     internal static let devicesListHeader = L10n.tr("Localizable", "accountPage.devicesListHeader", fallback: "Devices")
+    /// OpenDHT configuration
+    internal static let dhtConfiguration = L10n.tr("Localizable", "accountPage.dhtConfiguration", fallback: "OpenDHT configuration")
     /// Disable Booth Mode
     internal static let disableBoothMode = L10n.tr("Localizable", "accountPage.disableBoothMode", fallback: "Disable Booth Mode")
     /// Please provide your account password
