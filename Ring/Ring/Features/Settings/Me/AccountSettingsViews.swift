@@ -154,70 +154,91 @@ struct ConnectivitySettingsView: View {
                 }
 
             } else {
-                Section(footer: Text(L10n.AccountPage.peerDiscoveryExplanation)) {
-                    HStack {
-                        Text(L10n.AccountPage.peerDiscovery)
-                        Spacer()
-                        Toggle("", isOn: Binding<Any>.customBinding(
-                            get: { model.peerDiscovery },
-                            set: { newValue in model.enablePeerDiscovery(enable: newValue) }
-                        ))
-                        .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                    }
-                }
+                dhtConfigurationView()
             }
-            Section(header: Text(L10n.AccountPage.connectivityHeader)) {
-                HStack {
-                    Text(L10n.AccountPage.upnpEnabled)
-                    Spacer()
-                    Toggle("", isOn: Binding<Any>.customBinding(
-                        get: { model.upnpEnabled },
-                        set: { newValue in model.enableUpnp(enable: newValue) }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                }
-
-                HStack {
-                    Text(L10n.AccountPage.turnEnabled)
-                    Spacer()
-                    Toggle("", isOn: Binding<Any>.customBinding(
-                        get: { model.turnEnabled },
-                        set: { newValue in model.enableTurn(enable: newValue) }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                }
-
-                if model.turnEnabled {
-                    NavigationLink(destination: EditableFieldView(value: $model.turnServer, title: L10n.AccountPage.turnServer, placeholder: L10n.AccountPage.turnServer, onDisappearAction: {
-                        model.saveTurnSettings()
-                    })) {
-                        FieldRowView(label: L10n.AccountPage.turnServer, value: model.turnServer)
-                    }
-                    NavigationLink(destination: EditableFieldView(value: $model.turnUsername, title: L10n.AccountPage.turnUsername, placeholder: L10n.AccountPage.turnUsername, onDisappearAction: {
-                        model.saveTurnSettings()
-                    })) {
-                        FieldRowView(label: L10n.AccountPage.turnUsername, value: model.turnUsername)
-                    }
-
-                    NavigationLink(destination: EditPasswordView(password: $model.turnPassword, onDisappearAction: {
-                        model.saveTurnSettings()
-                    })) {
-                        FieldRowView(label: L10n.AccountPage.turnPassword, value: model.turnPassword.maskedPassword)
-                    }
-
-                    NavigationLink(destination: EditableFieldView(value: $model.turnRealm, title: L10n.AccountPage.turnRealm, placeholder: L10n.AccountPage.turnRealm, onDisappearAction: {
-                        model.saveTurnSettings()
-                    })) {
-                        FieldRowView(label: L10n.AccountPage.turnRealm, value: model.turnRealm)
-                    }
-                }
-            }
+            connectivityView()
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(L10n.AccountPage.connectivityAndConfiguration)
+    }
+
+    func dhtConfigurationView() -> some View {
+        Section(header: Text(L10n.AccountPage.dhtConfiguration)) {
+            NavigationLink(destination: EditableFieldView(value: $model.bootstrap,
+                                                          title: L10n.AccountPage.bootstrap,
+                                                          placeholder: L10n.AccountPage.bootstrap,
+                                                          onDisappearAction: {
+                                                            model.saveBootstrap()
+                                                          })) {
+                FieldRowView(label: L10n.AccountPage.bootstrap, value: model.bootstrap)
+            }
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(L10n.AccountPage.peerDiscovery)
+                    Spacer()
+                    Toggle("", isOn: Binding<Any>.customBinding(
+                        get: { model.peerDiscovery },
+                        set: { newValue in model.enablePeerDiscovery(enable: newValue) }
+                    ))
+                    .labelsHidden()
+                    .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
+                }
+                Text(L10n.AccountPage.peerDiscoveryExplanation)
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+            }
+        }
+    }
+
+    func connectivityView() -> some View {
+        Section(header: Text(L10n.AccountPage.connectivityHeader)) {
+            HStack {
+                Text(L10n.AccountPage.upnpEnabled)
+                Spacer()
+                Toggle("", isOn: Binding<Any>.customBinding(
+                    get: { model.upnpEnabled },
+                    set: { newValue in model.enableUpnp(enable: newValue) }
+                ))
+                .labelsHidden()
+                .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
+            }
+
+            HStack {
+                Text(L10n.AccountPage.turnEnabled)
+                Spacer()
+                Toggle("", isOn: Binding<Any>.customBinding(
+                    get: { model.turnEnabled },
+                    set: { newValue in model.enableTurn(enable: newValue) }
+                ))
+                .labelsHidden()
+                .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
+            }
+
+            if model.turnEnabled {
+                NavigationLink(destination: EditableFieldView(value: $model.turnServer, title: L10n.AccountPage.turnServer, placeholder: L10n.AccountPage.turnServer, onDisappearAction: {
+                    model.saveTurnSettings()
+                })) {
+                    FieldRowView(label: L10n.AccountPage.turnServer, value: model.turnServer)
+                }
+                NavigationLink(destination: EditableFieldView(value: $model.turnUsername, title: L10n.AccountPage.turnUsername, placeholder: L10n.AccountPage.turnUsername, onDisappearAction: {
+                    model.saveTurnSettings()
+                })) {
+                    FieldRowView(label: L10n.AccountPage.turnUsername, value: model.turnUsername)
+                }
+
+                NavigationLink(destination: EditPasswordView(password: $model.turnPassword, onDisappearAction: {
+                    model.saveTurnSettings()
+                })) {
+                    FieldRowView(label: L10n.AccountPage.turnPassword, value: model.turnPassword.maskedPassword)
+                }
+
+                NavigationLink(destination: EditableFieldView(value: $model.turnRealm, title: L10n.AccountPage.turnRealm, placeholder: L10n.AccountPage.turnRealm, onDisappearAction: {
+                    model.saveTurnSettings()
+                })) {
+                    FieldRowView(label: L10n.AccountPage.turnRealm, value: model.turnRealm)
+                }
+            }
+        }
     }
 }
 
