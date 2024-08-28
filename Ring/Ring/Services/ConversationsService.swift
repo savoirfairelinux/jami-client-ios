@@ -157,7 +157,7 @@ class ConversationsService {
     func updateConversationMessages(conversationId: String) {
         for conversation in self.conversations.value where conversation.id == conversationId {
             conversation.clearMessages()
-            self.conversationsAdapter.loadConversationMessages(conversation.accountId, conversationId: conversationId, from: "", size: 2)
+            self.conversationsAdapter.loadConversationMessages(conversation.accountId, conversationId: conversationId, from: "", size: 40)
         }
     }
 

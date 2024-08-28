@@ -427,7 +427,7 @@ class MessagesListVM: ObservableObject {
                     self.messagesModels = [MessageContainerModel]()
                     return
                 }
-                var insertionCount = 0
+                var insertionCount: Int = 0
                 for newMessage in messages.messages where self.insert(newMessage: newMessage, fromHistory: messages.fromHistory) == true {
                     insertionCount += 1
                 }

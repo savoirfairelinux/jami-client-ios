@@ -531,7 +531,6 @@ extension AppDelegate {
               let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
         self.accountService.updateCurrentAccount(account: account)
         if let conversationId = data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String {
-            self.conversationsService.updateConversationMessages(conversationId: conversationId)
             self.appCoordinator.openConversation(conversationId: conversationId, accountId: accountId)
         } else if let participantID = data[Constants.NotificationUserInfoKeys.participantID.rawValue] as? String {
             self.appCoordinator.openConversation(participantID: participantID)
