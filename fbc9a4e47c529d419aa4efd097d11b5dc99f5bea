@@ -142,6 +142,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47311bcf_d83c55e8",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 13
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-08-28T14:49:10Z",
+      "side": 1,
+      "message": "yes, `Account error` for title is ok",
+      "parentUuid": "06b186e9_dd0fd5e6",
+      "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "355964c9_ecb6df56",
@@ -173,6 +191,24 @@
       "side": 1,
       "message": "Changed to `Incorrect password. Please try again with the correct password.` Is this okay?",
       "parentUuid": "355964c9_ecb6df56",
+      "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd4ee44_bfea95ec",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 13
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-08-28T14:49:10Z",
+      "side": 1,
+      "message": "maybe `Incorrect password. Please verify password and try again.`?",
+      "parentUuid": "f5bcf1b1_3c9af4bc",
       "revId": "fbc9a4e47c529d419aa4efd097d11b5dc99f5bea",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
