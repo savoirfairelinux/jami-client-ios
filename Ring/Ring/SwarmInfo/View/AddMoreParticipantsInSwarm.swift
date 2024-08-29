@@ -70,7 +70,7 @@ struct AddMoreParticipantsInSwarm: View {
         return Button(action: {
                         showAddMember = false
                         viewmodel.addMember()}) {
-            Text(L10n.Swarm.addMember)
+            Text(L10n.Swarm.inviteMembers)
                 .swarmButtonTextStyle()
         }
         .swarmButtonStyle()
