@@ -22,12 +22,20 @@ struct SettingsView: View {
 
     @ObservedObject var viewmodel: SwarmInfoVM
     let stateEmitter: ConversationStatePublisher
+
+    enum PresentingAlert: Identifiable {
+        case removeConversation
+        case blockContact
+
+        var id: Self { self }
+    }
+
     @SwiftUI.State private var ignoreSwarm = true
     @SwiftUI.State private var shouldShowColorPannel = false
-    @SwiftUI.State private var showAlert = false
+    @SwiftUI.State private var presentingAlert: PresentingAlert?
     var id: String!
     var swarmType: String!
-
+    // swiftlint:disable closure_body_length
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 20) {
@@ -80,7 +88,7 @@ struct SettingsView: View {
                     }
                 }
                 Button(action: {
-                    showAlert = true
+                    presentingAlert = .removeConversation
                 }, label: {
                     HStack {
                         Text(L10n.Swarm.leaveConversation)
@@ -88,15 +96,38 @@ struct SettingsView: View {
                         Spacer()
                     }
                 })
-                .alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text(L10n.Swarm.confirmLeaveSwarm),
-                        primaryButton: .destructive(Text(L10n.Swarm.leave)) { [weak stateEmitter] in
-                            guard let stateEmitter = stateEmitter else { return }
-                            viewmodel.leaveSwarm(stateEmmiter: stateEmitter)
-                        },
-                        secondaryButton: .cancel()
-                    )
+                .alert(item: $presentingAlert) { alert in
+                    switch alert {
+                    case .removeConversation:
+                        return Alert(
+                            title: Text(L10n.Swarm.confirmLeaveSwarm),
+                            primaryButton: .destructive(Text(L10n.Swarm.leave)) {
+                                viewmodel.leaveSwarm(stateEmmiter: stateEmitter)
+                            },
+                            secondaryButton: .cancel()
+                        )
+                    case .blockContact:
+                        return Alert(
+                            title: Text(L10n.Alerts.confirmBlockContact),
+                            primaryButton: .destructive(Text(L10n.Global.block)) {
+                                viewmodel.blockContact(stateEmmiter: stateEmitter)
+                            },
+                            secondaryButton: .cancel()
+                        )
+                    }
+                }
+
+                if viewmodel.conversation?.isCoredialog() ?? false {
+                    Button(action: {
+                        presentingAlert = .blockContact
+                    }, label: {
+                        HStack {
+                            Text(L10n.Global.blockContact)
+                                .multilineTextAlignment(.leading)
+                                .padding(.top)
+                            Spacer()
+                        }
+                    })
                 }
             }
             .padding(.horizontal, 20)
