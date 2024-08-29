@@ -96,7 +96,7 @@ enum ParticipantRole: String {
         case .admin:
             return L10n.Swarm.admin
         case .banned:
-            return L10n.Swarm.banned
+            return L10n.Swarm.blocked
         case .unknown:
             return L10n.Swarm.unknown
         }

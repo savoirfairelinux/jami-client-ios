@@ -37,9 +37,9 @@ enum RequestStatus {
         case .accepted:
             return L10n.Invitations.accepted
         case .refused:
-            return L10n.Invitations.refused
+            return L10n.Invitations.declined
         case .banned:
-            return L10n.Invitations.banned
+            return L10n.Invitations.blocked
         }
     }
 

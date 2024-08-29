@@ -313,7 +313,7 @@ struct ButtonsView: View {
             })
 
             if showAdvancedOptions {
-                expandedbutton(L10n.Welcome.connectToManager, action: {
+                expandedbutton(L10n.Welcome.connectToJAMS, action: {
                     withAnimation {
                         activeView = .jamsAccount
                     }
