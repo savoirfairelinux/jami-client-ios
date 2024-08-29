@@ -39,7 +39,7 @@
 "global.preview" = "Preview";
 "global.accept" = "Accept";
 "global.block" = "Block";
-"global.refuse" = "Refuse";
+"global.decline" = "Decline";
 "global.name" = "Name";
 "global.copy" = "Copy";
 "global.reply" = "Reply";
@@ -57,7 +57,7 @@
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "Confirm password";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "Ignore the swarm";
 "swarm.leaveConversation" = "Leave conversation";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Identifier";
 "swarm.about" = "About";
 "swarm.members" = "Members";
@@ -85,7 +85,7 @@
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Banned";
 "swarm.unknown" = "Unknown";
-"swarm.addMember" = "Add Member";
+"swarm.addMember" = "Add member";
 "swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
 "swarm.Leave" = "Leave";
 "swarm.newSwarm" = "New swarm";
@@ -150,7 +150,7 @@
 "invitations.noInvitations" = "No invitations";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
+"invitations.declined" = "declined";
 "invitations.banned" = "banned";
 "invitations.list" = "Invitations received";
 
@@ -163,7 +163,7 @@
 "welcome.linkDevice" = "Import from another device";
 "welcome.linkBackup" = "Import from archive backup";
 "welcome.createAccount" = "Join";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.connectToManager" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
@@ -172,7 +172,7 @@
 "createProfile.enterNameLabel" = "Enter a display name";
 "createProfile.enterNamePlaceholder" = "Enter name";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.createYourAvatar" = "Create profile picture";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Join Jami";
@@ -214,20 +214,20 @@
 "importFromArchive.buttonTitle" = "Import";
 "importFromArchive.selectArchiveButton" = "Select archive file";
 
-// Link To Account Manager form
+// Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
-"linkToAccountManager.jamsExplanation" = "Enter the Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.jamsExplanation" = "Enter Jami Account Management Server (JAMS) URL";
 "linkToAccountManager.enterCredentials" = "Enter JAMS credentials";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
-"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkTitle" = "Network error";
+"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Take photo";
@@ -372,9 +372,9 @@
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
 "accountPage.pinError" = "Failed to generate PIN";
 "accountPage.notificationTitle" = "Notifications";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Allow incoming calls from unknown contacts";
-"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
+"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
+"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
@@ -409,7 +409,7 @@
 "account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Configure a SIP Account";
+"account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "SIP Account";
 "account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
@@ -458,7 +458,7 @@
 "notifications.newFile" = "New file";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusDecline" = "Decline";
 "dataTransfer.readableStatusAccept" = "Accept";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Send";
