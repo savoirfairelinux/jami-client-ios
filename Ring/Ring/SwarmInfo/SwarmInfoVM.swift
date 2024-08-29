@@ -199,8 +199,14 @@ class SwarmInfoVM: ObservableObject {
         guard let conversation = self.conversation else { return }
         let conversationId = conversation.id
         let accountId = conversation.accountId
-        if conversation.isCoredialog(),
-           let participantId = conversation.getParticipants().first?.jamiId {
+        self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+        stateEmmiter.emitState(ConversationState.conversationRemoved)
+    }
+
+    func blockContact(stateEmmiter: ConversationStatePublisher) {
+        guard let conversation = self.conversation else { return }
+        let accountId = conversation.accountId
+        if let participantId = conversation.getParticipants().first?.jamiId {
             self.contactsService
                 .removeContact(withId: participantId,
                                ban: true,
@@ -212,13 +218,7 @@ class SwarmInfoVM: ObservableObject {
                                                   keepConversation: false)
                 })
                 .disposed(by: self.disposeBag)
-        } else {
-            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
         }
         stateEmmiter.emitState(ConversationState.conversationRemoved)
-    }
-
-    func ignoreSwarm(isOn: Bool) {
-
     }
 }
