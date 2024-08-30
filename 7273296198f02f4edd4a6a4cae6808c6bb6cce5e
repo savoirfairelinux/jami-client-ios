@@ -16,6 +16,23 @@
       "message": "Is the special case of blocking yourself not allowed? Thank you",
       "revId": "7273296198f02f4edd4a6a4cae6808c6bb6cce5e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3539a14_d48a08d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 943
+      },
+      "writtenOn": "2024-08-30T12:04:56Z",
+      "side": 1,
+      "message": "Similiar like the Android client: https://git.jami.net/savoirfairelinux/jami-client-android/-/issues/1371#note_45333",
+      "revId": "7273296198f02f4edd4a6a4cae6808c6bb6cce5e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
