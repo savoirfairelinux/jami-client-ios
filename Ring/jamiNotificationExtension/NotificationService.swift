@@ -366,14 +366,12 @@ class NotificationService: UNNotificationServiceExtension {
                 if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
                     self.adapterService.stop(accountId: self.accountId)
                 }
+                info["displayName"] = name.isEmpty ? peerId : name
+                self.pendingCalls[peerId] = info
+
                 if name.isEmpty {
-                    info["displayName"] = peerId
-                    self.pendingCalls[peerId] = info
                     self.startAddressLookup(address: peerId)
-                    return
                 }
-                info["displayName"] = name
-                self.presentCall(info: info)
             })(peerId, "\(hasVideo)")
             return
         case .gitMessage(let convId):
@@ -605,6 +603,7 @@ extension NotificationService {
             self.lookupCompleted(address: address)
             return
         }
+        autoDispatchGroup.enter(id: address)
         let defaultSession = URLSession(configuration: .default)
         let task = defaultSession.dataTask(with: url) {[weak self](data, response, _) in
             guard let self = self else { return }
@@ -639,23 +638,27 @@ extension NotificationService {
 
     private func lookupCompleted(address: String) {
         let name = self.names[address]
-        for call in pendingCalls where call.key == address {
-            var info = call.value
-            if let name = name {
-                info["displayName"] = name
-            }
-            presentCall(info: info)
-            return
-        }
-        for pending in pendingLocalNotifications where pending.key == address {
-            let notifications = pending.value
-            for notification in notifications {
+        self.notificationQueue.sync { [weak self] in
+            guard let self = self else { return }
+            for call in pendingCalls where call.key == address {
+                var info = call.value
                 if let name = name {
-                    notification.content.title = name
+                    info["displayName"] = name
                 }
-                presentLocalNotification(notification: notification)
+                self.autoDispatchGroup.leave(id: address)
+                return
             }
-            pendingLocalNotifications.removeValue(forKey: address)
+            self.autoDispatchGroup.leave(id: address)
+            for pending in pendingLocalNotifications where pending.key == address {
+                let notifications = pending.value
+                for notification in notifications {
+                    if let name = name {
+                        notification.content.title = name
+                    }
+                    presentLocalNotification(notification: notification)
+                }
+                pendingLocalNotifications.removeValue(forKey: address)
+            }
         }
     }
 }
@@ -860,11 +863,9 @@ extension NotificationService {
         CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
             log("NotificationService", "Did report voip notification, error: \(String(describing: error))")
         })
-        self.notificationQueue.sync {
-            self.pendingCalls.removeAll()
-            self.pendingLocalNotifications.removeAll()
-        }
-        self.verifyTasksStatus()
+        self.pendingCalls.removeAll()
+        self.pendingLocalNotifications.removeAll()
+       // self.verifyTasksStatus()
     }
 
     private func enqueueNotificationForNameUpdate(notification: LocalNotification, peerId: String) {
