@@ -63,18 +63,18 @@
 "scan.badQrCode" = "קוד QR גרוע";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "חיפוש קשר...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "ליצור את הסוואר";
 "swarmcreation.addADescription" = "הוסף תיאור";
 // Swarm
 "swarm.ignoreSwarm" = "התעלמו מהגזע.";
-"swarm.leaveConversation" = "עזוב את השיחה.";
-"swarm.chooseColor" = "בחר צבע";
+"swarm.leaveConversation" = "Leave conversation";
+"swarm.chooseColor" = "צבע";
 "swarm.typeOfSwarm" = "סוג של סוואר";
 "swarm.identifier" = "זיהוי";
 "swarm.about" = "על אודות";
 "swarm.members" = "חברי";
-"swarm.addDescription" = "הוסף תיאור";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "שור פרטי";
 "swarm.adminInvitesOnly" = "מנהל הזמנות בלבד";
 "swarm.invitesOnly" = "שור פרטי";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "אתה בטוח שאתה רוצה לעזוב את הסוואר הזה?";
 "swarm.Leave" = "עזוב";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "שם הסווארם";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "אין תוצאות";
 "smartlist.noConversation" = "אין דיונים";
-"smartlist.searchBarPlaceholder" = "יש להזין שם...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "חיפוש";
 "smartlist.noNetworkConnectivity" = "אין חיבור לרשת";
 "smartlist.cellularAccess" = "ודא שהגישה הסלולרית נתונה בהגדרות שלך";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "אין הזמנות";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "ג'אמי היא פלטפורמה חופשית ויקונביסלית לשיחה שמטרת הפרטיות והחופש של המשתמשים";
 "welcome.haveAccount" = "יש לי חשבון.";
 "welcome.linkDevice" = "ייבוא ממכשיר אחר";
-"welcome.linkBackup" = "ייבוא מאחסן גיבוי";
+"welcome.linkBackup" = "Import from archive backup";
 "welcome.createAccount" = "הצטרף";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "דילוג";
 "createProfile.profileCreated" = "קדימה";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "הפרופיל שלך ייחלק עם אנשי הקשר שלך. אתה יכול לשנות אותו בכל עת.";
 "createProfile.createYourAvatar" = "ליצור את האווטאר שלך";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "הצטרף לג'מי.";
 "createAccount.lookingForUsernameAvailability" = "מחפשים זמינות...";
 "createAccount.invalidUsername" = "שם משתמש לא חוקי";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "טעות רשת";
 "createAccount.UsernameNotRegisteredMessage" = "חשבון נוצר אבל שם משתמש לא נרשם";
 "createAccount.timeoutTitle" = "חשבון נוצר";
-"createAccount.timeoutMessage" = "רישום שם משתמש בתהליך... זה יכול לקחת כמה רגעים.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "להגדיר חשבון SIP קיים";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "אתה יכול לבחור שם משתמש כדי לעזור לאחרים למצוא אותך בקלות יותר ולקשר אליך על ג'מי.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "לחשוף חשבון עם סיסמה";
 "createAccount.encryptExplanation" = "חשבון ג'אמי נוצר ומוחסן מקומית רק במכשיר זה, כאריכיון המכיל את מפתחות החשבון שלך. גישה לאריכיון זה יכולה להיות מוגנת בחירה באמצעות סיסמה.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "חיבור חשבונות";
 "linkToAccount.linkButtonTitle" = "קישור";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "מספר זיהוי אישי";
 "linkToAccount.pinLabel" = "הכניס את סימן PIN";
 "linkToAccount.scanQRCode" = "Scan QR Code";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "יבוא";
 "importFromArchive.selectArchiveButton" = "בחר תיק ארכיון";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "כניסה";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "דואר URL של JAMS";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "הכניס את כתובת ה-JAMS (Jami Account Management Server)";
 "linkToAccountManager.enterCredentials" = "הכניסה של תעודות אישור JAMS";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "לא מצליח למצוא חשבון";
-"alerts.accountCannotBeFoundMessage" = "לא ניתן למצוא חשבון ברשת ג'מי, ודא שהוא הוצא לג'מי ממכשיר קיים, ושהסמכות ההסמכות נכונות.";
-"alerts.accountAddedTitle" = "חשבון הוסף";
-"alerts.accountNoNetworkTitle" = "לא יכול להתחבר לרשת";
-"alerts.accountNoNetworkMessage" = "לא יכולתי להוסיף חשבון כי ג'מי לא יכול להתחבר לרשת המפצה.";
-"alerts.accountDefaultErrorTitle" = "טעות לא ידועה";
-"alerts.accountDefaultErrorMessage" = "לא ניתן ליצור את החשבון.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "צלם.";
 "alerts.profileUploadPhoto" = "תעלה תמונה";
 "alerts.accountLinkedTitle" = "חשבון חיבור";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "אישור מדיה לא מוסמך";
 "alerts.noLibraryPermissionsTitle" = "גישה לספריית התמונות לא מותרת";
 "alerts.noLocationPermissionsTitle" = "גישה לא מיקום";
-"alerts.errorWrongCredentials" = "לא ניתן להתחבר למנהל החשבון הנגיש. אנא בדוק את תעודות האישור שלך";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "הקלטת הודעה וידאו";
 "alerts.recordAudioMessage" = "הקלטת הודעה אוודית";
 "alerts.uploadFile" = "שלח קובץ";
 "alerts.uploadPhoto" = "Open gallery";
-"alerts.locationServiceIsDisabled" = "תפעיל את \"שירותי המיקום\" כדי לאפשר ל\"ג'מי\" לקבוע את המיקום שלך.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "שיתוף המיקום שלי";
 "alerts.alreadylocationSharing" = "כבר משתף את המיקום עם המשתמש הזה";
 "alerts.locationSharingDurationTitle" = "כמה זמן צריך להיות שיתוף המיקום?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© התורמים ל־OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "מידע נוסף";
 
-//Actions
+// Actions
 "actions.deleteAction" = "מחק";
 "actions.clearAction" = "ניקוי";
 "actions.backAction" = "חזרה";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "לכו להגדיר";
 "actions.stopLocationSharing" = "תפסיק לחלוק";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "רוצה לדבר איתך.";
 "calls.ringing" = "זה מצלצל...";
 "calls.connecting" = "חיבור...";
 "calls.callFinished" = "שיחת הודעה נגמרה.";
 "calls.currentCallWith" = "תתקשר עם ";
-"calls.haghUp" = "תנתק.";
-"calls.maximize" = "מקסימום";
-"calls.minimize" = "למנימום";
-"calls.setModerator" = "מתקן";
-"calls.removeModerator" = "מתקן לא מתאים";
-"calls.muteAudio" = "קול דומם";
-"calls.unmuteAudio" = "אוודיו לא שקט";
-"calls.lowerHand" = "יד התחתונה";
+"calls.maximize" = "Maximize";
+"calls.minimize" = "Minimize";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
+"calls.muteAudio" = "השתק אודיו";
+"calls.unmuteAudio" = "Unmute audio";
+"calls.lowerHand" = "Lower hand";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "התקנים";
 "accountPage.settingsHeader" = "הגדרות";
 "accountPage.notificationsHeader" = "הודעות";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "אנשי קשר חסומים";
 "accountPage.unblockContact" = "לא מבלי";
 "accountPage.proxyAddressAlert" = "תורם כתובת פרוקסי";
-"accountPage.noProxyExplanationLabel" = "המכשיר שלך לא יקבל הודעות כאשר הפוקסי מופעל";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "כתובת דווקא";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "אם החשבון שלך לא נפקח או הוסף למכשיר אחר, החשבון שלך ושמו המפורסם יעלמו באופן בלתי הפיך.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "התקשר אליי על ג'מי!";
-"accountPage.contactMeOnJamiContant" = "צור איתי קשר באמצעות \"%s\" על פלטפורמת התקשורת המوزعة של ג'מי: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "הכניסה סיסמה לחשבון";
 "accountPage.usernamePlaceholder" = "הכניס את שם המשתמש הרצוי";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "רישום";
 "accountPage.usernameRegisterAction" = "הירשם";
-"accountPage.usernameRegistrationFailed" = "ההרשמה נכשלה, אנא בדוק את הסיסמה.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "חשבון מוצפן";
 "accountPage.changePassword" = "לשנות סיסמה";
-"accountPage.oldPasswordPlaceholder" = "הכניסו סיסמה ישנה";
+"accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "הכניסו סיסמה חדשה";
 "accountPage.newPasswordConfirmPlaceholder" = "אישר סיסמה חדשה";
 "accountPage.changePasswordError" = "סיסמה שגויה";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "המכשיר הזה";
 "accountPage.otherDevices" = "מכשירים קשורים אחרים";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "קישור תחיל";
+"accountPage.dhtConfiguration" = "קונפיגורת OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "סרוויר";
 "account.port" = "פורט";
 "account.proxyServer" = "פרוקסי";
@@ -423,35 +425,35 @@
 "account.needMigration" = "חשבון צריך לעבור";
 "account.me" = "אני";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "אין קשרים חסומים";
 
-//Link New Device
+// Link New Device
 "linkDevice.title" = "קישור מכשיר חדש";
-"linkDevice.passwordError" = "הסיסמה שהכנסת לא פותחת את החשבון הזה";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "כדי להשלים את התהליך, אתה צריך לפתוח את ג'מי על המכשיר החדש ולבחר את האפשרות \"רחב את המכשיר הזה לחשבון\".";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "אימות";
 
-//Contact Page
-"contactPage.startAudioCall" = "התחל שיחת קול";
-"contactPage.startVideoCall" = "התחלת שיחת וידאו";
-"contactPage.sendMessage" = "שלח הודעה";
+// Contact Page
+"contactPage.startAudioCall" = "תחילת שיחת קול";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "ניקוי הצ׳אט";
-"contactPage.removeConversation" = "הסרת דיון";
+"contactPage.leaveConversation" = "עזוב את השיחה";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "-התחל...";
 "dataTransfer.readableStatusError" = "שגיאה";
 "dataTransfer.readableStatusAwaiting" = "מחכה...";
 "dataTransfer.readableStatusOngoing" = "העברה";
 "dataTransfer.readableStatusCanceled" = "מבוטל";
-"dataTransfer.sendingFailed" = "לא הצלחתי לשלוח";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "מלא";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "התקשרות החסרות";
 "notifications.newFile" = "תיק חדש";
 "notifications.locationSharingStarted" = "החל שיתוף מיקום נכנס";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "שלח";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "סרם נוצר";
 "generatedMessage.invitationReceived" = "הוזמנת להצטרף";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "שיתוף מיקום חי";
 "generatedMessage.contactLeftConversation" = "שמאלה";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "הגדרות הוידאו";
 "generalSettings.videoAcceleration" = "אפשרת אינטגרציה של וידאו";
 "generalSettings.fileTransfer" = "העברת קבצים";
-"generalSettings.locationSharing" = "שיתוף מקומות";
+"generalSettings.locationSharing" = "שיתוף מיקום";
 "generalSettings.automaticAcceptIncomingFiles" = "לקבל קבצים נכנסים באופן אוטומטי";
 "generalSettings.acceptTransferLimit" = "קבלו גבול העברה";
-"generalSettings.acceptTransferLimitDescription" = "(ב-MB, 0 = לא מוגבל)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "להגביל את משך זמן שיתוף המיקום";
 "generalSettings.locationSharingDuration" = "משך משותף עמדות";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "אבחון";
 "logView.description" = "הגדרות של תיעוד האבחנה פתוחה";
-"logView.startLogging" = "התחל לגרות";
-"logView.stopLogging" = "תפסיקו לחתוך עץ";
-"logView.saveError" = "לא הציל הקובץ";
-"logView.shareError" = "לא השיתוף קבצים";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "מיגרת חשבונות";
 "migrateAccount.migrateButton" = "חשבון היגר";
-"migrateAccount.explanation" = "החשבון הזה צריך לעבור.";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "כדי להמשיך עם ההגירה, אתה צריך להזין סיסמה ששימשה לחשבון הזה";
-"migrateAccount.error" = "לא העבר את החשבון שלך. אתה יכול לנסות שוב או למחוק את החשבון שלך.";
-"migrateAccount.migrating" = "היגר...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "להעביר חשבון אחר";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "משוב";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

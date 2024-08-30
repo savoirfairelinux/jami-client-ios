@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Zlý QR kód";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Vyhľadávanie kontaktu...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Vytvorte hŕstok";
 "swarmcreation.addADescription" = "Pridať opis";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoruj rýž";
-"swarm.leaveConversation" = "Nechajme rozhovor";
-"swarm.chooseColor" = "Vyberte si farbu";
+"swarm.leaveConversation" = "Nechaj rozhovor";
+"swarm.chooseColor" = "Farba";
 "swarm.typeOfSwarm" = "Typ hŕňa";
 "swarm.identifier" = "Identifikátor";
 "swarm.about" = "O programe";
 "swarm.members" = "Členovia";
-"swarm.addDescription" = "Pridať opis";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Privátny hŕst";
 "swarm.adminInvitesOnly" = "Správca pozýva iba";
 "swarm.invitesOnly" = "Privátny hŕst";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "Si si istý, že chceš opustiť tento hŕst?";
 "swarm.Leave" = "Odchádzam";
 "swarm.newSwarm" = "Nová skupina";
-"swarm.namePlaceholder" = "Názov šarmu";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "Po vytvorení skupiny môžete kedykoľvek pridať alebo pozvať členov";
-"swarm.customizeProfile" = "Upraviť profil skupiny";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Zmeniť fotku skupiny";
 "swarm.customize" = "Upraviť skupinu";
 "swarm.selectContacts" = "Vybrať kontakty";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Prijaté pozvania";
 "smartlist.noResults" = "Žiadne výsledky";
 "smartlist.noConversation" = "Žiadne konverzácie";
-"smartlist.searchBarPlaceholder" = "Zadajte meno...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Vyhľadávanie";
 "smartlist.noNetworkConnectivity" = "Žiadne sieťové pripojenie";
 "smartlist.cellularAccess" = "Uistite, že v nastaveniach je povolený prístup k mobilnej sieti";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "konverzácia sa synchronizuje";
 "smartlist.newMessage" = "Nová správa";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Pridať do kontaktov";
 "conversation.addToContactsLabel" = "Pridať do kontaktov?";
 "conversation.notContactLabel" = "nie je vo vašom zozname kontaktov";
@@ -146,7 +146,7 @@
 "conversation.edited" = "upravené";
 "conversation.deletedMessage" = "odstránil správu";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Žiadne pozvánky";
 "invitations.pending" = "čakajúce";
 "invitations.accepted" = "prijaté";
@@ -161,11 +161,11 @@
 "welcome.text" = "Jami je slobodná a univerzálna komunikačná platforma, ktorá zachováva súkromie a slobodu používateľov.";
 "welcome.haveAccount" = "Už mám účet.";
 "welcome.linkDevice" = "Import z iného zariadenia";
-"welcome.linkBackup" = "Import z zálohovacej archívy";
+"welcome.linkBackup" = "Importovať zo zálohovaného archívu";
 "welcome.createAccount" = "Pridať";
 "welcome.connectToManager" = "Pripojte sa k serveru Jami Account Manager";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "Preskočiť";
 "createProfile.profileCreated" = "Ďalej";
 "createProfile.title" = "Prispôsobte si svoj profil";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "Váš profil bude zdieľaný s vašimi kontaktami. Môžete to kedykoľvek zmeniť.";
 "createProfile.createYourAvatar" = "Vytvorte si avatara";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Pridajte sa k Jami";
 "createAccount.lookingForUsernameAvailability" = "Overovanie dostupnosti...";
 "createAccount.invalidUsername" = "neplatné používateľské meno";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Chyba siete";
 "createAccount.UsernameNotRegisteredMessage" = "Účet bol vytvorený, ale používateľské meno nebolo zaregistrované";
 "createAccount.timeoutTitle" = "Účet vytvorený";
-"createAccount.timeoutMessage" = "Prebieha registrácia používateľského mena... Chvíľu to potrvá.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Konfigurácia existujúceho účtu SIP";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Môžete si vybrať uživatelské meno, ktoré pomôže iným ľahko nájsť a dostať sa k vám na Jami.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Zšifrovať účet pomocou hesla";
 "createAccount.encryptExplanation" = "Účet Jami sa vytvára a ukladá len na tomto zariadení ako archív obsahujúci kľúče vášho účtu.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Prepájanie účtu";
 "linkToAccount.linkButtonTitle" = "Prepojiť";
-"linkToAccount.linkDeviceTitle" = "Prepojiť zariadenie";
-"linkToAccount.linkDeviceMessage" = "Ak chcete zobraziť QR kód alebo PIN, vyberte „Prepojiť nové zariadenie“ z inej aplikácie Jami";
+"linkToAccount.linkDeviceTitle" = "Prepájanie zariadenia";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Zadajte PIN";
 "linkToAccount.scanQRCode" = "Nasnímať QR kód";
-"linkToAccount.explanationPinMessage" = "Ak chcete vygenerovať kód PIN, prejdite do nastavení správy účtu na zariadení obsahujúcom účet, ktorý chcete prepojiť. Vyberte možnosť „Pripojiť nové zariadenie“. Na vyplnenie tohto formulára dostanete potrebný PIN. PIN je platný len 10 minút.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Dovoz";
 "importFromArchive.selectArchiveButton" = "Vyberte súbor archívu";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Prihlásiť sa";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Vložte URL Servera správy účtu Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "Vložte údaje JAMS";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Účet sa nedá nájsť";
-"alerts.accountCannotBeFoundMessage" = "Účet nebol nájdený v Jami sieti. Uistite sa, že bol do Jami exportovaný z existujúceho zariadenia a že zadané prihlasovacie údaje sú správne.";
-"alerts.accountAddedTitle" = "Účet pridaný";
-"alerts.accountNoNetworkTitle" = "Nedá sa pripojiť k sieti";
-"alerts.accountNoNetworkMessage" = "Účet sa nedal pridať, pretože Jami sa nedokázal pripojiť k distribuovanej sieti. Skontrolujte pripojenie vášho zariadenia.";
-"alerts.accountDefaultErrorTitle" = "Neznáma chyba";
-"alerts.accountDefaultErrorMessage" = "Účet nemohol byť vytvorený.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Zhotoviť fotografiu";
 "alerts.profileUploadPhoto" = "Nahrať fotografiu";
 "alerts.accountLinkedTitle" = "Prepájanie účtu";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "Nie sú udelené práva pre médiá";
 "alerts.noLibraryPermissionsTitle" = "Nie je povolený prístup ku knižnici fotografií";
 "alerts.noLocationPermissionsTitle" = "Prístup k lokalite nepovolený";
-"alerts.errorWrongCredentials" = "Nedá sa pripojiť k danému správcovi účtov. Skontrolujte prosím vaše prístupové údaje.";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Zaznamenať video správu";
 "alerts.recordAudioMessage" = "Zaznamenať audio správu";
 "alerts.uploadFile" = "Odoslať súbor";
 "alerts.uploadPhoto" = "Otvorená galéria";
-"alerts.locationServiceIsDisabled" = "Vypnite \"Služby umiestnenia\", aby \"Jami\" určil vašu polohu.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Zdieľajte moju polohu";
 "alerts.alreadylocationSharing" = "Už zdieľanie polohy s týmto používateľom";
 "alerts.locationSharingDurationTitle" = "Ako dlho by malo byť spoločné umiestnenie?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© prispievatelia OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "Zistiť viac";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Vymazať";
 "actions.clearAction" = "Vyčistiť";
 "actions.backAction" = "Späť";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Prejdite do Nastavenia";
 "actions.stopLocationSharing" = "Ukončiť zdieľanie";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "chce s vami hovoriť";
 "calls.ringing" = "Zvoní...";
 "calls.connecting" = "Pripájanie...";
 "calls.callFinished" = "Hovor bol ukončený";
 "calls.currentCallWith" = "Hovor s";
-"calls.haghUp" = "zložiť";
-"calls.maximize" = "maximalizovať";
-"calls.minimize" = "minimalizovať";
-"calls.setModerator" = "nastavený moderátor";
-"calls.removeModerator" = "Moderátor odstavený";
-"calls.muteAudio" = "hlúpe audio";
+"calls.maximize" = "Maximálne";
+"calls.minimize" = "Minimalizovať";
+"calls.setModerator" = "Nastaviť moderátor";
+"calls.removeModerator" = "Odstaviť moderátor";
+"calls.muteAudio" = "Stlmiť zvuk";
 "calls.unmuteAudio" = "Nevymazaný zvuk";
-"calls.lowerHand" = "dolná ruka";
+"calls.lowerHand" = "Dolná ruka";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Zariadenia";
 "accountPage.settingsHeader" = "Nastavenia";
 "accountPage.notificationsHeader" = "Upozornenia";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Blokované kontakty";
 "accountPage.unblockContact" = "ODBLOKOVAŤ";
 "accountPage.proxyAddressAlert" = "Zadajte adresu proxy";
-"accountPage.noProxyExplanationLabel" = "Vaše zariadenie nebude dostávať upozornenia keď je proxy vypnutá";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Adresa proxy";
 "accountPage.useProxyList" = "Použiť zoznam proxy";
 "accountPage.proxyListURL" = "URL zoznamu proxy";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Ak sa váš účet nezachytal alebo nebol pridaný do iného zariadenia, váš účet a registrované meno sa nepovratne stratia.";
 "accountPage.inviteFriends" = "Pozvať priateľov";
 "accountPage.contactMeOnJamiTitle" = "Kontaktujte ma na Jami!";
-"accountPage.contactMeOnJamiContant" = "Kontaktujete ma pomocou \"%s\" na distribuovanej komunikačnej platforme Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Zadajte heslo k účtu";
 "accountPage.usernamePlaceholder" = "Zadajte želané používateľské meno";
 "accountPage.registerNameErrorMessage" = "Zvolené používateľské meno nie je dostupné";
 "accountPage.usernameRegistering" = "Registruje sa";
 "accountPage.usernameRegisterAction" = "Registrovať";
-"accountPage.usernameRegistrationFailed" = "Registrácia zlyhala. Skontrolujte prosím heslo.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Zšifrovaný účet";
 "accountPage.changePassword" = "Zmeniť heslo";
-"accountPage.oldPasswordPlaceholder" = "Vložte starý heslo";
+"accountPage.currentPasswordPlaceholder" = "Vložte súčasný heslo";
 "accountPage.newPasswordPlaceholder" = "Vložte nový heslo";
 "accountPage.newPasswordConfirmPlaceholder" = "Potvrďte nový heslo";
 "accountPage.changePasswordError" = "Nespraviteľné heslo";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "Toto zariadenie";
 "accountPage.otherDevices" = "Ostatné prepojené zariadenia";
 "accountPage.accountIdentity" = "Identita účtu";
+"accountPage.bootstrap" = "Bootstrap";
+"accountPage.dhtConfiguration" = "Konfigurácia OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
@@ -423,35 +425,35 @@
 "account.needMigration" = "Váš účet musí byť migrovaný";
 "account.me" = "Ja";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "Žiadne blokované kontakty";
 
-//Link New Device
+// Link New Device
 "linkDevice.title" = "Prepojiť nové zariadenie";
-"linkDevice.passwordError" = "Heslo, ktoré ste zadali, neodomyká tento účet";
-"linkDevice.networkError" = "Počas exportu sa vyskytla sieťová chyba";
-"linkDevice.defaultError" = "Počas exportu sa vyskytla chyba";
-"linkDevice.explanationMessage" = "Na dokončenie procesu je potrebné otvoriť aplikáciu Jami na novom zariadení a zvoliť možnosť \"Prepojiť toto zariadenie s účtom\". Váš PIN bude funkčný po dobu 10 minút.";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Overovanie";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "Začať audio hovor";
 "contactPage.startVideoCall" = "Začať video hovor";
-"contactPage.sendMessage" = "Poslať správu";
+"contactPage.send" = "Poslať";
 "contactPage.clearConversation" = "Vymazať chat";
-"contactPage.removeConversation" = "Odstrániť konverzáciu";
+"contactPage.leaveConversation" = "Nechaj rozhovor";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "Inicializácia...";
 "dataTransfer.readableStatusError" = "Chyba";
 "dataTransfer.readableStatusAwaiting" = "Čaká sa...";
 "dataTransfer.readableStatusOngoing" = "Prenáša sa";
 "dataTransfer.readableStatusCanceled" = "Zrušené";
-"dataTransfer.sendingFailed" = "Odoslanie zlyhalo";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Dokončiť";
 "dataTransfer.recordInBackgroundWarning" = "Nahrávanie videa počas multitaskingu s viacerými aplikáciami môže viesť k nižšej kvalite videí. Ak chcete dosiahnuť najlepšie výsledky, nahrávajte, keď nevykonávate multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "Zmeškaný hovor";
 "notifications.newFile" = "Nový súbor";
 "notifications.locationSharingStarted" = "Začalo sa zdieľanie miest";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Poslať";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "Dostali ste pozvánku";
 "generatedMessage.swarmCreated" = "Vytvorený hŕstok";
 "generatedMessage.invitationReceived" = "bol pozvaný k tomu, aby sa pripojil";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Živo zdieľanie polohy";
 "generatedMessage.contactLeftConversation" = "ľavý";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "Nastavenia videa";
 "generalSettings.videoAcceleration" = "Povoliť akceleráciu videa";
 "generalSettings.fileTransfer" = "Prenos súborov";
-"generalSettings.locationSharing" = "Účastné miesto";
+"generalSettings.locationSharing" = "Obsadba miest";
 "generalSettings.automaticAcceptIncomingFiles" = "Automaticky prijať prichádzajúce súbory";
 "generalSettings.acceptTransferLimit" = "Prijme sa limit prevodov";
-"generalSettings.acceptTransferLimitDescription" = "(v MB, 0 = neobmedzené)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Obmedzenie trvania zdieľania umiestnenia";
 "generalSettings.locationSharingDuration" = "Dĺžka trvania podielu pozícií";
 "generalSettings.donationCampaign" = "Darcovská kampaň";
 "generalSettings.enableDonationCampaign" = "Povoliť darcovskú kampaň";
 
-//Log View
+// Log View
 "logView.title" = "Diagnostika";
 "logView.description" = "Otvorené nastavenia diagnostického protokolu";
-"logView.startLogging" = "Začnite s logovaním";
-"logView.stopLogging" = "Prestaňte s drevením";
-"logView.saveError" = "Zlyhanie ukladania súboru";
-"logView.shareError" = "Nezdieľanie súboru";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Prestaňte s vykladaním";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Migrácia účtu";
 "migrateAccount.migrateButton" = "Migrovať účet";
-"migrateAccount.explanation" = "Váš účet musí byť migrovaný";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "Pre pokračovanie v migrácii prosím zadajte heslo použité pre tento účet.";
-"migrateAccount.error" = "Migrácia vášho účtu zlyhala. Môžete to skúsiť znovu alebo môžete zmazať váš účet.";
-"migrateAccount.migrating" = "Migruje sa...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Migrovať ďalší účet";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, balík GNU, je softvér pre univerzálnu a distribuovanú komunikáciu typu peer-to-peer, ktorý rešpektuje slobodu a súkromie svojich používateľov. Navštíviť";
 "aboutJami.declaration2" = "Navštívte, aby ste sa dozvedeli viac";
 "aboutJami.noWarranty1" = "Tento program je dodávaný bez akejkoľvek záruky.";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "Spätná väzba";
 "aboutJami.createdBy" = "Vytvoril";
 "aboutJami.artworkBy" = "Ilustrácia od";
-
-

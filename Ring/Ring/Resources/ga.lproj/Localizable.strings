@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Cód QR olc";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Cuardaigh teagmháil...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Cruthaigh an swarm";
 "swarmcreation.addADescription" = "Cuir síos leis";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoráil an swarm";
-"swarm.leaveConversation" = "Cinnigh an comhrá";
-"swarm.chooseColor" = "Roghnaigh dath";
+"swarm.leaveConversation" = "Leave conversation";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Tír na n-uimhreacha";
 "swarm.identifier" = "Cluiche";
 "swarm.about" = "Maidir le";
 "swarm.members" = "Comhaltaí";
-"swarm.addDescription" = "Cuir síos";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Rann príobháideach";
 "swarm.adminInvitesOnly" = "Ní iarrann an rialtóir ach";
 "swarm.invitesOnly" = "Rann príobháideach";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "An bhfuil tú cinnte go bhfuil tú ag iarraidh a fhágáil an swarm?";
 "swarm.Leave" = "Téigh ar shiúl";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Ainm an Swarm";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ní raibh aon torthaí";
 "smartlist.noConversation" = "Ní raibh aon comhráite";
-"smartlist.searchBarPlaceholder" = "Cuir isteach ainm...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Cuardaigh";
 "smartlist.noNetworkConnectivity" = "Ní bheidh aon nasc líonra";
 "smartlist.cellularAccess" = "Déan cinnte go bhfuil rochtain ceallaithe ar fáil i do shuíomhanna";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Ní iarratais";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "Is ardán cumarsáide saor in aisce agus uilethír é Jami a chaomhnaíonn príobháideacht agus saoirsí na n-úsáideoirí";
 "welcome.haveAccount" = "Tá cuntas agam cheana féin";
 "welcome.linkDevice" = "Importaíocht ó threalamh eile";
-"welcome.linkBackup" = "Importaí ó chúltaca archiv";
+"welcome.linkBackup" = "Import from archive backup";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Next";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "Déanfar do phróifíl a roinnt le do chaontaithe. Is féidir leat é a athrú ag am ar bith.";
 "createProfile.createYourAvatar" = "Cruthaigh do avatar";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Téigh le Jami";
 "createAccount.lookingForUsernameAvailability" = "ag lorg ar fáil...";
 "createAccount.invalidUsername" = "ainm úsáideora neamhbhailí";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Measáin";
 "createAccount.UsernameNotRegisteredMessage" = "Cruthaíodh cuntas ach níor chláraigh ainm úsáideora";
 "createAccount.timeoutTitle" = "Cunntas a chruthú";
-"createAccount.timeoutMessage" = "Is féidir leis an clárú ainm úsáideora a bheith i mbun... d'fhéadfadh sé cúpla nóiméad a ghlacadh.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Cinntíonn cuntas SIP atá ann cheana féin";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Is féidir leat ainm úsáideora a roghnú chun cabhrú le daoine eile teacht ar do shon agus teagmháil a dhéanamh leat níos éasca ar Jami.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Criosadh cuntas le pasfhocal";
 "createAccount.encryptExplanation" = "Cruthaítear cuntas Jami agus stóráiltear go háitiúil ach ar an bhfeiste seo, mar archive a bhfuil do chléas cuntas ann. Is féidir rochtain ar an archive seo a chosaint le pasfhocal de rogha.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Cúlra nasc";
 "linkToAccount.linkButtonTitle" = "Líon";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Cuir PIN isteach";
 "linkToAccount.scanQRCode" = "Scan QR Code";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Éireodh";
 "importFromArchive.selectArchiveButton" = "Roghnaigh comhad archiv";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Clóscríobh isteach";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Cuir isteach URL Seirbhís Bainistíochta Cuntais Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "Cuir isteach na cáipéisí JAMS";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Ní féidir a fháil cuntas";
-"alerts.accountCannotBeFoundMessage" = "Ní raibh aon chuntas le fáil ar an líonra Jami. déan cinnte go ndearnadh é a onnmhairiú ar Jami ó ghléas atá ann cheana féin, agus go bhfuil na credentials foráil go bhfuil siad ceart.";
-"alerts.accountAddedTitle" = "Cunntas Leigthe";
-"alerts.accountNoNetworkTitle" = "Ní féidir a nascadh leis an líonra";
-"alerts.accountNoNetworkMessage" = "Ní raibh mé in ann cuntas a chur leis toisc nach raibh Jami in ann nasc a dhéanamh leis an líonra dáileadh.";
-"alerts.accountDefaultErrorTitle" = "Mearachta neamhfhóicthe";
-"alerts.accountDefaultErrorMessage" = "Ní raibh an cuntas a chruthú.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Déan grianghraf";
 "alerts.profileUploadPhoto" = "Fógraí a uaslódáil";
 "alerts.accountLinkedTitle" = "Cunntas nasc";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "Ceadaíocht na meán nach bhfuil deimhnithe";
 "alerts.noLibraryPermissionsTitle" = "rochtain ar leabharlann grianghraf nach bhfuil deimhnithe";
 "alerts.noLocationPermissionsTitle" = "Freagraíocht maidir le rochtain ar shuíomh";
-"alerts.errorWrongCredentials" = "Ní féidir teagmháil a dhéanamh le bainisteoir cuntas a sholáthraíonn tú.";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Teachtaireacht físeán a thaifeadadh";
 "alerts.recordAudioMessage" = "Teachtaireacht fuaime a thaifeadadh";
 "alerts.uploadFile" = "Comhad a sheoladh";
 "alerts.uploadPhoto" = "Open gallery";
-"alerts.locationServiceIsDisabled" = "Cuir ar \"Shoirbheis Líne\" chun ligean do \"Jami\" a chinneadh do shuíomh.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Comhroinn mo shuíomh";
 "alerts.alreadylocationSharing" = "Ag roinnt suíomh cheana féin leis an úsáideoir seo";
 "alerts.locationSharingDurationTitle" = "Cé chomh fada is ba chóir an suíomh a roinnt?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© rannpháirteoirí OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "Foghlaim níos mó";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Scriosadh";
 "actions.clearAction" = "Clúdach";
 "actions.backAction" = "Ar ais";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Téigh go dtí Suíomh";
 "actions.stopLocationSharing" = "Stop ag roinnt";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "Tá sé ag iarraidh labhairt leat";
 "calls.ringing" = "Ag glaoch...";
 "calls.connecting" = "Ceangal...";
 "calls.callFinished" = "Glao críochnaithe";
 "calls.currentCallWith" = "Déan teagmháil le ";
-"calls.haghUp" = "cuir suas";
-"calls.maximize" = "a mhéadú";
-"calls.minimize" = "a laghdú";
-"calls.setModerator" = "Modhálaí a shuiteáil";
-"calls.removeModerator" = "Modhálaí neamhshuite";
-"calls.muteAudio" = "fuaime bhuaite";
-"calls.unmuteAudio" = "fuaime neamhghnách";
-"calls.lowerHand" = "lámh íseal";
+"calls.maximize" = "Maximize";
+"calls.minimize" = "Minimize";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
+"calls.muteAudio" = "Audio Mute";
+"calls.unmuteAudio" = "Unmute audio";
+"calls.lowerHand" = "Lower hand";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Iarratais";
 "accountPage.settingsHeader" = "Cinntí";
 "accountPage.notificationsHeader" = "Feidhmeanna";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Contaeanna blocaithe";
 "accountPage.unblockContact" = "Unblock";
 "accountPage.proxyAddressAlert" = "Cuir seoladh proxy ar fáil";
-"accountPage.noProxyExplanationLabel" = "Ní fhaigheann do ghléas fógraí nuair a bhíonn an proxy diúltaithe";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Seoladh Proxy";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Mura ndearnadh do chuntas bacadh suas nó a chur le feiste eile, chaillfear do chuntas agus ainm cláraithe go neamhchinneach.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Déan teagmháil liom ar Jami!";
-"accountPage.contactMeOnJamiContant" = "Déan teagmháil liom ag baint úsáide as \"%s\" ar an ardán cumarsáide dáileadh Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Cluiche Pasfhocal";
 "accountPage.usernamePlaceholder" = "Cuir isteach ainm úsáideora is mian leat";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Cláir";
 "accountPage.usernameRegisterAction" = "Clár";
-"accountPage.usernameRegistrationFailed" = "Fág freagra ar 'An t-ainm atá ar an gcluiche'";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Cunntas criptithe";
 "accountPage.changePassword" = "Pasfhocal a athrú";
-"accountPage.oldPasswordPlaceholder" = "Cuir isteach an t-ardphasfhocal";
+"accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "Cluiche Pasfhocal nua";
 "accountPage.newPasswordConfirmPlaceholder" = "Déan pasfhocal nua a dhearbhú";
 "accountPage.changePasswordError" = "Pasfhocal mícheart";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "An t-ordú seo";
 "accountPage.otherDevices" = "Deiseanna eile a bhaineann le feistí";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Bootstrap";
+"accountPage.dhtConfiguration" = "OpenDHT configuration";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "Seirbhísí";
 "account.port" = "Port";
 "account.proxyServer" = "Cláir";
@@ -423,35 +425,35 @@
 "account.needMigration" = "Ní mór an cuntas a aistriú";
 "account.me" = "Mé féin";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "Ní thiocfar teagmhálacha";
 
-//Link New Device
-"linkDevice.title" = "Déan nasc a dhéanamh ar ghléas nua";
-"linkDevice.passwordError" = "Ní fhosclaíonn an pasfhocal a chuir tú isteach an cuntas seo";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "Chun an próiseas a chríochnú, ní mór duit Jami a oscailt ar an gléas nua agus an rogha a roghnú \"Connect this device to an account\". Tá do pin bailí ar feadh 10 nóiméad";
+// Link New Device
+"linkDevice.title" = "Déan nasc le feiste nua";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Feidhmiú";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "Tosaigh glao fuaime";
-"contactPage.startVideoCall" = "Tosaigh glao físe";
-"contactPage.sendMessage" = "Teachtaireacht a sheoladh";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "Cluiche A Shábháil";
-"contactPage.removeConversation" = "Crios an comhrá";
+"contactPage.leaveConversation" = "Leave conversation";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "Ag tús a chur le...";
 "dataTransfer.readableStatusError" = "Meas";
 "dataTransfer.readableStatusAwaiting" = "Ag fanacht...";
 "dataTransfer.readableStatusOngoing" = "Trághadh";
 "dataTransfer.readableStatusCanceled" = "Cealaithe";
-"dataTransfer.sendingFailed" = "Ní chuir sé ar aghaidh";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Críochnaithe";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "Cailleadh glao";
 "notifications.newFile" = "Fail nua";
 "notifications.locationSharingStarted" = "Thosaigh comharadh suíomh a thagann isteach";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Cuir isteach";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Cruthaíodh swarm";
 "generatedMessage.invitationReceived" = "cuireadh a thabhairt isteach";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Comparáid suíomh beo";
 "generatedMessage.contactLeftConversation" = "ar chlé";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "Suíomh-bhreathnú";
 "generalSettings.videoAcceleration" = "Céadú le héifeachtúlacht físe";
 "generalSettings.fileTransfer" = "Cuairteoirí";
-"generalSettings.locationSharing" = "Comparáid áit";
+"generalSettings.locationSharing" = "Comparáid suíomh";
 "generalSettings.automaticAcceptIncomingFiles" = "Freastalaí a fháil ar fáil go huathoibríoch";
 "generalSettings.acceptTransferLimit" = "Freagrach teorainn aistriú";
-"generalSettings.acceptTransferLimitDescription" = "(i MB, 0 = gan teorainn)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Coinneáil an tréimhse a bhaineann le comhroinnt áiteanna";
 "generalSettings.locationSharingDuration" = "Cinntíocht na n-airgead";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "Diagnóstaí";
 "logView.description" = "Cinntíocht leabhar diagnóis oscailte";
-"logView.startLogging" = "Tosaíocht a Thosaigh";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Níor éirigh leis an faíl a shábháil";
-"logView.shareError" = "Níor fhéidir comhad a roinnt";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Imirce cuntas";
 "migrateAccount.migrateButton" = "Cunntas Imirce";
-"migrateAccount.explanation" = "Ní mór an cuntas seo a aistriú";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "Chun dul ar aghaidh leis an imirce, ní mór duit pasfhocal a chur isteach a úsáideadh le haghaidh an cuntas seo";
-"migrateAccount.error" = "Ní raibh tú in ann do chuntas a aistriú. Is féidir leat iarracht a dhéanamh arís nó do chuntas a scriosadh.";
-"migrateAccount.migrating" = "Migráil...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Imirceáil chun cuntas eile";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "Freagra";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

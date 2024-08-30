@@ -63,18 +63,18 @@
 "scan.badQrCode" = "รหัส QR ที่ไม่ดี";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "ค้นหาการติดต่อ...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "สร้างกลุ่ม";
 "swarmcreation.addADescription" = "เพิ่มคําอธิบาย";
 // Swarm
 "swarm.ignoreSwarm" = "ใส่ใจกลุ่ม";
 "swarm.leaveConversation" = "ปล่อยการพูดคุย";
-"swarm.chooseColor" = "เลือกสี";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "ประเภทของกลุ่ม";
 "swarm.identifier" = "ตัวประจําตัว";
 "swarm.about" = "เกี่ยวกับ";
 "swarm.members" = "สมาชิก";
-"swarm.addDescription" = "เพิ่มการอธิบาย";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "กลุ่มส่วนตัว";
 "swarm.adminInvitesOnly" = "ผู้บริหารเชิญเท่านั้น";
 "swarm.invitesOnly" = "กลุ่มส่วนตัว";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "คุณแน่ใจนะว่าอยากออกจากกลุ่มนี้?";
 "swarm.Leave" = "ออกไป";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "ชื่อของสวาร์ม";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ไม่มีผลลัพธ์";
 "smartlist.noConversation" = "ไม่มีการพูดคุย";
-"smartlist.searchBarPlaceholder" = "ใส่ชื่อ...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "ค้นหา";
 "smartlist.noNetworkConnectivity" = "ไม่มีการเชื่อมต่อเครือข่าย";
 "smartlist.cellularAccess" = "ตรวจสอบให้แน่ใจว่าให้สิทธิ์การเข้าถึงมือถือในการตั้งค่าของคุณ";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "เพิ่มในรายชื่อติดต่อไหม";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "ไม่มีการเชิญ";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "จามิเป็นเว็บสื่อสารฟรีและทั่วไปที่รักษาความเป็นส่วนตัวและเสรีภาพของผู้ใช้";
 "welcome.haveAccount" = "ฉันมีบัญชีแล้ว";
 "welcome.linkDevice" = "การนําเข้าจากอุปกรณ์อื่น";
-"welcome.linkBackup" = "นําเข้าจากสํารองอาร์คไพ่";
+"welcome.linkBackup" = "นำเข้าจากข้อมูลสำรองที่เก็บถาวร";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "ข้าม";
 "createProfile.profileCreated" = "ต่อไป";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "โปรไฟล์ของคุณจะถูกแบ่งปันกับผู้ติดต่อของคุณ คุณสามารถเปลี่ยนมันได้ในเวลาใดก็ตาม";
 "createProfile.createYourAvatar" = "สร้างอวตาร์ของคุณ";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "เข้าร่วมกับจามิ";
 "createAccount.lookingForUsernameAvailability" = "กําลังมองหาความสามารถ...";
 "createAccount.invalidUsername" = "ชื่อผู้ใช้ที่ไม่ถูกต้อง";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "ความผิดพลาดในเครือข่าย";
 "createAccount.UsernameNotRegisteredMessage" = "การสร้างบัญชี แต่ชื่อผู้ใช้ไม่ได้ลงทะเบียน";
 "createAccount.timeoutTitle" = "การสร้างบัญชี";
-"createAccount.timeoutMessage" = "การลงทะเบียนชื่อผู้ใช้งาน กําลังดําเนินการ มันอาจใช้เวลาไม่กี่นาที";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "ปรับปรุงบัญชี SIP ที่มีอยู่";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "คุณสามารถเลือกชื่อผู้ใช้ เพื่อช่วยให้คนอื่นได้หาและติดต่อกับคุณได้ง่ายขึ้นใน Jami";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "เข้ารหัสบัญชีด้วยรหัสผ่าน";
 "createAccount.encryptExplanation" = "การสร้างบัญชี Jami และเก็บรักษาในพื้นที่ได้เพียงบนอุปกรณ์นี้เท่านั้น เป็นอาร์คไบที่มีกุญแจบัญชีของคุณ การเข้าถึงอาร์คไบนี้สามารถถูกคุ้มครองด้วยรหัสผ่านได้";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "การเชื่อมโยงบัญชี";
 "linkToAccount.linkButtonTitle" = "ลิงค์";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "เชื่อมโยงอุปกรณ์";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "ปักหมุด";
 "linkToAccount.pinLabel" = "ป้อน PIN";
 "linkToAccount.scanQRCode" = "สแกนคิวอาร์โค้ด";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "การนําเข้า";
 "importFromArchive.selectArchiveButton" = "เลือกไฟล์อาร์คไฮเวอร์";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "สมัครสมาชิก";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "กรอก URL ของบริการบริหารบัญชี Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "กรอกข้อมูล JAMS";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "ไม่พบบัญชี";
-"alerts.accountCannotBeFoundMessage" = "ไม่พบบัญชีในเครือข่ายของจามิ ให้แน่ใจว่ามันถูกส่งออกมาจากจามิจากอุปกรณ์ที่มีอยู่ และให้ข้อมูลที่ได้รับถูกต้อง";
-"alerts.accountAddedTitle" = "เพิ่มบัญชีแล้ว";
-"alerts.accountNoNetworkTitle" = "เชื่อมต่อเครือข่ายไม่ได้";
-"alerts.accountNoNetworkMessage" = "ไม่สามารถเพิ่มบัญชีได้ เพราะจามิไม่สามารถเชื่อมต่อเครือข่ายที่จําหน่ายได้ เช็คความเชื่อมต่อของอุปกรณ์ของคุณ";
-"alerts.accountDefaultErrorTitle" = "ข้อผิดพลาดที่ไม่รู้จัก";
-"alerts.accountDefaultErrorMessage" = "ไม่สามารถสร้างบัญชีได้";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "ถ่ายภาพ";
 "alerts.profileUploadPhoto" = "อัพโหลดรูปภาพ";
 "alerts.accountLinkedTitle" = "เชื่อมโยงบัญชี";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "การอนุญาตสื่อไม่ถูกให้";
 "alerts.noLibraryPermissionsTitle" = "การเข้าถึงห้องสมุดรูปภาพไม่ได้รับอนุญาต";
 "alerts.noLocationPermissionsTitle" = "การเข้าถึงสถานที่ที่ไม่ได้มอบ";
-"alerts.errorWrongCredentials" = "ไม่สามารถเชื่อมต่อกับผู้จัดการบัญชีที่ให้บริการ ได้โปรดตรวจสอบข้อมูลความเป็นเจ้าของของคุณ";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "ถ่ายวีดีโอข้อความ";
 "alerts.recordAudioMessage" = "ถ่ายข้อความเสียง";
 "alerts.uploadFile" = "ส่งไฟล์";
 "alerts.uploadPhoto" = "เปิดแกลเลอรี่";
-"alerts.locationServiceIsDisabled" = "เปิด \"บริการสถานที่\" ให้ \"Jami\" รู้ว่าสถานที่ของคุณ";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "แบ่งตําแหน่งของฉัน";
 "alerts.alreadylocationSharing" = "แบ่งปันสถานที่กับผู้ใช้งานนี้";
 "alerts.locationSharingDurationTitle" = "การแบ่งที่ตั้งควรใช้เวลานานแค่ไหน";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© ผู้ร่วมงาน OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "เรียนรู้เพิ่มเติม";
 
-//Actions
+// Actions
 "actions.deleteAction" = "ลบ";
 "actions.clearAction" = "ชัดเจน";
 "actions.backAction" = "กลับ";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "ไปยัง การตั้งค่า";
 "actions.stopLocationSharing" = "หยุดแบ่งปัน";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "อยากคุยกับเธอ";
 "calls.ringing" = "เสียงร้อง";
 "calls.connecting" = "การเชื่อมต่อ...";
 "calls.callFinished" = "โทรศัพท์เสร็จ";
 "calls.currentCallWith" = "โทรมา ";
-"calls.haghUp" = "หยุด";
-"calls.maximize" = "เพิ่มสูงสุด";
+"calls.maximize" = "ทำให้สูงสุด";
 "calls.minimize" = "ลดน้อยลง";
 "calls.setModerator" = "กําหนดผู้ปรับ";
-"calls.removeModerator" = "ปรับปรุงที่ไม่ตั้ง";
+"calls.removeModerator" = "ปฏิทินไม่ตั้ง";
 "calls.muteAudio" = "เสียงเงียบ";
-"calls.unmuteAudio" = "เสียงไม่หยุด";
+"calls.unmuteAudio" = "เสียงไม่ปิด";
 "calls.lowerHand" = "มือต่ํา";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "อุปกรณ์";
 "accountPage.settingsHeader" = "การตั้งค่า";
 "accountPage.notificationsHeader" = "การแจ้งเตือน";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "ผู้ติดต่อที่ถูกบล็อก";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "ให้ที่อยู่ตัวแทน";
-"accountPage.noProxyExplanationLabel" = "อุปกรณ์ของคุณจะไม่รับแจ้งเมื่อ proxy ถูกปิด";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "ที่อยู่ตัวแทน";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "ถ้าบัญชีของคุณไม่ได้ถูกสํารองหรือเพิ่มขึ้นในเครื่องอื่น บัญชีและชื่อที่ลงทะเบียนของคุณจะหายไปอย่างไม่ถูกลั้น";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ติดต่อฉันใน Jami!";
-"accountPage.contactMeOnJamiContant" = "ติดต่อฉันโดยใช้ \"%s\" บนโครงการสื่อสารกระจายของ Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "กรอกรหัสผ่านบัญชี";
 "accountPage.usernamePlaceholder" = "กรอกชื่อผู้ใช้ที่ต้องการ";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "การลงทะเบียน";
 "accountPage.usernameRegisterAction" = "ลงทะเบียน";
-"accountPage.usernameRegistrationFailed" = "การลงทะเบียนล้มเหลว ขอเช็คปัสริด";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "บัญชีรหัส";
 "accountPage.changePassword" = "เปลี่ยนปัสผ่าน";
-"accountPage.oldPasswordPlaceholder" = "กรอกรหัสผ่านเก่า";
+"accountPage.currentPasswordPlaceholder" = "กรอกปัสผ่านปัจจุบัน";
 "accountPage.newPasswordPlaceholder" = "กรอกรหัสผ่านใหม่";
 "accountPage.newPasswordConfirmPlaceholder" = "ยืนยันคําว่าใหม่";
 "accountPage.changePasswordError" = "ปรสওয়ার্ডผิด";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "เครื่องนี้";
 "accountPage.otherDevices" = "อุปกรณ์อื่นๆ ที่เชื่อมต่อกัน";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "แถวกระดาน";
+"accountPage.dhtConfiguration" = "การตั้งค่า OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "เซอร์เวอร์";
 "account.port" = "พอร์ต";
 "account.proxyServer" = "พอร์กส";
@@ -423,35 +425,35 @@
 "account.needMigration" = "ต้องย้ายบัญชี";
 "account.me" = "ฉัน";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "ไม่มีผู้ติดต่อที่ถูกบล็อก";
 
-//Link New Device
+// Link New Device
 "linkDevice.title" = "เชื่อมโยงอุปกรณ์ใหม่";
-"linkDevice.passwordError" = "รหัสผ่านที่คุณป้อนไม่ได้ปลดล็อคบัญชีนี้";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "เพื่อทําการสําเร็จ คุณต้องเปิด Jami บนอุปกรณ์ใหม่ และเลือกทางเลือก \"เชื่อมอุปกรณ์นี้กับบัญชี\" ปินของคุณมีสิทธิในการใช้งาน 10 นาที";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "กำลังยืนยัน";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "เริ่มการโทรเสียง";
 "contactPage.startVideoCall" = "เริ่มการโทรวีดีโอ";
-"contactPage.sendMessage" = "ส่ง ข้อความ";
+"contactPage.send" = "ส่ง";
 "contactPage.clearConversation" = "ส่งจอ";
-"contactPage.removeConversation" = "ถอด การ สัมภาษณ์";
+"contactPage.leaveConversation" = "ปล่อยการพูดคุย";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "การเริ่มต้น...";
 "dataTransfer.readableStatusError" = "ข้อผิดพลาด";
 "dataTransfer.readableStatusAwaiting" = "รออยู่";
 "dataTransfer.readableStatusOngoing" = "การโอน";
 "dataTransfer.readableStatusCanceled" = "ยกเลิกแล้ว";
-"dataTransfer.sendingFailed" = "ไม่ส่ง";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "เสร็จ";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "โทรศัพท์ที่พลาด";
 "notifications.newFile" = "ไฟล์ใหม่";
 "notifications.locationSharingStarted" = "การแบ่งปันสถานที่ที่เข้ามาเริ่ม";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "ส่ง";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "สร้างสระ";
 "generatedMessage.invitationReceived" = "ได้รับเชิญร่วม";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "การแบ่งปันสถานที่สด";
 "generatedMessage.contactLeftConversation" = "ซ้าย";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "การตั้งค่าวีดีโอ";
 "generalSettings.videoAcceleration" = "เปิดให้การเร่งวิดีโอ";
 "generalSettings.fileTransfer" = "การถ่ายโอนไฟล์";
-"generalSettings.locationSharing" = "แบ่งสถานที่";
+"generalSettings.locationSharing" = "การแบ่งปันสถานที่";
 "generalSettings.automaticAcceptIncomingFiles" = "รับไฟล์ที่เข้ามาโดยอัตโนมัติ";
 "generalSettings.acceptTransferLimit" = "ยอมรับขีดขั้นต่ําการโอน";
-"generalSettings.acceptTransferLimitDescription" = "(ใน MB, 0 = ไม่จํากัด)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "จํากัดระยะเวลาในการแบ่งที่ตั้ง";
 "generalSettings.locationSharingDuration" = "ระยะเวลาส่วนแบ่งตําแหน่ง";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "การวินิจฉัย";
 "logView.description" = "เปิดการตั้งค่าบันทึกการวินิจฉัย";
-"logView.startLogging" = "เริ่มการบันทึก";
-"logView.stopLogging" = "หยุดการเก็บไม้";
-"logView.saveError" = "ไม่สามารถบันทึกไฟล์ได้";
-"logView.shareError" = "ไม่สามารถแบ่งไฟล์ได้";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "หยุดการบันทึก";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "การย้ายบัญชี";
 "migrateAccount.migrateButton" = "บัญชีการย้าย";
-"migrateAccount.explanation" = "บัญชีนี้ต้องถูกย้าย";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "เพื่อดําเนินการย้ายไปยังประเทศอื่นๆ คุณต้องใส่รหัสผ่านที่ใช้สําหรับบัญชีนี้";
-"migrateAccount.error" = "ไม่สามารถย้ายบัญชีของคุณได้ คุณสามารถพยายามอีกครั้งหรือลบบัญชีของคุณ";
-"migrateAccount.migrating" = "การย้ายไป...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "ขยับบัญชีใหม่";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "ข้อเสนอแนะ";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

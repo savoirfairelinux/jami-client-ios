@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Зур QR код";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Байлцаах хайл...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Хүрэлсүхнийг бий болго";
 "swarmcreation.addADescription" = "Тодруул";
 // Swarm
 "swarm.ignoreSwarm" = "Хүрэнтгийрүүлэг";
 "swarm.leaveConversation" = "Хэлэлцүүлгийг орхи";
-"swarm.chooseColor" = "Цүн сонго";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Хүлээн төрөл";
 "swarm.identifier" = "Төлөөлөгч";
 "swarm.about" = "Үүнээс";
 "swarm.members" = "Улсчдын гишүүд";
-"swarm.addDescription" = "Тээрэмлэг";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Хувь хүний хуур";
 "swarm.adminInvitesOnly" = "Зөвхөн захирал урьж байна";
 "swarm.invitesOnly" = "Хувь хүний хуур";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "Та энэ цувралсаа гарахыг хүсч байгаа гэдэгт итгэлтэй байна уу?";
 "swarm.Leave" = "Хойч яв";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Свармгийн нэр";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Үр дүнгүй";
 "smartlist.noConversation" = "Хэлэлцүүлэггүй";
-"smartlist.searchBarPlaceholder" = "Нэрээ оруул...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Танд хайх";
 "smartlist.noNetworkConnectivity" = "Сүлжээний холболтгүй";
 "smartlist.cellularAccess" = "Таны тохируулгад соён утсаар хангах боломжтой байх";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "Та нар ч гэсэн холбоотондоо нэмж байна уу?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Нэр дэвшүүлэггүй";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -165,7 +165,7 @@
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "Улаанбаатар";
 "createProfile.profileCreated" = "Дараа нь";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "Таны профилийг таны холбоотонтай хуваалцах болно. Та үүнийг хэзээ ч өөрчилж болно.";
 "createProfile.createYourAvatar" = "Таны аватар бүтээх";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Жэмид нэгдээрэй";
 "createAccount.lookingForUsernameAvailability" = "...хүхлэг байдлыг хайж байна...";
 "createAccount.invalidUsername" = "хэрэглэгчийн нэр хүчингүй";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Хүлжээний алдаа";
 "createAccount.UsernameNotRegisteredMessage" = "Хилсэл бий болсон боловч хэрэглэгчдийн нэр бүртгэгдээгүй";
 "createAccount.timeoutTitle" = "Хэтгэлэг үүсгэн байгуулагдсан";
-"createAccount.timeoutMessage" = "Хэрэглэгчийн нэр бүртгэл явагдаж байна.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Одоогоор байгаа SIP дансыг тохируулна";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Та бусад хүмүүст Джами дээр таныг илүү хялбар олж, хүрэхэд туслах хэрэглэгч нэрийг сонгож болно.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Хууль нууц үгтэй дансыг нууцлах";
 "createAccount.encryptExplanation" = "Jami-ийн дансыг зөвхөн энэ төхөөрөмж дээр архивын хэлбэрээр хадгалж, орон нутгаар бий болгодог.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Нягтлан бодох бүртгэлийн холбоо";
 "linkToAccount.linkButtonTitle" = "Зэвсэглэл";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Зэвсэглэлтэй холболт";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "ПИН код";
 "linkToAccount.pinLabel" = "PIN-ийг оруул";
 "linkToAccount.scanQRCode" = "QR код сканируулна";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Импортын";
 "importFromArchive.selectArchiveButton" = "Архив файлыг сонго";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Та бүртгэнэ";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Jami Акаунтын удирдлагын сервер (JAMS) URL-ийг оруул";
 "linkToAccountManager.enterCredentials" = "JAMS-ийн итгэлийг оруулна";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Хэтгэлэг олж чадахгүй";
-"alerts.accountCannotBeFoundMessage" = "Жэми-ийн сүлжээний хуудас олж чадаагүй.";
-"alerts.accountAddedTitle" = "Санхүүжилт нэмнэ";
-"alerts.accountNoNetworkTitle" = "Түлжээний холболтгүй";
-"alerts.accountNoNetworkMessage" = "Жэми нь хуваарилсан сүлжээний холболтгүй учраас бүртгэл нэмж чадахгүй.";
-"alerts.accountDefaultErrorTitle" = "Мэдээгүй алдаа";
-"alerts.accountDefaultErrorMessage" = "Хэтгэлгийг бий болгох боломжгүй.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Сүрэл зураг хий";
 "alerts.profileUploadPhoto" = "Зураг борлуула";
 "alerts.accountLinkedTitle" = "Холбоосон данс";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "Мэдээлэл мэдээллийн зөвшөөрөл олгоогүй";
 "alerts.noLibraryPermissionsTitle" = "Фото номын сан руу орох эрх олгоогүй";
 "alerts.noLocationPermissionsTitle" = "Байгалийн газарт хандах эрх олгоогүй";
-"alerts.errorWrongCredentials" = "Танай дансны захирлаар холбогдож чадахгүй байна.";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Видео мэдээ бичнэ";
 "alerts.recordAudioMessage" = "Зөгнөлийн мэдээ бичнэ";
 "alerts.uploadFile" = "Файл илгээх";
 "alerts.uploadPhoto" = "Нээлттэй галерея";
-"alerts.locationServiceIsDisabled" = "\"Жами\" нь таны байр суурийг тодорхойлохын тулд \"Төвийн үйлчилгээ\" -ийг идэвхжүүлээрэй.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Миний байр суурийг хуваалцаарай";
 "alerts.alreadylocationSharing" = "Энэ хэрэглэгчийн байр суурийг хэдийнээ хуваалцаж байна";
 "alerts.locationSharingDurationTitle" = "-Хэрэв хэр удаан байршуулах вэ?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© OpenStreetMap-ийн хувь нэмэр оруулах хүмүүс";
 "alerts.openStreetMapCopyrightMoreInfo" = "Дэлгэрэнгүй мэдээрэй";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Хасах";
 "actions.clearAction" = "Ухаалаг";
 "actions.backAction" = "Хурд";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Байгууллага руу яв";
 "actions.stopLocationSharing" = "Хөдөлмөрийг хуваалцахыг зогсоо";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "Татай ярилцахыг хүсч байна";
 "calls.ringing" = "-Хэрэгтээ...";
 "calls.connecting" = "Байгууллага...";
 "calls.callFinished" = "Зудлага дууссан";
 "calls.currentCallWith" = "Тэнд нь дуудлаа";
-"calls.haghUp" = "-Хэлээч";
-"calls.maximize" = "хамгийн их хэмжээний";
-"calls.minimize" = "багасгах";
-"calls.setModerator" = "зохицуулагч байгуулж";
-"calls.removeModerator" = "нөөцгүй модератор";
-"calls.muteAudio" = "дуугүй дуу";
-"calls.unmuteAudio" = "дуу чимээгүй";
-"calls.lowerHand" = "доод гар";
+"calls.maximize" = "Хамгийн их хэмжээний";
+"calls.minimize" = "Хөгжлийн багасгах";
+"calls.setModerator" = "Модератор байгуулж";
+"calls.removeModerator" = "Улаанбаатар";
+"calls.muteAudio" = "Улаан дуу";
+"calls.unmuteAudio" = "Утасны үнэгүй";
+"calls.lowerHand" = "Доод гар";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Утасны хэрэгсэл";
 "accountPage.settingsHeader" = "Байгууллага";
 "accountPage.notificationsHeader" = "Хэвлэлт";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Хаалттай холбоо";
 "accountPage.unblockContact" = "БЛОКГАЛ";
 "accountPage.proxyAddressAlert" = "Прокси хаягийг өгөө";
-"accountPage.noProxyExplanationLabel" = "Прокси-ийг идэвхгүй болгосон үед гар утасныхаа мэдэгдэл хүлээн авахгүй";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Прокси хаяг";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Хэрэв таны дансыг санхүүжүүлээгүй бол эсвэл өөр төхөөрөмж дээр нэмж өгсөн бол таны данс болон бүртгэлтэй нэр нь эргэлтгүйгээр алдагдана.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Жэми дээр намайг холбогдох!";
-"accountPage.contactMeOnJamiContant" = "Jami-ийн хуваарилалттай харилцааны платформын \"%s\" хэрэгслээр намайг хангаарай: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Хэтгэлийн нууц үг оруулах";
 "accountPage.usernamePlaceholder" = "Та хүссэн хэрэглэгчдийн нэрийг оруул";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Төгсгөл";
 "accountPage.usernameRegisterAction" = "Тэтгэврийн";
-"accountPage.usernameRegistrationFailed" = "Тэнд бүртгэл алдаатай. Хууль нууц товчлуулъя.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Хилдчилсэн данс";
 "accountPage.changePassword" = "Хууль нууц товг өөрчлөх";
-"accountPage.oldPasswordPlaceholder" = "Эртний нууц үг оруулах";
+"accountPage.currentPasswordPlaceholder" = "Одоогийн нууц үг";
 "accountPage.newPasswordPlaceholder" = "Шинэ нууц үг оруулах";
 "accountPage.newPasswordConfirmPlaceholder" = "Шинэ нууц үг батлах";
 "accountPage.changePasswordError" = "Хууль үг буруу";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "Энэ төхөөрөмж";
 "accountPage.otherDevices" = "Бусад холбогдсон төхөөрөмжүүд";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Багасан шугам";
+"accountPage.dhtConfiguration" = "OpenDHT конфигурацыг";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "Server";
 "account.port" = "Газар";
 "account.proxyServer" = "Төлөөлөгч";
@@ -423,35 +425,35 @@
 "account.needMigration" = "дансыг нүүлгэн шилжүүлэх шаардлагатай";
 "account.me" = "Би";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "Харилцаагүй холбоо";
 
-//Link New Device
+// Link New Device
 "linkDevice.title" = "Шинэ төхөөрөмжийг холбох";
-"linkDevice.passwordError" = "Та оруулсан нууц үг энэ сэжигээ нээлттэй болгодоггүй";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "Энэ үйл явцыг дуусгахын тулд шинэ төхөөрөмж дээр Jami-г нээж, \"Энэ төхөөрөмжийг дансанд холбоно\" гэсэн сонголт сонгох хэрэгтэй. Таны шил нь 10 минут хүчинтэй байна";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Хяналт шалгах";
 
-//Contact Page
-"contactPage.startAudioCall" = "Аудио утас шуурхай";
+// Contact Page
+"contactPage.startAudioCall" = "Зэвсэгт дуу дуулах";
 "contactPage.startVideoCall" = "Видео утас эхлүүлэх";
-"contactPage.sendMessage" = "Мэдээлэл хүргүүлнэ";
+"contactPage.send" = "Хэвлэл";
 "contactPage.clearConversation" = "Ухаалагч";
-"contactPage.removeConversation" = "Хэлэлцүүлгийг устга";
+"contactPage.leaveConversation" = "Хэлэлцүүлгийг орхи";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "-Хэрэв нэг удаа...";
 "dataTransfer.readableStatusError" = "Хатаг";
 "dataTransfer.readableStatusAwaiting" = "-Хэрэв тийм юм бол...";
 "dataTransfer.readableStatusOngoing" = "Хөдөлмөрийн шилжүүлэн шилжүүлэн суулгана";
 "dataTransfer.readableStatusCanceled" = "Цуцаллаа";
-"dataTransfer.sendingFailed" = "Хэвлэлгээ хүргэх боломжгүй";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Тодорхой";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "Ухаалагдсан дуудлага";
 "notifications.newFile" = "Шинэ файл";
 "notifications.locationSharingStarted" = "Орон нутгийн хуваалц эхэллээ";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Хэвлэл";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Хүрэлсүх үүссэн";
 "generatedMessage.invitationReceived" = "оролцохоор урьж байсан";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Амьдрал байршуулын хуваалц";
 "generatedMessage.contactLeftConversation" = "зүүн";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "Видеогийн тохируулалт";
 "generalSettings.videoAcceleration" = "Видеоны хурдацлалтыг идэвхжүүлнэ";
 "generalSettings.fileTransfer" = "Файлын шилжүүлэн суулга";
 "generalSettings.locationSharing" = "Байгууллагын хуваалц";
 "generalSettings.automaticAcceptIncomingFiles" = "Авториар орж ирж буй файлуудыг хүлээн ав";
 "generalSettings.acceptTransferLimit" = "Хөдөлмөрийн шилжилтийн хязгаар хүлээн зөвшөөрө";
-"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = хязгааргүй)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Байгууллагын хуваалцлын хугацааг хязгаарла";
 "generalSettings.locationSharingDuration" = "Тодруулгын хувьцааны хугацаа";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "Хэвлэл";
 "logView.description" = "Диагностикийн тэмдэглэлийн нээлттэй тохируулалт";
-"logView.startLogging" = "Хүрэлтийн ажлыг эхлүүлнэ";
-"logView.stopLogging" = "Хөдөө аж ахуй зогсоо";
-"logView.saveError" = "Файлыг хадгалах боломжгүй";
-"logView.shareError" = "Файлыг хуваалцах боломжгүй";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Хөдөөг зогсоо";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Хэтгэлийн шилжилт";
 "migrateAccount.migrateButton" = "Хөрөнгө оруулалтын сан";
-"migrateAccount.explanation" = "Энэ дансыг нүүлгэн шилжүүлэн суулгах хэрэгтэй";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "Хөдөлгөөг үргэлжлүүлэхэд энэ дансны нууц үгсийг оруулж байх хэрэгтэй";
-"migrateAccount.error" = "Та өөрийн дансыг дахин туршиж, эсвэл устгах боломжтой.";
-"migrateAccount.migrating" = "Хөгжиж байна...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Өөр нэг дансыг нүүлгэн шилжүүлнэ";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "Хэтгэлэг";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

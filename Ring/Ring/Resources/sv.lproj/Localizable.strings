@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Felaktig QR-kod";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "-Sök efter kontakt...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Skapa en svärm";
 "swarmcreation.addADescription" = "Lägg till en beskrivning";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorera swarmen";
-"swarm.leaveConversation" = "Lämna samtalet.";
-"swarm.chooseColor" = "Välj en färg";
+"swarm.leaveConversation" = "Lämna samtalet";
+"swarm.chooseColor" = "Färg";
 "swarm.typeOfSwarm" = "Typ av svärm";
 "swarm.identifier" = "identifierare";
 "swarm.about" = "Om";
 "swarm.members" = "Medlemmar";
-"swarm.addDescription" = "Lägga till beskrivning";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Privat \"swarm\"";
 "swarm.adminInvitesOnly" = "Admin inbjuder bara";
 "swarm.invitesOnly" = "Privat \"swarm\"";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "Är du säker på att du vill lämna den här svärmen?";
 "swarm.Leave" = "- Gå.";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Gruppsamtalets namn";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Inget resultat";
 "smartlist.noConversation" = "Inga konversationer";
-"smartlist.searchBarPlaceholder" = "Ange namn...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Sök efter";
 "smartlist.noNetworkConnectivity" = "Ingen nätverksanslutning";
 "smartlist.cellularAccess" = "Tillse att mobilnätsåtkomst tillåts i dina inställningar";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "Lägga till i kontakter?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Inga inbjudningar";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "Jami är en obunden och universell kommunikationsplattform, som bevarar användarens integritet och frihet.";
 "welcome.haveAccount" = "Jag har redan ett konto.";
 "welcome.linkDevice" = "Import från en annan enhet";
-"welcome.linkBackup" = "Import från en säkerhetskopiering";
+"welcome.linkBackup" = "Importera från arkiverad säkerhetskopia";
 "welcome.createAccount" = "Anslut";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "Hopa över";
 "createProfile.profileCreated" = "Nästa";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "Din profil kommer att delas med dina kontakter. Du kan ändra den när du vill.";
 "createProfile.createYourAvatar" = "Skapa din avatar";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Gå med Jami.";
 "createAccount.lookingForUsernameAvailability" = "söker tillgänglighet...";
 "createAccount.invalidUsername" = "Ogiltigt användarnamn";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Nätverksfel";
 "createAccount.UsernameNotRegisteredMessage" = "Konto har skapats men användarnamn har inte registrerats";
 "createAccount.timeoutTitle" = "Konto skapat";
-"createAccount.timeoutMessage" = "Registrering av användarnamn pågår... det kan ta en stund.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Konfigurera ett befintligt SIP-konto";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Du kan välja ett användarnamn för att hjälpa andra att lättare hitta och nå dig på Jami.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Kryptera kontot med lösenord";
 "createAccount.encryptExplanation" = "Ett Jami-konto skapas och lagras lokalt endast på den här enheten, som ett arkiv som innehåller dina kontonäcklar. Tillgång till detta arkiv kan alternativt skyddas med ett lösenord.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontokoppling";
 "linkToAccount.linkButtonTitle" = "Länka";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Koppla enhet";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN-kod";
 "linkToAccount.pinLabel" = "Ange PIN-kod";
 "linkToAccount.scanQRCode" = "Skanna QR-kod";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Importera";
 "importFromArchive.selectArchiveButton" = "Välj arkivfil";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Logga in";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Ange Jami Account Management Server (JAMS) URL";
 "linkToAccountManager.enterCredentials" = "Ange JAMS-uppgifter";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Kan inte hitta kontot";
-"alerts.accountCannotBeFoundMessage" = "Kontot kunde inte hittas i Jami-nätverket. Tillse att det har exporterats från en befintlig enhet och att angivna kontouppgifter är korrekt.";
-"alerts.accountAddedTitle" = "Konto tillagt";
-"alerts.accountNoNetworkTitle" = "Kan inte ansluta till nätverket";
-"alerts.accountNoNetworkMessage" = "Kunde inte lägga till kontot, eftersom Jami inte kunde ansluta till det distribuerade nätverket. Kontrollera enhetens anslutning.";
-"alerts.accountDefaultErrorTitle" = "Okänt fel";
-"alerts.accountDefaultErrorMessage" = "Kontot kunde inte skapas.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Ta ett foto";
 "alerts.profileUploadPhoto" = "Ladda upp foto";
 "alerts.accountLinkedTitle" = "Kopplar konto";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "Mediabegäran inte tillåten";
 "alerts.noLibraryPermissionsTitle" = "Begäran om access till bildmapp inte godkänd";
 "alerts.noLocationPermissionsTitle" = "Begäran om access till plats inte godkänd";
-"alerts.errorWrongCredentials" = "Kan inte ansluta till kontoinställningar. Vänligen kontrollera dina uppgifter. ";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Spela in ett videomeddelande";
 "alerts.recordAudioMessage" = "Spela in ett ljudmeddelande";
 "alerts.uploadFile" = "Skicka fil";
 "alerts.uploadPhoto" = "Öppet galleri";
-"alerts.locationServiceIsDisabled" = "Slå på \"Lokala tjänster\" för att tillåta Jami hitta din plats. ";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Dela min plats";
 "alerts.alreadylocationSharing" = "Du delar redan platsinformation med denna användare";
 "alerts.locationSharingDurationTitle" = "Hur länge ska platsdata delas?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© OpenStreetMap bidragsgivare ";
 "alerts.openStreetMapCopyrightMoreInfo" = "Läs mer";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Ta bort";
 "actions.clearAction" = "Ta bort";
 "actions.backAction" = "Tillbaka";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Gå till Inställningar";
 "actions.stopLocationSharing" = "Sluta dela";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "vill prata med dig";
 "calls.ringing" = "Ringer...";
 "calls.connecting" = "Ansluter...";
 "calls.callFinished" = "Samtalet avslutat";
 "calls.currentCallWith" = "Ring upp med";
-"calls.haghUp" = "lägg på";
-"calls.maximize" = "maximera";
-"calls.minimize" = "minimera";
-"calls.setModerator" = "ange moderator";
-"calls.removeModerator" = "ta bort ange moderator";
-"calls.muteAudio" = "tysta ljud";
-"calls.unmuteAudio" = "tillåt ljud";
-"calls.lowerHand" = "ta ned handen";
+"calls.maximize" = "Maximera";
+"calls.minimize" = "Minimera";
+"calls.setModerator" = "Ange moderator. ";
+"calls.removeModerator" = "Moderator inte åsatt. ";
+"calls.muteAudio" = "Pausa ljud";
+"calls.unmuteAudio" = "Sätt på ljud";
+"calls.lowerHand" = "Ta ned handen ";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Enheter";
 "accountPage.settingsHeader" = "Inställningar";
 "accountPage.notificationsHeader" = "Aviseringar";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Blockerade kontakter";
 "accountPage.unblockContact" = "AVBLOCKERA";
 "accountPage.proxyAddressAlert" = "Ange proxyadress";
-"accountPage.noProxyExplanationLabel" = "Din enhet tar inte emot aviseringar när proxy är inaktiverat";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Proxyadress";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Om ditt konto inte blivit säkerhetskopierat eller lagt till på annan enhet kommer ditt konto och ditt registrerade namn att oåterkalleligen vara förlorat. ";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Kontakta mig på Jami!";
-"accountPage.contactMeOnJamiContant" = "Kontakta genom %s på Jami kommunikationsplattformen: https://jami.net ";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Ange kontolösenord";
 "accountPage.usernamePlaceholder" = "Ange önskat användanamn";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registrerar";
 "accountPage.usernameRegisterAction" = "Registrera";
-"accountPage.usernameRegistrationFailed" = "Registrering misslyckade. Kontrollera lösenord. ";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Kryptat konto";
 "accountPage.changePassword" = "Byt lösenord";
-"accountPage.oldPasswordPlaceholder" = "Ange gammalt lösenord";
+"accountPage.currentPasswordPlaceholder" = "Ange nuvarande lösenord";
 "accountPage.newPasswordPlaceholder" = "Ange nytt lösenord";
 "accountPage.newPasswordConfirmPlaceholder" = "Bekräfta nytt lösenord";
 "accountPage.changePasswordError" = "Felaktigt lösenord";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "Denna enhet";
 "accountPage.otherDevices" = "Andra länkade enheter";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Bootstrap";
+"accountPage.dhtConfiguration" = "OpenDHT-konfiguration";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
@@ -423,35 +425,35 @@
 "account.needMigration" = "Kontot måste migreras";
 "account.me" = "Jag";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "Inga blockerade kontakter";
 
-//Link New Device
-"linkDevice.title" = "Koppla en ny enhet";
-"linkDevice.passwordError" = "Det angivna lösenordet låser inte upp detta konto";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "För att slutföra åtgärden, måste du nu öppna Jami på den nya enheten och välja alternativet \"Koppla den här enheten till ett konto\". PIN-koden är giltig i 10 minuter.";
+// Link New Device
+"linkDevice.title" = "Koppla ny enhet";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifierar";
 
-//Contact Page
-"contactPage.startAudioCall" = "Starta röstsamtal";
+// Contact Page
+"contactPage.startAudioCall" = "Starta ljudsamtal";
 "contactPage.startVideoCall" = "Starta videosamtal";
-"contactPage.sendMessage" = "Skicka meddelande";
+"contactPage.send" = "Skicka";
 "contactPage.clearConversation" = "Rensa chatten";
-"contactPage.removeConversation" = "Ta bort konversation";
+"contactPage.leaveConversation" = "Lämna samtalet";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "Startar...";
 "dataTransfer.readableStatusError" = "Fel";
 "dataTransfer.readableStatusAwaiting" = "Väntar...";
 "dataTransfer.readableStatusOngoing" = "Överför";
 "dataTransfer.readableStatusCanceled" = "Avbruten";
-"dataTransfer.sendingFailed" = "Misslyckades att skicka";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Slutförd";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "Missat samtal";
 "notifications.newFile" = "Ny fil";
 "notifications.locationSharingStarted" = "Inkommande platsdelning startad";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Skicka";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Svärm skapad ";
 "generatedMessage.invitationReceived" = "blev inbjuden att ansluta sig";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Live platsdelning ";
 "generatedMessage.contactLeftConversation" = "vänster";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "Videonställningar";
 "generalSettings.videoAcceleration" = "Aktivera videoacceleration";
 "generalSettings.fileTransfer" = "Filöverföring";
 "generalSettings.locationSharing" = "Platsdelning";
 "generalSettings.automaticAcceptIncomingFiles" = "Acceptera inkommande filer automatiskt";
 "generalSettings.acceptTransferLimit" = "Ange gräns för överföring";
-"generalSettings.acceptTransferLimitDescription" = "(i MB, 0 = obegränsat)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Begränsa varaktigheten av platsdelning";
 "generalSettings.locationSharingDuration" = "Uppdragsdelstid";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "Diagnostik";
 "logView.description" = "Öppna inställningar för diagnostiklogg";
-"logView.startLogging" = "Starta loggning";
-"logView.stopLogging" = "Sluta skogskörd";
-"logView.saveError" = "Misslyckades med att spara fil";
-"logView.shareError" = "Misslyckades med att dela fil";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Avsluta loggning ";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Kontodelning";
 "migrateAccount.migrateButton" = "Migrera konto";
-"migrateAccount.explanation" = "Detta konto behöver migreras";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "För att fortsätta migrering behöver du ange lösenordet till detta konto\n ";
-"migrateAccount.error" = "82%match\nKunde inte migrera ditt konto. Du kan försöka igen genom att klicka OK, eller radera ditt konto.";
-"migrateAccount.migrating" = "Migrerar...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Migrera ett annat konto";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "Återkoppling";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Codul QR e greșit";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Caută un contact...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Creează grupul";
 "swarmcreation.addADescription" = "Adaugă o descriere";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoră grupul";
 "swarm.leaveConversation" = "Termină conversația";
-"swarm.chooseColor" = "Alege o culoare";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Tipul grupului";
 "swarm.identifier" = "Identificator";
 "swarm.about" = "Despre";
 "swarm.members" = "Membri";
-"swarm.addDescription" = "Adaugă o descriere";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Grup privat";
 "swarm.adminInvitesOnly" = "Doar invitat de administrator";
 "swarm.invitesOnly" = "Grup privat";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "Sigur vrei să părăsești acest grup?";
 "swarm.Leave" = "Părăsește";
 "swarm.newSwarm" = "Grup nou";
-"swarm.namePlaceholder" = "Numele grupului";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "Poți să adaugi sau să inviți membri în orice moment după ce a fost creat grupul";
-"swarm.customizeProfile" = "Personalizează profilul grupului";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Schimbă poza grupului";
 "swarm.customize" = "Personalizează grupul";
 "swarm.selectContacts" = "Alege contacte";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitații primite";
 "smartlist.noResults" = "Niciun rezultat";
 "smartlist.noConversation" = "Nicio conversație";
-"smartlist.searchBarPlaceholder" = "Introdu numele...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Caută";
 "smartlist.noNetworkConnectivity" = "Nu există conectare la rețea";
 "smartlist.cellularAccess" = "Asigură-te că accesul la rețea este permis";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "se sincronizează conversația";
 "smartlist.newMessage" = "Mesaj nou";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Adaugă la contacte";
 "conversation.addToContactsLabel" = "Adaugi la contacte?";
 "conversation.notContactLabel" = "nu e în contactele tale";
@@ -146,7 +146,7 @@
 "conversation.edited" = "modificat";
 "conversation.deletedMessage" = "a șters mesajul";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Nicio invitație";
 "invitations.pending" = "în așteptare";
 "invitations.accepted" = "acceptat";
@@ -161,11 +161,11 @@
 "welcome.text" = "Jami este o platformă de comunicare liberă și universală care păstrează libertățile și intimitatea.";
 "welcome.haveAccount" = "Am deja un cont";
 "welcome.linkDevice" = "Importă din alt aparat";
-"welcome.linkBackup" = "Importă dintr-o copie de rezervă";
+"welcome.linkBackup" = "Importă din copia de rezervă";
 "welcome.createAccount" = "Participă";
 "welcome.connectToManager" = "Conectează-te la Serverul de Administrare a Conturilor Jami";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "Omite";
 "createProfile.profileCreated" = "Înainte";
 "createProfile.title" = "Personalizează-ți profilul";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "Profilul tău va fi distribuit contactelor tale. Poți schimba asta cînd vrei.";
 "createProfile.createYourAvatar" = "Creează poza de profil";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Folosește Jami";
 "createAccount.lookingForUsernameAvailability" = "caut disponibilitatea...";
 "createAccount.invalidUsername" = "nume greșit";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Eroare de rețea";
 "createAccount.UsernameNotRegisteredMessage" = "Contul a fost creat, dar numele de utilizator nu a fost înscris";
 "createAccount.timeoutTitle" = "Cont creat";
-"createAccount.timeoutMessage" = "Înscriere în curs a numelui de utilizator... Poate dura cîteva clipe.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Configurează un cont SIP existent";
 "createAccount.creatingAccount" = "Se creează contul";
 "createAccount.nameExplanation" = "Poți alege un nume de utilizator pentru a fi ușor de găsit și de contactat pe Jami.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Cifrează contul cu o parolă";
 "createAccount.encryptExplanation" = "Un cont Jami este creat și stocat local numai în acest aparat, sub forma unei arhive care conține cheile contului tău. Accesul la această arhivă poate fi protejat facultativ cu o parolă.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asocierea contului";
 "linkToAccount.linkButtonTitle" = "Asociază";
 "linkToAccount.linkDeviceTitle" = "Asociază aparatul";
-"linkToAccount.linkDeviceMessage" = "Alege „Asociază alt aparat” din cealaltă aplicație Jami pentru a afișa codul QR sau PIN-ul.";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "Este necesar un cod PIN pentru a utiliza un cont Jami existent cu acest aparat";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introdu codul PIN";
 "linkToAccount.scanQRCode" = "Scanează Codul QR";
-"linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. Alege „Asociază alt aparat” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importă contul Jami din fișierul arhivei.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Importă";
 "importFromArchive.selectArchiveButton" = "Alege fișierul arhivei";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";
 "linkToAccountManager.title" = "Cont JAMS";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Introdu URL-ul Serverului de Administrare a Conturilor Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "Introdu datele de autentificare JAMS";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Nu pot găsi contul";
-"alerts.accountCannotBeFoundMessage" = "Contul nu poate fi găsit în rețeaua Jami. Asigură-te că a fost exportat pe Jami dintr-un aparat existent și datele de autentificare sînt corecte.";
-"alerts.accountAddedTitle" = "Cont adăugat";
-"alerts.accountNoNetworkTitle" = "Nu mă pot conecta la rețea";
-"alerts.accountNoNetworkMessage" = "Contul nu poate fi adăugat deoarece Jami nu se poate conecta la rețea. Verifică conectarea la rețea.";
-"alerts.accountDefaultErrorTitle" = "Eroare necunoscută";
-"alerts.accountDefaultErrorMessage" = "Contul nu a putut fi creat.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "A apărut o eroare la crearea contului.";
 "alerts.profileTakePhoto" = "Fă o poză";
 "alerts.profileUploadPhoto" = "Încarcă o poză";
 "alerts.accountLinkedTitle" = "Se asociază contul";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "Nu ai permis accesul la Media";
 "alerts.noLibraryPermissionsTitle" = "Nu ai permis accesul la poze";
 "alerts.noLocationPermissionsTitle" = "Nu ai permis localizarea";
-"alerts.errorWrongCredentials" = "Nu mă pot conecta la Administrare cont. Verifică datele de autentificare.";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Înregistrează un mesaj video";
 "alerts.recordAudioMessage" = "Înregistrează un mesaj vocal";
 "alerts.uploadFile" = "Trimite un fișier";
 "alerts.uploadPhoto" = "Deschide galeria";
-"alerts.locationServiceIsDisabled" = "Activează „Localizarea” pentru ca Jami să poată stabili poziția ta.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Trimite poziția mea";
 "alerts.alreadylocationSharing" = "Se trimite deja poziția către acest utilizator";
 "alerts.locationSharingDurationTitle" = "Cît timp trebuie să distribui poziția?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© OpenStreetMap colaboratori";
 "alerts.openStreetMapCopyrightMoreInfo" = "Află mai multe";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Șterge";
 "actions.clearAction" = "Șterge";
 "actions.backAction" = "Înapoi";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Du-te la Reglări";
 "actions.stopLocationSharing" = "Oprește distribuirea";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "vrea să vorbească cu tine";
 "calls.ringing" = "Sună...";
 "calls.connecting" = "Se conectează...";
 "calls.callFinished" = "Apel terminat";
 "calls.currentCallWith" = "Apel cu ";
-"calls.haghUp" = "închide";
-"calls.maximize" = "maximizează";
-"calls.minimize" = "minimizează";
-"calls.setModerator" = "pune un moderator";
-"calls.removeModerator" = "elimină moderatorul";
-"calls.muteAudio" = "oprește microfonul";
-"calls.unmuteAudio" = "pornește microfonul";
+"calls.maximize" = "Maximizează";
+"calls.minimize" = "Minimizează";
+"calls.setModerator" = "Pune un moderator";
+"calls.removeModerator" = "Elimină moderatorul";
+"calls.muteAudio" = "Oprește microfonul";
+"calls.unmuteAudio" = "Pornește microfonul";
 "calls.lowerHand" = "Coboară mîna";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Aparate";
 "accountPage.settingsHeader" = "Reglări";
 "accountPage.notificationsHeader" = "Notificări";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Contacte blocate";
 "accountPage.unblockContact" = "DEBLOCHEAZĂ";
 "accountPage.proxyAddressAlert" = "Introdu adresa proxy";
-"accountPage.noProxyExplanationLabel" = "Aparatul nu va primi notificări dacă Proxy e dezactivat";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Adresa Proxy";
 "accountPage.useProxyList" = "Folosește lista de proxy";
 "accountPage.proxyListURL" = "URL-ul listei de proxy";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Dacă contul tău nu a fost asociat cu alt aparat și nu ai o copie de rezervă, va fi pierdut definitiv împreună cu numele înscris.";
 "accountPage.inviteFriends" = "Invită prieteni";
 "accountPage.contactMeOnJamiTitle" = "Contactează-mă pe Jami!";
-"accountPage.contactMeOnJamiContant" = "Contactează-mă folosind „%s” pe platforma distribuită de comunicare Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Introdu parola contului";
 "accountPage.usernamePlaceholder" = "Introdu numele de utilizator";
 "accountPage.registerNameErrorMessage" = "Numele de utilizator introdus nu e disponibil";
 "accountPage.usernameRegistering" = "Se înscrie";
 "accountPage.usernameRegisterAction" = "Înscrie-te";
-"accountPage.usernameRegistrationFailed" = "Înscrierea a eșuat. Verifică parola.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Cifrează contul";
 "accountPage.changePassword" = "Schimbă parola";
-"accountPage.oldPasswordPlaceholder" = "Introdu parola veche";
+"accountPage.currentPasswordPlaceholder" = "Introdu parola actuală";
 "accountPage.newPasswordPlaceholder" = "Introdu parola nouă";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirmă parola nouă";
 "accountPage.changePasswordError" = "Parola e greșită";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "Acest aparat";
 "accountPage.otherDevices" = "Alte aparate asociate";
 "accountPage.accountIdentity" = "Identitatea contului";
+"accountPage.bootstrap" = "Server de pornire";
+"accountPage.dhtConfiguration" = "Configurare OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "Acest cont Jami există doar în acest aparat. Contul va fi pierdut dacă acest aparat este pierdut sau dacă aplicația este dezinstalată. Se recomandă efectuarea unei copii de rezervă a acestui cont.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Nu a fost permis accesul la locul ales.";
 "backupAccount.errorFailed" = "Exportarea nu a reușit.";
 
-//Account
+// Account
 "account.sipServer" = "Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
@@ -423,35 +425,35 @@
 "account.needMigration" = "contul trebuie transferat";
 "account.me" = "Mine";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "Niciun contact blocat";
 
-//Link New Device
-"linkDevice.title" = "Asociază alt aparat";
-"linkDevice.passwordError" = "Parola introdusă nu deblochează acest cont";
-"linkDevice.networkError" = "A apărut o eroare de rețea în timpul exportării";
-"linkDevice.defaultError" = "A apărut o eroare în timpul exportării";
-"linkDevice.explanationMessage" = "Pentru a completa procesul, trebuie să deschizi Jami în noul aparat și să alegi opțiunea „Asociază acest aparat cu un cont”. Codul tău PIN este valabil 10 minute.";
+// Link New Device
+"linkDevice.title" = "Asociază un nou aparat";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Se verifică";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "Începe un apel vocal";
 "contactPage.startVideoCall" = "Începe un apel video";
-"contactPage.sendMessage" = "Trimite un mesaj";
+"contactPage.send" = "Trimite";
 "contactPage.clearConversation" = "Șterge discuția";
-"contactPage.removeConversation" = "Șterge conversația";
+"contactPage.leaveConversation" = "Termină conversația";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "Inițializare...";
 "dataTransfer.readableStatusError" = "Eroare";
 "dataTransfer.readableStatusAwaiting" = "În așteptare…";
 "dataTransfer.readableStatusOngoing" = "Se transferă";
 "dataTransfer.readableStatusCanceled" = "Anulat";
-"dataTransfer.sendingFailed" = "Trimitere nereușită";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Terminat";
 "dataTransfer.recordInBackgroundWarning" = "Înregistrarea video în timp ce se utilizează și alte aplicații poate avea ca rezultat video de calitate inferioară. Pentru cele mai bune rezultate, închide celelalte aplicații.";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "Apel pierdut";
 "notifications.newFile" = "Fișier nou";
 "notifications.locationSharingStarted" = "Distribuirea poziției primite a început";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Trimite";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "Ai primit o invitație";
 "generatedMessage.swarmCreated" = "Grup creat";
 "generatedMessage.invitationReceived" = "a fost invitat să participe";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Distribuirea poziției în direct";
 "generatedMessage.contactLeftConversation" = "a ieșit";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "Reglări video";
 "generalSettings.videoAcceleration" = "Activează accelerarea video";
 "generalSettings.fileTransfer" = "Transfer de fișiere";
 "generalSettings.locationSharing" = "Distribuirea poziției";
 "generalSettings.automaticAcceptIncomingFiles" = "Acceptă automat fișierele primite";
 "generalSettings.acceptTransferLimit" = "Limita fișierului acceptat";
-"generalSettings.acceptTransferLimitDescription" = "(în Mo, 0 = nelimitat)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Limitează durata distribuirii poziției";
 "generalSettings.locationSharingDuration" = "Durata distribuirii poziției";
 "generalSettings.donationCampaign" = "Campania de donare";
 "generalSettings.enableDonationCampaign" = "Activează campania de donare";
 
-//Log View
+// Log View
 "logView.title" = "Diagnoză";
 "logView.description" = "Deschide reglările diagnozei";
-"logView.startLogging" = "Pornește diagnoza";
+"logView.startLogging" = "Start logging";
 "logView.stopLogging" = "Oprește diagnoza";
-"logView.saveError" = "Salvare nereușită";
-"logView.shareError" = "Fișierul nu a fost trimis";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Transferul contului";
 "migrateAccount.migrateButton" = "Transferă contul";
-"migrateAccount.explanation" = "Acest cont trebuie transferat";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "Pentru a continua transferul, trebuie să introduci o parolă care a fost folosită pentru acest cont.";
-"migrateAccount.error" = "Transferul contului tău nu a reușit. Poți încerca din nou sau șterge acest cont.";
-"migrateAccount.migrating" = "Se transferă...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Transferă alt cont";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, un pachet GNU, este un program pentru comunicare distribuită și universală care respectă libertatea și intimitatea utilizatorilor săi. A se vedea";
 "aboutJami.declaration2" = "pentru a afla mai multe.";
 "aboutJami.noWarranty1" = "Acest program nu oferă absolut nicio garanție. A se vedea";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "Părere";
 "aboutJami.createdBy" = "Creat de";
 "aboutJami.artworkBy" = "Grafică de";
-
-

@@ -63,18 +63,18 @@
 "scan.badQrCode" = "खराब क्यूआर कोड";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "संपर्क की खोज...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "झुंड को बनाएँ";
 "swarmcreation.addADescription" = "विवरण जोड़ें";
 // Swarm
 "swarm.ignoreSwarm" = "झुंड को अनदेखा करें";
-"swarm.leaveConversation" = "बातचीत छोड़ दो";
-"swarm.chooseColor" = "रंग चुनें";
+"swarm.leaveConversation" = "Leave conversation";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "झुंड का प्रकार";
 "swarm.identifier" = "पहचानकर्ता";
 "swarm.about" = "बारे में";
 "swarm.members" = "सदस्य";
-"swarm.addDescription" = "विवरण जोड़ें";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "निजी झुंड";
 "swarm.adminInvitesOnly" = "केवल व्यवस्थापक आमंत्रण";
 "swarm.invitesOnly" = "निजी झुंड";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "क्या आप इस झुंड को छोड़ना चाहते हैं?";
 "swarm.Leave" = "छोड़ो";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "सवार का नाम";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "कोई परिणाम नहीं";
 "smartlist.noConversation" = "कोई बातचीत नहीं";
-"smartlist.searchBarPlaceholder" = "नाम दर्ज करें...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "खोज";
 "smartlist.noNetworkConnectivity" = "कोई नेटवर्क कनेक्टिविटी नहीं";
 "smartlist.cellularAccess" = "सुनिश्चित करें कि आपकी सेटिंग्स में सेल्युलर एक्सेस की अनुमति है";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "संपर्क जोड़ें?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "कोई निमंत्रण नहीं";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "जामी एक मुक्त और सार्वभौमिक संचार मंच है जो उपयोगकर्ताओं की गोपनीयता और स्वतंत्रता को संरक्षित करता है";
 "welcome.haveAccount" = "मेरे पास पहले से ही एक खाता है";
 "welcome.linkDevice" = "दूसरे उपकरण से आयात";
-"welcome.linkBackup" = "एक संग्रह बैकअप से आयात";
+"welcome.linkBackup" = "Import from archive backup";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "स्किप";
 "createProfile.profileCreated" = "अगला";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "आपकी प्रोफ़ाइल आपके संपर्क के साथ साझा की जाएगी। आप इसे किसी भी समय बदल सकते हैं।";
 "createProfile.createYourAvatar" = "अपना अवतार बनाएं";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "जामी में शामिल हों";
 "createAccount.lookingForUsernameAvailability" = "उपलब्धता की तलाश में...";
 "createAccount.invalidUsername" = "अवैध उपयोगकर्ता नाम";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "नेटवर्क त्रुटि";
 "createAccount.UsernameNotRegisteredMessage" = "खाता बनाया गया था लेकिन उपयोगकर्ता नाम पंजीकृत नहीं किया गया था";
 "createAccount.timeoutTitle" = "खाता बनाया गया";
-"createAccount.timeoutMessage" = "उपयोगकर्ता नाम पंजीकरण चल रहा है... यह कुछ क्षण लग सकते हैं.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "मौजूदा SIP खाते को कॉन्फ़िगर करना";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "आप एक उपयोगकर्ता नाम चुन सकते हैं ताकि दूसरों को जामी पर आपको आसानी से खोजने और प्राप्त करने में मदद मिल सके।";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "पासवर्ड के साथ खाता एन्क्रिप्ट करें";
 "createAccount.encryptExplanation" = "एक Jami खाता सिर्जना और संग्रहीत किया जाता है स्थानीय रूप से केवल इस डिवाइस पर, एक संग्रह के रूप में जिसमें आपके खाते की चाबियाँ हैं. इस संग्रह तक पहुंच वैकल्पिक रूप से पासवर्ड द्वारा संरक्षित किया जा सकता है।";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "खाता लिंक";
 "linkToAccount.linkButtonTitle" = "लिंक";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "पिन";
 "linkToAccount.pinLabel" = "पिन दर्ज करें";
 "linkToAccount.scanQRCode" = "QR कोड स्कैन करें";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "आयात";
 "importFromArchive.selectArchiveButton" = "संग्रह फ़ाइल का चयन करें";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "साइन इन करें";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "जेम्स URL";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Jami खाता प्रबंधन सर्वर (JAMS) URL दर्ज करें";
 "linkToAccountManager.enterCredentials" = "JAMS क्रेडेंशियल दर्ज करें";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "खाता नहीं मिल सकता";
-"alerts.accountCannotBeFoundMessage" = "जामी नेटवर्क पर खाता नहीं मिला. सुनिश्चित करें कि यह जामी पर एक मौजूदा डिवाइस से निर्यात किया गया था, और कि प्रमाणीकरण सही हैं प्रदान की.";
-"alerts.accountAddedTitle" = "खाता जोड़ा गया";
-"alerts.accountNoNetworkTitle" = "नेटवर्क से कनेक्ट नहीं कर सकते";
-"alerts.accountNoNetworkMessage" = "मैं खाता जोड़ने में असमर्थ था क्योंकि जेमी वितरित नेटवर्क से कनेक्ट नहीं कर सका। अपने डिवाइस कनेक्टिविटी की जांच करें।";
-"alerts.accountDefaultErrorTitle" = "अज्ञात त्रुटि";
-"alerts.accountDefaultErrorMessage" = "खाता नहीं बनाया जा सकता है.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "तस्वीरें लें";
 "alerts.profileUploadPhoto" = "फोटो अपलोड करें";
 "alerts.accountLinkedTitle" = "लिंकिंग खाता";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "मीडिया अनुमति नहीं दी गई";
 "alerts.noLibraryPermissionsTitle" = "फोटो लाइब्रेरी तक पहुंच प्रदान नहीं की गई";
 "alerts.noLocationPermissionsTitle" = "स्थान तक पहुंच प्रदान नहीं की गई";
-"alerts.errorWrongCredentials" = "प्रदान किए गए खाता प्रबंधक से कनेक्ट नहीं हो सकता है. कृपया अपनी क्रेडेंशियल जांचें";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "वीडियो संदेश रिकॉर्ड करें";
 "alerts.recordAudioMessage" = "एक ऑडियो संदेश रिकॉर्ड करें";
 "alerts.uploadFile" = "फ़ाइल भेजें";
 "alerts.uploadPhoto" = "खुली गैलरी";
-"alerts.locationServiceIsDisabled" = "\"जामी\" को आपके स्थान का पता लगाने के लिए \"स्थान सेवा\" को चालू करें।";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "मेरी स्थिति साझा करें";
 "alerts.alreadylocationSharing" = "पहले से ही इस उपयोगकर्ता के साथ स्थान साझा";
 "alerts.locationSharingDurationTitle" = "स्थान साझा करने में कितना समय लगना चाहिए?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© ओपनस्ट्रीटमैप योगदानकर्ता";
 "alerts.openStreetMapCopyrightMoreInfo" = "और अधिक जानें";
 
-//Actions
+// Actions
 "actions.deleteAction" = "हटाएँ";
 "actions.clearAction" = "स्पष्ट";
 "actions.backAction" = "वापस";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "सेटिंग्स पर जाएं";
 "actions.stopLocationSharing" = "साझा करना बंद";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "आपसे बात करना चाहता है";
 "calls.ringing" = "बज रहा है...";
 "calls.connecting" = "कनेक्टिंग...";
 "calls.callFinished" = "कॉल समाप्त";
 "calls.currentCallWith" = "";
-"calls.haghUp" = "बंद करो";
-"calls.maximize" = "अधिकतम करना";
-"calls.minimize" = "कम करना";
-"calls.setModerator" = "संयोजक सेट करें";
-"calls.removeModerator" = "अनसेट मॉडरेटर";
+"calls.maximize" = "Maximize";
+"calls.minimize" = "Minimize";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
 "calls.muteAudio" = "मूक ऑडियो";
-"calls.unmuteAudio" = "अमूत ऑडियो";
+"calls.unmuteAudio" = "Unmute audio";
 "calls.lowerHand" = "निचला हाथ";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "उपकरण";
 "accountPage.settingsHeader" = "सेटिंग्स";
 "accountPage.notificationsHeader" = "सूचनाएं";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "अवरुद्ध संपर्क";
 "accountPage.unblockContact" = "अनब्लॉक";
 "accountPage.proxyAddressAlert" = "प्रॉक्सी पता प्रदान करें";
-"accountPage.noProxyExplanationLabel" = "प्रॉक्सी निष्क्रिय होने पर आपका डिवाइस सूचनाएं नहीं प्राप्त करेगा";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "प्रॉक्सी पता";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "यदि आपका खाता बैकअप नहीं लिया गया है या किसी अन्य डिवाइस में जोड़ा गया है, तो आपका खाता और पंजीकृत नाम अपरिवर्तनीय रूप से खो जाएगा।";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Jami पर मुझसे संपर्क करें!";
-"accountPage.contactMeOnJamiContant" = "जामी वितरित संचार मंच पर \"%s\" का उपयोग करके मुझसे संपर्क करेंः https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "खाता पासवर्ड दर्ज करें";
 "accountPage.usernamePlaceholder" = "वांछित उपयोगकर्ता नाम दर्ज करें";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "पंजीकरण";
 "accountPage.usernameRegisterAction" = "पंजी करें";
-"accountPage.usernameRegistrationFailed" = "पंजीकरण विफल रहा. कृपया पासवर्ड की जाँच करें.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "एन्क्रिप्टेड खाता";
 "accountPage.changePassword" = "पासवर्ड बदलें";
-"accountPage.oldPasswordPlaceholder" = "पुराना पासवर्ड दर्ज करें";
+"accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "नया पासवर्ड दर्ज करें";
 "accountPage.newPasswordConfirmPlaceholder" = "नया पासवर्ड पुष्टि करें";
 "accountPage.changePasswordError" = "गलत पासवर्ड";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "यह उपकरण";
 "accountPage.otherDevices" = "अन्य लिंक किए गए उपकरण";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "बूटस्ट्रैप";
+"accountPage.dhtConfiguration" = "ओपनडीएचटी कॉन्फ़िगरेशन";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "सर्वर";
 "account.port" = "बंदरगाह";
 "account.proxyServer" = "प्रॉक्सी";
@@ -423,35 +425,35 @@
 "account.needMigration" = "खाता को स्थानांतरित करना होगा";
 "account.me" = "मैं";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "कोई अवरुद्ध संपर्क नहीं";
 
-//Link New Device
-"linkDevice.title" = "एक नई डिवाइस को लिंक करें";
-"linkDevice.passwordError" = "आपने जो पासवर्ड दर्ज किया है वह इस खाते को अनलॉक नहीं करता है";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "प्रक्रिया को पूरा करने के लिए, आपको नए डिवाइस पर Jami खोलना होगा और विकल्प चुनना होगा \"इस डिवाइस को एक खाते से लिंक करें।\" आपका पिन 10 मिनट के लिए मान्य है";
+// Link New Device
+"linkDevice.title" = "नई डिवाइस लिंक";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "सत्यापन";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "ऑडियो कॉल प्रारंभ करें";
-"contactPage.startVideoCall" = "वीडियो कॉल प्रारंभ करें";
-"contactPage.sendMessage" = "संदेश भेजें";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "स्पष्ट चैट";
-"contactPage.removeConversation" = "बातचीत को हटा दें";
+"contactPage.leaveConversation" = "बातचीत छोड़ दें";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "आरंभिक...";
 "dataTransfer.readableStatusError" = "त्रुटि";
 "dataTransfer.readableStatusAwaiting" = "प्रतीक्षा कर रहा है...";
 "dataTransfer.readableStatusOngoing" = "स्थानांतरण";
 "dataTransfer.readableStatusCanceled" = "रद्द किया गया";
-"dataTransfer.sendingFailed" = "भेजने में विफल";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "पूर्ण";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "फोन नहीं मिला";
 "notifications.newFile" = "नई फ़ाइल";
 "notifications.locationSharingStarted" = "आने वाली स्थान साझाकरण शुरू हुआ";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "भेजें";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "सृजित झुंड";
 "generatedMessage.invitationReceived" = "शामिल होने के लिए आमंत्रित किया गया था";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "स्थान साझा करने के लिए लाइव";
 "generatedMessage.contactLeftConversation" = "बाएँ";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "वीडियो सेटिंग्स";
 "generalSettings.videoAcceleration" = "वीडियो त्वरण सक्षम करें";
 "generalSettings.fileTransfer" = "फ़ाइल स्थानांतरण";
 "generalSettings.locationSharing" = "स्थान साझा करना";
 "generalSettings.automaticAcceptIncomingFiles" = "स्वचालित रूप से आने वाली फ़ाइलों को स्वीकार करें";
 "generalSettings.acceptTransferLimit" = "हस्तांतरण की सीमा स्वीकार करें";
-"generalSettings.acceptTransferLimitDescription" = "(एमबी में, 0 = असीमित)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "स्थान साझा करने की अवधि को सीमित करें";
 "generalSettings.locationSharingDuration" = "स्थिति शेयर की अवधि";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "निदान";
 "logView.description" = "खुले डायग्नोस्टिक लॉग सेटिंग्स";
-"logView.startLogging" = "लॉगिंग शुरू करें";
-"logView.stopLogging" = "लकड़ी का उपयोग बंद करो";
-"logView.saveError" = "फ़ाइल सहेजने में विफल";
-"logView.shareError" = "फ़ाइल साझा करने में विफल";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "खाता माइग्रेशन";
 "migrateAccount.migrateButton" = "प्रवास खाता";
-"migrateAccount.explanation" = "इस खाते को माइग्रेट करने की जरूरत है";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "प्रवासन के साथ आगे बढ़ने के लिए, आपको एक पासवर्ड दर्ज करना होगा जो इस खाते के लिए उपयोग किया गया था";
-"migrateAccount.error" = "आप अपने खाते को फिर से प्रयास कर सकते हैं या हटा सकते हैं।";
-"migrateAccount.migrating" = "प्रवास...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "दूसरे खाते को स्थानांतरित करें";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "फीड्बैक";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

@@ -63,18 +63,18 @@
 "scan.badQrCode" = "誤ったQRコード";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "連絡先を探して...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "群れを作れ";
 "swarmcreation.addADescription" = "記述を追加する";
 // Swarm
 "swarm.ignoreSwarm" = "群れを無視する";
-"swarm.leaveConversation" = "話をやめろ";
-"swarm.chooseColor" = "色を選び";
+"swarm.leaveConversation" = "話しをやめましょう";
+"swarm.chooseColor" = "カラー";
 "swarm.typeOfSwarm" = "群れの種類";
 "swarm.identifier" = "識別子";
 "swarm.about" = "アプリについて";
 "swarm.members" = "要員";
-"swarm.addDescription" = "記述を追加する";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "非公開の会合";
 "swarm.adminInvitesOnly" = "アドミニアム招待のみ";
 "swarm.invitesOnly" = "非公開の会合";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "この群れを離れたいのか?";
 "swarm.Leave" = "出て行こう";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarmの名前";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "招待を受信しました";
 "smartlist.noResults" = "検索結果はありません";
 "smartlist.noConversation" = "会話はありません";
-"smartlist.searchBarPlaceholder" = "名前を入力...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "検索";
 "smartlist.noNetworkConnectivity" = "ネットワーク接続がありません";
 "smartlist.cellularAccess" = "設定から写真へのアクセスが許可されていることを確認してください";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "連絡先を追加しますか？";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "招待はありません";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "Jamiは世界中の利用者と繋がることができる自由ソフトウェアであり，利用者の自由と私事権とを尊重しています。";
 "welcome.haveAccount" = "すでにアカウントを持っている";
 "welcome.linkDevice" = "他のデバイスから輸入する";
-"welcome.linkBackup" = "ファイルバックアップから輸入";
+"welcome.linkBackup" = "アーカイブバックアップからインポート";
 "welcome.createAccount" = "参加";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "スキップ";
 "createProfile.profileCreated" = "次へ";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "プロフィール情報は連絡先と共有されます。設定の変更はいつでも可能です。";
 "createProfile.createYourAvatar" = "アバターを作成";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Jamiに登録";
 "createAccount.lookingForUsernameAvailability" = "利用可能か確認しています…";
 "createAccount.invalidUsername" = "不正な利用者名";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "ネットワークエラー";
 "createAccount.UsernameNotRegisteredMessage" = "アカウントは作成されましたが、ユーザー名がまだ登録されていません";
 "createAccount.timeoutTitle" = "アカウントを作成しました";
-"createAccount.timeoutMessage" = "ユーザー名を登録しています... しばらくお待ち下さい。";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "既存のSIPアカウントを構成";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "ユーザ名を選択して,他のユーザがJamiで簡単にあなたを見つけ,あなたのところに届けるようにします.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "アカウントをパスワードで暗号化";
 "createAccount.encryptExplanation" = "アカウントの鍵を含むアーカイブとして,このデバイスにのみJamiアカウントが作成され,本地的に保存されます.このアーカイブへのアクセスにはパスワードで保護することができます.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "アカウントを関連付けています";
 "linkToAccount.linkButtonTitle" = "リンク";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "機器を関連付ける";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PINを入力してください";
 "linkToAccount.scanQRCode" = "QR コードをスキャン";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "輸入";
 "importFromArchive.selectArchiveButton" = "アーカイブファイルを選択";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "サインイン";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMSのURL";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Jamiアカウント管理サーバー (JAMS) のURLを入力します";
 "linkToAccountManager.enterCredentials" = "JAMS認証を入力する";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "アカウントが見つかりません";
-"alerts.accountCannotBeFoundMessage" = "Jamiネットワーク上でアカウントが見つかりませんでした。 Jami接続する既存のデバイスから正しい認証情報がエクスポートされたことを確認してください。";
-"alerts.accountAddedTitle" = "アカウントを追加しました";
-"alerts.accountNoNetworkTitle" = "ネットワークに接続できません";
-"alerts.accountNoNetworkMessage" = "Jamiが分散ネットワークに接続できなかったためアカウントを追加できませんでした。デバイスのネットワーク接続を確認してください。";
-"alerts.accountDefaultErrorTitle" = "不明なエラー";
-"alerts.accountDefaultErrorMessage" = "アカウントを作成できませんでした。";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "撮影";
 "alerts.profileUploadPhoto" = "写真のアップロード";
 "alerts.accountLinkedTitle" = "アカウントをリンクしています";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "メディア許可が認められていない";
 "alerts.noLibraryPermissionsTitle" = "フォトライブラリへのアクセスが許可されていない";
 "alerts.noLocationPermissionsTitle" = "場所へのアクセスが認められていない";
-"alerts.errorWrongCredentials" = "ご指定のアカウント管理機能に接続できません。資格情報をご確認ください。";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "ビデオメッセージを録画";
 "alerts.recordAudioMessage" = "音声メッセージを録音";
 "alerts.uploadFile" = "ファイルの送信";
 "alerts.uploadPhoto" = "ギャラリーを開く";
-"alerts.locationServiceIsDisabled" = "\"Jami\"があなたの位置を決定できるように\"位置サービス\"をオンにします.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "私の位置をシェア";
 "alerts.alreadylocationSharing" = "このユーザーと既に位置情報を共有済みです";
 "alerts.locationSharingDurationTitle" = "いつまで位置情報を共有しますか？";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© OpenStreetMapの貢献者";
 "alerts.openStreetMapCopyrightMoreInfo" = "詳細情報";
 
-//Actions
+// Actions
 "actions.deleteAction" = "削除";
 "actions.clearAction" = "クリア";
 "actions.backAction" = "戻る";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "設定へ移動";
 "actions.stopLocationSharing" = "共有を停止";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "あなたと話したい";
 "calls.ringing" = "鳴ってる";
 "calls.connecting" = "接続中…";
 "calls.callFinished" = "呼び出し終了";
 "calls.currentCallWith" = "連絡する";
-"calls.haghUp" = "通話終了";
-"calls.maximize" = "最大";
-"calls.minimize" = "最小";
-"calls.setModerator" = "設定モデレーター";
-"calls.removeModerator" = "設定を解除するモデレーター";
-"calls.muteAudio" = "ミュート";
-"calls.unmuteAudio" = "ミュート解除";
-"calls.lowerHand" = "下手";
+"calls.maximize" = "最大化";
+"calls.minimize" = "最小化";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
+"calls.muteAudio" = "音声を消音する";
+"calls.unmuteAudio" = "Unmute audio";
+"calls.lowerHand" = "手を下げる";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "デバイス";
 "accountPage.settingsHeader" = "設定";
 "accountPage.notificationsHeader" = "通知";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "着信拒否した連絡先";
 "accountPage.unblockContact" = "ブロック解除";
 "accountPage.proxyAddressAlert" = "代理アドレスを入力する";
-"accountPage.noProxyExplanationLabel" = "お使いの端末のプロキシを無効にすると通知が受取れません";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "プロキシアドレス";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "アカウントがバックアップまたは他のデバイスに追加されていない場合、アカウントと登録された名前は永久に失われます";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ジャミに連絡する!";
-"accountPage.contactMeOnJamiContant" = "広報プラットフォームの\"%s\"を使用して私に連絡してください: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "アカウントのパスワードを入力";
 "accountPage.usernamePlaceholder" = "必要なユーザー名を入力する";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "登録";
 "accountPage.usernameRegisterAction" = "登録";
-"accountPage.usernameRegistrationFailed" = "登録失敗.パスワードを確認してください.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "暗号化アカウント";
 "accountPage.changePassword" = "パスワードを変更";
-"accountPage.oldPasswordPlaceholder" = "現在のパスワードを入力";
+"accountPage.currentPasswordPlaceholder" = "現在のパスワードを入力";
 "accountPage.newPasswordPlaceholder" = "新しいパスワードを入力";
 "accountPage.newPasswordConfirmPlaceholder" = "新しいパスワードを確認する";
 "accountPage.changePasswordError" = "パスワードが間違っています";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "この機器";
 "accountPage.otherDevices" = "接続された他の装置";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "ブートストラップ";
+"accountPage.dhtConfiguration" = "OpenDHT設定";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "サーバー";
 "account.port" = "ポート番号";
 "account.proxyServer" = "プロキシ";
@@ -423,35 +425,35 @@
 "account.needMigration" = "口座を移動する必要がある";
 "account.me" = "自分";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "ブロックした連絡先はありません";
 
-//Link New Device
-"linkDevice.title" = "新しいデバイスをリンク";
-"linkDevice.passwordError" = "入力したパスワードではこのアカウントのロックを解除できません";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "プロセスは完了するには,新しいデバイスでJamiを開いて\",このデバイスをアカウントにリンクする\"オプションを選択する必要があります. あなたのピンは10分間有効です";
+// Link New Device
+"linkDevice.title" = "新しいデバイスを連結する";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "検証中";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "音声通話を開始";
-"contactPage.startVideoCall" = "ビデオ通話を開始";
-"contactPage.sendMessage" = "メッセージを送信";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "クリアチャット";
-"contactPage.removeConversation" = "会話を削除";
+"contactPage.leaveConversation" = "話しをやめましょう";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "初期化中…";
 "dataTransfer.readableStatusError" = "エラー";
 "dataTransfer.readableStatusAwaiting" = "待ってる";
 "dataTransfer.readableStatusOngoing" = "転送中";
 "dataTransfer.readableStatusCanceled" = "キャンセルしました";
-"dataTransfer.sendingFailed" = "送信できませんでした";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "完了";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "欠電話";
 "notifications.newFile" = "新しいファイル";
 "notifications.locationSharingStarted" = "位置共有開始";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "送信";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "群れが生まれました";
 "generatedMessage.invitationReceived" = "加入するよう招待されました";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "リアルタイムでの位置共有";
 "generatedMessage.contactLeftConversation" = "左";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "ビデオ設定";
 "generalSettings.videoAcceleration" = "ビデオ加速を有効にする";
 "generalSettings.fileTransfer" = "ファイル転送";
-"generalSettings.locationSharing" = "場所 分享";
+"generalSettings.locationSharing" = "場所共有";
 "generalSettings.automaticAcceptIncomingFiles" = "ファイルの受信を自動的に許可";
 "generalSettings.acceptTransferLimit" = "譲渡制限を承認する";
-"generalSettings.acceptTransferLimitDescription" = "(MBで0 =無限)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "場所共有の期間を制限する";
 "generalSettings.locationSharingDuration" = "ポジションシェア期間";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "診断";
 "logView.description" = "診断記録設定を開く";
-"logView.startLogging" = "記録を開始する";
-"logView.stopLogging" = "伐採をやめ";
-"logView.saveError" = "ファイル保存に失敗";
-"logView.shareError" = "ファイル共有に失敗";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "アカウントの移行";
 "migrateAccount.migrateButton" = "アカウントを移行";
-"migrateAccount.explanation" = "このアカウントは移行する必要があります";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "移行を進めるとき,このアカウントに使用されたパスワードを入力する必要があります";
-"migrateAccount.error" = "アカウントを移行できなかった. また試すか削除することもできます.";
-"migrateAccount.migrating" = "移住する";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "別のアカウントに移行";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "フィードバック";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

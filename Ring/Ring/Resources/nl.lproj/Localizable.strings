@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Verkeerde QR-code";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Zoek contact...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Maak de zwerm.";
 "swarmcreation.addADescription" = "Voeg een beschrijving toe";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoreer de zwerm.";
-"swarm.leaveConversation" = "Laat het gesprek maar.";
-"swarm.chooseColor" = "Kies een kleur";
+"swarm.leaveConversation" = "Laat het gesprek";
+"swarm.chooseColor" = "Kleur";
 "swarm.typeOfSwarm" = "Soort zwerm";
 "swarm.identifier" = "Identificatie";
 "swarm.about" = "Over";
 "swarm.members" = "Lid-Staten";
-"swarm.addDescription" = "Beschrijving toevoegen";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Privé zwerm";
 "swarm.adminInvitesOnly" = "Admin nodigt alleen uit";
 "swarm.invitesOnly" = "Privé zwerm";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "Weet je zeker dat je deze zwerm wilt verlaten?";
 "swarm.Leave" = "Ga weg.";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "De naam van de zwerm";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Uitnodigingen ontvangen";
 "smartlist.noResults" = "Geen resultaten";
 "smartlist.noConversation" = "Geen gesprekken";
-"smartlist.searchBarPlaceholder" = "Voer naam in…";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Zoek";
 "smartlist.noNetworkConnectivity" = "Geen netwerkverbinding";
 "smartlist.cellularAccess" = "Zorg dat u toegang tot het mobiele netwerk toegestaan heeft in uw instellingen";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "Toevoegen aan contacten?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Geen uitnodigingen";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "Jami is een vrij en universeel communicatieplatform, dat de privacy en vrijheden van haar gebruikers eerbiedigt";
 "welcome.haveAccount" = "Ik heb al een account.";
 "welcome.linkDevice" = "Import van een ander apparaat";
-"welcome.linkBackup" = "Importen uit een archief back-up";
+"welcome.linkBackup" = "Importeren van back-uparchief";
 "welcome.createAccount" = "Deelnemen";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "Overslaan";
 "createProfile.profileCreated" = "Volgende";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "Uw profiel wordt gedeeld met uw contacten. U kunt het op elk moment wijzigen.";
 "createProfile.createYourAvatar" = "Maak uw avatar aan";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Neem deel aan Jami.";
 "createAccount.lookingForUsernameAvailability" = "beschikbaarheid wordt gecontroleerd…";
 "createAccount.invalidUsername" = "ongeldige gebruikersnaam";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Netwerkfout";
 "createAccount.UsernameNotRegisteredMessage" = "Het account is aangemaakt, maar de gebruikersnaam is niet geregistreerd";
 "createAccount.timeoutTitle" = "Account aangemaakt";
-"createAccount.timeoutMessage" = "Gebruikersnaam wordt geregistreerd… Dit kan even duren.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Configureer een bestaande SIP-rekening";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Je kunt een gebruikersnaam kiezen om anderen te helpen je makkelijker te vinden en te bereiken op Jami.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Account versleutelen met wachtwoord";
 "createAccount.encryptExplanation" = "Een Jami-account wordt uitsluitend op dit apparaat gecreëerd en lokaal opgeslagen als een archief met uw accountsleutels.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account koppelen";
 "linkToAccount.linkButtonTitle" = "Koppelen";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Apparaat koppelen";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "Pincode";
 "linkToAccount.pinLabel" = "Voer pincode in";
 "linkToAccount.scanQRCode" = "QR-code scannen";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Importeren";
 "importFromArchive.selectArchiveButton" = "Selecteer archiefbestand";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Inlog";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Voer de Jami Account Management Server (JAMS) URL in";
 "linkToAccountManager.enterCredentials" = "Voer JAMS-gegevens in";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Account kan niet gevonden worden";
-"alerts.accountCannotBeFoundMessage" = "Account kon niet gevonden worden op het Jami-netwerk. Controleer of het account geëxporteerd is van een bestaand apparaat en dat de ingevoerde gebruikersreferenties correct zijn.";
-"alerts.accountAddedTitle" = "Account toegevoegd";
-"alerts.accountNoNetworkTitle" = "Kan geen verbinding maken met het netwerk";
-"alerts.accountNoNetworkMessage" = "Kon het account niet toevoegen omdat Jami geen verbinding kon maken met het gedistribueerde netwerk. Controleer de netwerkverbinding van uw apparaat.";
-"alerts.accountDefaultErrorTitle" = "Onbekende fout";
-"alerts.accountDefaultErrorMessage" = "Het account kon niet aangemaakt worden.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Foto nemen";
 "alerts.profileUploadPhoto" = "Foto uploaden";
 "alerts.accountLinkedTitle" = "Account koppelen";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "Mediavergunning niet verleend";
 "alerts.noLibraryPermissionsTitle" = "Toegang tot de fotobibliotheek niet toegestaan";
 "alerts.noLocationPermissionsTitle" = "Toegang tot locatie niet toegestaan";
-"alerts.errorWrongCredentials" = "Kan niet aansluiten op de rekeningmanager.";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Een video bericht opnemen";
 "alerts.recordAudioMessage" = "Een audiobericht opnemen";
 "alerts.uploadFile" = "Bestand verzenden";
 "alerts.uploadPhoto" = "Open galerij";
-"alerts.locationServiceIsDisabled" = "Sluit \"Location Services\" aan om \"Jami\" toe te staan om uw locatie te bepalen.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Deel mijn locatie";
 "alerts.alreadylocationSharing" = "Al met deze gebruiker delen";
 "alerts.locationSharingDurationTitle" = "Hoe lang moet de locatie worden gedeeld?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© OpenStreetMap-medewerkers";
 "alerts.openStreetMapCopyrightMoreInfo" = "Meer informatie";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Verwijderen";
 "actions.clearAction" = "Wissen";
 "actions.backAction" = "Terug";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Ga naar instellingen";
 "actions.stopLocationSharing" = "Stop met delen";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "wil met u praten";
 "calls.ringing" = "Gaat over…";
 "calls.connecting" = "Bezig met verbinden…";
 "calls.callFinished" = "Oproep beëindigd";
 "calls.currentCallWith" = "Bellen met";
-"calls.haghUp" = "Doe je kop op.";
-"calls.maximize" = "maximaal";
-"calls.minimize" = "minimaliseren";
-"calls.setModerator" = "stel moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "stomme geluid";
+"calls.maximize" = "Maximaliseren";
+"calls.minimize" = "Minimaliseren";
+"calls.setModerator" = "Stel moderator in";
+"calls.removeModerator" = "De moderator is niet ingesteld.";
+"calls.muteAudio" = "Geluid dempen";
 "calls.unmuteAudio" = "Niet-gemakkelijk geluid";
-"calls.lowerHand" = "onderhand";
+"calls.lowerHand" = "Onderaan hand";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Apparaten";
 "accountPage.settingsHeader" = "Instellingen";
 "accountPage.notificationsHeader" = "Meldingen";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Geblokkeerde contacten";
 "accountPage.unblockContact" = "Deblokkeren";
 "accountPage.proxyAddressAlert" = "Voer proxyadres in";
-"accountPage.noProxyExplanationLabel" = "Uw apparaat zal geen meldingen ontvangen wanneer de proxy uitgeschakeld is";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Proxyadres";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Als uw account niet is gebakierd of toegevoegd aan een ander apparaat, zullen uw account en geregistreerde naam onomkeerbaar verloren gaan.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Contacteer me op Jami!";
-"accountPage.contactMeOnJamiContant" = "Neem contact met mij op via \"%s\" op het Jami-distributiecommunicatieplatform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Voer het account wachtwoord in";
 "accountPage.usernamePlaceholder" = "Voer de gewenste gebruikersnaam in";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registratie";
 "accountPage.usernameRegisterAction" = "Registreren";
-"accountPage.usernameRegistrationFailed" = "Registratie mislukt.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Gecodeerd account";
 "accountPage.changePassword" = "Wachtwoord wijzigen";
-"accountPage.oldPasswordPlaceholder" = "Voer het oude wachtwoord in";
+"accountPage.currentPasswordPlaceholder" = "Voer het huidige wachtwoord in";
 "accountPage.newPasswordPlaceholder" = "Voer een nieuw wachtwoord in";
 "accountPage.newPasswordConfirmPlaceholder" = "Bevestig het nieuwe wachtwoord";
 "accountPage.changePasswordError" = "Slecht wachtwoord";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "Dit apparaat";
 "accountPage.otherDevices" = "Andere gekoppelde apparaten";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Bootstrap";
+"accountPage.dhtConfiguration" = "OpenDHT-configuratie";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "Server";
 "account.port" = "Poort";
 "account.proxyServer" = "Proxy";
@@ -423,35 +425,35 @@
 "account.needMigration" = "rekening moet worden migreerd";
 "account.me" = "Ik";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "Geen geblokkeerde contacten";
 
-//Link New Device
-"linkDevice.title" = "Een nieuw apparaat koppelen";
-"linkDevice.passwordError" = "Het wachtwoord dat u heeft ingevoerd ontgrendelt dit account niet";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "Om het proces te voltooien opent u Jami op het nieuwe apparaat en kiest u de optie ‘Dit apparaat aan een account koppelen’. Uw pincode is 10 minuten geldig";
+// Link New Device
+"linkDevice.title" = "Nieuw apparaat koppelen";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verifiëren";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "Audio-oproep starten";
 "contactPage.startVideoCall" = "Video-oproep starten";
-"contactPage.sendMessage" = "Bericht versturen";
+"contactPage.send" = "Versturen";
 "contactPage.clearConversation" = "Gesprek wissen";
-"contactPage.removeConversation" = "Gesprek verwijderen";
+"contactPage.leaveConversation" = "Laat het gesprek";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "Bezig met initialiseren…";
 "dataTransfer.readableStatusError" = "Fout";
 "dataTransfer.readableStatusAwaiting" = "In afwachting…";
 "dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
 "dataTransfer.readableStatusCanceled" = "Geannuleerd";
-"dataTransfer.sendingFailed" = "Versturen mislukt";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Voltooid";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "Gemiste oproep";
 "notifications.newFile" = "Nieuw bestand";
 "notifications.locationSharingStarted" = "Inkomende locatie delen begonnen";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Versturen";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Een zwerm gecreëerd";
 "generatedMessage.invitationReceived" = "werd uitgenodigd om bij te komen";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Live locatie delen";
 "generatedMessage.contactLeftConversation" = "links";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "Video-instellingen";
 "generalSettings.videoAcceleration" = "Videoversnelling inschakelen";
 "generalSettings.fileTransfer" = "Bestandsoverdracht";
 "generalSettings.locationSharing" = "Locatieverdeling";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatisch ontvangen van inkomende bestanden";
 "generalSettings.acceptTransferLimit" = "Aanvaardingslimiet";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = onbeperkt)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Beperking van de duur van locatieverdeling";
 "generalSettings.locationSharingDuration" = "De duur van de positie";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "Diagnostiek";
 "logView.description" = "Open diagnostische loginstellingen";
-"logView.startLogging" = "Begin met loggen";
-"logView.stopLogging" = "Stop met het houtplanten";
-"logView.saveError" = "Het bestand is niet gespaard";
-"logView.shareError" = "Fichaire gedeeld";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop met het loggen";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Accountmigratie";
 "migrateAccount.migrateButton" = "Migreren rekening";
-"migrateAccount.explanation" = "Dit account moet worden migreerd.";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "Om door te gaan met de migratie, moet je een wachtwoord invoeren dat voor dit account werd gebruikt";
-"migrateAccount.error" = "Je kunt je account opnieuw proberen of verwijderen.";
-"migrateAccount.migrating" = "Migreert...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Migreer naar een ander account";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "Terugkoppeling";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

@@ -63,18 +63,18 @@
 "scan.badQrCode" = "كود QR يڠ براوسيا";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "ڤرلو مڠمبيل ڤڠاجرن...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "ممباوا ڤڠاجرن";
 "swarmcreation.addADescription" = "مڠهادڤن ڤرسمڤڠن";
 // Swarm
 "swarm.ignoreSwarm" = "تيدق ممڤوڽاءي ڤڠاجرن";
-"swarm.leaveConversation" = "ڤرنه مڠهادڤي";
-"swarm.chooseColor" = "ڤيليه ڤڠڬيل";
+"swarm.leaveConversation" = "Leave conversation";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "نوع سور";
 "swarm.identifier" = "ڤڠڬونا";
 "swarm.about" = "دري ڤڠاجرن";
 "swarm.members" = "ڤڠڬونا";
-"swarm.addDescription" = "مڠهادڤن ڤرسمڤڠن";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "ڤڠاجرن ڤريۏيدو";
 "swarm.adminInvitesOnly" = "منتظم مڠيڠتكن سهيڠڬ";
 "swarm.invitesOnly" = "ڤڠاجرن ڤريۏيدو";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "آيا مطمئني که ميخواي از اين سور ترک کني؟";
 "swarm.Leave" = "برلالو";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "اسم سڤيرم";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "تيدق ڤرلو";
 "smartlist.noConversation" = "تيدق اد ڤرچاي";
-"smartlist.searchBarPlaceholder" = "نامن دبريكن...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "ڤرچاي";
 "smartlist.noNetworkConnectivity" = "تيدق اد ڤڠاجرن نيتۏرك";
 "smartlist.cellularAccess" = "ڤرلو مڠمبيل ڤرلو دڤرلوكن دالم سيٽنگ";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "تيدق اد ڤڠاجرن";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "Jami اداله ڤلاڤتورم ڤمبلاجرن يڠ براوسيا دان ڤرنه ممڤرچايا?? ي ڤرودوک دان ڤرودوک ڤڠڬونا";
 "welcome.haveAccount" = "ساي تله مڠهادڤكن";
 "welcome.linkDevice" = "ڤڠاجرن دري ڤڠاجرن لاين";
-"welcome.linkBackup" = "ڤڠمبڠكن دري كاوسن ارشيڤ";
+"welcome.linkBackup" = "Import from archive backup";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "سكيڤ";
 "createProfile.profileCreated" = "ڤد ماس يڠ لاين";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "ڤروڤيلڽ دڤرچايا?? ي دڠن ڤڠاجرنڽ. اكو بوليه مڠهادڤيڽ دالم ساتو ڤرلو.";
 "createProfile.createYourAvatar" = "ڤرچاي اوتار";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "مڠڬوناكن Jami";
 "createAccount.lookingForUsernameAvailability" = "اونتوق ممڤوڽاءي ڤرلو...";
 "createAccount.invalidUsername" = "نام ڤڠڬونا يڠ تيدق برمولا";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "خطأ شبكه";
 "createAccount.UsernameNotRegisteredMessage" = "ايكون دتولق نامو ڤڠڬونا تيدق دتولق";
 "createAccount.timeoutTitle" = "ايكون دڤرچايا?? ي";
-"createAccount.timeoutMessage" = "ڤرجالنن نام ڤڠڬونا دالم ڤرڬرقن... اكن مڠڬوناكن ببراڤ كتيک.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "ڤڠاجرن اکاون SIP يڠ موجود";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "توڠڬوڠكن نام ڤڠڬونا اونتوق مڠونجوڠكن اورڠ لاين باڬي ممڤوپا?? ي دان ممڤوپا?? ي توڠڬوڠجوق دجامي.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "ايكوڤد ايكون دڠن ڤرسود";
 "createAccount.encryptExplanation" = "اکاونت Jami دڤرچايا?? ي دان دڤرچايا?? ي دالم لوکالي يڠ دڤرچايا?? ي، سباڬاي ارشيڤ يڠ مڠمبيل کليد اکاونت. ڤرچايا?? ن ارکايڤ اين بوليه دڤرچايا?? ي دڠن ڤاسر.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ڤڠاجرن حساب";
 "linkToAccount.linkButtonTitle" = "لينك";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "ڤڠڬيل PIN";
 "linkToAccount.scanQRCode" = "Scan QR Code";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "ڤڠاجرن";
 "importFromArchive.selectArchiveButton" = "ڤيليهن ڤمباچ ارشيڤ";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "ڤمباچ ڤرنه";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "مڠڬوناكن URL Jami Account Management Server (JAMS)";
 "linkToAccountManager.enterCredentials" = "ڤرلو ممبريكن كريديتاسي JAMS";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "نميتونم حساب پيدا کنم";
-"alerts.accountCannotBeFoundMessage" = "حساب تيدق دڤرچايا?? ي دالم نيتۏرك Jami. اكن مڠمبيلكنڽ دتمڤت دجمي دري ساتو ڤرچايا?? ن موجود، دان اڤابيلا كريديتينالڽ سموا.";
-"alerts.accountAddedTitle" = "حساب دڤيليه";
-"alerts.accountNoNetworkTitle" = "تيدق بوليه منچاريكن نيتۏرك";
-"alerts.accountNoNetworkMessage" = "نميتو ممبيناكن حساب كران جامي تيدق بوليه منچاريكن ڤڠاجرن اونتوق نيترۏيك دڤرتوبوهكن.";
-"alerts.accountDefaultErrorTitle" = "خطا ناشناخته";
-"alerts.accountDefaultErrorMessage" = "حساب تيدق بوليه دڤرچايا?? ي.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "ڤيليهن";
 "alerts.profileUploadPhoto" = "ڤڠاجرن ڤوتو";
 "alerts.accountLinkedTitle" = "حساب ڤڠاجرن";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "ڤرسمڤوان ميديا تيدق دبريكن";
 "alerts.noLibraryPermissionsTitle" = "ڤرلو دڤرچايا?? ي ڤمباچ ڤوترو";
 "alerts.noLocationPermissionsTitle" = "ڤرلو دڤرچايا?? يكن دالم لوكاسي";
-"alerts.errorWrongCredentials" = "تيدق بوليه منچاريكن ڤڠاره حساب يڠ دبريكن.";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "ڤرچاي ڤمبلاجرن";
 "alerts.recordAudioMessage" = "سلاكو ڤرساتوان اودي";
 "alerts.uploadFile" = "ڤرسکوتوان";
 "alerts.uploadPhoto" = "Open gallery";
-"alerts.locationServiceIsDisabled" = "مڠهادڤي \"خدمات موقعيت\" اونتوق ممبريكن \"جامي\" ممبنتو موقعيت.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "مڠمبيل موقعيت ساي";
 "alerts.alreadylocationSharing" = "ڤد ماس اين مڠمبيل ڤڠڬونا اين";
 "alerts.locationSharingDurationTitle" = "كم كتيک ڤرلو دڤرچايا?? يكن دالم ڤمباڠونن لوكاسي؟";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© ڤڠڬونا OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "مڠاتاكن لبيه";
 
-//Actions
+// Actions
 "actions.deleteAction" = "مڠمبيل";
 "actions.clearAction" = "واضح";
 "actions.backAction" = "ڤرنه";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "برتڠه دالم سيٽنگ";
 "actions.stopLocationSharing" = "ڤرنه مڠمبيل";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "بلياو برتوجو";
 "calls.ringing" = "...تڠه...";
 "calls.connecting" = "ارتباط...";
 "calls.callFinished" = "ڤڠاجين تله دڤرچايا?? ي";
 "calls.currentCallWith" = "كاو دڠن ";
-"calls.haghUp" = "كاو كاو";
-"calls.maximize" = "ڤڠاجين";
-"calls.minimize" = "مڠمبيل";
-"calls.setModerator" = "مودراتور سيت";
-"calls.removeModerator" = "مودراتور غيرمعياري";
-"calls.muteAudio" = "صوتي ساكن";
-"calls.unmuteAudio" = "اونتوق مڠمبيل";
-"calls.lowerHand" = "يڠ ڤرنه";
+"calls.maximize" = "Maximize";
+"calls.minimize" = "Minimize";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
+"calls.muteAudio" = "Mute audio";
+"calls.unmuteAudio" = "Unmute audio";
+"calls.lowerHand" = "Lower hand";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "ڤرودوک";
 "accountPage.settingsHeader" = "سيٽنگون";
 "accountPage.notificationsHeader" = "ڤمبلاجر";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "ڤڠاجين يڠ دڤرچايا?? ي";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "ممبريكن ڤرودوكسي";
-"accountPage.noProxyExplanationLabel" = "جهازك لن يتلق إخطارات عندما يتم تعطيل الوكيل";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "ڤرودوکسي";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "اڤابيلا ايكونت اتاو دڤرچايا?? ي دالم ساتو ڤرودوک لاين، ايكونت دان نام يڠ دڤرچايا?? ي دڤرچايا?? ي دڤرچايا?? ي.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "با من دري جامي تماس بگير!";
-"accountPage.contactMeOnJamiContant" = "منچاريکن ساي دڠن مڠݢوناکن \"%s\" دالم ڤرتوبوهن ڤمبلاجرن Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "مڠهادڤي كاسوڠن ايكون";
 "accountPage.usernamePlaceholder" = "ممبريكن نام ڤڠڬونا يڠ دڤرلو";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "ڤرجالنن";
 "accountPage.usernameRegisterAction" = "ڤمباچ";
-"accountPage.usernameRegistrationFailed" = "ڤرجالنن تله دڤرچايا?? ي.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "حساب ڤڠڬيلن";
 "accountPage.changePassword" = "مڠهادڤي ڤرسود";
-"accountPage.oldPasswordPlaceholder" = "ممبري ڤرسود ڤريڠکت";
+"accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "مڠهادڤي ڤرسودن بارو";
 "accountPage.newPasswordConfirmPlaceholder" = "ڤڠاتسكن ڤرسودن بارو";
 "accountPage.changePasswordError" = "ڤاسر يڠ تيدق برلاكو";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "اين دستگاه";
 "accountPage.otherDevices" = "ڤڠڬيلن يڠ دڤرچايا?? ي";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Bootstrap";
+"accountPage.dhtConfiguration" = "OpenDHT configuration";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "ڤڠاجين";
 "account.port" = "ڤڠوربان";
 "account.proxyServer" = "ڤروكسي";
@@ -423,35 +425,35 @@
 "account.needMigration" = "حساب ڤرلو دڤرچايا?? ي";
 "account.me" = "من";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "تيدق ڤرلو ممبليكن ڤڠاجرن";
 
-//Link New Device
-"linkDevice.title" = "منچيلكن ڤڠڬونا?? ن بارو";
-"linkDevice.passwordError" = "ڤاسر يڠ دبريكن تيدق ممڤوڽاءي ايكون اين";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "اونتوق ممڤرچايا?? ي ڤروسيس ايت، اكو بوليه ممبلي Jami دالم ڤرودوک بارو دان مميليه ڤيليهن \"مربوط ڤرودوک اين دڠن اکاونت\". ڤين اكو برلاكو اونتوق 10 مينيت";
+// Link New Device
+"linkDevice.title" = "Link new device";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "ڤمباچ";
 
-//Contact Page
-"contactPage.startAudioCall" = "ڤرودوک ڤرودوک";
-"contactPage.startVideoCall" = "ڤرودوک ڤيليهن";
-"contactPage.sendMessage" = "مڠهادڤکن ڤرساتوان";
+// Contact Page
+"contactPage.startAudioCall" = "Start audio call";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "چيت برتاهن";
-"contactPage.removeConversation" = "مڠهادڤي ڤڠاجرن";
+"contactPage.leaveConversation" = "Leave conversation";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "ڤرودوکن...";
 "dataTransfer.readableStatusError" = "خطأ";
 "dataTransfer.readableStatusAwaiting" = "منتظره...";
 "dataTransfer.readableStatusOngoing" = "ڤرچاي";
 "dataTransfer.readableStatusCanceled" = "ڤرنه دڤرچايا?? ي";
-"dataTransfer.sendingFailed" = "تيدق ممڤوپا?? ي";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "كامله";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "ڤڠاجرن يڠ تيدق دڤرچايا?? ي";
 "notifications.newFile" = "ملف جديد";
 "notifications.locationSharingStarted" = "ڤڠاجين لوكاسي يڠ دتوليس";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "مڠهادڤ";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "سڤرتي دڤرچايا?? ي";
 "generatedMessage.invitationReceived" = "دتاهن اونتوق مڠڬوناكن";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "ڤڠاجين لوكاسي";
 "generatedMessage.contactLeftConversation" = "ڤڠاجين";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "ڤڠاجرن ڤيديو";
 "generalSettings.videoAcceleration" = "ممبنتو ڤرودوک ڤيديو";
 "generalSettings.fileTransfer" = "ڤرچاي ڤرچاي";
-"generalSettings.locationSharing" = "ڤڠاجرن لوكاسي";
+"generalSettings.locationSharing" = "Location sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "مڠاتاهكن ڤرچاي يڠ دڤرچاي";
 "generalSettings.acceptTransferLimit" = "ڤڠاجرن ڤڠاجرن";
-"generalSettings.acceptTransferLimitDescription" = "(دالم MB, 0 = لامحدود)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "مڠهادڤي ڤڠاجرن ڤڠاجرن";
 "generalSettings.locationSharingDuration" = "ڤڠاجرن ڤروسي";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "ڤڠاجرن";
 "logView.description" = "ڤڠاجرن لوڬ دأڠڬڤ";
-"logView.startLogging" = "ڤرلو مڠهادڤي ڤڠاجين";
-"logView.stopLogging" = "ڤرنه مڠهادڤي";
-"logView.saveError" = "تيدق ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممو ممڤو مم";
-"logView.shareError" = "تيدق ممبنتو ڤمباچ";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "ڤمباچ ڤرچاي";
 "migrateAccount.migrateButton" = "حساب مڠاجر";
-"migrateAccount.explanation" = "اين حساب بايد مهاجرت شود";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "اونتوق ممڤرچايا?? ي ڤرڬي، اكو بوليه مپببكن ڤرسود يڠ دڤڠڬوناكن اونتوق ايكون اين";
-"migrateAccount.error" = "تيدق ممڤوڽاءي ڤڠاجرن ايكون اتاو تيدق ممڤوڽاءي ايكون اتاو مڠحذف.";
-"migrateAccount.migrating" = "ڤمبلاجرن...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "مڠهادڤي ايكونت لاين";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "ڤڠاجرن";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-
