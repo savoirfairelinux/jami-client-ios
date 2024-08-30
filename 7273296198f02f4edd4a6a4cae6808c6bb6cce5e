@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24ce3e95_e2e519e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-08-30T00:23:09Z",
+      "side": 1,
+      "message": "Is the special case of blocking yourself not allowed? Thank you",
+      "revId": "7273296198f02f4edd4a6a4cae6808c6bb6cce5e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
