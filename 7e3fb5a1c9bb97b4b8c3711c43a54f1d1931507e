@@ -22,6 +22,29 @@
       },
       "revId": "7e3fb5a1c9bb97b4b8c3711c43a54f1d1931507e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36f238b4_7b59d6b2",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-08-30T00:13:26Z",
+      "side": 0,
+      "message": "Can you please provide code pointers to where this variable name is used? Thank you",
+      "range": {
+        "startLine": 175,
+        "startChar": 1,
+        "endLine": 175,
+        "endChar": 31
+      },
+      "revId": "7e3fb5a1c9bb97b4b8c3711c43a54f1d1931507e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
