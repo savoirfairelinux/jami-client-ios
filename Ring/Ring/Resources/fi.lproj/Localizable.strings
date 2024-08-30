@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Väärä QR-koodi";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Etsit yhteydenpitoa...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Luota ruumis";
 "swarmcreation.addADescription" = "Lisää kuvaus";
 // Swarm
 "swarm.ignoreSwarm" = "Ilman huomiota";
-"swarm.leaveConversation" = "Jätä keskustelu";
-"swarm.chooseColor" = "Valitse väri";
+"swarm.leaveConversation" = "Leave conversation";
+"swarm.chooseColor" = "Väri";
 "swarm.typeOfSwarm" = "Ruumiin tyyppi";
 "swarm.identifier" = "Tunniste";
 "swarm.about" = "Tietoa";
 "swarm.members" = "Jäsenet";
-"swarm.addDescription" = "Lisää kuvausta";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Yksityinen parvi";
 "swarm.adminInvitesOnly" = "Valvontajohtaja vain kutsuu";
 "swarm.invitesOnly" = "Yksityinen parvi";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "Oletko varma, että haluat lähteä?";
 "swarm.Leave" = "Lähdetään";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm'n nimi";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ei tuloksia";
 "smartlist.noConversation" = "Ei keskusteluja";
-"smartlist.searchBarPlaceholder" = "Syötä nimi...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Etsintä";
 "smartlist.noNetworkConnectivity" = "Ei verkkoyhteyttä";
 "smartlist.cellularAccess" = "Varmista, että matkapuhelinverkon käyttö on sallittu asetuksissasi";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "Lisää yhteystietoihin?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Ei kutsuja";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "Jami on vapaa ja universaali viestintäalusta joka turvaa käyttäjien yksityisyyden ja vapaudet";
 "welcome.haveAccount" = "Minulla on jo tili.";
 "welcome.linkDevice" = "Muusta laitteesta tuonnut";
-"welcome.linkBackup" = "Tuoda arkistojen varmuuskopioista";
+"welcome.linkBackup" = "Import from archive backup";
 "welcome.createAccount" = "Liity";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "Ohita";
 "createProfile.profileCreated" = "Seuraava";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "Profiilisi jaetaan yhteystietojesi kanssa. Voit muuttaa sitä milloin tahansa.";
 "createProfile.createYourAvatar" = "Luo avatari";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Liity Jamiin.";
 "createAccount.lookingForUsernameAvailability" = "etsitään saatavuutta…";
 "createAccount.invalidUsername" = "käyttäjätunnus ei kelpaa";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Verkkovirhe";
 "createAccount.UsernameNotRegisteredMessage" = "Tili luotiin, mutta käyttäjänimeä ei rekisteröity";
 "createAccount.timeoutTitle" = "Tili luotu";
-"createAccount.timeoutMessage" = "Käyttäjätunnuksen rekisteröinti käynnissä... Se voi kestää hetken.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Määritä olemassa oleva SIP-tunnus.";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Voit valita käyttäjänimen auttaaksesi muita löytämään ja tavoittamaan sinua Jami:llä.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Salaa tunnus salasanalla";
 "createAccount.encryptExplanation" = "Jami-tilin luodaan ja tallennetaan paikallisesti vain tässä laitteessa, arkistoina, joka sisältää tiliasi avaimet.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Tilin linkittäminen";
 "linkToAccount.linkButtonTitle" = "Yhdistä";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Syötä PIN-koodi";
 "linkToAccount.scanQRCode" = "Skannaa QR-koodi";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Tuo";
 "importFromArchive.selectArchiveButton" = "Valitse arkistotiedosto";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Kirjaudu sisään";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS verkko-osoite";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Kirjoita Jami Account Management Serverin (JAMS) URL:";
 "linkToAccountManager.enterCredentials" = "Kirjoita JAMS-luottoluokit";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Tiliä ei löydy";
-"alerts.accountCannotBeFoundMessage" = "Tiliä ei löytynyt Jami-verkosta. Varmista, että se on viety Ringissä aiemmin luodusta laitteesta ja että annetut tunnistetiedot ovat oikein.";
-"alerts.accountAddedTitle" = "Tili lisätty";
-"alerts.accountNoNetworkTitle" = "Verkkoon ei saada yhteyttä";
-"alerts.accountNoNetworkMessage" = "Tiliä ei voitu lisätä, koska Jami ei voinut muodostaa yhteyttä hajautettuun verkkoon. Tarkista laitteen yhteydet.";
-"alerts.accountDefaultErrorTitle" = "Tuntematon virhe";
-"alerts.accountDefaultErrorMessage" = "Tiliä ei voitu luoda.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Ota valokuva";
 "alerts.profileUploadPhoto" = "Lähetä kuva";
 "alerts.accountLinkedTitle" = "Tilin linkittäminen";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "Medialupaa ei ole myönnetty";
 "alerts.noLibraryPermissionsTitle" = "Pääsyä valokuvakirjastoon ei ole myönnetty";
 "alerts.noLocationPermissionsTitle" = "Pääsy sijaintiin ei ole myönnetty";
-"alerts.errorWrongCredentials" = "Ei voi muodostaa yhteyttä tilin hallintaan. Tarkista käyttäjätiedot";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Tallenna videoviesti";
 "alerts.recordAudioMessage" = "Tallenna ääniviesti";
 "alerts.uploadFile" = "Lähetä tiedosto";
 "alerts.uploadPhoto" = "Avoin galleri";
-"alerts.locationServiceIsDisabled" = "Ota \"sijaintipalvelut\" käyttöön, jotta \"Jami\" voi määrittää sijaintisi.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Jaa minun sijainti";
 "alerts.alreadylocationSharing" = "Jaat jo sijaintia tämän käyttäjän kanssa";
 "alerts.locationSharingDurationTitle" = "Kuinka kauan sijainnin pitäisi olla jaettuna?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Lue lisää";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Poista";
 "actions.clearAction" = "Tyhjennä";
 "actions.backAction" = "Takaisin";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Mene asetuksiin";
 "actions.stopLocationSharing" = "Lopeta jakaminen";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "haluaa puhua kanssasi";
 "calls.ringing" = "Soi...";
 "calls.connecting" = "Yhdistää...";
 "calls.callFinished" = "Puhelu päättynyt";
 "calls.currentCallWith" = "Soita";
-"calls.haghUp" = "katkaise puhelu";
-"calls.maximize" = "suurenna";
-"calls.minimize" = "pienennä";
-"calls.setModerator" = "aseta valvoja";
-"calls.removeModerator" = "poista valvoja";
-"calls.muteAudio" = "mykistä ääni";
-"calls.unmuteAudio" = "poista mykistys";
-"calls.lowerHand" = "laskettu käsi";
+"calls.maximize" = "Maximize";
+"calls.minimize" = "Minimize";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
+"calls.muteAudio" = "Vaimenna ääni";
+"calls.unmuteAudio" = "Unmute audio";
+"calls.lowerHand" = "Lower hand";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Laitteet";
 "accountPage.settingsHeader" = "Asetukset";
 "accountPage.notificationsHeader" = "Ilmoitukset";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Estetyt yhteystiedot";
 "accountPage.unblockContact" = "SALLI";
 "accountPage.proxyAddressAlert" = "Anna välityspalvelimen osoite";
-"accountPage.noProxyExplanationLabel" = "Laite ei saa ilmoituksia, kun välityspalvelin on poistettu käytöstä";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Proxy osoite";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Jos sinun tunnusta ei ole varmuuskopioitu tai lisätty toiseen laitteeseen, tunnus ja rekisteröity nimi menetetään lopullisesti.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Ota minuun yhteyttä Jamilla!";
-"accountPage.contactMeOnJamiContant" = "Ota minuun yhteyttä \"%s\" Jamin hajautetun viestintäalustan avulla:  https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Syötä käyttäjätunnuksen salasana";
 "accountPage.usernamePlaceholder" = "Kirjoita haluamasi käyttäjänimi";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Rekisteröidään";
 "accountPage.usernameRegisterAction" = "Rekistöröi";
-"accountPage.usernameRegistrationFailed" = "Rekisteröinti epäonnistui. Tarkista salasana.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Salaistettu tili";
 "accountPage.changePassword" = "Vaihda salasana";
-"accountPage.oldPasswordPlaceholder" = "Anna vanha salasana";
+"accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "Anna uusi salasana";
 "accountPage.newPasswordConfirmPlaceholder" = "Vahvista uusi salasana";
 "accountPage.changePasswordError" = "Väärä salasana";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "Tämä laite";
 "accountPage.otherDevices" = "Muut linkitetyt laitteet";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Bootstrap";
+"accountPage.dhtConfiguration" = "OpenDHT configuration";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "Palvelin";
 "account.port" = "Portti";
 "account.proxyServer" = "Välityspalvelin";
@@ -423,35 +425,35 @@
 "account.needMigration" = "tili on siirrettävä";
 "account.me" = "Minä";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "EI estettyjä yhteystietoja";
 
-//Link New Device
+// Link New Device
 "linkDevice.title" = "Linkitä uusi laite";
-"linkDevice.passwordError" = "Antamasi salasana ei avaa tämän tunnuksen salaisuuksia";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "Prosessin loppuun saattamiseksi sinun on avattava Jami uudessa laitteessa ja valittava vaihtoehto \"Yhdistä tämä laite tunnukseen\". PIN on voimassa 10 minuuttia";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Tarkistetaan";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "Aloita äänipuhelu";
-"contactPage.startVideoCall" = "Aloita videopuhelu";
-"contactPage.sendMessage" = "Lähetä viesti";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "Tyhjennä keskustelu";
-"contactPage.removeConversation" = "Poista keskustelu";
+"contactPage.leaveConversation" = "Leave conversation";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "Valmistellaan...";
 "dataTransfer.readableStatusError" = "Virhe";
 "dataTransfer.readableStatusAwaiting" = "Odottaa...";
 "dataTransfer.readableStatusOngoing" = "Lähettää";
 "dataTransfer.readableStatusCanceled" = "Peruttu";
-"dataTransfer.sendingFailed" = "Lähetys epäonnistui";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Valmis";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "Vastaamaton puhelu";
 "notifications.newFile" = "Uusi tiedosto";
 "notifications.locationSharingStarted" = "Saapuvan sijainnin jakaminen alkoi";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Lähetä";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Parvi luotiin";
 "generatedMessage.invitationReceived" = "oli kutsuttu liittymään";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
 "generatedMessage.contactLeftConversation" = "vasemmisto";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "Videon asetukset";
 "generalSettings.videoAcceleration" = "Kytke videon laitteistokiihdytys";
 "generalSettings.fileTransfer" = "Tiedostonsiirto";
 "generalSettings.locationSharing" = "Paikallisen jakamisen";
 "generalSettings.automaticAcceptIncomingFiles" = "Hyväksy saapuvat tiedostot automaattisesti";
 "generalSettings.acceptTransferLimit" = "Hyväksy siirtoraja";
-"generalSettings.acceptTransferLimitDescription" = "(MB:ssä 0 = rajattomuus)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Rajoittakaa sijaintiyhteyden kesto";
 "generalSettings.locationSharingDuration" = "Asetuksen osakkeiden kesto";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "Diagnostiikka";
 "logView.description" = "Avaa diagnostiikan lokin asetukset";
-"logView.startLogging" = "Aloita kirjaaminen";
-"logView.stopLogging" = "Lopeta metsästys";
-"logView.saveError" = "Tiedosto ei ole tallennettu";
-"logView.shareError" = "Tiedosto ei ole jakettu";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Tilin siirto";
 "migrateAccount.migrateButton" = "Siirrä tunnus";
-"migrateAccount.explanation" = "Tämä tili on siirrettävä";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "Jatka siirtymistä antamalla salasana, jota käytettiin tähän tiliin";
-"migrateAccount.error" = "Tilisi siirtäminen epäonnistui. Voit yrittää uudelleen tai poistaa tilisi.";
-"migrateAccount.migrating" = "Siirretään...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Siirrä toinen tunnus";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "Palaute";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

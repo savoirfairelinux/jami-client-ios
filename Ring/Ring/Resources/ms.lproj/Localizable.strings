@@ -63,18 +63,18 @@
 "scan.badQrCode" = "മോശം ക്യുആർ കോഡ്";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "ബന്ധം കണ്ടെത്തുക...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "ഒരു കൂട്ടം സൃഷ്ടിക്കുക";
 "swarmcreation.addADescription" = "വിവരണം ചേർക്കുക";
 // Swarm
 "swarm.ignoreSwarm" = "ആ കൂട്ടം അവഗണിക്കുക";
 "swarm.leaveConversation" = "സംഭാഷണം ഉപേക്ഷിക്കുക";
-"swarm.chooseColor" = "ഒരു നിറം തിരഞ്ഞെടുക്കുക";
+"swarm.chooseColor" = "Warna";
 "swarm.typeOfSwarm" = "സവാമിയുടെ തരം";
 "swarm.identifier" = "ഐഡന്റിഫയർ";
 "swarm.about" = "Tentang";
 "swarm.members" = "അംഗങ്ങള്";
-"swarm.addDescription" = "വിവരണം ചേർക്കുക";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "സ്വകാര്യ സംഘം";
 "swarm.adminInvitesOnly" = "അഡ്മിൻ ക്ഷണിക്കുന്നു";
 "swarm.invitesOnly" = "സ്വകാര്യ സംഘം";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "ഈ കൂട്ടം വിട്ടുപോകാൻ നിനക്ക് ഉറപ്പുണ്ടോ?";
 "swarm.Leave" = "പോകൂ";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "സ്വാമിയുടെ പേര്";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ഫലങ്ങളില്ല";
 "smartlist.noConversation" = "സംഭാഷണം വേണ്ട";
-"smartlist.searchBarPlaceholder" = "പേര് നൽകുക.";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "തിരയൽ";
 "smartlist.noNetworkConnectivity" = "Tiada sambungan rangkaian";
 "smartlist.cellularAccess" = "നിങ്ങളുടെ ക്രമീകരണങ്ങളിൽ സെല്ലുലാർ ആക്സസ് അനുവദിച്ചിട്ടുണ്ടെന്ന് ഉറപ്പാക്കുക";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "ബന്ധുക്കളെ കൂട്ടിച്ചേർക്കണോ?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "ക്ഷണങ്ങളില്ല";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "ജാമി എന്നത് സ്വതന്ത്രവും സാർവത്രികവുമായ ഒരു ആശയവിനിമയ പ്ലാറ്റ്ഫോമാണ്, അത് ഉപയോക്താക്കളുടെ സ്വകാര്യതയും സ്വാതന്ത്ര്യവും സംരക്ഷിക്കുന്നു";
 "welcome.haveAccount" = "എനിക്ക് ഒരു അക്കൌണ്ട് ഉണ്ട്";
 "welcome.linkDevice" = "മറ്റൊരു ഉപകരണത്തിൽ നിന്നും ഇറക്കുമതി ചെയ്യുക";
-"welcome.linkBackup" = "ഒരു ആർക്കൈവ് ബാക്കപ്പ് നിന്നും ഇറക്കുമതി ചെയ്യുക";
+"welcome.linkBackup" = "ആർക്കൈവ് ബാക്കപ്പ് നിന്നും ഇറക്കുമതി ചെയ്യുക";
 "welcome.createAccount" = "Gabung";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "സ്കിപ്പ് ചെയ്യുക";
 "createProfile.profileCreated" = "അടുത്തത്";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "നിങ്ങളുടെ പ്രൊഫൈല് നിങ്ങളുടെ കോൺടാക്റ്റുകളുമായി പങ്കുവെക്കും. നിങ്ങള് ക്ക് അത് എപ്പോൾ വേണമെങ്കിലും മാറ്റാം.";
 "createProfile.createYourAvatar" = "നിങ്ങളുടെ അവതാർ സൃഷ്ടിക്കുക";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "ജാമിയിൽ ചേരുക";
 "createAccount.lookingForUsernameAvailability" = "ലഭ്യമായതിനായി അന്വേഷിക്കുന്നു.";
 "createAccount.invalidUsername" = "അസാധുവായ ഉപയോക്തൃനാമം";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Rangkaian gagal";
 "createAccount.UsernameNotRegisteredMessage" = "അക്കൌണ്ട് സൃഷ്ടിച്ചു, പക്ഷേ ഉപയോക്തൃനാമം രജിസ്റ്റർ ചെയ്തിട്ടില്ല";
 "createAccount.timeoutTitle" = "അക്കൌണ്ട് സൃഷ്ടിച്ചു";
-"createAccount.timeoutMessage" = "ഉപയോക്തൃനാമം രജിസ്റ്റർ ചെയ്യുന്നതിനുള്ള നടപടിക്രമം... കുറച്ച് നിമിഷങ്ങൾ എടുത്തേക്കാം.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "നിലവിലുള്ള SIP അക്കൌണ്ട് ക്രമീകരിക്കുക";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "ജാമി എന്ന സ്ഥലത്ത് നിങ്ങളെ കണ്ടെത്താനും എത്തിപ്പെടാനും മറ്റുള്ളവരെ സഹായിക്കുന്നതിന് നിങ്ങൾക്ക് ഒരു ഉപയോക്തൃനാമം തിരഞ്ഞെടുക്കാം.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "പാസ്വേഡ് ഉപയോഗിച്ച് അക്കൌണ്ട് എൻക്രിപ്റ്റ് ചെയ്യുക";
 "createAccount.encryptExplanation" = "നിങ്ങളുടെ അക്കൌണ്ട് കീകൾ അടങ്ങുന്ന ഒരു ആർക്കൈവായി ഈ ഉപകരണത്തിൽ മാത്രമേ ജാമി അക്കൌണ്ട് സൃഷ്ടിക്കുകയും സംഭരിക്കുകയും ചെയ്യൂ. ഈ ആർക്കൈവിലേക്കുള്ള ആക്സസ് ഒരു പാസ്വേഡ് ഉപയോഗിച്ച് സംരക്ഷിക്കാവുന്നതാണ്.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "അക്കൌണ്ട് ബന്ധിപ്പിക്കൽ";
 "linkToAccount.linkButtonTitle" = "ലിങ്ക്";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "ലിങ്ക് ഉപകരണം";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "പി. ഐ. എൻ.";
 "linkToAccount.pinLabel" = "Masukkan PIN";
 "linkToAccount.scanQRCode" = "Imbas kod QR";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "ഇറക്കുമതി";
 "importFromArchive.selectArchiveButton" = "ആർക്കൈവ് ഫയൽ തിരഞ്ഞെടുക്കുക";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "സൈൻ ഇൻ ചെയ്യുക";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "ജെയിംസ് URL";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "ജാമി അക്കൌണ്ട് മാനേജ്മെന്റ് സെർവർ (ജാമിസ്) URL നൽകുക";
 "linkToAccountManager.enterCredentials" = "ജെയിംസ് ക്രെഡൻഷ്യലുകൾ നൽകുക";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Akaun tidak ditemui";
-"alerts.accountCannotBeFoundMessage" = "ജാമി നെറ്റ്വർക്കിൽ അക്കൌണ്ട് കണ്ടെത്താനായില്ല. ജാമി നെറ്റ്വർക്കിൽ നിന്നും അത് കയറ്റുമതി ചെയ്തതായി ഉറപ്പാക്കുക.";
-"alerts.accountAddedTitle" = "അക്കൌണ്ട് ചേര് ന്നു";
-"alerts.accountNoNetworkTitle" = "Tidak dapat berhubung dengan rangkaian";
-"alerts.accountNoNetworkMessage" = "ജാമിക്ക് വിതരണം ചെയ്ത നെറ്റ്വർക്കിലേക്ക് കണക്ട് ചെയ്യാനായില്ല.";
-"alerts.accountDefaultErrorTitle" = "അജ്ഞാത പിശക്";
-"alerts.accountDefaultErrorMessage" = "അക്കൌണ്ട് സൃഷ്ടിക്കാൻ പറ്റിയില്ല.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "ഫോട്ടോ എടുക്കൂ";
 "alerts.profileUploadPhoto" = "ഫോട്ടോ അപ്ലോഡ് ചെയ്യുക";
 "alerts.accountLinkedTitle" = "ലിങ്കിംഗ് അക്കൌണ്ട്";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "മാധ്യമങ്ങളുടെ അനുമതി അനുവദിച്ചിട്ടില്ല";
 "alerts.noLibraryPermissionsTitle" = "ഫോട്ടോ ലൈബ്രറിയിലേക്കുള്ള പ്രവേശനം അനുവദിച്ചിട്ടില്ല";
 "alerts.noLocationPermissionsTitle" = "സ്ഥലം ലഭ്യമാക്കിയിട്ടില്ല";
-"alerts.errorWrongCredentials" = "നൽകിയിരിക്കുന്ന അക്കൌണ്ട് മാനേജറുമായി ബന്ധപ്പെടാനായില്ല. ദയവായി നിങ്ങളുടെ ക്രെഡിറ്റീവുകൾ പരിശോധിക്കുക";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "ഒരു വീഡിയോ സന്ദേശം റെക്കോർഡ് ചെയ്യുക";
 "alerts.recordAudioMessage" = "ഒരു ഓഡിയോ സന്ദേശം റെക്കോർഡ് ചെയ്യുക";
 "alerts.uploadFile" = "Hantar fail";
 "alerts.uploadPhoto" = "തുറന്ന ഗാലറി";
-"alerts.locationServiceIsDisabled" = "\"ജാമി\" നിങ്ങളുടെ സ്ഥാനം നിർണ്ണയിക്കാൻ \"ലൊക്കേഷൻ സർവീസസ്\" ഓണാക്കുക.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "എന്റെ സ്ഥാനം പങ്കുവെക്കുക";
 "alerts.alreadylocationSharing" = "ഈ ഉപയോക്താവിനൊപ്പം ഇതിനകം സ്ഥാനം പങ്കിടുന്നു";
 "alerts.locationSharingDurationTitle" = "സ്ഥലം പങ്കുവയ്ക്കല് എത്രകാലം വേണം?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© ഓപ്പൺ സ്ട്രീറ്റ് മാപ്പ് സംഭാവന ചെയ്യുന്നവർ";
 "alerts.openStreetMapCopyrightMoreInfo" = "കൂടുതല് അറിയുക";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Hapus";
 "actions.clearAction" = "വ്യക്തമായ";
 "actions.backAction" = "തിരിച്ചുപോവുക";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "ക്രമീകരണങ്ങളിലേക്ക് പോകുക";
 "actions.stopLocationSharing" = "പങ്കിടുന്നത് അവസാനിപ്പിക്കുക";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "നിന്നോട് സംസാരിക്കാന് ആഗ്രഹിക്കുന്നു";
 "calls.ringing" = "- വിളിക്കുന്നു.";
 "calls.connecting" = "ബന്ധിപ്പിക്കുന്ന...";
 "calls.callFinished" = "വിളി പൂർത്തിയായി";
 "calls.currentCallWith" = " വിളിക്കുക";
-"calls.haghUp" = "അടയ്ക്കുക";
 "calls.maximize" = "പരമാവധി";
-"calls.minimize" = "കുറയ്ക്കുക";
-"calls.setModerator" = "സെറ്റ് മോഡറേറ്റർ";
-"calls.removeModerator" = "അൺസെറ്റ് മോഡറേറ്റർ";
-"calls.muteAudio" = "നിശബ്ദ ശബ്ദം";
+"calls.minimize" = "പരിമിതപ്പെടുത്തുക";
+"calls.setModerator" = "മോഡറേറ്റർ സജ്ജമാക്കുക";
+"calls.removeModerator" = "മോഡറേറ്റർ അൺസെറ്റ് ചെയ്യുക";
+"calls.muteAudio" = "Matikan bunyi";
 "calls.unmuteAudio" = "നിശബ്ദമായ ഓഡിയോ";
 "calls.lowerHand" = "താഴത്തെ കൈ";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Perangkat";
 "accountPage.settingsHeader" = "Tetapan";
 "accountPage.notificationsHeader" = "അറിയിപ്പുകൾ";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "തടഞ്ഞ കോൺടാക്റ്റുകൾ";
 "accountPage.unblockContact" = "അൺബ്ലോക്ക്";
 "accountPage.proxyAddressAlert" = "പ്രോക്സി വിലാസം നൽകുക";
-"accountPage.noProxyExplanationLabel" = "പ്രോക്സി പ്രവർത്തനരഹിതമാക്കിയാല് നിങ്ങളുടെ ഉപകരണം അറിയിപ്പുകള് സ്വീകരിക്കില്ല";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "പ്രോക്സി വിലാസം";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "നിങ്ങളുടെ അക്കൌണ്ട് ബാക്കപ്പ് ചെയ്തിട്ടില്ലെങ്കില് അല്ലെങ്കിൽ മറ്റൊരു ഉപകരണത്തില് ചേര് ന്നിട്ടില്ലെങ്കില് നിങ്ങളുടെ അക്കൌണ്ടും രജിസ്റ്റര് ചെയ്ത പേരും അപ്രത്യക്ഷമാകും.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ജാമി എന്നിവിടങ്ങളിൽ എന്നെ ബന്ധപ്പെടുക!";
-"accountPage.contactMeOnJamiContant" = "ജാമി വിതരണം ചെയ്ത ആശയവിനിമയ പ്ലാറ്റ്ഫോമിലെ \"%s\" ഉപയോഗിച്ച് എന്നെ ബന്ധപ്പെടുകഃ https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "അക്കൌണ്ട് പാസ്വേഡ് നൽകുക";
 "accountPage.usernamePlaceholder" = "ആവശ്യമുള്ള ഉപയോക്തൃനാമം നൽകുക";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "രജിസ്ട്രേഷൻ";
 "accountPage.usernameRegisterAction" = "Daftar";
-"accountPage.usernameRegistrationFailed" = "രജിസ്ട്രേഷൻ പരാജയപ്പെട്ടു. പാസ്വേഡ് പരിശോധിക്കുക.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "എൻക്രിപ്റ്റ് ചെയ്ത അക്കൌണ്ട്";
 "accountPage.changePassword" = "പാസ്വേഡ് മാറ്റുക";
-"accountPage.oldPasswordPlaceholder" = "പഴയ പാസ്വേഡ് നൽകുക";
+"accountPage.currentPasswordPlaceholder" = "നിലവിലെ പാസ്വേഡ് നൽകുക";
 "accountPage.newPasswordPlaceholder" = "പുതിയ പാസ്വേഡ് നൽകുക";
 "accountPage.newPasswordConfirmPlaceholder" = "പുതിയ പാസ്വേഡ് സ്ഥിരീകരിക്കുക";
 "accountPage.changePasswordError" = "തെറ്റായ പാസ്വേഡ്";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "ഈ ഉപകരണം";
 "accountPage.otherDevices" = "മറ്റ് ബന്ധിപ്പിച്ച ഉപകരണങ്ങൾ";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Bootstrap";
+"accountPage.dhtConfiguration" = "ഓപ്പൺ ഡിഎച്ച്ടി കോൺഫിഗറേഷൻ";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "സെർവർ";
 "account.port" = "Port";
 "account.proxyServer" = "Proksi";
@@ -423,35 +425,35 @@
 "account.needMigration" = "അക്കൌണ്ട് നീക്കം ചെയ്യണം";
 "account.me" = "Saya";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "തടഞ്ഞ ബന്ധങ്ങളില്ല";
 
-//Link New Device
-"linkDevice.title" = "പുതിയ ഉപകരണം ബന്ധിപ്പിക്കുക";
-"linkDevice.passwordError" = "താങ്കൾ നൽകിയ പാസ്വേഡ് ഈ അക്കൌണ്ട് അൺലോക്കുചെയ്യുന്നില്ല";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "പ്രക്രിയ പൂർത്തിയാക്കുന്നതിന്, പുതിയ ഉപകരണത്തിൽ ജാമി തുറന്ന് \"ഈ ഉപകരണം ഒരു അക്കൌണ്ടിലേക്ക് ലിങ്ക് ചെയ്യുക\" എന്ന ഓപ്ഷൻ തിരഞ്ഞെടുക്കുക. നിങ്ങളുടെ പിൻ 10 മിനിറ്റ് സാധുവാണ്";
+// Link New Device
+"linkDevice.title" = "പുതിയ ഉപകരണം ലിങ്ക് ചെയ്യുക";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "പരിശോധന";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "ഓഡിയോ കോൾ ആരംഭിക്കുക";
 "contactPage.startVideoCall" = "വീഡിയോ കോൾ ആരംഭിക്കുക";
-"contactPage.sendMessage" = "സന്ദേശം അയയ്ക്കുക";
+"contactPage.send" = "അയയ്ക്കുക";
 "contactPage.clearConversation" = "വ്യക്തമായ ചാറ്റ്";
-"contactPage.removeConversation" = "സംഭാഷണം നീക്കം ചെയ്യുക";
+"contactPage.leaveConversation" = "സംഭാഷണം ഉപേക്ഷിക്കുക";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "- തുടക്കത്തില്.";
 "dataTransfer.readableStatusError" = "Gagal";
 "dataTransfer.readableStatusAwaiting" = "കാത്തിരിക്കുകയാണ്.";
 "dataTransfer.readableStatusOngoing" = "കൈമാറ്റം";
 "dataTransfer.readableStatusCanceled" = "Dibatalkan";
-"dataTransfer.sendingFailed" = "അയയ്ക്കാൻ സാധിച്ചില്ല";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "പൂർണ്ണമായ";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "വിളി നഷ്ടപ്പെട്ടു";
 "notifications.newFile" = "പുതിയ ഫയൽ";
 "notifications.locationSharingStarted" = "ലൊക്കേഷൻ പങ്കിടൽ ആരംഭിച്ചു";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "അയയ്ക്കുക";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "ഒരു കൂട്ടം സൃഷ്ടിച്ചു";
 "generatedMessage.invitationReceived" = "ചേരാൻ ക്ഷണിച്ചു";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "ലൈവ് ലൊക്കേഷൻ പങ്കിടൽ";
 "generatedMessage.contactLeftConversation" = "ഇടതുവശത്ത്";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "വീഡിയോ ക്രമീകരണങ്ങൾ";
 "generalSettings.videoAcceleration" = "വീഡിയോ വേഗത പ്രാപ്തമാക്കുക";
 "generalSettings.fileTransfer" = "ഫയൽ കൈമാറ്റം";
 "generalSettings.locationSharing" = "സ്ഥാനം പങ്കിടൽ";
 "generalSettings.automaticAcceptIncomingFiles" = "സ്വപ്രേരിതമായി വരുന്ന ഫയലുകൾ സ്വീകരിക്കുക";
 "generalSettings.acceptTransferLimit" = "കൈമാറ്റ പരിധി അംഗീകരിക്കുക";
-"generalSettings.acceptTransferLimitDescription" = "(MB ൽ, 0 = പരിധിയില്ലാത്തത്)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "സ്ഥാനം പങ്കിടുന്നതിന്റെ കാലാവധി പരിമിതപ്പെടുത്തുക";
 "generalSettings.locationSharingDuration" = "പോസിഷൻ ഓഹരി കാലാവധി";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "രോഗനിർണയം";
 "logView.description" = "ഡയഗ്നോസ്റ്റിക് ലോഗ് ക്രമീകരണങ്ങൾ തുറക്കുക";
-"logView.startLogging" = "ലോഗ് ആരംഭിക്കുക";
-"logView.stopLogging" = "മരം മുറിക്കുന്നത് അവസാനിപ്പിക്കുക";
-"logView.saveError" = "ഫയൽ സംരക്ഷിക്കാൻ സാധിച്ചില്ല";
-"logView.shareError" = "ഫയൽ പങ്കിടുന്നതിൽ പരാജയപ്പെട്ടു";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "മരം മുറിക്കുന്നത് നിർത്തുക";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Permindahan akaun";
 "migrateAccount.migrateButton" = "കുടിയേറ്റ അക്കൌണ്ട്";
-"migrateAccount.explanation" = "ഈ അക്കൌണ്ട് മൈഗ്രേറ്റ് ചെയ്യണം";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "ഈ അക്കൌണ്ടിനായി ഉപയോഗിച്ച പാസ്വേഡ് നിങ്ങൾ നൽകണം.";
-"migrateAccount.error" = "നിങ്ങളുടെ അക്കൌണ്ട് മൈഗ്രേറ്റ് ചെയ്യാനായില്ല. വീണ്ടും ശ്രമിക്കുകയോ ഇല്ലാതാക്കുകയോ ചെയ്യാം.";
-"migrateAccount.migrating" = "കുടിയേറുന്നു.";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "മറ്റൊരു അക്കൌണ്ടിലേക്ക് കുടിയേറുക";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "പ്രതികരണങ്ങൾ";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

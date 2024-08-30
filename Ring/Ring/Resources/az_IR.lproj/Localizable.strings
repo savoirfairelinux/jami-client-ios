@@ -63,18 +63,18 @@
 "scan.badQrCode" = "سيخين QR کد";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "تماس آختارماق...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "سورو یارات";
 "swarmcreation.addADescription" = "شرح قوش";
 // Swarm
 "swarm.ignoreSwarm" = "سورونو تفتیش ائت";
-"swarm.leaveConversation" = "دانیشیقدان چیخ";
-"swarm.chooseColor" = "رنگ سئچیب";
+"swarm.leaveConversation" = "Leave conversation";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "سورونون نوعو";
 "swarm.identifier" = "آدیفئکتور";
 "swarm.about" = "حاقّيندا";
 "swarm.members" = "عضولری";
-"swarm.addDescription" = "شرح قوش";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "خصوصی سوروم";
 "swarm.adminInvitesOnly" = "فقط مدير دعوت ائدير";
 "swarm.invitesOnly" = "خصوصی سوروم";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "آيا مطمئني که مي خواي از اين سوره خارج بشي؟";
 "swarm.Leave" = "گئت";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "سوْرما آدینی";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "نتیجه یوخدور";
 "smartlist.noConversation" = "دانیشیق اولماز";
-"smartlist.searchBarPlaceholder" = "آدینی یئره قوی...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "آختارماق";
 "smartlist.noNetworkConnectivity" = "شبکه باغلیغی یوخدور";
 "smartlist.cellularAccess" = "سیلاوی آچیقلاما سیزلیگیزین وئریلمه سیندن آرخایین اولون";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "تماس لری آرتیرماق؟";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "دعوتلر یوخدور";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "جامی، آزاد و آلیشلی بیر ارتباط پلتفرمیدیر کی، ایستیفاده چیلرین خصوصی و آزادلیغی قوروموشدور.";
 "welcome.haveAccount" = "منیم حسابوم وار";
 "welcome.linkDevice" = "باشقا آلاتدان واردات";
-"welcome.linkBackup" = "آرشیو آرخایینلاشماسیندان واردات";
+"welcome.linkBackup" = "Import from archive backup";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "سکیپ";
 "createProfile.profileCreated" = "سونراسي";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "پروفایلینیز تانریلارینیزلا اشتراک اولوناجاق.";
 "createProfile.createYourAvatar" = "اؤز اوتارينيزي يارادين";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "جمیه یه قوشول";
 "createAccount.lookingForUsernameAvailability" = "دريافتي ميخواهيم...";
 "createAccount.invalidUsername" = "نام کاربری بی اساس";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "شبکه خطای";
 "createAccount.UsernameNotRegisteredMessage" = "حساب یارادیلمیش، آمما ایستیفاده چی آدینی ثبت ائتمه میش";
 "createAccount.timeoutTitle" = "حساب یارادیلدی";
-"createAccount.timeoutMessage" = "آدين ثبت ائتمه سي بير نئچه لحظه ني آلاجاق.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "SIP حسابین قورولوشونو";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "باشقا آداملارین جمی ایله داها یاخشی یئتیشینی و چاتماسی اوچون ایستیفاده چی آدینی سئچیب آلین.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "رمزلشدیرمه حساب و رمز";
 "createAccount.encryptExplanation" = "بیر جامی حسابی یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیشدا یارانمیش یارانمیشدا یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش یارانمیش";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "حساب باغلاماسی";
 "linkToAccount.linkButtonTitle" = "لینک";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN یئری";
 "linkToAccount.scanQRCode" = "QR کد سکن";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "واردات";
 "importFromArchive.selectArchiveButton" = "آرشیو فایل لارینی سئچیب";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "آندا یاز";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Jami Account Management Server (JAMS) URL-ی دن یئری";
 "linkToAccountManager.enterCredentials" = "JAMS اعتباراتلارینی دن";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "حساب تاپميرام";
-"alerts.accountCannotBeFoundMessage" = "حساب جمي شبکه سينده تاپيلمادي.جمي يه موجود بير آلنادان صادر اولونموشو تأمئن ات و اونا گؤره کي، اعتباراتلار دوغرو اولسون.";
-"alerts.accountAddedTitle" = "حساب قوشولدو";
-"alerts.accountNoNetworkTitle" = "شبکه یه باغلی اولمامیش";
-"alerts.accountNoNetworkMessage" = "حسابي آرتيرماق اولمادي، چونکي جامي بؤلونموش شبکه يه باغلي اولمادي.";
-"alerts.accountDefaultErrorTitle" = "معلوم اولمايان خطب";
-"alerts.accountDefaultErrorMessage" = "حساب یاراتيلمادي.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "عکس آل";
 "alerts.profileUploadPhoto" = "عکس آپلود";
 "alerts.accountLinkedTitle" = "باغلانان حساب";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "میدیایا وئریلن اجازه وئریلمه دی";
 "alerts.noLibraryPermissionsTitle" = "عکس لری کیتابخانایا گئریلمه یه ده وئریلمه دی";
 "alerts.noLocationPermissionsTitle" = "مکانا گئریلمه دی";
-"alerts.errorWrongCredentials" = "حساب مدیرینه باغلی اولمامیش. لطفاً اعتباراتینیزینی چک ائدیرین";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "ویدئو پیغام ثبت کنید";
 "alerts.recordAudioMessage" = "آدیو پيغامي ضبط ائدير";
 "alerts.uploadFile" = "فایل گؤندر";
 "alerts.uploadPhoto" = "گالری آچیق";
-"alerts.locationServiceIsDisabled" = "\"جامی\" یئرلشن مکانینی تعیین ائتمه یه \"ماکان خدمات\" نی فعال ات.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "مکانیمی بؤلوم";
 "alerts.alreadylocationSharing" = "بو ایستیفاده چیله یئرلشمه یه چالیشمیش";
 "alerts.locationSharingDurationTitle" = "مکان بؤلونوشو نه قدر طولیله جک؟";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© OpenStreetMap یئرلشمه لری";
 "alerts.openStreetMapCopyrightMoreInfo" = "داها چوخ اؤيرنه";
 
-//Actions
+// Actions
 "actions.deleteAction" = "حذف";
 "actions.clearAction" = "واضح";
 "actions.backAction" = "گئری دؤن";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "\" تنظیمات \" یه گئدیب";
 "actions.stopLocationSharing" = "اشتراکلاشماغی بوراخ";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "ایسته ییر سنله دانیشیق";
 "calls.ringing" = "زنگ میزنه";
 "calls.connecting" = "باغلا...";
 "calls.callFinished" = "تماس تمام شد";
 "calls.currentCallWith" = "تماس بگیرید";
-"calls.haghUp" = "باغلا";
-"calls.maximize" = "آماج";
-"calls.minimize" = "آزالتماق";
-"calls.setModerator" = "مودراتور";
-"calls.removeModerator" = "moderator unset";
-"calls.muteAudio" = "سئلک آدیو";
-"calls.unmuteAudio" = "سَس سَس";
-"calls.lowerHand" = "آلتی ال";
+"calls.maximize" = "Maximize";
+"calls.minimize" = "Minimize";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
+"calls.muteAudio" = "Mute audio";
+"calls.unmuteAudio" = "Unmute audio";
+"calls.lowerHand" = "Lower hand";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "آلاتلار";
 "accountPage.settingsHeader" = "تنظیمات";
 "accountPage.notificationsHeader" = "اطلاعیه لر";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "قفل اولونموش تماسلار";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "پروکسی آدرسونو دن";
-"accountPage.noProxyExplanationLabel" = "پروکسی غیر فعال اولاندا آلینجینیز خبرلر آلماز";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "پراکسی آدرس";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "حسابین پشتیبانلیق ائتمه دیگی و یا باشقا بیر آلتیندا یئتیریلمه دیگی حالدا، حساب و ثبت اولونموش آدین بیر داها لغو اولماز.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "جمي ايله باغلي اول!";
-"accountPage.contactMeOnJamiContant" = "Jami-Distributed Communication Platform-ده \"%s\" ایستیفاده ائدرک منی تماس آلین: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "حساب رمزونو دن";
 "accountPage.usernamePlaceholder" = "ایسته دیگی یئنی آدلار یئری";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "ثبت";
 "accountPage.usernameRegisterAction" = "ثبت";
-"accountPage.usernameRegistrationFailed" = "ثبت نام ناکام اولدو. لطفا رمزونو چک کنید.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "رمزلشدیرمه حساب";
 "accountPage.changePassword" = "رمز لرینده یئنی دن";
-"accountPage.oldPasswordPlaceholder" = "کؤنول رمز دن یئری";
+"accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "تزه رمز دن یاز";
 "accountPage.newPasswordConfirmPlaceholder" = "یئنی رمز لری تصدیق ائدیر";
 "accountPage.changePasswordError" = "پاسورده حاقسيز";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "بو آلین";
 "accountPage.otherDevices" = "باشقا باغلانان قورولوشلار";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Bootstrap";
+"accountPage.dhtConfiguration" = "OpenDHT configuration";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "سرور";
 "account.port" = "بندر";
 "account.proxyServer" = "پراکسی";
@@ -423,35 +425,35 @@
 "account.needMigration" = "حسابي يئرلشديرمه يه لازيمدير";
 "account.me" = "منیم";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "موغوط ائتمه دی";
 
-//Link New Device
-"linkDevice.title" = "یئنی آلتی باغلا";
-"linkDevice.passwordError" = "واردیغی سئویش کلمه سی بو حسابین قفلینمه سینی آچمامیش";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "پروسه نی باشا چاتدیرماق اوچون، جامی نین یئنی آلتیندا آچماسی و \"بو آلتی حسابا باغلا\" آپشنینی سئچیب.";
+// Link New Device
+"linkDevice.title" = "Link new device";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "چکمه";
 
-//Contact Page
-"contactPage.startAudioCall" = "آودیو تماسونو باشلا";
-"contactPage.startVideoCall" = "ویدئو تماسونو باشلا";
-"contactPage.sendMessage" = "پيغام گؤندهرئن";
+// Contact Page
+"contactPage.startAudioCall" = "Start audio call";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "آچيق چت";
-"contactPage.removeConversation" = "دانیشیقلاری آرادان آپارین";
+"contactPage.leaveConversation" = "Leave conversation";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "اولتراژور...";
 "dataTransfer.readableStatusError" = "خطای";
 "dataTransfer.readableStatusAwaiting" = "منتظر...";
 "dataTransfer.readableStatusOngoing" = "یئرلشمه";
 "dataTransfer.readableStatusCanceled" = "لغو ائدیلدی";
-"dataTransfer.sendingFailed" = "گؤندرمهمئش";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "تام";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "تلفون تلفون";
 "notifications.newFile" = "یئنی فایل";
 "notifications.locationSharingStarted" = "یئرلشمه یه باشلادی";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "گؤنده ر";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "سوْنرا ياراندي";
 "generatedMessage.invitationReceived" = "گئتمه یه دعوت ائدیلدی";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "یاشاییش یئرلری اشتراکلاشماسی";
 "generatedMessage.contactLeftConversation" = "سول";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "ویدئو تنظیمات";
 "generalSettings.videoAcceleration" = "ویدئو سرعتینی فعال ائتمک";
 "generalSettings.fileTransfer" = "فایل لیږد";
-"generalSettings.locationSharing" = "مکان بؤلمه سی";
+"generalSettings.locationSharing" = "Location sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "آتاکت اولاراق گلين فایللاري قبول ائتمک";
 "generalSettings.acceptTransferLimit" = "قبول ائد ن لیک لری";
-"generalSettings.acceptTransferLimitDescription" = "(MB، 0 = محدود)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "یئر بؤلمه سی نین مودّتی محدود اولسون";
 "generalSettings.locationSharingDuration" = "موقف پايين مودّتي";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "دیآگنوستکس";
 "logView.description" = "آچیق دیآگنوستاتیک دوققلو قورولوشلار";
-"logView.startLogging" = "لوقونلاشما باشلا";
-"logView.stopLogging" = "چوبانليق ايستمه يئن";
-"logView.saveError" = "فایل ساقلاما اوغورلو";
-"logView.shareError" = "فایل بؤلمه سی اوغورلانمادي";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "حساب کؤچمه سی";
 "migrateAccount.migrateButton" = "مهاجرت حساب";
-"migrateAccount.explanation" = "بو حسابي کؤچورمک لازيمدير";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "مهاجرت اوچون، بو حساب اوچون ایستیفاده اولونموش رمز یازمالی دیر";
-"migrateAccount.error" = "حسابینی کؤچورمه یه قادیرسان. حسابینی گئنه چالیش یا دا ییرین.";
-"migrateAccount.migrating" = "کؤچورمک...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "باشقا حسابا کؤچ";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "ردعمل";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

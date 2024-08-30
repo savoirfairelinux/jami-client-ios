@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Un codiciu QR malo";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "La busca de contactu...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Crear el enjambre";
 "swarmcreation.addADescription" = "Axega una descripción";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorar el enjambre";
-"swarm.leaveConversation" = "La conversación ye una cuestión de tiempu.";
-"swarm.chooseColor" = "Escueye un color";
+"swarm.leaveConversation" = "Leave conversation";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Esti tipu de enjambre";
 "swarm.identifier" = "Identificador";
 "swarm.about" = "Sobre";
 "swarm.members" = "Los miembros";
-"swarm.addDescription" = "Aumentu de la descripción";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "El so grupu privado";
 "swarm.adminInvitesOnly" = "Admins solo invita";
 "swarm.invitesOnly" = "El so grupu privado";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "¿Seguru que quieres salir de la masa?";
 "swarm.Leave" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "El nome de la maraña";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Nun hai resultáu";
 "smartlist.noConversation" = "Nun hai conversaciones.";
-"smartlist.searchBarPlaceholder" = "Entra'l nome...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Buscar";
 "smartlist.noNetworkConnectivity" = "Nun hai conectividá de rede";
 "smartlist.cellularAccess" = "Asegúrese d'un accesu celular autorizáu nos sos ajustes";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "¿A añadir a los contactos?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Nun hai invitaciones.";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "Jami ye una plataforma de comunicación gratuita y universal que preserva la privacidá y les llibertaes de los usuarios.";
 "welcome.haveAccount" = "Nun hai nada que ver con esto.";
 "welcome.linkDevice" = "Importación dende otru dispositivu";
-"welcome.linkBackup" = "Importación dende un archivu de copia de seguridad";
+"welcome.linkBackup" = "Import from archive backup";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "El so nome ye \"Skip\".";
 "createProfile.profileCreated" = "El siguiente";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "El so perfil va ser compartidu con los sos contactos.";
 "createProfile.createYourAvatar" = "Crear el so avatar";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Uníu a Jami";
 "createAccount.lookingForUsernameAvailability" = "Buscando disponibilidá...";
 "createAccount.invalidUsername" = "Nombre d'usuariu inválidu";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Error de red";
 "createAccount.UsernameNotRegisteredMessage" = "Creóse una cuenta pero nun se rexistró'l nome d'usuariu";
 "createAccount.timeoutTitle" = "Creáu cuenta";
-"createAccount.timeoutMessage" = "El rexistru del nome d'usuariu en cursu... podría tardar unos momentos.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Configurar una cuenta SIP esistente";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Puede escoger un nome d'usuariu pa ayudar a otros a atopar y llegar más fácilmente a Jami.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Encripta la cuenta con contraseña";
 "createAccount.encryptExplanation" = "La so direición de la páxina web ye la siguiente:";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "La vinculación de cuentas";
 "linkToAccount.linkButtonTitle" = "Enllaz";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "El PIN";
 "linkToAccount.pinLabel" = "Entra PIN";
 "linkToAccount.scanQRCode" = "Archiváu dende l' oxetivu";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Importación";
 "importFromArchive.selectArchiveButton" = "Seleccione archivu";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Ensinar";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "La dirección de la páxina web de James";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Introducióse la URL del servidor de xestión de cuentas Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "Introdució les credenciales de JAMS";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Nun puedo atopar cuenta";
-"alerts.accountCannotBeFoundMessage" = "La cuenta nun pudo ser atopada na rede Jami.";
-"alerts.accountAddedTitle" = "Cuenta añadida";
-"alerts.accountNoNetworkTitle" = "Nun se puede conectar a la rede.";
-"alerts.accountNoNetworkMessage" = "La so cuenta nun pudo ser añadida porque Jami nun podía conectar a la rede distribuyida.";
-"alerts.accountDefaultErrorTitle" = "Error desconocíu";
-"alerts.accountDefaultErrorMessage" = "La cuenta nun se pudo crear.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Ye una fotografía.";
 "alerts.profileUploadPhoto" = "Archiváu dende l' oxetivu";
 "alerts.accountLinkedTitle" = "Cuenta de vinculación";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "Permisión de medios non concedida";
 "alerts.noLibraryPermissionsTitle" = "L'accesu a la biblioteca de fotos nun se concede";
 "alerts.noLocationPermissionsTitle" = "L'accesu a la localización nun se concede";
-"alerts.errorWrongCredentials" = "Nun se puede conectar al administrador de cuenta proporcionáu.";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Grabar un mensaxe de video";
 "alerts.recordAudioMessage" = "Grabar un mensaxe d'únicu audio";
 "alerts.uploadFile" = "Enviar archivu";
 "alerts.uploadPhoto" = "Galería abierta";
-"alerts.locationServiceIsDisabled" = "Enviada \"Servicios de localización\" pa dexar a \"Jami\" determinar la so localización.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Compartir la mio localización";
 "alerts.alreadylocationSharing" = "Al traviés de la páxina web, el nome del usuariu ye'l nome de la páxina web.";
 "alerts.locationSharingDurationTitle" = "¿Cuánto tiempu debería tar la distribución de la localización?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© Colaboradores de OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "Más información";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Esborrar";
 "actions.clearAction" = "El so nome ye \"Clarity\".";
 "actions.backAction" = "El so fíu, el so fíu,";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Asegúrese de les configuraciones";
 "actions.stopLocationSharing" = "Pa evitar la compartición";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "Quiere falar contigo.";
 "calls.ringing" = "El soníu...";
 "calls.connecting" = "La conexión...";
 "calls.callFinished" = "La llamada terminada";
 "calls.currentCallWith" = "Llamó con ";
-"calls.haghUp" = "Enfermedaes de la familia";
-"calls.maximize" = "maximizar";
-"calls.minimize" = "Minimizar";
-"calls.setModerator" = "Establecimientu inscritu nel Rexistru d'Actividaes Turístiques del Principáu d'Asturies col códigu DGT CA0831.";
-"calls.removeModerator" = "Moderador desimputáu";
-"calls.muteAudio" = "El so nome ye \"Audio\"";
-"calls.unmuteAudio" = "La so voz nun se silenció.";
-"calls.lowerHand" = "La mano inferior";
+"calls.maximize" = "Maximize";
+"calls.minimize" = "Minimize";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
+"calls.muteAudio" = "Mute audio";
+"calls.unmuteAudio" = "Unmute audio";
+"calls.lowerHand" = "Lower hand";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Configuración";
 "accountPage.notificationsHeader" = "Notificaciones";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Contactos bloqueados";
 "accountPage.unblockContact" = "Unbloque";
 "accountPage.proxyAddressAlert" = "Envíe direutamente la dirección de proxy";
-"accountPage.noProxyExplanationLabel" = "El so dispositivu nun recibirá notificaciones cuando se desactiva'l proxy";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "La dirección de proxy";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Si la so cuenta nun foi copia de seguridad o añadida a otru dispositivu, la so cuenta y nome rexistráu perderán irrevocablemente.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "¡Contacta-me en Jami!";
-"accountPage.contactMeOnJamiContant" = "La so primer apaición foi nel estrenu de la so cuarta temporada en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, y en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, y en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en The Hollywood Revival, en The Hollywood Revival, en The Hollywood Revival, en The Hollywood Revival, en The CW.";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Entra contraseña de la cuenta";
 "accountPage.usernamePlaceholder" = "Introduz el nome d' usuariu deseáu";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "El rexistru";
 "accountPage.usernameRegisterAction" = "El rexistru";
-"accountPage.usernameRegistrationFailed" = "La inscripción fallaron.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Encriptación de cuenta";
 "accountPage.changePassword" = "Cambiar contraseña";
-"accountPage.oldPasswordPlaceholder" = "Introducir una contraseña vieya";
+"accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "Introducir una contraseña nueva";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirmar la contraseña nueva";
 "accountPage.changePasswordError" = "La contraseña ye incorrecta";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "Esta máquina";
 "accountPage.otherDevices" = "Otros dispositivos conectados";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Bootstrap";
+"accountPage.dhtConfiguration" = "OpenDHT configuration";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "Servidores";
 "account.port" = "Portos";
 "account.proxyServer" = "El so nome ye";
@@ -423,35 +425,35 @@
 "account.needMigration" = "La cuenta tien de ser migrao.";
 "account.me" = "Yo tamién.";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "Nun hai contactos bloqueaos";
 
-//Link New Device
-"linkDevice.title" = "Enlazar un nuevu dispositivu";
-"linkDevice.passwordError" = "La contraseña que introdució nun desbloquea esta cuenta";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "El sistema de conexión de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de terminal de la terminal de la terminal de terminal de la terminal de terminal de la terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal";
+// Link New Device
+"linkDevice.title" = "Link new device";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Verificación";
 
-//Contact Page
-"contactPage.startAudioCall" = "Iniciativa pa la so intervención en audio";
-"contactPage.startVideoCall" = "Iniciativa pa la llamada de video";
-"contactPage.sendMessage" = "Enviar mensaxes";
+// Contact Page
+"contactPage.startAudioCall" = "Start audio call";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "La conversación ye clara.";
-"contactPage.removeConversation" = "La conversación ye desactivada";
+"contactPage.leaveConversation" = "Leave conversation";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "La inicialización...";
 "dataTransfer.readableStatusError" = "Error de cita";
 "dataTransfer.readableStatusAwaiting" = "En espera...";
 "dataTransfer.readableStatusOngoing" = "La transferencia";
 "dataTransfer.readableStatusCanceled" = "Cancelada";
-"dataTransfer.sendingFailed" = "Nun se envió";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "El so nome ye";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "La llamada perdida";
 "notifications.newFile" = "Archivu nuevu";
 "notifications.locationSharingStarted" = "El partu de localización entamó";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Enviar";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "El so nome ye \"Swarm\".";
 "generatedMessage.invitationReceived" = "Foi convidáu a participar";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Compartir la localización en directo";
 "generatedMessage.contactLeftConversation" = "La so parte inferior ye de la derecha.";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "La configuración de video";
 "generalSettings.videoAcceleration" = "Aceleración de video";
 "generalSettings.fileTransfer" = "Transferencia de archivos";
-"generalSettings.locationSharing" = "La división de los llaos";
+"generalSettings.locationSharing" = "Location sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Acceptar automáticamente archivos entrantes";
 "generalSettings.acceptTransferLimit" = "Accepta'l límite de transferencia";
-"generalSettings.acceptTransferLimitDescription" = "(en MB, 0 = ilimitáu)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Limitar la duración de la compartición de la ubicación";
 "generalSettings.locationSharingDuration" = "El periodu de duración de les acciones de posiciones";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "Los diagnósticos";
 "logView.description" = "Configuraciones abiertes del rexistru de diagnósticu";
-"logView.startLogging" = "Comienza la arquivada";
-"logView.stopLogging" = "Pa finar la tala";
-"logView.saveError" = "Faló en guardar archivos";
-"logView.shareError" = "Faló en compartir archivos";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Migración de cuentas";
 "migrateAccount.migrateButton" = "La cuenta de migración";
-"migrateAccount.explanation" = "Esta cuenta tien que ser migrao";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "Pa proceder a la migración, hai que introducir una contraseña que se usó pa esta cuenta.";
-"migrateAccount.error" = "Nun se pudo migrar la cuenta. Pueden intentar o borrar la cuenta.";
-"migrateAccount.migrating" = "Migrando...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Migráu a otra cuenta";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "La respuesta";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

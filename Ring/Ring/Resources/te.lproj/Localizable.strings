@@ -63,18 +63,18 @@
 "scan.badQrCode" = "చెడ్డ QR కోడ్";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "పరిచయం కోసం శోధన...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "సమూహము సృష్టించు";
 "swarmcreation.addADescription" = "వివరణను జోడించండి";
 // Swarm
 "swarm.ignoreSwarm" = "గుంపును విస్మరించు";
 "swarm.leaveConversation" = "సంభాషణను వదిలివేయండి";
-"swarm.chooseColor" = "రంగును ఎంచుకోండి";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "రకం";
 "swarm.identifier" = "గుర్తింపు";
 "swarm.about" = "గురించి";
 "swarm.members" = "సభ్యులు";
-"swarm.addDescription" = "వివరణను జోడించండి";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "ప్రైవేటు గుంపు";
 "swarm.adminInvitesOnly" = "అడ్మిన్ ఆహ్వానాలు మాత్రమే";
 "swarm.invitesOnly" = "ప్రైవేటు గుంపు";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "మీరు ఈ సమూహం వదిలి అనుకుంటున్నారా ఖచ్చితంగా?";
 "swarm.Leave" = "బయలుదేరండి";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "స్కార్మ్ పేరు";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ఫలితాలు లేవు";
 "smartlist.noConversation" = "చర్చలు లేవు";
-"smartlist.searchBarPlaceholder" = "పేరు నమోదు చేయండి.";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "శోధన";
 "smartlist.noNetworkConnectivity" = "నెట్వర్క్ కనెక్టివిటీ లేదు";
 "smartlist.cellularAccess" = "మీ సెట్టింగులలో సెల్ యాక్సెస్ అనుమతించబడిందని నిర్ధారించుకోండి";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "పరిచయాలకు జోడించండి?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "ఆహ్వానాలు లేవు";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -165,7 +165,7 @@
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "స్కిప్";
 "createProfile.profileCreated" = "తదుపరి";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "మీ ప్రొఫైల్ మీ పరిచయాలతో పంచుకుంటారు. మీరు ఎప్పుడైనా మార్చవచ్చు.";
 "createProfile.createYourAvatar" = "మీ అవతార్ సృష్టించు";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "జామితో చేరండి";
 "createAccount.lookingForUsernameAvailability" = "లభ్యత కోసం చూస్తున్న.";
 "createAccount.invalidUsername" = "చెల్లని వాడుకరి పేరు";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "నెట్వర్క్ లోపం";
 "createAccount.UsernameNotRegisteredMessage" = "ఖాతా సృష్టించబడింది కాని వినియోగదారు పేరు నమోదు చేయబడలేదు";
 "createAccount.timeoutTitle" = "ఖాతా సృష్టించడం";
-"createAccount.timeoutMessage" = "వినియోగదారు పేరు నమోదు ప్రక్రియలో... ఇది కొన్ని క్షణాలు పట్టవచ్చు.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "ఇప్పటికే ఉన్న SIP ఖాతాను కాన్ఫిగర్ చేయండి";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "మీరు ఒక వినియోగదారు పేరును ఎంచుకోవచ్చు, దీని ద్వారా ఇతరులు మిమ్మల్ని జామిలో సులభంగా కనుగొని మిమ్మల్ని సంప్రదించవచ్చు.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "పాస్వర్డ్తో ఖాతాను గుప్తీకరించండి";
 "createAccount.encryptExplanation" = "మీ ఖాతా కీలను కలిగి ఉన్న ఆర్కైవ్గా ఈ పరికరంలో మాత్రమే జామి ఖాతా సృష్టించబడుతుంది మరియు నిల్వ చేయబడుతుంది. ఈ ఆర్కైవ్కు ప్రాప్యత పాస్వర్డ్ ద్వారా రక్షించబడుతుంది.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ఖాతా లింకింగ్";
 "linkToAccount.linkButtonTitle" = "లింక్";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "లింక్ పరికరం";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "పిన్ను";
 "linkToAccount.pinLabel" = "PIN ని నమోదు చేయండి";
 "linkToAccount.scanQRCode" = "QR కోడ్ స్కాన్";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "దిగుమతి";
 "importFromArchive.selectArchiveButton" = "ఆర్కైవ్ ఫైల్ను ఎంచుకోండి";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "సైన్ ఇన్ చేయండి";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Jami ఖాతా నిర్వహణ సర్వర్ (JAMS) URL ని నమోదు చేయండి";
 "linkToAccountManager.enterCredentials" = "JAMS ఆధారాలను నమోదు చేయండి";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "ఖాతా కనుగొనలేము";
-"alerts.accountCannotBeFoundMessage" = "ఖాతా Jami నెట్వర్క్ లో కనుగొనబడలేదు. అది Jami ఇప్పటికే ఉన్న పరికరం నుండి ఎగుమతి చేయబడింది నిర్ధారించుకోండి, మరియు అందించిన ఆధారాలు సరైనవి.";
-"alerts.accountAddedTitle" = "ఖాతా జోడించబడింది";
-"alerts.accountNoNetworkTitle" = "నెట్వర్క్ కనెక్ట్ కాలేదు";
-"alerts.accountNoNetworkMessage" = "జమీ పంపిణీ నెట్వర్క్కు కనెక్ట్ కాలేదు కాబట్టి ఖాతాను జోడించలేకపోయాను. మీ పరికర కనెక్షన్ తనిఖీ చేయండి.";
-"alerts.accountDefaultErrorTitle" = "తెలియని లోపం";
-"alerts.accountDefaultErrorMessage" = "ఖాతాను సృష్టించలేము.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "ఫోటో తీయండి";
 "alerts.profileUploadPhoto" = "ఫోటో అప్లోడ్";
 "alerts.accountLinkedTitle" = "లింక్ ఖాతా";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "మీడియా అనుమతి ఇవ్వలేదు";
 "alerts.noLibraryPermissionsTitle" = "ఫోటో లైబ్రరీకి ప్రాప్యత ఇవ్వబడలేదు";
 "alerts.noLocationPermissionsTitle" = "స్థలానికి ప్రాప్యత ఇవ్వబడలేదు";
-"alerts.errorWrongCredentials" = "అందించిన ఖాతా నిర్వాహకుడికి కనెక్ట్ కాలేదు. దయచేసి మీ ఆధారాలను తనిఖీ చేయండి";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "వీడియో సందేశాన్ని రికార్డ్ చేయండి";
 "alerts.recordAudioMessage" = "ఒక ఆడియో సందేశాన్ని రికార్డ్ చేయండి";
 "alerts.uploadFile" = "ఫైల్‌ని పంపు";
 "alerts.uploadPhoto" = "బహిరంగ గ్యాలరీ";
-"alerts.locationServiceIsDisabled" = "\"జామి\" మీ స్థానాన్ని గుర్తించడానికి \"స్థానం సేవలు\" ను ప్రారంభించండి.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "నా స్థానాన్ని పంచుకోండి";
 "alerts.alreadylocationSharing" = "ఇప్పటికే ఈ వినియోగదారుతో స్థానం పంచుకోవడం";
 "alerts.locationSharingDurationTitle" = "స్థానం పంచుకోవడం ఎంతకాలం ఉండాలి?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© ఓపెన్ స్ట్రీట్ మ్యాప్ సహకర్తలు";
 "alerts.openStreetMapCopyrightMoreInfo" = "మరిన్ని తెలుసుకోండి";
 
-//Actions
+// Actions
 "actions.deleteAction" = "తొలగించు";
 "actions.clearAction" = "స్పష్టమైన";
 "actions.backAction" = "తిరిగి";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "సెట్టింగులకు వెళ్లండి";
 "actions.stopLocationSharing" = "భాగస్వామ్యం చేయడాన్ని ఆపండి";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "మీతో మాట్లాడాలనుకుంటుంది";
 "calls.ringing" = "రింగ్.";
 "calls.connecting" = "కనెక్ట్.";
 "calls.callFinished" = "కాల్ పూర్తయింది";
 "calls.currentCallWith" = " తో కాల్";
-"calls.haghUp" = "మూసివేయండి";
 "calls.maximize" = "గరిష్టంగా";
-"calls.minimize" = "తగ్గించు";
-"calls.setModerator" = "సెట్ మోడరేటర్";
-"calls.removeModerator" = "సెట్ చేయని మోడరేటర్";
-"calls.muteAudio" = "మ్యూట్ ఆడియో";
+"calls.minimize" = "తక్కువ స్థాయిలో";
+"calls.setModerator" = "మోడరేటర్ సెట్";
+"calls.removeModerator" = "సెట్టింగ్ను తొలగించు";
+"calls.muteAudio" = "మూత ఆడియో";
 "calls.unmuteAudio" = "నిశ్శబ్ద ఆడియో";
 "calls.lowerHand" = "దిగువ చేతి";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "పరికరాలు";
 "accountPage.settingsHeader" = "సెట్టింగులు";
 "accountPage.notificationsHeader" = "నోటిఫికేషన్లు";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "అడ్డుకున్న పరిచయాలు";
 "accountPage.unblockContact" = "అన్బ్లాక్";
 "accountPage.proxyAddressAlert" = "ప్రాక్సీ చిరునామాను అందించండి";
-"accountPage.noProxyExplanationLabel" = "ప్రాక్సీ డిసేబుల్ అయినప్పుడు మీ పరికరం నోటిఫికేషన్లను అందుకోదు";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "ప్రాక్సీ చిరునామా";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "మీ ఖాతాను బ్యాకప్ చేయకపోతే లేదా మరొక పరికరానికి జోడించకపోతే, మీ ఖాతా మరియు నమోదు చేయబడిన పేరు తిరస్కరించలేని విధంగా కోల్పోతాయి.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Jami వద్ద నాకు సంప్రదించండి!";
-"accountPage.contactMeOnJamiContant" = "జామి పంపిణీ కమ్యూనికేషన్ ప్లాట్ఫామ్లో \"%s\" ను ఉపయోగించి నన్ను సంప్రదించండిః https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "ఖాతా పాస్వర్డ్ను నమోదు చేయండి";
 "accountPage.usernamePlaceholder" = "కావలసిన వాడుకరి పేరును నమోదు చేయండి";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "నమోదు";
 "accountPage.usernameRegisterAction" = "నమోదు";
-"accountPage.usernameRegistrationFailed" = "నమోదు విఫలమైంది. దయచేసి పాస్వర్డ్ను తనిఖీ చేయండి.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "ఎన్క్రిప్ట్ ఖాతా";
 "accountPage.changePassword" = "పాస్వర్డ్ మార్చు";
-"accountPage.oldPasswordPlaceholder" = "పాత పాస్వర్డ్ను నమోదు చేయండి";
+"accountPage.currentPasswordPlaceholder" = "ప్రస్తుత పాస్వర్డ్ను నమోదు చేయండి";
 "accountPage.newPasswordPlaceholder" = "కొత్త పాస్వర్డ్ను నమోదు చేయండి";
 "accountPage.newPasswordConfirmPlaceholder" = "కొత్త పాస్వర్డ్ను నిర్ధారించు";
 "accountPage.changePasswordError" = "పాస్వర్డ్ తప్పు";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "ఈ పరికరం";
 "accountPage.otherDevices" = "ఇతర అనుసంధాన పరికరాలు";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "బూట్స్ట్రాప్";
+"accountPage.dhtConfiguration" = "ఓపెన్ డిహెచ్టి ఆకృతీకరణ";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "సర్వర్";
 "account.port" = "పోర్ట్";
 "account.proxyServer" = "ప్రాక్సీ";
@@ -423,35 +425,35 @@
 "account.needMigration" = "ఖాతా వలస అవసరం";
 "account.me" = "నేను";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "అడ్డుకున్న పరిచయాలు లేవు";
 
-//Link New Device
-"linkDevice.title" = "కొత్త పరికరాన్ని లింక్ చేయండి";
-"linkDevice.passwordError" = "మీరు నమోదు చేసిన పాస్వర్డ్ ఈ ఖాతాను అన్లాక్ చేయదు";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "ప్రక్రియను పూర్తి చేయడానికి, మీరు కొత్త పరికరంలో జామిని తెరిచి \"ఈ పరికరాన్ని ఖాతాకు లింక్ చేయండి\" ఎంపికను ఎంచుకోవాలి. మీ పిన్ 10 నిమిషాలు చెల్లుతుంది";
+// Link New Device
+"linkDevice.title" = "కొత్త పరికరానికి లింక్";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "తనిఖీ";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "ఆడియో కాల్ ప్రారంభించండి";
 "contactPage.startVideoCall" = "వీడియో కాల్ ప్రారంభించండి";
-"contactPage.sendMessage" = "సందేశం పంపండి";
+"contactPage.send" = "పంపండి";
 "contactPage.clearConversation" = "క్లియర్ చాట్";
-"contactPage.removeConversation" = "సంభాషణను తొలగించు";
+"contactPage.leaveConversation" = "సంభాషణను వదిలివేయండి";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "ప్రారంభించడం.";
 "dataTransfer.readableStatusError" = "తప్పు";
 "dataTransfer.readableStatusAwaiting" = "వేచి.";
 "dataTransfer.readableStatusOngoing" = "బదిలీ";
 "dataTransfer.readableStatusCanceled" = "రద్దు చేయబడినది";
-"dataTransfer.sendingFailed" = "పంపడంలో విఫలమైంది";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "పూర్తి";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "మిస్డ్ కాల్";
 "notifications.newFile" = "కొత్త ఫైల్";
 "notifications.locationSharingStarted" = "ఇన్కమింగ్ స్థాన భాగస్వామ్యం ప్రారంభమైంది";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "పంపండి";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "స్ర్క్ సృష్టించబడింది";
 "generatedMessage.invitationReceived" = "చేరడానికి ఆహ్వానించారు";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "ప్రత్యక్ష స్థానం భాగస్వామ్యం";
 "generatedMessage.contactLeftConversation" = "ఎడమ";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "వీడియో సెట్టింగులు";
 "generalSettings.videoAcceleration" = "వీడియో త్వరణం సక్రియం";
 "generalSettings.fileTransfer" = "ఫైల్ బదిలీ";
 "generalSettings.locationSharing" = "స్థానం పంచుకోవడం";
 "generalSettings.automaticAcceptIncomingFiles" = "స్వయంచాలకంగా ఇన్కమింగ్ ఫైళ్ళను అంగీకరించండి";
 "generalSettings.acceptTransferLimit" = "బదిలీ పరిమితిని అంగీకరించు";
-"generalSettings.acceptTransferLimitDescription" = "(MB లో, 0 = అపరిమిత)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "స్థానం పంచుకునే వ్యవధిని పరిమితం చేయండి";
 "generalSettings.locationSharingDuration" = "స్థానం వాటా వ్యవధి";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "రోగ నిర్ధారణ";
 "logView.description" = "రోగ నిర్ధారణ లాగ్ సెట్టింగులను తెరవండి";
-"logView.startLogging" = "లాగింగ్ ప్రారంభించండి";
-"logView.stopLogging" = "చెక్కతోటను ఆపండి";
-"logView.saveError" = "ఫైలును సేవ్ చేయడంలో విఫలమైంది";
-"logView.shareError" = "ఫైల్ భాగస్వామ్యం చేయడంలో విఫలమైంది";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "చెక్కడం ఆపండి";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "ఖాతా వలస";
 "migrateAccount.migrateButton" = "వలస ఖాతా";
-"migrateAccount.explanation" = "ఈ ఖాతాను వలస చేయాలి";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "ఈ ఖాతా కోసం ఉపయోగించిన పాస్వర్డ్ను నమోదు చేయడం ద్వారా మీరు ఈ వలసను కొనసాగించాలి";
-"migrateAccount.error" = "మీ ఖాతాను వలస చేయడంలో విఫలమైంది. మీరు మీ ఖాతాను మళ్లీ ప్రయత్నించవచ్చు లేదా తొలగించవచ్చు.";
-"migrateAccount.migrating" = "వలసలు.";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "మరొక ఖాతాను బదిలీ చేయండి";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "అభిప్రాయపత్రాలు";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

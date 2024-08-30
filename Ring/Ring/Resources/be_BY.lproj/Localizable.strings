@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Дрэнны QR-код";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Пошук кантактаў...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Стварыць раман";
 "swarmcreation.addADescription" = "Дадаць апісанне";
 // Swarm
 "swarm.ignoreSwarm" = "Ігнаруйце раман";
-"swarm.leaveConversation" = "Пакіньце размову";
-"swarm.chooseColor" = "Выберыце колер";
+"swarm.leaveConversation" = "Leave conversation";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Тып рама";
 "swarm.identifier" = "Ідэнтыфікатар";
 "swarm.about" = "Пра";
 "swarm.members" = "Члены";
-"swarm.addDescription" = "Дадаць апісанне";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Прыватны раман";
 "swarm.adminInvitesOnly" = "Адміністратар запрашае толькі";
 "swarm.invitesOnly" = "Прыватны раман";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "Ці ўпэўнены, што хочаш пакінуць гэты раман?";
 "swarm.Leave" = "Ад'ехаць";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Назва Сварма";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ніякіх вынікаў";
 "smartlist.noConversation" = "Ніякіх размоў";
-"smartlist.searchBarPlaceholder" = "Увядзіце імя...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Пошук";
 "smartlist.noNetworkConnectivity" = "Ніякай сеткавай сувязі";
 "smartlist.cellularAccess" = "Пераканайцеся, што доступ да мабільнага тэлефона дапускаецца ў вашых наладках";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Ніякіх запрашэнняў";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -161,11 +161,11 @@
 "welcome.text" = "Jami - гэта бясплатная і універсальная платформа для зносін, якая захоўвае прыватнасць і свабоды карыстальнікаў";
 "welcome.haveAccount" = "У мяне ўжо ёсць рахунак";
 "welcome.linkDevice" = "Імпарт з іншага прылады";
-"welcome.linkBackup" = "Імпарт з архіва рэзервовай копіі";
+"welcome.linkBackup" = "Import from archive backup";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "Скінг";
 "createProfile.profileCreated" = "Далей";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "Ваш профіль будзе падзяляцца з вашымі кантактамі. Вы можаце змяніць яго ў любы час.";
 "createProfile.createYourAvatar" = "Стварыце свой аватар";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Далучайцеся да Jami";
 "createAccount.lookingForUsernameAvailability" = "шукаючы даступнасць...";
 "createAccount.invalidUsername" = "недаступнае імя карыстальніка";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Памылка сеткі";
 "createAccount.UsernameNotRegisteredMessage" = "Уліковы запіс быў створаны, але імя карыстальніка не было зарэгістравана";
 "createAccount.timeoutTitle" = "Створаны ўліковы запіс";
-"createAccount.timeoutMessage" = "Падчас рэгістрацыі карыстальніка можа заняцца некалькі хвілін.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Канфігуруйце існуючы SIP-акаўнт";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Вы можаце выбраць імя карыстальніка, каб дапамагчы іншым лёгка знайсці і дасягнуць вас на Jami.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Зашыфраваць рахунак з паролем";
 "createAccount.encryptExplanation" = "Уліковы запіс Jami ствараецца і захоўваецца толькі на гэтым прыладзе, як архіў, які змяшчае ключы ад вашага ўліковага запісу.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Звязванне рахункаў";
 "linkToAccount.linkButtonTitle" = "Звязка";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "Пін-аўт";
 "linkToAccount.pinLabel" = "Увядзіце PIN";
 "linkToAccount.scanQRCode" = "Scan QR Code";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Імпарт";
 "importFromArchive.selectArchiveButton" = "Выберыце файл архіва";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Падпішыцеся";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Уведайце URL сервера кіравання рахункамі Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "Увесці даведнікі JAMS";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Не магу знайсці рахунак";
-"alerts.accountCannotBeFoundMessage" = "Уліковы запіс не знойдзены ў сетцы Jami.";
-"alerts.accountAddedTitle" = "Дададзены рахунак";
-"alerts.accountNoNetworkTitle" = "Не магу падключыць да сеткі";
-"alerts.accountNoNetworkMessage" = "Не змагла дадаць рахунак, бо Джамі не змог падключыцца да размеркаванай сеткі.";
-"alerts.accountDefaultErrorTitle" = "Невядомы памылка";
-"alerts.accountDefaultErrorMessage" = "Уліковы запіс не можа быць створаны.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Здымайце фота";
 "alerts.profileUploadPhoto" = "Загрузка фота";
 "alerts.accountLinkedTitle" = "Звязвальны рахунак";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "Здаволенасць СМІ не дадзена";
 "alerts.noLibraryPermissionsTitle" = "Доступ да бібліятэкі фота не даецца";
 "alerts.noLocationPermissionsTitle" = "Доступ да месцазнаходжання не даецца";
-"alerts.errorWrongCredentials" = "Не можа падключыцца да прадстаўленага кіраўніка рахунку. Калі ласка, праверце свае даведкі.";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Запіс відэапаведамлення";
 "alerts.recordAudioMessage" = "Запіс аўдыёпаведамлення";
 "alerts.uploadFile" = "Адправіць файл";
 "alerts.uploadPhoto" = "Open gallery";
-"alerts.locationServiceIsDisabled" = "Уключыце \"Сэрвісы месцазнаходжання\", каб \"Джамі\" вызначыць ваша месцазнаходжанне.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Падзяліцеся маім месцам";
 "alerts.alreadylocationSharing" = "Ужо дзяліцца месцазнаходжаннем з гэтым карыстальнікам";
 "alerts.locationSharingDurationTitle" = "Як доўга павінна быць месцазнаходжанне?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© Удзельнікі OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "Даведайцеся больш";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Знішчыць";
 "actions.clearAction" = "Ясна";
 "actions.backAction" = "Звярніцеся назад";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Перайсці да Налады";
 "actions.stopLocationSharing" = "Спыніце дзяліцца";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "хоча пагаварыць з вамі";
 "calls.ringing" = "Званочак...";
 "calls.connecting" = "Злучэнне...";
 "calls.callFinished" = "Званкі скончаны";
 "calls.currentCallWith" = "Звяжыцеся з ";
-"calls.haghUp" = "павесіць";
-"calls.maximize" = "максімальна";
-"calls.minimize" = "мінімізаваць";
-"calls.setModerator" = "пастаўлены мадэратар";
-"calls.removeModerator" = "неўстаноўлены мадэратар";
-"calls.muteAudio" = "неразгублены аўдыё";
-"calls.unmuteAudio" = "неўхільны аўдыё";
-"calls.lowerHand" = "ніжняя рука";
+"calls.maximize" = "Maximize";
+"calls.minimize" = "Minimize";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
+"calls.muteAudio" = "Mute audio";
+"calls.unmuteAudio" = "Unmute audio";
+"calls.lowerHand" = "Lower hand";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Прылады";
 "accountPage.settingsHeader" = "Налады";
 "accountPage.notificationsHeader" = "Паведамленні";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Блокаваныя кантакты";
 "accountPage.unblockContact" = "БЛОК";
 "accountPage.proxyAddressAlert" = "Уключыце адрас праксі";
-"accountPage.noProxyExplanationLabel" = "Ваша прылада не атрымае паведамленняў, калі праксі адключаны";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Адрас практычнага аддзела";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Калі ваш рахунак не быў запісаны ў запіс або дададзены ў іншае прыладу, ваш рахунак і рэгістраванае імя будуць незваротна страчаны.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Звяжыцеся са мной на Jami!";
-"accountPage.contactMeOnJamiContant" = "Звяжыцеся са мной з дапамогай \"%s\" на раскіданыя медыцынскія платформы Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Увядзіце пароль рахунку";
 "accountPage.usernamePlaceholder" = "Увядзіце жаданае карыстацкае імя";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Рэгістрацыя";
 "accountPage.usernameRegisterAction" = "Рэгістрацыя";
-"accountPage.usernameRegistrationFailed" = "Рэгістрацыя не атрымалася. Калі ласка, праверце пароль.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Зашыфраваны рахунак";
 "accountPage.changePassword" = "Змяніць пароль";
-"accountPage.oldPasswordPlaceholder" = "Увядзіце стары пароль";
+"accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "Увядзіце новы пароль";
 "accountPage.newPasswordConfirmPlaceholder" = "Пацвердзіце новы пароль";
 "accountPage.changePasswordError" = "Пароль няправільна";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "Гэта прылада";
 "accountPage.otherDevices" = "Іншыя злучаныя прылады";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Bootstrap";
+"accountPage.dhtConfiguration" = "OpenDHT configuration";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "Сервер";
 "account.port" = "Порт";
 "account.proxyServer" = "Практыкаванне";
@@ -423,35 +425,35 @@
 "account.needMigration" = "рахунак трэба перавесці";
 "account.me" = "Я";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "Ніякіх заблакаваных кантактаў";
 
-//Link New Device
-"linkDevice.title" = "Злучыць новае прылада";
-"linkDevice.passwordError" = "Пароль, якую вы ўвайшлі, не раскрывае гэты рахунак";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "Каб скончыць працэс, вам трэба адкрыць Jami на новым прыладзе і выбраць варыянт \"Звязаць гэта прыладу з рахункам\". Ваш шнур валідуе на працягу 10 хвілін";
+// Link New Device
+"linkDevice.title" = "Link new device";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Праверка";
 
-//Contact Page
-"contactPage.startAudioCall" = "Пачатак аўдыё-званкі";
-"contactPage.startVideoCall" = "Пачатак відэазванкі";
-"contactPage.sendMessage" = "Паслаць паведамленне";
+// Contact Page
+"contactPage.startAudioCall" = "Start audio call";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "Часны чат";
-"contactPage.removeConversation" = "Знімайце размову";
+"contactPage.leaveConversation" = "Leave conversation";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "Інтыцыялізацыя...";
 "dataTransfer.readableStatusError" = "Памылка";
 "dataTransfer.readableStatusAwaiting" = "Чакаючы...";
 "dataTransfer.readableStatusOngoing" = "Перадача";
 "dataTransfer.readableStatusCanceled" = "Скасавана";
-"dataTransfer.sendingFailed" = "Не атрымалася адправіць";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Поўны";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "Адпушчаны званок";
 "notifications.newFile" = "Новы файл";
 "notifications.locationSharingStarted" = "Пачалося дзяленне месцазнаходжання";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Пашляць";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Ствараецца натоўп";
 "generatedMessage.invitationReceived" = "быў запрошаны далучыцца";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Ужыванне месцазнаходжання";
 "generatedMessage.contactLeftConversation" = "лева";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "Налады відэа";
 "generalSettings.videoAcceleration" = "Уключыць паскарэнне відэа";
 "generalSettings.fileTransfer" = "Перадача файлаў";
-"generalSettings.locationSharing" = "Падзяленне месцазнаходжання";
+"generalSettings.locationSharing" = "Location sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Аўтаматычна прымаць паступаючыя файлы";
 "generalSettings.acceptTransferLimit" = "Прыняць ліміт перадачы";
-"generalSettings.acceptTransferLimitDescription" = "(у MB, 0 = неабмежаваны)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Абмежаванне тэрміну дзеяння месцазнаходжання";
 "generalSettings.locationSharingDuration" = "Працягласць пазіцыйных акцый";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "Дыягностыка";
 "logView.description" = "Адкрытыя налады дыягнастычнага часопіса";
-"logView.startLogging" = "Пачаць запіс";
-"logView.stopLogging" = "Спыніце лесабудаванне";
-"logView.saveError" = "Не ўдалося захаваць файл";
-"logView.shareError" = "Не атрымалася падзяліцца файлам";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Міграцыя рахунку";
 "migrateAccount.migrateButton" = "Міграцыйны рахунак";
-"migrateAccount.explanation" = "Гэты рахунак павінен быць міграваны";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "Каб працягнуць пераезд, вам трэба ўвесці пароль, які выкарыстоўваўся для гэтага рахунку";
-"migrateAccount.error" = "Вы можаце паспрабаваць зноў або выдаліць свой рахунак.";
-"migrateAccount.migrating" = "Міграцыя...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Перайсці на іншы рахунак";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "Адказ";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

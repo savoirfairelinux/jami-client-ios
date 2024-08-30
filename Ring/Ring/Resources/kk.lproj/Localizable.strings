@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Жаман QR код";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Байланыс іздеу...";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Қалыңдықты құру";
 "swarmcreation.addADescription" = "Тасуирлеуді қосу";
 // Swarm
 "swarm.ignoreSwarm" = "Қалыңдықты елеме";
-"swarm.leaveConversation" = "Әңгімелі тоқтатып жіберіңіз";
-"swarm.chooseColor" = "Түсін таңдаңыз";
+"swarm.leaveConversation" = "Әңгімелеуді қалдырыңыз";
+"swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Ұяның түрі";
 "swarm.identifier" = "Тұлғаны анықтау";
 "swarm.about" = "туралы";
 "swarm.members" = "Қауым мүшелері";
-"swarm.addDescription" = "Тасуирлеуді қосу";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Жеке тобыр";
 "swarm.adminInvitesOnly" = "Әкімдік тек шақырады";
 "swarm.invitesOnly" = "Жеке тобыр";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "Бұл тобырдан кетуіңізге сенімдісіз бе?";
 "swarm.Leave" = "Кетіңіздер";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Свармның аты";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
 "swarm.selectContacts" = "Select Contacts";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Нәтиже жоқ";
 "smartlist.noConversation" = "Әңгіме жоқ";
-"smartlist.searchBarPlaceholder" = "Аты-жөніңізді келтіріңіз...";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Іздеу";
 "smartlist.noNetworkConnectivity" = "Желілік қосылым жоқ";
 "smartlist.cellularAccess" = "Орындауларыңызда ұялы телефонға қол жеткізуді қамтамасыз етіңіз";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "Байланыстарға қосыл?";
 "conversation.notContactLabel" = "is not in your contact list";
@@ -146,7 +146,7 @@
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Шақыру жоқ";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
@@ -165,7 +165,7 @@
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "Кетіңіз";
 "createProfile.profileCreated" = "Келесі";
 "createProfile.title" = "Personalize your profile";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "Профиліңіз байланыс адамдарыңызбен бөлінеді.";
 "createProfile.createYourAvatar" = "Өзінің аватарын құру";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Жамиге қосыл";
 "createAccount.lookingForUsernameAvailability" = "қолжетімділікті іздеу...";
 "createAccount.invalidUsername" = "жарамсыз пайдаланушы аты";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Желі қатесі";
 "createAccount.UsernameNotRegisteredMessage" = "Тіркелгі құрылды, бірақ пайдаланушы аты тіркелмеген";
 "createAccount.timeoutTitle" = "Тіркелгі құрылды";
-"createAccount.timeoutMessage" = "Пайдаланушы атауын тіркеу жұмыстары жүргізілуде.";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Қолданыстағы SIP тіркелгісін баптау";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Сіз басқаларға Жәмиде сізді табуға және қол жеткізуге көмектесу үшін пайдаланушы атын таңдауыңыз мүмкін.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Парольмен тіркелгі шифрлау";
 "createAccount.encryptExplanation" = "Jami тіркелгісі осы құрылғыда ғана құрылады және сақталады, бұл тіркелгі кілттері бар мұрағат ретінде.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Есептік жазбаларды байланыстыру";
 "linkToAccount.linkButtonTitle" = "Тізім";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Қосылу құрылғысы";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "ПИН";
 "linkToAccount.pinLabel" = "PIN- ні келтіріңіз";
 "linkToAccount.scanQRCode" = "QR кодын сканерлеу";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Импорт";
 "importFromArchive.selectArchiveButton" = "Архив файлын таңдау";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Тіркелу";
 "linkToAccountManager.title" = "JAMS Account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Jami Account Management Server (JAMS) URL-ін келтіріңіз";
 "linkToAccountManager.enterCredentials" = "JAMS куәліктерін келтіріңіз";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "Есеп таба алмаймын";
-"alerts.accountCannotBeFoundMessage" = "Тіркелгі Джами желісінде табылмады. Жамиге экспортталғандығын тексеріңіз және куәліктері дұрыс.";
-"alerts.accountAddedTitle" = "Қосылған есеп";
-"alerts.accountNoNetworkTitle" = "Желіге қосыла алмаймын";
-"alerts.accountNoNetworkMessage" = "Жами таратушы желіге қосылмады, сондықтан тіркелгіңізді қосуға болмайды.";
-"alerts.accountDefaultErrorTitle" = "Белгісіз қате";
-"alerts.accountDefaultErrorMessage" = "Тіркелгі құрылмады.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Суретке түсіріңіз";
 "alerts.profileUploadPhoto" = "Фотоны жүктеу";
 "alerts.accountLinkedTitle" = "Қосылған шот";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "БАҚ рұқсаты берілмеген";
 "alerts.noLibraryPermissionsTitle" = "Фото кітапханасына қол жеткізу рұқсат етілмеген";
 "alerts.noLocationPermissionsTitle" = "Орналасуына қол жеткізу рұқсат етілмеген";
-"alerts.errorWrongCredentials" = "Келтірілген шот менеджеріне қосыла алмаймын.";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Видео хабарламаны жаз";
 "alerts.recordAudioMessage" = "Аудио хабарды жаздыру";
 "alerts.uploadFile" = "Файл жіберу";
 "alerts.uploadPhoto" = "Ашық галерея";
-"alerts.locationServiceIsDisabled" = "\"Жамның\" сіздің орналасқан жеріңізді анықтауына мүмкіндік беру үшін \"Жамның орналасқан жері\" қызметіне қосыңыз.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Менің орналасқан жерімді бөліңіз";
 "alerts.alreadylocationSharing" = "Бұл пайдаланушымен орналасқан жерді бөлісу";
 "alerts.locationSharingDurationTitle" = "Орналасқан жерді бөлісу қанша уақытқа созылады?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© OpenStreetMap қатысушылары";
 "alerts.openStreetMapCopyrightMoreInfo" = "Көбірек біліңіз";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Өшіру";
 "actions.clearAction" = "Ашық";
 "actions.backAction" = "Қайта оралу";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Параметрлерге өту";
 "actions.stopLocationSharing" = "Ортақ қатынастарды тоқтату";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "Сізбен сөйлесуді қалайды";
 "calls.ringing" = "Зыңғырады...";
 "calls.connecting" = "Қосылу...";
 "calls.callFinished" = "Зұрауы аяқталды";
 "calls.currentCallWith" = "";
-"calls.haghUp" = "құлаңыз";
-"calls.maximize" = "максималдық";
-"calls.minimize" = "азайту";
-"calls.setModerator" = "модульді орнату";
-"calls.removeModerator" = "орнатылмаған модератор";
-"calls.muteAudio" = "үнсіз аудио";
-"calls.unmuteAudio" = "үнді үнсіз";
-"calls.lowerHand" = "төменгі қол";
+"calls.maximize" = "Максималды";
+"calls.minimize" = "Ең төмендеу";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
+"calls.muteAudio" = "Ауызды үнсіз";
+"calls.unmuteAudio" = "Unmute audio";
+"calls.lowerHand" = "Төменгі қол";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Құрылғылар";
 "accountPage.settingsHeader" = "Параметрлері";
 "accountPage.notificationsHeader" = "Хабарламалар";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Ашық контакттар";
 "accountPage.unblockContact" = "БЛОКТАРЫҚ";
 "accountPage.proxyAddressAlert" = "Прокси мекенжайы";
-"accountPage.noProxyExplanationLabel" = "Прокси рұқсат етілмеген кезде құрылғыңыз хабарламалар алмайды";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Прокси адресі";
 "accountPage.useProxyList" = "Use proxy list";
 "accountPage.proxyListURL" = "Proxy list URL";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Егер сіздің тіркелгіңіз басқа құрылғыға қосылбаса немесе қосалқы копияланбаса, тіркелгіңіз мен тіркелген атыңыз кері қайтарылмайтын түрде жоғалады.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Jami-де менімен байланысыңыз!";
-"accountPage.contactMeOnJamiContant" = "Jami таратушы байланыс платформасында \"%s\" арқылы маған хабарласыңыз: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Тіркелгі паролін келтіріңіз";
 "accountPage.usernamePlaceholder" = "Қажетті пайдаланушы атауын келтіріңіз";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Тіркеу";
 "accountPage.usernameRegisterAction" = "Тіркеу";
-"accountPage.usernameRegistrationFailed" = "Тіркеу сәтсіз аяқталды.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Шифрланған шот";
 "accountPage.changePassword" = "Парольді өзгерту";
-"accountPage.oldPasswordPlaceholder" = "Ескі парольді келтіріңіз";
+"accountPage.currentPasswordPlaceholder" = "Назардағы парольді келтіріңіз";
 "accountPage.newPasswordPlaceholder" = "Жаңа парольді келтіріңіз";
 "accountPage.newPasswordConfirmPlaceholder" = "Жаңа парольді растаңыз";
 "accountPage.changePasswordError" = "Пароль дұрыс емес";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "Бұл құрылғы";
 "accountPage.otherDevices" = "Басқа қосылған құрылғылар";
 "accountPage.accountIdentity" = "Account identity";
+"accountPage.bootstrap" = "Бастау шегі";
+"accountPage.dhtConfiguration" = "OpenDHT конфигурациясы";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "The export operation failed.";
 
-//Account
+// Account
 "account.sipServer" = "Сервер";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
@@ -423,35 +425,35 @@
 "account.needMigration" = "шот көшірілуі қажет";
 "account.me" = "Мен...";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "Контакттар тосқауылданбаған";
 
-//Link New Device
+// Link New Device
 "linkDevice.title" = "Жаңа құрылғыны қосу";
-"linkDevice.passwordError" = "Кірген пароліңіз осы тіркелгіді ашпайды";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "Процессті аяқтау үшін жаңа құрылғыда Jami-ді ашу және \"Бұл құрылғыны тіркелгіге қосу\" параметрін таңдау керек.";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Тексеру";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "Аудио шақыруды бастау";
-"contactPage.startVideoCall" = "Видео шақыруды бастау";
-"contactPage.sendMessage" = "Хат жіберіңіз";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "Ашық әңгімелесу";
-"contactPage.removeConversation" = "Әңгімелерді алып тастау";
+"contactPage.leaveConversation" = "Әңгімелеуді қалдырыңыз";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "Бастапқыда...";
 "dataTransfer.readableStatusError" = "Қате";
 "dataTransfer.readableStatusAwaiting" = "Күтуде...";
 "dataTransfer.readableStatusOngoing" = "Алу";
 "dataTransfer.readableStatusCanceled" = "Бас тартылды";
-"dataTransfer.sendingFailed" = "Жіберуден аулақ";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Толық";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "Ұсталған шақыру";
 "notifications.newFile" = "Жаңа файл";
 "notifications.locationSharingStarted" = "Келесі жерді бөлісу басталды";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Жіберіңіз";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Ұяшық пайда болды";
 "generatedMessage.invitationReceived" = "қосылуға шақырылды";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Тікелей орналасқан жерді бөлісу";
 "generatedMessage.contactLeftConversation" = "сол жақ";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "Видеоның параметрлері";
 "generalSettings.videoAcceleration" = "Видео жылдамдатуды рұқсат ету";
 "generalSettings.fileTransfer" = "Файлдарды беру";
-"generalSettings.locationSharing" = "Орналасқан жерлер бөлінеді";
+"generalSettings.locationSharing" = "Орналасу ортақ";
 "generalSettings.automaticAcceptIncomingFiles" = "Түсетін файлдарды автоматты түрде қабылдау";
 "generalSettings.acceptTransferLimit" = "Алудың шекті мөлшерін қабылдау";
-"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = шексіз)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Орналасқан жерді бөлісудің ұзақтығын шектеу";
 "generalSettings.locationSharingDuration" = "Орналасқан позициялар";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-//Log View
+// Log View
 "logView.title" = "Диагностика";
 "logView.description" = "Диагностикалық журналды ашу параметрлері";
-"logView.startLogging" = "Жазбаларды жазуды бастаңыз";
-"logView.stopLogging" = "Ағаштарды тастау";
-"logView.saveError" = "Файл сақталмады";
-"logView.shareError" = "Файл ортақтастырылмады";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Есепшот көшіру";
 "migrateAccount.migrateButton" = "Көшіру шоты";
-"migrateAccount.explanation" = "Бұл тіркелгі көшірілуі керек";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "Көшіруді жалғастыру үшін осы тіркелгі үшін қолданылатын парольді келтіріңіз";
-"migrateAccount.error" = "Тіркелгіңізді көшіру мүмкін емес. Сіз қайтадан сынап көріңіз немесе тіркелгіңізді өшіре аласыз.";
-"migrateAccount.migrating" = "Көшіп-қону...";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Басқа тіркелгіге көшіру";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "Сапар";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
-
-

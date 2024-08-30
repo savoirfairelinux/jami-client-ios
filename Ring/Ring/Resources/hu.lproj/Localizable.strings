@@ -63,18 +63,18 @@
 "scan.badQrCode" = "Rossz QR-kód";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Kapcsolat keresése…";
+"swarmcreation.searchBar" = "Search for contact…";
 "swarmcreation.createTheSwarm" = "Rajcsoport létrehozása";
 "swarmcreation.addADescription" = "Leírás hozzáadása";
 // Swarm
 "swarm.ignoreSwarm" = "Rajcsoport figyelmen kívül hagyása";
 "swarm.leaveConversation" = "Kilépés a beszélgetésből";
-"swarm.chooseColor" = "Színválasztás";
+"swarm.chooseColor" = "Szín";
 "swarm.typeOfSwarm" = "Rajcsoporttípus";
 "swarm.identifier" = "Azonosító";
 "swarm.about" = "Névjegy";
 "swarm.members" = "Tagok";
-"swarm.addDescription" = "Leírás hozzáadása";
+"swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Személyes rajcsoport";
 "swarm.adminInvitesOnly" = "Csak rendszergazdai meghívók";
 "swarm.invitesOnly" = "Személyes rajcsoport";
@@ -89,9 +89,9 @@
 "swarm.confirmLeaveSwarm" = "Biztosan szeretne kilépni ebből a rajcsoportból?";
 "swarm.Leave" = "Elhagyás";
 "swarm.newSwarm" = "Új rajcsoport";
-"swarm.namePlaceholder" = "Rajcsoport neve";
+"swarm.namePlaceholder" = "Swarm name";
 "swarm.explanationText" = "Tagok a rajcsoport létrehozása után bármikor meghívhatók és hozzáadhatók";
-"swarm.customizeProfile" = "Rajcsoport-névjegy testreszabása";
+"swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Rajcsoportkép megváltoztatása";
 "swarm.customize" = "Rajcsoport testreszabása";
 "swarm.selectContacts" = "Kapcsolatok kijelölése";
@@ -108,7 +108,7 @@
 "smartlist.invitationReceived" = "Meghívások megérkeztek";
 "smartlist.noResults" = "Nincs eredmény";
 "smartlist.noConversation" = "Beszélgetés nem található";
-"smartlist.searchBarPlaceholder" = "Név megadása…";
+"smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Keresés";
 "smartlist.noNetworkConnectivity" = "Nincs hálózati csatlakozás";
 "smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
@@ -125,7 +125,7 @@
 "smartlist.inSynchronization" = "beszélgetés összehangolásában";
 "smartlist.newMessage" = "Új üzenet";
 
-//Conversation
+// Conversation
 "conversation.addToContactsButton" = "Hozzáadás a kapcsolatokhoz";
 "conversation.addToContactsLabel" = "Hozzáadja a kapcsolatokhoz?";
 "conversation.notContactLabel" = "nem szerepel a kapcsolatlistában";
@@ -146,7 +146,7 @@
 "conversation.edited" = "szerkesztve";
 "conversation.deletedMessage" = "Törölt üzenet";
 
-//Invitations
+// Invitations
 "invitations.noInvitations" = "Nincs meghívás";
 "invitations.pending" = "függőben levő…";
 "invitations.accepted" = "elfogadott";
@@ -165,7 +165,7 @@
 "welcome.createAccount" = "Csatlakozás";
 "welcome.connectToManager" = "Jami-fiókkezelő kiszolgáló csatlakozása";
 
-//Creation Profile Screen
+// Creation Profile Screen
 "createProfile.skipCreateProfile" = "Átugrani";
 "createProfile.profileCreated" = "Tovább";
 "createProfile.title" = "Névjegy testreszabása";
@@ -174,7 +174,7 @@
 "createProfile.subtitle" = "A névjegyed csak a kapcsolataival kerül megosztásra. Bármikor megváltoztathatja.";
 "createProfile.createYourAvatar" = "Névjegykép létrehozása";
 
-//Create Account form
+// Create Account form
 "createAccount.createAccountFormTitle" = "Jami csatlakozása";
 "createAccount.lookingForUsernameAvailability" = "a rendelkezésre állás keresése…";
 "createAccount.invalidUsername" = "Érvénytelen felhasználónév";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Hálózati hiba";
 "createAccount.UsernameNotRegisteredMessage" = "A fiók létrehozva de a felhasználónevét nincs bejegyzett";
 "createAccount.timeoutTitle" = "Fiók létrehozva";
-"createAccount.timeoutMessage" = "Felhasználónév bejegyeztetése folyamatban van, kis türelmet…";
+"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
 "createAccount.sipConfigure" = "Meglévő SIP-fiók beállítása";
 "createAccount.creatingAccount" = "Fiók létrehozása";
 "createAccount.nameExplanation" = "Regisztráljon felhasználónevet, hogy mások könnyebben megtalálják és elérjék Önt a Jamin.";
@@ -196,16 +196,16 @@
 "createAccount.encryptTitle" = "Fiók titkosítása jelszóval";
 "createAccount.encryptExplanation" = "A Jami-fiók csak ezen az eszközön jön létre és tárolódik helyileg, a fiókkulcsokat tartalmazó archívumként. Az archívumhoz való hozzáférés opcionálisan jelszóval védhető.";
 
-//Link To Account form
+// Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Fiók összekapcsolása";
 "linkToAccount.linkButtonTitle" = "Kapcsolat";
-"linkToAccount.linkDeviceTitle" = "Eszköz összekapcsolása";
-"linkToAccount.linkDeviceMessage" = "Válassza az „Új eszköz összekapcsolása” lehetőséget a másik Jami alkalmazásban a QR- vagy PIN-kód megjelenítéséhez";
+"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "Meglévő Jami-fiók használatához ezen az eszközön PIN-kód szükséges";
 "linkToAccount.pinPlaceholder" = "PIN-kód";
 "linkToAccount.pinLabel" = "PIN-kód megadása";
 "linkToAccount.scanQRCode" = "QR-kód beolvasása";
-"linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához lépjen a fiókkezelési beállításokhoz azon az eszközön, amelyen az összekapcsolni kívánt fiók található. Válassza az „Új eszköz összekapcsolása” lehetőséget. Megkapja az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Jami-fiók importálása a helyi archívfájlból.";
@@ -214,7 +214,7 @@
 "importFromArchive.buttonTitle" = "Importálás";
 "importFromArchive.selectArchiveButton" = "Archívfájl kijelölése";
 
-//Link To Account Manager form
+// Link To Account Manager form
 "linkToAccountManager.signIn" = "Bejelentkezés";
 "linkToAccountManager.title" = "JAMS-fiók";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL-je";
@@ -222,14 +222,14 @@
 "linkToAccountManager.jamsExplanation" = "Jami-fiókkezelő kiszolgáló (JAMS) URL-cím megadása";
 "linkToAccountManager.enterCredentials" = "Adja meg a JAMS hitelesítő adatait";
 
-//Alerts
-"alerts.accountCannotBeFoundTitle" = "A fiók nem található";
-"alerts.accountCannotBeFoundMessage" = "Nem található a fiók a Jami hálózatában. Győződjön meg róla, hogy a meglévő eszközön a Jami-t exportálták és a hitelesítő adatok helyesek voltak.";
-"alerts.accountAddedTitle" = "Hozzáadott fiók";
-"alerts.accountNoNetworkTitle" = "Nem lehet csatlakozni a hálózathoz";
-"alerts.accountNoNetworkMessage" = "Nem sikerült hozzáadni a fiókot, mert a Jami nem tudott csatlakozni az elosztott hálózathoz. Ellenőrizze az eszköz kapcsolatát.";
-"alerts.accountDefaultErrorTitle" = "Ismeretlen hiba";
-"alerts.accountDefaultErrorMessage" = "A fiókot nem lehet létrehozni.";
+// Alerts
+"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountAddedTitle" = "Account added";
+"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
+"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorMessage" = "Hiba történt a fiók létrehozásakor.";
 "alerts.profileTakePhoto" = "Fénykép készítése";
 "alerts.profileUploadPhoto" = "Fénykép feltöltése";
 "alerts.accountLinkedTitle" = "Fiók összekapcsolása…";
@@ -244,12 +244,12 @@
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
 "alerts.noLibraryPermissionsTitle" = "Fényképkönyvtár hozzáférése nem engedélyezett";
 "alerts.noLocationPermissionsTitle" = "Hozzáférés a tartózkodási hely nincs engedélyezve";
-"alerts.errorWrongCredentials" = "Nem lehet csatlakozni a megadott fiókkezelőhöz. Kérjük, ellenőrizze hitelesítő adatait.";
+"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Videoüzenet felvétele";
 "alerts.recordAudioMessage" = "Hangüzenet felvétele";
 "alerts.uploadFile" = "Fájl küldése";
 "alerts.uploadPhoto" = "Gyűjtemény megnyitása";
-"alerts.locationServiceIsDisabled" = "Helymeghatározási szolgáltatások bekapcsolása, hogy a „Jami” meghatározhassa a tartózkodási helyét.";
+"alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Tartózkodási hely megosztása";
 "alerts.alreadylocationSharing" = "Tartózkodási hely már megosztva ezzel a felhasználóval.";
 "alerts.locationSharingDurationTitle" = "Mennyi ideig engedélyezi a tartózkodási hely megosztása?";
@@ -259,7 +259,7 @@
 "alerts.openStreetMapCopyright" = "© OpenStreetMap közreműködők";
 "alerts.openStreetMapCopyrightMoreInfo" = "Tudjon meg többet";
 
-//Actions
+// Actions
 "actions.deleteAction" = "Törlés";
 "actions.clearAction" = "Törlés";
 "actions.backAction" = "Vissza";
@@ -271,22 +271,21 @@
 "actions.goToSettings" = "Beállítások megnyitása";
 "actions.stopLocationSharing" = "Megosztás leállítása";
 
-//Calls
+// Calls
 "calls.incomingCallInfo" = "szeretne Önnel beszélni";
 "calls.ringing" = "Csörögni…";
 "calls.connecting" = "Kapcsolódás…";
 "calls.callFinished" = "A hívás befejeződött";
 "calls.currentCallWith" = "Hívás:";
-"calls.haghUp" = "Hívás befejezése";
-"calls.maximize" = "teljes méret";
-"calls.minimize" = "kis méret";
-"calls.setModerator" = "Moderátor beállítása";
-"calls.removeModerator" = "Moderátor megszüntetése";
+"calls.maximize" = "Maximize";
+"calls.minimize" = "Minimize";
+"calls.setModerator" = "Set moderator";
+"calls.removeModerator" = "Unset moderator";
 "calls.muteAudio" = "Mikrofon elnémítása";
-"calls.unmuteAudio" = "Mikrofon némítás feloldása";
+"calls.unmuteAudio" = "Unmute audio";
 "calls.lowerHand" = "Kéz leengedése";
 
-//Account Page
+// Account Page
 "accountPage.devicesListHeader" = "Eszközök";
 "accountPage.settingsHeader" = "Beállítások";
 "accountPage.notificationsHeader" = "Értesítések";
@@ -295,7 +294,7 @@
 "accountPage.blockedContacts" = "Letiltott kapcsolatok";
 "accountPage.unblockContact" = "Letiltás feloldása";
 "accountPage.proxyAddressAlert" = "Adja meg a meghatalmazott címet";
-"accountPage.noProxyExplanationLabel" = "A készüléke nem kap értesítéseket amikor a meghatalmazott le van tiltva";
+"accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Meghatalmazott cím";
 "accountPage.useProxyList" = "Meghatalmazáslista használata";
 "accountPage.proxyListURL" = "Meghatalmazáslista URL-címe";
@@ -320,16 +319,17 @@
 "accountPage.removeAccountMessage" = "Ha fiókjáról nem készített biztonsági másolatot, vagy nem adott hozzá egy másik eszközhöz, akkor fiókját és regisztrált nevét visszavonhatatlanul elveszíti.";
 "accountPage.inviteFriends" = "Barátok és ismerősök meghívása";
 "accountPage.contactMeOnJamiTitle" = "Lépjen kapcsolatba velem a Jami-n!";
-"accountPage.contactMeOnJamiContant" = "Lépjen velem kapcsolatba a(z) „%s” használatával, a Jami elosztott kommunikációs platformon: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Fiók jelszavának megadása";
 "accountPage.usernamePlaceholder" = "Kívánt felhasználónév megadása";
 "accountPage.registerNameErrorMessage" = "A kért felhasználónév nem áll rendelkezésre";
 "accountPage.usernameRegistering" = "Regisztráció…";
 "accountPage.usernameRegisterAction" = "Regisztráció";
-"accountPage.usernameRegistrationFailed" = "Bejegyeztetés sikertelen. Kérjük, ellenőrizze a jelszót.";
+"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
+"accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Fiók titkosítása";
 "accountPage.changePassword" = "Jelszó megváltoztatása";
-"accountPage.oldPasswordPlaceholder" = "Jelenlegi jelszó megadása";
+"accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "Új jelszó megadása";
 "accountPage.newPasswordConfirmPlaceholder" = "Új jelszó megerősítése";
 "accountPage.changePasswordError" = "Helytelen jelszó";
@@ -388,6 +388,8 @@
 "accountPage.thisDevice" = "Ez az eszköz";
 "accountPage.otherDevices" = "Egyéb kapcsolódó eszközök";
 "accountPage.accountIdentity" = "Fiókazonosító";
+"accountPage.bootstrap" = "Rendszerindítás";
+"accountPage.dhtConfiguration" = "OpenDHT-beállítások";
 
 // Backup Account
 "backupAccount.explanation" = "Ez a Jami-fiók csak ezen az eszközön létezik. A fiók elveszik, ha ez az eszköz elveszik, vagy az alkalmazást eltávolítják. Javasoljuk, hogy készítsen biztonsági másolatot erről a fiókról.";
@@ -403,7 +405,7 @@
 "backupAccount.errorAccessDenied" = "A kijelölt helyhez való hozzáférés megtagadva.";
 "backupAccount.errorFailed" = "Hiba történt a fiók exportálása közben.";
 
-//Account
+// Account
 "account.sipServer" = "Kiszolgáló";
 "account.port" = "Kikötő";
 "account.proxyServer" = "Meghatalmazás";
@@ -423,35 +425,35 @@
 "account.needMigration" = "Fiókáttelepítés szükséges";
 "account.me" = "Én";
 
-//Block List Page
+// Block List Page
 "blockListPage.noBlockedContacts" = "Nincsenek letiltott kapcsolatok";
 
-//Link New Device
-"linkDevice.title" = "Eszköz összekapcsolása fiókhoz";
-"linkDevice.passwordError" = "A megadott jelszó nem oldja fel ezt a fiókot";
-"linkDevice.networkError" = "Hálózati hiba történt az exportálás során";
-"linkDevice.defaultError" = "Hiba történt a fiók exportálása közben.";
-"linkDevice.explanationMessage" = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön és válassza az „Eszköz összekapcsolása fiókhoz” opciót. A PIN-kódod 10 percig érvényes.";
+// Link New Device
+"linkDevice.title" = "Új eszköz összekapcsolása";
+"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.networkError" = "A network error occurred while exporting the account.";
+"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "Ellenőrzése";
 
-//Contact Page
+// Contact Page
 "contactPage.startAudioCall" = "Hanghívás indítása";
-"contactPage.startVideoCall" = "Videóhívás indítása";
-"contactPage.sendMessage" = "Üzenet küldése";
+"contactPage.startVideoCall" = "Start video call";
+"contactPage.send" = "Send";
 "contactPage.clearConversation" = "Csevegés törlése";
-"contactPage.removeConversation" = "Beszélgetés törlése";
+"contactPage.leaveConversation" = "Kilépés a beszélgetésből";
 
-//DataTransfer
+// DataTransfer
 "dataTransfer.readableStatusCreated" = "Előkészítés…";
 "dataTransfer.readableStatusError" = "Hiba";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusOngoing" = "Fájlküldés";
 "dataTransfer.readableStatusCanceled" = "Megszakítva";
-"dataTransfer.sendingFailed" = "Hiba történt a küldés során.";
+"dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.recordInBackgroundWarning" = "Ha több alkalmazással többfeladatos munka közben készít videót, akkor a videók gyengébb minőségét eredményezhetik. A legjobb eredmény elérése érdekében rögzítse, ha nem végez többfeladatot.";
 
-//Notifications
+// Notifications
 "notifications.missedCall" = "Nem fogadott hívás";
 "notifications.newFile" = "Új fájl";
 "notifications.locationSharingStarted" = "Bejövő tartózkodási hely megosztása elindítva";
@@ -462,7 +464,7 @@
 "dataTransfer.sendMessage" = "Küldés";
 
 
-//Generated Message
+// Generated Message
 "generatedMessage.contactAdded" = "Meghívás megérkezett";
 "generatedMessage.swarmCreated" = "Rajcsoport létrehozva";
 "generatedMessage.invitationReceived" = "meghívást kapott a csatlakozásra";
@@ -476,37 +478,37 @@
 "generatedMessage.liveLocationSharing" = "Valós idejű hely megosztása";
 "generatedMessage.contactLeftConversation" = "kilépett";
 
-//General Settings
+// General Settings
 "generalSettings.videoSettings" = "Videóbeállítások";
 "generalSettings.videoAcceleration" = "Videó gyorsítás engedélyezése";
 "generalSettings.fileTransfer" = "Fájlküldés";
 "generalSettings.locationSharing" = "Helymegosztás";
 "generalSettings.automaticAcceptIncomingFiles" = "A bejövő fájlok önműködő elfogadása";
 "generalSettings.acceptTransferLimit" = "Fájlküldési korlátozás elfogadása";
-"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = korlátlan)";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Helymegosztás időtartamának korlátozása";
 "generalSettings.locationSharingDuration" = "Helymegosztás időtartama";
 "generalSettings.donationCampaign" = "Adományozási kampány";
 "generalSettings.enableDonationCampaign" = "Adományozási kampány engedélyezése";
 
-//Log View
+// Log View
 "logView.title" = "Diagnosztika";
 "logView.description" = "Diagnosztikai naplóbeállítások megnyitása";
-"logView.startLogging" = "Naplózás indítása";
-"logView.stopLogging" = "Naplózás leállítása";
-"logView.saveError" = "Hiba történt a fájl mentése közben.";
-"logView.shareError" = "Hiba történt a fájl megosztása közben.";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop logging";
+"logView.saveError" = "An error occurred while saving the file.";
+"logView.shareError" = "An error occurred while sharing the file.";
 
-//Migrate Account
+// Migrate Account
 "migrateAccount.title" = "Fiók áttelepítése";
 "migrateAccount.migrateButton" = "Fiókáttelepítés";
-"migrateAccount.explanation" = "Fiókáttelepítés szükséges";
+"migrateAccount.explanation" = "Account migration required.";
 "migrateAccount.passwordExplanation" = "Adja meg a fiók jelszavát az áttelepítés folytatásához";
-"migrateAccount.error" = "Hiba történt a fiók áttelepítése közben. Kérjük, próbálja újra, vagy törölje a fiókot.";
-"migrateAccount.migrating" = "Áttelepítése…";
+"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
+"migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Másik fiókáttelepítés";
 
-//About Jami
+// About Jami
 "aboutJami.declaration1" = "A Jami, egy GNU-csomag, az univerzális és elosztott társ-társ kommunikációt szolgáló szoftver, amely tiszteletben tartja a felhasználók szabadságát és magánéletét. Látogatás";
 "aboutJami.declaration2" = "további tájékoztatásért.";
 "aboutJami.noWarranty1" = "Ehhez a programhoz semmilyen garancia nem jár. Látogatás";
@@ -515,5 +517,3 @@
 "aboutJami.feedback" = "Visszajelzés";
 "aboutJami.createdBy" = "Készítette";
 "aboutJami.artworkBy" = "Művész";
-
-
