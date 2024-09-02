@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Engadir descrición";
 // Swarm
 "swarm.ignoreSwarm" = "Ignora o enjambre";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Deixar a conversa";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Tipo de enjambre";
 "swarm.identifier" = "Identificador";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami é unha plataforma de comunicación libre e universal que coida a privacidade e liberdades das persoas.";
 "welcome.haveAccount" = "Xa teño unha conta.";
 "welcome.linkDevice" = "Importación a partir de outro dispositivo";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Importar desde ficheiro de apoio";
 "welcome.createAccount" = "Únete";
 "welcome.connectToManager" = "Conectar co Servidor de Xestión de Contas Jami";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Ligando conta";
 "linkToAccount.linkButtonTitle" = "Ligar";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Ligar dispositivo";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Conectando...";
 "calls.callFinished" = "Llamada terminada";
 "calls.currentCallWith" = "Llámenos con ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.maximize" = "Maximizar";
+"calls.minimize" = "Minimizar";
+"calls.setModerator" = "Establecer moderador";
+"calls.removeModerator" = "Desactivar moderador";
 "calls.muteAudio" = "Acalar audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.unmuteAudio" = "Reactivar audio";
+"calls.lowerHand" = "Man inferior";
 
 // Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Conta encriptada";
 "accountPage.changePassword" = "Cambiar contrasinal";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Introduza a contrasinal actual";
 "accountPage.newPasswordPlaceholder" = "Introduza unha nova contrasinal";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirmar a nova contrasinal";
 "accountPage.changePasswordError" = "Palabra de acceso incorrecta";
@@ -389,7 +389,7 @@
 "accountPage.otherDevices" = "Outros dispositivos conectados";
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.dhtConfiguration" = "Configuración OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -438,10 +438,10 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Iniciar chamada de audio";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Iniciar chamada de vídeo";
+"contactPage.send" = "Enviar";
 "contactPage.clearConversation" = "Cambio de datos";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Deixar a conversa";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "A inicializar...";
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnósticos";
 "logView.description" = "Abrir axustes do rexistro dos diagnósticos";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Deter o rexistro";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

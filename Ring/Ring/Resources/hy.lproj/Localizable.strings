@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Հաշվետու կապ";
 "linkToAccount.linkButtonTitle" = "Կապ";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Կապակցման սարք";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN-ը";
@@ -277,12 +277,12 @@
 "calls.connecting" = "Կապակցում...";
 "calls.callFinished" = "Հանգիստը ավարտված է";
 "calls.currentCallWith" = "Զանգահարեք ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.maximize" = "Մաքսիմալացնել";
+"calls.minimize" = "Մինիմինացնել";
+"calls.setModerator" = "Կազմել մոդերատոր";
+"calls.removeModerator" = "Կարգավորիչը անսահմանված";
 "calls.muteAudio" = "Լռական ձայն";
-"calls.unmuteAudio" = "Unmute audio";
+"calls.unmuteAudio" = "Անխափան ձայնային ձայն";
 "calls.lowerHand" = "Նվազագույն ձեռքը";
 
 // Account Page
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Գաղտնի հաշիվ";
 "accountPage.changePassword" = "Փոխել գաղտնաբառը";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Ներկայումս մուտքագրեք գաղտնաբառ";
 "accountPage.newPasswordPlaceholder" = "Ներբեռնեք նոր գաղտնաբառ";
 "accountPage.newPasswordConfirmPlaceholder" = "Համոզվեք նոր գաղտնաբառը";
 "accountPage.changePasswordError" = "Անշարունակություն";
@@ -438,8 +438,8 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Սկսել ձայնային զանգը";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Սկսեք տեսահաղորդումը";
+"contactPage.send" = "Գտիր";
 "contactPage.clearConversation" = "Հաղթանակ";
 "contactPage.leaveConversation" = "Թող խոսակցությունը";
 
@@ -495,7 +495,7 @@
 "logView.title" = "Վիրահատականներ";
 "logView.description" = "Բաց ախտորոշման օրագրի կարգավորումները";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Սեղմեք անտառային աշխատանքը";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Tilføj en beskrivelse";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorer sværmen";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Lad samtalen være";
 "swarm.chooseColor" = "Farve";
 "swarm.typeOfSwarm" = "Type svam";
 "swarm.identifier" = "Identifikator";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami er en gratis og universel kommunikationsplatform som respekterer sine brugeres privatliv og frihed";
 "welcome.haveAccount" = "Jeg har allerede en konto.";
 "welcome.linkDevice" = "Import fra et andet udstyr";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Import fra backup";
 "welcome.createAccount" = "Deltag";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Konto-tilknytning";
 "linkToAccount.linkButtonTitle" = "Tilknyt";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Tilknyt enhed";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Opretter forbindelse…";
 "calls.callFinished" = "Opkald afsluttet";
 "calls.currentCallWith" = "Opkald med";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "Maksimer";
+"calls.minimize" = "Minimer";
+"calls.setModerator" = "Indstilling af moderator";
+"calls.removeModerator" = "Moderator";
+"calls.muteAudio" = "Sluk Lyd";
+"calls.unmuteAudio" = "Udybnet lyd";
+"calls.lowerHand" = "Nedre hånd";
 
 // Account Page
 "accountPage.devicesListHeader" = "Enheder";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Kryptering af konto";
 "accountPage.changePassword" = "Skift adgangskode";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Indtaster det aktuelle adgangskode";
 "accountPage.newPasswordPlaceholder" = "Indtaster nyt adgangskode";
 "accountPage.newPasswordConfirmPlaceholder" = "bekræft nyt adgangskode";
 "accountPage.changePasswordError" = "Faldt adgangskode";
@@ -389,7 +389,7 @@
 "accountPage.otherDevices" = "Andre tilknyttede enheder";
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.dhtConfiguration" = "OpenDHT-konfiguration";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "Ingen blokerede kontakter";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Tilknyt ny enhed";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -437,11 +437,11 @@
 "linkDevice.hudMessage" = "Verificerer";
 
 // Contact Page
-"contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
+"contactPage.startAudioCall" = "Start et audio opkald";
+"contactPage.startVideoCall" = "Start et video opkald";
 "contactPage.send" = "Send";
 "contactPage.clearConversation" = "Ryd chat";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Lad samtalen være";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Initialiserer...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "Videoindstillinger";
 "generalSettings.videoAcceleration" = "Aktivere videobesked";
 "generalSettings.fileTransfer" = "Filoverførsler";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "Lokalisering";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatisk acceptere indgående filer";
 "generalSettings.acceptTransferLimit" = "Antagelse af overførselsgrænser";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnostik";
 "logView.description" = "Åbne indstillinger for diagnostisk log";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Stop med at logge";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

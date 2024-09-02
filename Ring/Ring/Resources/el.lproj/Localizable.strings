@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Προσθήκη περιγραφής";
 // Swarm
 "swarm.ignoreSwarm" = "Αγνοήστε το σμήνος";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Αφήστε τη συζήτηση";
 "swarm.chooseColor" = "Χρώμα";
 "swarm.typeOfSwarm" = "Τύπος σμήνος";
 "swarm.identifier" = "Ταυτοποιητής";
@@ -161,7 +161,7 @@
 "welcome.text" = "Η Jami είναι μια ελεύθερη και παγκόσμια πλατφόρμα επικοινωνίας που διατηρεί την ιδιωτικότητα και τις ελευθερίες των χρηστών";
 "welcome.haveAccount" = "Έχω ήδη λογαριασμό.";
 "welcome.linkDevice" = "Εισαγωγή από άλλη συσκευή";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Εισαγωγή απο αρχειοθετημένο αντίγραφο ασφαλείας";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Σύνδεση λογαριασμού";
 "linkToAccount.linkButtonTitle" = "Σύνδεσμος";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Σύνδεση συσκευής";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Συνδέοντας...";
 "calls.callFinished" = "Η κλήση ολοκληρώθηκε";
 "calls.currentCallWith" = "Τηλεφώνησε με";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "Μεγιστοποίηση";
+"calls.minimize" = "Ελαχιστοποίηση";
+"calls.setModerator" = "Ρυθμίστε τον διαχειριστή";
+"calls.removeModerator" = "Ανακατάσταση διαχειριστή";
+"calls.muteAudio" = "Σίγαση ήχου";
+"calls.unmuteAudio" = "Ανεκλειστικό ήχο";
+"calls.lowerHand" = "Κάτω χέρι";
 
 // Account Page
 "accountPage.devicesListHeader" = "Συσκευές";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Κρυπτογραφημένο λογαριασμό";
 "accountPage.changePassword" = "Αλλαγή κωδικού";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Εισάγετε τον τρέχοντα κωδικό πρόσβασης";
 "accountPage.newPasswordPlaceholder" = "Εισαγωγή νέου κωδικού";
 "accountPage.newPasswordConfirmPlaceholder" = "Επιβεβαίωση νέου κωδικού";
 "accountPage.changePasswordError" = "Λάθος κωδικό πρόσβασης";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "Αυτή η συσκευή";
 "accountPage.otherDevices" = "Άλλα συνδεδεμένα όργανα";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "Πυροσκόπηση";
+"accountPage.dhtConfiguration" = "Ρύθμιση OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "Μη αποκλεισμένες επαφές";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Σύνδεση νέας συσκευής";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -438,10 +438,10 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Ξεκινάτε την οχητική κλήση";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Ξεκινήστε την κλήση βίντεο";
+"contactPage.send" = "Αποστολή";
 "contactPage.clearConversation" = "Καθαρή συζήτηση";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Αφήστε τη συζήτηση";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Αρχική...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "Εποθέματα Βίντεο";
 "generalSettings.videoAcceleration" = "Επιτρέψτε την επιτάχυνση βίντεο";
 "generalSettings.fileTransfer" = "Μεταφορά Αρχείων";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "Συνοχή τοποθεσιών";
 "generalSettings.automaticAcceptIncomingFiles" = "Αποδέχεται αυτόματα εισερχόμενα αρχεία";
 "generalSettings.acceptTransferLimit" = "Αποδέχεται όριο μεταφοράς";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "Διαγνωστικά";
 "logView.description" = "Ανοίξτε τις ρυθμίσεις καταγραφής διαγνωστικού";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Τερματισμός καταγραφής";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

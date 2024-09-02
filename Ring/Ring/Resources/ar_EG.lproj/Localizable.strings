@@ -68,8 +68,8 @@
 "swarmcreation.addADescription" = "إضافة وصف";
 // Swarm
 "swarm.ignoreSwarm" = "تجاهل السحابة";
-"swarm.leaveConversation" = "Leave conversation";
-"swarm.chooseColor" = "Color";
+"swarm.leaveConversation" = "أترك المحادثة";
+"swarm.chooseColor" = "لون";
 "swarm.typeOfSwarm" = "نوع السحابة";
 "swarm.identifier" = "المعرف";
 "swarm.about" = "عن RING";
@@ -161,7 +161,7 @@
 "welcome.text" = "چامى هو منصة اتصال حرة وعالمية تحفظ خصوصية المستخدمين وحرياتهم";
 "welcome.haveAccount" = "لدي حساب بالفعل";
 "welcome.linkDevice" = "الاستيراد من جهاز آخر";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "الاستيراد من النسخة الاحتياطية";
 "welcome.createAccount" = "انضم";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ربط الحساب";
 "linkToAccount.linkButtonTitle" = "ربط";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "اربط جهاز";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "رمز الأمان";
@@ -277,13 +277,13 @@
 "calls.connecting" = "اتصال جاري...";
 "calls.callFinished" = "المكالمة انتهت";
 "calls.currentCallWith" = "اتصل بـ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "تكبير";
+"calls.minimize" = "خفض";
+"calls.setModerator" = "حدد المدير";
+"calls.removeModerator" = "إزالة المدير";
+"calls.muteAudio" = "كتم الصوت";
+"calls.unmuteAudio" = "صوت غير محكم";
+"calls.lowerHand" = "اليد السفلى";
 
 // Account Page
 "accountPage.devicesListHeader" = "الأجهزة";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "تشفير الحساب";
 "accountPage.changePassword" = "تغيير كلمة المرور";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "إدخال كلمة المرور الحالية";
 "accountPage.newPasswordPlaceholder" = "إدخال كلمة مرور جديدة";
 "accountPage.newPasswordConfirmPlaceholder" = "تأكيد كلمة المرور الجديدة";
 "accountPage.changePasswordError" = "كلمة مرور خاطئة";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "هذا الجهاز";
 "accountPage.otherDevices" = "الأجهزة الأخرى المرتبطة";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "تشغيل ذاتي";
+"accountPage.dhtConfiguration" = "تهيئة OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "لا توجد جهات إتصال محظورة";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "اربط جهاز جديد";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -437,11 +437,11 @@
 "linkDevice.hudMessage" = "جاري التحقق";
 
 // Contact Page
-"contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startAudioCall" = "بدأ مكالمة صوتية";
+"contactPage.startVideoCall" = "بدء مكالمة فيديو";
+"contactPage.send" = "إرسال";
 "contactPage.clearConversation" = "-تحدثوا";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "أترك المحادثة";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "إبتدائية...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "إعدادات الفيديو";
 "generalSettings.videoAcceleration" = "تمكين تسريع الفيديو";
 "generalSettings.fileTransfer" = "نقل ملف";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "مشاركة الموقع";
 "generalSettings.automaticAcceptIncomingFiles" = "تقبل الملفات الموصلة تلقائيًا";
 "generalSettings.acceptTransferLimit" = "اقبلوا الحد المحدد للتحويل";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "التشخيص";
 "logView.description" = "إعدادات سجل التشخيص المفتوحة";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "توقف عن التقطيع";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

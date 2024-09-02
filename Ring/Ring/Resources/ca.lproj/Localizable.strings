@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Ajuda una descripció";
 // Swarm
 "swarm.ignoreSwarm" = "Ignora l'esgarre";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Deixar la conversa";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Tip de enjame";
 "swarm.identifier" = "Identificador";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami és una plataforma de comunicació lliure i universal que conserva la privacitat i llibertats dels usuaris";
 "welcome.haveAccount" = "Jo ja tinc un compte";
 "welcome.linkDevice" = "Importació des d'un altre dispositiu";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Importa des d'una còpia de seguretat d'arxiu";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Enllaç de comptes";
 "linkToAccount.linkButtonTitle" = "Enllaç";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Enllaça Dispositiu";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Connectant…";
 "calls.callFinished" = "L' trucada acabada";
 "calls.currentCallWith" = "Llamem amb ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "Maximitza";
+"calls.minimize" = "Minimitza";
+"calls.setModerator" = "Configuració de moderador";
+"calls.removeModerator" = "Moderador desactivat";
+"calls.muteAudio" = "Silencia l'àudio";
+"calls.unmuteAudio" = "Audió inmutat";
+"calls.lowerHand" = "Man baixa";
 
 // Account Page
 "accountPage.devicesListHeader" = "Dispositius";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Conta encriptada";
 "accountPage.changePassword" = "Canvia la contrasenya";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Introdueix la contrasenya actual";
 "accountPage.newPasswordPlaceholder" = "Introdueix una nova contrasenya";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirmar la nova contrasenya";
 "accountPage.changePasswordError" = "Password incorrecte";
@@ -389,7 +389,7 @@
 "accountPage.otherDevices" = "D'altres dispositius connectats";
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.dhtConfiguration" = "Configuració de OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "Sense contactes blocats";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Coneix el nou dispositiu";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -437,11 +437,11 @@
 "linkDevice.hudMessage" = "Verificació";
 
 // Contact Page
-"contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startAudioCall" = "Comença una trucada de veu.";
+"contactPage.startVideoCall" = "Comença una videotrucada";
+"contactPage.send" = "Envia";
 "contactPage.clearConversation" = "Calla clar";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Deixar la conversa";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Inicialitzant…";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "Configuracions de vídeo";
 "generalSettings.videoAcceleration" = "Abilitar l'acceleració de vídeo";
 "generalSettings.fileTransfer" = "Transferència de fitxers";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "Partil·lació de localització";
 "generalSettings.automaticAcceptIncomingFiles" = "Accepta automàticament fitxers entrants";
 "generalSettings.acceptTransferLimit" = "Acceptar límit de transferència";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnòstics";
 "logView.description" = "Obre les opcions de diagnòstic";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Atura les traces";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

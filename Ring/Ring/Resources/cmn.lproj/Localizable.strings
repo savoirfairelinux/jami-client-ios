@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "添加描述";
 // Swarm
 "swarm.ignoreSwarm" = "忽略群聊";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "离开谈话";
 "swarm.chooseColor" = "色彩";
 "swarm.typeOfSwarm" = "群聊类型";
 "swarm.identifier" = "識別碼";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami 是一个保护用户的隐私和自由的通用自由软件。";
 "welcome.haveAccount" = "我已经有一个账户";
 "welcome.linkDevice" = "從其他裝置匯入";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "从归档备份中导入";
 "welcome.createAccount" = "加入";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "关联账户";
 "linkToAccount.linkButtonTitle" = "关联";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "关联设备";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN 碼";
@@ -229,7 +229,7 @@
 "alerts.accountNoNetworkTitle" = "Unable to connect to the network";
 "alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Account error";
-"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
+"alerts.accountDefaultErrorMessage" = "创建帐户时出错";
 "alerts.profileTakePhoto" = "照相";
 "alerts.profileUploadPhoto" = "上传照片";
 "alerts.accountLinkedTitle" = "正在关联账户";
@@ -277,13 +277,13 @@
 "calls.connecting" = "正在连接…";
 "calls.callFinished" = "通话已结束";
 "calls.currentCallWith" = "通话到";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "最大化";
+"calls.minimize" = "最小化";
+"calls.setModerator" = "設定主持人";
+"calls.removeModerator" = "取消設定主持人";
+"calls.muteAudio" = "静音";
+"calls.unmuteAudio" = "取消静音";
+"calls.lowerHand" = "放下手";
 
 // Account Page
 "accountPage.devicesListHeader" = "裝置";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "加密账户";
 "accountPage.changePassword" = "變更密碼";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "輸入目前密碼";
 "accountPage.newPasswordPlaceholder" = "输入新密码";
 "accountPage.newPasswordConfirmPlaceholder" = "确认新密码";
 "accountPage.changePasswordError" = "密码错误";
@@ -389,7 +389,7 @@
 "accountPage.otherDevices" = "其他关联设备";
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.dhtConfiguration" = "OpenDHT 配置";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "没有被屏蔽的联系人";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "关联新设备";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -437,11 +437,11 @@
 "linkDevice.hudMessage" = "正在驗證";
 
 // Contact Page
-"contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startAudioCall" = "发起语音通话";
+"contactPage.startVideoCall" = "開始視訊通話";
+"contactPage.send" = "发送";
 "contactPage.clearConversation" = "清除聊天";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "离开谈话";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "正在初始化…";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "视频设置";
 "generalSettings.videoAcceleration" = "启用视频加速";
 "generalSettings.fileTransfer" = "文件传输";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "位置共享";
 "generalSettings.automaticAcceptIncomingFiles" = "自动接收文件";
 "generalSettings.acceptTransferLimit" = "接受传输限制";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "診斷";
 "logView.description" = "開啟診斷紀錄檔設定";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "停止记录";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

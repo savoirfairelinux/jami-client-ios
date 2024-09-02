@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "مڠهادڤن ڤرسمڤڠن";
 // Swarm
 "swarm.ignoreSwarm" = "تيدق ممڤوڽاءي ڤڠاجرن";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "ترك ڤڠاجرن";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "نوع سور";
 "swarm.identifier" = "ڤڠڬونا";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami اداله ڤلاڤتورم ڤمبلاجرن يڠ براوسيا دان ڤرنه ممڤرچايا?? ي ڤرودوک دان ڤرودوک ڤڠڬونا";
 "welcome.haveAccount" = "ساي تله مڠهادڤكن";
 "welcome.linkDevice" = "ڤڠاجرن دري ڤڠاجرن لاين";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "ڤڠمبيلن دري ڤڠمبيلن ارشيڤ";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ڤڠاجرن حساب";
 "linkToAccount.linkButtonTitle" = "لينك";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "ڤڠڬيلن ڤڠڬيلن";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "ارتباط...";
 "calls.callFinished" = "ڤڠاجين تله دڤرچايا?? ي";
 "calls.currentCallWith" = "كاو دڠن ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "ممبنتو ڤڠاجرن";
+"calls.minimize" = "مڠهادڤي";
+"calls.setModerator" = "مودراتور دتڠڬوڠ";
+"calls.removeModerator" = "مودراتور دڤرچايا?? ي";
+"calls.muteAudio" = "صوتي ساكن";
+"calls.unmuteAudio" = "صوت غير محكم";
+"calls.lowerHand" = "يڠ دالم لالو";
 
 // Account Page
 "accountPage.devicesListHeader" = "ڤرودوک";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "حساب ڤڠڬيلن";
 "accountPage.changePassword" = "مڠهادڤي ڤرسود";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "ڤرلو مڠهادڤي ڤرساتوان";
 "accountPage.newPasswordPlaceholder" = "مڠهادڤي ڤرسودن بارو";
 "accountPage.newPasswordConfirmPlaceholder" = "ڤڠاتسكن ڤرسودن بارو";
 "accountPage.changePasswordError" = "ڤاسر يڠ تيدق برلاكو";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "اين دستگاه";
 "accountPage.otherDevices" = "ڤڠڬيلن يڠ دڤرچايا?? ي";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "بوتسترپ";
+"accountPage.dhtConfiguration" = "ڤڠڬيلن OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "تيدق ڤرلو ممبليكن ڤڠاجرن";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "دڠن ڤڠاجرن ڤڠاجرن";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -437,11 +437,11 @@
 "linkDevice.hudMessage" = "ڤمباچ";
 
 // Contact Page
-"contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startAudioCall" = "ڤرودوک ڤرودوک";
+"contactPage.startVideoCall" = "ڤرلو ممبنتو ڤيليهن";
+"contactPage.send" = "مڠهادڤ";
 "contactPage.clearConversation" = "چيت برتاهن";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "ترك ڤڠاجرن";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "ڤرودوکن...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "ڤڠاجرن ڤيديو";
 "generalSettings.videoAcceleration" = "ممبنتو ڤرودوک ڤيديو";
 "generalSettings.fileTransfer" = "ڤرچاي ڤرچاي";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "ڤڠاجرن لوكاسي";
 "generalSettings.automaticAcceptIncomingFiles" = "مڠاتاهكن ڤرچاي يڠ دڤرچاي";
 "generalSettings.acceptTransferLimit" = "ڤڠاجرن ڤڠاجرن";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "ڤڠاجرن";
 "logView.description" = "ڤڠاجرن لوڬ دأڠڬڤ";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "ڤرنه مڠهادڤي";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

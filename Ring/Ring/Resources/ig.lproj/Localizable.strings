@@ -280,9 +280,9 @@
 "calls.maximize" = "Mee Ka Ihe Dịkwuo Mma";
 "calls.minimize" = "Mee ka ihe dịkwuo ala";
 "calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.removeModerator" = "Ịkwụsị ịhazi ihe";
 "calls.muteAudio" = "Audio na-adịghị arụ ọrụ";
-"calls.unmuteAudio" = "Unmute audio";
+"calls.unmuteAudio" = "Ọkpụkpọ na-adịghị emechi emechi";
 "calls.lowerHand" = "Aka ala";
 
 // Account Page
@@ -438,8 +438,8 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Malite oku ọdịyo";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Malite ịkpọ oku vidiyo";
+"contactPage.send" = "Zie";
 "contactPage.clearConversation" = "Kpọmkwem Chat";
 "contactPage.leaveConversation" = "Hapụ mkparịta ụka ahụ";
 
@@ -495,7 +495,7 @@
 "logView.title" = "Ihe ndị e ji amata ọrịa";
 "logView.description" = "Mbido ndekọ ndekọ nchọpụta na-emeghe";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Kwụsị ịkwa osisi";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

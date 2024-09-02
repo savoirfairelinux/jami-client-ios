@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "विवरण जोड़ें";
 // Swarm
 "swarm.ignoreSwarm" = "झुंड को अनदेखा करें";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "बातचीत छोड़ दें";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "झुंड का प्रकार";
 "swarm.identifier" = "पहचानकर्ता";
@@ -161,7 +161,7 @@
 "welcome.text" = "जामी एक मुक्त और सार्वभौमिक संचार मंच है जो उपयोगकर्ताओं की गोपनीयता और स्वतंत्रता को संरक्षित करता है";
 "welcome.haveAccount" = "मेरे पास पहले से ही एक खाता है";
 "welcome.linkDevice" = "दूसरे उपकरण से आयात";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "संग्रह बैकअप से आयात";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "खाता लिंक";
 "linkToAccount.linkButtonTitle" = "लिंक";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "लिंक डिवाइस";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "पिन";
@@ -277,12 +277,12 @@
 "calls.connecting" = "कनेक्टिंग...";
 "calls.callFinished" = "कॉल समाप्त";
 "calls.currentCallWith" = "";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.maximize" = "बड़ा करें";
+"calls.minimize" = "न्यूनतम करें";
+"calls.setModerator" = "मॉडरेटर सेट करें";
+"calls.removeModerator" = "मॉडरेटर अनसेट करें";
 "calls.muteAudio" = "मूक ऑडियो";
-"calls.unmuteAudio" = "Unmute audio";
+"calls.unmuteAudio" = "अमूत ऑडियो";
 "calls.lowerHand" = "निचला हाथ";
 
 // Account Page
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "एन्क्रिप्टेड खाता";
 "accountPage.changePassword" = "पासवर्ड बदलें";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "वर्तमान पासवर्ड दर्ज करें";
 "accountPage.newPasswordPlaceholder" = "नया पासवर्ड दर्ज करें";
 "accountPage.newPasswordConfirmPlaceholder" = "नया पासवर्ड पुष्टि करें";
 "accountPage.changePasswordError" = "गलत पासवर्ड";
@@ -438,8 +438,8 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "ऑडियो कॉल प्रारंभ करें";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "वीडियो कॉल शुरू करें";
+"contactPage.send" = "भेजें";
 "contactPage.clearConversation" = "स्पष्ट चैट";
 "contactPage.leaveConversation" = "बातचीत छोड़ दें";
 
@@ -495,7 +495,7 @@
 "logView.title" = "निदान";
 "logView.description" = "खुले डायग्नोस्टिक लॉग सेटिंग्स";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "लकड़ी का काटना बंद करो";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

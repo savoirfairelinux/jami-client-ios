@@ -279,10 +279,10 @@
 "calls.currentCallWith" = "";
 "calls.maximize" = "Максималды";
 "calls.minimize" = "Ең төмендеу";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.setModerator" = "Модераторды орнату";
+"calls.removeModerator" = "Модераторды орнату";
 "calls.muteAudio" = "Ауызды үнсіз";
-"calls.unmuteAudio" = "Unmute audio";
+"calls.unmuteAudio" = "Ауызды үнсіз қалдыру";
 "calls.lowerHand" = "Төменгі қол";
 
 // Account Page
@@ -438,8 +438,8 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Аудио шақыруды бастау";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Видео шақыруды бастаңыз";
+"contactPage.send" = "Жіберіңіз";
 "contactPage.clearConversation" = "Ашық әңгімелесу";
 "contactPage.leaveConversation" = "Әңгімелеуді қалдырыңыз";
 
@@ -495,7 +495,7 @@
 "logView.title" = "Диагностика";
 "logView.description" = "Диагностикалық журналды ашу параметрлері";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Ағаштарды кесуді тоқтату";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

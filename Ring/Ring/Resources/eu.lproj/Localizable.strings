@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Deskribazioa gehitu";
 // Swarm
 "swarm.ignoreSwarm" = "Ez kasurik egin.";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Utzi elkarrizketa.";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Zizare-zulo mota";
 "swarm.identifier" = "Identifikatzailea";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami komunikazio plataforma librea eta unibertsala da, erabiltzaileen pribatutasuna eta askatasuna babesten dituena.";
 "welcome.haveAccount" = "Kontu bat daukat.";
 "welcome.linkDevice" = "Beste gailu batetik inportatzea";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Inportatu babes-kopia artxibotik";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontua estekatzen";
 "linkToAccount.linkButtonTitle" = "Esteka";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Estekatu gailua";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN-a";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Konektatzen...";
 "calls.callFinished" = "Deiak amaitu dira.";
 "calls.currentCallWith" = "Deitu.";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "Maximizatu";
+"calls.minimize" = "Minimizatu";
+"calls.setModerator" = "Moderatzailea ezarri";
+"calls.removeModerator" = "Moderatzailea desfinkatu";
+"calls.muteAudio" = "Isilarazi bideoa";
+"calls.unmuteAudio" = "Audio itzalita";
+"calls.lowerHand" = "Beheko eskua";
 
 // Account Page
 "accountPage.devicesListHeader" = "Gailuak";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Kontu enkriptatua";
 "accountPage.changePassword" = "Aldatu pasahitza";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Sartu oraingo pasahitza";
 "accountPage.newPasswordPlaceholder" = "Sartu pasahitz berria";
 "accountPage.newPasswordConfirmPlaceholder" = "Baieztatu pasahitza berria";
 "accountPage.changePasswordError" = "Pasahitza oker";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "Gailu hau";
 "accountPage.otherDevices" = "Beste unitate konektatuak";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "Errematxu bat";
+"accountPage.dhtConfiguration" = "OpenDHT konfigurazioa";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -438,10 +438,10 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Hasi audio-deia";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Hasi bideo-deia";
+"contactPage.send" = "Bidali";
 "contactPage.clearConversation" = "Argi hitz egin.";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Utzi elkarrizketa.";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Hasieratzen...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "Bideoaren ezarpenak";
 "generalSettings.videoAcceleration" = "Bideoak azkartzea ahalbidetu";
 "generalSettings.fileTransfer" = "Fitxategi-transferentzia";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "Kokapenaren banaketa";
 "generalSettings.automaticAcceptIncomingFiles" = "Sarrera jasotako fitxategiak automatikoki onartzen dira";
 "generalSettings.acceptTransferLimit" = "Onartu transferentziaren muga";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnostikoak";
 "logView.description" = "Diagnostikoaren egunerokoaren konfigurazioa ireki";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Utzi eguraldia.";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

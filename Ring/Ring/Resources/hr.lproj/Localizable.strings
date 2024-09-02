@@ -161,7 +161,7 @@
 "welcome.text" = "Jami je besplatna i univerzalna komunikacijska platforma koja čuva privatnost i slobode korisnika";
 "welcome.haveAccount" = "Već imam račun.";
 "welcome.linkDevice" = "Uvoz iz drugog uređaja";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Import iz arhiva";
 "welcome.createAccount" = "Pridruži se";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Povezivanje računa";
 "linkToAccount.linkButtonTitle" = "Poveznica";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Uređaj za povezivanje";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,12 +277,12 @@
 "calls.connecting" = "Povezivanje...";
 "calls.callFinished" = "Zvatak završen";
 "calls.currentCallWith" = "Zovi s ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.maximize" = "Maksimiziraj";
+"calls.minimize" = "Minimiziraj";
+"calls.setModerator" = "Nastavite moderator";
+"calls.removeModerator" = "Nepripremljen moderator";
 "calls.muteAudio" = "Neiskupljeni audio";
-"calls.unmuteAudio" = "Unmute audio";
+"calls.unmuteAudio" = "Neusmreni audio";
 "calls.lowerHand" = "Dolnja ruka";
 
 // Account Page
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Kriptirani račun";
 "accountPage.changePassword" = "Promjena lozinke";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Ubaci trenutnu lozinku";
 "accountPage.newPasswordPlaceholder" = "Ubaci novu lozinku";
 "accountPage.newPasswordConfirmPlaceholder" = "Potvrdi novu lozinku";
 "accountPage.changePasswordError" = "Lozinka pogrešna";
@@ -438,8 +438,8 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Pokrenite audio poziv";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Pokrenite video pozive";
+"contactPage.send" = "Pošalji";
 "contactPage.clearConversation" = "Čisti razgovor";
 "contactPage.leaveConversation" = "Ostavi razgovor";
 
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnostika";
 "logView.description" = "Otvorena postavka dijagnostičkog dnevnika";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Prestani se drvoći.";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

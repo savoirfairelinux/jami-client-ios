@@ -279,10 +279,10 @@
 "calls.currentCallWith" = "連絡する";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.setModerator" = "調停者を設定";
+"calls.removeModerator" = "調停者を取り消し";
 "calls.muteAudio" = "音声を消音する";
-"calls.unmuteAudio" = "Unmute audio";
+"calls.unmuteAudio" = "音声無音";
 "calls.lowerHand" = "手を下げる";
 
 // Account Page
@@ -438,8 +438,8 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "音声通話を開始";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "ビデオ通話を開始";
+"contactPage.send" = "送信";
 "contactPage.clearConversation" = "クリアチャット";
 "contactPage.leaveConversation" = "話しをやめましょう";
 
@@ -495,7 +495,7 @@
 "logView.title" = "診断";
 "logView.description" = "診断記録設定を開く";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "記録を終了する";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

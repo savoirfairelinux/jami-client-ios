@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Aldonu priskribon";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoru la amason";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Lasu la konversacion";
 "swarm.chooseColor" = "Koloro";
 "swarm.typeOfSwarm" = "Tipo de sorbo";
 "swarm.identifier" = "Identigilo";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami estas libera kaj universala komunikada platformo kiu konservas la privatecon kaj liberecojn de la uzantoj";
 "welcome.haveAccount" = "Mi jam havas konton.";
 "welcome.linkDevice" = "Importado de alia aparato";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Importado de arkiva kopiado";
 "welcome.createAccount" = "Kunigi";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Ligas konton";
 "linkToAccount.linkButtonTitle" = "Rilato";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Ligi aparaton";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Konekti...";
 "calls.callFinished" = "La voko finiĝis";
 "calls.currentCallWith" = "Voku kun ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "Maksimumi";
+"calls.minimize" = "Plejetigi";
+"calls.setModerator" = "Seti moderilon";
+"calls.removeModerator" = "Malkonstruo moderilo";
+"calls.muteAudio" = "Silentigi aŭdion";
+"calls.unmuteAudio" = "Neŝaltita aŭdio";
+"calls.lowerHand" = "Malsupra mano";
 
 // Account Page
 "accountPage.devicesListHeader" = "Aparatoj";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Enkripti konto";
 "accountPage.changePassword" = "Ŝanĝu pasvorton";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Enigu la aktualan pasvorton";
 "accountPage.newPasswordPlaceholder" = "Enigu novan pasvorton";
 "accountPage.newPasswordConfirmPlaceholder" = "Konfirmu novan pasvorton";
 "accountPage.changePasswordError" = "Malĝusta pasvorto";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "Tiu aparato";
 "accountPage.otherDevices" = "Aliaj ligitaj aparatoj";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "Praŝarĝo";
+"accountPage.dhtConfiguration" = "OpenDHT-konfiguro";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "Neniu blokita kontakto";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Ligi novan aparaton";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -438,10 +438,10 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Komenci la aŭdian alvokon";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Komenci videan alvokon";
+"contactPage.send" = "Sendi";
 "contactPage.clearConversation" = "Klare Ĉat";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Lasu la konversacion";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Komenciĝas...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "Video-aj agordoj";
 "generalSettings.videoAcceleration" = "Akceli la videoakceleraĵon";
 "generalSettings.fileTransfer" = "Transdono de dosieroj";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "Loka dividado";
 "generalSettings.automaticAcceptIncomingFiles" = "Aŭtomate akceptu alvenantajn dosierojn";
 "generalSettings.acceptTransferLimit" = "Akceptu translokiglimon";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnostikoj";
 "logView.description" = "Malfermu diagnozajn registrojn";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Ĉesu arbarigo";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

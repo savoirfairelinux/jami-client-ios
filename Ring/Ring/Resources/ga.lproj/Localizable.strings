@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Cuir síos leis";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoráil an swarm";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Cinnigh comhrá";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Tír na n-uimhreacha";
 "swarm.identifier" = "Cluiche";
@@ -161,7 +161,7 @@
 "welcome.text" = "Is ardán cumarsáide saor in aisce agus uilethír é Jami a chaomhnaíonn príobháideacht agus saoirsí na n-úsáideoirí";
 "welcome.haveAccount" = "Tá cuntas agam cheana féin";
 "welcome.linkDevice" = "Importaíocht ó threalamh eile";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Importaí ó chúltaca archiv";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Cúlra nasc";
 "linkToAccount.linkButtonTitle" = "Líon";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Feidhmchlár nasc";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Ceangal...";
 "calls.callFinished" = "Glao críochnaithe";
 "calls.currentCallWith" = "Déan teagmháil le ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.maximize" = "A mhéadú";
+"calls.minimize" = "Cinntíbhí";
+"calls.setModerator" = "Modhálaí a shuiteáil";
+"calls.removeModerator" = "Modhálaí neamhghnách";
 "calls.muteAudio" = "Audio Mute";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.unmuteAudio" = "Audio neamhbhuailte";
+"calls.lowerHand" = "lámh íochtarach";
 
 // Account Page
 "accountPage.devicesListHeader" = "Iarratais";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Cunntas criptithe";
 "accountPage.changePassword" = "Pasfhocal a athrú";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Cuir isteach an pasfhocal reatha";
 "accountPage.newPasswordPlaceholder" = "Cluiche Pasfhocal nua";
 "accountPage.newPasswordConfirmPlaceholder" = "Déan pasfhocal nua a dhearbhú";
 "accountPage.changePasswordError" = "Pasfhocal mícheart";
@@ -389,7 +389,7 @@
 "accountPage.otherDevices" = "Deiseanna eile a bhaineann le feistí";
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.dhtConfiguration" = "Comhréireacht OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -438,10 +438,10 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Tosaigh glao fuaime";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Tosaigh glao físe";
+"contactPage.send" = "Cuir isteach";
 "contactPage.clearConversation" = "Cluiche A Shábháil";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Cinnigh comhrá";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Ag tús a chur le...";

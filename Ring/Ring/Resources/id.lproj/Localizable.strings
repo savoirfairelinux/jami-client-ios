@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Penautan akun";
 "linkToAccount.linkButtonTitle" = "Tautan";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Tautkan perangkat";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,12 +277,12 @@
 "calls.connecting" = "Menghubungkan...";
 "calls.callFinished" = "Panggilan selesai";
 "calls.currentCallWith" = "Telepon dengan";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.maximize" = "Maksimalkan";
+"calls.minimize" = "Minimalkan";
+"calls.setModerator" = "Atur moderator";
+"calls.removeModerator" = "Batal atur moderator";
 "calls.muteAudio" = "Bisukan audio";
-"calls.unmuteAudio" = "Unmute audio";
+"calls.unmuteAudio" = "Bunyikan audio";
 "calls.lowerHand" = "Turunkan tangan";
 
 // Account Page
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Akun Enkripsi";
 "accountPage.changePassword" = "Ubah kata sandi";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Masukkan kata sandi saat ini";
 "accountPage.newPasswordPlaceholder" = "Masukan kata sandi baru";
 "accountPage.newPasswordConfirmPlaceholder" = "Konfirmasi kata sandi baru";
 "accountPage.changePasswordError" = "Kata sandi salah";
@@ -438,8 +438,8 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Mulai panggilan suara";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Mulai panggilan video";
+"contactPage.send" = "Kirim";
 "contactPage.clearConversation" = "Bersihkan obrolan";
 "contactPage.leaveConversation" = "Tinggalkan percakapan";
 
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnostik";
 "logView.description" = "Buka pengaturan log diagnostik";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Hentikan logging";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

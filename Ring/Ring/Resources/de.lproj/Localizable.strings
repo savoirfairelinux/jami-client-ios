@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Eine Beschreibung hinzufügen";
 // Swarm
 "swarm.ignoreSwarm" = "Den Schwarm ignorieren";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Unterhaltung verlassen";
 "swarm.chooseColor" = "Farbe";
 "swarm.typeOfSwarm" = "Typ des Schwarms";
 "swarm.identifier" = "Identifikator";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami ist eine freie und universelle Kommunikationsplattform und respektiert die Freiheiten und Privatsphäre der Benutzer. ";
 "welcome.haveAccount" = "Ich habe bereits einen Account";
 "welcome.linkDevice" = "Von einem anderen Gerät importieren";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Backuparchiv importieren";
 "welcome.createAccount" = "Beitreten";
 "welcome.connectToManager" = "Verbindung zu einem Jami Account Manager-Server herstellen";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontenverknüpfung";
 "linkToAccount.linkButtonTitle" = "Link";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Verbinde Gerät";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -229,7 +229,7 @@
 "alerts.accountNoNetworkTitle" = "Unable to connect to the network";
 "alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Account error";
-"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
+"alerts.accountDefaultErrorMessage" = "Beim Erstellen des Kontos ist ein Fehler aufgetreten.";
 "alerts.profileTakePhoto" = "Foto aufnehmen";
 "alerts.profileUploadPhoto" = "Foto hochladen";
 "alerts.accountLinkedTitle" = "Verknüpfe Konto";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Verbinde…";
 "calls.callFinished" = "Anruf beendet";
 "calls.currentCallWith" = "Anrufen mit";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "Maximieren";
+"calls.minimize" = "Minimieren";
+"calls.setModerator" = "Moderator festlegen";
+"calls.removeModerator" = "Moderator entfernen";
+"calls.muteAudio" = "Audio stummschalten";
+"calls.unmuteAudio" = "Stummschaltung aufheben";
+"calls.lowerHand" = "Hand senken";
 
 // Account Page
 "accountPage.devicesListHeader" = "Geräte";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Konto verschlüsseln";
 "accountPage.changePassword" = "Passwort ändern";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Aktuelles Passwort eingeben";
 "accountPage.newPasswordPlaceholder" = "Neues Passwort eingeben";
 "accountPage.newPasswordConfirmPlaceholder" = "Neues Passwort bestätigen";
 "accountPage.changePasswordError" = "Falsches Passwort";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "Dieses Gerät";
 "accountPage.otherDevices" = "andere verknüpfte Geräte";
 "accountPage.accountIdentity" = "Kontoidentität";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "Aktivierung";
+"accountPage.dhtConfiguration" = "OpenDHT-Einstellungen";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "Keine blockierten Kontakte";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Verbinde neues Gerät";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -437,11 +437,11 @@
 "linkDevice.hudMessage" = "Verifiziere";
 
 // Contact Page
-"contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startAudioCall" = "Audioanruf starten";
+"contactPage.startVideoCall" = "Videoanruf starten";
+"contactPage.send" = "Senden";
 "contactPage.clearConversation" = "Chat löschen";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Unterhaltung verlassen";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Initialisiere...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "Video-Einstellungen";
 "generalSettings.videoAcceleration" = "Videobeschleunigung aktivieren";
 "generalSettings.fileTransfer" = "Dateitransfer";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "Standortfreigabe";
 "generalSettings.automaticAcceptIncomingFiles" = "Eingehende Dateien automatisch annehmen";
 "generalSettings.acceptTransferLimit" = "Annahmelimit Datentransfer";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnose";
 "logView.description" = "Diagnoseprotokolleinstellungen öffnen";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Protokollierung beenden";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

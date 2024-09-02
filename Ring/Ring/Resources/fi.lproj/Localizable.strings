@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Lisää kuvaus";
 // Swarm
 "swarm.ignoreSwarm" = "Ilman huomiota";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Jätä keskustelu";
 "swarm.chooseColor" = "Väri";
 "swarm.typeOfSwarm" = "Ruumiin tyyppi";
 "swarm.identifier" = "Tunniste";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami on vapaa ja universaali viestintäalusta joka turvaa käyttäjien yksityisyyden ja vapaudet";
 "welcome.haveAccount" = "Minulla on jo tili.";
 "welcome.linkDevice" = "Muusta laitteesta tuonnut";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Tuo varmuuskopiosta";
 "welcome.createAccount" = "Liity";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Tilin linkittäminen";
 "linkToAccount.linkButtonTitle" = "Yhdistä";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Linkitä laite";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Yhdistää...";
 "calls.callFinished" = "Puhelu päättynyt";
 "calls.currentCallWith" = "Soita";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.maximize" = "Suurenna";
+"calls.minimize" = "Pienennä";
+"calls.setModerator" = "Aseta valvoja";
+"calls.removeModerator" = "Poista valvoja";
 "calls.muteAudio" = "Vaimenna ääni";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.unmuteAudio" = "Poista mykistys";
+"calls.lowerHand" = "Käsi alas";
 
 // Account Page
 "accountPage.devicesListHeader" = "Laitteet";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Salaistettu tili";
 "accountPage.changePassword" = "Vaihda salasana";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Anna nykyinen salasana";
 "accountPage.newPasswordPlaceholder" = "Anna uusi salasana";
 "accountPage.newPasswordConfirmPlaceholder" = "Vahvista uusi salasana";
 "accountPage.changePasswordError" = "Väärä salasana";
@@ -389,7 +389,7 @@
 "accountPage.otherDevices" = "Muut linkitetyt laitteet";
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.dhtConfiguration" = "OpenDHT-määritykset";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -438,10 +438,10 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Aloita äänipuhelu";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Aloita videopuhelu";
+"contactPage.send" = "Lähetä";
 "contactPage.clearConversation" = "Tyhjennä keskustelu";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Jätä keskustelu";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Valmistellaan...";
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnostiikka";
 "logView.description" = "Avaa diagnostiikan lokin asetukset";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Lopeta kirjaaminen";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

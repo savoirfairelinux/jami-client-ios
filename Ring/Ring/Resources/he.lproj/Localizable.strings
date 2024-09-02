@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "הוסף תיאור";
 // Swarm
 "swarm.ignoreSwarm" = "התעלמו מהגזע.";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "עזוב את השיחה";
 "swarm.chooseColor" = "צבע";
 "swarm.typeOfSwarm" = "סוג של סוואר";
 "swarm.identifier" = "זיהוי";
@@ -161,7 +161,7 @@
 "welcome.text" = "ג'אמי היא פלטפורמה חופשית ויקונביסלית לשיחה שמטרת הפרטיות והחופש של המשתמשים";
 "welcome.haveAccount" = "יש לי חשבון.";
 "welcome.linkDevice" = "ייבוא ממכשיר אחר";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "ייבוא מאחזת תיק";
 "welcome.createAccount" = "הצטרף";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "חיבור חשבונות";
 "linkToAccount.linkButtonTitle" = "קישור";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "מכשיר חיבור";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "מספר זיהוי אישי";
@@ -277,13 +277,13 @@
 "calls.connecting" = "חיבור...";
 "calls.callFinished" = "שיחת הודעה נגמרה.";
 "calls.currentCallWith" = "תתקשר עם ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.maximize" = "שימו את האפס";
+"calls.minimize" = "מינימום";
+"calls.setModerator" = "הגדרת המודרטור";
+"calls.removeModerator" = "מתקן לא מתאים";
 "calls.muteAudio" = "השתק אודיו";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.unmuteAudio" = "אוודיו לא שקט";
+"calls.lowerHand" = "יד התחתונה";
 
 // Account Page
 "accountPage.devicesListHeader" = "התקנים";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "חשבון מוצפן";
 "accountPage.changePassword" = "לשנות סיסמה";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "הכניסו סיסמה הנוכחית";
 "accountPage.newPasswordPlaceholder" = "הכניסו סיסמה חדשה";
 "accountPage.newPasswordConfirmPlaceholder" = "אישר סיסמה חדשה";
 "accountPage.changePasswordError" = "סיסמה שגויה";
@@ -438,8 +438,8 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "תחילת שיחת קול";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "תתחילו שיחת וידאו";
+"contactPage.send" = "שליחה";
 "contactPage.clearConversation" = "ניקוי הצ׳אט";
 "contactPage.leaveConversation" = "עזוב את השיחה";
 
@@ -495,7 +495,7 @@
 "logView.title" = "אבחון";
 "logView.description" = "הגדרות של תיעוד האבחנה פתוחה";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "תפסיקו לחתוך.";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

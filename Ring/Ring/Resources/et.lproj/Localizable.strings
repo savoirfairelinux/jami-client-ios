@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Lisa kirjeldus";
 // Swarm
 "swarm.ignoreSwarm" = "Eira vestlusrühma";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Lahku vestlusest";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Vestlusrühma tüüp";
 "swarm.identifier" = "Tunnus";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami on vaba ja universaalne suhtluslahendus, mis kaitseb kasutajate privaatsust ja vabadusi";
 "welcome.haveAccount" = "Mul on juba konto";
 "welcome.linkDevice" = "Impordi muust seadmest";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Impordi varukoopiast";
 "welcome.createAccount" = "Liitu";
 "welcome.connectToManager" = "Loo ühendus Jami Kontohaldusserveriga";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontode sidumine";
 "linkToAccount.linkButtonTitle" = "Seo";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Seo seade";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN-kood";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Ühendame...";
 "calls.callFinished" = "Kõne on lõppenud";
 "calls.currentCallWith" = "Helista kasutajale";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "Maksimeeri";
+"calls.minimize" = "Väikendada";
+"calls.setModerator" = "Seada moderator";
+"calls.removeModerator" = "Moderaator lülitati välja";
+"calls.muteAudio" = "Kuulutusvabad";
+"calls.unmuteAudio" = "Surnud audio";
+"calls.lowerHand" = "Lase käsi alla";
 
 // Account Page
 "accountPage.devicesListHeader" = "Seadmed";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Krüpti minu kasutajakonto";
 "accountPage.changePassword" = "Muuda salasõna";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Sisesta praegune salasõna";
 "accountPage.newPasswordPlaceholder" = "Sisesta uus salasõna";
 "accountPage.newPasswordConfirmPlaceholder" = "Korda uut salasõna";
 "accountPage.changePasswordError" = "Salasõna pole õige";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "See seade";
 "accountPage.otherDevices" = "Muud seotud seadmed";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "Laadi mällu";
+"accountPage.dhtConfiguration" = "OpenDHT seadistus";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -438,10 +438,10 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Alustada häälkõnet";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "Alusta videokõnet";
+"contactPage.send" = "Saada";
 "contactPage.clearConversation" = "Tühjenda vestlus";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Lahku vestlusest";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Käivitame...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "Video seadistused";
 "generalSettings.videoAcceleration" = "Kasuta video raudvaralist kiirendamist";
 "generalSettings.fileTransfer" = "Failide üleandmine";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "Asukoha jagamine";
 "generalSettings.automaticAcceptIncomingFiles" = "Automaatiliselt luba allalaadida saabuvaid faile";
 "generalSettings.acceptTransferLimit" = "Laaditavate failide mahu piirmäär";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnostika";
 "logView.description" = "Ava diagnostilise logimise seadistused";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Lõpeta logimine";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

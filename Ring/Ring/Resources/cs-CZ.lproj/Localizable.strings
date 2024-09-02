@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Přidejte popis";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorovat swarm";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "Opustit konverzaci";
 "swarm.chooseColor" = "Barva";
 "swarm.typeOfSwarm" = "Typ swarmu";
 "swarm.identifier" = "Identifikátor";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami je svobodný software a všeobecný dorozumívací systém, který zachovává soukromí a svobody uživatelů.";
 "welcome.haveAccount" = "Už účet mám";
 "welcome.linkDevice" = "Import z jiného zařízení";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Importovat ze záložního archivu";
 "welcome.createAccount" = "Spojit";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Připojení účtu";
 "linkToAccount.linkButtonTitle" = "Odkaz";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Připojit zařízení";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Spojuje se…";
 "calls.callFinished" = "Hovor ukončen";
 "calls.currentCallWith" = "Volat s ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "Maximalizovat";
+"calls.minimize" = "Zmenšit";
+"calls.setModerator" = "Nastavit moderátora";
+"calls.removeModerator" = "Nenastavený moderátor";
+"calls.muteAudio" = "Ztlumit zvuk";
+"calls.unmuteAudio" = "Zrušení ztlumení zvuku";
+"calls.lowerHand" = "Dát ruku dolů";
 
 // Account Page
 "accountPage.devicesListHeader" = "Zařízení";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Šifrování účtu";
 "accountPage.changePassword" = "Změnit heslo";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Zadejte současné heslo";
 "accountPage.newPasswordPlaceholder" = "Zadejte nové heslo.";
 "accountPage.newPasswordConfirmPlaceholder" = "Potvrďte nové heslo";
 "accountPage.changePasswordError" = "Heslo je nesprávné.";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "Toto zařízení";
 "accountPage.otherDevices" = "Ostatní připojená zařízení";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "Sada nástrojů pro tvorbu webu a webových aplikací";
+"accountPage.dhtConfiguration" = "Nastavení OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "Žádné blokované kontakty";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Připojit nové zařízení";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -437,11 +437,11 @@
 "linkDevice.hudMessage" = "Ověřuje se";
 
 // Contact Page
-"contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startAudioCall" = "Začít audio hovor";
+"contactPage.startVideoCall" = "Začít video hovor";
+"contactPage.send" = "Odeslat";
 "contactPage.clearConversation" = "Vyprázdnit zprávy";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Opustit konverzaci";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Inicializuje se…";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "Nastavení videa";
 "generalSettings.videoAcceleration" = "Povolit zrychlení videa";
 "generalSettings.fileTransfer" = "Přenos souboru";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "Sdílení polohy";
 "generalSettings.automaticAcceptIncomingFiles" = "Automaticky přijmout příchozí soubory";
 "generalSettings.acceptTransferLimit" = "Přijmout limit přenosu";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "Diagnostika";
 "logView.description" = "Otevření nastavení diagnostického protokolu";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Zazstavení záznamu";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

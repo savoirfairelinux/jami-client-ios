@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "Axega una descripción";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorar el enjambre";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "La conversación ye una conversación.";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Esti tipu de enjambre";
 "swarm.identifier" = "Identificador";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami ye una plataforma de comunicación gratuita y universal que preserva la privacidá y les llibertaes de los usuarios.";
 "welcome.haveAccount" = "Nun hai nada que ver con esto.";
 "welcome.linkDevice" = "Importación dende otru dispositivu";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Importación dende archivos de copia de seguridad";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "La vinculación de cuentas";
 "linkToAccount.linkButtonTitle" = "Enllaz";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Dispositivu de enllaz";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "El PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "La conexión...";
 "calls.callFinished" = "La llamada terminada";
 "calls.currentCallWith" = "Llamó con ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "La mayor parte de los casos";
+"calls.minimize" = "La so capacidá de control ye de 5 a 10 años.";
+"calls.setModerator" = "Establecimientu inscritu nel Rexistru d'Actividaes Turístiques del Principáu d'Asturies col códigu DGT CA0831.";
+"calls.removeModerator" = "Moderador desactiváu";
+"calls.muteAudio" = "El soníu mudo";
+"calls.unmuteAudio" = "El soníu nun silenciáu";
+"calls.lowerHand" = "La mano inferior";
 
 // Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Encriptación de cuenta";
 "accountPage.changePassword" = "Cambiar contraseña";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Introducir la contraseña actual";
 "accountPage.newPasswordPlaceholder" = "Introducir una contraseña nueva";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirmar la contraseña nueva";
 "accountPage.changePasswordError" = "La contraseña ye incorrecta";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "Esta máquina";
 "accountPage.otherDevices" = "Otros dispositivos conectados";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "La banda de arranque";
+"accountPage.dhtConfiguration" = "La configuración OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "Nun hai contactos bloqueaos";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Enlaza'l nuevu dispositivu";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -437,11 +437,11 @@
 "linkDevice.hudMessage" = "Verificación";
 
 // Contact Page
-"contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startAudioCall" = "Iniciativa pa la defensa del asturianu";
+"contactPage.startVideoCall" = "Iniciativa pa la creación d'una rede de televisión";
+"contactPage.send" = "Enviar";
 "contactPage.clearConversation" = "La conversación ye clara.";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "La conversación ye una conversación.";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "La inicialización...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "La configuración de video";
 "generalSettings.videoAcceleration" = "Aceleración de video";
 "generalSettings.fileTransfer" = "Transferencia de archivos";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "Compartir la ubicación";
 "generalSettings.automaticAcceptIncomingFiles" = "Acceptar automáticamente archivos entrantes";
 "generalSettings.acceptTransferLimit" = "Accepta'l límite de transferencia";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "Los diagnósticos";
 "logView.description" = "Configuraciones abiertes del rexistru de diagnósticu";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Pa parar la tala";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

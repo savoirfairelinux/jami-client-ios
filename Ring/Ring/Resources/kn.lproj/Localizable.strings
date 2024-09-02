@@ -279,10 +279,10 @@
 "calls.currentCallWith" = "";
 "calls.maximize" = "ಗರಿಷ್ಠ ಮಟ್ಟದಲ್ಲಿ";
 "calls.minimize" = "ಕಡಿಮೆ ಮಾಡಿ";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
+"calls.setModerator" = "ಮಾಡರೇಟರ್ ಅನ್ನು ಹೊಂದಿಸಿ";
+"calls.removeModerator" = "ಡಿಸ್ಇನ್ಸೆಟ್ ಮಾಡರೇಟರ್";
 "calls.muteAudio" = "ಮೂಕ ಆಡಿಯೋ";
-"calls.unmuteAudio" = "Unmute audio";
+"calls.unmuteAudio" = "ಅನಿರ್ದಿಷ್ಟ ಆಡಿಯೋ";
 "calls.lowerHand" = "ಕೆಳ ಕೈ";
 
 // Account Page
@@ -439,7 +439,7 @@
 // Contact Page
 "contactPage.startAudioCall" = "ಆಡಿಯೋ ಕರೆ ಆರಂಭಿಸಿ";
 "contactPage.startVideoCall" = "ವೀಡಿಯೊ ಕರೆ ಆರಂಭಿಸಿ";
-"contactPage.send" = "Send";
+"contactPage.send" = "ಕಳುಹಿಸು";
 "contactPage.clearConversation" = "ಕ್ಲೀನ್ ಚಾಟ್";
 "contactPage.leaveConversation" = "ಸಂಭಾಷಣೆಯನ್ನು ಬಿಟ್ಟುಬಿಡಿ";
 
@@ -495,7 +495,7 @@
 "logView.title" = "ರೋಗನಿರ್ಣಯ";
 "logView.description" = "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ಲಾಗ್ ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ತೆರೆಯಿರಿ";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "ಛೇದಕಗಳನ್ನು ನಿಲ್ಲಿಸಿ";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

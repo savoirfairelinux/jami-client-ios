@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "شرح قوش";
 // Swarm
 "swarm.ignoreSwarm" = "سورونو تفتیش ائت";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "مکالمه دن اوزاقلاش";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "سورونون نوعو";
 "swarm.identifier" = "آدیفئکتور";
@@ -161,7 +161,7 @@
 "welcome.text" = "جامی، آزاد و آلیشلی بیر ارتباط پلتفرمیدیر کی، ایستیفاده چیلرین خصوصی و آزادلیغی قوروموشدور.";
 "welcome.haveAccount" = "منیم حسابوم وار";
 "welcome.linkDevice" = "باشقا آلاتدان واردات";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "آرشیو آرخایینلاشماسیندان واردات";
 "welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "حساب باغلاماسی";
 "linkToAccount.linkButtonTitle" = "لینک";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "آلاچیقلاشما";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -277,13 +277,13 @@
 "calls.connecting" = "باغلا...";
 "calls.callFinished" = "تماس تمام شد";
 "calls.currentCallWith" = "تماس بگیرید";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "حددن آرتيق";
+"calls.minimize" = "آزالماق";
+"calls.setModerator" = "مودراتور قوی";
+"calls.removeModerator" = "مودئراتورون دَییشدیرمه سی";
+"calls.muteAudio" = "سئلک آدیو";
+"calls.unmuteAudio" = "سس لری بیز";
+"calls.lowerHand" = "آلتی ال";
 
 // Account Page
 "accountPage.devicesListHeader" = "آلاتلار";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "رمزلشدیرمه حساب";
 "accountPage.changePassword" = "رمز لرینده یئنی دن";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "ایندیکی رمز یاز";
 "accountPage.newPasswordPlaceholder" = "تزه رمز دن یاز";
 "accountPage.newPasswordConfirmPlaceholder" = "یئنی رمز لری تصدیق ائدیر";
 "accountPage.changePasswordError" = "پاسورده حاقسيز";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "بو آلین";
 "accountPage.otherDevices" = "باشقا باغلانان قورولوشلار";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "بوتر";
+"accountPage.dhtConfiguration" = "OpenDHT قورولوشو";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "موغوط ائتمه دی";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "یئنی آلینانی باغلا";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -437,11 +437,11 @@
 "linkDevice.hudMessage" = "چکمه";
 
 // Contact Page
-"contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startAudioCall" = "صداي زنگي باشلا";
+"contactPage.startVideoCall" = "ویدئوی تماس باشلا";
+"contactPage.send" = "گؤنده ر";
 "contactPage.clearConversation" = "آچيق چت";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "مکالمه دن اوزاقلاش";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "اولتراژور...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "ویدئو تنظیمات";
 "generalSettings.videoAcceleration" = "ویدئو سرعتینی فعال ائتمک";
 "generalSettings.fileTransfer" = "فایل لیږد";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "مکان بؤلمه سی";
 "generalSettings.automaticAcceptIncomingFiles" = "آتاکت اولاراق گلين فایللاري قبول ائتمک";
 "generalSettings.acceptTransferLimit" = "قبول ائد ن لیک لری";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "دیآگنوستکس";
 "logView.description" = "آچیق دیآگنوستاتیک دوققلو قورولوشلار";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "چوبانليق اتمهيي";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

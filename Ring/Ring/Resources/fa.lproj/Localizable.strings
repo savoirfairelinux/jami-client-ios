@@ -68,7 +68,7 @@
 "swarmcreation.addADescription" = "توضیحی اضافه کنید";
 // Swarm
 "swarm.ignoreSwarm" = "به گروه توجه نکن";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "مکالمه رو ترک کن";
 "swarm.chooseColor" = "رنگ";
 "swarm.typeOfSwarm" = "نوع سور";
 "swarm.identifier" = "شناسه";
@@ -161,7 +161,7 @@
 "welcome.text" = "جمی یک بستر ارتباطی رایگان و جهانی است، که حریم خصوصی و آزادی کاربران را حفظ می‌کند";
 "welcome.haveAccount" = "من قبلاً حسابي دارم";
 "welcome.linkDevice" = "واردات از دستگاه دیگری";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "وارد کردن از پشتیبان بایگانی‌شده";
 "welcome.createAccount" = "پیوستن";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "پیوند دادن حسابها";
 "linkToAccount.linkButtonTitle" = "پیوند";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "پیوند این افزاره";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "کد پین";
@@ -277,13 +277,13 @@
 "calls.connecting" = "در حال اتصال...";
 "calls.callFinished" = "تماس پایان یافت";
 "calls.currentCallWith" = "تماس با";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "به حداکثر رساندن";
+"calls.minimize" = "کمینه کردن";
+"calls.setModerator" = "تعیین مدیر";
+"calls.removeModerator" = "لغو میدیریت";
+"calls.muteAudio" = "قطع صدا";
+"calls.unmuteAudio" = "برقراری صدا";
+"calls.lowerHand" = "دست پایین";
 
 // Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "حساب رمزگذاری";
 "accountPage.changePassword" = "تغییر گذرواژه";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "رمز عبور فعلی را وارد کنید";
 "accountPage.newPasswordPlaceholder" = "گذرواژه جدید را وارد کنید";
 "accountPage.newPasswordConfirmPlaceholder" = "تایید گذرواژه جدید";
 "accountPage.changePasswordError" = "گذرواژه نادرست است";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "این دستگاه";
 "accountPage.otherDevices" = "دیگر دستگاه های پیوند داده شده";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "خود‌راه‌انداز(Bootstrap)";
+"accountPage.dhtConfiguration" = "پیکربندی OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -438,10 +438,10 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "شروع تماس صوتی";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startVideoCall" = "شروع تماس ویدیویی";
+"contactPage.send" = "ارسال";
 "contactPage.clearConversation" = "پاکسازی چت";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "مکالمه رو ترک کن";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "آغازِ فرایند...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "تنظیمات ویدیو";
 "generalSettings.videoAcceleration" = "فعال‌سازی شتاب‌دهی ویدیو";
 "generalSettings.fileTransfer" = "انتقال فایل";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "اشتراک گذاری مکان";
 "generalSettings.automaticAcceptIncomingFiles" = "پذیرش فایل‌های ورودی به صورت خودکار";
 "generalSettings.acceptTransferLimit" = "محدودیت انتقال را قبول کنید";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "عیب‌یابی";
 "logView.description" = "نتظیمات گزارش عیب‌یابی را باز کن";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "توقف گزارش‌گیری";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 

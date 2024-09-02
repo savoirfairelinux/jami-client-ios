@@ -68,8 +68,8 @@
 "swarmcreation.addADescription" = "Добавете описание";
 // Swarm
 "swarm.ignoreSwarm" = "Игнорира се рогата.";
-"swarm.leaveConversation" = "Leave conversation";
-"swarm.chooseColor" = "Color";
+"swarm.leaveConversation" = "Остави разговора.";
+"swarm.chooseColor" = "Цвят";
 "swarm.typeOfSwarm" = "Тип на рома";
 "swarm.identifier" = "Идентификатор";
 "swarm.about" = "Относно";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami е свободна и универсална комуникационна платформа, която запазва личния живот и свободите на потребителите";
 "welcome.haveAccount" = "Вече имам сметка.";
 "welcome.linkDevice" = "Внос от друго устройство";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Импорт от архивния резерв";
 "welcome.createAccount" = "Присъединяване";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
@@ -199,7 +199,7 @@
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Свързване на профил";
 "linkToAccount.linkButtonTitle" = "Свързване";
-"linkToAccount.linkDeviceTitle" = "Link device";
+"linkToAccount.linkDeviceTitle" = "Свързване на устройство";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
 "linkToAccount.pinPlaceholder" = "ПИН";
@@ -277,13 +277,13 @@
 "calls.connecting" = "Свързваме...";
 "calls.callFinished" = "Обаждането приключи.";
 "calls.currentCallWith" = "Обади се с ";
-"calls.maximize" = "Maximize";
-"calls.minimize" = "Minimize";
-"calls.setModerator" = "Set moderator";
-"calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
-"calls.lowerHand" = "Lower hand";
+"calls.maximize" = "Максимизирайте";
+"calls.minimize" = "Минимизиране";
+"calls.setModerator" = "Настройка на модератор";
+"calls.removeModerator" = "Изключен модератор";
+"calls.muteAudio" = "Заглушаване";
+"calls.unmuteAudio" = "Неизключен аудио";
+"calls.lowerHand" = "Ниска ръка";
 
 // Account Page
 "accountPage.devicesListHeader" = "Устройства";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Криптоварен акаунт";
 "accountPage.changePassword" = "Промяна на парола";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
+"accountPage.currentPasswordPlaceholder" = "Введете текущото пароло";
 "accountPage.newPasswordPlaceholder" = "Введете нов парол";
 "accountPage.newPasswordConfirmPlaceholder" = "Потвърди новия парол";
 "accountPage.changePasswordError" = "Паролето не е правилно";
@@ -388,8 +388,8 @@
 "accountPage.thisDevice" = "Това устройство";
 "accountPage.otherDevices" = "Други свързани устройства";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
-"accountPage.dhtConfiguration" = "OpenDHT configuration";
+"accountPage.bootstrap" = "Начална установка";
+"accountPage.dhtConfiguration" = "Конфигурация OpenDHT";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -429,7 +429,7 @@
 "blockListPage.noBlockedContacts" = "Без блокирани контакти";
 
 // Link New Device
-"linkDevice.title" = "Link new device";
+"linkDevice.title" = "Свържете ново устройство";
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
@@ -437,11 +437,11 @@
 "linkDevice.hudMessage" = "Проверка";
 
 // Contact Page
-"contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
-"contactPage.send" = "Send";
+"contactPage.startAudioCall" = "Започване на гласов разговор";
+"contactPage.startVideoCall" = "Започване на видео разговор";
+"contactPage.send" = "Изпращане";
 "contactPage.clearConversation" = "Разпространи се.";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "Остави разговора.";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Инициализиране...";
@@ -482,7 +482,7 @@
 "generalSettings.videoSettings" = "Настройки на видео";
 "generalSettings.videoAcceleration" = "Осигуряване на видео ускорение";
 "generalSettings.fileTransfer" = "Прехвърляне на файлове";
-"generalSettings.locationSharing" = "Location sharing";
+"generalSettings.locationSharing" = "Споделяне на местоположението";
 "generalSettings.automaticAcceptIncomingFiles" = "Автоматично приемате входящи файлове";
 "generalSettings.acceptTransferLimit" = "Приемане на прехвърляне";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
@@ -495,7 +495,7 @@
 "logView.title" = "Диагностика";
 "logView.description" = "Отворете настройките на диагностичния дневник";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Спрете да дървете";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "An error occurred while sharing the file.";
 
