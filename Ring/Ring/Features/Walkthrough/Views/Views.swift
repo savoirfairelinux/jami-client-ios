@@ -40,16 +40,14 @@ struct WalkthroughTextEditView: View {
     var identifier: String = ""
 
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color(UIColor.secondarySystemGroupedBackground))
-            TextField(placeholder, text: $text)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 12)
-                .autocorrectionDisabled(true)
-                .autocapitalization(.none)
-                .accessibilityIdentifier(identifier)
-        }
+        TextField(placeholder, text: $text)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 12)
+            .autocorrectionDisabled(true)
+            .autocapitalization(.none)
+            .accessibilityIdentifier(identifier)
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .cornerRadius(10)
     }
 }
 

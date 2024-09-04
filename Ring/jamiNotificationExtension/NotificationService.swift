@@ -27,7 +27,7 @@ import os
 import Darwin
 import Contacts
 import RxSwift
-import Atomics
+//import Atomics
 
 /*
  * This class is responsible for handling incoming notifications from the DHT proxy server.
@@ -225,7 +225,7 @@ class NotificationService: UNNotificationServiceExtension {
     private let disposeBag = DisposeBag()
 
     // The following objects are used to manage access to the Jami backend for synchronization
-    private var accountIsActive = ManagedAtomic<Bool>(false)
+    private var accountIsActive = false//ManagedAtomic<Bool>(false)
     private var accountId: String = ""
     private var adapterService: AdapterService = AdapterService(withAdapter: Adapter())
     private var jamiTaskId: String = ""
@@ -363,9 +363,9 @@ class NotificationService: UNNotificationServiceExtension {
                 info["hasVideo"] = hasVideo
                 let name = self.bestName(accountId: self.accountId, contactId: peerId)
                 // jami will be started. Set accounts to not active state
-                if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
-                    self.adapterService.stop(accountId: self.accountId)
-                }
+//                if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
+//                    self.adapterService.stop(accountId: self.accountId)
+//                }
                 info["displayName"] = name.isEmpty ? peerId : name
                 self.pendingCalls[peerId] = info
 
@@ -397,7 +397,7 @@ class NotificationService: UNNotificationServiceExtension {
         if !isResubscribe {
             return false
         }
-        self.accountIsActive.store(true, ordering: .relaxed)
+       // self.accountIsActive.store(true, ordering: .relaxed)
         self.adapterService.startAccount(accountId: accountId, convId: "", loadAll: false)
         self.adapterService.pushNotificationReceived(accountId: accountId, data: data)
         // TODO: comment this a bit more
@@ -408,9 +408,9 @@ class NotificationService: UNNotificationServiceExtension {
 
     private func handleGitMessage(convId: String, loadAll: Bool) {
         // If the account is already active, return, otherwise we set it to active and continue
-        if self.accountIsActive.compareExchange(expected: false, desired: true, ordering: .relaxed).original {
-            return
-        }
+//        if self.accountIsActive.compareExchange(expected: false, desired: true, ordering: .relaxed).original {
+//            return
+//        }
 
         jamiTaskId = UUID().uuidString
         self.autoDispatchGroup.enter(id: jamiTaskId)
@@ -468,19 +468,19 @@ class NotificationService: UNNotificationServiceExtension {
             // We could finish in two cases:
             // 1. we did not start account we are not waiting for the signals from the daemon
             // 2. conversation synchronization completed and all files downloaded
-            if !self.accountIsActive.load(ordering: .relaxed) ||
-                (self.syncCompleted && self.itemsToPresent == 0 && !self.waitForCloning) {
-                self.autoDispatchGroup.leave(id: jamiTaskId)
-            }
+//            if !self.accountIsActive.load(ordering: .relaxed) ||
+//                (self.syncCompleted && self.itemsToPresent == 0 && !self.waitForCloning) {
+//                self.autoDispatchGroup.leave(id: jamiTaskId)
+//            }
         }
     }
 
     private func finish() {
-        if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
-            self.adapterService.stop(accountId: self.accountId)
-        } else {
-            self.adapterService.removeDelegate()
-        }
+//        if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
+//            self.adapterService.stop(accountId: self.accountId)
+//        } else {
+//            self.adapterService.removeDelegate()
+//        }
         // cleanup pending notifications
         self.notificationQueue.sync {
             if !self.pendingCalls.isEmpty, let info = self.pendingCalls.first?.value {

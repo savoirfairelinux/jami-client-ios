@@ -19,7 +19,7 @@
  */
 
 import SwiftUI
-import MCEmojiPicker
+//import MCEmojiPicker
 
 enum ContextMenuPresentingState {
     case none
@@ -293,16 +293,16 @@ struct EmojiBarView: View {
 
     var emojipalette: some View {
         ZStack {
-            Button(action: {
-                cxModel.isEmojiPickerPresented.toggle()
-            }) {
-                Image(systemName: "plus.circle.fill")
-                    .font(.largeTitle)
-                    .foregroundColor(Color(cxModel.presentingMessage.model.preferencesColor))
-            }.emojiPicker(
-                isPresented: $cxModel.isEmojiPickerPresented,
-                selectedEmoji: $cxModel.selectedEmoji
-            )
+//            Button(action: {
+//                cxModel.isEmojiPickerPresented.toggle()
+//            }) {
+//                Image(systemName: "plus.circle.fill")
+//                    .font(.largeTitle)
+//                    .foregroundColor(Color(cxModel.presentingMessage.model.preferencesColor))
+//            }.emojiPicker(
+//                isPresented: $cxModel.isEmojiPickerPresented,
+//                selectedEmoji: $cxModel.selectedEmoji
+//            )
         }
         .padding(.trailing, 5)
         .opacity(emojiPaletteButtonOpacity)
