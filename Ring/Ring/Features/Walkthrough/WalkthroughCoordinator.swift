@@ -21,25 +21,22 @@
 
 import Foundation
 import RxSwift
-
-/// Represents the choice made by the user in the Walkthrough for the creation account type
-///
-/// - createAccount: create an account from scratch (profile / username / password)
-/// - linkDevice: link the device to an existing account (profile / pin / password)
-public enum WalkthroughType {
-    case createAccount
-    case linkDevice
-    case createSipAccount
-    case linkToAccountManager
-}
+import SwiftUI
 
 /// Represents walkthrough navigation state
 public enum WalkthroughState: State {
+    case accountCreation(createAction: (String, String, String, UIImage?) -> Void)
+    case linkDevice(linkAction: (_ pin: String, _ password: String) -> Void)
+    case importArchive(importAction: (_ url: URL, _ password: String) -> Void)
+    case connectJAMS(connectAction: (_ username: String, _ password: String, _ server: String) -> Void)
+    case connectSIP(connectAction: (_ username: String, _ password: String, _ server: String) -> Void)
+    case aboutJami
     case completed
 }
 
 /// This Coordinator drives the walkthrough navigation (welcome / profile / creation or link)
 class WalkthroughCoordinator: Coordinator, StateableResponsive {
+    
     var presentingVC = [String: Bool]()
     var rootViewController: UIViewController {
         return self.navigationViewController
@@ -52,7 +49,7 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
 
     private let navigationViewController = UINavigationController()
     private let injectionBag: InjectionBag
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
 
@@ -63,18 +60,71 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? WalkthroughState else { return }
                 switch state {
-                case .completed:
-                    self.navigationViewController.setViewControllers([], animated: false)
-                    self.rootViewController.dismiss(animated: true)
+                    case .completed:
+                        finish()
+                    case .accountCreation(let createAction):
+                        showAccountCreation(createAction: createAction)
+                    case .linkDevice(linkAction: let linkAction):
+                        showLinkDevice(linkAction: linkAction)
+                    case .importArchive(importAction: let importAction):
+                        showImportArchive(importAction: importAction)
+                    case .connectJAMS(connectAction: let connectAction):
+                        showConnectJAMS(connectAction: connectAction)
+                    case .connectSIP(connectAction: let connectAction):
+                        showConnectSIP(connectAction: connectAction)
+                    case .aboutJami:
+                        showAboutJami()
                 }
             })
             .disposed(by: self.disposeBag)
 
     }
 
-    func start () {
-        let presentedController = WelcomeViewController.instantiate(with: self.injectionBag)
-        presentedController.viewModel.notCancelable = isAccountFirst
-        self.present(viewController: presentedController, withStyle: .show, withAnimation: false, withStateable: presentedController.viewModel)
+    func showAccountCreation(createAction: @escaping (String, String, String, UIImage?) -> Void) {
+        let accountView = CreateAccountView(injectionBag: self.injectionBag, createAction: createAction)
+        let viewController = createDismissableVC(accountView, dismissible: accountView.viewModel)
+        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
+    }
+
+    func showLinkDevice(linkAction: @escaping (_ pin: String, _ password: String) -> Void) {
+        let accountView = LinkToAccountView(injectionBag: self.injectionBag, linkAction: linkAction)
+        let viewController = createDismissableVC(accountView, dismissible: accountView.viewModel)
+        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
+    }
+
+    func showImportArchive(importAction: @escaping (_ url: URL, _ password: String) -> Void) {
+        let accountView = ImportFromArchiveView(injectionBag: self.injectionBag, importAction: importAction)
+        let viewController = createDismissableVC(accountView, dismissible: accountView.viewModel)
+        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
+    }
+
+    func showConnectJAMS(connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
+        let accountView = JamsConnectView(injectionBag: self.injectionBag, connectAction: connectAction)
+        let viewController = createDismissableVC(accountView, dismissible: accountView.viewModel)
+        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
+    }
+
+    func showConnectSIP(connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
+        let accountView = SIPConfigurationView(injectionBag: self.injectionBag, connectAction: connectAction)
+        let viewController = createDismissableVC(accountView, dismissible: accountView.viewModel)
+        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
+    }
+
+    func showAboutJami() {
+        let aboutView = AboutSwiftUIView()
+        let viewController = createDismissableVC(aboutView, dismissible: aboutView.model)
+        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
+    }
+
+    func start() {
+        let welcomeView = WelcomeView(injectionBag: self.injectionBag)
+        let viewController = createVC(welcomeView)
+        welcomeView.viewModel.notCancelable = isAccountFirst
+        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: welcomeView.viewModel)
+    }
+
+    func finish() {
+        self.navigationViewController.setViewControllers([], animated: false)
+        self.rootViewController.dismiss(animated: true)
     }
 }

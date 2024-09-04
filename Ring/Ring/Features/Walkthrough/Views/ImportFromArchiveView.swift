@@ -19,21 +19,13 @@
 import SwiftUI
 
 struct ImportFromArchiveView: View {
-    @StateObject var model: CreateAccountViewModel
-    let dismissAction: () -> Void
-    let createAction: (URL, String) -> Void
-
-    @SwiftUI.State private var password = ""
-    @SwiftUI.State private var selectedFileURL: URL?
-    @SwiftUI.State private var pickerPresented = false
+    @ObservedObject var viewModel: ImportFromArchiveVM
 
     init(injectionBag: InjectionBag,
-         dismissAction: @escaping () -> Void,
-         createAction: @escaping (URL, String) -> Void) {
-        _model = StateObject(wrappedValue:
-                                CreateAccountViewModel(with: injectionBag))
-        self.dismissAction = dismissAction
-        self.createAction = createAction
+         importAction: @escaping (_ url: URL, _ password: String) -> Void) {
+        _viewModel = ObservedObject(wrappedValue:
+                                        ImportFromArchiveVM(with: injectionBag))
+        viewModel.importAction = importAction
     }
 
     var body: some View {
@@ -47,14 +39,14 @@ struct ImportFromArchiveView: View {
                         .padding(.vertical)
                     Text(L10n.ImportFromArchive.passwordExplanation)
                         .multilineTextAlignment(.center)
-                    WalkthroughPasswordView(text: $password,
+                    WalkthroughPasswordView(text: $viewModel.password,
                                             placeholder: L10n.Global.password)
                         .padding(.bottom)
                 }
                 .frame(maxWidth: 500)
             }
-            .sheet(isPresented: $pickerPresented) {
-                DocumentPicker(fileURL: $selectedFileURL, type: .item)
+            .sheet(isPresented: $viewModel.pickerPresented) {
+                DocumentPicker(fileURL: $viewModel.selectedFileURL, type: .item)
             }
             .padding(.horizontal)
         }
@@ -77,21 +69,17 @@ struct ImportFromArchiveView: View {
 
     private var importButton: some View {
         Button(action: {
-            if let selectedFileURL = selectedFileURL {
-                createAction(selectedFileURL, password)
-            }
+            viewModel.importAccount()
         }, label: {
             Text(L10n.ImportFromArchive.buttonTitle)
-                .foregroundColor(selectedFileURL == nil ?
-                                    Color(UIColor.secondaryLabel) :
-                                    .jamiColor)
+                .foregroundColor(viewModel.importButtonColor)
         })
-        .disabled(selectedFileURL == nil)
+        .disabled(viewModel.isImportButtonDisabled)
     }
 
     private var cancelButton: some View {
         Button(action: {
-            dismissAction()
+            viewModel.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
@@ -100,11 +88,9 @@ struct ImportFromArchiveView: View {
 
     private var selectFileButton: some View {
         Button(action: {
-            withAnimation {
-                pickerPresented = true
-            }
+            viewModel.selectFile()
         }, label: {
-            Text(selectedFileURL?.lastPathComponent ?? L10n.ImportFromArchive.selectArchiveButton)
+            Text(viewModel.selectedFileText)
                 .foregroundColor(Color(UIColor.label))
                 .padding(.horizontal, 12)
                 .padding(.vertical, 12)

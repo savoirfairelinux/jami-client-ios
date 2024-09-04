@@ -25,7 +25,7 @@ import Reusable
 import SwiftUI
 
 class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
-    var viewModel: WelcomeViewModel!
+    var viewModel: WelcomeVM!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,16 +34,16 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func addSwiftUI() {
-        let welcomeView = WelcomeView(model: self.viewModel)
-        let contentView = UIHostingController(rootView: welcomeView)
-        addChild(contentView)
-        view.addSubview(contentView.view)
-        contentView.view.frame = self.view.bounds
-        contentView.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        contentView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        contentView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        contentView.didMove(toParent: self)
+//        let welcomeView = WelcomeView(injectionBag: self.injectionBag)
+//        let contentView = UIHostingController(rootView: welcomeView)
+//        addChild(contentView)
+//        view.addSubview(contentView.view)
+//        contentView.view.frame = self.view.bounds
+//        contentView.view.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        contentView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        contentView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        contentView.didMove(toParent: self)
     }
 }

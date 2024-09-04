@@ -97,8 +97,8 @@
 		1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EE21F1D673600550433 /* InjectionBag.swift */; };
 		1A0C4EE51F1D67DF00550433 /* WalkthroughCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C4EE41F1D67DF00550433 /* WalkthroughCoordinator.swift */; };
 		1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2041791F1E547F00C08435 /* Stateable.swift */; };
-		1A20417C1F1E56FF00C08435 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A20417B1F1E56FF00C08435 /* WelcomeViewModel.swift */; };
-		1A2041881F1EA1EA00C08435 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2041871F1EA1EA00C08435 /* CreateAccountViewModel.swift */; };
+		1A20417C1F1E56FF00C08435 /* WelcomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A20417B1F1E56FF00C08435 /* WelcomeVM.swift */; };
+		1A2041881F1EA1EA00C08435 /* CreateAccountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2041871F1EA1EA00C08435 /* CreateAccountVM.swift */; };
 		1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A20418A1F1EA58A00C08435 /* ViewModelBased.swift */; };
 		1A20418D1F1EABCC00C08435 /* StateableResponsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A20418C1F1EABCC00C08435 /* StateableResponsive.swift */; };
 		1A20418F1F1EAC0E00C08435 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A20418E1F1EAC0E00C08435 /* Coordinator.swift */; };
@@ -182,6 +182,10 @@
 		261E4EF229F8191300ABB37C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E4EF129F8191300ABB37C /* LoadingView.swift */; };
 		2625814E2B4DE40200314C42 /* MessagePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814D2B4DE40200314C42 /* MessagePanelView.swift */; };
 		262581502B4EF15D00314C42 /* MessagePanelVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */; };
+		262F1CFA2C88BBBC002BF597 /* LinkToAccountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F1CF92C88BBBC002BF597 /* LinkToAccountVM.swift */; };
+		2632D2F12CA5A82F00E60096 /* ImportFromArchiveVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F02CA5A82F00E60096 /* ImportFromArchiveVM.swift */; };
+		2632D2F32CA5AF9100E60096 /* ConnectToManagerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F22CA5AF9100E60096 /* ConnectToManagerVM.swift */; };
+		2632D2F52CA5AFBB00E60096 /* ConnectSipVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F42CA5AFBB00E60096 /* ConnectSipVM.swift */; };
 		263B7158246D9390007044C4 /* SmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7157246D9390007044C4 /* SmartListCell.swift */; };
 		263B715A246D9556007044C4 /* IncognitoSmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */; };
 		263B715C246D96E5007044C4 /* IncognitoSmartListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263B715B246D96E5007044C4 /* IncognitoSmartListCell.xib */; };
@@ -744,8 +748,8 @@
 		1A1E476C1F0E808500EA9A36 /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
 		1A1E476E1F0E894600EA9A36 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		1A2041791F1E547F00C08435 /* Stateable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stateable.swift; sourceTree = "<group>"; };
-		1A20417B1F1E56FF00C08435 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
-		1A2041871F1EA1EA00C08435 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
+		1A20417B1F1E56FF00C08435 /* WelcomeVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeVM.swift; sourceTree = "<group>"; };
+		1A2041871F1EA1EA00C08435 /* CreateAccountVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountVM.swift; sourceTree = "<group>"; };
 		1A20418A1F1EA58A00C08435 /* ViewModelBased.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelBased.swift; sourceTree = "<group>"; };
 		1A20418C1F1EABCC00C08435 /* StateableResponsive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateableResponsive.swift; sourceTree = "<group>"; };
 		1A20418E1F1EAC0E00C08435 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -832,6 +836,10 @@
 		2625814D2B4DE40200314C42 /* MessagePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePanelView.swift; sourceTree = "<group>"; };
 		2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePanelVM.swift; sourceTree = "<group>"; };
 		262AA981262C724700DC34AD /* libfmt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmt.a; path = ../DEPS/arm64/lib/libfmt.a; sourceTree = "<group>"; };
+		262F1CF92C88BBBC002BF597 /* LinkToAccountVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkToAccountVM.swift; sourceTree = "<group>"; };
+		2632D2F02CA5A82F00E60096 /* ImportFromArchiveVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromArchiveVM.swift; sourceTree = "<group>"; };
+		2632D2F22CA5AF9100E60096 /* ConnectToManagerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectToManagerVM.swift; sourceTree = "<group>"; };
+		2632D2F42CA5AFBB00E60096 /* ConnectSipVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectSipVM.swift; sourceTree = "<group>"; };
 		26376721245315E600CDC51F /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		263B7157246D9390007044C4 /* SmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListCell.swift; sourceTree = "<group>"; };
 		263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncognitoSmartListCell.swift; sourceTree = "<group>"; };
@@ -2395,8 +2403,12 @@
 		26C4D07C2C61562800B1218C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1A20417B1F1E56FF00C08435 /* WelcomeViewModel.swift */,
-				1A2041871F1EA1EA00C08435 /* CreateAccountViewModel.swift */,
+				1A20417B1F1E56FF00C08435 /* WelcomeVM.swift */,
+				1A2041871F1EA1EA00C08435 /* CreateAccountVM.swift */,
+				262F1CF92C88BBBC002BF597 /* LinkToAccountVM.swift */,
+				2632D2F02CA5A82F00E60096 /* ImportFromArchiveVM.swift */,
+				2632D2F22CA5AF9100E60096 /* ConnectToManagerVM.swift */,
+				2632D2F42CA5AFBB00E60096 /* ConnectSipVM.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2959,6 +2971,7 @@
 				0E5806F523BE4307007D1F5D /* PlayerViewModel.swift in Sources */,
 				1DF75AC2296E09240055EA87 /* Button+Helpers.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
+				2632D2F52CA5AFBB00E60096 /* ConnectSipVM.swift in Sources */,
 				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
 				66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */,
 				26454FBD2B7FDED400CFF06C /* AboutSwiftUIView.swift in Sources */,
@@ -2972,6 +2985,7 @@
 				268C87F02C1BA78E00593D7C /* UtilitiesViews.swift in Sources */,
 				26A34ED52C6E83D500A41DD4 /* ImportFromArchiveView.swift in Sources */,
 				BB3B0A412971AEE30083CAD8 /* LocationSharingView.swift in Sources */,
+				262F1CFA2C88BBBC002BF597 /* LinkToAccountVM.swift in Sources */,
 				267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */,
 				268C87EC2C1BA28A00593D7C /* ManageAccountView.swift in Sources */,
 				0E49097A1FEAC9E1005CAA50 /* CallViewController.swift in Sources */,
@@ -3056,7 +3070,7 @@
 				264EA87E2977080300B6FB6F /* LogViewModel.swift in Sources */,
 				62B60AF92048A40D001BEACF /* DataTransferAdapter.mm in Sources */,
 				1A5DC0371F35675E0075E8EF /* ContactRequestCell.swift in Sources */,
-				1A20417C1F1E56FF00C08435 /* WelcomeViewModel.swift in Sources */,
+				1A20417C1F1E56FF00C08435 /* WelcomeVM.swift in Sources */,
 				265DFB09292FD25000834B97 /* DefaultTransferView.swift in Sources */,
 				1A5DC03D1F35678D0075E8EF /* RequestItem.swift in Sources */,
 				BB1E8C7729159E1F005AE1D6 /* SwarmInfoViewController.swift in Sources */,
@@ -3135,7 +3149,7 @@
 				268C87F42C1CA93B00593D7C /* EncryptAccountView.swift in Sources */,
 				268C87EE2C1BA74C00593D7C /* EditProfileView.swift in Sources */,
 				1A3D28A91F0EBF0200B524EE /* UIView+Ring.swift in Sources */,
-				1A2041881F1EA1EA00C08435 /* CreateAccountViewModel.swift in Sources */,
+				1A2041881F1EA1EA00C08435 /* CreateAccountVM.swift in Sources */,
 				62E55B6D1F758E6F00D3FEF4 /* String+Helpers.swift in Sources */,
 				1ABE07D21F0D8FE800D36361 /* Images.swift in Sources */,
 				0273C3081E0C68BF00CF00BA /* DesignableButton.swift in Sources */,
@@ -3165,6 +3179,7 @@
 				0E5A668322F0B1F100AA6820 /* ProgressView.swift in Sources */,
 				26EF35EF29075A5300D97E14 /* MessageStackView.swift in Sources */,
 				BB1E8C7329159DFC005AE1D6 /* MembersList.swift in Sources */,
+				2632D2F32CA5AF9100E60096 /* ConnectToManagerVM.swift in Sources */,
 				66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */,
 				0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */,
 				62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */,
@@ -3200,6 +3215,7 @@
 				26BCBBD32A964ABC0001EE38 /* ConferenceActionsModel.swift in Sources */,
 				0E6F5453223C3C7500ECC3CE /* AccountItemView.swift in Sources */,
 				26EEB19C2BD98CCA00B8B04B /* SearchBar.swift in Sources */,
+				2632D2F12CA5A82F00E60096 /* ImportFromArchiveVM.swift in Sources */,
 				0EF49AA123828CBC0064CD98 /* ParticipantProfileInfo.swift in Sources */,
 				BB68E6602AB1F03000F02AB7 /* ScreenHelper.swift in Sources */,
 				0EF49AA123828CBC0064CD98 /* ParticipantProfileInfo.swift in Sources */,

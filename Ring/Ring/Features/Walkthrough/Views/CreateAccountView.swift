@@ -18,9 +18,8 @@
 
 import SwiftUI
 
-struct CreateAccountView: View {
-    @StateObject var model: CreateAccountViewModel
-    let dismissAction: () -> Void
+struct CreateAccountView: View, ViewModelBacked {
+    @ObservedObject var viewModel: CreateAccountVM
     let createAction: (String, String, String, UIImage?) -> Void
 
     @SwiftUI.State private var isTextFieldFocused = true
@@ -34,11 +33,9 @@ struct CreateAccountView: View {
     @SwiftUI.State private var profileName: String = ""
 
     init(injectionBag: InjectionBag,
-         dismissAction: @escaping () -> Void,
          createAction: @escaping (String, String, String, UIImage?) -> Void) {
-        _model = StateObject(wrappedValue:
-                                CreateAccountViewModel(with: injectionBag))
-        self.dismissAction = dismissAction
+        _viewModel = ObservedObject(wrappedValue:
+                                        CreateAccountVM(with: injectionBag))
         self.createAction = createAction
     }
 
@@ -83,7 +80,7 @@ struct CreateAccountView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor.systemGroupedBackground).ignoresSafeArea())
         .onChange(of: name) { newValue in
-            model.usernameUpdated(to: newValue)
+            viewModel.usernameUpdated(to: newValue)
         }
     }
 
@@ -167,13 +164,13 @@ struct CreateAccountView: View {
     }
 
     @ViewBuilder private var footerView: some View {
-        if model.usernameValidationState.message.isEmpty {
+        if viewModel.usernameValidationState.message.isEmpty {
             Text("valid name")
                 .foregroundColor(.clear)
                 .font(.footnote)
         } else {
-            Text(model.usernameValidationState.message)
-                .foregroundColor(Color(model.usernameValidationState.textColor))
+            Text(viewModel.usernameValidationState.message)
+                .foregroundColor(Color(viewModel.usernameValidationState.textColor))
                 .font(.footnote)
                 .accessibilityIdentifier(AccessibilityIdentifiers.createAccountErrorLabel)
         }
@@ -181,7 +178,7 @@ struct CreateAccountView: View {
 
     private var cancelButton: some View {
         Button(action: {
-            dismissAction()
+            viewModel.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
@@ -194,11 +191,11 @@ struct CreateAccountView: View {
             createAction(name, password, profileName, profileImage)
         }, label: {
             Text(L10n.Global.create)
-                .foregroundColor(model.isJoinButtonDisabled ?
+                .foregroundColor(viewModel.isJoinButtonDisabled ?
                                     Color(UIColor.secondaryLabel) :
                                     .jamiColor)
         })
-        .disabled(model.isJoinButtonDisabled)
+        .disabled(viewModel.isJoinButtonDisabled)
         .accessibilityIdentifier(AccessibilityIdentifiers.joinButton)
     }
 
