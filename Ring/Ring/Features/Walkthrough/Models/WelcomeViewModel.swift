@@ -26,6 +26,7 @@ import SwiftUI
 class WelcomeViewModel: Stateable, ViewModel, ObservableObject {
 
     @Published var creationState: AccountCreationState = .initial
+    @Published var notCancelable = true
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
@@ -40,8 +41,6 @@ class WelcomeViewModel: Stateable, ViewModel, ObservableObject {
 
     let disposeBag = DisposeBag()
 
-    var notCancelable = true
-
     let registrationTimeout: CGFloat = 30
 
     var profileName: String = ""
@@ -55,6 +54,18 @@ class WelcomeViewModel: Stateable, ViewModel, ObservableObject {
     }
 
     func finish() {
+        self.stateSubject.onNext(WalkthroughState.completed)
+    }
+
+    func openAccountCreation() {
+        self.stateSubject.onNext(WalkthroughState.accountCreation(createAction: { [weak self] (name, password, profileName, profileImage)  in
+            guard let self = self else { return }
+            self.setProfileInfo(profileName: profileName, profileImage: profileImage)
+            self.createAccount(name: name, password: password)
+        }))
+    }
+
+    func openLinkDevice() {
         self.stateSubject.onNext(WalkthroughState.completed)
     }
 

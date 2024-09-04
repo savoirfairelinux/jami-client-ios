@@ -31,11 +31,16 @@ enum ActiveView: Identifiable {
     }
 }
 
-struct WelcomeView: View {
-    @ObservedObject var model: WelcomeViewModel
+struct WelcomeView: View, ViewModelBacked {
+    @ObservedObject var viewModel: WelcomeViewModel
     @SwiftUI.State var showImportOptions = false
     @SwiftUI.State var showAdvancedOptions = false
     @SwiftUI.State var activeView: ActiveView?
+
+    init(injectionBag: InjectionBag) {
+        _viewModel = ObservedObject(wrappedValue:
+                                WelcomeViewModel(with: injectionBag))
+    }
 
     @Environment(\.verticalSizeClass)
     var verticalSizeClass
@@ -47,11 +52,13 @@ struct WelcomeView: View {
                     if verticalSizeClass == .compact {
                         HorizontalView(showImportOptions: $showImportOptions,
                                        showAdvancedOptions: $showAdvancedOptions,
-                                       activeView: $activeView)
+                                       activeView: $activeView,
+                                       model: viewModel)
                     } else {
                         PortraitView(showImportOptions: $showImportOptions,
                                      showAdvancedOptions: $showAdvancedOptions,
-                                     activeView: $activeView)
+                                     activeView: $activeView,
+                                     model: viewModel)
                     }
                 }
                 .padding()
@@ -66,66 +73,66 @@ struct WelcomeView: View {
             .padding()
         }
         .applyJamiBackground()
-        .sheet(item: $activeView) { item in
-            switch item {
-            case .jamiAccount:
-                CreateAccountView(injectionBag: model.injectionBag,
-                                  dismissAction: {
-                                    activeView = nil
-                                  }, createAction: { [weak model] (name, password, profileName, profileImage)  in
-                                    activeView = nil
-                                    guard let model = model else { return }
-                                    model.setProfileInfo(profileName: profileName, profileImage: profileImage)
-                                    model.createAccount(name: name, password: password)
-                                  })
-            case .linkDevice:
-                LinkToAccountView(dismissAction: {
-                    activeView = nil
-                }, linkAction: {[weak model](pin, password) in
-                    activeView = nil
-                    guard let model = model else { return }
-                    model.linkDevice(pin: pin, password: password)
-
-                })
-            case .jamsAccount:
-                JamsConnectView(dismissAction: {
-                    activeView = nil
-                }, connectAction: { [weak model] username, password, server in
-                    activeView = nil
-                    guard let model = model else { return }
-                    model.connectToAccountManager(userName: username,
-                                                  password: password,
-                                                  server: server)
-                })
-            case .sipAccount:
-                SIPConfigurationView(dismissAction: {
-                    activeView = nil
-                }, connectAction: {[weak model] username, password, server in
-                    activeView = nil
-                    guard let model = model else { return }
-                    model.createSipAccount(userName: username,
-                                           password: password,
-                                           server: server)
-                })
-            case .aboutJami:
-                AboutSwiftUIView()
-            case .fromArchive:
-                ImportFromArchiveView(injectionBag: model.injectionBag,
-                                      dismissAction: {
-                                        activeView = nil
-                                      }, createAction: {[weak model] url, password in
-                                        activeView = nil
-                                        guard let model = model else { return }
-                                        model.importFromArchive(path: url, password: password)
-                                      })
-
-            }
-        }
+//        .sheet(item: $activeView) { item in
+//            switch item {
+//            case .jamiAccount:
+//                CreateAccountView(injectionBag: model.injectionBag,
+//                                  dismissAction: {
+//                                    activeView = nil
+//                                  }, createAction: { [weak model] (name, password, profileName, profileImage)  in
+//                                    activeView = nil
+//                                    guard let model = model else { return }
+//                                    model.setProfileInfo(profileName: profileName, profileImage: profileImage)
+//                                    model.createAccount(name: name, password: password)
+//                                  })
+//            case .linkDevice:
+//                LinkToAccountView(dismissAction: {
+//                    activeView = nil
+//                }, linkAction: {[weak model](pin, password) in
+//                    activeView = nil
+//                    guard let model = model else { return }
+//                    model.linkDevice(pin: pin, password: password)
+//
+//                })
+//            case .jamsAccount:
+//                JamsConnectView(dismissAction: {
+//                    activeView = nil
+//                }, connectAction: { [weak model] username, password, server in
+//                    activeView = nil
+//                    guard let model = model else { return }
+//                    model.connectToAccountManager(userName: username,
+//                                                  password: password,
+//                                                  server: server)
+//                })
+//            case .sipAccount:
+//                SIPConfigurationView(dismissAction: {
+//                    activeView = nil
+//                }, connectAction: {[weak model] username, password, server in
+//                    activeView = nil
+//                    guard let model = model else { return }
+//                    model.createSipAccount(userName: username,
+//                                           password: password,
+//                                           server: server)
+//                })
+//            case .aboutJami:
+//                AboutSwiftUIView()
+//            case .fromArchive:
+//                ImportFromArchiveView(injectionBag: model.injectionBag,
+//                                      dismissAction: {
+//                                        activeView = nil
+//                                      }, createAction: {[weak model] url, password in
+//                                        activeView = nil
+//                                        guard let model = model else { return }
+//                                        model.importFromArchive(path: url, password: password)
+//                                      })
+//
+//            }
+//        }
     }
 
     @ViewBuilder
     func alertView() -> some View {
-        switch model.creationState {
+        switch viewModel.creationState {
         case .initial, .unknown, .success:
             EmptyView()
         case .started:
@@ -144,9 +151,9 @@ struct WelcomeView: View {
         CustomAlert(content: { AlertFactory
             .alertWithOkButton(title: error.title,
                                message: error.message,
-                               action: { [weak model] in
-                                guard let model = model else { return }
-                                model.creationState = .initial
+                               action: { [weak viewModel] in
+                                guard let viewModel = viewModel else { return }
+                viewModel.creationState = .initial
                                })
         })
     }
@@ -158,9 +165,9 @@ struct WelcomeView: View {
         CustomAlert(content: { AlertFactory
             .alertWithOkButton(title: title,
                                message: message,
-                               action: {[weak model] in
-                                guard let model = model else { return }
-                                model.finish()
+                               action: {[weak viewModel] in
+                                guard let viewModel = viewModel else { return }
+                viewModel.finish()
                                })
         })
     }
@@ -172,9 +179,9 @@ struct WelcomeView: View {
         CustomAlert(content: { AlertFactory
             .alertWithOkButton(title: title,
                                message: message,
-                               action: {[weak model] in
-                                guard let model = model else { return }
-                                model.finish()
+                               action: {[weak viewModel] in
+                                guard let viewModel = viewModel else { return }
+                viewModel.finish()
                                })
         })
     }
@@ -186,12 +193,12 @@ struct WelcomeView: View {
 
     @ViewBuilder
     func cancelButton() -> some View {
-        if model.notCancelable {
+        if viewModel.notCancelable {
             EmptyView()
         } else {
-            Button(action: { [weak model] in
-                guard let model = model else { return }
-                model.finish()
+            Button(action: { [weak viewModel] in
+                guard let viewModel = viewModel else { return }
+                viewModel.finish()
             }, label: {
                 Text(L10n.Global.cancel)
                     .foregroundColor(Color.jamiColor)
@@ -203,6 +210,7 @@ struct HorizontalView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
     @Binding var activeView: ActiveView?
+    var model: WelcomeViewModel
     @SwiftUI.State private var height: CGFloat = 1
     var body: some View {
         HStack(spacing: 30) {
@@ -217,7 +225,8 @@ struct HorizontalView: View {
                 ScrollView(showsIndicators: false) {
                     ButtonsView(showImportOptions: $showImportOptions,
                                 showAdvancedOptions: $showAdvancedOptions,
-                                activeView: $activeView)
+                                activeView: $activeView,
+                                model: model)
                         .background(
                             GeometryReader { proxy in
                                 Color.clear
@@ -241,6 +250,7 @@ struct PortraitView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
     @Binding var activeView: ActiveView?
+    var model: WelcomeViewModel
     var body: some View {
         VStack {
             Spacer(minLength: 80)
@@ -248,7 +258,8 @@ struct PortraitView: View {
             ScrollView(showsIndicators: false) {
                 ButtonsView(showImportOptions: $showImportOptions,
                             showAdvancedOptions: $showAdvancedOptions,
-                            activeView: $activeView)
+                            activeView: $activeView,
+                            model: model)
             }
             AboutButton(activeView: $activeView)
         }
@@ -276,14 +287,16 @@ struct ButtonsView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
     @Binding var activeView: ActiveView?
+    var model: WelcomeViewModel
 
     var body: some View {
         VStack(spacing: 12) {
             button(L10n.CreateAccount.createAccountFormTitle,
                    action: {
-                    withAnimation {
-                        activeView = .jamiAccount
-                    }
+                model.openAccountCreation()
+//                    withAnimation {
+//                        activeView = .jamiAccount
+//                    }
                    })
                 .accessibilityIdentifier(AccessibilityIdentifiers.joinJamiButton)
 

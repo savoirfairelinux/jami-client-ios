@@ -182,10 +182,19 @@ extension AccountCreationError: LocalizedError {
     }
 }
 
-class CreateAccountViewModel: ObservableObject, ViewModel {
+class CreateAccountViewModel: Stateable, ObservableObject, ViewModel, Dismissable {
     @Published var isJoinButtonDisabled = false
     @Published var usernameValidationState: UsernameValidationState = .unknown
     @Published var username: String = ""
+
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
+
+    // MARK: - Rx Dismissable
+    var dismiss = PublishSubject<Bool>()
 
     private let disposeBag = DisposeBag()
     private let nameService: NameService

@@ -21,6 +21,7 @@
 
 import Foundation
 import RxSwift
+import SwiftUI
 
 /// Represents the choice made by the user in the Walkthrough for the creation account type
 ///
@@ -35,11 +36,13 @@ public enum WalkthroughType {
 
 /// Represents walkthrough navigation state
 public enum WalkthroughState: State {
+    case accountCreation(createAction: (String, String, String, UIImage?) -> Void)
     case completed
 }
 
 /// This Coordinator drives the walkthrough navigation (welcome / profile / creation or link)
 class WalkthroughCoordinator: Coordinator, StateableResponsive {
+    
     var presentingVC = [String: Bool]()
     var rootViewController: UIViewController {
         return self.navigationViewController
@@ -52,7 +55,7 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
 
     private let navigationViewController = UINavigationController()
     private let injectionBag: InjectionBag
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
 
@@ -66,15 +69,30 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
                 case .completed:
                     self.navigationViewController.setViewControllers([], animated: false)
                     self.rootViewController.dismiss(animated: true)
+                    case .accountCreation(let createAction):
+                        showAccountCreation(createAction: createAction)
                 }
             })
             .disposed(by: self.disposeBag)
 
     }
 
-    func start () {
-        let presentedController = WelcomeViewController.instantiate(with: self.injectionBag)
-        presentedController.viewModel.notCancelable = isAccountFirst
-        self.present(viewController: presentedController, withStyle: .show, withAnimation: false, withStateable: presentedController.viewModel)
+    func showAccountCreation(createAction: @escaping (String, String, String, UIImage?) -> Void) {
+        let accountView = CreateAccountView(injectionBag: self.injectionBag, createAction: createAction)
+        let viewController = createDismissableVC(accountView, dismissible: accountView.viewModel)
+        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, withStateable: accountView.viewModel)
+    }
+
+//    func showLinkDevice(linkAction: @escaping (_ pin: String, _ password: String) -> Void) {
+//        let accountView = LinkToAccountView(linkAction: linkAction)
+//        let viewController = createVC(accountView)
+//        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, withStateable: accountView.model)
+//    }
+
+    func start() {
+        let welcomeView = WelcomeView(injectionBag: self.injectionBag)
+        let viewController = createVC(welcomeView)
+        welcomeView.viewModel.notCancelable = false
+        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: welcomeView.viewModel)
     }
 }

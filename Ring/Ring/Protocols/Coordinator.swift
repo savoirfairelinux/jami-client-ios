@@ -21,6 +21,7 @@
 import Foundation
 import UIKit
 import RxSwift
+import SwiftUI
 
 /**
  Represents how a UIViewController should be displayed
@@ -53,6 +54,8 @@ protocol Coordinator: AnyObject {
     /// flag to be setting to true during particular viewController is presenting
     /// this property is added to prevent controller to be presenting multiple times, caused by UI lag
     var presentingVC: [String: Bool] { get set }
+
+    var disposeBag: DisposeBag { get set }
 
     /// Initializes a new Coordinator with a dependancy injection bag
     ///
@@ -139,4 +142,37 @@ extension Coordinator {
                 .disposed(by: disposeBag)
         }
     }
+
+    func createVC<Content: View>(
+        _ view: Content) -> UIViewController {
+        let viewController = UIHostingController(rootView: view)
+        return viewController
+    }
+
+    func createDismissableVC<Content: View>(
+        _ view: Content,
+        dismissible: Dismissable
+    ) -> UIViewController {
+        let viewController = UIHostingController(rootView: view)
+
+        dismissible
+            .dismiss
+            .take(1)
+            .subscribe(onNext: { [weak self] shouldDismiss in
+                if shouldDismiss {
+                    self?.dismiss(viewController: viewController, animated: true)
+                }
+            })
+            .disposed(by: self.disposeBag)
+        return viewController
+    }
+
+    private func dismiss(viewController: UIViewController, animated: Bool) {
+        if let navigationController = viewController.navigationController {
+            navigationController.popViewController(animated: animated)
+        } else {
+            viewController.dismiss(animated: animated, completion: nil)
+        }
+    }
+
 }
