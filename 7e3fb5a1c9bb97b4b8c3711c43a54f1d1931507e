@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f273d6e_6103b734",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-09-07T18:27:41Z",
+      "side": 0,
+      "message": "It is not used and could be removed",
+      "parentUuid": "1ff8176e_6d6639f4",
+      "range": {
+        "startLine": 42,
+        "startChar": 1,
+        "endLine": 42,
+        "endChar": 14
+      },
+      "revId": "7e3fb5a1c9bb97b4b8c3711c43a54f1d1931507e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36f238b4_7b59d6b2",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-30T00:13:26Z",
       "side": 0,
       "message": "Can you please provide code pointers to where this variable name is used? Thank you",
+      "range": {
+        "startLine": 175,
+        "startChar": 1,
+        "endLine": 175,
+        "endChar": 31
+      },
+      "revId": "7e3fb5a1c9bb97b4b8c3711c43a54f1d1931507e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27023fe2_150c6a23",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-09-07T18:27:41Z",
+      "side": 0,
+      "message": "It is not used and could be removed",
+      "parentUuid": "36f238b4_7b59d6b2",
       "range": {
         "startLine": 175,
         "startChar": 1,
