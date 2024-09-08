@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a19da97_13e27574",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 19
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-09-08T07:23:48Z",
+      "side": 1,
+      "message": "+1 for `authentication code`; however, the string seems to longest and may not be best for mobile and small screens.\n\nIf you agree, will update Android and Qt editions of Jami too.\n\nThank you",
+      "parentUuid": "36ed38fe_e80b511c",
+      "revId": "f3c3b0ca85c6a06c7c7c187da2d325939d1ca18f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "743c6811_af8cd576",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 19
