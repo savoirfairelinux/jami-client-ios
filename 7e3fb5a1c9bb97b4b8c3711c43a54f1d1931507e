@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f33423e_632aec86",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-09-08T06:19:29Z",
+      "side": 0,
+      "message": "What would you prefer? Leave or remove string? Thank you",
+      "parentUuid": "0f273d6e_6103b734",
+      "range": {
+        "startLine": 42,
+        "startChar": 1,
+        "endLine": 42,
+        "endChar": 14
+      },
+      "revId": "7e3fb5a1c9bb97b4b8c3711c43a54f1d1931507e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36f238b4_7b59d6b2",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 4
@@ -85,6 +109,30 @@
       "side": 0,
       "message": "It is not used and could be removed",
       "parentUuid": "36f238b4_7b59d6b2",
+      "range": {
+        "startLine": 175,
+        "startChar": 1,
+        "endLine": 175,
+        "endChar": 31
+      },
+      "revId": "7e3fb5a1c9bb97b4b8c3711c43a54f1d1931507e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b472fb_bdd39a84",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-09-08T06:19:29Z",
+      "side": 0,
+      "message": "What would you prefer? Leave or remove string? Thank you",
+      "parentUuid": "27023fe2_150c6a23",
       "range": {
         "startLine": 175,
         "startChar": 1,

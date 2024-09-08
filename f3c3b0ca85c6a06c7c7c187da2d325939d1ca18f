@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36ed38fe_e80b511c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 19
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-09-08T06:19:29Z",
+      "side": 1,
+      "message": "`PIN`/`PIN code` does not seem the best fit as the code expires. Better options seem to be:\n(a) `passcode`\n(b) `one-time password (OTP)`\n(c) `time-based one-time password (TOTP)`\n(d) `authentication code`\n\nhttps://git.jami.net/savoirfairelinux/jami-client-qt/-/issues/1730#note_51933\n\nhttps://git.jami.net/savoirfairelinux/jami-client-ios/-/issues/382#note_51916\n\nWhat do you think?",
+      "parentUuid": "1ef8d7ba_150f66be",
+      "revId": "f3c3b0ca85c6a06c7c7c187da2d325939d1ca18f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "743c6811_af8cd576",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 19
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4fcd78ec_1b37143b",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 19
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-09-08T06:19:29Z",
+      "side": 1,
+      "message": "Is the following better:\n`A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your network administrator.`\n\nThank you",
+      "parentUuid": "743c6811_af8cd576",
+      "revId": "f3c3b0ca85c6a06c7c7c187da2d325939d1ca18f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d97d6bc1_d349d85e",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 19
@@ -48,6 +84,24 @@
       "writtenOn": "2024-09-07T18:27:41Z",
       "side": 1,
       "message": "\"Please try again with the correct credentials.\" sounds a bit strong to me. It assumes that the credentials were incorrect without explicitly stating it. It might feel a bit presumptive or unclear to the user, especially if they\u0027re unsure what went wrong.",
+      "revId": "f3c3b0ca85c6a06c7c7c187da2d325939d1ca18f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2323422f_5aa5df5d",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 19
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-09-08T06:19:29Z",
+      "side": 1,
+      "message": "Is the following better:\n`An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.`\n\nThank you",
+      "parentUuid": "d97d6bc1_d349d85e",
       "revId": "f3c3b0ca85c6a06c7c7c187da2d325939d1ca18f",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
