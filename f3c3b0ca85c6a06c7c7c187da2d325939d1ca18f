@@ -54,6 +54,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48c481b_343d6029",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 19
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-09-08T08:10:45Z",
+      "side": 1,
+      "message": "Acknowledged. Can update this patch with `PIN code` and make another patch to update to agreed new word(s), i.e.\n(a) `passcode`\n(b) `one-time password (OTP)`\n(c) `time-based one-time password (TOTP)`\n(d) `authentication code`",
+      "parentUuid": "8a19da97_13e27574",
+      "revId": "f3c3b0ca85c6a06c7c7c187da2d325939d1ca18f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "743c6811_af8cd576",
