@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9572e98_9bdac303",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 19
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-09-08T06:22:43Z",
+      "side": 1,
+      "message": "`A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.`",
+      "parentUuid": "4fcd78ec_1b37143b",
+      "revId": "f3c3b0ca85c6a06c7c7c187da2d325939d1ca18f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d97d6bc1_d349d85e",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 19
