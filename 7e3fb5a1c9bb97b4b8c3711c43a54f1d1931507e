@@ -72,6 +72,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf3602e5_f12e11f2",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-09-08T07:20:05Z",
+      "side": 0,
+      "message": "Done. If you want to remove, please modify patch. Thank you",
+      "parentUuid": "5f33423e_632aec86",
+      "range": {
+        "startLine": 42,
+        "startChar": 1,
+        "endLine": 42,
+        "endChar": 14
+      },
+      "revId": "7e3fb5a1c9bb97b4b8c3711c43a54f1d1931507e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36f238b4_7b59d6b2",
@@ -133,6 +157,30 @@
       "side": 0,
       "message": "What would you prefer? Leave or remove string? Thank you",
       "parentUuid": "27023fe2_150c6a23",
+      "range": {
+        "startLine": 175,
+        "startChar": 1,
+        "endLine": 175,
+        "endChar": 31
+      },
+      "revId": "7e3fb5a1c9bb97b4b8c3711c43a54f1d1931507e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74b212dc_99ab91ae",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-09-08T07:20:05Z",
+      "side": 0,
+      "message": "Done. If you want to remove, please modify patch. Thank you",
+      "parentUuid": "e8b472fb_bdd39a84",
       "range": {
         "startLine": 175,
         "startChar": 1,
