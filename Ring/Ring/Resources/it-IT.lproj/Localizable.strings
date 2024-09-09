@@ -393,7 +393,7 @@
 
 // Backup Account
 "backupAccount.explanation" = "Questo account Jami esiste solo in questo dispositivo. L'account andrà perso se il dispositivo viene smarrito o se l'applicazione viene disinstallata. Si consiglia di fare una copia dell'account.";
-"backupAccount.title" = "Backup account";
+"backupAccount.title" = "Salva l'account";
 "backupAccount.creating" = "Creazione del backup";
 "backupAccount.archiveName" = "Seleziona un nome per l'archivio.";
 "backupAccount.archiveNamePlaceholder" = "Nome dell'archivio";
