@@ -393,7 +393,7 @@
 
 // Backup Account
 "backupAccount.explanation" = "Acest cont Jami există doar în acest aparat. Contul va fi pierdut dacă acest aparat este pierdut sau dacă aplicația este dezinstalată. Se recomandă efectuarea unei copii de rezervă a acestui cont.";
-"backupAccount.title" = "Copie de rezervă a contului";
+"backupAccount.title" = "Copiază contul";
 "backupAccount.creating" = "Se creează copia de rezervă";
 "backupAccount.archiveName" = "Alege un nume pentru arhivă.";
 "backupAccount.archiveNamePlaceholder" = "Numele arhivei";

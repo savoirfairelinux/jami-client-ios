@@ -44,7 +44,7 @@
 "global.copy" = "कॉपी";
 "global.reply" = "जवाब दे";
 "global.search" = "खोज...";
-"global.donate" = "Donate";
+"global.donate" = "दान करें";
 "global.deleteMessage" = "संदेश हटाएँ";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "संदेश संपादित करें";
@@ -105,7 +105,7 @@
 "smartlist.newContact" = "New Contact";
 "smartlist.newSwarm" = "New Swarm";
 "smartlist.accounts" = "खाते";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "आमंत्रण प्राप्त हुवा";
 "smartlist.noResults" = "कोई परिणाम नहीं";
 "smartlist.noConversation" = "कोई बातचीत नहीं";
 "smartlist.searchBarPlaceholder" = "Enter name…";
@@ -120,8 +120,8 @@
 "smartlist.aboutJami" = "जामी के बारे में";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "खाते";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.disableDonation" = "अभी नहीं";
+"smartlist.donationExplanation" = "यदि आपको जैमी का उपयोग करना अच्छा लगता है और आप हमारे मिशन में विश्वास करते हैं, तो क्या आप दान देंगे?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
@@ -152,7 +152,7 @@
 "invitations.accepted" = "accepted";
 "invitations.refused" = "refused";
 "invitations.banned" = "banned";
-"invitations.list" = "Invitations received";
+"invitations.list" = "आमंत्रण प्राप्त हुवा";
 
 // Walkthrough
 
