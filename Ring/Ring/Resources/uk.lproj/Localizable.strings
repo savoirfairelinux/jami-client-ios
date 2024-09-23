@@ -39,7 +39,7 @@
 "global.preview" = "Попередній перегляд";
 "global.accept" = "Прийняти";
 "global.block" = "Заблокувати";
-"global.refuse" = "Скидання";
+"global.decline" = "Відхилити";
 "global.name" = "Ім’я";
 "global.copy" = "Копіювати";
 "global.reply" = "Відповісти";
@@ -57,7 +57,7 @@
 "global.time" = "Час";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "Підтвердити пароль";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 
 // Scan
 "scan.badQrCode" = "Неприйнятний QR-код";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "Ігнорувати рій";
 "swarm.leaveConversation" = "Не переконвайтеся";
 "swarm.chooseColor" = "Колір";
-"swarm.typeOfSwarm" = "Тип рою";
+"swarm.typeOfSwarm" = "Тип";
 "swarm.identifier" = "Ідентифікатор";
 "swarm.about" = "Про программу";
 "swarm.members" = "Учасники";
@@ -83,14 +83,14 @@
 "swarm.member" = "Член";
 "swarm.invited" = "Запрошено";
 "swarm.admin" = "Адміністратор";
-"swarm.banned" = "Заборонена";
+"swarm.blocked" = "Blocked";
 "swarm.unknown" = "Невідомий";
-"swarm.addMember" = "Додавати члена";
+"swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveSwarm" = "Ти впевнений, що хочеш покинути цей рій?";
 "swarm.Leave" = "Піти";
 "swarm.newSwarm" = "Новий рій";
 "swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
 "swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
@@ -132,7 +132,7 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Ви зараз ділитеся своїм місцем розташуванням з ";
 "conversation.explanationReceivingLocationFrom" = "Ви зараз отримуєте пряму локацію від ";
-"conversation.errorSavingImage" = "Не вдалося зберегти зображення в галерею";
+"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
 "conversation.receivedRequest" = "%@ пропонує почати розмову.";
 "conversation.incomingRequest" = "Посилала прохання про розмову.";
 "conversation.requestMessage" = "Привіт, чи не хочеш приєднатися до розмови?";
@@ -150,8 +150,8 @@
 "invitations.noInvitations" = "Ніяких запрошень";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "заблокований";
+"invitations.declined" = "declined";
+"invitations.blocked" = "blocked";
 "invitations.list" = "Запрошення отримані";
 
 // Walkthrough
@@ -163,7 +163,7 @@
 "welcome.linkDevice" = "Імпорт з іншого пристрою";
 "welcome.linkBackup" = "Імпорт з архивного резервного копію";
 "welcome.createAccount" = "Приєднатися";
-"welcome.connectToManager" = "Підключитися до сервера облікових записів Jami.";
+"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустити";
@@ -172,7 +172,7 @@
 "createProfile.enterNameLabel" = "Введіть ім'я дисплею";
 "createProfile.enterNamePlaceholder" = "Введіть ім'я";
 "createProfile.subtitle" = "Ваш профіль буде передано вашим контактам. Ви можете змінити його в будь-який час.";
-"createProfile.createYourAvatar" = "Створюйте свій аватар";
+"createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Приєднуйся до Jami";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Збій мережі";
 "createAccount.UsernameNotRegisteredMessage" = "Уведено обліковий запис, але ім'я користувача не зареєстровано";
 "createAccount.timeoutTitle" = "Обліковий запис створено";
-"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
+"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
 "createAccount.sipConfigure" = "Дозволити сповіщення";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Ви можете вибрати ім'я користувача, щоб іншим було легше знайти вас і зв'язатися з вами в Jami.";
@@ -194,40 +194,40 @@
 "createAccount.encrypt" = "Зашифровано";
 "createAccount.customize" = "Натомість";
 "createAccount.encryptTitle" = "Зашифрувати мій профіль за допомогою пароля";
-"createAccount.encryptExplanation" = "Обліковий запис Jami створено та жбережено локально лише на цьому пристрої у вигляді архіву, що містить ключі вашого облікового запису. Доступ до цього архіву може бути захищений паролем за бажанням.";
+"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Поєднання облікових записів";
 "linkToAccount.linkButtonTitle" = "Зв'язати";
 "linkToAccount.linkDeviceTitle" = "Привʼязати пристрій";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
-"linkToAccount.pinPlaceholder" = "PIN-код";
-"linkToAccount.pinLabel" = "Ввести PIN-код";
-"linkToAccount.scanQRCode" = "Сканування QR коду";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
+"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
+"linkToAccount.pinPlaceholder" = "PIN code";
+"linkToAccount.pinLabel" = "Enter PIN code";
+"linkToAccount.scanQRCode" = "Скануйте QR-код";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.passwordExplanation" = "Якщо обліковий запис зашифрований паролем, заповніть наступне поле.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Імпортувати";
 "importFromArchive.selectArchiveButton" = "Виберіть файл архіва";
 
-// Link To Account Manager form
+// Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Підпишіться";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Введіть URL JAMS";
 "linkToAccountManager.jamsExplanation" = "Уведіть URL сервера керування обліковими записами Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "Введіть ідентифікацію JAMS";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
-"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkTitle" = "Збій мережі";
+"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Зняти фото";
@@ -244,9 +244,9 @@
 "alerts.noMediaPermissionsTitle" = "Звіленої інформації не надано дозволу";
 "alerts.noLibraryPermissionsTitle" = "Доступ до фотобіблиотеки не наданий";
 "alerts.noLocationPermissionsTitle" = "Доступ до місця не наданий";
-"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Запишіть відео повідомлення";
-"alerts.recordAudioMessage" = "Запишіть аудіоповість";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
+"alerts.recordVideoMessage" = "Record video message";
+"alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "Відправити файл";
 "alerts.uploadPhoto" = "Відкрити галерею";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
@@ -332,7 +332,7 @@
 "accountPage.currentPasswordPlaceholder" = "Введіть поточний пароль";
 "accountPage.newPasswordPlaceholder" = "Введіть новий пароль";
 "accountPage.newPasswordConfirmPlaceholder" = "Підтвердити новий пароль";
-"accountPage.changePasswordError" = "Пароль невірна";
+"accountPage.changePasswordError" = "Неправильний пароль";
 "accountPage.enableBoothMode" = "Отримати режим бути";
 "accountPage.disableBoothMode" = "Виключити режим бути";
 "accountPage.disableBoothModeExplanation" = "Будь ласка, надайте свій пароль для облікового запису";
@@ -360,21 +360,21 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Керувати акаунтом";
 "accountPage.encryptAccount" = "Зашифруйте обліковий запис паролем";
-"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Паролі не збігаються";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Привʼязані пристрої";
 "accountPage.unlink" = "Unlink";
-"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "На іншому пристрої";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
-"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
+"accountPage.pinError" = "Failed to generate PIN code";
 "accountPage.notificationTitle" = "За повідомленнями";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Дозвольте прийом покликів з невідомих контактів";
-"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
+"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
+"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
@@ -403,13 +403,13 @@
 "backupAccount.exportSuccess" = "Backup created";
 "backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.errorFailed" = "An error occurred while exporting the account.";
 
 // Account
 "account.sipServer" = "Сервер";
 "account.port" = "Порт";
 "account.proxyServer" = "Проксі";
-"account.createSipAccount" = "Налаштувати обліковий запис SIP";
+"account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "Аккаунт SIP";
 "account.configure" = "Налаштувати";
 "account.advancedFeatures" = "Розширені функції";
@@ -433,7 +433,7 @@
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "Перевірка";
 
 // Contact Page
@@ -458,7 +458,7 @@
 "notifications.newFile" = "Новий файл";
 "notifications.locationSharingStarted" = "Розпочалося обмін місцем розташування";
 "notifications.locationSharingStopped" = "Дохідний обмін місцем розташування припинено";
-"dataTransfer.readableStatusRefuse" = "Скидання";
+"dataTransfer.readableStatusDecline" = "Відхилити";
 "dataTransfer.readableStatusAccept" = "Прийняти";
 "dataTransfer.infoMessage" = "Натисніть, щоб почати запис";
 "dataTransfer.sendMessage" = "Відправити";

@@ -39,7 +39,7 @@
 "global.preview" = "תצוגה ראשונה";
 "global.accept" = "לקבל";
 "global.block" = "חסימה";
-"global.refuse" = "לדחות";
+"global.decline" = "ירידה";
 "global.name" = "שם";
 "global.copy" = "העתקה";
 "global.reply" = "תשובה";
@@ -57,7 +57,7 @@
 "global.time" = "זמן";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "אישור סיסמה";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 
 // Scan
 "scan.badQrCode" = "קוד QR גרוע";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "התעלמו מהגזע.";
 "swarm.leaveConversation" = "עזוב את השיחה";
 "swarm.chooseColor" = "צבע";
-"swarm.typeOfSwarm" = "סוג של סוואר";
+"swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "זיהוי";
 "swarm.about" = "על אודות";
 "swarm.members" = "חברי";
@@ -83,14 +83,14 @@
 "swarm.member" = "חבר";
 "swarm.invited" = "הזמנת";
 "swarm.admin" = "מנהל";
-"swarm.banned" = "אסור";
+"swarm.blocked" = "Blocked";
 "swarm.unknown" = "לא מוכר";
-"swarm.addMember" = "הוסף חבר";
+"swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveSwarm" = "אתה בטוח שאתה רוצה לעזוב את הסוואר הזה?";
 "swarm.Leave" = "עזוב";
 "swarm.newSwarm" = "New swarm";
 "swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
 "swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
@@ -132,7 +132,7 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "אתה חולק את המיקום שלך עם ";
 "conversation.explanationReceivingLocationFrom" = "אתה מקבל כרגע מיקום חי מ";
-"conversation.errorSavingImage" = "Failed to save image to gallery";
+"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "שלחתי לך בקשה לשיחה.";
 "conversation.requestMessage" = "שלום, תרצה להצטרף לשיחה?";
@@ -150,8 +150,8 @@
 "invitations.noInvitations" = "אין הזמנות";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.declined" = "declined";
+"invitations.blocked" = "blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -163,7 +163,7 @@
 "welcome.linkDevice" = "ייבוא ממכשיר אחר";
 "welcome.linkBackup" = "ייבוא מאחזת תיק";
 "welcome.createAccount" = "הצטרף";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "דילוג";
@@ -172,7 +172,7 @@
 "createProfile.enterNameLabel" = "הכניסו שם תצוגה";
 "createProfile.enterNamePlaceholder" = "הכניסה של שם";
 "createProfile.subtitle" = "הפרופיל שלך ייחלק עם אנשי הקשר שלך. אתה יכול לשנות אותו בכל עת.";
-"createProfile.createYourAvatar" = "ליצור את האווטאר שלך";
+"createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "הצטרף לג'מי.";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "טעות רשת";
 "createAccount.UsernameNotRegisteredMessage" = "חשבון נוצר אבל שם משתמש לא נרשם";
 "createAccount.timeoutTitle" = "חשבון נוצר";
-"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
+"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
 "createAccount.sipConfigure" = "להגדיר חשבון SIP קיים";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "אתה יכול לבחור שם משתמש כדי לעזור לאחרים למצוא אותך בקלות יותר ולקשר אליך על ג'מי.";
@@ -194,40 +194,40 @@
 "createAccount.encrypt" = "מוצפן";
 "createAccount.customize" = "אישית";
 "createAccount.encryptTitle" = "לחשוף חשבון עם סיסמה";
-"createAccount.encryptExplanation" = "חשבון ג'אמי נוצר ומוחסן מקומית רק במכשיר זה, כאריכיון המכיל את מפתחות החשבון שלך. גישה לאריכיון זה יכולה להיות מוגנת בחירה באמצעות סיסמה.";
+"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "חיבור חשבונות";
 "linkToAccount.linkButtonTitle" = "קישור";
 "linkToAccount.linkDeviceTitle" = "מכשיר חיבור";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
-"linkToAccount.pinPlaceholder" = "מספר זיהוי אישי";
-"linkToAccount.pinLabel" = "הכניס את סימן PIN";
-"linkToAccount.scanQRCode" = "Scan QR Code";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
+"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
+"linkToAccount.pinPlaceholder" = "PIN code";
+"linkToAccount.pinLabel" = "Enter PIN code";
+"linkToAccount.scanQRCode" = "Scan QR code";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "יבוא";
 "importFromArchive.selectArchiveButton" = "בחר תיק ארכיון";
 
-// Link To Account Manager form
+// Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "כניסה";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "דואר URL של JAMS";
 "linkToAccountManager.accountManagerLabel" = "הכניס את URL JAMS";
-"linkToAccountManager.jamsExplanation" = "הכניס את כתובת ה-JAMS (Jami Account Management Server)";
+"linkToAccountManager.jamsExplanation" = "Enter Jami Account Management Server (JAMS) URL";
 "linkToAccountManager.enterCredentials" = "הכניסה של תעודות אישור JAMS";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
-"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkTitle" = "טעות רשת";
+"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "צלם.";
@@ -244,9 +244,9 @@
 "alerts.noMediaPermissionsTitle" = "אישור מדיה לא מוסמך";
 "alerts.noLibraryPermissionsTitle" = "גישה לספריית התמונות לא מותרת";
 "alerts.noLocationPermissionsTitle" = "גישה לא מיקום";
-"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "הקלטת הודעה וידאו";
-"alerts.recordAudioMessage" = "הקלטת הודעה אוודית";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
+"alerts.recordVideoMessage" = "Record video message";
+"alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "שלח קובץ";
 "alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
@@ -332,7 +332,7 @@
 "accountPage.currentPasswordPlaceholder" = "הכניסו סיסמה הנוכחית";
 "accountPage.newPasswordPlaceholder" = "הכניסו סיסמה חדשה";
 "accountPage.newPasswordConfirmPlaceholder" = "אישר סיסמה חדשה";
-"accountPage.changePasswordError" = "סיסמה שגויה";
+"accountPage.changePasswordError" = "סיסמה לא נכונה";
 "accountPage.enableBoothMode" = "תפעיל מצב קיר";
 "accountPage.disableBoothMode" = "תבטל מצב הדלת";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
@@ -360,21 +360,21 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "מנהל חשבון";
 "accountPage.encryptAccount" = "לחשוף חשבון עם סיסמה";
-"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "סיסמאות לא מתאימות";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "מכשירים מחוברים";
 "accountPage.unlink" = "Unlink";
-"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
-"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
+"accountPage.pinError" = "Failed to generate PIN code";
 "accountPage.notificationTitle" = "הודעות";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "אפשרת שיחות נכנסות ממגעים לא ידועים";
-"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
+"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
+"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
@@ -403,13 +403,13 @@
 "backupAccount.exportSuccess" = "Backup created";
 "backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.errorFailed" = "An error occurred while exporting the account.";
 
 // Account
 "account.sipServer" = "סרוויר";
 "account.port" = "פורט";
 "account.proxyServer" = "פרוקסי";
-"account.createSipAccount" = "Configure a SIP Account";
+"account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "חשבון SIP";
 "account.configure" = "הגדר";
 "account.advancedFeatures" = "Advanced Features";
@@ -433,7 +433,7 @@
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "אימות";
 
 // Contact Page
@@ -458,7 +458,7 @@
 "notifications.newFile" = "תיק חדש";
 "notifications.locationSharingStarted" = "החל שיתוף מיקום נכנס";
 "notifications.locationSharingStopped" = "שיתוף מיקום נכנסים נעצר";
-"dataTransfer.readableStatusRefuse" = "לדחות";
+"dataTransfer.readableStatusDecline" = "Decline";
 "dataTransfer.readableStatusAccept" = "לקבל";
 "dataTransfer.infoMessage" = "לחץ כדי להתחיל להקליט";
 "dataTransfer.sendMessage" = "שלח";

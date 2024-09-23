@@ -39,7 +39,7 @@
 "global.preview" = "Eelvaade";
 "global.accept" = "Võta vastu";
 "global.block" = "Blokeeri";
-"global.refuse" = "Keeldu";
+"global.decline" = "Decline";
 "global.name" = "Nimi";
 "global.copy" = "Kopeeri";
 "global.reply" = "Vasta";
@@ -57,7 +57,7 @@
 "global.time" = "aeg";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "Korda salasõna";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 
 // Scan
 "scan.badQrCode" = "Vigane QR-kood";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "Eira vestlusrühma";
 "swarm.leaveConversation" = "Lahku vestlusest";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Vestlusrühma tüüp";
+"swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Tunnus";
 "swarm.about" = "Teave";
 "swarm.members" = "Liikmed";
@@ -83,14 +83,14 @@
 "swarm.member" = "Liige";
 "swarm.invited" = "Kutsutud";
 "swarm.admin" = "Peakasutaja";
-"swarm.banned" = "Ligipääs keelatud";
+"swarm.blocked" = "Blocked";
 "swarm.unknown" = "Pole teada";
-"swarm.addMember" = "Lisa liige";
+"swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveSwarm" = "Oled kindel, et tahad siit vestlusrühmast lahkuda?";
 "swarm.Leave" = "Jah, lahkun";
 "swarm.newSwarm" = "Uus vestlusrühm";
 "swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Peale vestlusrühma loomist saad igal ajal siia liikmeid lisada või neile kutse saata";
+"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
 "swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Muuda vestlusrühma pilti";
 "swarm.customize" = "Kohanda vestlusrühma";
@@ -132,7 +132,7 @@
 "conversation.messagePlaceholder" = "Kirjuta kasutajale";
 "conversation.explanationSendingLocationTo" = "Sa jagad praegu oma asukoha kasutajaga";
 "conversation.explanationReceivingLocationFrom" = "Hetkel näed reaalajas asukohta kasutajalt";
-"conversation.errorSavingImage" = "Pildi salvestamine galeriisse ei õnnestunud";
+"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
 "conversation.receivedRequest" = "%@ saatis sulle vestluse kutse";
 "conversation.incomingRequest" = "Saatis sulle vestluse kutse.";
 "conversation.requestMessage" = "Tere, kas sa sooviksid liituda vestlusega?";
@@ -150,8 +150,8 @@
 "invitations.noInvitations" = "Pole kutseid";
 "invitations.pending" = "ootel";
 "invitations.accepted" = "vastuvõetud";
-"invitations.refused" = "tagasilükatud";
-"invitations.banned" = "suhtluskeeld";
+"invitations.declined" = "declined";
+"invitations.blocked" = "blocked";
 "invitations.list" = "Sulle on kutseid";
 
 // Walkthrough
@@ -163,7 +163,7 @@
 "welcome.linkDevice" = "Impordi muust seadmest";
 "welcome.linkBackup" = "Impordi varukoopiast";
 "welcome.createAccount" = "Liitu";
-"welcome.connectToManager" = "Loo ühendus Jami Kontohaldusserveriga";
+"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Jäta vahele";
@@ -172,7 +172,7 @@
 "createProfile.enterNameLabel" = "Sisesta kuvatav nimi";
 "createProfile.enterNamePlaceholder" = "Sisesta nimi";
 "createProfile.subtitle" = "Sinu profiili jagatakse sinu kontaktidega. Sa saad seda alati muuta.";
-"createProfile.createYourAvatar" = "Loo oma tunnuspilt";
+"createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Liitu Jamiga";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Võrgu viga";
 "createAccount.UsernameNotRegisteredMessage" = "Kasutajakonto on nüüd loodud, kuid kasutajanimi jäi registreereerimata";
 "createAccount.timeoutTitle" = "Kasutajakonto on loodud";
-"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
+"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
 "createAccount.sipConfigure" = "Seadista olemasolev SIP-konto";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Selleks, et teised kasutajad saaksid sind kergemini Jami võrgus leida, võid valide endale kasutajanime.";
@@ -194,40 +194,40 @@
 "createAccount.encrypt" = "Krüpti";
 "createAccount.customize" = "Kohanda";
 "createAccount.encryptTitle" = "Kasuta konto krüptimisel salasõna";
-"createAccount.encryptExplanation" = "Sinu Jami kasutajakonto on registreeritud ja salvestatud vaid selles nutiseadmes ja olemuselt on tegemist arhiiviga, kus leiduvad sinu krüptovõtmed. Ligipääsu sellele arhiivile saad soovi korral turvata salasõnaga.";
+"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontode sidumine";
 "linkToAccount.linkButtonTitle" = "Seo";
 "linkToAccount.linkDeviceTitle" = "Seo seade";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
-"linkToAccount.pinPlaceholder" = "PIN-kood";
-"linkToAccount.pinLabel" = "Sisesta PIN-kood";
-"linkToAccount.scanQRCode" = "Skaneeri QR-koodi";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
+"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
+"linkToAccount.pinPlaceholder" = "PIN code";
+"linkToAccount.pinLabel" = "Enter PIN code";
+"linkToAccount.scanQRCode" = "Scan QR code";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Impordi";
 "importFromArchive.selectArchiveButton" = "Vali varukoopia arhiivfail";
 
-// Link To Account Manager form
+// Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Logi sisse";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Sisesta JAMS URL";
-"linkToAccountManager.jamsExplanation" = "Sisesta Jami kontohaldusserveri (JAMS) aadress";
+"linkToAccountManager.jamsExplanation" = "Enter Jami Account Management Server (JAMS) URL";
 "linkToAccountManager.enterCredentials" = "Sisesta Jami kontohaldusserveri kasutajanimi ja salasõna";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
-"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkTitle" = "Network error";
+"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Pildista";
@@ -244,9 +244,9 @@
 "alerts.noMediaPermissionsTitle" = "Meedia kasutamiseks puudub luba";
 "alerts.noLibraryPermissionsTitle" = "Fotogalerii kasutamiseks puudub luba";
 "alerts.noLocationPermissionsTitle" = "Asukoha kasutamiseks puudub luba";
-"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Salvesta videosõnum";
-"alerts.recordAudioMessage" = "Salvesta häälsõnum";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
+"alerts.recordVideoMessage" = "Record video message";
+"alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "Saada fail";
 "alerts.uploadPhoto" = "Ava galerii";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
@@ -332,7 +332,7 @@
 "accountPage.currentPasswordPlaceholder" = "Sisesta praegune salasõna";
 "accountPage.newPasswordPlaceholder" = "Sisesta uus salasõna";
 "accountPage.newPasswordConfirmPlaceholder" = "Korda uut salasõna";
-"accountPage.changePasswordError" = "Salasõna pole õige";
+"accountPage.changePasswordError" = "Vigane salasõna";
 "accountPage.enableBoothMode" = "Võimalise boodi toiming";
 "accountPage.disableBoothMode" = "Lülita kioskirežiim välja";
 "accountPage.disableBoothModeExplanation" = "Palun sisesta oma kasutajakonto salasõna";
@@ -360,21 +360,21 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Halda kasutajakontot";
 "accountPage.encryptAccount" = "Krüpti kasutajakonto salasõnaga";
-"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Salasõnad ei klapi";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Seotud seadmed";
 "accountPage.unlink" = "Unlink";
-"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "Teises seadmes";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
-"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
+"accountPage.pinError" = "Failed to generate PIN code";
 "accountPage.notificationTitle" = "Teavitused";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Luba kõnesid tundmatutelt kontaktidelt";
-"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
+"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
+"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
@@ -403,13 +403,13 @@
 "backupAccount.exportSuccess" = "Backup created";
 "backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.errorFailed" = "An error occurred while exporting the account.";
 
 // Account
 "account.sipServer" = "Server";
 "account.port" = "SIP-serveri port";
 "account.proxyServer" = "Proksiserver";
-"account.createSipAccount" = "Seadista SIP-konto";
+"account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "SIP-konto";
 "account.configure" = "Seadista";
 "account.advancedFeatures" = "Täiendavad seadistused";
@@ -433,7 +433,7 @@
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "Verifitseerime";
 
 // Contact Page
@@ -458,7 +458,7 @@
 "notifications.newFile" = "Uus fail";
 "notifications.locationSharingStarted" = "Algab teise osapoole asukoha jagamine";
 "notifications.locationSharingStopped" = "Lõppeb teise osapoole asukoha jagamine";
-"dataTransfer.readableStatusRefuse" = "Keeldu";
+"dataTransfer.readableStatusDecline" = "Decline";
 "dataTransfer.readableStatusAccept" = "Võta vastu";
 "dataTransfer.infoMessage" = "Salvestamise alustamiseks vajuta";
 "dataTransfer.sendMessage" = "Saada";

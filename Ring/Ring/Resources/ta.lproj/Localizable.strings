@@ -39,7 +39,7 @@
 "global.preview" = "முன்னோட்ட";
 "global.accept" = "ஏற்றுக்கொள்ளுங்கள்";
 "global.block" = "தொகுதி";
-"global.refuse" = "மறுத்தல்";
+"global.decline" = "குறைவு";
 "global.name" = "பெயர்";
 "global.copy" = "பதிப்பு";
 "global.reply" = "பதில்";
@@ -57,7 +57,7 @@
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "கடவுச்சொல்லை உறுதிப்படுத்தவும்";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 
 // Scan
 "scan.badQrCode" = "கெட்ட QR குறியீடு";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "கொடியை புறக்கணிக்கவும்";
 "swarm.leaveConversation" = "உரையாடலை விட்டுவிடுங்கள்";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "வகையான கும்பல்";
+"swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "அடையாளங்காட்டி";
 "swarm.about" = "பற்றி";
 "swarm.members" = "உறுப்பினர்";
@@ -83,14 +83,14 @@
 "swarm.member" = "உறுப்பினர்";
 "swarm.invited" = "அழைக்கப்பட்டவர்";
 "swarm.admin" = "நிர்வாகி";
-"swarm.banned" = "தடை செய்யப்பட்டது";
+"swarm.blocked" = "Blocked";
 "swarm.unknown" = "அறியப்படாதது";
-"swarm.addMember" = "உறுப்பினர் சேர்க்கவும்";
+"swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveSwarm" = "நீங்கள் இந்த குளத்தில் இருந்து வெளியேற வேண்டும் என்று உறுதியாக இருக்கிறீர்களா?";
 "swarm.Leave" = "வெளியேறு";
 "swarm.newSwarm" = "New swarm";
 "swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
 "swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
@@ -132,7 +132,7 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "நீங்கள் தற்போது உங்கள் இருப்பிடத்தை பகிர்ந்துகொள்கிறீர்கள் ";
 "conversation.explanationReceivingLocationFrom" = "நீங்கள் தற்போது ல் இருந்து ஒரு நேரடி இருப்பிடத்தை பெறுகிறீர்கள்";
-"conversation.errorSavingImage" = "Failed to save image to gallery";
+"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "ஒரு உரையாடல் கோரிக்கை அனுப்பிய.";
 "conversation.requestMessage" = "வணக்கம், நீங்கள் உரையாடலில் சேர விரும்புகிறீர்களா?";
@@ -150,8 +150,8 @@
 "invitations.noInvitations" = "அழைப்பிதழ்கள் இல்லை";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.declined" = "declined";
+"invitations.blocked" = "blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -163,7 +163,7 @@
 "welcome.linkDevice" = "மற்றொரு சாதனத்திலிருந்து இறக்குமதி";
 "welcome.linkBackup" = "காப்புரிமை காப்புரிமை இருந்து இறக்குமதி";
 "welcome.createAccount" = "Join";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "தப்பி";
@@ -172,7 +172,7 @@
 "createProfile.enterNameLabel" = "காட்சி பெயர் உள்ளிடவும்";
 "createProfile.enterNamePlaceholder" = "பெயர் உள்ளிடவும்";
 "createProfile.subtitle" = "உங்கள் சுயவிவரம் உங்கள் தொடர்புகளுடன் பகிரப்படும். நீங்கள் எந்த நேரத்திலும் அதை மாற்றலாம்.";
-"createProfile.createYourAvatar" = "உங்கள் அவதாரத்தை உருவாக்கவும்";
+"createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "ஜாமிக்கு சேரவும்";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "நெட்வொர்க் தவறு";
 "createAccount.UsernameNotRegisteredMessage" = "கணக்கு உருவாக்கப்பட்டது ஆனால் பயனர் பெயர் பதிவு செய்யப்படவில்லை";
 "createAccount.timeoutTitle" = "கணக்கு உருவாக்கப்பட்டது";
-"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
+"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
 "createAccount.sipConfigure" = "ஏற்கனவே உள்ள SIP கணக்கை உள்ளமைத்தல்";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "ஜாமி மீது உங்களை எளிதாகக் கண்டுபிடித்து அடைய உதவும் பயனர் பெயரை நீங்கள் தேர்வு செய்யலாம்.";
@@ -194,40 +194,40 @@
 "createAccount.encrypt" = "குறியாக்கம்";
 "createAccount.customize" = "தனிப்பயனாக்க";
 "createAccount.encryptTitle" = "கடவுச்சொல் கொண்ட கணக்கை குறியாக்கம் செய்யவும்";
-"createAccount.encryptExplanation" = "இந்த சாதனத்தில் மட்டுமே ஒரு ஜாமி கணக்கு உருவாக்கப்பட்டு சேமிக்கப்படுகிறது, உங்கள் கணக்கு விசைகளைக் கொண்ட ஒரு காப்பகமாக. இந்த காப்பகத்திற்கான அணுகலை விருப்பமாக கடவுச்சொல் மூலம் பாதுகாக்கலாம்.";
+"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "கணக்கு இணைப்பு";
 "linkToAccount.linkButtonTitle" = "இணைப்பு";
 "linkToAccount.linkDeviceTitle" = "இணைப்பு சாதனம்";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.pinLabel" = "PIN ஐ உள்ளிடவும்";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
+"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
+"linkToAccount.pinPlaceholder" = "PIN code";
+"linkToAccount.pinLabel" = "Enter PIN code";
 "linkToAccount.scanQRCode" = "QR குறியீட்டை ஸ்கேன் செய்யவும்";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.passwordExplanation" = "கணக்கு ஒரு கடவுச்சொல்லுடன் குறியாக்கம் செய்யப்பட்டிருந்தால், பின்வரும் புலத்தை நிரப்பவும்.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "இறக்குமதி";
 "importFromArchive.selectArchiveButton" = "காப்பக கோப்புகளைத் தேர்ந்தெடுக்கவும்";
 
-// Link To Account Manager form
+// Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "பதிவு செய்யவும்";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL ஐ உள்ளிடவும்";
-"linkToAccountManager.jamsExplanation" = "Jami கணக்கு மேலாண்மை சேவையக (JAMS) URL ஐ உள்ளிடவும்";
+"linkToAccountManager.jamsExplanation" = "Enter Jami Account Management Server (JAMS) URL";
 "linkToAccountManager.enterCredentials" = "JAMS சான்றிதழ்களை உள்ளிடவும்";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
-"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkTitle" = "நெட்வொர்க் தவறு";
+"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "புகைப்படம் எடு";
@@ -244,9 +244,9 @@
 "alerts.noMediaPermissionsTitle" = "ஊடக அனுமதி வழங்கப்படவில்லை";
 "alerts.noLibraryPermissionsTitle" = "புகைப்பட நூலகத்திற்கு அணுகல் வழங்கப்படவில்லை";
 "alerts.noLocationPermissionsTitle" = "இடத்திற்கு அணுகல் வழங்கப்படவில்லை";
-"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "வீடியோ செய்தியை பதிவு செய்யவும்";
-"alerts.recordAudioMessage" = "ஒரு ஆடியோ செய்தியை பதிவு செய்யவும்";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
+"alerts.recordVideoMessage" = "Record video message";
+"alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "கோப்பை அனுப்பு";
 "alerts.uploadPhoto" = "திறந்த கேலரி";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
@@ -360,21 +360,21 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "கணக்கை நிர்வகிக்கவும்";
 "accountPage.encryptAccount" = "கடவுச்சொல்லுடன் கணக்கை குறியாக்கம் செய்யவும்";
-"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "கடவுச்சொற்கள் பொருந்தாது";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "இணைக்கப்பட்ட சாதனங்கள்";
 "accountPage.unlink" = "Unlink";
-"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
-"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
+"accountPage.pinError" = "Failed to generate PIN code";
 "accountPage.notificationTitle" = "அறிவிப்புகள்";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "அறியப்படாத தொடர்புகளிலிருந்து வரும் அழைப்புகளை அனுமதிக்கவும்";
-"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
+"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
+"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
@@ -403,13 +403,13 @@
 "backupAccount.exportSuccess" = "Backup created";
 "backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.errorFailed" = "An error occurred while exporting the account.";
 
 // Account
 "account.sipServer" = "சேவையகம்";
 "account.port" = "துறைமுகம்";
 "account.proxyServer" = "பிரதிநிதி";
-"account.createSipAccount" = "Configure a SIP Account";
+"account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "SIP Account";
 "account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
@@ -433,7 +433,7 @@
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "சரிபார்ப்பு";
 
 // Contact Page
@@ -458,7 +458,7 @@
 "notifications.newFile" = "புதிய கோப்பு";
 "notifications.locationSharingStarted" = "வருகை தரும் இட பகிர்வு தொடங்கியது";
 "notifications.locationSharingStopped" = "வருகை தரும் இடம் பகிர்வு நிறுத்தப்பட்டது";
-"dataTransfer.readableStatusRefuse" = "மறுத்தல்";
+"dataTransfer.readableStatusDecline" = "குறைவு";
 "dataTransfer.readableStatusAccept" = "ஏற்றுக்கொள்ளுங்கள்";
 "dataTransfer.infoMessage" = "பதிவு செய்ய துவக்க அழுத்தவும்";
 "dataTransfer.sendMessage" = "அனுப்பு";

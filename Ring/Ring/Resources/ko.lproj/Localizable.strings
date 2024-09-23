@@ -39,7 +39,7 @@
 "global.preview" = "미리보기";
 "global.accept" = "수락";
 "global.block" = "블록";
-"global.refuse" = "거절";
+"global.decline" = "감소";
 "global.name" = "이름";
 "global.copy" = "복사하기";
 "global.reply" = "답변";
@@ -57,7 +57,7 @@
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "암호 확인";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 
 // Scan
 "scan.badQrCode" = "나쁜 QR 코드";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "무리를 무시해";
 "swarm.leaveConversation" = "대화는 그만둬";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "무리의 종류";
+"swarm.typeOfSwarm" = "유형";
 "swarm.identifier" = "식별자";
 "swarm.about" = "에 관한 것";
 "swarm.members" = "의원";
@@ -83,14 +83,14 @@
 "swarm.member" = "회원";
 "swarm.invited" = "초대받았어";
 "swarm.admin" = "관리자";
-"swarm.banned" = "금지";
+"swarm.blocked" = "Blocked";
 "swarm.unknown" = "알 수 없는";
-"swarm.addMember" = "회원 추가";
+"swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveSwarm" = "이 무리를 떠나고 싶다는 확신이 있나?";
 "swarm.Leave" = "떠나";
 "swarm.newSwarm" = "New swarm";
 "swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
 "swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
@@ -132,7 +132,7 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "현재 위치와 공유하고 있습니다.";
 "conversation.explanationReceivingLocationFrom" = "현재 ";
-"conversation.errorSavingImage" = "Failed to save image to gallery";
+"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "대화 요청을 보냈어요";
 "conversation.requestMessage" = "안녕하세요, 대화에 참여하고 싶으세요?";
@@ -150,8 +150,8 @@
 "invitations.noInvitations" = "초대도 없습니다";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.declined" = "declined";
+"invitations.blocked" = "blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -163,7 +163,7 @@
 "welcome.linkDevice" = "다른 장치에서 수입";
 "welcome.linkBackup" = "파일 백업에서 가져온";
 "welcome.createAccount" = "Join";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "스피프";
@@ -172,7 +172,7 @@
 "createProfile.enterNameLabel" = "표시 이름을 입력";
 "createProfile.enterNamePlaceholder" = "이름 입력";
 "createProfile.subtitle" = "귀하의 프로필은 연락처와 공유됩니다. 언제든지 변경할 수 있습니다.";
-"createProfile.createYourAvatar" = "아바타를 만들";
+"createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "자미에 합류해";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "네트워크 오류";
 "createAccount.UsernameNotRegisteredMessage" = "계정 생성, 사용자 이름 등록되지 않았습니다";
 "createAccount.timeoutTitle" = "계정 생성";
-"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
+"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
 "createAccount.sipConfigure" = "기존 SIP 계정을 구성";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "다른 사람들이 더 쉽게 Jami에서 당신을 찾아서 연락할 수 있도록 사용자 이름을 선택할 수 있습니다.";
@@ -194,40 +194,40 @@
 "createAccount.encrypt" = "암호화";
 "createAccount.customize" = "사용자 정의";
 "createAccount.encryptTitle" = "비밀번호로 계정을 암호화";
-"createAccount.encryptExplanation" = "자미 계정은 이 장치에서만 로컬로 생성되고 저장됩니다. 계정 키를 포함하는 아카이브로. 이 아카이브에 대한 액세스에는 비밀번호가 선택적으로 보호될 수 있습니다.";
+"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "계좌 연결";
 "linkToAccount.linkButtonTitle" = "연결";
 "linkToAccount.linkDeviceTitle" = "연결 장치";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.pinLabel" = "PIN를 입력";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
+"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
+"linkToAccount.pinPlaceholder" = "PIN code";
+"linkToAccount.pinLabel" = "Enter PIN code";
 "linkToAccount.scanQRCode" = "QR 코드를 스캔";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.passwordExplanation" = "계정 암호가 있는 경우 다음 필드를 작성하시기 바랍니다.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "가져오기";
 "importFromArchive.selectArchiveButton" = "파일 파일 선택";
 
-// Link To Account Manager form
+// Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "로그인";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL를 입력";
-"linkToAccountManager.jamsExplanation" = "Jami 계정 관리 서버 (JAMS) URL를 입력하세요";
+"linkToAccountManager.jamsExplanation" = "Enter Jami Account Management Server (JAMS) URL";
 "linkToAccountManager.enterCredentials" = "JAMS 자격증 입력";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
-"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkTitle" = "네트워크 오류";
+"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "사진 찍기";
@@ -244,9 +244,9 @@
 "alerts.noMediaPermissionsTitle" = "언론 허가 받지 않은";
 "alerts.noLibraryPermissionsTitle" = "사진 라이브러리에 대한 접근 권한이 부여되지 않았습니다";
 "alerts.noLocationPermissionsTitle" = "장소 접근은 허용되지 않습니다";
-"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "비디오 메시지를 녹음";
-"alerts.recordAudioMessage" = "오디오 메시지를 녹음";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
+"alerts.recordVideoMessage" = "Record video message";
+"alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "파일 보내기";
 "alerts.uploadPhoto" = "개장 갤러리";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
@@ -332,7 +332,7 @@
 "accountPage.currentPasswordPlaceholder" = "현재 비밀번호를 입력";
 "accountPage.newPasswordPlaceholder" = "새로운 비밀번호를 입력";
 "accountPage.newPasswordConfirmPlaceholder" = "새로운 비밀번호를 확인";
-"accountPage.changePasswordError" = "비밀번호 잘못";
+"accountPage.changePasswordError" = "잘못된 비밀번호";
 "accountPage.enableBoothMode" = "부스 모드를 활성화";
 "accountPage.disableBoothMode" = "부스 모드를 비활성화";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
@@ -360,21 +360,21 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "계정을 관리";
 "accountPage.encryptAccount" = "비밀번호로 계정을 암호화";
-"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "비밀번호가 일치하지 않습니다";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "연결된 장치";
 "accountPage.unlink" = "Unlink";
-"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
-"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
+"accountPage.pinError" = "Failed to generate PIN code";
 "accountPage.notificationTitle" = "통지";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "알려지지 않은 연락처에서 수신 전화를 허용";
-"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
+"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
+"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
@@ -403,13 +403,13 @@
 "backupAccount.exportSuccess" = "Backup created";
 "backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.errorFailed" = "An error occurred while exporting the account.";
 
 // Account
 "account.sipServer" = "서버";
 "account.port" = "포트";
 "account.proxyServer" = "프록시";
-"account.createSipAccount" = "Configure a SIP Account";
+"account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "SIP Account";
 "account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
@@ -433,7 +433,7 @@
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "확인";
 
 // Contact Page
@@ -458,7 +458,7 @@
 "notifications.newFile" = "새로운 파일";
 "notifications.locationSharingStarted" = "입국 위치 공유가 시작되었습니다";
 "notifications.locationSharingStopped" = "유입 위치 공유가 중단";
-"dataTransfer.readableStatusRefuse" = "거절";
+"dataTransfer.readableStatusDecline" = "감소";
 "dataTransfer.readableStatusAccept" = "수락";
 "dataTransfer.infoMessage" = "녹음을 시작하기 위해 누르세요";
 "dataTransfer.sendMessage" = "보내";

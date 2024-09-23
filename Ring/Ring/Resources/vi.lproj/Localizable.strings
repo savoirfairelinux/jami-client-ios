@@ -39,7 +39,7 @@
 "global.preview" = "Xem trước";
 "global.accept" = "Chấp nhận";
 "global.block" = "Blok";
-"global.refuse" = "Nhận không";
+"global.decline" = "Sự suy giảm";
 "global.name" = "Tên";
 "global.copy" = "Tải";
 "global.reply" = "Trả lời";
@@ -57,7 +57,7 @@
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "Tiếp tục xác nhận mật khẩu";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 
 // Scan
 "scan.badQrCode" = "Mã QR xấu";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "Đừng quan tâm đến đám đông";
 "swarm.leaveConversation" = "Để lại cuộc trò chuyện";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Loại tổ";
+"swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Định dạng";
 "swarm.about" = "Thông tin phần mềm";
 "swarm.members" = "Các thành viên";
@@ -83,14 +83,14 @@
 "swarm.member" = "Thành viên";
 "swarm.invited" = "Được mời";
 "swarm.admin" = "Trình quản lý";
-"swarm.banned" = "Thiết bị cấm";
+"swarm.blocked" = "Blocked";
 "swarm.unknown" = "Không biết";
-"swarm.addMember" = "Thêm thành viên";
+"swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveSwarm" = "Em có chắc em muốn rời khỏi đám đông này không?";
 "swarm.Leave" = "Đi đi";
 "swarm.newSwarm" = "New swarm";
 "swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
 "swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
@@ -132,7 +132,7 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Bạn đang chia sẻ vị trí của mình với ";
 "conversation.explanationReceivingLocationFrom" = "Bạn đang nhận được một địa điểm trực tiếp từ ";
-"conversation.errorSavingImage" = "Failed to save image to gallery";
+"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Tôi đã gửi cho anh một yêu cầu để nói chuyện.";
 "conversation.requestMessage" = "Chào, anh có muốn tham gia cuộc trò chuyện không?";
@@ -150,8 +150,8 @@
 "invitations.noInvitations" = "Không có lời mời";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.declined" = "declined";
+"invitations.blocked" = "blocked";
 "invitations.list" = "Lời mời nhận được";
 
 // Walkthrough
@@ -163,7 +163,7 @@
 "welcome.linkDevice" = "Nhập khẩu từ thiết bị khác";
 "welcome.linkBackup" = "Nhập từ sao lưu lưu lưu";
 "welcome.createAccount" = "Join";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Tháo";
@@ -172,7 +172,7 @@
 "createProfile.enterNameLabel" = "Nhập tên hiển thị";
 "createProfile.enterNamePlaceholder" = "Nhập tên";
 "createProfile.subtitle" = "Profile của bạn sẽ được chia sẻ với các liên lạc của bạn. Bạn có thể thay đổi nó bất cứ lúc nào.";
-"createProfile.createYourAvatar" = "Tạo avatar của bạn";
+"createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Tham gia Jami";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Hầm mạng";
 "createAccount.UsernameNotRegisteredMessage" = "Tài khoản đã được tạo nhưng tên người dùng đã không được đăng ký";
 "createAccount.timeoutTitle" = "Tài khoản được tạo ra";
-"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
+"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
 "createAccount.sipConfigure" = "Thiết lập tài khoản SIP hiện có";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Bạn có thể chọn một tên người dùng để giúp người khác dễ dàng tìm và tiếp cận bạn trên Jami.";
@@ -194,40 +194,40 @@
 "createAccount.encrypt" = "Mã hóa";
 "createAccount.customize" = "Cải tạo";
 "createAccount.encryptTitle" = "Mã hóa tài khoản với mật khẩu";
-"createAccount.encryptExplanation" = "Một tài khoản Jami được tạo và lưu trữ tại địa phương chỉ trên thiết bị này, như một lưu trữ chứa chìa khóa tài khoản của bạn.";
+"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kết nối tài khoản";
 "linkToAccount.linkButtonTitle" = "Liên kết";
 "linkToAccount.linkDeviceTitle" = "Thiết bị liên kết";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
-"linkToAccount.pinPlaceholder" = "GHIM";
-"linkToAccount.pinLabel" = "Nhập PIN";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
+"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
+"linkToAccount.pinPlaceholder" = "PIN code";
+"linkToAccount.pinLabel" = "Enter PIN code";
 "linkToAccount.scanQRCode" = "Quét mã QR";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.passwordExplanation" = "Nếu tài khoản được mã hóa bằng mật khẩu, vui lòng điền vào trường sau đây.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Nhập khẩu";
 "importFromArchive.selectArchiveButton" = "Chọn tệp lưu trữ";
 
-// Link To Account Manager form
+// Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Đăng nhập";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Nhập URL JAMS";
-"linkToAccountManager.jamsExplanation" = "Nhập URL máy chủ quản lý tài khoản Jami (JAMS)";
+"linkToAccountManager.jamsExplanation" = "Enter Jami Account Management Server (JAMS) URL";
 "linkToAccountManager.enterCredentials" = "Nhập thông tin xác thực JAMS";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
-"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkTitle" = "Hầm mạng";
+"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Tạo ảnh";
@@ -244,9 +244,9 @@
 "alerts.noMediaPermissionsTitle" = "Phán phép truyền thông không được cấp";
 "alerts.noLibraryPermissionsTitle" = "Phiên bản truy cập thư viện ảnh không được cấp";
 "alerts.noLocationPermissionsTitle" = "Phiên bản không được cấp";
-"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Tải một tin nhắn video";
-"alerts.recordAudioMessage" = "Tải một tin nhắn âm thanh";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
+"alerts.recordVideoMessage" = "Record video message";
+"alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "Gửi tập tin";
 "alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
@@ -332,7 +332,7 @@
 "accountPage.currentPasswordPlaceholder" = "Nhập mật khẩu hiện tại";
 "accountPage.newPasswordPlaceholder" = "Nhập mật khẩu mới";
 "accountPage.newPasswordConfirmPlaceholder" = "Xác nhận mật khẩu mới";
-"accountPage.changePasswordError" = "Mật khẩu không chính xác";
+"accountPage.changePasswordError" = "Mật khẩu không đúng";
 "accountPage.enableBoothMode" = "Khả năng chế độ Booth";
 "accountPage.disableBoothMode" = "Thiết lập chế độ Booth";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
@@ -360,21 +360,21 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Quản lý tài khoản";
 "accountPage.encryptAccount" = "Mã hóa tài khoản với mật khẩu";
-"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Mật khẩu không phù hợp";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Các thiết bị liên kết";
 "accountPage.unlink" = "Unlink";
-"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
-"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
+"accountPage.pinError" = "Failed to generate PIN code";
 "accountPage.notificationTitle" = "Thông báo";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Cho phép cuộc gọi đến từ các liên lạc không rõ";
-"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
+"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
+"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
@@ -403,13 +403,13 @@
 "backupAccount.exportSuccess" = "Backup created";
 "backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.errorFailed" = "An error occurred while exporting the account.";
 
 // Account
 "account.sipServer" = "Server";
 "account.port" = "Cảng";
 "account.proxyServer" = "Tín hiệu";
-"account.createSipAccount" = "Configure a SIP Account";
+"account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "SIP Account";
 "account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
@@ -433,7 +433,7 @@
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "Kiểm tra";
 
 // Contact Page
@@ -458,7 +458,7 @@
 "notifications.newFile" = "Dữ liệu mới";
 "notifications.locationSharingStarted" = "Việc chia sẻ địa điểm tiếp theo bắt đầu";
 "notifications.locationSharingStopped" = "Chia sẻ địa điểm tiếp nhận đã dừng lại";
-"dataTransfer.readableStatusRefuse" = "Nhận không";
+"dataTransfer.readableStatusDecline" = "Sự suy giảm";
 "dataTransfer.readableStatusAccept" = "Chấp nhận";
 "dataTransfer.infoMessage" = "Bấm để bắt đầu ghi";
 "dataTransfer.sendMessage" = "Gửi đi";

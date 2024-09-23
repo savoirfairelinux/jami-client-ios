@@ -39,7 +39,7 @@
 "global.preview" = "Vista previa";
 "global.accept" = "Aceptar";
 "global.block" = "Bloquear";
-"global.refuse" = "Rexeitar";
+"global.decline" = "Rexeitar";
 "global.name" = "Nome";
 "global.copy" = "Copiar";
 "global.reply" = "Responder";
@@ -57,7 +57,7 @@
 "global.time" = "Time";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "Confirmar contrasinal";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 
 // Scan
 "scan.badQrCode" = "Mal código QR";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "Ignora o enjambre";
 "swarm.leaveConversation" = "Deixar a conversa";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Tipo de enjambre";
+"swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Identificador";
 "swarm.about" = "Acerca de";
 "swarm.members" = "Membresía";
@@ -83,14 +83,14 @@
 "swarm.member" = "Membro";
 "swarm.invited" = "Convocado";
 "swarm.admin" = "Administración";
-"swarm.banned" = "Prohibido";
+"swarm.blocked" = "Blocked";
 "swarm.unknown" = "Descoñecido";
-"swarm.addMember" = "Adición de membro";
+"swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveSwarm" = "Estás seguro de que queres deixar este enjambre?";
 "swarm.Leave" = "Deixar";
 "swarm.newSwarm" = "Novo enxamio";
 "swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
 "swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
@@ -132,7 +132,7 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Actualmente está compartiendo a súa localización con ";
 "conversation.explanationReceivingLocationFrom" = "Actualmente está a recibir unha localización en directo de ";
-"conversation.errorSavingImage" = "Non se gardou a imaxe na galería";
+"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
 "conversation.receivedRequest" = "%@ enviouche unha solicitude para conversar.";
 "conversation.incomingRequest" = "Envíoche unha solicitude para unha conversa.";
 "conversation.requestMessage" = "Ola, queres unirte á conversa?";
@@ -150,8 +150,8 @@
 "invitations.noInvitations" = "Non hai invitacións";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.declined" = "declined";
+"invitations.blocked" = "blocked";
 "invitations.list" = "Convites recibidos";
 
 // Walkthrough
@@ -163,7 +163,7 @@
 "welcome.linkDevice" = "Importación a partir de outro dispositivo";
 "welcome.linkBackup" = "Importar desde ficheiro de apoio";
 "welcome.createAccount" = "Únete";
-"welcome.connectToManager" = "Conectar co Servidor de Xestión de Contas Jami";
+"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Saltar";
@@ -172,7 +172,7 @@
 "createProfile.enterNameLabel" = "Introduza un nome de pantalla";
 "createProfile.enterNamePlaceholder" = "Escribir nome";
 "createProfile.subtitle" = "O teu perfil será compartido cos teus contactos.";
-"createProfile.createYourAvatar" = "Crea o teu avatar";
+"createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Unirse a Jami";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Fallo na rede";
 "createAccount.UsernameNotRegisteredMessage" = "Creou conta pero non rexistrou o nome de usuario";
 "createAccount.timeoutTitle" = "Creación de conta";
-"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
+"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
 "createAccount.sipConfigure" = "Configurar unha conta SIP existente";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Podes escoller un nome de usuario para axudar aos demais a atopar e chegar a ti en Jami.";
@@ -194,40 +194,40 @@
 "createAccount.encrypt" = "Encriptación";
 "createAccount.customize" = "Personalizar";
 "createAccount.encryptTitle" = "Cifra a conta cun contrasinal";
-"createAccount.encryptExplanation" = "Unha conta Jami é creada e almacenada localmente só neste dispositivo, como un arquivo que contén as chaves da súa conta.";
+"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Ligando conta";
 "linkToAccount.linkButtonTitle" = "Ligar";
 "linkToAccount.linkDeviceTitle" = "Ligar dispositivo";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.pinLabel" = "Escribe o PIN";
-"linkToAccount.scanQRCode" = "Escanear código QR";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
+"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
+"linkToAccount.pinPlaceholder" = "PIN code";
+"linkToAccount.pinLabel" = "Enter PIN code";
+"linkToAccount.scanQRCode" = "Scan QR code";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Importación";
 "importFromArchive.selectArchiveButton" = "Seleccione arquivo";
 
-// Link To Account Manager form
+// Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Conectar";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL do JAMS";
 "linkToAccountManager.accountManagerLabel" = "Introduce URL JAMS";
-"linkToAccountManager.jamsExplanation" = "Introduza a URL do servidor de xestión de contas Jami (JAMS)";
+"linkToAccountManager.jamsExplanation" = "Escribe o URL do Jami Account Management Server (JAMS)";
 "linkToAccountManager.enterCredentials" = "Introduce credenciais JAMS";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
-"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkTitle" = "Network error";
+"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Tomar foto";
@@ -244,9 +244,9 @@
 "alerts.noMediaPermissionsTitle" = "Permiso de medios non concedido";
 "alerts.noLibraryPermissionsTitle" = "Acceso á biblioteca de fotos non concedido";
 "alerts.noLocationPermissionsTitle" = "Acceso á localización non concedido";
-"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Gravar videomensaxe";
-"alerts.recordAudioMessage" = "Gravar mensaxe de audio";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
+"alerts.recordVideoMessage" = "Record video message";
+"alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "Enviar ficheiro";
 "alerts.uploadPhoto" = "Abrir galería";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
@@ -360,21 +360,21 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Xestionar conta";
 "accountPage.encryptAccount" = "Encripta a conta cunha contrasinal";
-"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Non concordan os contrasinais";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Dispositivos ligados";
 "accountPage.unlink" = "Unlink";
-"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
-"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
+"accountPage.pinError" = "Failed to generate PIN code";
 "accountPage.notificationTitle" = "Notificacións";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "Permitir chamadas entrantes de contactos descoñecidos";
-"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
+"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
+"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
@@ -403,13 +403,13 @@
 "backupAccount.exportSuccess" = "Backup created";
 "backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.errorFailed" = "An error occurred while exporting the account.";
 
 // Account
 "account.sipServer" = "Servidor";
 "account.port" = "Porto";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Configurar Conta SIP";
+"account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "Conta SIP";
 "account.configure" = "Configurar";
 "account.advancedFeatures" = "Características Avanzadas";
@@ -433,7 +433,7 @@
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "Verificando";
 
 // Contact Page
@@ -458,7 +458,7 @@
 "notifications.newFile" = "Novo ficheiro";
 "notifications.locationSharingStarted" = "Comezou a partilla de localización";
 "notifications.locationSharingStopped" = "Partillo de localización de entrada interrompido";
-"dataTransfer.readableStatusRefuse" = "Rexeitar";
+"dataTransfer.readableStatusDecline" = "Decline";
 "dataTransfer.readableStatusAccept" = "Aceptar";
 "dataTransfer.infoMessage" = "Preme para comezar a gravar";
 "dataTransfer.sendMessage" = "Enviar";

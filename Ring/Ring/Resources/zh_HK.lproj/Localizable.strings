@@ -39,7 +39,7 @@
 "global.preview" = "預覽";
 "global.accept" = "接受";
 "global.block" = "屏蔽";
-"global.refuse" = "拒接";
+"global.decline" = "拒接";
 "global.name" = "姓名";
 "global.copy" = "複製";
 "global.reply" = "回复";
@@ -57,7 +57,7 @@
 "global.time" = "时间";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "确认密码";
-"global.cameraDisabled" = "Camera access is disabled. Please enable it in settings.";
+"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 
 // Scan
 "scan.badQrCode" = "无效的二维码";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "忽略群聊";
 "swarm.leaveConversation" = "离开谈话";
 "swarm.chooseColor" = "色彩";
-"swarm.typeOfSwarm" = "群聊类型";
+"swarm.typeOfSwarm" = "类别";
 "swarm.identifier" = "标识符";
 "swarm.about" = "關於";
 "swarm.members" = "成员";
@@ -83,14 +83,14 @@
 "swarm.member" = "成员";
 "swarm.invited" = "已邀请";
 "swarm.admin" = "管理员";
-"swarm.banned" = "已屏蔽";
+"swarm.blocked" = "Blocked";
 "swarm.unknown" = "未知";
-"swarm.addMember" = "加入成员";
+"swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveSwarm" = "你确定你想离开这个群体吗?";
 "swarm.Leave" = "离开";
 "swarm.newSwarm" = "New swarm";
 "swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
 "swarm.customizeProfile" = "Customize swarm profile";
 "swarm.changePicture" = "Change swarm picture";
 "swarm.customize" = "Customize swarm";
@@ -132,7 +132,7 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
-"conversation.errorSavingImage" = "Failed to save image to gallery";
+"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "发给你一个谈话请求.";
 "conversation.requestMessage" = "您好，\n您想要加入会话吗？";
@@ -150,8 +150,8 @@
 "invitations.noInvitations" = "沒有邀請";
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.declined" = "declined";
+"invitations.blocked" = "blocked";
 "invitations.list" = "邀请已发送";
 
 // Walkthrough
@@ -163,7 +163,7 @@
 "welcome.linkDevice" = "從其他裝置匯入";
 "welcome.linkBackup" = "从归档备份中导入";
 "welcome.createAccount" = "加入";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "跳过";
@@ -172,7 +172,7 @@
 "createProfile.enterNameLabel" = "选择一个显示名";
 "createProfile.enterNamePlaceholder" = "输入名称";
 "createProfile.subtitle" = "您的资料会分享给您的联系人。您可随时修改。";
-"createProfile.createYourAvatar" = "创建您的头像";
+"createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "加入 Jami";
@@ -185,7 +185,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "网络错误";
 "createAccount.UsernameNotRegisteredMessage" = "账户已创建，但用户名未注册";
 "createAccount.timeoutTitle" = "已建立帳號";
-"createAccount.timeoutMessage" = "Username registration in progress… It could take a few moments.";
+"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
 "createAccount.sipConfigure" = "設定既有的 SIP 帳號";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "您可以选择一个用户名,以帮助其他人更容易地找到和联系您在Jami.";
@@ -194,40 +194,40 @@
 "createAccount.encrypt" = "加密";
 "createAccount.customize" = "自定义";
 "createAccount.encryptTitle" = "用密码加密账户";
-"createAccount.encryptExplanation" = "简单地说,一个Jami帐户只在本设备上创建和存储,作为包含您的帐户密钥的档案库.";
+"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "关联账户";
 "linkToAccount.linkButtonTitle" = "关联";
 "linkToAccount.linkDeviceTitle" = "关联设备";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from the other Jami app to show the QR code or PIN";
-"linkToAccount.explanationMessage" = "A PIN is required to use an existing Jami account on this device";
-"linkToAccount.pinPlaceholder" = "PIN 碼";
-"linkToAccount.pinLabel" = "输入 PIN";
-"linkToAccount.scanQRCode" = "扫描二维码";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
+"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
+"linkToAccount.pinPlaceholder" = "PIN code";
+"linkToAccount.pinLabel" = "Enter PIN code";
+"linkToAccount.scanQRCode" = "扫描 QR 码";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please enter it below.";
+"importFromArchive.passwordExplanation" = "如果帐户使用密码加密,请填写下面的字段.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "倒入";
 "importFromArchive.selectArchiveButton" = "选择归档文件";
 
-// Link To Account Manager form
+// Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "注册";
-"linkToAccountManager.title" = "JAMS Account";
+"linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "输入 JAMS URL";
-"linkToAccountManager.jamsExplanation" = "输入 Jami 帐号管理服务器（JAMS）的 URL";
+"linkToAccountManager.jamsExplanation" = "輸入 Jami 帳號管理伺服器 (JAMS) URL。";
 "linkToAccountManager.enterCredentials" = "输入 JAMS 凭据";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Unable to find account";
+"alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Unable to connect to the network";
-"alerts.accountNoNetworkMessage" = "An error occurred while adding Jami account as unable to connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkTitle" = "网络错误";
+"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "创建帐户时出错";
 "alerts.profileTakePhoto" = "照相";
@@ -244,9 +244,9 @@
 "alerts.noMediaPermissionsTitle" = "未授予媒体权限";
 "alerts.noLibraryPermissionsTitle" = "未授予照片库访问权限";
 "alerts.noLocationPermissionsTitle" = "未授予访问位置权限";
-"alerts.errorWrongCredentials" = "Unable to connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "录制视频信息";
-"alerts.recordAudioMessage" = "录制语音信息";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
+"alerts.recordVideoMessage" = "Record video message";
+"alerts.recordAudioMessage" = "录制音频消息";
 "alerts.uploadFile" = "傳送檔案";
 "alerts.uploadPhoto" = "開啟相簿";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
@@ -360,21 +360,21 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "管理账户";
 "accountPage.encryptAccount" = "通过密码加密帐户";
-"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "密码不匹配";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "关联设备";
 "accountPage.unlink" = "Unlink";
-"accountPage.generatingPin" = "Generating PIN…";
+"accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "在其他设备上";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
-"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
+"accountPage.pinError" = "Failed to generate PIN code";
 "accountPage.notificationTitle" = "通知";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Please enable them in your device settings";
-"accountPage.callsFromUnknownContacts" = "允许未知联系人的来电";
-"accountPage.accountSettingsExplanation" = "These settings will only apply for this account";
+"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
+"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
+"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply on all the application";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
@@ -403,13 +403,13 @@
 "backupAccount.exportSuccess" = "Backup created";
 "backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "The export operation failed.";
+"backupAccount.errorFailed" = "An error occurred while exporting the account.";
 
 // Account
 "account.sipServer" = "服务器";
 "account.port" = "埠";
 "account.proxyServer" = "代理服務器";
-"account.createSipAccount" = "Configure a SIP Account";
+"account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "SIP 帳號";
 "account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
@@ -433,7 +433,7 @@
 "linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option “Link this device to an account.” Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "正在驗證";
 
 // Contact Page
@@ -458,7 +458,7 @@
 "notifications.newFile" = "新文件";
 "notifications.locationSharingStarted" = "传入位置分享已开始";
 "notifications.locationSharingStopped" = "传入位置分享已停止";
-"dataTransfer.readableStatusRefuse" = "拒接";
+"dataTransfer.readableStatusDecline" = "拒接";
 "dataTransfer.readableStatusAccept" = "接受";
 "dataTransfer.infoMessage" = "按下开始录音";
 "dataTransfer.sendMessage" = "发送";
