@@ -40,7 +40,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     private var navigationViewController = UINavigationController()
     let injectionBag: InjectionBag
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
     let callService: CallsService
