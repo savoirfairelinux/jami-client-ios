@@ -19,15 +19,15 @@
 import SwiftUI
 
 struct LinkToAccountView: View {
-    let dismissAction: () -> Void
-    let linkAction: (_ pin: String, _ password: String) -> Void
-    @SwiftUI.State private var password: String = ""
-    @SwiftUI.State private var pin: String = ""
-    @SwiftUI.State private var scannedCode: String?
-    @SwiftUI.State private var animatableScanSwitch: Bool = true
-    @SwiftUI.State private var notAnimatableScanSwitch: Bool = true
-
+    @ObservedObject var viewModel: LinkToAccountVM
     @Environment(\.verticalSizeClass) var verticalSizeClass
+
+    init(injectionBag: InjectionBag,
+         linkAction: @escaping (_ pin: String, _ password: String) -> Void) {
+        _viewModel = ObservedObject(wrappedValue:
+                                        LinkToAccountVM(with: injectionBag))
+        viewModel.linkAction = linkAction
+    }
 
     var body: some View {
         VStack {
@@ -85,7 +85,7 @@ struct LinkToAccountView: View {
                 .padding(.horizontal)
             HStack {
                 Text(L10n.LinkToAccount.pinPlaceholder + ":")
-                Text(pin)
+                Text(viewModel.pin)
                     .foregroundColor(Color(UIColor.jamiSuccess))
             }
             .padding()
@@ -94,16 +94,15 @@ struct LinkToAccountView: View {
 
     private var scanQRCodeView: some View {
         ScanQRCodeView(width: 350, height: 280) { pin in
-            self.pin = pin
-            self.scannedCode = pin
+            viewModel.didScanQRCode(pin)
         }
     }
 
     private var pinSection: some View {
         VStack(spacing: 15) {
-            if scannedCode == nil {
+            if viewModel.scannedCode == nil {
                 pinSwitchButtons
-                if animatableScanSwitch {
+                if viewModel.animatableScanSwitch {
                     scanQRCodeView
                 } else {
                     manualEntryPinView
@@ -118,28 +117,22 @@ struct LinkToAccountView: View {
     private var pinSwitchButtons: some View {
         HStack {
             switchButton(text: L10n.LinkToAccount.scanQRCode,
-                         isHeadline: notAnimatableScanSwitch,
-                         isHighlighted: animatableScanSwitch,
+                         isHeadline: viewModel.notAnimatableScanSwitch,
+                         isHighlighted: viewModel.animatableScanSwitch,
                          transitionEdge: .trailing,
                          action: {
-                            notAnimatableScanSwitch = true
-                            withAnimation {
-                                animatableScanSwitch = true
-                            }
-                         })
+                viewModel.switchToQRCode()
+            })
 
             Spacer()
 
             switchButton(text: L10n.LinkToAccount.pinLabel,
-                         isHeadline: !notAnimatableScanSwitch,
-                         isHighlighted: !animatableScanSwitch,
+                         isHeadline: !viewModel.notAnimatableScanSwitch,
+                         isHighlighted: !viewModel.animatableScanSwitch,
                          transitionEdge: .leading,
                          action: {
-                            notAnimatableScanSwitch = false
-                            withAnimation {
-                                animatableScanSwitch = false
-                            }
-                         })
+                viewModel.switchToManualEntry()
+            })
         }
     }
 
@@ -171,7 +164,7 @@ struct LinkToAccountView: View {
     }
 
     private var manualEntryPinView: some View {
-        WalkthroughTextEditView(text: $pin,
+        WalkthroughTextEditView(text: $viewModel.pin,
                                 placeholder: L10n.LinkToAccount.pinLabel)
     }
 
@@ -179,14 +172,14 @@ struct LinkToAccountView: View {
         VStack {
             Text(L10n.ImportFromArchive.passwordExplanation)
                 .multilineTextAlignment(.center)
-            WalkthroughPasswordView(text: $password, placeholder: L10n.Global.password)
+            WalkthroughPasswordView(text: $viewModel.password, placeholder: L10n.Global.password)
         }
         .padding(.vertical)
     }
 
     private var cancelButton: some View {
         Button(action: {
-            dismissAction()
+            viewModel.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
@@ -195,13 +188,11 @@ struct LinkToAccountView: View {
 
     private var linkButton: some View {
         Button(action: {
-            linkAction(pin, password)
+            viewModel.link()
         }, label: {
             Text(L10n.LinkToAccount.linkButtonTitle)
-                .foregroundColor(pin.isEmpty ?
-                                    Color(UIColor.secondaryLabel) :
-                                    .jamiColor)
+                .foregroundColor(viewModel.linkButtonColor)
         })
-        .disabled(pin.isEmpty )
+        .disabled(!viewModel.isLinkButtonEnabled)
     }
 }
