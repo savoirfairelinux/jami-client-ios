@@ -19,14 +19,15 @@
 import SwiftUI
 
 struct SIPConfigurationView: View {
-    let dismissAction: () -> Void
-    let connectAction: (_ username: String,
-                        _ password: String,
-                        _ server: String) -> Void
-    @SwiftUI.State private var username: String = ""
-    @SwiftUI.State private var password: String = ""
-    @SwiftUI.State private var server: String = ""
-    @SwiftUI.State private var isTextFieldFocused = true
+    @ObservedObject var viewModel: ConnectSipVM
+
+    init(injectionBag: InjectionBag,
+         connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
+        _viewModel = ObservedObject(wrappedValue:
+                                        ConnectSipVM(with: injectionBag))
+        viewModel.connectAction = connectAction
+    }
+
     var body: some View {
         VStack {
             header
@@ -61,7 +62,7 @@ struct SIPConfigurationView: View {
 
     private var cancelButton: some View {
         Button(action: {
-            dismissAction()
+            viewModel.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
@@ -70,7 +71,7 @@ struct SIPConfigurationView: View {
 
     private var configureButton: some View {
         Button(action: {
-            connectAction(username, password, server)
+            viewModel.connect()
         }, label: {
             Text(L10n.Account.configure)
                 .foregroundColor(.jamiColor)
@@ -78,18 +79,18 @@ struct SIPConfigurationView: View {
     }
 
     private var usernameView: some View {
-        WalkthroughTextEditView(text: $username,
+        WalkthroughTextEditView(text: $viewModel.username,
                                 placeholder: L10n.Global.username)
     }
 
     private var serverView: some View {
-        WalkthroughFocusableTextView(text: $server,
-                                     isTextFieldFocused: $isTextFieldFocused,
+        WalkthroughFocusableTextView(text: $viewModel.server,
+                                     isTextFieldFocused: $viewModel.isTextFieldFocused,
                                      placeholder: L10n.Account.sipServer)
     }
 
     private var passwordView: some View {
-        WalkthroughPasswordView(text: $password,
+        WalkthroughPasswordView(text: $viewModel.password,
                                 placeholder: L10n.Global.password)
             .padding(.bottom)
     }

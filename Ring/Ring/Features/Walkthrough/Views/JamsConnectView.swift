@@ -19,14 +19,14 @@
 import SwiftUI
 
 struct JamsConnectView: View {
-    let dismissAction: () -> Void
-    let connectAction: (_ username: String,
-                        _ password: String,
-                        _ server: String) -> Void
-    @SwiftUI.State private var username: String = ""
-    @SwiftUI.State private var password: String = ""
-    @SwiftUI.State private var server: String = ""
-    @SwiftUI.State private var isTextFieldFocused = true
+    @ObservedObject var viewModel: ConnectToManagerVM
+
+    init(injectionBag: InjectionBag,
+         connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
+        _viewModel = ObservedObject(wrappedValue:
+                                        ConnectToManagerVM(with: injectionBag))
+        viewModel.connectAction = connectAction
+    }
     var body: some View {
         VStack {
             header
@@ -64,7 +64,7 @@ struct JamsConnectView: View {
 
     private var cancelButton: some View {
         Button(action: {
-            dismissAction()
+            viewModel.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
@@ -73,35 +73,29 @@ struct JamsConnectView: View {
 
     private var signinButton: some View {
         Button(action: {
-            connectAction(username, password, server)
+            viewModel.connect()
         }, label: {
             Text(L10n.LinkToAccountManager.signIn)
-                .foregroundColor(signInDisabled ?
-                                    Color(UIColor.secondaryLabel) :
-                                    .jamiColor)
+                .foregroundColor(viewModel.signInButtonColor)
         })
-        .disabled(signInDisabled)
+        .disabled(viewModel.isSignInDisabled)
     }
 
     private var usernameView: some View {
-        WalkthroughTextEditView(text: $username,
+        WalkthroughTextEditView(text: $viewModel.username,
                                 placeholder: L10n.Global.username)
     }
 
     private var serverView: some View {
         let placeholder = L10n.LinkToAccountManager.accountManagerPlaceholder
-        return WalkthroughFocusableTextView(text: $server,
-                                            isTextFieldFocused: $isTextFieldFocused,
+        return WalkthroughFocusableTextView(text: $viewModel.server,
+                                            isTextFieldFocused: $viewModel.isTextFieldFocused,
                                             placeholder: placeholder)
     }
 
     private var passwordView: some View {
-        WalkthroughPasswordView(text: $password,
+        WalkthroughPasswordView(text: $viewModel.password,
                                 placeholder: L10n.Global.password)
             .padding(.bottom)
-    }
-
-    private var signInDisabled: Bool {
-        username.isEmpty || password.isEmpty || server.isEmpty
     }
 }
