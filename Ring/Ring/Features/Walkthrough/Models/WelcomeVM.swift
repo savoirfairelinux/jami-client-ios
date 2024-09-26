@@ -23,9 +23,10 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class WelcomeViewModel: Stateable, ViewModel, ObservableObject {
+class WelcomeVM: Stateable, ViewModel, ObservableObject {
 
     @Published var creationState: AccountCreationState = .initial
+    @Published var notCancelable = true
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
@@ -39,8 +40,6 @@ class WelcomeViewModel: Stateable, ViewModel, ObservableObject {
     let injectionBag: InjectionBag
 
     let disposeBag = DisposeBag()
-
-    var notCancelable = true
 
     let registrationTimeout: CGFloat = 30
 
@@ -58,6 +57,50 @@ class WelcomeViewModel: Stateable, ViewModel, ObservableObject {
         self.stateSubject.onNext(WalkthroughState.completed)
     }
 
+    func openAccountCreation() {
+        self.stateSubject.onNext(WalkthroughState.accountCreation(createAction: { [weak self] (name, password, profileName, profileImage)  in
+            guard let self = self else { return }
+            self.setProfileInfo(profileName: profileName, profileImage: profileImage)
+            self.createAccount(name: name, password: password)
+        }))
+    }
+
+    func openLinkDevice() {
+        self.stateSubject.onNext(WalkthroughState.linkDevice(linkAction: { [weak self] pin, password in
+            guard let self = self else { return }
+            self.linkDevice(pin: pin, password: password)
+        }))
+    }
+
+    func openImportArchive() {
+        self.stateSubject.onNext(WalkthroughState.importArchive(importAction: { [weak self] url, password in
+            guard let self = self else { return }
+            self.importFromArchive(path: url, password: password)
+        }))
+    }
+
+    func openJAMS() {
+        self.stateSubject.onNext(WalkthroughState.connectJAMS(connectAction: { [weak self] username, password, server in
+            guard let self = self else { return }
+            self.connectToAccountManager(userName: username,
+                                         password: password,
+                                         server: server)
+        }))
+    }
+
+    func openAboutJami() {
+        self.stateSubject.onNext(WalkthroughState.aboutJami)
+    }
+
+    func openSIP() {
+        self.stateSubject.onNext(WalkthroughState.connectSIP(connectAction: { [weak self] username, password, server in
+            guard let self = self else { return }
+            self.createSipAccount(userName: username,
+                                  password: password,
+                                  server: server)
+        }))
+    }
+
     func setProfileInfo(profileName: String, profileImage: UIImage?) {
         self.profileName = profileName
         self.profileImage = profileImage
@@ -65,7 +108,7 @@ class WelcomeViewModel: Stateable, ViewModel, ObservableObject {
 }
 
 // MARK: - Create account
-extension WelcomeViewModel {
+extension WelcomeVM {
     func createAccount(name: String, password: String) {
         self.creationState = .started
 
@@ -193,7 +236,7 @@ extension WelcomeViewModel {
 }
 
 // MARK: - link account
-extension WelcomeViewModel {
+extension WelcomeVM {
     func linkDevice(pin: String, password: String) {
         self.creationState = .started
         self.accountService
@@ -214,7 +257,7 @@ extension WelcomeViewModel {
 }
 
 // MARK: - import account
-extension WelcomeViewModel {
+extension WelcomeVM {
     func importFromArchive(path: URL, password: String) {
         guard path.startAccessingSecurityScopedResource() else {
             self.setState(state: .error(error: .unknown))
@@ -262,7 +305,7 @@ extension WelcomeViewModel {
 }
 
 // MARK: - connect to account manager
-extension WelcomeViewModel {
+extension WelcomeVM {
     func connectToAccountManager(userName: String,
                                  password: String,
                                  server: String) {
@@ -283,7 +326,7 @@ extension WelcomeViewModel {
 }
 
 // MARK: - configure SIP account
-extension WelcomeViewModel {
+extension WelcomeVM {
     func createSipAccount(userName: String,
                           password: String,
                           server: String) {

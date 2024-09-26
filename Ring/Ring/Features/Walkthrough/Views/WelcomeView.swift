@@ -18,24 +18,15 @@
 
 import SwiftUI
 
-enum ActiveView: Identifiable {
-    case jamiAccount
-    case linkDevice
-    case fromArchive
-    case jamsAccount
-    case sipAccount
-    case aboutJami
-
-    var id: Int {
-        hashValue
-    }
-}
-
 struct WelcomeView: View {
-    @ObservedObject var model: WelcomeViewModel
+    @ObservedObject var viewModel: WelcomeVM
     @SwiftUI.State var showImportOptions = false
     @SwiftUI.State var showAdvancedOptions = false
-    @SwiftUI.State var activeView: ActiveView?
+
+    init(injectionBag: InjectionBag) {
+        _viewModel = ObservedObject(wrappedValue:
+                                        WelcomeVM(with: injectionBag))
+    }
 
     @Environment(\.verticalSizeClass)
     var verticalSizeClass
@@ -47,11 +38,11 @@ struct WelcomeView: View {
                     if verticalSizeClass == .compact {
                         HorizontalView(showImportOptions: $showImportOptions,
                                        showAdvancedOptions: $showAdvancedOptions,
-                                       activeView: $activeView)
+                                       model: viewModel)
                     } else {
                         PortraitView(showImportOptions: $showImportOptions,
                                      showAdvancedOptions: $showAdvancedOptions,
-                                     activeView: $activeView)
+                                     model: viewModel)
                     }
                 }
                 .padding()
@@ -66,66 +57,11 @@ struct WelcomeView: View {
             .padding()
         }
         .applyJamiBackground()
-        .sheet(item: $activeView) { item in
-            switch item {
-            case .jamiAccount:
-                CreateAccountView(injectionBag: model.injectionBag,
-                                  dismissAction: {
-                                    activeView = nil
-                                  }, createAction: { [weak model] (name, password, profileName, profileImage)  in
-                                    activeView = nil
-                                    guard let model = model else { return }
-                                    model.setProfileInfo(profileName: profileName, profileImage: profileImage)
-                                    model.createAccount(name: name, password: password)
-                                  })
-            case .linkDevice:
-                LinkToAccountView(dismissAction: {
-                    activeView = nil
-                }, linkAction: {[weak model](pin, password) in
-                    activeView = nil
-                    guard let model = model else { return }
-                    model.linkDevice(pin: pin, password: password)
-
-                })
-            case .jamsAccount:
-                JamsConnectView(dismissAction: {
-                    activeView = nil
-                }, connectAction: { [weak model] username, password, server in
-                    activeView = nil
-                    guard let model = model else { return }
-                    model.connectToAccountManager(userName: username,
-                                                  password: password,
-                                                  server: server)
-                })
-            case .sipAccount:
-                SIPConfigurationView(dismissAction: {
-                    activeView = nil
-                }, connectAction: {[weak model] username, password, server in
-                    activeView = nil
-                    guard let model = model else { return }
-                    model.createSipAccount(userName: username,
-                                           password: password,
-                                           server: server)
-                })
-            case .aboutJami:
-                AboutSwiftUIView()
-            case .fromArchive:
-                ImportFromArchiveView(injectionBag: model.injectionBag,
-                                      dismissAction: {
-                                        activeView = nil
-                                      }, createAction: {[weak model] url, password in
-                                        activeView = nil
-                                        guard let model = model else { return }
-                                        model.importFromArchive(path: url, password: password)
-                                      })
-
-            }
-        }
     }
 
     @ViewBuilder
     func alertView() -> some View {
-        switch model.creationState {
+        switch viewModel.creationState {
         case .initial, .unknown, .success:
             EmptyView()
         case .started:
@@ -144,9 +80,9 @@ struct WelcomeView: View {
         CustomAlert(content: { AlertFactory
             .alertWithOkButton(title: error.title,
                                message: error.message,
-                               action: { [weak model] in
-                                guard let model = model else { return }
-                                model.creationState = .initial
+                               action: { [weak viewModel] in
+                                guard let viewModel = viewModel else { return }
+                viewModel.creationState = .initial
                                })
         })
     }
@@ -158,9 +94,9 @@ struct WelcomeView: View {
         CustomAlert(content: { AlertFactory
             .alertWithOkButton(title: title,
                                message: message,
-                               action: {[weak model] in
-                                guard let model = model else { return }
-                                model.finish()
+                               action: {[weak viewModel] in
+                                guard let viewModel = viewModel else { return }
+                viewModel.finish()
                                })
         })
     }
@@ -172,9 +108,9 @@ struct WelcomeView: View {
         CustomAlert(content: { AlertFactory
             .alertWithOkButton(title: title,
                                message: message,
-                               action: {[weak model] in
-                                guard let model = model else { return }
-                                model.finish()
+                               action: {[weak viewModel] in
+                                guard let viewModel = viewModel else { return }
+                viewModel.finish()
                                })
         })
     }
@@ -186,12 +122,12 @@ struct WelcomeView: View {
 
     @ViewBuilder
     func cancelButton() -> some View {
-        if model.notCancelable {
+        if viewModel.notCancelable {
             EmptyView()
         } else {
-            Button(action: { [weak model] in
-                guard let model = model else { return }
-                model.finish()
+            Button(action: { [weak viewModel] in
+                guard let viewModel = viewModel else { return }
+                viewModel.finish()
             }, label: {
                 Text(L10n.Global.cancel)
                     .foregroundColor(Color.jamiColor)
@@ -202,14 +138,14 @@ struct WelcomeView: View {
 struct HorizontalView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
-    @Binding var activeView: ActiveView?
+    var model: WelcomeVM
     @SwiftUI.State private var height: CGFloat = 1
     var body: some View {
         HStack(spacing: 30) {
             VStack {
                 Spacer()
                 HeaderView()
-                AboutButton(activeView: $activeView)
+                AboutButton(model: model)
                 Spacer()
             }
             VStack {
@@ -217,7 +153,7 @@ struct HorizontalView: View {
                 ScrollView(showsIndicators: false) {
                     ButtonsView(showImportOptions: $showImportOptions,
                                 showAdvancedOptions: $showAdvancedOptions,
-                                activeView: $activeView)
+                                model: model)
                         .background(
                             GeometryReader { proxy in
                                 Color.clear
@@ -240,7 +176,7 @@ struct HorizontalView: View {
 struct PortraitView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
-    @Binding var activeView: ActiveView?
+    var model: WelcomeVM
     var body: some View {
         VStack {
             Spacer(minLength: 80)
@@ -248,9 +184,9 @@ struct PortraitView: View {
             ScrollView(showsIndicators: false) {
                 ButtonsView(showImportOptions: $showImportOptions,
                             showAdvancedOptions: $showAdvancedOptions,
-                            activeView: $activeView)
+                            model: model)
             }
-            AboutButton(activeView: $activeView)
+            AboutButton(model: model)
         }
     }
 }
@@ -275,15 +211,13 @@ struct HeaderView: View {
 struct ButtonsView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
-    @Binding var activeView: ActiveView?
+    var model: WelcomeVM
 
     var body: some View {
         VStack(spacing: 12) {
             button(L10n.CreateAccount.createAccountFormTitle,
                    action: {
-                    withAnimation {
-                        activeView = .jamiAccount
-                    }
+                model.openAccountCreation()
                    })
                 .accessibilityIdentifier(AccessibilityIdentifiers.joinJamiButton)
 
@@ -295,14 +229,10 @@ struct ButtonsView: View {
 
             if showImportOptions {
                 expandedbutton(L10n.Welcome.linkDevice, action: {
-                    withAnimation {
-                        activeView = .linkDevice
-                    }
+                    model.openLinkDevice()
                 })
                 expandedbutton(L10n.Welcome.linkBackup, action: {
-                    withAnimation {
-                        activeView = .fromArchive
-                    }
+                    model.openImportArchive()
                 })
             }
 
@@ -314,14 +244,10 @@ struct ButtonsView: View {
 
             if showAdvancedOptions {
                 expandedbutton(L10n.Welcome.connectToJAMS, action: {
-                    withAnimation {
-                        activeView = .jamsAccount
-                    }
+                    model.openJAMS()
                 })
                 expandedbutton(L10n.Account.createSipAccount, action: {
-                    withAnimation {
-                        activeView = .sipAccount
-                    }
+                    model.openSIP()
                 })
             }
         }
@@ -370,12 +296,10 @@ struct ButtonsView: View {
 }
 
 struct AboutButton: View {
-    @Binding var activeView: ActiveView?
+    var model: WelcomeVM
     var body: some View {
         Button(action: {
-            withAnimation {
-                activeView = .aboutJami
-            }
+            model.openAboutJami()
         }, label: {
             Text(L10n.Smartlist.aboutJami)
                 .padding(12)

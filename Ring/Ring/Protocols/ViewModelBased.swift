@@ -21,6 +21,8 @@
 import Foundation
 import Reusable
 import UIKit
+import SwiftUI
+import RxSwift
 
 /// We assume that every application ViewModel should be aware of the injection bag
 /// it allows the factorize a ViewModelBased UIViewController instantiation
@@ -30,6 +32,19 @@ protocol ViewModel: AnyObject {
     ///
     /// - Parameter injectionBag: The injection Bag that will be passed to every sub components that need it
     init(with injectionBag: InjectionBag)
+}
+
+protocol Dismissable: AnyObject {
+
+    var dismiss: PublishSubject<Bool> { get set }
+
+    func dismissView()
+}
+
+extension Dismissable {
+    func dismissView() {
+        dismiss.onNext(true)
+    }
 }
 
 protocol ViewModelBased: AnyObject {

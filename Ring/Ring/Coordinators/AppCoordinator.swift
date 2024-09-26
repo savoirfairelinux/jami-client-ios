@@ -58,7 +58,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     // MARK: -
 
     // MARK: StateableResponsive
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
     // MARK: -
