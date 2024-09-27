@@ -48,6 +48,7 @@ enum ConversationState: State {
     case openConversationForConversationId(conversationId: String, accountId: String, shouldOpenSmarList: Bool)
     case reopenCall(viewController: CallViewController)
     case openAboutJami
+    case compose(model: ConversationsViewModel)
 }
 
 protocol ConversationNavigation: AnyObject {

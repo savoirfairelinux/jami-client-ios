@@ -56,15 +56,15 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func addSwiftUI() {
-        let contentView = UIHostingController(rootView: SmartListContainer(model: viewModel.conversationsModel))
-        addChild(contentView)
-        view.addSubview(contentView.view)
-        contentView.view.frame = self.view.bounds
-        contentView.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        contentView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        contentView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        contentView.didMove(toParent: self)
+//        let contentView = UIHostingController(rootView: SmartListContainer(model: viewModel.conversationsModel))
+//        addChild(contentView)
+//        view.addSubview(contentView.view)
+//        contentView.view.frame = self.view.bounds
+//        contentView.view.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        contentView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        contentView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        contentView.didMove(toParent: self)
     }
 }
