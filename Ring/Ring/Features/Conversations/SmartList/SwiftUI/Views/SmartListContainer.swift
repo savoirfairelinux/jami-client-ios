@@ -22,38 +22,30 @@ import SwiftUI
 import UIKit
 import Combine
 
-struct SmartListContainer: View {
-    @ObservedObject var model: ConversationsViewModel
-    var body: some View {
-        switch model.navigationTarget {
-        case .smartList:
-            SmartListView(model: model)
-        case .newMessage:
-            NewMessageView(model: model)
-                .applySlideTransition(directionUp: model.slideDirectionUp)
-        }
-    }
-}
+struct NewMessageView: View, StateEmittingView {
+    typealias StateEmitterType = ConversationStatePublisher
 
-struct NewMessageView: View {
-    @ObservedObject var model: ConversationsViewModel
+    @StateObject var viewModel: ConversationsViewModel
+    var stateEmitter = ConversationStatePublisher()
+    init(injectionBag: InjectionBag, source: ConversationDataSource) {
+        _viewModel = StateObject(wrappedValue:
+                                    ConversationsViewModel(with: injectionBag, conversationsSource: source))
+    }
     @SwiftUI.State private var isSearchBarActive = false // To track state initiated by the user
+
     var body: some View {
-        PlatformAdaptiveNavView {
-            SearchableConversationsView(model: model, isSearchBarActive: $isSearchBarActive)
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle(L10n.Smartlist.newMessage)
-                .navigationBarItems(leading: leadingBarItem)
-        }
+        SearchableConversationsView(model: viewModel,
+                                    stateEmitter: stateEmitter,
+                                    mode: .newMessage,
+                                    isSearchBarActive: $isSearchBarActive)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(L10n.Smartlist.newMessage)
+            .navigationBarItems(leading: leadingBarItem)
     }
 
     private var leadingBarItem: some View {
-        Button(action: {
-            model.slideDirectionUp = false
-            withAnimation { [weak model] in
-                guard let model = model else { return }
-                model.navigationTarget = .smartList
-            }
+        Button(action: {[weak stateEmitter] in
+            stateEmitter?.closeComposingMessage()
         }) {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color.jamiColor)
@@ -61,8 +53,15 @@ struct NewMessageView: View {
     }
 }
 
-struct SmartListView: View {
-    @ObservedObject var model: ConversationsViewModel
+struct SmartListView: View, StateEmittingView {
+    typealias StateEmitterType = ConversationStatePublisher
+    @StateObject var model: ConversationsViewModel
+    var stateEmitter = ConversationStatePublisher()
+
+    init(injectionBag: InjectionBag, source: ConversationDataSource) {
+        _model = StateObject(wrappedValue:
+                                ConversationsViewModel(with: injectionBag, conversationsSource: source))
+    }
     // account list presentation
     @SwiftUI.State private var showAccountList = false
     @SwiftUI.State private var coverBackgroundOpacity: CGFloat = 0
@@ -76,39 +75,26 @@ struct SmartListView: View {
 
     @SwiftUI.State private var isNavigatingToSettings = false
     var body: some View {
-        PlatformAdaptiveNavView {
-            ZStack(alignment: .bottom) {
-                SearchableConversationsView(model: model, isSearchBarActive: $isSearchBarActive)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarTitle("", displayMode: .inline)
-                    .navigationBarItems(leading: leadingBarItems, trailing: trailingBarItems)
-                    .zIndex(0)
-                    .accessibility(identifier: SmartListAccessibilityIdentifiers.conversationView)
-                if showAccountList {
-                    backgroundCover()
-                    accountListsView()
-                }
-
-                NavigationLink(
-                    destination: LazyView {
-                        if let account = self.model.accountsService.currentAccount {
-                            AccountSummaryView(injectionBag: self.model.injectionBag,
-                                               account: account, stateSubject: model.stateSubject)
-                        } else {
-                            EmptyView()
-                        }
-                    },
-                    isActive: $isNavigatingToSettings
-                ) {
-                    EmptyView()
-                }
-                .animation(.none)
+        ZStack(alignment: .bottom) {
+            SearchableConversationsView(model: model,
+                                        stateEmitter: stateEmitter,
+                                        mode: .smartList,
+                                        isSearchBarActive: $isSearchBarActive)
+                .zIndex(0)
+                .accessibility(identifier: SmartListAccessibilityIdentifiers.conversationView)
+            if showAccountList {
+                backgroundCover()
+                accountListsView()
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("", displayMode: .inline)
+        .navigationBarItems(leading: leadingBarItems, trailing: trailingBarItems)
         .sheet(isPresented: $showingPicker) {
             ContactPicker { [weak model] contact in
                 guard let model = model else { return }
-                model.showSipConversation(withNumber: contact)
+                model.showSipConversation(withNumber: contact,
+                                          publisher: stateEmitter)
                 showingPicker = false
             }
             .accessibility(identifier: SmartListAccessibilityIdentifiers.contactPicker)
@@ -152,9 +138,9 @@ struct SmartListView: View {
 
     @ViewBuilder
     private func accountListsView() -> some View {
-        AccountLists(model: model.accountsModel, createAccountCallback: {
+        AccountLists(model: model.accountsModel, createAccountCallback: {[weak stateEmitter] in
             toggleAccountList()
-            model.createAccount()
+            stateEmitter?.createAccount()
         }, accountSelectedCallback: {
             showAccountList.toggle()
         })
@@ -215,10 +201,10 @@ struct SmartListView: View {
     }
 
     private var diapladButton: some View {
-        Button(action: { [weak model] in
+        Button(action: { [weak stateEmitter] in
             isMenuOpen = false
-            guard let model = model else { return }
-            model.showDialpad()
+            guard let stateEmitter = stateEmitter else { return }
+            stateEmitter.showDialpad()
         }) {
             Image(systemName: "square.grid.3x3.topleft.filled")
                 .foregroundColor(Color.jamiColor)
@@ -248,9 +234,10 @@ struct SmartListView: View {
     }
 
     private var composeButton: some View {
-        Button(action: {
+        Button(action: { [weak stateEmitter] in
             isMenuOpen = false
-            triggerNewMessageAnimation()
+            guard let stateEmitter = stateEmitter else { return }
+            stateEmitter.openNewMessagesWindow()
         }) {
             Image(systemName: "square.and.pencil")
                 .foregroundColor(Color.jamiColor)
@@ -258,10 +245,10 @@ struct SmartListView: View {
     }
 
     private var createSwarmButton: some View {
-        Button(action: { [weak model] in
+        Button(action: { [weak stateEmitter] in
             isMenuOpen = false
-            guard let model = model else { return }
-            model.createSwarm()
+            guard let stateEmitter = stateEmitter else { return }
+            stateEmitter.createSwarm()
         }) {
             Label(L10n.Swarm.newSwarm, systemImage: "person.2")
         }
@@ -291,11 +278,11 @@ struct SmartListView: View {
     }
 
     private var settingsButton: some View {
-        Button(action: {
+        Button(action: {[weak model, weak stateEmitter] in
             isMenuOpen = false
-            withAnimation(.none) {
-                isNavigatingToSettings = true
-            }
+            guard let model = model,
+                  let stateEmitter = stateEmitter else { return }
+            model.showAccount(publisher: stateEmitter)
         }) {
             Label(L10n.AccountPage.settingsHeader, systemImage: "person.circle")
         }
@@ -312,10 +299,10 @@ struct SmartListView: View {
     }
 
     private var aboutJamiButton: some View {
-        Button(action: {[weak model] in
+        Button(action: {[weak stateEmitter] in
             isMenuOpen = false
-            guard let model = model else { return }
-            model.openAboutJami()
+            guard let stateEmitter = stateEmitter else { return }
+            stateEmitter.openAboutJami()
         }) {
             Label {
                 Text(L10n.Smartlist.aboutJami)
@@ -324,24 +311,22 @@ struct SmartListView: View {
             }
         }
     }
-
-    private func triggerNewMessageAnimation() {
-        model.slideDirectionUp = true
-        withAnimation { [weak model] in
-            guard let model = model else { return }
-            model.navigationTarget = .newMessage
-        }
-    }
 }
 
 struct SearchableConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
+    var stateEmitter: ConversationStatePublisher
+    @SwiftUI.State var mode: ConversationsViewModel.Target
     @Binding var isSearchBarActive: Bool
     @SwiftUI.State private var searchText = ""
     @SwiftUI.State private var isSearchBarDisabled = false // To programmatically disable the search bar
     @SwiftUI.State private var scrollViewOffset: CGFloat = 0
     var body: some View {
-        SmartListContentView(model: model, mode: model.navigationTarget, requestsModel: model.requestsModel, isSearchBarActive: $isSearchBarActive)
+        SmartListContentView(model: model,
+                             stateEmitter: stateEmitter,
+                             mode: mode,
+                             requestsModel: model.requestsModel,
+                             isSearchBarActive: $isSearchBarActive)
             .navigationBarSearch(self.$searchText, isActive: $isSearchBarActive, isSearchBarDisabled: $isSearchBarDisabled)
             .onChange(of: searchText) {[weak model] _ in
                 guard let model = model else { return }

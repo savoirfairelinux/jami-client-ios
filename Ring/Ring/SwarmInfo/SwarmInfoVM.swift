@@ -32,11 +32,6 @@ class SwarmInfoVM: ObservableObject {
 
     private let disposeBag = DisposeBag()
     private var contactsSubscriptionsDisposeBag = DisposeBag()
-    // MARK: - Rx Stateable
-    private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
     let injectionBag: InjectionBag
     private let accountService: AccountsService
     private let nameService: NameService
@@ -200,7 +195,7 @@ class SwarmInfoVM: ObservableObject {
         }
     }
 
-    func leaveSwarm() {
+    func leaveSwarm(stateEmmiter: ConversationStatePublisher) {
         guard let conversation = self.conversation else { return }
         let conversationId = conversation.id
         let accountId = conversation.accountId
@@ -220,8 +215,7 @@ class SwarmInfoVM: ObservableObject {
         } else {
             self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
         }
-        self.stateSubject.onNext(ConversationState.accountRemoved)
-
+        stateEmmiter.emitState(ConversationState.conversationRemoved)
     }
 
     func ignoreSwarm(isOn: Bool) {

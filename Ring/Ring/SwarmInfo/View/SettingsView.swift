@@ -20,7 +20,8 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    @StateObject var viewmodel: SwarmInfoVM
+    @ObservedObject var viewmodel: SwarmInfoVM
+    let stateEmitter: ConversationStatePublisher
     @SwiftUI.State private var ignoreSwarm = true
     @SwiftUI.State private var shouldShowColorPannel = false
     @SwiftUI.State private var showAlert = false
@@ -90,8 +91,9 @@ struct SettingsView: View {
                 .alert(isPresented: $showAlert) {
                     Alert(
                         title: Text(L10n.Swarm.confirmLeaveSwarm),
-                        primaryButton: .destructive(Text(L10n.Swarm.leave)) {
-                            viewmodel.leaveSwarm()
+                        primaryButton: .destructive(Text(L10n.Swarm.leave)) { [weak stateEmitter] in
+                            guard let stateEmitter = stateEmitter else { return }
+                            viewmodel.leaveSwarm(stateEmmiter: stateEmitter)
                         },
                         secondaryButton: .cancel()
                     )

@@ -19,13 +19,14 @@
 import SwiftUI
 
 struct LinkToAccountView: View {
-    @ObservedObject var viewModel: LinkToAccountVM
+    @StateObject var viewModel: LinkToAccountVM
+    let dismissHandler = DismissHandler()
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
     init(injectionBag: InjectionBag,
          linkAction: @escaping (_ pin: String, _ password: String) -> Void) {
-        _viewModel = ObservedObject(wrappedValue:
-                                        LinkToAccountVM(with: injectionBag))
+        _viewModel = StateObject(wrappedValue:
+                                    LinkToAccountVM(with: injectionBag))
         viewModel.linkAction = linkAction
     }
 
@@ -178,8 +179,8 @@ struct LinkToAccountView: View {
     }
 
     private var cancelButton: some View {
-        Button(action: {
-            viewModel.dismissView()
+        Button(action: {[weak dismissHandler] in
+            dismissHandler?.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
@@ -187,8 +188,9 @@ struct LinkToAccountView: View {
     }
 
     private var linkButton: some View {
-        Button(action: {
-            viewModel.link()
+        Button(action: {[weak dismissHandler, weak viewModel] in
+            dismissHandler?.dismissView()
+            viewModel?.link()
         }, label: {
             Text(L10n.LinkToAccount.linkButtonTitle)
                 .foregroundColor(viewModel.linkButtonColor)
