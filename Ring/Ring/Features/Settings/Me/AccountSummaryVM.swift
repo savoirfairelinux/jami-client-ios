@@ -31,6 +31,22 @@ public enum MeState: State {
     case needAccountMigration(accountId: String)
 }
 
+class AccountSummaryState: Stateable {
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
+
+    func dismiss() {
+        self.stateSubject.onNext(SettingsState.dismiss)
+    }
+
+    func emmitState(newState: SettingsState) {
+        self.stateSubject.onNext(newState)
+    }
+}
+
 class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
     let account: AccountModel
 
@@ -46,8 +62,6 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
 
     @Published var jamiId: String = ""
 
-    @Published var accountRemoved: Bool = false
-
     let avatarSize: CGFloat = 100
 
     let disposeBag = DisposeBag()
@@ -55,15 +69,13 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
     let accountService: AccountsService
     let profileService: ProfilesService
     let injectionBag: InjectionBag
-    let stateSubject: PublishSubject<State>
 
-    init(injectionBag: InjectionBag, account: AccountModel, stateSubject: PublishSubject<State>) {
+    init(injectionBag: InjectionBag, account: AccountModel) {
         self.account = account
         self.accountService = injectionBag.accountService
         self.profileService = injectionBag.profileService
         self.injectionBag = injectionBag
         self.jamiId = account.jamiId
-        self.stateSubject = stateSubject
 
         // account status
         if let details = account.details {
@@ -102,28 +114,37 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
         }
     }
 
-    func removeAccount() {
-        let allAccounts = self.accountService.accounts
-        if allAccounts.count < 1 { return }
-        if allAccounts.count == 1 {
-            UserDefaults.standard.set("", forKey: self.accountService.selectedAccountID)
-            self.stateSubject.onNext(MeState.needToOnboard)
-            accountRemoved = true
-            self.accountService.removeAccount(id: account.id)
-            return
+    func removeAccount(stateEmmiter: AccountSummaryState) {
+        let accounts = accountService.accounts
+        if accounts.isEmpty { return }
+
+        accountService.removeAccount(id: account.id)
+
+        // Determine the new state and selected account
+        let (newSelectedAccountID, newState) = determinePostRemovalState()
+
+        UserDefaults.standard.set(newSelectedAccountID, forKey: self.accountService.selectedAccountID)
+        stateEmmiter.emmitState(newState: newState)
+    }
+
+    // Determines the new selected account ID and the resulting state after account removal.
+    private func determinePostRemovalState() -> (String, SettingsState) {
+        let remainingAccounts = accountService.accounts.filter { $0.id != account.id }
+
+        if remainingAccounts.isEmpty {
+            // No accounts left; onboarding is required
+            return ("", .needToOnboard)
         }
 
-        for nextAccount in allAccounts where
-            (nextAccount != account && !accountService.needAccountMigration(accountId: nextAccount.id)) {
-            UserDefaults.standard.set(nextAccount.id, forKey: self.accountService.selectedAccountID)
-            self.accountService.currentAccount = nextAccount
-            self.accountService.removeAccount(id: account.id)
-            accountRemoved = true
-            return
+        // Attempt to find a suitable next account that doesn't require migration
+        if let nextAccount = remainingAccounts.first(where: { !accountService.needAccountMigration(accountId: $0.id) }) {
+            accountService.currentAccount = nextAccount
+            return (nextAccount.id, .accountRemoved)
+        } else {
+            // Take any account and notify that migration is required
+            let accountId: String = remainingAccounts.first?.id ?? ""
+            return ("", .needAccountMigration(accountId: accountId))
         }
-        self.accountService.removeAccount(id: account.id)
-        accountRemoved = true
-        self.stateSubject.onNext(MeState.needAccountMigration(accountId: allAccounts[1].id))
     }
 }
 

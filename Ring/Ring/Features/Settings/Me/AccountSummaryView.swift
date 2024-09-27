@@ -24,6 +24,8 @@ import RxSwift
 struct AccountSummaryView: View {
     @StateObject var model: AccountSummaryVM
 
+    let state = AccountSummaryState()
+
     @SwiftUI.State private var showEditPrpofile = false
     @SwiftUI.State private var showAccountRegistration = false
     @SwiftUI.State private var showQRcode = false
@@ -33,11 +35,10 @@ struct AccountSummaryView: View {
 
     let avatarSize: CGFloat = 60
 
-    init(injectionBag: InjectionBag, account: AccountModel, stateSubject: PublishSubject<State>) {
+    init(injectionBag: InjectionBag, account: AccountModel) {
         _model = StateObject(wrappedValue:
                                 AccountSummaryVM(injectionBag: injectionBag,
-                                                 account: account,
-                                                 stateSubject: stateSubject))
+                                                 account: account))
     }
 
     var body: some View {
@@ -61,7 +62,7 @@ struct AccountSummaryView: View {
                 if model.account.type == .sip {
                     Section {
                         NavigationLink(destination: ManageSipAccountView(injectionBag: model.injectionBag, account: model.account, removeAccount: {
-                            model.removeAccount()
+                            model.removeAccount(stateEmmiter: self.state)
                         })) {
                             SettingsRow(iconName: "person.crop.circle", title: L10n.AccountPage.manageAccount)
                         }
@@ -69,7 +70,7 @@ struct AccountSummaryView: View {
                 } else {
                     userIdentitySection()
                     Section {
-                        NavigationLink(destination: ManageAccountView(model: model)) {
+                        NavigationLink(destination: ManageAccountView(model: model, state: self.state)) {
                             SettingsRow(iconName: "person.crop.circle", title: L10n.AccountPage.manageAccount)
                         }
                         NavigationLink(destination: LinkedDevicesView(account: model.account, accountService: model.accountService)) {
@@ -87,16 +88,17 @@ struct AccountSummaryView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(L10n.AccountPage.accountHeader)
-        .navigationBarItems(trailing:
+        .navigationBarItems(leading:  Button(action: {[weak state] in
+            state?.dismiss()
+        }, label: {
+            Text(L10n.Global.cancel)
+                .foregroundColor(.jamiColor)
+        }),
+                            trailing:
                                 NavigationLink(destination: SettingsSummaryView(model: model)) {
-                                    Image(systemName: "gearshape.fill")
-                                        .foregroundColor(.jamiColor)
-                                })
-        .onChange(of: model.accountRemoved) { _ in
-            if model.accountRemoved {
-                presentation.wrappedValue.dismiss()
-            }
-        }
+            Image(systemName: "gearshape.fill")
+                .foregroundColor(.jamiColor)
+        })
     }
 
     func userIdentitySection() -> some View {

@@ -59,12 +59,11 @@ struct SmartListContentView: View {
         .transition(.opacity)
         .onAppear { [weak model] in
             guard let model = model else { return }
-            // If there was an active search before presenting the conversation, the search results should remain the same upon returning to the page.
+            // If there was an active search before presenting the conversation, the search results should remain the same upon returning to the page. Otherwise, flickering will occur.
             if model.presentedConversation.hasPresentedConversation() && !model.searchQuery.isEmpty {
                 isSearchBarActive = true
                 model.presentedConversation.resetPresentedConversation()
             }
-            mode = model.navigationTarget
             hideTopView = false
         }
         .onChange(of: isSearchBarActive) { _ in
@@ -207,7 +206,7 @@ struct SmartListContentView: View {
                     .multilineTextAlignment(.leading)
                     .hideRowSeparator()
                     .padding(.bottom, 3)
-                if model.conversations.isEmpty {
+                if model.filteredConversations.isEmpty {
                     Text(L10n.Smartlist.noConversationsFound)
                         .font(.callout)
                         .multilineTextAlignment(.leading)
