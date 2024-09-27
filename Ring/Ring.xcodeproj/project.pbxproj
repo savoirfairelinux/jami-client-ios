@@ -153,6 +153,9 @@
 		1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC3296E0A940055EA87 /* View+Helpers.swift */; };
 		1DF75AC6296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */; };
 		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
+		2607176E2CAC454E00494875 /* ComposeNewMessageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */; };
+		260717702CAD901D00494875 /* ConversationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176F2CAD901D00494875 /* ConversationDataSource.swift */; };
+		260717722CADB36A00494875 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260717712CADB36A00494875 /* SettingsCoordinator.swift */; };
 		26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* PreviewViewController.swift */; };
 		26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */; };
 		26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */; };
@@ -804,6 +807,9 @@
 		1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreParticipantsInSwarm.swift; sourceTree = "<group>"; };
 		26069B6524C9FCE8002361A3 /* ObjCHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCHandler.h; sourceTree = "<group>"; };
 		26069B6624C9FCE8002361A3 /* ObjCHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCHandler.m; sourceTree = "<group>"; };
+		2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComposeNewMessageCoordinator.swift; path = Ring/Features/Conversations/ComposeNewMessageCoordinator.swift; sourceTree = SOURCE_ROOT; };
+		2607176F2CAD901D00494875 /* ConversationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationDataSource.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ConversationDataSource.swift; sourceTree = SOURCE_ROOT; };
+		260717712CADB36A00494875 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		26074FD824F7FF9500374570 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContollerModel.swift; sourceTree = "<group>"; };
 		26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewViewController.storyboard; sourceTree = "<group>"; };
@@ -1960,6 +1966,7 @@
 				446FAF172373421500519C4F /* SendFile */,
 				1A2D18AE1F29153F00B2C785 /* Conversation */,
 				1A2D18AD1F29151E00B2C785 /* Smartlist */,
+				2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */,
 				1A2D18A91F29131900B2C785 /* ConversationsCoordinator.swift */,
 			);
 			name = Conversations;
@@ -1971,6 +1978,7 @@
 			children = (
 				264EA8782977078C00B6FB6F /* Diagnostic */,
 				26FDF4392C135384009D036B /* SwiftUI */,
+				260717712CADB36A00494875 /* SettingsCoordinator.swift */,
 			);
 			name = Settings;
 			path = Features/Settings;
@@ -2294,6 +2302,7 @@
 				26D87CEA2BBB4A5F0086E4AA /* AccountsViewModel.swift */,
 				26E081232BC07824001B4C18 /* RequestsViewModel.swift */,
 				26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */,
+				2607176F2CAD901D00494875 /* ConversationDataSource.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2932,6 +2941,7 @@
 				1D4EE84D29252AD000ED2010 /* SwarmCreationUIModel.swift in Sources */,
 				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,
 				0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */,
+				2607176E2CAC454E00494875 /* ComposeNewMessageCoordinator.swift in Sources */,
 				2685F90E2A1698B400BFCDA3 /* VideoInputsManager.swift in Sources */,
 				267B95FB2C2B5FFA00353B01 /* RevocationView.swift in Sources */,
 				0E6F544F223C0ED600ECC3CE /* AccountPickerAdapter.swift in Sources */,
@@ -3042,6 +3052,7 @@
 				1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */,
 				1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */,
 				267CFD6F2ACCDCD70066FE15 /* SmartListNavigationBar.swift in Sources */,
+				260717702CAD901D00494875 /* ConversationDataSource.swift in Sources */,
 				BB06BD8329D492AA0064F0FC /* LocationSharingVM.swift in Sources */,
 				2662FC79246B1E1700FA7782 /* JamiSearchView.swift in Sources */,
 				0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */,
@@ -3201,6 +3212,7 @@
 				26EEB19C2BD98CCA00B8B04B /* SearchBar.swift in Sources */,
 				2632D2F12CA5A82F00E60096 /* ImportFromArchiveVM.swift in Sources */,
 				0EF49AA123828CBC0064CD98 /* ParticipantProfileInfo.swift in Sources */,
+				260717722CADB36A00494875 /* SettingsCoordinator.swift in Sources */,
 				BB68E6602AB1F03000F02AB7 /* ScreenHelper.swift in Sources */,
 				0EF49AA123828CBC0064CD98 /* ParticipantProfileInfo.swift in Sources */,
 				26EEB19E2BDEDC0C00B8B04B /* UIControllersWrappers.swift in Sources */,

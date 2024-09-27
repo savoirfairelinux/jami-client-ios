@@ -23,37 +23,45 @@ import UIKit
 import Combine
 
 struct SmartListContainer: View {
-    @ObservedObject var model: ConversationsViewModel
+    @ObservedObject var viewModel: ConversationsViewModel
+
+    init(injectionBag: InjectionBag, source: ConversationDataSource) {
+        _viewModel = ObservedObject(wrappedValue:
+                                        ConversationsViewModel(with: injectionBag, conversationsSource: source))
+        // self.createAction = createAction
+    }
     var body: some View {
-        switch model.navigationTarget {
-        case .smartList:
-            SmartListView(model: model)
-        case .newMessage:
-            NewMessageView(model: model)
-                .applySlideTransition(directionUp: model.slideDirectionUp)
-        }
+        SmartListView(model: viewModel)
+//        switch viewModel.navigationTarget {
+//        case .smartList:
+//            SmartListView(model: viewModel)
+//        case .newMessage:
+//            NewMessageView(model: viewModel)
+//                .applySlideTransition(directionUp: viewModel.slideDirectionUp)
+//        }
     }
 }
 
 struct NewMessageView: View {
-    @ObservedObject var model: ConversationsViewModel
+    @ObservedObject var viewModel: ConversationsViewModel
+    init(injectionBag: InjectionBag, source: ConversationDataSource) {
+        _viewModel = ObservedObject(wrappedValue:
+                                        ConversationsViewModel(with: injectionBag, conversationsSource: source))
+        // self.createAction = createAction
+    }
     @SwiftUI.State private var isSearchBarActive = false // To track state initiated by the user
     var body: some View {
-        PlatformAdaptiveNavView {
-            SearchableConversationsView(model: model, isSearchBarActive: $isSearchBarActive)
+        //PlatformAdaptiveNavView {
+        SearchableConversationsView(model: viewModel, mode: .newMessage, isSearchBarActive: $isSearchBarActive)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle(L10n.Smartlist.newMessage)
                 .navigationBarItems(leading: leadingBarItem)
-        }
+       // }
     }
 
     private var leadingBarItem: some View {
         Button(action: {
-            model.slideDirectionUp = false
-            withAnimation { [weak model] in
-                guard let model = model else { return }
-                model.navigationTarget = .smartList
-            }
+            viewModel.closeComposingMessage()
         }) {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color.jamiColor)
@@ -76,35 +84,20 @@ struct SmartListView: View {
 
     @SwiftUI.State private var isNavigatingToSettings = false
     var body: some View {
-        PlatformAdaptiveNavView {
+        //PlatformAdaptiveNavView {
             ZStack(alignment: .bottom) {
-                SearchableConversationsView(model: model, isSearchBarActive: $isSearchBarActive)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarTitle("", displayMode: .inline)
-                    .navigationBarItems(leading: leadingBarItems, trailing: trailingBarItems)
+                SearchableConversationsView(model: model, mode: .smartList, isSearchBarActive: $isSearchBarActive)
                     .zIndex(0)
                     .accessibility(identifier: SmartListAccessibilityIdentifiers.conversationView)
                 if showAccountList {
                     backgroundCover()
                     accountListsView()
                 }
-
-                NavigationLink(
-                    destination: LazyView {
-                        if let account = self.model.accountsService.currentAccount {
-                            AccountSummaryView(injectionBag: self.model.injectionBag,
-                                               account: account, stateSubject: model.stateSubject)
-                        } else {
-                            EmptyView()
-                        }
-                    },
-                    isActive: $isNavigatingToSettings
-                ) {
-                    EmptyView()
-                }
-                .animation(.none)
             }
-        }
+        //}
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarItems(leading: leadingBarItems, trailing: trailingBarItems)
         .sheet(isPresented: $showingPicker) {
             ContactPicker { [weak model] contact in
                 guard let model = model else { return }
@@ -293,9 +286,10 @@ struct SmartListView: View {
     private var settingsButton: some View {
         Button(action: {
             isMenuOpen = false
-            withAnimation(.none) {
-                isNavigatingToSettings = true
-            }
+            model.showAccount()
+//            withAnimation(.none) {
+//                isNavigatingToSettings = true
+//            }
         }) {
             Label(L10n.AccountPage.settingsHeader, systemImage: "person.circle")
         }
@@ -326,22 +320,24 @@ struct SmartListView: View {
     }
 
     private func triggerNewMessageAnimation() {
-        model.slideDirectionUp = true
-        withAnimation { [weak model] in
-            guard let model = model else { return }
-            model.navigationTarget = .newMessage
-        }
+        model.openNewMessagesWindow()
+//        model.slideDirectionUp = true
+//        withAnimation { [weak model] in
+//            guard let model = model else { return }
+//            model.navigationTarget = .newMessage
+//        }
     }
 }
 
 struct SearchableConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
+    @SwiftUI.State var mode: ConversationsViewModel.Target
     @Binding var isSearchBarActive: Bool
     @SwiftUI.State private var searchText = ""
     @SwiftUI.State private var isSearchBarDisabled = false // To programmatically disable the search bar
     @SwiftUI.State private var scrollViewOffset: CGFloat = 0
     var body: some View {
-        SmartListContentView(model: model, mode: model.navigationTarget, requestsModel: model.requestsModel, isSearchBarActive: $isSearchBarActive)
+        SmartListContentView(model: model, mode: mode, requestsModel: model.requestsModel, isSearchBarActive: $isSearchBarActive)
             .navigationBarSearch(self.$searchText, isActive: $isSearchBarActive, isSearchBarDisabled: $isSearchBarDisabled)
             .onChange(of: searchText) {[weak model] _ in
                 guard let model = model else { return }

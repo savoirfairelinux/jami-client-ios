@@ -36,10 +36,9 @@ public enum WalkthroughState: State {
 
 /// This Coordinator drives the walkthrough navigation (welcome / profile / creation or link)
 class WalkthroughCoordinator: Coordinator, StateableResponsive {
-
     var presentingVC = [String: Bool]()
     var rootViewController: UIViewController {
-        return self.navigationViewController
+        return self.navigationController
     }
 
     var childCoordinators = [Coordinator]()
@@ -47,13 +46,13 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
     var isAccountFirst: Bool = true
     var withAnimations: Bool = true
 
-    private let navigationViewController = UINavigationController()
+    internal var navigationController: UINavigationController = UINavigationController()
     private let injectionBag: InjectionBag
     var disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
 
-    required init (with injectionBag: InjectionBag) {
+    required init(injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
 
         self.stateSubject
@@ -119,11 +118,10 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
         let welcomeView = WelcomeView(injectionBag: self.injectionBag)
         let viewController = createHostingVC(welcomeView)
         welcomeView.viewModel.notCancelable = isAccountFirst
-        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: welcomeView.viewModel)
+        self.present(viewController: viewController, withStyle: .show, withAnimation: withAnimations, withStateable: welcomeView.viewModel)
     }
 
     func finish() {
-        self.navigationViewController.setViewControllers([], animated: false)
         self.rootViewController.dismiss(animated: true)
     }
 }

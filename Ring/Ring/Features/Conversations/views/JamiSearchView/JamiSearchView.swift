@@ -40,7 +40,7 @@ class JamiSearchView: NSObject {
     let incognitoHeaderHeight: CGFloat = 0
     var showSearchResult: Bool = true
 
-    func configure(with injectionBag: InjectionBag, source: FilterConversationDataSource, isIncognito: Bool, delegate: FilterConversationDelegate?) {
+    func configure(with injectionBag: InjectionBag, source: ConversationDataSource, isIncognito: Bool, delegate: FilterConversationDelegate?) {
         self.viewModel = JamiSearchViewModel(with: injectionBag, source: source, searchOnlyExistingConversations: true)
         self.viewModel.setDelegate(delegate: delegate)
         self.isIncognito = isIncognito
@@ -83,16 +83,16 @@ class JamiSearchView: NSObject {
         }
         let searchResultsDatasource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
 
-        self.viewModel
-            .searchResults
-            .bind(to: self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource))
-            .disposed(by: disposeBag)
-        self.viewModel
-            .searchResults
-            .map({ (conversations) -> Bool in return conversations.isEmpty })
-            .subscribe(onNext: { [weak self] (hideFooterView) in
-                        self?.searchResultsTableView.tableFooterView?.isHidden = hideFooterView })
-            .disposed(by: disposeBag)
+//        self.viewModel
+//            .searchResults
+//            .bind(to: self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource))
+//            .disposed(by: disposeBag)
+//        self.viewModel
+//            .searchResults
+//            .map({ (conversations) -> Bool in return conversations.isEmpty })
+//            .subscribe(onNext: { [weak self] (hideFooterView) in
+//                        self?.searchResultsTableView.tableFooterView?.isHidden = hideFooterView })
+//            .disposed(by: disposeBag)
 
         self.searchResultsTableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
