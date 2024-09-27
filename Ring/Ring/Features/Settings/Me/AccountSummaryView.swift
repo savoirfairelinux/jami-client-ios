@@ -33,11 +33,10 @@ struct AccountSummaryView: View {
 
     let avatarSize: CGFloat = 60
 
-    init(injectionBag: InjectionBag, account: AccountModel, stateSubject: PublishSubject<State>) {
+    init(injectionBag: InjectionBag, account: AccountModel) {
         _model = StateObject(wrappedValue:
                                 AccountSummaryVM(injectionBag: injectionBag,
-                                                 account: account,
-                                                 stateSubject: stateSubject))
+                                                 account: account))
     }
 
     var body: some View {
