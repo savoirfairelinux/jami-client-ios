@@ -98,7 +98,7 @@ class ConversationsService {
                     return conv.getParticipants().first?.jamiId
                 }
                 /// filter out contact requests
-                var conversationsFromDB = conversationsModels.filter { conversation in
+                let conversationsFromDB = conversationsModels.filter { conversation in
                     !(conversation.messages.count == 1 && conversation.messages.first!.content == L10n.GeneratedMessage.invitationReceived)
                 }
                 /// Filter out conversations that already added to swarm

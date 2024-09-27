@@ -18,14 +18,20 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
-    @ObservedObject var viewModel: WelcomeVM
+struct WelcomeView: View, StateEmittingView {
+    typealias StateEmitterType = StatePublisher<WalkthroughState>
+
+    @StateObject var viewModel: WelcomeVM
+    let notCancelable: Bool
+    var stateEmitter = StatePublisher<WalkthroughState>()
     @SwiftUI.State var showImportOptions = false
     @SwiftUI.State var showAdvancedOptions = false
 
-    init(injectionBag: InjectionBag) {
-        _viewModel = ObservedObject(wrappedValue:
-                                        WelcomeVM(with: injectionBag))
+    init(injectionBag: InjectionBag,
+         notCancelable: Bool) {
+        self.notCancelable = notCancelable
+        _viewModel = StateObject(wrappedValue:
+                                    WelcomeVM(with: injectionBag))
     }
 
     @Environment(\.verticalSizeClass)
@@ -38,11 +44,13 @@ struct WelcomeView: View {
                     if verticalSizeClass == .compact {
                         HorizontalView(showImportOptions: $showImportOptions,
                                        showAdvancedOptions: $showAdvancedOptions,
-                                       model: viewModel)
+                                       model: viewModel,
+                                       stateEmitter: stateEmitter)
                     } else {
                         PortraitView(showImportOptions: $showImportOptions,
                                      showAdvancedOptions: $showAdvancedOptions,
-                                     model: viewModel)
+                                     model: viewModel,
+                                     stateEmitter: stateEmitter)
                     }
                 }
                 .padding()
@@ -94,9 +102,10 @@ struct WelcomeView: View {
         CustomAlert(content: { AlertFactory
             .alertWithOkButton(title: title,
                                message: message,
-                               action: {[weak viewModel] in
-                                guard let viewModel = viewModel else { return }
-                                viewModel.finish()
+                               action: {[weak viewModel, weak stateEmitter] in
+                                guard let viewModel = viewModel,
+                                      let stateEmitter = stateEmitter else { return }
+                                viewModel.finish(stateHandler: stateEmitter)
                                })
         })
     }
@@ -108,9 +117,10 @@ struct WelcomeView: View {
         CustomAlert(content: { AlertFactory
             .alertWithOkButton(title: title,
                                message: message,
-                               action: {[weak viewModel] in
-                                guard let viewModel = viewModel else { return }
-                                viewModel.finish()
+                               action: {[weak viewModel, weak stateEmitter] in
+                                guard let viewModel = viewModel,
+                                      let stateEmitter = stateEmitter else { return }
+                                viewModel.finish(stateHandler: stateEmitter)
                                })
         })
     }
@@ -122,12 +132,13 @@ struct WelcomeView: View {
 
     @ViewBuilder
     func cancelButton() -> some View {
-        if viewModel.notCancelable {
+        if notCancelable {
             EmptyView()
         } else {
-            Button(action: { [weak viewModel] in
-                guard let viewModel = viewModel else { return }
-                viewModel.finish()
+            Button(action: { [weak viewModel, weak stateEmitter] in
+                guard let viewModel = viewModel,
+                      let stateEmitter = stateEmitter else { return }
+                viewModel.finish(stateHandler: stateEmitter)
             }, label: {
                 Text(L10n.Global.cancel)
                     .foregroundColor(Color.jamiColor)
@@ -139,13 +150,15 @@ struct HorizontalView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
     var model: WelcomeVM
+    let stateEmitter: StatePublisher<WalkthroughState>
     @SwiftUI.State private var height: CGFloat = 1
     var body: some View {
         HStack(spacing: 30) {
             VStack {
                 Spacer()
                 HeaderView()
-                AboutButton(model: model)
+                AboutButton(model: model,
+                            stateEmitter: stateEmitter)
                 Spacer()
             }
             VStack {
@@ -153,7 +166,8 @@ struct HorizontalView: View {
                 ScrollView(showsIndicators: false) {
                     ButtonsView(showImportOptions: $showImportOptions,
                                 showAdvancedOptions: $showAdvancedOptions,
-                                model: model)
+                                model: model,
+                                stateEmitter: stateEmitter)
                         .background(
                             GeometryReader { proxy in
                                 Color.clear
@@ -177,6 +191,7 @@ struct PortraitView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
     var model: WelcomeVM
+    let stateEmitter: StatePublisher<WalkthroughState>
     var body: some View {
         VStack {
             Spacer(minLength: 80)
@@ -184,9 +199,11 @@ struct PortraitView: View {
             ScrollView(showsIndicators: false) {
                 ButtonsView(showImportOptions: $showImportOptions,
                             showAdvancedOptions: $showAdvancedOptions,
-                            model: model)
+                            model: model,
+                            stateEmitter: stateEmitter)
             }
-            AboutButton(model: model)
+            AboutButton(model: model,
+                        stateEmitter: stateEmitter)
         }
     }
 }
@@ -212,12 +229,15 @@ struct ButtonsView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
     var model: WelcomeVM
+    let stateEmitter: StatePublisher<WalkthroughState>
 
     var body: some View {
         VStack(spacing: 12) {
             button(L10n.CreateAccount.createAccountFormTitle,
-                   action: {
-                    model.openAccountCreation()
+                   action: {[weak model, weak stateEmitter] in
+                    guard let model = model,
+                          let stateEmitter = stateEmitter else { return }
+                    model.openAccountCreation(stateHandler: stateEmitter)
                    })
                 .accessibilityIdentifier(AccessibilityIdentifiers.joinJamiButton)
 
@@ -228,11 +248,15 @@ struct ButtonsView: View {
             })
 
             if showImportOptions {
-                expandedbutton(L10n.Welcome.linkDevice, action: {
-                    model.openLinkDevice()
+                expandedbutton(L10n.Welcome.linkDevice, action: {[weak model, weak stateEmitter] in
+                    guard let model = model,
+                          let stateEmitter = stateEmitter else { return }
+                    model.openLinkDevice(stateHandler: stateEmitter)
                 })
-                expandedbutton(L10n.Welcome.linkBackup, action: {
-                    model.openImportArchive()
+                expandedbutton(L10n.Welcome.linkBackup, action: {[weak model, weak stateEmitter] in
+                    guard let model = model,
+                          let stateEmitter = stateEmitter else { return }
+                    model.openImportArchive(stateHandler: stateEmitter)
                 })
             }
 
@@ -243,11 +267,15 @@ struct ButtonsView: View {
             })
 
             if showAdvancedOptions {
-                expandedbutton(L10n.Welcome.connectToJAMS, action: {
-                    model.openJAMS()
+                expandedbutton(L10n.Welcome.connectToJAMS, action: {[weak model, weak stateEmitter] in
+                    guard let model = model,
+                          let stateEmitter = stateEmitter else { return }
+                    model.openJAMS(stateHandler: stateEmitter)
                 })
-                expandedbutton(L10n.Account.createSipAccount, action: {
-                    model.openSIP()
+                expandedbutton(L10n.Account.createSipAccount, action: {[weak model, weak stateEmitter] in
+                    guard let model = model,
+                          let stateEmitter = stateEmitter else { return }
+                    model.openSIP(stateHandler: stateEmitter)
                 })
             }
         }
@@ -297,9 +325,12 @@ struct ButtonsView: View {
 
 struct AboutButton: View {
     var model: WelcomeVM
+    let stateEmitter: StatePublisher<WalkthroughState>
     var body: some View {
-        Button(action: {
-            model.openAboutJami()
+        Button(action: {[weak model, weak stateEmitter] in
+            guard let model = model,
+                  let stateEmitter = stateEmitter else { return }
+            model.openAboutJami(stateHandler: stateEmitter)
         }, label: {
             Text(L10n.Smartlist.aboutJami)
                 .padding(12)

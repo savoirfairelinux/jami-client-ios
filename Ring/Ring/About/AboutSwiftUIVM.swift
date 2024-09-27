@@ -19,7 +19,7 @@
 import Foundation
 import RxSwift
 
-class AboutSwiftUIVM: Dismissable {
+class AboutSwiftUIVM {
     let declarationText = L10n.AboutJami.declaration1 + " [jami.net](https://jami.net) " + L10n.AboutJami.declaration2
     let noWarrantyText = L10n.AboutJami.noWarranty1 + " [NU General Public License](https://www.gnu.org/licenses/gpl-3.0.html), " + L10n.AboutJami.noWarranty2
     let mainUrlText = "© 2015-2024 [Savoir-Faire linux](https://savoirfairelinux.com)"
@@ -28,9 +28,6 @@ class AboutSwiftUIVM: Dismissable {
     let feedbackLabel: String = L10n.AboutJami.feedback
     let createdLabel: String = L10n.AboutJami.createdBy
     let artworkLabel: String = L10n.AboutJami.artworkBy
-
-    // MARK: - Rx Dismissable
-    var dismiss = PublishSubject<Bool>()
 
     func openContributeLink() {
         if let url = URL(string: "https://jami.net/contribute/") {

@@ -24,6 +24,7 @@ import SwiftUI
 struct SwipeActionsModifier: ViewModifier {
     enum ActiveAlert: Identifiable {
         case block, delete
+
         var id: Self { self }
     }
 
@@ -71,8 +72,8 @@ struct SwipeActionsModifier: ViewModifier {
 
 extension View {
     @ViewBuilder
-    func conditionalSmartListSwipeActions(conversation: ConversationViewModel, model: ConversationsViewModel) -> some View {
-        if #available(iOS 15.0, *), model.navigationTarget == .smartList {
+    func conditionalSmartListSwipeActions(conversation: ConversationViewModel, model: ConversationsViewModel, target: ConversationsViewModel.Target) -> some View {
+        if #available(iOS 15.0, *), target == .smartList {
             self.modifier(SwipeActionsModifier(conversation: conversation, model: model))
         } else {
             self
@@ -82,15 +83,17 @@ extension View {
 
 struct ConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
+    let stateEmitter: ConversationStatePublisher
     @SwiftUI.State private var searchText = ""
     var body: some View {
-        ForEach(model.conversations) { [weak model] conversation in
+        ForEach(model.filteredConversations) { [weak model] conversation in
             ConversationRowView(model: conversation)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
                 .onTapGesture { [weak conversation, weak model] in
                     guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation)
+                    model.showConversation(withConversationViewModel: conversation,
+                                           publisher: stateEmitter)
                 }
                 .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
                 .transition(.opacity)
@@ -103,6 +106,7 @@ struct ConversationsView: View {
 
 struct TempConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
+    let state: ConversationStatePublisher
     var body: some View {
         if let conversation = model.temporaryConversation {
             ConversationRowView(model: conversation, withSeparator: false)
@@ -110,7 +114,8 @@ struct TempConversationsView: View {
                 .contentShape(Rectangle())
                 .onTapGesture { [weak conversation, weak model] in
                     guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation)
+                    model.showConversation(withConversationViewModel: conversation,
+                                           publisher: state)
                 }
                 .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
                 .transition(.opacity)
@@ -120,6 +125,7 @@ struct TempConversationsView: View {
 
 struct JamsSearchResultView: View {
     @ObservedObject var model: ConversationsViewModel
+    let state: ConversationStatePublisher
     var body: some View {
         ForEach(model.jamsSearchResult) { conversation in
             ConversationRowView(model: conversation, withSeparator: true)
@@ -127,7 +133,8 @@ struct JamsSearchResultView: View {
                 .contentShape(Rectangle())
                 .onTapGesture { [weak conversation, weak model] in
                     guard let conversation = conversation, let model = model else { return }
-                    model.showConversation(withConversationViewModel: conversation)
+                    model.showConversation(withConversationViewModel: conversation,
+                                           publisher: state)
                 }
                 .transition(.opacity)
                 .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))

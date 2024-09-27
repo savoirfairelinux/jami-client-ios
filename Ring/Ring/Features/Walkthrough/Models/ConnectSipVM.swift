@@ -20,14 +20,11 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class ConnectSipVM: ObservableObject, ViewModel, Dismissable {
+class ConnectSipVM: ObservableObject, ViewModel {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var server: String = ""
     @Published var isTextFieldFocused: Bool = true
-
-    // MARK: - Rx Dismissable
-    var dismiss = PublishSubject<Bool>()
 
     var connectAction: ((_ username: String, _ password: String, _ server: String) -> Void)?
 
@@ -35,7 +32,6 @@ class ConnectSipVM: ObservableObject, ViewModel, Dismissable {
     }
 
     func connect() {
-        dismissView()
         connectAction?(username, password, server)
     }
 }

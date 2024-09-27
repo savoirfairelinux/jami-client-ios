@@ -41,8 +41,10 @@ struct ReplyHistory: View {
     var target: MessageContentVM? {
         return model.target
     }
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.openURL) var openURL
+    @Environment(\.colorScheme)
+    var colorScheme
+    @Environment(\.openURL)
+    var openURL
 
     var body: some View {
         VStack(alignment: model.alignment, spacing: 4) {

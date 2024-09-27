@@ -20,6 +20,7 @@
 
 import Foundation
 import RxSwift
+import SwiftUI
 
 /// Represent a navigation state. We mostly use it as an enum
 public protocol State {
@@ -29,4 +30,20 @@ public protocol State {
 public protocol Stateable {
     /// The state that will be emitted and catch by the StateableResponsive classes to process the navigation
     var state: Observable<State> { get }
+}
+
+class StatePublisher<StateType: State>: Stateable {
+    let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
+
+    func emitState(_ newState: StateType) {
+        self.stateSubject.onNext(newState)
+    }
+}
+
+protocol StateEmittingView: View {
+    associatedtype StateEmitterType
+    var stateEmitter: StateEmitterType { get }
 }
