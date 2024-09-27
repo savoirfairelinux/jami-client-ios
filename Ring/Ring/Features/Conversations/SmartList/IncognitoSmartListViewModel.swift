@@ -21,7 +21,7 @@
 import RxSwift
 import RxCocoa
 
-class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataSource {
+class IncognitoSmartListViewModel: Stateable, ViewModel {
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()

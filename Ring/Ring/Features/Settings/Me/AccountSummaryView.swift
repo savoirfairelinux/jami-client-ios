@@ -22,7 +22,7 @@ import SwiftUI
 import RxSwift
 
 struct AccountSummaryView: View {
-    @StateObject var model: AccountSummaryVM
+    @ObservedObject var model: AccountSummaryVM
 
     @SwiftUI.State private var showEditPrpofile = false
     @SwiftUI.State private var showAccountRegistration = false
@@ -33,11 +33,10 @@ struct AccountSummaryView: View {
 
     let avatarSize: CGFloat = 60
 
-    init(injectionBag: InjectionBag, account: AccountModel, stateSubject: PublishSubject<State>) {
-        _model = StateObject(wrappedValue:
+    init(injectionBag: InjectionBag, account: AccountModel) {
+        _model = ObservedObject(wrappedValue:
                                 AccountSummaryVM(injectionBag: injectionBag,
-                                                 account: account,
-                                                 stateSubject: stateSubject))
+                                                 account: account))
     }
 
     var body: some View {
@@ -87,16 +86,19 @@ struct AccountSummaryView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(L10n.AccountPage.accountHeader)
-        .navigationBarItems(trailing:
-                                NavigationLink(destination: SettingsSummaryView(model: model)) {
-                                    Image(systemName: "gearshape.fill")
-                                        .foregroundColor(.jamiColor)
-                                })
-        .onChange(of: model.accountRemoved) { _ in
-            if model.accountRemoved {
-                presentation.wrappedValue.dismiss()
+        .navigationBarItems(leading:  Button(action: {
+            withAnimation {
+                model.dismiss()
             }
-        }
+        }, label: {
+            Text(L10n.Global.cancel)
+                .foregroundColor(.jamiColor)
+        }),
+                            trailing:
+                                NavigationLink(destination: SettingsSummaryView(model: model)) {
+            Image(systemName: "gearshape.fill")
+                .foregroundColor(.jamiColor)
+        })
     }
 
     func userIdentitySection() -> some View {
