@@ -22,6 +22,7 @@ import SwiftUI
 
 struct SmartListContentView: View {
     @ObservedObject var model: ConversationsViewModel
+    let state: ConversationStatePublisher
     @SwiftUI.State var mode: ConversationsViewModel.Target
     @SwiftUI.State var hideTopView: Bool = true
     @ObservedObject var requestsModel: RequestsViewModel
@@ -52,19 +53,18 @@ struct SmartListContentView: View {
                     .hideRowSeparator()
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
-                ConversationsView(model: model)
+                ConversationsView(model: model, state: state)
             }
             .padding(.horizontal, 15)
         }
         .transition(.opacity)
         .onAppear { [weak model] in
             guard let model = model else { return }
-            // If there was an active search before presenting the conversation, the search results should remain the same upon returning to the page.
+            // If there was an active search before presenting the conversation, the search results should remain the same upon returning to the page. Otherwise, flickering will occur.
             if model.presentedConversation.hasPresentedConversation() && !model.searchQuery.isEmpty {
                 isSearchBarActive = true
                 model.presentedConversation.resetPresentedConversation()
             }
-            mode = model.navigationTarget
             hideTopView = false
         }
         .onChange(of: isSearchBarActive) { _ in
@@ -84,12 +84,14 @@ struct SmartListContentView: View {
             RequestsView(model: requestsModel)
         }
         .sheet(isPresented: $isShowingScanner) {
-            ScanView(onCodeScanned: { [weak model] code in
+            ScanView(onCodeScanned: { [weak model, weak state] code in
                 defer {
                     isShowingScanner = false
                 }
-                guard let model = model else { return }
-                model.showConversationFromQRCode(jamiId: code)
+                guard let model = model,
+                      let state = state else { return }
+                model.showConversationFromQRCode(jamiId: code,
+                                                 publisher: state)
             }, injectionBag: model.injectionBag)
         }
     }
@@ -172,7 +174,7 @@ struct SmartListContentView: View {
         HStack {
             actionItem(icon: "qrcode", title: L10n.Smartlist.newContact, action: { isShowingScanner.toggle() })
             Spacer()
-            actionItem(icon: "person.2", title: L10n.Smartlist.newSwarm, action: model.createSwarm)
+            actionItem(icon: "person.2", title: L10n.Smartlist.newSwarm, action: state.createSwarm)
         }
         .hideRowSeparator()
     }
@@ -207,7 +209,7 @@ struct SmartListContentView: View {
                     .multilineTextAlignment(.leading)
                     .hideRowSeparator()
                     .padding(.bottom, 3)
-                if model.conversations.isEmpty {
+                if model.filteredConversations.isEmpty {
                     Text(L10n.Smartlist.noConversationsFound)
                         .font(.callout)
                         .multilineTextAlignment(.leading)
@@ -267,13 +269,13 @@ struct SmartListContentView: View {
 
     private var tempConversationsView: some View {
         VStack(alignment: .leading) {
-            TempConversationsView(model: model)
+            TempConversationsView(model: model, state: state)
         }
     }
 
     private var jamsSearchResultContainerView: some View {
         VStack(alignment: .leading) {
-            JamsSearchResultView(model: model)
+            JamsSearchResultView(model: model, state: state)
         }
     }
 

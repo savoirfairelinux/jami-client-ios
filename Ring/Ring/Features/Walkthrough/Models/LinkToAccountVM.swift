@@ -20,15 +20,12 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class LinkToAccountVM: ObservableObject, ViewModel, Dismissable {
+class LinkToAccountVM: ObservableObject, ViewModel {
     @Published var pin: String = ""
     @Published var password: String = ""
     @Published var scannedCode: String?
     @Published var animatableScanSwitch: Bool = true
     @Published var notAnimatableScanSwitch: Bool = true
-
-    // MARK: - Rx Dismissable
-    var dismiss = PublishSubject<Bool>()
 
     var linkAction: ((_ pin: String, _ password: String) -> Void)?
 
@@ -44,7 +41,6 @@ class LinkToAccountVM: ObservableObject, ViewModel, Dismissable {
     }
 
     func link() {
-        dismissView()
         linkAction?(pin, password)
     }
 

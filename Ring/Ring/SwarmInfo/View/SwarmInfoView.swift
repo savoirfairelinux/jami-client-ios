@@ -27,7 +27,8 @@ enum SwarmSettingView: String {
 // swiftlint:disable closure_body_length
 public struct SwarmInfoView: View {
 
-    @StateObject var viewmodel: SwarmInfoVM
+    @ObservedObject var viewmodel: SwarmInfoVM
+    let state = SwarmInfoStateEmmiter()
     @SwiftUI.State private var selectedView: SwarmSettingView = .about
     @SwiftUI.State private var descriptionTextFieldInput: String = ""
     @SwiftUI.State private var titleTextFieldInput: String = ""
@@ -130,7 +131,7 @@ public struct SwarmInfoView: View {
 
                 switch selectedView {
                 case .about:
-                    SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
+                        SettingsView(viewmodel: viewmodel, state: state, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
                 case .memberList:
                     MemberList(viewmodel: viewmodel)
                 }

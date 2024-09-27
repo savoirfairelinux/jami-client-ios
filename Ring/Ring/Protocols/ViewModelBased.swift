@@ -33,19 +33,6 @@ protocol ViewModel: AnyObject {
     init(with injectionBag: InjectionBag)
 }
 
-protocol Dismissable: AnyObject {
-
-    var dismiss: PublishSubject<Bool> { get set }
-
-    func dismissView()
-}
-
-extension Dismissable {
-    func dismissView() {
-        dismiss.onNext(true)
-    }
-}
-
 protocol ViewModelBased: AnyObject {
     associatedtype VMType: ViewModel
 

@@ -20,13 +20,10 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class ImportFromArchiveVM: ObservableObject, ViewModel, Dismissable {
+class ImportFromArchiveVM: ObservableObject, ViewModel {
     @Published var password: String = ""
     @Published var selectedFileURL: URL?
     @Published var pickerPresented: Bool = false
-
-    // MARK: - Rx Dismissable
-    var dismiss = PublishSubject<Bool>()
 
     var importAction: ((_ url: URL, _ password: String) -> Void)?
 
@@ -47,7 +44,6 @@ class ImportFromArchiveVM: ObservableObject, ViewModel, Dismissable {
 
     func importAccount() {
         if let selectedFileURL = selectedFileURL {
-            dismissView()
             importAction?(selectedFileURL, password)
         }
     }

@@ -21,6 +21,19 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
+class SwarmInfoStateEmmiter: Stateable {
+
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
+
+    func emitState(newState: ConversationState) {
+        self.stateSubject.onNext(newState)
+    }
+}
+
 class SwarmInfoVM: ObservableObject {
     @Published var participantsRows = [ParticipantRow]()
     @Published var selections: [String] = []
@@ -32,11 +45,6 @@ class SwarmInfoVM: ObservableObject {
 
     private let disposeBag = DisposeBag()
     private var contactsSubscriptionsDisposeBag = DisposeBag()
-    // MARK: - Rx Stateable
-    private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
     let injectionBag: InjectionBag
     private let accountService: AccountsService
     private let nameService: NameService
@@ -200,7 +208,7 @@ class SwarmInfoVM: ObservableObject {
         }
     }
 
-    func leaveSwarm() {
+    func leaveSwarm(stateEmmiter: SwarmInfoStateEmmiter) {
         guard let conversation = self.conversation else { return }
         let conversationId = conversation.id
         let accountId = conversation.accountId
@@ -220,8 +228,7 @@ class SwarmInfoVM: ObservableObject {
         } else {
             self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
         }
-        self.stateSubject.onNext(ConversationState.accountRemoved)
-
+        stateEmmiter.emitState(newState: ConversationState.conversationRemoved)
     }
 
     func ignoreSwarm(isOn: Bool) {
