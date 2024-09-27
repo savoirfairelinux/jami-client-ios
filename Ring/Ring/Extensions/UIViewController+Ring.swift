@@ -157,39 +157,8 @@ extension UIViewController {
     }
 
     func configureNavigationBar(isTransparent: Bool = false, backgroundColor: UIColor = .systemBackground) {
-        let appearance = UINavigationBarAppearance()
-        if isTransparent {
-            appearance.configureWithTransparentBackground()
-        } else {
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = backgroundColor
-        }
-
-        // Explicitly set shadow properties to none
-        appearance.shadowColor = .clear
-        appearance.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = UIColor.jamiButtonDark
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0
-
-        // Apply the appearance configuration
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.standardAppearance = appearance
-
-        if #available(iOS 16.0, *) {
-            navigationItem.preferredSearchBarPlacement = .stacked
-        }
         navigationController?.navigationBar.prefersLargeTitles = false
-    }
-
-    func configureWalkrhroughNavigationBar() {
-        let attrPortrait = [NSAttributedString.Key.foregroundColor: UIColor.jamiTextSecondary,
-                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: .thin)]
-        let attrLandscape = [NSAttributedString.Key.foregroundColor: UIColor.jamiTextSecondary,
-                             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .regular)]
-        let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
-        self.navigationController?
-            .navigationBar.titleTextAttributes = isPortrait ?
-            attrPortrait : attrLandscape
     }
 
     @objc
