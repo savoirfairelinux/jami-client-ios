@@ -33,8 +33,7 @@ struct ParticipantListCell: View {
     var isSelected: Bool
     var action: () -> Void
 
-    @ViewBuilder
-    var body: some View {
+    @ViewBuilder var body: some View {
         Button(action: self.action) {
             HStack(alignment: .center, spacing: nil) {
                 Image(uiImage: participant.imageDataFinal)
@@ -67,8 +66,7 @@ struct SelectedParticipantItem: View {
     @StateObject var participant: ParticipantRow
     var action: () -> Void
 
-    @ViewBuilder
-    var body: some View {
+    @ViewBuilder var body: some View {
         Button(action: self.action) {
             VStack(alignment: .center, spacing: nil) {
                 ZStack(alignment: .topTrailing) {
@@ -185,11 +183,12 @@ struct SwarmCreationUI: View {
 
     func createTheSwarmButtonView() -> some View {
         return Button(action: {
-                        self.hideKeyboard()
-                        list.createTheSwarm() }) {
+            self.hideKeyboard()
+            list.createTheSwarm()
+        }, label: {
             Text(L10n.Swarmcreation.createTheSwarm)
                 .swarmButtonTextStyle()
-        }
+        })
         .swarmButtonStyle()
     }
 }

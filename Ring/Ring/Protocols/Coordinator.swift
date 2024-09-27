@@ -33,10 +33,12 @@ import SwiftUI
 public enum PresentationStyle {
     case show
     case present
-    case popup
-    case appear
-    case push
+    case overCurrentContext
+    case fadeInOverFullScreen
+    case popToRootAndPush
     case formModal
+    case push
+    case replaceNavigationStack
 }
 
 /// A Coordinator drives the navigation of a whole part of the application
@@ -56,11 +58,6 @@ protocol Coordinator: AnyObject {
     var presentingVC: [String: Bool] { get set }
 
     var disposeBag: DisposeBag { get set }
-
-    /// Initializes a new Coordinator with a dependancy injection bag
-    ///
-    /// - Parameter injectionBag: The injection Bag that will be passed to every sub components that need it
-    init (with injectionBag: InjectionBag)
 
     /// Nothing will happen until this function is called
     /// it bootstraps the initial UIViewController (after the rooViewController) that will
@@ -100,7 +97,7 @@ extension Coordinator {
         case .present: self.rootViewController.present(viewController,
                                                        animated: animation,
                                                        completion: nil)
-        case .popup:
+        case .overCurrentContext:
             viewController.modalPresentationStyle = .overCurrentContext
             viewController.modalTransitionStyle = .coverVertical
             self.rootViewController.present(viewController,
@@ -114,18 +111,30 @@ extension Coordinator {
                                             completion: nil)
         case .show:
             self.rootViewController.show(viewController, sender: nil)
-        case .appear:
+        case .fadeInOverFullScreen:
             viewController.modalPresentationStyle = .overFullScreen
             viewController.modalTransitionStyle = .crossDissolve
             self.rootViewController.present(viewController,
                                             animated: animation,
                                             completion: nil)
-        case .push:
+        case .popToRootAndPush:
             if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
                 // ensure we on the root view controller
                 contoller.popViewController(animated: false)
                 contoller.pushViewController(viewController, animated: false)
             }
+
+        case .push:
+            if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
+                contoller.pushViewController(viewController, animated: animation)
+            }
+        case .replaceNavigationStack:
+            viewController.modalPresentationStyle = .overFullScreen
+            viewController.modalTransitionStyle = .coverVertical
+            if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
+                contoller.setViewControllers([viewController], animated: animation)
+            }
+
         }
 
         if let viewControllerType = VCType {
@@ -144,27 +153,27 @@ extension Coordinator {
     }
 
     func createHostingVC<Content: View>(
-        _ view: Content) -> UIViewController {
-        let viewController = UIHostingController(rootView: view)
-        return viewController
+        _ view: Content
+    ) -> UIViewController {
+        let hostingController = UIHostingController(rootView: view)
+        return hostingController
     }
 
     func createDismissableVC<Content: View>(
         _ view: Content,
-        dismissible: Dismissable
+        dismissible: DismissHandler
     ) -> UIViewController {
-        let viewController = UIHostingController(rootView: view)
-
+        let hostingController = UIHostingController(rootView: view)
         dismissible
             .dismiss
             .take(1)
             .subscribe(onNext: { [weak self] shouldDismiss in
                 if shouldDismiss {
-                    self?.dismiss(viewController: viewController, animated: true)
+                    self?.dismiss(viewController: hostingController, animated: true)
                 }
             })
             .disposed(by: self.disposeBag)
-        return viewController
+        return hostingController
     }
 
     private func dismiss(viewController: UIViewController, animated: Bool) {
@@ -174,5 +183,15 @@ extension Coordinator {
             viewController.dismiss(animated: animated, completion: nil)
         }
     }
+}
 
+/// The `RootCoordinator` protocol is designed for the root coordinator that manages
+/// the primary `UINavigationController` of the application.
+///
+/// Unlike other coordinators, which create and manage their own navigation controllers
+/// internally, the `RootCoordinator` requires a navigation controller to be passed in
+/// from `AppCoordinator`.
+protocol RootCoordinator: Coordinator {
+    var navigationController: UINavigationController { get }
+    init(navigationController: UINavigationController, injectionBag: InjectionBag)
 }

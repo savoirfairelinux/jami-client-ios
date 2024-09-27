@@ -179,13 +179,13 @@ class ContactViewModel: ViewModel, Stateable {
                         .removeConversationFromDB(conversation: conversation,
                                                   keepConversation: false)
                     self.stateSubject.onNext(ConversationState
-                                                .returnToSmartList)
+                                                .conversationRemoved)
                 })
                 .disposed(by: self.disposeBag)
         } else {
             self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
             self.stateSubject.onNext(ConversationState
-                                        .returnToSmartList)
+                                        .conversationRemoved)
         }
     }
 
@@ -206,13 +206,13 @@ class ContactViewModel: ViewModel, Stateable {
                         .removeConversationFromDB(conversation: conversation,
                                                   keepConversation: false)
                     self.stateSubject.onNext(ConversationState
-                                                .returnToSmartList)
+                                                .conversationRemoved)
                 })
                 .disposed(by: self.disposeBag)
         } else {
             self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
             self.stateSubject.onNext(ConversationState
-                                        .returnToSmartList)
+                                        .conversationRemoved)
         }
     }
 }

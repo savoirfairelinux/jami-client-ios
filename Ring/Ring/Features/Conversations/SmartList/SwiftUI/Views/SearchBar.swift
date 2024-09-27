@@ -79,7 +79,8 @@ private struct SearchBar: UIViewControllerRepresentable {
             searchController.delegate = self
         }
 
-        @objc private func searchBarTextDidBeginEditing(_ textField: UITextField) {
+        @objc
+        private func searchBarTextDidBeginEditing(_ textField: UITextField) {
             DispatchQueue.main.async {
                 withAnimation {
                     self.isSearchBarDisabled = false
@@ -96,7 +97,8 @@ private struct SearchBar: UIViewControllerRepresentable {
             }
         }
 
-        @objc private func searchBarTextDidEndEditing(_ textField: UITextField) {
+        @objc
+        private func searchBarTextDidEndEditing(_ textField: UITextField) {
             DispatchQueue.main.async {
                 withAnimation {
                     self.isActive = false

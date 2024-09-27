@@ -76,7 +76,7 @@ final class JamiSearchViewModelTests: XCTestCase {
                                     withSystemService: systemService)
         conversationVM = ConversationViewModel(with: injectionBag)
         conversationVM.conversation = ConversationModel()
-        dataSource = TestableFilteredDataSource(conversations: [conversationVM])
+        dataSource = TestableFilteredDataSource(conversations: [conversationVM], injectionBag: injectionBag)
         searchViewModel = JamiSearchViewModel(with: injectionBag, source: dataSource, searchOnlyExistingConversations: false)
     }
 

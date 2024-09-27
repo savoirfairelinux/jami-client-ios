@@ -126,25 +126,25 @@ struct LogUI: View {
     private var shareButton: some View {
         Button(action: {
             model.openShareWindow()
-        }) {
+        }, label: {
             if let uiImage = UIImage(systemName: "square.and.arrow.up") {
                 Image(uiImage: uiImage)
                     .padding(5)
                     .foregroundColor(Color.jamiColor)
             }
-        }
+        })
     }
 
     private var saveButton: some View {
         Button(action: {
             model.openDocumentBrowser()
-        }) {
+        }, label: {
             if let uiImage = UIImage(systemName: "arrow.down.circle") {
                 Image(uiImage: uiImage)
                     .padding(5)
                     .foregroundColor(Color.jamiColor)
             }
-        }
+        })
     }
 
     func actions() -> some View {

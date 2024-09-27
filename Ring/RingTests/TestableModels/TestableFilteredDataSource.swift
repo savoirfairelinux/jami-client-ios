@@ -21,11 +21,10 @@
 import Foundation
 @testable import Ring
 
-class TestableFilteredDataSource: FilterConversationDataSource {
+class TestableFilteredDataSource: ConversationDataSource {
 
-    var conversationViewModels: [Ring.ConversationViewModel]
-
-    init(conversations: [Ring.ConversationViewModel]) {
+    init(conversations: [Ring.ConversationViewModel], injectionBag: InjectionBag) {
+        super.init(with: injectionBag)
         self.conversationViewModels = conversations
     }
 }

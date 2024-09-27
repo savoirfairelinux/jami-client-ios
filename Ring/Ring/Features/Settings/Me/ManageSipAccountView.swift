@@ -24,7 +24,8 @@ struct ManageSipAccountView: View {
     @StateObject var model: SipAccountDetailModel
     @SwiftUI.State private var showRemovalAlert = false
 
-    @Environment(\.presentationMode) var presentation
+    @Environment(\.presentationMode)
+    var presentation
 
     var removeAccount: (() -> Void)
 

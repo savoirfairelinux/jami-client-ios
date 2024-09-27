@@ -106,7 +106,7 @@ class EditProfileViewModel {
            let imageData = image.convertToData(ofMaxSize: 40000) {
             photo = imageData.base64EncodedString()
         }
-        guard var details = account.details else { return }
+        guard let details = account.details else { return }
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName), withValue: self.name)
         account.details = details
         self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
