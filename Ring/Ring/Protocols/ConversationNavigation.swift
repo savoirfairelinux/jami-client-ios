@@ -26,6 +26,7 @@ enum ConversationState: State {
     case startCall(contactRingId: String, userName: String)
     case startAudioCall(contactRingId: String, userName: String)
     case conversationDetail(conversationViewModel: ConversationViewModel)
+    case closeComposingMessage
     case contactDetail(conversationViewModel: ConversationModel)
     case qrCode
     case createSwarm
@@ -48,6 +49,8 @@ enum ConversationState: State {
     case openConversationForConversationId(conversationId: String, accountId: String, shouldOpenSmarList: Bool)
     case reopenCall(viewController: CallViewController)
     case openAboutJami
+    case compose(model: ConversationsViewModel)
+    case showAccountSettings(account: AccountModel)
 }
 
 protocol ConversationNavigation: AnyObject {
@@ -91,6 +94,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     break
                 case .reopenCall(let viewController):
                     self.reopenCall(viewController: viewController)
+                case .showAccountSettings(let account):
+                    self.showAccountSettings(account: account)
                 default:
                     break
                 }
@@ -146,17 +151,22 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func presentSwarmInfo(swarmInfo: SwarmInfoProtocol) {
-        if let flag = self.presentingVC[VCType.contact.rawValue], flag {
-            return
-        }
-        self.presentingVC[VCType.contact.rawValue] = true
-        let swarmInfoViewController = SwarmInfoViewController.instantiate(with: self.injectionBag)
-        swarmInfoViewController.viewModel.swarmInfo = swarmInfo
-        self.present(viewController: swarmInfoViewController,
-                     withStyle: .show,
-                     withAnimation: true,
-                     withStateable: swarmInfoViewController.viewModel,
-                     lockWhilePresenting: VCType.contact.rawValue)
+       // guard let swarmInfo = self.viewModel.swarmInfo else { return }
+        let swiftUIVM = SwarmInfoVM(with: self.injectionBag, swarmInfo: swarmInfo)
+        let view = SwarmInfoView(viewmodel: swiftUIVM)
+        let viewController = createHostingVC(view)
+        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.viewmodel)
+//        if let flag = self.presentingVC[VCType.contact.rawValue], flag {
+//            return
+//        }
+//        self.presentingVC[VCType.contact.rawValue] = true
+//        let swarmInfoViewController = SwarmInfoViewController.instantiate(with: self.injectionBag)
+//        swarmInfoViewController.viewModel.swarmInfo = swarmInfo
+//        self.present(viewController: swarmInfoViewController,
+//                     withStyle: .show,
+//                     withAnimation: true,
+//                     withStateable: swarmInfoViewController.viewModel,
+//                     lockWhilePresenting: VCType.contact.rawValue)
     }
 
     func presentContactInfo(conversation: ConversationModel) {
@@ -181,10 +191,16 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
         conversationViewController.viewModel = conversationViewModel
         self.present(viewController: conversationViewController,
-                     withStyle: .show,
-                     withAnimation: false,
+                     withStyle: .onlyPush,
+                     withAnimation: true,
                      withStateable: conversationViewController.viewModel,
                      lockWhilePresenting: VCType.conversation.rawValue)
+    }
+
+    func showAccountSettings(account: AccountModel) {
+        let view = AccountSummaryView(injectionBag: self.injectionBag, account: account)
+        let viewController = createHostingVC(view)
+        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.model)
     }
 
     func reopenCall(viewController: CallViewController) {

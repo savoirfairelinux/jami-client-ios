@@ -21,7 +21,7 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
-class SwarmInfoVM: ObservableObject {
+class SwarmInfoVM: ObservableObject, Stateable {
     @Published var participantsRows = [ParticipantRow]()
     @Published var selections: [String] = []
     @Published var finalAvatar: UIImage = UIImage()
@@ -221,7 +221,6 @@ class SwarmInfoVM: ObservableObject {
             self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
         }
         self.stateSubject.onNext(ConversationState.accountRemoved)
-
     }
 
     func ignoreSwarm(isOn: Bool) {

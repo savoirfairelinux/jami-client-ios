@@ -153,6 +153,7 @@
 		1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC3296E0A940055EA87 /* View+Helpers.swift */; };
 		1DF75AC6296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */; };
 		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
+		2607176E2CAC454E00494875 /* ComposeNewMessageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */; };
 		26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* PreviewViewController.swift */; };
 		26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */; };
 		26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */; };
@@ -804,6 +805,7 @@
 		1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreParticipantsInSwarm.swift; sourceTree = "<group>"; };
 		26069B6524C9FCE8002361A3 /* ObjCHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCHandler.h; sourceTree = "<group>"; };
 		26069B6624C9FCE8002361A3 /* ObjCHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCHandler.m; sourceTree = "<group>"; };
+		2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComposeNewMessageCoordinator.swift; path = Ring/Features/Conversations/ComposeNewMessageCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		26074FD824F7FF9500374570 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContollerModel.swift; sourceTree = "<group>"; };
 		26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewViewController.storyboard; sourceTree = "<group>"; };
@@ -1960,6 +1962,7 @@
 				446FAF172373421500519C4F /* SendFile */,
 				1A2D18AE1F29153F00B2C785 /* Conversation */,
 				1A2D18AD1F29151E00B2C785 /* Smartlist */,
+				2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */,
 				1A2D18A91F29131900B2C785 /* ConversationsCoordinator.swift */,
 			);
 			name = Conversations;
@@ -2932,6 +2935,7 @@
 				1D4EE84D29252AD000ED2010 /* SwarmCreationUIModel.swift in Sources */,
 				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,
 				0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */,
+				2607176E2CAC454E00494875 /* ComposeNewMessageCoordinator.swift in Sources */,
 				2685F90E2A1698B400BFCDA3 /* VideoInputsManager.swift in Sources */,
 				267B95FB2C2B5FFA00353B01 /* RevocationView.swift in Sources */,
 				0E6F544F223C0ED600ECC3CE /* AccountPickerAdapter.swift in Sources */,

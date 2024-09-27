@@ -33,14 +33,14 @@ class SmartlistViewModel: Stateable, ViewModel {
     }()
 
     let injectionBag: InjectionBag
-    let conversationsModel: ConversationsViewModel
+    //let conversationsModel: ConversationsViewModel
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
-        self.conversationsModel = ConversationsViewModel(injectionBag: injectionBag, stateSubject: self.stateSubject)
+        //self.conversationsModel = ConversationsViewModel(with: injectionBag)
     }
 
     func closeAllPlayers() {
-        self.conversationsModel.closeAllPlayers()
+        //self.conversationsModel.closeAllPlayers()
     }
 }

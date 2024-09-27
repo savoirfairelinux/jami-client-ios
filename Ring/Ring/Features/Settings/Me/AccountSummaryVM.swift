@@ -31,7 +31,7 @@ public enum MeState: State {
     case needAccountMigration(accountId: String)
 }
 
-class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
+class AccountSummaryVM: ObservableObject, AvatarViewDataModel, Stateable {
     let account: AccountModel
 
     // profile
@@ -55,15 +55,21 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
     let accountService: AccountsService
     let profileService: ProfilesService
     let injectionBag: InjectionBag
-    let stateSubject: PublishSubject<State>
+    //let stateSubject: PublishSubject<State>!
 
-    init(injectionBag: InjectionBag, account: AccountModel, stateSubject: PublishSubject<State>) {
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
+
+    init(injectionBag: InjectionBag, account: AccountModel) {
         self.account = account
         self.accountService = injectionBag.accountService
         self.profileService = injectionBag.profileService
         self.injectionBag = injectionBag
         self.jamiId = account.jamiId
-        self.stateSubject = stateSubject
+      //  self.stateSubject = stateSubject
 
         // account status
         if let details = account.details {
@@ -107,9 +113,9 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
         if allAccounts.count < 1 { return }
         if allAccounts.count == 1 {
             UserDefaults.standard.set("", forKey: self.accountService.selectedAccountID)
-            self.stateSubject.onNext(MeState.needToOnboard)
             accountRemoved = true
             self.accountService.removeAccount(id: account.id)
+            self.stateSubject.onNext(MeState.needToOnboard)
             return
         }
 
@@ -123,7 +129,7 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
         }
         self.accountService.removeAccount(id: account.id)
         accountRemoved = true
-        self.stateSubject.onNext(MeState.needAccountMigration(accountId: allAccounts[1].id))
+        self.stateSubject.onNext(ConversationState.accountRemoved)
     }
 }
 

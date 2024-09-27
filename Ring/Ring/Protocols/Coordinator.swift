@@ -37,6 +37,8 @@ public enum PresentationStyle {
     case appear
     case push
     case formModal
+    case onlyPush
+    case set
 }
 
 /// A Coordinator drives the navigation of a whole part of the application
@@ -56,11 +58,6 @@ protocol Coordinator: AnyObject {
     var presentingVC: [String: Bool] { get set }
 
     var disposeBag: DisposeBag { get set }
-
-    /// Initializes a new Coordinator with a dependancy injection bag
-    ///
-    /// - Parameter injectionBag: The injection Bag that will be passed to every sub components that need it
-    init (with injectionBag: InjectionBag)
 
     /// Nothing will happen until this function is called
     /// it bootstraps the initial UIViewController (after the rooViewController) that will
@@ -97,35 +94,47 @@ extension Coordinator {
                  lockWhilePresenting VCType: String? = nil,
                  disposeBag: DisposeBag) {
         switch style {
-        case .present: self.rootViewController.present(viewController,
-                                                       animated: animation,
-                                                       completion: nil)
-        case .popup:
-            viewController.modalPresentationStyle = .overCurrentContext
-            viewController.modalTransitionStyle = .coverVertical
-            self.rootViewController.present(viewController,
-                                            animated: animation,
-                                            completion: nil)
-        case .formModal:
-            viewController.modalPresentationStyle = .formSheet
-            viewController.modalTransitionStyle = .coverVertical
-            self.rootViewController.present(viewController,
-                                            animated: animation,
-                                            completion: nil)
-        case .show:
-            self.rootViewController.show(viewController, sender: nil)
-        case .appear:
-            viewController.modalPresentationStyle = .overFullScreen
-            viewController.modalTransitionStyle = .crossDissolve
-            self.rootViewController.present(viewController,
-                                            animated: animation,
-                                            completion: nil)
-        case .push:
-            if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
-                // ensure we on the root view controller
-                contoller.popViewController(animated: false)
-                contoller.pushViewController(viewController, animated: false)
-            }
+            case .present: self.rootViewController.present(viewController,
+                                                           animated: animation,
+                                                           completion: nil)
+            case .popup:
+                viewController.modalPresentationStyle = .overCurrentContext
+                viewController.modalTransitionStyle = .coverVertical
+                self.rootViewController.present(viewController,
+                                                animated: animation,
+                                                completion: nil)
+            case .formModal:
+                viewController.modalPresentationStyle = .formSheet
+                viewController.modalTransitionStyle = .coverVertical
+                self.rootViewController.present(viewController,
+                                                animated: animation,
+                                                completion: nil)
+            case .show:
+                self.rootViewController.show(viewController, sender: nil)
+            case .appear:
+                viewController.modalPresentationStyle = .overFullScreen
+                viewController.modalTransitionStyle = .crossDissolve
+                self.rootViewController.present(viewController,
+                                                animated: animation,
+                                                completion: nil)
+            case .push:
+                if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
+                    // ensure we on the root view controller
+                    contoller.popViewController(animated: false)
+                    contoller.pushViewController(viewController, animated: false)
+                }
+
+            case .onlyPush:
+                if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
+                    contoller.pushViewController(viewController, animated: animation)
+                }
+            case .set:
+                viewController.modalPresentationStyle = .overFullScreen
+                viewController.modalTransitionStyle = .coverVertical
+                if let contoller: UINavigationController = self.rootViewController as? UINavigationController {
+                    contoller.setViewControllers([viewController], animated: animation)
+                }
+
         }
 
         if let viewControllerType = VCType {
@@ -174,5 +183,15 @@ extension Coordinator {
             viewController.dismiss(animated: animated, completion: nil)
         }
     }
+}
 
+/// The `RootCoordinator` protocol is designed for the root coordinator that manages
+/// the primary `UINavigationController` of the application.
+///
+/// Unlike other coordinators, which create and manage their own navigation controllers
+/// internally, the `RootCoordinator` requires a navigation controller to be passed in
+/// from `AppCoordinator`.
+protocol RootCoordinator: Coordinator {
+    var navigationController: UINavigationController { get }
+    init(navigationController: UINavigationController, injectionBag: InjectionBag)
 }

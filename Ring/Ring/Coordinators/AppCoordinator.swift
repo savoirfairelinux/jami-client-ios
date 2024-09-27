@@ -55,26 +55,18 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     var parentCoordinator: Coordinator?
 
     var childCoordinators = [Coordinator]()
-    // MARK: -
 
     // MARK: StateableResponsive
     var disposeBag = DisposeBag()
 
     let stateSubject = PublishSubject<State>()
-    // MARK: -
 
     // MARK: Private members
-    private let navigationController = UINavigationController()
+    private let navigationController: UINavigationController = UINavigationController()
     let injectionBag: InjectionBag
 
-    /// Initializer
-    ///
-    /// - Parameter injectionBag: the injected injectionBag
-    required init (with injectionBag: InjectionBag) {
+    init(injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
-
-        self.navigationController.setNavigationBarHidden(true, animated: false)
-
         self.stateSubject
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? AppState else { return }
@@ -134,9 +126,10 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     // MARK: - Private methods
 
-    /// Presents the walkthrough as a popup with a fade effect
+    /// Presents the walkthrough
     private func showWalkthrough (animated: Bool, isAccountFirst: Bool) {
-        let walkthroughCoordinator = WalkthroughCoordinator(with: self.injectionBag)
+        let walkthroughCoordinator = WalkthroughCoordinator(injectionBag: self.injectionBag)
+        walkthroughCoordinator.parentCoordinator = self
         walkthroughCoordinator.isAccountFirst = isAccountFirst
         walkthroughCoordinator.withAnimations = animated
         walkthroughCoordinator.start()
@@ -147,7 +140,6 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                      withStyle: .appear,
                      withAnimation: true,
                      disposeBag: self.disposeBag)
-
         walkthroughViewController.rx.controllerWasDismissed
             .subscribe(onNext: { [weak self, weak walkthroughCoordinator] (_) in
                 walkthroughCoordinator?.stateSubject.dispose()
@@ -159,18 +151,24 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     /// Presents the main interface
     private func showMainInterface () {
-
-        if !self.childCoordinators.isEmpty,
-           self.childCoordinators[0] as? ConversationsCoordinator != nil {
+        if self.isConversationsPresented() {
             return
         }
-        let conversationsCoordinator = ConversationsCoordinator(with: self.injectionBag)
+        let conversationsCoordinator = ConversationsCoordinator(navigationController: self.navigationController, injectionBag: self.injectionBag)
         conversationsCoordinator.parentCoordinator = self
-        conversationsCoordinator.setNavigationController(controller: self.navigationController)
-        conversationsCoordinator.start()
         self.addChildCoordinator(childCoordinator: conversationsCoordinator)
+        conversationsCoordinator.start()
     }
 
+    private func isConversationsPresented() -> Bool {
+        return self.childCoordinators.contains(where: { coordinator in
+            return coordinator is ConversationsCoordinator
+        })
+    }
+}
+
+// MARK: - open conversation from notification
+extension AppCoordinator {
     func openConversation(participantID: String) {
         if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
             conversationCoordinator.pushConversation(participantId: participantID)
@@ -182,7 +180,10 @@ final class AppCoordinator: Coordinator, StateableResponsive {
             conversationCoordinator.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: true)
         }
     }
+}
 
+// MARK: - staert call from resent calls in phone book
+extension AppCoordinator {
     func startCall(participant: String, name: String, isVideo: Bool) {
         DispatchQueue.main.async {
             for child in self.childCoordinators {
@@ -190,12 +191,12 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                     if isVideo {
                         childCoordinattor.stateSubject
                             .onNext(ConversationState
-                                        .startCall(contactRingId: participant, userName: name))
+                                .startCall(contactRingId: participant, userName: name))
                         return
                     }
                     childCoordinattor.stateSubject
                         .onNext(ConversationState
-                                    .startAudioCall(contactRingId: participant, userName: name))
+                            .startAudioCall(contactRingId: participant, userName: name))
                     return
                 }
             }

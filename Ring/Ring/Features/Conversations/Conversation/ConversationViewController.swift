@@ -96,11 +96,13 @@ class ConversationViewController: UIViewController,
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layer.shadowOpacity = 0
+       // self.navigationController?.setNavigationBarHidden(true, animated: animated)
         self.viewModel.setMessagesAsRead()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+      //  self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                            displayName: self.viewModel.displayName.value,
                            username: self.viewModel.userName.value)
