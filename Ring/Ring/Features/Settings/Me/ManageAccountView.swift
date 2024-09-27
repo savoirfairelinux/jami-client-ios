@@ -92,7 +92,6 @@ struct ManageAccountView: View {
                 })
                 Spacer()
                 Button(action: {
-                    presentation.wrappedValue.dismiss()
                     model.removeAccount()
                 }, label: {
                     Text(L10n.Global.remove)
