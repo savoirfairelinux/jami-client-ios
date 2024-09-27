@@ -54,7 +54,7 @@ final class ContactUtilsTests: XCTestCase {
                           "firstName": firstName,
                           "lastName": lastName,
                           "organization": organization,
-                          "jamiId": jamiId,
+                          "id": jamiId,
                           "profilePicture": profilePicture]
         let imageData = NSData(base64Encoded: profilePicture, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
         let userDetails = ContactsUtils.deserializeUser(dictionary: dictionary)
