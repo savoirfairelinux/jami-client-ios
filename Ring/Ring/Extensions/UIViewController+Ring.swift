@@ -157,24 +157,7 @@ extension UIViewController {
     }
 
     func configureNavigationBar(isTransparent: Bool = false, backgroundColor: UIColor = .systemBackground) {
-        let appearance = UINavigationBarAppearance()
-        if isTransparent {
-            appearance.configureWithTransparentBackground()
-        } else {
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = backgroundColor
-        }
-
-        // Explicitly set shadow properties to none
-        appearance.shadowColor = .clear
-        appearance.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = UIColor.jamiButtonDark
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0
-
-        // Apply the appearance configuration
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.standardAppearance = appearance
-
         if #available(iOS 16.0, *) {
             navigationItem.preferredSearchBarPlacement = .stacked
         }
