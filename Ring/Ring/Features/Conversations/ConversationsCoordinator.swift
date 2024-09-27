@@ -27,18 +27,18 @@ import os
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable type_body_length
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
-class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
+class ConversationsCoordinator: RootCoordinator, StateableResponsive, ConversationNavigation {
     var presentingVC = [String: Bool]()
 
     var rootViewController: UIViewController {
-        return self.navigationViewController
+        return self.navigationController
     }
 
     var childCoordinators = [Coordinator]()
     var parentCoordinator: Coordinator?
     var smartListViewController = UIViewController()
 
-    private var navigationViewController = UINavigationController()
+    var navigationController = UINavigationController()
     let injectionBag: InjectionBag
     var disposeBag = DisposeBag()
 
@@ -49,8 +49,11 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     let callsProvider: CallsProviderService
     let nameService: NameService
     let requestsService: RequestsService
+    let conversationsSource: ConversationDataSource
 
-    required init (with injectionBag: InjectionBag) {
+    required init(navigationController: UINavigationController, injectionBag: InjectionBag) {
+        // we get navigationController from app coordinator, as it main view for the application
+        self.navigationController = navigationController
         self.injectionBag = injectionBag
 
         self.callService = injectionBag.callService
@@ -59,6 +62,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.conversationService = injectionBag.conversationsService
         self.callsProvider = injectionBag.callsProvider
         self.requestsService = injectionBag.requestsService
+        self.conversationsSource = ConversationDataSource(with: injectionBag)
         self.addLockFlags()
 
         self.stateSubject
@@ -66,34 +70,38 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ConversationState else { return }
                 switch state {
-                case .createNewAccount:
-                    self.createNewAccount()
-                case .showDialpad(let inCall):
-                    self.showDialpad(inCall: inCall)
-                case .openAboutJami:
-                    self.openAboutJami()
-                case .navigateToCall(let call):
-                    self.navigateToCall(call: call)
-                case .showContactPicker(let callID, let contactCallBack, let conversationCallBack):
-                    self.showContactPicker(callId: callID, contactSelectedCB: contactCallBack, conversationSelectedCB: conversationCallBack)
-                case .accountRemoved:
-                    self.popToSmartList()
-                case .needToOnboard:
-                    self.needToOnboard()
-                case .accountModeChanged:
-                    self.accountModeChanged()
-                case .migrateAccount(let accountId):
-                    self.migrateAccount(accountId: accountId)
-                case .returnToSmartList:
-                    self.popToSmartList()
-                case .openConversation(let jamiId):
-                    self.openConversation(jamiId: jamiId)
-                case .openConversationForConversationId(let conversationId, let accountId, let shouldOpenSmarList):
-                    self.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: shouldOpenSmarList)
-                case .openConversationFromCall(let conversation):
-                    self.openConversationFromCall(conversationModel: conversation)
-                default:
-                    break
+                    case .createNewAccount:
+                        self.createNewAccount()
+                    case .showDialpad(let inCall):
+                        self.showDialpad(inCall: inCall)
+                    case .openAboutJami:
+                        self.openAboutJami()
+                    case .navigateToCall(let call):
+                        self.navigateToCall(call: call)
+                    case .showContactPicker(let callID, let contactCallBack, let conversationCallBack):
+                        self.showContactPicker(callId: callID, contactSelectedCB: contactCallBack, conversationSelectedCB: conversationCallBack)
+                    case .conversationRemoved:
+                        self.popToSmartList()
+                    case .needToOnboard:
+                        self.needToOnboard()
+                    case .migrateAccount(let accountId):
+                        self.migrateAccount(accountId: accountId)
+                    case .openNewConversation(let jamiId):
+                        self.openNewConversation(jamiId: jamiId)
+                    case .openConversationForConversationId(let conversationId,
+                                                            let accountId,
+                                                            let shouldOpenSmarList,
+                                                            let withAnimation):
+                        self.openConversation(conversationId: conversationId,
+                                              accountId: accountId,
+                                              shouldOpenSmarList: shouldOpenSmarList,
+                                              withAnimation: withAnimation)
+                    case .openConversationFromCall(let conversation):
+                        self.openConversationFromCall(conversationModel: conversation)
+                    case .compose(let model):
+                        self.presentCompose(model: model)
+                    default:
+                        break
                 }
             })
             .disposed(by: self.disposeBag)
@@ -108,14 +116,34 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.callbackPlaceCall()
     }
 
-    func needToOnboard() {
-        if let parent = self.parentCoordinator as? AppCoordinator {
-            self.navigationViewController.popViewController(animated: false)
-            parent.stateSubject.onNext(AppState.needToOnboard(animated: false, isFirstAccount: true))
+    func start() {
+        let view = SmartListContainer(injectionBag: self.injectionBag, source: self.conversationsSource)
+        let viewController = createHostingVC(view)
+        self.smartListViewController = viewController
+        self.present(viewController: viewController, withStyle: .set, withAnimation: true, withStateable: view.viewModel)
+    }
+
+    func addLockFlags() {
+        presentingVC[VCType.contact.rawValue] = false
+        presentingVC[VCType.conversation.rawValue] = false
+    }
+}
+// swiftlint:enable cyclomatic_complexity
+// swiftlint:enable type_body_length
+
+// MARK: - State
+extension ConversationsCoordinator {
+    func popToSmartList() {
+        let viewControllers = navigationController.viewControllers
+        if viewControllers.contains(smartListViewController) {
+            navigationController.popToViewController(smartListViewController, animated: false)
         }
     }
-    func accountModeChanged() {
-        self.start()
+
+    func needToOnboard() {
+        if let parent = self.parentCoordinator as? AppCoordinator {
+            parent.stateSubject.onNext(AppState.needToOnboard(animated: false, isFirstAccount: true))
+        }
     }
 
     func migrateAccount(accountId: String) {
@@ -124,9 +152,147 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         }
     }
 
+    func createNewAccount() {
+        if let parent = self.parentCoordinator as? AppCoordinator {
+            parent.stateSubject.onNext(AppState.addAccount)
+        }
+    }
+
+    func showDialpad(inCall: Bool) {
+        let dialpadViewController = DialpadViewController.instantiate(with: self.injectionBag)
+        dialpadViewController.viewModel.inCallDialpad = inCall
+        if !inCall {
+            self.present(viewController: dialpadViewController,
+                         withStyle: .present,
+                         withAnimation: true,
+                         withStateable: dialpadViewController.viewModel)
+            return
+        }
+        if let controller = self.navigationController.visibleViewController as? CallViewController {
+            controller.present(dialpadViewController, animated: true, completion: nil)
+        }
+    }
+
+    func showContactPicker(callId: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)? = nil, conversationSelectedCB: ((_ conversationIds: [String]) -> Void)? = nil) {
+        let contactPickerViewController = ContactPickerViewController.instantiate(with: self.injectionBag)
+        contactPickerViewController.type = callId.isEmpty ? .forConversation : .forCall
+        contactPickerViewController.viewModel.currentCallId = callId
+        contactPickerViewController.viewModel.contactSelectedCB = contactSelectedCB
+        contactPickerViewController.viewModel.conversationSelectedCB = conversationSelectedCB
+        if let controller = self.navigationController.visibleViewController as? ContactPickerDelegate {
+            controller.presentContactPicker(contactPickerVC: contactPickerViewController)
+        }
+    }
+
+    func openAboutJami() {
+        let aboutJamiController = AboutViewController.instantiate()
+        self.present(viewController: aboutJamiController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
+    }
+
+    func presentCompose(model: ConversationsViewModel) {
+        let composeCoordinator = ComposeNewMessageCoordinator(injectionBag: self.injectionBag)
+        composeCoordinator.conversationsSource = self.conversationsSource
+        composeCoordinator.parentCoordinator = self
+        self.addChildCoordinator(childCoordinator: composeCoordinator)
+        composeCoordinator.start()
+        let composeController = composeCoordinator.rootViewController
+        self.present(viewController: composeController,
+                     withStyle: .popup,
+                     withAnimation: true,
+                     disposeBag: self.disposeBag)
+        composeController.rx.controllerWasDismissed
+            .subscribe(onNext: { [weak self, weak composeCoordinator] (_) in
+                self?.removeChildCoordinator(childCoordinator: composeCoordinator)
+            })
+            .disposed(by: self.disposeBag)
+    }
+}
+
+
+
+// MARK: - Open conversation
+extension ConversationsCoordinator {
+    func openConversationFromNotificationFor(participantId: String) {
+        self.popToSmartList()
+        guard let account = accountService.currentAccount else {
+            return
+        }
+        guard let uriString = JamiURI(schema: URIType.ring, infoHash: participantId).uriString else {
+            return
+        }
+        if let model = getConversationViewModelForParticipant(jamiId: uriString) {
+            self.showConversation(withConversationViewModel: model)
+            return
+        }
+        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: participantId, accontId: account.id) else {
+            return
+        }
+        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
+        conversationViewModel.conversation = conversation
+        self.showConversation(withConversationViewModel: conversationViewModel)
+    }
+
+    func openNewConversation(jamiId: String) {
+        guard let account = self.accountService.currentAccount else { return }
+        let uri = JamiURI(schema: URIType.ring, infoHash: jamiId)
+        if let conversation = self.getConversationViewModelForParticipant(jamiId: jamiId) {
+            self.showConversation(withConversationViewModel: conversation)
+            return
+        }
+        let conversation = ConversationModel(withParticipantUri: uri,
+                                             accountId: account.id)
+        let newConversation = ConversationViewModel(with: self.injectionBag)
+        newConversation.conversation = conversation
+        self.showConversation(withConversationViewModel: newConversation)
+    }
+
+    func openConversation(conversationId: String, accountId: String, shouldOpenSmarList: Bool, withAnimation: Bool) {
+        if shouldOpenSmarList {
+            popToSmartList()
+        }
+        if let model = getConversationViewModelForId(conversationId: conversationId) {
+            self.showConversation(withConversationViewModel: model, withAnimation: false)
+        }
+        if !shouldOpenSmarList {
+            let viewControllers = navigationController.viewControllers
+            if let index = viewControllers.firstIndex(where: { $0 is SwarmCreationViewController }) {
+                navigationController.viewControllers.remove(at: index)
+            }
+        }
+    }
+
+    func openConversationFromCall(conversationModel: ConversationModel) {
+        guard let navigationController = self.rootViewController as? UINavigationController else { return }
+        let controllers = navigationController.children
+        for controller in controllers
+        where controller.isKind(of: (ConversationViewController).self) {
+            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation == conversationModel {
+                navigationController.popToViewController(conversationController, animated: true)
+                conversationController.becomeFirstResponder()
+                return
+            }
+        }
+        self.openConversation(conversationId: conversationModel.id, accountId: conversationModel.accountId, shouldOpenSmarList: true, withAnimation: true)
+    }
+
+    func getConversationViewModelForParticipant(jamiId: String) -> ConversationViewModel? {
+        return self.conversationsSource.conversationViewModels.first(where: { model in
+            model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId
+        })
+    }
+
+    func getConversationViewModelForId(conversationId: String) -> ConversationViewModel? {
+        return self.conversationsSource.conversationViewModels.first(where: { model in
+            model.conversation.id == conversationId
+        })
+    }
+}
+
+// MARK: - Call
+extension ConversationsCoordinator {
     func showIncomingCall(call: CallModel) {
         guard let account = self.accountService
-                .getAccount(fromAccountId: call.accountId),
+            .getAccount(fromAccountId: call.accountId),
               !call.callId.isEmpty else {
             return
         }
@@ -143,7 +309,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     return false
                 }
                 guard let callUUID: String = serviceEvent
-                        .getEventInput(ServiceEventInput.callUUID) else {
+                    .getEventInput(ServiceEventInput.callUUID) else {
                     return false
                 }
                 return callUUID == call?.callUUID.uuidString
@@ -162,7 +328,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.nameService.usernameLookupStatus
             .filter({ [weak call] lookupNameResponse in
                 return lookupNameResponse.address != nil &&
-                    lookupNameResponse.address == call?.paricipantHash()
+                lookupNameResponse.address == call?.paricipantHash()
             })
             .asObservable()
             .take(1)
@@ -176,20 +342,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             .disposed(by: self.disposeBag)
         self.nameService.lookupAddress(withAccount: account.id, nameserver: "", address: call.participantUri.filterOutHost())
 
-    }
-
-    func openConversation(jamiId: String) {
-        guard let account = self.accountService.currentAccount else { return }
-        let uri = JamiURI(schema: URIType.ring, infoHash: jamiId)
-        if let conversation = self.getConversationViewModelForParticipant(jamiId: jamiId) {
-            self.showConversation(withConversationViewModel: conversation)
-            return
-        }
-        let conversation = ConversationModel(withParticipantUri: uri,
-                                             accountId: account.id)
-        let newConversation = ConversationViewModel(with: self.injectionBag)
-        newConversation.conversation = conversation
-        self.showConversation(withConversationViewModel: newConversation)
     }
 
     func presentCallScreen(call: CallModel) {
@@ -211,148 +363,4 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                      withAnimation: false,
                      withStateable: controller.viewModel)
     }
-
-    func createNewAccount() {
-        if let parent = self.parentCoordinator as? AppCoordinator {
-            parent.stateSubject.onNext(AppState.addAccount)
-        }
-    }
-
-    func showDialpad(inCall: Bool) {
-        let dialpadViewController = DialpadViewController.instantiate(with: self.injectionBag)
-        dialpadViewController.viewModel.inCallDialpad = inCall
-        if !inCall {
-            self.present(viewController: dialpadViewController,
-                         withStyle: .present,
-                         withAnimation: true,
-                         withStateable: dialpadViewController.viewModel)
-            return
-        }
-        if let controller = self.navigationViewController.visibleViewController as? CallViewController {
-            controller.present(dialpadViewController, animated: true, completion: nil)
-        }
-    }
-
-    func showContactPicker(callId: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)? = nil, conversationSelectedCB: ((_ conversationIds: [String]) -> Void)? = nil) {
-        let contactPickerViewController = ContactPickerViewController.instantiate(with: self.injectionBag)
-        contactPickerViewController.type = callId.isEmpty ? .forConversation : .forCall
-        contactPickerViewController.viewModel.currentCallId = callId
-        contactPickerViewController.viewModel.contactSelectedCB = contactSelectedCB
-        contactPickerViewController.viewModel.conversationSelectedCB = conversationSelectedCB
-        if let controller = self.navigationViewController.visibleViewController as? ContactPickerDelegate {
-            controller.presentContactPicker(contactPickerVC: contactPickerViewController)
-        }
-    }
-
-    func openAboutJami() {
-        let aboutJamiController = AboutViewController.instantiate()
-        self.present(viewController: aboutJamiController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
-    }
-
-    func popToSmartList() {
-        let viewControllers = navigationViewController.viewControllers
-        if viewControllers.contains(smartListViewController) {
-            navigationViewController.popToViewController(smartListViewController, animated: false)
-        }
-    }
-
-    func openConversationFromCall(conversationModel: ConversationModel) {
-        guard let navigationController = self.rootViewController as? UINavigationController else { return }
-        let controllers = navigationController.children
-        for controller in controllers
-        where controller.isKind(of: (ConversationViewController).self) {
-            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation == conversationModel {
-                navigationController.popToViewController(conversationController, animated: true)
-                conversationController.becomeFirstResponder()
-                return
-            }
-        }
-        self.openConversation(conversationId: conversationModel.id, accountId: conversationModel.accountId, shouldOpenSmarList: true)
-    }
-
-    func openConversation(conversationId: String, accountId: String, shouldOpenSmarList: Bool) {
-        if shouldOpenSmarList {
-            popToSmartList()
-        }
-        if let model = getConversationViewModelForId(conversationId: conversationId) {
-            self.showConversation(withConversationViewModel: model)
-        }
-        if !shouldOpenSmarList {
-            let viewControllers = navigationViewController.viewControllers
-            if let index = viewControllers.firstIndex(where: { $0 is SwarmCreationViewController }) {
-                navigationViewController.viewControllers.remove(at: index)
-            }
-        }
-    }
-
-    func pushConversation(participantId: String) {
-        self.popToSmartList()
-        guard let account = accountService.currentAccount else {
-            return
-        }
-        guard let uriString = JamiURI(schema: URIType.ring, infoHash: participantId).uriString else {
-            return
-        }
-        if let model = getConversationViewModelForParticipant(jamiId: uriString) {
-            self.showConversation(withConversationViewModel: model)
-            return
-        }
-        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: participantId, accontId: account.id) else {
-            return
-        }
-        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-        conversationViewModel.conversation = conversation
-        self.showConversation(withConversationViewModel: conversationViewModel)
-    }
-
-    func start() {
-        let boothMode = self.accountService.boothMode()
-        if boothMode {
-            let smartViewController = IncognitoSmartListViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: smartViewController, withStyle: .show, withAnimation: true, withStateable: smartViewController.viewModel)
-            smartListViewController = smartViewController
-            return
-        }
-        //        let smartViewController = SwarmCreationViewController.instantiate(with: self.injectionBag)
-        let smartViewController = SmartlistViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: smartViewController, withStyle: .show, withAnimation: true, withStateable: smartViewController.viewModel)
-        smartListViewController = smartViewController
-    }
-
-    func setNavigationController(controller: UINavigationController) {
-        navigationViewController = controller
-    }
-
-    func getConversationViewModelForParticipant(jamiId: String) -> ConversationViewModel? {
-        let viewControllers = self.navigationViewController.children
-        for controller in viewControllers {
-            if let smartController = controller as? SmartlistViewController {
-                for model in smartController.viewModel.conversationsModel.conversationViewModels where
-                    model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId {
-                    return model
-                }
-            }
-        }
-        return nil
-    }
-
-    func getConversationViewModelForId(conversationId: String) -> ConversationViewModel? {
-        let viewControllers = self.navigationViewController.children
-        for controller in viewControllers {
-            if let smartController = controller as? SmartlistViewController {
-                for model in smartController.viewModel.conversationsModel.conversationViewModels where
-                    model.conversation.id == conversationId {
-                    return model
-                }
-            }
-        }
-        return nil
-    }
-
-    func addLockFlags() {
-        presentingVC[VCType.contact.rawValue] = false
-        presentingVC[VCType.conversation.rawValue] = false
-    }
 }
-// swiftlint:enable cyclomatic_complexity
-// swiftlint:enable type_body_length
