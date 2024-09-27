@@ -19,11 +19,11 @@
 import SwiftUI
 
 struct JamsConnectView: View {
-    @ObservedObject var viewModel: ConnectToManagerVM
+    @StateObject var viewModel: ConnectToManagerVM
 
     init(injectionBag: InjectionBag,
          connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
-        _viewModel = ObservedObject(wrappedValue:
+        _viewModel = StateObject(wrappedValue:
                                         ConnectToManagerVM(with: injectionBag))
         viewModel.connectAction = connectAction
     }

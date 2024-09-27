@@ -19,7 +19,7 @@
 import SwiftUI
 
 struct CreateAccountView: View {
-    @ObservedObject var viewModel: CreateAccountVM
+    @StateObject var viewModel: CreateAccountVM
     let createAction: (String, String, String, UIImage?) -> Void
 
     @SwiftUI.State private var isTextFieldFocused = true
@@ -34,7 +34,7 @@ struct CreateAccountView: View {
 
     init(injectionBag: InjectionBag,
          createAction: @escaping (String, String, String, UIImage?) -> Void) {
-        _viewModel = ObservedObject(wrappedValue:
+        _viewModel = StateObject(wrappedValue:
                                         CreateAccountVM(with: injectionBag))
         self.createAction = createAction
     }

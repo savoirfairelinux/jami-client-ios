@@ -19,11 +19,11 @@
 import SwiftUI
 
 struct ImportFromArchiveView: View {
-    @ObservedObject var viewModel: ImportFromArchiveVM
+    @StateObject var viewModel: ImportFromArchiveVM
 
     init(injectionBag: InjectionBag,
          importAction: @escaping (_ url: URL, _ password: String) -> Void) {
-        _viewModel = ObservedObject(wrappedValue:
+        _viewModel = StateObject(wrappedValue:
                                         ImportFromArchiveVM(with: injectionBag))
         viewModel.importAction = importAction
     }

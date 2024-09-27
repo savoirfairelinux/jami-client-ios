@@ -19,12 +19,12 @@
 import SwiftUI
 
 struct LinkToAccountView: View {
-    @ObservedObject var viewModel: LinkToAccountVM
+    @StateObject var viewModel: LinkToAccountVM
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
     init(injectionBag: InjectionBag,
          linkAction: @escaping (_ pin: String, _ password: String) -> Void) {
-        _viewModel = ObservedObject(wrappedValue:
+        _viewModel = StateObject(wrappedValue:
                                         LinkToAccountVM(with: injectionBag))
         viewModel.linkAction = linkAction
     }

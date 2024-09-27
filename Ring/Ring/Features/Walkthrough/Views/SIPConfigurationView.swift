@@ -19,11 +19,11 @@
 import SwiftUI
 
 struct SIPConfigurationView: View {
-    @ObservedObject var viewModel: ConnectSipVM
+    @StateObject var viewModel: ConnectSipVM
 
     init(injectionBag: InjectionBag,
          connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
-        _viewModel = ObservedObject(wrappedValue:
+        _viewModel = StateObject(wrappedValue:
                                         ConnectSipVM(with: injectionBag))
         viewModel.connectAction = connectAction
     }
