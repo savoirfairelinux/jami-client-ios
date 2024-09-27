@@ -34,6 +34,6 @@ class ScanViewModel: ViewModel, Stateable {
     required init(with injectionBag: InjectionBag) {}
 
     func openConversation(jamiId: String) {
-        self.stateSubject.onNext(ConversationState.openConversation(jamiId: jamiId))
+        self.stateSubject.onNext(ConversationState.openNewConversation(jamiId: jamiId))
     }
 }

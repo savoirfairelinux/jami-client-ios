@@ -84,6 +84,14 @@ class ConversationViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let standardAppearance = UINavigationBarAppearance()
+        standardAppearance.configureWithOpaqueBackground()
+        standardAppearance.shadowImage = UIImage()
+        standardAppearance.shadowColor = .clear
+        standardAppearance.backgroundColor = UIColor.systemBackground
+
+        self.navigationItem.standardAppearance = standardAppearance
+        self.navigationItem.scrollEdgeAppearance = standardAppearance
         self.configureNavigationBar()
         self.setupUI()
         self.setupBindings()
@@ -94,8 +102,6 @@ class ConversationViewController: UIViewController,
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0
         self.viewModel.setMessagesAsRead()
     }
 
@@ -123,12 +129,10 @@ class ConversationViewController: UIViewController,
                 guard let self = self else { return }
                 if self.navigationItem.rightBarButtonItems?.isEmpty == hide { return }
                 if hide {
-                    self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
                     self.navigationItem.titleView = UIView()
                     self.navigationItem.rightBarButtonItems = []
                     self.navigationItem.setHidesBackButton(true, animated: false)
                 } else {
-                    self.configureNavigationBar()
                     self.setRightNavigationButtons()
                     self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                                        displayName: self.viewModel.displayName.value,
