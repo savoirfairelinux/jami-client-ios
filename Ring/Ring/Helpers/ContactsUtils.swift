@@ -33,14 +33,18 @@ class ContactsUtils {
     }
 
     class func deserializeUser(dictionary: [String: String]) -> JamiSearchViewModel.JamsUserSearchModel? {
-        guard let username = dictionary["username"],
-              let firstName = dictionary["firstName"],
-              let lastName = dictionary["lastName"],
-              let organization = dictionary["organization"],
-              let jamiId = dictionary["id"] ?? dictionary["jamiId"],
-              let base64Encoded = dictionary["profilePicture"]
-        else { return nil }
-        let imageData = NSData(base64Encoded: base64Encoded, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+        guard let jamiId = dictionary["id"] else {
+            return nil
+        }
+
+        let username = dictionary["username"] ?? ""
+        let firstName = dictionary["firstName"] ?? ""
+        let lastName = dictionary["lastName"] ?? ""
+        let organization = dictionary["organization"] ?? ""
+
+        let base64Encoded = dictionary["profilePicture"]
+        let imageData = base64Encoded.flatMap { NSData(base64Encoded: $0, options: .ignoreUnknownCharacters) as Data? }
+
         return JamiSearchViewModel.JamsUserSearchModel(username: username,
                                                        firstName: firstName,
                                                        lastName: lastName,
