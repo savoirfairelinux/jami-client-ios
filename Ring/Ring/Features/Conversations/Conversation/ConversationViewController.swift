@@ -84,6 +84,14 @@ class ConversationViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let standardAppearance = UINavigationBarAppearance()
+        standardAppearance.configureWithOpaqueBackground()
+        standardAppearance.shadowImage = UIImage()
+        standardAppearance.shadowColor = .clear
+        standardAppearance.backgroundColor = UIColor.systemBackground
+
+        self.navigationItem.standardAppearance = standardAppearance
+        self.navigationItem.scrollEdgeAppearance = standardAppearance
         self.configureNavigationBar()
         self.setupUI()
         self.setupBindings()
@@ -94,13 +102,12 @@ class ConversationViewController: UIViewController,
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0
         self.viewModel.setMessagesAsRead()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                            displayName: self.viewModel.displayName.value,
                            username: self.viewModel.userName.value)
