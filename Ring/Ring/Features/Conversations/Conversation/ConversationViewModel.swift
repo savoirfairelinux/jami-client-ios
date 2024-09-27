@@ -332,6 +332,25 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             .disposed(by: self.disposeBag)
     }
 
+    // Add the matches method to handle filtering logic
+    func matches(_ searchQuery: String) -> Bool {
+        if self.model().isSwarm() {
+            guard let swarmInfo = self.swarmInfo else { return false }
+            return swarmInfo.contains(searchQuery: searchQuery)
+        } else {
+            var displayNameContainsText = false
+            if let displayName = self.displayName.value {
+                displayNameContainsText = displayName.containsCaseInsensitive(string: searchQuery)
+            }
+            var participantHashContainsText = false
+            if let hash = self.model().getParticipants().first?.jamiId {
+                participantHashContainsText = hash.containsCaseInsensitive(string: searchQuery)
+            }
+            return self.userName.value.containsCaseInsensitive(string: searchQuery) ||
+                displayNameContainsText || participantHashContainsText
+        }
+    }
+
     func editMessage(content: String, messageId: String) {
         guard let conversation = self.conversation else { return }
         self.conversationsService.editSwarmMessage(conversationId: conversation.id, accountId: conversation.accountId, message: content, parentId: messageId)
@@ -650,7 +669,7 @@ extension ConversationViewModel {
         guard let accountId = self.accountService.currentAccount?.id else { return }
         if items.contains(where: { $0 == self.conversation.id }) { return } // if items contains the current conversation, we do not need to change it
         guard let selectedConversationId = items.first else { return }
-        self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: selectedConversationId, accountId: accountId, shouldOpenSmarList: true))
+        self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: selectedConversationId, accountId: accountId, shouldOpenSmarList: true, withAnimation: true))
     }
 
     private func shareMessage(message: MessageContentVM, with conversationId: String, fileURL: URL?, fileName: String) {

@@ -22,6 +22,7 @@ import SwiftUI
 
 struct ManageAccountView: View {
     @ObservedObject var model: AccountSummaryVM
+    let state: AccountStatePublisher
     @Environment(\.presentationMode)
     var presentation
     @SwiftUI.State private var showRemovalAlert = false
@@ -92,8 +93,7 @@ struct ManageAccountView: View {
                 })
                 Spacer()
                 Button(action: {
-                    presentation.wrappedValue.dismiss()
-                    model.removeAccount()
+                    model.removeAccount(statePublisher: self.state)
                 }, label: {
                     Text(L10n.Global.remove)
                         .foregroundColor(Color(UIColor.jamiFailure))

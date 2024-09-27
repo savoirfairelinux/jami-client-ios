@@ -23,16 +23,31 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class WelcomeVM: Stateable, ViewModel, ObservableObject {
+class DismissHandler {
 
-    @Published var creationState: AccountCreationState = .initial
-    @Published var notCancelable = true
+    var dismiss = PublishSubject<Bool>()
+
+    func dismissView() {
+        dismiss.onNext(true)
+    }
+}
+
+class WalktrowStateHandler: Stateable {
 
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
+
+    func emitState(newState: WalkthroughState) {
+        self.stateSubject.onNext(newState)
+    }
+}
+
+class WelcomeVM: ViewModel, ObservableObject {
+
+    @Published var creationState: AccountCreationState = .initial
 
     private let accountService: AccountsService
     private let nameService: NameService
@@ -53,51 +68,60 @@ class WelcomeVM: Stateable, ViewModel, ObservableObject {
         self.injectionBag = injectionBag
     }
 
-    func finish() {
-        self.stateSubject.onNext(WalkthroughState.completed)
+    func finish(stateHandler: WalktrowStateHandler) {
+        stateHandler.emitState(newState: WalkthroughState.completed)
     }
 
-    func openAccountCreation() {
-        self.stateSubject.onNext(WalkthroughState.accountCreation(createAction: { [weak self] (name, password, profileName, profileImage)  in
-            guard let self = self else { return }
+    func openAccountCreation(stateHandler: WalktrowStateHandler) {
+        stateHandler.emitState(newState: WalkthroughState.accountCreation(createAction: { [weak self, weak stateHandler] (name, password, profileName, profileImage)  in
+            guard let self = self,
+                  let stateHandler = stateHandler else { return }
             self.setProfileInfo(profileName: profileName, profileImage: profileImage)
-            self.createAccount(name: name, password: password)
+            self.createAccount(name: name,
+                               password: password,
+                               stateHandler: stateHandler)
         }))
     }
 
-    func openLinkDevice() {
-        self.stateSubject.onNext(WalkthroughState.linkDevice(linkAction: { [weak self] pin, password in
-            guard let self = self else { return }
-            self.linkDevice(pin: pin, password: password)
+    func openLinkDevice(stateHandler: WalktrowStateHandler) {
+        stateHandler.emitState(newState: WalkthroughState.linkDevice(linkAction: { [weak self, weak stateHandler] pin, password in
+            guard let self = self,
+                  let stateHandler = stateHandler else { return }
+            self.linkDevice(pin: pin, password: password, stateHandler: stateHandler)
         }))
     }
 
-    func openImportArchive() {
-        self.stateSubject.onNext(WalkthroughState.importArchive(importAction: { [weak self] url, password in
-            guard let self = self else { return }
-            self.importFromArchive(path: url, password: password)
+    func openImportArchive(stateHandler: WalktrowStateHandler) {
+        stateHandler.emitState(newState: WalkthroughState.importArchive(importAction: { [weak self, weak stateHandler] url, password in
+            guard let self = self,
+                  let stateHandler = stateHandler else { return }
+            self.importFromArchive(path: url, password: password, stateHandler: stateHandler)
         }))
     }
 
-    func openJAMS() {
-        self.stateSubject.onNext(WalkthroughState.connectJAMS(connectAction: { [weak self] username, password, server in
-            guard let self = self else { return }
+    func openJAMS(stateHandler: WalktrowStateHandler) {
+        stateHandler.emitState(newState: WalkthroughState.connectJAMS(connectAction: { [weak self, weak stateHandler] username, password, server in
+            guard let self = self,
+                  let stateHandler = stateHandler else { return }
             self.connectToAccountManager(userName: username,
                                          password: password,
-                                         server: server)
+                                         server: server,
+                                         stateHandler: stateHandler)
         }))
     }
 
-    func openAboutJami() {
-        self.stateSubject.onNext(WalkthroughState.aboutJami)
+    func openAboutJami(stateHandler: WalktrowStateHandler) {
+        stateHandler.emitState(newState: WalkthroughState.aboutJami)
     }
 
-    func openSIP() {
-        self.stateSubject.onNext(WalkthroughState.connectSIP(connectAction: { [weak self] username, password, server in
-            guard let self = self else { return }
+    func openSIP(stateHandler: WalktrowStateHandler) {
+        stateHandler.emitState(newState: WalkthroughState.connectSIP(connectAction: { [weak self, weak stateHandler] username, password, server in
+            guard let self = self,
+                  let stateHandler = stateHandler else { return }
             self.createSipAccount(userName: username,
                                   password: password,
-                                  server: server)
+                                  server: server,
+                                  stateHandler: stateHandler)
         }))
     }
 
@@ -109,7 +133,9 @@ class WelcomeVM: Stateable, ViewModel, ObservableObject {
 
 // MARK: - Create account
 extension WelcomeVM {
-    func createAccount(name: String, password: String) {
+    func createAccount(name: String,
+                       password: String,
+                       stateHandler: WalktrowStateHandler) {
         self.creationState = .started
 
         self.accountService
@@ -118,10 +144,12 @@ extension WelcomeVM {
                             pin: "",
                             arhivePath: "",
                             profileName: self.profileName)
-            .subscribe(onNext: { [weak self] accountId in
+            .subscribe(onNext: { [weak self, weak stateHandler] accountId in
+                guard let stateHandler = stateHandler else { return }
                 self?.handleAccountCreationSuccess(accountId,
                                                    username: name,
-                                                   password: password)
+                                                   password: password,
+                                                   stateHandler: stateHandler)
             }, onError: { [weak self] error in
                 self?.handleAccountCreationError(error)
             })
@@ -130,15 +158,17 @@ extension WelcomeVM {
 
     private func handleAccountCreationSuccess(_ accountId: String,
                                               username: String,
-                                              password: String) {
+                                              password: String,
+                                              stateHandler: WalktrowStateHandler) {
         self.enablePushNotifications()
         self.saveProfile(accountId: accountId)
         if !username.isEmpty {
             self.registerAccountName(for: accountId,
                                      username: username,
-                                     password: password)
+                                     password: password,
+                                     stateHandler: stateHandler)
         } else {
-            self.accountCreated()
+            self.accountCreated(stateHandler: stateHandler)
         }
     }
 
@@ -152,13 +182,16 @@ extension WelcomeVM {
 
     private func registerAccountName(for accountId: String,
                                      username: String,
-                                     password: String) {
+                                     password: String,
+                                     stateHandler: WalktrowStateHandler) {
         let registerName = nameService
             .registerNameObservable(accountId: accountId,
                                     password: password,
                                     name: username)
-            .subscribe(onNext: { [weak self] registered in
-                self?.handleNameRegistrationResult(registered)
+            .subscribe(onNext: { [weak self, weak stateHandler] registered in
+                guard let stateHandler = stateHandler else { return }
+                self?.handleNameRegistrationResult(registered,
+                                                   stateHandler: stateHandler)
             }, onError: { [weak self] _ in
                 self?.setState(state: .nameNotRegistered)
             })
@@ -179,9 +212,10 @@ extension WelcomeVM {
         }
     }
 
-    private func handleNameRegistrationResult(_ registered: Bool) {
+    private func handleNameRegistrationResult(_ registered: Bool,
+                                              stateHandler: WalktrowStateHandler) {
         if registered {
-            accountCreated()
+            accountCreated(stateHandler: stateHandler)
         } else {
             self.setState(state: .nameNotRegistered)
         }
@@ -193,11 +227,10 @@ extension WelcomeVM {
         }
     }
 
-    private func accountCreated() {
+    private func accountCreated(stateHandler: WalktrowStateHandler) {
         self.setState(state: .success)
-        DispatchQueue.main.async {
-            self.stateSubject
-                .onNext(WalkthroughState.completed)
+        DispatchQueue.main.async {[weak stateHandler] in
+            stateHandler?.emitState(newState: WalkthroughState.completed)
         }
     }
 
@@ -237,7 +270,9 @@ extension WelcomeVM {
 
 // MARK: - link account
 extension WelcomeVM {
-    func linkDevice(pin: String, password: String) {
+    func linkDevice(pin: String,
+                    password: String,
+                    stateHandler: WalktrowStateHandler) {
         self.creationState = .started
         self.accountService
             .addJamiAccount(username: "",
@@ -245,10 +280,11 @@ extension WelcomeVM {
                             pin: pin,
                             arhivePath: "",
                             profileName: self.profileName)
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
+            .subscribe(onNext: { [weak self, weak stateHandler] _ in
+                guard let self = self,
+                      let stateHandler = stateHandler else { return }
                 self.enablePushNotifications()
-                self.accountCreated()
+                self.accountCreated(stateHandler: stateHandler)
             }, onError: { [weak self] error in
                 self?.handleAccountCreationError(error)
             })
@@ -258,7 +294,9 @@ extension WelcomeVM {
 
 // MARK: - import account
 extension WelcomeVM {
-    func importFromArchive(path: URL, password: String) {
+    func importFromArchive(path: URL,
+                           password: String,
+                           stateHandler: WalktrowStateHandler) {
         guard path.startAccessingSecurityScopedResource() else {
             self.setState(state: .error(error: .unknown))
             return
@@ -285,10 +323,11 @@ extension WelcomeVM {
                             pin: "",
                             arhivePath: path.absoluteURL.path,
                             profileName: self.profileName)
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
+            .subscribe(onNext: { [weak self, weak stateHandler] _ in
+                guard let self = self,
+                      let stateHandler = stateHandler else { return }
                 self.enablePushNotifications()
-                self.accountCreated()
+                self.accountCreated(stateHandler: stateHandler)
                 stopResourceAccess()
                 if let timer = stopTimer, timer.isValid {
                     timer.invalidate()
@@ -308,16 +347,18 @@ extension WelcomeVM {
 extension WelcomeVM {
     func connectToAccountManager(userName: String,
                                  password: String,
-                                 server: String) {
+                                 server: String,
+                                 stateHandler: WalktrowStateHandler) {
         self.creationState = .started
         self.accountService
             .connectToAccountManager(username: userName,
                                      password: password,
                                      serverUri: server)
-            .subscribe(onNext: { [weak self] (_) in
-                guard let self = self else { return }
+            .subscribe(onNext: { [weak self, weak stateHandler] (_) in
+                guard let self = self,
+                      let stateHandler = stateHandler else { return }
                 self.enablePushNotifications()
-                self.accountCreated()
+                self.accountCreated(stateHandler: stateHandler)
             }, onError: { [weak self] (error) in
                 self?.handleAccountCreationError(error)
             })
@@ -329,13 +370,14 @@ extension WelcomeVM {
 extension WelcomeVM {
     func createSipAccount(userName: String,
                           password: String,
-                          server: String) {
+                          server: String,
+                          stateHandler: WalktrowStateHandler) {
         let created = self.accountService
             .addSipAccount(userName: userName,
                            password: password,
                            sipServer: server)
         if created {
-            self.accountCreated()
+            self.accountCreated(stateHandler: stateHandler)
         } else {
             self.setState(state: .error(error: .unknown))
         }
