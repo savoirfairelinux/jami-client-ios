@@ -26,6 +26,7 @@ enum ConversationState: State {
     case startCall(contactRingId: String, userName: String)
     case startAudioCall(contactRingId: String, userName: String)
     case conversationDetail(conversationViewModel: ConversationViewModel)
+    case closeComposingMessage
     case contactDetail(conversationViewModel: ConversationModel)
     case qrCode
     case createSwarm
@@ -39,15 +40,19 @@ enum ConversationState: State {
     case accountModeChanged
     case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate)
     case openIncomingInvitationView(displayName: String, request: RequestModel, parentView: UIViewController, invitationHandeledCB: ((_ conversationId: String) -> Void))
-    case accountRemoved
+    case conversationRemoved
     case needToOnboard
-    case returnToSmartList
     case migrateAccount(accountId: String)
     case presentSwarmInfo(swarmInfo: SwarmInfoProtocol)
-    case openConversation(jamiId: String)
-    case openConversationForConversationId(conversationId: String, accountId: String, shouldOpenSmarList: Bool)
+    case openNewConversation(jamiId: String)
+    case openConversationForConversationId(conversationId: String,
+                                           accountId: String,
+                                           shouldOpenSmarList: Bool,
+                                           withAnimation: Bool)
     case reopenCall(viewController: CallViewController)
     case openAboutJami
+    case compose
+    case showAccountSettings(account: AccountModel)
 }
 
 protocol ConversationNavigation: AnyObject {
@@ -87,10 +92,10 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate)
                 case .presentSwarmInfo(let swarmInfo):
                     self.presentSwarmInfo(swarmInfo: swarmInfo)
-                case .openConversationForConversationId:
-                    break
                 case .reopenCall(let viewController):
                     self.reopenCall(viewController: viewController)
+                case .showAccountSettings(let account):
+                    self.showAccountSettings(account: account)
                 default:
                     break
                 }
@@ -109,7 +114,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         recordFileViewController.viewModel.conversation = conversation
         recordFileViewController.viewModel.audioOnly = audioOnly
         self.present(viewController: recordFileViewController,
-                     withStyle: .popup,
+                     withStyle: .overCurrentContext,
                      withAnimation: !audioOnly,
                      withStateable: recordFileViewController.viewModel)
     }
@@ -146,17 +151,10 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func presentSwarmInfo(swarmInfo: SwarmInfoProtocol) {
-        if let flag = self.presentingVC[VCType.contact.rawValue], flag {
-            return
-        }
-        self.presentingVC[VCType.contact.rawValue] = true
-        let swarmInfoViewController = SwarmInfoViewController.instantiate(with: self.injectionBag)
-        swarmInfoViewController.viewModel.swarmInfo = swarmInfo
-        self.present(viewController: swarmInfoViewController,
-                     withStyle: .show,
-                     withAnimation: true,
-                     withStateable: swarmInfoViewController.viewModel,
-                     lockWhilePresenting: VCType.contact.rawValue)
+        let swiftUIVM = SwarmInfoVM(with: self.injectionBag, swarmInfo: swarmInfo)
+        let view = SwarmInfoView(viewmodel: swiftUIVM)
+        let viewController = createHostingVC(view)
+        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.viewmodel)
     }
 
     func presentContactInfo(conversation: ConversationModel) {
@@ -173,18 +171,38 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      lockWhilePresenting: VCType.contact.rawValue)
     }
 
-    func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
+    func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel, withAnimation: Bool = true) {
         if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
             return
         }
+        // TODO: move to hosting controller with full implementation in swiftUI
         self.presentingVC[VCType.conversation.rawValue] = true
         let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
         conversationViewController.viewModel = conversationViewModel
         self.present(viewController: conversationViewController,
-                     withStyle: .show,
-                     withAnimation: false,
+                     withStyle: .push,
+                     withAnimation: withAnimation,
                      withStateable: conversationViewController.viewModel,
                      lockWhilePresenting: VCType.conversation.rawValue)
+    }
+
+    func showAccountSettings(account: AccountModel) {
+        let accountCoordinator = SettingsCoordinator(injectionBag: self.injectionBag)
+        accountCoordinator.account = account
+        accountCoordinator.parentCoordinator = self
+        accountCoordinator.start()
+
+        self.addChildCoordinator(childCoordinator: accountCoordinator)
+        let settingsController = accountCoordinator.rootViewController
+        self.present(viewController: settingsController,
+                     withStyle: .fadeInOverFullScreen,
+                     withAnimation: true,
+                     disposeBag: self.disposeBag)
+        settingsController.rx.controllerWasDismissed
+            .subscribe(onNext: { [weak self, weak accountCoordinator] (_) in
+                self?.removeChildCoordinator(childCoordinator: accountCoordinator)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func reopenCall(viewController: CallViewController) {
@@ -196,7 +214,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             return
         }
         self.present(viewController: viewController,
-                     withStyle: .appear,
+                     withStyle: .fadeInOverFullScreen,
                      withAnimation: false,
                      withStateable: viewController.viewModel)
     }
@@ -235,7 +253,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             .instantiate(with: self.injectionBag)
         callViewController.viewModel.call = call
         self.present(viewController: callViewController,
-                     withStyle: .appear,
+                     withStyle: .fadeInOverFullScreen,
                      withAnimation: false,
                      withStateable: callViewController.viewModel)
     }
@@ -261,7 +279,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             topController.dismiss(animated: false, completion: nil)
             let callViewController = CallViewController.instantiate(with: self.injectionBag)
             self.present(viewController: callViewController,
-                         withStyle: .appear,
+                         withStyle: .fadeInOverFullScreen,
                          withAnimation: false,
                          withStateable: callViewController.viewModel)
             callViewController.viewModel.placeCall(with: contactRingId, userName: userName, account: account, isAudioOnly: isAudioOnly)

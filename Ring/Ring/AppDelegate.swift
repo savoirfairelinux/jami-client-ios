@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withSystemService: self.systemService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
-        return AppCoordinator(with: self.injectionBag)
+        return AppCoordinator(injectionBag: self.injectionBag)
     }()
 
     private let log = SwiftyBeaver.self
