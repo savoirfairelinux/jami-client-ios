@@ -72,7 +72,7 @@ struct SwipeActionsModifier: ViewModifier {
 extension View {
     @ViewBuilder
     func conditionalSmartListSwipeActions(conversation: ConversationViewModel, model: ConversationsViewModel) -> some View {
-        if #available(iOS 15.0, *), model.navigationTarget == .smartList {
+        if #available(iOS 15.0, *) {
             self.modifier(SwipeActionsModifier(conversation: conversation, model: model))
         } else {
             self
@@ -84,7 +84,7 @@ struct ConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
     @SwiftUI.State private var searchText = ""
     var body: some View {
-        ForEach(model.conversations) { [weak model] conversation in
+        ForEach(model.filteredConversations) { [weak model] conversation in
             ConversationRowView(model: conversation)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
