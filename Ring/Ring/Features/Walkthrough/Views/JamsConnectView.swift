@@ -19,11 +19,12 @@
 import SwiftUI
 
 struct JamsConnectView: View {
-    @ObservedObject var viewModel: ConnectToManagerVM
+    @StateObject var viewModel: ConnectToManagerVM
+    let dismissHandler = DismissHandler()
 
     init(injectionBag: InjectionBag,
          connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
-        _viewModel = ObservedObject(wrappedValue:
+        _viewModel = StateObject(wrappedValue:
                                         ConnectToManagerVM(with: injectionBag))
         viewModel.connectAction = connectAction
     }
@@ -63,8 +64,8 @@ struct JamsConnectView: View {
     }
 
     private var cancelButton: some View {
-        Button(action: {
-            viewModel.dismissView()
+        Button(action: {[weak dismissHandler] in
+            dismissHandler?.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))

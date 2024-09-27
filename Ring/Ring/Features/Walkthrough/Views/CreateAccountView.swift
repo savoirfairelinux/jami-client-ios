@@ -19,7 +19,8 @@
 import SwiftUI
 
 struct CreateAccountView: View {
-    @ObservedObject var viewModel: CreateAccountVM
+    @StateObject var viewModel: CreateAccountVM
+    let dismissHandler = DismissHandler()
     let createAction: (String, String, String, UIImage?) -> Void
 
     @SwiftUI.State private var isTextFieldFocused = true
@@ -34,7 +35,7 @@ struct CreateAccountView: View {
 
     init(injectionBag: InjectionBag,
          createAction: @escaping (String, String, String, UIImage?) -> Void) {
-        _viewModel = ObservedObject(wrappedValue:
+        _viewModel = StateObject(wrappedValue:
                                         CreateAccountVM(with: injectionBag))
         self.createAction = createAction
     }
@@ -177,8 +178,8 @@ struct CreateAccountView: View {
     }
 
     private var cancelButton: some View {
-        Button(action: {
-            viewModel.dismissView()
+        Button(action: {[weak dismissHandler] in
+            dismissHandler?.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
@@ -187,8 +188,8 @@ struct CreateAccountView: View {
     }
 
     private var createButton: some View {
-        Button(action: {
-            viewModel.dismissView()
+        Button(action: {[weak dismissHandler] in
+            dismissHandler?.dismissView()
             createAction(name, password, profileName, profileImage)
         }, label: {
             Text(L10n.Global.create)

@@ -94,11 +94,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<Ring.ScanViewController>(storyboard: ScanViewController.self)
   }
-  internal enum SmartlistViewController: StoryboardType {
-    internal static let storyboardName = "SmartlistViewController"
-
-    internal static let initialScene = InitialSceneType<Ring.SmartlistViewController>(storyboard: SmartlistViewController.self)
-  }
 }
 
 internal enum StoryboardSegue {

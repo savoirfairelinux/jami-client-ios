@@ -20,6 +20,7 @@ import SwiftUI
 
 struct AboutSwiftUIView: View {
     let model = AboutSwiftUIVM()
+    let dismissHandler = DismissHandler()
     let padding: CGFloat = 20
     var body: some View {
         VStack(spacing: padding) {

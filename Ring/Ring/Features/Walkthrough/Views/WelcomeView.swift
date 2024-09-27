@@ -20,6 +20,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @ObservedObject var viewModel: WelcomeVM
+    let stateHandler = WalktrowStateHandler()
     @SwiftUI.State var showImportOptions = false
     @SwiftUI.State var showAdvancedOptions = false
 
@@ -38,11 +39,13 @@ struct WelcomeView: View {
                     if verticalSizeClass == .compact {
                         HorizontalView(showImportOptions: $showImportOptions,
                                        showAdvancedOptions: $showAdvancedOptions,
-                                       model: viewModel)
+                                       model: viewModel,
+                                       stateHandler: stateHandler)
                     } else {
                         PortraitView(showImportOptions: $showImportOptions,
                                      showAdvancedOptions: $showAdvancedOptions,
-                                     model: viewModel)
+                                     model: viewModel,
+                                     stateHandler: stateHandler)
                     }
                 }
                 .padding()
@@ -94,9 +97,10 @@ struct WelcomeView: View {
         CustomAlert(content: { AlertFactory
             .alertWithOkButton(title: title,
                                message: message,
-                               action: {[weak viewModel] in
-                                guard let viewModel = viewModel else { return }
-                                viewModel.finish()
+                               action: {[weak viewModel, weak stateHandler] in
+                                guard let viewModel = viewModel,
+                let stateHandler = stateHandler else { return }
+                viewModel.finish(stateHandler: stateHandler)
                                })
         })
     }
@@ -108,9 +112,10 @@ struct WelcomeView: View {
         CustomAlert(content: { AlertFactory
             .alertWithOkButton(title: title,
                                message: message,
-                               action: {[weak viewModel] in
-                                guard let viewModel = viewModel else { return }
-                                viewModel.finish()
+                               action: {[weak viewModel, weak stateHandler] in
+                                guard let viewModel = viewModel,
+                let stateHandler = stateHandler else { return }
+                viewModel.finish(stateHandler: stateHandler)
                                })
         })
     }
@@ -125,9 +130,10 @@ struct WelcomeView: View {
         if viewModel.notCancelable {
             EmptyView()
         } else {
-            Button(action: { [weak viewModel] in
-                guard let viewModel = viewModel else { return }
-                viewModel.finish()
+            Button(action: { [weak viewModel, weak stateHandler] in
+                guard let viewModel = viewModel,
+                      let stateHandler = stateHandler else { return }
+                viewModel.finish(stateHandler: stateHandler)
             }, label: {
                 Text(L10n.Global.cancel)
                     .foregroundColor(Color.jamiColor)
@@ -139,13 +145,15 @@ struct HorizontalView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
     var model: WelcomeVM
+    let stateHandler: WalktrowStateHandler
     @SwiftUI.State private var height: CGFloat = 1
     var body: some View {
         HStack(spacing: 30) {
             VStack {
                 Spacer()
                 HeaderView()
-                AboutButton(model: model)
+                AboutButton(model: model,
+                            stateHandler: stateHandler)
                 Spacer()
             }
             VStack {
@@ -153,7 +161,8 @@ struct HorizontalView: View {
                 ScrollView(showsIndicators: false) {
                     ButtonsView(showImportOptions: $showImportOptions,
                                 showAdvancedOptions: $showAdvancedOptions,
-                                model: model)
+                                model: model,
+                                stateHandler: stateHandler)
                         .background(
                             GeometryReader { proxy in
                                 Color.clear
@@ -177,6 +186,7 @@ struct PortraitView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
     var model: WelcomeVM
+    let stateHandler: WalktrowStateHandler
     var body: some View {
         VStack {
             Spacer(minLength: 80)
@@ -184,9 +194,11 @@ struct PortraitView: View {
             ScrollView(showsIndicators: false) {
                 ButtonsView(showImportOptions: $showImportOptions,
                             showAdvancedOptions: $showAdvancedOptions,
-                            model: model)
+                            model: model,
+                            stateHandler: stateHandler)
             }
-            AboutButton(model: model)
+            AboutButton(model: model,
+                        stateHandler: stateHandler)
         }
     }
 }
@@ -212,12 +224,15 @@ struct ButtonsView: View {
     @Binding var showImportOptions: Bool
     @Binding var showAdvancedOptions: Bool
     var model: WelcomeVM
+    let stateHandler: WalktrowStateHandler
 
     var body: some View {
         VStack(spacing: 12) {
             button(L10n.CreateAccount.createAccountFormTitle,
-                   action: {
-                    model.openAccountCreation()
+                   action: {[weak model, weak stateHandler] in
+                guard let model = model,
+                      let stateHandler = stateHandler else { return }
+                model.openAccountCreation(stateHandler: stateHandler)
                    })
                 .accessibilityIdentifier(AccessibilityIdentifiers.joinJamiButton)
 
@@ -228,11 +243,15 @@ struct ButtonsView: View {
             })
 
             if showImportOptions {
-                expandedbutton(L10n.Welcome.linkDevice, action: {
-                    model.openLinkDevice()
+                expandedbutton(L10n.Welcome.linkDevice, action: {[weak model, weak stateHandler] in
+                    guard let model = model,
+                          let stateHandler = stateHandler else { return }
+                    model.openLinkDevice(stateHandler: stateHandler)
                 })
-                expandedbutton(L10n.Welcome.linkBackup, action: {
-                    model.openImportArchive()
+                expandedbutton(L10n.Welcome.linkBackup, action: {[weak model, weak stateHandler] in
+                    guard let model = model,
+                          let stateHandler = stateHandler else { return }
+                    model.openImportArchive(stateHandler: stateHandler)
                 })
             }
 
@@ -243,11 +262,15 @@ struct ButtonsView: View {
             })
 
             if showAdvancedOptions {
-                expandedbutton(L10n.Welcome.connectToJAMS, action: {
-                    model.openJAMS()
+                expandedbutton(L10n.Welcome.connectToJAMS, action: {[weak model, weak stateHandler] in
+                    guard let model = model,
+                          let stateHandler = stateHandler else { return }
+                    model.openJAMS(stateHandler: stateHandler)
                 })
-                expandedbutton(L10n.Account.createSipAccount, action: {
-                    model.openSIP()
+                expandedbutton(L10n.Account.createSipAccount, action: {[weak model, weak stateHandler] in
+                    guard let model = model,
+                          let stateHandler = stateHandler else { return }
+                    model.openSIP(stateHandler: stateHandler)
                 })
             }
         }
@@ -297,9 +320,12 @@ struct ButtonsView: View {
 
 struct AboutButton: View {
     var model: WelcomeVM
+    let stateHandler: WalktrowStateHandler
     var body: some View {
-        Button(action: {
-            model.openAboutJami()
+        Button(action: {[weak model, weak stateHandler] in
+            guard let model = model,
+                  let stateHandler = stateHandler else { return }
+            model.openAboutJami(stateHandler: stateHandler)
         }, label: {
             Text(L10n.Smartlist.aboutJami)
                 .padding(12)

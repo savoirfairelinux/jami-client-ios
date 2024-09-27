@@ -19,11 +19,12 @@
 import SwiftUI
 
 struct SIPConfigurationView: View {
-    @ObservedObject var viewModel: ConnectSipVM
+    @StateObject var viewModel: ConnectSipVM
+    let dismissHandler = DismissHandler()
 
     init(injectionBag: InjectionBag,
          connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
-        _viewModel = ObservedObject(wrappedValue:
+        _viewModel = StateObject(wrappedValue:
                                         ConnectSipVM(with: injectionBag))
         viewModel.connectAction = connectAction
     }
@@ -61,8 +62,8 @@ struct SIPConfigurationView: View {
     }
 
     private var cancelButton: some View {
-        Button(action: {
-            viewModel.dismissView()
+        Button(action: {[weak dismissHandler] in
+            dismissHandler?.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
@@ -70,8 +71,9 @@ struct SIPConfigurationView: View {
     }
 
     private var configureButton: some View {
-        Button(action: {
-            viewModel.connect()
+        Button(action: {[weak dismissHandler, weak viewModel] in
+            dismissHandler?.dismissView()
+            viewModel?.connect()
         }, label: {
             Text(L10n.Account.configure)
                 .foregroundColor(.jamiColor)

@@ -19,11 +19,12 @@
 import SwiftUI
 
 struct ImportFromArchiveView: View {
-    @ObservedObject var viewModel: ImportFromArchiveVM
+    @StateObject var viewModel: ImportFromArchiveVM
+    let dismissHandler = DismissHandler()
 
     init(injectionBag: InjectionBag,
          importAction: @escaping (_ url: URL, _ password: String) -> Void) {
-        _viewModel = ObservedObject(wrappedValue:
+        _viewModel = StateObject(wrappedValue:
                                         ImportFromArchiveVM(with: injectionBag))
         viewModel.importAction = importAction
     }
@@ -68,8 +69,9 @@ struct ImportFromArchiveView: View {
     }
 
     private var importButton: some View {
-        Button(action: {
-            viewModel.importAccount()
+        Button(action: {[weak dismissHandler, weak viewModel] in
+            dismissHandler?.dismissView()
+            viewModel?.importAccount()
         }, label: {
             Text(L10n.ImportFromArchive.buttonTitle)
                 .foregroundColor(viewModel.importButtonColor)
@@ -78,8 +80,8 @@ struct ImportFromArchiveView: View {
     }
 
     private var cancelButton: some View {
-        Button(action: {
-            viewModel.dismissView()
+        Button(action: {[weak dismissHandler] in
+            dismissHandler?.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
@@ -87,8 +89,8 @@ struct ImportFromArchiveView: View {
     }
 
     private var selectFileButton: some View {
-        Button(action: {
-            viewModel.selectFile()
+        Button(action: {[weak viewModel] in
+            viewModel?.selectFile()
         }, label: {
             Text(viewModel.selectedFileText)
                 .foregroundColor(Color(UIColor.label))

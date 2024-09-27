@@ -138,13 +138,11 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
     let nameService: NameService
     var disposeBag = DisposeBag()
     var profileDisposeBag = DisposeBag()
-    let stateSubject: PublishSubject<State>
 
-    init(accountService: AccountsService, profileService: ProfilesService, nameService: NameService, stateSubject: PublishSubject<State>) {
+    init(accountService: AccountsService, profileService: ProfilesService, nameService: NameService) {
         self.accountService = accountService
         self.profileService = profileService
         self.nameService = nameService
-        self.stateSubject = stateSubject
         self.avatarSize = self.dimensions.imageSize
         self.subscribeToCurrentAccountUpdates()
         self.subscribeToRegisteredName()
@@ -197,7 +195,6 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
     func changeCurrentAccount(accountId: String) {
         guard let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
         if accountService.needAccountMigration(accountId: accountId) {
-            self.stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
             return
         }
         self.accountService.updateCurrentAccount(account: account)
