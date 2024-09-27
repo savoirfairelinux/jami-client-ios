@@ -22,7 +22,7 @@ import SwiftUI
 
 struct SmartListContentView: View {
     @ObservedObject var model: ConversationsViewModel
-    @SwiftUI.State var mode: ConversationsViewModel.Target
+   // @SwiftUI.State var mode: ConversationsViewModel.Target
     @SwiftUI.State var hideTopView: Bool = true
     @ObservedObject var requestsModel: RequestsViewModel
     @Binding var isSearchBarActive: Bool
@@ -38,15 +38,15 @@ struct SmartListContentView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
                 if !hideTopView {
-                    if mode == .smartList {
-                        smartListTopView
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
-                    } else {
-                        newMessageTopView
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
-                    }
+//                    if mode == .smartList {
+//                        smartListTopView
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+//                            .contentShape(Rectangle())
+//                    } else {
+//                        newMessageTopView
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+//                            .contentShape(Rectangle())
+//                    }
                 }
                 conversationsSearchHeaderView
                     .hideRowSeparator()
@@ -64,7 +64,7 @@ struct SmartListContentView: View {
                 isSearchBarActive = true
                 model.presentedConversation.resetPresentedConversation()
             }
-            mode = model.navigationTarget
+            //mode = model.navigationTarget
             hideTopView = false
         }
         .onChange(of: isSearchBarActive) { _ in
@@ -207,7 +207,7 @@ struct SmartListContentView: View {
                     .multilineTextAlignment(.leading)
                     .hideRowSeparator()
                     .padding(.bottom, 3)
-                if model.conversations.isEmpty {
+                if model.filteredConversations.isEmpty {
                     Text(L10n.Smartlist.noConversationsFound)
                         .font(.callout)
                         .multilineTextAlignment(.leading)
@@ -220,10 +220,10 @@ struct SmartListContentView: View {
     @ViewBuilder private var publicDirectorySearchView: some View {
         if isSearchBarActive {
             VStack(alignment: .leading) {
-                if mode == .smartList && !model.isSipAccount() {
-                    newChatOptions
-                        .padding(.vertical, 10)
-                }
+//                if mode == .smartList && !model.isSipAccount() {
+//                    newChatOptions
+//                        .padding(.vertical, 10)
+//                }
                 if !model.searchQuery.isEmpty {
                     Text(model.publicDirectoryTitle)
                         .fontWeight(.semibold)

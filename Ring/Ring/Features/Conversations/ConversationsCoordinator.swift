@@ -92,6 +92,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: shouldOpenSmarList)
                 case .openConversationFromCall(let conversation):
                     self.openConversationFromCall(conversationModel: conversation)
+                    case .compose(let model):
+                        self.presentCompose(model: model)
+
                 default:
                     break
                 }
@@ -306,17 +309,27 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func start() {
-        let boothMode = self.accountService.boothMode()
-        if boothMode {
-            let smartViewController = IncognitoSmartListViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: smartViewController, withStyle: .show, withAnimation: true, withStateable: smartViewController.viewModel)
-            smartListViewController = smartViewController
-            return
-        }
-        //        let smartViewController = SwarmCreationViewController.instantiate(with: self.injectionBag)
-        let smartViewController = SmartlistViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: smartViewController, withStyle: .show, withAnimation: true, withStateable: smartViewController.viewModel)
-        smartListViewController = smartViewController
+        let view = SmartListContainer(injectionBag: self.injectionBag)
+        let viewController = createHostingVC(view)
+        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.viewModel)
+    }
+
+    func presentCompose(model: ConversationsViewModel) {
+        let view = NewMessageView(model: model)
+        let viewController = createHostingVC(view)
+        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
+        //self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.viewModel)
+//        guard let account = self.accountService.currentAccount else { return }
+//        let uri = JamiURI(schema: URIType.ring, infoHash: jamiId)
+//        if let conversation = self.getConversationViewModelForParticipant(jamiId: jamiId) {
+//            self.showConversation(withConversationViewModel: conversation)
+//            return
+//        }
+//        let conversation = ConversationModel(withParticipantUri: uri,
+//                                             accountId: account.id)
+//        let newConversation = ConversationViewModel(with: self.injectionBag)
+//        newConversation.conversation = conversation
+//        self.showConversation(withConversationViewModel: newConversation)
     }
 
     func setNavigationController(controller: UINavigationController) {
@@ -325,27 +338,27 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     func getConversationViewModelForParticipant(jamiId: String) -> ConversationViewModel? {
         let viewControllers = self.navigationViewController.children
-        for controller in viewControllers {
-            if let smartController = controller as? SmartlistViewController {
-                for model in smartController.viewModel.conversationsModel.conversationViewModels where
-                    model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId {
-                    return model
-                }
-            }
-        }
+//        for controller in viewControllers {
+//            if let smartController = controller as? SmartlistViewController {
+//                for model in smartController.viewModel.conversationsModel.conversationViewModels where
+//                    model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId {
+//                    return model
+//                }
+//            }
+//        }
         return nil
     }
 
     func getConversationViewModelForId(conversationId: String) -> ConversationViewModel? {
         let viewControllers = self.navigationViewController.children
-        for controller in viewControllers {
-            if let smartController = controller as? SmartlistViewController {
-                for model in smartController.viewModel.conversationsModel.conversationViewModels where
-                    model.conversation.id == conversationId {
-                    return model
-                }
-            }
-        }
+//        for controller in viewControllers {
+//            if let smartController = controller as? SmartlistViewController {
+//                for model in smartController.viewModel.conversationsModel.conversationViewModels where
+//                    model.conversation.id == conversationId {
+//                    return model
+//                }
+//            }
+//        }
         return nil
     }
 

@@ -23,10 +23,70 @@ import SwiftUI
 import RxSwift
 import RxRelay
 
+class ConversationDataSource: ObservableObject, FilterConversationDataSource {
+    var conversationViewModels = [ConversationViewModel]()
+    let conversationsService: ConversationsService
+    let accountsService: AccountsService
+    var disposeBag = DisposeBag()
+    let injectionBag: InjectionBag
+
+    var onNewConversationViewModelCreated: ((ConversationModel) -> Void)?
+
+    init(with injectionBag: InjectionBag) {
+        self.injectionBag = injectionBag
+        self.conversationsService = injectionBag.conversationsService
+        self.accountsService = injectionBag.accountService
+        self.subscribeToConversations()
+        self.subscribeToConversationRemovals()
+    }
+
+    private func subscribeToConversations() {
+        self.conversationsService.conversations
+            .share()
+            .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .map { [weak self] conversations -> [ConversationViewModel] in
+                guard let self = self else { return [] }
+
+                return conversations.map { conversationModel in
+                    if let existing = self.conversationViewModels.first(where: { $0.conversation == conversationModel }) {
+                        return existing
+                    } else {
+                        let newViewModel = ConversationViewModel(with: self.injectionBag)
+                        newViewModel.conversation = conversationModel
+                        // Notify that a new conversation view model is created.
+                        // So temporary conversation could be updated if needed.
+                        self.onNewConversationViewModelCreated?(conversationModel)
+                        return newViewModel
+                    }
+                }
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] updatedViewModels in
+                self?.conversationViewModels = updatedViewModels
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func subscribeToConversationRemovals() {
+        self.conversationsService.sharedResponseStream
+            .filter { event in
+                event.eventType == .conversationRemoved && event.getEventInput(.accountId) == self.accountsService.currentAccount?.id
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let conversationId: String = event.getEventInput(.conversationId),
+                      let accountId: String = event.getEventInput(.accountId),
+                      let index = self.conversationViewModels.firstIndex(where: { $0.conversation.id == conversationId && $0.conversation.accountId == accountId }) else { return }
+
+                self.conversationViewModels.remove(at: index)
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
 // swiftlint:disable type_body_length
-class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
-    // filtered conversations to display
-    @Published var conversations = [ConversationViewModel]()
+class ConversationsViewModel: ObservableObject, Stateable {
     // temporary conversation for jami or sip
     @Published var temporaryConversation: ConversationViewModel? {
         didSet { updateSearchStatusIfNeeded() }
@@ -42,63 +102,101 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     @Published var conversationCreated: String = ""
     @Published var searchStatus: SearchStatus = .notSearching
 
-    // all conversations
-    var conversationViewModels = [ConversationViewModel]() {
-        didSet {
-            self.updateConversations()
-        }
+    private let conversationsSource: ConversationDataSource
+
+    var filteredConversations: [ConversationViewModel] {
+        return searchModel.filteredResults
     }
+
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
+
     var disposeBag = DisposeBag()
     let conversationsService: ConversationsService
     let requestsService: RequestsService
     let accountsService: AccountsService
     let contactsService: ContactsService
-    let stateSubject: PublishSubject<State>
+    let networkService: NetworkService
     let injectionBag: InjectionBag
-    var searchModel: JamiSearchViewModel?
-    var requestsModel: RequestsViewModel
     let jamiImage = UIImage(asset: Asset.jamiIcon)!.resizeImageWith(newSize: CGSize(width: 20, height: 20), opaque: false)!
 
-    var accountsModel: AccountsViewModel
+    lazy var accountsModel: AccountsViewModel = {
+        return AccountsViewModel(
+            accountService: self.injectionBag.accountService,
+            profileService: self.injectionBag.profileService,
+            nameService: self.injectionBag.nameService,
+            stateSubject: stateSubject
+        )
+    }()
 
-    init(injectionBag: InjectionBag, stateSubject: PublishSubject<State>) {
+    lazy var requestsModel: RequestsViewModel = {
+        return RequestsViewModel(injectionBag: self.injectionBag)
+    }()
+
+    lazy var searchModel: JamiSearchViewModel = {
+        return JamiSearchViewModel(
+            with: self.injectionBag,
+            source: self.conversationsSource,
+            searchOnlyExistingConversations: false
+        )
+    }()
+
+    required init(with injectionBag: InjectionBag, conversationsSource: ConversationDataSource) {
+        self.injectionBag = injectionBag
         self.conversationsService = injectionBag.conversationsService
         self.requestsService = injectionBag.requestsService
         self.accountsService = injectionBag.accountService
         self.contactsService = injectionBag.contactsService
-        self.accountsModel =
-            AccountsViewModel(accountService: injectionBag.accountService,
-                              profileService: injectionBag.profileService,
-                              nameService: injectionBag.nameService,
-                              stateSubject: stateSubject)
-        self.injectionBag = injectionBag
-        self.stateSubject = stateSubject
-        self.requestsModel = RequestsViewModel(injectionBag: injectionBag)
-        self.searchModel = JamiSearchViewModel(with: injectionBag, source: self, searchOnlyExistingConversations: false)
-        self.subscribeConversations()
+        self.networkService = injectionBag.networkService
+        self.conversationsSource = conversationsSource
+        self.setupNewConversationHandler()
         self.subscribeSearch()
-        injectionBag.networkService.connectionState
-            .startWith(injectionBag.networkService.connectionState.value)
+        self.setupNetworkStateObservation()
+        self.setupAccountChangeObservation()
+        if let account = self.accountsService.currentAccount, account.isJams {
+            publicDirectoryTitle = L10n.Smartlist.jamsResults
+        }
+    }
+
+    private func setupAccountChangeObservation() {
+        accountsService.currentAccountChanged
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] account in
+                guard let self = self else { return }
+                self.publicDirectoryTitle = account?.isJams == true
+                ? L10n.Smartlist.jamsResults
+                : L10n.Smartlist.results
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func setupNetworkStateObservation() {
+        networkService.connectionState
+            .startWith(networkService.connectionState.value)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] state in
                 self?.connectionState = state
             })
             .disposed(by: self.disposeBag)
-        self.accountsService.currentAccountChanged
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] account in
-                if let account = account {
-                    if account.isJams {
-                        self?.publicDirectoryTitle = L10n.Smartlist.jamsResults
-                    } else {
-                        self?.publicDirectoryTitle = L10n.Smartlist.results
-                    }
-                }
-            })
-            .disposed(by: self.disposeBag)
-        if let account = self.accountsService.currentAccount, account.isJams {
-            publicDirectoryTitle = L10n.Smartlist.jamsResults
+    }
+
+    private func setupNewConversationHandler() {
+        conversationsSource.onNewConversationViewModelCreated = { [weak self] conversationModel in
+            guard let self = self else { return }
+
+            if let tempConversation = self.temporaryConversation, tempConversation.conversation == conversationModel {
+                self.conversationFromTemporaryCreated(conversation: conversationModel)
+            } else if let jamsConversation = self.jamsSearchResult.first(where: { $0.conversation == conversationModel }) {
+                self.conversationFromTemporaryCreated(conversation: conversationModel)
+            }
         }
+    }
+
+    func openNewMessagesWindow() {
+        self.stateSubject.onNext(ConversationState.compose(model: self))
     }
 
     func conversationFromTemporaryCreated(conversation: ConversationModel) {
@@ -106,7 +204,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
             guard let self = self else { return }
             // If conversation created from temporary navigate back to smart list
             if self.presentedConversation.isTemporaryPresented() {
-                navigationTarget = .smartList
+                //navigationTarget = .smartList
                 self.presentedConversation.resetPresentedConversation()
             }
             // cleanup search
@@ -117,95 +215,95 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     }
 
     private func subscribeConversations() {
-        let conversationObservable = self.conversationsService.conversations
-            .share()
-            .startWith(self.conversationsService.conversations.value)
-        let conersationViewModels =
-            conversationObservable.map { [weak self] conversations -> [ConversationViewModel] in
-                guard let self = self else { return [] }
-
-                // Reset conversationViewModels if conversations are empty
-                if conversations.isEmpty {
-                    self.conversationViewModels.removeAll()
-                    return []
-                }
-
-                // Map conversations to view models, updating existing ones or creating new
-                return conversations.compactMap { conversationModel in
-                    // Check for existing conversation view model
-                    if let existing = self.conversationViewModels.first(where: { $0.conversation == conversationModel }) {
-                        return existing
-                    }
-                    // Check for temporary conversation
-                    else if let tempConversation = self.temporaryConversation, tempConversation.conversation == conversationModel {
-                        tempConversation.conversation = conversationModel
-                        tempConversation.conversationCreated.accept(true)
-                        self.conversationFromTemporaryCreated(conversation: conversationModel)
-                        return tempConversation
-                    } else if let jamsConversation = self.jamsSearchResult.first(where: { jams in
-                        jams.conversation == conversationModel
-                    }) {
-                        jamsConversation.conversation = conversationModel
-                        jamsConversation.conversationCreated.accept(true)
-                        self.conversationFromTemporaryCreated(conversation: conversationModel)
-                        return jamsConversation
-                    }
-                    // Create new conversation view model
-                    else {
-                        let newViewModel = ConversationViewModel(with: self.injectionBag)
-                        newViewModel.conversation = conversationModel
-                        return newViewModel
-                    }
-                }
-            }
-
-        conersationViewModels
-            .subscribe(onNext: { [weak self] updatedViewModels in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    for conversation in updatedViewModels {
-                        conversation.swiftUIModel.isTemporary = false
-                    }
-                    self.conversationViewModels = updatedViewModels
-                }
-            })
-            .disposed(by: self.disposeBag)
-
-        // Observe conversation removed
-        self.conversationsService.sharedResponseStream
-            .filter({ event in
-                event.eventType == .conversationRemoved && event.getEventInput(.accountId) == self.accountsService.currentAccount?.id
-            })
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] event in
-                guard let conversationId: String = event.getEventInput(.conversationId),
-                      let accountId: String = event.getEventInput(.accountId) else { return }
-                guard let index = self?.conversationViewModels.firstIndex(where: { conversationModel in
-                    conversationModel.conversation.id == conversationId && conversationModel.conversation.accountId == accountId
-                }) else { return }
-                self?.conversationViewModels.remove(at: index)
-                self?.updateConversations()
-            })
-            .disposed(by: self.disposeBag)
+//        let conversationObservable = self.conversationsService.conversations
+//            .share()
+//            .startWith(self.conversationsService.conversations.value)
+//        let conersationViewModels =
+//            conversationObservable.map { [weak self] conversations -> [ConversationViewModel] in
+//                guard let self = self else { return [] }
+//
+//                // Reset conversationViewModels if conversations are empty
+//                if conversations.isEmpty {
+//                    self.conversationViewModels.removeAll()
+//                    return []
+//                }
+//
+//                // Map conversations to view models, updating existing ones or creating new
+//                return conversations.compactMap { conversationModel in
+//                    // Check for existing conversation view model
+//                    if let existing = self.conversationViewModels.first(where: { $0.conversation == conversationModel }) {
+//                        return existing
+//                    }
+//                    // Check for temporary conversation
+//                    else if let tempConversation = self.temporaryConversation, tempConversation.conversation == conversationModel {
+//                        tempConversation.conversation = conversationModel
+//                        tempConversation.conversationCreated.accept(true)
+//                        self.conversationFromTemporaryCreated(conversation: conversationModel)
+//                        return tempConversation
+//                    } else if let jamsConversation = self.jamsSearchResult.first(where: { jams in
+//                        jams.conversation == conversationModel
+//                    }) {
+//                        jamsConversation.conversation = conversationModel
+//                        jamsConversation.conversationCreated.accept(true)
+//                        self.conversationFromTemporaryCreated(conversation: conversationModel)
+//                        return jamsConversation
+//                    }
+//                    // Create new conversation view model
+//                    else {
+//                        let newViewModel = ConversationViewModel(with: self.injectionBag)
+//                        newViewModel.conversation = conversationModel
+//                        return newViewModel
+//                    }
+//                }
+//            }
+//
+//        conersationViewModels
+//            .subscribe(onNext: { [weak self] updatedViewModels in
+//                DispatchQueue.main.async {
+//                    guard let self = self else { return }
+//                    for conversation in updatedViewModels {
+//                        conversation.swiftUIModel.isTemporary = false
+//                    }
+//                    self.conversationViewModels = updatedViewModels
+//                }
+//            })
+//            .disposed(by: self.disposeBag)
+//
+//        // Observe conversation removed
+//        self.conversationsService.sharedResponseStream
+//            .filter({ event in
+//                event.eventType == .conversationRemoved && event.getEventInput(.accountId) == self.accountsService.currentAccount?.id
+//            })
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] event in
+//                guard let conversationId: String = event.getEventInput(.conversationId),
+//                      let accountId: String = event.getEventInput(.accountId) else { return }
+//                guard let index = self?.conversationViewModels.firstIndex(where: { conversationModel in
+//                    conversationModel.conversation.id == conversationId && conversationModel.conversation.accountId == accountId
+//                }) else { return }
+//                self?.conversationViewModels.remove(at: index)
+//                self?.updateConversations()
+//            })
+//            .disposed(by: self.disposeBag)
     }
 
     private func subscribeSearch() {
-        searchModel?
-            .filteredResults
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] conversations in
-                guard let self = self else { return }
-                let filteredConv = conversations.isEmpty && searchQuery.isEmpty ? nil : conversations
-                // Add a delay before displaying the filtered conversation
-                // to avoid interference with the animation for the search results.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                    guard let self = self else { return }
-                    self.updateConversations(with: filteredConv)
-                }
-            })
-            .disposed(by: self.disposeBag)
+//        searchModel?
+//            .filteredResults
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] conversations in
+//                guard let self = self else { return }
+//                let filteredConv = conversations.isEmpty && searchQuery.isEmpty ? nil : conversations
+//                // Add a delay before displaying the filtered conversation
+//                // to avoid interference with the animation for the search results.
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+//                    guard let self = self else { return }
+//                    self.updateConversations(with: filteredConv)
+//                }
+//            })
+//            .disposed(by: self.disposeBag)
 
-        searchModel?
+        searchModel
             .temporaryConversation
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] conversation in
@@ -216,7 +314,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
             })
             .disposed(by: self.disposeBag)
 
-        searchModel?
+        searchModel
             .jamsTemporaryResults
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] conversations in
@@ -226,7 +324,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                 }
             })
             .disposed(by: self.disposeBag)
-        searchModel?
+        searchModel
             .searchStatus
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] status in
@@ -237,11 +335,11 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     }
 
     private func updateConversations(with filtered: [ConversationViewModel]? = nil) {
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            // Use filtered conversations if provided; otherwise, fall back to all conversationViewModels
-            self.conversations = filtered ?? self.conversationViewModels
-        }
+//        DispatchQueue.main.async {[weak self] in
+//            guard let self = self else { return }
+//            // Use filtered conversations if provided; otherwise, fall back to all conversationViewModels
+//            self.conversations = filtered ?? self.conversationViewModels
+//        }
     }
 
     func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
@@ -255,14 +353,14 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
         guard let account = accountsService.currentAccount else { return }
 
         // Attempt to find an existing one-to-one conversation with the specified jamiId
-        if let existingConversation = conversations.first(where: {
-            $0.conversation.type == .oneToOne && $0.conversation.getParticipants().first?.jamiId == jamiId
-        }) {
-            // Update and show the existing conversation
-            presentedConversation.updatePresentedConversation(conversationViewModel: existingConversation)
-            stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: existingConversation))
-            return
-        }
+//        if let existingConversation = conversations.first(where: {
+//            $0.conversation.type == .oneToOne && $0.conversation.getParticipants().first?.jamiId == jamiId
+//        }) {
+//            // Update and show the existing conversation
+//            presentedConversation.updatePresentedConversation(conversationViewModel: existingConversation)
+//            stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: existingConversation))
+//            return
+       // }
 
         // Create a new temporary swarm conversation since no existing one matched
         let tempConversation = createTemporarySwarmConversation(with: jamiId, accountId: account.id)
@@ -284,11 +382,11 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     }
 
     func showConversationIfExists(conversationId: String) {
-        if let conversation = self.conversations.first(where: { conv in
-            conv.conversation.id == conversationId
-        }) {
-            self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: conversation))
-        }
+//        if let conversation = self.conversations.first(where: { conv in
+//            conv.conversation.id == conversationId
+//        }) {
+//            self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: conversation))
+//        }
     }
 
     func showDialpad() {
@@ -395,23 +493,21 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     var presentedConversation = PresentedConversation()
 
     // MARK: - Navigation
-    enum Target {
-        case smartList
-        case newMessage
-    }
-
-    @Published var slideDirectionUp: Bool = true
-
-    @Published var navigationTarget: Target = .smartList
+//    enum Target {
+//        case smartList
+//        case newMessage
+//    }
+//
+//    @Published var slideDirectionUp: Bool = true
+//
+//    @Published var navigationTarget: Target = .smartList
 
     // MARK: - Search
     func performSearch(query: String) {
         withAnimation {
             self.searchQuery = query
         }
-        if let searchModel = self.searchModel {
-            searchModel.searchBarText.accept(query)
-        }
+        searchModel.searchBarText.accept(query)
     }
 
     private func updateSearchStatus(with status: SearchStatus? = nil) {
@@ -473,9 +569,9 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     }
 
     func closeAllPlayers() {
-        self.conversationViewModels.forEach { conversationModel in
-            conversationModel.closeAllPlayers()
-        }
+//        self.conversationViewModels.forEach { conversationModel in
+//            conversationModel.closeAllPlayers()
+//        }
     }
 }
 // swiftlint:enable type_body_length

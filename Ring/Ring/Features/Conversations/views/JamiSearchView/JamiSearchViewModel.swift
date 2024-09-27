@@ -23,6 +23,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import SwiftyBeaver
+import SwiftUI
 
 enum SearchStatus {
     case notSearching
@@ -59,7 +60,7 @@ protocol FilterConversationDelegate: AnyObject {
     func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel)
 }
 
-class JamiSearchViewModel {
+class JamiSearchViewModel: ObservableObject {
     struct JamsUserSearchModel {
         var username, firstName, lastName, organization, jamiId: String
         var profilePicture: Data?
@@ -74,25 +75,25 @@ class JamiSearchViewModel {
 
     private let disposeBag = DisposeBag()
 
-    lazy var searchResults: Observable<[ConversationSection]> = {
-        return Observable<[ConversationSection]>
-            .combineLatest(self.temporaryConversation.asObservable(),
-                           self.filteredResults.asObservable(),
-                           self.jamsTemporaryResults.asObservable(),
-                           resultSelector: { temporaryConversation, filteredResults, jamsTemporaryResults in
-                            var sections = [ConversationSection]()
-                            if !jamsTemporaryResults.isEmpty {
-                                sections.append(ConversationSection(header: L10n.Smartlist.results, items: jamsTemporaryResults))
-                            } else if let temporaryConversation = temporaryConversation {
-                                sections.append(ConversationSection(header: L10n.Smartlist.results, items: [temporaryConversation]))
-                            }
-                            if !filteredResults.isEmpty {
-                                sections.append(ConversationSection(header: L10n.Smartlist.conversations, items: filteredResults))
-                            }
-                            return sections
-                           })
-            .observe(on: MainScheduler.instance)
-    }()
+//    lazy var searchResults: Observable<[ConversationSection]> = {
+//        return Observable<[ConversationSection]>
+//            .combineLatest(self.temporaryConversation.asObservable(),
+//                           self.filteredResults.asObservable(),
+//                           self.jamsTemporaryResults.asObservable(),
+//                           resultSelector: { temporaryConversation, filteredResults, jamsTemporaryResults in
+//                            var sections = [ConversationSection]()
+//                            if !jamsTemporaryResults.isEmpty {
+//                                sections.append(ConversationSection(header: L10n.Smartlist.results, items: jamsTemporaryResults))
+//                            } else if let temporaryConversation = temporaryConversation {
+//                                sections.append(ConversationSection(header: L10n.Smartlist.results, items: [temporaryConversation]))
+//                            }
+//                            if !filteredResults.isEmpty {
+//                                sections.append(ConversationSection(header: L10n.Smartlist.conversations, items: filteredResults))
+//                            }
+//                            return sections
+//                           })
+//            .observe(on: MainScheduler.instance)
+//    }()
 
     // Temporary conversation created when perform search for a new contact.
     var temporaryConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
@@ -101,7 +102,16 @@ class JamiSearchViewModel {
      Existing conversations with the title containing search result or one of
      the participant's name containing search result.
      */
-    var filteredResults = BehaviorRelay(value: [ConversationViewModel]())
+   // var filteredResults = BehaviorRelay(value: [ConversationViewModel]())
+
+    var filteredResults: [ConversationViewModel] {
+        // return searchModel?.filteredResults
+        if searchBarText.value.isEmpty {
+            return dataSource.conversationViewModels
+        } else {
+            return dataSource.conversationViewModels.filter { $0.matches(searchBarText.value) }
+        }
+    }
 
     // Jams temporary conversations created when perform search for a new contact
     let jamsTemporaryResults = BehaviorRelay<[ConversationViewModel]>(value: [])
@@ -242,9 +252,9 @@ class JamiSearchViewModel {
             self.searchStatus.onNext(.notSearching)
             return
         }
-        if let filteredConversations = getFilteredConversations(for: searchQuery) {
-            self.filteredResults.accept(filteredConversations)
-        }
+//        if let filteredConversations = getFilteredConversations(for: searchQuery) {
+//            self.filteredResults.accept(filteredConversations)
+//        }
         guard let account = self.accountsService.currentAccount else { return }
         if searchQuery.count < 3 && !account.isJams {
             self.searchStatus.onNext(.invalidId)
@@ -336,7 +346,7 @@ class JamiSearchViewModel {
                 // Filter out existing conversations (filtered results).
                 jamsSearch = JamiSearchViewModel
                     .removeFilteredConversations(from: jamsSearch,
-                                                 with: self.filteredResults.value)
+                                                 with: self.filteredResults)
                 self.jamsTemporaryResults.accept(jamsSearch)
                 self.updateSearchStatus()
 
@@ -352,7 +362,7 @@ class JamiSearchViewModel {
     private func cleanUpPreviousSearch() {
         self.temporaryConversationCreated(tempConversation: nil)
         self.jamsTemporaryResults.accept([])
-        self.filteredResults.accept([])
+        //self.filteredResults.accept([])
     }
 
     private func convertToConversations(from searchModels: [JamiSearchViewModel.JamsUserSearchModel], accountId: String) -> [ConversationViewModel] {

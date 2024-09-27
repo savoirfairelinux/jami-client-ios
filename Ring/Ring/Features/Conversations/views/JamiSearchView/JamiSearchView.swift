@@ -83,16 +83,16 @@ class JamiSearchView: NSObject {
         }
         let searchResultsDatasource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
 
-        self.viewModel
-            .searchResults
-            .bind(to: self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource))
-            .disposed(by: disposeBag)
-        self.viewModel
-            .searchResults
-            .map({ (conversations) -> Bool in return conversations.isEmpty })
-            .subscribe(onNext: { [weak self] (hideFooterView) in
-                        self?.searchResultsTableView.tableFooterView?.isHidden = hideFooterView })
-            .disposed(by: disposeBag)
+//        self.viewModel
+//            .searchResults
+//            .bind(to: self.searchResultsTableView.rx.items(dataSource: searchResultsDatasource))
+//            .disposed(by: disposeBag)
+//        self.viewModel
+//            .searchResults
+//            .map({ (conversations) -> Bool in return conversations.isEmpty })
+//            .subscribe(onNext: { [weak self] (hideFooterView) in
+//                        self?.searchResultsTableView.tableFooterView?.isHidden = hideFooterView })
+//            .disposed(by: disposeBag)
 
         self.searchResultsTableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
