@@ -57,7 +57,7 @@
 "global.time" = "Время";
 "global.editPassword" = "Изменить пароль";
 "global.confirmPassword" = "Подтверждение пароля";
-"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
+"global.cameraDisabled" = "Доступ к камере отключен. Включите его в настройках устройства, чтобы использовать эту функцию.";
 
 // Scan
 "scan.badQrCode" = "Плохой QR-code";
@@ -202,8 +202,8 @@
 "linkToAccount.linkDeviceTitle" = "Привязать устройство";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
 "linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
-"linkToAccount.pinPlaceholder" = "PIN code";
-"linkToAccount.pinLabel" = "Enter PIN code";
+"linkToAccount.pinPlaceholder" = "PIN-код";
+"linkToAccount.pinLabel" = "Введите PIN-код";
 "linkToAccount.scanQRCode" = "Сканирование QR-кода";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
@@ -216,7 +216,7 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Войти";
-"linkToAccountManager.title" = "JAMS account";
+"linkToAccountManager.title" = "Аккаунт JAMS";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Введите URL-адрес JAMS";
 "linkToAccountManager.jamsExplanation" = "Введите URL-адрес сервера управления учетной записью Jami (JAMS)";
@@ -366,11 +366,11 @@
 "accountPage.passwordUpdated" = "Пароль обновлен";
 "accountPage.linkedDevices" = "Привязанные устройства";
 "accountPage.unlink" = "Отвязать";
-"accountPage.generatingPin" = "Generating PIN code…";
+"accountPage.generatingPin" = "Генерируется PIN-код...";
 "accountPage.passwordForPin" = "Этот аккаунт защищен паролем, введите пароль для создания PIN-кода";
 "accountPage.pinExplanationTitle" = "На другом устройстве";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "Не удалось сгенерировать PIN-код";
 "accountPage.notificationTitle" = "Уведомления";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
@@ -409,7 +409,7 @@
 "account.sipServer" = "Сервер";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
-"account.createSipAccount" = "Configure SIP Account";
+"account.createSipAccount" = "Настроить аккаунт SIP";
 "account.sipAccount" = "Учетная запись SIP";
 "account.configure" = "Настройка";
 "account.advancedFeatures" = "Дополнительные функции";

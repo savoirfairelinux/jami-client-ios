@@ -204,12 +204,12 @@
 "linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
 "linkToAccount.pinPlaceholder" = "PIN code";
 "linkToAccount.pinLabel" = "Enter PIN code";
-"linkToAccount.scanQRCode" = "Scan QR code";
+"linkToAccount.scanQRCode" = "QR कोड स्कैन करें";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "यदि खाता पासवर्ड से एन्क्रिप्टेड है, तो कृपया निम्नलिखित फ़ील्ड भरें।";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "आयात";
 "importFromArchive.selectArchiveButton" = "संग्रह फ़ाइल का चयन करें";
@@ -458,7 +458,7 @@
 "notifications.newFile" = "नई फ़ाइल";
 "notifications.locationSharingStarted" = "आने वाली स्थान साझाकरण शुरू हुआ";
 "notifications.locationSharingStopped" = "आने वाली स्थान साझाकरण बंद कर दिया गया";
-"dataTransfer.readableStatusDecline" = "Decline";
+"dataTransfer.readableStatusDecline" = "गिरावट";
 "dataTransfer.readableStatusAccept" = "स्वीकार करें";
 "dataTransfer.infoMessage" = "रिकॉर्डिंग शुरू करने के लिए दबाएं";
 "dataTransfer.sendMessage" = "भेजें";

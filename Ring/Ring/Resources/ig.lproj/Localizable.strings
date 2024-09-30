@@ -209,7 +209,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Ọ bụrụ na e jiri paswọọdụ mee ka akaụntụ ahụ bụrụ nke e debere, biko dejupụta mpaghara na-esonụ.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Ịba n'ime";
 "importFromArchive.selectArchiveButton" = "Họrọ faịlụ nchekwa";

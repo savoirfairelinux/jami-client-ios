@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "群れを無視する";
 "swarm.leaveConversation" = "話しをやめましょう";
 "swarm.chooseColor" = "カラー";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "種類";
 "swarm.identifier" = "識別子";
 "swarm.about" = "アプリについて";
 "swarm.members" = "要員";
@@ -209,7 +209,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "アカウントがパスワードで暗号化されている場合は,次のフィールドを記入してください.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "輸入";
 "importFromArchive.selectArchiveButton" = "アーカイブファイルを選択";
@@ -246,7 +246,7 @@
 "alerts.noLocationPermissionsTitle" = "場所へのアクセスが認められていない";
 "alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Record video message";
-"alerts.recordAudioMessage" = "Record audio message";
+"alerts.recordAudioMessage" = "音声メッセージを録音";
 "alerts.uploadFile" = "ファイルの送信";
 "alerts.uploadPhoto" = "ギャラリーを開く";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";

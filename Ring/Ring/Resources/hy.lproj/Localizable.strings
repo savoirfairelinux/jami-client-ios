@@ -209,7 +209,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Եթե հաշիվը կոդավորված է գաղտնաբառով, խնդրում ենք լրացնել հետեւյալ դաշտը:";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Արտահանման համար";
 "importFromArchive.selectArchiveButton" = "Ընտրեք արխիվային ֆայլը";

@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "Abaikan kawanan";
 "swarm.leaveConversation" = "Tinggalkan percakapan";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Tipe";
 "swarm.identifier" = "Pengidentifikasi";
 "swarm.about" = "Tentang";
 "swarm.members" = "Anggota";
@@ -209,7 +209,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Jika akun terenkripsi dengan kata sandi, silahkan isi kolom berikut.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Impor";
 "importFromArchive.selectArchiveButton" = "Pilih file arsip";
@@ -246,7 +246,7 @@
 "alerts.noLocationPermissionsTitle" = "Akses ke lokasi tidak diberikan";
 "alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Record video message";
-"alerts.recordAudioMessage" = "Record audio message";
+"alerts.recordAudioMessage" = "Rekam pesan suara";
 "alerts.uploadFile" = "Kirim berkas";
 "alerts.uploadPhoto" = "Buka galeri";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";

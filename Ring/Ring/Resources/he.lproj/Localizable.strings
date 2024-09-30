@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "התעלמו מהגזע.";
 "swarm.leaveConversation" = "עזוב את השיחה";
 "swarm.chooseColor" = "צבע";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "טיפוס";
 "swarm.identifier" = "זיהוי";
 "swarm.about" = "על אודות";
 "swarm.members" = "חברי";
@@ -204,12 +204,12 @@
 "linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
 "linkToAccount.pinPlaceholder" = "PIN code";
 "linkToAccount.pinLabel" = "Enter PIN code";
-"linkToAccount.scanQRCode" = "Scan QR code";
+"linkToAccount.scanQRCode" = "סריק קוד QR";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "אם החשבון מוצפן באמצעות סיסמה, אנא מלאו את השדה הבא.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "יבוא";
 "importFromArchive.selectArchiveButton" = "בחר תיק ארכיון";
@@ -458,7 +458,7 @@
 "notifications.newFile" = "תיק חדש";
 "notifications.locationSharingStarted" = "החל שיתוף מיקום נכנס";
 "notifications.locationSharingStopped" = "שיתוף מיקום נכנסים נעצר";
-"dataTransfer.readableStatusDecline" = "Decline";
+"dataTransfer.readableStatusDecline" = "ירידה";
 "dataTransfer.readableStatusAccept" = "לקבל";
 "dataTransfer.infoMessage" = "לחץ כדי להתחיל להקליט";
 "dataTransfer.sendMessage" = "שלח";

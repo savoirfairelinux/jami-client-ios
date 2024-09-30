@@ -39,7 +39,7 @@
 "global.preview" = "Pevisualizar";
 "global.accept" = "Aceptar";
 "global.block" = "Bloquear";
-"global.decline" = "Decline";
+"global.decline" = "Rechazar";
 "global.name" = "Nombre";
 "global.copy" = "Copiar";
 "global.reply" = "Responder";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "Ignorar enjambre";
 "swarm.leaveConversation" = "Salir de la conversación";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Tipo";
 "swarm.identifier" = "Identificador";
 "swarm.about" = "Acerca de";
 "swarm.members" = "Miembros";
@@ -204,12 +204,12 @@
 "linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
 "linkToAccount.pinPlaceholder" = "PIN code";
 "linkToAccount.pinLabel" = "Enter PIN code";
-"linkToAccount.scanQRCode" = "Scan QR code";
+"linkToAccount.scanQRCode" = "Escanear el código QR";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Si la cuenta está cifrada con una contraseña, completa el siguiente campo.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Importar";
 "importFromArchive.selectArchiveButton" = "Seleccionar archivo";
@@ -219,14 +219,14 @@
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL de JAMS";
 "linkToAccountManager.accountManagerLabel" = "Ingresá la URL del JAMS";
-"linkToAccountManager.jamsExplanation" = "Enter Jami Account Management Server (JAMS) URL";
+"linkToAccountManager.jamsExplanation" = "Ingrese el URL del Servidor de Administración de Cuentas de Jami (JAMS)";
 "linkToAccountManager.enterCredentials" = "Ingresar credenciales del JAMS";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Network error";
+"alerts.accountNoNetworkTitle" = "Error de red";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
@@ -246,7 +246,7 @@
 "alerts.noLocationPermissionsTitle" = "Acceso a la ubicación no concedido";
 "alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Record video message";
-"alerts.recordAudioMessage" = "Record audio message";
+"alerts.recordAudioMessage" = "Grabar mensaje de voz";
 "alerts.uploadFile" = "Enviar archivo";
 "alerts.uploadPhoto" = "Galeria abierta";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
@@ -332,7 +332,7 @@
 "accountPage.currentPasswordPlaceholder" = "Ingresá la contraseña actual";
 "accountPage.newPasswordPlaceholder" = "Ingresar nueva contraseña";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirmar nueva contraseña";
-"accountPage.changePasswordError" = "Incorrect password";
+"accountPage.changePasswordError" = "Contraseña incorrecta";
 "accountPage.enableBoothMode" = "Habilitar modo reservado";
 "accountPage.disableBoothMode" = "Deshabilitar modo reservado";
 "accountPage.disableBoothModeExplanation" = "Por favor Introduzca la contraseña de su cuenta";
@@ -458,7 +458,7 @@
 "notifications.newFile" = "Nuevo archivo";
 "notifications.locationSharingStarted" = "Comenzó la compartición de ubicación entrante";
 "notifications.locationSharingStopped" = "Se ha detenido la compartición de ubicación entrante";
-"dataTransfer.readableStatusDecline" = "Decline";
+"dataTransfer.readableStatusDecline" = "Rechazar";
 "dataTransfer.readableStatusAccept" = "Aceptar";
 "dataTransfer.infoMessage" = "Presioná para comenzar a grabar";
 "dataTransfer.sendMessage" = "Enviar";

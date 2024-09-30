@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "Ignoriraj gomilu";
 "swarm.leaveConversation" = "Ostavi razgovor";
 "swarm.chooseColor" = "Boja";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Vrsta";
 "swarm.identifier" = "Identifikacija";
 "swarm.about" = "O programu";
 "swarm.members" = "Članovi";
@@ -209,7 +209,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Ako je račun šifriran lozinom, molimo popunite sljedeće polje.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Uvezi";
 "importFromArchive.selectArchiveButton" = "Izberite arhiv datoteku";

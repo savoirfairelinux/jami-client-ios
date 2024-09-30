@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "Ignoriraj gomilu";
 "swarm.leaveConversation" = "Ostavi razgovor";
 "swarm.chooseColor" = "Boja";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Vrsta";
 "swarm.identifier" = "Identifikacija";
 "swarm.about" = "O programu";
 "swarm.members" = "Članovi";
@@ -204,12 +204,12 @@
 "linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
 "linkToAccount.pinPlaceholder" = "PIN code";
 "linkToAccount.pinLabel" = "Enter PIN code";
-"linkToAccount.scanQRCode" = "Scan QR code";
+"linkToAccount.scanQRCode" = "Skeniranje QR koda";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Ako je račun šifriran lozinom, molimo popunite sljedeće polje.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Uvezi";
 "importFromArchive.selectArchiveButton" = "Izberite arhiv datoteku";
@@ -458,7 +458,7 @@
 "notifications.newFile" = "Novi dosje";
 "notifications.locationSharingStarted" = "Počelo je dijeljenje lokacije";
 "notifications.locationSharingStopped" = "Ulazna dijeljenje lokacije zaustavljeno";
-"dataTransfer.readableStatusDecline" = "Decline";
+"dataTransfer.readableStatusDecline" = "Odbij";
 "dataTransfer.readableStatusAccept" = "Prihvati";
 "dataTransfer.infoMessage" = "Pritisnite da biste počeli snimanje";
 "dataTransfer.sendMessage" = "Pošalji";

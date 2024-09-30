@@ -39,7 +39,7 @@
 "global.preview" = "Antaŭvido";
 "global.accept" = "Akcepti";
 "global.block" = "Bloko";
-"global.decline" = "Decline";
+"global.decline" = "Rifuzi";
 "global.name" = "Nomo";
 "global.copy" = "Kopii";
 "global.reply" = "Respondo";
@@ -70,7 +70,7 @@
 "swarm.ignoreSwarm" = "Ignoru la amason";
 "swarm.leaveConversation" = "Lasu la konversacion";
 "swarm.chooseColor" = "Koloro";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Tipo";
 "swarm.identifier" = "Identigilo";
 "swarm.about" = "Pri";
 "swarm.members" = "Anoj";
@@ -204,12 +204,12 @@
 "linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
 "linkToAccount.pinPlaceholder" = "PIN code";
 "linkToAccount.pinLabel" = "Enter PIN code";
-"linkToAccount.scanQRCode" = "Scan QR code";
+"linkToAccount.scanQRCode" = "Skanu QR-kodojn";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Se la konto estas ĉifrita per pasvorto, bonvolu plenigi la sekvan kampon.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Enporti";
 "importFromArchive.selectArchiveButton" = "Elektu arkivan dosieron";
@@ -226,7 +226,7 @@
 "alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Network error";
+"alerts.accountNoNetworkTitle" = "Reta eraro";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
@@ -332,7 +332,7 @@
 "accountPage.currentPasswordPlaceholder" = "Enigu la aktualan pasvorton";
 "accountPage.newPasswordPlaceholder" = "Enigu novan pasvorton";
 "accountPage.newPasswordConfirmPlaceholder" = "Konfirmu novan pasvorton";
-"accountPage.changePasswordError" = "Incorrect password";
+"accountPage.changePasswordError" = "Malĝusta pasvorto";
 "accountPage.enableBoothMode" = "Aktivigu la ŝarĝan reĝimon";
 "accountPage.disableBoothMode" = "Malŝaltu la buŝan reĝimon";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
@@ -458,7 +458,7 @@
 "notifications.newFile" = "Nova dosiero";
 "notifications.locationSharingStarted" = "Envenanta loko partumado komenciĝis";
 "notifications.locationSharingStopped" = "Envenanta loko dividado haltis";
-"dataTransfer.readableStatusDecline" = "Decline";
+"dataTransfer.readableStatusDecline" = "Rifuzi";
 "dataTransfer.readableStatusAccept" = "Akcepti";
 "dataTransfer.infoMessage" = "Premu por komenci registri";
 "dataTransfer.sendMessage" = "Sendi";

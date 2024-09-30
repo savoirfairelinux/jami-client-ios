@@ -39,7 +39,7 @@
 "global.preview" = "پیش نمایش";
 "global.accept" = "قبول ائدیر";
 "global.block" = "بلوک";
-"global.decline" = "Decline";
+"global.decline" = "آشاغی صفحه";
 "global.name" = "آد";
 "global.copy" = "نُسخ";
 "global.reply" = "جاواب";
@@ -204,12 +204,12 @@
 "linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
 "linkToAccount.pinPlaceholder" = "PIN code";
 "linkToAccount.pinLabel" = "Enter PIN code";
-"linkToAccount.scanQRCode" = "Scan QR code";
+"linkToAccount.scanQRCode" = "QR کد سکن";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import a Jami account from a local archive file.";
-"importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
+"importFromArchive.passwordExplanation" = "اگر حساب رمزلندیریلیرسه، لطفاً آشاغیداکی ساحه نی دولدورون.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "واردات";
 "importFromArchive.selectArchiveButton" = "آرشیو فایل لارینی سئچیب";
@@ -226,7 +226,7 @@
 "alerts.accountCannotBeFoundTitle" = "Account error";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
-"alerts.accountNoNetworkTitle" = "Network error";
+"alerts.accountNoNetworkTitle" = "شبکه خطای";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
@@ -332,7 +332,7 @@
 "accountPage.currentPasswordPlaceholder" = "ایندیکی رمز یاز";
 "accountPage.newPasswordPlaceholder" = "تزه رمز دن یاز";
 "accountPage.newPasswordConfirmPlaceholder" = "یئنی رمز لری تصدیق ائدیر";
-"accountPage.changePasswordError" = "Incorrect password";
+"accountPage.changePasswordError" = "خاطا رمز";
 "accountPage.enableBoothMode" = "بوث مودونو فعال ائتمک";
 "accountPage.disableBoothMode" = "بوث مودونو غیر فعال ات";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
@@ -458,7 +458,7 @@
 "notifications.newFile" = "یئنی فایل";
 "notifications.locationSharingStarted" = "یئرلشمه یه باشلادی";
 "notifications.locationSharingStopped" = "یئرلشمه یه داوام ائتدی";
-"dataTransfer.readableStatusDecline" = "Decline";
+"dataTransfer.readableStatusDecline" = "آشاغی صفحه";
 "dataTransfer.readableStatusAccept" = "قبول ائدیر";
 "dataTransfer.infoMessage" = "ضبط ائتمک اوچون باس";
 "dataTransfer.sendMessage" = "گؤنده ر";
