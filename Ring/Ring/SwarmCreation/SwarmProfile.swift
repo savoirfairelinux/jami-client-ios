@@ -87,7 +87,7 @@ struct SwarmProfile: View {
                             .disableAutocorrection(true)
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: 200, minHeight: 40)
-                        TextField(L10n.Swarmcreation.addADescription, text: $model.swarmDescription)
+                        TextField(L10n.Swarmcreation.addDescription, text: $model.swarmDescription)
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: 200, minHeight: 40)
                     }
