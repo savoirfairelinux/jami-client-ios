@@ -263,7 +263,7 @@ struct SmartListView: View {
             guard let model = model else { return }
             model.createSwarm()
         }) {
-            Label(L10n.Swarm.newSwarm, systemImage: "person.2")
+            Label(L10n.Swarm.newGroup, systemImage: "person.2")
         }
     }
 

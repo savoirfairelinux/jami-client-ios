@@ -116,7 +116,7 @@ public struct SwarmInfoView: View {
                     ForEach(swarmViews, id: \.self) {
                         switch $0 {
                         case .about:
-                            Text(L10n.Swarm.about)
+                            Text(L10n.Swarm.settings)
                         case .memberList:
                             Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
                         }
