@@ -251,7 +251,7 @@ struct SmartListView: View, StateEmittingView {
             guard let stateEmitter = stateEmitter else { return }
             stateEmitter.createSwarm()
         }, label: {
-            Label(L10n.Swarm.newSwarm, systemImage: "person.2")
+            Label(L10n.Swarm.newGroup, systemImage: "person.2")
         })
     }
 
