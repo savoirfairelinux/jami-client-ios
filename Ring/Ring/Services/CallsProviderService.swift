@@ -247,9 +247,9 @@ extension CallsProviderService {
     private func requestTransaction(_ transaction: CXTransaction) {
         callController.request(transaction) { error in
             if let error = error {
-                print("Error requesting transaction: \(error)")
+                print("An error occurred while requesting transaction: \(error)")
             } else {
-                print("Requested transaction successfully")
+                print("Transaction requested successfully.")
             }
         }
     }

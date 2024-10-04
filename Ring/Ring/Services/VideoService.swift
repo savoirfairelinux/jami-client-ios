@@ -119,7 +119,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                     captureDevice.activeVideoMaxFrameDuration = newMaxFrameDuration
                     captureDevice.unlockForConfiguration()
                 } catch {
-                    print("Could not lock device for configuration: \(error)")
+                    print("An error occurred while attempting to lock device for configuration: \(error)")
                 }
                 return
             }
@@ -224,7 +224,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             do {
                 try self.performConfiguration(withPosition: position, withOrientation: orientation)
             } catch {
-                print("Error configuring session: \(error)")
+                print("An error occurred while configuring session: \(error)")
             }
         }
     }
@@ -451,7 +451,7 @@ class VideoService: FrameExtractorDelegate {
     func enumerateVideoInputDevices() {
         do {
             camera.configureSession(withPosition: AVCaptureDevice.Position.front, withOrientation: camera.getOrientation)
-            self.log.debug("Camera successfully configured")
+            self.log.debug("Camera configured successfully.")
             let highResolutionDevice: [String: String] = try camera
                 .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
                                quality: AVCaptureSession.Preset.high)
@@ -470,16 +470,16 @@ class VideoService: FrameExtractorDelegate {
             }
             self.currentDeviceId = self.videoAdapter.getDefaultDevice()
         } catch let e as VideoError {
-            self.log.error("Error during capture device enumeration: \(e)")
+            self.log.error("An error occurred while capturing device enumeration: \(e)")
         } catch {
-            self.log.error("Unkonwn error configuring capture device")
+            self.log.error("An unknown error occurred while configuring capture device.")
         }
     }
 
     func switchCamera() {
         self.camera.switchCamera()
             .subscribe(onCompleted: {
-                print("camera switched")
+                print("Camera switched successfully.")
             }, onError: { error in
                 print(error)
             })
@@ -501,7 +501,7 @@ class VideoService: FrameExtractorDelegate {
             newOrientation = AVCaptureVideoOrientation.portrait
         }
         if newOrientation == self.currentOrientation && !forceUpdate {
-            self.log.warning("no orientation change required")
+            self.log.warning("No orientation change required.")
             return
         }
         self.angle = self.mapDeviceOrientation(orientation: newOrientation)
