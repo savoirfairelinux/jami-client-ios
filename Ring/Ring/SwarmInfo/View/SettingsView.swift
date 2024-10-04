@@ -100,7 +100,7 @@ struct SettingsView: View {
                     switch alert {
                     case .removeConversation:
                         return Alert(
-                            title: Text(L10n.Swarm.confirmLeaveSwarm),
+                            title: Text(L10n.Swarm.confirmLeaveConversation),
                             primaryButton: .destructive(Text(L10n.Swarm.leave)) {
                                 viewmodel.leaveSwarm(stateEmitter: stateEmitter)
                             },
