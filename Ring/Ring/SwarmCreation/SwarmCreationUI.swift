@@ -187,7 +187,7 @@ struct SwarmCreationUI: View {
         return Button(action: {
                         self.hideKeyboard()
                         list.createTheSwarm() }) {
-            Text(L10n.Swarmcreation.createTheSwarm)
+            Text(L10n.Swarmcreation.newGroup)
                 .swarmButtonTextStyle()
         }
         .swarmButtonStyle()
