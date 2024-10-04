@@ -220,7 +220,7 @@ public class MessageModel {
                 case.banned:
                     self.content = L10n.GeneratedMessage.contactBlocked
                 case .unban:
-                    self.content = L10n.GeneratedMessage.contactReAdded
+                    self.content = L10n.GeneratedMessage.contactUnblocked
                 }
             }
         case .fileTransfer:

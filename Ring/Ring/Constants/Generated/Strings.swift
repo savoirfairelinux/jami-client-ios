@@ -592,22 +592,22 @@ internal enum L10n {
     internal static let locationSharingDuration = L10n.tr("Localizable", "generalSettings.locationSharingDuration", fallback: "Position share duration")
     /// Enable video acceleration
     internal static let videoAcceleration = L10n.tr("Localizable", "generalSettings.videoAcceleration", fallback: "Enable video acceleration")
-    /// Video Settings
-    internal static let videoSettings = L10n.tr("Localizable", "generalSettings.videoSettings", fallback: "Video Settings")
+    /// Video settings
+    internal static let videoSettings = L10n.tr("Localizable", "generalSettings.videoSettings", fallback: "Video settings")
   }
   internal enum GeneratedMessage {
-    /// You received invitation
-    internal static let contactAdded = L10n.tr("Localizable", "generatedMessage.contactAdded", fallback: "You received invitation")
-    /// was kicked
-    internal static let contactBlocked = L10n.tr("Localizable", "generatedMessage.contactBlocked", fallback: "was kicked")
-    /// left
-    internal static let contactLeftConversation = L10n.tr("Localizable", "generatedMessage.contactLeftConversation", fallback: "left")
-    /// was re-added
-    internal static let contactReAdded = L10n.tr("Localizable", "generatedMessage.contactReAdded", fallback: "was re-added")
+    /// Invitation received
+    internal static let contactAdded = L10n.tr("Localizable", "generatedMessage.contactAdded", fallback: "Invitation received")
+    /// was kicked from the conversation
+    internal static let contactBlocked = L10n.tr("Localizable", "generatedMessage.contactBlocked", fallback: "was kicked from the conversation")
+    /// left the conversation
+    internal static let contactLeftConversation = L10n.tr("Localizable", "generatedMessage.contactLeftConversation", fallback: "left the conversation")
+    /// rejoined the conversation
+    internal static let contactUnblocked = L10n.tr("Localizable", "generatedMessage.contactUnblocked", fallback: "rejoined the conversation")
     /// joined the conversation
     internal static let invitationAccepted = L10n.tr("Localizable", "generatedMessage.invitationAccepted", fallback: "joined the conversation")
-    /// was invited to join
-    internal static let invitationReceived = L10n.tr("Localizable", "generatedMessage.invitationReceived", fallback: "was invited to join")
+    /// was invited to join the conversation
+    internal static let invitationReceived = L10n.tr("Localizable", "generatedMessage.invitationReceived", fallback: "was invited to join the conversation")
     /// Live location sharing
     internal static let liveLocationSharing = L10n.tr("Localizable", "generatedMessage.liveLocationSharing", fallback: "Live location sharing")
     /// Missed incoming call
@@ -616,8 +616,8 @@ internal enum L10n {
     internal static let missedOutgoingCall = L10n.tr("Localizable", "generatedMessage.missedOutgoingCall", fallback: "Missed outgoing call")
     /// Outgoing call
     internal static let outgoingCall = L10n.tr("Localizable", "generatedMessage.outgoingCall", fallback: "Outgoing call")
-    /// Swarm created
-    internal static let swarmCreated = L10n.tr("Localizable", "generatedMessage.swarmCreated", fallback: "Swarm created")
+    /// Group created
+    internal static let swarmCreated = L10n.tr("Localizable", "generatedMessage.swarmCreated", fallback: "Group created")
     /// You joined the conversation
     internal static let youJoined = L10n.tr("Localizable", "generatedMessage.youJoined", fallback: "You joined the conversation")
   }
@@ -842,8 +842,8 @@ internal enum L10n {
     internal static let accounts = L10n.tr("Localizable", "smartlist.accounts", fallback: "Account list")
     /// Accounts
     internal static let accountsTitle = L10n.tr("Localizable", "smartlist.accountsTitle", fallback: "Accounts")
-    /// + Add Account
-    internal static let addAccountButton = L10n.tr("Localizable", "smartlist.addAccountButton", fallback: "+ Add Account")
+    /// + Add account
+    internal static let addAccountButton = L10n.tr("Localizable", "smartlist.addAccountButton", fallback: "+ Add account")
     /// Be sure cellular access is granted in your settings
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess", fallback: "Be sure cellular access is granted in your settings")
     /// Conversations
@@ -860,14 +860,14 @@ internal enum L10n {
     internal static let invitations = L10n.tr("Localizable", "smartlist.invitations", fallback: "Invitations")
     /// Invite friends
     internal static let inviteFriends = L10n.tr("Localizable", "smartlist.inviteFriends", fallback: "Invite friends")
-    /// Search Result
-    internal static let jamsResults = L10n.tr("Localizable", "smartlist.jamsResults", fallback: "Search Result")
-    /// New Contact
-    internal static let newContact = L10n.tr("Localizable", "smartlist.newContact", fallback: "New Contact")
-    /// New Message
-    internal static let newMessage = L10n.tr("Localizable", "smartlist.newMessage", fallback: "New Message")
-    /// New Swarm
-    internal static let newSwarm = L10n.tr("Localizable", "smartlist.newSwarm", fallback: "New Swarm")
+    /// Search result
+    internal static let jamsResults = L10n.tr("Localizable", "smartlist.jamsResults", fallback: "Search result")
+    /// New contact
+    internal static let newContact = L10n.tr("Localizable", "smartlist.newContact", fallback: "New contact")
+    /// Create new group
+    internal static let newGroup = L10n.tr("Localizable", "smartlist.newGroup", fallback: "Create new group")
+    /// New message
+    internal static let newMessage = L10n.tr("Localizable", "smartlist.newMessage", fallback: "New message")
     /// No conversations
     internal static let noConversation = L10n.tr("Localizable", "smartlist.noConversation", fallback: "No conversations")
     /// No conversations match your search
@@ -878,8 +878,8 @@ internal enum L10n {
     internal static let noNumber = L10n.tr("Localizable", "smartlist.noNumber", fallback: "Selected contact does not have any number")
     /// No results
     internal static let noResults = L10n.tr("Localizable", "smartlist.noResults", fallback: "No results")
-    /// Public Directory
-    internal static let results = L10n.tr("Localizable", "smartlist.results", fallback: "Public Directory")
+    /// Public directory
+    internal static let results = L10n.tr("Localizable", "smartlist.results", fallback: "Public directory")
     /// Search
     internal static let searchBar = L10n.tr("Localizable", "smartlist.searchBar", fallback: "Search")
     /// Enter name…
@@ -890,38 +890,34 @@ internal enum L10n {
     internal static let yesterday = L10n.tr("Localizable", "smartlist.yesterday", fallback: "Yesterday")
   }
   internal enum Swarm {
-    /// About
-    internal static let about = L10n.tr("Localizable", "swarm.about", fallback: "About")
     /// Add description
     internal static let addDescription = L10n.tr("Localizable", "swarm.addDescription", fallback: "Add description")
     /// Administrator
     internal static let admin = L10n.tr("Localizable", "swarm.admin", fallback: "Administrator")
-    /// Admin invites only
-    internal static let adminInvitesOnly = L10n.tr("Localizable", "swarm.adminInvitesOnly", fallback: "Admin invites only")
+    /// Private group (restricted invites)
+    internal static let adminInvitesOnly = L10n.tr("Localizable", "swarm.adminInvitesOnly", fallback: "Private group (restricted invites)")
     /// Blocked
     internal static let blocked = L10n.tr("Localizable", "swarm.blocked", fallback: "Blocked")
-    /// Change swarm picture
-    internal static let changePicture = L10n.tr("Localizable", "swarm.changePicture", fallback: "Change swarm picture")
+    /// Change group picture
+    internal static let changePicture = L10n.tr("Localizable", "swarm.changePicture", fallback: "Change group picture")
     /// Color
     internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor", fallback: "Color")
-    /// Are you sure you want to leave this swarm?
-    internal static let confirmLeaveSwarm = L10n.tr("Localizable", "swarm.confirmLeaveSwarm", fallback: "Are you sure you want to leave this swarm?")
-    /// Customize swarm
-    internal static let customize = L10n.tr("Localizable", "swarm.customize", fallback: "Customize swarm")
-    /// Customize swarm profile
-    internal static let customizeProfile = L10n.tr("Localizable", "swarm.customizeProfile", fallback: "Customize swarm profile")
-    /// Members can be invited at any time after the swarm has been created
-    internal static let explanationText = L10n.tr("Localizable", "swarm.explanationText", fallback: "Members can be invited at any time after the swarm has been created")
+    /// Do you really want to leave this conversation?
+    internal static let confirmLeaveConversation = L10n.tr("Localizable", "swarm.confirmLeaveConversation", fallback: "Do you really want to leave this conversation?")
+    /// Customize group
+    internal static let customize = L10n.tr("Localizable", "swarm.customize", fallback: "Customize group")
+    /// Customize group profile
+    internal static let customizeProfile = L10n.tr("Localizable", "swarm.customizeProfile", fallback: "Customize group profile")
+    /// Members can be invited at any time after the group has been created.
+    internal static let explanationText = L10n.tr("Localizable", "swarm.explanationText", fallback: "Members can be invited at any time after the group has been created.")
     /// Identifier
     internal static let identifier = L10n.tr("Localizable", "swarm.identifier", fallback: "Identifier")
-    /// Ignore the swarm
-    internal static let ignoreSwarm = L10n.tr("Localizable", "swarm.ignoreSwarm", fallback: "Ignore the swarm")
     /// Invited
     internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Invited")
     /// Invite members
     internal static let inviteMembers = L10n.tr("Localizable", "swarm.inviteMembers", fallback: "Invite members")
-    /// Private swarm
-    internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private swarm")
+    /// Private group
+    internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private group")
     /// Leave
     internal static let leave = L10n.tr("Localizable", "swarm.Leave", fallback: "Leave")
     /// Leave conversation
@@ -930,28 +926,32 @@ internal enum L10n {
     internal static let member = L10n.tr("Localizable", "swarm.member", fallback: "Member")
     /// Members
     internal static let members = L10n.tr("Localizable", "swarm.members", fallback: "Members")
-    /// Swarm name
-    internal static let namePlaceholder = L10n.tr("Localizable", "swarm.namePlaceholder", fallback: "Swarm name")
-    /// New swarm
-    internal static let newSwarm = L10n.tr("Localizable", "swarm.newSwarm", fallback: "New swarm")
-    /// Private swarm
-    internal static let oneToOne = L10n.tr("Localizable", "swarm.oneToOne", fallback: "Private swarm")
+    /// Mute conversation
+    internal static let muteConversation = L10n.tr("Localizable", "swarm.muteConversation", fallback: "Mute conversation")
+    /// Group name
+    internal static let namePlaceholder = L10n.tr("Localizable", "swarm.namePlaceholder", fallback: "Group name")
+    /// Create new group
+    internal static let newGroup = L10n.tr("Localizable", "swarm.newGroup", fallback: "Create new group")
+    /// 1:1
+    internal static let oneToOne = L10n.tr("Localizable", "swarm.oneToOne", fallback: "1:1")
     /// Others
     internal static let others = L10n.tr("Localizable", "swarm.others", fallback: "Others")
-    /// Public swarm
-    internal static let publicChat = L10n.tr("Localizable", "swarm.publicChat", fallback: "Public swarm")
-    /// Select Contacts
-    internal static let selectContacts = L10n.tr("Localizable", "swarm.selectContacts", fallback: "Select Contacts")
+    /// Public group
+    internal static let publicChat = L10n.tr("Localizable", "swarm.publicChat", fallback: "Public group")
+    /// Select contacts
+    internal static let selectContacts = L10n.tr("Localizable", "swarm.selectContacts", fallback: "Select contacts")
+    /// Settings
+    internal static let settings = L10n.tr("Localizable", "swarm.settings", fallback: "Settings")
     /// Type
     internal static let typeOfSwarm = L10n.tr("Localizable", "swarm.typeOfSwarm", fallback: "Type")
     /// Unknown
     internal static let unknown = L10n.tr("Localizable", "swarm.unknown", fallback: "Unknown")
   }
   internal enum Swarmcreation {
-    /// Add a description
-    internal static let addADescription = L10n.tr("Localizable", "swarmcreation.addADescription", fallback: "Add a description")
-    /// Create the swarm
-    internal static let createTheSwarm = L10n.tr("Localizable", "swarmcreation.createTheSwarm", fallback: "Create the swarm")
+    /// Add description
+    internal static let addDescription = L10n.tr("Localizable", "swarmcreation.addDescription", fallback: "Add description")
+    /// Create new group
+    internal static let newGroup = L10n.tr("Localizable", "swarmcreation.newGroup", fallback: "Create new group")
     /// Search for contact…
     internal static let searchBar = L10n.tr("Localizable", "swarmcreation.searchBar", fallback: "Search for contact…")
   }
