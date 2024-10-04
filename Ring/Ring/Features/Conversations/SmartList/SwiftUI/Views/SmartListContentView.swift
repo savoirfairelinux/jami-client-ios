@@ -172,7 +172,7 @@ struct SmartListContentView: View {
         HStack {
             actionItem(icon: "qrcode", title: L10n.Smartlist.newContact, action: { isShowingScanner.toggle() })
             Spacer()
-            actionItem(icon: "person.2", title: L10n.Smartlist.newSwarm, action: model.createSwarm)
+            actionItem(icon: "person.2", title: L10n.Smartlist.newGroup, action: model.createSwarm)
         }
         .hideRowSeparator()
     }
