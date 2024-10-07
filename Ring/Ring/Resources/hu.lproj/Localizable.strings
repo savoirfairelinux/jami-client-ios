@@ -27,7 +27,7 @@
 "global.enterPassword" = "Jelszó megadása";
 "global.enterUsername" = "Felhasználónév megadása";
 "global.cancel" = "Mégse";
-"global.blockContact" = "Kapcsolat letiltása";
+"global.blockContact" = "Kapcsolattartó letiltása";
 "global.removeAccount" = "Fiók eltávolítása";
 "global.incomingCall" = "Bejövő hívás";
 "global.ok" = "Rendben";
@@ -63,11 +63,11 @@
 "scan.badQrCode" = "Rossz QR-kód";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Kapcsolat keresése…";
-"swarmcreation.createTheSwarm" = "Rajcsoport létrehozása";
+"swarmcreation.searchBar" = "Kapcsolattartó keresése…";
+"swarmcreation.createTheSwarm" = "Új csoport létrehozása";
 "swarmcreation.addADescription" = "Leírás hozzáadása";
 // Swarm
-"swarm.ignoreSwarm" = "Rajcsoport figyelmen kívül hagyása";
+"swarm.ignoreSwarm" = "Beszélgetés figyelmen kívül hagyása";
 "swarm.leaveConversation" = "Kilépés a beszélgetésből";
 "swarm.chooseColor" = "Szín";
 "swarm.typeOfSwarm" = "Típus";
@@ -75,10 +75,10 @@
 "swarm.about" = "Névjegy";
 "swarm.members" = "Tagok";
 "swarm.addDescription" = "Leírás hozzáadása";
-"swarm.oneToOne" = "Személyes rajcsoport";
+"swarm.oneToOne" = "1:1";
 "swarm.adminInvitesOnly" = "Csak rendszergazdai meghívók";
-"swarm.invitesOnly" = "Személyes rajcsoport";
-"swarm.publicChat" = "Nyilvános rajcsoport";
+"swarm.invitesOnly" = "Személyes csoport";
+"swarm.publicChat" = "Nyilvános csoport";
 "swarm.others" = "Egyebek";
 "swarm.member" = "Tag";
 "swarm.invited" = "Meghívott";
@@ -86,15 +86,15 @@
 "swarm.blocked" = "Letiltva";
 "swarm.unknown" = "Ismeretlen";
 "swarm.inviteMembers" = "Tagok meghívása";
-"swarm.confirmLeaveSwarm" = "Biztosan szeretne kilépni ebből a rajcsoportból?";
+"swarm.confirmLeaveSwarm" = "Biztosan szeretne kilépni ebből a beszélgetésből?";
 "swarm.Leave" = "Elhagyás";
-"swarm.newSwarm" = "Új rajcsoport";
-"swarm.namePlaceholder" = "Rajcsoport neve";
-"swarm.explanationText" = "A tagok a rajcsoport létrehozása után bármikor meghívhatók.";
-"swarm.customizeProfile" = "Rajcsoport-névjegy testreszabása";
-"swarm.changePicture" = "Rajcsoportkép megváltoztatása";
-"swarm.customize" = "Rajcsoport testreszabása";
-"swarm.selectContacts" = "Kapcsolatok kijelölése";
+"swarm.newSwarm" = "Új csoport létrehozása";
+"swarm.namePlaceholder" = "Csoport neve";
+"swarm.explanationText" = "A tagok a csoport létrehozása után bármikor meghívhatók.";
+"swarm.customizeProfile" = "Csoportprofil szerkesztése";
+"swarm.changePicture" = "Csoportkép módosítása";
+"swarm.customize" = "Csoport szerkesztése";
+"swarm.selectContacts" = "Kapcsolattartók kijelölése";
 
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
@@ -102,8 +102,8 @@
 "smartlist.jamsResults" = "Keresési eredmény";
 "smartlist.conversations" = "Beszélgetések";
 "smartlist.noConversationsFound" = "Nincs a keresésnek megfelelő beszélgetés";
-"smartlist.newContact" = "Új kapcsolat";
-"smartlist.newSwarm" = "Új rajcsoport";
+"smartlist.newContact" = "Új kapcsolattartó";
+"smartlist.newSwarm" = "Új csoport létrehozása";
 "smartlist.accounts" = "Fiókok";
 "smartlist.invitationReceived" = "Meghívások megérkeztek";
 "smartlist.noResults" = "Nincs eredmény";
@@ -114,7 +114,7 @@
 "smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
 "smartlist.accountsTitle" = "Fiókok";
 "smartlist.addAccountButton" = "+ Fiók hozzáadása";
-"smartlist.noNumber" = "A kiválasztott kapcsolatnak nincs SIP-száma";
+"smartlist.noNumber" = "A kijelölt kapcsolattartnak nincsenek SIP-számák";
 "smartlist.selectOneNumber" = "Válasszon egy számot";
 "smartlist.invitations" = "Meghívások";
 "smartlist.aboutJami" = "A Jami névjegye";
@@ -126,9 +126,9 @@
 "smartlist.newMessage" = "Új üzenet";
 
 // Conversation
-"conversation.addToContactsButton" = "Hozzáadás a kapcsolatokhoz";
-"conversation.addToContactsLabel" = "Hozzáadja a kapcsolatokhoz?";
-"conversation.notContactLabel" = "nem szerepel a kapcsolatlistában";
+"conversation.addToContactsButton" = "Hozzáadás a kapcsolattartók közé";
+"conversation.addToContactsLabel" = "Hozzáadás a kapcsolattartók közé?";
+"conversation.notContactLabel" = "nem szerepel a kapcsolattartólistában";
 "conversation.messagePlaceholder" = "Írj a következő(k)nek:";
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
@@ -291,7 +291,7 @@
 "accountPage.notificationsHeader" = "Értesítések";
 "accountPage.usernameNotRegistered" = "felhasználónév: nincs bejegyzett";
 "accountPage.credentialsHeader" = "Fiók részletek";
-"accountPage.blockedContacts" = "Letiltott kapcsolatok";
+"accountPage.blockedContacts" = "Letiltott kapcsolattartók";
 "accountPage.unblockContact" = "Letiltás feloldása";
 "accountPage.proxyAddressAlert" = "Adja meg a meghatalmazott címet";
 "accountPage.noProxyExplanationLabel" = "Az értesítések nem fogadhatók amikor a meghatalmazás le van tiltva.";
@@ -426,7 +426,7 @@
 "account.me" = "Én";
 
 // Block List Page
-"blockListPage.noBlockedContacts" = "Nincsenek letiltott kapcsolatok";
+"blockListPage.noBlockedContacts" = "Nincsenek letiltott kapcsolattartók";
 
 // Link New Device
 "linkDevice.title" = "Új eszköz összekapcsolása";
@@ -466,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Meghívás megérkezett";
-"generatedMessage.swarmCreated" = "Rajcsoport létrehozva";
+"generatedMessage.swarmCreated" = "Új csoport létrehozva";
 "generatedMessage.invitationReceived" = "meghívást kapott a csatlakozásra";
 "generatedMessage.invitationAccepted" = "csatlakozott a beszélgetéshez";
 "generatedMessage.youJoined" = "Ön csatlakozott a beszélgetéshez";
