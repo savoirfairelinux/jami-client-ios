@@ -33,6 +33,42 @@
       "message": "Similiar like the Android client: https://git.jami.net/savoirfairelinux/jami-client-android/-/issues/1371#note_45333",
       "revId": "7273296198f02f4edd4a6a4cae6808c6bb6cce5e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c50d513_ecf36742",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-10-09T15:55:08Z",
+      "side": 1,
+      "message": "No, there is no option to block yourself.",
+      "parentUuid": "24ce3e95_e2e519e7",
+      "revId": "7273296198f02f4edd4a6a4cae6808c6bb6cce5e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdff1227_508e7aa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-10-09T15:55:08Z",
+      "side": 1,
+      "message": "There is no option to block yourself. There is only option to leave conversation.",
+      "parentUuid": "f3539a14_d48a08d5",
+      "revId": "7273296198f02f4edd4a6a4cae6808c6bb6cce5e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
