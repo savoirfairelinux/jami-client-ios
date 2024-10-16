@@ -209,24 +209,30 @@ extension ConversationsCoordinator {
 
 // MARK: - Open conversation
 extension ConversationsCoordinator {
-    func openConversationFromNotificationFor(participantId: String) {
+    func openConversationFromNotificationFor(participantId: String, accountId: String) {
         self.popToSmartList()
-        guard let account = accountService.currentAccount else {
-            return
-        }
         guard let uriString = JamiURI(schema: URIType.ring, infoHash: participantId).uriString else {
             return
         }
         if let model = getConversationViewModelForParticipant(jamiId: uriString) {
-            self.showConversation(withConversationViewModel: model)
-            return
+            reloadAndShowConversation(model)
         }
-        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: participantId, accontId: account.id) else {
-            return
+    }
+
+    func openConversationFromNotification(conversationId: String, accountId: String) {
+        self.popToSmartList()
+        if let model = getConversationViewModelForId(conversationId: conversationId) {
+            reloadAndShowConversation(model)
         }
-        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-        conversationViewModel.conversation = conversation
-        self.showConversation(withConversationViewModel: conversationViewModel)
+    }
+
+    private func reloadAndShowConversation(_ model: ConversationViewModel) {
+        /*
+         Messages will be reloaded. Remove existing messages
+         to ensure the message order is correct.
+         */
+        model.cleanMessages()
+        self.showConversation(withConversationViewModel: model, withAnimation: false)
     }
 
     func openNewConversation(jamiId: String) {
@@ -248,7 +254,7 @@ extension ConversationsCoordinator {
             popToSmartList()
         }
         if let model = getConversationViewModelForId(conversationId: conversationId) {
-            self.showConversation(withConversationViewModel: model, withAnimation: false)
+            self.showConversation(withConversationViewModel: model, withAnimation: withAnimation)
         }
         if !shouldOpenSmarList {
             let viewControllers = navigationController.viewControllers

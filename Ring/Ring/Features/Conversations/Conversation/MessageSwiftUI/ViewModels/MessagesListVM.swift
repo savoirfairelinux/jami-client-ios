@@ -580,6 +580,10 @@ class MessagesListVM: ObservableObject {
         }
     }
 
+    func cleanMessages() {
+        self.messagesModels = [MessageContainerModel]()
+    }
+
     private func getMessageIndex(messageId: String) -> Int? {
         return self.messagesModels.firstIndex(where: { $0.id == messageId })
     }
