@@ -533,7 +533,7 @@ extension AppDelegate {
         if let conversationId = data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String {
             self.appCoordinator.openConversation(conversationId: conversationId, accountId: accountId)
         } else if let participantID = data[Constants.NotificationUserInfoKeys.participantID.rawValue] as? String {
-            self.appCoordinator.openConversation(participantID: participantID)
+            self.appCoordinator.openConversation(participantID: participantID, accountId: accountId)
         }
     }
 

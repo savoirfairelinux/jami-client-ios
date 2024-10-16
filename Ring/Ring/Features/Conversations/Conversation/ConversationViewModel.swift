@@ -213,6 +213,10 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         return swiftUIModel.lastMessageDate.asObservable()
     }
 
+    func cleanMessages() {
+        self.swiftUIModel.cleanMessages()
+    }
+
     var conversation: ConversationModel! {
         didSet {
             self.subscribeUnreadMessages()

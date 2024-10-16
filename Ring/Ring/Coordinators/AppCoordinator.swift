@@ -171,15 +171,15 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
 // MARK: - open conversation from notification
 extension AppCoordinator {
-    func openConversation(participantID: String) {
+    func openConversation(participantID: String, accountId: String) {
         if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
-            conversationCoordinator.openConversationFromNotificationFor(participantId: participantID)
+            conversationCoordinator.openConversationFromNotificationFor(participantId: participantID, accountId: accountId)
         }
     }
 
     func openConversation(conversationId: String, accountId: String) {
         if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
-            conversationCoordinator.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: true, withAnimation: true)
+            conversationCoordinator.openConversationFromNotification(conversationId: conversationId, accountId: accountId)
         }
     }
 }
