@@ -195,15 +195,30 @@ class SwarmInfoVM: ObservableObject {
         }
     }
 
-    func leaveSwarm(stateEmmiter: ConversationStatePublisher) {
+    func leaveSwarm(stateEmitter: ConversationStatePublisher) {
         guard let conversation = self.conversation else { return }
         let conversationId = conversation.id
         let accountId = conversation.accountId
-        self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
-        stateEmmiter.emitState(ConversationState.conversationRemoved)
+        /*
+         If it's a one-to-one conversation, remove the associated contact.
+         This action will also remove the conversation.
+         */
+        if conversation.isCoredialog(),
+           let participant = conversation.getParticipants().first {
+            self.contactsService
+                .removeContact(withId: participant.jamiId,
+                               ban: false,
+                               withAccountId: accountId)
+                .asObservable()
+                .subscribe(onCompleted: {})
+                .disposed(by: self.disposeBag)
+        } else {
+            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+        }
+        stateEmitter.emitState(ConversationState.conversationRemoved)
     }
 
-    func blockContact(stateEmmiter: ConversationStatePublisher) {
+    func blockContact(stateEmitter: ConversationStatePublisher) {
         guard let conversation = self.conversation else { return }
         let accountId = conversation.accountId
         if let participantId = conversation.getParticipants().first?.jamiId {
@@ -219,6 +234,6 @@ class SwarmInfoVM: ObservableObject {
                 })
                 .disposed(by: self.disposeBag)
         }
-        stateEmmiter.emitState(ConversationState.conversationRemoved)
+        stateEmitter.emitState(ConversationState.conversationRemoved)
     }
 }
