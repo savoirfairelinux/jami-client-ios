@@ -199,13 +199,28 @@ class SwarmInfoVM: ObservableObject {
         guard let conversation = self.conversation else { return }
         let conversationId = conversation.id
         let accountId = conversation.accountId
-        self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+        if conversation.isCoredialog(),
+           let participant = conversation.getParticipants().first {
+            self.contactsService
+                .removeContact(withId: participant.jamiId,
+                               ban: false,
+                               withAccountId: accountId)
+                .asObservable()
+                .subscribe(onCompleted: { [weak self] in
+                    guard let self = self else { return }
+                    self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+                })
+                .disposed(by: self.disposeBag)
+        } else {
+            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+        }
         stateEmmiter.emitState(ConversationState.conversationRemoved)
     }
 
     func blockContact(stateEmmiter: ConversationStatePublisher) {
         guard let conversation = self.conversation else { return }
         let accountId = conversation.accountId
+        let conversationId = conversation.id
         if let participantId = conversation.getParticipants().first?.jamiId {
             self.contactsService
                 .removeContact(withId: participantId,
@@ -213,6 +228,7 @@ class SwarmInfoVM: ObservableObject {
                                withAccountId: accountId)
                 .asObservable()
                 .subscribe(onCompleted: { [weak self] in
+                    self?.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
                     self?.conversationService
                         .removeConversationFromDB(conversation: conversation,
                                                   keepConversation: false)
