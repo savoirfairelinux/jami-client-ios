@@ -102,7 +102,7 @@ struct SettingsView: View {
                         return Alert(
                             title: Text(L10n.Swarm.confirmLeaveSwarm),
                             primaryButton: .destructive(Text(L10n.Swarm.leave)) {
-                                viewmodel.leaveSwarm(stateEmmiter: stateEmitter)
+                                viewmodel.leaveSwarm(stateEmitter: stateEmitter)
                             },
                             secondaryButton: .cancel()
                         )
@@ -110,7 +110,7 @@ struct SettingsView: View {
                         return Alert(
                             title: Text(L10n.Alerts.confirmBlockContact),
                             primaryButton: .destructive(Text(L10n.Global.block)) {
-                                viewmodel.blockContact(stateEmmiter: stateEmitter)
+                                viewmodel.blockContact(stateEmitter: stateEmitter)
                             },
                             secondaryButton: .cancel()
                         )
