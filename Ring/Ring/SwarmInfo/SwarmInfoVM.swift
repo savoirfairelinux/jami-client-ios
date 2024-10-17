@@ -199,7 +199,18 @@ class SwarmInfoVM: ObservableObject {
         guard let conversation = self.conversation else { return }
         let conversationId = conversation.id
         let accountId = conversation.accountId
-        self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+        if conversation.isCoredialog(),
+           let participant = conversation.getParticipants().first {
+            self.contactsService
+                .removeContact(withId: participant.jamiId,
+                               ban: false,
+                               withAccountId: accountId)
+                .asObservable()
+                .subscribe(onCompleted: {})
+                .disposed(by: self.disposeBag)
+        } else {
+            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+        }
         stateEmmiter.emitState(ConversationState.conversationRemoved)
     }
 
