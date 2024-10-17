@@ -178,10 +178,12 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
                 }
                 return true
             })
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                guard let account = self.accountService.currentAccount else { return }
-                self.updateProfileDetails(account: account)
+                guard let self = self,
+                      let account = self.accountService.currentAccount else { return }
+                self.registeredName = self.resolveAccountName(from: account)
+                self.updateBestName()
             })
             .disposed(by: disposeBag)
     }
