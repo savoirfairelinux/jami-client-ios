@@ -32,6 +32,7 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
     let nameService: NameService
     let contactsService: ContactsService
     let presenceService: PresenceService
+    let conversationsService: ConversationsService
     let account: AccountModel
     let contact: ContactModel
     let id: String
@@ -45,6 +46,7 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
         self.nameService = injectionBag.nameService
         self.contactsService = injectionBag.contactsService
         self.presenceService = injectionBag.presenceService
+        self.conversationsService = injectionBag.conversationsService
         self.account = account
         self.contact = contact
         self.id = contact.hash
@@ -111,6 +113,7 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
         self.presenceService.subscribeBuddy(withAccountId: account.id,
                                             withJamiId: contact.hash,
                                             withFlag: true)
+        self.conversationsService.contactUnblocked(contactId: contact.hash, accountId: account.id)
     }
 }
 

@@ -71,6 +71,8 @@ class ConversationsViewModel: ObservableObject {
     @Published var conversationCreated: String = ""
     @Published var searchStatus: SearchStatus = .notSearching
 
+    private let bannedStatusChanged = PassthroughSubject<Void, Never>()
+
     private let conversationsSource: ConversationDataSource
 
     @Published var filteredConversations: [ConversationViewModel] = []
@@ -121,6 +123,7 @@ class ConversationsViewModel: ObservableObject {
         self.observeSearchModelUpdates()
         self.observeNetworkState()
         self.observeAccountChange()
+        self.observeContactAdded()
         self.setupFilteredConversations()
         if let account = self.accountsService.currentAccount, account.isJams {
             publicDirectoryTitle = L10n.Smartlist.jamsResults
@@ -128,14 +131,16 @@ class ConversationsViewModel: ObservableObject {
     }
 
     private func setupFilteredConversations() {
-        Publishers.CombineLatest($searchQuery, conversationsSource.$conversationViewModels)
-            .map { searchQuery, conversationViewModels in
+        Publishers.CombineLatest3($searchQuery,
+                                 conversationsSource.$conversationViewModels,
+                                 bannedStatusChanged)
+            .map { searchQuery, conversationViewModels, _ in
                 if searchQuery.isEmpty {
                     return conversationViewModels.filter { conversation in
                         if conversation.conversation.isCoredialog() {
                             if let jamiId = conversation.conversation.getParticipants().first?.jamiId,
                                let contact = self.contactsService.contact(withHash: jamiId), contact.banned {
-                                  return false
+                                return false
                             }
                         }
                         return true
@@ -189,6 +194,29 @@ class ConversationsViewModel: ObservableObject {
                     : L10n.Smartlist.results
             })
             .disposed(by: disposeBag)
+    }
+
+    private func observeContactAdded() {
+        self.contactsService.sharedResponseStream
+            .filter({ $0.eventType == ServiceEventType.contactAdded })
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let accountId: String = event.getEventInput(.accountId),
+                      let peerUri: String = event.getEventInput(.peerUri),
+                      let account = self.accountsService.currentAccount,
+                      account.id == accountId else { return }
+                let convForBannedContacts = self.conversationsSource.conversationViewModels.filter { conversation in
+                    if conversation.conversation.isCoredialog() {
+                        if let jamiId = conversation.conversation.getParticipants().first?.jamiId,
+                           peerUri == jamiId { return true }
+                    }
+                    return false
+                }.first
+                if let convForBannedContacts = convForBannedContacts {
+                    self.bannedStatusChanged.send()
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func observeNetworkState() {

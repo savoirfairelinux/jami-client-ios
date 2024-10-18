@@ -546,7 +546,7 @@ extension ConversationViewModel {
                 } onError: { _ in
                 }
                 .disposed(by: self.disposeBag)
-        } 
+        }
     }
 
     private func subscribeUnreadMessages() {
