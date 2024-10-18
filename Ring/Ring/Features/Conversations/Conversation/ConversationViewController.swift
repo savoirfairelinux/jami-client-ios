@@ -96,6 +96,7 @@ class ConversationViewController: UIViewController,
         self.setupUI()
         self.setupBindings()
         screenTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        screenTapRecognizer.cancelsTouchesInView = false
         self.view.addGestureRecognizer(screenTapRecognizer)
         self.addSwiftUIView()
     }
