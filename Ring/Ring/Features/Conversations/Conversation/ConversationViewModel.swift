@@ -530,8 +530,14 @@ extension ConversationViewModel {
         if !self.conversation.isDialog() {
             return
         }
+
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        guard let contact = self.contactsService.contact(withHash: jamiId) else { return }
+        if contact.banned {
+            return
+        }
         // subscribe to presence updates for the conversation's associated contact
-        if let jamiId = self.conversation.getParticipants().first?.jamiId, let contactPresence = self.presenceService.getSubscriptionsForContact(contactId: jamiId) {
+        if let contactPresence = self.presenceService.getSubscriptionsForContact(contactId: jamiId) {
             self.contactPresence = contactPresence
         } else {
             self.contactPresence.accept(.offline)
@@ -541,7 +547,7 @@ extension ConversationViewModel {
                     guard let uri: String = serviceEvent.getEventInput(ServiceEventInput.uri),
                           let accountID: String = serviceEvent.getEventInput(ServiceEventInput.accountId),
                           let conversation = self?.conversation else { return false }
-                    return uri == conversation.getParticipants().first?.jamiId && accountID == conversation.accountId
+                    return uri == jamiId && accountID == conversation.accountId
                 })
                 .subscribe(onNext: { [weak self] _ in
                     self?.subscribePresence()
