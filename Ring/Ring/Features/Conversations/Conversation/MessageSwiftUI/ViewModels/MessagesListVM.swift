@@ -124,6 +124,7 @@ class MessagesListVM: ObservableObject {
         }
     }
     @Published var isSyncing: Bool = false
+    @Published var isBlocked: Bool = false
     @Published var syncMessage = ""
     private let log = SwiftyBeaver.self
     var contactAvatar: UIImage = UIImage()
@@ -238,6 +239,20 @@ class MessagesListVM: ObservableObject {
                 self.screenTapped = event
             })
             .disposed(by: self.disposeBag)
+    }
+
+    func unblock() {
+        guard let account = accountService.currentAccount,
+              conversation.isDialog(),
+              let jamiId = conversation.getParticipants().first?.jamiId,
+              let contact = contactsService.contact(withHash: jamiId) else {
+            return
+        }
+
+        contactsService.unbanContact(contact: contact, account: account)
+        presenceService.subscribeBuddy(withAccountId: account.id,
+                                       withJamiId: contact.hash,
+                                       withFlag: true)
     }
 
     func subscribeBestName(bestName: Observable<String>) {
@@ -591,6 +606,12 @@ class MessagesListVM: ObservableObject {
 
     func cleanMessages() {
         self.messagesModels = [MessageContainerModel]()
+    }
+
+    func updateBlockedStatus(blocked: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.isBlocked = blocked
+        }
     }
 
     private func getMessageIndex(messageId: String) -> Int? {

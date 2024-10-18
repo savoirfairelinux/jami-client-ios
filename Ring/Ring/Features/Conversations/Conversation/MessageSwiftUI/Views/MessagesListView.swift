@@ -78,13 +78,15 @@ struct MessagesListView: View {
                     }
                     .layoutPriority(1)
                     .padding(.bottom, shouldHideActiveKeyboard ? keyboardHeight : messageContainerHeight - 30)
-                    MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
-                        .alignmentGuide(VerticalAlignment.center) { dimensions in
-                            DispatchQueue.main.async {
-                                self.messageContainerHeight = dimensions.height
+                    if !model.isBlocked {
+                        MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
+                            .alignmentGuide(VerticalAlignment.center) { dimensions in
+                                DispatchQueue.main.async {
+                                    self.messageContainerHeight = dimensions.height
+                                }
+                                return dimensions[VerticalAlignment.center]
                             }
-                            return dimensions[VerticalAlignment.center]
-                        }
+                    }
                 }
                 .overlay(contextMenuPresentingState == .shouldPresent && model.contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
                 // hide navigation bar when presenting context menu
@@ -118,6 +120,10 @@ struct MessagesListView: View {
 
                 if model.isSyncing {
                     syncView()
+                }
+
+                if model.isBlocked {
+                    blockView()
                 }
             }
             if showReactionsView {
@@ -310,6 +316,34 @@ struct MessagesListView: View {
             Text(model.syncMessage)
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
+
+        }
+        .padding()
+        .background(Color(UIColor.secondarySystemBackground))
+    }
+
+    func blockView() -> some View {
+        VStack {
+            Text(L10n.Conversation.contactBlocked)
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
+            Button(action: {
+                model.unblock()
+            }, label: {
+                HStack {
+                    Image(systemName: "person.crop.circle.badge.plus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 18, height: 18)
+                        .foregroundColor(.jamiColor)
+                    Text(L10n.AccountPage.unblockContact)
+                        .foregroundColor(Color(UIColor.label))
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 10)
+                .background(Color.jamiTertiaryControl)
+                .cornerRadius(12)
+            })
         }
         .padding()
         .background(Color(UIColor.secondarySystemBackground))
