@@ -228,6 +228,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 self.isAccountSip = true
                 return
             }
+            self.updateBlockedStatus()
             self.subscribePresenceServiceContactPresence()
             if self.shouldCreateSwarmInfo() {
                 self.createSwarmInfo()
@@ -521,6 +522,16 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     var conversationCreated = BehaviorRelay(value: true)
+
+    func updateBlockedStatus() {
+        if !self.conversation.isDialog() {
+            return
+        }
+
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        guard let contact = self.contactsService.contact(withHash: jamiId) else { return }
+        self.swiftUIModel.updateBlockedStatus(blocked: contact.banned)
+    }
 }
 
 // MARK: Conversation didSet functions

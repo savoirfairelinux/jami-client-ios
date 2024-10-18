@@ -64,6 +64,7 @@ class ConversationDataSource: ObservableObject {
             }
 
             if isConversationWithBlockedContact(conversationModel) {
+                newViewModel.updateBlockedStatus()
                 blockedConversation.append(newViewModel)
                 return nil
             }
@@ -144,6 +145,7 @@ class ConversationDataSource: ObservableObject {
         // Check if the conversation is already in active conversations
         if let index = self.conversationViewModels.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
             let conversationViewModel = self.conversationViewModels.remove(at: index)
+            conversationViewModel.updateBlockedStatus()
             self.blockedConversation.append(conversationViewModel)
         } else {
             // Ignore if already in the banned

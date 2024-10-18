@@ -124,6 +124,7 @@ class MessagesListVM: ObservableObject {
         }
     }
     @Published var isSyncing: Bool = false
+    @Published var isBlocked: Bool = false
     @Published var syncMessage = ""
     private let log = SwiftyBeaver.self
     var contactAvatar: UIImage = UIImage()
@@ -591,6 +592,12 @@ class MessagesListVM: ObservableObject {
 
     func cleanMessages() {
         self.messagesModels = [MessageContainerModel]()
+    }
+
+    func updateBlockedStatus(blocked: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.isBlocked = blocked
+        }
     }
 
     private func getMessageIndex(messageId: String) -> Int? {
