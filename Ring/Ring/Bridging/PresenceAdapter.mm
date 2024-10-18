@@ -53,10 +53,10 @@ static id <PresenceAdapterDelegate> _delegate;
                                                                                       const std::string& lineStatus) {
         if(PresenceAdapter.delegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSString* uriString = [NSString stringWithUTF8String:uri.c_str()];
+            NSString* jamiId = [NSString stringWithUTF8String:uri.c_str()];
             NSString* lineStatusString = [NSString stringWithUTF8String:lineStatus.c_str()];
 
-            [PresenceAdapter.delegate newBuddyNotificationWithAccountId:accountId withUri:uriString withStatus:(NSInteger)status withLineStatus:lineStatusString];
+            [PresenceAdapter.delegate newBuddyNotificationWithAccountId:accountId withJamiId:jamiId withStatus:(NSInteger)status withLineStatus:lineStatusString];
         }
     }));
 
@@ -65,8 +65,8 @@ static id <PresenceAdapterDelegate> _delegate;
 
 #pragma mark -
 
-- (void)subscribeBuddyWithURI:(NSString*)uri WithAccountId:(NSString*)accountId WithFlag:(BOOL)flag {
-    subscribeBuddy(std::string([accountId UTF8String]), std::string([uri UTF8String]), (bool)flag);
+- (void)subscribeBuddyWithJamiId:(NSString*)jamiId WithAccountId:(NSString*)accountId WithFlag:(BOOL)flag {
+    subscribeBuddy(std::string([accountId UTF8String]), std::string([jamiId UTF8String]), (bool)flag);
 }
 
 #pragma mark PresenceAdapterDelegate

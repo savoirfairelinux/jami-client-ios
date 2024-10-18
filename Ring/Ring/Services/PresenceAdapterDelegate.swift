@@ -20,7 +20,7 @@
 
 @objc protocol PresenceAdapterDelegate {
     func newBuddyNotification(withAccountId accountId: String,
-                              withUri uri: String,
+                              withJamiId jamiId: String,
                               withStatus status: Int,
                               withLineStatus lineStatus: String)
 }

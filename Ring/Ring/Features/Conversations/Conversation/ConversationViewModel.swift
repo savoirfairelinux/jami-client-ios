@@ -530,32 +530,23 @@ extension ConversationViewModel {
         if !self.conversation.isDialog() {
             return
         }
-        // subscribe to presence updates for the conversation's associated contact
-        if let jamiId = self.conversation.getParticipants().first?.jamiId, let contactPresence = self.presenceService.getSubscriptionsForContact(contactId: jamiId) {
-            self.contactPresence = contactPresence
-        } else {
-            self.contactPresence.accept(.offline)
-            self.presenceService
-                .sharedResponseStream
-                .filter({ [weak self] serviceEvent in
-                    guard let uri: String = serviceEvent.getEventInput(ServiceEventInput.uri),
-                          let accountID: String = serviceEvent.getEventInput(ServiceEventInput.accountId),
-                          let conversation = self?.conversation else { return false }
-                    return uri == conversation.getParticipants().first?.jamiId && accountID == conversation.accountId
-                })
-                .subscribe(onNext: { [weak self] _ in
-                    self?.subscribePresence()
-                })
-                .disposed(by: self.disposeBag)
-            self.presenceService.subscribeBuddy(withAccountId: self.conversation.accountId, withUri: self.conversation.getParticipants().first!.jamiId, withFlag: true)
+
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        guard let contact = self.contactsService.contact(withHash: jamiId) else { return }
+        if contact.banned {
+            return
         }
-        self.contactPresence
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] presence in
-                self?.presence = presence
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
+        // subscribe to presence updates for the conversation's associated contact
+        if let contactPresence = self.presenceService.getSubscriptionsForContact(contactId: jamiId) {
+            self.contactPresence = contactPresence
+            self.contactPresence
+                .observe(on: MainScheduler.instance)
+                .subscribe { [weak self] presence in
+                    self?.presence = presence
+                } onError: { _ in
+                }
+                .disposed(by: self.disposeBag)
+        } 
     }
 
     private func subscribeUnreadMessages() {
