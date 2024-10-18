@@ -544,8 +544,15 @@ class ConversationViewController: UIViewController,
     private func setRightNavigationButtons() {
         // do not show call buttons for swarm with multiple participants
         if self.viewModel.conversation.getParticipants().count > 1 {
+            self.navigationItem.rightBarButtonItems = []
             return
         }
+
+        if self.viewModel.isConversationForBlockedContact() {
+            self.navigationItem.rightBarButtonItems = []
+            return
+        }
+
         let audioCallItem = UIBarButtonItem()
         audioCallItem.image = UIImage(asset: Asset.callButton)
         audioCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
@@ -614,6 +621,15 @@ class ConversationViewController: UIViewController,
                 self?.viewModel.openCall()
             })
             .disposed(by: self.disposeBag)
+        self.viewModel.updateNavigationBar
+            .observe(on: MainScheduler.instance)
+            .startWith(self.viewModel.updateNavigationBar.value)
+            .subscribe(onNext: { [weak self] update in
+                if update {
+                    self?.setRightNavigationButtons()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     func placeCall() {
