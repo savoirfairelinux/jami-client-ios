@@ -119,6 +119,12 @@ class JamiSearchViewModel: ObservableObject {
                 self.search(withText: text)
             })
             .disposed(by: disposeBag)
+        self.dataSource.onConversationRestored = { [weak self] conversation in
+            guard let self = self else { return }
+            if self.blockedConversation.value?.conversation == conversation {
+                self.blockedConversation.accept(nil)
+            }
+        }
     }
 
     static func removeFilteredConversations(from conversationViewModels: [ConversationViewModel],

@@ -88,6 +88,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     let showIncomingLocationSharing = BehaviorRelay<Bool>(value: false)
     let showOutgoingLocationSharing = BehaviorRelay<Bool>(value: false)
+    let updateNavigationBar = BehaviorRelay<Bool>(value: false)
 
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
@@ -228,6 +229,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 self.isAccountSip = true
                 return
             }
+            self.updateBlockedStatus()
             self.subscribePresenceServiceContactPresence()
             if self.shouldCreateSwarmInfo() {
                 self.createSwarmInfo()
@@ -521,6 +523,21 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     var conversationCreated = BehaviorRelay(value: true)
+
+    func updateBlockedStatus() {
+        self.swiftUIModel.updateBlockedStatus(blocked: isConversationForBlockedContact())
+        self.updateNavigationBar.accept(true)
+    }
+
+    func isConversationForBlockedContact() -> Bool {
+        if !self.conversation.isDialog() {
+            return false
+        }
+
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return false }
+        guard let contact = self.contactsService.contact(withHash: jamiId) else { return false }
+        return contact.banned
+    }
 }
 
 // MARK: Conversation didSet functions
