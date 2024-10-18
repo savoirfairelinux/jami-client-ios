@@ -25,8 +25,8 @@ struct ImportFromArchiveView: View {
     init(injectionBag: InjectionBag,
          importAction: @escaping (_ url: URL, _ password: String) -> Void) {
         _viewModel = StateObject(wrappedValue:
-                                    ImportFromArchiveVM(with: injectionBag))
-        viewModel.importAction = importAction
+                                    ImportFromArchiveVM(with: injectionBag,
+                                                        importAction: importAction))
     }
 
     var body: some View {

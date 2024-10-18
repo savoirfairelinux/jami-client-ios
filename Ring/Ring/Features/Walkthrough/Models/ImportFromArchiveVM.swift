@@ -20,12 +20,12 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class ImportFromArchiveVM: ObservableObject, ViewModel {
+class ImportFromArchiveVM: ObservableObject {
     @Published var password: String = ""
     @Published var selectedFileURL: URL?
     @Published var pickerPresented: Bool = false
 
-    var importAction: ((_ url: URL, _ password: String) -> Void)?
+    var importAction: ((_ url: URL, _ password: String) -> Void)
 
     var isImportButtonDisabled: Bool {
         return selectedFileURL == nil
@@ -39,12 +39,13 @@ class ImportFromArchiveVM: ObservableObject, ViewModel {
         return selectedFileURL?.lastPathComponent ?? L10n.ImportFromArchive.selectArchiveButton
     }
 
-    required init(with injectionBag: InjectionBag) {
+    init(with injectionBag: InjectionBag, importAction: @escaping ((_ url: URL, _ password: String) -> Void)) {
+        self.importAction = importAction
     }
 
     func importAccount() {
         if let selectedFileURL = selectedFileURL {
-            importAction?(selectedFileURL, password)
+            importAction(selectedFileURL, password)
         }
     }
 

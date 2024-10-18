@@ -25,8 +25,8 @@ struct JamsConnectView: View {
     init(injectionBag: InjectionBag,
          connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
         _viewModel = StateObject(wrappedValue:
-                                    ConnectToManagerVM(with: injectionBag))
-        viewModel.connectAction = connectAction
+                                    ConnectToManagerVM(with: injectionBag,
+                                                       connectAction: connectAction))
     }
     var body: some View {
         VStack {

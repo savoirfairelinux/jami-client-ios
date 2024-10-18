@@ -19,14 +19,13 @@
 import SwiftUI
 
 struct SIPConfigurationView: View {
-    @StateObject var viewModel: ConnectSipVM
+    @StateObject private var model: ConnectSipVM
     let dismissHandler = DismissHandler()
 
     init(injectionBag: InjectionBag,
          connectAction: @escaping (_ username: String, _ password: String, _ server: String) -> Void) {
-        _viewModel = StateObject(wrappedValue:
-                                    ConnectSipVM(with: injectionBag))
-        viewModel.connectAction = connectAction
+        _model = StateObject(wrappedValue:
+                                ConnectSipVM(with: injectionBag, connectAction: connectAction))
     }
 
     var body: some View {
@@ -71,9 +70,9 @@ struct SIPConfigurationView: View {
     }
 
     private var configureButton: some View {
-        Button(action: {[weak dismissHandler, weak viewModel] in
+        Button(action: {[weak dismissHandler, weak model] in
             dismissHandler?.dismissView()
-            viewModel?.connect()
+            model?.connect()
         }, label: {
             Text(L10n.Account.configure)
                 .foregroundColor(.jamiColor)
@@ -81,18 +80,18 @@ struct SIPConfigurationView: View {
     }
 
     private var usernameView: some View {
-        WalkthroughTextEditView(text: $viewModel.username,
+        WalkthroughTextEditView(text: $model.username,
                                 placeholder: L10n.Global.username)
     }
 
     private var serverView: some View {
-        WalkthroughFocusableTextView(text: $viewModel.server,
-                                     isTextFieldFocused: $viewModel.isTextFieldFocused,
+        WalkthroughFocusableTextView(text: $model.server,
+                                     isTextFieldFocused: $model.isTextFieldFocused,
                                      placeholder: L10n.Account.sipServer)
     }
 
     private var passwordView: some View {
-        WalkthroughPasswordView(text: $viewModel.password,
+        WalkthroughPasswordView(text: $model.password,
                                 placeholder: L10n.Global.password)
             .padding(.bottom)
     }

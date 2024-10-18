@@ -27,8 +27,8 @@ struct LinkToAccountView: View {
     init(injectionBag: InjectionBag,
          linkAction: @escaping (_ pin: String, _ password: String) -> Void) {
         _viewModel = StateObject(wrappedValue:
-                                    LinkToAccountVM(with: injectionBag))
-        viewModel.linkAction = linkAction
+                                    LinkToAccountVM(with: injectionBag,
+                                                    linkAction: linkAction))
     }
 
     var body: some View {

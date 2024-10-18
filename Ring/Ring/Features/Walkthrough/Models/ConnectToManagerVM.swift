@@ -20,13 +20,13 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class ConnectToManagerVM: ObservableObject, ViewModel {
+class ConnectToManagerVM: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var server: String = ""
     @Published var isTextFieldFocused: Bool = true
 
-    var connectAction: ((_ username: String, _ password: String, _ server: String) -> Void)?
+    var connectAction: ((_ username: String, _ password: String, _ server: String) -> Void)
 
     var isSignInDisabled: Bool {
         username.isEmpty || password.isEmpty || server.isEmpty
@@ -36,12 +36,13 @@ class ConnectToManagerVM: ObservableObject, ViewModel {
         return isSignInDisabled ? Color(UIColor.secondaryLabel) : .jamiColor
     }
 
-    required init(with injectionBag: InjectionBag) {
+    init(with injectionBag: InjectionBag, connectAction: @escaping ((_ username: String, _ password: String, _ server: String) -> Void)) {
+        self.connectAction = connectAction
     }
 
     func connect() {
         if !isSignInDisabled {
-            connectAction?(username, password, server)
+            connectAction(username, password, server)
         }
     }
 }

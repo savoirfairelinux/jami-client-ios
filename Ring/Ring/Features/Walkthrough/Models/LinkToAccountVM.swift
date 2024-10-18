@@ -20,14 +20,14 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class LinkToAccountVM: ObservableObject, ViewModel {
+class LinkToAccountVM: ObservableObject {
     @Published var pin: String = ""
     @Published var password: String = ""
     @Published var scannedCode: String?
     @Published var animatableScanSwitch: Bool = true
     @Published var notAnimatableScanSwitch: Bool = true
 
-    var linkAction: ((_ pin: String, _ password: String) -> Void)?
+    var linkAction: ((_ pin: String, _ password: String) -> Void)
 
     var isLinkButtonEnabled: Bool {
         return !pin.isEmpty
@@ -37,11 +37,12 @@ class LinkToAccountVM: ObservableObject, ViewModel {
         return pin.isEmpty ? Color(UIColor.secondaryLabel) : .jamiColor
     }
 
-    required init(with injectionBag: InjectionBag) {
+    init(with injectionBag: InjectionBag, linkAction: @escaping ((_ pin: String, _ password: String) -> Void)) {
+        self.linkAction = linkAction
     }
 
     func link() {
-        linkAction?(pin, password)
+        linkAction(pin, password)
     }
 
     func switchToQRCode() {

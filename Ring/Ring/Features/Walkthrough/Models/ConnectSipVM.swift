@@ -20,18 +20,19 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class ConnectSipVM: ObservableObject, ViewModel {
+class ConnectSipVM: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var server: String = ""
     @Published var isTextFieldFocused: Bool = true
 
-    var connectAction: ((_ username: String, _ password: String, _ server: String) -> Void)?
+    var connectAction: ((_ username: String, _ password: String, _ server: String) -> Void)
 
-    required init(with injectionBag: InjectionBag) {
+    required init(with injectionBag: InjectionBag, connectAction: @escaping ((_ username: String, _ password: String, _ server: String) -> Void)) {
+        self.connectAction = connectAction
     }
 
     func connect() {
-        connectAction?(username, password, server)
+        connectAction(username, password, server)
     }
 }
