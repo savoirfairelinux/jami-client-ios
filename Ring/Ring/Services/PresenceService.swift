@@ -61,35 +61,35 @@ class PresenceService {
                           subscribe: Bool) {
         for contact in contacts where !contact.banned {
             self.subscribeBuddy(withAccountId: accountId,
-                                withUri: contact.hash,
+                                withJamiId: contact.hash,
                                 withFlag: subscribe)
         }
     }
 
     func subscribeBuddy(withAccountId accountId: String,
-                        withUri uri: String,
+                        withJamiId jamiId: String,
                         withFlag flag: Bool) {
         presenceQueue.async { [weak self] in
             guard let self = self else { return }
-            if flag && self.contactPresence[uri] != nil {
+            if flag && self.contactPresence[jamiId] != nil {
                 // already subscribed
                 return
             }
-            self.presenceAdapter.subscribeBuddy(withURI: uri, withAccountId: accountId, withFlag: flag)
+            self.presenceAdapter.subscribeBuddy(withJamiId: jamiId, withAccountId: accountId, withFlag: flag)
             if !flag {
-                self.contactPresence[uri] = nil
+                self.contactPresence[jamiId] = nil
                 return
             }
-            if let presenceForContact = self.contactPresence[uri] {
+            if let presenceForContact = self.contactPresence[jamiId] {
                 presenceForContact.accept(.offline)
                 return
             }
             let observableValue = BehaviorRelay<PresenceStatus>(value: .offline)
-            self.contactPresence[uri] = observableValue
+            self.contactPresence[jamiId] = observableValue
             DispatchQueue.global(qos: .background).async {
                 var event = ServiceEvent(withEventType: .presenseSubscribed)
                 event.addEventInput(.accountId, value: accountId)
-                event.addEventInput(.uri, value: uri)
+                event.addEventInput(.uri, value: jamiId)
                 self.responseStream.onNext(event)
             }
         }
@@ -98,18 +98,18 @@ class PresenceService {
 
 extension PresenceService: PresenceAdapterDelegate {
     func newBuddyNotification(withAccountId accountId: String,
-                              withUri uri: String,
+                              withJamiId jamiId: String,
                               withStatus status: Int,
                               withLineStatus lineStatus: String) {
         presenceQueue.async {[weak self] in
             guard let self = self else { return }
             guard let presenceStatus = PresenceStatus(rawValue: status) else { return}
-            if let presenceForContact = self.contactPresence[uri] {
+            if let presenceForContact = self.contactPresence[jamiId] {
                 presenceForContact.accept(presenceStatus)
                 return
             }
             let observableValue = BehaviorRelay<PresenceStatus>(value: presenceStatus)
-            self.contactPresence[uri] = observableValue
+            self.contactPresence[jamiId] = observableValue
         }
     }
 }

@@ -112,7 +112,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         if item.request.type == .contact && self.contactsService.contact(withHash: jamiId) == nil {
             let acceptCompleted = self.requestsService.acceptContactRequest(jamiId: item.request.participants.first!.jamiId, withAccount: item.request.accountId)
             self.presenceService.subscribeBuddy(withAccountId: item.request.accountId,
-                                                withUri: jamiId,
+                                                withJamiId: jamiId,
                                                 withFlag: true)
             return acceptCompleted.asObservable()
         }
