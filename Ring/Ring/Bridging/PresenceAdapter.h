@@ -26,6 +26,6 @@
 
 @property (class, nonatomic, weak) id <PresenceAdapterDelegate> delegate;
 
-- (void)subscribeBuddyWithURI:(NSString*)uri WithAccountId:(NSString*)accountId WithFlag:(BOOL)flag;
+- (void)subscribeBuddyWithJamiId:(NSString*)jamiId WithAccountId:(NSString*)accountId WithFlag:(BOOL)flag;
 
 @end
