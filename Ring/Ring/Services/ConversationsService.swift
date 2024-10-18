@@ -193,6 +193,20 @@ class ConversationsService {
         self.conversations.accept(sorted)
     }
 
+    func contactUnblocked(contactId: String, accountId: String) {
+        if let conversation = self.getConversationForParticipant(jamiId: contactId, accontId: accountId) {
+            let conversationId = conversation.id
+
+            print("reeadd connversation id \(conversationId)")
+            var currentConversations = self.conversations.value
+            self.sortAndUpdate(conversations: &currentConversations)
+           // sortIfNeeded()
+//            var currentConversations = self.conversations.value
+//            self.addSwarm(conversationId: conversationId, accountId: accountId, accountURI: "", to: &currentConversations)
+        }
+
+    }
+
     private func updateUnreadMessages(conversation: ConversationModel, accountId: String) {
         if let lastRead = conversation.getLastReadMessage(), let jamiId = conversation.getLocalParticipants()?.jamiId {
             let unreadInteractions = self.conversationsAdapter.countInteractions(accountId, conversationId: conversation.id, from: lastRead, to: "", authorUri: jamiId)

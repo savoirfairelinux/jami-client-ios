@@ -135,7 +135,7 @@ class ConversationsViewModel: ObservableObject {
                         if conversation.conversation.isCoredialog() {
                             if let jamiId = conversation.conversation.getParticipants().first?.jamiId,
                                let contact = self.contactsService.contact(withHash: jamiId), contact.banned {
-                                  return false
+                                return false
                             }
                         }
                         return true
