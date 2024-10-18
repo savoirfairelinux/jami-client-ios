@@ -142,6 +142,7 @@ class MessagesListVM: ObservableObject {
     var contactsService: ContactsService
     var nameService: NameService
     var requestsService: RequestsService
+    var presenceService: PresenceService
     var transferHelper: TransferHelper
     var messagePanel: MessagePanelVM
 
@@ -217,6 +218,7 @@ class MessagesListVM: ObservableObject {
         self.conversationService = injectionBag.conversationsService
         self.contactsService = injectionBag.contactsService
         self.nameService = injectionBag.nameService
+        self.presenceService = injectionBag.presenceService
         self.transferHelper = transferHelper
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject)
@@ -259,8 +261,15 @@ class MessagesListVM: ObservableObject {
                                 withAccountId: conversation.accountId,
                                 avatar: avatar,
                                 alias: jamsName)
-            .subscribe(onCompleted: { [weak self] in
-                DispatchQueue.main.async {
+            .subscribe(onCompleted: { [weak self, weak conversation] in
+                guard let self = self,
+                let conversation = conversation else { return }
+                if conversation.isDialog() {
+                    self.presenceService.subscribeBuddy(withAccountId: conversation.accountId,
+                                                         withUri: jamiId,
+                                                         withFlag: true)
+                }
+                DispatchQueue.main.async {[weak self] in
                     guard let self = self else { return }
                     self.isTemporary = false
                 }
