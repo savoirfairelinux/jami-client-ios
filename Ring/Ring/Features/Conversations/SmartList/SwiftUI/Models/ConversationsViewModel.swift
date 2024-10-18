@@ -131,7 +131,15 @@ class ConversationsViewModel: ObservableObject {
         Publishers.CombineLatest($searchQuery, conversationsSource.$conversationViewModels)
             .map { searchQuery, conversationViewModels in
                 if searchQuery.isEmpty {
-                    return conversationViewModels
+                    return conversationViewModels.filter { conversation in
+                        if conversation.conversation.isCoredialog() {
+                            if let jamiId = conversation.conversation.getParticipants().first?.jamiId,
+                               let contact = self.contactsService.contact(withHash: jamiId), contact.banned {
+                                  return false
+                            }
+                        }
+                        return true
+                    }
                 } else {
                     return conversationViewModels.filter { $0.matches(searchQuery) }
                 }
