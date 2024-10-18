@@ -124,6 +124,7 @@ class MessagesListVM: ObservableObject {
         }
     }
     @Published var isSyncing: Bool = false
+    @Published var isBlocked: Bool = false
     @Published var syncMessage = ""
     private let log = SwiftyBeaver.self
     var contactAvatar: UIImage = UIImage()
@@ -195,6 +196,12 @@ class MessagesListVM: ObservableObject {
             subscriptionQueue.async { [weak self] in
                 guard let self = self else { return }
                 self.invalidateAndSetupConversationSubscriptions()
+            }
+            if conversation.isCoredialog() {
+                if let jamiId = conversation.getParticipants().first?.jamiId,
+                   let contact = self.contactsService.contact(withHash: jamiId), contact.banned {
+                    isBlocked = true
+                }
             }
             self.updateColorPreference()
             self.updateLastDisplayed()

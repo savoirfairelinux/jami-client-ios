@@ -119,6 +119,10 @@ struct MessagesListView: View {
                 if model.isSyncing {
                     syncView()
                 }
+
+                if model.isBlocked {
+                    blockView()
+                }
             }
             if showReactionsView {
                 if let reactions = reactionsForMessage {
@@ -308,6 +312,16 @@ struct MessagesListView: View {
     func syncView() -> some View {
         VStack {
             Text(model.syncMessage)
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
+        }
+        .padding()
+        .background(Color(UIColor.secondarySystemBackground))
+    }
+
+    func blockView() -> some View {
+        VStack {
+            Text("Contact Blocked")
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
         }
