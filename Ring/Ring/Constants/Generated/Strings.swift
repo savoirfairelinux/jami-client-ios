@@ -257,8 +257,8 @@ internal enum L10n {
     internal static let turnServer = L10n.tr("Localizable", "accountPage.turnServer", fallback: "TURN address")
     /// TURN username
     internal static let turnUsername = L10n.tr("Localizable", "accountPage.turnUsername", fallback: "TURN username")
-    /// UNBLOCK
-    internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact", fallback: "UNBLOCK")
+    /// Unblock
+    internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact", fallback: "Unblock")
     /// Unlink
     internal static let unlink = L10n.tr("Localizable", "accountPage.unlink", fallback: "Unlink")
     /// Use UPnP
@@ -445,6 +445,8 @@ internal enum L10n {
     internal static let addToContactsButton = L10n.tr("Localizable", "conversation.addToContactsButton", fallback: "Add to Contacts")
     /// Add to contacts?
     internal static let addToContactsLabel = L10n.tr("Localizable", "conversation.addToContactsLabel", fallback: "Add to contacts?")
+    /// Contact blocked
+    internal static let contactBlocked = L10n.tr("Localizable", "conversation.contactBlocked", fallback: "Contact blocked")
     /// deleted a message
     internal static let deletedMessage = L10n.tr("Localizable", "conversation.deletedMessage", fallback: "deleted a message")
     /// edited

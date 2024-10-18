@@ -31,6 +31,7 @@ class ConversationDataSource: ObservableObject {
     let injectionBag: InjectionBag
 
     var onNewConversationViewModelCreated: ((ConversationModel) -> Void)?
+    var onConversationRestored: ((ConversationModel) -> Void)?
 
     init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -59,11 +60,14 @@ class ConversationDataSource: ObservableObject {
 
     private func mapConversationsToViewModels(_ conversations: [ConversationModel]) -> [ConversationViewModel] {
         conversations.compactMap { conversationModel -> ConversationViewModel? in
-            guard let newViewModel = createOrRetrieveViewModel(for: conversationModel) else {
+            let isBlocked = isConversationWithBlockedContact(conversationModel)
+            guard let newViewModel = createOrRetrieveViewModel(for: conversationModel,
+                                                               isBlocked: isBlocked) else {
                 return nil
             }
 
-            if isConversationWithBlockedContact(conversationModel) {
+            if isBlocked {
+                newViewModel.updateBlockedStatus()
                 blockedConversation.append(newViewModel)
                 return nil
             }
@@ -73,14 +77,39 @@ class ConversationDataSource: ObservableObject {
         }
     }
 
-    private func createOrRetrieveViewModel(for conversationModel: ConversationModel) -> ConversationViewModel? {
-        if let existingViewModel = conversationViewModels.first(where: { $0.conversation == conversationModel }) {
-            return existingViewModel
-        } else {
-            let newViewModel = ConversationViewModel(with: injectionBag)
-            newViewModel.conversation = conversationModel
-            return newViewModel
+    private func createOrRetrieveViewModel(for conversationModel: ConversationModel, isBlocked: Bool) -> ConversationViewModel? {
+        if let viewModel = conversationViewModels.first(where: { $0.conversation == conversationModel }) {
+            return viewModel
         }
+        // Attempt to restore a blocked conversation if not blocked
+        if !isBlocked,
+           let jamiId = conversationModel.getParticipants().first?.jamiId,
+           let restoredViewModel = restoreBlockedConversation(jamiId: jamiId) {
+            return restoredViewModel
+        }
+
+        let newViewModel = ConversationViewModel(with: injectionBag)
+        newViewModel.conversation = conversationModel
+        return newViewModel
+    }
+
+    func restoreBlockedConversation(jamiId: String) -> ConversationViewModel? {
+        guard let blockedIndex = blockedConversation.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) else {
+            return nil
+        }
+        let viewModel = blockedConversation.remove(at: blockedIndex)
+
+        // Reset conversation to trigger didSet
+        let conversation = viewModel.conversation
+        viewModel.conversation = conversation
+
+        // Notify if a conversation has been restored
+        if let onConversationRestored = self.onConversationRestored,
+           let conversation = conversation {
+            onConversationRestored(conversation)
+        }
+
+        return viewModel
     }
 
     private func observeContactAdded() {
@@ -99,23 +128,16 @@ class ConversationDataSource: ObservableObject {
     }
 
     private func restoreConversation(jamiId: String, accountId: String) {
-        // If the conversation is not banned, it is a new contact that will be added when conversation ready, skip it.
-        guard let blockedIndex = blockedConversation.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) else {
-            return
-        }
-        _ = blockedConversation.remove(at: blockedIndex)
-
-        // Retrieve the conversation and determine its correct index to maintain the order
-        guard let conversation = conversationsService.getConversationForParticipant(jamiId: jamiId, accountId: accountId),
-              let targetIndex = conversationsService.conversations.value.firstIndex(where: { $0 == conversation }) else {
-            return
-        }
-
-        let newViewModel = ConversationViewModel(with: injectionBag)
-        newViewModel.conversation = conversation
-
-        DispatchQueue.main.async { [weak self] in
-            self?.conversationViewModels.insert(newViewModel, at: targetIndex)
+        if let viewModel = restoreBlockedConversation(jamiId: jamiId) {
+            // Retrieve the conversation and determine its correct index to maintain the order
+            guard let targetIndex = conversationsService.conversations.value.firstIndex(where: { $0 == viewModel.conversation }) else {
+                return
+            }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                let safeIndex = min(targetIndex, self.conversationViewModels.count)
+                self.conversationViewModels.insert(viewModel, at: safeIndex)
+            }
         }
     }
 
@@ -144,6 +166,7 @@ class ConversationDataSource: ObservableObject {
         // Check if the conversation is already in active conversations
         if let index = self.conversationViewModels.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
             let conversationViewModel = self.conversationViewModels.remove(at: index)
+            conversationViewModel.updateBlockedStatus()
             self.blockedConversation.append(conversationViewModel)
         } else {
             // Ignore if already in the banned

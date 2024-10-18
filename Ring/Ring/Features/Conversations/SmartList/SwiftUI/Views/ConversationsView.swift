@@ -171,7 +171,14 @@ struct ConversationRowView: View {
                     Text(model.name)
                         .fontWeight(model.unreadMessages > 0 ? .bold : .regular)
                         .lineLimit(1)
-                    if !model.lastMessage.isEmpty {
+                    if model.swiftUIModel.isBlocked {
+                        Spacer()
+                            .frame(height: 5)
+                        Text(L10n.Swarm.blocked)
+                            .italic()
+                            .font(.footnote)
+                            .lineLimit(1)
+                    } else if !model.lastMessage.isEmpty {
                         Spacer()
                             .frame(height: 5)
                         HStack(alignment: .bottom, spacing: 4) {
