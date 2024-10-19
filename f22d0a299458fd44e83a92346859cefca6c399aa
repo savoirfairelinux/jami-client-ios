@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d1924b0_7f286198",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-10-19T18:59:13Z",
+      "side": 1,
+      "message": "Should this be sentence case, i.e. `Contact blocked`? Thank you",
+      "range": {
+        "startLine": 324,
+        "startChar": 18,
+        "endLine": 324,
+        "endChar": 33
+      },
+      "revId": "f22d0a299458fd44e83a92346859cefca6c399aa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
