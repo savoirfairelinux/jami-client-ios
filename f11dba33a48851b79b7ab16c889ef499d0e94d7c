@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a29f198_6bb45a13",
+        "filename": "Ring/Ring/Services/ConversationsService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-10-19T18:50:45Z",
+      "side": 1,
+      "message": "Typo? Should `reeadd` be `readd`? Thank you",
+      "range": {
+        "startLine": 200,
+        "startChar": 19,
+        "endLine": 200,
+        "endChar": 25
+      },
+      "revId": "f11dba33a48851b79b7ab16c889ef499d0e94d7c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "547bba87_5e9f66d1",
+        "filename": "Ring/Ring/Services/ConversationsService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-10-19T18:50:45Z",
+      "side": 1,
+      "message": "Typo? Should `connversation` be `conversation`? Thank you",
+      "range": {
+        "startLine": 200,
+        "startChar": 26,
+        "endLine": 200,
+        "endChar": 39
+      },
+      "revId": "f11dba33a48851b79b7ab16c889ef499d0e94d7c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
