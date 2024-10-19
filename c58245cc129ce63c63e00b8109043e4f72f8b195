@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a28f4f0e_59d7869e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-10-19T18:53:37Z",
+      "side": 1,
+      "message": "Should the space ` ` be removed to align with line above? Thank you",
+      "range": {
+        "startLine": 270,
+        "startChar": 56,
+        "endLine": 270,
+        "endChar": 57
+      },
+      "revId": "c58245cc129ce63c63e00b8109043e4f72f8b195",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
