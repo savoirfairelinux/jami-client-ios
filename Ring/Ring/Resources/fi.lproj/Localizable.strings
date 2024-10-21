@@ -44,9 +44,9 @@
 "global.copy" = "Kopioi";
 "global.reply" = "Vastaa";
 "global.search" = "Etsitään...";
-"global.donate" = "Donate";
+"global.donate" = "Lahjoita";
 "global.deleteMessage" = "Poista viesti";
-"global.deleteFile" = "Delete file from device";
+"global.deleteFile" = "Poista tiedosto laitteelta";
 "global.editMessage" = "Ääritä viestiä";
 "global.editing" = "Editing";
 "global.create" = "Luo";
@@ -120,8 +120,8 @@
 "smartlist.aboutJami" = "Tietoa Jamista";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Tunnukset";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.disableDonation" = "Ei nyt";
+"smartlist.donationExplanation" = "Jos pidät Jami'sta ja uskot missioomme, tekisitkö lahjoituksen?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
@@ -144,7 +144,7 @@
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "poisti viestin";
 
 // Invitations
 "invitations.noInvitations" = "Ei kutsuja";
@@ -368,7 +368,7 @@
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
-"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationTitle" = "Toisella laitteella";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
 "accountPage.pinError" = "Failed to generate PIN code";
 "accountPage.notificationTitle" = "Ilmoitukset";
@@ -489,7 +489,7 @@
 "generalSettings.limitLocationSharingDuration" = "Rajoittakaa sijaintiyhteyden kesto";
 "generalSettings.locationSharingDuration" = "Asetuksen osakkeiden kesto";
 "generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.enableDonationCampaign" = "Lahjoituskampanja käyttöön";
 
 // Log View
 "logView.title" = "Diagnostiikka";
