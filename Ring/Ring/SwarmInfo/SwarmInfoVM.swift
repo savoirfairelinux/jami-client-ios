@@ -227,11 +227,7 @@ class SwarmInfoVM: ObservableObject {
                                ban: true,
                                withAccountId: accountId)
                 .asObservable()
-                .subscribe(onCompleted: { [weak self] in
-                    self?.conversationService
-                        .removeConversationFromDB(conversation: conversation,
-                                                  keepConversation: false)
-                })
+                .subscribe(onCompleted: {})
                 .disposed(by: self.disposeBag)
         }
         stateEmitter.emitState(ConversationState.conversationRemoved)

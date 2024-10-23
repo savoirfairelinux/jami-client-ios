@@ -364,7 +364,7 @@ extension CallViewModel {
             return
         }
 
-        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId, accontId: call.accountId) else {
+        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId, accountId: call.accountId) else {
             return
         }
         self.stateSubject.onNext(ConversationState.openConversationFromCall(conversation: conversation))
