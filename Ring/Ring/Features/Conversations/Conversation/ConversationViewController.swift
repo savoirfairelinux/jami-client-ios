@@ -103,6 +103,7 @@ class ConversationViewController: UIViewController,
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.resetNavigationBarShadow()
         self.viewModel.setMessagesAsRead()
     }
 
@@ -639,6 +640,13 @@ class ConversationViewController: UIViewController,
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
+    }
+
+    func resetNavigationBarShadow() {
+        self.navigationController?.navigationBar.shadowImage = UIImage() // Clear the shadow image
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.0) // Default shadow offset
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.0 // Default shadow opacity
     }
 
     // MARK: ContactPickerDelegate
