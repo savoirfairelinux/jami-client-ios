@@ -394,7 +394,7 @@ class ConversationsService {
     }
 
     func saveJamsConversation(for jamiId: String, accountId: String, refreshConversations: Bool) {
-        if self.getConversationForParticipant(jamiId: jamiId, accontId: accountId) != nil { return }
+        if self.getConversationForParticipant(jamiId: jamiId, accountId: accountId) != nil { return }
         let contactUri = JamiURI(schema: .ring, infoHash: jamiId)
         guard let contactUriString = contactUri.uriString else { return }
         let conversationId = dbManager.createConversationsFor(contactUri: contactUriString, accountId: accountId)
@@ -579,7 +579,7 @@ class ConversationsService {
         /// do not add multiple contact interactions
         if let hash = JamiURI(from: contactUri).hash,
            interactionType == .contact,
-           let conversation = self.getConversationForParticipant(jamiId: hash, accontId: accountId),
+           let conversation = self.getConversationForParticipant(jamiId: hash, accountId: accountId),
            conversation.messages.map({ ($0.content) }).contains(messageContent) {
             return
 
@@ -683,9 +683,9 @@ class ConversationsService {
 
     // MARK: helpers
 
-    func getConversationForParticipant(jamiId: String, accontId: String) -> ConversationModel? {
+    func getConversationForParticipant(jamiId: String, accountId: String) -> ConversationModel? {
         return self.conversations.value.filter { conversation in
-            conversation.getParticipants().first?.jamiId == jamiId && conversation.isDialog() && conversation.accountId == accontId
+            conversation.getParticipants().first?.jamiId == jamiId && conversation.isDialog() && conversation.accountId == accountId
         }.first
     }
 
@@ -776,7 +776,7 @@ class ConversationsService {
         if !conversationId.isEmpty {
             conversationUnwraped = self.getConversationForId(conversationId: conversationId, accountId: accountId)
         } else {
-            conversationUnwraped = self.getConversationForParticipant(jamiId: jamiId, accontId: accountId)
+            conversationUnwraped = self.getConversationForParticipant(jamiId: jamiId, accountId: accountId)
         }
         guard let conversation = conversationUnwraped else { return }
         let messages = conversation.messages

@@ -32,6 +32,7 @@ enum ServiceEventType {
     case knownDevicesChanged
     case exportOnRingEnded
     case contactAdded
+    case contactRemoved
     case contactRequestReceived
     case contactRequestDiscarded
     case notificationEnabled
