@@ -234,6 +234,11 @@ extension ContactsService: ContactsAdapterDelegate {
             return
         }
         contactToRemove.banned = banned
+        let serviceEventType: ServiceEventType = .contactRemoved
+        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        serviceEvent.addEventInput(.accountId, value: accountId)
+        serviceEvent.addEventInput(.peerUri, value: uri)
+        self.responseStream.onNext(serviceEvent)
         log.debug("Contact removed :\(uri)")
     }
 

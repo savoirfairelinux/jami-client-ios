@@ -99,7 +99,7 @@ class GeneratedInteractionsManager {
                                     contactRingId: String,
                                     shouldUpdateConversation: Bool) {
 
-        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: contactRingId, accontId: accountId) else {
+        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: contactRingId, accountId: accountId) else {
             return
         }
         // remove conversation if it contain only contact messages
@@ -131,7 +131,7 @@ class GeneratedInteractionsManager {
 
                 if account.type != .sip {
                     // we should generate messages only for non swarm conversations
-                    guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId.filterOutHost(), accontId: accountID), !conversation.isSwarm() else { return }
+                    guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId.filterOutHost(), accountId: accountID), !conversation.isSwarm() else { return }
                 } else {
                     // ensure sip conversation exists
                     guard let uri = JamiURI.init(schema: .sip, infoHash: jamiId, account: account).uriString else {
