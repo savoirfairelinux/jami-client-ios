@@ -737,5 +737,15 @@ extension ConversationViewModel: Equatable {
     }
 }
 
+extension ConversationViewModel {
+    func isCoreConversationWith(jamiId: String) -> Bool {
+        guard conversation.isCoredialog(),
+              let participantJamiId = conversation.getParticipants().first?.jamiId else {
+            return false
+        }
+        return participantJamiId == jamiId
+    }
+}
+
 // swiftlint:enable type_body_length
 // swiftlint:enable file_length

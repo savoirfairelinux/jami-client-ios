@@ -106,6 +106,9 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
 
     func unblock() {
         self.contactsService.unbanContact(contact: contact, account: account)
+        self.presenceService.subscribeBuddy(withAccountId: self.account.id,
+                                            withJamiId: self.contact.hash,
+                                            withFlag: true)
     }
 }
 
