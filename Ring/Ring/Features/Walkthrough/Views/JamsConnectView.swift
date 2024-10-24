@@ -28,6 +28,7 @@ struct JamsConnectView: View {
                                     ConnectToManagerVM(with: injectionBag,
                                                        connectAction: connectAction))
     }
+
     var body: some View {
         VStack {
             header
@@ -73,8 +74,9 @@ struct JamsConnectView: View {
     }
 
     private var signinButton: some View {
-        Button(action: {
-            viewModel.connect()
+        Button(action: {[weak dismissHandler, weak viewModel] in
+            dismissHandler?.dismissView()
+            viewModel?.connect()
         }, label: {
             Text(L10n.LinkToAccountManager.signIn)
                 .foregroundColor(viewModel.signInButtonColor)
