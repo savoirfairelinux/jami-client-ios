@@ -74,6 +74,9 @@ class JamiSearchViewModel: ObservableObject {
     // Temporary conversation created when perform search for a new contact.
     var temporaryConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
 
+    // Conversation with blocked contact.
+    var blockedConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
+
     var filteredResults: [ConversationViewModel] {
         if searchBarText.value.isEmpty {
             return dataSource.conversationViewModels
@@ -183,6 +186,11 @@ class JamiSearchViewModel: ObservableObject {
         return temporaryConversation.model().getParticipants().first?.jamiId == jamiId
     }
 
+    func blockedConversationExists(for jamiId: String) -> Bool {
+        guard let blockedConversation = self.blockedConversation.value else { return false }
+        return blockedConversation.isCoreConversationWith(jamiId: jamiId)
+    }
+
     func isConversation(_ conversation: ConversationViewModel, match searchQuery: String) -> Bool {
         guard conversation.model().isCoredialog() else {
             return false
@@ -197,6 +205,9 @@ class JamiSearchViewModel: ObservableObject {
     }
 
     func isConversationExists(for searchQuery: String) -> Bool {
+        if let blocked = self.blockedConversation.value, blocked.isCoreConversationWith(jamiId: searchQuery) {
+            return true
+        }
         let coreDialog = self.dataSource.conversationViewModels
             .filter({[weak self] conversation in
                 guard let self = self else { return false }
@@ -226,12 +237,20 @@ class JamiSearchViewModel: ObservableObject {
             self.searchStatus.onNext(.invalidId)
             return
         }
+
+        self.searchBlocked(searchQuery: searchQuery)
         // not need to searh on network
         if searchOnlyExistingConversations {
             self.searchStatus.onNext(.notSearching)
             return
         }
         self.addTemporaryConversationsIfNeed(searchQuery: searchQuery)
+    }
+
+    private func searchBlocked(searchQuery: String) {
+        if let conversation = self.dataSource.blockedConversation.filter({ $0.isCoreConversationWith(jamiId: searchQuery) }).first {
+            self.blockedConversation.accept(conversation)
+        }
     }
 
     private func addTemporaryConversationsIfNeed(searchQuery: String) {
@@ -281,6 +300,10 @@ class JamiSearchViewModel: ObservableObject {
                     self.updateSearchStatus()
                     return
                 }
+                self.searchBlocked(searchQuery: lookupResponse.address)
+                if blockedConversationExists(for: lookupResponse.address) {
+                    return
+                }
                 if self.temporaryConversationExists(for: lookupResponse.address) {
                     return
                 }
@@ -326,6 +349,7 @@ class JamiSearchViewModel: ObservableObject {
     }
 
     private func cleanUpPreviousSearch() {
+        self.blockedConversation.accept(nil)
         self.temporaryConversationCreated(tempConversation: nil)
         self.jamsTemporaryResults.accept([])
     }
