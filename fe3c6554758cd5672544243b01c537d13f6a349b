@@ -16,6 +16,24 @@
       "message": "\u003e terminology around groups and swarms to be discussed\n\u003e https://review.jami.net/c/jami-client-android/+/29175/comments/4b512a34_21659069\n\n\u003e Unable to connect\n\u003e\n\u003e An error occurred during a connection to jenkins.jami.net. \n\u003e https://jenkins.jami.net/job/client-ios/3965/\n\nCan you please help with resolving the build failure?\n\nThank you",
       "revId": "fe3c6554758cd5672544243b01c537d13f6a349b",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8536af7f_d06d5096",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-10-24T20:50:17Z",
+      "side": 1,
+      "message": "Adrien Béraud `Code-Review +2` in https://review.jami.net/c/jami-client-android/+/29175/comments/4b512a34_21659069?tab\u003dcomments\n\nUnsure how to resolve the build failure. Can you please help resolve build failure to enable patch to be rebased?\n\nThank you",
+      "parentUuid": "680c5df7_8add127e",
+      "revId": "fe3c6554758cd5672544243b01c537d13f6a349b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
