@@ -74,6 +74,9 @@ class JamiSearchViewModel: ObservableObject {
     // Temporary conversation created when perform search for a new contact.
     var temporaryConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
 
+    // Banned conversation.
+    var bannedConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
+
     var filteredResults: [ConversationViewModel] {
         if searchBarText.value.isEmpty {
             return dataSource.conversationViewModels
@@ -197,6 +200,9 @@ class JamiSearchViewModel: ObservableObject {
     }
 
     func isConversationExists(for searchQuery: String) -> Bool {
+        if let banned = self.bannedConversation.value, banned.isCoreConversationWith(jamiId: searchQuery) {
+            return true
+        }
         let coreDialog = self.dataSource.conversationViewModels
             .filter({[weak self] conversation in
                 guard let self = self else { return false }
@@ -226,12 +232,20 @@ class JamiSearchViewModel: ObservableObject {
             self.searchStatus.onNext(.invalidId)
             return
         }
+
+        self.searchBanned(searchQuery: searchQuery)
         // not need to searh on network
         if searchOnlyExistingConversations {
             self.searchStatus.onNext(.notSearching)
             return
         }
         self.addTemporaryConversationsIfNeed(searchQuery: searchQuery)
+    }
+
+    private func searchBanned(searchQuery: String) {
+        if let conversation = self.dataSource.bannedConversations.filter({ $0.isCoreConversationWith(jamiId: searchQuery) }).first {
+            self.bannedConversation.accept(conversation)
+        }
     }
 
     private func addTemporaryConversationsIfNeed(searchQuery: String) {
@@ -326,6 +340,7 @@ class JamiSearchViewModel: ObservableObject {
     }
 
     private func cleanUpPreviousSearch() {
+        self.bannedConversation.accept(nil)
         self.temporaryConversationCreated(tempConversation: nil)
         self.jamsTemporaryResults.accept([])
     }
