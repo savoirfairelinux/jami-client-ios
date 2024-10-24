@@ -235,6 +235,9 @@ struct SmartListContentView: View {
                         .hideRowSeparator()
                         .padding(.bottom)
                         .padding(.top, 3)
+                    if let conversation = model.blockedConversation {
+                        blockedcontactsView(conversation: conversation)
+                    }
                 }
             }
         }
@@ -264,6 +267,24 @@ struct SmartListContentView: View {
                 SwiftUI.ProgressView()
                 Spacer()
             }
+        }
+    }
+
+    func blockedcontactsView(conversation: ConversationViewModel) -> some View {
+        VStack(alignment: .leading) {
+            Text(L10n.AccountPage.blockedContacts)
+                .fontWeight(.semibold)
+            ConversationRowView(model: conversation, withSeparator: false)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .onTapGesture { [weak conversation, weak model] in
+                    guard let conversation = conversation, let model = model else { return }
+                    model.showConversation(withConversationViewModel: conversation,
+                                           publisher: stateEmitter)
+                }
+                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+                .transition(.opacity)
+                .hideRowSeparator()
         }
     }
 

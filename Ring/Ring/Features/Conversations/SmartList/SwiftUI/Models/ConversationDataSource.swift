@@ -23,7 +23,7 @@ import RxRelay
 
 class ConversationDataSource: ObservableObject {
     @Published var conversationViewModels = [ConversationViewModel]()
-    var bannedConversations = [ConversationViewModel]()
+    var blockedConversation = [ConversationViewModel]()
     let conversationsService: ConversationsService
     let contactsService: ContactsService
     let accountsService: AccountsService
@@ -63,8 +63,8 @@ class ConversationDataSource: ObservableObject {
                 return nil
             }
 
-            if isConversationWithBannedContact(conversationModel) {
-                bannedConversations.append(newViewModel)
+            if isConversationWithBlockedContact(conversationModel) {
+                blockedConversation.append(newViewModel)
                 return nil
             }
 
@@ -100,10 +100,10 @@ class ConversationDataSource: ObservableObject {
 
     private func restoreConversation(jamiId: String, accountId: String) {
         // If the conversation is not banned, it is a new contact that will be added when conversation ready, skip it.
-        guard let bannedIndex = bannedConversations.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) else {
+        guard let blockedIndex = blockedConversation.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) else {
             return
         }
-        _ = bannedConversations.remove(at: bannedIndex)
+        _ = blockedConversation.remove(at: blockedIndex)
 
         // Retrieve the conversation and determine its correct index to maintain the order
         guard let conversation = conversationsService.getConversationForParticipant(jamiId: jamiId, accountId: accountId),
@@ -144,15 +144,15 @@ class ConversationDataSource: ObservableObject {
         // Check if the conversation is already in active conversations
         if let index = self.conversationViewModels.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
             let conversationViewModel = self.conversationViewModels.remove(at: index)
-            self.bannedConversations.append(conversationViewModel)
+            self.blockedConversation.append(conversationViewModel)
         } else {
             // Ignore if already in the banned
-            if self.bannedConversations.contains(where: { $0.isCoreConversationWith(jamiId: jamiId) }) { return}
+            if self.blockedConversation.contains(where: { $0.isCoreConversationWith(jamiId: jamiId) }) { return}
             // If not, check if the conversation exists in conversationsService
             if let conversationModel = self.conversationsService.getConversationForParticipant(jamiId: jamiId, accountId: accountId) {
                 let newViewModel = ConversationViewModel(with: self.injectionBag)
                 newViewModel.conversation = conversationModel
-                self.bannedConversations.append(newViewModel)
+                self.blockedConversation.append(newViewModel)
             }
         }
     }
@@ -176,7 +176,7 @@ class ConversationDataSource: ObservableObject {
             .disposed(by: disposeBag)
     }
 
-    private func isConversationWithBannedContact(_ conversation: ConversationModel) -> Bool {
+    private func isConversationWithBlockedContact(_ conversation: ConversationModel) -> Bool {
         guard conversation.isCoredialog(),
               let jamiId = conversation.getParticipants().first?.jamiId,
               let contact = self.contactsService.contact(withHash: jamiId) else {
