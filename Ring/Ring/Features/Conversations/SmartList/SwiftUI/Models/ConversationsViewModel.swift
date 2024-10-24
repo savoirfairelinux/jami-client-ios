@@ -64,6 +64,11 @@ class ConversationsViewModel: ObservableObject {
     @Published var jamsSearchResult = [ConversationViewModel]() {
         didSet { updateSearchStatusIfNeeded() }
     }
+
+    // conversation for blocked contact
+    @Published var blockedConversation: ConversationViewModel? {
+        didSet { updateSearchStatusIfNeeded() }
+    }
     @Published var publicDirectoryTitle = L10n.Smartlist.results
     @Published var searchingLabel = ""
     @Published var connectionState: ConnectionType = .none
@@ -147,6 +152,17 @@ class ConversationsViewModel: ObservableObject {
                 guard let self = self else { return }
                 withAnimation {
                     self.temporaryConversation = conversation
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        searchModel
+            .blockedConversation
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] conversation in
+                guard let self = self else { return }
+                withAnimation {
+                    self.blockedConversation = conversation
                 }
             })
             .disposed(by: self.disposeBag)
