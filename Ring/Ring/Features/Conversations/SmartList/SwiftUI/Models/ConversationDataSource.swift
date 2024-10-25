@@ -188,11 +188,11 @@ class ConversationDataSource: ObservableObject {
             .subscribe(onNext: { [weak self] event in
                 guard let self = self,
                       let conversationId: String = event.getEventInput(.conversationId),
-                      let accountId: String = event.getEventInput(.accountId),
-                      let index = self.conversationViewModels.firstIndex(where: { $0.conversation.id == conversationId && $0.conversation.accountId == accountId }) else { return }
+                      let accountId: String = event.getEventInput(.accountId) else { return }
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.conversationViewModels.remove(at: index)
+                    self.conversationViewModels.removeAll { $0.conversation.id == conversationId && $0.conversation.accountId == accountId
+                    }
                 }
             })
             .disposed(by: disposeBag)
