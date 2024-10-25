@@ -345,8 +345,8 @@ struct MessagesListView: View {
             })
         }
         .padding()
-        .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
-        .background(VisualEffect(style: .systemThickMaterial, withVibrancy: true))
+        .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false).allowsHitTesting(false))
+        .background(VisualEffect(style: .systemThickMaterial, withVibrancy: true).allowsHitTesting(false))
     }
 
     private func hideKeyboardIfNeed() {

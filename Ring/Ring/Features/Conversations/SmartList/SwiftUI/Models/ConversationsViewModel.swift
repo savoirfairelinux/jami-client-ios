@@ -275,6 +275,16 @@ class ConversationsViewModel: ObservableObject {
             return
         }
 
+        // Attempt to find blocked conversation
+        if let blockedConversation = conversationsSource.blockedConversation.first(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
+            presentedConversation.updatePresentedConversation(conversationViewModel: blockedConversation)
+            let state = ConversationState
+                .conversationDetail(conversationViewModel:
+                                        blockedConversation)
+            publisher.emitState(state)
+            return
+        }
+
         // Create a new temporary swarm conversation since no existing one matched
         let tempConversation = createTemporarySwarmConversation(with: jamiId, accountId: account.id)
         temporaryConversation = tempConversation
