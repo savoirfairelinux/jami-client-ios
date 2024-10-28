@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Δεν υπάρχουν προσκλήσεις.";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "όνομα χρήστη: μη εγγεγραμμένο";
 "accountPage.credentialsHeader" = "Πληροφορίες λογαριασμού";
 "accountPage.blockedContacts" = "Μπλοκαρισμένες επαφές";
-"accountPage.unblockContact" = "ΑΝΑΜΜΑΤΟ";
+"accountPage.unblockContact" = "Unblock";
 "accountPage.proxyAddressAlert" = "Παρέξτε διεύθυνση αντιπροσωπευτικού χαρακτήρα";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Δικαστική διεύθυνση";

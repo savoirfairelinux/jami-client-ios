@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Нэр дэвшүүлэггүй";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "хэрэглэгчийн нэр: бүртгэгдээгүй";
 "accountPage.credentialsHeader" = "Санхүүгийн мэдээллийг";
 "accountPage.blockedContacts" = "Хаалттай холбоо";
-"accountPage.unblockContact" = "БЛОКГАЛ";
+"accountPage.unblockContact" = "Блокийг нээж";
 "accountPage.proxyAddressAlert" = "Прокси хаягийг өгөө";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Прокси хаяг";

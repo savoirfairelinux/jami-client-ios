@@ -145,6 +145,7 @@
 "conversation.yourself" = "vous-même";
 "conversation.edited" = "modifié";
 "conversation.deletedMessage" = "a supprimé le message";
+"conversation.contactBlocked" = "Contact bloqué";
 
 // Invitations
 "invitations.noInvitations" = "Aucune invitation";

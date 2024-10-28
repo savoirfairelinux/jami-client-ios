@@ -145,6 +145,7 @@
 "conversation.yourself" = "tú mismo";
 "conversation.edited" = "editado";
 "conversation.deletedMessage" = "Eliminar mensaje";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Sin invitaciones";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Nombre de usuario: no registrado";
 "accountPage.credentialsHeader" = "Detalles de cuenta";
 "accountPage.blockedContacts" = "Contactos bloqueados";
-"accountPage.unblockContact" = "DESBLOQUEAR";
+"accountPage.unblockContact" = "Desbloquear";
 "accountPage.proxyAddressAlert" = "Provea dirección proxy";
 "accountPage.noProxyExplanationLabel" = "No se pueden recibir notificaciones cuando el proxy está deshabilitado.";
 "accountPage.proxyPaceholder" = "Dirección proxy";
@@ -325,8 +326,8 @@
 "accountPage.registerNameErrorMessage" = "El nombre de usuario no está disponible";
 "accountPage.usernameRegistering" = "Registrando";
 "accountPage.usernameRegisterAction" = "Registrar";
-"accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
+"accountPage.usernameRegistrationFailedTitle" = "Registro fallido";
+"accountPage.usernameRegistrationFailed" = "Por favor, compruebe su contraseña.";
 "accountPage.createPassword" = "Cuenta encriptada";
 "accountPage.changePassword" = "Cambiar contraseña";
 "accountPage.currentPasswordPlaceholder" = "Ingresar la contraseña actual";
@@ -351,65 +352,65 @@
 "accountPage.upnpEnabled" = "Usar UPnP";
 "accountPage.security" = "Seguridad";
 "accountPage.enableSRTP" = "Cifrar transmisión de medios (SRTP)";
-"accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
+"accountPage.registerNameExplanation" = "Registra un nombre de usuario para ayudar a los otros a encontrarte y comunicarse contigo de forma más fácil en Jami.";
 "accountPage.profileHeader" = "Perfil";
-"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.profileNameNotSelected" = "Nombre no seleccionado";
 "accountPage.accountHeader" = "Cuenta";
 "accountPage.profileName" = "Nombre de perfil";
-"accountPage.profileNamePlaceholder" = "Enter profile name";
-"accountPage.editProfile" = "Edit Profile";
+"accountPage.profileNamePlaceholder" = "Ingresa el nombre del perfil";
+"accountPage.editProfile" = "Editar Perfil";
 "accountPage.manageAccount" = "Administración de Cuenta";
 "accountPage.encryptAccount" = "Cuenta encriptada con contraseña";
 "accountPage.passwordExplanation" = "Una cuenta Jami se crea y almacena localmente solo en este dispositivo como un archivo que contiene sus claves de cuenta. El acceso al archivo puede protegerse opcionalmente con una contraseña.";
 "accountPage.passwordsDoNotMatch" = "Las contraseñas no coinciden";
-"accountPage.passwordCreated" = "Password created";
-"accountPage.passwordUpdated" = "Password updated";
+"accountPage.passwordCreated" = "Contraseña creada";
+"accountPage.passwordUpdated" = "Contraseña actualizada";
 "accountPage.linkedDevices" = "Dispositivos vinculados";
-"accountPage.unlink" = "Unlink";
-"accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.unlink" = "Desvincular";
+"accountPage.generatingPin" = "Generando código PIN…";
+"accountPage.passwordForPin" = "Esta cuenta está encriptada con contraseña, ingrese una contraseña para generar el código PIN";
 "accountPage.pinExplanationTitle" = "En otro dispositivo";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "Error al generar el código PIN";
 "accountPage.notificationTitle" = "Notificaciones";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
-"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
-"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
-"accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
-"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.notificationError" = "Las notificaciones de Jami están deshabilitadas. Para usar esta función se habilita en la configuración del dispositivo.";
+"accountPage.callsFromUnknownContacts" = "Permitir llamadas de contactos desconocidos.";
+"accountPage.accountSettingsExplanation" = "Esta configuración solo se aplicará a esta cuenta.";
+"accountPage.appSettings" = "Configuración de la aplicación";
+"accountPage.appSettingsExplanation" = "Estos ajustes se aplicarán en toda la aplicación";
+"accountPage.connectivityAndConfiguration" = "Conectividad y configuraciones";
 "accountPage.sipExpirationTime" = "Tiempo de expiración del registro (segundos)";
 "accountPage.tlsVerifyServerCertificates" = "Verificar certificados TLS de servidor";
-"accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
+"accountPage.tlsVerifyClientCertificates" = "Verificar certificados TLS de cliente";
 "accountPage.tlsRequireTlsCertificate" = "Exigir un certificado para conexiones TLS entrantes";
 "accountPage.tlsDisableSecureDlgCheck" = "Deshabilitar la comprobación de diálogo seguro para datos TLS entrantes";
-"accountPage.editSipExpirationTime" = "Expiration time";
-"accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
+"accountPage.editSipExpirationTime" = "Fecha de expiración";
+"accountPage.selectSipExpirationTime" = "Establezca el tiempo (en segundos) para que caduque el registro";
 "accountPage.thisDevice" = "Este dispositivo";
 "accountPage.otherDevices" = "Otros dispositivos vinculados";
-"accountPage.accountIdentity" = "Account identity";
+"accountPage.accountIdentity" = "Identidad de la cuenta";
 "accountPage.bootstrap" = "Bootstrap";
 "accountPage.dhtConfiguration" = "Configuración de OpenDHT";
 
 // Backup Account
-"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.explanation" = "Esta cuenta Jami existe solo en este dispositivo. La cuenta se perderá si se pierde este dispositivo o si se desinstala la aplicación. Se recomienda hacer una copia de seguridad de esta cuenta.";
 "backupAccount.title" = "Crear copia de seguridad de la cuenta";
-"backupAccount.creating" = "Creating backup";
-"backupAccount.archiveName" = "Select a name for the archive.";
-"backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
-"backupAccount.backupButton" = "Backup";
-"backupAccount.documentPickerButton" = "Open backup location";
-"backupAccount.exportSuccess" = "Backup created";
-"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
-"backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "An error occurred while exporting the account.";
+"backupAccount.creating" = "Creando una copia de seguridad...";
+"backupAccount.archiveName" = "Seleccione un nombre para el archivo.";
+"backupAccount.archiveNamePlaceholder" = "Nombre de archivo";
+"backupAccount.passwordRequest" = "Ingresa la contraseña utilizada para cifrar la cuenta.";
+"backupAccount.backupButton" = "Copia de seguridad";
+"backupAccount.documentPickerButton" = "Abrir ubicación de la copia de seguridad";
+"backupAccount.exportSuccess" = "Copia de seguridad creada";
+"backupAccount.errorWrongLocation" = "La ruta del archivo seleccionada no es válida. Por favor, selecciona una ubicación diferente.";
+"backupAccount.errorAccessDenied" = "Se denegó el acceso a la ubicación seleccionada.";
+"backupAccount.errorFailed" = "Se produjo un error al exportar la cuenta.";
 
 // Account
 "account.sipServer" = "Servidor";
 "account.port" = "Puerto";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Configure SIP Account";
+"account.createSipAccount" = "Configurar Cuenta SIP";
 "account.sipAccount" = "Cuenta SIP";
 "account.configure" = "Configurar";
 "account.advancedFeatures" = "Características avanzadas";
@@ -430,10 +431,10 @@
 
 // Link New Device
 "linkDevice.title" = "Vincular nuevo dispositivo";
-"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
-"linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
+"linkDevice.passwordError" = "Contraseña incorrecta. Por favor, inténtelo de nuevo con la contraseña correcta.";
+"linkDevice.networkError" = "Se produjo un error de red al exportar la cuenta.";
+"linkDevice.defaultError" = "Se produjo un error al exportar la cuenta.";
+"linkDevice.explanationMessage" = "Abra Jami en el nuevo dispositivo y elija \"Vincular este dispositivo a una cuenta\" para completar el proceso. El código PIN caducará en 10 minutos.";
 "linkDevice.hudMessage" = "Verificando";
 
 // Contact Page
@@ -449,7 +450,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pendiente...";
 "dataTransfer.readableStatusOngoing" = "Transferiendo";
 "dataTransfer.readableStatusCanceled" = "Cancelado";
-"dataTransfer.sendingFailed" = "An error occurred while sending.";
+"dataTransfer.sendingFailed" = "Se produjo un error al enviar.";
 "dataTransfer.readableStatusSuccess" = "Completado";
 "dataTransfer.recordInBackgroundWarning" = "Grabar un video mientras se realizan varias tareas a la vez con varias aplicaciones puede originar una baja calidad del video. Para obtener los mejores resultados, grabe cuando no realice múltiples tareas";
 

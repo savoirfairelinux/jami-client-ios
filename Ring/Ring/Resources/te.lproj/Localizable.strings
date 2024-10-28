@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "ఆహ్వానాలు లేవు";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "వాడుకరి పేరుః నమోదు చేయబడలేదు";
 "accountPage.credentialsHeader" = "ఖాతా వివరాలు";
 "accountPage.blockedContacts" = "అడ్డుకున్న పరిచయాలు";
-"accountPage.unblockContact" = "అన్బ్లాక్";
+"accountPage.unblockContact" = "బ్లాక్ ను అన్బ్లాక్ చేయండి";
 "accountPage.proxyAddressAlert" = "ప్రాక్సీ చిరునామాను అందించండి";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "ప్రాక్సీ చిరునామా";

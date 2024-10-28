@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ez dago gonbidapenik.";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Erabiltzaile izena: ez dago erregistratuta.";
 "accountPage.credentialsHeader" = "Kontuaren xehetasunak";
 "accountPage.blockedContacts" = "Blokeatutako kontaktuak";
-"accountPage.unblockContact" = "- Ez.";
+"accountPage.unblockContact" = "Desblokeatu";
 "accountPage.proxyAddressAlert" = "Eman helbide proxy bat";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Helbide proxy bat";

@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "ಆಹ್ವಾನಗಳಿಲ್ಲ";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "ಬಳಕೆದಾರ ಹೆಸರುಃ ನೋಂದಾಯಿತವಲ್ಲ";
 "accountPage.credentialsHeader" = "ಖಾತೆ ವಿವರಗಳು";
 "accountPage.blockedContacts" = "ನಿರ್ಬಂಧಿತ ಸಂಪರ್ಕಗಳು";
-"accountPage.unblockContact" = "ಅನ್ಬ್ಲಾಕ್";
+"accountPage.unblockContact" = "ಅನಿರ್ಬಂಧವನ್ನು ತೆರವುಗೊಳಿಸಿ";
 "accountPage.proxyAddressAlert" = "ಪ್ರಾಕ್ಸಿ ವಿಳಾಸವನ್ನು ಒದಗಿಸಿ";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "ಪ್ರಾಕ್ಸಿ ವಿಳಾಸ";

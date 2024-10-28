@@ -145,6 +145,7 @@
 "conversation.yourself" = "себе";
 "conversation.edited" = "отредактировано";
 "conversation.deletedMessage" = "удалённое сообщение";
+"conversation.contactBlocked" = "Контакт заблокирован";
 
 // Invitations
 "invitations.noInvitations" = "Приглашений нет";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "имя пользователя: не зарегистрировано";
 "accountPage.credentialsHeader" = "Информация об аккаунте";
 "accountPage.blockedContacts" = "Заблокированные контакты";
-"accountPage.unblockContact" = "РАЗБЛОКИРОВАТЬ";
+"accountPage.unblockContact" = "Разблокировать";
 "accountPage.proxyAddressAlert" = "Укажите адрес прокси";
 "accountPage.noProxyExplanationLabel" = "Не удается получать уведомления, если прокси-сервер выключен.";
 "accountPage.proxyPaceholder" = "Адрес прокси";

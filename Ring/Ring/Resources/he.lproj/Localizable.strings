@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "אין הזמנות";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "שם משתמש: לא רשום";
 "accountPage.credentialsHeader" = "פרטים על החשבון";
 "accountPage.blockedContacts" = "אנשי קשר חסומים";
-"accountPage.unblockContact" = "לא מבלי";
+"accountPage.unblockContact" = "פותח את הבלוק";
 "accountPage.proxyAddressAlert" = "תורם כתובת פרוקסי";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "כתובת דווקא";

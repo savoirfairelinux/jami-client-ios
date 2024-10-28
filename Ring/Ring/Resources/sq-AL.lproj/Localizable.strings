@@ -57,7 +57,7 @@
 "global.time" = "Kohë";
 "global.editPassword" = "Përpunoni fjalëkalim";
 "global.confirmPassword" = "Ripohoni fjalëkalimin";
-"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
+"global.cameraDisabled" = "Përdorimi i kamerës është i çaktivizuar. Që të mund të përdorni këtë veçori, aktivizojeni te rregullimet e pajisjes.";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -83,14 +83,14 @@
 "swarm.member" = "Anëtar";
 "swarm.invited" = "Ftuar";
 "swarm.admin" = "Përgjegjës";
-"swarm.blocked" = "Blocked";
+"swarm.blocked" = "Bllokuar";
 "swarm.unknown" = "I panjohur";
-"swarm.inviteMembers" = "Invite members";
+"swarm.inviteMembers" = "Ftoni anëtarë";
 "swarm.confirmLeaveSwarm" = "Jeni i sigurt se doni të braktisni këtë zgjua?";
 "swarm.Leave" = "Braktise";
 "swarm.newSwarm" = "Zgjua i ri";
 "swarm.namePlaceholder" = "Emër zgjoi";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
+"swarm.explanationText" = "Anëtarët mund të ftohen në çfarëdo kohe, pasi të jetë krijuar zgjoi";
 "swarm.customizeProfile" = "Përshtatni profil zgjoi";
 "swarm.changePicture" = "Ndryshoni foto zgjoi";
 "swarm.customize" = "Përshtatni zgjua";
@@ -132,7 +132,7 @@
 "conversation.messagePlaceholder" = "Shkruajini";
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "Ndodhi një gabim teksa ruhej figurë te galeri.";
 "conversation.receivedRequest" = "%@ ju dërgoi një kërkesë për bisedë.";
 "conversation.incomingRequest" = "Ju dërgoi një kërkesë për bisedë.";
 "conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
@@ -145,13 +145,14 @@
 "conversation.yourself" = "vetes";
 "conversation.edited" = "u përpunua";
 "conversation.deletedMessage" = "fshiu një mesazh";
+"conversation.contactBlocked" = "Kontakti u bllokua ";
 
 // Invitations
 "invitations.noInvitations" = "S’ka ftesa";
 "invitations.pending" = "pezull";
 "invitations.accepted" = "pranuar";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.declined" = "hedhur poshtë";
+"invitations.blocked" = "bllokuar";
 "invitations.list" = "Ftesat u morën";
 
 // Walkthrough
@@ -163,7 +164,7 @@
 "welcome.linkDevice" = "Importoni nga pajisje tjetër";
 "welcome.linkBackup" = "Importoni prej kopjeruajtjeje arkivi";
 "welcome.createAccount" = "Merrni pjesë";
-"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
+"welcome.connectToJAMS" = "Lidhuni te Shërbyes Administrimi Llogarish Jami (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Anashkaloje";
@@ -172,7 +173,7 @@
 "createProfile.enterNameLabel" = "Jepni një emër për në ekran";
 "createProfile.enterNamePlaceholder" = "Jepni emër";
 "createProfile.subtitle" = "Profili juaj do të ndahet me kontaktet tuaja. Mund ta ndryshoni në çfarëdo kohe.";
-"createProfile.createProfilePicture" = "Create profile picture";
+"createProfile.createProfilePicture" = "Krijo foto profili";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Bëhuni pjesë e Jami-t";
@@ -185,7 +186,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Gabim rrjeti";
 "createAccount.UsernameNotRegisteredMessage" = "Llogaria u krijua, por emri i përdoruesit s’u regjistrua";
 "createAccount.timeoutTitle" = "Llogaria u Krijua";
-"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
+"createAccount.timeoutMessage" = "Regjistrimi i emrit të përdoruesit është në ecuri e sipër. Ju lutemi, prisni…";
 "createAccount.sipConfigure" = "Formësoni një llogari SIP ekzistuese";
 "createAccount.creatingAccount" = "Po krijohet llogari";
 "createAccount.nameExplanation" = "Mund të zgjidhni një emër përdoruesi, për t’i ndihmuar të tjerët t’ju gjejnë dhe të komunikojmë më lehtë me ju në Jami.";
@@ -194,18 +195,18 @@
 "createAccount.encrypt" = "Fshehtëzoje";
 "createAccount.customize" = "Përshtateni";
 "createAccount.encryptTitle" = "Fshehtëzojeni llogarinë me fjalëkalim";
-"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"createAccount.encryptExplanation" = "Një llogari Jami krijohet dhe depozitohet lokalisht vetëm në këtë pajisje, si një arkiv që përmban kyçet e veta të llogarisë. Hyrja në arkiv, në daçi, mund të mbrohet me një fjalëkalimi.";
 
 // Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";
 "linkToAccount.linkButtonTitle" = "Lidhje";
 "linkToAccount.linkDeviceTitle" = "Lidhni pajisje";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
-"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
-"linkToAccount.pinPlaceholder" = "PIN code";
-"linkToAccount.pinLabel" = "Enter PIN code";
+"linkToAccount.linkDeviceMessage" = "Që të shfaqet kodi QR, apo që të prodhohet një PIN, zgjidhni “Lidhni pajisje të re”, që nga një aplikacion tjetër Jami.";
+"linkToAccount.explanationMessage" = "Për të përdorur një llogari ekzistuese Jami në këtë pajisje, lypset një PIN.";
+"linkToAccount.pinPlaceholder" = "PIN";
+"linkToAccount.pinLabel" = "Jepni PIN-in";
 "linkToAccount.scanQRCode" = "Skanoni kod QR";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Për të prodhuar kod PIN, kaloni te rregullimet e administrimit të llogarive te pajisja që përmban llogarinë që doni të lidhni. Përzgjidhni “Lidhni pajisje të re”. Do të merrni PIN-in e nevojshëm për plotësimin e këtij formulari. PIN-i do të skadojë pas 10 minutash.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importoni një llogari Jami që nga një kartelë vendore arkivi.";
@@ -216,7 +217,7 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Hyni";
-"linkToAccountManager.title" = "JAMS account";
+"linkToAccountManager.title" = "Llogari JAMS";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAM-i";
 "linkToAccountManager.accountManagerLabel" = "Jepni URL JAMS-i";
 "linkToAccountManager.jamsExplanation" = "Jepni URL Shërbyesi Administrimi Llogarish Jami (JAMS)";
@@ -227,7 +228,7 @@
 "alerts.accountCannotBeFoundMessage" = "S’arrihet të gjendet llogari në rrjetin Jami. Sigurohuni që qe eksportuar në Jami që prej një pajisjeje ekzistuese dhe se kredencialet e dhëna për hyrjen janë të sakta.";
 "alerts.accountAddedTitle" = "U shtua llogari";
 "alerts.accountNoNetworkTitle" = "Gabim rrjeti";
-"alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
+"alerts.accountNoNetworkMessage" = "Ndodhi një gabim lidhjeje teksa shtohej llogari Jami te rrjeti i shpërndarë. Ju lutemi, riprovoni. Nëse problemi vazhdon, lidhuni me përgjegjësin e sistemit tuaj.";
 "alerts.accountDefaultErrorTitle" = "Gabim lidhjeje";
 "alerts.accountDefaultErrorMessage" = "Ndodhi një gabim teksa krijohej llogaria.";
 "alerts.profileTakePhoto" = "Bëni një foto";
@@ -244,8 +245,8 @@
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
 "alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
 "alerts.noLocationPermissionsTitle" = "S’u akordua hyrje te vendndodhje";
-"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
-"alerts.recordVideoMessage" = "Record video message";
+"alerts.errorWrongCredentials" = "Ndodhi një gabim teksa lidhjen Shërbyesi i Administrimit të Llogarive Jami (JAMS). Ju lutemi, riprovoni. Nëse problemi vazhdon, lidhuni me përgjegjësin e sistemit tuaj.";
+"alerts.recordVideoMessage" = "Regjistroni mesazh video";
 "alerts.recordAudioMessage" = "Incizo mesazh audio";
 "alerts.uploadFile" = "Dërgo kartelë";
 "alerts.uploadPhoto" = "Hap galerinë";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "emër përdoruesi: jo i regjistruar";
 "accountPage.credentialsHeader" = "Hollësi Llogarie";
 "accountPage.blockedContacts" = "Kontakte të bllokuar";
-"accountPage.unblockContact" = "ZHBLLOKOJE";
+"accountPage.unblockContact" = "Zhbllokoje";
 "accountPage.proxyAddressAlert" = "Jepni adresë ndërmjetësi";
 "accountPage.noProxyExplanationLabel" = "S’arrihet të merren njoftime, kur ndërmjetësi është i çaktivizuar.";
 "accountPage.proxyPaceholder" = "Adresë ndërmjetësi";
@@ -360,21 +361,21 @@
 "accountPage.editProfile" = "Përpunoni Profil";
 "accountPage.manageAccount" = "Administroni llogari";
 "accountPage.encryptAccount" = "Fshehtëzoni llogarinë me një fjalëkalim";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.passwordExplanation" = "Një llogari Jami krijohet dhe depozitohet lokalisht vetëm në këtë pajisje, si një arkiv që përmban kyçet e veta të llogarisë. Hyrja në arkiv, në daçi, mund të mbrohet me një fjalëkalimi.";
 "accountPage.passwordsDoNotMatch" = "Fjalëkalimet nuk përputhen";
 "accountPage.passwordCreated" = "U krijua fjalëkalim";
 "accountPage.passwordUpdated" = "U përditësua fjalëkalim";
 "accountPage.linkedDevices" = "Pajisje të lidhura";
 "accountPage.unlink" = "Hiqe lidhjen";
-"accountPage.generatingPin" = "Generating PIN code…";
+"accountPage.generatingPin" = "Po prodhohet PIN…";
 "accountPage.passwordForPin" = "Kjo llogari mbrohet me fjalëkalim, jepni një fjalëkalim që të prodhohet një kod PIN";
 "accountPage.pinExplanationTitle" = "Në pajisjen tjetër";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinExplanationMessage" = "Instaloni dhe nisni Jami-n, përzgjidhni “Importo prej pajisje tjetër” dhe skanoni kodin QR, ose jepeni dorazi një PIN.";
+"accountPage.pinError" = "S’u arrit të prodhohet PIN";
 "accountPage.notificationTitle" = "Njoftime";
-"accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
-"accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
-"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
+"accountPage.notificationError" = "Njoftimet për Jami-n janë të çaktivizuara. Që të mund të përdorni këtë veçori, aktivizojeni te rregullimet e pajisjes.";
+"accountPage.callsFromUnknownContacts" = "Lejo thirrje prej kontaktesh të panjohur.";
+"accountPage.accountSettingsExplanation" = "Këto rregullimet do të aplikohen vetëm te kjo llogari.";
 "accountPage.appSettings" = "Rregullime aplikacioni";
 "accountPage.appSettingsExplanation" = "Këto rregullime do të zbatohen për krejt aplikacionin";
 "accountPage.connectivityAndConfiguration" = "Aftësi lidhjeje dhe formësime";
@@ -409,7 +410,7 @@
 "account.sipServer" = "Shërbyes";
 "account.port" = "Portë";
 "account.proxyServer" = "Ndërmjetës";
-"account.createSipAccount" = "Configure SIP Account";
+"account.createSipAccount" = "Formësoni Llogari SIP";
 "account.sipAccount" = "Llogari SIP";
 "account.configure" = "Formësojeni";
 "account.advancedFeatures" = "Veçori të Thelluara";
@@ -433,7 +434,7 @@
 "linkDevice.passwordError" = "Fjalëkalim i pasaktë. Ju lutemi, riprovoni me fjalëkalimin e saktë.";
 "linkDevice.networkError" = "Ndodhi një gabim rrjeti teksa eksportohej llogaria.";
 "linkDevice.defaultError" = "Ndodhi një gabim teksa eksportohej llogaria.";
-"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
+"linkDevice.explanationMessage" = "Që të plotësohet procesi, hapni Jami-n në pajisjen e re dhe zgjidhni “Lidhe këtë pajisje me një llogari”. Kodi PIN do të skadojë pas 10 minutash.";
 "linkDevice.hudMessage" = "Po verifikohet";
 
 // Contact Page

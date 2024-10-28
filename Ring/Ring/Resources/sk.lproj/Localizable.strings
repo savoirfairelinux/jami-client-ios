@@ -145,6 +145,7 @@
 "conversation.yourself" = "seba";
 "conversation.edited" = "upravené";
 "conversation.deletedMessage" = "odstránil správu";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Žiadne pozvánky";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "používateľské meno: nezaregistrované";
 "accountPage.credentialsHeader" = "Podrobnosti účtu";
 "accountPage.blockedContacts" = "Blokované kontakty";
-"accountPage.unblockContact" = "ODBLOKOVAŤ";
+"accountPage.unblockContact" = "Odblokovať";
 "accountPage.proxyAddressAlert" = "Zadajte adresu proxy";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Adresa proxy";

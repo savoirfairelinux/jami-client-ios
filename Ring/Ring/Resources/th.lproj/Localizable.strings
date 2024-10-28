@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "ไม่มีการเชิญ";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "ชื่อผู้ใช้: ไม่ลงทะเบียน";
 "accountPage.credentialsHeader" = "รายละเอียดบัญชี";
 "accountPage.blockedContacts" = "ผู้ติดต่อที่ถูกบล็อก";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.unblockContact" = "เลิกบล็อก";
 "accountPage.proxyAddressAlert" = "ให้ที่อยู่ตัวแทน";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "ที่อยู่ตัวแทน";

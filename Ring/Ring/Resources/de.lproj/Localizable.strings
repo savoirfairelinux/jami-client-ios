@@ -145,6 +145,7 @@
 "conversation.yourself" = "Ich selbst";
 "conversation.edited" = "bearbeitet";
 "conversation.deletedMessage" = "eine Nachricht wurde gelöscht";
+"conversation.contactBlocked" = "Kontakt blockiert";
 
 // Invitations
 "invitations.noInvitations" = "Keine Einladungen";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Benutzername: Nicht registriert";
 "accountPage.credentialsHeader" = "Kontodetails";
 "accountPage.blockedContacts" = "Blockierte Kontakte";
-"accountPage.unblockContact" = "Blockierung aufheben";
+"accountPage.unblockContact" = "Unblock";
 "accountPage.proxyAddressAlert" = "Proxy Adresse angeben";
 "accountPage.noProxyExplanationLabel" = "Es können keine Benachrichtigungen empfangen werden, wenn der Proxy deaktiviert ist.";
 "accountPage.proxyPaceholder" = "Proxy Adresse";

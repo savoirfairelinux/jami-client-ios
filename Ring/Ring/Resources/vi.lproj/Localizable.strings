@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Không có lời mời";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Tên người dùng: không đăng ký";
 "accountPage.credentialsHeader" = "Thông tin chi tiết tài khoản";
 "accountPage.blockedContacts" = "Các liên lạc bị chặn";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.unblockContact" = "Tháo khóa";
 "accountPage.proxyAddressAlert" = "Cung cấp địa chỉ đại diện";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Địa chỉ đại diện";

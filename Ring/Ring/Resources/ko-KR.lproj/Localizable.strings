@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "초대도 없습니다";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "사용자 이름: 등록되지 않은";
 "accountPage.credentialsHeader" = "계좌 세부 사항";
 "accountPage.blockedContacts" = "차단된 연락처";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.unblockContact" = "차단 해제";
 "accountPage.proxyAddressAlert" = "프록시 주소를 입력";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "프록시 주소는";

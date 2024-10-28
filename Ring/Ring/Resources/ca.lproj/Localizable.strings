@@ -145,6 +145,7 @@
 "conversation.yourself" = "tu mateix";
 "conversation.edited" = "editat";
 "conversation.deletedMessage" = "esborra un missatge";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "No hi ha invitacions";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Nom d'usuari: no està registrat";
 "accountPage.credentialsHeader" = "Detalls de compte";
 "accountPage.blockedContacts" = "Contactes bloquejats";
-"accountPage.unblockContact" = "Unbloc";
+"accountPage.unblockContact" = "Unblock";
 "accountPage.proxyAddressAlert" = "Enviar l'adreça proxy";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Direcció de proxy";

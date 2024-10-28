@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Чакырулар юк";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Исем: теркәлмәгән";
 "accountPage.credentialsHeader" = "Хисапның тулылыгы";
 "accountPage.blockedContacts" = "Тотылган контактлар";
-"accountPage.unblockContact" = "БЛОКЛОК";
+"accountPage.unblockContact" = "Блокны ачыгыз";
 "accountPage.proxyAddressAlert" = "Прокси адресны күрсәтү";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Прокси адресы";

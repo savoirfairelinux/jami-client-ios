@@ -145,6 +145,7 @@
 "conversation.yourself" = "vam";
 "conversation.edited" = "urejen";
 "conversation.deletedMessage" = "je izbrisal/a sporočilo";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ni povabil";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "uporabniško ime: ni registrirano";
 "accountPage.credentialsHeader" = "Podrobnosti računa";
 "accountPage.blockedContacts" = "Blokirani stiki";
-"accountPage.unblockContact" = "ODBLOKIRAJ";
+"accountPage.unblockContact" = "Odblokiraj";
 "accountPage.proxyAddressAlert" = "Posredujte naslov posredniškega strežnika";
 "accountPage.noProxyExplanationLabel" = "Ni možno prejemati obvestil, če je posredniški strežnik onemogočen.";
 "accountPage.proxyPaceholder" = "Naslov posredniškega strežnika";

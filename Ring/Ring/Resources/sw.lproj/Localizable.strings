@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Hakuna mwaliko";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Jina la mtumiaji: halijasajiliwa";
 "accountPage.credentialsHeader" = "Maelezo ya Akaunti";
 "accountPage.blockedContacts" = "Mawasiliano yaliyopigwa";
-"accountPage.unblockContact" = "UONGOZI";
+"accountPage.unblockContact" = "Kufungua kizuizi";
 "accountPage.proxyAddressAlert" = "Toa anwani ya proxy";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Anwani ya Wakala";

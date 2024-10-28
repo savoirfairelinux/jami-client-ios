@@ -145,6 +145,7 @@
 "conversation.yourself" = "önmaga";
 "conversation.edited" = "szerkesztve";
 "conversation.deletedMessage" = "Törölt üzenet";
+"conversation.contactBlocked" = "Kapcsolattartó letiltva";
 
 // Invitations
 "invitations.noInvitations" = "Nincs meghívás";

@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ոչ մի հրավիրում";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "օգտագործողի անունը. գրանցված չէ";
 "accountPage.credentialsHeader" = "Հաշվետու մանրամասներ";
 "accountPage.blockedContacts" = "Պակված շփումներ";
-"accountPage.unblockContact" = "Անբլոկ";
+"accountPage.unblockContact" = "Բաց թողնել";
 "accountPage.proxyAddressAlert" = "Պատվիրել պրոկսի հասցեն";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Փոխանակման հասցե";

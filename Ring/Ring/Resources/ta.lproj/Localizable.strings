@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "அழைப்பிதழ்கள் இல்லை";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "பயனர் பெயர்ஃ பதிவு செய்யப்படவில்லை";
 "accountPage.credentialsHeader" = "கணக்கு விவரங்கள்";
 "accountPage.blockedContacts" = "தடுக்கப்பட்ட தொடர்புகள்";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.unblockContact" = "தடுக்கலை திறக்கவும்";
 "accountPage.proxyAddressAlert" = "பிரதி முகவரியை வழங்கவும்";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "பிரதிநிதி முகவரி";

@@ -145,6 +145,7 @@
 "conversation.yourself" = "tine";
 "conversation.edited" = "modificat";
 "conversation.deletedMessage" = "a șters mesajul";
+"conversation.contactBlocked" = "Contact blocat";
 
 // Invitations
 "invitations.noInvitations" = "Nicio invitație";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "nume de utilizator: neînscris";
 "accountPage.credentialsHeader" = "Detaliile contului";
 "accountPage.blockedContacts" = "Contacte blocate";
-"accountPage.unblockContact" = "DEBLOCHEAZĂ";
+"accountPage.unblockContact" = "Deblochează";
 "accountPage.proxyAddressAlert" = "Introdu adresa proxy";
 "accountPage.noProxyExplanationLabel" = "Nu se pot primi notificări dacă Proxy este dezactivat.";
 "accountPage.proxyPaceholder" = "Adresa Proxy";

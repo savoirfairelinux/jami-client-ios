@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "تيدق اد ڤڠاجرن";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "نام ڤڠڬونا: تيدق دڤرجواڠن";
 "accountPage.credentialsHeader" = "ڤرچاي ڤڠاجين";
 "accountPage.blockedContacts" = "ڤڠاجين يڠ دڤرچايا?? ي";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.unblockContact" = "Unblock";
 "accountPage.proxyAddressAlert" = "ممبريكن ڤرودوكسي";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "ڤرودوکسي";

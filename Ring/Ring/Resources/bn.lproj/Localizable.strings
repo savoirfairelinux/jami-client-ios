@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "আমন্ত্রণ নেই";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "ব্যবহারকারীর নামঃ নিবন্ধিত নয়";
 "accountPage.credentialsHeader" = "অ্যাকাউন্টের বিবরণ";
 "accountPage.blockedContacts" = "বন্ধ করা পরিচিতি";
-"accountPage.unblockContact" = "আনব্লক";
+"accountPage.unblockContact" = "Unblock";
 "accountPage.proxyAddressAlert" = "প্রক্সি ঠিকানা প্রদান করুন";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "প্রক্সি ঠিকানা";

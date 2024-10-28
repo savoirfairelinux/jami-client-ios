@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "دعوتلر یوخدور";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "آدی: ثبت اولونماييب";
 "accountPage.credentialsHeader" = "حساب بیلگیلری";
 "accountPage.blockedContacts" = "قفل اولونموش تماسلار";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.unblockContact" = "Unblock";
 "accountPage.proxyAddressAlert" = "پروکسی آدرسونو دن";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "پراکسی آدرس";

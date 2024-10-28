@@ -145,6 +145,7 @@
 "conversation.yourself" = "te";
 "conversation.edited" = "modificato";
 "conversation.deletedMessage" = "ha cancellato il messaggio";
+"conversation.contactBlocked" = "Contatto bloccato";
 
 // Invitations
 "invitations.noInvitations" = "Nessun invito";

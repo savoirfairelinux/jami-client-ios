@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Tidak ada undangan";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Nama pengguna: tidak terdaftar";
 "accountPage.credentialsHeader" = "Detail Akun";
 "accountPage.blockedContacts" = "Kontak yang diblokir";
-"accountPage.unblockContact" = "BUKA BLOKIR";
+"accountPage.unblockContact" = "Buka blokir";
 "accountPage.proxyAddressAlert" = "Masukkan alamat proksi";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Alamat proksi";

@@ -145,6 +145,7 @@
 "conversation.yourself" = "iseendale";
 "conversation.edited" = "muudetud";
 "conversation.deletedMessage" = "kustutas sõnumi";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Pole kutseid";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "kasutajanimi: registreerimata";
 "accountPage.credentialsHeader" = "Kasutajakonto üksikasjad";
 "accountPage.blockedContacts" = "Sissepuudud";
-"accountPage.unblockContact" = "EEMALDA BLOKEERING";
+"accountPage.unblockContact" = "Eemalda blokeering";
 "accountPage.proxyAddressAlert" = "Sisesta proksiserveri aadress";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Proksiserveri aadress";

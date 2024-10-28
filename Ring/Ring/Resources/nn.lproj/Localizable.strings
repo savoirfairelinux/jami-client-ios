@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ingen invitasjonar";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Brukarnamn: ikkje registrert";
 "accountPage.credentialsHeader" = "Kontoinformasjon";
 "accountPage.blockedContacts" = "Bloka kontakt";
-"accountPage.unblockContact" = "Unblock";
+"accountPage.unblockContact" = "Avbløka";
 "accountPage.proxyAddressAlert" = "Gjev ut proxy-adress";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Adressen til representant";

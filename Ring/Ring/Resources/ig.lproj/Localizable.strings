@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Enweghị akwụkwọ ịkpọ òkù";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "aha njirimara: edebanyere ahaghị aha";
 "accountPage.credentialsHeader" = "Ihe ndekọ ego";
 "accountPage.blockedContacts" = "Ndị a na-egbochi";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.unblockContact" = "Ịgbanwee";
 "accountPage.proxyAddressAlert" = "Nye adreesị nnọchiteanya";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Adreesị nnọchiteanya";

@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Davetiye yok";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "kullanıcı adı: kayıtlı değil";
 "accountPage.credentialsHeader" = "Hesap ayrıntıları";
 "accountPage.blockedContacts" = "Engellenmiş kişiler";
-"accountPage.unblockContact" = "ENGELİ KALDIR";
+"accountPage.unblockContact" = "Engeli kaldır";
 "accountPage.proxyAddressAlert" = "Vekil sunucu adresi sağlayın";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Vekil sunucu adresi";

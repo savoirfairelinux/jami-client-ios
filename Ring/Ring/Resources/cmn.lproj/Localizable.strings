@@ -74,7 +74,7 @@
 "swarm.identifier" = "識別碼";
 "swarm.about" = "關於";
 "swarm.members" = "成員";
-"swarm.addDescription" = "Add description";
+"swarm.addDescription" = "添加描述";
 "swarm.oneToOne" = "私人 swarm";
 "swarm.adminInvitesOnly" = "仅可管理员邀请";
 "swarm.invitesOnly" = "私人 swarm";
@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "删除了一封邮件";
+"conversation.contactBlocked" = "联系人被封锁";
 
 // Invitations
 "invitations.noInvitations" = "沒有邀請";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "用户名：未被注册";
 "accountPage.credentialsHeader" = "账户详情";
 "accountPage.blockedContacts" = "已屏蔽的联系人";
-"accountPage.unblockContact" = "取消屏蔽";
+"accountPage.unblockContact" = "Unblock";
 "accountPage.proxyAddressAlert" = "提供代理地址";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "代理地址";
@@ -497,7 +498,7 @@
 "logView.startLogging" = "Start logging";
 "logView.stopLogging" = "停止记录";
 "logView.saveError" = "An error occurred while saving the file.";
-"logView.shareError" = "An error occurred while sharing the file.";
+"logView.shareError" = "共享文件时出错。";
 
 // Migrate Account
 "migrateAccount.title" = "账户迁移";

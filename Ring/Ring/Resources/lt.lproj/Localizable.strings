@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Pakvietimų nėra";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "naudotojo vardas: neregistruotas";
 "accountPage.credentialsHeader" = "Išsamesnė paskyros informacija";
 "accountPage.blockedContacts" = "Užblokuoti adresatai";
-"accountPage.unblockContact" = "ATBLOKUOTI";
+"accountPage.unblockContact" = "Atblokuoti";
 "accountPage.proxyAddressAlert" = "Pateikite proxy adresą";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Įgaliotojo serverio adresas";

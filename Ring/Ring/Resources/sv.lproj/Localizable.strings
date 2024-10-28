@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Inga inbjudningar";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Användarnamn: Inte registrerat";
 "accountPage.credentialsHeader" = "Kontoinformation";
 "accountPage.blockedContacts" = "Blockerade kontakter";
-"accountPage.unblockContact" = "AVBLOCKERA";
+"accountPage.unblockContact" = "Ta bort blockering";
 "accountPage.proxyAddressAlert" = "Ange proxyadress";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Proxyadress";

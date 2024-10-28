@@ -145,6 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
+"conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ніякіх запрашэнняў";
@@ -292,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "імя карыстальніка: не зарэгістраваны";
 "accountPage.credentialsHeader" = "Падрабязнасць рахунку";
 "accountPage.blockedContacts" = "Блокаваныя кантакты";
-"accountPage.unblockContact" = "БЛОК";
+"accountPage.unblockContact" = "Unblock";
 "accountPage.proxyAddressAlert" = "Уключыце адрас праксі";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Адрас практычнага аддзела";
