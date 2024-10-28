@@ -145,8 +145,9 @@ class AccountModel: Equatable {
         let newDetails = AccountConfigModel(withDetails: dictionary)
         self.updateFromDetails(details: newDetails)
         detailsQueue.sync(flags: .barrier) { [weak self] in
-            guard let self = self else { return }
-            self.protectedDetails?.update(withDetails: dictionary)
+            guard let self = self,
+            let details = self.protectedDetails else { return }
+            details.update(withDetails: dictionary)
         }
     }
 
@@ -154,8 +155,9 @@ class AccountModel: Equatable {
         let newDetails = AccountConfigModel(withDetails: dictionary)
         self.updateFromVolatileDetails(details: newDetails)
         volatileDetailsQueue.sync(flags: .barrier) { [weak self] in
-            guard let self = self else { return }
-            self.protectedVolatileDetails?.update(withDetails: dictionary)
+            guard let self = self,
+                  let details = self.protectedVolatileDetails else { return }
+            details.update(withDetails: dictionary)
         }
     }
 
