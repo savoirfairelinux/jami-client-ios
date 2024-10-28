@@ -293,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "آدی: ثبت اولونماييب";
 "accountPage.credentialsHeader" = "حساب بیلگیلری";
 "accountPage.blockedContacts" = "قفل اولونموش تماسلار";
-"accountPage.unblockContact" = "Unblock";
+"accountPage.unblockContact" = "قفلین آچماق";
 "accountPage.proxyAddressAlert" = "پروکسی آدرسونو دن";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "پراکسی آدرس";

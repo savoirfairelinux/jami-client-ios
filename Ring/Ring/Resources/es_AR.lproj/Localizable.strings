@@ -145,7 +145,7 @@
 "conversation.yourself" = "tú mismo";
 "conversation.edited" = "editado";
 "conversation.deletedMessage" = "Eliminar mensaje";
-"conversation.contactBlocked" = "Contact blocked";
+"conversation.contactBlocked" = "Contacto bloqueado";
 
 // Invitations
 "invitations.noInvitations" = "Sin invitaciones";
@@ -495,18 +495,18 @@
 // Log View
 "logView.title" = "Diagnósticos";
 "logView.description" = "Abrir preferencias de registro de diagnóstico";
-"logView.startLogging" = "Start logging";
+"logView.startLogging" = "Iniciar registro";
 "logView.stopLogging" = "Detener registro";
-"logView.saveError" = "An error occurred while saving the file.";
-"logView.shareError" = "An error occurred while sharing the file.";
+"logView.saveError" = "Ocurrió un error mientras guardaba el archivo:";
+"logView.shareError" = "Ocurrió un error mientras cdompartía el archivo:";
 
 // Migrate Account
 "migrateAccount.title" = "Migración de cuenta";
 "migrateAccount.migrateButton" = "Migrar cuenta";
-"migrateAccount.explanation" = "Account migration required.";
+"migrateAccount.explanation" = "Se necesita la migración de la cuenta";
 "migrateAccount.passwordExplanation" = "Para continuar con la migración, necesitás ingresar la contraseña que se utilizó para esta cuenta.";
-"migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
-"migrateAccount.migrating" = "Migrating…";
+"migrateAccount.error" = "Ocurrió un error durante la creación de la cuenta. Vuelva a intentar o elimine la cuenta.";
+"migrateAccount.migrating" = "Migrando...";
 "migrateAccount.migrateAnother" = "Migrar otra cuenta";
 
 // About Jami

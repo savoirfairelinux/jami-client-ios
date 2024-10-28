@@ -293,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "نام ڤڠڬونا: تيدق دڤرجواڠن";
 "accountPage.credentialsHeader" = "ڤرچاي ڤڠاجين";
 "accountPage.blockedContacts" = "ڤڠاجين يڠ دڤرچايا?? ي";
-"accountPage.unblockContact" = "Unblock";
+"accountPage.unblockContact" = "ڤڠاجرن";
 "accountPage.proxyAddressAlert" = "ممبريكن ڤرودوكسي";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "ڤرودوکسي";

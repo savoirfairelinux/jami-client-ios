@@ -293,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "اسم المستخدم: غير مسجل";
 "accountPage.credentialsHeader" = "تفاصيل الحساب";
 "accountPage.blockedContacts" = "جهات إتصال محظورة";
-"accountPage.unblockContact" = "Unblock";
+"accountPage.unblockContact" = "إزالة حظر";
 "accountPage.proxyAddressAlert" = "إعطاء عنوان النظام الأساسي";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "عنوان النظام الأساسي";

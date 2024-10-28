@@ -293,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Nome d'usuariu: non rexistráu";
 "accountPage.credentialsHeader" = "Detalles de la cuenta";
 "accountPage.blockedContacts" = "Contactos bloqueados";
-"accountPage.unblockContact" = "Unblock";
+"accountPage.unblockContact" = "Desbloquear";
 "accountPage.proxyAddressAlert" = "Envíe direutamente la dirección de proxy";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "La dirección de proxy";
