@@ -183,7 +183,7 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
                 guard let self = self,
                       let account = self.accountService.currentAccount else { return }
                 self.registeredName = self.resolveAccountName(from: account)
-                self.updateBestName()
+                self.updateProfileDetails(account: account)
             })
             .disposed(by: disposeBag)
     }
