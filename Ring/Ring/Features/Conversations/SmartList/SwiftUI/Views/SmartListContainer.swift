@@ -223,7 +223,6 @@ struct SmartListView: View, StateEmittingView {
             }
             accountsButton
             settingsButton
-            donateButton
             aboutJamiButton
         } label: {
             Image(systemName: "ellipsis.circle")
