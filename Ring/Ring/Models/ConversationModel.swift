@@ -221,6 +221,12 @@ class ConversationModel: Equatable {
         self.subscribeUnreadMessages()
     }
 
+    func addParticipant(jamiId: String) {
+        let participant = ConversationParticipant(jamiId: jamiId)
+        participant.isLocal = false
+        self.participants.append(participant)
+    }
+
     func updateInfo(info: [String: String]) {
         if let syncing = info["syncing"], syncing == "true" {
             self.synchronizing.accept(true)
