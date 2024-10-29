@@ -605,7 +605,10 @@ class MessagesListVM: ObservableObject {
     }
 
     func cleanMessages() {
-        self.messagesModels = [MessageContainerModel]()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.messagesModels = [MessageContainerModel]()
+        }
     }
 
     func updateBlockedStatus(blocked: Bool) {

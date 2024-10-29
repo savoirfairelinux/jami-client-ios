@@ -367,6 +367,12 @@ class ConversationModel: Equatable {
         return self.type == .nonSwarm || self.type == .oneToOne || self.type == .sip || self.type == .jams
     }
 
+    func isCoreDialogMatch(conversation: ConversationModel) -> Bool {
+        return self.isCoredialog() &&
+        conversation.isCoredialog() &&
+        self.getParticipants().first == conversation.getParticipants().first
+    }
+
     func getParticipants() -> [ConversationParticipant] {
         return self.participants.filter { participant in
             !participant.isLocal
