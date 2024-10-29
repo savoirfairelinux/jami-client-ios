@@ -48,10 +48,13 @@ class ConversationDataSource: ObservableObject {
         self.conversationsService.conversations
             .share()
             .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .map { [weak self] conversations in
-                self?.mapConversationsToViewModels(conversations) ?? []
+            .flatMapLatest { [weak self] conversations -> Observable<[ConversationViewModel]> in
+                // Map on background thread
+                guard let self = self else { return .empty() }
+                let mappedViewModels = self.mapConversationsToViewModels(conversations)
+                return Observable.just(mappedViewModels)
+                    .observe(on: MainScheduler.instance) // Ensure update on main thread
             }
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] updatedViewModels in
                 self?.conversationViewModels = updatedViewModels
             })
