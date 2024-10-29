@@ -86,6 +86,7 @@ enum MessagePanelState: State {
 }
 
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class MessagesListVM: ObservableObject {
 
     // view properties
@@ -605,7 +606,10 @@ class MessagesListVM: ObservableObject {
     }
 
     func cleanMessages() {
-        self.messagesModels = [MessageContainerModel]()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.messagesModels = [MessageContainerModel]()
+        }
     }
 
     func updateBlockedStatus(blocked: Bool) {

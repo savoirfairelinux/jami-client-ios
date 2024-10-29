@@ -146,7 +146,7 @@ class AccountModel: Equatable {
         self.updateFromDetails(details: newDetails)
         detailsQueue.sync(flags: .barrier) { [weak self] in
             guard let self = self,
-            let details = self.protectedDetails else { return }
+                  let details = self.protectedDetails else { return }
             details.update(withDetails: dictionary)
         }
     }
