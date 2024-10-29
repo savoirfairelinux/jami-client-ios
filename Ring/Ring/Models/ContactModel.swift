@@ -22,6 +22,7 @@
 class ContactModel: Equatable {
 
     var hash: String = ""
+    var conversationId: String = ""
     var userName: String?
     var uriString: String?
     var confirmed: Bool = false
@@ -60,6 +61,10 @@ class ContactModel: Equatable {
         if let banned = dictionary["banned"],
            let isBanned = banned.toBool() {
             self.banned = isBanned
+        }
+
+        if let conversationId = dictionary["conversationId"] {
+            self.conversationId = conversationId
         }
     }
 }
