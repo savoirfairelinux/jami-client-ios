@@ -259,9 +259,12 @@ class ConversationsManager {
                       let jamiId: String = event.getEventInput(.peerUri),
                       let account = self.accountsService.getAccount(fromAccountId: accountId),
                       account.isJams,
-                      let currentAccount = self.accountsService.currentAccount
+                      let currentAccount = self.accountsService.currentAccount,
+                      account == currentAccount,
+                      let contact = self.contactsService.contact(withHash: jamiId),
+                      !contact.conversationId.isEmpty
                 else { return }
-                self.conversationService.saveJamsConversation(for: jamiId, accountId: accountId, refreshConversations: currentAccount.id == accountId)
+                self.conversationService.addSwarmConversationId(conversationId: contact.conversationId, accountId: accountId, jamiId: jamiId)
             })
             .disposed(by: self.disposeBag)
     }
@@ -555,7 +558,10 @@ extension  ConversationsManager: MessagesAdapterDelegate {
 
     func conversationReady(conversationId: String, accountId: String) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
+        guard let currentAccount = self.accountsService.currentAccount else { return }
+        if account == currentAccount {
+            self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
+        }
     }
 
     func updateTransferInfoIfNeed(newMessage: MessageModel, conversationId: String, accountId: String) {

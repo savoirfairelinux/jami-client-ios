@@ -695,6 +695,16 @@ class ConversationsService {
         }.first
     }
 
+    func addSwarmConversationId(conversationId: String, accountId: String, jamiId: String) {
+        if self.getConversationForId(conversationId: conversationId, accountId: accountId) != nil { return }
+        var conversations = self.conversations.value
+        let conversation = ConversationModel(withId: conversationId, accountId: accountId)
+        conversation.type = .oneToOne
+        conversation.addParticipant(jamiId: jamiId)
+        conversations.append(conversation)
+        self.conversations.accept(conversations)
+    }
+
     // MARK: file transfer
 
     func generateDataTransferMessage(transferId: String,
