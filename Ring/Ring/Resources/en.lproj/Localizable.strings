@@ -75,7 +75,7 @@
 "swarm.settings" = "Settings";
 "swarm.members" = "Members";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Private";
 "swarm.adminInvitesOnly" = "Private group (restricted invites)";
 "swarm.invitesOnly" = "Private group";
 "swarm.publicChat" = "Public group";
