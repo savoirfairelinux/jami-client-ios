@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "무리를 만들어";
-"swarmcreation.addADescription" = "설명을 추가";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "무리를 무시해";
+"swarm.muteConversation" = "침묵의 대화";
 "swarm.leaveConversation" = "대화는 그만둬";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "유형";
 "swarm.identifier" = "식별자";
-"swarm.about" = "에 관한 것";
+"swarm.settings" = "Settings";
 "swarm.members" = "의원";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "개인 무리가";
-"swarm.adminInvitesOnly" = "관리자 초청만 합니다";
-"swarm.invitesOnly" = "개인 무리가";
-"swarm.publicChat" = "공공 무리가";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "공공 그룹";
 "swarm.others" = "다른";
 "swarm.member" = "회원";
 "swarm.invited" = "초대받았어";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "알 수 없는";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "이 무리를 떠나고 싶다는 확신이 있나?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "떠나";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "어제";
-"smartlist.results" = "공공 디렉토리";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "대화";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "새 연락처";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "회계";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "결과도 없습니다";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "네트워크 연결이 없습니다";
 "smartlist.cellularAccess" = "설정에서 셀룰러 접속이 허용되었는지 확인하세요";
 "smartlist.accountsTitle" = "회계";
-"smartlist.addAccountButton" = "+ 계정을 추가";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "선택된 연락처는 번호가 없습니다";
 "smartlist.selectOneNumber" = "숫자들 중 하나를 선택";
 "smartlist.invitations" = "초대";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "무리가 만들어졌습니다";
-"generatedMessage.invitationReceived" = "참여하도록 초청되었습니다.";
+"generatedMessage.contactAdded" = "초대 받은 것";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "대화에 참여";
 "generatedMessage.youJoined" = "대화에 참여했지";
-"generatedMessage.contactBlocked" = "발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발";
-"generatedMessage.contactReAdded" = "다시 추가되었습니다";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "출력 전화";
 "generatedMessage.missedOutgoingCall" = "출력 전화가 빠진 것";
 "generatedMessage.missedIncomingCall" = "수신 전화가 빠진 것";
 "generatedMessage.liveLocationSharing" = "실시간 위치 공유";
-"generatedMessage.contactLeftConversation" = "왼쪽";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "비디오 설정";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "비디오 가속을 활성화";
 "generalSettings.fileTransfer" = "파일 전송";
 "generalSettings.locationSharing" = "위치 공유";

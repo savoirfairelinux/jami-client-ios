@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Kërkoni për kontakt…";
-"swarmcreation.createTheSwarm" = "Krijoje zgjoin";
-"swarmcreation.addADescription" = "Shtoni një përshkrim";
+"swarmcreation.newGroup" = "Krijoni grup të ri";
+"swarmcreation.addDescription" = "Shtoni përshkrim";
 // Swarm
-"swarm.ignoreSwarm" = "Shpërfille zgjuan";
+"swarm.muteConversation" = "Heshtoje bisedën";
 "swarm.leaveConversation" = "Braktise bisedën";
 "swarm.chooseColor" = "Ngjyrë";
 "swarm.typeOfSwarm" = "Lloj";
 "swarm.identifier" = "Identifikues";
-"swarm.about" = "Mbi";
+"swarm.settings" = "Settings";
 "swarm.members" = "Anëtarë";
 "swarm.addDescription" = "Shtoni përshkrim";
-"swarm.oneToOne" = "Zgjua privat";
-"swarm.adminInvitesOnly" = "Vetëm me ftesa nga përgjegjësi";
-"swarm.invitesOnly" = "Zgjua privat";
-"swarm.publicChat" = "Zgjua publik";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Grup privat (kufizim ftesash)";
+"swarm.invitesOnly" = "Grup privat";
+"swarm.publicChat" = "Grup publik";
 "swarm.others" = "Të tjerë";
 "swarm.member" = "Anëtar";
 "swarm.invited" = "Ftuar";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Bllokuar";
 "swarm.unknown" = "I panjohur";
 "swarm.inviteMembers" = "Ftoni anëtarë";
-"swarm.confirmLeaveSwarm" = "Jeni i sigurt se doni të braktisni këtë zgjua?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Braktise";
-"swarm.newSwarm" = "Zgjua i ri";
-"swarm.namePlaceholder" = "Emër zgjoi";
-"swarm.explanationText" = "Anëtarët mund të ftohen në çfarëdo kohe, pasi të jetë krijuar zgjoi";
-"swarm.customizeProfile" = "Përshtatni profil zgjoi";
-"swarm.changePicture" = "Ndryshoni foto zgjoi";
-"swarm.customize" = "Përshtatni zgjua";
-"swarm.selectContacts" = "Përzgjidhni Kontakte";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Përzgjidhni kontake";
 
 // Smartlist
 "smartlist.yesterday" = "Dje";
-"smartlist.results" = "Drejtori Publike";
-"smartlist.jamsResults" = "Përfundime Kërkimi";
+"smartlist.results" = "Drejtori publike";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Biseda";
 "smartlist.noConversationsFound" = "S’ka bisedë me përputhje me kërkimin tuaj";
-"smartlist.newContact" = "Kontakt i Ri";
-"smartlist.newSwarm" = "Zgjua i Ri";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Krijoni grup të ri";
 "smartlist.accounts" = "Llogari";
 "smartlist.invitationReceived" = "Ftesat u morën";
 "smartlist.noResults" = "S’ka përfundime";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
 "smartlist.cellularAccess" = "Sigurohuni qe te rregullimet tuaja i është dhënë hyrje te celulari";
 "smartlist.accountsTitle" = "Llogari";
-"smartlist.addAccountButton" = "+ Shtoni Llogari";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Kontakti i përzgjedhur s’ka ndonjë numër";
 "smartlist.selectOneNumber" = "Përzgjidhni një nga numrat";
 "smartlist.invitations" = "Ftesa";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Jo tani";
 "smartlist.donationExplanation" = "Nëse ju shijon të përdorni Jami-n dhe besoni në misionin tonë, a do të bënit një dhurim?";
 "smartlist.inSynchronization" = "bisedë në njëkohësim e sipër";
-"smartlist.newMessage" = "Mesazh i Ri";
+"smartlist.newMessage" = "Mesazh i ri";
 
 // Conversation
 "conversation.addToContactsButton" = "Shtoje te Kontaktet";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "Morët ftesë";
-"generatedMessage.swarmCreated" = "Zgjoi u krijua";
-"generatedMessage.invitationReceived" = "u ftua të marrë pjesë";
+"generatedMessage.contactAdded" = "Ftesa u mor";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "hyri në bisedë";
 "generatedMessage.youJoined" = "Hytë në bisedë";
-"generatedMessage.contactBlocked" = "u përzu";
-"generatedMessage.contactReAdded" = "u rishtua";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Thirrje për";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie e vendndodhjes drejtpërsëdrejti";
-"generatedMessage.contactLeftConversation" = "iku";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Rregullime Videoje";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
 "generalSettings.fileTransfer" = "Shpërngulje kartelash";
 "generalSettings.locationSharing" = "Tregim vendndodhjeje";

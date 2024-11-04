@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "创建群聊";
-"swarmcreation.addADescription" = "添加描述";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "添加描述";
 // Swarm
-"swarm.ignoreSwarm" = "忽略群聊";
+"swarm.muteConversation" = "静音对话";
 "swarm.leaveConversation" = "离开谈话";
 "swarm.chooseColor" = "色彩";
 "swarm.typeOfSwarm" = "型";
 "swarm.identifier" = "标识符";
-"swarm.about" = "關於";
+"swarm.settings" = "Settings";
 "swarm.members" = "成员";
 "swarm.addDescription" = "添加描述";
-"swarm.oneToOne" = "私人 swarm";
-"swarm.adminInvitesOnly" = "仅可管理员邀请";
-"swarm.invitesOnly" = "私人 swarm";
-"swarm.publicChat" = "公共群";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "私人群组(受限制邀请)";
+"swarm.invitesOnly" = "私密组";
+"swarm.publicChat" = "公开组<br>";
 "swarm.others" = "其他";
 "swarm.member" = "成员";
 "swarm.invited" = "已邀请";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "未知";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "你确定你想离开这个群体吗?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "离开";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "选择联系人";
 
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公共目录";
-"smartlist.jamsResults" = "搜索结果";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "對話";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "新連絡人";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "帳號";
 "smartlist.invitationReceived" = "邀请已发送";
 "smartlist.noResults" = "无结果";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "无网络连接";
 "smartlist.cellularAccess" = "確定在您的設定中已授權使用行動通訊";
 "smartlist.accountsTitle" = "帳號";
-"smartlist.addAccountButton" = "+ 添加账户";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "选定的连接没有任何数字";
 "smartlist.selectOneNumber" = "選取其中一個號碼";
 "smartlist.invitations" = "邀請";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "现在不要";
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "新消息";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "已建立 Swarm";
-"generatedMessage.invitationReceived" = "邀请加入";
+"generatedMessage.contactAdded" = "已接受邀请";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "加入该对话";
 "generatedMessage.youJoined" = "你加入了谈话";
-"generatedMessage.contactBlocked" = "被了";
-"generatedMessage.contactReAdded" = "已重新添加";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "撥出電話";
 "generatedMessage.missedOutgoingCall" = "未接去電";
 "generatedMessage.missedIncomingCall" = "未接來電";
 "generatedMessage.liveLocationSharing" = "实时位置分享";
-"generatedMessage.contactLeftConversation" = "左边";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "视频设置";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "启用视频加速";
 "generalSettings.fileTransfer" = "文件传输";
 "generalSettings.locationSharing" = "位置共享";

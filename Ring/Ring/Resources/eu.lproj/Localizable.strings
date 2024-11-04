@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Sortu sorta.";
-"swarmcreation.addADescription" = "Deskribazioa gehitu";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ez kasurik egin.";
+"swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "Utzi elkarrizketa.";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Mota";
 "swarm.identifier" = "Identifikatzailea";
-"swarm.about" = "Honi buruz";
+"swarm.settings" = "Settings";
 "swarm.members" = "Kideak";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Beraien artean";
-"swarm.adminInvitesOnly" = "Administrazioak gonbidatzen du soilik";
-"swarm.invitesOnly" = "Beraien artean";
-"swarm.publicChat" = "Jendearen sorta";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Public group";
 "swarm.others" = "Beste batzuk";
 "swarm.member" = "Batzarkidea";
 "swarm.invited" = "Gonbidatuak";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Ezezaguna";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Ziur zaude ez duzula talde hau utzi nahi?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Joan zaitezke?";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Atzo";
-"smartlist.results" = "Zerrenda publikoa";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Elkarrizketak";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "Kontaktu berria";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Kontuak";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Emaitzarik ez";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Ez dago sare-konexiorik";
 "smartlist.cellularAccess" = "Egiaztatu sare mugikorrera sarbidea eman dela ezarpenetan";
 "smartlist.accountsTitle" = "Kontuak";
-"smartlist.addAccountButton" = "+ Kontua gehitu";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Aukeratutako kontaktuak ez du zenbakirik.";
 "smartlist.selectOneNumber" = "Aukeratu zenbakietako bat.";
 "smartlist.invitations" = "Gonbidapenak";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Sarrera sortua";
-"generatedMessage.invitationReceived" = "Batera etortzeko gonbidatu zuten.";
+"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "Elkarrizketan sartu nintzen.";
 "generatedMessage.youJoined" = "Elkarrizketan sartu zinen.";
-"generatedMessage.contactBlocked" = "ostiko bat eman zidaten.";
-"generatedMessage.contactReAdded" = "gehitu egin da.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Irteera-deia";
 "generatedMessage.missedOutgoingCall" = "Galdutako irteera-deia";
 "generatedMessage.missedIncomingCall" = "Galdutako sarrera-deia";
 "generatedMessage.liveLocationSharing" = "Toki partekatzea zuzenean";
-"generatedMessage.contactLeftConversation" = "ezkerrera";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Bideoaren ezarpenak";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Bideoak azkartzea ahalbidetu";
 "generalSettings.fileTransfer" = "Fitxategi-transferentzia";
 "generalSettings.locationSharing" = "Kokapenaren banaketa";

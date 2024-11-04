@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Поиск контакта...";
-"swarmcreation.createTheSwarm" = "Создать группу";
-"swarmcreation.addADescription" = "Добавить описание";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Игнорируйте ров";
+"swarm.muteConversation" = "Отключить звук в беседе";
 "swarm.leaveConversation" = "Покинуть беседу";
 "swarm.chooseColor" = "Цвет";
 "swarm.typeOfSwarm" = "Тип";
 "swarm.identifier" = "Идентификатор";
-"swarm.about" = "О продукте";
+"swarm.settings" = "Settings";
 "swarm.members" = "Участники";
 "swarm.addDescription" = "Добавить описание";
-"swarm.oneToOne" = "Частный рой";
-"swarm.adminInvitesOnly" = "Администратор приглашает только";
-"swarm.invitesOnly" = "Частный рой";
-"swarm.publicChat" = "Общественный ров";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Приватная группа (приглашения ограничены)";
+"swarm.invitesOnly" = "Приватная группа";
+"swarm.publicChat" = "Публичная группа";
 "swarm.others" = "Другие";
 "swarm.member" = "Участник";
 "swarm.invited" = "Приглашен(а)";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Неизвестно";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Ты уверен, что хочешь покинуть этот рог?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Покинуть";
-"swarm.newSwarm" = "Новый рой";
-"swarm.namePlaceholder" = "Название созвона";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Настроить профиль созвона";
-"swarm.changePicture" = "Изменить изображение созвона";
-"swarm.customize" = "Настроить созвон";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Выбрать контакты";
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Публичный Каталог";
-"smartlist.jamsResults" = "Результаты поиска";
+"smartlist.results" = "Публичный каталог";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Разговоры";
 "smartlist.noConversationsFound" = "По вашему запросу не найдено ни одного разговора";
-"smartlist.newContact" = "Новый контакт";
-"smartlist.newSwarm" = "Новый созвон";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Учетные записи";
 "smartlist.invitationReceived" = "Приглашения получены";
 "smartlist.noResults" = "Нет результатов";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Отсутствует сетевое подключение";
 "smartlist.cellularAccess" = "Убедитесь, что сотовый доступ предоставляется в настройках";
 "smartlist.accountsTitle" = "Учетные записи";
-"smartlist.addAccountButton" = "+ Добавить аккаунт";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Выбранный контакт не имеет номера";
 "smartlist.selectOneNumber" = "Выберите один из номеров";
 "smartlist.invitations" = "Приглашения";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "Вы получили приглашение";
-"generatedMessage.swarmCreated" = "Рой создан";
-"generatedMessage.invitationReceived" = "приглашали к участию";
+"generatedMessage.contactAdded" = "Получено приглашение";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "Присоединился к разговору";
 "generatedMessage.youJoined" = "Ты присоединился к разговору";
-"generatedMessage.contactBlocked" = "был выбит";
-"generatedMessage.contactReAdded" = "был передобавлен";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Исходящий вызов";
 "generatedMessage.missedOutgoingCall" = "Пропущенный исходящий";
 "generatedMessage.missedIncomingCall" = "Пропущенный входящий";
 "generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
-"generatedMessage.contactLeftConversation" = "левый";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Настройки видео";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Разрешить видео-ускорение";
 "generalSettings.fileTransfer" = "Передача файлов";
 "generalSettings.locationSharing" = "Доступ к местоположению";

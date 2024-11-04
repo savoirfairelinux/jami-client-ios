@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "ರಾಶಿಯನ್ನು ರಚಿಸಿ";
-"swarmcreation.addADescription" = "ವಿವರಣೆಯನ್ನು ಸೇರಿಸಿ";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "ಆ ಗುಂಪನ್ನು ನಿರ್ಲಕ್ಷಿಸಿ";
+"swarm.muteConversation" = "ಮೂಕ ಸಂಭಾಷಣೆ";
 "swarm.leaveConversation" = "ಸಂಭಾಷಣೆಯನ್ನು ಬಿಟ್ಟುಬಿಡಿ";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "ಗುರುತಿನ ಚೀಟಿ";
-"swarm.about" = "ಬಗ್ಗೆ";
+"swarm.settings" = "Settings";
 "swarm.members" = "ಸದಸ್ಯರು";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "ಖಾಸಗಿ ಗುಂಪು";
-"swarm.adminInvitesOnly" = "ನಿರ್ವಾಹಕ ಆಹ್ವಾನ ಮಾತ್ರ";
-"swarm.invitesOnly" = "ಖಾಸಗಿ ಗುಂಪು";
-"swarm.publicChat" = "ಸಾರ್ವಜನಿಕರ ಗುಂಪು";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "ಸಾರ್ವಜನಿಕ ಗುಂಪು";
 "swarm.others" = "ಇತರರು";
 "swarm.member" = "ಸದಸ್ಯ";
 "swarm.invited" = "ಆಹ್ವಾನಿತರು";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "ಅಜ್ಞಾತ";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "ಈ ರಾಶಿಯನ್ನು ಬಿಟ್ಟು ಹೋಗಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "ಹೊರಟುಹೋಗು";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "ನಿನ್ನೆ";
-"smartlist.results" = "ಸಾರ್ವಜನಿಕ ಡೈರೆಕ್ಟರಿ";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "ಸಂಭಾಷಣೆ";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "ಖಾತೆಗಳು";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ಫಲಿತಾಂಶಗಳಿಲ್ಲ";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "ನೆಟ್ವರ್ಕ್ ಸಂಪರ್ಕವಿಲ್ಲ";
 "smartlist.cellularAccess" = "ನಿಮ್ಮ ಸೆಟ್ಟಿಂಗ್ಗಳಲ್ಲಿ ಸೆಲ್ ಪ್ರವೇಶವನ್ನು ಅನುಮತಿಸಲಾಗಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ";
 "smartlist.accountsTitle" = "ಖಾತೆಗಳು";
-"smartlist.addAccountButton" = "+ ಖಾತೆಯನ್ನು ಸೇರಿಸಿ";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "ಆಯ್ಕೆ ಮಾಡಿದ ಸಂಪರ್ಕವು ಯಾವುದೇ ಸಂಖ್ಯೆಯನ್ನು ಹೊಂದಿಲ್ಲ";
 "smartlist.selectOneNumber" = "ಒಂದು ಸಂಖ್ಯೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ";
 "smartlist.invitations" = "ಆಹ್ವಾನಗಳು";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "ಒಂದು ಗುಂಪು ರಚಿಸಲಾಗಿದೆ";
-"generatedMessage.invitationReceived" = "ಸೇರಲು ಆಹ್ವಾನಿಸಲಾಯಿತು";
+"generatedMessage.contactAdded" = "ಸ್ವೀಕರಿಸಿದ ಆಹ್ವಾನ";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "ಸಂಭಾಷಣೆಗೆ ಸೇರಿಕೊಂಡರು";
 "generatedMessage.youJoined" = "ನೀವು ಸಂಭಾಷಣೆಗೆ ಸೇರಿದ್ದೀರಿ";
-"generatedMessage.contactBlocked" = "ಕೊಲ್ಲಲ್ಪಟ್ಟರು";
-"generatedMessage.contactReAdded" = "ಮರು ಸೇರಿಸಲಾಗಿದೆ";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "ಹೊರಹೋಗುವ ಕರೆ";
 "generatedMessage.missedOutgoingCall" = "ತಪ್ಪಿಸಿಕೊಂಡ ಹೊರಹೋಗುವ ಕರೆ";
 "generatedMessage.missedIncomingCall" = "ತಪ್ಪಿದ ಕರೆ";
 "generatedMessage.liveLocationSharing" = "ಲೈವ್ ಸ್ಥಳ ಹಂಚಿಕೆ";
-"generatedMessage.contactLeftConversation" = "ಎಡ";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "ವೀಡಿಯೊ ಸೆಟ್ಟಿಂಗ್ಗಳು";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "ವೀಡಿಯೊ ವೇಗವರ್ಧನೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ";
 "generalSettings.fileTransfer" = "ಫೈಲ್ ವರ್ಗಾವಣೆ";
 "generalSettings.locationSharing" = "ಸ್ಥಳ ಹಂಚಿಕೆ";

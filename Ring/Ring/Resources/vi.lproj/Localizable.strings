@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Tạo ra đám đông";
-"swarmcreation.addADescription" = "Thêm mô tả";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Đừng quan tâm đến đám đông";
+"swarm.muteConversation" = "Cuộc trò chuyện câm lặng";
 "swarm.leaveConversation" = "Để lại cuộc trò chuyện";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Định dạng";
-"swarm.about" = "Thông tin phần mềm";
+"swarm.settings" = "Settings";
 "swarm.members" = "Các thành viên";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Đội đông cá nhân";
-"swarm.adminInvitesOnly" = "Admin chỉ mời";
-"swarm.invitesOnly" = "Đội đông cá nhân";
-"swarm.publicChat" = "Động đồng công cộng";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Nhóm tư nhân (được mời giới hạn)";
+"swarm.invitesOnly" = "Nhóm tư nhân";
+"swarm.publicChat" = "Nhóm công cộng";
 "swarm.others" = "Những người khác";
 "swarm.member" = "Thành viên";
 "swarm.invited" = "Được mời";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Không biết";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Em có chắc em muốn rời khỏi đám đông này không?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Đi đi";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Hôm qua";
-"smartlist.results" = "Đồ mục công cộng";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Các cuộc trò chuyện";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Tài khoản";
 "smartlist.invitationReceived" = "Lời mời nhận được";
 "smartlist.noResults" = "Không có kết quả";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Không có kết nối mạng";
 "smartlist.cellularAccess" = "Hãy chắc chắn rằng truy cập di động được cấp trong cài đặt của bạn";
 "smartlist.accountsTitle" = "Tài khoản";
-"smartlist.addAccountButton" = "+ Thêm tài khoản";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Liên hệ được chọn không có số";
 "smartlist.selectOneNumber" = "Chọn một trong số";
 "smartlist.invitations" = "Thỉnh cầu";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Thủy tạo ra";
-"generatedMessage.invitationReceived" = "được mời tham gia";
+"generatedMessage.contactAdded" = "Thỉnh cầu được nhận";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "gia nhập cuộc trò chuyện";
 "generatedMessage.youJoined" = "Anh đã tham gia cuộc trò chuyện";
-"generatedMessage.contactBlocked" = "bị đá";
-"generatedMessage.contactReAdded" = "được thêm lại";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Tiếp tục gọi";
 "generatedMessage.missedOutgoingCall" = "Lỡ cuộc gọi ra ngoài";
 "generatedMessage.missedIncomingCall" = "Lỡ cuộc gọi tiếp nhận";
 "generatedMessage.liveLocationSharing" = "Chia sẻ địa điểm trực tiếp";
-"generatedMessage.contactLeftConversation" = "trái";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Định hướng video";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Khả năng tăng tốc video";
 "generalSettings.fileTransfer" = "Chuyển tập tin";
 "generalSettings.locationSharing" = "Chia sẻ vị trí";

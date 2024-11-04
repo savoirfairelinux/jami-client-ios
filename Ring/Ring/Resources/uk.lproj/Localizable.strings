@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Створюйте ров";
-"swarmcreation.addADescription" = "Додати опис";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ігнорувати рій";
+"swarm.muteConversation" = "Немовний розмову";
 "swarm.leaveConversation" = "Не переконвайтеся";
 "swarm.chooseColor" = "Колір";
 "swarm.typeOfSwarm" = "Тип";
 "swarm.identifier" = "Ідентифікатор";
-"swarm.about" = "Про программу";
+"swarm.settings" = "Settings";
 "swarm.members" = "Учасники";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Приватний рій";
-"swarm.adminInvitesOnly" = "Лише адміністратор запрошує";
-"swarm.invitesOnly" = "Приватний рій";
-"swarm.publicChat" = "Публічний рій";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Частна група (запрошення обмежені)";
+"swarm.invitesOnly" = "Приватна група";
+"swarm.publicChat" = "Публічна група";
 "swarm.others" = "Інші";
 "swarm.member" = "Член";
 "swarm.invited" = "Запрошено";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Невідомий";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Ти впевнений, що хочеш покинути цей рій?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Піти";
-"swarm.newSwarm" = "Новий рій";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Виберіть контакти";
 
 // Smartlist
 "smartlist.yesterday" = "Учора";
 "smartlist.results" = "Публічний каталог";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Групові чати";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "Новий контакт";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Облікові записи";
 "smartlist.invitationReceived" = "Запрошення отримані";
 "smartlist.noResults" = "Ніяких результатів";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Відсутнє з’єднання з мережею";
 "smartlist.cellularAccess" = "Переконайтеся, що доступ на мобільний телефон у ваших налаштуваннях";
 "smartlist.accountsTitle" = "Облікові записи";
-"smartlist.addAccountButton" = "+ Додати обліковий запис";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Вибраний контакт не має ніякого номера";
 "smartlist.selectOneNumber" = "Виберіть один з цифр";
 "smartlist.invitations" = "Запрошення";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Не зараз";
 "smartlist.donationExplanation" = "Якщо вам подобається Jami і ви вірите в нашу місію, чи не зробили б ви пожертву?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "Нове повідомлення";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "Ви отримали запрошення";
-"generatedMessage.swarmCreated" = "Створена пастка";
-"generatedMessage.invitationReceived" = "був запрошений приєднатися";
+"generatedMessage.contactAdded" = "Отримано запрошення";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "приєднався до розмови";
 "generatedMessage.youJoined" = "Ти приєднався до розмови";
-"generatedMessage.contactBlocked" = "був кинутий";
-"generatedMessage.contactReAdded" = "було додано";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Вихідний виклик";
 "generatedMessage.missedOutgoingCall" = "Пропущений вихідний виклик";
 "generatedMessage.missedIncomingCall" = "Пропущений вхідний виклик";
 "generatedMessage.liveLocationSharing" = "Поділення місцями на живо";
-"generatedMessage.contactLeftConversation" = "ліво";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Настройки відео";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Отримати прискорення відео";
 "generalSettings.fileTransfer" = "Передача файлів";
 "generalSettings.locationSharing" = "Розділ місцезнаходження";

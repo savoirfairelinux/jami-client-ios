@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Hae henkilöä…";
-"swarmcreation.createTheSwarm" = "Luo keskustelu";
-"swarmcreation.addADescription" = "Lisää kuvaus";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ohita keskustelu";
+"swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "Poistu keskustelusta";
 "swarm.chooseColor" = "Väri";
 "swarm.typeOfSwarm" = "Tyyppi";
 "swarm.identifier" = "Tunniste";
-"swarm.about" = "Tietoa";
+"swarm.settings" = "Settings";
 "swarm.members" = "Jäsenet";
 "swarm.addDescription" = "Lisää kuvaus";
-"swarm.oneToOne" = "Yksityinen keskustelu";
-"swarm.adminInvitesOnly" = "Vain ylläpitäjä kutsuu";
-"swarm.invitesOnly" = "Yksityinen keskustelu";
-"swarm.publicChat" = "Julkinen keskustelu";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Public group";
 "swarm.others" = "Muut";
 "swarm.member" = "Jäsen";
 "swarm.invited" = "Kutsuttu";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Estetty";
 "swarm.unknown" = "Tuntematon";
 "swarm.inviteMembers" = "Kutsu jäseniä";
-"swarm.confirmLeaveSwarm" = "Oletko varma, että haluat lähteä?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Lähdetään";
-"swarm.newSwarm" = "Uusi keskustelu";
-"swarm.namePlaceholder" = "Keskustelun nimi";
-"swarm.explanationText" = "Jäseniä voidaan kutsua milloin tahansa keskustelun luomisen jälkeen";
-"swarm.customizeProfile" = "Muokkaa keskustelun profiilia";
-"swarm.changePicture" = "Muuta keskustelun kuva";
-"swarm.customize" = "Muokkaa keskustelua";
-"swarm.selectContacts" = "Valitse henkilöt";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Eilen";
-"smartlist.results" = "Julkinen kansio";
-"smartlist.jamsResults" = "Hakutulos";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Keskustelu";
 "smartlist.noConversationsFound" = "Yksikään keskustelu ei vastaa hakuasi";
-"smartlist.newContact" = "Uusi yhteystieto";
-"smartlist.newSwarm" = "Uusi keskustelu";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Tilit";
 "smartlist.invitationReceived" = "Kutsut vastaanotettu";
 "smartlist.noResults" = "Ei tuloksia";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Ei verkkoyhteyttä";
 "smartlist.cellularAccess" = "Varmista, että matkapuhelinverkon käyttö on sallittu asetuksissa";
 "smartlist.accountsTitle" = "Tilit";
-"smartlist.addAccountButton" = "+ Lisää tili";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Valitulla henkilöllä ei ole numeroa";
 "smartlist.selectOneNumber" = "Valitse yksi numeroista";
 "smartlist.invitations" = "Kutsut";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "Sait kutsun";
-"generatedMessage.swarmCreated" = "Keskustelu luotu";
-"generatedMessage.invitationReceived" = "oli kutsuttu liittymään";
+"generatedMessage.contactAdded" = "Kutsu vastaanotettu";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "liittyi keskusteluun";
 "generatedMessage.youJoined" = "Sinä liityit keskusteluun";
-"generatedMessage.contactBlocked" = "hänet potkaistiin";
-"generatedMessage.contactReAdded" = "hänet lisättiin uudelleen";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Lähtevä puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
-"generatedMessage.contactLeftConversation" = "vasen";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Videon asetukset";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Kytke videon laitteistokiihdytys";
 "generalSettings.fileTransfer" = "Tiedostonsiirto";
 "generalSettings.locationSharing" = "Sijainnin jakaminen";

@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Хүрэлсүхнийг бий болго";
-"swarmcreation.addADescription" = "Тодруул";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Хүрэнтгийрүүлэг";
+"swarm.muteConversation" = "Үгүй яриа";
 "swarm.leaveConversation" = "Хэлэлцүүлгийг орхи";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Төлөөлөгч";
-"swarm.about" = "Үүнээс";
+"swarm.settings" = "Settings";
 "swarm.members" = "Улсчдын гишүүд";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Хувь хүний хуур";
-"swarm.adminInvitesOnly" = "Зөвхөн захирал урьж байна";
-"swarm.invitesOnly" = "Хувь хүний хуур";
-"swarm.publicChat" = "Нийтийн цуврал";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Олон нийтийн бүлгийн";
 "swarm.others" = "Бусад";
 "swarm.member" = "гишүүн";
 "swarm.invited" = "Урилга авсан";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Мэдээгүй";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Та энэ цувралсаа гарахыг хүсч байгаа гэдэгт итгэлтэй байна уу?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Хойч яв";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Өчигдөр";
-"smartlist.results" = "Нийтийн захиалг";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Хэлэлцүүлэг";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Санхүүжилт";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Үр дүнгүй";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Сүлжээний холболтгүй";
 "smartlist.cellularAccess" = "Таны тохируулгад соён утсаар хангах боломжтой байх";
 "smartlist.accountsTitle" = "Санхүүжилт";
-"smartlist.addAccountButton" = "+ Эвлэл нэмнэ";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Сонгосон холбооны дуудлага нь ямар ч нөмөргүй";
 "smartlist.selectOneNumber" = "Нэг тоот тоот сонго";
 "smartlist.invitations" = "Нэрлэг";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Хүрэлсүх үүссэн";
-"generatedMessage.invitationReceived" = "оролцохоор урьж байсан";
+"generatedMessage.contactAdded" = "Нээлтийг хүлээн авсан";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "ярилцлагад нэгдсэн";
 "generatedMessage.youJoined" = "Та яриадаа нэгдсэн.";
-"generatedMessage.contactBlocked" = "- Би ч гэсэн";
-"generatedMessage.contactReAdded" = "дахин нэмсэн";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Урьдчилсан дуудлага";
 "generatedMessage.missedOutgoingCall" = "Удахгүй дууссан";
 "generatedMessage.missedIncomingCall" = "Улаан дуудлага алдсан";
 "generatedMessage.liveLocationSharing" = "Амьдрал байршуулын хуваалц";
-"generatedMessage.contactLeftConversation" = "зүүн";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Видеогийн тохируулалт";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Видеоны хурдацлалтыг идэвхжүүлнэ";
 "generalSettings.fileTransfer" = "Файлын шилжүүлэн суулга";
 "generalSettings.locationSharing" = "Байгууллагын хуваалц";

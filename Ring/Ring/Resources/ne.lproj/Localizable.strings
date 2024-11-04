@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "झुण्ड बनाउनुहोस्";
-"swarmcreation.addADescription" = "विवरण थप्नुहोस्";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "झुण्डलाई बेवास्ता गर";
+"swarm.muteConversation" = "मौन कुराकानी";
 "swarm.leaveConversation" = "कुराकानी छोड्नुहोस्";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "पहिचानकर्ता";
-"swarm.about" = "बारेमा";
+"swarm.settings" = "Settings";
 "swarm.members" = "सदस्यहरू";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "निजी झुण्ड";
-"swarm.adminInvitesOnly" = "एडमिनले मात्र निम्तो दिन्छ";
-"swarm.invitesOnly" = "निजी झुण्ड";
-"swarm.publicChat" = "सार्वजनिक झुण्ड";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "निजी समूह (प्रतिबन्धित निमन्त्रणा)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "सार्वजनिक समूह";
 "swarm.others" = "अन्य";
 "swarm.member" = "सदस्य";
 "swarm.invited" = "आमन्त्रित";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "अज्ञात";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "के तपाई निश्चित हुनुहुन्छ कि तपाई यो झुण्ड छोड्न चाहानुहुन्छ?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "छोड्नु";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "सम्पर्कहरू चयन गर्नुहोस्";
 
 // Smartlist
 "smartlist.yesterday" = "हिजो";
-"smartlist.results" = "सार्वजनिक निर्देशिका";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "वार्तालाप";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "लेखा";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "कुनै परिणामहरू";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "नेटवर्क जडान छैन";
 "smartlist.cellularAccess" = "तपाईँको सेटिङमा सेल्युलर पहुँच प्रदान गरिएको छ भन्ने कुरा निश्चित गर्नुहोस्";
 "smartlist.accountsTitle" = "लेखा";
-"smartlist.addAccountButton" = "+ खाता थप्नुहोस्";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "चयनित सम्पर्कमा कुनै नम्बर छैन";
 "smartlist.selectOneNumber" = "एउटा नम्बर चयन गर्नुहोस्";
 "smartlist.invitations" = "निमन्त्रणाहरू";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "सार्म सिर्जना गरियो";
-"generatedMessage.invitationReceived" = "सहभागी हुन निम्तो दिइएको थियो";
+"generatedMessage.contactAdded" = "निमन्त्रणा प्राप्त";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "वार्तालापमा सहभागी भए";
 "generatedMessage.youJoined" = "तपाईं कुराकानीमा सामेल";
-"generatedMessage.contactBlocked" = "ठक्कर खाएको";
-"generatedMessage.contactReAdded" = "पुनः थपियो";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "आउटगोइंग कल";
 "generatedMessage.missedOutgoingCall" = "अपाङ्गित प्रस्थान कल";
 "generatedMessage.missedIncomingCall" = "अनुपस्थित आगमन कल";
 "generatedMessage.liveLocationSharing" = "प्रत्यक्ष स्थान साझेदारी";
-"generatedMessage.contactLeftConversation" = "बायाँ";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "भिडियो सेटिंग्स";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "भिडियो गति सक्षम गर्नुहोस्";
 "generalSettings.fileTransfer" = "फाइल स्थानान्तरण";
 "generalSettings.locationSharing" = "स्थान साझा";

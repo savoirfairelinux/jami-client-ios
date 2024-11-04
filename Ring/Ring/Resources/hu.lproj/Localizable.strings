@@ -57,27 +57,27 @@
 "global.time" = "Idő";
 "global.editPassword" = "Jelszó megváltoztatása";
 "global.confirmPassword" = "Jelszó megerősítése";
-"global.cameraDisabled" = "A kamera hozzáférése le van tiltva. A funkció használatához engedélyezze az eszköz beállításaiban.";
+"global.cameraDisabled" = "A fényképezőgép használati engedélye le van tiltva. A funkció használatát engedélyezze az eszköz beállításaiban.";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Kapcsolattartó keresése…";
-"swarmcreation.createTheSwarm" = "Új csoport létrehozása";
-"swarmcreation.addADescription" = "Leírás hozzáadása";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Beszélgetés figyelmen kívül hagyása";
+"swarm.muteConversation" = "Beszélgetés elnémítása";
 "swarm.leaveConversation" = "Kilépés a beszélgetésből";
 "swarm.chooseColor" = "Szín";
 "swarm.typeOfSwarm" = "Típus";
 "swarm.identifier" = "Azonosító";
-"swarm.about" = "Névjegy";
+"swarm.settings" = "Settings";
 "swarm.members" = "Tagok";
 "swarm.addDescription" = "Leírás hozzáadása";
 "swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Csak rendszergazdai meghívók";
-"swarm.invitesOnly" = "Személyes csoport";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
 "swarm.publicChat" = "Nyilvános csoport";
 "swarm.others" = "Egyebek";
 "swarm.member" = "Tag";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Letiltva";
 "swarm.unknown" = "Ismeretlen";
 "swarm.inviteMembers" = "Tagok meghívása";
-"swarm.confirmLeaveSwarm" = "Biztosan szeretne kilépni ebből a beszélgetésből?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Elhagyás";
-"swarm.newSwarm" = "Új csoport létrehozása";
-"swarm.namePlaceholder" = "Csoport neve";
-"swarm.explanationText" = "A tagok a csoport létrehozása után bármikor meghívhatók.";
-"swarm.customizeProfile" = "Csoportprofil szerkesztése";
-"swarm.changePicture" = "Csoportkép módosítása";
-"swarm.customize" = "Csoport szerkesztése";
-"swarm.selectContacts" = "Kapcsolattartók kijelölése";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
-"smartlist.results" = "Nyilvános címtár";
-"smartlist.jamsResults" = "Keresési eredmény";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Beszélgetések";
 "smartlist.noConversationsFound" = "Nincs a keresésnek megfelelő beszélgetés";
-"smartlist.newContact" = "Új kapcsolattartó";
-"smartlist.newSwarm" = "Új csoport létrehozása";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Új csoport létrehozása";
 "smartlist.accounts" = "Fiókok";
 "smartlist.invitationReceived" = "Meghívások megérkeztek";
 "smartlist.noResults" = "Nincs eredmény";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Nincs hálózati csatlakozás";
 "smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
 "smartlist.accountsTitle" = "Fiókok";
-"smartlist.addAccountButton" = "+ Fiók hozzáadása";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "A kijelölt kapcsolattartnak nincsenek SIP-számák";
 "smartlist.selectOneNumber" = "Válasszon egy számot";
 "smartlist.invitations" = "Meghívások";
@@ -327,7 +327,7 @@
 "accountPage.usernameRegistering" = "Regisztráció…";
 "accountPage.usernameRegisterAction" = "Regisztráció";
 "accountPage.usernameRegistrationFailedTitle" = "Bejegyeztetés hiba";
-"accountPage.usernameRegistrationFailed" = "Ellenőrizze a fiók jelszavát.";
+"accountPage.usernameRegistrationFailed" = "Kérjük, ellenőrizze a fiók jelszavát.";
 "accountPage.createPassword" = "Fiók titkosítása";
 "accountPage.changePassword" = "Jelszó megváltoztatása";
 "accountPage.currentPasswordPlaceholder" = "Jelenlegi jelszó megadása";
@@ -373,7 +373,7 @@
 "accountPage.pinExplanationMessage" = "Telepítse és indítsa el a Jami alkalmazást, válassza az „Importálás másik eszközről” lehetőséget, és QR-kód beolvasása vagy PIN-kód kézi megadása.";
 "accountPage.pinError" = "Hiba történt a PIN kód generálása közben.";
 "accountPage.notificationTitle" = "Értesítések";
-"accountPage.notificationError" = "A Jami értesítései le vannak tiltva. A funkció használatához engedélyezze az eszköz beállításaiban.";
+"accountPage.notificationError" = "A Jami értesítései le vannak tiltva. A funkció használatát engedélyezze az eszköz beállításaiban.";
 "accountPage.callsFromUnknownContacts" = "Ismeretlen névjegyektől érkező hívások engedélyezése.";
 "accountPage.accountSettingsExplanation" = "Ezek a beállítások csak erre a fiókra vonatkoznak.";
 "accountPage.appSettings" = "Alkalmazási beállítások";
@@ -467,20 +467,20 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Meghívás megérkezett";
-"generatedMessage.swarmCreated" = "Új csoport létrehozva";
-"generatedMessage.invitationReceived" = "meghívást kapott a csatlakozásra";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "csatlakozott a beszélgetéshez";
 "generatedMessage.youJoined" = "Ön csatlakozott a beszélgetéshez";
-"generatedMessage.contactBlocked" = "eltávolítva lett";
-"generatedMessage.contactReAdded" = "újra hozzáadva";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Kimenő hívás";
 "generatedMessage.missedOutgoingCall" = "Nem fogadott kimenő hívás";
 "generatedMessage.missedIncomingCall" = "Nem fogadott bejövő hívás";
 "generatedMessage.liveLocationSharing" = "Valós idejű hely megosztása";
-"generatedMessage.contactLeftConversation" = "kilépett";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Videóbeállítások";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Videó gyorsítás engedélyezése";
 "generalSettings.fileTransfer" = "Fájlküldés";
 "generalSettings.locationSharing" = "Helymegosztás";

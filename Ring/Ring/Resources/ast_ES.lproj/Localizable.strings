@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Crear el enjambre";
-"swarmcreation.addADescription" = "Axega una descripción";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ignorar el enjambre";
+"swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "La conversación ye una conversación.";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Identificador";
-"swarm.about" = "Sobre";
+"swarm.settings" = "Settings";
 "swarm.members" = "Los miembros";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "El so grupu privado";
-"swarm.adminInvitesOnly" = "Admins solo invita";
-"swarm.invitesOnly" = "El so grupu privado";
-"swarm.publicChat" = "El rei de los Estaos Xuníos";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Public group";
 "swarm.others" = "Altres";
 "swarm.member" = "Miembro";
 "swarm.invited" = "Convidaos";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Nun se sabe";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "¿Seguru que quieres salir de la masa?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "En xineru de 2011";
-"smartlist.results" = "El Directoriu Públicu";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "El so padre foi un fíu de la familia de la familia de los hermanos.";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Cuentas";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Nun hai resultáu";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Nun hai conectividá de rede";
 "smartlist.cellularAccess" = "Asegúrese d'un accesu celular autorizáu nos sos ajustes";
 "smartlist.accountsTitle" = "Cuentas";
-"smartlist.addAccountButton" = "+ Agrega cuenta";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "El contautu seleccionáu nun tien númberu.";
 "smartlist.selectOneNumber" = "Seleccione unu de los númberos";
 "smartlist.invitations" = "Les invitaciones";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "El so nome ye \"Swarm\".";
-"generatedMessage.invitationReceived" = "Foi convidáu a participar";
+"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "Entra na conversación.";
 "generatedMessage.youJoined" = "Acompañó la conversación";
-"generatedMessage.contactBlocked" = "Foi pateada";
-"generatedMessage.contactReAdded" = "Foi añadida de nuevu";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "L'escursión de salida";
 "generatedMessage.missedOutgoingCall" = "La llamada saliente perdida";
 "generatedMessage.missedIncomingCall" = "La llamada entrante perdida";
 "generatedMessage.liveLocationSharing" = "Compartir la localización en directo";
-"generatedMessage.contactLeftConversation" = "La so parte inferior ye de la derecha.";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "La configuración de video";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Aceleración de video";
 "generalSettings.fileTransfer" = "Transferencia de archivos";
 "generalSettings.locationSharing" = "Compartir la ubicación";

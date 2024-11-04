@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Procurar contacto…";
-"swarmcreation.createTheSwarm" = "Criar o enxame";
-"swarmcreation.addADescription" = "Adicionar uma descrição";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ignorar o enxame";
+"swarm.muteConversation" = "Silenciar conversa";
 "swarm.leaveConversation" = "Abandonar a conversa";
 "swarm.chooseColor" = "Cor";
 "swarm.typeOfSwarm" = "Tipo";
 "swarm.identifier" = "Identificador";
-"swarm.about" = "Sobre";
+"swarm.settings" = "Settings";
 "swarm.members" = "Membros";
 "swarm.addDescription" = "Adicionar descrição";
-"swarm.oneToOne" = "Enxame privado";
-"swarm.adminInvitesOnly" = "Apenas convites de administradores";
-"swarm.invitesOnly" = "Enxame privado";
-"swarm.publicChat" = "Enxame público";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Grupo privado (convites restritos)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Grupo público";
 "swarm.others" = "Outros";
 "swarm.member" = "Membro";
 "swarm.invited" = "Convidado";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Bloqueado";
 "swarm.unknown" = "Desconhecido";
 "swarm.inviteMembers" = "Convidar membros";
-"swarm.confirmLeaveSwarm" = "Tem a certeza que quer sair deste enxame?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Sair";
-"swarm.newSwarm" = "Novo enxame";
-"swarm.namePlaceholder" = "Nome do enxame";
-"swarm.explanationText" = "Os membros podem ser convidados em qualquer altura depois de o enxame ter sido criado";
-"swarm.customizeProfile" = "Personalizar o perfil do enxame";
-"swarm.changePicture" = "Alterar a imagem do enxame";
-"swarm.customize" = "Personalizar enxame";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Selecionar contactos";
 
 // Smartlist
 "smartlist.yesterday" = "Ontem";
-"smartlist.results" = "Diretório público";
-"smartlist.jamsResults" = "Resultado da pesquisa";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Conversas";
 "smartlist.noConversationsFound" = "Nenhuma conversa corresponde à sua pesquisa";
-"smartlist.newContact" = "Novo contacto";
-"smartlist.newSwarm" = "Novo enxame";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Contas";
 "smartlist.invitationReceived" = "Convites recebidos";
 "smartlist.noResults" = "Nenhum resultado";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Sem conectividade à rede";
 "smartlist.cellularAccess" = "Verifique se o acesso via telemóvel está autorizado nas suas configurações";
 "smartlist.accountsTitle" = "Contas";
-"smartlist.addAccountButton" = "+ Adicionar conta";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "O contacto selecionado não tem nenhum número";
 "smartlist.selectOneNumber" = "Selecione um dos números";
 "smartlist.invitations" = "Convites";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "Recebeu um convite";
-"generatedMessage.swarmCreated" = "Enxame criado";
-"generatedMessage.invitationReceived" = "foi convidado a participar";
+"generatedMessage.contactAdded" = "Convite recebido";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "juntou-se à conversa";
 "generatedMessage.youJoined" = "Entrou na conversa";
-"generatedMessage.contactBlocked" = "foi expulso";
-"generatedMessage.contactReAdded" = "foi adicionado novamente";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Chamada efetuada";
 "generatedMessage.missedOutgoingCall" = "Chamada efetuada perdida";
 "generatedMessage.missedIncomingCall" = "Chamada recebida perdida";
 "generatedMessage.liveLocationSharing" = "Partilha de localização em tempo real";
-"generatedMessage.contactLeftConversation" = "saiu";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Configurações de vídeo";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Ativar aceleração de vídeo";
 "generalSettings.fileTransfer" = "Transferência de ficheiro";
 "generalSettings.locationSharing" = "Partilha de localização";

@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Skaf sværmen";
-"swarmcreation.addADescription" = "Tilføj en beskrivelse";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ignorer sværmen";
+"swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "Lad samtalen være";
 "swarm.chooseColor" = "Farve";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Identifikator";
-"swarm.about" = "Om";
+"swarm.settings" = "Settings";
 "swarm.members" = "Medlemmer";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Privat svam";
-"swarm.adminInvitesOnly" = "Admin inviterer kun";
-"swarm.invitesOnly" = "Privat svam";
-"swarm.publicChat" = "Fælles swarm";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Public group";
 "swarm.others" = "Andre";
 "swarm.member" = "Medlem";
 "swarm.invited" = "Indbydes";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Ukendt";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Er du sikker på, du vil forlade denne sværm?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "- Gå væk.";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.results" = "Det offentlige register";
-"smartlist.jamsResults" = "Søgeresultat";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Samtaler";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "Ny kontakt";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Konti";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ingen resultater";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Ingen netværksforbindelse";
 "smartlist.cellularAccess" = "Kontroller at rettigheder til mobildata er givet i indstillinger";
 "smartlist.accountsTitle" = "Konti";
-"smartlist.addAccountButton" = "+Tilføj Konto";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Den valgte kontakt har ikke noget nummer";
 "smartlist.selectOneNumber" = "Vælg et af numrene";
 "smartlist.invitations" = "Invitationer";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -293,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "brugernavn: ikke registreret";
 "accountPage.credentialsHeader" = "Kontodetaljer";
 "accountPage.blockedContacts" = "Blokerede kontakter";
-"accountPage.unblockContact" = "Unblock";
+"accountPage.unblockContact" = "Fjern blokering";
 "accountPage.proxyAddressAlert" = "Angiv proxy-adresse";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Proxy-adresse";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Skarm skabt";
-"generatedMessage.invitationReceived" = "blev inviteret til at deltage";
+"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "- Jeg er med i samtalen.";
 "generatedMessage.youJoined" = "Du er med i samtalen.";
-"generatedMessage.contactBlocked" = "blev sparket";
-"generatedMessage.contactReAdded" = "blev tilføjet";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Udgående opkald";
 "generatedMessage.missedOutgoingCall" = "Ubesvarede udgående opkald";
 "generatedMessage.missedIncomingCall" = "Ubesvarede indgående opkald";
 "generatedMessage.liveLocationSharing" = "Live placeringsholding";
-"generatedMessage.contactLeftConversation" = "til venstre";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Videoindstillinger";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Aktivere videobesked";
 "generalSettings.fileTransfer" = "Filoverførsler";
 "generalSettings.locationSharing" = "Lokalisering";

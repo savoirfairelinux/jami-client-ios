@@ -64,19 +64,19 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Направи групу";
-"swarmcreation.addADescription" = "Додај опис";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Занемари групу";
+"swarm.muteConversation" = "Умоли разговор";
 "swarm.leaveConversation" = "Оставите разговор";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Идентификатор";
-"swarm.about" = "О контакту";
+"swarm.settings" = "Settings";
 "swarm.members" = "Чланови";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Приватни рој";
-"swarm.adminInvitesOnly" = "Администратор позива само";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Приватна група (ограничени позиви)";
 "swarm.invitesOnly" = "Приватна група";
 "swarm.publicChat" = "Јавна група";
 "swarm.others" = "Други";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Непознат";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Да ли сте сигурни да желите да напустите овај рој?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Одлази";
-"swarm.newSwarm" = "Нови рој";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Изабери контакте";
 
 // Smartlist
 "smartlist.yesterday" = "Јуче";
 "smartlist.results" = "Јавни именик";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Разговори";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Налози";
 "smartlist.invitationReceived" = "Позивнице примљене";
 "smartlist.noResults" = "Нема резултата";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Nema internet konekcije";
 "smartlist.cellularAccess" = "Уверите се да је доступ на мобилном у вашем подесувању";
 "smartlist.accountsTitle" = "Налози";
-"smartlist.addAccountButton" = "+ Додај налог";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Избрани контакт нема никакав број";
 "smartlist.selectOneNumber" = "Изаберите један од бројева";
 "smartlist.invitations" = "Позивања";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Не сада";
 "smartlist.donationExplanation" = "Ако уживате у коришћењу Јамија и верујете у нашу мисију, да ли бисте дали донацију?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "Нова порука";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Додај у контакте";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Стварено је пало";
-"generatedMessage.invitationReceived" = "позвана да се придружи";
+"generatedMessage.contactAdded" = "Позивница је примљена";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "придружио се разговору";
 "generatedMessage.youJoined" = "Придружио си се разговору.";
-"generatedMessage.contactBlocked" = "је убођен";
-"generatedMessage.contactReAdded" = "додао је";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Poziva se";
 "generatedMessage.missedOutgoingCall" = "Propušten odlazeći poziv";
 "generatedMessage.missedIncomingCall" = "Propušten dolazeći poziv";
 "generatedMessage.liveLocationSharing" = "Поделивање локације на живо";
-"generatedMessage.contactLeftConversation" = "лево";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Постављања видео";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Omogućite video ubrzanje";
 "generalSettings.fileTransfer" = "Prenos podatka";
 "generalSettings.locationSharing" = "Дељење локације";
