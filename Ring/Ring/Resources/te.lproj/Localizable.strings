@@ -64,20 +64,20 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "సమూహము సృష్టించు";
-"swarmcreation.addADescription" = "వివరణను జోడించండి";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "గుంపును విస్మరించు";
+"swarm.muteConversation" = "నిశ్శబ్ద సంభాషణ";
 "swarm.leaveConversation" = "సంభాషణను వదిలివేయండి";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "గుర్తింపు";
-"swarm.about" = "గురించి";
+"swarm.settings" = "Settings";
 "swarm.members" = "సభ్యులు";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "ప్రైవేటు గుంపు";
-"swarm.adminInvitesOnly" = "అడ్మిన్ ఆహ్వానాలు మాత్రమే";
-"swarm.invitesOnly" = "ప్రైవేటు గుంపు";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "ప్రైవేట్ సమూహం (పరిమిత ఆహ్వానాలు)";
+"swarm.invitesOnly" = "ప్రైవేటు సమూహం";
 "swarm.publicChat" = "ప్రజా సమూహం";
 "swarm.others" = "ఇతర";
 "swarm.member" = "సభ్యుడు";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "తెలియని";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "మీరు ఈ సమూహం వదిలి అనుకుంటున్నారా ఖచ్చితంగా?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "బయలుదేరండి";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "పరిచయాలను ఎంచుకోండి";
 
 // Smartlist
 "smartlist.yesterday" = "నిన్న";
 "smartlist.results" = "పబ్లిక్ డైరెక్టరీ";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "సంభాషణలు";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "ఖాతాలు";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ఫలితాలు లేవు";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "నెట్వర్క్ కనెక్టివిటీ లేదు";
 "smartlist.cellularAccess" = "మీ సెట్టింగులలో సెల్ యాక్సెస్ అనుమతించబడిందని నిర్ధారించుకోండి";
 "smartlist.accountsTitle" = "ఖాతాలు";
-"smartlist.addAccountButton" = "+ ఖాతాను జోడించండి";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "ఎంపిక చేసిన పరిచయానికి సంఖ్య లేదు";
 "smartlist.selectOneNumber" = "సంఖ్యలలో ఒకదాన్ని ఎంచుకోండి";
 "smartlist.invitations" = "ఆహ్వానాలు";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "స్ర్క్ సృష్టించబడింది";
-"generatedMessage.invitationReceived" = "చేరడానికి ఆహ్వానించారు";
+"generatedMessage.contactAdded" = "అందుకున్న ఆహ్వానం";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "సంభాషణలో చేరారు";
 "generatedMessage.youJoined" = "మీరు సంభాషణ చేరారు";
-"generatedMessage.contactBlocked" = "కొట్టారు";
-"generatedMessage.contactReAdded" = "తిరిగి జోడించబడింది";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "బయటి కాల్";
 "generatedMessage.missedOutgoingCall" = "మిస్ అవుట్గోయింగ్ కాల్";
 "generatedMessage.missedIncomingCall" = "మిస్డ్ ఇన్కమింగ్ కాల్";
 "generatedMessage.liveLocationSharing" = "ప్రత్యక్ష స్థానం భాగస్వామ్యం";
-"generatedMessage.contactLeftConversation" = "ఎడమ";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "వీడియో సెట్టింగులు";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "వీడియో త్వరణం సక్రియం";
 "generalSettings.fileTransfer" = "ఫైల్ బదిలీ";
 "generalSettings.locationSharing" = "స్థానం పంచుకోవడం";

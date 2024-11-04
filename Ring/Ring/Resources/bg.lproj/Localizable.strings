@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Създавайте рома";
-"swarmcreation.addADescription" = "Добавете описание";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Игнорира се рогата.";
+"swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "Остави разговора.";
 "swarm.chooseColor" = "Цвят";
 "swarm.typeOfSwarm" = "Вид";
 "swarm.identifier" = "Идентификатор";
-"swarm.about" = "Относно";
+"swarm.settings" = "Settings";
 "swarm.members" = "Членове";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Частни родовия";
-"swarm.adminInvitesOnly" = "Администраторът поканява само";
-"swarm.invitesOnly" = "Частни родовия";
-"swarm.publicChat" = "Обществен ров";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Public group";
 "swarm.others" = "Други";
 "swarm.member" = "Член";
 "swarm.invited" = "Поканени";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Неизвестно";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Сигурен ли си, че искаш да напуснеш роя?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Излезте.";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Обществен каталог";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Разговори";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "Нов контакт";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Профили";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Няма резултати";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Няма връзка с мрежата";
 "smartlist.cellularAccess" = "Уверете се, че в настроенията ви е предоставен достъп с мобилен телефон.";
 "smartlist.accountsTitle" = "Профили";
-"smartlist.addAccountButton" = "Добавяне на профил";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Избраният контакт няма номер";
 "smartlist.selectOneNumber" = "Изберете един от числата";
 "smartlist.invitations" = "Покани";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -293,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "потребителско име: не е регистрирано";
 "accountPage.credentialsHeader" = "Подробности за профила";
 "accountPage.blockedContacts" = "Блокирани контакти";
-"accountPage.unblockContact" = "Unblock";
+"accountPage.unblockContact" = "Отблокиране";
 "accountPage.proxyAddressAlert" = "Посочете адрес на прокси";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Адрес на прокси";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Създадени са сбори";
-"generatedMessage.invitationReceived" = "беше поканена да се присъедини";
+"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "Присъедини се към разговора.";
 "generatedMessage.youJoined" = "Присъедини се към разговора.";
-"generatedMessage.contactBlocked" = "- Да, но беше ритна.";
-"generatedMessage.contactReAdded" = "е добавен отново";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Изходящо обаждане";
 "generatedMessage.missedOutgoingCall" = "Пропуснато изходящо обаждане";
 "generatedMessage.missedIncomingCall" = "Пропуснато входящо обаждане";
 "generatedMessage.liveLocationSharing" = "Съвместно разпределение на местоположения";
-"generatedMessage.contactLeftConversation" = "лево";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Настройки на видео";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Осигуряване на видео ускорение";
 "generalSettings.fileTransfer" = "Прехвърляне на файлове";
 "generalSettings.locationSharing" = "Споделяне на местоположението";

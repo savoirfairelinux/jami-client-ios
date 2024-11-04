@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Kreu la sorbon";
-"swarmcreation.addADescription" = "Aldonu priskribon";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ignoru la amason";
+"swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "Lasu la konversacion";
 "swarm.chooseColor" = "Koloro";
 "swarm.typeOfSwarm" = "Tipo";
 "swarm.identifier" = "Identigilo";
-"swarm.about" = "Pri";
+"swarm.settings" = "Settings";
 "swarm.members" = "Anoj";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Privata sorbo";
-"swarm.adminInvitesOnly" = "Admin invitas nur";
-"swarm.invitesOnly" = "Privata sorbo";
-"swarm.publicChat" = "Publika sorbo";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Public group";
 "swarm.others" = "Aliaj";
 "swarm.member" = "Membro";
 "swarm.invited" = "Invitita";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Nekonata";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Ĉu vi certas, ke vi volas forlasi tiun sorbon?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Foriru";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Hieraŭ";
-"smartlist.results" = "Publika Direktorio";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Konversacioj";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "Nova kontakto";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Kontoj";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Nula trovaĵon";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Sen reta konekto";
 "smartlist.cellularAccess" = "Certigu ke la poŝtelefono estas permesita en viaj agordoj";
 "smartlist.accountsTitle" = "Kontoj";
-"smartlist.addAccountButton" = "+ Aldonu Konto";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "La elektita kontakto ne havas nombron";
 "smartlist.selectOneNumber" = "Elektu unu el la nombroj";
 "smartlist.invitations" = "Invitoj";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -293,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Uzan nomon: ne registrita";
 "accountPage.credentialsHeader" = "Konto detaloj";
 "accountPage.blockedContacts" = "Blokiĝintaj kontaktoj";
-"accountPage.unblockContact" = "Unblock";
+"accountPage.unblockContact" = "Malŝalti la blokon";
 "accountPage.proxyAddressAlert" = "Provizu proxy-adreson";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Proksimula adreso";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "La ŝarmo kreis";
-"generatedMessage.invitationReceived" = "estis invitita al ligi";
+"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "aliĝis al la konversacio";
 "generatedMessage.youJoined" = "Vi aliĝis al la konversacio.";
-"generatedMessage.contactBlocked" = "estis piedbatita";
-"generatedMessage.contactReAdded" = "estis aldonita";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Eliranta voko";
 "generatedMessage.missedOutgoingCall" = "Maltrafis forirantan telefonon";
 "generatedMessage.missedIncomingCall" = "Maltrafis envenantan telefonon";
 "generatedMessage.liveLocationSharing" = "Viva kunhavado de lokoj";
-"generatedMessage.contactLeftConversation" = "maldekstre";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Video-aj agordoj";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Akceli la videoakceleraĵon";
 "generalSettings.fileTransfer" = "Transdono de dosieroj";
 "generalSettings.locationSharing" = "Loka dividado";

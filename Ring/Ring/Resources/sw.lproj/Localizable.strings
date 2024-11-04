@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Unda kundi";
-"swarmcreation.addADescription" = "Ongeza maelezo";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Puuza umati";
+"swarm.muteConversation" = "Mazungumzo ya kimya";
 "swarm.leaveConversation" = "Acha mazungumzo";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Kitambulisho";
-"swarm.about" = "Kuhusu";
+"swarm.settings" = "Settings";
 "swarm.members" = "Wajumbe";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Wanyama wa kibinafsi";
-"swarm.adminInvitesOnly" = "Admin inauomba tu";
-"swarm.invitesOnly" = "Wanyama wa kibinafsi";
-"swarm.publicChat" = "Umma wa watu";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Kundi la kibinafsi (mwaliko mdogo)";
+"swarm.invitesOnly" = "Kundi la kibinafsi";
+"swarm.publicChat" = "Kikundi cha umma";
 "swarm.others" = "Wengine";
 "swarm.member" = "Mshiriki";
 "swarm.invited" = "Mwaliko";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Haijulikani";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Je, una uhakika unataka kuondoka kundi hili?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Ondoka";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Chagua mawasiliano";
 
 // Smartlist
 "smartlist.yesterday" = "Jana";
-"smartlist.results" = "Orodha ya Umma";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Orodha ya umma";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Mazungumzo";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Malipo";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Hakuna matokeo";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Hakuna uhusiano wa mtandao";
 "smartlist.cellularAccess" = "Hakikisha ufikiaji wa simu ni iliyotolewa katika mipangilio yako";
 "smartlist.accountsTitle" = "Malipo";
-"smartlist.addAccountButton" = "+ Ongeza Akaunti";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Wasilianaji waliochaguliwa hawana nambari yoyote";
 "smartlist.selectOneNumber" = "Chagua moja ya idadi";
 "smartlist.invitations" = "Maombi";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Kiwanda kilichoundwa";
-"generatedMessage.invitationReceived" = "alialikwa kujiunga";
+"generatedMessage.contactAdded" = "Mwaliko uliopokelewa";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "alijiunga na mazungumzo";
 "generatedMessage.youJoined" = "Wewe kujiunga na mazungumzo";
-"generatedMessage.contactBlocked" = "alipewa kick";
-"generatedMessage.contactReAdded" = "aliongezwa tena";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Kuondoka simu";
 "generatedMessage.missedOutgoingCall" = "Kupoteza wito wa nje";
 "generatedMessage.missedIncomingCall" = "Kupoteza simu ya ndani";
 "generatedMessage.liveLocationSharing" = "Kushiriki eneo la kuishi";
-"generatedMessage.contactLeftConversation" = "kushoto";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Mipangilio ya Video";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Kuwezesha video kuharakisha";
 "generalSettings.fileTransfer" = "Uhamisho wa faili";
 "generalSettings.locationSharing" = "Kushiriki eneo";

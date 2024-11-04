@@ -64,19 +64,19 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Саулыкны барлыкка китерегез";
-"swarmcreation.addADescription" = "Тәрҗемәсе";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Саулыкны санга сукма.";
+"swarm.muteConversation" = "Тыныч сөйләшү";
 "swarm.leaveConversation" = "Сөйләшүне калдырыгыз";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Идентификатор";
-"swarm.about" = "Бу хакта";
+"swarm.settings" = "Settings";
 "swarm.members" = "Депутатлар";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Шәхси төркем";
-"swarm.adminInvitesOnly" = "Администратор гына чакыра";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Шәхси төркем (кече чакырулар белән)";
 "swarm.invitesOnly" = "Шәхси төркем";
 "swarm.publicChat" = "Халык төркеме";
 "swarm.others" = "Башкалар";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Билгесез";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Сез бу җәмәгатьчелекне калдырырга телисез икәненә ышанасызмы?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Кит!";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Кичә";
-"smartlist.results" = "Халык күрсәткече";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Сөйләшүләр";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Хисаплар";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Нәтиҗәләр юк";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Авылыбыз юк";
 "smartlist.cellularAccess" = "Үз җайланмаларыгызда күчермәле телефонга керү рөхсәт ителгәнен тикшерегез";
 "smartlist.accountsTitle" = "Хисаплар";
-"smartlist.addAccountButton" = "+ Аккаунт өсти";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Сайланган контактның номеры юк";
 "smartlist.selectOneNumber" = "Саннардан берсен сайлагыз";
 "smartlist.invitations" = "Чакырулар";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Туганнар төркеме";
-"generatedMessage.invitationReceived" = "кушылырга чакырылды";
+"generatedMessage.contactAdded" = "Чакыру кабул ителгән";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "сөйләшүгә кушылды";
 "generatedMessage.youJoined" = "Син сөйләшүгә кушылдың.";
-"generatedMessage.contactBlocked" = "мине бәреп төшерделәр";
-"generatedMessage.contactReAdded" = "яңадан кушылды";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Чыгышлы чакыру";
 "generatedMessage.missedOutgoingCall" = "Чыгышны югалткан чакыру";
 "generatedMessage.missedIncomingCall" = "Килгән чакыруны югалту";
 "generatedMessage.liveLocationSharing" = "Тере урынны бүлешү";
-"generatedMessage.contactLeftConversation" = "сул";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Видеолар көйләү";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Видео тизләтүне кую";
 "generalSettings.fileTransfer" = "Файллар күчерү";
 "generalSettings.locationSharing" = "Мәйданны бүлешү";

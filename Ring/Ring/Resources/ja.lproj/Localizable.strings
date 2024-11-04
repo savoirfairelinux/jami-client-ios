@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "群れを作れ";
-"swarmcreation.addADescription" = "記述を追加する";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "群れを無視する";
+"swarm.muteConversation" = "会話をミュートする";
 "swarm.leaveConversation" = "話しをやめましょう";
 "swarm.chooseColor" = "カラー";
 "swarm.typeOfSwarm" = "種類";
 "swarm.identifier" = "識別子";
-"swarm.about" = "アプリについて";
+"swarm.settings" = "Settings";
 "swarm.members" = "要員";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "非公開の会合";
-"swarm.adminInvitesOnly" = "アドミニアム招待のみ";
-"swarm.invitesOnly" = "非公開の会合";
-"swarm.publicChat" = "公衆群";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "パブリックグループ";
 "swarm.others" = "他者";
 "swarm.member" = "メンバー";
 "swarm.invited" = "招待された";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "不明";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "この群れを離れたいのか?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "出て行こう";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "昨日";
-"smartlist.results" = "公開ディレクトリー";
-"smartlist.jamsResults" = "検索結果";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "会話";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "新しい連絡先";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "アカウント";
 "smartlist.invitationReceived" = "招待を受信しました";
 "smartlist.noResults" = "検索結果はありません";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "ネットワーク接続がありません";
 "smartlist.cellularAccess" = "設定から写真へのアクセスが許可されていることを確認してください";
 "smartlist.accountsTitle" = "アカウント";
-"smartlist.addAccountButton" = "+ アカウントを追加";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "この連絡先には番号が登録されていません";
 "smartlist.selectOneNumber" = "番号のうちの1つを選択";
 "smartlist.invitations" = "招待";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "新規メッセージ";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "群れが生まれました";
-"generatedMessage.invitationReceived" = "加入するよう招待されました";
+"generatedMessage.contactAdded" = "招待を受信しました";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "話を参加した";
 "generatedMessage.youJoined" = "話を聞いてくれた";
-"generatedMessage.contactBlocked" = "蹴られた";
-"generatedMessage.contactReAdded" = "追加されました";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "発信";
 "generatedMessage.missedOutgoingCall" = "不在発信";
 "generatedMessage.missedIncomingCall" = "不在着信";
 "generatedMessage.liveLocationSharing" = "リアルタイムでの位置共有";
-"generatedMessage.contactLeftConversation" = "左";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "ビデオ設定";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "ビデオ加速を有効にする";
 "generalSettings.fileTransfer" = "ファイル転送";
 "generalSettings.locationSharing" = "場所共有";

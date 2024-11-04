@@ -64,20 +64,20 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Cerca contatto…";
-"swarmcreation.createTheSwarm" = "Crea il gruppo";
-"swarmcreation.addADescription" = "Aggiungi una descrizione";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ignora il gruppo";
+"swarm.muteConversation" = "Disattiva le notifiche";
 "swarm.leaveConversation" = "Lascia la conversazione";
 "swarm.chooseColor" = "Colore";
 "swarm.typeOfSwarm" = "Tipo";
 "swarm.identifier" = "Identificatore";
-"swarm.about" = "Info";
+"swarm.settings" = "Settings";
 "swarm.members" = "Membri";
 "swarm.addDescription" = "Aggiungi descrizione";
-"swarm.oneToOne" = "Gruppo privato";
-"swarm.adminInvitesOnly" = "Solo invitati dall'amministratore";
-"swarm.invitesOnly" = "Gruppo privato";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
 "swarm.publicChat" = "Gruppo pubblico";
 "swarm.others" = "Altri";
 "swarm.member" = "Membro";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Bloccato";
 "swarm.unknown" = "Sconosciuto";
 "swarm.inviteMembers" = "Invita membri";
-"swarm.confirmLeaveSwarm" = "Sei sicuro di voler lasciare questo gruppo?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Lascia";
-"swarm.newSwarm" = "Nuovo gruppo";
-"swarm.namePlaceholder" = "Nome del gruppo";
-"swarm.explanationText" = "Puoi invitare membri in qualsiasi momento dopo la creazione del gruppo";
-"swarm.customizeProfile" = "Personalizza il profilo del gruppo";
-"swarm.changePicture" = "Cambia la foto del gruppo";
-"swarm.customize" = "Personalizza gruppo";
-"swarm.selectContacts" = "Seleziona contatti";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Ieri";
-"smartlist.results" = "Elenco pubblico";
-"smartlist.jamsResults" = "Risultati ricerca";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Conversazioni";
 "smartlist.noConversationsFound" = "Nessuna conversazione corrisponde";
-"smartlist.newContact" = "Nuovo contatto";
-"smartlist.newSwarm" = "Nuovo gruppo";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Crea un nuovo gruppo";
 "smartlist.accounts" = "Account";
 "smartlist.invitationReceived" = "Inviti ricevuti";
 "smartlist.noResults" = "Nessun risultato";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Nessuna connessione di rete";
 "smartlist.cellularAccess" = "Assicurati che l'accesso alla rete sia consentito";
 "smartlist.accountsTitle" = "Account";
-"smartlist.addAccountButton" = "+ Aggiungi account";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Il contatto selezionato non ha nessun numero";
 "smartlist.selectOneNumber" = "Seleziona uno dei numeri";
 "smartlist.invitations" = "Inviti";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "Hai ricevuto un invito";
-"generatedMessage.swarmCreated" = "Gruppo creato";
-"generatedMessage.invitationReceived" = "è stato invitato a partecipare";
+"generatedMessage.contactAdded" = "Invito ricevuto";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "partecipa alla conversazione";
 "generatedMessage.youJoined" = "Partecipi alla conversazione";
-"generatedMessage.contactBlocked" = "è stato espulso";
-"generatedMessage.contactReAdded" = "è stato riammesso";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Chiamata in uscita";
 "generatedMessage.missedOutgoingCall" = "Chiamata in uscita persa";
 "generatedMessage.missedIncomingCall" = "Chiamata in arrivo persa";
 "generatedMessage.liveLocationSharing" = "Condivisione della posizione in diretta";
-"generatedMessage.contactLeftConversation" = "è uscito";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Impostazioni video";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Attiva l'accelerazione video";
 "generalSettings.fileTransfer" = "Trasferimento file";
 "generalSettings.locationSharing" = "Condivisione della posizione";

@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Sukurkite sraudą";
-"swarmcreation.addADescription" = "Pridėti aprašą";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ignoruokite sraudą";
+"swarm.muteConversation" = "Mutu pokalbis";
 "swarm.leaveConversation" = "Palikite pokalbį";
 "swarm.chooseColor" = "Spalva";
 "swarm.typeOfSwarm" = "Tipas";
 "swarm.identifier" = "Identifikavimo ženklas";
-"swarm.about" = "Apie";
+"swarm.settings" = "Settings";
 "swarm.members" = "Parlamento nariai";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Privati sparnukai";
-"swarm.adminInvitesOnly" = "Admin kviečia tik";
-"swarm.invitesOnly" = "Privati sparnukai";
-"swarm.publicChat" = "Visuomenė srauta";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Vieša grupė";
 "swarm.others" = "Kiti";
 "swarm.member" = "Žmogaus teisių";
 "swarm.invited" = "Pakviesti";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Nežinomas";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Ar tikrai nori palikti šį sraudą?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Išvykite.";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Vakar";
-"smartlist.results" = "Visuomenė direktorija";
-"smartlist.jamsResults" = "Paieškos rezultatas";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Pokalbiai";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "Naujas adresatas";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Paskyros";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Jokių rezultatų";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Nėra tinklo ryšio";
 "smartlist.cellularAccess" = "Įsitikinkite, kad jūsų nustatymuose yra suteiktas mobiliojo ryšio prieiga";
 "smartlist.accountsTitle" = "Paskyros";
-"smartlist.addAccountButton" = "+ Pridėti paskyrą";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Pasirinktas adresatas neturi numerio";
 "smartlist.selectOneNumber" = "Pasirinkite vieną iš numerių";
 "smartlist.invitations" = "Pakvietimai";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "Nauja žinutė";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Skaitė sukurta";
-"generatedMessage.invitationReceived" = "buvo pakviestas prisijungti";
+"generatedMessage.contactAdded" = "Gautas pakvietimas";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "prisijungė prie pokalbio";
 "generatedMessage.youJoined" = "Tu prisijungėte prie pokalbio.";
-"generatedMessage.contactBlocked" = "buvo iššaudytas";
-"generatedMessage.contactReAdded" = "buvo pridėta";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Išsiunčiamasis skambutis";
 "generatedMessage.missedOutgoingCall" = "Praleistas išvykęs paskyras";
 "generatedMessage.missedIncomingCall" = "Praleistas gaunamasis skambutis";
 "generatedMessage.liveLocationSharing" = "Gyvi vietos pasidalijimas";
-"generatedMessage.contactLeftConversation" = "kairėje";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Vaizdo nustatymai";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Įjungti vaizdo spartinimą";
 "generalSettings.fileTransfer" = "Failų persiuntimas";
 "generalSettings.locationSharing" = "Vietos pasidalijimas";

@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Mepụta ìgwè mmadụ ahụ";
-"swarmcreation.addADescription" = "Tinye nkọwa";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Echefula ìgwè mmadụ ahụ";
+"swarm.muteConversation" = "Mkparịta ụka nkịtị";
 "swarm.leaveConversation" = "Hapụ mkparịta ụka ahụ";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Ihe Nkọwapụta";
-"swarm.about" = "Banyere";
+"swarm.settings" = "Settings";
 "swarm.members" = "Ndị otu";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Ndị mmadụ na-akpa ókè";
-"swarm.adminInvitesOnly" = "Admin na-akpọ naanị";
-"swarm.invitesOnly" = "Ndị mmadụ na-akpa ókè";
-"swarm.publicChat" = "Ndị mmadụ na-akpa ókè";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Ndị otu ọha";
 "swarm.others" = "Ndị ọzọ";
 "swarm.member" = "Onye so na ya";
 "swarm.invited" = "A Kpọọrọ Ha";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "A maghị";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Ì ji n'aka na ị chọrọ ịhapụ ìgwè a?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Hapụ ya";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "N'ụbọchị gara aga";
-"smartlist.results" = "Akwụkwọ ndekọ ọha";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Mkparịta ụka";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Ihe ndekọ";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Enweghị nsonaazụ";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Enweghị njikọ netwọk";
 "smartlist.cellularAccess" = "Jide n'aka na e nyere ohere ịnweta ekwentị na ntọala gị";
 "smartlist.accountsTitle" = "Ihe ndekọ";
-"smartlist.addAccountButton" = "+ Tinye Akaụntụ";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "N'ime kọntaktị a họọrọ enweghị nọmba ọ bụla";
 "smartlist.selectOneNumber" = "Họrọ otu n'ime nọmba";
 "smartlist.invitations" = "Akwụkwọ ịkpọ òkù";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "A na-emepụta ụyọkọ";
-"generatedMessage.invitationReceived" = "a kpọrọ ya ka o soro";
+"generatedMessage.contactAdded" = "Òkù a kpọrọ";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "sonyeere mkparịta ụka ahụ";
 "generatedMessage.youJoined" = "Ị sonyeere mkparịta ụka ahụ";
-"generatedMessage.contactBlocked" = "a kụrụ ya";
-"generatedMessage.contactReAdded" = "e gbakwunyere ya ọzọ";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "N'imepụta oku";
 "generatedMessage.missedOutgoingCall" = "Ọ dịghị onye na-akpọ gị";
 "generatedMessage.missedIncomingCall" = "Ọ dịghị onye na-akpọ gị";
 "generatedMessage.liveLocationSharing" = "Ịkekọrịta ọnọdụ ndụ";
-"generatedMessage.contactLeftConversation" = "aka ekpe";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Ntọala nke Ihe Nlereanya";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Gbaa ọsọ ọsọ vidiyo";
 "generalSettings.fileTransfer" = "Nyefe faịlụ";
 "generalSettings.locationSharing" = "Ịkekọrịta ebe";

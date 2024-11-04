@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "ممباوا ڤڠاجرن";
-"swarmcreation.addADescription" = "مڠهادڤن ڤرسمڤڠن";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "تيدق ممڤوڽاءي ڤڠاجرن";
+"swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "ترك ڤڠاجرن";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "ڤڠڬونا";
-"swarm.about" = "دري ڤڠاجرن";
+"swarm.settings" = "Settings";
 "swarm.members" = "ڤڠڬونا";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "ڤڠاجرن ڤريۏيدو";
-"swarm.adminInvitesOnly" = "منتظم مڠيڠتكن سهيڠڬ";
-"swarm.invitesOnly" = "ڤڠاجرن ڤريۏيدو";
-"swarm.publicChat" = "ڤڠاجرن ڤولاو";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Public group";
 "swarm.others" = "يڠ لاين";
 "swarm.member" = "ڤڠڬونا";
 "swarm.invited" = "دجالنكن";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "نامعلوم";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "آيا مطمئني که ميخواي از اين سور ترک کني؟";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "برلالو";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "ديري";
-"smartlist.results" = "ڤڠاجرن ڤولاو";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "ڤڠاجرن";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "حسابن";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "تيدق ڤرلو";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "تيدق اد ڤڠاجرن نيتۏرك";
 "smartlist.cellularAccess" = "ڤرلو مڠمبيل ڤرلو دڤرلوكن دالم سيٽنگ";
 "smartlist.accountsTitle" = "حسابن";
-"smartlist.addAccountButton" = "+ مڠهادڤن حساب";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "ڤڠاجين يڠ دڤيليه تيدق برتيندقكن ايڠين";
 "smartlist.selectOneNumber" = "انتوق سياستن";
 "smartlist.invitations" = "ڤڠاجين";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "سڤرتي دڤرچايا?? ي";
-"generatedMessage.invitationReceived" = "دتاهن اونتوق مڠڬوناكن";
+"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "مڠمبيل ڤرساتوان";
 "generatedMessage.youJoined" = "تو اونتوق مڠاتاكن ڤڠاجرن";
-"generatedMessage.contactBlocked" = "دڤرچاي";
-"generatedMessage.contactReAdded" = "دڤرچايا?? ي";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "ڤڠاجين يڠ برمولا";
 "generatedMessage.missedOutgoingCall" = "ڤڠاجرن يڠ تله دڤرچايا?? ي";
 "generatedMessage.missedIncomingCall" = "ڤڠاجرن يڠ دڤرچايا?? ي";
 "generatedMessage.liveLocationSharing" = "ڤڠاجين لوكاسي";
-"generatedMessage.contactLeftConversation" = "ڤڠاجين";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "ڤڠاجرن ڤيديو";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "ممبنتو ڤرودوک ڤيديو";
 "generalSettings.fileTransfer" = "ڤرچاي ڤرچاي";
 "generalSettings.locationSharing" = "ڤڠاجرن لوكاسي";

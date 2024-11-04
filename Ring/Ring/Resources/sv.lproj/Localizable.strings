@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "Skapa en svärm";
-"swarmcreation.addADescription" = "Lägg till en beskrivning";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ignorera swarmen";
+"swarm.muteConversation" = "- Ett stillsamt samtal.";
 "swarm.leaveConversation" = "Lämna samtalet";
 "swarm.chooseColor" = "Färg";
 "swarm.typeOfSwarm" = "Typ";
 "swarm.identifier" = "identifierare";
-"swarm.about" = "Om";
+"swarm.settings" = "Settings";
 "swarm.members" = "Medlemmar";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Privat \"swarm\"";
-"swarm.adminInvitesOnly" = "Admin inbjuder bara";
-"swarm.invitesOnly" = "Privat \"swarm\"";
-"swarm.publicChat" = "Övergripande swarm";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Privat grupp (endast inbjudna)";
+"swarm.invitesOnly" = "Privat grupp ";
+"swarm.publicChat" = "Öppen grupp ";
 "swarm.others" = "Andra";
 "swarm.member" = "Medlem";
 "swarm.invited" = "Inbjudna";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Okänd";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "Är du säker på att du vill lämna den här svärmen?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "- Gå.";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Välj kontakter";
 
 // Smartlist
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Offentlig mapp";
-"smartlist.jamsResults" = "Sökresultat";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Konversationer";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "Ny kontakt";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Konton";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Inget resultat";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Ingen nätverksanslutning";
 "smartlist.cellularAccess" = "Tillse att mobilnätsåtkomst tillåts i dina inställningar";
 "smartlist.accountsTitle" = "Konton";
-"smartlist.addAccountButton" = "+ Lägg till konto";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Den valda kontakten har inget nummer";
 "smartlist.selectOneNumber" = "Välj ett nummer";
 "smartlist.invitations" = "Inbjudningar";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "Nytt meddelande";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Svärm skapad ";
-"generatedMessage.invitationReceived" = "blev inbjuden att ansluta sig";
+"generatedMessage.contactAdded" = "Inbjudan mottagen";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "- Jag gick med i samtalet.";
 "generatedMessage.youJoined" = "Du gick med i samtalet.";
-"generatedMessage.contactBlocked" = "- Jag fick sparken.";
-"generatedMessage.contactReAdded" = "lagdes till";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Utgående samtal";
 "generatedMessage.missedOutgoingCall" = "Missat utgående samtal";
 "generatedMessage.missedIncomingCall" = "Missat inkommande samtal";
 "generatedMessage.liveLocationSharing" = "Live platsdelning ";
-"generatedMessage.contactLeftConversation" = "vänster";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Videonställningar";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Aktivera videoacceleration";
 "generalSettings.fileTransfer" = "Filöverföring";
 "generalSettings.locationSharing" = "Platsdelning";

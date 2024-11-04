@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = "கொட்டையை உருவாக்குங்கள்";
-"swarmcreation.addADescription" = "ஒரு விவரத்தை சேர்க்கவும்";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "கொடியை புறக்கணிக்கவும்";
+"swarm.muteConversation" = "மௌனமான உரையாடல்";
 "swarm.leaveConversation" = "உரையாடலை விட்டுவிடுங்கள்";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "அடையாளங்காட்டி";
-"swarm.about" = "பற்றி";
+"swarm.settings" = "Settings";
 "swarm.members" = "உறுப்பினர்";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "தனியார் கும்பல்";
-"swarm.adminInvitesOnly" = "நிர்வாகி அழைப்பு மட்டும்";
-"swarm.invitesOnly" = "தனியார் கும்பல்";
-"swarm.publicChat" = "பொதுமக்கள் கூட்டம்";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "தனியார் குழு (குறைந்த அழைப்பு)";
+"swarm.invitesOnly" = "தனியார் குழு";
+"swarm.publicChat" = "பொது குழு";
 "swarm.others" = "மற்றவை";
 "swarm.member" = "உறுப்பினர்";
 "swarm.invited" = "அழைக்கப்பட்டவர்";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "அறியப்படாதது";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "நீங்கள் இந்த குளத்தில் இருந்து வெளியேற வேண்டும் என்று உறுதியாக இருக்கிறீர்களா?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "வெளியேறு";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "தொடர்புகளைத் தேர்ந்தெடுக்கவும்";
 
 // Smartlist
 "smartlist.yesterday" = "நேற்று";
 "smartlist.results" = "பொதுப் பட்டியல்";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "உரையாடல்கள்";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "கணக்குகள்";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "முடிவுகள் இல்லை";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "நெட்வொர்க் இணைப்பு இல்லை";
 "smartlist.cellularAccess" = "உங்கள் அமைப்புகளில் செல்போன் அணுகல் வழங்கப்பட்டிருப்பதை உறுதி செய்யவும்";
 "smartlist.accountsTitle" = "கணக்குகள்";
-"smartlist.addAccountButton" = "+ கணக்கை சேர்க்கவும்";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "தேர்ந்தெடுக்கப்பட்ட தொடர்பு எண் இல்லை";
 "smartlist.selectOneNumber" = "எண்களில் ஒன்றைத் தேர்ந்தெடுக்கவும்";
 "smartlist.invitations" = "அழைப்பிதழ்கள்";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "ஒரு குவியல் உருவாக்கப்பட்டது";
-"generatedMessage.invitationReceived" = "சேர அழைக்கப்பட்டார்";
+"generatedMessage.contactAdded" = "அழைப்பு";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "உரையாடலில் சேர்ந்து";
 "generatedMessage.youJoined" = "நீங்கள் உரையாடலில் சேர்ந்து";
-"generatedMessage.contactBlocked" = "அடித்த";
-"generatedMessage.contactReAdded" = "மீண்டும் சேர்க்கப்பட்டது";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "வெளியேறும் அழைப்பு";
 "generatedMessage.missedOutgoingCall" = "தொலைபேசி அழைப்பு தவறியது";
 "generatedMessage.missedIncomingCall" = "தவறவிட்ட அழைப்பு";
 "generatedMessage.liveLocationSharing" = "நேரடி இருப்பிட பகிர்வு";
-"generatedMessage.contactLeftConversation" = "இடது";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "வீடியோ அமைப்புகள்";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "வீடியோ துரிதப்படுத்தலை இயக்கு";
 "generalSettings.fileTransfer" = "கோப்பு பரிமாற்றம்";
 "generalSettings.locationSharing" = "இருப்பிட பகிர்வு";

@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.createTheSwarm" = ". جمع را بساز";
-"swarmcreation.addADescription" = "توضیحی اضافه کنید";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "به گروه توجه نکن";
+"swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "مکالمه رو ترک کن";
 "swarm.chooseColor" = "رنگ";
 "swarm.typeOfSwarm" = "نوع";
 "swarm.identifier" = "شناسه";
-"swarm.about" = "درباره";
+"swarm.settings" = "Settings";
 "swarm.members" = "اعضا";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Swarm خصوصی";
-"swarm.adminInvitesOnly" = "فقط منتظم دعوت می کند";
-"swarm.invitesOnly" = "Swarm خصوصی";
-"swarm.publicChat" = "سواد عمومی";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Public group";
 "swarm.others" = "سایر";
 "swarm.member" = "عضو";
 "swarm.invited" = "دعوت شده";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "ناشناخته";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveSwarm" = "مطمئنی می خوای از این سور خارج بشی؟";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "از اينجا بريد";
-"swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm name";
-"swarm.explanationText" = "Members can be invited at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "دیروز";
-"smartlist.results" = "دایرکتوری عمومی";
-"smartlist.jamsResults" = "نتیجه جستجو";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "گفتگو‌ها";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "مخاطب نو";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "حساب‌ها";
 "smartlist.invitationReceived" = "دعوت‌نامه‌های دریافت شد";
 "smartlist.noResults" = "بدون نتیجه";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "قطع ارتباط با شبکه";
 "smartlist.cellularAccess" = "اطمینان حاصل کنید که دسترسی به تلفن همراه در تنظیمات شما اعمال شده است";
 "smartlist.accountsTitle" = "حساب‌ها";
-"smartlist.addAccountButton" = "افزودن حساب...";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "مخاطب انتخاب‌شده شماره‌ای ندارد";
 "smartlist.selectOneNumber" = "یکی از شماره‌ها را انتخاب کنید";
 "smartlist.invitations" = "دعوت ها";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "الان نه";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.newMessage" = "پیام جدید";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "سوق ایجاد شده";
-"generatedMessage.invitationReceived" = "دعوت شد که به";
+"generatedMessage.contactAdded" = "دعوت‌نامه دریافت شد";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "به حرف زدن پیوست";
 "generatedMessage.youJoined" = "تو هم به اين مکالمه پیوستي";
-"generatedMessage.contactBlocked" = "و به دستش خورد";
-"generatedMessage.contactReAdded" = "دوباره اضافه شد";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "تماس خروجی";
 "generatedMessage.missedOutgoingCall" = "تماس خروجی بی پاسخ";
 "generatedMessage.missedIncomingCall" = "تماس ورودی بی پاسخ";
 "generatedMessage.liveLocationSharing" = "هم‌رسانی زنده مکان";
-"generatedMessage.contactLeftConversation" = "چپ";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "تنظیمات ویدیو";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "فعال‌سازی شتاب‌دهی ویدیو";
 "generalSettings.fileTransfer" = "انتقال فایل";
 "generalSettings.locationSharing" = "اشتراک گذاری مکان";

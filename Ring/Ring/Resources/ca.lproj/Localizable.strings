@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Buscar un contacte...";
-"swarmcreation.createTheSwarm" = "Crea el enjame";
-"swarmcreation.addADescription" = "Ajuda una descripció";
+"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.ignoreSwarm" = "Ignora l'esgarre";
+"swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "Deixar la conversa";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Tipus";
 "swarm.identifier" = "Identificador";
-"swarm.about" = "Quant a";
+"swarm.settings" = "Settings";
 "swarm.members" = "Membres";
 "swarm.addDescription" = "Afegir descripció";
-"swarm.oneToOne" = "Swarm privat";
-"swarm.adminInvitesOnly" = "Admins només convida";
-"swarm.invitesOnly" = "Swarm privat";
-"swarm.publicChat" = "Envair públic";
+"swarm.oneToOne" = "1:1";
+"swarm.adminInvitesOnly" = "Private group (restricted invites)";
+"swarm.invitesOnly" = "Private group";
+"swarm.publicChat" = "Public group";
 "swarm.others" = "Altres";
 "swarm.member" = "Membre";
 "swarm.invited" = "Invitats";
@@ -86,24 +86,24 @@
 "swarm.blocked" = "Bloquejat";
 "swarm.unknown" = "Desconegut";
 "swarm.inviteMembers" = "Convidar membres";
-"swarm.confirmLeaveSwarm" = "Tens la certeza que vols deixar aquest enjame?";
+"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Deixar";
-"swarm.newSwarm" = "Nou grup";
-"swarm.namePlaceholder" = "Nom del grup";
-"swarm.explanationText" = "Es poden convidar nous membres qualsevol moment un cop s'hagi creat el grup";
-"swarm.customizeProfile" = "Personalitzar el perfil del grup";
-"swarm.changePicture" = "Canviar la imatge del grup";
-"swarm.customize" = "Personalitzar grup";
-"swarm.selectContacts" = "Seleccionar els contactes";
+"swarm.newGroup" = "Create new group";
+"swarm.namePlaceholder" = "Group name";
+"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.customizeProfile" = "Customize group profile";
+"swarm.changePicture" = "Change group picture";
+"swarm.customize" = "Customize group";
+"swarm.selectContacts" = "Select contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Ahir";
-"smartlist.results" = "Directori públic";
-"smartlist.jamsResults" = "Resultat de cerca";
+"smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Converses";
 "smartlist.noConversationsFound" = "Cap conversa coincideix amb la cerca";
-"smartlist.newContact" = "Nou contacte";
-"smartlist.newSwarm" = "Nou grup";
+"smartlist.newContact" = "New contact";
+"smartlist.newGroup" = "Create new group";
 "smartlist.accounts" = "Comptes";
 "smartlist.invitationReceived" = "Invitacions rebudes";
 "smartlist.noResults" = "Sense resultats";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "No hi ha connexió a la xarxa";
 "smartlist.cellularAccess" = "Assegureu-vos que l’accés al mòbil s’atorga a la vostra configuració";
 "smartlist.accountsTitle" = "Comptes";
-"smartlist.addAccountButton" = "+ Agrega compte";
+"smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "El contacte seleccionat no té cap número";
 "smartlist.selectOneNumber" = "Seleccioneu un dels números";
 "smartlist.invitations" = "Invitacions";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Ara no";
 "smartlist.donationExplanation" = "Si gaudeixes utilitzant el Jami i creus en la nostre missió, faries una donació?";
 "smartlist.inSynchronization" = "conversa en sincronització";
-"smartlist.newMessage" = "Nou missatge";
+"smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Afegeix als contactes";
@@ -293,7 +293,7 @@
 "accountPage.usernameNotRegistered" = "Nom d'usuari: no està registrat";
 "accountPage.credentialsHeader" = "Detalls de compte";
 "accountPage.blockedContacts" = "Contactes bloquejats";
-"accountPage.unblockContact" = "Unblock";
+"accountPage.unblockContact" = "Desbloqeja";
 "accountPage.proxyAddressAlert" = "Enviar l'adreça proxy";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Direcció de proxy";
@@ -466,21 +466,21 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Creat un amas";
-"generatedMessage.invitationReceived" = "va ser convidat a unir-se";
+"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "s'ha unit a la conversa";
 "generatedMessage.youJoined" = "Has anat a la conversa";
-"generatedMessage.contactBlocked" = "va ser patejat";
-"generatedMessage.contactReAdded" = "va ser afegit de nou";
+"generatedMessage.contactBlocked" = "was kicked from the conversation";
+"generatedMessage.contactUnblocked" = "rejoined the conversation";
 "generatedMessage.outgoingCall" = "Trucada sortint";
 "generatedMessage.missedOutgoingCall" = "Trucada sortint perduda";
 "generatedMessage.missedIncomingCall" = "Trucada entrant perduda";
 "generatedMessage.liveLocationSharing" = "Partage de localització en directe";
-"generatedMessage.contactLeftConversation" = "esquerra";
+"generatedMessage.contactLeftConversation" = "left the conversation";
 
 // General Settings
-"generalSettings.videoSettings" = "Configuracions de vídeo";
+"generalSettings.videoSettings" = "Video settings";
 "generalSettings.videoAcceleration" = "Abilitar l'acceleració de vídeo";
 "generalSettings.fileTransfer" = "Transferència de fitxers";
 "generalSettings.locationSharing" = "Partil·lació de localització";
