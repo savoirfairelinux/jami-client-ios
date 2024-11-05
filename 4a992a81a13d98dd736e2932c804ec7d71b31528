@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "272d5b70_514cbdd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-11-05T06:23:10Z",
+      "side": 1,
+      "message": "https://git.jami.net/savoirfairelinux/jami-client-ios/-/issues/382#note_51919",
+      "revId": "4a992a81a13d98dd736e2932c804ec7d71b31528",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
