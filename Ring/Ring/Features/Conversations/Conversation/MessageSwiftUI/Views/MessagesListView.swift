@@ -174,16 +174,16 @@ struct MessagesListView: View {
                     ForEach(model.messagesModels) { message in
                         createMessageRowView(for: message)
                             .id(message.id)
+                            // lazy loading
+                            .onAppear(perform: {
+                                if message == self.model.messagesModels.last {
+                                    DispatchQueue.global(qos: .background).async {
+                                        self.model.loadMore()
+                                    }
+                                }
+                            })
                     }
                     .flipped()
-                    // load more
-                    Text("")
-                        .onAppear(perform: {
-                            DispatchQueue.global(qos: .background)
-                                .asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 10)) {
-                                    self.model.loadMore()
-                                }
-                        })
                 }
                 .listRowBackground(Color.clear)
                 .onReceive(model.$scrollToId, perform: { (scrollToId) in

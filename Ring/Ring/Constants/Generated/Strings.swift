@@ -932,8 +932,8 @@ internal enum L10n {
     internal static let namePlaceholder = L10n.tr("Localizable", "swarm.namePlaceholder", fallback: "Group name")
     /// Create new group
     internal static let newGroup = L10n.tr("Localizable", "swarm.newGroup", fallback: "Create new group")
-    /// 1:1
-    internal static let oneToOne = L10n.tr("Localizable", "swarm.oneToOne", fallback: "1:1")
+    /// Private
+    internal static let oneToOne = L10n.tr("Localizable", "swarm.oneToOne", fallback: "Private")
     /// Others
     internal static let others = L10n.tr("Localizable", "swarm.others", fallback: "Others")
     /// Public group
