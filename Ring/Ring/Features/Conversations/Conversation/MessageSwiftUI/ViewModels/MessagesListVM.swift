@@ -452,10 +452,9 @@ class MessagesListVM: ObservableObject {
                     self.messagesModels = [MessageContainerModel]()
                     return
                 }
-                var insertionCount: Int = 0
-                for newMessage in messages.messages where self.insert(newMessage: newMessage, fromHistory: messages.fromHistory) == true {
-                    insertionCount += 1
-                }
+                let insertionCount: Int = self.insert(messages: messages.messages,
+                                                      git status
+                                                      fromHistory: messages.fromHistory)
                 if insertionCount == 0 {
                     return
                 }
@@ -514,49 +513,89 @@ class MessagesListVM: ObservableObject {
         }
     }
 
-    private func insert(newMessage: MessageModel, fromHistory: Bool) -> Bool {
+    private func insert(messages: [MessageModel], fromHistory: Bool) -> Int {
         guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
-            return false
-        }
-        if self.messagesModels.contains(where: { messageModel in
-            messageModel.message.id == newMessage.id
-        }) { return false }
-        let isHistory = newMessage.isReply()
-        let container =
-            MessageContainerModel(message: newMessage,
-                                  contextMenuState: self.contextStateSubject,
-                                  isHistory: isHistory,
-                                  localJamiId: localJamiId, preferencesColor: self.conversation.preferences.getColor())
-        self.subscribeMessage(container: container)
-        if fromHistory {
-            self.messagesModels.append(container)
-        } else {
-            self.messagesModels.insert(container, at: 0)
-        }
-        self.updateLastRead(message: container)
-        self.updateLastDelivered(message: container)
-        if newMessage.isReply() {
-            self.receiveReply(newMessage: container, fromHistory: fromHistory)
+            return 0
         }
 
-        if self.messagesModels.count > 1 && fromHistory {
-            return true
+        // Filter out messages that already exist in messagesModels to avoid duplicates
+        let newMessages = messages.filter { newMessage in
+            !self.messagesModels.contains(where: { messageModel in
+                messageModel.message.id == newMessage.id
+            })
         }
-        lastMessageDisposeBag = DisposeBag()
-        self.lastMessageDate.accept(newMessage.receivedDate.conversationTimestamp())
-        if newMessage.type != .contact {
-            self.lastMessage.accept(newMessage.content)
+
+        let newContainers = newMessages.map { newMessage -> MessageContainerModel in
+
+            let isHistory = newMessage.isReply()
+            let container = MessageContainerModel(
+                message: newMessage,
+                contextMenuState: self.contextStateSubject,
+                isHistory: isHistory,
+                localJamiId: localJamiId,
+                preferencesColor: self.conversation.preferences.getColor()
+            )
+
+            self.subscribeMessage(container: container)
+            self.updateLastRead(message: container)
+            self.updateLastDelivered(message: container)
+
+            if newMessage.isReply() {
+                self.receiveReply(newMessage: container, fromHistory: fromHistory)
+            }
+
+            return container
+        }
+
+        if fromHistory {
+            self.messagesModels.append(contentsOf: newContainers)
         } else {
-            container.contactViewModel.observableContent
-                .startWith( container.contactViewModel.observableContent.value)
+            self.messagesModels.insert(contentsOf: newContainers, at: 0)
+        }
+
+        updateLastMessageIfNeeded(fromHistory: fromHistory,
+                                  newContainers: newContainers)
+
+        return newContainers.count
+    }
+
+    private func updateLastMessageIfNeeded(fromHistory: Bool, newContainers: [MessageContainerModel]) {
+        /*
+         Update the last message details if necessary. We do not need to update
+         the last message if we are loading older messages, unless it is the
+         initial loading of the conversation.
+
+         Since `newContainers` was just added, we should check if `messagesModels`
+         contains messages other than those in `newContainers`.
+         If so, simply return.
+         */
+        guard !(self.messagesModels.count > newContainers.count && fromHistory) else {
+            return
+        }
+
+        /*
+         Order is reversed when loading history.
+         When we receive a new message, it only contains one message.
+         */
+        guard let lastMessageContainer = newContainers.first else { return }
+
+        // Reset the subscription for the last message.
+        lastMessageDisposeBag = DisposeBag()
+
+        let lastMessage = lastMessageContainer.message
+        self.lastMessageDate.accept(lastMessage.receivedDate.conversationTimestamp())
+
+        if lastMessage.type != .contact {
+            self.lastMessage.accept(lastMessage.content)
+        } else {
+            // For contact messages, update when the display name is available.
+            lastMessageContainer.contactViewModel.observableContent
+                .startWith(lastMessageContainer.contactViewModel.observableContent.value)
                 .subscribe { [weak self] content in
-                    guard let self = self else { return }
-                    self.lastMessage.accept(content)
-                } onError: { _ in
+                    self?.lastMessage.accept(content)
                 }
                 .disposed(by: lastMessageDisposeBag)
         }
-        return true
     }
 
     func getLastReadIndices() -> [Int]? {
@@ -606,10 +645,7 @@ class MessagesListVM: ObservableObject {
     }
 
     func cleanMessages() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.messagesModels = [MessageContainerModel]()
-        }
+        self.messagesModels = [MessageContainerModel]()
     }
 
     func updateBlockedStatus(blocked: Bool) {
