@@ -193,51 +193,52 @@ extension ContactsService: ContactsAdapterDelegate {
 
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool) {
         // update contact status
+        var conversationId: String = ""
         if let contact = self.contact(withUri: uri) {
             if contact.confirmed != confirmed {
                 contact.confirmed = confirmed
             }
-        }
-        /// sync contacts with daemon contacts
-        else {
-            let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: accountId)
-            // Serialize them
-            if let contacts = contactsDictionaries?.map({ contactDict in
-                return ContactModel(withDictionary: contactDict)
-            }) {
-                for contact in contacts where self.contacts.value.firstIndex(of: contact) == nil {
-                    var values = self.contacts.value
-                    values.append(contact)
-                    self.contacts.accept(values)
-                }
+            conversationId = contact.conversationId
+        } else {
+            // add new contact
+            if let contactDict = self.contactsAdapter.contactDetails(withURI: uri, accountId: accountId) {
+                let contact = ContactModel(withDictionary: contactDict)
+                conversationId = contact.conversationId
+                var values = self.contacts.value
+                values.append(contact)
+                self.contacts.accept(values)
             }
         }
         let serviceEventType: ServiceEventType = .contactAdded
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.accountId, value: accountId)
         serviceEvent.addEventInput(.peerUri, value: uri)
+        serviceEvent.addEventInput(.conversationId, value: conversationId)
         self.responseStream.onNext(serviceEvent)
         log.debug("Contact added :\(uri)")
     }
 
     func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool) {
-        guard let contactToRemove = self.contacts.value.filter({ $0.hash == uri }).first else {
-            /// if contact was banned we need to add it to the contact list to keep track of banned contacts
-            if banned, let contactDetais = self.contactsAdapter.contactDetails(withURI: uri, accountId: accountId) {
-                let contact = ContactModel(withDictionary: contactDetais)
-                if self.contacts.value.firstIndex(of: contact) == nil {
-                    var values = self.contacts.value
-                    values.append(contact)
-                    self.contacts.accept(values)
-                }
-            }
-            return
+        var contactToRemove = self.contacts.value.first(where: { $0.hash == uri })
+
+        // If the contact is banned and not found, retrieve details and add it to track banned contacts
+        if contactToRemove == nil, banned, let contactDetails = self.contactsAdapter.contactDetails(withURI: uri, accountId: accountId) {
+            contactToRemove = ContactModel(withDictionary: contactDetails)
         }
+
+        guard let contactToRemove = contactToRemove else { return }
         contactToRemove.banned = banned
+
+        if !banned {
+            var values = self.contacts.value
+            values.removeAll { $0 == contactToRemove }
+            self.contacts.accept(values)
+        }
         let serviceEventType: ServiceEventType = .contactRemoved
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.accountId, value: accountId)
         serviceEvent.addEventInput(.peerUri, value: uri)
+        serviceEvent.addEventInput(.conversationId, value: contactToRemove.conversationId)
         self.responseStream.onNext(serviceEvent)
         log.debug("Contact removed :\(uri)")
     }
