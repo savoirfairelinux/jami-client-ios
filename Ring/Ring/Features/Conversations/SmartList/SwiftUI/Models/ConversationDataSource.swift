@@ -32,6 +32,7 @@ class ConversationDataSource: ObservableObject {
 
     var onNewConversationViewModelCreated: ((ConversationModel) -> Void)?
     var onConversationRestored: ((ConversationModel) -> Void)?
+    var getTemporaryConversation: (() -> ConversationViewModel?)?
 
     init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -91,6 +92,11 @@ class ConversationDataSource: ObservableObject {
             return restoredViewModel
         }
 
+        if let tempConversation = getTemporaryConversation?(), tempConversation.conversation.isCoreDialogMatch(conversation: conversationModel) {
+            tempConversation.conversation = conversationModel
+           return tempConversation
+        }
+
         let newViewModel = ConversationViewModel(with: injectionBag)
         newViewModel.conversation = conversationModel
         return newViewModel
@@ -126,6 +132,12 @@ class ConversationDataSource: ObservableObject {
                       account.id == accountId else { return }
 
                 self.restoreConversation(jamiId: peerUri, accountId: accountId)
+                if let conversation = self.conversationViewModels.filter({ $0.isCoreConversationWith(jamiId: peerUri)
+                }).first {
+//                    let convModel = conversation.conversation
+//                    conversation.conversation = convModel
+                    conversation.subscribePresenceServiceContactPresence()
+                }
             })
             .disposed(by: disposeBag)
     }

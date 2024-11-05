@@ -543,7 +543,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 // MARK: Conversation didSet functions
 extension ConversationViewModel {
 
-    private func subscribePresenceServiceContactPresence() {
+    func subscribePresenceServiceContactPresence() {
         if !self.conversation.isDialog() {
             return
         }

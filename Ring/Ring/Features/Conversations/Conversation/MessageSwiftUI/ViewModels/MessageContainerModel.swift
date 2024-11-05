@@ -25,7 +25,7 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class MessageContainerModel: Identifiable {
+class MessageContainerModel: Identifiable, Equatable {
     let id: String
     let messageContent: MessageContentVM
     let messageRow: MessageRowVM
@@ -153,5 +153,9 @@ class MessageContainerModel: Identifiable {
 
     func hasReactions() -> Bool {
         return !self.message.reactions.isEmpty
+    }
+
+    static func == (lhs: MessageContainerModel, rhs: MessageContainerModel) -> Bool {
+        return lhs.id == rhs.id
     }
 }

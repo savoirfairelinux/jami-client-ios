@@ -212,29 +212,34 @@ class ConversationsViewModel: ObservableObject {
     private func setupNewConversationHandler() {
         conversationsSource.onNewConversationViewModelCreated = { [weak self] conversationModel in
             guard let self = self else { return }
-            func updateConversation(_ existingConversation: inout ConversationViewModel, with model: ConversationModel) {
-                existingConversation.cleanMessages()
-                existingConversation.conversation.clearMessages()
-                existingConversation.conversation = model
-                self.conversationFromTemporaryCreated(conversation: model)
-                self.conversationsService.loadConversationMessages(
-                    conversationId: model.id,
-                    accountId: model.accountId,
-                    from: ""
-                )
-            }
+            self.conversationFromTemporaryCreated(conversation: conversationModel)
+//            func updateConversation(_ existingConversation: inout ConversationViewModel, with model: ConversationModel) {
+//                existingConversation.cleanMessages()
+//                existingConversation.conversation.clearMessages()
+//                existingConversation.conversation = model
+//                self.conversationFromTemporaryCreated(conversation: model)
+//                self.conversationsService.loadConversationMessages(
+//                    conversationId: model.id,
+//                    accountId: model.accountId,
+//                    from: ""
+//                )
+//            }
+//
+//            // Check if temporary conversation matches
+////            if var tempConversation = self.temporaryConversation,
+////               tempConversation.conversation == conversationModel || tempConversation.conversation.isCoreDialogMatch(conversation: conversationModel) {
+////                updateConversation(&tempConversation, with: conversationModel)
+////                return
+////            }
+//
+//            // Check if conversation matches any in jamsSearchResult
+//            if var jamsConversation = self.jamsSearchResult.first(where: { $0.conversation == conversationModel || $0.conversation.isCoreDialogMatch(conversation: conversationModel) }) {
+//                updateConversation(&jamsConversation, with: conversationModel)
+//            }
+        }
 
-            // Check if temporary conversation matches
-            if var tempConversation = self.temporaryConversation,
-               tempConversation.conversation == conversationModel || tempConversation.conversation.isCoreDialogMatch(conversation: conversationModel) {
-                updateConversation(&tempConversation, with: conversationModel)
-                return
-            }
-
-            // Check if conversation matches any in jamsSearchResult
-            if var jamsConversation = self.jamsSearchResult.first(where: { $0.conversation == conversationModel || $0.conversation.isCoreDialogMatch(conversation: conversationModel) }) {
-                updateConversation(&jamsConversation, with: conversationModel)
-            }
+        conversationsSource.getTemporaryConversation = { [weak self] in
+            return self?.temporaryConversation
         }
     }
 
