@@ -452,10 +452,10 @@ class MessagesListVM: ObservableObject {
                     self.messagesModels = [MessageContainerModel]()
                     return
                 }
-                var insertionCount: Int = 0
-                for newMessage in messages.messages where self.insert(newMessage: newMessage, fromHistory: messages.fromHistory) == true {
-                    insertionCount += 1
-                }
+                var insertionCount: Int = self.insert(messages: messages.messages, fromHistory: messages.fromHistory)
+//                for newMessage in messages.messages where self.insert(newMessage: newMessage, fromHistory: messages.fromHistory) == true {
+//                    insertionCount += 1
+//                }
                 if insertionCount == 0 {
                     return
                 }
@@ -512,6 +512,79 @@ class MessagesListVM: ObservableObject {
             self.coordinates = coordinates
             self.shouldShowMap = self.isAlreadySharingLocation() && !coordinates.isEmpty
         }
+    }
+
+    private func insert(messages: [MessageModel], fromHistory: Bool) -> Int {
+        guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
+            return 0
+        }
+
+        // Filter out messages that already exist in messagesModels to avoid duplicates
+        let newMessages = messages.filter { newMessage in
+            !self.messagesModels.contains(where: { messageModel in
+                messageModel.message.id == newMessage.id
+            })
+        }
+
+        // Transform new messages into MessageContainerModel instances
+        let newContainers = newMessages.map { newMessage -> MessageContainerModel in
+
+            let isHistory = newMessage.isReply()
+            let container = MessageContainerModel(
+                message: newMessage,
+                contextMenuState: self.contextStateSubject,
+                isHistory: isHistory,
+                localJamiId: localJamiId,
+                preferencesColor: self.conversation.preferences.getColor()
+            )
+
+            // Subscribe and update states for each container
+            self.subscribeMessage(container: container)
+            self.updateLastRead(message: container)
+            self.updateLastDelivered(message: container)
+
+            if newMessage.isReply() {
+                self.receiveReply(newMessage: container, fromHistory: fromHistory)
+            }
+
+            return container
+        }
+
+        // Append or insert the array of new containers into messagesModels
+        if fromHistory {
+            self.messagesModels.append(contentsOf: newContainers)
+        } else {
+            self.messagesModels.insert(contentsOf: newContainers, at: 0)
+        }
+
+        // Update last message details if necessary
+        if self.messagesModels.count > 1 && fromHistory {
+            return newContainers.count
+        }
+
+        lastMessageDisposeBag = DisposeBag()
+
+        // order is reversed
+        if let lastMessage = newMessages.first {
+            self.lastMessageDate.accept(lastMessage.receivedDate.conversationTimestamp())
+
+            if lastMessage.type != .contact {
+                self.lastMessage.accept(lastMessage.content)
+            } else {
+                // Find the corresponding container for the last message
+                if let container = newContainers.first(where: { $0.message.id == lastMessage.id }) {
+                    container.contactViewModel.observableContent
+                        .startWith(container.contactViewModel.observableContent.value)
+                        .subscribe { [weak self] content in
+                            guard let self = self else { return }
+                            self.lastMessage.accept(content)
+                        } onError: { _ in }
+                        .disposed(by: lastMessageDisposeBag)
+                }
+            }
+        }
+
+        return newContainers.count
     }
 
     private func insert(newMessage: MessageModel, fromHistory: Bool) -> Bool {
@@ -606,10 +679,11 @@ class MessagesListVM: ObservableObject {
     }
 
     func cleanMessages() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+       // DispatchQueue.main.async { [weak self] in
+           // guard let self = self else { return }
+            print("***** cleaning messages ")
             self.messagesModels = [MessageContainerModel]()
-        }
+       // }
     }
 
     func updateBlockedStatus(blocked: Bool) {
@@ -841,6 +915,7 @@ class MessagesListVM: ObservableObject {
                 .loadConversationMessages(conversationId: self.conversation.id,
                                           accountId: self.conversation.accountId,
                                           from: messageId)
+            print("***** load more")
             self.loading = true
         }
     }
