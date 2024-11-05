@@ -75,8 +75,8 @@ internal enum L10n {
     internal static let accountSettingsExplanation = L10n.tr("Localizable", "accountPage.accountSettingsExplanation", fallback: "These settings will only apply to this account.")
     /// App settings
     internal static let appSettings = L10n.tr("Localizable", "accountPage.appSettings", fallback: "App settings")
-    /// These settings will apply on all the application
-    internal static let appSettingsExplanation = L10n.tr("Localizable", "accountPage.appSettingsExplanation", fallback: "These settings will apply on all the application")
+    /// These settings will apply to the entire application.
+    internal static let appSettingsExplanation = L10n.tr("Localizable", "accountPage.appSettingsExplanation", fallback: "These settings will apply to the entire application.")
     /// Auto register after expiration
     internal static let autoRegistration = L10n.tr("Localizable", "accountPage.autoRegistration", fallback: "Auto register after expiration")
     /// Blocked contacts
@@ -187,8 +187,8 @@ internal enum L10n {
     internal static let peerDiscovery = L10n.tr("Localizable", "accountPage.peerDiscovery", fallback: "Enable local peer discovery")
     /// Connect to other DHT nodes advertising on our local network
     internal static let peerDiscoveryExplanation = L10n.tr("Localizable", "accountPage.peerDiscoveryExplanation", fallback: "Connect to other DHT nodes advertising on our local network")
-    /// Failed to generate PIN code
-    internal static let pinError = L10n.tr("Localizable", "accountPage.pinError", fallback: "Failed to generate PIN code")
+    /// An error occurred while generating the PIN code.
+    internal static let pinError = L10n.tr("Localizable", "accountPage.pinError", fallback: "An error occurred while generating the PIN code.")
     /// Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.
     internal static let pinExplanationMessage = L10n.tr("Localizable", "accountPage.pinExplanationMessage", fallback: "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.")
     /// On another device
@@ -417,16 +417,16 @@ internal enum L10n {
     internal static let maximize = L10n.tr("Localizable", "calls.maximize", fallback: "Maximize")
     /// Minimize
     internal static let minimize = L10n.tr("Localizable", "calls.minimize", fallback: "Minimize")
-    /// Mute audio
-    internal static let muteAudio = L10n.tr("Localizable", "calls.muteAudio", fallback: "Mute audio")
+    /// Mute microphone
+    internal static let muteAudio = L10n.tr("Localizable", "calls.muteAudio", fallback: "Mute microphone")
     /// Unset moderator
     internal static let removeModerator = L10n.tr("Localizable", "calls.removeModerator", fallback: "Unset moderator")
     /// Ringing…
     internal static let ringing = L10n.tr("Localizable", "calls.ringing", fallback: "Ringing…")
     /// Set moderator
     internal static let setModerator = L10n.tr("Localizable", "calls.setModerator", fallback: "Set moderator")
-    /// Unmute audio
-    internal static let unmuteAudio = L10n.tr("Localizable", "calls.unmuteAudio", fallback: "Unmute audio")
+    /// Unmute microphone
+    internal static let unmuteAudio = L10n.tr("Localizable", "calls.unmuteAudio", fallback: "Unmute microphone")
   }
   internal enum ContactPage {
     /// Clear Chat
@@ -720,8 +720,8 @@ internal enum L10n {
   internal enum ImportFromArchive {
     /// Import
     internal static let buttonTitle = L10n.tr("Localizable", "importFromArchive.buttonTitle", fallback: "Import")
-    /// Import a Jami account from a local archive file.
-    internal static let explanation = L10n.tr("Localizable", "importFromArchive.explanation", fallback: "Import a Jami account from a local archive file.")
+    /// Import Jami account from local archive file.
+    internal static let explanation = L10n.tr("Localizable", "importFromArchive.explanation", fallback: "Import Jami account from local archive file.")
     /// If the account is encrypted with a password, please fill the following field.
     internal static let passwordExplanation = L10n.tr("Localizable", "importFromArchive.passwordExplanation", fallback: "If the account is encrypted with a password, please fill the following field.")
     /// Select archive file
@@ -786,8 +786,8 @@ internal enum L10n {
     internal static let enterCredentials = L10n.tr("Localizable", "linkToAccountManager.enterCredentials", fallback: "Enter JAMS credentials")
     /// Enter Jami Account Management Server (JAMS) URL
     internal static let jamsExplanation = L10n.tr("Localizable", "linkToAccountManager.jamsExplanation", fallback: "Enter Jami Account Management Server (JAMS) URL")
-    /// Sign In
-    internal static let signIn = L10n.tr("Localizable", "linkToAccountManager.signIn", fallback: "Sign In")
+    /// Sign in
+    internal static let signIn = L10n.tr("Localizable", "linkToAccountManager.signIn", fallback: "Sign in")
     /// JAMS account
     internal static let title = L10n.tr("Localizable", "linkToAccountManager.title", fallback: "JAMS account")
   }

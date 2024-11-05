@@ -230,7 +230,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 return
             }
             self.updateBlockedStatus()
-            self.subscribePresenceServiceContactPresence()
+            self.setupPresence()
             if self.shouldCreateSwarmInfo() {
                 self.createSwarmInfo()
             } else {
@@ -543,27 +543,54 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 // MARK: Conversation didSet functions
 extension ConversationViewModel {
 
-    private func subscribePresenceServiceContactPresence() {
+    private func setupPresence() {
         if !self.conversation.isDialog() {
             return
         }
 
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        guard let contact = self.contactsService.contact(withHash: jamiId) else { return }
-        if contact.banned {
-            return
+        if let contact = self.contactsService.contact(withHash: jamiId) {
+            // Exit if the contact is banned
+            guard !contact.banned else { return }
+
+            // Subscribe to presence updates for the contact
+            subscribePresence(contactId: jamiId)
+        } else if self.isCoreConversationWith(jamiId: jamiId) {
+            // If contact is not available and it's a core conversation, subscribe to the contact added event
+            subscribeToContactAdded()
         }
-        // subscribe to presence updates for the conversation's associated contact
-        if let contactPresence = self.presenceService.getSubscriptionsForContact(contactId: jamiId) {
+    }
+
+    private func subscribePresence(contactId: String) {
+        if let contactPresence = self.presenceService.getSubscriptionsForContact(contactId: contactId) {
             self.contactPresence = contactPresence
             self.contactPresence
                 .observe(on: MainScheduler.instance)
-                .subscribe { [weak self] presence in
-                    self?.presence = presence
-                } onError: { _ in
-                }
+                .subscribe(
+                    onNext: { [weak self] presence in
+                        self?.presence = presence
+                    },
+                    onError: { error in
+                        print("Error observing presence updates: \(error)")
+                    }
+                )
                 .disposed(by: self.disposeBag)
         }
+    }
+
+    private func subscribeToContactAdded() {
+        self.contactsService.sharedResponseStream
+            .filter { $0.eventType == .contactAdded &&
+                $0.getEventInput(.conversationId) == self.conversation.id
+            }
+            .take(1)
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let peerUri: String = event.getEventInput(.peerUri),
+                      self.isCoreConversationWith(jamiId: peerUri) else { return }
+                self.setupPresence()
+            })
+            .disposed(by: disposeBag)
     }
 
     private func subscribeUnreadMessages() {
