@@ -32,6 +32,7 @@ class ConversationDataSource: ObservableObject {
 
     var onNewConversationViewModelCreated: ((ConversationModel) -> Void)?
     var onConversationRestored: ((ConversationModel) -> Void)?
+    var getTemporaryConversation: ((ConversationModel) -> ConversationViewModel?)?
 
     init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -89,6 +90,12 @@ class ConversationDataSource: ObservableObject {
            let jamiId = conversationModel.getParticipants().first?.jamiId,
            let restoredViewModel = restoreBlockedConversation(jamiId: jamiId) {
             return restoredViewModel
+        }
+
+        // Update temporary conversation if exists
+        if let tempConversation = getTemporaryConversation?(conversationModel) {
+            tempConversation.conversation = conversationModel
+            return tempConversation
         }
 
         let newViewModel = ConversationViewModel(with: injectionBag)

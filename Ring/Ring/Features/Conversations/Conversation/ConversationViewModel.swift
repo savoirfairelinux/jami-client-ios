@@ -543,13 +543,18 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 // MARK: Conversation didSet functions
 extension ConversationViewModel {
 
-    private func subscribePresenceServiceContactPresence() {
+    func subscribePresenceServiceContactPresence() {
         if !self.conversation.isDialog() {
             return
         }
 
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        guard let contact = self.contactsService.contact(withHash: jamiId) else { return }
+        guard let contact = self.contactsService.contact(withHash: jamiId) else {
+            if self.isCoreConversationWith(jamiId: jamiId) {
+                subscribeToContactAdded()
+            }
+            return
+        }
         if contact.banned {
             return
         }
@@ -564,6 +569,22 @@ extension ConversationViewModel {
                 }
                 .disposed(by: self.disposeBag)
         }
+    }
+
+    private func subscribeToContactAdded() {
+        self.contactsService.sharedResponseStream
+            .filter { $0.eventType == .contactAdded }
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let accountId: String = event.getEventInput(.accountId),
+                      let peerUri: String = event.getEventInput(.peerUri),
+                      let account = self.accountService.currentAccount,
+                      account.id == accountId,
+                self.isCoreConversationWith(jamiId: peerUri) else { return }
+                self.subscribePresenceServiceContactPresence()
+            })
+            .disposed(by: disposeBag)
+
     }
 
     private func subscribeUnreadMessages() {
