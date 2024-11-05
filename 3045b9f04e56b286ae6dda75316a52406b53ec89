@@ -16,6 +16,24 @@
       "message": "maybe \"These settings will apply to the entire application\"? To emphasize it in opposite other settings that only applied to selected account.",
       "revId": "3045b9f04e56b286ae6dda75316a52406b53ec89",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28ae9b1b_5f9c5455",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-11-05T19:42:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94494371_e053eaec",
+      "revId": "3045b9f04e56b286ae6dda75316a52406b53ec89",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
