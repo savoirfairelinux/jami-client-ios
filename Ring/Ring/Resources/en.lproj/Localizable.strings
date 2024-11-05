@@ -209,7 +209,7 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Import Jami account from local archive file.";
 "importFromArchive.passwordExplanation" = "If the account is encrypted with a password, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Import";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Minimize";
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Unset moderator";
-"calls.muteAudio" = "Mute audio";
-"calls.unmuteAudio" = "Unmute audio";
+"calls.muteAudio" = "Mute microphone";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Lower hand";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Notifications";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
 "accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
