@@ -34,6 +34,24 @@
       "parentUuid": "94494371_e053eaec",
       "revId": "3045b9f04e56b286ae6dda75316a52406b53ec89",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba5d7b26_73930881",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-11-06T19:30:40Z",
+      "side": 1,
+      "message": "Should it have been \"These settings will apply to all accounts.\"",
+      "parentUuid": "28ae9b1b_5f9c5455",
+      "revId": "3045b9f04e56b286ae6dda75316a52406b53ec89",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
