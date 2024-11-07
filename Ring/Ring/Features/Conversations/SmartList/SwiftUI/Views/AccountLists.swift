@@ -63,6 +63,7 @@ struct AccountLists: View {
             createAccountCallback()
         }, label: {
             Text(L10n.Smartlist.addAccountButton)
+                .foregroundColor(Color(UIColor.jamiButtonDark))
                 .lineLimit(1)
                 .padding()
                 .frame(maxWidth: .infinity)
