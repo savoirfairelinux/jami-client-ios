@@ -631,6 +631,17 @@ class AccountsService: AccountAdapterDelegate {
 
     func setPushNotificationToken(token: String) {
         self.accountAdapter.setPushNotificationToken(token)
+        // Set account details to force the DHT update to use the token.
+        for account in accounts {
+            // Use details from the daemon, as the token may be set immediately after account creation,
+            // meaning the client might not have the updated details.
+            guard let accountDetailsDict = accountAdapter.getAccountDetails(account.id) as? [String: String] else { continue }
+            let accountDetails = AccountConfigModel(withDetails: accountDetailsDict)
+            let model = ConfigKeyModel(withKey: .proxyEnabled)
+            if accountDetails.get(withConfigKeyModel: model) == "true" {
+                self.setAccountDetails(forAccountId: account.id, withDetails: accountDetails)
+            }
+        }
     }
 
     func setPushNotificationTopic(topic: String) {
