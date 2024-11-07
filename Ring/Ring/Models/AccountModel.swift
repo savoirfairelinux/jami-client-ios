@@ -108,16 +108,56 @@ class AccountModel: Equatable {
     }
     var credentialDetails = [AccountCredentialsModel]()
     var devices = [DeviceModel]()
-    var registeredName = ""
     var username = ""
     var jamiId: String {
         return self.username.replacingOccurrences(of: "ring:", with: "")
     }
     var type = AccountType.ring
     var isJams = false
-    var status = AccountState.unregistered
     var enabled = true
-    var proxy = ""
+    private let syncQueue = DispatchQueue(label: "com.accountModel.statusAccess")
+    private var _status: AccountState = .unregistered
+    private var _registeredName: String = ""
+    private var _proxy: String = ""
+
+    var status: AccountState {
+        get {
+            return syncQueue.sync {
+                _status
+            }
+        }
+        set {
+            syncQueue.sync {
+                _status = newValue
+            }
+        }
+    }
+
+    var registeredName: String {
+        get {
+            return syncQueue.sync {
+                _registeredName
+            }
+        }
+        set {
+            syncQueue.sync {
+                _registeredName = newValue
+            }
+        }
+    }
+
+    var proxy: String {
+        get {
+            return syncQueue.sync {
+                _proxy
+            }
+        }
+        set {
+            syncQueue.sync {
+                _proxy = newValue
+            }
+        }
+    }
 
     // MARK: Init
     convenience init(withAccountId accountId: String) {
