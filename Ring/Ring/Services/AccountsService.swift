@@ -631,6 +631,13 @@ class AccountsService: AccountAdapterDelegate {
 
     func setPushNotificationToken(token: String) {
         self.accountAdapter.setPushNotificationToken(token)
+        for account in accounts {
+            guard let accountDetails = account.details else { continue }
+            let model = ConfigKeyModel(withKey: .proxyEnabled)
+            if accountDetails.get(withConfigKeyModel: model) == "true" {
+                self.setAccountDetails(forAccountId: account.id, withDetails: accountDetails)
+            }
+        }
     }
 
     func setPushNotificationTopic(topic: String) {
