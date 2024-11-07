@@ -61,6 +61,7 @@ class SettingsCoordinator: Coordinator, StateableResponsive {
                 }
             })
             .disposed(by: self.disposeBag)
+        self.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
     }
 
     func start() {
