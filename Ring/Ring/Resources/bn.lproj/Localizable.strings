@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.newGroup" = "নতুন গোষ্ঠী বানান";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.muteConversation" = "Mute conversation";
+"swarm.muteConversation" = "নিঃশব্দ কথোপকথন";
 "swarm.leaveConversation" = "কথোপকথন ছেড়ে দিন";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "সনাক্তকরণ";
-"swarm.settings" = "Settings";
+"swarm.settings" = "সেটিং";
 "swarm.members" = "সদস্য";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
-"swarm.publicChat" = "Public group";
+"swarm.oneToOne" = "ব্যক্তিগত";
+"swarm.adminInvitesOnly" = "ব্যক্তিগত গ্রুপ (সীমাবদ্ধ আমন্ত্রণ)";
+"swarm.invitesOnly" = "ব্যক্তিগত গ্রুপ";
+"swarm.publicChat" = "জনগোষ্ঠী";
 "swarm.others" = "অন্যান্য";
 "swarm.member" = "সদস্য";
 "swarm.invited" = "আমন্ত্রিত";
@@ -88,22 +88,22 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "চলে যাও";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "নতুন গোষ্ঠী বানান";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
-"swarm.selectContacts" = "Select contacts";
+"swarm.selectContacts" = "পরিচিতি নির্বাচন করুন";
 
 // Smartlist
 "smartlist.yesterday" = "গতকাল";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "পাবলিক ডিরেক্টরি";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "কথোপকথন";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "নতুন গোষ্ঠী বানান";
 "smartlist.accounts" = "অ্যাকাউন্ট";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "কোন ফলাফল নেই";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "জামি সম্পর্কে";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "অ্যাকাউন্ট";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "এখন না";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Import Jami account from local archive file.";
 "importFromArchive.passwordExplanation" = "যদি অ্যাকাউন্টটি পাসওয়ার্ড দিয়ে এনক্রিপ্ট করা হয়, তাহলে দয়া করে নিম্নলিখিত ক্ষেত্রটি পূরণ করুন।";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "আমদানি";
 "importFromArchive.selectArchiveButton" = "আর্কাইভ ফাইল নির্বাচন করুন";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "সাইন ইন করুন";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL লিখুন";
@@ -282,8 +282,8 @@
 "calls.minimize" = "কমিয়ে আনুন";
 "calls.setModerator" = "সেট মডারেটর";
 "calls.removeModerator" = "অপসারণকারী";
-"calls.muteAudio" = "নিঃশব্দ অডিও";
-"calls.unmuteAudio" = "অডিও মুছে ফেলা";
+"calls.muteAudio" = "নিঃশব্দ মাইক্রোফোন";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "নীচের হাত";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "বিজ্ঞপ্তি";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "নিবন্ধনের মেয়াদ শেষ হওয়ার সময় (সেকেন্ড)";
 "accountPage.tlsVerifyServerCertificates" = "সার্ভার টিএলএস সার্টিফিকেট যাচাই করুন";
@@ -466,7 +466,7 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.contactAdded" = "আমন্ত্রণ প্রাপ্তি";
 "generatedMessage.swarmCreated" = "Group created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "কথোপকথনে যোগদান";

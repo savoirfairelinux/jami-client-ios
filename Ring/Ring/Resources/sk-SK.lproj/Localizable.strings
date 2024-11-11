@@ -72,10 +72,10 @@
 "swarm.chooseColor" = "Farba";
 "swarm.typeOfSwarm" = "Typ";
 "swarm.identifier" = "Identifikátor";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Nastavenia";
 "swarm.members" = "Členovia";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Privátny";
 "swarm.adminInvitesOnly" = "Privátna skupina (obmedzené pozvánky)";
 "swarm.invitesOnly" = "Privátna skupina";
 "swarm.publicChat" = "Verejná skupina";
@@ -209,7 +209,7 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Importujte účet Jami z miestneho archívu.";
 "importFromArchive.passwordExplanation" = "Ak je účet šifrovaný heslom, vyplňte nasledujúce pole.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Dovoz";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Minimalizovať";
 "calls.setModerator" = "Nastaviť moderátor";
 "calls.removeModerator" = "Odstaviť moderátor";
-"calls.muteAudio" = "Stlmiť zvuk";
-"calls.unmuteAudio" = "Nevymazaný zvuk";
+"calls.muteAudio" = "Stlmiť mikrofón";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Dolná ruka";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "Tento účet je zašifrovaný heslom, zadajte heslo na vygenerovanie PIN kódu";
 "accountPage.pinExplanationTitle" = "Na inom zariadení";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Upozornenia";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "Nastavenia aplikácie";
-"accountPage.appSettingsExplanation" = "Tieto nastavenia budú platiť pre celú aplikáciu";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Konektivita a konfigurácie";
 "accountPage.sipExpirationTime" = "Čas uplynutia platnosti registrácie (sekundy)";
 "accountPage.tlsVerifyServerCertificates" = "Overenie certifikátov TLS serverov";

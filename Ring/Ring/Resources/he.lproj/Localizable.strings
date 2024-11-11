@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.newGroup" = "יצירת קבוצה חדשה";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.muteConversation" = "Mute conversation";
+"swarm.muteConversation" = "שיחה שקטה";
 "swarm.leaveConversation" = "עזוב את השיחה";
 "swarm.chooseColor" = "צבע";
 "swarm.typeOfSwarm" = "טיפוס";
 "swarm.identifier" = "זיהוי";
-"swarm.settings" = "Settings";
+"swarm.settings" = "הגדרות";
 "swarm.members" = "חברי";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
-"swarm.publicChat" = "Public group";
+"swarm.oneToOne" = "פרטי";
+"swarm.adminInvitesOnly" = "קבוצה פרטית (זמנות מוגבלות)";
+"swarm.invitesOnly" = "קבוצה פרטית";
+"swarm.publicChat" = "קבוצה ציבורית";
 "swarm.others" = "אחרים";
 "swarm.member" = "חבר";
 "swarm.invited" = "הזמנת";
@@ -88,7 +88,7 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "עזוב";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "יצירת קבוצה חדשה";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -103,7 +103,7 @@
 "smartlist.conversations" = "דיונים";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "יצירת קבוצה חדשה";
 "smartlist.accounts" = "חשבונות";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "אין תוצאות";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "על אודות Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "חשבונות";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "לא עכשיו";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "יבוא חשבון ג'מי מתיק הארכיון המקומי.";
 "importFromArchive.passwordExplanation" = "אם החשבון מוצפן באמצעות סיסמה, אנא מלאו את השדה הבא.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "יבוא";
 "importFromArchive.selectArchiveButton" = "בחר תיק ארכיון";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "כניסה";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "דואר URL של JAMS";
 "linkToAccountManager.accountManagerLabel" = "הכניס את URL JAMS";
@@ -282,8 +282,8 @@
 "calls.minimize" = "מינימום";
 "calls.setModerator" = "הגדרת המודרטור";
 "calls.removeModerator" = "מתקן לא מתאים";
-"calls.muteAudio" = "השתק אודיו";
-"calls.unmuteAudio" = "אוודיו לא שקט";
+"calls.muteAudio" = "מיקרופון שקט";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "יד התחתונה";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "הודעות";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "זמן סיום הרישום (שניות)";
 "accountPage.tlsVerifyServerCertificates" = "אימות תעודות TLS של השרת";

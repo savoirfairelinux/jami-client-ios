@@ -72,12 +72,12 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "पहिचानकर्ता";
-"swarm.settings" = "Settings";
+"swarm.settings" = "सेटिंग्स";
 "swarm.members" = "सदस्यहरू";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "निजी";
 "swarm.adminInvitesOnly" = "निजी समूह (प्रतिबन्धित निमन्त्रणा)";
-"swarm.invitesOnly" = "Private group";
+"swarm.invitesOnly" = "निजी समूह";
 "swarm.publicChat" = "सार्वजनिक समूह";
 "swarm.others" = "अन्य";
 "swarm.member" = "सदस्य";
@@ -98,7 +98,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "हिजो";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "सार्वजनिक निर्देशिका";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "वार्तालाप";
 "smartlist.noConversationsFound" = "No conversations match your search";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "जमीको बारेमा";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "लेखा";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "अहिले होइन";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "स्थानीय अभिलेख फाइलबाट जामी खाता आयात गर्नुहोस्।";
 "importFromArchive.passwordExplanation" = "यदि खाता पासवर्डको साथ एन्क्रिप्टेड छ भने, कृपया निम्न फिल्ड भर्नुहोस्।";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "आयात";
 "importFromArchive.selectArchiveButton" = "अभिलेख फाइल चयन गर्नुहोस्";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "साइन इन गर्नुहोस्";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL प्रविष्ट गर्नुहोस्";
@@ -282,8 +282,8 @@
 "calls.minimize" = "कम्तिमा";
 "calls.setModerator" = "मोडरेटर सेट गर्नुहोस्";
 "calls.removeModerator" = "अनसेट मोडरेटर";
-"calls.muteAudio" = "अडियो बन्द";
-"calls.unmuteAudio" = "अनमोल अडियो";
+"calls.muteAudio" = "गहिरो माइक्रोफोन";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "तलको हात";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "सूचनाहरू";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "दर्ता समाप्ति समय (सेकेन्ड)";
 "accountPage.tlsVerifyServerCertificates" = "सर्भर TLS प्रमाणपत्रहरू प्रमाणित गर्नुहोस्";

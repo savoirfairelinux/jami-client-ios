@@ -64,7 +64,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.newGroup" = "Nieuwe groep aanmaken";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Zwijg gesprek";
@@ -72,12 +72,12 @@
 "swarm.chooseColor" = "Kleur";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Identificatie";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Instellingen";
 "swarm.members" = "Lid-Staten";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Privé";
 "swarm.adminInvitesOnly" = "Privégroep (beperkte uitnodigingen)";
-"swarm.invitesOnly" = "Private group";
+"swarm.invitesOnly" = "Privégroep";
 "swarm.publicChat" = "Openbare groep";
 "swarm.others" = "Andere";
 "swarm.member" = "Lid";
@@ -88,7 +88,7 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Ga weg.";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "Nieuwe groep aanmaken";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -98,12 +98,12 @@
 
 // Smartlist
 "smartlist.yesterday" = "Gisteren";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "Openbare catalogus";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Gesprekken";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "Nieuwe groep aanmaken";
 "smartlist.accounts" = "Accounts";
 "smartlist.invitationReceived" = "Uitnodigingen ontvangen";
 "smartlist.noResults" = "Geen resultaten";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Importeer Jami-account uit het lokale archiefbestand.";
 "importFromArchive.passwordExplanation" = "Als het account met een wachtwoord is versleuteld, vul het volgende veld in.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Importeren";
 "importFromArchive.selectArchiveButton" = "Selecteer archiefbestand";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Inlog";
+"linkToAccountManager.signIn" = "Aanmelden";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Voer JAMS-URL in";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Minimaliseren";
 "calls.setModerator" = "Stel moderator in";
 "calls.removeModerator" = "De moderator is niet ingesteld.";
-"calls.muteAudio" = "Geluid dempen";
-"calls.unmuteAudio" = "Niet-gemakkelijk geluid";
+"calls.muteAudio" = "Microfoon dempen";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Onderaan hand";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Meldingen";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Vervaltijd van de registratie (seconden)";
 "accountPage.tlsVerifyServerCertificates" = "Verifieer TLS-certificaten van de server";

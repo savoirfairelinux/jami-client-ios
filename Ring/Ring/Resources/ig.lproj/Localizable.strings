@@ -72,12 +72,12 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Ihe Nkọwapụta";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Ntọala";
 "swarm.members" = "Ndị otu";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
+"swarm.oneToOne" = "Ndị mmadụ n'onwe ha";
+"swarm.adminInvitesOnly" = "Otu ndị mmadụ n'otu n'otu (n'ụdị ịkpọ òkù)";
+"swarm.invitesOnly" = "Otu ndị na-ahụ maka ndị mmadụ";
 "swarm.publicChat" = "Ndị otu ọha";
 "swarm.others" = "Ndị ọzọ";
 "swarm.member" = "Onye so na ya";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "Banyere Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Ihe ndekọ";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "Ọbụghị ugbu a";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Bubata akaụntụ Jami site na faịlụ ihe ndekọ mpaghara.";
 "importFromArchive.passwordExplanation" = "Ọ bụrụ na e jiri paswọọdụ mee ka akaụntụ ahụ bụrụ nke e debere, biko dejupụta mpaghara na-esonụ.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Ịba n'ime";
 "importFromArchive.selectArchiveButton" = "Họrọ faịlụ nchekwa";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Banye";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Tinye URL JAMS";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Mee ka ihe dịkwuo ala";
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Ịkwụsị ịhazi ihe";
-"calls.muteAudio" = "Audio na-adịghị arụ ọrụ";
-"calls.unmuteAudio" = "Ọkpụkpọ na-adịghị emechi emechi";
+"calls.muteAudio" = "Igwe okwu na-adịghị arụ ọrụ";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Aka ala";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Nkwupụta";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Oge ngwụcha ndebanye aha (sekọnd)";
 "accountPage.tlsVerifyServerCertificates" = "Nyochaa akwụkwọ TLS nke ihe nkesa";

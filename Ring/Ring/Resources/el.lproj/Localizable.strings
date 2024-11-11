@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.newGroup" = "Δημιουργία νέας ομάδας";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.muteConversation" = "Mute conversation";
+"swarm.muteConversation" = "Μείνε αθόρυβα.";
 "swarm.leaveConversation" = "Αφήστε τη συζήτηση";
 "swarm.chooseColor" = "Χρώμα";
 "swarm.typeOfSwarm" = "Τύπος";
 "swarm.identifier" = "Ταυτοποιητής";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Ρυθμίσεις";
 "swarm.members" = "Μέλη";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
-"swarm.publicChat" = "Public group";
+"swarm.oneToOne" = "Ιδιωτικό";
+"swarm.adminInvitesOnly" = "Ιδιωτική ομάδα (συγκριτικές προσκλήσεις)";
+"swarm.invitesOnly" = "Ιδιωτική ομάδα";
+"swarm.publicChat" = "Δημόσια ομάδα";
 "swarm.others" = "Άλλοι";
 "swarm.member" = "Μέλος";
 "swarm.invited" = "Καλεσμένοι";
@@ -88,22 +88,22 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Φύγε";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "Δημιουργία νέας ομάδας";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
-"swarm.selectContacts" = "Select contacts";
+"swarm.selectContacts" = "Επιλέξτε επαφές";
 
 // Smartlist
 "smartlist.yesterday" = "Χθες";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "Δημόσιος κατάλογος";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Συνομιλίες";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "Δημιουργία νέας ομάδας";
 "smartlist.accounts" = "Λογαριασμοί";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Χωρίς αποτελέσματα";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "Σχετικά με το Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Λογαριασμοί";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "Όχι τώρα";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Εισαγωγή λογαριασμού Jami από το τοπικό αρχείο αρχείου.";
 "importFromArchive.passwordExplanation" = "Εάν το λογαριασμό είναι κρυπτογραφημένο με κωδικό πρόσβασης, συμπληρώστε το ακόλουθο πεδίο.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Εισαγωγή";
 "importFromArchive.selectArchiveButton" = "Επιλέξτε αρχείο αρχείου";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Εισαγγελέστε";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "Η διεύθυνση URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Εισάγετε το URL JAMS";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Ελαχιστοποίηση";
 "calls.setModerator" = "Ρυθμίστε τον διαχειριστή";
 "calls.removeModerator" = "Ανακατάσταση διαχειριστή";
-"calls.muteAudio" = "Σίγαση ήχου";
-"calls.unmuteAudio" = "Ανεκλειστικό ήχο";
+"calls.muteAudio" = "Σίγαση μικροφώνου";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Κάτω χέρι";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Ειδοποιήσεις";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Χρόνος λήξης της εγγραφής (δευτερόλεπτα)";
 "accountPage.tlsVerifyServerCertificates" = "Να επαληθεύονται τα πιστοποιητικά TLS του διακομιστή";
@@ -466,7 +466,7 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.contactAdded" = "Η πρόσκληση παραλήφθηκε";
 "generatedMessage.swarmCreated" = "Group created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "Συμμετείχε στη συζήτηση";

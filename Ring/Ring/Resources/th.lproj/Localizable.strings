@@ -64,7 +64,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.newGroup" = "สร้างกลุ่มใหม่";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "การพูดคุยเงียบ";
@@ -72,10 +72,10 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "ตัวประจําตัว";
-"swarm.settings" = "Settings";
+"swarm.settings" = "การตั้งค่า";
 "swarm.members" = "สมาชิก";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "เอกชน";
 "swarm.adminInvitesOnly" = "กลุ่มส่วนตัว (เชิญจํากัด)";
 "swarm.invitesOnly" = "กลุ่มเอกชน";
 "swarm.publicChat" = "กลุ่มสาธารณะ";
@@ -88,7 +88,7 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "ออกไป";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "สร้างกลุ่มใหม่";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -103,7 +103,7 @@
 "smartlist.conversations" = "บทสนทนา";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "สร้างกลุ่มใหม่";
 "smartlist.accounts" = "บัญชี";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ไม่มีผลลัพธ์";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "เกี่ยวกับ Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "บัญชี";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "ไม่ใช่ตอนนี้";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "นําเข้าบัญชี Jami จากไฟล์อาร์คไฮเวอร์ท้องถิ่น";
 "importFromArchive.passwordExplanation" = "หากบัญชีถูกรหัสผ่านด้วยรหัสผ่าน โปรดเติมฟิลด์ที่ติดตามนี้";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "การนําเข้า";
 "importFromArchive.selectArchiveButton" = "เลือกไฟล์อาร์คไฮเวอร์";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "สมัครสมาชิก";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "กรอก URL JAMS";
@@ -282,8 +282,8 @@
 "calls.minimize" = "ลดน้อยลง";
 "calls.setModerator" = "กําหนดผู้ปรับ";
 "calls.removeModerator" = "ปฏิทินไม่ตั้ง";
-"calls.muteAudio" = "เสียงเงียบ";
-"calls.unmuteAudio" = "เสียงไม่ปิด";
+"calls.muteAudio" = "ปิดเสียงไมโครโฟน";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "มือต่ํา";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "การแจ้งเตือน";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "เวลาหมดอายุการลงทะเบียน (วินาที)";
 "accountPage.tlsVerifyServerCertificates" = "ยืนยันการรับรอง TLS ของเซอร์เวอร์";

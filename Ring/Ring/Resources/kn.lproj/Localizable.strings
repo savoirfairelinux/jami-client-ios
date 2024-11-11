@@ -72,12 +72,12 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "ಗುರುತಿನ ಚೀಟಿ";
-"swarm.settings" = "Settings";
+"swarm.settings" = "ಸೆಟ್ಟಿಂಗ್ಗಳು";
 "swarm.members" = "ಸದಸ್ಯರು";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
+"swarm.oneToOne" = "ಖಾಸಗಿ";
+"swarm.adminInvitesOnly" = "ಖಾಸಗಿ ಗುಂಪು (ಸೀಮಿತ ಆಹ್ವಾನ)";
+"swarm.invitesOnly" = "ಖಾಸಗಿ ಗುಂಪು";
 "swarm.publicChat" = "ಸಾರ್ವಜನಿಕ ಗುಂಪು";
 "swarm.others" = "ಇತರರು";
 "swarm.member" = "ಸದಸ್ಯ";
@@ -94,11 +94,11 @@
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
-"swarm.selectContacts" = "Select contacts";
+"swarm.selectContacts" = "ಸಂಪರ್ಕಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ";
 
 // Smartlist
 "smartlist.yesterday" = "ನಿನ್ನೆ";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "ಸಾರ್ವಜನಿಕ ಡೈರೆಕ್ಟರಿ";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "ಸಂಭಾಷಣೆ";
 "smartlist.noConversationsFound" = "No conversations match your search";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "ಜಾಮಿ ಬಗ್ಗೆ";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "ಖಾತೆಗಳು";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "ಈಗ ಬೇಡ";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "ಜಾಮಿ ಖಾತೆಯನ್ನು ಸ್ಥಳೀಯ ಆರ್ಕೈವ್ ಫೈಲ್ನಿಂದ ಆಮದು ಮಾಡಿಕೊಳ್ಳಿ.";
 "importFromArchive.passwordExplanation" = "ಖಾತೆಯನ್ನು ಪಾಸ್ವರ್ಡ್ನೊಂದಿಗೆ ಎನ್ಕ್ರಿಪ್ಟ್ ಮಾಡಿದ್ದರೆ, ದಯವಿಟ್ಟು ಈ ಕೆಳಗಿನ ಕ್ಷೇತ್ರವನ್ನು ಭರ್ತಿ ಮಾಡಿ.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "ಆಮದು";
 "importFromArchive.selectArchiveButton" = "ಆರ್ಕೈವ್ ಫೈಲ್ ಆಯ್ಕೆಮಾಡಿ";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "ಸೈನ್ ಇನ್ ಮಾಡಿ";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL ಅನ್ನು ನಮೂದಿಸಿ";
@@ -282,8 +282,8 @@
 "calls.minimize" = "ಕಡಿಮೆ ಮಾಡಿ";
 "calls.setModerator" = "ಮಾಡರೇಟರ್ ಅನ್ನು ಹೊಂದಿಸಿ";
 "calls.removeModerator" = "ಡಿಸ್ಇನ್ಸೆಟ್ ಮಾಡರೇಟರ್";
-"calls.muteAudio" = "ಮೂಕ ಆಡಿಯೋ";
-"calls.unmuteAudio" = "ಅನಿರ್ದಿಷ್ಟ ಆಡಿಯೋ";
+"calls.muteAudio" = "ಮೂಕ ಮೈಕ್ರೊಫೋನ್";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "ಕೆಳ ಕೈ";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "ಅಧಿಸೂಚನೆಗಳು";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "ನೋಂದಣಿ ಅವಧಿ (ಸೆಕೆಂಡುಗಳು)";
 "accountPage.tlsVerifyServerCertificates" = "ಸರ್ವರ್ TLS ಪ್ರಮಾಣಪತ್ರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ";

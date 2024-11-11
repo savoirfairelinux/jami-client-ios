@@ -64,7 +64,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.newGroup" = "建立新群組";
 "swarmcreation.addDescription" = "添加描述";
 // Swarm
 "swarm.muteConversation" = "静音对话";
@@ -75,7 +75,7 @@
 "swarm.settings" = "設定";
 "swarm.members" = "成員";
 "swarm.addDescription" = "添加描述";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "私人";
 "swarm.adminInvitesOnly" = "私人群组(受限制邀请)";
 "swarm.invitesOnly" = "私密组";
 "swarm.publicChat" = "公开组<br>";
@@ -88,7 +88,7 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "离开";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "建立新群組";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -103,7 +103,7 @@
 "smartlist.conversations" = "對話";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "建立新群組";
 "smartlist.accounts" = "帳號";
 "smartlist.invitationReceived" = "邀请已发送";
 "smartlist.noResults" = "沒有結果";
@@ -209,7 +209,7 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "从本地档案文件导入Jami账户。";
 "importFromArchive.passwordExplanation" = "如果帐户使用密码加密,请填写下面的字段.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "匯入";
@@ -282,8 +282,8 @@
 "calls.minimize" = "最小化";
 "calls.setModerator" = "設定主持人";
 "calls.removeModerator" = "取消設定主持人";
-"calls.muteAudio" = "靜音";
-"calls.unmuteAudio" = "取消靜音";
+"calls.muteAudio" = "麥克風靜音";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "放下手";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "在其他设备上";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "通知";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "註冊過期時間（秒）";
 "accountPage.tlsVerifyServerCertificates" = "驗證伺服器 TLS 證書";

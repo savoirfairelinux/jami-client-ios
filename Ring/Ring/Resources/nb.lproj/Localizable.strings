@@ -72,12 +72,12 @@
 "swarm.chooseColor" = "Farge";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Identifikator";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Innstillinger";
 "swarm.members" = "Medlemmer";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Privat";
 "swarm.adminInvitesOnly" = "Privatgruppe (inviterte)";
-"swarm.invitesOnly" = "Private group";
+"swarm.invitesOnly" = "Privatgruppe";
 "swarm.publicChat" = "Offentlig gruppe";
 "swarm.others" = "Andre";
 "swarm.member" = "Medlem";
@@ -98,7 +98,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Igår";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "Offentlig katalog";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Samtaler";
 "smartlist.noConversationsFound" = "Ingen samtaler samsvarer med søket ditt";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Import Jami konto fra lokale arkiv fil.";
 "importFromArchive.passwordExplanation" = "Hvis kontoen er kryptert med passord, vennligst fyll i følgende felt.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Importer";
 "importFromArchive.selectArchiveButton" = "Velg arkivfil";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Logg på";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Skriv inn JAMS-URL";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Minimer";
 "calls.setModerator" = "Angi ordstyrer";
 "calls.removeModerator" = "Avløs ordstyrer";
-"calls.muteAudio" = "Koble ut lyden";
-"calls.unmuteAudio" = "Slå på lyden";
+"calls.muteAudio" = "Koble ut mikrofon";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Ta ned hånden";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Varsler";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Registreringstidspunktet for registrering (sekunder)";
 "accountPage.tlsVerifyServerCertificates" = "Verifiser tjener TLS sertifikater";

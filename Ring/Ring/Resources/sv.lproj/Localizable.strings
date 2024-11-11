@@ -64,7 +64,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.newGroup" = "Skapa ny grupp";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "- Ett stillsamt samtal.";
@@ -72,10 +72,10 @@
 "swarm.chooseColor" = "Färg";
 "swarm.typeOfSwarm" = "Typ";
 "swarm.identifier" = "identifierare";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Inställningar";
 "swarm.members" = "Medlemmar";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Privat";
 "swarm.adminInvitesOnly" = "Privat grupp (endast inbjudna)";
 "swarm.invitesOnly" = "Privat grupp ";
 "swarm.publicChat" = "Öppen grupp ";
@@ -88,7 +88,7 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "- Gå.";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "Skapa ny grupp";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -103,7 +103,7 @@
 "smartlist.conversations" = "Konversationer";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "Skapa ny grupp";
 "smartlist.accounts" = "Konton";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Inget resultat";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "Om Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Konton";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "Inte nu";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "Nytt meddelande";
@@ -209,7 +209,7 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Importera Jami-konto från lokal arkivfil.";
 "importFromArchive.passwordExplanation" = "Om kontot är krypterat med ett lösenord, fyll i följande fält.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Importera";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Minimera";
 "calls.setModerator" = "Ange moderator. ";
 "calls.removeModerator" = "Moderator inte åsatt. ";
-"calls.muteAudio" = "Pausa ljud";
-"calls.unmuteAudio" = "Sätt på ljud";
+"calls.muteAudio" = "Stäng av mikrofon";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Ta ned handen ";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Aviseringar";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Tid för registrering går ut (sekunder)";
 "accountPage.tlsVerifyServerCertificates" = "Verifiera server TLS-certifikat";

@@ -64,7 +64,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.newGroup" = "Tạo nhóm mới";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Cuộc trò chuyện câm lặng";
@@ -72,10 +72,10 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Định dạng";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Cài đặt";
 "swarm.members" = "Các thành viên";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Tự riêng";
 "swarm.adminInvitesOnly" = "Nhóm tư nhân (được mời giới hạn)";
 "swarm.invitesOnly" = "Nhóm tư nhân";
 "swarm.publicChat" = "Nhóm công cộng";
@@ -88,7 +88,7 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Đi đi";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "Tạo nhóm mới";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -103,7 +103,7 @@
 "smartlist.conversations" = "Các cuộc trò chuyện";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "Tạo nhóm mới";
 "smartlist.accounts" = "Tài khoản";
 "smartlist.invitationReceived" = "Lời mời nhận được";
 "smartlist.noResults" = "Không có kết quả";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "Về Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Tài khoản";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "Lúc khác";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Nhập vào tài khoản Jami từ tệp lưu trữ địa phương.";
 "importFromArchive.passwordExplanation" = "Nếu tài khoản được mã hóa bằng mật khẩu, vui lòng điền vào trường sau đây.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Nhập khẩu";
 "importFromArchive.selectArchiveButton" = "Chọn tệp lưu trữ";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Đăng nhập";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Nhập URL JAMS";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Giảm thiểu";
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Moderator không cài đặt";
-"calls.muteAudio" = "Âm thanh câm";
-"calls.unmuteAudio" = "Đáp âm thanh không động";
+"calls.muteAudio" = "Tắt tiếng micrô";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Tay dưới";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Thông báo";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Thời gian hết hạn đăng ký (thì giây)";
 "accountPage.tlsVerifyServerCertificates" = "Kiểm tra chứng chỉ TLS của máy chủ";

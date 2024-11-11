@@ -72,12 +72,12 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "ओळखकर्ता";
-"swarm.settings" = "Settings";
+"swarm.settings" = "सेटिंग्ज";
 "swarm.members" = "सदस्य";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
+"swarm.oneToOne" = "खासगी";
+"swarm.adminInvitesOnly" = "खासगी गट (प्रतिबंधित आमंत्रण)";
+"swarm.invitesOnly" = "खासगी गट";
 "swarm.publicChat" = "सार्वजनिक गट";
 "swarm.others" = "इतर";
 "swarm.member" = "सदस्य";
@@ -94,11 +94,11 @@
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
-"swarm.selectContacts" = "Select contacts";
+"swarm.selectContacts" = "संपर्क निवडा";
 
 // Smartlist
 "smartlist.yesterday" = "काल";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "सार्वजनिक निर्देशिका";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "चर्चा";
 "smartlist.noConversationsFound" = "No conversations match your search";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "जेमी बद्दल";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "खाते";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "आता नाही";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "जिमी खाते स्थानिक संग्रहण फाइलमधून आयात करा.";
 "importFromArchive.passwordExplanation" = "जर खाते संकेतशब्दाने एन्क्रिप्ट केले असेल तर कृपया खालील फील्ड भरा.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "आयात";
 "importFromArchive.selectArchiveButton" = "संग्रहण फाइल निवडा";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "साइन इन करा";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL प्रविष्ट करा";
@@ -282,8 +282,8 @@
 "calls.minimize" = "कमीत कमी करा";
 "calls.setModerator" = "मॉडरेटर सेट करा";
 "calls.removeModerator" = "अनसेट मॉडरेटर";
-"calls.muteAudio" = "गप्प आवाज";
-"calls.unmuteAudio" = "अनमूट ऑडिओ";
+"calls.muteAudio" = "गप्प मायक्रोफोन";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "खालचा हात";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "सूचना";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "नोंदणीचा कालावधी (सेकंद)";
 "accountPage.tlsVerifyServerCertificates" = "सर्व्हर TLS प्रमाणपत्रे सत्यापित करा";

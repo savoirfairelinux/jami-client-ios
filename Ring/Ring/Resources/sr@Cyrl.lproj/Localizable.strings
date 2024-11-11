@@ -72,10 +72,10 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Идентификатор";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Подешавања";
 "swarm.members" = "Чланови";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Приватно";
 "swarm.adminInvitesOnly" = "Приватна група (ограничени позиви)";
 "swarm.invitesOnly" = "Приватна група";
 "swarm.publicChat" = "Јавна група";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Увезив рачуна Џами из локалног архива.";
 "importFromArchive.passwordExplanation" = "Ако је рачун шифрен лозинком, пожените следеће поље.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Увоз";
 "importFromArchive.selectArchiveButton" = "Izaberite datoteku arhive";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Пријави се";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "ЈАМС URL";
 "linkToAccountManager.accountManagerLabel" = "Унесите JAMS URL";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Минимализирајте";
 "calls.setModerator" = "Уредимо модератор";
 "calls.removeModerator" = "Упременимо модератор";
-"calls.muteAudio" = "Уморан аудио";
-"calls.unmuteAudio" = "Неуглашен аудио";
+"calls.muteAudio" = "Искључи микрофон";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Ниже руке";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "Na drugom uređaju";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Обавештења";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Време истека регистрације (секунда)";
 "accountPage.tlsVerifyServerCertificates" = "Проверите сертификате TLS сервера";

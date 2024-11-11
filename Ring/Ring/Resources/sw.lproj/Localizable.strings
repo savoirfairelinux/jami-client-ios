@@ -72,10 +72,10 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Kitambulisho";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Mipangilio";
 "swarm.members" = "Wajumbe";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Private";
 "swarm.adminInvitesOnly" = "Kundi la kibinafsi (mwaliko mdogo)";
 "swarm.invitesOnly" = "Kundi la kibinafsi";
 "swarm.publicChat" = "Kikundi cha umma";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Kuagiza akaunti Jami kutoka faili ya kumbukumbu ya ndani.";
 "importFromArchive.passwordExplanation" = "Ikiwa akaunti imefichwa kwa kutumia password, tafadhali jaza uwanja ufuatao.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Uagizaji";
 "importFromArchive.selectArchiveButton" = "Chagua faili ya kumbukumbu";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Ingia";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Ingiza URL ya JAMS";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Punguza";
 "calls.setModerator" = "Weka moderator";
 "calls.removeModerator" = "Moderator kutoweka";
-"calls.muteAudio" = "Sauti isiyo na sauti";
-"calls.unmuteAudio" = "Sauti isiyo na sauti";
+"calls.muteAudio" = "Kipaza sauti";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Mkono wa chini";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Maarifa";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Muda wa kumalizika kwa usajili (sekunde)";
 "accountPage.tlsVerifyServerCertificates" = "Thibitisha vyeti vya TLS vya seva";

@@ -64,7 +64,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.newGroup" = "새 그룹 만들기";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "침묵의 대화";
@@ -72,12 +72,12 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "유형";
 "swarm.identifier" = "식별자";
-"swarm.settings" = "Settings";
+"swarm.settings" = "설정";
 "swarm.members" = "의원";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
+"swarm.oneToOne" = "개인";
+"swarm.adminInvitesOnly" = "개인 그룹 (제한 초청)";
+"swarm.invitesOnly" = "개인 그룹";
 "swarm.publicChat" = "공공 그룹";
 "swarm.others" = "다른";
 "swarm.member" = "회원";
@@ -88,22 +88,22 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "떠나";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "새 그룹 만들기";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
-"swarm.selectContacts" = "Select contacts";
+"swarm.selectContacts" = "연락처를 선택";
 
 // Smartlist
 "smartlist.yesterday" = "어제";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "공공 디렉토리";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "대화";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "새 그룹 만들기";
 "smartlist.accounts" = "회계";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "결과도 없습니다";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "자미 에 관한 것";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "회계";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "나중에";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "자미 계정을 로컬 아카이브 파일에서 가져오세요.";
 "importFromArchive.passwordExplanation" = "계정 암호가 있는 경우 다음 필드를 작성하시기 바랍니다.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "가져오기";
 "importFromArchive.selectArchiveButton" = "파일 파일 선택";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "로그인";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL를 입력";
@@ -282,8 +282,8 @@
 "calls.minimize" = "최소화";
 "calls.setModerator" = "조정기를 설정";
 "calls.removeModerator" = "설정하지 않는 모더레이터";
-"calls.muteAudio" = "음향이 무성";
-"calls.unmuteAudio" = "무음 음향";
+"calls.muteAudio" = "무음 마이크";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "하위 손";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "통지";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "등록 만료시간 (초)";
 "accountPage.tlsVerifyServerCertificates" = "서버 TLS 인증서를 확인";

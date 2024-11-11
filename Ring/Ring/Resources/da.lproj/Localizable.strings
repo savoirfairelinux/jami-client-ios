@@ -67,18 +67,18 @@
 "swarmcreation.newGroup" = "Create new group";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
-"swarm.muteConversation" = "Mute conversation";
+"swarm.muteConversation" = "Stemme samtaler";
 "swarm.leaveConversation" = "Lad samtalen være";
 "swarm.chooseColor" = "Farve";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Identifikator";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Indstillinger";
 "swarm.members" = "Medlemmer";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
-"swarm.publicChat" = "Public group";
+"swarm.oneToOne" = "Privat";
+"swarm.adminInvitesOnly" = "Privatgruppe (undtagen invitationer)";
+"swarm.invitesOnly" = "Privatgruppe";
+"swarm.publicChat" = "Den offentlige gruppe";
 "swarm.others" = "Andre";
 "swarm.member" = "Medlem";
 "swarm.invited" = "Indbydes";
@@ -94,11 +94,11 @@
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
-"swarm.selectContacts" = "Select contacts";
+"swarm.selectContacts" = "Vælg kontakter";
 
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "Offentlig mappe";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Samtaler";
 "smartlist.noConversationsFound" = "No conversations match your search";
@@ -120,10 +120,10 @@
 "smartlist.aboutJami" = "Om Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Konti";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "Ikke nu";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New message";
+"smartlist.newMessage" = "Ny besked";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Import Jami-konto fra lokale arkiv.";
 "importFromArchive.passwordExplanation" = "Hvis kontoen er krypteret med et adgangskode, bedes du udfylde følgende felt.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Importér";
 "importFromArchive.selectArchiveButton" = "Vælg arkivfil";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Log Ind";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Indtaster JAMS URL";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Minimer";
 "calls.setModerator" = "Indstilling af moderator";
 "calls.removeModerator" = "Moderator";
-"calls.muteAudio" = "Sluk Lyd";
-"calls.unmuteAudio" = "Udybnet lyd";
+"calls.muteAudio" = "Sluk mikrofon";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Nedre hånd";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Notifikationer";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "Registreringstidspunktet for at udløbe (sekunder)";
 "accountPage.tlsVerifyServerCertificates" = "Verificere TLS-certifikater for serveren";
@@ -466,7 +466,7 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.contactAdded" = "Invitation modtaget";
 "generatedMessage.swarmCreated" = "Group created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "- Jeg er med i samtalen.";

@@ -64,7 +64,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
+"swarmcreation.newGroup" = "Шинэ бүлэг үүсгэх";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Үгүй яриа";
@@ -72,12 +72,12 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Төлөөлөгч";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Байгууллага";
 "swarm.members" = "Улсчдын гишүүд";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
+"swarm.oneToOne" = "Хувь хүн";
+"swarm.adminInvitesOnly" = "Хувь хүний баг (хязгаарлалттай уриал)";
+"swarm.invitesOnly" = "Хувь хүний баг";
 "swarm.publicChat" = "Олон нийтийн бүлгийн";
 "swarm.others" = "Бусад";
 "swarm.member" = "гишүүн";
@@ -88,22 +88,22 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Хойч яв";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "Шинэ бүлэг үүсгэх";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
-"swarm.selectContacts" = "Select contacts";
+"swarm.selectContacts" = "Байрлагуудыг сонго";
 
 // Smartlist
 "smartlist.yesterday" = "Өчигдөр";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "Нийтийн захиалг";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Хэлэлцүүлэг";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "Шинэ бүлэг үүсгэх";
 "smartlist.accounts" = "Санхүүжилт";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Үр дүнгүй";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "Жэмигийн тухай";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Санхүүжилт";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "Одоо биш";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "Джами-ийн дансыг орон нутгийн архив файлын сангаас импортлоод байна.";
 "importFromArchive.passwordExplanation" = "Хэрэв данс нууц үгээр нууцалтлан нууцалтлан байгаа бол дараахь талбайг толгуурь.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Импортын";
 "importFromArchive.selectArchiveButton" = "Архив файлыг сонго";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Та бүртгэнэ";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL-ийг оруул";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Хөгжлийн багасгах";
 "calls.setModerator" = "Модератор байгуулж";
 "calls.removeModerator" = "Улаанбаатар";
-"calls.muteAudio" = "Улаан дуу";
-"calls.unmuteAudio" = "Утасны үнэгүй";
+"calls.muteAudio" = "Улаан чимээгүй микрофон";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Доод гар";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Хэвлэлт";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "бүртгэлийн хугацаа дуусах хугацаа (эдэв)";
 "accountPage.tlsVerifyServerCertificates" = "Сервер TLS сертификатыг шалгах";

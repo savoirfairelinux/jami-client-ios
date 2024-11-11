@@ -64,21 +64,21 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Kontakt suchen…";
-"swarmcreation.newGroup" = "Create new group";
-"swarmcreation.addDescription" = "Add description";
+"swarmcreation.newGroup" = "Neue Gruppe erstellen";
+"swarmcreation.addDescription" = "Beschreibung hinzufügen";
 // Swarm
-"swarm.muteConversation" = "Mute conversation";
+"swarm.muteConversation" = "Unterhaltung stummschalten";
 "swarm.leaveConversation" = "Unterhaltung verlassen";
 "swarm.chooseColor" = "Farbe";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Identifier";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Einstellungen";
 "swarm.members" = "Members";
 "swarm.addDescription" = "Beschreibung hinzufügen";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
-"swarm.publicChat" = "Public group";
+"swarm.oneToOne" = "Privat";
+"swarm.adminInvitesOnly" = "private Gruppe (eingeschränkte Einladungen)";
+"swarm.invitesOnly" = "private Gruppe";
+"swarm.publicChat" = "öffentliche Gruppe";
 "swarm.others" = "Others";
 "swarm.member" = "Member";
 "swarm.invited" = "Invited";
@@ -88,17 +88,17 @@
 "swarm.inviteMembers" = "Mitglieder einladen";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Leave";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "Neue Gruppe erstellen";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
-"swarm.selectContacts" = "Select contacts";
+"swarm.selectContacts" = "Kontakte auswählen";
 
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "Öffentlich einsehbares Verzeichnis";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Conversations";
 "smartlist.noConversationsFound" = "No conversations match your search";
@@ -123,7 +123,7 @@
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New message";
+"smartlist.newMessage" = "Neue Nachricht";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "Um den PIN-Code zu generieren, gehen Sie zu den Kontoverwaltungseinstellungen auf dem Gerät, das das Konto enthält, mit dem Sie eine Verknüpfung herstellen möchten. Wählen Sie „Neues Gerät verknüpfen“. Sie erhalten den zum Ausfüllen dieses Formulars erforderlichen PIN-Code. Der PIN-Code läuft in 10 Minuten ab.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Ein Jami-Konto aus einer lokalen Archivdatei importieren.";
+"importFromArchive.explanation" = "Ein Jami-Konto aus lokalen Archivdatei importieren.";
 "importFromArchive.passwordExplanation" = "Wenn das Konto mit einem Passwort verschlüsselt ist, füllen Sie bitte das folgende Feld aus.";
 "importFromArchive.title" = "Aus Archiv importieren";
 "importFromArchive.buttonTitle" = "Import";
 "importFromArchive.selectArchiveButton" = "Archivdatei auswählen";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Einloggen";
 "linkToAccountManager.title" = "JAMS-Konto";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Minimieren";
 "calls.setModerator" = "Moderator festlegen";
 "calls.removeModerator" = "Moderator freistellen";
-"calls.muteAudio" = "Stummschalten";
-"calls.unmuteAudio" = "Stummschaltung aufheben";
+"calls.muteAudio" = "Mikrofon stummschalten";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Hand senken";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "Dieses Konto ist passwortverschlüsselt. Geben Sie das Passwort ein, um den PIN-Code zu generieren.";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Installieren und starten Sie Jami, wählen Sie „Von einem anderen Gerät importieren“ und scannen Sie den QR-Code oder geben Sie manuell einen PIN-Code ein.";
-"accountPage.pinError" = "Der PIN-Code konnte nicht generiert werden";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Notifications";
 "accountPage.notificationError" = "Benachrichtigungen für Jami sind deaktiviert. Aktivieren Sie es in den Geräteeinstellungen, um diese Funktion zu nutzen.";
 "accountPage.callsFromUnknownContacts" = "Anrufe von unbekannten Kontakten erlauben.";
 "accountPage.accountSettingsExplanation" = "Diese Einstellungen gelten nur für dieses Konto.";
 "accountPage.appSettings" = "App-Einstellungen";
-"accountPage.appSettingsExplanation" = "Diese Einstellungen gelten für die gesamte Anwendung";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Verbindungen und Konfigurationen";
 "accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
 "accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
@@ -466,7 +466,7 @@
 
 
 // Generated Message
-"generatedMessage.contactAdded" = "Invitation received";
+"generatedMessage.contactAdded" = "Einladung erhalten";
 "generatedMessage.swarmCreated" = "Group created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "joined the conversation";

@@ -26,11 +26,11 @@
 "global.registerAUsername" = "Register username";
 "global.enterPassword" = "Enter password";
 "global.enterUsername" = "Enter username";
-"global.cancel" = "අවලංගු කරන්න";
-"global.blockContact" = "Block contact";
+"global.cancel" = "Cancel";
+"global.blockContact" = "ସମ୍ପର୍କ ଅବରୋଧ କରନ୍ତୁ";
 "global.removeAccount" = "Remove account";
 "global.incomingCall" = "Incoming call";
-"global.ok" = "හරි";
+"global.ok" = "OK";
 "global.close" = "Close";
 "global.share" = "Share";
 "global.forward" = "Forward";
@@ -43,7 +43,7 @@
 "global.name" = "Name";
 "global.copy" = "Copy";
 "global.reply" = "Reply";
-"global.search" = "Searching…";
+"global.search" = "ସନ୍ଧାନ କରୁଛି…";
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete message";
 "global.deleteFile" = "Delete file from device";
@@ -64,15 +64,15 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "නව සමූහය තනන්න";
+"swarmcreation.newGroup" = "ନୂତନ ଗୋଷ୍ଠୀ ସୃଷ୍ଟି କରନ୍ତୁ";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Mute conversation";
-"swarm.leaveConversation" = "Leave conversation";
+"swarm.leaveConversation" = "ବାର୍ତ୍ତାଳାପ ତ୍ୟାଗ କରନ୍ତୁ";
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "Identifier";
-"swarm.settings" = "සැකසුම්";
+"swarm.settings" = "Settings";
 "swarm.members" = "Members";
 "swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Private";
@@ -88,7 +88,7 @@
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Leave";
-"swarm.newGroup" = "නව සමූහය තනන්න";
+"swarm.newGroup" = "ନୂତନ ଗୋଷ୍ଠୀ ସୃଷ୍ଟି କରନ୍ତୁ";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -99,17 +99,17 @@
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public directory";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "ସନ୍ଧାନ ଫଳାଫଳଗୁଡ଼ିକ";
 "smartlist.conversations" = "Conversations";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "නව සමූහය තනන්න";
+"smartlist.newGroup" = "ନୂତନ ଗୋଷ୍ଠୀ ସୃଷ୍ଟି କରନ୍ତୁ";
 "smartlist.accounts" = "Accounts";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name…";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "ସନ୍ଧାନ";
 "smartlist.noNetworkConnectivity" = "No network connectivity";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 "smartlist.accountsTitle" = "Accounts";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "About Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Accounts";
-"smartlist.disableDonation" = "දැන් නොවේ";
+"smartlist.disableDonation" = "ବର୍ତ୍ତମାନ ନୁହେଁ";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -145,7 +145,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "deleted a message";
-"conversation.contactBlocked" = "Contact blocked";
+"conversation.contactBlocked" = "ସମ୍ପର୍କ ଅବରୋଧ";
 
 // Invitations
 "invitations.noInvitations" = "No invitations";
@@ -170,7 +170,7 @@
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Next";
 "createProfile.title" = "Personalize your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNameLabel" = "ଏକ ପ୍ରଦର୍ଶନ ନାମ ପ୍ରବିଷ୍ଟ କରନ୍ତୁ";
 "createProfile.enterNamePlaceholder" = "Enter name";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createProfilePicture" = "Create profile picture";
@@ -248,7 +248,7 @@
 "alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Record video message";
 "alerts.recordAudioMessage" = "Record audio message";
-"alerts.uploadFile" = "ගොනුව යවන්න";
+"alerts.uploadFile" = "Send file";
 "alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Share my location";
@@ -288,7 +288,7 @@
 
 // Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "සැකසුම්";
+"accountPage.settingsHeader" = "Settings";
 "accountPage.notificationsHeader" = "Notifications";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
@@ -329,7 +329,7 @@
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "Encrypt account";
-"accountPage.changePassword" = "Change password";
+"accountPage.changePassword" = "ପାସ୍‌ୱାର୍ଡ୍ ପରିବର୍ତ୍ତନ କରନ୍ତୁ";
 "accountPage.currentPasswordPlaceholder" = "Enter current password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
@@ -359,7 +359,7 @@
 "accountPage.profileName" = "Profile name";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "ଆକାଉଣ୍ଟ ପରିଚାଳନା କରନ୍ତୁ";
 "accountPage.encryptAccount" = "Encrypt account with a password";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match";
@@ -439,17 +439,17 @@
 
 // Contact Page
 "contactPage.startAudioCall" = "Start audio call";
-"contactPage.startVideoCall" = "Start video call";
+"contactPage.startVideoCall" = "ଭିଡିଓ କଲ୍ ଆରମ୍ଭ କରନ୍ତୁ";
 "contactPage.send" = "Send";
 "contactPage.clearConversation" = "Clear Chat";
-"contactPage.leaveConversation" = "Leave conversation";
+"contactPage.leaveConversation" = "ବାର୍ତ୍ତାଳାପ ତ୍ୟାଗ କରନ୍ତୁ";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "අවලංගු කළා";
+"dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";

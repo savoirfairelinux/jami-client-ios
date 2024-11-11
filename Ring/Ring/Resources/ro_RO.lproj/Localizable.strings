@@ -64,20 +64,20 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Caută un contact…";
-"swarmcreation.newGroup" = "Create new group";
-"swarmcreation.addDescription" = "Add description";
+"swarmcreation.newGroup" = "Creează un grup nou";
+"swarmcreation.addDescription" = "Adaugă o descriere";
 // Swarm
 "swarm.muteConversation" = "Dezactivează notificările";
 "swarm.leaveConversation" = "Termină conversația";
 "swarm.chooseColor" = "Culoare";
 "swarm.typeOfSwarm" = "Tip";
 "swarm.identifier" = "Identificator";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Reglări";
 "swarm.members" = "Membri";
 "swarm.addDescription" = "Adaugă o descriere";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Privat";
 "swarm.adminInvitesOnly" = "Grup privat (invitații limitate)";
-"swarm.invitesOnly" = "Private group";
+"swarm.invitesOnly" = "Grup privat";
 "swarm.publicChat" = "Grup public";
 "swarm.others" = "Alții";
 "swarm.member" = "Membru";
@@ -86,23 +86,23 @@
 "swarm.blocked" = "Blocat";
 "swarm.unknown" = "Necunoscut";
 "swarm.inviteMembers" = "Invită membri";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Chiar vrei să părăsești această conversație?";
 "swarm.Leave" = "Părăsește";
-"swarm.newGroup" = "Create new group";
-"swarm.namePlaceholder" = "Group name";
-"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
-"swarm.customizeProfile" = "Customize group profile";
-"swarm.changePicture" = "Change group picture";
-"swarm.customize" = "Customize group";
+"swarm.newGroup" = "Creează un grup nou";
+"swarm.namePlaceholder" = "Numele grupului";
+"swarm.explanationText" = "Membrii pot fi invitați în orice moment după ce a fost creat grupul.";
+"swarm.customizeProfile" = "Personalizează profilul grupului";
+"swarm.changePicture" = "Schimbă poza grupului";
+"swarm.customize" = "Personalizează grupul";
 "swarm.selectContacts" = "Alege contacte";
 
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Rezultatele căutării";
 "smartlist.conversations" = "Conversații";
 "smartlist.noConversationsFound" = "Nicio conversație nu corespunde căutării";
-"smartlist.newContact" = "New contact";
+"smartlist.newContact" = "Contact nou";
 "smartlist.newGroup" = "Creează un grup nou";
 "smartlist.accounts" = "Conturi";
 "smartlist.invitationReceived" = "Invitații primite";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Nicio legătură la rețea";
 "smartlist.cellularAccess" = "Asigură-te că accesul la rețea este permis";
 "smartlist.accountsTitle" = "Conturi";
-"smartlist.addAccountButton" = "+ Add account";
+"smartlist.addAccountButton" = "+ Adaugă un cont";
 "smartlist.noNumber" = "Contactul ales nu are niciun număr";
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
 "smartlist.invitations" = "Invitații";
@@ -283,7 +283,7 @@
 "calls.setModerator" = "Pune un moderator";
 "calls.removeModerator" = "Elimină moderatorul";
 "calls.muteAudio" = "Oprește microfonul";
-"calls.unmuteAudio" = "Pornește microfonul";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Coboară mâna";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "Acest cont este cifrat cu parolă, introdu parola pentru a genera codul PIN.";
 "accountPage.pinExplanationTitle" = "În alt aparat";
 "accountPage.pinExplanationMessage" = "Instalează și pornește Jami, alege „Importă din alt aparat” și scanează codul QR sau introdu manual PIN-ul.";
-"accountPage.pinError" = "Nu s-a reușit generarea PIN-ului";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Notificări";
 "accountPage.notificationError" = "Notificările pentru Jami sînt dezactivate. Activează-le din reglările aparatului tău.";
 "accountPage.callsFromUnknownContacts" = "Primește apeluri necunoscute.";
 "accountPage.accountSettingsExplanation" = "Aceste reglări se vor aplica numai acestui cont";
 "accountPage.appSettings" = "Reglări generale";
-"accountPage.appSettingsExplanation" = "Aceste reglări se vor aplica tuturor conturilor";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Conectare și configurare";
 "accountPage.sipExpirationTime" = "Timp maxim de înscriere (secunde)";
 "accountPage.tlsVerifyServerCertificates" = "Verifică certificatele TLS ale serverului";
@@ -467,20 +467,20 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Invitație primită";
-"generatedMessage.swarmCreated" = "Group created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
+"generatedMessage.swarmCreated" = "Grup creat";
+"generatedMessage.invitationReceived" = "a fost invitat să participe la conversație";
 "generatedMessage.invitationAccepted" = "participă la conversație";
 "generatedMessage.youJoined" = "Participi la conversație";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.contactBlocked" = "a fost dat afară din conversație";
+"generatedMessage.contactUnblocked" = "a reintrat în conversație";
 "generatedMessage.outgoingCall" = "Apel efectuat";
 "generatedMessage.missedOutgoingCall" = "Apel efectuat nepreluat";
 "generatedMessage.missedIncomingCall" = "Apel pierdut";
 "generatedMessage.liveLocationSharing" = "Distribuirea poziției în direct";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "a părăsit conversația";
 
 // General Settings
-"generalSettings.videoSettings" = "Video settings";
+"generalSettings.videoSettings" = "Reglări video";
 "generalSettings.videoAcceleration" = "Activează accelerarea video";
 "generalSettings.fileTransfer" = "Transfer de fișiere";
 "generalSettings.locationSharing" = "Distribuirea poziției";

@@ -72,12 +72,12 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "ഐഡന്റിഫയർ";
-"swarm.settings" = "Settings";
+"swarm.settings" = "ക്രമീകരണങ്ങൾ";
 "swarm.members" = "അംഗങ്ങള്";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
-"swarm.adminInvitesOnly" = "Private group (restricted invites)";
-"swarm.invitesOnly" = "Private group";
+"swarm.oneToOne" = "സ്വകാര്യ";
+"swarm.adminInvitesOnly" = "സ്വകാര്യ ഗ്രൂപ്പ് (പരിമിത ക്ഷണം)";
+"swarm.invitesOnly" = "സ്വകാര്യ സംഘം";
 "swarm.publicChat" = "പൊതുസംഘം";
 "swarm.others" = "മറ്റു";
 "swarm.member" = "അംഗം";
@@ -94,11 +94,11 @@
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
-"swarm.selectContacts" = "Select contacts";
+"swarm.selectContacts" = "കോൺടാക്റ്റുകൾ തിരഞ്ഞെടുക്കുക";
 
 // Smartlist
 "smartlist.yesterday" = "ഇന്നലെ";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "പൊതുവായ ഡയറക്ടറി";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "സംഭാഷണങ്ങൾ";
 "smartlist.noConversationsFound" = "No conversations match your search";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "ജാമിയെ കുറിച്ച്";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "അക്കൌണ്ടുകൾ";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "ഇപ്പോൾ വേണ്ട";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "ജാമി അക്കൌണ്ട് പ്രാദേശിക ആർക്കൈവ് ഫയലിൽ നിന്നും ഇറക്കുമതി ചെയ്യുക.";
 "importFromArchive.passwordExplanation" = "അക്കൌണ്ട് ഒരു പാസ്വേഡ് ഉപയോഗിച്ച് എൻക്രിപ്റ്റ് ചെയ്തിട്ടുണ്ടെങ്കിൽ താഴെ പറയുന്ന ഫീൽഡ് പൂരിപ്പിക്കുക.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "ഇറക്കുമതി";
 "importFromArchive.selectArchiveButton" = "ആർക്കൈവ് ഫയൽ തിരഞ്ഞെടുക്കുക";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "സൈൻ ഇൻ ചെയ്യുക";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "ജെയിംസ് URL";
 "linkToAccountManager.accountManagerLabel" = "ജെയിംസ് URL നൽകുക";
@@ -282,8 +282,8 @@
 "calls.minimize" = "പരിമിതപ്പെടുത്തുക";
 "calls.setModerator" = "മോഡറേറ്റർ സജ്ജമാക്കുക";
 "calls.removeModerator" = "മോഡറേറ്റർ അൺസെറ്റ് ചെയ്യുക";
-"calls.muteAudio" = "നിശബ്ദ ശബ്ദം";
-"calls.unmuteAudio" = "നിശബ്ദമായ ഓഡിയോ";
+"calls.muteAudio" = "മിണ്ടാത്ത മൈക്രോഫോൺ";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "താഴത്തെ കൈ";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "അറിയിപ്പുകൾ";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "രജിസ്ട്രേഷൻ കാലാവധി (സെക്കൻഡുകൾ)";
 "accountPage.tlsVerifyServerCertificates" = "സെർവർ TLS സർട്ടിഫിക്കറ്റുകൾ പരിശോധിക്കുക";

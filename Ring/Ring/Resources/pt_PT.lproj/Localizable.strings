@@ -64,20 +64,20 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Procurar contacto…";
-"swarmcreation.newGroup" = "Create new group";
-"swarmcreation.addDescription" = "Add description";
+"swarmcreation.newGroup" = "Criar novo grupo";
+"swarmcreation.addDescription" = "Adicionar descrição";
 // Swarm
 "swarm.muteConversation" = "Silenciar conversa";
 "swarm.leaveConversation" = "Abandonar a conversa";
 "swarm.chooseColor" = "Cor";
 "swarm.typeOfSwarm" = "Tipo";
 "swarm.identifier" = "Identificador";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Configurações";
 "swarm.members" = "Membros";
 "swarm.addDescription" = "Adicionar descrição";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Privado";
 "swarm.adminInvitesOnly" = "Grupo privado (convites restritos)";
-"swarm.invitesOnly" = "Private group";
+"swarm.invitesOnly" = "Grupo privado";
 "swarm.publicChat" = "Grupo público";
 "swarm.others" = "Outros";
 "swarm.member" = "Membro";
@@ -88,7 +88,7 @@
 "swarm.inviteMembers" = "Convidar membros";
 "swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
 "swarm.Leave" = "Sair";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "Criar novo grupo";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -98,12 +98,12 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ontem";
-"smartlist.results" = "Public directory";
+"smartlist.results" = "Diretório público";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Conversas";
 "smartlist.noConversationsFound" = "Nenhuma conversa corresponde à sua pesquisa";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "Criar novo grupo";
 "smartlist.accounts" = "Contas";
 "smartlist.invitationReceived" = "Convites recebidos";
 "smartlist.noResults" = "Nenhum resultado";
@@ -209,7 +209,7 @@
 "linkToAccount.explanationPinMessage" = "Para gerar o código PIN, aceda às configurações de gestão da conta no dispositivo que contém a conta à qual pretende ligar. Selecione “Vincular novo dispositivo”. Receberá o código PIN necessário para preencher este formulário. O código PIN expira dentro de 10 minutos.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Importar uma conta Jami a partir de um ficheiro de arquivo local.";
+"importFromArchive.explanation" = "Importar a conta Jami do ficheiro local.";
 "importFromArchive.passwordExplanation" = "Se a conta estiver encriptada com uma palavra-passe, preencha o campo seguinte.";
 "importFromArchive.title" = "Importar de um arquivo";
 "importFromArchive.buttonTitle" = "Importar";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Minimizar";
 "calls.setModerator" = "Definir moderador";
 "calls.removeModerator" = "Moderador não definido";
-"calls.muteAudio" = "Desativar som do áudio";
-"calls.unmuteAudio" = "Ligar áudio";
+"calls.muteAudio" = "Silenciar microfone";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Baixar mão";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "Esta conta é encriptada por palavra-passe, introduza uma palavra-passe para gerar o código PIN";
 "accountPage.pinExplanationTitle" = "Noutro dispositivo";
 "accountPage.pinExplanationMessage" = "Instale e inicie o Jami, selecione importar de outro dispositivo e digitalize o código QR ou introduza manualmente um código PIN.";
-"accountPage.pinError" = "Falha ao gerar o código PIN";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Notificações";
 "accountPage.notificationError" = "As notificações para o Jami estão desativadas. Ative-as nas configurações do dispositivo para poder utilizar esta funcionalidade.";
 "accountPage.callsFromUnknownContacts" = "Permitir chamadas de contactos desconhecidos.";
 "accountPage.accountSettingsExplanation" = "Estas definições aplicar-se-ão apenas a esta conta.";
 "accountPage.appSettings" = "Definições da aplicação";
-"accountPage.appSettingsExplanation" = "Estas definições aplicar-se-ão a todas as aplicações";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Conectividade e configurações";
 "accountPage.sipExpirationTime" = "Tempo de expiração do registo (segundos)";
 "accountPage.tlsVerifyServerCertificates" = "Verificar os certificados TLS do servidor";

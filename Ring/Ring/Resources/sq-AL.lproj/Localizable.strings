@@ -72,10 +72,10 @@
 "swarm.chooseColor" = "Ngjyrë";
 "swarm.typeOfSwarm" = "Lloj";
 "swarm.identifier" = "Identifikues";
-"swarm.settings" = "Settings";
+"swarm.settings" = "Rregullime";
 "swarm.members" = "Anëtarë";
 "swarm.addDescription" = "Shtoni përshkrim";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "Privat";
 "swarm.adminInvitesOnly" = "Grup privat (kufizim ftesash)";
 "swarm.invitesOnly" = "Grup privat";
 "swarm.publicChat" = "Grup publik";
@@ -86,23 +86,23 @@
 "swarm.blocked" = "Bllokuar";
 "swarm.unknown" = "I panjohur";
 "swarm.inviteMembers" = "Ftoni anëtarë";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Doni vërtet të braktiset kjo bisedë?";
 "swarm.Leave" = "Braktise";
-"swarm.newGroup" = "Create new group";
-"swarm.namePlaceholder" = "Group name";
-"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
-"swarm.customizeProfile" = "Customize group profile";
-"swarm.changePicture" = "Change group picture";
-"swarm.customize" = "Customize group";
+"swarm.newGroup" = "Krijoni grup të ri";
+"swarm.namePlaceholder" = "Emër grupi";
+"swarm.explanationText" = "Pasi të jetë krijuar grupi, anëtarët mund të ftohen në çfarëdo kohe.";
+"swarm.customizeProfile" = "Përshtatni profil grupi";
+"swarm.changePicture" = "Ndryshoni foto grupi";
+"swarm.customize" = "Përshtatni grupin";
 "swarm.selectContacts" = "Përzgjidhni kontake";
 
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori publike";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Përfundime kërkimi";
 "smartlist.conversations" = "Biseda";
 "smartlist.noConversationsFound" = "S’ka bisedë me përputhje me kërkimin tuaj";
-"smartlist.newContact" = "New contact";
+"smartlist.newContact" = "Kontakt i ri";
 "smartlist.newGroup" = "Krijoni grup të ri";
 "smartlist.accounts" = "Llogari";
 "smartlist.invitationReceived" = "Ftesat u morën";
@@ -113,7 +113,7 @@
 "smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
 "smartlist.cellularAccess" = "Sigurohuni qe te rregullimet tuaja i është dhënë hyrje te celulari";
 "smartlist.accountsTitle" = "Llogari";
-"smartlist.addAccountButton" = "+ Add account";
+"smartlist.addAccountButton" = "+ Shtoni llogari";
 "smartlist.noNumber" = "Kontakti i përzgjedhur s’ka ndonjë numër";
 "smartlist.selectOneNumber" = "Përzgjidhni një nga numrat";
 "smartlist.invitations" = "Ftesa";
@@ -209,7 +209,7 @@
 "linkToAccount.explanationPinMessage" = "Për të prodhuar kod PIN, kaloni te rregullimet e administrimit të llogarive te pajisja që përmban llogarinë që doni të lidhni. Përzgjidhni “Lidhni pajisje të re”. Do të merrni PIN-in e nevojshëm për plotësimin e këtij formulari. PIN-i do të skadojë pas 10 minutash.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Importoni një llogari Jami që nga një kartelë vendore arkivi.";
+"importFromArchive.explanation" = "Importo llogari Jami prej një kartele vendore arkiv";
 "importFromArchive.passwordExplanation" = "Nëse llogaria është fshehtëzuar me një fjalëkalim, ju lutemi, plotësoni fushën vijuese.";
 "importFromArchive.title" = "Importo prej arkive";
 "importFromArchive.buttonTitle" = "Importoje";
@@ -282,8 +282,8 @@
 "calls.minimize" = "Minimizoje";
 "calls.setModerator" = "Caktoni moderator";
 "calls.removeModerator" = "Hiqe nga moderator";
-"calls.muteAudio" = "Mbylli zërin";
-"calls.unmuteAudio" = "Riktheji zërin";
+"calls.muteAudio" = "Heshtoje mikrofonin";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Uleni dorën";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "Kjo llogari mbrohet me fjalëkalim, jepni një fjalëkalim që të prodhohet një kod PIN";
 "accountPage.pinExplanationTitle" = "Në pajisjen tjetër";
 "accountPage.pinExplanationMessage" = "Instaloni dhe nisni Jami-n, përzgjidhni “Importo prej pajisje tjetër” dhe skanoni kodin QR, ose jepeni dorazi një PIN.";
-"accountPage.pinError" = "S’u arrit të prodhohet PIN";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Njoftime";
 "accountPage.notificationError" = "Njoftimet për Jami-n janë të çaktivizuara. Që të mund të përdorni këtë veçori, aktivizojeni te rregullimet e pajisjes.";
 "accountPage.callsFromUnknownContacts" = "Lejo thirrje prej kontaktesh të panjohur.";
 "accountPage.accountSettingsExplanation" = "Këto rregullimet do të aplikohen vetëm te kjo llogari.";
 "accountPage.appSettings" = "Rregullime aplikacioni";
-"accountPage.appSettingsExplanation" = "Këto rregullime do të zbatohen për krejt aplikacionin";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Aftësi lidhjeje dhe formësime";
 "accountPage.sipExpirationTime" = "Kohë skadimi regjistrimi (sekonda)";
 "accountPage.tlsVerifyServerCertificates" = "Verifiko dëshmi TLS shërbyesi";
@@ -467,20 +467,20 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Ftesa u mor";
-"generatedMessage.swarmCreated" = "Group created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
+"generatedMessage.swarmCreated" = "Grupi u krijua";
+"generatedMessage.invitationReceived" = "u ftua të marrë pjesë në bisedë";
 "generatedMessage.invitationAccepted" = "hyri në bisedë";
 "generatedMessage.youJoined" = "Hytë në bisedë";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.contactBlocked" = "u përzu nga biseda";
+"generatedMessage.contactUnblocked" = "rihyri në bisedë";
 "generatedMessage.outgoingCall" = "Thirrje për";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie e vendndodhjes drejtpërsëdrejti";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "e la bisedën";
 
 // General Settings
-"generalSettings.videoSettings" = "Video settings";
+"generalSettings.videoSettings" = "Rregullime videoje";
 "generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
 "generalSettings.fileTransfer" = "Shpërngulje kartelash";
 "generalSettings.locationSharing" = "Tregim vendndodhjeje";

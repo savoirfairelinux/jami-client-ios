@@ -72,10 +72,10 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Type";
 "swarm.identifier" = "గుర్తింపు";
-"swarm.settings" = "Settings";
+"swarm.settings" = "సెట్టింగులు";
 "swarm.members" = "సభ్యులు";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "1:1";
+"swarm.oneToOne" = "ప్రైవేటు";
 "swarm.adminInvitesOnly" = "ప్రైవేట్ సమూహం (పరిమిత ఆహ్వానాలు)";
 "swarm.invitesOnly" = "ప్రైవేటు సమూహం";
 "swarm.publicChat" = "ప్రజా సమూహం";
@@ -120,7 +120,7 @@
 "smartlist.aboutJami" = "జామి గురించి";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "ఖాతాలు";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "ఇప్పుడు కాదు";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -209,14 +209,14 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import a Jami account from a local archive file.";
+"importFromArchive.explanation" = "స్థానిక ఆర్కైవ్ ఫైల్ నుండి జామి ఖాతాను దిగుమతి చేయండి.";
 "importFromArchive.passwordExplanation" = "ఖాతాకు పాస్వర్డ్తో గుప్తీకరణ ఉంటే, దయచేసి ఈ క్రింది ఫీల్డ్ను పూరించండి.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "దిగుమతి";
 "importFromArchive.selectArchiveButton" = "ఆర్కైవ్ ఫైల్ను ఎంచుకోండి";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "సైన్ ఇన్ చేయండి";
+"linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "JAMS account";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL ను నమోదు చేయండి";
@@ -282,8 +282,8 @@
 "calls.minimize" = "తక్కువ స్థాయిలో";
 "calls.setModerator" = "మోడరేటర్ సెట్";
 "calls.removeModerator" = "సెట్టింగ్ను తొలగించు";
-"calls.muteAudio" = "మూత ఆడియో";
-"calls.unmuteAudio" = "నిశ్శబ్ద ఆడియో";
+"calls.muteAudio" = "మ్యూట్ మైక్రోఫోన్";
+"calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "దిగువ చేతి";
 
 // Account Page
@@ -371,13 +371,13 @@
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "Failed to generate PIN code";
+"accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "నోటిఫికేషన్లు";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
 "accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
 "accountPage.appSettings" = "App settings";
-"accountPage.appSettingsExplanation" = "These settings will apply on all the application";
+"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
 "accountPage.sipExpirationTime" = "నమోదు గడువు (సెకన్లు)";
 "accountPage.tlsVerifyServerCertificates" = "సర్వర్ TLS సర్టిఫికేట్లను ధృవీకరించండి";
