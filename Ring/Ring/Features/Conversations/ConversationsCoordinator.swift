@@ -246,7 +246,7 @@ extension ConversationsCoordinator {
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: account.id)
         let newConversation = ConversationViewModel(with: self.injectionBag)
-        newConversation.conversation = conversation
+        newConversation.setConversation(conversation: conversation)
         self.showConversation(withConversationViewModel: newConversation)
     }
 
@@ -270,7 +270,7 @@ extension ConversationsCoordinator {
         let controllers = navigationController.children
         for controller in controllers
         where controller.isKind(of: (ConversationViewController).self) {
-            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation == conversationModel {
+            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.isViewFor(conversation: conversationModel) {
                 navigationController.popToViewController(conversationController, animated: true)
                 conversationController.becomeFirstResponder()
                 return
@@ -280,15 +280,17 @@ extension ConversationsCoordinator {
     }
 
     func getConversationViewModelForParticipant(jamiId: String) -> ConversationViewModel? {
-        return self.conversationsSource.conversationViewModels.first(where: { model in
-            model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId
-        })
+        return nil
+//        return self.conversationsSource.conversationViewModels.first(where: { model in
+//            model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId
+//        })
     }
 
     func getConversationViewModelForId(conversationId: String) -> ConversationViewModel? {
-        return self.conversationsSource.conversationViewModels.first(where: { model in
-            model.conversation.id == conversationId
-        })
+        return nil
+//        return self.conversationsSource.conversationViewModels.first(where: { model in
+//            model.conversation.id == conversationId
+//        })
     }
 }
 
