@@ -82,7 +82,7 @@ class ConversationDataSource: ObservableObject {
     }
 
     private func createOrRetrieveViewModel(for conversationModel: ConversationModel, isBlocked: Bool) -> ConversationViewModel? {
-        if let viewModel = conversationViewModels.first(where: { $0.conversation == conversationModel }) {
+        if let viewModel = conversationViewModels.first(where: { $0.isViewFor(conversation: conversationModel) }) {
             return viewModel
         }
         // Attempt to restore a blocked conversation if not blocked
@@ -94,12 +94,12 @@ class ConversationDataSource: ObservableObject {
 
         // Update temporary conversation if exists
         if let tempConversation = getTemporaryConversation?(conversationModel) {
-            tempConversation.conversation = conversationModel
+            tempConversation.setConversation(conversation: conversationModel)
             return tempConversation
         }
 
         let newViewModel = ConversationViewModel(with: injectionBag)
-        newViewModel.conversation = conversationModel
+        newViewModel.setConversation(conversation: conversationModel)
         return newViewModel
     }
 
@@ -110,8 +110,8 @@ class ConversationDataSource: ObservableObject {
         let viewModel = blockedConversation.remove(at: blockedIndex)
 
         // Reset conversation to trigger didSet
-        let conversation = viewModel.conversation
-        viewModel.conversation = conversation
+//        let conversation = viewModel.conversation
+//        viewModel.conversation = conversation
 
         // Notify if a conversation has been restored
         if let onConversationRestored = self.onConversationRestored,

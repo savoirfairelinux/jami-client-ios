@@ -218,7 +218,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.swiftUIModel.cleanMessages()
     }
 
-    var conversation: ConversationModel! {
+    private var conversation: ConversationModel! {
         didSet {
             self.subscribeUnreadMessages()
             self.swiftUIModel.conversation = conversation
@@ -458,6 +458,14 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         }
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return false }
         return self.callService.call(participantHash: jamiId, accountID: self.conversation.accountId) != nil
+    }
+
+    func setConversation(conversation: ConversationModel) {
+        self.conversation = conversation
+    }
+
+    func isViewFor(conversation: ConversationModel) -> Bool {
+        return self.conversation == conversation
     }
 
     lazy var showCallButton: Observable<Bool> = {
