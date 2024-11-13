@@ -180,17 +180,6 @@ struct SwarmCreationUI: View {
             .padding(.horizontal)
         })
     }
-
-    func createTheSwarmButtonView() -> some View {
-        return Button(action: {
-            self.hideKeyboard()
-            list.createTheSwarm()
-        }, label: {
-            Text(L10n.Swarmcreation.newGroup)
-                .swarmButtonTextStyle()
-        })
-        .swarmButtonStyle()
-    }
 }
 
 struct ImagePicker: UIViewControllerRepresentable {
