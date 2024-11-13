@@ -616,8 +616,8 @@ internal enum L10n {
     internal static let missedOutgoingCall = L10n.tr("Localizable", "generatedMessage.missedOutgoingCall", fallback: "Missed outgoing call")
     /// Outgoing call
     internal static let outgoingCall = L10n.tr("Localizable", "generatedMessage.outgoingCall", fallback: "Outgoing call")
-    /// Group created
-    internal static let swarmCreated = L10n.tr("Localizable", "generatedMessage.swarmCreated", fallback: "Group created")
+    /// Conversation created
+    internal static let swarmCreated = L10n.tr("Localizable", "generatedMessage.swarmCreated", fallback: "Conversation created")
     /// You joined the conversation
     internal static let youJoined = L10n.tr("Localizable", "generatedMessage.youJoined", fallback: "You joined the conversation")
   }
@@ -864,8 +864,8 @@ internal enum L10n {
     internal static let jamsResults = L10n.tr("Localizable", "smartlist.jamsResults", fallback: "Search result")
     /// New contact
     internal static let newContact = L10n.tr("Localizable", "smartlist.newContact", fallback: "New contact")
-    /// Create new group
-    internal static let newGroup = L10n.tr("Localizable", "smartlist.newGroup", fallback: "Create new group")
+    /// New group
+    internal static let newGroup = L10n.tr("Localizable", "smartlist.newGroup", fallback: "New group")
     /// New message
     internal static let newMessage = L10n.tr("Localizable", "smartlist.newMessage", fallback: "New message")
     /// No conversations
@@ -950,8 +950,8 @@ internal enum L10n {
   internal enum Swarmcreation {
     /// Add description
     internal static let addDescription = L10n.tr("Localizable", "swarmcreation.addDescription", fallback: "Add description")
-    /// Create new group
-    internal static let newGroup = L10n.tr("Localizable", "swarmcreation.newGroup", fallback: "Create new group")
+    /// New group
+    internal static let newGroup = L10n.tr("Localizable", "swarmcreation.newGroup", fallback: "New group")
     /// Search for contact…
     internal static let searchBar = L10n.tr("Localizable", "swarmcreation.searchBar", fallback: "Search for contact…")
   }
