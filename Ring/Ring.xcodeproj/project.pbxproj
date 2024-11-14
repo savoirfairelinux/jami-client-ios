@@ -89,8 +89,6 @@
 		0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */; };
 		0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
 		0EDCC8601F98150500B121D7 /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */; };
-		0EDE34C71F868E1200FFA15C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE34C61F868E1200FFA15C /* EditProfileViewController.swift */; };
-		0EDE34C91F8691BB00FFA15C /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE34C81F8691BB00FFA15C /* EditProfileViewModel.swift */; };
 		0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		0EF49AA123828CBC0064CD98 /* ParticipantProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF49AA023828CBC0064CD98 /* ParticipantProfileInfo.swift */; };
 		0EF78DE31FD0AE3000FC6966 /* ConversationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF78DE21FD0AE3000FC6966 /* ConversationsManager.swift */; };
@@ -727,8 +725,6 @@
 		0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		0ED6660F1F9FED1C00743D42 /* AMPopTip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPopTip.framework; path = Carthage/Build/iOS/AMPopTip.framework; sourceTree = "<group>"; };
 		0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
-		0EDE34C61F868E1200FFA15C /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		0EDE34C81F8691BB00FFA15C /* EditProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCardUtils.swift; sourceTree = "<group>"; };
 		0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsecp256k1.a; path = ../DEPS/arm64/lib/libsecp256k1.a; sourceTree = "<group>"; };
 		0EF49AA023828CBC0064CD98 /* ParticipantProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileInfo.swift; sourceTree = "<group>"; };
@@ -1875,8 +1871,6 @@
 		0EDE34C51F868D2D00FFA15C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				0EDE34C61F868E1200FFA15C /* EditProfileViewController.swift */,
-				0EDE34C81F8691BB00FFA15C /* EditProfileViewModel.swift */,
 				26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */,
 			);
 			name = Shared;
@@ -2992,7 +2986,6 @@
 				26454F7C2B7E770900CFF06C /* TestEnvironment.swift in Sources */,
 				62AA15CA1FFD3D7E0064A063 /* VideoService.swift in Sources */,
 				26D08AB9269628F400E37574 /* RequestsService.swift in Sources */,
-				0EDE34C71F868E1200FFA15C /* EditProfileViewController.swift in Sources */,
 				1DE93596291B119900E426CF /* SwarmCreationViewModel.swift in Sources */,
 				2679E42C29328352007E4639 /* ConcurrentDictionary.swift in Sources */,
 				26A072F92959F461006D8163 /* ContextMenuView.swift in Sources */,
@@ -3135,7 +3128,6 @@
 				66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */,
 				0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */,
 				62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */,
-				0EDE34C91F8691BB00FFA15C /* EditProfileViewModel.swift in Sources */,
 				267B958A2C2478F100353B01 /* SipAccountDetailModel.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				1A2D18D11F29182500B2C785 /* ConversationViewController.swift in Sources */,
