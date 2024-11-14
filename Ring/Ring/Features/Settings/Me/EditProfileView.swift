@@ -41,6 +41,7 @@ struct EditProfileView: View {
         NavigationView {
             VStack(alignment: .center) {
                 Button(action: {
+                    hideKeyboard()
                     showingImagePicker = true
                 }, label: {
                     ZStack {
