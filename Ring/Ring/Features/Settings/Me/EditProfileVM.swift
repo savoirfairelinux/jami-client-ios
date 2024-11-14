@@ -42,18 +42,18 @@ class EditProfileVM: ObservableObject, AvatarViewDataModel {
     }
 
     func updateProfile() {
-        var photo: String?
-        if let image = self.profileImage?.fixOrientation(),
-           let imageData = image.convertToData(ofMaxSize: 40000) {
-            photo = imageData.base64EncodedString()
+        // Run on a background thread
+        Task {
+            var photo: String?
+
+            if let image = self.profileImage?.fixOrientation(),
+               let imageData = image.convertToData(ofMaxSize: 40000) {
+                photo = imageData.base64EncodedString()
+            }
+
+            let avatar: String = photo ?? ""
+
+            await self.accountService.updateProfile(accountId: self.account.id, displayName: self.profileName, avatar: avatar)
         }
-        guard let details = self.account.details else { return }
-        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName), withValue: self.profileName)
-        account.details = details
-        self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
-        let accountUri = AccountModelHelper.init(withAccount: account).uri ?? ""
-        self.profileService.updateAccountProfile(accountId: account.id,
-                                                 alias: self.profileName,
-                                                 photo: photo, accountURI: accountUri)
     }
 }

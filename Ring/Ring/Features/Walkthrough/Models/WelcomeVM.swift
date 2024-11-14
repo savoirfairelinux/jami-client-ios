@@ -229,21 +229,22 @@ extension WelcomeVM {
     }
 
     private func saveProfile(accountId: String) {
-        guard let account = self.accountService.getAccount(fromAccountId: accountId) else {
-            return
-        }
-        let photo = convertProfileImageToBase64()
+        // Run on a background thread
+        Task {
+            guard let account = self.accountService.getAccount(fromAccountId: accountId) else {
+                return
+            }
+            let photo = convertProfileImageToBase64()
 
-        if photo == nil && profileName.isEmpty {
-            // No changes for profile
-            return
-        }
+            if photo == nil && profileName.isEmpty {
+                // No changes for profile
+                return
+            }
 
-        let accountURI = AccountModelHelper(withAccount: account).uri ?? ""
-        profileService.updateAccountProfile(accountId: accountId,
-                                            alias: profileName,
-                                            photo: photo,
-                                            accountURI: accountURI)
+            let avatar: String = photo ?? ""
+
+            await self.accountService.updateProfile(accountId: account.id, displayName: self.profileName, avatar: avatar)
+        }
     }
 
     private func convertProfileImageToBase64() -> String? {

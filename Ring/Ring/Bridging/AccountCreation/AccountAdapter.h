@@ -89,5 +89,8 @@
               destinationPath:(NSString *)destinationPath
                        scheme:(NSString *)scheme
                      password:(NSString *)password;
+-(void)updateProfile:(NSString *)accountId
+         displayName:(NSString *)displayName
+              avatar:(NSString *)avatar;
 
 @end
