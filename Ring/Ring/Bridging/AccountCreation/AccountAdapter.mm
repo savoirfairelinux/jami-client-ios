@@ -225,6 +225,14 @@ static id <AccountAdapterDelegate> _delegate;
                                  std::string([newPassword UTF8String]));
 }
 
+-(void)updateProfile:(NSString *)accountId
+         displayName:(NSString *)displayName
+              avatar:(NSString *)avatar {
+    updateProfile(std::string([accountId UTF8String]),
+                  std::string([displayName UTF8String]),
+                  std::string([avatar UTF8String]), 1);
+}
+
 -(void)setAccountsActive:(BOOL) active {
     auto accounts = getAccountList();
     for(auto account: accounts) {
