@@ -382,6 +382,10 @@ class AccountsService: AccountAdapterDelegate {
         accountAdapter.revokeDevice(account, password: password, deviceId: deviceId)
     }
 
+    func updateProfile(accountId: String, displayName: String, avatar: String) {
+        accountAdapter.updateProfile(accountId, displayName: displayName, avatar: avatar)
+    }
+
     /**
      Gathers all the initial default details contained by any accounts, Ring or SIP.
 

@@ -51,9 +51,8 @@ class EditProfileVM: ObservableObject, AvatarViewDataModel {
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName), withValue: self.profileName)
         account.details = details
         self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
-        let accountUri = AccountModelHelper.init(withAccount: account).uri ?? ""
-        self.profileService.updateAccountProfile(accountId: account.id,
-                                                 alias: self.profileName,
-                                                 photo: photo, accountURI: accountUri)
+        let avatar: String = photo ?? ""
+
+        self.accountService.updateProfile(accountId: account.id, displayName: self.profileName, avatar: avatar)
     }
 }
