@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "مکالمن ساكيت";
@@ -75,7 +74,7 @@
 "swarm.settings" = "سيٽنگون";
 "swarm.members" = "ڤڠڬونا";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Private";
+"swarm.oneToOne" = "ڤريڤوت";
 "swarm.adminInvitesOnly" = "ڤڠوربان ڤريۏيت (مڠمبيل ڤرليندوڠن)";
 "swarm.invitesOnly" = "ڤروڤيوت";
 "swarm.publicChat" = "ڤڠوربانن ڤولاو";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "ڤڠاجرن";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "حسابن";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "تيدق ڤرلو";
@@ -209,7 +208,7 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import Jami account from local archive file.";
+"importFromArchive.explanation" = "مڠمبيل كاونت Jami دري مڠيكوت مريك.";
 "importFromArchive.passwordExplanation" = "اڤابيلا ايكون دڤرچايڤكن دڠن ڤاسر، كرجاسا?? ن ممبلي ڤلباڬاي يڠ دلاڤوركن.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "ڤڠاجرن";
@@ -282,7 +281,7 @@
 "calls.minimize" = "مڠهادڤي";
 "calls.setModerator" = "مودراتور دتڠڬوڠ";
 "calls.removeModerator" = "مودراتور دڤرچايا?? ي";
-"calls.muteAudio" = "Mute microphone";
+"calls.muteAudio" = "ميكروفون خاموش";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "يڠ دالم لالو";
 
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "ڤڠاجين يڠ دڤرچايا?? ي";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "مڠمبيل ڤرساتوان";
 "generatedMessage.youJoined" = "تو اونتوق مڠاتاكن ڤڠاجرن";

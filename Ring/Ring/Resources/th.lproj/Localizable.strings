@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "สร้างกลุ่มใหม่";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "การพูดคุยเงียบ";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "บทสนทนา";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "สร้างกลุ่มใหม่";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "บัญชี";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ไม่มีผลลัพธ์";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "ได้รับคำเชิญ";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "เข้าร่วมการพูดคุย";
 "generatedMessage.youJoined" = "คุณเข้าร่วมการพูดคุย";

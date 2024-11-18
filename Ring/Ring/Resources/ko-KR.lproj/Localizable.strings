@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "새 그룹 만들기";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "침묵의 대화";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "대화";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "새 그룹 만들기";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "회계";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "결과도 없습니다";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "초대 받은 것";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "대화에 참여";
 "generatedMessage.youJoined" = "대화에 참여했지";

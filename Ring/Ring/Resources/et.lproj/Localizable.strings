@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Loo uus grupp";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Summuta vestlus";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Vestlused";
 "smartlist.noConversationsFound" = "Ühtegi vestlust ei vasta sinu otsingule";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Loo uus grupp";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Kasutajakontod";
 "smartlist.invitationReceived" = "Sulle on kutseid";
 "smartlist.noResults" = "Pole tulemusi";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Said kutse";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "liitus vestlusega";
 "generatedMessage.youJoined" = "Sa liitusid vestlusega";

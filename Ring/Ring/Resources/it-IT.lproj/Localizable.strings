@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Cerca contatto…";
-"swarmcreation.newGroup" = "Crea un nuovo gruppo";
 "swarmcreation.addDescription" = "Aggiungi descrizione";
 // Swarm
 "swarm.muteConversation" = "Disattiva le notifiche";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Conversazioni";
 "smartlist.noConversationsFound" = "Nessuna conversazione corrisponde";
 "smartlist.newContact" = "Nuovo contatto";
-"smartlist.newGroup" = "Crea un nuovo gruppo";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Account";
 "smartlist.invitationReceived" = "Inviti ricevuti";
 "smartlist.noResults" = "Nessun risultato";
@@ -198,7 +197,7 @@
 "createAccount.encryptExplanation" = "Un account Jami viene creato e memorizzato localmente solo su questo dispositivo, come archivio contenente le chiavi dell'account. L'accesso a questo archivio può essere protetto da una password.";
 
 // Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Collegamento dell'account";
+"linkToAccount.waitLinkToAccountTitle" = "Associazione dell'account";
 "linkToAccount.linkButtonTitle" = "Associa";
 "linkToAccount.linkDeviceTitle" = "Associa dispositivo";
 "linkToAccount.linkDeviceMessage" = "Scegliere \"Associa un altro dispositivo\" dall'altra applicazione Jami per mostrare il codice QR o il PIN";
@@ -233,7 +232,7 @@
 "alerts.accountDefaultErrorMessage" = "Si è verificato un errore durante la creazione dell'account.";
 "alerts.profileTakePhoto" = "Scatta una foto";
 "alerts.profileUploadPhoto" = "Carica foto";
-"alerts.accountLinkedTitle" = "Collegamento account";
+"alerts.accountLinkedTitle" = "Associazione dell'account";
 "alerts.dbFailedTitle" = "Si è verificato un errore durante l'avvio di Jami";
 "alerts.dbFailedMessage" = "Chiudi l'applicazione e prova ad aprirla di nuovo";
 "alerts.confirmBlockContact" = "Sei sicuro di voler bloccare questo contatto? Anche la cronologia delle conversazioni con questo contatto verrà eliminata in modo permanente.";
@@ -283,7 +282,7 @@
 "calls.setModerator" = "Metti un moderatore";
 "calls.removeModerator" = "Rimuovi moderatore";
 "calls.muteAudio" = "Disattiva microfono";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "Attiva microfono";
 "calls.lowerHand" = "Abbassa la mano";
 
 // Account Page
@@ -371,13 +370,13 @@
 "accountPage.passwordForPin" = "Questo account è protetto da password; immettere la password per generare il codice PIN.";
 "accountPage.pinExplanationTitle" = "Nell'altro dispositivo";
 "accountPage.pinExplanationMessage" = "Installa e avvia Jami, seleziona \"Importa da un altro dispositivo\" e scansiona il codice QR oppure inserire manualmente il PIN.";
-"accountPage.pinError" = "An error occurred while generating the PIN code.";
+"accountPage.pinError" = "Si è verificato un errore durante la generazione del codice PIN.";
 "accountPage.notificationTitle" = "Notifiche";
 "accountPage.notificationError" = "Le notifiche per Jami sono disattivate. Attivale nelle impostazioni del tuo dispositivo";
 "accountPage.callsFromUnknownContacts" = "Ricevi chiamate sconosciute.";
 "accountPage.accountSettingsExplanation" = "Queste impostazioni si applicano solo a questo account.";
 "accountPage.appSettings" = "Impostazioni generali";
-"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
+"accountPage.appSettingsExplanation" = " Queste impostazioni verranno applicate a tutti gli account.";
 "accountPage.connectivityAndConfiguration" = "Connessione e configurazione";
 "accountPage.sipExpirationTime" = "Ritardo massimo di registrazione (secondi)";
 "accountPage.tlsVerifyServerCertificates" = "Verifica i certificati TLS del server";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Invito ricevuto";
-"generatedMessage.swarmCreated" = "Gruppo creato";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "è stato invitato a partecipare alla conversazione";
 "generatedMessage.invitationAccepted" = "partecipa alla conversazione";
 "generatedMessage.youJoined" = "Partecipi alla conversazione";

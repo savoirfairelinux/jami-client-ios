@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Buat grup baru";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Bisukan obrolan";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Obrolan";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Buat grup baru";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Akun";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Tidak ketemu";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Undangan diterima";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "bergabung dengan percakapan";
 "generatedMessage.youJoined" = "Kau bergabung dalam percakapan";

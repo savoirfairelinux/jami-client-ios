@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Поиск контакта...";
-"swarmcreation.newGroup" = "Создать новую группу";
 "swarmcreation.addDescription" = "Добавить описание";
 // Swarm
 "swarm.muteConversation" = "Отключить звук в беседе";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Разговоры";
 "smartlist.noConversationsFound" = "По вашему запросу не найдено ни одного разговора";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Создать новую группу";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Учетные записи";
 "smartlist.invitationReceived" = "Приглашения получены";
 "smartlist.noResults" = "Нет результатов";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Получено приглашение";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "Присоединился к разговору";
 "generatedMessage.youJoined" = "Ты присоединился к разговору";

@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Vytvořit novou skupinu";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Ztlumit konverzaci";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Konverzace";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Vytvořit novou skupinu";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Účty";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Žádné výsledky";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Pozvání přijato";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "Připojeno ke konverzaci";
 "generatedMessage.youJoined" = "Připojil jste se ke konverzaci";

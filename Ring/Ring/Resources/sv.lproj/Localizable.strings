@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Skapa ny grupp";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "- Ett stillsamt samtal.";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Konversationer";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Skapa ny grupp";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Konton";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Inget resultat";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Inbjudan mottagen";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "- Jag gick med i samtalet.";
 "generatedMessage.youJoined" = "Du gick med i samtalet.";

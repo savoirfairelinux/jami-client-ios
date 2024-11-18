@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "നിശബ്ദ സംഭാഷണം";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "സംഭാഷണങ്ങൾ";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "അക്കൌണ്ടുകൾ";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ഫലങ്ങളില്ല";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "ക്ഷണം ലഭിച്ചത്";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "സംഭാഷണത്തില് പങ്കെടുത്തു";
 "generatedMessage.youJoined" = "നീ സംഭാഷണത്തില് പങ്കെടുത്തു";

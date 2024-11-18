@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Caută un contact…";
-"swarmcreation.newGroup" = "Creează un grup nou";
 "swarmcreation.addDescription" = "Adaugă o descriere";
 // Swarm
 "swarm.muteConversation" = "Dezactivează notificările";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Conversații";
 "smartlist.noConversationsFound" = "Nicio conversație nu corespunde căutării";
 "smartlist.newContact" = "Contact nou";
-"smartlist.newGroup" = "Creează un grup nou";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Conturi";
 "smartlist.invitationReceived" = "Invitații primite";
 "smartlist.noResults" = "Niciun rezultat";
@@ -128,7 +127,7 @@
 // Conversation
 "conversation.addToContactsButton" = "Adaugă la contacte";
 "conversation.addToContactsLabel" = "Adaugi la contacte?";
-"conversation.notContactLabel" = "nu e în contactele tale";
+"conversation.notContactLabel" = "nu este în contactele tale";
 "conversation.messagePlaceholder" = "Scrie pentru";
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către ";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
@@ -283,7 +282,7 @@
 "calls.setModerator" = "Pune un moderator";
 "calls.removeModerator" = "Elimină moderatorul";
 "calls.muteAudio" = "Oprește microfonul";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "Pornește microfonul";
 "calls.lowerHand" = "Coboară mîna";
 
 // Account Page
@@ -371,13 +370,13 @@
 "accountPage.passwordForPin" = "Acest cont este cifrat cu parolă, introdu parola pentru a genera codul PIN.";
 "accountPage.pinExplanationTitle" = "În alt aparat";
 "accountPage.pinExplanationMessage" = "Instalează și pornește Jami, alege „Importă din alt aparat” și scanează codul QR sau introdu manual PIN-ul.";
-"accountPage.pinError" = "An error occurred while generating the PIN code.";
+"accountPage.pinError" = "A apărut o eroare în timpul generării codului PIN.";
 "accountPage.notificationTitle" = "Notificări";
 "accountPage.notificationError" = "Notificările pentru Jami sînt dezactivate. Activează-le din reglările aparatului tău.";
 "accountPage.callsFromUnknownContacts" = "Primește apeluri necunoscute.";
 "accountPage.accountSettingsExplanation" = "Aceste reglări se vor aplica numai acestui cont.";
 "accountPage.appSettings" = "Reglări generale";
-"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
+"accountPage.appSettingsExplanation" = "Aceste reglări se vor aplica tuturor conturilor.";
 "accountPage.connectivityAndConfiguration" = "Conectare și configurare";
 "accountPage.sipExpirationTime" = "Timp maxim de înscriere (secunde)";
 "accountPage.tlsVerifyServerCertificates" = "Verifică certificatele TLS de server";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Invitație primită";
-"generatedMessage.swarmCreated" = "Grup creat";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "a fost invitat să participe la conversație";
 "generatedMessage.invitationAccepted" = "participă la conversație";
 "generatedMessage.youJoined" = "Participi la conversație";

@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Hae henkilöä…";
-"swarmcreation.newGroup" = "Luo uusi ryhmä";
 "swarmcreation.addDescription" = "Lisää kuvaus";
 // Swarm
 "swarm.muteConversation" = "Mykistä keskustelu";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Keskustelu";
 "smartlist.noConversationsFound" = "Yksikään keskustelu ei vastaa hakuasi";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Luo uusi ryhmä";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Tilit";
 "smartlist.invitationReceived" = "Kutsut vastaanotettu";
 "smartlist.noResults" = "Ei tuloksia";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Kutsu vastaanotettu";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "liittyi keskusteluun";
 "generatedMessage.youJoined" = "Sinä liityit keskusteluun";

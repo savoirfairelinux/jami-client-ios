@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "મૌન વાતચીત";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "વાતચીત";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "ખાતાઓ";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "કોઈ પરિણામો";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "પ્રાપ્ત આમંત્રણ";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "વાતચીતમાં જોડાયા";
 "generatedMessage.youJoined" = "તમે વાતચીતમાં જોડાયા";
