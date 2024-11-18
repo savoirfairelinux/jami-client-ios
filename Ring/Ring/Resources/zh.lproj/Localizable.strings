@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "建立新群組";
 "swarmcreation.addDescription" = "添加描述";
 // Swarm
 "swarm.muteConversation" = "静音对话";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "對話";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "建立新群組";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "帳號";
 "smartlist.invitationReceived" = "邀请已发送";
 "smartlist.noResults" = "无结果";
@@ -224,12 +223,12 @@
 "linkToAccountManager.enterCredentials" = "输入 JAMS 凭据";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Account error";
-"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundTitle" = "无法找到账户";
+"alerts.accountCannotBeFoundMessage" = "在 Jami 网络上找不到账户。请确保它是从现有设备上的 Jami 导出的，并且提供的凭据是正确的。";
 "alerts.accountAddedTitle" = "Account added";
 "alerts.accountNoNetworkTitle" = "网络错误";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
-"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorTitle" = "无法找到账户";
 "alerts.accountDefaultErrorMessage" = "创建帐户时出错";
 "alerts.profileTakePhoto" = "照相";
 "alerts.profileUploadPhoto" = "上传照片";
@@ -431,7 +430,7 @@
 
 // Link New Device
 "linkDevice.title" = "关联新设备";
-"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
+"linkDevice.passwordError" = "使用该密码无法解锁您的账户。";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
 "linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "已接受邀请";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "加入该对话";
 "generatedMessage.youJoined" = "你加入了谈话";

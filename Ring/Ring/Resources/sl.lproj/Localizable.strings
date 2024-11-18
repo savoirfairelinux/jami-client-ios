@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Poišči stik ...";
-"swarmcreation.newGroup" = "Ustvari novo skupino";
 "swarmcreation.addDescription" = "Dodaj opis";
 // Swarm
 "swarm.muteConversation" = "Utišaj pogovor";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Pogovori";
 "smartlist.noConversationsFound" = "Noben pogovor se ne ujema z vašim iskanim nizom";
 "smartlist.newContact" = "Nov stik";
-"smartlist.newGroup" = "Ustvari novo skupino";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Računi";
 "smartlist.invitationReceived" = "Prejetih povabil";
 "smartlist.noResults" = "Ni zadetkov";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Povabilo je prejeto";
-"generatedMessage.swarmCreated" = "Skupina ustvarjena";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "se je pridružil_a pogovoru";
 "generatedMessage.youJoined" = "Pridružili ste se pogovoru";

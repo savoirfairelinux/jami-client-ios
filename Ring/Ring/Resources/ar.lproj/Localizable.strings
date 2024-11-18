@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "إنشاء مجموعة جديدة";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "محادثة صامتة";
@@ -75,7 +74,7 @@
 "swarm.settings" = "الإعدادات";
 "swarm.members" = "الأعضاء";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Private";
+"swarm.oneToOne" = "خاص";
 "swarm.adminInvitesOnly" = "مجموعة خاصة (دعوات مقيدة)";
 "swarm.invitesOnly" = "مجموعة خاصة";
 "swarm.publicChat" = "مجموعة عامة";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "محادثات";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "إنشاء مجموعة جديدة";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "حسابات";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "لا يوجد نتائج";
@@ -209,7 +208,7 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import Jami account from local archive file.";
+"importFromArchive.explanation" = "استيراد حساب جامي من ملف أرشيف محلي.";
 "importFromArchive.passwordExplanation" = "إذا كان الحساب مشفرًا بمشفرة، يرجى ملء الحقل التالي.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "استيراد";
@@ -282,7 +281,7 @@
 "calls.minimize" = "خفض";
 "calls.setModerator" = "حدد المدير";
 "calls.removeModerator" = "إزالة المدير";
-"calls.muteAudio" = "Mute microphone";
+"calls.muteAudio" = "كتم ميكروفون";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "اليد السفلى";
 
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "تم تلقي دعوة";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "انضم إلى المحادثة";
 "generatedMessage.youJoined" = "لقد انضمت إلى المحادثة";

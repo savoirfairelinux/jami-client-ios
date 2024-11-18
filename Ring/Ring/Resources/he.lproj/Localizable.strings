@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "יצירת קבוצה חדשה";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "שיחה שקטה";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "דיונים";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "יצירת קבוצה חדשה";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "חשבונות";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "אין תוצאות";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "הזמנה התקבלה";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "הצטרף לשיחה";
 "generatedMessage.youJoined" = "אתה הצטרפת לשיחה";

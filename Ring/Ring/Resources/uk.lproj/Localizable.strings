@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Створити нову групу";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Немовний розмову";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Групові чати";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Створити нову групу";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Облікові записи";
 "smartlist.invitationReceived" = "Запрошення отримані";
 "smartlist.noResults" = "Ніяких результатів";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Отримано запрошення";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "приєднався до розмови";
 "generatedMessage.youJoined" = "Ти приєднався до розмови";

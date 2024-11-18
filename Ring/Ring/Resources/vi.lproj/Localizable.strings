@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Tạo nhóm mới";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Cuộc trò chuyện câm lặng";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Các cuộc trò chuyện";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Tạo nhóm mới";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Tài khoản";
 "smartlist.invitationReceived" = "Lời mời nhận được";
 "smartlist.noResults" = "Không có kết quả";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Thỉnh cầu được nhận";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "gia nhập cuộc trò chuyện";
 "generatedMessage.youJoined" = "Anh đã tham gia cuộc trò chuyện";

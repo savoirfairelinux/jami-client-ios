@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Kontakt suchen…";
-"swarmcreation.newGroup" = "Neue Gruppe erstellen";
 "swarmcreation.addDescription" = "Beschreibung hinzufügen";
 // Swarm
 "swarm.muteConversation" = "Unterhaltung stummschalten";
@@ -86,24 +85,24 @@
 "swarm.blocked" = "Blockiert";
 "swarm.unknown" = "Unbekannt";
 "swarm.inviteMembers" = "Mitglieder einladen";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Möchten Sie diese Unterhaltung wirklich verlassen?";
 "swarm.Leave" = "Verlassen";
 "swarm.newGroup" = "Neue Gruppe erstellen";
-"swarm.namePlaceholder" = "Group name";
-"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
-"swarm.customizeProfile" = "Customize group profile";
-"swarm.changePicture" = "Change group picture";
-"swarm.customize" = "Customize group";
+"swarm.namePlaceholder" = "Gruppenname";
+"swarm.explanationText" = "Mitglieder können jederzeit eingeladen werden, nachdem die Gruppe erstellt wurde.";
+"swarm.customizeProfile" = "Gruppenprofil anpassen";
+"swarm.changePicture" = "Gruppenbild ändern";
+"swarm.customize" = "Gruppe anpassen";
 "swarm.selectContacts" = "Kontakte auswählen";
 
 // Smartlist
 "smartlist.yesterday" = "Gestern";
 "smartlist.results" = "Öffentliches Verzeichnis";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Suchergebnis";
 "smartlist.conversations" = "Unterhaltungen";
 "smartlist.noConversationsFound" = "Keine Unterhaltungen entsprechen Ihrer Suche";
-"smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Neue Gruppe erstellen";
+"smartlist.newContact" = "Neuer Kontakt";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Konten";
 "smartlist.invitationReceived" = "Einladungen erhalten";
 "smartlist.noResults" = "Keine Ergebnisse";
@@ -113,7 +112,7 @@
 "smartlist.noNetworkConnectivity" = "Keine Netzwerkverbindung";
 "smartlist.cellularAccess" = "Vergewissern Sie sich, dass der Mobilfunkzugang in Ihren Einstellungen erlaubt ist.";
 "smartlist.accountsTitle" = "Konten";
-"smartlist.addAccountButton" = "+ Add account";
+"smartlist.addAccountButton" = "+ Konto hinzufügen";
 "smartlist.noNumber" = "Der ausgewählte Kontakt hat keine Nummer";
 "smartlist.selectOneNumber" = "Eine der Nummern auswählen";
 "smartlist.invitations" = "Einladungen";
@@ -283,7 +282,7 @@
 "calls.setModerator" = "Moderator festlegen";
 "calls.removeModerator" = "Moderator entfernen";
 "calls.muteAudio" = "Mikrofon stummschalten";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "Mikrofon-Stummschaltung aufheben";
 "calls.lowerHand" = "Hand senken";
 
 // Account Page
@@ -371,13 +370,13 @@
 "accountPage.passwordForPin" = "Dieses Konto ist passwortverschlüsselt. Geben Sie das Passwort ein, um den PIN-Code zu generieren.";
 "accountPage.pinExplanationTitle" = "Auf einem anderen Gerät";
 "accountPage.pinExplanationMessage" = "Installieren und starten Sie Jami, wählen Sie „Von einem anderen Gerät importieren“ und scannen Sie den QR-Code oder geben Sie manuell einen PIN-Code ein.";
-"accountPage.pinError" = "An error occurred while generating the PIN code.";
+"accountPage.pinError" = "Beim Generieren des PIN-Codes ist ein Fehler aufgetreten.";
 "accountPage.notificationTitle" = "Benachrichtigungen";
 "accountPage.notificationError" = "Benachrichtigungen für Jami sind deaktiviert. Aktivieren Sie es in den Geräteeinstellungen, um diese Funktion zu nutzen.";
 "accountPage.callsFromUnknownContacts" = "Anrufe von unbekannten Kontakten erlauben.";
 "accountPage.accountSettingsExplanation" = "Diese Einstellungen gelten nur für dieses Konto.";
 "accountPage.appSettings" = "App-Einstellungen";
-"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
+"accountPage.appSettingsExplanation" = "Diese Einstellungen gelten für die gesamte Anwendung";
 "accountPage.connectivityAndConfiguration" = "Verbindungen und Konfigurationen";
 "accountPage.sipExpirationTime" = "Ablaufzeit der Registrierung (Sekunden)";
 "accountPage.tlsVerifyServerCertificates" = "Server-TLS-Zertifikate überprüfen";
@@ -467,20 +466,20 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Einladung erhalten";
-"generatedMessage.swarmCreated" = "Group created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
+"generatedMessage.swarmCreated" = "Conversation created";
+"generatedMessage.invitationReceived" = "wurde zur Unterhaltung eingeladen";
 "generatedMessage.invitationAccepted" = "ist der Unterhaltung beigetreten";
 "generatedMessage.youJoined" = "Sie sind der Unterhaltung beigetreten";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.contactBlocked" = "wurde aus der Unterhaltung hinausgeworfen";
+"generatedMessage.contactUnblocked" = "ist der Unterhaltung wieder beigetreten";
 "generatedMessage.outgoingCall" = "Ausgehender Anruf";
 "generatedMessage.missedOutgoingCall" = "Ausgehender Anruf fehlgeschlagen";
 "generatedMessage.missedIncomingCall" = "Verpasster eingehender Anruf";
 "generatedMessage.liveLocationSharing" = "Live-Standortfreigabe";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "hat die Unterhaltung verlassen";
 
 // General Settings
-"generalSettings.videoSettings" = "Video settings";
+"generalSettings.videoSettings" = "Videoeinstellungen";
 "generalSettings.videoAcceleration" = "Videobeschleunigung aktivieren";
 "generalSettings.fileTransfer" = "Dateitransfer";
 "generalSettings.locationSharing" = "Standortfreigabe";

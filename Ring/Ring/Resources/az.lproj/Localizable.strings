@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "ساکئت مکالمات";
@@ -75,7 +74,7 @@
 "swarm.settings" = "تنظیمات";
 "swarm.members" = "عضولری";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Private";
+"swarm.oneToOne" = "خصوصی";
 "swarm.adminInvitesOnly" = "خصوصی گروه (محدود دعوت)";
 "swarm.invitesOnly" = "خصوصی گروه";
 "swarm.publicChat" = "عمومی گروه";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "دانیشیقلار";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "حسابلار";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "نتیجه یوخدور";
@@ -209,7 +208,7 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import Jami account from local archive file.";
+"importFromArchive.explanation" = "جامی حسابینی یئرلی آرکائیو فایل لاریندان واردات ائدیرم.";
 "importFromArchive.passwordExplanation" = "اگر حساب رمزلندیریلیرسه، لطفاً آشاغیداکی ساحه نی دولدورون.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "واردات";
@@ -282,7 +281,7 @@
 "calls.minimize" = "آزالماق";
 "calls.setModerator" = "مودراتور قوی";
 "calls.removeModerator" = "مودئراتورون دَییشدیرمه سی";
-"calls.muteAudio" = "Mute microphone";
+"calls.muteAudio" = "Mikrofonu səssiz et";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "آلتی ال";
 
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "دعوت آلدی";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "دانیشیقدا قوشولدو";
 "generatedMessage.youJoined" = "سن ده مکالمایا قوشولدون";

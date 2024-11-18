@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Ստեղծել նոր խումբ";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Լռական զրույց";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Զրույցներ";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Ստեղծել նոր խումբ";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Հաշվետոմսեր";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ոչ մի արդյունք";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Հրավիրություն";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "միացել է զրույցին";
 "generatedMessage.youJoined" = "Դուք միացել եք զրույցին";

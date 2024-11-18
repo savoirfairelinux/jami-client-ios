@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Buscar contacto…";
-"swarmcreation.newGroup" = "Crear nuevo grupo";
 "swarmcreation.addDescription" = "Añadir descripción";
 // Swarm
 "swarm.muteConversation" = "Silenciar conversación";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Conversaciones";
 "smartlist.noConversationsFound" = "No hay conversaciones que coincidan con su búsqueda";
 "smartlist.newContact" = "Nuevo contacto";
-"smartlist.newGroup" = "Crear nuevo grupo";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Cuentas";
 "smartlist.invitationReceived" = "Invitaciones recibidas";
 "smartlist.noResults" = "Sin resultados";
@@ -283,7 +282,7 @@
 "calls.setModerator" = "Asignar moderador";
 "calls.removeModerator" = "Desasignar moderador";
 "calls.muteAudio" = "Enmudecer micrófono";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "Activar micrófono";
 "calls.lowerHand" = "Bajar la mano";
 
 // Account Page
@@ -371,13 +370,13 @@
 "accountPage.passwordForPin" = "Esta cuenta está encriptada con contraseña, ingrese una contraseña para generar el código PIN";
 "accountPage.pinExplanationTitle" = "En otro dispositivo";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
-"accountPage.pinError" = "An error occurred while generating the PIN code.";
+"accountPage.pinError" = "Se produjo un error al generar el código PIN.";
 "accountPage.notificationTitle" = "Norificaciones";
 "accountPage.notificationError" = "Las notificaciones de Jami están deshabilitadas. Para usar esta función se habilita en la configuración del dispositivo.";
 "accountPage.callsFromUnknownContacts" = "Permitir llamadas de contactos desconocidos.";
 "accountPage.accountSettingsExplanation" = "Esta configuración solo se aplicará a esta cuenta.";
 "accountPage.appSettings" = "Configuración de la aplicación";
-"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
+"accountPage.appSettingsExplanation" = "Estos ajustes se aplicarán a toda la aplicación.";
 "accountPage.connectivityAndConfiguration" = "Conectividad y configuraciones";
 "accountPage.sipExpirationTime" = "Tiempo de expiración del registro (segundos)";
 "accountPage.tlsVerifyServerCertificates" = "Verificar certificados TLS de servidor";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Invitación recibida";
-"generatedMessage.swarmCreated" = "Grupo creado";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "invitado a unirse a la conversación";
 "generatedMessage.invitationAccepted" = "unido a la conversación";
 "generatedMessage.youJoined" = "Te uniste a la conversación";

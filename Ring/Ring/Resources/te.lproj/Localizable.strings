@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "నిశ్శబ్ద సంభాషణ";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "సంభాషణలు";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "ఖాతాలు";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ఫలితాలు లేవు";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "అందుకున్న ఆహ్వానం";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "సంభాషణలో చేరారు";
 "generatedMessage.youJoined" = "మీరు సంభాషణ చేరారు";

@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Kapcsolattartó keresése…";
-"swarmcreation.newGroup" = "Új csoport létrehozása";
 "swarmcreation.addDescription" = "Leírás hozzáadása";
 // Swarm
 "swarm.muteConversation" = "Beszélgetés elnémítása";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Beszélgetések";
 "smartlist.noConversationsFound" = "Nincs a keresésnek megfelelő beszélgetés";
 "smartlist.newContact" = "Új kapcsolattartó";
-"smartlist.newGroup" = "Új csoport létrehozása";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Fiókok";
 "smartlist.invitationReceived" = "Meghívások megérkeztek";
 "smartlist.noResults" = "Nincs eredmény";
@@ -283,7 +282,7 @@
 "calls.setModerator" = "Moderátor beállítása";
 "calls.removeModerator" = "Moderátor megszüntetése";
 "calls.muteAudio" = "Mikrofon elnémítása";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "Mikrofon némításának feloldása";
 "calls.lowerHand" = "Kéz leengedése";
 
 // Account Page
@@ -371,13 +370,13 @@
 "accountPage.passwordForPin" = "Ez a fiók jelszóval titkosított. Kérjük, adja meg a jelszót a PIN-kód létrehozásához.";
 "accountPage.pinExplanationTitle" = "Másik eszközön";
 "accountPage.pinExplanationMessage" = "Telepítse és indítsa el a Jami alkalmazást, válassza az „Importálás másik eszközről” lehetőséget, és QR-kód beolvasása vagy PIN-kód kézi megadása.";
-"accountPage.pinError" = "An error occurred while generating the PIN code.";
+"accountPage.pinError" = "Hiba történt a PIN-kód generálása közben.";
 "accountPage.notificationTitle" = "Értesítések";
 "accountPage.notificationError" = "A Jami értesítései le vannak tiltva. A funkció használatát engedélyezze az eszköz beállításaiban.";
 "accountPage.callsFromUnknownContacts" = "Ismeretlen névjegyektől érkező hívások engedélyezése.";
 "accountPage.accountSettingsExplanation" = "Ezek a beállítások csak erre a fiókra vonatkoznak.";
 "accountPage.appSettings" = "Alkalmazási beállítások";
-"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
+"accountPage.appSettingsExplanation" = "Ezek a beállítások a teljes alkalmazásra vonatkoznak.";
 "accountPage.connectivityAndConfiguration" = "Kapcsolódás és beállítások";
 "accountPage.sipExpirationTime" = "Bejegyeztetés lejárati ideje (másodperc)";
 "accountPage.tlsVerifyServerCertificates" = "Kiszolgáló TLS-tanúsítványok ellenőrzése";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Meghívás megérkezett";
-"generatedMessage.swarmCreated" = "Csoport létrehozva";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "meghívott a beszélgetéshez";
 "generatedMessage.invitationAccepted" = "csatlakozott a beszélgetéshez";
 "generatedMessage.youJoined" = "Ön csatlakozott a beszélgetéshez";

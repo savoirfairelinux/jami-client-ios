@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Δημιουργία νέας ομάδας";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "Μείνε αθόρυβα.";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Συνομιλίες";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Δημιουργία νέας ομάδας";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Λογαριασμοί";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Χωρίς αποτελέσματα";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Η πρόσκληση παραλήφθηκε";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "Συμμετείχε στη συζήτηση";
 "generatedMessage.youJoined" = "Εσύ συμμετείχες στη συζήτηση.";

@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Kërkoni për kontakt…";
-"swarmcreation.newGroup" = "Krijoni grup të ri";
 "swarmcreation.addDescription" = "Shtoni përshkrim";
 // Swarm
 "swarm.muteConversation" = "Heshtoje bisedën";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Biseda";
 "smartlist.noConversationsFound" = "S’ka bisedë me përputhje me kërkimin tuaj";
 "smartlist.newContact" = "Kontakt i ri";
-"smartlist.newGroup" = "Krijoni grup të ri";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Llogari";
 "smartlist.invitationReceived" = "Ftesat u morën";
 "smartlist.noResults" = "S’ka përfundime";
@@ -283,7 +282,7 @@
 "calls.setModerator" = "Caktoni moderator";
 "calls.removeModerator" = "Hiqe nga moderator";
 "calls.muteAudio" = "Heshtoje mikrofonin";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "Hiqi heshtimin mikrofonit";
 "calls.lowerHand" = "Uleni dorën";
 
 // Account Page
@@ -371,13 +370,13 @@
 "accountPage.passwordForPin" = "Kjo llogari mbrohet me fjalëkalim, jepni një fjalëkalim që të prodhohet një kod PIN";
 "accountPage.pinExplanationTitle" = "Në pajisjen tjetër";
 "accountPage.pinExplanationMessage" = "Instaloni dhe nisni Jami-n, përzgjidhni “Importo prej pajisje tjetër” dhe skanoni kodin QR, ose jepeni dorazi një PIN.";
-"accountPage.pinError" = "An error occurred while generating the PIN code.";
+"accountPage.pinError" = "Ndodhi një gabim teksa prodhohej kod PIN.";
 "accountPage.notificationTitle" = "Njoftime";
 "accountPage.notificationError" = "Njoftimet për Jami-n janë të çaktivizuara. Që të mund të përdorni këtë veçori, aktivizojeni te rregullimet e pajisjes.";
 "accountPage.callsFromUnknownContacts" = "Lejo thirrje prej kontaktesh të panjohur.";
 "accountPage.accountSettingsExplanation" = "Këto rregullimet do të aplikohen vetëm te kjo llogari.";
 "accountPage.appSettings" = "Rregullime aplikacioni";
-"accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
+"accountPage.appSettingsExplanation" = "Këto rregullime do të zbatohen për krejt aplikacionin.";
 "accountPage.connectivityAndConfiguration" = "Aftësi lidhjeje dhe formësime";
 "accountPage.sipExpirationTime" = "Kohë skadimi regjistrimi (sekonda)";
 "accountPage.tlsVerifyServerCertificates" = "Verifiko dëshmi TLS shërbyesi";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Ftesa u mor";
-"generatedMessage.swarmCreated" = "Grupi u krijua";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "u ftua të marrë pjesë në bisedë";
 "generatedMessage.invitationAccepted" = "hyri në bisedë";
 "generatedMessage.youJoined" = "Hytë në bisedë";

@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Procurar contacto…";
-"swarmcreation.newGroup" = "Criar novo grupo";
 "swarmcreation.addDescription" = "Adicionar descrição";
 // Swarm
 "swarm.muteConversation" = "Silenciar conversa";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "Conversas";
 "smartlist.noConversationsFound" = "Nenhuma conversa corresponde à sua pesquisa";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Criar novo grupo";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Contas";
 "smartlist.invitationReceived" = "Convites recebidos";
 "smartlist.noResults" = "Nenhum resultado";
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Convite recebido";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "juntou-se à conversa";
 "generatedMessage.youJoined" = "Você se juntou à conversa.";

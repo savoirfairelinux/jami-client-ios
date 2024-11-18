@@ -64,7 +64,6 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.newGroup" = "Create new group";
 "swarmcreation.addDescription" = "Add description";
 // Swarm
 "swarm.muteConversation" = "La conversación silenciosa";
@@ -75,7 +74,7 @@
 "swarm.settings" = "Configuración";
 "swarm.members" = "Los miembros";
 "swarm.addDescription" = "Add description";
-"swarm.oneToOne" = "Private";
+"swarm.oneToOne" = "Privada";
 "swarm.adminInvitesOnly" = "El grupu priváu (invitaciones restrinxíes)";
 "swarm.invitesOnly" = "El grupu priváu";
 "swarm.publicChat" = "El grupu públicu";
@@ -103,7 +102,7 @@
 "smartlist.conversations" = "El so padre foi un fíu de la familia de la familia de los hermanos.";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "Create new group";
+"smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Cuentas";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Nun hai resultáu";
@@ -209,7 +208,7 @@
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Import Jami account from local archive file.";
+"importFromArchive.explanation" = "Importa la cuenta Jami del archivu local.";
 "importFromArchive.passwordExplanation" = "Si la cuenta ta cifrada con contraseña, llétase'l siguiente campu.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Importación";
@@ -282,7 +281,7 @@
 "calls.minimize" = "La so capacidá de control ye de 5 a 10 años.";
 "calls.setModerator" = "Establecimientu inscritu nel Rexistru d'Actividaes Turístiques del Principáu d'Asturies col códigu DGT CA0831.";
 "calls.removeModerator" = "Moderador desactiváu";
-"calls.muteAudio" = "Mute microphone";
+"calls.muteAudio" = "Micrófonos silenciosos";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "La mano inferior";
 
@@ -467,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "La invitación recibida";
-"generatedMessage.swarmCreated" = "Group created";
+"generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation";
 "generatedMessage.invitationAccepted" = "Entra na conversación.";
 "generatedMessage.youJoined" = "Acompañó la conversación";
