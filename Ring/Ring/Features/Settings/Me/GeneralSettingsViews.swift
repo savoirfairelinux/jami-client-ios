@@ -90,31 +90,33 @@ struct LocationSharingSettingsView: View {
                             Text(L10n.GeneralSettings.limitLocationSharingDuration)
                             Spacer()
                             Text(model.locationSharingDurationString)
-                                .onTapGesture {
-                                    showingDurationPicker = true
-                                }
+                            Image(systemName: "chevron.down")
+                        }
+                        .onTapGesture {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.9, blendDuration: 0.4)) {
+                                showingDurationPicker = true
+                            }
                         }
                     }
-
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle(L10n.GeneralSettings.locationSharing)
             }
             if showingDurationPicker {
-                Color.black.opacity(0.4)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        withAnimation {
-                            showingDurationPicker = false
+                Group {
+                    Color.black.opacity(showingDurationPicker ? 0.4 : 0)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            withAnimation {
+                                showingDurationPicker = false
+                            }
                         }
-                    }
-
-                DurationPickerView(duration: $model.locationSharingDuration, isPresented: $showingDurationPicker)
-                    .background(Color(UIColor.systemBackground))
-                    .cornerRadius(12)
-                    .shadow(radius: 5)
-                    .transition(.move(edge: .bottom))
-                    .animation(.easeInOut)
+                    DurationPickerView(duration: $model.locationSharingDuration, isPresented: $showingDurationPicker)
+                        .background(Color(UIColor.systemBackground))
+                        .cornerRadius(12)
+                        .shadow(radius: 5)
+                        .transition(.move(edge: .bottom))
+                }
             }
         }
     }
