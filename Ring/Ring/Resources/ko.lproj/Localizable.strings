@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "침묵의 대화";
 "swarm.leaveConversation" = "대화는 그만둬";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "유형";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "식별자";
 "swarm.settings" = "설정";
 "swarm.members" = "의원";

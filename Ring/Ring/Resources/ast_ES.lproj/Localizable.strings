@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "La conversación silenciosa";
 "swarm.leaveConversation" = "La conversación ye una conversación.";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identificador";
 "swarm.settings" = "Configuración";
 "swarm.members" = "Los miembros";

@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Bisukan obrolan";
 "swarm.leaveConversation" = "Tinggalkan percakapan";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Tipe";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Pengidentifikasi";
 "swarm.settings" = "Setelan";
 "swarm.members" = "Anggota";

@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Silenta konversacio";
 "swarm.leaveConversation" = "Lasu la konversacion";
 "swarm.chooseColor" = "Koloro";
-"swarm.typeOfSwarm" = "Tipo";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identigilo";
 "swarm.settings" = "Agordoj";
 "swarm.members" = "Anoj";

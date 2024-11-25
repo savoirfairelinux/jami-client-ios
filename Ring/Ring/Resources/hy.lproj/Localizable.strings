@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Լռական զրույց";
 "swarm.leaveConversation" = "Թող խոսակցությունը";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Հնազեկիչ";
 "swarm.settings" = "Կարգավորումներ";
 "swarm.members" = "Անդամներ";

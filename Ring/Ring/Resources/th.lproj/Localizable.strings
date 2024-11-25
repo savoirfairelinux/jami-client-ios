@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "การพูดคุยเงียบ";
 "swarm.leaveConversation" = "ปล่อยการพูดคุย";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "ตัวประจําตัว";
 "swarm.settings" = "การตั้งค่า";
 "swarm.members" = "สมาชิก";

@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "নিঃশব্দ কথোপকথন";
 "swarm.leaveConversation" = "কথোপকথন ছেড়ে দিন";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "সনাক্তকরণ";
 "swarm.settings" = "সেটিং";
 "swarm.members" = "সদস্য";

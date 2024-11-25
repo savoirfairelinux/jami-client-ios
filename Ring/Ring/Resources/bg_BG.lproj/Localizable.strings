@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Мълчави разговори";
 "swarm.leaveConversation" = "Остави разговора.";
 "swarm.chooseColor" = "Цвят";
-"swarm.typeOfSwarm" = "Вид";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Идентификатор";
 "swarm.settings" = "Настройки";
 "swarm.members" = "Членове";

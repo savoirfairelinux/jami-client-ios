@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Stemme samtaler";
 "swarm.leaveConversation" = "Lad samtalen være";
 "swarm.chooseColor" = "Farve";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifikator";
 "swarm.settings" = "Indstillinger";
 "swarm.members" = "Medlemmer";

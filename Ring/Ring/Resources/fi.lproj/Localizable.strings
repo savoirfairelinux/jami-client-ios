@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Mykistä keskustelu";
 "swarm.leaveConversation" = "Poistu keskustelusta";
 "swarm.chooseColor" = "Väri";
-"swarm.typeOfSwarm" = "Tyyppi";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Tunniste";
 "swarm.settings" = "Asetukset";
 "swarm.members" = "Jäsenet";

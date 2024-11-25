@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Silenciar conversa";
 "swarm.leaveConversation" = "Abandonar a conversa";
 "swarm.chooseColor" = "Cor";
-"swarm.typeOfSwarm" = "Tipo";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identificador";
 "swarm.settings" = "Configurações";
 "swarm.members" = "Membros";

@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Mazungumzo ya kimya";
 "swarm.leaveConversation" = "Acha mazungumzo";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Kitambulisho";
 "swarm.settings" = "Mipangilio";
 "swarm.members" = "Wajumbe";

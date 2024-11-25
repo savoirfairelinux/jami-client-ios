@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Summuta vestlus";
 "swarm.leaveConversation" = "Lahku vestlusest";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Tunnus";
 "swarm.settings" = "Seadistused";
 "swarm.members" = "Liikmed";

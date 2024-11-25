@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Cuộc trò chuyện câm lặng";
 "swarm.leaveConversation" = "Để lại cuộc trò chuyện";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Định dạng";
 "swarm.settings" = "Cài đặt";
 "swarm.members" = "Các thành viên";

@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Unterhaltung stummschalten";
 "swarm.leaveConversation" = "Unterhaltung verlassen";
 "swarm.chooseColor" = "Farbe";
-"swarm.typeOfSwarm" = "Typ";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifikator";
 "swarm.settings" = "Einstellungen";
 "swarm.members" = "Mitglieder";
@@ -102,7 +102,7 @@
 "smartlist.conversations" = "Unterhaltungen";
 "smartlist.noConversationsFound" = "Keine Unterhaltungen entsprechen Ihrer Suche";
 "smartlist.newContact" = "Neuer Kontakt";
-"smartlist.newGroup" = "New group";
+"smartlist.newGroup" = "Neue Gruppe";
 "smartlist.accounts" = "Konten";
 "smartlist.invitationReceived" = "Einladungen erhalten";
 "smartlist.noResults" = "Keine Ergebnisse";
@@ -466,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Einladung erhalten";
-"generatedMessage.swarmCreated" = "Conversation created";
+"generatedMessage.swarmCreated" = "Unterhaltung erstellt";
 "generatedMessage.invitationReceived" = "wurde zur Unterhaltung eingeladen";
 "generatedMessage.invitationAccepted" = "ist der Unterhaltung beigetreten";
 "generatedMessage.youJoined" = "Sie sind der Unterhaltung beigetreten";

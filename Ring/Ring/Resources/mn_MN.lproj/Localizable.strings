@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Үгүй яриа";
 "swarm.leaveConversation" = "Хэлэлцүүлгийг орхи";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Төлөөлөгч";
 "swarm.settings" = "Байгууллага";
 "swarm.members" = "Улсчдын гишүүд";

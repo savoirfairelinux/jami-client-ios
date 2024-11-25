@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "Išeiti iš pokalbio";
 "swarm.chooseColor" = "Spalva";
-"swarm.typeOfSwarm" = "Tipas";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifikatorius";
 "swarm.settings" = "Nustatymai";
 "swarm.members" = "Nariai";
@@ -102,7 +102,7 @@
 "smartlist.conversations" = "Pokalbiai";
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "Naujas adresatas";
-"smartlist.newGroup" = "New group";
+"smartlist.newGroup" = "Nauja grupė";
 "smartlist.accounts" = "Paskyros";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Jokių rezultatų";
@@ -303,14 +303,14 @@
 "accountPage.enableNotifications" = "Įjungti pranešimus";
 "accountPage.proxyDisabledAlertTitle" = "Įgaliotasis serveris išjungtas";
 "accountPage.proxyDisabledAlertBody" = "Norėdami gauti pranešimus, įjunkite įgaliotąjį serverį";
-"accountPage.removeDeviceTitle" = "Remove device";
+"accountPage.removeDeviceTitle" = "Šalinti įrenginį";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Panaikinti";
 "accountPage.revokeDevicePlaceholder" = "Įveskite savo slaptažodį";
 "accountPage.deviceRevoked" = "Įrenginio panaikinimas užbaigtas";
 "accountPage.deviceRevocationProgress" = "Šalinama…";
 "accountPage.deviceRevocationSuccess" = "Įrenginys pašalintas";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationTryAgain" = "Bandyti dar kartą";
 "accountPage.deviceRevocationWrongPassword" = "Neteisingas slaptažodis";
 "accountPage.deviceRevocationUnknownDevice" = "Nežinomas įrenginys";
 "accountPage.deviceRevocationError" = "Įrenginio panaikinimo klaida";
@@ -320,8 +320,8 @@
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
-"accountPage.passwordPlaceholder" = "Enter account password";
-"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.passwordPlaceholder" = "Įveskite paskyros slaptažodį";
+"accountPage.usernamePlaceholder" = "Įveskite pageidaujamą naudotojo vardą";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Registruoti";
@@ -329,9 +329,9 @@
 "accountPage.usernameRegistrationFailed" = "Patikrinkite slaptažodį.";
 "accountPage.createPassword" = "Šifruoti paskyrą";
 "accountPage.changePassword" = "Pakeisti slaptažodį";
-"accountPage.currentPasswordPlaceholder" = "Enter current password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
+"accountPage.currentPasswordPlaceholder" = "Įveskite dabartinį slaptažodį";
+"accountPage.newPasswordPlaceholder" = "Įveskite naują slaptažodį";
+"accountPage.newPasswordConfirmPlaceholder" = "Pakartokite naują slaptažodį";
 "accountPage.changePasswordError" = "Neteisingas slaptažodis";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
@@ -356,7 +356,7 @@
 "accountPage.profileNameNotSelected" = "Name not selected";
 "accountPage.accountHeader" = "Paskyra";
 "accountPage.profileName" = "Profilio pavadinimas";
-"accountPage.profileNamePlaceholder" = "Enter profile name";
+"accountPage.profileNamePlaceholder" = "Įveskite profilio pavadinimą";
 "accountPage.editProfile" = "Taisyti profilį";
 "accountPage.manageAccount" = "Tvarkyti paskyrą";
 "accountPage.encryptAccount" = "Šifruoti paskyrą slaptažodžiu";
@@ -377,7 +377,7 @@
 "accountPage.accountSettingsExplanation" = "Šie nustatymai bus taikomi tik šiai paskyrai.";
 "accountPage.appSettings" = "Programos nustatymai";
 "accountPage.appSettingsExplanation" = "Šie nustatymai bus taikomi visai programai.";
-"accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
+"accountPage.connectivityAndConfiguration" = "Jungiamumas ir konfigūracijos";
 "accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
 "accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
 "accountPage.tlsVerifyClientCertificates" = "Verify client TLS certificates";
@@ -387,7 +387,7 @@
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
 "accountPage.thisDevice" = "Šis įrenginys";
 "accountPage.otherDevices" = "Kiti susieti įrenginiai";
-"accountPage.accountIdentity" = "Account identity";
+"accountPage.accountIdentity" = "Paskyros tapatybė";
 "accountPage.bootstrap" = "Pradinė įkeltis";
 "accountPage.dhtConfiguration" = "OpenDHT konfigūracija";
 
@@ -400,16 +400,16 @@
 "backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
-"backupAccount.exportSuccess" = "Backup created";
+"backupAccount.exportSuccess" = "Atsarginė kopija sukurta";
 "backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
-"backupAccount.errorFailed" = "An error occurred while exporting the account.";
+"backupAccount.errorFailed" = "Eksportuojant paskyrą įvyko klaida.";
 
 // Account
 "account.sipServer" = "Serveris";
 "account.port" = "Prievadas";
 "account.proxyServer" = "Įgaliotasis serveris";
-"account.createSipAccount" = "Configure SIP Account";
+"account.createSipAccount" = "Konfigūruoti SIP paskyrą";
 "account.sipAccount" = "SIP paskyra";
 "account.configure" = "Konfigūruoti";
 "account.advancedFeatures" = "Išplėstinės ypatybės";
@@ -431,8 +431,8 @@
 // Link New Device
 "linkDevice.title" = "Susieti naują įrenginį";
 "linkDevice.passwordError" = "Neteisingas slaptažodis. Bandykite dar kartą naudodami teisingą slaptažodį.";
-"linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.defaultError" = "An error occurred while exporting the account.";
+"linkDevice.networkError" = "Eksportuojant paskyrą įvyko tinklo klaida.";
+"linkDevice.defaultError" = "Eksportuojant paskyrą įvyko klaida.";
 "linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "Verifying";
 
@@ -449,7 +449,7 @@
 "dataTransfer.readableStatusAwaiting" = "Laukiama…";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Atsisakyta";
-"dataTransfer.sendingFailed" = "An error occurred while sending.";
+"dataTransfer.sendingFailed" = "Siunčiant įvyko klaida.";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
@@ -496,8 +496,8 @@
 "logView.description" = "Atverti diagnostikos žurnalo nustatymus";
 "logView.startLogging" = "Start logging";
 "logView.stopLogging" = "Stop logging";
-"logView.saveError" = "An error occurred while saving the file.";
-"logView.shareError" = "An error occurred while sharing the file.";
+"logView.saveError" = "Įrašant failą įvyko klaida.";
+"logView.shareError" = "Bendrinant failą įvyko klaida.";
 
 // Migrate Account
 "migrateAccount.title" = "Paskyros perkėlimas";

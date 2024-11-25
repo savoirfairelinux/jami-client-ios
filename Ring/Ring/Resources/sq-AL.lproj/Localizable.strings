@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Heshtoje bisedën";
 "swarm.leaveConversation" = "Braktise bisedën";
 "swarm.chooseColor" = "Ngjyrë";
-"swarm.typeOfSwarm" = "Lloj";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifikues";
 "swarm.settings" = "Rregullime";
 "swarm.members" = "Anëtarë";
@@ -102,7 +102,7 @@
 "smartlist.conversations" = "Biseda";
 "smartlist.noConversationsFound" = "S’ka bisedë me përputhje me kërkimin tuaj";
 "smartlist.newContact" = "Kontakt i ri";
-"smartlist.newGroup" = "New group";
+"smartlist.newGroup" = "Grup i ri";
 "smartlist.accounts" = "Llogari";
 "smartlist.invitationReceived" = "Ftesat u morën";
 "smartlist.noResults" = "S’ka përfundime";
@@ -466,7 +466,7 @@
 
 // Generated Message
 "generatedMessage.contactAdded" = "Ftesa u mor";
-"generatedMessage.swarmCreated" = "Conversation created";
+"generatedMessage.swarmCreated" = "Biseda ui krijua";
 "generatedMessage.invitationReceived" = "u ftua të marrë pjesë në bisedë";
 "generatedMessage.invitationAccepted" = "hyri në bisedë";
 "generatedMessage.youJoined" = "Hytë në bisedë";

@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Zwijg gesprek";
 "swarm.leaveConversation" = "Laat het gesprek";
 "swarm.chooseColor" = "Kleur";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identificatie";
 "swarm.settings" = "Instellingen";
 "swarm.members" = "Lid-Staten";

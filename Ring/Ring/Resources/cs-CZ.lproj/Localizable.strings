@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Ztlumit konverzaci";
 "swarm.leaveConversation" = "Opustit konverzaci";
 "swarm.chooseColor" = "Barva";
-"swarm.typeOfSwarm" = "Typ";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifikátor";
 "swarm.settings" = "Nastavení";
 "swarm.members" = "Členové";

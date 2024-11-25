@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Hitz egin isilduta.";
 "swarm.leaveConversation" = "Utzi elkarrizketa.";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Mota";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifikatzailea";
 "swarm.settings" = "Ezarpenak";
 "swarm.members" = "Kideak";

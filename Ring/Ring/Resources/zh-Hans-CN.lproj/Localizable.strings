@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "静音对话";
 "swarm.leaveConversation" = "离开谈话";
 "swarm.chooseColor" = "颜色";
-"swarm.typeOfSwarm" = "类别";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "标识符";
 "swarm.settings" = "设置";
 "swarm.members" = "成员";

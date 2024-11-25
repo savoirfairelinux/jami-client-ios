@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Μείνε αθόρυβα.";
 "swarm.leaveConversation" = "Αφήστε τη συζήτηση";
 "swarm.chooseColor" = "Χρώμα";
-"swarm.typeOfSwarm" = "Τύπος";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Ταυτοποιητής";
 "swarm.settings" = "Ρυθμίσεις";
 "swarm.members" = "Μέλη";

@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Тілсіз әңгіме";
 "swarm.leaveConversation" = "Әңгімелеуді қалдырыңыз";
 "swarm.chooseColor" = "Color";
-"swarm.typeOfSwarm" = "Type";
+"swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Тұлғаны анықтау";
 "swarm.settings" = "Параметрлері";
 "swarm.members" = "Қауым мүшелері";
