@@ -145,7 +145,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     func cancelTransfer(withId transferId: String, accountId: String, conversationId: String) -> NSDataTransferError {
         let err = self.dataTransferAdapter.cancelDataTransfer(withId: transferId, accountId: accountId, conversationId: conversationId)
         if err != .success {
-            self.log.error("couldn't cancel transfer with id: \(transferId)")
+            self.log.error("Unable to cancel transfer with id: \(transferId)")
         }
         return err
     }
@@ -171,7 +171,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         do {
             try imageData.write(to: URL(fileURLWithPath: imagePath.path), options: .atomic)
         } catch {
-            self.log.error("couldn't copy image to cache")
+            self.log.error("Unable to copy image to cache")
         }
         self.sendFile(conversation: conversation, filePath: imagePath.path, displayName: displayName, localIdentifier: nil)
     }
@@ -314,7 +314,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String) {
         guard let event = NSDataTransferEventCode(rawValue: UInt32(eventCode)) else {
-            self.log.error("DataTransferService: can't get transfer code")
+            self.log.error("DataTransferService: unable to get transfer code")
             return
         }
 
