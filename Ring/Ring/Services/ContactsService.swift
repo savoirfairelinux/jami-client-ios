@@ -75,7 +75,7 @@ class ContactsService {
             var values = self.contacts.value
             values.append(contact)
             self.contacts.accept(values)
-            self.log.debug("contact: \(String(describing: contact.userName))")
+            self.log.debug("Contact: \(String(describing: contact.userName))")
         }
     }
     private func loadAndSaveJamiContacts(withAccount account: AccountModel) {
@@ -215,7 +215,7 @@ extension ContactsService: ContactsAdapterDelegate {
         serviceEvent.addEventInput(.peerUri, value: uri)
         serviceEvent.addEventInput(.conversationId, value: conversationId)
         self.responseStream.onNext(serviceEvent)
-        log.debug("Contact added :\(uri)")
+        log.debug("Contact added: \(uri)")
     }
 
     func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool) {
@@ -240,7 +240,7 @@ extension ContactsService: ContactsAdapterDelegate {
         serviceEvent.addEventInput(.peerUri, value: uri)
         serviceEvent.addEventInput(.conversationId, value: contactToRemove.conversationId)
         self.responseStream.onNext(serviceEvent)
-        log.debug("Contact removed :\(uri)")
+        log.debug("Contact removed: \(uri)")
     }
 
 }

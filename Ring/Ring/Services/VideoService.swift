@@ -633,7 +633,7 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startCapture(withDevice device: String) {
-        self.log.debug("Capture started...")
+        self.log.debug("Capture started…")
         if device == camera.highResolutionCamera && self.camera.quality == AVCaptureSession.Preset.medium {
             self.camera.setQuality(quality: AVCaptureSession.Preset.high)
         } else if device == camera.mediumCamera && self.camera.quality == AVCaptureSession.Preset.high {

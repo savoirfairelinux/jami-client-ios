@@ -69,7 +69,7 @@ class AccountsService: AccountAdapterDelegate {
 
     /**
      private Accounts list.
-     Can be used for all the operations, but won't be accessed from outside this file.
+     Can be used for all the operations, but is unable to be accessed from outside this file.
 
      - SeeAlso: `accounts`
      */
