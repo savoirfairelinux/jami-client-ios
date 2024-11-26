@@ -23,7 +23,7 @@
 
 /**
  Forward declaration of the Swift delegate.
- We have to do this because the Ring-Swift.h generated file can't be imported from a .h file.
+ This is done because the Ring-Swift.h generated file is unable to be imported from a .h file.
  The plain import is done in the .mm file.
  */
 @protocol AccountAdapterDelegate;
