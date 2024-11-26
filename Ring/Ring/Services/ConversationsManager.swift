@@ -410,7 +410,7 @@ class ConversationsManager {
                       let messageId: String = event.getEventInput(ServiceEventInput.messageId),
                       let transferInfo = self.dataTransferService.dataTransferInfo(withId: transferId, accountId: accountId, conversationId: conversationId, isSwarm: !conversationId.isEmpty),
                       let currentAccount = self.accountsService.currentAccount else {
-                    self.log.error("ConversationsManager: can't find transferInfo")
+                    self.log.error("ConversationsManager: unable to find transferInfo")
                     return
                 }
                 switch event.eventType {

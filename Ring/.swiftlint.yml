@@ -11,7 +11,7 @@ opt_in_rules: # some rules are only opt-in
   - explicit_self
   - modifier_order
   - toggle_bool
-  - empty_count # can't be autocorrected
+  - empty_count # unable to autocorrect
   - multiline_function_chains
   - closing_brace_spacing
   - closure_body_length
