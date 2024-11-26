@@ -83,7 +83,7 @@ class DaemonService {
             throw StartDaemonError.daemonAlreadyRunning
         }
 
-        log.debug("Starting daemon...")
+        log.debug("Starting daemon…")
         if self.dRingAdaptor.initDaemon() {
             log.debug("Daemon initialized.")
             if self.dRingAdaptor.startDaemon() {
@@ -107,7 +107,7 @@ class DaemonService {
             throw StopDaemonError.daemonNotRunning
         }
 
-        log.debug("Stopping daemon...")
+        log.debug("Stopping daemon…")
         self.dRingAdaptor.fini()
         self.daemonStarted = false
         log.debug("Daemon stopped.")
