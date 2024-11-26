@@ -139,8 +139,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if !self.moveDataToGroupContainer() {
             self.window?.rootViewController = self.appCoordinator.rootViewController
             self.window?.makeKeyAndVisible()
-            let alertController = UIAlertController(title: "There was an error starting Jami", message: "Please try again", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default)
+            let alertController = UIAlertController(title: "Unable to start Jami", message: "An error occurred while attempting to start Jami. Please try again.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
             alertController.addAction(okAction)
             self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
             return true
@@ -321,7 +321,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     self.accountService.currentAccount = account
                 }
                 guard let currentAccount = self.accountService.currentAccount else {
-                    self.log.error("Can't get current account!")
+                    self.log.error("Unable to get current account!")
                     return
                 }
                 DispatchQueue.global(qos: .background).async {[weak self] in

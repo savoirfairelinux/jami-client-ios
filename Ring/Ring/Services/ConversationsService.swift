@@ -660,7 +660,7 @@ class ConversationsService {
     func createSipConversation(uri: String, accountId: String) {
         /// create db. Return if opening db failed
         do {
-            /// return false if could not open database connection
+            /// return false if unable to open database connection
             if try !dbManager.createDatabaseForAccount(accountId: accountId) {
                 return
             }
