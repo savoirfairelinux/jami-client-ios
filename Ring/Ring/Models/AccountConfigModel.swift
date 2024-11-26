@@ -105,7 +105,7 @@ class AccountConfigModel {
                     configValues.updateValue(value, forKey: configKeyModel)
                 } else {
                     // ~ The key given in parameter is not known from Ring.
-                    log.warning("Can't find key: \(key)")
+                    log.warning("Unable to find key: \(key)")
                 }
             }
         }
@@ -162,7 +162,7 @@ class AccountConfigModel {
                 configValues.updateValue(value, forKey: configKeyModel)
             } else {
                 // ~ The key given in parameter is not known from Ring.
-                log.warning("Can't find key: \(key)")
+                log.warning("Unable to find key: \(key)")
             }
         }
     }
