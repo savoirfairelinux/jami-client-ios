@@ -230,6 +230,7 @@ static id <AccountAdapterDelegate> _delegate;
               avatar:(NSString *)avatar {
     updateProfile(std::string([accountId UTF8String]),
                   std::string([displayName UTF8String]),
+                  "",
                   std::string([avatar UTF8String]), 1);
 }
 
