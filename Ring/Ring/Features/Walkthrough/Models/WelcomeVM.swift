@@ -243,7 +243,7 @@ extension WelcomeVM {
 
             let avatar: String = photo ?? ""
 
-            await self.accountService.updateProfile(accountId: account.id, displayName: self.profileName, avatar: avatar)
+            await self.accountService.updateProfile(accountId: account.id, displayName: self.profileName, avatar: avatar, fileType: "JPEG")
         }
     }
 

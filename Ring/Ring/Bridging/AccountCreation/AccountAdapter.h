@@ -91,6 +91,8 @@
                      password:(NSString *)password;
 -(void)updateProfile:(NSString *)accountId
          displayName:(NSString *)displayName
-              avatar:(NSString *)avatar;
+              avatar:(NSString *)avatar
+            fileType:(NSString *)fileType;
+
 
 @end

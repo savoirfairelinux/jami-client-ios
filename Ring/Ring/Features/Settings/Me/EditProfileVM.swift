@@ -53,7 +53,7 @@ class EditProfileVM: ObservableObject, AvatarViewDataModel {
 
             let avatar: String = photo ?? ""
 
-            await self.accountService.updateProfile(accountId: self.account.id, displayName: self.profileName, avatar: avatar)
+            await self.accountService.updateProfile(accountId: self.account.id, displayName: self.profileName, avatar: avatar, fileType: "JPEG")
         }
     }
 }
