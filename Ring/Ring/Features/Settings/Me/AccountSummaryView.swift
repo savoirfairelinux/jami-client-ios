@@ -144,12 +144,7 @@ struct AccountSummaryView: View {
                 showEditPrpofile = true
             }
             .sheet(isPresented: $showEditPrpofile) {
-                EditProfileView(injectionBag: model.injectionBag,
-                                account: model.account,
-                                profileImage: model.profileImage,
-                                profileName: model.profileName,
-                                username: model.username,
-                                avatarSize: model.avatarSize,
+                EditProfileView(accountModel: model,
                                 isPresented: $showEditPrpofile)
             }
         }

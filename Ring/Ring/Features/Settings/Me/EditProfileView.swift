@@ -24,11 +24,13 @@ struct EditProfileView: View {
     @Binding var isPresented: Bool
     @StateObject var model: EditProfileVM
     var avatarSize: CGFloat
+    @ObservedObject var accountModel: AccountSummaryVM
 
-    init(injectionBag: InjectionBag, account: AccountModel, profileImage: UIImage?, profileName: String, username: String?, avatarSize: CGFloat, isPresented: Binding<Bool>) {
-        _model = StateObject(wrappedValue: EditProfileVM(injectionBag: injectionBag, account: account, profileImage: profileImage, profileName: profileName, username: username))
+    init(accountModel: AccountSummaryVM, isPresented: Binding<Bool>) {
+        _model = StateObject(wrappedValue: EditProfileVM(injectionBag: accountModel.injectionBag, account: accountModel.account, profileImage: accountModel.profileImage, profileName: accountModel.profileName, username: accountModel.username))
+        self.accountModel = accountModel
         _isPresented = isPresented
-        self.avatarSize = avatarSize
+        self.avatarSize = accountModel.avatarSize
     }
 
     @SwiftUI.State private var profileImage: Image? = Image(systemName: "person.circle")
@@ -100,6 +102,7 @@ struct EditProfileView: View {
                 }),
                 trailing: Button(action: {
                     model.updateProfile()
+                    accountModel.profileImage = model.profileImage
                     isPresented = false
                 }, label: {
                     Text(L10n.Global.save)

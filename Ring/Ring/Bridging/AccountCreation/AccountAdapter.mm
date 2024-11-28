@@ -227,11 +227,12 @@ static id <AccountAdapterDelegate> _delegate;
 
 -(void)updateProfile:(NSString *)accountId
          displayName:(NSString *)displayName
-              avatar:(NSString *)avatar {
+              avatar:(NSString *)avatar
+            fileType:(NSString *)fileType {
     updateProfile(std::string([accountId UTF8String]),
                   std::string([displayName UTF8String]),
-                  "",
-                  std::string([avatar UTF8String]), 1);
+                  std::string([avatar UTF8String]),
+                  std::string([fileType UTF8String]), 1);
 }
 
 -(void)setAccountsActive:(BOOL) active {

@@ -382,8 +382,8 @@ class AccountsService: AccountAdapterDelegate {
         accountAdapter.revokeDevice(account, password: password, deviceId: deviceId)
     }
 
-    func updateProfile(accountId: String, displayName: String, avatar: String) async {
-        accountAdapter.updateProfile(accountId, displayName: displayName, avatar: avatar)
+    func updateProfile(accountId: String, displayName: String, avatar: String, fileType: String) async {
+        accountAdapter.updateProfile(accountId, displayName: displayName, avatar: avatar, fileType: fileType)
     }
 
     /**
