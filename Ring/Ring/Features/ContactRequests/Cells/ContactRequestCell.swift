@@ -88,7 +88,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
         }
         .startWith((item.profileImageData.value, item.userName.value))
         .observe(on: MainScheduler.instance)
-        .subscribe({ [weak self] profileData -> Void in
+        .subscribe({ [weak self] profileData in
             guard let data = profileData.element?.1 else {
                 return
             }

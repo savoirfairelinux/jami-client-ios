@@ -161,14 +161,14 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
     }
     private func removeContactFromInvitationList(atIndex: IndexPath) {
         let alert = UIAlertController(title: L10n.Alerts.confirmDeleteConversationTitle, message: L10n.Alerts.confirmDeleteConversation, preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction, style: .destructive) {[weak self] (_: UIAlertAction!) -> Void in
+        let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction, style: .destructive) {[weak self] (_: UIAlertAction!) in
             guard let self = self else { return }
             if let reqToDelete: RequestItem = try? self.tableView.rx.model(at: atIndex) {
                 self.viewModel.deleteRequest(item: reqToDelete)
                 self.tableView.reloadData()
             }
         }
-        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
+        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) in }
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
