@@ -75,7 +75,7 @@ struct ContactPicker: UIViewControllerRepresentable {
                                                   message: nil,
                                                   preferredStyle: .alert)
                     let cancelAction = UIAlertAction(title: L10n.Global.ok,
-                                                     style: .default) { (_: UIAlertAction!) -> Void in }
+                                                     style: .default) { (_: UIAlertAction!) in }
                     alert.addAction(cancelAction)
                     if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
                         rootViewController.present(alert, animated: true, completion: nil)

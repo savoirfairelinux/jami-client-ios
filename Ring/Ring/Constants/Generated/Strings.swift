@@ -942,8 +942,8 @@ internal enum L10n {
     internal static let selectContacts = L10n.tr("Localizable", "swarm.selectContacts", fallback: "Select contacts")
     /// Settings
     internal static let settings = L10n.tr("Localizable", "swarm.settings", fallback: "Settings")
-    /// Type
-    internal static let typeOfSwarm = L10n.tr("Localizable", "swarm.typeOfSwarm", fallback: "Type")
+    /// Conversation type
+    internal static let typeOfSwarm = L10n.tr("Localizable", "swarm.typeOfSwarm", fallback: "Conversation type")
     /// Unknown
     internal static let unknown = L10n.tr("Localizable", "swarm.unknown", fallback: "Unknown")
   }
