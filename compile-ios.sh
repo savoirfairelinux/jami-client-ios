@@ -51,7 +51,7 @@ IOS_TOP_DIR="$(pwd)"
 
 if [ -z "$DAEMON_DIR" ]; then
   DAEMON_DIR="$(pwd)/../daemon"
-  echo "DAEMON_DIR not provided trying to find it in $DAEMON_DIR"
+  echo "DAEMON_DIR not provided attempting to find it in $DAEMON_DIR"
 fi
 if [ ! -d "$DAEMON_DIR" ]; then
   echo 'Daemon not found.'
@@ -64,7 +64,7 @@ fi
 
 if [ ! $(which gas-preprocessor.pl) ]
 then
-  echo 'gas-preprocessor.pl not found. Trying to install...'
+  echo 'gas-preprocessor.pl not found. Attempting to install…'
   mkdir -p "$DAEMON_DIR/extras/tools/build/bin/"
   (curl -L https://github.com/libav/gas-preprocessor/raw/master/gas-preprocessor.pl \
     -o "$DAEMON_DIR/extras/tools/build/bin/gas-preprocessor.pl" \
@@ -196,8 +196,8 @@ then
   for f in $LIBFILES
   do
     libFile=${f##*/}
-    echo "Processing $libFile lib..."
-    #There is only 2 ARCH max... So let's make it simple
+    echo "Processing $libFile lib…"
+    #There is only 2 ARCH max… So let's make it simple
     lipo -create  "$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/$libFile"  \
                   "$IOS_TOP_DIR/DEPS/${ARCHS[1]}/lib/$libFile" \
                   -output "$FAT_DIR/lib/$libFile"
