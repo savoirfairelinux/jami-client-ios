@@ -290,7 +290,7 @@ class MessagesListVM: ObservableObject {
                     self.isTemporary = false
                 }
             }, onError: { [weak self] (_) in
-                self?.log.error("error sending contact request")
+                self?.log.error("Error sending contact request")
             })
             .disposed(by: self.disposeBag)
     }
@@ -418,13 +418,13 @@ class MessagesListVM: ObservableObject {
                         if let dat = event["data"], let mId = event["parentMessageId"] {
                             self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: dat, parentId: mId)
                         } else {
-                            self.log.error("[MessagesListVM] Invalid data provided while trying to add a reaction a message.")
+                            self.log.error("[MessagesListVM] Invalid data provided while attempting to add a reaction a message.")
                         }
                     case ReactionCommand.revoke.toString():
                         if let rId = event["reactionId"] {
                             self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: rId)
                         } else {
-                            self.log.error("[MessagesListVM] Invalid message ID provided while trying to revoke a reaction from a message.")
+                            self.log.error("[MessagesListVM] Invalid message ID provided while attempting to revoke a reaction from a message.")
                         }
                     default: break
                     }
@@ -619,7 +619,7 @@ class MessagesListVM: ObservableObject {
          or if this message precedes the current 'lastDelivered' in the messages list.
          */
 
-        // get indeces of last read messages
+        // get indices of last read messages
         let lastReadIndices = getLastReadIndices()
 
         guard let index = self.messagesModels.firstIndex(where: { $0.id == message.id }) else { return }
@@ -815,7 +815,7 @@ class MessagesListVM: ObservableObject {
     func scrollToTargetReply(messageId: String) {
         /*
          If the required message is already loaded, simply scroll to it;
-         otherwise,load conversation until the required message.
+         otherwise, load conversation until the required message.
          */
         if self.getMessage(messageId: messageId) != nil {
             self.scrollToReplyTarget = messageId

@@ -23,7 +23,7 @@ import Foundation
 import SwiftyBeaver
 
 /**
- Errors that can be thrown when trying to start the daemon:
+ Errors that can be thrown when attempting to start the daemon:
 
  - DaemonAlreadyRunning: the daemon is already running.
  - InitializationFailure: the daemon failed to initialiaze.
@@ -36,7 +36,7 @@ enum StartDaemonError: Error {
 }
 
 /**
- Errors that can be thrown when trying to stop the daemon:
+ Errors that can be thrown when attempting to stop the daemon:
 
  - DaemonNotRunning: the daemon is not running and can not be stopped.
  */
