@@ -169,7 +169,7 @@ class ContextMenuVM: ObservableObject {
                 return false
             }
         } else {
-            log.error("[ContextMenu] Jami account ID invaled while trying to read message reactions.")
+            log.error("[ContextMenu] Jami account ID invalid while attempting to read message reactions.")
             return false
         }
     }
@@ -178,7 +178,7 @@ class ContextMenuVM: ObservableObject {
         if let sender = self.currentJamiAccountId {
             return self.presentingMessage.messageModel.message.reactions.first(where: { item in item.author == sender && item.content == withValue })
         } else {
-            log.error("[ContextMenu] Jami account ID invaled while trying to read message reactions.")
+            log.error("[ContextMenu] Jami account ID invalid while attempting to read message reactions.")
             return nil
         }
     }
