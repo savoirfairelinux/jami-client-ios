@@ -24,7 +24,7 @@
 import Foundation
 
 /**
- Errors that can be thrown when trying to build an AccountModel
+ Errors that can be thrown when attempting to build an AccountModel
  */
 enum AccountModelError: Error {
     case unexpectedError

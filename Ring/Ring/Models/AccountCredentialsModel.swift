@@ -19,9 +19,9 @@
  */
 
 /**
- Errors that can be thrown when trying create an AccountCredentialsModel
+ Errors that can be thrown when attempting create an AccountCredentialsModel
 
- - NotEnoughData: some information are missing to create the object
+ - NotEnoughData: information is missing to create the object
  */
 enum CredentialsError: Error {
     case notEnoughData
