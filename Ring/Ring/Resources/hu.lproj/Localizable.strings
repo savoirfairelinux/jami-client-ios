@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Beszélgetés elnémítása";
 "swarm.leaveConversation" = "Kilépés a beszélgetésből";
 "swarm.chooseColor" = "Szín";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Beszélgetés típusa";
 "swarm.identifier" = "Azonosító";
 "swarm.settings" = "Beállítások";
 "swarm.members" = "Tagok";
@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
 "conversation.errorSavingImage" = "Hiba történt a kép gyűjteménybe történő mentése közben.";
-"conversation.receivedRequest" = "%@ kérelmet küldött Önnek egy beszélgetésre.";
-"conversation.incomingRequest" = "Beszélgetési kérelmet küldött.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Üdv!\nSzeretne csatlakozni a beszélgetéshez?";
-"conversation.sendRequest" = "Kapcsolatfelvételi kérelem elküldése, hogy együtt képesek legyenek megosztani.";
-"conversation.sendRequestTitle" = "Kapcsolatfelvételi kérelem küldése";
-"conversation.synchronizationTitle" = "Elfogadta a beszélgetési kérelmet.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Várjuk, hogy a(z) %@ csatlakozzon a beszélgetés összehangolásához.";
 "conversation.inReplyTo" = "Válaszul erre:";
 "conversation.repliedTo" = "válaszolt neki:";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Meghívás megérkezett";
 "generatedMessage.swarmCreated" = "Beszélgetés létrehozva";
-"generatedMessage.invitationReceived" = "meghívott a beszélgetéshez";
-"generatedMessage.invitationAccepted" = "csatlakozott a beszélgetéshez";
-"generatedMessage.youJoined" = "Ön csatlakozott a beszélgetéshez";
-"generatedMessage.contactBlocked" = "eltávolított a beszélgetésből";
-"generatedMessage.contactUnblocked" = "újra csatlakozott a beszélgetéshez";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Kimenő hívás";
 "generatedMessage.missedOutgoingCall" = "Nem fogadott kimenő hívás";
 "generatedMessage.missedIncomingCall" = "Nem fogadott bejövő hívás";

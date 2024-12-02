@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Actualmente está compartiendo a súa localización con ";
 "conversation.explanationReceivingLocationFrom" = "Actualmente está a recibir unha localización en directo de ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ enviouche unha solicitude para conversar.";
-"conversation.incomingRequest" = "Envíoche unha solicitude para unha conversa.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Ola, queres unirte á conversa?";
-"conversation.sendRequest" = "Envío-lle unha solicitude de contacto para poder intercambiar xuntos";
-"conversation.sendRequestTitle" = "Envíe solicitude de contacto";
-"conversation.synchronizationTitle" = "Aceptaches a solicitude para conversar.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Estamos esperando por %@ conexións para sincronizar a conversa.";
 "conversation.inReplyTo" = "En resposta a";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Convite recibido";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "unirse á conversa";
-"generatedMessage.youJoined" = "Unícheste á conversa.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Chamada saínte";
 "generatedMessage.missedOutgoingCall" = "Chamada sen resposta";
 "generatedMessage.missedIncomingCall" = "Chamada entrante perdida";

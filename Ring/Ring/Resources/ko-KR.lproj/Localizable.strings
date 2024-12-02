@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "현재 위치와 공유하고 있습니다.";
 "conversation.explanationReceivingLocationFrom" = "현재 ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "대화 요청을 보냈어요";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "안녕하세요, 대화에 참여하고 싶으세요?";
-"conversation.sendRequest" = "함께 교환할 수 있도록 연락 요청을 보내십시오";
-"conversation.sendRequestTitle" = "연락 요청 을 보내십시오";
-"conversation.synchronizationTitle" = "대화 요청을 받아들였습니다.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "우리는 대화를 동기화하기 위해 %@ 연결을 기다리고 있습니다.";
 "conversation.inReplyTo" = "이에 대한 답변";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "초대 받은 것";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "대화에 참여";
-"generatedMessage.youJoined" = "대화에 참여했지";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "출력 전화";
 "generatedMessage.missedOutgoingCall" = "출력 전화가 빠진 것";
 "generatedMessage.missedIncomingCall" = "수신 전화가 빠진 것";

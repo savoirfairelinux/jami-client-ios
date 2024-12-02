@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "तुम्ही सध्या तुमच्या स्थानाची माहिती ";
 "conversation.explanationReceivingLocationFrom" = "तुम्हाला सध्या ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "मी तुम्हाला संभाषण करण्याची विनंती पाठवली.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "नमस्कार, तुम्हाला या संभाषणात सहभागी व्हायचं आहे का?";
-"conversation.sendRequest" = "त्याला/त्याला संपर्क विनंती पाठवा ज्यामुळे आपण एकत्र विनिमय करू शकाल.";
-"conversation.sendRequestTitle" = "संपर्क विनंती पाठवा";
-"conversation.synchronizationTitle" = "तुम्ही संभाषण विनंती स्वीकारली आहे.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "आम्ही संभाषण समक्रमित करण्यासाठी %@ कनेक्ट्सची वाट पाहत आहोत.";
 "conversation.inReplyTo" = "उत्तर";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "प्राप्त आमंत्रण";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "संभाषणात सहभागी झाले";
-"generatedMessage.youJoined" = "तुम्हीही या संभाषणाला सहभागी झालात";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "बाहेरचा कॉल";
 "generatedMessage.missedOutgoingCall" = "गमावलेला प्रस्थान कॉल";
 "generatedMessage.missedIncomingCall" = "गमावलेला कॉल";

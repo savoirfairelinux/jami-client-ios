@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Դուք ներկայումս կիսում եք ձեր գտնվելու վայրը ";
 "conversation.explanationReceivingLocationFrom" = "Դուք ներկայումս ստանում եք կենդանի տեղակայման ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Ձեզ ուղարկել է հարցազրույցի խնդրանք:";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Բարեւ, կցանկանայի՞ք միանալ զրույցին:";
-"conversation.sendRequest" = "Նրան/այնին ուղարկեք կապի խնդրանք, որպեսզի կարողանաք փոխանակել միասին";
-"conversation.sendRequestTitle" = "Հեռախոսազրույց ուղարկել";
-"conversation.synchronizationTitle" = "Դուք ընդունել եք զրուցի խնդրանքը:";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Մենք սպասում ենք %@ կապերի, որպեսզի սինխրոնացվի զրույցը:";
 "conversation.inReplyTo" = "Պատասխանելով";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Հրավիրություն";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "միացել է զրույցին";
-"generatedMessage.youJoined" = "Դուք միացել եք զրույցին";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Արտաքին զանգ";
 "generatedMessage.missedOutgoingCall" = "Հեռացվող զանգը բացակայում է";
 "generatedMessage.missedIncomingCall" = "Հեռացած ներկա զանգ";

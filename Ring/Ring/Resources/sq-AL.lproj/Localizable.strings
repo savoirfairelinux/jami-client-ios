@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Heshtoje bisedën";
 "swarm.leaveConversation" = "Braktise bisedën";
 "swarm.chooseColor" = "Ngjyrë";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Lloj bisede";
 "swarm.identifier" = "Identifikues";
 "swarm.settings" = "Rregullime";
 "swarm.members" = "Anëtarë";
@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 "conversation.errorSavingImage" = "Ndodhi një gabim teksa ruhej figurë te galeri.";
-"conversation.receivedRequest" = "%@ ju dërgoi një kërkesë për bisedë.";
-"conversation.incomingRequest" = "Ju dërgoi një kërkesë për bisedë.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
-"conversation.sendRequest" = "Dërgojini një kërkesë kontakti, që të jeni në gjendje të shkëmbeni me njëri-tjetrin";
-"conversation.sendRequestTitle" = "Dërgo Kërkesë Kontakti";
-"conversation.synchronizationTitle" = "Keni pranuar kërkesën për bisedë.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Po presim që %@ të lidhet për të njëkohësuar bisedën.";
 "conversation.inReplyTo" = "Në përgjigje të";
 "conversation.repliedTo" = "iu përgjigj";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Ftesa u mor";
 "generatedMessage.swarmCreated" = "Biseda ui krijua";
-"generatedMessage.invitationReceived" = "u ftua të marrë pjesë në bisedë";
-"generatedMessage.invitationAccepted" = "hyri në bisedë";
-"generatedMessage.youJoined" = "Hytë në bisedë";
-"generatedMessage.contactBlocked" = "u përzu nga biseda";
-"generatedMessage.contactUnblocked" = "rihyri në bisedë";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Thirrje për";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";

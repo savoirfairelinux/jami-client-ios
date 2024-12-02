@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
 "conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@size bir görüşme isteği gönderdi.";
-"conversation.incomingRequest" = "Sana bir görüşme isteği gönderdim.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Merhaba,\nGörüşmeye katılmak ister misin?";
-"conversation.sendRequest" = "Birlikte iletişim kurmak için ona bir kişi isteği gönderin";
-"conversation.sendRequestTitle" = "İletişim İsteği Gönder";
-"conversation.synchronizationTitle" = "Görüşme isteğini kabul ettin.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Görüşmeyi eş zamanlamak için %@ bağlanmasını bekliyoruz.";
 "conversation.inReplyTo" = "Cevap olarak";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Davetiye alındı";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "görüşmeye katıldı";
-"generatedMessage.youJoined" = "Görüşme katıldın";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Giden çağrı";
 "generatedMessage.missedOutgoingCall" = "Cevapsız giden çağrı";
 "generatedMessage.missedIncomingCall" = "Cevapsız gelen çağrı";

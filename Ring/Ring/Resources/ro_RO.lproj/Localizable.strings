@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Dezactivează notificările";
 "swarm.leaveConversation" = "Termină conversația";
 "swarm.chooseColor" = "Culoare";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Tipul conversației";
 "swarm.identifier" = "Identificator";
 "swarm.settings" = "Reglări";
 "swarm.members" = "Membri";
@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către ";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
 "conversation.errorSavingImage" = "A apărut o eroare în timpul salvării imaginii.";
-"conversation.receivedRequest" = "%@ ți-a trimis o invitație la conversație.";
-"conversation.incomingRequest" = "Ți-a trimis o invitație la conversație.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Vrei să participi la conversație?";
-"conversation.sendRequest" = "Trimite-i o cerere de contact pentru a conversa împreună.";
-"conversation.sendRequestTitle" = "Trimite o cerere de contact";
-"conversation.synchronizationTitle" = "Ai acceptat invitația la conversație.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Se așteaptă ca %@ să se conecteze pentru a sincroniza conversația.";
 "conversation.inReplyTo" = "Răspuns pentru";
 "conversation.repliedTo" = " a răspuns pentru";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Invitație primită";
 "generatedMessage.swarmCreated" = "Conversație creată";
-"generatedMessage.invitationReceived" = "a fost invitat să participe la conversație";
-"generatedMessage.invitationAccepted" = "participă la conversație";
-"generatedMessage.youJoined" = "Participi la conversație";
-"generatedMessage.contactBlocked" = "a fost dat afară din conversație";
-"generatedMessage.contactUnblocked" = "a reintrat în conversație";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Apel efectuat";
 "generatedMessage.missedOutgoingCall" = "Apel efectuat nepreluat";
 "generatedMessage.missedIncomingCall" = "Apel pierdut";

@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Anda saat ini berbagi lokasi Anda dengan";
 "conversation.explanationReceivingLocationFrom" = "Saat ini Anda sedang menerima lokasi langsung dari";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Mengirimkan permintaan untuk percakapan.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Halo, \nApakah Anda ingin bergabung dalam percakapan?";
-"conversation.sendRequest" = "Kirimkan permintaan kontak kepadanya agar Anda bisa saling bertukar pikiran.";
-"conversation.sendRequestTitle" = "Kirim permintaan kontak";
-"conversation.synchronizationTitle" = "Anda telah menerima permintaan percakapan.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Kami menunggu %@ terhubung untuk menyinkronkan percakapan.";
 "conversation.inReplyTo" = "Sebagai balasan";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Undangan diterima";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "bergabung dengan percakapan";
-"generatedMessage.youJoined" = "Kau bergabung dalam percakapan";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
 "generatedMessage.missedOutgoingCall" = "Panggilan keluar tidak terjawab";
 "generatedMessage.missedIncomingCall" = "Panggilan masuk tidak terjawab";

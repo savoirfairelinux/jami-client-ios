@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "أنت تشارك موقعك حاليًا مع";
 "conversation.explanationReceivingLocationFrom" = "أنت تتلقى حاليًا موقعًا مباشرًا من";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "أرسلت لك طلباً للحديث";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "مرحباً، هل تودين الانضمام إلى المحادثة؟";
-"conversation.sendRequest" = "إرسال طلب اتصال له لكي يتمكنوا من التبادل معاً";
-"conversation.sendRequestTitle" = "أرسل طلب الاتصال";
-"conversation.synchronizationTitle" = "لقد قبلت طلب المحادثة";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "نحن ننتظر %@ الاتصالات لنزامن المحادثة.";
 "conversation.inReplyTo" = "في جواب";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "تم تلقي دعوة";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "انضم إلى المحادثة";
-"generatedMessage.youJoined" = "لقد انضمت إلى المحادثة";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "مكالمة خارجة";
 "generatedMessage.missedOutgoingCall" = "مكالمة خارجة فائتة";
 "generatedMessage.missedIncomingCall" = "مكالمة واردة فائتة";
