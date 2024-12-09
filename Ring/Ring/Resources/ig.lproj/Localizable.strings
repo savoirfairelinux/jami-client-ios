@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Ị na-ekere òkè ugbu a na ọnọdụ gị na ";
 "conversation.explanationReceivingLocationFrom" = "Ị na-enweta ugbu a a a ndụ ọnọdụ site ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "M zigara gị arịrịọ maka mkparịta ụka.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Ndewo, ị̀ ga-achọ isonyere anyị ná mkparịta ụka ahụ?";
-"conversation.sendRequest" = "Ziga ya arịrịọ ịkpọtụrụ ya ka o nwee ike ịkekọrịta ọnụ";
-"conversation.sendRequestTitle" = "Ziga Arịrịọ Kpọtụrụ";
-"conversation.synchronizationTitle" = "Ị nabatawo arịrịọ ahụ e nyere gị ka gị na ya kwurịta okwu.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Anyị na-eche maka %@ njikọ iji mekọrịta mkparịta ụka ahụ.";
 "conversation.inReplyTo" = "Na nzaghachi";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Òkù a kpọrọ";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "sonyeere mkparịta ụka ahụ";
-"generatedMessage.youJoined" = "Ị sonyeere mkparịta ụka ahụ";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "N'imepụta oku";
 "generatedMessage.missedOutgoingCall" = "Ọ dịghị onye na-akpọ gị";
 "generatedMessage.missedIncomingCall" = "Ọ dịghị onye na-akpọ gị";

@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "V súčasnosti zdieľate svoju polohu s ";
 "conversation.explanationReceivingLocationFrom" = "Momentálne dostávate živú lokalitu od ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ vám poslal žiadosť o konverzáciu. ";
-"conversation.incomingRequest" = "Poslal som vám žiadosť o rozhovor.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Ahoj, chcela by si sa pripojiť k rozhovore?";
-"conversation.sendRequest" = "Posielajte mu/jej kontaktnú žiadosť, aby mohli spolu vymieňať";
-"conversation.sendRequestTitle" = "Pošlite žiadosť o kontakt";
-"conversation.synchronizationTitle" = "Prijal si žiadosť o rozhovor.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Čakajú na %@ pripojenia na synchronizáciu konverzácie.";
 "conversation.inReplyTo" = "V odpovedi na";
 "conversation.repliedTo" = "Odpovedať";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Bola prijatá pozvánka";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "Pripojil sa k rozhovore";
-"generatedMessage.youJoined" = "Pripojil si sa k konverzácii";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Odchádzajúci hovor";
 "generatedMessage.missedOutgoingCall" = "Zmeškaný odchádzajúci hovory";
 "generatedMessage.missedIncomingCall" = "Zmeškaný príchodzí hovor";

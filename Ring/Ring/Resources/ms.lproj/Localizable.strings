@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "നിങ്ങൾ നിലവിൽ നിങ്ങളുടെ സ്ഥാനം പങ്കുവെക്കുന്നു ";
 "conversation.explanationReceivingLocationFrom" = "∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "ഒരു സംഭാഷണം നടത്താന് ഒരു അഭ്യർത്ഥന അയച്ചു.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "ഹലോ, നിങ്ങള് ക്ക് സംഭാഷണത്തില് പങ്കെടുക്കാന് താല്പര്യം ഉണ്ടോ?";
-"conversation.sendRequest" = "ഒരുമിച്ച് കൈമാറ്റം ചെയ്യാന് ഒരു കോൺടാക്റ്റ് അഭ്യർത്ഥന അയയ്ക്കുക";
-"conversation.sendRequestTitle" = "ബന്ധപ്പെടാനുള്ള അപേക്ഷ അയയ്ക്കുക";
-"conversation.synchronizationTitle" = "നിങ്ങള് സംഭാഷണ അഭ്യർത്ഥന അംഗീകരിച്ചു.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "സംഭാഷണം സമന്വയിപ്പിക്കാൻ %@ കണക്ഷനുകൾക്കായി കാത്തിരിക്കുകയാണ്.";
 "conversation.inReplyTo" = "ഇതിന് മറുപടിയായി";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "ക്ഷണം ലഭിച്ചത്";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "സംഭാഷണത്തില് പങ്കെടുത്തു";
-"generatedMessage.youJoined" = "നീ സംഭാഷണത്തില് പങ്കെടുത്തു";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
 "generatedMessage.missedOutgoingCall" = "നഷ്ടപ്പെട്ട വിളി";
 "generatedMessage.missedIncomingCall" = "നഷ്ടപ്പെട്ട കോൾ";

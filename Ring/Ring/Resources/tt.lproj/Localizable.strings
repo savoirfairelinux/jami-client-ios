@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Сез хәзерге вакытта ";
 "conversation.explanationReceivingLocationFrom" = "Сез хәзерге вакытта ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Сезгә сөйләшү өчен үтенеч җибәрдем.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Сәлам, әңгәмәгә кушылырга телисезме?";
-"conversation.sendRequest" = "Бергәләп алмашу өчен, аңа мөрәҗәгать итү соравы җибәр";
-"conversation.sendRequestTitle" = "Контактны сорап җибәрү";
-"conversation.synchronizationTitle" = "Сез сөйләшү үтенечен кабул иттегез.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Без %@ бәйләнешләрен сөйләмнең синхронлаштыруын көтәбез.";
 "conversation.inReplyTo" = "Бу сорауларга җавап итеп:";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Чакыру кабул ителгән";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "сөйләшүгә кушылды";
-"generatedMessage.youJoined" = "Син сөйләшүгә кушылдың.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Чыгышлы чакыру";
 "generatedMessage.missedOutgoingCall" = "Чыгышны югалткан чакыру";
 "generatedMessage.missedIncomingCall" = "Килгән чакыруны югалту";

@@ -125,19 +125,19 @@
 "smartlist.newMessage" = "Nauja žinutė";
 
 // Conversation
-"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsButton" = "Pridėti prie adresatų";
 "conversation.addToContactsLabel" = "Pridėti prie adresatų?";
 "conversation.notContactLabel" = "nėra jūsų adresatų sąraše";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Sveiki,\nAr norėtumėte prisijungti prie pokalbio?";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.sendRequestTitle" = "Send Contact Request";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "We are waiting for %@ connects to synchronize the conversation.";
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "replied to";
@@ -161,7 +161,7 @@
 "welcome.text" = "Jami yra laisva ir universali bendravimo platforma, kuri išsaugo naudotojo privatumą ir laisves.";
 "welcome.haveAccount" = "Aš jau turiu paskyrą";
 "welcome.linkDevice" = "Importuoti iš kito įrenginio";
-"welcome.linkBackup" = "Import from archive backup";
+"welcome.linkBackup" = "Importuoti iš atsarginės kopijos archyvo";
 "welcome.createAccount" = "Prisijungti";
 "welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
@@ -229,7 +229,7 @@
 "alerts.accountNoNetworkTitle" = "Tinklo klaida";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Paskyros klaida";
-"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
+"alerts.accountDefaultErrorMessage" = "Kuriant paskyrą įvyko klaida.";
 "alerts.profileTakePhoto" = "Padaryti nuotrauką";
 "alerts.profileUploadPhoto" = "Įkelti nuotrauką";
 "alerts.accountLinkedTitle" = "Susiejama paskyra";
@@ -306,7 +306,7 @@
 "accountPage.removeDeviceTitle" = "Šalinti įrenginį";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Panaikinti";
-"accountPage.revokeDevicePlaceholder" = "Įveskite savo slaptažodį";
+"accountPage.revokeDevicePlaceholder" = "Įveskite slaptažodį";
 "accountPage.deviceRevoked" = "Įrenginio panaikinimas užbaigtas";
 "accountPage.deviceRevocationProgress" = "Šalinama…";
 "accountPage.deviceRevocationSuccess" = "Įrenginys pašalintas";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Gautas pakvietimas";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Išsiunčiamasis skambutis";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Praleistas gaunamasis skambutis";

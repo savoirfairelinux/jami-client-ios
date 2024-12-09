@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "คุณกําลังแบ่งปันสถานที่ของคุณกับ ";
 "conversation.explanationReceivingLocationFrom" = "คุณกําลังรับข้อมูลที่ตั้งสดจาก ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "ส่งคําขอให้คุยกัน";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "สวัสดีครับ คุณอยากเข้าร่วมการพูดคุยกันไหม";
-"conversation.sendRequest" = "ส่งคําขอติดต่อให้เขา/เธอ เพื่อสามารถแลกเปลี่ยนด้วยกัน";
-"conversation.sendRequestTitle" = "ส่ง คํา สนใจ";
-"conversation.synchronizationTitle" = "คุณยอมรับคําขอคุย";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "เรากําลังรอการเชื่อมต่อ %@ เพื่อสอดคล้องการพูดคุย";
 "conversation.inReplyTo" = "ตอบ";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "ได้รับคำเชิญ";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "เข้าร่วมการพูดคุย";
-"generatedMessage.youJoined" = "คุณเข้าร่วมการพูดคุย";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "โทรออก";
 "generatedMessage.missedOutgoingCall" = "สายที่ไม่ได้รับ";
 "generatedMessage.missedIncomingCall" = "สายเรียกเข้าที่ไม่ได้รับ";

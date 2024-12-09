@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Bạn đang chia sẻ vị trí của mình với ";
 "conversation.explanationReceivingLocationFrom" = "Bạn đang nhận được một địa điểm trực tiếp từ ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Tôi đã gửi cho anh một yêu cầu để nói chuyện.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Chào, anh có muốn tham gia cuộc trò chuyện không?";
-"conversation.sendRequest" = "Gửi cho anh ta/cô ấy một yêu cầu liên lạc để có thể trao đổi cùng nhau";
-"conversation.sendRequestTitle" = "Gửi yêu cầu liên lạc";
-"conversation.synchronizationTitle" = "Ông đã chấp nhận yêu cầu nói chuyện.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Chúng tôi đang chờ đợi %@ kết nối để đồng bộ hóa cuộc trò chuyện.";
 "conversation.inReplyTo" = "Trả lời";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Thỉnh cầu được nhận";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "gia nhập cuộc trò chuyện";
-"generatedMessage.youJoined" = "Anh đã tham gia cuộc trò chuyện";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Tiếp tục gọi";
 "generatedMessage.missedOutgoingCall" = "Lỡ cuộc gọi ra ngoài";
 "generatedMessage.missedIncomingCall" = "Lỡ cuộc gọi tiếp nhận";

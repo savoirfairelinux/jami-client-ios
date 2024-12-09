@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Sa jagad praegu oma asukoha kasutajaga";
 "conversation.explanationReceivingLocationFrom" = "Hetkel näed reaalajas asukohta kasutajalt";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ saatis sulle vestluse kutse";
-"conversation.incomingRequest" = "Saatis sulle vestluse kutse.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Tere, kas sa sooviksid liituda vestlusega?";
-"conversation.sendRequest" = "Et saaksite omavahel suhelda, saada talle palve kontaktide vahetamiseks";
-"conversation.sendRequestTitle" = "Saada palve kontaktide vahetamiseks";
-"conversation.synchronizationTitle" = "Sa oled nõustunud vestluskutsega.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Vestluse sünkroniseerimiseks ootame kasutaja %@ ühendust.";
 "conversation.inReplyTo" = "Vastuseks kasutajale";
 "conversation.repliedTo" = "vastusena";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Said kutse";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "liitus vestlusega";
-"generatedMessage.youJoined" = "Sa liitusid vestlusega";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Väljuv kõne";
 "generatedMessage.missedOutgoingCall" = "Väljuv kõne jäi märkamata";
 "generatedMessage.missedIncomingCall" = "Saabuv kõne jäi märkamata";
