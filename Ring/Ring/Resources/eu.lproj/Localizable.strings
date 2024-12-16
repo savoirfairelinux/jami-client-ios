@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Orain zure kokapena partekatzen ari zara.";
 "conversation.explanationReceivingLocationFrom" = "Oraintxe bertan, zuzenean ari zara entzuten.";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Elkarrizketa baterako eskaera bidali dizut.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Kaixo, elkarrizketara etorri nahi duzu?";
-"conversation.sendRequest" = "Bidaliko diozu kontaktu-eskaera, elkarrekin truke egiteko.";
-"conversation.sendRequestTitle" = "Bidali kontaktu eskaera";
-"conversation.synchronizationTitle" = "Onartu duzu elkarrizketa eskaera.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "%@ konektatuaren zain gaude elkarrizketa sinkronizatzeko.";
 "conversation.inReplyTo" = "Erantzun";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Gonbidapena jasota";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "Elkarrizketan sartu nintzen.";
-"generatedMessage.youJoined" = "Elkarrizketan sartu zinen.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Irteera-deia";
 "generatedMessage.missedOutgoingCall" = "Galdutako irteera-deia";
 "generatedMessage.missedIncomingCall" = "Galdutako sarrera-deia";

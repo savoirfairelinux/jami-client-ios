@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Tá tú ag roinnt do shuíomh faoi láthair le ";
 "conversation.explanationReceivingLocationFrom" = "Tá tú ag fáil suíomh beo faoi láthair ó ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Chuir mé iarratas ar chuntas duit le haghaidh comhrá.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Halo, ba mhaith leat a bheith páirteach sa comhrá?";
-"conversation.sendRequest" = "Cuir iarratas a dhéanamh ar an gcaidreamh leis nó léi chun a bheith in ann malartú le chéile";
-"conversation.sendRequestTitle" = "Cuir iarratas a dhéanamh ar an teagmháil";
-"conversation.synchronizationTitle" = "Tá tú glacadh leis an iarraidh comhrá.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Táimid ag fanacht le %@ nascanna chun an comhrá a shuimhrónachadh.";
 "conversation.inReplyTo" = "I dtuarascáil do";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Ag iarraidh a fháil";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "chuaigh isteach sa comhrá";
-"generatedMessage.youJoined" = "Thosaigh tú ag caint";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Glacadh amach";
 "generatedMessage.missedOutgoingCall" = "Ag iarraidh glaoch a fháil";
 "generatedMessage.missedIncomingCall" = "Ag iarraidh glaoch a fháil";

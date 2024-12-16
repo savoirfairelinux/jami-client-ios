@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Du deler for tiden din lokasjon med";
 "conversation.explanationReceivingLocationFrom" = "Du mottar for øyeblikket en live lokasjon fra";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sendte deg en samtaleforespørsel.";
-"conversation.incomingRequest" = "Sendt deg en forespørsel om en samtale.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Hei\nVil du bli med i samtalen?";
-"conversation.sendRequest" = "Send vedkommende en kontaktforespørsel for å kunne snakke sammen.";
-"conversation.sendRequestTitle" = "Send kontaktforespørsler";
-"conversation.synchronizationTitle" = "Du har takket ja til samtaleforespørselen.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Vi venter på  %@ tilkoblinger for å synkronisere samtalen.";
 "conversation.inReplyTo" = "I svar til";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Invitasjon mottatt";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "ble med i samtalen";
-"generatedMessage.youJoined" = "Du kom med i samtalen";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Utgående samtale";
 "generatedMessage.missedOutgoingCall" = "Tapt utgående anrop";
 "generatedMessage.missedIncomingCall" = "Tapt innkommende anrop";

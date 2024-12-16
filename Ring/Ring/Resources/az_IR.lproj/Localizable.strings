@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "حال بو حالدا یئرینی ایشله ییبسان.";
 "conversation.explanationReceivingLocationFrom" = "ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "سنه مکالمه اوچون درخواست گؤندردئم.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "سلام، گئجه جکسن؟";
-"conversation.sendRequest" = "اونا بیرلیکده آچیقلاماق اوچون تماس طلبی گؤندره";
-"conversation.sendRequestTitle" = "تماس طلبی بفرستید";
-"conversation.synchronizationTitle" = "دانیشما طلبئني قبول ائتدین.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "%@-ين ارتباطيني گؤزله ييب، مکالماتي همچينلاشديرماق اوچون.";
 "conversation.inReplyTo" = "جاوابدا";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "دعوت آلدی";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "دانیشیقدا قوشولدو";
-"generatedMessage.youJoined" = "سن ده مکالمایا قوشولدون";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "گئدن چاغ";
 "generatedMessage.missedOutgoingCall" = "گئدن زنگینلیک";
 "generatedMessage.missedIncomingCall" = "گئچن چاغداش چاغداشلار";

@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Сіз қазір орналасқан жеріңізді ";
 "conversation.explanationReceivingLocationFrom" = "Сіз қазір ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Сізге әңгімелесуді сұрап жібердім.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Сәлем, әңгімеге қосылғыңыз келе ме?";
-"conversation.sendRequest" = "Бірге алмасу үшін оған байланыс сұрауыңызды жіберіңіз";
-"conversation.sendRequestTitle" = "Байланыс сұрауыңызды жіберіңіз";
-"conversation.synchronizationTitle" = "Сіз әңгімелесу сұрағын қабылдадыңыз.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Біз %@ қосылыстарын күтіп отырмыз.";
 "conversation.inReplyTo" = "Жауап ретінде";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Қабылданған шақыру";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "әңгімеге қосылды";
-"generatedMessage.youJoined" = "Сіз әңгімеге қосылдыңыз";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Шығушы шақыру";
 "generatedMessage.missedOutgoingCall" = "Шығып жатқан шақыруды жоғалтқан";
 "generatedMessage.missedIncomingCall" = "Келесі шақыруды жіберген";

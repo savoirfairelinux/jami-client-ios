@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Ви зараз ділитеся своїм місцем розташуванням з ";
 "conversation.explanationReceivingLocationFrom" = "Ви зараз отримуєте пряму локацію від ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ пропонує почати розмову.";
-"conversation.incomingRequest" = "Посилала прохання про розмову.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Привіт, чи не хочеш приєднатися до розмови?";
-"conversation.sendRequest" = "Відправить йому/їй запит на контакт, щоб вони могли обмінюватися разом";
-"conversation.sendRequestTitle" = "Відправляйте запит на зв'язок";
-"conversation.synchronizationTitle" = "Ви прийняли запит на розмову.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Ми чекаємо %@ підключення для синхронізації розмови.";
 "conversation.inReplyTo" = "Відповідно до";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Отримано запрошення";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "приєднався до розмови";
-"generatedMessage.youJoined" = "Ти приєднався до розмови";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Вихідний виклик";
 "generatedMessage.missedOutgoingCall" = "Пропущений вихідний виклик";
 "generatedMessage.missedIncomingCall" = "Пропущений вхідний виклик";

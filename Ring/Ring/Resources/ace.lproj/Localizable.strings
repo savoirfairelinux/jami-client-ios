@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "توڠڬوڠ ڤد ماس اين تله مڠمبيل موقعيت توڠڬوڠ ";
 "conversation.explanationReceivingLocationFrom" = "توڠڬوڠ دڤرچايا?? ي موقع يڠ دڤرچايا?? ي";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "منولقكن كيت ڤرلو مڠهادڤكن.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "سلام، آيا ميخواي به اين مکالمه ملحق بشي؟";
-"conversation.sendRequest" = "مڠهادڤكن كڤدڽ كڤد ڤرلو مڠمبيلكن كڤدڽ اونتوق مڠمبيلكن كڤدڽ";
-"conversation.sendRequestTitle" = "مڠهادڤكن ڤرليندوڠن ڤڠاجرن";
-"conversation.synchronizationTitle" = "تو قبول کردي درخواست صحبت";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "كيت مڠنتو %@ منچاريكن كڤد ڤمباچ.";
 "conversation.inReplyTo" = "دالم ڤردان منتري";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "ڤڠاجين يڠ دڤرچايا?? ي";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "مڠمبيل ڤرساتوان";
-"generatedMessage.youJoined" = "تو اونتوق مڠاتاكن ڤڠاجرن";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "ڤڠاجين يڠ برمولا";
 "generatedMessage.missedOutgoingCall" = "ڤڠاجرن يڠ تله دڤرچايا?? ي";
 "generatedMessage.missedIncomingCall" = "ڤڠاجرن يڠ دڤرچايا?? ي";

@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "現在地の共有相手: ";
 "conversation.explanationReceivingLocationFrom" = "現在地を受信している相手: ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "会話の要請を送った";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "こんにちは\n会話に参加しませんか？";
-"conversation.sendRequest" = "連絡を依頼して一緒に交換できる";
-"conversation.sendRequestTitle" = "連絡を要請する";
-"conversation.synchronizationTitle" = "会話への参加が許可されました";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "会話を同期させるために %@接続を待っています.";
 "conversation.inReplyTo" = "メッセージへの返信";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "招待を受信しました";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "話を参加した";
-"generatedMessage.youJoined" = "話を聞いてくれた";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "発信";
 "generatedMessage.missedOutgoingCall" = "不在発信";
 "generatedMessage.missedIncomingCall" = "不在着信";

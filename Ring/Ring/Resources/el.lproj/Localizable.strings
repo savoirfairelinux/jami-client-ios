@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Συμμετέχετε τη θέση σας με ";
 "conversation.explanationReceivingLocationFrom" = "Πλέον λαμβάνετε ζωντανή τοποθεσία από";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "Ο χρήστης %@ σας έστειλε αίτημα συνομιλίας.";
-"conversation.incomingRequest" = "Σου έστειλα αίτημα για συζήτηση.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Γεια σας, θα θέλατε να συμμετάσχετε στη συζήτηση;";
-"conversation.sendRequest" = "Να του στείλετε αίτηση επικοινωνίας για να μπορέσουν να ανταλλάξουν μαζί";
-"conversation.sendRequestTitle" = "Στείλτε αίτηση επικοινωνίας";
-"conversation.synchronizationTitle" = "- Δέχτηκες την αίτηση συζήτησης.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Περιμένουμε %@ συνδέσεις για να συγχρονιστεί η συζήτηση.";
 "conversation.inReplyTo" = "Απαντώντας";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Η πρόσκληση παραλήφθηκε";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "Συμμετείχε στη συζήτηση";
-"generatedMessage.youJoined" = "Εσύ συμμετείχες στη συζήτηση.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Εξερχόμενη κλήση";
 "generatedMessage.missedOutgoingCall" = "Αναπάντητη εξερχόμενη κλήση";
 "generatedMessage.missedIncomingCall" = "Αναπάντητη εισερχόμενη κλήση";

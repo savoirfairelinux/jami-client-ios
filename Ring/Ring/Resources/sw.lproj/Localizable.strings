@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Kwa sasa unashiriki eneo lako na ";
 "conversation.explanationReceivingLocationFrom" = "Kwa sasa unapata eneo moja kwa moja kutoka ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Nilituma ombi la mazungumzo.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Halo, ungependa kujiunga na mazungumzo?";
-"conversation.sendRequest" = "Kumtumia ombi la kuwasiliana ili waweze kubadilishana pamoja";
-"conversation.sendRequestTitle" = "Tuma Ombi la Wasiliana";
-"conversation.synchronizationTitle" = "Umeikubali ombi la mazungumzo.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Tunasubiri kwa ajili ya %@ uhusiano kwa kulinganisha mazungumzo.";
 "conversation.inReplyTo" = "Kwa kujibu";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Mwaliko uliopokelewa";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "alijiunga na mazungumzo";
-"generatedMessage.youJoined" = "Wewe kujiunga na mazungumzo";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Kuondoka simu";
 "generatedMessage.missedOutgoingCall" = "Kupoteza wito wa nje";
 "generatedMessage.missedIncomingCall" = "Kupoteza simu ya ndani";
