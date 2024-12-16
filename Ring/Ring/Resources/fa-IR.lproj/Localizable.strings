@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "در حال حاضر مکان خود را به اشتراک می‌گذارید";
 "conversation.explanationReceivingLocationFrom" = "در حال حاضر مکان زنده را دریافت می‌کنید از";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "بهتون درخواست مکالمه رو فرستادم";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "درود،\nمی‌خواهید به گفت‌وگو بپیوندید؟";
-"conversation.sendRequest" = "برای او درخواست ارتباط بفرستید تا بتواند با هم تبادل کنید";
-"conversation.sendRequestTitle" = "درخواست تماس ارسال کنید";
-"conversation.synchronizationTitle" = "درخواست گفت‌وگو را پذیرفته‌اید.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "ما منتظر ارتباط %@ هستیم تا گفتگو را همگام‌سازی کنیم.";
 "conversation.inReplyTo" = "در پاسخ به";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "دعوت‌نامه دریافت شد";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "به حرف زدن پیوست";
-"generatedMessage.youJoined" = "تو هم به اين مکالمه پیوستي";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "تماس خروجی";
 "generatedMessage.missedOutgoingCall" = "تماس خروجی از‌دست‌رفته";
 "generatedMessage.missedIncomingCall" = "تماس ورودی از‌دست‌رفته";

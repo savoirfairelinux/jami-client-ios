@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Unterhaltung stummschalten";
 "swarm.leaveConversation" = "Unterhaltung verlassen";
 "swarm.chooseColor" = "Farbe";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Unterhaltungstyp";
 "swarm.identifier" = "Identifier";
 "swarm.settings" = "Einstellungen";
 "swarm.members" = "Members";
@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 "conversation.errorSavingImage" = "Beim Speichern des Bildes in der Galerie ist ein Fehler aufgetreten.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.sendRequestTitle" = "Send Contact Request";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "We are waiting for %@ connects to synchronize the conversation.";
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Einladung erhalten";
 "generatedMessage.swarmCreated" = "Unterhaltung erstellt";
-"generatedMessage.invitationReceived" = "wurde zur Unterhaltung eingeladen";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBlocked" = "wurde aus der Unterhaltung hinausgeworfen";
-"generatedMessage.contactUnblocked" = "ist der Unterhaltung wieder beigetreten";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Outgoing call";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Missed incoming call";

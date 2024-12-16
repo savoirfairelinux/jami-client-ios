@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "静音对话";
 "swarm.leaveConversation" = "离开谈话";
 "swarm.chooseColor" = "色彩";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "对话类型";
 "swarm.identifier" = "識別碼";
 "swarm.settings" = "設定";
 "swarm.members" = "成員";
@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "您目前正在分享您的位置，與";
 "conversation.explanationReceivingLocationFrom" = "您正收到即時位置，從";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "发给你一个谈话请求.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "您好，\n您想要加入對話嗎？";
-"conversation.sendRequest" = "向他／她傳送聯絡人請求，如此才能一起交流";
-"conversation.sendRequestTitle" = "发送联系请求";
-"conversation.synchronizationTitle" = "您已接受對話請求。";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "我們正在等待 %@ 連線以同步對話。";
 "conversation.inReplyTo" = "在回复中";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "已收到邀請";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "加入该对话";
-"generatedMessage.youJoined" = "你加入了谈话";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "撥出電話";
 "generatedMessage.missedOutgoingCall" = "未接去電";
 "generatedMessage.missedIncomingCall" = "未接來電";

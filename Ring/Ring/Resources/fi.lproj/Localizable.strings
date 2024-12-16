@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Mykistä keskustelu";
 "swarm.leaveConversation" = "Poistu keskustelusta";
 "swarm.chooseColor" = "Väri";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Keskustelun tyyppi";
 "swarm.identifier" = "Tunniste";
 "swarm.settings" = "Asetukset";
 "swarm.members" = "Jäsenet";
@@ -85,23 +85,23 @@
 "swarm.blocked" = "Estetty";
 "swarm.unknown" = "Tuntematon";
 "swarm.inviteMembers" = "Kutsu jäseniä";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Haluatko todella poistua keskustelusta?";
 "swarm.Leave" = "Lähdetään";
 "swarm.newGroup" = "Luo uusi ryhmä";
-"swarm.namePlaceholder" = "Group name";
-"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
-"swarm.customizeProfile" = "Customize group profile";
-"swarm.changePicture" = "Change group picture";
-"swarm.customize" = "Customize group";
+"swarm.namePlaceholder" = "Ryhmän nimi";
+"swarm.explanationText" = "Jäseniä voidaan kutsua ryhmän luomisen jälkeen.";
+"swarm.customizeProfile" = "Muokkaa ryhmän profiilia";
+"swarm.changePicture" = "Muuta ryhmän kuvaa";
+"swarm.customize" = "Muokkaa ryhmää";
 "swarm.selectContacts" = "Valitse henkilöt";
 
 // Smartlist
 "smartlist.yesterday" = "Eilen";
 "smartlist.results" = "Julkinen kansio";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "Hakutulokset";
 "smartlist.conversations" = "Keskustelu";
 "smartlist.noConversationsFound" = "Yksikään keskustelu ei vastaa hakuasi";
-"smartlist.newContact" = "New contact";
+"smartlist.newContact" = "Uusi henkilö";
 "smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Tilit";
 "smartlist.invitationReceived" = "Kutsut vastaanotettu";
@@ -127,17 +127,17 @@
 // Conversation
 "conversation.addToContactsButton" = "Lisää yhteystietoihin";
 "conversation.addToContactsLabel" = "Lisätäänkö yhteystietoihin?";
-"conversation.notContactLabel" = "ei ole yhteystiedoissasi";
+"conversation.notContactLabel" = "ei ole yhteystiedoissa";
 "conversation.messagePlaceholder" = "Kirjoita...";
 "conversation.explanationSendingLocationTo" = "Jaat sijaintisi tällä hetkellä";
 "conversation.explanationReceivingLocationFrom" = "Saat parhaillaan suoraa sijaintia";
 "conversation.errorSavingImage" = "Virhe tallennettaessa kuvaa galleriaan.";
-"conversation.receivedRequest" = "%@ lähetti sinulle keskustelupyynnön.";
-"conversation.incomingRequest" = "Lähetti sinulle keskustelupyynnön.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "Hei,\nHaluatko liittyä keskusteluun?";
-"conversation.sendRequest" = "Lähetä hänelle pyyntö, jotta hän voi vaihtaa tietoja.";
-"conversation.sendRequestTitle" = "Lähetä yhteydenottopyyntö";
-"conversation.synchronizationTitle" = "Olet hyväksynyt keskustelupyynnön.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Odotamme, että %@ tahdistaa keskustelun.";
 "conversation.inReplyTo" = "Vastauksena";
 "conversation.repliedTo" = " vastaus...";
@@ -319,7 +319,7 @@
 "accountPage.removeAccountMessage" = "Jos sinun tiliä ei ole varmuuskopioitu tai lisätty toiseen laitteeseen, tili ja rekisteröity nimi katoaa lopullisesti.";
 "accountPage.inviteFriends" = "Kutsu ystäviä";
 "accountPage.contactMeOnJamiTitle" = "Ota minuun yhteyttä Jamilla!";
-"accountPage.contactMeOnJamiContant" = "Ota minuun yhteyttä \"%s\" Jamin hajautetun viestintäalustan avulla:  https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Ota minuun yhteyttä \"%s\" Jami viestintäalustan kautta:  https://jami.net";
 "accountPage.passwordPlaceholder" = "Anna tilin salasana";
 "accountPage.usernamePlaceholder" = "Kirjoita haluamasi käyttäjänimi";
 "accountPage.registerNameErrorMessage" = "Valittu käyttäjänimi ei ole käytettävissä";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Kutsu vastaanotettu";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "liittyi keskusteluun";
-"generatedMessage.youJoined" = "Sinä liityit keskusteluun";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Lähtevä puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";

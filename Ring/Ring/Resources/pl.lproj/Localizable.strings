@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "Udostępniasz teraz lokalizację dla ";
 "conversation.explanationReceivingLocationFrom" = "Otrzymujesz teraz lokalizację na żywo od";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ wysłał prośbę o rozmowę.";
-"conversation.incomingRequest" = "Wysłałem ci prośbę o rozmowę.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "- Cześć, chciałbyś dołączyć do rozmowy?";
-"conversation.sendRequest" = "Wysyłać mu/jej prośbę o kontakt, aby mogli wspólnie wymieniać się";
-"conversation.sendRequestTitle" = "Wysyłaj wniosek o kontakt";
-"conversation.synchronizationTitle" = "Przyjąłeś prośbę o rozmowę.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Czekamy na łączenia %@, aby zsynchronizować rozmowę.";
 "conversation.inReplyTo" = "W odpowiedzi na";
 "conversation.repliedTo" = "odpowiedział";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Otrzymano zaproszenie";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "Dołączyłem do rozmowy";
-"generatedMessage.youJoined" = "Dołączyłeś do rozmowy.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "Połączenie wychodzące";
 "generatedMessage.missedOutgoingCall" = "Nieodebrane połączenie wychodzące";
 "generatedMessage.missedIncomingCall" = "Nieodebrane połączenie przychodzące";

@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "אתה חולק את המיקום שלך עם ";
 "conversation.explanationReceivingLocationFrom" = "אתה מקבל כרגע מיקום חי מ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "שלחתי לך בקשה לשיחה.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "שלום, תרצה להצטרף לשיחה?";
-"conversation.sendRequest" = "שלח לו/ה בקשה ליצור קשר כדי שנוכל להחליף יחד";
-"conversation.sendRequestTitle" = "שלח בקשה ליצור קשר";
-"conversation.synchronizationTitle" = "אתה קיבלת את בקשת השיחה.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "אנחנו מחכים ל%@ מתחברים כדי להעמיק את השיחה.";
 "conversation.inReplyTo" = "בתשובה";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "הזמנה התקבלה";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "הצטרף לשיחה";
-"generatedMessage.youJoined" = "אתה הצטרפת לשיחה";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "שיחה יוצאת";
 "generatedMessage.missedOutgoingCall" = "פספסתי שיחת פנויה";
 "generatedMessage.missedIncomingCall" = "פספסתי שיחת כניסה";

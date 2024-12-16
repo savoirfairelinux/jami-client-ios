@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "आप वर्तमान में अपने स्थान को साझा कर रहे हैं ";
 "conversation.explanationReceivingLocationFrom" = "आप वर्तमान में एक लाइव स्थान प्राप्त कर रहे हैं ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "आपको एक बातचीत के लिए एक अनुरोध भेजा.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "हैलो, क्या आप बातचीत में शामिल होना चाहते हैं?";
-"conversation.sendRequest" = "उसे संपर्क अनुरोध भेजें ताकि वह एक साथ आदान-प्रदान कर सके";
-"conversation.sendRequestTitle" = "संपर्क अनुरोध भेजें";
-"conversation.synchronizationTitle" = "आपने वार्तालाप अनुरोध स्वीकार कर लिया है।";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "हम वार्तालाप को सिंक्रनाइज़ करने के लिए %@ कनेक्शन की प्रतीक्षा कर रहे हैं।";
 "conversation.inReplyTo" = "उत्तर में";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "प्राप्त निमंत्रण";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "बातचीत में शामिल हो गया";
-"generatedMessage.youJoined" = "आप बातचीत में शामिल हो गए";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "आउटगोइंग कॉल";
 "generatedMessage.missedOutgoingCall" = "मिस्ड आउटगोइंग कॉल";
 "generatedMessage.missedIncomingCall" = "मिस्ड इनकमिंग कॉल";

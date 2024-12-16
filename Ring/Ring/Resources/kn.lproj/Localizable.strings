@@ -132,12 +132,12 @@
 "conversation.explanationSendingLocationTo" = "ನೀವು ಪ್ರಸ್ತುತ ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಹಂಚಿಕೊಳ್ಳುತ್ತಿದ್ದೀರಿ ";
 "conversation.explanationReceivingLocationFrom" = "ನೀವು ಪ್ರಸ್ತುತ ";
 "conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
-"conversation.incomingRequest" = "ನಿಮಗೆ ಸಂಭಾಷಣೆಗಾಗಿ ವಿನಂತಿಯನ್ನು ಕಳುಹಿಸಿದೆ.";
+"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
+"conversation.incomingRequest" = "Sent you a conversation invitation.";
 "conversation.requestMessage" = "ಹಲೋ, ನೀವು ಸಂಭಾಷಣೆಗೆ ಸೇರಲು ಬಯಸುವಿರಾ?";
-"conversation.sendRequest" = "ಒಟ್ಟಿಗೆ ವಿನಿಮಯ ಮಾಡಿಕೊಳ್ಳುವ ಸಲುವಾಗಿ ಅವರಿಗೆ ಸಂಪರ್ಕ ವಿನಂತಿಯನ್ನು ಕಳುಹಿಸಿ";
-"conversation.sendRequestTitle" = "ಸಂಪರ್ಕ ವಿನಂತಿಯನ್ನು ಕಳುಹಿಸಿ";
-"conversation.synchronizationTitle" = "ನೀವು ಸಂಭಾಷಣೆ ವಿನಂತಿಯನ್ನು ಸ್ವೀಕರಿಸಿದ್ದೀರಿ.";
+"conversation.sendRequest" = "Send them an invitation to be able converse.";
+"conversation.sendRequestTitle" = "Send conversation invitation";
+"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "ಸಂಭಾಷಣೆಯನ್ನು ಸಿಂಕ್ರೊನೈಸ್ ಮಾಡಲು ನಾವು %@ ಸಂಪರ್ಕಗಳಿಗಾಗಿ ಕಾಯುತ್ತಿದ್ದೇವೆ.";
 "conversation.inReplyTo" = "ಇದಕ್ಕೆ ಪ್ರತಿಕ್ರಿಯೆಯಾಗಿ";
 "conversation.repliedTo" = "replied to";
@@ -467,11 +467,11 @@
 // Generated Message
 "generatedMessage.contactAdded" = "ಸ್ವೀಕರಿಸಿದ ಆಹ್ವಾನ";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation";
-"generatedMessage.invitationAccepted" = "ಸಂಭಾಷಣೆಗೆ ಸೇರಿಕೊಂಡರು";
-"generatedMessage.youJoined" = "ನೀವು ಸಂಭಾಷಣೆಗೆ ಸೇರಿದ್ದೀರಿ";
-"generatedMessage.contactBlocked" = "was kicked from the conversation";
-"generatedMessage.contactUnblocked" = "rejoined the conversation";
+"generatedMessage.invitationReceived" = "was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.contactBlocked" = "was kicked from the conversation.";
+"generatedMessage.contactUnblocked" = "rejoined the conversation.";
 "generatedMessage.outgoingCall" = "ಹೊರಹೋಗುವ ಕರೆ";
 "generatedMessage.missedOutgoingCall" = "ತಪ್ಪಿಸಿಕೊಂಡ ಹೊರಹೋಗುವ ಕರೆ";
 "generatedMessage.missedIncomingCall" = "ತಪ್ಪಿದ ಕರೆ";
