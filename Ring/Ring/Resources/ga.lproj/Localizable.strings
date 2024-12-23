@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Ní aithnítear";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Téigh ar shiúl";
 "swarm.newGroup" = "Create new group";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Tá tú ag roinnt do shuíomh faoi láthair le ";
 "conversation.explanationReceivingLocationFrom" = "Tá tú ag fáil suíomh beo faoi láthair ó ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Halo, ba mhaith leat a bheith páirteach sa comhrá?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Táimid ag fanacht le %@ nascanna chun an comhrá a shuimhrónachadh.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "I dtuarascáil do";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Cunntas nasc";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Cuir isteach an t-iarratas agus déan iarracht é a oscailt arís";
-"alerts.confirmBlockContact" = "Tá tú cinnte go bhfuil tú ag iarraidh an teagmháil seo a bhac?";
-"alerts.confirmDeleteConversation" = "An bhfuil tú cinnte gur mhaith leat an comhrá seo a scriosadh go buan?";
-"alerts.confirmDeleteConversationFromContact" = "An bhfuil tú cinnte go bhfuil tú ag iarraidh an comhrá a scriosadh leis an teagmháil seo?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Scrios an comhrá";
-"alerts.confirmClearConversation" = "An bhfuil tú cinnte go bhfuil tú ag iarraidh an comhrá a sheachaint leis an teagmháil seo?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Cainteacht Shéine";
 "alerts.noMediaPermissionsTitle" = "Ceadaíocht na meán nach bhfuil deimhnithe";
 "alerts.noLibraryPermissionsTitle" = "rochtain ar leabharlann grianghraf nach bhfuil deimhnithe";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Seirbhísí Proxy A Díchíchíchumas";
 "accountPage.proxyDisabledAlertBody" = "Chun fógraí a fháil, déan iarracht proxy a chumasú";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Athghairm";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "An t-údarú feiste críochnaithe";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Glacadh amach";
 "generatedMessage.missedOutgoingCall" = "Ag iarraidh glaoch a fháil";
 "generatedMessage.missedIncomingCall" = "Ag iarraidh glaoch a fháil";
 "generatedMessage.liveLocationSharing" = "Comparáid suíomh beo";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Անհայտ";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Գնացեք";
 "swarm.newGroup" = "Ստեղծել նոր խումբ";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Դուք ներկայումս կիսում եք ձեր գտնվելու վայրը ";
 "conversation.explanationReceivingLocationFrom" = "Դուք ներկայումս ստանում եք կենդանի տեղակայման ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Բարեւ, կցանկանայի՞ք միանալ զրույցին:";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Մենք սպասում ենք %@ կապերի, որպեսզի սինխրոնացվի զրույցը:";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Պատասխանելով";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Կապակցող հաշիվ";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Խնդրում ենք փակել դիմումը եւ փորձել նորից բացել այն";
-"alerts.confirmBlockContact" = "Համոզված եք, որ ցանկանում եք արգելափակել այս շփումը: Այս շփման հետ կապված զրույցի պատմությունը նույնպես կսահմանվի մշտապես:";
-"alerts.confirmDeleteConversation" = "Համոզված ես, որ ուզում ես այս զրույցը մշտապես ջնջել:";
-"alerts.confirmDeleteConversationFromContact" = "Համոզված եք, որ ցանկանում եք ջնջել այս շփման հետ զրույցը:";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Սեղմեք զրույցը";
-"alerts.confirmClearConversation" = "Համոզված ես, որ ցանկանում ես բացել զրույցը այս շփման հետ:";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Հստակ զրույց";
 "alerts.noMediaPermissionsTitle" = "ԶԼՄ-ների թույլտվությունը չի տրվել";
 "alerts.noLibraryPermissionsTitle" = "Լուսանկարների գրադարան մուտք չի տրվել";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Պրոքսի սերվերները անջատված են";
 "accountPage.proxyDisabledAlertBody" = "Հրավերներ ստանալու համար խնդրում ենք ակտիվացնել proxy- ը";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Վերադարձ";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Հեռացման սարքը ավարտված է";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Արտաքին զանգ";
 "generatedMessage.missedOutgoingCall" = "Հեռացվող զանգը բացակայում է";
 "generatedMessage.missedIncomingCall" = "Հեռացած ներկա զանգ";
 "generatedMessage.liveLocationSharing" = "Կայքի առցանց փոխանակում";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

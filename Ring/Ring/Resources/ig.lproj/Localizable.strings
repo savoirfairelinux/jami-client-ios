@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "A maghị";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Hapụ ya";
 "swarm.newGroup" = "Create new group";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Ị na-ekere òkè ugbu a na ọnọdụ gị na ";
 "conversation.explanationReceivingLocationFrom" = "Ị na-enweta ugbu a a a ndụ ọnọdụ site ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Ndewo, ị̀ ga-achọ isonyere anyị ná mkparịta ụka ahụ?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Anyị na-eche maka %@ njikọ iji mekọrịta mkparịta ụka ahụ.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Na nzaghachi";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Nkwekọrịta akaụntụ";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Biko mechie akwụkwọ ma gbalịa imeghe ya ọzọ";
-"alerts.confirmBlockContact" = "Ị̀ maara na ị chọrọ igbochi kọntaktị a? A ga-ehichapụ akụkọ ihe mere eme nke mkparịta ụka na kọntaktị a kpamkpam.";
-"alerts.confirmDeleteConversation" = "Ì ji n'aka na ị chọrọ ihichapụ mkparịta ụka a kpamkpam?";
-"alerts.confirmDeleteConversationFromContact" = "Ì ji n'aka na ị chọrọ ihichapụ mkparịta ụka ahụ na kọntaktị a?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Ihichapụ Mkparịta Ụka";
-"alerts.confirmClearConversation" = "Ì ji n'aka na ị chọrọ iji kọntaktị a mee ka mkparịta ụka ahụ kwụsị?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Mkparịta Ụka Dị Mkpa";
 "alerts.noMediaPermissionsTitle" = "Enweghị ikike mgbasa ozi";
 "alerts.noLibraryPermissionsTitle" = "Enweghị ohere ịnweta ọbá akwụkwọ foto";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Onye ọrụ nnọchi anya akwadoghị";
 "accountPage.proxyDisabledAlertBody" = "Iji nweta ọkwa, biko mee proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Ịtụgharị";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "E mechaa iwepụ ngwaọrụ";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "N'imepụta oku";
 "generatedMessage.missedOutgoingCall" = "Ọ dịghị onye na-akpọ gị";
 "generatedMessage.missedIncomingCall" = "Ọ dịghị onye na-akpọ gị";
 "generatedMessage.liveLocationSharing" = "Ịkekọrịta ọnọdụ ndụ";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

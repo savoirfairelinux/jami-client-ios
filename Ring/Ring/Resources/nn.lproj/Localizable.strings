@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Ukenne";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Gå bort";
 "swarm.newGroup" = "Create new group";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Du delar no med deg av plasseringa med ";
 "conversation.explanationReceivingLocationFrom" = "Du får for tiden ein live-platsing frå ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Helt godt, vil du koma med på samtalen?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Me ventar på %@-kontakter for å synkronisere samtalen.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "I svar på";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Liningkonto";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Vennligst lukk søknaden og prøv å opna den igjen";
-"alerts.confirmBlockContact" = "Er du sikker på du vil blokkere denne kontakta? Samtalehistoria med denne kontakta vert òg slettet permanent.";
-"alerts.confirmDeleteConversation" = "Er du sikker på du vil sletta samtalen permanent?";
-"alerts.confirmDeleteConversationFromContact" = "Er du sikker på du vil sletta samtalen med denne kontakten?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Ta bort samtal";
-"alerts.confirmClearConversation" = "Er du sikker på du vil rydde opp samrøytinga med denne kontakten?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Ein klar samtale";
 "alerts.noMediaPermissionsTitle" = "Medieavgjevd tillating";
 "alerts.noLibraryPermissionsTitle" = "Tilgang til fotoboska er ikkje tilgjeve";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Proxy server funksjonshemma";
 "accountPage.proxyDisabledAlertBody" = "For å motta meldingar, bed du aktivera proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Avkalling";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Avkalling av utstyret fullført";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Utgående samtale";
 "generatedMessage.missedOutgoingCall" = "Miska utgående samtale";
 "generatedMessage.missedIncomingCall" = "Miska innkomne samtal";
 "generatedMessage.liveLocationSharing" = "Live lokasjon deling";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

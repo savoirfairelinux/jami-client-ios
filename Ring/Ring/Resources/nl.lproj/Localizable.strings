@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Onbekend";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Ga weg.";
 "swarm.newGroup" = "Nieuwe groep aanmaken";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "U deelt uw locatie momenteel met ";
 "conversation.explanationReceivingLocationFrom" = "U ontvangt momenteel een live locatie van ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Wil je meedoen aan het gesprek?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "We wachten op %@ verbindingen om het gesprek te synchroniseren.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "In antwoord op";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Account koppelen";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Sluit de toepassing en probeer het opnieuw";
-"alerts.confirmBlockContact" = "Weet u zeker dat u dit contact wilt blokkeren? De gespreksgeschiedenis met dit contact zal ook voorgoed verwijderd worden.";
-"alerts.confirmDeleteConversation" = "Weet u zeker dat u dit gesprek voorgoed wilt verwijderen?";
-"alerts.confirmDeleteConversationFromContact" = "Weet u zeker dat u het gesprek met dit contact wilt verwijderen?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Gesprek verwijderen";
-"alerts.confirmClearConversation" = "Weet u zeker dat u het gesprek met dit contact wilt verwijderen?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Gesprek wissen";
 "alerts.noMediaPermissionsTitle" = "Mediavergunning niet verleend";
 "alerts.noLibraryPermissionsTitle" = "Toegang tot de fotobibliotheek niet toegestaan";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Proxyserver uitgeschakeld";
 "accountPage.proxyDisabledAlertBody" = "Schakel de proxy in om meldingen te kunnen ontvangen";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Intrekken";
 "accountPage.revokeDevicePlaceholder" = "Voer uw wachtwoord in";
 "accountPage.deviceRevoked" = "Intrekken van apparaat voltooid";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Uitgaande oproep";
 "generatedMessage.missedOutgoingCall" = "Gemiste uitgaande oproep";
 "generatedMessage.missedIncomingCall" = "Gemiste inkomende oproep";
 "generatedMessage.liveLocationSharing" = "Live locatie delen";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

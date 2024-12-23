@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Không biết";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Đi đi";
 "swarm.newGroup" = "Tạo nhóm mới";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Bạn đang chia sẻ vị trí của mình với ";
 "conversation.explanationReceivingLocationFrom" = "Bạn đang nhận được một địa điểm trực tiếp từ ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Chào, anh có muốn tham gia cuộc trò chuyện không?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Chúng tôi đang chờ đợi %@ kết nối để đồng bộ hóa cuộc trò chuyện.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Trả lời";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Tài khoản liên kết";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Vui lòng đóng đơn và cố gắng mở lại";
-"alerts.confirmBlockContact" = "Bạn có chắc chắn rằng bạn muốn chặn liên lạc này? lịch sử cuộc trò chuyện với liên lạc này cũng sẽ bị xóa vĩnh viễn.";
-"alerts.confirmDeleteConversation" = "Em có chắc em muốn xóa cuộc trò chuyện này vĩnh viễn không?";
-"alerts.confirmDeleteConversationFromContact" = "Anh có chắc là muốn xóa cuộc trò chuyện với người liên lạc này không?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Tránh cuộc trò chuyện";
-"alerts.confirmClearConversation" = "Anh có chắc là anh muốn giải quyết cuộc trò chuyện với người này không?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Cuộc trò chuyện rõ ràng";
 "alerts.noMediaPermissionsTitle" = "Phán phép truyền thông không được cấp";
 "alerts.noLibraryPermissionsTitle" = "Phiên bản truy cập thư viện ảnh không được cấp";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server bị vô hiệu hóa";
 "accountPage.proxyDisabledAlertBody" = "Để nhận thông báo, xin vui lòng bật proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Tháo lại";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Việc hủy bỏ thiết bị đã hoàn thành";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Tiếp tục gọi";
 "generatedMessage.missedOutgoingCall" = "Lỡ cuộc gọi ra ngoài";
 "generatedMessage.missedIncomingCall" = "Lỡ cuộc gọi tiếp nhận";
 "generatedMessage.liveLocationSharing" = "Chia sẻ địa điểm trực tiếp";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

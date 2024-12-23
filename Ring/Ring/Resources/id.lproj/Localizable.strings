@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Tidak diketahui";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Keluar";
 "swarm.newGroup" = "Buat grup baru";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Anda saat ini berbagi lokasi Anda dengan";
 "conversation.explanationReceivingLocationFrom" = "Saat ini Anda sedang menerima lokasi langsung dari";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Halo, \nApakah Anda ingin bergabung dalam percakapan?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Kami menunggu %@ terhubung untuk menyinkronkan percakapan.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Sebagai balasan";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Menghubungkan akun";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Harap tutup aplikasi dan coba buka lagi";
-"alerts.confirmBlockContact" = "Apakah Anda yakin ingin memblokir kontak ini? Riwayat percakapan dengan kontak ini juga akan dihapus secara permanen.";
-"alerts.confirmDeleteConversation" = "Apakah Anda yakin ingin menghapus percakapan ini secara permanen?";
-"alerts.confirmDeleteConversationFromContact" = "Apakah Anda yakin ingin menghapus percakapan dengan kontak ini?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Hapus Percakapan";
-"alerts.confirmClearConversation" = "Apakah Anda yakin ingin menghapus percakapan dengan kontak ini?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Bersihkan Percakapan";
 "alerts.noMediaPermissionsTitle" = "Izin media tidak diberikan";
 "alerts.noLibraryPermissionsTitle" = "Akses ke galeri foto tidak diberikan";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Server Proxy Dinonaktifkan";
 "accountPage.proxyDisabledAlertBody" = "Untuk menerima notifikasi, harap aktifkan proksi";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Cabut";
 "accountPage.revokeDevicePlaceholder" = "Masukkan kata sandi anda";
 "accountPage.deviceRevoked" = "Pencabutan perangkat selesai";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
 "generatedMessage.missedOutgoingCall" = "Panggilan keluar tidak terjawab";
 "generatedMessage.missedIncomingCall" = "Panggilan masuk tidak terjawab";
 "generatedMessage.liveLocationSharing" = "Berbagi lokasi secara live";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

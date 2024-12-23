@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "مجهول";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "إرحل";
 "swarm.newGroup" = "إنشاء مجموعة جديدة";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "أنت تشارك موقعك حاليًا مع";
 "conversation.explanationReceivingLocationFrom" = "أنت تتلقى حاليًا موقعًا مباشرًا من";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "مرحباً، هل تودين الانضمام إلى المحادثة؟";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "نحن ننتظر %@ الاتصالات لنزامن المحادثة.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "في جواب";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "جاري ربط الحساب";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "الرجاء إغلاق التطبيق ومحاولة فتحه مرة ثانية";
-"alerts.confirmBlockContact" = "هل أنت متأكد أنك تريد حظر هذا الاتصال؟ سيقوم حذف تاريخ المحادثة مع هذا الاتصال بشكل دائم.";
-"alerts.confirmDeleteConversation" = "هل أنت متأكد أنك تريد حذف هذه المحادثة بشكل دائم؟";
-"alerts.confirmDeleteConversationFromContact" = "هل أنت متأكد أنك تريد حذف المحادثة مع هذا الاتصال؟";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "إزالة المحادثة";
-"alerts.confirmClearConversation" = "هل أنت متأكد أنك تريد أن تنظف المحادثة مع هذا الاتصال؟";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "محادثة واضحة";
 "alerts.noMediaPermissionsTitle" = "الإعلام غير مُمَنِح";
 "alerts.noLibraryPermissionsTitle" = "لا يُمنح الوصول إلى مكتبة الصور";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "محطم خادم النظام الأساسي";
 "accountPage.proxyDisabledAlertBody" = "من أجل تلقي الإخطارات، يرجى تمكين النظام الأساسي";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "سحب";
 "accountPage.revokeDevicePlaceholder" = "أدخِل كلمة المرور";
 "accountPage.deviceRevoked" = "إعادة إلغاء الجهاز قد تم الانتهاء منها";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "مكالمة صادرة";
 "generatedMessage.missedOutgoingCall" = "مكالمة صادرة فائتة";
 "generatedMessage.missedIncomingCall" = "مكالمة واردة فائتة";
 "generatedMessage.liveLocationSharing" = "مشاركة الموقع المباشر";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

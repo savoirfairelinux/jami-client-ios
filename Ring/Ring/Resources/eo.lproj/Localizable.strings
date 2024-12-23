@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Nekonata";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Foriru";
 "swarm.newGroup" = "Create new group";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Vi nun dividas vian lokon kun ";
 "conversation.explanationReceivingLocationFrom" = "Vi nun ricevas live-lokon de ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Saluton, ĉu vi ŝatus aliĝi al la konversacio?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Ni atendas %@ konektojn por sinkronigi la konversacion.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "En respondo al";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Ligas konton";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Bonvolu fermu aplikaĵo kaj provu aktivigi ĝin denove";
-"alerts.confirmBlockContact" = "Ĉu vi certas, ke vi volas bloki tiun kontakton? La konversacia historio kun tiu kontakto ankaŭ estos forigita permanente.";
-"alerts.confirmDeleteConversation" = "Ĉu vi certas, ke vi volas forigi ĉi tiun konversacion permanente?";
-"alerts.confirmDeleteConversationFromContact" = "Ĉu vi certas, ke vi volas forigi la konversacion kun tiu kontakto?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Forigu konversacion";
-"alerts.confirmClearConversation" = "Ĉu vi certas, ke vi volas purigi la konversacion kun tiu kontakto?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Klara konversacio";
 "alerts.noMediaPermissionsTitle" = "La permeso de amaskomunikiloj ne estas donita";
 "alerts.noLibraryPermissionsTitle" = "Aliro al fotbiblioteko ne koncedita";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Proxy-servilo malfunkciigita";
 "accountPage.proxyDisabledAlertBody" = "Por ricevi mesaĝojn, bonvolu aktivigi proxy";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Revoĝo";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "La aparato estas nuligita";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Eliranta voko";
 "generatedMessage.missedOutgoingCall" = "Maltrafis forirantan telefonon";
 "generatedMessage.missedIncomingCall" = "Maltrafis envenantan telefonon";
 "generatedMessage.liveLocationSharing" = "Viva kunhavado de lokoj";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

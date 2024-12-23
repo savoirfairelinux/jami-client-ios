@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "نامعلوم";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "برلالو";
 "swarm.newGroup" = "Create new group";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "توڠڬوڠ ڤد ماس اين تله مڠمبيل موقعيت توڠڬوڠ ";
 "conversation.explanationReceivingLocationFrom" = "توڠڬوڠ دڤرچايا?? ي موقع يڠ دڤرچايا?? ي";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "سلام، آيا ميخواي به اين مکالمه ملحق بشي؟";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "كيت مڠنتو %@ منچاريكن كڤد ڤمباچ.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "دالم ڤردان منتري";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "حساب ڤڠاجرن";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "كرجاسا?? ن مڠهادڤكن ڤرچاي دان ممڤرچايكنڽ كدوا";
-"alerts.confirmBlockContact" = "اڤابيلا اكو مريك مريك اكن مريك اكن مڠهادڤكن ڤڠاجرن اين؟ سياستن ڤڠاجرن اين دأداكن دڠن ڤڠاجرن اين.";
-"alerts.confirmDeleteConversation" = "اكو يقيني اكو بوليه مڠحذفكن ڤرساتوان اين دالم كهيدوڤن؟";
-"alerts.confirmDeleteConversationFromContact" = "اكو يقيني اكو بررلو مڠحذفكن ڤمبلاجرن دڠن ڤڠاجرن اين؟";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "مڠمبيل ڤڠاجرن";
-"alerts.confirmClearConversation" = "اكو يقيني اكو بررسي ممبينا ڤمباچ دڠن ڤڠاجرن اين؟";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "ڤڠاجرن يڠ برڤرچايا?? ن";
 "alerts.noMediaPermissionsTitle" = "ڤرسمڤوان ميديا تيدق دبريكن";
 "alerts.noLibraryPermissionsTitle" = "ڤرلو دڤرچايا?? ي ڤمباچ ڤوترو";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "ڤروكسي ڤرلو دڤرچايا?? ي";
 "accountPage.proxyDisabledAlertBody" = "اونتوق مڠهادڤي ڤرساتوان، كرجاسام ممبنتو ڤروكسي";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "ڤڠاجرن";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "ڤمبلاجرن ڤڠڬونا";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "ڤڠاجين يڠ برمولا";
 "generatedMessage.missedOutgoingCall" = "ڤڠاجرن يڠ تله دڤرچايا?? ي";
 "generatedMessage.missedIncomingCall" = "ڤڠاجرن يڠ دڤرچايا?? ي";
 "generatedMessage.liveLocationSharing" = "ڤڠاجين لوكاسي";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

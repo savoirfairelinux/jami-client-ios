@@ -85,7 +85,7 @@
 "swarm.blocked" = "Bloccato";
 "swarm.unknown" = "Sconosciuto";
 "swarm.inviteMembers" = "Invita membri";
-"swarm.confirmLeaveConversation" = "Vuoi davvero abbandonare questa conversazione?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Lascia";
 "swarm.newGroup" = "Crea un nuovo gruppo";
 "swarm.namePlaceholder" = "Nome del gruppo";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Scrivi a";
 "conversation.explanationSendingLocationTo" = "Stai condividendo la tua posizione con ";
 "conversation.explanationReceivingLocationFrom" = "Stai ricevendo una posizione in diretta da ";
-"conversation.errorSavingImage" = "Si è verificato un errore durante il salvataggio dell'immagine.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ ti ha mandato un invito alla conversazione.";
-"conversation.incomingRequest" = "Ti ha mandato un invito alla conversazione.";
-"conversation.requestMessage" = "Ciao, \nVuoi partecipare alla conversazione?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Manda un invito per poter conversare.";
 "conversation.sendRequestTitle" = "Manda invito alla conversazione";
 "conversation.synchronizationTitle" = "Hai accettato l'invito alla conversazione.";
-"conversation.synchronizationMessage" = "In attesa che %@ si connetta per sincronizzare la conversazione.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "In risposta a";
 "conversation.repliedTo" = " ha risposto a";
 "conversation.yourself" = "te";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Associazione dell'account";
 "alerts.dbFailedTitle" = "Si è verificato un errore durante l'avvio di Jami";
 "alerts.dbFailedMessage" = "Chiudi l'applicazione e prova ad aprirla di nuovo";
-"alerts.confirmBlockContact" = "Sei sicuro di voler bloccare questo contatto? Anche la cronologia delle conversazioni con questo contatto verrà cancellata in modo permanente.";
-"alerts.confirmDeleteConversation" = "Sei sicuro di voler cancellare questa conversazione in modo permanente?";
-"alerts.confirmDeleteConversationFromContact" = "Sei sicuro di voler cancellare la conversazione con questo contatto?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Cancella conversazione";
-"alerts.confirmClearConversation" = "Sei sicuro di voler cancellare la conversazione con questo contatto?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Cancella conversazione";
 "alerts.noMediaPermissionsTitle" = "Permesso non consentito ai media";
 "alerts.noLibraryPermissionsTitle" = "Accesso non consentito alle foto";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Server proxy disabilitato";
 "accountPage.proxyDisabledAlertBody" = "Attiva il proxy, per ricevere le notifiche";
 "accountPage.removeDeviceTitle" = "Rimuovi dispositivo";
-"accountPage.revokeDeviceMessage" = "Sei sicuro di voler rimuovere questo dispositivo? Questa azione non può essere annullata.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Revoca";
 "accountPage.revokeDevicePlaceholder" = "Inserisci la tua password";
 "accountPage.deviceRevoked" = "Revoca del dispositico completata";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "è stato invitato a partecipare alla conversazione.";
 "generatedMessage.invitationAccepted" = "partecipa alla conversazione.";
 "generatedMessage.youJoined" = "Partecipi alla conversazione.";
-"generatedMessage.contactBlocked" = "è stato espulso dalla conversazione.";
-"generatedMessage.contactUnblocked" = "ha ripreso la conversazione.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Chiamata in uscita";
 "generatedMessage.missedOutgoingCall" = "Chiamata in uscita persa";
 "generatedMessage.missedIncomingCall" = "Chiamata in arrivo persa";
 "generatedMessage.liveLocationSharing" = "Condivisione della posizione in diretta";
-"generatedMessage.contactLeftConversation" = "ha abbandonato la conversazione";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Impostazioni video";

@@ -85,7 +85,7 @@
 "swarm.blocked" = "Bllokuar";
 "swarm.unknown" = "I panjohur";
 "swarm.inviteMembers" = "Ftoni anëtarë";
-"swarm.confirmLeaveConversation" = "Doni vërtet të braktiset kjo bisedë?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Braktise";
 "swarm.newGroup" = "Krijoni grup të ri";
 "swarm.namePlaceholder" = "Emër grupi";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Shkruajini";
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
-"conversation.errorSavingImage" = "Ndodhi një gabim teksa ruhej figurë te galeri.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ ju dërgoi një ftesë bisede.";
-"conversation.incomingRequest" = "Ju dërgoi një ftesë bisede.";
-"conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Dërgojuni një ftesë, që të jeni në gjendje të bisedoni.";
 "conversation.sendRequestTitle" = "Dërgoni ftesë bisede";
 "conversation.synchronizationTitle" = "Keni pranuar ftesën e bisedës.";
-"conversation.synchronizationMessage" = "Po presim që %@ të lidhet për të njëkohësuar bisedën.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Në përgjigje të";
 "conversation.repliedTo" = "iu përgjigj";
 "conversation.yourself" = "vetes";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Po lidhet llogaria";
 "alerts.dbFailedTitle" = "Ndodhi një gabim gjatë nisjes së Jami-t";
 "alerts.dbFailedMessage" = "Ju lutemi, mbylleni aplikacionin dhe provoni ta rihapni";
-"alerts.confirmBlockContact" = "Jeni i sigurt se doni të bllokohet ky kontakt? Edhe historiku i bisedave me këtë kontakt do të fshihet përgjithmonë.";
-"alerts.confirmDeleteConversation" = "Jeni i sigurt se doni të fshihet përgjithmonë kjo bisedë?";
-"alerts.confirmDeleteConversationFromContact" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
-"alerts.confirmClearConversation" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Spastroje Bisedën";
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
 "alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
 "accountPage.proxyDisabledAlertBody" = "Që të mund të merrni njoftime, ju lutemi, aktivizoni ndërmjetësin";
 "accountPage.removeDeviceTitle" = "Hiqe pajisjen";
-"accountPage.revokeDeviceMessage" = "Jeni i sigurt se doni të hiqet kjo pajisje? Ky veprim s’mund të zhbëhet.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Shfuqizoje";
 "accountPage.revokeDevicePlaceholder" = "Jepni fjalëkalimin tuaj";
 "accountPage.deviceRevoked" = "Shfuqizimi i pajisjes u plotësua";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "u ftua të marrë pjesë në bisedë.";
 "generatedMessage.invitationAccepted" = "erdhi në bisedë.";
 "generatedMessage.youJoined" = "Erdhët në bisedë.";
-"generatedMessage.contactBlocked" = "u përzu nga biseda.";
-"generatedMessage.contactUnblocked" = "rierdhi te biseda.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Thirrje për";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie e vendndodhjes drejtpërsëdrejti";
-"generatedMessage.contactLeftConversation" = "e la bisedën";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Rregullime videoje";

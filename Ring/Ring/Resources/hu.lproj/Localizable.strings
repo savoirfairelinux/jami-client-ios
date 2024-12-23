@@ -85,7 +85,7 @@
 "swarm.blocked" = "Letiltva";
 "swarm.unknown" = "Ismeretlen";
 "swarm.inviteMembers" = "Tagok meghívása";
-"swarm.confirmLeaveConversation" = "Biztosan meg szeretné kilépni a beszélgetésből?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Elhagyás";
 "swarm.newGroup" = "Új csoport létrehozása";
 "swarm.namePlaceholder" = "Csoport neve";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Írj a következő(k)nek:";
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
-"conversation.errorSavingImage" = "Hiba történt a kép gyűjteménybe történő mentése közben.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ beszélgetésre szóló meghívót küldött Önnek.";
-"conversation.incomingRequest" = "beszélgetésre szóló meghívót küldött Önnek.";
-"conversation.requestMessage" = "Üdv!\nSzeretne csatlakozni a beszélgetéshez?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Meghívó küldése a beszélgetés engedélyezéséhez.";
 "conversation.sendRequestTitle" = "Beszélgetési meghívó küldése";
 "conversation.synchronizationTitle" = "Ön elfogadott a beszélgetési meghívást.";
-"conversation.synchronizationMessage" = "Várjuk, hogy a(z) %@ csatlakozzon a beszélgetés összehangolásához.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Válaszul erre:";
 "conversation.repliedTo" = "válaszolt neki:";
 "conversation.yourself" = "önmaga";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Fiók összekapcsolása…";
 "alerts.dbFailedTitle" = "Hiba történt a Jami indításakor";
 "alerts.dbFailedMessage" = "Kérjük, hogy zárja be az alkalmazást és próbálja meg újra megnyitni";
-"alerts.confirmBlockContact" = "Biztosan szeretné letiltani ezt a felhasználót? A beszélgetés előzményei a kapcsolattal együtt véglegesen törlésre kerülnek.";
-"alerts.confirmDeleteConversation" = "Biztosan szeretné végleg törölni ezt a beszélgetést?";
-"alerts.confirmDeleteConversationFromContact" = "Biztosan szeretné törölni a beszélgetést ezzel az ismerőssel?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Beszélgetés törlése";
-"alerts.confirmClearConversation" = "Biztosan szeretné törölni a beszélgetést ezzel az ismerőssel?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Beszélgetés törlése";
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
 "alerts.noLibraryPermissionsTitle" = "Fényképkönyvtár hozzáférése nem engedélyezett";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Meghatalmazott-kiszolgáló letiltva";
 "accountPage.proxyDisabledAlertBody" = "Annak érdekében, hogy értesítéseket kaphasson kérjük, hogy engedélyezze a meghatalmazott használatát";
 "accountPage.removeDeviceTitle" = "Eszköz eltávolítása";
-"accountPage.revokeDeviceMessage" = "Biztosan szeretné leválasztani ezt az eszközt? Ez a művelet nem vonható vissza.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Visszavon";
 "accountPage.revokeDevicePlaceholder" = "Jelszó megadása";
 "accountPage.deviceRevoked" = "Az eszköz visszavonása befejeződött";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "meghívott a beszélgetéshez.";
 "generatedMessage.invitationAccepted" = "csatlakozott a beszélgetéshez.";
 "generatedMessage.youJoined" = "Ön csatlakozott a beszélgetéshez.";
-"generatedMessage.contactBlocked" = "eltávolított a beszélgetésből.";
-"generatedMessage.contactUnblocked" = "újra csatlakozott a beszélgetéshez.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Kimenő hívás";
 "generatedMessage.missedOutgoingCall" = "Nem fogadott kimenő hívás";
 "generatedMessage.missedIncomingCall" = "Nem fogadott bejövő hívás";
 "generatedMessage.liveLocationSharing" = "Valós idejű hely megosztása";
-"generatedMessage.contactLeftConversation" = "kilépett a beszélgetésből";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Videóbeállítások";

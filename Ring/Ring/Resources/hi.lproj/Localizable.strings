@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "अज्ञात";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "छोड़ो";
 "swarm.newGroup" = "नया समूह बनाएँ";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "आप वर्तमान में अपने स्थान को साझा कर रहे हैं ";
 "conversation.explanationReceivingLocationFrom" = "आप वर्तमान में एक लाइव स्थान प्राप्त कर रहे हैं ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "हैलो, क्या आप बातचीत में शामिल होना चाहते हैं?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "हम वार्तालाप को सिंक्रनाइज़ करने के लिए %@ कनेक्शन की प्रतीक्षा कर रहे हैं।";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "उत्तर में";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "लिंकिंग खाता";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "कृपया आवेदन बंद करें और इसे फिर से खोलने की कोशिश करें";
-"alerts.confirmBlockContact" = "क्या आप इस संपर्क को अवरुद्ध करना चाहते हैं? इस संपर्क के साथ बातचीत का इतिहास भी स्थायी रूप से हटा दिया जाएगा।";
-"alerts.confirmDeleteConversation" = "क्या आप सुनिश्चित हैं कि आप इस बातचीत को स्थायी रूप से हटाना चाहते हैं?";
-"alerts.confirmDeleteConversationFromContact" = "क्या आप सुनिश्चित हैं कि आप इस संपर्क के साथ बातचीत को हटाना चाहते हैं?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "बातचीत को हटा दें";
-"alerts.confirmClearConversation" = "क्या आप इस संपर्क के साथ बातचीत को साफ करना चाहते हैं?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "स्पष्ट बातचीत";
 "alerts.noMediaPermissionsTitle" = "मीडिया अनुमति नहीं दी गई";
 "alerts.noLibraryPermissionsTitle" = "फोटो लाइब्रेरी तक पहुंच प्रदान नहीं की गई";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "प्रॉक्सी सर्वर निष्क्रिय";
 "accountPage.proxyDisabledAlertBody" = "सूचना प्राप्त करने के लिए, कृपया प्रॉक्सी सक्षम करें";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "निरस्त";
 "accountPage.revokeDevicePlaceholder" = "अपना पासवर्ड दर्ज करें";
 "accountPage.deviceRevoked" = "डिवाइस निरस्त पूरा";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "आउटगोइंग कॉल";
 "generatedMessage.missedOutgoingCall" = "मिस्ड आउटगोइंग कॉल";
 "generatedMessage.missedIncomingCall" = "मिस्ड इनकमिंग कॉल";
 "generatedMessage.liveLocationSharing" = "स्थान साझा करने के लिए लाइव";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

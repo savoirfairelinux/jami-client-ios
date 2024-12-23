@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "ไม่ทราบ";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "ออกไป";
 "swarm.newGroup" = "สร้างกลุ่มใหม่";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "คุณกําลังแบ่งปันสถานที่ของคุณกับ ";
 "conversation.explanationReceivingLocationFrom" = "คุณกําลังรับข้อมูลที่ตั้งสดจาก ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "สวัสดีครับ คุณอยากเข้าร่วมการพูดคุยกันไหม";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "เรากําลังรอการเชื่อมต่อ %@ เพื่อสอดคล้องการพูดคุย";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "ตอบ";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "เชื่อมโยงบัญชี";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "โปรดปิดแอปพลิเคชันแล้วลองเปิดใหม่อีกครั้ง";
-"alerts.confirmBlockContact" = "คุณแน่ใจนะว่า คุณต้องการปิดการติดต่อนี้? ประวัติการพูดคุยกับการติดต่อนี้จะถูกลบไปอย่างถาวร";
-"alerts.confirmDeleteConversation" = "คุณแน่ใจนะว่า คุณต้องการลบการพูดคุยนี้ได้ตลอดไป";
-"alerts.confirmDeleteConversationFromContact" = "คุณแน่ใจนะว่าอยากลบการพูดคุยกับผู้ติดต่อนี้";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "กดการพูดคุย";
-"alerts.confirmClearConversation" = "คุณแน่ใจนะว่าอยากแก้ปัญหากับผู้ติดต่อนี้?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "การ สัมภาษณ์ ที่ สะดวก";
 "alerts.noMediaPermissionsTitle" = "การอนุญาตสื่อไม่ถูกให้";
 "alerts.noLibraryPermissionsTitle" = "การเข้าถึงห้องสมุดรูปภาพไม่ได้รับอนุญาต";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "พรอক্ซี่เซอร์เวอร์ปิด";
 "accountPage.proxyDisabledAlertBody" = "เพื่อรับแจ้งความโปรดเปิดตัวแทน";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "ยกเลิก";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "การยกเลิกอุปกรณ์เสร็จสิ้น";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "โทรออก";
 "generatedMessage.missedOutgoingCall" = "สายที่ไม่ได้รับ";
 "generatedMessage.missedIncomingCall" = "สายเรียกเข้าที่ไม่ได้รับ";
 "generatedMessage.liveLocationSharing" = "การแบ่งปันสถานที่สด";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "ಅಜ್ಞಾತ";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "ಹೊರಟುಹೋಗು";
 "swarm.newGroup" = "Create new group";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "ನೀವು ಪ್ರಸ್ತುತ ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಹಂಚಿಕೊಳ್ಳುತ್ತಿದ್ದೀರಿ ";
 "conversation.explanationReceivingLocationFrom" = "ನೀವು ಪ್ರಸ್ತುತ ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "ಹಲೋ, ನೀವು ಸಂಭಾಷಣೆಗೆ ಸೇರಲು ಬಯಸುವಿರಾ?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "ಸಂಭಾಷಣೆಯನ್ನು ಸಿಂಕ್ರೊನೈಸ್ ಮಾಡಲು ನಾವು %@ ಸಂಪರ್ಕಗಳಿಗಾಗಿ ಕಾಯುತ್ತಿದ್ದೇವೆ.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "ಇದಕ್ಕೆ ಪ್ರತಿಕ್ರಿಯೆಯಾಗಿ";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "ಲಿಂಕ್ ಖಾತೆ";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "ದಯವಿಟ್ಟು ಅರ್ಜಿಯನ್ನು ಮುಚ್ಚಿ ಮತ್ತೆ ತೆರೆಯಲು ಪ್ರಯತ್ನಿಸಿ";
-"alerts.confirmBlockContact" = "ಈ ಸಂಪರ್ಕವನ್ನು ನಿರ್ಬಂಧಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ? ಈ ಸಂಪರ್ಕದೊಂದಿಗೆ ಸಂಭಾಷಣೆ ಇತಿಹಾಸವನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ.";
-"alerts.confirmDeleteConversation" = "ಈ ಸಂಭಾಷಣೆಯನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?";
-"alerts.confirmDeleteConversationFromContact" = "ಈ ಸಂಪರ್ಕದ ಜೊತೆಗಿನ ಸಂಭಾಷಣೆಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "ಸಂಭಾಷಣೆಯನ್ನು ಅಳಿಸಿ";
-"alerts.confirmClearConversation" = "ಈ ಸಂಪರ್ಕದೊಂದಿಗೆ ನೀವು ಸಂಭಾಷಣೆಯನ್ನು ತೆರವುಗೊಳಿಸಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "ಸ್ಪಷ್ಟವಾದ ಸಂಭಾಷಣೆ";
 "alerts.noMediaPermissionsTitle" = "ಮಾಧ್ಯಮ ಅನುಮತಿ ನೀಡಿಲ್ಲ";
 "alerts.noLibraryPermissionsTitle" = "ಫೋಟೋ ಲೈಬ್ರರಿಗೆ ಪ್ರವೇಶವನ್ನು ನೀಡಿಲ್ಲ";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "ಪ್ರಾಕ್ಸಿ ಸರ್ವರ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ";
 "accountPage.proxyDisabledAlertBody" = "ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವೀಕರಿಸಲು, ದಯವಿಟ್ಟು ಪ್ರಾಕ್ಸಿ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "ರದ್ದು";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "ಸಾಧನವನ್ನು ಹಿಂತೆಗೆದುಕೊಳ್ಳುವುದು ಪೂರ್ಣಗೊಂಡಿದೆ";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "ಹೊರಹೋಗುವ ಕರೆ";
 "generatedMessage.missedOutgoingCall" = "ತಪ್ಪಿಸಿಕೊಂಡ ಹೊರಹೋಗುವ ಕರೆ";
 "generatedMessage.missedIncomingCall" = "ತಪ್ಪಿದ ಕರೆ";
 "generatedMessage.liveLocationSharing" = "ಲೈವ್ ಸ್ಥಳ ಹಂಚಿಕೆ";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

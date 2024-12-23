@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "తెలియని";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "బయలుదేరండి";
 "swarm.newGroup" = "Create new group";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "మీరు ప్రస్తుతం మీ స్థానాన్ని పంచుకుంటున్నారు ";
 "conversation.explanationReceivingLocationFrom" = "మీరు ప్రస్తుతం  నుండి ఒక ప్రత్యక్ష స్థానం అందుకుంటున్న";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "హలో, మీరు సంభాషణ చేరాలనుకుంటున్నారా?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "సంభాషణను సమకాలీకరించడానికి %@ కనెక్ట్ కోసం మేము వేచి ఉన్నాము.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "దీనికి ప్రతిస్పందనగా";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "లింక్ ఖాతా";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "దయచేసి అప్లికేషన్ను మూసివేసి, దాన్ని మళ్లీ తెరవడానికి ప్రయత్నించండి";
-"alerts.confirmBlockContact" = "మీరు ఈ పరిచయాన్ని నిరోధించాలనుకుంటున్నారా అని మీకు ఖచ్చితంగా తెలుసా? ఈ పరిచయం ఉన్న సంభాషణ చరిత్రను కూడా శాశ్వతంగా తొలగించబడుతుంది.";
-"alerts.confirmDeleteConversation" = "మీరు ఈ సంభాషణ శాశ్వతంగా తొలగించడానికి అనుకుంటున్నారా ఖచ్చితంగా?";
-"alerts.confirmDeleteConversationFromContact" = "మీరు ఈ పరిచయం తో సంభాషణ తొలగించడానికి అనుకుంటున్నారా ఖచ్చితంగా?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "సంభాషణను తొలగించు";
-"alerts.confirmClearConversation" = "మీరు ఈ పరిచయం తో సంభాషణ క్లియర్ అనుకుంటున్నారా ఖచ్చితంగా?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "స్పష్టమైన సంభాషణ";
 "alerts.noMediaPermissionsTitle" = "మీడియా అనుమతి ఇవ్వలేదు";
 "alerts.noLibraryPermissionsTitle" = "ఫోటో లైబ్రరీకి ప్రాప్యత ఇవ్వబడలేదు";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "ప్రాక్సీ సర్వర్ డిసేబుల్";
 "accountPage.proxyDisabledAlertBody" = "నోటిఫికేషన్లను స్వీకరించడానికి, దయచేసి ప్రాక్సీని ప్రారంభించండి";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "రద్దు";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "పరికరం రద్దు పూర్తయింది";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "బయటి కాల్";
 "generatedMessage.missedOutgoingCall" = "మిస్ అవుట్గోయింగ్ కాల్";
 "generatedMessage.missedIncomingCall" = "మిస్డ్ ఇన్కమింగ్ కాల్";
 "generatedMessage.liveLocationSharing" = "ప్రత్యక్ష స్థానం భాగస్వామ్యం";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

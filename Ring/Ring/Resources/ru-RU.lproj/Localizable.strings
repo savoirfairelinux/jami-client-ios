@@ -85,7 +85,7 @@
 "swarm.blocked" = "Заблокирован";
 "swarm.unknown" = "Неизвестно";
 "swarm.inviteMembers" = "Пригласить участников";
-"swarm.confirmLeaveConversation" = "Вы действительно хотите покинуть эту беседу?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Покинуть";
 "swarm.newGroup" = "Создать новую группу";
 "swarm.namePlaceholder" = "Имя группы";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Написать сообщение";
 "conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
 "conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
-"conversation.errorSavingImage" = "Произошла ошибка при сохранении изображения в галерею.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Привет,\nВы хотите присоединиться к разговору?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Мы ожидаем пока %@ подключиться для синхронизации беседы.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "В ответ на";
 "conversation.repliedTo" = "в ответ на";
 "conversation.yourself" = "себе";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Привязать аккаунт";
 "alerts.dbFailedTitle" = "Произошла ошибка при запуске Jami";
 "alerts.dbFailedMessage" = "Пожалуйста, закройте приложение и попробуйте открыть его снова";
-"alerts.confirmBlockContact" = "Вы уверены, что хотите заблокировать этот контакт? История разговоров с этим контактом также будет безвозвратно удалена.";
-"alerts.confirmDeleteConversation" = "Вы уверены, что хотите безвозвратно удалить этот разговор?";
-"alerts.confirmDeleteConversationFromContact" = "Вы уверены, что хотите удалить разговор с этим контактом?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Удалить разговор";
-"alerts.confirmClearConversation" = "Вы уверены, что хотите удалить разговор с этим контактом?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Очистить разговор";
 "alerts.noMediaPermissionsTitle" = "Не прав доступа к медиа";
 "alerts.noLibraryPermissionsTitle" = "Не предоставлен доступ к библиотеке фотографий";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Прокси-сервер выключен";
 "accountPage.proxyDisabledAlertBody" = "Для получения уведомлений, пожалуйста, включите прокси";
 "accountPage.removeDeviceTitle" = "Удалить устройство";
-"accountPage.revokeDeviceMessage" = "Вы уверены, что хотите удалить это устройство? Это действие не может быть отменено.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Отозвать";
 "accountPage.revokeDevicePlaceholder" = "Введите ваш пароль";
 "accountPage.deviceRevoked" = "Отзыв устройства завершенно";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Исходящий вызов";
 "generatedMessage.missedOutgoingCall" = "Пропущенный исходящий";
 "generatedMessage.missedIncomingCall" = "Пропущенный входящий";
 "generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
-"generatedMessage.contactLeftConversation" = "вышел из беседы";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Настройки видео";

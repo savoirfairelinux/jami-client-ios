@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "לא מוכר";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "עזוב";
 "swarm.newGroup" = "יצירת קבוצה חדשה";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "אתה חולק את המיקום שלך עם ";
 "conversation.explanationReceivingLocationFrom" = "אתה מקבל כרגע מיקום חי מ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "שלום, תרצה להצטרף לשיחה?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "אנחנו מחכים ל%@ מתחברים כדי להעמיק את השיחה.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "בתשובה";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "חשבון חיבור";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "בבקשה סגור את ההזמנה ותנסה לפתוח אותה שוב.";
-"alerts.confirmBlockContact" = "האם אתה בטוח שאתה רוצה לחסום את הקשר הזה? היסטוריית השיחה עם הקשר הזה גם תימחק באופן קבוע.";
-"alerts.confirmDeleteConversation" = "אתה בטוח שאתה רוצה למחוק את השיחה הזאת באופן קבוע?";
-"alerts.confirmDeleteConversationFromContact" = "אתה בטוח שאתה רוצה למחוק את השיחה עם הקשר הזה?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "מחיקת דיון";
-"alerts.confirmClearConversation" = "האם אכן ברצונך לנקות את הדיון עם איש הקשר הזה?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "ניקוי הדיון";
 "alerts.noMediaPermissionsTitle" = "אישור מדיה לא מוסמך";
 "alerts.noLibraryPermissionsTitle" = "גישה לספריית התמונות לא מותרת";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "שרת פרוקסי מופחת";
 "accountPage.proxyDisabledAlertBody" = "כדי לקבל הודעות, אנא פעל פרוקסי";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "ביטול";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "ביטול המכשיר הושלם";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "שיחה יוצאת";
 "generatedMessage.missedOutgoingCall" = "פספסתי שיחת פנויה";
 "generatedMessage.missedIncomingCall" = "פספסתי שיחת כניסה";
 "generatedMessage.liveLocationSharing" = "שיתוף מיקום חי";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

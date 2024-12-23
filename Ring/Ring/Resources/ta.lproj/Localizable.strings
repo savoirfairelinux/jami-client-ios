@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "அறியப்படாதது";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "வெளியேறு";
 "swarm.newGroup" = "Create new group";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "நீங்கள் தற்போது உங்கள் இருப்பிடத்தை பகிர்ந்துகொள்கிறீர்கள் ";
 "conversation.explanationReceivingLocationFrom" = "நீங்கள் தற்போது ல் இருந்து ஒரு நேரடி இருப்பிடத்தை பெறுகிறீர்கள்";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "வணக்கம், நீங்கள் உரையாடலில் சேர விரும்புகிறீர்களா?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "உரையாடலை ஒத்திசைக்க %@ இணைப்புக்காக காத்திருக்கிறோம்.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "பதில்";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "இணைப்பு கணக்கு";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "தயவுசெய்து விண்ணப்பத்தை மூடிவிட்டு மீண்டும் திறக்க முயற்சிக்கவும்";
-"alerts.confirmBlockContact" = "இந்த தொடர்பு தொடர்பான உரையாடல் வரலாறு நிரந்தரமாக நீக்கப்படும்.";
-"alerts.confirmDeleteConversation" = "நீங்கள் இந்த உரையாடலை நிரந்தரமாக நீக்க வேண்டும் என்று உறுதியாக இருக்கிறீர்களா?";
-"alerts.confirmDeleteConversationFromContact" = "இந்த தொடர்பு கொண்டு உரையாடலை நீக்க விரும்புகிறீர்களா?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "உரையாடலை நீக்கு";
-"alerts.confirmClearConversation" = "இந்த தொடர்பு கொண்டு உரையாடலை அழிக்க விரும்புகிறீர்கள் என்று உறுதியாக உள்ளீர்களா?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "தெளிவான உரையாடல்";
 "alerts.noMediaPermissionsTitle" = "ஊடக அனுமதி வழங்கப்படவில்லை";
 "alerts.noLibraryPermissionsTitle" = "புகைப்பட நூலகத்திற்கு அணுகல் வழங்கப்படவில்லை";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "ப்ராக்ஸி சேவையகம் செயலிழக்கப்பட்டது";
 "accountPage.proxyDisabledAlertBody" = "அறிவிப்புகளைப் பெற, ப்ராக்ஸி இயக்கு";
 "accountPage.removeDeviceTitle" = "Remove device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "மீறல்";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "சாதனத்தை திரும்பப் பெறுதல் நிறைவு";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "வெளியேறும் அழைப்பு";
 "generatedMessage.missedOutgoingCall" = "தொலைபேசி அழைப்பு தவறியது";
 "generatedMessage.missedIncomingCall" = "தவறவிட்ட அழைப்பு";
 "generatedMessage.liveLocationSharing" = "நேரடி இருப்பிட பகிர்வு";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

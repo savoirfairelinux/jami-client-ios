@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Neznámé";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you really want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Opustit";
 "swarm.newGroup" = "Vytvořit novou skupinu";
 "swarm.namePlaceholder" = "Group name";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Právě sdílíte svou polohu s ";
 "conversation.explanationReceivingLocationFrom" = "Právě přijímáte aktuální polohu od ";
-"conversation.errorSavingImage" = "An error occurred while saving image to gallery.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Dobrý den,\nChcete se připojit ke konverzaci?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Čekáme, až se %@připojí, aby mohlo dokjít k synchronizaci konverzace.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "V odpovědi na";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Připojuje se účet";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Zavřete, prosím, program a zkuste jej otevřít znovu";
-"alerts.confirmBlockContact" = "Jste si jistý, že chcete blokovat tento kontakt? Minulost konverzace s tímto spojením bude rovněž trvale smazána.";
-"alerts.confirmDeleteConversation" = "Jste si jistý, že chcete tuto konverzaci odstranit trvale?";
-"alerts.confirmDeleteConversationFromContact" = "Jste si jistý, že chcete smazat konverzaci s tímto kontaktem?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Odstranit konverzaci";
-"alerts.confirmClearConversation" = "Jste si jistý, že chcete vyprázdnit konverzaci s tímto kontaktem?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Vyprázdnit konverzaci";
 "alerts.noMediaPermissionsTitle" = "Oprávnění médií nebyla udělena.";
 "alerts.noLibraryPermissionsTitle" = "Přístup ke knihovně fotek nebyl udělen.";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Server proxy zakázán";
 "accountPage.proxyDisabledAlertBody" = "Pro přijímání oznámení povolte, prosím, proxy";
 "accountPage.removeDeviceTitle" = "Odstranit zařízení";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to remove this device? This action cannot be undone.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Odebrat";
 "accountPage.revokeDevicePlaceholder" = "Zadejte své heslo";
 "accountPage.deviceRevoked" = "Odebrání zařízení dokončeno";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Odchozí hovor";
 "generatedMessage.missedOutgoingCall" = "Nepřijatý odchozí hovor";
 "generatedMessage.missedIncomingCall" = "Zmeškaný příchozí hovor";
 "generatedMessage.liveLocationSharing" = "Sdílení aktuální polohy";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

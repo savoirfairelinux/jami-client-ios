@@ -85,7 +85,7 @@
 "swarm.blocked" = "Blokiran/a";
 "swarm.unknown" = "Neznano";
 "swarm.inviteMembers" = "Povabi člane";
-"swarm.confirmLeaveConversation" = "Ali res želite zapustiti ta pogovor?";
+"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Zapusti";
 "swarm.newGroup" = "Ustvari novo skupino";
 "swarm.namePlaceholder" = "Ime skupine";
@@ -131,14 +131,14 @@
 "conversation.messagePlaceholder" = "Piši";
 "conversation.explanationSendingLocationTo" = "Trenutno v živo delite svojo lokacijo z ";
 "conversation.explanationReceivingLocationFrom" = "Trenutno v živo pridobivate podatek o lokaciji od";
-"conversation.errorSavingImage" = "Pri shranjevanju datoteke v galerijo je prišlo do napake.";
+"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "Sent you a conversation invitation.";
-"conversation.requestMessage" = "Pozdravljeni, \nse želite pridružiti pogovoru?";
+"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Čakamo, da se %@ poveže, da sinhroniziramo pogovor.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Kot odgovor";
 "conversation.repliedTo" = "je odgovoril_a";
 "conversation.yourself" = "vam";
@@ -235,11 +235,11 @@
 "alerts.accountLinkedTitle" = "Povezovanje računa";
 "alerts.dbFailedTitle" = "Ob zagonu Jami je prišlo do napake";
 "alerts.dbFailedMessage" = "Zaprite program in ga ponovno zaženite";
-"alerts.confirmBlockContact" = "Ali ste prepričani, da želite blokirati ta stik? Zgodovina pogovorov s tem stikom bo trajsno izbrisana.";
-"alerts.confirmDeleteConversation" = "Ali ste prepričani, da želite trajno izbrisati ta pogovor?";
-"alerts.confirmDeleteConversationFromContact" = "Ali ste prepričani, da želite izbrisati pogovor s tem stikom?";
+"alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Izbriši pogovor";
-"alerts.confirmClearConversation" = "Ali ste prepričani, da želite počistiti pogovor s tem stikom?";
+"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "Počisti pogovor";
 "alerts.noMediaPermissionsTitle" = "Dovoljenje za medij ni podano";
 "alerts.noLibraryPermissionsTitle" = "Dostop do fotoalbuma ni bil dodeljen";
@@ -304,7 +304,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Posredniški strežnik je onemogočen";
 "accountPage.proxyDisabledAlertBody" = "Če želite prejemati obvestila, omogočite posredniški strežnik";
 "accountPage.removeDeviceTitle" = "Odstrani napravo";
-"accountPage.revokeDeviceMessage" = "Ali ste prepričani, da želite odstraniti to napravo? Tega dejanja ni mogoče razveljaviti.";
+"accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Odpokliči";
 "accountPage.revokeDevicePlaceholder" = "Vnesite geslo";
 "accountPage.deviceRevoked" = "Odpoklic naprave je uspel";
@@ -470,13 +470,13 @@
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was kicked from the conversation.";
-"generatedMessage.contactUnblocked" = "rejoined the conversation.";
+"generatedMessage.contactBlocked" = "was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Odhodni klic";
 "generatedMessage.missedOutgoingCall" = "Zgrešen odhodni klic";
 "generatedMessage.missedIncomingCall" = "Zgrešen dohodni klic";
 "generatedMessage.liveLocationSharing" = "Deljenje lokacije v živo";
-"generatedMessage.contactLeftConversation" = "left the conversation";
+"generatedMessage.contactLeftConversation" = "left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Nastavitve videa";
