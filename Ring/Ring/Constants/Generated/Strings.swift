@@ -225,8 +225,8 @@ internal enum L10n {
     internal static let removeDeviceTitle = L10n.tr("Localizable", "accountPage.removeDeviceTitle", fallback: "Remove device")
     /// Revoke
     internal static let revokeDeviceButton = L10n.tr("Localizable", "accountPage.revokeDeviceButton", fallback: "Revoke")
-    /// Are you sure you want to remove this device? This action cannot be undone.
-    internal static let revokeDeviceMessage = L10n.tr("Localizable", "accountPage.revokeDeviceMessage", fallback: "Are you sure you want to remove this device? This action cannot be undone.")
+    /// Do you want to remove this device? This action cannot be undone.
+    internal static let revokeDeviceMessage = L10n.tr("Localizable", "accountPage.revokeDeviceMessage", fallback: "Do you want to remove this device? This action cannot be undone.")
     /// Enter your password
     internal static let revokeDevicePlaceholder = L10n.tr("Localizable", "accountPage.revokeDevicePlaceholder", fallback: "Enter your password")
     /// Security
@@ -315,16 +315,16 @@ internal enum L10n {
     internal static let accountNoNetworkTitle = L10n.tr("Localizable", "alerts.accountNoNetworkTitle", fallback: "Network error")
     /// Already sharing location with this user
     internal static let alreadylocationSharing = L10n.tr("Localizable", "alerts.alreadylocationSharing", fallback: "Already sharing location with this user")
-    /// Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.
-    internal static let confirmBlockContact = L10n.tr("Localizable", "alerts.confirmBlockContact", fallback: "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.")
-    /// Are you sure you want to clear the conversation with this contact?
-    internal static let confirmClearConversation = L10n.tr("Localizable", "alerts.confirmClearConversation", fallback: "Are you sure you want to clear the conversation with this contact?")
+    /// Do you want to block this contact? The conversation history with this contact will also be deleted permanently.
+    internal static let confirmBlockContact = L10n.tr("Localizable", "alerts.confirmBlockContact", fallback: "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.")
+    /// Do you want to clear the conversation with this contact?
+    internal static let confirmClearConversation = L10n.tr("Localizable", "alerts.confirmClearConversation", fallback: "Do you want to clear the conversation with this contact?")
     /// Clear Conversation
     internal static let confirmClearConversationTitle = L10n.tr("Localizable", "alerts.confirmClearConversationTitle", fallback: "Clear Conversation")
-    /// Are you sure you want to delete this conversation permanently?
-    internal static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation", fallback: "Are you sure you want to delete this conversation permanently?")
-    /// Are you sure you want to delete the conversation with this contact?
-    internal static let confirmDeleteConversationFromContact = L10n.tr("Localizable", "alerts.confirmDeleteConversationFromContact", fallback: "Are you sure you want to delete the conversation with this contact?")
+    /// Do you want to delete this conversation permanently?
+    internal static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation", fallback: "Do you want to delete this conversation permanently?")
+    /// Do you want to delete the conversation with this contact?
+    internal static let confirmDeleteConversationFromContact = L10n.tr("Localizable", "alerts.confirmDeleteConversationFromContact", fallback: "Do you want to delete the conversation with this contact?")
     /// Delete Conversation
     internal static let confirmDeleteConversationTitle = L10n.tr("Localizable", "alerts.confirmDeleteConversationTitle", fallback: "Delete Conversation")
     /// Please close application and try to open it again
@@ -451,14 +451,14 @@ internal enum L10n {
     internal static let deletedMessage = L10n.tr("Localizable", "conversation.deletedMessage", fallback: "deleted a message")
     /// edited
     internal static let edited = L10n.tr("Localizable", "conversation.edited", fallback: "edited")
-    /// An error occurred while saving image to gallery.
-    internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "An error occurred while saving image to gallery.")
+    /// An error occurred while saving the image to the gallery.
+    internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "An error occurred while saving the image to the gallery.")
     /// You are currently receiving a live location from 
     internal static let explanationReceivingLocationFrom = L10n.tr("Localizable", "conversation.explanationReceivingLocationFrom", fallback: "You are currently receiving a live location from ")
     /// You are currently sharing your location with 
     internal static let explanationSendingLocationTo = L10n.tr("Localizable", "conversation.explanationSendingLocationTo", fallback: "You are currently sharing your location with ")
-    /// Sent you a conversation invitation.
-    internal static let incomingRequest = L10n.tr("Localizable", "conversation.incomingRequest", fallback: "Sent you a conversation invitation.")
+    /// sent you a conversation invitation.
+    internal static let incomingRequest = L10n.tr("Localizable", "conversation.incomingRequest", fallback: "sent you a conversation invitation.")
     /// In reply to
     internal static let inReplyTo = L10n.tr("Localizable", "conversation.inReplyTo", fallback: "In reply to")
     /// Write to
@@ -472,15 +472,15 @@ internal enum L10n {
     /// replied to
     internal static let repliedTo = L10n.tr("Localizable", "conversation.repliedTo", fallback: "replied to")
     /// Hello,
-    /// Would you like to join the conversation?
-    internal static let requestMessage = L10n.tr("Localizable", "conversation.requestMessage", fallback: "Hello,\nWould you like to join the conversation?")
+    /// Do you want to join the conversation?
+    internal static let requestMessage = L10n.tr("Localizable", "conversation.requestMessage", fallback: "Hello,\nDo you want to join the conversation?")
     /// Send them an invitation to be able converse.
     internal static let sendRequest = L10n.tr("Localizable", "conversation.sendRequest", fallback: "Send them an invitation to be able converse.")
     /// Send conversation invitation
     internal static let sendRequestTitle = L10n.tr("Localizable", "conversation.sendRequestTitle", fallback: "Send conversation invitation")
-    /// We are waiting for %@ connects to synchronize the conversation.
+    /// Waiting for %@ to connect to synchronize the conversation…
     internal static func synchronizationMessage(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "conversation.synchronizationMessage", String(describing: p1), fallback: "We are waiting for %@ connects to synchronize the conversation.")
+      return L10n.tr("Localizable", "conversation.synchronizationMessage", String(describing: p1), fallback: "Waiting for %@ to connect to synchronize the conversation…")
     }
     /// You have accepted the conversation invitation.
     internal static let synchronizationTitle = L10n.tr("Localizable", "conversation.synchronizationTitle", fallback: "You have accepted the conversation invitation.")
@@ -598,12 +598,12 @@ internal enum L10n {
   internal enum GeneratedMessage {
     /// Invitation received
     internal static let contactAdded = L10n.tr("Localizable", "generatedMessage.contactAdded", fallback: "Invitation received")
-    /// was kicked from the conversation.
-    internal static let contactBlocked = L10n.tr("Localizable", "generatedMessage.contactBlocked", fallback: "was kicked from the conversation.")
-    /// left the conversation
-    internal static let contactLeftConversation = L10n.tr("Localizable", "generatedMessage.contactLeftConversation", fallback: "left the conversation")
-    /// rejoined the conversation.
-    internal static let contactUnblocked = L10n.tr("Localizable", "generatedMessage.contactUnblocked", fallback: "rejoined the conversation.")
+    /// was blocked from the conversation.
+    internal static let contactBlocked = L10n.tr("Localizable", "generatedMessage.contactBlocked", fallback: "was blocked from the conversation.")
+    /// left the conversation.
+    internal static let contactLeftConversation = L10n.tr("Localizable", "generatedMessage.contactLeftConversation", fallback: "left the conversation.")
+    /// was unblocked from the conversation.
+    internal static let contactUnblocked = L10n.tr("Localizable", "generatedMessage.contactUnblocked", fallback: "was unblocked from the conversation.")
     /// joined the conversation.
     internal static let invitationAccepted = L10n.tr("Localizable", "generatedMessage.invitationAccepted", fallback: "joined the conversation.")
     /// was invited to join the conversation.
@@ -902,8 +902,8 @@ internal enum L10n {
     internal static let changePicture = L10n.tr("Localizable", "swarm.changePicture", fallback: "Change group picture")
     /// Color
     internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor", fallback: "Color")
-    /// Do you really want to leave this conversation?
-    internal static let confirmLeaveConversation = L10n.tr("Localizable", "swarm.confirmLeaveConversation", fallback: "Do you really want to leave this conversation?")
+    /// Do you want to leave this conversation?
+    internal static let confirmLeaveConversation = L10n.tr("Localizable", "swarm.confirmLeaveConversation", fallback: "Do you want to leave this conversation?")
     /// Customize group
     internal static let customize = L10n.tr("Localizable", "swarm.customize", fallback: "Customize group")
     /// Customize group profile
