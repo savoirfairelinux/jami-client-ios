@@ -98,7 +98,7 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func applyL10n() {
         self.backButton.setTitle(L10n.Actions.backAction, for: .normal)
-        self.clearButton.setTitle(L10n.Actions.clearAction, for: .normal)
+        self.clearButton.setTitle(L10n.Actions.deleteAction, for: .normal)
     }
 }
 
