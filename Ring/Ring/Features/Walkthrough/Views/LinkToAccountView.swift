@@ -18,14 +18,22 @@
 
 import SwiftUI
 
+enum DisplayMode: String, CaseIterable, Identifiable {
+    case qrCode = "Show QR Code"
+    case label = "Show PIN Code"
+
+    var id: String { rawValue }
+}
+
 struct LinkToAccountView: View {
     @StateObject var viewModel: LinkToAccountVM
     let dismissHandler = DismissHandler()
     @Environment(\.verticalSizeClass)
     var verticalSizeClass
+    @SwiftUI.State private var displayMode: DisplayMode = .qrCode
 
     init(injectionBag: InjectionBag,
-         linkAction: @escaping (_ pin: String, _ password: String) -> Void) {
+         linkAction: @escaping () -> Void) {
         _viewModel = StateObject(wrappedValue:
                                     LinkToAccountVM(with: injectionBag,
                                                     linkAction: linkAction))
@@ -34,11 +42,7 @@ struct LinkToAccountView: View {
     var body: some View {
         VStack {
             header
-            if verticalSizeClass != .regular {
-                landscapeView
-            } else {
-                portraitView
-            }
+            mainContent
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor.systemGroupedBackground)
@@ -51,151 +55,237 @@ struct LinkToAccountView: View {
             HStack {
                 cancelButton
                 Spacer()
-                linkButton
             }
-            Text(L10n.LinkToAccount.linkDeviceTitle)
-                .font(.headline)
+            Text("Import account")
+                .font(.system(size: 18, weight: .semibold))
         }
         .padding()
     }
 
+    @ViewBuilder private var mainContent: some View {
+        switch viewModel.uiState {
+        case .initial:
+            loadingView
+        case .displayingToken:
+            tokenView
+        case .connecting:
+            connectingView
+        case .authenticating:
+            autenticatingView
+        case .inProgress:
+            VStack {
+                SwiftUI.ProgressView()
+                Spacer()
+            }
+            .padding()
+        case .success:
+            successView()
+        case .error(let message):
+            errorView(message)
+        }
+    }
+
+    private var loadingView: some View {
+        VStack(spacing: 30) {
+            info
+            SwiftUI.ProgressView()
+            Spacer()
+        }
+        .padding(.horizontal)
+    }
+
+    private var tokenView: some View {
+        Group {
+            if verticalSizeClass == .regular {
+                portraitView
+            } else {
+                landscapeView
+            }
+        }
+    }
+
+    private var connectingView: some View {
+        VStack(spacing: 15) {
+            Text("Action required.\nPlease confirm account on your old device.")
+                .multilineTextAlignment(.center)
+            Spacer()
+        }
+        .padding(.horizontal)
+    }
+
+    private var autenticatingView: some View {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 15) {
+                userInfoView
+                if viewModel.hasPassword {
+                    passwordView
+                        .padding(.top)
+                }
+                StyleImportAccountButton(title: "Import", action: { [weak viewModel] in
+                    viewModel?.connect()
+                })
+                Spacer()
+            }
+            .padding(.horizontal)
+        }
+    }
+
+    private func successView() -> some View {
+        VStack {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundColor(Color(UIColor.jamiSuccess))
+                .font(.system(size: 50))
+                .padding()
+            Text("You are all set!")
+            Text("Your account is successfully imported on the new device!")
+            StyleImportAccountButton(title: "Go to accounts", action: { [weak dismissHandler, weak viewModel] in
+                dismissHandler?.dismissView()
+                viewModel?.linkCompleted()
+            })
+            Spacer()
+        }
+    }
+
+    private func errorView(_ message: String) -> some View {
+        VStack {
+            Image(systemName: "exclamationmark.circle.fill")
+                .foregroundColor(Color(UIColor.jamiFailure))
+                .font(.system(size: 50))
+                .padding()
+            Text(message)
+            StyleImportAccountButton(title: "Exit", action: { [weak dismissHandler, weak viewModel] in
+                dismissHandler?.dismissView()
+                viewModel?.onCancel()
+            })
+            Spacer()
+        }
+    }
+
     private var portraitView: some View {
         ScrollView(showsIndicators: false) {
-            info
-            pinSection
+            VStack(spacing: 30) {
+                info
+                tokenDisplay
+                Spacer()
+            }
+            .padding(.horizontal)
         }
     }
 
     private var landscapeView: some View {
         HStack(spacing: 30) {
             VStack {
-                Spacer().frame(height: 50)
+                Spacer().frame(height: 30)
                 info
                 Spacer()
             }
             ScrollView(showsIndicators: false) {
-                pinSection
-            }
-        }
-    }
-
-    private var info: some View {
-        VStack {
-            Text(L10n.LinkToAccount.explanationMessage)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: 500)
-                .padding(.horizontal)
-            HStack {
-                Text(L10n.LinkToAccount.pinPlaceholder + ":")
-                Text(viewModel.pin)
-                    .foregroundColor(Color(UIColor.jamiSuccess))
-            }
-            .padding()
-        }
-    }
-
-    private var scanQRCodeView: some View {
-        ScanQRCodeView(width: 350, height: 280) { pin in
-            viewModel.didScanQRCode(pin)
-        }
-    }
-
-    private var pinSection: some View {
-        VStack(spacing: 15) {
-            if viewModel.scannedCode == nil {
-                pinSwitchButtons
-                if viewModel.animatableScanSwitch {
-                    scanQRCodeView
-                } else {
-                    manualEntryPinView
+                VStack(spacing: 30) {
+                    tokenDisplay
                 }
             }
-            passwordView
+            Spacer()
         }
-        .frame(minWidth: 350, maxWidth: 500)
         .padding(.horizontal)
     }
 
-    private var pinSwitchButtons: some View {
-        HStack {
-            switchButton(text: L10n.LinkToAccount.scanQRCode,
-                         isHeadline: viewModel.notAnimatableScanSwitch,
-                         isHighlighted: viewModel.animatableScanSwitch,
-                         transitionEdge: .trailing,
-                         action: {
-                            viewModel.switchToQRCode()
-                         })
-
-            Spacer()
-
-            switchButton(text: L10n.LinkToAccount.pinLabel,
-                         isHeadline: !viewModel.notAnimatableScanSwitch,
-                         isHighlighted: !viewModel.animatableScanSwitch,
-                         transitionEdge: .leading,
-                         action: {
-                            viewModel.switchToManualEntry()
-                         })
-        }
+    private var info: some View {
+        (
+            Text("On the old device, initiate the exportation.\n")
+                + Text("Select Account > Account Settings > Link a new device.\n").bold()
+                + Text(displayMode == .qrCode ? "When ready, scan the provided QR code." : "When ready, enter provided code.")
+        )
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: 500)
     }
 
-    private func switchButton(text: String,
-                              isHeadline: Bool,
-                              isHighlighted: Bool,
-                              transitionEdge: Edge,
-                              action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            VStack {
-                Text(text)
-                    .foregroundColor(Color(UIColor.label))
-                    .font(isHeadline ? .headline : .body)
-                if isHighlighted {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(Color.black)
-                        .frame(height: 1)
-                        .padding(.horizontal)
-                        .transition(.move(edge: transitionEdge))
-                } else {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(Color.clear)
-                        .frame(height: 1)
-                        .padding(.horizontal)
-                        .transition(.move(edge: transitionEdge))
+    @ViewBuilder private var tokenDisplay: some View {
+        Group {
+            Picker("Display Mode", selection: $displayMode) {
+                ForEach(DisplayMode.allCases) { mode in
+                    Text(mode.rawValue).tag(mode)
                 }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+
+            // Display based on chosen mode
+            if displayMode == .label {
+                tokenLabel
+            } else {
+                qrCodeView
             }
         }
     }
 
-    private var manualEntryPinView: some View {
-        WalkthroughTextEditView(text: $viewModel.pin,
-                                placeholder: L10n.LinkToAccount.pinLabel)
+    private var qrCodeView: some View {
+        QRCodeView(jamiId: viewModel.token, size: 200)
+    }
+
+    private var tokenLabel: some View {
+        VStack(spacing: 30) {
+            Text(viewModel.token)
+                .font(.footnote)
+                .contextMenu {
+                    Button(action: {
+                        UIPasteboard.general.string = viewModel.token
+                    }, label: {
+                        Text("Copy")
+                        Image(systemName: "doc.on.doc")
+                    })
+                }
+            ShareButtonView(infoToShare: viewModel.getShareInfo())
+        }
     }
 
     private var passwordView: some View {
         VStack {
-            Text(L10n.ImportFromArchive.passwordExplanation)
+            Text("Your account is locked with password. Unlock it to continue")
                 .multilineTextAlignment(.center)
             WalkthroughPasswordView(text: $viewModel.password, placeholder: L10n.Global.password)
         }
-        .padding(.vertical)
+    }
+
+    private var userInfoView: some View {
+        VStack(spacing: 15) {
+            AvatarImageView(model: viewModel, width: 100, height: 100)
+            if let username = viewModel.username {
+                Text(username)
+            }
+            Text(viewModel.jamiId).font(.callout)
+        }
+        .padding()
+        .background(Color(UIColor.secondarySystemBackground))
+        .cornerRadius(10)
+        .shadow(radius: 2)
     }
 
     private var cancelButton: some View {
-        Button(action: {[weak dismissHandler] in
+        Button(action: {[weak dismissHandler, weak viewModel] in
             dismissHandler?.dismissView()
+            viewModel?.onCancel()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
+                .font(.system(size: 18))
         })
     }
+}
 
-    private var linkButton: some View {
-        Button(action: {[weak dismissHandler, weak viewModel] in
-            dismissHandler?.dismissView()
-            viewModel?.link()
-        }, label: {
-            Text(L10n.LinkToAccount.linkButtonTitle)
-                .foregroundColor(viewModel.linkButtonColor)
-        })
-        .disabled(!viewModel.isLinkButtonEnabled)
+struct StyleImportAccountButton: View {
+    let title: String
+    let action: () -> Void
+    var backgroundColor: Color = Color.jamiColor
+    var textColor: Color = .white
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .foregroundColor(textColor)
+                .padding(.horizontal)
+                .padding(.vertical, 10)
+                .background(backgroundColor)
+                .cornerRadius(10)
+        }
+        .padding()
     }
 }
