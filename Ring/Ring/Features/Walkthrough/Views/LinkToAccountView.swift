@@ -18,11 +18,19 @@
 
 import SwiftUI
 
+enum DisplayMode: String, CaseIterable, Identifiable {
+    case qrCode = "Show QR Code"
+    case label = "Show PIN Code"
+
+    var id: String { rawValue }
+}
+
 struct LinkToAccountView: View {
     @StateObject var viewModel: LinkToAccountVM
     let dismissHandler = DismissHandler()
     @Environment(\.verticalSizeClass)
     var verticalSizeClass
+    @SwiftUI.State private var displayMode: DisplayMode = .qrCode
 
     init(injectionBag: InjectionBag,
          linkAction: @escaping (_ pin: String, _ password: String) -> Void) {
@@ -34,16 +42,83 @@ struct LinkToAccountView: View {
     var body: some View {
         VStack {
             header
-            if verticalSizeClass != .regular {
-                landscapeView
-            } else {
-                portraitView
-            }
+            mainContent
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor.systemGroupedBackground)
-                        .ignoresSafeArea()
+            .ignoresSafeArea()
         )
+    }
+
+    @ViewBuilder
+    private var mainContent: some View {
+        switch viewModel.uiState {
+            case .initial:
+                VStack(spacing: 30) {
+                    info
+                    SwiftUI.ProgressView()
+                    Spacer()
+                }
+                .padding()
+            case .displayingPin:
+                if verticalSizeClass != .regular {
+                    landscapeView
+                } else {
+                    portraitView
+                }
+            case .connecting:
+                VStack {
+                    SwiftUI.ProgressView()
+                    Spacer()
+                }
+                .padding()
+            case .authenticating:
+                autenticatingView
+            case .inProgress:
+                VStack {
+                    SwiftUI.ProgressView()
+                    Spacer()
+                }
+                .padding()
+            case .success:
+                VStack {
+                   Text("Completed")
+                }
+                .onAppear { [weak dismissHandler] in
+                    dismissHandler?.dismiss
+                }
+            case .error(let message):
+                VStack {
+                    errorView(message)
+                    Spacer()
+                }
+                
+        }
+    }
+
+    private var successView: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundColor(.green)
+                .font(.system(size: 50))
+            Text("")
+            Button("") {
+                dismissHandler.dismissView()
+            }
+        }
+    }
+
+    private func errorView(_ message: String) -> some View {
+        VStack(spacing: 20) {
+            Image(systemName: "xmark.circle.fill")
+                .foregroundColor(.red)
+                .font(.system(size: 50))
+            Text(message)
+                .foregroundColor(.red)
+            Button("") {
+                viewModel.retryConnection()
+            }
+        }
     }
 
     private var header: some View {
@@ -51,123 +126,124 @@ struct LinkToAccountView: View {
             HStack {
                 cancelButton
                 Spacer()
-                linkButton
+                if viewModel.uiState == .authenticating {
+                    linkButton
+                }
             }
-            Text(L10n.LinkToAccount.linkDeviceTitle)
-                .font(.headline)
+                Text("Connect")
+                    .font(.headline)
+        }
+        .padding()
+    }
+
+    private var readyView: some View {
+        Group {
+            if verticalSizeClass != .regular {
+                landscapeView
+            } else {
+                portraitView
+            }
+        }
+    }
+
+    private var autenticatingView: some View {
+        VStack(spacing: 30) {
+            info
+            AvatarImageView(model: viewModel, width: 100, height: 100)
+            if let username = viewModel.username {
+                Text(username)
+            }
+            Text(viewModel.jamiId)
+            if viewModel.hasPassword {
+                passwordView
+            }
         }
         .padding()
     }
 
     private var portraitView: some View {
         ScrollView(showsIndicators: false) {
-            info
-            pinSection
+            VStack(spacing: 30) {
+                info
+                pinDisplay
+                Spacer()
+                if viewModel.uiState == .authenticating {
+                    Text("autenticating")
+                }
+                if viewModel.uiState == .authenticating && viewModel.hasPassword {
+                    passwordView
+                }
+            }
+            .padding()
         }
     }
 
     private var landscapeView: some View {
         HStack(spacing: 30) {
             VStack {
-                Spacer().frame(height: 50)
+                Spacer()
                 info
                 Spacer()
             }
             ScrollView(showsIndicators: false) {
-                pinSection
+                VStack(spacing: 30) {
+                    pinDisplay
+                    if viewModel.uiState == .authenticating {
+                        Text("autenticating")
+                    }
+                    if viewModel.uiState == .authenticating && viewModel.hasPassword {
+                        passwordView
+                    }
+                }
             }
+            Spacer()
         }
+        .padding()
     }
 
     private var info: some View {
-        VStack {
-            Text(L10n.LinkToAccount.explanationMessage)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: 500)
-                .padding(.horizontal)
-            HStack {
-                Text(L10n.LinkToAccount.pinPlaceholder + ":")
-                Text(viewModel.pin)
-                    .foregroundColor(Color(UIColor.jamiSuccess))
-            }
-            .padding()
-        }
+        Text("On the old device, initiate the exportation. Select Account > Account Settings > Link a new device. When ready, scan the QR Code below.")
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: 500)
     }
 
-    private var scanQRCodeView: some View {
-        ScanQRCodeView(width: 350, height: 280) { pin in
-            viewModel.didScanQRCode(pin)
-        }
-    }
-
-    private var pinSection: some View {
-        VStack(spacing: 15) {
-            if viewModel.scannedCode == nil {
-                pinSwitchButtons
-                if viewModel.animatableScanSwitch {
-                    scanQRCodeView
-                } else {
-                    manualEntryPinView
+    @ViewBuilder
+    private var pinDisplay: some View {
+        Group {
+            Picker("Display Mode", selection: $displayMode) {
+                ForEach(DisplayMode.allCases) { mode in
+                    Text(mode.rawValue).tag(mode)
                 }
             }
-            passwordView
-        }
-        .frame(minWidth: 350, maxWidth: 500)
-        .padding(.horizontal)
-    }
+            .pickerStyle(SegmentedPickerStyle())
 
-    private var pinSwitchButtons: some View {
-        HStack {
-            switchButton(text: L10n.LinkToAccount.scanQRCode,
-                         isHeadline: viewModel.notAnimatableScanSwitch,
-                         isHighlighted: viewModel.animatableScanSwitch,
-                         transitionEdge: .trailing,
-                         action: {
-                            viewModel.switchToQRCode()
-                         })
-
-            Spacer()
-
-            switchButton(text: L10n.LinkToAccount.pinLabel,
-                         isHeadline: !viewModel.notAnimatableScanSwitch,
-                         isHighlighted: !viewModel.animatableScanSwitch,
-                         transitionEdge: .leading,
-                         action: {
-                            viewModel.switchToManualEntry()
-                         })
-        }
-    }
-
-    private func switchButton(text: String,
-                              isHeadline: Bool,
-                              isHighlighted: Bool,
-                              transitionEdge: Edge,
-                              action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            VStack {
-                Text(text)
-                    .foregroundColor(Color(UIColor.label))
-                    .font(isHeadline ? .headline : .body)
-                if isHighlighted {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(Color.black)
-                        .frame(height: 1)
-                        .padding(.horizontal)
-                        .transition(.move(edge: transitionEdge))
-                } else {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(Color.clear)
-                        .frame(height: 1)
-                        .padding(.horizontal)
-                        .transition(.move(edge: transitionEdge))
-                }
+            // Display based on chosen mode
+            if displayMode == .label {
+                pinLabel
+            } else {
+                qrCodeView
             }
         }
     }
 
-    private var manualEntryPinView: some View {
-        WalkthroughTextEditView(text: $viewModel.pin,
-                                placeholder: L10n.LinkToAccount.pinLabel)
+    private var qrCodeView: some View {
+        QRCodeView(jamiId: viewModel.pin, size: 200)
+    }
+
+    private var pinLabel: some View {
+        VStack(spacing: 30) {
+            Text(viewModel.pin)
+                .font(.footnote)
+                .contextMenu {
+                    Button(action: {
+                        UIPasteboard.general.string = viewModel.pin
+                    }) {
+                        Text("Copy")
+                        Image(systemName: "doc.on.doc")
+                    }
+                }
+            ShareButtonView(infoToShare: viewModel.pin)
+        }
     }
 
     private var passwordView: some View {
@@ -176,12 +252,13 @@ struct LinkToAccountView: View {
                 .multilineTextAlignment(.center)
             WalkthroughPasswordView(text: $viewModel.password, placeholder: L10n.Global.password)
         }
-        .padding(.vertical)
+        .padding(.bottom)
     }
 
     private var cancelButton: some View {
-        Button(action: {[weak dismissHandler] in
+        Button(action: {[weak dismissHandler, weak viewModel] in
             dismissHandler?.dismissView()
+            viewModel?.onCancel()
         }, label: {
             Text(L10n.Global.cancel)
                 .foregroundColor(Color(UIColor.label))
@@ -190,12 +267,13 @@ struct LinkToAccountView: View {
 
     private var linkButton: some View {
         Button(action: {[weak dismissHandler, weak viewModel] in
-            dismissHandler?.dismissView()
-            viewModel?.link()
+           // dismissHandler?.dismissView()
+            viewModel?.connect()
         }, label: {
-            Text(L10n.LinkToAccount.linkButtonTitle)
+            Text("Connect")
                 .foregroundColor(viewModel.linkButtonColor)
         })
-        .disabled(!viewModel.isLinkButtonEnabled)
+        // .disabled(!viewModel.isLinkButtonEnabled)
     }
 }
+
