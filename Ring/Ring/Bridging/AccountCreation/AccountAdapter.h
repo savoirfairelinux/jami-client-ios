@@ -94,5 +94,15 @@
               avatar:(NSString *)avatar
             fileType:(NSString *)fileType;
 
+- (uint32_t)addDevice:(NSString *)accountId
+                token:(NSString *)token;
+
+- (void)confirmAddDevice:(NSString *)accountId
+             operationId:(uint32_t)operationId;
+
+- (void)cancelAddDevice:(NSString *)accountId
+            operationId:(uint32_t)operationId;
+
+- (void)provideAccountAuthentication:(NSString *)accountId password:(NSString *)password;
 
 @end
