@@ -79,14 +79,34 @@ static id <AccountAdapterDelegate> _delegate;
         }
     }));
 
-    confHandlers.insert(exportable_callback<ConfigurationSignal::ExportOnRingEnded>([&](const std::string& account_id, int state, const std::string& pin) {
+    // Add new handlers for device-related signals
+    confHandlers.insert(exportable_callback<ConfigurationSignal::AddDeviceStateChanged>([&](const std::string& account_id,
+                                                                                          uint32_t op_id,
+                                                                                          int state,
+                                                                                          const std::map<std::string, std::string>& detail) {
         if (AccountAdapter.delegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSInteger stateN = state;
-            NSString* pinN = [NSString stringWithUTF8String:pin.c_str()];
-            [AccountAdapter.delegate exportOnRingEndedFor:accountId state:stateN pin:pinN];
+            NSMutableDictionary* detailsDict = [Utils mapToDictionnary:detail];
+            [AccountAdapter.delegate addDeviceStateChangedWithAccountId:accountId 
+                                                                opId:op_id 
+                                                               state:state 
+                                                             details:detailsDict];
         }
     }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::DeviceAuthStateChanged>([&](const std::string& account_id,
+                                                                                           int state,
+                                                                                           const std::map<std::string, std::string>& detail) {
+        if (AccountAdapter.delegate) {
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSMutableDictionary* detailsDict = [Utils mapToDictionnary:detail];
+            [AccountAdapter.delegate deviceAuthStateChangedWithAccountId:accountId
+                                                                state:state
+                                                              details:detailsDict];
+        }
+    }));
+
+
 
     confHandlers.insert(exportable_callback<ConfigurationSignal::KnownDevicesChanged>([&](const std::string& account_id, const std::map<std::string, std::string>& devices) {
         if (AccountAdapter.delegate) {
@@ -199,7 +219,12 @@ static id <AccountAdapterDelegate> _delegate;
 
 - (Boolean)exportOnRing:(NSString *)accountID
                password: (NSString *)password {
-    return exportOnRing(std::string([accountID UTF8String]), std::string([password UTF8String]));
+    return true;//exportOnRing(std::string([accountID UTF8String]), std::string([password UTF8String]));
+}
+
+- (uint32_t)addDevice:(NSString *)accountID
+           token:(NSString *)token {
+    return addDevice(std::string([accountID UTF8String]), std::string([token UTF8String]));
 }
 
 - (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data {

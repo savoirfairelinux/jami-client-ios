@@ -144,26 +144,40 @@ struct ShareButtonView: View {
         }
     }
 }
+
 struct QRCodeView: View {
+    let jamiId: String
+    var size: CGFloat = 270
+    @SwiftUI.State var image: UIImage?
+
+    var body: some View {
+        VStack {
+            Spacer()
+                .frame(height: 20)
+            if let image = image {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: size, height: size)
+                    .cornerRadius(10)
+                    .padding()
+            }
+            Spacer()
+        }
+        .onAppear {
+            image = jamiId.generateQRCode()
+        }
+    }
+}
+
+struct QRCodePresenter: View {
     @Binding var isPresented: Bool
     let jamiId: String
     @SwiftUI.State var image: UIImage?
 
     var body: some View {
         NavigationView {
-            VStack {
-                Spacer()
-                    .frame(height: 20)
-                if let image = image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 270, height: 270)
-                        .cornerRadius(10)
-                        .padding()
-                }
-                Spacer()
-            }
+            QRCodeView(jamiId: jamiId)
             .navigationBarItems(leading: Button(action: {
                 isPresented = false
             }) {
@@ -173,9 +187,6 @@ struct QRCodeView: View {
         }
         .onTapGesture {
             isPresented = false
-        }
-        .onAppear {
-            image = jamiId.generateQRCode()
         }
         .optionalMediumPresentationDetents()
     }

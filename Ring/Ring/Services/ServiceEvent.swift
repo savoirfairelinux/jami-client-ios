@@ -62,6 +62,8 @@ enum ServiceEventType {
     case conversationMemberEvent
     case conversationRemoved
     case requestAccepted
+    case addDeviceStateChanged
+    case deviceAuthStateChanged
 }
 
 /**

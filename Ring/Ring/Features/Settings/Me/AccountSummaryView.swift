@@ -122,7 +122,7 @@ struct AccountSummaryView: View {
                         showQRcode = true
                     }
                     .sheet(isPresented: $showQRcode) {
-                        QRCodeView(isPresented: $showQRcode, jamiId: model.jamiId)
+                        QRCodePresenter(isPresented: $showQRcode, jamiId: model.jamiId)
                     }
             }
             .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
