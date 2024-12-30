@@ -76,7 +76,17 @@ struct AccountSummaryView: View {
                         NavigationLink(destination: LinkedDevicesView(account: model.account, accountService: model.accountService)) {
                             SettingsRow(iconName: "link", title: L10n.AccountPage.linkedDevices)
                         }
-                        ShareButtonView(accountInfoToShare: model.accountInfoToShare)
+                        ShareButtonView(infoToShare: model.accountInfoToShare) {
+                            Group {
+                                Image(systemName: "envelope")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 18, height: 18)
+                                    .padding(.trailing, 5)
+                                Text(L10n.Smartlist.inviteFriends)
+                            }
+                            .foregroundColor(.jamiColor)
+                        }
                     }
                 }
             }
@@ -122,7 +132,7 @@ struct AccountSummaryView: View {
                         showQRcode = true
                     }
                     .sheet(isPresented: $showQRcode) {
-                        QRCodeView(isPresented: $showQRcode, jamiId: model.jamiId)
+                        QRCodePresenter(isPresented: $showQRcode, jamiId: model.jamiId)
                     }
             }
             .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))

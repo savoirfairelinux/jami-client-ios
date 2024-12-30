@@ -746,6 +746,21 @@ internal enum L10n {
   internal enum LinkDevice {
     /// An error occurred while exporting the account.
     internal static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError", fallback: "An error occurred while exporting the account.")
+    /// A network error occurred.
+    /// Please verify your connection.
+    internal static let errorNetwork = L10n.tr("Localizable", "linkDevice.errorNetwork", fallback: "A network error occurred.\nPlease verify your connection.")
+    /// The operation has timed out.
+    /// Please try again.
+    internal static let errorTimeout = L10n.tr("Localizable", "linkDevice.errorTimeout", fallback: "The operation has timed out.\nPlease try again.")
+    /// An error occurred while generating the token.
+    /// Please try again.
+    internal static let errorToken = L10n.tr("Localizable", "linkDevice.errorToken", fallback: "An error occurred while generating the token.\nPlease try again.")
+    /// An error occurred while exporting the account.n
+    /// Please try again.
+    internal static let errorWrongData = L10n.tr("Localizable", "linkDevice.errorWrongData", fallback: "An error occurred while exporting the account.n\nPlease try again.")
+    /// An authentication error occurred.
+    /// Please verify your password.
+    internal static let errorWrongPassword = L10n.tr("Localizable", "linkDevice.errorWrongPassword", fallback: "An authentication error occurred.\nPlease verify your password.")
     /// Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.
     internal static let explanationMessage = L10n.tr("Localizable", "linkDevice.explanationMessage", fallback: "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.")
     /// Verifying
@@ -758,10 +773,31 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "linkDevice.title", fallback: "Link new device")
   }
   internal enum LinkToAccount {
+    /// Your account is locked with a password.
+    /// Unlock it to continue.
+    internal static let accountLockedWithPassword = L10n.tr("Localizable", "linkToAccount.accountLockedWithPassword", fallback: "Your account is locked with a password.\nUnlock it to continue.")
+    /// Action required.
+    /// Please confirm account on your old device.
+    internal static let actionRequired = L10n.tr("Localizable", "linkToAccount.actionRequired", fallback: "Action required.\nPlease confirm account on your old device.")
+    /// You are all set!
+    /// Your account is successfully imported on the new device!
+    internal static let allSet = L10n.tr("Localizable", "linkToAccount.allSet", fallback: "You are all set!\nYour account is successfully imported on the new device!")
+    /// When ready, enter the code.
+    internal static let enterProvidedCode = L10n.tr("Localizable", "linkToAccount.enterProvidedCode", fallback: "When ready, enter the code.")
+    /// Exit
+    internal static let exit = L10n.tr("Localizable", "linkToAccount.exit", fallback: "Exit")
     /// A PIN code is required to use an existing Jami account on this device.
     internal static let explanationMessage = L10n.tr("Localizable", "linkToAccount.explanationMessage", fallback: "A PIN code is required to use an existing Jami account on this device.")
     /// To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.
     internal static let explanationPinMessage = L10n.tr("Localizable", "linkToAccount.explanationPinMessage", fallback: "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.")
+    /// On the old device, initiate the exportation.
+    internal static let exportInstructions = L10n.tr("Localizable", "linkToAccount.exportInstructions", fallback: "On the old device, initiate the exportation.")
+    /// Select Account > Account Settings > Link a new device.
+    internal static let exportInstructionsPath = L10n.tr("Localizable", "linkToAccount.exportInstructionsPath", fallback: "Select Account > Account Settings > Link a new device.")
+    /// Go to my new account
+    internal static let goToAccounts = L10n.tr("Localizable", "linkToAccount.goToAccounts", fallback: "Go to my new account")
+    /// Import account
+    internal static let importAccount = L10n.tr("Localizable", "linkToAccount.importAccount", fallback: "Import account")
     /// Link
     internal static let linkButtonTitle = L10n.tr("Localizable", "linkToAccount.linkButtonTitle", fallback: "Link")
     /// Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.
@@ -774,6 +810,14 @@ internal enum L10n {
     internal static let pinPlaceholder = L10n.tr("Localizable", "linkToAccount.pinPlaceholder", fallback: "PIN code")
     /// Scan QR code
     internal static let scanQRCode = L10n.tr("Localizable", "linkToAccount.scanQRCode", fallback: "Scan QR code")
+    /// When ready, scan the QR Code.
+    internal static let scanQrCode = L10n.tr("Localizable", "linkToAccount.scanQrCode", fallback: "When ready, scan the QR Code.")
+    /// Your code is:
+    internal static let shareMessage = L10n.tr("Localizable", "linkToAccount.shareMessage", fallback: "Your code is:")
+    /// Show PIN Code
+    internal static let showPinCode = L10n.tr("Localizable", "linkToAccount.showPinCode", fallback: "Show PIN Code")
+    /// Show QR Code
+    internal static let showQrCode = L10n.tr("Localizable", "linkToAccount.showQrCode", fallback: "Show QR Code")
     /// Account linking
     internal static let waitLinkToAccountTitle = L10n.tr("Localizable", "linkToAccount.waitLinkToAccountTitle", fallback: "Account linking")
   }
