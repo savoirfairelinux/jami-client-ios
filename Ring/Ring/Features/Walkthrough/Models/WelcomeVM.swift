@@ -71,10 +71,10 @@ class WelcomeVM: ViewModel, ObservableObject {
     }
 
     func openLinkDevice(stateHandler: StatePublisher<WalkthroughState>) {
-        stateHandler.emitState(WalkthroughState.linkDevice(linkAction: { [weak self, weak stateHandler] pin, password in
+        stateHandler.emitState(WalkthroughState.linkDevice(linkAction: { [weak self, weak stateHandler] in
             guard let self = self,
                   let stateHandler = stateHandler else { return }
-            self.linkDevice(pin: pin, password: password, stateHandler: stateHandler)
+            self.linkDeviceCompleted(stateHandler: stateHandler)
         }))
     }
 
@@ -258,25 +258,8 @@ extension WelcomeVM {
 
 // MARK: - link account
 extension WelcomeVM {
-    func linkDevice(pin: String,
-                    password: String,
-                    stateHandler: StatePublisher<WalkthroughState>) {
-        self.creationState = .started
-        self.accountService
-            .addJamiAccount(username: "",
-                            password: password,
-                            pin: pin,
-                            arhivePath: "",
-                            profileName: self.profileName)
-            .subscribe(onNext: { [weak self, weak stateHandler] _ in
-                guard let self = self,
-                      let stateHandler = stateHandler else { return }
-                self.enablePushNotifications()
-                self.accountCreated(stateHandler: stateHandler)
-            }, onError: { [weak self] error in
-                self?.handleAccountCreationError(error)
-            })
-            .disposed(by: disposeBag)
+    func linkDeviceCompleted(stateHandler: StatePublisher<WalkthroughState>) {
+        self.accountCreated(stateHandler: stateHandler)
     }
 }
 

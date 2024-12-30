@@ -206,6 +206,21 @@
 "linkToAccount.pinLabel" = "Enter PIN code";
 "linkToAccount.scanQRCode" = "Scan QR code";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
+"linkToAccount.importAccount" = "Import account";
+"linkToAccount.showQrCode" = "Show QR Code";
+"linkToAccount.showPinCode" = "Show PIN Code";
+"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on your old device.";
+"linkToAccount.allSet" = "You are all set!\nYour account is successfully imported on the new device!";
+"linkToAccount.goToAccounts" = "Go to my new account";
+"linkToAccount.exportInstructions" = "On the old device, initiate the exportation.";
+"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link a new device.";
+"linkToAccount.scanQrCode" = "When ready, scan the QR Code.";
+"linkToAccount.enterProvidedCode" = "When ready, enter the code.";
+"linkToAccount.accountLockedWithPassword" = "Your account is locked with a password.\nUnlock it to continue.";
+"linkToAccount.exit" = "Exit";
+"linkToAccount.shareMessage" = "Your code is:";
+"linkToAccount.alertTile" = "Are you sure you want to exit?";
+"linkToAccount.alertMessage" = "Exiting now will cancel the account importation process.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import Jami account from local archive file.";
@@ -432,6 +447,11 @@
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
 "linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "Verifying";
+"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
+"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
+"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
+"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Start audio call";
