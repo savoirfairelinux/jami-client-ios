@@ -132,19 +132,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
     func updateOrientation() {
         if self.videoPreviewLayer?.connection!.isVideoOrientationSupported ?? false {
-            let orientation: UIDeviceOrientation = UIDevice.current.orientation
-            var cameraOrientation = AVCaptureVideoOrientation.portrait
-            switch orientation {
-            case .landscapeRight:
-                cameraOrientation = AVCaptureVideoOrientation.landscapeLeft
-            case .landscapeLeft:
-                cameraOrientation = AVCaptureVideoOrientation.landscapeRight
-            case .portraitUpsideDown:
-                cameraOrientation = AVCaptureVideoOrientation.portraitUpsideDown
-            default:
-                cameraOrientation = AVCaptureVideoOrientation.portrait
-            }
-            self.videoPreviewLayer?.connection?.videoOrientation = cameraOrientation
+            self.videoPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation(ScreenHelper.currentOrientation())
         }
     }
 

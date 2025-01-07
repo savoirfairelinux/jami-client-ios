@@ -49,7 +49,6 @@ static id <NameRegistrationAdapterDelegate> _delegate;
     confHandlers
         .insert(exportable_callback<ConfigurationSignal::RegisteredNameFound>([&](const std::string& account_id,
                                                                                   const std::string& requested_name,
-
                                                                                   int state,
                                                                                   const std::string address,
                                                                                   const std::string& name) {
