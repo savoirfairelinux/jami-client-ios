@@ -77,15 +77,19 @@ struct AccountSummaryView: View {
                             SettingsRow(iconName: "link", title: L10n.AccountPage.linkedDevices)
                         }
                         ShareButtonView(infoToShare: model.accountInfoToShare) {
-                            Group {
-                                Image(systemName: "envelope")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 18, height: 18)
-                                    .padding(.trailing, 5)
-                                Text(L10n.Smartlist.inviteFriends)
+                            HStack {
+                                Spacer()
+                                Group {
+                                    Image(systemName: "envelope")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 18, height: 18)
+                                        .padding(.trailing, 5)
+                                    Text(L10n.Smartlist.inviteFriends)
+                                }
+                                .foregroundColor(.jamiColor)
+                                Spacer()
                             }
-                            .foregroundColor(.jamiColor)
                         }
                     }
                 }

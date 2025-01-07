@@ -111,3 +111,120 @@ struct UITextViewWrapper: UIViewRepresentable {
         }
     }
 }
+
+struct QRCodeScannerView: UIViewControllerRepresentable {
+    let width: CGFloat
+    let height: CGFloat
+    var didFindCode: (String) -> Void
+
+    var previewLayer = AVCaptureVideoPreviewLayer()
+
+    class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
+        var parent: QRCodeScannerView
+
+        init(parent: QRCodeScannerView) {
+            self.parent = parent
+        }
+
+        func metadataOutput(_ output: AVCaptureMetadataOutput,
+                            didOutput metadataObjects: [AVMetadataObject],
+                            from connection: AVCaptureConnection) {
+            if let metadataObject = metadataObjects.first,
+               let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject,
+               let stringValue = readableObject.stringValue {
+                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                parent.didFindCode(stringValue)
+            }
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(parent: self)
+    }
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        let viewController = UIViewController()
+        let session = AVCaptureSession()
+
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+            showCameraDisabledMessage(in: viewController)
+            return viewController
+        }
+
+        do {
+            let videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+            if session.canAddInput(videoInput) {
+                session.addInput(videoInput)
+            } else {
+                showCameraDisabledMessage(in: viewController)
+                return viewController
+            }
+        } catch {
+            showCameraDisabledMessage(in: viewController)
+            return viewController
+        }
+
+        let metadataOutput = AVCaptureMetadataOutput()
+        if session.canAddOutput(metadataOutput) {
+            session.addOutput(metadataOutput)
+            metadataOutput.setMetadataObjectsDelegate(context.coordinator, queue: .main)
+            metadataOutput.metadataObjectTypes = [.qr]
+            metadataOutput.rectOfInterest = CGRect(x: 0, y: 0, width: width, height: height)
+        } else {
+            showCameraDisabledMessage(in: viewController)
+            return viewController
+        }
+
+        previewLayer.session = session
+        previewLayer.videoGravity = .resizeAspectFill
+
+        previewLayer.frame = viewController.view.bounds
+        viewController.view.layer.addSublayer(previewLayer)
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            session.startRunning()
+        }
+
+        return viewController
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        previewLayer.frame = uiViewController.view.bounds
+
+        if let connection = previewLayer.connection, connection.isVideoOrientationSupported {
+            connection.videoOrientation = AVCaptureVideoOrientation(ScreenHelper.currentOrientation())
+        }
+    }
+
+    private func showCameraDisabledMessage(in viewController: UIViewController) {
+        viewController.view.backgroundColor = .black
+        let label = UILabel()
+        label.text = L10n.Global.cameraDisabled
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.textAlignment = .center
+        label.frame = CGRect(x: 20, y: 0, width: width - 40, height: height)
+        viewController.view.addSubview(label)
+    }
+}
+
+extension AVCaptureVideoOrientation {
+    init(_ orientation: UIInterfaceOrientation) {
+        switch orientation {
+        case .portrait:
+            self = .portrait
+        case .portraitUpsideDown:
+            self = .portraitUpsideDown
+        case .landscapeLeft:
+            // If you are seeing an upside-down preview in landscape,
+            // switch this to .landscapeLeft
+            self = .landscapeLeft
+        case .landscapeRight:
+            self = .landscapeRight
+        case .unknown:
+            self = .portrait
+        @unknown default:
+            self = .portrait
+        }
+    }
+}
