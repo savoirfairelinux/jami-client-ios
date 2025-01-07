@@ -400,6 +400,7 @@
 		26D08AB9269628F400E37574 /* RequestsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08AB8269628F400E37574 /* RequestsService.swift */; };
 		26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */; };
 		26D08ABE2696296300E37574 /* RequestsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABD2696296300E37574 /* RequestsAdapter.mm */; };
+		26D3B08C2D3075F800975914 /* LinkDeviceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3B08B2D3075F800975914 /* LinkDeviceVM.swift */; };
 		26D87CEB2BBB4A5F0086E4AA /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D87CEA2BBB4A5F0086E4AA /* AccountsViewModel.swift */; };
 		26D8F54A2A6C08D20044398A /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D8F5492A6C08D20044398A /* TopView.swift */; };
 		26DA813224B641A5006C6E23 /* ProfilesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26DA813124B641A5006C6E23 /* ProfilesAdapter.mm */; };
@@ -1003,6 +1004,7 @@
 		26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsAdapterDelegate.swift; sourceTree = "<group>"; };
 		26D08ABC2696296300E37574 /* RequestsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestsAdapter.h; sourceTree = "<group>"; };
 		26D08ABD2696296300E37574 /* RequestsAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RequestsAdapter.mm; sourceTree = "<group>"; };
+		26D3B08B2D3075F800975914 /* LinkDeviceVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkDeviceVM.swift; sourceTree = "<group>"; };
 		26D87CEA2BBB4A5F0086E4AA /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountsViewModel.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/AccountsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		26D8F5492A6C08D20044398A /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		26DA813024B641A5006C6E23 /* ProfilesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilesAdapter.h; sourceTree = "<group>"; };
@@ -2412,6 +2414,7 @@
 				26FDF43E2C1353BA009D036B /* AccountSummaryVM.swift */,
 				268C87E32C1793E300593D7C /* NameRegistrationVM.swift */,
 				268C87E72C1B6E2000593D7C /* BlockedContactsVM.swift */,
+				26D3B08B2D3075F800975914 /* LinkDeviceVM.swift */,
 				268C87F12C1CA74A00593D7C /* EncryptAccountVM.swift */,
 				268C87F52C1CC78100593D7C /* LinkedDevicesVM.swift */,
 				267B95692C20C99A00353B01 /* EditProfileVM.swift */,
@@ -3054,6 +3057,7 @@
 				268C87E82C1B6E2000593D7C /* BlockedContactsVM.swift in Sources */,
 				642AD48424EC64CE00521127 /* CopyableLabel.swift in Sources */,
 				269255782C5B18DB00F85A1E /* LinkToAccountView.swift in Sources */,
+				26D3B08C2D3075F800975914 /* LinkDeviceVM.swift in Sources */,
 				261190B42A2928D000CAE7F8 /* ParticipantViewModel.swift in Sources */,
 				26A34EDC2C6EBCD600A41DD4 /* BackupAccountModel.swift in Sources */,
 				264EA8802977082A00B6FB6F /* LogUIViewModel.swift in Sources */,

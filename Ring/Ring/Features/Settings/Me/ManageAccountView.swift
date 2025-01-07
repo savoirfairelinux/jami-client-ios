@@ -23,8 +23,6 @@ import SwiftUI
 struct ManageAccountView: View {
     @ObservedObject var model: AccountSummaryVM
     let state: AccountStatePublisher
-    @Environment(\.presentationMode)
-    var presentation
     @SwiftUI.State private var showRemovalAlert = false
     var body: some View {
         ZStack {
