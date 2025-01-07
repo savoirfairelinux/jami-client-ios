@@ -133,101 +133,6 @@ struct QRCodeScannerOverlayView: View {
     }
 }
 
-struct QRCodeScannerView: UIViewControllerRepresentable {
-    let width: CGFloat
-    let height: CGFloat
-    var didFindCode: (String) -> Void
-
-    class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
-        var parent: QRCodeScannerView
-
-        init(parent: QRCodeScannerView) {
-            self.parent = parent
-        }
-
-        func metadataOutput(_ output: AVCaptureMetadataOutput,
-                            didOutput metadataObjects: [AVMetadataObject],
-                            from connection: AVCaptureConnection) {
-            if let metadataObject = metadataObjects.first {
-                guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-                guard let stringValue = readableObject.stringValue else { return }
-                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                parent.didFindCode(stringValue)
-            }
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(parent: self)
-    }
-
-    func makeUIViewController(context: Context) -> UIViewController {
-        let viewController = UIViewController()
-        let session = AVCaptureSession()
-
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-            showCameraDisabledMessage(in: viewController)
-            return viewController
-        }
-        let videoInput: AVCaptureDeviceInput
-
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            showCameraDisabledMessage(in: viewController)
-            return viewController
-        }
-
-        if session.canAddInput(videoInput) {
-            session.addInput(videoInput)
-        } else {
-            showCameraDisabledMessage(in: viewController)
-            return viewController
-        }
-
-        let metadataOutput = AVCaptureMetadataOutput()
-
-        if session.canAddOutput(metadataOutput) {
-            session.addOutput(metadataOutput)
-
-            metadataOutput.setMetadataObjectsDelegate(context.coordinator,
-                                                      queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
-            metadataOutput.rectOfInterest = CGRect(x: 0, y: 0,
-                                                   width: width,
-                                                   height: height)
-        } else {
-            showCameraDisabledMessage(in: viewController)
-            return viewController
-        }
-
-        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer.frame = CGRect(x: 0, y: 0, width: width, height: width)
-        previewLayer.videoGravity = .resizeAspectFill
-        viewController.view.layer.addSublayer(previewLayer)
-
-        DispatchQueue.global(qos: .userInitiated).async {
-            session.startRunning()
-        }
-
-        return viewController
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController,
-                                context: Context) {}
-
-    private func showCameraDisabledMessage(in viewController: UIViewController) {
-        viewController.view.backgroundColor = .black
-        let label = UILabel()
-        label.text = L10n.Global.cameraDisabled
-        label.numberOfLines = 0
-        label.textColor = .white
-        label.textAlignment = .center
-        label.frame = CGRect(x: 20, y: 0, width: width - 40, height: height)
-        viewController.view.addSubview(label)
-    }
-}
-
 struct AlertFactory {
     static func alertWithOkButton(title: String,
                                   message: String,
@@ -258,5 +163,125 @@ struct AlertFactory {
                 .padding(.bottom, 30)
         }
         .padding()
+    }
+}
+
+// Common enum for QR/PIN modes
+enum DeviceLinkingMode: String, CaseIterable, Identifiable {
+    case qrCode = "qrCode"
+    case pin = "pinCode"
+
+    var id: String { rawValue }
+
+    func getTitle(isLinkToAccount: Bool) -> String {
+        switch self {
+        case .qrCode:
+            return isLinkToAccount ? L10n.LinkToAccount.showQrCode : L10n.LinkDevice.scanQRCode
+        case .pin:
+            return isLinkToAccount ? L10n.LinkToAccount.showPinCode : L10n.LinkDevice.enterCode
+        }
+    }
+}
+
+// Reusable mode selector
+struct ModeSelectorView: View {
+    @Binding var selectedMode: DeviceLinkingMode
+    let isLinkToAccount: Bool
+
+    var body: some View {
+        Picker("Display Mode", selection: $selectedMode) {
+            ForEach(DeviceLinkingMode.allCases) { mode in
+                Text(mode.getTitle(isLinkToAccount: isLinkToAccount)).tag(mode)
+            }
+        }
+        .pickerStyle(SegmentedPickerStyle())
+    }
+}
+
+// Reusable success view
+struct SuccessStateView: View {
+    let message: String
+    let buttonTitle: String
+    let action: () -> Void
+
+    var body: some View {
+        VStack {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundColor(Color(UIColor.jamiSuccess))
+                .font(.system(size: 50))
+                .padding()
+            Text(message)
+                .multilineTextAlignment(.center)
+            ActionButton(title: buttonTitle, action: action)
+            Spacer()
+        }
+    }
+}
+
+// Reusable error view
+struct ErrorStateView: View {
+    let message: String
+    let buttonTitle: String
+    let action: () -> Void
+
+    var body: some View {
+        VStack {
+            Image(systemName: "exclamationmark.circle.fill")
+                .foregroundColor(Color(UIColor.jamiFailure))
+                .font(.system(size: 50))
+                .padding()
+            Text(message)
+                .multilineTextAlignment(.center)
+            ActionButton(title: buttonTitle, action: action)
+            Spacer()
+        }
+    }
+}
+
+// Reusable action button
+struct ActionButton: View {
+    let title: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .foregroundColor(Color(UIColor.label))
+                .padding(.horizontal, 10)
+                .padding(.vertical, 12)
+                .background(Color.jamiTertiaryControl)
+                .cornerRadius(10)
+        }
+        .padding()
+    }
+}
+
+// Reusable back button
+struct BackButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack {
+                Image(systemName: "chevron.left")
+                Text(L10n.Actions.backAction)
+            }
+            .foregroundColor(Color(UIColor.jamiButtonDark))
+        }
+    }
+}
+
+// Reusable loading view
+struct LoadingStateView: View {
+    let message: String
+
+    var body: some View {
+        VStack {
+            Text(message)
+                .multilineTextAlignment(.center)
+            SwiftUI.ProgressView()
+                .padding()
+            Spacer()
+        }
     }
 }
