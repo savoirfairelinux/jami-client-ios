@@ -31,10 +31,11 @@ enum AuthSchemes {
     static let password = "password"
 }
 
-private enum AuthenticationKeys {
+enum AuthenticationKeys {
     static let importAuthScheme = "auth_scheme"
     static let importAuthError = "auth_error"
     static let importPeerId = "peer_id"
+    static let peerAddress = "peer_address"
     static let token = "token"
     static let error = "error"
 }
