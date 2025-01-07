@@ -435,6 +435,12 @@
 "linkDevice.defaultError" = "An error occurred while exporting the account.";
 "linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
 "linkDevice.hudMessage" = "Verifying";
+"linkDevice.errorWrongPassword" = "Password incorrect.\nPlease verify your password.";
+"linkDevice.errorNetwork" = "Network error.\nPlease try again.";
+"linkDevice.errorTimeout" = "Operation timeout.\nPlease try again.";
+"linkDevice.errorState" = "Incorrect state.\nPlease try again.";
+"linkDevice.errorToken" = "An error happens while generating token.\nPlease try again.";
+"linkDevice.errorWrongData" = "An error happens while exporting account.n\nPlease try again.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Start audio call";

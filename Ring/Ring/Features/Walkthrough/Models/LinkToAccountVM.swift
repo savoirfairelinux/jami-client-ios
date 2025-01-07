@@ -21,30 +21,42 @@ import RxSwift
 import SwiftUI
 
 enum ErrorMessages {
-    static let wrongPassword = "Wrong password"
-    static let networkError = "Network error message"
-    static let failedToGeneratePin = "Error when generating PIN"
-    static let jamiIdNotFound = "Error when Jami ID is missing"
+    static let wrongPassword = L10n.LinkDevice.errorWrongPassword
+    static let networkError = L10n.LinkDevice.errorNetwork
+    static let failedToGenerateToken = L10n.LinkDevice.errorToken
+    static let jamiIdNotFound = L10n.LinkDevice.errorWrongData
 }
 
 enum AuthSchemes {
     static let password = "password"
 }
 
-private enum AuthenticationKeys {
+enum AuthenticationKeys {
     static let importAuthScheme = "auth_scheme"
     static let importAuthError = "auth_error"
     static let importPeerId = "peer_id"
+    static let peerAddress = "peer_address"
     static let token = "token"
     static let error = "error"
 }
 
 enum AuthError: String {
-    case wrongPassword = "wrong_password"
-    case unknown = "network_error"
+    case wrongPassword = "auth_error"
+    case network = "network"
+    case timeout = "timeout"
+    case state = "state"
 
     static func fromString(_ string: String) -> AuthError? {
         return AuthError(rawValue: string)
+    }
+
+    func message() -> String {
+        switch self {
+            case .wrongPassword: return L10n.LinkDevice.errorWrongPassword
+            case .network: return L10n.LinkDevice.errorNetwork
+            case .timeout: return L10n.LinkDevice.errorTimeout
+            case .state: return L10n.LinkDevice.errorState
+        }
     }
 }
 
@@ -130,7 +142,7 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
             self.token = token
             withAnimation { uiState = .displayingToken(pin: token) }
         } else {
-            withAnimation { uiState = .error(message: ErrorMessages.failedToGeneratePin) }
+            withAnimation { uiState = .error(message: ErrorMessages.failedToGenerateToken) }
         }
     }
 
@@ -185,10 +197,13 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
     }
 
     private func handleDone(details: [String: String]) {
-        if let error = details[AuthenticationKeys.error].flatMap(AuthError.fromString) {
-            withAnimation { uiState = .error(message: error.rawValue) }
+        if let errorString = details[AuthenticationKeys.error],
+           !errorString.isEmpty,
+           errorString != "none",
+           let error = AuthError(rawValue: errorString) {
+            withAnimation { self.uiState = .error(message: error.message()) }
         } else {
-            withAnimation { uiState = .success }
+            withAnimation { self.uiState = .success }
         }
     }
 

@@ -100,12 +100,12 @@ struct ShareButtonView<ButtonContent: View>: View {
     let infoToShare: String
     @SwiftUI.State private var showShareView = false
     let buttonContent: ButtonContent
-    
+
     init(infoToShare: String, @ViewBuilder content: () -> ButtonContent) {
         self.infoToShare = infoToShare
         self.buttonContent = content()
     }
-    
+
     var body: some View {
         VStack {
             if #available(iOS 16.0, *) {
@@ -115,7 +115,7 @@ struct ShareButtonView<ButtonContent: View>: View {
             }
         }
     }
-    
+
     // ShareLink for iOS 16 and above
     @available(iOS 16.0, *)
     private var shareLinkButton: some View {
@@ -123,7 +123,7 @@ struct ShareButtonView<ButtonContent: View>: View {
             buttonContent
         }
     }
-    
+
     // Fallback for iOS versions prior to 16
     private var shareButtonFallback: some View {
         Button {
@@ -160,15 +160,15 @@ struct QRCodeView: View {
 
     var body: some View {
         VStack {
-//            Spacer()
-//                .frame(height: 20)
+            //            Spacer()
+            //                .frame(height: 20)
             if let image = image {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size, height: size)
                     .cornerRadius(10)
-                    //.padding()
+                // .padding()
             }
             Spacer()
         }
@@ -188,12 +188,12 @@ struct QRCodePresenter: View {
             QRCodeView(jamiId: jamiId)
                 .padding()
                 .padding(.top, 30)
-            .navigationBarItems(leading: Button(action: {
-                isPresented = false
-            }) {
-                Text(L10n.Global.cancel)
-                    .foregroundColor(.jamiColor)
-            })
+                .navigationBarItems(leading: Button(action: {
+                    isPresented = false
+                }) {
+                    Text(L10n.Global.cancel)
+                        .foregroundColor(.jamiColor)
+                })
         }
         .onTapGesture {
             isPresented = false
