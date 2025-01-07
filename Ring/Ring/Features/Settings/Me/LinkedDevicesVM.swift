@@ -80,6 +80,23 @@ enum ActionsState {
     case noAction
 }
 
+// enum AuthState {
+//    case initial
+//    case connecting
+//    case authenticating
+//    case inProgress
+//    case done
+// }
+
+enum AddDeviceExportState {
+    case initial(error: AuthError? = nil)
+    case connecting
+    case authenticating(peerAddress: String?)
+    case inProgress
+    case success
+    case error(error: String)
+}
+
 class LinkedDevicesVM: ObservableObject {
 
     @Published var devices = [DeviceModel]()
@@ -87,11 +104,16 @@ class LinkedDevicesVM: ObservableObject {
     @Published var revocationSuccess: String?
     @Published var generatingState = GeneratingPinState.initial
     @Published var PINImage: UIImage?
-    @Published var showLinkDeviceAlert: Bool = false
+    @Published var showLinkDevice: Bool = false
+    @Published var exportState: AddDeviceExportState = .initial()
+    @Published var exportToken: String = "jami-auth://"
+    @Published var entryError: String?
     let account: AccountModel
     let accountService: AccountsService
 
     let disposeBag = DisposeBag()
+
+    private var operationId: UInt32 = 0
 
     init(account: AccountModel, accountService: AccountsService) {
         self.account = account
@@ -127,11 +149,8 @@ class LinkedDevicesVM: ObservableObject {
         }
     }
 
-    func showLinkDevice() {
-        showLinkDeviceAlert = true
-        if !self.hasPassword() {
-            self.linkDevice(with: "")
-        }
+    func linkDevice() {
+        showLinkDevice = true
     }
 
     func linkDevice(with password: String) {
@@ -239,5 +258,98 @@ class LinkedDevicesVM: ObservableObject {
                 updateStateOnMainThread(.error(error: PinError.defaultError))
             }
         }
+    }
+
+    func handleAuthenticationUri(_ jamiAuthentication: String) {
+        entryError = nil
+        guard !jamiAuthentication.isEmpty,
+              jamiAuthentication.hasPrefix("jami-auth://"),
+              jamiAuthentication.count == 59 else {
+            entryError = "Invalid input"
+            return
+        }
+
+        self.accountService.authStateSubject
+            .filter { [weak self] authResult in
+                guard let self = self else { return false }
+                return authResult.accountId == self.account.id &&
+                    authResult.operationId == self.operationId
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] authResult in
+                self?.handleAuthResult(authResult)
+            })
+            .disposed(by: disposeBag)
+
+        operationId = self.accountService.addDevice(accountId: account.id, token: jamiAuthentication)
+    }
+
+    private func handleAuthResult(_ result: AuthResult) {
+        guard checkNewStateValidity(newState: result.state) else {
+            print("Invalid state transition: \(exportState) -> \(result.state)")
+            return
+        }
+
+        print("Processing signal: \(result.accountId):\(result.operationId):\(result.state) \(result.details)")
+
+        switch result.state {
+        case .initializing:
+            break
+        case .connecting:
+            handleConnectingSignal()
+        case .authenticating:
+            handleAuthenticatingSignal(result.details)
+        case .inProgress:
+            handleInProgressSignal()
+        case .done:
+            handleDoneSignal(result.details)
+        case .tokenAvailable:
+            break
+        }
+    }
+
+    private func checkNewStateValidity(newState: AuthState) -> Bool {
+        let validStates: [AuthState]
+
+        switch exportState {
+        case .initial: validStates = [.connecting, .done]
+        case .connecting: validStates = [.authenticating, .done]
+        case .authenticating: validStates = [.inProgress, .done]
+        case .inProgress: validStates = [.done]
+        case .error, .success: validStates = [.done]
+        }
+
+        return validStates.contains(newState)
+    }
+
+    private func handleConnectingSignal() {
+        withAnimation { self.exportState = .connecting }
+    }
+
+    private func handleAuthenticatingSignal(_ details: [String: String]) {
+        let peerAddress = details[AuthenticationKeys.peerAddress]
+        withAnimation { self.exportState = .authenticating(peerAddress: peerAddress) }
+    }
+
+    private func handleInProgressSignal() {
+        withAnimation { self.exportState = .inProgress }
+    }
+
+    private func handleDoneSignal(_ details: [String: String]) {
+        let errorString = details[AuthenticationKeys.error]
+        let error = errorString.flatMap { $0.isEmpty || $0 == "none" ? nil : AuthError(rawValue: $0) }
+        if let errorMessage = error?.rawValue {
+            withAnimation { self.exportState = .error(error: errorMessage) }
+        } else {
+            withAnimation { self.exportState = .success }
+        }
+    }
+
+    func confirmAddDevice() {
+        accountService.confirmAddDevice(accountId: account.id, operationId: operationId)
+    }
+
+    func cancelAddDevice() {
+        accountService.cancelAddDevice(accountId: account.id, operationId: operationId)
     }
 }
