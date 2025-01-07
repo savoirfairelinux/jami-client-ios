@@ -651,9 +651,9 @@ class AccountsService: AccountAdapterDelegate {
     private func handleAuthStateChange(accountId: String, opId: UInt32, state: Int32, details: [String: String]) {
         guard let authState = AuthState(rawValue: state) else { return }
         let result = AuthResult(accountId: accountId,
-                              operationId: opId,
-                              state: authState,
-                              details: details)
+                                operationId: opId,
+                                state: authState,
+                                details: details)
         authStateSubject.onNext(result)
     }
 
@@ -1153,7 +1153,7 @@ extension AccountsService {
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
 
-    func Temporary() async throws -> String {
+    func createTemporaryAccount() async throws -> String {
         var details = try getJamiInitialAccountDetails()
         details.updateValue("jami-auth", forKey: ConfigKey.archiveURL.rawValue)
 

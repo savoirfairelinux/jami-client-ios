@@ -125,6 +125,10 @@ internal enum L10n {
     internal static let userPresenceOnline = L10n.tr("Localizable", "accessibility.userPresenceOnline", fallback: "Online")
     /// Welcome to Jami
     internal static let welcomeToJamiTitle = L10n.tr("Localizable", "accessibility.welcomeToJamiTitle", fallback: "Welcome to Jami")
+    internal enum Account {
+      /// Token QRCode
+      internal static let tokenQRcode = L10n.tr("Localizable", "accessibility.account.tokenQRcode", fallback: "Token QRCode")
+    }
     internal enum Call {
       /// Lasted
       internal static let lasted = L10n.tr("Localizable", "accessibility.call.lasted", fallback: "Lasted")
@@ -832,8 +836,12 @@ internal enum L10n {
     internal static let cancel = L10n.tr("Localizable", "global.cancel", fallback: "Cancel")
     /// Close
     internal static let close = L10n.tr("Localizable", "global.close", fallback: "Close")
+    /// Confirm
+    internal static let confirm = L10n.tr("Localizable", "global.confirm", fallback: "Confirm")
     /// Confirm password
     internal static let confirmPassword = L10n.tr("Localizable", "global.confirmPassword", fallback: "Confirm password")
+    /// Connect
+    internal static let connect = L10n.tr("Localizable", "global.connect", fallback: "Connect")
     /// Copy
     internal static let copy = L10n.tr("Localizable", "global.copy", fallback: "Copy")
     /// Create
@@ -920,8 +928,15 @@ internal enum L10n {
     internal static let noInvitations = L10n.tr("Localizable", "invitations.noInvitations", fallback: "No invitations")
   }
   internal enum LinkDevice {
+    /// New device found at address below. Is that you?
+    /// Clicking on confirm will continue transfering account.
+    internal static let authenticationInfo = L10n.tr("Localizable", "linkDevice.authenticationInfo", fallback: "New device found at address below. Is that you?\nClicking on confirm will continue transfering account.")
+    /// Connecting to your new device…
+    internal static let connecting = L10n.tr("Localizable", "linkDevice.connecting", fallback: "Connecting to your new device…")
     /// An error occurred while exporting the account.
     internal static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError", fallback: "An error occurred while exporting the account.")
+    /// Enter Code
+    internal static let enterCode = L10n.tr("Localizable", "linkDevice.enterCode", fallback: "Enter Code")
     /// A network error occurred.
     /// Please verify your connection.
     internal static let errorNetwork = L10n.tr("Localizable", "linkDevice.errorNetwork", fallback: "A network error occurred.\nPlease verify your connection.")
@@ -939,14 +954,36 @@ internal enum L10n {
     internal static let errorWrongPassword = L10n.tr("Localizable", "linkDevice.errorWrongPassword", fallback: "An authentication error occurred.\nPlease verify your password.")
     /// Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.
     internal static let explanationMessage = L10n.tr("Localizable", "linkDevice.explanationMessage", fallback: "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.")
+    /// Your account is exporting to your new device.
+    /// Please confirm import on the new device.
+    internal static let exportInProgress = L10n.tr("Localizable", "linkDevice.exportInProgress", fallback: "Your account is exporting to your new device.\nPlease confirm import on the new device.")
     /// Verifying
     internal static let hudMessage = L10n.tr("Localizable", "linkDevice.hudMessage", fallback: "Verifying")
+    /// Select Add Account > Connect from another device.
+    /// 
+    internal static let infoAddAccount = L10n.tr("Localizable", "linkDevice.infoAddAccount", fallback: "Select Add Account > Connect from another device.\n")
+    /// When ready, enter the code and press `Connect`.
+    internal static let infoCode = L10n.tr("Localizable", "linkDevice.infoCode", fallback: "When ready, enter the code and press `Connect`.")
+    /// When ready, scan the QR Code
+    internal static let infoQRCode = L10n.tr("Localizable", "linkDevice.infoQRCode", fallback: "When ready, scan the QR Code")
+    /// On the new device, initiate a new account.
+    /// 
+    internal static let initialInfo = L10n.tr("Localizable", "linkDevice.initialInfo", fallback: "On the new device, initiate a new account.\n")
     /// A network error occurred while exporting the account.
     internal static let networkError = L10n.tr("Localizable", "linkDevice.networkError", fallback: "A network error occurred while exporting the account.")
+    /// New device IP:
+    internal static let newDeviceIP = L10n.tr("Localizable", "linkDevice.newDeviceIP", fallback: "New device IP:")
     /// Incorrect password. Please try again with the correct password.
     internal static let passwordError = L10n.tr("Localizable", "linkDevice.passwordError", fallback: "Incorrect password. Please try again with the correct password.")
+    /// Scan QR Code
+    internal static let scanQRCode = L10n.tr("Localizable", "linkDevice.scanQRCode", fallback: "Scan QR Code")
     /// Link new device
     internal static let title = L10n.tr("Localizable", "linkDevice.title", fallback: "Link new device")
+    /// token
+    internal static let token = L10n.tr("Localizable", "linkDevice.token", fallback: "token")
+    /// New device identifier is not recognized.
+    /// Please follow above instruction.
+    internal static let wrongEntry = L10n.tr("Localizable", "linkDevice.wrongEntry", fallback: "New device identifier is not recognized.\nPlease follow above instruction.")
   }
   internal enum LinkToAccount {
     /// Your account is locked with a password.
