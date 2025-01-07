@@ -18,27 +18,15 @@
 
 import SwiftUI
 
-enum DisplayMode: String, CaseIterable, Identifiable {
-    case qrCode = "qrCode"
-    case label = "pinCode"
-
-    var id: String { rawValue }
-
-    var title: String {
-        switch self {
-        case .qrCode:
-            return L10n.LinkToAccount.showQrCode
-        case .label:
-            return L10n.LinkToAccount.showPinCode
-        }
-    }
-}
+typealias DisplayMode = DeviceLinkingMode
 
 struct LinkToAccountView: View {
     @StateObject var viewModel: LinkToAccountVM
     let dismissHandler = DismissHandler()
     @Environment(\.verticalSizeClass)
     var verticalSizeClass
+    @Environment(\.colorScheme)
+    var colorScheme
     @SwiftUI.State private var displayMode: DisplayMode = .qrCode
     @SwiftUI.State private var showAlert = false
 
@@ -51,6 +39,8 @@ struct LinkToAccountView: View {
 
     var body: some View {
         mainContent
+            .padding()
+            .frame(maxWidth: 500)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(L10n.LinkToAccount.importAccount)
             .navigationBarBackButtonHidden(true)
@@ -71,11 +61,7 @@ struct LinkToAccountView: View {
         case .authenticating:
             autenticatingView
         case .inProgress:
-            VStack {
-                SwiftUI.ProgressView()
-                Spacer()
-            }
-            .padding()
+            inProgressView
         case .success:
             successView()
         case .error(let message):
@@ -89,26 +75,24 @@ struct LinkToAccountView: View {
             SwiftUI.ProgressView()
             Spacer()
         }
-        .padding(.horizontal)
     }
 
-    private var tokenView: some View {
-        Group {
-            if verticalSizeClass == .regular {
-                portraitView
-            } else {
-                landscapeView
-            }
+    @ViewBuilder private var tokenView: some View {
+        if verticalSizeClass == .regular {
+            portraitView
+        } else {
+            landscapeView
         }
     }
 
     private var connectingView: some View {
-        VStack(spacing: 15) {
+        VStack {
             Text(L10n.LinkToAccount.actionRequired)
                 .multilineTextAlignment(.center)
+                .font(.callout)
+                .lineSpacing(4)
             Spacer()
         }
-        .padding(.horizontal)
     }
 
     private var autenticatingView: some View {
@@ -118,46 +102,48 @@ struct LinkToAccountView: View {
                 if viewModel.hasPassword {
                     passwordView.padding(.top)
                 }
-                StyleImportAccountButton(title: L10n.LinkToAccount.importAccount,
-                                         action: { [weak viewModel] in
-                                            viewModel?.connect()
-                                         })
+                Button(action: { [weak viewModel] in
+                    viewModel?.connect()
+                }, label: {
+                    Text(L10n.LinkToAccount.importAccount)
+                        .commonButtonStyle()
+                })
+                .disabled(viewModel.hasPassword && viewModel.password.isEmpty)
+                .opacity((viewModel.hasPassword && viewModel.password.isEmpty) ? 0.5 : 1)
                 Spacer()
             }
             .padding(.horizontal)
         }
     }
 
-    private func successView() -> some View {
-        VStack {
-            Image(systemName: "checkmark.circle.fill")
-                .foregroundColor(Color(UIColor.jamiSuccess))
-                .font(.system(size: 50))
-                .padding()
-            Text(L10n.LinkToAccount.allSet)
-                .multilineTextAlignment(.center)
-            StyleImportAccountButton(title: L10n.LinkToAccount.goToAccounts,
-                                     action: { [weak dismissHandler, weak viewModel] in
-                                        dismissHandler?.dismissView()
-                                        viewModel?.linkCompleted()
-                                     })
+    private var inProgressView: some View {
+        HStack {
+            Spacer()
+            VStack {
+                SwiftUI.ProgressView()
+                Spacer()
+            }
             Spacer()
         }
     }
 
+    private func successView() -> some View {
+        SuccessStateView(
+            message: L10n.LinkToAccount.allSet,
+            buttonTitle: L10n.LinkToAccount.goToAccounts
+        ) {
+            dismissHandler.dismissView()
+            viewModel.linkCompleted()
+        }
+    }
+
     private func errorView(_ message: String) -> some View {
-        VStack {
-            Image(systemName: "exclamationmark.circle.fill")
-                .foregroundColor(Color(UIColor.jamiFailure))
-                .font(.system(size: 50))
-                .padding()
-            Text(message)
-            StyleImportAccountButton(title: L10n.LinkToAccount.exit,
-                                     action: { [weak dismissHandler, weak viewModel] in
-                                        dismissHandler?.dismissView()
-                                        viewModel?.onCancel()
-                                     })
-            Spacer()
+        ErrorStateView(
+            message: message,
+            buttonTitle: L10n.LinkToAccount.exit
+        ) {
+            dismissHandler.dismissView()
+            viewModel.onCancel()
         }
     }
 
@@ -166,9 +152,9 @@ struct LinkToAccountView: View {
             VStack(spacing: 30) {
                 info
                 tokenDisplay
+                    .frame(maxWidth: 500)
                 Spacer()
             }
-            .padding(.horizontal)
         }
     }
 
@@ -186,7 +172,6 @@ struct LinkToAccountView: View {
             }
             Spacer()
         }
-        .padding(.horizontal)
     }
 
     private var info: some View {
@@ -197,28 +182,33 @@ struct LinkToAccountView: View {
                         L10n.LinkToAccount.scanQrCode : L10n.LinkToAccount.enterProvidedCode)
         )
         .multilineTextAlignment(.center)
+        .font(.callout)
+        .lineSpacing(4)
         .frame(maxWidth: 500)
     }
 
     @ViewBuilder private var tokenDisplay: some View {
-        Group {
-            Picker("Display Mode", selection: $displayMode) {
-                ForEach(DisplayMode.allCases) { mode in
-                    Text(mode.title).tag(mode)
-                }
-            }
-            .pickerStyle(SegmentedPickerStyle())
-
-            if displayMode == .label {
-                tokenLabel
-            } else {
-                qrCodeView
-            }
-        }
+        ModeSelectorView(selectedMode: $displayMode, isLinkToAccount: true)
+        tokenContent
     }
 
     private var qrCodeView: some View {
         QRCodeView(jamiId: viewModel.token, size: 200)
+    }
+
+    @ViewBuilder private var tokenContent: some View {
+        Group {
+            if displayMode == .pin {
+                tokenLabel
+            } else {
+                qrCodeView
+                    .frame(maxWidth: 500)
+            }
+        }
+        .padding()
+        .background(colorScheme == .light ? Color(UIColor.secondarySystemGroupedBackground) : Color(UIColor.systemGray2))
+        .cornerRadius(10)
+        .padding(.horizontal)
     }
 
     private var tokenLabel: some View {
@@ -240,24 +230,30 @@ struct LinkToAccountView: View {
     private var passwordView: some View {
         VStack {
             Text(L10n.LinkToAccount.accountLockedWithPassword)
+                .font(.callout)
                 .multilineTextAlignment(.center)
+                .lineSpacing(4)
             WalkthroughPasswordView(text: $viewModel.password, placeholder: L10n.Global.password)
+            if let error = viewModel.authError {
+                Text(error)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color(UIColor.jamiFailure))
+                    .font(.footnote)
+            }
         }
     }
 
     private var userInfoView: some View {
         VStack(spacing: 15) {
-            AvatarImageView(model: viewModel, width: 80, height: 80)
+            AvatarImageView(model: viewModel, width: 60, height: 60)
             if let username = viewModel.username {
                 Text(username)
             }
             Text(viewModel.jamiId).font(.callout)
         }
         .padding()
-        .background(Color(UIColor.secondarySystemBackground))
+        .background(colorScheme == .light ? Color(UIColor.secondarySystemGroupedBackground) : Color(UIColor.systemGray2))
         .cornerRadius(10)
-        .shadow(color: Color(UIColor.quaternaryLabel), radius: 1)
-        .padding()
     }
 
     func cancelRequested() {
@@ -275,20 +271,7 @@ struct LinkToAccountView: View {
 
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
-            backButton
-        }
-    }
-
-    @ViewBuilder
-    private var backButton: some View {
-        Button(action: cancelRequested) {
-            HStack {
-                Group {
-                    Image(systemName: "chevron.left")
-                    Text(L10n.Actions.backAction)
-                }
-                .foregroundColor(Color(UIColor.jamiButtonDark))
-            }
+            BackButton(action: cancelRequested)
         }
     }
 
@@ -304,24 +287,5 @@ struct LinkToAccountView: View {
     private var backgroundColor: some View {
         Color(UIColor.systemGroupedBackground)
             .ignoresSafeArea()
-    }
-}
-
-struct StyleImportAccountButton: View {
-    let title: String
-    let action: () -> Void
-    var backgroundColor: Color = Color.jamiColor
-    var textColor: Color = .white
-
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .foregroundColor(textColor)
-                .padding(.horizontal)
-                .padding(.vertical, 10)
-                .background(backgroundColor)
-                .cornerRadius(10)
-        }
-        .padding()
     }
 }

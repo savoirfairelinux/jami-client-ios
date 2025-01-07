@@ -44,6 +44,15 @@ struct LinkedDevicesView: View {
                         }
                     }
                 }
+                linkDeviceButton()
+                    .background(
+                        NavigationLink(
+                            destination: LinkDeviceView(account: model.account, accountService: model.accountService),
+                            isActive: $model.showLinkDevice,
+                            label: { EmptyView() }
+                        )
+                    )
+
                 if !model.devices.filter({ device in
                     !device.isCurrent
                 }).isEmpty {
@@ -55,24 +64,14 @@ struct LinkedDevicesView: View {
                         }
                     }
                 }
-                linkDeviceButton()
             }
             if showRevocationAlert {
                 RevocationView(model: model, showRevocationAlert: $showRevocationAlert, deviceToRevoke: $deviceToRevoke)
-            }
-
-            if model.showLinkDeviceAlert {
-                LinkDeviceView(model: model, askForPassword: model.hasPassword())
             }
         }
         .onChange(of: showRevocationAlert) { _ in
             if !showRevocationAlert {
                 deviceToRevoke = nil
-                model.cleanInfoMessages()
-            }
-        }
-        .onChange(of: model.showLinkDeviceAlert ) { _ in
-            if !model.showLinkDeviceAlert {
                 model.cleanInfoMessages()
             }
         }
@@ -121,7 +120,7 @@ struct LinkedDevicesView: View {
     func linkDeviceButton() -> some View {
         Button(action: {
             withAnimation {
-                model.showLinkDevice()
+                model.linkDevice()
             }
         }, label: {
             Text(L10n.LinkDevice.title)

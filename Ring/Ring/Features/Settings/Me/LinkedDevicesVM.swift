@@ -21,55 +21,6 @@
 import SwiftUI
 import RxSwift
 
-enum ExportAccountResponse: Int {
-    case success = 0
-    case wrongPassword = 1
-    case networkProblem = 2
-}
-
-enum PinError {
-    case passwordError
-    case networkError
-    case defaultError
-
-    var description: String {
-        switch self {
-        case .passwordError:
-            return L10n.LinkDevice.passwordError
-        case .networkError:
-            return L10n.LinkDevice.networkError
-        case .defaultError:
-            return L10n.LinkDevice.defaultError
-        }
-    }
-}
-
-enum GeneratingPinState {
-
-    case initial
-    case generatingPin
-    case success(pin: String)
-    case error(error: PinError)
-
-    var rawValue: String {
-        switch self {
-        case .initial:
-            return "INITIAL"
-        case .generatingPin:
-            return "GENERATING_PIN"
-        case .success:
-            return "SUCCESS"
-        case .error:
-            return "ERROR"
-        }
-    }
-
-    func isStateOfType(type: String) -> Bool {
-
-        return self.rawValue == type
-    }
-}
-
 enum ActionsState {
     case deviceRevokedWithSuccess(deviceId: String)
     case deviceRevocationError(deviceId: String, errorMessage: String)
@@ -85,9 +36,7 @@ class LinkedDevicesVM: ObservableObject {
     @Published var devices = [DeviceModel]()
     @Published var revocationError: String?
     @Published var revocationSuccess: String?
-    @Published var generatingState = GeneratingPinState.initial
-    @Published var PINImage: UIImage?
-    @Published var showLinkDeviceAlert: Bool = false
+    @Published var showLinkDevice: Bool = false
     let account: AccountModel
     let accountService: AccountsService
 
@@ -127,51 +76,13 @@ class LinkedDevicesVM: ObservableObject {
         }
     }
 
-    func showLinkDevice() {
-        showLinkDeviceAlert = true
-        if !self.hasPassword() {
-            self.linkDevice(with: "")
-        }
-    }
-
-    func linkDevice(with password: String) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let self = self else { return }
-            self.updateStateOnMainThread(GeneratingPinState.generatingPin)
-
-            if self.hasPassword() && password.isEmpty {
-                updateStateOnMainThread(.error(error: PinError.passwordError))
-                return
-            }
-
-            self.accountService.sharedResponseStream
-                .filter({ [weak self] exportCompletedEvent in
-                    guard let self = self else { return false }
-                    return exportCompletedEvent.eventType == ServiceEventType.exportOnRingEnded &&
-                        exportCompletedEvent.getEventInput(.id) == self.accountService.currentAccount?.id
-                })
-                .subscribe(onNext: { [weak self] exportCompletedEvent in
-                    guard let self = self else { return }
-                    if let state: Int = exportCompletedEvent.getEventInput(.state) {
-                        self.handleExportCompletedEvent(with: state, event: exportCompletedEvent)
-                    }
-                })
-                .disposed(by: self.disposeBag)
-
-            self.accountService.exportOnRing(withPassword: password)
-                .subscribe(onCompleted: {
-                }, onError: { [weak self] _ in
-                    guard let self = self else { return }
-                    self.updateStateOnMainThread(.error(error: PinError.passwordError))
-                })
-                .disposed(by: self.disposeBag)
-        }
+    func linkDevice() {
+        showLinkDevice = true
     }
 
     func cleanInfoMessages() {
         revocationError = nil
         revocationSuccess = nil
-        updateStateOnMainThread(.initial)
     }
 
     private func subscribeToDeviceRevocationEvents(for deviceId: String) {
@@ -210,34 +121,6 @@ class LinkedDevicesVM: ObservableObject {
             self.revocationError = L10n.AccountPage.deviceRevocationUnknownDevice
         default:
             self.revocationError = L10n.AccountPage.deviceRevocationError
-        }
-    }
-
-    private func updateStateOnMainThread(_ state: GeneratingPinState) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.generatingState = state
-        }
-    }
-
-    private func handleExportCompletedEvent(with state: Int, event: ServiceEvent) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            switch state {
-            case ExportAccountResponse.success.rawValue:
-                if let pin: String = event.getEventInput(.pin) {
-                    self.PINImage = pin.generateQRCode()
-                    updateStateOnMainThread(.success(pin: pin))
-                } else {
-                    updateStateOnMainThread(.error(error: PinError.defaultError))
-                }
-            case ExportAccountResponse.wrongPassword.rawValue:
-                updateStateOnMainThread(.error(error: PinError.passwordError))
-            case ExportAccountResponse.networkProblem.rawValue:
-                updateStateOnMainThread(.error(error: PinError.networkError))
-            default:
-                updateStateOnMainThread(.error(error: PinError.defaultError))
-            }
         }
     }
 }
