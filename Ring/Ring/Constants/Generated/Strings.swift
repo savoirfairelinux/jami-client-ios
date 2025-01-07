@@ -746,6 +746,18 @@ internal enum L10n {
   internal enum LinkDevice {
     /// An error occurred while exporting the account.
     internal static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError", fallback: "An error occurred while exporting the account.")
+    /// Network error.
+    /// Please try again.
+    internal static let errorNetwork = L10n.tr("Localizable", "linkDevice.errorNetwork", fallback: "Network error.\nPlease try again.")
+    /// Incorrect state.
+    /// Please try again.
+    internal static let errorState = L10n.tr("Localizable", "linkDevice.errorState", fallback: "Incorrect state.\nPlease try again.")
+    /// Operation timeout.
+    /// Please try again.
+    internal static let errorTimeout = L10n.tr("Localizable", "linkDevice.errorTimeout", fallback: "Operation timeout.\nPlease try again.")
+    /// Password incorrect.
+    /// Please verify your password.
+    internal static let errorWrongPassword = L10n.tr("Localizable", "linkDevice.errorWrongPassword", fallback: "Password incorrect.\nPlease verify your password.")
     /// Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.
     internal static let explanationMessage = L10n.tr("Localizable", "linkDevice.explanationMessage", fallback: "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.")
     /// Verifying
