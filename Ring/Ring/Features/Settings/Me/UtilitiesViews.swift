@@ -142,12 +142,8 @@ extension ShareButtonView where ButtonContent == AnyView {
     init(infoToShare: String) {
         self.init(infoToShare: infoToShare) {
             AnyView(
-                Label("Share", systemImage: "square.and.arrow.up.fill")
-                    .foregroundColor(.white)
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                    .background(Color.jamiColor)
-                    .cornerRadius(10)
+                Label(L10n.Global.share, systemImage: "square.and.arrow.up.fill")
+                    .commonButtonStyle()
             )
         }
     }

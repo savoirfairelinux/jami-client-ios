@@ -58,6 +58,8 @@
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "Confirm password";
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
+"global.confirm" = "Confirm";
+"global.connect" = "Connect";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -455,6 +457,18 @@
 "linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
 "linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
+"linkDevice.scanQRCode" = "Scan QR Code";
+"linkDevice.enterCode" = "Enter Code";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
+"linkDevice.infoQRCode" = "When ready, scan the QR Code";
+"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
+"linkDevice.connecting" = "Connecting to your new device…";
+"linkDevice.authenticationInfo" = "New device found at address below. Is that you?\nClicking on confirm will continue transfering account.";
+"linkDevice.newDeviceIP" = "New device IP:";
+"linkDevice.token" = "token";
+"linkDevice.wrongEntry" = "New device identifier is not recognized.\nPlease follow above instruction.";
+"linkDevice.exportInProgress" = "Your account is exporting to your new device.\nPlease confirm import on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Start audio call";
