@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2024 Savoir-faire Linux Inc.
+ *  Copyright (C) 2024-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,138 +18,274 @@
 
 import SwiftUI
 
-struct LinkDeviceView: View {
-    @ObservedObject var model: LinkedDevicesVM
-    @SwiftUI.State var askForPassword: Bool
-    @SwiftUI.State var password: String = ""
+typealias EntryMode = DeviceLinkingMode
 
-    var body: some View {
-        CustomAlert(content: { createLinkDeviceView() })
+struct LinkDeviceView: View {
+    @StateObject var model: LinkDeviceVM
+    @SwiftUI.State var entryMode: DeviceLinkingMode = .qrCode
+    @Environment(\.verticalSizeClass)
+    var verticalSizeClass
+    @Environment(\.colorScheme)
+    var colorScheme
+    @SwiftUI.State private var showAlert = false
+    @Environment(\.presentationMode)
+    var presentation
+
+    init(account: AccountModel, accountService: AccountsService) {
+        _model = StateObject(wrappedValue:
+                                LinkDeviceVM(account: account,
+                                             accountService: accountService))
     }
 
+    var body: some View {
+        createLinkDeviceView()
+            .padding()
+            .frame(maxWidth: 500)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(L10n.LinkDevice.title)
+            .toolbar { toolbarContent }
+            .alert(isPresented: $showAlert, content: alertContent)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(UIColor.systemGroupedBackground)
+                            .ignoresSafeArea())
+    }
+
+    @ViewBuilder
     func createLinkDeviceView() -> some View {
-        VStack(spacing: 20) {
-            if askForPassword {
-                passwordView()
-            } else {
-                switch model.generatingState {
-                case .initial, .generatingPin:
-                    loadingView()
-                case .success(let pin):
-                    successView(pin: pin)
-                case .error(let error):
-                    errorView(error: error.description)
+        switch model.exportState {
+        case .initial:
+            initialView
+        case .connecting:
+            connectingView()
+        case .authenticating(peerAddress: let peerAddress):
+            authenticatedView(address: peerAddress ?? "")
+        case .inProgress:
+            loadingView()
+        case .error(let error):
+            errorView(error)
+        case .success:
+            successView()
+        }
+    }
+
+    @ViewBuilder private var initialView: some View {
+        if verticalSizeClass == .regular {
+            portraitView
+        } else {
+            landscapeView
+        }
+    }
+
+    private var portraitView: some View {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 30) {
+                info
+                tokenView
+                    .frame(maxWidth: 500)
+                Spacer()
+            }
+        }
+    }
+
+    private var landscapeView: some View {
+        HStack(spacing: 30) {
+            VStack {
+                Spacer().frame(height: 30)
+                info
+                Spacer()
+            }
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 30) {
+                    tokenView
+                        .frame(maxWidth: 500)
                 }
             }
+            Spacer()
+        }
+    }
+
+    private var info: some View {
+        (
+            Text(L10n.LinkDevice.initialInfo)
+                + Text(L10n.LinkDevice.infoAddAccount).bold()
+                + Text(entryMode == .qrCode ? L10n.LinkDevice.infoQRCode : L10n.LinkDevice.infoCode)
+        )
+        .multilineTextAlignment(.center)
+        .font(.callout)
+        .lineSpacing(4)
+        .frame(maxWidth: 500)
+    }
+
+    @ViewBuilder private var tokenView: some View {
+        ModeSelectorView(selectedMode: $entryMode, isLinkToAccount: false)
+            .onChange(of: entryMode) { _ in
+                model.cleanState()
+            }
+        tokenContent
+    }
+
+    @ViewBuilder private var tokenContent: some View {
+        Group {
+            if entryMode == .pin {
+                tokenEntry
+            } else {
+                qrCodeView
+                    .frame(maxWidth: .infinity)
+            }
+        }
+        .padding()
+        .background(colorScheme == .light ? Color(UIColor.secondarySystemGroupedBackground) : Color(UIColor.systemGray2))
+        .cornerRadius(10)
+        .padding(.horizontal)
+    }
+
+    private func connectingView() -> some View {
+        VStack {
+            Text(L10n.LinkDevice.connecting)
+                .multilineTextAlignment(.center)
+                .font(.callout)
+                .lineSpacing(4)
+            SwiftUI.ProgressView()
+                .padding()
+            Spacer()
+        }
+    }
+
+    func authenticatedView(address: String) -> some View {
+        VStack {
+            VStack {
+                Text(L10n.LinkDevice.authenticationInfo)
+                    .multilineTextAlignment(.center)
+                    .font(.callout)
+                    .lineSpacing(4)
+                Text(L10n.LinkDevice.newDeviceIP("\(address)"))
+                    .bold().padding(.vertical)
+                    .multilineTextAlignment(.center)
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        model.confirmAddDevice()
+                    }, label: {
+                        Text(L10n.Global.confirm)
+                            .foregroundColor(Color(UIColor.label))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 12)
+                            .background(Color.jamiTertiaryControl)
+                            .cornerRadius(10)
+                    })
+                    .padding(.horizontal)
+                    Button(action: {
+                        model.cancelAddDevice()
+                    }, label: {
+                        Text(L10n.Global.cancel)
+                            .foregroundColor(Color(UIColor.label))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 12)
+                            .background(Color.jamiTertiaryControl)
+                            .cornerRadius(10)
+                    })
+                    Spacer()
+                }
+            }
+            .padding()
+            .background(colorScheme == .light ? Color(UIColor.secondarySystemGroupedBackground) : Color(UIColor.systemGray2))
+            .cornerRadius(10)
+            .padding(.horizontal)
+            .frame(maxWidth: 500)
+            Spacer()
         }
     }
 
     func loadingView() -> some View {
         VStack {
-            SwiftUI.ProgressView(L10n.AccountPage.generatingPin)
+            Text(L10n.LinkDevice.exportInProgress)
+                .multilineTextAlignment(.center)
+                .font(.callout)
+                .lineSpacing(4)
+            SwiftUI.ProgressView()
                 .padding()
-        }
-        .frame(minWidth: 280, minHeight: 150)
-    }
-
-    func passwordView() -> some View {
-        VStack(spacing: 20) {
-            Text(L10n.LinkDevice.title)
-                .font(.headline)
-            Text(L10n.AccountPage.passwordForPin)
-                .font(.subheadline)
-            PasswordFieldView(text: $password, placeholder: L10n.Global.enterPassword)
-                .textFieldStyleInAlert()
-            HStack {
-                Button(action: {
-                    withAnimation {
-                        model.showLinkDeviceAlert = false
-                    }
-                }, label: {
-                    Text(L10n.Global.cancel)
-                        .foregroundColor(.jamiColor)
-                })
-                Spacer()
-                Button(action: {
-                    withAnimation {
-                        askForPassword = false
-                    }
-                    model.linkDevice(with: password)
-                }, label: {
-                    Text(L10n.LinkToAccount.linkButtonTitle)
-                        .foregroundColor(.jamiColor)
-                })
-                .disabled(password.isEmpty)
-                .opacity(password.isEmpty ? 0.5 : 1)
-            }
+            Spacer()
         }
     }
 
-    func successView(pin: String) -> some View {
-        VStack(spacing: 20) {
-            Text("\(pin)")
-                .foregroundColor(.jamiColor)
-                .font(.headline)
-                .conditionalTextSelection()
-            if let image = model.PINImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 140, height: 140)
-                    .accessibilityHidden(true)
-            }
-            HStack(spacing: 15) {
-                Image(systemName: "info.circle")
-                    .resizable()
-                    .foregroundColor(.jamiColor)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20, height: 20)
-                VStack(spacing: 5) {
-                    Text(L10n.AccountPage.pinExplanationTitle)
-                    Text(L10n.AccountPage.pinExplanationMessage)
-                        .font(.footnote)
-                }
-            }
-            .padding()
-            .background(Color.jamiTertiaryControl)
-            .cornerRadius(12)
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel(L10n.AccountPage.pinExplanationTitle + " " + L10n.AccountPage.pinExplanationMessage)
-            .accessibilityAutoFocusOnAppear()
-
-            HStack {
-                Spacer()
-                Button(action: {
-                    withAnimation {
-                        model.showLinkDeviceAlert = false
-                    }
-                }, label: {
-                    Text(L10n.Global.close)
-                        .foregroundColor(.jamiColor)
-                        .padding(.horizontal)
-                })
-            }
+    private func successView() -> some View {
+        SuccessStateView(
+            message: L10n.LinkDevice.completed,
+            buttonTitle: L10n.Global.ok
+        ) {
+            presentation.wrappedValue.dismiss()
         }
     }
 
-    func errorView(error: String) -> some View {
+    private func errorView(_ message: String) -> some View {
+        ErrorStateView(
+            message: message,
+            buttonTitle: L10n.Global.ok
+        ) {
+            presentation.wrappedValue.dismiss()
+        }
+    }
+
+    private var qrCodeView: some View {
+        ScanQRCodeView(width: 250, height: 200) { jamiAuthentication in
+            model.handleAuthenticationUri(jamiAuthentication)
+        }
+    }
+
+    func connectButton() -> some View {
+        Button(action: {
+            withAnimation {
+                model.handleAuthenticationUri(model.exportToken)
+            }
+        }, label: {
+            Text(L10n.Global.connect)
+                .commonButtonStyle()
+        })
+    }
+
+    private var tokenEntry: some View {
         VStack {
-            Text(L10n.AccountPage.pinError + ": \(error.description)")
+            TextField(L10n.LinkDevice.token, text: $model.exportToken)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 12)
+                .autocorrectionDisabled(true)
+                .autocapitalization(.none)
+                .background(Color(UIColor.systemGroupedBackground))
+                .cornerRadius(10)
+            Text(model.entryError ?? "")
+                .font(.footnote)
                 .foregroundColor(Color(UIColor.jamiFailure))
-                .font(.subheadline)
-                .padding()
-            HStack {
-                Spacer()
-                Button(action: {
-                    withAnimation {
-                        model.showLinkDeviceAlert = false
-                    }
-                }, label: {
-                    Text(L10n.Global.close)
-                        .foregroundColor(.jamiColor)
-                        .padding(.horizontal)
-                })
-            }
+                .multilineTextAlignment(.center)
+            connectButton()
+                .padding(.top)
         }
+    }
+
+    func cancelRequested() {
+        if model.shouldShowAlert() {
+            self.showAlert = true
+        } else {
+            cancel()
+        }
+    }
+
+    func cancel() {
+        presentation.wrappedValue.dismiss()
+    }
+
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            BackButton(action: cancelRequested)
+        }
+    }
+
+    private func alertContent() -> Alert {
+        Alert(
+            title: Text(L10n.LinkToAccount.alertTile),
+            message: Text(L10n.LinkToAccount.alertMessage),
+            primaryButton: .destructive(Text(L10n.Global.confirm), action: cancel),
+            secondaryButton: .cancel()
+        )
     }
 }
