@@ -29,24 +29,53 @@ struct LinkDeviceView: View {
 
     func createLinkDeviceView() -> some View {
         VStack(spacing: 20) {
-            if askForPassword {
-                passwordView()
-            } else {
-                switch model.generatingState {
-                case .initial, .generatingPin:
-                    loadingView()
-                case .success(let pin):
-                    successView(pin: pin)
-                case .error(let error):
-                    errorView(error: error.description)
-                }
+            //            if askForPassword {
+            //                passwordView()
+            //            } else {
+            switch model.exportState {
+            case .initial:
+                scanQRCodeView
+            case .done(let error):
+                errorView(error: error?.rawValue ?? "error")
+            case .connecting:
+                loadingView()
+            case .authenticating(peerAddress: let peerAddress):
+                authenticatedView
+            case .inProgress:
+                loadingView()
             }
+            // }
+        }
+    }
+
+    private var authenticatedView: some View {
+        VStack {
+            Text("Authenticated")
+            HStack {
+                Button(action: {
+                    model.confirmAddDevice()
+                }, label: {
+                    Text("Confirm")
+                })
+                Button(action: {
+                    model.cancelAddDevice()
+                }, label: {
+                    Text("Cancel")
+                })
+            }
+        }
+    }
+
+    private var scanQRCodeView: some View {
+        ScanQRCodeView(width: 350, height: 280) { jamiAuthentication in
+            model.handleAuthenticationUri(jamiAuthentication)
+            // viewModel.didScanQRCode(pin)
         }
     }
 
     func loadingView() -> some View {
         VStack {
-            SwiftUI.ProgressView(L10n.AccountPage.generatingPin)
+            SwiftUI.ProgressView("Connecting")
                 .padding()
         }
         .frame(minWidth: 280, minHeight: 150)
