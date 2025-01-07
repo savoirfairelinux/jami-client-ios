@@ -23,7 +23,7 @@ import SwiftUI
 enum LinkDeviceError {
     static let wrongPassword = L10n.LinkDevice.errorWrongPassword
     static let networkError = L10n.LinkDevice.errorNetwork
-    static let failedToGeneratePin = L10n.LinkDevice.errorToken
+    static let failedToGenerateToken = L10n.LinkDevice.errorToken
     static let jamiIdNotFound = L10n.LinkDevice.errorWrongData
 }
 
@@ -36,6 +36,7 @@ enum LinkDeviceConstants {
         static let importAuthScheme = "auth_scheme"
         static let importAuthError = "auth_error"
         static let importPeerId = "peer_id"
+        static let peerAddress = "peer_address"
         static let token = "token"
         static let error = "error"
     }
@@ -143,7 +144,7 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
             self.token = token
             withAnimation { uiState = .displayingToken(pin: token) }
         } else {
-            withAnimation { uiState = .error(message: LinkDeviceError.failedToGeneratePin) }
+            withAnimation { uiState = .error(message: LinkDeviceError.failedToGenerateToken) }
         }
     }
 
@@ -198,15 +199,17 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
     }
 
     private func handleDone(details: [String: String]) {
-        if let error = details[LinkDeviceConstants.Keys.error].flatMap(AuthError.fromString) {
-            withAnimation { uiState = .error(message: error.rawValue) }
+        if let errorString = details[LinkDeviceConstants.Keys.error],
+           !errorString.isEmpty,
+           errorString != "none",
+           let error = AuthError(rawValue: errorString) {
+            withAnimation { self.uiState = .error(message: error.message()) }
         } else {
-            withAnimation { uiState = .success }
+            withAnimation { self.uiState = .success }
         }
     }
 
     func onCancel() {
-        // Remove temporary account if it exists
         if let tempAccountId = tempAccount {
             accountsService.removeAccount(id: tempAccountId)
         }
