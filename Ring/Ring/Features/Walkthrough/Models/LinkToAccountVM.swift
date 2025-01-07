@@ -23,7 +23,7 @@ import SwiftUI
 enum LinkDeviceError {
     static let wrongPassword = L10n.LinkDevice.errorWrongPassword
     static let networkError = L10n.LinkDevice.errorNetwork
-    static let failedToGeneratePin = L10n.LinkDevice.errorToken
+    static let failedToGenerateToken = L10n.LinkDevice.errorToken
     static let jamiIdNotFound = L10n.LinkDevice.errorWrongData
 }
 
@@ -36,6 +36,7 @@ enum LinkDeviceConstants {
         static let importAuthScheme = "auth_scheme"
         static let importAuthError = "auth_error"
         static let importPeerId = "peer_id"
+        static let peerAddress = "peer_address"
         static let token = "token"
         static let error = "error"
     }
@@ -68,7 +69,8 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
     @Published var username: String?
     @Published var token: String = ""
     @Published var password: String = ""
-    @Published var hasPassword: Bool = false
+    @Published var hasPassword: Bool = true
+    @Published var authError: String?
     @Published private(set) var uiState: LinkDeviceUIState = .initial
 
     var jamiId: String = ""
@@ -118,8 +120,8 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
         case .initial: validStates = [.tokenAvailable, .done]
         case .displayingToken: validStates = [.tokenAvailable, .connecting, .done]
         case .connecting: validStates = [.authenticating, .done]
-        case .authenticating, .inProgress: validStates = [.inProgress, .done]
-        case .error, .success: validStates = [.done]
+        case .authenticating, .inProgress: validStates = [.inProgress, .done, .authenticating]
+        case .error, .success: validStates = [.done, .authenticating, .inProgress]
         }
 
         return validStates.contains(newState)
@@ -143,7 +145,7 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
             self.token = token
             withAnimation { uiState = .displayingToken(pin: token) }
         } else {
-            withAnimation { uiState = .error(message: LinkDeviceError.failedToGeneratePin) }
+            withAnimation { uiState = .error(message: LinkDeviceError.failedToGenerateToken) }
         }
     }
 
@@ -155,12 +157,10 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
         hasPassword = details[LinkDeviceConstants.Keys.importAuthScheme] == LinkDeviceConstants.AuthScheme.password
         let authError = details[LinkDeviceConstants.Keys.importAuthError].flatMap { AuthError.fromString($0) }
         if let errorMessage = authError?.rawValue {
-            withAnimation { uiState = .error(message: errorMessage) }
-            return
+            self.authError = errorMessage
         }
 
         guard let jamiId = details[LinkDeviceConstants.Keys.importPeerId] else {
-            withAnimation { uiState = .error(message: LinkDeviceError.jamiIdNotFound) }
             return
         }
         self.jamiId = jamiId
@@ -198,15 +198,17 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
     }
 
     private func handleDone(details: [String: String]) {
-        if let error = details[LinkDeviceConstants.Keys.error].flatMap(AuthError.fromString) {
-            withAnimation { uiState = .error(message: error.rawValue) }
+        if let errorString = details[LinkDeviceConstants.Keys.error],
+           !errorString.isEmpty,
+           errorString != "none",
+           let error = AuthError(rawValue: errorString) {
+            withAnimation { self.uiState = .error(message: error.message()) }
         } else {
-            withAnimation { uiState = .success }
+            withAnimation { self.uiState = .success }
         }
     }
 
     func onCancel() {
-        // Remove temporary account if it exists
         if let tempAccountId = tempAccount {
             accountsService.removeAccount(id: tempAccountId)
         }
