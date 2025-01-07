@@ -106,8 +106,6 @@ static id <AccountAdapterDelegate> _delegate;
         }
     }));
 
-
-
     confHandlers.insert(exportable_callback<ConfigurationSignal::KnownDevicesChanged>([&](const std::string& account_id, const std::map<std::string, std::string>& devices) {
         if (AccountAdapter.delegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
