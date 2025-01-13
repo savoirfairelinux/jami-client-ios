@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "กดการพูดคุย";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "การ สัมภาษณ์ ที่ สะดวก";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "การอนุญาตสื่อไม่ถูกให้";
 "alerts.noLibraryPermissionsTitle" = "การเข้าถึงห้องสมุดรูปภาพไม่ได้รับอนุญาต";
 "alerts.noLocationPermissionsTitle" = "การเข้าถึงสถานที่ที่ไม่ได้มอบ";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "ลบ";
-"actions.clearAction" = "ชัดเจน";
 "actions.backAction" = "กลับ";
 "actions.doneAction" = "ทําแล้ว";
 "alerts.incomingCallAllertTitle" = "โทรศัพท์ที่เข้ามาจาก ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "เริ่มการโทรเสียง";
 "contactPage.startVideoCall" = "เริ่มการโทรวีดีโอ";
 "contactPage.send" = "ส่ง";
-"contactPage.clearConversation" = "ส่งจอ";
 "contactPage.leaveConversation" = "ปล่อยการพูดคุย";
 
 // DataTransfer

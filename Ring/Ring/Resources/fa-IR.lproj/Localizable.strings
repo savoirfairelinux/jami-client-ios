@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "پاک کردن گفتگو";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "پاک کردن گفتگو";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "مجوز رسانه داده نشده است";
 "alerts.noLibraryPermissionsTitle" = "دسترسی به کتابخانه تصاویر داده نشده است";
 "alerts.noLocationPermissionsTitle" = "دسترسی به مکان داده نشده است";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "حذف";
-"actions.clearAction" = "پاک‌سازی";
 "actions.backAction" = "بازگشت";
 "actions.doneAction" = "انجام شد";
 "alerts.incomingCallAllertTitle" = "تماس دریافتی از";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "شروع تماس صوتی";
 "contactPage.startVideoCall" = "شروع تماس ویدیویی";
 "contactPage.send" = "ارسال";
-"contactPage.clearConversation" = "پاکسازی چت";
 "contactPage.leaveConversation" = "مکالمه رو ترک کن";
 
 // DataTransfer

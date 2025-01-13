@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "La conversación ye borrada";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "El so padre, el so padre, yera un fíu de María.";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Permisión de medios non concedida";
 "alerts.noLibraryPermissionsTitle" = "L'accesu a la biblioteca de fotos nun se concede";
 "alerts.noLocationPermissionsTitle" = "L'accesu a la localización nun se concede";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Esborrar";
-"actions.clearAction" = "El so nome ye \"Clarity\".";
 "actions.backAction" = "El so fíu, el so fíu,";
 "actions.doneAction" = "Fináu";
 "alerts.incomingCallAllertTitle" = "Llamada de ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Iniciativa pa la defensa del asturianu";
 "contactPage.startVideoCall" = "Iniciativa pa la creación d'una rede de televisión";
 "contactPage.send" = "Enviar";
-"contactPage.clearConversation" = "La conversación ye clara.";
 "contactPage.leaveConversation" = "La conversación ye una conversación.";
 
 // DataTransfer

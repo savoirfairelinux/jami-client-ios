@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Odstranit konverzaci";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Vyprázdnit konverzaci";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Oprávnění médií nebyla udělena.";
 "alerts.noLibraryPermissionsTitle" = "Přístup ke knihovně fotek nebyl udělen.";
 "alerts.noLocationPermissionsTitle" = "Přístup k poloze nebyl udělen.";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Odstranit";
-"actions.clearAction" = "Vyprázdnit";
 "actions.backAction" = "Zpět";
 "actions.doneAction" = "Hotovo";
 "alerts.incomingCallAllertTitle" = "Příchozí hovor od";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Začít audio hovor";
 "contactPage.startVideoCall" = "Začít video hovor";
 "contactPage.send" = "Odeslat";
-"contactPage.clearConversation" = "Vyprázdnit zprávy";
 "contactPage.leaveConversation" = "Opustit konverzaci";
 
 // DataTransfer

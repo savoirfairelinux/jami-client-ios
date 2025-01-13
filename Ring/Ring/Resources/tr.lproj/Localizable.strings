@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Görüşmeyi Sil";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Görüşmeyi temizle";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Medya izni verilmedi";
 "alerts.noLibraryPermissionsTitle" = "Fotoğraf kitaplığına erişim izni verilmedi";
 "alerts.noLocationPermissionsTitle" = "Konum erişim izni verilmedi";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Sil";
-"actions.clearAction" = "Temizle";
 "actions.backAction" = "Geri";
 "actions.doneAction" = "Tamam";
 "alerts.incomingCallAllertTitle" = "Adlı kişiden gelen çağrı";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Sesli arama başlat";
 "contactPage.startVideoCall" = "Görüntülü arama başlat";
 "contactPage.send" = "Gönder";
-"contactPage.clearConversation" = "Görüşmeyi temizle";
 "contactPage.leaveConversation" = "Görüşmeden ayrıl";
 
 // DataTransfer

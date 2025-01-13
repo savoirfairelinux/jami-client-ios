@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Vrei să blochezi acest contact? Conversația cu acest contact va fi ștearsă definitiv.";
 "alerts.confirmDeleteConversation" = "Vrei să ștergi definitiv această conversație?";
 "alerts.confirmDeleteConversationFromContact" = "Vrei să ștergi conversația cu acest contact?";
-"alerts.confirmDeleteConversationTitle" = "Șterge conversația";
-"alerts.confirmClearConversation" = "Vrei să ștergi conversația cu acest contact?";
-"alerts.confirmClearConversationTitle" = "Șterge conversația";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Nu ai permis accesul la Media";
 "alerts.noLibraryPermissionsTitle" = "Nu ai permis accesul la poze";
 "alerts.noLocationPermissionsTitle" = "Nu ai permis localizarea";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Șterge";
-"actions.clearAction" = "Șterge";
 "actions.backAction" = "Înapoi";
 "actions.doneAction" = "Făcut";
 "alerts.incomingCallAllertTitle" = "Apel primit de la ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Începe un apel vocal";
 "contactPage.startVideoCall" = "Începe un apel video";
 "contactPage.send" = "Trimite";
-"contactPage.clearConversation" = "Șterge discuția";
 "contactPage.leaveConversation" = "Termină conversația";
 
 // DataTransfer

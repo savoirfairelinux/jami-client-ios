@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Haluatko estää tämän henkilön? Henkilön keskusteluhistoria myös poistetaan pysyvästi.";
 "alerts.confirmDeleteConversation" = "Haluatko poistaa tämän keskustelun pysyvästi?";
 "alerts.confirmDeleteConversationFromContact" = "Haluatko poistaa keskustelun tämän henkilön kanssa?";
-"alerts.confirmDeleteConversationTitle" = "Poista keskustelu";
-"alerts.confirmClearConversation" = "Haluatko tyhjentää keskustelun tämän henkilön kanssa?";
-"alerts.confirmClearConversationTitle" = "Tyhjennä keskustelu";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Pääsyä mediaan ei ole myönnetty";
 "alerts.noLibraryPermissionsTitle" = "Pääsyä valokuviin ei ole myönnetty";
 "alerts.noLocationPermissionsTitle" = "Pääsyä sijaintiin ei ole myönnetty";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Poista";
-"actions.clearAction" = "Tyhjennä";
 "actions.backAction" = "Takaisin";
 "actions.doneAction" = "Valmis";
 "alerts.incomingCallAllertTitle" = "Saapuva puhelu";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Aloita äänipuhelu";
 "contactPage.startVideoCall" = "Aloita videopuhelu";
 "contactPage.send" = "Lähetä";
-"contactPage.clearConversation" = "Tyhjennä keskustelu";
 "contactPage.leaveConversation" = "Poistu keskustelusta";
 
 // DataTransfer

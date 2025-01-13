@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Szeretne letiltani ezt a kapcsolattartót? A beszélgetés előzményei a kapcsolattartóval együtt véglegesen törlésre kerülnek.";
 "alerts.confirmDeleteConversation" = "Szeretne véglegesen törölni ezt a beszélgetést?";
 "alerts.confirmDeleteConversationFromContact" = "Szeretne törli a beszélgetést ezzel a kapcsolattartóval?";
-"alerts.confirmDeleteConversationTitle" = "Beszélgetés törlése";
-"alerts.confirmClearConversation" = "Szeretne törli a beszélgetést ezzel a kapcsolattartóval?";
-"alerts.confirmClearConversationTitle" = "Beszélgetés törlése";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
 "alerts.noLibraryPermissionsTitle" = "Fényképkönyvtár hozzáférése nem engedélyezett";
 "alerts.noLocationPermissionsTitle" = "Hozzáférés a tartózkodási hely nincs engedélyezve";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Törlés";
-"actions.clearAction" = "Törlés";
 "actions.backAction" = "Vissza";
 "actions.doneAction" = "Kész";
 "alerts.incomingCallAllertTitle" = "Bejövő hívás -tól/-től";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Hanghívás indítása";
 "contactPage.startVideoCall" = "Videohívás indítása";
 "contactPage.send" = "Küldés";
-"contactPage.clearConversation" = "Csevegés törlése";
 "contactPage.leaveConversation" = "Kilépés a beszélgetésből";
 
 // DataTransfer

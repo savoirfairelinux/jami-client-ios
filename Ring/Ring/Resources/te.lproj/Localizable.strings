@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "సంభాషణను తొలగించు";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "స్పష్టమైన సంభాషణ";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "మీడియా అనుమతి ఇవ్వలేదు";
 "alerts.noLibraryPermissionsTitle" = "ఫోటో లైబ్రరీకి ప్రాప్యత ఇవ్వబడలేదు";
 "alerts.noLocationPermissionsTitle" = "స్థలానికి ప్రాప్యత ఇవ్వబడలేదు";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "తొలగించు";
-"actions.clearAction" = "స్పష్టమైన";
 "actions.backAction" = "తిరిగి";
 "actions.doneAction" = "పూర్తి";
 "alerts.incomingCallAllertTitle" = " నుండి ఇన్కమింగ్ కాల్";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "ఆడియో కాల్ ప్రారంభించండి";
 "contactPage.startVideoCall" = "వీడియో కాల్ ప్రారంభించండి";
 "contactPage.send" = "పంపండి";
-"contactPage.clearConversation" = "క్లియర్ చాట్";
 "contactPage.leaveConversation" = "సంభాషణను వదిలివేయండి";
 
 // DataTransfer

@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "מחיקת דיון";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "ניקוי הדיון";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "אישור מדיה לא מוסמך";
 "alerts.noLibraryPermissionsTitle" = "גישה לספריית התמונות לא מותרת";
 "alerts.noLocationPermissionsTitle" = "גישה לא מיקום";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "מחק";
-"actions.clearAction" = "ניקוי";
 "actions.backAction" = "חזרה";
 "actions.doneAction" = "סיים";
 "alerts.incomingCallAllertTitle" = "שיחת כולה מ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "תחילת שיחת קול";
 "contactPage.startVideoCall" = "תתחילו שיחת וידאו";
 "contactPage.send" = "שליחה";
-"contactPage.clearConversation" = "ניקוי הצ׳אט";
 "contactPage.leaveConversation" = "עזוב את השיחה";
 
 // DataTransfer

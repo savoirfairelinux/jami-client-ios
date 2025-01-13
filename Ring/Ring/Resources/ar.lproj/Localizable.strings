@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "إزالة المحادثة";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "محادثة واضحة";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "الإعلام غير مُمَنِح";
 "alerts.noLibraryPermissionsTitle" = "لا يُمنح الوصول إلى مكتبة الصور";
 "alerts.noLocationPermissionsTitle" = "الوصول إلى الموقع غير الممنوح";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "إحذف";
-"actions.clearAction" = "واضح";
 "actions.backAction" = "السابق";
 "actions.doneAction" = "منجز";
 "alerts.incomingCallAllertTitle" = "مكالمة قادمة من";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "بدأ مكالمة صوتية";
 "contactPage.startVideoCall" = "بدء مكالمة فيديو";
 "contactPage.send" = "إرسال";
-"contactPage.clearConversation" = "-تحدثوا";
 "contactPage.leaveConversation" = "أترك المحادثة";
 
 // DataTransfer

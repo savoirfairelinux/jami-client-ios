@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "دانیشیق لاری سئل";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "آچيق دانیشیق";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "میدیایا وئریلن اجازه وئریلمه دی";
 "alerts.noLibraryPermissionsTitle" = "عکس لری کیتابخانایا گئریلمه یه ده وئریلمه دی";
 "alerts.noLocationPermissionsTitle" = "مکانا گئریلمه دی";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "حذف";
-"actions.clearAction" = "واضح";
 "actions.backAction" = "گئری دؤن";
 "actions.doneAction" = "یئرلشدی";
 "alerts.incomingCallAllertTitle" = "گلیرکن زنگین";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "صداي زنگي باشلا";
 "contactPage.startVideoCall" = "ویدئوی تماس باشلا";
 "contactPage.send" = "گؤنده ر";
-"contactPage.clearConversation" = "آچيق چت";
 "contactPage.leaveConversation" = "مکالمه دن اوزاقلاش";
 
 // DataTransfer

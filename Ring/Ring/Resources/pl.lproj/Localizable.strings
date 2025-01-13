@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Usuń rozmowę";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Wyczyść Rozmowę";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Uprawnienia multimediów nieprzyznane";
 "alerts.noLibraryPermissionsTitle" = "Nie udzielono dostępu do biblioteki zdjęć";
 "alerts.noLocationPermissionsTitle" = "Nie udzielono dostępu do lokalizacji";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Usuń";
-"actions.clearAction" = "Wyczyść";
 "actions.backAction" = "Wstecz";
 "actions.doneAction" = "Gotowe";
 "alerts.incomingCallAllertTitle" = "Połączenie przychodzące od";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Rozpocznij połączenie głosowe";
 "contactPage.startVideoCall" = "Rozpocznij rozmowę wideo";
 "contactPage.send" = "Wyślij";
-"contactPage.clearConversation" = "Wyczyść chat";
 "contactPage.leaveConversation" = "/Nie mówcie o tym.";
 
 // DataTransfer

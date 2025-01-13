@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Ta bort konversation";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Ta bort konversation";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Mediabegäran inte tillåten";
 "alerts.noLibraryPermissionsTitle" = "Begäran om access till bildmapp inte godkänd";
 "alerts.noLocationPermissionsTitle" = "Begäran om access till plats inte godkänd";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Ta bort";
-"actions.clearAction" = "Ta bort";
 "actions.backAction" = "Tillbaka";
 "actions.doneAction" = "Klar";
 "alerts.incomingCallAllertTitle" = "Inkommande samtal från";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Starta ljudsamtal";
 "contactPage.startVideoCall" = "Starta videosamtal";
 "contactPage.send" = "Skicka";
-"contactPage.clearConversation" = "Rensa chatten";
 "contactPage.leaveConversation" = "Lämna samtalet";
 
 // DataTransfer

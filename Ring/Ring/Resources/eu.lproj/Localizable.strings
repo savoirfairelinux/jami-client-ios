@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Ezabatu elkarrizketa";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Elkarrizketa argia";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Mediaren baimena ez da eman";
 "alerts.noLibraryPermissionsTitle" = "Argazki-liburutegira sarbidea ez da ematen.";
 "alerts.noLocationPermissionsTitle" = "Lekuetara sarbidea ez da ematen.";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Ezabatu";
-"actions.clearAction" = "Garbi dago.";
 "actions.backAction" = "Atzera";
 "actions.doneAction" = "Egina";
 "alerts.incomingCallAllertTitle" = "Dei bat dator.";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Hasi audio-deia";
 "contactPage.startVideoCall" = "Hasi bideo-deia";
 "contactPage.send" = "Bidali";
-"contactPage.clearConversation" = "Argi hitz egin.";
 "contactPage.leaveConversation" = "Utzi elkarrizketa.";
 
 // DataTransfer

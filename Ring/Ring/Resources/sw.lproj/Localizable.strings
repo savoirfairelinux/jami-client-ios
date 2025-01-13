@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Ondoa Mazungumzo";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Mazungumzo Yenye Kueleweka";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Utoaji wa ruhusa wa vyombo vya habari haukupewa";
 "alerts.noLibraryPermissionsTitle" = "Ufikiaji wa maktaba ya picha haukupewa";
 "alerts.noLocationPermissionsTitle" = "Ufikiaji wa eneo la tukio haukupewa";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Futa";
-"actions.clearAction" = "Safi";
 "actions.backAction" = "Kurudi";
 "actions.doneAction" = "Imefanywa";
 "alerts.incomingCallAllertTitle" = "Simu inayokuja kutoka ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Kuanza wito wa sauti";
 "contactPage.startVideoCall" = "Anza simu ya video";
 "contactPage.send" = "Tuma";
-"contactPage.clearConversation" = "Mazungumzo wazi";
 "contactPage.leaveConversation" = "Acha mazungumzo";
 
 // DataTransfer

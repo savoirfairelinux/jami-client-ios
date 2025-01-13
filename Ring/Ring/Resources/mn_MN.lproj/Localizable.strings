@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Хэлэлцүүлгийг устгах";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Ухаалаг яриа";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Мэдээлэл мэдээллийн зөвшөөрөл олгоогүй";
 "alerts.noLibraryPermissionsTitle" = "Фото номын сан руу орох эрх олгоогүй";
 "alerts.noLocationPermissionsTitle" = "Байгалийн газарт хандах эрх олгоогүй";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Хасах";
-"actions.clearAction" = "Ухаалаг";
 "actions.backAction" = "Хурд";
 "actions.doneAction" = "Сураг";
 "alerts.incomingCallAllertTitle" = "";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Зэвсэгт дуу дуулах";
 "contactPage.startVideoCall" = "Видео утас эхлүүлэх";
 "contactPage.send" = "Хэвлэл";
-"contactPage.clearConversation" = "Ухаалагч";
 "contactPage.leaveConversation" = "Хэлэлцүүлгийг орхи";
 
 // DataTransfer

@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Սեղմեք զրույցը";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Հստակ զրույց";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "ԶԼՄ-ների թույլտվությունը չի տրվել";
 "alerts.noLibraryPermissionsTitle" = "Լուսանկարների գրադարան մուտք չի տրվել";
 "alerts.noLocationPermissionsTitle" = "Տեղի մուտք չի տրվել";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Հեռացնել";
-"actions.clearAction" = "Հստակ";
 "actions.backAction" = "Վերադարձ";
 "actions.doneAction" = "Կատարված";
 "alerts.incomingCallAllertTitle" = "Հեռախոսազանգ ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Սկսել ձայնային զանգը";
 "contactPage.startVideoCall" = "Սկսեք տեսահաղորդումը";
 "contactPage.send" = "Գտիր";
-"contactPage.clearConversation" = "Հաղթանակ";
 "contactPage.leaveConversation" = "Թող խոսակցությունը";
 
 // DataTransfer

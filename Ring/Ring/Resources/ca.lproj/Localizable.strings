@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Eliminar la conversa";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Una conversa clara";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Permissió de mitjans no concedida";
 "alerts.noLibraryPermissionsTitle" = "Accés a la biblioteca de fotografies no concedit";
 "alerts.noLocationPermissionsTitle" = "Accès a l'ubicació no concedida";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Suprimeix";
-"actions.clearAction" = "Neteja";
 "actions.backAction" = "Enrere";
 "actions.doneAction" = "Fet";
 "alerts.incomingCallAllertTitle" = "L' trucada de ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Comença una trucada de veu.";
 "contactPage.startVideoCall" = "Comença una videotrucada";
 "contactPage.send" = "Envia";
-"contactPage.clearConversation" = "Calla clar";
 "contactPage.leaveConversation" = "Deixar la conversa";
 
 // DataTransfer

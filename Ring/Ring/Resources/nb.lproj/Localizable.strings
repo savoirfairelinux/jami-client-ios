@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Slett samtale";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Slett samtale";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Media tilgang ikke innvilget";
 "alerts.noLibraryPermissionsTitle" = "Tilgang til foto bibliotek ikke innvilget";
 "alerts.noLocationPermissionsTitle" = "Tilgang til lokasjon ikke innvilget";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Slett";
-"actions.clearAction" = "Slett";
 "actions.backAction" = "Tilbake";
 "actions.doneAction" = "Ferdig";
 "alerts.incomingCallAllertTitle" = "Innkommende anrop fra";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Start lydsamtale";
 "contactPage.startVideoCall" = "Start videosamtale";
 "contactPage.send" = "Send";
-"contactPage.clearConversation" = "Slett chat";
 "contactPage.leaveConversation" = "La samtalen være";
 
 // DataTransfer

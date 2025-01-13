@@ -69,7 +69,7 @@
 "swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "Išeiti iš pokalbio";
 "swarm.chooseColor" = "Spalva";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Pokalbio tipas";
 "swarm.identifier" = "Identifikatorius";
 "swarm.settings" = "Nustatymai";
 "swarm.members" = "Nariai";
@@ -236,11 +236,9 @@
 "alerts.dbFailedTitle" = "Paleidžiant Jami įvyko klaida";
 "alerts.dbFailedMessage" = "Prašome užverti programą ir bandyti ją atverti dar kartą";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Ištrinti pokalbį";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Išvalyti pokalbį";
+"alerts.confirmDeleteConversation" = "Ar norite visiems laikams ištrinti šį pokalbį?";
+"alerts.confirmDeleteConversationFromContact" = "Ar norite ištrinti pokalbį su šiuo adresatu?";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.noLocationPermissionsTitle" = "Access to location not granted";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Ištrinti";
-"actions.clearAction" = "Išvalyti";
 "actions.backAction" = "Atgal";
 "actions.doneAction" = "Atlikta";
 "alerts.incomingCallAllertTitle" = "Gaunamasis skambutis nuo ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Pradėti garso skambutį";
 "contactPage.startVideoCall" = "Pradėti vaizdo skambutį";
 "contactPage.send" = "Siųsti";
-"contactPage.clearConversation" = "Išvalyti pokalbį";
 "contactPage.leaveConversation" = "Išeiti iš pokalbio";
 
 // DataTransfer
@@ -495,7 +491,7 @@
 "logView.title" = "Diagnostika";
 "logView.description" = "Atverti diagnostikos žurnalo nustatymus";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Stabdyti registravimą";
 "logView.saveError" = "Įrašant failą įvyko klaida.";
 "logView.shareError" = "Bendrinant failą įvyko klaida.";
 

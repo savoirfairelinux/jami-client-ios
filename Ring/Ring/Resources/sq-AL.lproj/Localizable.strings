@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Doni të bllokohet ky kontakt? Edhe historiku i bisedës me këtë kontakt do të fshihet përgjithmonëy.";
 "alerts.confirmDeleteConversation" = "Doni të fshihet përgjithmonë kjo bisedë?";
 "alerts.confirmDeleteConversationFromContact" = "Doni të fshihet biseda me këtë kontakt?";
-"alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
-"alerts.confirmClearConversation" = "Doni të spastrohet biseda me këtë kontakt?";
-"alerts.confirmClearConversationTitle" = "Spastroje Bisedën";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
 "alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
 "alerts.noLocationPermissionsTitle" = "S’u akordua hyrje te vendndodhje";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Fshije";
-"actions.clearAction" = "Spastroje";
 "actions.backAction" = "Mbrapsht";
 "actions.doneAction" = "U bë";
 "alerts.incomingCallAllertTitle" = "Thirrje nga";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Filloni thirrje audio";
 "contactPage.startVideoCall" = "Filloni thirrje video";
 "contactPage.send" = "Dërgoje";
-"contactPage.clearConversation" = "Spastroje Bisedën";
 "contactPage.leaveConversation" = "Braktise bisedën";
 
 // DataTransfer

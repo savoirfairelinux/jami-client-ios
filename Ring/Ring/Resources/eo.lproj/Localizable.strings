@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Forigu konversacion";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Klara konversacio";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "La permeso de amaskomunikiloj ne estas donita";
 "alerts.noLibraryPermissionsTitle" = "Aliro al fotbiblioteko ne koncedita";
 "alerts.noLocationPermissionsTitle" = "Aliro al loko ne koncedita";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Forigi";
-"actions.clearAction" = "Malpezo";
 "actions.backAction" = "Reiri";
 "actions.doneAction" = "Finita";
 "alerts.incomingCallAllertTitle" = "Envenanta alvoko de ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Komenci la aŭdian alvokon";
 "contactPage.startVideoCall" = "Komenci videan alvokon";
 "contactPage.send" = "Sendi";
-"contactPage.clearConversation" = "Klare Ĉat";
 "contactPage.leaveConversation" = "Lasu la konversacion";
 
 // DataTransfer

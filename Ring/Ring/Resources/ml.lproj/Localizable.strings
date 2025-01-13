@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "സംഭാഷണം ഇല്ലാതാക്കുക";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "വ്യക്തമായ സംഭാഷണം";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "മാധ്യമങ്ങളുടെ അനുമതി അനുവദിച്ചിട്ടില്ല";
 "alerts.noLibraryPermissionsTitle" = "ഫോട്ടോ ലൈബ്രറിയിലേക്കുള്ള പ്രവേശനം അനുവദിച്ചിട്ടില്ല";
 "alerts.noLocationPermissionsTitle" = "സ്ഥലം ലഭ്യമാക്കിയിട്ടില്ല";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "ഇല്ലാതാക്കുക";
-"actions.clearAction" = "വ്യക്തമായ";
 "actions.backAction" = "തിരിച്ചുപോവുക";
 "actions.doneAction" = "പൂർത്തിയായി";
 "alerts.incomingCallAllertTitle" = "∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "ഓഡിയോ കോൾ ആരംഭിക്കുക";
 "contactPage.startVideoCall" = "വീഡിയോ കോൾ ആരംഭിക്കുക";
 "contactPage.send" = "അയയ്ക്കുക";
-"contactPage.clearConversation" = "വ്യക്തമായ ചാറ്റ്";
 "contactPage.leaveConversation" = "സംഭാഷണം ഉപേക്ഷിക്കുക";
 
 // DataTransfer

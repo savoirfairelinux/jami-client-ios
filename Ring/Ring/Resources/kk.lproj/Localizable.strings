@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Әңгімелерді өшіру";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Ашық әңгіме";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "БАҚ рұқсаты берілмеген";
 "alerts.noLibraryPermissionsTitle" = "Фото кітапханасына қол жеткізу рұқсат етілмеген";
 "alerts.noLocationPermissionsTitle" = "Орналасуына қол жеткізу рұқсат етілмеген";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Өшіру";
-"actions.clearAction" = "Ашық";
 "actions.backAction" = "Қайта оралу";
 "actions.doneAction" = "Жарайды";
 "alerts.incomingCallAllertTitle" = "             ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Аудио шақыруды бастау";
 "contactPage.startVideoCall" = "Видео шақыруды бастаңыз";
 "contactPage.send" = "Жіберіңіз";
-"contactPage.clearConversation" = "Ашық әңгімелесу";
 "contactPage.leaveConversation" = "Әңгімелеуді қалдырыңыз";
 
 // DataTransfer

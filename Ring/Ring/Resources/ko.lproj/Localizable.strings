@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "대화 를 삭제";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "명확 한 대화";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "언론 허가 받지 않은";
 "alerts.noLibraryPermissionsTitle" = "사진 라이브러리에 대한 접근 권한이 부여되지 않았습니다";
 "alerts.noLocationPermissionsTitle" = "장소 접근은 허용되지 않습니다";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "삭제";
-"actions.clearAction" = "명확한 것";
 "actions.backAction" = "돌아와";
 "actions.doneAction" = "완료";
 "alerts.incomingCallAllertTitle" = "";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "오디오 호출을 시작";
 "contactPage.startVideoCall" = "비디오 통화 시작";
 "contactPage.send" = "보내";
-"contactPage.clearConversation" = "클리어 채팅";
 "contactPage.leaveConversation" = "대화는 그만둬";
 
 // DataTransfer

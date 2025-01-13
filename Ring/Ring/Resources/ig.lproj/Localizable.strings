@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Ihichapụ Mkparịta Ụka";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Mkparịta Ụka Dị Mkpa";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Enweghị ikike mgbasa ozi";
 "alerts.noLibraryPermissionsTitle" = "Enweghị ohere ịnweta ọbá akwụkwọ foto";
 "alerts.noLocationPermissionsTitle" = "Enweghị ohere ịnweta ebe";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Ihichapụ";
-"actions.clearAction" = "Ọ dị ọcha";
 "actions.backAction" = "Ịlaghachi azụ";
 "actions.doneAction" = "E mechaala";
 "alerts.incomingCallAllertTitle" = "N' olu dị ala, ọ na- esi n' ụlọ ọrụ ahụ abịa.";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Malite oku ọdịyo";
 "contactPage.startVideoCall" = "Malite ịkpọ oku vidiyo";
 "contactPage.send" = "Zie";
-"contactPage.clearConversation" = "Kpọmkwem Chat";
 "contactPage.leaveConversation" = "Hapụ mkparịta ụka ahụ";
 
 // DataTransfer

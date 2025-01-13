@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Hapus Percakapan";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Bersihkan Percakapan";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Izin media tidak diberikan";
 "alerts.noLibraryPermissionsTitle" = "Akses ke galeri foto tidak diberikan";
 "alerts.noLocationPermissionsTitle" = "Akses ke lokasi tidak diberikan";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Hapus";
-"actions.clearAction" = "Bersihkan";
 "actions.backAction" = "Kembali";
 "actions.doneAction" = "Selesai";
 "alerts.incomingCallAllertTitle" = "Panggilan masuk dari";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Mulai panggilan suara";
 "contactPage.startVideoCall" = "Mulai panggilan video";
 "contactPage.send" = "Kirim";
-"contactPage.clearConversation" = "Bersihkan obrolan";
 "contactPage.leaveConversation" = "Tinggalkan percakapan";
 
 // DataTransfer

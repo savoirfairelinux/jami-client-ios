@@ -238,9 +238,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Изтриване на разговор";
-"alerts.confirmClearConversation" = "Do you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Изчистване на разговор";
+"alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Недопускане на разрешение на медиите";
 "alerts.noLibraryPermissionsTitle" = "Достъп до фото библиотека не е предоставен";
 "alerts.noLocationPermissionsTitle" = "Достъп до местоположение, който не е предоставен";
@@ -261,7 +259,6 @@
 
 // Actions
 "actions.deleteAction" = "Изтриване";
-"actions.clearAction" = "Чисто";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
 "alerts.incomingCallAllertTitle" = "Пристъпващ обаждане от ";
@@ -440,7 +437,6 @@
 "contactPage.startAudioCall" = "Започване на гласов разговор";
 "contactPage.startVideoCall" = "Започване на видео разговор";
 "contactPage.send" = "Изпращане";
-"contactPage.clearConversation" = "Разпространи се.";
 "contactPage.leaveConversation" = "Остави разговора.";
 
 // DataTransfer
