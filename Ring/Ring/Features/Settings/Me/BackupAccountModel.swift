@@ -85,7 +85,7 @@ class BackupAccountModel: ObservableObject {
                 filePath.stopAccessingSecurityScopedResource()
             }
 
-            let archiveName = fileName + ".gz"
+            let archiveName = fileName + ".jac"
             let finalUrl = filePath.appendingPathComponent(archiveName)
 
             let exportSuccess = self.accountService.exportToFileWithPassword(
