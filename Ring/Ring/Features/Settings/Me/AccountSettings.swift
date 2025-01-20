@@ -47,6 +47,8 @@ class AccountSettings: ObservableObject {
 
     @Published var bootstrap = ""
 
+    @Published var serverName = ""
+
     var notificationsPermitted: Bool = LocalNotificationsHelper.isEnabled()
     let accountService: AccountsService
     let account: AccountModel
@@ -110,6 +112,7 @@ class AccountSettings: ObservableObject {
 // MARK: - Jami account
 extension AccountSettings {
     private func setUPJamiParameters() {
+        self.serverName = self.getStringState(for: .ringNsURI)
         self.proxyEnabled = self.getBoolState(for: .proxyEnabled)
         self.proxyListUrl = self.getStringState(for: ConfigKey.dhtProxyListUrl)
         self.bootstrap = self.getStringState(for: ConfigKey.accountHostname)
@@ -196,6 +199,11 @@ extension AccountSettings {
     func saveProxyListUrl() {
         let property = ConfigKeyModel(withKey: .dhtProxyListUrl)
         self.accountService.setAccountProperty(property: property, value: self.proxyListUrl, accountId: account.id)
+    }
+
+    func saveNameServer() {
+        let property = ConfigKeyModel(withKey: ConfigKey.ringNsURI)
+        self.accountService.setAccountProperty(property: property, value: self.serverName, accountId: account.id)
     }
 }
 
