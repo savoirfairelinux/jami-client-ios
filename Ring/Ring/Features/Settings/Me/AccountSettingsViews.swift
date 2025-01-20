@@ -125,6 +125,26 @@ struct NotificationsSettingsView: View {
     }
 }
 
+struct NameServerView: View {
+    @StateObject var model: AccountSettings
+
+    init(injectionBag: InjectionBag, account: AccountModel) {
+        _model = StateObject(wrappedValue: AccountSettings(account: account, injectionBag: injectionBag))
+    }
+
+    var body: some View {
+        List {
+            NavigationLink(destination: EditableFieldView(value: $model.serverName, title: "Name server", placeholder: "Name server address", onDisappearAction: {
+                model.saveNameServer()
+            })) {
+                FieldRowView(label: "Name server", value: model.serverName)
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(L10n.AccountPage.notificationTitle)
+    }
+}
+
 struct ConnectivitySettingsView: View {
     @StateObject var model: AccountSettings
 
