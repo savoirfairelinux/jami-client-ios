@@ -37,6 +37,10 @@ struct SettingsSummaryView: View {
                     NavigationLink(destination: NotificationsSettingsView(injectionBag: model.injectionBag, account: model.account)) {
                         SettingsRow(iconName: "bell", title: L10n.AccountPage.notificationsHeader)
                     }
+
+                    NavigationLink(destination: NameServerView(injectionBag: model.injectionBag, account: model.account)) {
+                        SettingsRow(iconName: "server.rack", title: L10n.AccountPage.nameServer)
+                    }
                 }
                 NavigationLink(destination: ConnectivitySettingsView(injectionBag: model.injectionBag, account: model.account)) {
                     SettingsRow(iconName: "link", title: L10n.AccountPage.connectivityAndConfiguration)

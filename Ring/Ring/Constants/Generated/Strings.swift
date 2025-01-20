@@ -153,6 +153,8 @@ internal enum L10n {
     internal static let linkedDevices = L10n.tr("Localizable", "accountPage.linkedDevices", fallback: "Linked devices")
     /// Manage account
     internal static let manageAccount = L10n.tr("Localizable", "accountPage.manageAccount", fallback: "Manage account")
+    /// Name server
+    internal static let nameServer = L10n.tr("Localizable", "accountPage.nameServer", fallback: "Name server")
     /// Confirm new password
     internal static let newPasswordConfirmPlaceholder = L10n.tr("Localizable", "accountPage.newPasswordConfirmPlaceholder", fallback: "Confirm new password")
     /// Enter new password
