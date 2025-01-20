@@ -144,7 +144,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "измењена";
 "conversation.deletedMessage" = "обрисао поруку";
-"conversation.contactBlocked" = "Contact blocked";
+"conversation.contactBlocked" = "Kontakt blokiran";
 
 // Invitations
 "invitations.noInvitations" = "Нема покана";
@@ -508,7 +508,7 @@
 "aboutJami.declaration1" = "Jami, GNU paket, je softver za univerzalnu i distribuiranu ravnopravnu komunikaciju koja poštuje slobodu i privatnost svojih korisnika. Posetite";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
-"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.noWarranty2" = "verzija 3 ili novija za detalje.";
 "aboutJami.contribute" = "Допринеси";
 "aboutJami.feedback" = "Повратна информација";
 "aboutJami.createdBy" = "Created by";
