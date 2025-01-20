@@ -155,7 +155,7 @@ extension NameService: NameRegistrationAdapterDelegate {
             usernameValidationStatus.onNext(.valid)
         } else if response.state == .found {
             usernameValidationStatus.onNext(.alreadyTaken)
-        } else if response.state == .invalidName {
+        } else if response.state == .invalidName || response.state == .error {
             usernameValidationStatus.onNext(.invalid)
         } else {
             log.error("Lookup name error")
