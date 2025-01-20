@@ -35,5 +35,6 @@ typedef NS_ENUM(NSInteger, LookupNameState) {
 @property (nonatomic) LookupNameState state;
 @property (nonatomic, retain) NSString* address;
 @property (nonatomic, retain) NSString* name;
+@property (nonatomic, retain) NSString* requestedName;
 
 @end

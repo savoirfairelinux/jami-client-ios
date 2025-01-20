@@ -46,19 +46,23 @@ static id <NameRegistrationAdapterDelegate> _delegate;
 - (void)registerConfigurationHandler {
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 
-    confHandlers.insert(exportable_callback<ConfigurationSignal::RegisteredNameFound>([&](const std::string&account_id,
-                                                                                          int state,
-                                                                                          const std::string address,
-                                                                                          const std::string& name) {
-        if (NameRegistrationAdapter.delegate) {
-            LookupNameResponse* response = [LookupNameResponse new];
-            response.accountId = [NSString stringWithUTF8String:account_id.c_str()];
-            response.state = (LookupNameState)state;
-            response.address = [NSString stringWithUTF8String:address.c_str()];
-            response.name = [NSString stringWithUTF8String:name.c_str()];
-            [NameRegistrationAdapter.delegate registeredNameFoundWith:response];
-        }
-    }));
+    confHandlers
+        .insert(exportable_callback<ConfigurationSignal::RegisteredNameFound>([&](const std::string& account_id,
+                                                                                  const std::string& requested_name,
+
+                                                                                  int state,
+                                                                                  const std::string address,
+                                                                                  const std::string& name) {
+            if (NameRegistrationAdapter.delegate) {
+                LookupNameResponse* response = [LookupNameResponse new];
+                response.accountId = [NSString stringWithUTF8String:account_id.c_str()];
+                response.state = (LookupNameState)state;
+                response.address = [NSString stringWithUTF8String:address.c_str()];
+                response.name = [NSString stringWithUTF8String:name.c_str()];
+                response.requestedName = [NSString stringWithUTF8String:requested_name.c_str()];
+                [NameRegistrationAdapter.delegate registeredNameFoundWith:response];
+            }
+        }));
 
     confHandlers.insert(exportable_callback<ConfigurationSignal::NameRegistrationEnded>([&](const std::string&account_id,
                                                                                             int state,

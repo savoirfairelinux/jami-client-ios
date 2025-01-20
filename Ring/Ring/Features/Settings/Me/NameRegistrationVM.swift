@@ -35,7 +35,7 @@ class NameRegistrationVM: ObservableObject {
     @Published var name = "" {
         didSet {
             if !name.isEmpty && name != oldValue {
-                self.nameService.lookupName(withAccount: "", nameserver: "", name: name)
+                self.nameService.lookupName(withAccount: account.id, nameserver: "", name: name)
             }
         }
     }

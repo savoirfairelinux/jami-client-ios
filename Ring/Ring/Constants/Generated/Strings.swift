@@ -179,8 +179,8 @@ internal enum L10n {
     internal static let passwordForPin = L10n.tr("Localizable", "accountPage.passwordForPin", fallback: "This account is password encrypted, enter a password to generate PIN code")
     /// Enter account password
     internal static let passwordPlaceholder = L10n.tr("Localizable", "accountPage.passwordPlaceholder", fallback: "Enter account password")
-    /// Passwords do not match
-    internal static let passwordsDoNotMatch = L10n.tr("Localizable", "accountPage.passwordsDoNotMatch", fallback: "Passwords do not match")
+    /// Passwords do not match.
+    internal static let passwordsDoNotMatch = L10n.tr("Localizable", "accountPage.passwordsDoNotMatch", fallback: "Passwords do not match.")
     /// Password updated
     internal static let passwordUpdated = L10n.tr("Localizable", "accountPage.passwordUpdated", fallback: "Password updated")
     /// Enable local peer discovery
@@ -215,8 +215,8 @@ internal enum L10n {
     internal static let proxyListURL = L10n.tr("Localizable", "accountPage.proxyListURL", fallback: "Proxy list URL")
     /// Proxy address
     internal static let proxyPaceholder = L10n.tr("Localizable", "accountPage.proxyPaceholder", fallback: "Proxy address")
-    /// Chosen username is not available
-    internal static let registerNameErrorMessage = L10n.tr("Localizable", "accountPage.registerNameErrorMessage", fallback: "Chosen username is not available")
+    /// The username is unavailable.
+    internal static let registerNameErrorMessage = L10n.tr("Localizable", "accountPage.registerNameErrorMessage", fallback: "The username is unavailable.")
     /// Register a username to help others more easily find and reach you on Jami.
     internal static let registerNameExplanation = L10n.tr("Localizable", "accountPage.registerNameExplanation", fallback: "Register a username to help others more easily find and reach you on Jami.")
     /// If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.
@@ -281,8 +281,6 @@ internal enum L10n {
   internal enum Actions {
     /// Back
     internal static let backAction = L10n.tr("Localizable", "actions.backAction", fallback: "Back")
-    /// Clear
-    internal static let clearAction = L10n.tr("Localizable", "actions.clearAction", fallback: "Clear")
     /// Delete
     internal static let deleteAction = L10n.tr("Localizable", "actions.deleteAction", fallback: "Delete")
     /// Done
@@ -317,16 +315,12 @@ internal enum L10n {
     internal static let alreadylocationSharing = L10n.tr("Localizable", "alerts.alreadylocationSharing", fallback: "Already sharing location with this user")
     /// Do you want to block this contact? The conversation history with this contact will also be deleted permanently.
     internal static let confirmBlockContact = L10n.tr("Localizable", "alerts.confirmBlockContact", fallback: "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.")
-    /// Do you want to clear the conversation with this contact?
-    internal static let confirmClearConversation = L10n.tr("Localizable", "alerts.confirmClearConversation", fallback: "Do you want to clear the conversation with this contact?")
-    /// Clear Conversation
-    internal static let confirmClearConversationTitle = L10n.tr("Localizable", "alerts.confirmClearConversationTitle", fallback: "Clear Conversation")
     /// Do you want to delete this conversation permanently?
     internal static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation", fallback: "Do you want to delete this conversation permanently?")
     /// Do you want to delete the conversation with this contact?
     internal static let confirmDeleteConversationFromContact = L10n.tr("Localizable", "alerts.confirmDeleteConversationFromContact", fallback: "Do you want to delete the conversation with this contact?")
-    /// Delete Conversation
-    internal static let confirmDeleteConversationTitle = L10n.tr("Localizable", "alerts.confirmDeleteConversationTitle", fallback: "Delete Conversation")
+    /// Delete conversation
+    internal static let confirmDeleteConversationTitle = L10n.tr("Localizable", "alerts.confirmDeleteConversationTitle", fallback: "Delete conversation")
     /// Please close application and try to open it again
     internal static let dbFailedMessage = L10n.tr("Localizable", "alerts.dbFailedMessage", fallback: "Please close application and try to open it again")
     /// An error happened when launching Jami
@@ -429,8 +423,6 @@ internal enum L10n {
     internal static let unmuteAudio = L10n.tr("Localizable", "calls.unmuteAudio", fallback: "Unmute microphone")
   }
   internal enum ContactPage {
-    /// Clear Chat
-    internal static let clearConversation = L10n.tr("Localizable", "contactPage.clearConversation", fallback: "Clear Chat")
     /// Leave conversation
     internal static let leaveConversation = L10n.tr("Localizable", "contactPage.leaveConversation", fallback: "Leave conversation")
     /// Send
@@ -449,8 +441,8 @@ internal enum L10n {
     internal static let contactBlocked = L10n.tr("Localizable", "conversation.contactBlocked", fallback: "Contact blocked")
     /// deleted a message
     internal static let deletedMessage = L10n.tr("Localizable", "conversation.deletedMessage", fallback: "deleted a message")
-    /// edited
-    internal static let edited = L10n.tr("Localizable", "conversation.edited", fallback: "edited")
+    /// Edited
+    internal static let edited = L10n.tr("Localizable", "conversation.edited", fallback: "Edited")
     /// An error occurred while saving the image to the gallery.
     internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "An error occurred while saving the image to the gallery.")
     /// You are currently receiving a live location from 
@@ -484,8 +476,8 @@ internal enum L10n {
     }
     /// You have accepted the conversation invitation.
     internal static let synchronizationTitle = L10n.tr("Localizable", "conversation.synchronizationTitle", fallback: "You have accepted the conversation invitation.")
-    /// yourself
-    internal static let yourself = L10n.tr("Localizable", "conversation.yourself", fallback: "yourself")
+    /// You
+    internal static let yourself = L10n.tr("Localizable", "conversation.yourself", fallback: "You")
   }
   internal enum CreateAccount {
     /// Join Jami
@@ -502,10 +494,10 @@ internal enum L10n {
     internal static let encryptionEnabled = L10n.tr("Localizable", "createAccount.encryptionEnabled", fallback: "Encryption enabled")
     /// Encrypt account with password
     internal static let encryptTitle = L10n.tr("Localizable", "createAccount.encryptTitle", fallback: "Encrypt account with password")
-    /// invalid username
-    internal static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername", fallback: "invalid username")
-    /// Loading
-    internal static let loading = L10n.tr("Localizable", "createAccount.loading", fallback: "Loading")
+    /// Invalid username. Please enter a valid username.
+    internal static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername", fallback: "Invalid username. Please enter a valid username.")
+    /// Loading…
+    internal static let loading = L10n.tr("Localizable", "createAccount.loading", fallback: "Loading…")
     /// looking for availability…
     internal static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability", fallback: "looking for availability…")
     /// You can choose a username to help others more easily find and reach you on Jami.
@@ -524,8 +516,8 @@ internal enum L10n {
     internal static let usernameNotRegisteredMessage = L10n.tr("Localizable", "createAccount.UsernameNotRegisteredMessage", fallback: "Account was created but username was not registered")
     /// Network error
     internal static let usernameNotRegisteredTitle = L10n.tr("Localizable", "createAccount.UsernameNotRegisteredTitle", fallback: "Network error")
-    /// username is available
-    internal static let usernameValid = L10n.tr("Localizable", "createAccount.usernameValid", fallback: "username is available")
+    /// The username is available.
+    internal static let usernameValid = L10n.tr("Localizable", "createAccount.usernameValid", fallback: "The username is available.")
     /// Adding account
     internal static let waitCreateAccountTitle = L10n.tr("Localizable", "createAccount.waitCreateAccountTitle", fallback: "Adding account")
   }
@@ -600,12 +592,12 @@ internal enum L10n {
     internal static let contactAdded = L10n.tr("Localizable", "generatedMessage.contactAdded", fallback: "Invitation received")
     /// was blocked from the conversation.
     internal static let contactBlocked = L10n.tr("Localizable", "generatedMessage.contactBlocked", fallback: "was blocked from the conversation.")
-    /// left the conversation.
-    internal static let contactLeftConversation = L10n.tr("Localizable", "generatedMessage.contactLeftConversation", fallback: "left the conversation.")
+    /// has left the conversation.
+    internal static let contactLeftConversation = L10n.tr("Localizable", "generatedMessage.contactLeftConversation", fallback: "has left the conversation.")
     /// was unblocked from the conversation.
     internal static let contactUnblocked = L10n.tr("Localizable", "generatedMessage.contactUnblocked", fallback: "was unblocked from the conversation.")
-    /// joined the conversation.
-    internal static let invitationAccepted = L10n.tr("Localizable", "generatedMessage.invitationAccepted", fallback: "joined the conversation.")
+    /// has joined the conversation.
+    internal static let invitationAccepted = L10n.tr("Localizable", "generatedMessage.invitationAccepted", fallback: "has joined the conversation.")
     /// was invited to join the conversation.
     internal static let invitationReceived = L10n.tr("Localizable", "generatedMessage.invitationReceived", fallback: "was invited to join the conversation.")
     /// Live location sharing
