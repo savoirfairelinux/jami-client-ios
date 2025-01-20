@@ -292,14 +292,14 @@ class JamiSearchViewModel: ObservableObject {
         self.nameService.usernameLookupStatus
             .observe(on: MainScheduler.instance)
             .filter({ [weak self] responce in
-                responce.name == self?.searchBarText.value
+                responce.requested_name == self?.searchBarText.value
             })
             .take(1)
             .subscribe(onNext: { [weak self] lookupResponse in
                 guard let self = self,
                       let account = self.accountsService.currentAccount else { return }
                 guard lookupResponse.state == .found,
-                      lookupResponse.name == self.searchBarText.value else {
+                      lookupResponse.requested_name == self.searchBarText.value else {
                     self.updateSearchStatus()
                     return
                 }
