@@ -238,7 +238,7 @@
 "alerts.confirmBlockContact" = "Vrei să blochezi acest contact? Conversația cu acest contact va fi ștearsă definitiv.";
 "alerts.confirmDeleteConversation" = "Vrei să ștergi definitiv această conversație?";
 "alerts.confirmDeleteConversationFromContact" = "Vrei să ștergi conversația cu acest contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Șterge conversația";
 "alerts.noMediaPermissionsTitle" = "Nu ai permis accesul la Media";
 "alerts.noLibraryPermissionsTitle" = "Nu ai permis accesul la poze";
 "alerts.noLocationPermissionsTitle" = "Nu ai permis localizarea";

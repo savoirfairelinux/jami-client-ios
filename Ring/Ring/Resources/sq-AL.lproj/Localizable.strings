@@ -238,7 +238,7 @@
 "alerts.confirmBlockContact" = "Doni të bllokohet ky kontakt? Edhe historiku i bisedës me këtë kontakt do të fshihet përgjithmonëy.";
 "alerts.confirmDeleteConversation" = "Doni të fshihet përgjithmonë kjo bisedë?";
 "alerts.confirmDeleteConversationFromContact" = "Doni të fshihet biseda me këtë kontakt?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Fshije bisedën";
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
 "alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
 "alerts.noLocationPermissionsTitle" = "S’u akordua hyrje te vendndodhje";

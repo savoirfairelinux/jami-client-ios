@@ -144,7 +144,7 @@
 "conversation.yourself" = "yourself";
 "conversation.edited" = "izmenjena";
 "conversation.deletedMessage" = "obrisao poruku";
-"conversation.contactBlocked" = "Contact blocked";
+"conversation.contactBlocked" = "Kontakt blokiran";
 
 // Invitations
 "invitations.noInvitations" = "Nema pozivnica";
@@ -437,7 +437,7 @@
 "contactPage.startAudioCall" = "Započni audio poziv";
 "contactPage.startVideoCall" = "Započnite video poziv";
 "contactPage.send" = "Pošalji";
-"contactPage.leaveConversation" = "Оставите разговор";
+"contactPage.leaveConversation" = "Napusti razgovor";
 
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Почињење...";
@@ -479,7 +479,7 @@
 "generalSettings.videoAcceleration" = "Omogući video ubrzanje";
 "generalSettings.fileTransfer" = "Prenos podatka";
 "generalSettings.locationSharing" = "Дељење локације";
-"generalSettings.automaticAcceptIncomingFiles" = "Автоматски прихватају долазне датотеке";
+"generalSettings.automaticAcceptIncomingFiles" = "Automatski prihvati dolazne datoteke";
 "generalSettings.acceptTransferLimit" = "Прихватајте лимит преноса";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Ограничити трајање поделе локације";
@@ -508,7 +508,7 @@
 "aboutJami.declaration1" = "Jami, GNU paket, je softver za univerzalnu i distribuiranu ravnopravnu komunikaciju koja poštuje slobodu i privatnost svojih korisnika. Posetite";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
-"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.noWarranty2" = "verzija 3 ili novija za detalje.";
 "aboutJami.contribute" = "Doprinesi";
 "aboutJami.feedback" = "Povratna informacija";
 "aboutJami.createdBy" = "Created by";

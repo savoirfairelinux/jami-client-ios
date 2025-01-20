@@ -238,7 +238,7 @@
 "alerts.confirmBlockContact" = "¿Quieres bloquear este contacto? El historial de conversaciones con este contacto también se eliminará de forma permanente.";
 "alerts.confirmDeleteConversation" = "¿Quieres eliminar esta conversación de forma permanente?";
 "alerts.confirmDeleteConversationFromContact" = "¿Quieres eliminar la conversación con este contacto?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Eliminar conversación";
 "alerts.noMediaPermissionsTitle" = "Permiso a medios no concedido";
 "alerts.noLibraryPermissionsTitle" = "Acceso a librería de fotos no concedido";
 "alerts.noLocationPermissionsTitle" = "Acceso a la ubicación no concedido";

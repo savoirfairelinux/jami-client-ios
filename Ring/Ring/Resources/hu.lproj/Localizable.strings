@@ -109,7 +109,7 @@
 "smartlist.noConversation" = "Beszélgetés nem található";
 "smartlist.searchBarPlaceholder" = "Név megadása…";
 "smartlist.searchBar" = "Keresés";
-"smartlist.noNetworkConnectivity" = "Nincs hálózati csatlakozás";
+"smartlist.noNetworkConnectivity" = "Nincs hálózati kapcsolat";
 "smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
 "smartlist.accountsTitle" = "Fiókok";
 "smartlist.addAccountButton" = "+ Fiók hozzáadása";
@@ -238,7 +238,7 @@
 "alerts.confirmBlockContact" = "Szeretne letiltani ezt a kapcsolattartót? A beszélgetés előzményei a kapcsolattartóval együtt véglegesen törlésre kerülnek.";
 "alerts.confirmDeleteConversation" = "Szeretne véglegesen törölni ezt a beszélgetést?";
 "alerts.confirmDeleteConversationFromContact" = "Szeretne törli a beszélgetést ezzel a kapcsolattartóval?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Beszélgetés törlése";
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
 "alerts.noLibraryPermissionsTitle" = "Fényképkönyvtár hozzáférése nem engedélyezett";
 "alerts.noLocationPermissionsTitle" = "Hozzáférés a tartózkodási hely nincs engedélyezve";
