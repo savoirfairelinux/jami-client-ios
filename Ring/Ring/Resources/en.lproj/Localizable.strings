@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "You";
+"conversation.edited" = "Edited";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -180,7 +180,7 @@
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.usernameValid" = "username is available";
-"createAccount.loading" = "Loading";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Adding account";
 "createAccount.UsernameNotRegisteredTitle" = "Network error";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Manage account";
 "accountPage.encryptAccount" = "Encrypt account with a password";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Linked devices";
