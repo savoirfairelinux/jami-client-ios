@@ -1,4 +1,28 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29998c7b_9a650224",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 9
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-01-22T21:32:39Z",
+      "side": 1,
+      "message": "@kateryna.kostiuk@savoirfairelinux.com is it possible to have the variable in the string to make a complete sentence? It can make translations better. Thank you",
+      "range": {
+        "startLine": 467,
+        "startChar": 41,
+        "endLine": 467,
+        "endChar": 69
+      },
+      "revId": "2c113daae732ca5d1b37bc8cbb1e19f11bcbe800",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ],
   "submitRequirementResults": []
 }
