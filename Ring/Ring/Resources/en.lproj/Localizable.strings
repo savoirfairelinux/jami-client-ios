@@ -159,7 +159,7 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.haveAccount" = "I already have an account";
+"welcome.haveAccount" = "Already have an account?";
 "welcome.linkDevice" = "Import from another device";
 "welcome.linkBackup" = "Import from archive backup";
 "welcome.createAccount" = "Join";
@@ -175,7 +175,7 @@
 "createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "Need an account?";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "username already taken";
