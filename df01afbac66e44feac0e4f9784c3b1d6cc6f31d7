@@ -16,6 +16,24 @@
       "message": "This should be discussed with the project team, as I\u0027m not certain if these strings were collectively chosen by the entire project team on Jami Web during their initial implementation. They appear to be consistent across all other clients.\n@adrien.beraud@savoirfairelinux.com",
       "revId": "df01afbac66e44feac0e4f9784c3b1d6cc6f31d7",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e0cc84f_94a57ed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-01-23T03:29:32Z",
+      "side": 1,
+      "message": "Can you please provide your 40-character Jami ID? It can make it easier to discuss. Thank you",
+      "parentUuid": "93299667_5a77675b",
+      "revId": "df01afbac66e44feac0e4f9784c3b1d6cc6f31d7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
