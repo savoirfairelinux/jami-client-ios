@@ -16,6 +16,24 @@
       "message": "It is different with other platforms. On qt client we use \"Join Jami\" https://review.jami.net/c/jami-client-qt/+/30068.",
       "revId": "938e88e77d8a03ee688707a25864be309c949899",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157af162_82a212d3",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-01-24T18:17:46Z",
+      "side": 1,
+      "message": "@adrien.beraud@savoirfairelinux.com\nHow do you want the terminology to be unified across *desktop*, *mobile*, and *web*?\n\nhttps://review.jami.net/c/jami-client-qt/+/30068\nhttps://review.jami.net/c/jami-client-android/+/30069\nhttps://review.jami.net/c/jami-client-ios/+/30067\n\n### A. User without Jami account\n1. Join Jami\n2. Join Jami?\n3. Create Jami account\n4. Create Jami account?\n5. Need an account?\n6. Something else?\n\n### B. User with Jami account\n1. I already have an account\n2. Already have an account?\n3. Import Jami account\n4. Something else?\n\nThank you",
+      "parentUuid": "7fc68b88_131a9921",
+      "revId": "938e88e77d8a03ee688707a25864be309c949899",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
