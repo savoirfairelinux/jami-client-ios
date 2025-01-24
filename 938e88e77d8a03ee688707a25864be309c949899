@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fc68b88_131a9921",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-01-24T15:44:53Z",
+      "side": 1,
+      "message": "It is different with other platforms. On qt client we use \"Join Jami\" https://review.jami.net/c/jami-client-qt/+/30068.",
+      "revId": "938e88e77d8a03ee688707a25864be309c949899",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
