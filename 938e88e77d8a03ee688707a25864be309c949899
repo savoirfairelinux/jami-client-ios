@@ -52,6 +52,24 @@
       "parentUuid": "157af162_82a212d3",
       "revId": "938e88e77d8a03ee688707a25864be309c949899",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fe272d5_71fb5a6f",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-01-27T20:55:32Z",
+      "side": 1,
+      "message": "Can \"Join Jami\" please be updated to something like \"Join {}\" where `{}` is replaced by a variable which contains the Jami protocol name? Thank you",
+      "parentUuid": "1e582465_01de1759",
+      "revId": "938e88e77d8a03ee688707a25864be309c949899",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ],
   "submitRequirementResults": []
