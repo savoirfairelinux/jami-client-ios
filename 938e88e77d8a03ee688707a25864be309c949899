@@ -34,6 +34,24 @@
       "parentUuid": "7fc68b88_131a9921",
       "revId": "938e88e77d8a03ee688707a25864be309c949899",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e582465_01de1759",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-01-27T20:50:08Z",
+      "side": 1,
+      "message": "Suggested that Jami web be updated instead.\n\nPlease see comment at https://review.jami.net/c/jami-web/+/30012\n\nCf.\nhttps://review.jami.net/c/jami-client-qt/+/30068\nhttps://review.jami.net/c/jami-client-android/+/30069\nhttps://review.jami.net/c/jami-client-ios/+/30067\n\nThank you",
+      "parentUuid": "157af162_82a212d3",
+      "revId": "938e88e77d8a03ee688707a25864be309c949899",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ],
   "submitRequirementResults": []
