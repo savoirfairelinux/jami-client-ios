@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "பதில்";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "நீ";
+"conversation.edited" = "தொகுப்பு";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "ஜாமிக்கு சேரவும்";
 "createAccount.lookingForUsernameAvailability" = "கிடைக்கும் தன்மையை தேடும்...";
-"createAccount.invalidUsername" = "செல்லுபடியாகும் பயனர் பெயர்";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "ஏற்கனவே எடுக்கப்பட்ட பயனர் பெயர்";
-"createAccount.usernameValid" = "பயனர் பெயர் கிடைக்கிறது";
-"createAccount.loading" = "சுமை";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "கணக்கு சேர்க்கல்";
 "createAccount.UsernameNotRegisteredTitle" = "நெட்வொர்க் தவறு";
 "createAccount.UsernameNotRegisteredMessage" = "கணக்கு உருவாக்கப்பட்டது ஆனால் பயனர் பெயர் பதிவு செய்யப்படவில்லை";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "கணக்கு கடவுச்சொல்லை உள்ளிடவும்";
 "accountPage.usernamePlaceholder" = "விரும்பிய பயனர்பெயரை உள்ளிடவும்";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "பதிவு";
 "accountPage.usernameRegisterAction" = "பதிவு";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "கணக்கை நிர்வகிக்கவும்";
 "accountPage.encryptAccount" = "கடவுச்சொல்லுடன் கணக்கை குறியாக்கம் செய்யவும்";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "கடவுச்சொற்கள் பொருந்தாது";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "இணைக்கப்பட்ட சாதனங்கள்";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "அழைப்பு";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "தொலைபேசி அழைப்பு தவறியது";
 "generatedMessage.missedIncomingCall" = "தவறவிட்ட அழைப்பு";
 "generatedMessage.liveLocationSharing" = "நேரடி இருப்பிட பகிர்வு";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

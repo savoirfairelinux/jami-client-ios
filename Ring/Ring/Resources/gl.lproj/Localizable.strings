@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "En resposta a";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "Ti";
+"conversation.edited" = "Editado";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Unirse a Jami";
 "createAccount.lookingForUsernameAvailability" = "Buscando disponibilidade...";
-"createAccount.invalidUsername" = "nome de usuaria non válido";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "o nome de usuaria xa está collido";
-"createAccount.usernameValid" = "o nome de usuario está dispoñible";
-"createAccount.loading" = "Cargando";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Engadindo conta";
 "createAccount.UsernameNotRegisteredTitle" = "Fallo na rede";
 "createAccount.UsernameNotRegisteredMessage" = "Creou conta pero non rexistrou o nome de usuario";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Escribe o contrasinal da conta";
 "accountPage.usernamePlaceholder" = "Introduza o nome de usuario deseado";
-"accountPage.registerNameErrorMessage" = "O identificador elexido non está dispoñible";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Registro";
 "accountPage.usernameRegisterAction" = "Rexistro";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Xestionar conta";
 "accountPage.encryptAccount" = "Encripta a conta cunha contrasinal";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Non concordan os contrasinais";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Dispositivos ligados";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Convite recibido";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Chamada sen resposta";
 "generatedMessage.missedIncomingCall" = "Chamada entrante perdida";
 "generatedMessage.liveLocationSharing" = "Compartillo de localización en directo";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

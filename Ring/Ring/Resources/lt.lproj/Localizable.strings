@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "Jūs";
+"conversation.edited" = "Išdavinimas";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Adresatas užblokuotas";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.lookingForUsernameAvailability" = "tikrinamas prieinamumas…";
-"createAccount.invalidUsername" = "neteisingas naudotojo vardas";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "naudotojo vardas jau užimtas";
-"createAccount.usernameValid" = "naudotojo vardas yra prieinamas";
-"createAccount.loading" = "Įkeliama";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Pridedama paskyra";
 "createAccount.UsernameNotRegisteredTitle" = "Tinklo klaida";
 "createAccount.UsernameNotRegisteredMessage" = "Paskyra buvo sukurta, bet naudotojo vardas nebuvo užregistruotas";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Įveskite paskyros slaptažodį";
 "accountPage.usernamePlaceholder" = "Įveskite pageidaujamą naudotojo vardą";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Registruoti";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Tvarkyti paskyrą";
 "accountPage.encryptAccount" = "Šifruoti paskyrą slaptažodžiu";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Slaptažodžiai nesutampa";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Slaptažodis sukurtas";
 "accountPage.passwordUpdated" = "Slaptažodis atnaujintas";
 "accountPage.linkedDevices" = "Susieti įrenginiai";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Gautas pakvietimas";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Praleistas gaunamasis skambutis";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Vaizdo nustatymai";

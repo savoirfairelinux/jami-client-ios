@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "উত্তর";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "তুমি";
+"conversation.edited" = "সম্পাদনা";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "জামিতে যোগদান করুন";
 "createAccount.lookingForUsernameAvailability" = "উপলব্ধতা খুঁজছেন...";
-"createAccount.invalidUsername" = "অবৈধ ব্যবহারকারীর নাম";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "ব্যবহারকারীর নাম ইতিমধ্যে নেওয়া হয়েছে";
-"createAccount.usernameValid" = "ব্যবহারকারীর নাম পাওয়া যায়";
-"createAccount.loading" = "লোডিং";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "যোগ করা অ্যাকাউন্ট";
 "createAccount.UsernameNotRegisteredTitle" = "নেটওয়ার্ক ত্রুটি";
 "createAccount.UsernameNotRegisteredMessage" = "অ্যাকাউন্ট তৈরি করা হয়েছে কিন্তু ব্যবহারকারীর নাম নিবন্ধিত হয়নি";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "অ্যাকাউন্টের পাসওয়ার্ড লিখুন";
 "accountPage.usernamePlaceholder" = "পছন্দসই ব্যবহারকারীর নাম লিখুন";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "নিবন্ধন";
 "accountPage.usernameRegisterAction" = "নিবন্ধন";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "অ্যাকাউন্ট পরিচালনা";
 "accountPage.encryptAccount" = "পাসওয়ার্ড দিয়ে অ্যাকাউন্ট এনক্রিপ্ট করুন";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "পাসওয়ার্ড মিলছে না";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "সংযুক্ত ডিভাইস";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "আমন্ত্রণ প্রাপ্তি";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "মিস করা কল";
 "generatedMessage.missedIncomingCall" = "মিস করা ইনকামিং কল";
 "generatedMessage.liveLocationSharing" = "লাইভ অবস্থান ভাগ";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "V odpovedi na";
 "conversation.repliedTo" = "Odpovedať";
-"conversation.yourself" = "seba";
-"conversation.edited" = "upravené";
+"conversation.yourself" = "Ty...";
+"conversation.edited" = "Vytvorené";
 "conversation.deletedMessage" = "odstránil správu";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Pridajte sa k Jami";
 "createAccount.lookingForUsernameAvailability" = "Overovanie dostupnosti...";
-"createAccount.invalidUsername" = "neplatné používateľské meno";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "používateľské meno je už použité";
-"createAccount.usernameValid" = "Používateľské meno je dostupné";
-"createAccount.loading" = "Načítavanie";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Pridávanie účtu";
 "createAccount.UsernameNotRegisteredTitle" = "Chyba siete";
 "createAccount.UsernameNotRegisteredMessage" = "Účet bol vytvorený, ale používateľské meno nebolo zaregistrované";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Zadajte heslo k účtu";
 "accountPage.usernamePlaceholder" = "Zadajte želané používateľské meno";
-"accountPage.registerNameErrorMessage" = "Zvolené používateľské meno nie je dostupné";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Registruje sa";
 "accountPage.usernameRegisterAction" = "Registrovať";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Spravovať účet";
 "accountPage.encryptAccount" = "Zšifrovať účet heslom";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Heslá sa nezhodujú";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Heslo vytvorené";
 "accountPage.passwordUpdated" = "Heslo aktualizované";
 "accountPage.linkedDevices" = "Prepojené zariadenia";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Bola prijatá pozvánka";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Zmeškaný odchádzajúci hovor";
 "generatedMessage.missedIncomingCall" = "Zmeškaný prichádzajúci hovor";
 "generatedMessage.liveLocationSharing" = "Živo zdieľanie polohy";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

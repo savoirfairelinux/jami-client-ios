@@ -141,7 +141,7 @@
 "conversation.synchronizationMessage" = "Nous attendons que %@ se connecte afin de synchroniser la conversation.";
 "conversation.inReplyTo" = "En réponse à";
 "conversation.repliedTo" = "répondre à";
-"conversation.yourself" = "vous-même";
+"conversation.yourself" = "Vous";
 "conversation.edited" = "Modifié";
 "conversation.deletedMessage" = "a supprimé le message";
 "conversation.contactBlocked" = "Contact bloqué";
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Rejoindre Jami";
 "createAccount.lookingForUsernameAvailability" = "Vérification de la disponibilité...";
-"createAccount.invalidUsername" = "nom d'utilisateur invalide ";
+"createAccount.invalidUsername" = "Nom d'utilisateur incorrect. Veuillez saisir un nom d'utilisateur valide.";
 "createAccount.usernameAlreadyTaken" = "nom d'utilisateur déjà pris";
-"createAccount.usernameValid" = "Ce nom d'utilisateur est disponible";
-"createAccount.loading" = "En chargement";
+"createAccount.usernameValid" = "Le nom d'utilisateur est disponible.";
+"createAccount.loading" = "Chargement...";
 "createAccount.waitCreateAccountTitle" = "Ajouter un compte";
 "createAccount.UsernameNotRegisteredTitle" = "Erreur de réseau";
 "createAccount.UsernameNotRegisteredMessage" = "Le compte a été créé mais le nom d'utilisateur n'a pas été enregistré";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contactez-moi par l'identifiant : %s sur la plateforme distribuée de communication Jami. https://jami.net ";
 "accountPage.passwordPlaceholder" = "Entrer le mot de passe de votre compte";
 "accountPage.usernamePlaceholder" = "Entrez le nom d'utilisateur souhaité";
-"accountPage.registerNameErrorMessage" = "Le nom d'utilisateur choisi n'est pas disponible";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Inscription";
 "accountPage.usernameRegisterAction" = "Inscription";
 "accountPage.usernameRegistrationFailedTitle" = "L'enregistrement a échoué";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Gérer le compte";
 "accountPage.encryptAccount" = "Chiffrer mon compte avec un mot de passe";
 "accountPage.passwordExplanation" = "Un compte Jami est créé et stocké localement uniquement sur cet appareil, sous la forme d'une archive contenant les clés de votre compte. L'accès à cette archive peut éventuellement être protégé par un mot de passe.";
-"accountPage.passwordsDoNotMatch" = "Les mots de passe ne concordent pas";
+"accountPage.passwordsDoNotMatch" = "Les mots de passe ne correspondent pas.";
 "accountPage.passwordCreated" = "Mot de passe créé";
 "accountPage.passwordUpdated" = "Mot de passe modifié";
 "accountPage.linkedDevices" = "Appareils associés";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Invitation reçue";
 "generatedMessage.swarmCreated" = "La conversation a été créée";
 "generatedMessage.invitationReceived" = "a été invité à rejoindre la conversation";
-"generatedMessage.invitationAccepted" = " a rejoint la conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "Vous avez rejoint la conversation.";
 "generatedMessage.contactBlocked" = "a été bloqué de la conversation.";
 "generatedMessage.contactUnblocked" = "a été réintégré dans la conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Appel sortant manqué";
 "generatedMessage.missedIncomingCall" = "Appel entrant manqué";
 "generatedMessage.liveLocationSharing" = "Partage de position en temps réel";
-"generatedMessage.contactLeftConversation" = "a quitté la conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Paramètres vidéo ";

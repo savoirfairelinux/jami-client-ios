@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "ಇದಕ್ಕೆ ಪ್ರತಿಕ್ರಿಯೆಯಾಗಿ";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "ನೀನೇ";
+"conversation.edited" = "ಸಂಪಾದನೆ";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "ಜಾಮಿಗೆ ಸೇರಿ";
 "createAccount.lookingForUsernameAvailability" = "ಲಭ್ಯತೆಗಾಗಿ ಹುಡುಕುತ್ತಿರುವ...";
-"createAccount.invalidUsername" = "ಅಮಾನ್ಯ ಬಳಕೆದಾರ ಹೆಸರು";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "ಈಗಾಗಲೇ ತೆಗೆದ ಬಳಕೆದಾರ ಹೆಸರು";
-"createAccount.usernameValid" = "ಬಳಕೆದಾರ ಹೆಸರು ಲಭ್ಯವಿದೆ";
-"createAccount.loading" = "ಲೋಡ್";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "ಖಾತೆ ಸೇರ್ಪಡೆ";
 "createAccount.UsernameNotRegisteredTitle" = "ನೆಟ್ವರ್ಕ್ ದೋಷ";
 "createAccount.UsernameNotRegisteredMessage" = "ಖಾತೆಯನ್ನು ರಚಿಸಲಾಗಿದೆ ಆದರೆ ಬಳಕೆದಾರ ಹೆಸರು ನೋಂದಾಯಿಸಲಾಗಿಲ್ಲ";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "ಖಾತೆ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";
 "accountPage.usernamePlaceholder" = "ಬಯಸಿದ ಬಳಕೆದಾರ ಹೆಸರನ್ನು ನಮೂದಿಸಿ";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "ನೋಂದಣಿ";
 "accountPage.usernameRegisterAction" = "ನೋಂದಣಿ";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "ಖಾತೆಯನ್ನು ನಿರ್ವಹಿಸಿ";
 "accountPage.encryptAccount" = "ಪಾಸ್ವರ್ಡ್ನೊಂದಿಗೆ ಖಾತೆಯನ್ನು ಎನ್ಕ್ರಿಪ್ಟ್ ಮಾಡಿ";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "ಪಾಸ್ವರ್ಡ್ಗಳು ಹೊಂದಿಕೆಯಾಗುವುದಿಲ್ಲ";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "ಸಂಪರ್ಕಿತ ಸಾಧನಗಳು";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "ಸ್ವೀಕರಿಸಿದ ಆಹ್ವಾನ";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "ತಪ್ಪಿಸಿಕೊಂಡ ಹೊರಹೋಗುವ ಕರೆ";
 "generatedMessage.missedIncomingCall" = "ತಪ್ಪಿದ ಕರೆ";
 "generatedMessage.liveLocationSharing" = "ಲೈವ್ ಸ್ಥಳ ಹಂಚಿಕೆ";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

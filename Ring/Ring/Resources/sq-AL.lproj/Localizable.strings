@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Po pritet që %@ të lidhet, që të njëkohësohet biseda…";
 "conversation.inReplyTo" = "Në përgjigje të";
 "conversation.repliedTo" = "iu përgjigj";
-"conversation.yourself" = "vetes";
-"conversation.edited" = "u përpunua";
+"conversation.yourself" = "Ju";
+"conversation.edited" = "U përpunua";
 "conversation.deletedMessage" = "fshiu një mesazh";
 "conversation.contactBlocked" = "Kontakti u bllokua ";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Bëhuni pjesë e Jami-t";
 "createAccount.lookingForUsernameAvailability" = "po shihet për pasje…";
-"createAccount.invalidUsername" = "emër përdoruesi i pavlefshëm";
+"createAccount.invalidUsername" = "Emër i pavlefshëm përdoruesi. Ju lutemi, jepni një emër përdoruesi të vlefshëm.";
 "createAccount.usernameAlreadyTaken" = "emër përdoruesi tashmë i zënë";
-"createAccount.usernameValid" = "emri i përdoruesit është i lirë";
-"createAccount.loading" = "Po ngarkohet";
+"createAccount.usernameValid" = "Emri i përdoruesit është i lirë.";
+"createAccount.loading" = "Po ngarkohet…";
 "createAccount.waitCreateAccountTitle" = "Po shtohet llogaria";
 "createAccount.UsernameNotRegisteredTitle" = "Gabim rrjeti";
 "createAccount.UsernameNotRegisteredMessage" = "Llogaria u krijua, por emri i përdoruesit s’u regjistrua";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Lidhuni me mua duke përdorur “%s” në platformën e komunikimeve të shpërndara Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Jepni fjalëkalim llogarie";
 "accountPage.usernamePlaceholder" = "Jepni emrin e dëshiruar të përdoruesit";
-"accountPage.registerNameErrorMessage" = "Emri i përdoruesit i zgjedhur s’është i lirë";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Regjistrim";
 "accountPage.usernameRegisterAction" = "Regjistrohuni";
 "accountPage.usernameRegistrationFailedTitle" = "Regjistrimi dështoi";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Administroni llogari";
 "accountPage.encryptAccount" = "Fshehtëzoni llogarinë me një fjalëkalim";
 "accountPage.passwordExplanation" = "Një llogari Jami krijohet dhe depozitohet lokalisht vetëm në këtë pajisje, si një arkiv që përmban kyçet e veta të llogarisë. Hyrja në arkiv, në daçi, mund të mbrohet me një fjalëkalimi.";
-"accountPage.passwordsDoNotMatch" = "Fjalëkalimet nuk përputhen";
+"accountPage.passwordsDoNotMatch" = "Fjalëkalimet nuk përputhen.";
 "accountPage.passwordCreated" = "U krijua fjalëkalim";
 "accountPage.passwordUpdated" = "U përditësua fjalëkalim";
 "accountPage.linkedDevices" = "Pajisje të lidhura";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Ftesa u mor";
 "generatedMessage.swarmCreated" = "Biseda ui krijua";
 "generatedMessage.invitationReceived" = "u ftua të marrë pjesë në bisedë.";
-"generatedMessage.invitationAccepted" = "erdhi në bisedë.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "Erdhët në bisedë.";
 "generatedMessage.contactBlocked" = "u bllokua prej bisede.";
 "generatedMessage.contactUnblocked" = "u zhbllokua prej bisede.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie e vendndodhjes drejtpërsëdrejti";
-"generatedMessage.contactLeftConversation" = "e braktisi bisedën.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Rregullime videoje";

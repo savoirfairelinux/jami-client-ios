@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Vestluse sünkroniseerimiseks ootame kasutaja %@ ühendust.";
 "conversation.inReplyTo" = "Vastuseks kasutajale";
 "conversation.repliedTo" = "vastusena";
-"conversation.yourself" = "iseendale";
-"conversation.edited" = "muudetud";
+"conversation.yourself" = "Sina";
+"conversation.edited" = "Muudetud";
 "conversation.deletedMessage" = "kustutas sõnumi";
 "conversation.contactBlocked" = "Kontakt on blokeeritud";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Liitu Jamiga";
 "createAccount.lookingForUsernameAvailability" = "uurime kättesaadavust...";
-"createAccount.invalidUsername" = "vigane kasutajanimi";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "kasutajanimi on juba võetud";
-"createAccount.usernameValid" = "kasutajanimi on saadaval";
-"createAccount.loading" = "Laadime andmeid";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Lisame kasutajakontot";
 "createAccount.UsernameNotRegisteredTitle" = "Võrgu viga";
 "createAccount.UsernameNotRegisteredMessage" = "Kasutajakonto on nüüd loodud, kuid kasutajanimi jäi registreereerimata";
@@ -238,7 +238,7 @@
 "alerts.confirmBlockContact" = "Kas sa oled kindel, et soovid selle kontakti blokeerida? Samaga kustutatakse jäädavalt kogu tema vestlusajalugu.";
 "alerts.confirmDeleteConversation" = "Kas sa oled kindel, et soovid selle vestluse lõplikult kustutada?";
 "alerts.confirmDeleteConversationFromContact" = "Kas sa oled kindel, et soovid vestluse selle kontaktiga kustutada?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Kustuta vestlus";
 "alerts.noMediaPermissionsTitle" = "Meedia kasutamiseks puudub luba";
 "alerts.noLibraryPermissionsTitle" = "Fotogalerii kasutamiseks puudub luba";
 "alerts.noLocationPermissionsTitle" = "Asukoha kasutamiseks puudub luba";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Kasutades „%s“ suhtle minuga hajutatud suhtlusvõrgus Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Sisesta kasutajakonto salasõna";
 "accountPage.usernamePlaceholder" = "Sisesta soovitud kasutajanimi";
-"accountPage.registerNameErrorMessage" = "Valitud kasutajanimi ei ole saadaval";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Registreerime";
 "accountPage.usernameRegisterAction" = "Registreeri";
 "accountPage.usernameRegistrationFailedTitle" = "Registreerumine ei õnnestunud";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Halda kasutajakontot";
 "accountPage.encryptAccount" = "Krüpti kasutajakonto salasõnaga";
 "accountPage.passwordExplanation" = "Jami kasutajakonto on registreeritud ja salvestatud vaid selles nutiseadmes ja olemuselt on tegemist arhiiviga, kus leiduvad sinu krüptovõtmed. Ligipääsu sellele arhiivile saad soovi korral turvata salasõnaga.";
-"accountPage.passwordsDoNotMatch" = "Salasõnad ei klapi";
+"accountPage.passwordsDoNotMatch" = "Salasõnad ei klapi.";
 "accountPage.passwordCreated" = "Salasõna on loodud";
 "accountPage.passwordUpdated" = "Salasõna on uuendatud";
 "accountPage.linkedDevices" = "Seotud seadmed";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Said kutse";
 "generatedMessage.swarmCreated" = "Vestlus on loodud";
 "generatedMessage.invitationReceived" = "sai kutse liitumiseks vestlusega.";
-"generatedMessage.invitationAccepted" = "liitus vestlusega.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "Sina liitusid vestlusega.";
 "generatedMessage.contactBlocked" = "blokeeriti sellest vestlusest.";
 "generatedMessage.contactUnblocked" = "blokeering sellest vestlusest eemaldati.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Väljuv kõne jäi märkamata";
 "generatedMessage.missedIncomingCall" = "Saabuv kõne jäi märkamata";
 "generatedMessage.liveLocationSharing" = "Asukoha jagamine reaalajas";
-"generatedMessage.contactLeftConversation" = "lahkus vestlusest.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video seadistused";

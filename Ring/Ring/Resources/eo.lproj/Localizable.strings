@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "En respondo al";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "Vi";
+"conversation.edited" = "Redaktita";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Aliĝu al Jami";
 "createAccount.lookingForUsernameAvailability" = "serĉante haveblecon...";
-"createAccount.invalidUsername" = "nevalida uzantnomo";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "uzantnomo jam prenita";
-"createAccount.usernameValid" = "uzantnomo estas havebla";
-"createAccount.loading" = "Ŝarĝas";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Aldonanta konton";
 "createAccount.UsernameNotRegisteredTitle" = "Reta eraro";
 "createAccount.UsernameNotRegisteredMessage" = "Konto estis kreita sed uzantnomo ne estis registrita";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Enigu la pasvorton de la konto";
 "accountPage.usernamePlaceholder" = "Enigu la deziratan uzantnomon";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Registriĝo";
 "accountPage.usernameRegisterAction" = "Registri";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Administri Konton";
 "accountPage.encryptAccount" = "Enkriptu konton per pasvorto";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Pasvortoj ne kongruas";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Interligitaj aparatoj";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Invito ricevita";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Maltrafis forirantan telefonon";
 "generatedMessage.missedIncomingCall" = "Maltrafis envenantan telefonon";
 "generatedMessage.liveLocationSharing" = "Viva kunhavado de lokoj";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

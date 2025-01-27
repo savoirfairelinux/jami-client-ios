@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Хэвлэл мэдээллийн хэрэгсэл";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "Та нар";
+"conversation.edited" = "Хөгжүүлэн";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Жэмид нэгдээрэй";
 "createAccount.lookingForUsernameAvailability" = "...хүхлэг байдлыг хайж байна...";
-"createAccount.invalidUsername" = "хэрэглэгчийн нэр хүчингүй";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "хэрэглэгчдийн нэр аль хэдийн авсан";
-"createAccount.usernameValid" = "хэрэглэгчийн нэр нь ашиглах боломжтой";
-"createAccount.loading" = "Татаж";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Нэвтрүүлэг";
 "createAccount.UsernameNotRegisteredTitle" = "Хүлжээний алдаа";
 "createAccount.UsernameNotRegisteredMessage" = "Хилсэл бий болсон боловч хэрэглэгчдийн нэр бүртгэгдээгүй";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Хэтгэлийн нууц үг оруулах";
 "accountPage.usernamePlaceholder" = "Та хүссэн хэрэглэгчдийн нэрийг оруул";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Төгсгөл";
 "accountPage.usernameRegisterAction" = "Тэтгэврийн";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Хэтгэлээ удирдах";
 "accountPage.encryptAccount" = "Хууль нууц үгтэй дансыг нууцлах";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Хууль нууц үг нь тохиромжтой биш";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Хөгжлийн багаж хэрэгсэл";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Нээлтийг хүлээн авсан";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Удахгүй дууссан";
 "generatedMessage.missedIncomingCall" = "Улаан дуудлага алдсан";
 "generatedMessage.liveLocationSharing" = "Амьдрал байршуулын хуваалц";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

@@ -141,9 +141,9 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Cevap olarak";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.yourself" = "Siz";
+"conversation.edited" = "Düzenlendi";
+"conversation.deletedMessage" = "bir mesajı sildi";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Jami'ye katılın.";
 "createAccount.lookingForUsernameAvailability" = "kullanılabilirliğine bakılıyor...";
-"createAccount.invalidUsername" = "geçersiz kullanıcı adı";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "kullanıcı adı önceden alınmış";
-"createAccount.usernameValid" = "Kullanıcı adı kullanılabilir";
-"createAccount.loading" = "Yükleniyor";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Hesap ekleniyor";
 "createAccount.UsernameNotRegisteredTitle" = "Ağ hatası";
 "createAccount.UsernameNotRegisteredMessage" = "Hesap oluşturuldu fakat kullanıcı adı kaydedilmedi";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Hesap parolanızı girin";
 "accountPage.usernamePlaceholder" = "İstenen kullanıcı adını girin";
-"accountPage.registerNameErrorMessage" = "Seçilen kullanıcı adı uygun değil";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Kayıt ediliyor";
 "accountPage.usernameRegisterAction" = "Kaydol";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Hesabı yönet";
 "accountPage.encryptAccount" = "Hesabı parola ile şifrele";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Parolalar eşleşmedi";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Bağlı Aygıtlar";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Davetiye alındı";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Cevapsız giden çağrı";
 "generatedMessage.missedIncomingCall" = "Cevapsız gelen çağrı";
 "generatedMessage.liveLocationSharing" = "Canlı konum paylaşımı";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

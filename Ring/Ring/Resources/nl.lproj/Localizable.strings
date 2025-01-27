@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "In antwoord op";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "Jij?";
+"conversation.edited" = "Gecorrigeerd";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Neem deel aan Jami.";
 "createAccount.lookingForUsernameAvailability" = "beschikbaarheid wordt gecontroleerd…";
-"createAccount.invalidUsername" = "ongeldige gebruikersnaam";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "gebruikersnaam reeds in gebruik";
-"createAccount.usernameValid" = "gebruikersnaam is beschikbaar";
-"createAccount.loading" = "Laden";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Account wordt toegevoegd";
 "createAccount.UsernameNotRegisteredTitle" = "Netwerkfout";
 "createAccount.UsernameNotRegisteredMessage" = "Het account is aangemaakt, maar de gebruikersnaam is niet geregistreerd";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Voer het account wachtwoord in";
 "accountPage.usernamePlaceholder" = "Voer de gewenste gebruikersnaam in";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Registratie";
 "accountPage.usernameRegisterAction" = "Registreren";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Account beheren";
 "accountPage.encryptAccount" = "Gecodeerd account met wachtwoord";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Wachtwoorden komen niet overeen";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Gekoppelde apparaten";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Uitnodiging ontvangen";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Gemiste uitgaande oproep";
 "generatedMessage.missedIncomingCall" = "Gemiste inkomende oproep";
 "generatedMessage.liveLocationSharing" = "Live locatie delen";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Odotetaan, että %@ synkronoi keskustelun…";
 "conversation.inReplyTo" = "Vastauksena";
 "conversation.repliedTo" = " vastaus...";
-"conversation.yourself" = "itselle";
-"conversation.edited" = "muokattu";
+"conversation.yourself" = "Sinä";
+"conversation.edited" = "Muokattu";
 "conversation.deletedMessage" = "poisti viestin";
 "conversation.contactBlocked" = "Henkilö estetty";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Liity Jamiin";
 "createAccount.lookingForUsernameAvailability" = "etsitään saatavuutta…";
-"createAccount.invalidUsername" = "Virheellinen käyttäjänimi";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "Käyttäjänimi on jo varattu";
-"createAccount.usernameValid" = "Käyttäjänimi on saatavilla";
-"createAccount.loading" = "Ladataan";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Lisätään tiliä";
 "createAccount.UsernameNotRegisteredTitle" = "Verkkovirhe";
 "createAccount.UsernameNotRegisteredMessage" = "Tili luotiin, mutta käyttäjänimeä ei rekisteröity";
@@ -238,7 +238,7 @@
 "alerts.confirmBlockContact" = "Haluatko estää tämän henkilön? Henkilön keskusteluhistoria myös poistetaan pysyvästi.";
 "alerts.confirmDeleteConversation" = "Haluatko poistaa tämän keskustelun pysyvästi?";
 "alerts.confirmDeleteConversationFromContact" = "Haluatko poistaa keskustelun tämän henkilön kanssa?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Poista keskustelu";
 "alerts.noMediaPermissionsTitle" = "Pääsyä mediaan ei ole myönnetty";
 "alerts.noLibraryPermissionsTitle" = "Pääsyä valokuviin ei ole myönnetty";
 "alerts.noLocationPermissionsTitle" = "Pääsyä sijaintiin ei ole myönnetty";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Ota minuun yhteyttä \"%s\" Jami viestintäalustan kautta:  https://jami.net";
 "accountPage.passwordPlaceholder" = "Anna tilin salasana";
 "accountPage.usernamePlaceholder" = "Kirjoita haluamasi käyttäjänimi";
-"accountPage.registerNameErrorMessage" = "Valittu käyttäjänimi ei ole käytettävissä";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Rekisteröidään";
 "accountPage.usernameRegisterAction" = "Rekistöröi";
 "accountPage.usernameRegistrationFailedTitle" = "Rekisteröinti epäonnistui";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Hallinnoi tiliä";
 "accountPage.encryptAccount" = "Salaa tili salasanalla";
 "accountPage.passwordExplanation" = "Jami-tili luodaan ja tallennetaan paikallisesti vain tälle laitteelle. Tilin avain on pakattuna ja pääsy tähän voidaan valinnaisesti suojata salasanalla.";
-"accountPage.passwordsDoNotMatch" = "Salasanat eivät täsmää";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Salasana luotu";
 "accountPage.passwordUpdated" = "Salasana päivitetty";
 "accountPage.linkedDevices" = "Linkitetyt laitteet";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Kutsu vastaanotettu";
 "generatedMessage.swarmCreated" = "Keskustelu luotu";
 "generatedMessage.invitationReceived" = "kutsuttiin keskusteluun.";
-"generatedMessage.invitationAccepted" = "liittyi keskusteluun.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "Liityit keskusteluun.";
 "generatedMessage.contactBlocked" = "estettiin keskustelusta.";
 "generatedMessage.contactUnblocked" = "keskustelun esto poistettiin.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
-"generatedMessage.contactLeftConversation" = "poistui keskustelusta.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Videoasetukset";

@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "בתשובה";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "You";
+"conversation.edited" = "מאורגן";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "הצטרף לג'מי.";
 "createAccount.lookingForUsernameAvailability" = "מחפשים זמינות...";
-"createAccount.invalidUsername" = "שם משתמש לא חוקי";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "שם המשתמש כבר נלקח";
-"createAccount.usernameValid" = "שם המשתמש זמין";
-"createAccount.loading" = "מטען";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "הוספת חשבון";
 "createAccount.UsernameNotRegisteredTitle" = "טעות רשת";
 "createAccount.UsernameNotRegisteredMessage" = "חשבון נוצר אבל שם משתמש לא נרשם";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "הכניסה סיסמה לחשבון";
 "accountPage.usernamePlaceholder" = "הכניס את שם המשתמש הרצוי";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "רישום";
 "accountPage.usernameRegisterAction" = "הירשם";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "מנהל חשבון";
 "accountPage.encryptAccount" = "לחשוף חשבון עם סיסמה";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "סיסמאות לא מתאימות";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "מכשירים מחוברים";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "הזמנה התקבלה";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "פספסתי שיחת פנויה";
 "generatedMessage.missedIncomingCall" = "פספסתי שיחת כניסה";
 "generatedMessage.liveLocationSharing" = "שיתוף מיקום חי";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

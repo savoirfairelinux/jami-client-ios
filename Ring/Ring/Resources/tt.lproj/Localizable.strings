@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Бу сорауларга җавап итеп:";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "You";
+"conversation.edited" = "Редакция";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Җәмигә кушылыгыз";
 "createAccount.lookingForUsernameAvailability" = "Барлык нәрсәләрне эзлибез...";
-"createAccount.invalidUsername" = "гамәлдән чыгарылган кулланучы исеме";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "инде алынган кулланучы исеме";
-"createAccount.usernameValid" = "кулланучы исеме";
-"createAccount.loading" = "Ташылу";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Өстәмә исәп";
 "createAccount.UsernameNotRegisteredTitle" = "Аварияләр";
 "createAccount.UsernameNotRegisteredMessage" = "Хисап төзелгән, әмма кулланучы исеме теркәлмәгән";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Хисап номеры шифрен кертегез";
 "accountPage.usernamePlaceholder" = "Теләгелгән кулланучы исемен кертү";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Теркәлү";
 "accountPage.usernameRegisterAction" = "Теркәлү";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Хисапны идарә итү";
 "accountPage.encryptAccount" = "Кулланма белән хисапны шифрлау";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Парольләр туры килми";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Бәйләнешле җайланмалар";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Чакыру кабул ителгән";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Чыгышны югалткан чакыру";
 "generatedMessage.missedIncomingCall" = "Килгән чакыруны югалту";
 "generatedMessage.liveLocationSharing" = "Тере урынны бүлешү";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

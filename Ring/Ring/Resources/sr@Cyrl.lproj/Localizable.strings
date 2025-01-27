@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "У одговору на";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "измењена";
+"conversation.yourself" = "Ти";
+"conversation.edited" = "Редактирана";
 "conversation.deletedMessage" = "обрисао поруку";
 "conversation.contactBlocked" = "Kontakt blokiran";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Придружи се Јамију";
 "createAccount.lookingForUsernameAvailability" = "тражим доступност...";
-"createAccount.invalidUsername" = "неважни кориснички назив";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "Име корисника већ преузето";
-"createAccount.usernameValid" = "корисничко име је доступно";
-"createAccount.loading" = "Учитавање";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Додавање налога";
 "createAccount.UsernameNotRegisteredTitle" = "Мрежна грешка";
 "createAccount.UsernameNotRegisteredMessage" = "Налог је креиран, али корисничко име није регистровано";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Уведите лозинку рачуна";
 "accountPage.usernamePlaceholder" = "Унесите жељено корисничко име";
-"accountPage.registerNameErrorMessage" = "Odabrano korisničko ime nije dostupno";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Регистрација";
 "accountPage.usernameRegisterAction" = "Registruj se";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Управљајте налогом";
 "accountPage.encryptAccount" = "Шифровање рачуна са лозинком";
 "accountPage.passwordExplanation" = "Jami nalog se kreira i čuva lokalno samo na ovom uređaju kao arhiva koja sadrži ključeve naloga. Pristup arhivi se opciono može zaštititi lozinkom.";
-"accountPage.passwordsDoNotMatch" = "Лозинке се не поклапају";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Lozinka kreirana";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Повезани уређаји";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Позивница је примљена";
 "generatedMessage.swarmCreated" = "Konverzacija je napravljena";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Propušten odlazeći poziv";
 "generatedMessage.missedIncomingCall" = "Propušten dolazeći poziv";
 "generatedMessage.liveLocationSharing" = "Поделивање локације на живо";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

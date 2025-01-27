@@ -134,15 +134,15 @@
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@hat Ihnen eine Unterhaltungseinladung geschickt.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
-"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
+"conversation.requestMessage" = "Hallo,\nMöchten Sie an der Unterhaltung teilnehmen?";
 "conversation.sendRequest" = "Senden Sie ihnen eine Einladung, um sich unterhalten zu können.";
 "conversation.sendRequestTitle" = "Unterhaltungseinladung senden";
 "conversation.synchronizationTitle" = "Sie haben die Unterhaltungseinladung angenommen.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "Du";
+"conversation.edited" = "Bearbeitet";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Kontakt blockiert";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "invalid username";
+"createAccount.invalidUsername" = "Ungültiger Benutzername. Bitte geben Sie einen gültigen Benutzernamen ein.";
 "createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.usernameValid" = "username is available";
-"createAccount.loading" = "Loading";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Wird geladen…";
 "createAccount.waitCreateAccountTitle" = "Adding account";
 "createAccount.UsernameNotRegisteredTitle" = "Network error";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Kontaktieren Sie mich über „%s“ auf der Jami-Plattform für verteilte Kommunikation: https://jami.net";
 "accountPage.passwordPlaceholder" = "Enter account password";
 "accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Register";
 "accountPage.usernameRegistrationFailedTitle" = "Registrierung fehlgeschlagen";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Manage account";
 "accountPage.encryptAccount" = "Encrypt account with a password";
 "accountPage.passwordExplanation" = "Ein Jami-Konto wird nur auf diesem Gerät lokal erstellt und als Archiv mit seinen Kontoschlüsseln gespeichert. Der Zugriff auf das Archiv kann optional mit einem Passwort geschützt werden.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Passwort erstellt";
 "accountPage.passwordUpdated" = "Passwort aktualisiert";
 "accountPage.linkedDevices" = "Linked devices";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Einladung erhalten";
 "generatedMessage.swarmCreated" = "Unterhaltung erstellt";
 "generatedMessage.invitationReceived" = "wurde zur Unterhaltung eingeladen.";
-"generatedMessage.invitationAccepted" = "der Unterhaltung beigetreten.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "Sie sind der Unterhaltung begetreten.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Missed incoming call";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Videoeinstellungen";

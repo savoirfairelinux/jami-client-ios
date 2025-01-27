@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Απαντώντας";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "Εσύ";
+"conversation.edited" = "Επορθωμένο";
 "conversation.deletedMessage" = "διαγράφτηκε ένα μήνυμα";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Δημιουργήστε λογαριασμό Jami";
 "createAccount.lookingForUsernameAvailability" = "Ψάχνοντας διαθεσιμότητα...";
-"createAccount.invalidUsername" = "Μη έγκυρο όνομα χρήστη";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "Το όνομα χρήστη ήδη χρησιμοποιείται";
-"createAccount.usernameValid" = "Το όνομα χρήστη είναι διαθέσιμο";
-"createAccount.loading" = "Ανεβαίνει";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Εισαγωγή λογαριασμού";
 "createAccount.UsernameNotRegisteredTitle" = "Σφάλμα δικτύου";
 "createAccount.UsernameNotRegisteredMessage" = "Δημιουργήθηκε λογαριασμός αλλά δεν καταχωρίστηκε όνομα χρήστη";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Εισάγετε κωδικό πρόσβασης λογαριασμού";
 "accountPage.usernamePlaceholder" = "Εισάγετε το επιθυμητό όνομα χρήστη";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Καταχώριση";
 "accountPage.usernameRegisterAction" = "Εγγραφή";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Διαχείριση Λογαριασμού";
 "accountPage.encryptAccount" = "Κρυπτογράφηση λογαριασμού με κωδικό πρόσβασης";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Δεν ταιριάζουν τα κωδικά.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Συνδεδεμένες συσκευές";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Η πρόσκληση παραλήφθηκε";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Αναπάντητη εξερχόμενη κλήση";
 "generatedMessage.missedIncomingCall" = "Αναπάντητη εισερχόμενη κλήση";
 "generatedMessage.liveLocationSharing" = "Συνοχή τοποθεσιών ζωντανά";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

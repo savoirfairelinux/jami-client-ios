@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "దీనికి ప్రతిస్పందనగా";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "మీరు";
+"conversation.edited" = "సవరణ";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "జామితో చేరండి";
 "createAccount.lookingForUsernameAvailability" = "లభ్యత కోసం చూస్తున్న.";
-"createAccount.invalidUsername" = "చెల్లని వాడుకరి పేరు";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "ఇప్పటికే తీసుకున్న వాడుకరి పేరు";
-"createAccount.usernameValid" = "వాడుకరి పేరు అందుబాటులో ఉంది";
-"createAccount.loading" = "లోడింగ్";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "ఖాతా జోడించడం";
 "createAccount.UsernameNotRegisteredTitle" = "నెట్వర్క్ లోపం";
 "createAccount.UsernameNotRegisteredMessage" = "ఖాతా సృష్టించబడింది కాని వినియోగదారు పేరు నమోదు చేయబడలేదు";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "ఖాతా పాస్వర్డ్ను నమోదు చేయండి";
 "accountPage.usernamePlaceholder" = "కావలసిన వాడుకరి పేరును నమోదు చేయండి";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "నమోదు";
 "accountPage.usernameRegisterAction" = "నమోదు";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "ఖాతాను నిర్వహించండి";
 "accountPage.encryptAccount" = "పాస్వర్డ్తో ఖాతాను గుప్తీకరించండి";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "పాస్వర్డ్లు సరిపోలవు";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "లింక్ చేయబడిన పరికరాలు";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "అందుకున్న ఆహ్వానం";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "మిస్ అవుట్గోయింగ్ కాల్";
 "generatedMessage.missedIncomingCall" = "మిస్డ్ ఇన్కమింగ్ కాల్";
 "generatedMessage.liveLocationSharing" = "ప్రత్యక్ష స్థానం భాగస్వామ్యం";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

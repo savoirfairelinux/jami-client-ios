@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "I svar til";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "deg selv";
-"conversation.edited" = "redigert";
+"conversation.yourself" = "Deg";
+"conversation.edited" = "Redigert";
 "conversation.deletedMessage" = "slettet en melding";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Bli med Jami";
 "createAccount.lookingForUsernameAvailability" = "leter etter tilgjengelighet...";
-"createAccount.invalidUsername" = "ugyldig brukernavn";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "brukernavn allerede i bruk";
-"createAccount.usernameValid" = "ledig brukernavn";
-"createAccount.loading" = "Laster";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Legger til konto";
 "createAccount.UsernameNotRegisteredTitle" = "Nettverksfeil";
 "createAccount.UsernameNotRegisteredMessage" = "Konto ble opprettet men brukernavn ble ikke registrert";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Tast inn kontopassord";
 "accountPage.usernamePlaceholder" = "Tast inn ønsket brukernavn";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Registrerer";
 "accountPage.usernameRegisterAction" = "Registrer";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Behandle konto";
 "accountPage.encryptAccount" = "Kryptere konto med passord";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Passordene samsvarer ikke";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Tilknyttede enheter";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Invitasjon mottatt";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Tapt utgående anrop";
 "generatedMessage.missedIncomingCall" = "Tapt innkommende anrop";
 "generatedMessage.liveLocationSharing" = "Live posisjonsdeling";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

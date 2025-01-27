@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Ждем %@ для подключения к синхронизации беседы…";
 "conversation.inReplyTo" = "В ответ на";
 "conversation.repliedTo" = "в ответ на";
-"conversation.yourself" = "себе";
-"conversation.edited" = "отредактировано";
+"conversation.yourself" = "Вы";
+"conversation.edited" = "Отредактировано";
 "conversation.deletedMessage" = "удалённое сообщение";
 "conversation.contactBlocked" = "Контакт заблокирован";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Присоединиться к Jami";
 "createAccount.lookingForUsernameAvailability" = "проверка доступности…";
-"createAccount.invalidUsername" = "неверное имя пользователя ";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "имя пользователя уже занято";
-"createAccount.usernameValid" = "имя пользователя доступно";
-"createAccount.loading" = "Загрузка";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Добавление аккаунта";
 "createAccount.UsernameNotRegisteredTitle" = "Ошибка сети";
 "createAccount.UsernameNotRegisteredMessage" = "Аккаунт был создан но имя пользователя не было зарегистрировано";
@@ -238,7 +238,7 @@
 "alerts.confirmBlockContact" = "Хотите заблокировать этот контакт? История бесед с этим контактом будет удалена навсегда.";
 "alerts.confirmDeleteConversation" = "Хотите удалить эту беседу навсегда?";
 "alerts.confirmDeleteConversationFromContact" = "Хотите удалить беседу с этим контактом?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Удалить беседу";
 "alerts.noMediaPermissionsTitle" = "Не прав доступа к медиа";
 "alerts.noLibraryPermissionsTitle" = "Не предоставлен доступ к библиотеке фотографий";
 "alerts.noLocationPermissionsTitle" = "Доступ к местоположению не предоставлен";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Свяжитесь со мной используя \"%s\" на платформе распределенной связи Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Введите пароль вашего аккаунта";
 "accountPage.usernamePlaceholder" = "Введите желаемое имя пользователя";
-"accountPage.registerNameErrorMessage" = "Выбранное имя пользователя недоступно";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Регистрация";
 "accountPage.usernameRegisterAction" = "Зарегистрировать";
 "accountPage.usernameRegistrationFailedTitle" = "Не удалось зарегистрироваться";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Учетные записи";
 "accountPage.encryptAccount" = "Зашифровать аккаунт с паролем";
 "accountPage.passwordExplanation" = "Аккаунт Джами создаётся локально и хранится только на этом устройстве в форме архива, содержащего ключи от вашей учётной записи. По желанию, доступ к архиву может быть защищён паролем.";
-"accountPage.passwordsDoNotMatch" = "Пароли не совпадают";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Пароль создан";
 "accountPage.passwordUpdated" = "Пароль обновлен";
 "accountPage.linkedDevices" = "Привязанные устройства";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Получено приглашение";
 "generatedMessage.swarmCreated" = "Беседа создана";
 "generatedMessage.invitationReceived" = "был(а) приглашен(а) присоединиться к беседе.";
-"generatedMessage.invitationAccepted" = "присоединяется к беседе.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "Вы присоединились к беседе.";
 "generatedMessage.contactBlocked" = "был(а) заблокирован(а) в беседе.";
 "generatedMessage.contactUnblocked" = "был(а) разблокирован(а) в беседе.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Пропущенный исходящий";
 "generatedMessage.missedIncomingCall" = "Пропущенный входящий";
 "generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
-"generatedMessage.contactLeftConversation" = "покинул(а) беседу.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Настройки видео";

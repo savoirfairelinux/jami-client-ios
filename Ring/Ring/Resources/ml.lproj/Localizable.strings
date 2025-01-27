@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "ഇതിന് മറുപടിയായി";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "നീ";
+"conversation.edited" = "പരിഷ്ക്കരിക്കുക";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "ജാമിയിൽ ചേരുക";
 "createAccount.lookingForUsernameAvailability" = "ലഭ്യമായതിനായി അന്വേഷിക്കുന്നു.";
-"createAccount.invalidUsername" = "അസാധുവായ ഉപയോക്തൃനാമം";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "ഇതിനകം ഉപയോഗിച്ച ഉപയോക്തൃനാമം";
-"createAccount.usernameValid" = "ഉപയോക്തൃനാമം ലഭ്യമാണ്";
-"createAccount.loading" = "ലോഡിംഗ്";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "അക്കൌണ്ട് കൂട്ടിച്ചേർക്കൽ";
 "createAccount.UsernameNotRegisteredTitle" = "നെറ്റ് വർക്ക് പിശക്";
 "createAccount.UsernameNotRegisteredMessage" = "അക്കൌണ്ട് സൃഷ്ടിച്ചു, പക്ഷേ ഉപയോക്തൃനാമം രജിസ്റ്റർ ചെയ്തിട്ടില്ല";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "അക്കൌണ്ട് പാസ്വേഡ് നൽകുക";
 "accountPage.usernamePlaceholder" = "ആവശ്യമുള്ള ഉപയോക്തൃനാമം നൽകുക";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "രജിസ്ട്രേഷൻ";
 "accountPage.usernameRegisterAction" = "രജിസ്റ്റർ ചെയ്യുക";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "അക്കൌണ്ട് മാനേജുചെയ്യുക";
 "accountPage.encryptAccount" = "പാസ്വേഡുള്ള അക്കൌണ്ട് എൻക്രിപ്റ്റ് ചെയ്യുക";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "പാസ്വേഡുകൾ യോജിക്കുന്നില്ല";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "ബന്ധിപ്പിച്ച ഉപകരണങ്ങൾ";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "ക്ഷണം ലഭിച്ചത്";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "നഷ്ടപ്പെട്ട വിളി";
 "generatedMessage.missedIncomingCall" = "നഷ്ടപ്പെട്ട കോൾ";
 "generatedMessage.liveLocationSharing" = "ലൈവ് ലൊക്കേഷൻ പങ്കിടൽ";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

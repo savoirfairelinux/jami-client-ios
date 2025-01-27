@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Erantzun";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "Zuk";
+"conversation.edited" = "Eusko Jaurlaritzaren laguntzarekin egindako azpitituluak";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Jar zaitez Jami-rekin.";
 "createAccount.lookingForUsernameAvailability" = "-Eskaintza bila.";
-"createAccount.invalidUsername" = "erabiltzaile-izen baliogabea";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "erabiltzaile-izena hartuta dago";
-"createAccount.usernameValid" = "erabiltzaile izena eskura";
-"createAccount.loading" = "Kargatzen";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Kontua gehitzen";
 "createAccount.UsernameNotRegisteredTitle" = "Sare errorea";
 "createAccount.UsernameNotRegisteredMessage" = "Kontua sortu zen, baina erabiltzaile izena ez zen erregistratu.";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Sartu kontuaren pasahitza";
 "accountPage.usernamePlaceholder" = "Sartu nahi duzun erabiltzaile izena";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Erregistroa";
 "accountPage.usernameRegisterAction" = "Erregistratu";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Kudeatu kontua";
 "accountPage.encryptAccount" = "Kontua pasahitzarekin enkriptatu";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Pasahitzak ez datoz bat";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Estekatuta dauden gailuak";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Gonbidapena jasota";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Galdutako irteera-deia";
 "generatedMessage.missedIncomingCall" = "Galdutako sarrera-deia";
 "generatedMessage.liveLocationSharing" = "Toki partekatzea zuzenean";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

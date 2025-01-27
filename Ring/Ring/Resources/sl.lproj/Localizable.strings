@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Kot odgovor";
 "conversation.repliedTo" = "je odgovoril_a";
-"conversation.yourself" = "vam";
-"conversation.edited" = "urejen";
+"conversation.yourself" = "Vi";
+"conversation.edited" = "Urejeno";
 "conversation.deletedMessage" = "je izbrisal/a sporočilo";
 "conversation.contactBlocked" = "Stik blokiran";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Pridruži se Jami";
 "createAccount.lookingForUsernameAvailability" = "preverjanje dosegljivosti ...";
-"createAccount.invalidUsername" = "napačno uporabniško ime";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "uporabniško ime je zasedeno";
-"createAccount.usernameValid" = "uporabniško ime je na voljo";
-"createAccount.loading" = "Nalaganje";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Dodajanje računa";
 "createAccount.UsernameNotRegisteredTitle" = "Napaka na omrežju";
 "createAccount.UsernameNotRegisteredMessage" = "Račun je bil ustvarjen, vendar uporabniško ime ni bilo registrirano";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Stopi v stik z menoj z uporabo »%s« na razpršeni komunikacijski platformi Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Vnesite geslo računa";
 "accountPage.usernamePlaceholder" = "Vnesite želeno uporabniško ime";
-"accountPage.registerNameErrorMessage" = "Izbrano uporabniško ime ni na voljo";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Registracija";
 "accountPage.usernameRegisterAction" = "Registriraj";
 "accountPage.usernameRegistrationFailedTitle" = "Registracija je spodletela";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Upravljanje računa";
 "accountPage.encryptAccount" = "Šifriraj račun z geslom";
 "accountPage.passwordExplanation" = "Račun Jami je ustvarjen in hranjen krajevno samo na tej napravi, kot arhiv, ki vsebuje ključe vašega računa. Dostop do arhiva lahko dodatno zaščitite z geslom.";
-"accountPage.passwordsDoNotMatch" = "Gesli se ne ujemata";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Geslo ustvarjeno";
 "accountPage.passwordUpdated" = "Geslo posodobljeno";
 "accountPage.linkedDevices" = "Povezane naprave";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Povabilo je prejeto";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Zgrešen odhodni klic";
 "generatedMessage.missedIncomingCall" = "Zgrešen dohodni klic";
 "generatedMessage.liveLocationSharing" = "Deljenje lokacije v živo";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Nastavitve videa";

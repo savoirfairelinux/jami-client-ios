@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "उत्तर";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "तू";
+"conversation.edited" = "संपादित";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "जामीमध्ये सामील व्हा";
 "createAccount.lookingForUsernameAvailability" = "उपलब्धता शोधत आहे.";
-"createAccount.invalidUsername" = "अवैध वापरकर्तानाव";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "आधीच वापरकर्ता नाव";
-"createAccount.usernameValid" = "वापरकर्तानाव उपलब्ध आहे";
-"createAccount.loading" = "लोड";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "खाते जोडणे";
 "createAccount.UsernameNotRegisteredTitle" = "नेटवर्क त्रुटी";
 "createAccount.UsernameNotRegisteredMessage" = "खाते तयार केले परंतु वापरकर्तानाव नोंदणीकृत नाही";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "खाते संकेतशब्द प्रविष्ट करा";
 "accountPage.usernamePlaceholder" = "इच्छित वापरकर्तानाव प्रविष्ट करा";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "नोंदणी";
 "accountPage.usernameRegisterAction" = "नोंदणी";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "खाते व्यवस्थापित करा";
 "accountPage.encryptAccount" = "पासवर्डसह खाते एन्क्रिप्ट करा";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "पासवर्ड जुळत नाहीत";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "जोडलेले उपकरणे";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "प्राप्त आमंत्रण";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "गमावलेला प्रस्थान कॉल";
 "generatedMessage.missedIncomingCall" = "गमावलेला कॉल";
 "generatedMessage.liveLocationSharing" = "थेट स्थान सामायिकरण";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

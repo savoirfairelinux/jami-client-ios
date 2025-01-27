@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Trả lời";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "You";
+"conversation.edited" = "Được biên tập";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Tham gia Jami";
 "createAccount.lookingForUsernameAvailability" = "tìm kiếm khả năng sẵn sàng...";
-"createAccount.invalidUsername" = "Username không hợp lệ";
+"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "Username đã được lấy";
-"createAccount.usernameValid" = "Username có sẵn";
-"createAccount.loading" = "Lái";
+"createAccount.usernameValid" = "The username is available.";
+"createAccount.loading" = "Loading…";
 "createAccount.waitCreateAccountTitle" = "Tài khoản bổ sung";
 "createAccount.UsernameNotRegisteredTitle" = "Hầm mạng";
 "createAccount.UsernameNotRegisteredMessage" = "Tài khoản đã được tạo nhưng tên người dùng đã không được đăng ký";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Nhập mật khẩu tài khoản";
 "accountPage.usernamePlaceholder" = "Nhập tên người dùng mong muốn";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "The username is unavailable.";
 "accountPage.usernameRegistering" = "Đăng ký";
 "accountPage.usernameRegisterAction" = "Register";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Quản lý tài khoản";
 "accountPage.encryptAccount" = "Mã hóa tài khoản với mật khẩu";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Mật khẩu không phù hợp";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Các thiết bị liên kết";
@@ -464,7 +464,7 @@
 "generatedMessage.contactAdded" = "Thỉnh cầu được nhận";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "joined the conversation.";
+"generatedMessage.invitationAccepted" = "has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
 "generatedMessage.contactBlocked" = "was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
@@ -472,7 +472,7 @@
 "generatedMessage.missedOutgoingCall" = "Lỡ cuộc gọi ra ngoài";
 "generatedMessage.missedIncomingCall" = "Lỡ cuộc gọi tiếp nhận";
 "generatedMessage.liveLocationSharing" = "Chia sẻ địa điểm trực tiếp";
-"generatedMessage.contactLeftConversation" = "left the conversation.";
+"generatedMessage.contactLeftConversation" = "has left the conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
