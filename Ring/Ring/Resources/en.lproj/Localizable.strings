@@ -464,16 +464,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Invitation received";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Outgoing call";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Missed incoming call";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

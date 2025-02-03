@@ -78,7 +78,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     init(message: MessageModel) {
         self.message = message
         self.incoming = message.incoming
-        self.centeredMessage = message.type == .contact || message.type == .initial
+        self.centeredMessage = message.type.isContact || message.type == .initial
         self.readBorderColor = Color(UIColor.systemBackground)
         self.timeString = getTimeLabelString()
         self.updateMessageStatus()

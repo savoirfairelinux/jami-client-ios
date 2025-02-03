@@ -592,22 +592,36 @@ internal enum L10n {
   internal enum GeneratedMessage {
     /// Invitation received
     internal static let contactAdded = L10n.tr("Localizable", "generatedMessage.contactAdded", fallback: "Invitation received")
-    /// was blocked from the conversation.
-    internal static let contactBlocked = L10n.tr("Localizable", "generatedMessage.contactBlocked", fallback: "was blocked from the conversation.")
-    /// has left the conversation.
-    internal static let contactLeftConversation = L10n.tr("Localizable", "generatedMessage.contactLeftConversation", fallback: "has left the conversation.")
-    /// was unblocked from the conversation.
-    internal static let contactUnblocked = L10n.tr("Localizable", "generatedMessage.contactUnblocked", fallback: "was unblocked from the conversation.")
-    /// has joined the conversation.
-    internal static let invitationAccepted = L10n.tr("Localizable", "generatedMessage.invitationAccepted", fallback: "has joined the conversation.")
-    /// was invited to join the conversation.
-    internal static let invitationReceived = L10n.tr("Localizable", "generatedMessage.invitationReceived", fallback: "was invited to join the conversation.")
+    /// %@ was blocked from the conversation.
+    internal static func contactBlocked(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "generatedMessage.contactBlocked", String(describing: p1), fallback: "%@ was blocked from the conversation.")
+    }
+    /// %@ has left the conversation.
+    internal static func contactLeftConversation(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "generatedMessage.contactLeftConversation", String(describing: p1), fallback: "%@ has left the conversation.")
+    }
+    /// %@ was unblocked from the conversation.
+    internal static func contactUnblocked(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "generatedMessage.contactUnblocked", String(describing: p1), fallback: "%@ was unblocked from the conversation.")
+    }
+    /// %@ has joined the conversation.
+    internal static func invitationAccepted(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "generatedMessage.invitationAccepted", String(describing: p1), fallback: "%@ has joined the conversation.")
+    }
+    /// %@ was invited to join the conversation.
+    internal static func invitationReceived(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "generatedMessage.invitationReceived", String(describing: p1), fallback: "%@ was invited to join the conversation.")
+    }
     /// Live location sharing
     internal static let liveLocationSharing = L10n.tr("Localizable", "generatedMessage.liveLocationSharing", fallback: "Live location sharing")
     /// Missed incoming call
     internal static let missedIncomingCall = L10n.tr("Localizable", "generatedMessage.missedIncomingCall", fallback: "Missed incoming call")
     /// Missed outgoing call
     internal static let missedOutgoingCall = L10n.tr("Localizable", "generatedMessage.missedOutgoingCall", fallback: "Missed outgoing call")
+    /// Your invitation was accepted
+    internal static let nonSwarmInvitationAccepted = L10n.tr("Localizable", "generatedMessage.nonSwarmInvitationAccepted", fallback: "Your invitation was accepted")
+    /// You sent an invitation
+    internal static let nonSwarmInvitationReceived = L10n.tr("Localizable", "generatedMessage.nonSwarmInvitationReceived", fallback: "You sent an invitation")
     /// Outgoing call
     internal static let outgoingCall = L10n.tr("Localizable", "generatedMessage.outgoingCall", fallback: "Outgoing call")
     /// Conversation created
