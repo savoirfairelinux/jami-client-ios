@@ -43,7 +43,7 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImage
     var message: MessageModel
     var username = "" {
         didSet {
-            self.content = self.username.isEmpty ? self.message.content : self.username + " " + self.message.content
+            self.content = self.message.getContactInteractionString(name: username) ?? ""
         }
     }
     var infoState: PublishSubject<State>?
@@ -64,7 +64,7 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImage
 
     func setInfoState(state: PublishSubject<State>) {
         self.infoState = state
-        if message.type == .contact && message.incoming {
+        if message.type.isContact && message.incoming {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             requestAvatar(jamiId: jamiId)
             requestName(jamiId: jamiId)

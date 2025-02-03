@@ -222,7 +222,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         if self.isLink() {
             let backgroundIsLightColor: Bool = self.backgroundColor.isLight(threshold: 0.8) ?? true
             self.styling.textColor = backgroundIsLightColor ? .blue : .white
-        } else if !self.isIncoming && self.type != .contact {
+        } else if !self.isIncoming && !self.type.isContact {
             self.styling.textColor = Color.white
         } else {
             self.styling.textColor = self.styling.defaultTextColor
@@ -238,7 +238,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     private func updateBackgroundColor() {
-        if self.type == .contact || self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
+        if self.type.isContact || self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
             self.backgroundColor = .clear
         } else {
             self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
