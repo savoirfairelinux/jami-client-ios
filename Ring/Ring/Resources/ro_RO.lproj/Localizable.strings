@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Folosește Jami";
 "createAccount.lookingForUsernameAvailability" = "caut disponibilitatea...";
-"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
+"createAccount.invalidUsername" = "Numele este greșit. Trebuie introdus un nume corect.";
 "createAccount.usernameAlreadyTaken" = "nume ales deja";
-"createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
+"createAccount.usernameValid" = "Numele este disponibil.";
+"createAccount.loading" = "Se încarcă…";
 "createAccount.waitCreateAccountTitle" = "Se adaugă contul";
 "createAccount.UsernameNotRegisteredTitle" = "Eroare de rețea";
 "createAccount.UsernameNotRegisteredMessage" = "Contul a fost creat, dar numele de utilizator nu a fost înscris";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contactează-mă folosind „%s” pe platforma distribuită de comunicare Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Introdu parola contului";
 "accountPage.usernamePlaceholder" = "Introdu numele de utilizator";
-"accountPage.registerNameErrorMessage" = "The username is unavailable.";
+"accountPage.registerNameErrorMessage" = "Numele nu este disponibil.";
 "accountPage.usernameRegistering" = "Se înscrie";
 "accountPage.usernameRegisterAction" = "Înscrie-te";
 "accountPage.usernameRegistrationFailedTitle" = "Înscrierea nu a reușit";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Gestionează contul";
 "accountPage.encryptAccount" = "Cifrează contul cu o parolă";
 "accountPage.passwordExplanation" = "Un cont Jami este creat și stocat local numai în acest aparat, sub forma unei arhive care conține cheile contului. Accesul la această arhivă poate fi protejat facultativ cu o parolă.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordsDoNotMatch" = "Parolele nu se potrivesc.";
 "accountPage.passwordCreated" = "Parolă creată";
 "accountPage.passwordUpdated" = "Parolă actualizată";
 "accountPage.linkedDevices" = "Aparate asociate";
@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Identitatea contului";
 "accountPage.bootstrap" = "Server de pornire";
 "accountPage.dhtConfiguration" = "Configurare OpenDHT";
+"accountPage.nameServer" = "Server de nume";
 
 // Backup Account
 "backupAccount.explanation" = "Acest cont Jami există doar în acest aparat. Contul va fi pierdut dacă acest aparat este pierdut sau dacă aplicația este dezinstalată. Se recomandă efectuarea unei copii de rezervă a acestui cont.";
@@ -464,7 +465,7 @@
 "generatedMessage.contactAdded" = "Invitație primită";
 "generatedMessage.swarmCreated" = "Conversație creată";
 "generatedMessage.invitationReceived" = "a fost invitat să participe la conversație.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationAccepted" = "participă la conversație.";
 "generatedMessage.youJoined" = "Participi la conversație.";
 "generatedMessage.contactBlocked" = "a fost blocat din conversație.";
 "generatedMessage.contactUnblocked" = "a fost deblocat din conversație.";
@@ -472,7 +473,7 @@
 "generatedMessage.missedOutgoingCall" = "Apel efectuat nepreluat";
 "generatedMessage.missedIncomingCall" = "Apel pierdut";
 "generatedMessage.liveLocationSharing" = "Distribuirea poziției în direct";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "a părăsit conversația.";
 
 // General Settings
 "generalSettings.videoSettings" = "Reglări video";

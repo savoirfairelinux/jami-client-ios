@@ -142,7 +142,7 @@
 "conversation.inReplyTo" = "دالم ڤردان منتري";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "You";
-"conversation.edited" = "Edited";
+"conversation.edited" = "ڤڠاجرن";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "بوتسترپ";
 "accountPage.dhtConfiguration" = "ڤڠڬيلن OpenDHT";
+"accountPage.nameServer" = "نام سڤير";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";

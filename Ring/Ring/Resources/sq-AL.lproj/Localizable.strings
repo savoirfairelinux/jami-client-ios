@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Lidhuni me mua duke përdorur “%s” në platformën e komunikimeve të shpërndara Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Jepni fjalëkalim llogarie";
 "accountPage.usernamePlaceholder" = "Jepni emrin e dëshiruar të përdoruesit";
-"accountPage.registerNameErrorMessage" = "The username is unavailable.";
+"accountPage.registerNameErrorMessage" = "Emri i përdoruesit s’mund të kihet.";
 "accountPage.usernameRegistering" = "Regjistrim";
 "accountPage.usernameRegisterAction" = "Regjistrohuni";
 "accountPage.usernameRegistrationFailedTitle" = "Regjistrimi dështoi";
@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Identitet llogarie";
 "accountPage.bootstrap" = "Bootstrap";
 "accountPage.dhtConfiguration" = "Formësim i OpenDHT-së";
+"accountPage.nameServer" = "Shërbyes emrash";
 
 // Backup Account
 "backupAccount.explanation" = "Kjo llogari Jami ekziston vetëm në këtë pajisje. Llogaria do të humbë, nëse humbet kjo pajisje, ose nëse çinstalohet aplikacioni. Rekomandohet të bëni një kopjeruajtje të kësaj llogarie.";
@@ -464,7 +465,7 @@
 "generatedMessage.contactAdded" = "Ftesa u mor";
 "generatedMessage.swarmCreated" = "Biseda ui krijua";
 "generatedMessage.invitationReceived" = "u ftua të marrë pjesë në bisedë.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationAccepted" = "erdhi në bisedë.";
 "generatedMessage.youJoined" = "Erdhët në bisedë.";
 "generatedMessage.contactBlocked" = "u bllokua prej bisede.";
 "generatedMessage.contactUnblocked" = "u zhbllokua prej bisede.";
@@ -472,7 +473,7 @@
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie e vendndodhjes drejtpërsëdrejti";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "iku nga biseda.";
 
 // General Settings
 "generalSettings.videoSettings" = "Rregullime videoje";

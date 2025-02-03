@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Contactez-moi par l'identifiant : %s sur la plateforme distribuée de communication Jami. https://jami.net ";
 "accountPage.passwordPlaceholder" = "Entrer le mot de passe de votre compte";
 "accountPage.usernamePlaceholder" = "Entrez le nom d'utilisateur souhaité";
-"accountPage.registerNameErrorMessage" = "The username is unavailable.";
+"accountPage.registerNameErrorMessage" = "Ce nom d'utilisateur est indisponible.";
 "accountPage.usernameRegistering" = "Inscription";
 "accountPage.usernameRegisterAction" = "Enregistrer";
 "accountPage.usernameRegistrationFailedTitle" = "L'enregistrement a échoué";
@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Identité du compte";
 "accountPage.bootstrap" = "Amorcer";
 "accountPage.dhtConfiguration" = "Configuration OpenDHT";
+"accountPage.nameServer" = "Serveur de nom";
 
 // Backup Account
 "backupAccount.explanation" = "Ce compte Jami n'existe que sur cet appareil.\nLe compte sera perdu si cet appareil est perdu ou si l'application est désinstallée. Il est recommandé de faire une sauvegarde de ce compte.";
@@ -464,7 +465,7 @@
 "generatedMessage.contactAdded" = "Invitation reçue";
 "generatedMessage.swarmCreated" = "La conversation a été créée";
 "generatedMessage.invitationReceived" = "a été invité à rejoindre la conversation";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationAccepted" = " a rejoint la conversation.";
 "generatedMessage.youJoined" = "Vous avez rejoint la conversation.";
 "generatedMessage.contactBlocked" = "a été bloqué de la conversation.";
 "generatedMessage.contactUnblocked" = "a été réintégré dans la conversation.";
@@ -472,7 +473,7 @@
 "generatedMessage.missedOutgoingCall" = "Appel sortant manqué";
 "generatedMessage.missedIncomingCall" = "Appel entrant manqué";
 "generatedMessage.liveLocationSharing" = "Partage de position en temps réel";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "a quitté la conversation.";
 
 // General Settings
 "generalSettings.videoSettings" = "Paramètres vidéo ";

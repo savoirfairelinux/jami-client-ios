@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Fiókazonosító";
 "accountPage.bootstrap" = "Rendszerindítás";
 "accountPage.dhtConfiguration" = "OpenDHT-beállítások";
+"accountPage.nameServer" = "Kiszolgálói névszerver";
 
 // Backup Account
 "backupAccount.explanation" = "Ez a Jami-fiók csak ezen az eszközön létezik. A fiók elveszik, ha ez az eszköz elveszik, vagy az alkalmazást eltávolítják. Javasoljuk, hogy készítsen biztonsági másolatot erről a fiókról.";

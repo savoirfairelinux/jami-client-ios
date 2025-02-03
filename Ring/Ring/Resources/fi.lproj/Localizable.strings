@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Tilin identiteetti";
 "accountPage.bootstrap" = "Bootstrap";
 "accountPage.dhtConfiguration" = "OpenDHT-määritykset";
+"accountPage.nameServer" = "Nimipalvelin";
 
 // Backup Account
 "backupAccount.explanation" = "Tämä Jami-tili on olemassa vain tässä laitteessa. Tilin voi menetetää, jos laite katoaa tai sovellus poistetaan. Suositeltavaa on tehdä tilistä varmuuskopio.";

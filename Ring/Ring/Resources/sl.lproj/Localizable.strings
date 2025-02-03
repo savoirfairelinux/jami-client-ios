@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Identiteta računa";
 "accountPage.bootstrap" = "Začetni nalagalnik";
 "accountPage.dhtConfiguration" = "Nastavitve OpenDTH";
+"accountPage.nameServer" = "Imenski strežnik";
 
 // Backup Account
 "backupAccount.explanation" = "Ta račun Jami obstaja samo na tej napravi. Račun bo izgubljen, če to napravo izgubite ali če odstranite program. Priporočamo, da naredite varnostno kopijo tega računa.";

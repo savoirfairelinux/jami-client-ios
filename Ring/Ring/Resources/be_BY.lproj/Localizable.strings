@@ -142,7 +142,7 @@
 "conversation.inReplyTo" = "У адказ на";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "You";
-"conversation.edited" = "Edited";
+"conversation.edited" = "Рэдагаваны";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "Падпрыемства";
 "accountPage.dhtConfiguration" = "Канфігурацыя OpenDHT";
+"accountPage.nameServer" = "Назва сервера";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";

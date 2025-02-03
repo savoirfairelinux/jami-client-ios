@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Paskyros tapatybė";
 "accountPage.bootstrap" = "Pradinė įkeltis";
 "accountPage.dhtConfiguration" = "OpenDHT konfigūracija";
+"accountPage.nameServer" = "Vardų serveris";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";

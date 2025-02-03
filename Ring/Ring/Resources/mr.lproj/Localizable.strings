@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "बूटस्ट्रॅप";
 "accountPage.dhtConfiguration" = "OpenDHT कॉन्फिगरेशन";
+"accountPage.nameServer" = "नाव सर्व्हर";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";

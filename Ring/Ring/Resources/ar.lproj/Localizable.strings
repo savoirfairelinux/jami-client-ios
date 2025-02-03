@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "في جواب";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "You";
-"conversation.edited" = "Edited";
+"conversation.yourself" = "أنت";
+"conversation.edited" = "تحرير";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "تشغيل ذاتي";
 "accountPage.dhtConfiguration" = "تهيئة OpenDHT";
+"accountPage.nameServer" = "Name server";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";

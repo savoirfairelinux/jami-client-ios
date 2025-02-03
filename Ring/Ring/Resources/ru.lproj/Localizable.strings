@@ -177,10 +177,10 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Присоединиться к Джами";
 "createAccount.lookingForUsernameAvailability" = "проверка доступности…";
-"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
+"createAccount.invalidUsername" = "Неверное имя пользователя. Введите верное.";
 "createAccount.usernameAlreadyTaken" = "имя пользователя уже занято";
-"createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
+"createAccount.usernameValid" = "Имя пользователя доступно.";
+"createAccount.loading" = "Загрузка…";
 "createAccount.waitCreateAccountTitle" = "Добавление аккаунта";
 "createAccount.UsernameNotRegisteredTitle" = "Ошибка сети";
 "createAccount.UsernameNotRegisteredMessage" = "Аккаунт был создан, но имя пользователя не было зарегистрировано";
@@ -319,7 +319,7 @@
 "accountPage.contactMeOnJamiContant" = "Свяжитесь со мной по адресу «%s» на платформе распределенной связи Джами: https://jami.net";
 "accountPage.passwordPlaceholder" = "Введите пароль вашего аккаунта";
 "accountPage.usernamePlaceholder" = "Введите желаемое имя пользователя";
-"accountPage.registerNameErrorMessage" = "The username is unavailable.";
+"accountPage.registerNameErrorMessage" = "Имя пользователя недоступно.";
 "accountPage.usernameRegistering" = "Регистрация";
 "accountPage.usernameRegisterAction" = "Зарегистрировать";
 "accountPage.usernameRegistrationFailedTitle" = "Не удалось зарегистрироваться";
@@ -358,7 +358,7 @@
 "accountPage.manageAccount" = "Управление аккаунтом";
 "accountPage.encryptAccount" = "Зашифровать аккаунт с паролем";
 "accountPage.passwordExplanation" = "Аккаунт Джами создаётся локально и хранится только на этом устройстве в форме архива, содержащего ключи от вашей учётной записи. По желанию, доступ к архиву может быть защищён паролем.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordsDoNotMatch" = "Пароли не совпадают.";
 "accountPage.passwordCreated" = "Пароль создан";
 "accountPage.passwordUpdated" = "Пароль обновлен";
 "accountPage.linkedDevices" = "Привязанные устройства";
@@ -387,6 +387,7 @@
 "accountPage.accountIdentity" = "Идентификатор аккаунта";
 "accountPage.bootstrap" = "Сервер начальной загрузки";
 "accountPage.dhtConfiguration" = "Конфигурация OpenDHT";
+"accountPage.nameServer" = "Сервер имён";
 
 // Backup Account
 "backupAccount.explanation" = "Этот аккаунт Джами существует только на данном устройстве. Аккаунт будет утрачен, если это устройство будет потеряно или если приложение будет удалено. Рекомендуется создать резервную копию аккаунта.";
@@ -464,7 +465,7 @@
 "generatedMessage.contactAdded" = "Получено приглашение";
 "generatedMessage.swarmCreated" = "Беседа создана";
 "generatedMessage.invitationReceived" = "был(а) приглашен(а) присоединиться к беседе.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationAccepted" = "присоединяется к беседе.";
 "generatedMessage.youJoined" = "Вы присоединились к беседе.";
 "generatedMessage.contactBlocked" = "был(а) заблокирован(а) в беседе.";
 "generatedMessage.contactUnblocked" = "был(а) разблокирован(а) в беседе.";
@@ -472,7 +473,7 @@
 "generatedMessage.missedOutgoingCall" = "Непринятый исходящий вызов";
 "generatedMessage.missedIncomingCall" = "Пропущенный входящий вызов";
 "generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "покидает беседу.";
 
 // General Settings
 "generalSettings.videoSettings" = "Настройки видео";

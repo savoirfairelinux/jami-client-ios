@@ -26,11 +26,11 @@
 "global.registerAUsername" = "Register username";
 "global.enterPassword" = "Enter password";
 "global.enterUsername" = "Enter username";
-"global.cancel" = "අවලංගු කරන්න";
+"global.cancel" = "Cancel";
 "global.blockContact" = "Block contact";
 "global.removeAccount" = "Remove account";
 "global.incomingCall" = "Incoming call";
-"global.ok" = "හරි";
+"global.ok" = "OK";
 "global.close" = "Close";
 "global.share" = "Share";
 "global.forward" = "Forward";
@@ -71,7 +71,7 @@
 "swarm.chooseColor" = "Color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifier";
-"swarm.settings" = "සැකසුම්";
+"swarm.settings" = "Settings";
 "swarm.members" = "Members";
 "swarm.addDescription" = "Add description";
 "swarm.oneToOne" = "Private";
@@ -81,13 +81,13 @@
 "swarm.others" = "Others";
 "swarm.member" = "Member";
 "swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
-"swarm.blocked" = "Blocked";
+"swarm.admin" = "管理員";
+"swarm.blocked" = "已封鎖";
 "swarm.unknown" = "Unknown";
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Leave";
-"swarm.newGroup" = "නව සමූහය තනන්න";
+"swarm.newGroup" = "Create new group";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -119,7 +119,7 @@
 "smartlist.aboutJami" = "About Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Accounts";
-"smartlist.disableDonation" = "දැන් නොවේ";
+"smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
@@ -141,8 +141,8 @@
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "replied to";
-"conversation.yourself" = "You";
-"conversation.edited" = "Edited";
+"conversation.yourself" = "您";
+"conversation.edited" = "已编辑";
 "conversation.deletedMessage" = "deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
@@ -203,7 +203,7 @@
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
 "linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
 "linkToAccount.pinPlaceholder" = "PIN code";
-"linkToAccount.pinLabel" = "Enter PIN code";
+"linkToAccount.pinLabel" = "输入PIN码";
 "linkToAccount.scanQRCode" = "Scan QR code";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
@@ -245,7 +245,7 @@
 "alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Record video message";
 "alerts.recordAudioMessage" = "Record audio message";
-"alerts.uploadFile" = "ගොනුව යවන්න";
+"alerts.uploadFile" = "Send file";
 "alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Share my location";
@@ -284,7 +284,7 @@
 
 // Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "සැකසුම්";
+"accountPage.settingsHeader" = "Settings";
 "accountPage.notificationsHeader" = "Notifications";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
@@ -387,7 +387,7 @@
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "Bootstrap";
 "accountPage.dhtConfiguration" = "OpenDHT configuration";
-"accountPage.nameServer" = "Name server";
+"accountPage.nameServer" = "名称服务器";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -445,7 +445,7 @@
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "අවලංගු කළා";
+"dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "An error occurred while sending.";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
@@ -513,4 +513,4 @@
 "aboutJami.contribute" = "Contribute";
 "aboutJami.feedback" = "Feedback";
 "aboutJami.createdBy" = "Created by";
-"aboutJami.artworkBy" = "Artwork by";
+"aboutJami.artworkBy" = "美術設計";
