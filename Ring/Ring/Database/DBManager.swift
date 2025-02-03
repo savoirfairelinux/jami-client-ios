@@ -49,9 +49,9 @@ enum GeneratedMessage: Int {
         case .contactAdded:
             return L10n.GeneratedMessage.contactAdded
         case .invitationReceived:
-            return L10n.GeneratedMessage.invitationReceived
+            return L10n.GeneratedMessage.nonSwarmInvitationReceived
         case .invitationAccepted:
-            return L10n.GeneratedMessage.invitationAccepted
+            return L10n.GeneratedMessage.nonSwarmInvitationAccepted
         case .missedOutgoingCall:
             return L10n.GeneratedMessage.missedOutgoingCall
         case .missedIncomingCall:
@@ -156,7 +156,7 @@ enum InteractionType: String {
         case .call:
             return .call
         case .contact:
-            return .contact
+            return .contact( .add)
         case .iTransfer:
             return .fileTransfer
         case .oTransfer:

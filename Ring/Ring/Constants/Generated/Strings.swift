@@ -41,8 +41,8 @@ internal enum L10n {
     internal static let enableAccount = L10n.tr("Localizable", "account.enableAccount", fallback: "Enable Account")
     /// Me
     internal static let me = L10n.tr("Localizable", "account.me", fallback: "Me")
-    /// account need to be migrated
-    internal static let needMigration = L10n.tr("Localizable", "account.needMigration", fallback: "account need to be migrated")
+    /// Account requires migration.
+    internal static let needMigration = L10n.tr("Localizable", "account.needMigration", fallback: "Account requires migration.")
     /// Port
     internal static let port = L10n.tr("Localizable", "account.port", fallback: "Port")
     /// Enter Port Number
@@ -105,8 +105,6 @@ internal enum L10n {
     internal static let contactMeOnJamiTitle = L10n.tr("Localizable", "accountPage.contactMeOnJamiTitle", fallback: "Contact me on Jami!")
     /// Encrypt account
     internal static let createPassword = L10n.tr("Localizable", "accountPage.createPassword", fallback: "Encrypt account")
-    /// Account Details
-    internal static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader", fallback: "Account Details")
     /// Enter current password
     internal static let currentPasswordPlaceholder = L10n.tr("Localizable", "accountPage.currentPasswordPlaceholder", fallback: "Enter current password")
     /// Device revocation error
@@ -267,8 +265,6 @@ internal enum L10n {
     internal static let upnpEnabled = L10n.tr("Localizable", "accountPage.upnpEnabled", fallback: "Use UPnP")
     /// Use proxy list
     internal static let useProxyList = L10n.tr("Localizable", "accountPage.useProxyList", fallback: "Use proxy list")
-    /// username: not registered
-    internal static let usernameNotRegistered = L10n.tr("Localizable", "accountPage.usernameNotRegistered", fallback: "username: not registered")
     /// Enter desired username
     internal static let usernamePlaceholder = L10n.tr("Localizable", "accountPage.usernamePlaceholder", fallback: "Enter desired username")
     /// Register
@@ -289,10 +285,6 @@ internal enum L10n {
     internal static let doneAction = L10n.tr("Localizable", "actions.doneAction", fallback: "Done")
     /// Go to Settings
     internal static let goToSettings = L10n.tr("Localizable", "actions.goToSettings", fallback: "Go to Settings")
-    ///   Audio Call
-    internal static let startAudioCall = L10n.tr("Localizable", "actions.startAudioCall", fallback: "  Audio Call")
-    ///   Video Call
-    internal static let startVideoCall = L10n.tr("Localizable", "actions.startVideoCall", fallback: "  Video Call")
     /// Stop sharing
     internal static let stopLocationSharing = L10n.tr("Localizable", "actions.stopLocationSharing", fallback: "Stop sharing")
   }
@@ -329,10 +321,6 @@ internal enum L10n {
     internal static let dbFailedTitle = L10n.tr("Localizable", "alerts.dbFailedTitle", fallback: "An error happened when launching Jami")
     /// An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.
     internal static let errorWrongCredentials = L10n.tr("Localizable", "alerts.errorWrongCredentials", fallback: "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.")
-    /// Incoming call from 
-    internal static let incomingCallAllertTitle = L10n.tr("Localizable", "alerts.incomingCallAllertTitle", fallback: "Incoming call from ")
-    /// Ignore
-    internal static let incomingCallButtonIgnore = L10n.tr("Localizable", "alerts.incomingCallButtonIgnore", fallback: "Ignore")
     /// Turn on “Location Services” to allow “Jami” to determine device location.
     internal static let locationServiceIsDisabled = L10n.tr("Localizable", "alerts.locationServiceIsDisabled", fallback: "Turn on “Location Services” to allow “Jami” to determine device location.")
     /// Share my location
@@ -405,8 +393,6 @@ internal enum L10n {
     internal static let connecting = L10n.tr("Localizable", "calls.connecting", fallback: "Connecting…")
     /// Call with 
     internal static let currentCallWith = L10n.tr("Localizable", "calls.currentCallWith", fallback: "Call with ")
-    /// wants to talk to you
-    internal static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo", fallback: "wants to talk to you")
     /// Lower hand
     internal static let lowerHand = L10n.tr("Localizable", "calls.lowerHand", fallback: "Lower hand")
     /// Maximize
@@ -441,16 +427,14 @@ internal enum L10n {
     internal static let addToContactsLabel = L10n.tr("Localizable", "conversation.addToContactsLabel", fallback: "Add to contacts?")
     /// Contact blocked
     internal static let contactBlocked = L10n.tr("Localizable", "conversation.contactBlocked", fallback: "Contact blocked")
-    /// deleted a message
-    internal static let deletedMessage = L10n.tr("Localizable", "conversation.deletedMessage", fallback: "deleted a message")
+    /// %@ deleted a message
+    internal static func deletedMessage(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "conversation.deletedMessage", String(describing: p1), fallback: "%@ deleted a message")
+    }
     /// Edited
     internal static let edited = L10n.tr("Localizable", "conversation.edited", fallback: "Edited")
     /// An error occurred while saving the image to the gallery.
     internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "An error occurred while saving the image to the gallery.")
-    /// You are currently receiving a live location from 
-    internal static let explanationReceivingLocationFrom = L10n.tr("Localizable", "conversation.explanationReceivingLocationFrom", fallback: "You are currently receiving a live location from ")
-    /// You are currently sharing your location with 
-    internal static let explanationSendingLocationTo = L10n.tr("Localizable", "conversation.explanationSendingLocationTo", fallback: "You are currently sharing your location with ")
     /// sent you a conversation invitation.
     internal static let incomingRequest = L10n.tr("Localizable", "conversation.incomingRequest", fallback: "sent you a conversation invitation.")
     /// In reply to
@@ -463,8 +447,10 @@ internal enum L10n {
     internal static func receivedRequest(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.receivedRequest", String(describing: p1), fallback: "%@ sent you a conversation invitation.")
     }
-    /// replied to
-    internal static let repliedTo = L10n.tr("Localizable", "conversation.repliedTo", fallback: "replied to")
+    /// %@ replied to %@
+    internal static func repliedTo(_ p1: Any, _ p2: Any) -> String {
+      return L10n.tr("Localizable", "conversation.repliedTo", String(describing: p1), String(describing: p2), fallback: "%@ replied to %@")
+    }
     /// Hello,
     /// Do you want to join the conversation?
     internal static let requestMessage = L10n.tr("Localizable", "conversation.requestMessage", fallback: "Hello,\nDo you want to join the conversation?")
@@ -498,10 +484,8 @@ internal enum L10n {
     internal static let encryptTitle = L10n.tr("Localizable", "createAccount.encryptTitle", fallback: "Encrypt account with password")
     /// Invalid username. Please enter a valid username.
     internal static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername", fallback: "Invalid username. Please enter a valid username.")
-    /// Loading…
-    internal static let loading = L10n.tr("Localizable", "createAccount.loading", fallback: "Loading…")
-    /// looking for availability…
-    internal static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability", fallback: "looking for availability…")
+    /// Looking for availability…
+    internal static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability", fallback: "Looking for availability…")
     /// You can choose a username to help others more easily find and reach you on Jami.
     internal static let nameExplanation = L10n.tr("Localizable", "createAccount.nameExplanation", fallback: "You can choose a username to help others more easily find and reach you on Jami.")
     /// New account
@@ -512,16 +496,14 @@ internal enum L10n {
     internal static let timeoutMessage = L10n.tr("Localizable", "createAccount.timeoutMessage", fallback: "Username registration is in progress. Please wait…")
     /// Account Created
     internal static let timeoutTitle = L10n.tr("Localizable", "createAccount.timeoutTitle", fallback: "Account Created")
-    /// username already taken
-    internal static let usernameAlreadyTaken = L10n.tr("Localizable", "createAccount.usernameAlreadyTaken", fallback: "username already taken")
+    /// Username already taken
+    internal static let usernameAlreadyTaken = L10n.tr("Localizable", "createAccount.usernameAlreadyTaken", fallback: "Username already taken")
     /// Account was created but username was not registered
     internal static let usernameNotRegisteredMessage = L10n.tr("Localizable", "createAccount.UsernameNotRegisteredMessage", fallback: "Account was created but username was not registered")
     /// Network error
     internal static let usernameNotRegisteredTitle = L10n.tr("Localizable", "createAccount.UsernameNotRegisteredTitle", fallback: "Network error")
     /// The username is available.
     internal static let usernameValid = L10n.tr("Localizable", "createAccount.usernameValid", fallback: "The username is available.")
-    /// Adding account
-    internal static let waitCreateAccountTitle = L10n.tr("Localizable", "createAccount.waitCreateAccountTitle", fallback: "Adding account")
   }
   internal enum CreateProfile {
     /// Create profile picture
@@ -592,22 +574,36 @@ internal enum L10n {
   internal enum GeneratedMessage {
     /// Invitation received
     internal static let contactAdded = L10n.tr("Localizable", "generatedMessage.contactAdded", fallback: "Invitation received")
-    /// was blocked from the conversation.
-    internal static let contactBlocked = L10n.tr("Localizable", "generatedMessage.contactBlocked", fallback: "was blocked from the conversation.")
-    /// has left the conversation.
-    internal static let contactLeftConversation = L10n.tr("Localizable", "generatedMessage.contactLeftConversation", fallback: "has left the conversation.")
-    /// was unblocked from the conversation.
-    internal static let contactUnblocked = L10n.tr("Localizable", "generatedMessage.contactUnblocked", fallback: "was unblocked from the conversation.")
-    /// has joined the conversation.
-    internal static let invitationAccepted = L10n.tr("Localizable", "generatedMessage.invitationAccepted", fallback: "has joined the conversation.")
-    /// was invited to join the conversation.
-    internal static let invitationReceived = L10n.tr("Localizable", "generatedMessage.invitationReceived", fallback: "was invited to join the conversation.")
+    /// %@ was blocked from the conversation.
+    internal static func contactBlocked(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "generatedMessage.contactBlocked", String(describing: p1), fallback: "%@ was blocked from the conversation.")
+    }
+    /// %@ has left the conversation.
+    internal static func contactLeftConversation(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "generatedMessage.contactLeftConversation", String(describing: p1), fallback: "%@ has left the conversation.")
+    }
+    /// %@ was unblocked from the conversation.
+    internal static func contactUnblocked(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "generatedMessage.contactUnblocked", String(describing: p1), fallback: "%@ was unblocked from the conversation.")
+    }
+    /// %@ has joined the conversation.
+    internal static func invitationAccepted(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "generatedMessage.invitationAccepted", String(describing: p1), fallback: "%@ has joined the conversation.")
+    }
+    /// %@ was invited to join the conversation.
+    internal static func invitationReceived(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "generatedMessage.invitationReceived", String(describing: p1), fallback: "%@ was invited to join the conversation.")
+    }
     /// Live location sharing
     internal static let liveLocationSharing = L10n.tr("Localizable", "generatedMessage.liveLocationSharing", fallback: "Live location sharing")
     /// Missed incoming call
     internal static let missedIncomingCall = L10n.tr("Localizable", "generatedMessage.missedIncomingCall", fallback: "Missed incoming call")
     /// Missed outgoing call
     internal static let missedOutgoingCall = L10n.tr("Localizable", "generatedMessage.missedOutgoingCall", fallback: "Missed outgoing call")
+    /// Your invitation was accepted.
+    internal static let nonSwarmInvitationAccepted = L10n.tr("Localizable", "generatedMessage.nonSwarmInvitationAccepted", fallback: "Your invitation was accepted.")
+    /// You sent an invitation.
+    internal static let nonSwarmInvitationReceived = L10n.tr("Localizable", "generatedMessage.nonSwarmInvitationReceived", fallback: "You sent an invitation.")
     /// Outgoing call
     internal static let outgoingCall = L10n.tr("Localizable", "generatedMessage.outgoingCall", fallback: "Outgoing call")
     /// Conversation created
@@ -724,18 +720,16 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "importFromArchive.title", fallback: "Import from archive")
   }
   internal enum Invitations {
-    /// accepted
-    internal static let accepted = L10n.tr("Localizable", "invitations.accepted", fallback: "accepted")
-    /// blocked
-    internal static let blocked = L10n.tr("Localizable", "invitations.blocked", fallback: "blocked")
-    /// declined
-    internal static let declined = L10n.tr("Localizable", "invitations.declined", fallback: "declined")
+    /// Accepted
+    internal static let accepted = L10n.tr("Localizable", "invitations.accepted", fallback: "Accepted")
+    /// Blocked
+    internal static let blocked = L10n.tr("Localizable", "invitations.blocked", fallback: "Blocked")
+    /// Declined
+    internal static let declined = L10n.tr("Localizable", "invitations.declined", fallback: "Declined")
     /// Invitations received
     internal static let list = L10n.tr("Localizable", "invitations.list", fallback: "Invitations received")
     /// No invitations
     internal static let noInvitations = L10n.tr("Localizable", "invitations.noInvitations", fallback: "No invitations")
-    /// pending
-    internal static let pending = L10n.tr("Localizable", "invitations.pending", fallback: "pending")
   }
   internal enum LinkDevice {
     /// An error occurred while exporting the account.

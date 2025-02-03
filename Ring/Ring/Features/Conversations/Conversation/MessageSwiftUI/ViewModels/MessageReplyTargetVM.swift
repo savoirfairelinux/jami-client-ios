@@ -97,8 +97,8 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarI
     private func getInReplyMessage() -> String {
         let inReplyToSelf = L10n.Conversation.inReplyTo + " \(L10n.Account.me)"
         let inReplyToOther = L10n.Conversation.inReplyTo + " \(targetReplyUsername)"
-        let repliedByOtherToSelf = "\(username) " + L10n.Conversation.repliedTo + " \(L10n.Account.me)"
-        let repliedByOtherToOther = "\(username) " + L10n.Conversation.repliedTo + " \(targetReplyUsername)"
+        let repliedByOtherToSelf = L10n.Conversation.repliedTo(username, L10n.Account.me)
+        let repliedByOtherToOther = L10n.Conversation.repliedTo(username, targetReplyUsername)
 
         switch (replyIsIncoming(), targetReplyIsIncoming()) {
         case (true, true):
