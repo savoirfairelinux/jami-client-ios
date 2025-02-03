@@ -99,7 +99,7 @@ class ConversationsService {
                 }
                 /// filter out contact requests
                 let conversationsFromDB = conversationsModels.filter { conversation in
-                    !(conversation.messages.count == 1 && conversation.messages.first!.content == L10n.GeneratedMessage.invitationReceived)
+                    !(conversation.messages.count == 1 && conversation.messages.first!.content == L10n.GeneratedMessage.nonSwarmInvitationReceived)
                 }
                 /// Filter out conversations that already added to swarm
                 .filter { conversation in
@@ -487,7 +487,7 @@ class ConversationsService {
                                 conversation.accountId == toAccountId
                         })
                         .first {
-                        let content = (message.type == .contact || message.type == .call) ?
+                        let content = (message.type.isContact || message.type == .call) ?
                             GeneratedMessage.init(from: message.content).toMessage(with: Int(duration))
                             : message.content
                         message.content = content
@@ -750,7 +750,7 @@ class ConversationsService {
                                 conversation.accountId == accountId
                         })
                         .first {
-                        let content = (message.type == .contact || message.type == .call) ?
+                        let content = (message.type.isContact || message.type == .call) ?
                             GeneratedMessage.init(from: message.content).toMessage(with: Int(0))
                             : message.content
                         message.content = content

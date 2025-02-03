@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,15 +138,14 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "In reply to";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "You";
 "conversation.edited" = "Edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "No invitations";
-"invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
 "invitations.declined" = "declined";
 "invitations.blocked" = "blocked";
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Join Jami";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "username already taken";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Adding account";
 "createAccount.UsernameNotRegisteredTitle" = "Network error";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Delete";
 "actions.backAction" = "Back";
 "actions.doneAction" = "Done";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonIgnore" = "Ignore";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
 "actions.stopLocationSharing" = "Stop sharing";
 
 // Calls
-"calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
 "calls.callFinished" = "Call finished";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Devices";
 "accountPage.settingsHeader" = "Settings";
 "accountPage.notificationsHeader" = "Notifications";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
 "accountPage.blockedContacts" = "Blocked contacts";
 "accountPage.unblockContact" = "Unblock";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Connecting";
 "account.statusUnknown" = "Unknown";
 "account.statusConnectionerror" = "Connection Error";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "Account need to be migrated";
 "account.me" = "Me";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Invitation received";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Outgoing call";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Missed incoming call";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";

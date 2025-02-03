@@ -123,7 +123,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     @Published var finalImage: UIImage?
     @Published var messageDeleted = false
     @Published var messageEdited = false
-    @Published var messageDeletedText = " " + L10n.Conversation.deletedMessage
+    @Published var messageDeletedText = ""
     @Published var editIndicator = L10n.Conversation.edited
     @Published var editionColor = Color.secondary
     @Published var scale: CGFloat = 1
@@ -173,7 +173,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.messageDeletedText = self.username + " " + L10n.Conversation.deletedMessage
+                self.messageDeletedText = L10n.Conversation.deletedMessage(self.username)
             }
         }
     }
@@ -222,7 +222,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         if self.isLink() {
             let backgroundIsLightColor: Bool = self.backgroundColor.isLight(threshold: 0.8) ?? true
             self.styling.textColor = backgroundIsLightColor ? .blue : .white
-        } else if !self.isIncoming && self.type != .contact {
+        } else if !self.isIncoming && !self.type.isContact {
             self.styling.textColor = Color.white
         } else {
             self.styling.textColor = self.styling.defaultTextColor
@@ -238,7 +238,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     private func updateBackgroundColor() {
-        if self.type == .contact || self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
+        if self.type.isContact || self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
             self.backgroundColor = .clear
         } else {
             self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
