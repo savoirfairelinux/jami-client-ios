@@ -37,14 +37,69 @@ enum MessageAttributes: String {
     case totalSize = "totalSize"
 }
 
-enum MessageType: String {
-    case text = "text/plain"
-    case fileTransfer = "application/data-transfer+json"
-    case contact = "member"
-    case call = "application/call-history+json"
-    case merge = "merge"
-    case initial = "initial"
-    case profile = "application/update-profile"
+enum MessageType: Equatable {
+    case text
+    case fileTransfer
+    case contact(ContactAction)
+    case call
+    case merge
+    case initial
+    case profile
+
+    // Computed property to get associated string representation
+    var rawValue: String {
+        switch self {
+        case .text: return "text/plain"
+        case .fileTransfer: return "application/data-transfer+json"
+        case .contact: return "member"
+        case .call: return "application/call-history+json"
+        case .merge: return "merge"
+        case .initial: return "initial"
+        case .profile: return "application/update-profile"
+        }
+    }
+
+    // Initializer from a string
+    init?(rawValue: String) {
+        switch rawValue {
+        case "text/plain": self = .text
+        case "application/data-transfer+json": self = .fileTransfer
+        case "member": self = .contact(.add) // Default to `.add`, can be modified later
+        case "application/call-history+json": self = .call
+        case "merge": self = .merge
+        case "initial": self = .initial
+        case "application/update-profile": self = .profile
+        default: return nil
+        }
+    }
+
+    static func == (lhs: MessageType, rhs: MessageType) -> Bool {
+        switch (lhs, rhs) {
+        case (.text, .text),
+             (.fileTransfer, .fileTransfer),
+             (.call, .call),
+             (.merge, .merge),
+             (.initial, .initial),
+             (.contact, .contact),
+             (.profile, .profile):
+            return true
+        default:
+            return false
+        }
+    }
+
+    var isContact: Bool {
+        if case .contact = self { return true }
+        return false
+    }
+
+
+    func getInteractionString(name: String, isIncoming: Bool) -> String? {
+        if case .contact(let action) = self {
+            return action.getInteractionString(name: name, isIncomig: isIncoming)
+        }
+        return nil // Return nil for non-contact messages
+    }
 }
 
 enum ContactAction: String {
@@ -53,6 +108,22 @@ enum ContactAction: String {
     case join
     case banned
     case unban
+
+    func getInteractionString(name: String, isIncomig: Bool) -> String {
+        switch self {
+            case .add:
+                return isIncomig ? L10n.GeneratedMessage.invitationReceived(name) :
+                L10n.GeneratedMessage.contactAdded
+            case .join:
+                return isIncomig ? L10n.GeneratedMessage.invitationAccepted(name) : L10n.GeneratedMessage.youJoined
+            case .remove:
+                return L10n.GeneratedMessage.contactLeftConversation(name)
+            case.banned:
+                return L10n.GeneratedMessage.contactBlocked(name)
+            case .unban:
+                return L10n.GeneratedMessage.contactUnblocked(name)
+        }
+    }
 }
 
 class MessageAction: Identifiable, Equatable, Hashable {
@@ -161,7 +232,7 @@ public class MessageModel {
            let messageType = MessageType(rawValue: type) {
             self.type = messageType
         }
-        if let content = info[MessageAttributes.body.rawValue], self.type == .text {
+        if let content = info[MessageAttributes.body.rawValue], self.type == MessageType.text {
             self.content = content
         }
         if let reply = info[MessageAttributes.reply.rawValue] {
@@ -209,19 +280,20 @@ public class MessageModel {
         case .contact:
             if let action = info[MessageAttributes.action.rawValue],
                let contactAction = ContactAction(rawValue: action) {
-                switch contactAction {
-                case .add:
-                    self.content = self.incoming ? L10n.GeneratedMessage.invitationReceived :
-                        L10n.GeneratedMessage.contactAdded
-                case .join:
-                    self.content = self.incoming ? L10n.GeneratedMessage.invitationAccepted : L10n.GeneratedMessage.youJoined
-                case .remove:
-                    self.content = L10n.GeneratedMessage.contactLeftConversation
-                case.banned:
-                    self.content = L10n.GeneratedMessage.contactBlocked
-                case .unban:
-                    self.content = L10n.GeneratedMessage.contactUnblocked
-                }
+                self.type = .contact(contactAction)
+                //                switch contactAction {
+                //                case .add:
+                //                    self.content = self.incoming ? L10n.GeneratedMessage.invitationReceived :
+                //                        L10n.GeneratedMessage.contactAdded
+                //                case .join:
+                //                    self.content = self.incoming ? L10n.GeneratedMessage.invitationAccepted : L10n.GeneratedMessage.youJoined
+                //                case .remove:
+                //                    self.content = L10n.GeneratedMessage.contactLeftConversation
+                //                case.banned:
+                //                    self.content = L10n.GeneratedMessage.contactBlocked
+                //                case .unban:
+                //                    self.content = L10n.GeneratedMessage.contactUnblocked
+                //                }
             }
         case .fileTransfer:
             if let fileid = info[MessageAttributes.fileId.rawValue] {
@@ -236,6 +308,10 @@ public class MessageModel {
         default:
             break
         }
+    }
+
+    func getContactInteractionString(name: String) -> String? {
+        return self.type.getInteractionString(name: name, isIncoming: incoming)
     }
 
     func updateFrom(info: [String: String]) {
