@@ -584,7 +584,7 @@ class MessagesListVM: ObservableObject {
         let lastMessage = lastMessageContainer.message
         self.lastMessageDate.accept(lastMessage.receivedDate.conversationTimestamp())
 
-        if lastMessage.type != .contact {
+        if !lastMessage.type.isContact {
             self.lastMessage.accept(lastMessage.content)
         } else {
             // For contact messages, update when the display name is available.
@@ -925,7 +925,7 @@ class MessagesListVM: ObservableObject {
 
     private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
         let differentUri = message.uri != secondMessage.uri
-        let messageTypeCheck = message.type == .contact || message.type == .initial
+        let messageTypeCheck = message.type.isContact || message.type == .initial
         let differentAuthor = message.authorId != secondMessage.authorId
         let isReplyCheck = message.isReply() || secondMessage.isReply()
         let hasReactions = !message.reactions.isEmpty || !secondMessage.reactions.isEmpty
