@@ -504,3 +504,9 @@
 "aboutJami.feedback" = "Feedback";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";

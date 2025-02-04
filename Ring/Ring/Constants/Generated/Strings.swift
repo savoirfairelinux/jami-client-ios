@@ -28,6 +28,18 @@ internal enum L10n {
     /// version 3 or later for details.
     internal static let noWarranty2 = L10n.tr("Localizable", "aboutJami.noWarranty2", fallback: "version 3 or later for details.")
   }
+  internal enum Accessibility {
+    /// Close
+    internal static let close = L10n.tr("Localizable", "accessibility.close", fallback: "Close")
+    /// Add account
+    internal static let smartListAddAccount = L10n.tr("Localizable", "accessibility.smartListAddAccount", fallback: "Add account")
+    /// Your current account is %@
+    internal static func smartListConnectedAs(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.smartListConnectedAs", String(describing: p1), fallback: "Your current account is %@")
+    }
+    /// Switch account
+    internal static let smartListSwitchAccounts = L10n.tr("Localizable", "accessibility.smartListSwitchAccounts", fallback: "Switch account")
+  }
   internal enum Account {
     /// Account Status
     internal static let accountStatus = L10n.tr("Localizable", "account.accountStatus", fallback: "Account Status")

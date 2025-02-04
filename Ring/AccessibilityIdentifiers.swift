@@ -45,4 +45,6 @@ struct SmartListAccessibilityIdentifiers {
     static let bookButton = "bookButtonIdentifier"
     static let searchBarTextField = "searchBarTextField"
     static let contactPicker = "contactPicker"
+    static let accountsListTitle = "accountsListTitle"
+    static let closeAccountsList = "closeAccountsList"
 }
