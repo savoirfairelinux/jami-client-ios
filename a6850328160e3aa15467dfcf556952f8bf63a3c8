@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0a1d61b_57098c3e",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-02-04T20:26:33Z",
+      "side": 0,
+      "message": "Can the string be updated to:\n`Account requires migration.`",
+      "range": {
+        "startLine": 423,
+        "startChar": 27,
+        "endLine": 423,
+        "endChar": 54
+      },
+      "revId": "a6850328160e3aa15467dfcf556952f8bf63a3c8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}

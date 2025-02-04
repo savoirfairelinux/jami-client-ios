@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb0d5548_9ac80508",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-02-04T20:26:33Z",
+      "side": 1,
+      "message": "Should the string end with a full stop `.`? Thank you",
+      "range": {
+        "startLine": 465,
+        "startChar": 49,
+        "endLine": 465,
+        "endChar": 71
+      },
+      "revId": "645332cb0d2fadc9cac11de4eacb3d80d62c1d09",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac8246fa_48d78bd0",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-02-04T20:26:33Z",
+      "side": 1,
+      "message": "Should the string end with a full stop `.`? Thank you",
+      "range": {
+        "startLine": 466,
+        "startChar": 49,
+        "endLine": 466,
+        "endChar": 77
+      },
+      "revId": "645332cb0d2fadc9cac11de4eacb3d80d62c1d09",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
