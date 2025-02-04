@@ -362,6 +362,8 @@ struct CurrentAccountButton: View {
             }
             Spacer()
         }
+        .accessibilityLabel(L10n.Accessibility.smartListSwitchAccounts)
+        .accessibilityHint(L10n.Accessibility.smartListConnectedAs(model.bestName))
         .transaction { transaction in
             transaction.animation = nil
         }
