@@ -33,18 +33,38 @@ struct AccountLists: View {
             accountsView()
             newAccountButton()
         }
-        .accessibilityElement(children: .contain)
         .accessibility(identifier: SmartListAccessibilityIdentifiers.accountListView)
         .padding(.horizontal, 5)
     }
-
+    
     @ViewBuilder
     private func accountsView() -> some View {
         VStack {
             Spacer()
                 .frame(height: verticalSpacing)
-            Text(model.headerTitle)
-                .fontWeight(.semibold)
+            HStack {
+                Text(model.headerTitle)
+                    .fontWeight(.semibold)
+                    .accessibilityIdentifier("AccListTitle")
+                    .frame(maxWidth: .infinity, alignment: .center) // Center title
+
+                Spacer() // Pushes the button to the right
+                
+                Button(action: {
+                    accountSelectedCallback()
+                }) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(10)
+                        .background(Circle().fill(Color.gray.opacity(0.4)))
+                        .accessibilityIdentifier("AccListClose")
+                        .accessibilityLabel("Close")
+                        
+
+                }
+            }
+
             Spacer()
                 .frame(height: verticalSpacing)
             accountsList()
@@ -55,6 +75,7 @@ struct AccountLists: View {
         .cornerRadius(cornerRadius)
         .shadow(radius: shadowRadius)
         .fixedSize(horizontal: false, vertical: true)
+
     }
 
     @ViewBuilder
@@ -73,6 +94,7 @@ struct AccountLists: View {
         .cornerRadius(cornerRadius)
         .shadow(radius: shadowRadius)
         .accessibility(identifier: SmartListAccessibilityIdentifiers.addAccountButton)
+        .accessibilityLabel("Add account")
     }
 
     @ViewBuilder
@@ -118,6 +140,8 @@ struct AccountRowView: View {
             guard let model = model else { return }
             model.changeCurrentAccount(accountId: accountRow.id)
         }
+        .accessibilityElement()
+        .accessibilityLabel(accountRow.bestName)
     }
 
     private var isSelectedAccount: Bool {
