@@ -362,6 +362,8 @@ struct CurrentAccountButton: View {
             }
             Spacer()
         }
+        .accessibilityLabel("Switch accounts")
+        .accessibilityHint("You are connected as " + model.bestName)
         .transaction { transaction in
             transaction.animation = nil
         }
