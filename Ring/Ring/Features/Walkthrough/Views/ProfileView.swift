@@ -68,6 +68,9 @@ struct ProfileView: View {
                                 .foregroundColor(.white)
                                 .padding(8)
                         }
+                        .accessibilityLabel(L10n.Accessibility.profilePicturePicker)
+                        .accessibilityHint(L10n.Accessibility.profilePicturePickerHint)
+
                     })
                     .actionSheet(isPresented: $showingImagePicker) {
                         ActionSheet(

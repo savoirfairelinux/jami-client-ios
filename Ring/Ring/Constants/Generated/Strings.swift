@@ -33,6 +33,12 @@ internal enum L10n {
     internal static let aboutJamiTitle = L10n.tr("Localizable", "accessibility.aboutJamiTitle", fallback: "About Jami")
     /// Close
     internal static let close = L10n.tr("Localizable", "accessibility.close", fallback: "Close")
+    /// Enter a username to verify if it's available
+    internal static let createAccountVerifyUsernamePrompt = L10n.tr("Localizable", "accessibility.createAccountVerifyUsernamePrompt", fallback: "Enter a username to verify if it's available")
+    /// Profile picture
+    internal static let profilePicturePicker = L10n.tr("Localizable", "accessibility.profilePicturePicker", fallback: "Profile picture")
+    /// Double-tap to take a picture or select a picture from the library
+    internal static let profilePicturePickerHint = L10n.tr("Localizable", "accessibility.profilePicturePickerHint", fallback: "Double-tap to take a picture or select a picture from the library")
     /// Add account
     internal static let smartListAddAccount = L10n.tr("Localizable", "accessibility.smartListAddAccount", fallback: "Add account")
     /// Your current account is %@
