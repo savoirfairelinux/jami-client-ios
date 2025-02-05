@@ -60,10 +60,7 @@ struct AccountLists: View {
                         .background(Circle().fill(Color.gray.opacity(0.4)))
                         .accessibilityIdentifier("AccListClose")
                         .accessibilityLabel("Close")
-                        .accessibilityActivate {
-                                            isActivated.toggle() // Perform the activation action
-                                            return true          // Indicate success
-                                        }
+                        
 
                 }
             }
