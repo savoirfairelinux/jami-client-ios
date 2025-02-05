@@ -63,11 +63,14 @@ struct ProfileView: View {
                             Circle()
                                 .fill(Color.black.opacity(0.5))
                                 .frame(width: 100, height: 100)
-
+                            
                             Image(systemName: "camera.fill")
                                 .foregroundColor(.white)
                                 .padding(8)
                         }
+                        .accessibilityLabel("Profile picture")
+                        .accessibilityHint("Double-tap to take a picture or select a picture from the library")
+
                     })
                     .actionSheet(isPresented: $showingImagePicker) {
                         ActionSheet(

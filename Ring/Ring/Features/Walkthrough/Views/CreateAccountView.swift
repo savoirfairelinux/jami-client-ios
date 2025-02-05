@@ -169,6 +169,7 @@ struct CreateAccountView: View {
             Text("valid name")
                 .foregroundColor(.clear)
                 .font(.footnote)
+                .accessibilityLabel("Enter a username to verify if it's available")
         } else {
             Text(viewModel.usernameValidationState.message)
                 .foregroundColor(Color(viewModel.usernameValidationState.textColor))
@@ -182,7 +183,8 @@ struct CreateAccountView: View {
             dismissHandler?.dismissView()
         }, label: {
             Text(L10n.Global.cancel)
-                .foregroundColor(Color(UIColor.label))
+                .foregroundColor(.jamiColor)
+
         })
         .accessibilityIdentifier(AccessibilityIdentifiers.cancelCreatingAccount)
     }
