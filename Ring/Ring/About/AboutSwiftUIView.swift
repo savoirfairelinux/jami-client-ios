@@ -24,10 +24,24 @@ struct AboutSwiftUIView: View {
     let padding: CGFloat = 20
     var body: some View {
         VStack(spacing: padding) {
-            Image("jami_gnupackage")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 30)
+            HStack {
+                Spacer() // To push the title to the center
+                Image("jami_gnupackage")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 30)
+                    .accessibilityLabel(L10n.Accessibility.aboutJamiTitle)
+                Spacer() // To push the title to the center
+
+                CloseButton(
+                    action: { [weak dismissHandler] in
+                        dismissHandler?.dismissView()
+                    },
+                    accessibilityIdentifier: SmartListAccessibilityIdentifiers .closeAboutView
+                )
+
+            }
+            
             ScrollView {
                 VStack(alignment: .leading, spacing: padding) {
                     VStack(alignment: .center) {

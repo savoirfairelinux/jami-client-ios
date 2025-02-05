@@ -51,18 +51,10 @@ struct AccountLists: View {
                 HStack {
                     Spacer() // Pushes the button to the right
 
-                    Button(action: {
-                        accountSelectedCallback()
-                    }, label: {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 12, weight: .bold))
-                            .foregroundColor(.black)
-                            .padding(10) // Increases tap area
-                            .background(Circle().fill(Color.gray.opacity(0.4)))
-                            .accessibilityIdentifier(SmartListAccessibilityIdentifiers.closeAccountsList)
-                            .accessibilityLabel(L10n.Accessibility.close)
-                            .padding()
-                    })
+                    CloseButton(
+                        action: accountSelectedCallback,
+                        accessibilityIdentifier: SmartListAccessibilityIdentifiers.closeAccountsList
+                    )
                 }
             }
 
