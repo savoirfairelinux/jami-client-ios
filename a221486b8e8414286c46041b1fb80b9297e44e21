@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee9b71fb_02fbc404",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-02-05T18:49:31Z",
+      "side": 1,
+      "message": "Jami Web has:\n`The username is already taken.`\n\nWhich one is correct? Here of Jami Web?\n\nThank you",
+      "range": {
+        "startLine": 178,
+        "startChar": 40,
+        "endLine": 178,
+        "endChar": 62
+      },
+      "revId": "a221486b8e8414286c46041b1fb80b9297e44e21",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
