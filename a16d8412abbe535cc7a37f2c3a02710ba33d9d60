@@ -379,6 +379,54 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd2a4f2d_0ca83b04",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5176012e_67b33eb4",
+      "range": {
+        "startLine": 152,
+        "startChar": 26,
+        "endLine": 152,
+        "endChar": 34
+      },
+      "revId": "a16d8412abbe535cc7a37f2c3a02710ba33d9d60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f89edc6d_09e52d78",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5176012e_67b33eb4",
+      "range": {
+        "startLine": 152,
+        "startChar": 26,
+        "endLine": 152,
+        "endChar": 34
+      },
+      "revId": "a16d8412abbe535cc7a37f2c3a02710ba33d9d60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32b0e5f0_48061165",
@@ -450,6 +498,54 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0432a78c_05a5f81d",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a8719aa_2dc9a897",
+      "range": {
+        "startLine": 153,
+        "startChar": 26,
+        "endLine": 153,
+        "endChar": 34
+      },
+      "revId": "a16d8412abbe535cc7a37f2c3a02710ba33d9d60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c10a9d62_8fd4fcc9",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a8719aa_2dc9a897",
+      "range": {
+        "startLine": 153,
+        "startChar": 26,
+        "endLine": 153,
+        "endChar": 34
+      },
+      "revId": "a16d8412abbe535cc7a37f2c3a02710ba33d9d60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67b3e6c8_bb27bb3d",
@@ -511,6 +607,54 @@
       "side": 1,
       "message": "Can it start with a capital letter?\n`Blocked`",
       "parentUuid": "77d8c456_67c7bbe1",
+      "range": {
+        "startLine": 154,
+        "startChar": 25,
+        "endLine": 154,
+        "endChar": 32
+      },
+      "revId": "a16d8412abbe535cc7a37f2c3a02710ba33d9d60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba4320e_0dd91637",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83d77ef9_f8a2e248",
+      "range": {
+        "startLine": 154,
+        "startChar": 25,
+        "endLine": 154,
+        "endChar": 32
+      },
+      "revId": "a16d8412abbe535cc7a37f2c3a02710ba33d9d60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b25df6c1_1fe7e227",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83d77ef9_f8a2e248",
       "range": {
         "startLine": 154,
         "startChar": 25,

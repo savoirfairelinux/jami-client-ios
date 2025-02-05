@@ -24,6 +24,54 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e283511_b8680895",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb0d5548_9ac80508",
+      "range": {
+        "startLine": 465,
+        "startChar": 49,
+        "endLine": 465,
+        "endChar": 71
+      },
+      "revId": "645332cb0d2fadc9cac11de4eacb3d80d62c1d09",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d5d7d7b_0fb67b1d",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb0d5548_9ac80508",
+      "range": {
+        "startLine": 465,
+        "startChar": 49,
+        "endLine": 465,
+        "endChar": 71
+      },
+      "revId": "645332cb0d2fadc9cac11de4eacb3d80d62c1d09",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac8246fa_48d78bd0",
@@ -37,6 +85,54 @@
       "writtenOn": "2025-02-04T20:26:33Z",
       "side": 1,
       "message": "Should the string end with a full stop `.`? Thank you",
+      "range": {
+        "startLine": 466,
+        "startChar": 49,
+        "endLine": 466,
+        "endChar": 77
+      },
+      "revId": "645332cb0d2fadc9cac11de4eacb3d80d62c1d09",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ad015a5_64541e11",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac8246fa_48d78bd0",
+      "range": {
+        "startLine": 466,
+        "startChar": 49,
+        "endLine": 466,
+        "endChar": 77
+      },
+      "revId": "645332cb0d2fadc9cac11de4eacb3d80d62c1d09",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8eb27a5_0c68b587",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac8246fa_48d78bd0",
       "range": {
         "startLine": 466,
         "startChar": 49,

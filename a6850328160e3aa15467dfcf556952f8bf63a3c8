@@ -22,6 +22,54 @@
       },
       "revId": "a6850328160e3aa15467dfcf556952f8bf63a3c8",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21cae8a2_74ec7246",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "a0a1d61b_57098c3e",
+      "range": {
+        "startLine": 423,
+        "startChar": 27,
+        "endLine": 423,
+        "endChar": 54
+      },
+      "revId": "a6850328160e3aa15467dfcf556952f8bf63a3c8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fae80fb_6898bba2",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-05T18:36:00Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "a0a1d61b_57098c3e",
+      "range": {
+        "startLine": 423,
+        "startChar": 27,
+        "endLine": 423,
+        "endChar": 54
+      },
+      "revId": "a6850328160e3aa15467dfcf556952f8bf63a3c8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
