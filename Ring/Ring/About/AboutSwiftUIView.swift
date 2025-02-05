@@ -24,10 +24,25 @@ struct AboutSwiftUIView: View {
     let padding: CGFloat = 20
     var body: some View {
         VStack(spacing: padding) {
-            Image("jami_gnupackage")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 30)
+            ZStack {
+                HStack {
+                    Spacer() // Push the close button to the right
+                    CloseButton(
+                        action: { [weak dismissHandler] in
+                            dismissHandler?.dismissView()
+                        },
+                        accessibilityIdentifier: SmartListAccessibilityIdentifiers.closeAboutView
+                    )
+                }
+                
+                Image("jami_gnupackage")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 30)
+                    .accessibilityLabel(L10n.Accessibility.aboutJamiTitle)
+                    .frame(maxWidth: .infinity, alignment: .center) // This will center the image horizontally
+            }
+
             ScrollView {
                 VStack(alignment: .leading, spacing: padding) {
                     VStack(alignment: .center) {

@@ -215,6 +215,8 @@ struct HeaderView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 80)
+                .accessibilityLabel(L10n.Accessibility.welcomeToJamiTitle)
+                .accessibilityHidden(true)
             Text(L10n.Welcome.title)
                 .font(.headline)
                 .multilineTextAlignment(.center)
@@ -347,6 +349,7 @@ extension View {
                 .ignoresSafeArea()
                 .scaledToFill()
                 .accessibilityIdentifier(AccessibilityIdentifiers.welcomeWindow)
+                .accessibilityHidden(true)
         )
     }
 }
