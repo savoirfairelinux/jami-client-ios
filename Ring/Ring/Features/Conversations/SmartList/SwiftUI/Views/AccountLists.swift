@@ -45,6 +45,28 @@ struct AccountLists: View {
                 .frame(height: verticalSpacing)
             Text(model.headerTitle)
                 .fontWeight(.semibold)
+            HStack {
+                Text(model.headerTitle)
+                    .fontWeight(.semibold)
+                    .accessibilityIdentifier("AccListTitle")
+                    .frame(maxWidth: .infinity, alignment: .center) // Center title
+
+                Spacer() // Pushes the button to the right
+                
+                Button(action: {
+                    accountSelectedCallback()
+                }) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(10)
+                        .background(Circle().fill(Color.gray.opacity(0.4)))
+                        .accessibilityIdentifier("AccListClose")
+                        .accessibilityLabel("Close")
+                        
+
+                }
+            }
             Spacer()
                 .frame(height: verticalSpacing)
             accountsList()
