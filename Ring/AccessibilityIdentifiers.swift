@@ -47,4 +47,5 @@ struct SmartListAccessibilityIdentifiers {
     static let contactPicker = "contactPicker"
     static let accountsListTitle = "accountsListTitle"
     static let closeAccountsList = "closeAccountsList"
+    static let closeAboutView = "closeAboutView"
 }

@@ -243,3 +243,23 @@ extension View {
         self.modifier(OptionalListSectionSpacing(spacing: spacing))
     }
 }
+
+struct CloseButton: View {
+    let action: () -> Void
+    let accessibilityIdentifier: String
+
+    var body: some View {
+        Button(action: {
+            action()
+        }, label: {
+            Image(systemName: "xmark")
+                .font(.system(size: 12, weight: .bold))
+                .foregroundColor(.black)
+                .padding(10) // Increases tap area
+                .background(Circle().fill(Color.gray.opacity(0.4)))
+                .accessibilityIdentifier(accessibilityIdentifier)
+                .accessibilityLabel(L10n.Accessibility.close)
+                .padding()
+        })
+    }
+}

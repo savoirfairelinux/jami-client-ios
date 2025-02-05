@@ -29,6 +29,8 @@ internal enum L10n {
     internal static let noWarranty2 = L10n.tr("Localizable", "aboutJami.noWarranty2", fallback: "version 3 or later for details.")
   }
   internal enum Accessibility {
+    /// About Jami
+    internal static let aboutJamiTitle = L10n.tr("Localizable", "accessibility.aboutJamiTitle", fallback: "About Jami")
     /// Close
     internal static let close = L10n.tr("Localizable", "accessibility.close", fallback: "Close")
     /// Add account
@@ -39,6 +41,8 @@ internal enum L10n {
     }
     /// Switch account
     internal static let smartListSwitchAccounts = L10n.tr("Localizable", "accessibility.smartListSwitchAccounts", fallback: "Switch account")
+    /// Welcome to Jami
+    internal static let welcomeToJamiTitle = L10n.tr("Localizable", "accessibility.welcomeToJamiTitle", fallback: "Welcome to Jami")
   }
   internal enum Account {
     /// Account Status
