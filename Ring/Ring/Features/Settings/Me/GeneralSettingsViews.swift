@@ -30,16 +30,12 @@ struct FileTransferSettingsView: View {
     var body: some View {
         List {
             Section {
-                HStack {
-                    Text(L10n.GeneralSettings.automaticAcceptIncomingFiles)
-                    Spacer()
-                    Toggle("", isOn: Binding<Any>.customBinding(
-                        get: { model.automaticlyDownloadIncomingFiles },
-                        set: { newValue in model.enableAutomaticlyDownload(enable: newValue) }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                }
+                toggleCell (
+                    toggleText: L10n.GeneralSettings.automaticAcceptIncomingFiles,
+                    getAction: { model.automaticlyDownloadIncomingFiles },
+                    setAction: { newValue in model.enableAutomaticlyDownload(enable: newValue) },
+                    accessibilityLabelValue: model.automaticlyDownloadIncomingFiles ? "" : ""
+               )
                 if model.automaticlyDownloadIncomingFiles {
                     HStack {
                         Text(L10n.GeneralSettings.acceptTransferLimit) + Text(L10n.GeneralSettings.acceptTransferLimitDescription)
@@ -54,6 +50,8 @@ struct FileTransferSettingsView: View {
                         .disabled(!model.automaticlyDownloadIncomingFiles)
                         .foregroundColor(model.automaticlyDownloadIncomingFiles ? .jamiColor : Color(UIColor.secondaryLabel))
                     }
+                    .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
+                    .accessibilityLabel(L10n.GeneralSettings.acceptTransferLimit)
                 }
             }
         }
@@ -74,17 +72,12 @@ struct LocationSharingSettingsView: View {
         ZStack {
             List {
                 Section {
-                    HStack {
-                        Text(L10n.GeneralSettings.limitLocationSharingDuration)
-                            .layoutPriority(1)
-                        Spacer()
-                        Toggle("", isOn: Binding<Any>.customBinding(
-                            get: { model.limitLocationSharing },
-                            set: { newValue in model.enableLocationSharingLimit(enable: newValue) }
-                        ))
-                        .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                    }
+                    toggleCell (
+                        toggleText: L10n.GeneralSettings.limitLocationSharingDuration,
+                        getAction: { model.limitLocationSharing },
+                        setAction: { newValue in model.enableLocationSharingLimit(enable: newValue) },
+                        accessibilityLabelValue: model.limitLocationSharing ? "" : ""
+                   )
                     if model.limitLocationSharing {
                         HStack {
                             Text(L10n.GeneralSettings.limitLocationSharingDuration)
@@ -97,6 +90,8 @@ struct LocationSharingSettingsView: View {
                                 showingDurationPicker = true
                             }
                         }
+                        .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
+                        .accessibilityLabel(L10n.GeneralSettings.limitLocationSharingDuration)
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)
@@ -132,16 +127,12 @@ struct VideoSettingsView: View {
     var body: some View {
         List {
             Section {
-                HStack {
-                    Text(L10n.GeneralSettings.videoAcceleration)
-                    Spacer()
-                    Toggle("", isOn: Binding<Any>.customBinding(
-                        get: { model.videoAccelerationEnabled },
-                        set: { newValue in model.enableVideoAcceleration(enable: newValue) }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                }
+                toggleCell (
+                    toggleText: L10n.GeneralSettings.videoAcceleration,
+                    getAction: { model.videoAccelerationEnabled },
+                    setAction: { newValue in model.enableVideoAcceleration(enable: newValue) },
+                    accessibilityLabelValue: model.videoAccelerationEnabled ? "" : ""
+               )
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(L10n.Global.video)

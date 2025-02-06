@@ -217,6 +217,9 @@ struct ConversationRowView: View {
             }
         }
         .transition(.opacity)
+        .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
+        .accessibilityLabel(computeAccessibilityLabel())
+
     }
 
     private var presenceIndicator: some View {
@@ -241,4 +244,32 @@ struct ConversationRowView: View {
             )
             .offset(x: -1, y: -1)
     }
+    
+    private func computeAccessibilityLabel() -> String {
+        var label = "\(model.name)"
+
+        if model.unreadMessages > 0 {
+            label += ", \(model.unreadMessages) unread messages"
+        }
+
+        if model.swiftUIModel.isBlocked {
+            label += ", conversation blocked"
+        } else if model.swiftUIModel.isSyncing {
+            label += ", syncing in progress"
+        } else if !model.lastMessage.isEmpty {
+            label += ", last message on \(model.lastMessageDate): \(model.lastMessage)"
+        }
+
+        switch model.presence {
+        case .connected:
+            label += ", online"
+        case .available:
+            label += ", available"
+        default:
+            break
+        }
+
+        return label
+    }
+
 }
