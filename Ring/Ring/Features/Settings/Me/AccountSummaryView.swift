@@ -48,15 +48,19 @@ struct AccountSummaryView: View {
 
                 Section(header: Text(L10n.AccountPage.accountHeader)) {
                     HStack {
-                        Text(model.accountStatus)
+                        Text("Online")
                         Spacer()
-                        Toggle("", isOn: Binding<Any>.customBinding(
+                        Toggle("", isOn: Binding(
                             get: { model.accountEnabled },
                             set: { newValue in model.enableAccount(enable: newValue) }
                         ))
                         .labelsHidden()
                         .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(model.accountEnabled ? "" : "")
+
+                    
                 }
 
                 if model.account.type == .sip {
@@ -98,6 +102,7 @@ struct AccountSummaryView: View {
             NavigationLink(destination: SettingsSummaryView(model: model)) {
                 Image(systemName: "gearshape.fill")
                     .foregroundColor(.jamiColor)
+                    .accessibilityLabel("Settings")
             })
     }
 
@@ -110,6 +115,7 @@ struct AccountSummaryView: View {
                     .conditionalTextSelection()
                     .truncationMode(.middle)
                     .lineLimit(1)
+                    .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 Spacer()
                     .frame(width: 15)
                 Spacer()
@@ -124,8 +130,13 @@ struct AccountSummaryView: View {
                     .sheet(isPresented: $showQRcode) {
                         QRCodeView(isPresented: $showQRcode, jamiId: model.jamiId)
                     }
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityLabel("QR Code")
+                    .accessibilityHint("Double-tap to view your contact QR code")
+
             }
             .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
+
         }
     }
 
@@ -147,6 +158,10 @@ struct AccountSummaryView: View {
                 EditProfileView(accountModel: model,
                                 isPresented: $showEditPrpofile)
             }
+            .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
+            .accessibilityLabel(getProfileName())
+            .accessibilityHint("Double-tao to edit your profile")
+
         }
     }
 
@@ -160,6 +175,14 @@ struct AccountSummaryView: View {
         }
     }
 
+    func getProfileName() -> String {
+        if model.profileName.isEmpty {
+            return L10n.AccountPage.profileNameNotSelected
+        } else {
+            return model.profileName
+        }
+    }
+    
     func editProfileButton() -> some View {
         VStack {
             Image(systemName: "pencil")
