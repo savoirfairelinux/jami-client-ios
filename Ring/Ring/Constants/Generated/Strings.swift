@@ -31,6 +31,14 @@ internal enum L10n {
   internal enum Accessibility {
     /// About Jami
     internal static let aboutJamiTitle = L10n.tr("Localizable", "accessibility.aboutJamiTitle", fallback: "About Jami")
+    /// Double-tao to edit your profile
+    internal static let accountSummaryEditProfileHint = L10n.tr("Localizable", "accessibility.accountSummaryEditProfileHint", fallback: "Double-tao to edit your profile")
+    /// Settings
+    internal static let accountSummaryEditSettingsButton = L10n.tr("Localizable", "accessibility.accountSummaryEditSettingsButton", fallback: "Settings")
+    /// QR Code
+    internal static let accountSummaryQrCode = L10n.tr("Localizable", "accessibility.accountSummaryQrCode", fallback: "QR Code")
+    /// Double-tap to view your contact QR code
+    internal static let accountSummaryQrCodeHint = L10n.tr("Localizable", "accessibility.accountSummaryQrCodeHint", fallback: "Double-tap to view your contact QR code")
     /// Close
     internal static let close = L10n.tr("Localizable", "accessibility.close", fallback: "Close")
     /// Enter a username to verify if it's available
@@ -47,6 +55,14 @@ internal enum L10n {
     }
     /// Switch account
     internal static let smartListSwitchAccounts = L10n.tr("Localizable", "accessibility.smartListSwitchAccounts", fallback: "Switch account")
+    /// Group picture
+    internal static let swarmPicturePicker = L10n.tr("Localizable", "accessibility.swarmPicturePicker", fallback: "Group picture")
+    /// Double-tap to take a picture or select a picture from the library
+    internal static let swarmPicturePickerHint = L10n.tr("Localizable", "accessibility.swarmPicturePickerHint", fallback: "Double-tap to take a picture or select a picture from the library")
+    /// Off
+    internal static let switchButtonIsOff = L10n.tr("Localizable", "accessibility.switchButtonIsOff", fallback: "Off")
+    /// On
+    internal static let switchButtonIsOn = L10n.tr("Localizable", "accessibility.switchButtonIsOn", fallback: "On")
     /// Welcome to Jami
     internal static let welcomeToJamiTitle = L10n.tr("Localizable", "accessibility.welcomeToJamiTitle", fallback: "Welcome to Jami")
   }
