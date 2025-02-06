@@ -100,6 +100,7 @@ struct RevocationView: View {
         VStack {
             SwiftUI.ProgressView(L10n.AccountPage.deviceRevocationProgress)
                 .padding()
+                .accessibilityAutoFocusOnAppear()
         }
         .frame(minWidth: 280, minHeight: 150)
     }
@@ -110,6 +111,7 @@ struct RevocationView: View {
                 .font(.headline)
             Text(L10n.AccountPage.revokeDeviceMessage)
                 .font(.subheadline)
+                .accessibilityAutoFocusOnAppear()
             if model.hasPassword() {
                 PasswordFieldView(text: $password, placeholder: L10n.Global.enterPassword)
                     .textFieldStyleInAlert()

@@ -65,6 +65,7 @@ struct EncryptAccount: View {
                 .listRowBackground(Color.clear)
                 .optionalRowSeparator(hidden: true)
                 .listRowInsets(EdgeInsets(top: model.validationError == nil ? 15 : 5, leading: 0, bottom: 0, trailing: 0))
+                .accessibilityAutoFocusOnAppear()
 
             if let errorMessage = model.encryptError {
                 ErrorMessageView(errorMessage: errorMessage)
