@@ -263,3 +263,64 @@ struct CloseButton: View {
         })
     }
 }
+
+// MARK: - Accessibility
+extension View {
+    // Conditionally applies an accessibility focus modifier on iOS 15+,
+    func accessibilityFocusCompat(_ isFocused: Binding<Bool>) -> some View {
+        if #available(iOS 15, *) {
+            return AnyView(self.modifier(AccessibilityFocusModifier(isFocused: isFocused)))
+        } else {
+            return AnyView(self)
+        }
+    }
+
+    // Automatically apply accessibility focus to view when it appears on iOS 15+.
+    func accessibilityAutoFocusOnAppear(_ shouldFocus: Bool = true) -> some View {
+        if #available(iOS 15, *) {
+            return AnyView(self.modifier(AccessibilityAutoFocusModifier(shouldFocus: shouldFocus)))
+        } else {
+            return AnyView(self)
+        }
+    }
+}
+
+@available(iOS 15, *)
+struct AccessibilityAutoFocusModifier: ViewModifier {
+    let shouldFocus: Bool
+    @AccessibilityFocusState private var isFocused: Bool
+
+    func body(content: Content) -> some View {
+        content
+            .accessibilityFocused($isFocused)
+            .onAppear {
+                if shouldFocus {
+                    isFocused = true
+                }
+            }
+    }
+}
+
+@available(iOS 15, *)
+private struct AccessibilityFocusModifier: ViewModifier {
+    @Binding var isFocused: Bool
+    @AccessibilityFocusState private var internalFocus: Bool
+
+    func body(content: Content) -> some View {
+        content
+            .accessibilityFocused($internalFocus)
+            .onAppear {
+                internalFocus = isFocused
+            }
+            .onChange(of: internalFocus) { newValue in
+                if isFocused != newValue {
+                    isFocused = newValue
+                }
+            }
+            .onChange(of: isFocused) { newValue in
+                if internalFocus != newValue {
+                    internalFocus = newValue
+                }
+            }
+    }
+}
