@@ -173,7 +173,8 @@ public class MessageModel {
     var reactions = Set<MessageAction>()
     var editions = Set<MessageAction>()
     var statusForParticipant = [String: MessageStatus]()
-
+    var accessibilityLabelValue: String = ""
+    
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
         self.receivedDate = receivedDate
@@ -258,21 +259,44 @@ public class MessageModel {
         }
         switch self.type {
         case .text:
-            if let content = info[MessageAttributes.body.rawValue] {
-                self.content = content
+            if let timestamp = info[MessageAttributes.timestamp.rawValue],
+               let timestampDouble = Double(timestamp) {
+                let receivedDate = Date(timeIntervalSince1970: timestampDouble)
+
+                if let content = info[MessageAttributes.body.rawValue] {
+                    self.content = content
+                    self.accessibilityLabelValue = "\(content), \(self.incoming ? "Message received" : "Message sent") on \(receivedDate.conversationTimestamp())."
+                } else {
+                    self.content = "Text Message"
+                    self.accessibilityLabelValue = "Text message received on \(receivedDate.conversationTimestamp()), content not available."
+                }
             }
         case .call:
-            if let duration = info[MessageAttributes.duration.rawValue],
-               let durationDouble = Double(duration) {
-                if durationDouble < 0 {
-                    self.content = self.incoming ? L10n.Global.incomingCall : L10n.GeneratedMessage.outgoingCall
+            if let timestamp = info[MessageAttributes.timestamp.rawValue],
+               let timestampDouble = Double(timestamp) {
+                let receivedDate = Date(timeIntervalSince1970: timestampDouble)
+
+                if let duration = info[MessageAttributes.duration.rawValue],
+                   let durationDouble = Double(duration) {
+                    if durationDouble < 0 {
+                        self.content = self.incoming ? "Incoming Call" : "Outgoing Call"
+                        self.accessibilityLabelValue = self.incoming
+                            ? "Incoming call on \(receivedDate.conversationTimestamp()), no duration available."
+                            : "Outgoing call on \(receivedDate.conversationTimestamp()), no duration available."
+                    } else {
+                        let durationSeconds = durationDouble * 0.001
+                        let time = Date.convertSecondsToTimeString(seconds: durationSeconds)
+                        self.content = self.incoming ? "Incoming Call - \(time)" : "Outgoing Call - \(time)"
+                        self.accessibilityLabelValue = self.incoming
+                            ? "Incoming call on \(receivedDate.conversationTimestamp()), lasted \(time)."
+                            : "Outgoing call on \(receivedDate.conversationTimestamp()), lasted \(time)."
+                    }
                 } else {
-                    let durationSeconds = durationDouble * 0.001
-                    let time = Date.convertSecondsToTimeString(seconds: durationSeconds)
-                    self.content = self.incoming ? L10n.Global.incomingCall + " - " + time : L10n.GeneratedMessage.outgoingCall + " - " + time
+                    self.content = self.incoming ? "Missed Incoming Call" : "Missed Outgoing Call"
+                    self.accessibilityLabelValue = self.incoming
+                        ? "Missed incoming call on \(receivedDate.conversationTimestamp()), no answer."
+                        : "Missed outgoing call on \(receivedDate.conversationTimestamp()), no answer."
                 }
-            } else {
-                self.content = self.incoming ? L10n.GeneratedMessage.missedIncomingCall : L10n.GeneratedMessage.missedOutgoingCall
             }
         case .contact:
             if let action = info[MessageAttributes.action.rawValue],
@@ -280,17 +304,50 @@ public class MessageModel {
                 self.type = .contact(contactAction)
             }
         case .fileTransfer:
-            if let fileid = info[MessageAttributes.fileId.rawValue] {
-                self.daemonId = fileid
-            }
-            if let displayName = info[MessageAttributes.displayName.rawValue] {
-                self.content = displayName
+            if let timestamp = info[MessageAttributes.timestamp.rawValue],
+               let timestampDouble = Double(timestamp) {
+                let receivedDate = Date(timeIntervalSince1970: timestampDouble)
+                
+                if let fileid = info[MessageAttributes.fileId.rawValue] {
+                    self.daemonId = fileid
+                }
+                
+                if let displayName = info[MessageAttributes.displayName.rawValue] {
+                    self.content = displayName
+                    self.accessibilityLabelValue = "\(content), \(self.incoming ? "File received" : "File sent") on \(receivedDate.conversationTimestamp())."
+                } else {
+                    self.content = "File Transfer"
+                    self.accessibilityLabelValue = "File received on \(receivedDate.conversationTimestamp()), name not available."
+                }
             }
         case .initial:
             self.type = .initial
             self.content = L10n.GeneratedMessage.swarmCreated
         default:
             break
+        }
+        
+        if !self.incoming {
+            switch self.status {
+            case .displayed:
+                self.accessibilityLabelValue += ", Read by recipient"
+            case .sent:
+                self.accessibilityLabelValue += ", Unread by recipient"
+            default:
+                break
+            }
+        }
+
+        if self.isMessageEdited() {
+            self.accessibilityLabelValue += ", Edited"
+        }
+
+        if self.isMessageDeleted() {
+            self.accessibilityLabelValue = "Message deleted"
+        }
+
+        if self.isReply() {
+            self.accessibilityLabelValue += ", In reply to a message"
         }
     }
 
