@@ -89,12 +89,14 @@ struct LinkedDevicesView: View {
                             .conditionalTextSelection()
                     } else {
                         FocusableTextField(text: $deviceName, isFirstResponder: $isFocused)
+                            .accessibilityAutoFocusOnAppear()
                     }
                 }
                 Text(device.deviceId)
                     .font(.footnote)
                     .foregroundColor(Color(UIColor.secondaryLabel))
                     .lineLimit(1)
+                    .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                     .conditionalTextSelection()
             }
             Spacer()

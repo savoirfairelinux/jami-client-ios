@@ -47,16 +47,11 @@ struct AccountSummaryView: View {
                 profileSection()
 
                 Section(header: Text(L10n.AccountPage.accountHeader)) {
-                    HStack {
-                        Text(model.accountStatus)
-                        Spacer()
-                        Toggle("", isOn: Binding<Any>.customBinding(
-                            get: { model.accountEnabled },
-                            set: { newValue in model.enableAccount(enable: newValue) }
-                        ))
-                        .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                    }
+                     toggleCell (
+                         toggleText: L10n.Account.statusOnline,
+                         getAction: { model.accountEnabled },
+                         setAction: { newValue in model.enableAccount(enable: newValue) }
+                    )
                 }
 
                 if model.account.type == .sip {
@@ -98,6 +93,7 @@ struct AccountSummaryView: View {
             NavigationLink(destination: SettingsSummaryView(model: model)) {
                 Image(systemName: "gearshape.fill")
                     .foregroundColor(.jamiColor)
+                    .accessibilityLabel(L10n.Accessibility.accountSummaryEditSettingsButton)
             })
     }
 
@@ -110,22 +106,29 @@ struct AccountSummaryView: View {
                     .conditionalTextSelection()
                     .truncationMode(.middle)
                     .lineLimit(1)
+                    .accessibilityHidden(true)
+
                 Spacer()
                     .frame(width: 15)
                 Spacer()
-                Image(systemName: "qrcode")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 18, height: 18)
-                    .foregroundColor(.jamiColor)
-                    .onTapGesture {
-                        showQRcode = true
-                    }
-                    .sheet(isPresented: $showQRcode) {
-                        QRCodeView(isPresented: $showQRcode, jamiId: model.jamiId)
-                    }
+
+                Button(action: {
+                    showQRcode = true
+                }) {
+                    Image(systemName: "qrcode")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 18, height: 18)
+                        .foregroundColor(.jamiColor)
+                }
+                .sheet(isPresented: $showQRcode) {
+                    QRCodeView(isPresented: $showQRcode, jamiId: model.jamiId)
+                }
+                .accessibilityLabel(L10n.Accessibility.accountSummaryQrCode)
+                .accessibilityHint(L10n.Accessibility.accountSummaryQrCodeHint)
             }
             .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
+
         }
     }
 
@@ -147,6 +150,10 @@ struct AccountSummaryView: View {
                 EditProfileView(accountModel: model,
                                 isPresented: $showEditPrpofile)
             }
+            .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
+            .accessibilityLabel(getProfileName())
+            .accessibilityHint(L10n.Accessibility.accountSummaryEditProfileHint)
+
         }
     }
 
@@ -160,6 +167,14 @@ struct AccountSummaryView: View {
         }
     }
 
+    func getProfileName() -> String {
+        if model.profileName.isEmpty {
+            return L10n.AccountPage.profileNameNotSelected
+        } else {
+            return model.profileName
+        }
+    }
+    
     func editProfileButton() -> some View {
         VStack {
             Image(systemName: "pencil")
