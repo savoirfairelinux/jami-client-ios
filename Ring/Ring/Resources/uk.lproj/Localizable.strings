@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Додати до контактів?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Ви зараз ділитеся своїм місцем розташуванням з ";
-"conversation.explanationReceivingLocationFrom" = "Ви зараз отримуєте пряму локацію від ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Відповідно до";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Ви";
 "conversation.edited" = "Редагування";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ніяких запрошень";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Прийнято";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Запрошення отримані";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Приєднуйся до Jami";
-"createAccount.lookingForUsernameAvailability" = "шукаючи доступність...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Уживальне ім'я вже прийнято";
+"createAccount.usernameAlreadyTaken" = "Ім'я користувача вже зайнято";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Додавання облікового запису";
 "createAccount.UsernameNotRegisteredTitle" = "Збій мережі";
 "createAccount.UsernameNotRegisteredMessage" = "Уведено обліковий запис, але ім'я користувача не зареєстровано";
 "createAccount.timeoutTitle" = "Обліковий запис створено";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Видалити";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
-"alerts.incomingCallAllertTitle" = "Позванка з ";
-"alerts.incomingCallButtonIgnore" = "Ігнорувати";
-"actions.startAudioCall" = "Зов'янок з аудіо";
-"actions.startVideoCall" = "Віддіові дзвінки";
 "actions.goToSettings" = "Перейти до Настройки";
 "actions.stopLocationSharing" = "Зупинити поширення";
 
 // Calls
-"calls.incomingCallInfo" = "Хоче розмовляти з тобою";
 "calls.ringing" = "Звон...";
 "calls.connecting" = "З'єднавши...";
 "calls.callFinished" = "Зов'язок завершений";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Пристрої";
 "accountPage.settingsHeader" = "Налаштування";
 "accountPage.notificationsHeader" = "За повідомленнями";
-"accountPage.usernameNotRegistered" = "користувацьке ім'я: не зареєстровано";
-"accountPage.credentialsHeader" = "Відомості про обліковий запис";
 "accountPage.blockedContacts" = "Заблоковані контакти";
 "accountPage.unblockContact" = "Розблокувати";
 "accountPage.proxyAddressAlert" = "Додайте прокси-адрес";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "З'єднання";
 "account.statusUnknown" = "Невідомий";
 "account.statusConnectionerror" = "Помилка з'єднання";
-"account.needMigration" = "рахунку потрібно перевести";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Я";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Отримано запрошення";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Вихідний виклик";
 "generatedMessage.missedOutgoingCall" = "Пропущений вихідний виклик";
 "generatedMessage.missedIncomingCall" = "Пропущений вхідний виклик";
 "generatedMessage.liveLocationSharing" = "Поділення місцями на живо";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Відгук";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Закрити";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Додати обліковий запис";
+"accessibility.aboutJamiTitle" = "Про Jami";
+"accessibility.welcomeToJamiTitle" = "Вітаємо в Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Фото профілю";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

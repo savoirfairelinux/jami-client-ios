@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Adaugi la contacte?";
 "conversation.notContactLabel" = "nu este în contactele tale";
 "conversation.messagePlaceholder" = "Scrie pentru";
-"conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către ";
-"conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
 "conversation.errorSavingImage" = "A apărut o eroare în timpul salvării imaginii.";
 "conversation.receivedRequest" = "%@ ți-a trimis o invitație la conversație.";
 "conversation.incomingRequest" = "ți-a trimis o invitație la conversație.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "Ai acceptat invitația la conversație.";
 "conversation.synchronizationMessage" = "Se așteaptă ca %@ să se conecteze pentru a sincroniza conversația…";
 "conversation.inReplyTo" = "Răspuns pentru";
-"conversation.repliedTo" = " a răspuns pentru";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Tu";
 "conversation.edited" = "Modificat";
-"conversation.deletedMessage" = "a șters mesajul";
+"conversation.deletedMessage" = "%@ a șters mesajul";
 "conversation.contactBlocked" = "Contact blocat";
 
 // Invitations
 "invitations.noInvitations" = "Nicio invitație";
-"invitations.pending" = "în așteptare";
-"invitations.accepted" = "acceptat";
-"invitations.declined" = "refuzat";
-"invitations.blocked" = "blocat";
+"invitations.accepted" = "Acceptat";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocat";
 "invitations.list" = "Invitații primite";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Folosește Jami";
-"createAccount.lookingForUsernameAvailability" = "caut disponibilitatea...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Numele este greșit. Trebuie introdus un nume corect.";
-"createAccount.usernameAlreadyTaken" = "nume ales deja";
+"createAccount.usernameAlreadyTaken" = "Nume ales deja";
 "createAccount.usernameValid" = "Numele este disponibil.";
-"createAccount.loading" = "Se încarcă…";
-"createAccount.waitCreateAccountTitle" = "Se adaugă contul";
 "createAccount.UsernameNotRegisteredTitle" = "Eroare de rețea";
 "createAccount.UsernameNotRegisteredMessage" = "Contul a fost creat, dar numele de utilizator nu a fost înscris";
 "createAccount.timeoutTitle" = "Cont creat";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Șterge";
 "actions.backAction" = "Înapoi";
 "actions.doneAction" = "Făcut";
-"alerts.incomingCallAllertTitle" = "Apel primit de la ";
-"alerts.incomingCallButtonIgnore" = "Ignoră";
-"actions.startAudioCall" = "  Apel vocal";
-"actions.startVideoCall" = "  Apel video";
 "actions.goToSettings" = "Du-te la Reglări";
 "actions.stopLocationSharing" = "Oprește distribuirea";
 
 // Calls
-"calls.incomingCallInfo" = "vrea să vorbească cu tine";
 "calls.ringing" = "Sună...";
 "calls.connecting" = "Se conectează...";
 "calls.callFinished" = "Apel terminat";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Aparate";
 "accountPage.settingsHeader" = "Reglări";
 "accountPage.notificationsHeader" = "Notificări";
-"accountPage.usernameNotRegistered" = "nume de utilizator: neînscris";
-"accountPage.credentialsHeader" = "Detaliile contului";
 "accountPage.blockedContacts" = "Contacte blocate";
 "accountPage.unblockContact" = "Deblochează";
 "accountPage.proxyAddressAlert" = "Introdu adresa proxy";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Se conectează";
 "account.statusUnknown" = "Necunoscut";
 "account.statusConnectionerror" = "Eroare de conectare";
-"account.needMigration" = "contul trebuie transferat";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Mine";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Invitație primită";
 "generatedMessage.swarmCreated" = "Conversație creată";
-"generatedMessage.invitationReceived" = "a fost invitat să participe la conversație.";
-"generatedMessage.invitationAccepted" = "participă la conversație.";
+"generatedMessage.invitationReceived" = "%@ a fost invitat să participe la conversație.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "Participi la conversație.";
-"generatedMessage.contactBlocked" = "a fost blocat din conversație.";
-"generatedMessage.contactUnblocked" = "a fost deblocat din conversație.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Apel efectuat";
 "generatedMessage.missedOutgoingCall" = "Apel efectuat nepreluat";
 "generatedMessage.missedIncomingCall" = "Apel pierdut";
 "generatedMessage.liveLocationSharing" = "Distribuirea poziției în direct";
-"generatedMessage.contactLeftConversation" = "a părăsit conversația.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Reglări video";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Părere";
 "aboutJami.createdBy" = "Creat de";
 "aboutJami.artworkBy" = "Grafică de";
+
+// Accessibility
+"accessibility.close" = "Închide";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Adaugă un cont";
+"accessibility.aboutJamiTitle" = "Despre Jami";
+"accessibility.welcomeToJamiTitle" = "Bine ai venit pe Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Poză de profil";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "אתה חולק את המיקום שלך עם ";
-"conversation.explanationReceivingLocationFrom" = "אתה מקבל כרגע מיקום חי מ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "בתשובה";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "You";
 "conversation.edited" = "מאורגן";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "אין הזמנות";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "הצטרף לג'מי.";
-"createAccount.lookingForUsernameAvailability" = "מחפשים זמינות...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "שם המשתמש כבר נלקח";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "הוספת חשבון";
 "createAccount.UsernameNotRegisteredTitle" = "טעות רשת";
 "createAccount.UsernameNotRegisteredMessage" = "חשבון נוצר אבל שם משתמש לא נרשם";
 "createAccount.timeoutTitle" = "חשבון נוצר";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "מחק";
 "actions.backAction" = "חזרה";
 "actions.doneAction" = "סיים";
-"alerts.incomingCallAllertTitle" = "שיחת כולה מ";
-"alerts.incomingCallButtonIgnore" = "להתעלם";
-"actions.startAudioCall" = "שיחת קול";
-"actions.startVideoCall" = "שיחת וידאו";
 "actions.goToSettings" = "לכו להגדיר";
 "actions.stopLocationSharing" = "תפסיק לחלוק";
 
 // Calls
-"calls.incomingCallInfo" = "רוצה לדבר איתך.";
 "calls.ringing" = "זה מצלצל...";
 "calls.connecting" = "חיבור...";
 "calls.callFinished" = "שיחת הודעה נגמרה.";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "התקנים";
 "accountPage.settingsHeader" = "הגדרות";
 "accountPage.notificationsHeader" = "הודעות";
-"accountPage.usernameNotRegistered" = "שם משתמש: לא רשום";
-"accountPage.credentialsHeader" = "פרטים על החשבון";
 "accountPage.blockedContacts" = "אנשי קשר חסומים";
 "accountPage.unblockContact" = "פותח את הבלוק";
 "accountPage.proxyAddressAlert" = "תורם כתובת פרוקסי";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "מתחבר";
 "account.statusUnknown" = "לא מוכר";
 "account.statusConnectionerror" = "טעות חיבור";
-"account.needMigration" = "חשבון צריך לעבור";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "אני";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "הזמנה התקבלה";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "שיחה יוצאת";
 "generatedMessage.missedOutgoingCall" = "פספסתי שיחת פנויה";
 "generatedMessage.missedIncomingCall" = "פספסתי שיחת כניסה";
 "generatedMessage.liveLocationSharing" = "שיתוף מיקום חי";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "משוב";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "סגירה";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "הוספת חשבון";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

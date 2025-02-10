@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "পরিচিতি যোগ করা?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "আপনি বর্তমানে আপনার অবস্থান শেয়ার করছেন ";
-"conversation.explanationReceivingLocationFrom" = "আপনি বর্তমানে একটি লাইভ অবস্থান থেকে প্রাপ্ত ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "উত্তর";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "তুমি";
 "conversation.edited" = "সম্পাদনা";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "আমন্ত্রণ নেই";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "জামিতে যোগদান করুন";
-"createAccount.lookingForUsernameAvailability" = "উপলব্ধতা খুঁজছেন...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "ব্যবহারকারীর নাম ইতিমধ্যে নেওয়া হয়েছে";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "যোগ করা অ্যাকাউন্ট";
 "createAccount.UsernameNotRegisteredTitle" = "নেটওয়ার্ক ত্রুটি";
 "createAccount.UsernameNotRegisteredMessage" = "অ্যাকাউন্ট তৈরি করা হয়েছে কিন্তু ব্যবহারকারীর নাম নিবন্ধিত হয়নি";
 "createAccount.timeoutTitle" = "অ্যাকাউন্ট তৈরি করা হয়েছে";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "মুছে ফেলুন";
 "actions.backAction" = "ফিরে";
 "actions.doneAction" = "সম্পন্ন";
-"alerts.incomingCallAllertTitle" = "";
-"alerts.incomingCallButtonIgnore" = "উপেক্ষা করা";
-"actions.startAudioCall" = "অডিও কল";
-"actions.startVideoCall" = "ভিডিও কল";
 "actions.goToSettings" = "সেটিংসে যান";
 "actions.stopLocationSharing" = "শেয়ারিং বন্ধ করুন";
 
 // Calls
-"calls.incomingCallInfo" = "তোমার সাথে কথা বলতে চায়";
 "calls.ringing" = "- রিং...";
 "calls.connecting" = "সংযোগ...";
 "calls.callFinished" = "কল শেষ";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "ডিভাইস";
 "accountPage.settingsHeader" = "সেটিং";
 "accountPage.notificationsHeader" = "বিজ্ঞপ্তি";
-"accountPage.usernameNotRegistered" = "ব্যবহারকারীর নামঃ নিবন্ধিত নয়";
-"accountPage.credentialsHeader" = "অ্যাকাউন্টের বিবরণ";
 "accountPage.blockedContacts" = "বন্ধ করা পরিচিতি";
 "accountPage.unblockContact" = "ব্লক খুলে দিন";
 "accountPage.proxyAddressAlert" = "প্রক্সি ঠিকানা প্রদান করুন";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "সংযোগ";
 "account.statusUnknown" = "অজানা";
 "account.statusConnectionerror" = "সংযোগ ত্রুটি";
-"account.needMigration" = "অ্যাকাউন্ট স্থানান্তরিত করা দরকার";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "আমি";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "আমন্ত্রণ প্রাপ্তি";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "প্রস্থান কল";
 "generatedMessage.missedOutgoingCall" = "মিস করা কল";
 "generatedMessage.missedIncomingCall" = "মিস করা ইনকামিং কল";
 "generatedMessage.liveLocationSharing" = "লাইভ অবস্থান ভাগ";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "প্রতিক্রিয়া";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

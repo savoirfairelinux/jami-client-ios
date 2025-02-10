@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "தொடர்புகளை சேர்க்க?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "நீங்கள் தற்போது உங்கள் இருப்பிடத்தை பகிர்ந்துகொள்கிறீர்கள் ";
-"conversation.explanationReceivingLocationFrom" = "நீங்கள் தற்போது ல் இருந்து ஒரு நேரடி இருப்பிடத்தை பெறுகிறீர்கள்";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "பதில்";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "நீ";
 "conversation.edited" = "தொகுப்பு";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "அழைப்பிதழ்கள் இல்லை";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "ஏற்றுக்கொள்ளப்பட்டது";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "ஜாமிக்கு சேரவும்";
-"createAccount.lookingForUsernameAvailability" = "கிடைக்கும் தன்மையை தேடும்...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "ஏற்கனவே எடுக்கப்பட்ட பயனர் பெயர்";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "கணக்கு சேர்க்கல்";
 "createAccount.UsernameNotRegisteredTitle" = "நெட்வொர்க் தவறு";
 "createAccount.UsernameNotRegisteredMessage" = "கணக்கு உருவாக்கப்பட்டது ஆனால் பயனர் பெயர் பதிவு செய்யப்படவில்லை";
 "createAccount.timeoutTitle" = "கணக்கு உருவாக்கப்பட்டது";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "நீக்கவும்";
 "actions.backAction" = "திரும்பி";
 "actions.doneAction" = "முடிந்தது";
-"alerts.incomingCallAllertTitle" = "ல் இருந்து வருகின்ற அழைப்பு";
-"alerts.incomingCallButtonIgnore" = "புறக்கணிக்கவும்";
-"actions.startAudioCall" = "ஆடியோ அழைப்பு";
-"actions.startVideoCall" = "வீடியோ அழைப்பு";
 "actions.goToSettings" = "அமைப்புகள் பக்கம் செல்லவும்";
 "actions.stopLocationSharing" = "பகிர்வதை நிறுத்து";
 
 // Calls
-"calls.incomingCallInfo" = "உங்களுடன் பேச விரும்புகிறார்";
 "calls.ringing" = "- ஒலிக்கிறது.";
 "calls.connecting" = "இணைப்பு.";
 "calls.callFinished" = "அழைப்பு முடிந்தது";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "சாதனங்கள்";
 "accountPage.settingsHeader" = "அமைப்புகள்";
 "accountPage.notificationsHeader" = "அறிவிப்புகள்";
-"accountPage.usernameNotRegistered" = "பயனர் பெயர்ஃ பதிவு செய்யப்படவில்லை";
-"accountPage.credentialsHeader" = "கணக்கு விவரங்கள்";
 "accountPage.blockedContacts" = "தடுக்கப்பட்ட தொடர்புகள்";
 "accountPage.unblockContact" = "தடுக்கலை திறக்கவும்";
 "accountPage.proxyAddressAlert" = "பிரதி முகவரியை வழங்கவும்";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "இணைப்பு";
 "account.statusUnknown" = "அறியப்படாதது";
 "account.statusConnectionerror" = "இணைப்பு தவறு";
-"account.needMigration" = "கணக்கு இடமாற்றம் செய்யப்பட வேண்டும்";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "நான்";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "அழைப்பு";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "வெளியேறும் அழைப்பு";
 "generatedMessage.missedOutgoingCall" = "தொலைபேசி அழைப்பு தவறியது";
 "generatedMessage.missedIncomingCall" = "தவறவிட்ட அழைப்பு";
 "generatedMessage.liveLocationSharing" = "நேரடி இருப்பிட பகிர்வு";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "பின்னூட்டம்";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "நெருக்கமாக";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "கணக்கை சேர்க்கவும்";
+"accessibility.aboutJamiTitle" = "ஜாமி பற்றி";
+"accessibility.welcomeToJamiTitle" = "ஜாமிக்கு வரவேற்கிறோம்";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "சுயவிவரப் படம்";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

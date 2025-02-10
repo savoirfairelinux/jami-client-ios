@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "連絡先を追加しますか？";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "現在地の共有相手: ";
-"conversation.explanationReceivingLocationFrom" = "現在地を受信している相手: ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "メッセージへの返信";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "自分";
 "conversation.edited" = "編集";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "招待はありません";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "招待を受信しました";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Jamiに登録";
-"createAccount.lookingForUsernameAvailability" = "利用可能か確認しています…";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "この利用者名は既に取得されています。";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "アカウントを追加";
 "createAccount.UsernameNotRegisteredTitle" = "ネットワークエラー";
 "createAccount.UsernameNotRegisteredMessage" = "アカウントは作成されましたが、ユーザー名がまだ登録されていません";
 "createAccount.timeoutTitle" = "アカウントを作成しました";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "削除";
 "actions.backAction" = "戻る";
 "actions.doneAction" = "完了";
-"alerts.incomingCallAllertTitle" = "からの電話";
-"alerts.incomingCallButtonIgnore" = "無視";
-"actions.startAudioCall" = "  音声通話";
-"actions.startVideoCall" = "  ビデオ通話";
 "actions.goToSettings" = "設定へ移動";
 "actions.stopLocationSharing" = "共有を停止";
 
 // Calls
-"calls.incomingCallInfo" = "あなたと話したい";
 "calls.ringing" = "鳴ってる";
 "calls.connecting" = "接続中…";
 "calls.callFinished" = "呼び出し終了";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "デバイス";
 "accountPage.settingsHeader" = "設定";
 "accountPage.notificationsHeader" = "通知";
-"accountPage.usernameNotRegistered" = "ユーザー名:登録されていない";
-"accountPage.credentialsHeader" = "アカウント詳細";
 "accountPage.blockedContacts" = "着信拒否した連絡先";
 "accountPage.unblockContact" = "ブロック解除";
 "accountPage.proxyAddressAlert" = "代理アドレスを入力する";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "接続中";
 "account.statusUnknown" = "不明";
 "account.statusConnectionerror" = "接続エラー";
-"account.needMigration" = "口座を移動する必要がある";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "自分";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "招待を受信しました";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "発信";
 "generatedMessage.missedOutgoingCall" = "不在発信";
 "generatedMessage.missedIncomingCall" = "不在着信";
 "generatedMessage.liveLocationSharing" = "リアルタイムでの位置共有";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "フィードバック";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "閉じる";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "アカウントを追加";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "プロフィール画像";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

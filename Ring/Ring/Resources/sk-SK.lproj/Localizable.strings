@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Pridať do kontaktov?";
 "conversation.notContactLabel" = "nie je vo vašom zozname kontaktov";
 "conversation.messagePlaceholder" = "Písať";
-"conversation.explanationSendingLocationTo" = "V súčasnosti zdieľate svoju polohu s ";
-"conversation.explanationReceivingLocationFrom" = "Momentálne dostávate živú lokalitu od ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "V odpovedi na";
-"conversation.repliedTo" = "Odpovedať";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Ty...";
 "conversation.edited" = "Vytvorené";
-"conversation.deletedMessage" = "odstránil správu";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Žiadne pozvánky";
-"invitations.pending" = "čakajúce";
-"invitations.accepted" = "prijaté";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Prijaté";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Prijaté pozvania";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Pridajte sa k Jami";
-"createAccount.lookingForUsernameAvailability" = "Overovanie dostupnosti...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "používateľské meno je už použité";
+"createAccount.usernameAlreadyTaken" = "Používateľské meno je už použité";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Pridávanie účtu";
 "createAccount.UsernameNotRegisteredTitle" = "Chyba siete";
 "createAccount.UsernameNotRegisteredMessage" = "Účet bol vytvorený, ale používateľské meno nebolo zaregistrované";
 "createAccount.timeoutTitle" = "Účet vytvorený";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Vymazať";
 "actions.backAction" = "Späť";
 "actions.doneAction" = "Hotovo";
-"alerts.incomingCallAllertTitle" = "Prichádzajúci hovor od";
-"alerts.incomingCallButtonIgnore" = "Ignorovať";
-"actions.startAudioCall" = "Zvukový hovor";
-"actions.startVideoCall" = "Videovolanie";
 "actions.goToSettings" = "Prejdite do Nastavenia";
 "actions.stopLocationSharing" = "Ukončiť zdieľanie";
 
 // Calls
-"calls.incomingCallInfo" = "chce s vami hovoriť";
 "calls.ringing" = "Zvoní...";
 "calls.connecting" = "Pripájanie...";
 "calls.callFinished" = "Hovor bol ukončený";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Zariadenia";
 "accountPage.settingsHeader" = "Nastavenia";
 "accountPage.notificationsHeader" = "Upozornenia";
-"accountPage.usernameNotRegistered" = "používateľské meno: nezaregistrované";
-"accountPage.credentialsHeader" = "Podrobnosti účtu";
 "accountPage.blockedContacts" = "Blokované kontakty";
 "accountPage.unblockContact" = "Odblokovať";
 "accountPage.proxyAddressAlert" = "Zadajte adresu proxy";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Pripájanie";
 "account.statusUnknown" = "Neznámy";
 "account.statusConnectionerror" = "Chyba pripojenia";
-"account.needMigration" = "Váš účet musí byť migrovaný";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Ja";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Bola prijatá pozvánka";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Odchádzajúci hovor";
 "generatedMessage.missedOutgoingCall" = "Zmeškaný odchádzajúci hovory";
 "generatedMessage.missedIncomingCall" = "Zmeškaný príchodzí hovor";
 "generatedMessage.liveLocationSharing" = "Živo zdieľanie polohy";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Spätná väzba";
 "aboutJami.createdBy" = "Vytvoril";
 "aboutJami.artworkBy" = "Ilustrácia od";
+
+// Accessibility
+"accessibility.close" = "Zavrieť";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Pridať účet";
+"accessibility.aboutJamiTitle" = "O programe Jami";
+"accessibility.welcomeToJamiTitle" = "Vitajte v Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profilu";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

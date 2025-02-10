@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "¿Agregar a contactos?";
 "conversation.notContactLabel" = "no está en tu lista de contactos.";
 "conversation.messagePlaceholder" = "Escribir a";
-"conversation.explanationSendingLocationTo" = "Estás compartiendo tu ubicación con";
-"conversation.explanationReceivingLocationFrom" = "Estás recibiendo una ubicación en vivo de";
 "conversation.errorSavingImage" = "Se produjo un error al guardar la imagen en la galería.";
 "conversation.receivedRequest" = "%@ te envió una invitación de conversación.";
 "conversation.incomingRequest" = "te envié una invitación de conversación.";
@@ -140,17 +138,16 @@
 "conversation.synchronizationTitle" = "Has aceptado la invitación a la conversación.";
 "conversation.synchronizationMessage" = "Esperando a que %@ se conecte para sincronizar la conversación…";
 "conversation.inReplyTo" = "En respuesta a";
-"conversation.repliedTo" = "responder a";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Tú";
 "conversation.edited" = "Editado";
-"conversation.deletedMessage" = "Eliminar mensaje";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contacto bloqueado";
 
 // Invitations
 "invitations.noInvitations" = "Sin invitaciones";
-"invitations.pending" = "En espera...";
-"invitations.accepted" = "Aceptada";
-"invitations.declined" = "Rechazada";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
 "invitations.blocked" = "Bloqueado";
 "invitations.list" = "Invitaciones recibidas";
 
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Unirse a Jami";
-"createAccount.lookingForUsernameAvailability" = "buscando disponibilidad ...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Nombre de usuario no válido. Por favor, introduzca un nombre de usuario válido.";
-"createAccount.usernameAlreadyTaken" = "usuario ya en uso";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "El nombre de usuario está disponible.";
-"createAccount.loading" = "Cargando…";
-"createAccount.waitCreateAccountTitle" = "Agregando cuenta";
 "createAccount.UsernameNotRegisteredTitle" = "Error de red";
 "createAccount.UsernameNotRegisteredMessage" = "La cuenta fue creada pero el nombre de usuario no fue registrado";
 "createAccount.timeoutTitle" = "Cuenta creada";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Eliminar";
 "actions.backAction" = "Atrás";
 "actions.doneAction" = "Hecho";
-"alerts.incomingCallAllertTitle" = "Llamada entrante de";
-"alerts.incomingCallButtonIgnore" = "Ignorar";
-"actions.startAudioCall" = "Llamada de voz";
-"actions.startVideoCall" = "Videollamada";
 "actions.goToSettings" = "Ir a Ajustes";
 "actions.stopLocationSharing" = "Dejar de compartir";
 
 // Calls
-"calls.incomingCallInfo" = "quiere hablar con vos";
 "calls.ringing" = "Sonando...";
 "calls.connecting" = "Conectando…";
 "calls.callFinished" = "Llamada finalizada";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Configuraciones";
 "accountPage.notificationsHeader" = "Notificaciones";
-"accountPage.usernameNotRegistered" = "Nombre de usuario: no registrado";
-"accountPage.credentialsHeader" = "Detalles de cuenta";
 "accountPage.blockedContacts" = "Contactos bloqueados";
 "accountPage.unblockContact" = "Desbloquear";
 "accountPage.proxyAddressAlert" = "Provea dirección proxy";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Conectado";
 "account.statusUnknown" = "Desconocido";
 "account.statusConnectionerror" = "Error de conexión";
-"account.needMigration" = "cuenta necesita ser migrada";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Yo";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Invitación recibida";
 "generatedMessage.swarmCreated" = "Conversación creada";
-"generatedMessage.invitationReceived" = "fue invitado a unirse a la conversación.";
-"generatedMessage.invitationAccepted" = "se ha unido a la conversación.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "Te uniste a la conversación.";
-"generatedMessage.contactBlocked" = "se bloqueó de la conversación.";
-"generatedMessage.contactUnblocked" = "se bloqueó de la conversación.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Lllamando a ";
 "generatedMessage.missedOutgoingCall" = "Lllamada saliente perdida";
 "generatedMessage.missedIncomingCall" = "Llamada entrante perdida";
 "generatedMessage.liveLocationSharing" = "Compartición de ubicación en vivo";
-"generatedMessage.contactLeftConversation" = "ha abandonado la conversación.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Ajustes de vídeo";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Retroalimentación";
 "aboutJami.createdBy" = "Creado por";
 "aboutJami.artworkBy" = "Ilustraciones realizadas por";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

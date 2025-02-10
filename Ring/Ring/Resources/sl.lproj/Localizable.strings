@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Dodam med stike?";
 "conversation.notContactLabel" = "ni na seznamu vaših stikov";
 "conversation.messagePlaceholder" = "Piši";
-"conversation.explanationSendingLocationTo" = "Trenutno v živo delite svojo lokacijo z ";
-"conversation.explanationReceivingLocationFrom" = "Trenutno v živo pridobivate podatek o lokaciji od";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Kot odgovor";
-"conversation.repliedTo" = "je odgovoril_a";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Vi";
 "conversation.edited" = "Urejeno";
-"conversation.deletedMessage" = "je izbrisal/a sporočilo";
+"conversation.deletedMessage" = "%@ je izbrisal/a sporočilo";
 "conversation.contactBlocked" = "Stik blokiran";
 
 // Invitations
 "invitations.noInvitations" = "Ni povabil";
-"invitations.pending" = "na čakanju";
-"invitations.accepted" = "sprejet";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Sprejeto";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blokiran/a";
 "invitations.list" = "Prejetih povabil";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Pridruži se Jami";
-"createAccount.lookingForUsernameAvailability" = "preverjanje dosegljivosti ...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "uporabniško ime je zasedeno";
+"createAccount.usernameAlreadyTaken" = "Uporabniško ime je že oddano";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Dodajanje računa";
 "createAccount.UsernameNotRegisteredTitle" = "Napaka na omrežju";
 "createAccount.UsernameNotRegisteredMessage" = "Račun je bil ustvarjen, vendar uporabniško ime ni bilo registrirano";
 "createAccount.timeoutTitle" = "Račun je ustvarjen";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Izbriši";
 "actions.backAction" = "Nazaj";
 "actions.doneAction" = "Opravljeno";
-"alerts.incomingCallAllertTitle" = "Dohodni klic od";
-"alerts.incomingCallButtonIgnore" = "Prezri";
-"actions.startAudioCall" = "Zvočni klic";
-"actions.startVideoCall" = "Videoklic";
 "actions.goToSettings" = "Pojdi na nastavitve";
 "actions.stopLocationSharing" = "Prenehaj deliti";
 
 // Calls
-"calls.incomingCallInfo" = "želi govoriti z vami";
 "calls.ringing" = "Zvonenje ...";
 "calls.connecting" = "Povezovanje ...";
 "calls.callFinished" = "Klic je končan";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Naprave";
 "accountPage.settingsHeader" = "Nastavitve";
 "accountPage.notificationsHeader" = "Obveščanje";
-"accountPage.usernameNotRegistered" = "uporabniško ime: ni registrirano";
-"accountPage.credentialsHeader" = "Podrobnosti računa";
 "accountPage.blockedContacts" = "Blokirani stiki";
 "accountPage.unblockContact" = "Odblokiraj";
 "accountPage.proxyAddressAlert" = "Posredujte naslov posredniškega strežnika";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Povezovanje";
 "account.statusUnknown" = "Neznano";
 "account.statusConnectionerror" = "Napaka pri povezovanju";
-"account.needMigration" = "račun mora biti preseljen";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Jaz";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Povabilo je prejeto";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Odhodni klic";
 "generatedMessage.missedOutgoingCall" = "Zgrešen odhodni klic";
 "generatedMessage.missedIncomingCall" = "Zgrešen dohodni klic";
 "generatedMessage.liveLocationSharing" = "Deljenje lokacije v živo";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Nastavitve videa";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Povratna informacija";
 "aboutJami.createdBy" = "Ustvaril/a";
 "aboutJami.artworkBy" = "Grafična podoba";
+
+// Accessibility
+"accessibility.close" = "Zapri";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Dodajanje računa";
+"accessibility.aboutJamiTitle" = "O programu Jami";
+"accessibility.welcomeToJamiTitle" = "Dobrodošli v Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Slika profila";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

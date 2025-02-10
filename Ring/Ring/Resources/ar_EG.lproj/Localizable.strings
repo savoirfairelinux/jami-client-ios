@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "إضافة إلى جهات الإتصال؟";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "أنت تشارك موقعك حاليًا مع";
-"conversation.explanationReceivingLocationFrom" = "أنت تتلقى حاليًا موقعًا مباشرًا من";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "في جواب";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "أنت";
 "conversation.edited" = "تحرير";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "لم تــرد أي دعوة";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "انضموا إلى جامي";
-"createAccount.lookingForUsernameAvailability" = "تبحث عن إمكانية الوصول...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "هذا الاسم غير متوفر";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "في طور إضافة حساب";
 "createAccount.UsernameNotRegisteredTitle" = "خطأ في الشبكة";
 "createAccount.UsernameNotRegisteredMessage" = "تم إنشاء حساب ولكن لم يتم تسجيل اسم المستخدم";
 "createAccount.timeoutTitle" = "حساب تم إنشاؤه";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "حذف";
 "actions.backAction" = "السابق";
 "actions.doneAction" = "منجز";
-"alerts.incomingCallAllertTitle" = "مكالمة قادمة من";
-"alerts.incomingCallButtonIgnore" = "تجاهل";
-"actions.startAudioCall" = "مكالمة صوتية";
-"actions.startVideoCall" = "مكالمة فيديو";
 "actions.goToSettings" = "إذهب إلى الإعدادات";
 "actions.stopLocationSharing" = "إيقاف المشاركة";
 
 // Calls
-"calls.incomingCallInfo" = "يريد التحدث معك";
 "calls.ringing" = "... يرن";
 "calls.connecting" = "اتصال جاري...";
 "calls.callFinished" = "المكالمة انتهت";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "الأجهزة";
 "accountPage.settingsHeader" = "الإعدادات";
 "accountPage.notificationsHeader" = "الإشعارات";
-"accountPage.usernameNotRegistered" = "اسم المستخدم: غير مسجل";
-"accountPage.credentialsHeader" = "تفاصيل الحساب";
 "accountPage.blockedContacts" = "جهات إتصال محظورة";
 "accountPage.unblockContact" = "إزالة حظر";
 "accountPage.proxyAddressAlert" = "إعطاء عنوان النظام الأساسي";
@@ -387,7 +375,7 @@
 "accountPage.accountIdentity" = "Account identity";
 "accountPage.bootstrap" = "تشغيل ذاتي";
 "accountPage.dhtConfiguration" = "تهيئة OpenDHT";
-"accountPage.nameServer" = "Name server";
+"accountPage.nameServer" = "اسم خادم";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "يتم الإتصال";
 "account.statusUnknown" = "مجهول";
 "account.statusConnectionerror" = "خطأ الاتصال";
-"account.needMigration" = "الحساب يجب الهجرة";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "شخصي";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "تم تلقي دعوة";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "مكالمة صادرة";
 "generatedMessage.missedOutgoingCall" = "مكالمة صادرة فائتة";
 "generatedMessage.missedIncomingCall" = "مكالمة واردة فائتة";
 "generatedMessage.liveLocationSharing" = "مشاركة الموقع المباشر";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "سبر راي";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

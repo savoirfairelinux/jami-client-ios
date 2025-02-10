@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Та нар ч гэсэн холбоотондоо нэмж байна уу?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Та одоо байр сууриа хуваалцаж байна.";
-"conversation.explanationReceivingLocationFrom" = "Та одоо ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Хэвлэл мэдээллийн хэрэгсэл";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Та нар";
 "conversation.edited" = "Хөгжүүлэн";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Нэр дэвшүүлэггүй";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Хөгжиж байна";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Жэмид нэгдээрэй";
-"createAccount.lookingForUsernameAvailability" = "...хүхлэг байдлыг хайж байна...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "хэрэглэгчдийн нэр аль хэдийн авсан";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Нэвтрүүлэг";
 "createAccount.UsernameNotRegisteredTitle" = "Хүлжээний алдаа";
 "createAccount.UsernameNotRegisteredMessage" = "Хилсэл бий болсон боловч хэрэглэгчдийн нэр бүртгэгдээгүй";
 "createAccount.timeoutTitle" = "Хэтгэлэг үүсгэн байгуулагдсан";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Хасах";
 "actions.backAction" = "Хурд";
 "actions.doneAction" = "Сураг";
-"alerts.incomingCallAllertTitle" = "";
-"alerts.incomingCallButtonIgnore" = "Үргэлж";
-"actions.startAudioCall" = "Зөгнөлийн дуудлага";
-"actions.startVideoCall" = "Видео утас";
 "actions.goToSettings" = "Байгууллага руу яв";
 "actions.stopLocationSharing" = "Хөдөлмөрийг хуваалцахыг зогсоо";
 
 // Calls
-"calls.incomingCallInfo" = "Татай ярилцахыг хүсч байна";
 "calls.ringing" = "-Хэрэгтээ...";
 "calls.connecting" = "Байгууллага...";
 "calls.callFinished" = "Зудлага дууссан";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Утасны хэрэгсэл";
 "accountPage.settingsHeader" = "Байгууллага";
 "accountPage.notificationsHeader" = "Хэвлэлт";
-"accountPage.usernameNotRegistered" = "хэрэглэгчийн нэр: бүртгэгдээгүй";
-"accountPage.credentialsHeader" = "Санхүүгийн мэдээллийг";
 "accountPage.blockedContacts" = "Хаалттай холбоо";
 "accountPage.unblockContact" = "Блокийг нээж";
 "accountPage.proxyAddressAlert" = "Прокси хаягийг өгөө";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Харилцаа холбоо";
 "account.statusUnknown" = "Мэдээгүй";
 "account.statusConnectionerror" = "Холбоолалтын алдаа";
-"account.needMigration" = "дансыг нүүлгэн шилжүүлэх шаардлагатай";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Би";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Нээлтийг хүлээн авсан";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Урьдчилсан дуудлага";
 "generatedMessage.missedOutgoingCall" = "Удахгүй дууссан";
 "generatedMessage.missedIncomingCall" = "Улаан дуудлага алдсан";
 "generatedMessage.liveLocationSharing" = "Амьдрал байршуулын хуваалц";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Хэтгэлэг";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Тэнд нь";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Хэтгэлэг нэмнэ";
+"accessibility.aboutJamiTitle" = "Жэмигийн тухай";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Профилийн зураг";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

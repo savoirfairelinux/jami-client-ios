@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Вы ў цяперашні час дзяліцеся сваім месцам з ";
-"conversation.explanationReceivingLocationFrom" = "Вы ў цяперашні час атрымліваеце жывое месца з ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "У адказ на";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "You";
 "conversation.edited" = "Рэдагаваны";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ніякіх запрашэнняў";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Далучайцеся да Jami";
-"createAccount.lookingForUsernameAvailability" = "шукаючы даступнасць...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Ужо прыняты імя карыстальніка";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Дададзены рахунак";
 "createAccount.UsernameNotRegisteredTitle" = "Памылка сеткі";
 "createAccount.UsernameNotRegisteredMessage" = "Уліковы запіс быў створаны, але імя карыстальніка не было зарэгістравана";
 "createAccount.timeoutTitle" = "Створаны ўліковы запіс";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Знішчыць";
 "actions.backAction" = "Звярніцеся назад";
 "actions.doneAction" = "Скончаная";
-"alerts.incomingCallAllertTitle" = "Паступае званка ад ";
-"alerts.incomingCallButtonIgnore" = "Ігнаруем";
-"actions.startAudioCall" = "Аўдыёвы званок";
-"actions.startVideoCall" = "Відэазварот";
 "actions.goToSettings" = "Перайсці да Налады";
 "actions.stopLocationSharing" = "Спыніце дзяліцца";
 
 // Calls
-"calls.incomingCallInfo" = "хоча пагаварыць з вамі";
 "calls.ringing" = "Званочак...";
 "calls.connecting" = "Злучэнне...";
 "calls.callFinished" = "Званкі скончаны";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Прылады";
 "accountPage.settingsHeader" = "Налады";
 "accountPage.notificationsHeader" = "Паведамленні";
-"accountPage.usernameNotRegistered" = "імя карыстальніка: не зарэгістраваны";
-"accountPage.credentialsHeader" = "Падрабязнасць рахунку";
 "accountPage.blockedContacts" = "Блокаваныя кантакты";
 "accountPage.unblockContact" = "Адключыць блок";
 "accountPage.proxyAddressAlert" = "Уключыце адрас праксі";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Злучэнне";
 "account.statusUnknown" = "Невядома";
 "account.statusConnectionerror" = "Памылка падлучэння";
-"account.needMigration" = "рахунак трэба перавесці";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Я";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Атрыманая запрашэнне";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Выходны званок";
 "generatedMessage.missedOutgoingCall" = "Адпусцілі выхадны званок";
 "generatedMessage.missedIncomingCall" = "Адпусцілі ўступаючы званок";
 "generatedMessage.liveLocationSharing" = "Ужыванне месцазнаходжання";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Адказ";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

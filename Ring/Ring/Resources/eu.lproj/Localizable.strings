@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Gehitu kontaktuetara?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Orain zure kokapena partekatzen ari zara.";
-"conversation.explanationReceivingLocationFrom" = "Oraintxe bertan, zuzenean ari zara entzuten.";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Erantzun";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Zuk";
 "conversation.edited" = "Eusko Jaurlaritzaren laguntzarekin egindako azpitituluak";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ez dago gonbidapenik.";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Jar zaitez Jami-rekin.";
-"createAccount.lookingForUsernameAvailability" = "-Eskaintza bila.";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "erabiltzaile-izena hartuta dago";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Kontua gehitzen";
 "createAccount.UsernameNotRegisteredTitle" = "Sare errorea";
 "createAccount.UsernameNotRegisteredMessage" = "Kontua sortu zen, baina erabiltzaile izena ez zen erregistratu.";
 "createAccount.timeoutTitle" = "Kontua sortua";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Ezabatu";
 "actions.backAction" = "Atzera";
 "actions.doneAction" = "Egina";
-"alerts.incomingCallAllertTitle" = "Dei bat dator.";
-"alerts.incomingCallButtonIgnore" = "Ezikusi";
-"actions.startAudioCall" = "Deiak audioz";
-"actions.startVideoCall" = "Bideo deialdia";
 "actions.goToSettings" = "Joan ezarpenetara";
 "actions.stopLocationSharing" = "Utzi partekatzeari";
 
 // Calls
-"calls.incomingCallInfo" = "Zurekin hitz egin nahi du.";
 "calls.ringing" = "-Badakit.";
 "calls.connecting" = "Konektatzen...";
 "calls.callFinished" = "Deiak amaitu dira.";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Gailuak";
 "accountPage.settingsHeader" = "Ezarpenak";
 "accountPage.notificationsHeader" = "Oharrak";
-"accountPage.usernameNotRegistered" = "Erabiltzaile izena: ez dago erregistratuta.";
-"accountPage.credentialsHeader" = "Kontuaren xehetasunak";
 "accountPage.blockedContacts" = "Blokeatutako kontaktuak";
 "accountPage.unblockContact" = "Desblokeatu";
 "accountPage.proxyAddressAlert" = "Eman helbide proxy bat";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Konektatzen";
 "account.statusUnknown" = "Ezezaguna";
 "account.statusConnectionerror" = "Lotura-hutsegitea";
-"account.needMigration" = "Kontua mugitu behar da.";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Ni";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Gonbidapena jasota";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Irteera-deia";
 "generatedMessage.missedOutgoingCall" = "Galdutako irteera-deia";
 "generatedMessage.missedIncomingCall" = "Galdutako sarrera-deia";
 "generatedMessage.liveLocationSharing" = "Toki partekatzea zuzenean";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Iruzkinak";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

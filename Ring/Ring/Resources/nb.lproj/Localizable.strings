@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Legg til kontakter?";
 "conversation.notContactLabel" = "er ikke i kontaktlisten din";
 "conversation.messagePlaceholder" = "Skriv til";
-"conversation.explanationSendingLocationTo" = "Du deler for tiden din lokasjon med";
-"conversation.explanationReceivingLocationFrom" = "Du mottar for øyeblikket en live lokasjon fra";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "I svar til";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Deg";
 "conversation.edited" = "Redigert";
-"conversation.deletedMessage" = "slettet en melding";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ingen invitasjoner";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Godkjent";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitasjoner mottatt";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Bli med Jami";
-"createAccount.lookingForUsernameAvailability" = "leter etter tilgjengelighet...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "brukernavn allerede i bruk";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Legger til konto";
 "createAccount.UsernameNotRegisteredTitle" = "Nettverksfeil";
 "createAccount.UsernameNotRegisteredMessage" = "Konto ble opprettet men brukernavn ble ikke registrert";
 "createAccount.timeoutTitle" = "Konto opprettet";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Slett";
 "actions.backAction" = "Tilbake";
 "actions.doneAction" = "Ferdig";
-"alerts.incomingCallAllertTitle" = "Innkommende anrop fra";
-"alerts.incomingCallButtonIgnore" = "Ignorer";
-"actions.startAudioCall" = "Lydsamtale";
-"actions.startVideoCall" = "Videosamtale";
 "actions.goToSettings" = "Gå til innstillinger";
 "actions.stopLocationSharing" = "Stopp delingen";
 
 // Calls
-"calls.incomingCallInfo" = "ønsker å snakke med deg";
 "calls.ringing" = "Ringer...";
 "calls.connecting" = "Kobler opp...";
 "calls.callFinished" = "Samtale fullført";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Enheter";
 "accountPage.settingsHeader" = "Innstillinger";
 "accountPage.notificationsHeader" = "Varsler";
-"accountPage.usernameNotRegistered" = "brukernavn: ikke registrert";
-"accountPage.credentialsHeader" = "Kontodetaljer";
 "accountPage.blockedContacts" = "Blokkerte kontakter";
 "accountPage.unblockContact" = "Fjern blokkering";
 "accountPage.proxyAddressAlert" = "Angi mellomtjeneradresse";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Kobler opp";
 "account.statusUnknown" = "Ukjent";
 "account.statusConnectionerror" = "Tilkoblingsfeil";
-"account.needMigration" = "konto må overføres";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Meg";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Invitasjon mottatt";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Utgående samtale";
 "generatedMessage.missedOutgoingCall" = "Tapt utgående anrop";
 "generatedMessage.missedIncomingCall" = "Tapt innkommende anrop";
 "generatedMessage.liveLocationSharing" = "Live posisjonsdeling";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Tilbakemelding";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Lukk";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Legg til konto";
+"accessibility.aboutJamiTitle" = "Om Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profilbilde";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

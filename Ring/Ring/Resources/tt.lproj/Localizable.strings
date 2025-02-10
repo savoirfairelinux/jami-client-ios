@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Сез хәзерге вакытта ";
-"conversation.explanationReceivingLocationFrom" = "Сез хәзерге вакытта ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Бу сорауларга җавап итеп:";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "You";
 "conversation.edited" = "Редакция";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Чакырулар юк";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Кабул ителгән";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Җәмигә кушылыгыз";
-"createAccount.lookingForUsernameAvailability" = "Барлык нәрсәләрне эзлибез...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "инде алынган кулланучы исеме";
+"createAccount.usernameAlreadyTaken" = "Инде алынган кулланучы исеме";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Өстәмә исәп";
 "createAccount.UsernameNotRegisteredTitle" = "Аварияләр";
 "createAccount.UsernameNotRegisteredMessage" = "Хисап төзелгән, әмма кулланучы исеме теркәлмәгән";
 "createAccount.timeoutTitle" = "Хисапны булдыру";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Ачу";
 "actions.backAction" = "Кайт!";
 "actions.doneAction" = "Эшләнгән";
-"alerts.incomingCallAllertTitle" = "";
-"alerts.incomingCallButtonIgnore" = "Игътибар итмәгез";
-"actions.startAudioCall" = "Аудиокызылыш";
-"actions.startVideoCall" = "Видеокүршетү";
 "actions.goToSettings" = "Категорияләргә күчегез";
 "actions.stopLocationSharing" = "Бүлешүне туктатыгыз";
 
 // Calls
-"calls.incomingCallInfo" = "синең белән сөйләшергә тели";
 "calls.ringing" = "- Чаллыда...";
 "calls.connecting" = "Бергә тоташтыру...";
 "calls.callFinished" = "Чакыру тәмамланды";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Кораллар";
 "accountPage.settingsHeader" = "Калыплар";
 "accountPage.notificationsHeader" = "Билгеләүләр";
-"accountPage.usernameNotRegistered" = "Исем: теркәлмәгән";
-"accountPage.credentialsHeader" = "Хисапның тулылыгы";
 "accountPage.blockedContacts" = "Тотылган контактлар";
 "accountPage.unblockContact" = "Блокны ачыгыз";
 "accountPage.proxyAddressAlert" = "Прокси адресны күрсәтү";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Бәйләнеш";
 "account.statusUnknown" = "Билгесез";
 "account.statusConnectionerror" = "Бәйләнеш хатасы";
-"account.needMigration" = "хисапны күчерү кирәк";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Мин.";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Чакыру кабул ителгән";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Чыгышлы чакыру";
 "generatedMessage.missedOutgoingCall" = "Чыгышны югалткан чакыру";
 "generatedMessage.missedIncomingCall" = "Килгән чакыруны югалту";
 "generatedMessage.liveLocationSharing" = "Тере урынны бүлешү";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Фидбэк";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Якында";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Аккаунт өстәгез";
+"accessibility.aboutJamiTitle" = "Җәми турында";
+"accessibility.welcomeToJamiTitle" = "Җәмигә рәхим итегез.";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Профиль рәсеме";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

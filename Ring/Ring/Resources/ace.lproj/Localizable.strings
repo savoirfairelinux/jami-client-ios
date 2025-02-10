@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "توڠڬوڠ ڤد ماس اين تله مڠمبيل موقعيت توڠڬوڠ ";
-"conversation.explanationReceivingLocationFrom" = "توڠڬوڠ دڤرچايا?? ي موقع يڠ دڤرچايا?? ي";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "دالم ڤردان منتري";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "You";
 "conversation.edited" = "ڤڠاجرن";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "تيدق اد ڤڠاجرن";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "مڠڬوناكن Jami";
-"createAccount.lookingForUsernameAvailability" = "اونتوق ممڤوڽاءي ڤرلو...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "نام ڤڠڬونا يڠ دڤرچايا?? ي";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "ڤڠاجين";
 "createAccount.UsernameNotRegisteredTitle" = "خطأ شبكه";
 "createAccount.UsernameNotRegisteredMessage" = "ايكون دتولق نامو ڤڠڬونا تيدق دتولق";
 "createAccount.timeoutTitle" = "ايكون دڤرچايا?? ي";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "مڠمبيل";
 "actions.backAction" = "ڤرنه";
 "actions.doneAction" = "ڤرنه";
-"alerts.incomingCallAllertTitle" = "كاوسن يڠ دتاهن دري ";
-"alerts.incomingCallButtonIgnore" = "تيدق ممڤوڽاءي";
-"actions.startAudioCall" = "ڤڠاجين اوندڠ";
-"actions.startVideoCall" = "ڤڠاجين ڤيديو";
 "actions.goToSettings" = "برتڠه دالم سيٽنگ";
 "actions.stopLocationSharing" = "ڤرنه مڠمبيل";
 
 // Calls
-"calls.incomingCallInfo" = "بلياو برتوجو";
 "calls.ringing" = "...تڠه...";
 "calls.connecting" = "ارتباط...";
 "calls.callFinished" = "ڤڠاجين تله دڤرچايا?? ي";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "ڤرودوک";
 "accountPage.settingsHeader" = "سيٽنگون";
 "accountPage.notificationsHeader" = "ڤمبلاجر";
-"accountPage.usernameNotRegistered" = "نام ڤڠڬونا: تيدق دڤرجواڠن";
-"accountPage.credentialsHeader" = "ڤرچاي ڤڠاجين";
 "accountPage.blockedContacts" = "ڤڠاجين يڠ دڤرچايا?? ي";
 "accountPage.unblockContact" = "ڤڠاجرن";
 "accountPage.proxyAddressAlert" = "ممبريكن ڤرودوكسي";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "ڤڠاجين";
 "account.statusUnknown" = "نامعلوم";
 "account.statusConnectionerror" = "خطأ ڤربواتن";
-"account.needMigration" = "حساب ڤرلو دڤرچايا?? ي";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "من";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "ڤڠاجين يڠ دڤرچايا?? ي";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "ڤڠاجين يڠ برمولا";
 "generatedMessage.missedOutgoingCall" = "ڤڠاجرن يڠ تله دڤرچايا?? ي";
 "generatedMessage.missedIncomingCall" = "ڤڠاجرن يڠ دڤرچايا?? ي";
 "generatedMessage.liveLocationSharing" = "ڤڠاجين لوكاسي";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "ڤڠاجرن";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

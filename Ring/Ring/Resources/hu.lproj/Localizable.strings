@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Hozzáadás a kapcsolattartók közé?";
 "conversation.notContactLabel" = "nem szerepel a kapcsolattartólistában";
 "conversation.messagePlaceholder" = "Írás a következő(k)nek:";
-"conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
-"conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
 "conversation.errorSavingImage" = "Hiba történt a kép gyűjteménybe történő mentése közben.";
 "conversation.receivedRequest" = "%@ beszélgetésre szóló meghívót küldött Önnek.";
 "conversation.incomingRequest" = "beszélgetésre szóló meghívót küldött Önnek.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "Ön elfogadott a beszélgetési meghívást.";
 "conversation.synchronizationMessage" = "Várakozás a(z) %@ csatlakozásra a beszélgetés összehangolásához…";
 "conversation.inReplyTo" = "Válaszul erre:";
-"conversation.repliedTo" = "válaszolt neki:";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Ön";
 "conversation.edited" = "Szerkesztve";
-"conversation.deletedMessage" = "Törölt üzenet";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Kapcsolattartó letiltva";
 
 // Invitations
 "invitations.noInvitations" = "Nincs meghívás";
-"invitations.pending" = "függőben levő…";
-"invitations.accepted" = "elfogadott";
-"invitations.declined" = "elutasítva";
-"invitations.blocked" = "letiltva";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Letiltva";
 "invitations.list" = "Meghívások megérkeztek";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Jami csatlakozása";
-"createAccount.lookingForUsernameAvailability" = "a rendelkezésre állás keresése…";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Érvénytelen felhasználónév. Kérjük, adjon meg egy érvényes felhasználónevet.";
-"createAccount.usernameAlreadyTaken" = "A felhasználó név már foglalt";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Betöltés…";
-"createAccount.waitCreateAccountTitle" = "Fiók hozzáadása";
 "createAccount.UsernameNotRegisteredTitle" = "Hálózati hiba";
 "createAccount.UsernameNotRegisteredMessage" = "A fiók létrehozva de a felhasználónevét nincs bejegyzett";
 "createAccount.timeoutTitle" = "Fiók létrehozva";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Törlés";
 "actions.backAction" = "Vissza";
 "actions.doneAction" = "Kész";
-"alerts.incomingCallAllertTitle" = "Bejövő hívás a következőtől: ";
-"alerts.incomingCallButtonIgnore" = "Figyelmen kívül hagy";
-"actions.startAudioCall" = "Hanghívás";
-"actions.startVideoCall" = "Videohívás";
 "actions.goToSettings" = "Beállítások megnyitása";
 "actions.stopLocationSharing" = "Megosztás leállítása";
 
 // Calls
-"calls.incomingCallInfo" = "szeretne Önnel beszélni";
 "calls.ringing" = "Csörögni…";
 "calls.connecting" = "Kapcsolódás…";
 "calls.callFinished" = "A hívás befejeződött";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Eszközök";
 "accountPage.settingsHeader" = "Beállítások";
 "accountPage.notificationsHeader" = "Értesítések";
-"accountPage.usernameNotRegistered" = "felhasználónév: nincs bejegyzett";
-"accountPage.credentialsHeader" = "Fiók részletek";
 "accountPage.blockedContacts" = "Letiltott kapcsolattartók";
 "accountPage.unblockContact" = "Letiltás feloldása";
 "accountPage.proxyAddressAlert" = "Adja meg a meghatalmazott címet";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Kapcsolódás";
 "account.statusUnknown" = "Ismeretlen";
 "account.statusConnectionerror" = "Csatlakozási hiba";
-"account.needMigration" = "Fiókáttelepítés szükséges";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Én";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Meghívás megérkezett";
 "generatedMessage.swarmCreated" = "Beszélgetés létrehozva";
-"generatedMessage.invitationReceived" = "meghívást kapott, hogy csatlakozzon a beszélgetéshez.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "Ön csatlakozott a beszélgetéshez.";
-"generatedMessage.contactBlocked" = "le lett tiltva a beszélgetésből.";
-"generatedMessage.contactUnblocked" = "beszélgetés letiltása fel lett oldva.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Kimenő hívás";
 "generatedMessage.missedOutgoingCall" = "Nem fogadott kimenő hívás";
 "generatedMessage.missedIncomingCall" = "Nem fogadott bejövő hívás";
 "generatedMessage.liveLocationSharing" = "Valós idejű hely megosztása";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Videóbeállítások";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Visszajelzés";
 "aboutJami.createdBy" = "Készítette";
 "aboutJami.artworkBy" = "Művész";
+
+// Accessibility
+"accessibility.close" = "Bezárás";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Fiók hozzáadása";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Névjegykép";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

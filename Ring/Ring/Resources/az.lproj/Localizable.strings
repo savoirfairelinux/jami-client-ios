@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "تماس لری آرتیرماق؟";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "حال بو حالدا یئرینی ایشله ییبسان.";
-"conversation.explanationReceivingLocationFrom" = "ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "جاوابدا";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "سن";
 "conversation.edited" = "ترمیم";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "دعوتلر یوخدور";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "جمیه یه قوشول";
-"createAccount.lookingForUsernameAvailability" = "دريافتي ميخواهيم...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "آدی آلمیش";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "حساب قوشولما";
 "createAccount.UsernameNotRegisteredTitle" = "شبکه خطای";
 "createAccount.UsernameNotRegisteredMessage" = "حساب یارادیلمیش، آمما ایستیفاده چی آدینی ثبت ائتمه میش";
 "createAccount.timeoutTitle" = "حساب یارادیلدی";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "حذف";
 "actions.backAction" = "گئری دؤن";
 "actions.doneAction" = "یئرلشدی";
-"alerts.incomingCallAllertTitle" = "گلیرکن زنگین";
-"alerts.incomingCallButtonIgnore" = "ردّ";
-"actions.startAudioCall" = "صداي زنگ";
-"actions.startVideoCall" = "ویدئو تماس";
 "actions.goToSettings" = "\" تنظیمات \" یه گئدیب";
 "actions.stopLocationSharing" = "اشتراکلاشماغی بوراخ";
 
 // Calls
-"calls.incomingCallInfo" = "ایسته ییر سنله دانیشیق";
 "calls.ringing" = "زنگ میزنه";
 "calls.connecting" = "باغلا...";
 "calls.callFinished" = "تماس تمام شد";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "آلاتلار";
 "accountPage.settingsHeader" = "تنظیمات";
 "accountPage.notificationsHeader" = "اطلاعیه لر";
-"accountPage.usernameNotRegistered" = "آدی: ثبت اولونماييب";
-"accountPage.credentialsHeader" = "حساب بیلگیلری";
 "accountPage.blockedContacts" = "قفل اولونموش تماسلار";
 "accountPage.unblockContact" = "قفلین آچماق";
 "accountPage.proxyAddressAlert" = "پروکسی آدرسونو دن";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "باغلاشما";
 "account.statusUnknown" = "نامعلوم";
 "account.statusConnectionerror" = "اتصال خطيي";
-"account.needMigration" = "حسابي يئرلشديرمه يه لازيمدير";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "منیم";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "دعوت آلدی";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "گئدن چاغ";
 "generatedMessage.missedOutgoingCall" = "گئدن زنگینلیک";
 "generatedMessage.missedIncomingCall" = "گئچن چاغداش چاغداشلار";
 "generatedMessage.liveLocationSharing" = "یاشاییش یئرلری اشتراکلاشماسی";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "ردعمل";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

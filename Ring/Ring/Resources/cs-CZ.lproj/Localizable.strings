@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Přidat do kontaktů?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Právě sdílíte svou polohu s ";
-"conversation.explanationReceivingLocationFrom" = "Právě přijímáte aktuální polohu od ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "V odpovědi na";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Vy";
 "conversation.edited" = "Upraveno";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Žádná pozvání";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Připojit k Jami";
-"createAccount.lookingForUsernameAvailability" = "Zjišťuje se dostupnost…";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Uživatelské jméno již zabráno";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Přidávám účet";
 "createAccount.UsernameNotRegisteredTitle" = "Chyba sítě";
 "createAccount.UsernameNotRegisteredMessage" = "Účet byl vytvořen, ale uživatelské jméno nebylo registrováno.";
 "createAccount.timeoutTitle" = "Účet byl vytvořen.";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Odstranit";
 "actions.backAction" = "Zpět";
 "actions.doneAction" = "Hotovo";
-"alerts.incomingCallAllertTitle" = "Příchozí hovor od";
-"alerts.incomingCallButtonIgnore" = "Přehlížet";
-"actions.startAudioCall" = "Audio hovor";
-"actions.startVideoCall" = "Video hovor";
 "actions.goToSettings" = "Jít to nastavení";
 "actions.stopLocationSharing" = "Přestat sdílet";
 
 // Calls
-"calls.incomingCallInfo" = "chce s vámi mluvit";
 "calls.ringing" = "Vyzvání…";
 "calls.connecting" = "Spojuje se…";
 "calls.callFinished" = "Hovor ukončen";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Zařízení";
 "accountPage.settingsHeader" = "Nastavení";
 "accountPage.notificationsHeader" = "Oznámení";
-"accountPage.usernameNotRegistered" = "uživatelské jméno: neregistrováno";
-"accountPage.credentialsHeader" = "Podrobnosti účtu";
 "accountPage.blockedContacts" = "Blokované kontakty";
 "accountPage.unblockContact" = "Odblokovat";
 "accountPage.proxyAddressAlert" = "Poskytnout adresu proxy";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Spojuje se";
 "account.statusUnknown" = "Neznámé";
 "account.statusConnectionerror" = "Chyba spojení";
-"account.needMigration" = "Tento účet musí být převeden.";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Já";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Pozvání přijato";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Odchozí hovor";
 "generatedMessage.missedOutgoingCall" = "Nepřijatý odchozí hovor";
 "generatedMessage.missedIncomingCall" = "Zmeškaný příchozí hovor";
 "generatedMessage.liveLocationSharing" = "Sdílení aktuální polohy";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Zpětná vazba";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
