@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2585856f_d0ac69b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-02-10T23:16:40Z",
+      "side": 1,
+      "message": "Can the Android fastlane files be copied into iOS with the same structure?\n\n30253: fastlane/metadata/android/\u003clocale\u003e/title.txt: complete | https://review.jami.net/c/jami-client-android/+/30253\n\n30260: fastlane/metadata/android/\u003clocale\u003e/full_description.txt: complete | https://review.jami.net/c/jami-client-android/+/30260\n\n30239: short_description.txt: update source and translations (attempt 2) | https://review.jami.net/c/jami-client-android/+/30239",
+      "revId": "83e58557bb667299e754e427b82e58723affe280",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
