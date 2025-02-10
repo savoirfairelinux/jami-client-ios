@@ -469,6 +469,7 @@ class ConversationViewController: UIViewController,
         let profileImageView = UIImageView(frame: CGRect(x: 0, y: imageOffsetY, width: imageSize, height: imageSize))
         profileImageView.frame = CGRect.init(x: 0, y: 0, width: imageSize, height: imageSize)
         profileImageView.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
+        profileImageView.accessibilityElementsHidden = true
 
         if let profileName = displayName, !profileName.isEmpty {
             profileImageView.addSubview(AvatarView(profileImageData: profileImageData, username: profileName, size: 30))
@@ -542,6 +543,10 @@ class ConversationViewController: UIViewController,
     }
 
     private func setRightNavigationButtons() {
+        let contactName: String = !(viewModel.displayName.value?.isEmpty ?? true)
+            ? viewModel.displayName.value ?? ""
+            : viewModel.userName.value
+
         // do not show call buttons for swarm with multiple participants
         if self.viewModel.conversation.getParticipants().count > 1 {
             self.navigationItem.rightBarButtonItems = []
@@ -555,6 +560,7 @@ class ConversationViewController: UIViewController,
 
         let audioCallItem = UIBarButtonItem()
         audioCallItem.image = UIImage(asset: Asset.callButton)
+        audioCallItem.accessibilityLabel = L10n.Accessibility.conversationStartVoiceCall(contactName)
         audioCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.placeAudioOnlyCall()
@@ -563,6 +569,7 @@ class ConversationViewController: UIViewController,
 
         let videoCallItem = UIBarButtonItem()
         videoCallItem.image = UIImage(asset: Asset.videoRunning)
+        videoCallItem.accessibilityLabel = L10n.Accessibility.conversationStartVideoCall(contactName)
         videoCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.placeCall()

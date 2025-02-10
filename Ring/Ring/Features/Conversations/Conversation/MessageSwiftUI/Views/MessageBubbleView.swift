@@ -63,6 +63,8 @@ struct MessageBubbleView: View {
                     })
             }
         )
+        .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
+        .accessibilityLabel(model.accessibilityLabelValue.isEmpty ? Text("No accessibility label available") : Text(model.accessibilityLabelValue))
     }
 
     private func renderCallMessage() -> some View {
