@@ -47,6 +47,7 @@ struct AccountLists: View {
                 Text(model.headerTitle)
                     .fontWeight(.semibold)
                     .accessibilityIdentifier(SmartListAccessibilityIdentifiers.accountsListTitle)
+                    .accessibilityAutoFocusOnAppear()
 
                 HStack {
                     Spacer() // Pushes the button to the right
