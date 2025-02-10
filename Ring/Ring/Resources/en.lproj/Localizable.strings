@@ -523,3 +523,8 @@
 "accessibility.accountSummaryEditSettingsButton" = "Settings";
 "accessibility.switchButtonIsOn" = "On";
 "accessibility.switchButtonIsOff" = "Off";
+"accessibility.conversationStartVoiceCall" = "Start a voice call with %@";
+"accessibility.conversationStartVideoCall" = "Start a video call with %@";
+"accessibility.conversationComposeMessage" = "Compose a message";
+"accessibility.conversationShareMedia" = "Share media";
+"accessibility.conversationCameraHint" = "Double-tap to open camera";
