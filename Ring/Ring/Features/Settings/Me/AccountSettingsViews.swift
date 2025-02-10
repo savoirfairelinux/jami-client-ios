@@ -30,16 +30,11 @@ struct CallSettingsView: View {
     var body: some View {
         List {
             Section {
-                HStack {
-                    Text(L10n.AccountPage.callsFromUnknownContacts)
-                    Spacer()
-                    Toggle("", isOn: Binding<Any>.customBinding(
-                        get: { model.callsFromUnknownContacts },
-                        set: { newValue in model.enableCallsFromUnknownContacts(enable: newValue) }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                }
+                toggleCell(
+                    toggleText: L10n.AccountPage.callsFromUnknownContacts,
+                    getAction: { model.callsFromUnknownContacts },
+                    setAction: { newValue in model.enableCallsFromUnknownContacts(enable: newValue) }
+                )
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -57,30 +52,23 @@ struct NotificationsSettingsView: View {
     var body: some View {
         List {
             Section(footer: notificationsFooterView()) {
-                HStack {
-                    Text(L10n.AccountPage.enableNotifications)
-                    Spacer()
-                    Toggle("", isOn: Binding<Any>.customBinding(
-                        get: { model.proxyEnabled },
-                        set: { newValue in model.enableNotifications(enable: newValue) }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                }
+                toggleCell (
+                    toggleText: L10n.AccountPage.enableNotifications,
+                    getAction: { model.proxyEnabled },
+                    setAction: { newValue in model.enableNotifications(enable: newValue) }
+               )
+                
             }
 
             if model.proxyEnabled {
                 Section(header: Text(L10n.AccountPage.proxyHeader), footer: Text(L10n.AccountPage.proxyExplanation)) {
-                    HStack {
-                        Text(L10n.AccountPage.useProxyList)
-                        Spacer()
-                        Toggle("", isOn: Binding<Any>.customBinding(
-                            get: { model.proxyListEnabled },
-                            set: { newValue in model.enableProxyList(enable: newValue) }
-                        ))
-                        .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                    }
+                    toggleCell (
+                        toggleText: L10n.AccountPage.useProxyList,
+                        getAction: { model.proxyListEnabled },
+                        setAction: { newValue in model.enableProxyList(enable: newValue) }
+                   )
+                    
+
                     if model.proxyListEnabled {
                         NavigationLink(destination: EditableFieldView(value: $model.proxyListUrl, title: L10n.AccountPage.proxyListURL, placeholder: L10n.AccountPage.proxyListURL, onDisappearAction: {
                             model.saveProxyListUrl()
@@ -156,16 +144,12 @@ struct ConnectivitySettingsView: View {
         List {
             if model.account.type == .sip {
                 Section {
-                    HStack {
-                        Text(L10n.AccountPage.autoRegistration)
-                        Spacer()
-                        Toggle("", isOn: Binding<Any>.customBinding(
-                            get: { model.autoRegistrationEnabled },
-                            set: { newValue in model.enableaAtoregister(enable: newValue) }
-                        ))
-                        .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                    }
+                    toggleCell (
+                        toggleText: L10n.AccountPage.autoRegistration,
+                        getAction: { model.autoRegistrationEnabled },
+                        setAction: { newValue in model.enableaAtoregister(enable: newValue) }
+                   )
+                    
                     NavigationLink(destination: EditExpirationtime(expirationtime: $model.autoRegistrationExpirationTime, onDisappearAction: {
                         model.setExpirationTime()
                     })) {
@@ -193,16 +177,11 @@ struct ConnectivitySettingsView: View {
                 FieldRowView(label: L10n.AccountPage.bootstrap, value: model.bootstrap)
             }
             VStack(alignment: .leading) {
-                HStack {
-                    Text(L10n.AccountPage.peerDiscovery)
-                    Spacer()
-                    Toggle("", isOn: Binding<Any>.customBinding(
-                        get: { model.peerDiscovery },
-                        set: { newValue in model.enablePeerDiscovery(enable: newValue) }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                }
+                toggleCell (
+                    toggleText: L10n.AccountPage.peerDiscovery,
+                    getAction: { model.peerDiscovery },
+                    setAction: { newValue in model.enablePeerDiscovery(enable: newValue) }
+               )
                 Text(L10n.AccountPage.peerDiscoveryExplanation)
                     .font(.footnote)
                     .foregroundColor(Color(UIColor.secondaryLabel))
@@ -212,27 +191,17 @@ struct ConnectivitySettingsView: View {
 
     func connectivityView() -> some View {
         Section(header: Text(L10n.AccountPage.connectivityHeader)) {
-            HStack {
-                Text(L10n.AccountPage.upnpEnabled)
-                Spacer()
-                Toggle("", isOn: Binding<Any>.customBinding(
-                    get: { model.upnpEnabled },
-                    set: { newValue in model.enableUpnp(enable: newValue) }
-                ))
-                .labelsHidden()
-                .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-            }
+            toggleCell (
+                toggleText: L10n.AccountPage.upnpEnabled,
+                getAction: { model.upnpEnabled },
+                setAction: { newValue in model.enableUpnp(enable: newValue) }
+            )
 
-            HStack {
-                Text(L10n.AccountPage.turnEnabled)
-                Spacer()
-                Toggle("", isOn: Binding<Any>.customBinding(
-                    get: { model.turnEnabled },
-                    set: { newValue in model.enableTurn(enable: newValue) }
-                ))
-                .labelsHidden()
-                .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-            }
+            toggleCell (
+                toggleText: L10n.AccountPage.turnEnabled,
+                getAction: { model.turnEnabled },
+                setAction: { newValue in model.enableTurn(enable: newValue) }
+           )
 
             if model.turnEnabled {
                 NavigationLink(destination: EditableFieldView(value: $model.turnServer, title: L10n.AccountPage.turnServer, placeholder: L10n.AccountPage.turnServer, onDisappearAction: {
@@ -272,16 +241,11 @@ struct SecuritySettingsView: View {
     var body: some View {
         List {
             Section {
-                HStack {
-                    Text(L10n.AccountPage.enableSRTP)
-                    Spacer()
-                    Toggle("", isOn: Binding<Any>.customBinding(
-                        get: { model.enableSRTP },
-                        set: { newValue in model.enableSRTP(enable: newValue) }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
-                }
+                toggleCell (
+                    toggleText: L10n.AccountPage.enableSRTP,
+                    getAction: { model.enableSRTP },
+                    setAction: { newValue in model.enableSRTP(enable: newValue) }
+                )
             }
         }
         .navigationBarTitleDisplayMode(.inline)
