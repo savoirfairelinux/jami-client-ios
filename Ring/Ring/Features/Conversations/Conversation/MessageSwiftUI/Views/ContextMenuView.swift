@@ -264,6 +264,21 @@ struct ContextMenuView: View {
         .cornerRadius(radius: model.menuCornerRadius, corners: .allCorners)
     }
 
+    func makeActionsAccessibilityActions() {
+        model.menuItems.forEach { item in
+            // Adding accessibility action for each item
+            self.accessibilityAction(named: Text(item.toString())) {
+                // Directly call the method or trigger the action
+                if let messageModel = model.presentingMessage?.model as? MessageContentVM {
+                    messageModel.contextMenuSelect(item: item)
+                    print("\(item.toString()) action triggered")
+                } else {
+                    print("Error: Unable to trigger action for \(item.toString())")
+                }
+            }
+        }
+    }
+
     func makeWithSpacers(elementForAlignment: some View) -> some View {
         HStack {
             if !model.isOurMsg! {

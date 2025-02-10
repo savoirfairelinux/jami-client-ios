@@ -195,6 +195,8 @@ struct SmartListContentView: View {
         .background(Color.jamiTertiaryControl)
         .cornerRadius(12)
         .onTapGesture(perform: action)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(title)
     }
 
     @ViewBuilder private var conversationsSearchHeaderView: some View {

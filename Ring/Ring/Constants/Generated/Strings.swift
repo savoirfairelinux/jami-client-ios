@@ -41,6 +41,20 @@ internal enum L10n {
     internal static let accountSummaryQrCodeHint = L10n.tr("Localizable", "accessibility.accountSummaryQrCodeHint", fallback: "Double-tap to view your account QR code")
     /// Close
     internal static let close = L10n.tr("Localizable", "accessibility.close", fallback: "Close")
+    /// Double-tap to open camera
+    internal static let conversationCameraHint = L10n.tr("Localizable", "accessibility.conversationCameraHint", fallback: "Double-tap to open camera")
+    /// Compose a message
+    internal static let conversationComposeMessage = L10n.tr("Localizable", "accessibility.conversationComposeMessage", fallback: "Compose a message")
+    /// Share media
+    internal static let conversationShareMedia = L10n.tr("Localizable", "accessibility.conversationShareMedia", fallback: "Share media")
+    /// Start a video call with %@
+    internal static func conversationStartVideoCall(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.conversationStartVideoCall", String(describing: p1), fallback: "Start a video call with %@")
+    }
+    /// Start a voice call with %@
+    internal static func conversationStartVoiceCall(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.conversationStartVoiceCall", String(describing: p1), fallback: "Start a voice call with %@")
+    }
     /// Enter a username to verify if it's available
     internal static let createAccountVerifyUsernamePrompt = L10n.tr("Localizable", "accessibility.createAccountVerifyUsernamePrompt", fallback: "Enter a username to verify if it's available")
     /// Profile picture
