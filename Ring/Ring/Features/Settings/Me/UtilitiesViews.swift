@@ -161,6 +161,7 @@ struct QRCodeView: View {
                         .frame(width: 270, height: 270)
                         .cornerRadius(10)
                         .padding()
+                        .accessibilityLabel(L10n.Accessibility.accountSummaryQrCode)
                 }
                 Spacer()
             }
@@ -178,6 +179,8 @@ struct QRCodeView: View {
             image = jamiId.generateQRCode()
         }
         .optionalMediumPresentationDetents()
+        .accessibilityAutoFocusOnAppear()
+
     }
 }
 

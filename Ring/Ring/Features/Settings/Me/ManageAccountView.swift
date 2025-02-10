@@ -82,6 +82,7 @@ struct ManageAccountView: View {
             Text(L10n.AccountPage.removeAccountMessage)
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
+                .accessibilityAutoFocusOnAppear()
             HStack {
                 Button(action: {
                     withAnimation {

@@ -305,7 +305,7 @@ struct AccessibilityAutoFocusModifier: ViewModifier {
 private struct AccessibilityFocusModifier: ViewModifier {
     @Binding var isFocused: Bool
     @AccessibilityFocusState private var internalFocus: Bool
-
+    
     func body(content: Content) -> some View {
         content
             .accessibilityFocused($internalFocus)
@@ -322,5 +322,27 @@ private struct AccessibilityFocusModifier: ViewModifier {
                     internalFocus = newValue
                 }
             }
+    }
+}
+
+struct toggleCell: View {
+    let toggleText: String
+    let getAction: () -> Bool
+    let setAction: (Bool) -> Void
+    let accessibilityLabelValue: String
+    
+    var body: some View {
+        HStack {
+            Text(toggleText)
+            Spacer()
+            Toggle("", isOn: Binding(
+                get: { getAction() },
+                set: { newValue in setAction(newValue) }
+            ))
+            .labelsHidden()
+            .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabelValue)
     }
 }
