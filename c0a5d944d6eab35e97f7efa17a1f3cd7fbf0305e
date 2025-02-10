@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89916402_957c6524",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SwiftUI/Views/ConversationsView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "the function should be in the model",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb22102_bffae65f",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SwiftUI/Views/ConversationsView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "not translatable",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0240454_2a3e2e69",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "accessibilityLabelValue is empty",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4b30fd3_289820c6",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "accessibilityLabelValue is empty",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "233be4bb_f7004e8d",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "accessibilityLabelValue is empty",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff4cf9c7_6410c3d7",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "accessibilityLabelValue is empty",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ae96870_c0c06542",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "accessibilityLabelValue is empty",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ca6b4e2_1c441f0a",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "accessibilityLabelValue is empty",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67bc9fdc_9c6e9d9a",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "accessibilityLabelValue is empty",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71e5295_87d771d4",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "accessibilityLabelValue is empty",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "099ecb8d_52834a5f",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSummaryView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "accessibilityLabelValue not completed",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f60baf65_d91b17a9",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSummaryView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "this function should be in the model",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb8ab7a5_445bcd73",
+        "filename": "Ring/Ring/Features/Settings/Me/GeneralSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "what is the value for accessibilityLabelValue",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6af0a8_67cef1d6",
+        "filename": "Ring/Ring/Features/Settings/Me/GeneralSettingsViews.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "accessibilityLabelValue is empty",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5cb126d_17171af5",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T17:43:15Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
