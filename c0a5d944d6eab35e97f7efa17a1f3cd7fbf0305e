@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0ceb6db_58a32855",
+        "filename": "Ring/Ring/Extensions/View+Helpers.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T18:05:08Z",
+      "side": 1,
+      "message": "type name should start with upper case.",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "89916402_957c6524",
         "filename": "Ring/Ring/Features/Conversations/SmartList/SwiftUI/Views/ConversationsView.swift",
         "patchSetId": 5
@@ -184,6 +201,23 @@
       "writtenOn": "2025-02-10T17:43:15Z",
       "side": 1,
       "message": "accessibilityLabelValue not completed",
+      "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad61044_7c5c4de4",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSummaryView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-10T18:05:08Z",
+      "side": 1,
+      "message": "use .buttonStyle(PlainButtonStyle()) to limit hit-test area of the button, otherwise it will cover the entire row.",
       "revId": "c0a5d944d6eab35e97f7efa17a1f3cd7fbf0305e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
