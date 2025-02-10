@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Lisätäänkö yhteystietoihin?";
 "conversation.notContactLabel" = "ei ole yhteystiedoissa";
 "conversation.messagePlaceholder" = "Kirjoita...";
-"conversation.explanationSendingLocationTo" = "Jaat sijaintisi tällä hetkellä";
-"conversation.explanationReceivingLocationFrom" = "Saat parhaillaan suoraa sijaintia";
 "conversation.errorSavingImage" = "Virhe tallennettaessa kuvaa galleriaan.";
 "conversation.receivedRequest" = "%@ lähetti sinulle keskustelukutsun.";
 "conversation.incomingRequest" = "lähetti sinulle keskustelukutsun.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "Olet hyväksynyt keskustelukutsun.";
 "conversation.synchronizationMessage" = "Odotetaan, että %@ synkronoi keskustelun…";
 "conversation.inReplyTo" = "Vastauksena";
-"conversation.repliedTo" = " vastaus...";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Sinä";
 "conversation.edited" = "Muokattu";
-"conversation.deletedMessage" = "poisti viestin";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Henkilö estetty";
 
 // Invitations
 "invitations.noInvitations" = "Ei kutsuja";
-"invitations.pending" = "odottaa";
-"invitations.accepted" = "hyväksytty";
-"invitations.declined" = "hylätty";
-"invitations.blocked" = "estetty";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Estetty";
 "invitations.list" = "Kutsut vastaanotettu";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Liity Jamiin";
-"createAccount.lookingForUsernameAvailability" = "etsitään saatavuutta…";
-"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Käyttäjänimi on jo varattu";
-"createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Lisätään tiliä";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
+"createAccount.invalidUsername" = "Virheellinen käyttäjänimi Anna kelvollinen käyttäjänimi.";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameValid" = "Käyttäjänimi on saatavilla.";
 "createAccount.UsernameNotRegisteredTitle" = "Verkkovirhe";
 "createAccount.UsernameNotRegisteredMessage" = "Tili luotiin, mutta käyttäjänimeä ei rekisteröity";
 "createAccount.timeoutTitle" = "Tili luotu";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Poista";
 "actions.backAction" = "Takaisin";
 "actions.doneAction" = "Valmis";
-"alerts.incomingCallAllertTitle" = "Saapuva puhelu";
-"alerts.incomingCallButtonIgnore" = "Sivuuta";
-"actions.startAudioCall" = "Äänipuhelu";
-"actions.startVideoCall" = "Videopuhelu";
 "actions.goToSettings" = "Mene asetuksiin";
 "actions.stopLocationSharing" = "Lopeta jakaminen";
 
 // Calls
-"calls.incomingCallInfo" = "haluaa puhua kanssasi";
 "calls.ringing" = "Soi...";
 "calls.connecting" = "Yhdistää...";
 "calls.callFinished" = "Puhelu päättynyt";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Laitteet";
 "accountPage.settingsHeader" = "Asetukset";
 "accountPage.notificationsHeader" = "Ilmoitukset";
-"accountPage.usernameNotRegistered" = "käyttäjätunnus: ei rekisteröity";
-"accountPage.credentialsHeader" = "Tilin tiedot";
 "accountPage.blockedContacts" = "Estetyt henkilöt";
 "accountPage.unblockContact" = "Poista esto";
 "accountPage.proxyAddressAlert" = "Anna välityspalvelimen osoite";
@@ -319,7 +307,7 @@
 "accountPage.contactMeOnJamiContant" = "Ota minuun yhteyttä \"%s\" Jami viestintäalustan kautta:  https://jami.net";
 "accountPage.passwordPlaceholder" = "Anna tilin salasana";
 "accountPage.usernamePlaceholder" = "Kirjoita haluamasi käyttäjänimi";
-"accountPage.registerNameErrorMessage" = "The username is unavailable.";
+"accountPage.registerNameErrorMessage" = "Käyttäjänimi ei ole saatavilla.";
 "accountPage.usernameRegistering" = "Rekisteröidään";
 "accountPage.usernameRegisterAction" = "Rekistöröi";
 "accountPage.usernameRegistrationFailedTitle" = "Rekisteröinti epäonnistui";
@@ -358,7 +346,7 @@
 "accountPage.manageAccount" = "Hallinnoi tiliä";
 "accountPage.encryptAccount" = "Salaa tili salasanalla";
 "accountPage.passwordExplanation" = "Jami-tili luodaan ja tallennetaan paikallisesti vain tälle laitteelle. Tilin avain on pakattuna ja pääsy tähän voidaan valinnaisesti suojata salasanalla.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordsDoNotMatch" = "Salasanat eivät täsmää.";
 "accountPage.passwordCreated" = "Salasana luotu";
 "accountPage.passwordUpdated" = "Salasana päivitetty";
 "accountPage.linkedDevices" = "Linkitetyt laitteet";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Yhdistetään";
 "account.statusUnknown" = "Tuntematon";
 "account.statusConnectionerror" = "Yhteysvirhe";
-"account.needMigration" = "tili on siirrettävä";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Minä";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Kutsu vastaanotettu";
 "generatedMessage.swarmCreated" = "Keskustelu luotu";
-"generatedMessage.invitationReceived" = "kutsuttiin keskusteluun.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "Liityit keskusteluun.";
-"generatedMessage.contactBlocked" = "estettiin keskustelusta.";
-"generatedMessage.contactUnblocked" = "keskustelun esto poistettiin.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Lähtevä puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Videoasetukset";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Palaute";
 "aboutJami.createdBy" = "Luonut:";
 "aboutJami.artworkBy" = "Ulkoasu:";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

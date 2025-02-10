@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Tambah ke kontak?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Anda saat ini berbagi lokasi Anda dengan";
-"conversation.explanationReceivingLocationFrom" = "Saat ini Anda sedang menerima lokasi langsung dari";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Sebagai balasan";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Anda";
 "conversation.edited" = "Diedit";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Tidak ada undangan";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Gabung Jami";
-"createAccount.lookingForUsernameAvailability" = "Memeriksa ketersediaan...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Nama pengguna sudah diambil";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Menambahkan akun";
 "createAccount.UsernameNotRegisteredTitle" = "Galat jaringan";
 "createAccount.UsernameNotRegisteredMessage" = "Akun telah dibuat tetapi nama pengguna tidak terdaftar";
 "createAccount.timeoutTitle" = "Akun Dibuat";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Hapus";
 "actions.backAction" = "Kembali";
 "actions.doneAction" = "Selesai";
-"alerts.incomingCallAllertTitle" = "Panggilan masuk dari";
-"alerts.incomingCallButtonIgnore" = "Abaikan";
-"actions.startAudioCall" = "Panggilan suara";
-"actions.startVideoCall" = "Panggilan video";
 "actions.goToSettings" = "Ke pengaturan";
 "actions.stopLocationSharing" = "Berhenti berbagi";
 
 // Calls
-"calls.incomingCallInfo" = "ingin berbicara dengan Anda";
 "calls.ringing" = "Berdering...";
 "calls.connecting" = "Menghubungkan...";
 "calls.callFinished" = "Panggilan selesai";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Perangkat";
 "accountPage.settingsHeader" = "Setelan";
 "accountPage.notificationsHeader" = "Notifikasi";
-"accountPage.usernameNotRegistered" = "Nama pengguna: tidak terdaftar";
-"accountPage.credentialsHeader" = "Detail Akun";
 "accountPage.blockedContacts" = "Kontak yang diblokir";
 "accountPage.unblockContact" = "Buka blokir";
 "accountPage.proxyAddressAlert" = "Masukkan alamat proksi";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Menghubungkan";
 "account.statusUnknown" = "Tidak diketahui";
 "account.statusConnectionerror" = "Gangguan koneksi";
-"account.needMigration" = "akun perlu dimigrasikan";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Saya";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Undangan diterima";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
 "generatedMessage.missedOutgoingCall" = "Panggilan keluar tidak terjawab";
 "generatedMessage.missedIncomingCall" = "Panggilan masuk tidak terjawab";
 "generatedMessage.liveLocationSharing" = "Berbagi lokasi secara live";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Umpan balik";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Tutup";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Tambah akun";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Foto profil";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

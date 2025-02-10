@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "افزودن به مخاطبان؟";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "در حال حاضر مکان خود را به اشتراک می‌گذارید";
-"conversation.explanationReceivingLocationFrom" = "در حال حاضر مکان زنده را دریافت می‌کنید از";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "در پاسخ به";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "شما";
 "conversation.edited" = "ویرایش شده";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "بدون دعوت‌نامه";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "دعوت‌نامه‌های دریافت شد";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "با جمی هم همراهی کن";
-"createAccount.lookingForUsernameAvailability" = "بررسی در‌دسترس بودن…";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "نام کاربری قبلاً انتخاب شده";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "در حال افزودن حساب";
 "createAccount.UsernameNotRegisteredTitle" = "خطای شبکه";
 "createAccount.UsernameNotRegisteredMessage" = "حساب ایجاد شده، اما نام‌کاربری ثبت نشده است";
 "createAccount.timeoutTitle" = "حساب کاربری ایجاد شد";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "حذف";
 "actions.backAction" = "بازگشت";
 "actions.doneAction" = "انجام شد";
-"alerts.incomingCallAllertTitle" = "تماس دریافتی از";
-"alerts.incomingCallButtonIgnore" = "رد";
-"actions.startAudioCall" = "تماس صوتی";
-"actions.startVideoCall" = "تماس تصویری";
 "actions.goToSettings" = "برو به تنظیمات";
 "actions.stopLocationSharing" = "توقف اشتراک‌گذاری";
 
 // Calls
-"calls.incomingCallInfo" = "میخواهد با شما حرف بزند";
 "calls.ringing" = "در حال زنگ خوردن...";
 "calls.connecting" = "در حال اتصال...";
 "calls.callFinished" = "تماس پایان یافت";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "دستگاه ها";
 "accountPage.settingsHeader" = "تنظیمات";
 "accountPage.notificationsHeader" = "اعلان‌ها";
-"accountPage.usernameNotRegistered" = "نام کاربری: ثبت نشده";
-"accountPage.credentialsHeader" = "جزییات حساب کاربری";
 "accountPage.blockedContacts" = "مخاطبین مسدود‌شده";
 "accountPage.unblockContact" = "رفع مسدودی";
 "accountPage.proxyAddressAlert" = "تامین آدرس پروکسی";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "در حال اتصال";
 "account.statusUnknown" = "ناشناخته";
 "account.statusConnectionerror" = "خطای ارتباط";
-"account.needMigration" = "نیاز است که حساب شما انتقال یابد.";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "من";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "دعوت‌نامه دریافت شد";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "تماس خروجی";
 "generatedMessage.missedOutgoingCall" = "تماس خروجی بی پاسخ";
 "generatedMessage.missedIncomingCall" = "تماس ورودی بی پاسخ";
 "generatedMessage.liveLocationSharing" = "هم‌رسانی زنده مکان";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "بازخورد";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

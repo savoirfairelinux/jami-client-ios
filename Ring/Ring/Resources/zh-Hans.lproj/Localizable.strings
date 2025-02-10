@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "新增到聯絡人？";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "您目前正在分享您的位置，與";
-"conversation.explanationReceivingLocationFrom" = "您正收到即時位置，從";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "在回复中";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "您";
 "conversation.edited" = "已编辑";
-"conversation.deletedMessage" = "删除了一封邮件";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "联系人被封锁";
 
 // Invitations
 "invitations.noInvitations" = "沒有邀請";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "已接受";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "已封鎖";
 "invitations.list" = "邀请已发送";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "加入 Jami";
-"createAccount.lookingForUsernameAvailability" = "正在確認是否可用……";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "使用者名稱已被使用";
+"createAccount.usernameAlreadyTaken" = "已取得的使用者名稱";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "正在加入帳號";
 "createAccount.UsernameNotRegisteredTitle" = "網路錯誤";
 "createAccount.UsernameNotRegisteredMessage" = "帳號已建立，但未註冊使用者名稱";
 "createAccount.timeoutTitle" = "已建立帳號";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "刪除";
 "actions.backAction" = "前一個";
 "actions.doneAction" = "完成";
-"alerts.incomingCallAllertTitle" = "來電從";
-"alerts.incomingCallButtonIgnore" = "忽略";
-"actions.startAudioCall" = "音訊通話";
-"actions.startVideoCall" = "視訊通話";
 "actions.goToSettings" = "前往設定";
 "actions.stopLocationSharing" = "停止分享";
 
 // Calls
-"calls.incomingCallInfo" = "想要與您交談";
 "calls.ringing" = "響鈴中……";
 "calls.connecting" = "正在連線……";
 "calls.callFinished" = "通話結束";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "裝置";
 "accountPage.settingsHeader" = "設定";
 "accountPage.notificationsHeader" = "通知";
-"accountPage.usernameNotRegistered" = "使用者名稱：未註冊";
-"accountPage.credentialsHeader" = "帳號詳細資訊";
 "accountPage.blockedContacts" = "已阻擋的聯絡人";
 "accountPage.unblockContact" = "取消封鎖";
 "accountPage.proxyAddressAlert" = "提供代理伺服器附加元件";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "連接中";
 "account.statusUnknown" = "未知";
 "account.statusConnectionerror" = "連線錯誤";
-"account.needMigration" = "需要遷移帳號";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "我";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "已收到邀請";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@被邀请加入对话。";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@被阻止参与对话。";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "撥出電話";
 "generatedMessage.missedOutgoingCall" = "未接去電";
 "generatedMessage.missedIncomingCall" = "未接來電";
 "generatedMessage.liveLocationSharing" = "即時位置分享";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "回饋";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "美術設計";
+
+// Accessibility
+"accessibility.close" = "關閉";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "加入帳號";
+"accessibility.aboutJamiTitle" = "關於 Jami";
+"accessibility.welcomeToJamiTitle" = "歡迎來到 Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "个人资料图片";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

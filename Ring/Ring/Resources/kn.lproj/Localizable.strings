@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "ಸಂಪರ್ಕಗಳಿಗೆ ಸೇರಿಸುವುದೇ?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "ನೀವು ಪ್ರಸ್ತುತ ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಹಂಚಿಕೊಳ್ಳುತ್ತಿದ್ದೀರಿ ";
-"conversation.explanationReceivingLocationFrom" = "ನೀವು ಪ್ರಸ್ತುತ ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "ಇದಕ್ಕೆ ಪ್ರತಿಕ್ರಿಯೆಯಾಗಿ";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "ನೀನೇ";
 "conversation.edited" = "ಸಂಪಾದನೆ";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "ಆಹ್ವಾನಗಳಿಲ್ಲ";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "ಜಾಮಿಗೆ ಸೇರಿ";
-"createAccount.lookingForUsernameAvailability" = "ಲಭ್ಯತೆಗಾಗಿ ಹುಡುಕುತ್ತಿರುವ...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "ಈಗಾಗಲೇ ತೆಗೆದ ಬಳಕೆದಾರ ಹೆಸರು";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "ಖಾತೆ ಸೇರ್ಪಡೆ";
 "createAccount.UsernameNotRegisteredTitle" = "ನೆಟ್ವರ್ಕ್ ದೋಷ";
 "createAccount.UsernameNotRegisteredMessage" = "ಖಾತೆಯನ್ನು ರಚಿಸಲಾಗಿದೆ ಆದರೆ ಬಳಕೆದಾರ ಹೆಸರು ನೋಂದಾಯಿಸಲಾಗಿಲ್ಲ";
 "createAccount.timeoutTitle" = "ಖಾತೆ ರಚನೆ";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "ಅಳಿಸು";
 "actions.backAction" = "ಹಿಂದಕ್ಕೆ";
 "actions.doneAction" = "ಮುಗಿದಿದೆ";
-"alerts.incomingCallAllertTitle" = "";
-"alerts.incomingCallButtonIgnore" = "ನಿರ್ಲಕ್ಷಿಸಿ";
-"actions.startAudioCall" = "ಆಡಿಯೋ ಕರೆ";
-"actions.startVideoCall" = "ವಿಡಿಯೋ ಕರೆ";
 "actions.goToSettings" = "ಸೆಟ್ಟಿಂಗ್ಗಳಿಗೆ ಹೋಗಿ";
 "actions.stopLocationSharing" = "ಹಂಚಿಕೆ ನಿಲ್ಲಿಸಿ";
 
 // Calls
-"calls.incomingCallInfo" = "ನಿಮ್ಮೊಂದಿಗೆ ಮಾತನಾಡಲು ಬಯಸಿದೆ";
 "calls.ringing" = "ರಿಂಗಿಂಗ್.";
 "calls.connecting" = "ಸಂಪರ್ಕಿಸುವಿಕೆ.";
 "calls.callFinished" = "ಕರೆ ಮುಗಿದ";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "ಉಪಕರಣಗಳು";
 "accountPage.settingsHeader" = "ಸೆಟ್ಟಿಂಗ್ಗಳು";
 "accountPage.notificationsHeader" = "ಅಧಿಸೂಚನೆಗಳು";
-"accountPage.usernameNotRegistered" = "ಬಳಕೆದಾರ ಹೆಸರುಃ ನೋಂದಾಯಿತವಲ್ಲ";
-"accountPage.credentialsHeader" = "ಖಾತೆ ವಿವರಗಳು";
 "accountPage.blockedContacts" = "ನಿರ್ಬಂಧಿತ ಸಂಪರ್ಕಗಳು";
 "accountPage.unblockContact" = "ಅನಿರ್ಬಂಧವನ್ನು ತೆರವುಗೊಳಿಸಿ";
 "accountPage.proxyAddressAlert" = "ಪ್ರಾಕ್ಸಿ ವಿಳಾಸವನ್ನು ಒದಗಿಸಿ";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "ಸಂಪರ್ಕ";
 "account.statusUnknown" = "ಅಜ್ಞಾತ";
 "account.statusConnectionerror" = "ಸಂಪರ್ಕ ದೋಷ";
-"account.needMigration" = "ಖಾತೆಯನ್ನು ಸ್ಥಳಾಂತರಿಸಬೇಕಾಗಿದೆ";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "ನಾನು";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "ಸ್ವೀಕರಿಸಿದ ಆಹ್ವಾನ";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "ಹೊರಹೋಗುವ ಕರೆ";
 "generatedMessage.missedOutgoingCall" = "ತಪ್ಪಿಸಿಕೊಂಡ ಹೊರಹೋಗುವ ಕರೆ";
 "generatedMessage.missedIncomingCall" = "ತಪ್ಪಿದ ಕರೆ";
 "generatedMessage.liveLocationSharing" = "ಲೈವ್ ಸ್ಥಳ ಹಂಚಿಕೆ";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "ಪ್ರತಿಕ್ರಿಯೆ";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "ಹತ್ತಿರ";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "ಖಾತೆಯನ್ನು ಸೇರಿಸಿ";
+"accessibility.aboutJamiTitle" = "ಜಾಮಿ ಬಗ್ಗೆ";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "ಪ್ರೊಫೈಲ್ ಚಿತ್ರ";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

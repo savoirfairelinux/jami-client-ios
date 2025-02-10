@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Kişilere eklensin mi?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
-"conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Cevap olarak";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Siz";
 "conversation.edited" = "Düzenlendi";
-"conversation.deletedMessage" = "bir mesajı sildi";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Davetiye yok";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Kabul edildi";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Alınan davetler";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Jami'ye katılın.";
-"createAccount.lookingForUsernameAvailability" = "kullanılabilirliğine bakılıyor...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "kullanıcı adı önceden alınmış";
+"createAccount.usernameAlreadyTaken" = "Kullanıcı adı önceden alınmış";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Hesap ekleniyor";
 "createAccount.UsernameNotRegisteredTitle" = "Ağ hatası";
 "createAccount.UsernameNotRegisteredMessage" = "Hesap oluşturuldu fakat kullanıcı adı kaydedilmedi";
 "createAccount.timeoutTitle" = "Hesap Oluşturuldu";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Sil";
 "actions.backAction" = "Geri";
 "actions.doneAction" = "Tamam";
-"alerts.incomingCallAllertTitle" = "Adlı kişiden gelen çağrı";
-"alerts.incomingCallButtonIgnore" = "Göz ardı et";
-"actions.startAudioCall" = "Sesli Çağrı";
-"actions.startVideoCall" = "Görüntülü Çağrı";
 "actions.goToSettings" = "Ayarlara Git";
 "actions.stopLocationSharing" = "Paylaşmayı durdur";
 
 // Calls
-"calls.incomingCallInfo" = "seninle konuşmak istiyor";
 "calls.ringing" = "Çalıyor...";
 "calls.connecting" = "Bağlanıyor...";
 "calls.callFinished" = "Çağrı sonlandırıldı";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Aygıtlar";
 "accountPage.settingsHeader" = "Ayarlar";
 "accountPage.notificationsHeader" = "Bildirimler";
-"accountPage.usernameNotRegistered" = "kullanıcı adı: kayıtlı değil";
-"accountPage.credentialsHeader" = "Hesap ayrıntıları";
 "accountPage.blockedContacts" = "Engellenmiş kişiler";
 "accountPage.unblockContact" = "Engeli kaldır";
 "accountPage.proxyAddressAlert" = "Vekil sunucu adresi sağlayın";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Bağlanılıyor";
 "account.statusUnknown" = "Bilinmeyen";
 "account.statusConnectionerror" = "Bağlantı hatası";
-"account.needMigration" = "Hesabın taşınması gerekiyor";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Ben";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Davetiye alındı";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Giden çağrı";
 "generatedMessage.missedOutgoingCall" = "Cevapsız giden çağrı";
 "generatedMessage.missedIncomingCall" = "Cevapsız gelen çağrı";
 "generatedMessage.liveLocationSharing" = "Canlı konum paylaşımı";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Geri bildirim";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Kapat";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Hesap ekle";
+"accessibility.aboutJamiTitle" = "Jami Hakkında";
+"accessibility.welcomeToJamiTitle" = "Jami ye Hoş geldin";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profil görseli";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

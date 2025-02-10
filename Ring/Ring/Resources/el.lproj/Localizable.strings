@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Προσθήκη στις επαφές;";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Συμμετέχετε τη θέση σας με ";
-"conversation.explanationReceivingLocationFrom" = "Πλέον λαμβάνετε ζωντανή τοποθεσία από";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Απαντώντας";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Εσύ";
 "conversation.edited" = "Επορθωμένο";
-"conversation.deletedMessage" = "διαγράφτηκε ένα μήνυμα";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Δεν υπάρχουν προσκλήσεις.";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Δημιουργήστε λογαριασμό Jami";
-"createAccount.lookingForUsernameAvailability" = "Ψάχνοντας διαθεσιμότητα...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Το όνομα χρήστη ήδη χρησιμοποιείται";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Εισαγωγή λογαριασμού";
 "createAccount.UsernameNotRegisteredTitle" = "Σφάλμα δικτύου";
 "createAccount.UsernameNotRegisteredMessage" = "Δημιουργήθηκε λογαριασμός αλλά δεν καταχωρίστηκε όνομα χρήστη";
 "createAccount.timeoutTitle" = "Δημιουργήθηκε λογαριασμός";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Διαγραφή";
 "actions.backAction" = "Πίσω";
 "actions.doneAction" = "Τελείωσε";
-"alerts.incomingCallAllertTitle" = "Ερχόμενη κλήση από ";
-"alerts.incomingCallButtonIgnore" = "Αγνοήστε";
-"actions.startAudioCall" = "Ηχητική κλήση";
-"actions.startVideoCall" = "Βίντεο κλήση";
 "actions.goToSettings" = "Πηγαίνετε στις ρυθμίσεις";
 "actions.stopLocationSharing" = "Τερματισμός κοινοποίησης";
 
 // Calls
-"calls.incomingCallInfo" = "Θέλει να σου μιλήσει.";
 "calls.ringing" = "- Ακούγεται...";
 "calls.connecting" = "Συνδέοντας...";
 "calls.callFinished" = "Η κλήση ολοκληρώθηκε";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Συσκευές";
 "accountPage.settingsHeader" = "Ρυθμίσεις";
 "accountPage.notificationsHeader" = "Ειδοποιήσεις";
-"accountPage.usernameNotRegistered" = "όνομα χρήστη: μη εγγεγραμμένο";
-"accountPage.credentialsHeader" = "Πληροφορίες λογαριασμού";
 "accountPage.blockedContacts" = "Μπλοκαρισμένες επαφές";
 "accountPage.unblockContact" = "Ανοίξτε την μπλοκ";
 "accountPage.proxyAddressAlert" = "Παρέξτε διεύθυνση αντιπροσωπευτικού χαρακτήρα";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Συνδέεται";
 "account.statusUnknown" = "Άγνωστοι";
 "account.statusConnectionerror" = "Λάθος σύνδεσης";
-"account.needMigration" = "Πρέπει να μεταφερθεί λογαριασμός";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Εγώ";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Η πρόσκληση παραλήφθηκε";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Εξερχόμενη κλήση";
 "generatedMessage.missedOutgoingCall" = "Αναπάντητη εξερχόμενη κλήση";
 "generatedMessage.missedIncomingCall" = "Αναπάντητη εισερχόμενη κλήση";
 "generatedMessage.liveLocationSharing" = "Συνοχή τοποθεσιών ζωντανά";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Σχόλια";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

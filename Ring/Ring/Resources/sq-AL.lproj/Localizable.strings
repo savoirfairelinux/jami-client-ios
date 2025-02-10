@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Të shtohet te kontaktet?";
 "conversation.notContactLabel" = "s’është në listën e kontakteve tuaj";
 "conversation.messagePlaceholder" = "Shkruajini";
-"conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
-"conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 "conversation.errorSavingImage" = "Ndodhi një gabim teksa ruhej figura te galeria.";
 "conversation.receivedRequest" = "%@ ju dërgoi një ftesë bisede.";
 "conversation.incomingRequest" = "ju dërgoi një ftesë për bisedë.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "Keni pranuar ftesën e bisedës.";
 "conversation.synchronizationMessage" = "Po pritet që %@ të lidhet, që të njëkohësohet biseda…";
 "conversation.inReplyTo" = "Në përgjigje të";
-"conversation.repliedTo" = "iu përgjigj";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Ju";
 "conversation.edited" = "U përpunua";
-"conversation.deletedMessage" = "fshiu një mesazh";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Kontakti u bllokua ";
 
 // Invitations
 "invitations.noInvitations" = "S’ka ftesa";
-"invitations.pending" = "pezull";
-"invitations.accepted" = "pranuar";
-"invitations.declined" = "hedhur poshtë";
-"invitations.blocked" = "bllokuar";
+"invitations.accepted" = "E pranuar";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Bllokuar";
 "invitations.list" = "Ftesat u morën";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Bëhuni pjesë e Jami-t";
-"createAccount.lookingForUsernameAvailability" = "po shihet për pasje…";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Emër i pavlefshëm përdoruesi. Ju lutemi, jepni një emër përdoruesi të vlefshëm.";
-"createAccount.usernameAlreadyTaken" = "emër përdoruesi tashmë i zënë";
+"createAccount.usernameAlreadyTaken" = "Emër përdoruesi tashmë i zënë";
 "createAccount.usernameValid" = "Emri i përdoruesit është i lirë.";
-"createAccount.loading" = "Po ngarkohet…";
-"createAccount.waitCreateAccountTitle" = "Po shtohet llogaria";
 "createAccount.UsernameNotRegisteredTitle" = "Gabim rrjeti";
 "createAccount.UsernameNotRegisteredMessage" = "Llogaria u krijua, por emri i përdoruesit s’u regjistrua";
 "createAccount.timeoutTitle" = "Llogaria u Krijua";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Fshije";
 "actions.backAction" = "Mbrapsht";
 "actions.doneAction" = "U bë";
-"alerts.incomingCallAllertTitle" = "Thirrje nga";
-"alerts.incomingCallButtonIgnore" = "Shpërfille";
-"actions.startAudioCall" = "Thirrje Audio";
-"actions.startVideoCall" = "Thirrje Video";
 "actions.goToSettings" = "Kalo te Rregullimet";
 "actions.stopLocationSharing" = "Resht së dhëni";
 
 // Calls
-"calls.incomingCallInfo" = "dëshiron të flasë me ju";
 "calls.ringing" = "Po thirret…";
 "calls.connecting" = "Po lidhet…";
 "calls.callFinished" = "Thirrja përfundoi";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Pajisje";
 "accountPage.settingsHeader" = "Rregullime";
 "accountPage.notificationsHeader" = "Njoftime";
-"accountPage.usernameNotRegistered" = "emër përdoruesi: jo i regjistruar";
-"accountPage.credentialsHeader" = "Hollësi Llogarie";
 "accountPage.blockedContacts" = "Kontakte të bllokuar";
 "accountPage.unblockContact" = "Zhbllokoje";
 "accountPage.proxyAddressAlert" = "Jepni adresë ndërmjetësi";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Po lidhet";
 "account.statusUnknown" = "I panjohur";
 "account.statusConnectionerror" = "Gabim Lidhjeje";
-"account.needMigration" = "llogari që duhet migruar";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Unë";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Ftesa u mor";
 "generatedMessage.swarmCreated" = "Biseda ui krijua";
-"generatedMessage.invitationReceived" = "u ftua të marrë pjesë në bisedë.";
-"generatedMessage.invitationAccepted" = "erdhi në bisedë.";
+"generatedMessage.invitationReceived" = "%@ u ftua të marrë pjesë në bisedë.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "Erdhët në bisedë.";
-"generatedMessage.contactBlocked" = "u bllokua prej bisede.";
-"generatedMessage.contactUnblocked" = "u zhbllokua prej bisede.";
+"generatedMessage.contactBlocked" = "%@ u bllokua prej bisede.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Thirrje për";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie e vendndodhjes drejtpërsëdrejti";
-"generatedMessage.contactLeftConversation" = "iku nga biseda.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Rregullime videoje";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Përshtypje";
 "aboutJami.createdBy" = "Krijuar nga";
 "aboutJami.artworkBy" = "Ana grafike nga";
+
+// Accessibility
+"accessibility.close" = "Mbylle";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Shtoni llogari";
+"accessibility.aboutJamiTitle" = "Mbi Jami-n";
+"accessibility.welcomeToJamiTitle" = "Mirë se vini te Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Foto profili";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

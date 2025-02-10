@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Ị na-ekere òkè ugbu a na ọnọdụ gị na ";
-"conversation.explanationReceivingLocationFrom" = "Ị na-enweta ugbu a a a ndụ ọnọdụ site ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Na nzaghachi";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "You";
 "conversation.edited" = "E Deziiri Ya";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Enweghị akwụkwọ ịkpọ òkù";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Soro Jami";
-"createAccount.lookingForUsernameAvailability" = "na-achọ nnweta...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "aha njirimara e weghaara";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Ihe ndekọ";
 "createAccount.UsernameNotRegisteredTitle" = "Njehie netwọk";
 "createAccount.UsernameNotRegisteredMessage" = "E mepụtara akaụntụ ma aha njirimara edeghị aha";
 "createAccount.timeoutTitle" = "E Mepụtara Akaụntụ";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Ihichapụ";
 "actions.backAction" = "Ịlaghachi azụ";
 "actions.doneAction" = "E mechaala";
-"alerts.incomingCallAllertTitle" = "N' olu dị ala, ọ na- esi n' ụlọ ọrụ ahụ abịa.";
-"alerts.incomingCallButtonIgnore" = "Echefula ya";
-"actions.startAudioCall" = "Oku Audio";
-"actions.startVideoCall" = "N'Ịkpọ Òkù Site na Vidio";
 "actions.goToSettings" = "Gaa na Ntọala";
 "actions.stopLocationSharing" = "Kwụsị ịkekọrịta";
 
 // Calls
-"calls.incomingCallInfo" = "Ọ chọrọ ịgwa gị okwu";
 "calls.ringing" = "Ọ na-akpọ.";
 "calls.connecting" = "Ịkpọtụrụ...";
 "calls.callFinished" = "Oku ahụ agwụla";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Ngwaọrụ";
 "accountPage.settingsHeader" = "Ntọala";
 "accountPage.notificationsHeader" = "Nkwupụta";
-"accountPage.usernameNotRegistered" = "aha njirimara: edebanyere ahaghị aha";
-"accountPage.credentialsHeader" = "Ihe ndekọ ego";
 "accountPage.blockedContacts" = "Ndị a na-egbochi";
 "accountPage.unblockContact" = "Ịgbanwee";
 "accountPage.proxyAddressAlert" = "Nye adreesị nnọchiteanya";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Njikọ";
 "account.statusUnknown" = "A maghị";
 "account.statusConnectionerror" = "Njehie Njikọ";
-"account.needMigration" = "a ga-akwaga akaụntụ ahụ";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Mụ onwe m";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Òkù a kpọrọ";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "N'imepụta oku";
 "generatedMessage.missedOutgoingCall" = "Ọ dịghị onye na-akpọ gị";
 "generatedMessage.missedIncomingCall" = "Ọ dịghị onye na-akpọ gị";
 "generatedMessage.liveLocationSharing" = "Ịkekọrịta ọnọdụ ndụ";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Nzaghachi";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Ọ ga-abụ na ọ dị nso.";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Tinye akaụntụ";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Foto profaịlụ";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

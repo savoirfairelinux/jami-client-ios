@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Dodati u kontakte?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Trenutno dijelite svoju lokaciju s ";
-"conversation.explanationReceivingLocationFrom" = "Trenutno primaš uživo lokaciju od ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "U odgovor na";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Ti si";
 "conversation.edited" = "U redigiranju";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Nema poziva";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Pridruži se Jamiju.";
-"createAccount.lookingForUsernameAvailability" = "Traže dostupnost...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "korisničko ime je već zauzeto";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Dodajem račun";
 "createAccount.UsernameNotRegisteredTitle" = "Greška mreže";
 "createAccount.UsernameNotRegisteredMessage" = "Stvoreno je račun, ali korisničko ime nije registrirano";
 "createAccount.timeoutTitle" = "Stvoreni račun";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Izbriši";
 "actions.backAction" = "Natrag";
 "actions.doneAction" = "Učinjeno";
-"alerts.incomingCallAllertTitle" = "Približeći poziv iz ";
-"alerts.incomingCallButtonIgnore" = "Ignoriraj";
-"actions.startAudioCall" = "Audio poziv";
-"actions.startVideoCall" = "Video poziv";
 "actions.goToSettings" = "Idi u postavke";
 "actions.stopLocationSharing" = "Prestani dijeliti";
 
 // Calls
-"calls.incomingCallInfo" = "Želi razgovarati s tobom.";
 "calls.ringing" = "Zvuči...";
 "calls.connecting" = "Povezivanje...";
 "calls.callFinished" = "Zvatak završen";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Uređaji";
 "accountPage.settingsHeader" = "Postavke";
 "accountPage.notificationsHeader" = "Uloga za obavještavanje";
-"accountPage.usernameNotRegistered" = "korisničko ime: nije registrirano";
-"accountPage.credentialsHeader" = "Podrobnosti o računu";
 "accountPage.blockedContacts" = "Blokirani kontakti";
 "accountPage.unblockContact" = "Deblokiraj";
 "accountPage.proxyAddressAlert" = "Ustavite proxy adresu";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Spajanje";
 "account.statusUnknown" = "Nepoznato";
 "account.statusConnectionerror" = "Pogreška povezivanja";
-"account.needMigration" = "računa mora biti migrirana";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Ja";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Poziv primljen";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Odlazni poziv";
 "generatedMessage.missedOutgoingCall" = "Propušteni odlazni poziv";
 "generatedMessage.missedIncomingCall" = "Propušteni dolazni poziv";
 "generatedMessage.liveLocationSharing" = "Udio lokacije uživo";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Povratna informacija";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "-U blizini.";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Dodaj račun";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

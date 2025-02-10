@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "పరిచయాలకు జోడించండి?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "మీరు ప్రస్తుతం మీ స్థానాన్ని పంచుకుంటున్నారు ";
-"conversation.explanationReceivingLocationFrom" = "మీరు ప్రస్తుతం  నుండి ఒక ప్రత్యక్ష స్థానం అందుకుంటున్న";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "దీనికి ప్రతిస్పందనగా";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "మీరు";
 "conversation.edited" = "సవరణ";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "ఆహ్వానాలు లేవు";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "ఆమోదము";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "జామితో చేరండి";
-"createAccount.lookingForUsernameAvailability" = "లభ్యత కోసం చూస్తున్న.";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "ఇప్పటికే తీసుకున్న వాడుకరి పేరు";
+"createAccount.usernameAlreadyTaken" = "ఇప్పటికే తీసుకోబడిన వాడుకరి పేరు";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "ఖాతా జోడించడం";
 "createAccount.UsernameNotRegisteredTitle" = "నెట్వర్క్ లోపం";
 "createAccount.UsernameNotRegisteredMessage" = "ఖాతా సృష్టించబడింది కాని వినియోగదారు పేరు నమోదు చేయబడలేదు";
 "createAccount.timeoutTitle" = "ఖాతా సృష్టించడం";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "తొలగించు";
 "actions.backAction" = "తిరిగి";
 "actions.doneAction" = "పూర్తి";
-"alerts.incomingCallAllertTitle" = " నుండి ఇన్కమింగ్ కాల్";
-"alerts.incomingCallButtonIgnore" = "విస్మరించు";
-"actions.startAudioCall" = "ఆడియో కాల్";
-"actions.startVideoCall" = "వీడియో కాల్";
 "actions.goToSettings" = "సెట్టింగులకు వెళ్లండి";
 "actions.stopLocationSharing" = "భాగస్వామ్యం చేయడాన్ని ఆపండి";
 
 // Calls
-"calls.incomingCallInfo" = "మీతో మాట్లాడాలనుకుంటుంది";
 "calls.ringing" = "రింగ్.";
 "calls.connecting" = "కనెక్ట్.";
 "calls.callFinished" = "కాల్ పూర్తయింది";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "పరికరాలు";
 "accountPage.settingsHeader" = "సెట్టింగులు";
 "accountPage.notificationsHeader" = "నోటిఫికేషన్లు";
-"accountPage.usernameNotRegistered" = "వాడుకరి పేరుః నమోదు చేయబడలేదు";
-"accountPage.credentialsHeader" = "ఖాతా వివరాలు";
 "accountPage.blockedContacts" = "అడ్డుకున్న పరిచయాలు";
 "accountPage.unblockContact" = "బ్లాక్ ను అన్బ్లాక్ చేయండి";
 "accountPage.proxyAddressAlert" = "ప్రాక్సీ చిరునామాను అందించండి";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "కనెక్షన్";
 "account.statusUnknown" = "తెలియని";
 "account.statusConnectionerror" = "కనెక్షన్ లోపం";
-"account.needMigration" = "ఖాతా వలస అవసరం";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "నేను";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "అందుకున్న ఆహ్వానం";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "బయటి కాల్";
 "generatedMessage.missedOutgoingCall" = "మిస్ అవుట్గోయింగ్ కాల్";
 "generatedMessage.missedIncomingCall" = "మిస్డ్ ఇన్కమింగ్ కాల్";
 "generatedMessage.liveLocationSharing" = "ప్రత్యక్ష స్థానం భాగస్వామ్యం";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "అభిప్రాయపత్రాలు";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "దగ్గరగా";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "ఖాతా జోడించండి";
+"accessibility.aboutJamiTitle" = "జామి గురించి";
+"accessibility.welcomeToJamiTitle" = "జామికి స్వాగతం";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "ప్రొఫైల్ చిత్రం";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

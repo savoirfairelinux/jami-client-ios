@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Tá tú ag roinnt do shuíomh faoi láthair le ";
-"conversation.explanationReceivingLocationFrom" = "Tá tú ag fáil suíomh beo faoi láthair ó ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "I dtuarascáil do";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "You";
 "conversation.edited" = "A athchóiriú";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ní iarratais";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Téigh le Jami";
-"createAccount.lookingForUsernameAvailability" = "ag lorg ar fáil...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "ainm úsáideora a glacadh cheana féin";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Cunntas breise";
 "createAccount.UsernameNotRegisteredTitle" = "Measáin";
 "createAccount.UsernameNotRegisteredMessage" = "Cruthaíodh cuntas ach níor chláraigh ainm úsáideora";
 "createAccount.timeoutTitle" = "Cunntas a chruthú";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Scriosadh";
 "actions.backAction" = "Ar ais";
 "actions.doneAction" = "Ar deireadh";
-"alerts.incomingCallAllertTitle" = "Glao ar fáil ó ";
-"alerts.incomingCallButtonIgnore" = "Ignorate";
-"actions.startAudioCall" = "Glao as an gcliabhra";
-"actions.startVideoCall" = "Glaoigh físe";
 "actions.goToSettings" = "Téigh go dtí Suíomh";
 "actions.stopLocationSharing" = "Stop ag roinnt";
 
 // Calls
-"calls.incomingCallInfo" = "Tá sé ag iarraidh labhairt leat";
 "calls.ringing" = "Ag glaoch...";
 "calls.connecting" = "Ceangal...";
 "calls.callFinished" = "Glao críochnaithe";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Iarratais";
 "accountPage.settingsHeader" = "Cinntí";
 "accountPage.notificationsHeader" = "Feidhmeanna";
-"accountPage.usernameNotRegistered" = "ainm úsáideora: gan chlárú";
-"accountPage.credentialsHeader" = "sonraí cuntas";
 "accountPage.blockedContacts" = "Contaeanna blocaithe";
 "accountPage.unblockContact" = "Fág an blocaíocht";
 "accountPage.proxyAddressAlert" = "Cuir seoladh proxy ar fáil";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Ceangal";
 "account.statusUnknown" = "Ní aithnítear";
 "account.statusConnectionerror" = "Measadh Cearrbhachas";
-"account.needMigration" = "Ní mór an cuntas a aistriú";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Mé féin";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Ag iarraidh a fháil";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Glacadh amach";
 "generatedMessage.missedOutgoingCall" = "Ag iarraidh glaoch a fháil";
 "generatedMessage.missedIncomingCall" = "Ag iarraidh glaoch a fháil";
 "generatedMessage.liveLocationSharing" = "Comparáid suíomh beo";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Freagra";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Dlúth";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Cuid ar an cuntas";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Добавить в контакты?";
 "conversation.notContactLabel" = "не входит в ваш список контактов";
 "conversation.messagePlaceholder" = "Написать сообщение";
-"conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
-"conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
 "conversation.errorSavingImage" = "При сохранении изображения в галерею произошла ошибка.";
 "conversation.receivedRequest" = "%@отправил(а) вам приглашение для беседы.";
 "conversation.incomingRequest" = "отправил(а) вам приглашение для беседы.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "Вы приняли приглашение для беседы.";
 "conversation.synchronizationMessage" = "Ждем %@ для подключения к синхронизации беседы…";
 "conversation.inReplyTo" = "В ответ на";
-"conversation.repliedTo" = "в ответ на";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Вы";
 "conversation.edited" = "Отредактировано";
-"conversation.deletedMessage" = "удалённое сообщение";
+"conversation.deletedMessage" = "Cообщение удалено (%@)";
 "conversation.contactBlocked" = "Контакт заблокирован";
 
 // Invitations
 "invitations.noInvitations" = "Приглашений нет";
-"invitations.pending" = "ожидает";
-"invitations.accepted" = "принято";
-"invitations.declined" = "отклонён";
-"invitations.blocked" = "заблокирован";
+"invitations.accepted" = "Принято";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Заблокирован";
 "invitations.list" = "Приглашения получены";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Присоединиться к Джами";
-"createAccount.lookingForUsernameAvailability" = "проверка доступности…";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Неверное имя пользователя. Введите верное.";
-"createAccount.usernameAlreadyTaken" = "имя пользователя уже занято";
+"createAccount.usernameAlreadyTaken" = "Имя пользователя уже занято";
 "createAccount.usernameValid" = "Имя пользователя доступно.";
-"createAccount.loading" = "Загрузка…";
-"createAccount.waitCreateAccountTitle" = "Добавление аккаунта";
 "createAccount.UsernameNotRegisteredTitle" = "Ошибка сети";
 "createAccount.UsernameNotRegisteredMessage" = "Аккаунт был создан, но имя пользователя не было зарегистрировано";
 "createAccount.timeoutTitle" = "Аккаунт создан";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Удалить";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
-"alerts.incomingCallAllertTitle" = "Входящий вызов от";
-"alerts.incomingCallButtonIgnore" = "Игнорировать";
-"actions.startAudioCall" = "Аудиовызов";
-"actions.startVideoCall" = "Видеовызов";
 "actions.goToSettings" = "Перейти к настройкам";
 "actions.stopLocationSharing" = "Остановить трансляцию";
 
 // Calls
-"calls.incomingCallInfo" = "хочет поговорить с вами";
 "calls.ringing" = "Вызов…";
 "calls.connecting" = "Соединение…";
 "calls.callFinished" = "Вызов завершен";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Устройства";
 "accountPage.settingsHeader" = "Настройки";
 "accountPage.notificationsHeader" = "Уведомления";
-"accountPage.usernameNotRegistered" = "имя пользователя: не зарегистрировано";
-"accountPage.credentialsHeader" = "Информация об аккаунте";
 "accountPage.blockedContacts" = "Заблокированные контакты";
 "accountPage.unblockContact" = "Разблокировать";
 "accountPage.proxyAddressAlert" = "Укажите адрес прокси";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Подключение";
 "account.statusUnknown" = "Неизвестно";
 "account.statusConnectionerror" = "Ошибка подключения";
-"account.needMigration" = "аккаунт нуждается в переносе";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Я";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Получено приглашение";
 "generatedMessage.swarmCreated" = "Беседа создана";
-"generatedMessage.invitationReceived" = "был(а) приглашен(а) присоединиться к беседе.";
-"generatedMessage.invitationAccepted" = "присоединяется к беседе.";
+"generatedMessage.invitationReceived" = "%@был(а) приглашен(а) присоединиться к беседе.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "Вы присоединились к беседе.";
-"generatedMessage.contactBlocked" = "был(а) заблокирован(а) в беседе.";
-"generatedMessage.contactUnblocked" = "был(а) разблокирован(а) в беседе.";
+"generatedMessage.contactBlocked" = "%@был(а) заблокирован(а) для участия в беседе.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Исходящий вызов";
 "generatedMessage.missedOutgoingCall" = "Непринятый исходящий вызов";
 "generatedMessage.missedIncomingCall" = "Пропущенный входящий вызов";
 "generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
-"generatedMessage.contactLeftConversation" = "покидает беседу.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Настройки видео";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Обратная связь";
 "aboutJami.createdBy" = "Авторы:";
 "aboutJami.artworkBy" = "Художник:";
+
+// Accessibility
+"accessibility.close" = "Закрыть";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Добавить аккаунт";
+"accessibility.aboutJamiTitle" = "О программе Джами";
+"accessibility.welcomeToJamiTitle" = "Добро пожаловать в Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Фото профиля";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

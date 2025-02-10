@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Добавяне към контактите?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "В момента споделяте местоположението си с ";
-"conversation.explanationReceivingLocationFrom" = "В момента получавате живо местоположение от ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "В отговор на";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Ти си...";
 "conversation.edited" = "Издадено";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Няма покани.";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Присъединете се към Джами.";
-"createAccount.lookingForUsernameAvailability" = "проверяване дали е свободно…";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "потребителското име вече е заето";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Добавяне на профил";
 "createAccount.UsernameNotRegisteredTitle" = "Мрежова грешка";
 "createAccount.UsernameNotRegisteredMessage" = "Профилът бе създаден, но потребителското име не бе регистрирано";
 "createAccount.timeoutTitle" = "Профилът е създаден";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Изтриване";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
-"alerts.incomingCallAllertTitle" = "Пристъпващ обаждане от ";
-"alerts.incomingCallButtonIgnore" = "Игнориране";
-"actions.startAudioCall" = "Аудио обаждане";
-"actions.startVideoCall" = "Видео обаждане";
 "actions.goToSettings" = "Отидете в Настройки";
 "actions.stopLocationSharing" = "Спрете да споделяте";
 
 // Calls
-"calls.incomingCallInfo" = "Иска да говори с теб.";
 "calls.ringing" = "Звъня...";
 "calls.connecting" = "Свързваме...";
 "calls.callFinished" = "Обаждането приключи.";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Устройства";
 "accountPage.settingsHeader" = "Настройки";
 "accountPage.notificationsHeader" = "Известия";
-"accountPage.usernameNotRegistered" = "потребителско име: не е регистрирано";
-"accountPage.credentialsHeader" = "Подробности за профила";
 "accountPage.blockedContacts" = "Блокирани контакти";
 "accountPage.unblockContact" = "Отблокиране";
 "accountPage.proxyAddressAlert" = "Посочете адрес на прокси";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Свързване";
 "account.statusUnknown" = "Неизвестно";
 "account.statusConnectionerror" = "Изключение грешка";
-"account.needMigration" = "трябва да се мигрира сметката";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Аз";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Поканата е приета";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Изходящо обаждане";
 "generatedMessage.missedOutgoingCall" = "Пропуснато изходящо обаждане";
 "generatedMessage.missedIncomingCall" = "Пропуснато входящо обаждане";
 "generatedMessage.liveLocationSharing" = "Съвместно разпределение на местоположения";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Обратна връзка";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

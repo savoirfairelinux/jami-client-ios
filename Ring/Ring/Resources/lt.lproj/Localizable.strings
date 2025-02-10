@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Pridėti prie adresatų?";
 "conversation.notContactLabel" = "nėra jūsų adresatų sąraše";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "In reply to";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Jūs";
-"conversation.edited" = "Išdavinimas";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.edited" = "Edited";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Adresatas užblokuotas";
 
 // Invitations
 "invitations.noInvitations" = "Pakvietimų nėra";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Join Jami";
-"createAccount.lookingForUsernameAvailability" = "tikrinamas prieinamumas…";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "naudotojo vardas jau užimtas";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Pridedama paskyra";
 "createAccount.UsernameNotRegisteredTitle" = "Tinklo klaida";
 "createAccount.UsernameNotRegisteredMessage" = "Paskyra buvo sukurta, bet naudotojo vardas nebuvo užregistruotas";
 "createAccount.timeoutTitle" = "Paskyra sukurta";
@@ -204,7 +199,7 @@
 "linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
 "linkToAccount.pinPlaceholder" = "PIN kodas";
 "linkToAccount.pinLabel" = "Enter PIN code";
-"linkToAccount.scanQRCode" = "Scan QR code";
+"linkToAccount.scanQRCode" = "Skenuokite QR kodą";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
 
 // Import from Archive
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Ištrinti";
 "actions.backAction" = "Atgal";
 "actions.doneAction" = "Atlikta";
-"alerts.incomingCallAllertTitle" = "Gaunamasis skambutis nuo ";
-"alerts.incomingCallButtonIgnore" = "Nepaisyti";
-"actions.startAudioCall" = "Garso skambutis";
-"actions.startVideoCall" = "Vaizdo skambutis";
 "actions.goToSettings" = "Go to Settings";
 "actions.stopLocationSharing" = "Stop sharing";
 
 // Calls
-"calls.incomingCallInfo" = "nori su jumis pakalbėti";
 "calls.ringing" = "Skambinama…";
 "calls.connecting" = "Jungiamasi…";
 "calls.callFinished" = "Skambutis užbaigtas";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Įrenginiai";
 "accountPage.settingsHeader" = "Nustatymai";
 "accountPage.notificationsHeader" = "Pranešimai";
-"accountPage.usernameNotRegistered" = "naudotojo vardas: neregistruotas";
-"accountPage.credentialsHeader" = "Išsamesnė paskyros informacija";
 "accountPage.blockedContacts" = "Užblokuoti adresatai";
 "accountPage.unblockContact" = "Atblokuoti";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Sujungiama";
 "account.statusUnknown" = "Nežinomas";
 "account.statusConnectionerror" = "Ryšio klaida";
-"account.needMigration" = "paskyra turi būti perkelta";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Aš";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Gautas pakvietimas";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Išsiunčiamasis skambutis";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Praleistas gaunamasis skambutis";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Vaizdo nustatymai";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Atsiliepimai";
 "aboutJami.createdBy" = "Sukūrė";
 "aboutJami.artworkBy" = "Apipavidalino";
+
+// Accessibility
+"accessibility.close" = "Užverti";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Pridėti paskyrą";
+"accessibility.aboutJamiTitle" = "Apie Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Kas lisame kontaktina?";
 "conversation.notContactLabel" = "ei leidu sinu kontaktides";
 "conversation.messagePlaceholder" = "Kirjuta kasutajale";
-"conversation.explanationSendingLocationTo" = "Sa jagad praegu oma asukoha kasutajaga";
-"conversation.explanationReceivingLocationFrom" = "Hetkel näed reaalajas asukohta kasutajalt";
 "conversation.errorSavingImage" = "Pildi salvestamisel galeriisse tekkis viga.";
 "conversation.receivedRequest" = "%@ saatis sulle vestluskutse.";
 "conversation.incomingRequest" = "saatis sulle vestluskutse.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "Sa oled nõustunud vestluskutsega.";
 "conversation.synchronizationMessage" = "Vestluse sünkroniseerimiseks ootame kasutaja %@ ühendust.";
 "conversation.inReplyTo" = "Vastuseks kasutajale";
-"conversation.repliedTo" = "vastusena";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Sina";
 "conversation.edited" = "Muudetud";
-"conversation.deletedMessage" = "kustutas sõnumi";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Kontakt on blokeeritud";
 
 // Invitations
 "invitations.noInvitations" = "Pole kutseid";
-"invitations.pending" = "ootel";
-"invitations.accepted" = "vastuvõetud";
-"invitations.declined" = "keeldumine";
-"invitations.blocked" = "blokeeritud";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blokeeritud";
 "invitations.list" = "Sulle on kutseid";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Liitu Jamiga";
-"createAccount.lookingForUsernameAvailability" = "uurime kättesaadavust...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Kasutajanimi on vigane. Palun sisesta korrektne kasutajanimi.";
-"createAccount.usernameAlreadyTaken" = "kasutajanimi on juba võetud";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "Kasutajanimi on saadaval";
-"createAccount.loading" = "Laadime andmeid…";
-"createAccount.waitCreateAccountTitle" = "Lisame kasutajakontot";
 "createAccount.UsernameNotRegisteredTitle" = "Võrgu viga";
 "createAccount.UsernameNotRegisteredMessage" = "Kasutajakonto on nüüd loodud, kuid kasutajanimi jäi registreereerimata";
 "createAccount.timeoutTitle" = "Kasutajakonto on loodud";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Kustuta";
 "actions.backAction" = "Tagasi";
 "actions.doneAction" = "Tehtud";
-"alerts.incomingCallAllertTitle" = "Sissetulev kõne kasutajalt";
-"alerts.incomingCallButtonIgnore" = "Eira";
-"actions.startAudioCall" = "Häälkõne";
-"actions.startVideoCall" = "Videokõne";
 "actions.goToSettings" = "Ava seadistused";
 "actions.stopLocationSharing" = "Lõpeta jagamine";
 
 // Calls
-"calls.incomingCallInfo" = "soovib sinuga rääkida";
 "calls.ringing" = "Heliseb...";
 "calls.connecting" = "Ühendame...";
 "calls.callFinished" = "Kõne on lõppenud";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Seadmed";
 "accountPage.settingsHeader" = "Seadistused";
 "accountPage.notificationsHeader" = "Teavitused";
-"accountPage.usernameNotRegistered" = "kasutajanimi: registreerimata";
-"accountPage.credentialsHeader" = "Kasutajakonto üksikasjad";
 "accountPage.blockedContacts" = "Blokeeritud kontaktid";
 "accountPage.unblockContact" = "Eemalda blokeering";
 "accountPage.proxyAddressAlert" = "Sisesta proksiserveri aadress";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Ühendame";
 "account.statusUnknown" = "Pole teada";
 "account.statusConnectionerror" = "Ühenduse viga ";
-"account.needMigration" = "kasutajakonto peab olema üle kolitud";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Mina";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Said kutse";
 "generatedMessage.swarmCreated" = "Vestlus on loodud";
-"generatedMessage.invitationReceived" = "sai kutse liitumiseks vestlusega.";
-"generatedMessage.invitationAccepted" = "on liitunud vestlusega.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "Sina liitusid vestlusega.";
-"generatedMessage.contactBlocked" = "blokeeriti sellest vestlusest.";
-"generatedMessage.contactUnblocked" = "blokeering sellest vestlusest eemaldati.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Väljuv kõne";
 "generatedMessage.missedOutgoingCall" = "Väljuv kõne jäi märkamata";
 "generatedMessage.missedIncomingCall" = "Saabuv kõne jäi märkamata";
 "generatedMessage.liveLocationSharing" = "Asukoha jagamine reaalajas";
-"generatedMessage.contactLeftConversation" = "on lahkunud vestlusest.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video seadistused";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Tagasiside";
 "aboutJami.createdBy" = "Rakenduse autor:";
 "aboutJami.artworkBy" = "Kujunduse autor:";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

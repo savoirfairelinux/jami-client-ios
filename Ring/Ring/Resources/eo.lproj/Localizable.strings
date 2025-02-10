@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Ĉu aldoni al kontaktoj?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Vi nun dividas vian lokon kun ";
-"conversation.explanationReceivingLocationFrom" = "Vi nun ricevas live-lokon de ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "En respondo al";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Vi";
 "conversation.edited" = "Redaktita";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Neniu invito";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Aliĝu al Jami";
-"createAccount.lookingForUsernameAvailability" = "serĉante haveblecon...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "uzantnomo jam prenita";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Aldonanta konton";
 "createAccount.UsernameNotRegisteredTitle" = "Reta eraro";
 "createAccount.UsernameNotRegisteredMessage" = "Konto estis kreita sed uzantnomo ne estis registrita";
 "createAccount.timeoutTitle" = "Konto kreita";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Forigi";
 "actions.backAction" = "Reiri";
 "actions.doneAction" = "Finita";
-"alerts.incomingCallAllertTitle" = "Envenanta alvoko de ";
-"alerts.incomingCallButtonIgnore" = "Malatenti";
-"actions.startAudioCall" = "Aŭdio-vokado";
-"actions.startVideoCall" = "Videokalvoko";
 "actions.goToSettings" = "Iru al Agordoj";
 "actions.stopLocationSharing" = "Ĉesu dividi";
 
 // Calls
-"calls.incomingCallInfo" = "Li volas paroli kun vi.";
 "calls.ringing" = "Sonoras...";
 "calls.connecting" = "Konekti...";
 "calls.callFinished" = "La voko finiĝis";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Aparatoj";
 "accountPage.settingsHeader" = "Agordoj";
 "accountPage.notificationsHeader" = "Notifikaĵoj";
-"accountPage.usernameNotRegistered" = "Uzan nomon: ne registrita";
-"accountPage.credentialsHeader" = "Konto detaloj";
 "accountPage.blockedContacts" = "Blokiĝintaj kontaktoj";
 "accountPage.unblockContact" = "Malŝalti la blokon";
 "accountPage.proxyAddressAlert" = "Provizu proxy-adreson";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Konektiĝo";
 "account.statusUnknown" = "Nekonata";
 "account.statusConnectionerror" = "Eraro pri konekto";
-"account.needMigration" = "Konto devas esti migrita";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Mi";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Invito ricevita";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Eliranta voko";
 "generatedMessage.missedOutgoingCall" = "Maltrafis forirantan telefonon";
 "generatedMessage.missedIncomingCall" = "Maltrafis envenantan telefonon";
 "generatedMessage.liveLocationSharing" = "Viva kunhavado de lokoj";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Reago";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Close";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Add account";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

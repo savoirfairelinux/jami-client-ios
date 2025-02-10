@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "เพิ่มในรายชื่อติดต่อไหม";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "คุณกําลังแบ่งปันสถานที่ของคุณกับ ";
-"conversation.explanationReceivingLocationFrom" = "คุณกําลังรับข้อมูลที่ตั้งสดจาก ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "ตอบ";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "คุณ";
 "conversation.edited" = "ปรับแต่ง";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "ไม่มีการเชิญ";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "รับรอง";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "เข้าร่วมกับจามิ";
-"createAccount.lookingForUsernameAvailability" = "กําลังมองหาความสามารถ...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "ชื่อผู้ใช้ถูกนำไปใช้แล้ว";
+"createAccount.usernameAlreadyTaken" = "ชื่อผู้ใช้ที่ได้รับแล้ว";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "กำลังเพิ่มบัญชี";
 "createAccount.UsernameNotRegisteredTitle" = "ความผิดพลาดในเครือข่าย";
 "createAccount.UsernameNotRegisteredMessage" = "การสร้างบัญชี แต่ชื่อผู้ใช้ไม่ได้ลงทะเบียน";
 "createAccount.timeoutTitle" = "การสร้างบัญชี";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "ลบ";
 "actions.backAction" = "กลับ";
 "actions.doneAction" = "ทําแล้ว";
-"alerts.incomingCallAllertTitle" = "โทรศัพท์ที่เข้ามาจาก ";
-"alerts.incomingCallButtonIgnore" = "หมอง";
-"actions.startAudioCall" = "การเรียกเสียง";
-"actions.startVideoCall" = "โทรศัพท์วีดีโอ";
 "actions.goToSettings" = "ไปยัง การตั้งค่า";
 "actions.stopLocationSharing" = "หยุดแบ่งปัน";
 
 // Calls
-"calls.incomingCallInfo" = "อยากคุยกับเธอ";
 "calls.ringing" = "เสียงร้อง";
 "calls.connecting" = "การเชื่อมต่อ...";
 "calls.callFinished" = "โทรศัพท์เสร็จ";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "อุปกรณ์";
 "accountPage.settingsHeader" = "การตั้งค่า";
 "accountPage.notificationsHeader" = "การแจ้งเตือน";
-"accountPage.usernameNotRegistered" = "ชื่อผู้ใช้: ไม่ลงทะเบียน";
-"accountPage.credentialsHeader" = "รายละเอียดบัญชี";
 "accountPage.blockedContacts" = "ผู้ติดต่อที่ถูกบล็อก";
 "accountPage.unblockContact" = "เลิกบล็อก";
 "accountPage.proxyAddressAlert" = "ให้ที่อยู่ตัวแทน";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "กำลังเชื่อมต่อ";
 "account.statusUnknown" = "ไม่ทราบ";
 "account.statusConnectionerror" = "ความผิดพลาดการเชื่อมต่อ";
-"account.needMigration" = "ต้องย้ายบัญชี";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "ฉัน";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "ได้รับคำเชิญ";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "โทรออก";
 "generatedMessage.missedOutgoingCall" = "สายที่ไม่ได้รับ";
 "generatedMessage.missedIncomingCall" = "สายเรียกเข้าที่ไม่ได้รับ";
 "generatedMessage.liveLocationSharing" = "การแบ่งปันสถานที่สด";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "ข้อเสนอแนะ";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "ใกล้";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "เพิ่มบัญชี";
+"accessibility.aboutJamiTitle" = "เกี่ยวกับ Jami";
+"accessibility.welcomeToJamiTitle" = "ยินดีต้อนรับสู่ Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "รูปแบบ";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

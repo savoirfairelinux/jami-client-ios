@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Add to contacts?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Bạn đang chia sẻ vị trí của mình với ";
-"conversation.explanationReceivingLocationFrom" = "Bạn đang nhận được một địa điểm trực tiếp từ ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Trả lời";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "You";
 "conversation.edited" = "Được biên tập";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Không có lời mời";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Được chấp nhận";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Lời mời nhận được";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Tham gia Jami";
-"createAccount.lookingForUsernameAvailability" = "tìm kiếm khả năng sẵn sàng...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username đã được lấy";
+"createAccount.usernameAlreadyTaken" = "Tên người dùng đã được lấy";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Tài khoản bổ sung";
 "createAccount.UsernameNotRegisteredTitle" = "Hầm mạng";
 "createAccount.UsernameNotRegisteredMessage" = "Tài khoản đã được tạo nhưng tên người dùng đã không được đăng ký";
 "createAccount.timeoutTitle" = "Tài khoản được tạo ra";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Xóa";
 "actions.backAction" = "Trở lại";
 "actions.doneAction" = "Được làm";
-"alerts.incomingCallAllertTitle" = "Tiếp đến từ ";
-"alerts.incomingCallButtonIgnore" = "Tránh bỏ";
-"actions.startAudioCall" = "Hỗng gọi âm thanh";
-"actions.startVideoCall" = "Video Call";
 "actions.goToSettings" = "Đi đến Settings";
 "actions.stopLocationSharing" = "Ngừng chia sẻ";
 
 // Calls
-"calls.incomingCallInfo" = "muốn nói chuyện với anh";
 "calls.ringing" = "- Anh nghe thấy...";
 "calls.connecting" = "Kết nối...";
 "calls.callFinished" = "Tiếp tục cuộc gọi";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Thiết bị";
 "accountPage.settingsHeader" = "Cài đặt";
 "accountPage.notificationsHeader" = "Thông báo";
-"accountPage.usernameNotRegistered" = "Tên người dùng: không đăng ký";
-"accountPage.credentialsHeader" = "Thông tin chi tiết tài khoản";
 "accountPage.blockedContacts" = "Các liên lạc bị chặn";
 "accountPage.unblockContact" = "Tháo khóa";
 "accountPage.proxyAddressAlert" = "Cung cấp địa chỉ đại diện";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Kết nối";
 "account.statusUnknown" = "Không biết";
 "account.statusConnectionerror" = "Hầm kết nối";
-"account.needMigration" = "tài khoản cần phải di chuyển";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Tôi.";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Thỉnh cầu được nhận";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Tiếp tục gọi";
 "generatedMessage.missedOutgoingCall" = "Lỡ cuộc gọi ra ngoài";
 "generatedMessage.missedIncomingCall" = "Lỡ cuộc gọi tiếp nhận";
 "generatedMessage.liveLocationSharing" = "Chia sẻ địa điểm trực tiếp";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Nhận phản hồi";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Gần";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Thêm tài khoản";
+"accessibility.aboutJamiTitle" = "Về Jami";
+"accessibility.welcomeToJamiTitle" = "Chào mừng đến với Jami.";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Hình ảnh hồ sơ";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

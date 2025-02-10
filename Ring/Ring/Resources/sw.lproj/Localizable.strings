@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Kuongeza mawasiliano?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Kwa sasa unashiriki eneo lako na ";
-"conversation.explanationReceivingLocationFrom" = "Kwa sasa unapata eneo moja kwa moja kutoka ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Kwa kujibu";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Wewe";
 "conversation.edited" = "Iliyohaririwa";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Hakuna mwaliko";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Kubaliwa";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Jiunge Jami";
-"createAccount.lookingForUsernameAvailability" = "kutafuta upatikanaji...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "jina la mtumiaji tayari imechukuliwa";
+"createAccount.usernameAlreadyTaken" = "Jina la mtumiaji tayari limechukuliwa";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Kuongeza akaunti";
 "createAccount.UsernameNotRegisteredTitle" = "Kosa la mtandao";
 "createAccount.UsernameNotRegisteredMessage" = "Akaunti iliundwa lakini jina la mtumiaji halikuandikishwa";
 "createAccount.timeoutTitle" = "Akaunti Iliyotengenezwa";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Futa";
 "actions.backAction" = "Kurudi";
 "actions.doneAction" = "Imefanywa";
-"alerts.incomingCallAllertTitle" = "Simu inayokuja kutoka ";
-"alerts.incomingCallButtonIgnore" = "Puuza";
-"actions.startAudioCall" = "Simu ya sauti";
-"actions.startVideoCall" = "Video ya Kuita";
 "actions.goToSettings" = "Nenda kwenye Mipangilio";
 "actions.stopLocationSharing" = "Acha kushiriki";
 
 // Calls
-"calls.incomingCallInfo" = "anataka kuzungumza na wewe";
 "calls.ringing" = "Kupiga simu...";
 "calls.connecting" = "Kuunganisha...";
 "calls.callFinished" = "Wito umekamilika";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "Vifaa";
 "accountPage.settingsHeader" = "Mipangilio";
 "accountPage.notificationsHeader" = "Maarifa";
-"accountPage.usernameNotRegistered" = "Jina la mtumiaji: halijasajiliwa";
-"accountPage.credentialsHeader" = "Maelezo ya Akaunti";
 "accountPage.blockedContacts" = "Mawasiliano yaliyopigwa";
 "accountPage.unblockContact" = "Kufungua kizuizi";
 "accountPage.proxyAddressAlert" = "Toa anwani ya proxy";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Kuunganisha";
 "account.statusUnknown" = "Haijulikani";
 "account.statusConnectionerror" = "Kosa la Kuunganisha";
-"account.needMigration" = "akaunti inahitaji kuhamishwa";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Mimi";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Mwaliko uliopokelewa";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Kuondoka simu";
 "generatedMessage.missedOutgoingCall" = "Kupoteza wito wa nje";
 "generatedMessage.missedIncomingCall" = "Kupoteza simu ya ndani";
 "generatedMessage.liveLocationSharing" = "Kushiriki eneo la kuishi";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Maoni ya kurudia";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Karibu";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Ongeza akaunti";
+"accessibility.aboutJamiTitle" = "Kuhusu Jami";
+"accessibility.welcomeToJamiTitle" = "Karibu Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Picha ya wasifu";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";

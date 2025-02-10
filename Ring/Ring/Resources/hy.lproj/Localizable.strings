@@ -129,8 +129,6 @@
 "conversation.addToContactsLabel" = "Բարձրացնել կոնտակտներին:";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Դուք ներկայումս կիսում եք ձեր գտնվելու վայրը ";
-"conversation.explanationReceivingLocationFrom" = "Դուք ներկայումս ստանում եք կենդանի տեղակայման ";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
@@ -140,18 +138,17 @@
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Պատասխանելով";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Դուք";
 "conversation.edited" = "Կարգավորվել";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Ոչ մի հրավիրում";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.declined" = "declined";
-"invitations.blocked" = "blocked";
+"invitations.accepted" = "Accepted";
+"invitations.declined" = "Declined";
+"invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
 
 // Walkthrough
@@ -176,12 +173,10 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Միացեք Ջամիին";
-"createAccount.lookingForUsernameAvailability" = "փնտրում է առկայություն...";
+"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "օգտագործողի անունը արդեն վերցված է";
+"createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
-"createAccount.loading" = "Loading…";
-"createAccount.waitCreateAccountTitle" = "Բաժին ավելացում";
 "createAccount.UsernameNotRegisteredTitle" = "Համացանցի սխալ";
 "createAccount.UsernameNotRegisteredMessage" = "Հաշիվ է ստեղծվել, բայց օգտատերերի անունը չի գրանցվել";
 "createAccount.timeoutTitle" = "Հաշիվ ստեղծվել";
@@ -261,15 +256,10 @@
 "actions.deleteAction" = "Հեռացնել";
 "actions.backAction" = "Վերադարձ";
 "actions.doneAction" = "Կատարված";
-"alerts.incomingCallAllertTitle" = "Հեռախոսազանգ ";
-"alerts.incomingCallButtonIgnore" = "Անտեսել";
-"actions.startAudioCall" = "Ձայնային զանգ";
-"actions.startVideoCall" = "Տեսագրական զանգ";
 "actions.goToSettings" = "Գնացեք Կարգավորումների էջ";
 "actions.stopLocationSharing" = "Սեղմեք կիսումը";
 
 // Calls
-"calls.incomingCallInfo" = "ուզում է խոսել քեզ հետ";
 "calls.ringing" = "Զանգում է...";
 "calls.connecting" = "Կապակցում...";
 "calls.callFinished" = "Հանգիստը ավարտված է";
@@ -286,8 +276,6 @@
 "accountPage.devicesListHeader" = "սարքավորումներ";
 "accountPage.settingsHeader" = "Կարգավորումներ";
 "accountPage.notificationsHeader" = "Հրավերներ";
-"accountPage.usernameNotRegistered" = "օգտագործողի անունը. գրանցված չէ";
-"accountPage.credentialsHeader" = "Հաշվետու մանրամասներ";
 "accountPage.blockedContacts" = "Պակված շփումներ";
 "accountPage.unblockContact" = "Բաց թողնել";
 "accountPage.proxyAddressAlert" = "Պատվիրել պրոկսի հասցեն";
@@ -420,7 +408,7 @@
 "account.statusConnecting" = "Կապակցում";
 "account.statusUnknown" = "Անհայտ";
 "account.statusConnectionerror" = "Կապման սխալ";
-"account.needMigration" = "հաշիվը պետք է տեղափոխվի";
+"account.needMigration" = "Account requires migration.";
 "account.me" = "Ես";
 
 // Block List Page
@@ -464,16 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Հրավիրություն";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Արտաքին զանգ";
 "generatedMessage.missedOutgoingCall" = "Հեռացվող զանգը բացակայում է";
 "generatedMessage.missedIncomingCall" = "Հեռացած ներկա զանգ";
 "generatedMessage.liveLocationSharing" = "Կայքի առցանց փոխանակում";
-"generatedMessage.contactLeftConversation" = "has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video settings";
@@ -514,3 +504,14 @@
 "aboutJami.feedback" = "Վերադարձ կապ";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
+
+// Accessibility
+"accessibility.close" = "Մոտակայքում";
+"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListAddAccount" = "Բաժնորդագրություն ավելացնել";
+"accessibility.aboutJamiTitle" = "About Jami";
+"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.profilePicturePicker" = "Պրոֆիլային նկար";
+"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
