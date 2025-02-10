@@ -96,6 +96,7 @@ struct LinkDeviceView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 140, height: 140)
+                    .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             }
             HStack(spacing: 15) {
                 Image(systemName: "info.circle")
@@ -112,6 +113,9 @@ struct LinkDeviceView: View {
             .padding()
             .background(Color.jamiTertiaryControl)
             .cornerRadius(12)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(L10n.AccountPage.pinExplanationTitle + " " + L10n.AccountPage.pinExplanationMessage)
+            .accessibilityAutoFocusOnAppear()
 
             HStack {
                 Spacer()
