@@ -324,3 +324,23 @@ private struct AccessibilityFocusModifier: ViewModifier {
             }
     }
 }
+
+struct ToggleCell: View {
+    let toggleText: String
+    let getAction: () -> Bool
+    let setAction: (Bool) -> Void
+
+    var body: some View {
+        HStack {
+            Text(toggleText)
+            Spacer()
+            Toggle("", isOn: Binding(
+                get: { getAction() },
+                set: { newValue in setAction(newValue) }
+            ))
+            .labelsHidden()
+            .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
+        }
+        .accessibilityElement(children: .combine)
+    }
+}
