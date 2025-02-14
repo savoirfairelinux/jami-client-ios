@@ -63,6 +63,19 @@ struct MessageBubbleView: View {
                     })
             }
         )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(model.accessibilityLabelValue))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.preview.toString(), action: { model.contextMenuSelect(item: .preview) }), apply: model.menuItems.contains(.preview))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.forward.toString(), action: { model.contextMenuSelect(item: .forward) }), apply: model.menuItems.contains(.forward))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.share.toString(), action: { model.contextMenuSelect(item: .share) }), apply: model.menuItems.contains(.share))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.save.toString(), action: { model.contextMenuSelect(item: .save) }), apply: model.menuItems.contains(.save))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.copy.toString(), action: { model.contextMenuSelect(item: .copy) }), apply: model.menuItems.contains(.copy))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.reply.toString(), action: { model.contextMenuSelect(item: .reply) }), apply: model.menuItems.contains(.reply))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.deleteMessage.toString(), action: { model.contextMenuSelect(item: .deleteMessage) }), apply: model.menuItems.contains(.deleteMessage))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.deleteFile.toString(), action: { model.contextMenuSelect(item: .deleteFile) }), apply: model.menuItems.contains(.deleteFile))
+        .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.edit.toString(), action: { model.contextMenuSelect(item: .edit) }), apply: model.menuItems.contains(.edit))
+        .accessibilityAddTraits(.isButton)
+
     }
 
     private func renderCallMessage() -> some View {
@@ -146,5 +159,17 @@ struct MessageBubbleWithEditionWrapper<Content: View>: View {
                 .font(.footnote)
                 .foregroundColor(model.editionColor)
         }
+    }
+}
+
+struct AccessibilityActionModifier: ViewModifier {
+    let actionName: String
+    let action: () -> Void
+    
+    func body(content: Content) -> some View {
+        content
+            .accessibilityAction(named: Text(actionName)) {
+                action()
+            }
     }
 }
