@@ -173,6 +173,7 @@ public class MessageModel {
     var reactions = Set<MessageAction>()
     var editions = Set<MessageAction>()
     var statusForParticipant = [String: MessageStatus]()
+    var accessibilityLabelValue: String = ""
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -212,6 +213,7 @@ public class MessageModel {
                 }
             }
         }
+        self.updateAccessibilityLabel(for: self.type, with: swarmMessage.body, receivedDate: self.receivedDate)
     }
 
     // swiftlint:disable:next cyclomatic_complexity
@@ -292,6 +294,10 @@ public class MessageModel {
         default:
             break
         }
+
+        let timestampDouble = Double(info[MessageAttributes.timestamp.rawValue]!)!
+        let receivedDate = Date(timeIntervalSince1970: timestampDouble)
+        self.updateAccessibilityLabel(for: self.type, with: info, receivedDate: receivedDate)
     }
 
     func getContactInteractionString(name: String) -> String? {
@@ -315,6 +321,15 @@ public class MessageModel {
         }) {
             self.parents.append(contentsOf: parents)
         }
+
+        if let timestamp = info[MessageAttributes.timestamp.rawValue],
+           let timestampDouble = Double(timestamp) {
+            let receivedDate = Date.init(timeIntervalSince1970: timestampDouble)
+            self.updateAccessibilityLabel(for: self.type, with: info, receivedDate: receivedDate)
+        } else {
+            self.updateAccessibilityLabel(for: self.type, with: info, receivedDate: nil)
+        }
+
     }
 
     func isReply() -> Bool {
@@ -387,5 +402,78 @@ public class MessageModel {
 
     func reactionsMessageIdsBySender(jamiId: String) -> [String] {
         return Array(self.reactions.filter({ item in item.author == jamiId }).map({ item in item.id }))
+    }
+
+    private func updateAccessibilityLabel(for messageType: MessageType, with info: [String: String], receivedDate: Date?) {
+        let timestamp = receivedDate?.conversationTimestamp() ?? ""
+        let messageStatus = self.incoming ? L10n.Accessibility.messageBubbleStatus("Received", timestamp)
+            : L10n.Accessibility.messageBubbleStatus("Sent", timestamp)
+
+        func formatCallLabel(isIncoming: Bool, duration: String?) -> String {
+            let callType = isIncoming ? "Incoming" : "Outgoing"
+
+            guard let duration = duration, let durationDouble = Double(duration) else {
+                return L10n.Accessibility.missedCall(callType, timestamp)
+            }
+
+            if durationDouble < 0 {
+                return L10n.Accessibility.call(callType, timestamp) + ". " + L10n.Accessibility.callNoDuration
+            }
+
+            let time = Date.convertSecondsToTimeString(seconds: durationDouble * 0.001)
+            return L10n.Accessibility.call(callType, timestamp) + ". " + L10n.Accessibility.callLasted(time)
+        }
+
+        switch messageType {
+        case .text:
+            self.accessibilityLabelValue = self.content.isEmpty
+                ? L10n.Accessibility.textNotAvailable(timestamp)
+                : L10n.Accessibility.textMessage(self.content, messageStatus)
+
+        case .call:
+            self.accessibilityLabelValue = formatCallLabel(isIncoming: self.incoming, duration: info[MessageAttributes.duration.rawValue])
+
+        case .fileTransfer:
+            self.accessibilityLabelValue = self.content.isEmpty
+                ? L10n.Accessibility.fileTransferNoName(timestamp)
+                : L10n.Accessibility.fileTransfer(self.content, messageStatus)
+
+
+        default:
+            return
+        }
+
+        if self.isReply() {
+            self.accessibilityLabelValue += ". " + L10n.Accessibility.inReply
+        }
+
+        updateReadStatusAccessibilityLabel()
+        updateEditedStatusAccessibilityLabel()
+        updateDeletedStatusAccessibilityLabel()
+    }
+
+    private func updateReadStatusAccessibilityLabel() {
+        if !self.incoming {
+            switch self.status {
+            case .displayed:
+                self.accessibilityLabelValue += ". " + L10n.Accessibility.messageBubbleRead
+            case .sent:
+                self.accessibilityLabelValue += L10n.Accessibility.messageBubbleUnread
+            default:
+                break
+            }
+        }
+    }
+
+    private func updateEditedStatusAccessibilityLabel() {
+        if self.isMessageEdited() {
+            self.accessibilityLabelValue += ". " + L10n.Accessibility.messageBubbleEdited
+        }
+    }
+
+    private func updateDeletedStatusAccessibilityLabel() {
+        if self.isMessageDeleted() {
+            self.accessibilityLabelValue = L10n.Accessibility.messageBubbleDeleted
+        }
     }
 }
