@@ -77,4 +77,29 @@ extension Date {
 
         return dateString
     }
+
+    func getTimeLabelString() -> String {
+        let currentDateTime = Date()
+
+        // prepare formatter
+        let dateFormatter = DateFormatter()
+
+        if Calendar.current.compare(currentDateTime, to: self, toGranularity: .day) == .orderedSame {
+            // age: [0, received the previous day[
+            dateFormatter.dateFormat = "h:mma"
+        } else if Calendar.current.compare(currentDateTime, to: self, toGranularity: .weekOfYear) == .orderedSame {
+            // age: [received the previous day, received 7 days ago[
+            dateFormatter.dateFormat = "E h:mma"
+        } else if Calendar.current.compare(currentDateTime, to: self, toGranularity: .year) == .orderedSame {
+            // age: [received 7 days ago, received the previous year[
+            dateFormatter.dateFormat = "MMM d, h:mma"
+        } else {
+            // age: [received the previous year, inf[
+            dateFormatter.dateFormat = "MMM d, yyyy h:mma"
+        }
+
+        // generate the string containing the message time
+        return dateFormatter.string(from: self).uppercased()
+    }
+
 }

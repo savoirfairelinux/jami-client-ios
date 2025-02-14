@@ -96,7 +96,7 @@ struct LinkDeviceView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 140, height: 140)
-                    .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    .accessibilityHidden(true)
             }
             HStack(spacing: 15) {
                 Image(systemName: "info.circle")
