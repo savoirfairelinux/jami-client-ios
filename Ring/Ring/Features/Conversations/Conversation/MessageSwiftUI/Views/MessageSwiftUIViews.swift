@@ -66,6 +66,7 @@ struct PlayerSwiftUI: View {
     var withControls: Bool
     var customCornerRadius: CGFloat = 0
     @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         ZStack(alignment: .center) {
             if colorScheme == .dark {
@@ -74,11 +75,20 @@ struct PlayerSwiftUI: View {
                     .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                     .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
             }
-            PlayerViewWrapper.init(viewModel: player, width: model.playerWidth * ratio, height: model.playerHeight * ratio, onLongGesture: onLongGesture, withControls: withControls)
+            PlayerViewWrapper(viewModel: player, width: model.playerWidth * ratio, height: model.playerHeight * ratio, onLongGesture: onLongGesture, withControls: withControls)
                 .frame(height: model.playerHeight * ratio)
                 .frame(width: model.playerWidth * ratio)
                 .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
+        }
+        .accessibilityElement(children: .ignore) // Make it one element
+        .accessibilityLabel(player.pause.value ? L10n.Accessibility.audioPlayerPlay : L10n.Accessibility.audioPlayerPause)
+        .accessibilityAddTraits(.isButton) // Treat it as a button
+        .accessibilityAction {
+            player.toglePause()
+        }
+        .onTapGesture {
+            player.toglePause()
         }
     }
 }

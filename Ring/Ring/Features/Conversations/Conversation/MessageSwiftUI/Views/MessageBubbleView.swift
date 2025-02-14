@@ -63,6 +63,8 @@ struct MessageBubbleView: View {
                     })
             }
         )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(model.accessibilityLabelValue))
     }
 
     private func renderCallMessage() -> some View {
