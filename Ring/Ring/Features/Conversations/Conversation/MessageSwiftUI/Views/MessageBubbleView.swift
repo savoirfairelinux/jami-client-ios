@@ -63,6 +63,11 @@ struct MessageBubbleView: View {
                     })
             }
         )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(model.accessibilityLabelValue.isEmpty ? Text("No accessibility label available") : Text(model.accessibilityLabelValue))
+        .accessibilityHint(Text("Double-tap, then swipe up or down to select an action."))
+        .accessibilityAddTraits(.isButton)
+        .makeActionsAccessibilityActions()
     }
 
     private func renderCallMessage() -> some View {
