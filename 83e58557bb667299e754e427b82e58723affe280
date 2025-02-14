@@ -34,6 +34,24 @@
       "parentUuid": "2585856f_d0ac69b4",
       "revId": "83e58557bb667299e754e427b82e58723affe280",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "300340af_b3446b02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-14T15:46:13Z",
+      "side": 1,
+      "message": "These files are specific to the Google Play Store and are not required for iOS.",
+      "parentUuid": "a22b6046_255c70d9",
+      "revId": "83e58557bb667299e754e427b82e58723affe280",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
