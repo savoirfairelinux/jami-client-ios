@@ -39,10 +39,112 @@ internal enum L10n {
     internal static let accountSummaryQrCode = L10n.tr("Localizable", "accessibility.accountSummaryQrCode", fallback: "QR Code")
     /// Double-tap to view your account QR code
     internal static let accountSummaryQrCodeHint = L10n.tr("Localizable", "accessibility.accountSummaryQrCodeHint", fallback: "Double-tap to view your account QR code")
+    /// Pause
+    internal static let audioPlayerPause = L10n.tr("Localizable", "accessibility.audioPlayerPause", fallback: "Pause")
+    /// Play
+    internal static let audioPlayerPlay = L10n.tr("Localizable", "accessibility.audioPlayerPlay", fallback: "Play")
     /// Close
     internal static let close = L10n.tr("Localizable", "accessibility.close", fallback: "Close")
+    /// Double-tap to open camera
+    internal static let conversationCameraHint = L10n.tr("Localizable", "accessibility.conversationCameraHint", fallback: "Double-tap to open camera")
+    /// Compose a message
+    internal static let conversationComposeMessage = L10n.tr("Localizable", "accessibility.conversationComposeMessage", fallback: "Compose a message")
+    /// conversation blocked
+    internal static let conversationRowBlocked = L10n.tr("Localizable", "accessibility.conversationRowBlocked", fallback: "conversation blocked")
+    /// last message on %@
+    internal static func conversationRowLastMessage(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.conversationRowLastMessage", String(describing: p1), fallback: "last message on %@")
+    }
+    /// syncing in progress
+    internal static let conversationRowSyncing = L10n.tr("Localizable", "accessibility.conversationRowSyncing", fallback: "syncing in progress")
+    /// %@ unread messages
+    internal static func conversationRowUnreadCount(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.conversationRowUnreadCount", String(describing: p1), fallback: "%@ unread messages")
+    }
+    /// Share media
+    internal static let conversationShareMedia = L10n.tr("Localizable", "accessibility.conversationShareMedia", fallback: "Share media")
+    /// Start a video call with %@
+    internal static func conversationStartVideoCall(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.conversationStartVideoCall", String(describing: p1), fallback: "Start a video call with %@")
+    }
+    /// Start a voice call with %@
+    internal static func conversationStartVoiceCall(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.conversationStartVoiceCall", String(describing: p1), fallback: "Start a voice call with %@")
+    }
     /// Enter a username to verify if it's available
     internal static let createAccountVerifyUsernamePrompt = L10n.tr("Localizable", "accessibility.createAccountVerifyUsernamePrompt", fallback: "Enter a username to verify if it's available")
+    /// File Transfer
+    internal static let fileTransfer = L10n.tr("Localizable", "accessibility.fileTransfer", fallback: "File Transfer")
+    /// File received on %@, name not available.
+    internal static func fileTransferNoName(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.fileTransferNoName", String(describing: p1), fallback: "File received on %@, name not available.")
+    }
+    /// Lasted %@
+    internal static func messageBubbleCallLasted(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.messageBubbleCallLasted", String(describing: p1), fallback: "Lasted %@")
+    }
+    /// No duration available.
+    internal static let messageBubbleCallNoDuration = L10n.tr("Localizable", "accessibility.messageBubbleCallNoDuration", fallback: "No duration available.")
+    /// Message deleted
+    internal static let messageBubbleDeleted = L10n.tr("Localizable", "accessibility.messageBubbleDeleted", fallback: "Message deleted")
+    /// Edited
+    internal static let messageBubbleEdited = L10n.tr("Localizable", "accessibility.messageBubbleEdited", fallback: "Edited")
+    /// File %@, %@ on %@.
+    internal static func messageBubbleFileValue(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.messageBubbleFileValue", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "File %@, %@ on %@.")
+    }
+    /// Incoming call on %@
+    internal static func messageBubbleIncomingCall(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.messageBubbleIncomingCall", String(describing: p1), fallback: "Incoming call on %@")
+    }
+    /// In reply to a message
+    internal static let messageBubbleInReply = L10n.tr("Localizable", "accessibility.messageBubbleInReply", fallback: "In reply to a message")
+    /// Outgoing call on %@
+    internal static func messageBubbleOutgoingCall(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.messageBubbleOutgoingCall", String(describing: p1), fallback: "Outgoing call on %@")
+    }
+    /// Read
+    internal static let messageBubbleRead = L10n.tr("Localizable", "accessibility.messageBubbleRead", fallback: "Read")
+    /// Message received
+    internal static let messageBubbleReceived = L10n.tr("Localizable", "accessibility.messageBubbleReceived", fallback: "Message received")
+    /// Message sent
+    internal static let messageBubbleSent = L10n.tr("Localizable", "accessibility.messageBubbleSent", fallback: "Message sent")
+    /// Text Message
+    internal static let messageBubbleText = L10n.tr("Localizable", "accessibility.messageBubbleText", fallback: "Text Message")
+    /// Text message received on %@, content not available.
+    internal static func messageBubbleTextNotAvailable(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.messageBubbleTextNotAvailable", String(describing: p1), fallback: "Text message received on %@, content not available.")
+    }
+    /// %@, %@ on %@.
+    internal static func messageBubbleTextValue(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.messageBubbleTextValue", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%@, %@ on %@.")
+    }
+    /// Unread
+    internal static let messageBubbleUnread = L10n.tr("Localizable", "accessibility.messageBubbleUnread", fallback: "Unread")
+    /// Missed Incoming call
+    internal static let missedIncomingCall = L10n.tr("Localizable", "accessibility.missedIncomingCall", fallback: "Missed Incoming call")
+    /// Missed Incoming call on %@
+    internal static func missedIncomingCallOn(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.missedIncomingCallOn", String(describing: p1), fallback: "Missed Incoming call on %@")
+    }
+    /// Missed Outgpomg call
+    internal static let missedOutgoingCall = L10n.tr("Localizable", "accessibility.missedOutgoingCall", fallback: "Missed Outgpomg call")
+    /// Missed Outgpomg call on %@
+    internal static func missedOutgoingCallOn(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.missedOutgoingCallOn", String(describing: p1), fallback: "Missed Outgpomg call on %@")
+    }
+    /// Accept invitation
+    internal static let pendingRequestsListAcceptInvitation = L10n.tr("Localizable", "accessibility.pendingRequestsListAcceptInvitation", fallback: "Accept invitation")
+    /// Block user
+    internal static let pendingRequestsListBlockUser = L10n.tr("Localizable", "accessibility.pendingRequestsListBlockUser", fallback: "Block user")
+    /// Reject invitation
+    internal static let pendingRequestsListRejectInvitation = L10n.tr("Localizable", "accessibility.pendingRequestsListRejectInvitation", fallback: "Reject invitation")
+    /// Invitation received: %@ pending invitation
+    internal static func pendingRequestsRow(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.pendingRequestsRow", String(describing: p1), fallback: "Invitation received: %@ pending invitation")
+    }
+    /// Double-tap to review and reply to invitations you received
+    internal static let pendingRequestsRowHint = L10n.tr("Localizable", "accessibility.pendingRequestsRowHint", fallback: "Double-tap to review and reply to invitations you received")
     /// Profile picture
     internal static let profilePicturePicker = L10n.tr("Localizable", "accessibility.profilePicturePicker", fallback: "Profile picture")
     /// Double-tap to take a picture or select a picture from the library
@@ -63,6 +165,10 @@ internal enum L10n {
     internal static let switchButtonIsOff = L10n.tr("Localizable", "accessibility.switchButtonIsOff", fallback: "Off")
     /// On
     internal static let switchButtonIsOn = L10n.tr("Localizable", "accessibility.switchButtonIsOn", fallback: "On")
+    /// Available
+    internal static let userPresenceAvailable = L10n.tr("Localizable", "accessibility.userPresenceAvailable", fallback: "Available")
+    /// Online
+    internal static let userPresenceOnline = L10n.tr("Localizable", "accessibility.userPresenceOnline", fallback: "Online")
     /// Welcome to Jami
     internal static let welcomeToJamiTitle = L10n.tr("Localizable", "accessibility.welcomeToJamiTitle", fallback: "Welcome to Jami")
   }
