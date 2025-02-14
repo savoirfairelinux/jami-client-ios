@@ -100,7 +100,7 @@
 "smartlist.results" = "Public directory";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Conversations";
-"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.noConversationsFound" = "There are no conversations that match the criteria.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Accounts";
@@ -110,7 +110,7 @@
 "smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "No network connectivity";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
 "smartlist.accountsTitle" = "Accounts";
 "smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Selected contact does not have any number";
@@ -120,14 +120,14 @@
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
 "smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "Add to contacts?";
-"conversation.notContactLabel" = "is not in your contact list";
+"conversation.notContactLabel" = "is not in the contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
@@ -173,7 +173,7 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Join Jami";
-"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "Checking username availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
@@ -508,18 +508,18 @@
 // Accessibility
 "accessibility.close" = "Close";
 "accessibility.smartListSwitchAccounts" = "Switch account";
-"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListConnectedAs" = "The current account is %@";
 "accessibility.smartListAddAccount" = "Add account";
 "accessibility.aboutJamiTitle" = "About Jami";
 "accessibility.welcomeToJamiTitle" = "Welcome to Jami";
-"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter username to check availability.";
 "accessibility.profilePicturePicker" = "Profile picture";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
 "accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "QR Code";
-"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
-"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";
 "accessibility.accountSummaryEditSettingsButton" = "Settings";
 "accessibility.switchButtonIsOn" = "On";
 "accessibility.switchButtonIsOff" = "Off";
