@@ -217,6 +217,9 @@ struct ConversationRowView: View {
             }
         }
         .transition(.opacity)
+        .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
+        .accessibilityLabel(constreuctChatRowAccessibilityLabel())
+
     }
 
     private var presenceIndicator: some View {
@@ -241,4 +244,32 @@ struct ConversationRowView: View {
             )
             .offset(x: -1, y: -1)
     }
+
+    private func constreuctChatRowAccessibilityLabel() -> String {
+        var label = "\(model.name)"
+
+        if model.unreadMessages > 0 {
+            label += L10n.Accessibility.conversationRowUnreadCount(model.unreadMessages)
+        }
+
+        if model.swiftUIModel.isBlocked {
+            label += L10n.Accessibility.conversationRowBlocked
+        } else if model.swiftUIModel.isSyncing {
+            label += L10n.Accessibility.conversationRowSyncing
+        } else if !model.lastMessage.isEmpty {
+            label += L10n.Accessibility.conversationRowLastMessage(model.lastMessageDate) + ": \(model.lastMessage)"
+        }
+
+        switch model.presence {
+        case .connected:
+            label += L10n.Accessibility.userPresenceOnline
+        case .available:
+            label += L10n.Accessibility.userPresenceAvailable
+        default:
+            break
+        }
+
+        return label
+    }
+
 }

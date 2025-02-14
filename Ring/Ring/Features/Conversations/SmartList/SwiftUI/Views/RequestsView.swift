@@ -43,6 +43,9 @@ struct RequestsIndicatorView: View {
         .frame(maxWidth: .infinity)
         .background(Color.jamiRequestsColor)
         .cornerRadius(cornerRadius)
+        .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
+        .accessibilityLabel(L10n.Accessibility.pendingRequestsRow(model.unreadRequests))
+        .accessibilityHint(L10n.Accessibility.pendingRequestsRowHint)
     }
 
     private var icon: some View {
@@ -82,14 +85,27 @@ struct RequestsIndicatorView: View {
 
 struct RequestsView: View {
     @ObservedObject var model: RequestsViewModel
+    @Environment(\.presentationMode)
+    var presentation
 
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                Text(model.title)
-                    .font(.headline)
-                    .foregroundColor(Color(UIColor.systemBackground))
-                    .padding(.vertical, 20)
+                HStack {
+                    Spacer()
+                    Text(model.title)
+                        .font(.headline)
+                        .foregroundColor(Color(UIColor.systemBackground))
+                        .padding(.vertical, 20)
+                    Spacer()
+                    Button(action: {
+                        presentation.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(Color(UIColor.systemBackground))
+                            .padding()
+                    }
+                }
 
                 requestsList
             }
@@ -206,6 +222,7 @@ struct RequestsRowView: View {
                 .padding(.horizontal, buttonPadding)
                 .foregroundColor(requestRow.status.color())
         }
+        .accessibilityElement(children: .combine)
     }
 
     private var avatarView: some View {
@@ -222,21 +239,21 @@ struct RequestsRowView: View {
 
     private var actionButtonsView: some View {
         HStack {
-            actionIcon("slash.circle") {
+            actionIcon("slash.circle", L10n.Accessibility.pendingRequestsListBlockUser) {
                 listModel.block(requestRow: requestRow)
             }
             Spacer().frame(width: spacerWidth)
-            actionIcon("xmark") {
+            actionIcon("xmark", L10n.Accessibility.pendingRequestsListRejectInvitation) {
                 listModel.discard(requestRow: requestRow)
             }
             Spacer().frame(width: spacerWidth)
-            actionIcon("checkmark") {
+            actionIcon("checkmark", L10n.Accessibility.pendingRequestsListAcceptInvitation) {
                 listModel.accept(requestRow: requestRow)
             }
         }
     }
 
-    private func actionIcon(_ systemName: String, action: @escaping () -> Void) -> some View {
+    private func actionIcon(_ systemName: String, _ accessibilityLabelValue: String, action: @escaping () -> Void) -> some View {
         Image(systemName: systemName)
             .resizable()
             .aspectRatio(contentMode: .fit)
@@ -248,5 +265,8 @@ struct RequestsRowView: View {
             .background(Color.requestsBadgeBackground)
             .cornerRadius(cornerRadius)
             .onTapGesture(perform: action)
+            .accessibilityLabel(accessibilityLabelValue)
+            .accessibilityRemoveTraits(.isImage)
+            .accessibilityAddTraits(.isButton)
     }
 }
