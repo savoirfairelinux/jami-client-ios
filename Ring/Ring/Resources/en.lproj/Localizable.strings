@@ -173,7 +173,7 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Join Jami";
-"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "Checking username availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "Username already taken";
 "createAccount.usernameValid" = "The username is available.";
