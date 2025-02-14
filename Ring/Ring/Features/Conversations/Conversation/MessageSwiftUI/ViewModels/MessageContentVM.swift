@@ -106,6 +106,7 @@ enum ContextualMenuItem: Identifiable {
 class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
 
     @Published var content = ""
+    @Published var accessibilityLabelValue = ""
     @Published var metadata: LPLinkMetadata?
 
     // file transfer
@@ -195,6 +196,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             maxImageSize = 100
         }
         self.content = message.content
+        self.accessibilityLabelValue = message.accessibilityLabelValue
         self.transferStatus = message.transferStatus
         self.preferencesColor = preferencesColor
         self.updateMessageStyle()
@@ -469,6 +471,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             self.content = self.message.content
             self.messageDeleted = self.message.isMessageDeleted()
             self.messageEdited = self.message.isMessageEdited()
+            self.accessibilityLabelValue = self.message.accessibilityLabelValue
             if self.messageDeleted || self.messageEdited {
                 self.updateMessageStyle()
             }

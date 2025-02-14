@@ -96,7 +96,7 @@ struct LinkedDevicesView: View {
                     .font(.footnote)
                     .foregroundColor(Color(UIColor.secondaryLabel))
                     .lineLimit(1)
-                    .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    .accessibilityHidden(true)
                     .conditionalTextSelection()
             }
             Spacer()
