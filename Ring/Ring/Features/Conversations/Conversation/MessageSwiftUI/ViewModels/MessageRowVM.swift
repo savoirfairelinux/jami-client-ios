@@ -46,7 +46,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
 
     var shouldShowTimeString = false {
         didSet {
-            self.timeString = self.shouldShowTimeString ? self.getTimeLabelString() : ""
+            self.timeString = self.shouldShowTimeString ? self.message.receivedDate.getTimeLabelString() : ""
         }
     }
 
@@ -80,39 +80,13 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
         self.incoming = message.incoming
         self.centeredMessage = message.type.isContact || message.type == .initial
         self.readBorderColor = Color(UIColor.systemBackground)
-        self.timeString = getTimeLabelString()
+        self.timeString = self.message.receivedDate.getTimeLabelString()
         self.updateMessageStatus()
     }
 
     func setInfoState(state: PublishSubject<State>) {
         self.infoState = state
         self.requestReadStatus(messageId: self.message.id)
-    }
-
-    func getTimeLabelString() -> String {
-        let time = self.message.receivedDate
-        // get the current time
-        let currentDateTime = Date()
-
-        // prepare formatter
-        let dateFormatter = DateFormatter()
-
-        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
-            // age: [0, received the previous day[
-            dateFormatter.dateFormat = "h:mma"
-        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
-            // age: [received the previous day, received 7 days ago[
-            dateFormatter.dateFormat = "E h:mma"
-        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
-            // age: [received 7 days ago, received the previous year[
-            dateFormatter.dateFormat = "MMM d, h:mma"
-        } else {
-            // age: [received the previous year, inf[
-            dateFormatter.dateFormat = "MMM d, yyyy h:mma"
-        }
-
-        // generate the string containing the message time
-        return dateFormatter.string(from: time).uppercased()
     }
 
     func setSequencing(sequencing: MessageSequencing) {

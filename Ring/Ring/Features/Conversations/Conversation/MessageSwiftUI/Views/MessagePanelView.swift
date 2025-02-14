@@ -163,18 +163,22 @@ struct MessagePanelView: View {
                 Menu(content: menuContent, label: {
                     MessagePanelImageButton(model: model, systemName: "plus.circle", width: defaultControlSize, height: defaultControlSize)
                 })
+                .accessibilityLabel(L10n.Accessibility.conversationShareMedia)
+                .accessibilityRemoveTraits(.isButton)
 
                 Button(action: {
                     self.model.sendPhoto()
                 }, label: {
                     MessagePanelImageButton(model: model, systemName: "camera", width: 44, height: defaultControlSize)
                 })
+                .accessibilityHint(L10n.Accessibility.conversationCameraHint)
 
                 Spacer()
                     .frame(width: 5)
                 UITextViewWrapper(withBackground: true, text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
                     .frame(minHeight: textHeight, maxHeight: textHeight)
                     .cornerRadius(18)
+                    .accessibilityLabel(L10n.Accessibility.conversationComposeMessage)
                     .placeholder(when: text.isEmpty, alignment: .leading) {
                         Text(model.placeholder)
                             .padding(.horizontal, 12)
@@ -184,6 +188,7 @@ struct MessagePanelView: View {
                             .font(model.styling.textFont)
                             .foregroundColor(model.styling.secondaryTextColor)
                             .cornerRadius(18)
+                            .accessibilityHidden(true)
                     }
                 Spacer()
                     .frame(width: 10)
