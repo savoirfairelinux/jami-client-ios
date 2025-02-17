@@ -515,3 +515,11 @@
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
 "accessibility.profilePicturePicker" = "ପ୍ରୋଫାଇଲ୍ ଫଟୋ";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "QR Code";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

@@ -146,7 +146,7 @@
 
 // Invitations
 "invitations.noInvitations" = "Ոչ մի հրավիրում";
-"invitations.accepted" = "Accepted";
+"invitations.accepted" = "ընդունված";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "Միացեք Ջամիին";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Օգտագործողի անունը արդեն վերցված";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "Համացանցի սխալ";
 "createAccount.UsernameNotRegisteredMessage" = "Հաշիվ է ստեղծվել, բայց օգտատերերի անունը չի գրանցվել";
@@ -510,8 +510,16 @@
 "accessibility.smartListSwitchAccounts" = "Switch account";
 "accessibility.smartListConnectedAs" = "Your current account is %@";
 "accessibility.smartListAddAccount" = "Բաժնորդագրություն ավելացնել";
-"accessibility.aboutJamiTitle" = "About Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.aboutJamiTitle" = "Ջամիի մասին";
+"accessibility.welcomeToJamiTitle" = "Բարի գալուստ Ջամի:";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
 "accessibility.profilePicturePicker" = "Պրոֆիլային նկար";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "QR կոդ";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Կարգավորումներ";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

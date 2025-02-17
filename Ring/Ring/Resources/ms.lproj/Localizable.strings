@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "ജാമിയിൽ ചേരുക";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Nama pengguna telah digunakan pengguna lain";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "Rangkaian gagal";
 "createAccount.UsernameNotRegisteredMessage" = "അക്കൌണ്ട് സൃഷ്ടിച്ചു, പക്ഷേ ഉപയോക്തൃനാമം രജിസ്റ്റർ ചെയ്തിട്ടില്ല";
@@ -511,7 +511,15 @@
 "accessibility.smartListConnectedAs" = "Your current account is %@";
 "accessibility.smartListAddAccount" = "അക്കൌണ്ട് ചേർക്കുക";
 "accessibility.aboutJamiTitle" = "ജാമിയെ കുറിച്ച്";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.welcomeToJamiTitle" = "ജാമിയിൽ സ്വാഗതം";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
 "accessibility.profilePicturePicker" = "പ്രൊഫൈല് ചിത്രം";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "ക്യുആർ കോഡ്";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Tetapan";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

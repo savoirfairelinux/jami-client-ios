@@ -146,7 +146,7 @@
 
 // Invitations
 "invitations.noInvitations" = "Няма покани.";
-"invitations.accepted" = "Accepted";
+"invitations.accepted" = "Приети";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "Присъединете се към Джами.";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Потребителското име вече е заето";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "Мрежова грешка";
 "createAccount.UsernameNotRegisteredMessage" = "Профилът бе създаден, но потребителското име не бе регистрирано";
@@ -506,12 +506,20 @@
 "aboutJami.artworkBy" = "Artwork by";
 
 // Accessibility
-"accessibility.close" = "Close";
+"accessibility.close" = "Затваряне";
 "accessibility.smartListSwitchAccounts" = "Switch account";
 "accessibility.smartListConnectedAs" = "Your current account is %@";
-"accessibility.smartListAddAccount" = "Add account";
-"accessibility.aboutJamiTitle" = "About Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.smartListAddAccount" = "Добавяне на акаунт";
+"accessibility.aboutJamiTitle" = "Относно Jami";
+"accessibility.welcomeToJamiTitle" = "Добре дошли в Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
-"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePicker" = "Профилна снимка";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "QR Code";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

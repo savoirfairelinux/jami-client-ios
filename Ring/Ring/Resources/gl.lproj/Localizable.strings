@@ -146,7 +146,7 @@
 
 // Invitations
 "invitations.noInvitations" = "Non hai invitacións";
-"invitations.accepted" = "Accepted";
+"invitations.accepted" = "Aceptado";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Blocked";
 "invitations.list" = "Convites recibidos";
@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "Unirse a Jami";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Este nome de usuaria xa está collido";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "Fallo na rede";
 "createAccount.UsernameNotRegisteredMessage" = "Creou conta pero non rexistrou o nome de usuario";
@@ -510,8 +510,16 @@
 "accessibility.smartListSwitchAccounts" = "Switch account";
 "accessibility.smartListConnectedAs" = "Your current account is %@";
 "accessibility.smartListAddAccount" = "Engadir conta";
-"accessibility.aboutJamiTitle" = "About Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.aboutJamiTitle" = "Acerca de Jami";
+"accessibility.welcomeToJamiTitle" = "Benvida/o a Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
-"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePicker" = "Imágenes de perfil";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "Código QR";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

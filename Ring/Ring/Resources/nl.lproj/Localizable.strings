@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "Neem deel aan Jami.";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Gebruikersnaam reeds in gebruik";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "Netwerkfout";
 "createAccount.UsernameNotRegisteredMessage" = "Het account is aangemaakt, maar de gebruikersnaam is niet geregistreerd";
@@ -511,7 +511,15 @@
 "accessibility.smartListConnectedAs" = "Your current account is %@";
 "accessibility.smartListAddAccount" = "Account toevoegen";
 "accessibility.aboutJamiTitle" = "Over Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.welcomeToJamiTitle" = "Welkom bij Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
 "accessibility.profilePicturePicker" = "Profielfoto";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "QR-code";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Instellingen";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

@@ -146,7 +146,7 @@
 
 // Invitations
 "invitations.noInvitations" = "بدون دعوت‌نامه";
-"invitations.accepted" = "Accepted";
+"invitations.accepted" = "پذیرفته‌شده";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Blocked";
 "invitations.list" = "دعوت‌نامه‌های دریافت شده";
@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "با جمی هم همراهی کن";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "نام کاربری قبلا گرفته شده است";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "خطای شبکه";
 "createAccount.UsernameNotRegisteredMessage" = "حساب ایجاد شده، اما نام‌کاربری ثبت نشده است";
@@ -506,12 +506,20 @@
 "aboutJami.artworkBy" = "Artwork by";
 
 // Accessibility
-"accessibility.close" = "Close";
+"accessibility.close" = "بستن";
 "accessibility.smartListSwitchAccounts" = "Switch account";
 "accessibility.smartListConnectedAs" = "Your current account is %@";
-"accessibility.smartListAddAccount" = "Add account";
-"accessibility.aboutJamiTitle" = "About Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.smartListAddAccount" = "افزودن حساب";
+"accessibility.aboutJamiTitle" = "درباره جمی";
+"accessibility.welcomeToJamiTitle" = "به جمی خوش آمدید";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
-"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePicker" = "تصویر پروفایل";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "مز QRر";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

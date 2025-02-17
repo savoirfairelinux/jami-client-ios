@@ -146,7 +146,7 @@
 
 // Invitations
 "invitations.noInvitations" = "कोई निमंत्रण नहीं";
-"invitations.accepted" = "Accepted";
+"invitations.accepted" = "स्वीकार किया गया";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Blocked";
 "invitations.list" = "आमंत्रण प्राप्त हुवा";
@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "जामी में शामिल हों";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "पहले से ही लिया गया उपयोगकर्ता नाम";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "नेटवर्क त्रुटि";
 "createAccount.UsernameNotRegisteredMessage" = "खाता बनाया गया था लेकिन उपयोगकर्ता नाम पंजीकृत नहीं किया गया था";
@@ -510,8 +510,16 @@
 "accessibility.smartListSwitchAccounts" = "Switch account";
 "accessibility.smartListConnectedAs" = "Your current account is %@";
 "accessibility.smartListAddAccount" = "खाता जोड़ें";
-"accessibility.aboutJamiTitle" = "About Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.aboutJamiTitle" = "जामी के बारे में";
+"accessibility.welcomeToJamiTitle" = "जामी में आपका स्वागत है";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
-"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePicker" = "प्रोफ़ाइल चित्र";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "क्यूआर कोड";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

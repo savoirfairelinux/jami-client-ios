@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "S' unís a Jami";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Nom d’utilizaire ja pres";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "Error ret";
 "createAccount.UsernameNotRegisteredMessage" = "Un compte es creat mas lo nom d' utilizaire es pas enregistrat";
@@ -511,7 +511,15 @@
 "accessibility.smartListConnectedAs" = "Your current account is %@";
 "accessibility.smartListAddAccount" = "Ajustar compte";
 "accessibility.aboutJamiTitle" = "A prepaus de Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.welcomeToJamiTitle" = "Benvenguts a Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
 "accessibility.profilePicturePicker" = "Fotografia de perfil";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "Còdi QR";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Paramètres";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

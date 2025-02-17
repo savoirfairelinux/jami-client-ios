@@ -146,7 +146,7 @@
 
 // Invitations
 "invitations.noInvitations" = "Ei kutsuja";
-"invitations.accepted" = "Accepted";
+"invitations.accepted" = "Hyväksytty";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Estetty";
 "invitations.list" = "Kutsut vastaanotettu";
@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "Liity Jamiin";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Virheellinen käyttäjänimi Anna kelvollinen käyttäjänimi.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Käyttäjänimi on jo varattu";
 "createAccount.usernameValid" = "Käyttäjänimi on saatavilla.";
 "createAccount.UsernameNotRegisteredTitle" = "Verkkovirhe";
 "createAccount.UsernameNotRegisteredMessage" = "Tili luotiin, mutta käyttäjänimeä ei rekisteröity";
@@ -452,10 +452,10 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Kutsu vastaanotettu";
 "generatedMessage.swarmCreated" = "Keskustelu luotu";
-"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
+"generatedMessage.invitationReceived" = "%@ kutsuttiin keskusteluun.";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "Liityit keskusteluun.";
-"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ estettiin keskustelusta.";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Lähtevä puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
@@ -506,12 +506,20 @@
 "aboutJami.artworkBy" = "Ulkoasu:";
 
 // Accessibility
-"accessibility.close" = "Close";
+"accessibility.close" = "Sulje";
 "accessibility.smartListSwitchAccounts" = "Switch account";
 "accessibility.smartListConnectedAs" = "Your current account is %@";
-"accessibility.smartListAddAccount" = "Add account";
-"accessibility.aboutJamiTitle" = "About Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.smartListAddAccount" = "Lisää tili";
+"accessibility.aboutJamiTitle" = "Tietoja Jami'sta";
+"accessibility.welcomeToJamiTitle" = "Tervetuloa Jamiin";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
-"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePicker" = "Profiilikuva";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "QR-koodi";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

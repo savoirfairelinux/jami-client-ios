@@ -176,7 +176,7 @@
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
 "createAccount.usernameAlreadyTaken" = "已取得的使用者名稱";
-"createAccount.usernameValid" = "The username is available.";
+"createAccount.usernameValid" = "用户名可用。";
 "createAccount.UsernameNotRegisteredTitle" = "網路錯誤";
 "createAccount.UsernameNotRegisteredMessage" = "帳號已建立，但未註冊使用者名稱";
 "createAccount.timeoutTitle" = "已建立帳號";
@@ -346,7 +346,7 @@
 "accountPage.manageAccount" = "管理帳號";
 "accountPage.encryptAccount" = "通过密码加密帐户";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordsDoNotMatch" = "密码不匹配。";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "已連結的裝置";
@@ -515,3 +515,11 @@
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
 "accessibility.profilePicturePicker" = "个人资料图片";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "QR Code";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "設定";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

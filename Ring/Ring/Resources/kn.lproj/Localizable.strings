@@ -146,7 +146,7 @@
 
 // Invitations
 "invitations.noInvitations" = "ಆಹ್ವಾನಗಳಿಲ್ಲ";
-"invitations.accepted" = "Accepted";
+"invitations.accepted" = "ಒಪ್ಪಿಕೊಂಡಿದ್ದಾರೆ";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "ಜಾಮಿಗೆ ಸೇರಿ";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "ಈಗಾಗಲೇ ತೆಗೆದ ಬಳಕೆದಾರ ಹೆಸರು";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "ನೆಟ್ವರ್ಕ್ ದೋಷ";
 "createAccount.UsernameNotRegisteredMessage" = "ಖಾತೆಯನ್ನು ರಚಿಸಲಾಗಿದೆ ಆದರೆ ಬಳಕೆದಾರ ಹೆಸರು ನೋಂದಾಯಿಸಲಾಗಿಲ್ಲ";
@@ -511,7 +511,15 @@
 "accessibility.smartListConnectedAs" = "Your current account is %@";
 "accessibility.smartListAddAccount" = "ಖಾತೆಯನ್ನು ಸೇರಿಸಿ";
 "accessibility.aboutJamiTitle" = "ಜಾಮಿ ಬಗ್ಗೆ";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.welcomeToJamiTitle" = "ಜಾಮಿಗೆ ಸ್ವಾಗತ";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
 "accessibility.profilePicturePicker" = "ಪ್ರೊಫೈಲ್ ಚಿತ್ರ";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "ಕ್ಯೂಆರ್ ಕೋಡ್";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "ಸೆಟ್ಟಿಂಗ್ಗಳು";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

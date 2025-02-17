@@ -455,7 +455,7 @@
 "generatedMessage.invitationReceived" = "%@ foi convidado a juntar-se à conversa.";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
 "generatedMessage.youJoined" = "Você entrou na conversa.";
-"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ foi bloqueado da conversa.";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Chamada efetuada";
 "generatedMessage.missedOutgoingCall" = "Chamadas efetuadas perdidas";
@@ -515,3 +515,11 @@
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
 "accessibility.profilePicturePicker" = "Imagem de perfil";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "Código QR";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Configurações";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

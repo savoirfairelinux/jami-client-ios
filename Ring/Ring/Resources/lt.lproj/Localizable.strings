@@ -141,12 +141,12 @@
 "conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Jūs";
 "conversation.edited" = "Edited";
-"conversation.deletedMessage" = "%@ deleted a message";
+"conversation.deletedMessage" = "%@ ištrynė žinutę";
 "conversation.contactBlocked" = "Adresatas užblokuotas";
 
 // Invitations
 "invitations.noInvitations" = "Pakvietimų nėra";
-"invitations.accepted" = "Accepted";
+"invitations.accepted" = "Priimta";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Blocked";
 "invitations.list" = "Invitations received";
@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Naudotojo vardas jau užimtas";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "Tinklo klaida";
 "createAccount.UsernameNotRegisteredMessage" = "Paskyra buvo sukurta, bet naudotojo vardas nebuvo užregistruotas";
@@ -511,7 +511,15 @@
 "accessibility.smartListConnectedAs" = "Your current account is %@";
 "accessibility.smartListAddAccount" = "Pridėti paskyrą";
 "accessibility.aboutJamiTitle" = "Apie Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.welcomeToJamiTitle" = "Sveiki atvykę į Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
 "accessibility.profilePicturePicker" = "Profile picture";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "QR kodas";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Nustatymai";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

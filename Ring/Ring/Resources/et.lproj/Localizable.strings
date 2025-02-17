@@ -138,16 +138,16 @@
 "conversation.synchronizationTitle" = "Sa oled nõustunud vestluskutsega.";
 "conversation.synchronizationMessage" = "Vestluse sünkroniseerimiseks ootame kasutaja %@ ühendust.";
 "conversation.inReplyTo" = "Vastuseks kasutajale";
-"conversation.repliedTo" = "%@ replied to %@";
+"conversation.repliedTo" = "%@ vastas kasutajale %@";
 "conversation.yourself" = "Sina";
 "conversation.edited" = "Muudetud";
-"conversation.deletedMessage" = "%@ deleted a message";
+"conversation.deletedMessage" = "%@ kustutas sõnumi.";
 "conversation.contactBlocked" = "Kontakt on blokeeritud";
 
 // Invitations
 "invitations.noInvitations" = "Pole kutseid";
-"invitations.accepted" = "Accepted";
-"invitations.declined" = "Declined";
+"invitations.accepted" = "Vastuvõetud";
+"invitations.declined" = "Keeldutud";
 "invitations.blocked" = "Blokeeritud";
 "invitations.list" = "Sulle on kutseid";
 
@@ -173,9 +173,9 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Liitu Jamiga";
-"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "Uurime kättesaadavust...";
 "createAccount.invalidUsername" = "Kasutajanimi on vigane. Palun sisesta korrektne kasutajanimi.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Kasutajanimi on juba võetud";
 "createAccount.usernameValid" = "Kasutajanimi on saadaval";
 "createAccount.UsernameNotRegisteredTitle" = "Võrgu viga";
 "createAccount.UsernameNotRegisteredMessage" = "Kasutajakonto on nüüd loodud, kuid kasutajanimi jäi registreereerimata";
@@ -408,7 +408,7 @@
 "account.statusConnecting" = "Ühendame";
 "account.statusUnknown" = "Pole teada";
 "account.statusConnectionerror" = "Ühenduse viga ";
-"account.needMigration" = "Account requires migration.";
+"account.needMigration" = "Kasutajakonto vajab uuendamist.";
 "account.me" = "Mina";
 
 // Block List Page
@@ -452,18 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Said kutse";
 "generatedMessage.swarmCreated" = "Vestlus on loodud";
-"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ sai liitumiskutse selle vestlusega.";
+"generatedMessage.invitationAccepted" = "%@ on liitunud vestlusega.";
 "generatedMessage.youJoined" = "Sina liitusid vestlusega.";
-"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ osalemine siin vestluses on blokeeritud.";
+"generatedMessage.contactUnblocked" = "%@ blokeerimine on siit vestlusest eemaldatud.";
 "generatedMessage.outgoingCall" = "Väljuv kõne";
 "generatedMessage.missedOutgoingCall" = "Väljuv kõne jäi märkamata";
 "generatedMessage.missedIncomingCall" = "Saabuv kõne jäi märkamata";
 "generatedMessage.liveLocationSharing" = "Asukoha jagamine reaalajas";
-"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
-"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
-"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
+"generatedMessage.contactLeftConversation" = "%@ on lahkunud vestlusest.";
+"generatedMessage.nonSwarmInvitationReceived" = "Sa saatsid kutse";
+"generatedMessage.nonSwarmInvitationAccepted" = "Sinu kutse võeti vastu.";
 
 // General Settings
 "generalSettings.videoSettings" = "Video seadistused";
@@ -506,12 +506,20 @@
 "aboutJami.artworkBy" = "Kujunduse autor:";
 
 // Accessibility
-"accessibility.close" = "Close";
-"accessibility.smartListSwitchAccounts" = "Switch account";
-"accessibility.smartListConnectedAs" = "Your current account is %@";
-"accessibility.smartListAddAccount" = "Add account";
-"accessibility.aboutJamiTitle" = "About Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
-"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
-"accessibility.profilePicturePicker" = "Profile picture";
-"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.close" = "Sulge";
+"accessibility.smartListSwitchAccounts" = "Vaheta kasutajakontot";
+"accessibility.smartListConnectedAs" = "Sinu praegune kasutajakonto on %@";
+"accessibility.smartListAddAccount" = "Lisa kasutajakonto";
+"accessibility.aboutJamiTitle" = "Jami teave";
+"accessibility.welcomeToJamiTitle" = "Tere tulemast kasutama suhtlusrakendust Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Sisesta kasutajanimi kontrollimaks kas ta on saadaval";
+"accessibility.profilePicturePicker" = "Profiilikuva";
+"accessibility.profilePicturePickerHint" = "Topeltklõpsa pildistamiseks või galeriist pildi valimiseks";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Topeltklõpsa pildistamiseks või galeriist pildi valimiseks";
+"accessibility.accountSummaryQrCode" = "QR Code";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

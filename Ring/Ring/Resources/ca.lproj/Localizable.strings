@@ -146,9 +146,9 @@
 
 // Invitations
 "invitations.noInvitations" = "No hi ha invitacions";
-"invitations.accepted" = "Accepted";
+"invitations.accepted" = "Acceptada";
 "invitations.declined" = "Declined";
-"invitations.blocked" = "Blocked";
+"invitations.blocked" = "Bloquejat";
 "invitations.list" = "Invitacions rebudes";
 
 // Walkthrough
@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "Unir-se a Jami";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Nom d'usuari ja registrat.";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "Error de xarxa";
 "createAccount.UsernameNotRegisteredMessage" = "Es va crear un compte però no s'ha registrat el nom d'usuari";
@@ -506,12 +506,20 @@
 "aboutJami.artworkBy" = "Artwork by";
 
 // Accessibility
-"accessibility.close" = "Close";
+"accessibility.close" = "Tanca";
 "accessibility.smartListSwitchAccounts" = "Switch account";
 "accessibility.smartListConnectedAs" = "Your current account is %@";
-"accessibility.smartListAddAccount" = "Add account";
-"accessibility.aboutJamiTitle" = "About Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.smartListAddAccount" = "Afegeix un compte";
+"accessibility.aboutJamiTitle" = "Sobre Jami...";
+"accessibility.welcomeToJamiTitle" = "Benvingut a Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
-"accessibility.profilePicturePicker" = "Profile picture";
+"accessibility.profilePicturePicker" = "Imatge de perfil";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "QR Code";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

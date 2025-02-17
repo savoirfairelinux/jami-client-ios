@@ -175,7 +175,7 @@
 "createAccount.createAccountFormTitle" = "Жэмид нэгдээрэй";
 "createAccount.lookingForUsernameAvailability" = "Looking for availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгчийн нэр / хэрэглэгдсэн / хэрэглэгдсэн / хэрэглэгдсэн / хэрэглэгдсэн / хэрэглэгдсэн / хэрэглэгдсэн / хэрэглэгдсэн / хэрэглэгдсэн / хэрэглэгд / хэрэглэгд / хэрэглэгд / / / хэрэглэгд / / / хэрэглэгд / / /";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "Хүлжээний алдаа";
 "createAccount.UsernameNotRegisteredMessage" = "Хилсэл бий болсон боловч хэрэглэгчдийн нэр бүртгэгдээгүй";
@@ -511,7 +511,15 @@
 "accessibility.smartListConnectedAs" = "Your current account is %@";
 "accessibility.smartListAddAccount" = "Хэтгэлэг нэмнэ";
 "accessibility.aboutJamiTitle" = "Жэмигийн тухай";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
+"accessibility.welcomeToJamiTitle" = "Жэми-д тавтай морилно уу";
 "accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
 "accessibility.profilePicturePicker" = "Профилийн зураг";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "QR код";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Байгууллага";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";

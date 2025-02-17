@@ -138,16 +138,16 @@
 "conversation.synchronizationTitle" = "Sie haben die Unterhaltungseinladung angenommen.";
 "conversation.synchronizationMessage" = "Warten auf %@sich zu verbinden um die Unterhaltung zu synchronisieren …";
 "conversation.inReplyTo" = "Als Antwort auf";
-"conversation.repliedTo" = "%@ replied to %@";
+"conversation.repliedTo" = "%@antwortete an %@";
 "conversation.yourself" = "Sie";
 "conversation.edited" = "Bearbeitet";
-"conversation.deletedMessage" = "%@ deleted a message";
+"conversation.deletedMessage" = "%@ hat eine Nachricht gelöscht";
 "conversation.contactBlocked" = "Kontakt blockiert";
 
 // Invitations
 "invitations.noInvitations" = "Keine Einladungen";
-"invitations.accepted" = "Accepted";
-"invitations.declined" = "Declined";
+"invitations.accepted" = "Angenommen";
+"invitations.declined" = "Abgelehnt";
 "invitations.blocked" = "Blockiert";
 "invitations.list" = "Einladungen erhalten";
 
@@ -173,9 +173,9 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Mitmachen bei Jami";
-"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "Suche nach Verfügbarkeit…";
 "createAccount.invalidUsername" = "Ungültiger Benutzername. Bitte geben Sie einen gültigen Benutzernamen ein.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Dieser Benutzername ist bereits vergeben";
 "createAccount.usernameValid" = "Der Benutzername ist verfügbar.";
 "createAccount.UsernameNotRegisteredTitle" = "Netzwerkfehler";
 "createAccount.UsernameNotRegisteredMessage" = "Konto wurde erstellt, aber der Benutzername wurde nicht registriert";
@@ -408,7 +408,7 @@
 "account.statusConnecting" = "Verbindet";
 "account.statusUnknown" = "Unbekannt";
 "account.statusConnectionerror" = "Verbindungsfehler";
-"account.needMigration" = "Account requires migration.";
+"account.needMigration" = "Konto muss migriert werden.";
 "account.me" = "Ich";
 
 // Block List Page
@@ -452,18 +452,18 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Einladung erhalten";
 "generatedMessage.swarmCreated" = "Unterhaltung erstellt";
-"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@wurde zur Unterhaltung eingeladen.";
+"generatedMessage.invitationAccepted" = "%@ ist der Unterhaltung beigetreten.";
 "generatedMessage.youJoined" = "Sie sind der Unterhaltung begetreten.";
-"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ wurde in der Unterhaltung blockiert.";
+"generatedMessage.contactUnblocked" = "%@ wurde in der Unterhaltung entblockt.";
 "generatedMessage.outgoingCall" = "Ausgehender Anruf";
 "generatedMessage.missedOutgoingCall" = "Ausgehender Anruf fehlgeschlagen";
 "generatedMessage.missedIncomingCall" = "Verpasster eingehender Anruf";
 "generatedMessage.liveLocationSharing" = "Live-Standortfreigabe";
-"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
-"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
-"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
+"generatedMessage.contactLeftConversation" = "%@ hat die Unterhaltung verlassen.";
+"generatedMessage.nonSwarmInvitationReceived" = "Sie haben eine Einladung gesendet.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Ihre Einladung wurde angenommen.";
 
 // General Settings
 "generalSettings.videoSettings" = "Videoeinstellungen";
@@ -506,12 +506,20 @@
 "aboutJami.artworkBy" = "Visuelle Gestaltung von";
 
 // Accessibility
-"accessibility.close" = "Close";
-"accessibility.smartListSwitchAccounts" = "Switch account";
-"accessibility.smartListConnectedAs" = "Your current account is %@";
-"accessibility.smartListAddAccount" = "Add account";
-"accessibility.aboutJamiTitle" = "About Jami";
-"accessibility.welcomeToJamiTitle" = "Welcome to Jami";
-"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
-"accessibility.profilePicturePicker" = "Profile picture";
-"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.close" = "Schließen";
+"accessibility.smartListSwitchAccounts" = "Konto wechseln";
+"accessibility.smartListConnectedAs" = "Ihr aktuelles Konto ist %@";
+"accessibility.smartListAddAccount" = "Konto hinzufügen";
+"accessibility.aboutJamiTitle" = "Über Jami";
+"accessibility.welcomeToJamiTitle" = "Willkommen bei Jami";
+"accessibility.createAccountVerifyUsernamePrompt" = "Geben Sie einen Benutzernamen ein, um zu überprüfen, ob er verfügbar ist";
+"accessibility.profilePicturePicker" = "Profilbild";
+"accessibility.profilePicturePickerHint" = "Doppeltippen Sie, um ein Bild aufzunehmen, oder wählen Sie ein Bild aus der Bibliothek aus";
+"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.accountSummaryQrCode" = "QR Code";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.switchButtonIsOn" = "On";
+"accessibility.switchButtonIsOff" = "Off";
