@@ -517,9 +517,9 @@
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
 "accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
-"accessibility.accountSummaryQrCode" = "QR Code";
+"accessibility.accountSummaryQrCode" = "QR код";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
-"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.accountSummaryEditSettingsButton" = "Настройки";
 "accessibility.switchButtonIsOn" = "On";
 "accessibility.switchButtonIsOff" = "Off";

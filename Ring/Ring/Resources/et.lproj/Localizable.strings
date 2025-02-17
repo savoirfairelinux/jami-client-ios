@@ -517,9 +517,9 @@
 "accessibility.profilePicturePickerHint" = "Topeltklõpsa pildistamiseks või galeriist pildi valimiseks";
 "accessibility.swarmPicturePicker" = "Group picture";
 "accessibility.swarmPicturePickerHint" = "Topeltklõpsa pildistamiseks või galeriist pildi valimiseks";
-"accessibility.accountSummaryQrCode" = "QR Code";
+"accessibility.accountSummaryQrCode" = "QR-kood";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
-"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.accountSummaryEditSettingsButton" = "Seadistused";
 "accessibility.switchButtonIsOn" = "On";
 "accessibility.switchButtonIsOff" = "Off";

@@ -515,11 +515,11 @@
 "accessibility.createAccountVerifyUsernamePrompt" = "Entrer un nom d'utilisateur afin de vérifier sa disponibilité";
 "accessibility.profilePicturePicker" = "Image de profil";
 "accessibility.profilePicturePickerHint" = "Taper deux fois pour prendre une photo ou choisir une image dans votre bibliothèque";
-"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.swarmPicturePicker" = "Image du groupe";
 "accessibility.swarmPicturePickerHint" = "Taper deux fois pour prendre une photo ou choisir une image dans votre bibliothèque";
 "accessibility.accountSummaryQrCode" = "Code QR";
-"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
-"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
-"accessibility.accountSummaryEditSettingsButton" = "Settings";
-"accessibility.switchButtonIsOn" = "On";
-"accessibility.switchButtonIsOff" = "Off";
+"accessibility.accountSummaryQrCodeHint" = "Double tapotement pour voir le code QR du compte";
+"accessibility.accountSummaryEditProfileHint" = "Double tapotement pour modifier votre profile";
+"accessibility.accountSummaryEditSettingsButton" = "Réglages";
+"accessibility.switchButtonIsOn" = "Marche";
+"accessibility.switchButtonIsOff" = "Arrêt";

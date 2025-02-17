@@ -517,9 +517,9 @@
 "accessibility.profilePicturePickerHint" = "Toca dos veces para tomar una foto o seleccionar una imagen de la biblioteca.";
 "accessibility.swarmPicturePicker" = "Group picture";
 "accessibility.swarmPicturePickerHint" = "Toca dos veces para tomar una foto o seleccionar una imagen de la biblioteca.";
-"accessibility.accountSummaryQrCode" = "QR Code";
+"accessibility.accountSummaryQrCode" = "Código QR";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
-"accessibility.accountSummaryEditSettingsButton" = "Settings";
+"accessibility.accountSummaryEditSettingsButton" = "Ajustes";
 "accessibility.switchButtonIsOn" = "On";
 "accessibility.switchButtonIsOff" = "Off";

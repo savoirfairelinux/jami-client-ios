@@ -138,10 +138,10 @@
 "conversation.synchronizationTitle" = "Keni pranuar ftesën e bisedës.";
 "conversation.synchronizationMessage" = "Po pritet që %@ të lidhet, që të njëkohësohet biseda…";
 "conversation.inReplyTo" = "Në përgjigje të";
-"conversation.repliedTo" = "%@ replied to %@";
+"conversation.repliedTo" = "%@ iu përgjigj %@";
 "conversation.yourself" = "Ju";
 "conversation.edited" = "U përpunua";
-"conversation.deletedMessage" = "%@ deleted a message";
+"conversation.deletedMessage" = "%@ fshiu një mesazh";
 "conversation.contactBlocked" = "Kontakti u bllokua ";
 
 // Invitations
@@ -408,7 +408,7 @@
 "account.statusConnecting" = "Po lidhet";
 "account.statusUnknown" = "I panjohur";
 "account.statusConnectionerror" = "Gabim Lidhjeje";
-"account.needMigration" = "Account requires migration.";
+"account.needMigration" = "Llogaria lyp migrim.";
 "account.me" = "Unë";
 
 // Block List Page
@@ -453,17 +453,17 @@
 "generatedMessage.contactAdded" = "Ftesa u mor";
 "generatedMessage.swarmCreated" = "Biseda ui krijua";
 "generatedMessage.invitationReceived" = "%@ u ftua të marrë pjesë në bisedë.";
-"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
+"generatedMessage.invitationAccepted" = "%@ erdhi te biseda.";
 "generatedMessage.youJoined" = "Erdhët në bisedë.";
 "generatedMessage.contactBlocked" = "%@ u bllokua prej bisede.";
-"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ u zhbllokua nga biseda.";
 "generatedMessage.outgoingCall" = "Thirrje për";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie e vendndodhjes drejtpërsëdrejti";
-"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
-"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
-"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
+"generatedMessage.contactLeftConversation" = "%@ e braktisi bisedën.";
+"generatedMessage.nonSwarmInvitationReceived" = "Dërguat një ftesë.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Ftesa juaj u pranua.";
 
 // General Settings
 "generalSettings.videoSettings" = "Rregullime videoje";
@@ -507,19 +507,19 @@
 
 // Accessibility
 "accessibility.close" = "Mbylle";
-"accessibility.smartListSwitchAccounts" = "Switch account";
-"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListSwitchAccounts" = "Ndërroni llogari";
+"accessibility.smartListConnectedAs" = "Llogaria juaj e tanishme është %@";
 "accessibility.smartListAddAccount" = "Shtoni llogari";
 "accessibility.aboutJamiTitle" = "Mbi Jami-n";
 "accessibility.welcomeToJamiTitle" = "Mirë se vini te Jami";
-"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.createAccountVerifyUsernamePrompt" = "Jepni një emër përdoruesi, që të verifikohet nëse është i pazënë";
 "accessibility.profilePicturePicker" = "Foto profili";
-"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.profilePicturePickerHint" = "Prekeni dy herë, që të bëni një foto, ose të përzgjidhni një foto nga fototeka";
 "accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.swarmPicturePickerHint" = "Prekeni dy herë, që të bëni një foto, ose të përzgjidhni një foto nga fototeka";
 "accessibility.accountSummaryQrCode" = "Kod QR";
-"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
-"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryQrCodeHint" = "Prekeni dy herë, që të shihni kodin QR të llogarisë tuaj";
+"accessibility.accountSummaryEditProfileHint" = "Prekeni dy herë, që të përpunoni profilin tuaj";
 "accessibility.accountSummaryEditSettingsButton" = "Rregullime";
 "accessibility.switchButtonIsOn" = "On";
 "accessibility.switchButtonIsOff" = "Off";
