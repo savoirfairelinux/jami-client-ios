@@ -66,7 +66,7 @@ NSString* const accountConfig = @"config.yml";
 constexpr auto ID_TIMEOUT = std::chrono::hours(24);
 
 std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
-std::map<std::string, std::string> cachedNames;
+std::map<std::string, std::pair<std::string, std::string>> cachedNames;
 std::map<std::string, std::string> nameServers;
 
 #pragma mark Callbacks registration
@@ -317,38 +317,55 @@ toJson(NSDictionary* value)
     return val;
 }
 
-std::string getName(std::string addres, std::string accountId)
+std::string getName(const std::string& addres, const std::string& accountId)
 {
-    auto name = cachedNames.find(addres);
-    if (name != cachedNames.end()) {
-        return name->second;
+    try {
+        auto nameIter = cachedNames.find(addres);
+        if (nameIter != cachedNames.end()) {
+            return nameIter->second.first;
+        }
+
+        // Retrieve the name server based on the account ID
+        auto ns = getNameServer(accountId);
+        NSURL *url = [NSURL URLWithString:@(ns.c_str())];
+        NSString* host = [url host];
+        NSString* nameServer = host.length == 0 ? defaultNameServer : host;
+        std::string namesPath = [[[Constants cachesPath] URLByAppendingPathComponent:nameCache] URLByAppendingPathComponent:nameServer].path.UTF8String;
+
+        msgpack::unpacker pac;
+        // Read the file
+        std::ifstream file(namesPath, std::ios_base::in);
+        if (!file.is_open()) {
+            return "";
+        }
+        std::string line;
+        while (std::getline(file, line)) {
+            pac.reserve_buffer(line.size());
+            memcpy(pac.buffer(), line.data(), line.size());
+            pac.buffer_consumed(line.size());
+        }
+
+        // Load values
+        msgpack::object_handle oh;
+        if (pac.next(oh)) {
+            std::map<std::string, std::pair<std::string, std::string>> tempMap;
+            oh.get().convert(tempMap);
+            cachedNames.insert(tempMap.begin(), tempMap.end());
+        }
+
+        auto cacheRes = cachedNames.find(addres);
+        return cacheRes != cachedNames.end() ? cacheRes->second.first : std::string{};
     }
-
-    auto ns = getNameServer(accountId);
-    NSURL *url = [NSURL URLWithString: @(ns.c_str())];
-    NSString* host = [url host];
-    NSString* nameServer = host.length == 0 ? defaultNameServer : host;
-    std::string namesPath = [[[Constants cachesPath] URLByAppendingPathComponent: nameCache] URLByAppendingPathComponent: nameServer].path.UTF8String;
-
-    msgpack::unpacker pac;
-    // read file
-    std::ifstream file = std::ifstream(namesPath, std::ios_base::in);
-    if (!file.is_open()) {
+    catch (const msgpack::parse_error& e) {
+        NSString *errorMessage = [NSString stringWithFormat:@"MessagePack parse error: %s", e.what()];
+        NSLog(@"%@", errorMessage);
         return "";
     }
-    std::string line;
-    while (std::getline(file, line)) {
-        pac.reserve_buffer(line.size());
-        memcpy(pac.buffer(), line.data(), line.size());
-        pac.buffer_consumed(line.size());
+    catch (const std::bad_cast& e) {
+        NSString *errorMessage = [NSString stringWithFormat:@"Bad cast exception: %s", e.what()];
+        NSLog(@"%@", errorMessage);
+        return "";
     }
-
-    // load values
-    msgpack::object_handle oh;
-    if (pac.next(oh))
-        oh.get().convert(cachedNames);
-    auto cacheRes = cachedNames.find(addres);
-    return cacheRes != cachedNames.end() ? cacheRes->second : std::string {};
 }
 
 std::string getNameServer(std::string accountId) {
@@ -360,11 +377,17 @@ std::string getNameServer(std::string accountId) {
     auto accountConfigPath = [[[Constants documentsPath] URLByAppendingPathComponent: @(accountId.c_str())] URLByAppendingPathComponent: accountConfig].path.UTF8String;
     try {
         std::ifstream file = std::ifstream(accountConfigPath, std::ios_base::in);
+        if (!file.is_open()) {
+            return nameServer;
+        }
         YAML::Node node = YAML::Load(file);
         file.close();
-        nameServer = node[nameServerConfiguration].as<std::string>();
-        if (!nameServer.empty()) {
-            nameServers.insert(std::pair<std::string, std::string>(accountId, nameServer));
+        if (node[nameServerConfiguration]) {
+            nameServer = node[nameServerConfiguration].as<std::string>();
+            // Cache the result if it's not empty
+            if (!nameServer.empty()) {
+                nameServers[accountId] = nameServer;
+            }
         }
     } catch (const std::exception& e) {}
     return nameServer;
