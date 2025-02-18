@@ -234,26 +234,26 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
         guard let info = self.info else { return }
         switch item {
         case .minimize:
-            let button = ButtonInfo(background: .clear, stroke: .clear, name: "arrow.down.right.and.arrow.up.left", action: ParticipantAction.minimize(info: info))
+            let button = ButtonInfo(background: .clear, stroke: .clear, name: "arrow.down.right.and.arrow.up.left", accessibilityLabelValue: "pleasewait", action: ParticipantAction.minimize(info: info))
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .maximize:
-            let button = ButtonInfo(background: .clear, stroke: .clear, name: "arrow.up.left.and.arrow.down.right", action: ParticipantAction.maximize(info: info))
+            let button = ButtonInfo(background: .clear, stroke: .clear, name: "arrow.up.left.and.arrow.down.right", accessibilityLabelValue: "pleasewait", action: ParticipantAction.maximize(info: info))
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .setModerator:
-            let button = self.isModerator ? ButtonInfo(background: .clear, stroke: .clear, name: "crown", action: ParticipantAction.setModerator(info: info)) :
-                ButtonInfo(background: .clear, stroke: .clear, name: "crown.fill", action: ParticipantAction.setModerator(info: info))
+            let button = self.isModerator ? ButtonInfo(background: .clear, stroke: .clear, name: "crown", accessibilityLabelValue: "pleasewait", action: ParticipantAction.setModerator(info: info)) :
+                ButtonInfo(background: .clear, stroke: .clear, name: "crown.fill", accessibilityLabelValue: "pleasewait", action: ParticipantAction.setModerator(info: info))
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .muteAudio:
-            var button = self.audioMuted ? ButtonInfo(background: .clear, stroke: .clear, name: "mic.slash", action: ParticipantAction.muteAudio(info: info)) :
-                ButtonInfo(background: .clear, stroke: .clear, name: "mic", action: ParticipantAction.muteAudio(info: info))
+            var button = self.audioMuted ? ButtonInfo(background: .clear, stroke: .clear, name: "mic.slash", accessibilityLabelValue: "pleasewait", action: ParticipantAction.muteAudio(info: info)) :
+                ButtonInfo(background: .clear, stroke: .clear, name: "mic", accessibilityLabelValue: "pleasewait", action: ParticipantAction.muteAudio(info: info))
             button.imageColor = self.audioMuted ? .red : .white
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .hangup:
-            let button = ButtonInfo(background: .clear, stroke: .clear, name: "slash.circle", action: ParticipantAction.hangup(info: info))
+            let button = ButtonInfo(background: .clear, stroke: .clear, name: "slash.circle", accessibilityLabelValue: "pleasewait", action: ParticipantAction.hangup(info: info))
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .lowerHand:
             let button =
-                ButtonInfo(background: .clear, stroke: .clear, name: "hand.raised", action: ParticipantAction.raseHand(info: info))
+                ButtonInfo(background: .clear, stroke: .clear, name: "hand.raised", accessibilityLabelValue: "Quit call", action: ParticipantAction.raseHand(info: info))
             conferenceActions.append(ButtonInfoWrapper(info: button))
         }
     }
