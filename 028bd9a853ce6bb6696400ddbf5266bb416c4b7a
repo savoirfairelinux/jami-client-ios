@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "863c34f8_64b881a1",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-02-18T01:39:13Z",
+      "side": 0,
+      "message": "Can the variable please be added to the string? eg.\n`%@ is not in your contact list`\nor\n`%@ is not in the contact list`\n\nThank you",
+      "range": {
+        "startLine": 130,
+        "startChar": 33,
+        "endLine": 130,
+        "endChar": 62
+      },
+      "revId": "028bd9a853ce6bb6696400ddbf5266bb416c4b7a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
