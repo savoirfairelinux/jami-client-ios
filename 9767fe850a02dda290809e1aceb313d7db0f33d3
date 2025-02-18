@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b900f7e7_7164b0f8",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2025-02-18T18:39:24Z",
+      "side": 1,
+      "message": "This is meant to be a short, user-friendly label to inform the user that there is no result for his search.\nWhile the new text is correct, \"match the criteria\" may sounds a bit too technical?\nCurrently, there is no search criteria except the search query.",
+      "range": {
+        "startLine": 103,
+        "startChar": 36,
+        "endLine": 103,
+        "endChar": 87
+      },
+      "revId": "9767fe850a02dda290809e1aceb313d7db0f33d3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
