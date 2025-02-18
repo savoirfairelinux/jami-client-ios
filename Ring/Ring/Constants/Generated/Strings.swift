@@ -73,9 +73,9 @@ internal enum L10n {
     }
     /// Enter a username to verify if it's available
     internal static let createAccountVerifyUsernamePrompt = L10n.tr("Localizable", "accessibility.createAccountVerifyUsernamePrompt", fallback: "Enter a username to verify if it's available")
-    /// File received on %@, name not available
+    /// File received on %@, name not available.
     internal static func fileTransferNoName(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "accessibility.fileTransferNoName", String(describing: p1), fallback: "File received on %@, name not available")
+      return L10n.tr("Localizable", "accessibility.fileTransferNoName", String(describing: p1), fallback: "File received on %@, name not available.")
     }
     /// In reply to a message
     internal static let inReply = L10n.tr("Localizable", "accessibility.inReply", fallback: "In reply to a message")
@@ -128,6 +128,52 @@ internal enum L10n {
     internal enum Call {
       /// Lasted
       internal static let lasted = L10n.tr("Localizable", "accessibility.call.lasted", fallback: "Lasted")
+    }
+    internal enum Calls {
+      internal enum Alter {
+        /// 
+        internal static let addParticipant = L10n.tr("Localizable", "accessibility.calls.alter.addParticipant", fallback: "")
+        /// Hang up
+        internal static let hangUpCall = L10n.tr("Localizable", "accessibility.calls.alter.hangUpCall", fallback: "Hang up")
+        /// 
+        internal static let openConversation = L10n.tr("Localizable", "accessibility.calls.alter.openConversation", fallback: "")
+        /// Resume call
+        internal static let pauseCall = L10n.tr("Localizable", "accessibility.calls.alter.pauseCall", fallback: "Resume call")
+        /// 
+        internal static let raiseHand = L10n.tr("Localizable", "accessibility.calls.alter.raiseHand", fallback: "")
+        /// 
+        internal static let showDialpad = L10n.tr("Localizable", "accessibility.calls.alter.showDialpad", fallback: "")
+        /// 
+        internal static let switchCamera = L10n.tr("Localizable", "accessibility.calls.alter.switchCamera", fallback: "")
+        /// Enable microphone
+        internal static let toggleAudio = L10n.tr("Localizable", "accessibility.calls.alter.toggleAudio", fallback: "Enable microphone")
+        /// 
+        internal static let toggleSpeaker = L10n.tr("Localizable", "accessibility.calls.alter.toggleSpeaker", fallback: "")
+        /// Disable camera
+        internal static let toggleVideo = L10n.tr("Localizable", "accessibility.calls.alter.toggleVideo", fallback: "Disable camera")
+      }
+      internal enum Default {
+        /// Add participant
+        internal static let addParticipant = L10n.tr("Localizable", "accessibility.calls.default.addParticipant", fallback: "Add participant")
+        /// Hang up
+        internal static let hangUpCall = L10n.tr("Localizable", "accessibility.calls.default.hangUpCall", fallback: "Hang up")
+        /// Open conversation
+        internal static let openConversation = L10n.tr("Localizable", "accessibility.calls.default.openConversation", fallback: "Open conversation")
+        /// Pause call
+        internal static let pauseCall = L10n.tr("Localizable", "accessibility.calls.default.pauseCall", fallback: "Pause call")
+        /// Raise hand
+        internal static let raiseHand = L10n.tr("Localizable", "accessibility.calls.default.raiseHand", fallback: "Raise hand")
+        /// Show dialpad
+        internal static let showDialpad = L10n.tr("Localizable", "accessibility.calls.default.showDialpad", fallback: "Show dialpad")
+        /// Switch camera
+        internal static let switchCamera = L10n.tr("Localizable", "accessibility.calls.default.switchCamera", fallback: "Switch camera")
+        /// Disable microphone
+        internal static let toggleAudio = L10n.tr("Localizable", "accessibility.calls.default.toggleAudio", fallback: "Disable microphone")
+        /// Use speaker
+        internal static let toggleSpeaker = L10n.tr("Localizable", "accessibility.calls.default.toggleSpeaker", fallback: "Use speaker")
+        /// Enable camera
+        internal static let toggleVideo = L10n.tr("Localizable", "accessibility.calls.default.toggleVideo", fallback: "Enable camera")
+      }
     }
     internal enum FileTransfer {
       /// File: %@ , received on %@

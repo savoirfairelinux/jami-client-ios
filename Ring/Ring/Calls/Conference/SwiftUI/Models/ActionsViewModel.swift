@@ -25,6 +25,7 @@ import SwiftUI
 class ButtonInfoWrapper: ObservableObject {
     @Published var background: Color
     @Published var name: String
+    @Published var accessibilityLabelValue: String
     @Published var stroke: Color
     @Published var disabled = false
     var action: State
@@ -39,6 +40,7 @@ class ButtonInfoWrapper: ObservableObject {
         self.isSystem = info.isSystem
         self.imageColor = info.imageColor
         self.disabled = info.disabled
+        self.accessibilityLabelValue = info.accessibilityLabelValue
     }
 
     func updateWith(info: ButtonInfo) {
@@ -69,6 +71,7 @@ struct ButtonInfo {
     var background: Color
     let stroke: Color
     let name: String
+    let accessibilityLabelValue: String
     let action: State
     var isSystem = true
     var imageColor = Color.white
@@ -94,50 +97,50 @@ enum CallAction: State {
     var defaultButtonInfo: ButtonInfo {
         switch self {
         case .toggleAudio:
-            return ButtonInfo(background: .clear, stroke: .white, name: "mic", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "mic", accessibilityLabelValue: L10n.Accessibility.Calls.Default.toggleAudio, action: self)
         case .toggleVideo:
-            return ButtonInfo(background: .clear, stroke: .white, name: "video", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "video", accessibilityLabelValue: L10n.Accessibility.Calls.Default.toggleVideo, action: self)
         case .pauseCall:
-            return ButtonInfo(background: .clear, stroke: .white, name: "pause.fill", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "pause.fill", accessibilityLabelValue: L10n.Accessibility.Calls.Default.pauseCall, action: self)
         case .hangUpCall:
-            return ButtonInfo(background: .red, stroke: .red, name: "phone.down", action: self)
+            return ButtonInfo(background: .red, stroke: .red, name: "phone.down", accessibilityLabelValue: L10n.Accessibility.Calls.Default.hangUpCall, action: self)
         case .addParticipant:
-            return ButtonInfo(background: .clear, stroke: .white, name: "person.fill.badge.plus", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "person.fill.badge.plus", accessibilityLabelValue: L10n.Accessibility.Calls.Default.addParticipant, action: self)
         case .switchCamera:
-            return ButtonInfo(background: .clear, stroke: .white, name: "arrow.triangle.2.circlepath.camera", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "arrow.triangle.2.circlepath.camera", accessibilityLabelValue: L10n.Accessibility.Calls.Default.switchCamera, action: self)
         case .toggleSpeaker:
-            return ButtonInfo(background: .clear, stroke: .white, name: "speaker.wave.2", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "speaker.wave.2", accessibilityLabelValue: L10n.Accessibility.Calls.Default.toggleSpeaker, action: self)
         case .openConversation:
-            return ButtonInfo(background: .clear, stroke: .white, name: "message", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "message", accessibilityLabelValue: L10n.Accessibility.Calls.Default.openConversation, action: self)
         case .showDialpad:
-            return ButtonInfo(background: .clear, stroke: .white, name: "dialpad", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "dialpad", accessibilityLabelValue: L10n.Accessibility.Calls.Default.showDialpad, action: self)
         case .raiseHand:
-            return ButtonInfo(background: .clear, stroke: .white, name: "hand.raised", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "hand.raised", accessibilityLabelValue: L10n.Accessibility.Calls.Default.raiseHand, action: self)
         }
     }
 
     var alterButtonInfo: ButtonInfo {
         switch self {
         case .toggleAudio:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "mic.slash", action: self)
+            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "mic.slash", accessibilityLabelValue: "pleasewait", action: self)
         case .toggleVideo:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "video.slash", action: self)
+            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "video.slash", accessibilityLabelValue: "pleasewait", action: self)
         case .pauseCall:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "play", action: self)
+            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "play", accessibilityLabelValue: "pleasewait", action: self)
         case .hangUpCall:
-            return ButtonInfo(background: .red, stroke: .red, name: "phone.down", action: self)
+            return ButtonInfo(background: .red, stroke: .red, name: "phone.down", accessibilityLabelValue: "pleasewait", action: self)
         case .addParticipant:
-            return ButtonInfo(background: .clear, stroke: .white, name: "person.fill.badge.plus", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "person.fill.badge.plus", accessibilityLabelValue: "pleasewait", action: self)
         case .switchCamera:
-            return ButtonInfo(background: .clear, stroke: .white, name: "arrow.triangle.2.circlepath.camera", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "arrow.triangle.2.circlepath.camera", accessibilityLabelValue: "pleasewait", action: self)
         case .toggleSpeaker:
-            return ButtonInfo(background: .clear, stroke: .white, name: "speaker.wave.3", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "speaker.wave.3", accessibilityLabelValue: "pleasewait", action: self)
         case .openConversation:
-            return ButtonInfo(background: .clear, stroke: .white, name: "message", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "message", accessibilityLabelValue: "pleasewait", action: self)
         case .showDialpad:
-            return ButtonInfo(background: .clear, stroke: .white, name: "dialpad", action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "dialpad", accessibilityLabelValue: "pleasewait", action: self)
         case .raiseHand:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "hand.raised", action: self)
+            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "hand.raised", accessibilityLabelValue: "pleasewait", action: self)
         }
     }
 }

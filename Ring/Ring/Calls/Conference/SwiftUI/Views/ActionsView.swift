@@ -185,6 +185,7 @@ struct CustomButtonView: View {
             CallButtonView(buttonInfo: buttonInfo)
         })
         .disabled(buttonInfo.disabled)
+        .accessibilityLabel(buttonInfo.accessibilityLabelValue)
     }
 }
 
@@ -351,6 +352,7 @@ struct ParticipantInfoRowView: View {
                     .truncationMode(.middle)
                     .layoutPriority(1)
             }
+            .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
             Spacer()
             ParticipantActionsView(participant: participant)
         }
