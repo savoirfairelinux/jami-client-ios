@@ -180,8 +180,7 @@ extension AccountSummaryVM {
         self.accountService.sharedResponseStream
             .filter({ [weak self] serviceEvent in
                 guard let self = self else { return false }
-                guard serviceEvent
-                        .getEventInput(ServiceEventInput.registrationState) != nil else { return false }
+                guard serviceEvent.getEventInput(ServiceEventInput.registrationState) as String? != nil else { return false }
                 guard let accountId: String = serviceEvent
                         .getEventInput(ServiceEventInput.accountId),
                       accountId == self.account.id else { return false }

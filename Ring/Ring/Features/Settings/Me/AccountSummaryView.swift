@@ -47,11 +47,17 @@ struct AccountSummaryView: View {
                 profileSection()
 
                 Section(header: Text(L10n.AccountPage.accountHeader)) {
-                    ToggleCell(
-                        toggleText: L10n.Account.statusOnline,
-                        getAction: { model.accountEnabled },
-                        setAction: { newValue in model.enableAccount(enable: newValue) }
-                    )
+                    HStack {
+                        Text(model.accountStatus)
+                        Spacer()
+                        Toggle("", isOn: Binding(
+                            get: { model.accountEnabled },
+                            set: { newValue in model.enableAccount(enable: newValue) }
+                        ))
+                        .labelsHidden()
+                        .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
+                    }
+                    .accessibilityElement(children: .combine)
                 }
 
                 if model.account.type == .sip {
