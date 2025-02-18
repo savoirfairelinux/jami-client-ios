@@ -46,6 +46,30 @@
       },
       "revId": "028bd9a853ce6bb6696400ddbf5266bb416c4b7a",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27a3cf25_3d873fd6",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-02-18T20:45:02Z",
+      "side": 0,
+      "message": "Can this please be done in another patch? Thank you",
+      "parentUuid": "ab771c87_23796788",
+      "range": {
+        "startLine": 130,
+        "startChar": 33,
+        "endLine": 130,
+        "endChar": 62
+      },
+      "revId": "028bd9a853ce6bb6696400ddbf5266bb416c4b7a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
