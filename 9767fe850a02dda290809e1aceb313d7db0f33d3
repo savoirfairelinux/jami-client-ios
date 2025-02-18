@@ -22,6 +22,30 @@
       },
       "revId": "9767fe850a02dda290809e1aceb313d7db0f33d3",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bedc1dcb_e48adb67",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-02-18T20:43:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b900f7e7_7164b0f8",
+      "range": {
+        "startLine": 103,
+        "startChar": 36,
+        "endLine": 103,
+        "endChar": 87
+      },
+      "revId": "9767fe850a02dda290809e1aceb313d7db0f33d3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
