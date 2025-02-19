@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba4d9bad_c664e1dc",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageSwiftUIViews.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-19T21:40:07Z",
+      "side": 1,
+      "message": "this onTapGesture will prevent options to mute audio",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b10c10e_174d5583",
         "filename": "Ring/Ring/Models/MessageModel.swift",
         "patchSetId": 12
@@ -82,6 +99,40 @@
       "writtenOn": "2025-02-19T21:21:41Z",
       "side": 1,
       "message": "we should not modify self.content",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3155b5f5_a35b85c6",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 12
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-19T21:40:07Z",
+      "side": 1,
+      "message": "use less parameters",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd3712b3_65c4faa4",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 12
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-19T21:40:07Z",
+      "side": 1,
+      "message": "use less parameters",
       "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
