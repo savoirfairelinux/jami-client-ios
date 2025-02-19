@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b10c10e_174d5583",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-19T21:21:41Z",
+      "side": 1,
+      "message": "do we need this? we have another updateAccessibilityLabel function that already included this",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad3e2414_d83cc9bb",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-19T21:21:41Z",
+      "side": 1,
+      "message": "updates may not include info[MessageAttributes.body.rawValue] but we already have message content in the model",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda0a398_71ffd8ab",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-19T21:21:41Z",
+      "side": 1,
+      "message": "this is not related to accessibility",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6726a21a_dffc71e3",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-19T21:21:41Z",
+      "side": 1,
+      "message": "do not add L10n string as parameters to another L10n string. Instead create two different complete strings",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f00f6f70_4537d591",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-19T21:21:41Z",
+      "side": 1,
+      "message": "we should not modify self.content",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
