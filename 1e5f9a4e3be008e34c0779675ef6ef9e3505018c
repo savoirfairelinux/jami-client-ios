@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31bcb246_591ca536",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1113
+      },
+      "writtenOn": "2025-02-20T17:58:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29f13683_93368181",
+      "revId": "1e5f9a4e3be008e34c0779675ef6ef9e3505018c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bbff24a_1c57887b",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-02-20T17:23:32Z",
       "side": 1,
       "message": "We already set self.receivedDate, do not need to extract it again",
+      "revId": "1e5f9a4e3be008e34c0779675ef6ef9e3505018c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "274a9253_c9f46e59",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1113
+      },
+      "writtenOn": "2025-02-20T17:58:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bbff24a_1c57887b",
       "revId": "1e5f9a4e3be008e34c0779675ef6ef9e3505018c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

@@ -35,6 +35,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38daaeb3_c78fe87e",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SwiftUI/Views/RequestsView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1113
+      },
+      "writtenOn": "2025-02-20T17:58:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be586373_d651b30d",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b10c10e_174d5583",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-02-19T21:21:41Z",
       "side": 1,
       "message": "do we need this? we have another updateAccessibilityLabel function that already included this",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80071731_e83cd750",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1113
+      },
+      "writtenOn": "2025-02-20T17:58:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b10c10e_174d5583",
       "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -69,6 +105,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc5a9847_3da7901b",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1113
+      },
+      "writtenOn": "2025-02-20T17:58:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad3e2414_d83cc9bb",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bda0a398_71ffd8ab",
@@ -82,6 +136,24 @@
       "writtenOn": "2025-02-19T21:21:41Z",
       "side": 1,
       "message": "this is not related to accessibility",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c98622c_33980cda",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1113
+      },
+      "writtenOn": "2025-02-20T17:58:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bda0a398_71ffd8ab",
       "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -103,6 +175,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e69cc97f_5204444c",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1113
+      },
+      "writtenOn": "2025-02-20T17:58:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6726a21a_dffc71e3",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f00f6f70_4537d591",
@@ -116,6 +206,24 @@
       "writtenOn": "2025-02-19T21:21:41Z",
       "side": 1,
       "message": "we should not modify self.content",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "291ba2d1_a37bae8c",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1113
+      },
+      "writtenOn": "2025-02-20T17:58:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f00f6f70_4537d591",
       "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -137,6 +245,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd50b8f8_4443eeea",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 12
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1113
+      },
+      "writtenOn": "2025-02-20T17:58:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3155b5f5_a35b85c6",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd3712b3_65c4faa4",
@@ -150,6 +276,24 @@
       "writtenOn": "2025-02-19T21:40:07Z",
       "side": 1,
       "message": "use less parameters",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4260abf3_d063c554",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 12
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1113
+      },
+      "writtenOn": "2025-02-20T17:58:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd3712b3_65c4faa4",
       "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
