@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8390f7e6_55f64648",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageSwiftUIViews.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-21T16:05:42Z",
+      "side": 1,
+      "message": "use it as conditional modifier only when accessibilityEnabled",
+      "parentUuid": "ba4d9bad_c664e1dc",
+      "revId": "29b6ef583ad51f23b4771c5d67213e1123c1d496",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be586373_d651b30d",
         "filename": "Ring/Ring/Features/Conversations/SmartList/SwiftUI/Views/RequestsView.swift",
         "patchSetId": 12

@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7947d20b_b0c7aa6e",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-21T16:05:42Z",
+      "side": 1,
+      "message": "receivedDate does not need to be optional",
+      "revId": "71d61ddb5f6b3f629428b26b8b551ac125592124",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36735b25_05d25009",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-21T16:05:42Z",
+      "side": 1,
+      "message": "run with SwiftLint to remove empty spaces",
+      "revId": "71d61ddb5f6b3f629428b26b8b551ac125592124",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57e02dd6_10511984",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-21T16:05:42Z",
+      "side": 1,
+      "message": "for incoming message we should have L10n.Accessibility.Text.receivedOn",
+      "revId": "71d61ddb5f6b3f629428b26b8b551ac125592124",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b49f4314_a989ce83",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-21T16:05:42Z",
+      "side": 1,
+      "message": "TODO: add reply target",
+      "revId": "71d61ddb5f6b3f629428b26b8b551ac125592124",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5410764_3615beb6",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-21T16:05:42Z",
+      "side": 1,
+      "message": "\"Block invitation sender\"",
+      "revId": "71d61ddb5f6b3f629428b26b8b551ac125592124",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8f5084_a99474bd",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-21T16:05:42Z",
+      "side": 1,
+      "message": "extra space before ,",
+      "revId": "71d61ddb5f6b3f629428b26b8b551ac125592124",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
