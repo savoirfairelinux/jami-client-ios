@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06fda53c_00d47765",
+        "filename": "Ring/Ring/Calls/Conference/SwiftUI/Models/ActionsViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-24T21:28:30Z",
+      "side": 1,
+      "message": "accessibilityLabelValue",
+      "revId": "3cb044c7f9823d71c8b1b5aa05bd210d5a884133",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6540afd4_8e8a596b",
+        "filename": "Ring/Ring/Calls/Conference/SwiftUI/Models/ParticipantViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-24T21:28:30Z",
+      "side": 1,
+      "message": "check accessibilityLabelValue",
+      "revId": "3cb044c7f9823d71c8b1b5aa05bd210d5a884133",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}

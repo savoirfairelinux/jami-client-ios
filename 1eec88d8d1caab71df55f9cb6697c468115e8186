@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f82bb28_1e1199e1",
+        "filename": "Ring/Ring.xcodeproj/xcshareddata/xcschemes/jamiNotificationExtension.xcscheme",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-24T21:28:30Z",
+      "side": 0,
+      "message": "removed property",
+      "revId": "1eec88d8d1caab71df55f9cb6697c468115e8186",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
