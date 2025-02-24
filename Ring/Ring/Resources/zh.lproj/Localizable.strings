@@ -84,11 +84,11 @@
 "swarm.admin" = "管理员";
 "swarm.blocked" = "已封鎖";
 "swarm.unknown" = "未知";
-"swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"swarm.inviteMembers" = "邀请成员";
+"swarm.confirmLeaveConversation" = "您要退出对话吗？";
 "swarm.Leave" = "离开";
 "swarm.newGroup" = "建立新群組";
-"swarm.namePlaceholder" = "Group name";
+"swarm.namePlaceholder" = "群名";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
@@ -132,7 +132,7 @@
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
-"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
+"conversation.requestMessage" = "您好，您想加入通话吗？";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
@@ -269,7 +269,7 @@
 "calls.setModerator" = "設定主持人";
 "calls.removeModerator" = "取消設定主持人";
 "calls.muteAudio" = "关闭麦克风";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "麦克风静音";
 "calls.lowerHand" = "放下手";
 
 // Account Page
@@ -307,7 +307,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "输入账户密码";
 "accountPage.usernamePlaceholder" = "输入想使用的用户名";
-"accountPage.registerNameErrorMessage" = "The username is unavailable.";
+"accountPage.registerNameErrorMessage" = "用户名不可用。";
 "accountPage.usernameRegistering" = "注册中";
 "accountPage.usernameRegisterAction" = "註冊";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -521,5 +521,33 @@
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
 "accessibility.accountSummaryEditSettingsButton" = "設定";
-"accessibility.switchButtonIsOn" = "On";
-"accessibility.switchButtonIsOff" = "Off";
+"accessibility.conversationStartVoiceCall" = "Start a voice call with %@";
+"accessibility.conversationStartVideoCall" = "Start a video call with %@";
+"accessibility.conversationComposeMessage" = "Compose a message";
+"accessibility.conversationShareMedia" = "Share media";
+"accessibility.conversationCameraHint" = "Double-tap to open camera";
+"accessibility.audioPlayerPlay" = "播放";
+"accessibility.audioPlayerPause" = "暫停";
+"accessibility.conversationRowUnreadCount" = "%@ unread messages";
+"accessibility.conversationRowBlocked" = "Conversation blocked";
+"accessibility.conversationRowSyncing" = "Syncing in progress";
+"accessibility.conversationRowLastMessage" = "Last message on %@";
+"accessibility.userPresenceOnline" = "線上";
+"accessibility.userPresenceAvailable" = "可获得的";
+"accessibility.pendingRequestsRow" = "Invitation received: %@ pending invitation";
+"accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
+"accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
+"accessibility.pendingRequestsListRejectInvitation" = "Reject invitation";
+"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.messageBubbleDeleted" = "Message deleted";
+"accessibility.messageBubbleEdited" = "已编辑";
+"accessibility.messageBubbleRead" = "Read";
+"accessibility.messageBubbleUnread" = "Unread";
+"accessibility.textNotAvailable" = "Text message received on %@, content not available";
+"accessibility.fileTransferNoName" = "File received on %@, name not available";
+"accessibility.inReply" = "In reply to a message";
+"accessibility.text.receivedOn" = "%@, message received on %@";
+"accessibility.text.sentOn" = "%@, message sent on %@";
+"accessibility.fileTransfer.receivedOn" = "File: %@ , received on %@";
+"accessibility.fileTransfer.sentOn" = "File: %@, sent on %@";
+"accessibility.call.lasted" = "Lasted";
