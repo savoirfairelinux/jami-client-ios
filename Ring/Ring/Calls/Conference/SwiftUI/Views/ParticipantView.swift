@@ -188,6 +188,7 @@ struct ParticipantInfoView: View {
                 .foregroundColor(.white)
                 .lineLimit(1)
                 .cornerRadius(3)
+                .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             Spacer()
                 .frame(width: 15)
             if model.audioMuted {

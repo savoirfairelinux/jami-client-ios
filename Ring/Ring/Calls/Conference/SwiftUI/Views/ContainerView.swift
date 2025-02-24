@@ -40,6 +40,8 @@ struct Avatar: View {
             .aspectRatio(contentMode: .fill)
             .frame(width: size, height: size)
             .clipShape(Circle())
+            .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+
     }
 }
 
@@ -65,6 +67,8 @@ struct PulsatingAvatarView: View {
                 }
             Avatar(participant: participant)
         }
+        .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+
     }
 }
 
