@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97aa14ac_bab407d2",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListContainer.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-24T21:59:26Z",
+      "side": 0,
+      "message": "do we need this change?",
+      "revId": "b736dd7b4b11f3bf66a3f2d33d248644bff6862c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
