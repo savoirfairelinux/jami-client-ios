@@ -351,17 +351,22 @@ struct CurrentAccountButton: View {
                 .scaledToFill()
                 .frame(width: model.dimensions.imageSize, height: model.dimensions.imageSize)
                 .clipShape(Circle())
-            Spacer()
-                .frame(width: model.dimensions.spacing)
+                .accessibilityHidden(true) // Prevents duplicate announcements
+
+            Spacer().frame(width: model.dimensions.spacing)
+
             VStack(alignment: .leading) {
                 Text(model.bestName)
                     .bold()
                     .lineLimit(1)
                     .foregroundColor(Color.jamiColor)
                     .frame(maxWidth: 150, alignment: .leading)
+                    .accessibilityHidden(true) // Hides redundant VoiceOver announcements
             }
+
             Spacer()
         }
+        .accessibilityElement()
         .accessibilityLabel(L10n.Accessibility.smartListSwitchAccounts)
         .accessibilityHint(L10n.Accessibility.smartListConnectedAs(model.bestName))
         .transaction { transaction in

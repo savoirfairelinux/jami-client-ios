@@ -31,7 +31,9 @@ struct AccountLists: View {
     var body: some View {
         VStack(spacing: 10) {
             accountsView()
+                .accessibilitySortPriority(2)
             newAccountButton()
+                .accessibilitySortPriority(1)
         }
         .accessibility(identifier: SmartListAccessibilityIdentifiers.accountListView)
         .padding(.horizontal, 5)
