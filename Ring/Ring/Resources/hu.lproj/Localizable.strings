@@ -85,7 +85,7 @@
 "swarm.blocked" = "Letiltva";
 "swarm.unknown" = "Ismeretlen";
 "swarm.inviteMembers" = "Tagok meghívása";
-"swarm.confirmLeaveConversation" = "Szeretne kilépni ebből a beszélgetésből?";
+"swarm.confirmLeaveConversation" = "Szeretne kilépni a beszélgetésből?";
 "swarm.Leave" = "Elhagyás";
 "swarm.newGroup" = "Új csoport létrehozása";
 "swarm.namePlaceholder" = "Csoport neve";
@@ -120,7 +120,7 @@
 "smartlist.inviteFriends" = "Barátok és ismerősök meghívása";
 "smartlist.accounts" = "Fiókok";
 "smartlist.disableDonation" = "Máskor";
-"smartlist.donationExplanation" = "Ha hisz a küldetésünkben, adományozna?";
+"smartlist.donationExplanation" = "Ha szívesen használja a Jamit, és hisz a küldetésünkben, szeretne adományozni?";
 "smartlist.inSynchronization" = "beszélgetés összehangolásában";
 "smartlist.newMessage" = "Új üzenet";
 
@@ -174,7 +174,7 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Jami csatlakozása";
 "createAccount.lookingForUsernameAvailability" = "Felhasználónév elérhetőségének ellenőrzése…";
-"createAccount.invalidUsername" = "Érvénytelen felhasználónév. Kérjük, adjon meg egy érvényes felhasználónevet.";
+"createAccount.invalidUsername" = "Érvénytelen felhasználónév. Kérjük, adja meg a helyes felhasználónevet.";
 "createAccount.usernameAlreadyTaken" = "A felhasználónév már foglalt";
 "createAccount.usernameValid" = "A felhasználónév elérhető.";
 "createAccount.UsernameNotRegisteredTitle" = "Hálózati hiba";
@@ -222,7 +222,7 @@
 "alerts.accountCannotBeFoundMessage" = "Nem található fiók a Jami hálózaton. Győződjön meg arról, hogy a Jami-re exportálták egy meglévő eszközről, és hogy a megadott hitelesítő adatok helyesek.";
 "alerts.accountAddedTitle" = "Fiók hozzáadva";
 "alerts.accountNoNetworkTitle" = "Hálózati hiba";
-"alerts.accountNoNetworkMessage" = "Kapcsolódási hiba történt a Jami-fióknak az elosztott hálózathoz való hozzáadása közben. Próbálkozzon újra. Ha a hiba nem szűnik meg, segítségért forduljon a támogatási csoporthoz.";
+"alerts.accountNoNetworkMessage" = "Kapcsolódási hiba történt a Jami-fióknak az elosztott hálózathoz való hozzáadása közben. Próbálkozzon újra. Ha a probléma továbbra is fennáll, forduljon a rendszergazdához.";
 "alerts.accountDefaultErrorTitle" = "Fiókhiba";
 "alerts.accountDefaultErrorMessage" = "Hiba történt a fiók létrehozásakor.";
 "alerts.profileTakePhoto" = "Fénykép készítése";
@@ -237,7 +237,7 @@
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
 "alerts.noLibraryPermissionsTitle" = "Fényképkönyvtár hozzáférése nem engedélyezett";
 "alerts.noLocationPermissionsTitle" = "Hozzáférés a tartózkodási hely nincs engedélyezve";
-"alerts.errorWrongCredentials" = "Hiba történt a Jami-fiókkezelő kiszolgálóhoz (JAMS) való csatlakozáskor. Próbálkozzon újra. Ha a hiba nem szűnik meg, segítségért forduljon a támogatási csoporthoz.";
+"alerts.errorWrongCredentials" = "Hiba történt a Jami-fiókkezelő kiszolgálóhoz (JAMS) való csatlakozáskor. Próbálkozzon újra. Ha a probléma továbbra is fennáll, forduljon a rendszergazdához.";
 "alerts.recordVideoMessage" = "Videoüzenet felvétele";
 "alerts.recordAudioMessage" = "Hangüzenet felvétele";
 "alerts.uploadFile" = "Fájl küldése";
@@ -301,7 +301,7 @@
 "accountPage.deviceRevocationError" = "Eszköz visszavonási hiba";
 "accountPage.linkDeviceTitle" = "Eszköz összekapcsolása fiókhoz";
 "accountPage.other" = "Másik";
-"accountPage.removeAccountMessage" = "Ha fiókjáról nem készített biztonsági másolatot, vagy nem adott hozzá egy másik eszközhöz, akkor fiókját és regisztrált nevét visszavonhatatlanul elveszíti.";
+"accountPage.removeAccountMessage" = "Ha nincs készített biztonsági másolatot, vagy nincs összekapcsolt eszközt a fiókról, akkor a fiók és a regisztrált felhasználónév VISSZAVONHATATLANUL ELVESZIK.";
 "accountPage.inviteFriends" = "Barátok és ismerősök meghívása";
 "accountPage.contactMeOnJamiTitle" = "Lépjen kapcsolatba velem a Jami-n!";
 "accountPage.contactMeOnJamiContant" = "Lépjen kapcsolatba velem a(z) „%s” használatával a Jami elosztott kommunikációs platformon: https://jami.net";
@@ -343,7 +343,7 @@
 "accountPage.profileName" = "Névjegynév";
 "accountPage.profileNamePlaceholder" = "Névjegynév megadása";
 "accountPage.editProfile" = "Névjegy szerkesztése";
-"accountPage.manageAccount" = "Fiók kezelése";
+"accountPage.manageAccount" = "Fiókkezelés";
 "accountPage.encryptAccount" = "Fiók titkosítása jelszóval";
 "accountPage.passwordExplanation" = "A Jami-fiók csak helyileg jön létre és tárolódik ezen az eszközön a fiókkulcsokat tartalmazó archívumként. Az archívumhoz való hozzáférés választható jelszóval védhető.";
 "accountPage.passwordsDoNotMatch" = "A jelszavak nem egyeznek.";
@@ -508,18 +508,46 @@
 // Accessibility
 "accessibility.close" = "Bezárás";
 "accessibility.smartListSwitchAccounts" = "Fiókváltás";
-"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListConnectedAs" = "%@ a jelenlegi fiók";
 "accessibility.smartListAddAccount" = "Fiók hozzáadása";
 "accessibility.aboutJamiTitle" = "A Jami névjegye";
 "accessibility.welcomeToJamiTitle" = "Üdvözli a Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "Írjon be egy felhasználónevet, hogy ellenőrizze, elérhető-e.";
 "accessibility.profilePicturePicker" = "Névjegykép";
-"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
-"accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
+"accessibility.profilePicturePickerHint" = "Koppintson duplán a kép készítéséhez vagy a könyvtárból kijelölendő képhez";
+"accessibility.swarmPicturePicker" = "Csoportkép";
+"accessibility.swarmPicturePickerHint" = "Koppintson duplán a kép készítéséhez vagy a könyvtárból kijelölendő képhez";
 "accessibility.accountSummaryQrCode" = "QR-kód";
-"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
-"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryQrCodeHint" = "Koppintson duplán a fiók QR-kódjának megtekintéséhez";
+"accessibility.accountSummaryEditProfileHint" = "Koppintson duplán a profil szerkesztéséhez";
 "accessibility.accountSummaryEditSettingsButton" = "Beállítások";
-"accessibility.switchButtonIsOn" = "On";
-"accessibility.switchButtonIsOff" = "Off";
+"accessibility.conversationStartVoiceCall" = "Start a voice call with %@";
+"accessibility.conversationStartVideoCall" = "Start a video call with %@";
+"accessibility.conversationComposeMessage" = "Compose a message";
+"accessibility.conversationShareMedia" = "Share media";
+"accessibility.conversationCameraHint" = "Double-tap to open camera";
+"accessibility.audioPlayerPlay" = "Lejátszás";
+"accessibility.audioPlayerPause" = "Megállítás";
+"accessibility.conversationRowUnreadCount" = "%@ unread messages";
+"accessibility.conversationRowBlocked" = "Conversation blocked";
+"accessibility.conversationRowSyncing" = "Syncing in progress";
+"accessibility.conversationRowLastMessage" = "Last message on %@";
+"accessibility.userPresenceOnline" = "Online";
+"accessibility.userPresenceAvailable" = "Elérhető";
+"accessibility.pendingRequestsRow" = "Invitation received: %@ pending invitation";
+"accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
+"accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
+"accessibility.pendingRequestsListRejectInvitation" = "Reject invitation";
+"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.messageBubbleDeleted" = "Message deleted";
+"accessibility.messageBubbleEdited" = "Szerkesztve";
+"accessibility.messageBubbleRead" = "Read";
+"accessibility.messageBubbleUnread" = "Unread";
+"accessibility.textNotAvailable" = "Text message received on %@, content not available";
+"accessibility.fileTransferNoName" = "File received on %@, name not available";
+"accessibility.inReply" = "In reply to a message";
+"accessibility.text.receivedOn" = "%@, message received on %@";
+"accessibility.text.sentOn" = "%@, message sent on %@";
+"accessibility.fileTransfer.receivedOn" = "File: %@ , received on %@";
+"accessibility.fileTransfer.sentOn" = "File: %@, sent on %@";
+"accessibility.call.lasted" = "Lasted";
