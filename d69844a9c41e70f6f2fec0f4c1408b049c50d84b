@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbcf3bad_fb463abe",
+        "filename": "Ring/Ring/Calls/Conference/SwiftUI/Models/ActionsViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-25T17:29:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f1a5509_b8d2c321",
+      "revId": "d69844a9c41e70f6f2fec0f4c1408b049c50d84b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc9b3712_a2e5f220",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-02-25T17:12:59Z",
       "side": 1,
       "message": "Lower hand",
+      "revId": "d69844a9c41e70f6f2fec0f4c1408b049c50d84b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81972251_f0e4c370",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-25T17:29:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7526e771_0abae6ca",
       "revId": "d69844a9c41e70f6f2fec0f4c1408b049c50d84b",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
