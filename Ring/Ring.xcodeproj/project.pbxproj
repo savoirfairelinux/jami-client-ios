@@ -147,6 +147,8 @@
 		1DF75AC2296E09240055EA87 /* Button+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC1296E09240055EA87 /* Button+Helpers.swift */; };
 		1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC3296E0A940055EA87 /* View+Helpers.swift */; };
 		1DF75AC6296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */; };
+		26001BD82D6E5D1A009A8E23 /* libnatpmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BD72D6E5C8F009A8E23 /* libnatpmp.a */; };
+		26001BD92D6E5E40009A8E23 /* libnatpmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BD72D6E5C8F009A8E23 /* libnatpmp.a */; };
 		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
 		2607176E2CAC454E00494875 /* ComposeNewMessageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */; };
 		260717702CAD901D00494875 /* ConversationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176F2CAD901D00494875 /* ConversationDataSource.swift */; };
@@ -787,6 +789,7 @@
 		1DF75AC1296E09240055EA87 /* Button+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Helpers.swift"; sourceTree = "<group>"; };
 		1DF75AC3296E0A940055EA87 /* View+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Helpers.swift"; sourceTree = "<group>"; };
 		1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreParticipantsInSwarm.swift; sourceTree = "<group>"; };
+		26001BD72D6E5C8F009A8E23 /* libnatpmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnatpmp.a; path = ../fat/lib/libnatpmp.a; sourceTree = "<group>"; };
 		26069B6524C9FCE8002361A3 /* ObjCHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCHandler.h; sourceTree = "<group>"; };
 		26069B6624C9FCE8002361A3 /* ObjCHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCHandler.m; sourceTree = "<group>"; };
 		2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComposeNewMessageCoordinator.swift; path = Ring/Features/Conversations/ComposeNewMessageCoordinator.swift; sourceTree = SOURCE_ROOT; };
@@ -1205,6 +1208,7 @@
 				649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */,
 				269DA07428D0D366007D51D6 /* libspeexdsp.a in Frameworks */,
 				269DA06C28D0D366007D51D6 /* libpjsip-simple.a in Frameworks */,
+				26001BD92D6E5E40009A8E23 /* libnatpmp.a in Frameworks */,
 				6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */,
 				26CA4C5A2AB23CCF00AEF8F5 /* libixml.a in Frameworks */,
 				269DA05C28D0D366007D51D6 /* libgmp.a in Frameworks */,
@@ -1319,6 +1323,7 @@
 				26A88C7626700ABC00888EED /* libz.tbd in Frameworks */,
 				26C4845C2A796D87005BC767 /* libdhtnet.a in Frameworks */,
 				26A88C75267009EC00888EED /* CoreVideo.framework in Frameworks */,
+				26001BD82D6E5D1A009A8E23 /* libnatpmp.a in Frameworks */,
 				269DA08028D0D614007D51D6 /* libsecp256k1.a in Frameworks */,
 				269DA03B28D0D2E5007D51D6 /* libpjmedia-videodev.a in Frameworks */,
 				269DA04128D0D2E5007D51D6 /* libpjsua.a in Frameworks */,
@@ -1372,6 +1377,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26001BD72D6E5C8F009A8E23 /* libnatpmp.a */,
 				267B958D2C2AFEEA00353B01 /* libllhttp.a */,
 				26EB61382B7675FB00183FF4 /* Embassy.xcframework */,
 				26CA4C562AB23A9200AEF8F5 /* libxml2.2.tbd */,
