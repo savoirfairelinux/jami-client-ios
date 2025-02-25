@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc9b3712_a2e5f220",
+        "filename": "Ring/Ring/Calls/Conference/SwiftUI/Models/ParticipantViewModel.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-02-25T17:18:54Z",
+      "side": 1,
+      "message": "accessibilityLabelValue wrong and not translatable",
+      "revId": "d69844a9c41e70f6f2fec0f4c1408b049c50d84b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7526e771_0abae6ca",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 4
