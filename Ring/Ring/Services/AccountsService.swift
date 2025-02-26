@@ -49,6 +49,22 @@ enum MigrationState: String {
     case UNKOWN
 }
 
+enum AuthState: Int32 {
+    case initializing = 0
+    case tokenAvailable = 1
+    case connecting = 2
+    case authenticating = 3
+    case inProgress = 4
+    case done = 5
+}
+
+struct AuthResult {
+    let accountId: String
+    let operationId: UInt32
+    let state: AuthState
+    let details: [String: String]
+}
+
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class AccountsService: AccountAdapterDelegate {
@@ -106,6 +122,7 @@ class AccountsService: AccountAdapterDelegate {
 
     let currentAccountChanged = PublishSubject<AccountModel?>()
     let currentWillChange = PublishSubject<AccountModel?>()
+    let authStateSubject = PublishSubject<AuthResult>()
 
     /**
      Public shared stream forwarding the events of the responseStream.
@@ -631,6 +648,29 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    private func handleAuthStateChange(accountId: String, opId: UInt32, state: Int32, details: [String: String]) {
+        guard let authState = AuthState(rawValue: state) else { return }
+        let result = AuthResult(accountId: accountId,
+                                operationId: opId,
+                                state: authState,
+                                details: details)
+        authStateSubject.onNext(result)
+    }
+
+    func addDeviceStateChanged(accountId: String, opId: UInt32, state: Int32, details: [String: String]) {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            self.handleAuthStateChange(accountId: accountId, opId: opId, state: state, details: details)
+        }
+    }
+
+    func deviceAuthStateChanged(accountId: String, state: Int32, details: [String: String]) {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            self.handleAuthStateChange(accountId: accountId, opId: 0, state: state, details: details)
+        }
+    }
+
     // MARK: Push Notifications
 
     func setPushNotificationToken(token: String) {
@@ -880,6 +920,22 @@ extension AccountsService {
             })
         return accountDevices.concat(newDevice)
     }
+
+    func provideAccountAuthentication(accountId: String, password: String) {
+        self.accountAdapter.provideAccountAuthentication(accountId, password: password)
+    }
+
+    func addDevice(accountId: String, token: String) -> UInt32 {
+        return accountAdapter.addDevice(accountId, token: token)
+    }
+
+    func confirmAddDevice(accountId: String, operationId: UInt32) {
+        accountAdapter.confirmAddDevice(accountId, operationId: operationId)
+    }
+
+    func cancelAddDevice(accountId: String, operationId: UInt32) {
+        accountAdapter.cancelAddDevice(accountId, operationId: operationId)
+    }
 }
 
 // MARK: - account creation
@@ -1095,5 +1151,19 @@ extension AccountsService {
                 return !response.accountId.isEmpty ? response : nil
             }
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+    }
+
+    func createTemporaryAccount() async throws -> String {
+        var details = try getJamiInitialAccountDetails()
+        details.updateValue("jami-auth", forKey: ConfigKey.archiveURL.rawValue)
+
+        if let testServer = TestEnvironment.shared.nameServerURI {
+            details[ConfigKey.ringNsURI.rawValue] = testServer
+        }
+
+        guard let accountId = accountAdapter.addAccount(details) else {
+            throw AccountCreationError.unknown
+        }
+        return accountId
     }
 }

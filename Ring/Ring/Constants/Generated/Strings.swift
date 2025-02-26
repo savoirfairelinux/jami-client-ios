@@ -129,6 +129,10 @@ internal enum L10n {
     internal static let userPresenceOnline = L10n.tr("Localizable", "accessibility.userPresenceOnline", fallback: "Online")
     /// Welcome to Jami
     internal static let welcomeToJamiTitle = L10n.tr("Localizable", "accessibility.welcomeToJamiTitle", fallback: "Welcome to Jami")
+    internal enum Account {
+      /// Token QR code
+      internal static let tokenQRcode = L10n.tr("Localizable", "accessibility.account.tokenQRcode", fallback: "Token QR code")
+    }
     internal enum Call {
       /// Lasted %@
       internal static func lasted(_ p1: Any) -> String {
@@ -151,12 +155,12 @@ internal enum L10n {
         internal static let showDialpad = L10n.tr("Localizable", "accessibility.calls.alter.showDialpad", fallback: "Show dialpad")
         /// Switch camera
         internal static let switchCamera = L10n.tr("Localizable", "accessibility.calls.alter.switchCamera", fallback: "Switch camera")
-        /// Turn on microphone
-        internal static let toggleAudio = L10n.tr("Localizable", "accessibility.calls.alter.toggleAudio", fallback: "Turn on microphone")
+        /// Unmute microphone
+        internal static let toggleAudio = L10n.tr("Localizable", "accessibility.calls.alter.toggleAudio", fallback: "Unmute microphone")
         /// Turn off speaker
         internal static let toggleSpeaker = L10n.tr("Localizable", "accessibility.calls.alter.toggleSpeaker", fallback: "Turn off speaker")
-        /// Turn off camera
-        internal static let toggleVideo = L10n.tr("Localizable", "accessibility.calls.alter.toggleVideo", fallback: "Turn off camera")
+        /// Stop camera
+        internal static let toggleVideo = L10n.tr("Localizable", "accessibility.calls.alter.toggleVideo", fallback: "Stop camera")
       }
       internal enum Default {
         /// Add participant
@@ -173,12 +177,12 @@ internal enum L10n {
         internal static let showDialpad = L10n.tr("Localizable", "accessibility.calls.default.showDialpad", fallback: "Show dialpad")
         /// Switch camera
         internal static let switchCamera = L10n.tr("Localizable", "accessibility.calls.default.switchCamera", fallback: "Switch camera")
-        /// Turn off microphone
-        internal static let toggleAudio = L10n.tr("Localizable", "accessibility.calls.default.toggleAudio", fallback: "Turn off microphone")
+        /// Mute microphone
+        internal static let toggleAudio = L10n.tr("Localizable", "accessibility.calls.default.toggleAudio", fallback: "Mute microphone")
         /// Turn on speaker
         internal static let toggleSpeaker = L10n.tr("Localizable", "accessibility.calls.default.toggleSpeaker", fallback: "Turn on speaker")
-        /// Turn on camera
-        internal static let toggleVideo = L10n.tr("Localizable", "accessibility.calls.default.toggleVideo", fallback: "Turn on camera")
+        /// Start camera
+        internal static let toggleVideo = L10n.tr("Localizable", "accessibility.calls.default.toggleVideo", fallback: "Start camera")
       }
     }
     internal enum Conference {
@@ -838,6 +842,8 @@ internal enum L10n {
     internal static let cancel = L10n.tr("Localizable", "global.cancel", fallback: "Cancel")
     /// Close
     internal static let close = L10n.tr("Localizable", "global.close", fallback: "Close")
+    /// Confirm
+    internal static let confirm = L10n.tr("Localizable", "global.confirm", fallback: "Confirm")
     /// Confirm password
     internal static let confirmPassword = L10n.tr("Localizable", "global.confirmPassword", fallback: "Confirm password")
     /// Copy
@@ -928,6 +934,21 @@ internal enum L10n {
   internal enum LinkDevice {
     /// An error occurred while exporting the account.
     internal static let defaultError = L10n.tr("Localizable", "linkDevice.defaultError", fallback: "An error occurred while exporting the account.")
+    /// A network error occurred.
+    /// Please verify your connection.
+    internal static let errorNetwork = L10n.tr("Localizable", "linkDevice.errorNetwork", fallback: "A network error occurred.\nPlease verify your connection.")
+    /// The operation has timed out.
+    /// Please try again.
+    internal static let errorTimeout = L10n.tr("Localizable", "linkDevice.errorTimeout", fallback: "The operation has timed out.\nPlease try again.")
+    /// An error occurred while generating the token.
+    /// Please try again.
+    internal static let errorToken = L10n.tr("Localizable", "linkDevice.errorToken", fallback: "An error occurred while generating the token.\nPlease try again.")
+    /// An error occurred while exporting the account.n
+    /// Please try again.
+    internal static let errorWrongData = L10n.tr("Localizable", "linkDevice.errorWrongData", fallback: "An error occurred while exporting the account.n\nPlease try again.")
+    /// An authentication error occurred.
+    /// Please verify your password.
+    internal static let errorWrongPassword = L10n.tr("Localizable", "linkDevice.errorWrongPassword", fallback: "An authentication error occurred.\nPlease verify your password.")
     /// Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.
     internal static let explanationMessage = L10n.tr("Localizable", "linkDevice.explanationMessage", fallback: "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.")
     /// Verifying
@@ -940,10 +961,34 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "linkDevice.title", fallback: "Link new device")
   }
   internal enum LinkToAccount {
+    /// The account is protected with a password.
+    /// To continue, enter the account password.
+    internal static let accountLockedWithPassword = L10n.tr("Localizable", "linkToAccount.accountLockedWithPassword", fallback: "The account is protected with a password.\nTo continue, enter the account password.")
+    /// Action required.
+    /// Please confirm account on the source device.
+    internal static let actionRequired = L10n.tr("Localizable", "linkToAccount.actionRequired", fallback: "Action required.\nPlease confirm account on the source device.")
+    /// Exiting now will cancel the account importation process.
+    internal static let alertMessage = L10n.tr("Localizable", "linkToAccount.alertMessage", fallback: "Exiting now will cancel the account importation process.")
+    /// Are you sure you want to exit?
+    internal static let alertTile = L10n.tr("Localizable", "linkToAccount.alertTile", fallback: "Are you sure you want to exit?")
+    /// Account imported successfully on the new device.
+    internal static let allSet = L10n.tr("Localizable", "linkToAccount.allSet", fallback: "Account imported successfully on the new device.")
+    /// When ready, enter the authentication code.
+    internal static let enterProvidedCode = L10n.tr("Localizable", "linkToAccount.enterProvidedCode", fallback: "When ready, enter the authentication code.")
+    /// Exit
+    internal static let exit = L10n.tr("Localizable", "linkToAccount.exit", fallback: "Exit")
     /// A PIN code is required to use an existing Jami account on this device.
     internal static let explanationMessage = L10n.tr("Localizable", "linkToAccount.explanationMessage", fallback: "A PIN code is required to use an existing Jami account on this device.")
     /// To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.
     internal static let explanationPinMessage = L10n.tr("Localizable", "linkToAccount.explanationPinMessage", fallback: "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.")
+    /// On the source device, initiate the exportation.
+    internal static let exportInstructions = L10n.tr("Localizable", "linkToAccount.exportInstructions", fallback: "On the source device, initiate the exportation.")
+    /// Select Account > Account Settings > Link new device.
+    internal static let exportInstructionsPath = L10n.tr("Localizable", "linkToAccount.exportInstructionsPath", fallback: "Select Account > Account Settings > Link new device.")
+    /// Go to my new account
+    internal static let goToAccounts = L10n.tr("Localizable", "linkToAccount.goToAccounts", fallback: "Go to my new account")
+    /// Import account
+    internal static let importAccount = L10n.tr("Localizable", "linkToAccount.importAccount", fallback: "Import account")
     /// Link
     internal static let linkButtonTitle = L10n.tr("Localizable", "linkToAccount.linkButtonTitle", fallback: "Link")
     /// Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.
@@ -954,8 +999,18 @@ internal enum L10n {
     internal static let pinLabel = L10n.tr("Localizable", "linkToAccount.pinLabel", fallback: "Enter PIN code")
     /// PIN code
     internal static let pinPlaceholder = L10n.tr("Localizable", "linkToAccount.pinPlaceholder", fallback: "PIN code")
+    /// When ready, scan the QR Code.
+    internal static let scanQrCode = L10n.tr("Localizable", "linkToAccount.scanQrCode", fallback: "When ready, scan the QR Code.")
     /// Scan QR code
     internal static let scanQRCode = L10n.tr("Localizable", "linkToAccount.scanQRCode", fallback: "Scan QR code")
+    /// Your code is: %@
+    internal static func shareMessage(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "linkToAccount.shareMessage", String(describing: p1), fallback: "Your code is: %@")
+    }
+    /// Authentication code
+    internal static let showPinCode = L10n.tr("Localizable", "linkToAccount.showPinCode", fallback: "Authentication code")
+    /// QR code
+    internal static let showQrCode = L10n.tr("Localizable", "linkToAccount.showQrCode", fallback: "QR code")
     /// Account linking
     internal static let waitLinkToAccountTitle = L10n.tr("Localizable", "linkToAccount.waitLinkToAccountTitle", fallback: "Account linking")
   }

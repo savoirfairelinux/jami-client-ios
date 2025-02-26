@@ -96,9 +96,15 @@ struct ActivityViewController: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
 
-struct ShareButtonView: View {
-    let accountInfoToShare: String
+struct ShareButtonView<ButtonContent: View>: View {
+    let infoToShare: String
     @SwiftUI.State private var showShareView = false
+    let buttonContent: ButtonContent
+
+    init(infoToShare: String, @ViewBuilder content: () -> ButtonContent) {
+        self.infoToShare = infoToShare
+        self.buttonContent = content()
+    }
 
     var body: some View {
         VStack {
@@ -113,8 +119,8 @@ struct ShareButtonView: View {
     // ShareLink for iOS 16 and above
     @available(iOS 16.0, *)
     private var shareLinkButton: some View {
-        ShareLink(item: accountInfoToShare) {
-            shareView()
+        ShareLink(item: infoToShare) {
+            buttonContent
         }
     }
 
@@ -123,64 +129,76 @@ struct ShareButtonView: View {
         Button {
             showShareView = true
         } label: {
-            shareView()
+            buttonContent
         }
         .sheet(isPresented: $showShareView) {
-            ActivityViewController(activityItems: [accountInfoToShare])
-        }
-    }
-
-    func shareView() -> some View {
-        HStack {
-            Group {
-                Image(systemName: "envelope")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 18, height: 18)
-                    .padding(.trailing, 5)
-                Text(L10n.Smartlist.inviteFriends)
-            }
-            .foregroundColor(.jamiColor)
+            ActivityViewController(activityItems: [infoToShare])
         }
     }
 }
+
+// Default button style using AnyView
+extension ShareButtonView where ButtonContent == AnyView {
+    init(infoToShare: String) {
+        self.init(infoToShare: infoToShare) {
+            AnyView(
+                Label("Share", systemImage: "square.and.arrow.up.fill")
+                    .foregroundColor(.white)
+                    .padding(.horizontal)
+                    .padding(.vertical, 10)
+                    .background(Color.jamiColor)
+                    .cornerRadius(10)
+            )
+        }
+    }
+}
+
 struct QRCodeView: View {
-    @Binding var isPresented: Bool
     let jamiId: String
+    let accessibilityLabel: String
+    var size: CGFloat = 270
     @SwiftUI.State var image: UIImage?
 
     var body: some View {
-        NavigationView {
-            VStack {
-                Spacer()
-                    .frame(height: 20)
-                if let image = image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 270, height: 270)
-                        .cornerRadius(10)
-                        .padding()
-                        .accessibilityLabel(L10n.Accessibility.accountSummaryQrCode)
-                }
-                Spacer()
+        VStack {
+            if let image = image {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: size, height: size)
+                    .cornerRadius(10)
             }
-            .navigationBarItems(leading: Button(action: {
-                isPresented = false
-            }) {
-                Text(L10n.Global.cancel)
-                    .foregroundColor(.jamiColor)
-            })
-        }
-        .onTapGesture {
-            isPresented = false
+            Spacer()
         }
         .onAppear {
             image = jamiId.generateQRCode()
         }
+    }
+}
+
+struct QRCodePresenter: View {
+    @Binding var isPresented: Bool
+    let jamiId: String
+    let accessibilityLabel: String
+    @SwiftUI.State var image: UIImage?
+
+    var body: some View {
+        NavigationView {
+            QRCodeView(jamiId: jamiId, accessibilityLabel: accessibilityLabel)
+                .padding()
+                .padding(.top, 30)
+                .navigationBarItems(leading: Button(action: {
+                    isPresented = false
+                }) {
+                    Text(L10n.Global.cancel)
+                        .foregroundColor(.jamiColor)
+                })
+        }
+        .onTapGesture {
+            isPresented = false
+        }
         .optionalMediumPresentationDetents()
         .accessibilityAutoFocusOnAppear()
-
     }
 }
 

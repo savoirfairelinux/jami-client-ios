@@ -25,19 +25,30 @@ import SwiftUI
 
 /**
  Represents how a UIViewController should be displayed
-
- - show: the system adapts the presentation mecanism to fit the context (can be a push in case of a UINavigationViewController for instance)
- - present: simply presents the UIViewController
- - popup: presents the UIViewController as a modal popup with a .coverVertical transition
  */
 public enum PresentationStyle {
-    case show
-    case present
-    case overCurrentContext
-    case fadeInOverFullScreen
-    case popToRootAndPush
-    case formModal
+    /// Pushes a view controller onto the navigation stack.
     case push
+
+    /// Presents a view controller modally.
+    case present
+
+    /// Displays a view controller over the current context, keeping the background visible.
+    case overCurrentContext
+
+    /// Presents a view controller with a fade-in transition over the full screen.
+    case fadeInOverFullScreen
+
+    /// Pops the navigation stack to its root and then pushes a new view controller.
+    case popToRootAndPush
+
+    /// Presents a view controller modally in a form sheet style.
+    case formModal
+
+    /// Displays a view controller using the most appropriate method based on the context.
+    case show
+
+    /// Replaces the current navigation stack with a new stack containing the specified view controller.
     case replaceNavigationStack
 }
 
