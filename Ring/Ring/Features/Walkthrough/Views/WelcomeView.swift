@@ -62,7 +62,7 @@ struct WelcomeView: View, StateEmittingView {
                 cancelButton()
                 Spacer()
             }
-            .padding()
+            .padding(.horizontal)
         }
         .applyJamiBackground()
     }

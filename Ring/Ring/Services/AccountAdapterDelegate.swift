@@ -28,4 +28,6 @@ protocol AccountAdapterDelegate {
     func migrationEnded(for account: String, status: String)
     func accountDetailsChanged(accountId: String, details: [String: String])
     func accountVoaltileDetailsChanged(accountId: String, details: [String: String])
+    func addDeviceStateChanged(accountId: String, opId: UInt32, state: Int32, details: [String: String])
+    func deviceAuthStateChanged(accountId: String, state: Int32, details: [String: String])
 }
