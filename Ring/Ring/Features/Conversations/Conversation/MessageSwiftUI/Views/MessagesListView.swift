@@ -286,7 +286,7 @@ struct MessagesListView: View {
             Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
             VStack {
                 VStack {
-                    Text(model.name + " " + L10n.Conversation.notContactLabel)
+                    Text(L10n.Conversation.notContactLabel(model.name))
                         .frame(maxWidth: .infinity)
                         .multilineTextAlignment(.center)
                     Text(L10n.Conversation.addToContactsLabel)

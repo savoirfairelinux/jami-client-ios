@@ -31,14 +31,14 @@ internal enum L10n {
   internal enum Accessibility {
     /// About Jami
     internal static let aboutJamiTitle = L10n.tr("Localizable", "accessibility.aboutJamiTitle", fallback: "About Jami")
-    /// Double-tap to edit your profile
-    internal static let accountSummaryEditProfileHint = L10n.tr("Localizable", "accessibility.accountSummaryEditProfileHint", fallback: "Double-tap to edit your profile")
+    /// Double-tap to edit the profile
+    internal static let accountSummaryEditProfileHint = L10n.tr("Localizable", "accessibility.accountSummaryEditProfileHint", fallback: "Double-tap to edit the profile")
     /// Settings
     internal static let accountSummaryEditSettingsButton = L10n.tr("Localizable", "accessibility.accountSummaryEditSettingsButton", fallback: "Settings")
     /// QR Code
     internal static let accountSummaryQrCode = L10n.tr("Localizable", "accessibility.accountSummaryQrCode", fallback: "QR Code")
-    /// Double-tap to view your account QR code
-    internal static let accountSummaryQrCodeHint = L10n.tr("Localizable", "accessibility.accountSummaryQrCodeHint", fallback: "Double-tap to view your account QR code")
+    /// Double-tap to view the account QR code
+    internal static let accountSummaryQrCodeHint = L10n.tr("Localizable", "accessibility.accountSummaryQrCodeHint", fallback: "Double-tap to view the account QR code")
     /// Pause
     internal static let audioPlayerPause = L10n.tr("Localizable", "accessibility.audioPlayerPause", fallback: "Pause")
     /// Play
@@ -55,30 +55,30 @@ internal enum L10n {
     internal static func conversationRowLastMessage(_ p1: Any) -> String {
       return L10n.tr("Localizable", "accessibility.conversationRowLastMessage", String(describing: p1), fallback: "Last message on %@")
     }
-    /// Syncing in progress
-    internal static let conversationRowSyncing = L10n.tr("Localizable", "accessibility.conversationRowSyncing", fallback: "Syncing in progress")
-    /// %@ unread messages
+    /// Synchronization in progress
+    internal static let conversationRowSyncing = L10n.tr("Localizable", "accessibility.conversationRowSyncing", fallback: "Synchronization in progress")
+    /// %@ unread messages.
     internal static func conversationRowUnreadCount(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "accessibility.conversationRowUnreadCount", String(describing: p1), fallback: "%@ unread messages")
+      return L10n.tr("Localizable", "accessibility.conversationRowUnreadCount", String(describing: p1), fallback: "%@ unread messages.")
     }
     /// Share media
     internal static let conversationShareMedia = L10n.tr("Localizable", "accessibility.conversationShareMedia", fallback: "Share media")
-    /// Start a video call with %@
+    /// Start video call with %@
     internal static func conversationStartVideoCall(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "accessibility.conversationStartVideoCall", String(describing: p1), fallback: "Start a video call with %@")
+      return L10n.tr("Localizable", "accessibility.conversationStartVideoCall", String(describing: p1), fallback: "Start video call with %@")
     }
-    /// Start a voice call with %@
+    /// Start audio call with %@
     internal static func conversationStartVoiceCall(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "accessibility.conversationStartVoiceCall", String(describing: p1), fallback: "Start a voice call with %@")
+      return L10n.tr("Localizable", "accessibility.conversationStartVoiceCall", String(describing: p1), fallback: "Start audio call with %@")
     }
-    /// Enter a username to verify if it's available
-    internal static let createAccountVerifyUsernamePrompt = L10n.tr("Localizable", "accessibility.createAccountVerifyUsernamePrompt", fallback: "Enter a username to verify if it's available")
+    /// Enter username to check availability.
+    internal static let createAccountVerifyUsernamePrompt = L10n.tr("Localizable", "accessibility.createAccountVerifyUsernamePrompt", fallback: "Enter username to check availability.")
     /// File received on %@, name not available.
     internal static func fileTransferNoName(_ p1: Any) -> String {
       return L10n.tr("Localizable", "accessibility.fileTransferNoName", String(describing: p1), fallback: "File received on %@, name not available.")
     }
-    /// In reply to a message
-    internal static let inReply = L10n.tr("Localizable", "accessibility.inReply", fallback: "In reply to a message")
+    /// In reply to message
+    internal static let inReply = L10n.tr("Localizable", "accessibility.inReply", fallback: "In reply to message")
     /// Message deleted
     internal static let messageBubbleDeleted = L10n.tr("Localizable", "accessibility.messageBubbleDeleted", fallback: "Message deleted")
     /// Edited
@@ -91,8 +91,8 @@ internal enum L10n {
     internal static let pendingRequestsListAcceptInvitation = L10n.tr("Localizable", "accessibility.pendingRequestsListAcceptInvitation", fallback: "Accept invitation")
     /// Block invitation sender
     internal static let pendingRequestsListBlockUser = L10n.tr("Localizable", "accessibility.pendingRequestsListBlockUser", fallback: "Block invitation sender")
-    /// Reject invitation
-    internal static let pendingRequestsListRejectInvitation = L10n.tr("Localizable", "accessibility.pendingRequestsListRejectInvitation", fallback: "Reject invitation")
+    /// Decline invitation
+    internal static let pendingRequestsListRejectInvitation = L10n.tr("Localizable", "accessibility.pendingRequestsListRejectInvitation", fallback: "Decline invitation")
     /// Invitation received: %@ pending invitation
     internal static func pendingRequestsRow(_ p1: Any) -> String {
       return L10n.tr("Localizable", "accessibility.pendingRequestsRow", String(describing: p1), fallback: "Invitation received: %@ pending invitation")
@@ -105,9 +105,9 @@ internal enum L10n {
     internal static let profilePicturePickerHint = L10n.tr("Localizable", "accessibility.profilePicturePickerHint", fallback: "Double-tap to take a picture or select a picture from the library")
     /// Add account
     internal static let smartListAddAccount = L10n.tr("Localizable", "accessibility.smartListAddAccount", fallback: "Add account")
-    /// Your current account is %@
+    /// The current account is %@
     internal static func smartListConnectedAs(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "accessibility.smartListConnectedAs", String(describing: p1), fallback: "Your current account is %@")
+      return L10n.tr("Localizable", "accessibility.smartListConnectedAs", String(describing: p1), fallback: "The current account is %@")
     }
     /// Switch account
     internal static let smartListSwitchAccounts = L10n.tr("Localizable", "accessibility.smartListSwitchAccounts", fallback: "Switch account")
@@ -405,8 +405,8 @@ internal enum L10n {
     internal static let registerNameErrorMessage = L10n.tr("Localizable", "accountPage.registerNameErrorMessage", fallback: "The username is unavailable.")
     /// Register a username to help others more easily find and reach you on Jami.
     internal static let registerNameExplanation = L10n.tr("Localizable", "accountPage.registerNameExplanation", fallback: "Register a username to help others more easily find and reach you on Jami.")
-    /// If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.
-    internal static let removeAccountMessage = L10n.tr("Localizable", "accountPage.removeAccountMessage", fallback: "If your account has not been backed up or added to another device, your account and registered name will be irrevocably lost.")
+    /// If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.
+    internal static let removeAccountMessage = L10n.tr("Localizable", "accountPage.removeAccountMessage", fallback: "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.")
     /// Remove device
     internal static let removeDeviceTitle = L10n.tr("Localizable", "accountPage.removeDeviceTitle", fallback: "Remove device")
     /// Revoke
@@ -627,8 +627,10 @@ internal enum L10n {
     internal static let inReplyTo = L10n.tr("Localizable", "conversation.inReplyTo", fallback: "In reply to")
     /// Write to
     internal static let messagePlaceholder = L10n.tr("Localizable", "conversation.messagePlaceholder", fallback: "Write to")
-    /// is not in your contact list
-    internal static let notContactLabel = L10n.tr("Localizable", "conversation.notContactLabel", fallback: "is not in your contact list")
+    /// %@ is not in the contact list
+    internal static func notContactLabel(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "conversation.notContactLabel", String(describing: p1), fallback: "%@ is not in the contact list")
+    }
     /// %@ sent you a conversation invitation.
     internal static func receivedRequest(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.receivedRequest", String(describing: p1), fallback: "%@ sent you a conversation invitation.")
@@ -668,16 +670,16 @@ internal enum L10n {
     internal static let encryptionEnabled = L10n.tr("Localizable", "createAccount.encryptionEnabled", fallback: "Encryption enabled")
     /// Encrypt account with password
     internal static let encryptTitle = L10n.tr("Localizable", "createAccount.encryptTitle", fallback: "Encrypt account with password")
-    /// Invalid username. Please enter a valid username.
-    internal static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername", fallback: "Invalid username. Please enter a valid username.")
-    /// Looking for availability…
-    internal static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability", fallback: "Looking for availability…")
+    /// Invalid username. Please enter the correct username.
+    internal static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername", fallback: "Invalid username. Please enter the correct username.")
+    /// Checking username availability…
+    internal static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability", fallback: "Checking username availability…")
     /// You can choose a username to help others more easily find and reach you on Jami.
     internal static let nameExplanation = L10n.tr("Localizable", "createAccount.nameExplanation", fallback: "You can choose a username to help others more easily find and reach you on Jami.")
     /// New account
     internal static let newAccount = L10n.tr("Localizable", "createAccount.newAccount", fallback: "New account")
-    /// Configure an existing SIP account
-    internal static let sipConfigure = L10n.tr("Localizable", "createAccount.sipConfigure", fallback: "Configure an existing SIP account")
+    /// Configure existing SIP account
+    internal static let sipConfigure = L10n.tr("Localizable", "createAccount.sipConfigure", fallback: "Configure existing SIP account")
     /// Username registration is in progress. Please wait…
     internal static let timeoutMessage = L10n.tr("Localizable", "createAccount.timeoutMessage", fallback: "Username registration is in progress. Please wait…")
     /// Account Created
@@ -1018,14 +1020,14 @@ internal enum L10n {
     internal static let accountsTitle = L10n.tr("Localizable", "smartlist.accountsTitle", fallback: "Accounts")
     /// + Add account
     internal static let addAccountButton = L10n.tr("Localizable", "smartlist.addAccountButton", fallback: "+ Add account")
-    /// Be sure cellular access is granted in your settings
-    internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess", fallback: "Be sure cellular access is granted in your settings")
+    /// Ensure cellular access is granted in the settings.
+    internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess", fallback: "Ensure cellular access is granted in the settings.")
     /// Conversations
     internal static let conversations = L10n.tr("Localizable", "smartlist.conversations", fallback: "Conversations")
     /// Not now
     internal static let disableDonation = L10n.tr("Localizable", "smartlist.disableDonation", fallback: "Not now")
-    /// If you enjoy using Jami and believe in our mission, would you make a donation?
-    internal static let donationExplanation = L10n.tr("Localizable", "smartlist.donationExplanation", fallback: "If you enjoy using Jami and believe in our mission, would you make a donation?")
+    /// If you enjoy using Jami and believe in our mission, do you want to make a donation?
+    internal static let donationExplanation = L10n.tr("Localizable", "smartlist.donationExplanation", fallback: "If you enjoy using Jami and believe in our mission, do you want to make a donation?")
     /// conversation in synchronization
     internal static let inSynchronization = L10n.tr("Localizable", "smartlist.inSynchronization", fallback: "conversation in synchronization")
     /// Invitations received
@@ -1044,8 +1046,8 @@ internal enum L10n {
     internal static let newMessage = L10n.tr("Localizable", "smartlist.newMessage", fallback: "New message")
     /// No conversations
     internal static let noConversation = L10n.tr("Localizable", "smartlist.noConversation", fallback: "No conversations")
-    /// No conversations match your search
-    internal static let noConversationsFound = L10n.tr("Localizable", "smartlist.noConversationsFound", fallback: "No conversations match your search")
+    /// No conversations match the search.
+    internal static let noConversationsFound = L10n.tr("Localizable", "smartlist.noConversationsFound", fallback: "No conversations match the search.")
     /// No network connectivity
     internal static let noNetworkConnectivity = L10n.tr("Localizable", "smartlist.noNetworkConnectivity", fallback: "No network connectivity")
     /// Selected contact does not have any number
@@ -1130,8 +1132,8 @@ internal enum L10n {
   internal enum Welcome {
     /// Connect to Jami Account Management Server (JAMS)
     internal static let connectToJAMS = L10n.tr("Localizable", "welcome.connectToJAMS", fallback: "Connect to Jami Account Management Server (JAMS)")
-    /// Join
-    internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount", fallback: "Join")
+    /// Create Jami account
+    internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount", fallback: "Create Jami account")
     /// I already have an account
     internal static let haveAccount = L10n.tr("Localizable", "welcome.haveAccount", fallback: "I already have an account")
     /// Import from archive backup
