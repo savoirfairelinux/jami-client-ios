@@ -26,7 +26,7 @@ import SwiftUI
 /// Represents walkthrough navigation state
 public enum WalkthroughState: State {
     case accountCreation(createAction: (String, String, String, UIImage?) -> Void)
-    case linkDevice(linkAction: (_ pin: String, _ password: String) -> Void)
+    case linkDevice(linkAction: () -> Void)
     case importArchive(importAction: (_ url: URL, _ password: String) -> Void)
     case connectJAMS(connectAction: (_ username: String, _ password: String, _ server: String) -> Void)
     case connectSIP(connectAction: (_ username: String, _ password: String, _ server: String) -> Void)
@@ -76,6 +76,7 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
                 }
             })
             .disposed(by: self.disposeBag)
+        self.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
     }
 
     func showAccountCreation(createAction: @escaping (String, String, String, UIImage?) -> Void) {
@@ -84,10 +85,10 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
         self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
     }
 
-    func showLinkDevice(linkAction: @escaping (_ pin: String, _ password: String) -> Void) {
+    func showLinkDevice(linkAction: @escaping () -> Void) {
         let accountView = LinkToAccountView(injectionBag: self.injectionBag, linkAction: linkAction)
         let viewController = createDismissableVC(accountView, dismissible: accountView.dismissHandler)
-        self.present(viewController: viewController, withStyle: .formModal, withAnimation: true, disposeBag: self.disposeBag)
+        self.present(viewController: viewController, withStyle: .push, withAnimation: true, disposeBag: self.disposeBag)
     }
 
     func showImportArchive(importAction: @escaping (_ url: URL, _ password: String) -> Void) {

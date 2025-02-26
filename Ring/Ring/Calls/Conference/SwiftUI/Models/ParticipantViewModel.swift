@@ -241,11 +241,11 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .setModerator:
             let button = self.isModerator ? ButtonInfo(background: .clear, stroke: .clear, name: "crown", accessibilityLabelValue: L10n.Accessibility.Conference.unsetModerator, action: ParticipantAction.setModerator(info: info)) :
-            ButtonInfo(background: .clear, stroke: .clear, name: "crown.fill", accessibilityLabelValue: L10n.Accessibility.Conference.setModerator, action: ParticipantAction.setModerator(info: info))
+                ButtonInfo(background: .clear, stroke: .clear, name: "crown.fill", accessibilityLabelValue: L10n.Accessibility.Conference.setModerator, action: ParticipantAction.setModerator(info: info))
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .muteAudio:
             var button = self.audioMuted ? ButtonInfo(background: .clear, stroke: .clear, name: "mic.slash", accessibilityLabelValue: L10n.Accessibility.Conference.unmuteAudio, action: ParticipantAction.muteAudio(info: info)) :
-            ButtonInfo(background: .clear, stroke: .clear, name: "mic", accessibilityLabelValue: L10n.Accessibility.Conference.muteAudio, action: ParticipantAction.muteAudio(info: info))
+                ButtonInfo(background: .clear, stroke: .clear, name: "mic", accessibilityLabelValue: L10n.Accessibility.Conference.muteAudio, action: ParticipantAction.muteAudio(info: info))
             button.imageColor = self.audioMuted ? .red : .white
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .hangup:
@@ -253,7 +253,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .lowerHand:
             let button =
-            ButtonInfo(background: .clear, stroke: .clear, name: "hand.raised", accessibilityLabelValue: L10n.Accessibility.Conference.lowerHand, action: ParticipantAction.raseHand(info: info))
+                ButtonInfo(background: .clear, stroke: .clear, name: "hand.raised", accessibilityLabelValue: L10n.Accessibility.Conference.lowerHand, action: ParticipantAction.raseHand(info: info))
             conferenceActions.append(ButtonInfoWrapper(info: button))
         }
     }
