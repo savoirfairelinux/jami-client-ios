@@ -100,7 +100,7 @@
 "smartlist.results" = "公開目錄";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "對話";
-"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
 "smartlist.accounts" = "帳號";
@@ -110,7 +110,7 @@
 "smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "搜尋";
 "smartlist.noNetworkConnectivity" = "沒有網路連接";
-"smartlist.cellularAccess" = "確定在您的設定中已授權使用行動通訊";
+"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
 "smartlist.accountsTitle" = "帳號";
 "smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "選定的連絡人沒有任何號碼";
@@ -127,7 +127,7 @@
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
 "conversation.addToContactsLabel" = "新增到聯絡人？";
-"conversation.notContactLabel" = "is not in your contact list";
+"conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
@@ -159,7 +159,7 @@
 "welcome.haveAccount" = "我已经有一个账户";
 "welcome.linkDevice" = "從其他裝置匯入";
 "welcome.linkBackup" = "從封存備份匯入";
-"welcome.createAccount" = "加入";
+"welcome.createAccount" = "Create Jami account";
 "welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
@@ -173,15 +173,15 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "加入 Jami";
-"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
-"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
+"createAccount.lookingForUsernameAvailability" = "检查用户名是否可用...";
+"createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
 "createAccount.usernameAlreadyTaken" = "已取得的使用者名稱";
 "createAccount.usernameValid" = "用户名可用。";
 "createAccount.UsernameNotRegisteredTitle" = "網路錯誤";
 "createAccount.UsernameNotRegisteredMessage" = "帳號已建立，但未註冊使用者名稱";
 "createAccount.timeoutTitle" = "已建立帳號";
 "createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "設定既有的 SIP 帳號";
+"createAccount.sipConfigure" = "Configure existing SIP account";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "您可以选择一个用户名,以帮助其他人更容易地找到和联系您在Jami.";
 "createAccount.newAccount" = "新增帳號";
@@ -196,7 +196,7 @@
 "linkToAccount.linkButtonTitle" = "連結";
 "linkToAccount.linkDeviceTitle" = "連結裝置";
 "linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
-"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
+"linkToAccount.explanationMessage" = "使用此设备上的现有Jami帐户需要PIN码。";
 "linkToAccount.pinPlaceholder" = "PIN code";
 "linkToAccount.pinLabel" = "输入PIN码";
 "linkToAccount.scanQRCode" = "扫描 QR 码";
@@ -301,7 +301,7 @@
 "accountPage.deviceRevocationError" = "裝置撤銷錯誤";
 "accountPage.linkDeviceTitle" = "連結其他裝置";
 "accountPage.other" = "其他";
-"accountPage.removeAccountMessage" = "如果您的帳號未備份，或是新增至其他裝置，您的帳號與已註冊的名稱將會不可逆地遺失。";
+"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "在 Jami 上聯絡我";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
@@ -454,7 +454,7 @@
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@被邀请加入对话。";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
-"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.youJoined" = "您加入了对话。";
 "generatedMessage.contactBlocked" = "%@被阻止参与对话。";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "撥出電話";
@@ -508,36 +508,36 @@
 // Accessibility
 "accessibility.close" = "關閉";
 "accessibility.smartListSwitchAccounts" = "Switch account";
-"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListConnectedAs" = "The current account is %@";
 "accessibility.smartListAddAccount" = "加入帳號";
 "accessibility.aboutJamiTitle" = "關於 Jami";
 "accessibility.welcomeToJamiTitle" = "歡迎來到 Jami";
-"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter username to check availability.";
 "accessibility.profilePicturePicker" = "个人资料图片";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
 "accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "QR Code";
-"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
-"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";
 "accessibility.accountSummaryEditSettingsButton" = "設定";
-"accessibility.conversationStartVoiceCall" = "Start a voice call with %@";
-"accessibility.conversationStartVideoCall" = "Start a video call with %@";
+"accessibility.conversationStartVoiceCall" = "Start audio call with %@";
+"accessibility.conversationStartVideoCall" = "Start video call with %@";
 "accessibility.conversationComposeMessage" = "Compose a message";
 "accessibility.conversationShareMedia" = "Share media";
 "accessibility.conversationCameraHint" = "Double-tap to open camera";
 "accessibility.audioPlayerPlay" = "播放";
 "accessibility.audioPlayerPause" = "暫停";
-"accessibility.conversationRowUnreadCount" = "%@ unread messages";
+"accessibility.conversationRowUnreadCount" = "%@ unread messages.";
 "accessibility.conversationRowBlocked" = "Conversation blocked";
-"accessibility.conversationRowSyncing" = "Syncing in progress";
+"accessibility.conversationRowSyncing" = "Synchronization in progress";
 "accessibility.conversationRowLastMessage" = "Last message on %@";
 "accessibility.userPresenceOnline" = "線上";
 "accessibility.userPresenceAvailable" = "可获得的";
 "accessibility.pendingRequestsRow" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Reject invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
 "accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "已编辑";
@@ -545,9 +545,39 @@
 "accessibility.messageBubbleUnread" = "Unread";
 "accessibility.textNotAvailable" = "Text message received on %@, content not available";
 "accessibility.fileTransferNoName" = "File received on %@, name not available";
-"accessibility.inReply" = "In reply to a message";
+"accessibility.inReply" = "In reply to message";
 "accessibility.text.receivedOn" = "%@, message received on %@";
 "accessibility.text.sentOn" = "%@, message sent on %@";
 "accessibility.fileTransfer.receivedOn" = "File: %@ , received on %@";
 "accessibility.fileTransfer.sentOn" = "File: %@, sent on %@";
 "accessibility.call.lasted" = "Lasted";
+"accessibility.fileTransferNoName" = "File received on %@, name not available";
+"accessibility.calls.default.toggleAudio" = "Turn off microphone";
+"accessibility.calls.default.toggleVideo" = "Turn on camera";
+"accessibility.calls.default.pauseCall" = "Pause call";
+"accessibility.calls.default.hangUpCall" = "Hang up";
+"accessibility.calls.default.addParticipant" = "新增參與者";
+"accessibility.calls.default.switchCamera" = "Switch camera";
+"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.openConversation" = "Open conversation";
+"accessibility.calls.default.showDialpad" = "Show dialpad";
+"accessibility.calls.default.raiseHand" = "舉手";
+
+"accessibility.calls.alter.toggleAudio" = "Turn on microphone";
+"accessibility.calls.alter.toggleVideo" = "Turn off camera";
+"accessibility.calls.alter.pauseCall" = "恢復通話";
+"accessibility.calls.alter.hangUpCall" = "Hang up";
+"accessibility.calls.alter.addParticipant" = "新增參與者";
+"accessibility.calls.alter.switchCamera" = "Switch camera";
+"accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
+"accessibility.calls.alter.openConversation" = "開啟對話";
+"accessibility.calls.alter.showDialpad" = "Show dialpad";
+"accessibility.calls.alter.raiseHand" = "放下手";
+"accessibility.conference.minimize" = "最小化";
+"accessibility.conference.maximize" = "Maximize";
+"accessibility.conference.setModerator" = "Set moderator";
+"accessibility.conference.unsetModerator" = "Unset moderator";
+"accessibility.conference.muteAudio" = "靜音";
+"accessibility.conference.unmuteAudio" = "取消靜音";
+"accessibility.conference.hangup" = "Hang up";
+"accessibility.conference.lowerHand" = "放下手";

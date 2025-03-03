@@ -100,7 +100,7 @@
 "smartlist.results" = "Јавни именик";
 "smartlist.jamsResults" = "Rezultat pretrage";
 "smartlist.conversations" = "Разговори";
-"smartlist.noConversationsFound" = "Nijedna prepiska ne odgovara vašoj pretrazi";
+"smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "Novi kontakt";
 "smartlist.newGroup" = "Nova grupa";
 "smartlist.accounts" = "Налози";
@@ -110,7 +110,7 @@
 "smartlist.searchBarPlaceholder" = "Unesite ime…";
 "smartlist.searchBar" = "Претрага";
 "smartlist.noNetworkConnectivity" = "Nema internet konekcije";
-"smartlist.cellularAccess" = "Уверите се да је доступ на мобилном у вашем подесувању";
+"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
 "smartlist.accountsTitle" = "Налози";
 "smartlist.addAccountButton" = "+ Dodaj nalog";
 "smartlist.noNumber" = "Избрани контакт нема никакав број";
@@ -120,14 +120,14 @@
 "smartlist.inviteFriends" = "Позови пријатеље";
 "smartlist.accounts" = "Налози";
 "smartlist.disableDonation" = "Не сада";
-"smartlist.donationExplanation" = "Ако уживате у коришћењу Јамија и верујете у нашу мисију, да ли бисте дали донацију?";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "razgovor u sinhronizaciji";
 "smartlist.newMessage" = "Nova poruka";
 
 // Conversation
 "conversation.addToContactsButton" = "Додај у контакте";
 "conversation.addToContactsLabel" = "Додај у контакте?";
-"conversation.notContactLabel" = "није у твојој контакт листи";
+"conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Pišite";
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "Dobili ste pozivnicu za razgovor od %@.";
@@ -159,7 +159,7 @@
 "welcome.haveAccount" = "Већ имам налог";
 "welcome.linkDevice" = "Увоз из другог уређаја";
 "welcome.linkBackup" = "Импорт из архивног резервног копија";
-"welcome.createAccount" = "Join";
+"welcome.createAccount" = "Create Jami account";
 "welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
@@ -173,15 +173,15 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Придружи се Јамију";
-"createAccount.lookingForUsernameAvailability" = "Looking for availability…";
-"createAccount.invalidUsername" = "Invalid username. Please enter a valid username.";
+"createAccount.lookingForUsernameAvailability" = "Checking username availability…";
+"createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
 "createAccount.usernameAlreadyTaken" = "Корисничко име је већ заузето";
 "createAccount.usernameValid" = "The username is available.";
 "createAccount.UsernameNotRegisteredTitle" = "Мрежна грешка";
 "createAccount.UsernameNotRegisteredMessage" = "Налог је креиран, али корисничко име није регистровано";
 "createAccount.timeoutTitle" = "Налог је направљен";
 "createAccount.timeoutMessage" = "Registracija korisničkog imena je u toku. Molimo sačekajte…";
-"createAccount.sipConfigure" = "Конфигурирање постојећег СИП рачуна";
+"createAccount.sipConfigure" = "Configure existing SIP account";
 "createAccount.creatingAccount" = "Kreiranje naloga";
 "createAccount.nameExplanation" = "Можете изабрати корисничко име да бисте помогли другима да вас лакше пронађу и дођу до вас на Џами.";
 "createAccount.newAccount" = "Novi nalog";
@@ -301,7 +301,7 @@
 "accountPage.deviceRevocationError" = "Грешка повлачења уређаја";
 "accountPage.linkDeviceTitle" = "Сврнути још један уређај";
 "accountPage.other" = "Други";
-"accountPage.removeAccountMessage" = "Ако ваш рачун није био резервни или додатан на друго уређај, ваш рачун и регистровано име ће се неповратно изгубити.";
+"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
 "accountPage.inviteFriends" = "Позови пријатеље";
 "accountPage.contactMeOnJamiTitle" = "Контактирај ме на Џами!";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
@@ -508,36 +508,36 @@
 // Accessibility
 "accessibility.close" = "Затвори";
 "accessibility.smartListSwitchAccounts" = "Switch account";
-"accessibility.smartListConnectedAs" = "Your current account is %@";
+"accessibility.smartListConnectedAs" = "The current account is %@";
 "accessibility.smartListAddAccount" = "Додај налог";
 "accessibility.aboutJamiTitle" = "О Јамију";
 "accessibility.welcomeToJamiTitle" = "Добродошли у Јами";
-"accessibility.createAccountVerifyUsernamePrompt" = "Enter a username to verify if it's available";
+"accessibility.createAccountVerifyUsernamePrompt" = "Enter username to check availability.";
 "accessibility.profilePicturePicker" = "Фотографија профила";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
 "accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "QR код";
-"accessibility.accountSummaryQrCodeHint" = "Double-tap to view your account QR code";
-"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit your profile";
+"accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
+"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";
 "accessibility.accountSummaryEditSettingsButton" = "Подешавања";
-"accessibility.conversationStartVoiceCall" = "Start a voice call with %@";
-"accessibility.conversationStartVideoCall" = "Start a video call with %@";
+"accessibility.conversationStartVoiceCall" = "Start audio call with %@";
+"accessibility.conversationStartVideoCall" = "Start video call with %@";
 "accessibility.conversationComposeMessage" = "Compose a message";
 "accessibility.conversationShareMedia" = "Share media";
 "accessibility.conversationCameraHint" = "Double-tap to open camera";
 "accessibility.audioPlayerPlay" = "Пусти";
 "accessibility.audioPlayerPause" = "Паузирај";
-"accessibility.conversationRowUnreadCount" = "%@ unread messages";
+"accessibility.conversationRowUnreadCount" = "%@ unread messages.";
 "accessibility.conversationRowBlocked" = "Conversation blocked";
-"accessibility.conversationRowSyncing" = "Syncing in progress";
+"accessibility.conversationRowSyncing" = "Synchronization in progress";
 "accessibility.conversationRowLastMessage" = "Last message on %@";
 "accessibility.userPresenceOnline" = "На мрежи";
 "accessibility.userPresenceAvailable" = "Dostupno";
 "accessibility.pendingRequestsRow" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Reject invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
 "accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "Редактирана";
@@ -545,9 +545,39 @@
 "accessibility.messageBubbleUnread" = "Unread";
 "accessibility.textNotAvailable" = "Text message received on %@, content not available";
 "accessibility.fileTransferNoName" = "File received on %@, name not available";
-"accessibility.inReply" = "In reply to a message";
+"accessibility.inReply" = "In reply to message";
 "accessibility.text.receivedOn" = "%@, message received on %@";
 "accessibility.text.sentOn" = "%@, message sent on %@";
 "accessibility.fileTransfer.receivedOn" = "File: %@ , received on %@";
 "accessibility.fileTransfer.sentOn" = "File: %@, sent on %@";
 "accessibility.call.lasted" = "Lasted";
+"accessibility.fileTransferNoName" = "File received on %@, name not available";
+"accessibility.calls.default.toggleAudio" = "Turn off microphone";
+"accessibility.calls.default.toggleVideo" = "Turn on camera";
+"accessibility.calls.default.pauseCall" = "Pause call";
+"accessibility.calls.default.hangUpCall" = "Hang up";
+"accessibility.calls.default.addParticipant" = "Додајте учесника";
+"accessibility.calls.default.switchCamera" = "Switch camera";
+"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.openConversation" = "Open conversation";
+"accessibility.calls.default.showDialpad" = "Show dialpad";
+"accessibility.calls.default.raiseHand" = "Подигни руку";
+
+"accessibility.calls.alter.toggleAudio" = "Turn on microphone";
+"accessibility.calls.alter.toggleVideo" = "Turn off camera";
+"accessibility.calls.alter.pauseCall" = "Пронављање позива";
+"accessibility.calls.alter.hangUpCall" = "Hang up";
+"accessibility.calls.alter.addParticipant" = "Додајте учесника";
+"accessibility.calls.alter.switchCamera" = "Switch camera";
+"accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
+"accessibility.calls.alter.openConversation" = "Open conversation";
+"accessibility.calls.alter.showDialpad" = "Show dialpad";
+"accessibility.calls.alter.raiseHand" = "Ниже руке";
+"accessibility.conference.minimize" = "Minimize";
+"accessibility.conference.maximize" = "Maximize";
+"accessibility.conference.setModerator" = "Set moderator";
+"accessibility.conference.unsetModerator" = "Unset moderator";
+"accessibility.conference.muteAudio" = "Уморан аудио";
+"accessibility.conference.unmuteAudio" = "Неуглашен аудио";
+"accessibility.conference.hangup" = "Hang up";
+"accessibility.conference.lowerHand" = "Ниже руке";
