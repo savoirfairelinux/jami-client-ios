@@ -408,7 +408,14 @@ public class MessageModel {
                     : L10n.Accessibility.Text.sentOn(self.content, timestamp))
 
         case .call:
-            self.accessibilityLabelValue = self.content.replacingOccurrences(of: " - ", with: "." + L10n.Accessibility.Call.lasted + " ")
+            if self.content.contains(" - ") {
+                let components = self.content.components(separatedBy: " - ")
+                let callType = components[0]
+                let duration = components[1]
+                self.accessibilityLabelValue = callType + "." + L10n.Accessibility.Call.lasted(duration)
+            } else {
+                self.accessibilityLabelValue = self.content
+            }
 
         case .fileTransfer:
             self.accessibilityLabelValue = self.content.isEmpty
