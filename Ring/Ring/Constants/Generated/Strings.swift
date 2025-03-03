@@ -51,9 +51,9 @@ internal enum L10n {
     internal static let conversationComposeMessage = L10n.tr("Localizable", "accessibility.conversationComposeMessage", fallback: "Compose a message")
     /// Conversation blocked
     internal static let conversationRowBlocked = L10n.tr("Localizable", "accessibility.conversationRowBlocked", fallback: "Conversation blocked")
-    /// Last message on %@
+    /// Last message at %@
     internal static func conversationRowLastMessage(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "accessibility.conversationRowLastMessage", String(describing: p1), fallback: "Last message on %@")
+      return L10n.tr("Localizable", "accessibility.conversationRowLastMessage", String(describing: p1), fallback: "Last message at %@")
     }
     /// Synchronization in progress
     internal static let conversationRowSyncing = L10n.tr("Localizable", "accessibility.conversationRowSyncing", fallback: "Synchronization in progress")
@@ -73,9 +73,9 @@ internal enum L10n {
     }
     /// Enter username to check availability.
     internal static let createAccountVerifyUsernamePrompt = L10n.tr("Localizable", "accessibility.createAccountVerifyUsernamePrompt", fallback: "Enter username to check availability.")
-    /// File received on %@, name not available.
+    /// File received on %@, name not available
     internal static func fileTransferNoName(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "accessibility.fileTransferNoName", String(describing: p1), fallback: "File received on %@, name not available.")
+      return L10n.tr("Localizable", "accessibility.fileTransferNoName", String(describing: p1), fallback: "File received on %@, name not available")
     }
     /// In reply to message
     internal static let inReply = L10n.tr("Localizable", "accessibility.inReply", fallback: "In reply to message")
@@ -93,12 +93,16 @@ internal enum L10n {
     internal static let pendingRequestsListBlockUser = L10n.tr("Localizable", "accessibility.pendingRequestsListBlockUser", fallback: "Block invitation sender")
     /// Decline invitation
     internal static let pendingRequestsListRejectInvitation = L10n.tr("Localizable", "accessibility.pendingRequestsListRejectInvitation", fallback: "Decline invitation")
-    /// Invitation received: %@ pending invitation
-    internal static func pendingRequestsRow(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "accessibility.pendingRequestsRow", String(describing: p1), fallback: "Invitation received: %@ pending invitation")
-    }
     /// Double-tap to review and reply to invitations you received
     internal static let pendingRequestsRowHint = L10n.tr("Localizable", "accessibility.pendingRequestsRowHint", fallback: "Double-tap to review and reply to invitations you received")
+    /// Invitations received: %@ pending invitations
+    internal static func pendingRequestsRowPlural(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.pendingRequestsRowPlural", String(describing: p1), fallback: "Invitations received: %@ pending invitations")
+    }
+    /// Invitation received: %@ pending invitation
+    internal static func pendingRequestsRowSingular(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "accessibility.pendingRequestsRowSingular", String(describing: p1), fallback: "Invitation received: %@ pending invitation")
+    }
     /// Profile picture
     internal static let profilePicturePicker = L10n.tr("Localizable", "accessibility.profilePicturePicker", fallback: "Profile picture")
     /// Double-tap to take a picture or select a picture from the library
@@ -115,9 +119,9 @@ internal enum L10n {
     internal static let swarmPicturePicker = L10n.tr("Localizable", "accessibility.swarmPicturePicker", fallback: "Group picture")
     /// Double-tap to take a picture or select a picture from the library
     internal static let swarmPicturePickerHint = L10n.tr("Localizable", "accessibility.swarmPicturePickerHint", fallback: "Double-tap to take a picture or select a picture from the library")
-    /// Text message received on %@, content not available
+    /// Empty text message received on %@. This might not have been sent correctly.
     internal static func textNotAvailable(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "accessibility.textNotAvailable", String(describing: p1), fallback: "Text message received on %@, content not available")
+      return L10n.tr("Localizable", "accessibility.textNotAvailable", String(describing: p1), fallback: "Empty text message received on %@. This might not have been sent correctly.")
     }
     /// Available
     internal static let userPresenceAvailable = L10n.tr("Localizable", "accessibility.userPresenceAvailable", fallback: "Available")
@@ -126,8 +130,10 @@ internal enum L10n {
     /// Welcome to Jami
     internal static let welcomeToJamiTitle = L10n.tr("Localizable", "accessibility.welcomeToJamiTitle", fallback: "Welcome to Jami")
     internal enum Call {
-      /// Lasted
-      internal static let lasted = L10n.tr("Localizable", "accessibility.call.lasted", fallback: "Lasted")
+      /// Lasted %@
+      internal static func lasted(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "accessibility.call.lasted", String(describing: p1), fallback: "Lasted %@")
+      }
     }
     internal enum Calls {
       internal enum Alter {
@@ -194,23 +200,23 @@ internal enum L10n {
       internal static let unsetModerator = L10n.tr("Localizable", "accessibility.conference.unsetModerator", fallback: "Unset moderator")
     }
     internal enum FileTransfer {
-      /// File: %@ , received on %@
+      /// File: %1@ , received on %2@
       internal static func receivedOn(_ p1: Any, _ p2: Any) -> String {
-        return L10n.tr("Localizable", "accessibility.fileTransfer.receivedOn", String(describing: p1), String(describing: p2), fallback: "File: %@ , received on %@")
+        return L10n.tr("Localizable", "accessibility.fileTransfer.receivedOn", String(describing: p1), String(describing: p2), fallback: "File: %1@ , received on %2@")
       }
-      /// File: %@, sent on %@
+      /// File: %1@, sent on %2@
       internal static func sentOn(_ p1: Any, _ p2: Any) -> String {
-        return L10n.tr("Localizable", "accessibility.fileTransfer.sentOn", String(describing: p1), String(describing: p2), fallback: "File: %@, sent on %@")
+        return L10n.tr("Localizable", "accessibility.fileTransfer.sentOn", String(describing: p1), String(describing: p2), fallback: "File: %1@, sent on %2@")
       }
     }
     internal enum Text {
-      /// %@, message received on %@
+      /// %1@, message received on %2@
       internal static func receivedOn(_ p1: Any, _ p2: Any) -> String {
-        return L10n.tr("Localizable", "accessibility.text.receivedOn", String(describing: p1), String(describing: p2), fallback: "%@, message received on %@")
+        return L10n.tr("Localizable", "accessibility.text.receivedOn", String(describing: p1), String(describing: p2), fallback: "%1@, message received on %2@")
       }
-      /// %@, message sent on %@
+      /// %1@, message sent on %2@
       internal static func sentOn(_ p1: Any, _ p2: Any) -> String {
-        return L10n.tr("Localizable", "accessibility.text.sentOn", String(describing: p1), String(describing: p2), fallback: "%@, message sent on %@")
+        return L10n.tr("Localizable", "accessibility.text.sentOn", String(describing: p1), String(describing: p2), fallback: "%1@, message sent on %2@")
       }
     }
   }
