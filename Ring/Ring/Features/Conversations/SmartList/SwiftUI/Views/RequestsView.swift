@@ -44,7 +44,7 @@ struct RequestsIndicatorView: View {
         .background(Color.jamiRequestsColor)
         .cornerRadius(cornerRadius)
         .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
-        .accessibilityLabel(L10n.Accessibility.pendingRequestsRow(model.unreadRequests))
+        .accessibilityLabel(model.unreadRequestsAccessibilityLabel)
         .accessibilityHint(L10n.Accessibility.pendingRequestsRowHint)
     }
 
