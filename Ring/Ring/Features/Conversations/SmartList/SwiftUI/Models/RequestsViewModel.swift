@@ -241,7 +241,12 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
 class RequestsViewModel: ObservableObject {
     @Published var requestsRow = [RequestRowViewModel]()
     @Published var requestNames = ""
-    @Published var unreadRequests = 0
+    @Published var unreadRequests = 0 {
+        didSet {
+            unreadRequestsAccessibilityLabel = unreadRequests > 1 ? L10n.Accessibility.pendingRequestsRowPlural("\(unreadRequests)") : L10n.Accessibility.pendingRequestsRowSingular("\(unreadRequests)")
+        }
+    }
+    @Published var unreadRequestsAccessibilityLabel = ""
     @Published var requestViewOpened = false
     var requestsNameResolvers = ThreadSafeArray<RequestNameResolver>(label: "com.requestsNameResolvers")// requests and resolved name
     var title = L10n.Smartlist.invitationReceived
