@@ -552,7 +552,7 @@
 "accessibility.fileTransfer.sentOn" = "File: %@, sent on %@";
 "accessibility.call.lasted" = "Lasted";
 "accessibility.fileTransferNoName" = "File received on %@, name not available.";
-"accessibility.calls.default.toggleAudio" = "Turn off microphone";
+"accessibility.calls.default.toggleAudio" = "Mute microphone";
 "accessibility.calls.default.toggleVideo" = "Turn on camera";
 "accessibility.calls.default.pauseCall" = "Pause call";
 "accessibility.calls.default.hangUpCall" = "Hang up";
@@ -563,7 +563,7 @@
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Raise hand";
 
-"accessibility.calls.alter.toggleAudio" = "Turn on microphone";
+"accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Turn off camera";
 "accessibility.calls.alter.pauseCall" = "Resume call";
 "accessibility.calls.alter.hangUpCall" = "Hang up";
