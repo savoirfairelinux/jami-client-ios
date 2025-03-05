@@ -25,24 +25,28 @@ if test -z "$HOST"
 then
   if [ "$IOS_TARGET_PLATFORM" = "all" ]
   then
-    ARCHS=("arm64" "x86_64")
+    # Build for all three combinations
+    ARCHS_PLATFORMS=("arm64:iPhoneOS" "arm64:iPhoneSimulator" "x86_64:iPhoneSimulator")
   elif [ "$IOS_TARGET_PLATFORM" = "iPhoneSimulator" ]
   then
-    ARCHS=("x86_64")
+    # Build for both simulator architectures
+    ARCHS_PLATFORMS=("arm64:iPhoneSimulator" "x86_64:iPhoneSimulator")
   elif [ "$IOS_TARGET_PLATFORM" = "iPhoneOS" ]
   then
-    ARCHS=("arm64")
+    ARCHS_PLATFORMS=("arm64:iPhoneOS")
   fi
 else
-  ARCHS=("${HOST%%-*}")
   case "$HOST" in
     aarch64-*)
-      IOS_TARGET_PLATFORM="iPhoneOS"
-      ARCHS=("arm64")
+      if [ "$IOS_TARGET_PLATFORM" = "iPhoneSimulator" ]
+      then
+        ARCHS_PLATFORMS=("arm64:iPhoneSimulator")
+      else
+        ARCHS_PLATFORMS=("arm64:iPhoneOS")
+      fi
     ;;
     x86_64-*)
-      IOS_TARGET_PLATFORM="iPhoneSimulator"
-      ARCHS=("x86_64")
+      ARCHS_PLATFORMS=("x86_64:iPhoneSimulator")
     ;;
   esac
 fi
@@ -76,25 +80,30 @@ if [ -z "$NPROC"  ]; then
   NPROC=$(sysctl -n hw.ncpu || echo -n 1)
 fi
 
-export IOS_TARGET_PLATFORM
-echo "Building for $IOS_TARGET_PLATFORM for $ARCHS"
+echo "Building for ${ARCHS_PLATFORMS[@]}"
 
 cd "$DAEMON_DIR"
 
-for ARCH in "${ARCHS[@]}"
+for ARCH_PLATFORM in "${ARCHS_PLATFORMS[@]}"
 do
-  mkdir -p "contrib/native-$ARCH"
-  cd "contrib/native-$ARCH"
+  # Split the architecture and platform
+  ARCH="${ARCH_PLATFORM%%:*}"
+  IOS_TARGET_PLATFORM="${ARCH_PLATFORM#*:}"
+  export IOS_TARGET_PLATFORM
+  
+  echo "Building for $IOS_TARGET_PLATFORM with architecture $ARCH"
+  
+  # Create a unique build directory for this combination
+  BUILD_DIR="$ARCH-$IOS_TARGET_PLATFORM"
+  mkdir -p "contrib/native-$BUILD_DIR"
+  cd "contrib/native-$BUILD_DIR"
 
   if [ "$ARCH" = "arm64" ]
   then
     HOST=aarch64-apple-darwin_ios
-    IOS_TARGET_PLATFORM="iPhoneOS"
   else
     HOST="$ARCH"-apple-darwin_ios
-    IOS_TARGET_PLATFORM="iPhoneSimulator"
   fi
-  export IOS_TARGET_PLATFORM
 
   SDKROOT=$(xcode-select -print-path)/Platforms/${IOS_TARGET_PLATFORM}.platform/Developer/SDKs/${IOS_TARGET_PLATFORM}${SDK_VERSION}.sdk
 
@@ -109,7 +118,10 @@ do
   CC="xcrun -sdk $SDK clang"
   CXX="xcrun -sdk $SDK clang++"
 
-  SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --disable-plugin --disable-libarchive --enable-ffmpeg
+  # Specify contrib folder path but don't create it (bootstrap will create it)
+  CONTRIB_FOLDER="$DAEMON_DIR/contrib/contrib-$BUILD_DIR"
+
+  SDKROOT="$SDKROOT" ../bootstrap --host="$HOST" --disable-libav --disable-plugin --disable-libarchive --enable-ffmpeg --prefix="$CONTRIB_FOLDER"
 
   echo "Building contrib"
   make fetch
@@ -135,8 +147,8 @@ do
   LDFLAGS="$CFLAGS"
 
   ./autogen.sh || exit 1
-  mkdir -p "build-ios-$ARCH"
-  cd "build-ios-$ARCH"
+  mkdir -p "build-ios-$BUILD_DIR"
+  cd "build-ios-$BUILD_DIR"
 
   JAMI_CONF="--host=$HOST \
              --without-dbus \
@@ -145,7 +157,8 @@ do
              --enable-static \
              --without-natpmp \
              --disable-shared \
-             --prefix=$IOS_TOP_DIR/DEPS/$ARCH"
+             --prefix=$IOS_TOP_DIR/DEPS/$BUILD_DIR \
+             --with-contrib=$CONTRIB_FOLDER"
 
   if [ "$RELEASE" = "0" ]
   then
@@ -167,17 +180,18 @@ do
   make -j"$NPROC" || exit 1
   make install || exit 1
 
-  rsync -ar "$DAEMON_DIR/contrib/$HOST/lib/"*.a "$IOS_TOP_DIR/DEPS/$ARCH/lib/"
+  # Use the specified contrib folder for copying libraries and headers
+  rsync -ar "$CONTRIB_FOLDER/lib/"*.a "$IOS_TOP_DIR/DEPS/$BUILD_DIR/lib/"
   # copy headers for extension
-  rsync -ar "$DAEMON_DIR/contrib/$HOST/include/opendht" "$IOS_TOP_DIR/DEPS/$ARCH/include/"
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/msgpack.hpp "$IOS_TOP_DIR/DEPS/$ARCH/include/"
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/gnutls "$IOS_TOP_DIR/DEPS/$ARCH/include/"
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/json "$IOS_TOP_DIR/DEPS/$ARCH/include/"
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/msgpack "$IOS_TOP_DIR/DEPS/$ARCH/include/"
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/yaml-cpp "$IOS_TOP_DIR/DEPS/$ARCH/include/"
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/libavutil "$IOS_TOP_DIR/DEPS/$ARCH/include/"
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/fmt "$IOS_TOP_DIR/DEPS/$ARCH/include/"
-  cd "$IOS_TOP_DIR/DEPS/$ARCH/lib/"
+  rsync -ar "$CONTRIB_FOLDER/include/opendht" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
+  rsync -ar "$CONTRIB_FOLDER/include/msgpack.hpp" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
+  rsync -ar "$CONTRIB_FOLDER/include/gnutls" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
+  rsync -ar "$CONTRIB_FOLDER/include/json" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
+  rsync -ar "$CONTRIB_FOLDER/include/msgpack" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
+  rsync -ar "$CONTRIB_FOLDER/include/yaml-cpp" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
+  rsync -ar "$CONTRIB_FOLDER/include/libavutil" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
+  rsync -ar "$CONTRIB_FOLDER/include/fmt" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
+  cd "$IOS_TOP_DIR/DEPS/$BUILD_DIR/lib/"
   for i in *.a ; do mv "$i" "${i/-$HOST.a/.a}" ; done
 
   cd "$DAEMON_DIR"
@@ -185,26 +199,240 @@ done
 
 cd "$IOS_TOP_DIR"
 
-FAT_DIR="$IOS_TOP_DIR/fat"
-mkdir -p "$FAT_DIR"
+# Create XCFrameworks instead of fat libraries
+XCFRAMEWORK_DIR="$IOS_TOP_DIR/xcframework"
+mkdir -p "$XCFRAMEWORK_DIR"
 
-if ((${#ARCHS[@]} == "2"))
-then
-  mkdir -p "$FAT_DIR/lib"
-  echo "Making fat lib for ${ARCHS[0]} and ${ARCHS[1]}"
-  LIBFILES="$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/"*.a
-  for f in $LIBFILES
-  do
-    libFile=${f##*/}
-    echo "Processing $libFile lib…"
-    #There is only 2 ARCH max… So let's make it simple
-    lipo -create  "$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/$libFile"  \
-                  "$IOS_TOP_DIR/DEPS/${ARCHS[1]}/lib/$libFile" \
-                  -output "$FAT_DIR/lib/$libFile"
-  done
+# Copy headers to a common location
+mkdir -p "$XCFRAMEWORK_DIR/include"
+if [ -d "$IOS_TOP_DIR/DEPS/${ARCHS_PLATFORMS[0]%%:*}-${ARCHS_PLATFORMS[0]#*:}/include/" ]; then
+  rsync -ar --delete "$IOS_TOP_DIR/DEPS/${ARCHS_PLATFORMS[0]%%:*}-${ARCHS_PLATFORMS[0]#*:}/include/"* "$XCFRAMEWORK_DIR/include"
 else
-  echo "No need for fat lib"
-  rsync -ar --delete "$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/"*.a "$FAT_DIR/lib"
+  echo "Warning: No include directory found for ${ARCHS_PLATFORMS[0]}"
 fi
 
-rsync -ar --delete "$IOS_TOP_DIR/DEPS/${ARCHS[0]}/include/"* "$FAT_DIR/include"
+echo "Creating XCFrameworks..."
+
+# Get list of all libraries from the first build directory
+BUILD_DIRS=()
+for ARCH_PLATFORM in "${ARCHS_PLATFORMS[@]}"
+do
+  BUILD_DIRS+=("${ARCH_PLATFORM%%:*}-${ARCH_PLATFORM#*:}")
+done
+
+# Group build directories by platform
+DEVICE_BUILDS=()
+SIMULATOR_BUILDS=()
+
+for BUILD_DIR in "${BUILD_DIRS[@]}"
+do
+  if [[ "$BUILD_DIR" == *-iPhoneOS ]]; then
+    DEVICE_BUILDS+=("$BUILD_DIR")
+  elif [[ "$BUILD_DIR" == *-iPhoneSimulator ]]; then
+    SIMULATOR_BUILDS+=("$BUILD_DIR")
+  fi
+done
+
+# Process each library
+LIBFILES="$IOS_TOP_DIR/DEPS/${BUILD_DIRS[0]}/lib/"*.a
+for f in $LIBFILES
+do
+  libFile=${f##*/}
+  FRAMEWORK_NAME="${libFile%.a}"
+  
+  # Check if this library exists in at least one simulator build
+  HAS_SIMULATOR_LIB=false
+  for BUILD in "${SIMULATOR_BUILDS[@]}"; do
+    if [ -f "$IOS_TOP_DIR/DEPS/$BUILD/lib/$libFile" ]; then
+      HAS_SIMULATOR_LIB=true
+      break
+    fi
+  done
+  
+  # Check if this library exists in at least one device build
+  HAS_DEVICE_LIB=false
+  for BUILD in "${DEVICE_BUILDS[@]}"; do
+    if [ -f "$IOS_TOP_DIR/DEPS/$BUILD/lib/$libFile" ]; then
+      HAS_DEVICE_LIB=true
+      break
+    fi
+  done
+  
+  # Skip if the library doesn't exist for any platform
+  if [ "$HAS_SIMULATOR_LIB" = "false" ] && [ "$HAS_DEVICE_LIB" = "false" ]; then
+    echo "Skipping $FRAMEWORK_NAME - not available for any platform"
+    continue
+  fi
+  
+  echo "Processing $FRAMEWORK_NAME for XCFramework..."
+  
+  # Create temporary directories for device and simulator frameworks
+  TEMP_DIR="$IOS_TOP_DIR/temp"
+  mkdir -p "$TEMP_DIR"
+  
+  # Create framework for each platform
+  FRAMEWORK_ARGS=""
+  
+  # Process device builds (typically just arm64)
+  if [ ${#DEVICE_BUILDS[@]} -gt 0 ]; then
+    DEVICE_DIR="$TEMP_DIR/device"
+    mkdir -p "$DEVICE_DIR"
+    
+    if [ "$HAS_DEVICE_LIB" = "true" ]; then
+      # Create fat library for device if multiple architectures
+      if [ ${#DEVICE_BUILDS[@]} -gt 1 ]; then
+        mkdir -p "$DEVICE_DIR/lib"
+        LIPO_CMD="lipo -create"
+        LIPO_INPUTS=0
+        for BUILD in "${DEVICE_BUILDS[@]}"; do
+          if [ -f "$IOS_TOP_DIR/DEPS/$BUILD/lib/$libFile" ]; then
+            LIPO_CMD+=" $IOS_TOP_DIR/DEPS/$BUILD/lib/$libFile"
+            LIPO_INPUTS=$((LIPO_INPUTS+1))
+          fi
+        done
+        
+        if [ $LIPO_INPUTS -gt 0 ]; then
+          $LIPO_CMD -output "$DEVICE_DIR/lib/$libFile"
+        fi
+      else
+        # Just copy the single architecture file if it exists
+        if [ -f "$IOS_TOP_DIR/DEPS/${DEVICE_BUILDS[0]}/lib/$libFile" ]; then
+          mkdir -p "$DEVICE_DIR/lib"
+          cp "$IOS_TOP_DIR/DEPS/${DEVICE_BUILDS[0]}/lib/$libFile" "$DEVICE_DIR/lib/$libFile"
+        fi
+      fi
+    else
+      # Create a dummy library for device if it doesn't exist
+      echo "Creating dummy device library for $FRAMEWORK_NAME"
+      mkdir -p "$DEVICE_DIR/lib"
+
+      # Create a dummy object file first
+      echo "void dummy_function() {}" > "$TEMP_DIR/dummy.c"
+      $CC -c "$TEMP_DIR/dummy.c" -o "$TEMP_DIR/dummy.o"
+
+      # Create a static library with the dummy object
+      ar -rc "$DEVICE_DIR/lib/$libFile" "$TEMP_DIR/dummy.o"
+    fi
+    
+    # Create framework structure
+    mkdir -p "$DEVICE_DIR/$FRAMEWORK_NAME.framework"
+    cp "$DEVICE_DIR/lib/$libFile" "$DEVICE_DIR/$FRAMEWORK_NAME.framework/$FRAMEWORK_NAME"
+    
+    # Create a minimal Info.plist
+    cat > "$DEVICE_DIR/$FRAMEWORK_NAME.framework/Info.plist" << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleExecutable</key>
+    <string>${FRAMEWORK_NAME}</string>
+    <key>CFBundleIdentifier</key>
+    <string>org.jami.${FRAMEWORK_NAME}</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>${FRAMEWORK_NAME}</string>
+    <key>CFBundlePackageType</key>
+    <string>FMWK</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>MinimumOSVersion</key>
+    <string>${MIN_IOS_VERSION}</string>
+</dict>
+</plist>
+EOF
+    
+    FRAMEWORK_ARGS+=" -framework $DEVICE_DIR/$FRAMEWORK_NAME.framework"
+  fi
+  
+  # Process simulator builds
+  if [ ${#SIMULATOR_BUILDS[@]} -gt 0 ]; then
+    SIM_DIR="$TEMP_DIR/simulator"
+    mkdir -p "$SIM_DIR"
+    
+    if [ "$HAS_SIMULATOR_LIB" = "true" ]; then
+      # Create fat library for simulator if multiple architectures
+      if [ ${#SIMULATOR_BUILDS[@]} -gt 1 ]; then
+        mkdir -p "$SIM_DIR/lib"
+        LIPO_CMD="lipo -create"
+        LIPO_INPUTS=0
+        for BUILD in "${SIMULATOR_BUILDS[@]}"; do
+          if [ -f "$IOS_TOP_DIR/DEPS/$BUILD/lib/$libFile" ]; then
+            LIPO_CMD+=" $IOS_TOP_DIR/DEPS/$BUILD/lib/$libFile"
+            LIPO_INPUTS=$((LIPO_INPUTS+1))
+          fi
+        done
+        
+        if [ $LIPO_INPUTS -gt 0 ]; then
+          $LIPO_CMD -output "$SIM_DIR/lib/$libFile"
+        fi
+      else
+        # Just copy the single architecture file if it exists
+        if [ -f "$IOS_TOP_DIR/DEPS/${SIMULATOR_BUILDS[0]}/lib/$libFile" ]; then
+          mkdir -p "$SIM_DIR/lib"
+          cp "$IOS_TOP_DIR/DEPS/${SIMULATOR_BUILDS[0]}/lib/$libFile" "$SIM_DIR/lib/$libFile"
+        fi
+      fi
+    else
+      # Create a dummy library for simulator if it doesn't exist
+      echo "Creating dummy simulator library for $FRAMEWORK_NAME"
+      mkdir -p "$SIM_DIR/lib"
+
+      # Create a dummy object file first
+      echo "void dummy_function() {}" > "$TEMP_DIR/dummy.c"
+      $CC -c "$TEMP_DIR/dummy.c" -o "$TEMP_DIR/dummy.o"
+
+      # Create a static library with the dummy object
+      ar -rc "$SIM_DIR/lib/$libFile" "$TEMP_DIR/dummy.o"
+    fi
+    
+    # Create framework structure
+    mkdir -p "$SIM_DIR/$FRAMEWORK_NAME.framework"
+    cp "$SIM_DIR/lib/$libFile" "$SIM_DIR/$FRAMEWORK_NAME.framework/$FRAMEWORK_NAME"
+    
+    # Create a minimal Info.plist
+    cat > "$SIM_DIR/$FRAMEWORK_NAME.framework/Info.plist" << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleExecutable</key>
+    <string>${FRAMEWORK_NAME}</string>
+    <key>CFBundleIdentifier</key>
+    <string>org.jami.${FRAMEWORK_NAME}</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>${FRAMEWORK_NAME}</string>
+    <key>CFBundlePackageType</key>
+    <string>FMWK</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>MinimumOSVersion</key>
+    <string>${MIN_IOS_VERSION}</string>
+</dict>
+</plist>
+EOF
+    
+    FRAMEWORK_ARGS+=" -framework $SIM_DIR/$FRAMEWORK_NAME.framework"
+  fi
+  
+  # Create XCFramework
+  xcrun xcodebuild -create-xcframework $FRAMEWORK_ARGS -output "$XCFRAMEWORK_DIR/$FRAMEWORK_NAME.xcframework"
+  echo "Created $FRAMEWORK_NAME.xcframework"
+  
+  # Clean up temporary directories
+  rm -rf "$TEMP_DIR"
+done
+
+echo "XCFrameworks created in $XCFRAMEWORK_DIR"
+echo "Headers copied to $XCFRAMEWORK_DIR/include"
+echo "You can now link these XCFrameworks in your Xcode project"
