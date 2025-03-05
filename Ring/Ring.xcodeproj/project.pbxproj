@@ -147,8 +147,114 @@
 		1DF75AC2296E09240055EA87 /* Button+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC1296E09240055EA87 /* Button+Helpers.swift */; };
 		1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC3296E0A940055EA87 /* View+Helpers.swift */; };
 		1DF75AC6296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */; };
-		26001BD82D6E5D1A009A8E23 /* libnatpmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BD72D6E5C8F009A8E23 /* libnatpmp.a */; };
-		26001BD92D6E5E40009A8E23 /* libnatpmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BD72D6E5C8F009A8E23 /* libnatpmp.a */; };
+		26001C0C2D78E1A1009A8E23 /* libpjsua.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BDF2D78E198009A8E23 /* libpjsua.xcframework */; };
+		26001C0E2D78E1A1009A8E23 /* libsrtp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE02D78E198009A8E23 /* libsrtp.xcframework */; };
+		26001C102D78E1A1009A8E23 /* libspeexdsp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE12D78E198009A8E23 /* libspeexdsp.xcframework */; };
+		26001C122D78E1A1009A8E23 /* libnettle.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE22D78E199009A8E23 /* libnettle.xcframework */; };
+		26001C142D78E1A1009A8E23 /* libswscale.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE32D78E199009A8E23 /* libswscale.xcframework */; };
+		26001C162D78E1A1009A8E23 /* libgnutls.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE42D78E199009A8E23 /* libgnutls.xcframework */; };
+		26001C182D78E1A1009A8E23 /* libcrypto.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE52D78E199009A8E23 /* libcrypto.xcframework */; };
+		26001C1A2D78E1A1009A8E23 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE62D78E199009A8E23 /* libavutil.xcframework */; };
+		26001C1C2D78E1A1009A8E23 /* libpjsua2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE72D78E199009A8E23 /* libpjsua2.xcframework */; };
+		26001C1E2D78E1A2009A8E23 /* libpjnath.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE82D78E199009A8E23 /* libpjnath.xcframework */; };
+		26001C202D78E1A2009A8E23 /* libixml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE92D78E19A009A8E23 /* libixml.xcframework */; };
+		26001C222D78E1A2009A8E23 /* libpjmedia.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEA2D78E19A009A8E23 /* libpjmedia.xcframework */; };
+		26001C242D78E1A2009A8E23 /* libsecp256k1.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEB2D78E19A009A8E23 /* libsecp256k1.xcframework */; };
+		26001C262D78E1A2009A8E23 /* libhogweed.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEC2D78E19A009A8E23 /* libhogweed.xcframework */; };
+		26001C282D78E1A2009A8E23 /* libgmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BED2D78E19A009A8E23 /* libgmp.xcframework */; };
+		26001C2A2D78E1A2009A8E23 /* libyaml-cpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEE2D78E19A009A8E23 /* libyaml-cpp.xcframework */; };
+		26001C2C2D78E1A2009A8E23 /* libswresample.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEF2D78E19A009A8E23 /* libswresample.xcframework */; };
+		26001C2E2D78E1A2009A8E23 /* libtls.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF02D78E19B009A8E23 /* libtls.xcframework */; };
+		26001C302D78E1A2009A8E23 /* libavcodec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF12D78E19B009A8E23 /* libavcodec.xcframework */; };
+		26001C322D78E1A2009A8E23 /* libupnp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF22D78E19B009A8E23 /* libupnp.xcframework */; };
+		26001C342D78E1A2009A8E23 /* libx264.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF32D78E19B009A8E23 /* libx264.xcframework */; };
+		26001C362D78E1A2009A8E23 /* libpjsip-simple.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF42D78E19B009A8E23 /* libpjsip-simple.xcframework */; };
+		26001C382D78E1A2009A8E23 /* libopendht.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF52D78E19C009A8E23 /* libopendht.xcframework */; };
+		26001C3A2D78E1A3009A8E23 /* libjami.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF62D78E19C009A8E23 /* libjami.xcframework */; };
+		26001C3C2D78E1A3009A8E23 /* libpjmedia-audiodev.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF72D78E19C009A8E23 /* libpjmedia-audiodev.xcframework */; };
+		26001C3E2D78E1A3009A8E23 /* libpjlib-util.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF82D78E19C009A8E23 /* libpjlib-util.xcframework */; };
+		26001C402D78E1A3009A8E23 /* libargon2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF92D78E19C009A8E23 /* libargon2.xcframework */; };
+		26001C422D78E1A3009A8E23 /* libpj.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFA2D78E19C009A8E23 /* libpj.xcframework */; };
+		26001C442D78E1A3009A8E23 /* libhttp_parser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFB2D78E19C009A8E23 /* libhttp_parser.xcframework */; };
+		26001C462D78E1A3009A8E23 /* libopus.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFC2D78E19D009A8E23 /* libopus.xcframework */; };
+		26001C482D78E1A3009A8E23 /* libdhtnet.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFD2D78E19D009A8E23 /* libdhtnet.xcframework */; };
+		26001C4A2D78E1A3009A8E23 /* libjsoncpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFE2D78E19D009A8E23 /* libjsoncpp.xcframework */; };
+		26001C4C2D78E1A3009A8E23 /* libpjsip-ua.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFF2D78E19F009A8E23 /* libpjsip-ua.xcframework */; };
+		26001C4E2D78E1A3009A8E23 /* libpjsip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C002D78E19F009A8E23 /* libpjsip.xcframework */; };
+		26001C502D78E1A3009A8E23 /* libspeex.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C012D78E19F009A8E23 /* libspeex.xcframework */; };
+		26001C522D78E1A4009A8E23 /* libyuv.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C022D78E1A0009A8E23 /* libyuv.xcframework */; };
+		26001C542D78E1A4009A8E23 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C032D78E1A0009A8E23 /* libavfilter.xcframework */; };
+		26001C562D78E1A4009A8E23 /* libpjmedia-codec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C042D78E1A0009A8E23 /* libpjmedia-codec.xcframework */; };
+		26001C582D78E1A4009A8E23 /* libavformat.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C052D78E1A0009A8E23 /* libavformat.xcframework */; };
+		26001C5A2D78E1A4009A8E23 /* libssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C062D78E1A0009A8E23 /* libssl.xcframework */; };
+		26001C5C2D78E1A4009A8E23 /* libavdevice.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C072D78E1A0009A8E23 /* libavdevice.xcframework */; };
+		26001C5E2D78E1A4009A8E23 /* libfmt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C082D78E1A0009A8E23 /* libfmt.xcframework */; };
+		26001C602D78E1A4009A8E23 /* libgit2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C092D78E1A0009A8E23 /* libgit2.xcframework */; };
+		26001C622D78E1A4009A8E23 /* libllhttp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C0A2D78E1A1009A8E23 /* libllhttp.xcframework */; };
+		26001C642D78E1A4009A8E23 /* libpjmedia-videodev.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C0B2D78E1A1009A8E23 /* libpjmedia-videodev.xcframework */; };
+		26001C662D78E1EC009A8E23 /* SwiftyBeaver.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38C288704530023878C /* SwiftyBeaver.xcframework */; };
+		26001C672D78E1EC009A8E23 /* SwiftyBeaver.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38C288704530023878C /* SwiftyBeaver.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26001C682D78E3E4009A8E23 /* libargon2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF92D78E19C009A8E23 /* libargon2.xcframework */; };
+		26001C6A2D78E3E5009A8E23 /* libavcodec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF12D78E19B009A8E23 /* libavcodec.xcframework */; };
+		26001C6C2D78E3E5009A8E23 /* libavdevice.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C072D78E1A0009A8E23 /* libavdevice.xcframework */; };
+		26001C6E2D78E3E5009A8E23 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C032D78E1A0009A8E23 /* libavfilter.xcframework */; };
+		26001C702D78E3E5009A8E23 /* libavformat.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C052D78E1A0009A8E23 /* libavformat.xcframework */; };
+		26001C722D78E3E5009A8E23 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE62D78E199009A8E23 /* libavutil.xcframework */; };
+		26001C742D78E3E5009A8E23 /* libcrypto.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE52D78E199009A8E23 /* libcrypto.xcframework */; };
+		26001C762D78E3E5009A8E23 /* libdhtnet.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFD2D78E19D009A8E23 /* libdhtnet.xcframework */; };
+		26001C782D78E3E5009A8E23 /* libfmt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C082D78E1A0009A8E23 /* libfmt.xcframework */; };
+		26001C7A2D78E3E5009A8E23 /* libgit2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C092D78E1A0009A8E23 /* libgit2.xcframework */; };
+		26001C7C2D78E3E5009A8E23 /* libgmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BED2D78E19A009A8E23 /* libgmp.xcframework */; };
+		26001C7E2D78E3E5009A8E23 /* libgnutls.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE42D78E199009A8E23 /* libgnutls.xcframework */; };
+		26001C802D78E3E5009A8E23 /* libhogweed.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEC2D78E19A009A8E23 /* libhogweed.xcframework */; };
+		26001C822D78E3E5009A8E23 /* libhttp_parser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFB2D78E19C009A8E23 /* libhttp_parser.xcframework */; };
+		26001C842D78E3E5009A8E23 /* libixml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE92D78E19A009A8E23 /* libixml.xcframework */; };
+		26001C862D78E3E5009A8E23 /* libjami.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF62D78E19C009A8E23 /* libjami.xcframework */; };
+		26001C882D78E3E6009A8E23 /* libjsoncpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFE2D78E19D009A8E23 /* libjsoncpp.xcframework */; };
+		26001C8A2D78E3E6009A8E23 /* libllhttp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C0A2D78E1A1009A8E23 /* libllhttp.xcframework */; };
+		26001C8C2D78E3E6009A8E23 /* libnettle.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE22D78E199009A8E23 /* libnettle.xcframework */; };
+		26001C8E2D78E3E6009A8E23 /* libopendht.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF52D78E19C009A8E23 /* libopendht.xcframework */; };
+		26001C902D78E3E6009A8E23 /* libopus.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFC2D78E19D009A8E23 /* libopus.xcframework */; };
+		26001C922D78E3E6009A8E23 /* libpj.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFA2D78E19C009A8E23 /* libpj.xcframework */; };
+		26001C942D78E3E6009A8E23 /* libpjlib-util.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF82D78E19C009A8E23 /* libpjlib-util.xcframework */; };
+		26001C962D78E3E6009A8E23 /* libpjmedia-audiodev.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF72D78E19C009A8E23 /* libpjmedia-audiodev.xcframework */; };
+		26001C982D78E3E6009A8E23 /* libpjmedia-codec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C042D78E1A0009A8E23 /* libpjmedia-codec.xcframework */; };
+		26001C9A2D78E3E6009A8E23 /* libpjmedia-videodev.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C0B2D78E1A1009A8E23 /* libpjmedia-videodev.xcframework */; };
+		26001C9C2D78E3E6009A8E23 /* libpjmedia.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEA2D78E19A009A8E23 /* libpjmedia.xcframework */; };
+		26001C9E2D78E3E6009A8E23 /* libpjnath.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE82D78E199009A8E23 /* libpjnath.xcframework */; };
+		26001CA02D78E3E6009A8E23 /* libpjsip-simple.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF42D78E19B009A8E23 /* libpjsip-simple.xcframework */; };
+		26001CA22D78E3E7009A8E23 /* libpjsip-ua.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFF2D78E19F009A8E23 /* libpjsip-ua.xcframework */; };
+		26001CA42D78E3E7009A8E23 /* libpjsip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C002D78E19F009A8E23 /* libpjsip.xcframework */; };
+		26001CA62D78E3E7009A8E23 /* libpjsua.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BDF2D78E198009A8E23 /* libpjsua.xcframework */; };
+		26001CA82D78E3E7009A8E23 /* libpjsua2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE72D78E199009A8E23 /* libpjsua2.xcframework */; };
+		26001CAA2D78E3E7009A8E23 /* libsecp256k1.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEB2D78E19A009A8E23 /* libsecp256k1.xcframework */; };
+		26001CAC2D78E3E7009A8E23 /* libspeex.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C012D78E19F009A8E23 /* libspeex.xcframework */; };
+		26001CAE2D78E3E7009A8E23 /* libspeexdsp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE12D78E198009A8E23 /* libspeexdsp.xcframework */; };
+		26001CB02D78E3E7009A8E23 /* libsrtp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE02D78E198009A8E23 /* libsrtp.xcframework */; };
+		26001CB22D78E3E7009A8E23 /* libssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C062D78E1A0009A8E23 /* libssl.xcframework */; };
+		26001CB42D78E3E7009A8E23 /* libswresample.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEF2D78E19A009A8E23 /* libswresample.xcframework */; };
+		26001CB62D78E3E7009A8E23 /* libswscale.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE32D78E199009A8E23 /* libswscale.xcframework */; };
+		26001CB82D78E3E7009A8E23 /* libtls.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF02D78E19B009A8E23 /* libtls.xcframework */; };
+		26001CBA2D78E3E8009A8E23 /* libupnp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF22D78E19B009A8E23 /* libupnp.xcframework */; };
+		26001CBC2D78E3E8009A8E23 /* libx264.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF32D78E19B009A8E23 /* libx264.xcframework */; };
+		26001CBE2D78E3E8009A8E23 /* libyaml-cpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEE2D78E19A009A8E23 /* libyaml-cpp.xcframework */; };
+		26001CC02D78E3E8009A8E23 /* libyuv.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C022D78E1A0009A8E23 /* libyuv.xcframework */; };
+		26001CC42D7918BD009A8E23 /* libvpx.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001CC32D7918BD009A8E23 /* libvpx.xcframework */; };
+		26001CC62D7918E4009A8E23 /* libvpx.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001CC32D7918BD009A8E23 /* libvpx.xcframework */; };
+		26001CC92D792489009A8E23 /* SQLite.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB398288704860023878C /* SQLite.xcframework */; };
+		26001CCA2D792489009A8E23 /* SQLite.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB398288704860023878C /* SQLite.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26001CCB2D79248B009A8E23 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38B2887044E0023878C /* RxSwift.xcframework */; };
+		26001CCC2D79248B009A8E23 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38B2887044E0023878C /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26001CCD2D79248D009A8E23 /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB397288704820023878C /* RxRelay.xcframework */; };
+		26001CCE2D79248D009A8E23 /* RxRelay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB397288704820023878C /* RxRelay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26001CCF2D79248E009A8E23 /* RxDataSources.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38F288704600023878C /* RxDataSources.xcframework */; };
+		26001CD02D79248F009A8E23 /* RxDataSources.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38F288704600023878C /* RxDataSources.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26001CD12D792490009A8E23 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3962887047E0023878C /* RxCocoa.xcframework */; };
+		26001CD22D792490009A8E23 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3962887047E0023878C /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26001CD32D792492009A8E23 /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB390288704640023878C /* RxBlocking.xcframework */; };
+		26001CD42D792492009A8E23 /* RxBlocking.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB390288704640023878C /* RxBlocking.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26001CD52D792494009A8E23 /* Reusable.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB395288704790023878C /* Reusable.xcframework */; };
+		26001CD62D792494009A8E23 /* Reusable.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB395288704790023878C /* Reusable.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
 		2607176E2CAC454E00494875 /* ComposeNewMessageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */; };
 		260717702CAD901D00494875 /* ConversationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176F2CAD901D00494875 /* ConversationDataSource.swift */; };
@@ -243,8 +349,6 @@
 		267B956E2C233E2600353B01 /* GeneralSettingsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B956D2C233E2600353B01 /* GeneralSettingsViews.swift */; };
 		267B958A2C2478F100353B01 /* SipAccountDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B95892C2478F100353B01 /* SipAccountDetailModel.swift */; };
 		267B958C2C24793500353B01 /* ManageSipAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B958B2C24793500353B01 /* ManageSipAccountView.swift */; };
-		267B958E2C2AFF0F00353B01 /* libllhttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267B958D2C2AFEEA00353B01 /* libllhttp.a */; };
-		267B958F2C2AFFD700353B01 /* libllhttp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267B958D2C2AFEEA00353B01 /* libllhttp.a */; };
 		267B95F62C2B40C600353B01 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07E11F0D924700D36361 /* Strings.swift */; };
 		267B95F92C2B5FB000353B01 /* LinkDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B95F82C2B5FB000353B01 /* LinkDeviceView.swift */; };
 		267B95FB2C2B5FFA00353B01 /* RevocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B95FA2C2B5FFA00353B01 /* RevocationView.swift */; };
@@ -273,86 +377,6 @@
 		2692557C2C5D24FA00F85A1E /* SIPConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2692557B2C5D24FA00F85A1E /* SIPConfigurationView.swift */; };
 		2692557E2C5D53A300F85A1E /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2692557D2C5D53A300F85A1E /* Views.swift */; };
 		26929FD425659E5F0052A601 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 26929FD125659E5F0052A601 /* cacert.pem */; };
-		269DA02728D0D2E5007D51D6 /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */; };
-		269DA02828D0D2E5007D51D6 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB21D1C341A00E99CD9 /* libavcodec.a */; };
-		269DA02928D0D2E5007D51D6 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB31D1C341A00E99CD9 /* libavdevice.a */; };
-		269DA02A28D0D2E5007D51D6 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB41D1C341A00E99CD9 /* libavfilter.a */; };
-		269DA02B28D0D2E5007D51D6 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB51D1C341A00E99CD9 /* libavformat.a */; };
-		269DA02C28D0D2E5007D51D6 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB61D1C341A00E99CD9 /* libavutil.a */; };
-		269DA02D28D0D2E5007D51D6 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCE206C0AEE0009C44C /* libcrypto.a */; };
-		269DA02E28D0D2E5007D51D6 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB81D1C341A00E99CD9 /* libgmp.a */; };
-		269DA02F28D0D2E5007D51D6 /* libgnutls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB91D1C341A00E99CD9 /* libgnutls.a */; };
-		269DA03028D0D2E5007D51D6 /* libhogweed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABB1D1C341A00E99CD9 /* libhogweed.a */; };
-		269DA03128D0D2E5007D51D6 /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4A51CB23282BCC00357AFC /* libhttp_parser.a */; };
-		269DA03328D0D2E5007D51D6 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */; };
-		269DA03428D0D2E5007D51D6 /* libnettle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC01D1C341A00E99CD9 /* libnettle.a */; };
-		269DA03528D0D2E5007D51D6 /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC21D1C341A00E99CD9 /* libopendht.a */; };
-		269DA03628D0D2E5007D51D6 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC31D1C341A00E99CD9 /* libopus.a */; };
-		269DA03728D0D2E5007D51D6 /* libpj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC61D1C341A00E99CD9 /* libpj.a */; };
-		269DA03828D0D2E5007D51D6 /* libpjlib-util.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC71D1C341A00E99CD9 /* libpjlib-util.a */; };
-		269DA03928D0D2E5007D51D6 /* libpjmedia-audiodev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC81D1C341A00E99CD9 /* libpjmedia-audiodev.a */; };
-		269DA03A28D0D2E5007D51D6 /* libpjmedia-codec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC91D1C341A00E99CD9 /* libpjmedia-codec.a */; };
-		269DA03B28D0D2E5007D51D6 /* libpjmedia-videodev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACA1D1C341A00E99CD9 /* libpjmedia-videodev.a */; };
-		269DA03C28D0D2E5007D51D6 /* libpjmedia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACB1D1C341A00E99CD9 /* libpjmedia.a */; };
-		269DA03D28D0D2E5007D51D6 /* libpjnath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACC1D1C341A00E99CD9 /* libpjnath.a */; };
-		269DA03E28D0D2E5007D51D6 /* libpjsip-simple.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACD1D1C341A00E99CD9 /* libpjsip-simple.a */; };
-		269DA03F28D0D2E5007D51D6 /* libpjsip-ua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACE1D1C341A00E99CD9 /* libpjsip-ua.a */; };
-		269DA04028D0D2E5007D51D6 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACF1D1C341A00E99CD9 /* libpjsip.a */; };
-		269DA04128D0D2E5007D51D6 /* libpjsua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD01D1C341A00E99CD9 /* libpjsua.a */; };
-		269DA04228D0D2E5007D51D6 /* libpjsua2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD11D1C341A00E99CD9 /* libpjsua2.a */; };
-		269DA04428D0D2E6007D51D6 /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD71D1C341A00E99CD9 /* libspeex.a */; };
-		269DA04528D0D2E6007D51D6 /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD81D1C341A00E99CD9 /* libspeexdsp.a */; };
-		269DA04628D0D2E6007D51D6 /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD91D1C341A00E99CD9 /* libsrtp.a */; };
-		269DA04728D0D2E6007D51D6 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCA206BE23B0009C44C /* libssl.a */; };
-		269DA04828D0D2E6007D51D6 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADA1D1C341A00E99CD9 /* libswresample.a */; };
-		269DA04928D0D2E6007D51D6 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADB1D1C341A00E99CD9 /* libswscale.a */; };
-		269DA04A28D0D2E6007D51D6 /* libtls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCC206BF4730009C44C /* libtls.a */; };
-		269DA04C28D0D2E6007D51D6 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
-		269DA04D28D0D2E6007D51D6 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
-		269DA05328D0D366007D51D6 /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */; };
-		269DA05428D0D366007D51D6 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB21D1C341A00E99CD9 /* libavcodec.a */; };
-		269DA05528D0D366007D51D6 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB31D1C341A00E99CD9 /* libavdevice.a */; };
-		269DA05628D0D366007D51D6 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB41D1C341A00E99CD9 /* libavfilter.a */; };
-		269DA05728D0D366007D51D6 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB51D1C341A00E99CD9 /* libavformat.a */; };
-		269DA05928D0D366007D51D6 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCE206C0AEE0009C44C /* libcrypto.a */; };
-		269DA05A28D0D366007D51D6 /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05128D0D2ED007D51D6 /* libfmt.a */; };
-		269DA05B28D0D366007D51D6 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05228D0D2EF007D51D6 /* libgit2.a */; };
-		269DA05C28D0D366007D51D6 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB81D1C341A00E99CD9 /* libgmp.a */; };
-		269DA05D28D0D366007D51D6 /* libgnutls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB91D1C341A00E99CD9 /* libgnutls.a */; };
-		269DA05E28D0D366007D51D6 /* libhogweed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABB1D1C341A00E99CD9 /* libhogweed.a */; };
-		269DA05F28D0D366007D51D6 /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4A51CB23282BCC00357AFC /* libhttp_parser.a */; };
-		269DA06128D0D366007D51D6 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */; };
-		269DA06228D0D366007D51D6 /* libnettle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC01D1C341A00E99CD9 /* libnettle.a */; };
-		269DA06328D0D366007D51D6 /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC21D1C341A00E99CD9 /* libopendht.a */; };
-		269DA06428D0D366007D51D6 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC31D1C341A00E99CD9 /* libopus.a */; };
-		269DA06528D0D366007D51D6 /* libpj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC61D1C341A00E99CD9 /* libpj.a */; };
-		269DA06628D0D366007D51D6 /* libpjlib-util.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC71D1C341A00E99CD9 /* libpjlib-util.a */; };
-		269DA06728D0D366007D51D6 /* libpjmedia-audiodev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC81D1C341A00E99CD9 /* libpjmedia-audiodev.a */; };
-		269DA06828D0D366007D51D6 /* libpjmedia-codec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC91D1C341A00E99CD9 /* libpjmedia-codec.a */; };
-		269DA06928D0D366007D51D6 /* libpjmedia-videodev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACA1D1C341A00E99CD9 /* libpjmedia-videodev.a */; };
-		269DA06A28D0D366007D51D6 /* libpjmedia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACB1D1C341A00E99CD9 /* libpjmedia.a */; };
-		269DA06B28D0D366007D51D6 /* libpjnath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACC1D1C341A00E99CD9 /* libpjnath.a */; };
-		269DA06C28D0D366007D51D6 /* libpjsip-simple.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACD1D1C341A00E99CD9 /* libpjsip-simple.a */; };
-		269DA06D28D0D366007D51D6 /* libpjsip-ua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACE1D1C341A00E99CD9 /* libpjsip-ua.a */; };
-		269DA06E28D0D366007D51D6 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACF1D1C341A00E99CD9 /* libpjsip.a */; };
-		269DA06F28D0D366007D51D6 /* libpjsua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD01D1C341A00E99CD9 /* libpjsua.a */; };
-		269DA07028D0D366007D51D6 /* libpjsua2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD11D1C341A00E99CD9 /* libpjsua2.a */; };
-		269DA07228D0D366007D51D6 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05028D0D2EA007D51D6 /* libsecp256k1.a */; };
-		269DA07328D0D366007D51D6 /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD71D1C341A00E99CD9 /* libspeex.a */; };
-		269DA07428D0D366007D51D6 /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD81D1C341A00E99CD9 /* libspeexdsp.a */; };
-		269DA07528D0D366007D51D6 /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD91D1C341A00E99CD9 /* libsrtp.a */; };
-		269DA07628D0D366007D51D6 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCA206BE23B0009C44C /* libssl.a */; };
-		269DA07728D0D366007D51D6 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADA1D1C341A00E99CD9 /* libswresample.a */; };
-		269DA07828D0D366007D51D6 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADB1D1C341A00E99CD9 /* libswscale.a */; };
-		269DA07928D0D367007D51D6 /* libtls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCC206BF4730009C44C /* libtls.a */; };
-		269DA07B28D0D367007D51D6 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
-		269DA07C28D0D367007D51D6 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
-		269DA07D28D0D367007D51D6 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
-		269DA07E28D0D367007D51D6 /* libyuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA04F28D0D2E6007D51D6 /* libyuv.a */; };
-		269DA07F28D0D5D0007D51D6 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05228D0D2EF007D51D6 /* libgit2.a */; };
-		269DA08028D0D614007D51D6 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05028D0D2EA007D51D6 /* libsecp256k1.a */; };
-		269DA08228D0D68F007D51D6 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB61D1C341A00E99CD9 /* libavutil.a */; };
-		269DA08628D0DFE3007D51D6 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		269DA09928E23D37007D51D6 /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09828E23D37007D51D6 /* MessageRowView.swift */; };
 		269DA09D28E23F57007D51D6 /* MessagesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09C28E23F57007D51D6 /* MessagesListView.swift */; };
 		269DA09F28E244F1007D51D6 /* MessagesListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09E28E244F1007D51D6 /* MessagesListVM.swift */; };
@@ -390,15 +414,8 @@
 		26BC15EE29302B00003FC8D1 /* ContactMessageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */; };
 		26BCBBD32A964ABC0001EE38 /* ConferenceActionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BCBBD22A964ABC0001EE38 /* ConferenceActionsModel.swift */; };
 		26BCBBD52A965EFC0001EE38 /* PictureInPictureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BCBBD42A965EFC0001EE38 /* PictureInPictureManager.swift */; };
-		26C4845A2A79645E005BC767 /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05128D0D2ED007D51D6 /* libfmt.a */; };
-		26C4845C2A796D87005BC767 /* libdhtnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C4845B2A796D69005BC767 /* libdhtnet.a */; };
-		26C4845D2A796DC9005BC767 /* libdhtnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C4845B2A796D69005BC767 /* libdhtnet.a */; };
 		26C4D07E2C62730100B1218C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C4D07D2C62730100B1218C /* ProfileView.swift */; };
 		26C6A2602927EC4E007786B8 /* SwarmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */; };
-		26CA4C542AB23A8500AEF8F5 /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADD1D1C341A00E99CD9 /* libupnp.a */; };
-		26CA4C592AB23C4100AEF8F5 /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABD1D1C341A00E99CD9 /* libixml.a */; };
-		26CA4C5A2AB23CCF00AEF8F5 /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABD1D1C341A00E99CD9 /* libixml.a */; };
-		26CA4C5B2AB23CCF00AEF8F5 /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADD1D1C341A00E99CD9 /* libupnp.a */; };
 		26D08AB9269628F400E37574 /* RequestsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08AB8269628F400E37574 /* RequestsService.swift */; };
 		26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */; };
 		26D08ABE2696296300E37574 /* RequestsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABD2696296300E37574 /* RequestsAdapter.mm */; };
@@ -433,30 +450,12 @@
 		446FAF1D2373427100519C4F /* SendFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446FAF1C2373427100519C4F /* SendFileViewModel.swift */; };
 		449E736428D9F69E00CBF564 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DA1F0D915100D36361 /* Localizable.strings */; };
 		449E736728D9F86A00CBF564 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07E11F0D924700D36361 /* Strings.swift */; };
-		44DFB39C2887048F0023878C /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38B2887044E0023878C /* RxSwift.xcframework */; };
-		44DFB39D2887048F0023878C /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38B2887044E0023878C /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB39E2887048F0023878C /* SwiftyBeaver.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38C288704530023878C /* SwiftyBeaver.xcframework */; };
-		44DFB39F2887048F0023878C /* SwiftyBeaver.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38C288704530023878C /* SwiftyBeaver.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3A42887048F0023878C /* RxDataSources.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38F288704600023878C /* RxDataSources.xcframework */; };
-		44DFB3A52887048F0023878C /* RxDataSources.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38F288704600023878C /* RxDataSources.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3A6288704900023878C /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB390288704640023878C /* RxBlocking.xcframework */; };
-		44DFB3A7288704900023878C /* RxBlocking.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB390288704640023878C /* RxBlocking.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3A8288704900023878C /* Differentiator.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB391288704690023878C /* Differentiator.xcframework */; };
 		44DFB3A9288704900023878C /* Differentiator.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB391288704690023878C /* Differentiator.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3AC288704900023878C /* GSKStretchyHeaderView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB393288704710023878C /* GSKStretchyHeaderView.xcframework */; };
 		44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB393288704710023878C /* GSKStretchyHeaderView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3AE288704900023878C /* AMPopTip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB394288704750023878C /* AMPopTip.xcframework */; };
 		44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB394288704750023878C /* AMPopTip.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3B0288704910023878C /* Reusable.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB395288704790023878C /* Reusable.xcframework */; };
-		44DFB3B1288704910023878C /* Reusable.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB395288704790023878C /* Reusable.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3B2288704910023878C /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3962887047E0023878C /* RxCocoa.xcframework */; };
-		44DFB3B3288704910023878C /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3962887047E0023878C /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3B4288704910023878C /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB397288704820023878C /* RxRelay.xcframework */; };
-		44DFB3B5288704910023878C /* RxRelay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB397288704820023878C /* RxRelay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3B6288704910023878C /* SQLite.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB398288704860023878C /* SQLite.xcframework */; };
-		44DFB3B7288704910023878C /* SQLite.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB398288704860023878C /* SQLite.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44EDA53E28FE232400BEB99A /* libjami.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EDA53D28FE22FD00BEB99A /* libjami.a */; };
-		44EDA53F28FE234500BEB99A /* libjami.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EDA53D28FE22FD00BEB99A /* libjami.a */; };
 		5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
 		5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */; };
 		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
@@ -499,7 +498,6 @@
 		6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144324B4ACA7007203D5 /* CoreLocation.framework */; };
 		645BDD8124B74BCB009129B1 /* LocationSharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BDD8024B74BCB009129B1 /* LocationSharingService.swift */; };
 		648AF76D24ED7CA90004D727 /* UITextView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648AF76C24ED7CA90004D727 /* UITextView+Helpers.swift */; };
-		649AD3C324B4CFC700A0236D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144724B4ACDE007203D5 /* libsqlite3.tbd */; };
 		649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144124B4AC9F007203D5 /* libc++.tbd */; };
 		64DBCD2224DB3CF600CB5CA2 /* UserSearchResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 64DBCD2124DB3CF600CB5CA2 /* UserSearchResponse.m */; };
 		6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6613A611214AFF4700B497D1 /* ScanViewController.storyboard */; };
@@ -569,17 +567,17 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				44DFB3A7288704900023878C /* RxBlocking.xcframework in Embed Frameworks */,
-				44DFB3A52887048F0023878C /* RxDataSources.xcframework in Embed Frameworks */,
-				44DFB3B5288704910023878C /* RxRelay.xcframework in Embed Frameworks */,
-				44DFB39D2887048F0023878C /* RxSwift.xcframework in Embed Frameworks */,
+				26001CD02D79248F009A8E23 /* RxDataSources.xcframework in Embed Frameworks */,
 				44DFB3A9288704900023878C /* Differentiator.xcframework in Embed Frameworks */,
-				44DFB3B3288704910023878C /* RxCocoa.xcframework in Embed Frameworks */,
-				44DFB39F2887048F0023878C /* SwiftyBeaver.xcframework in Embed Frameworks */,
-				44DFB3B1288704910023878C /* Reusable.xcframework in Embed Frameworks */,
-				44DFB3B7288704910023878C /* SQLite.xcframework in Embed Frameworks */,
+				26001C672D78E1EC009A8E23 /* SwiftyBeaver.xcframework in Embed Frameworks */,
+				26001CCA2D792489009A8E23 /* SQLite.xcframework in Embed Frameworks */,
+				26001CCC2D79248B009A8E23 /* RxSwift.xcframework in Embed Frameworks */,
+				26001CD22D792490009A8E23 /* RxCocoa.xcframework in Embed Frameworks */,
 				44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */,
 				44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */,
+				26001CD42D792492009A8E23 /* RxBlocking.xcframework in Embed Frameworks */,
+				26001CCE2D79248D009A8E23 /* RxRelay.xcframework in Embed Frameworks */,
+				26001CD62D792494009A8E23 /* Reusable.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,51 +626,6 @@
 		04399AA91D1C304300E99CD9 /* Ring-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ring-Bridging-Header.h"; sourceTree = "<group>"; };
 		04399AAA1D1C304300E99CD9 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		04399AAB1D1C304300E99CD9 /* Utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
-		04399AB21D1C341A00E99CD9 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../fat/lib/libavcodec.a; sourceTree = "<group>"; };
-		04399AB31D1C341A00E99CD9 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = ../fat/lib/libavdevice.a; sourceTree = "<group>"; };
-		04399AB41D1C341A00E99CD9 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = ../fat/lib/libavfilter.a; sourceTree = "<group>"; };
-		04399AB51D1C341A00E99CD9 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ../fat/lib/libavformat.a; sourceTree = "<group>"; };
-		04399AB61D1C341A00E99CD9 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ../fat/lib/libavutil.a; sourceTree = "<group>"; };
-		04399AB71D1C341A00E99CD9 /* libFLAC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFLAC.a; path = ../fat/lib/libFLAC.a; sourceTree = "<group>"; };
-		04399AB81D1C341A00E99CD9 /* libgmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgmp.a; path = ../fat/lib/libgmp.a; sourceTree = "<group>"; };
-		04399AB91D1C341A00E99CD9 /* libgnutls.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgnutls.a; path = ../fat/lib/libgnutls.a; sourceTree = "<group>"; };
-		04399ABB1D1C341A00E99CD9 /* libhogweed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhogweed.a; path = ../fat/lib/libhogweed.a; sourceTree = "<group>"; };
-		04399ABD1D1C341A00E99CD9 /* libixml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libixml.a; path = ../fat/lib/libixml.a; sourceTree = "<group>"; };
-		04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjsoncpp.a; path = ../fat/lib/libjsoncpp.a; sourceTree = "<group>"; };
-		04399ABF1D1C341A00E99CD9 /* libmsgpackc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmsgpackc.a; path = ../fat/lib/libmsgpackc.a; sourceTree = "<group>"; };
-		04399AC01D1C341A00E99CD9 /* libnettle.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnettle.a; path = ../fat/lib/libnettle.a; sourceTree = "<group>"; };
-		04399AC11D1C341A00E99CD9 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = ../fat/lib/libogg.a; sourceTree = "<group>"; };
-		04399AC21D1C341A00E99CD9 /* libopendht.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopendht.a; path = ../fat/lib/libopendht.a; sourceTree = "<group>"; };
-		04399AC31D1C341A00E99CD9 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopus.a; path = ../fat/lib/libopus.a; sourceTree = "<group>"; };
-		04399AC41D1C341A00E99CD9 /* libpcre.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpcre.a; path = ../fat/lib/libpcre.a; sourceTree = "<group>"; };
-		04399AC51D1C341A00E99CD9 /* libpcreposix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpcreposix.a; path = ../fat/lib/libpcreposix.a; sourceTree = "<group>"; };
-		04399AC61D1C341A00E99CD9 /* libpj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpj.a; path = ../fat/lib/libpj.a; sourceTree = "<group>"; };
-		04399AC71D1C341A00E99CD9 /* libpjlib-util.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjlib-util.a"; path = "../fat/lib/libpjlib-util.a"; sourceTree = "<group>"; };
-		04399AC81D1C341A00E99CD9 /* libpjmedia-audiodev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-audiodev.a"; path = "../fat/lib/libpjmedia-audiodev.a"; sourceTree = "<group>"; };
-		04399AC91D1C341A00E99CD9 /* libpjmedia-codec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-codec.a"; path = "../fat/lib/libpjmedia-codec.a"; sourceTree = "<group>"; };
-		04399ACA1D1C341A00E99CD9 /* libpjmedia-videodev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-videodev.a"; path = "../fat/lib/libpjmedia-videodev.a"; sourceTree = "<group>"; };
-		04399ACB1D1C341A00E99CD9 /* libpjmedia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjmedia.a; path = ../fat/lib/libpjmedia.a; sourceTree = "<group>"; };
-		04399ACC1D1C341A00E99CD9 /* libpjnath.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjnath.a; path = ../fat/lib/libpjnath.a; sourceTree = "<group>"; };
-		04399ACD1D1C341A00E99CD9 /* libpjsip-simple.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-simple.a"; path = "../fat/lib/libpjsip-simple.a"; sourceTree = "<group>"; };
-		04399ACE1D1C341A00E99CD9 /* libpjsip-ua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-ua.a"; path = "../fat/lib/libpjsip-ua.a"; sourceTree = "<group>"; };
-		04399ACF1D1C341A00E99CD9 /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = ../fat/lib/libpjsip.a; sourceTree = "<group>"; };
-		04399AD01D1C341A00E99CD9 /* libpjsua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsua.a; path = ../fat/lib/libpjsua.a; sourceTree = "<group>"; };
-		04399AD11D1C341A00E99CD9 /* libpjsua2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsua2.a; path = ../fat/lib/libpjsua2.a; sourceTree = "<group>"; };
-		04399AD41D1C341A00E99CD9 /* libring.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libring.a; path = ../fat/lib/libring.a; sourceTree = "<group>"; };
-		04399AD51D1C341A00E99CD9 /* libsamplerate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsamplerate.a; path = ../fat/lib/libsamplerate.a; sourceTree = "<group>"; };
-		04399AD61D1C341A00E99CD9 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../fat/lib/libsndfile.a; sourceTree = "<group>"; };
-		04399AD71D1C341A00E99CD9 /* libspeex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspeex.a; path = ../fat/lib/libspeex.a; sourceTree = "<group>"; };
-		04399AD81D1C341A00E99CD9 /* libspeexdsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspeexdsp.a; path = ../fat/lib/libspeexdsp.a; sourceTree = "<group>"; };
-		04399AD91D1C341A00E99CD9 /* libsrtp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsrtp.a; path = ../fat/lib/libsrtp.a; sourceTree = "<group>"; };
-		04399ADA1D1C341A00E99CD9 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = ../fat/lib/libswresample.a; sourceTree = "<group>"; };
-		04399ADB1D1C341A00E99CD9 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ../fat/lib/libswscale.a; sourceTree = "<group>"; };
-		04399ADD1D1C341A00E99CD9 /* libupnp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libupnp.a; path = ../fat/lib/libupnp.a; sourceTree = "<group>"; };
-		04399ADE1D1C341A00E99CD9 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = ../fat/lib/libvorbis.a; sourceTree = "<group>"; };
-		04399ADF1D1C341A00E99CD9 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = ../fat/lib/libvorbisenc.a; sourceTree = "<group>"; };
-		04399AE01D1C341A00E99CD9 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../fat/lib/libvorbisfile.a; sourceTree = "<group>"; };
-		04399AE11D1C341A00E99CD9 /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = ../fat/lib/libvpx.a; sourceTree = "<group>"; };
-		04399AE21D1C341A00E99CD9 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../fat/lib/libx264.a; sourceTree = "<group>"; };
-		04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../fat/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
 		0586C94A1F684DF600613517 /* UIImage+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Helpers.swift"; sourceTree = "<group>"; };
 		0E0FF1A61FC38070003898C2 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		0E0FF1A91FC3843E003898C2 /* DBContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBContainer.swift; sourceTree = "<group>"; };
@@ -700,7 +653,6 @@
 		0E4909741FEAC943005CAA50 /* CallViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CallViewController.storyboard; sourceTree = "<group>"; };
 		0E4909791FEAC9E1005CAA50 /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		0E49097B1FEACA4B005CAA50 /* CallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewModel.swift; sourceTree = "<group>"; };
-		0E4A51CB23282BCC00357AFC /* libhttp_parser.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhttp_parser.a; path = ../fat/lib/libhttp_parser.a; sourceTree = "<group>"; };
 		0E5806F223BE42EC007D1F5D /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		0E5806F423BE4307007D1F5D /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		0E5806F623BE4325007D1F5D /* PlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerView.xib; sourceTree = "<group>"; };
@@ -789,7 +741,52 @@
 		1DF75AC1296E09240055EA87 /* Button+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Helpers.swift"; sourceTree = "<group>"; };
 		1DF75AC3296E0A940055EA87 /* View+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Helpers.swift"; sourceTree = "<group>"; };
 		1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreParticipantsInSwarm.swift; sourceTree = "<group>"; };
-		26001BD72D6E5C8F009A8E23 /* libnatpmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnatpmp.a; path = ../fat/lib/libnatpmp.a; sourceTree = "<group>"; };
+		26001BDF2D78E198009A8E23 /* libpjsua.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libpjsua.xcframework; path = ../xcframework/libpjsua.xcframework; sourceTree = "<group>"; };
+		26001BE02D78E198009A8E23 /* libsrtp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libsrtp.xcframework; path = ../xcframework/libsrtp.xcframework; sourceTree = "<group>"; };
+		26001BE12D78E198009A8E23 /* libspeexdsp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libspeexdsp.xcframework; path = ../xcframework/libspeexdsp.xcframework; sourceTree = "<group>"; };
+		26001BE22D78E199009A8E23 /* libnettle.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libnettle.xcframework; path = ../xcframework/libnettle.xcframework; sourceTree = "<group>"; };
+		26001BE32D78E199009A8E23 /* libswscale.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libswscale.xcframework; path = ../xcframework/libswscale.xcframework; sourceTree = "<group>"; };
+		26001BE42D78E199009A8E23 /* libgnutls.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libgnutls.xcframework; path = ../xcframework/libgnutls.xcframework; sourceTree = "<group>"; };
+		26001BE52D78E199009A8E23 /* libcrypto.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libcrypto.xcframework; path = ../xcframework/libcrypto.xcframework; sourceTree = "<group>"; };
+		26001BE62D78E199009A8E23 /* libavutil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavutil.xcframework; path = ../xcframework/libavutil.xcframework; sourceTree = "<group>"; };
+		26001BE72D78E199009A8E23 /* libpjsua2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libpjsua2.xcframework; path = ../xcframework/libpjsua2.xcframework; sourceTree = "<group>"; };
+		26001BE82D78E199009A8E23 /* libpjnath.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libpjnath.xcframework; path = ../xcframework/libpjnath.xcframework; sourceTree = "<group>"; };
+		26001BE92D78E19A009A8E23 /* libixml.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libixml.xcframework; path = ../xcframework/libixml.xcframework; sourceTree = "<group>"; };
+		26001BEA2D78E19A009A8E23 /* libpjmedia.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libpjmedia.xcframework; path = ../xcframework/libpjmedia.xcframework; sourceTree = "<group>"; };
+		26001BEB2D78E19A009A8E23 /* libsecp256k1.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libsecp256k1.xcframework; path = ../xcframework/libsecp256k1.xcframework; sourceTree = "<group>"; };
+		26001BEC2D78E19A009A8E23 /* libhogweed.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libhogweed.xcframework; path = ../xcframework/libhogweed.xcframework; sourceTree = "<group>"; };
+		26001BED2D78E19A009A8E23 /* libgmp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libgmp.xcframework; path = ../xcframework/libgmp.xcframework; sourceTree = "<group>"; };
+		26001BEE2D78E19A009A8E23 /* libyaml-cpp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libyaml-cpp.xcframework"; path = "../xcframework/libyaml-cpp.xcframework"; sourceTree = "<group>"; };
+		26001BEF2D78E19A009A8E23 /* libswresample.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libswresample.xcframework; path = ../xcframework/libswresample.xcframework; sourceTree = "<group>"; };
+		26001BF02D78E19B009A8E23 /* libtls.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libtls.xcframework; path = ../xcframework/libtls.xcframework; sourceTree = "<group>"; };
+		26001BF12D78E19B009A8E23 /* libavcodec.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavcodec.xcframework; path = ../xcframework/libavcodec.xcframework; sourceTree = "<group>"; };
+		26001BF22D78E19B009A8E23 /* libupnp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libupnp.xcframework; path = ../xcframework/libupnp.xcframework; sourceTree = "<group>"; };
+		26001BF32D78E19B009A8E23 /* libx264.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libx264.xcframework; path = ../xcframework/libx264.xcframework; sourceTree = "<group>"; };
+		26001BF42D78E19B009A8E23 /* libpjsip-simple.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libpjsip-simple.xcframework"; path = "../xcframework/libpjsip-simple.xcframework"; sourceTree = "<group>"; };
+		26001BF52D78E19C009A8E23 /* libopendht.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libopendht.xcframework; path = ../xcframework/libopendht.xcframework; sourceTree = "<group>"; };
+		26001BF62D78E19C009A8E23 /* libjami.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libjami.xcframework; path = ../xcframework/libjami.xcframework; sourceTree = "<group>"; };
+		26001BF72D78E19C009A8E23 /* libpjmedia-audiodev.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libpjmedia-audiodev.xcframework"; path = "../xcframework/libpjmedia-audiodev.xcframework"; sourceTree = "<group>"; };
+		26001BF82D78E19C009A8E23 /* libpjlib-util.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libpjlib-util.xcframework"; path = "../xcframework/libpjlib-util.xcframework"; sourceTree = "<group>"; };
+		26001BF92D78E19C009A8E23 /* libargon2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libargon2.xcframework; path = ../xcframework/libargon2.xcframework; sourceTree = "<group>"; };
+		26001BFA2D78E19C009A8E23 /* libpj.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libpj.xcframework; path = ../xcframework/libpj.xcframework; sourceTree = "<group>"; };
+		26001BFB2D78E19C009A8E23 /* libhttp_parser.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libhttp_parser.xcframework; path = ../xcframework/libhttp_parser.xcframework; sourceTree = "<group>"; };
+		26001BFC2D78E19D009A8E23 /* libopus.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libopus.xcframework; path = ../xcframework/libopus.xcframework; sourceTree = "<group>"; };
+		26001BFD2D78E19D009A8E23 /* libdhtnet.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libdhtnet.xcframework; path = ../xcframework/libdhtnet.xcframework; sourceTree = "<group>"; };
+		26001BFE2D78E19D009A8E23 /* libjsoncpp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libjsoncpp.xcframework; path = ../xcframework/libjsoncpp.xcframework; sourceTree = "<group>"; };
+		26001BFF2D78E19F009A8E23 /* libpjsip-ua.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libpjsip-ua.xcframework"; path = "../xcframework/libpjsip-ua.xcframework"; sourceTree = "<group>"; };
+		26001C002D78E19F009A8E23 /* libpjsip.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libpjsip.xcframework; path = ../xcframework/libpjsip.xcframework; sourceTree = "<group>"; };
+		26001C012D78E19F009A8E23 /* libspeex.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libspeex.xcframework; path = ../xcframework/libspeex.xcframework; sourceTree = "<group>"; };
+		26001C022D78E1A0009A8E23 /* libyuv.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libyuv.xcframework; path = ../xcframework/libyuv.xcframework; sourceTree = "<group>"; };
+		26001C032D78E1A0009A8E23 /* libavfilter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavfilter.xcframework; path = ../xcframework/libavfilter.xcframework; sourceTree = "<group>"; };
+		26001C042D78E1A0009A8E23 /* libpjmedia-codec.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libpjmedia-codec.xcframework"; path = "../xcframework/libpjmedia-codec.xcframework"; sourceTree = "<group>"; };
+		26001C052D78E1A0009A8E23 /* libavformat.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavformat.xcframework; path = ../xcframework/libavformat.xcframework; sourceTree = "<group>"; };
+		26001C062D78E1A0009A8E23 /* libssl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libssl.xcframework; path = ../xcframework/libssl.xcframework; sourceTree = "<group>"; };
+		26001C072D78E1A0009A8E23 /* libavdevice.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavdevice.xcframework; path = ../xcframework/libavdevice.xcframework; sourceTree = "<group>"; };
+		26001C082D78E1A0009A8E23 /* libfmt.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libfmt.xcframework; path = ../xcframework/libfmt.xcframework; sourceTree = "<group>"; };
+		26001C092D78E1A0009A8E23 /* libgit2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libgit2.xcframework; path = ../xcframework/libgit2.xcframework; sourceTree = "<group>"; };
+		26001C0A2D78E1A1009A8E23 /* libllhttp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libllhttp.xcframework; path = ../xcframework/libllhttp.xcframework; sourceTree = "<group>"; };
+		26001C0B2D78E1A1009A8E23 /* libpjmedia-videodev.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libpjmedia-videodev.xcframework"; path = "../xcframework/libpjmedia-videodev.xcframework"; sourceTree = "<group>"; };
+		26001CC32D7918BD009A8E23 /* libvpx.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libvpx.xcframework; path = ../xcframework/libvpx.xcframework; sourceTree = "<group>"; };
 		26069B6524C9FCE8002361A3 /* ObjCHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCHandler.h; sourceTree = "<group>"; };
 		26069B6624C9FCE8002361A3 /* ObjCHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCHandler.m; sourceTree = "<group>"; };
 		2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComposeNewMessageCoordinator.swift; path = Ring/Features/Conversations/ComposeNewMessageCoordinator.swift; sourceTree = SOURCE_ROOT; };
@@ -887,7 +884,6 @@
 		267B956D2C233E2600353B01 /* GeneralSettingsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViews.swift; sourceTree = "<group>"; };
 		267B95892C2478F100353B01 /* SipAccountDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SipAccountDetailModel.swift; sourceTree = "<group>"; };
 		267B958B2C24793500353B01 /* ManageSipAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageSipAccountView.swift; sourceTree = "<group>"; };
-		267B958D2C2AFEEA00353B01 /* libllhttp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libllhttp.a; path = ../fat/lib/libllhttp.a; sourceTree = "<group>"; };
 		267B95F82C2B5FB000353B01 /* LinkDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkDeviceView.swift; sourceTree = "<group>"; };
 		267B95FA2C2B5FFA00353B01 /* RevocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevocationView.swift; sourceTree = "<group>"; };
 		267CFD6E2ACCDCD70066FE15 /* SmartListNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListNavigationBar.swift; sourceTree = "<group>"; };
@@ -914,10 +910,6 @@
 		2692557D2C5D53A300F85A1E /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
 		26929FD125659E5F0052A601 /* cacert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cacert.pem; sourceTree = "<group>"; };
 		269B849326151AC10015BC72 /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = ../DEPS/arm64/lib/libgit2.a; sourceTree = "<group>"; };
-		269DA04F28D0D2E6007D51D6 /* libyuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyuv.a; path = ../fat/lib/libyuv.a; sourceTree = "<group>"; };
-		269DA05028D0D2EA007D51D6 /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsecp256k1.a; path = ../fat/lib/libsecp256k1.a; sourceTree = "<group>"; };
-		269DA05128D0D2ED007D51D6 /* libfmt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmt.a; path = ../fat/lib/libfmt.a; sourceTree = "<group>"; };
-		269DA05228D0D2EF007D51D6 /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = ../fat/lib/libgit2.a; sourceTree = "<group>"; };
 		269DA08428D0DA18007D51D6 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../DEPS/x86_64/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
 		269DA09828E23D37007D51D6 /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
 		269DA09C28E23F57007D51D6 /* MessagesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListView.swift; sourceTree = "<group>"; };
@@ -997,7 +989,6 @@
 		26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageVM.swift; sourceTree = "<group>"; };
 		26BCBBD22A964ABC0001EE38 /* ConferenceActionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceActionsModel.swift; sourceTree = "<group>"; };
 		26BCBBD42A965EFC0001EE38 /* PictureInPictureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureInPictureManager.swift; sourceTree = "<group>"; };
-		26C4845B2A796D69005BC767 /* libdhtnet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdhtnet.a; path = ../fat/lib/libdhtnet.a; sourceTree = "<group>"; };
 		26C4D07D2C62730100B1218C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfo.swift; sourceTree = "<group>"; };
 		26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationPrefixHeader.pch; sourceTree = "<group>"; };
@@ -1054,7 +1045,6 @@
 		44DFB397288704820023878C /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
 		44DFB398288704860023878C /* SQLite.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SQLite.xcframework; path = Carthage/Build/SQLite.xcframework; sourceTree = "<group>"; };
 		44DFB3992887048A0023878C /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
-		44EDA53D28FE22FD00BEB99A /* libjami.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjami.a; path = ../fat/lib/libjami.a; sourceTree = "<group>"; };
 		5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModelHelper.swift; sourceTree = "<group>"; };
 		5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModelHelperTests.swift; sourceTree = "<group>"; };
 		557086501E8ADB9D001A7CE4 /* SystemAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemAdapter.h; sourceTree = "<group>"; };
@@ -1078,7 +1068,6 @@
 		56BBC9A01ED714DF00CDAF8B /* MessagesAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesAdapterDelegate.swift; sourceTree = "<group>"; };
 		56BBC9A11ED714DF00CDAF8B /* ConversationsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsService.swift; sourceTree = "<group>"; };
 		56BBC9BB1ED7161200CDAF8B /* Date+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
-		56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libargon2.a; path = ../fat/lib/libargon2.a; sourceTree = "<group>"; };
 		56BBC9DD1EDDC9D300CDAF8B /* LookupNameResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookupNameResponse.h; sourceTree = "<group>"; };
 		56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookupNameResponse.m; sourceTree = "<group>"; };
 		56C715FD1F0D36C600770048 /* ContactsAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsAdapter.h; sourceTree = "<group>"; };
@@ -1090,9 +1079,6 @@
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
 		623660A920092081002598C1 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../daemon/src; sourceTree = "<group>"; };
 		627F11F020348FBF006560B5 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
-		628F4DCA206BE23B0009C44C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../fat/lib/libssl.a; sourceTree = "<group>"; };
-		628F4DCC206BF4730009C44C /* libtls.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtls.a; path = ../fat/lib/libtls.a; sourceTree = "<group>"; };
-		628F4DCE206C0AEE0009C44C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../fat/lib/libcrypto.a; sourceTree = "<group>"; };
 		62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenceAdapter.h; sourceTree = "<group>"; };
 		62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceAdapterDelegate.swift; sourceTree = "<group>"; };
 		62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PresenceAdapter.mm; sourceTree = "<group>"; };
@@ -1197,76 +1183,74 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				269DA05E28D0D366007D51D6 /* libhogweed.a in Frameworks */,
-				649AD3C324B4CFC700A0236D /* libsqlite3.tbd in Frameworks */,
-				269DA06A28D0D366007D51D6 /* libpjmedia.a in Frameworks */,
-				269DA06328D0D366007D51D6 /* libopendht.a in Frameworks */,
-				269DA07028D0D366007D51D6 /* libpjsua2.a in Frameworks */,
-				269DA05728D0D366007D51D6 /* libavformat.a in Frameworks */,
 				04399A981D1C2F6100E99CD9 /* libz.tbd in Frameworks */,
-				269DA07228D0D366007D51D6 /* libsecp256k1.a in Frameworks */,
+				26001C122D78E1A1009A8E23 /* libnettle.xcframework in Frameworks */,
 				649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */,
-				269DA07428D0D366007D51D6 /* libspeexdsp.a in Frameworks */,
-				269DA06C28D0D366007D51D6 /* libpjsip-simple.a in Frameworks */,
-				26001BD92D6E5E40009A8E23 /* libnatpmp.a in Frameworks */,
+				26001C262D78E1A2009A8E23 /* libhogweed.xcframework in Frameworks */,
+				26001CCF2D79248E009A8E23 /* RxDataSources.xcframework in Frameworks */,
+				26001C3A2D78E1A3009A8E23 /* libjami.xcframework in Frameworks */,
 				6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */,
-				26CA4C5A2AB23CCF00AEF8F5 /* libixml.a in Frameworks */,
-				269DA05C28D0D366007D51D6 /* libgmp.a in Frameworks */,
-				269DA05328D0D366007D51D6 /* libargon2.a in Frameworks */,
+				26001C1A2D78E1A1009A8E23 /* libavutil.xcframework in Frameworks */,
+				26001C1C2D78E1A1009A8E23 /* libpjsua2.xcframework in Frameworks */,
+				26001C542D78E1A4009A8E23 /* libavfilter.xcframework in Frameworks */,
+				26001C202D78E1A2009A8E23 /* libixml.xcframework in Frameworks */,
 				44DFB3AC288704900023878C /* GSKStretchyHeaderView.xcframework in Frameworks */,
 				0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */,
-				269DA05628D0D366007D51D6 /* libavfilter.a in Frameworks */,
-				44EDA53E28FE232400BEB99A /* libjami.a in Frameworks */,
+				26001C1E2D78E1A2009A8E23 /* libpjnath.xcframework in Frameworks */,
 				0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */,
-				269DA07D28D0D367007D51D6 /* libyaml-cpp.a in Frameworks */,
-				269DA05D28D0D366007D51D6 /* libgnutls.a in Frameworks */,
-				44DFB3B4288704910023878C /* RxRelay.xcframework in Frameworks */,
-				269DA07528D0D366007D51D6 /* libsrtp.a in Frameworks */,
-				26CA4C5B2AB23CCF00AEF8F5 /* libupnp.a in Frameworks */,
-				44DFB3B0288704910023878C /* Reusable.xcframework in Frameworks */,
-				269DA05428D0D366007D51D6 /* libavcodec.a in Frameworks */,
-				269DA06F28D0D366007D51D6 /* libpjsua.a in Frameworks */,
-				26C4845D2A796DC9005BC767 /* libdhtnet.a in Frameworks */,
-				269DA07328D0D366007D51D6 /* libspeex.a in Frameworks */,
-				269DA06B28D0D366007D51D6 /* libpjnath.a in Frameworks */,
+				26001C482D78E1A3009A8E23 /* libdhtnet.xcframework in Frameworks */,
+				26001C322D78E1A2009A8E23 /* libupnp.xcframework in Frameworks */,
+				26001C4C2D78E1A3009A8E23 /* libpjsip-ua.xcframework in Frameworks */,
+				26001C562D78E1A4009A8E23 /* libpjmedia-codec.xcframework in Frameworks */,
+				26001C5A2D78E1A4009A8E23 /* libssl.xcframework in Frameworks */,
 				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
-				269DA06728D0D366007D51D6 /* libpjmedia-audiodev.a in Frameworks */,
-				269DA06828D0D366007D51D6 /* libpjmedia-codec.a in Frameworks */,
-				44DFB3A6288704900023878C /* RxBlocking.xcframework in Frameworks */,
-				44DFB3B2288704910023878C /* RxCocoa.xcframework in Frameworks */,
-				269DA07B28D0D367007D51D6 /* libvpx.a in Frameworks */,
-				44DFB39E2887048F0023878C /* SwiftyBeaver.xcframework in Frameworks */,
-				269DA06928D0D366007D51D6 /* libpjmedia-videodev.a in Frameworks */,
-				44DFB3B6288704910023878C /* SQLite.xcframework in Frameworks */,
-				269DA07E28D0D367007D51D6 /* libyuv.a in Frameworks */,
-				269DA06628D0D366007D51D6 /* libpjlib-util.a in Frameworks */,
-				269DA06E28D0D366007D51D6 /* libpjsip.a in Frameworks */,
-				269DA05B28D0D366007D51D6 /* libgit2.a in Frameworks */,
-				269DA06D28D0D366007D51D6 /* libpjsip-ua.a in Frameworks */,
-				44DFB3A42887048F0023878C /* RxDataSources.xcframework in Frameworks */,
+				26001CD12D792490009A8E23 /* RxCocoa.xcframework in Frameworks */,
+				26001CD52D792494009A8E23 /* Reusable.xcframework in Frameworks */,
+				26001C422D78E1A3009A8E23 /* libpj.xcframework in Frameworks */,
+				26001C2E2D78E1A2009A8E23 /* libtls.xcframework in Frameworks */,
+				26001C462D78E1A3009A8E23 /* libopus.xcframework in Frameworks */,
+				26001CC92D792489009A8E23 /* SQLite.xcframework in Frameworks */,
+				26001C342D78E1A2009A8E23 /* libx264.xcframework in Frameworks */,
 				44DFB3AE288704900023878C /* AMPopTip.xcframework in Frameworks */,
-				269DA05928D0D366007D51D6 /* libcrypto.a in Frameworks */,
-				44DFB39C2887048F0023878C /* RxSwift.xcframework in Frameworks */,
-				269DA07628D0D366007D51D6 /* libssl.a in Frameworks */,
+				26001C142D78E1A1009A8E23 /* libswscale.xcframework in Frameworks */,
+				26001C302D78E1A2009A8E23 /* libavcodec.xcframework in Frameworks */,
+				26001C4E2D78E1A3009A8E23 /* libpjsip.xcframework in Frameworks */,
+				26001C662D78E1EC009A8E23 /* SwiftyBeaver.xcframework in Frameworks */,
+				26001C402D78E1A3009A8E23 /* libargon2.xcframework in Frameworks */,
+				26001C522D78E1A4009A8E23 /* libyuv.xcframework in Frameworks */,
+				26001C282D78E1A2009A8E23 /* libgmp.xcframework in Frameworks */,
+				26001C5E2D78E1A4009A8E23 /* libfmt.xcframework in Frameworks */,
+				26001C382D78E1A2009A8E23 /* libopendht.xcframework in Frameworks */,
+				26001C242D78E1A2009A8E23 /* libsecp256k1.xcframework in Frameworks */,
+				26001CD32D792492009A8E23 /* RxBlocking.xcframework in Frameworks */,
+				26001CC42D7918BD009A8E23 /* libvpx.xcframework in Frameworks */,
+				26001CCD2D79248D009A8E23 /* RxRelay.xcframework in Frameworks */,
 				44DFB3A8288704900023878C /* Differentiator.xcframework in Frameworks */,
+				26001C102D78E1A1009A8E23 /* libspeexdsp.xcframework in Frameworks */,
+				26001C4A2D78E1A3009A8E23 /* libjsoncpp.xcframework in Frameworks */,
 				5593D7D32B7FE00A00DA109C /* MCEmojiPicker in Frameworks */,
-				269DA07C28D0D367007D51D6 /* libx264.a in Frameworks */,
-				269DA07928D0D367007D51D6 /* libtls.a in Frameworks */,
-				269DA05F28D0D366007D51D6 /* libhttp_parser.a in Frameworks */,
-				269DA05528D0D366007D51D6 /* libavdevice.a in Frameworks */,
-				269DA06228D0D366007D51D6 /* libnettle.a in Frameworks */,
-				269DA07828D0D366007D51D6 /* libswscale.a in Frameworks */,
-				269DA06528D0D366007D51D6 /* libpj.a in Frameworks */,
-				269DA05A28D0D366007D51D6 /* libfmt.a in Frameworks */,
+				26001C2C2D78E1A2009A8E23 /* libswresample.xcframework in Frameworks */,
+				26001CCB2D79248B009A8E23 /* RxSwift.xcframework in Frameworks */,
+				26001C3E2D78E1A3009A8E23 /* libpjlib-util.xcframework in Frameworks */,
+				26001C0E2D78E1A1009A8E23 /* libsrtp.xcframework in Frameworks */,
+				26001C0C2D78E1A1009A8E23 /* libpjsua.xcframework in Frameworks */,
+				26001C642D78E1A4009A8E23 /* libpjmedia-videodev.xcframework in Frameworks */,
+				26001C5C2D78E1A4009A8E23 /* libavdevice.xcframework in Frameworks */,
 				04399A971D1C2F6100E99CD9 /* libbz2.tbd in Frameworks */,
-				269DA06428D0D366007D51D6 /* libopus.a in Frameworks */,
-				269DA06128D0D366007D51D6 /* libjsoncpp.a in Frameworks */,
+				26001C582D78E1A4009A8E23 /* libavformat.xcframework in Frameworks */,
+				26001C182D78E1A1009A8E23 /* libcrypto.xcframework in Frameworks */,
+				26001C162D78E1A1009A8E23 /* libgnutls.xcframework in Frameworks */,
+				26001C622D78E1A4009A8E23 /* libllhttp.xcframework in Frameworks */,
+				26001C222D78E1A2009A8E23 /* libpjmedia.xcframework in Frameworks */,
+				26001C3C2D78E1A3009A8E23 /* libpjmedia-audiodev.xcframework in Frameworks */,
 				04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */,
-				267B958F2C2AFFD700353B01 /* libllhttp.a in Frameworks */,
+				26001C602D78E1A4009A8E23 /* libgit2.xcframework in Frameworks */,
+				26001C442D78E1A3009A8E23 /* libhttp_parser.xcframework in Frameworks */,
 				04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */,
-				269DA07728D0D366007D51D6 /* libswresample.a in Frameworks */,
+				26001C2A2D78E1A2009A8E23 /* libyaml-cpp.xcframework in Frameworks */,
+				26001C502D78E1A3009A8E23 /* libspeex.xcframework in Frameworks */,
+				26001C362D78E1A2009A8E23 /* libpjsip-simple.xcframework in Frameworks */,
 				04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */,
-				269DA08228D0D68F007D51D6 /* libavutil.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1288,67 +1272,67 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				269DA03C28D0D2E5007D51D6 /* libpjmedia.a in Frameworks */,
-				269DA04A28D0D2E6007D51D6 /* libtls.a in Frameworks */,
-				269DA03D28D0D2E5007D51D6 /* libpjnath.a in Frameworks */,
+				26001CB62D78E3E7009A8E23 /* libswscale.xcframework in Frameworks */,
 				26BB43852670150E00019CF6 /* libbz2.tbd in Frameworks */,
-				44EDA53F28FE234500BEB99A /* libjami.a in Frameworks */,
+				26001CAA2D78E3E7009A8E23 /* libsecp256k1.xcframework in Frameworks */,
+				26001C882D78E3E6009A8E23 /* libjsoncpp.xcframework in Frameworks */,
+				26001CC02D78E3E8009A8E23 /* libyuv.xcframework in Frameworks */,
 				26BB43842670144800019CF6 /* libz.1.2.8.tbd in Frameworks */,
+				26001C942D78E3E6009A8E23 /* libpjlib-util.xcframework in Frameworks */,
+				26001CAC2D78E3E7009A8E23 /* libspeex.xcframework in Frameworks */,
+				26001C7C2D78E3E5009A8E23 /* libgmp.xcframework in Frameworks */,
+				26001C902D78E3E6009A8E23 /* libopus.xcframework in Frameworks */,
+				26001C9C2D78E3E6009A8E23 /* libpjmedia.xcframework in Frameworks */,
+				26001CA22D78E3E7009A8E23 /* libpjsip-ua.xcframework in Frameworks */,
+				26001CBA2D78E3E8009A8E23 /* libupnp.xcframework in Frameworks */,
+				26001C842D78E3E5009A8E23 /* libixml.xcframework in Frameworks */,
+				26001C802D78E3E5009A8E23 /* libhogweed.xcframework in Frameworks */,
+				26001CA42D78E3E7009A8E23 /* libpjsip.xcframework in Frameworks */,
 				26BB43822670141100019CF6 /* libz.1.tbd in Frameworks */,
+				26001C7A2D78E3E5009A8E23 /* libgit2.xcframework in Frameworks */,
+				26001C6E2D78E3E5009A8E23 /* libavfilter.xcframework in Frameworks */,
 				26BB43802670140600019CF6 /* libz.1.2.5.tbd in Frameworks */,
-				269DA02C28D0D2E5007D51D6 /* libavutil.a in Frameworks */,
-				269DA04628D0D2E6007D51D6 /* libsrtp.a in Frameworks */,
-				269DA04728D0D2E6007D51D6 /* libssl.a in Frameworks */,
-				269DA02728D0D2E5007D51D6 /* libargon2.a in Frameworks */,
-				269DA03828D0D2E5007D51D6 /* libpjlib-util.a in Frameworks */,
-				269DA04928D0D2E6007D51D6 /* libswscale.a in Frameworks */,
-				269DA03428D0D2E5007D51D6 /* libnettle.a in Frameworks */,
-				269DA02928D0D2E5007D51D6 /* libavdevice.a in Frameworks */,
-				269DA08628D0DFE3007D51D6 /* libyaml-cpp.a in Frameworks */,
-				269DA03028D0D2E5007D51D6 /* libhogweed.a in Frameworks */,
+				26001C6C2D78E3E5009A8E23 /* libavdevice.xcframework in Frameworks */,
+				26001C8C2D78E3E6009A8E23 /* libnettle.xcframework in Frameworks */,
 				26BB437E267013FB00019CF6 /* libz.1.2.11.tbd in Frameworks */,
+				26001C782D78E3E5009A8E23 /* libfmt.xcframework in Frameworks */,
 				26BB437D267013F600019CF6 /* libz.1.1.3.tbd in Frameworks */,
+				26001C862D78E3E5009A8E23 /* libjami.xcframework in Frameworks */,
+				26001CBC2D78E3E8009A8E23 /* libx264.xcframework in Frameworks */,
+				26001C6A2D78E3E5009A8E23 /* libavcodec.xcframework in Frameworks */,
+				26001C702D78E3E5009A8E23 /* libavformat.xcframework in Frameworks */,
 				26A88C7926700BC500888EED /* libiconv.tbd in Frameworks */,
-				26C4845A2A79645E005BC767 /* libfmt.a in Frameworks */,
-				26CA4C542AB23A8500AEF8F5 /* libupnp.a in Frameworks */,
-				269DA03328D0D2E5007D51D6 /* libjsoncpp.a in Frameworks */,
-				269DA02E28D0D2E5007D51D6 /* libgmp.a in Frameworks */,
-				267B958E2C2AFF0F00353B01 /* libllhttp.a in Frameworks */,
-				269DA07F28D0D5D0007D51D6 /* libgit2.a in Frameworks */,
-				269DA02B28D0D2E5007D51D6 /* libavformat.a in Frameworks */,
+				26001CA82D78E3E7009A8E23 /* libpjsua2.xcframework in Frameworks */,
+				26001CBE2D78E3E8009A8E23 /* libyaml-cpp.xcframework in Frameworks */,
 				623196862BAE498900C2252C /* Atomics in Frameworks */,
+				26001CB42D78E3E7009A8E23 /* libswresample.xcframework in Frameworks */,
+				26001C742D78E3E5009A8E23 /* libcrypto.xcframework in Frameworks */,
 				26A88C7826700B7500888EED /* libc++.tbd in Frameworks */,
-				269DA03E28D0D2E5007D51D6 /* libpjsip-simple.a in Frameworks */,
-				26CA4C592AB23C4100AEF8F5 /* libixml.a in Frameworks */,
+				26001C9A2D78E3E6009A8E23 /* libpjmedia-videodev.xcframework in Frameworks */,
+				26001C822D78E3E5009A8E23 /* libhttp_parser.xcframework in Frameworks */,
+				26001CA62D78E3E7009A8E23 /* libpjsua.xcframework in Frameworks */,
+				26001CB82D78E3E7009A8E23 /* libtls.xcframework in Frameworks */,
+				26001CC62D7918E4009A8E23 /* libvpx.xcframework in Frameworks */,
+				26001C8E2D78E3E6009A8E23 /* libopendht.xcframework in Frameworks */,
+				26001C8A2D78E3E6009A8E23 /* libllhttp.xcframework in Frameworks */,
 				26A88C7626700ABC00888EED /* libz.tbd in Frameworks */,
-				26C4845C2A796D87005BC767 /* libdhtnet.a in Frameworks */,
 				26A88C75267009EC00888EED /* CoreVideo.framework in Frameworks */,
-				26001BD82D6E5D1A009A8E23 /* libnatpmp.a in Frameworks */,
-				269DA08028D0D614007D51D6 /* libsecp256k1.a in Frameworks */,
-				269DA03B28D0D2E5007D51D6 /* libpjmedia-videodev.a in Frameworks */,
-				269DA04128D0D2E5007D51D6 /* libpjsua.a in Frameworks */,
+				26001C762D78E3E5009A8E23 /* libdhtnet.xcframework in Frameworks */,
+				26001C962D78E3E6009A8E23 /* libpjmedia-audiodev.xcframework in Frameworks */,
+				26001C7E2D78E3E5009A8E23 /* libgnutls.xcframework in Frameworks */,
 				26A88C73267009A700888EED /* AVFoundation.framework in Frameworks */,
-				269DA04C28D0D2E6007D51D6 /* libvpx.a in Frameworks */,
-				269DA04428D0D2E6007D51D6 /* libspeex.a in Frameworks */,
+				26001C682D78E3E4009A8E23 /* libargon2.xcframework in Frameworks */,
 				26A88C722670099D00888EED /* AudioToolbox.framework in Frameworks */,
-				269DA03928D0D2E5007D51D6 /* libpjmedia-audiodev.a in Frameworks */,
-				269DA03628D0D2E5007D51D6 /* libopus.a in Frameworks */,
-				269DA03528D0D2E5007D51D6 /* libopendht.a in Frameworks */,
-				269DA02D28D0D2E5007D51D6 /* libcrypto.a in Frameworks */,
-				269DA02F28D0D2E5007D51D6 /* libgnutls.a in Frameworks */,
-				269DA04828D0D2E6007D51D6 /* libswresample.a in Frameworks */,
 				26A88C712670099500888EED /* VideoToolbox.framework in Frameworks */,
-				269DA04228D0D2E5007D51D6 /* libpjsua2.a in Frameworks */,
-				269DA03728D0D2E5007D51D6 /* libpj.a in Frameworks */,
-				269DA04528D0D2E6007D51D6 /* libspeexdsp.a in Frameworks */,
-				269DA02A28D0D2E5007D51D6 /* libavfilter.a in Frameworks */,
+				26001C722D78E3E5009A8E23 /* libavutil.xcframework in Frameworks */,
+				26001CB22D78E3E7009A8E23 /* libssl.xcframework in Frameworks */,
+				26001C9E2D78E3E6009A8E23 /* libpjnath.xcframework in Frameworks */,
+				26001CB02D78E3E7009A8E23 /* libsrtp.xcframework in Frameworks */,
+				26001CAE2D78E3E7009A8E23 /* libspeexdsp.xcframework in Frameworks */,
 				26A88C702670098D00888EED /* CoreMedia.framework in Frameworks */,
-				269DA03A28D0D2E5007D51D6 /* libpjmedia-codec.a in Frameworks */,
-				269DA04028D0D2E5007D51D6 /* libpjsip.a in Frameworks */,
-				269DA03F28D0D2E5007D51D6 /* libpjsip-ua.a in Frameworks */,
-				269DA04D28D0D2E6007D51D6 /* libx264.a in Frameworks */,
-				269DA03128D0D2E5007D51D6 /* libhttp_parser.a in Frameworks */,
-				269DA02828D0D2E5007D51D6 /* libavcodec.a in Frameworks */,
+				26001C922D78E3E6009A8E23 /* libpj.xcframework in Frameworks */,
+				26001CA02D78E3E6009A8E23 /* libpjsip-simple.xcframework in Frameworks */,
+				26001C982D78E3E6009A8E23 /* libpjmedia-codec.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1378,6 +1362,52 @@
 			isa = PBXGroup;
 			children = (
 				26001BD72D6E5C8F009A8E23 /* libnatpmp.a */,
+				26001CC32D7918BD009A8E23 /* libvpx.xcframework */,
+				26001BF92D78E19C009A8E23 /* libargon2.xcframework */,
+				26001BF12D78E19B009A8E23 /* libavcodec.xcframework */,
+				26001C072D78E1A0009A8E23 /* libavdevice.xcframework */,
+				26001C032D78E1A0009A8E23 /* libavfilter.xcframework */,
+				26001C052D78E1A0009A8E23 /* libavformat.xcframework */,
+				26001BE62D78E199009A8E23 /* libavutil.xcframework */,
+				26001BE52D78E199009A8E23 /* libcrypto.xcframework */,
+				26001BFD2D78E19D009A8E23 /* libdhtnet.xcframework */,
+				26001C082D78E1A0009A8E23 /* libfmt.xcframework */,
+				26001C092D78E1A0009A8E23 /* libgit2.xcframework */,
+				26001BED2D78E19A009A8E23 /* libgmp.xcframework */,
+				26001BE42D78E199009A8E23 /* libgnutls.xcframework */,
+				26001BEC2D78E19A009A8E23 /* libhogweed.xcframework */,
+				26001BFB2D78E19C009A8E23 /* libhttp_parser.xcframework */,
+				26001BE92D78E19A009A8E23 /* libixml.xcframework */,
+				26001BF62D78E19C009A8E23 /* libjami.xcframework */,
+				26001BFE2D78E19D009A8E23 /* libjsoncpp.xcframework */,
+				26001C0A2D78E1A1009A8E23 /* libllhttp.xcframework */,
+				26001BE22D78E199009A8E23 /* libnettle.xcframework */,
+				26001BF52D78E19C009A8E23 /* libopendht.xcframework */,
+				26001BFC2D78E19D009A8E23 /* libopus.xcframework */,
+				26001BFA2D78E19C009A8E23 /* libpj.xcframework */,
+				26001BF82D78E19C009A8E23 /* libpjlib-util.xcframework */,
+				26001BF72D78E19C009A8E23 /* libpjmedia-audiodev.xcframework */,
+				26001C042D78E1A0009A8E23 /* libpjmedia-codec.xcframework */,
+				26001C0B2D78E1A1009A8E23 /* libpjmedia-videodev.xcframework */,
+				26001BEA2D78E19A009A8E23 /* libpjmedia.xcframework */,
+				26001BE82D78E199009A8E23 /* libpjnath.xcframework */,
+				26001BF42D78E19B009A8E23 /* libpjsip-simple.xcframework */,
+				26001BFF2D78E19F009A8E23 /* libpjsip-ua.xcframework */,
+				26001C002D78E19F009A8E23 /* libpjsip.xcframework */,
+				26001BDF2D78E198009A8E23 /* libpjsua.xcframework */,
+				26001BE72D78E199009A8E23 /* libpjsua2.xcframework */,
+				26001BEB2D78E19A009A8E23 /* libsecp256k1.xcframework */,
+				26001C012D78E19F009A8E23 /* libspeex.xcframework */,
+				26001BE12D78E198009A8E23 /* libspeexdsp.xcframework */,
+				26001BE02D78E198009A8E23 /* libsrtp.xcframework */,
+				26001C062D78E1A0009A8E23 /* libssl.xcframework */,
+				26001BEF2D78E19A009A8E23 /* libswresample.xcframework */,
+				26001BE32D78E199009A8E23 /* libswscale.xcframework */,
+				26001BF02D78E19B009A8E23 /* libtls.xcframework */,
+				26001BF22D78E19B009A8E23 /* libupnp.xcframework */,
+				26001BF32D78E19B009A8E23 /* libx264.xcframework */,
+				26001BEE2D78E19A009A8E23 /* libyaml-cpp.xcframework */,
+				26001C022D78E1A0009A8E23 /* libyuv.xcframework */,
 				267B958D2C2AFEEA00353B01 /* libllhttp.a */,
 				26EB61382B7675FB00183FF4 /* Embassy.xcframework */,
 				26CA4C562AB23A9200AEF8F5 /* libxml2.2.tbd */,
@@ -3441,18 +3471,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MARKETING_VERSION = 3.86;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
@@ -3484,14 +3512,13 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MARKETING_VERSION = 3.86;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
@@ -3511,9 +3538,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3521,7 +3547,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ringTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RingTests/RingTests-Bridging-Header.h";
@@ -3538,7 +3564,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3546,7 +3572,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ringTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RingTests/RingTests-Bridging-Header.h";
@@ -3669,7 +3695,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
@@ -3678,14 +3703,13 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MARKETING_VERSION = 3.86;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
@@ -3706,9 +3730,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3716,7 +3739,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ringTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RingTests/RingTests-Bridging-Header.h";
@@ -3772,7 +3795,6 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MSHYCBXK85;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
@@ -3780,10 +3802,7 @@
 					"DEBUG=1",
 					"OPENDHT_JSONCPP=1",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../fat/include/include",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3791,7 +3810,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				NEW_SETTING = "";
 				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
@@ -3827,7 +3845,6 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MSHYCBXK85;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
@@ -3835,10 +3852,7 @@
 					"DEBUG=1",
 					"OPENDHT_JSONCPP=1",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../fat/include/include",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3846,7 +3860,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				NEW_SETTING = "";
 				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
@@ -3889,10 +3902,7 @@
 					"$(inherited)",
 					"OPENDHT_JSONCPP=1",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../fat/include/include",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3900,7 +3910,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				NEW_SETTING = "";
 				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
@@ -3937,10 +3946,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "OPENDHT_JSONCPP=1";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../fat/include/include",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3948,7 +3954,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				NEW_SETTING = "";
 				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
 				OTHER_LDFLAGS = "";
@@ -4039,14 +4044,13 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MARKETING_VERSION = 3.86;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
@@ -4068,7 +4072,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4076,7 +4080,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ringTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RingTests/RingTests-Bridging-Header.h";
