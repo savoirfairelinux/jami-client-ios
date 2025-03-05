@@ -1,10 +1,10 @@
-
 # Evil DS_Store
 .DS_Store
 
 # Dependency lib
 fat/
 DEPS/
+xcframework/
 
 # Xcode UserData
 Ring/Ring.xcodeproj/project.xcworkspace/xcshareddata/

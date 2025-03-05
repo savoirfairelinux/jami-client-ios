@@ -1,6 +1,6 @@
 # Jami iOS
 
-This repository is for the porting of Jami to iOS.
+This repository contains the iOS client implementation of Jami.
 
 ## Requirements
 
@@ -9,40 +9,63 @@ This repository is for the porting of Jami to iOS.
 - Homebrew (instructions could be found on https://brew.sh)
 - Carthage (brew install carthage)
 
-## Buil instructions
+## Build instructions
 
-Supported archs are: arm64
+Supported archs are: arm64 for iPhoneOS and arm64, x86_64 for iPhoneSimulator
 Minimum supported version is: 14.5
 
-- clone the project
+1. Clone the project
 
 ```bash
 git clone https://review.jami.net/jami-project
 ```
 
-- init repositories
+2. Initialize repositories
 
 ```bash
 cd jami-project && ./build.py --init
 ```
 
-- install dependencies
+3. Install dependencies
 
 ```bash
 ./build.py --dependencies --distribution IOS
 ```
 
-- build daemon and contributions
+4. Build daemon and contributions (choose one option):
 
-```bash
-cd client-ios && ./compile-ios.sh --platform=iPhoneOS
-```
+   **Option A: For iPhone device only**
+   ```bash
+   cd client-ios && ./compile-ios.sh --platform=iPhoneOS
+   ```
 
-- build client dependencies
+   **Option B: For simulator only**
+   ```bash
+   cd client-ios && ./compile-ios.sh --platform=iPhoneSimulator
+   ```
+
+   **Option C: For both iPhone device and simulator**
+   ```bash
+   cd client-ios && ./compile-ios.sh --platform=all
+   ```
+
+   **Additional options:**
+   ```
+   --release         Build in release mode with optimizations
+   --arch=ARCH       Specify a specific architecture for simulator builds (arm64 or x86_64)
+                     Note: This option is only used when building for iPhoneSimulator
+   --help            Display detailed help information
+   ```
+
+5. Build client dependencies
 
 ```bash
 cd Ring && ./fetch-dependencies.sh
 ```
+
+## XCFrameworks
+
+The build process automatically generates XCFrameworks from the compiled static libraries. These XCFrameworks are located in the `xcframework` directory and include both device (arm64) and simulator (arm64, x86_64) architectures when built with `--platform=all`.
 
 ## Update translations
 
