@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6621f83_1e175e5a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:10:00Z",
+      "side": 1,
+      "message": "`Code` → `code`",
+      "range": {
+        "startLine": 446,
+        "startChar": 35,
+        "endLine": 446,
+        "endChar": 39
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e65c18_f6ea7837",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:10:00Z",
+      "side": 1,
+      "message": "`Code` → `authentication code`",
+      "range": {
+        "startLine": 447,
+        "startChar": 32,
+        "endLine": 447,
+        "endChar": 36
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "786f20b8_6272697e",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:10:00Z",
+      "side": 1,
+      "message": "`new` → `target`",
+      "range": {
+        "startLine": 448,
+        "startChar": 35,
+        "endLine": 448,
+        "endChar": 38
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2886e5b_72c7ac9d",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:10:00Z",
+      "side": 1,
+      "message": "`Code` → `code`",
+      "range": {
+        "startLine": 450,
+        "startChar": 51,
+        "endLine": 450,
+        "endChar": 55
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64152772_9e55c72a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:10:00Z",
+      "side": 1,
+      "message": "`To continue, enter the authentication code and click Connect.`",
+      "range": {
+        "startLine": 451,
+        "startChar": 25,
+        "endLine": 451,
+        "endChar": 72
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc298b87_95244180",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:10:00Z",
+      "side": 1,
+      "message": "`your new` → `the target`",
+      "range": {
+        "startLine": 452,
+        "startChar": 41,
+        "endLine": 452,
+        "endChar": 49
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8894df1f_e3e4e63c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:10:00Z",
+      "side": 1,
+      "message": "1. `new` → `target`\n2. `IP` → `IP address`\n3. Can the variable please be added to this string?\n\n`Target device IP address: %1`",
+      "range": {
+        "startLine": 454,
+        "startChar": 28,
+        "endLine": 454,
+        "endChar": 42
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c0d870_afe77997",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:10:00Z",
+      "side": 1,
+      "message": "`not recognized` → `unrecognized`",
+      "range": {
+        "startLine": 456,
+        "startChar": 52,
+        "endLine": 456,
+        "endChar": 66
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
