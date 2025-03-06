@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f42cfbee_d01d534d",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "`Code` → `code`\n\n`Display QR code`\nhttps://app.transifex.com/savoirfairelinux/jami/translate/#hu/$/571275267?q\u003dtext%3A\u0027Display+QR+Code\u0027\n\n`Show QR code`\nhttps://app.transifex.com/savoirfairelinux/jami/translate/#hu/$/473283462?q\u003dtext%3A\u0027Show+QR+Code\u0027",
+      "range": {
+        "startLine": 205,
+        "startChar": 30,
+        "endLine": 205,
+        "endChar": 42
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97062c75_a82cbf17",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "`Code` → `code`\n\n1. `Display authentication code`\n2. `Show authentication code`",
+      "range": {
+        "startLine": 206,
+        "startChar": 31,
+        "endLine": 206,
+        "endChar": 44
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8590bf93_12440ba1",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "`your old` → `the source`",
+      "range": {
+        "startLine": 207,
+        "startChar": 78,
+        "endLine": 207,
+        "endChar": 86
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d0895e_e2b4174f",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "`Account imported successfully on the target device.`",
+      "range": {
+        "startLine": 208,
+        "startChar": 44,
+        "endLine": 208,
+        "endChar": 100
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea259b6_4137d39f",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "`old` → `source`",
+      "range": {
+        "startLine": 210,
+        "startChar": 45,
+        "endLine": 210,
+        "endChar": 48
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "732d7e91_9cb4e8a4",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "`Link a new device` → `Link new device`",
+      "range": {
+        "startLine": 211,
+        "startChar": 78,
+        "endLine": 211,
+        "endChar": 95
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e44890_acfb39d1",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "`To continue, scan the QR code.`",
+      "range": {
+        "startLine": 212,
+        "startChar": 30,
+        "endLine": 212,
+        "endChar": 59
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec41058c_2ff7f350",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "`To continue, enter the authentication code.`",
+      "range": {
+        "startLine": 213,
+        "startChar": 37,
+        "endLine": 213,
+        "endChar": 64
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43d7382_e8ae5af2",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "`To continue, enter the account password and click Unlock.`\nor\n`To continue, enter the account password.`",
+      "range": {
+        "startLine": 214,
+        "startChar": 86,
+        "endLine": 214,
+        "endChar": 108
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1745cc2f_c11fa4ae",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "`The account is protected with a password.`",
+      "range": {
+        "startLine": 214,
+        "startChar": 45,
+        "endLine": 214,
+        "endChar": 84
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0ce6a82_f880c658",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-06T01:32:51Z",
+      "side": 1,
+      "message": "1. `Token QR code`\n2. `QR code token`\n\nIs this something like:\nhttps://www.ftsafe.com/Products/OTP/qr_code_token",
+      "range": {
+        "startLine": 605,
+        "startChar": 39,
+        "endLine": 605,
+        "endChar": 51
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
