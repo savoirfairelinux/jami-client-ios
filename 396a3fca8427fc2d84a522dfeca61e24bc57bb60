@@ -24,6 +24,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dc033e7_624f68f5",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f42cfbee_d01d534d",
+      "range": {
+        "startLine": 205,
+        "startChar": 30,
+        "endLine": 205,
+        "endChar": 42
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97062c75_a82cbf17",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-06T01:32:51Z",
       "side": 1,
       "message": "`Code` → `code`\n\n1. `Display authentication code`\n2. `Show authentication code`",
+      "range": {
+        "startLine": 206,
+        "startChar": 31,
+        "endLine": 206,
+        "endChar": 44
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c72034ef_c79ee21f",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "\"QR code\" and \"Authentication code\", it is switch control",
+      "parentUuid": "97062c75_a82cbf17",
       "range": {
         "startLine": 206,
         "startChar": 31,
@@ -70,6 +118,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ed1922_5831f6c3",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8590bf93_12440ba1",
+      "range": {
+        "startLine": 207,
+        "startChar": 78,
+        "endLine": 207,
+        "endChar": 86
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81d0895e_e2b4174f",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-03-06T01:32:51Z",
       "side": 1,
       "message": "`Account imported successfully on the target device.`",
+      "range": {
+        "startLine": 208,
+        "startChar": 44,
+        "endLine": 208,
+        "endChar": 100
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "970606b1_35d47587",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81d0895e_e2b4174f",
       "range": {
         "startLine": 208,
         "startChar": 44,
@@ -116,6 +212,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94a594f6_5f51c75a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aea259b6_4137d39f",
+      "range": {
+        "startLine": 210,
+        "startChar": 45,
+        "endLine": 210,
+        "endChar": 48
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "732d7e91_9cb4e8a4",
@@ -129,6 +249,30 @@
       "writtenOn": "2025-03-06T01:32:51Z",
       "side": 1,
       "message": "`Link a new device` → `Link new device`",
+      "range": {
+        "startLine": 211,
+        "startChar": 78,
+        "endLine": 211,
+        "endChar": 95
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66bc9b17_298d5540",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "732d7e91_9cb4e8a4",
       "range": {
         "startLine": 211,
         "startChar": 78,
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "005baf31_6359f480",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "In this context, \u0027When ready\u0027 may be more precise. A QR code takes time to generate, so it needs to be ready, and the source device should be prepared.",
+      "parentUuid": "12e44890_acfb39d1",
+      "range": {
+        "startLine": 212,
+        "startChar": 30,
+        "endLine": 212,
+        "endChar": 59
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec41058c_2ff7f350",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 11
@@ -175,6 +343,30 @@
       "writtenOn": "2025-03-06T01:32:51Z",
       "side": 1,
       "message": "`To continue, enter the authentication code.`",
+      "range": {
+        "startLine": 213,
+        "startChar": 37,
+        "endLine": 213,
+        "endChar": 64
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d299178_ece3076b",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "When ready, enter the authentication code.",
+      "parentUuid": "ec41058c_2ff7f350",
       "range": {
         "startLine": 213,
         "startChar": 37,
@@ -231,6 +423,54 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "664fa016_ad52fe30",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1745cc2f_c11fa4ae",
+      "range": {
+        "startLine": 214,
+        "startChar": 45,
+        "endLine": 214,
+        "endChar": 84
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76eb67c9_a88286a9",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c43d7382_e8ae5af2",
+      "range": {
+        "startLine": 214,
+        "startChar": 86,
+        "endLine": 214,
+        "endChar": 108
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0ce6a82_f880c658",
@@ -244,6 +484,30 @@
       "writtenOn": "2025-03-06T01:32:51Z",
       "side": 1,
       "message": "1. `Token QR code`\n2. `QR code token`\n\nIs this something like:\nhttps://www.ftsafe.com/Products/OTP/qr_code_token",
+      "range": {
+        "startLine": 605,
+        "startChar": 39,
+        "endLine": 605,
+        "endChar": 51
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "358c78f8_830fcf63",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T17:27:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0ce6a82_f880c658",
       "range": {
         "startLine": 605,
         "startChar": 39,
