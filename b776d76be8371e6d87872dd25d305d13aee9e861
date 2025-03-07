@@ -142,6 +142,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d4e9ef6_34fa07e7",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:06:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd9f8e81_9cc95836",
+      "range": {
+        "startLine": 448,
+        "startChar": 35,
+        "endLine": 448,
+        "endChar": 38
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2886e5b_72c7ac9d",
@@ -297,6 +321,30 @@
       "side": 1,
       "message": "In this context `When ready` may be more precise.",
       "parentUuid": "64152772_9e55c72a",
+      "range": {
+        "startLine": 451,
+        "startChar": 25,
+        "endLine": 451,
+        "endChar": 72
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c9c9f70_43d584fb",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:06:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17b90489_bac5c301",
       "range": {
         "startLine": 451,
         "startChar": 25,
