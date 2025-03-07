@@ -120,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd9f8e81_9cc95836",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:05:46Z",
+      "side": 1,
+      "message": "keep `new`",
+      "parentUuid": "786f20b8_6272697e",
+      "range": {
+        "startLine": 448,
+        "startChar": 35,
+        "endLine": 448,
+        "endChar": 38
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2886e5b_72c7ac9d",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 24
@@ -212,6 +236,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a14332c8_55bfd049",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80be8aed_bb6d3ca9",
+      "range": {
+        "startLine": 450,
+        "startChar": 27,
+        "endLine": 450,
+        "endChar": 55
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64152772_9e55c72a",
@@ -237,6 +285,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17b90489_bac5c301",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:05:46Z",
+      "side": 1,
+      "message": "In this context `When ready` may be more precise.",
+      "parentUuid": "64152772_9e55c72a",
+      "range": {
+        "startLine": 451,
+        "startChar": 25,
+        "endLine": 451,
+        "endChar": 72
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc298b87_95244180",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 24
@@ -248,6 +320,30 @@
       "writtenOn": "2025-03-06T01:10:00Z",
       "side": 1,
       "message": "`your new` → `the target`",
+      "range": {
+        "startLine": 452,
+        "startChar": 41,
+        "endLine": 452,
+        "endChar": 49
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cd9b6ee_a9fb6112",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc298b87_95244180",
       "range": {
         "startLine": 452,
         "startChar": 41,
