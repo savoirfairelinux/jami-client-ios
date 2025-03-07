@@ -24,6 +24,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "615beacb_31ac1ae1",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6621f83_1e175e5a",
+      "range": {
+        "startLine": 446,
+        "startChar": 35,
+        "endLine": 446,
+        "endChar": 39
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26e65c18_f6ea7837",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-06T01:10:00Z",
       "side": 1,
       "message": "`Code` → `authentication code`",
+      "range": {
+        "startLine": 447,
+        "startChar": 32,
+        "endLine": 447,
+        "endChar": 36
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b27609be_404716d8",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26e65c18_f6ea7837",
       "range": {
         "startLine": 447,
         "startChar": 32,
@@ -109,6 +157,30 @@
       "range": {
         "startLine": 450,
         "startChar": 27,
+        "endLine": 450,
+        "endChar": 55
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12a76cde_c54b6e6a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2886e5b_72c7ac9d",
+      "range": {
+        "startLine": 450,
+        "startChar": 51,
         "endLine": 450,
         "endChar": 55
       },
@@ -208,6 +280,54 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8434abc_bc71ff61",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f782ec5b_e406829f",
+      "range": {
+        "startLine": 453,
+        "startChar": 55,
+        "endLine": 453,
+        "endChar": 62
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c017a375_528f20c3",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a64e90e_e6677497",
+      "range": {
+        "startLine": 453,
+        "startChar": 84,
+        "endLine": 453,
+        "endChar": 138
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8894df1f_e3e4e63c",
@@ -221,6 +341,30 @@
       "writtenOn": "2025-03-06T01:10:00Z",
       "side": 1,
       "message": "1. `new` → `target`\n2. `IP` → `IP address`\n3. Can the variable please be added to this string?\n\n`Target device IP address: %1`",
+      "range": {
+        "startLine": 454,
+        "startChar": 28,
+        "endLine": 454,
+        "endChar": 42
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fde2220c_e009ae48",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8894df1f_e3e4e63c",
       "range": {
         "startLine": 454,
         "startChar": 28,
@@ -254,6 +398,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4736df3c_64cf400c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T18:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c0d870_afe77997",
+      "range": {
+        "startLine": 456,
+        "startChar": 52,
+        "endLine": 456,
+        "endChar": 66
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f12a4d71_9bbffb1e",
@@ -267,6 +435,30 @@
       "writtenOn": "2025-03-06T01:17:22Z",
       "side": 1,
       "message": "`Export account operation on the source device is waiting for the import account operation confirmation from the target device.`",
+      "range": {
+        "startLine": 457,
+        "startChar": 33,
+        "endLine": 457,
+        "endChar": 120
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8417c2a4_f403bc51",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T18:16:35Z",
+      "side": 1,
+      "message": "This message is displayed on the source device. In this case, \u0027Export account operation on the source device is waiting\u0027 feels a bit too detailed",
+      "parentUuid": "f12a4d71_9bbffb1e",
       "range": {
         "startLine": 457,
         "startChar": 33,
