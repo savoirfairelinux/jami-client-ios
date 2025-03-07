@@ -1,4 +1,28 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0ebd84_f253d248",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 13
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-07T22:26:20Z",
+      "side": 1,
+      "message": "`Stopping will cancel the import account operation.`",
+      "range": {
+        "startLine": 219,
+        "startChar": 32,
+        "endLine": 219,
+        "endChar": 88
+      },
+      "revId": "abd1bb03b327422e073b50ba982d6246ec204254",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ],
   "submitRequirementResults": []
 }
