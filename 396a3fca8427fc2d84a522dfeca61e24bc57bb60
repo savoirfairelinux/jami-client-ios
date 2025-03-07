@@ -95,6 +95,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a2419eb_48ebec6a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c72034ef_c79ee21f",
+      "range": {
+        "startLine": 206,
+        "startChar": 31,
+        "endLine": 206,
+        "endChar": 44
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8590bf93_12440ba1",
@@ -330,6 +354,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "732cf567_166c2862",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "005baf31_6359f480",
+      "range": {
+        "startLine": 212,
+        "startChar": 30,
+        "endLine": 212,
+        "endChar": 59
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec41058c_2ff7f350",
@@ -367,6 +415,30 @@
       "side": 1,
       "message": "When ready, enter the authentication code.",
       "parentUuid": "ec41058c_2ff7f350",
+      "range": {
+        "startLine": 213,
+        "startChar": 37,
+        "endLine": 213,
+        "endChar": 64
+      },
+      "revId": "396a3fca8427fc2d84a522dfeca61e24bc57bb60",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae93a3ec_177c64b6",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d299178_ece3076b",
       "range": {
         "startLine": 213,
         "startChar": 37,
