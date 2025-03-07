@@ -190,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80be8aed_bb6d3ca9",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:04:20Z",
+      "side": 1,
+      "message": "In this context `When ready` may be more precise.",
+      "parentUuid": "149bab22_8f98783e",
+      "range": {
+        "startLine": 450,
+        "startChar": 27,
+        "endLine": 450,
+        "endChar": 55
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64152772_9e55c72a",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 24
@@ -459,6 +483,30 @@
       "side": 1,
       "message": "This message is displayed on the source device. In this case, \u0027Export account operation on the source device is waiting\u0027 feels a bit too detailed",
       "parentUuid": "f12a4d71_9bbffb1e",
+      "range": {
+        "startLine": 457,
+        "startChar": 33,
+        "endLine": 457,
+        "endChar": 120
+      },
+      "revId": "b776d76be8371e6d87872dd25d305d13aee9e861",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf29bcd9_1096547a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 24
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-07T19:04:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8417c2a4_f403bc51",
       "range": {
         "startLine": 457,
         "startChar": 33,
