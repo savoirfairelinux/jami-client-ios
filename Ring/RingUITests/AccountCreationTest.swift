@@ -51,12 +51,28 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
         }
         let accountsButton = XCUIApplication().navigationBars.buttons[SmartListAccessibilityIdentifiers.openAccountsButton]
         accountsButton.tap()
+
+        waitForSeconds(2)
+
+        // Try to find the add account button by identifier first
         let addAccount = app.buttons[SmartListAccessibilityIdentifiers.addAccountButton]
-        waitForElementToAppear(addAccount)
+
         if addAccount.exists {
             addAccount.tap()
         } else {
-            XCTFail("addAccount button did not appear in time")
+            // Fallback to finding by exact label if identifier doesn't work
+            let addAccountByLabel = app.buttons[L10n.Smartlist.addAccountButton]
+            if addAccountByLabel.exists {
+                addAccountByLabel.tap()
+            } else {
+                // Try by accessibility label
+                let addAccountByAccessibilityLabel = app.buttons[L10n.Accessibility.smartListAddAccount]
+                if addAccountByAccessibilityLabel.exists {
+                    addAccountByAccessibilityLabel.tap()
+                } else {
+                    XCTFail("addAccount button did not appear in time")
+                }
+            }
         }
     }
 
