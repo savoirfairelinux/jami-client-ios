@@ -24,6 +24,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fba66ec_cd824e6b",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 27
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-10T15:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "807f403a_176e8715",
+      "range": {
+        "startLine": 211,
+        "startChar": 44,
+        "endLine": 211,
+        "endChar": 48
+      },
+      "revId": "427fb1e71376f52b0a0cc821402521be587068e3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b6b678f_1935e9f2",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-07T22:28:09Z",
       "side": 1,
       "message": "Change `Exiting` to `stopping`?",
+      "range": {
+        "startLine": 212,
+        "startChar": 32,
+        "endLine": 212,
+        "endChar": 39
+      },
+      "revId": "427fb1e71376f52b0a0cc821402521be587068e3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f97f3a_efbe4783",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 27
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-10T15:03:40Z",
+      "side": 1,
+      "message": "Done\nhttps://review.jami.net/c/jami-client-ios/+/30601",
+      "parentUuid": "3b6b678f_1935e9f2",
       "range": {
         "startLine": 212,
         "startChar": 32,
