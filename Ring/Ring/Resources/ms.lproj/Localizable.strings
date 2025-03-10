@@ -57,7 +57,10 @@
 "global.time" = "Masa";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "Sahkan kata laluan";
+"global.confirm" = "സ്ഥിരീകരണം";
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
+"global.confirm" = "സ്ഥിരീകരണം";
+"global.connect" = "ബന്ധിപ്പിക്കുക";
 
 // Scan
 "scan.badQrCode" = "മോശം ക്യുആർ കോഡ്";
@@ -159,7 +162,7 @@
 "welcome.haveAccount" = "എനിക്ക് ഒരു അക്കൌണ്ട് ഉണ്ട്";
 "welcome.linkDevice" = "മറ്റൊരു ഉപകരണത്തിൽ നിന്നും ഇറക്കുമതി ചെയ്യുക";
 "welcome.linkBackup" = "ആർക്കൈവ് ബാക്കപ്പ് നിന്നും ഇറക്കുമതി ചെയ്യുക";
-"welcome.createAccount" = "Create Jami account";
+"welcome.createAccount" = "ജാമി അക്കൌണ്ട് സൃഷ്ടിക്കുക";
 "welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
@@ -192,15 +195,21 @@
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "അക്കൌണ്ട് ബന്ധിപ്പിക്കൽ";
-"linkToAccount.linkButtonTitle" = "ലിങ്ക്";
-"linkToAccount.linkDeviceTitle" = "ലിങ്ക് ഉപകരണം";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
-"linkToAccount.explanationMessage" = "A PIN code is required to use an existing Jami account on this device.";
-"linkToAccount.pinPlaceholder" = "PIN code";
-"linkToAccount.pinLabel" = "Enter PIN code";
-"linkToAccount.scanQRCode" = "ക്യുആർ കോഡ് സ്കാൻ ചെയ്യുക";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
+"linkToAccount.importAccount" = "Import account";
+"linkToAccount.showQrCode" = "ക്യുആർ കോഡ്";
+"linkToAccount.showPinCode" = "Authentication code";
+"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
+"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.goToAccounts" = "Go to imported account";
+"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
+"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
+"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
+"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.exit" = "Exit";
+"linkToAccount.shareMessage" = "Your code is: %@";
+"linkToAccount.alertTile" = "Do you want to exit?";
+"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "ജാമി അക്കൌണ്ട് പ്രാദേശിക ആർക്കൈവ് ഫയലിൽ നിന്നും ഇറക്കുമതി ചെയ്യുക.";
@@ -416,11 +425,23 @@
 
 // Link New Device
 "linkDevice.title" = "പുതിയ ഉപകരണം ലിങ്ക് ചെയ്യുക";
-"linkDevice.passwordError" = "Incorrect password. Please try again with the correct password.";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
-"linkDevice.hudMessage" = "പരിശോധന";
+"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
+"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
+"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
+"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
+"linkDevice.connecting" = "Connecting to your new device…";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
+"linkDevice.newDeviceIP" = "New device IP address: %1@";
+"linkDevice.token" = "token";
+"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
+"linkDevice.completed" = "Account imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "ഓഡിയോ കോൾ ആരംഭിക്കുക";
@@ -531,10 +552,11 @@
 "accessibility.conversationRowUnreadCount" = "%@ unread messages.";
 "accessibility.conversationRowBlocked" = "Conversation blocked";
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
-"accessibility.conversationRowLastMessage" = "Last message on %@";
+"accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "ഓൺലൈൻ";
 "accessibility.userPresenceAvailable" = "Available";
-"accessibility.pendingRequestsRow" = "Invitation received: %@ pending invitation";
+"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
 "accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
@@ -543,41 +565,42 @@
 "accessibility.messageBubbleEdited" = "പരിഷ്ക്കരിക്കുക";
 "accessibility.messageBubbleRead" = "Read";
 "accessibility.messageBubbleUnread" = "Unread";
-"accessibility.textNotAvailable" = "Text message received on %@, content not available";
+"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
 "accessibility.fileTransferNoName" = "File received on %@, name not available";
 "accessibility.inReply" = "In reply to message";
-"accessibility.text.receivedOn" = "%@, message received on %@";
-"accessibility.text.sentOn" = "%@, message sent on %@";
-"accessibility.fileTransfer.receivedOn" = "File: %@ , received on %@";
-"accessibility.fileTransfer.sentOn" = "File: %@, sent on %@";
-"accessibility.call.lasted" = "Lasted";
-"accessibility.fileTransferNoName" = "File received on %@, name not available";
-"accessibility.calls.default.toggleAudio" = "Turn off microphone";
-"accessibility.calls.default.toggleVideo" = "Turn on camera";
-"accessibility.calls.default.pauseCall" = "Pause call";
-"accessibility.calls.default.hangUpCall" = "Hang up";
+"accessibility.text.receivedOn" = "%1@, message received on %2@";
+"accessibility.text.sentOn" = "%1@, message sent on %2@";
+"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
+"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
+"accessibility.call.lasted" = "Lasted %@";
+"accessibility.calls.default.toggleAudio" = "മിണ്ടാത്ത മൈക്രോഫോൺ";
+"accessibility.calls.default.toggleVideo" = "Start camera";
+"accessibility.calls.default.pauseCall" = "ഇടവേള വിളി";
+"accessibility.calls.default.hangUpCall" = "Putuskan";
 "accessibility.calls.default.addParticipant" = "പങ്കാളിയെ കൂട്ടിച്ചേർക്കുക";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
-"accessibility.calls.default.openConversation" = "Open conversation";
+"accessibility.calls.default.openConversation" = "തുറന്ന സംഭാഷണം";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "കൈ ഉയര് ത്തുക";
 
-"accessibility.calls.alter.toggleAudio" = "Turn on microphone";
-"accessibility.calls.alter.toggleVideo" = "Turn off camera";
+"accessibility.calls.alter.toggleAudio" = "Unmute microphone";
+"accessibility.calls.alter.toggleVideo" = "ക്യാമറ നിർത്തുക";
 "accessibility.calls.alter.pauseCall" = "പുനരാരംഭിക്കുക";
-"accessibility.calls.alter.hangUpCall" = "Hang up";
-"accessibility.calls.alter.addParticipant" = "Add participant";
+"accessibility.calls.alter.hangUpCall" = "Putuskan";
+"accessibility.calls.alter.addParticipant" = "പങ്കാളിയെ കൂട്ടിച്ചേർക്കുക";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
-"accessibility.calls.alter.openConversation" = "Open conversation";
+"accessibility.calls.alter.openConversation" = "തുറന്ന സംഭാഷണം";
 "accessibility.calls.alter.showDialpad" = "Show dialpad";
-"accessibility.calls.alter.raiseHand" = "Lower hand";
-"accessibility.conference.minimize" = "Minimize";
-"accessibility.conference.maximize" = "Maximize";
-"accessibility.conference.setModerator" = "Set moderator";
-"accessibility.conference.unsetModerator" = "Unset moderator";
-"accessibility.conference.muteAudio" = "Mute audio";
+"accessibility.calls.alter.raiseHand" = "താഴത്തെ കൈ";
+"accessibility.conference.minimize" = "പരിമിതപ്പെടുത്തുക";
+"accessibility.conference.maximize" = "പരമാവധി";
+"accessibility.conference.setModerator" = "മോഡറേറ്റർ സജ്ജമാക്കുക";
+"accessibility.conference.unsetModerator" = "മോഡറേറ്റർ അൺസെറ്റ് ചെയ്യുക";
+"accessibility.conference.muteAudio" = "Matikan bunyi";
 "accessibility.conference.unmuteAudio" = "നിശബ്ദമായ ഓഡിയോ";
-"accessibility.conference.hangup" = "Hang up";
-"accessibility.conference.lowerHand" = "Lower hand";
+"accessibility.conference.hangup" = "Putuskan";
+"accessibility.conference.lowerHand" = "താഴത്തെ കൈ";
+
+"accessibility.account.tokenQRcode" = "Token QR code";
