@@ -27,15 +27,15 @@ typealias Conversation = (
 
 final class ConversationDataHelper {
     let table = Table("conversations")
-    let id = Expression<Int64>("id")
-    let participant = Expression<String>("participant")
+    let id = SQLite.Expression<Int64>("id")
+    let participant = SQLite.Expression<String>("participant")
 
     // reference foreign key
     let tableProfiles = Table("profiles")
-    let uri = Expression<String>("uri")
+    let uri = SQLite.Expression<String>(value: "uri")
 
     // to migrate from legacy db
-    let participantId = Expression<Int64>("participant_id")
+    let participantId = SQLite.Expression<Int64>("participant_id")
 
     func migrateToDBForAccount(from oldDB: Connection,
                                to newDB: Connection,

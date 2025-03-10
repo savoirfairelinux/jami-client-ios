@@ -24,10 +24,10 @@ import SwiftyBeaver
 final class ProfileDataHelper {
     let contactsProfileTable = Table("profiles")
     let accountProfileTable = Table("account_profile")
-    let uri = Expression<String>("uri")
-    let alias = Expression<String?>("alias")
-    let photo = Expression<String?>("photo")
-    let type = Expression<String>("type")
+    let uri = SQLite.Expression<String>("uri")
+    let alias = SQLite.Expression<String?>("alias")
+    let photo = SQLite.Expression<String?>("photo")
+    let type = SQLite.Expression<String>("type")
     private let log = SwiftyBeaver.self
 
     func dropAccountTable(accountDb: Connection) {
