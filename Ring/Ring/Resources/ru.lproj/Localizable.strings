@@ -57,7 +57,10 @@
 "global.time" = "Время";
 "global.editPassword" = "Изменить пароль";
 "global.confirmPassword" = "Подтверждение пароля";
+"global.confirm" = "Подтвердить";
 "global.cameraDisabled" = "Доступ к камере отключен. Включите его в настройках устройства, чтобы использовать эту функцию.";
+"global.confirm" = "Подтвердить";
+"global.connect" = "Соединение";
 
 // Scan
 "scan.badQrCode" = "Некорректный QR-код";
@@ -100,7 +103,7 @@
 "smartlist.results" = "Публичный каталог";
 "smartlist.jamsResults" = "Результаты поиска";
 "smartlist.conversations" = "Разговоры";
-"smartlist.noConversationsFound" = "No conversations match the search.";
+"smartlist.noConversationsFound" = "Нет бесед, соответствующих запросу.";
 "smartlist.newContact" = "Новый контакт";
 "smartlist.newGroup" = "Новая группа";
 "smartlist.accounts" = "Аккаунты";
@@ -110,7 +113,7 @@
 "smartlist.searchBarPlaceholder" = "Введите имя…";
 "smartlist.searchBar" = "Поиск";
 "smartlist.noNetworkConnectivity" = "Нет подключения к сети";
-"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
+"smartlist.cellularAccess" = "Убедитесь, что в настройках разрешен доступ к сотовой сети.";
 "smartlist.accountsTitle" = "Аккаунты";
 "smartlist.addAccountButton" = "+ Добавить аккаунт";
 "smartlist.noNumber" = "У выбранного контакта нет номера";
@@ -127,7 +130,7 @@
 // Conversation
 "conversation.addToContactsButton" = "Добавить в контакты";
 "conversation.addToContactsLabel" = "Добавить в контакты?";
-"conversation.notContactLabel" = "%@ is not in the contact list";
+"conversation.notContactLabel" = "%@нет в списке контактов";
 "conversation.messagePlaceholder" = "Написать сообщение";
 "conversation.errorSavingImage" = "При сохранении изображения в галерею произошла ошибка.";
 "conversation.receivedRequest" = "%@отправил(а) вам приглашение для беседы.";
@@ -159,7 +162,7 @@
 "welcome.haveAccount" = "У меня уже есть аккаунт";
 "welcome.linkDevice" = "Импортировать с другого устройства";
 "welcome.linkBackup" = "Импортировать из резервной копии";
-"welcome.createAccount" = "Create Jami account";
+"welcome.createAccount" = "Создать учетную запись Jami";
 "welcome.connectToJAMS" = "Подключиться к серверу управления аккаунтами Джами (JAMS)";
 
 // Creation Profile Screen
@@ -174,14 +177,14 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Присоединиться к Джами";
 "createAccount.lookingForUsernameAvailability" = "Проверка наличия имени пользователя…";
-"createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
+"createAccount.invalidUsername" = "Неверное имя пользователя. Введите правильное.";
 "createAccount.usernameAlreadyTaken" = "Имя пользователя уже занято";
 "createAccount.usernameValid" = "Имя пользователя доступно.";
 "createAccount.UsernameNotRegisteredTitle" = "Ошибка сети";
 "createAccount.UsernameNotRegisteredMessage" = "Аккаунт был создан, но имя пользователя не было зарегистрировано";
 "createAccount.timeoutTitle" = "Аккаунт создан";
 "createAccount.timeoutMessage" = "Производится регистрация имени пользователя. Подождите...";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.sipConfigure" = "Настройте существующую учетную запись SIP";
 "createAccount.creatingAccount" = "Создание аккаунта";
 "createAccount.nameExplanation" = "Вы можете выбрать имя пользователя, чтобы помочь другим найти и связаться с вами в Джами.";
 "createAccount.newAccount" = "Новый аккаунт";
@@ -192,15 +195,21 @@
 "createAccount.encryptExplanation" = "Аккаунт Джами создаётся локально и хранится только на этом устройстве в форме архива, содержащего ключи от вашей учётной записи. При желании доступ к архиву может быть защищён паролем.";
 
 // Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Привязка аккаунта";
-"linkToAccount.linkButtonTitle" = "Привязать";
-"linkToAccount.linkDeviceTitle" = "Привязать устройство";
-"linkToAccount.linkDeviceMessage" = "Выберите «Привязать новое устройство» в другом приложении Джами, чтобы показать QR-код или сгенерировать ПИН.";
-"linkToAccount.explanationMessage" = "Для использования существующего аккаунта Джами на этом устройстве требуется ПИН.";
-"linkToAccount.pinPlaceholder" = "ПИН-код";
-"linkToAccount.pinLabel" = "Введите PIN-код";
-"linkToAccount.scanQRCode" = "Сканирование QR-кода";
-"linkToAccount.explanationPinMessage" = "Чтобы сгенерировать ПИН-код, перейдите в настройки управления аккаунтом на другом устройстве, где есть нужный аккаунт Джами. Выберите «Привязать новое устройство». Появится ПИН-код, который нужно ввести на данном экране. ПИН действителен только 10 минут.";
+"linkToAccount.importAccount" = "Import account";
+"linkToAccount.showQrCode" = "QR-код";
+"linkToAccount.showPinCode" = "Authentication code";
+"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
+"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.goToAccounts" = "Go to imported account";
+"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
+"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
+"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
+"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.exit" = "Выход";
+"linkToAccount.shareMessage" = "Your code is: %@";
+"linkToAccount.alertTile" = "Do you want to exit?";
+"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Импортируйте аккаунт Джами из локального архивного файла.";
@@ -301,7 +310,7 @@
 "accountPage.deviceRevocationError" = "Ошибка отзыва устройства";
 "accountPage.linkDeviceTitle" = "Привязать другое устройство";
 "accountPage.other" = "Другой";
-"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
+"accountPage.removeAccountMessage" = "Если учетная запись не была сохранена или добавлена ​​на другое устройство, она и зарегистрированное имя пользователя будут БЕЗВОЗВРАТНО УТРАЧЕНЫ.";
 "accountPage.inviteFriends" = "Пригласить друзей";
 "accountPage.contactMeOnJamiTitle" = "Свяжитесь со мной в Джами!";
 "accountPage.contactMeOnJamiContant" = "Свяжитесь со мной по адресу «%s» на платформе распределенной связи Джами: https://jami.net";
@@ -416,11 +425,23 @@
 
 // Link New Device
 "linkDevice.title" = "Привязать новое устройство";
-"linkDevice.passwordError" = "Неправильный пароль. Пожалуйста, попробуйте еще раз с правильным паролем.";
 "linkDevice.networkError" = "При экспорте учетной записи возникла ошибка сети.";
-"linkDevice.defaultError" = "При экспорте учетной записи возникла ошибка.";
-"linkDevice.explanationMessage" = "Чтобы завершить процесс, откройте Джами на новом устройстве и выберите опцию «Привязать это устройство к аккаунту». Ваш PIN-код будет действителен 10 минут.";
-"linkDevice.hudMessage" = "Проверка";
+"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
+"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
+"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
+"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
+"linkDevice.connecting" = "Connecting to your new device…";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
+"linkDevice.newDeviceIP" = "New device IP address: %1@";
+"linkDevice.token" = "token";
+"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
+"linkDevice.completed" = "Account imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Начать голосовой вызов";
@@ -508,76 +529,78 @@
 // Accessibility
 "accessibility.close" = "Закрыть";
 "accessibility.smartListSwitchAccounts" = "Сменить учетную запись";
-"accessibility.smartListConnectedAs" = "The current account is %@";
+"accessibility.smartListConnectedAs" = "Текущая учетная запись - это %@";
 "accessibility.smartListAddAccount" = "Добавить аккаунт";
 "accessibility.aboutJamiTitle" = "О программе Джами";
 "accessibility.welcomeToJamiTitle" = "Добро пожаловать в Jami";
-"accessibility.createAccountVerifyUsernamePrompt" = "Enter username to check availability.";
+"accessibility.createAccountVerifyUsernamePrompt" = "Введите имя пользователя для проверки доступности.";
 "accessibility.profilePicturePicker" = "Фото профиля";
 "accessibility.profilePicturePickerHint" = "Двойной клик, чтобы сделать снимок или выбрать изображение из библиотеки";
 "accessibility.swarmPicturePicker" = "Картинка группы";
 "accessibility.swarmPicturePickerHint" = "Двойной клик, чтобы сделать снимок или выбрать изображение из библиотеки";
 "accessibility.accountSummaryQrCode" = "QR-код";
-"accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
-"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";
+"accessibility.accountSummaryQrCodeHint" = "Нажмите дважды для просмотра QR-кода учетной записи";
+"accessibility.accountSummaryEditProfileHint" = "Нажмите дважды для изменения профиля";
 "accessibility.accountSummaryEditSettingsButton" = "Настройки";
-"accessibility.conversationStartVoiceCall" = "Start audio call with %@";
-"accessibility.conversationStartVideoCall" = "Start video call with %@";
+"accessibility.conversationStartVoiceCall" = "Начать аудиозвонок с %@";
+"accessibility.conversationStartVideoCall" = "Начать видеозвонок с %@";
 "accessibility.conversationComposeMessage" = "Составьте сообщение";
 "accessibility.conversationShareMedia" = "Поделиться медиа";
 "accessibility.conversationCameraHint" = "Коснитесь дважды, чтобы открыть камеру";
 "accessibility.audioPlayerPlay" = "Проиграть";
 "accessibility.audioPlayerPause" = "Пауза";
-"accessibility.conversationRowUnreadCount" = "%@ unread messages.";
+"accessibility.conversationRowUnreadCount" = "%@непрочитанных сообщений.";
 "accessibility.conversationRowBlocked" = "Беседа заблокирована";
-"accessibility.conversationRowSyncing" = "Synchronization in progress";
-"accessibility.conversationRowLastMessage" = "Последнее сообщение на %@";
+"accessibility.conversationRowSyncing" = "Выполняется синхронизация";
+"accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "В сети";
 "accessibility.userPresenceAvailable" = "Доступно";
-"accessibility.pendingRequestsRow" = "Получено приглашение: %@ожидает приглашения";
+"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowSingular" = "Получено приглашение: %@ожидает приглашения";
 "accessibility.pendingRequestsRowHint" = "Коснитесь дважды, чтобы просмотреть и ответить на полученные приглашения";
 "accessibility.pendingRequestsListBlockUser" = "Блокировать отправителя приглашения";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Отклонить приглашение";
 "accessibility.pendingRequestsListAcceptInvitation" = "Принять приглашение";
 "accessibility.messageBubbleDeleted" = "Сообщение удалено";
 "accessibility.messageBubbleEdited" = "Отредактировано";
 "accessibility.messageBubbleRead" = "Прочитано";
 "accessibility.messageBubbleUnread" = "Непрочитано";
-"accessibility.textNotAvailable" = "Текстовое сообщение получено на %@, содержимое недоступно";
+"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
 "accessibility.fileTransferNoName" = "Файл получен на %@, имя недоступно";
-"accessibility.inReply" = "In reply to message";
-"accessibility.text.receivedOn" = "%@, сообщение получено на %@";
-"accessibility.text.sentOn" = "%@, сообщение отправлено на %@";
-"accessibility.fileTransfer.receivedOn" = "Файл: %@, получен на %@";
-"accessibility.fileTransfer.sentOn" = "Файл: %@, отправлен на  %@";
-"accessibility.call.lasted" = "Длился";
-"accessibility.fileTransferNoName" = "Файл получен на %@, имя недоступно";
-"accessibility.calls.default.toggleAudio" = "Turn off microphone";
-"accessibility.calls.default.toggleVideo" = "Turn on camera";
-"accessibility.calls.default.pauseCall" = "Pause call";
-"accessibility.calls.default.hangUpCall" = "Hang up";
+"accessibility.inReply" = "В ответ на сообщение";
+"accessibility.text.receivedOn" = "%1@, message received on %2@";
+"accessibility.text.sentOn" = "%1@, message sent on %2@";
+"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
+"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
+"accessibility.call.lasted" = "Lasted %@";
+"accessibility.calls.default.toggleAudio" = "Выключить микрофон";
+"accessibility.calls.default.toggleVideo" = "Включить камеру";
+"accessibility.calls.default.pauseCall" = "Приостановить вызов";
+"accessibility.calls.default.hangUpCall" = "Повесить трубку";
 "accessibility.calls.default.addParticipant" = "Добавить участника";
-"accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
-"accessibility.calls.default.openConversation" = "Open conversation";
-"accessibility.calls.default.showDialpad" = "Show dialpad";
+"accessibility.calls.default.switchCamera" = "Переключить камеру";
+"accessibility.calls.default.toggleSpeaker" = "Включить динамик";
+"accessibility.calls.default.openConversation" = "Открыть разговор";
+"accessibility.calls.default.showDialpad" = "Показать панель набора номера";
 "accessibility.calls.default.raiseHand" = "Поднять руку";
 
-"accessibility.calls.alter.toggleAudio" = "Turn on microphone";
-"accessibility.calls.alter.toggleVideo" = "Turn off camera";
+"accessibility.calls.alter.toggleAudio" = "Включить микрофон";
+"accessibility.calls.alter.toggleVideo" = "Остановить камеру";
 "accessibility.calls.alter.pauseCall" = "Возобновить вызов";
-"accessibility.calls.alter.hangUpCall" = "Hang up";
-"accessibility.calls.alter.addParticipant" = "Add participant";
-"accessibility.calls.alter.switchCamera" = "Switch camera";
-"accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
-"accessibility.calls.alter.openConversation" = "Open conversation";
-"accessibility.calls.alter.showDialpad" = "Show dialpad";
+"accessibility.calls.alter.hangUpCall" = "Повесить трубку";
+"accessibility.calls.alter.addParticipant" = "Добавить участника";
+"accessibility.calls.alter.switchCamera" = "Переключить камеру";
+"accessibility.calls.alter.toggleSpeaker" = "Выключить динамик";
+"accessibility.calls.alter.openConversation" = "Открыть разговор";
+"accessibility.calls.alter.showDialpad" = "Показать панель набора номера";
 "accessibility.calls.alter.raiseHand" = "Опущенная рука";
-"accessibility.conference.minimize" = "Minimize";
-"accessibility.conference.maximize" = "Maximize";
-"accessibility.conference.setModerator" = "Set moderator";
-"accessibility.conference.unsetModerator" = "Unset moderator";
+"accessibility.conference.minimize" = "Свернуть";
+"accessibility.conference.maximize" = "Максимизировать";
+"accessibility.conference.setModerator" = "Установить модератора";
+"accessibility.conference.unsetModerator" = "Отменить установку модератора";
 "accessibility.conference.muteAudio" = "Отключить звук";
 "accessibility.conference.unmuteAudio" = "Включить звук";
-"accessibility.conference.hangup" = "Hang up";
+"accessibility.conference.hangup" = "Повесить трубку";
 "accessibility.conference.lowerHand" = "Опущенная рука";
+
+"accessibility.account.tokenQRcode" = "Token QR code";
