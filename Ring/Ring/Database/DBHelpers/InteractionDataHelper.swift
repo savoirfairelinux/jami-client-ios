@@ -37,25 +37,25 @@ struct Interaction {
 final class InteractionDataHelper {
 
     let table = Table("interactions")
-    let id = Expression<Int64>("id")
-    let author = Expression<String?>("author")
-    let duration = Expression<Int64>("duration")
-    let conversation = Expression<Int64>("conversation")
-    let timestamp = Expression<Int64>("timestamp")
-    let body = Expression<String>("body")
-    let type = Expression<String>("type")
-    let status = Expression<String>("status")
-    let daemonId = Expression<String>("daemon_id")
-    let incoming = Expression<Bool>("incoming")
+    let id = SQLite.Expression<Int64>("id")
+    let author = SQLite.Expression<String?>("author")
+    let duration = SQLite.Expression<Int64>("duration")
+    let conversation = SQLite.Expression<Int64>("conversation")
+    let timestamp = SQLite.Expression<Int64>("timestamp")
+    let body = SQLite.Expression<String>("body")
+    let type = SQLite.Expression<String>("type")
+    let status = SQLite.Expression<String>("status")
+    let daemonId = SQLite.Expression<String>("daemon_id")
+    let incoming = SQLite.Expression<Bool>("incoming")
 
     // foreign keys references
     let tableProfiles = Table("profiles")
     let tableConversations = Table("conversations")
-    let uri = Expression<String>("uri")
+    let uri = SQLite.Expression<String>("uri")
 
     // migrations from legacy db
-    let authorId = Expression<Int64>("author_id")
-    let conversationId = Expression<Int64>("conversation_id")
+    let authorId = SQLite.Expression<Int64>("author_id")
+    let conversationId = SQLite.Expression<Int64>("conversation_id")
 
     func migrateToDBForAccount (from oldDB: Connection,
                                 to newDB: Connection,
@@ -189,7 +189,7 @@ final class InteractionDataHelper {
         return interactions
     }
 
-    func selectInteractions(where predicat: Expression<Bool>, dataBase: Connection) throws -> [Interaction] {
+    func selectInteractions(where predicat: SQLite.Expression<Bool>, dataBase: Connection) throws -> [Interaction] {
         let query = table.filter(predicat)
         var interactions = [Interaction]()
         let items = try dataBase.prepare(query)
@@ -261,7 +261,7 @@ final class InteractionDataHelper {
         }
     }
 
-    func deleteInteractions(where predicat: Expression<Bool>, dataBase: Connection) throws -> Bool {
+    func deleteInteractions(where predicat: SQLite.Expression<Bool>, dataBase: Connection) throws -> Bool {
         let query = table.filter(predicat)
         let deletedRows = try dataBase.run(query.delete())
         return deletedRows > 0
