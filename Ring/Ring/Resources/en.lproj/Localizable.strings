@@ -208,8 +208,8 @@
 "linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
 "linkToAccount.exit" = "Exit";
 "linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.alertTile" = "Do you want to stop?";
+"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import Jami account from local archive file.";

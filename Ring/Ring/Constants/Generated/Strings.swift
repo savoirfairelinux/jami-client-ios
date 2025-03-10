@@ -990,10 +990,10 @@ internal enum L10n {
     /// Action required.
     /// Please confirm account on the source device.
     internal static let actionRequired = L10n.tr("Localizable", "linkToAccount.actionRequired", fallback: "Action required.\nPlease confirm account on the source device.")
-    /// Exiting will cancel the import account operation.
-    internal static let alertMessage = L10n.tr("Localizable", "linkToAccount.alertMessage", fallback: "Exiting will cancel the import account operation.")
-    /// Do you want to exit?
-    internal static let alertTile = L10n.tr("Localizable", "linkToAccount.alertTile", fallback: "Do you want to exit?")
+    /// Stopping will cancel the import account operation.
+    internal static let alertMessage = L10n.tr("Localizable", "linkToAccount.alertMessage", fallback: "Stopping will cancel the import account operation.")
+    /// Do you want to stop?
+    internal static let alertTile = L10n.tr("Localizable", "linkToAccount.alertTile", fallback: "Do you want to stop?")
     /// Account imported successfully.
     internal static let allSet = L10n.tr("Localizable", "linkToAccount.allSet", fallback: "Account imported successfully.")
     /// When ready, enter the authentication code.
