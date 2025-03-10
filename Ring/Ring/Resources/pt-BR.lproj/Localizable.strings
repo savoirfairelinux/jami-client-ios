@@ -57,7 +57,10 @@
 "global.time" = "Tempo";
 "global.editPassword" = "Editar palavra-passe";
 "global.confirmPassword" = "Confirmar senha";
+"global.confirm" = "Confirmar";
 "global.cameraDisabled" = "O acesso à câmara está desativado. Ative-o nas configurações do dispositivo para poder utilizar esta funcionalidade.";
+"global.confirm" = "Confirmar";
+"global.connect" = "Conectar";
 
 // Scan
 "scan.badQrCode" = "Código QR ilegível";
@@ -159,7 +162,7 @@
 "welcome.haveAccount" = "Eu já tenho uma conta";
 "welcome.linkDevice" = "Importar de outro dispositivo";
 "welcome.linkBackup" = "Importar de um arquivo de backup";
-"welcome.createAccount" = "Create Jami account";
+"welcome.createAccount" = "Criar conta do Jami";
 "welcome.connectToJAMS" = "Conectar ao servidor de gestão de conta Jami (JAMS)";
 
 // Creation Profile Screen
@@ -192,15 +195,21 @@
 "createAccount.encryptExplanation" = "Uma conta Jami é criada e armazenada localmente apenas neste dispositivo como um arquivo que contém as suas chaves de conta. O acesso ao arquivo pode, opcionalmente, ser protegido com uma palavra-passe.";
 
 // Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Vinculação de conta";
-"linkToAccount.linkButtonTitle" = "Vincular";
-"linkToAccount.linkDeviceTitle" = "Vincular dispositivo";
-"linkToAccount.linkDeviceMessage" = "Escolha “Vincular um novo dispositivo” a partir de outra aplicação Jami para mostrar o código QR ou gerar um código PIN.";
-"linkToAccount.explanationMessage" = "É necessário um código PIN para utilizar uma conta Jami existente neste dispositivo.";
-"linkToAccount.pinPlaceholder" = "Código PIN";
-"linkToAccount.pinLabel" = "Introduza o código PIN";
-"linkToAccount.scanQRCode" = "Escanar código QR";
-"linkToAccount.explanationPinMessage" = "Para gerar o código PIN, aceda às configurações de gestão da conta no dispositivo que contém a conta à qual pretende ligar. Selecione “Vincular novo dispositivo”. Receberá o código PIN necessário para preencher este formulário. O código PIN expira dentro de 10 minutos.";
+"linkToAccount.importAccount" = "Import account";
+"linkToAccount.showQrCode" = "Código QR";
+"linkToAccount.showPinCode" = "Authentication code";
+"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
+"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.goToAccounts" = "Go to imported account";
+"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
+"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
+"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
+"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.exit" = "Sair";
+"linkToAccount.shareMessage" = "Your code is: %@";
+"linkToAccount.alertTile" = "Do you want to exit?";
+"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importa a conta Jami do arquivo local.";
@@ -416,11 +425,23 @@
 
 // Link New Device
 "linkDevice.title" = "Vincular novo dispositivo";
-"linkDevice.passwordError" = "Palavra-passe incorreta. Tente novamente com a palavra-passe correta.";
 "linkDevice.networkError" = "Ocorreu um erro de rede durante a exportação da conta.";
-"linkDevice.defaultError" = "Ocorreu um erro durante a exportação da conta.";
-"linkDevice.explanationMessage" = "Abra o Jami no novo dispositivo e selecione “Vincular este dispositivo a uma conta” para concluir o processo. O código PIN expira dentro de 10 minutos.";
-"linkDevice.hudMessage" = "Verificando";
+"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
+"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
+"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
+"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
+"linkDevice.connecting" = "Connecting to your new device…";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
+"linkDevice.newDeviceIP" = "New device IP address: %1@";
+"linkDevice.token" = "token";
+"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
+"linkDevice.completed" = "Account imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Iniciar chamada de áudio";
@@ -531,53 +552,55 @@
 "accessibility.conversationRowUnreadCount" = "%@ unread messages.";
 "accessibility.conversationRowBlocked" = "Conversation blocked";
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
-"accessibility.conversationRowLastMessage" = "Last message on %@";
+"accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "Online";
 "accessibility.userPresenceAvailable" = "Disponível";
-"accessibility.pendingRequestsRow" = "Invitation received: %@ pending invitation";
+"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Recusar convite";
 "accessibility.pendingRequestsListAcceptInvitation" = "Aceitar convite";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "Editado";
 "accessibility.messageBubbleRead" = "Read";
 "accessibility.messageBubbleUnread" = "Unread";
-"accessibility.textNotAvailable" = "Text message received on %@, content not available";
+"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
 "accessibility.fileTransferNoName" = "File received on %@, name not available";
 "accessibility.inReply" = "In reply to message";
-"accessibility.text.receivedOn" = "%@, message received on %@";
-"accessibility.text.sentOn" = "%@, message sent on %@";
-"accessibility.fileTransfer.receivedOn" = "File: %@ , received on %@";
-"accessibility.fileTransfer.sentOn" = "File: %@, sent on %@";
-"accessibility.call.lasted" = "Lasted";
-"accessibility.fileTransferNoName" = "File received on %@, name not available";
-"accessibility.calls.default.toggleAudio" = "Turn off microphone";
-"accessibility.calls.default.toggleVideo" = "Turn on camera";
-"accessibility.calls.default.pauseCall" = "Pause call";
-"accessibility.calls.default.hangUpCall" = "Hang up";
+"accessibility.text.receivedOn" = "%1@, message received on %2@";
+"accessibility.text.sentOn" = "%1@, message sent on %2@";
+"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
+"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
+"accessibility.call.lasted" = "Lasted %@";
+"accessibility.calls.default.toggleAudio" = "Desativar microfone";
+"accessibility.calls.default.toggleVideo" = "Start camera";
+"accessibility.calls.default.pauseCall" = "Pausa chamada";
+"accessibility.calls.default.hangUpCall" = "Desligar";
 "accessibility.calls.default.addParticipant" = "Adicionar participante";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
-"accessibility.calls.default.openConversation" = "Open conversation";
+"accessibility.calls.default.openConversation" = "Conversa em curso";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Levantar a mão";
 
-"accessibility.calls.alter.toggleAudio" = "Turn on microphone";
-"accessibility.calls.alter.toggleVideo" = "Turn off camera";
+"accessibility.calls.alter.toggleAudio" = "Ativar microfone";
+"accessibility.calls.alter.toggleVideo" = "Parar a câmera";
 "accessibility.calls.alter.pauseCall" = "Retornar chamada";
-"accessibility.calls.alter.hangUpCall" = "Hang up";
-"accessibility.calls.alter.addParticipant" = "Add participant";
+"accessibility.calls.alter.hangUpCall" = "Desligar";
+"accessibility.calls.alter.addParticipant" = "Adicionar participante";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
-"accessibility.calls.alter.openConversation" = "Open conversation";
+"accessibility.calls.alter.openConversation" = "Conversa em curso";
 "accessibility.calls.alter.showDialpad" = "Show dialpad";
 "accessibility.calls.alter.raiseHand" = "Abaixar a mão";
-"accessibility.conference.minimize" = "Minimize";
-"accessibility.conference.maximize" = "Maximize";
-"accessibility.conference.setModerator" = "Set moderator";
-"accessibility.conference.unsetModerator" = "Unset moderator";
+"accessibility.conference.minimize" = "Minimizar";
+"accessibility.conference.maximize" = "Maximizar";
+"accessibility.conference.setModerator" = "Definir moderador";
+"accessibility.conference.unsetModerator" = "Moderador não definido";
 "accessibility.conference.muteAudio" = "Desabilitar som do áudio";
 "accessibility.conference.unmuteAudio" = "Ligar áudio";
-"accessibility.conference.hangup" = "Hang up";
-"accessibility.conference.lowerHand" = "Lower hand";
+"accessibility.conference.hangup" = "Desligar";
+"accessibility.conference.lowerHand" = "Abaixar a mão";
+
+"accessibility.account.tokenQRcode" = "Token QR code";

@@ -57,7 +57,10 @@
 "global.time" = "Kohë";
 "global.editPassword" = "Përpunoni fjalëkalim";
 "global.confirmPassword" = "Ripohoni fjalëkalimin";
+"global.confirm" = "Ripohoje";
 "global.cameraDisabled" = "Përdorimi i kamerës është i çaktivizuar. Që të mund të përdorni këtë veçori, aktivizojeni te rregullimet e pajisjes.";
+"global.confirm" = "Ripohoje";
+"global.connect" = "Lidhu";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -100,7 +103,7 @@
 "smartlist.results" = "Drejtori publike";
 "smartlist.jamsResults" = "Përfundime kërkimi";
 "smartlist.conversations" = "Biseda";
-"smartlist.noConversationsFound" = "No conversations match the search.";
+"smartlist.noConversationsFound" = "S’ka ndonjë bisedë që përkon me kërkimin.";
 "smartlist.newContact" = "Kontakt i ri";
 "smartlist.newGroup" = "Grup i ri";
 "smartlist.accounts" = "Llogari";
@@ -110,7 +113,7 @@
 "smartlist.searchBarPlaceholder" = "Jepni emër…";
 "smartlist.searchBar" = "Kërkim";
 "smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
-"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
+"smartlist.cellularAccess" = "Siguroni që te rregullimet është lejuar përdorim celular.";
 "smartlist.accountsTitle" = "Llogari";
 "smartlist.addAccountButton" = "+ Shtoni llogari";
 "smartlist.noNumber" = "Kontakti i përzgjedhur s’ka ndonjë numër";
@@ -127,7 +130,7 @@
 // Conversation
 "conversation.addToContactsButton" = "Shtoje te Kontaktet";
 "conversation.addToContactsLabel" = "Të shtohet te kontaktet?";
-"conversation.notContactLabel" = "%@ is not in the contact list";
+"conversation.notContactLabel" = "%@ s’gjendet te lista e kontakteve";
 "conversation.messagePlaceholder" = "Shkruajini";
 "conversation.errorSavingImage" = "Ndodhi një gabim teksa ruhej figura te galeria.";
 "conversation.receivedRequest" = "%@ ju dërgoi një ftesë bisede.";
@@ -159,7 +162,7 @@
 "welcome.haveAccount" = "Kam tashmë një llogari";
 "welcome.linkDevice" = "Importoni nga pajisje tjetër";
 "welcome.linkBackup" = "Importoni prej kopjeruajtjeje arkivi";
-"welcome.createAccount" = "Create Jami account";
+"welcome.createAccount" = "Krijoni një llogari Jami";
 "welcome.connectToJAMS" = "Lidhuni te Shërbyes Administrimi Llogarish Jami (JAMS)";
 
 // Creation Profile Screen
@@ -174,14 +177,14 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Bëhuni pjesë e Jami-t";
 "createAccount.lookingForUsernameAvailability" = "Po kontrollohet a është i zënë emri i përdoruesit…";
-"createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
+"createAccount.invalidUsername" = "Emër përdoruesi i pavlefshëm. Ju lutemi, jepni emrin e saktë të përdoruesit.";
 "createAccount.usernameAlreadyTaken" = "Emër përdoruesi tashmë i zënë";
 "createAccount.usernameValid" = "Emri i përdoruesit është i lirë.";
 "createAccount.UsernameNotRegisteredTitle" = "Gabim rrjeti";
 "createAccount.UsernameNotRegisteredMessage" = "Llogaria u krijua, por emri i përdoruesit s’u regjistrua";
 "createAccount.timeoutTitle" = "Llogaria u Krijua";
 "createAccount.timeoutMessage" = "Regjistrimi i emrit të përdoruesit është në ecuri e sipër. Ju lutemi, prisni…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.sipConfigure" = "Formësoni llogari SIP ekzistuese";
 "createAccount.creatingAccount" = "Po krijohet llogari";
 "createAccount.nameExplanation" = "Mund të zgjidhni një emër përdoruesi, për t’i ndihmuar të tjerët t’ju gjejnë dhe të komunikojmë më lehtë me ju në Jami.";
 "createAccount.newAccount" = "Llogari e re";
@@ -192,15 +195,21 @@
 "createAccount.encryptExplanation" = "Një llogari Jami krijohet dhe depozitohet lokalisht vetëm në këtë pajisje, si një arkiv që përmban kyçet e veta të llogarisë. Hyrja në arkiv, në daçi, mund të mbrohet me një fjalëkalimi.";
 
 // Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";
-"linkToAccount.linkButtonTitle" = "Lidhje";
-"linkToAccount.linkDeviceTitle" = "Lidhni pajisje";
-"linkToAccount.linkDeviceMessage" = "Që të shfaqet kodi QR, apo që të prodhohet një PIN, zgjidhni “Lidhni pajisje të re”, që nga një aplikacion tjetër Jami.";
-"linkToAccount.explanationMessage" = "Për të përdorur një llogari ekzistuese Jami në këtë pajisje, lypset një PIN.";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.pinLabel" = "Jepni PIN-in";
-"linkToAccount.scanQRCode" = "Skanoni kod QR";
-"linkToAccount.explanationPinMessage" = "Për të prodhuar kod PIN, kaloni te rregullimet e administrimit të llogarive te pajisja që përmban llogarinë që doni të lidhni. Përzgjidhni “Lidhni pajisje të re”. Do të merrni PIN-in e nevojshëm për plotësimin e këtij formulari. PIN-i do të skadojë pas 10 minutash.";
+"linkToAccount.importAccount" = "Importoni llogari";
+"linkToAccount.showQrCode" = "Kod QR";
+"linkToAccount.showPinCode" = "Authentication code";
+"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
+"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.goToAccounts" = "Go to imported account";
+"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
+"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
+"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
+"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.exit" = "Dalje";
+"linkToAccount.shareMessage" = "Your code is: %@";
+"linkToAccount.alertTile" = "Do you want to exit?";
+"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importo llogari Jami prej një kartele vendore arkiv";
@@ -301,7 +310,7 @@
 "accountPage.deviceRevocationError" = "Gabim shfuqizimi pajisjeje";
 "accountPage.linkDeviceTitle" = "Lidhni një pajisje tjetër";
 "accountPage.other" = "Tjetër";
-"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
+"accountPage.removeAccountMessage" = "Nëse llogaria s’është kopjeruajtur, apo shtuar te një pajisje tjetër, ajo dhe emri i përdoruesit regjistruar për të do të HUMBIN NË MËNYRË TË PAKTHYESHME.";
 "accountPage.inviteFriends" = "Ftoni shokë";
 "accountPage.contactMeOnJamiTitle" = "Lidhuni me mua në Jami!";
 "accountPage.contactMeOnJamiContant" = "Lidhuni me mua duke përdorur “%s” në platformën e komunikimeve të shpërndara Jami: https://jami.net";
@@ -416,11 +425,23 @@
 
 // Link New Device
 "linkDevice.title" = "Lidhni pajisje të re";
-"linkDevice.passwordError" = "Fjalëkalim i pasaktë. Ju lutemi, riprovoni me fjalëkalimin e saktë.";
 "linkDevice.networkError" = "Ndodhi një gabim rrjeti teksa eksportohej llogaria.";
-"linkDevice.defaultError" = "Ndodhi një gabim teksa eksportohej llogaria.";
-"linkDevice.explanationMessage" = "Që të plotësohet procesi, hapni Jami-n në pajisjen e re dhe zgjidhni “Lidhe këtë pajisje me një llogari”. Kodi PIN do të skadojë pas 10 minutash.";
-"linkDevice.hudMessage" = "Po verifikohet";
+"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
+"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
+"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
+"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
+"linkDevice.connecting" = "Connecting to your new device…";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
+"linkDevice.newDeviceIP" = "New device IP address: %1@";
+"linkDevice.token" = "token";
+"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
+"linkDevice.completed" = "Llogaria u importua me sukses te pajisja e re.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Filloni thirrje audio";
@@ -508,76 +529,78 @@
 // Accessibility
 "accessibility.close" = "Mbylle";
 "accessibility.smartListSwitchAccounts" = "Ndërroni llogari";
-"accessibility.smartListConnectedAs" = "The current account is %@";
+"accessibility.smartListConnectedAs" = "Llogaria e tanishme është %@";
 "accessibility.smartListAddAccount" = "Shtoni llogari";
 "accessibility.aboutJamiTitle" = "Mbi Jami-n";
 "accessibility.welcomeToJamiTitle" = "Mirë se vini te Jami";
-"accessibility.createAccountVerifyUsernamePrompt" = "Enter username to check availability.";
+"accessibility.createAccountVerifyUsernamePrompt" = "Jepni emër përdoruesi që të shihet në është i lirë.";
 "accessibility.profilePicturePicker" = "Foto profili";
 "accessibility.profilePicturePickerHint" = "Prekeni dy herë, që të bëni një foto, ose të përzgjidhni një foto nga fototeka";
 "accessibility.swarmPicturePicker" = "Foto grupi";
 "accessibility.swarmPicturePickerHint" = "Prekeni dy herë, që të bëni një foto, ose të përzgjidhni një foto nga fototeka";
 "accessibility.accountSummaryQrCode" = "Kod QR";
-"accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
-"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";
+"accessibility.accountSummaryQrCodeHint" = "Prekeni dy herë që të shihni kodin QR të llogarisë";
+"accessibility.accountSummaryEditProfileHint" = "Prekeni dy herë që të përpunoni profilin";
 "accessibility.accountSummaryEditSettingsButton" = "Rregullime";
-"accessibility.conversationStartVoiceCall" = "Start audio call with %@";
-"accessibility.conversationStartVideoCall" = "Start video call with %@";
+"accessibility.conversationStartVoiceCall" = "Filloni një thirrje me audio me %@";
+"accessibility.conversationStartVideoCall" = "Filloni një thirrje me video me %@";
 "accessibility.conversationComposeMessage" = "Hartoni një mesazh";
 "accessibility.conversationShareMedia" = "Ndani media me të tjerë";
 "accessibility.conversationCameraHint" = "Prekeni dy herë që të hapet kamera";
 "accessibility.audioPlayerPlay" = "Luaje";
 "accessibility.audioPlayerPause" = "Pushim";
-"accessibility.conversationRowUnreadCount" = "%@ unread messages.";
+"accessibility.conversationRowUnreadCount" = "%@ mesazhe të palexuar.";
 "accessibility.conversationRowBlocked" = "Biseda u bllokua";
-"accessibility.conversationRowSyncing" = "Synchronization in progress";
-"accessibility.conversationRowLastMessage" = "Mesazhi i fundit më %@";
+"accessibility.conversationRowSyncing" = "Njëkohësim në ecuri e sipër";
+"accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "Në linjë";
 "accessibility.userPresenceAvailable" = "I lirë";
-"accessibility.pendingRequestsRow" = "U mor ftesë: %@ ftesë pezull";
+"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowSingular" = "U mor ftesë: %@ ftesë pezull";
 "accessibility.pendingRequestsRowHint" = "Prekeni dy herë që të shqyrtoni dhe t’u përgjigjeni ftesave që morët";
 "accessibility.pendingRequestsListBlockUser" = "Blloko dërgues ftese";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Hidhe poshtë ftesën";
 "accessibility.pendingRequestsListAcceptInvitation" = "Pranoje ftesën";
 "accessibility.messageBubbleDeleted" = "Mesazhi u fshi";
 "accessibility.messageBubbleEdited" = "U përpunua";
-"accessibility.messageBubbleRead" = "Read";
-"accessibility.messageBubbleUnread" = "Unread";
-"accessibility.textNotAvailable" = "Text message received on %@, content not available";
+"accessibility.messageBubbleRead" = "Të lexuar";
+"accessibility.messageBubbleUnread" = "Të palexuar";
+"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
 "accessibility.fileTransferNoName" = "File received on %@, name not available";
-"accessibility.inReply" = "In reply to message";
-"accessibility.text.receivedOn" = "%@, message received on %@";
-"accessibility.text.sentOn" = "%@, message sent on %@";
-"accessibility.fileTransfer.receivedOn" = "File: %@ , received on %@";
-"accessibility.fileTransfer.sentOn" = "File: %@, sent on %@";
-"accessibility.call.lasted" = "Lasted";
-"accessibility.fileTransferNoName" = "File received on %@, name not available";
-"accessibility.calls.default.toggleAudio" = "Turn off microphone";
-"accessibility.calls.default.toggleVideo" = "Turn on camera";
-"accessibility.calls.default.pauseCall" = "Pause call";
-"accessibility.calls.default.hangUpCall" = "Hang up";
+"accessibility.inReply" = "Në përgjigje të mesazhit";
+"accessibility.text.receivedOn" = "%1@, message received on %2@";
+"accessibility.text.sentOn" = "%1@, message sent on %2@";
+"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
+"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
+"accessibility.call.lasted" = "Lasted %@";
+"accessibility.calls.default.toggleAudio" = "Heshtoje mikrofonin";
+"accessibility.calls.default.toggleVideo" = "Vëre kamerë në punë";
+"accessibility.calls.default.pauseCall" = "Ndale thirren";
+"accessibility.calls.default.hangUpCall" = "Mbylle thirrjen";
 "accessibility.calls.default.addParticipant" = "Shtoni pjesëmarrës";
-"accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
-"accessibility.calls.default.openConversation" = "Open conversation";
-"accessibility.calls.default.showDialpad" = "Show dialpad";
+"accessibility.calls.default.switchCamera" = "Ndërro kamerën";
+"accessibility.calls.default.toggleSpeaker" = "Hap altoparlantin";
+"accessibility.calls.default.openConversation" = "Hap bisedë";
+"accessibility.calls.default.showDialpad" = "Shfaq pjesën numerike";
 "accessibility.calls.default.raiseHand" = "Ngrini dorën";
 
-"accessibility.calls.alter.toggleAudio" = "Turn on microphone";
-"accessibility.calls.alter.toggleVideo" = "Turn off camera";
+"accessibility.calls.alter.toggleAudio" = "Hiqi heshtimin mikrofonit";
+"accessibility.calls.alter.toggleVideo" = "Ndale kamerën";
 "accessibility.calls.alter.pauseCall" = "Rimerre thirrjen";
-"accessibility.calls.alter.hangUpCall" = "Hang up";
+"accessibility.calls.alter.hangUpCall" = "Mbylle thirrjen";
 "accessibility.calls.alter.addParticipant" = "Shtoni pjesëmarrës";
-"accessibility.calls.alter.switchCamera" = "Switch camera";
-"accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
-"accessibility.calls.alter.openConversation" = "Open conversation";
-"accessibility.calls.alter.showDialpad" = "Show dialpad";
+"accessibility.calls.alter.switchCamera" = "Ndërro kamerën";
+"accessibility.calls.alter.toggleSpeaker" = "Mbyll altoparlantin";
+"accessibility.calls.alter.openConversation" = "Hap bisedë";
+"accessibility.calls.alter.showDialpad" = "Shfaq pjesën numerike";
 "accessibility.calls.alter.raiseHand" = "Uleni dorën";
-"accessibility.conference.minimize" = "Minimize";
-"accessibility.conference.maximize" = "Maximize";
-"accessibility.conference.setModerator" = "Set moderator";
-"accessibility.conference.unsetModerator" = "Unset moderator";
+"accessibility.conference.minimize" = "Minimizoje";
+"accessibility.conference.maximize" = "Maksimizoje";
+"accessibility.conference.setModerator" = "Caktoni moderator";
+"accessibility.conference.unsetModerator" = "Hiqe nga moderator";
 "accessibility.conference.muteAudio" = "Mbylli zërin";
 "accessibility.conference.unmuteAudio" = "Riktheji zërin";
-"accessibility.conference.hangup" = "Hang up";
+"accessibility.conference.hangup" = "Mbylle thirrjen";
 "accessibility.conference.lowerHand" = "Uleni dorën";
+
+"accessibility.account.tokenQRcode" = "Token QR code";

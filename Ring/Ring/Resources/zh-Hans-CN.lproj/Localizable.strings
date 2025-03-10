@@ -57,7 +57,10 @@
 "global.time" = "时间";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "确认密码";
+"global.confirm" = "确认";
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
+"global.confirm" = "确认";
+"global.connect" = "连接";
 
 // Scan
 "scan.badQrCode" = "无效的二维码";
@@ -159,7 +162,7 @@
 "welcome.haveAccount" = "我已经有一个账户";
 "welcome.linkDevice" = "從其他裝置匯入";
 "welcome.linkBackup" = "从归档备份中导入";
-"welcome.createAccount" = "Create Jami account";
+"welcome.createAccount" = "建立 Jami 帳號";
 "welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
@@ -181,7 +184,7 @@
 "createAccount.UsernameNotRegisteredMessage" = "账户已创建，但用户名未注册";
 "createAccount.timeoutTitle" = "已创建账户";
 "createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.sipConfigure" = "配置现有 SIP 帐户";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "您可以选择一个用户名，以便他人在 Jami 上找到并联系您。";
 "createAccount.newAccount" = "新账户";
@@ -192,15 +195,21 @@
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "账户关联";
-"linkToAccount.linkButtonTitle" = "关联";
-"linkToAccount.linkDeviceTitle" = "关联设备";
-"linkToAccount.linkDeviceMessage" = "Choose “Link new device” from another Jami app to show the QR code or generate a PIN code.";
-"linkToAccount.explanationMessage" = "使用此设备上的现有Jami帐户需要PIN码。";
-"linkToAccount.pinPlaceholder" = "PIN code";
-"linkToAccount.pinLabel" = "输入PIN码";
-"linkToAccount.scanQRCode" = "扫描 QR 码";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select “Link new device”. You will receive the necessary PIN code to complete this form. The PIN code will expire in 10 minutes.";
+"linkToAccount.importAccount" = "Import account";
+"linkToAccount.showQrCode" = "二维码";
+"linkToAccount.showPinCode" = "Authentication code";
+"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
+"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.goToAccounts" = "Go to imported account";
+"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
+"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
+"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
+"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.exit" = "退出";
+"linkToAccount.shareMessage" = "Your code is: %@";
+"linkToAccount.alertTile" = "Do you want to exit?";
+"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "从本地档案文件导入Jami账户。";
@@ -301,7 +310,7 @@
 "accountPage.deviceRevocationError" = "设备吊销出错";
 "accountPage.linkDeviceTitle" = "关联另一台设备";
 "accountPage.other" = "其他";
-"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
+"accountPage.removeAccountMessage" = "如果该帐户未备份或添加到其他设备，则该帐户和注册用户名将不可找回地丢失。";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "在 Jami 上联系我！";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
@@ -416,11 +425,23 @@
 
 // Link New Device
 "linkDevice.title" = "关联新设备";
-"linkDevice.passwordError" = "使用该密码无法解锁您的账户。";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.defaultError" = "An error occurred while exporting the account.";
-"linkDevice.explanationMessage" = "Open Jami on the new device and choose “Link this device to an account” to complete the process. The PIN code will expire in 10 minutes.";
-"linkDevice.hudMessage" = "认证中";
+"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
+"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
+"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
+"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
+"linkDevice.connecting" = "Connecting to your new device…";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
+"linkDevice.newDeviceIP" = "New device IP address: %1@";
+"linkDevice.token" = "token";
+"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
+"linkDevice.completed" = "Account imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "发起语音通话";
@@ -531,42 +552,42 @@
 "accessibility.conversationRowUnreadCount" = "%@ unread messages.";
 "accessibility.conversationRowBlocked" = "Conversation blocked";
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
-"accessibility.conversationRowLastMessage" = "Last message on %@";
+"accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "在线";
 "accessibility.userPresenceAvailable" = "可获得的";
-"accessibility.pendingRequestsRow" = "Invitation received: %@ pending invitation";
+"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "拒绝邀请";
 "accessibility.pendingRequestsListAcceptInvitation" = "接受邀请";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "已编辑";
 "accessibility.messageBubbleRead" = "Read";
 "accessibility.messageBubbleUnread" = "Unread";
-"accessibility.textNotAvailable" = "Text message received on %@, content not available";
+"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
 "accessibility.fileTransferNoName" = "File received on %@, name not available";
 "accessibility.inReply" = "In reply to message";
-"accessibility.text.receivedOn" = "%@, message received on %@";
-"accessibility.text.sentOn" = "%@, message sent on %@";
-"accessibility.fileTransfer.receivedOn" = "File: %@ , received on %@";
-"accessibility.fileTransfer.sentOn" = "File: %@, sent on %@";
-"accessibility.call.lasted" = "Lasted";
-"accessibility.fileTransferNoName" = "File received on %@, name not available";
-"accessibility.calls.default.toggleAudio" = "Turn off microphone";
-"accessibility.calls.default.toggleVideo" = "Turn on camera";
-"accessibility.calls.default.pauseCall" = "Pause call";
-"accessibility.calls.default.hangUpCall" = "Hang up";
+"accessibility.text.receivedOn" = "%1@, message received on %2@";
+"accessibility.text.sentOn" = "%1@, message sent on %2@";
+"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
+"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
+"accessibility.call.lasted" = "Lasted %@";
+"accessibility.calls.default.toggleAudio" = "关闭麦克风";
+"accessibility.calls.default.toggleVideo" = "启动摄像头";
+"accessibility.calls.default.pauseCall" = "暂停通话";
+"accessibility.calls.default.hangUpCall" = "挂断";
 "accessibility.calls.default.addParticipant" = "添加参与者";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
-"accessibility.calls.default.openConversation" = "Open conversation";
+"accessibility.calls.default.openConversation" = "打开会话";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "举手";
 
-"accessibility.calls.alter.toggleAudio" = "Turn on microphone";
-"accessibility.calls.alter.toggleVideo" = "Turn off camera";
+"accessibility.calls.alter.toggleAudio" = "麦克风静音";
+"accessibility.calls.alter.toggleVideo" = "关闭摄像头";
 "accessibility.calls.alter.pauseCall" = "恢复通话";
-"accessibility.calls.alter.hangUpCall" = "Hang up";
+"accessibility.calls.alter.hangUpCall" = "挂断";
 "accessibility.calls.alter.addParticipant" = "添加参与者";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -574,10 +595,12 @@
 "accessibility.calls.alter.showDialpad" = "Show dialpad";
 "accessibility.calls.alter.raiseHand" = "放下手";
 "accessibility.conference.minimize" = "最小化";
-"accessibility.conference.maximize" = "Maximize";
-"accessibility.conference.setModerator" = "Set moderator";
-"accessibility.conference.unsetModerator" = "Unset moderator";
+"accessibility.conference.maximize" = "最大化";
+"accessibility.conference.setModerator" = "设置管理员";
+"accessibility.conference.unsetModerator" = "取消设置管理员";
 "accessibility.conference.muteAudio" = "静音";
 "accessibility.conference.unmuteAudio" = "取消静音";
-"accessibility.conference.hangup" = "Hang up";
+"accessibility.conference.hangup" = "挂断";
 "accessibility.conference.lowerHand" = "放下手";
+
+"accessibility.account.tokenQRcode" = "Token QR code";
