@@ -16,6 +16,24 @@
       "message": "Why use a space instead of a new line? Dividing the text can make it easier to read.",
       "revId": "96f823a6a5169a80da1e778b44333f2f59b7ca86",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70ca55c8_4a1d090a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 12
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-11T20:58:17Z",
+      "side": 0,
+      "message": "The sentences are part of the same paragraph.",
+      "parentUuid": "64f48d27_9992ad9c",
+      "revId": "96f823a6a5169a80da1e778b44333f2f59b7ca86",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
