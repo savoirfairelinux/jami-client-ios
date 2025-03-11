@@ -41,6 +41,7 @@ class ConversationsManager {
     private let callsProvider: CallsProviderService
     private let requestService: RequestsService
     private let profileService: ProfilesService
+    private let presenceService: PresenceService
 
     private let disposeBag = DisposeBag()
     private let textPlainMIMEType = "text/plain"
@@ -60,7 +61,8 @@ class ConversationsManager {
          contactsService: ContactsService,
          callsProvider: CallsProviderService,
          requestsService: RequestsService,
-         profileService: ProfilesService) {
+         profileService: ProfilesService,
+         presenceService: PresenceService) {
         self.conversationService = conversationService
         self.accountsService = accountsService
         self.nameService = nameService
@@ -71,6 +73,7 @@ class ConversationsManager {
         self.callsProvider = callsProvider
         self.requestService = requestsService
         self.profileService = profileService
+        self.presenceService = presenceService
         ProfilesAdapter.delegate = self
 
         ConversationsAdapter.messagesDelegate = self
@@ -258,12 +261,12 @@ class ConversationsManager {
                       let accountId: String = event.getEventInput(.accountId),
                       let jamiId: String = event.getEventInput(.peerUri),
                       let account = self.accountsService.getAccount(fromAccountId: accountId),
-                      account.isJams,
                       let currentAccount = self.accountsService.currentAccount,
                       account == currentAccount,
-                      let contact = self.contactsService.contact(withHash: jamiId),
-                      !contact.conversationId.isEmpty
+                      let contact = self.contactsService.contact(withHash: jamiId)
                 else { return }
+                self.presenceService.subscribeBuddy(withAccountId: accountId, withJamiId: jamiId, withFlag: true)
+                guard account.isJams, !contact.conversationId.isEmpty else { return }
                 self.conversationService.addSwarmConversationId(conversationId: contact.conversationId, accountId: accountId, jamiId: jamiId)
             })
             .disposed(by: self.disposeBag)
