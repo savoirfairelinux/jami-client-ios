@@ -35,6 +35,7 @@ protocol SwarmInfoProtocol {
     var avatarSpacing: CGFloat { get set }
 
     var finalTitle: Observable<String> { get set }
+    var participantsString: BehaviorRelay<String> { get set }
 
     var finalAvatar: Observable<UIImage> { get set }
 
@@ -140,6 +141,8 @@ class SwarmInfo: SwarmInfoProtocol {
                 return self.buildTitleFrom(names: names)
             }
     }()
+
+    var participantsString = BehaviorRelay(value: "")
 
     lazy var finalAvatar: Observable<UIImage> = {
         return Observable
@@ -252,6 +255,7 @@ class SwarmInfo: SwarmInfoProtocol {
             .subscribe { [weak self] names in
                 guard let self = self else { return }
                 self.participantsNames.accept(Array(Set(names)))
+                self.participantsString.accept(buildTitleFrom(names: Array(Set(names))))
             } onError: { _ in
             }
             .disposed(by: self.tempBag)

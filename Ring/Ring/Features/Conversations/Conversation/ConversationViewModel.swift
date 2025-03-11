@@ -316,6 +316,13 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
+        self.swarmInfo!.participantsString.share()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] name in
+                self?.userName.accept(name)
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
     }
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {
