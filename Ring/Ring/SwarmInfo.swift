@@ -35,6 +35,7 @@ protocol SwarmInfoProtocol {
     var avatarSpacing: CGFloat { get set }
 
     var finalTitle: Observable<String> { get set }
+    var participantsString: BehaviorRelay<String> { get set }
 
     var finalAvatar: Observable<UIImage> { get set }
 
@@ -141,6 +142,8 @@ class SwarmInfo: SwarmInfoProtocol {
             }
     }()
 
+    var participantsString = BehaviorRelay(value: "")
+
     lazy var finalAvatar: Observable<UIImage> = {
         return Observable
             .combineLatest(self.avatar.asObservable().startWith(self.avatar.value),
@@ -239,36 +242,59 @@ class SwarmInfo: SwarmInfoProtocol {
 
     private func subscribeParticipantsInfo() {
         tempBag = DisposeBag()
-        let namesObservable = participants.value
-            .map({ participantInfo in
-                return participantInfo.finalName.share().asObservable()
-            })
-        Observable
-            .combineLatest(namesObservable) { (items: [String]) -> [String] in
-                return items.filter { name in
-                    !name.isEmpty
-                }
-            }
-            .subscribe { [weak self] names in
+
+        let finalNameObservables = participants.value.map { $0.finalName.share().asObservable() }
+        let registeredNameObservables = participants.value.map { $0.registeredName.share().asObservable() }
+        let profileNameObservables = participants.value.map { $0.profileName.share().asObservable() }
+
+        if let conversation = self.conversation, conversation.isDialog() {
+            subscribeToNames(observables: finalNameObservables) { [weak self] names in
                 guard let self = self else { return }
                 self.participantsNames.accept(Array(Set(names)))
-            } onError: { _ in
             }
-            .disposed(by: self.tempBag)
-        // filter out default avatars
-        let avatarsObservable = participants.value
-            .map({ participantInfo in
-                return participantInfo.avatar.share().asObservable()
-            })
+
+            subscribeToNames(observables: registeredNameObservables) { [weak self] names in
+                guard let self = self else { return }
+                self.participantsString.accept(self.buildTitleFrom(names: Array(Set(names))))
+            }
+
+            subscribeToNames(observables: profileNameObservables) { [weak self] names in
+                guard let self = self else { return }
+                if self.title.value.isEmpty, let name = names.first {
+                    self.title.accept(name)
+                }
+            }
+        } else {
+            subscribeToNames(observables: finalNameObservables) { [weak self] names in
+                guard let self = self else { return }
+                let uniqueNames = Array(Set(names))
+                self.participantsNames.accept(uniqueNames)
+                self.participantsString.accept(self.buildTitleFrom(names: uniqueNames))
+            }
+        }
+
+        subscribeToParticipantAvatars()
+    }
+
+    private func subscribeToNames(observables: [Observable<String>], onNext: @escaping ([String]) -> Void) {
         Observable
-            .combineLatest(avatarsObservable) { (items: [UIImage?]) -> [UIImage] in
-                return items.compactMap { $0 }
-            }
-            .subscribe { [weak self] avatars in
+            .combineLatest(observables) { $0.filter { !$0.isEmpty } }
+            .subscribe(
+                onNext: onNext,
+                onError: { _ in }
+            )
+            .disposed(by: self.tempBag)
+    }
+
+    private func subscribeToParticipantAvatars() {
+        let avatarObservables = participants.value.map { $0.avatar.share().asObservable() }
+
+        Observable.combineLatest(avatarObservables)
+            .map { avatars in avatars.compactMap { $0 } }
+            .subscribe(onNext: { [weak self] avatars in
                 guard let self = self else { return }
                 self.participantsAvatars.accept(avatars)
-            } onError: { _ in
-            }
+            })
             .disposed(by: self.tempBag)
     }
 

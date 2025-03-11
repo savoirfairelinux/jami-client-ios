@@ -31,6 +31,7 @@ class TestableSwarmInfo: SwarmInfoProtocol {
     var description = BehaviorRelay(value: "")
     var participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
     var participantsAvatars: BehaviorRelay<[UIImage]> = BehaviorRelay(value: [UIImage()])
+    var participantsString = BehaviorRelay<String>(value: "")
 
     var avatarHeight: CGFloat = 55
     var avatarSpacing: CGFloat = 2
