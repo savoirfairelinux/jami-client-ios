@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8870968_4f46e4db",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-03-11T00:38:36Z",
+      "side": 0,
+      "message": "`Do you want to stop linking the account?`",
+      "range": {
+        "startLine": 211,
+        "startChar": 29,
+        "endLine": 211,
+        "endChar": 49
+      },
+      "revId": "94f2a3e4e15866608a99eadb91b58cfa766cb5ec",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
