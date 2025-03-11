@@ -220,11 +220,11 @@
 "linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
 "linkToAccount.exit" = "Exit";
 "linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.alertTile" = "Do you want to stop linking the account?";
+"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import Jami account from local archive file.";
@@ -378,7 +378,7 @@
 "accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Notifications";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
@@ -441,20 +441,21 @@
 // Link New Device
 "linkDevice.title" = "Link new device";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
-"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code.";
-"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
+"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
 "linkDevice.connecting" = "Connecting to your new device…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
 "linkDevice.newDeviceIP" = "New device IP address: %1@";
 "linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
+"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "Account imported successfully on the new device.";
 
 // Contact Page
@@ -525,7 +526,7 @@
 "migrateAccount.title" = "Account migration";
 "migrateAccount.migrateButton" = "Migrate Account";
 "migrateAccount.explanation" = "Account migration required.";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
 "migrateAccount.error" = "An error occurred while migrating the account. Retry or delete the account.";
 "migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
