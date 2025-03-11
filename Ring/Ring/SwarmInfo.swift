@@ -35,6 +35,7 @@ protocol SwarmInfoProtocol {
     var avatarSpacing: CGFloat { get set }
 
     var finalTitle: Observable<String> { get set }
+    var participantsString: BehaviorRelay<String> { get set }
 
     var finalAvatar: Observable<UIImage> { get set }
 
@@ -141,6 +142,8 @@ class SwarmInfo: SwarmInfoProtocol {
             }
     }()
 
+    var participantsString = BehaviorRelay(value: "")
+
     lazy var finalAvatar: Observable<UIImage> = {
         return Observable
             .combineLatest(self.avatar.asObservable().startWith(self.avatar.value),
@@ -239,37 +242,51 @@ class SwarmInfo: SwarmInfoProtocol {
 
     private func subscribeParticipantsInfo() {
         tempBag = DisposeBag()
-        let namesObservable = participants.value
-            .map({ participantInfo in
-                return participantInfo.finalName.share().asObservable()
-            })
-        Observable
-            .combineLatest(namesObservable) { (items: [String]) -> [String] in
-                return items.filter { name in
-                    !name.isEmpty
-                }
+
+        guard !participants.value.isEmpty else { return }
+
+        let isDialog = conversation?.isDialog() ?? false
+
+        // Create a single shared observable for all participant data
+        // swiftlint:disable large_tuple
+        let participantData = Observable.combineLatest(
+            participants.value.map { participant -> Observable<(String, String, String, UIImage?)> in
+                return Observable.combineLatest(
+                    participant.finalName.asObservable(),
+                    participant.registeredName.asObservable(),
+                    participant.profileName.asObservable(),
+                    participant.avatar.asObservable()
+                )
             }
-            .subscribe { [weak self] names in
+        )
+        .share(replay: 1)
+        // swiftlint:enable large_tuple
+
+        participantData
+            .subscribe(onNext: { [weak self] data in
                 guard let self = self else { return }
-                self.participantsNames.accept(Array(Set(names)))
-            } onError: { _ in
-            }
-            .disposed(by: self.tempBag)
-        // filter out default avatars
-        let avatarsObservable = participants.value
-            .map({ participantInfo in
-                return participantInfo.avatar.share().asObservable()
-            })
-        Observable
-            .combineLatest(avatarsObservable) { (items: [UIImage?]) -> [UIImage] in
-                return items.compactMap { $0 }
-            }
-            .subscribe { [weak self] avatars in
-                guard let self = self else { return }
+
+                let finalNames = data.map { $0.0 }.filter { !$0.isEmpty }
+                let registeredNames = data.map { $0.1 }.filter { !$0.isEmpty }
+                let profileNames = data.map { $0.2 }.filter { !$0.isEmpty }
+                let avatars = data.map { $0.3 }.compactMap { $0 }
+
                 self.participantsAvatars.accept(avatars)
-            } onError: { _ in
-            }
-            .disposed(by: self.tempBag)
+
+                if isDialog {
+                    self.participantsNames.accept(Array(Set(finalNames)))
+                    self.participantsString.accept(self.buildTitleFrom(names: Array(Set(registeredNames))))
+
+                    if self.title.value.isEmpty, let name = profileNames.first {
+                        self.title.accept(name)
+                    }
+                } else {
+                    let uniqueNames = Array(Set(finalNames))
+                    self.participantsNames.accept(uniqueNames)
+                    self.participantsString.accept(self.buildTitleFrom(names: uniqueNames))
+                }
+            })
+            .disposed(by: tempBag)
     }
 
     private func subscribeConversationEvents() {
