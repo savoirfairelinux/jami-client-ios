@@ -68,11 +68,11 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
 
         menuButton.tap()
 
-        let overly = smartListViewPage.overlay
+        let settings = app.collectionViews.buttons[L10n.AccountPage.settingsHeader]
 
-        waitForElementToAppear(overly)
+        waitForElementToAppear(settings)
 
-        XCTAssertTrue(overly.exists)
+        XCTAssertTrue(settings.exists)
 
         // Tap outside the menu to dismiss it
         let coordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
