@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f48d27_9992ad9c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 12
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-03-11T16:00:40Z",
+      "side": 0,
+      "message": "Why use a space instead of a new line? Dividing the text can make it easier to read.",
+      "revId": "96f823a6a5169a80da1e778b44333f2f59b7ca86",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
