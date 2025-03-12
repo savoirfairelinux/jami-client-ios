@@ -70,7 +70,6 @@ private struct SearchBar: UIViewControllerRepresentable {
 
             searchController.searchResultsUpdater = self
             searchController.searchBar.searchTextField.addTarget(self, action: #selector(searchBarTextDidBeginEditing(_:)), for: .editingDidBegin)
-            searchController.searchBar.searchTextField.addTarget(self, action: #selector(searchBarTextDidEndEditing(_:)), for: .editingDidEnd)
             searchController.hidesNavigationBarDuringPresentation = true
             searchController.obscuresBackgroundDuringPresentation = false
             searchController.searchBar.searchTextField.accessibilityIdentifier = SmartListAccessibilityIdentifiers.searchBarTextField
@@ -90,15 +89,6 @@ private struct SearchBar: UIViewControllerRepresentable {
         }
 
         func didDismissSearchController(_ searchController: UISearchController) {
-            DispatchQueue.main.async {
-                withAnimation {
-                    self.isActive = false
-                }
-            }
-        }
-
-        @objc
-        private func searchBarTextDidEndEditing(_ textField: UITextField) {
             DispatchQueue.main.async {
                 withAnimation {
                     self.isActive = false
