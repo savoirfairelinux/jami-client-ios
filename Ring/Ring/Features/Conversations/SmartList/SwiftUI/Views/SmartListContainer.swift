@@ -130,7 +130,7 @@ struct SmartListView: View, StateEmittingView {
     @ViewBuilder
     private func backgroundCover() -> some View {
         Color(UIColor.black).opacity(coverBackgroundOpacity)
-            .ignoresSafeArea(edges: [.top, .bottom])
+            .ignoresSafeArea()
             .allowsHitTesting(true)
             .onTapGesture {
                 toggleAccountList()

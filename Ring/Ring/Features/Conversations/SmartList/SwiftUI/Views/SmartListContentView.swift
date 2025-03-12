@@ -29,35 +29,51 @@ struct SmartListContentView: View {
     @Binding var isSearchBarActive: Bool
     @SwiftUI.State var currentSearchBarStatus: Bool = false
     @SwiftUI.State var isShowingScanner: Bool = false
-    @SwiftUI.State var isShowingTopView: Bool = true
 
     var body: some View {
-        // Use ScrollView instead of List to prevent memory leaks when using a conversation model inside ForEach.
-        ScrollView {
-            VStack(alignment: .leading) {
-                publicDirectorySearchView
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
-                if !hideTopView {
-                    if mode == .smartList {
-                        smartListTopView
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
-                    } else {
-                        newMessageTopView
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
+        let conversationsView = ConversationsView(model: model, stateEmitter: stateEmitter)
+
+        return ZStack {
+            Group {
+                if isSearchBarActive {
+                    // Use ScrollView instead of List to prevent memory leaks when using a conversation model inside ForEach.
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            publicDirectorySearchView
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .contentShape(Rectangle())
+                            conversationsSearchHeaderView
+                                .hideRowSeparator()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .contentShape(Rectangle())
+                            conversationsView
+                        }
+                        .padding(.horizontal, 15)
+                    }
+                } else {
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            if mode == .smartList {
+                                smartListTopView
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .contentShape(Rectangle())
+                            } else {
+                                newMessageTopView
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .contentShape(Rectangle())
+                            }
+                            conversationsView
+                        }
+                        .padding(.horizontal, 15)
                     }
                 }
-                conversationsSearchHeaderView
-                    .hideRowSeparator()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
-                ConversationsView(model: model, stateEmitter: stateEmitter)
             }
-            .padding(.horizontal, 15)
+            .transition(AnyTransition.asymmetric(
+                insertion: .opacity,
+                removal: .opacity.animation(.easeOut(duration: 0))
+            ))
         }
-        .transition(.opacity)
+        .animation(.easeIn(duration: 0.3), value: isSearchBarActive)
         .onAppear { [weak model] in
             guard let model = model else { return }
             // If there was an active search before presenting the conversation, the search results should remain the same upon returning to the page. Otherwise, flickering will occur.
@@ -66,17 +82,6 @@ struct SmartListContentView: View {
                 model.presentedConversation.resetPresentedConversation()
             }
             hideTopView = false
-        }
-        .onChange(of: isSearchBarActive) { _ in
-            if isSearchBarActive {
-                isShowingTopView = false
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    withAnimation {
-                        isShowingTopView = !isSearchBarActive
-                    }
-                }
-            }
         }
         .listStyle(.plain)
         .hideRowSeparator()
@@ -97,24 +102,21 @@ struct SmartListContentView: View {
     }
 
     @ViewBuilder private var smartListTopView: some View {
-        if isShowingTopView && (requestsModel.unreadRequests > 0 || model.connectionState == .none) {
+        if requestsModel.unreadRequests > 0 || model.connectionState == .none {
             VStack {
                 if model.connectionState == .none {
                     networkSettingsButton()
-                        .transition(.opacity)
                 }
                 if requestsModel.unreadRequests > 0 {
                     RequestsIndicatorView(model: requestsModel)
                         .onTapGesture { [weak requestsModel] in
                             requestsModel?.presentRequests()
                         }
-                        .transition(.opacity)
                 }
             }
             .padding(.bottom)
             .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 5, trailing: 15))
             .hideRowSeparator()
-            .transition(.opacity)
         }
     }
 
@@ -157,17 +159,12 @@ struct SmartListContentView: View {
     }
 
     @ViewBuilder private var newMessageTopView: some View {
-        if !isSearchBarActive {
-            VStack {
-                if isShowingTopView {
-                    newChatOptions
-                }
-            }
-            .padding(.bottom)
-            .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 5, trailing: 15))
-            .hideRowSeparator()
-            .transition(.opacity)
+        VStack {
+            newChatOptions
         }
+        .padding(.bottom)
+        .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 5, trailing: 15))
+        .hideRowSeparator()
     }
 
     @ViewBuilder private var newChatOptions: some View {
@@ -201,10 +198,8 @@ struct SmartListContentView: View {
 
     @ViewBuilder private var conversationsSearchHeaderView: some View {
         VStack(alignment: .leading) {
-            if isSearchBarActive {
-                Spacer()
-                    .frame(height: 10)
-            }
+            Spacer()
+                .frame(height: 10)
             if !model.searchQuery.isEmpty {
                 Text(L10n.Smartlist.conversations)
                     .fontWeight(.semibold)
@@ -222,24 +217,22 @@ struct SmartListContentView: View {
     }
 
     @ViewBuilder private var publicDirectorySearchView: some View {
-        if isSearchBarActive {
-            VStack(alignment: .leading) {
-                if mode == .smartList && !model.isSipAccount() {
-                    newChatOptions
-                        .padding(.vertical, 10)
-                }
-                if !model.searchQuery.isEmpty {
-                    Text(model.publicDirectoryTitle)
-                        .fontWeight(.semibold)
-                        .hideRowSeparator()
-                        .padding(.top)
-                    searchResultView
-                        .hideRowSeparator()
-                        .padding(.bottom)
-                        .padding(.top, 3)
-                    if let conversation = model.blockedConversation {
-                        blockedcontactsView(conversation: conversation)
-                    }
+        VStack(alignment: .leading) {
+            if !model.isSipAccount() {
+                newChatOptions
+                    .padding(.vertical, 10)
+            }
+            if !model.searchQuery.isEmpty {
+                Text(model.publicDirectoryTitle)
+                    .fontWeight(.semibold)
+                    .hideRowSeparator()
+                    .padding(.top)
+                searchResultView
+                    .hideRowSeparator()
+                    .padding(.bottom)
+                    .padding(.top, 3)
+                if let conversation = model.blockedConversation {
+                    blockedcontactsView(conversation: conversation)
                 }
             }
         }
