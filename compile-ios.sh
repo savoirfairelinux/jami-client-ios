@@ -131,6 +131,19 @@ echo "Building for ${ARCHS_PLATFORMS[@]}"
 
 cd "$DAEMON_DIR"
 
+# clean build artifacts
+# remove existing DEPS folder if it exists
+DEPS_DIR="$IOS_TOP_DIR/DEPS"
+if [ -d "$DEPS_DIR" ]; then
+  rm -rf "$DEPS_DIR"
+fi
+
+# remove existing XCFramework folder if it exists
+XCFRAMEWORK_DIR="$IOS_TOP_DIR/xcframework"
+if [ -d "$XCFRAMEWORK_DIR" ]; then
+  rm -rf "$XCFRAMEWORK_DIR"
+fi
+
 for ARCH_PLATFORM in "${ARCHS_PLATFORMS[@]}"
 do
   # Split the architecture and platform
@@ -261,7 +274,7 @@ done
 cd "$IOS_TOP_DIR"
 
 # Create XCFrameworks
-XCFRAMEWORK_DIR="$IOS_TOP_DIR/xcframework"
+
 mkdir -p "$XCFRAMEWORK_DIR"
 
 # Copy headers to a common location
