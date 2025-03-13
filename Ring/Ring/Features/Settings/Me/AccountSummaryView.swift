@@ -103,7 +103,7 @@ struct AccountSummaryView: View {
         .navigationBarItems(leading: Button(action: {[weak state] in
             state?.dismiss()
         }, label: {
-            Text(L10n.Global.cancel)
+            Text(L10n.Global.close)
                 .foregroundColor(.jamiColor)
         }),
         trailing:
