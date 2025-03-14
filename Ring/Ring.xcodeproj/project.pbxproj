@@ -147,8 +147,6 @@
 		1DF75AC2296E09240055EA87 /* Button+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC1296E09240055EA87 /* Button+Helpers.swift */; };
 		1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC3296E0A940055EA87 /* View+Helpers.swift */; };
 		1DF75AC6296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */; };
-		26001BD82D6E5D1A009A8E23 /* libnatpmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BD72D6E5C8F009A8E23 /* libnatpmp.a */; };
-		26001BD92D6E5E40009A8E23 /* libnatpmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BD72D6E5C8F009A8E23 /* libnatpmp.a */; };
 		26001BDB2D6FF5F6009A8E23 /* Video+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26001BDA2D6FF5F6009A8E23 /* Video+Helpers.swift */; };
 		26001C0C2D78E1A1009A8E23 /* libpjsua.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BDF2D78E198009A8E23 /* libpjsua.xcframework */; };
 		26001C0E2D78E1A1009A8E23 /* libsrtp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE02D78E198009A8E23 /* libsrtp.xcframework */; };
@@ -761,7 +759,6 @@
 		1DF75AC1296E09240055EA87 /* Button+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Helpers.swift"; sourceTree = "<group>"; };
 		1DF75AC3296E0A940055EA87 /* View+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Helpers.swift"; sourceTree = "<group>"; };
 		1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreParticipantsInSwarm.swift; sourceTree = "<group>"; };
-		26001BD72D6E5C8F009A8E23 /* libnatpmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnatpmp.a; path = ../fat/lib/libnatpmp.a; sourceTree = "<group>"; };
 		26001BDA2D6FF5F6009A8E23 /* Video+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+Helpers.swift"; sourceTree = "<group>"; };
 		26001BDF2D78E198009A8E23 /* libpjsua.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libpjsua.xcframework; path = ../xcframework/libpjsua.xcframework; sourceTree = "<group>"; };
 		26001BE02D78E198009A8E23 /* libsrtp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libsrtp.xcframework; path = ../xcframework/libsrtp.xcframework; sourceTree = "<group>"; };
@@ -3442,7 +3439,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -3456,7 +3453,6 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 3.87;
 				MARKETING_VERSION = 3.86;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
@@ -3483,7 +3479,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3496,7 +3492,6 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 3.87;
 				MARKETING_VERSION = 3.86;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
@@ -3670,7 +3665,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -3689,7 +3684,6 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 3.87;
 				MARKETING_VERSION = 3.86;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
@@ -4018,7 +4012,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -4032,7 +4026,6 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 3.87;
 				MARKETING_VERSION = 3.86;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
