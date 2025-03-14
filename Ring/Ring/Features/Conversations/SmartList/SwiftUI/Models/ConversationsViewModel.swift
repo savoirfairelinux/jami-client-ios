@@ -71,7 +71,7 @@ class ConversationsViewModel: ObservableObject {
     }
     @Published var publicDirectoryTitle = L10n.Smartlist.results
     @Published var searchingLabel = ""
-    @Published var connectionState: ConnectionType = .none
+    @Published var connectionState: ConnectionType = .connected
     @Published var searchQuery: String = ""
     @Published var conversationCreated: String = ""
     @Published var searchStatus: SearchStatus = .notSearching
