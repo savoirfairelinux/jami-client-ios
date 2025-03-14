@@ -23,7 +23,7 @@ import SwiftUI
 enum LinkDeviceError {
     static let wrongPassword = L10n.LinkDevice.errorWrongPassword
     static let networkError = L10n.LinkDevice.errorNetwork
-    static let failedToGenerateToken = L10n.LinkDevice.errorToken
+    static let failedToGenerateCode = L10n.LinkDevice.errorCode
     static let jamiIdNotFound = L10n.LinkDevice.errorWrongData
 }
 
@@ -149,7 +149,7 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
             self.token = token
             withAnimation { uiState = .displayingToken(pin: token) }
         } else {
-            withAnimation { uiState = .error(message: LinkDeviceError.failedToGenerateToken) }
+            withAnimation { uiState = .error(message: LinkDeviceError.failedToGenerateCode) }
         }
     }
 
