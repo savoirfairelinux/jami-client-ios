@@ -107,9 +107,8 @@ struct LinkDeviceView: View {
 
     private var info: some View {
         (
-            Text(L10n.LinkDevice.initialInfo)
-                + Text(L10n.LinkDevice.infoAddAccount).bold()
-                + Text(entryMode == .qrCode ? L10n.LinkDevice.infoQRCode : L10n.LinkDevice.infoCode)
+            Text(L10n.LinkDevice.initialInfo) +
+                Text(entryMode == .qrCode ? "\n" + L10n.LinkDevice.infoQRCode : "\n" + L10n.LinkDevice.infoCode)
         )
         .multilineTextAlignment(.center)
         .font(.callout)

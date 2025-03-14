@@ -947,9 +947,9 @@ internal enum L10n {
     /// The operation has timed out.
     /// Please try again.
     internal static let errorTimeout = L10n.tr("Localizable", "linkDevice.errorTimeout", fallback: "The operation has timed out.\nPlease try again.")
-    /// An error occurred while generating the token.
+    /// An error occurred while generating the code.
     /// Please try again.
-    internal static let errorToken = L10n.tr("Localizable", "linkDevice.errorToken", fallback: "An error occurred while generating the token.\nPlease try again.")
+    internal static let errorToken = L10n.tr("Localizable", "linkDevice.errorToken", fallback: "An error occurred while generating the code.\nPlease try again.")
     /// An error occurred while exporting the account.n
     /// Please try again.
     internal static let errorWrongData = L10n.tr("Localizable", "linkDevice.errorWrongData", fallback: "An error occurred while exporting the account.n\nPlease try again.")
@@ -959,16 +959,13 @@ internal enum L10n {
     /// The export account operation to the new device is in progress.
     /// Please confirm import on the new device.
     internal static let exportInProgress = L10n.tr("Localizable", "linkDevice.exportInProgress", fallback: "The export account operation to the new device is in progress.\nPlease confirm import on the new device.")
-    /// Select Add Account > Connect from another device.
-    /// 
-    internal static let infoAddAccount = L10n.tr("Localizable", "linkDevice.infoAddAccount", fallback: "Select Add Account > Connect from another device.\n")
     /// When ready, enter the code and press `Connect`.
     internal static let infoCode = L10n.tr("Localizable", "linkDevice.infoCode", fallback: "When ready, enter the code and press `Connect`.")
-    /// When ready, scan the QR code
-    internal static let infoQRCode = L10n.tr("Localizable", "linkDevice.infoQRCode", fallback: "When ready, scan the QR code")
+    /// When ready, scan the QR code.
+    internal static let infoQRCode = L10n.tr("Localizable", "linkDevice.infoQRCode", fallback: "When ready, scan the QR code.")
     /// On the new device, initiate a new account.
-    /// 
-    internal static let initialInfo = L10n.tr("Localizable", "linkDevice.initialInfo", fallback: "On the new device, initiate a new account.\n")
+    /// Select Add Account > Connect from another device.
+    internal static let initialInfo = L10n.tr("Localizable", "linkDevice.initialInfo", fallback: "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.")
     /// A network error occurred while exporting the account.
     internal static let networkError = L10n.tr("Localizable", "linkDevice.networkError", fallback: "A network error occurred while exporting the account.")
     /// New device IP address: %1@
@@ -977,8 +974,8 @@ internal enum L10n {
     }
     /// Link new device
     internal static let title = L10n.tr("Localizable", "linkDevice.title", fallback: "Link new device")
-    /// token
-    internal static let token = L10n.tr("Localizable", "linkDevice.token", fallback: "token")
+    /// code
+    internal static let token = L10n.tr("Localizable", "linkDevice.token", fallback: "code")
     /// New device identifier is unrecognized.
     /// Please follow above instruction.
     internal static let wrongEntry = L10n.tr("Localizable", "linkDevice.wrongEntry", fallback: "New device identifier is unrecognized.\nPlease follow above instruction.")
