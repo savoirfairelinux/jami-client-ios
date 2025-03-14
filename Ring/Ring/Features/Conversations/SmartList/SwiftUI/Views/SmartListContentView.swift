@@ -34,46 +34,50 @@ struct SmartListContentView: View {
         let conversationsView = ConversationsView(model: model, stateEmitter: stateEmitter)
 
         return ZStack {
-            Group {
-                if isSearchBarActive {
-                    // Use ScrollView instead of List to prevent memory leaks when using a conversation model inside ForEach.
-                    ScrollView {
-                        VStack(alignment: .leading) {
-                            publicDirectorySearchView
+            ContentViewSwitcher(isSearchBarActive: isSearchBarActive, mode: mode) {
+                // Search view content
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        publicDirectorySearchView
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
+                        conversationsSearchHeaderView
+                            .hideRowSeparator()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
+                        conversationsView
+                    }
+                    .padding(.horizontal, 15)
+                }
+            } regularContent: {
+                // Regular view content
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        if mode == .smartList {
+                            smartListTopView
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .contentShape(Rectangle())
-                            conversationsSearchHeaderView
-                                .hideRowSeparator()
+                        } else {
+                            newMessageTopView
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .contentShape(Rectangle())
-                            conversationsView
                         }
-                        .padding(.horizontal, 15)
+                        conversationsView
                     }
-                } else {
-                    ScrollView {
-                        VStack(alignment: .leading) {
-                            if mode == .smartList {
-                                smartListTopView
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .contentShape(Rectangle())
-                            } else {
-                                newMessageTopView
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .contentShape(Rectangle())
-                            }
-                            conversationsView
-                        }
-                        .padding(.horizontal, 15)
-                    }
+                    .padding(.horizontal, 15)
                 }
             }
-            .transition(AnyTransition.asymmetric(
-                insertion: .opacity,
-                removal: .opacity.animation(.easeOut(duration: 0))
-            ))
         }
-        .animation(.easeIn(duration: 0.3), value: isSearchBarActive)
+        .animation(isSearchBarActive ? .easeIn(duration: 0.3) : nil, value: isSearchBarActive)
+        .onChange(of: isSearchBarActive) { newValue in
+            if !newValue {
+                // Disable all animations when exiting search mode
+                withAnimation(.none) {
+                    // This is just a placeholder to trigger the animation context
+                    hideTopView = hideTopView
+                }
+            }
+        }
         .onAppear { [weak model] in
             guard let model = model else { return }
             // If there was an active search before presenting the conversation, the search results should remain the same upon returning to the page. Otherwise, flickering will occur.
@@ -174,6 +178,7 @@ struct SmartListContentView: View {
             actionItem(icon: "person.2", title: L10n.Smartlist.newGroup, action: stateEmitter.createSwarm)
         }
         .hideRowSeparator()
+        .animation(nil, value: isSearchBarActive)
     }
 
     private func actionItem(icon: String, title: String, action: @escaping () -> Void) -> some View {
@@ -221,18 +226,22 @@ struct SmartListContentView: View {
             if !model.isSipAccount() {
                 newChatOptions
                     .padding(.vertical, 10)
+                    .animation(nil, value: isSearchBarActive)
             }
             if !model.searchQuery.isEmpty {
                 Text(model.publicDirectoryTitle)
                     .fontWeight(.semibold)
                     .hideRowSeparator()
                     .padding(.top)
+                    .animation(nil, value: isSearchBarActive)
                 searchResultView
                     .hideRowSeparator()
                     .padding(.bottom)
                     .padding(.top, 3)
+                    .animation(nil, value: isSearchBarActive)
                 if let conversation = model.blockedConversation {
                     blockedcontactsView(conversation: conversation)
+                        .animation(nil, value: isSearchBarActive)
                 }
             }
         }
@@ -299,6 +308,56 @@ struct SmartListContentView: View {
         VStack(alignment: .leading) {
             Text(model.searchStatus.toString())
                 .font(.callout)
+        }
+    }
+}
+
+// Custom view switcher that controls animation based on search state
+struct ContentViewSwitcher<SearchContent: View, RegularContent: View>: View {
+    let isSearchBarActive: Bool
+    let mode: ConversationsViewModel.Target
+    let searchContent: () -> SearchContent
+    let regularContent: () -> RegularContent
+    
+    init(isSearchBarActive: Bool, 
+         mode: ConversationsViewModel.Target,
+         @ViewBuilder searchContent: @escaping () -> SearchContent,
+         @ViewBuilder regularContent: @escaping () -> RegularContent) {
+        self.isSearchBarActive = isSearchBarActive
+        self.mode = mode
+        self.searchContent = searchContent
+        self.regularContent = regularContent
+    }
+    
+    var body: some View {
+        ZStack {
+            if isSearchBarActive {
+                // When entering search mode, use opacity transition with animation
+                searchContent()
+                    .transition(.opacity)
+            } else {
+                // When exiting search mode, use identity transition with no animation
+                regularContent()
+                    .transition(.identity)
+                    .animation(nil, value: isSearchBarActive) // Explicitly disable animation
+            }
+        }
+        // Disable animation for the container when exiting search mode
+        .animation(isSearchBarActive ? .default : nil, value: isSearchBarActive)
+    }
+}
+
+// Custom modifier to conditionally apply transitions based on search state
+struct ConditionalTransitionModifier: ViewModifier {
+    let isSearchBarActive: Bool
+    
+    func body(content: Content) -> some View {
+        if isSearchBarActive {
+            // Only apply animation when transitioning to search mode
+            content.transition(AnyTransition.opacity.animation(.easeIn(duration: 0.3)))
+        } else {
+            // No animation when exiting search mode
+            content.transition(AnyTransition.identity)
         }
     }
 }
