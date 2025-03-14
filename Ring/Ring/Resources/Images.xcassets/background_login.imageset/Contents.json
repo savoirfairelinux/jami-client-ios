@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Background _Light.heic",
+      "filename" : "bg_light.heic",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Background _Dark.heic",
+      "filename" : "bg_dark.heic",
       "idiom" : "universal"
     }
   ],
