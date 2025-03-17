@@ -441,9 +441,7 @@
 		26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F5442C2C5815770069A7A4 /* WelcomeView.swift */; };
 		26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */; };
 		26F82D042D7A09AF00954A7B /* libnatpmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F82D032D7A09AE00954A7B /* libnatpmp.xcframework */; };
-		26F82D052D7A09AF00954A7B /* libnatpmp.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F82D032D7A09AE00954A7B /* libnatpmp.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26F82D062D7A09C300954A7B /* libnatpmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F82D032D7A09AE00954A7B /* libnatpmp.xcframework */; };
-		26F82D072D7A09C300954A7B /* libnatpmp.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26F82D032D7A09AE00954A7B /* libnatpmp.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26FDF4192C1101C2009D036B /* JamiBaseUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF4182C1101C2009D036B /* JamiBaseUITest.swift */; };
 		26FDF43D2C1353A9009D036B /* AccountSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF43C2C1353A9009D036B /* AccountSummaryView.swift */; };
 		26FDF43F2C1353BA009D036B /* AccountSummaryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF43E2C1353BA009D036B /* AccountSummaryVM.swift */; };
@@ -567,17 +565,6 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		26F82D082D7A09C300954A7B /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				26F82D072D7A09C300954A7B /* libnatpmp.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		645BDD6424B5FEFF009129B1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -591,7 +578,6 @@
 				26001CCC2D79248B009A8E23 /* RxSwift.xcframework in Embed Frameworks */,
 				26001CD22D792490009A8E23 /* RxCocoa.xcframework in Embed Frameworks */,
 				44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */,
-				26F82D052D7A09AF00954A7B /* libnatpmp.xcframework in Embed Frameworks */,
 				44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */,
 				26001CD42D792492009A8E23 /* RxBlocking.xcframework in Embed Frameworks */,
 				26001CCE2D79248D009A8E23 /* RxRelay.xcframework in Embed Frameworks */,
@@ -2626,7 +2612,6 @@
 				26A88C00266FFFC800888EED /* Sources */,
 				26A88C01266FFFC800888EED /* Frameworks */,
 				26A88C02266FFFC800888EED /* Resources */,
-				26F82D082D7A09C300954A7B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
