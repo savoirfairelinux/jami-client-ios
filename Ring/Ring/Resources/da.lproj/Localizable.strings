@@ -57,10 +57,10 @@
 "global.time" = "Tid";
 "global.editPassword" = "Edit password";
 "global.confirmPassword" = "Bekræft adgangskode";
-"global.confirm" = "Confirm";
+"global.confirm" = "- Det bekræfter jeg.";
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
-"global.confirm" = "Confirm";
-"global.connect" = "Connect";
+"global.confirm" = "- Det bekræfter jeg.";
+"global.connect" = "Køb";
 
 // Scan
 "scan.badQrCode" = "Ugyldigt QR-kode";
@@ -196,7 +196,7 @@
 
 // Link To Account form
 "linkToAccount.importAccount" = "Import account";
-"linkToAccount.showQrCode" = "QR code";
+"linkToAccount.showQrCode" = "QR-kode";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
 "linkToAccount.allSet" = "Account imported successfully.";
@@ -206,7 +206,7 @@
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
 "linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
-"linkToAccount.exit" = "Exit";
+"linkToAccount.exit" = "Afslut";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to exit?";
 "linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
@@ -429,16 +429,15 @@
 "linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
 "linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
 "linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
-"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
+"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code.";
 "linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
 "linkDevice.connecting" = "Connecting to your new device…";
 "linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
 "linkDevice.newDeviceIP" = "New device IP address: %1@";
-"linkDevice.token" = "token";
+"linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
 "linkDevice.completed" = "Account imported successfully on the new device.";
@@ -573,7 +572,7 @@
 "accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
 "accessibility.call.lasted" = "Lasted %@";
-"accessibility.calls.default.toggleAudio" = "Mute microphone";
+"accessibility.calls.default.toggleAudio" = "Sluk mikrofon";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pause-opkald";
 "accessibility.calls.default.hangUpCall" = "Læg på";
@@ -585,7 +584,7 @@
 "accessibility.calls.default.raiseHand" = "Løft hånden.";
 
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
-"accessibility.calls.alter.toggleVideo" = "Stop camera";
+"accessibility.calls.alter.toggleVideo" = "Stop kameraet";
 "accessibility.calls.alter.pauseCall" = "Opkaldet genoptages";
 "accessibility.calls.alter.hangUpCall" = "Læg på";
 "accessibility.calls.alter.addParticipant" = "Tilføj deltager";

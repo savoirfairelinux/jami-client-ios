@@ -195,21 +195,21 @@
 "createAccount.encryptExplanation" = "A Jami-fiók csak helyileg jön létre és tárolódik ezen az eszközön a fiókkulcsokat tartalmazó archívumként. Az archívumhoz való hozzáférés választható jelszóval védhető.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Fiók importálása";
 "linkToAccount.showQrCode" = "QR-kód";
-"linkToAccount.showPinCode" = "Authentication code";
+"linkToAccount.showPinCode" = "Hitelesítési kód";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "A fiók importálása sikerült.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
-"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
-"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.scanQrCode" = "Ha készen áll, olvassa be a QR-kódot.";
+"linkToAccount.enterProvidedCode" = "Ha készen áll, adja meg a hitelesítési kódot.";
+"linkToAccount.accountLockedWithPassword" = "A fiók jelszóval van védve. A folytatáshoz adja meg a fiók jelszavát.";
 "linkToAccount.exit" = "Kilépés";
 "linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.alertTile" = "Leállítja a fiók összekapcsolását?";
+"linkToAccount.alertMessage" = "A leállítás megszakítja a fiók importálási műveletét.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Jami-fiók importálása a helyi archívfájlból.";
@@ -333,7 +333,7 @@
 "accountPage.boothModeExplanation" = "A fülke üzemmódban a beszélgetési előzmények nem kerülnek mentésre, és a Jami funkcionalitása korlátozott a kimenő hívások kezdeményezésekor. Ha a fülke üzemmód engedélyezve van, az összes beszélgetés törlődik.";
 "accountPage.noBoothMode" = "A fülke üzemmód engedélyezéséhez először titkosítsa a fiókot.";
 "accountPage.boothModeAlertMessage" = "A fülke üzemmód engedélyezése után az összes beszélgetés eltávolításra kerül.";
-"accountPage.peerDiscovery" = "Helyi partner felderítése engedélyezése";
+"accountPage.peerDiscovery" = "Helyi társ felderítése engedélyezése";
 "accountPage.peerDiscoveryExplanation" = "Csatlakozás más DHT-csomópontokhoz, amelyek a helyi hálózaton hirdetnek";
 "accountPage.autoRegistration" = "Önműködő bejegyzése a lejárat után";
 "accountPage.connectivityHeader" = "Kapcsolódás";
@@ -426,22 +426,21 @@
 // Link New Device
 "linkDevice.title" = "Új eszköz összekapcsolása";
 "linkDevice.networkError" = "Hálózati hiba történt a fiók exportálása közben.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
-"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.errorWrongPassword" = "Hitelesítési hiba történt az eszköz összekapcsolása közben. Kérjük, ellenőrizze jelszavát, és próbálkozzon újra.";
+"linkDevice.errorNetwork" = "Hálózati hiba történt a fiók összekapcsolása közben. Ellenőrizze a kapcsolatot, majd próbálkozzon újra.";
+"linkDevice.errorTimeout" = "Művelet időtúllépése. Próbálkozzon újra.";
+"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
+"linkDevice.errorWrongData" = "Hiba történt a fiók exportálása közben. Próbálkozzon újra.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "Ha készen áll, olvassa be a QR-kódot.";
 "linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
 "linkDevice.connecting" = "Connecting to your new device…";
 "linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
-"linkDevice.token" = "token";
-"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
+"linkDevice.newDeviceIP" = "Új eszköz IP-címe: %1@";
+"linkDevice.code" = "code";
+"linkDevice.wrongEntry" = "Ismeretlen új eszközazonosító. Kérjük, kövesse a fenti utasításokat.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "A fiók importálása sikerült az új eszközön.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Hanghívás indítása";
@@ -552,7 +551,7 @@
 "accessibility.conversationRowUnreadCount" = "%@ olvasatlan üzenet.";
 "accessibility.conversationRowBlocked" = "Beszélgetés letiltva";
 "accessibility.conversationRowSyncing" = "Összehangolás folyamatban";
-"accessibility.conversationRowLastMessage" = "Last message at %@";
+"accessibility.conversationRowLastMessage" = "Utolsó üzenet időpontja: %@";
 "accessibility.userPresenceOnline" = "Elérhető";
 "accessibility.userPresenceAvailable" = "Elérhető";
 "accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
@@ -565,15 +564,15 @@
 "accessibility.messageBubbleEdited" = "Szerkesztve";
 "accessibility.messageBubbleRead" = "Olvasott";
 "accessibility.messageBubbleUnread" = "Olvasatlan";
-"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
+"accessibility.textNotAvailable" = "Üres szöveges üzenet érkezésének ideje: %@. Lehet, hogy az üzenetet nem küldték el megfelelően.";
 "accessibility.fileTransferNoName" = "Fájl érkezésének ideje: %@, nincs elérhető név";
 "accessibility.inReply" = "Válasz az üzenetre";
-"accessibility.text.receivedOn" = "%1@, message received on %2@";
-"accessibility.text.sentOn" = "%1@, message sent on %2@";
-"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
-"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
-"accessibility.calls.default.toggleAudio" = "Mute microphone";
+"accessibility.text.receivedOn" = "%1@, az üzenet érkezésének ideje: %2@";
+"accessibility.text.sentOn" = "%1@, az üzenet küldésének ideje: %2@";
+"accessibility.fileTransfer.receivedOn" = "A(z) %1@ fájl érkezésének ideje: %2@";
+"accessibility.fileTransfer.sentOn" = "A(z) %1@ fájl küldésének ideje: %2@";
+"accessibility.call.lasted" = "%@ tartott";
+"accessibility.calls.default.toggleAudio" = "Mikrofon elnémítása";
 "accessibility.calls.default.toggleVideo" = "Fényképezőgép indítása";
 "accessibility.calls.default.pauseCall" = "Hívás tartása";
 "accessibility.calls.default.hangUpCall" = "Hívás befejezése";
@@ -603,4 +602,4 @@
 "accessibility.conference.hangup" = "Hívás befejezése";
 "accessibility.conference.lowerHand" = "Kéz leengedése";
 
-"accessibility.account.tokenQRcode" = "Token QR code";
+"accessibility.account.tokenQRcode" = "Jogkivonat QR-kód";

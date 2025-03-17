@@ -195,21 +195,21 @@
 "createAccount.encryptExplanation" = "Аккаунт Джами создаётся локально и хранится только на этом устройстве в форме архива, содержащего ключи от вашей учётной записи. По желанию, доступ к архиву может быть защищён паролем.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Импорт учетной записи";
 "linkToAccount.showQrCode" = "QR-код";
-"linkToAccount.showPinCode" = "Authentication code";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
-"linkToAccount.goToAccounts" = "Go to imported account";
-"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
-"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
-"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.showPinCode" = "Код аутентификации";
+"linkToAccount.actionRequired" = "Требуется действие.\nПодтвердите учетную запись на исходном устройстве.";
+"linkToAccount.allSet" = "Учетная запись успешно импортирована.";
+"linkToAccount.goToAccounts" = "Перейти к импортированной учетной записи";
+"linkToAccount.exportInstructions" = "На исходном устройстве инициируйте экспорт.";
+"linkToAccount.exportInstructionsPath" = "Выберите Учетная запись > Настройки учетной записи > Привязать новое устройство.";
+"linkToAccount.scanQrCode" = "Когда будете готовы, отсканируйте QR-код.";
+"linkToAccount.enterProvidedCode" = "По готовности введите код аутентификации.";
+"linkToAccount.accountLockedWithPassword" = "Учетная запись защищена паролем.\nЧтобы продолжить, введите пароль учетной записи.";
 "linkToAccount.exit" = "Выход";
-"linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.shareMessage" = "Ваш код:%@";
+"linkToAccount.alertTile" = "Вы хотите выйти?";
+"linkToAccount.alertMessage" = "Выход отменит операцию импорта учетной записи.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Импортируйте аккаунт Jami из локального архивного файла.";
@@ -426,22 +426,21 @@
 // Link New Device
 "linkDevice.title" = "Привязать новое устройство";
 "linkDevice.networkError" = "При экспорте учетной записи возникла ошибка сети.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
-"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
-"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
-"linkDevice.connecting" = "Connecting to your new device…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
-"linkDevice.token" = "token";
-"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.errorWrongPassword" = "Произошла ошибка аутентификации.\nПожалуйста, проверьте свой пароль.";
+"linkDevice.errorNetwork" = "Произошла ошибка сети.\nПроверьте подключение.";
+"linkDevice.errorTimeout" = "Время операции истекло.\nПопробуйте еще раз.";
+"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
+"linkDevice.errorWrongData" = "Произошла ошибка при экспорте аккаунта.\nПопробуйте снова.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "Когда будете готовы, отсканируйте QR-код.";
+"linkDevice.infoCode" = "Когда будете готовы, введите код и нажмите \"Подключиться\".";
+"linkDevice.connecting" = "Подключение к новому устройству…";
+"linkDevice.authenticationInfo" = "Новое устройство найдено по указанному ниже IP-адресу. Это вы?\nЧтобы продолжить перенос аккаунта, нажмите \"Подтвердить\".";
+"linkDevice.newDeviceIP" = "IP-адрес нового устройства:%1@";
+"linkDevice.code" = "code";
+"linkDevice.wrongEntry" = "Новый идентификатор устройства не распознан.\nСледуйте инструкциям выше.";
+"linkDevice.exportInProgress" = "Выполняется операция экспорта учетной записи на новое устройство.\nПодтвердите импорт на новом устройстве.";
+"linkDevice.completed" = "Учетная запись успешно импортирована на новое устройство.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Начать аудиозвонок";
@@ -552,10 +551,10 @@
 "accessibility.conversationRowUnreadCount" = "%@непрочитанных сообщений.";
 "accessibility.conversationRowBlocked" = "Беседа заблокирована";
 "accessibility.conversationRowSyncing" = "Выполняется синхронизация";
-"accessibility.conversationRowLastMessage" = "Last message at %@";
+"accessibility.conversationRowLastMessage" = "Последнее сообщение в %@";
 "accessibility.userPresenceOnline" = "В сети";
 "accessibility.userPresenceAvailable" = "Доступно";
-"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowPlural" = "Получено приглашений:  %@ожидающие приглашения";
 "accessibility.pendingRequestsRowSingular" = "Получено приглашение: %@ожидает приглашения";
 "accessibility.pendingRequestsRowHint" = "Коснитесь дважды, чтобы просмотреть и ответить на полученные приглашения";
 "accessibility.pendingRequestsListBlockUser" = "Блокировать отправителя приглашения";
@@ -565,14 +564,14 @@
 "accessibility.messageBubbleEdited" = "Отредактировано";
 "accessibility.messageBubbleRead" = "Прочитано";
 "accessibility.messageBubbleUnread" = "Непрочитано";
-"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
+"accessibility.textNotAvailable" = "Получено пустое текстовое сообщение на %@ . Возможно, оно было отправлено неправильно.";
 "accessibility.fileTransferNoName" = "Файл получен на %@, имя недоступно";
 "accessibility.inReply" = "В ответ на сообщение";
-"accessibility.text.receivedOn" = "%1@, message received on %2@";
-"accessibility.text.sentOn" = "%1@, message sent on %2@";
-"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
-"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.text.receivedOn" = "%1@, сообщение получено на %2@";
+"accessibility.text.sentOn" = "%1@ , сообщение отправлено на %2@";
+"accessibility.fileTransfer.receivedOn" = "Файл: %1@, получен на %2@";
+"accessibility.fileTransfer.sentOn" = "Файл: %1@, отправлен на %2@";
+"accessibility.call.lasted" = "Длилось %@";
 "accessibility.calls.default.toggleAudio" = "Отключить микрофон";
 "accessibility.calls.default.toggleVideo" = "Включить камеру";
 "accessibility.calls.default.pauseCall" = "Приостановить звонок";
@@ -603,4 +602,4 @@
 "accessibility.conference.hangup" = "Завершить";
 "accessibility.conference.lowerHand" = "Опущенная рука";
 
-"accessibility.account.tokenQRcode" = "Token QR code";
+"accessibility.account.tokenQRcode" = "QR-код токена";

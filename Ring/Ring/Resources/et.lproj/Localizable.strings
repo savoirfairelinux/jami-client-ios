@@ -57,9 +57,9 @@
 "global.time" = "Aeg";
 "global.editPassword" = "Muuda salasõna";
 "global.confirmPassword" = "Korda salasõna";
-"global.confirm" = "Confirm";
+"global.confirm" = "Kinnita";
 "global.cameraDisabled" = "Puuduvad õigused kaamera kasutamiseks. Selle funktsionaalsuse jaoks anna nutiseadme seadistustest vastavad õigused.";
-"global.confirm" = "Confirm";
+"global.confirm" = "Kinnita";
 "global.connect" = "Ühenda";
 
 // Scan
@@ -195,21 +195,21 @@
 "createAccount.encryptExplanation" = "Jami kasutajakonto on registreeritud ja salvestatud vaid selles nutiseadmes ja olemuselt on tegemist arhiiviga, kus leiduvad sinu krüptovõtmed. Ligipääsu sellele arhiivile saad soovi korral turvata salasõnaga.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
-"linkToAccount.showQrCode" = "QR code";
-"linkToAccount.showPinCode" = "Authentication code";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
-"linkToAccount.goToAccounts" = "Go to imported account";
-"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
-"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
-"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
-"linkToAccount.exit" = "Exit";
-"linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.importAccount" = "Impordi kasutajakonto";
+"linkToAccount.showQrCode" = "QR-kood";
+"linkToAccount.showPinCode" = "Autentimiskood";
+"linkToAccount.actionRequired" = "Sinu osalemine on vajalik.\nPalun kinnita kasutajakonto lähteseadmes.";
+"linkToAccount.allSet" = "Kasutajakonto importimine õnnestus. ";
+"linkToAccount.goToAccounts" = "Suundu imporditud kasutajakonto juurde";
+"linkToAccount.exportInstructions" = "Algata lähteseadmes eksportimine.";
+"linkToAccount.exportInstructionsPath" = "Vali „Kasutajakontod“ > „Kasutajakonto seadistused“ > „Seo uus seade“. ";
+"linkToAccount.scanQrCode" = "Kui oled valmis, siis skaneeri QR-koodi";
+"linkToAccount.enterProvidedCode" = "Kui oled valmis, siis sisesta autentimiskood.";
+"linkToAccount.accountLockedWithPassword" = "See kasutajakonto on kaitstud salasõnaga.\nJätkamiseks palun sisesta konto salasõna.";
+"linkToAccount.exit" = "Välju";
+"linkToAccount.shareMessage" = "Sinu kood on: %@";
+"linkToAccount.alertTile" = "Kas sa soovid väljuda?";
+"linkToAccount.alertMessage" = "Väljumisel katkeb importimine.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Impordi Jami kasutajakonto kohaliku varukoopia arhiivifailist..";
@@ -426,22 +426,21 @@
 // Link New Device
 "linkDevice.title" = "Seo uus seade";
 "linkDevice.networkError" = "Kasutajakonto eksportimisel tekkis võrguviga.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
-"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
-"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
-"linkDevice.connecting" = "Connecting to your new device…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
-"linkDevice.token" = "token";
-"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.errorWrongPassword" = "Autentimisel tekkis viga.\nPalun kontrolli et salasõna on õige ja proovi uuesti.";
+"linkDevice.errorNetwork" = "Tekkis võrguühenduse viga.\nPalun kontrolli, et võrguühendus toimib.";
+"linkDevice.errorTimeout" = "Tegevus aegus.\nPalun proovi uuesti.";
+"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
+"linkDevice.errorWrongData" = "Kasutajakonto eksportimisel tekkis viga.\nPalun proovi uuesti.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "Kui oled valmis, siis skaneeri QR-koodi";
+"linkDevice.infoCode" = "Kui oled valmis, siis sisesta kood ja vajuta „Kinnita“.";
+"linkDevice.connecting" = "Loome ühendust sinu uue seadmega…";
+"linkDevice.authenticationInfo" = "Leidsime uue seadme allpooltoodud aadressil. Kas see oled sina?\nKui klõpsid „Kinnita“, siis jätkame kasutajakonto teisaldamisega.";
+"linkDevice.newDeviceIP" = "Uue seadme ip-aadress: %1@";
+"linkDevice.code" = "code";
+"linkDevice.wrongEntry" = "Uue seadme tunnus pole tuvastatav.\nPalun järgi eelpooltoodud juhendit.";
+"linkDevice.exportInProgress" = "Kasutajakonto eksportimine uude seadmesse on pooleli.\nJätkamiseks palun kinnita importimine uues seadmes.";
+"linkDevice.completed" = "Kasutajakonto importimine sellesse seadmesse õnnestus. ";
 
 // Contact Page
 "contactPage.startAudioCall" = "Alusta häälkõnet";
@@ -552,10 +551,10 @@
 "accessibility.conversationRowUnreadCount" = "%@ lugemata sõnumit.";
 "accessibility.conversationRowBlocked" = "Vestlus on blokeeritud";
 "accessibility.conversationRowSyncing" = "Sünkroniseerimine on pooleli";
-"accessibility.conversationRowLastMessage" = "Last message at %@";
+"accessibility.conversationRowLastMessage" = "Viimane sõnum: %@";
 "accessibility.userPresenceOnline" = "Võrgus";
 "accessibility.userPresenceAvailable" = "Saadaval";
-"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowPlural" = "Saabunud kutsed: %@ ootel kutset";
 "accessibility.pendingRequestsRowSingular" = "Saabunud kutse: %@ ootel kutse";
 "accessibility.pendingRequestsRowHint" = "Saadud kutsete vaatamiseks ja neile vastamiseks topeltklõpsi";
 "accessibility.pendingRequestsListBlockUser" = "Blokeeri kutse saatja";
@@ -565,16 +564,16 @@
 "accessibility.messageBubbleEdited" = "Muudetud";
 "accessibility.messageBubbleRead" = "Loetud";
 "accessibility.messageBubbleUnread" = "Lugemata";
-"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
+"accessibility.textNotAvailable" = "Tühi tekstisõnum vastuvõetud %@. Võib-olla saatmine polnud korrektne.";
 "accessibility.fileTransferNoName" = "Fail on vastu võetud %@, aga sisu pole saadaval";
 "accessibility.inReply" = "Vastuseks sõnumile";
-"accessibility.text.receivedOn" = "%1@, message received on %2@";
-"accessibility.text.sentOn" = "%1@, message sent on %2@";
-"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
-"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
-"accessibility.calls.default.toggleAudio" = "Mute microphone";
-"accessibility.calls.default.toggleVideo" = "Start camera";
+"accessibility.text.receivedOn" = "%1@, sõnum vastuvõetud %2@";
+"accessibility.text.sentOn" = "%1@, sõnum saadetud %2@";
+"accessibility.fileTransfer.receivedOn" = "Fail: %1@, vastuvõetud %2@";
+"accessibility.fileTransfer.sentOn" = "Fail: %1@, saadetud %2@";
+"accessibility.call.lasted" = "Kestus: %@";
+"accessibility.calls.default.toggleAudio" = "Summuta mikrofon";
+"accessibility.calls.default.toggleVideo" = "Käivita kaamera";
 "accessibility.calls.default.pauseCall" = "Peata kõne";
 "accessibility.calls.default.hangUpCall" = "Lõpeta kõne";
 "accessibility.calls.default.addParticipant" = "Lisa osaleja";
@@ -585,7 +584,7 @@
 "accessibility.calls.default.raiseHand" = "Anna käega märku";
 
 "accessibility.calls.alter.toggleAudio" = "Lõpeta mikrofoni summutamine";
-"accessibility.calls.alter.toggleVideo" = "Stop camera";
+"accessibility.calls.alter.toggleVideo" = "Peata kaamera";
 "accessibility.calls.alter.pauseCall" = "Jätka kõnet";
 "accessibility.calls.alter.hangUpCall" = "Lõpeta kõne";
 "accessibility.calls.alter.addParticipant" = "Lisa osaleja";
@@ -603,4 +602,4 @@
 "accessibility.conference.hangup" = "Lõpeta kõne";
 "accessibility.conference.lowerHand" = "Lase käsi alla";
 
-"accessibility.account.tokenQRcode" = "Token QR code";
+"accessibility.account.tokenQRcode" = "Tunnusloa QR-kood";

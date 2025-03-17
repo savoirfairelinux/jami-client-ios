@@ -57,9 +57,9 @@
 "global.time" = "Aika";
 "global.editPassword" = "Muokkaa salasanaa";
 "global.confirmPassword" = "Varmista salasana";
-"global.confirm" = "Confirm";
+"global.confirm" = "Vahvista";
 "global.cameraDisabled" = "Kameran käyttö on estetty. Ota se käyttöön laitteen asetuksissa, jotta voit käyttää tätä ominaisuutta.";
-"global.confirm" = "Confirm";
+"global.confirm" = "Vahvista";
 "global.connect" = "Yhdistä";
 
 // Scan
@@ -195,10 +195,10 @@
 "createAccount.encryptExplanation" = "Jami-tili luodaan ja tallennetaan paikallisesti vain tälle laitteelle. Tilin avain on pakattuna ja pääsy tähän voidaan valinnaisesti suojata salasanalla.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Tuo tunnus";
 "linkToAccount.showQrCode" = "QR-koodi";
 "linkToAccount.showPinCode" = "Authentication code";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
+"linkToAccount.actionRequired" = "Toimenpiteitä tarvitaan.\nVahvista tili toisella laitteella.";
 "linkToAccount.allSet" = "Account imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
@@ -206,10 +206,10 @@
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
 "linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
-"linkToAccount.exit" = "Exit";
+"linkToAccount.exit" = "Poistu";
 "linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.alertTile" = "Haluatko poistua?";
+"linkToAccount.alertMessage" = "Poistuminen peruuttaa tilin tuomisen.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Tuo Jami-tili varmuuskopiosta";
@@ -427,21 +427,20 @@
 "linkDevice.title" = "Linkitä uusi laite";
 "linkDevice.networkError" = "Tiliä vietäessä tapahtui verkkovirhe.";
 "linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
-"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
+"linkDevice.errorNetwork" = "Tapahtui verkkovirhe.\nTarkista internetyhteytesi.";
+"linkDevice.errorTimeout" = "Toiminto on aikakatkaistu. Yritä uudelleen.";
+"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code.";
 "linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
-"linkDevice.connecting" = "Connecting to your new device…";
+"linkDevice.connecting" = "Yhdistetään uuteen laitteeseen…";
 "linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
-"linkDevice.token" = "token";
+"linkDevice.newDeviceIP" = "Uuden laitteen ip-osoite: %1@";
+"linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "Tilin tuonti uuteen laitteeseen onnistui.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Aloita äänipuhelu";
@@ -573,19 +572,19 @@
 "accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
 "accessibility.call.lasted" = "Lasted %@";
-"accessibility.calls.default.toggleAudio" = "Mute microphone";
-"accessibility.calls.default.toggleVideo" = "Start camera";
+"accessibility.calls.default.toggleAudio" = "Mykistä mikrofoni";
+"accessibility.calls.default.toggleVideo" = "Avaa kamera";
 "accessibility.calls.default.pauseCall" = "Puhelu pitoon";
 "accessibility.calls.default.hangUpCall" = "Katkaise puhelu";
 "accessibility.calls.default.addParticipant" = "Lisää osannottaja";
 "accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.toggleSpeaker" = "Kytke kaiutin";
 "accessibility.calls.default.openConversation" = "Avaa keskustelu";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Nosta käsi";
 
 "accessibility.calls.alter.toggleAudio" = "Poista mikrofonin mykistys";
-"accessibility.calls.alter.toggleVideo" = "Stop camera";
+"accessibility.calls.alter.toggleVideo" = "Sulje kamera";
 "accessibility.calls.alter.pauseCall" = "Jatka puhelua";
 "accessibility.calls.alter.hangUpCall" = "Katkaise puhelu";
 "accessibility.calls.alter.addParticipant" = "Lisää osannottaja";

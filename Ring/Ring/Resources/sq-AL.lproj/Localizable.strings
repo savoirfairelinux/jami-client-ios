@@ -197,19 +197,19 @@
 // Link To Account form
 "linkToAccount.importAccount" = "Importoni llogari";
 "linkToAccount.showQrCode" = "Kod QR";
-"linkToAccount.showPinCode" = "Authentication code";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
-"linkToAccount.goToAccounts" = "Go to imported account";
-"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
-"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
-"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.showPinCode" = "Kod mirëfilltësimi";
+"linkToAccount.actionRequired" = "Lypset veprim.\nJu lutemi, ripohoni llogarinë në pajisjen burim.";
+"linkToAccount.allSet" = "Llogaria u importua me sukses.";
+"linkToAccount.goToAccounts" = "Kalo te llogaria e importuar";
+"linkToAccount.exportInstructions" = "Te pajisja burim, filloni eksportimin.";
+"linkToAccount.exportInstructionsPath" = "Përzgjidhni Llogari > Rregullime Llogarie > Lidhni pajisje të re.";
+"linkToAccount.scanQrCode" = "Kur të jeni gati, skanoni kodin QR.";
+"linkToAccount.enterProvidedCode" = "Kur të jeni gati, jepni kodin e mirëfilltësimit.";
+"linkToAccount.accountLockedWithPassword" = "Llogaria është e mbrojtur me një fjalëkalim.\nQë të vazhdohet, jepni fjalëkalimin e llogarisë.";
 "linkToAccount.exit" = "Dalje";
-"linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.shareMessage" = "Kodi juaj është: %@";
+"linkToAccount.alertTile" = "Doni të dilet?";
+"linkToAccount.alertMessage" = "Dalja do të anulojë veprimin e importimit të llogarisë.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importo llogari Jami prej një kartele vendore arkiv";
@@ -426,21 +426,20 @@
 // Link New Device
 "linkDevice.title" = "Lidhni pajisje të re";
 "linkDevice.networkError" = "Ndodhi një gabim rrjeti teksa eksportohej llogaria.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
-"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
-"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
-"linkDevice.connecting" = "Connecting to your new device…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
-"linkDevice.token" = "token";
-"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
+"linkDevice.errorWrongPassword" = "Ndodhi një gabim mirëfilltësimi.\nJu lutemi, verifikoni fjalëkalimin tuaj.";
+"linkDevice.errorNetwork" = "Ndodhi një gabim rrjeti.\nJu lutemi, verifikoni lidhjen tuaj.";
+"linkDevice.errorTimeout" = "Veprimit i mbaroi koha.\nJu lutemi, riprovoni.";
+"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
+"linkDevice.errorWrongData" = "Ndodhi një gabim teksa eksportohej llogaria.\nJu lutemi, riprovoni.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "Kur të jeni gati, skanoni kodin QR.";
+"linkDevice.infoCode" = "Kur të jeni gati, jepni kodin dhe shtypni `Lidhu`.";
+"linkDevice.connecting" = "Po bëhet lidhja te pajisja juaj e re…";
+"linkDevice.authenticationInfo" = "Te adresa IP më poshtë u gjet pajisje e re. A jeni ju?\nQë të vazhdohet shpërngulja e llogarisë, klikoni mbi `Ripohojeni`.";
+"linkDevice.newDeviceIP" = "Adresë IP e pajisjes së re: %1@";
+"linkDevice.code" = "code";
+"linkDevice.wrongEntry" = "Identifikuesi i pajisjes së re është i papranuar.\nJu lutemi, ndiqni udhëzimin më sipër.";
+"linkDevice.exportInProgress" = "Veprimi i eksportimit të llogarisë te pajisja e re është në kryerje e sipër.\nJu lutemi, ripohoni importimin te pajisja e re.";
 "linkDevice.completed" = "Llogaria u importua me sukses te pajisja e re.";
 
 // Contact Page
@@ -555,7 +554,7 @@
 "accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "Në linjë";
 "accessibility.userPresenceAvailable" = "I lirë";
-"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowPlural" = "U morën ftesa: %@ ftesa pezull";
 "accessibility.pendingRequestsRowSingular" = "U mor ftesë: %@ ftesë pezull";
 "accessibility.pendingRequestsRowHint" = "Prekeni dy herë që të shqyrtoni dhe t’u përgjigjeni ftesave që morët";
 "accessibility.pendingRequestsListBlockUser" = "Blloko dërgues ftese";
@@ -603,4 +602,4 @@
 "accessibility.conference.hangup" = "Mbylle thirrjen";
 "accessibility.conference.lowerHand" = "Uleni dorën";
 
-"accessibility.account.tokenQRcode" = "Token QR code";
+"accessibility.account.tokenQRcode" = "Kod QR token-i";

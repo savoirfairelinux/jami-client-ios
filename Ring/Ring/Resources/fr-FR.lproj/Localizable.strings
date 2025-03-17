@@ -57,9 +57,9 @@
 "global.time" = "Durée";
 "global.editPassword" = "Modifier le mot de passe";
 "global.confirmPassword" = "Confirmer le mot de passe";
-"global.confirm" = "Confirm";
+"global.confirm" = "Confirmer";
 "global.cameraDisabled" = "L'accès à votre caméra est désactivé. Veuillez l'activer dans les paramètres.";
-"global.confirm" = "Confirm";
+"global.confirm" = "Confirmer";
 "global.connect" = "Se connecter";
 
 // Scan
@@ -195,21 +195,21 @@
 "createAccount.encryptExplanation" = "Un compte Jami est créé et stocké localement uniquement sur cet appareil, sous la forme d'une archive contenant les clés de votre compte. L'accès à cette archive peut éventuellement être protégé par un mot de passe.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Importer un compte";
 "linkToAccount.showQrCode" = "Code QR";
-"linkToAccount.showPinCode" = "Authentication code";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
-"linkToAccount.goToAccounts" = "Go to imported account";
-"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
+"linkToAccount.showPinCode" = "Code d'authentication code";
+"linkToAccount.actionRequired" = "Action requise.\nVeuillez confirmer le compte sur l'appareil source.";
+"linkToAccount.allSet" = "Compte importé avec succès.";
+"linkToAccount.goToAccounts" = "Aller sur le compte importé";
+"linkToAccount.exportInstructions" = "Sur l'appareil source, lancez l'exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
-"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
-"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
-"linkToAccount.exit" = "Exit";
-"linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.scanQrCode" = "Une fois prêt, scannez le code QR.";
+"linkToAccount.enterProvidedCode" = "Une fois prêt, saisissez le code d'authentification.";
+"linkToAccount.accountLockedWithPassword" = "Le compte est protégé par un mot de passe.\nPour continuer, entrez le mot de passe du compte.";
+"linkToAccount.exit" = "Sortir";
+"linkToAccount.shareMessage" = "Votre code est : %@";
+"linkToAccount.alertTile" = "Voulez-vous sortir ?";
+"linkToAccount.alertMessage" = "La sortie annule l'opération d'importation du compte.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importer un compte Jami à partir d'un fichier d'archives local.";
@@ -426,22 +426,21 @@
 // Link New Device
 "linkDevice.title" = "Lier un nouvel appareil";
 "linkDevice.networkError" = "Une erreur inconnue s'est produite lors de l'exportation du compte.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
-"linkDevice.errorToken" = "An error occurred while generating the token.\nPlease try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\n";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.\n";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
-"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
-"linkDevice.connecting" = "Connecting to your new device…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
-"linkDevice.token" = "token";
-"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.errorWrongPassword" = "Une erreur d'authentification s'est produite. Veuillez vérifier votre mot de passe.";
+"linkDevice.errorNetwork" = "Une erreur réseau s'est produite.\nVérifier votre connectivité réseau.";
+"linkDevice.errorTimeout" = "L'opération a été interrompue.\nVeuillez réessayer.";
+"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
+"linkDevice.errorWrongData" = "Une erreur s'est produite pendant l'exportation du compte.\nVérifiez et réessayez.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "Une fois prêt, scannez le code QR.";
+"linkDevice.infoCode" = "Une fois prêt, saisissez le code d'authentification.";
+"linkDevice.connecting" = "Connexion à votre nouvel appareil ...";
+"linkDevice.authenticationInfo" = "Nouvel appareil trouvé à l'adresse ci-dessous. Est-ce vous ?\nEn cliquant sur confirmer, le transfert du compte se poursuivra.";
+"linkDevice.newDeviceIP" = "Nouvelle adresse IP de l'appareil : %1@";
+"linkDevice.code" = "code";
+"linkDevice.wrongEntry" = "Le nouvel identifiant de l'appareil n'est pas reconnu.\nVeuillez suivre les instructions ci-dessus.";
+"linkDevice.exportInProgress" = "L'opération d'exportation du compte vers le nouvel appareil est en cours.\nVeuillez confirmer l'importation sur le nouvel appareil.";
+"linkDevice.completed" = "Compte importé avec succès sur le nouvel appareil.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Démarrer appel audio";
@@ -552,10 +551,10 @@
 "accessibility.conversationRowUnreadCount" = "%@ messages non lus";
 "accessibility.conversationRowBlocked" = "Conversation bloquées";
 "accessibility.conversationRowSyncing" = "Synchronisation en cours";
-"accessibility.conversationRowLastMessage" = "Last message at %@";
+"accessibility.conversationRowLastMessage" = "Dernier message sur %@";
 "accessibility.userPresenceOnline" = "En ligne";
 "accessibility.userPresenceAvailable" = "Disponible";
-"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowPlural" = "Invitation reçues : %@ invitation(s) en attente";
 "accessibility.pendingRequestsRowSingular" = "Invitation reçues : %@ invitation en attente";
 "accessibility.pendingRequestsRowHint" = "Double tap pour consulter les invitations que vous avez reçues et y répondre.";
 "accessibility.pendingRequestsListBlockUser" = "Bloquer l'expéditeur de l'invitation";
@@ -565,15 +564,15 @@
 "accessibility.messageBubbleEdited" = "Modifié";
 "accessibility.messageBubbleRead" = "Lu";
 "accessibility.messageBubbleUnread" = "Non lu";
-"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
+"accessibility.textNotAvailable" = "Message vide reçu le %@. Il se peut que ce message n'ait pas été envoyé correctement.";
 "accessibility.fileTransferNoName" = "Fichier reçu le %@, son nom est indisponible";
 "accessibility.inReply" = "En réponse au message";
-"accessibility.text.receivedOn" = "%1@, message received on %2@";
-"accessibility.text.sentOn" = "%1@, message sent on %2@";
-"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
-"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
-"accessibility.calls.default.toggleAudio" = "Mute microphone";
+"accessibility.text.receivedOn" = "%1@, message reçu le %2@";
+"accessibility.text.sentOn" = "%1@, message envoyé le %2@";
+"accessibility.fileTransfer.receivedOn" = "Fichier : %1@ , reçu le %2@";
+"accessibility.fileTransfer.sentOn" = "Fichier : %1@, envoyé le %2@";
+"accessibility.call.lasted" = "Dernier %@";
+"accessibility.calls.default.toggleAudio" = "Couper le micro";
 "accessibility.calls.default.toggleVideo" = "Allumer la caméra";
 "accessibility.calls.default.pauseCall" = "Mettre l'appel en pause";
 "accessibility.calls.default.hangUpCall" = "Raccrocher";
@@ -585,7 +584,7 @@
 "accessibility.calls.default.raiseHand" = "Lever la main";
 
 "accessibility.calls.alter.toggleAudio" = "Réouvrir le microphone";
-"accessibility.calls.alter.toggleVideo" = "Stop camera";
+"accessibility.calls.alter.toggleVideo" = "Arrêt de la caméra";
 "accessibility.calls.alter.pauseCall" = "Reprendre l'appel";
 "accessibility.calls.alter.hangUpCall" = "Raccrocher";
 "accessibility.calls.alter.addParticipant" = "Ajouter un participant";
