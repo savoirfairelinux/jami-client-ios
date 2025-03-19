@@ -58,7 +58,10 @@ class ParticipantInfo: Equatable, Hashable {
     var profileName = BehaviorRelay(value: "")
     var finalName = BehaviorRelay(value: "")
     let disposeBag = DisposeBag()
+
     var hasProfileAvatar = false
+
+    let profileLock = NSLock()
 
     init(jamiId: String, role: ParticipantRole) {
         self.jamiId = jamiId
@@ -68,11 +71,15 @@ class ParticipantInfo: Equatable, Hashable {
             .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak self] name in
                 guard let self = self else { return }
-                // when profile does not have an avatar, contact image
-                // should be updated each time when name changed.
-                if !self.hasProfileAvatar, !name.isEmpty {
 
-                    self.avatar.accept(UIImage.createContactAvatar(username: name, size: CGSize(width: 55, height: 55)))
+                // Only create backup avatar if profile avatar set and name is available
+                if !name.isEmpty {
+                    self.profileLock.lock()
+                    if !self.hasProfileAvatar {
+                        let backupAvatar = UIImage.createContactAvatar(username: name, size: CGSize(width: 55, height: 55))
+                        self.avatar.accept(backupAvatar)
+                    }
+                    self.profileLock.unlock()
                 }
             } onError: { _ in
             }
@@ -394,8 +401,10 @@ class SwarmInfo: SwarmInfoProtocol {
                 guard let participantInfo = participantInfo else { return }
                 // The view has a size of avatarHeight. Create a larger image for better resolution.
                 if let imageString = profile.photo, let image = imageString.createImage(size: self.avatarHeight * 2) {
-                    participantInfo.avatar.accept(image)
+                    participantInfo.profileLock.lock()
                     participantInfo.hasProfileAvatar = true
+                    participantInfo.avatar.accept(image)
+                    participantInfo.profileLock.unlock()
                 }
                 if let profileName = profile.alias, !profileName.isEmpty {
                     participantInfo.profileName.accept(profileName)
