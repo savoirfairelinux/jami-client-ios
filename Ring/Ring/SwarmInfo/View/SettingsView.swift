@@ -32,21 +32,85 @@ struct SettingsView: View {
 
     @SwiftUI.State private var ignoreSwarm = true
     @SwiftUI.State private var shouldShowColorPannel = false
+    @SwiftUI.State private var showQRcode = false
     @SwiftUI.State private var presentingAlert: PresentingAlert?
     var id: String!
     var swarmType: String!
     // swiftlint:disable closure_body_length
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 20) {
+        Form {
+            if let conversation = viewmodel.conversation,
+               conversation.isCoredialog(),
+               let jamiId = conversation.getParticipants().first?.jamiId {
+                Section(header: Text("Contact")) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Jami id:")
+                        if #available(iOS 15.0, *) {
+                            Text(jamiId)
+                                .font(.footnote)
+                                .multilineTextAlignment(.trailing)
+                                .truncationMode(.middle)
+                                .lineLimit(1)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                                .textSelection(.enabled)
+
+                        } else {
+                            Text(jamiId)
+                                .font(.footnote)
+                                .multilineTextAlignment(.trailing)
+                                .truncationMode(.middle)
+                                .lineLimit(1)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                        }
+                    }
+
+                    Button(action: {
+                        showQRcode = true
+                    }) {
+                        HStack {
+                            Image(systemName: "qrcode")
+                                .foregroundColor(Color.jamiColor)
+                            Text("Show Contact QR Code")
+                                .foregroundColor(Color.jamiColor)
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .sheet(isPresented: $showQRcode) {
+                        QRCodePresenter(isPresented: $showQRcode, jamiId: jamiId, accessibilityLabel: "Contact's QR code")
+                    }
+
+                    ShareButtonView(infoToShare: "You can add this contact \(jamiId) on the Jami distributed communication platform: https://jami.net") {
+                        HStack {
+                            Image(systemName: "square.and.arrow.up")
+                                .foregroundColor(Color.jamiColor)
+                            Text("Share contact info")
+                                .foregroundColor(Color.jamiColor)
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+
+                    Button(action: {
+                        presentingAlert = .blockContact
+                    }, label: {
+                        HStack {
+                            Image(systemName: "person.crop.circle.badge.xmark")
+                                .foregroundColor(Color(UIColor.jamiFailure))
+                            Text(L10n.Global.blockContact)
+                                .multilineTextAlignment(.leading)
+                                .foregroundColor(Color(UIColor.jamiFailure))
+                        }
+                    })
+                }
+            }
+
+            Section(header: Text("Conversation")) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(L10n.Swarm.identifier)
-                        .padding(.trailing, 30)
+                    Text("Conversation Id:")
                     if #available(iOS 15.0, *) {
                         Text(id)
                             .font(.footnote)
                             .multilineTextAlignment(.trailing)
-                            .truncationMode(.tail)
+                            .truncationMode(.middle)
                             .lineLimit(1)
                             .foregroundColor(Color(UIColor.secondaryLabel))
                             .textSelection(.enabled)
@@ -54,7 +118,7 @@ struct SettingsView: View {
                         Text(id)
                             .font(.footnote)
                             .multilineTextAlignment(.trailing)
-                            .truncationMode(.tail)
+                            .truncationMode(.middle)
                             .lineLimit(1)
                             .foregroundColor(Color(UIColor.secondaryLabel))
                     }
@@ -71,7 +135,7 @@ struct SettingsView: View {
                     ZStack {
                         Circle()
                             .fill(Color(hex: viewmodel.finalColor)!)
-                            .frame(width: 20, height: 20)
+                            .frame(width: 15, height: 15)
                             .onTapGesture(perform: {
                                 withAnimation {
                                     viewmodel.showColorSheet.toggle()
@@ -84,16 +148,18 @@ struct SettingsView: View {
                             .padding(10)
                         Circle()
                             .stroke(Color(hex: viewmodel.finalColor)!, lineWidth: 5)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 25, height: 25)
                     }
                 }
                 Button(action: {
                     presentingAlert = .removeConversation
                 }, label: {
                     HStack {
+                        Image(systemName: "arrow.right.circle")
+                            .foregroundColor(Color(UIColor.jamiFailure))
                         Text(L10n.Swarm.leaveConversation)
                             .multilineTextAlignment(.leading)
-                        Spacer()
+                            .foregroundColor(Color(UIColor.jamiFailure))
                     }
                 })
                 .alert(item: $presentingAlert) { alert in
@@ -116,21 +182,7 @@ struct SettingsView: View {
                         )
                     }
                 }
-
-                if viewmodel.conversation?.isCoredialog() ?? false {
-                    Button(action: {
-                        presentingAlert = .blockContact
-                    }, label: {
-                        HStack {
-                            Text(L10n.Global.blockContact)
-                                .multilineTextAlignment(.leading)
-                                .padding(.top)
-                            Spacer()
-                        }
-                    })
-                }
             }
-            .padding(.horizontal, 20)
         }
     }
 }
