@@ -83,7 +83,7 @@ struct SwarmProfile: View {
                 VStack {
                     imagePickerButton()
                         .accessibilityLabel(L10n.Accessibility.swarmPicturePicker)
-                        .accessibilityHint(L10n.Accessibility.swarmPicturePickerHint)
+                        .accessibilityHint(L10n.Accessibility.profilePicturePickerHint)
                     VStack(alignment: .center) {
                         TextField(L10n.Swarm.namePlaceholder, text: $model.swarmName)
                             .disableAutocorrection(true)
