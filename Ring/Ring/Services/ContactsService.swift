@@ -97,11 +97,11 @@ class ContactsService {
             return ContactModel(withDictionary: contactDict)
         }) {
             self.contacts.accept([])
+            var values = [ContactModel]()
             for contact in contacts where self.contacts.value.firstIndex(of: contact) == nil {
-                var values = self.contacts.value
                 values.append(contact)
-                self.contacts.accept(values)
             }
+            self.contacts.accept(values)
         }
     }
     /**
@@ -119,7 +119,8 @@ class ContactsService {
 
     func contact(withUri uri: String) -> ContactModel? {
         guard let contact = self.contacts.value.filter({ $0.uriString == uri }).first else {
-            return nil
+            // fallback contact with hash
+            return contact(withHash: uri)
         }
         return contact
     }

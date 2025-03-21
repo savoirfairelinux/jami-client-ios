@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 Savoir-faire Linux Inc. *
+ * Copyright (C) 2022 - 2025 Savoir-faire Linux Inc. *
  *
  * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
  *
@@ -19,66 +19,81 @@
 import SwiftUI
 
 struct MemberList: View {
-
-    @StateObject var viewmodel: SwarmInfoVM
+    // MARK: - Properties
+    @StateObject var viewModel: SwarmInfoVM
     @SwiftUI.State private var editMode = EditMode.inactive
 
+    // MARK: - Body
     var body: some View {
         List {
-            ForEach(viewmodel.swarmInfo.participants.value, id: \.self) {
-                MemberItem(image: $0.avatar.value, name: $0.finalName.value.isEmpty ? $0.jamiId : $0.finalName.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
-                    .deleteDisabled($0.role == .admin)
-            }
-            .onDelete(perform: viewmodel.isAdmin ? delete : nil)
-            if #available(iOS 15.0, *) {
-                Spacer()
-                    .frame(height: 60)
-                    .listRowSeparator(.hidden)
-            } else {
-                Spacer()
-                    .frame(height: 60)
+            Section(header: Text(L10n.Swarm.members)) {
+                ForEach(viewModel.swarmInfo.participants.value, id: \.self) { participant in
+                    MemberItem(
+                        participant: participant,
+                        isInvited: participant.role == .invited
+                    )
+                    .deleteDisabled(participant.role == .admin)
+                }
+                .onDelete(perform: viewModel.isAdmin ? delete : nil)
             }
         }
         .environment(\.editMode, $editMode)
-        .onChange(of: viewmodel.swarmInfo.participants.value) { _ in
+        .onChange(of: viewModel.swarmInfo.participants.value) { _ in
             if editMode == .active {
                 editMode = .inactive
             }
         }
-        .listStyle(PlainListStyle())
     }
 
-    func delete(at indexSet: IndexSet) {
-        viewmodel.removeMember(indexOffset: indexSet)
+    // MARK: - Methods
+    private func delete(at indexSet: IndexSet) {
+        viewModel.removeMember(indexOffset: indexSet)
     }
 }
 
 struct MemberItem: View {
-    var image: UIImage?
-    var name: String
-    var role: String
-    var isInvited: Bool
+    // MARK: - Properties
+    let participant: ParticipantInfo
+    let isInvited: Bool
 
+    private var displayName: String {
+        participant.finalName.value.isEmpty ? participant.jamiId : participant.finalName.value
+    }
+
+    private var roleText: String {
+        participant.role == .member ? "" : participant.role.stringValue
+    }
+
+    // MARK: - Body
     var body: some View {
-        HStack(alignment: .center) {
-            Image(uiImage: image ?? UIImage(asset: Asset.fallbackAvatar)!)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 50, height: 50, alignment: .center)
-                .clipShape(Circle())
-            Text(name)
-                .font(.system(size: 15.0, weight: .regular, design: .default))
-                .padding(.leading, 8.0)
-                .lineLimit(1)
-                .truncationMode(.tail)
+        HStack(alignment: .center, spacing: 12) {
+            profileImage
+            nameLabel
             Spacer()
-            HStack {
-                Text(role)
-                    .font(.system(.callout, design: .rounded))
-                    .fontWeight(.light)
-                    .frame(width: nil, height: nil, alignment: .trailing)
-            }
+            roleLabel
         }
         .opacity(isInvited ? 0.5 : 1)
+    }
+
+    // MARK: - View Components
+    private var profileImage: some View {
+        Image(uiImage: participant.avatar.value ?? UIImage(asset: Asset.fallbackAvatar)!)
+            .resizable()
+            .scaledToFill()
+            .frame(width: 50, height: 50)
+            .clipShape(Circle())
+    }
+
+    private var nameLabel: some View {
+        Text(displayName)
+            .lineLimit(1)
+            .truncationMode(.middle)
+    }
+
+    private var roleLabel: some View {
+        Text(roleText)
+            .font(.system(.callout, design: .rounded))
+            .fontWeight(.light)
+            .foregroundColor(.secondary)
     }
 }
