@@ -103,10 +103,14 @@ public struct SwarmInfoView: View, StateEmittingView {
                             titleLabel
                         }
                         Group {
-                            if viewmodel.isAdmin {
+                            if viewmodel.isAdmin,
+                               let conversation = viewmodel.conversation,
+                               !conversation.isCoredialog() {
                                 descriptionTextField
                             } else {
-                                descriptionLabel
+                                if !viewmodel.description.isEmpty {
+                                    descriptionLabel
+                                }
                             }
                         }
                     }
@@ -115,21 +119,23 @@ public struct SwarmInfoView: View, StateEmittingView {
                     .background(Color(hex: viewmodel.finalColor))
                     .ignoresSafeArea(edges: [.top, .leading, .trailing])
                 }
-                Picker("", selection: $selectedView) {
-                    ForEach(swarmViews, id: \.self) {
-                        switch $0 {
-                        case .about:
-                            Text(L10n.Swarm.settings)
-                        case .memberList:
-                            Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
+                if swarmViews.count > 1 {
+                    Picker("", selection: $selectedView) {
+                        ForEach(swarmViews, id: \.self) {
+                            switch $0 {
+                                case .about:
+                                    Text(L10n.Swarm.settings)
+                                case .memberList:
+                                    Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
+                            }
                         }
                     }
+                    .onChange(of: selectedView, perform: { _ in
+                        viewmodel.showColorSheet = false
+                    })
+                    .pickerStyle(.segmented)
+                    .padding([.horizontal, .top], 20)
                 }
-                .onChange(of: selectedView, perform: { _ in
-                    viewmodel.showColorSheet = false
-                })
-                .pickerStyle(.segmented)
-                .padding(.all, 20)
 
                 switch selectedView {
                 case .about:
@@ -178,6 +184,7 @@ public struct SwarmInfoView: View, StateEmittingView {
             minimizedTopView = shouldMinimizeTop()
         })
         .ignoresSafeArea(edges: [.top])
+        .background(Color(UIColor.systemGroupedBackground))
     }
 
     func shouldMinimizeTop() -> Bool {
@@ -199,6 +206,7 @@ private extension SwarmInfoView {
         Text(viewmodel.finalTitle)
             .font(Font.title3.weight(.semibold))
             .multilineTextAlignment(.center)
+            .truncationMode(.middle)
             // Text color.
             .foregroundColor(lightOrDarkColor)
             // Cursor color.
@@ -212,6 +220,7 @@ private extension SwarmInfoView {
             onCommit: {
                 viewmodel.title = titleTextFieldInput
             })
+            .truncationMode(.middle)
             // Text color.
             .foregroundColor(lightOrDarkColor)
             // Cursor color.

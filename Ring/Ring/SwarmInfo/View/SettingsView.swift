@@ -32,21 +32,95 @@ struct SettingsView: View {
 
     @SwiftUI.State private var ignoreSwarm = true
     @SwiftUI.State private var shouldShowColorPannel = false
+    @SwiftUI.State private var showQRcode = false
     @SwiftUI.State private var presentingAlert: PresentingAlert?
     var id: String!
     var swarmType: String!
     // swiftlint:disable closure_body_length
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 20) {
+        Form {
+            if let conversation = viewmodel.conversation,
+               conversation.isCoredialog(),
+               let jamiId = conversation.getParticipants().first?.jamiId {
+                Section(header: Text("Contact")) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Jami id:")
+                        if #available(iOS 15.0, *) {
+                            Text(jamiId)
+                                .font(.footnote)
+                                .multilineTextAlignment(.trailing)
+                                .truncationMode(.middle)
+                                .lineLimit(1)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                                .textSelection(.enabled)
+
+                        } else {
+                            Text(jamiId)
+                                .font(.footnote)
+                                .multilineTextAlignment(.trailing)
+                                .truncationMode(.middle)
+                                .lineLimit(1)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                        }
+
+                        HStack(spacing: 0) {
+                            Button(action: {
+                                showQRcode = true
+                            }) {
+                                Image(systemName: "qrcode")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(Color(UIColor.secondaryLabel))
+                                    .padding(5)
+                                    .frame(maxWidth: .infinity)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color(UIColor.systemGray4), lineWidth: 1)
+                                    )
+                            }
+                            .padding(.horizontal, 5)
+                            .sheet(isPresented: $showQRcode) {
+                                QRCodePresenter(isPresented: $showQRcode, jamiId: jamiId, accessibilityLabel: "Contact's qr code")
+                            }
+                            .buttonStyle(PlainButtonStyle())
+
+                            ShareButtonView(infoToShare: "You can add this contact \(jamiId) on the Jami distributed communication platform: https://jami.net") {
+                                Image(systemName: "square.and.arrow.up")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(Color(UIColor.secondaryLabel))
+                                    .padding(5)
+                                    .frame(maxWidth: .infinity)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color(UIColor.systemGray4), lineWidth: 1)
+                                    )
+                                    .padding(.horizontal, 5)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .padding(.vertical, 8)
+                    }
+
+                    Button(action: {
+                        presentingAlert = .blockContact
+                    }, label: {
+                        Text(L10n.Global.blockContact)
+                            .multilineTextAlignment(.leading)
+                    })
+                }
+            }
+
+            Section(header: Text("Conversation")) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(L10n.Swarm.identifier)
-                        .padding(.trailing, 30)
+                    Text("Conversation Id:")
                     if #available(iOS 15.0, *) {
                         Text(id)
                             .font(.footnote)
                             .multilineTextAlignment(.trailing)
-                            .truncationMode(.tail)
+                            .truncationMode(.middle)
                             .lineLimit(1)
                             .foregroundColor(Color(UIColor.secondaryLabel))
                             .textSelection(.enabled)
@@ -54,7 +128,7 @@ struct SettingsView: View {
                         Text(id)
                             .font(.footnote)
                             .multilineTextAlignment(.trailing)
-                            .truncationMode(.tail)
+                            .truncationMode(.middle)
                             .lineLimit(1)
                             .foregroundColor(Color(UIColor.secondaryLabel))
                     }
@@ -71,7 +145,7 @@ struct SettingsView: View {
                     ZStack {
                         Circle()
                             .fill(Color(hex: viewmodel.finalColor)!)
-                            .frame(width: 20, height: 20)
+                            .frame(width: 15, height: 15)
                             .onTapGesture(perform: {
                                 withAnimation {
                                     viewmodel.showColorSheet.toggle()
@@ -84,17 +158,14 @@ struct SettingsView: View {
                             .padding(10)
                         Circle()
                             .stroke(Color(hex: viewmodel.finalColor)!, lineWidth: 5)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 25, height: 25)
                     }
                 }
                 Button(action: {
                     presentingAlert = .removeConversation
                 }, label: {
-                    HStack {
                         Text(L10n.Swarm.leaveConversation)
                             .multilineTextAlignment(.leading)
-                        Spacer()
-                    }
                 })
                 .alert(item: $presentingAlert) { alert in
                     switch alert {
@@ -116,21 +187,7 @@ struct SettingsView: View {
                         )
                     }
                 }
-
-                if viewmodel.conversation?.isCoredialog() ?? false {
-                    Button(action: {
-                        presentingAlert = .blockContact
-                    }, label: {
-                        HStack {
-                            Text(L10n.Global.blockContact)
-                                .multilineTextAlignment(.leading)
-                                .padding(.top)
-                            Spacer()
-                        }
-                    })
-                }
             }
-            .padding(.horizontal, 20)
         }
     }
 }
@@ -170,5 +227,17 @@ struct CircleView: View {
                     .frame(width: 50, height: 50)
             }
         }
+    }
+}
+
+struct BorderButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(configuration.isPressed ? Color(UIColor.systemGray5) : Color.clear)
+            )
+            .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
+            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
     }
 }

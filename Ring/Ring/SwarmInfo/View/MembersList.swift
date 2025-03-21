@@ -25,18 +25,12 @@ struct MemberList: View {
 
     var body: some View {
         List {
-            ForEach(viewmodel.swarmInfo.participants.value, id: \.self) {
-                MemberItem(image: $0.avatar.value, name: $0.finalName.value.isEmpty ? $0.jamiId : $0.finalName.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
-                    .deleteDisabled($0.role == .admin)
-            }
-            .onDelete(perform: viewmodel.isAdmin ? delete : nil)
-            if #available(iOS 15.0, *) {
-                Spacer()
-                    .frame(height: 60)
-                    .listRowSeparator(.hidden)
-            } else {
-                Spacer()
-                    .frame(height: 60)
+            Section(header: Text("Members")) {
+                ForEach(viewmodel.swarmInfo.participants.value, id: \.self) {
+                    MemberItem(image: $0.avatar.value, name: $0.finalName.value.isEmpty ? $0.jamiId : $0.finalName.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
+                        .deleteDisabled($0.role == .admin)
+                }
+                .onDelete(perform: viewmodel.isAdmin ? delete : nil)
             }
         }
         .environment(\.editMode, $editMode)
@@ -45,7 +39,6 @@ struct MemberList: View {
                 editMode = .inactive
             }
         }
-        .listStyle(PlainListStyle())
     }
 
     func delete(at indexSet: IndexSet) {
@@ -67,16 +60,16 @@ struct MemberItem: View {
                 .frame(width: 50, height: 50, alignment: .center)
                 .clipShape(Circle())
             Text(name)
-                .font(.system(size: 15.0, weight: .regular, design: .default))
+               // .font(.system(size: 15.0, weight: .regular, design: .default))
                 .padding(.leading, 8.0)
                 .lineLimit(1)
-                .truncationMode(.tail)
+                .truncationMode(.middle)
             Spacer()
             HStack {
                 Text(role)
                     .font(.system(.callout, design: .rounded))
                     .fontWeight(.light)
-                    .frame(width: nil, height: nil, alignment: .trailing)
+                   // .frame(width: nil, height: nil, alignment: .trailing)
             }
         }
         .opacity(isInvited ? 0.5 : 1)

@@ -56,6 +56,10 @@ class SwarmInfoVM: ObservableObject {
         }
     }
     var isAdmin: Bool {
+        guard let conversation = self.conversation else { return false }
+        if conversation.isCoredialog() {
+            return false
+        }
         guard let accountId = self.conversation?.accountId,
               let jamiId = accountService.getAccount(fromAccountId: accountId)?.jamiId else {
             return false
