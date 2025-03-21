@@ -99,6 +99,8 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                     self.openConversationFromCall(conversationModel: conversation)
                 case .compose:
                     self.presentCompose()
+                    case .presentSwarmInfo(let swarmInfo):
+                        self.presentSwarmInfo(swarmInfo: swarmInfo)
                 default:
                     break
                 }
@@ -133,6 +135,24 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
 
 // MARK: - State
 extension ConversationsCoordinator {
+
+    func presentSwarmInfo(swarmInfo: SwarmInfoProtocol) {
+        let swiftUIVM = SwarmInfoVM(with: self.injectionBag, swarmInfo: swarmInfo)
+        let view = SwarmInfoView(viewModel: swiftUIVM)
+        let viewController = createHostingVC(view)
+        viewController.rx.viewWillAppear
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController.navigationBar.tintColor = UIColor.white
+            })
+            .disposed(by: disposeBag)
+        viewController.rx.viewWillDisappear
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
+            })
+            .disposed(by: disposeBag)
+        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.stateEmitter)
+    }
+
     func popToSmartList() {
         let viewControllers = navigationController.viewControllers
         if viewControllers.contains(smartListViewController) {
