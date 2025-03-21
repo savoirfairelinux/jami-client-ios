@@ -18,219 +18,350 @@
  */
 
 import SwiftUI
+import Combine
 
-enum SwarmSettingView: String {
+// MARK: - Enums and Types
+
+/// Defines the available views in the swarm settings
+enum SwarmSettingView: String, CaseIterable {
     case about
     case memberList
+    
+    var title: String {
+        switch self {
+        case .about:
+            return L10n.Swarm.settings
+        case .memberList:
+            return L10n.Swarm.members
+        }
+    }
 }
 
-// swiftlint:disable closure_body_length
+// MARK: - SwarmInfoView
 
 public struct SwarmInfoView: View, StateEmittingView {
+    // MARK: - Type Definitions
     typealias StateEmitterType = ConversationStatePublisher
-
+    
+    // MARK: - Constants
+    private enum Layout {
+        static let avatarSize: CGFloat = 80
+        static let minimizedTopHeight: CGFloat = 50
+        static let contentPadding: CGFloat = 20
+        static let segmentedControlPadding: CGFloat = 20
+        static let verticalSpacing: CGFloat = 20
+        static let callButtonSize: CGFloat = 45
+        static let callButtonSpacing: CGFloat = 20
+    }
+    
+    // MARK: - Properties
     @ObservedObject var viewmodel: SwarmInfoVM
-    var stateEmitter = ConversationStatePublisher()
+    let stateEmitter = ConversationStatePublisher()
+    
+    // MARK: - State
     @SwiftUI.State private var selectedView: SwarmSettingView = .about
     @SwiftUI.State private var descriptionTextFieldInput: String = ""
     @SwiftUI.State private var titleTextFieldInput: String = ""
     @SwiftUI.State private var showingOptions = false
     @SwiftUI.State private var showingType: PhotoSheetType?
     @SwiftUI.State private var image: UIImage?
-    @SwiftUI.State private var offset: CGFloat = .zero
-    @SwiftUI.State private var topViewHeight: CGFloat = 200
-    @SwiftUI.State private var minimizedTopView: Bool = false // for lanscape for iphone
-    var swarmViews: [SwarmSettingView] {
-        if let conversation = viewmodel.conversation, conversation.isCoredialog() {
-            return [.about]
-        } else {
-            return [.about, .memberList]
-        }
-    }
+    @SwiftUI.State private var minimizedTopView: Bool = false
 
+    // MARK: - Computed Properties
+    private var swarmViews: [SwarmSettingView] {
+        guard let conversation = viewmodel.conversation, !conversation.isCoredialog() else {
+            return [.about]
+        }
+        return [.about, .memberList]
+    }
+    
+    private var lightOrDarkColor: Color {
+        let isLight = Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true
+        return isLight ? Color(UIColor.jamiMain) : Color.white
+    }
+    
+    private var placeholderColor: Color {
+        if viewmodel.finalColor == "#CDDC39" || viewmodel.finalColor == "#FFC107" {
+            return Color.white.opacity(0.7)
+        }
+        
+        let isLight = Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true
+        return isLight ? Color.black.opacity(0.5) : Color.white.opacity(0.5)
+    }
+    
+    // MARK: - Body
     public var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            VStack {
-                if minimizedTopView {
-                    Color(hex: viewmodel.finalColor)
-                        .frame(height: 50)
-                        .ignoresSafeArea(edges: [.top, .leading, .trailing])
-                } else {
-                    VStack(spacing: 15) {
-                        HStack {
-                            Spacer()
-                                .frame(height: 20)
-                        }
-                        Button {
-                            if viewmodel.isAdmin {
-                                showingOptions = true
-                            }
-                        } label: {
-                            Image(uiImage: viewmodel.finalAvatar)
-                                .renderingMode(.original)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 80, height: 80, alignment: .center)
-                                .clipShape(Circle())
-                        }
-                        .actionSheet(isPresented: $showingOptions) {
-                            ActionSheet(
-                                title: Text(""),
-                                buttons: [
-                                    .default(Text(L10n.Alerts.profileTakePhoto)) {
-                                        showingType = .picture
-                                    },
-                                    .default(Text(L10n.Alerts.profileUploadPhoto)) {
-                                        showingType = .gallery
-                                    },
-                                    .cancel()
-                                ]
-                            )
-                        }
-                        .sheet(item: $showingType) { type in
-                            if type == .gallery {
-                                ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
-                            } else {
-                                ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
-                            }
-                        }
-                        .onChange(of: image) { _ in
-                            viewmodel.updateSwarmAvatar(image: image)
-                        }
-                        if viewmodel.isAdmin {
-                            titleTextField
-                        } else {
-                            titleLabel
-                        }
-                        Group {
-                            if viewmodel.isAdmin {
-                                descriptionTextField
-                            } else {
-                                descriptionLabel
-                            }
-                        }
-                    }
-                    .frame(height: topViewHeight)
-                    .padding([.vertical, .horizontal], 30)
-                    .background(Color(hex: viewmodel.finalColor))
-                    .ignoresSafeArea(edges: [.top, .leading, .trailing])
-                }
-                Picker("", selection: $selectedView) {
-                    ForEach(swarmViews, id: \.self) {
-                        switch $0 {
-                        case .about:
-                            Text(L10n.Swarm.settings)
-                        case .memberList:
-                            Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
-                        }
-                    }
-                }
-                .onChange(of: selectedView, perform: { _ in
-                    viewmodel.showColorSheet = false
-                })
-                .pickerStyle(.segmented)
-                .padding(.all, 20)
-
-                switch selectedView {
-                case .about:
-                    SettingsView(viewmodel: viewmodel,
-                                 stateEmitter: stateEmitter,
-                                 id: viewmodel.swarmInfo.id,
-                                 swarmType: viewmodel.swarmInfo.type.value.stringValue)
-                case .memberList:
-                    MemberList(viewmodel: viewmodel)
-                }
-            }
-            .onLoad {
-                descriptionTextFieldInput = viewmodel.swarmInfo.description.value
-                titleTextFieldInput = viewmodel.finalTitle
-            }
-            .onChange(of: viewmodel.finalTitle) { _ in
-                titleTextFieldInput = viewmodel.finalTitle
-            }
-            if !(viewmodel.conversation?.isCoredialog() ?? true) {
-                AddMoreParticipantsInSwarm(viewmodel: viewmodel)
-            }
-            if viewmodel.showColorSheet {
-                ZStack(alignment: .bottom) {
-                    Rectangle()
-                        .foregroundColor(.black.opacity(0.5))
-                        .onTapGesture {
-                            viewmodel.showColorSheet = false
-                            viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
-                        }
-                        .ignoresSafeArea()
-                    CustomColorPicker(selectedColor: $viewmodel.selectedColor, currentColor: $viewmodel.finalColor)
-                        .frame(height: 70)
-                        .background(Color.white)
-                        .onChange(of: viewmodel.finalColor) { _ in
-                            viewmodel.showColorSheet = false
-                            viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
-                        }
-                        .ignoresSafeArea()
-                }
-            }
+            mainContent
+            colorPickerOverlay
+            addParticipantsButton
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+        .onReceive(orientationPublisher) { _ in
             minimizedTopView = shouldMinimizeTop()
         }
-        .onAppear(perform: {
-            minimizedTopView = shouldMinimizeTop()
-        })
+        .onAppear {
+            setupInitialState()
+        }
         .ignoresSafeArea(edges: [.top])
+        .background(Color(UIColor.systemGroupedBackground))
     }
-
-    func shouldMinimizeTop() -> Bool {
-        return UIDevice.current.orientation.isLandscape && UIDevice.current.userInterfaceIdiom == .phone
+    
+    // MARK: - Main Content Components
+    
+    @ViewBuilder
+    private var mainContent: some View {
+        VStack(spacing: 0) {
+            topArea
+            segmentedControl
+            contentArea
+        }
+        .onLoad {
+            descriptionTextFieldInput = viewmodel.swarmInfo.description.value
+            titleTextFieldInput = viewmodel.finalTitle
+        }
+        .onChange(of: viewmodel.finalTitle) { newValue in
+            titleTextFieldInput = newValue
+        }
     }
-}
-
-private extension SwarmInfoView {
-    var lightOrDarkColor: Color {
-        return Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiMain) : Color.white
+    
+    @ViewBuilder
+    private var topArea: some View {
+        if minimizedTopView {
+            minimizedTopBar
+        } else {
+            fullTopArea
+        }
     }
-
-    var placeholderColor: Color {
-        return viewmodel.finalColor == "#CDDC39" || viewmodel.finalColor == "#FFC107" ? Color.white.opacity(0.7) :
-            Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color.black.opacity(0.5) :
-            Color.white.opacity(0.5)
+    
+    private var minimizedTopBar: some View {
+        Color(hex: viewmodel.finalColor)
+            .frame(height: Layout.minimizedTopHeight)
+            .ignoresSafeArea(edges: [.top, .leading, .trailing])
     }
-    var titleLabel: some View {
+    
+    private var fullTopArea: some View {
+        VStack(spacing: Layout.verticalSpacing) {
+            HStack {
+                Spacer()
+                VStack(spacing: Layout.verticalSpacing) {
+                    Spacer().frame(height: 30)
+                    avatarView
+                    titleView
+                    descriptionView
+                    if viewmodel.getContactJamiId() != nil {
+                        callButtons
+                    }
+                }
+                Spacer()
+            }
+        }
+        .padding(Layout.contentPadding)
+        .ignoresSafeArea(edges: [.top, .leading, .trailing])
+        .background(Color(hex: viewmodel.finalColor))
+    }
+    
+    private var callButtons: some View {
+        HStack(spacing: Layout.callButtonSpacing) {
+            Spacer()
+            
+            callButton(
+                systemName: "phone",
+                action: placeAudioCall,
+                accessibilityLabel: "Place audio call"
+            )
+            
+            callButton(
+                systemName: "video",
+                action: placeVideoCall,
+                accessibilityLabel: "Place video call"
+            )
+            
+            Spacer()
+        }
+        .padding(.vertical, 5)
+    }
+    
+    private func callButton(systemName: String, action: @escaping () -> Void, accessibilityLabel: String) -> some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(lightOrDarkColor)
+                .frame(width: Layout.callButtonSize, height: Layout.callButtonSize)
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color(UIColor.white).opacity(0.2)))
+        }
+        .accessibilityLabel(accessibilityLabel)
+    }
+    
+    @ViewBuilder
+    private var avatarView: some View {
+        if viewmodel.isAdmin {
+            editableAvatar
+        } else {
+            nonEditableAvatar
+        }
+    }
+    
+    private var editableAvatar: some View {
+        Button {
+            showingOptions = true
+        } label: {
+            avatarImage
+        }
+        .actionSheet(isPresented: $showingOptions) {
+            ActionSheet(
+                title: Text(""),
+                buttons: [
+                    .default(Text(L10n.Alerts.profileTakePhoto)) {
+                        showingType = .picture
+                    },
+                    .default(Text(L10n.Alerts.profileUploadPhoto)) {
+                        showingType = .gallery
+                    },
+                    .cancel()
+                ]
+            )
+        }
+        .sheet(item: $showingType) { type in
+            ImagePicker(
+                sourceType: type == .gallery ? .photoLibrary : .camera,
+                showingType: $showingType,
+                image: $image
+            )
+        }
+        .onChange(of: image) { newValue in
+            viewmodel.updateSwarmAvatar(image: newValue)
+        }
+    }
+    
+    private var nonEditableAvatar: some View {
+        avatarImage
+    }
+    
+    private var avatarImage: some View {
+        Image(uiImage: viewmodel.finalAvatar)
+            .renderingMode(.original)
+            .resizable()
+            .scaledToFill()
+            .frame(width: Layout.avatarSize, height: Layout.avatarSize, alignment: .center)
+            .clipShape(Circle())
+    }
+    
+    @ViewBuilder
+    private var titleView: some View {
+        if viewmodel.isAdmin {
+            titleTextField
+        } else {
+            titleLabel
+        }
+    }
+    
+    @ViewBuilder
+    private var descriptionView: some View {
+        if viewmodel.isAdmin,
+           let conversation = viewmodel.conversation,
+           !conversation.isCoredialog() {
+            descriptionTextField
+                .padding(.bottom, 10)
+        } else if !viewmodel.description.isEmpty {
+            descriptionLabel
+                .padding(.bottom, 10)
+        }
+    }
+    
+    @ViewBuilder
+    private var segmentedControl: some View {
+        if swarmViews.count > 1 {
+            Picker("", selection: $selectedView) {
+                ForEach(swarmViews, id: \.self) { view in
+                    Text(view == .memberList ? 
+                         "\(viewmodel.swarmInfo.participants.value.count) \(view.title)" : 
+                         view.title)
+                }
+            }
+            .onChange(of: selectedView) { _ in
+                viewmodel.showColorSheet = false
+            }
+            .pickerStyle(.segmented)
+            .padding([.horizontal, .top], Layout.segmentedControlPadding)
+        }
+    }
+    
+    @ViewBuilder
+    private var contentArea: some View {
+        switch selectedView {
+        case .about:
+            SettingsView(viewmodel: viewmodel, stateEmitter: stateEmitter)
+        case .memberList:
+            MemberList(viewmodel: viewmodel)
+        }
+    }
+    
+    @ViewBuilder
+    private var colorPickerOverlay: some View {
+        if viewmodel.showColorSheet {
+            ZStack(alignment: .bottom) {
+                Rectangle()
+                    .foregroundColor(.black.opacity(0.5))
+                    .onTapGesture {
+                        dismissColorPicker()
+                    }
+                    .ignoresSafeArea()
+                
+                CustomColorPicker(
+                    selectedColor: $viewmodel.selectedColor,
+                    currentColor: $viewmodel.finalColor
+                )
+                .frame(height: 70)
+                .background(Color.white)
+                .onChange(of: viewmodel.finalColor) { _ in
+                    dismissColorPicker()
+                }
+                .ignoresSafeArea()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var addParticipantsButton: some View {
+        if !(viewmodel.conversation?.isCoredialog() ?? true) {
+            AddMoreParticipantsInSwarm(viewmodel: viewmodel)
+        }
+    }
+    
+    // MARK: - Text Components
+    
+    private var titleLabel: some View {
         Text(viewmodel.finalTitle)
             .font(Font.title3.weight(.semibold))
             .multilineTextAlignment(.center)
-            // Text color.
+            .truncationMode(.middle)
             .foregroundColor(lightOrDarkColor)
-            // Cursor color.
             .accentColor(lightOrDarkColor)
     }
-
-    var titleTextField: some View {
+    
+    private var titleTextField: some View {
         TextField(
             "",
-            text: $titleTextFieldInput,
+            text: $viewmodel.finalTitle,
             onCommit: {
                 viewmodel.title = titleTextFieldInput
             })
-            // Text color.
+            .truncationMode(.middle)
             .foregroundColor(lightOrDarkColor)
-            // Cursor color.
             .accentColor(lightOrDarkColor)
             .font(Font.title3.weight(.semibold))
             .multilineTextAlignment(.center)
     }
-
-    var descriptionLabel: some View {
+    
+    private var descriptionLabel: some View {
         Text(viewmodel.swarmInfo.description.value)
             .font(.body)
             .multilineTextAlignment(.center)
-            // Text color.
             .foregroundColor(lightOrDarkColor)
-            // Cursor color.
             .accentColor(lightOrDarkColor)
     }
-
-    var descriptionTextField: some View {
+    
+    private var descriptionTextField: some View {
         TextField(
             "",
             text: $descriptionTextFieldInput,
@@ -238,13 +369,46 @@ private extension SwarmInfoView {
                 viewmodel.description = descriptionTextFieldInput
             })
             .placeholder(when: descriptionTextFieldInput.isEmpty) {
-                Text(L10n.Swarm.addDescription).foregroundColor(placeholderColor)
+                Text(L10n.Swarm.addDescription)
+                    .foregroundColor(placeholderColor)
             }
-            // Cursor color.
             .accentColor(lightOrDarkColor)
-            // Text color.
             .foregroundColor(lightOrDarkColor)
             .font(.body)
             .multilineTextAlignment(.center)
+    }
+    
+    // MARK: - Action Methods
+    
+    private func placeAudioCall() {
+        guard let jamiId = viewmodel.getContactJamiId() else { return }
+        stateEmitter.emitState(.startAudioCall(contactRingId: jamiId, userName: ""))
+    }
+    
+    private func placeVideoCall() {
+        guard let jamiId = viewmodel.getContactJamiId() else { return }
+        stateEmitter.emitState(.startCall(contactRingId: jamiId, userName: ""))
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func setupInitialState() {
+        minimizedTopView = shouldMinimizeTop()
+        descriptionTextFieldInput = viewmodel.swarmInfo.description.value
+        titleTextFieldInput = viewmodel.finalTitle
+    }
+    
+    private func shouldMinimizeTop() -> Bool {
+        return UIDevice.current.orientation.isLandscape && 
+               UIDevice.current.userInterfaceIdiom == .phone
+    }
+    
+    private func dismissColorPicker() {
+        viewmodel.showColorSheet = false
+        viewmodel.hideShowBackButton(colorPicker: false)
+    }
+    
+    private var orientationPublisher: NotificationCenter.Publisher {
+        NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
     }
 }
