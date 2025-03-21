@@ -1139,8 +1139,8 @@ internal enum L10n {
     internal static let blocked = L10n.tr("Localizable", "swarm.blocked", fallback: "Blocked")
     /// Change group picture
     internal static let changePicture = L10n.tr("Localizable", "swarm.changePicture", fallback: "Change group picture")
-    /// Color
-    internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor", fallback: "Color")
+    /// Conversation color
+    internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor", fallback: "Conversation color")
     /// Do you want to leave this conversation?
     internal static let confirmLeaveConversation = L10n.tr("Localizable", "swarm.confirmLeaveConversation", fallback: "Do you want to leave this conversation?")
     /// Customize group

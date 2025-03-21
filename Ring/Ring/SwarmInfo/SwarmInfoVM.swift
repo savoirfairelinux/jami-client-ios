@@ -56,6 +56,10 @@ class SwarmInfoVM: ObservableObject {
         }
     }
     var isAdmin: Bool {
+        guard let conversation = self.conversation else { return false }
+        if conversation.isCoredialog() {
+            return false
+        }
         guard let accountId = self.conversation?.accountId,
               let jamiId = accountService.getAccount(fromAccountId: accountId)?.jamiId else {
             return false
@@ -112,6 +116,28 @@ class SwarmInfoVM: ObservableObject {
             shouldTriggerDescriptionDidSet = true
         }
     }
+
+    // MARK: - Contact Information Methods
+    
+    /// Gets the Jami ID for a one-to-one conversation
+    /// - Returns: Jami ID string if available, nil otherwise
+    func getContactJamiId() -> String? {
+        guard let conversation = self.conversation,
+              conversation.isCoredialog(),
+              let participant = conversation.getParticipants().first else {
+            return nil
+        }
+        return participant.jamiId
+    }
+    
+    /// Creates shareable contact information
+    /// - Parameter jamiId: The Jami ID to share
+    /// - Returns: Formatted share message
+    func createShareInfo(for jamiId: String) -> String {
+        return "You can add this contact \(jamiId) on the Jami distributed communication platform: https://jami.net"
+    }
+    
+    // MARK: - Swarm Info Methods
 
     func updateSwarmInfo() {
         if let conversationId = conversation?.id,
