@@ -39,7 +39,7 @@ class TestableSwarmInfo: SwarmInfoProtocol {
         return conversation?.id ?? ""
     }()
 
-    var finalTitle: Observable<String> = Observable.just("")
+    var finalTitle = BehaviorRelay(value: "")
     var finalAvatar: Observable<UIImage> = Observable.just(UIImage())
     var participants = BehaviorRelay(value: [ParticipantInfo]())
     var contacts = BehaviorRelay(value: [ParticipantInfo]())
