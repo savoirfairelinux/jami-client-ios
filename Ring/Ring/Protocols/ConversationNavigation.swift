@@ -90,8 +90,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.migrateAccount(accountId: accountId)
                 case .openFullScreenPreview(let parentView, let viewModel, let image, let initialFrame, let delegate):
                     self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate)
-                case .presentSwarmInfo(let swarmInfo):
-                    self.presentSwarmInfo(swarmInfo: swarmInfo)
+                //                case .presentSwarmInfo(let swarmInfo):
+                //                    self.presentSwarmInfo(swarmInfo: swarmInfo)
                 case .reopenCall(let viewController):
                     self.reopenCall(viewController: viewController)
                 case .showAccountSettings(let account):
@@ -148,13 +148,6 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStyle: .show,
                      withAnimation: true,
                      withStateable: swarmCreationViewController.viewModel)
-    }
-
-    func presentSwarmInfo(swarmInfo: SwarmInfoProtocol) {
-        let swiftUIVM = SwarmInfoVM(with: self.injectionBag, swarmInfo: swarmInfo)
-        let view = SwarmInfoView(viewmodel: swiftUIVM)
-        let viewController = createHostingVC(view)
-        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.stateEmitter)
     }
 
     func presentContactInfo(conversation: ConversationModel) {
