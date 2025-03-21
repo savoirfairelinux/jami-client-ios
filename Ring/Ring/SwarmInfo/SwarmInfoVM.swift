@@ -25,10 +25,13 @@ class SwarmInfoVM: ObservableObject {
     @Published var participantsRows = [ParticipantRow]()
     @Published var selections: [String] = []
     @Published var finalAvatar: UIImage = UIImage()
-    @Published var finalTitle: String = ""
+    @Published var title: String = ""
     @Published var finalColor: String = UIColor.defaultSwarm
     @Published var selectedColor: String = String()
     @Published var showColorSheet = false
+    @Published var description: String = ""
+    @Published var editableTitle: String = ""
+    @Published var isShowingTitleAlert = false
 
     private let disposeBag = DisposeBag()
     private var contactsSubscriptionsDisposeBag = DisposeBag()
@@ -41,31 +44,18 @@ class SwarmInfoVM: ObservableObject {
 
     var swarmInfo: SwarmInfoProtocol
     var conversation: ConversationModel?
-    var description: String = "" {
-        didSet {
-            if shouldTriggerDescriptionDidSet {
-                updateSwarmInfo()
-            }
-        }
-    }
-    var title: String = "" {
-        didSet {
-            if shouldTriggerDescriptionDidSet {
-                updateSwarmInfo()
-            }
-        }
-    }
     var isAdmin: Bool {
-        guard let accountId = self.conversation?.accountId,
-              let jamiId = accountService.getAccount(fromAccountId: accountId)?.jamiId else {
+        guard let conversation = self.conversation else { return false }
+        if conversation.isCoredialog() {
+            return false
+        }
+        guard let jamiId = accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId else {
             return false
         }
         let members = swarmInfo.participants.value
         return members.filter({ $0.role == .admin }).contains(where: { $0.jamiId == jamiId })
     }
-    private var shouldTriggerDescriptionDidSet: Bool = false
     var colorPickerStatus = BehaviorRelay<Bool>(value: false)
-    var navBarColor = BehaviorRelay<String>(value: "")
 
     init(with injectionBag: InjectionBag, swarmInfo: SwarmInfoProtocol) {
         self.injectionBag = injectionBag
@@ -85,10 +75,24 @@ class SwarmInfoVM: ObservableObject {
             })
             .disposed(by: disposeBag)
         self.swarmInfo.finalTitle
+            .startWith(self.swarmInfo.finalTitle.value)
             .subscribe(onNext: { [weak self] newValue in
                 DispatchQueue.main.async {
                     guard let self = self else { return }
-                    self.finalTitle = newValue
+                    if self.title != newValue {
+                        self.title = newValue
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+        self.swarmInfo.description
+            .startWith(self.swarmInfo.description.value)
+            .subscribe(onNext: { [weak self] newValue in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    if self.description != newValue {
+                        self.description = newValue
+                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -102,16 +106,46 @@ class SwarmInfoVM: ObservableObject {
                     } else {
                         self.selectedColor = String()
                     }
-                    self.navBarColor.accept(newValue)
                 }
             })
             .disposed(by: disposeBag)
-        if !shouldTriggerDescriptionDidSet {
-            description = swarmInfo.description.value
-            title = swarmInfo.title.value
-            shouldTriggerDescriptionDidSet = true
-        }
     }
+
+    // MARK: - Contact Information Methods
+    func getContactJamiId() -> String? {
+        guard let conversation = self.conversation,
+              conversation.isCoredialog(),
+              let participant = conversation.getParticipants().first else {
+            return nil
+        }
+        return participant.jamiId
+    }
+
+    func createShareInfo(for jamiId: String) -> String {
+        return "You can add this contact \(jamiId) on the Jami distributed communication platform: https://jami.net"
+    }
+    
+    // MARK: - Title Editing
+    
+    func presentTitleEditView() {
+        editableTitle = ""
+        isShowingTitleAlert = true
+    }
+    
+    func saveTitleEdit() {
+        if editableTitle != title {
+            title = editableTitle
+            updateSwarmInfo()
+        }
+        isShowingTitleAlert = false
+    }
+    
+    func cancelTitleEdit() {
+        editableTitle = title
+        isShowingTitleAlert = false
+    }
+
+    // MARK: - Swarm Info Methods
 
     func updateSwarmInfo() {
         if let conversationId = conversation?.id,

@@ -34,7 +34,7 @@ protocol SwarmInfoProtocol {
     var avatarHeight: CGFloat { get set }
     var avatarSpacing: CGFloat { get set }
 
-    var finalTitle: Observable<String> { get set }
+    var finalTitle: BehaviorRelay<String> { get set }
     var participantsString: BehaviorRelay<String> { get set }
 
     var finalAvatar: Observable<UIImage> { get set }
@@ -139,16 +139,7 @@ class SwarmInfo: SwarmInfoProtocol {
         return conversation?.id ?? ""
     }()
 
-    lazy var finalTitle: Observable<String> = {
-        return Observable
-            .combineLatest(self.title.asObservable().startWith(self.title.value),
-                           self.participantsNames.asObservable().startWith(self.participantsNames.value)) { [weak self] (title: String, names: [String]) -> String in
-                guard let self = self else { return "" }
-                if !title.isEmpty { return title }
-                return self.buildTitleFrom(names: names)
-            }
-    }()
-
+    var finalTitle = BehaviorRelay<String>(value: "")
     var participantsString = BehaviorRelay(value: "")
 
     lazy var finalAvatar: Observable<UIImage> = {
@@ -189,6 +180,20 @@ class SwarmInfo: SwarmInfoProtocol {
         self.requestsService = injectionBag.requestsService
         self.accountId = accountId
         self.localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId
+        
+        // Setup finalTitle updates whenever title or participantsNames change
+        Observable
+            .combineLatest(self.title.asObservable(),
+                           self.participantsNames.asObservable()) { [weak self] (title: String, names: [String]) -> String in
+                guard let self = self else { return "" }
+                if !title.isEmpty { return title }
+                return self.buildTitleFrom(names: names)
+            }
+            .subscribe(onNext: { [weak self] title in
+                self?.finalTitle.accept(title)
+            })
+            .disposed(by: self.disposeBag)
+            
         self.participants
             .subscribe {[weak self] _ in
                 guard let self = self else { return }
