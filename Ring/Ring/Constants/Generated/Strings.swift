@@ -1129,6 +1129,8 @@ internal enum L10n {
     internal static let yesterday = L10n.tr("Localizable", "smartlist.yesterday", fallback: "Yesterday")
   }
   internal enum Swarm {
+    /// QR code for contact
+    internal static let accessibilityContactQRCode = L10n.tr("Localizable", "swarm.accessibilityContactQRCode", fallback: "QR code for contact")
     /// Add description
     internal static let addDescription = L10n.tr("Localizable", "swarm.addDescription", fallback: "Add description")
     /// Administrator
@@ -1139,14 +1141,22 @@ internal enum L10n {
     internal static let blocked = L10n.tr("Localizable", "swarm.blocked", fallback: "Blocked")
     /// Change group picture
     internal static let changePicture = L10n.tr("Localizable", "swarm.changePicture", fallback: "Change group picture")
-    /// Color
-    internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor", fallback: "Color")
+    /// Conversation color
+    internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor", fallback: "Conversation color")
     /// Do you want to leave this conversation?
     internal static let confirmLeaveConversation = L10n.tr("Localizable", "swarm.confirmLeaveConversation", fallback: "Do you want to leave this conversation?")
+    /// Contact
+    internal static let contactHeader = L10n.tr("Localizable", "swarm.contactHeader", fallback: "Contact")
+    /// Conversation
+    internal static let conversationHeader = L10n.tr("Localizable", "swarm.conversationHeader", fallback: "Conversation")
+    /// Conversation ID
+    internal static let conversationId = L10n.tr("Localizable", "swarm.conversationId", fallback: "Conversation ID")
     /// Customize group
     internal static let customize = L10n.tr("Localizable", "swarm.customize", fallback: "Customize group")
     /// Customize group profile
     internal static let customizeProfile = L10n.tr("Localizable", "swarm.customizeProfile", fallback: "Customize group profile")
+    /// Edit group description
+    internal static let descriptionAlertHeader = L10n.tr("Localizable", "swarm.descriptionAlertHeader", fallback: "Edit group description")
     /// Members can be invited at any time after the group has been created.
     internal static let explanationText = L10n.tr("Localizable", "swarm.explanationText", fallback: "Members can be invited at any time after the group has been created.")
     /// Identifier
@@ -1181,6 +1191,18 @@ internal enum L10n {
     internal static let selectContacts = L10n.tr("Localizable", "swarm.selectContacts", fallback: "Select contacts")
     /// Settings
     internal static let settings = L10n.tr("Localizable", "swarm.settings", fallback: "Settings")
+    /// Share contact information
+    internal static let shareContactInfo = L10n.tr("Localizable", "swarm.shareContactInfo", fallback: "Share contact information")
+    /// You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net
+    internal static func shareContactMessage(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "swarm.shareContactMessage", String(describing: p1), fallback: "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net")
+    }
+    /// Show contact QR code
+    internal static let showContactQRCode = L10n.tr("Localizable", "swarm.showContactQRCode", fallback: "Show contact QR code")
+    /// Edit group title
+    internal static let titleAlertHeader = L10n.tr("Localizable", "swarm.titleAlertHeader", fallback: "Edit group title")
+    /// Enter title
+    internal static let titlePlaceholder = L10n.tr("Localizable", "swarm.titlePlaceholder", fallback: "Enter title")
     /// Conversation type
     internal static let typeOfSwarm = L10n.tr("Localizable", "swarm.typeOfSwarm", fallback: "Conversation type")
     /// Unknown
