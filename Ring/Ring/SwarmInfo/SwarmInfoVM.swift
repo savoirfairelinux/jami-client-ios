@@ -21,215 +21,292 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
+/// ViewModel that manages swarm information display and editing
 class SwarmInfoVM: ObservableObject {
+    // MARK: - Public Properties
+    
+    // SwiftUI published properties
     @Published var participantsRows = [ParticipantRow]()
     @Published var selections: [String] = []
     @Published var finalAvatar: UIImage = UIImage()
-    @Published var finalTitle: String = ""
+    @Published var title: String = ""
+    @Published var description: String = ""
+    
+    // Color related properties
     @Published var finalColor: String = UIColor.defaultSwarm
     @Published var selectedColor: String = String()
     @Published var showColorSheet = false
-
+    var colorPickerStatus = BehaviorRelay<Bool>(value: false)
+    
+    // Alert related properties
+    @Published var editableTitle: String = ""
+    @Published var editableDescription: String = ""
+    @Published var isShowingTitleAlert = false
+    @Published var isShowingDescriptionAlert = false
+    
+    var swarmInfo: SwarmInfoProtocol
+    var conversation: ConversationModel?
+    
+    // MARK: - Private Properties
     private let disposeBag = DisposeBag()
     private var contactsSubscriptionsDisposeBag = DisposeBag()
-    let injectionBag: InjectionBag
+    
     private let accountService: AccountsService
     private let nameService: NameService
     private let profileService: ProfilesService
     private let conversationService: ConversationsService
     private let contactsService: ContactsService
-
-    var swarmInfo: SwarmInfoProtocol
-    var conversation: ConversationModel?
-    var description: String = "" {
-        didSet {
-            if shouldTriggerDescriptionDidSet {
-                updateSwarmInfo()
-            }
-        }
-    }
-    var title: String = "" {
-        didSet {
-            if shouldTriggerDescriptionDidSet {
-                updateSwarmInfo()
-            }
-        }
-    }
+    let injectionBag: InjectionBag
+    
+    // MARK: - Computed Properties
+    
     var isAdmin: Bool {
-        guard let accountId = self.conversation?.accountId,
-              let jamiId = accountService.getAccount(fromAccountId: accountId)?.jamiId else {
+        guard let conversation = self.conversation else { return false }
+        // No admin in one-to-one conversations
+        if conversation.isCoredialog() {
             return false
         }
+        
+        guard let jamiId = accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId else {
+            return false
+        }
+        
         let members = swarmInfo.participants.value
         return members.filter({ $0.role == .admin }).contains(where: { $0.jamiId == jamiId })
     }
-    private var shouldTriggerDescriptionDidSet: Bool = false
-    var colorPickerStatus = BehaviorRelay<Bool>(value: false)
-    var navBarColor = BehaviorRelay<String>(value: "")
-
+    
+    // MARK: - Initialization
+    
     init(with injectionBag: InjectionBag, swarmInfo: SwarmInfoProtocol) {
         self.injectionBag = injectionBag
+        
         self.accountService = injectionBag.accountService
         self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
         self.contactsService = injectionBag.contactsService
+        
         self.swarmInfo = swarmInfo
         self.conversation = swarmInfo.conversation
+        
+        setupBindings()
+    }
+    
+    // MARK: - Setup
+    
+    private func setupBindings() {
         self.swarmInfo.finalAvatar
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] newValue in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.finalAvatar = newValue
-                }
+                self?.finalAvatar = newValue
             })
             .disposed(by: disposeBag)
+        
         self.swarmInfo.finalTitle
+            .startWith(self.swarmInfo.finalTitle.value)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] newValue in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.finalTitle = newValue
+                guard let self = self else { return }
+                if self.title != newValue {
+                    self.title = newValue
                 }
             })
             .disposed(by: disposeBag)
+        
+        self.swarmInfo.description
+            .startWith(self.swarmInfo.description.value)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] newValue in
+                guard let self = self else { return }
+                if self.description != newValue {
+                    self.description = newValue
+                }
+            })
+            .disposed(by: disposeBag)
+        
         self.swarmInfo.color
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] newValue in
-                DispatchQueue.main.async {
-                    guard let self = self, !newValue.isEmpty else { return }
-                    self.finalColor = newValue
-                    if Constants.swarmColors.contains(newValue) {
-                        self.selectedColor = newValue
-                    } else {
-                        self.selectedColor = String()
-                    }
-                    self.navBarColor.accept(newValue)
-                }
+                guard let self = self, !newValue.isEmpty else { return }
+                self.finalColor = newValue
+                self.selectedColor = Constants.swarmColors.contains(newValue) ? newValue : String()
+                self.colorPickerStatus.accept(false)
             })
             .disposed(by: disposeBag)
-        if !shouldTriggerDescriptionDidSet {
-            description = swarmInfo.description.value
-            title = swarmInfo.title.value
-            shouldTriggerDescriptionDidSet = true
+    }
+    
+    // MARK: - Contact Information Methods
+    
+    func getContactJamiId() -> String? {
+        guard let conversation = self.conversation,
+              conversation.isCoredialog(),
+              let participant = conversation.getParticipants().first else {
+            return nil
         }
+        return participant.jamiId
     }
 
-    func updateSwarmInfo() {
-        if let conversationId = conversation?.id,
-           let accountId = conversation?.accountId {
-            var conversationInfo = conversationService.getConversationInfo(conversationId: conversationId, accountId: accountId)
-            conversationInfo[ConversationAttributes.description.rawValue] = description
-            conversationInfo[ConversationAttributes.title.rawValue] = title
-            self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
+    func createShareInfo(for jamiId: String) -> String {
+        return "You can add this contact \(jamiId) on the Jami distributed communication platform: https://jami.net"
+    }
+    
+    // MARK: - Title and Description Editing
+    
+    func presentTitleEditView() {
+        editableTitle = ""
+        DispatchQueue.main.async { [weak self] in
+            self?.isShowingTitleAlert = true
         }
     }
+    
+    func saveTitleEdit() {
+        if editableTitle == title { return }
 
-    func updateSwarmAvatar(image: UIImage?) {
-        guard let image = image, let data = image.convertToDataForSwarm() else { return }
-        if let conversationId = conversation?.id,
-           let accountId = conversation?.accountId {
-            var conversationInfo = conversationService.getConversationInfo(conversationId: conversationId, accountId: accountId)
-            conversationInfo[ConversationAttributes.avatar.rawValue] = data.base64EncodedString()
-            self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
-            self.finalAvatar = image
+        title = editableTitle
+        updateSwarmInfo()
+    }
+    
+    func presentDescriptionEditView() {
+        editableDescription = ""
+        DispatchQueue.main.async { [weak self] in
+            self?.isShowingDescriptionAlert = true
         }
     }
-    func updateSwarmColor(selectedColor: String) {
-        if let conversationId = conversation?.id,
-           let accountId = conversation?.accountId {
-            let prefsInfo = conversationService.getConversationPreferences(accountId: accountId, conversationId: conversationId)
-            guard var prefsInfo = prefsInfo else { return }
-            prefsInfo[ConversationPreferenceAttributes.color.rawValue] = selectedColor
-            self.conversationService.updateConversationPrefs(accountId: accountId, conversationId: conversationId, prefs: prefsInfo)
-        }
+    
+    func saveDescriptionEdit() {
+        if editableDescription == description  { return }
+
+        description = editableDescription
+        updateSwarmInfo()
     }
+    
+    // MARK: - UI State Management
+    
     func hideShowBackButton(colorPicker: Bool) {
         colorPickerStatus.accept(colorPicker)
     }
-    func updateContactList () {
-        self.swarmInfo.contacts
+
+    // MARK: - Swarm Info Methods
+    
+    func updateSwarmInfo() {
+        guard let conversationId = conversation?.id,
+              let accountId = conversation?.accountId else { return }
+        
+        var conversationInfo = conversationService.getConversationInfo(conversationId: conversationId, accountId: accountId)
+        conversationInfo[ConversationAttributes.description.rawValue] = description
+        conversationInfo[ConversationAttributes.title.rawValue] = title
+        self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
+    }
+    
+    func updateSwarmAvatar(image: UIImage?) {
+        guard let image = image,
+              let data = image.convertToDataForSwarm(),
+              let conversationId = conversation?.id,
+              let accountId = conversation?.accountId else { return }
+        
+        var conversationInfo = conversationService.getConversationInfo(conversationId: conversationId, accountId: accountId)
+        conversationInfo[ConversationAttributes.avatar.rawValue] = data.base64EncodedString()
+        self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
+        self.finalAvatar = image
+    }
+    
+    func updateSwarmColor(selectedColor: String) {
+        guard let conversationId = conversation?.id,
+              let accountId = conversation?.accountId,
+              var prefsInfo = conversationService.getConversationPreferences(accountId: accountId, conversationId: conversationId) else { return }
+        
+        prefsInfo[ConversationPreferenceAttributes.color.rawValue] = selectedColor
+        self.conversationService.updateConversationPrefs(accountId: accountId, conversationId: conversationId, prefs: prefsInfo)
+    }
+    
+    // MARK: - Participants Management
+    
+    func updateContactList() {
+        self.contactsSubscriptionsDisposeBag = DisposeBag()
+        
+        swarmInfo.contacts
             .subscribe { [weak self] newValue in
                 guard let self = self else { return }
-                DispatchQueue.main.async {
-                    self.participantsRows = [ParticipantRow]()
-                    for info in newValue {
-                        let participant = ParticipantRow(participantData: info)
-                        self.participantsRows.append(participant)
-                    }
+                DispatchQueue.main.async { [weak self] in
+                    self?.participantsRows = newValue.map { ParticipantRow(participantData: $0) }
                 }
-            } onError: { _ in
             }
             .disposed(by: self.contactsSubscriptionsDisposeBag)
-        injectionBag
-            .contactsService
-            .contacts
-            .asObservable()
-            .subscribe { [weak self] contacts in
-                guard let self = self else { return }
-                self.swarmInfo.addContacts(contacts: contacts)
-            } onError: { _ in
-            }
+        
+        injectionBag.contactsService.contacts
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] contacts in
+                self?.swarmInfo.addContacts(contacts: contacts)
+            })
             .disposed(by: self.contactsSubscriptionsDisposeBag)
     }
-
+    
     func removeExistingSubscription() {
         self.contactsSubscriptionsDisposeBag = DisposeBag()
     }
-
+    
     func addMember() {
+        guard let conversationId = conversation?.id,
+              let accountId = conversation?.accountId else { return }
+        
         for participant in selections {
-            if let conversationId = conversation?.id,
-               let accountId = conversation?.accountId {
-                self.conversationService.addConversationMember(accountId: accountId, conversationId: conversationId, memberId: participant)
-            }
+            conversationService.addConversationMember(accountId: accountId, conversationId: conversationId, memberId: participant)
         }
         selections.removeAll()
     }
+    
     func removeMember(indexOffset: IndexSet) {
-        let idDelete = indexOffset.map { swarmInfo.participants.value[$0].jamiId }
-        if let conversationId = conversation?.id,
-           let accountId = conversation?.accountId {
-            _ = idDelete.compactMap { memberID in
-                print(memberID)
-                conversationService.removeConversationMember(accountId: accountId, conversationId: conversationId, memberId: memberID)
-            }
+        guard let conversationId = conversation?.id,
+              let accountId = conversation?.accountId else { return }
+        
+        let idsToDelete = indexOffset.map { swarmInfo.participants.value[$0].jamiId }
+        
+        for memberId in idsToDelete {
+            conversationService.removeConversationMember(accountId: accountId, conversationId: conversationId, memberId: memberId)
         }
     }
-
+    
     func leaveSwarm(stateEmitter: ConversationStatePublisher) {
         guard let conversation = self.conversation else { return }
+        
         let conversationId = conversation.id
         let accountId = conversation.accountId
+        
         /*
          If it's a one-to-one conversation, remove the associated contact.
          This action will also remove the conversation.
          */
         if conversation.isCoredialog(),
            let participant = conversation.getParticipants().first {
-            self.contactsService
+            // Capture a weak reference to self to avoid retain cycles
+            contactsService
                 .removeContact(withId: participant.jamiId,
                                ban: false,
                                withAccountId: accountId)
                 .asObservable()
                 .subscribe(onCompleted: {})
-                .disposed(by: self.disposeBag)
+                .disposed(by: disposeBag)
         } else {
-            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+            conversationService
+                .removeConversation(conversationId: conversationId, accountId: accountId)
         }
         stateEmitter.emitState(ConversationState.conversationRemoved)
     }
-
+    
     func blockContact(stateEmitter: ConversationStatePublisher) {
-        guard let conversation = self.conversation else { return }
+        guard let conversation = self.conversation,
+              let participantId = conversation.getParticipants().first?.jamiId else { return }
+        
         let accountId = conversation.accountId
-        if let participantId = conversation.getParticipants().first?.jamiId {
-            self.contactsService
-                .removeContact(withId: participantId,
-                               ban: true,
-                               withAccountId: accountId)
-                .asObservable()
-                .subscribe(onCompleted: {})
-                .disposed(by: self.disposeBag)
-        }
+        
+        contactsService
+            .removeContact(withId: participantId,
+                           ban: true,
+                           withAccountId: accountId)
+            .asObservable()
+            .subscribe(onCompleted: {})
+            .disposed(by: disposeBag)
+        
         stateEmitter.emitState(ConversationState.conversationRemoved)
     }
 }
