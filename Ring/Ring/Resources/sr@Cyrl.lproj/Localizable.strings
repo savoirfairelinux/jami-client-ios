@@ -25,12 +25,12 @@
 "global.password" = "Лозинка";
 "global.registerAUsername" = "Региструј корисничко име";
 "global.enterPassword" = "Унеси лозинку";
-"global.enterUsername" = "Unesi korisničko ime";
+"global.enterUsername" = "Унеси корисничко име";
 "global.cancel" = "Откажи";
 "global.blockContact" = "Блокирај контакт";
 "global.removeAccount" = "Уклони налог";
 "global.incomingCall" = "Долазни позив";
-"global.ok" = "U redu";
+"global.ok" = "У реду";
 "global.close" = "Затвори";
 "global.share" = "Подели";
 "global.forward" = "Напред";
@@ -48,17 +48,17 @@
 "global.deleteMessage" = "Избриши поруку";
 "global.deleteFile" = "Избриши датотеку са уређаја";
 "global.editMessage" = "Уреди поруку";
-"global.editing" = "Uređivanje";
+"global.editing" = "Уређивање";
 "global.create" = "Направи";
 "global.edit" = "Редактирање";
-"global.remove" = "Увајање";
+"global.remove" = "Уклони";
 "global.call" = "Позови";
 "global.video" = "Видео";
-"global.time" = "Vreme";
-"global.editPassword" = "Uredi lozinku";
+"global.time" = "Време";
+"global.editPassword" = "Уреди лозинку";
 "global.confirmPassword" = "Потврди лозинку";
 "global.confirm" = "Потврди";
-"global.cameraDisabled" = "Pristup kameri je onemogućen. Omogućite ga u podešavanjima uređaja da biste koristili ovu funkciju.";
+"global.cameraDisabled" = "Приступ камери је онемогућен. Омогућите га у подешавањима уређаја да бисте користили ову функцију.";
 "global.confirm" = "Потврди";
 "global.connect" = "Повежи се";
 
@@ -66,17 +66,17 @@
 "scan.badQrCode" = "Лош QR код";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Potražite kontakt…";
-"swarmcreation.addDescription" = "Dodaj opis";
+"swarmcreation.searchBar" = "Потражите контакт…";
+"swarmcreation.addDescription" = "Додајте опис";
 // Swarm
-"swarm.muteConversation" = "Умоли разговор";
+"swarm.muteConversation" = "Утишај разговор";
 "swarm.leaveConversation" = "Оставите разговор";
-"swarm.chooseColor" = "Boja";
-"swarm.typeOfSwarm" = "Vrsta razgovora";
+"swarm.chooseColor" = "Боја";
+"swarm.typeOfSwarm" = "Врста разговора";
 "swarm.identifier" = "Идентификатор";
 "swarm.settings" = "Подешавања";
 "swarm.members" = "Чланови";
-"swarm.addDescription" = "Dodaj opis";
+"swarm.addDescription" = "Додајте опис";
 "swarm.oneToOne" = "Приватно";
 "swarm.adminInvitesOnly" = "Приватна група (ограничени позиви)";
 "swarm.invitesOnly" = "Приватна група";
@@ -85,37 +85,37 @@
 "swarm.member" = "Члан";
 "swarm.invited" = "Позван";
 "swarm.admin" = "Администратор";
-"swarm.blocked" = "Blokiran";
+"swarm.blocked" = "Блокирано";
 "swarm.unknown" = "Непознат";
-"swarm.inviteMembers" = "Pozovite članove";
-"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"swarm.inviteMembers" = "Позовите чланове";
+"swarm.confirmLeaveConversation" = "Да ли желите да напустите овај разговор?";
 "swarm.Leave" = "Одлази";
-"swarm.newGroup" = "Kreiraj novu grupu";
-"swarm.namePlaceholder" = "Naziv grupe";
-"swarm.explanationText" = "Članovi mogu biti pozvani u bilo koje vreme nakon što je grupa napravljena.";
-"swarm.customizeProfile" = "Prilagodite profil grupe";
-"swarm.changePicture" = "Promeni sliku grupe";
-"swarm.customize" = "Prilagodi grupu";
+"swarm.newGroup" = "Креирајте нову групу";
+"swarm.namePlaceholder" = "Назив групе";
+"swarm.explanationText" = "Чланови могу бити позвани у било које време након што је група направљена.";
+"swarm.customizeProfile" = "Прилагодите профил групе";
+"swarm.changePicture" = "Промените слику групе";
+"swarm.customize" = "Прилагодите групу";
 "swarm.selectContacts" = "Изабери контакте";
 
 // Smartlist
 "smartlist.yesterday" = "Јуче";
 "smartlist.results" = "Јавни именик";
-"smartlist.jamsResults" = "Rezultat pretrage";
+"smartlist.jamsResults" = "Резултат претраге";
 "smartlist.conversations" = "Разговори";
-"smartlist.noConversationsFound" = "No conversations match the search.";
-"smartlist.newContact" = "Novi kontakt";
-"smartlist.newGroup" = "Nova grupa";
+"smartlist.noConversationsFound" = "Ниједна преписка не одговара претрази.";
+"smartlist.newContact" = "Нови контакт";
+"smartlist.newGroup" = "Нова група";
 "smartlist.accounts" = "Налози";
 "smartlist.invitationReceived" = "Позивнице примљене";
 "smartlist.noResults" = "Нема резултата";
 "smartlist.noConversation" = "Нема разговора";
-"smartlist.searchBarPlaceholder" = "Unesite ime…";
+"smartlist.searchBarPlaceholder" = "Унесите име…";
 "smartlist.searchBar" = "Претрага";
-"smartlist.noNetworkConnectivity" = "Nema internet konekcije";
-"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
+"smartlist.noNetworkConnectivity" = "Нема интернет конекције";
+"smartlist.cellularAccess" = "Уверите се да је мобилни приступ одобрен у подешавањима.";
 "smartlist.accountsTitle" = "Налози";
-"smartlist.addAccountButton" = "+ Dodaj nalog";
+"smartlist.addAccountButton" = "+ Додај налог";
 "smartlist.noNumber" = "Избрани контакт нема никакав број";
 "smartlist.selectOneNumber" = "Изаберите један од бројева";
 "smartlist.invitations" = "Позивања";
@@ -123,100 +123,100 @@
 "smartlist.inviteFriends" = "Позови пријатеље";
 "smartlist.accounts" = "Налози";
 "smartlist.disableDonation" = "Не сада";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
-"smartlist.inSynchronization" = "razgovor u sinhronizaciji";
-"smartlist.newMessage" = "Nova poruka";
+"smartlist.donationExplanation" = "Ако уживате у коришћењу Јами-ја и верујете у нашу мисију, да ли желите да дате донацију?";
+"smartlist.inSynchronization" = "разговор у синхронизацији";
+"smartlist.newMessage" = "Нова порука";
 
 // Conversation
 "conversation.addToContactsButton" = "Додај у контакте";
 "conversation.addToContactsLabel" = "Додај у контакте?";
-"conversation.notContactLabel" = "%@ is not in the contact list";
-"conversation.messagePlaceholder" = "Pišite";
-"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
-"conversation.receivedRequest" = "Dobili ste pozivnicu za razgovor od %@.";
-"conversation.incomingRequest" = "sent you a conversation invitation.";
-"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
-"conversation.sendRequest" = "Pošaljite im pozivnicu da biste mogli razgovarati.";
-"conversation.sendRequestTitle" = "Send conversation invitation";
-"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
+"conversation.notContactLabel" = "%@ није на листи контаката";
+"conversation.messagePlaceholder" = "Пишите";
+"conversation.errorSavingImage" = "Дошло је до грешке при чувању слике у галерији.";
+"conversation.receivedRequest" = "%@ вам је послао позивницу за разговор.";
+"conversation.incomingRequest" = "послао вам је позивницу за разговор.";
+"conversation.requestMessage" = "Здраво,\nДа ли желите да се придружите разговору?";
+"conversation.sendRequest" = "Пошаљите им позивницу да бисте могли разговарати.";
+"conversation.sendRequestTitle" = "Пошаљите позивницу за разговор";
+"conversation.synchronizationTitle" = "Прихватили сте позивницу за разговор.";
+"conversation.synchronizationMessage" = "Чека се %@ да се повеже ради синхронизације разговора…";
 "conversation.inReplyTo" = "У одговору на";
-"conversation.repliedTo" = "%@ replied to %@";
+"conversation.repliedTo" = "%@ одговорио на %@";
 "conversation.yourself" = "Ти";
-"conversation.edited" = "Редактирана";
+"conversation.edited" = "Измењена";
 "conversation.deletedMessage" = "%@ обрисао поруку";
-"conversation.contactBlocked" = "Kontakt blokiran";
+"conversation.contactBlocked" = "Контакт блокиран";
 
 // Invitations
-"invitations.noInvitations" = "Нема покана";
+"invitations.noInvitations" = "Нема позивница";
 "invitations.accepted" = "Прихваћено";
-"invitations.declined" = "Declined";
-"invitations.blocked" = "Blokiran";
+"invitations.declined" = "Одбијено";
+"invitations.blocked" = "Блокирано";
 "invitations.list" = "Позивнице примљене";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
-"welcome.text" = "Џами је бесплатна и универзална комуникацијска платформа која чува приватност и слободе корисника";
+"welcome.title" = "Делите, слободно и приватно са Јамијем";
+"welcome.text" = "Јами је бесплатна и универзална комуникациона платформа која чува приватност и слободе корисника";
 "welcome.haveAccount" = "Већ имам налог";
 "welcome.linkDevice" = "Увоз из другог уређаја";
-"welcome.linkBackup" = "Импорт из архивног резервног копија";
-"welcome.createAccount" = "Стварити рачун Jami";
-"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
+"welcome.linkBackup" = "Увези из резервне копије архиве";
+"welcome.createAccount" = "Направите Јами налог";
+"welcome.connectToJAMS" = "Повежите се са Јами сервером за управљање налогом (JAMS)";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Прескочи";
 "createProfile.profileCreated" = "Напред";
-"createProfile.title" = "Personalize your profile";
-"createProfile.enterNameLabel" = "Унесите име приказа";
+"createProfile.title" = "Персонализујте свој профил";
+"createProfile.enterNameLabel" = "Унесите име за приказ";
 "createProfile.enterNamePlaceholder" = "Унесите име";
-"createProfile.subtitle" = "Профил ће бити подељен са својим контактима.";
-"createProfile.createProfilePicture" = "Napravite sliku profila";
+"createProfile.subtitle" = "Ваш профил ће бити дељен са вашим контактима. Можете га променити у било ком тренутку.";
+"createProfile.createProfilePicture" = "Направите слику профила";
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Придружи се Јамију";
-"createAccount.lookingForUsernameAvailability" = "Checking username availability…";
-"createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
+"createAccount.lookingForUsernameAvailability" = "Проверава се доступност корисничког имена…";
+"createAccount.invalidUsername" = "Неважеће корисничко име. Унесите исправно корисничко име.";
 "createAccount.usernameAlreadyTaken" = "Корисничко име је већ заузето";
-"createAccount.usernameValid" = "The username is available.";
+"createAccount.usernameValid" = "Корисничко име је доступно.";
 "createAccount.UsernameNotRegisteredTitle" = "Мрежна грешка";
 "createAccount.UsernameNotRegisteredMessage" = "Налог је креиран, али корисничко име није регистровано";
 "createAccount.timeoutTitle" = "Налог је направљен";
-"createAccount.timeoutMessage" = "Registracija korisničkog imena je u toku. Molimo sačekajte…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
-"createAccount.creatingAccount" = "Kreiranje naloga";
-"createAccount.nameExplanation" = "Можете изабрати корисничко име да бисте помогли другима да вас лакше пронађу и дођу до вас на Џами.";
-"createAccount.newAccount" = "Novi nalog";
-"createAccount.encryptionEnabled" = "Šifrovanje je omogućeno";
-"createAccount.encrypt" = "Шифровано";
+"createAccount.timeoutMessage" = "Регистрација корисничког имена је у току. Молимо сачекајте…";
+"createAccount.sipConfigure" = "Конфигуришите постојећи SIP налог";
+"createAccount.creatingAccount" = "Креирање налога";
+"createAccount.nameExplanation" = "Можете да изаберете корисничко име да бисте помогли другима да вас лакше пронађу и дођу до вас на Јами.";
+"createAccount.newAccount" = "Нови налог";
+"createAccount.encryptionEnabled" = "Шифровање је омогућено";
+"createAccount.encrypt" = "Шифруј";
 "createAccount.customize" = "Прилагоди";
 "createAccount.encryptTitle" = "Шифрујте налог лозинком";
-"createAccount.encryptExplanation" = "Jami nalog se kreira i čuva lokalno samo na ovom uređaju kao arhiva koja sadrži ključeve naloga. Pristup arhivi se opciono može zaštititi lozinkom.";
+"createAccount.encryptExplanation" = "Јами налог се креира и чува локално само на овом уређају као архива која садржи кључеве налога. Приступ архиви се опционо може заштитити лозинком.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Увези налог";
 "linkToAccount.showQrCode" = "QR код";
-"linkToAccount.showPinCode" = "Authentication code";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
-"linkToAccount.goToAccounts" = "Go to imported account";
-"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
-"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
-"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
-"linkToAccount.exit" = "Exit";
+"linkToAccount.showPinCode" = "Код за аутентификацију";
+"linkToAccount.actionRequired" = "Потребна радња.\nПотврдите налог на изворном уређају.";
+"linkToAccount.allSet" = "Налог је успешно увезен.";
+"linkToAccount.goToAccounts" = "Идите на увезени налог";
+"linkToAccount.exportInstructions" = "На изворном уређају покрените извоз.";
+"linkToAccount.exportInstructionsPath" = "Изаберите Налог > Подешавања налога > Повежи нови уређај.";
+"linkToAccount.scanQrCode" = "Када будете спремни, скенирајте QR код.";
+"linkToAccount.enterProvidedCode" = "Када будете спремни, унесите код за потврду аутентичности.";
+"linkToAccount.accountLockedWithPassword" = "Налог је заштићен лозинком.\nДа бисте наставили, унесите лозинку налога.";
+"linkToAccount.exit" = "Изађи";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to exit?";
 "linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
 
 // Import from Archive
-"importFromArchive.explanation" = "Увезив рачуна Џами из локалног архива.";
-"importFromArchive.passwordExplanation" = "Ако је рачун шифрен лозинком, пожените следеће поље.";
-"importFromArchive.title" = "Import from archive";
+"importFromArchive.explanation" = "Увезите Јами налог из локалне архивске датотеке.";
+"importFromArchive.passwordExplanation" = "Ако је налог шифрован лозинком, попуните следеће поље.";
+"importFromArchive.title" = "Увези из архиве";
 "importFromArchive.buttonTitle" = "Увоз";
-"importFromArchive.selectArchiveButton" = "Izaberite datoteku arhive";
+"importFromArchive.selectArchiveButton" = "Изаберите датотеку архиве";
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Sign in";
@@ -233,7 +233,7 @@
 "alerts.accountNoNetworkTitle" = "Мрежна грешка";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Грешка налога";
-"alerts.accountDefaultErrorMessage" = "Desila se greška prilikom pravljenja naloga.";
+"alerts.accountDefaultErrorMessage" = "Дошло је до грешке при креирању налога.";
 "alerts.profileTakePhoto" = "Снимите фотографију.";
 "alerts.profileUploadPhoto" = "Унесите фотографију";
 "alerts.accountLinkedTitle" = "Повезивање налога";
@@ -266,7 +266,7 @@
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
 "actions.goToSettings" = "Идите у подешавања";
-"actions.stopLocationSharing" = "Prestani sa deljenjem";
+"actions.stopLocationSharing" = "Престани да делиш";
 
 // Calls
 "calls.ringing" = "Звучи...";
@@ -283,16 +283,16 @@
 
 // Account Page
 "accountPage.devicesListHeader" = "Уреди";
-"accountPage.settingsHeader" = "Podešavanja";
+"accountPage.settingsHeader" = "Подешавања";
 "accountPage.notificationsHeader" = "Уведомљења";
 "accountPage.blockedContacts" = "Блокирани контакти";
 "accountPage.unblockContact" = "Одблокирај";
 "accountPage.proxyAddressAlert" = "Устави прокси адресу";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Прокси адреса";
-"accountPage.useProxyList" = "Koristite listu proksija";
+"accountPage.useProxyList" = "Користите листу проксија";
 "accountPage.proxyListURL" = "Proxy list URL";
-"accountPage.proxyExplanation" = "Obaveštenja se rutiraju preko proksija. Možete da koristite podrazumevani proksi, unesete prilagođenu proksi adresu ili navedete URL sa listom proksija.";
+"accountPage.proxyExplanation" = "Обавештења се рутирају преко проксија. Можете да користите подразумевани прокси, унесете прилагођену прокси адресу или наведете URL са листом проксија.";
 "accountPage.proxyHeader" = "Proxy";
 "accountPage.enableNotifications" = "Омогућивање обавештења";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сервер је деактивисан";
@@ -321,7 +321,7 @@
 "accountPage.usernameRegisterAction" = "Registruj se";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "Криптован рачун";
+"accountPage.createPassword" = "Шифруј налог";
 "accountPage.changePassword" = "Променити лозинку";
 "accountPage.currentPasswordPlaceholder" = "Унесите тренутни лозинки";
 "accountPage.newPasswordPlaceholder" = "Унесите нову лозинку";
@@ -330,7 +330,7 @@
 "accountPage.enableBoothMode" = "Обезбедите режим бута";
 "accountPage.disableBoothMode" = "Деактивирајте режим бута";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
-"accountPage.boothModeExplanation" = "У режиму бух, историја разговора није спасана и функционалност Jami ограничена правећи исходяће позиве.";
+"accountPage.boothModeExplanation" = "У режиму кабине историја разговора није сачувана и јами функционалност је ограничена упућивањем одлазних позива. Када омогућите режим кабине, сви ваши разговори ће бити уклоњени.";
 "accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Након укључивања режима кабина, сви ваши разговори ће бити уклоњени.";
 "accountPage.peerDiscovery" = "Омогући откривање локалних парњака";
@@ -340,7 +340,7 @@
 "accountPage.turnEnabled" = "Омогућивање ТУРН";
 "accountPage.turnServer" = "Адреса ТУРН";
 "accountPage.turnUsername" = "TURN korisničko ime";
-"accountPage.turnPassword" = "TURN lozinka";
+"accountPage.turnPassword" = "TURN лозинка";
 "accountPage.turnRealm" = "СВЕТИЦА СВЕТ";
 "accountPage.upnpEnabled" = "Користе UPnP";
 "accountPage.security" = "Безбедност";
@@ -349,13 +349,13 @@
 "accountPage.profileHeader" = "Профил";
 "accountPage.profileNameNotSelected" = "Name not selected";
 "accountPage.accountHeader" = "Налог";
-"accountPage.profileName" = "Ime profila";
+"accountPage.profileName" = "Име профила";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Управљајте налогом";
 "accountPage.encryptAccount" = "Шифровање рачуна са лозинком";
-"accountPage.passwordExplanation" = "Jami nalog se kreira i čuva lokalno samo na ovom uređaju kao arhiva koja sadrži ključeve naloga. Pristup arhivi se opciono može zaštititi lozinkom.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordExplanation" = "Јами налог се креира и чува локално само на овом уређају као архива која садржи кључеве налога. Приступ архиви се опционо може заштитити лозинком.";
+"accountPage.passwordsDoNotMatch" = "Лозинке се не поклапају.";
 "accountPage.passwordCreated" = "Lozinka kreirana";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Повезани уређаји";
@@ -432,7 +432,7 @@
 "linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code.";
+"linkDevice.infoQRCode" = "Када будете спремни, скенирајте QR код.";
 "linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
 "linkDevice.connecting" = "Connecting to your new device…";
 "linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";

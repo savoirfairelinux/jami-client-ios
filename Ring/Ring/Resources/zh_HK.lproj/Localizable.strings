@@ -183,7 +183,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "网络错误";
 "createAccount.UsernameNotRegisteredMessage" = "账户已创建，但用户名未注册";
 "createAccount.timeoutTitle" = "已建立帳號";
-"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
+"createAccount.timeoutMessage" = "用户名正在注册中。请稍候...";
 "createAccount.sipConfigure" = "配置现有 SIP 帐户";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "您可以选择一个用户名,以帮助其他人更容易地找到和联系您在Jami.";
@@ -195,10 +195,10 @@
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "导入帐户";
 "linkToAccount.showQrCode" = "二维码";
 "linkToAccount.showPinCode" = "Authentication code";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
+"linkToAccount.actionRequired" = "需要如下操作。\n请确认源设备上的帐户。";
 "linkToAccount.allSet" = "Account imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
@@ -208,8 +208,8 @@
 "linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
 "linkToAccount.exit" = "離開";
 "linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.alertTile" = "要退出吗？";
+"linkToAccount.alertMessage" = "退出将取消导入账户操作。";
 
 // Import from Archive
 "importFromArchive.explanation" = "从本地档案文件导入Jami账户。";
@@ -242,7 +242,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "删除对话";
 "alerts.noMediaPermissionsTitle" = "未授予媒体权限";
 "alerts.noLibraryPermissionsTitle" = "未授予照片库访问权限";
 "alerts.noLocationPermissionsTitle" = "未授予访问位置权限";
@@ -427,20 +427,20 @@
 "linkDevice.title" = "关联新设备";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
+"linkDevice.errorNetwork" = "网络错误。\n请验证您的连接。";
+"linkDevice.errorTimeout" = "操作超时。\n请重试。";
 "linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
 "linkDevice.infoQRCode" = "When ready, scan the QR code.";
 "linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
-"linkDevice.connecting" = "Connecting to your new device…";
+"linkDevice.connecting" = "连接到新设备...";
 "linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
+"linkDevice.newDeviceIP" = "新设备 IP 地址：%1@";
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "账户已成功导入新设备。";
 
 // Contact Page
 "contactPage.startAudioCall" = "发起语音通话";
@@ -578,7 +578,7 @@
 "accessibility.calls.default.hangUpCall" = "挂断";
 "accessibility.calls.default.addParticipant" = "添加参与者";
 "accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.toggleSpeaker" = "打开扬声器";
 "accessibility.calls.default.openConversation" = "打开会话";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "举手";

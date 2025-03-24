@@ -197,19 +197,19 @@
 // Link To Account form
 "linkToAccount.importAccount" = "Importă contul";
 "linkToAccount.showQrCode" = "Cod QR";
-"linkToAccount.showPinCode" = "Authentication code";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
-"linkToAccount.goToAccounts" = "Go to imported account";
-"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
-"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
-"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.showPinCode" = "Cod de autentificare";
+"linkToAccount.actionRequired" = "Acțiune necesară.\nConfirmă contul pe aparatul sursă.";
+"linkToAccount.allSet" = "Cont importat cu succes.";
+"linkToAccount.goToAccounts" = "La contul importat";
+"linkToAccount.exportInstructions" = "Începe exportarea de la aparatul sursă.";
+"linkToAccount.exportInstructionsPath" = "Reglările contului > Asociază un nou aparat.";
+"linkToAccount.scanQrCode" = "Apoi, scanează codul QR";
+"linkToAccount.enterProvidedCode" = "Apoi, introdu codul de autentificare.";
+"linkToAccount.accountLockedWithPassword" = "Contul este protejat cu o parolă.\nIntrodu parola, pentru a continua.";
 "linkToAccount.exit" = "Ieșire";
-"linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.shareMessage" = "Codul tău este: %@";
+"linkToAccount.alertTile" = "Vrei să oprești?";
+"linkToAccount.alertMessage" = "Oprirea va anula importarea contului.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importă contul Jami din fișierul arhivei.";
@@ -426,21 +426,21 @@
 // Link New Device
 "linkDevice.title" = "Asociază un nou aparat";
 "linkDevice.networkError" = "A apărut o eroare de rețea în timpul exportării contului.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
-"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code.";
-"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
-"linkDevice.connecting" = "Connecting to your new device…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
-"linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.errorWrongPassword" = "A apărut o eroare de autentificare.\nVerifică parola.";
+"linkDevice.errorNetwork" = "A apărut o eroare de rețea.\nVerifică conectarea.";
+"linkDevice.errorTimeout" = "Timpul operațiunii a expirat.\nÎncearcă din nou.";
+"linkDevice.errorCode" = "A apărut o eroare în timpul generării codului.\nÎncearcă din nou.";
+"linkDevice.errorWrongData" = "A apărut o eroare în timpul exportării contului.\nÎncearcă din nou.";
+"linkDevice.initialInfo" = "În noul aparat, creează un cont nou.\nAlege Adaugă un cont > Conectează-te de la alt aparat.";
+"linkDevice.infoQRCode" = "Apoi, scanează codul QR";
+"linkDevice.infoCode" = "Apoi, introdu codul și apasă Conectează.";
+"linkDevice.connecting" = "Se conectează la noul aparat…";
+"linkDevice.authenticationInfo" = "Un nou aparat a fost găsit la adresa IP de mai jos. Tu ești?\nPentru a continua transferul contului, apasă „Confirmă”.";
+"linkDevice.newDeviceIP" = "Adresa IP a noului aparat: %1@";
+"linkDevice.code" = "cod";
+"linkDevice.wrongEntry" = "Noul identificator al aparatului nu este recunoscut.\nUrmează instrucțiunile de mai sus.";
+"linkDevice.exportInProgress" = "Exportarea contului către noul aparat este în curs.\nConfirmă importarea în noul aparat";
+"linkDevice.completed" = "Contul a fost importat cu succes în noul aparat.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Începe un apel vocal";
@@ -551,10 +551,10 @@
 "accessibility.conversationRowUnreadCount" = "%@ mesaje necitite.";
 "accessibility.conversationRowBlocked" = "Conversație blocată";
 "accessibility.conversationRowSyncing" = "Sincronizare în curs";
-"accessibility.conversationRowLastMessage" = "Last message at %@";
+"accessibility.conversationRowLastMessage" = "Ultimul mesaj la %@";
 "accessibility.userPresenceOnline" = "Conectat";
 "accessibility.userPresenceAvailable" = "Disponibil";
-"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowPlural" = "Invitații primite: %@ invitații în așteptare";
 "accessibility.pendingRequestsRowSingular" = "Invitație primită: %@ invitație în așteptare";
 "accessibility.pendingRequestsRowHint" = "Atinge de două ori pentru a examina și a răspunde la invitațiile pe care le-ai primit";
 "accessibility.pendingRequestsListBlockUser" = "Blochează expeditorul invitației";
@@ -564,14 +564,14 @@
 "accessibility.messageBubbleEdited" = "Modificat";
 "accessibility.messageBubbleRead" = "Citit";
 "accessibility.messageBubbleUnread" = "Necitit";
-"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
+"accessibility.textNotAvailable" = "Mesaj text gol primit pe %@. Este posibil ca acesta să nu fi fost trimis corect..";
 "accessibility.fileTransferNoName" = "Fișier primit pe %@, numele nu este disponibil";
 "accessibility.inReply" = "Ca răspuns la mesaj";
-"accessibility.text.receivedOn" = "%1@, message received on %2@";
-"accessibility.text.sentOn" = "%1@, message sent on %2@";
-"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
-"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.text.receivedOn" = "%1@, mesaj primit pe %2@";
+"accessibility.text.sentOn" = "%1@, mesaj trimis pe %2@";
+"accessibility.fileTransfer.receivedOn" = "Fișier: %1@ , primit pe %2@";
+"accessibility.fileTransfer.sentOn" = "Fișier: %1@, trimis pe %2@";
+"accessibility.call.lasted" = "Durata %@";
 "accessibility.calls.default.toggleAudio" = "Oprește microfonul";
 "accessibility.calls.default.toggleVideo" = "Pornește camera";
 "accessibility.calls.default.pauseCall" = "Pauză apel";
@@ -602,4 +602,4 @@
 "accessibility.conference.hangup" = "Închide";
 "accessibility.conference.lowerHand" = "Coboară mâna";
 
-"accessibility.account.tokenQRcode" = "Token QR code";
+"accessibility.account.tokenQRcode" = "Codul QR";
