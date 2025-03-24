@@ -429,15 +429,15 @@
 "linkDevice.errorWrongPassword" = "Ndodhi një gabim mirëfilltësimi.\nJu lutemi, verifikoni fjalëkalimin tuaj.";
 "linkDevice.errorNetwork" = "Ndodhi një gabim rrjeti.\nJu lutemi, verifikoni lidhjen tuaj.";
 "linkDevice.errorTimeout" = "Veprimit i mbaroi koha.\nJu lutemi, riprovoni.";
-"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
+"linkDevice.errorCode" = "Ndodhi një gabim teksa prodhohej kodi.\nJu lutemi, riprovoni.";
 "linkDevice.errorWrongData" = "Ndodhi një gabim teksa eksportohej llogaria.\nJu lutemi, riprovoni.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
+"linkDevice.initialInfo" = "Në pajisjen e re, krijoni një llogari të re.\nPërzgjidhni “Shtoni Llogari” -> “Lidhni prej pajisjeje tjetër”.";
 "linkDevice.infoQRCode" = "Kur të jeni gati, skanoni kodin QR.";
 "linkDevice.infoCode" = "Kur të jeni gati, jepni kodin dhe shtypni `Lidhu`.";
 "linkDevice.connecting" = "Po bëhet lidhja te pajisja juaj e re…";
 "linkDevice.authenticationInfo" = "Te adresa IP më poshtë u gjet pajisje e re. A jeni ju?\nQë të vazhdohet shpërngulja e llogarisë, klikoni mbi `Ripohojeni`.";
 "linkDevice.newDeviceIP" = "Adresë IP e pajisjes së re: %1@";
-"linkDevice.code" = "code";
+"linkDevice.code" = "kod";
 "linkDevice.wrongEntry" = "Identifikuesi i pajisjes së re është i papranuar.\nJu lutemi, ndiqni udhëzimin më sipër.";
 "linkDevice.exportInProgress" = "Veprimi i eksportimit të llogarisë te pajisja e re është në kryerje e sipër.\nJu lutemi, ripohoni importimin te pajisja e re.";
 "linkDevice.completed" = "Llogaria u importua me sukses te pajisja e re.";
@@ -551,7 +551,7 @@
 "accessibility.conversationRowUnreadCount" = "%@ mesazhe të palexuar.";
 "accessibility.conversationRowBlocked" = "Biseda u bllokua";
 "accessibility.conversationRowSyncing" = "Njëkohësim në ecuri e sipër";
-"accessibility.conversationRowLastMessage" = "Last message at %@";
+"accessibility.conversationRowLastMessage" = "Mesazhi i fundit më %@";
 "accessibility.userPresenceOnline" = "Në linjë";
 "accessibility.userPresenceAvailable" = "I lirë";
 "accessibility.pendingRequestsRowPlural" = "U morën ftesa: %@ ftesa pezull";
