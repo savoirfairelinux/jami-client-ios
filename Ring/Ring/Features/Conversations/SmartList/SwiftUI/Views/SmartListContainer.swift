@@ -145,6 +145,8 @@ struct SmartListView: View, StateEmittingView {
             stateEmitter?.createAccount()
         }, accountSelectedCallback: {
             showAccountList.toggle()
+        }, closeCallback: {
+            animateAccountListVisibility()
         })
         .zIndex(1)
         .transition(.move(edge: .bottom))

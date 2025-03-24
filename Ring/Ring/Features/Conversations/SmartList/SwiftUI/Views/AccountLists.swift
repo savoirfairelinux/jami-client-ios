@@ -24,6 +24,7 @@ struct AccountLists: View {
     @ObservedObject var model: AccountsViewModel
     var createAccountCallback: (() -> Void)
     var accountSelectedCallback: (() -> Void)
+    var closeCallback: (() -> Void)
     let verticalSpacing: CGFloat = 15
     let maxHeight: CGFloat = 300
     let cornerRadius: CGFloat = 16
@@ -55,7 +56,7 @@ struct AccountLists: View {
                     Spacer() // Pushes the button to the right
 
                     CloseButton(
-                        action: accountSelectedCallback,
+                        action: closeCallback,
                         accessibilityIdentifier: SmartListAccessibilityIdentifiers.closeAccountsList
                     )
                 }
