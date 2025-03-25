@@ -190,7 +190,7 @@ extern "C" {
         return NULL;
     }
 
-   CVPixelBufferRef pixelBuffer = NULL;
+    CVPixelBufferRef pixelBuffer = NULL;
 
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
                              @(frame->linesize[0]), kCVPixelBufferBytesPerRowAlignmentKey,
@@ -203,14 +203,21 @@ extern "C" {
                                   (__bridge CFDictionaryRef)(options),
                                   &pixelBuffer);
 
-    if (ret < 0) {
-        return nil;
+    if (ret < 0 || pixelBuffer == NULL) {
+        return NULL;
     }
 
-    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    CVReturn lockStatus = CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    if (lockStatus != kCVReturnSuccess) {
+        CVPixelBufferRelease(pixelBuffer);
+        return NULL;
+    }
+    
     size_t bytePerRowY = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
     size_t bytesPerRowUV = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
-    uint8_t*  base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0));
+    uint8_t* base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0));
+    
+    // Copy Y plane
     if (bytePerRowY == frame->linesize[0]) {
         memcpy(base, frame->data[0], bytePerRowY * frame->height);
     } else {
@@ -220,46 +227,69 @@ extern "C" {
                     destLinesize: bytePerRowY
                           height: frame->height];
     }
+    
+    // Handle UV planes
+    base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1));
+    
     if ((AVPixelFormat)frame->format == AV_PIX_FMT_NV12) {
-        base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1));
-        if (bytesPerRowUV == frame->linesize[0]) {
+        // NV12 format: UV planes are already interleaved
+        if (bytesPerRowUV == frame->linesize[1]) {
             memcpy(base, frame->data[1], bytesPerRowUV * frame->height/2);
         } else {
             [Utils copyLineByLineSrc: frame->data[1]
                               toDest: base
-                         srcLinesize: frame->linesize[0]
+                         srcLinesize: frame->linesize[1]
                         destLinesize: bytesPerRowUV
                               height: frame->height/2];
         }
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
-        return pixelBuffer;
-    }
-    base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1));
-    // pixelbuffer does not have a padding
-    if (bytesPerRowUV == frame->linesize[1] * 2) {
-        for(size_t i = 0; i < frame->height / 2 * bytesPerRowUV / 2; i++ ) {
-            *base++ = frame->data[1][i];
-            *base++ = frame->data[2][i];
-        }
     } else {
-        uint32_t size = frame->linesize[1] * frame->height / 2;
-        uint8_t* dstData = new uint8_t[2 * size];
-        for (int i = 0; i < 2 * size; i++){
-            if (i % 2 == 0){
-                dstData[i] = frame->data[1][i/2];
-            }else {
-                dstData[i] = frame->data[2][i/2];
+        // YUV420P format: Need to interleave U and V planes
+        if (bytesPerRowUV == frame->linesize[1] * 2) {
+            // Interleave U and V planes directly into destination
+            for(size_t i = 0; i < frame->height / 2; i++) {
+                uint8_t* srcU = frame->data[1] + i * frame->linesize[1];
+                uint8_t* srcV = frame->data[2] + i * frame->linesize[2];
+                uint8_t* dst = base + i * bytesPerRowUV;
+                
+                for(size_t j = 0; j < frame->width / 2; j++) {
+                    *dst++ = *srcU++;
+                    *dst++ = *srcV++;
+                }
             }
+        } else {
+            // Allocate buffer for interleaved data, copy then free
+            size_t rowSize = frame->width / 2 * 2; // Each UV pair is 2 bytes
+            uint8_t* tempBuffer = new uint8_t[rowSize * frame->height / 2];
+            
+            if (!tempBuffer) {
+                CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+                CVPixelBufferRelease(pixelBuffer);
+                return NULL;
+            }
+            
+            // Interleave U and V data
+            for (size_t i = 0; i < frame->height / 2; i++) {
+                uint8_t* srcU = frame->data[1] + i * frame->linesize[1];
+                uint8_t* srcV = frame->data[2] + i * frame->linesize[2];
+                uint8_t* dst = tempBuffer + i * rowSize;
+                
+                for (size_t j = 0; j < frame->width / 2; j++) {
+                    *dst++ = *srcU++;
+                    *dst++ = *srcV++;
+                }
+            }
+            
+            // Copy interleaved data to destination
+            [Utils copyLineByLineSrc: tempBuffer
+                              toDest: base
+                         srcLinesize: rowSize
+                        destLinesize: bytesPerRowUV
+                              height: frame->height/2];
+            
+            delete[] tempBuffer;
         }
-        [Utils copyLineByLineSrc: dstData
-                          toDest: base
-                     srcLinesize: frame->linesize[1] * 2
-                    destLinesize: bytesPerRowUV
-                          height: frame->height/2];
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
-        free(dstData);
-        return pixelBuffer;
     }
+    
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
     return pixelBuffer;
 }

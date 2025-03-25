@@ -196,24 +196,36 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                         self.videoRunning.accept(false)
                         return
                     }
+                    
+                    let radiansValue = self.radians(from: info.rotation)
+                    let needsRotationUpdate = self.currentRadiants != radiansValue
+                    
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
-                        let radiansValue = self.radians(from: info.rotation)
-                        if self.currentRadiants != radiansValue {
+                        
+                        if needsRotationUpdate {
                             self.currentRadiants = radiansValue
                             var transform = CGAffineTransform.identity
                             transform = transform.rotated(by: radiansValue)
+                            
                             self.gridDisplayLayer.setAffineTransform(transform)
                             self.mainDisplayLayer.setAffineTransform(transform)
-                            if let container = self.mainDisplayLayer.superlayer?.delegate as? UIView, container.bounds != self.mainDisplayLayer.frame {
+                            
+                            if let container = self.mainDisplayLayer.superlayer?.delegate as? UIView,
+                               container.bounds != self.mainDisplayLayer.frame {
                                 CATransaction.begin()
                                 CATransaction.setDisableActions(true)
                                 self.mainDisplayLayer.frame = container.bounds
                                 CATransaction.commit()
                             }
                         }
-                        self.mainDisplayLayer.enqueue(image)
-                        self.gridDisplayLayer.enqueue(image)
+
+                        if self.notActiveParticipant {
+                            self.gridDisplayLayer.enqueue(image)
+                        } else {
+                            self.mainDisplayLayer.enqueue(image)
+                        }
+
                         self.videoRunning.accept(true)
                     }
                 })
