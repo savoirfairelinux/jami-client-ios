@@ -28,22 +28,22 @@ enum IndicatorOrientation {
     case horizontal
 }
 
-struct Indicator: View {
-    let orientation: IndicatorOrientation
-
-    var body: some View {
-        switch orientation {
-        case .vertical:
-            RoundedRectangle(cornerRadius: 5)
-                .fill(Color(UIColor.lightGray))
-                .frame(width: 5, height: 60)
-        case .horizontal:
-            RoundedRectangle(cornerRadius: 5)
-                .fill(Color(UIColor.lightGray))
-                .frame(width: 60, height: 5)
-        }
-    }
-}
+//struct Indicator: View {
+//    let orientation: IndicatorOrientation
+//
+//    var body: some View {
+//        switch orientation {
+//        case .vertical:
+//            RoundedRectangle(cornerRadius: 5)
+//                .fill(Color(UIColor.lightGray))
+//                .frame(width: 5, height: 60)
+//        case .horizontal:
+//            RoundedRectangle(cornerRadius: 5)
+//                .fill(Color(UIColor.lightGray))
+//                .frame(width: 60, height: 5)
+//        }
+//    }
+//}
 
 struct SizePreferenceKey: PreferenceKey {
     static var defaultValue: CGSize = .zero
