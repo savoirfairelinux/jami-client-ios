@@ -46,7 +46,7 @@ struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
 
     func makeUIView(context: Context) -> UIVisualEffectView {
-        return UIVisualEffectView()
+        return UIVisualEffectView(effect: effect)
     }
 
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
@@ -61,9 +61,10 @@ struct ActionsView<Content: View>: View {
     @SwiftUI.State var expanded: Bool = false
     let minHeight: CGFloat = 120
     let indicatorWidth: CGFloat = 60
-    let radius: CGFloat = 40
+    let radius: CGFloat = 28
     let snapRatio: CGFloat = 0.25
     let overshootValue: CGFloat = 0
+    let stretchLimit: CGFloat = 30
 
     init(maxHeight: Binding<CGFloat>, visible: Binding<Bool>, @ViewBuilder content: () -> Content) {
         self._maxHeight = maxHeight
@@ -79,32 +80,59 @@ struct ActionsView<Content: View>: View {
 
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
-                Color.black
-                    .opacity(0.5)
-                VisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))
-                VStack(spacing: 0) {
-                    Indicator(orientation: .horizontal).padding(ActionsConstants.indicatorPadding)
-                    self.content
+            ZStack(alignment: .bottom) {
+                if visible {
+                    Color.black
+                        .opacity(0.2)
+                        .ignoresSafeArea()
+                        .transition(.opacity)
+                        .animation(.easeInOut(duration: 0.3), value: visible)
+                        .onTapGesture {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                visible = false
+                            }
+                        }
                 }
-            }
-            .frame(width: geometry.size.width, height: self.maxHeight + overshootValue, alignment: .top)
-            .cornerRadius(radius: radius, corners: [.topLeft, .topRight])
-            .frame(height: geometry.size.height, alignment: .bottom)
-            .offset(y: max(self.offset + self.translation, 0))
-            .animation(.interactiveSpring(), value: expanded)
-            .animation(.interactiveSpring(), value: translation)
-            .gesture(
-                DragGesture().updating(self.$translation) { value, state, _ in
-                    state = value.translation.height
-                }
-                .onEnded { value in
-                    let snapDistance = self.maxHeight * snapRatio
-                    guard abs(value.translation.height) > snapDistance else {
-                        return
+
+                ZStack(alignment: .bottom) {
+                    VisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))
+                        .edgesIgnoringSafeArea(.bottom)
+                        .frame(
+                            width: geometry.size.width,
+                            height: maxHeight + (expanded && translation < 0 ? min(-translation * 0.5, 40) : 0)
+                        )
+
+                    VStack(spacing: 0) {
+                        Indicator(orientation: .horizontal)
+                            .padding(.top, 12)
+                            .padding(.bottom, 8)
+
+                        self.content
+                            .padding(.top, 4)
                     }
-                    self.expanded = value.translation.height < 0
+                    .frame(width: geometry.size.width, height: maxHeight)
+                    .offset(y: expanded && translation < 0 ? max(translation * 0.2, -15) : 0)
                 }
+                .background(Color.black.opacity(0.6))
+                .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
+                .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: -3)
+                .offset(y: max(self.offset + applyResistance(to: translation), 0))
+                .animation(.easeInOut(duration: 0.3), value: visible)
+            }
+            .frame(height: geometry.size.height, alignment: .bottom)
+            .animation(.interactiveSpring(response: 0.35, dampingFraction: 0.7), value: expanded)
+            .animation(.interactiveSpring(response: 0.35, dampingFraction: 0.7), value: translation)
+            .gesture(
+                DragGesture()
+                    .updating($translation) { value, state, _ in
+                        state = value.translation.height
+                    }
+                    .onEnded { value in
+                        let snapDistance = self.maxHeight * snapRatio
+                        if abs(value.translation.height) > snapDistance {
+                            self.expanded = value.translation.height < 0 && maxHeight > minHeight * 1.5
+                        }
+                    }
             )
         }
         .onChange(of: visible) { newValue in
@@ -112,11 +140,32 @@ struct ActionsView<Content: View>: View {
                 self.expanded = false
             }
         }
-        .onTapGesture {
-            withAnimation {
-                visible.toggle()
-            }
+    }
+
+    private func applyResistance(to translation: CGFloat) -> CGFloat {
+        if expanded && translation < 0 {
+            let normalizedTranslation = min(abs(translation) / stretchLimit, 1.0)
+            let resistance = 1.0 - normalizedTranslation * normalizedTranslation * 0.4
+            return translation * resistance
         }
+
+        if !expanded && translation > 0 {
+            let normalizedTranslation = min(translation / stretchLimit, 1.0)
+            let resistance = 1.0 - normalizedTranslation * normalizedTranslation * 0.4
+            return translation * resistance
+        }
+
+        return translation
+    }
+}
+
+struct RoundedCorners: Shape {
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
     }
 }
 
@@ -130,23 +179,31 @@ struct BottomSheetContentView: View {
     private var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
             if idiom == .pad {
                 createButtonRow(buttons: model.buttons)
                     .padding(.bottom, margin)
+                    .padding(.top, margin * 0.5)
             } else {
                 createButtonRow(buttons: model.firstLineButtons)
                     .padding(.bottom, margin)
+                    .padding(.top, margin * 0.5)
                 createButtonRow(buttons: model.secondLineButtons)
-                    .padding(.bottom, margin)
             }
+
+            Divider()
+                .background(Color.white.opacity(0.2))
+                .padding()
             ParticipantInfoListView(participants: $participants)
+
+            // Pending calls section
             if !pending.isEmpty {
                 Divider()
+                    .background(Color.white.opacity(0.2))
+                    .padding()
                 PendingInfoListView(pending: $pending)
             }
         }
-        .cornerRadius(radius: 40, corners: [.topLeft, .topRight])
         .padding(.bottom, margin)
         .background(
             GeometryReader { innerGeometry in
@@ -191,27 +248,35 @@ struct CustomButtonView: View {
 
 struct CallButtonView: View {
     @ObservedObject var buttonInfo: ButtonInfoWrapper
-    var size: CGFloat = 45
+    var size: CGFloat = 46
     var margin: CGFloat = 5
 
     var body: some View {
         Image(systemName: buttonInfo.name)
             .imageScale(.large)
+            .font(.system(size: 18, weight: .medium))
             .foregroundColor(buttonInfo.disabled ? .gray : .white)
             .frame(width: size, height: size)
             .background(buttonInfo.background)
             .clipShape(Circle())
             .overlay(
                 Circle()
-                    .stroke(buttonInfo.disabled ? .gray : buttonInfo.stroke, lineWidth: 2)
+                    .stroke(
+                        buttonInfo.disabled ?
+                            Color.gray.opacity(0.3) :
+                            buttonInfo.stroke.opacity(0.8),
+                        lineWidth: 2
+                    )
             )
+            .shadow(color: buttonInfo.disabled ? .clear : buttonInfo.stroke.opacity(0.3),
+                    radius: 4, x: 0, y: 2)
             .frame(width: size + margin, height: size + margin)
     }
 }
 
 struct ParticipantActionView: View {
     @ObservedObject var buttonInfo: ButtonInfoWrapper
-    var size: CGFloat = 40
+    var size: CGFloat = 36
 
     var body: some View {
         let image: Image
@@ -221,18 +286,20 @@ struct ParticipantActionView: View {
             image = Image(buttonInfo.name)
         }
         return image
-            .imageScale(.large)
+            .imageScale(.medium)
+            .font(.system(size: 14, weight: .medium))
             .foregroundColor(buttonInfo.imageColor)
             .frame(width: size, height: size)
             .background(buttonInfo.background)
             .clipShape(Circle())
+            .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
     }
 }
 
 struct ParticipantInfoListView: View {
     @Binding var participants: [ParticipantViewModel]
     @SwiftUI.State var contentHeight: CGFloat = 0
-    let spacing: CGFloat = 40
+    let spacing: CGFloat = 20
     let margin: CGFloat = 20
 
     var body: some View {
@@ -273,7 +340,7 @@ struct ParticipantInfoListView: View {
 struct PendingInfoListView: View {
     @Binding var pending: [PendingConferenceCall]
     @SwiftUI.State var contentHeight: CGFloat = 0
-    let spacing: CGFloat = 40
+    let spacing: CGFloat = 20
     let margin: CGFloat = 20
     var size: CGFloat = 30
 
@@ -288,8 +355,10 @@ struct PendingInfoListView: View {
                                 HStack(spacing: margin) {
                                     Image(uiImage: participant.avatar)
                                         .resizable()
+                                        .aspectRatio(contentMode: .fill)
                                         .frame(width: 35, height: 35)
-                                        .mask(Circle())
+                                        .clipShape(Circle())
+
                                     Text(participant.name)
                                         .font(.footnote)
                                         .foregroundColor(.white)
@@ -334,7 +403,7 @@ struct PendingInfoListView: View {
 
 struct ParticipantInfoRowView: View {
     @ObservedObject var participant: ParticipantViewModel
-    var size: CGFloat = 35
+    var size: CGFloat = 40
     let margin: CGFloat = 20
 
     var body: some View {
@@ -342,9 +411,10 @@ struct ParticipantInfoRowView: View {
             HStack(spacing: margin) {
                 Image(uiImage: participant.avatar)
                     .resizable()
-                    .scaledToFill()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: size, height: size)
-                    .mask(Circle())
+                    .clipShape(Circle())
+
                 Text(participant.name)
                     .font(.footnote)
                     .foregroundColor(.white)

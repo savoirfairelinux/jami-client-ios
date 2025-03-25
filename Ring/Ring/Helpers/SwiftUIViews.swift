@@ -32,16 +32,12 @@ struct Indicator: View {
     let orientation: IndicatorOrientation
 
     var body: some View {
-        switch orientation {
-        case .vertical:
-            RoundedRectangle(cornerRadius: 5)
-                .fill(Color(UIColor.lightGray))
-                .frame(width: 5, height: 60)
-        case .horizontal:
-            RoundedRectangle(cornerRadius: 5)
-                .fill(Color(UIColor.lightGray))
-                .frame(width: 60, height: 5)
-        }
+        RoundedRectangle(cornerRadius: ActionsConstants.indicatorHeight / 2)
+            .fill(Color.white.opacity(0.6))
+            .frame(
+                width: orientation == .horizontal ? 60 : ActionsConstants.indicatorHeight,
+                height: orientation == .horizontal ? ActionsConstants.indicatorHeight : 60
+            )
     }
 }
 

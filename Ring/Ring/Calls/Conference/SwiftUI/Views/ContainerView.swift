@@ -127,12 +127,14 @@ struct ContainerView: View {
             } else if showInitialView {
                 initialAudioCallView()
             }
+
             ActionsView(maxHeight: $maxHeight, visible: $buttonsVisible) {
                 BottomSheetContentView(maxHeight: $maxHeight, model: model.actionsViewModel, participants: $model.participants, pending: $model.pending)
             }
         }
         .background(Color.black)
         .ignoresSafeArea()
+        .contentShape(Rectangle())
         .onTapGesture {
             withAnimation {
                 buttonsVisible.toggle()
