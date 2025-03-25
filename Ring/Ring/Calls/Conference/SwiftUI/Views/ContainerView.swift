@@ -47,28 +47,76 @@ struct Avatar: View {
 
 struct PulsatingAvatarView: View {
     var size: CGFloat = avatarSize
-    @SwiftUI.State private var scale: CGFloat = 1.0
-    @SwiftUI.State private var opacity: Double = 0.6
     let participant: ParticipantViewModel
-
+    
     var body: some View {
         ZStack {
-            Color.white
+            // First pulsating ring
+            PulsatingRing(color: Color.white.opacity(0.9), 
+                          delay: 0,
+                          duration: 2.0,
+                          maxScale: 1.8)
                 .frame(width: size, height: size)
-                .clipShape(Circle())
-                .scaleEffect(scale)
-                .opacity(opacity)
-                .onAppear {
-                    withAnimation(.easeOut(duration: 1.5)
-                                    .repeatForever(autoreverses: false)) {
-                        opacity = 0
-                        scale = 2.2
-                    }
-                }
+            
+            // Second pulsating ring
+            PulsatingRing(color: Color.white.opacity(0.7), 
+                          delay: 0.5,
+                          duration: 2.0,
+                          maxScale: 1.8)
+                .frame(width: size, height: size)
+            
+            // Third pulsating ring
+            PulsatingRing(color: Color.white.opacity(0.5), 
+                          delay: 1.0,
+                          duration: 2.0,
+                          maxScale: 1.8)
+                .frame(width: size, height: size)
+            
+            // The actual avatar
             Avatar(participant: participant)
         }
-        .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+        .accessibilityHidden(true)
+    }
+}
 
+struct PulsatingRing: View {
+    let color: Color
+    let delay: Double
+    let duration: Double
+    let maxScale: CGFloat
+    
+    @SwiftUI.State private var scale: CGFloat = 1.0
+    @SwiftUI.State private var opacity: Double = 0.8
+    @SwiftUI.State private var rotation: Double = 0
+    
+    var body: some View {
+        ZStack {
+            // Gradient circle with white color
+            RadialGradient(
+                gradient: Gradient(colors: [color, color.opacity(0.1)]),
+                center: .center,
+                startRadius: 0,
+                endRadius: 100
+            )
+            .clipShape(Circle())
+            .scaleEffect(scale)
+            .opacity(opacity)
+            .rotationEffect(.degrees(rotation))
+            .onAppear {
+                // Delay the start of animation
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    withAnimation(
+                        Animation
+                            .easeInOut(duration: duration)
+                            .repeatForever(autoreverses: false)
+                    ) {
+                        scale = maxScale
+                        opacity = 0
+                        rotation = 15
+                    }
+                }
+            }
+        }
     }
 }
 
