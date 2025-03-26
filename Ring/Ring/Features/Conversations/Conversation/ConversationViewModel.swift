@@ -377,10 +377,10 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             guard let participantJamiId = conversation.getParticipants().first?.jamiId,
                   let account = self.accountService.currentAccount else { return }
             /// if in call send sip msg
-            if let call = self.callService.call(participantHash: participantJamiId, accountID: conversation.accountId) {
-                self.callService.sendTextMessage(callID: call.callId, message: content, accountId: account)
-                return
-            }
+//            if let call = self.callService.call(participantHash: participantJamiId, accountID: conversation.accountId) {
+//                self.callService.sendTextMessage(callID: call.callId, message: content, accountId: account)
+//                return
+//            }
             self.conversationsService
                 .sendNonSwarmMessage(withContent: content,
                                      from: account,
@@ -460,11 +460,12 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     func haveCurrentCall() -> Bool {
-        if !self.conversation.isDialog() {
-            return false
-        }
-        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return false }
-        return self.callService.call(participantHash: jamiId, accountID: self.conversation.accountId) != nil
+        return true
+//        if !self.conversation.isDialog() {
+//            return false
+//        }
+//        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return false }
+//        return self.callService.call(participantHash: jamiId, accountID: self.conversation.accountId) != nil
     }
 
     lazy var showCallButton: Observable<Bool> = {
@@ -511,11 +512,11 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     func openCall() {
-        guard let call = self.callService
-                .call(participantHash: self.conversation.getParticipants().first?.jamiId ?? "",
-                      accountID: self.conversation.accountId) else { return }
-
-        self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
+//        guard let call = self.callService
+//                .call(participantHash: self.conversation.getParticipants().first?.jamiId ?? "",
+//                      accountID: self.conversation.accountId) else { return }
+//
+//        self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
     }
 
     deinit {
