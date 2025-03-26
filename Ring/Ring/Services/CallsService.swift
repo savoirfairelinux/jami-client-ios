@@ -25,6 +25,7 @@ import SwiftyBeaver
 import Contacts
 import os
 
+// MARK: - Error definitions
 enum CallServiceError: Error {
     case acceptCallFailed
     case refuseCallFailed
@@ -34,6 +35,7 @@ enum CallServiceError: Error {
     case placeCallFailed
 }
 
+// MARK: - Enums
 enum ConferenceState: String {
     case conferenceCreated
     case conferenceDestroyed
@@ -51,9 +53,88 @@ enum MediaType: String, CustomStringConvertible {
 
 typealias ConferenceUpdates = (conferenceID: String, state: String, calls: Set<String>)
 
+// MARK: - Protocols
+
+// Interface for call management
+protocol CallManaging {
+    func call(callID: String) -> CallModel?
+    func callByUUID(UUID: String) -> CallModel?
+    func accept(call: CallModel?) -> Completable
+    func refuse(callId: String) -> Completable
+    func hangUp(callId: String) -> Completable
+    func hold(callId: String) -> Completable
+    func unhold(callId: String) -> Completable
+    func placeCall(withAccount account: AccountModel,
+                   toParticipantId participantId: String,
+                   userName: String,
+                   videoSource: String,
+                   isAudioOnly: Bool,
+                   withMedia: [[String: String]]) -> Single<CallModel>
+    func answerCall(call: CallModel) -> Bool
+    func stopCall(call: CallModel)
+    func stopPendingCall(callId: String)
+    func playDTMF(code: String)
+    func isCurrentCall() -> Bool
+}
+
+// Interface for conference management
+protocol ConferenceManaging {
+    func joinConference(confID: String, callID: String)
+    func joinCall(firstCallId: String, secondCallId: String)
+    func callAndAddParticipant(participant contactId: String,
+                               toCall callId: String,
+                               withAccount account: AccountModel,
+                               userName: String,
+                               videSource: String,
+                               isAudioOnly: Bool) -> Observable<CallModel>
+    func hangUpCallOrConference(callId: String) -> Completable
+    func isParticipant(participantURI: String?, activeIn conferenceId: String, accountId: String) -> Bool?
+    func isModerator(participantId: String, inConference confId: String) -> Bool
+    func getConferenceParticipants(for conferenceId: String) -> [ConferenceParticipant]?
+    func setActiveParticipant(conferenceId: String, maximixe: Bool, jamiId: String)
+    func setModeratorParticipant(confId: String, participantId: String, active: Bool)
+    func hangupParticipant(confId: String, participantId: String, device: String)
+    func muteStream(confId: String, participantId: String, device: String, accountId: String, streamId: String, state: Bool)
+    func setRaiseHand(confId: String, participantId: String, state: Bool, accountId: String, deviceId: String)
+}
+
+// Interface for message handling
+protocol MessageHandling: VCardSender {
+    func sendTextMessage(callID: String, message: String, accountId: AccountModel)
+    func sendChunk(callID: String, message: [String: String], accountId: String, from: String)
+}
+
+// Interface for media management
+protocol MediaManaging {
+    func getVideoCodec(call: CallModel) -> String?
+    func audioMuted(call callId: String, mute: Bool)
+    func videoMuted(call callId: String, mute: Bool)
+    func callMediaUpdated(call: CallModel)
+    func updateCallMediaIfNeeded(call: CallModel)
+}
+
+// Interface for call adapter observations
+protocol CallsAdapterObserving {
+    func didChangeCallState(withCallId callId: String, state: String, accountId: String, stateCode: NSInteger)
+    func didChangeMediaNegotiationStatus(withCallId callId: String, event: String, withMedia: [[String: String]])
+    func didReceiveMediaChangeRequest(withAccountId accountId: String, callId: String, withMedia: [[String: String]])
+    func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String])
+    func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String, withMedia mediaList: [[String: String]])
+    func callPlacedOnHold(withCallId callId: String, holding: Bool)
+    func conferenceCreated(conference conferenceID: String, accountId: String)
+    func conferenceChanged(conference conferenceID: String, accountId: String, state: String)
+    func conferenceRemoved(conference conferenceID: String)
+    func remoteRecordingChanged(call callId: String, record: Bool)
+    func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]])
+}
+
+// MARK: - Implementations
+
+// Main service that coordinates all call-related activities
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class CallsService: CallsAdapterDelegate, VCardSender {
+class CallsService: CallsAdapterDelegate, VCardSender, CallManaging, ConferenceManaging, MessageHandling, MediaManaging, CallsAdapterObserving {
+    // MARK: - Properties
     private let disposeBag = DisposeBag()
     private let callsAdapter: CallsAdapter
     private let log = SwiftyBeaver.self
@@ -74,7 +155,9 @@ class CallsService: CallsAdapterDelegate, VCardSender {
 
     let currentConferenceEvent: BehaviorRelay<ConferenceUpdates> = BehaviorRelay<ConferenceUpdates>(value: ConferenceUpdates("", "", Set<String>()))
     let inConferenceCalls = PublishSubject<CallModel>()
+    var conferenceInfos = [String: [ConferenceParticipant]]()
 
+    // MARK: - Initialization
     init(withCallsAdapter callsAdapter: CallsAdapter, dbManager: DBManager) {
         self.callsAdapter = callsAdapter
         self.responseStream.disposed(by: disposeBag)
@@ -93,6 +176,8 @@ class CallsService: CallsAdapterDelegate, VCardSender {
             })
             .disposed(by: self.disposeBag)
     }
+
+    // MARK: - Call handling
 
     func currentCall(callId: String) -> Observable<CallModel> {
         return self.currentCallsEvents
@@ -131,6 +216,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         }.first
     }
 
+    // MARK: - Media management
     func getVideoCodec(call: CallModel) -> String? {
         let callDetails = self.callsAdapter.callDetails(withCallId: call.callId, accountId: call.accountId)
         return callDetails?[CallDetailKey.videoCodec.rawValue]
@@ -145,6 +231,54 @@ class CallsService: CallsAdapterDelegate, VCardSender {
             }.first
     }
 
+    func audioMuted(call callId: String, mute: Bool) {
+        guard let call = self.calls.value[callId] else {
+            return
+        }
+        call.audioMuted = mute
+        self.currentCallsEvents.onNext(call)
+    }
+
+    func remoteRecordingChanged(call callId: String, record: Bool) {
+        guard let call = self.calls.value[callId] else {
+            return
+        }
+        call.callRecorded = record
+        self.currentCallsEvents.onNext(call)
+    }
+
+    func videoMuted(call callId: String, mute: Bool) {
+        guard let call = self.calls.value[callId] else {
+            return
+        }
+        call.videoMuted = mute
+        self.currentCallsEvents.onNext(call)
+    }
+
+    func callMediaUpdated(call: CallModel) {
+        var mediaList = call.mediaList
+        if mediaList.isEmpty {
+            guard let attributes = self.callsAdapter.currentMediaList(withCallId: call.callId, accountId: call.accountId) else { return }
+            call.update(withDictionary: [:], withMedia: attributes)
+            mediaList = call.mediaList
+        }
+        if let callDictionary = self.callsAdapter.callDetails(withCallId: call.callId, accountId: call.accountId) {
+            call.update(withDictionary: callDictionary, withMedia: mediaList)
+            self.currentCallsEvents.onNext(call)
+        }
+    }
+
+    func updateCallMediaIfNeeded(call: CallModel) {
+        var mediaList = call.mediaList
+        if mediaList.isEmpty {
+            guard let attributes = self.callsAdapter.currentMediaList(withCallId: call.callId, accountId: call.accountId) else { return }
+            call.update(withDictionary: [:], withMedia: attributes)
+            mediaList = call.mediaList
+        }
+        call.mediaList = mediaList
+    }
+
+    // MARK: - Call actions
     func accept(call: CallModel?) -> Completable {
         return Completable.create(subscribe: { completable in
             guard let callId = call?.callId else {
@@ -185,66 +319,6 @@ class CallsService: CallsAdapterDelegate, VCardSender {
             self.pendingConferences[firstCallId] = [secondCallId]
         }
         self.callsAdapter.joinCall(firstCallId, second: secondCallId, accountId: firstCall.accountId, account2Id: secondCall.accountId)
-    }
-
-    func isParticipant(participantURI: String?, activeIn conferenceId: String, accountId: String) -> Bool? {
-        guard let uri = participantURI,
-              let participantsArray = self.callsAdapter.getConferenceInfo(conferenceId, accountId: accountId) as? [[String: String]] else { return nil }
-        let participants = self.arrayToConferenceParticipants(participants: participantsArray, onlyURIAndActive: true)
-        for participant in participants where participant.uri?.filterOutHost() == uri.filterOutHost() {
-            return participant.isActive
-        }
-        return nil
-    }
-
-    private func arrayToConferenceParticipants(participants: [[String: String]], onlyURIAndActive: Bool) -> [ConferenceParticipant] {
-        var conferenceParticipants = [ConferenceParticipant]()
-        for participant in participants {
-            conferenceParticipants.append(ConferenceParticipant(info: participant, onlyURIAndActive: onlyURIAndActive))
-        }
-        return conferenceParticipants
-    }
-
-    var conferenceInfos = [String: [ConferenceParticipant]]()
-
-    func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]]) {
-        let participants = self.arrayToConferenceParticipants(participants: info, onlyURIAndActive: false)
-        self.conferenceInfos[conferenceID] = participants
-        currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
-    }
-
-    func isModerator(participantId: String, inConference confId: String) -> Bool {
-        let participants = self.conferenceInfos[confId]
-        let participant = participants?.filter({ confParticipant in
-            return confParticipant.uri?.filterOutHost() == participantId.filterOutHost()
-        }).first
-        return participant?.isModerator ?? false
-    }
-
-    func getConferenceParticipants(for conferenceId: String) -> [ConferenceParticipant]? {
-        return conferenceInfos[conferenceId]
-    }
-
-    func setActiveParticipant(conferenceId: String, maximixe: Bool, jamiId: String) {
-        guard let conference = self.call(callID: conferenceId),
-              let isActive = self.isParticipant(participantURI: jamiId, activeIn: conferenceId, accountId: conference.accountId) else { return }
-        let newLayout = isActive ? self.getNewLayoutForActiveParticipant(currentLayout: conference.layout, maximixe: maximixe) : .oneWithSmal
-        conference.layout = newLayout
-        self.callsAdapter.setActiveParticipant(jamiId, forConference: conferenceId, accountId: conference.accountId)
-        self.callsAdapter.setConferenceLayout(newLayout.rawValue, forConference: conferenceId, accountId: conference.accountId)
-    }
-
-    private func getNewLayoutForActiveParticipant(currentLayout: CallLayout, maximixe: Bool) -> CallLayout {
-        var newLayout = CallLayout.grid
-        switch currentLayout {
-        case .grid:
-            newLayout = .oneWithSmal
-        case .oneWithSmal:
-            newLayout = maximixe ? .one : .grid
-        case .one:
-            newLayout = .oneWithSmal
-        }
-        return newLayout
     }
 
     func callAndAddParticipant(participant contactId: String,
@@ -300,6 +374,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         guard let call = self.call(callID: callId) else { return }
         self.stopCall(call: call)
     }
+
     func answerCall(call: CallModel) -> Bool {
         NSLog("call service answerCall %@", call.callId)
         return self.callsAdapter.acceptCall(withId: call.callId, accountId: call.accountId, withMedia: call.mediaList)
@@ -436,62 +511,130 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         self.callsAdapter.playDTMF(code)
     }
 
-    func sendVCard(callID: String, accountID: String) {
-        if accountID.isEmpty || callID.isEmpty {
+    // MARK: - Conference handling
+    func isCurrentCall() -> Bool {
+        for call in self.calls.value.values {
+            if call.state == .current || call.state == .hold ||
+                call.state == .unhold || call.state == .ringing {
+                return true
+            }
+        }
+        return false
+    }
+
+    func callPlacedOnHold(withCallId callId: String, holding: Bool) {
+        guard let call = self.calls.value[callId] else {
             return
         }
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else { return }
-            guard let profile = self.dbManager.accountVCard(for: accountID) else { return }
-            let jamiId = profile.uri
-            VCardUtils.sendVCard(card: profile,
-                                 callID: callID,
-                                 accountID: accountID,
-                                 sender: self, from: jamiId)
-        }
+        call.peerHolding = holding
+        self.currentCallsEvents.onNext(call)
     }
 
-    func sendTextMessage(callID: String, message: String, accountId: AccountModel) {
-        guard let call = self.call(callID: callID) else { return }
-        let messageDictionary = ["text/plain": message]
-        self.callsAdapter.sendTextMessage(withCallID: callID,
-                                          accountId: accountId.id,
-                                          message: messageDictionary,
-                                          from: call.paricipantHash(),
-                                          isMixed: true)
-        let accountHelper = AccountModelHelper(withAccount: accountId)
-        let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
-        let contactUri = JamiURI.init(schema: type, infoHash: call.participantUri, account: accountId)
-        guard let stringUri = contactUri.uriString else {
+    func conferenceCreated(conference conferenceID: String, accountId: String) {
+        let conferenceCalls = Set(self.callsAdapter
+                                    .getConferenceCalls(conferenceID, accountId: accountId))
+        if conferenceCalls.isEmpty {
+            // no calls attached to a conference. Wait until conference changed to check the calls.
+            createdConferences.insert(conferenceID)
             return
         }
-        if let uri = accountHelper.uri {
-            var event = ServiceEvent(withEventType: .newOutgoingMessage)
-            event.addEventInput(.content, value: message)
-            event.addEventInput(.peerUri, value: stringUri)
-            event.addEventInput(.accountId, value: accountId.id)
-            event.addEventInput(.accountUri, value: uri)
-
-            self.newMessagesStream.onNext(event)
+        createdConferences.remove(conferenceID)
+        self.pendingConferences.forEach { pending in
+            if !conferenceCalls.contains(pending.key) ||
+                conferenceCalls.isDisjoint(with: pending.value) {
+                return
+            }
+            let callId = pending.key
+            var values = pending.value
+            // update pending conferences
+            // replace callID by new Conference ID, and remove calls that was already added to onference
+            values.subtract(conferenceCalls)
+            self.pendingConferences[callId] = nil
+            if !values.isEmpty {
+                self.pendingConferences[conferenceID] = values
+            }
+            // update calls and add conference
+            self.call(callID: callId)?.participantsCallId = conferenceCalls
+            values.forEach { (call) in
+                self.call(callID: call)?.participantsCallId = conferenceCalls
+            }
+            guard var callDetails = self.callsAdapter.getConferenceDetails(conferenceID, accountId: accountId) else { return }
+            callDetails[CallDetailKey.accountIdKey.rawValue] = self.call(callID: callId)?.accountId
+            callDetails[CallDetailKey.audioOnlyKey.rawValue] = self.call(callID: callId)?.isAudioOnly.toString()
+            let mediaList = [[String: String]]()
+            let conf = CallModel(withCallId: conferenceID, callDetails: callDetails, withMedia: mediaList)
+            conf.participantsCallId = conferenceCalls
+            var value = self.calls.value
+            value[conferenceID] = conf
+            self.calls.accept(value)
+            currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.conferenceCreated.rawValue, conferenceCalls))
         }
     }
 
-    func sendChunk(callID: String, message: [String: String], accountId: String, from: String) {
-        self.callsAdapter.sendTextMessage(withCallID: callID,
-                                          accountId: accountId,
-                                          message: message,
-                                          from: from,
-                                          isMixed: true)
-    }
-
-    func updateCallUUID(callId: String, callUUID: String) {
-        if let call = self.call(callID: callId), let uuid = UUID(uuidString: callUUID) {
-            call.callUUID = uuid
+    func conferenceChanged(conference conferenceID: String, accountId: String, state: String) {
+        if createdConferences.contains(conferenceID) {
+            // a conference was created but calls was not attached to a conference. In this case a conference should be added first.
+            self.conferenceCreated(conference: conferenceID, accountId: accountId)
+            return
+        }
+        guard let conference = self.call(callID: conferenceID) else { return }
+        let conferenceCalls = Set(self.callsAdapter
+                                    .getConferenceCalls(conferenceID, accountId: conference.accountId))
+        conference.participantsCallId = conferenceCalls
+        conferenceCalls.forEach { (callId) in
+            guard let call = self.call(callID: callId) else { return }
+            call.participantsCallId = conferenceCalls
+            var values = self.calls.value
+            values[callId] = call
+            self.calls.accept(values)
         }
     }
 
-    // MARK: CallsAdapterDelegate
-    // swiftlint:disable cyclomatic_complexity
+    func conferenceRemoved(conference conferenceID: String) {
+        guard let conference = self.call(callID: conferenceID) else { return }
+        self.conferenceInfos[conferenceID] = nil
+        self.currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
+        self.currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.conferenceDestroyed.rawValue, conference.participantsCallId))
+        var values = self.calls.value
+        values[conferenceID] = nil
+        self.calls.accept(values)
+    }
+
+    func updateConferences(callId: String) {
+        let conferences = self.calls.value.keys.filter { (callID) -> Bool in
+            guard let callModel = self.calls.value[callID] else { return false }
+            return callModel.participantsCallId.count > 1 && callModel.participantsCallId.contains(callId)
+        }
+
+        guard let conferenceID = conferences.first, let conference = call(callID: conferenceID) else { return }
+        let conferenceCalls = Set(self.callsAdapter
+                                    .getConferenceCalls(conferenceID, accountId: conference.accountId))
+        conference.participantsCallId = conferenceCalls
+        conferenceCalls.forEach { (callID) in
+            self.call(callID: callID)?.participantsCallId = conferenceCalls
+        }
+    }
+
+    func setModeratorParticipant(confId: String, participantId: String, active: Bool) {
+        guard let conference = call(callID: confId) else { return }
+        self.callsAdapter.setConferenceModerator(participantId, forConference: confId, accountId: conference.accountId, active: active)
+    }
+
+    func hangupParticipant(confId: String, participantId: String, device: String) {
+        guard let conference = call(callID: confId) else { return }
+        self.callsAdapter.hangupConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId, deviceId: device)
+    }
+
+    func muteStream(confId: String, participantId: String, device: String, accountId: String, streamId: String, state: Bool) {
+        self.callsAdapter.muteStream(participantId, forConference: confId, accountId: accountId, deviceId: device, streamId: streamId, state: state)
+    }
+
+    func setRaiseHand(confId: String, participantId: String, state: Bool, accountId: String, deviceId: String) {
+        guard let conference = call(callID: confId) else { return }
+        self.callsAdapter.raiseHand(participantId, forConference: confId, accountId: accountId, deviceId: deviceId, state: state)
+    }
+
+    // MARK: - Call adapter observations
     func didChangeCallState(withCallId callId: String, state: String, accountId: String, stateCode: NSInteger) {
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) {
             // Add or update new call
@@ -638,7 +781,6 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         event.addEventInput(.accountId, value: accountId)
         self.newMessagesStream.onNext(event)
     }
-    // swiftlint:enable cyclomatic_complexity
 
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String, withMedia mediaList: [[String: String]]) {
         os_log("incoming call call service")
@@ -655,172 +797,227 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         }
     }
 
-    func isCurrentCall() -> Bool {
-        for call in self.calls.value.values {
-            if call.state == .current || call.state == .hold ||
-                call.state == .unhold || call.state == .ringing {
-                return true
+    func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]]) {
+        let participants = self.arrayToConferenceParticipants(participants: info, onlyURIAndActive: false)
+        self.conferenceInfos[conferenceID] = participants
+        currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
+    }
+
+    private func arrayToConferenceParticipants(participants: [[String: String]], onlyURIAndActive: Bool) -> [ConferenceParticipant] {
+        var conferenceParticipants = [ConferenceParticipant]()
+        for participant in participants {
+            conferenceParticipants.append(ConferenceParticipant(info: participant, onlyURIAndActive: onlyURIAndActive))
+        }
+        return conferenceParticipants
+    }
+
+    func setActiveParticipant(conferenceId: String, maximixe: Bool, jamiId: String) {
+        guard let conference = self.call(callID: conferenceId),
+              let isActive = self.isParticipant(participantURI: jamiId, activeIn: conferenceId, accountId: conference.accountId) else { return }
+        let newLayout = isActive ? self.getNewLayoutForActiveParticipant(currentLayout: conference.layout, maximixe: maximixe) : .oneWithSmal
+        conference.layout = newLayout
+        self.callsAdapter.setActiveParticipant(jamiId, forConference: conferenceId, accountId: conference.accountId)
+        self.callsAdapter.setConferenceLayout(newLayout.rawValue, forConference: conferenceId, accountId: conference.accountId)
+    }
+
+    private func getNewLayoutForActiveParticipant(currentLayout: CallLayout, maximixe: Bool) -> CallLayout {
+        var newLayout = CallLayout.grid
+        switch currentLayout {
+        case .grid:
+            newLayout = .oneWithSmal
+        case .oneWithSmal:
+            newLayout = maximixe ? .one : .grid
+        case .one:
+            newLayout = .oneWithSmal
+        }
+        return newLayout
+    }
+
+    func isParticipant(participantURI: String?, activeIn conferenceId: String, accountId: String) -> Bool? {
+        guard let uri = participantURI,
+              let participantsArray = self.callsAdapter.getConferenceInfo(conferenceId, accountId: accountId) as? [[String: String]] else { return nil }
+        let participants = self.arrayToConferenceParticipants(participants: participantsArray, onlyURIAndActive: true)
+        for participant in participants where participant.uri?.filterOutHost() == uri.filterOutHost() {
+            return participant.isActive
+        }
+        return nil
+    }
+
+    func updateCallUUID(callId: String, callUUID: String) {
+        if let call = self.call(callID: callId), let uuid = UUID(uuidString: callUUID) {
+            call.callUUID = uuid
+        }
+    }
+
+    // MARK: - Message handling
+    func sendVCard(callID: String, accountID: String) {
+        if accountID.isEmpty || callID.isEmpty {
+            return
+        }
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            guard let profile = self.dbManager.accountVCard(for: accountID) else { return }
+            let jamiId = profile.uri
+            VCardUtils.sendVCard(card: profile,
+                                 callID: callID,
+                                 accountID: accountID,
+                                 sender: self, from: jamiId)
+        }
+    }
+
+    func sendTextMessage(callID: String, message: String, accountId: AccountModel) {
+        guard let call = self.call(callID: callID) else { return }
+        let messageDictionary = ["text/plain": message]
+        self.callsAdapter.sendTextMessage(withCallID: callID,
+                                          accountId: accountId.id,
+                                          message: messageDictionary,
+                                          from: call.paricipantHash(),
+                                          isMixed: true)
+        let accountHelper = AccountModelHelper(withAccount: accountId)
+        let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
+        let contactUri = JamiURI.init(schema: type, infoHash: call.participantUri, account: accountId)
+        guard let stringUri = contactUri.uriString else {
+            return
+        }
+        if let uri = accountHelper.uri {
+            var event = ServiceEvent(withEventType: .newOutgoingMessage)
+            event.addEventInput(.content, value: message)
+            event.addEventInput(.peerUri, value: stringUri)
+            event.addEventInput(.accountId, value: accountId.id)
+            event.addEventInput(.accountUri, value: uri)
+
+            self.newMessagesStream.onNext(event)
+        }
+    }
+
+    func sendChunk(callID: String, message: [String: String], accountId: String, from: String) {
+        self.callsAdapter.sendTextMessage(withCallID: callID,
+                                          accountId: accountId,
+                                          message: message,
+                                          from: from,
+                                          isMixed: true)
+    }
+
+    func isModerator(participantId: String, inConference confId: String) -> Bool {
+        let participants = self.conferenceInfos[confId]
+        let participant = participants?.filter({ confParticipant in
+            return confParticipant.uri?.filterOutHost() == participantId.filterOutHost()
+        }).first
+        return participant?.isModerator ?? false
+    }
+
+    func getConferenceParticipants(for conferenceId: String) -> [ConferenceParticipant]? {
+        return conferenceInfos[conferenceId]
+    }
+}
+
+// MARK: - Factory classes
+
+/// Factory for creating a call model
+/// Follows the Factory Method pattern to create CallModel instances
+class CallModelFactory {
+    static func createCall(withId callId: String, callDetails: [String: String], withMedia mediaList: [[String: String]]) -> CallModel {
+        return CallModel(withCallId: callId, callDetails: callDetails, withMedia: mediaList)
+    }
+
+    static func createOutgoingCall(participantId: String,
+                                   accountId: String,
+                                   userName: String,
+                                   isAudioOnly: Bool,
+                                   withMedia mediaList: [[String: String]]) -> CallModel {
+        var callDetails = [String: String]()
+        callDetails[CallDetailKey.callTypeKey.rawValue] = String(describing: CallType.outgoing)
+        callDetails[CallDetailKey.displayNameKey.rawValue] = userName
+        callDetails[CallDetailKey.accountIdKey.rawValue] = accountId
+        callDetails[CallDetailKey.audioOnlyKey.rawValue] = isAudioOnly.toString()
+        callDetails[CallDetailKey.timeStampStartKey.rawValue] = ""
+
+        let call = CallModel(withCallId: participantId, callDetails: callDetails, withMedia: mediaList)
+        call.state = .unknown
+        call.callType = .outgoing
+        call.participantUri = participantId
+        return call
+    }
+}
+
+/// Factory for creating media attributes
+/// Follows the Factory Method pattern to create media attributes
+class MediaAttributeFactory {
+    static func createAudioMedia() -> [String: String] {
+        var mediaAttribute = [String: String]()
+        mediaAttribute[MediaAttributeKey.mediaType.rawValue] = MediaAttributeValue.audio.rawValue
+        mediaAttribute[MediaAttributeKey.label.rawValue] = "audio_0"
+        mediaAttribute[MediaAttributeKey.enabled.rawValue] = "true"
+        mediaAttribute[MediaAttributeKey.muted.rawValue] = "false"
+        return mediaAttribute
+    }
+
+    static func createVideoMedia(source: String) -> [String: String] {
+        var mediaAttribute = [String: String]()
+        mediaAttribute[MediaAttributeKey.mediaType.rawValue] = MediaAttributeValue.video.rawValue
+        mediaAttribute[MediaAttributeKey.label.rawValue] = "video_0"
+        mediaAttribute[MediaAttributeKey.source.rawValue] = source
+        mediaAttribute[MediaAttributeKey.enabled.rawValue] = "true"
+        mediaAttribute[MediaAttributeKey.muted.rawValue] = "false"
+        return mediaAttribute
+    }
+
+    static func createDefaultMediaList(isAudioOnly: Bool, videoSource: String) -> [[String: String]] {
+        var mediaList = [[String: String]]()
+        mediaList.append(createAudioMedia())
+
+        if !isAudioOnly {
+            mediaList.append(createVideoMedia(source: videoSource))
+        }
+
+        return mediaList
+    }
+}
+
+// MARK: - Extension for refactored call handling
+
+extension CallsService {
+    /// Refactored method to place a call, using factory classes
+    func placeCallRefactored(withAccount account: AccountModel,
+                             toParticipantId participantId: String,
+                             userName: String,
+                             videoSource: String,
+                             isAudioOnly: Bool = false,
+                             withMedia: [[String: String]] = [[String: String]]()) -> Single<CallModel> {
+
+        let mediaList = withMedia.isEmpty ?
+            MediaAttributeFactory.createDefaultMediaList(isAudioOnly: isAudioOnly, videoSource: videoSource) :
+            withMedia
+
+        let call = CallModelFactory.createOutgoingCall(
+            participantId: participantId,
+            accountId: account.id,
+            userName: userName,
+            isAudioOnly: isAudioOnly,
+            withMedia: mediaList
+        )
+
+        return Single<CallModel>.create(subscribe: { [weak self] single in
+            if let self = self,
+               let callId = self.callsAdapter.placeCall(withAccountId: account.id,
+                                                        toParticipantId: participantId,
+                                                        withMedia: mediaList),
+               !callId.isEmpty,
+               let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: account.id) {
+                call.update(withDictionary: callDictionary, withMedia: mediaList)
+                call.participantUri = participantId
+                call.callId = callId
+                call.participantsCallId.removeAll()
+                call.participantsCallId.insert(callId)
+                self.currentCallsEvents.onNext(call)
+                var values = self.calls.value
+                values[callId] = call
+                self.calls.accept(values)
+                single(.success(call))
+            } else {
+                single(.failure(CallServiceError.placeCallFailed))
             }
-        }
-        return false
+            return Disposables.create { }
+        })
     }
-
-    func callPlacedOnHold(withCallId callId: String, holding: Bool) {
-        guard let call = self.calls.value[callId] else {
-            return
-        }
-        call.peerHolding = holding
-        self.currentCallsEvents.onNext(call)
-    }
-
-    func audioMuted(call callId: String, mute: Bool) {
-        guard let call = self.calls.value[callId] else {
-            return
-        }
-        call.audioMuted = mute
-        self.currentCallsEvents.onNext(call)
-    }
-    func remoteRecordingChanged(call callId: String, record: Bool) {
-        guard let call = self.calls.value[callId] else {
-            return
-        }
-        call.callRecorded = record
-        self.currentCallsEvents.onNext(call)
-    }
-
-    func videoMuted(call callId: String, mute: Bool) {
-        guard let call = self.calls.value[callId] else {
-            return
-        }
-        call.videoMuted = mute
-        self.currentCallsEvents.onNext(call)
-    }
-
-    func callMediaUpdated(call: CallModel) {
-        var mediaList = call.mediaList
-        if mediaList.isEmpty {
-            guard let attributes = self.callsAdapter.currentMediaList(withCallId: call.callId, accountId: call.accountId) else { return }
-            call.update(withDictionary: [:], withMedia: attributes)
-            mediaList = call.mediaList
-        }
-        if let callDictionary = self.callsAdapter.callDetails(withCallId: call.callId, accountId: call.accountId) {
-            call.update(withDictionary: callDictionary, withMedia: mediaList)
-            self.currentCallsEvents.onNext(call)
-        }
-    }
-
-    func updateCallMediaIfNeeded(call: CallModel) {
-        var mediaList = call.mediaList
-        if mediaList.isEmpty {
-            guard let attributes = self.callsAdapter.currentMediaList(withCallId: call.callId, accountId: call.accountId) else { return }
-            call.update(withDictionary: [:], withMedia: attributes)
-            mediaList = call.mediaList
-        }
-        call.mediaList = mediaList
-    }
-
-    func conferenceCreated(conference conferenceID: String, accountId: String) {
-        let conferenceCalls = Set(self.callsAdapter
-                                    .getConferenceCalls(conferenceID, accountId: accountId))
-        if conferenceCalls.isEmpty {
-            // no calls attached to a conference. Wait until conference changed to check the calls.
-            createdConferences.insert(conferenceID)
-            return
-        }
-        createdConferences.remove(conferenceID)
-        self.pendingConferences.forEach { pending in
-            if !conferenceCalls.contains(pending.key) ||
-                conferenceCalls.isDisjoint(with: pending.value) {
-                return
-            }
-            let callId = pending.key
-            var values = pending.value
-            // update pending conferences
-            // replace callID by new Conference ID, and remove calls that was already added to onference
-            values.subtract(conferenceCalls)
-            self.pendingConferences[callId] = nil
-            if !values.isEmpty {
-                self.pendingConferences[conferenceID] = values
-            }
-            // update calls and add conference
-            self.call(callID: callId)?.participantsCallId = conferenceCalls
-            values.forEach { (call) in
-                self.call(callID: call)?.participantsCallId = conferenceCalls
-            }
-            guard var callDetails = self.callsAdapter.getConferenceDetails(conferenceID, accountId: accountId) else { return }
-            callDetails[CallDetailKey.accountIdKey.rawValue] = self.call(callID: callId)?.accountId
-            callDetails[CallDetailKey.audioOnlyKey.rawValue] = self.call(callID: callId)?.isAudioOnly.toString()
-            let mediaList = [[String: String]]()
-            let conf = CallModel(withCallId: conferenceID, callDetails: callDetails, withMedia: mediaList)
-            conf.participantsCallId = conferenceCalls
-            var value = self.calls.value
-            value[conferenceID] = conf
-            self.calls.accept(value)
-            currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.conferenceCreated.rawValue, conferenceCalls))
-        }
-    }
-
-    func conferenceChanged(conference conferenceID: String, accountId: String, state: String) {
-        if createdConferences.contains(conferenceID) {
-            // a conference was created but calls was not attached to a conference. In this case a conference should be added first.
-            self.conferenceCreated(conference: conferenceID, accountId: accountId)
-            return
-        }
-        guard let conference = self.call(callID: conferenceID) else { return }
-        let conferenceCalls = Set(self.callsAdapter
-                                    .getConferenceCalls(conferenceID, accountId: conference.accountId))
-        conference.participantsCallId = conferenceCalls
-        conferenceCalls.forEach { (callId) in
-            guard let call = self.call(callID: callId) else { return }
-            call.participantsCallId = conferenceCalls
-            var values = self.calls.value
-            values[callId] = call
-            self.calls.accept(values)
-        }
-    }
-
-    func conferenceRemoved(conference conferenceID: String) {
-        guard let conference = self.call(callID: conferenceID) else { return }
-        self.conferenceInfos[conferenceID] = nil
-        self.currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
-        self.currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.conferenceDestroyed.rawValue, conference.participantsCallId))
-        var values = self.calls.value
-        values[conferenceID] = nil
-        self.calls.accept(values)
-    }
-
-    func updateConferences(callId: String) {
-        let conferences = self.calls.value.keys.filter { (callID) -> Bool in
-            guard let callModel = self.calls.value[callID] else { return false }
-            return callModel.participantsCallId.count > 1 && callModel.participantsCallId.contains(callId)
-        }
-
-        guard let conferenceID = conferences.first, let conference = call(callID: conferenceID) else { return }
-        let conferenceCalls = Set(self.callsAdapter
-                                    .getConferenceCalls(conferenceID, accountId: conference.accountId))
-        conference.participantsCallId = conferenceCalls
-        conferenceCalls.forEach { (callID) in
-            self.call(callID: callID)?.participantsCallId = conferenceCalls
-        }
-    }
-
-    func setModeratorParticipant(confId: String, participantId: String, active: Bool) {
-        guard let conference = call(callID: confId) else { return }
-        self.callsAdapter.setConferenceModerator(participantId, forConference: confId, accountId: conference.accountId, active: active)
-    }
-
-    func hangupParticipant(confId: String, participantId: String, device: String) {
-        guard let conference = call(callID: confId) else { return }
-        self.callsAdapter.hangupConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId, deviceId: device)
-    }
-
-    func muteStream(confId: String, participantId: String, device: String, accountId: String, streamId: String, state: Bool) {
-        self.callsAdapter.muteStream(participantId, forConference: confId, accountId: accountId, deviceId: device, streamId: streamId, state: state)
-    }
-
-    func setRaiseHand(confId: String, participantId: String, state: Bool, accountId: String, deviceId: String) {
-        guard let conference = call(callID: confId) else { return }
-        self.callsAdapter.raiseHand(participantId, forConference: confId, accountId: accountId, deviceId: deviceId, state: state)
-    }
-
 }
