@@ -48,6 +48,10 @@ enum CallState: String {
         }
     }
 
+    func isFinished() -> Bool {
+        return self == .over || self == .hungup || self == .failure
+    }
+
     func isActive() -> Bool {
         return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold || self == .unhold
     }
