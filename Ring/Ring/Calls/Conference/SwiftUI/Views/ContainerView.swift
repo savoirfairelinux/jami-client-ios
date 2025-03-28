@@ -79,8 +79,8 @@ struct ContainerView: View {
     @SwiftUI.State var showTopGridView = true
     @SwiftUI.State private var maxHeight = maxButtonsWidgetHeight
     @SwiftUI.State var buttonsVisible: Bool = true
-    @SwiftUI.State var hasLocalVideo: Bool = false
-    @SwiftUI.State var hasIncomingVideo: Bool = false
+    //    @SwiftUI.State var hasLocalVideo: Bool = false
+    //    @SwiftUI.State var hasIncomingVideo: Bool = false
     @SwiftUI.State var showInitialView: Bool = true
     @SwiftUI.State var audioCallViewIdentifier = "audioCallView_"
     @Namespace var namespace
@@ -115,11 +115,12 @@ struct ContainerView: View {
                 }
             }
             .padding(5)
-            if !hasIncomingVideo && !showInitialView {
+
+            if !model.hasIncomingVideo && !showInitialView {
                 audioCallView()
             }
 
-            if hasLocalVideo {
+            if model.hasLocalVideo {
                 if showInitialView {
                     initialVideoCallView()
                 } else {
@@ -139,28 +140,15 @@ struct ContainerView: View {
                 buttonsVisible.toggle()
             }
         }
-        .onChange(of: model.hasLocalVideo) { newValue in
-            hasLocalVideo = newValue
-        }
-        .onChange(of: model.hasIncomingVideo) { newValue in
-            hasIncomingVideo = newValue
-        }
         .onChange(of: model.callAnswered) { newValue in
             if newValue {
-                if hasLocalVideo {
+                if model.hasLocalVideo {
                     withAnimation(.dragableCaptureViewAnimation()) {
                         showInitialView = false
                     }
                 } else {
                     showInitialView = false
                 }
-            }
-        }
-        .onAppear {
-            hasLocalVideo = model.hasLocalVideo
-            hasIncomingVideo = model.hasIncomingVideo
-            if model.callAnswered {
-                showInitialView = false
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in

@@ -45,7 +45,7 @@ class ContactPickerViewModel: ViewModel {
         }
         return Observable
             .combineLatest(self.contactsService.contacts.asObservable(),
-                           self.callService.calls.asObservable()) {[weak self] (contacts, calls) -> [ContactPickerSection] in
+                           self.callService.calls.observable) {[weak self] (contacts, calls) -> [ContactPickerSection] in
                 var sections = [ContactPickerSection]()
                 guard let self = self else { return sections }
                 guard let currentCall = self.callService.call(callID: self.currentCallId) else { return sections }

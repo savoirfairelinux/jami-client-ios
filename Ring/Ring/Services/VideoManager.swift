@@ -44,7 +44,7 @@ class VideoManager {
             }
             .subscribe { [weak self] _ in
                 guard let self = self else { return }
-                let calls = self.callService.calls.value
+                let calls = self.callService.calls.get()
                 guard calls.count <= 1 else { return }
                 self.videoService.stopCapture(withDevice: "camera://")
                 self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
