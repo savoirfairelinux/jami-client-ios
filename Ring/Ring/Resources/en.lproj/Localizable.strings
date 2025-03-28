@@ -301,6 +301,7 @@
 "calls.muteAudio" = "Mute microphone";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Lower hand";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call?";
 
 // Account Page
 "accountPage.devicesListHeader" = "Devices";

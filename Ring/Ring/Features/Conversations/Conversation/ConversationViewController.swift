@@ -168,6 +168,8 @@ class ConversationViewController: UIViewController,
                     self.importDocument()
                 case .registerTypingIndicator(let typingStatus):
                     self.viewModel.setIsComposingMsg(isComposing: typingStatus)
+                case .joinActiveCall(call: let call, withVideo: let withVideo):
+                        self.viewModel.joinActiveCall(call: call, withVideo: withVideo)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -550,10 +552,10 @@ class ConversationViewController: UIViewController,
             : viewModel.userName.value
 
         // do not show call buttons for swarm with multiple participants
-        if self.viewModel.conversation.getParticipants().count > 1 {
-            self.navigationItem.rightBarButtonItems = []
-            return
-        }
+        //        if self.viewModel.conversation.getParticipants().count > 1 {
+        //            self.navigationItem.rightBarButtonItems = []
+        //            return
+        //        }
 
         if self.viewModel.isConversationForBlockedContact() {
             self.navigationItem.rightBarButtonItems = []
