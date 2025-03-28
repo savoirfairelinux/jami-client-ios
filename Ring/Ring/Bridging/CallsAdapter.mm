@@ -95,7 +95,7 @@ static id <CallsAdapterDelegate> _delegate;
                                                     withMedia:mediaList];
         }
     }));
-    
+
     callHandlers.insert(exportable_callback<CallSignal::MediaNegotiationStatus>([&](const std::string& callId,
                                                                                    const std::string& event,
                                                                                    const std::vector<std::map<std::string, std::string>>& media) {
@@ -154,7 +154,9 @@ static id <CallsAdapterDelegate> _delegate;
     callHandlers.insert(exportable_callback<CallSignal::ConferenceCreated>([&](const std::string& accountId, const std::string& conversationId, const std::string& confId) {
         if (CallsAdapter.delegate) {
             NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
-            [CallsAdapter.delegate conferenceCreatedWithConference: confIdString accountId:[NSString stringWithUTF8String:accountId.c_str()] ];
+            NSString* conversationIdString = [NSString stringWithUTF8String:conversationId.c_str()];
+            NSString* accountIdString = [NSString stringWithUTF8String:accountId.c_str()];
+            [CallsAdapter.delegate conferenceCreatedWithConferenceId:confIdString conversationId:conversationIdString accountId:accountIdString];
         }
     }));
 

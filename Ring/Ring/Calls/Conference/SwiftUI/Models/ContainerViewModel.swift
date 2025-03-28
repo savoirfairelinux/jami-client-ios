@@ -124,12 +124,18 @@ class ContainerViewModel: ObservableObject {
         self.callService.currentConferenceEvent
             .observe(on: MainScheduler.instance)
             .asObservable()
-            .filter(isRelevantConference)
-            .subscribe(onNext: handleConferenceEvent)
+            .filter { [weak self] conference in
+                guard let self = self else { return false }
+                return self.isRelevantConference(conference)
+            }
+            .subscribe(onNext: { [weak self] conference in
+                guard let self = self else { return }
+                self.handleConferenceEvent(conference)
+            })
             .disposed(by: disposeBag)
 
         self.callService
-            .inConferenceCalls
+            .inConferenceCalls()
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] call in
@@ -243,17 +249,20 @@ class ContainerViewModel: ObservableObject {
         let menu = self.getItemsForConferenceMenu(sinkId: info.sinkId)
         participant.setActions(items: menu)
         self.participants.append(participant)
-        if self.participants.count == 1 {
-            participant.videoRunning
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { [weak self] hasVideo in
-                    self?.hasIncomingVideo = hasVideo
-                })
-                .disposed(by: self.videoRunningBag)
-        } else {
-            videoRunningBag = DisposeBag()
-            self.hasIncomingVideo = true
-        }
+//        if self.participants.count == 1 {
+//            participant.videoRunning
+//                .observe(on: MainScheduler.instance)
+//                .subscribe(onNext: { [weak self] hasVideo in
+//                    guard let self = self else { return }
+//                    DispatchQueue.main.async {[weak self] in
+//                        self?.hasIncomingVideo = hasVideo
+//                    }
+//                })
+//                .disposed(by: self.videoRunningBag)
+//        } else {
+//            videoRunningBag = DisposeBag()
+//            self.hasIncomingVideo = true
+//        }
     }
 
     func updateWith(participantsInfo: [ConferenceParticipant], mode: AVLayerVideoGravity) {
