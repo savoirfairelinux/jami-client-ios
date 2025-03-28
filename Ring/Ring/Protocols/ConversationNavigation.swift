@@ -250,8 +250,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func getTopController() -> UIViewController? {
-        guard var topController = UIApplication.shared
-                .keyWindow?.rootViewController else {
+        guard var topController = UIApplication.shared.windows.first?.rootViewController else {
             return nil
         }
         while let presentedViewController = topController.presentedViewController {
@@ -270,7 +269,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             topController.dismiss(animated: false, completion: nil)
             let callViewController = CallViewController.instantiate(with: self.injectionBag)
             self.present(viewController: callViewController,
-                         withStyle: .fadeInOverFullScreen,
+                         withStyle: .popToRootAndPush,
                          withAnimation: false,
                          withStateable: callViewController.viewModel)
             callViewController.viewModel.placeCall(with: contactRingId, userName: userName, account: account, isAudioOnly: isAudioOnly)

@@ -63,6 +63,8 @@ enum ServiceEventType {
     case requestAccepted
     case addDeviceStateChanged
     case deviceAuthStateChanged
+    case callStarted
+    case incomingCall
 }
 
 /**
@@ -81,6 +83,9 @@ enum ServiceEventInput {
     case date
     case callType
     case callTime
+    case callState
+    case mediaType
+    case mediaState
     case transferId
     case conversationId
     case localPhotolID

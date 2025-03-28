@@ -86,6 +86,16 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
         }
     }));
 
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::ActiveCallsChanged>([&](const std::string& account_id, const std::string& conversation_id, const std::vector<std::map<std::string, std::string>>& activeCalls) {
+        if (ConversationsAdapter.messagesDelegate) {
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSString* conversationId = [NSString stringWithUTF8String:conversation_id.c_str()];
+            NSArray* callsDictionary = [Utils vectorOfMapsToArray: activeCalls];
+            [ConversationsAdapter.messagesDelegate activeCallsChangedWithConversationId:conversationId accountId:accountId calls:callsDictionary];
+        }
+    }));
+
     confHandlers.insert(exportable_callback<ConfigurationSignal::ComposingStatusChanged>([&](const std::string& account_id, const std::string& convId, const std::string& from, int status) {
         if (ConversationsAdapter.messagesDelegate) {
             NSString* fromPeer = [NSString stringWithUTF8String:from.c_str()];
