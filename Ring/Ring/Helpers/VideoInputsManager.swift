@@ -62,7 +62,8 @@ class VideoInputsManager {
 
     func writeFrame(withBuffer buffer: CVPixelBuffer?, sinkId: String, rotation: Int) {
         guard let sampleBuffer = self.createSampleBufferFrom(pixelBuffer: buffer) else {
-            return }
+            return
+        }
         self.setSampleBufferAttachments(sampleBuffer)
         let frameInfo = VideoFrameInfo(sampleBuffer: sampleBuffer, rotation: rotation, sinkId: sinkId)
         frameSubject.onNext(frameInfo)

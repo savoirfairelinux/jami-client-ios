@@ -23,6 +23,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import os
+import SwiftUI
 
 // swiftlint:disable cyclomatic_complexity
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
@@ -107,14 +108,20 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
             })
             .disposed(by: self.disposeBag)
 
-        self.callService.newCall
+        self.callService.sharedResponseStream
             .asObservable()
+            .filter({ event in
+                return event.eventType == .incomingCall
+            })
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (call) in
+            .subscribe(onNext: { (event) in
+                guard  let callId: String = event.getEventInput(.callId),
+                       let call = self.callService.call(callID: callId) else { return }
                 self.showIncomingCall(call: call)
             })
             .disposed(by: self.disposeBag)
         self.callbackPlaceCall()
+        self.subscribeToActiveCalls()
         self.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
     }
 
@@ -123,6 +130,53 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
         let viewController = createHostingVC(view)
         self.smartListViewController = viewController
         self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: true, withStateable: view.stateEmitter)
+    }
+
+    func subscribeToActiveCalls() {
+        self.injectionBag.callService.activeCalls
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] accountCalls in
+                guard let self = self else { return }
+                // get not local and not ignored calls
+                let hasActiveCalls = accountCalls.values.contains { accountCalls in
+                    !accountCalls.allConversationIds.flatMap { accountCalls.notIgnoredCalls(for: $0) }
+                        .filter { !$0.isFromLocalDevice }
+                        .isEmpty
+                }
+
+                guard hasActiveCalls else { return }
+
+                if self.presentingVC["activeCalls"] == true {
+                    return
+                }
+
+                let activeCallsViewModel = ActiveCallsViewModel(
+                    injectionBag: self.injectionBag, conversationsSource: self.conversationsSource
+                )
+                let activeCallsView = ActiveCallsView(viewModel: activeCallsViewModel)
+                let viewController = self.createHostingVC(activeCallsView)
+                viewController.view.backgroundColor = .clear
+
+                // Present from the top-most view controller
+                var topController = UIApplication.shared.windows.first?.rootViewController
+                while let presentedViewController = topController?.presentedViewController {
+                    topController = presentedViewController
+                }
+                if let topController = topController {
+                    viewController.modalPresentationStyle = .overFullScreen
+                    viewController.modalTransitionStyle = .crossDissolve
+                    self.presentingVC["activeCalls"] = true
+                    topController.present(viewController, animated: true) { [weak self] in
+                        self?.presentingVC["activeCalls"] = false
+                    }
+                    activeCallsViewModel.state.take(until: viewController.rx.deallocated)
+                        .subscribe(onNext: { [weak self] (state) in
+                            self?.stateSubject.onNext(state)
+                        })
+                        .disposed(by: self.disposeBag)
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func addLockFlags() {
