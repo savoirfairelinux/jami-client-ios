@@ -143,6 +143,23 @@ struct JamsSearchResultView: View {
     }
 }
 
+struct ActiveCallIndicator: View {
+    @SwiftUI.State private var isAnimating = false
+
+    var body: some View {
+        Image(systemName: "phone")
+            .font(.system(size: 18, weight: .semibold))
+            .foregroundColor(.jamiColor)
+            .padding(.horizontal)
+            .opacity(isAnimating ? 0.4 : 1.0)
+            .onAppear {
+                withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
+                    isAnimating = true
+                }
+            }
+    }
+}
+
 struct ConversationRowView: View {
     @ObservedObject var model: ConversationViewModel
     var withSeparator: Bool = true
@@ -200,6 +217,9 @@ struct ConversationRowView: View {
                     }
                 }
                 Spacer()
+                if model.swiftUIModel.callBannerViewModel.isVisible {
+                    ActiveCallIndicator()
+                }
                 if model.unreadMessages > 0 {
                     Text("\(model.unreadMessages)")
                         .fontWeight(.semibold)

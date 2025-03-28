@@ -207,7 +207,7 @@ extension CallsProviderService {
 
     func getHandleInfo(account: AccountModel, call: CallModel) -> (displayName: String, handle: String)? {
         let type = account.type == AccountType.ring ? URIType.ring : URIType.sip
-        let uri = JamiURI.init(schema: type, infoHash: call.participantUri, account: account)
+        let uri = JamiURI.init(schema: type, infoHash: call.callUri, account: account)
         guard var handle = uri.hash else { return nil }
         // for sip contact if account and contact have different host name add contact host name
         if account.type == AccountType.sip {

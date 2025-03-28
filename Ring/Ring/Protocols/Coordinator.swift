@@ -187,6 +187,16 @@ extension Coordinator {
         return hostingController
     }
 
+    func getTopController() -> UIViewController? {
+        guard var topController = UIApplication.shared.windows.first?.rootViewController else {
+            return nil
+        }
+        while let presentedViewController = topController.presentedViewController {
+            topController = presentedViewController
+        }
+        return topController
+    }
+
     private func dismiss(viewController: UIViewController, animated: Bool) {
         if let navigationController = viewController.navigationController {
             navigationController.popViewController(animated: animated)
