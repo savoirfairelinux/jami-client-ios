@@ -128,15 +128,15 @@ class ContainerViewModel: ObservableObject {
             .subscribe(onNext: handleConferenceEvent)
             .disposed(by: disposeBag)
 
-        self.callService
-            .inConferenceCalls
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] call in
-                guard let self = self else { return }
-                self.handlePendingCall(call)
-            })
-            .disposed(by: self.disposeBag)
+                self.callService
+                    .inConferenceCalls()
+                    .asObservable()
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onNext: { [weak self] call in
+                        guard let self = self else { return }
+                        self.handlePendingCall(call)
+                    })
+                    .disposed(by: self.disposeBag)
 
         self.observeRaiseHand()
         self.observeConferenceActions()
@@ -167,12 +167,18 @@ class ContainerViewModel: ObservableObject {
     }
 
     private func handleConferenceEvent(_ conference: ConferenceUpdates) {
+        print("VIDEO DEBUG: Handling conference event: \(conference.state) for conferenceID: \(conference.conferenceID)")
         switch conference.state {
         case ConferenceState.conferenceDestroyed.rawValue:
             handleConferenceDestroyed(conference)
         case ConferenceState.conferenceCreated.rawValue:
+            print("VIDEO DEBUG: Conference created, updating view for new conference")
             updateViewForNewConference()
             fallthrough
+        case "ACTIVE_ATTACHED":
+            // For swarm calls, when a participant is attached, update the view
+            print("VIDEO DEBUG: Participant attached to conference, updating view")
+            updateViewForOngoingConference(conference)
         default:
             updateViewForOngoingConference(conference)
         }
@@ -192,9 +198,23 @@ class ContainerViewModel: ObservableObject {
     }
 
     private func updateViewForOngoingConference(_ conference: ConferenceUpdates) {
+        print("VIDEO DEBUG: Updating view for ongoing conference: \(conference.conferenceID)")
         callId = conference.conferenceID
         if let participants = getConferenceParticipants() {
+            print("VIDEO DEBUG: Got \(participants.count) conference participants")
             updateWith(participantsInfo: participants, mode: .resizeAspectFill)
+            
+            // Force update hasIncomingVideo if any participant has video
+            let anyParticipantHasVideo = self.participants.contains { $0.videoRunning.value }
+            if anyParticipantHasVideo && !self.hasIncomingVideo {
+                print("VIDEO DEBUG: Force setting hasIncomingVideo to true because a participant has video")
+                self.hasIncomingVideo = true
+                DispatchQueue.main.async { [weak self] in
+                    self?.objectWillChange.send()
+                }
+            }
+        } else {
+            print("VIDEO DEBUG: No participants found for conference")
         }
     }
 
@@ -208,7 +228,13 @@ class ContainerViewModel: ObservableObject {
         let participant = ConferenceParticipant(sinkId: call.callId, isActive: true)
         participant.uri = call.participantUri
         updateWith(participantsInfo: [participant], mode: .resizeAspect)
+        print("VIDEO DEBUG: updateViewForCurrentCall setting hasIncomingVideo = true for call \(call.callId)")
         hasIncomingVideo = true
+        
+        // Force UI update
+        DispatchQueue.main.async { [weak self] in
+            self?.objectWillChange.send()
+        }
     }
 
     func isHostCall(participantId: String) -> Bool {
@@ -244,15 +270,30 @@ class ContainerViewModel: ObservableObject {
         participant.setActions(items: menu)
         self.participants.append(participant)
         if self.participants.count == 1 {
+            print("VIDEO DEBUG: Setting up video running subscription for first participant: \(participant.id)")
             participant.videoRunning
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] hasVideo in
-                    self?.hasIncomingVideo = hasVideo
+                    print("VIDEO DEBUG: videoRunning update for participant \(participant.id): \(hasVideo)")
+                    guard let self = self else { return }
+                    self.hasIncomingVideo = hasVideo
+                    print("VIDEO DEBUG: Updated hasIncomingVideo to: \(hasVideo)")
+                    
+                    // Force UI update when video state changes
+                    DispatchQueue.main.async {
+                        self.objectWillChange.send()
+                    }
                 })
                 .disposed(by: self.videoRunningBag)
         } else {
+            print("VIDEO DEBUG: Multiple participants (\(self.participants.count)), setting hasIncomingVideo = true")
             videoRunningBag = DisposeBag()
             self.hasIncomingVideo = true
+            
+            // Force UI update
+            DispatchQueue.main.async { [weak self] in
+                self?.objectWillChange.send()
+            }
         }
     }
 
@@ -421,23 +462,23 @@ class ContainerViewModel: ObservableObject {
     }
 
     func subscribePendingCall(callId: String, pending: PendingConferenceCall) {
-        self.callService
-            .currentCall(callId: callId)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] currentCall in
-                if currentCall.state != .ringing && currentCall.state != .connecting
-                    && currentCall.state != .unknown {
-                    if let index = self?.pending.firstIndex(where: { model in
-                        model.id == currentCall.callId
-                    }) {
-                        self?.pending.remove(at: index)
-                        DispatchQueue.main.async { [weak self] in
-                            self?.objectWillChange.send()
+                self.callService
+                    .currentCall(callId: callId)
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onNext: { [weak self] currentCall in
+                        if currentCall.state != .ringing && currentCall.state != .connecting
+                            && currentCall.state != .unknown {
+                            if let index = self?.pending.firstIndex(where: { model in
+                                model.id == currentCall.callId
+                            }) {
+                                self?.pending.remove(at: index)
+                                DispatchQueue.main.async { [weak self] in
+                                    self?.objectWillChange.send()
+                                }
+                            }
                         }
-                    }
-                }
-            })
-            .disposed(by: pending.disposeBag)
+                    })
+                    .disposed(by: pending.disposeBag)
     }
 }
 
