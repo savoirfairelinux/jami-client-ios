@@ -64,7 +64,7 @@ final class CallProviderDelegateTests: XCTestCase {
         let expectation = self.expectation(description: "Should have no pending call and no system call")
         let account = AccountModel()
         let call = CallModel()
-        call.participantUri = jamiId1
+        call.callUri = jamiId1
         // Act
         callProviderService.handleIncomingCall(account: account, call: call)
         callProviderService.stopCall(callUUID: call.callUUID, participant: jamiId1)
@@ -80,7 +80,7 @@ final class CallProviderDelegateTests: XCTestCase {
         let expectation = self.expectation(description: "Should have no pending call and one system call")
         let account = AccountModel()
         let call = CallModel()
-        call.participantUri = jamiId1
+        call.callUri = jamiId1
         // Act
         callProviderService.previewPendingCall(peerId: jamiId1, withVideo: false, displayName: "", completion: nil)
         callProviderService.handleIncomingCall(account: account, call: call)
@@ -96,7 +96,7 @@ final class CallProviderDelegateTests: XCTestCase {
         let expectation = self.expectation(description: "Should have no pending call and one system call")
         let account = AccountModel()
         let call = CallModel()
-        call.participantUri = jamiId1
+        call.callUri = jamiId1
         // Act
         callProviderService.handleIncomingCall(account: account, call: call)
         updateCalls(expectation: expectation, jamiId: jamiId1)
