@@ -60,8 +60,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                                              callId: viewModel.callId())
         videoContainerViewModel = createContainerViewModel(with: properties)
 
-        if let jamiId = viewModel.getJamiId() {
-            updateParticipant(jamiId: jamiId)
+        if let uri = viewModel.callURI(), !uri.isEmpty {
+            updateParticipant(uri: uri)
         }
 
         subscribeCallActions()
@@ -78,9 +78,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                                   callId: properties.callId)
     }
 
-    private func updateParticipant(jamiId: String) {
+    private func updateParticipant(uri: String) {
         let participant = ConferenceParticipant(sinkId: viewModel.conferenceId, isActive: true)
-        participant.uri = jamiId
+        participant.uri = uri
         videoContainerViewModel.updateWith(participantsInfo: [participant], mode: .resizeAspect)
     }
 

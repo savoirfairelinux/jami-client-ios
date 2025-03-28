@@ -45,7 +45,7 @@ class ContactPickerViewModel: ViewModel {
         }
         return Observable
             .combineLatest(self.contactsService.contacts.asObservable(),
-                           self.callService.calls.asObservable()) {[weak self] (contacts, calls) -> [ContactPickerSection] in
+                           self.callService.calls.observable) {[weak self] (contacts, calls) -> [ContactPickerSection] in
                 var sections = [ContactPickerSection]()
                 guard let self = self else { return sections }
                 guard let currentCall = self.callService.call(callID: self.currentCallId) else { return sections }
@@ -213,7 +213,7 @@ extension ContactPickerViewModel {
         calls.values.forEach { call in
             guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else { return }
             let type = account.type == AccountType.ring ? URIType.ring : URIType.sip
-            let uri = JamiURI.init(schema: type, infoHash: call.participantUri, account: account)
+            let uri = JamiURI.init(schema: type, infoHash: call.callUri, account: account)
             guard let uriString = uri.uriString else { return }
             guard let hashString = uri.hash else { return }
             callURIs.append(uriString)
