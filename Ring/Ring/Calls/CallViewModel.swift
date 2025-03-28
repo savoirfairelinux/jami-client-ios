@@ -100,7 +100,7 @@ class CallViewModel: Stateable, ViewModel {
     // data for ViewController binding
     lazy var showRecordImage: Observable<Bool> = {
         return self.callService
-            .currentCallsEvents
+            .callUpdates
             .asObservable()
             .map({[weak self] call in
                 guard let self = self else { return false }
@@ -112,10 +112,10 @@ class CallViewModel: Stateable, ViewModel {
     lazy var dismisVC: Observable<Bool> = {
         return currentCall
             .filter({ call in
-                return !call.isExists()
+                return !call.isExists() || call.state.isFinished()
             })
             .map({ [weak self] call in
-                let hide = !call.isExists()
+                let hide = !call.isExists() || call.state.isFinished()
                 // if it was conference call switch to another running call
                 if hide && call.participantsCallId.count > 1 {
                     // switch to another call
@@ -298,34 +298,57 @@ class CallViewModel: Stateable, ViewModel {
 extension CallViewModel {
 
     func cancelCall() {
+        guard let call = call else { return }
+        var isSwarmCall = false
+        let conversationId: String = self.call?.conversationId ?? ""
+        if !conversationId.isEmpty {
+            if let conversation = self.conversationService.getConversationForId(conversationId: conversationId, accountId: call.accountId) {
+                isSwarmCall = conversation.getParticipants().count > 1
+            }
+        }
         self.callService
-            .hangUpCallOrConference(callId: self.conferenceId)
+            .hangUpCallOrConference(callId: self.conferenceId, isSwarm: isSwarmCall)
             .subscribe()
             .disposed(by: self.disposeBag)
     }
 
     func answerCall() -> Completable {
-        return self.callService.accept(call: call)
+        return self.callService.accept(callId: call?.callId ?? "")
     }
 
     func placeCall(with uri: String, userName: String, account: AccountModel, isAudioOnly: Bool = false) {
-        self.callService.placeCall(withAccount: account,
-                                   toParticipantId: uri,
-                                   userName: userName,
-                                   videoSource: self.videoService.getVideoSource(),
-                                   isAudioOnly: isAudioOnly)
-            .subscribe(onSuccess: { [weak self] callModel in
-                self?.call = callModel
-                if self?.isBoothMode() ?? false {
-                    return
-                }
-                self?.callsProvider
-                    .startCall(account: account, call: callModel)
-                self?.callStarted.accept(true)
-            }, onFailure: {  [weak self] _ in
-                self?.callFailed.accept(true)
-            })
-            .disposed(by: self.disposeBag)
+        if uri.starts(with: "swarm:") {
+            self.callService.placeSwarmCall(withAccount: account,
+                                            uri: uri,
+                                            userName: userName,
+                                            videoSource: self.videoService.getVideoSource(),
+                                            isAudioOnly: isAudioOnly)
+                .subscribe(onSuccess: { [weak self] callModel in
+                    self?.call = callModel
+                    self?.conferenceId = callModel.callId // Set the conferenceId for swarm calls
+                    self?.callsProvider
+                        .startCall(account: account, call: callModel)
+                    self?.callStarted.accept(true)
+                }, onFailure: {  [weak self] _ in
+                    self?.callFailed.accept(true)
+                })
+                .disposed(by: self.disposeBag)
+        } else {
+            self.callService.placeCall(withAccount: account,
+                                       toParticipantId: uri,
+                                       userName: userName,
+                                       videoSource: self.videoService.getVideoSource(),
+                                       isAudioOnly: isAudioOnly)
+                .subscribe(onSuccess: { [weak self] callModel in
+                    self?.call = callModel
+                    self?.callsProvider
+                        .startCall(account: account, call: callModel)
+                    self?.callStarted.accept(true)
+                }, onFailure: {  [weak self] _ in
+                    self?.callFailed.accept(true)
+                })
+                .disposed(by: self.disposeBag)
+        }
     }
 
     func showContactPickerVC() {
@@ -343,8 +366,6 @@ extension CallViewModel {
                                            userName: contactToAdd.registeredName,
                                            videSource: self.videoService.getVideoSource(),
                                            isAudioOnly: call.isAudioOnly)
-                    .subscribe()
-                    .disposed(by: self.disposeBag)
                 return
             }
             guard let secondCall = self.callService.call(callID: contact.conferenceID) else { return }
@@ -398,7 +419,9 @@ extension CallViewModel {
         let callId = (self.isHost ?? false) ? self.conferenceId : call.callId
         guard let callToMute = self.callService.call(callID: callId) else { return }
         let device = self.videoService.getCurrentVideoSource()
-        self.callService.updateCallMediaIfNeeded(call: callToMute)
+        Task {
+            await self.callService.updateCallMediaIfNeeded(call: callToMute)
+        }
         self.videoService.requestMediaChange(call: callToMute, mediaLabel: "audio_0", source: device)
         updateCallStateForConferenceHost()
     }
@@ -408,7 +431,9 @@ extension CallViewModel {
         let callId = (self.isHost ?? false) ? self.conferenceId : call.callId
         guard let callToMute = self.callService.call(callID: callId) else { return }
         let device = self.videoService.getCurrentVideoSource()
-        self.callService.updateCallMediaIfNeeded(call: callToMute)
+        Task {
+            await self.callService.updateCallMediaIfNeeded(call: callToMute)
+        }
         self.videoService.requestMediaChange(call: callToMute, mediaLabel: "video_0", source: device)
         updateCallStateForConferenceHost()
     }

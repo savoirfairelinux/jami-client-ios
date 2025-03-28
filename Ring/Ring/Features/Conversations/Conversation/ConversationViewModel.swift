@@ -387,9 +387,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             /// send not swarm message
             guard let participantJamiId = conversation.getParticipants().first?.jamiId,
                   let account = self.accountService.currentAccount else { return }
-            /// if in call send sip msg
-            if let call = self.callService.call(participantHash: participantJamiId, accountID: conversation.accountId) {
-                self.callService.sendTextMessage(callID: call.callId, message: content, accountId: account)
+            // if in call send sip msg
+            if let call = self.callService.call(participantId: participantJamiId, accountId: conversation.accountId) {
+                self.callService.sendInCallMessage(callID: call.callId, message: content, accountId: account)
                 return
             }
             self.conversationsService
@@ -429,8 +429,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     func startCall() {
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        let uri = self.conversation.isDialog() ? jamiId : "swarm:" + self.conversation.id
         self.closeAllPlayers()
-        self.stateSubject.onNext(ConversationState.startCall(contactRingId: jamiId, userName: self.displayName.value ?? self.userName.value))
+        self.stateSubject.onNext(ConversationState.startCall(contactRingId: uri, userName: self.displayName.value ?? self.userName.value))
     }
 
     func startAudioCall() {
@@ -475,12 +476,12 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             return false
         }
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return false }
-        return self.callService.call(participantHash: jamiId, accountID: self.conversation.accountId) != nil
+        return self.callService.call(participantId: jamiId, accountId: self.conversation.accountId) != nil
     }
 
     lazy var showCallButton: Observable<Bool> = {
         return self.callService
-            .currentCallsEvents
+            .callUpdates
             .share()
             .asObservable()
             .filter({ [weak self] (call) -> Bool in
@@ -523,8 +524,8 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     func openCall() {
         guard let call = self.callService
-                .call(participantHash: self.conversation.getParticipants().first?.jamiId ?? "",
-                      accountID: self.conversation.accountId) else { return }
+                .call(participantId: self.conversation.getParticipants().first?.jamiId ?? "",
+                      accountId: self.conversation.accountId) else { return }
 
         self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
     }

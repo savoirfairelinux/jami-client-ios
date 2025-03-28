@@ -48,6 +48,10 @@ enum CallState: String {
         }
     }
 
+    func isFinished() -> Bool {
+        return self == .over || self == .hungup || self == .failure
+    }
+
     func isActive() -> Bool {
         return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold || self == .unhold
     }
@@ -116,6 +120,7 @@ public class CallModel {
     var displayName: String = ""
     var registeredName: String = ""
     var accountId: String = ""
+    var conversationId: String = ""
     var audioMuted: Bool = false
     var callRecorded: Bool = false
     var videoMuted: Bool = false
@@ -252,5 +257,22 @@ public class CallModel {
 
     func isActive() -> Bool {
         return self.state == .connecting || self.state == .ringing || self.state == .current
+    }
+
+    func isCurrent() -> Bool {
+        return self.state == .current || self.state == .hold ||
+            self.state == .unhold || self.state == .ringing
+    }
+
+    func updateParticipantsCallId(callId: String) {
+        participantsCallId.removeAll()
+        participantsCallId.insert(callId)
+    }
+
+    func updateWith(callId: String, callDictionary: [String: String], participantId: String) {
+        self.update(withDictionary: callDictionary, withMedia: self.mediaList)
+        self.participantUri = participantId
+        self.callId = callId
+        self.updateParticipantsCallId(callId: callId)
     }
 }

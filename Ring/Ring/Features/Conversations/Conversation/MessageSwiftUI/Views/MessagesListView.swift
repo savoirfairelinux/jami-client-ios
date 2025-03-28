@@ -128,6 +128,13 @@ struct MessagesListView: View {
                 if model.isBlocked {
                     blockView()
                 }
+
+                // Add call banner at the top
+                if model.callBannerViewModel.isVisible {
+                    CallBannerView(viewModel: model.callBannerViewModel)
+                        .transition(.move(edge: .top))
+                        .zIndex(1)
+                }
             }
             if showReactionsView {
                 if let reactions = reactionsForMessage {
