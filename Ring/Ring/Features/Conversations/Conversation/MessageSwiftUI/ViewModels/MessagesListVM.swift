@@ -45,6 +45,7 @@ enum MessagePanelState: State {
     case recordAudio
     case recordVido
     case sendFile
+    case joinActiveCall(call: ActiveCall, withVideo: Bool)
 
     func toString() -> String {
         switch self {
@@ -64,8 +65,8 @@ enum MessagePanelState: State {
             return L10n.Alerts.uploadFile
         case .sendPhoto:
             return "send photo"
-        case .registerTypingIndicator:
-            return "typing indicator"
+        default:
+            return ""
         }
     }
 
@@ -151,6 +152,8 @@ class MessagesListVM: ObservableObject {
     var transferHelper: TransferHelper
     var messagePanel: MessagePanelVM
     var currentlyTypingUsers: Set<String> = []
+    var callBannerViewModel: CallBannerViewModel
+    private let injectionBag: InjectionBag
 
     // state
     private let contextStateSubject = PublishSubject<State>()
@@ -205,6 +208,7 @@ class MessagesListVM: ObservableObject {
             }
             self.updateColorPreference()
             self.updateLastDisplayed()
+            self.callBannerViewModel = CallBannerViewModel(injectionBag: self.injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
         }
     }
 
@@ -218,6 +222,7 @@ class MessagesListVM: ObservableObject {
     @Published var typingIndicatorText = ""
 
     init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
+        self.injectionBag = injectionBag
         self.requestsService = injectionBag.requestsService
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
@@ -230,7 +235,9 @@ class MessagesListVM: ObservableObject {
         self.transferHelper = transferHelper
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject)
+        self.callBannerViewModel = CallBannerViewModel(injectionBag: injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
         self.contextMenuModel.currentJamiAccountId = self.accountService.currentAccount?.jamiId
+
         self.subscribeLocationEvents()
         self.subscribeSwarmPreferences()
         self.subscribeUserAvatarForLocationSharing()

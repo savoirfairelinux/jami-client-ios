@@ -47,6 +47,7 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
 
 struct MessagesListView: View {
     @ObservedObject var model: MessagesListVM
+    @ObservedObject var callBannerViewModel: CallBannerViewModel
     @SwiftUI.State var showScrollToLatestButton = false
     let scrollReserved = UIScreen.main.bounds.height * 1.5
 
@@ -67,6 +68,11 @@ struct MessagesListView: View {
 
     @SwiftUI.State private var dotCount = 0
     private let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+
+    init(model: MessagesListVM) {
+        self.model = model
+        self.callBannerViewModel = model.callBannerViewModel
+    }
 
     var body: some View {
         ZStack {
@@ -127,6 +133,10 @@ struct MessagesListView: View {
 
                 if model.isBlocked {
                     blockView()
+                }
+
+                if callBannerViewModel.isVisible {
+                    CallBannerView(viewModel: callBannerViewModel)
                 }
             }
             if showReactionsView {
