@@ -128,15 +128,15 @@ class ContainerViewModel: ObservableObject {
             .subscribe(onNext: handleConferenceEvent)
             .disposed(by: disposeBag)
 
-        self.callService
-            .inConferenceCalls
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] call in
-                guard let self = self else { return }
-                self.handlePendingCall(call)
-            })
-            .disposed(by: self.disposeBag)
+                self.callService
+                    .inConferenceCalls()
+                    .asObservable()
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onNext: { [weak self] call in
+                        guard let self = self else { return }
+                        self.handlePendingCall(call)
+                    })
+                    .disposed(by: self.disposeBag)
 
         self.observeRaiseHand()
         self.observeConferenceActions()
@@ -247,7 +247,8 @@ class ContainerViewModel: ObservableObject {
             participant.videoRunning
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] hasVideo in
-                    self?.hasIncomingVideo = hasVideo
+                    guard let self = self else { return }
+                    self.hasIncomingVideo = hasVideo
                 })
                 .disposed(by: self.videoRunningBag)
         } else {
@@ -421,23 +422,23 @@ class ContainerViewModel: ObservableObject {
     }
 
     func subscribePendingCall(callId: String, pending: PendingConferenceCall) {
-        self.callService
-            .currentCall(callId: callId)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] currentCall in
-                if currentCall.state != .ringing && currentCall.state != .connecting
-                    && currentCall.state != .unknown {
-                    if let index = self?.pending.firstIndex(where: { model in
-                        model.id == currentCall.callId
-                    }) {
-                        self?.pending.remove(at: index)
-                        DispatchQueue.main.async { [weak self] in
-                            self?.objectWillChange.send()
+                self.callService
+                    .currentCall(callId: callId)
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onNext: { [weak self] currentCall in
+                        if currentCall.state != .ringing && currentCall.state != .connecting
+                            && currentCall.state != .unknown {
+                            if let index = self?.pending.firstIndex(where: { model in
+                                model.id == currentCall.callId
+                            }) {
+                                self?.pending.remove(at: index)
+                                DispatchQueue.main.async { [weak self] in
+                                    self?.objectWillChange.send()
+                                }
+                            }
                         }
-                    }
-                }
-            })
-            .disposed(by: pending.disposeBag)
+                    })
+                    .disposed(by: pending.disposeBag)
     }
 }
 

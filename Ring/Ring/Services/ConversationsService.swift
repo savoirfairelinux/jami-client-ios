@@ -67,6 +67,12 @@ class ConversationsService {
 
     private let serialOperationQueue = DispatchQueue(label: "com.jami.ConversationsService.operationQueue")
 
+    // MARK: Active Calls
+    private let activeCallsRelay = BehaviorRelay<[String: ActiveCall]>(value: [:])
+    var activeCalls: Observable<[String: ActiveCall]> {
+        return activeCallsRelay.asObservable()
+    }
+
     // MARK: initial loading
 
     init(withConversationsAdapter adapter: ConversationsAdapter, dbManager: DBManager) {
