@@ -44,11 +44,13 @@ using namespace libjami;
 }
 
 - (BOOL) initDaemonInternal {
-#if DEBUG
-    int flag = 0;
-#else
-    int flag = 0;
-#endif
+//#if DEBUG
+//    int flag = 0;
+//#else
+//    int flag = 0;
+//#endif
+
+    int flag = LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_SYSLOG;
     return init(static_cast<InitFlag>(flag));
 }
 
