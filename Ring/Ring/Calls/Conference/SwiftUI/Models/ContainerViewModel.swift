@@ -129,7 +129,7 @@ class ContainerViewModel: ObservableObject {
             .disposed(by: disposeBag)
 
         self.callService
-            .inConferenceCalls
+            .inConferenceCalls()
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] call in
@@ -247,7 +247,8 @@ class ContainerViewModel: ObservableObject {
             participant.videoRunning
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] hasVideo in
-                    self?.hasIncomingVideo = hasVideo
+                    guard let self = self else { return }
+                    self.hasIncomingVideo = hasVideo
                 })
                 .disposed(by: self.videoRunningBag)
         } else {
