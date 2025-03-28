@@ -39,4 +39,5 @@
     func composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int)
     func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String)
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap)
+    func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]])
 }

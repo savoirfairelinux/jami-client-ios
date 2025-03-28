@@ -200,6 +200,18 @@ struct ConversationRowView: View {
                     }
                 }
                 Spacer()
+                if model.swiftUIModel.callBannerViewModel.isVisible {
+                    Image(systemName: "phone.fill")
+                        .font(.system(size: 15))
+                        .foregroundColor(.jamiColor)
+                        .padding(.horizontal)
+                        .scaleEffect(model.swiftUIModel.callBannerViewModel.isVisible ? 1.2 : 1.0)
+                        .animation(
+                            .easeInOut(duration: 1.0)
+                                .repeatForever(autoreverses: true),
+                            value: model.swiftUIModel.callBannerViewModel.isVisible
+                        )
+                }
                 if model.unreadMessages > 0 {
                     Text("\(model.unreadMessages)")
                         .fontWeight(.semibold)
