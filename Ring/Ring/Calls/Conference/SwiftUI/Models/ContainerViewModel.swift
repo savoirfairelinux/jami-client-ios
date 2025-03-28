@@ -30,6 +30,7 @@ class ContainerViewModel: ObservableObject {
     @Published var localImage = UIImage()
     @Published var callAnswered = false
     @Published var callState = ""
+    @Published var isSwarmCall: Bool = false
 
     private var conferenceActionsModel: ConferenceActionsModel
     var mainGridViewModel: MainGridViewModel = MainGridViewModel()
@@ -81,8 +82,15 @@ class ContainerViewModel: ObservableObject {
         self.callService = injectionBag.callService
         self.currentCall = currentCall
         self.callAnswered = incoming
-        if let call = self.callService.call(callID: callId), call.state == .current || call.state == .hold {
-            self.callAnswered = true
+
+        if let call = self.callService.call(callID: callId) {
+            if call.state == .current || call.state == .hold || !call.conversationId.isEmpty {
+                self.callAnswered = true
+            }
+
+            if !call.conversationId.isEmpty {
+                self.isSwarmCall = true
+            }
         }
 
         self.actionsViewModel = ActionsViewModel(actionsState: self.actionsStateSubject, currentCall: currentCall, audioService: injectionBag.audioService)
@@ -124,12 +132,18 @@ class ContainerViewModel: ObservableObject {
         self.callService.currentConferenceEvent
             .observe(on: MainScheduler.instance)
             .asObservable()
-            .filter(isRelevantConference)
-            .subscribe(onNext: handleConferenceEvent)
+            .filter { [weak self] conference in
+                guard let self = self else { return false }
+                return self.isRelevantConference(conference)
+            }
+            .subscribe(onNext: { [weak self] conference in
+                guard let self = self else { return }
+                self.handleConferenceEvent(conference)
+            })
             .disposed(by: disposeBag)
 
         self.callService
-            .inConferenceCalls
+            .inConferenceCalls()
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] call in
@@ -206,7 +220,7 @@ class ContainerViewModel: ObservableObject {
 
     private func updateViewForCurrentCall(_ call: CallModel) {
         let participant = ConferenceParticipant(sinkId: call.callId, isActive: true)
-        participant.uri = call.participantUri
+        participant.uri = call.callUri
         updateWith(participantsInfo: [participant], mode: .resizeAspect)
         hasIncomingVideo = true
     }
@@ -245,9 +259,14 @@ class ContainerViewModel: ObservableObject {
         self.participants.append(participant)
         if self.participants.count == 1 {
             participant.videoRunning
-                .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] hasVideo in
-                    self?.hasIncomingVideo = hasVideo
+                    guard let self = self else { return }
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        if self.participants.count == 1 {
+                            self.hasIncomingVideo = hasVideo
+                        }
+                    }
                 })
                 .disposed(by: self.videoRunningBag)
         } else {

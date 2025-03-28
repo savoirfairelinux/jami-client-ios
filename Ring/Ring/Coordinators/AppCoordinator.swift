@@ -41,6 +41,7 @@ public enum AppState: State {
 public enum VCType: String {
     case conversation
     case contact
+    case activeCalls
     case blockList
     case log
 }

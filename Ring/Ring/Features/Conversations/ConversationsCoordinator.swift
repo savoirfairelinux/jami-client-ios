@@ -23,6 +23,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import os
+import SwiftUI
 
 // swiftlint:disable cyclomatic_complexity
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
@@ -107,14 +108,20 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
             })
             .disposed(by: self.disposeBag)
 
-        self.callService.newCall
+        self.callService.sharedResponseStream
             .asObservable()
+            .filter({ event in
+                return event.eventType == .incomingCall
+            })
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (call) in
+            .subscribe(onNext: { (event) in
+                guard  let callId: String = event.getEventInput(.callId),
+                       let call = self.callService.call(callID: callId) else { return }
                 self.showIncomingCall(call: call)
             })
             .disposed(by: self.disposeBag)
         self.callbackPlaceCall()
+        self.subscribeToActiveCalls()
         self.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
     }
 
@@ -123,6 +130,49 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
         let viewController = createHostingVC(view)
         self.smartListViewController = viewController
         self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: true, withStateable: view.stateEmitter)
+    }
+
+    func subscribeToActiveCalls() {
+        self.injectionBag.callService.activeCalls
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] accountCalls in
+                guard let self = self else { return }
+                let hasActiveCalls = accountCalls.values.contains { accountCalls in
+                    !accountCalls.incomingUnansweredNotIgnoredCalls().isEmpty
+                }
+
+                guard hasActiveCalls else { return }
+
+                // Skip showing call alert if the conversation for incoming call is already open
+                if accountCalls.count == 1 {
+                    if accountCalls.first?.value.incomingUnansweredNotIgnoredCalls().count == 1,
+                       let conversationId = accountCalls.first?.value.incomingUnansweredNotIgnoredCalls().first?.conversationId,
+                       let navigationController = self.rootViewController as? UINavigationController,
+                       let conversationModel = self.getConversationViewModelForId(conversationId: conversationId),
+                       let conversationController = navigationController.topViewController as? ConversationViewController,
+                       conversationController.viewModel == conversationModel {
+                        return
+                    }
+                }
+
+                if self.presentingVC[VCType.activeCalls.rawValue] == true {
+                    return
+                }
+
+                let activeCallsViewModel = ActiveCallsViewModel(
+                    injectionBag: self.injectionBag, conversationsSource: self.conversationsSource
+                )
+                let activeCallsView = ActiveCallsView(viewModel: activeCallsViewModel)
+                let viewController = self.createHostingVC(activeCallsView)
+                viewController.view.backgroundColor = .clear
+
+                self.presentFromTopController(viewController: viewController,
+                                              style: .overFullScreen,
+                                              animation: true,
+                                              stateable: activeCallsViewModel,
+                                              lockKey: VCType.activeCalls.rawValue)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func addLockFlags() {
@@ -367,7 +417,7 @@ extension ConversationsCoordinator {
                 }
             })
             .disposed(by: self.disposeBag)
-        self.nameService.lookupAddress(withAccount: account.id, nameserver: "", address: call.participantUri.filterOutHost())
+        self.nameService.lookupAddress(withAccount: account.id, nameserver: "", address: call.callUri.filterOutHost())
 
     }
 

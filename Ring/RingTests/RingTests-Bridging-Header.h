@@ -27,3 +27,4 @@
 #import "Ring-Bridging-Header.h"
 #import "FixtureFailInitDRingAdapter.h"
 #import "FixtureFailStartDRingAdapter.h"
+#import "ObjCMockCallsAdapter.h"

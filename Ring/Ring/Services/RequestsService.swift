@@ -295,7 +295,7 @@ class RequestsService {
             do {
                 var payload: Data?
                 if let accountProfile = self.dbManager.accountProfile(for: accountId) {
-                    var cardChanged = accountProfile.alias != nil || accountProfile.photo != nil
+                    let cardChanged = accountProfile.alias != nil || accountProfile.photo != nil
                     if cardChanged {
                         payload = try VCardUtils.dataWithImageAndUUID(from: accountProfile)
                     }
