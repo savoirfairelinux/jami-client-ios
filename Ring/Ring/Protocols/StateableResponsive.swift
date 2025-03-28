@@ -57,4 +57,41 @@ extension StateableResponsive where Self: Coordinator {
             })
             .disposed(by: self.disposeBag)
     }
+
+    /// Present a view controller from the top-most view controller
+    ///
+    /// - Parameters:
+    ///   - viewController: The ViewController to present
+    ///   - style: The presentation style
+    ///   - animation: Whether the transition should be animated
+    ///   - stateable: The stateable that will feed the inner stateSubject
+    ///   - lockKey: The key to use for presentation locking
+    func presentFromTopController(viewController: UIViewController,
+                                  style: UIModalPresentationStyle,
+                                  animation: Bool,
+                                  stateable: Stateable? = nil,
+                                  lockKey: String? = nil) {
+        guard let topController = getTopController() else { return }
+
+        viewController.modalPresentationStyle = style
+        viewController.modalTransitionStyle = .crossDissolve
+
+        if let lockKey = lockKey {
+            self.presentingVC[lockKey] = true
+        }
+
+        topController.present(viewController, animated: animation) { [weak self] in
+            if let lockKey = lockKey {
+                self?.presentingVC[lockKey] = false
+            }
+        }
+
+        if let stateable = stateable {
+            stateable.state.take(until: viewController.rx.deallocated)
+                .subscribe(onNext: { [weak self] (state) in
+                    self?.stateSubject.onNext(state)
+                })
+                .disposed(by: self.disposeBag)
+        }
+    }
 }
