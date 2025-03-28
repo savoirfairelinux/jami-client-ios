@@ -86,6 +86,37 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                 }
             })
             .disposed(by: self.disposeBag)
+            
+        // Subscribe to active calls
+        self.injectionBag.conversationsService.activeCalls
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] calls in
+                guard let self = self else { return }
+                guard !calls.isEmpty else { return }
+
+                let activeCallsViewModel = ActiveCallsViewModel(
+                    conversationService: self.injectionBag.conversationsService,
+                    callService: self.injectionBag.callService,
+                    callsProvider: self.injectionBag.callsProvider
+                )
+                let activeCallsView = ActiveCallsView(viewModel: activeCallsViewModel)
+                let viewController = self.createHostingVC(activeCallsView)
+                viewController.view.backgroundColor = .clear
+
+                // Get the top-most view controller
+                var topController = UIApplication.shared.windows.first?.rootViewController
+                while let presentedViewController = topController?.presentedViewController {
+                    topController = presentedViewController
+                }
+
+                // Present from the top-most view controller
+                if let topController = topController {
+                    viewController.modalPresentationStyle = .overFullScreen
+                    viewController.modalTransitionStyle = .crossDissolve
+                    topController.present(viewController, animated: true)
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     /// Starts the coordinator

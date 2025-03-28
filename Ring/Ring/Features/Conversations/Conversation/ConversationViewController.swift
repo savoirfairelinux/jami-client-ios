@@ -550,10 +550,10 @@ class ConversationViewController: UIViewController,
             : viewModel.userName.value
 
         // do not show call buttons for swarm with multiple participants
-        if self.viewModel.conversation.getParticipants().count > 1 {
-            self.navigationItem.rightBarButtonItems = []
-            return
-        }
+//        if self.viewModel.conversation.getParticipants().count > 1 {
+//            self.navigationItem.rightBarButtonItems = []
+//            return
+//        }
 
         if self.viewModel.isConversationForBlockedContact() {
             self.navigationItem.rightBarButtonItems = []

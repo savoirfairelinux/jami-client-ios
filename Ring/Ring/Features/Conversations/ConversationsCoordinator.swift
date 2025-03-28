@@ -23,6 +23,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import os
+import SwiftUI
 
 // swiftlint:disable cyclomatic_complexity
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
@@ -107,10 +108,15 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
             })
             .disposed(by: self.disposeBag)
 
-        self.callService.newCall
+        self.callService.sharedResponseStream
             .asObservable()
+            .filter({ event in
+                return event.eventType == .incomingCall
+            })
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (call) in
+            .subscribe(onNext: { (event) in
+                guard  let callId: String = event.getEventInput(.callId),
+                       let call = self.callService.call(callID: callId) else { return }
                 self.showIncomingCall(call: call)
             })
             .disposed(by: self.disposeBag)

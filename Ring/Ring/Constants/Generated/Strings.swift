@@ -453,10 +453,10 @@ internal enum L10n {
     internal static let turnServer = L10n.tr("Localizable", "accountPage.turnServer", fallback: "TURN address")
     /// TURN username
     internal static let turnUsername = L10n.tr("Localizable", "accountPage.turnUsername", fallback: "TURN username")
-    /// Enable typing indicator
-    internal static let typingIndicator = L10n.tr("Localizable", "accountPage.typingIndicator", fallback: "Enable typing indicator")
-    /// Send and receive typing indicators showing that a message is being typed.
-    internal static let typingIndicatorExplanation = L10n.tr("Localizable", "accountPage.typingIndicatorExplanation", fallback: "Send and receive typing indicators showing that a message is being typed.")
+    /// Typing indicator
+    internal static let typingIndicator = L10n.tr("Localizable", "accountPage.typingIndicator", fallback: "Typing indicator")
+    /// Send and receive typing indicators showing when messages are being typed.
+    internal static let typingIndicatorExplanation = L10n.tr("Localizable", "accountPage.typingIndicatorExplanation", fallback: "Send and receive typing indicators showing when messages are being typed.")
     /// Unblock
     internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact", fallback: "Unblock")
     /// Unlink
@@ -666,21 +666,21 @@ internal enum L10n {
     }
     /// You have accepted the conversation invitation.
     internal static let synchronizationTitle = L10n.tr("Localizable", "conversation.synchronizationTitle", fallback: "You have accepted the conversation invitation.")
-    /// %@ is typing
+    /// %@ is typing…
     internal static func typingIndicatorOneUser(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "conversation.typingIndicatorOneUser", String(describing: p1), fallback: "%@ is typing")
+      return L10n.tr("Localizable", "conversation.typingIndicatorOneUser", String(describing: p1), fallback: "%@ is typing…")
     }
-    /// %1@, %2@ and %3@ others are typing
+    /// %1@, %2@ and %3@ others are typing…
     internal static func typingIndicatorOthersUsers(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
-      return L10n.tr("Localizable", "conversation.typingIndicatorOthersUsers", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%1@, %2@ and %3@ others are typing")
+      return L10n.tr("Localizable", "conversation.typingIndicatorOthersUsers", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%1@, %2@ and %3@ others are typing…")
     }
-    /// %1@, %2@ and %3@ other are typing
+    /// %1@, %2@ and %3@ other are typing…
     internal static func typingIndicatorOtherUsers(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
-      return L10n.tr("Localizable", "conversation.typingIndicatorOtherUsers", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%1@, %2@ and %3@ other are typing")
+      return L10n.tr("Localizable", "conversation.typingIndicatorOtherUsers", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%1@, %2@ and %3@ other are typing…")
     }
-    /// %1@ and %2@ are typing
+    /// %1@ and %2@ are typing…
     internal static func typingIndicatorTwoUsers(_ p1: Any, _ p2: Any) -> String {
-      return L10n.tr("Localizable", "conversation.typingIndicatorTwoUsers", String(describing: p1), String(describing: p2), fallback: "%1@ and %2@ are typing")
+      return L10n.tr("Localizable", "conversation.typingIndicatorTwoUsers", String(describing: p1), String(describing: p2), fallback: "%1@ and %2@ are typing…")
     }
     /// You
     internal static let yourself = L10n.tr("Localizable", "conversation.yourself", fallback: "You")
@@ -832,9 +832,7 @@ internal enum L10n {
   internal enum Global {
     /// Accept
     internal static let accept = L10n.tr("Localizable", "global.accept", fallback: "Accept")
-    /// *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
-    ///  *
-    ///  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+    /// *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
     ///  *
     ///  *  This program is free software; you can redistribute it and/or modify
     ///  *  it under the terms of the GNU General Public License as published by

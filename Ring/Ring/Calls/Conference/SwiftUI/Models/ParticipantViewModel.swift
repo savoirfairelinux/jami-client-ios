@@ -180,19 +180,41 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
     var videoRunning = BehaviorRelay<Bool>(value: false)
 
     func subscribe() {
+        print("VIDEO DEBUG: Subscribing to video for sinkId: \(self.id)")
+        
+        // Make sure to add listener before subscribing to frames
         self.videoService.addListener(withsinkId: self.id)
+        
+        // For swarm calls, sinkId might be in a different format, try to extract the base ID 
+        // in case we need to check alternative IDs
+        let baseSinkId = self.id.components(separatedBy: "_").first ?? self.id
+        print("VIDEO DEBUG: Base sink ID: \(baseSinkId)")
+        
         if !subscribed {
             subscribed = true
+            
+            // Create a subscription that will accept frames from either the exact sinkId or a matching base ID
             self.videoService.videoInputManager.frameSubject
-                .filter({ [weak self]  result in
+                .filter({ [weak self] result in
                     guard let self = self else { return false }
-                    return result.sinkId == self.id
+                    
+                    // Check if the frame's sinkId matches exactly
+                    let exactMatch = result.sinkId == self.id
+                    
+                    // Or if it matches the base ID (for swarm calls)
+                    let baseIdMatch = result.sinkId.components(separatedBy: "_").first == baseSinkId
+                    
+                    if exactMatch || baseIdMatch {
+                        return true
+                    }
+                    return false
                 })
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] info in
                     guard let self = self else { return }
 
                     guard let image = info.sampleBuffer else {
+                        print("VIDEO DEBUG: No sample buffer for sinkId: \(info.sinkId)")
                         self.videoRunning.accept(false)
                         return
                     }
@@ -206,15 +228,46 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                             self.gridDisplayLayer.setAffineTransform(transform)
                             self.mainDisplayLayer.setAffineTransform(transform)
                             if let container = self.mainDisplayLayer.superlayer?.delegate as? UIView, container.bounds != self.mainDisplayLayer.frame {
+                                print("VIDEO DEBUG: Adjusting mainDisplayLayer frame to match container bounds")
                                 CATransaction.begin()
                                 CATransaction.setDisableActions(true)
                                 self.mainDisplayLayer.frame = container.bounds
                                 CATransaction.commit()
                             }
                         }
-                        self.mainDisplayLayer.enqueue(image)
-                        self.gridDisplayLayer.enqueue(image)
-                        self.videoRunning.accept(true)
+
+                        // Check current status of display layers
+                        let mainLayerStatus = self.mainDisplayLayer.status == AVQueuedSampleBufferRenderingStatus.failed ? "failed" :
+                                             self.mainDisplayLayer.status == AVQueuedSampleBufferRenderingStatus.unknown ? "unknown" :
+                                             self.mainDisplayLayer.status == AVQueuedSampleBufferRenderingStatus.rendering ? "rendering" : "invalid"
+                        let gridLayerStatus = self.gridDisplayLayer.status == AVQueuedSampleBufferRenderingStatus.failed ? "failed" :
+                                             self.gridDisplayLayer.status == AVQueuedSampleBufferRenderingStatus.unknown ? "unknown" :
+                                             self.gridDisplayLayer.status == AVQueuedSampleBufferRenderingStatus.rendering ? "rendering" : "invalid"
+
+                        print("VIDEO DEBUG: Before enqueue - mainDisplayLayer status: \(mainLayerStatus), gridDisplayLayer status: \(gridLayerStatus)")
+                        
+                        if self.mainDisplayLayer.status == .failed {
+                            print("VIDEO DEBUG: Resetting failed mainDisplayLayer")
+                            self.mainDisplayLayer = AVSampleBufferDisplayLayer()
+                            self.mainDisplayLayer.videoGravity = .resizeAspect
+                        }
+                        
+                        if self.gridDisplayLayer.status == .failed {
+                            print("VIDEO DEBUG: Resetting failed gridDisplayLayer")
+                            self.gridDisplayLayer = AVSampleBufferDisplayLayer()
+                            self.gridDisplayLayer.videoGravity = .resizeAspectFill
+                        }
+                        
+                        // Try to enqueue the sample buffer
+                        do {
+                            self.mainDisplayLayer.enqueue(image)
+                            self.gridDisplayLayer.enqueue(image)
+                            print("VIDEO DEBUG: Successfully enqueued frame for sinkId: \(info.sinkId)")
+                            self.videoRunning.accept(true)
+                        } catch {
+                            print("VIDEO DEBUG: Error enqueueing frame: \(error)")
+                            self.videoRunning.accept(false)
+                        }
                     }
                 })
                 .disposed(by: self.disposeBag)
