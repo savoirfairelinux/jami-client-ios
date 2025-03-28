@@ -1,0 +1,105 @@
+/*
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+import Foundation
+
+/// Helper class for managing thread-safe queue operations.
+/// This class provides a consistent way to handle thread safety across services
+/// and prevents deadlocks by tracking whether code is already executing on the queue.
+final class ThreadSafeQueueHelper {
+
+    // MARK: - Properties
+
+    /// The managed dispatch queue
+    private let queue: DispatchQueue
+
+    /// Key for tracking whether the current thread is already on the queue
+    private let queueKey = DispatchSpecificKey<Bool>()
+
+    // MARK: - Initialization
+
+    /// Initialize the helper with a dispatch queue
+    /// - Parameter label: The label for the queue
+    /// - Parameter qos: The quality of service for the queue (default: .userInitiated)
+    init(label: String, qos: DispatchQoS = .userInitiated) {
+        self.queue = DispatchQueue(label: label, qos: qos, attributes: .concurrent)
+        self.queue.setSpecific(key: queueKey, value: true)
+    }
+
+    /// Initialize the helper with an existing dispatch queue
+    /// - Parameter queue: The dispatch queue to manage
+    init(queue: DispatchQueue) {
+        self.queue = queue
+        self.queue.setSpecific(key: queueKey, value: true)
+    }
+
+    // MARK: - Public Methods
+
+    /// Execute a block synchronously if it's safe to do so, directly if already on the queue
+    /// - Parameter work: The work to execute
+    /// - Returns: The result of the work
+    func safeSync<T>(_ work: () -> T) -> T {
+        if DispatchQueue.getSpecific(key: queueKey) == true {
+            // Already on the queue, execute directly
+            return work()
+        } else {
+            // Not on the queue, safe to use sync
+            return queue.sync {
+                return work()
+            }
+        }
+    }
+
+    /// Execute a block asynchronously with a barrier for write operations
+    /// - Parameter work: The work to execute
+    func barrierAsync(_ work: @escaping () -> Void) {
+        queue.async(flags: .barrier) {
+            work()
+        }
+    }
+
+    /// Execute a block synchronously with a barrier if it's safe to do so
+    /// - Parameter work: The work to execute
+    /// - Returns: The result of the work
+    /// - Note: This should only be used when you absolutely need a synchronous barrier operation
+    ///         and you're sure it won't cause a deadlock.
+    func safeBarrierSync<T>(_ work: () -> T) -> T {
+        if DispatchQueue.getSpecific(key: queueKey) == true {
+            // Already on the queue, direct execution to avoid deadlock
+            // Note: This loses the barrier guarantee but prevents deadlock
+            return work()
+        } else {
+            // Not on the queue, can use barrier sync safely
+            return queue.sync(flags: .barrier) {
+                return work()
+            }
+        }
+    }
+
+    /// Check if the current execution context is already on the queue
+    /// - Returns: true if already on the queue, false otherwise
+    func isCurrentThreadOnQueue() -> Bool {
+        return DispatchQueue.getSpecific(key: queueKey) == true
+    }
+
+    /// Access the underlying queue directly
+    /// - Warning: Only use this when you know exactly what you're doing
+    var underlyingQueue: DispatchQueue {
+        return queue
+    }
+}
