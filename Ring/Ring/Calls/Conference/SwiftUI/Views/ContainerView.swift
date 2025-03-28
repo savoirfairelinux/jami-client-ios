@@ -113,9 +113,11 @@ struct ContainerView: View {
                         self.showTopGridView = true
                     }
                 }
+                print("VIDEO DEBUG: Layout changed to \(model.layout), showMainGridView: \(showMainGridView), showTopGridView: \(showTopGridView)")
             }
             .padding(5)
-            if !hasIncomingVideo && !showInitialView {
+            
+            if !model.hasIncomingVideo && !showInitialView {
                 audioCallView()
             }
 
@@ -140,12 +142,15 @@ struct ContainerView: View {
             }
         }
         .onChange(of: model.hasLocalVideo) { newValue in
+            print("VIDEO DEBUG: model.hasLocalVideo changed to \(newValue)")
             hasLocalVideo = newValue
         }
         .onChange(of: model.hasIncomingVideo) { newValue in
+            print("VIDEO DEBUG: model.hasIncomingVideo changed to \(newValue), updating view state")
             hasIncomingVideo = newValue
         }
         .onChange(of: model.callAnswered) { newValue in
+            print("VIDEO DEBUG: model.callAnswered changed to \(newValue)")
             if newValue {
                 if hasLocalVideo {
                     withAnimation(.dragableCaptureViewAnimation()) {
@@ -157,10 +162,37 @@ struct ContainerView: View {
             }
         }
         .onAppear {
+            print("VIDEO DEBUG: ContainerView appeared, hasLocalVideo: \(model.hasLocalVideo), hasIncomingVideo: \(model.hasIncomingVideo), callAnswered: \(model.callAnswered)")
             hasLocalVideo = model.hasLocalVideo
             hasIncomingVideo = model.hasIncomingVideo
             if model.callAnswered {
                 showInitialView = false
+            }
+            
+            // Set up timer to periodically check if view state is in sync with model
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+                DispatchQueue.main.async {
+                    if hasIncomingVideo != model.hasIncomingVideo {
+                        print("VIDEO DEBUG: Fixing out-of-sync hasIncomingVideo: view=\(hasIncomingVideo), model=\(model.hasIncomingVideo)")
+                        hasIncomingVideo = model.hasIncomingVideo
+                    }
+                    
+                    if hasLocalVideo != model.hasLocalVideo {
+                        print("VIDEO DEBUG: Fixing out-of-sync hasLocalVideo: view=\(hasLocalVideo), model=\(model.hasLocalVideo)")
+                        hasLocalVideo = model.hasLocalVideo
+                    }
+                    
+                    if !model.callAnswered && model.participants.contains(where: { $0.videoRunning.value }) {
+                        print("VIDEO DEBUG: Video is running but call not answered, updating callAnswered state")
+                        model.callAnswered = true
+                        showInitialView = false
+                    }
+                    
+                    if model.hasIncomingVideo && !showInitialView && !hasIncomingVideo {
+                        print("VIDEO DEBUG: Forcing hasIncomingVideo to true based on model state")
+                        hasIncomingVideo = true
+                    }
+                }
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in

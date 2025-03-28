@@ -662,6 +662,10 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         self.requestService.conversationRemoved(conversationId: conversationId, accountId: accountId)
         self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
     }
+
+    func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]]) {
+        self.callService.activeCallsChanged(conversationId: conversationId, accountId: accountId, calls: calls)
+    }
 }
 
 extension  ConversationsManager: RequestsAdapterDelegate {

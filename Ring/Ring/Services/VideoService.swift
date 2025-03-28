@@ -583,6 +583,9 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func decodingStarted(withsinkId sinkId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?, withaAccountId accountId: String, call: CallModel?) {
+        // Add debug logging
+        print("VIDEO DEBUG: Decoding started for sinkId: \(sinkId), width: \(width), height: \(height), codec: \(codec ?? "none"), call: \(call?.callId ?? "none")")
+        
         if let codecId = codec, !codecId.isEmpty {
             // we do not support hardware acceleration with VP8 codec. In this case software
             // encoding will be used. Downgrate resolution if needed. After call finished
@@ -596,6 +599,7 @@ extension VideoService: VideoAdapterDelegate {
             }
         }
         let hasListener = self.videoInputManager.hasListener(sinkId: sinkId)
+        print("VIDEO DEBUG: hasListener for sinkId \(sinkId): \(hasListener)")
         videoAdapter.registerSinkTarget(withSinkId: sinkId, withWidth: width, withHeight: height, hasListeners: hasListener)
         self.currentDeviceId = self.videoAdapter.getDefaultDevice()
         renderStarted.accept(sinkId)
@@ -618,8 +622,10 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func decodingStopped(withsinkId sinkId: String) {
+        print("VIDEO DEBUG: Decoding stopped for sinkId: \(sinkId)")
         self.videoInputManager.stop(sinkId: sinkId)
         videoAdapter.removeSinkTarget(withSinkId: sinkId)
+        renderStopped.accept(sinkId)
     }
 
     func writeFrame(withBuffer buffer: CVPixelBuffer?, sinkId: String, rotation: Int) {
