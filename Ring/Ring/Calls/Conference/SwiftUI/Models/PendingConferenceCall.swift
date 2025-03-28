@@ -60,6 +60,7 @@ class PendingConferenceCall {
     }
 
     func stopPendingCall() {
-        self.callsService.stopPendingCall(callId: self.id)
+        guard let call = self.callsService.call(callID: self.id) else { return }
+        self.callsService.stopCall(call: call)
     }
 }

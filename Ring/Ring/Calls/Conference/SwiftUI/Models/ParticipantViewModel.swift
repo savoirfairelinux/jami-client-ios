@@ -180,13 +180,24 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
     var videoRunning = BehaviorRelay<Bool>(value: false)
 
     func subscribe() {
+
         self.videoService.addListener(withsinkId: self.id)
+
+        // For swarm calls, sinkId might be in a different format, try to extract the base ID
+        // in case we need to check alternative IDs
+        let baseSinkId = self.id.components(separatedBy: "_").first ?? self.id
+
         if !subscribed {
             subscribed = true
+
             self.videoService.videoInputManager.frameSubject
-                .filter({ [weak self]  result in
-                    guard let self = self else { return false }
-                    return result.sinkId == self.id
+                .filter({ result in
+                    let baseIdMatch = result.sinkId.components(separatedBy: "_").first == baseSinkId
+
+                    if baseIdMatch {
+                        return true
+                    }
+                    return false
                 })
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] info in

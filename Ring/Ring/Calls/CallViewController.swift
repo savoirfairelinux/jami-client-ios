@@ -60,7 +60,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                                              callId: viewModel.callId())
         videoContainerViewModel = createContainerViewModel(with: properties)
 
-        if let jamiId = viewModel.getJamiId() {
+        if let jamiId = viewModel.callURI(), !jamiId.isEmpty {
             updateParticipant(jamiId: jamiId)
         }
 
