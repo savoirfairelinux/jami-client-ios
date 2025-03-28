@@ -48,6 +48,10 @@ enum CallState: String {
         }
     }
 
+    func isFinished() -> Bool {
+        return self == .over || self == .hungup || self == .failure
+    }
+
     func isActive() -> Bool {
         return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold || self == .unhold
     }
@@ -112,10 +116,17 @@ public class CallModel {
     }
     var callUUID: UUID = UUID()
     var dateReceived: Date?
-    var participantUri: String = ""
+    var callUri: String = "" {
+        didSet {
+            if !callUri.isEmpty {
+                self.updateConversationId()
+            }
+        }
+    }
     var displayName: String = ""
     var registeredName: String = ""
     var accountId: String = ""
+    var conversationId: String = ""
     var audioMuted: Bool = false
     var callRecorded: Bool = false
     var videoMuted: Bool = false
@@ -124,7 +135,7 @@ public class CallModel {
     var isAudioOnly: Bool = false
     var layout: CallLayout = .one
     lazy var paricipantHash = {
-        self.participantUri.filterOutHost()
+        self.callUri.filterOutHost()
     }
     var mediaList: [[String: String]] = [[String: String]]()
 
@@ -162,7 +173,7 @@ public class CallModel {
         self.callId = callId
 
         if let fromRingId = dictionary[CallDetailKey.peerNumberKey.rawValue] {
-            self.participantUri = fromRingId
+            self.callUri = fromRingId
         }
 
         if let accountId = dictionary[CallDetailKey.accountIdKey.rawValue] {
@@ -225,7 +236,7 @@ public class CallModel {
         }
 
         if let participantRingId = dictionary[CallDetailKey.peerNumberKey.rawValue] {
-            self.participantUri = participantRingId
+            self.callUri = participantRingId
         }
 
         if let accountId = dictionary[CallDetailKey.accountIdKey.rawValue] {
@@ -252,5 +263,32 @@ public class CallModel {
 
     func isActive() -> Bool {
         return self.state == .connecting || self.state == .ringing || self.state == .current
+    }
+
+    func isCurrent() -> Bool {
+        return self.state == .current || self.state == .hold ||
+            self.state == .unhold || self.state == .ringing
+    }
+
+    func updateParticipantsCallId(callId: String) {
+        participantsCallId.removeAll()
+        participantsCallId.insert(callId)
+    }
+
+    func updateWith(callId: String, callDictionary: [String: String], participantId: String) {
+        self.update(withDictionary: callDictionary, withMedia: self.mediaList)
+        self.callUri = participantId
+        self.callId = callId
+        self.updateParticipantsCallId(callId: callId)
+    }
+
+    func getactiveCallFromURI() -> ActiveCall? {
+        return ActiveCall(self.callUri)
+    }
+
+    func updateConversationId() {
+        if let activeCall = getactiveCallFromURI() {
+            self.conversationId = activeCall.conversationId
+        }
     }
 }

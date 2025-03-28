@@ -587,6 +587,8 @@ internal enum L10n {
     internal static let noBlockedContacts = L10n.tr("Localizable", "blockListPage.noBlockedContacts", fallback: "No blocked contacts")
   }
   internal enum Calls {
+    /// A call is in progress. Do you want to join the call?
+    internal static let activeCallLabel = L10n.tr("Localizable", "calls.activeCallLabel", fallback: "A call is in progress. Do you want to join the call?")
     /// Call finished
     internal static let callFinished = L10n.tr("Localizable", "calls.callFinished", fallback: "Call finished")
     /// Connecting…

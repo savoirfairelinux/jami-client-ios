@@ -28,7 +28,7 @@
     func audioMuted(call callId: String, mute: Bool)
     func videoMuted(call callId: String, mute: Bool)
     func remoteRecordingChanged(call callId: String, record: Bool)
-    func conferenceCreated(conference conferenceID: String, accountId: String)
+    func conferenceCreated(conferenceId: String, conversationId: String, accountId: String)
     func conferenceChanged(conference conferenceID: String, accountId: String, state: String)
     func conferenceRemoved(conference conferenceID: String)
     func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]])
