@@ -151,6 +151,8 @@ class MessagesListVM: ObservableObject {
     var transferHelper: TransferHelper
     var messagePanel: MessagePanelVM
     var currentlyTypingUsers: Set<String> = []
+    var callBannerViewModel: CallBannerViewModel
+    private let injectionBag: InjectionBag
 
     // state
     private let contextStateSubject = PublishSubject<State>()
@@ -205,6 +207,8 @@ class MessagesListVM: ObservableObject {
             }
             self.updateColorPreference()
             self.updateLastDisplayed()
+            // Update CallBannerViewModel with new conversation
+            self.callBannerViewModel = CallBannerViewModel(injectionBag: self.injectionBag, conversation: self.conversation)
         }
     }
 
@@ -218,6 +222,7 @@ class MessagesListVM: ObservableObject {
     @Published var typingIndicatorText = ""
 
     init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
+        self.injectionBag = injectionBag
         self.requestsService = injectionBag.requestsService
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
@@ -230,7 +235,9 @@ class MessagesListVM: ObservableObject {
         self.transferHelper = transferHelper
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject)
+        self.callBannerViewModel = CallBannerViewModel(injectionBag: injectionBag, conversation: self.conversation)
         self.contextMenuModel.currentJamiAccountId = self.accountService.currentAccount?.jamiId
+
         self.subscribeLocationEvents()
         self.subscribeSwarmPreferences()
         self.subscribeUserAvatarForLocationSharing()
