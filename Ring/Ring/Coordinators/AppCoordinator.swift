@@ -86,6 +86,63 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                 }
             })
             .disposed(by: self.disposeBag)
+            
+        // Subscribe to active calls
+//        self.injectionBag.callService.activeCalls
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] accountCalls in
+//                guard let self = self else { return }
+//                // Check if there are any active calls across all accounts
+//                let hasActiveCalls = accountCalls.values.contains { accountCalls in
+//                    !accountCalls.allConversationIds.flatMap { accountCalls.notIgnoredCalls(for: $0) }
+//                        .filter { !$0.isfromLocalDevice }
+//                        .isEmpty
+//                }
+//
+//                guard hasActiveCalls else { return }
+//
+//                // Check if active calls view is already presented
+//                if self.presentingVC["activeCalls"] == true {
+//                    return
+//                }
+//
+//                let activeCallsViewModel = ActiveCallsViewModel(
+//                    conversationService: self.injectionBag.conversationsService,
+//                    callService: self.injectionBag.callService,
+//                    callsProvider: self.injectionBag.callsProvider,
+//                    accountsService: self.injectionBag.accountService
+//                )
+//                let activeCallsView = ActiveCallsView(viewModel: activeCallsViewModel)
+//                let viewController = self.createHostingVC(activeCallsView)
+//                viewController.view.backgroundColor = .clear
+//
+//                // Get the top-most view controller
+//                var topController = UIApplication.shared.windows.first?.rootViewController
+//                while let presentedViewController = topController?.presentedViewController {
+//                    topController = presentedViewController
+//                }
+//
+//                // Present from the top-most view controller
+//                if let topController = topController {
+//                    viewController.modalPresentationStyle = .overFullScreen
+//                    viewController.modalTransitionStyle = .crossDissolve
+//                    self.presentingVC["activeCalls"] = true
+//                    topController.present(viewController, animated: true) { [weak self] in
+//                        self?.presentingVC["activeCalls"] = false
+//                    }
+//                    activeCallsViewModel.state.take(until: viewController.rx.deallocated)
+//                        .subscribe(onNext: { [weak self] (state) in
+//                            if case ConversationState.startCall(let contactRingId, let userName) = state {
+//                                self?.startCall(participant: contactRingId, name: userName, isVideo: true)
+//                            } else if case ConversationState.startAudioCall(let contactRingId, let userName) = state {
+//                                self?.startCall(participant: contactRingId, name: userName, isVideo: false)
+//                            }
+//                            self?.stateSubject.onNext(state)
+//                        })
+//                        .disposed(by: self.disposeBag)
+//                }
+//            })
+//            .disposed(by: self.disposeBag)
     }
 
     /// Starts the coordinator
