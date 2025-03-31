@@ -67,6 +67,7 @@ class ParticipantInfo: Equatable, Hashable {
         self.jamiId = jamiId
         self.role = role
         self.finalName.accept(jamiId)
+        self.registeredName.accept(jamiId)
         self.finalName
             .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak self] name in
@@ -90,7 +91,6 @@ class ParticipantInfo: Equatable, Hashable {
                 guard let self = self else { return }
                 let finalName = ContactsUtils.getFinalNameFrom(registeredName: registeredName, profileName: profileName, hash: self.jamiId)
                 self.finalName.accept(finalName)
-
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
@@ -294,10 +294,10 @@ class SwarmInfo: SwarmInfoProtocol {
 
                 if isDialog {
                     self.participantsNames.accept(Array(Set(finalNames)))
-                    self.participantsString.accept(self.buildTitleFrom(names: Array(Set(registeredNames))))
+                    self.participantsString.accept(self.registeredNameForDialog())
 
                     if self.title.value.isEmpty, let name = profileNames.first {
-                        self.title.accept(name)
+                        self.title.accept(titleForDialog())
                     }
                 } else {
                     let uniqueNames = Array(Set(finalNames))
@@ -476,6 +476,26 @@ class SwarmInfo: SwarmInfoProtocol {
             return avatar
         }
         return UIImage.createSwarmAvatar(convId: convId, size: CGSize(width: self.avatarHeight, height: self.avatarHeight))
+    }
+
+    private func titleForDialog() -> String {
+        if let localJamiId = self.localJamiId,
+           let name = self.participants.value.filter({ info in
+            return info.jamiId != localJamiId
+           }).first?.profileName.value {
+            return name
+        }
+        return ""
+    }
+
+    private func registeredNameForDialog() -> String {
+        if let localJamiId = self.localJamiId,
+           let name = self.participants.value.filter({ info in
+            return info.jamiId != localJamiId
+           }).first?.registeredName.value {
+            return name
+        }
+        return ""
     }
 
     private func buildTitleFrom(names: [String]) -> String {
