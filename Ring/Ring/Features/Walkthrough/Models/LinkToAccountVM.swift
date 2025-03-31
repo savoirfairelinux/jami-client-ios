@@ -210,6 +210,11 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
            let error = AuthError(rawValue: errorString) {
             withAnimation { self.uiState = .error(message: error.message()) }
         } else {
+            // enable push notifications
+            NotificationCenter
+                .default
+                .post(name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
+                      object: nil)
             withAnimation { self.uiState = .success }
         }
     }
