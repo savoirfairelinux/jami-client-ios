@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Cuộc trò chuyện câm lặng";
 "swarm.leaveConversation" = "Để lại cuộc trò chuyện";
-"swarm.chooseColor" = "Color";
+"swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Định dạng";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Cài đặt";
 "swarm.members" = "Các thành viên";
 "swarm.addDescription" = "Add description";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Contact";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Share contact information";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Cuộc trò chuyện";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Tự riêng";
 "swarm.adminInvitesOnly" = "Nhóm tư nhân (được mời giới hạn)";
 "swarm.invitesOnly" = "Nhóm tư nhân";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Hình ảnh hồ sơ";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "Mã QR";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";

@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "Išeiti iš pokalbio";
-"swarm.chooseColor" = "Spalva";
+"swarm.chooseColor" = "Pokalbio spalva";
 "swarm.typeOfSwarm" = "Pokalbio tipas";
 "swarm.identifier" = "Identifikatorius";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Nustatymai";
 "swarm.members" = "Nariai";
 "swarm.addDescription" = "Pridėti aprašą";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Adresatas";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Bendrinti kontaktinę informaciją";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Pokalbis";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Privatus";
 "swarm.adminInvitesOnly" = "Private group (restricted invites)";
 "swarm.invitesOnly" = "Privati grupė";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Profile picture";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "QR kodas";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";

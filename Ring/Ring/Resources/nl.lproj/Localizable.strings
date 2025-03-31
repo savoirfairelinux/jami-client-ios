@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Zwijg gesprek";
 "swarm.leaveConversation" = "Laat het gesprek";
-"swarm.chooseColor" = "Kleur";
+"swarm.chooseColor" = "Kleur van het gesprek";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identificatie";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Instellingen";
 "swarm.members" = "Lid-Staten";
 "swarm.addDescription" = "Add description";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Contact";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Share contact information";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Gesprek";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Privé";
 "swarm.adminInvitesOnly" = "Privégroep (beperkte uitnodigingen)";
 "swarm.invitesOnly" = "Privégroep";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Profielfoto";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "QR-code";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";

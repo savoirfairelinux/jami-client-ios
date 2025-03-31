@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Mykistä keskustelu";
 "swarm.leaveConversation" = "Poistu keskustelusta";
-"swarm.chooseColor" = "Väri";
+"swarm.chooseColor" = "Keskustelun väri";
 "swarm.typeOfSwarm" = "Keskustelun tyyppi";
 "swarm.identifier" = "Tunniste";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Asetukset";
 "swarm.members" = "Jäsenet";
 "swarm.addDescription" = "Lisää kuvaus";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Yhteystieto";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Jaa yhteystiedot";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Keskustelu";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Yksityinen";
 "swarm.adminInvitesOnly" = "Yksityinen ryhmä (rajoitetut kutsut)";
 "swarm.invitesOnly" = "Yksityinen ryhmä";
@@ -89,7 +104,7 @@
 "swarm.unknown" = "Tuntematon";
 "swarm.inviteMembers" = "Kutsu jäseniä";
 "swarm.confirmLeaveConversation" = "Haluatko poistua keskustelusta?";
-"swarm.Leave" = "Lähdetään";
+"swarm.Leave" = "Poistu";
 "swarm.newGroup" = "Luo uusi ryhmä";
 "swarm.namePlaceholder" = "Ryhmän nimi";
 "swarm.explanationText" = "Jäseniä voidaan kutsua ryhmän luomisen jälkeen.";
@@ -162,7 +177,7 @@
 "welcome.haveAccount" = "Minulla on jo tili.";
 "welcome.linkDevice" = "Tuo toisesta laitteesta";
 "welcome.linkBackup" = "Tuo varmuuskopiosta";
-"welcome.createAccount" = "Luo Jami-tilin";
+"welcome.createAccount" = "Luo Jami-tili";
 "welcome.connectToJAMS" = "Yhdistä Jami Account Management Server (JAMS)";
 
 // Creation Profile Screen
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Profiilikuva";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "QR-koodi";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";

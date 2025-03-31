@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Silenciar conversa";
 "swarm.leaveConversation" = "Abandonar a conversa";
-"swarm.chooseColor" = "Cor";
+"swarm.chooseColor" = "Cor da conversação";
 "swarm.typeOfSwarm" = "Tipo de conversa";
 "swarm.identifier" = "Identificador";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Configurações";
 "swarm.members" = "Membros";
 "swarm.addDescription" = "Adicionar descrição";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Editar título do grupo";
+"swarm.descriptionAlertHeader" = "Editar descrição do grupo";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Contacto";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Partilhar informação do contacto";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Conversação";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Privado";
 "swarm.adminInvitesOnly" = "Grupo privado (convites restritos)";
 "swarm.invitesOnly" = "Grupo privado";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Imagem do perfil";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "Código QR";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";

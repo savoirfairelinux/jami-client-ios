@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Silenciar conversación";
 "swarm.leaveConversation" = "Salir de la conversación";
-"swarm.chooseColor" = "Color";
+"swarm.chooseColor" = "Color de la conversación";
 "swarm.typeOfSwarm" = "Tipo de conversación";
 "swarm.identifier" = "Identificador";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Configuraciones";
 "swarm.members" = "Miembros";
 "swarm.addDescription" = "Añadir descripción";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Contacto";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Compartir información de contacto";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Conversación";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Privado";
 "swarm.adminInvitesOnly" = "Grupo privado (invitaciones limitadas)";
 "swarm.invitesOnly" = "Grupo privado";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Imagen de perfil";
 "accessibility.profilePicturePickerHint" = "Toca dos veces para tomar una foto o seleccionar una imagen de la biblioteca.";
 "accessibility.swarmPicturePicker" = "Foto de grupo";
-"accessibility.swarmPicturePickerHint" = "Toca dos veces para tomar una foto o seleccionar una imagen de la biblioteca.";
 "accessibility.accountSummaryQrCode" = "Código QR";
 "accessibility.accountSummaryQrCodeHint" = "Doble clic para ver el código QR de la cuenta";
 "accessibility.accountSummaryEditProfileHint" = "Doble clic para editar el perfil.";

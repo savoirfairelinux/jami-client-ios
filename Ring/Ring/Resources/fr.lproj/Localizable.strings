@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Mettre en sourdine";
 "swarm.leaveConversation" = "Quitter la conversation";
-"swarm.chooseColor" = "Couleur";
+"swarm.chooseColor" = "Couleur de conversation";
 "swarm.typeOfSwarm" = "Type de conversation";
 "swarm.identifier" = "Identifiant ";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Paramètres";
 "swarm.members" = "Membres";
 "swarm.addDescription" = "Ajouter une description";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Contact";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Partager les informations du contact";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Conversation";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Privé";
 "swarm.adminInvitesOnly" = "Groupe privé (sur invitation)";
 "swarm.invitesOnly" = "Groupe privé";
@@ -429,7 +444,7 @@
 "linkDevice.errorWrongPassword" = "Une erreur d'authentification s'est produite. Veuillez vérifier votre mot de passe.";
 "linkDevice.errorNetwork" = "Une erreur réseau s'est produite.\nVérifier votre connectivité réseau.";
 "linkDevice.errorTimeout" = "L'opération a été interrompue.\nVeuillez réessayer.";
-"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
+"linkDevice.errorCode" = "Une erreur s'est produite lors de la génération du code.\nEssayez à nouveau.";
 "linkDevice.errorWrongData" = "Une erreur s'est produite pendant l'exportation du compte.\nVérifiez et réessayez.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
 "linkDevice.infoQRCode" = "Une fois prêt, scannez le code QR.";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Image de profil";
 "accessibility.profilePicturePickerHint" = "Taper deux fois pour prendre une photo ou choisir une image dans votre bibliothèque";
 "accessibility.swarmPicturePicker" = "Image du groupe";
-"accessibility.swarmPicturePickerHint" = "Taper deux fois pour prendre une photo ou choisir une image dans votre bibliothèque";
 "accessibility.accountSummaryQrCode" = "Code QR";
 "accessibility.accountSummaryQrCodeHint" = "Double tapotement pour voir le code QR du compte";
 "accessibility.accountSummaryEditProfileHint" = "Double tapotement pour modifier votre profil";

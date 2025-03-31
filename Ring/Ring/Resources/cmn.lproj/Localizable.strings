@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "静音对话";
 "swarm.leaveConversation" = "离开谈话";
-"swarm.chooseColor" = "色彩";
+"swarm.chooseColor" = "对话框颜色";
 "swarm.typeOfSwarm" = "对话类型";
 "swarm.identifier" = "識別碼";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "設定";
 "swarm.members" = "成員";
 "swarm.addDescription" = "添加描述";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Contact";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Share contact information";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "對話";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "私人";
 "swarm.adminInvitesOnly" = "私人群组(受限制邀请)";
 "swarm.invitesOnly" = "私密群组";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "个人资料图片";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "二维码";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";

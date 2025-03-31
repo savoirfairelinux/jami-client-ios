@@ -44,7 +44,7 @@
 "global.copy" = "Zkopírovat";
 "global.reply" = "Odpovědět";
 "global.search" = "Hledá se…";
-"global.donate" = "Donate";
+"global.donate" = "Darovat";
 "global.deleteMessage" = "Smazat zprávu";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Upravit zprávu";
@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Ztlumit konverzaci";
 "swarm.leaveConversation" = "Opustit konverzaci";
-"swarm.chooseColor" = "Barva";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.chooseColor" = "Barva konverzace";
+"swarm.typeOfSwarm" = "Typ konverzace";
 "swarm.identifier" = "Identifikátor";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Nastavení";
 "swarm.members" = "Členové";
 "swarm.addDescription" = "Add description";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Contact";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Share contact information";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Konverzace";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Soukromý";
 "swarm.adminInvitesOnly" = "Soukromá skupina (omezené pozvánky)";
 "swarm.invitesOnly" = "Soukromá skupina";
@@ -85,7 +100,7 @@
 "swarm.member" = "Člen";
 "swarm.invited" = "Pozvaný";
 "swarm.admin" = "Správce";
-"swarm.blocked" = "Blocked";
+"swarm.blocked" = "Blokováno";
 "swarm.unknown" = "Neznámé";
 "swarm.inviteMembers" = "Invite members";
 "swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
@@ -144,14 +159,14 @@
 "conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Vy";
 "conversation.edited" = "Upraveno";
-"conversation.deletedMessage" = "%@ deleted a message";
+"conversation.deletedMessage" = "%@ smazaná zpráva";
 "conversation.contactBlocked" = "Contact blocked";
 
 // Invitations
 "invitations.noInvitations" = "Žádná pozvání";
 "invitations.accepted" = "Přijato";
 "invitations.declined" = "Declined";
-"invitations.blocked" = "Blocked";
+"invitations.blocked" = "Blokováno";
 "invitations.list" = "Pozvání přijato";
 
 // Walkthrough
@@ -184,7 +199,7 @@
 "createAccount.UsernameNotRegisteredMessage" = "Účet byl vytvořen, ale uživatelské jméno nebylo registrováno.";
 "createAccount.timeoutTitle" = "Účet byl vytvořen.";
 "createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.sipConfigure" = "Nakonfigurujte stávající SIP účet";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Můžete si zvolit uživatelské jméno, aby vás ostatní mohli na Jami snáze najít a zastihnout.";
 "createAccount.newAccount" = "Nový účet";
@@ -192,7 +207,7 @@
 "createAccount.encrypt" = "Šifrování";
 "createAccount.customize" = "Upravit";
 "createAccount.encryptTitle" = "Šifrovat účet heslem";
-"createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"createAccount.encryptExplanation" = "Účet Jami je vytvořen a uložen lokálně pouze na tomto zařízení jako archiv obsahující jeho klíče účtu. Přístup do archivu lze volitelně chránit heslem.";
 
 // Link To Account form
 "linkToAccount.importAccount" = "Import account";
@@ -208,8 +223,8 @@
 "linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
 "linkToAccount.exit" = "Odejít";
 "linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.alertTile" = "Chcete ukončit?";
+"linkToAccount.alertMessage" = "Ukončením zrušíte operaci importu účtu.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Import účtu Jami z místního archivního souboru.";
@@ -233,7 +248,7 @@
 "alerts.accountNoNetworkTitle" = "Chyba sítě";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
-"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
+"alerts.accountDefaultErrorMessage" = "Při vytváření účtu došlo k chybě.";
 "alerts.profileTakePhoto" = "Vyfotit";
 "alerts.profileUploadPhoto" = "Nahrát fotografii";
 "alerts.accountLinkedTitle" = "Připojuje se účet";
@@ -310,7 +325,7 @@
 "accountPage.deviceRevocationError" = "Chyba při odebrání zařízení";
 "accountPage.linkDeviceTitle" = "Připojit další zařízení";
 "accountPage.other" = "Ostatní";
-"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
+"accountPage.removeAccountMessage" = "Pokud účet nebyl zálohován nebo přidán do jiného zařízení, účet a registrované uživatelské jméno budou NENÁVRATNĚ ZTRACENY.";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Spojte se se mnou přes Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
@@ -354,21 +369,21 @@
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Spravovat účet";
 "accountPage.encryptAccount" = "Zašifrování účtu pomocí hesla";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.passwordExplanation" = "Účet Jami je vytvořen a uložen lokálně pouze na tomto zařízení jako archiv obsahující jeho klíče účtu. Přístup do archivu lze volitelně chránit heslem.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Připojená zařízení";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "Tento účet je zašifrován heslem, zadejte heslo pro vygenerování PIN kódu";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter a PIN code.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Oznámení";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
 "accountPage.callsFromUnknownContacts" = "Allow calls from unknown contacts.";
-"accountPage.accountSettingsExplanation" = "These settings will only apply to this account.";
+"accountPage.accountSettingsExplanation" = "Tato nastavení se budou vztahovat pouze na tento účet.";
 "accountPage.appSettings" = "App settings";
 "accountPage.appSettingsExplanation" = "These settings will apply to the entire application.";
 "accountPage.connectivityAndConfiguration" = "Connectivity and configurations";
@@ -387,7 +402,7 @@
 "accountPage.nameServer" = "Jmenný server";
 
 // Backup Account
-"backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
+"backupAccount.explanation" = "Tento účet Jami existuje pouze na tomto zařízení. Účet bude ztracen, pokud toto zařízení ztratíte nebo pokud bude aplikace odinstalována. Doporučuje se vytvořit zálohu tohoto účtu.";
 "backupAccount.title" = "Zálohovat účet";
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
@@ -427,8 +442,8 @@
 "linkDevice.title" = "Připojit nové zařízení";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
+"linkDevice.errorNetwork" = "Došlo k chybě sítě.\nZkontrolujte prosím vaše připojení.";
+"linkDevice.errorTimeout" = "Časový limit operace vypršel.\nZkuste to prosím znovu.";
 "linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
@@ -474,7 +489,7 @@
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
-"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.youJoined" = "Připojil jste se ke konverzaci.";
 "generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Odchozí hovor";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Profilový obrázek";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "Kód QR";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";
@@ -553,13 +567,13 @@
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
 "accessibility.conversationRowLastMessage" = "Last message at %@";
 "accessibility.userPresenceOnline" = "Připojen";
-"accessibility.userPresenceAvailable" = "Available";
+"accessibility.userPresenceAvailable" = "K dispozici";
 "accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
-"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Odmítnout pozvání";
+"accessibility.pendingRequestsListAcceptInvitation" = "Přijmout pozvání";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "Upraveno";
 "accessibility.messageBubbleRead" = "Read";
@@ -578,7 +592,7 @@
 "accessibility.calls.default.hangUpCall" = "Zavěsit";
 "accessibility.calls.default.addParticipant" = "Přidat účastníka";
 "accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.toggleSpeaker" = "Zapnout reproduktor";
 "accessibility.calls.default.openConversation" = "Otevřít konverzaci";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Zvednout ruku";

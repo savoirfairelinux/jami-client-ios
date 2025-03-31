@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Disattiva le notifiche";
 "swarm.leaveConversation" = "Lascia la conversazione";
-"swarm.chooseColor" = "Colore";
+"swarm.chooseColor" = "Colore della conversazione";
 "swarm.typeOfSwarm" = "Tipo di conversazione";
 "swarm.identifier" = "Identificatore";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Impostazioni";
 "swarm.members" = "Membri";
 "swarm.addDescription" = "Aggiungi descrizione";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Modifica il titolo del gruppo";
+"swarm.descriptionAlertHeader" = "Modifica la descrizione del gruppo";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Contatto";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Condividi informazioni di contatto";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Conversazione";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Privato";
 "swarm.adminInvitesOnly" = "Gruppo privato (inviti limitati)";
 "swarm.invitesOnly" = "Gruppo privato";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Foto di profilo";
 "accessibility.profilePicturePickerHint" = "Toccare due volte per scattare una foto o selezionare un'immagine dalla galleria";
 "accessibility.swarmPicturePicker" = "Foto del gruppo";
-"accessibility.swarmPicturePickerHint" = "Toccare due volte per scattare una foto o selezionare un'immagine dalla galleria";
 "accessibility.accountSummaryQrCode" = "Codice QR";
 "accessibility.accountSummaryQrCodeHint" = "Doppio tocco per vedere il codice QR dell'account";
 "accessibility.accountSummaryEditProfileHint" = "Doppio tocco per modificare il profilo";

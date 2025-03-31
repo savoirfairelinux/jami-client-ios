@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Summuta vestlus";
 "swarm.leaveConversation" = "Lahku vestlusest";
-"swarm.chooseColor" = "Värv";
+"swarm.chooseColor" = "Vestluse värv";
 "swarm.typeOfSwarm" = "Vestluse tüüp";
 "swarm.identifier" = "Tunnus";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Seadistused";
 "swarm.members" = "Liikmed";
 "swarm.addDescription" = "Lisa kirjeldus";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Kontakt";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Jaga kontaktandmed";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Vestlus";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Privaatne";
 "swarm.adminInvitesOnly" = "Privaatne grupp (piiratud kutsetega)";
 "swarm.invitesOnly" = "Privaatne grupp";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Profiilikuva";
 "accessibility.profilePicturePickerHint" = "Topeltklõpsa pildistamiseks või galeriist pildi valimiseks";
 "accessibility.swarmPicturePicker" = "Vestlusrühma tunnuspilt";
-"accessibility.swarmPicturePickerHint" = "Topeltklõpsa pildistamiseks või galeriist pildi valimiseks";
 "accessibility.accountSummaryQrCode" = "QR-kood";
 "accessibility.accountSummaryQrCodeHint" = "Kasutajakonto QR-koodi vaatamiseks topeltklõpsi";
 "accessibility.accountSummaryEditProfileHint" = "Profiili muutmiseks topeltklõpsi";

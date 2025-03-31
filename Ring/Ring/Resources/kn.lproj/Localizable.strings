@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "ಮೂಕ ಸಂಭಾಷಣೆ";
 "swarm.leaveConversation" = "ಸಂಭಾಷಣೆಯನ್ನು ಬಿಟ್ಟುಬಿಡಿ";
-"swarm.chooseColor" = "Color";
+"swarm.chooseColor" = "ಸಂಭಾಷಣೆ ಬಣ್ಣ";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "ಗುರುತಿನ ಚೀಟಿ";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "ಸೆಟ್ಟಿಂಗ್ಗಳು";
 "swarm.members" = "ಸದಸ್ಯರು";
 "swarm.addDescription" = "Add description";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Contact";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Share contact information";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "ಸಂಭಾಷಣೆ";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "ಖಾಸಗಿ";
 "swarm.adminInvitesOnly" = "ಖಾಸಗಿ ಗುಂಪು (ಸೀಮಿತ ಆಹ್ವಾನ)";
 "swarm.invitesOnly" = "ಖಾಸಗಿ ಗುಂಪು";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "ಪ್ರೊಫೈಲ್ ಚಿತ್ರ";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "ಕ್ಯೂಆರ್ ಕೋಡ್";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";

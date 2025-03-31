@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Утишај разговор";
 "swarm.leaveConversation" = "Оставите разговор";
-"swarm.chooseColor" = "Боја";
+"swarm.chooseColor" = "Боја разговора";
 "swarm.typeOfSwarm" = "Врста разговора";
 "swarm.identifier" = "Идентификатор";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Подешавања";
 "swarm.members" = "Чланови";
 "swarm.addDescription" = "Додајте опис";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Izmenite naslov grupe";
+"swarm.descriptionAlertHeader" = "Izmenite opis grupe";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Контакт";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Podeli kontakt informacije";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Разговор";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Приватно";
 "swarm.adminInvitesOnly" = "Приватна група (ограничени позиви)";
 "swarm.invitesOnly" = "Приватна група";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Фотографија профила";
 "accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.swarmPicturePicker" = "Group picture";
-"accessibility.swarmPicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
 "accessibility.accountSummaryQrCode" = "QR код";
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";

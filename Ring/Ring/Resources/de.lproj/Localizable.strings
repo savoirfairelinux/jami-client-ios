@@ -71,12 +71,27 @@
 // Swarm
 "swarm.muteConversation" = "Unterhaltung stummschalten";
 "swarm.leaveConversation" = "Unterhaltung verlassen";
-"swarm.chooseColor" = "Farbe";
+"swarm.chooseColor" = "Farbe der Unterhaltung";
 "swarm.typeOfSwarm" = "Unterhaltungstyp";
 "swarm.identifier" = "Identifikator";
+"swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Einstellungen";
 "swarm.members" = "Mitglieder";
 "swarm.addDescription" = "Beschreibung hinzufügen";
+"swarm.titlePlaceholder" = "Enter title";
+"swarm.titleAlertHeader" = "Edit group title";
+"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.contactHeader" = "Contact";
+"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.shareContactInfo" = "Share contact information";
+"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
+"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.editTextHint" = "Double tap to edit";
+"swarm.conversationHeader" = "Unterhaltung";
+"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Privat";
 "swarm.adminInvitesOnly" = "private Gruppe (eingeschränkte Einladungen)";
 "swarm.invitesOnly" = "private Gruppe";
@@ -536,7 +551,6 @@
 "accessibility.profilePicturePicker" = "Profilbild";
 "accessibility.profilePicturePickerHint" = "Doppeltippen Sie, um ein Bild aufzunehmen, oder wählen Sie ein Bild aus der Bibliothek aus";
 "accessibility.swarmPicturePicker" = "Gruppenbild";
-"accessibility.swarmPicturePickerHint" = "Doppeltippen Sie, um ein Bild aufzunehmen, oder wählen Sie ein Bild aus der Bibliothek aus";
 "accessibility.accountSummaryQrCode" = "QR-Code";
 "accessibility.accountSummaryQrCodeHint" = "Doppeltippen, um den QR-Code des Kontos anzuzeigen";
 "accessibility.accountSummaryEditProfileHint" = "Doppeltippen, um das Profil zu bearbeiten";
