@@ -71,7 +71,7 @@
 // Swarm
 "swarm.muteConversation" = "La conversación silenciosa";
 "swarm.leaveConversation" = "La conversación ye una conversación.";
-"swarm.chooseColor" = "Conversation color";
+"swarm.chooseColor" = "El color de la conversación";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identificador";
 "swarm.conversationId" = "Conversation ID";
@@ -90,7 +90,7 @@
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
 "swarm.editTextHint" = "Double tap to edit";
-"swarm.conversationHeader" = "Conversation";
+"swarm.conversationHeader" = "La conversación";
 "swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Privada";
 "swarm.adminInvitesOnly" = "El grupu priváu (invitaciones restrinxíes)";

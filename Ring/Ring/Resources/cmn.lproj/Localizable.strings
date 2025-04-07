@@ -79,12 +79,12 @@
 "swarm.members" = "成員";
 "swarm.addDescription" = "添加描述";
 "swarm.titlePlaceholder" = "Enter title";
-"swarm.titleAlertHeader" = "Edit group title";
-"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.titleAlertHeader" = "编辑群名称";
+"swarm.descriptionAlertHeader" = "编辑群简介";
 "swarm.descriptionPlaceholder" = "Enter title";
-"swarm.contactHeader" = "Contact";
+"swarm.contactHeader" = "聯絡人";
 "swarm.showContactQRCode" = "Show contact QR code";
-"swarm.shareContactInfo" = "Share contact information";
+"swarm.shareContactInfo" = "分享联系人";
 "swarm.accessibilityContactQRCode" = "QR code for contact";
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";

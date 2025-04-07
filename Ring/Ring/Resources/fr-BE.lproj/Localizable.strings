@@ -79,8 +79,8 @@
 "swarm.members" = "Membres";
 "swarm.addDescription" = "Ajouter une description";
 "swarm.titlePlaceholder" = "Enter title";
-"swarm.titleAlertHeader" = "Edit group title";
-"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.titleAlertHeader" = "Modifier le titre du groupe";
+"swarm.descriptionAlertHeader" = "Modifier la description du groupe";
 "swarm.descriptionPlaceholder" = "Enter title";
 "swarm.contactHeader" = "Contact";
 "swarm.showContactQRCode" = "Show contact QR code";
