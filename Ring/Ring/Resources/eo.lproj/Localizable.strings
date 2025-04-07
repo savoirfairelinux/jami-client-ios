@@ -82,7 +82,7 @@
 "swarm.titleAlertHeader" = "Edit group title";
 "swarm.descriptionAlertHeader" = "Edit group description";
 "swarm.descriptionPlaceholder" = "Enter title";
-"swarm.contactHeader" = "Contact";
+"swarm.contactHeader" = "Kontakto";
 "swarm.showContactQRCode" = "Show contact QR code";
 "swarm.shareContactInfo" = "Share contact information";
 "swarm.accessibilityContactQRCode" = "QR code for contact";

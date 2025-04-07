@@ -79,8 +79,8 @@
 "swarm.members" = "Jäsenet";
 "swarm.addDescription" = "Lisää kuvaus";
 "swarm.titlePlaceholder" = "Enter title";
-"swarm.titleAlertHeader" = "Edit group title";
-"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.titleAlertHeader" = "Muokkaa ryhmän nimeä";
+"swarm.descriptionAlertHeader" = "Muokkaa ryhmän kuvausta";
 "swarm.descriptionPlaceholder" = "Enter title";
 "swarm.contactHeader" = "Yhteystieto";
 "swarm.showContactQRCode" = "Show contact QR code";

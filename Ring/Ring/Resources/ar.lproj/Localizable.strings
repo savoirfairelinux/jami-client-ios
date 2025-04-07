@@ -71,7 +71,7 @@
 // Swarm
 "swarm.muteConversation" = "محادثة صامتة";
 "swarm.leaveConversation" = "أترك المحادثة";
-"swarm.chooseColor" = "Conversation color";
+"swarm.chooseColor" = "لون المحادثة";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "المعرف";
 "swarm.conversationId" = "Conversation ID";
@@ -82,7 +82,7 @@
 "swarm.titleAlertHeader" = "Edit group title";
 "swarm.descriptionAlertHeader" = "Edit group description";
 "swarm.descriptionPlaceholder" = "Enter title";
-"swarm.contactHeader" = "Contact";
+"swarm.contactHeader" = "إتصال";
 "swarm.showContactQRCode" = "Show contact QR code";
 "swarm.shareContactInfo" = "Share contact information";
 "swarm.accessibilityContactQRCode" = "QR code for contact";
@@ -90,7 +90,7 @@
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
 "swarm.editTextHint" = "Double tap to edit";
-"swarm.conversationHeader" = "Conversation";
+"swarm.conversationHeader" = "محادثة";
 "swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "خاص";
 "swarm.adminInvitesOnly" = "مجموعة خاصة (دعوات مقيدة)";

@@ -67,24 +67,24 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.addDescription" = "Add description";
+"swarmcreation.addDescription" = "Додати опис";
 // Swarm
 "swarm.muteConversation" = "Немовний розмову";
 "swarm.leaveConversation" = "Не переконвайтеся";
 "swarm.chooseColor" = "Колір розмови";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Тип розмови";
 "swarm.identifier" = "Ідентифікатор";
 "swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Налаштування";
 "swarm.members" = "Учасники";
-"swarm.addDescription" = "Add description";
+"swarm.addDescription" = "Додати опис";
 "swarm.titlePlaceholder" = "Enter title";
-"swarm.titleAlertHeader" = "Edit group title";
-"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.titleAlertHeader" = "Редагувати назву групи";
+"swarm.descriptionAlertHeader" = "Редагувати опис групи";
 "swarm.descriptionPlaceholder" = "Enter title";
 "swarm.contactHeader" = "Контакт";
 "swarm.showContactQRCode" = "Show contact QR code";
-"swarm.shareContactInfo" = "Share contact information";
+"swarm.shareContactInfo" = "Поділитися контактною інформацією";
 "swarm.accessibilityContactQRCode" = "QR code for contact";
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
@@ -138,7 +138,7 @@
 "smartlist.inviteFriends" = "Запросити друзів";
 "smartlist.accounts" = "Облікові записи";
 "smartlist.disableDonation" = "Не зараз";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
+"smartlist.donationExplanation" = "Якщо вам подобається користуватися Jami і ви вірите в нашу місію, чи хочете зробити пожертву?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "Нове повідомлення";
 
@@ -159,8 +159,8 @@
 "conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Ви";
 "conversation.edited" = "Редагування";
-"conversation.deletedMessage" = "%@ deleted a message";
-"conversation.contactBlocked" = "Contact blocked";
+"conversation.deletedMessage" = "%@ видалив(-ла) повідомлення";
+"conversation.contactBlocked" = "Контакт заблоковано";
 
 // Invitations
 "invitations.noInvitations" = "Ніяких запрошень";
@@ -191,15 +191,15 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Приєднуйся до Jami";
-"createAccount.lookingForUsernameAvailability" = "Checking username availability…";
+"createAccount.lookingForUsernameAvailability" = "Перевірка доступності імені користувача...";
 "createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
 "createAccount.usernameAlreadyTaken" = "Ім'я користувача вже зайнято";
-"createAccount.usernameValid" = "The username is available.";
+"createAccount.usernameValid" = "Ім'я користувача доступне.";
 "createAccount.UsernameNotRegisteredTitle" = "Збій мережі";
 "createAccount.UsernameNotRegisteredMessage" = "Уведено обліковий запис, але ім'я користувача не зареєстровано";
 "createAccount.timeoutTitle" = "Обліковий запис створено";
-"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.timeoutMessage" = "Реєстрація імені користувача триває. Будь ласка, зачекайте...";
+"createAccount.sipConfigure" = "Налаштувати існуючий SIP-обліковий запис";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Ви можете вибрати ім'я користувача, щоб іншим було легше знайти вас і зв'язатися з вами в Jami.";
 "createAccount.newAccount" = "Новий аккаунт";
@@ -210,7 +210,7 @@
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Імпортувати аккаунт";
 "linkToAccount.showQrCode" = "QR-код";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
@@ -243,12 +243,12 @@
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "Account error";
-"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Не вдається знайти обліковий запис у мережі Jami. Переконайтеся, що він був експортований з Jami з існуючого пристрою, і що надані облікові дані правильні.";
 "alerts.accountAddedTitle" = "Account added";
 "alerts.accountNoNetworkTitle" = "Збій мережі";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
-"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
+"alerts.accountDefaultErrorMessage" = "Сталася помилка під час створення облікового запису.";
 "alerts.profileTakePhoto" = "Зняти фото";
 "alerts.profileUploadPhoto" = "Завантажити фото";
 "alerts.accountLinkedTitle" = "Спільний рахунок";
@@ -331,7 +331,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Введіть пароль рахунку";
 "accountPage.usernamePlaceholder" = "Введіть бажане ім'я користувача";
-"accountPage.registerNameErrorMessage" = "The username is unavailable.";
+"accountPage.registerNameErrorMessage" = "Ім'я користувача недоступне.";
 "accountPage.usernameRegistering" = "Реєстрація";
 "accountPage.usernameRegisterAction" = "Зареєструватися";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -364,13 +364,13 @@
 "accountPage.profileHeader" = "Профіль";
 "accountPage.profileNameNotSelected" = "Name not selected";
 "accountPage.accountHeader" = "Акаунт";
-"accountPage.profileName" = "Profile name";
+"accountPage.profileName" = "Ім'я профілю";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Керувати акаунтом";
 "accountPage.encryptAccount" = "Зашифруйте обліковий запис паролем";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordsDoNotMatch" = "Паролі не збігаються.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Привʼязані пристрої";
@@ -451,11 +451,11 @@
 "linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
 "linkDevice.connecting" = "Connecting to your new device…";
 "linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
+"linkDevice.newDeviceIP" = "IP-адреса нового пристрою:%1@";
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "Обліковий запис успішно імпортовано на новий пристрій.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Розпочати аудіодзвінок";
@@ -487,16 +487,16 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Отримано запрошення";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ був(-ла) запрошений(-а) приєднатися до розмови.";
+"generatedMessage.invitationAccepted" = "%@ приєднався(-лась) до розмови.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ був(-ла) заблокований(-а) в розмові.";
+"generatedMessage.contactUnblocked" = "%@ був(-ла) розблокований(-а) в розмові.";
 "generatedMessage.outgoingCall" = "Вихідний виклик";
 "generatedMessage.missedOutgoingCall" = "Пропущений вихідний виклик";
 "generatedMessage.missedIncomingCall" = "Пропущений вхідний виклик";
 "generatedMessage.liveLocationSharing" = "Поділення місцями на живо";
-"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ залишив(-ла) розмову.";
 "generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
 "generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
@@ -519,7 +519,7 @@
 "logView.startLogging" = "Start logging";
 "logView.stopLogging" = "Зупинити ведення журналу";
 "logView.saveError" = "An error occurred while saving the file.";
-"logView.shareError" = "An error occurred while sharing the file.";
+"logView.shareError" = "Сталася помилка під час поширення файлу.";
 
 // Migrate Account
 "migrateAccount.title" = "Переведення облікового запису";
@@ -572,8 +572,8 @@
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
-"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Відхилити запрошення";
+"accessibility.pendingRequestsListAcceptInvitation" = "Прийняти запрошення";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "Редагування";
 "accessibility.messageBubbleRead" = "Read";
@@ -592,7 +592,7 @@
 "accessibility.calls.default.hangUpCall" = "Зупинити";
 "accessibility.calls.default.addParticipant" = "Додати учасників";
 "accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.toggleSpeaker" = "Увімкнути гучномовець";
 "accessibility.calls.default.openConversation" = "Відкрити розмову";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Підняти руку";

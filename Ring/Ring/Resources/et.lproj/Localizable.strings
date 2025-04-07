@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.accountSettings" = "Kontode seaded";
+"global.accountSettings" = "Kasutajakontode seadistused";
 "global.username" = "Kasutajanimi";
 "global.recommended" = "Soovitatav";
 "global.password" = "Salasõna";
@@ -74,24 +74,24 @@
 "swarm.chooseColor" = "Vestluse värv";
 "swarm.typeOfSwarm" = "Vestluse tüüp";
 "swarm.identifier" = "Tunnus";
-"swarm.conversationId" = "Conversation ID";
+"swarm.conversationId" = "Vestluse tunnus";
 "swarm.settings" = "Seadistused";
 "swarm.members" = "Liikmed";
 "swarm.addDescription" = "Lisa kirjeldus";
-"swarm.titlePlaceholder" = "Enter title";
-"swarm.titleAlertHeader" = "Edit group title";
-"swarm.descriptionAlertHeader" = "Edit group description";
-"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.titlePlaceholder" = "Sisesta pealkiri";
+"swarm.titleAlertHeader" = "Muuda grupi nime";
+"swarm.descriptionAlertHeader" = "Muuda grupi kirjeldust";
+"swarm.descriptionPlaceholder" = "Sisesta pealkiri";
 "swarm.contactHeader" = "Kontakt";
-"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.showContactQRCode" = "Näita kontakti QR-koodi";
 "swarm.shareContactInfo" = "Jaga kontaktandmed";
-"swarm.accessibilityContactQRCode" = "QR code for contact";
-"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
-"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
-"swarm.accessibilityColorPicker" = "Conversation color picker";
-"swarm.editTextHint" = "Double tap to edit";
+"swarm.accessibilityContactQRCode" = "Kontakti QR-kood";
+"swarm.accessibilityContactQRCodeHint" = "Avab ekraanivaate kontakti QR-koodiga";
+"swarm.accessibilityContactShareHint" = "Avab kontaktandmete jagamise valikud";
+"swarm.accessibilityColorPicker" = "Vestluse värvivalija";
+"swarm.editTextHint" = "Muutmiseks topeltklõpsi";
 "swarm.conversationHeader" = "Vestlus";
-"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
+"swarm.shareContactMessage" = "Sa võid selle „%1@“ kontakti lisada hajutatud suhtlusvõrgus Jami: https://jami.net";
 "swarm.oneToOne" = "Privaatne";
 "swarm.adminInvitesOnly" = "Privaatne grupp (piiratud kutsetega)";
 "swarm.invitesOnly" = "Privaatne grupp";
@@ -126,7 +126,7 @@
 "smartlist.noResults" = "Pole tulemusi";
 "smartlist.noConversation" = "Pole vestlusi";
 "smartlist.searchBarPlaceholder" = "Sisesta nimi…";
-"smartlist.searchBar" = "Otsing";
+"smartlist.searchBar" = "Otsi";
 "smartlist.noNetworkConnectivity" = "Võrguühendus puudub";
 "smartlist.cellularAccess" = "Palun veendu, et nutiseadme seadistustes on lubatud juurdepääs mobiilivõrgule.";
 "smartlist.accountsTitle" = "Kasutajakontod";
@@ -289,7 +289,7 @@
 "calls.callFinished" = "Kõne on lõppenud";
 "calls.currentCallWith" = "Helista kasutajale";
 "calls.maximize" = "Maksimeeri";
-"calls.minimize" = "Väikendada";
+"calls.minimize" = "Minimeeri";
 "calls.setModerator" = "Määra moderaator";
 "calls.removeModerator" = "Eemalda moderaator";
 "calls.muteAudio" = "Summuta mikrofon";
@@ -548,7 +548,7 @@
 "accessibility.aboutJamiTitle" = "Jami teave";
 "accessibility.welcomeToJamiTitle" = "Tere tulemast kasutama suhtlusrakendust Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "Sisesta kasutajanimi kontrollimaks kas ta on saadaval.";
-"accessibility.profilePicturePicker" = "Profiilikuva";
+"accessibility.profilePicturePicker" = "Profiilipilt";
 "accessibility.profilePicturePickerHint" = "Topeltklõpsa pildistamiseks või galeriist pildi valimiseks";
 "accessibility.swarmPicturePicker" = "Vestlusrühma tunnuspilt";
 "accessibility.accountSummaryQrCode" = "QR-kood";
@@ -611,8 +611,8 @@
 "accessibility.conference.maximize" = "Maksimeeri";
 "accessibility.conference.setModerator" = "Määra moderaator";
 "accessibility.conference.unsetModerator" = "Eemalda moderaator";
-"accessibility.conference.muteAudio" = "Kuulutusvabad";
-"accessibility.conference.unmuteAudio" = "Surnud audio";
+"accessibility.conference.muteAudio" = "Summuta heli";
+"accessibility.conference.unmuteAudio" = "Lõpeta heli summutamine";
 "accessibility.conference.hangup" = "Lõpeta kõne";
 "accessibility.conference.lowerHand" = "Lase käsi alla";
 
