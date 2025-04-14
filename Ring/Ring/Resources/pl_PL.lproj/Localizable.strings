@@ -257,7 +257,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Usuń rozmowę";
 "alerts.noMediaPermissionsTitle" = "Uprawnienia multimediów nieprzyznane";
 "alerts.noLibraryPermissionsTitle" = "Dostęp do galerii zdjęć nie został nadany";
 "alerts.noLocationPermissionsTitle" = "Nie udzielono dostępu do lokalizacji";
@@ -572,8 +572,8 @@
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
-"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Odrzuć zaproszenie";
+"accessibility.pendingRequestsListAcceptInvitation" = "Zaakceptuj zaproszenie";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "Edytowany";
 "accessibility.messageBubbleRead" = "Read";

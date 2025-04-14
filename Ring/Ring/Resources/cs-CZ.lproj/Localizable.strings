@@ -191,14 +191,14 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Připojit k Jami";
-"createAccount.lookingForUsernameAvailability" = "Checking username availability…";
+"createAccount.lookingForUsernameAvailability" = "Kontrola dostupnosti uživatelského jména…";
 "createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
 "createAccount.usernameAlreadyTaken" = "Uživatelské jméno je již zabrané.";
-"createAccount.usernameValid" = "The username is available.";
+"createAccount.usernameValid" = "Uživatelské jméno je k dispozici.";
 "createAccount.UsernameNotRegisteredTitle" = "Chyba sítě";
 "createAccount.UsernameNotRegisteredMessage" = "Účet byl vytvořen, ale uživatelské jméno nebylo registrováno.";
 "createAccount.timeoutTitle" = "Účet byl vytvořen.";
-"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
+"createAccount.timeoutMessage" = "Probíhá registrace uživatelského jména. Čekejte prosím…";
 "createAccount.sipConfigure" = "Nakonfigurujte stávající SIP účet";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Můžete si zvolit uživatelské jméno, aby vás ostatní mohli na Jami snáze najít a zastihnout.";
@@ -213,7 +213,7 @@
 "linkToAccount.importAccount" = "Import account";
 "linkToAccount.showQrCode" = "Kód QR";
 "linkToAccount.showPinCode" = "Authentication code";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
+"linkToAccount.actionRequired" = "Je vyžadována akce.\nPotvrďte účet na zdrojovém zařízení.";
 "linkToAccount.allSet" = "Account imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
@@ -242,12 +242,12 @@
 "linkToAccountManager.enterCredentials" = "Zadejte pověření JAMS";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Account error";
-"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundTitle" = "Chyba účtu";
+"alerts.accountCannotBeFoundMessage" = "Nelze najít účet v síti Jami. Ujistěte se, že byl exportován na Jami z existujícího zařízení a že poskytnuté přihlašovací údaje jsou správné.";
 "alerts.accountAddedTitle" = "Account added";
 "alerts.accountNoNetworkTitle" = "Chyba sítě";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
-"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorTitle" = "Chyba účtu";
 "alerts.accountDefaultErrorMessage" = "Při vytváření účtu došlo k chybě.";
 "alerts.profileTakePhoto" = "Vyfotit";
 "alerts.profileUploadPhoto" = "Nahrát fotografii";
@@ -370,7 +370,7 @@
 "accountPage.manageAccount" = "Spravovat účet";
 "accountPage.encryptAccount" = "Zašifrování účtu pomocí hesla";
 "accountPage.passwordExplanation" = "Účet Jami je vytvořen a uložen lokálně pouze na tomto zařízení jako archiv obsahující jeho klíče účtu. Přístup do archivu lze volitelně chránit heslem.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordsDoNotMatch" = "Hesla se neshodují.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Připojená zařízení";
