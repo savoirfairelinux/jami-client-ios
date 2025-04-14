@@ -248,7 +248,7 @@
 "alerts.accountNoNetworkTitle" = "ਨੈੱਟਵਰਕ ਗੜਬੜ";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "Account error";
-"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
+"alerts.accountDefaultErrorMessage" = "ਖਾਤਾ ਬਣਾਉਣ ਵੇਲੇ ਕੋਈ ਗੜਬੜ ਹੋਈ";
 "alerts.profileTakePhoto" = "ਫ਼ੋਟੋ ਖਿੱਚੋ";
 "alerts.profileUploadPhoto" = "ਫ਼ੋਟੋ ਅੱਪਲੋਡ ਕਰੋ";
 "alerts.accountLinkedTitle" = "ਖਾਤਾ ਲਿੰਕ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ";
