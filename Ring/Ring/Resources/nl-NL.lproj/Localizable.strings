@@ -1,4 +1,4 @@
-﻿ /*
+ /*
  *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
@@ -67,7 +67,7 @@
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";;
 
 //Invitations
 "invitations.noInvitations" = "Geen uitnodigingen";
