@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.accountSettings" = "Account Settings";
+"global.accountSettings" = "账户设置";
 "global.username" = "Username";
 "global.recommended" = "Recommended";
 "global.password" = "Password";
@@ -29,14 +29,14 @@
 "global.cancel" = "Cancel";
 "global.blockContact" = "阻擋連絡人";
 "global.removeAccount" = "Remove account";
-"global.incomingCall" = "Incoming call";
+"global.incomingCall" = "来电";
 "global.ok" = "確定";
 "global.close" = "Close";
 "global.share" = "Share";
 "global.forward" = "Forward";
 "global.save" = "Save";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "预览";
 "global.accept" = "Accept";
 "global.block" = "Block";
 "global.decline" = "拒接";
@@ -117,7 +117,7 @@
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "公共目录";
 "smartlist.jamsResults" = "Search result";
-"smartlist.conversations" = "Conversations";
+"smartlist.conversations" = "会话";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
@@ -249,7 +249,7 @@
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
 "alerts.accountDefaultErrorTitle" = "无法找到账户";
 "alerts.accountDefaultErrorMessage" = "创建帐户时出错";
-"alerts.profileTakePhoto" = "Take photo";
+"alerts.profileTakePhoto" = "拍照";
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
@@ -278,7 +278,7 @@
 
 // Actions
 "actions.deleteAction" = "Delete";
-"actions.backAction" = "Back";
+"actions.backAction" = "上一步";
 "actions.doneAction" = "Done";
 "actions.goToSettings" = "Go to Settings";
 "actions.stopLocationSharing" = "Stop sharing";
@@ -298,7 +298,7 @@
 
 // Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Settings";
+"accountPage.settingsHeader" = "设置";
 "accountPage.notificationsHeader" = "通知";
 "accountPage.blockedContacts" = "Blocked contacts";
 "accountPage.unblockContact" = "取消屏蔽";
@@ -481,7 +481,7 @@
 "dataTransfer.readableStatusDecline" = "拒接";
 "dataTransfer.readableStatusAccept" = "Accept";
 "dataTransfer.infoMessage" = "Press to start recording";
-"dataTransfer.sendMessage" = "Send";
+"dataTransfer.sendMessage" = "发送";
 
 
 // Generated Message
@@ -492,9 +492,9 @@
 "generatedMessage.youJoined" = "您加入了对话。";
 "generatedMessage.contactBlocked" = "%@被阻止参与对话。";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
-"generatedMessage.outgoingCall" = "Outgoing call";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.outgoingCall" = "去电";
+"generatedMessage.missedOutgoingCall" = "呼叫失败";
+"generatedMessage.missedIncomingCall" = "未接来电";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 "generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
 "generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
@@ -585,7 +585,7 @@
 "accessibility.text.sentOn" = "%1@, message sent on %2@";
 "accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.call.lasted" = "持续%@";
 "accessibility.calls.default.toggleAudio" = "关闭麦克风";
 "accessibility.calls.default.toggleVideo" = "启动摄像头";
 "accessibility.calls.default.pauseCall" = "暫停通話";

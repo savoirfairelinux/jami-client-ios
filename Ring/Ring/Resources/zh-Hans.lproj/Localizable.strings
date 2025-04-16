@@ -585,7 +585,7 @@
 "accessibility.text.sentOn" = "%1@, message sent on %2@";
 "accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.call.lasted" = "持续%@";
 "accessibility.calls.default.toggleAudio" = "麥克風靜音";
 "accessibility.calls.default.toggleVideo" = "启动摄像头";
 "accessibility.calls.default.pauseCall" = "暫停通話";
