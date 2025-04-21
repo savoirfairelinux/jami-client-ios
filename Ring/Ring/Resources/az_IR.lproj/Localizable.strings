@@ -71,7 +71,7 @@
 // Swarm
 "swarm.muteConversation" = "ساکئت مکالمات";
 "swarm.leaveConversation" = "مکالمه دن اوزاقلاش";
-"swarm.chooseColor" = "Conversation color";
+"swarm.chooseColor" = "دانیشیق رنگینه";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "آدیفئکتور";
 "swarm.conversationId" = "Conversation ID";
@@ -90,7 +90,7 @@
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
 "swarm.editTextHint" = "Double tap to edit";
-"swarm.conversationHeader" = "Conversation";
+"swarm.conversationHeader" = "دانیشیق";
 "swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "خصوصی";
 "swarm.adminInvitesOnly" = "خصوصی گروه (محدود دعوت)";

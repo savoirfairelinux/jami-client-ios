@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.accountSettings" = "Account Settings";
+"global.accountSettings" = "Konto-Einstellungen";
 "global.username" = "Username";
 "global.recommended" = "Recommended";
 "global.password" = "Password";
@@ -29,7 +29,7 @@
 "global.cancel" = "Cancel";
 "global.blockContact" = "Block contact";
 "global.removeAccount" = "Remove account";
-"global.incomingCall" = "Incoming call";
+"global.incomingCall" = "Eingehender Anruf";
 "global.ok" = "OK";
 "global.close" = "Close";
 "global.share" = "Share";
@@ -42,7 +42,7 @@
 "global.decline" = "Ablehnen";
 "global.name" = "Name";
 "global.copy" = "Copy";
-"global.reply" = "Reply";
+"global.reply" = "Antworten";
 "global.search" = "Searching…";
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete message";
@@ -122,19 +122,19 @@
 "smartlist.newContact" = "Neuer Kontakt";
 "smartlist.newGroup" = "Neue Gruppe";
 "smartlist.accounts" = "Accounts";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "Erhaltene Einladungen";
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Namen eingeben…";
 "smartlist.searchBar" = "Search";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
+"smartlist.noNetworkConnectivity" = "Keine Netzwerkverbindung";
 "smartlist.cellularAccess" = "Stellen Sie sicher, dass in den Einstellungen der Mobilfunkzugriff erlaubt ist.";
 "smartlist.accountsTitle" = "Accounts";
 "smartlist.addAccountButton" = "+ Konto hinzufügen";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
 "smartlist.invitations" = "Invitations";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "Über Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Accounts";
 "smartlist.disableDonation" = "Not now";
@@ -144,7 +144,7 @@
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
-"conversation.addToContactsLabel" = "Add to contacts?";
+"conversation.addToContactsLabel" = "Zu Kontakten hinzufügen?";
 "conversation.notContactLabel" = "%@ ist nicht in der Kontaktliste";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.errorSavingImage" = "Beim Speichern des Bildes in der Galerie ist ein Fehler aufgetreten.";
@@ -167,7 +167,7 @@
 "invitations.accepted" = "Akzeptiert";
 "invitations.declined" = "Abgelehnt";
 "invitations.blocked" = "Blockiert";
-"invitations.list" = "Invitations received";
+"invitations.list" = "Erhaltene Einladungen";
 
 // Walkthrough
 
@@ -264,15 +264,15 @@
 "alerts.errorWrongCredentials" = "Beim Herstellen der Verbindung zum Jami Account Management Server (JAMS) ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, wenden Sie sich an Ihren Systemadministrator.";
 "alerts.recordVideoMessage" = "Videonachricht aufnehmen";
 "alerts.recordAudioMessage" = "Sprachnachricht aufnehmen";
-"alerts.uploadFile" = "Send file";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "Datei senden";
+"alerts.uploadPhoto" = "Galerie öffnen";
 "alerts.locationServiceIsDisabled" = "„Ortungsdienste“ aktivieren damit „Jami“ den Standort des Geräts bestimmen kann.";
 "alerts.locationSharing" = "Share my location";
 "alerts.alreadylocationSharing" = "Already sharing location with this user";
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.mapInformation" = "Karteninformation";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
@@ -281,7 +281,7 @@
 "actions.backAction" = "Back";
 "actions.doneAction" = "Done";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.stopLocationSharing" = "Teilen beenden";
 
 // Calls
 "calls.ringing" = "Ringing…";
@@ -298,7 +298,7 @@
 
 // Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Settings";
+"accountPage.settingsHeader" = "Einstellungen";
 "accountPage.notificationsHeader" = "Notifications";
 "accountPage.blockedContacts" = "Blocked contacts";
 "accountPage.unblockContact" = "Entblocken";
@@ -367,7 +367,7 @@
 "accountPage.profileName" = "Profile name";
 "accountPage.profileNamePlaceholder" = "Profilnamen eingeben";
 "accountPage.editProfile" = "Profil bearbeiten";
-"accountPage.manageAccount" = "Manage account";
+"accountPage.manageAccount" = "Konto verwalten";
 "accountPage.encryptAccount" = "Encrypt account with a password";
 "accountPage.passwordExplanation" = "Ein Jami-Konto wird nur auf diesem Gerät lokal erstellt und als Archiv mit seinen Kontoschlüsseln gespeichert. Der Zugriff auf das Archiv kann optional mit einem Passwort geschützt werden.";
 "accountPage.passwordsDoNotMatch" = "Passwörter stimmen nicht überein.";
@@ -492,9 +492,9 @@
 "generatedMessage.youJoined" = "Sie sind der Unterhaltung begetreten.";
 "generatedMessage.contactBlocked" = "%@ wurde von der Unterhaltung ausgeschlossen.";
 "generatedMessage.contactUnblocked" = "%@ wurde in der Unterhaltung entblockt.";
-"generatedMessage.outgoingCall" = "Outgoing call";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.outgoingCall" = "Ausgehende Anruf";
+"generatedMessage.missedOutgoingCall" = "Verpasster ausgehender Anruf";
+"generatedMessage.missedIncomingCall" = "Verpasster eingehender Anruf";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 "generatedMessage.contactLeftConversation" = "%@ hat die Unterhaltung verlassen.";
 "generatedMessage.nonSwarmInvitationReceived" = "Sie haben eine Einladung gesendet.";
@@ -503,7 +503,7 @@
 // General Settings
 "generalSettings.videoSettings" = "Videoeinstellungen";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
-"generalSettings.fileTransfer" = "File transfer";
+"generalSettings.fileTransfer" = "Dateiübertragung";
 "generalSettings.locationSharing" = "Standortfreigabe";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
@@ -535,7 +535,7 @@
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
 "aboutJami.noWarranty2" = "version 3 or later for details.";
-"aboutJami.contribute" = "Contribute";
+"aboutJami.contribute" = "Beitragen";
 "aboutJami.feedback" = "Feedback";
 "aboutJami.createdBy" = "Created by";
 "aboutJami.artworkBy" = "Artwork by";
