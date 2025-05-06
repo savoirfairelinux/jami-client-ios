@@ -251,11 +251,25 @@ class SwarmInfo: SwarmInfoProtocol {
         }.isEmpty
     }
 
+    func normalize(_ input: String) -> String {
+        let decomposed = input.decomposedStringWithCanonicalMapping
+        let filtered = decomposed.unicodeScalars.filter {
+            !$0.properties.isDiacritic
+        }
+        return String(String.UnicodeScalarView(filtered))
+    }
+
     func contains(searchQuery: String) -> Bool {
-        if self.title.value.containsCaseInsensitive(string: searchQuery) { return true }
+        let normalizedQuery = normalize(searchQuery)
+
+        if normalize(self.title.value).containsCaseInsensitive(string: normalizedQuery) {
+            return true
+        }
+
         return !self.participants.value.filter { participant in
-            participant.registeredName.value.containsCaseInsensitive(string: searchQuery) ||
-                participant.profileName.value.containsCaseInsensitive(string: searchQuery) || participant.jamiId.containsCaseInsensitive(string: searchQuery)
+            normalize(participant.registeredName.value).containsCaseInsensitive(string: normalizedQuery) ||
+                normalize(participant.profileName.value).containsCaseInsensitive(string: normalizedQuery) ||
+                normalize(participant.jamiId).containsCaseInsensitive(string: normalizedQuery)
         }.isEmpty
     }
 
