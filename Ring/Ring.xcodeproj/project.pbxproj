@@ -322,6 +322,8 @@
 		265807202B0FBE2900CDE196 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */; };
 		2659F65827483656009107F1 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65727483656009107F1 /* VideoManager.swift */; };
 		2659F65C27483A27009107F1 /* DecodingAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */; };
+		265B759F2DCBAB1A00CB1622 /* AccountMigrationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265B759E2DCBAB1900CB1622 /* AccountMigrationAlert.swift */; };
+		265B75A12DCBBB0500CB1622 /* AccountMigrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265B75A02DCBBB0500CB1622 /* AccountMigrationModel.swift */; };
 		265C436A286254C900B4BE73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C4369286254C900B4BE73 /* Constants.swift */; };
 		265C436B286254C900B4BE73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C4369286254C900B4BE73 /* Constants.swift */; };
 		265DFAF32929C01400834B97 /* MessageRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFAF22929C01400834B97 /* MessageRowVM.swift */; };
@@ -859,6 +861,8 @@
 		2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
 		2659F65727483656009107F1 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingAdapterDelegate.swift; sourceTree = "<group>"; };
+		265B759E2DCBAB1900CB1622 /* AccountMigrationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountMigrationAlert.swift; path = ../../../SmartList/SwiftUI/Views/AccountMigrationAlert.swift; sourceTree = "<group>"; };
+		265B75A02DCBBB0500CB1622 /* AccountMigrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountMigrationModel.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/AccountMigrationModel.swift; sourceTree = SOURCE_ROOT; };
 		265C4369286254C900B4BE73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		265C436C2862561700B4BE73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Ring/Constants/Constants.swift; sourceTree = "<group>"; };
 		265DFAF22929C01400834B97 /* MessageRowVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRowVM.swift; sourceTree = "<group>"; };
@@ -2256,6 +2260,7 @@
 				26E081232BC07824001B4C18 /* RequestsViewModel.swift */,
 				26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */,
 				2607176F2CAD901D00494875 /* ConversationDataSource.swift */,
+				265B75A02DCBBB0500CB1622 /* AccountMigrationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2263,6 +2268,7 @@
 		26625BB32BA9DF22009D2DDB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				265B759E2DCBAB1900CB1622 /* AccountMigrationAlert.swift */,
 				26625BB42BA9DF67009D2DDB /* ConversationsView.swift */,
 				26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */,
 				26625BBA2BAA0749009D2DDB /* SmartListContainer.swift */,
@@ -2865,6 +2871,7 @@
 				26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */,
 				BB90263528F0918700B85859 /* PaddingTextField.swift in Sources */,
 				268C87FF2C1E6CF000593D7C /* GeneralSettings.swift in Sources */,
+				265B759F2DCBAB1A00CB1622 /* AccountMigrationAlert.swift in Sources */,
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
 				263B7158246D9390007044C4 /* SmartListCell.swift in Sources */,
 				0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */,
@@ -3036,6 +3043,7 @@
 				26625BB72BA9DF81009D2DDB /* ConversationsViewModel.swift in Sources */,
 				1DF75AC6296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift in Sources */,
 				62AA15C31FFC39C80064A063 /* VideoAdapterDelegate.swift in Sources */,
+				265B75A12DCBBB0500CB1622 /* AccountMigrationModel.swift in Sources */,
 				2692557A2C5D1E1200F85A1E /* JamsConnectView.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */,
