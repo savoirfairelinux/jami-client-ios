@@ -129,6 +129,11 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
     @Published var selectedAccount: String?
     @Published var accountsRows: [AccountRow] = []
 
+    // Migration state
+    @Published var showMigrationAlert = false
+    @Published var accountToMigrate: String?
+    @Published var migrationState: AccountMigrationState = .unknown
+
     let headerTitle = L10n.Smartlist.accounts
 
     var dimensions = AccountRowSizes()
@@ -194,12 +199,57 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
         }
     }
 
-    func changeCurrentAccount(accountId: String) {
-        guard let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
-        if accountService.needAccountMigration(accountId: accountId) {
-            return
+    func changeCurrentAccount(accountId: String) -> Bool {
+        guard let account = self.accountService.getAccount(fromAccountId: accountId) else { return false }
+        if true {
+            // if accountService.needAccountMigration(accountId: accountId) {
+            self.accountToMigrate = accountId
+            self.showMigrationAlert = true
+            return false
         }
         self.accountService.updateCurrentAccount(account: account)
         UserDefaults.standard.set(accountId, forKey: self.accountService.selectedAccountID)
+        return true
     }
+
+    func handleMigrationAction(action: AccountAction) {
+        guard let accountId = accountToMigrate else { return }
+
+        switch action {
+        case .migrate:
+            // Navigate to migration screen
+            // self.accountService.migrateAccount(account: <#T##String#>, password: <#T##String#>)
+            self.migrationState = .started
+            // The actual migration will be handled by MigrateAccountViewModel
+            NotificationCenter.default.post(name: .needAccountMigration, object: nil, userInfo: ["accountId": accountId])
+        case .remove:
+            self.accountService.removeAccount(id: accountId)
+            if self.accountService.accounts.isEmpty {
+                // Handle no accounts case
+                NotificationCenter.default.post(name: .needToOnboard, object: nil)
+            } else {
+                // Select next available account
+                if let nextAccount = self.accountService.accounts.first(where: { $0.id != accountId && $0.status != .errorNeedMigration }) {
+                    UserDefaults.standard.set(nextAccount.id, forKey: self.accountService.selectedAccountID)
+                    self.accountService.currentAccount = nextAccount
+                }
+            }
+        case .cancel:
+            break
+        }
+
+        self.showMigrationAlert = false
+        self.accountToMigrate = nil
+    }
+}
+
+enum AccountAction {
+    case migrate
+    case remove
+    case cancel
+}
+
+extension Notification.Name {
+    static let needAccountMigration = Notification.Name("needAccountMigration")
+    static let needToOnboard = Notification.Name("needToOnboard")
 }

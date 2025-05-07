@@ -29,15 +29,36 @@ struct AccountLists: View {
     let maxHeight: CGFloat = 300
     let cornerRadius: CGFloat = 16
     let shadowRadius: CGFloat = 6
+    
     var body: some View {
-        VStack(spacing: 10) {
-            accountsView()
-                .accessibilitySortPriority(2)
-            newAccountButton()
-                .accessibilitySortPriority(1)
+        GeometryReader { geometry in
+            ZStack(alignment: .bottom) {
+                VStack(spacing: 10) {
+                    accountsView()
+                        .accessibilitySortPriority(2)
+                    newAccountButton()
+                        .accessibilitySortPriority(1)
+                }
+                .accessibility(identifier: SmartListAccessibilityIdentifiers.accountListView)
+                .padding(.horizontal, 5)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                
+                if model.showMigrationAlert {
+                    Color.black.opacity(0.4)
+                        .ignoresSafeArea()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    AccountMigrationAlert(
+                        accountId: model.accountToMigrate ?? "",
+                        accountService: model.accountService,
+                        profileService: model.profileService,
+                        isPresented: $model.showMigrationAlert
+                    )
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                }
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height)
         }
-        .accessibility(identifier: SmartListAccessibilityIdentifiers.accountListView)
-        .padding(.horizontal, 5)
     }
 
     @ViewBuilder
@@ -134,9 +155,10 @@ struct AccountRowView: View {
         .contentShape(Rectangle())
         .background(backgroundForAccountRow())
         .onTapGesture { [weak model] in
-            accountSelectedCallback()
             guard let model = model else { return }
-            model.changeCurrentAccount(accountId: accountRow.id)
+            if  model.changeCurrentAccount(accountId: accountRow.id) {
+                accountSelectedCallback()
+            }
         }
         .accessibilityElement()
         .accessibilityLabel(accountRow.bestName)
