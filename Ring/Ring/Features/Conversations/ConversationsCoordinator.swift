@@ -84,7 +84,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                 case .needToOnboard:
                     self.needToOnboard()
                 case .migrateAccount(let accountId):
-                    self.migrateAccount(accountId: accountId)
+                        self.migrateAccount(accountId: accountId)
                 case .openNewConversation(let jamiId):
                     self.openNewConversation(jamiId: jamiId)
                 case .openConversationForConversationId(let conversationId,
@@ -167,9 +167,12 @@ extension ConversationsCoordinator {
     }
 
     func migrateAccount(accountId: String) {
-        if let parent = self.parentCoordinator as? AppCoordinator {
-            parent.stateSubject.onNext(AppState.needAccountMigration(accountId: accountId))
-        }
+        let view = AccountMigrationAlert(accountId: accountId,
+                                       accountService: injectionBag.accountService,
+                                       profileService: injectionBag.profileService,
+                                         isPresented: .constant(true))
+        let viewController = createHostingVC(view)
+        self.present(viewController: viewController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
     }
 
     func createNewAccount() {
