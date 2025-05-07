@@ -29,73 +29,46 @@ struct AccountLists: View {
     let maxHeight: CGFloat = 300
     let cornerRadius: CGFloat = 16
     let shadowRadius: CGFloat = 6
+    
     var body: some View {
-        VStack(spacing: 10) {
-            accountsView()
-                .accessibilitySortPriority(2)
-            newAccountButton()
-                .accessibilitySortPriority(1)
-        }
-        .accessibility(identifier: SmartListAccessibilityIdentifiers.accountListView)
-        .padding(.horizontal, 5)
-    }
-
-    @ViewBuilder
-    private func accountsView() -> some View {
-        VStack {
-            Spacer()
-                .frame(height: verticalSpacing)
-
-            ZStack {
-                Text(model.headerTitle)
-                    .fontWeight(.semibold)
-                    .accessibilityIdentifier(SmartListAccessibilityIdentifiers.accountsListTitle)
-                    .accessibilityAutoFocusOnAppear()
-
-                HStack {
-                    Spacer() // Pushes the button to the right
-
-                    CloseButton(
-                        action: closeCallback,
-                        accessibilityIdentifier: SmartListAccessibilityIdentifiers.closeAccountsList
-                    )
-                }
+        GeometryReader { geometry in
+            VStack(spacing: 10) {
+                accountsView()
+                    .accessibilitySortPriority(2)
+                newAccountButton()
+                    .accessibilitySortPriority(1)
             }
-
-            Spacer()
-                .frame(height: verticalSpacing)
-
-            accountsList()
-
-            Spacer()
-                .frame(height: verticalSpacing)
+            .accessibility(identifier: SmartListAccessibilityIdentifiers.accountListView)
+            .padding(.horizontal, 5)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            .frame(width: geometry.size.width, height: geometry.size.height)
         }
-        .background(VisualEffect(style: .systemMaterial, withVibrancy: false))
+    }
+    
+    private func accountsView() -> some View {
+        VStack(spacing: verticalSpacing) {
+            headerView()
+            accountsList()
+        }
+        .background(Color(UIColor.systemBackground))
         .cornerRadius(cornerRadius)
         .shadow(radius: shadowRadius)
-        .fixedSize(horizontal: false, vertical: true)
     }
-
-    @ViewBuilder
-    private func newAccountButton() -> some View {
-        Button(action: {
-            createAccountCallback()
-        }, label: {
-            Text(L10n.Smartlist.addAccountButton)
-                .foregroundColor(Color(UIColor.jamiButtonDark))
-                .lineLimit(1)
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
-        })
-        .frame(minWidth: 100, maxWidth: .infinity)
-        .cornerRadius(cornerRadius)
-        .shadow(radius: shadowRadius)
-        .accessibility(identifier: SmartListAccessibilityIdentifiers.addAccountButton)
-        .accessibilityLabel(L10n.Accessibility.smartListAddAccount)
+    
+    private func headerView() -> some View {
+        HStack {
+            Text(model.headerTitle)
+                .font(.headline)
+            Spacer()
+            Button(action: closeCallback) {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.gray)
+            }
+        }
+        .padding(.horizontal)
+        .padding(.top)
     }
-
-    @ViewBuilder
+    
     private func accountsList() -> some View {
         ScrollView {
             VStack {
@@ -107,6 +80,20 @@ struct AccountLists: View {
         }
         .frame(maxHeight: maxHeight)
     }
+    
+    private func newAccountButton() -> some View {
+        Button(action: createAccountCallback) {
+            HStack {
+                Image(systemName: "plus.circle.fill")
+                //Text(L10n.AccountPage.addAccount)
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color(UIColor.systemBackground))
+            .cornerRadius(cornerRadius)
+            .shadow(radius: shadowRadius)
+        }
+    }
 }
 
 struct AccountRowView: View {
@@ -114,6 +101,7 @@ struct AccountRowView: View {
     @ObservedObject var model: AccountsViewModel
     var accountSelectedCallback: (() -> Void)
     let cornerRadius: CGFloat = 8
+    
     var body: some View {
         HStack(spacing: 0) {
             Image(uiImage: accountRow.avatar)
@@ -125,6 +113,11 @@ struct AccountRowView: View {
             VStack(alignment: .leading) {
                 Text(accountRow.bestName)
                     .lineLimit(1)
+                if let migrationText = accountRow.needMigrate {
+                    Text(migrationText)
+                        .font(.caption)
+                        .foregroundColor(.red)
+                }
             }
             Spacer()
         }
@@ -134,25 +127,32 @@ struct AccountRowView: View {
         .contentShape(Rectangle())
         .background(backgroundForAccountRow())
         .onTapGesture { [weak model] in
-            accountSelectedCallback()
             guard let model = model else { return }
-            model.changeCurrentAccount(accountId: accountRow.id)
+            if model.changeCurrentAccount(accountId: accountRow.id) {
+                accountSelectedCallback()
+            }
         }
         .accessibilityElement()
         .accessibilityLabel(accountRow.bestName)
-    }
 
+        .onChange(of: model.migrationcompleted) { newValue in
+                        if model.migrationcompleted {
+                            accountSelectedCallback()
+                            model.migrationcompleted = false
+                        }
+        }
+    }
+    
     private var isSelectedAccount: Bool {
         accountRow.id == model.selectedAccount
     }
-
-    @ViewBuilder
+    
     private func backgroundForAccountRow() -> some View {
         Group {
             if isSelectedAccount {
-                Color(UIColor.secondarySystemFill)
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                    .padding(.horizontal, 6)
+                Color(UIColor.systemGray5)
+            } else {
+                Color.clear
             }
         }
     }
