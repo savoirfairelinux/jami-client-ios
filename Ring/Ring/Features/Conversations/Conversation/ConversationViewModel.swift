@@ -369,6 +369,17 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.conversationsService.editSwarmMessage(conversationId: conversation.id, accountId: conversation.accountId, message: content, parentId: messageId)
     }
 
+    func setIsComposingMsg(isComposing: Bool) {
+        if let conversationx = conversation {
+            guard let uri = conversationx.getConversationURI() else { return }
+            conversationsService.setIsComposingMsg(
+                to: uri,
+                from: conversation.accountId,
+                isComposing: isComposing
+            )
+        }
+    }
+
     func sendMessage(withContent content: String, parentId: String = "", contactURI: String? = nil, conversationModel: ConversationModel? = nil) {
         let conversation = conversationModel ?? self.conversation
         guard let conversation = conversation else { return }
