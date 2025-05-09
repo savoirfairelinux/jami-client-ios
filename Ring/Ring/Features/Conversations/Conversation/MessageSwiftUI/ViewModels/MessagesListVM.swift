@@ -38,6 +38,7 @@ enum MessageInfo: State {
 enum MessagePanelState: State {
     case sendMessage(content: String, parentId: String)
     case editMessage(content: String, messageId: String)
+    case registerTypingIndicator(typingStatus: Bool)
     case sendPhoto
     case openGalery
     case shareLocation
@@ -63,6 +64,8 @@ enum MessagePanelState: State {
             return L10n.Alerts.uploadFile
         case .sendPhoto:
             return "send photo"
+        case .registerTypingIndicator:
+            return "typing indicator"
         }
     }
 
@@ -209,7 +212,10 @@ class MessagesListVM: ObservableObject {
         self.subscribeForNewMessages()
         self.subscribeMessageUpdates()
         self.subscribeReactions()
+        //        self.subscribeToTypingStatus()
     }
+
+    @Published var typingIndicatorText = ""
 
     init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
         self.requestsService = injectionBag.requestsService
@@ -538,6 +544,7 @@ class MessagesListVM: ObservableObject {
             self.subscribeMessage(container: container)
             self.updateLastRead(message: container)
             self.updateLastDelivered(message: container)
+            self.subscribeToTypingStatus()
 
             if newMessage.isReply() {
                 self.receiveReply(newMessage: container, fromHistory: fromHistory)
@@ -798,6 +805,29 @@ class MessagesListVM: ObservableObject {
                 }
             })
             .disposed(by: self.disposeBag)
+    }
+
+    func subscribeToTypingStatus() {
+        conversationService.typingStatusStream
+            .filter { [weak self] status in
+                guard let self = self else { return false }
+                if status.conversationId == self.conversation.id {
+                    return true
+                } else {
+                    // print("filter fail: \(status.conversationId) and \(self.conversation.id)")
+                    return false
+                }
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] status in
+                guard let self = self else { return }
+                if status.status == 1 {
+                    self.typingIndicatorText = "\(status.from) is typing..."
+                } else if status.status == 0 {
+                    self.typingIndicatorText = ""
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     private func updateColorPreference() {

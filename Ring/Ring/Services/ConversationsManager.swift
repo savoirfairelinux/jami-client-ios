@@ -613,6 +613,10 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         self.conversationService.reactionAdded(conversationId: conversationId, accountId: accountId, messageId: messageId, reaction: reaction)
     }
 
+    func composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int) {
+        self.conversationService.composingStatusChanged(accountId: accountId, conversationId: conversationId, from: from, status: status)
+    }
+
     func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
         self.conversationService.reactionRemoved(conversationId: conversationId, accountId: accountId, messageId: messageId, reactionId: reactionId)
     }

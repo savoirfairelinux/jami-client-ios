@@ -486,6 +486,28 @@ class ConversationsService {
         conversation.reactionRemoved(messageId: messageId, reactionId: reactionId)
     }
 
+    struct TypingStatus {
+        let from: String
+        let status: Int
+        let conversationId: String
+    }
+
+    func composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int) {
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else {
+            return
+        }
+
+        let typingStatus = TypingStatus(from: from, status: status, conversationId: conversationId)
+
+        typingStatusSubject.onNext(typingStatus)
+    }
+
+    let typingStatusSubject = ReplaySubject<TypingStatus>.create(bufferSize: 1)
+
+    var typingStatusStream: Observable<TypingStatus> {
+        return typingStatusSubject.asObservable()
+    }
+
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap, localJamiId: String) {
         guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
         conversation.messageUpdated(swarmMessage: message, localJamiId: localJamiId)
@@ -954,8 +976,10 @@ class ConversationsService {
 
     // MARK: typing indicator
 
-    func setIsComposingMsg(to peer: String, from account: String, isComposing: Bool) {
-        conversationsAdapter.setComposingMessageTo(peer, fromAccount: account, isComposing: isComposing)
+    func setIsComposingMsg(to conversationUri: String, from accountId: String, isComposing: Bool) {
+        conversationsAdapter.setComposingMessageTo(conversationUri, fromAccount: accountId, isComposing: isComposing)
+        print("Conversation URI: \(conversationUri)")
+        print("Jami ID: \(accountId)")
     }
 
     func detectingMessageTyping(_ from: String, for accountId: String, status: Int) {
