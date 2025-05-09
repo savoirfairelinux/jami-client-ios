@@ -30,6 +30,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     @Published var isEdit: Bool = false
     @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""
+    @Published var isTyping = false
     var styling: MessageStyling = MessageStyling()
 
     private let messagePanelState: PublishSubject<State>
@@ -123,6 +124,10 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
     func cancelEdit() {
         messageToEdit = nil
         isEdit = false
+    }
+
+    func handleTyping() {
+        messagePanelState.onNext(MessagePanelState.registerTypingIndicator(typingStatus: true))
     }
 
     func updateUsername(name: String, jamiId: String) {

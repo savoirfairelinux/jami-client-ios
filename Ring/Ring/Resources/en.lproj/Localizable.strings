@@ -161,6 +161,11 @@
 "conversation.edited" = "Edited";
 "conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
+"conversation.typingIndicatorOneUser" = "%@ is typing...";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing...";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ amd %3@ other are typing...";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ amd %3@ others are typing...";
+
 
 // Invitations
 "invitations.noInvitations" = "No invitations";
