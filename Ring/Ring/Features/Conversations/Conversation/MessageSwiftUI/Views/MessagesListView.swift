@@ -170,6 +170,14 @@ struct MessagesListView: View {
                     // scroll to the bottom
                     Text("")
                         .id("lastMessage")
+                    if !model.typingIndicatorText.isEmpty {
+                        Text(model.typingIndicatorText)
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+                            .flipped()
+                            .transition(.opacity)
+                    }
+
                     // messages
                     ForEach(model.messagesModels) { message in
                         createMessageRowView(for: message)

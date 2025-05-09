@@ -26,8 +26,6 @@
                            to receiverAccountId: String)
     func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
                               to jamiId: String, in conversationId: String)
-    func detectingMessageTyping(_ from: String, for accountId: String, status: Int)
-
     func conversationLoaded(conversationId: String, accountId: String, messages: [SwarmMessageWrap], requestId: Int)
     func messageLoaded(conversationId: String, accountId: String, messages: [[String: String]])
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap)
@@ -38,6 +36,7 @@
     func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String])
     func conversationPreferencesUpdated(conversationId: String, accountId: String, preferences: [String: String])
     func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String])
+    func composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int)
     func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String)
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap)
 }

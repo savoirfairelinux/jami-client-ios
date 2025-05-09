@@ -31,6 +31,9 @@ struct SettingsSummaryView: View {
                         SettingsRow(iconName: "shield", title: L10n.AccountPage.security)
                     }
                 } else {
+                    NavigationLink(destination: ChatSettingsView(injectionBag: model.injectionBag, account: model.account)) {
+                        SettingsRow(iconName: "message", title: L10n.AccountPage.chats)
+                    }
                     NavigationLink(destination: CallSettingsView(injectionBag: model.injectionBag, account: model.account)) {
                         SettingsRow(iconName: "phone", title: L10n.Global.call)
                     }
