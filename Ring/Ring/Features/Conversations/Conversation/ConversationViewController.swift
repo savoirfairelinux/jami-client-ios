@@ -166,6 +166,10 @@ class ConversationViewController: UIViewController,
                     self.recordVideo()
                 case .sendFile:
                     self.importDocument()
+                case .registerTypingIndicator(let typingStatus):
+                    self.viewModel.setIsComposingMsg(isComposing: typingStatus)
+                    print("i am typing")
+                    print(typingStatus)
                 }
             })
             .disposed(by: self.disposeBag)
