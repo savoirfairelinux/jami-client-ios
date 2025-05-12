@@ -319,7 +319,7 @@
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Entfernen…";
 "accountPage.deviceRevocationSuccess" = "Gerät wurde getrennt";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationTryAgain" = "Erneut versuchen";
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";

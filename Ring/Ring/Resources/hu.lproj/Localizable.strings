@@ -32,7 +32,7 @@
 "global.incomingCall" = "Bejövő hívás";
 "global.ok" = "Rendben";
 "global.close" = "Bezárás";
-"global.share" = "Megosztás ";
+"global.share" = "Megosztás";
 "global.forward" = "Hívásátirányítás";
 "global.save" = "Mentés";
 "global.resend" = "Újraküldés";
@@ -213,7 +213,7 @@
 "linkToAccount.importAccount" = "Fiók importálása";
 "linkToAccount.showQrCode" = "QR-kód";
 "linkToAccount.showPinCode" = "Hitelesítési kód";
-"linkToAccount.actionRequired" = "Beavatkozás szükséges.\nKérjük, erősítse meg a fiókot a forráseszközön.";
+"linkToAccount.actionRequired" = "Beavatkozás szükséges. Kérjük, erősítse meg a fiókot a forráseszközön.";
 "linkToAccount.allSet" = "A fiók importálása sikerült.";
 "linkToAccount.goToAccounts" = "Ugrás az importált fiókra";
 "linkToAccount.exportInstructions" = "A forráseszközön indítsa el a fiók exportálásának műveletét.";
