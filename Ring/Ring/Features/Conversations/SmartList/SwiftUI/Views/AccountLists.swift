@@ -134,12 +134,19 @@ struct AccountRowView: View {
         .contentShape(Rectangle())
         .background(backgroundForAccountRow())
         .onTapGesture { [weak model] in
-            accountSelectedCallback()
             guard let model = model else { return }
-            model.changeCurrentAccount(accountId: accountRow.id)
+            if model.changeCurrentAccount(accountId: accountRow.id) {
+                accountSelectedCallback()
+            }
         }
         .accessibilityElement()
         .accessibilityLabel(accountRow.bestName)
+        .onChange(of: model.migrationCompleted) { newValue in
+            if model.migrationCompleted {
+                accountSelectedCallback()
+                model.migrationCompleted = false
+            }
+        }
     }
 
     private var isSelectedAccount: Bool {
