@@ -98,7 +98,8 @@ class ConversationsViewModel: ObservableObject {
         return AccountsViewModel(
             accountService: self.injectionBag.accountService,
             profileService: self.injectionBag.profileService,
-            nameService: self.injectionBag.nameService
+            nameService: self.injectionBag.nameService,
+            stateEmitter: self.stateEmitter
         )
     }()
 
@@ -114,13 +115,16 @@ class ConversationsViewModel: ObservableObject {
         )
     }()
 
-    required init(with injectionBag: InjectionBag, conversationsSource: ConversationDataSource) {
+    let stateEmitter: ConversationStatePublisher
+
+    required init(with injectionBag: InjectionBag, conversationsSource: ConversationDataSource, stateEmitter: ConversationStatePublisher) {
         self.injectionBag = injectionBag
         self.conversationsService = injectionBag.conversationsService
         self.requestsService = injectionBag.requestsService
         self.accountsService = injectionBag.accountService
         self.contactsService = injectionBag.contactsService
         self.networkService = injectionBag.networkService
+        self.stateEmitter = stateEmitter
         self.conversationsSource = conversationsSource
         self.setupNewConversationHandler()
         self.observeSearchModelUpdates()

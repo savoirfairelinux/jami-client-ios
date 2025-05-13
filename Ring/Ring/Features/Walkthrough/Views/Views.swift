@@ -22,11 +22,12 @@ struct WalkthroughPasswordView: View {
     @Binding var text: String
     var placeholder: String
     var identifier: String = ""
+    var backgroundColor: Color = Color(UIColor.secondarySystemGroupedBackground)
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color(UIColor.secondarySystemGroupedBackground))
+                .foregroundColor(backgroundColor)
             PasswordFieldView(text: $text, placeholder: placeholder)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 12)
