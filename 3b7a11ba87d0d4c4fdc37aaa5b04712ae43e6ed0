@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7d918dc_95f7190a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-13T20:13:44Z",
+      "side": 1,
+      "message": "Commit title should be lowercase. Add a link to the related Git issue.”",
+      "revId": "3b7a11ba87d0d4c4fdc37aaa5b04712ae43e6ed0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32619f95_a78b3fda",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-13T20:13:44Z",
+      "side": 1,
+      "message": "remove print output",
+      "revId": "3b7a11ba87d0d4c4fdc37aaa5b04712ae43e6ed0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
