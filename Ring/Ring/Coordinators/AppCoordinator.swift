@@ -97,11 +97,12 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     }
 
     func migrateAccount(accountId: String) {
-        let migratonController = MigrateAccountViewController.instantiate(with: self.injectionBag)
-        migratonController.viewModel.accountToMigrate = accountId
-        self.present(viewController: migratonController, withStyle: .show,
-                     withAnimation: true,
-                     withStateable: migratonController.viewModel)
+        let view = AccountMigrationAlert(accountId: accountId,
+                                         accountService: injectionBag.accountService,
+                                         profileService: injectionBag.profileService,
+                                         onCompletion: nil)
+        let viewController = createHostingVC(view)
+        self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: true, withStateable: view.stateEmitter)
     }
 
     /// Handles the switch between the three supported screens.
@@ -109,7 +110,12 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         if self.injectionBag.accountService.accounts.isEmpty {
             self.stateSubject.onNext(AppState.needToOnboard(animated: true, isFirstAccount: true))
         } else {
-            self.stateSubject.onNext(AppState.allSet)
+            if let currentAcountId = self.injectionBag.accountService.currentAccount?.id, self.injectionBag.accountService.needAccountMigration(accountId: currentAcountId) {
+                self.stateSubject.onNext(AppState.needAccountMigration(accountId: currentAcountId))
+
+            } else {
+                self.stateSubject.onNext(AppState.allSet)
+            }
         }
     }
 

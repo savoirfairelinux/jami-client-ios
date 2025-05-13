@@ -127,6 +127,13 @@ struct AccountRowView: View {
                     .lineLimit(1)
             }
             Spacer()
+            if let migrationText = accountRow.needMigrate,
+               !migrationText.isEmpty {
+                Text(migrationText)
+                    .font(.caption)
+                    .foregroundColor(.red)
+
+            }
         }
         .padding(.horizontal)
         .padding(.vertical, accountRow.dimensions.spacing)
@@ -134,12 +141,19 @@ struct AccountRowView: View {
         .contentShape(Rectangle())
         .background(backgroundForAccountRow())
         .onTapGesture { [weak model] in
-            accountSelectedCallback()
             guard let model = model else { return }
-            model.changeCurrentAccount(accountId: accountRow.id)
+            if model.changeCurrentAccount(accountId: accountRow.id) {
+                accountSelectedCallback()
+            }
         }
         .accessibilityElement()
         .accessibilityLabel(accountRow.bestName)
+        .onChange(of: model.migrationCompleted) { _ in
+            if model.migrationCompleted {
+                accountSelectedCallback()
+                model.migrationCompleted = false
+            }
+        }
     }
 
     private var isSelectedAccount: Bool {

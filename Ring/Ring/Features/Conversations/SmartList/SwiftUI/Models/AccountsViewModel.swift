@@ -129,6 +129,10 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
     @Published var selectedAccount: String?
     @Published var accountsRows: [AccountRow] = []
 
+    @Published var migrationCompleted: Bool = false
+
+    let stateEmitter: ConversationStatePublisher
+
     let headerTitle = L10n.Smartlist.accounts
 
     var dimensions = AccountRowSizes()
@@ -139,10 +143,11 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
     var disposeBag = DisposeBag()
     var profileDisposeBag = DisposeBag()
 
-    init(accountService: AccountsService, profileService: ProfilesService, nameService: NameService) {
+    init(accountService: AccountsService, profileService: ProfilesService, nameService: NameService, stateEmitter: ConversationStatePublisher) {
         self.accountService = accountService
         self.profileService = profileService
         self.nameService = nameService
+        self.stateEmitter = stateEmitter
         self.avatarSize = self.dimensions.imageSize
         self.subscribeToCurrentAccountUpdates()
         self.subscribeToRegisteredName()
@@ -194,12 +199,17 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
         }
     }
 
-    func changeCurrentAccount(accountId: String) {
-        guard let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
-        if accountService.needAccountMigration(accountId: accountId) {
-            return
+    func changeCurrentAccount(accountId: String) -> Bool {
+        guard let account = self.accountService.getAccount(fromAccountId: accountId) else { return false }
+        if account.status == .errorNeedMigration {
+            self.stateEmitter.emitState(.migrateAccount(accountId: account.id, completion: { [weak self] in
+                guard let self = self else { return }
+                self.migrationCompleted = true
+            }))
+            return false
         }
         self.accountService.updateCurrentAccount(account: account)
         UserDefaults.standard.set(accountId, forKey: self.accountService.selectedAccountID)
+        return true
     }
 }

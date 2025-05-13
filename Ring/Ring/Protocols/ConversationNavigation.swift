@@ -42,7 +42,7 @@ enum ConversationState: State {
     case openIncomingInvitationView(displayName: String, request: RequestModel, parentView: UIViewController, invitationHandeledCB: ((_ conversationId: String) -> Void))
     case conversationRemoved
     case needToOnboard
-    case migrateAccount(accountId: String)
+    case migrateAccount(accountId: String, completion: (() -> Void)?)
     case presentSwarmInfo(swarmInfo: SwarmInfoProtocol)
     case openNewConversation(jamiId: String)
     case openConversationForConversationId(conversationId: String,
@@ -101,7 +101,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             .disposed(by: self.disposeBag)
     }
 
-    func migrateAccount(accountId: String) {
+    func migrateAccount(accountId: String, completion: (() -> Void)? = nil) {
         if let parent = self.parentCoordinator as? AppCoordinator {
             parent.stateSubject.onNext(AppState.needAccountMigration(accountId: accountId))
         }
