@@ -82,9 +82,6 @@
 		0EABD3852303600B00DE7ACF /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EABD3842303600B00DE7ACF /* default.wav */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
 		0EC7808F2424FDAE000A04C5 /* CustomActionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */; };
-		0ECA56812433948E0055D31E /* MigrateAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECA56802433948E0055D31E /* MigrateAccountViewController.storyboard */; };
-		0ECA5683243394960055D31E /* MigrateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA5682243394960055D31E /* MigrateAccountViewController.swift */; };
-		0ECA56852433949C0055D31E /* MigrateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA56842433949C0055D31E /* MigrateAccountViewModel.swift */; };
 		0ECB4E2822B2D4840097CD7B /* CallsProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB4E2722B2D4840097CD7B /* CallsProviderService.swift */; };
 		0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */; };
 		0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
@@ -322,6 +319,8 @@
 		265807202B0FBE2900CDE196 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */; };
 		2659F65827483656009107F1 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65727483656009107F1 /* VideoManager.swift */; };
 		2659F65C27483A27009107F1 /* DecodingAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */; };
+		265B759F2DCBAB1A00CB1622 /* AccountMigrationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265B759E2DCBAB1900CB1622 /* AccountMigrationAlert.swift */; };
+		265B75A12DCBBB0500CB1622 /* AccountMigrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265B75A02DCBBB0500CB1622 /* AccountMigrationModel.swift */; };
 		265C436A286254C900B4BE73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C4369286254C900B4BE73 /* Constants.swift */; };
 		265C436B286254C900B4BE73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C4369286254C900B4BE73 /* Constants.swift */; };
 		265DFAF32929C01400834B97 /* MessageRowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFAF22929C01400834B97 /* MessageRowVM.swift */; };
@@ -675,9 +674,6 @@
 		0EB12451224AB1030025F8CA /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		0EBB72A82034F44200D88F46 /* ProfilesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesService.swift; sourceTree = "<group>"; };
 		0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionTextView.swift; sourceTree = "<group>"; };
-		0ECA56802433948E0055D31E /* MigrateAccountViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MigrateAccountViewController.storyboard; sourceTree = "<group>"; };
-		0ECA5682243394960055D31E /* MigrateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrateAccountViewController.swift; sourceTree = "<group>"; };
-		0ECA56842433949C0055D31E /* MigrateAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrateAccountViewModel.swift; sourceTree = "<group>"; };
 		0ECB4E2722B2D4840097CD7B /* CallsProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsProviderService.swift; sourceTree = "<group>"; };
 		0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
@@ -859,6 +855,8 @@
 		2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
 		2659F65727483656009107F1 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingAdapterDelegate.swift; sourceTree = "<group>"; };
+		265B759E2DCBAB1900CB1622 /* AccountMigrationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountMigrationAlert.swift; path = ../../../SmartList/SwiftUI/Views/AccountMigrationAlert.swift; sourceTree = "<group>"; };
+		265B75A02DCBBB0500CB1622 /* AccountMigrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountMigrationModel.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/AccountMigrationModel.swift; sourceTree = SOURCE_ROOT; };
 		265C4369286254C900B4BE73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		265C436C2862561700B4BE73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Ring/Constants/Constants.swift; sourceTree = "<group>"; };
 		265DFAF22929C01400834B97 /* MessageRowVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRowVM.swift; sourceTree = "<group>"; };
@@ -1847,16 +1845,6 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		0ECA567F243394660055D31E /* MigrateAccount */ = {
-			isa = PBXGroup;
-			children = (
-				0ECA56842433949C0055D31E /* MigrateAccountViewModel.swift */,
-				0ECA5682243394960055D31E /* MigrateAccountViewController.swift */,
-				0ECA56802433948E0055D31E /* MigrateAccountViewController.storyboard */,
-			);
-			path = MigrateAccount;
-			sourceTree = "<group>";
-		};
 		0EDE34C51F868D2D00FFA15C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -1870,7 +1858,6 @@
 			children = (
 				26454FB52B7FDCA100CFF06C /* About */,
 				BB1E8C6B29159DDE005AE1D6 /* SwarmInfo */,
-				0ECA567F243394660055D31E /* MigrateAccount */,
 				0E320D4E224ADF570070B515 /* Dialpad */,
 				6613A610214AF8B100B497D1 /* QRCode */,
 				0E3BD4222044770000A50DDF /* Contact */,
@@ -2256,6 +2243,7 @@
 				26E081232BC07824001B4C18 /* RequestsViewModel.swift */,
 				26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */,
 				2607176F2CAD901D00494875 /* ConversationDataSource.swift */,
+				265B75A02DCBBB0500CB1622 /* AccountMigrationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2263,6 +2251,7 @@
 		26625BB32BA9DF22009D2DDB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				265B759E2DCBAB1900CB1622 /* AccountMigrationAlert.swift */,
 				26625BB42BA9DF67009D2DDB /* ConversationsView.swift */,
 				26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */,
 				26625BBA2BAA0749009D2DDB /* SmartListContainer.swift */,
@@ -2776,7 +2765,6 @@
 				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
 				1A5DC0381F35675E0075E8EF /* ContactRequestCell.xib in Resources */,
-				0ECA56812433948E0055D31E /* MigrateAccountViewController.storyboard in Resources */,
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
 				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
 				446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */,
@@ -2865,6 +2853,7 @@
 				26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */,
 				BB90263528F0918700B85859 /* PaddingTextField.swift in Sources */,
 				268C87FF2C1E6CF000593D7C /* GeneralSettings.swift in Sources */,
+				265B759F2DCBAB1A00CB1622 /* AccountMigrationAlert.swift in Sources */,
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
 				263B7158246D9390007044C4 /* SmartListCell.swift in Sources */,
 				0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */,
@@ -2963,7 +2952,6 @@
 				0E13A91C22B844B100A12A54 /* NSUserActivity+Call.swift in Sources */,
 				1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */,
 				26E081262BC09534001B4C18 /* RequestsView.swift in Sources */,
-				0ECA56852433949C0055D31E /* MigrateAccountViewModel.swift in Sources */,
 				02C9B63F1E1D4E8C00F82F0C /* ServiceEvent.swift in Sources */,
 				62B60AF420489E7C001BEACF /* DataTransferService.swift in Sources */,
 				62AA15BF1FFC36840064A063 /* VideoAdapter.mm in Sources */,
@@ -3017,7 +3005,6 @@
 				1A5DC03D1F35678D0075E8EF /* RequestItem.swift in Sources */,
 				2659F65827483656009107F1 /* VideoManager.swift in Sources */,
 				262581502B4EF15D00314C42 /* MessagePanelVM.swift in Sources */,
-				0ECA5683243394960055D31E /* MigrateAccountViewController.swift in Sources */,
 				BB3AB06C29316FA6006906BA /* ViewDidLoadModifier.swift in Sources */,
 				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,
 				0E3BD4262044778100A50DDF /* ContactViewModel.swift in Sources */,
@@ -3036,6 +3023,7 @@
 				26625BB72BA9DF81009D2DDB /* ConversationsViewModel.swift in Sources */,
 				1DF75AC6296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift in Sources */,
 				62AA15C31FFC39C80064A063 /* VideoAdapterDelegate.swift in Sources */,
+				265B75A12DCBBB0500CB1622 /* AccountMigrationModel.swift in Sources */,
 				2692557A2C5D1E1200F85A1E /* JamsConnectView.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
 				26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */,
