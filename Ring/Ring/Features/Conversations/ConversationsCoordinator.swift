@@ -83,8 +83,8 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                     self.popToSmartList()
                 case .needToOnboard:
                     self.needToOnboard()
-                case .migrateAccount(let accountId):
-                    self.migrateAccount(accountId: accountId)
+                case .migrateAccount(let accountId, let completion):
+                    self.migrateAccount(accountId: accountId, completion: completion)
                 case .openNewConversation(let jamiId):
                     self.openNewConversation(jamiId: jamiId)
                 case .openConversationForConversationId(let conversationId,
@@ -166,10 +166,13 @@ extension ConversationsCoordinator {
         }
     }
 
-    func migrateAccount(accountId: String) {
-        if let parent = self.parentCoordinator as? AppCoordinator {
-            parent.stateSubject.onNext(AppState.needAccountMigration(accountId: accountId))
-        }
+    func migrateAccount(accountId: String, completion: ((Bool) -> Void)?) {
+        let view = AccountMigrationView(accountId: accountId,
+                                        accountService: injectionBag.accountService,
+                                        profileService: injectionBag.profileService,
+                                        onCompletion: completion)
+        let viewController = createHostingVC(view)
+        self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.stateEmitter)
     }
 
     func createNewAccount() {
