@@ -36,6 +36,16 @@ struct AccountLists: View {
             newAccountButton()
                 .accessibilitySortPriority(1)
         }
+        .onChange(of: model.migrationHandledWithSuccess) { _ in
+            if let success = model.migrationHandledWithSuccess {
+                if !success {
+                    closeCallback()
+                } else {
+                    accountSelectedCallback()
+                }
+                model.migrationHandledWithSuccess = nil
+            }
+        }
         .accessibility(identifier: SmartListAccessibilityIdentifiers.accountListView)
         .padding(.horizontal, 5)
     }
@@ -127,6 +137,13 @@ struct AccountRowView: View {
                     .lineLimit(1)
             }
             Spacer()
+            if let migrationText = accountRow.needMigrate,
+               !migrationText.isEmpty {
+                Text(migrationText)
+                    .font(.caption)
+                    .foregroundColor(.red)
+
+            }
         }
         .padding(.horizontal)
         .padding(.vertical, accountRow.dimensions.spacing)
@@ -134,9 +151,10 @@ struct AccountRowView: View {
         .contentShape(Rectangle())
         .background(backgroundForAccountRow())
         .onTapGesture { [weak model] in
-            accountSelectedCallback()
             guard let model = model else { return }
-            model.changeCurrentAccount(accountId: accountRow.id)
+            if model.changeCurrentAccount(accountId: accountRow.id) {
+                accountSelectedCallback()
+            }
         }
         .accessibilityElement()
         .accessibilityLabel(accountRow.bestName)

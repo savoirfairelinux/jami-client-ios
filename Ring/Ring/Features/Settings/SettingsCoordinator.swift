@@ -81,7 +81,7 @@ class SettingsCoordinator: Coordinator, StateableResponsive {
 
     func migrateAccount(accountId: String) {
         if let parent = self.parentCoordinator as? ConversationsCoordinator {
-            parent.stateSubject.onNext(ConversationState.migrateAccount(accountId: accountId))
+            parent.stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
             self.finish()
         }
     }
