@@ -469,6 +469,7 @@ class AccountsService: AccountAdapterDelegate {
                 return serviceEvent.getEventInput(ServiceEventInput.accountId) == accountId &&
                     serviceEvent.eventType == .migrationEnded
             }
+            .timeout(.seconds(30), scheduler: MainScheduler.instance)
         return Observable
             .combineLatest(saveAccount.asObservable(), filteredDaemonSignals.asObservable()) { (_, serviceEvent) -> Bool in
                 guard let status: String = serviceEvent.getEventInput(ServiceEventInput.state),

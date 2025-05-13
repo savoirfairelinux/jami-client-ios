@@ -26,12 +26,14 @@ struct NewMessageView: View, StateEmittingView {
     typealias StateEmitterType = ConversationStatePublisher
 
     @StateObject var viewModel: ConversationsViewModel
-    var stateEmitter = ConversationStatePublisher()
+    var stateEmitter: ConversationStatePublisher
     @SwiftUI.State private var isSearchBarActive = false // To track state initiated by the user
 
     init(injectionBag: InjectionBag, source: ConversationDataSource) {
+        let emitter = ConversationStatePublisher()
+        self.stateEmitter = emitter
         _viewModel = StateObject(wrappedValue:
-                                    ConversationsViewModel(with: injectionBag, conversationsSource: source))
+                                    ConversationsViewModel(with: injectionBag, conversationsSource: source, stateEmitter: emitter))
     }
 
     var body: some View {
@@ -58,24 +60,26 @@ struct SmartListView: View, StateEmittingView {
     typealias StateEmitterType = ConversationStatePublisher
 
     @StateObject var model: ConversationsViewModel
-    var stateEmitter = ConversationStatePublisher()
-
-    init(injectionBag: InjectionBag, source: ConversationDataSource) {
-        _model = StateObject(wrappedValue:
-                                ConversationsViewModel(with: injectionBag, conversationsSource: source))
-    }
-    // account list presentation
-    @SwiftUI.State private var showAccountList = false
+    var stateEmitter: ConversationStatePublisher
+    @SwiftUI.State var showAccountList = false
     @SwiftUI.State private var coverBackgroundOpacity: CGFloat = 0
-    @SwiftUI.State private var isSearchBarActive = false // To track state initiated by the user
-    let maxCoverBackgroundOpacity: CGFloat = 0.09
-    let minCoverBackgroundOpacity: CGFloat = 0
-    @SwiftUI.State  var showingPicker = false
-    // share account info
+    @SwiftUI.State private var isSearchBarActive = false
+    @SwiftUI.State private var showingPicker = false
     @SwiftUI.State private var isSharing = false
     @SwiftUI.State private var isMenuOpen = false
-
     @SwiftUI.State private var isNavigatingToSettings = false
+
+    let maxCoverBackgroundOpacity: CGFloat = 0.09
+    let minCoverBackgroundOpacity: CGFloat = 0
+
+    init(injectionBag: InjectionBag, source: ConversationDataSource) {
+        let emitter = ConversationStatePublisher()
+        self.stateEmitter = emitter
+        _model = StateObject(wrappedValue:
+                                ConversationsViewModel(with: injectionBag, conversationsSource: source,
+                                                       stateEmitter: emitter))
+    }
+
     var body: some View {
         ZStack(alignment: .bottom) {
             SearchableConversationsView(model: model,
