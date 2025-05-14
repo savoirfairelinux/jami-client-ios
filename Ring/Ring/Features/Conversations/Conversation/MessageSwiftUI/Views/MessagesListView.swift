@@ -65,6 +65,9 @@ struct MessagesListView: View {
     @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
     @SwiftUI.State private var showReactionsView = false
 
+    @SwiftUI.State private var dotCount = 0
+    private let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+
     var body: some View {
         ZStack {
             ZStack(alignment: .top) {
@@ -170,6 +173,24 @@ struct MessagesListView: View {
                     // scroll to the bottom
                     Text("")
                         .id("lastMessage")
+                    if !model.typingIndicatorText.isEmpty {
+                        HStack {
+                            Text("\(model.typingIndicatorText)\(String(repeating: ".", count: dotCount))")
+                                .font(.footnote)
+                                .foregroundColor(Color(UIColor.secondaryLabel))
+                            Spacer()
+                        }
+                        .flipped()
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
+                        .accessibilityElement()
+                        .accessibilityLabel("\(model.typingIndicatorText)")
+                        .id(model.typingIndicatorText)
+                        .transition(.opacity)
+                        .onReceive(timer) { _ in
+                            dotCount = (dotCount + 1) % 4
+                        }
+                    }
                     // messages
                     ForEach(model.messagesModels) { message in
                         createMessageRowView(for: message)
