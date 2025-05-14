@@ -38,6 +38,7 @@ enum MessageInfo: State {
 enum MessagePanelState: State {
     case sendMessage(content: String, parentId: String)
     case editMessage(content: String, messageId: String)
+    case registerTypingIndicator(typingStatus: Bool)
     case sendPhoto
     case openGalery
     case shareLocation
@@ -63,6 +64,8 @@ enum MessagePanelState: State {
             return L10n.Alerts.uploadFile
         case .sendPhoto:
             return "send photo"
+        case .registerTypingIndicator:
+            return "typing indicator"
         }
     }
 
@@ -147,6 +150,7 @@ class MessagesListVM: ObservableObject {
     var presenceService: PresenceService
     var transferHelper: TransferHelper
     var messagePanel: MessagePanelVM
+    var currentlyTypingUsers: Set<String> = []
 
     // state
     private let contextStateSubject = PublishSubject<State>()
@@ -210,6 +214,8 @@ class MessagesListVM: ObservableObject {
         self.subscribeMessageUpdates()
         self.subscribeReactions()
     }
+
+    @Published var typingIndicatorText = ""
 
     init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
         self.requestsService = injectionBag.requestsService
@@ -538,6 +544,7 @@ class MessagesListVM: ObservableObject {
             self.subscribeMessage(container: container)
             self.updateLastRead(message: container)
             self.updateLastDelivered(message: container)
+            self.subscribeToTypingStatus()
 
             if newMessage.isReply() {
                 self.receiveReply(newMessage: container, fromHistory: fromHistory)
@@ -798,6 +805,54 @@ class MessagesListVM: ObservableObject {
                 }
             })
             .disposed(by: self.disposeBag)
+    }
+
+    func subscribeToTypingStatus() {
+        conversationService.typingStatusStream
+            .filter { [weak self] status in
+                guard let self = self else { return false }
+                return status.conversationId == self.conversation.id
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] status in
+                guard let self = self else { return }
+
+                var typerName = ""
+
+                if let nameObservable = self.names.get(key: status.from) as? BehaviorRelay<String> {
+                    typerName = nameObservable.value
+                }
+
+                if status.status == 1 {
+                    self.currentlyTypingUsers.insert(typerName)
+                } else {
+                    self.currentlyTypingUsers.remove(typerName)
+                }
+
+                self.updateTypingIndicatorText()
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func updateTypingIndicatorText() {
+        let users = Array(currentlyTypingUsers)
+
+        switch users.count {
+        case 0:
+            typingIndicatorText = ""
+        case 1:
+            typingIndicatorText = L10n.Conversation.typingIndicatorOneUser(users[0])
+        case 2:
+            typingIndicatorText = L10n.Conversation.typingIndicatorTwoUsers(users[0], users[1])
+        default:
+            let othersTypingCount = users.count - 2
+
+            if othersTypingCount == 1 {
+                typingIndicatorText = L10n.Conversation.typingIndicatorOtherUsers(users[0], users[1], othersTypingCount)
+            } else {
+                typingIndicatorText = L10n.Conversation.typingIndicatorOthersUsers(users[0], users[1], othersTypingCount)
+            }
+        }
     }
 
     private func updateColorPreference() {
