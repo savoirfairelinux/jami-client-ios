@@ -515,10 +515,6 @@ class ConversationsManager {
                                                       in: conversationId)
     }
 
-    func detectingMessageTyping(_ from: String, for accountId: String, status: Int) {
-        conversationService.detectingMessageTyping(from, for: accountId, status: status)
-    }
-
     func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {
         conversationService.conversationProfileUpdated(conversationId: conversationId, accountId: accountId, profile: profile)
     }
@@ -611,6 +607,10 @@ extension  ConversationsManager: MessagesAdapterDelegate {
 
     func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
         self.conversationService.reactionAdded(conversationId: conversationId, accountId: accountId, messageId: messageId, reaction: reaction)
+    }
+
+    func composingStatusChanged(accountId: String, conversationId: String, from: String, status: Int) {
+        self.conversationService.composingStatusChanged(accountId: accountId, conversationId: conversationId, from: from, status: status)
     }
 
     func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
