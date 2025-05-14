@@ -31,6 +31,7 @@ class AccountSettings: ObservableObject {
     @Published var showNotificationPermitionIssue: Bool = false
     @Published var upnpEnabled: Bool = false
     @Published var turnEnabled: Bool = false
+    @Published var typingIndicator: Bool = true
 
     @Published var autoRegistrationEnabled: Bool = false
     @Published var autoRegistrationExpirationTime = ""
@@ -120,6 +121,7 @@ extension AccountSettings {
         self.proxyAddress = self.account.proxy
         self.callsFromUnknownContacts = self.getBoolState(for: ConfigKey.dhtPublicIn)
         self.peerDiscovery = self.getBoolState(for: ConfigKey.dhtPeerDiscovery)
+        self.typingIndicator = self.getBoolState(for: ConfigKey.typingIndicator)
         self.verifyNotificationPermissionStatus()
         observeNotificationPermissionChanges()
     }
@@ -131,6 +133,15 @@ extension AccountSettings {
         let property = ConfigKeyModel(withKey: ConfigKey.dhtPublicIn)
         self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
         self.callsFromUnknownContacts = enable
+    }
+
+    func enableTypingIndicator(enable: Bool) {
+        if self.typingIndicator == enable {
+            return
+        }
+        let property = ConfigKeyModel(withKey: ConfigKey.typingIndicator)
+        self.accountService.switchAccountPropertyTo(state: enable, accountId: account.id, property: property)
+        self.typingIndicator = enable
     }
 
     func enableProxyList(enable: Bool) {

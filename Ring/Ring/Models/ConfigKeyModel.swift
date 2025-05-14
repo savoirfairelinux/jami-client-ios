@@ -111,6 +111,7 @@ enum ConfigKey: String {
     case accountPublish = "Account.accountPublish"
     case managerUri = "Account.managerUri"
     case managerUsername = "Account.managerUsername"
+    case typingIndicator = "Account.sendComposing"
 }
 
 /**
