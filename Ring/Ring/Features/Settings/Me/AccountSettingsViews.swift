@@ -42,6 +42,31 @@ struct CallSettingsView: View {
     }
 }
 
+struct ChatSettingsView: View {
+    @StateObject var model: AccountSettings
+
+    init(injectionBag: InjectionBag, account: AccountModel) {
+        _model = StateObject(wrappedValue: AccountSettings(account: account, injectionBag: injectionBag))
+    }
+
+    var body: some View {
+        List {
+            VStack(alignment: .leading) {
+                ToggleCell(
+                    toggleText: L10n.AccountPage.typingIndicator,
+                    getAction: { model.typingIndicator },
+                    setAction: { newValue in model.enableTypingIndicator(enable: newValue) }
+                )
+                Text(L10n.AccountPage.typingIndicatorExplanation)
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(L10n.AccountPage.chats)
+    }
+}
+
 struct NotificationsSettingsView: View {
     @StateObject var model: AccountSettings
 

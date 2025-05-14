@@ -406,7 +406,8 @@
 "accountPage.dhtConfiguration" = "OpenDHT configuration";
 "accountPage.nameServer" = "Name server";
 "accountPage.chats" = "Chats";
-"accountPage.typingIndicator" = "Typing indicator";
+"accountPage.typingIndicator" = "Enable typing indicator";
+"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing that a message is being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
