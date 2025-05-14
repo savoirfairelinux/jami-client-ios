@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d56a065c_fdaf29cb",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-14T19:33:29Z",
+      "side": 1,
+      "message": "do subscribeToTypingStatus() in the init",
+      "revId": "f15cb35c6e0f39ffad895bbb22f9bdfc52e7e687",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108fb435_3bf8d204",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-14T19:33:29Z",
+      "side": 1,
+      "message": "same condition checked twice",
+      "revId": "f15cb35c6e0f39ffad895bbb22f9bdfc52e7e687",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
