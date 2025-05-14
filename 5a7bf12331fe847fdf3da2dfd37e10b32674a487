@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d366c957_40d02f51",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-14T14:18:35Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "5a7bf12331fe847fdf3da2dfd37e10b32674a487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4b328ba_6642c832",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-14T14:18:35Z",
+      "side": 1,
+      "message": "Set typingStatus to false if the text is empty.",
+      "revId": "5a7bf12331fe847fdf3da2dfd37e10b32674a487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44226883_0e8f97bf",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-14T14:18:35Z",
+      "side": 1,
+      "message": "Set a default value for status.from to handle cases where no name is found.",
+      "revId": "5a7bf12331fe847fdf3da2dfd37e10b32674a487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2363e2e_e5458ed4",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-14T14:18:35Z",
+      "side": 1,
+      "message": "Add leading alignment to match incoming messages, and animate the dots so they appear one by one, mimicking typing.",
+      "revId": "5a7bf12331fe847fdf3da2dfd37e10b32674a487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
