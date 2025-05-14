@@ -88,9 +88,14 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
 
     confHandlers.insert(exportable_callback<ConfigurationSignal::ComposingStatusChanged>([&](const std::string& account_id, const std::string& convId, const std::string& from, int status) {
         if (ConversationsAdapter.messagesDelegate) {
-            NSString* fromPeer =  [NSString stringWithUTF8String:from.c_str()];
-            NSString* toAccount =  [NSString stringWithUTF8String:account_id.c_str()];
-            [ConversationsAdapter.messagesDelegate detectingMessageTyping:fromPeer for:toAccount status:status];
+            NSString* fromPeer = [NSString stringWithUTF8String:from.c_str()];
+            NSString* toAccount = [NSString stringWithUTF8String:account_id.c_str()];
+            NSString* conversationId = [NSString stringWithUTF8String:convId.c_str()];
+
+            [ConversationsAdapter.messagesDelegate composingStatusChangedWithAccountId:toAccount
+                                                                   conversationId:conversationId
+                                                                              from:fromPeer
+                                                                             status:status];
         }
     }));
 
@@ -225,11 +230,11 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
                            [Utils dictionnaryToMap:content], flag);
 }
 
-- (void)setComposingMessageTo:(NSString*)peer
+- (void)setComposingMessageTo:(NSString*)conversationUri
                    fromAccount:(NSString*)accountID
                    isComposing:(BOOL)isComposing {
     setIsComposing(std::string([accountID UTF8String]),
-                   std::string([peer UTF8String]),
+                   std::string([conversationUri UTF8String]),
                    isComposing);
 }
 

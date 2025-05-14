@@ -190,6 +190,9 @@ struct MessagePanelView: View {
                             .cornerRadius(18)
                             .accessibilityHidden(true)
                     }
+                    .onChange(of: text) { _ in
+                        model.handleTyping(message: text)
+                    }
                 Spacer()
                     .frame(width: 10)
                 Button(action: {
