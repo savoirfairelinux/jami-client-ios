@@ -125,6 +125,14 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
         isEdit = false
     }
 
+    func handleTyping(message: String) {
+        if !message.isEmpty {
+            messagePanelState.onNext(MessagePanelState.registerTypingIndicator(typingStatus: true))
+        } else {
+            messagePanelState.onNext(MessagePanelState.registerTypingIndicator(typingStatus: false))
+        }
+    }
+
     func updateUsername(name: String, jamiId: String) {
         guard let message = messageToReply, !name.isEmpty else { return }
         if message.message.authorId == jamiId {

@@ -287,6 +287,8 @@ internal enum L10n {
     internal static let changePassword = L10n.tr("Localizable", "accountPage.changePassword", fallback: "Change password")
     /// Incorrect password
     internal static let changePasswordError = L10n.tr("Localizable", "accountPage.changePasswordError", fallback: "Incorrect password")
+    /// Chats
+    internal static let chats = L10n.tr("Localizable", "accountPage.chats", fallback: "Chats")
     /// Connectivity and configurations
     internal static let connectivityAndConfiguration = L10n.tr("Localizable", "accountPage.connectivityAndConfiguration", fallback: "Connectivity and configurations")
     /// Connectivity
@@ -451,6 +453,8 @@ internal enum L10n {
     internal static let turnServer = L10n.tr("Localizable", "accountPage.turnServer", fallback: "TURN address")
     /// TURN username
     internal static let turnUsername = L10n.tr("Localizable", "accountPage.turnUsername", fallback: "TURN username")
+    /// Typing indicator
+    internal static let typingIndicator = L10n.tr("Localizable", "accountPage.typingIndicator", fallback: "Typing indicator")
     /// Unblock
     internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact", fallback: "Unblock")
     /// Unlink
@@ -660,6 +664,22 @@ internal enum L10n {
     }
     /// You have accepted the conversation invitation.
     internal static let synchronizationTitle = L10n.tr("Localizable", "conversation.synchronizationTitle", fallback: "You have accepted the conversation invitation.")
+    /// %@ is typing
+    internal static func typingIndicatorOneUser(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "conversation.typingIndicatorOneUser", String(describing: p1), fallback: "%@ is typing")
+    }
+    /// %1@, %2@ amd %3@ others are typing
+    internal static func typingIndicatorOthersUsers(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+      return L10n.tr("Localizable", "conversation.typingIndicatorOthersUsers", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%1@, %2@ amd %3@ others are typing")
+    }
+    /// %1@, %2@ amd %3@ other are typing
+    internal static func typingIndicatorOtherUsers(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+      return L10n.tr("Localizable", "conversation.typingIndicatorOtherUsers", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%1@, %2@ amd %3@ other are typing")
+    }
+    /// %1@ and %2@ are typing
+    internal static func typingIndicatorTwoUsers(_ p1: Any, _ p2: Any) -> String {
+      return L10n.tr("Localizable", "conversation.typingIndicatorTwoUsers", String(describing: p1), String(describing: p2), fallback: "%1@ and %2@ are typing")
+    }
     /// You
     internal static let yourself = L10n.tr("Localizable", "conversation.yourself", fallback: "You")
   }
