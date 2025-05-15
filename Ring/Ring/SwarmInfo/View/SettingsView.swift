@@ -44,6 +44,8 @@ struct SettingsView: View {
     // MARK: - State
     @SwiftUI.State private var showQRcode = false
     @SwiftUI.State private var presentingAlert: PresentingAlert?
+    @SwiftUI.State private var showColorPicker = false
+    @SwiftUI.State private var isVoiceOverEnabled = UIAccessibility.isVoiceOverRunning
 
     // MARK: - Body
     var body: some View {
@@ -53,6 +55,9 @@ struct SettingsView: View {
         }
         .alert(item: $presentingAlert) { alert in
             createAlert(for: alert)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)) { _ in
+            isVoiceOverEnabled = UIAccessibility.isVoiceOverRunning
         }
     }
 
@@ -159,9 +164,11 @@ struct SettingsView: View {
                 .fill(Color(hex: viewmodel.finalColor) ?? .gray)
                 .frame(width: iconSize, height: iconSize)
                 .onTapGesture {
-                    withAnimation {
-                        viewmodel.showColorSheet.toggle()
-                    }
+                    showColorPicker = true
+                }
+                .sheet(isPresented: $showColorPicker) {
+                    AccessibleCustomColorPicker(isPresented: $showColorPicker, selectedColor: $viewmodel.selectedColor,
+                                                currentColor: viewmodel.finalColor)
                 }
                 .onChange(of: viewmodel.selectedColor) { newValue in
                     viewmodel.updateSwarmColor(selectedColor: newValue)
@@ -254,7 +261,7 @@ struct CustomColorPicker: View {
         GeometryReader { geometry in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: spacing) {
-                    ForEach(Constants.swarmColors, id: \.self) { color in
+                    ForEach(Array(Constants.swarmColors.keys), id: \.self) { color in
                         CircleView(
                             colorString: color,
                             selectedColor: $selectedColor,
@@ -269,6 +276,64 @@ struct CustomColorPicker: View {
                 .frame(minWidth: geometry.size.width, minHeight: geometry.size.height)
             }
         }
+    }
+}
+
+struct AccessibleCustomColorPicker: View {
+    @Binding var isPresented: Bool
+    @Binding var selectedColor: String
+    let currentColor: String
+
+    // MARK: - Layout Constants
+    private let circleSize: CGFloat = 40
+    private let circleStrokeWidth: CGFloat = 5
+    private let circleStrokeSize: CGFloat = 50
+    private let circlePadding: CGFloat = 5
+    private let spacing: CGFloat = 10
+
+    var body: some View {
+        NavigationView {
+            GeometryReader { geometry in
+                VStack {
+                    Spacer()
+
+                    let columns = [
+                        GridItem(.adaptive(minimum: circleSize + circlePadding * 2), spacing: spacing)
+                    ]
+
+                    LazyVGrid(columns: columns, spacing: spacing) {
+                        ForEach(Array(Constants.swarmColors.keys), id: \.self) { color in
+                            CircleView(
+                                colorString: color,
+                                selectedColor: $selectedColor,
+                                circleSize: circleSize,
+                                circleStrokeWidth: circleStrokeWidth,
+                                circleStrokeSize: circleStrokeSize,
+                                circlePadding: circlePadding
+                            )
+                        }
+                    }
+                    .padding()
+                    .frame(maxHeight: 300) // Optional max height to avoid huge grids
+
+                    Spacer()
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+            }
+            .navigationTitle(Text(L10n.Swarm.chooseColor))
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading: Button(action: {
+                isPresented = false
+            }) {
+                Text(L10n.Global.cancel)
+                    .foregroundColor(.jamiColor)
+            })
+        }
+        .onTapGesture {
+            isPresented = false
+        }
+        .optionalMediumPresentationDetents()
+        .accessibilityAutoFocusOnAppear()
     }
 }
 
@@ -301,7 +366,7 @@ struct CircleView: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityValue(colorString)
+        .accessibilityLabel(Constants.swarmColors[colorString] ?? "")
         .accessibilityAddTraits(selectedColor == colorString ? .isSelected : [])
     }
 }

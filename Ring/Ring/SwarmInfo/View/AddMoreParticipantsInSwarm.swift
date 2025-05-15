@@ -29,7 +29,6 @@ struct AddMoreParticipantsInSwarm: View {
         Button(action: {
             viewmodel.selections.removeAll()
             showAddMember = true
-            viewmodel.showColorSheet = false
             viewmodel.updateContactList()
         }, label: {
             Image(uiImage: addMorePeople)
@@ -38,7 +37,6 @@ struct AddMoreParticipantsInSwarm: View {
                 .aspectRatio(contentMode: .fill)
                 .foregroundColor(Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiButtonDark) : Color.white)
                 .frame(width: 30, height: 30, alignment: .center)
-
         })
         .frame(width: 50, height: 50, alignment: .center)
         .background(Color(hex: viewmodel.finalColor))
@@ -47,32 +45,52 @@ struct AddMoreParticipantsInSwarm: View {
         .sheet(isPresented: $showAddMember, onDismiss: {
             viewmodel.removeExistingSubscription()
         }, content: {
-            List {
-                ForEach(viewmodel.participantsRows) { contact in
-                    ParticipantListCell(participant: contact, isSelected: viewmodel.selections.contains(contact.id)) {
-                        if viewmodel.selections.contains(contact.id) {
-                            viewmodel.selections.removeAll(where: { $0 == contact.id })
-                        } else {
-                            viewmodel.selections.append(contact.id)
+            NavigationView {
+                VStack {
+                    List {
+                        ForEach(viewmodel.participantsRows) { contact in
+                            ParticipantListCell(participant: contact, isSelected: viewmodel.selections.contains(contact.id)) {
+                                if viewmodel.selections.contains(contact.id) {
+                                    viewmodel.selections.removeAll(where: { $0 == contact.id })
+                                } else {
+                                    viewmodel.selections.append(contact.id)
+                                }
+                            }
+                            .accessibilityElement()
+                            .accessibilityLabel(Text(contact.name))
+                            .accessibilityValue(viewmodel.selections.contains(contact.id) ? L10n.Swarm.inviteMembersSelected : L10n.Swarm.inviteMembersNotSelected)
                         }
                     }
+                    .listStyle(PlainListStyle())
+
+                    if !viewmodel.selections.isEmpty {
+                        addMember()
+                            .padding()
+                    }
                 }
-            }
-            .listStyle(PlainListStyle())
-            .frame(width: nil, height: nil, alignment: .leading)
-            if !viewmodel.selections.isEmpty {
-                addMember()
+                .navigationTitle(L10n.Swarm.inviteMembers) // 🔹 Title
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button(L10n.Global.cancel) {
+                            showAddMember = false
+                        }
+                        .foregroundColor(.jamiColor)
+                    }
+                }
             }
         })
     }
 
     func addMember() -> some View {
         return Button(action: {
-                        showAddMember = false
-                        viewmodel.addMember()}) {
+            showAddMember = false
+            viewmodel.addMember()
+        }) {
             Text(L10n.Swarm.inviteMembers)
                 .swarmButtonTextStyle()
         }
         .swarmButtonStyle()
+        .accessibilityLabel(L10n.Swarm.inviteSelectedMembers)
     }
 }

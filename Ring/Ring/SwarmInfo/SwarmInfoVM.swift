@@ -32,7 +32,6 @@ class SwarmInfoVM: ObservableObject {
 
     @Published var finalColor: String = UIColor.defaultSwarm
     @Published var selectedColor: String = String()
-    @Published var showColorSheet = false
 
     @Published var editableTitle: String = ""
     @Published var editableDescription: String = ""
@@ -113,7 +112,7 @@ class SwarmInfoVM: ObservableObject {
             // Update color if not empty
             if !newColor.isEmpty {
                 self.finalColor = newColor
-                self.selectedColor = Constants.swarmColors.contains(newColor) ? newColor : String()
+                self.selectedColor = Constants.swarmColors.keys.contains(newColor) ? newColor : String()
             }
         })
         .disposed(by: disposeBag)

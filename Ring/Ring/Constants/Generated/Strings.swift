@@ -453,10 +453,10 @@ internal enum L10n {
     internal static let turnServer = L10n.tr("Localizable", "accountPage.turnServer", fallback: "TURN address")
     /// TURN username
     internal static let turnUsername = L10n.tr("Localizable", "accountPage.turnUsername", fallback: "TURN username")
-    /// Enable typing indicator
-    internal static let typingIndicator = L10n.tr("Localizable", "accountPage.typingIndicator", fallback: "Enable typing indicator")
-    /// Send and receive typing indicators showing that a message is being typed.
-    internal static let typingIndicatorExplanation = L10n.tr("Localizable", "accountPage.typingIndicatorExplanation", fallback: "Send and receive typing indicators showing that a message is being typed.")
+    /// Typing indicator
+    internal static let typingIndicator = L10n.tr("Localizable", "accountPage.typingIndicator", fallback: "Typing indicator")
+    /// Send and receive typing indicators showing when messages are being typed.
+    internal static let typingIndicatorExplanation = L10n.tr("Localizable", "accountPage.typingIndicatorExplanation", fallback: "Send and receive typing indicators showing when messages are being typed.")
     /// Unblock
     internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact", fallback: "Unblock")
     /// Unlink
@@ -666,21 +666,21 @@ internal enum L10n {
     }
     /// You have accepted the conversation invitation.
     internal static let synchronizationTitle = L10n.tr("Localizable", "conversation.synchronizationTitle", fallback: "You have accepted the conversation invitation.")
-    /// %@ is typing
+    /// %@ is typing…
     internal static func typingIndicatorOneUser(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "conversation.typingIndicatorOneUser", String(describing: p1), fallback: "%@ is typing")
+      return L10n.tr("Localizable", "conversation.typingIndicatorOneUser", String(describing: p1), fallback: "%@ is typing…")
     }
-    /// %1@, %2@ and %3@ others are typing
+    /// %1@, %2@ and %3@ others are typing…
     internal static func typingIndicatorOthersUsers(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
-      return L10n.tr("Localizable", "conversation.typingIndicatorOthersUsers", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%1@, %2@ and %3@ others are typing")
+      return L10n.tr("Localizable", "conversation.typingIndicatorOthersUsers", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%1@, %2@ and %3@ others are typing…")
     }
-    /// %1@, %2@ and %3@ other are typing
+    /// %1@, %2@ and %3@ other are typing…
     internal static func typingIndicatorOtherUsers(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
-      return L10n.tr("Localizable", "conversation.typingIndicatorOtherUsers", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%1@, %2@ and %3@ other are typing")
+      return L10n.tr("Localizable", "conversation.typingIndicatorOtherUsers", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%1@, %2@ and %3@ other are typing…")
     }
-    /// %1@ and %2@ are typing
+    /// %1@ and %2@ are typing…
     internal static func typingIndicatorTwoUsers(_ p1: Any, _ p2: Any) -> String {
-      return L10n.tr("Localizable", "conversation.typingIndicatorTwoUsers", String(describing: p1), String(describing: p2), fallback: "%1@ and %2@ are typing")
+      return L10n.tr("Localizable", "conversation.typingIndicatorTwoUsers", String(describing: p1), String(describing: p2), fallback: "%1@ and %2@ are typing…")
     }
     /// You
     internal static let yourself = L10n.tr("Localizable", "conversation.yourself", fallback: "You")
@@ -832,9 +832,7 @@ internal enum L10n {
   internal enum Global {
     /// Accept
     internal static let accept = L10n.tr("Localizable", "global.accept", fallback: "Accept")
-    /// *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
-    ///  *
-    ///  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+    /// *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
     ///  *
     ///  *  This program is free software; you can redistribute it and/or modify
     ///  *  it under the terms of the GNU General Public License as published by
@@ -1143,8 +1141,8 @@ internal enum L10n {
   internal enum Swarm {
     /// Conversation color picker
     internal static let accessibilityColorPicker = L10n.tr("Localizable", "swarm.accessibilityColorPicker", fallback: "Conversation color picker")
-    /// QR code for contact
-    internal static let accessibilityContactQRCode = L10n.tr("Localizable", "swarm.accessibilityContactQRCode", fallback: "QR code for contact")
+    /// Show contact QR code
+    internal static let accessibilityContactQRCode = L10n.tr("Localizable", "swarm.accessibilityContactQRCode", fallback: "Show contact QR code")
     /// Opens a screen with contact's QR code
     internal static let accessibilityContactQRCodeHint = L10n.tr("Localizable", "swarm.accessibilityContactQRCodeHint", fallback: "Opens a screen with contact's QR code")
     /// Opens sharing options for contact information
@@ -1187,6 +1185,12 @@ internal enum L10n {
     internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Invited")
     /// Invite members
     internal static let inviteMembers = L10n.tr("Localizable", "swarm.inviteMembers", fallback: "Invite members")
+    /// Not selected
+    internal static let inviteMembersNotSelected = L10n.tr("Localizable", "swarm.inviteMembersNotSelected", fallback: "Not selected")
+    /// Selected
+    internal static let inviteMembersSelected = L10n.tr("Localizable", "swarm.inviteMembersSelected", fallback: "Selected")
+    /// Invite Selected contacts
+    internal static let inviteSelectedMembers = L10n.tr("Localizable", "swarm.inviteSelectedMembers", fallback: "Invite Selected contacts")
     /// Private group
     internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private group")
     /// Leave
@@ -1229,6 +1233,38 @@ internal enum L10n {
     internal static let typeOfSwarm = L10n.tr("Localizable", "swarm.typeOfSwarm", fallback: "Conversation type")
     /// Unknown
     internal static let unknown = L10n.tr("Localizable", "swarm.unknown", fallback: "Unknown")
+  }
+  internal enum SwarmColors {
+    /// Amber
+    internal static let amber = L10n.tr("Localizable", "swarmColors.amber", fallback: "Amber")
+    /// Bright Orange
+    internal static let brightOrange = L10n.tr("Localizable", "swarmColors.brightOrange", fallback: "Bright Orange")
+    /// Brown
+    internal static let brown = L10n.tr("Localizable", "swarmColors.brown", fallback: "Brown")
+    /// Cyan
+    internal static let cyan = L10n.tr("Localizable", "swarmColors.cyan", fallback: "Cyan")
+    /// Deep Purple
+    internal static let deepPurple = L10n.tr("Localizable", "swarmColors.deepPurple", fallback: "Deep Purple")
+    /// Green
+    internal static let green = L10n.tr("Localizable", "swarmColors.green", fallback: "Green")
+    /// Indigo Blue
+    internal static let indigoBlue = L10n.tr("Localizable", "swarmColors.indigoBlue", fallback: "Indigo Blue")
+    /// Lime Green
+    internal static let limeGreen = L10n.tr("Localizable", "swarmColors.limeGreen", fallback: "Lime Green")
+    /// Medium Gray
+    internal static let mediumGray = L10n.tr("Localizable", "swarmColors.mediumGray", fallback: "Medium Gray")
+    /// Royal Purple
+    internal static let royalPurple = L10n.tr("Localizable", "swarmColors.royalPurple", fallback: "Royal Purple")
+    /// Sky Blue
+    internal static let skyBlue = L10n.tr("Localizable", "swarmColors.skyBlue", fallback: "Sky Blue")
+    /// Steel Blue
+    internal static let steelBlue = L10n.tr("Localizable", "swarmColors.steelBlue", fallback: "Steel Blue")
+    /// Teal
+    internal static let teal = L10n.tr("Localizable", "swarmColors.teal", fallback: "Teal")
+    /// Vibrant Pink
+    internal static let vibrantPink = L10n.tr("Localizable", "swarmColors.vibrantPink", fallback: "Vibrant Pink")
+    /// Yellow Green
+    internal static let yellowGreen = L10n.tr("Localizable", "swarmColors.yellowGreen", fallback: "Yellow Green")
   }
   internal enum Swarmcreation {
     /// Add description

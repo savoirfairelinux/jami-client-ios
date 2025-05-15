@@ -49,7 +49,6 @@ public struct SwarmInfoView: View, StateEmittingView {
         static let minimizedTopHeight: CGFloat = 50
         static let topSpacerHeight: CGFloat = 30
         static let callButtonSize: CGFloat = 45
-        static let colorPickerHeight: CGFloat = 70
         static let callButtonsMargin: CGFloat = 5
     }
 
@@ -82,7 +81,6 @@ public struct SwarmInfoView: View, StateEmittingView {
         ZStack(alignment: .bottomTrailing) {
             Color(UIColor.systemGroupedBackground)
             mainContent
-            colorPickerOverlay
             addParticipantsButton
             if viewModel.isShowingTitleAlert {
                 editTitleAlert()
@@ -291,9 +289,6 @@ public struct SwarmInfoView: View, StateEmittingView {
                             view.title)
                 }
             }
-            .onChange(of: selectedView) { _ in
-                viewModel.showColorSheet = false
-            }
             .pickerStyle(.segmented)
             .padding([.horizontal, .top], Layout.generalMargin)
         }
@@ -308,33 +303,8 @@ public struct SwarmInfoView: View, StateEmittingView {
         }
     }
 
-    @ViewBuilder private var colorPickerOverlay: some View {
-        if viewModel.showColorSheet {
-            ZStack(alignment: .bottom) {
-                Rectangle()
-                    .foregroundColor(.black.opacity(0.5))
-                    .onTapGesture {
-                        dismissColorPicker()
-                    }
-                    .ignoresSafeArea()
-
-                CustomColorPicker(
-                    selectedColor: $viewModel.selectedColor,
-                    currentColor: $viewModel.finalColor
-                )
-                .frame(height: Layout.colorPickerHeight)
-                .background(Color.white)
-                .onChange(of: viewModel.finalColor) { _ in
-                    dismissColorPicker()
-                }
-                .accessibilityLabel(L10n.Swarm.accessibilityColorPicker)
-                .ignoresSafeArea()
-            }
-        }
-    }
-
     @ViewBuilder private var addParticipantsButton: some View {
-        if !(viewModel.conversation?.isCoredialog() ?? true) && !viewModel.showColorSheet {
+        if !(viewModel.conversation?.isCoredialog() ?? true) {
             AddMoreParticipantsInSwarm(viewmodel: viewModel)
         }
     }
@@ -418,10 +388,6 @@ public struct SwarmInfoView: View, StateEmittingView {
     private func shouldMinimizeTop() -> Bool {
         return UIDevice.current.orientation.isLandscape &&
             UIDevice.current.userInterfaceIdiom == .phone
-    }
-
-    private func dismissColorPicker() {
-        viewModel.showColorSheet = false
     }
 
     private var orientationPublisher: NotificationCenter.Publisher {
