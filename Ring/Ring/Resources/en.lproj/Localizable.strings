@@ -1,7 +1,5 @@
  /*
- *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -161,10 +159,10 @@
 "conversation.edited" = "Edited";
 "conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
-"conversation.typingIndicatorOneUser" = "%@ is typing";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
+"conversation.typingIndicatorOneUser" = "%@ is typing…";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other is typing…";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
 
 
 // Invitations
@@ -406,8 +404,8 @@
 "accountPage.dhtConfiguration" = "OpenDHT configuration";
 "accountPage.nameServer" = "Name server";
 "accountPage.chats" = "Chats";
-"accountPage.typingIndicator" = "Enable typing indicator";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing that a message is being typed.";
+"accountPage.typingIndicator" = "Enable typing indicators";
+"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
