@@ -1,4 +1,28 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c1c9170_28b83c5d",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 14
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-05-15T21:02:26Z",
+      "side": 1,
+      "message": "If %3@ \u003d 1, should `are` be `is`?",
+      "range": {
+        "startLine": 166,
+        "startChar": 67,
+        "endLine": 166,
+        "endChar": 70
+      },
+      "revId": "1a02d64ee3a93f14a53b64bed9cf47a31d8db0ad",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ],
   "submitRequirementResults": []
 }
