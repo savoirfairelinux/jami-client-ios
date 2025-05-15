@@ -42,8 +42,10 @@ struct SettingsView: View {
     }
 
     // MARK: - State
+    @SwiftUI.State private var showColorPicker = false
     @SwiftUI.State private var showQRcode = false
     @SwiftUI.State private var presentingAlert: PresentingAlert?
+    @SwiftUI.State private var isVoiceOverEnabled = UIAccessibility.isVoiceOverRunning
 
     // MARK: - Body
     var body: some View {
@@ -53,6 +55,9 @@ struct SettingsView: View {
         }
         .alert(item: $presentingAlert) { alert in
             createAlert(for: alert)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)) { _ in
+            isVoiceOverEnabled = UIAccessibility.isVoiceOverRunning
         }
     }
 
@@ -149,7 +154,7 @@ struct SettingsView: View {
         HStack {
             Text(L10n.Swarm.chooseColor)
             Spacer()
-            colorCircle
+            isVoiceOverEnabled ? AnyView(newColorCircle) : AnyView(colorCircle)
         }
     }
 
@@ -162,6 +167,32 @@ struct SettingsView: View {
                     withAnimation {
                         viewmodel.showColorSheet.toggle()
                     }
+                }
+                .onChange(of: viewmodel.selectedColor) { newValue in
+                    viewmodel.updateSwarmColor(selectedColor: newValue)
+                }
+                .padding(iconPadding)
+
+            Circle()
+                .stroke(Color(hex: viewmodel.finalColor) ?? .gray, lineWidth: iconStrokeWidth)
+                .frame(width: iconFrameSize, height: iconFrameSize)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(L10n.Swarm.chooseColor)
+        .accessibilityValue(viewmodel.finalColor)
+    }
+
+    private var newColorCircle: some View {
+        ZStack {
+            Circle()
+                .fill(Color(hex: viewmodel.finalColor) ?? .gray)
+                .frame(width: iconSize, height: iconSize)
+                .onTapGesture {
+                    showColorPicker = true
+                }
+                .sheet(isPresented: $showColorPicker) {
+                    ColorPickerPresenter(isPresented: $showColorPicker, selectedColor: $viewmodel.selectedColor,
+                                         currentColor: viewmodel.finalColor)
                 }
                 .onChange(of: viewmodel.selectedColor) { newValue in
                     viewmodel.updateSwarmColor(selectedColor: newValue)
@@ -254,7 +285,7 @@ struct CustomColorPicker: View {
         GeometryReader { geometry in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: spacing) {
-                    ForEach(Constants.swarmColors, id: \.self) { color in
+                    ForEach(Array(Constants.swarmColors.keys), id: \.self) { color in
                         CircleView(
                             colorString: color,
                             selectedColor: $selectedColor,
@@ -301,7 +332,8 @@ struct CircleView: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityValue(colorString)
+        //        .accessibilityValue(colorString)
+        .accessibilityLabel(Constants.swarmColors[colorString] ?? "")
         .accessibilityAddTraits(selectedColor == colorString ? .isSelected : [])
     }
 }

@@ -149,22 +149,25 @@ public class Constants: NSObject {
         case accountID
         case conversationID
     }
+    
+    public static let swarmColors: [String: String] = [
+        "#E91E63": L10n.SwarmColors.vibrantPink,
+        "#9C27B0": L10n.SwarmColors.deepPurple,
+        "#673AB7": L10n.SwarmColors.royalPurple,
+        "#3F51B5": L10n.SwarmColors.indigoBlue,
+        "#2196F3": L10n.SwarmColors.skyBlue,
+        "#00BCD4": L10n.SwarmColors.cyan,
+        "#009688": L10n.SwarmColors.teal,
+        "#4CAF50": L10n.SwarmColors.green,
+        "#8BC34A": L10n.SwarmColors.limeGreen,
+        "#9E9E9E": L10n.SwarmColors.mediumGray,
+        "#CDDC39": L10n.SwarmColors.yellowGreen,
+        "#FFC107": L10n.SwarmColors.amber,
+        "#FF5722": L10n.SwarmColors.brightOrange,
+        "#795548": L10n.SwarmColors.brown,
+        "#607D8B": L10n.SwarmColors.steelBlue
+    ]
 
-    public static let swarmColors: [String] = ["#E91E63",
-                                               "#9C27B0",
-                                               "#673AB7",
-                                               "#3F51B5",
-                                               "#2196F3",
-                                               "#00BCD4",
-                                               "#009688",
-                                               "#4CAF50",
-                                               "#8BC34A",
-                                               "#9E9E9E",
-                                               "#CDDC39",
-                                               "#FFC107",
-                                               "#FF5722",
-                                               "#795548",
-                                               "#607D8B"]
     public static let MAX_PROFILE_IMAGE_SIZE: CGFloat = 512
 
     public static let versionName = "Εἰρήνη"

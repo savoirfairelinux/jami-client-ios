@@ -73,6 +73,9 @@ struct MemberItem: View {
             roleLabel
         }
         .opacity(isInvited ? 0.5 : 1)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(displayName), \(roleText)")
+        .accessibilityHint(isInvited ? "Invited" : "")
     }
 
     // MARK: - View Components
@@ -82,6 +85,7 @@ struct MemberItem: View {
             .scaledToFill()
             .frame(width: 50, height: 50)
             .clipShape(Circle())
+            .accessibilityHidden(true)
     }
 
     private var nameLabel: some View {
