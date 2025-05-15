@@ -198,6 +198,60 @@ struct QRCodePresenter: View {
     }
 }
 
+struct ColorPickerPresenter: View {
+    @Binding var isPresented: Bool
+    @Binding var selectedColor: String
+    let currentColor: String
+
+    // MARK: - Layout Constants
+    private let circleSize: CGFloat = 40
+    private let circleStrokeWidth: CGFloat = 5
+    private let circleStrokeSize: CGFloat = 50
+    private let circlePadding: CGFloat = 5
+    private let spacing: CGFloat = 10
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Color picker")
+                    .padding()
+                    .padding(.top, 30)
+
+                GeometryReader { geometry in
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: spacing) {
+                            ForEach(Constants.swarmColors, id: \.self) { color in
+                                CircleView(
+                                    colorString: color,
+                                    selectedColor: $selectedColor,
+                                    circleSize: circleSize,
+                                    circleStrokeWidth: circleStrokeWidth,
+                                    circleStrokeSize: circleStrokeSize,
+                                    circlePadding: circlePadding
+                                )
+                            }
+                        }
+                        .padding()
+                        .frame(minWidth: geometry.size.width, minHeight: geometry.size.height)
+                    }
+                }
+            }
+            .navigationBarItems(leading: Button(action: {
+                isPresented = false
+            }) {
+                Text(L10n.Global.cancel)
+                    .foregroundColor(.jamiColor)
+            })
+        }
+        .onTapGesture {
+            isPresented = false
+        }
+        .optionalMediumPresentationDetents()
+        .accessibilityAutoFocusOnAppear()
+    }
+
+}
+
 struct CustomAlert<Content: View>: View {
     @ViewBuilder let content: Content
 

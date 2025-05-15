@@ -42,6 +42,7 @@ struct SettingsView: View {
     }
 
     // MARK: - State
+    @SwiftUI.State private var showColorPicker = false
     @SwiftUI.State private var showQRcode = false
     @SwiftUI.State private var presentingAlert: PresentingAlert?
 
@@ -150,6 +151,7 @@ struct SettingsView: View {
             Text(L10n.Swarm.chooseColor)
             Spacer()
             colorCircle
+            newColorCircle
         }
     }
 
@@ -162,6 +164,32 @@ struct SettingsView: View {
                     withAnimation {
                         viewmodel.showColorSheet.toggle()
                     }
+                }
+                .onChange(of: viewmodel.selectedColor) { newValue in
+                    viewmodel.updateSwarmColor(selectedColor: newValue)
+                }
+                .padding(iconPadding)
+
+            Circle()
+                .stroke(Color(hex: viewmodel.finalColor) ?? .gray, lineWidth: iconStrokeWidth)
+                .frame(width: iconFrameSize, height: iconFrameSize)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(L10n.Swarm.chooseColor)
+        .accessibilityValue(viewmodel.finalColor)
+    }
+
+    private var newColorCircle: some View {
+        ZStack {
+            Circle()
+                .fill(Color(hex: viewmodel.finalColor) ?? .gray)
+                .frame(width: iconSize, height: iconSize)
+                .onTapGesture {
+                    showColorPicker = true
+                }
+                .sheet(isPresented: $showColorPicker) {
+                    ColorPickerPresenter(isPresented: $showColorPicker, selectedColor: $viewmodel.selectedColor,
+                                         currentColor: viewmodel.finalColor)
                 }
                 .onChange(of: viewmodel.selectedColor) { newValue in
                     viewmodel.updateSwarmColor(selectedColor: newValue)
@@ -301,7 +329,8 @@ struct CircleView: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityValue(colorString)
+        //        .accessibilityValue(colorString)
+        .accessibilityLabel(Constants.swarmColorsDescription[colorString] ?? "")
         .accessibilityAddTraits(selectedColor == colorString ? .isSelected : [])
     }
 }

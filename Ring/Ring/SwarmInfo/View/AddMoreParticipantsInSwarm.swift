@@ -44,6 +44,7 @@ struct AddMoreParticipantsInSwarm: View {
         .background(Color(hex: viewmodel.finalColor))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding()
+        .accessibilityLabel(L10n.Swarm.inviteMembers)
         .sheet(isPresented: $showAddMember, onDismiss: {
             viewmodel.removeExistingSubscription()
         }, content: {
@@ -56,10 +57,14 @@ struct AddMoreParticipantsInSwarm: View {
                             viewmodel.selections.append(contact.id)
                         }
                     }
+                    .accessibilityElement()
+                    .accessibilityLabel(Text(contact.name)) // Assuming `contact.name` exists
+                    .accessibilityValue(viewmodel.selections.contains(contact.id) ? L10n.Swarm.inviteMembersSelected : L10n.Swarm.inviteMembersNotSelected)
                 }
             }
             .listStyle(PlainListStyle())
             .frame(width: nil, height: nil, alignment: .leading)
+
             if !viewmodel.selections.isEmpty {
                 addMember()
             }
@@ -68,11 +73,13 @@ struct AddMoreParticipantsInSwarm: View {
 
     func addMember() -> some View {
         return Button(action: {
-                        showAddMember = false
-                        viewmodel.addMember()}) {
+            showAddMember = false
+            viewmodel.addMember()
+        }) {
             Text(L10n.Swarm.inviteMembers)
                 .swarmButtonTextStyle()
         }
         .swarmButtonStyle()
+        .accessibilityLabel(L10n.Swarm.inviteSelectedMembers)
     }
 }

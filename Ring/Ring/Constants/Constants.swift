@@ -165,6 +165,25 @@ public class Constants: NSObject {
                                                "#FF5722",
                                                "#795548",
                                                "#607D8B"]
+    
+    public static let swarmColorsDescription: [String: String] = [
+        "#E91E63": "Vibrant Pink",
+        "#9C27B0": "Deep Purple",
+        "#673AB7": "Royal Purple",
+        "#3F51B5": "Indigo Blue",
+        "#2196F3": "Sky Blue",
+        "#00BCD4": "Cyan",
+        "#009688": "Teal",
+        "#4CAF50": "Green",
+        "#8BC34A": "Lime Green",
+        "#9E9E9E": "Medium Gray",
+        "#CDDC39": "Yellow Green",
+        "#FFC107": "Amber",
+        "#FF5722": "Bright Orange",
+        "#795548": "Brown",
+        "#607D8B": "Steel Blue"
+    ]
+
     public static let MAX_PROFILE_IMAGE_SIZE: CGFloat = 512
 
     public static let versionName = "Εἰρήνη"

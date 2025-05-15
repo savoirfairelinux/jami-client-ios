@@ -1121,8 +1121,8 @@ internal enum L10n {
   internal enum Swarm {
     /// Conversation color picker
     internal static let accessibilityColorPicker = L10n.tr("Localizable", "swarm.accessibilityColorPicker", fallback: "Conversation color picker")
-    /// QR code for contact
-    internal static let accessibilityContactQRCode = L10n.tr("Localizable", "swarm.accessibilityContactQRCode", fallback: "QR code for contact")
+    /// Show contact QR code
+    internal static let accessibilityContactQRCode = L10n.tr("Localizable", "swarm.accessibilityContactQRCode", fallback: "Show contact QR code")
     /// Opens a screen with contact's QR code
     internal static let accessibilityContactQRCodeHint = L10n.tr("Localizable", "swarm.accessibilityContactQRCodeHint", fallback: "Opens a screen with contact's QR code")
     /// Opens sharing options for contact information
@@ -1165,6 +1165,12 @@ internal enum L10n {
     internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Invited")
     /// Invite members
     internal static let inviteMembers = L10n.tr("Localizable", "swarm.inviteMembers", fallback: "Invite members")
+    /// Not selected
+    internal static let inviteMembersNotSelected = L10n.tr("Localizable", "swarm.inviteMembersNotSelected", fallback: "Not selected")
+    /// Selected
+    internal static let inviteMembersSelected = L10n.tr("Localizable", "swarm.inviteMembersSelected", fallback: "Selected")
+    /// Invite Selected Members
+    internal static let inviteSelectedMembers = L10n.tr("Localizable", "swarm.inviteSelectedMembers", fallback: "Invite Selected Members")
     /// Private group
     internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private group")
     /// Leave

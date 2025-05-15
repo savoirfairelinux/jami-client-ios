@@ -85,7 +85,7 @@
 "swarm.contactHeader" = "Contact";
 "swarm.showContactQRCode" = "Show contact QR code";
 "swarm.shareContactInfo" = "Share contact information";
-"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCode" = "Show contact QR code";
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
@@ -103,6 +103,9 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Unknown";
 "swarm.inviteMembers" = "Invite members";
+"swarm.inviteSelectedMembers" = "Invite Selected Members";
+"swarm.inviteMembersSelected" = "Selected";
+"swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "Leave";
 "swarm.newGroup" = "Create new group";

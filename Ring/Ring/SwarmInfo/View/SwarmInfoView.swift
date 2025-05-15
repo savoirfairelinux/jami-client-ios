@@ -63,6 +63,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     @SwiftUI.State private var showingType: PhotoSheetType?
     @SwiftUI.State private var image: UIImage?
     @SwiftUI.State private var minimizedTopView: Bool = false
+    @SwiftUI.State private var showQRcode = false
 
     // MARK: - Computed Properties
     private var swarmViews: [SwarmSettingView] {
