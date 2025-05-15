@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3494b614_b7f5cd95",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-05-15T20:57:41Z",
+      "side": 1,
+      "message": "Should the string be sentence case?\n`Invite selected members`\n\nIs someone only a member once they have accepted an invitation? If so, should the string be:\n`Invited selected contacts`\n\nThank you",
+      "range": {
+        "startLine": 106,
+        "startChar": 33,
+        "endLine": 106,
+        "endChar": 56
+      },
+      "revId": "780cd0039a17893979f536b7633eb225fee7b567",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
