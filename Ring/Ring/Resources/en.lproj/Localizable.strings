@@ -159,10 +159,12 @@
 "conversation.edited" = "Edited";
 "conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
-"conversation.typingIndicatorOneUser" = "%@ is typing…";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+// An ellipsis is not directly in the string, as an ellipsis animation is shown when messages are being typed in the view.
+// The ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
+"conversation.typingIndicatorOneUser" = "%@ is typing";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
 
 
 // Invitations
