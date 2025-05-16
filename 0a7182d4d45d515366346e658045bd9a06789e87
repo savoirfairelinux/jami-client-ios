@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38aafd69_64070ca4",
+        "filename": "Ring/Ring/Features/Settings/Me/UtilitiesViews.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-16T19:22:48Z",
+      "side": 1,
+      "message": "keep ColorPickerPresenter in the related file SettingsView",
+      "revId": "0a7182d4d45d515366346e658045bd9a06789e87",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84749425_c8ae7731",
+        "filename": "Ring/Ring/Features/Settings/Me/UtilitiesViews.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-16T19:22:48Z",
+      "side": 1,
+      "message": "L10n.Swarm.chooseColor should be navigation title",
+      "revId": "0a7182d4d45d515366346e658045bd9a06789e87",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfff194c_f385e748",
+        "filename": "Ring/Ring/Features/Settings/Me/UtilitiesViews.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-16T19:22:48Z",
+      "side": 1,
+      "message": "Since the view is half the screen height, we can arrange the colors in multiple rows rather than a single one.",
+      "revId": "0a7182d4d45d515366346e658045bd9a06789e87",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a00ecb_5ca5494f",
+        "filename": "Ring/Ring/SwarmInfo/View/SettingsView.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-16T19:22:48Z",
+      "side": 1,
+      "message": "If !isVoiceOverEnabled, it should be the colorCircle view.",
+      "revId": "0a7182d4d45d515366346e658045bd9a06789e87",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
