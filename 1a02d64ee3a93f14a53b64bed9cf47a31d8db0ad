@@ -22,6 +22,30 @@
       },
       "revId": "1a02d64ee3a93f14a53b64bed9cf47a31d8db0ad",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8f52de8_20017320",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 14
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-05-16T01:57:00Z",
+      "side": 1,
+      "message": "No.",
+      "parentUuid": "5c1c9170_28b83c5d",
+      "range": {
+        "startLine": 166,
+        "startChar": 67,
+        "endLine": 166,
+        "endChar": 70
+      },
+      "revId": "1a02d64ee3a93f14a53b64bed9cf47a31d8db0ad",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ],
   "submitRequirementResults": []
