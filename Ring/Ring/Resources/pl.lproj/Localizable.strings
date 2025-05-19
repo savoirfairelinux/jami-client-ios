@@ -1,7 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -161,6 +159,11 @@
 "conversation.edited" = "Wydany w wersji";
 "conversation.deletedMessage" = "%@ usunął wiadomość";
 "conversation.contactBlocked" = "Kontakt zablokowany";
+"conversation.typingIndicatorOneUser" = "%@ is typing…";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+
 
 // Invitations
 "invitations.noInvitations" = "Brak zaproszeń";
@@ -220,11 +223,11 @@
 "linkToAccount.exportInstructionsPath" = "Wybierz Konto > Ustawienia konta > Połącz nowe urządzenie.";
 "linkToAccount.scanQrCode" = "Zeskanuj kod QR";
 "linkToAccount.enterProvidedCode" = "Wpisz kod uwierzytelnienia.";
-"linkToAccount.accountLockedWithPassword" = "Konto jest zabezpieczone hasłem.\nWpisz hasło, aby przejść dalej.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
 "linkToAccount.exit" = "Wyjdź";
 "linkToAccount.shareMessage" = "Twój kod to: %@";
-"linkToAccount.alertTile" = "Czy na pewno chcesz wyjść?";
-"linkToAccount.alertMessage" = "Wyjście z ekranu spowoduje anulowanie importu konta.";
+"linkToAccount.alertTile" = "Do you want to stop linking the account?";
+"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importuj konto Jami z lokalnego archiwum.";
@@ -378,7 +381,7 @@
 "accountPage.generatingPin" = "Tworzenie kodu PIN…";
 "accountPage.passwordForPin" = "To konto jest szyfrowane hasłem, wprowadź hasło, aby wygenerować kod PIN";
 "accountPage.pinExplanationTitle" = "Na innym urządzeniu";
-"accountPage.pinExplanationMessage" = "Zainstaluj i włącz Jami. Importuj z innego urządzenia przy pomocy kodu QR lub ręcznie wpisz kod PIN.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
 "accountPage.pinError" = "Błąd podczas generacji nowego kodu PIN.";
 "accountPage.notificationTitle" = "Powiadomienia";
 "accountPage.notificationError" = "Powiadomenia od Jami są wyłączone. Włącz je w ustawieniach urządzenia, jeśli chcesz je otrzymywać.";
@@ -400,6 +403,9 @@
 "accountPage.bootstrap" = "Bootstrap";
 "accountPage.dhtConfiguration" = "ustawienia OpenDHT";
 "accountPage.nameServer" = "Serwer nazw";
+"accountPage.chats" = "Chats";
+"accountPage.typingIndicator" = "Wskaźnik typu";
+"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "To konto Jami istnieje tylko w tym urządzeniu. Jeśli to urządzenie zginie, to także zginie to konto. Zalecamy stworzenie kopii zapasowej konta.";
@@ -441,20 +447,21 @@
 // Link New Device
 "linkDevice.title" = "Połącz nowe urządzenie";
 "linkDevice.networkError" = "Błąd sieci podczas eksportu konta.";
-"linkDevice.errorWrongPassword" = "Błąd uwierzytelnienia. \nSprawdź poprawność hasła.";
-"linkDevice.errorNetwork" = "Wystąpił błąd połączenia z siecią.\nSprawdź swoje połączenie.";
-"linkDevice.errorTimeout" = "Operacja zakończona niepowodzeniem z powodu przekroczenia limitu czasu.\nSpróbuj ponownie.";
-"linkDevice.errorCode" = "Błąd podczas tworzenia kodu.\nSpróbuj ponownie.";
-"linkDevice.errorWrongData" = "Błąd podczas eksportu konta.\nSpróbuj ponownie.";
-"linkDevice.initialInfo" = "W nowym urządzeniu, utwórz nowe konto. Wybierz Dodaj konto > Połącz z innego urządzenia.";
-"linkDevice.infoQRCode" = "Zeskanuj kod QR";
-"linkDevice.infoCode" = "Wpisz kod i naciśnij 'Połącz'.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
+"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
 "linkDevice.connecting" = "Łączenie z twoim nowym urządzeniem...";
-"linkDevice.authenticationInfo" = "Nowe urządzenie wykryte z poniższym adresem IP. Czy to Ty?\nŻeby kontynuować przesyłanie konta, naciśnij 'Potwierdź'.";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
 "linkDevice.newDeviceIP" = "Nowy adres IP urządzenia: %1@";
 "linkDevice.code" = "kod";
-"linkDevice.wrongEntry" = "Identyfikator nowego urządzenia nie rozpoznany! Postępuj zgodnie z powyższą instrukcją.";
-"linkDevice.exportInProgress" = "Eksport konta do nowego urządzenia w toku. Akceptuj import w nowym urządzeniu.";
+"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "Import konta do nowego urządzenia zakończony sukcesem.";
 
 // Contact Page
@@ -525,7 +532,7 @@
 "migrateAccount.title" = "Przenoszenie konta";
 "migrateAccount.migrateButton" = "Przenieś Konto";
 "migrateAccount.explanation" = "Konto wymaga migracji";
-"migrateAccount.passwordExplanation" = "Aby kontynuować przenoszenie, musisz wprowadzić hasło, które zostało użytego do tego konta.";
+"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
 "migrateAccount.error" = "Błąd migracji konta. Spróbuj ponownie lub usuń konto.";
 "migrateAccount.migrating" = "Migracja w toku…";
 "migrateAccount.migrateAnother" = "Przenieś Inne Konto";

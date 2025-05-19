@@ -1,7 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -161,6 +159,11 @@
 "conversation.edited" = "Отредактировано";
 "conversation.deletedMessage" = "Cообщение удалено (%@)";
 "conversation.contactBlocked" = "Контакт заблокирован";
+"conversation.typingIndicatorOneUser" = "%@ is typing…";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+
 
 // Invitations
 "invitations.noInvitations" = "Приглашений нет";
@@ -220,11 +223,11 @@
 "linkToAccount.exportInstructionsPath" = "Выберите Учетная запись > Настройки учетной записи > Привязать новое устройство.";
 "linkToAccount.scanQrCode" = "Когда будете готовы, отсканируйте QR-код.";
 "linkToAccount.enterProvidedCode" = "По готовности введите код аутентификации.";
-"linkToAccount.accountLockedWithPassword" = "Учетная запись защищена паролем.\nЧтобы продолжить, введите пароль учетной записи.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
 "linkToAccount.exit" = "Выход";
 "linkToAccount.shareMessage" = "Ваш код:%@";
-"linkToAccount.alertTile" = "Вы хотите выйти?";
-"linkToAccount.alertMessage" = "Выход отменит операцию импорта учетной записи.";
+"linkToAccount.alertTile" = "Do you want to stop linking the account?";
+"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Импортируйте аккаунт Джами из локального архивного файла.";
@@ -378,7 +381,7 @@
 "accountPage.generatingPin" = "Генерируется PIN-код...";
 "accountPage.passwordForPin" = "Этот аккаунт защищен паролем, введите пароль для создания PIN-кода";
 "accountPage.pinExplanationTitle" = "На другом устройстве";
-"accountPage.pinExplanationMessage" = "Установите и запустите Джами, выберите опцию импорта с другого устройства, затем отсканируйте QR-код или введите ПИН-код вручную.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
 "accountPage.pinError" = "Ошибка при генерации ПИН-кода";
 "accountPage.notificationTitle" = "Уведомления";
 "accountPage.notificationError" = "Уведомления от Джами выключены. Включите их в настройках устройства, чтобы использовать данную функцию.";
@@ -400,6 +403,9 @@
 "accountPage.bootstrap" = "Сервер начальной загрузки";
 "accountPage.dhtConfiguration" = "Конфигурация OpenDHT";
 "accountPage.nameServer" = "Сервер имён";
+"accountPage.chats" = "Chats";
+"accountPage.typingIndicator" = "Индикатор набора сообщения";
+"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Этот аккаунт Джами существует только на данном устройстве. Аккаунт будет утрачен, если это устройство будет потеряно или если приложение будет удалено. Рекомендуется создать резервную копию аккаунта.";
@@ -441,20 +447,21 @@
 // Link New Device
 "linkDevice.title" = "Привязать новое устройство";
 "linkDevice.networkError" = "При экспорте учетной записи возникла ошибка сети.";
-"linkDevice.errorWrongPassword" = "Произошла ошибка аутентификации.\nПожалуйста, проверьте свой пароль.";
-"linkDevice.errorNetwork" = "Произошла ошибка сети.\nПроверьте подключение.";
-"linkDevice.errorTimeout" = "Время операции истекло.\nПопробуйте еще раз.";
-"linkDevice.errorCode" = "Ошибка при генерации кода.\nПопробуйте еще раз.";
-"linkDevice.errorWrongData" = "Произошла ошибка при экспорте аккаунта.\nПопробуйте снова.";
-"linkDevice.initialInfo" = "На новом устройстве инициируйте новую учетную запись.\nВыберите Добавить учетную запись > Подключиться с другого устройства.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
+"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
 "linkDevice.infoQRCode" = "Когда будете готовы, отсканируйте QR-код.";
-"linkDevice.infoCode" = "Когда будете готовы, введите код и нажмите \"Подключиться\".";
+"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
 "linkDevice.connecting" = "Подключение к новому устройству…";
-"linkDevice.authenticationInfo" = "Новое устройство найдено по указанному ниже IP-адресу. Это вы?\nЧтобы продолжить перенос аккаунта, нажмите \"Подтвердить\".";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
 "linkDevice.newDeviceIP" = "IP-адрес нового устройства:%1@";
 "linkDevice.code" = "код";
-"linkDevice.wrongEntry" = "Новый идентификатор устройства не распознан.\nСледуйте инструкциям выше.";
-"linkDevice.exportInProgress" = "Выполняется операция экспорта учетной записи на новое устройство.\nПодтвердите импорт на новом устройстве.";
+"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "Учетная запись успешно импортирована на новое устройство.";
 
 // Contact Page
@@ -525,7 +532,7 @@
 "migrateAccount.title" = "Перенос аккаунта";
 "migrateAccount.migrateButton" = "Перенос аккаунта";
 "migrateAccount.explanation" = "Необходимо перенести аккаунт";
-"migrateAccount.passwordExplanation" = "Чтобы завершить перенос, необходимо ввести пароль, используемый для этого аккаунта";
+"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
 "migrateAccount.error" = "При миграции аккаунта произошла ошибка. Попробуйте еще раз или удалите аккаунт.";
 "migrateAccount.migrating" = "Перенос…";
 "migrateAccount.migrateAnother" = "Перенос другого аккаунта";

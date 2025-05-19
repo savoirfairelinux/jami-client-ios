@@ -1,7 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -161,6 +159,11 @@
 "conversation.edited" = "Редактирана";
 "conversation.deletedMessage" = "%@ obrisao poruku";
 "conversation.contactBlocked" = "Kontakt blokiran";
+"conversation.typingIndicatorOneUser" = "%@ is typing…";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+
 
 // Invitations
 "invitations.noInvitations" = "Nema pozivnica";
@@ -220,11 +223,11 @@
 "linkToAccount.exportInstructionsPath" = "Изаберите Налог > Подешавања налога > Повежи нови уређај.";
 "linkToAccount.scanQrCode" = "Када будете спремни, скенирајте QR код.";
 "linkToAccount.enterProvidedCode" = "Када будете спремни, унесите код за потврду аутентичности.";
-"linkToAccount.accountLockedWithPassword" = "Налог је заштићен лозинком.\nДа бисте наставили, унесите лозинку налога.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
 "linkToAccount.exit" = "Изађи";
 "linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Do you want to exit?";
-"linkToAccount.alertMessage" = "Exiting will cancel the import account operation.";
+"linkToAccount.alertTile" = "Do you want to stop linking the account?";
+"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Увезив рачуна Џами из локалног архива.";
@@ -378,7 +381,7 @@
 "accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "Na drugom uređaju";
-"accountPage.pinExplanationMessage" = "Instalirajte i pokrenite Jami, izaberite uvoz sa drugog uređaja i skenirajte QR kod ili ručno unesite PIN kod.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Obaveštenja";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
@@ -400,6 +403,9 @@
 "accountPage.bootstrap" = "Bootstrap";
 "accountPage.dhtConfiguration" = "OpenDHT konfiguracija";
 "accountPage.nameServer" = "Сервер имена";
+"accountPage.chats" = "Chats";
+"accountPage.typingIndicator" = "Индикатор за типовање";
+"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -441,20 +447,21 @@
 // Link New Device
 "linkDevice.title" = "Povežite novi uređaj";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "A network error occurred.\nPlease verify your connection.";
-"linkDevice.errorTimeout" = "The operation has timed out.\nPlease try again.";
-"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "Када будете спремни, скенирајте QR код.";
-"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
+"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
 "linkDevice.connecting" = "Connecting to your new device…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
 "linkDevice.newDeviceIP" = "New device IP address: %1@";
 "linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
+"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "Account imported successfully on the new device.";
 
 // Contact Page
@@ -525,7 +532,7 @@
 "migrateAccount.title" = "Selidba naloga";
 "migrateAccount.migrateButton" = "Миграциони рачун";
 "migrateAccount.explanation" = "Account migration required.";
-"migrateAccount.passwordExplanation" = "Da biste nastavili sa migracijom, potrebno je da unesete lozinku koja je korišćena za ovaj nalog";
+"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
 "migrateAccount.error" = "Došlo je do greške prilikom migracije naloga. Pokušajte ponovo ili izbrišite nalog.";
 "migrateAccount.migrating" = "Migrating…";
 "migrateAccount.migrateAnother" = "Миграција на други рачун";

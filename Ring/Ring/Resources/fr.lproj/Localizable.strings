@@ -1,7 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -161,6 +159,11 @@
 "conversation.edited" = "Modifié";
 "conversation.deletedMessage" = "%@ a supprimé un message";
 "conversation.contactBlocked" = "Contact bloqué";
+"conversation.typingIndicatorOneUser" = "%@ is typing…";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+
 
 // Invitations
 "invitations.noInvitations" = "Aucune invitation";
@@ -220,11 +223,11 @@
 "linkToAccount.exportInstructionsPath" = "Choisir un compte > Paramètres du compte > Associer un nouvel appareil";
 "linkToAccount.scanQrCode" = "Une fois prêt, scannez le code QR.";
 "linkToAccount.enterProvidedCode" = "Une fois prêt, saisissez le code d'authentification.";
-"linkToAccount.accountLockedWithPassword" = "Le compte est protégé par un mot de passe.\nPour continuer, entrez le mot de passe du compte.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
 "linkToAccount.exit" = "Sortir";
 "linkToAccount.shareMessage" = "Votre code est : %@";
-"linkToAccount.alertTile" = "Voulez-vous sortir ?";
-"linkToAccount.alertMessage" = "La sortie annule l'opération d'importation du compte.";
+"linkToAccount.alertTile" = "Do you want to stop linking the account?";
+"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importer un compte Jami à partir d'un fichier d'archives local.";
@@ -378,7 +381,7 @@
 "accountPage.generatingPin" = "Génération du NIP ...";
 "accountPage.passwordForPin" = "Ce compte est chiffré, veuillez saisir le mot de passe pour générer un NIP.";
 "accountPage.pinExplanationTitle" = "Sur l'autre appareil";
-"accountPage.pinExplanationMessage" = "Installer et lancer Jami, choisissez \"Importer d'un nouvel appareil\" et scanner le code QR ou entrer manuellement le NIP";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
 "accountPage.pinError" = "Une erreur s'est produite pendant la génération du NIP.";
 "accountPage.notificationTitle" = "Notifications";
 "accountPage.notificationError" = "Les notifications pour Jami sont désactivées. S'il vous plaît, activez les dans les paramètres de votre appareil.";
@@ -400,6 +403,9 @@
 "accountPage.bootstrap" = "Adresse du nœud d'amorçage";
 "accountPage.dhtConfiguration" = "Configuration d'OpenDHT";
 "accountPage.nameServer" = "serveur de nom";
+"accountPage.chats" = "Chats";
+"accountPage.typingIndicator" = "Typing indicator";
+"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Ce compte Jami n'existe que sur cet appareil.\nLe compte sera perdu si cet appareil est perdu ou si l'application est désinstallée. Il est recommandé de faire une sauvegarde de ce compte.";
@@ -441,20 +447,21 @@
 // Link New Device
 "linkDevice.title" = "Associer un nouvel appareil";
 "linkDevice.networkError" = "Une erreur inconnue s'est produite lors de l'exportation du compte.";
-"linkDevice.errorWrongPassword" = "Une erreur d'authentification s'est produite. Veuillez vérifier votre mot de passe.";
-"linkDevice.errorNetwork" = "Une erreur réseau s'est produite.\nVérifier votre connectivité réseau.";
-"linkDevice.errorTimeout" = "L'opération a été interrompue.\nVeuillez réessayer.";
-"linkDevice.errorCode" = "Une erreur s'est produite lors de la génération du code.\nEssayez à nouveau.";
-"linkDevice.errorWrongData" = "Une erreur s'est produite pendant l'exportation du compte.\nVérifiez et réessayez.";
-"linkDevice.initialInfo" = "Sur le nouvel appareil, créez un nouveau compte.\nChoisissez Ajouter un compte > Se connecter depuis un autre appareil.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
+"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
 "linkDevice.infoQRCode" = "Une fois prêt, scannez le code QR.";
-"linkDevice.infoCode" = "Une fois prêt, saisissez le code d'authentification.";
+"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
 "linkDevice.connecting" = "Connexion à votre nouvel appareil ...";
-"linkDevice.authenticationInfo" = "Nouvel appareil trouvé à l'adresse ci-dessous. Est-ce vous ?\nEn cliquant sur confirmer, le transfert du compte se poursuivra.";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
 "linkDevice.newDeviceIP" = "Nouvelle adresse IP de l'appareil : %1@";
 "linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "Le nouvel identifiant de l'appareil n'est pas reconnu.\nVeuillez suivre les instructions ci-dessus.";
-"linkDevice.exportInProgress" = "L'opération d'exportation du compte vers le nouvel appareil est en cours.\nVeuillez confirmer l'importation sur le nouvel appareil.";
+"linkDevice.wrongEntry" = "Nouvel identifiant d'appareil non reconnu. Veuillez suivre les instructions ci-dessus.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "Compte importé avec succès sur le nouvel appareil.";
 
 // Contact Page
@@ -525,7 +532,7 @@
 "migrateAccount.title" = "Migration du compte";
 "migrateAccount.migrateButton" = "Migrer le compte";
 "migrateAccount.explanation" = "Migration de compte nécessaire";
-"migrateAccount.passwordExplanation" = "Pour effectuer la migration, vous devez entrer le mot de passe que vous avez utilisé pour ce compte";
+"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
 "migrateAccount.error" = "Une erreur s'est produite pendant la migration du compte. Veuillez réessayer ou supprimer le compte.";
 "migrateAccount.migrating" = "Migration du compte…";
 "migrateAccount.migrateAnother" = "Migrer d'une autre compte";

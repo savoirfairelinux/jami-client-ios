@@ -1,7 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -161,6 +159,11 @@
 "conversation.edited" = "Modificat";
 "conversation.deletedMessage" = "%@ a șters mesajul";
 "conversation.contactBlocked" = "Contact blocat";
+"conversation.typingIndicatorOneUser" = "%@ is typing…";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+
 
 // Invitations
 "invitations.noInvitations" = "Nicio invitație";
@@ -220,11 +223,11 @@
 "linkToAccount.exportInstructionsPath" = "Reglările contului > Asociază un nou aparat.";
 "linkToAccount.scanQrCode" = "Apoi, scanează codul QR";
 "linkToAccount.enterProvidedCode" = "Apoi, introdu codul de autentificare.";
-"linkToAccount.accountLockedWithPassword" = "Contul este protejat cu o parolă.\nIntrodu parola, pentru a continua.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
 "linkToAccount.exit" = "Ieșire";
 "linkToAccount.shareMessage" = "Codul tău este: %@";
-"linkToAccount.alertTile" = "Vrei să oprești?";
-"linkToAccount.alertMessage" = "Oprirea va anula importarea contului.";
+"linkToAccount.alertTile" = "Do you want to stop linking the account?";
+"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importă contul Jami din fișierul arhivei.";
@@ -378,7 +381,7 @@
 "accountPage.generatingPin" = "Se generează codul PIN…";
 "accountPage.passwordForPin" = "Acest cont este cifrat cu parolă, introdu parola pentru a genera codul PIN.";
 "accountPage.pinExplanationTitle" = "În alt aparat";
-"accountPage.pinExplanationMessage" = "Instalează și pornește Jami, alege „Importă din alt aparat” și scanează codul QR sau introdu manual PIN-ul.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
 "accountPage.pinError" = "A apărut o eroare în timpul generării codului PIN.";
 "accountPage.notificationTitle" = "Notificări";
 "accountPage.notificationError" = "Notificările pentru Jami sînt dezactivate. Activează-le din reglările aparatului tău.";
@@ -400,6 +403,9 @@
 "accountPage.bootstrap" = "Server de pornire";
 "accountPage.dhtConfiguration" = "Configurare OpenDHT";
 "accountPage.nameServer" = "Server de nume";
+"accountPage.chats" = "Chats";
+"accountPage.typingIndicator" = "Indicator de scriere";
+"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Acest cont Jami există doar în acest aparat. Contul va fi pierdut dacă acest aparat este pierdut sau dacă aplicația este dezinstalată. Se recomandă efectuarea unei copii de rezervă a contului.";
@@ -441,20 +447,21 @@
 // Link New Device
 "linkDevice.title" = "Asociază un nou aparat";
 "linkDevice.networkError" = "A apărut o eroare de rețea în timpul exportării contului.";
-"linkDevice.errorWrongPassword" = "A apărut o eroare de autentificare.\nVerifică parola.";
-"linkDevice.errorNetwork" = "A apărut o eroare de rețea.\nVerifică conectarea.";
-"linkDevice.errorTimeout" = "Timpul operațiunii a expirat.\nÎncearcă din nou.";
-"linkDevice.errorCode" = "A apărut o eroare în timpul generării codului.\nÎncearcă din nou.";
-"linkDevice.errorWrongData" = "A apărut o eroare în timpul exportării contului.\nÎncearcă din nou.";
-"linkDevice.initialInfo" = "În noul aparat, creează un cont nou.\nAlege Adaugă un cont > Conectează-te de la alt aparat.";
-"linkDevice.infoQRCode" = "Apoi, scanează codul QR";
-"linkDevice.infoCode" = "Apoi, introdu codul și apasă Conectează.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
+"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
 "linkDevice.connecting" = "Se conectează la noul aparat…";
-"linkDevice.authenticationInfo" = "Un nou aparat a fost găsit la adresa IP de mai jos. Tu ești?\nPentru a continua transferul contului, apasă „Confirmă”.";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
 "linkDevice.newDeviceIP" = "Adresa IP a noului aparat: %1@";
 "linkDevice.code" = "cod";
-"linkDevice.wrongEntry" = "Noul identificator al aparatului nu este recunoscut.\nUrmează instrucțiunile de mai sus.";
-"linkDevice.exportInProgress" = "Exportarea contului către noul aparat este în curs.\nConfirmă importarea în noul aparat";
+"linkDevice.wrongEntry" = "Identificatorul noului aparat nu a fost recunoscut. Urmează instrucțiunile de mai sus.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "Contul a fost importat cu succes în noul aparat.";
 
 // Contact Page
@@ -525,7 +532,7 @@
 "migrateAccount.title" = "Transferul contului";
 "migrateAccount.migrateButton" = "Transferă contul";
 "migrateAccount.explanation" = "Transferul contului e necesar.";
-"migrateAccount.passwordExplanation" = "Pentru a continua transferul, trebuie să introduci o parolă care a fost folosită pentru acest cont.";
+"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
 "migrateAccount.error" = "A apărut o eroare în timpul transferării contului. Încearcă din nou sau șterge contul.";
 "migrateAccount.migrating" = "Se transferă…";
 "migrateAccount.migrateAnother" = "Transferă alt cont";

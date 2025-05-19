@@ -1,7 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -161,6 +159,11 @@
 "conversation.edited" = "U përpunua";
 "conversation.deletedMessage" = "%@ fshiu një mesazh";
 "conversation.contactBlocked" = "Kontakti u bllokua ";
+"conversation.typingIndicatorOneUser" = "%@ is typing…";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+
 
 // Invitations
 "invitations.noInvitations" = "S’ka ftesa";
@@ -220,11 +223,11 @@
 "linkToAccount.exportInstructionsPath" = "Përzgjidhni Llogari > Rregullime Llogarie > Lidhni pajisje të re.";
 "linkToAccount.scanQrCode" = "Kur të jeni gati, skanoni kodin QR.";
 "linkToAccount.enterProvidedCode" = "Kur të jeni gati, jepni kodin e mirëfilltësimit.";
-"linkToAccount.accountLockedWithPassword" = "Llogaria është e mbrojtur me një fjalëkalim.\nQë të vazhdohet, jepni fjalëkalimin e llogarisë.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
 "linkToAccount.exit" = "Dalje";
 "linkToAccount.shareMessage" = "Kodi juaj është: %@";
-"linkToAccount.alertTile" = "Doni të dilet?";
-"linkToAccount.alertMessage" = "Dalja do të anulojë veprimin e importimit të llogarisë.";
+"linkToAccount.alertTile" = "Do you want to stop linking the account?";
+"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importo llogari Jami prej një kartele vendore arkiv";
@@ -378,7 +381,7 @@
 "accountPage.generatingPin" = "Po prodhohet PIN…";
 "accountPage.passwordForPin" = "Kjo llogari mbrohet me fjalëkalim, jepni një fjalëkalim që të prodhohet një kod PIN";
 "accountPage.pinExplanationTitle" = "Në pajisjen tjetër";
-"accountPage.pinExplanationMessage" = "Instaloni dhe nisni Jami-n, përzgjidhni “Importo prej pajisje tjetër” dhe skanoni kodin QR, ose jepeni dorazi një PIN.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
 "accountPage.pinError" = "Ndodhi një gabim teksa prodhohej kod PIN.";
 "accountPage.notificationTitle" = "Njoftime";
 "accountPage.notificationError" = "Njoftimet për Jami-n janë të çaktivizuara. Që të mund të përdorni këtë veçori, aktivizojeni te rregullimet e pajisjes.";
@@ -400,6 +403,9 @@
 "accountPage.bootstrap" = "Bootstrap";
 "accountPage.dhtConfiguration" = "Formësim i OpenDHT-së";
 "accountPage.nameServer" = "Shërbyes emrash";
+"accountPage.chats" = "Chats";
+"accountPage.typingIndicator" = "Tregues shtypjeje në tastierë";
+"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Kjo llogari Jami ekziston vetëm në këtë pajisje. Llogaria do të humbë, nëse humbet kjo pajisje, ose nëse çinstalohet aplikacioni. Rekomandohet të bëni një kopjeruajtje të kësaj llogarie.";
@@ -441,20 +447,21 @@
 // Link New Device
 "linkDevice.title" = "Lidhni pajisje të re";
 "linkDevice.networkError" = "Ndodhi një gabim rrjeti teksa eksportohej llogaria.";
-"linkDevice.errorWrongPassword" = "Ndodhi një gabim mirëfilltësimi.\nJu lutemi, verifikoni fjalëkalimin tuaj.";
-"linkDevice.errorNetwork" = "Ndodhi një gabim rrjeti.\nJu lutemi, verifikoni lidhjen tuaj.";
-"linkDevice.errorTimeout" = "Veprimit i mbaroi koha.\nJu lutemi, riprovoni.";
-"linkDevice.errorCode" = "Ndodhi një gabim teksa prodhohej kodi.\nJu lutemi, riprovoni.";
-"linkDevice.errorWrongData" = "Ndodhi një gabim teksa eksportohej llogaria.\nJu lutemi, riprovoni.";
-"linkDevice.initialInfo" = "Në pajisjen e re, krijoni një llogari të re.\nPërzgjidhni “Shtoni Llogari” -> “Lidhni prej pajisjeje tjetër”.";
-"linkDevice.infoQRCode" = "Kur të jeni gati, skanoni kodin QR.";
-"linkDevice.infoCode" = "Kur të jeni gati, jepni kodin dhe shtypni `Lidhu`.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
+"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "Kur të jeni gati, skanoni kodin QR";
+"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
 "linkDevice.connecting" = "Po bëhet lidhja te pajisja juaj e re…";
-"linkDevice.authenticationInfo" = "Te adresa IP më poshtë u gjet pajisje e re. A jeni ju?\nQë të vazhdohet shpërngulja e llogarisë, klikoni mbi `Ripohojeni`.";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
 "linkDevice.newDeviceIP" = "Adresë IP e pajisjes së re: %1@";
 "linkDevice.code" = "kod";
-"linkDevice.wrongEntry" = "Identifikuesi i pajisjes së re është i papranuar.\nJu lutemi, ndiqni udhëzimin më sipër.";
-"linkDevice.exportInProgress" = "Veprimi i eksportimit të llogarisë te pajisja e re është në kryerje e sipër.\nJu lutemi, ripohoni importimin te pajisja e re.";
+"linkDevice.wrongEntry" = "Identifikues i panjohur pajisjeje të re. Ju lutemi, ndiqni udhëzimet më sipër.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "Llogaria u importua me sukses te pajisja e re.";
 
 // Contact Page
@@ -525,7 +532,7 @@
 "migrateAccount.title" = "Migrim llogarie";
 "migrateAccount.migrateButton" = "Migroni Llogari";
 "migrateAccount.explanation" = "Lyp migrim llogarie.";
-"migrateAccount.passwordExplanation" = "Që të vazhdohet me migrimin, lypset të jepni një fjalëkalim që qe përdorur për këtë llogari";
+"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
 "migrateAccount.error" = "Ndodhi një gabim teksa migrohej llogaria. Riprovoni, ose fshijeni llogarinë.";
 "migrateAccount.migrating" = "Po bëhet migrimi…";
 "migrateAccount.migrateAnother" = "Migroni Llogari Tjetër";

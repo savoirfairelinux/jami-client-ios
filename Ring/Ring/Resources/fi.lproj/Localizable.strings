@@ -1,7 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -74,24 +72,24 @@
 "swarm.chooseColor" = "Keskustelun väri";
 "swarm.typeOfSwarm" = "Keskustelun tyyppi";
 "swarm.identifier" = "Tunniste";
-"swarm.conversationId" = "Conversation ID";
+"swarm.conversationId" = "Keskustelu id";
 "swarm.settings" = "Asetukset";
 "swarm.members" = "Jäsenet";
 "swarm.addDescription" = "Lisää kuvaus";
-"swarm.titlePlaceholder" = "Enter title";
+"swarm.titlePlaceholder" = "Anna otsikko";
 "swarm.titleAlertHeader" = "Muokkaa ryhmän nimeä";
 "swarm.descriptionAlertHeader" = "Muokkaa ryhmän kuvausta";
-"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.descriptionPlaceholder" = "Anna otsikko";
 "swarm.contactHeader" = "Yhteystieto";
-"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.showContactQRCode" = "Näytä henkilön QR-koodi";
 "swarm.shareContactInfo" = "Jaa yhteystiedot";
-"swarm.accessibilityContactQRCode" = "QR code for contact";
-"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
-"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
-"swarm.accessibilityColorPicker" = "Conversation color picker";
-"swarm.editTextHint" = "Double tap to edit";
+"swarm.accessibilityContactQRCode" = "QR-koodi yhteydenotolle";
+"swarm.accessibilityContactQRCodeHint" = "Avaa näytön, jossa on henkilön QR-koodi";
+"swarm.accessibilityContactShareHint" = "Avaa yhteystietojen jakoasetukset";
+"swarm.accessibilityColorPicker" = "Keskustelun värivalitsin";
+"swarm.editTextHint" = "Kaksoisnapauta ja muokkaa";
 "swarm.conversationHeader" = "Keskustelu";
-"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
+"swarm.shareContactMessage" = "Voit lisätä tämän henkilön, %1@, Jamin viestintäalustaan: https://jami.net";
 "swarm.oneToOne" = "Yksityinen";
 "swarm.adminInvitesOnly" = "Yksityinen ryhmä (rajoitetut kutsut)";
 "swarm.invitesOnly" = "Yksityinen ryhmä";
@@ -118,7 +116,7 @@
 "smartlist.results" = "Julkinen kansio";
 "smartlist.jamsResults" = "Hakutulokset";
 "smartlist.conversations" = "Keskustelu";
-"smartlist.noConversationsFound" = "No conversations match the search.";
+"smartlist.noConversationsFound" = "Hakua vastaavaa keskustelua ei löytynyt.";
 "smartlist.newContact" = "Uusi henkilö";
 "smartlist.newGroup" = "Uusi ryhmä";
 "smartlist.accounts" = "Tilit";
@@ -128,7 +126,7 @@
 "smartlist.searchBarPlaceholder" = "Anna nimi...";
 "smartlist.searchBar" = "Hae";
 "smartlist.noNetworkConnectivity" = "Ei verkkoyhteyttä";
-"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
+"smartlist.cellularAccess" = "Varmista, että puhelinverkko on sallittu asetuksissa.";
 "smartlist.accountsTitle" = "Tilit";
 "smartlist.addAccountButton" = "+ Lisää tili";
 "smartlist.noNumber" = "Valitulla henkilöllä ei ole numeroa";
@@ -145,7 +143,7 @@
 // Conversation
 "conversation.addToContactsButton" = "Lisää yhteystietoihin";
 "conversation.addToContactsLabel" = "Lisätäänkö yhteystietoihin?";
-"conversation.notContactLabel" = "%@ is not in the contact list";
+"conversation.notContactLabel" = "%@ ei ole yhteystiedoissa";
 "conversation.messagePlaceholder" = "Kirjoita...";
 "conversation.errorSavingImage" = "Virhe tallennettaessa kuvaa galleriaan.";
 "conversation.receivedRequest" = "%@ lähetti sinulle keskustelukutsun.";
@@ -156,16 +154,21 @@
 "conversation.synchronizationTitle" = "Olet hyväksynyt keskustelukutsun.";
 "conversation.synchronizationMessage" = "Odotetaan, että %@ synkronoi keskustelun…";
 "conversation.inReplyTo" = "Vastauksena";
-"conversation.repliedTo" = "%@ replied to %@";
+"conversation.repliedTo" = "%@ vastasi %@:lle";
 "conversation.yourself" = "Sinä";
 "conversation.edited" = "Muokattu";
-"conversation.deletedMessage" = "%@ deleted a message";
+"conversation.deletedMessage" = "%@ poisti viestin";
 "conversation.contactBlocked" = "Henkilö estetty";
+"conversation.typingIndicatorOneUser" = "%@ is typing…";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+
 
 // Invitations
 "invitations.noInvitations" = "Ei kutsuja";
 "invitations.accepted" = "Hyväksytty";
-"invitations.declined" = "Declined";
+"invitations.declined" = "Hylätty";
 "invitations.blocked" = "Estetty";
 "invitations.list" = "Kutsut vastaanotettu";
 
@@ -192,7 +195,7 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Liity Jamiin";
 "createAccount.lookingForUsernameAvailability" = "Tarkistetaan käyttäjänimen saatavuutta…";
-"createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
+"createAccount.invalidUsername" = "Virheellinen käyttäjänimi Anna oikea käyttäjänimi.";
 "createAccount.usernameAlreadyTaken" = "Käyttäjänimi on jo varattu";
 "createAccount.usernameValid" = "Käyttäjänimi on saatavilla.";
 "createAccount.UsernameNotRegisteredTitle" = "Verkkovirhe";
@@ -212,19 +215,19 @@
 // Link To Account form
 "linkToAccount.importAccount" = "Tuo tunnus";
 "linkToAccount.showQrCode" = "QR-koodi";
-"linkToAccount.showPinCode" = "Authentication code";
+"linkToAccount.showPinCode" = "Todennuskoodi";
 "linkToAccount.actionRequired" = "Toimenpiteitä tarvitaan.\nVahvista tili toisella laitteella.";
-"linkToAccount.allSet" = "Account imported successfully.";
-"linkToAccount.goToAccounts" = "Go to imported account";
-"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
-"linkToAccount.scanQrCode" = "When ready, scan the QR code.";
-"linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password.\nTo continue, enter the account password.";
+"linkToAccount.allSet" = "Tili tuotiin onnistuneesti.";
+"linkToAccount.goToAccounts" = "Siirry tuotuun tiliin";
+"linkToAccount.exportInstructions" = "Aloita vienti lähdelaitteella.";
+"linkToAccount.exportInstructionsPath" = "Valitse Tili > Tiliasetukset > Linkitä uusi laite.";
+"linkToAccount.scanQrCode" = "Kun olet valmis, skannaa QR-koodi.";
+"linkToAccount.enterProvidedCode" = "Kun olet valmis, kirjoita todennuskoodi";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
 "linkToAccount.exit" = "Poistu";
-"linkToAccount.shareMessage" = "Your code is: %@";
-"linkToAccount.alertTile" = "Haluatko poistua?";
-"linkToAccount.alertMessage" = "Poistuminen peruuttaa tilin tuomisen.";
+"linkToAccount.shareMessage" = "Koodisi on: %@";
+"linkToAccount.alertTile" = "Do you want to stop linking the account?";
+"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Tuo Jami-tili varmuuskopiosta";
@@ -378,7 +381,7 @@
 "accountPage.generatingPin" = "Luodaan PIN-koodia…";
 "accountPage.passwordForPin" = "Tili on salattu salasanalla, anna salasana ja luo PIN-koodi";
 "accountPage.pinExplanationTitle" = "Toisella laitteella";
-"accountPage.pinExplanationMessage" = "Asenna ja käynnistä Jami, valitse tuo toiselta laitteelta. Skannaa QR-koodi tai anna PIN-koodi manuaalisesti.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
 "accountPage.pinError" = "PIN-koodia luotaessa tapahtui virhe.";
 "accountPage.notificationTitle" = "Ilmoitukset";
 "accountPage.notificationError" = "Jamin ilmoitukset on poistettu käytöstä. Ota käyttöön laitteen asetuksissa, jotta voit käyttää ominaisuutta.";
@@ -400,6 +403,9 @@
 "accountPage.bootstrap" = "Bootstrap";
 "accountPage.dhtConfiguration" = "OpenDHT-määritykset";
 "accountPage.nameServer" = "Nimipalvelin";
+"accountPage.chats" = "Chats";
+"accountPage.typingIndicator" = "Typing indicator";
+"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Tämä Jami-tili on olemassa vain tässä laitteessa. Tilin voi menetetää, jos laite katoaa tai sovellus poistetaan. Suositeltavaa on tehdä tilistä varmuuskopio.";
@@ -432,7 +438,7 @@
 "account.statusConnecting" = "Yhdistetään";
 "account.statusUnknown" = "Tuntematon";
 "account.statusConnectionerror" = "Yhteysvirhe";
-"account.needMigration" = "Account requires migration.";
+"account.needMigration" = "Tili vaatii migraation.";
 "account.me" = "Minä";
 
 // Block List Page
@@ -441,20 +447,21 @@
 // Link New Device
 "linkDevice.title" = "Linkitä uusi laite";
 "linkDevice.networkError" = "Tiliä vietäessä tapahtui verkkovirhe.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred.\nPlease verify your password.";
-"linkDevice.errorNetwork" = "Tapahtui verkkovirhe.\nTarkista internetyhteytesi.";
-"linkDevice.errorTimeout" = "Toiminto on aikakatkaistu. Yritä uudelleen.";
-"linkDevice.errorCode" = "An error occurred while generating the code.\nPlease try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account.n\nPlease try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.\nSelect Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code.";
-"linkDevice.infoCode" = "When ready, enter the code and press `Connect`.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
+"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
 "linkDevice.connecting" = "Yhdistetään uuteen laitteeseen…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you?\nTo continue to transfer the account, click `Confirm`.";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
 "linkDevice.newDeviceIP" = "Uuden laitteen ip-osoite: %1@";
-"linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "New device identifier is unrecognized.\nPlease follow above instruction.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress.\nPlease confirm import on the new device.";
+"linkDevice.code" = "koodi";
+"linkDevice.wrongEntry" = "Tuntematon uusi laitetunniste. Noudata yllä olevia ohjeita.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "Tilin tuonti uuteen laitteeseen onnistui.";
 
 // Contact Page
@@ -488,17 +495,17 @@
 "generatedMessage.contactAdded" = "Kutsu vastaanotettu";
 "generatedMessage.swarmCreated" = "Keskustelu luotu";
 "generatedMessage.invitationReceived" = "%@ kutsuttiin keskusteluun.";
-"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
+"generatedMessage.invitationAccepted" = "%@ liittyi keskusteluun.";
 "generatedMessage.youJoined" = "Liityit keskusteluun.";
 "generatedMessage.contactBlocked" = "%@ estettiin keskustelusta.";
-"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
+"generatedMessage.contactUnblocked" = "%@ keskustelun esto poistettiin.";
 "generatedMessage.outgoingCall" = "Lähtevä puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
-"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
-"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
-"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
+"generatedMessage.contactLeftConversation" = "%@ poistui keskustelusta.";
+"generatedMessage.nonSwarmInvitationReceived" = "Lähetit kutsun.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Kutsu hyväksytty.";
 
 // General Settings
 "generalSettings.videoSettings" = "Videoasetukset";
@@ -525,7 +532,7 @@
 "migrateAccount.title" = "Tilin siirto";
 "migrateAccount.migrateButton" = "Siirrä tunnus";
 "migrateAccount.explanation" = "Vaaditaan tunnuksen siirtoa";
-"migrateAccount.passwordExplanation" = "Jatka siirtymistä antamalla salasana, jota käytettiin tähän tiliin";
+"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
 "migrateAccount.error" = "Tiliä siirrettäessä tapahtui virhe. Yritä uudelleen tai poista tili.";
 "migrateAccount.migrating" = "Siirretään...";
 "migrateAccount.migrateAnother" = "Siirrä toinen tunnus";
@@ -542,59 +549,59 @@
 
 // Accessibility
 "accessibility.close" = "Sulje";
-"accessibility.smartListSwitchAccounts" = "Switch account";
-"accessibility.smartListConnectedAs" = "The current account is %@";
+"accessibility.smartListSwitchAccounts" = "Vaihda tiliä";
+"accessibility.smartListConnectedAs" = "Nykyinen tili %@";
 "accessibility.smartListAddAccount" = "Lisää tili";
 "accessibility.aboutJamiTitle" = "Tietoja Jami'sta";
 "accessibility.welcomeToJamiTitle" = "Tervetuloa Jamiin";
-"accessibility.createAccountVerifyUsernamePrompt" = "Enter username to check availability.";
+"accessibility.createAccountVerifyUsernamePrompt" = "Tarkista saatavuus kirjoittamalla tunnus.";
 "accessibility.profilePicturePicker" = "Profiilikuva";
-"accessibility.profilePicturePickerHint" = "Double-tap to take a picture or select a picture from the library";
-"accessibility.swarmPicturePicker" = "Group picture";
+"accessibility.profilePicturePickerHint" = "Ota kuva napauttamalla tai valitse kuva kirjastosta";
+"accessibility.swarmPicturePicker" = "Ryhmäkuva";
 "accessibility.accountSummaryQrCode" = "QR-koodi";
-"accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
-"accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";
+"accessibility.accountSummaryQrCodeHint" = "Näet tilin QR-koodin napauttamalla";
+"accessibility.accountSummaryEditProfileHint" = "Napauta ja muokkaa profiilia";
 "accessibility.accountSummaryEditSettingsButton" = "Asetukset";
-"accessibility.conversationStartVoiceCall" = "Start audio call with %@";
-"accessibility.conversationStartVideoCall" = "Start video call with %@";
-"accessibility.conversationComposeMessage" = "Compose a message";
-"accessibility.conversationShareMedia" = "Share media";
-"accessibility.conversationCameraHint" = "Double-tap to open camera";
+"accessibility.conversationStartVoiceCall" = "Aloita puhelu %@:lle";
+"accessibility.conversationStartVideoCall" = "Aloita videopuhelu %@:lle";
+"accessibility.conversationComposeMessage" = "Kirjoita viesti";
+"accessibility.conversationShareMedia" = "Jaa mediaa";
+"accessibility.conversationCameraHint" = "Napauta ja avaa kamera";
 "accessibility.audioPlayerPlay" = "Toista";
 "accessibility.audioPlayerPause" = "Pysäytä";
-"accessibility.conversationRowUnreadCount" = "%@ unread messages.";
-"accessibility.conversationRowBlocked" = "Conversation blocked";
-"accessibility.conversationRowSyncing" = "Synchronization in progress";
-"accessibility.conversationRowLastMessage" = "Last message at %@";
+"accessibility.conversationRowUnreadCount" = "%@ lukematonta.";
+"accessibility.conversationRowBlocked" = "Keskustelu estetty";
+"accessibility.conversationRowSyncing" = "Synkronointi käynnissä";
+"accessibility.conversationRowLastMessage" = "Viimeinen viesti %@";
 "accessibility.userPresenceOnline" = "Verkossa";
 "accessibility.userPresenceAvailable" = "Saatavilla";
-"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
-"accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
-"accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
-"accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
+"accessibility.pendingRequestsRowPlural" = "Kutsuja: %@ odottavaa kutsua";
+"accessibility.pendingRequestsRowSingular" = "Kutsu: %@ odottava kutsu";
+"accessibility.pendingRequestsRowHint" = "Tarkista saamasi kutsut ja vastaa niihin napauttamalla";
+"accessibility.pendingRequestsListBlockUser" = "Estä kutsun lähettäjä";
 "accessibility.pendingRequestsListRejectInvitation" = "Hylkää kutsu";
 "accessibility.pendingRequestsListAcceptInvitation" = "Hyväksy kutsu";
-"accessibility.messageBubbleDeleted" = "Message deleted";
+"accessibility.messageBubbleDeleted" = "Viesti poistettu";
 "accessibility.messageBubbleEdited" = "Muokattu";
-"accessibility.messageBubbleRead" = "Read";
-"accessibility.messageBubbleUnread" = "Unread";
-"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
-"accessibility.fileTransferNoName" = "File received on %@, name not available";
-"accessibility.inReply" = "In reply to message";
-"accessibility.text.receivedOn" = "%1@, message received on %2@";
-"accessibility.text.sentOn" = "%1@, message sent on %2@";
-"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
-"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.messageBubbleRead" = "Luettu";
+"accessibility.messageBubbleUnread" = "Lukematon";
+"accessibility.textNotAvailable" = "Tyhjä viesti vastaanotettu %@. Tätä ei ehkä lähetetty oikein.";
+"accessibility.fileTransferNoName" = "Tiedosto vastaanotettu %@, nimeä ei ole saatavilla";
+"accessibility.inReply" = "Vastauksena viestiin";
+"accessibility.text.receivedOn" = "%1@, viesti saapui %2@";
+"accessibility.text.sentOn" = "%1@, viesti lähetetty %2@";
+"accessibility.fileTransfer.receivedOn" = "Tiedosto: %1@ , vastaanotettu %2@";
+"accessibility.fileTransfer.sentOn" = "Tiedosto: %1@, lähetetty %2@";
+"accessibility.call.lasted" = "Kesto %@";
 "accessibility.calls.default.toggleAudio" = "Mykistä mikrofoni";
 "accessibility.calls.default.toggleVideo" = "Avaa kamera";
 "accessibility.calls.default.pauseCall" = "Puhelu pitoon";
 "accessibility.calls.default.hangUpCall" = "Katkaise puhelu";
 "accessibility.calls.default.addParticipant" = "Lisää osannottaja";
-"accessibility.calls.default.switchCamera" = "Switch camera";
+"accessibility.calls.default.switchCamera" = "Vaihda kamera";
 "accessibility.calls.default.toggleSpeaker" = "Kytke kaiutin";
 "accessibility.calls.default.openConversation" = "Avaa keskustelu";
-"accessibility.calls.default.showDialpad" = "Show dialpad";
+"accessibility.calls.default.showDialpad" = "Näytä numeronäppäimet";
 "accessibility.calls.default.raiseHand" = "Nosta käsi";
 
 "accessibility.calls.alter.toggleAudio" = "Poista mikrofonin mykistys";
@@ -602,10 +609,10 @@
 "accessibility.calls.alter.pauseCall" = "Jatka puhelua";
 "accessibility.calls.alter.hangUpCall" = "Katkaise puhelu";
 "accessibility.calls.alter.addParticipant" = "Lisää osannottaja";
-"accessibility.calls.alter.switchCamera" = "Switch camera";
-"accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
+"accessibility.calls.alter.switchCamera" = "Vaihda kamera";
+"accessibility.calls.alter.toggleSpeaker" = "Mykistä kaiutin";
 "accessibility.calls.alter.openConversation" = "Avaa keskustelu";
-"accessibility.calls.alter.showDialpad" = "Show dialpad";
+"accessibility.calls.alter.showDialpad" = "Näytä numeronäppäimet";
 "accessibility.calls.alter.raiseHand" = "Käsi alas";
 "accessibility.conference.minimize" = "Pienennä";
 "accessibility.conference.maximize" = "Suurenna";
@@ -616,4 +623,4 @@
 "accessibility.conference.hangup" = "Katkaise puhelu";
 "accessibility.conference.lowerHand" = "Käsi alas";
 
-"accessibility.account.tokenQRcode" = "Token QR code";
+"accessibility.account.tokenQRcode" = "Token QR-koodi";

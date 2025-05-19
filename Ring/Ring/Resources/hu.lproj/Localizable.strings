@@ -1,7 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -161,6 +159,11 @@
 "conversation.edited" = "Szerkesztve";
 "conversation.deletedMessage" = "%@ törölt egy üzenetet";
 "conversation.contactBlocked" = "Kapcsolattartó letiltva";
+"conversation.typingIndicatorOneUser" = "%@ is typing…";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+
 
 // Invitations
 "invitations.noInvitations" = "Nincs meghívás";
@@ -220,11 +223,11 @@
 "linkToAccount.exportInstructionsPath" = "Jelölje ki a Fiók → Fiókbeállítások → Új eszköz összekapcsolása lehetőséget.";
 "linkToAccount.scanQrCode" = "Ha készen áll, olvassa be a QR-kódot.";
 "linkToAccount.enterProvidedCode" = "Ha készen áll, adja meg a hitelesítési kódot.";
-"linkToAccount.accountLockedWithPassword" = "A fiók jelszóval van védve. A folytatáshoz adja meg a fiók jelszavát.";
+"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
 "linkToAccount.exit" = "Kilépés";
 "linkToAccount.shareMessage" = "A kód: %@";
-"linkToAccount.alertTile" = "Leállítja a fiók összekapcsolását?";
-"linkToAccount.alertMessage" = "A leállítás megszakítja a fiók importálási műveletét.";
+"linkToAccount.alertTile" = "Do you want to stop linking the account?";
+"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Jami-fiók importálása a helyi archívfájlból.";
@@ -378,7 +381,7 @@
 "accountPage.generatingPin" = "PIN-kód generálása folyamatban…";
 "accountPage.passwordForPin" = "Ez a fiók jelszóval titkosított. Kérjük, adja meg a jelszót a PIN-kód létrehozásához.";
 "accountPage.pinExplanationTitle" = "Másik eszközön";
-"accountPage.pinExplanationMessage" = "Telepítse és indítsa el a Jami alkalmazást, válassza az „Importálás másik eszközről” lehetőséget, és QR-kód beolvasása vagy PIN-kód kézi megadása.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
 "accountPage.pinError" = "Hiba történt a PIN-kód generálása közben.";
 "accountPage.notificationTitle" = "Értesítések";
 "accountPage.notificationError" = "A Jami értesítései le vannak tiltva. A funkció használatát engedélyezze az eszköz beállításaiban.";
@@ -400,6 +403,9 @@
 "accountPage.bootstrap" = "Rendszerindítás";
 "accountPage.dhtConfiguration" = "OpenDHT-beállítások";
 "accountPage.nameServer" = "Névkiszolgáló";
+"accountPage.chats" = "Chats";
+"accountPage.typingIndicator" = "Typing indicator";
+"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Ez a Jami-fiók csak ezen az eszközön létezik. A fiók elveszik, ha ez az eszköz elveszik, vagy az alkalmazást eltávolítják. Javasoljuk, hogy készítsen biztonsági másolatot erről a fiókról.";
@@ -441,20 +447,21 @@
 // Link New Device
 "linkDevice.title" = "Új eszköz összekapcsolása";
 "linkDevice.networkError" = "Hálózati hiba történt a fiók exportálása közben.";
-"linkDevice.errorWrongPassword" = "Hitelesítési hiba történt az eszköz összekapcsolása közben. Kérjük, ellenőrizze jelszavát, és próbálkozzon újra.";
-"linkDevice.errorNetwork" = "Hálózati hiba történt a fiók összekapcsolása közben. Ellenőrizze a kapcsolatot, majd próbálkozzon újra.";
-"linkDevice.errorTimeout" = "Művelet időtúllépése. Próbálkozzon újra.";
-"linkDevice.errorCode" = "Hiba történt a kód létrehozásakor. Próbálkozzon újra.";
-"linkDevice.errorWrongData" = "Hiba történt a fiók exportálása közben. Próbálkozzon újra.";
-"linkDevice.initialInfo" = "Az új eszközön indítsa el a fiók importálásának műveletét.\nJelölje ki a Fiók hozzáadása > Fiók létrehozása más eszközről lehetőséget.";
-"linkDevice.infoQRCode" = "Ha készen áll, olvassa be a QR-kódot.";
-"linkDevice.infoCode" = "Ha készen áll, írja be a kódot, és nyomja meg a Kapcsolódás gombot.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
+"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
+"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code";
+"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
 "linkDevice.connecting" = "Kapcsolódás az új eszközhöz…";
-"linkDevice.authenticationInfo" = "Új eszköz található a következő címen. Ön az?\nA fiókexportálási művelet folytatásához kattintson a Megerősítés gombra.";
+"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
 "linkDevice.newDeviceIP" = "Új eszköz IP-címe: %1@";
 "linkDevice.code" = "kód";
 "linkDevice.wrongEntry" = "Ismeretlen új eszközazonosító. Kérjük, kövesse a fenti utasításokat.";
-"linkDevice.exportInProgress" = "A fiók exportálása az új eszközre folyamatban van.\nKérjük, erősítse meg az importálást az új eszközön.";
+"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "A fiók importálása sikerült az új eszközön.";
 
 // Contact Page
@@ -525,7 +532,7 @@
 "migrateAccount.title" = "Fiók áttelepítése";
 "migrateAccount.migrateButton" = "Fiókáttelepítés";
 "migrateAccount.explanation" = "Fiók áttelepítése szükséges.";
-"migrateAccount.passwordExplanation" = "Adja meg a fiók jelszavát az áttelepítés folytatásához";
+"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
 "migrateAccount.error" = "Hiba történt a fiók áttelepítése közben. Próbálja újra, vagy törölje a fiókot.";
 "migrateAccount.migrating" = "Áttelepítés…";
 "migrateAccount.migrateAnother" = "Másik fiókáttelepítés";
