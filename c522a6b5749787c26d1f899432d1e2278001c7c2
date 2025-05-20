@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bd541b7_33e01b97",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 10
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-05-20T03:15:57Z",
+      "side": 0,
+      "message": "Sorry for the noise. What is preferred? For example, `press`, `click`, `tap`, `select`?",
+      "range": {
+        "startLine": 458,
+        "startChar": 56,
+        "endLine": 458,
+        "endChar": 61
+      },
+      "revId": "c522a6b5749787c26d1f899432d1e2278001c7c2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
