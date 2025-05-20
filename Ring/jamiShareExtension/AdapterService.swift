@@ -1,0 +1,137 @@
+/*
+ *  Copyright (C) 2018-2019 Savoir-faire Linux Inc.
+ *
+ *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
+ *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+import SwiftyBeaver
+import RxSwift
+import Foundation
+import MobileCoreServices
+import Photos
+
+public final class AdapterService: AdapterDelegate {
+    private let log = SwiftyBeaver.self
+
+    private let adapter: Adapter
+
+    init(withAdapter adapter: Adapter) {
+        self.adapter = adapter
+        Adapter.delegate = self
+    }
+    
+    func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
+        adapter.setAccountActive(accountId, active: true)
+        adapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
+        log.info("*** Message sent ***")
+    }
+
+    func setAccountActive(_ accountId: String, newValue: Bool) {
+        adapter.setAccountActive(accountId, active: newValue)
+    }
+
+    func sendSwarmFile(accountId: String, conversationId: String, filePath: String, fileName: String, parentId: String) {
+        let cleanedPath = filePath.replacingOccurrences(of: "file://", with: "")
+        let fileManager = FileManager.default
+        let tempDirectory = NSTemporaryDirectory()
+        let duplicatedFilePath = (tempDirectory as NSString).appendingPathComponent(fileName)
+
+        do {
+            if fileManager.fileExists(atPath: duplicatedFilePath) {
+                try fileManager.removeItem(atPath: duplicatedFilePath)
+            }
+
+            try fileManager.copyItem(atPath: cleanedPath, toPath: duplicatedFilePath)
+
+            adapter.sendSwarmFile(withName: fileName, accountId: accountId, conversationId: conversationId, withFilePath: duplicatedFilePath, parent: parentId)
+            log.info("*** File duplicated and sent successfully ***")
+        } catch {
+            log.error("Error duplicating file: \(error.localizedDescription)")
+        }
+    }
+
+    func getAccountList() -> [String] {
+        return adapter.getAccountList() as? [String] ?? []
+    }
+
+    func getConversationsByAccount() -> [String: [String]] {
+        var result: [String: [String]] = [:]
+        for account in getAccountList() {
+            let conversations = adapter.getSwarmConversations(forAccount: account) as? [String] ?? []
+            result[account] = conversations
+        }
+        return result
+    }
+
+    struct FileTransferStatus {
+        let transferId: String
+        let eventCode: Int
+        let accountId: String
+        let conversationId: String
+        let interactionId: String
+    }
+    
+    let fileTransferStatusSubject = ReplaySubject<FileTransferStatus>.create(bufferSize: 1)
+
+    var fileTransferStatusStream: Observable<FileTransferStatus> {
+        return fileTransferStatusSubject.asObservable()
+    }
+
+    func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String) {
+        print("****************")
+        print("Data transfer event received - fileId: \(transferId), eventCode: \(eventCode), accountId: \(accountId), conversationId: \(conversationId), interactionId: \(interactionId)")
+
+        let status = FileTransferStatus(
+            transferId: transferId,
+            eventCode: eventCode,
+            accountId: accountId,
+            conversationId: conversationId,
+            interactionId: interactionId
+        )
+
+        fileTransferStatusSubject.onNext(status)
+    }
+    
+    func setUpdatedConversations(accountId: String, conversationId: String) {
+        guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else {
+            return
+        }
+        var conversationData = [[String: String]]()
+        if let existingData = userDefaults.object(forKey: Constants.updatedConversations) as? [[String: String]] {
+            conversationData = existingData
+        }
+        
+        // Check if this conversation with the same accountId and conversationId already exists
+        for data in conversationData
+        where data[Constants.NotificationUserInfoKeys.accountID.rawValue] == accountId &&
+              data[Constants.NotificationUserInfoKeys.conversationID.rawValue] == conversationId {
+            return
+        }
+
+        // Add new conversation dictionary
+        let conversation = [
+            Constants.NotificationUserInfoKeys.accountID.rawValue: accountId,
+            Constants.NotificationUserInfoKeys.conversationID.rawValue: conversationId
+        ]
+
+        conversationData.append(conversation)
+        userDefaults.set(conversationData, forKey: Constants.updatedConversations)
+    }
+
+
+}
