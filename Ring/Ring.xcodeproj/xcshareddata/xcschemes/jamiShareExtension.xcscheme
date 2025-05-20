@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1430"
+   LastUpgradeVersion = "1520"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "26A88C03266FFFC800888EED"
-               BuildableName = "jamiNotificationExtension.appex"
-               BlueprintName = "jamiNotificationExtension"
+               BlueprintIdentifier = "3D0E69762DDCD9C70046FA3D"
+               BuildableName = "jamiShareExtension.appex"
+               BlueprintName = "jamiShareExtension"
                ReferencedContainer = "container:Ring.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -56,8 +56,12 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "1"
+         BundleIdentifier = "com.savoirfairelinux.ring"
+         RemotePath = "/var/containers/Bundle/Application/0799BDC4-6BF8-4424-B450-D0C9ACAAD791/Ring.app">
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "043999F21D1C2D9D00E99CD9"
@@ -65,7 +69,7 @@
             BlueprintName = "Ring"
             ReferencedContainer = "container:Ring.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
