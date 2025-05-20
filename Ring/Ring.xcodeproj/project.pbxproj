@@ -444,6 +444,9 @@
 		26FDF4192C1101C2009D036B /* JamiBaseUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF4182C1101C2009D036B /* JamiBaseUITest.swift */; };
 		26FDF43D2C1353A9009D036B /* AccountSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF43C2C1353A9009D036B /* AccountSummaryView.swift */; };
 		26FDF43F2C1353BA009D036B /* AccountSummaryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF43E2C1353BA009D036B /* AccountSummaryVM.swift */; };
+		3D0E697A2DDCD9C80046FA3D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E69792DDCD9C80046FA3D /* ShareViewController.swift */; };
+		3D0E697D2DDCD9C80046FA3D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D0E697B2DDCD9C80046FA3D /* MainInterface.storyboard */; };
+		3D0E69812DDCD9C80046FA3D /* jamiShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
 		4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66E236CBC6900747177 /* ContactPickerViewController.swift */; };
@@ -550,6 +553,13 @@
 			remoteGlobalIDString = 26A88C03266FFFC800888EED;
 			remoteInfo = jamiNotificationExtension;
 		};
+		3D0E697F2DDCD9C80046FA3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D0E69762DDCD9C70046FA3D;
+			remoteInfo = jamiShareExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -560,6 +570,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				26A88C0B266FFFC800888EED /* jamiNotificationExtension.appex in Embed App Extensions */,
+				3D0E69812DDCD9C80046FA3D /* jamiShareExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1027,6 +1038,10 @@
 		26FDF4182C1101C2009D036B /* JamiBaseUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiBaseUITest.swift; sourceTree = "<group>"; };
 		26FDF43C2C1353A9009D036B /* AccountSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryView.swift; sourceTree = "<group>"; };
 		26FDF43E2C1353BA009D036B /* AccountSummaryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryVM.swift; sourceTree = "<group>"; };
+		3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = jamiShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D0E69792DDCD9C80046FA3D /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		3D0E697C2DDCD9C80046FA3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		3D0E697E2DDCD9C80046FA3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
 		4430A66E236CBC6900747177 /* ContactPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerViewController.swift; sourceTree = "<group>"; };
@@ -1340,6 +1355,13 @@
 				26F82D062D7A09C300954A7B /* libnatpmp.xcframework in Frameworks */,
 				26001CA02D78E3E6009A8E23 /* libpjsip-simple.xcframework in Frameworks */,
 				26001C982D78E3E6009A8E23 /* libpjmedia-codec.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D0E69742DDCD9C70046FA3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1666,6 +1688,7 @@
 				04399A0F1D1C2D9D00E99CD9 /* RingTests */,
 				04399A1A1D1C2D9D00E99CD9 /* RingUITests */,
 				26A88C05266FFFC800888EED /* jamiNotificationExtension */,
+				3D0E69782DDCD9C80046FA3D /* jamiShareExtension */,
 				043999F41D1C2D9D00E99CD9 /* Products */,
 				02AED8171DD4C4B000F740BA /* Frameworks */,
 			);
@@ -1678,6 +1701,7 @@
 				04399A0C1D1C2D9D00E99CD9 /* RingTests.xctest */,
 				04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */,
 				26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */,
+				3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2419,6 +2443,16 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		3D0E69782DDCD9C80046FA3D /* jamiShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				3D0E69792DDCD9C80046FA3D /* ShareViewController.swift */,
+				3D0E697B2DDCD9C80046FA3D /* MainInterface.storyboard */,
+				3D0E697E2DDCD9C80046FA3D /* Info.plist */,
+			);
+			path = jamiShareExtension;
+			sourceTree = "<group>";
+		};
 		4430A669236CB9F600747177 /* Conference */ = {
 			isa = PBXGroup;
 			children = (
@@ -2549,6 +2583,7 @@
 			);
 			dependencies = (
 				26A88C0A266FFFC800888EED /* PBXTargetDependency */,
+				3D0E69802DDCD9C80046FA3D /* PBXTargetDependency */,
 			);
 			name = Ring;
 			packageProductDependencies = (
@@ -2614,6 +2649,23 @@
 			productReference = 26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		3D0E69762DDCD9C70046FA3D /* jamiShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D0E69862DDCD9CA0046FA3D /* Build configuration list for PBXNativeTarget "jamiShareExtension" */;
+			buildPhases = (
+				3D0E69732DDCD9C70046FA3D /* Sources */,
+				3D0E69742DDCD9C70046FA3D /* Frameworks */,
+				3D0E69752DDCD9C70046FA3D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = jamiShareExtension;
+			productName = jamiShareExtension;
+			productReference = 3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2623,7 +2675,7 @@
 				KnownAssetTags = (
 					New,
 				);
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Savoir-faire Linux";
 				TargetAttributes = {
@@ -2664,6 +2716,9 @@
 						DevelopmentTeam = MSHYCBXK85;
 						LastSwiftMigration = 1250;
 						ProvisioningStyle = Manual;
+					};
+					3D0E69762DDCD9C70046FA3D = {
+						CreatedOnToolsVersion = 15.2;
 					};
 					62366028200914C1002598C1 = {
 						CreatedOnToolsVersion = 9.2;
@@ -2724,6 +2779,7 @@
 				ru,
 				"zh-Hans-CN",
 				"zh-Hans",
+				Base,
 			);
 			mainGroup = 043999EA1D1C2D9D00E99CD9;
 			packageReferences = (
@@ -2739,6 +2795,7 @@
 				04399A161D1C2D9D00E99CD9 /* RingUITests */,
 				62366028200914C1002598C1 /* libring */,
 				26A88C03266FFFC800888EED /* jamiNotificationExtension */,
+				3D0E69762DDCD9C70046FA3D /* jamiShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2796,6 +2853,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				449E736428D9F69E00CBF564 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D0E69752DDCD9C70046FA3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D0E697D2DDCD9C80046FA3D /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3210,6 +3275,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3D0E69732DDCD9C70046FA3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D0E697A2DDCD9C80046FA3D /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3227,6 +3300,11 @@
 			isa = PBXTargetDependency;
 			target = 26A88C03266FFFC800888EED /* jamiNotificationExtension */;
 			targetProxy = 26A88C09266FFFC800888EED /* PBXContainerItemProxy */;
+		};
+		3D0E69802DDCD9C80046FA3D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D0E69762DDCD9C70046FA3D /* jamiShareExtension */;
+			targetProxy = 3D0E697F2DDCD9C80046FA3D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3283,6 +3361,14 @@
 				62AD0C2B1FE0557D00BEA1F6 /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		3D0E697B2DDCD9C80046FA3D /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D0E697C2DDCD9C80046FA3D /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -3914,6 +4000,168 @@
 			};
 			name = Release;
 		};
+		3D0E69822DDCD9CA0046FA3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = jamiShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = jamiShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3D0E69832DDCD9CA0046FA3D /* Debug with lint */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = jamiShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = jamiShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug with lint";
+		};
+		3D0E69842DDCD9CA0046FA3D /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = jamiShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = jamiShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Development;
+		};
+		3D0E69852DDCD9CA0046FA3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = jamiShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = jamiShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		6229B5A51FCDB006006937DF /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4134,6 +4382,17 @@
 				265219D42B603FD700D1CAE9 /* Debug with lint */,
 				26A88C0E266FFFC800888EED /* Development */,
 				26A88C0F266FFFC800888EED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D0E69862DDCD9CA0046FA3D /* Build configuration list for PBXNativeTarget "jamiShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D0E69822DDCD9CA0046FA3D /* Debug */,
+				3D0E69832DDCD9CA0046FA3D /* Debug with lint */,
+				3D0E69842DDCD9CA0046FA3D /* Development */,
+				3D0E69852DDCD9CA0046FA3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
