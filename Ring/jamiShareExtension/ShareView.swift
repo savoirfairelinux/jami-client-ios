@@ -1,0 +1,516 @@
+import SwiftUI
+import UniformTypeIdentifiers
+import MobileCoreServices
+import CryptoKit
+
+struct ShareView: View {
+    // Extension data
+    let closeAction: () -> Void
+    
+    @State private var selectedConversation: String? = nil
+    @State private var showUnsupportedAlert: Bool = false
+    @State private var showNoAccountAlert: Bool = false
+
+
+    let items: [NSExtensionItem]
+    @ObservedObject var viewModel: ShareViewModel
+    
+    init(items: [NSExtensionItem], closeAction: @escaping () -> Void) {
+        self.items = items
+        self.closeAction = closeAction
+        self.viewModel = ShareViewModel(sharedItems: items)
+    }
+
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    SharedItemsSection(items: items)
+
+//                    if !viewModel.transmissionSummary.isEmpty {
+//                        
+//                        Text(viewModel.transmissionSummary)
+//                            .font(.caption)
+//                            .padding()
+//                            .background(Color.yellow.opacity(0.2))
+//                            .cornerRadius(8)
+//                    }
+
+                    Divider()
+
+                    AccountsSection(
+                        accountList: viewModel.accountList,
+                        conversationsByAccount: viewModel.conversationsByAccount,
+                        sendAction: sendAllItems
+                    )
+
+
+                    Spacer()
+                }
+                .padding()
+            }
+            .navigationTitle("Jami")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Close") {
+                        closeAction()
+                    }
+                }
+            }
+            .onAppear {
+                if viewModel.conversationsByAccount.isEmpty {
+                    showNoAccountAlert = true
+                }
+            }
+            .alert(isPresented: $showUnsupportedAlert) {
+                Alert(title: Text("Unsupported Content"),
+                      message: Text("The shared item type is not supported yet."),
+                      dismissButton: .default(Text("OK")))
+            }
+            .alert(isPresented: $showNoAccountAlert) {
+                Alert(
+                    title: Text("No Account Found"),
+                    message: Text("Please create an account in the main app to continue."),
+                    dismissButton: .default(Text("OK"), action: closeAction)
+                )
+            }
+        }
+        .onChange(of: viewModel.transmissionSummary) { newValue in
+            if !newValue.isEmpty {
+                closeAction()
+            }
+        }
+
+    }
+
+    private func sendAllItems(to convo: String, account: String) {
+        for item in items {
+            if let attachments = item.attachments {
+                for provider in attachments {
+                    if provider.hasItemConformingToTypeIdentifier(UTType.plainText.identifier) {
+                        provider.loadItem(forTypeIdentifier: UTType.plainText.identifier, options: nil) { (data, _) in
+                            if let text = data as? String {
+                                viewModel.sendMessage(accountId: account, conversationId: convo, message: text)
+                            } else {
+                                showUnsupportedAlert = true
+                            }
+                        }
+                    } else if provider.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
+                        provider.loadItem(forTypeIdentifier: UTType.image.identifier, options: nil) { (data, _) in
+                            if let url = data as? URL {
+                                let filename = url.lastPathComponent
+                                viewModel.sendFile(accountId: account, conversationId: convo, filePath: url.absoluteString, fileName: filename)
+                            } else {
+                                showUnsupportedAlert = true
+                            }
+                        }
+                    } else if provider.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) {
+                        provider.loadItem(forTypeIdentifier: UTType.fileURL.identifier, options: nil) { (data, _) in
+                            if let url = data as? URL {
+                                let filename = url.lastPathComponent
+                                viewModel.sendFile(accountId: account, conversationId: convo, filePath: url.absoluteString, fileName: filename)
+                            } else {
+                                showUnsupportedAlert = true
+                            }
+                        }
+                    } else if provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
+                        provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { (data, _) in
+                            if let url = data as? URL {
+                                viewModel.sendMessage(accountId: account, conversationId: convo, message: url.absoluteString)
+                            } else if let str = data as? String {
+                                viewModel.sendMessage(accountId: account, conversationId: convo, message: str)
+                            } else {
+                                showUnsupportedAlert = true
+                            }
+                        }
+                    } else {
+                        showUnsupportedAlert = true
+                    }
+                }
+            } else {
+                showUnsupportedAlert = true
+            }
+        }
+    }
+}
+
+
+// MARK: - Shared Items Section
+
+struct SharedItemsSection: View {
+    let items: [NSExtensionItem]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Shared Content")
+                .font(.headline)
+
+            if !items.isEmpty {
+                ForEach(items.indices, id: \.self) { index in
+                    ItemView(item: items[index])
+                        .padding(.vertical, 8)
+                }
+            } else {
+                Text("No items shared.")
+                    .foregroundColor(.gray)
+            }
+        }
+    }
+}
+
+// MARK: - Accounts Section
+
+struct AccountsSection: View {
+    let accountList: [(id: String, name: String, avatar: String)]
+    let conversationsByAccount: [String: [(id: String, name: String, avatar: String)]]
+    @State private var selectedAccountId: String?
+
+    let sendAction: (String, String) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            // Account selector with avatar as part of Menu label
+            if let selectedId = selectedAccountId,
+               let selectedAccount = accountList.first(where: { $0.id == selectedId }) {
+                Menu {
+                    Picker("Select Account", selection: $selectedAccountId) {
+                        ForEach(accountList, id: \.id) { account in
+                            Text(account.name).tag(account.id as String?)
+                        }
+                    }
+                } label: {
+                    HStack(spacing: 12) {
+                        if let avatarImage = imageFromBase64(selectedAccount.avatar), !selectedAccount.avatar.isEmpty {
+                            Image(uiImage: avatarImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 40, height: 40)
+                                .clipShape(Circle())
+                        } else {
+                            Circle()
+                                .fill(Color(backgroundColor(for: selectedAccount.name)))
+                                .frame(width: 40, height: 40)
+                                .overlay(
+                                    Text(selectedAccount.name.prefix(1).uppercased())
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                )
+                        }
+
+                        Text(selectedAccount.name)
+                            .foregroundColor(.primary)
+
+                        Image(systemName: "chevron.down")
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 6)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(8)
+                }
+                .padding(.horizontal)
+            }
+
+            // Conversations for selected account
+            if let selected = selectedAccountId {
+                if let conversations = conversationsByAccount[selected], !conversations.isEmpty {
+                    VStack(alignment: .leading, spacing: 12) {
+                        ForEach(conversations, id: \.id) { convo in
+                            HStack(spacing: 12) {
+                                if let avatarImage = imageFromBase64(convo.avatar), !convo.avatar.isEmpty {
+                                    Image(uiImage: avatarImage)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 40, height: 40)
+                                        .clipShape(Circle())
+                                } else {
+                                    Circle()
+                                        .fill(Color(backgroundColor(for: convo.name)))
+                                        .frame(width: 40, height: 40)
+                                        .overlay(
+                                            Text(convo.name.prefix(1).uppercased())
+                                                .foregroundColor(.white)
+                                                .font(.headline)
+                                        )
+                                }
+
+                                Text(convo.name)
+                                    .font(.body)
+
+                                Spacer()
+                            }
+                            .padding(.horizontal)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                sendAction(convo.id, selected)
+                            }
+                        }
+                    }
+                } else {
+                    Text("No conversation found")
+                        .foregroundColor(.gray)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding()
+                }
+            }
+        }
+        .padding(.top)
+        .onAppear {
+            if selectedAccountId == nil {
+                selectedAccountId = accountList.first?.id
+            }
+        }
+    }
+}
+
+// MARK: - Account Disclosure View
+
+struct AccountDisclosureView: View {
+    let account: String
+    let conversations: [String]
+    @Binding var isExpanded: Bool
+    let onSelectConversation: (String) -> Void
+
+    var body: some View {
+        DisclosureGroup(
+            isExpanded: $isExpanded,
+            content: {
+                if conversations.isEmpty {
+                    Text("No conversations.")
+                        .foregroundColor(.gray)
+                        .padding(.leading, 10)
+                } else {
+                    ForEach(conversations, id: \.self) { convo in
+                        Button(action: {
+                            onSelectConversation(convo)
+                        }) {
+                            Text(convo)
+                                .padding(.leading, 10)
+                                .foregroundColor(.blue)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                }
+            },
+            label: {
+                Text(account)
+                    .font(.subheadline)
+                    .bold()
+            }
+        )
+        .padding(.vertical, 4)
+    }
+}
+
+// MARK: - ItemView and Preview Models
+
+struct ItemView: View {
+    let item: NSExtensionItem
+    @State private var contentPreviews: [ContentPreview] = []
+    @State private var showAlert = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Item:")
+                .font(.subheadline)
+                .bold()
+
+            if contentPreviews.isEmpty {
+                Text("Loading content...")
+                    .foregroundColor(.gray)
+                    .onAppear { loadContent() }
+            } else {
+                ForEach(contentPreviews) { preview in
+                    switch preview.type {
+                    case .text(let string):
+                        VStack(alignment: .leading) {
+                            Text("Type: Text")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            Text(string)
+                                .padding(6)
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(6)
+                        }
+                    case .image(let image, let url):
+                        VStack(alignment: .leading) {
+                            Text("Type: Image")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxHeight: 150)
+                                .cornerRadius(8)
+                            if let url = url {
+                                Text(url.absoluteString)
+                                    .font(.caption2)
+                                    .foregroundColor(.gray)
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                            }
+                        }
+                    case .file(let url):
+                        VStack(alignment: .leading) {
+                            Text("Type: File")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            Text(url.lastPathComponent)
+                                .italic()
+                                .foregroundColor(.blue)
+                        }
+                    case .url(let url):
+                        VStack(alignment: .leading) {
+                            Text("Type: URL")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            Text(url.absoluteString)
+                                .underline()
+                                .foregroundColor(.blue)
+                                .lineLimit(2)
+                        }
+                    }
+                }
+            }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Unsupported Content"),
+                  message: Text("Could not load item content."),
+                  dismissButton: .default(Text("OK")))
+        }
+    }
+
+    func loadContent() {
+        guard let attachments = item.attachments else {
+            showAlert = true
+            return
+        }
+
+        for provider in attachments {
+            if provider.hasItemConformingToTypeIdentifier(UTType.plainText.identifier) {
+                provider.loadItem(forTypeIdentifier: UTType.plainText.identifier, options: nil) { (data, _) in
+                    if let text = data as? String {
+                        DispatchQueue.main.async {
+                            contentPreviews.append(ContentPreview(.text(text)))
+                        }
+                    }
+                }
+            } else if provider.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
+                provider.loadItem(forTypeIdentifier: UTType.image.identifier, options: nil) { (data, _) in
+                    if let url = data as? URL, let uiImage = UIImage(contentsOfFile: url.path) {
+                        DispatchQueue.main.async {
+                            contentPreviews.append(ContentPreview(.image(Image(uiImage: uiImage), url)))
+                        }
+                    } else if let uiImage = data as? UIImage {
+                        DispatchQueue.main.async {
+                            contentPreviews.append(ContentPreview(.image(Image(uiImage: uiImage), nil)))
+                        }
+                    } else {
+                        DispatchQueue.main.async { showAlert = true }
+                    }
+                }
+            } else if provider.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) {
+                provider.loadItem(forTypeIdentifier: UTType.fileURL.identifier, options: nil) { (data, _) in
+                    if let url = data as? URL {
+                        DispatchQueue.main.async {
+                            contentPreviews.append(ContentPreview(.file(url)))
+                        }
+                    } else {
+                        DispatchQueue.main.async { showAlert = true }
+                    }
+                }
+            } else if provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
+                provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { (data, _) in
+                    if let url = data as? URL {
+                        DispatchQueue.main.async {
+                            contentPreviews.append(ContentPreview(.url(url)))
+                        }
+                    } else {
+                        DispatchQueue.main.async { showAlert = true }
+                    }
+                }
+            } else {
+                DispatchQueue.main.async { showAlert = true }
+            }
+        }
+    }
+}
+
+enum ContentPreviewType: Identifiable {
+    case text(String)
+    case image(Image, URL?)
+    case file(URL)
+    case url(URL)
+
+    var id: UUID { UUID() }
+}
+
+struct ContentPreview: Identifiable {
+    let id = UUID()
+    let type: ContentPreviewType
+    init(_ type: ContentPreviewType) { self.type = type }
+}
+
+extension UIColor {
+    convenience init?(hexString: String) {
+        var hex = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
+        if hex.hasPrefix("#") {
+            hex.removeFirst()
+        }
+
+        var rgb: UInt64 = 0
+        guard Scanner(string: hex).scanHexInt64(&rgb) else { return nil }
+
+        let r = CGFloat((rgb >> 16) & 0xFF) / 255.0
+        let g = CGFloat((rgb >> 8) & 0xFF) / 255.0
+        let b = CGFloat(rgb & 0xFF) / 255.0
+
+        self.init(red: r, green: g, blue: b, alpha: 1.0)
+    }
+}
+
+let defaultAvatarColor = UIColor(hexString: "808080")!
+
+// Colors from material.io
+let avatarColors = [
+    UIColor(hexString: "#f44336")!, // Red
+    UIColor(hexString: "#e91e63")!, // Pink
+    UIColor(hexString: "#9c27b0")!, // Purple
+    UIColor(hexString: "#673ab7")!, // Deep Purple
+    UIColor(hexString: "#3f51b5")!, // Indigo
+    UIColor(hexString: "#2196f3")!, // Blue
+    UIColor(hexString: "#00bcd4")!, // Cyan
+    UIColor(hexString: "#009688")!, // Teal
+    UIColor(hexString: "#4caf50")!, // Green
+    UIColor(hexString: "#8bc34a")!, // Light Green
+    UIColor(hexString: "#9e9e9e")!, // Grey
+    UIColor(hexString: "#cddc39")!, // Lime
+    UIColor(hexString: "#ffc107")!, // Amber
+    UIColor(hexString: "#ff5722")!, // Deep Orange
+    UIColor(hexString: "#795548")!, // Brown
+    UIColor(hexString: "#607d8b")!  // Blue Grey
+];
+
+func backgroundColor(for username: String) -> UIColor {
+    // Compute MD5 hash of username
+    let md5Data = Insecure.MD5.hash(data: Data(username.utf8))
+    let md5HexString = md5Data.map { String(format: "%02hhx", $0) }.joined()
+    
+    let prefix = String(md5HexString.prefix(1))
+    var index: UInt64 = 0
+    let scanner = Scanner(string: prefix)
+    if scanner.scanHexInt64(&index) {
+        let colorIndex = Int(index) % avatarColors.count
+        return avatarColors[colorIndex]
+    }
+    
+    // fallback color if something fails
+    return defaultAvatarColor
+}
+
+func imageFromBase64(_ base64: String) -> UIImage? {
+    guard let data = Data(base64Encoded: base64),
+          let image = UIImage(data: data) else { return nil }
+    return image
+}
