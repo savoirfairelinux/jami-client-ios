@@ -1,4 +1,4 @@
-﻿ /*
+﻿/*
  *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -159,10 +159,13 @@
 "conversation.edited" = "Szerkesztve";
 "conversation.deletedMessage" = "%@ törölt egy üzenetet";
 "conversation.contactBlocked" = "Kapcsolattartó letiltva";
-"conversation.typingIndicatorOneUser" = "%@ is typing…";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+// An ellipsis is not directly shown in the following typing indicator strings.
+// An ellipsis animation is shown when messages are being typed in the view.
+// An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
+"conversation.typingIndicatorOneUser" = "%@ is typing";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
 
 
 // Invitations
@@ -181,7 +184,7 @@
 "welcome.linkDevice" = "Importálás másik eszközről";
 "welcome.linkBackup" = "Importálás archívum biztonsági másolatból";
 "welcome.createAccount" = "Jami-fiók létrehozása";
-"welcome.connectToJAMS" = "Csatlakozás a Jami-fiókkezelő kiszolgálóhoz (JAMS)";
+"welcome.connectToJAMS" = "Connect to a management server";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Átugrani";
@@ -189,7 +192,7 @@
 "createProfile.title" = "Névjegy testreszabása";
 "createProfile.enterNameLabel" = "Megjelenítendő név megadása";
 "createProfile.enterNamePlaceholder" = "Név megadása";
-"createProfile.subtitle" = "A névjegyed csak a kapcsolataival kerül megosztásra. Bármikor megváltoztathatja.";
+"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
 "createProfile.createProfilePicture" = "Névjegykép létrehozása";
 
 // Create Account form
@@ -220,14 +223,14 @@
 "linkToAccount.allSet" = "A fiók importálása sikerült.";
 "linkToAccount.goToAccounts" = "Ugrás az importált fiókra";
 "linkToAccount.exportInstructions" = "A forráseszközön indítsa el a fiók exportálásának műveletét.";
-"linkToAccount.exportInstructionsPath" = "Jelölje ki a Fiók → Fiókbeállítások → Új eszköz összekapcsolása lehetőséget.";
+"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "Ha készen áll, olvassa be a QR-kódot.";
 "linkToAccount.enterProvidedCode" = "Ha készen áll, adja meg a hitelesítési kódot.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "A fiók jelszóval van védve. A folytatáshoz adja meg a fiók jelszavát.";
 "linkToAccount.exit" = "Kilépés";
 "linkToAccount.shareMessage" = "A kód: %@";
-"linkToAccount.alertTile" = "Do you want to stop linking the account?";
-"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
+"linkToAccount.alertTile" = "Szeretné leállítani a fiók összekapcsolását?";
+"linkToAccount.alertMessage" = "A leállítás megszakítja a fiók importálási műveletét.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Jami-fiók importálása a helyi archívfájlból.";
@@ -238,11 +241,11 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Bejelentkezés";
-"linkToAccountManager.title" = "JAMS-fiók";
-"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL-je";
-"linkToAccountManager.accountManagerLabel" = "JAMS URL-címe megadása";
-"linkToAccountManager.jamsExplanation" = "Jami-fiókkezelő kiszolgáló (JAMS) URL-cím megadása";
-"linkToAccountManager.enterCredentials" = "Adja meg a JAMS hitelesítő adatait";
+"linkToAccountManager.title" = "Management server account";
+"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
+"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "Fiókhiba";
@@ -264,7 +267,7 @@
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
 "alerts.noLibraryPermissionsTitle" = "Fényképkönyvtár hozzáférése nem engedélyezett";
 "alerts.noLocationPermissionsTitle" = "Hozzáférés a tartózkodási hely nincs engedélyezve";
-"alerts.errorWrongCredentials" = "Hiba történt a Jami-fiókkezelő kiszolgálóhoz (JAMS) való csatlakozáskor. Próbálkozzon újra. Ha a probléma továbbra is fennáll, forduljon a rendszergazdához.";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Videoüzenet felvétele";
 "alerts.recordAudioMessage" = "Hangüzenet felvétele";
 "alerts.uploadFile" = "Fájl küldése";
@@ -322,7 +325,7 @@
 "accountPage.deviceRevoked" = "Az eszköz visszavonása befejeződött";
 "accountPage.deviceRevocationProgress" = "Az eszköz leválasztására vonatkozó kérés folyamatban van…";
 "accountPage.deviceRevocationSuccess" = "A kijelölt eszközt leválasztották erről a Jami-fiókról.";
-"accountPage.deviceRevocationTryAgain" = "Próbálja újra";
+"accountPage.deviceRevocationTryAgain" = "Próbálkozzon újra";
 "accountPage.deviceRevocationWrongPassword" = "Hibás jelszó";
 "accountPage.deviceRevocationUnknownDevice" = "Ismeretlen eszköz";
 "accountPage.deviceRevocationError" = "Eszköz visszavonási hiba";
@@ -381,7 +384,7 @@
 "accountPage.generatingPin" = "PIN-kód generálása folyamatban…";
 "accountPage.passwordForPin" = "Ez a fiók jelszóval titkosított. Kérjük, adja meg a jelszót a PIN-kód létrehozásához.";
 "accountPage.pinExplanationTitle" = "Másik eszközön";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "Hiba történt a PIN-kód generálása közben.";
 "accountPage.notificationTitle" = "Értesítések";
 "accountPage.notificationError" = "A Jami értesítései le vannak tiltva. A funkció használatát engedélyezze az eszköz beállításaiban.";
@@ -403,9 +406,9 @@
 "accountPage.bootstrap" = "Rendszerindítás";
 "accountPage.dhtConfiguration" = "OpenDHT-beállítások";
 "accountPage.nameServer" = "Névkiszolgáló";
-"accountPage.chats" = "Chats";
-"accountPage.typingIndicator" = "Typing indicator";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.chats" = "Csevegések";
+"accountPage.typingIndicator" = "Gépelésjelző";
+"accountPage.typingIndicatorExplanation" = "Gépelésjelzők küldése és fogadása, amelyek jelzik az üzenetek beírását.";
 
 // Backup Account
 "backupAccount.explanation" = "Ez a Jami-fiók csak ezen az eszközön létezik. A fiók elveszik, ha ez az eszköz elveszik, vagy az alkalmazást eltávolítják. Javasoljuk, hogy készítsen biztonsági másolatot erről a fiókról.";
@@ -447,21 +450,21 @@
 // Link New Device
 "linkDevice.title" = "Új eszköz összekapcsolása";
 "linkDevice.networkError" = "Hálózati hiba történt a fiók exportálása közben.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
-"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
-"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
+"linkDevice.errorNetwork" = "Hálózati hiba történt a fiók összekapcsolása közben.\nKérjük, ellenőrizze a kapcsolatot, és próbálkozzon újra.";
+"linkDevice.errorTimeout" = "Művelet időtúllépése. Próbálkozzon újra.";
+"linkDevice.errorCode" = "Hiba történt a kód létrehozásakor. Próbálkozzon újra.";
+"linkDevice.errorWrongData" = "Hiba történt a fiók exportálása közben. Próbálkozzon újra.";
+"linkDevice.initialInfo" = "Az új eszközön hozzon létre új fiókot.";
+"linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
+"linkDevice.infoQRCode" = "Ha készen áll, olvassa be a QR-kódot.";
+"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Kapcsolódás az új eszközhöz…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
+"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "Új eszköz IP-címe: %1@";
 "linkDevice.code" = "kód";
 "linkDevice.wrongEntry" = "Ismeretlen új eszközazonosító. Kérjük, kövesse a fenti utasításokat.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
+"linkDevice.exportInProgress" = "A fiók exportálási művelet az új eszközre folyamatban van. Kérjük, erősítse meg az importálást az új eszközön.";
 "linkDevice.completed" = "A fiók importálása sikerült az új eszközön.";
 
 // Contact Page
@@ -487,7 +490,7 @@
 "notifications.locationSharingStopped" = "Bejövő tartózkodási hely megosztása leállítva";
 "dataTransfer.readableStatusDecline" = "Elutasítás";
 "dataTransfer.readableStatusAccept" = "Elfogadás";
-"dataTransfer.infoMessage" = "Nyomja meg ezt a gombot a felvétel elindításához";
+"dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "Küldés";
 
 
@@ -532,7 +535,7 @@
 "migrateAccount.title" = "Fiók áttelepítése";
 "migrateAccount.migrateButton" = "Fiókáttelepítés";
 "migrateAccount.explanation" = "Fiók áttelepítése szükséges.";
-"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
+"migrateAccount.passwordExplanation" = "A fiók áttelepítésének folytatásához adja meg a fiók jelszavát.";
 "migrateAccount.error" = "Hiba történt a fiók áttelepítése közben. Próbálja újra, vagy törölje a fiókot.";
 "migrateAccount.migrating" = "Áttelepítés…";
 "migrateAccount.migrateAnother" = "Másik fiókáttelepítés";

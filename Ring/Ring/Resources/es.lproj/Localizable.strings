@@ -1,4 +1,4 @@
-﻿ /*
+﻿/*
  *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -159,10 +159,13 @@
 "conversation.edited" = "Editado";
 "conversation.deletedMessage" = "%@ Eliminar mensaje";
 "conversation.contactBlocked" = "Contacto bloqueado";
-"conversation.typingIndicatorOneUser" = "%@ is typing…";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+// An ellipsis is not directly shown in the following typing indicator strings.
+// An ellipsis animation is shown when messages are being typed in the view.
+// An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
+"conversation.typingIndicatorOneUser" = "%@ is typing";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
 
 
 // Invitations
@@ -181,7 +184,7 @@
 "welcome.linkDevice" = "Importar desde otro dispositivo";
 "welcome.linkBackup" = "Importar desde un archivo de respaldo";
 "welcome.createAccount" = "Crear una cuenta en Jami";
-"welcome.connectToJAMS" = "Conectar a un Servidor de Gestión de Cuentas Jami (JAMS)";
+"welcome.connectToJAMS" = "Connect to a management server";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Saltar";
@@ -189,7 +192,7 @@
 "createProfile.title" = "Personaliza tu perfil";
 "createProfile.enterNameLabel" = "Introduzca un nombre para mostrar";
 "createProfile.enterNamePlaceholder" = "Introducir nombre";
-"createProfile.subtitle" = "Tu perfil será compartido con tus contactos. Puedes cambiarlo en cualquier momento.";
+"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
 "createProfile.createProfilePicture" = "Crear foto de perfil";
 
 // Create Account form
@@ -220,14 +223,14 @@
 "linkToAccount.allSet" = "Cuenta importada correctamente.";
 "linkToAccount.goToAccounts" = "Ir a la cuenta importada";
 "linkToAccount.exportInstructions" = "En el dispositivo de origen, inicie la exportación.";
-"linkToAccount.exportInstructionsPath" = "Seleccionar Cuenta > Configurar la cuenta > Vincular nuevo dispositivo.";
+"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "Cuando esté listo, escanee el código QR.";
 "linkToAccount.enterProvidedCode" = "Cuando esté listo, ingrese el código de autenticación.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "La cuenta está protegida con una contraseña. Para continuar, ingresar la contraseña de la cuenta.";
 "linkToAccount.exit" = "Salir";
 "linkToAccount.shareMessage" = "Su código es: %@";
-"linkToAccount.alertTile" = "Do you want to stop linking the account?";
-"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
+"linkToAccount.alertTile" = "¿Quieres dejar de vincular la cuenta?";
+"linkToAccount.alertMessage" = "Detener cancelará la operación de importación de la cuenta.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importar la cuenta Jami desde el archivo de almacenamiento local.";
@@ -238,11 +241,11 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Iniciar sesión";
-"linkToAccountManager.title" = "Cuenta JAMS";
-"linkToAccountManager.accountManagerPlaceholder" = "URL del JAMS";
-"linkToAccountManager.accountManagerLabel" = "Ingresa la URL del JAMS";
-"linkToAccountManager.jamsExplanation" = "Ingresa la URL del JAMS (Jami Account Management Server)";
-"linkToAccountManager.enterCredentials" = "Ingresar credenciales del JAMS";
+"linkToAccountManager.title" = "Management server account";
+"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
+"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "Error de cuenta";
@@ -264,7 +267,7 @@
 "alerts.noMediaPermissionsTitle" = "Permiso de acceso al almacenamiento no otorgado";
 "alerts.noLibraryPermissionsTitle" = "Acceso a la galería de fotos no otorgado";
 "alerts.noLocationPermissionsTitle" = "Acceso a la ubicación no concedido";
-"alerts.errorWrongCredentials" = "Se produjo un error al conectarse al Servidor de Administración de Cuentas Jami (JAMS). Por favor, inténtelo de nuevo. Si el problema persiste, póngase en contacto con el administrador del sistema.";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Grabar mensaje de video";
 "alerts.recordAudioMessage" = "Grabar mensaje de audio";
 "alerts.uploadFile" = "Enviar archivo";
@@ -381,7 +384,7 @@
 "accountPage.generatingPin" = "Generando código PIN…";
 "accountPage.passwordForPin" = "Esta cuenta está encriptada con contraseña, ingrese una contraseña para generar el código PIN";
 "accountPage.pinExplanationTitle" = "En otro dispositivo";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "Se produjo un error al generar el código PIN.";
 "accountPage.notificationTitle" = "Notificaciones";
 "accountPage.notificationError" = "Las notificaciones de Jami están deshabilitadas. Para usar esta función se habilita en la configuración del dispositivo.";
@@ -404,8 +407,8 @@
 "accountPage.dhtConfiguration" = "Configuración de OpenDHT";
 "accountPage.nameServer" = "Nombre del servidor";
 "accountPage.chats" = "Chats";
-"accountPage.typingIndicator" = "Typing indicator";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.typingIndicator" = "Indicadores de tipeo";
+"accountPage.typingIndicatorExplanation" = "Enviar y recibir indicadores de escritura que muestran cuándo se escriben los mensajes.";
 
 // Backup Account
 "backupAccount.explanation" = "Esta cuenta Jami existe solo en este dispositivo. La cuenta se perderá si se pierde este dispositivo o si se desinstala la aplicación. Se recomienda hacer una copia de seguridad de esta cuenta.";
@@ -447,21 +450,21 @@
 // Link New Device
 "linkDevice.title" = "Vincular un dispositivo nuevo";
 "linkDevice.networkError" = "Se produjo un error de red al exportar la cuenta.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
-"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "Cuando esté listo, escanee el código QR";
-"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
+"linkDevice.errorNetwork" = "Error de red al vincular la cuenta. Verificar la conexión e intentarlo de nuevo.";
+"linkDevice.errorTimeout" = "Agotado el tiempo de espera de la operación. Por favor, inténtelo de nuevo.";
+"linkDevice.errorCode" = "Error al generar el código. Por favor, inténtelo de nuevo.";
+"linkDevice.errorWrongData" = "Error al exportar la cuenta. Por favor, inténtelo de nuevo.";
+"linkDevice.initialInfo" = "En el nuevo dispositivo, iniciar una nueva cuenta.";
+"linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code.";
+"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Conexión a su nuevo dispositivo...";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
+"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "Nueva dirección IP del dispositivo: %1@";
 "linkDevice.code" = "código";
-"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
+"linkDevice.wrongEntry" = "Nuevo identificador de dispositivo no reconocido. Por favor, siga las instrucciones anteriores.";
+"linkDevice.exportInProgress" = "La operación de exportación de la cuenta al nuevo dispositivo está en curso. Confirme la importación en el nuevo dispositivo.";
 "linkDevice.completed" = "Cuenta importada correctamente en el nuevo dispositivo.";
 
 // Contact Page
@@ -487,7 +490,7 @@
 "notifications.locationSharingStopped" = "Se ha parado la compartición de ubicación entrante";
 "dataTransfer.readableStatusDecline" = "Rechazar";
 "dataTransfer.readableStatusAccept" = "Aceptar";
-"dataTransfer.infoMessage" = "Presiona para comenzar a grabar";
+"dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "Enviar";
 
 
@@ -532,7 +535,7 @@
 "migrateAccount.title" = "Migración de la cuenta";
 "migrateAccount.migrateButton" = "Migrar Cuenta";
 "migrateAccount.explanation" = "Se necesita la migración de la cuenta";
-"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
+"migrateAccount.passwordExplanation" = "Para continuar con la migración de la cuenta, ingresar la contraseña de la cuenta.";
 "migrateAccount.error" = "Ocurrió un error durante la creación de la cuenta. Vuelva a intentar o elimine la cuenta.";
 "migrateAccount.migrating" = "Migrando...";
 "migrateAccount.migrateAnother" = "Migrar otra cuenta";

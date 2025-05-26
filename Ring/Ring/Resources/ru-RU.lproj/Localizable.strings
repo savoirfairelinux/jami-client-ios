@@ -1,4 +1,4 @@
-﻿ /*
+﻿/*
  *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -159,10 +159,13 @@
 "conversation.edited" = "Отредактировано";
 "conversation.deletedMessage" = "Cообщение удалено (%@)";
 "conversation.contactBlocked" = "Контакт заблокирован";
-"conversation.typingIndicatorOneUser" = "%@ is typing…";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+// An ellipsis is not directly shown in the following typing indicator strings.
+// An ellipsis animation is shown when messages are being typed in the view.
+// An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
+"conversation.typingIndicatorOneUser" = "%@ is typing";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
 
 
 // Invitations
@@ -181,7 +184,7 @@
 "welcome.linkDevice" = "Импортировать с другого устройства";
 "welcome.linkBackup" = "Импортировать из резервной копии";
 "welcome.createAccount" = "Создать учетную запись Jami";
-"welcome.connectToJAMS" = "Подключиться к серверу управления аккаунтами Джами (JAMS)";
+"welcome.connectToJAMS" = "Connect to a management server";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустить";
@@ -189,7 +192,7 @@
 "createProfile.title" = "Персонализируйте свой профиль";
 "createProfile.enterNameLabel" = "Введите отображаемое имя";
 "createProfile.enterNamePlaceholder" = "Введите имя";
-"createProfile.subtitle" = "Ваш профиль будет доступен только вашим контактам. Вы можете изменить это в любое время.";
+"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
 "createProfile.createProfilePicture" = "Создать фотографию профиля";
 
 // Create Account form
@@ -220,7 +223,7 @@
 "linkToAccount.allSet" = "Учетная запись успешно импортирована.";
 "linkToAccount.goToAccounts" = "Перейти к импортированной учетной записи";
 "linkToAccount.exportInstructions" = "На исходном устройстве инициируйте экспорт.";
-"linkToAccount.exportInstructionsPath" = "Выберите Учетная запись > Настройки учетной записи > Привязать новое устройство.";
+"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "Когда будете готовы, отсканируйте QR-код.";
 "linkToAccount.enterProvidedCode" = "По готовности введите код аутентификации.";
 "linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
@@ -238,11 +241,11 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Войти";
-"linkToAccountManager.title" = "Аккаунт JAMS";
-"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Введите URL-адрес JAMS";
-"linkToAccountManager.jamsExplanation" = "Введите URL-адрес сервера управления учетной записью Jami (JAMS)";
-"linkToAccountManager.enterCredentials" = "Введите учётные данные JAMS";
+"linkToAccountManager.title" = "Management server account";
+"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
+"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "Ошибка аккаунта";
@@ -264,7 +267,7 @@
 "alerts.noMediaPermissionsTitle" = "Не прав доступа к медиа";
 "alerts.noLibraryPermissionsTitle" = "Не предоставлен доступ к библиотеке фотографий";
 "alerts.noLocationPermissionsTitle" = "Доступ к местоположению не предоставлен";
-"alerts.errorWrongCredentials" = "Произошла ошибка при подключении к серверу управления аккаунтами Джами (JAMS). Пожалуйста, повторите позднее. Если проблема останется, свяжитесь с вашим системным администратором.";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Записать видеосообщение";
 "alerts.recordAudioMessage" = "Записать голосовое сообщение";
 "alerts.uploadFile" = "Отправить файл";
@@ -381,7 +384,7 @@
 "accountPage.generatingPin" = "Генерируется PIN-код...";
 "accountPage.passwordForPin" = "Этот аккаунт защищен паролем, введите пароль для создания PIN-кода";
 "accountPage.pinExplanationTitle" = "На другом устройстве";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "Ошибка при генерации ПИН-кода";
 "accountPage.notificationTitle" = "Уведомления";
 "accountPage.notificationError" = "Уведомления от Джами выключены. Включите их в настройках устройства, чтобы использовать данную функцию.";
@@ -447,17 +450,17 @@
 // Link New Device
 "linkDevice.title" = "Привязать новое устройство";
 "linkDevice.networkError" = "При экспорте учетной записи возникла ошибка сети.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
 "linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
 "linkDevice.errorTimeout" = "The operation timed out. Please try again.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
+"linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "Когда будете готовы, отсканируйте QR-код.";
-"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
+"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Подключение к новому устройству…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
+"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "IP-адрес нового устройства:%1@";
 "linkDevice.code" = "код";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
@@ -487,7 +490,7 @@
 "notifications.locationSharingStopped" = "Входящий обмен местоположением остановился";
 "dataTransfer.readableStatusDecline" = "Отклонить";
 "dataTransfer.readableStatusAccept" = "Принять";
-"dataTransfer.infoMessage" = "Нажмите, чтобы начать запись";
+"dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "Отправть";
 
 

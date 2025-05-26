@@ -1,4 +1,4 @@
-﻿ /*
+﻿/*
  *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -159,10 +159,13 @@
 "conversation.edited" = "Muudetud";
 "conversation.deletedMessage" = "%@ kustutas sõnumi.";
 "conversation.contactBlocked" = "Kontakt on blokeeritud";
-"conversation.typingIndicatorOneUser" = "%@ is typing…";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+// An ellipsis is not directly shown in the following typing indicator strings.
+// An ellipsis animation is shown when messages are being typed in the view.
+// An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
+"conversation.typingIndicatorOneUser" = "%@ is typing";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
 
 
 // Invitations
@@ -181,7 +184,7 @@
 "welcome.linkDevice" = "Impordi muust seadmest";
 "welcome.linkBackup" = "Impordi varukoopiast";
 "welcome.createAccount" = "Loo Jami konto";
-"welcome.connectToJAMS" = "Loo ühendus Jami kontohaldusserveriga (JAMS)";
+"welcome.connectToJAMS" = "Connect to a management server";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Jäta vahele";
@@ -189,7 +192,7 @@
 "createProfile.title" = "Isikupärasta oma profiili";
 "createProfile.enterNameLabel" = "Sisesta kuvatav nimi";
 "createProfile.enterNamePlaceholder" = "Sisesta nimi";
-"createProfile.subtitle" = "Sinu profiili jagatakse sinu kontaktidega. Sa saad seda alati muuta.";
+"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
 "createProfile.createProfilePicture" = "Loo profiilipilt";
 
 // Create Account form
@@ -220,14 +223,14 @@
 "linkToAccount.allSet" = "Kasutajakonto importimine õnnestus. ";
 "linkToAccount.goToAccounts" = "Suundu imporditud kasutajakonto juurde";
 "linkToAccount.exportInstructions" = "Algata lähteseadmes eksportimine.";
-"linkToAccount.exportInstructionsPath" = "Vali „Kasutajakontod“ > „Kasutajakonto seadistused“ > „Seo uus seade“. ";
+"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "Kui oled valmis, siis skaneeri QR-koodi";
 "linkToAccount.enterProvidedCode" = "Kui oled valmis, siis sisesta autentimiskood.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "See kasutajakonto on kaitstud salasõnaga. Jätkamiseks palun sisesta konto salasõna.";
 "linkToAccount.exit" = "Välju";
 "linkToAccount.shareMessage" = "Sinu kood on: %@";
-"linkToAccount.alertTile" = "Do you want to stop linking the account?";
-"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
+"linkToAccount.alertTile" = "Kas sa soovid kontakti sidumise lõpetada?";
+"linkToAccount.alertMessage" = "Lõpetamisel katkeb importimine.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Impordi Jami kasutajakonto kohaliku varukoopia arhiivifailist..";
@@ -238,11 +241,11 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Logi sisse";
-"linkToAccountManager.title" = "JAMSi kasutajakonto";
-"linkToAccountManager.accountManagerPlaceholder" = "JAMSi võrguaadress";
-"linkToAccountManager.accountManagerLabel" = "Sisesta JAMSi võrguaadress";
-"linkToAccountManager.jamsExplanation" = "Sisesta Jami kontohaldusserveri (JAMS) võrguaadress";
-"linkToAccountManager.enterCredentials" = "Sisesta Jami kontohaldusserveri kasutajanimi ja salasõna";
+"linkToAccountManager.title" = "Management server account";
+"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
+"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "Kasutajakontoga seotud viga";
@@ -264,7 +267,7 @@
 "alerts.noMediaPermissionsTitle" = "Meedia kasutamiseks puudub luba";
 "alerts.noLibraryPermissionsTitle" = "Fotogalerii kasutamiseks puudub luba";
 "alerts.noLocationPermissionsTitle" = "Asukoha kasutamiseks puudub luba";
-"alerts.errorWrongCredentials" = "Ühendusse loomise Jami kontohaldusserveriga (JAMS) tekkis  viga. Palun proovi uuesti. Kui viga ei kao, siis võta ühendust serveri haldajaga.";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Salvesta videosõnum";
 "alerts.recordAudioMessage" = "Salvesta häälsõnum";
 "alerts.uploadFile" = "Saada fail";
@@ -381,7 +384,7 @@
 "accountPage.generatingPin" = "Loome PIN-koodi...";
 "accountPage.passwordForPin" = "Selle kasutajakonto andmed on krüptitud salasõnaga. PIN-koodi loomiseks palun sisesta oma salasõna.";
 "accountPage.pinExplanationTitle" = "Teises seadmes";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "PIN-koodi loomisel tekkis viga.";
 "accountPage.notificationTitle" = "Teavitused";
 "accountPage.notificationError" = "Puuduvad õigused teavitusi saata. Selle funktsionaalsuse jaoks anna nutiseadme seadistustest vastavad õigused.";
@@ -403,9 +406,9 @@
 "accountPage.bootstrap" = "Algata esmane tuvastus";
 "accountPage.dhtConfiguration" = "OpenDHT seadistus";
 "accountPage.nameServer" = "Nimeserver";
-"accountPage.chats" = "Chats";
-"accountPage.typingIndicator" = "Typing indicator";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.chats" = "Vestlused";
+"accountPage.typingIndicator" = "Trükkimisteatis";
+"accountPage.typingIndicatorExplanation" = "Saada ise ja saa trükkimisteatisi, mis näitavad, et teine osapool kirjutab sõnumit.";
 
 // Backup Account
 "backupAccount.explanation" = "See Jami kasutajakonto eksisteerib vaid selles seadmes. Kui see seade kaob või rakendus eemaldatakse, siis kaob ka kasutajakonto. Seetõttu soovitame, et teed kasutajakontost varukoopia.";
@@ -447,21 +450,21 @@
 // Link New Device
 "linkDevice.title" = "Seo uus seade";
 "linkDevice.networkError" = "Kasutajakonto eksportimisel tekkis võrguviga.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
-"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "Kui oled valmis, siis skaneeri QR-koodi";
-"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
+"linkDevice.errorNetwork" = "Kasutajakonto ühendamisel tekkis viga võrguühenduses. Palun kontrolli oma nutiseadme võrguühendust ja proovi uuesti.";
+"linkDevice.errorTimeout" = "Tegevus aegus. Palun proovi uuesti.";
+"linkDevice.errorCode" = "Koodi loomisel tekkis viga. Palun proovi uuesti.";
+"linkDevice.errorWrongData" = "Kasutajakonto eksportimisel tekkis viga. Palun proovi uuesti.";
+"linkDevice.initialInfo" = "Uues seadmes algata kasutajakonto lisamine.";
+"linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code.";
+"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Loome ühendust sinu uue seadmega…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
+"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "Uue seadme ip-aadress: %1@";
 "linkDevice.code" = "kood";
 "linkDevice.wrongEntry" = "Tundmatu uue seadme tunnus. Palun järgi eeltoodud juhendit";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
+"linkDevice.exportInProgress" = "Kasutajakonto eksportimine uude seadmesse on pooleli. Jätkamiseks palun kinnita importimine uues seadmes.";
 "linkDevice.completed" = "Kasutajakonto importimine sellesse seadmesse õnnestus. ";
 
 // Contact Page
@@ -487,7 +490,7 @@
 "notifications.locationSharingStopped" = "Lõppes teise osapoole asukoha jagamine";
 "dataTransfer.readableStatusDecline" = "Keeldu";
 "dataTransfer.readableStatusAccept" = "Võta vastu";
-"dataTransfer.infoMessage" = "Salvestamise alustamiseks vajuta";
+"dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "Saada";
 
 
@@ -532,7 +535,7 @@
 "migrateAccount.title" = "Kasutajakonto uuendus";
 "migrateAccount.migrateButton" = "Uuenda kasutajakontot";
 "migrateAccount.explanation" = "Kasutajakonto uuendamine on nõutav.";
-"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
+"migrateAccount.passwordExplanation" = "Kasutajakonto ületõstmisega jätkamiseks palun sisesta konto salasõna.";
 "migrateAccount.error" = "Kasutajakonto uuendamisel tekkis viga. Palun proovi uuesti või kustuta kasutajakonto.";
 "migrateAccount.migrating" = "Uuendame...";
 "migrateAccount.migrateAnother" = "Uuenda mõni muu kasutajakonto";

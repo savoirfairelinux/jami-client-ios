@@ -1,4 +1,4 @@
-﻿ /*
+﻿/*
  *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -159,10 +159,13 @@
 "conversation.edited" = "U përpunua";
 "conversation.deletedMessage" = "%@ fshiu një mesazh";
 "conversation.contactBlocked" = "Kontakti u bllokua ";
-"conversation.typingIndicatorOneUser" = "%@ is typing…";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+// An ellipsis is not directly shown in the following typing indicator strings.
+// An ellipsis animation is shown when messages are being typed in the view.
+// An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
+"conversation.typingIndicatorOneUser" = "%@ is typing";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
 
 
 // Invitations
@@ -181,7 +184,7 @@
 "welcome.linkDevice" = "Importoni nga pajisje tjetër";
 "welcome.linkBackup" = "Importoni prej kopjeruajtjeje arkivi";
 "welcome.createAccount" = "Krijoni një llogari Jami";
-"welcome.connectToJAMS" = "Lidhuni te Shërbyes Administrimi Llogarish Jami (JAMS)";
+"welcome.connectToJAMS" = "Connect to a management server";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Anashkaloje";
@@ -189,7 +192,7 @@
 "createProfile.title" = "Personalizoni profilin tuaj";
 "createProfile.enterNameLabel" = "Jepni një emër për në ekran";
 "createProfile.enterNamePlaceholder" = "Jepni emër";
-"createProfile.subtitle" = "Profili juaj do të ndahet me kontaktet tuaja. Mund ta ndryshoni në çfarëdo kohe.";
+"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
 "createProfile.createProfilePicture" = "Krijo foto profili";
 
 // Create Account form
@@ -220,14 +223,14 @@
 "linkToAccount.allSet" = "Llogaria u importua me sukses.";
 "linkToAccount.goToAccounts" = "Kalo te llogaria e importuar";
 "linkToAccount.exportInstructions" = "Te pajisja burim, filloni eksportimin.";
-"linkToAccount.exportInstructionsPath" = "Përzgjidhni Llogari > Rregullime Llogarie > Lidhni pajisje të re.";
+"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "Kur të jeni gati, skanoni kodin QR.";
 "linkToAccount.enterProvidedCode" = "Kur të jeni gati, jepni kodin e mirëfilltësimit.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "Llogaria është e mbrojtur me një fjalëkalim. Që të vazhdohet, jepni fjalëkalimin e llogarisë.";
 "linkToAccount.exit" = "Dalje";
 "linkToAccount.shareMessage" = "Kodi juaj është: %@";
-"linkToAccount.alertTile" = "Do you want to stop linking the account?";
-"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
+"linkToAccount.alertTile" = "Doni të reshtë lidhja e llogarisë?";
+"linkToAccount.alertMessage" = "Ndalja do të anulojë veprimin e importimit të llogarisë.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importo llogari Jami prej një kartele vendore arkiv";
@@ -238,11 +241,11 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Hyni";
-"linkToAccountManager.title" = "Llogari JAMS";
-"linkToAccountManager.accountManagerPlaceholder" = "URL JAM-i";
-"linkToAccountManager.accountManagerLabel" = "Jepni URL JAMS-i";
-"linkToAccountManager.jamsExplanation" = "Jepni URL Shërbyesi Administrimi Llogarish Jami (JAMS)";
-"linkToAccountManager.enterCredentials" = "Jepni kredencialet për te JAMS";
+"linkToAccountManager.title" = "Management server account";
+"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
+"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "Gabim lidhjeje";
@@ -264,7 +267,7 @@
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";
 "alerts.noLibraryPermissionsTitle" = "S’u akordua hyrje te fototekë";
 "alerts.noLocationPermissionsTitle" = "S’u akordua hyrje te vendndodhje";
-"alerts.errorWrongCredentials" = "Ndodhi një gabim teksa lidhjen Shërbyesi i Administrimit të Llogarive Jami (JAMS). Ju lutemi, riprovoni. Nëse problemi vazhdon, lidhuni me përgjegjësin e sistemit tuaj.";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Regjistroni mesazh video";
 "alerts.recordAudioMessage" = "Incizo mesazh audio";
 "alerts.uploadFile" = "Dërgo kartelë";
@@ -381,7 +384,7 @@
 "accountPage.generatingPin" = "Po prodhohet PIN…";
 "accountPage.passwordForPin" = "Kjo llogari mbrohet me fjalëkalim, jepni një fjalëkalim që të prodhohet një kod PIN";
 "accountPage.pinExplanationTitle" = "Në pajisjen tjetër";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "Ndodhi një gabim teksa prodhohej kod PIN.";
 "accountPage.notificationTitle" = "Njoftime";
 "accountPage.notificationError" = "Njoftimet për Jami-n janë të çaktivizuara. Që të mund të përdorni këtë veçori, aktivizojeni te rregullimet e pajisjes.";
@@ -403,9 +406,9 @@
 "accountPage.bootstrap" = "Bootstrap";
 "accountPage.dhtConfiguration" = "Formësim i OpenDHT-së";
 "accountPage.nameServer" = "Shërbyes emrash";
-"accountPage.chats" = "Chats";
+"accountPage.chats" = "Fjalosje";
 "accountPage.typingIndicator" = "Tregues shtypjeje në tastierë";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "Dërgoni dhe merrni shenja shtypjeje që tregojnë se po shtypen mesazhe.";
 
 // Backup Account
 "backupAccount.explanation" = "Kjo llogari Jami ekziston vetëm në këtë pajisje. Llogaria do të humbë, nëse humbet kjo pajisje, ose nëse çinstalohet aplikacioni. Rekomandohet të bëni një kopjeruajtje të kësaj llogarie.";
@@ -447,21 +450,21 @@
 // Link New Device
 "linkDevice.title" = "Lidhni pajisje të re";
 "linkDevice.networkError" = "Ndodhi një gabim rrjeti teksa eksportohej llogaria.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
-"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "Kur të jeni gati, skanoni kodin QR";
-"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
+"linkDevice.errorWrongPassword" = "Ndodhi një gabim mirëfilltësimi teksa lidhej pajisja. Ju lutemi, kontrolloni kredencialet dhe riprovoni.";
+"linkDevice.errorNetwork" = "Ndodhi një gabim teksa lidhej llogaria. Ju lutemi, kontrolloni lidhjen tuaj dhe riprovoni.";
+"linkDevice.errorTimeout" = "Veprimit i mbaroi koha. Ju lutemi, riprovoni.";
+"linkDevice.errorCode" = "Ndodhi një gabim teksa prodhohej kodi. Ju lutemi, riprovoni.";
+"linkDevice.errorWrongData" = "Ndodhi një gabim teksa eksportohej llogaria. Ju lutemi, riprovoni.";
+"linkDevice.initialInfo" = "Te pajisja e re, krijoni një llogari të re.";
+"linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
+"linkDevice.infoQRCode" = "Kur të jeni gati, skanoni kodin QR.";
+"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Po bëhet lidhja te pajisja juaj e re…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
+"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "Adresë IP e pajisjes së re: %1@";
 "linkDevice.code" = "kod";
 "linkDevice.wrongEntry" = "Identifikues i panjohur pajisjeje të re. Ju lutemi, ndiqni udhëzimet më sipër.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
+"linkDevice.exportInProgress" = "Veprimi i eksportimit të llogarisë te pajisja e re është në kryerje e sipër. Ju lutemi, ripohoni importimin te pajisja e re.";
 "linkDevice.completed" = "Llogaria u importua me sukses te pajisja e re.";
 
 // Contact Page
@@ -487,7 +490,7 @@
 "notifications.locationSharingStopped" = "Reshti dhënia e vendndodhjes për thirrje ardhëse";
 "dataTransfer.readableStatusDecline" = "Hidhe tej";
 "dataTransfer.readableStatusAccept" = "Pranoje";
-"dataTransfer.infoMessage" = "Shtypeni që të fillojë regjistrimi";
+"dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "Dërgoje";
 
 
@@ -532,7 +535,7 @@
 "migrateAccount.title" = "Migrim llogarie";
 "migrateAccount.migrateButton" = "Migroni Llogari";
 "migrateAccount.explanation" = "Lyp migrim llogarie.";
-"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
+"migrateAccount.passwordExplanation" = "Që të vazhdohet me migrimin e llogarisë, jepni fjalëkalimin e llogarisë.";
 "migrateAccount.error" = "Ndodhi një gabim teksa migrohej llogaria. Riprovoni, ose fshijeni llogarinë.";
 "migrateAccount.migrating" = "Po bëhet migrimi…";
 "migrateAccount.migrateAnother" = "Migroni Llogari Tjetër";
@@ -592,7 +595,7 @@
 "accessibility.text.sentOn" = "%1@, u dërgua mesazh te %2@";
 "accessibility.fileTransfer.receivedOn" = "Kartelë: %1@ , marrë te %2@";
 "accessibility.fileTransfer.sentOn" = "Kartelë: %1@, dërguar te %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.call.lasted" = "Zgjati %@";
 "accessibility.calls.default.toggleAudio" = "Heshtoje mikrofonin";
 "accessibility.calls.default.toggleVideo" = "Vëre kamerë në punë";
 "accessibility.calls.default.pauseCall" = "Ndale thirren";

@@ -1,4 +1,4 @@
-﻿ /*
+﻿/*
  *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -159,10 +159,13 @@
 "conversation.edited" = "已编辑";
 "conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "联系人被封锁";
-"conversation.typingIndicatorOneUser" = "%@ is typing…";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+// An ellipsis is not directly shown in the following typing indicator strings.
+// An ellipsis animation is shown when messages are being typed in the view.
+// An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
+"conversation.typingIndicatorOneUser" = "%@ is typing";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
 
 
 // Invitations
@@ -181,7 +184,7 @@
 "welcome.linkDevice" = "從其他裝置匯入";
 "welcome.linkBackup" = "从归档备份中导入";
 "welcome.createAccount" = "建立 Jami 帳號";
-"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
+"welcome.connectToJAMS" = "Connect to a management server";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "跳过";
@@ -189,7 +192,7 @@
 "createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "选择一个显示名";
 "createProfile.enterNamePlaceholder" = "输入名称";
-"createProfile.subtitle" = "您的资料会分享给您的联系人。您可随时修改。";
+"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
 "createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
@@ -220,7 +223,7 @@
 "linkToAccount.allSet" = "Account imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
+"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
 "linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
@@ -238,11 +241,11 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "登录";
-"linkToAccountManager.title" = "JAMS account";
-"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "输入 JAMS URL";
-"linkToAccountManager.jamsExplanation" = "輸入 Jami 帳號管理伺服器 (JAMS) URL。";
-"linkToAccountManager.enterCredentials" = "输入 JAMS 凭据";
+"linkToAccountManager.title" = "Management server account";
+"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
+"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "无法找到账户";
@@ -264,7 +267,7 @@
 "alerts.noMediaPermissionsTitle" = "未授予媒体权限";
 "alerts.noLibraryPermissionsTitle" = "未授予照片库访问权限";
 "alerts.noLocationPermissionsTitle" = "未授予访问位置权限";
-"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Record video message";
 "alerts.recordAudioMessage" = "录制音频消息";
 "alerts.uploadFile" = "傳送檔案";
@@ -381,7 +384,7 @@
 "accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "在其他设备上";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "通知";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
@@ -404,8 +407,8 @@
 "accountPage.dhtConfiguration" = "OpenDHT 配置";
 "accountPage.nameServer" = "名称服务器";
 "accountPage.chats" = "Chats";
-"accountPage.typingIndicator" = "Typing indicator";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.typingIndicator" = "类型指标";
+"accountPage.typingIndicatorExplanation" = "发送和接收显示正在输入消息的提示。";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -447,17 +450,17 @@
 // Link New Device
 "linkDevice.title" = "关联新设备";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
 "linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
 "linkDevice.errorTimeout" = "The operation timed out. Please try again.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
-"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
+"linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code.";
+"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "连接到新设备...";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
+"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "新设备 IP 地址：%1@";
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "无法识别新设备标识符。请按照上述说明操作。";
@@ -487,7 +490,7 @@
 "notifications.locationSharingStopped" = "传入位置分享已停止";
 "dataTransfer.readableStatusDecline" = "拒接";
 "dataTransfer.readableStatusAccept" = "接聽";
-"dataTransfer.infoMessage" = "按下开始录音";
+"dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "发送";
 
 

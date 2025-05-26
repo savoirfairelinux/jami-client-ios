@@ -1,4 +1,4 @@
-﻿ /*
+﻿/*
  *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -159,10 +159,13 @@
 "conversation.edited" = "सम्पादित";
 "conversation.deletedMessage" = "%@ ने एक संदेश हटा दिया";
 "conversation.contactBlocked" = "Contact blocked";
-"conversation.typingIndicatorOneUser" = "%@ is typing…";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+// An ellipsis is not directly shown in the following typing indicator strings.
+// An ellipsis animation is shown when messages are being typed in the view.
+// An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
+"conversation.typingIndicatorOneUser" = "%@ is typing";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
 
 
 // Invitations
@@ -181,7 +184,7 @@
 "welcome.linkDevice" = "दूसरे उपकरण से आयात";
 "welcome.linkBackup" = "संग्रह बैकअप से आयात";
 "welcome.createAccount" = "Jami खाता बनाएं";
-"welcome.connectToJAMS" = "Connect to Jami Account Management Server (JAMS)";
+"welcome.connectToJAMS" = "Connect to a management server";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "स्किप";
@@ -189,7 +192,7 @@
 "createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "एक प्रदर्शन नाम दर्ज करें";
 "createProfile.enterNamePlaceholder" = "नाम दर्ज करें";
-"createProfile.subtitle" = "आपकी प्रोफ़ाइल आपके संपर्क के साथ साझा की जाएगी। आप इसे किसी भी समय बदल सकते हैं।";
+"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
 "createProfile.createProfilePicture" = "Create profile picture";
 
 // Create Account form
@@ -220,7 +223,7 @@
 "linkToAccount.allSet" = "Account imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account > Account Settings > Link new device.";
+"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
 "linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
@@ -238,11 +241,11 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Sign in";
-"linkToAccountManager.title" = "JAMS account";
-"linkToAccountManager.accountManagerPlaceholder" = "जेम्स URL";
-"linkToAccountManager.accountManagerLabel" = "JAMS URL दर्ज करें";
-"linkToAccountManager.jamsExplanation" = "Enter Jami Account Management Server (JAMS) URL";
-"linkToAccountManager.enterCredentials" = "JAMS क्रेडेंशियल दर्ज करें";
+"linkToAccountManager.title" = "Management server account";
+"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
+"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "Account error";
@@ -264,7 +267,7 @@
 "alerts.noMediaPermissionsTitle" = "मीडिया अनुमति नहीं दी गई";
 "alerts.noLibraryPermissionsTitle" = "फोटो लाइब्रेरी तक पहुंच प्रदान नहीं की गई";
 "alerts.noLocationPermissionsTitle" = "स्थान तक पहुंच प्रदान नहीं की गई";
-"alerts.errorWrongCredentials" = "An error occurred while connecting to Jami Account Management Server (JAMS). Please try again. If the problem persists, contact your system administrator.";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Record video message";
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "फ़ाइल भेजें";
@@ -381,7 +384,7 @@
 "accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "सूचनाएं";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
@@ -404,7 +407,7 @@
 "accountPage.dhtConfiguration" = "ओपनडीएचटी कॉन्फ़िगरेशन";
 "accountPage.nameServer" = "नाम सर्वर";
 "accountPage.chats" = "Chats";
-"accountPage.typingIndicator" = "Typing indicator";
+"accountPage.typingIndicator" = "टाइपिंग सूचक";
 "accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
 
 // Backup Account
@@ -447,17 +450,17 @@
 // Link New Device
 "linkDevice.title" = "नई डिवाइस लिंक";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
+"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
 "linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
 "linkDevice.errorTimeout" = "The operation timed out. Please try again.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
-"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
+"linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
+"linkDevice.infoQRCode" = "When ready, scan the QR code.";
+"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Connecting to your new device…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
+"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "New device IP address: %1@";
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
@@ -487,7 +490,7 @@
 "notifications.locationSharingStopped" = "आने वाली स्थान साझाकरण बंद कर दिया गया";
 "dataTransfer.readableStatusDecline" = "गिरावट";
 "dataTransfer.readableStatusAccept" = "स्वीकार करें";
-"dataTransfer.infoMessage" = "रिकॉर्डिंग शुरू करने के लिए दबाएं";
+"dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "भेजें";
 
 

@@ -1,4 +1,4 @@
-﻿ /*
+﻿/*
  *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -159,10 +159,13 @@
 "conversation.edited" = "Modificat";
 "conversation.deletedMessage" = "%@ a șters mesajul";
 "conversation.contactBlocked" = "Contact blocat";
-"conversation.typingIndicatorOneUser" = "%@ is typing…";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing…";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing…";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing…";
+// An ellipsis is not directly shown in the following typing indicator strings.
+// An ellipsis animation is shown when messages are being typed in the view.
+// An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
+"conversation.typingIndicatorOneUser" = "%@ is typing";
+"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
 
 
 // Invitations
@@ -181,7 +184,7 @@
 "welcome.linkDevice" = "Importă din alt aparat";
 "welcome.linkBackup" = "Importă din copia de rezervă";
 "welcome.createAccount" = "Creează un cont Jami";
-"welcome.connectToJAMS" = "Conectează-te la Serverului de Administrare a Conturilor Jami (JAMS)";
+"welcome.connectToJAMS" = "Connect to a management server";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Omite";
@@ -189,7 +192,7 @@
 "createProfile.title" = "Personalizează-ți profilul";
 "createProfile.enterNameLabel" = "Introdu un nume de afișat";
 "createProfile.enterNamePlaceholder" = "Introdu numele";
-"createProfile.subtitle" = "Profilul tău va fi distribuit contactelor tale. Poți schimba asta cînd vrei.";
+"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
 "createProfile.createProfilePicture" = "Poza de profil";
 
 // Create Account form
@@ -220,14 +223,14 @@
 "linkToAccount.allSet" = "Cont importat cu succes.";
 "linkToAccount.goToAccounts" = "La contul importat";
 "linkToAccount.exportInstructions" = "Începe exportarea de la aparatul sursă.";
-"linkToAccount.exportInstructionsPath" = "Reglările contului > Asociază un nou aparat.";
+"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "Apoi, scanează codul QR";
 "linkToAccount.enterProvidedCode" = "Apoi, introdu codul de autentificare.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "Contul este protejat cu o parolă. Introdu parola, pentru a continua.";
 "linkToAccount.exit" = "Ieșire";
 "linkToAccount.shareMessage" = "Codul tău este: %@";
-"linkToAccount.alertTile" = "Do you want to stop linking the account?";
-"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
+"linkToAccount.alertTile" = "Vrei să oprești asocierea contului?";
+"linkToAccount.alertMessage" = "Oprirea va anula importarea contului.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importă contul Jami din fișierul arhivei.";
@@ -238,11 +241,11 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Autentificare";
-"linkToAccountManager.title" = "Cont JAMS";
-"linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
-"linkToAccountManager.accountManagerLabel" = "Introdu URL-ul JAMS";
-"linkToAccountManager.jamsExplanation" = "Introdu URL-ul Serverului de Administrare a Conturilor Jami (JAMS)";
-"linkToAccountManager.enterCredentials" = "Introdu datele de autentificare JAMS";
+"linkToAccountManager.title" = "Management server account";
+"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
+"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "Eroare a contului";
@@ -264,7 +267,7 @@
 "alerts.noMediaPermissionsTitle" = "Nu ai permis accesul la Media";
 "alerts.noLibraryPermissionsTitle" = "Nu ai permis accesul la poze";
 "alerts.noLocationPermissionsTitle" = "Nu ai permis localizarea";
-"alerts.errorWrongCredentials" = "A apărut o eroare în timpul conectării la Serverul de Administrare a Conturilor Jami (JAMS). Încearcă din nou. Dacă problema persistă, contactează administratorul sistemului.";
+"alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
 "alerts.recordVideoMessage" = "Înregistrează un mesaj video";
 "alerts.recordAudioMessage" = "Înregistrează un mesaj vocal";
 "alerts.uploadFile" = "Trimite un fișier";
@@ -381,7 +384,7 @@
 "accountPage.generatingPin" = "Se generează codul PIN…";
 "accountPage.passwordForPin" = "Acest cont este cifrat cu parolă, introdu parola pentru a genera codul PIN.";
 "accountPage.pinExplanationTitle" = "În alt aparat";
-"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan the QR code or enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "A apărut o eroare în timpul generării codului PIN.";
 "accountPage.notificationTitle" = "Notificări";
 "accountPage.notificationError" = "Notificările pentru Jami sînt dezactivate. Activează-le din reglările aparatului tău.";
@@ -403,9 +406,9 @@
 "accountPage.bootstrap" = "Server de pornire";
 "accountPage.dhtConfiguration" = "Configurare OpenDHT";
 "accountPage.nameServer" = "Server de nume";
-"accountPage.chats" = "Chats";
+"accountPage.chats" = "Discuții";
 "accountPage.typingIndicator" = "Indicator de scriere";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "Trimite și primește indicatoare de scriere care arată că se scrie un mesaj.";
 
 // Backup Account
 "backupAccount.explanation" = "Acest cont Jami există doar în acest aparat. Contul va fi pierdut dacă acest aparat este pierdut sau dacă aplicația este dezinstalată. Se recomandă efectuarea unei copii de rezervă a contului.";
@@ -447,21 +450,21 @@
 // Link New Device
 "linkDevice.title" = "Asociază un nou aparat";
 "linkDevice.networkError" = "A apărut o eroare de rețea în timpul exportării contului.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please verify your password and try again.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
-"linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.";
-"linkDevice.infoAddAccount" = "Select Add Account > Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code";
-"linkDevice.infoCode" = "When ready, enter the code and click Connect.";
+"linkDevice.errorWrongPassword" = "A apărut o eroare de autentificare în timpul asocierii aparatului. Verifică datele de autentificare și încearcă din nou.";
+"linkDevice.errorNetwork" = "A apărut o eroare în timpul asocierii contului. Verifică conexiunea și încearcă din nou.";
+"linkDevice.errorTimeout" = "Timpul operațiunii a expirat. Încearcă din nou.";
+"linkDevice.errorCode" = "A apărut o eroare în timpul generării codului. Încearcă din nou.";
+"linkDevice.errorWrongData" = "A apărut o eroare în timpul exportării contului. Încearcă din nou.";
+"linkDevice.initialInfo" = "În noul aparat, creează un cont nou.";
+"linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
+"linkDevice.infoQRCode" = "Apoi, scanează codul QR";
+"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Se conectează la noul aparat…";
-"linkDevice.authenticationInfo" = "New device found at IP address below. Is that you? To continue to transfer the account, click Confirm.";
+"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "Adresa IP a noului aparat: %1@";
 "linkDevice.code" = "cod";
 "linkDevice.wrongEntry" = "Identificatorul noului aparat nu a fost recunoscut. Urmează instrucțiunile de mai sus.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
+"linkDevice.exportInProgress" = "Exportarea contului către noul aparat este în curs. Confirmă importarea în noul aparat";
 "linkDevice.completed" = "Contul a fost importat cu succes în noul aparat.";
 
 // Contact Page
@@ -487,7 +490,7 @@
 "notifications.locationSharingStopped" = "Distribuirea poziției primite s-a oprit";
 "dataTransfer.readableStatusDecline" = "Refuză";
 "dataTransfer.readableStatusAccept" = "Acceptă";
-"dataTransfer.infoMessage" = "Apasă pentru a începe înregistrarea";
+"dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "Trimite";
 
 
@@ -532,7 +535,7 @@
 "migrateAccount.title" = "Transferul contului";
 "migrateAccount.migrateButton" = "Transferă contul";
 "migrateAccount.explanation" = "Transferul contului e necesar.";
-"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
+"migrateAccount.passwordExplanation" = "Pentru a continua migrarea contului, introdu parola contului.";
 "migrateAccount.error" = "A apărut o eroare în timpul transferării contului. Încearcă din nou sau șterge contul.";
 "migrateAccount.migrating" = "Se transferă…";
 "migrateAccount.migrateAnother" = "Transferă alt cont";
