@@ -675,6 +675,15 @@ class AccountsService: AccountAdapterDelegate {
     // MARK: Push Notifications
 
     func setPushNotificationToken(token: String) {
+        if token.isEmpty {
+            self.accountAdapter.setPushNotificationToken(token)
+        } else {
+            var pushConfig = [String: String]()
+            pushConfig["token"] = token
+            pushConfig["platform"] = "ios"
+            let mutableDict = NSMutableDictionary(dictionary: pushConfig)
+            self.accountAdapter.setPushNotificationConfig(mutableDict)
+        }
         self.accountAdapter.setPushNotificationToken(token)
         // Set account details to force the DHT update to use the token.
         for account in accounts {

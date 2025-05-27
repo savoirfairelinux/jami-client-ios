@@ -246,6 +246,10 @@ static id <AccountAdapterDelegate> _delegate;
     setPushNotificationToken(std::string([token UTF8String]));
 }
 
+- (void)setPushNotificationConfig: (NSMutableDictionary *) config {
+    setPushNotificationConfig([Utils dictionnaryToMap:config]);
+}
+
 - (void)setPushNotificationTopic:(NSString*)topic {
     setPushNotificationTopic(std::string([topic UTF8String]));
 }
