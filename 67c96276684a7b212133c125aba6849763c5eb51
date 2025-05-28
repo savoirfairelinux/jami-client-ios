@@ -34,6 +34,24 @@
       "parentUuid": "12cdfc35_1858b39c",
       "revId": "67c96276684a7b212133c125aba6849763c5eb51",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c5a94e_a5b4aab5",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-05-28T23:55:19Z",
+      "side": 1,
+      "message": "`Indicate when messages are being typed.`",
+      "parentUuid": "7003e79d_a01792a5",
+      "revId": "67c96276684a7b212133c125aba6849763c5eb51",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
