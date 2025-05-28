@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12cdfc35_1858b39c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-05-28T17:50:40Z",
+      "side": 1,
+      "message": "Maybe we could simplify it more. Something like \"Send and receive typing indicators when messages are being typed.\"",
+      "revId": "67c96276684a7b212133c125aba6849763c5eb51",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
