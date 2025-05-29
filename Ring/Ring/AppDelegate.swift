@@ -523,14 +523,57 @@ extension AppDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let data = response.notification.request.content.userInfo
-        self.handleNotificationActions(data: data)
+        let actionIdentifier = response.actionIdentifier
+        self.handleNotificationActions(data: data, actionIdentifier: actionIdentifier)
         completionHandler()
     }
 
-    func handleNotificationActions(data: [AnyHashable: Any]) {
+    func handleNotificationActions(data: [AnyHashable: Any], actionIdentifier: String) {
         guard let accountId = data[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String,
               let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
+
         self.accountService.updateCurrentAccount(account: account)
+
+        if isCallNotification(data: data) {
+            handleCallNotification(data: data, account: account, actionIdentifier: actionIdentifier)
+        } else {
+            handleConversationNotification(data: data, accountId: accountId)
+        }
+    }
+
+    private func isCallNotification(data: [AnyHashable: Any]) -> Bool {
+        return data[Constants.NotificationUserInfoKeys.callURI.rawValue] != nil
+    }
+
+    private func isCallAction(_ actionIdentifier: String) -> Bool {
+        return actionIdentifier == Constants.NotificationAction.answerVideo.rawValue ||
+            actionIdentifier == Constants.NotificationAction.answerAudio.rawValue
+    }
+
+    private func handleCallNotification(data: [AnyHashable: Any], account: AccountModel, actionIdentifier: String) {
+        guard let conversationId = data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String else { return }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let self = self else { return }
+
+            self.callService.updateActiveCalls(conversationId: conversationId, account: account)
+
+            if self.isCallAction(actionIdentifier) {
+                self.handleCallAction(actionIdentifier: actionIdentifier, data: data)
+            } else {
+                self.handleConversationNotification(data: data, accountId: account.id)
+            }
+        }
+    }
+
+    private func handleCallAction(actionIdentifier: String, data: [AnyHashable: Any]) {
+        guard let callURI = data[Constants.NotificationUserInfoKeys.callURI.rawValue] as? String else { return }
+
+        let isAudioOnly = actionIdentifier == Constants.NotificationAction.answerAudio.rawValue
+        self.appCoordinator.joinCall(callURI: callURI, isAudioOnly: isAudioOnly)
+    }
+
+    private func handleConversationNotification(data: [AnyHashable: Any], accountId: String) {
         if let conversationId = data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String {
             self.appCoordinator.openConversation(conversationId: conversationId, accountId: accountId)
         } else if let participantID = data[Constants.NotificationUserInfoKeys.participantID.rawValue] as? String {

@@ -418,6 +418,13 @@ class CallsService: CallsAdapterDelegate {
         self.activeCallsHelper.ignoreCall(call)
     }
 
+    func updateActiveCalls(accountId: String, conversationId: String, account: AccountModel) {
+        guard let calls = self.callsAdapter.getActiveCalls(conversationId, accountId: accountId) else {
+            return
+        }
+        activeCallsHelper.updateActiveCalls(conversationId: conversationId, accountId: accountId, calls: calls, account: account)
+    }
+
     func joinConferenceIfNeeded(callId: String, accountId: String) {
         guard let confId = conferenceManagementService.shouldCallBeAddedToConference(callId: callId) else {
             return

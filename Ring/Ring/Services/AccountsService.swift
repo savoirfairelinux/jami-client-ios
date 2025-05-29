@@ -684,7 +684,6 @@ class AccountsService: AccountAdapterDelegate {
             let mutableDict = NSMutableDictionary(dictionary: pushConfig)
             self.accountAdapter.setPushNotificationConfig(mutableDict)
         }
-        self.accountAdapter.setPushNotificationToken(token)
         // Set account details to force the DHT update to use the token.
         for account in accounts {
             // Use details from the daemon, as the token may be set immediately after account creation,
