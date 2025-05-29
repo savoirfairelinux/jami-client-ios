@@ -184,6 +184,12 @@ extension AppCoordinator {
         }
     }
 
+    func joinCall(callURI: String, isAudioOnly: Bool) {
+        if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
+            conversationCoordinator.startOutgoingCall(contactRingId: callURI, userName: "", isAudioOnly: isAudioOnly)
+        }
+    }
+
     func openConversation(conversationId: String, accountId: String) {
         if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
             conversationCoordinator.openConversationFromNotification(conversationId: conversationId, accountId: accountId)

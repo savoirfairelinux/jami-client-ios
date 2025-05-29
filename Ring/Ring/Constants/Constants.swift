@@ -148,6 +148,35 @@ public class Constants: NSObject {
         case participantID
         case accountID
         case conversationID
+        case callURI
+    }
+
+    enum NotificationCategory: String {
+        case call = "CALL_CATEGORY"
+    }
+
+    enum NotificationAction: String {
+        case answerVideo = "GROUP_ANSWER_VIDEO_ACTION"
+        case answerAudio = "GROUP_ANSWER_AUDIO_ACTION"
+    }
+
+    enum NotificationActionIcon: String {
+        case video = "video.fill"
+        case audio = "phone.fill"
+    }
+
+    enum NotificationActionTitle {
+        case answerWithVideo
+        case answerWithAudio
+
+        func toString() -> String {
+            switch self {
+                case .answerWithVideo:
+                    return L10n.Calls.answerWithVideo
+                case .answerWithAudio:
+                    return L10n.Calls.answerWithAudio
+            }
+        }
     }
 
     public static let swarmColors: [String] = ["#E91E63",

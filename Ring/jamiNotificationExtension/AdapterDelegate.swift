@@ -31,4 +31,5 @@ import Foundation
     func conversationSyncCompleted(accountId: String)
     func conversationCloned(accountId: String)
     func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String])
+    func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]])
 }
