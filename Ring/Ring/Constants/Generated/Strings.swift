@@ -591,6 +591,10 @@ internal enum L10n {
     internal static let activeCallInConversation = L10n.tr("Localizable", "calls.activeCallInConversation", fallback: "A call is in progress. Do you want to join the call?")
     /// A call is in progress. Do you want to join the call? You can also join the call later from the conversation.
     internal static let activeCallLabel = L10n.tr("Localizable", "calls.activeCallLabel", fallback: "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.")
+    /// Answer with audio
+    internal static let answerWithAudio = L10n.tr("Localizable", "calls.answerWithAudio", fallback: "Answer with audio")
+    /// Answer with video
+    internal static let answerWithVideo = L10n.tr("Localizable", "calls.answerWithVideo", fallback: "Answer with video")
     /// Call finished
     internal static let callFinished = L10n.tr("Localizable", "calls.callFinished", fallback: "Call finished")
     /// Connecting…

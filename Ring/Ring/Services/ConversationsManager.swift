@@ -667,7 +667,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else {
             return
         }
-        self.callService.activeCallsChanged(conversationId: conversationId, accountId: accountId, calls: calls, account: account)
+        self.callService.activeCallsChanged(conversationId: conversationId, calls: calls, account: account)
     }
 }
 

@@ -22,6 +22,7 @@
 #import "CallsAdapter.h"
 #import "Utils.h"
 #import "jami/callmanager_interface.h"
+#import "jami/conversation_interface.h"
 #import "Ring-Swift.h"
 #import <os/log.h>
 
@@ -225,6 +226,11 @@ static id <CallsAdapterDelegate> _delegate;
 - (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId accountId:(NSString*)accountId {
     std::map<std::string, std::string> callDetails = getCallDetails(std::string([accountId UTF8String]), std::string([callId UTF8String]));
     return [Utils mapToDictionnary:callDetails];
+}
+
+- (NSArray<NSDictionary<NSString*,NSString*>*>*)getActiveCalls:(NSString*)conversationId accountId:(NSString*)accountId {
+    std::vector<std::map<std::string, std::string>> calls = getActiveCalls(std::string([accountId UTF8String]), std::string([conversationId UTF8String]));
+    return [Utils vectorOfMapsToArray:calls];
 }
 
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)currentMediaListWithCallId:(NSString*)callId accountId:(NSString*)accountId {

@@ -412,12 +412,19 @@ class CallsService: CallsAdapterDelegate {
 
     // MARK: - Conference handling methods
 
-    func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]], account: AccountModel) {
+    func activeCallsChanged(conversationId: String, calls: [[String: String]], account: AccountModel) {
         activeCallsHelper.updateActiveCalls(conversationId: conversationId, calls: calls, account: account)
     }
 
     func ignoreCall(call: ActiveCall) {
         self.activeCallsHelper.ignoreCall(call)
+    }
+
+    func updateActiveCalls(conversationId: String, account: AccountModel) {
+        guard let calls = self.callsAdapter.getActiveCalls(conversationId, accountId: account.id) else {
+            return
+        }
+        activeCallsHelper.updateActiveCalls(conversationId: conversationId, calls: calls, account: account)
     }
 
     func joinConferenceIfNeeded(callId: String, accountId: String) {
