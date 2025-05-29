@@ -70,6 +70,24 @@
       "parentUuid": "83c5a94e_a5b4aab5",
       "revId": "67c96276684a7b212133c125aba6849763c5eb51",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7514eb83_006766ed",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-05-29T21:58:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a88cbdb7_8bc1f8a3",
+      "revId": "67c96276684a7b212133c125aba6849763c5eb51",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
