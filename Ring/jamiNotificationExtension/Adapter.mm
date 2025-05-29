@@ -145,6 +145,16 @@ std::map<std::string, std::string> nameServers;
             [delegate receivedConversationRequestWithAccountId: accountIdStr conversationId: convIdStr metadata:info];
         }
     }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::ActiveCallsChanged>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& conversation_id, const std::vector<std::map<std::string, std::string>>& activeCalls) {
+        id<AdapterDelegate> delegate = weakDelegate;
+        if (delegate) {
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSString* conversationId = [NSString stringWithUTF8String:conversation_id.c_str()];
+            NSArray* callsDictionary = [Utils vectorOfMapsToArray: activeCalls];
+            [delegate activeCallsChangedWithConversationId:conversationId accountId:accountId calls:callsDictionary];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 
@@ -224,6 +234,19 @@ std::map<std::string, std::string> nameServers;
 
 - (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data {
     pushNotificationReceived(std::string([from UTF8String]), [Utils dictionnaryToMap:data]);
+}
+
+- (NSMutableDictionary<NSString*,NSString*>*)getConversationInfoForAccount:(NSString*) accountId conversationId:(NSString*) conversationId {
+    return [Utils mapToDictionnary: conversationInfos(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+}
+
+- (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId {
+    return [Utils vectorOfMapsToArray: getConversationMembers(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+}
+
+- (NSDictionary *)getAccountDetails:(NSString *)accountID {
+    auto accDetails = getAccountDetails(std::string([accountID UTF8String]));
+    return [Utils mapToDictionnary:accDetails];
 }
 
 - (NSDictionary<NSString*, NSString*>*)decrypt:(NSString*)keyPath
