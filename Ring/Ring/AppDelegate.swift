@@ -531,6 +531,28 @@ extension AppDelegate {
         guard let accountId = data[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String,
               let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
         self.accountService.updateCurrentAccount(account: account)
+
+        if let actionIdentifier = data["actionIdentifier"] as? String {
+            handleCallAction(actionIdentifier: actionIdentifier, data: data)
+        } else {
+            handleConversationNotification(data: data, accountId: accountId)
+        }
+    }
+
+    private func handleCallAction(actionIdentifier: String, data: [AnyHashable: Any]) {
+        guard let callURI = data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String else { return }
+
+        switch actionIdentifier {
+        case "GROUP_ANSWER_VIDEO_ACTION":
+            self.appCoordinator.joinCall(callURI: callURI, isAudioOnly: false)
+        case "GROUP_ANSWER_AUDIO_ACTION":
+            self.appCoordinator.joinCall(callURI: callURI, isAudioOnly: true)
+        default:
+            handleConversationNotification(data: data, accountId: data[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String ?? "")
+        }
+    }
+
+    private func handleConversationNotification(data: [AnyHashable: Any], accountId: String) {
         if let conversationId = data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String {
             self.appCoordinator.openConversation(conversationId: conversationId, accountId: accountId)
         } else if let participantID = data[Constants.NotificationUserInfoKeys.participantID.rawValue] as? String {

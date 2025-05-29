@@ -24,6 +24,19 @@ import MobileCoreServices
 import Photos
 import os
 
+struct ActiveCall: Hashable {
+    let id: String
+    let uri: String
+    let device: String
+    let conversationId: String
+    let accountId: String
+    let isFromLocalDevice: Bool
+
+    func constructURI() -> String {
+        return "rdv:" + self.conversationId + "/" + self.uri + "/" + self.device + "/" + self.id
+    }
+}
+
 class AdapterService {
     enum InteractionAttributes: String {
         case interactionId = "id"
@@ -51,6 +64,7 @@ class AdapterService {
         case syncCompleted
         case conversationCloned
         case invitation
+        case activeCall
     }
 
     enum PeerConnectionRequestType {
@@ -264,5 +278,29 @@ extension AdapterService: AdapterDelegate {
                 handler(.fileTransferInProgress, data)
             }
         }
+    }
+
+    func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]]) {
+        guard let handler = self.eventHandler else {
+            return
+        }
+
+        let parsedCalls: [ActiveCall] = calls.compactMap { dict -> ActiveCall? in
+            guard let id = dict["id"], let uri = dict["uri"], let device = dict["device"] else {
+                return nil
+            }
+
+            return ActiveCall(
+                id: id,
+                uri: uri,
+                device: device,
+                conversationId: conversationId,
+                accountId: accountId,
+                isFromLocalDevice: false
+            )
+        }
+
+        let data = EventData(accountId: accountId, jamiId: "", conversationId: conversationId, content: "", groupTitle: "", calls: parsedCalls)
+        handler(.activeCall, data)
     }
 }

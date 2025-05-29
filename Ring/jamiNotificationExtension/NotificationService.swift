@@ -453,6 +453,10 @@ class NotificationService: UNNotificationServiceExtension {
             case .conversationCloned:
                 self.taskPropertyQueue.sync { self.waitForCloning = false }
                 self.verifyTasksStatus()
+            case .activeCall:
+                guard let calls = eventData.calls, !calls.isEmpty else { return }
+                self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
+                self.configureAndPresentCallNotification(config: notifConfig, calls: calls)
             }
         }
     }
@@ -842,6 +846,38 @@ extension NotificationService {
         } else {
             self.presentLocalNotification(notification: notif)
         }
+    }
+
+    private func configureAndPresentCallNotification(config: NotificationConfig, calls: [ActiveCall]) {
+        var updatedConfig = config
+        let notif = self.configureNotification(config: config, type: .message)
+
+        let answerVideoAction = UNNotificationAction(
+            identifier: "GROUP_ANSWER_VIDEO_ACTION",
+            title: "Answer with Video",
+            options: .foreground
+        )
+
+        let answerAudioAction = UNNotificationAction(
+            identifier: "GROUP_ANSWER_AUDIO_ACTION",
+            title: "Answer with Audio",
+            options: .foreground
+        )
+
+        let callCategory = UNNotificationCategory(
+            identifier: "CALL_CATEGORY",
+            actions: [answerVideoAction, answerAudioAction],
+            intentIdentifiers: [],
+            options: .customDismissAction
+        )
+
+        UNUserNotificationCenter.current().setNotificationCategories([callCategory])
+
+        var info = notif.content.userInfo
+        info[Constants.NotificationUserInfoKeys.callURI.rawValue] = calls.first?.constructURI()
+
+        notif.content.categoryIdentifier = "CALL_CATEGORY"
+        self.presentLocalNotification(notification: notif)
     }
 
     private func presentLocalNotification(notification: LocalNotification) {

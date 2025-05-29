@@ -148,6 +148,7 @@ public class Constants: NSObject {
         case participantID
         case accountID
         case conversationID
+        case callURI
     }
 
     public static let swarmColors: [String] = ["#E91E63",

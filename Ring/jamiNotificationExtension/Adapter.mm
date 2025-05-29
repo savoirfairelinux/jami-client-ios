@@ -145,6 +145,16 @@ std::map<std::string, std::string> nameServers;
             [delegate receivedConversationRequestWithAccountId: accountIdStr conversationId: convIdStr metadata:info];
         }
     }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::ActiveCallsChanged>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& conversation_id, const std::vector<std::map<std::string, std::string>>& activeCalls) {
+        id<AdapterDelegate> delegate = weakDelegate;
+        if (delegate) {
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSString* conversationId = [NSString stringWithUTF8String:conversation_id.c_str()];
+            NSArray* callsDictionary = [Utils vectorOfMapsToArray: activeCalls];
+            [delegate activeCallsChangedWithConversationId:conversationId accountId:accountId calls:callsDictionary];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 
