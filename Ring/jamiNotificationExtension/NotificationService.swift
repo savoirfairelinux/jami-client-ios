@@ -241,6 +241,7 @@ class NotificationService: UNNotificationServiceExtension {
     private let notificationQueue = DispatchQueue(label: Constants.appIdentifier + ".Notification.queue")
     private var pendingLocalNotifications = [String: [LocalNotification]]() // local notification waiting for name lookup
     private var pendingCalls = [String: [AnyHashable: Any]]() // calls waiting for name lookup
+    private var pendingActiveCallNotifications = [String: (notification: LocalNotification, participants: [String])]() // active call notifications waiting for name lookup
     private var names = [String: String]() // map of peerId and best name
     private let thumbnailSize = 100
 
@@ -453,6 +454,11 @@ class NotificationService: UNNotificationServiceExtension {
             case .conversationCloned:
                 self.taskPropertyQueue.sync { self.waitForCloning = false }
                 self.verifyTasksStatus()
+            case .activeCall:
+                guard let calls = eventData.calls, !calls.isEmpty else { return }
+                self.conversationUpdated(conversationId: eventData.conversationId, accountId: eventData.accountId)
+                self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
+                self.configureAndPresentCallNotification(config: notifConfig, calls: calls, accountId: eventData.accountId)
             }
         }
     }
@@ -650,6 +656,13 @@ extension NotificationService {
                 self.autoDispatchGroup.leave(id: address)
                 return
             }
+
+            if let (notification, participants) = self.pendingActiveCallNotifications[address],
+               let accountId = notification.content.userInfo[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String {
+                self.handleActiveCallNotification(notification: notification, participants: participants, accountId: accountId)
+                return
+            }
+
             for pending in pendingLocalNotifications where pending.key == address {
                 let notifications = pending.value
                 for notification in notifications {
@@ -891,4 +904,163 @@ extension NotificationService {
             userDefaults.set(new, forKey: Constants.notificationsCount)
         }
     }
+}
+
+// MARK: active calls
+extension NotificationService {
+    private func configureAndPresentCallNotification(config: NotificationConfig, calls: [ActiveCall], accountId: String) {
+        let notification = configureNotification(config: config, type: .message)
+        var info = notification.content.userInfo
+        info[Constants.NotificationUserInfoKeys.callURI.rawValue] = calls.first?.constructURI()
+        notification.content.userInfo = info
+        notification.content.body = L10n.Calls.activeCallLabel
+        configureCallActions(notification: notification, calls: calls, info: &info)
+
+        if let conversationTitle = getConversationTitle(accountId: accountId, conversationId: config.conversationId) {
+            notification.content.title = conversationTitle
+            presentLocalNotification(notification: notification)
+        } else {
+            handlePresentationWithoutconverationTitle(notification: notification, accountId: accountId, conversationId: config.conversationId)
+        }
+    }
+
+    private func getConversationTitle(accountId: String, conversationId: String) -> String? {
+        guard let convInfo = adapterService.getConversationInfo(accountId: accountId, conversationId: conversationId),
+              let title = convInfo[ConversationAttributes.title.rawValue] else {
+            return nil
+        }
+        return "\(title)"
+    }
+
+    private func handlePresentationWithoutconverationTitle(notification: LocalNotification, accountId: String, conversationId: String) {
+        guard let participants = adapterService.getConversationMemebers(accountId: accountId, conversationId: conversationId),
+              let localJamiId = adapterService.getAccountJamiId(accountId: accountId) else {
+            return
+        }
+
+        let filteredParticipants = participants.filter { $0 != localJamiId }
+        let participantNames = Dictionary(uniqueKeysWithValues: filteredParticipants.map {
+            ($0, self.bestName(accountId: accountId, contactId: $0))
+        })
+
+        let nonEmptyNames = participantNames.filter { !$0.value.isEmpty }
+        let remainingParticipants = participantNames.filter { $0.value.isEmpty }
+
+        if nonEmptyNames.count >= 3 || remainingParticipants.isEmpty {
+            buildTitleForNotification(notification: notification, nonEmptyNames: nonEmptyNames, totalCount: participantNames.count)
+            self.presentLocalNotification(notification: notification)
+
+            cleanupActiveCallNotifications(for: notification)
+        } else {
+            lookupParticipants(notification: notification, nonEmptyNames: nonEmptyNames, remainingParticipants: remainingParticipants, filteredParticipants: filteredParticipants)
+        }
+    }
+
+    private func lookupParticipants(notification: LocalNotification, nonEmptyNames: [String: String], remainingParticipants: [String: String], filteredParticipants: [String]) {
+        let neededLookups = min(3 - nonEmptyNames.count, remainingParticipants.count)
+        let participantsToLookup = Array(remainingParticipants.keys.prefix(neededLookups))
+
+        if let firstParticipant = participantsToLookup.first {
+            storeAndStartLookup(notification: notification, participant: firstParticipant, participants: filteredParticipants)
+        }
+
+        participantsToLookup.forEach { startAddressLookup(address: $0) }
+    }
+
+    private func storeAndStartLookup(notification: LocalNotification, participant: String, participants: [String]) {
+        notificationQueue.sync {
+            pendingActiveCallNotifications[participant] = (notification, participants)
+        }
+        startAddressLookup(address: participant)
+    }
+
+    private func configureCallActions(notification: LocalNotification, calls: [ActiveCall], info: inout [AnyHashable: Any]) {
+        let answerVideoAction: UNNotificationAction
+        let answerAudioAction: UNNotificationAction
+
+        if #available(iOS 15.0, *) {
+            answerVideoAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.answerVideo.rawValue,
+                title: Constants.NotificationActionTitle.answerWithVideo.rawValue,
+                options: [.foreground, .authenticationRequired],
+                icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.video.rawValue)
+            )
+
+            answerAudioAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.answerAudio.rawValue,
+                title: Constants.NotificationActionTitle.answerWithAudio.rawValue,
+                options: [.foreground, .authenticationRequired],
+                icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.audio.rawValue)
+            )
+
+            notification.content.interruptionLevel = .timeSensitive
+        } else {
+            answerVideoAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.answerVideo.rawValue,
+                title: Constants.NotificationActionTitle.answerWithVideo.rawValue,
+                options: [.foreground, .authenticationRequired]
+            )
+
+            answerAudioAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.answerAudio.rawValue,
+                title: Constants.NotificationActionTitle.answerWithAudio.rawValue,
+                options: [.foreground, .authenticationRequired]
+            )
+        }
+
+        let callCategory = UNNotificationCategory(
+            identifier: Constants.NotificationCategory.call.rawValue,
+            actions: [answerVideoAction, answerAudioAction],
+            intentIdentifiers: [],
+            options: [.customDismissAction, .hiddenPreviewsShowTitle]
+        )
+
+        UNUserNotificationCenter.current().setNotificationCategories([callCategory])
+
+        notification.content.categoryIdentifier = Constants.NotificationCategory.call.rawValue
+    }
+
+    private func handleActiveCallNotification(notification: LocalNotification, participants: [String], accountId: String) {
+        let participantNames = Dictionary(uniqueKeysWithValues: participants.map {
+            ($0, self.bestName(accountId: accountId, contactId: $0))
+        })
+
+        let nonEmptyNames = participantNames.filter { !$0.value.isEmpty }
+        let remainingParticipants = participantNames.filter { $0.value.isEmpty }
+
+        if nonEmptyNames.count >= 3 || remainingParticipants.isEmpty {
+            buildTitleForNotification(notification: notification, nonEmptyNames: nonEmptyNames, totalCount: participantNames.count)
+            self.presentLocalNotification(notification: notification)
+
+            cleanupActiveCallNotifications(for: notification)
+        }
+    }
+
+    private func buildTitleForNotification(notification: LocalNotification, nonEmptyNames: [String: String], totalCount: Int) {
+        var title: String
+        if nonEmptyNames.count == 1 {
+            title = nonEmptyNames.first!.value
+        } else if nonEmptyNames.count == 2 {
+            title = nonEmptyNames.map { $0.value }.joined(separator: " and ")
+        } else {
+            let firstThree = nonEmptyNames.prefix(3)
+            let remainingCount = totalCount - 3
+            title = firstThree.map { $0.value }.joined(separator: ", ")
+            if remainingCount > 0 {
+                title += " and \(remainingCount) others"
+            }
+        }
+        notification.content.title = title
+    }
+
+    private func cleanupActiveCallNotifications(for notification: LocalNotification) {
+        guard let conversationId = notification.content.userInfo[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String else { return }
+        for (key, _) in self.pendingActiveCallNotifications {
+            if let notif = self.pendingActiveCallNotifications[key]?.notification,
+               notif.content.userInfo[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String == conversationId {
+                self.pendingActiveCallNotifications.removeValue(forKey: key)
+            }
+        }
+    }
+
 }

@@ -24,6 +24,27 @@ import MobileCoreServices
 import Photos
 import os
 
+struct ActiveCall: Hashable {
+    let id: String
+    let uri: String
+    let device: String
+    let conversationId: String
+    let accountId: String
+    let isFromLocalDevice: Bool
+
+    func constructURI() -> String {
+        return "rdv:" + self.conversationId + "/" + self.uri + "/" + self.device + "/" + self.id
+    }
+}
+
+enum ConversationAttributes: String {
+    case title = "title"
+    case description = "description"
+    case avatar = "avatar"
+    case mode = "mode"
+    case conversationId = "id"
+}
+
 class AdapterService {
     enum InteractionAttributes: String {
         case interactionId = "id"
@@ -51,6 +72,7 @@ class AdapterService {
         case syncCompleted
         case conversationCloned
         case invitation
+        case activeCall
     }
 
     enum PeerConnectionRequestType {
@@ -265,4 +287,45 @@ extension AdapterService: AdapterDelegate {
             }
         }
     }
+
+    func activeCallsChanged(conversationId: String, accountId: String, calls: [[String: String]]) {
+        guard let handler = self.eventHandler else {
+            return
+        }
+
+        let parsedCalls: [ActiveCall] = calls.compactMap { dict -> ActiveCall? in
+            guard let id = dict["id"], let uri = dict["uri"], let device = dict["device"] else {
+                return nil
+            }
+
+            return ActiveCall(
+                id: id,
+                uri: uri,
+                device: device,
+                conversationId: conversationId,
+                accountId: accountId,
+                isFromLocalDevice: false
+            )
+        }
+
+        let data = EventData(accountId: accountId, jamiId: "", conversationId: conversationId, content: "", groupTitle: "", calls: parsedCalls)
+        handler(.activeCall, data)
+    }
+
+    func getConversationInfo(accountId: String, conversationId: String) -> [String: String]? {
+        return adapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String]
+    }
+
+    func getConversationMemebers(accountId: String, conversationId: String) -> [String]? {
+        return adapter.getConversationMembers(accountId, conversationId: conversationId)?.compactMap { $0["uri"]?.replacingOccurrences(of: "ring:", with: "") }
+    }
+
+    func getAccountDetails(accountId: String) -> [String: String]? {
+        return adapter.getAccountDetails(accountId) as? [String: String]
+    }
+
+    func getAccountJamiId(accountId: String) -> String? {
+        return getAccountDetails(accountId: accountId)?["Account.username"]?.replacingOccurrences(of: "ring:", with: "")
+    }
+
 }

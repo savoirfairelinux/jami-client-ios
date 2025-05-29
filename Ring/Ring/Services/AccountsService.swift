@@ -680,7 +680,7 @@ class AccountsService: AccountAdapterDelegate {
         } else {
             var pushConfig = [String: String]()
             pushConfig["token"] = token
-            pushConfig["platform"] = "ios"
+            pushConfig["platform"] = "ios1"
             let mutableDict = NSMutableDictionary(dictionary: pushConfig)
             self.accountAdapter.setPushNotificationConfig(mutableDict)
         }
