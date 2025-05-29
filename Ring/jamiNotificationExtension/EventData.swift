@@ -17,12 +17,14 @@ import Foundation
 
 struct EventData {
     var accountId, jamiId, conversationId, content, groupTitle: String
+    var calls: [ActiveCall]?
 
-    init(accountId: String = "", jamiId: String = "", conversationId: String = "", content: String = "", groupTitle: String = "") {
+    init(accountId: String = "", jamiId: String = "", conversationId: String = "", content: String = "", groupTitle: String = "", calls: [ActiveCall]? = nil) {
         self.accountId = accountId
         self.jamiId = jamiId
         self.conversationId = conversationId
         self.content = content
         self.groupTitle = groupTitle
+        self.calls = calls
     }
 }
