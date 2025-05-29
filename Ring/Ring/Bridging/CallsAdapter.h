@@ -66,4 +66,5 @@
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)currentMediaListWithCallId:(NSString*)callId accountId:(NSString*)accountId;
 
 -(BOOL)muteLocalMediaWithCallId:(NSString*)callId accountId:(NSString*)accountId mediaType:(NSString*)mediaType mute:(BOOL)mute;
+-(NSArray<NSDictionary<NSString*,NSString*>*>*)getActiveCalls:(NSString*)conversationId accountId:(NSString*)accountId;
 @end
