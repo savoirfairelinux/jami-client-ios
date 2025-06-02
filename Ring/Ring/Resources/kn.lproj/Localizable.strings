@@ -408,7 +408,7 @@
 "accountPage.nameServer" = "ಹೆಸರು ಸರ್ವರ್";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "ಟೈಪಿಂಗ್ ಸೂಚಕ";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";

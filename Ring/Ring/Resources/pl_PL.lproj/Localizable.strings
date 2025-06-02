@@ -408,7 +408,7 @@
 "accountPage.nameServer" = "Serwer nazw";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "Wskaźnik typu";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "To konto Jami istnieje tylko w tym urządzeniu. Jeśli to urządzenie zginie, to także zginie to konto. Zalecamy stworzenie kopii zapasowej konta.";

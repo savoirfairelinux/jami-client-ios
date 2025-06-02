@@ -408,7 +408,7 @@
 "accountPage.nameServer" = "Namenserver";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "Tipp-Indikatoren";
-"accountPage.typingIndicatorExplanation" = "Senden und Empfangen von Tipp-Indikatoren, die erscheinen, wenn Nachrichten getippt werden.";
+"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Dieses Jami-Konto existiert nur auf diesem Gerät. Das Konto geht verloren, wenn dieses Gerät verloren geht oder die Anwendung deinstalliert wird. Es wird empfohlen, ein Backup dieses Kontos zu erstellen.";
@@ -450,14 +450,14 @@
 // Link New Device
 "linkDevice.title" = "Verbinde neues Gerät";
 "linkDevice.networkError" = "Beim Exportieren des Kontos ist ein Netzwerkfehler aufgetreten.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
+"linkDevice.errorWrongPassword" = "Beim Verknüpfen des Geräts ist ein Authentifizierungsfehler aufgetreten. Bitte überprüfen Sie die Anmeldeinformationen und versuchen Sie es erneut.";
 "linkDevice.errorNetwork" = "Beim Verknüpfen des Kontos ist ein Netzwerkfehler aufgetreten. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.";
 "linkDevice.errorTimeout" = "Bei der Operation ist ein Timeout aufgetreten. Versuchen Sie es erneut.";
 "linkDevice.errorCode" = "Beim Generieren des Codes ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.";
 "linkDevice.errorWrongData" = "Beim Exportieren des Kontos ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.";
 "linkDevice.initialInfo" = "Richten Sie auf dem neuen Gerät ein neues Konto ein.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code.";
+"linkDevice.infoQRCode" = "Wenn Sie bereit sind, scannen Sie den QR-Code.";
 "linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Verbindung zu Ihrem neuen Gerät wird hergestellt …";
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
