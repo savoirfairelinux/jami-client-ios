@@ -408,7 +408,7 @@
 "accountPage.nameServer" = "serveur de nom";
 "accountPage.chats" = "Clavardage";
 "accountPage.typingIndicator" = "Indicateur de frappe";
-"accountPage.typingIndicatorExplanation" = "Envoyer et recevoir les indicateurs de frappe montrant qu'un message est cours de rédaction.";
+"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Ce compte Jami n'existe que sur cet appareil.\nLe compte sera perdu si cet appareil est perdu ou si l'application est désinstallée. Il est recommandé de faire une sauvegarde de ce compte.";
@@ -450,14 +450,14 @@
 // Link New Device
 "linkDevice.title" = "Associer un nouvel appareil";
 "linkDevice.networkError" = "Une erreur inconnue s'est produite lors de l'exportation du compte.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
+"linkDevice.errorWrongPassword" = "Une erreur d'authentification s'est produite lors de la connexion de l'appareil. Veuillez vérifier les informations d'identification et réessayer.";
 "linkDevice.errorNetwork" = "Une erreur réseau s'est produite pendant l'association du compte. Vérifier votre connectivité réseau.";
 "linkDevice.errorTimeout" = "L'opération a été interrompue. Veuillez réessayer.";
 "linkDevice.errorCode" = "Une erreur s'est produite lors de la génération du code. Essayez à nouveau.";
 "linkDevice.errorWrongData" = "Une erreur s'est produite pendant l'exportation du compte. Vérifiez et réessayez.";
 "linkDevice.initialInfo" = "Sur le nouvel appareil, initier un nouveau compte.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
-"linkDevice.infoQRCode" = "When ready, scan the QR code.";
+"linkDevice.infoQRCode" = "Une fois prêt, scannez le code QR.";
 "linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Connexion à votre nouvel appareil ...";
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";

@@ -408,7 +408,7 @@
 "accountPage.nameServer" = "Imenski strežnik";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "Pokazatelj tipkanja";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Ta račun Jami obstaja samo na tej napravi. Račun bo izgubljen, če to napravo izgubite ali če odstranite program. Priporočamo, da naredite varnostno kopijo tega računa.";

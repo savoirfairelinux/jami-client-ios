@@ -408,7 +408,7 @@
 "accountPage.nameServer" = "名称服务器";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "类型指标";
-"accountPage.typingIndicatorExplanation" = "发送和接收显示正在输入消息的提示。";
+"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -450,7 +450,7 @@
 // Link New Device
 "linkDevice.title" = "关联新设备";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
+"linkDevice.errorWrongPassword" = "链接设备时出现身份验证错误。请检查凭据，然后重试。";
 "linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
 "linkDevice.errorTimeout" = "The operation timed out. Please try again.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";

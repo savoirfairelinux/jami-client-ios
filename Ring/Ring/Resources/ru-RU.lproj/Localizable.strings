@@ -408,7 +408,7 @@
 "accountPage.nameServer" = "Сервер имён";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "Индикатор набора сообщения";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Этот аккаунт Jami существует только на этом устройстве. Аккаунт будет потерян, если это устройство будет потеряно или если приложение будет удалено. Рекомендуется создать резервную копию этого аккаунта.";

@@ -408,7 +408,7 @@
 "accountPage.nameServer" = "名稱伺服器";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "类型指标";
-"accountPage.typingIndicatorExplanation" = "发送和接收显示正在输入消息的提示。";
+"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";

@@ -408,7 +408,7 @@
 "accountPage.nameServer" = "Jmenný server";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "Indikátor psaní";
-"accountPage.typingIndicatorExplanation" = "Send and receive typing indicators showing when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
 
 // Backup Account
 "backupAccount.explanation" = "Tento účet Jami existuje pouze na tomto zařízení. Účet bude ztracen, pokud toto zařízení ztratíte nebo pokud bude aplikace odinstalována. Doporučuje se vytvořit zálohu tohoto účtu.";
