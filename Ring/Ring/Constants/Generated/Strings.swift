@@ -455,8 +455,8 @@ internal enum L10n {
     internal static let turnUsername = L10n.tr("Localizable", "accountPage.turnUsername", fallback: "TURN username")
     /// Typing indicator
     internal static let typingIndicator = L10n.tr("Localizable", "accountPage.typingIndicator", fallback: "Typing indicator")
-    /// Send and receive typing indicators showing when messages are being typed.
-    internal static let typingIndicatorExplanation = L10n.tr("Localizable", "accountPage.typingIndicatorExplanation", fallback: "Send and receive typing indicators showing when messages are being typed.")
+    /// Indicate when messages are being typed.
+    internal static let typingIndicatorExplanation = L10n.tr("Localizable", "accountPage.typingIndicatorExplanation", fallback: "Indicate when messages are being typed.")
     /// Unblock
     internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact", fallback: "Unblock")
     /// Unlink
