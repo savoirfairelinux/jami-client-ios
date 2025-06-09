@@ -70,10 +70,6 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ConversationState else { return }
                 switch state {
-                case .startCall(let contactRingId, let name):
-                    self.startOutgoingCall(contactRingId: contactRingId, userName: name)
-                case .startAudioCall(let contactRingId, let name):
-                    self.startOutgoingCall(contactRingId: contactRingId, userName: name, isAudioOnly: true)
                 case .conversationDetail(let conversationViewModel):
                     self.showConversation(withConversationViewModel: conversationViewModel)
                 case .contactDetail(let conversationModel):
@@ -249,20 +245,22 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStateable: callViewController.viewModel)
     }
 
-    func startOutgoingCall(contactRingId: String, userName: String, isAudioOnly: Bool = false) {
-        guard let topController = getTopController(),
-              !topController.isKind(of: (CallViewController).self),
-              let account = self.injectionBag.accountService.currentAccount else {
+    func dismissAllModals(completion: @escaping () -> Void) {
+        guard var currentController = UIApplication.shared.windows.first?.rootViewController else {
+            completion()
             return
         }
-        DispatchQueue.main.async {
-            topController.dismiss(animated: false, completion: nil)
-            let callViewController = CallViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: callViewController,
-                         withStyle: .popToRootAndPush,
-                         withAnimation: false,
-                         withStateable: callViewController.viewModel)
-            callViewController.viewModel.placeCall(with: contactRingId, userName: userName, account: account, isAudioOnly: isAudioOnly)
+
+        while let presentedController = currentController.presentedViewController {
+            currentController = presentedController
+        }
+
+        if currentController != UIApplication.shared.windows.first?.rootViewController {
+            currentController.dismiss(animated: false) {
+                self.dismissAllModals(completion: completion)
+            }
+        } else {
+            completion()
         }
     }
 }

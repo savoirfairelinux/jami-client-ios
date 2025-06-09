@@ -218,7 +218,6 @@ class CallViewModel: Stateable, ViewModel {
             return
         }
         callCompleted = true
-        self.showConversations()
     }
 
     private func handleConferenceCallSwitch(_ call: CallModel) -> Bool {

@@ -102,6 +102,10 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                     self.presentCompose()
                 case .presentSwarmInfo(let swarmInfo):
                     self.presentSwarmInfo(swarmInfo: swarmInfo)
+                case .startCall(let contactRingId, let name):
+                    self.startOutgoingCall(contactRingId: contactRingId, userName: name)
+                case .startAudioCall(let contactRingId, let name):
+                    self.startOutgoingCall(contactRingId: contactRingId, userName: name, isAudioOnly: true)
                 default:
                     break
                 }
@@ -143,6 +147,15 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
 
                 guard hasActiveCalls else { return }
 
+                if self.presentingVC[VCType.activeCalls.rawValue] == true {
+                    return
+                }
+
+                guard let account = self.accountService.currentAccount, accountCalls.keys.contains(account.id) else {
+                    // TODO: show alert for call for another account
+                    return
+                }
+
                 // Skip showing call alert if the conversation for incoming call is already open
                 if accountCalls.count == 1 {
                     if accountCalls.first?.value.incomingUnansweredNotIgnoredCalls().count == 1,
@@ -153,10 +166,6 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                        conversationController.viewModel == conversationModel {
                         return
                     }
-                }
-
-                if self.presentingVC[VCType.activeCalls.rawValue] == true {
-                    return
                 }
 
                 let activeCallsViewModel = ActiveCallsViewModel(
@@ -439,5 +448,64 @@ extension ConversationsCoordinator {
                      withStyle: .fadeInOverFullScreen,
                      withAnimation: false,
                      withStateable: controller.viewModel)
+    }
+
+    func startOutgoingCall(contactRingId: String, userName: String, isAudioOnly: Bool = false) {
+        guard let account = self.injectionBag.accountService.currentAccount else {
+            return
+        }
+
+        DispatchQueue.main.async { [weak self] in
+            self?.handleOutgoingCall(contactRingId: contactRingId,
+                                     userName: userName,
+                                     account: account,
+                                     isAudioOnly: isAudioOnly)
+        }
+    }
+
+    private func handleOutgoingCall(contactRingId: String, userName: String, account: AccountModel, isAudioOnly: Bool) {
+        dismissAllModals { [weak self] in
+            guard let self = self else { return }
+
+            self.popToSmartList()
+            self.navigateToConversationIfNeeded(for: contactRingId, account: account)
+            self.presentCallViewController(contactRingId: contactRingId, userName: userName, account: account, isAudioOnly: isAudioOnly)
+        }
+    }
+
+    private func navigateToConversationIfNeeded(for contactRingId: String, account: AccountModel) {
+        if let conversation = findConversationForOutgoingCall(contactRingId: contactRingId, account: account) {
+            showConversation(withConversationViewModel: conversation, withAnimation: false)
+        }
+    }
+
+    private func findConversationForOutgoingCall(contactRingId: String, account: AccountModel) -> ConversationViewModel? {
+        if let call = ActiveCall(contactRingId),
+           let conversation = getConversationViewModelForId(conversationId: call.conversationId) {
+            return conversation
+        }
+
+        if let conversation = getConversationViewModelForParticipant(jamiId: contactRingId) {
+            return conversation
+        }
+
+        let swarmId = contactRingId.replacingOccurrences(of: "swarm:", with: "")
+        if let conversation = getConversationViewModelForId(conversationId: swarmId) {
+            return conversation
+        }
+
+        return nil
+    }
+
+    private func presentCallViewController(contactRingId: String, userName: String, account: AccountModel, isAudioOnly: Bool) {
+        let callViewController = CallViewController.instantiate(with: injectionBag)
+        present(viewController: callViewController,
+                withStyle: .fadeInOverFullScreen,
+                withAnimation: false,
+                withStateable: callViewController.viewModel)
+        callViewController.viewModel.placeCall(with: contactRingId,
+                                               userName: userName,
+                                               account: account,
+                                               isAudioOnly: isAudioOnly)
     }
 }
