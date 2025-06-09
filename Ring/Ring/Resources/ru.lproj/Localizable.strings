@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Выключить микрофон";
 "calls.unmuteAudio" = "Включить микрофон";
 "calls.lowerHand" = "Опущенная рука";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "Идет разговор. Вы хотите присоединиться к разговору?";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Устройства";

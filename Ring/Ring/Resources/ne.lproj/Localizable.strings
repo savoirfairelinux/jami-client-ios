@@ -301,6 +301,10 @@
 "calls.muteAudio" = "गहिरो माइक्रोफोन";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "तलको हात";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "एउटा कल चलिरहेको छ. के तपाईं कलमा सामेल हुन चाहनुहुन्छ?";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "उपकरणहरू";

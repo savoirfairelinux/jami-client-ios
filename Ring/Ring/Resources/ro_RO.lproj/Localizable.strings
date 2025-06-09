@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Oprește microfonul";
 "calls.unmuteAudio" = "Pornește microfonul";
 "calls.lowerHand" = "Coboară mâna";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "O convorbire este în curs. Vrei să participi la convorbire?";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Aparate";

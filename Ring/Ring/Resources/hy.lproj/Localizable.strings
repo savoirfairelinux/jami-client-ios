@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Միկրոֆոն անջատ";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Նվազագույն ձեռքը";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "Հեռախոսազանգ է ընթանում։ Ցանկանում եք միանալ զանգին։";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "սարքավորումներ";

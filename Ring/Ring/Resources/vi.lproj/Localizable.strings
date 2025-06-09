@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Tắt tiếng micrô";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Tay dưới";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "Có cuộc gọi đang diễn ra, anh có muốn tham gia cuộc gọi không?";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Thiết bị";

@@ -82,7 +82,7 @@
 "swarm.descriptionPlaceholder" = "Sisesta pealkiri";
 "swarm.contactHeader" = "Kontakt";
 "swarm.showContactQRCode" = "Näita kontakti QR-koodi";
-"swarm.shareContactInfo" = "Jaga kontaktandmed";
+"swarm.shareContactInfo" = "Jaga kontaktandmeid";
 "swarm.accessibilityContactQRCode" = "Kontakti QR-kood";
 "swarm.accessibilityContactQRCodeHint" = "Avab ekraanivaate kontakti QR-koodiga";
 "swarm.accessibilityContactShareHint" = "Avab kontaktandmete jagamise valikud";
@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Summuta mikrofon";
 "calls.unmuteAudio" = "Lõpeta mikrofoni summutamine";
 "calls.lowerHand" = "Lase käsi alla";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "Kõne on pooleli. Kas sa soovid sellega liituda?";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Seadmed";

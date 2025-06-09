@@ -301,6 +301,10 @@
 "calls.muteAudio" = "மைக்ரோஃபோன் முடக்கப்பட்டது";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "கீழ் கை";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "ஒரு அழைப்பு நடந்து வருகிறது. நீங்கள் அழைப்பு சேர விரும்புகிறீர்களா?";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "சாதனங்கள்";
