@@ -42,6 +42,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         let callId: String
     }
 
+    deinit {
+        UIDevice.current.isProximityMonitoringEnabled = false
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if self.viewModel.call != nil && !self.viewConfigured {
@@ -203,11 +208,24 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     func removeFromScreen() {
         if self.videoContainerViewModel != nil {
             self.videoContainerViewModel.callStopped()
+            self.videoContainerViewModel = nil
         }
+
+        for child in children {
+            child.willMove(toParent: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
+
         UIDevice.current.isProximityMonitoringEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false
         self.viewModel.callFinished()
-        self.dismiss(animated: false)
+
+        if let presentingViewController = self.presentingViewController {
+            presentingViewController.dismiss(animated: false, completion: nil)
+        } else {
+            self.dismiss(animated: false, completion: nil)
+        }
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
