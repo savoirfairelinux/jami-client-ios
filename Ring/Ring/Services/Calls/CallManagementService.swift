@@ -156,9 +156,18 @@ class CallManagementService {
         isAudioOnly: Bool,
         withMedia: [[String: String]]
     ) -> Single<CallModel> {
-        let mediaList = withMedia.isEmpty ?
-            MediaAttributeFactory.createDefaultMediaList(isAudioOnly: isAudioOnly, videoSource: videoSource) :
-            withMedia
+
+        var mediaList: [[String: String]] = []
+
+        if participantId.contains("rdv:") || participantId.contains("swarm:") {
+            // When joining a group conversation call, create both audio and video streams,
+            // muting video if needed while still allowing incoming video to be received
+            mediaList = MediaAttributeFactory.createCompleteMediaList(isVideoMuted: isAudioOnly, videoSource: videoSource)
+        } else {
+            mediaList = withMedia.isEmpty ?
+                MediaAttributeFactory.createDefaultMediaList(isAudioOnly: isAudioOnly, videoSource: videoSource) :
+                withMedia
+        }
 
         let call = CallModelFactory.createOutgoingCall(
             participantId: participantId,

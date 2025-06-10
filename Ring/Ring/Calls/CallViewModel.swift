@@ -281,7 +281,7 @@ class CallViewModel: Stateable, ViewModel {
     }
 
     private func configureVideo() {
-        if !(self.call?.isAudioOnly ?? true) {
+        if !(self.call?.isAudioOnly ?? true || self.call?.videoMuted ?? true) {
             self.videoService.startVideoCaptureBeforeCall()
         }
         self.currentCall
