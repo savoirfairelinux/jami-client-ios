@@ -199,19 +199,28 @@ final class MediaAttributeFactory {
         [
             MediaAttributeKey.mediaType.rawValue: MediaAttributeValue.audio.rawValue,
             MediaAttributeKey.label.rawValue: "audio_0",
+            MediaAttributeKey.source.rawValue: "",
             MediaAttributeKey.enabled.rawValue: "true",
             MediaAttributeKey.muted.rawValue: "false"
         ]
     }
 
-    static func createVideoMedia(source: String) -> [String: String] {
+    static func createVideoMedia(source: String, muted: Bool = false) -> [String: String] {
         [
             MediaAttributeKey.mediaType.rawValue: MediaAttributeValue.video.rawValue,
             MediaAttributeKey.label.rawValue: "video_0",
-            MediaAttributeKey.source.rawValue: source,
+            MediaAttributeKey.source.rawValue: muted ? "" : source,
             MediaAttributeKey.enabled.rawValue: "true",
-            MediaAttributeKey.muted.rawValue: "false"
+            MediaAttributeKey.muted.rawValue: muted.toString()
         ]
+    }
+
+    static func createCompleteMediaList(isVideoMuted: Bool, videoSource: String) -> [[String: String]] {
+        var mediaList = [createAudioMedia()]
+
+        mediaList.append(createVideoMedia(source: videoSource, muted: isVideoMuted))
+
+        return mediaList
     }
 
     static func createDefaultMediaList(isAudioOnly: Bool, videoSource: String) -> [[String: String]] {
