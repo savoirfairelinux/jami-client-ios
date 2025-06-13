@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a98571f_7f90daa9",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 24
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c54d461b_4592a120",
+      "revId": "8ebf14a353665896bd0fba67cfd95013d5f98aca",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "053331c3_6867d2c5",
@@ -35,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d1c5ded_ec4d9ba7",
+        "filename": "Ring/jamiShareExtension/ShareViewController.swift",
+        "patchSetId": 24
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "053331c3_6867d2c5",
+      "revId": "8ebf14a353665896bd0fba67cfd95013d5f98aca",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "430545c0_0a1a9e2b",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-06-11T17:32:39Z",
       "side": 1,
       "message": "We don’t need all those parameters. We’re already passing the viewModel as a parameter, so there’s no need to pass other parameters that are already part of the viewModel.",
+      "revId": "8ebf14a353665896bd0fba67cfd95013d5f98aca",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12a6092e_15252bc5",
+        "filename": "Ring/jamiShareExtension/ShareViewController.swift",
+        "patchSetId": 24
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "430545c0_0a1a9e2b",
       "revId": "8ebf14a353665896bd0fba67cfd95013d5f98aca",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
