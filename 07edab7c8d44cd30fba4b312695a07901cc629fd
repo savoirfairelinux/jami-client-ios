@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "199bfefa_55c91f99",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "it never used",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25701a3c_164dde8f",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "from share items we had url, we should use it directly, instead of converting to file path and than back to url",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2da291_5c1ffa14",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "is it used?",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8aae9d_845dea4b",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "is it used?",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7630f97_0407058a",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "why do we need it? we could use directly NewInteraction",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90e8d6a8_fe9abe58",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "use getNameFromVCard from VCardUtils to avoid loading avatars",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2444f40e_65d526b3",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "use getNameFromVCard from VCardUtils to avoid loading avatars",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b76b8dc_6b37db5e",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "we could not use it, name is stored in application folder, we do not have access to it",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "977b8e6a_671764a5",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "we need to check getConversationInfo title and avatar in any cases, not just for cases is members empty",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84ac720_2ce70a19",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "we need avatar only for conversations with one participant. for others conversations we display default avatar.",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b5eb86_a7d502f6",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "viewModel should be StateObject, because it created by the view",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c7906d_6b427127",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "when perform close we should ensure state of daemon and accounts",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "307fdfc8_080f1e05",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "those properties not observable. use ShareViewModel to ge access to observable properties",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406cb833_45d89300",
+        "filename": "Ring/jamiShareExtension/ShareViewModel.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-13T20:48:32Z",
+      "side": 1,
+      "message": "it should be done on background thread, loading all conversations and profiles could be long. We should present right away interface with default values and then update them when data available",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
