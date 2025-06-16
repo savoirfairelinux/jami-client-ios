@@ -82,7 +82,7 @@
 "swarm.descriptionPlaceholder" = "Sisesta pealkiri";
 "swarm.contactHeader" = "Kontakt";
 "swarm.showContactQRCode" = "Näita kontakti QR-koodi";
-"swarm.shareContactInfo" = "Jaga kontaktandmed";
+"swarm.shareContactInfo" = "Jaga kontaktandmeid";
 "swarm.accessibilityContactQRCode" = "Kontakti QR-kood";
 "swarm.accessibilityContactQRCodeHint" = "Avab ekraanivaate kontakti QR-koodiga";
 "swarm.accessibilityContactShareHint" = "Avab kontaktandmete jagamise valikud";
@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Summuta mikrofon";
 "calls.unmuteAudio" = "Lõpeta mikrofoni summutamine";
 "calls.lowerHand" = "Lase käsi alla";
+"calls.activeCallLabel" = "Kõne on pooleli. Kas sa soovid sellega liituda? Sa saad temaga ka hiljem liituda vestlusest.";
+"calls.activeCallInConversation" = "Kõne on pooleli. Kas sa soovid sellega liituda?";
+"calls.answerWithAudio" = "Vasta häälkõnena";
+"calls.answerWithVideo" = "Vasta videokõnena";
 
 // Account Page
 "accountPage.devicesListHeader" = "Seadmed";
@@ -403,7 +407,7 @@
 "accountPage.thisDevice" = "See seade";
 "accountPage.otherDevices" = "Muud seotud seadmed";
 "accountPage.accountIdentity" = "Kasutajakonto identiteet";
-"accountPage.bootstrap" = "Algata esmane tuvastus";
+"accountPage.bootstrap" = "Server esmaseks tuvastuseks";
 "accountPage.dhtConfiguration" = "OpenDHT seadistus";
 "accountPage.nameServer" = "Nimeserver";
 "accountPage.chats" = "Vestlused";

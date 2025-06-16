@@ -301,6 +301,10 @@
 "calls.muteAudio" = "ميكروفون خاموش";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "يڠ دالم لالو";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "يه تماس داره پيش مياد، ميخواي به تماس بليک بشي؟";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "ڤرودوک";

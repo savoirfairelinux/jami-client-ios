@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Mikrofon stummschalten";
 "calls.unmuteAudio" = "Mikrofon-Stummschaltung aufheben";
 "calls.lowerHand" = "Hand senken";
+"calls.activeCallLabel" = "Es ist gerade ein Anruf im Gange. Möchten Sie dem Anruf beitreten? Sie können dem Anruf auch später aus der Unterhaltung heraus beitreten.";
+"calls.activeCallInConversation" = "Ein Anruf ist im Laufen. Möchten Sie am Anruf teilnehmen?";
+"calls.answerWithAudio" = "Mit Audio antworten";
+"calls.answerWithVideo" = "Mit Video antworten";
 
 // Account Page
 "accountPage.devicesListHeader" = "Geräte";

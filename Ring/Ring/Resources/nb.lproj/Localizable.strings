@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Koble ut mikrofon";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Ta ned hånden";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "- Vil du delta i samtalen?";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Enheter";

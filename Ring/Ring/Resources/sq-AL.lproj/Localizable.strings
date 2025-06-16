@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Heshtoje mikrofonin";
 "calls.unmuteAudio" = "Hiqi heshtimin mikrofonit";
 "calls.lowerHand" = "Uleni dorën";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "Ka një thirrje në zhvillim e sipër. Doni të merrni pjesë në thirrje?";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Pajisje";

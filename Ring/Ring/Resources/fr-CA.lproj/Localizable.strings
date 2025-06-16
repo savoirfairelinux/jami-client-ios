@@ -162,10 +162,10 @@
 // An ellipsis is not directly shown in the following typing indicator strings.
 // An ellipsis animation is shown when messages are being typed in the view.
 // An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
-"conversation.typingIndicatorOneUser" = "%@ is typing";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
+"conversation.typingIndicatorOneUser" = "%@ est en train d'écrire ...";
+"conversation.typingIndicatorTwoUsers" = "%1@ et %2@ sont en train d'écrire…";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ et %3@ sont en train d'écrire…";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ et %3@ sont en train d'écrire…";
 
 
 // Invitations
@@ -184,7 +184,7 @@
 "welcome.linkDevice" = "Importer d'un autre appareil";
 "welcome.linkBackup" = "Importer à partir d'une sauvegarde";
 "welcome.createAccount" = "Créer un compte Jami";
-"welcome.connectToJAMS" = "Connect to a management server";
+"welcome.connectToJAMS" = "Se connecter à un serveur JAMS";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Passer";
@@ -192,7 +192,7 @@
 "createProfile.title" = "Personnaliser votre profil";
 "createProfile.enterNameLabel" = "Entrez un nom d'affichage";
 "createProfile.enterNamePlaceholder" = "Entrer un nom";
-"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
+"createProfile.subtitle" = "Ce profil est uniquement partagé avec les contacts de ce compte. Le profil peut être modifié à tout moment dans les paramètres du compte.";
 "createProfile.createProfilePicture" = "Créer une image pour le profile";
 
 // Create Account form
@@ -223,7 +223,7 @@
 "linkToAccount.allSet" = "Compte importé avec succès.";
 "linkToAccount.goToAccounts" = "Aller sur le compte importé";
 "linkToAccount.exportInstructions" = "Sur l'appareil source, lancez l'exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
+"linkToAccount.exportInstructionsPath" = "Choisir un compte → Paramètres du compte → Associer un nouvel appareil.";
 "linkToAccount.scanQrCode" = "Une fois prêt, scannez le code QR.";
 "linkToAccount.enterProvidedCode" = "Une fois prêt, saisissez le code d'authentification.";
 "linkToAccount.accountLockedWithPassword" = "Le compte est protégé par un mot de passe. Pour continuer, entrez le mot de passe du compte.";
@@ -241,11 +241,11 @@
 
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Connexion";
-"linkToAccountManager.title" = "Management server account";
-"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
-"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
-"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
-"linkToAccountManager.enterCredentials" = "Enter the management server credentials";
+"linkToAccountManager.title" = "Compte JAMS";
+"linkToAccountManager.accountManagerPlaceholder" = "URL du serveur JAMS";
+"linkToAccountManager.accountManagerLabel" = "Saisir l'URL du serveur JAMS";
+"linkToAccountManager.jamsExplanation" = "Saisir l'URL du serveur JAMS";
+"linkToAccountManager.enterCredentials" = "Saisir les paramètres d'identité JAMS";
 
 // Alerts
 "alerts.accountCannotBeFoundTitle" = "Erreur liée au compte";
@@ -267,7 +267,7 @@
 "alerts.noMediaPermissionsTitle" = "L'accès au média non autorisé";
 "alerts.noLibraryPermissionsTitle" = "L'accès à la bibliothèque de photos non autorisé";
 "alerts.noLocationPermissionsTitle" = "L'accès à la géolocalisation non autorisé";
-"alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
+"alerts.errorWrongCredentials" = "Une erreur s'est produite lors de la connexion à Jami Account Management Server (JAMS). Veuillez réessayer. Si le problème persiste, contactez votre administrateur système.";
 "alerts.recordVideoMessage" = "Enregistrer un message vidéo";
 "alerts.recordAudioMessage" = "Enregistrer un message vocal";
 "alerts.uploadFile" = "Envoyer le fichier";
@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Couper le microphone";
 "calls.unmuteAudio" = "Réouvrir le microphone";
 "calls.lowerHand" = "Baisser la main";
+"calls.activeCallLabel" = "Un appel est en cours. Voulez-vous rejoindre l'appel ? Vous pourrez toujours l'appel plus tard à partir de la conversation.";
+"calls.activeCallInConversation" = "Un appel est en cours. Souhaitez-vous rejoindre l'appel ?";
+"calls.answerWithAudio" = "Répondre en audio";
+"calls.answerWithVideo" = "Répondre en vidéo";
 
 // Account Page
 "accountPage.devicesListHeader" = "Appareils";
@@ -384,7 +388,7 @@
 "accountPage.generatingPin" = "Génération du NIP ...";
 "accountPage.passwordForPin" = "Ce compte est chiffré, veuillez saisir le mot de passe pour générer un NIP.";
 "accountPage.pinExplanationTitle" = "Sur l'autre appareil";
-"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Installer et lancer Jami, choisissez \"Importer d'un nouvel appareil\" et scanner le code QR ou entrer manuellement le NIP.";
 "accountPage.pinError" = "Une erreur s'est produite pendant la génération du NIP.";
 "accountPage.notificationTitle" = "Notifications";
 "accountPage.notificationError" = "Les notifications pour Jami sont désactivées. S'il vous plaît, activez les dans les paramètres de votre appareil.";
@@ -408,7 +412,7 @@
 "accountPage.nameServer" = "Serveur de nom";
 "accountPage.chats" = "Clavardage";
 "accountPage.typingIndicator" = "Indicateur de frappe";
-"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "Indique lors de l'écriture d'un message.";
 
 // Backup Account
 "backupAccount.explanation" = "Ce compte Jami n'existe que sur cet appareil.\nLe compte sera perdu si cet appareil est perdu ou si l'application est désinstallée. Il est recommandé de faire une sauvegarde de ce compte.";
@@ -456,11 +460,11 @@
 "linkDevice.errorCode" = "Une erreur s'est produite lors de la génération du code. Essayez à nouveau.";
 "linkDevice.errorWrongData" = "Une erreur s'est produite pendant l'exportation du compte. Vérifiez et réessayez.";
 "linkDevice.initialInfo" = "Sur le nouvel appareil, initier un nouveau compte.";
-"linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
+"linkDevice.infoAddAccount" = "Choisir Ajouter un compte  → Se connecter à partir d'un autre appareil.";
 "linkDevice.infoQRCode" = "Une fois prêt, scannez le code QR.";
-"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
+"linkDevice.infoCode" = "Une fois prêt, saisir le code d'authentification et taper sur Connexion.";
 "linkDevice.connecting" = "Connexion à votre nouvel appareil ...";
-"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
+"linkDevice.authenticationInfo" = "Nouvel appareil trouvé à l'adresse ci-dessous. Est-ce vous ? En cliquant sur confirmer, le transfert du compte se poursuivra.";
 "linkDevice.newDeviceIP" = "Nouvelle adresse IP de l'appareil : %1@";
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Nouvel identifiant d'appareil non reconnu. Veuillez suivre les instructions ci-dessus.";
@@ -490,7 +494,7 @@
 "notifications.locationSharingStopped" = "Le partage de position entrant s'est terminé";
 "dataTransfer.readableStatusDecline" = "Refuser";
 "dataTransfer.readableStatusAccept" = "Accepter";
-"dataTransfer.infoMessage" = "Tap to start recording";
+"dataTransfer.infoMessage" = "Appuyer pour démarrer l'enregistrement";
 "dataTransfer.sendMessage" = "Envoyer";
 
 

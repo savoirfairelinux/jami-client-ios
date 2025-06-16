@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Igwe okwu na-adịghị arụ ọrụ";
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "Aka ala";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "A na-akpọ oku na-aga n'ihu. Ị chọrọ isonyere oku ahụ?";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Ngwaọrụ";

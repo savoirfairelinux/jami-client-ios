@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Mikrofon elnémítása";
 "calls.unmuteAudio" = "Mikrofon némításának feloldása";
 "calls.lowerHand" = "Kéz leengedése";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "Hívás folyamatban van. Szeretne csatlakozni a híváshoz?";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Eszközök";

@@ -301,6 +301,10 @@
 "calls.muteAudio" = "Mykistä mikrofoni";
 "calls.unmuteAudio" = "Poista mikrofonin mykistys";
 "calls.lowerHand" = "Käsi alas";
+"calls.activeCallLabel" = "Puhelu on käynnissä. Haluatko liittyä puheluun? Voit liittyä puheluun myös myöhemmin keskustelusta.";
+"calls.activeCallInConversation" = "Puhelu on meneillään. Haluatko liittyä?";
+"calls.answerWithAudio" = "Vastaa äänellä";
+"calls.answerWithVideo" = "Vastaa videolla";
 
 // Account Page
 "accountPage.devicesListHeader" = "Laitteet";
@@ -408,7 +412,7 @@
 "accountPage.nameServer" = "Nimipalvelin";
 "accountPage.chats" = "Keskustelut";
 "accountPage.typingIndicator" = "Typpintason indikaattori";
-"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "Ilmaisee, milloin viestejä kirjoitetaan.";
 
 // Backup Account
 "backupAccount.explanation" = "Tämä Jami-tili on olemassa vain tässä laitteessa. Tilin voi menetetää, jos laite katoaa tai sovellus poistetaan. Suositeltavaa on tehdä tilistä varmuuskopio.";

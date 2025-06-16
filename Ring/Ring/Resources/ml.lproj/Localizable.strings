@@ -301,6 +301,10 @@
 "calls.muteAudio" = "മിണ്ടാത്ത മൈക്രോഫോൺ";
 "calls.unmuteAudio" = "മൈക്ക് അൺമ്യൂട്ട് ചെയ്യുക";
 "calls.lowerHand" = "താഴത്തെ കൈ";
+"calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
+"calls.activeCallInConversation" = "ഒരു കോൾ നടക്കുന്നുണ്ട്.";
+"calls.answerWithAudio" = "Answer with audio";
+"calls.answerWithVideo" = "Answer with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "ഉപകരണങ്ങൾ";
