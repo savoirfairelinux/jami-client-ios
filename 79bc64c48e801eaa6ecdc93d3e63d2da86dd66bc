@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ee07ea5_7b772b34",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 32
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-17T17:11:56Z",
+      "side": 1,
+      "message": "if we only have jami id, we should display Image(systemName: \"person\"), instead of avatar with first letter",
+      "revId": "79bc64c48e801eaa6ecdc93d3e63d2da86dd66bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
