@@ -188,6 +188,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed874912_83438830",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-17T14:40:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1b5eb86_a7d502f6",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4c7906d_6b427127",
@@ -222,6 +240,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "592d6230_f469f04f",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-17T14:40:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "307fdfc8_080f1e05",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "406cb833_45d89300",
@@ -235,6 +271,24 @@
       "writtenOn": "2025-06-13T20:48:32Z",
       "side": 1,
       "message": "it should be done on background thread, loading all conversations and profiles could be long. We should present right away interface with default values and then update them when data available",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26f8f3a6_1f0d6587",
+        "filename": "Ring/jamiShareExtension/ShareViewModel.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-17T14:40:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "406cb833_45d89300",
       "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
