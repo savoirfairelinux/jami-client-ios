@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a244e45_3ff2f6c3",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "199bfefa_55c91f99",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25701a3c_164dde8f",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-13T20:48:32Z",
       "side": 1,
       "message": "from share items we had url, we should use it directly, instead of converting to file path and than back to url",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eec31d3_b8df5dc4",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25701a3c_164dde8f",
       "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79270153_fb5cfd7e",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e2da291_5c1ffa14",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd8aae9d_845dea4b",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-06-13T20:48:32Z",
       "side": 1,
       "message": "is it used?",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfa55ba1_00479cff",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd8aae9d_845dea4b",
       "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -86,6 +158,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f2185ba_c02f25fe",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7630f97_0407058a",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90e8d6a8_fe9abe58",
@@ -99,6 +189,24 @@
       "writtenOn": "2025-06-13T20:48:32Z",
       "side": 1,
       "message": "use getNameFromVCard from VCardUtils to avoid loading avatars",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ac00a47_e99ce938",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90e8d6a8_fe9abe58",
       "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -120,6 +228,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9e13a7d_c048775a",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2444f40e_65d526b3",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b76b8dc_6b37db5e",
@@ -133,6 +259,24 @@
       "writtenOn": "2025-06-13T20:48:32Z",
       "side": 1,
       "message": "we could not use it, name is stored in application folder, we do not have access to it",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3333d03c_40e9bcc0",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b76b8dc_6b37db5e",
       "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -154,6 +298,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0238332_50af31d3",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "977b8e6a_671764a5",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b84ac720_2ce70a19",
@@ -167,6 +329,24 @@
       "writtenOn": "2025-06-13T20:48:32Z",
       "side": 1,
       "message": "we need avatar only for conversations with one participant. for others conversations we display default avatar.",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec866c0_d5a0982d",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b84ac720_2ce70a19",
       "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
