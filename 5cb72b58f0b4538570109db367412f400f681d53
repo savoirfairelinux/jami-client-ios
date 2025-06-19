@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036265b1_35d79549",
+        "filename": "Ring/Ring.xcodeproj/xcshareddata/xcschemes/Ring.xcscheme",
+        "patchSetId": 42
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T18:35:15Z",
+      "side": 1,
+      "message": "keep original configuration",
+      "revId": "5cb72b58f0b4538570109db367412f400f681d53",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee1faa8_1a8e0611",
+        "filename": "Ring/jamiShareExtension/Adapter.mm",
+        "patchSetId": 42
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T18:35:15Z",
+      "side": 1,
+      "message": "add this signal to registerSignals",
+      "revId": "5cb72b58f0b4538570109db367412f400f681d53",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e9ebb0_c1f5e316",
+        "filename": "Ring/jamiShareExtension/ConversationViewModel.swift",
+        "patchSetId": 42
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T18:35:15Z",
+      "side": 1,
+      "message": "it is not account type. maybe create enum avatarType?",
+      "revId": "5cb72b58f0b4538570109db367412f400f681d53",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e9dd966_58a9bbc0",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 42
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T18:35:15Z",
+      "side": 1,
+      "message": "do not need title",
+      "revId": "5cb72b58f0b4538570109db367412f400f681d53",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7fafac5_fa6167dd",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 42
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T18:35:15Z",
+      "side": 1,
+      "message": "we should display default image if account only have jami id",
+      "revId": "5cb72b58f0b4538570109db367412f400f681d53",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d19be7a2_c7e7a234",
+        "filename": "Ring/jamiShareExtension/ShareViewModel.swift",
+        "patchSetId": 42
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T18:35:15Z",
+      "side": 1,
+      "message": "transmissionStatus does not need to be published",
+      "revId": "5cb72b58f0b4538570109db367412f400f681d53",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18bca107_93cb0691",
+        "filename": "Ring/jamiShareExtension/ShareViewModel.swift",
+        "patchSetId": 42
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T18:35:15Z",
+      "side": 1,
+      "message": "Since both the key and value are needed, destructure them directly in the if let instead of force-unwrapping the value afterward.",
+      "revId": "5cb72b58f0b4538570109db367412f400f681d53",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cabef84a_45dad4f5",
+        "filename": "Ring/jamiShareExtension/ShareViewModel.swift",
+        "patchSetId": 42
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T18:35:15Z",
+      "side": 1,
+      "message": "need to invalidate timer",
+      "revId": "5cb72b58f0b4538570109db367412f400f681d53",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
