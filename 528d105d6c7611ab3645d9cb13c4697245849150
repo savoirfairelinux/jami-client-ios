@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8980587_b3c76eef",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 44
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T19:32:10Z",
+      "side": 1,
+      "message": ".multilineTextAlignment(.leading)",
+      "revId": "528d105d6c7611ab3645d9cb13c4697245849150",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2dbb756_943d78dc",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 44
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T19:32:10Z",
+      "side": 1,
+      "message": ".padding(.vertical, 12)",
+      "revId": "528d105d6c7611ab3645d9cb13c4697245849150",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f6edd45_c525e609",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 44
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T19:32:10Z",
+      "side": 1,
+      "message": ".padding(.horizontal)",
+      "revId": "528d105d6c7611ab3645d9cb13c4697245849150",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fa14b92_8c3a46bd",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 44
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T19:32:10Z",
+      "side": 1,
+      "message": ".multilineTextAlignment(.leading)",
+      "revId": "528d105d6c7611ab3645d9cb13c4697245849150",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40471290_795db4fd",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 44
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-06-19T19:32:10Z",
+      "side": 1,
+      "message": "remove this button style, it prevents click",
+      "revId": "528d105d6c7611ab3645d9cb13c4697245849150",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
