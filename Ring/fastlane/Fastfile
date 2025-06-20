@@ -54,16 +54,23 @@ platform :ios do
     )
     match(
       api_key: api_key,
-      app_identifier: ["com.savoirfairelinux.ring", "com.savoirfairelinux.ring.jamiNotificationExtension"],
+      app_identifier: ["com.savoirfairelinux.ring", "com.savoirfairelinux.ring.jamiNotificationExtension",
+"com.savoirfairelinux.ring.jamiShareExtension"],
       type: "appstore",
       readonly: true
     )
     profile_path = ENV["sigh_com.savoirfairelinux.ring_appstore_profile-path"]
     profile_path_extension = ENV["sigh_com.savoirfairelinux.ring.jamiNotificationExtension_appstore_profile-path"]
+    profile_path_share_extension = ENV["sigh_com.savoirfairelinux.ring.jamiShareExtension_appstore_profile-path"]
     update_project_provisioning(
        target_filter: "jamiNotificationExtension",
        build_configuration: "Release",
        profile: profile_path_extension
+    )
+    update_project_provisioning(
+       target_filter: "jamiShareExtension",
+       build_configuration: "Release",
+       profile: profile_path_share_extension
     )
     update_project_provisioning(
        target_filter: "Ring",
