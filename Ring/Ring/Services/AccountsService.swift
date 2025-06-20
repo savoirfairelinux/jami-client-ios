@@ -1002,7 +1002,9 @@ extension AccountsService {
             let accountUri = AccountModelHelper.init(withAccount: newAccount).uri ?? ""
             _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: account, accountURI: accountUri)
             self.currentAccount = newAccount
-            UserDefaults.standard.set(account, forKey: self.selectedAccountID)
+            if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
+                sharedDefaults.set(account, forKey: self.selectedAccountID)
+            }
             return true
         } catch {
             return false
@@ -1063,7 +1065,9 @@ extension AccountsService {
         if let account = getAccount(fromAccountId: accountId) {
             currentAccount = account
         }
-        UserDefaults.standard.set(accountId, forKey: selectedAccountID)
+        if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
+            sharedDefaults.set(accountId, forKey: selectedAccountID)
+        }
         return nil
     }
 
