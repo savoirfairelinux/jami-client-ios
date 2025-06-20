@@ -97,7 +97,9 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
         if let accountId = tempAccount {
             guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
             self.accountsService.updateCurrentAccount(account: account)
-            UserDefaults.standard.set(accountId, forKey: self.accountsService.selectedAccountID)
+            if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
+                sharedDefaults.set(accountId, forKey: self.accountsService.selectedAccountID)
+            }
         }
         linkAction()
     }

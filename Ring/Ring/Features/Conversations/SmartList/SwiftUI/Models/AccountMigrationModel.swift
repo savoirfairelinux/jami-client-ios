@@ -164,7 +164,9 @@ final class AccountMigrationModel: ObservableObject, AvatarViewDataModel {
     private func updateCurrentAccount() {
         guard let account = accountService.getAccount(fromAccountId: accountId) else { return }
         let selectedAccountKey = accountService.selectedAccountID
-        UserDefaults.standard.set(accountId, forKey: selectedAccountKey)
+        if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
+            sharedDefaults.set(accountId, forKey: selectedAccountKey)
+        }
         accountService.currentAccount = account
     }
 }
