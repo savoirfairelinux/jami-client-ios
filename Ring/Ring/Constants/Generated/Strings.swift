@@ -1092,6 +1092,30 @@ internal enum L10n {
     /// Bad QR code
     internal static let badQrCode = L10n.tr("Localizable", "scan.badQrCode", fallback: "Bad QR code")
   }
+  internal enum ShareExtension {
+    /// Jami
+    internal static let appName = L10n.tr("Localizable", "shareExtension.appName", fallback: "Jami")
+    /// Conversations
+    internal static let conversations = L10n.tr("Localizable", "shareExtension.conversations", fallback: "Conversations")
+    /// No conversation available.
+    internal static let noConversation = L10n.tr("Localizable", "shareExtension.noConversation", fallback: "No conversation available.")
+    /// Select an account.
+    internal static let selectAccount = L10n.tr("Localizable", "shareExtension.selectAccount", fallback: "Select an account.")
+    /// Sending...
+    internal static let sending = L10n.tr("Localizable", "shareExtension.sending", fallback: "Sending...")
+    internal enum NoAccount {
+      /// lease create an account in the main app to continue.
+      internal static let description = L10n.tr("Localizable", "shareExtension.noAccount.description", fallback: "lease create an account in the main app to continue.")
+      /// No account found
+      internal static let title = L10n.tr("Localizable", "shareExtension.noAccount.title", fallback: "No account found")
+    }
+    internal enum UnsupportedType {
+      /// Jami doesn't currently support the content you want to share.
+      internal static let description = L10n.tr("Localizable", "shareExtension.unsupportedType.description", fallback: "Jami doesn't currently support the content you want to share.")
+      /// Unsupported content
+      internal static let title = L10n.tr("Localizable", "shareExtension.unsupportedType.title", fallback: "Unsupported content")
+    }
+  }
   internal enum Smartlist {
     /// About Jami
     internal static let aboutJami = L10n.tr("Localizable", "smartlist.aboutJami", fallback: "About Jami")
