@@ -311,10 +311,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 } else {
                     self.unregisterNotifications()
                 }
-                if let selectedAccountId = UserDefaults.standard.string(forKey: self.accountService.selectedAccountID),
-                   let account = self.accountService.getAccount(fromAccountId: selectedAccountId) {
+
+                let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier)
+                let standardDefaults = UserDefaults.standard
+
+                if let selectedAccountID = sharedDefaults?.string(forKey: self.accountService.selectedAccountID),
+                   let account = self.accountService.getAccount(fromAccountId: selectedAccountID) {
                     self.accountService.currentAccount = account
+                } else if let selectedAccountID = standardDefaults.string(forKey: self.accountService.selectedAccountID),
+                          let account = self.accountService.getAccount(fromAccountId: selectedAccountID) {
+                    self.accountService.currentAccount = account
+                    sharedDefaults?.set(account.id, forKey: self.accountService.selectedAccountID)
                 }
+
                 guard let currentAccount = self.accountService.currentAccount else {
                     self.log.error("Unable to get current account!")
                     return

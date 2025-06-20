@@ -629,5 +629,15 @@
 "accessibility.conference.unmuteAudio" = "Unmute audio";
 "accessibility.conference.hangup" = "Hang up";
 "accessibility.conference.lowerHand" = "Lower hand";
-
 "accessibility.account.tokenQRcode" = "Token QR code";
+
+// Share extension
+"shareExtension.appName" = "Jami";
+"shareExtension.noAccount.title" = "No account found";
+"shareExtension.noAccount.description" = "lease create an account in the main app to continue.";
+"shareExtension.unsupportedType.title" = "Unsupported content";
+"shareExtension.unsupportedType.description" = "Jami doesn't currently support the content you want to share.";
+"shareExtension.sending" = "Sending...";
+"shareExtension.conversations" = "Conversations";
+"shareExtension.noConversation" = "No conversation available.";
+"shareExtension.selectAccount" = "Select an account.";
