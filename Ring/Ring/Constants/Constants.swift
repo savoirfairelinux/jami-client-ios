@@ -166,15 +166,15 @@ public class Constants: NSObject {
     }
 
     enum NotificationActionTitle {
-        case answerWithVideo
-        case answerWithAudio
+        case acceptWithVideo
+        case acceptWithAudio
 
         func toString() -> String {
             switch self {
-                case .answerWithVideo:
-                    return L10n.Calls.answerWithVideo
-                case .answerWithAudio:
-                    return L10n.Calls.answerWithAudio
+                case .acceptWithVideo:
+                    return L10n.Calls.acceptWithVideo
+                case .acceptWithAudio:
+                    return L10n.Calls.acceptWithAudio
             }
         }
     }
