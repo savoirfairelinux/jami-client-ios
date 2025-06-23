@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2021-2024 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2021-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -515,12 +513,12 @@ class NotificationService: UNNotificationServiceExtension {
         }
         var appIsActive = false
         group.enter()
-        // post darwin notification and wait for the answer from the main app. If answer received app is active
+        // Post darwin notification and wait for the response from the main app. If response is received, the app is active.
         self.listenToMainAppResponse { _ in
             appIsActive = true
         }
         CFNotificationCenterPostNotification(notificationCenter, CFNotificationName(Constants.notificationReceived), nil, nil, true)
-        // wait fro 300 milliseconds. If no answer from main app is received app is not active.
+        // Wait for 300 milliseconds. If no response from main app is received, the app is inactive.
         _ = group.wait(timeout: .now() + 0.3)
 
         return appIsActive
