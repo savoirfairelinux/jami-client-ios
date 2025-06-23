@@ -1,11 +1,5 @@
 /*
- *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
- *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
- *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
- *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
- *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -546,8 +540,8 @@ extension AppDelegate {
     }
 
     private func isCallAction(_ actionIdentifier: String) -> Bool {
-        return actionIdentifier == Constants.NotificationAction.answerVideo.rawValue ||
-            actionIdentifier == Constants.NotificationAction.answerAudio.rawValue
+        return actionIdentifier == Constants.NotificationAction.acceptVideo.rawValue ||
+            actionIdentifier == Constants.NotificationAction.acceptAudio.rawValue
     }
 
     private func handleCallNotification(data: [AnyHashable: Any], account: AccountModel, actionIdentifier: String) {
@@ -569,7 +563,7 @@ extension AppDelegate {
     private func handleCallAction(actionIdentifier: String, data: [AnyHashable: Any]) {
         guard let callURI = data[Constants.NotificationUserInfoKeys.callURI.rawValue] as? String else { return }
 
-        let isAudioOnly = actionIdentifier == Constants.NotificationAction.answerAudio.rawValue
+        let isAudioOnly = actionIdentifier == Constants.NotificationAction.acceptAudio.rawValue
         self.appCoordinator.joinCall(callURI: callURI, isAudioOnly: isAudioOnly)
     }
 
