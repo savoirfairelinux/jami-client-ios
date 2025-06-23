@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2021-2024 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2021-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -515,12 +513,12 @@ class NotificationService: UNNotificationServiceExtension {
         }
         var appIsActive = false
         group.enter()
-        // post darwin notification and wait for the answer from the main app. If answer received app is active
+        // Post darwin notification and wait for the response from the main app. If response is received, the app is active.
         self.listenToMainAppResponse { _ in
             appIsActive = true
         }
         CFNotificationCenterPostNotification(notificationCenter, CFNotificationName(Constants.notificationReceived), nil, nil, true)
-        // wait fro 300 milliseconds. If no answer from main app is received app is not active.
+        // Wait for 300 milliseconds. If no response from main app is received, the app is inactive.
         _ = group.wait(timeout: .now() + 0.3)
 
         return appIsActive
@@ -975,42 +973,42 @@ extension NotificationService {
     }
 
     private func configureCallActions(notification: LocalNotification, calls: [ActiveCall], info: inout [AnyHashable: Any]) {
-        let answerVideoAction: UNNotificationAction
-        let answerAudioAction: UNNotificationAction
+        let acceptVideoAction: UNNotificationAction
+        let acceptAudioAction: UNNotificationAction
 
         if #available(iOS 15.0, *) {
-            answerVideoAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.answerVideo.rawValue,
-                title: Constants.NotificationActionTitle.answerWithVideo.toString(),
+            acceptVideoAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.acceptVideo.rawValue,
+                title: Constants.NotificationActionTitle.acceptWithVideo.toString(),
                 options: [.foreground, .authenticationRequired],
                 icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.video.rawValue)
             )
 
-            answerAudioAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.answerAudio.rawValue,
-                title: Constants.NotificationActionTitle.answerWithAudio.toString(),
+            acceptAudioAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.acceptAudio.rawValue,
+                title: Constants.NotificationActionTitle.acceptWithAudio.toString(),
                 options: [.foreground, .authenticationRequired],
                 icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.audio.rawValue)
             )
 
             notification.content.interruptionLevel = .timeSensitive
         } else {
-            answerVideoAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.answerVideo.rawValue,
-                title: Constants.NotificationActionTitle.answerWithVideo.toString(),
+            acceptVideoAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.acceptVideo.rawValue,
+                title: Constants.NotificationActionTitle.acceptWithVideo.toString(),
                 options: [.foreground, .authenticationRequired]
             )
 
-            answerAudioAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.answerAudio.rawValue,
-                title: Constants.NotificationActionTitle.answerWithAudio.toString(),
+            acceptAudioAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.acceptAudio.rawValue,
+                title: Constants.NotificationActionTitle.acceptWithAudio.toString(),
                 options: [.foreground, .authenticationRequired]
             )
         }
 
         let callCategory = UNNotificationCategory(
             identifier: Constants.NotificationCategory.call.rawValue,
-            actions: [answerVideoAction, answerAudioAction],
+            actions: [acceptVideoAction, acceptAudioAction],
             intentIdentifiers: [],
             options: [.customDismissAction, .hiddenPreviewsShowTitle]
         )
