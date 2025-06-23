@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2022-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -156,8 +154,8 @@ public class Constants: NSObject {
     }
 
     enum NotificationAction: String {
-        case answerVideo = "GROUP_ANSWER_VIDEO_ACTION"
-        case answerAudio = "GROUP_ANSWER_AUDIO_ACTION"
+        case acceptVideo = "GROUP_ACCEPT_VIDEO_ACTION"
+        case acceptAudio = "GROUP_ACCEPT_AUDIO_ACTION"
     }
 
     enum NotificationActionIcon: String {
@@ -166,15 +164,15 @@ public class Constants: NSObject {
     }
 
     enum NotificationActionTitle {
-        case answerWithVideo
-        case answerWithAudio
+        case acceptWithVideo
+        case acceptWithAudio
 
         func toString() -> String {
             switch self {
-                case .answerWithVideo:
-                    return L10n.Calls.answerWithVideo
-                case .answerWithAudio:
-                    return L10n.Calls.answerWithAudio
+                case .acceptWithVideo:
+                    return L10n.Calls.acceptWithVideo
+                case .acceptWithAudio:
+                    return L10n.Calls.acceptWithAudio
             }
         }
     }
