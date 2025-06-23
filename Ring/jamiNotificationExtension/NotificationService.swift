@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2021-2024 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2021-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -981,14 +979,14 @@ extension NotificationService {
         if #available(iOS 15.0, *) {
             answerVideoAction = UNNotificationAction(
                 identifier: Constants.NotificationAction.answerVideo.rawValue,
-                title: Constants.NotificationActionTitle.answerWithVideo.toString(),
+                title: Constants.NotificationActionTitle.acceptWithVideo.toString(),
                 options: [.foreground, .authenticationRequired],
                 icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.video.rawValue)
             )
 
             answerAudioAction = UNNotificationAction(
                 identifier: Constants.NotificationAction.answerAudio.rawValue,
-                title: Constants.NotificationActionTitle.answerWithAudio.toString(),
+                title: Constants.NotificationActionTitle.acceptWithAudio.toString(),
                 options: [.foreground, .authenticationRequired],
                 icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.audio.rawValue)
             )
@@ -997,13 +995,13 @@ extension NotificationService {
         } else {
             answerVideoAction = UNNotificationAction(
                 identifier: Constants.NotificationAction.answerVideo.rawValue,
-                title: Constants.NotificationActionTitle.answerWithVideo.toString(),
+                title: Constants.NotificationActionTitle.acceptWithVideo.toString(),
                 options: [.foreground, .authenticationRequired]
             )
 
             answerAudioAction = UNNotificationAction(
                 identifier: Constants.NotificationAction.answerAudio.rawValue,
-                title: Constants.NotificationActionTitle.answerWithAudio.toString(),
+                title: Constants.NotificationActionTitle.acceptWithAudio.toString(),
                 options: [.foreground, .authenticationRequired]
             )
         }
