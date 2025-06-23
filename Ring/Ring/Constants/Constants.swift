@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2022-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -172,9 +170,9 @@ public class Constants: NSObject {
         func toString() -> String {
             switch self {
                 case .answerWithVideo:
-                    return L10n.Calls.answerWithVideo
+                    return L10n.Calls.acceptWithVideo
                 case .answerWithAudio:
-                    return L10n.Calls.answerWithAudio
+                    return L10n.Calls.acceptWithAudio
             }
         }
     }
