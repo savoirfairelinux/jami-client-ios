@@ -26,6 +26,7 @@ class ShareViewModel: ObservableObject {
     private var ongoingTransfersByAccount: [String: Set<String>] = [:]
     private var stallTimer: Timer?
     private var didSetTransmissionSummary = false
+    static let localShareExtensionQueryNotificationName = Notification.Name(Constants.appIdentifier + ".shareExtensionQuery.internal")
 
     @Published var accountList: [AccountViewModel] = []
     @Published var conversationsByAccount: [String: [ConversationViewModel]] = [:]
@@ -33,9 +34,8 @@ class ShareViewModel: ObservableObject {
     var transmissionStatus: [String: NewStatusIndicator] = [:]
 
     init() {
+
         self.adapter = Adapter()
-        self.adapter.initDaemon()
-        self.adapter.startDaemon()
         self.adapterService = AdapterService(withAdapter: adapter)
 
         fetchAccountsAndConversations()
@@ -45,6 +45,7 @@ class ShareViewModel: ObservableObject {
         subscribeToMessageStatusChanged()
 
         startStallMonitoring()
+        setupDarwinNotificationListener()
     }
 
     private func subscribeToNewInteractions() {
@@ -197,6 +198,8 @@ class ShareViewModel: ObservableObject {
             self.conversationsByAccount[accountId] = conversationViewModels
             adapterService.setAccountActive(accountId, newValue: false)
         }
+
+        self.adapterService.updateShareExtensionAccountState(isActive: false)
     }
 
     func sendMessage(accountId: String, conversationId: String, message: String, parentId: String? = nil) {
@@ -294,6 +297,10 @@ class ShareViewModel: ObservableObject {
         for account in self.accountList {
             adapterService.setAccountActive(account.id, newValue: false)
         }
+
+        self.adapterService.updateShareExtensionAccountState(isActive: false)
+
+        removeDarwinNotificationListener()
         
         if let timer = stallTimer {
             timer.invalidate()
@@ -301,6 +308,58 @@ class ShareViewModel: ObservableObject {
         }
 
         adapterService.removeDelegate()
+    }
+    
+    // MARK: Darwin Notification Handling
+    private func setupDarwinNotificationListener() {
+        NotificationCenter.default.addObserver(forName: ShareViewModel.localShareExtensionQueryNotificationName, object: nil, queue: nil) { [weak self] _ in
+            self?.handleAccountQuery()
+        }
+        
+        let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
+        CFNotificationCenterAddObserver(notificationCenter,
+                                        nil, { (_, _, _, _, _) in
+                                            NotificationCenter.default.post(name: ShareViewModel.localShareExtensionQueryNotificationName,
+                                                                            object: nil,
+                                                                            userInfo: nil)
+                                        },
+                                        Constants.notificationShareExtensionQuery,
+                                        nil,
+                                        .deliverImmediately)
+    }
+    
+    private func handleAccountQuery() {
+        if adapterService.hasActiveAccount() {
+            // Respond that we have an active account
+            let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
+            CFNotificationCenterPostNotification(notificationCenter, 
+                                               CFNotificationName(Constants.notificationShareExtensionResponse), 
+                                               nil, 
+                                               nil, 
+                                               true)
+            // Handle notification data if any
+            guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier),
+                  let notificationData = userDefaults.object(forKey: Constants.notificationData) as? [[String: String]] else {
+                return
+            }
+            userDefaults.set([[String: String]](), forKey: Constants.notificationData)
+            for data in notificationData {
+                self.adapterService.pushNotificationReceived(data: data)
+            }
+        }
+    }
+    
+
+    
+    private func removeDarwinNotificationListener() {
+        let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
+        let observer = Unmanaged.passUnretained(self).toOpaque()
+        CFNotificationCenterRemoveEveryObserver(notificationCenter, observer)
+        NotificationCenter.default.removeObserver(self, name: ShareViewModel.localShareExtensionQueryNotificationName, object: nil)
+    }
+    
+    deinit {
+        removeDarwinNotificationListener()
     }
 }
 

@@ -19,9 +19,13 @@
 import RxSwift
 import Foundation
 import Photos
+import Atomics
 
 public final class AdapterService: AdapterDelegate {
     private var adapter: Adapter?
+    
+    // Atomic property to track if share extension has an active account
+    private var accountIsActive = ManagedAtomic<Bool>(false)
 
     var usernameLookupStatus = PublishSubject<LookupNameResponse>()
     private let disposeBag = DisposeBag()
@@ -30,7 +34,21 @@ public final class AdapterService: AdapterDelegate {
         print("[ShareExtension] AdapterService init - setting up adapter and delegate")
         self.adapter = adapter
         Adapter.delegate = self
+        self.startDaemon()
         print("[ShareExtension] AdapterService init completed")
+    }
+
+    func startDaemon() {
+        guard let adapter = self.adapter else { return }
+        
+        _ = adapter.initDaemon()
+        
+        // Start daemon - returns NO if already initialized (doing nothing), 
+        // or YES if it actually started the daemon
+        if adapter.startDaemon() {
+            // Daemon was actually started so set accounts active
+            accountIsActive.store(true, ordering: .relaxed)
+        }
     }
 
     func removeDelegate() {
@@ -45,13 +63,42 @@ public final class AdapterService: AdapterDelegate {
 
     func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
         print("[ShareExtension] sendSwarmMessage - accountId: \(accountId), conversationId: \(conversationId), message: \(message), parentId: \(parentId)")
-        adapter?.setAccountActive(accountId, active: true)
+        setAccountActive(accountId, newValue: true)
         adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
         print("[ShareExtension] sendSwarmMessage completed")
     }
 
     func setAccountActive(_ accountId: String, newValue: Bool) {
-        adapter?.setAccountActive(accountId, active: newValue)
+        if newValue {
+            // Only set account active if no account is currently active
+            if !accountIsActive.load(ordering: .relaxed) {
+                adapter?.setAccountActive(accountId, active: newValue)
+                updateShareExtensionAccountState(isActive: true)
+            }
+        } else {
+            adapter?.setAccountActive(accountId, active: newValue)
+        }
+    }
+
+    func pushNotificationReceived(data: [String: Any]) {
+        var notificationData = [String: String]()
+        for key in data.keys {
+            if let value = data[key] {
+                let valueString = String(describing: value)
+                let keyString = String(describing: key)
+                notificationData[keyString] = valueString
+            }
+        }
+        self.adapter?.pushNotificationReceived("", message: notificationData)
+    }
+
+    func updateShareExtensionAccountState(isActive: Bool) {
+        accountIsActive.store(isActive, ordering: .relaxed)
+    }
+    
+    /// Check if share extension has an active account
+    func hasActiveAccount() -> Bool {
+        return accountIsActive.load(ordering: .relaxed)
     }
 
     @discardableResult
@@ -100,7 +147,7 @@ public final class AdapterService: AdapterDelegate {
                 try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
                 print("[ShareExtension] File copied successfully")
 
-                self.adapter?.setAccountActive(accountId, active: true)
+                self.setAccountActive(accountId, newValue: true)
 
                 print("[ShareExtension] Calling adapter sendSwarmFile")
                 self.adapter?.sendSwarmFile(
