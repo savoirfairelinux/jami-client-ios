@@ -39,6 +39,8 @@
 	<string>Used to share your location with your contacts</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The microphone will be used for communication during a call.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Jami uses local network access to enable peer-to-peer file sharing and direct communication with contacts on the same network.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Used to save selected images</string>
 	<key>NSPhotoLibraryUsageDescription</key>
