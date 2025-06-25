@@ -50,34 +50,39 @@ public final class AdapterService: AdapterDelegate {
         adapter?.setAccountActive(accountId, active: newValue)
     }
 
-    @discardableResult
-    func sendSwarmFile(accountId: String, conversationId: String, filePath: URL, fileName: String, parentId: String) -> String? {
+    func sendSwarmFile(accountId: String, conversationId: String, filePath: URL, fileName: String, parentId: String) {
         guard filePath.startAccessingSecurityScopedResource() else {
-            return nil
+            return
         }
 
-        defer { filePath.stopAccessingSecurityScopedResource() }
+        defer {
+            filePath.stopAccessingSecurityScopedResource()
+        }
+
+        guard let duplicatedFilePath = CommonHelpers.createFileUrlForSwarm(fileName: fileName, accountId: accountId, conversationId: conversationId)?.path else {
+            return
+        }
+
         let fileManager = FileManager.default
-        let tempDirectory = NSTemporaryDirectory()
-        let duplicatedFilePath = (tempDirectory as NSString).appendingPathComponent(fileName)
 
         do {
-            if fileManager.fileExists(atPath: duplicatedFilePath) {
-                try fileManager.removeItem(atPath: duplicatedFilePath)
-            }
-            try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
-            adapter?.setAccountActive(accountId, active: true)
 
-            adapter?.sendSwarmFile(
+            try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
+
+            self.adapter?.setAccountActive(accountId, active: true)
+
+            self.adapter?.sendSwarmFile(
                 withName: fileName,
                 accountId: accountId,
                 conversationId: conversationId,
                 withFilePath: duplicatedFilePath,
                 parent: parentId
             )
-            return duplicatedFilePath
+            return
+
         } catch {
-            return nil
+            print("[ShareExtension] sendSwarmFile failed with error: \(error.localizedDescription)")
+            return
         }
     }
 
@@ -95,14 +100,6 @@ public final class AdapterService: AdapterDelegate {
         return result
     }
 
-    struct FileTransferStatus {
-        let transferId: String
-        let eventCode: Int
-        let accountId: String
-        let conversationId: String
-        let interactionId: String
-    }
-
     let fileTransferStatusSubject = ReplaySubject<FileTransferStatus>.create(bufferSize: 1)
 
     var fileTransferStatusStream: Observable<FileTransferStatus> {
@@ -110,7 +107,6 @@ public final class AdapterService: AdapterDelegate {
     }
 
     func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String) {
-
         let status = FileTransferStatus(
             transferId: transferId,
             eventCode: eventCode,
@@ -122,48 +118,13 @@ public final class AdapterService: AdapterDelegate {
         fileTransferStatusSubject.onNext(status)
     }
 
-    func setUpdatedConversations(accountId: String, conversationId: String) {
-        guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else {
-            return
-        }
-        var conversationData = [[String: String]]()
-        if let existingData = userDefaults.object(forKey: Constants.updatedConversations) as? [[String: String]] {
-            conversationData = existingData
-        }
-
-        for data in conversationData
-        where data[Constants.NotificationUserInfoKeys.accountID.rawValue] == accountId &&
-            data[Constants.NotificationUserInfoKeys.conversationID.rawValue] == conversationId {
-            return
-        }
-
-        let conversation = [
-            Constants.NotificationUserInfoKeys.accountID.rawValue: accountId,
-            Constants.NotificationUserInfoKeys.conversationID.rawValue: conversationId
-        ]
-
-        conversationData.append(conversation)
-        userDefaults.set(conversationData as Any, forKey: Constants.updatedConversations)
-    }
-
-    public struct NewInteraction {
-        public let conversationId: String
-        public let accountId: String
-        public let messageId: String
-        public let type: String
-        public let body: [String: Any]
-    }
-
     let newInteractionSubject = ReplaySubject<NewInteraction>.create(bufferSize: 1)
     var newInteractionStream: Observable<NewInteraction> {
         return newInteractionSubject.asObservable()
     }
 
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
-
         let bodyDict: [String: Any] = message.body.mapValues { $0 as Any }
-
-        let statusDict = message.status
 
         let interaction = NewInteraction(
             conversationId: conversationId,
@@ -174,14 +135,6 @@ public final class AdapterService: AdapterDelegate {
         )
 
         newInteractionSubject.onNext(interaction)
-    }
-
-    public struct MessageStatusChangedEvent {
-        public let conversationId: String
-        public let accountId: String
-        public let jamiId: String
-        public let messageId: String
-        public let status: MessageStatus
     }
 
     let messageStatusChangedSubject = ReplaySubject<MessageStatusChangedEvent>.create(bufferSize: 1)
@@ -200,18 +153,6 @@ public final class AdapterService: AdapterDelegate {
         )
 
         messageStatusChangedSubject.onNext(event)
-    }
-
-    func getTransferProgress(withId transferId: String, accountId: String, conversationId: String, isSwarm: Bool) -> [String: Int] {
-        let info = NSDataTransferInfo()
-        info.conversationId = conversationId
-
-        self.adapter?.dataTransferInfo(withId: transferId, accountId: accountId, with: info)
-
-        return [
-            "totalsize": Int(info.totalSize),
-            "progressbyte": Int(info.bytesProgress)
-        ]
     }
 
     private func contactProfileName(accountId: String, contactId: String, type: String) -> String? {
@@ -252,28 +193,11 @@ public final class AdapterService: AdapterDelegate {
         if let username = adapter?.getAccountDetails(accountId)["Account.username"] as? String {
             let jamiId = username.replacingOccurrences(of: "ring:", with: "")
             return lookupUsername(accountId: accountId, address: jamiId)
-                .map { [weak self] response in
+                .map { response in
                     (response.state == .found && !(response.name?.isEmpty ?? true)) ? (response.name!, .single) : (jamiId, .jamiid)
                 }
         }
         return .just(("", .single))
-    }
-
-    struct AccountDetails {
-        let accountId: String
-        let accountName: String
-        let accountAvatarType: AvatarType
-        let accountAvatar: String
-    }
-
-    func getDefaultAccount() -> String? {
-        if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
-            if let selectedAccountID = sharedDefaults.string(forKey: "SELECTED_ACCOUNT_ID") {
-                print("==========ACFTSET: \(selectedAccountID)")
-                return selectedAccountID
-            }
-        }
-        return nil
     }
 
     func resolveLocalAccountDetails(accountId: String) -> Single<AccountDetails> {
@@ -289,19 +213,6 @@ public final class AdapterService: AdapterDelegate {
     }
 
     func registeredNameFound(with response: LookupNameResponse) {
-        let status: UsernameValidationStatus
-
-        switch response.state {
-        case .found:
-            status = .alreadyTaken
-        case .notFound:
-            status = .valid
-        case .invalidName, .error:
-            status = .invalid
-        default:
-            return
-        }
-
         usernameLookupStatus.onNext(response)
     }
 
@@ -384,12 +295,26 @@ public final class AdapterService: AdapterDelegate {
     }
 }
 
-enum UsernameValidationStatus {
-    case empty, lookingUp, invalid, alreadyTaken, valid
+struct MessageStatusChangedEvent {
+    let conversationId: String
+    let accountId: String
+    let jamiId: String
+    let messageId: String
+    let status: MessageStatus
 }
 
-enum AvatarType: String {
-    case jamiid
-    case single
-    case group
+struct NewInteraction {
+    let conversationId: String
+    let accountId: String
+    let messageId: String
+    let type: String
+    let body: [String: Any]
+}
+
+struct FileTransferStatus {
+    let transferId: String
+    let eventCode: Int
+    let accountId: String
+    let conversationId: String
+    let interactionId: String
 }

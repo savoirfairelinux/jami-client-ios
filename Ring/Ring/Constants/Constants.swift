@@ -106,6 +106,8 @@ public class Constants: NSObject {
     @objc public static let notificationsCount = "notificationsCount"
     @objc public static let appIdentifier = "com.savoirfairelinux.jami"
 
+    public static let selectedAccountID = "SELECTED_ACCOUNT_ID"
+
     @objc public static let documentsPath: URL? = {
         return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?.appendingPathComponent("Documents")
     }()

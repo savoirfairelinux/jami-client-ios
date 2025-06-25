@@ -315,13 +315,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier)
                 let standardDefaults = UserDefaults.standard
 
-                if let selectedAccountID = sharedDefaults?.string(forKey: self.accountService.selectedAccountID),
+                if let selectedAccountID = sharedDefaults?.string(forKey: Constants.selectedAccountID),
                    let account = self.accountService.getAccount(fromAccountId: selectedAccountID) {
                     self.accountService.currentAccount = account
-                } else if let selectedAccountID = standardDefaults.string(forKey: self.accountService.selectedAccountID),
+                } else if let selectedAccountID = standardDefaults.string(forKey: Constants.selectedAccountID),
                           let account = self.accountService.getAccount(fromAccountId: selectedAccountID) {
                     self.accountService.currentAccount = account
-                    sharedDefaults?.set(account.id, forKey: self.accountService.selectedAccountID)
+                    sharedDefaults?.set(account.id, forKey: Constants.selectedAccountID)
                 }
 
                 guard let currentAccount = self.accountService.currentAccount else {

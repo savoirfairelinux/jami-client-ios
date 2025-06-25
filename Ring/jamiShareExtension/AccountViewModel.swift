@@ -18,6 +18,19 @@
 
 import RxSwift
 
+struct AccountDetails {
+    let accountId: String
+    let accountName: String
+    let accountAvatarType: AvatarType
+    let accountAvatar: String
+}
+
+enum AvatarType: String {
+    case jamiid
+    case single
+    case group
+}
+
 class AccountViewModel: ObservableObject, Identifiable, Equatable {
     let id: String
     @Published var name: String

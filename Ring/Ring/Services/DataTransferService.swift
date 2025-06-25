@@ -165,7 +165,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         if !conversation.isSwarm() {
             fileUrl = self.getFilePathForTransfer(forFile: displayName, accountID: conversation.accountId, conversationID: conversation.id)
         } else {
-            fileUrl = self.createFileUrlForSwarm(fileName: displayName, accountID: conversation.accountId, conversationID: conversation.id)
+            fileUrl = CommonHelpers.createFileUrlForSwarm(fileName: displayName, accountId: conversation.accountId, conversationId: conversation.id)
         }
         guard let imagePath = fileUrl else { return }
         do {
@@ -248,7 +248,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     func getFilePathForRecordings(forFile fileName: String, accountID: String, conversationID: String, isSwarm: Bool) -> URL? {
         if isSwarm {
-            return self.createFileUrlForSwarm(fileName: fileName, accountID: accountID, conversationID: conversationID)
+            return CommonHelpers.createFileUrlForSwarm(fileName: fileName, accountId: accountID, conversationId: conversationID)
         }
         return self.createFileUrlForDirectory(directory: Directories.recorded.rawValue,
                                               fileName: fileName,
@@ -270,37 +270,6 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             .appendingPathComponent(fileName)
         if FileManager.default.fileExists(atPath: pathUrl.path) {
             return pathUrl
-        }
-        return nil
-    }
-
-    /// create url to save file before sending for swarm conversation
-    func createFileUrlForSwarm(fileName: String, accountID: String, conversationID: String) -> URL? {
-        let fileNameOnly = (fileName as NSString).deletingPathExtension
-        let fileExtensionOnly = (fileName as NSString).pathExtension
-        guard let documentsURL = Constants.documentsPath else {
-            return nil
-        }
-        let directoryURL = documentsURL.appendingPathComponent(accountID)
-            .appendingPathComponent(Directories.conversation_data.rawValue)
-            .appendingPathComponent(conversationID)
-        var isDirectory = ObjCBool(false)
-        let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
-        if directoryExists && isDirectory.boolValue {
-            // check if file exists, if so add " (<duplicates+1>)" or "_<duplicates+1>"
-            // first check /.../AppData/Documents/directory/<fileNameOnly>.<fileExtensionOnly>
-            var finalFileName = fileNameOnly + "." + fileExtensionOnly
-            var filePathCheck = directoryURL.appendingPathComponent(finalFileName)
-            var fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
-            var duplicates = 2
-            while fileExists {
-                // check /.../AppData/Documents/directory/<fileNameOnly>_<duplicates>.<fileExtensionOnly>
-                finalFileName = fileNameOnly + "_" + String(duplicates) + "." + fileExtensionOnly
-                filePathCheck = directoryURL.appendingPathComponent(finalFileName)
-                fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
-                duplicates += 1
-            }
-            return filePathCheck
         }
         return nil
     }

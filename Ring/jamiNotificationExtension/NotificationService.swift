@@ -423,11 +423,11 @@ class NotificationService: UNNotificationServiceExtension {
 
             switch event {
             case .message:
-                self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
+                CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
                 self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
                 self.configureAndPresentNotification(config: notifConfig, type: LocalNotificationType.message)
             case .fileTransferDone:
-                self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
+                CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
                 // If the content is a URL then we have already downloaded the file and can present the notification,
                 // otherwise we need to download the file first, so add it to the items to present
                 if let url = URL(string: eventData.content) {
@@ -443,7 +443,7 @@ class NotificationService: UNNotificationServiceExtension {
             case .fileTransferInProgress:
                 self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
             case .invitation:
-                self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
+                CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
                 self.taskPropertyQueue.sync {
                     self.syncCompleted = true
                     self.itemsToPresent += 1
@@ -454,7 +454,7 @@ class NotificationService: UNNotificationServiceExtension {
                 self.verifyTasksStatus()
             case .activeCall:
                 guard let calls = eventData.calls, !calls.isEmpty else { return }
-                self.conversationUpdated(conversationId: eventData.conversationId, accountId: eventData.accountId)
+                CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
                 self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
                 self.configureAndPresentCallNotification(config: notifConfig, calls: calls, accountId: eventData.accountId)
             }
@@ -534,35 +534,6 @@ class NotificationService: UNNotificationServiceExtension {
         }
         notificationData.append(data)
         userDefaults.set(notificationData, forKey: Constants.notificationData)
-    }
-
-    private func conversationUpdated(conversationId: String, accountId: String) {
-        var conversationData = [String: String]()
-        conversationData[Constants.NotificationUserInfoKeys.conversationID.rawValue] = conversationId
-        conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] = accountId
-        self.setUpdatedConversations(conversation: conversationData)
-    }
-
-    private func setUpdatedConversations(conversation: [String: String]) {
-        /*
-         Save updated conversations so they can be reloaded when Jami
-         becomes active.
-         */
-        guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else {
-            return
-        }
-        var conversationData = [[String: String]]()
-        if let existingData = userDefaults.object(forKey: Constants.updatedConversations) as? [[String: String]] {
-            conversationData = existingData
-        }
-        for data in conversationData
-        where data[Constants.NotificationUserInfoKeys.conversationID.rawValue] ==
-            conversation[Constants.NotificationUserInfoKeys.conversationID.rawValue] {
-            return
-        }
-
-        conversationData.append(conversation)
-        userDefaults.set(conversationData, forKey: Constants.updatedConversations)
     }
 
     private func requestToDictionary(request: UNNotificationRequest) -> [String: String] {

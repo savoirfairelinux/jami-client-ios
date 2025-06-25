@@ -210,7 +210,7 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
         }
         self.accountService.updateCurrentAccount(account: account)
         if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
-            sharedDefaults.set(accountId, forKey: self.accountService.selectedAccountID)
+            sharedDefaults.set(accountId, forKey: Constants.selectedAccountID)
             return true
         }
         return false

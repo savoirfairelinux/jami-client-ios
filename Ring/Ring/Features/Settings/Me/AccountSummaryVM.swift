@@ -115,7 +115,7 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
         let (newSelectedAccountID, newState) = determinePostRemovalState()
 
         if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
-            sharedDefaults.set(newSelectedAccountID, forKey: self.accountService.selectedAccountID)
+            sharedDefaults.set(newSelectedAccountID, forKey: Constants.selectedAccountID)
         }
         statePublisher.emmitState(newState: newState)
     }

@@ -74,8 +74,6 @@ class AccountsService: AccountAdapterDelegate {
      logguer
      */
     private let log = SwiftyBeaver.self
-
-    let selectedAccountID = "SELECTED_ACCOUNT_ID"
     let boothModeEnabled = "BOOTH_MODE_ENABLED"
 
     /**
@@ -1003,7 +1001,7 @@ extension AccountsService {
             _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: account, accountURI: accountUri)
             self.currentAccount = newAccount
             if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
-                sharedDefaults.set(account, forKey: self.selectedAccountID)
+                sharedDefaults.set(account, forKey: Constants.selectedAccountID)
             }
             return true
         } catch {
@@ -1066,7 +1064,7 @@ extension AccountsService {
             currentAccount = account
         }
         if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
-            sharedDefaults.set(accountId, forKey: selectedAccountID)
+            sharedDefaults.set(accountId, forKey: Constants.selectedAccountID)
         }
         return nil
     }

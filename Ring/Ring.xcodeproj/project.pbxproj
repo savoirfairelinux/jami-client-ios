@@ -456,6 +456,10 @@
 		26EF35EB28E38DA200D97E14 /* MessageContentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */; };
 		26EF35EF29075A5300D97E14 /* MessageStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EE29075A5300D97E14 /* MessageStackView.swift */; };
 		26EFD7B42E2D59BB00B63F74 /* ScreenDimensionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7B32E2D59B600B63F74 /* ScreenDimensionsManager.swift */; };
+		26EFD7E32E2E944100B63F74 /* CommonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */; };
+		26EFD7E42E2E944100B63F74 /* CommonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */; };
+		26EFD7E52E2E944100B63F74 /* CommonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */; };
+		26EFD7E62E2E9F6B00B63F74 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
 		26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F5442C2C5815770069A7A4 /* WelcomeView.swift */; };
 		26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */; };
 		26F82D042D7A09AF00954A7B /* libnatpmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F82D032D7A09AE00954A7B /* libnatpmp.xcframework */; };
@@ -519,7 +523,6 @@
 		3D4181D42DDE33BF001BAD76 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB43812670140D00019CF6 /* libz.1.tbd */; };
 		3D4181D52DDE33BF001BAD76 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A961D1C2F6100E99CD9 /* libz.tbd */; };
 		3D4181D72DDE33E3001BAD76 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A951D1C2F6100E99CD9 /* libbz2.tbd */; };
-		3D4181D82DDE3412001BAD76 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
 		3D4181D92DDE3448001BAD76 /* libiconv.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D417D882DDE2841001BAD76 /* libiconv.2.tbd */; };
 		3D4181DC2DDE6C70001BAD76 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C436C2862561700B4BE73 /* Constants.swift */; };
 		3D48AB3D2E006C5A00924590 /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D48AB3C2E006C5100924590 /* ConversationViewModel.swift */; };
@@ -1131,6 +1134,7 @@
 		26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentVM.swift; sourceTree = "<group>"; };
 		26EF35EE29075A5300D97E14 /* MessageStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStackView.swift; sourceTree = "<group>"; };
 		26EFD7B32E2D59B600B63F74 /* ScreenDimensionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDimensionsManager.swift; sourceTree = "<group>"; };
+		26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHelpers.swift; sourceTree = "<group>"; };
 		26F5442C2C5815770069A7A4 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-release.entitlements"; sourceTree = "<group>"; };
@@ -2025,7 +2029,7 @@
 				3D41817D2DDE3120001BAD76 /* libavformat.xcframework in Frameworks */,
 				3D41819D2DDE3147001BAD76 /* libopendht.xcframework in Frameworks */,
 				3D4181AF2DDE315E001BAD76 /* libpjsip-simple.xcframework in Frameworks */,
-				3D4181D82DDE3412001BAD76 /* VideoToolbox.framework in Frameworks */,
+				26EFD7E62E2E9F6B00B63F74 /* VideoToolbox.framework in Frameworks */,
 				3D4181C92DDE317E001BAD76 /* libupnp.xcframework in Frameworks */,
 				3D4181B92DDE316A001BAD76 /* libsecp256k1.xcframework in Frameworks */,
 				3D41818D2DDE3133001BAD76 /* libhogweed.xcframework in Frameworks */,
@@ -2914,6 +2918,7 @@
 		043999EA1D1C2D9D00E99CD9 = {
 			isa = PBXGroup;
 			children = (
+				26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */,
 				2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */,
 				265C436C2862561700B4BE73 /* Constants.swift */,
 				6236602520091425002598C1 /* daemon */,
@@ -4470,6 +4475,7 @@
 				268C87EA2C1BA1F700593D7C /* BlockedContactsView.swift in Sources */,
 				26454FBF2B7FDEE900CFF06C /* AboutSwiftUIVM.swift in Sources */,
 				2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */,
+				26EFD7E42E2E944100B63F74 /* CommonHelpers.swift in Sources */,
 				0E320D52224ADF930070B515 /* DialpadViewController.swift in Sources */,
 				BB6690042A99043200875848 /* SharedActionsPresenter.swift in Sources */,
 				0E49096E1FEAC0DE005CAA50 /* CallsService.swift in Sources */,
@@ -4565,6 +4571,7 @@
 				26BB4389267017D400019CF6 /* Utils.mm in Sources */,
 				26A88C07266FFFC800888EED /* NotificationService.swift in Sources */,
 				26A88C1A267000F000888EED /* Adapter.mm in Sources */,
+				26EFD7E32E2E944100B63F74 /* CommonHelpers.swift in Sources */,
 				267CC6FC29D5B27600505E56 /* Data+Helpers.swift in Sources */,
 				26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */,
 				267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */,
@@ -4577,6 +4584,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26EFD7E52E2E944100B63F74 /* CommonHelpers.swift in Sources */,
 				3D0E69882DDCDBE70046FA3D /* ShareView.swift in Sources */,
 				3D6E7C582DDD058800C6EB24 /* Strings.swift in Sources */,
 				3DAAC4732DDD1AC500D94B71 /* Adapter.mm in Sources */,

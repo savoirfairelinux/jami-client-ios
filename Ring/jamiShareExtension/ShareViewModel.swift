@@ -182,7 +182,7 @@ class ShareViewModel: ObservableObject {
         let convsByAccount = adapterService.getConversationsByAccount()
         guard !convsByAccount.isEmpty else { return }
 
-        let defaultAccountId = adapterService.getDefaultAccount()
+        let defaultAccountId = getDefaultAccount()
 
         let sortedAccounts = convsByAccount.sorted { first, _ in
             first.key == defaultAccountId
@@ -267,7 +267,7 @@ class ShareViewModel: ObservableObject {
             """
 
             if let first = indicators.first {
-                self.adapterService.setUpdatedConversations(accountId: first.accountid, conversationId: first.convid)
+                CommonHelpers.setUpdatedConversations(accountId: first.accountid, conversationId: first.convid)
             }
         }
     }
@@ -307,35 +307,14 @@ class ShareViewModel: ObservableObject {
 
         adapterService.removeDelegate()
     }
-}
 
-enum DataTransferEvent: UInt32 {
-    case invalid = 0
-    case created
-    case unsupported
-    case waitPeerAcceptance
-    case waitHostAcceptance
-    case ongoing
-    case finished
-    case closedByHost
-    case closedByPeer
-    case invalidPathname
-    case unjoinablePeer
-
-    var description: String {
-        switch self {
-        case .invalid: return "Invalid transfer"
-        case .created: return "Transfer created"
-        case .unsupported: return "Transfer type unsupported"
-        case .waitPeerAcceptance: return "Waiting for peer to accept"
-        case .waitHostAcceptance: return "Waiting for host to accept"
-        case .ongoing: return "Transfer in progress"
-        case .finished: return "Transfer completed"
-        case .closedByHost: return "Transfer closed by sender"
-        case .closedByPeer: return "Transfer closed by receiver"
-        case .invalidPathname: return "Transfer failed: Invalid file path"
-        case .unjoinablePeer: return "Transfer failed: Peer unavailable"
+    func getDefaultAccount() -> String? {
+        if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
+            if let selectedAccountID = sharedDefaults.string(forKey: Constants.selectedAccountID) {
+                return selectedAccountID
+            }
         }
+        return nil
     }
 }
 

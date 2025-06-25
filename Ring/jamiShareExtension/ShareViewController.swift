@@ -21,7 +21,8 @@ import SwiftUI
 import Social
 import RxSwift
 
-@objc class ShareViewController: UIViewController {
+@objc
+class ShareViewController: UIViewController {
     private var viewModel: ShareViewModel!
 
     override func viewDidLoad() {

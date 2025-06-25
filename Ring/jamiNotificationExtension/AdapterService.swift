@@ -82,29 +82,6 @@ class AdapterService {
         case unknown
     }
 
-    enum DataTransferEventCode: Int {
-        case invalid
-        case created
-        case unsupported
-        case waitPeeracceptance
-        case waitHostAcceptance
-        case ongoing
-        case finished
-        case closedByHost
-        case closedByPeer
-        case invalidPathname
-        case unjoinablePeer
-
-        func isCompleted() -> Bool {
-            switch self {
-            case .finished, .closedByHost, .closedByPeer, .unjoinablePeer, .invalidPathname:
-                return true
-            default:
-                return false
-            }
-        }
-    }
-
     private let maxSizeForAutoaccept = 20 * 1024 * 1024
 
     private var adapter: Adapter!
@@ -216,7 +193,7 @@ extension AdapterService: AdapterDelegate {
     func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String) {
         guard let handler = self.eventHandler,
               let data = loadingFiles[transferId],
-              let code = DataTransferEventCode(rawValue: eventCode),
+              let code = DataTransferEvent(rawValue: UInt32(eventCode)),
               code.isCompleted() else { return }
         handler(.fileTransferDone, data)
         loadingFiles.removeValue(forKey: transferId)

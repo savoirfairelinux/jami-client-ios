@@ -22,17 +22,6 @@
 import RxSwift
 import SwiftyBeaver
 
-/**
- Represents the status of a username validation request when the user is typing his username
- */
-enum UsernameValidationStatus {
-    case empty
-    case lookingUp
-    case invalid
-    case alreadyTaken
-    case valid
-}
-
 let registeredNamesKey = "REGISTERED_NAMES_KEY"
 
 class NameService {
