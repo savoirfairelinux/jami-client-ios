@@ -18,28 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+#import "ObjcTypes.h"
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(int, MessageStatus)  {
-    MessageStatusUnknown = 0,
-    MessageStatusSending,
-    MessageStatusSent,
-    MessageStatusDisplayed,
-    MessageStatusFailure,
-    MessageStatusCanceled
-};
-
-@interface SwarmMessageWrap : NSObject
-
-@property (nonatomic, strong) NSString* id;
-@property (nonatomic, strong) NSString* type;
-@property (nonatomic, strong) NSString* linearizedParent;
-@property (nonatomic, strong) NSDictionary<NSString *, NSString *>* body;
-@property (nonatomic, strong) NSArray<NSDictionary<NSString *, NSString *> *>* reactions;
-@property (nonatomic, strong) NSArray<NSDictionary<NSString *, NSString *> *>* editions;
-@property (nonatomic, strong) NSDictionary<NSString *, NSNumber* >* status;
-
-@end
 
 @protocol MessagesAdapterDelegate;
 

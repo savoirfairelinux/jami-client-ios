@@ -287,6 +287,7 @@
 		2625814E2B4DE40200314C42 /* MessagePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814D2B4DE40200314C42 /* MessagePanelView.swift */; };
 		262581502B4EF15D00314C42 /* MessagePanelVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */; };
 		262F1CFA2C88BBBC002BF597 /* LinkToAccountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F1CF92C88BBBC002BF597 /* LinkToAccountVM.swift */; };
+		263289A42E16B965003D9DA8 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 263289A32E16B965003D9DA8 /* Atomics */; };
 		2632D2F12CA5A82F00E60096 /* ImportFromArchiveVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F02CA5A82F00E60096 /* ImportFromArchiveVM.swift */; };
 		2632D2F32CA5AF9100E60096 /* ConnectToManagerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F22CA5AF9100E60096 /* ConnectToManagerVM.swift */; };
 		2632D2F52CA5AFBB00E60096 /* ConnectSipVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F42CA5AFBB00E60096 /* ConnectSipVM.swift */; };
@@ -426,7 +427,6 @@
 		26BB43822670141100019CF6 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB43812670140D00019CF6 /* libz.1.tbd */; };
 		26BB43842670144800019CF6 /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB43832670144500019CF6 /* libz.1.2.8.tbd */; };
 		26BB43852670150E00019CF6 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A951D1C2F6100E99CD9 /* libbz2.tbd */; };
-		26BB4389267017D400019CF6 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26BB4388267017D400019CF6 /* Utils.mm */; };
 		26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438A2670191E00019CF6 /* AdapterDelegate.swift */; };
 		26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438C267019FC00019CF6 /* AdapterService.swift */; };
 		26BC15EE29302B00003FC8D1 /* ContactMessageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */; };
@@ -460,6 +460,9 @@
 		26EFD7E42E2E944100B63F74 /* CommonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */; };
 		26EFD7E52E2E944100B63F74 /* CommonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */; };
 		26EFD7E62E2E9F6B00B63F74 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
+		26EFD7F92E2EB38300B63F74 /* VideoUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7F82E2EB38300B63F74 /* VideoUtils.mm */; };
+		26EFD7FB2E2EBA4500B63F74 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
+		26EFD7FC2E2EBA4500B63F74 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
 		26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F5442C2C5815770069A7A4 /* WelcomeView.swift */; };
 		26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */; };
 		26F82D042D7A09AF00954A7B /* libnatpmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F82D032D7A09AE00954A7B /* libnatpmp.xcframework */; };
@@ -531,7 +534,6 @@
 		3DAAC4702DDD1AC500D94B71 /* AdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAC4692DDD1AC500D94B71 /* AdapterDelegate.swift */; };
 		3DAAC4712DDD1AC500D94B71 /* AdapterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAC46C2DDD1AC500D94B71 /* AdapterService.swift */; };
 		3DAAC4732DDD1AC500D94B71 /* Adapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAC46E2DDD1AC500D94B71 /* Adapter.mm */; };
-		3DAAC4742DDD1AC500D94B71 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAC46F2DDD1AC500D94B71 /* Utils.mm */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
 		4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66E236CBC6900747177 /* ContactPickerViewController.swift */; };
@@ -1098,8 +1100,6 @@
 		26BB437F2670140200019CF6 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		26BB43812670140D00019CF6 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 		26BB43832670144500019CF6 /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
-		26BB4387267017D400019CF6 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
-		26BB4388267017D400019CF6 /* Utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
 		26BB438A2670191E00019CF6 /* AdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterDelegate.swift; sourceTree = "<group>"; };
 		26BB438C267019FC00019CF6 /* AdapterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterService.swift; sourceTree = "<group>"; };
 		26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageVM.swift; sourceTree = "<group>"; };
@@ -1135,6 +1135,9 @@
 		26EF35EE29075A5300D97E14 /* MessageStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStackView.swift; sourceTree = "<group>"; };
 		26EFD7B32E2D59B600B63F74 /* ScreenDimensionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDimensionsManager.swift; sourceTree = "<group>"; };
 		26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHelpers.swift; sourceTree = "<group>"; };
+		26EFD7F72E2EB35200B63F74 /* MediaUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaUtils.h; sourceTree = "<group>"; };
+		26EFD7F82E2EB38300B63F74 /* VideoUtils.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = VideoUtils.mm; sourceTree = "<group>"; };
+		26EFD8012E2ED72400B63F74 /* ObjcTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcTypes.h; sourceTree = "<group>"; };
 		26F5442C2C5815770069A7A4 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-release.entitlements"; sourceTree = "<group>"; };
@@ -1686,10 +1689,8 @@
 		3D6E7C4A2DDCFF7A00C6EB24 /* jamiShareExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jamiShareExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DAAC4692DDD1AC500D94B71 /* AdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterDelegate.swift; sourceTree = "<group>"; };
 		3DAAC46A2DDD1AC500D94B71 /* Adapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adapter.h; sourceTree = "<group>"; };
-		3DAAC46B2DDD1AC500D94B71 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		3DAAC46C2DDD1AC500D94B71 /* AdapterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterService.swift; sourceTree = "<group>"; };
 		3DAAC46E2DDD1AC500D94B71 /* Adapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Adapter.mm; sourceTree = "<group>"; };
-		3DAAC46F2DDD1AC500D94B71 /* Utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
 		3DD777512E046A3000023295 /* jamiShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = jamiShareExtension.entitlements; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
@@ -2060,6 +2061,7 @@
 				3D41817F2DDE3122001BAD76 /* libavutil.xcframework in Frameworks */,
 				3D4181912DDE3138001BAD76 /* libixml.xcframework in Frameworks */,
 				3D4181AB2DDE3159001BAD76 /* libpjmedia.xcframework in Frameworks */,
+				263289A42E16B965003D9DA8 /* Atomics in Frameworks */,
 				3D4181BF2DDE3172001BAD76 /* libsrtp.xcframework in Frameworks */,
 				3D41818B2DDE3131001BAD76 /* libgnutls.xcframework in Frameworks */,
 				3D4181742DDE2FEA001BAD76 /* libjami.xcframework in Frameworks */,
@@ -2837,8 +2839,6 @@
 				557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */,
 				04399AA71D1C304300E99CD9 /* DRingAdapter.h */,
 				04399AA81D1C304300E99CD9 /* DRingAdapter.mm */,
-				04399AAA1D1C304300E99CD9 /* Utils.h */,
-				04399AAB1D1C304300E99CD9 /* Utils.mm */,
 				563AEC741EA66487003A5641 /* AccountCreation */,
 				563AEC731EA6627F003A5641 /* NameRegistration */,
 				62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */,
@@ -2857,6 +2857,8 @@
 				26DA813124B641A5006C6E23 /* ProfilesAdapter.mm */,
 				26D08ABC2696296300E37574 /* RequestsAdapter.h */,
 				26D08ABD2696296300E37574 /* RequestsAdapter.mm */,
+				26EFD7F72E2EB35200B63F74 /* MediaUtils.h */,
+				26EFD7F82E2EB38300B63F74 /* VideoUtils.mm */,
 			);
 			path = Bridging;
 			sourceTree = "<group>";
@@ -2918,6 +2920,7 @@
 		043999EA1D1C2D9D00E99CD9 = {
 			isa = PBXGroup;
 			children = (
+				26EFD7FA2E2EB9EE00B63F74 /* CommonObjc */,
 				26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */,
 				2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */,
 				265C436C2862561700B4BE73 /* Constants.swift */,
@@ -3619,8 +3622,6 @@
 				26A88C18267000F000888EED /* Adapter.h */,
 				26A88C19267000F000888EED /* Adapter.mm */,
 				26A88C17267000F000888EED /* JamiNotificationExtension-Bridging-Header.h */,
-				26BB4387267017D400019CF6 /* Utils.h */,
-				26BB4388267017D400019CF6 /* Utils.mm */,
 				26BB438A2670191E00019CF6 /* AdapterDelegate.swift */,
 				26BB438C267019FC00019CF6 /* AdapterService.swift */,
 				BB91FAA9292EA26900BB41C1 /* EventData.swift */,
@@ -3649,6 +3650,16 @@
 				26FDF4182C1101C2009D036B /* JamiBaseUITest.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		26EFD7FA2E2EB9EE00B63F74 /* CommonObjc */ = {
+			isa = PBXGroup;
+			children = (
+				04399AAA1D1C304300E99CD9 /* Utils.h */,
+				04399AAB1D1C304300E99CD9 /* Utils.mm */,
+				26EFD8012E2ED72400B63F74 /* ObjcTypes.h */,
+			);
+			path = CommonObjc;
 			sourceTree = "<group>";
 		};
 		26F5442B2C5815640069A7A4 /* Views */ = {
@@ -3722,8 +3733,6 @@
 				3DAAC46E2DDD1AC500D94B71 /* Adapter.mm */,
 				3DAAC4692DDD1AC500D94B71 /* AdapterDelegate.swift */,
 				3DAAC46C2DDD1AC500D94B71 /* AdapterService.swift */,
-				3DAAC46B2DDD1AC500D94B71 /* Utils.h */,
-				3DAAC46F2DDD1AC500D94B71 /* Utils.mm */,
 				3D0E69792DDCD9C80046FA3D /* ShareViewController.swift */,
 				3D0E697E2DDCD9C80046FA3D /* Info.plist */,
 				3D0E69872DDCDBE70046FA3D /* ShareView.swift */,
@@ -3945,6 +3954,7 @@
 			);
 			name = jamiShareExtension;
 			packageProductDependencies = (
+				263289A32E16B965003D9DA8 /* Atomics */,
 			);
 			productName = jamiShareExtension;
 			productReference = 3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */;
@@ -4359,6 +4369,7 @@
 				263C16832D9DBCE6008E102C /* ThreadSafeQueueHelper.swift in Sources */,
 				1A5DC03D1F35678D0075E8EF /* RequestItem.swift in Sources */,
 				2659F65827483656009107F1 /* VideoManager.swift in Sources */,
+				26EFD7F92E2EB38300B63F74 /* VideoUtils.mm in Sources */,
 				262581502B4EF15D00314C42 /* MessagePanelVM.swift in Sources */,
 				263C16662D94E1BA008E102C /* CallManagementService.swift in Sources */,
 				BB3AB06C29316FA6006906BA /* ViewDidLoadModifier.swift in Sources */,
@@ -4568,7 +4579,6 @@
 				265C436B286254C900B4BE73 /* Constants.swift in Sources */,
 				2637E5692DDE662200ACCF91 /* Constants.swift in Sources */,
 				26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */,
-				26BB4389267017D400019CF6 /* Utils.mm in Sources */,
 				26A88C07266FFFC800888EED /* NotificationService.swift in Sources */,
 				26A88C1A267000F000888EED /* Adapter.mm in Sources */,
 				26EFD7E32E2E944100B63F74 /* CommonHelpers.swift in Sources */,
@@ -4576,6 +4586,7 @@
 				26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */,
 				267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */,
 				BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */,
+				26EFD7FB2E2EBA4500B63F74 /* Utils.mm in Sources */,
 				449E736728D9F86A00CBF564 /* Strings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4590,9 +4601,9 @@
 				3DAAC4732DDD1AC500D94B71 /* Adapter.mm in Sources */,
 				3D0E697A2DDCD9C80046FA3D /* ShareViewController.swift in Sources */,
 				3D4181DC2DDE6C70001BAD76 /* Constants.swift in Sources */,
-				3DAAC4742DDD1AC500D94B71 /* Utils.mm in Sources */,
 				3D48AB3D2E006C5A00924590 /* ConversationViewModel.swift in Sources */,
 				3D3E68CB2DEF657200E6203F /* VCardUtils.swift in Sources */,
+				26EFD7FC2E2EBA4500B63F74 /* Utils.mm in Sources */,
 				3D1D839A2DE60E9B00D4BD9E /* ShareViewModel.swift in Sources */,
 				3DAAC4702DDD1AC500D94B71 /* AdapterDelegate.swift in Sources */,
 				3D48AB412E00709D00924590 /* AccountViewModel.swift in Sources */,
@@ -5792,6 +5803,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		263289A32E16B965003D9DA8 /* Atomics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 623196842BAE498900C2252C /* XCRemoteSwiftPackageReference "swift-atomics" */;
+			productName = Atomics;
+		};
 		5593D7D22B7FE00A00DA109C /* MCEmojiPicker */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5593D7D12B7FE00A00DA109C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;

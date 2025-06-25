@@ -30,21 +30,38 @@ class ShareViewModel: ObservableObject {
     @Published var accountList: [AccountViewModel] = []
     @Published var conversationsByAccount: [String: [ConversationViewModel]] = [:]
     @Published var transmissionSummary: String = ""
+    @Published var shouldCloseExtension: Bool = false
+    @Published var isLoading: Bool = true
     var transmissionStatus: [String: NewStatusIndicator] = [:]
 
     init() {
         self.adapter = Adapter()
-        self.adapter.initDaemon()
-        self.adapter.startDaemon()
         self.adapterService = AdapterService(withAdapter: adapter)
 
-        fetchAccountsAndConversations()
+        // Check if daemon can be started (waits up to 10 seconds for notification extension)
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
 
-        subscribeToNewInteractions()
-        subscribeToFileTransferStatus()
-        subscribeToMessageStatusChanged()
+            let canStart = self.adapterService.canStartDaemon()
+            if canStart {
+                self.adapterService.startDaemon()
 
-        startStallMonitoring()
+                self.subscribeToNewInteractions()
+                self.subscribeToFileTransferStatus()
+                self.subscribeToMessageStatusChanged()
+
+                self.startStallMonitoring()
+            }
+
+            DispatchQueue.main.async {[weak self] in
+                guard let self = self else { return }
+                self.isLoading = false
+                self.shouldCloseExtension = !canStart
+                if canStart {
+                    self.fetchAccountsAndConversations()
+                }
+            }
+        }
     }
 
     private func subscribeToNewInteractions() {
@@ -200,8 +217,9 @@ class ShareViewModel: ObservableObject {
             }
 
             self.conversationsByAccount[accountId] = conversationViewModels
-            adapterService.setAccountActive(accountId, newValue: false)
         }
+
+        adapterService.setAllAccountsInactive()
     }
 
     func sendMessage(accountId: String, conversationId: String, message: String, parentId: String? = nil) {
@@ -296,9 +314,7 @@ class ShareViewModel: ObservableObject {
     }
 
     func closeShareExtension() {
-        for account in self.accountList {
-            adapterService.setAccountActive(account.id, newValue: false)
-        }
+        adapterService.setAllAccountsInactive()
 
         if let timer = stallTimer {
             timer.invalidate()

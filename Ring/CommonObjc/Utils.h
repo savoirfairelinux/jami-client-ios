@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2021 -2022 Savoir-faire Linux Inc.
-
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2016-2019 Savoir-faire Linux Inc.
+ *
+ *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,7 +15,8 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+ * USA.
  */
 
 #import <Foundation/Foundation.h>
@@ -24,16 +25,16 @@
 #import <string>
 #import <vector>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface Utils : NSObject
 
++ (NSArray*)vectorToArray:(const std::vector<std::string>&)vector;
 + (NSMutableDictionary*)mapToDictionnary:
     (const std::map<std::string, std::string>&)map;
-+ (std::vector<uint8_t>)vectorOfUInt8FromData:(NSData*)data;
-+ (NSArray*)vectorOfMapsToArray: (const std::vector<std::map<std::string, std::string>>&)vectorOfMaps;
 + (std::map<std::string, std::string>)dictionnaryToMap:(NSDictionary*)dict;
++ (NSArray*)vectorOfMapsToArray:(const std::vector<std::map<std::string, std::string>>&)vectorOfMaps;
++ (NSData*)dataFromVectorOfUInt8:(std::vector<uint8_t>)vectorOfUInt8;
++ (std::vector<uint8_t>)vectorOfUInt8FromData:(NSData*)data;
++ (std::vector<std::map<std::string, std::string>>)arrayOfDictionnarisToVectorOfMap:(NSArray*)dictionaries;
++ (NSMutableDictionary*)mapToDictionnaryWithInt:(const std::map<std::string, int32_t>&)map;
 
 @end
-
-NS_ASSUME_NONNULL_END
