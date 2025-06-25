@@ -50,25 +50,56 @@ public final class AdapterService: AdapterDelegate {
         adapter?.setAccountActive(accountId, active: newValue)
     }
 
+    func createFileUrlForSwarm(fileName: String, accountId: String, conversationId: String) -> URL? {
+        let fileNameOnly = (fileName as NSString).deletingPathExtension
+        let fileExtensionOnly = (fileName as NSString).pathExtension
+        guard let documentsURL = Constants.documentsPath else {
+            return nil
+        }
+        let directoryURL = documentsURL.appendingPathComponent(accountId)
+            .appendingPathComponent("conversation_data")
+            .appendingPathComponent(conversationId)
+        var isDirectory = ObjCBool(false)
+        let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
+        if directoryExists && isDirectory.boolValue {
+            var finalFileName = fileNameOnly + "." + fileExtensionOnly
+            var filePathCheck = directoryURL.appendingPathComponent(finalFileName)
+            var fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
+            var duplicates = 2
+            while fileExists {
+                finalFileName = fileNameOnly + "_" + String(duplicates) + "." + fileExtensionOnly
+                filePathCheck = directoryURL.appendingPathComponent(finalFileName)
+                fileExists = FileManager.default.fileExists(atPath: filePathCheck.path, isDirectory: &isDirectory)
+                duplicates += 1
+            }
+            return filePathCheck
+        }
+        return nil
+    }
+
     @discardableResult
     func sendSwarmFile(accountId: String, conversationId: String, filePath: URL, fileName: String, parentId: String) -> String? {
         guard filePath.startAccessingSecurityScopedResource() else {
             return nil
         }
 
-        defer { filePath.stopAccessingSecurityScopedResource() }
+        defer {
+            filePath.stopAccessingSecurityScopedResource()
+        }
+
+        guard let duplicatedFilePath = self.createFileUrlForSwarm(fileName: fileName, accountId: accountId, conversationId: conversationId)?.path else {
+            return nil
+        }
+
         let fileManager = FileManager.default
-        let tempDirectory = NSTemporaryDirectory()
-        let duplicatedFilePath = (tempDirectory as NSString).appendingPathComponent(fileName)
 
         do {
-            if fileManager.fileExists(atPath: duplicatedFilePath) {
-                try fileManager.removeItem(atPath: duplicatedFilePath)
-            }
-            try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
-            adapter?.setAccountActive(accountId, active: true)
 
-            adapter?.sendSwarmFile(
+            try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
+
+            self.adapter?.setAccountActive(accountId, active: true)
+
+            self.adapter?.sendSwarmFile(
                 withName: fileName,
                 accountId: accountId,
                 conversationId: conversationId,
@@ -76,7 +107,10 @@ public final class AdapterService: AdapterDelegate {
                 parent: parentId
             )
             return duplicatedFilePath
+
         } catch {
+            print("[ShareExtension] sendSwarmFile failed with error: \(error.localizedDescription)")
+            print("[ShareExtension] Error details: \(error)")
             return nil
         }
     }
@@ -110,6 +144,14 @@ public final class AdapterService: AdapterDelegate {
     }
 
     func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String) {
+        print("[ShareExtension] dataTransferEvent - transferId: \(transferId), eventCode: \(eventCode), accountId: \(accountId), conversationId: \(conversationId), interactionId: \(interactionId)")
+
+        // Log human readable event description
+        if let dataTransferEvent = DataTransferEvent(rawValue: UInt32(eventCode)) {
+            print("[ShareExtension] Transfer event: \(dataTransferEvent.description)")
+        } else {
+            print("[ShareExtension] Unknown transfer event code: \(eventCode)")
+        }
 
         let status = FileTransferStatus(
             transferId: transferId,
@@ -160,6 +202,15 @@ public final class AdapterService: AdapterDelegate {
     }
 
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
+        print("[ShareExtension] newInteraction - conversationId: \(conversationId), accountId: \(accountId), messageId: \(message.id), type: \(message.type)")
+
+        // Log file transfer related interactions
+        if message.type == "application/data-transfer+json" {
+            print("[ShareExtension] File transfer interaction detected")
+            if let body = message.body["body"] as? String {
+                print("[ShareExtension] Transfer body: \(body)")
+            }
+        }
 
         let bodyDict: [String: Any] = message.body.mapValues { $0 as Any }
 
