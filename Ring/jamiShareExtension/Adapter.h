@@ -155,4 +155,6 @@ typedef NS_ENUM(UInt32, NSDataTransferFlags)  {
 
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId;
 
+- (void)pushNotificationReceived:(NSString *) from message:(NSDictionary*) data;
+
 @end
