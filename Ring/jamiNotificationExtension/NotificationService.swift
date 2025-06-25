@@ -63,8 +63,16 @@ import Atomics
 // swiftlint:disable file_length
 
 protocol DarwinNotificationHandler {
-    func listenToMainAppResponse(completion: @escaping (Bool) -> Void)
-    func removeObserver()
+    func checkDarwinNotificationResponse(
+        queryNotification: CFString,
+        responseNotification: CFString,
+        localNotificationName: Notification.Name,
+        setupAction: (() -> Void)?
+    ) -> Bool
+
+    func listenForNotificationResponse(responseNotification: CFString, localNotificationName: NSNotification.Name, completion: @escaping (Bool) -> Void)
+
+    func removeNotificationObserver(responseNotification: CFString, localNotificationName: Notification.Name)
 }
 
 enum NotificationField: String {
@@ -212,6 +220,7 @@ class NotificationService: UNNotificationServiceExtension {
     typealias LocalNotification = (content: UNMutableNotificationContent, type: LocalNotificationType)
 
     private static let localNotificationName = Notification.Name(Constants.appIdentifier + ".appActive.internal")
+    private static let localShareExtensionNotificationName = Notification.Name(Constants.appIdentifier + ".shareExtensionActive.internal")
 
     private let notificationTimeout = DispatchTimeInterval.seconds(25)
     private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
@@ -249,9 +258,15 @@ class NotificationService: UNNotificationServiceExtension {
         httpStreamHandler.invalidateAndCancelSession()
     }
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupNotificationExtensionQueryListener()
+    }
+    
     // Entry point for processing incoming notification requests.
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
+        setupNotificationExtensionQueryListener()
 
         Task {
             self.processNotificationRequest(request)
@@ -269,10 +284,15 @@ class NotificationService: UNNotificationServiceExtension {
             return
         }
 
-        // Save notification data so that if the main app is active, the extension can let the app handle notification
+        // Save notification data so that if the main app or share extension is active, the extension can let them handle notification
         saveDataIfNeeded(data: requestData)
         guard !appIsActive() else {
             log("App is in foreground")
+            return
+        }
+
+        guard !shareExtensionHasAccountActive(accountId: accountId) else {
+            log("Share extension has this account active")
             return
         }
 
@@ -508,22 +528,52 @@ class NotificationService: UNNotificationServiceExtension {
     }
 
     private func appIsActive() -> Bool {
-        let group = DispatchGroup()
-        defer {
-            self.removeObserver()
-            group.leave()
+        return checkDarwinNotificationResponse(
+            queryNotification: Constants.notificationReceived,
+            responseNotification: Constants.notificationAppIsActive,
+            localNotificationName: NotificationService.localNotificationName,
+            setupAction: nil
+        )
+    }
+    
+    private func shareExtensionHasAccountActive(accountId: String) -> Bool {
+        return checkDarwinNotificationResponse(
+            queryNotification: Constants.notificationShareExtensionQuery,
+            responseNotification: Constants.notificationShareExtensionResponse,
+            localNotificationName: NotificationService.localShareExtensionNotificationName,
+            setupAction: { [weak self] in
+                // Store the account ID we're querying in shared storage
+                guard let self = self else { return }
+                if let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
+                    userDefaults.set(accountId, forKey: Constants.queriedAccountId)
+                }
+            }
+        )
+    }
+    
+    private func setupNotificationExtensionQueryListener() {
+        let observer = Unmanaged.passUnretained(self).toOpaque()
+        
+        CFNotificationCenterAddObserver(notificationCenter,
+                                        observer, { (_, observer, _, _, _) in
+            guard let observer = observer else { return }
+            let notificationService = Unmanaged<NotificationService>.fromOpaque(observer).takeUnretainedValue()
+            notificationService.handleNotificationExtensionQuery()
+        },
+                                        Constants.notificationExtensionQuery,
+                                        nil,
+                                        .deliverImmediately)
+    }
+    
+    private func handleNotificationExtensionQuery() {
+        // Respond if we have an active account
+        if accountIsActive.load(ordering: .relaxed) {
+            CFNotificationCenterPostNotification(notificationCenter,
+                                               CFNotificationName(Constants.notificationExtensionResponse),
+                                               nil,
+                                               nil,
+                                               true)
         }
-        var appIsActive = false
-        group.enter()
-        // post darwin notification and wait for the answer from the main app. If answer received app is active
-        self.listenToMainAppResponse { _ in
-            appIsActive = true
-        }
-        CFNotificationCenterPostNotification(notificationCenter, CFNotificationName(Constants.notificationReceived), nil, nil, true)
-        // wait fro 300 milliseconds. If no answer from main app is received app is not active.
-        _ = group.wait(timeout: .now() + 0.3)
-
-        return appIsActive
     }
 
     private func saveDataIfNeeded(data: [String: String]) {
@@ -737,28 +787,68 @@ extension NotificationService {
 
 // MARK: DarwinNotificationHandler
 extension NotificationService: DarwinNotificationHandler {
-    func listenToMainAppResponse(completion: @escaping (Bool) -> Void) {
+    func checkDarwinNotificationResponse(
+        queryNotification: CFString,
+        responseNotification: CFString,
+        localNotificationName: Notification.Name,
+        setupAction: (() -> Void)?
+    ) -> Bool {
+        let group = DispatchGroup()
+        defer {
+            self.removeNotificationObserver(responseNotification: responseNotification, localNotificationName: localNotificationName)
+            group.leave()
+        }
+        var hasResponse = false
+        group.enter()
+
+        setupAction?()
+
+        self.listenForNotificationResponse(responseNotification: responseNotification, localNotificationName: localNotificationName) { _ in
+            hasResponse = true
+        }
+
+        CFNotificationCenterPostNotification(notificationCenter, CFNotificationName(queryNotification), nil, nil, true)
+
+        _ = group.wait(timeout: .now() + 0.3)
+
+        return hasResponse
+    }
+
+    func listenForNotificationResponse(responseNotification: CFString, localNotificationName: NSNotification.Name, completion: @escaping (Bool) -> Void) {
         let observer = Unmanaged.passUnretained(self).toOpaque()
-        CFNotificationCenterAddObserver(notificationCenter,
-                                        observer, { (_, _, _, _, _) in
-                                            NotificationCenter.default.post(name: NotificationService.localNotificationName,
-                                                                            object: nil,
-                                                                            userInfo: nil)
-                                        },
-                                        Constants.notificationAppIsActive,
-                                        nil,
-                                        .deliverImmediately)
-        NotificationCenter.default.addObserver(forName: NotificationService.localNotificationName, object: nil, queue: nil) { _ in
+
+        if responseNotification == Constants.notificationAppIsActive {
+            CFNotificationCenterAddObserver(notificationCenter,
+                                            observer, { (_, _, _, _, _) in
+                NotificationCenter.default.post(name: NotificationService.localNotificationName,
+                                                object: nil,
+                                                userInfo: nil)
+            },
+                                            responseNotification,
+                                            nil,
+                                            .deliverImmediately)
+        } else if responseNotification == Constants.notificationShareExtensionResponse {
+            CFNotificationCenterAddObserver(notificationCenter,
+                                            observer, { (_, _, _, _, _) in
+                NotificationCenter.default.post(name: NotificationService.localShareExtensionNotificationName,
+                                                object: nil,
+                                                userInfo: nil)
+            },
+                                            responseNotification,
+                                            nil,
+                                            .deliverImmediately)
+        }
+
+        NotificationCenter.default.addObserver(forName: localNotificationName, object: nil, queue: nil) { _ in
             completion(true)
         }
     }
 
-    func removeObserver() {
+    func removeNotificationObserver(responseNotification: CFString, localNotificationName: Notification.Name) {
         let observer = Unmanaged.passUnretained(self).toOpaque()
         CFNotificationCenterRemoveEveryObserver(notificationCenter, observer)
-        NotificationCenter.default.removeObserver(self, name: NotificationService.localNotificationName, object: nil)
+        NotificationCenter.default.removeObserver(self, name: localNotificationName, object: nil)
     }
-
 }
 
 // MARK: Present and update notifications
