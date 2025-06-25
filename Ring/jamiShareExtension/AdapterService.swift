@@ -45,13 +45,49 @@ public final class AdapterService: AdapterDelegate {
 
     func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
         print("[ShareExtension] sendSwarmMessage - accountId: \(accountId), conversationId: \(conversationId), message: \(message), parentId: \(parentId)")
-        adapter?.setAccountActive(accountId, active: true)
+        setAccountActive(accountId, newValue: true)
         adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
         print("[ShareExtension] sendSwarmMessage completed")
     }
 
     func setAccountActive(_ accountId: String, newValue: Bool) {
         adapter?.setAccountActive(accountId, active: newValue)
+        
+        // Track account state in shared UserDefaults for notification extension
+        updateShareExtensionAccountState(accountId: accountId, isActive: newValue)
+    }
+
+    func pushNotificationReceived(data: [String: Any]) {
+        var notificationData = [String: String]()
+        for key in data.keys {
+            if let value = data[key] {
+                let valueString = String(describing: value)
+                let keyString = String(describing: key)
+                notificationData[keyString] = valueString
+            }
+        }
+        self.adapter?.pushNotificationReceived("", message: notificationData)
+    }
+
+    private func updateShareExtensionAccountState(accountId: String, isActive: Bool) {
+        guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else {
+            return
+        }
+        
+        let shareExtensionActiveKey = Constants.shareExtensionActiveAccounts
+        var activeAccounts = userDefaults.array(forKey: shareExtensionActiveKey) as? [String] ?? []
+        
+        if isActive {
+            if !activeAccounts.contains(accountId) {
+                activeAccounts.append(accountId)
+            }
+        } else {
+            if let index = activeAccounts.firstIndex(of: accountId) {
+                activeAccounts.remove(at: index)
+            }
+        }
+        
+        userDefaults.set(activeAccounts, forKey: shareExtensionActiveKey)
     }
 
     @discardableResult
@@ -100,7 +136,7 @@ public final class AdapterService: AdapterDelegate {
                 try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
                 print("[ShareExtension] File copied successfully")
 
-                self.adapter?.setAccountActive(accountId, active: true)
+                self.setAccountActive(accountId, newValue: true)
 
                 print("[ShareExtension] Calling adapter sendSwarmFile")
                 self.adapter?.sendSwarmFile(
