@@ -19,12 +19,27 @@
 import RxSwift
 import Foundation
 import Photos
+import Atomics
 
 public final class AdapterService: AdapterDelegate {
     private var adapter: Adapter?
+    
+    // Atomic property to track if share extension has an active account
+    private var accountIsActive = ManagedAtomic<Bool>(false)
+    
+    // Darwin notification center for inter-extension communication
+    private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
+    
+    // Polling mechanism for notification extension monitoring
+    private var notificationExtensionMonitorTimer: Timer?
+    private var monitoringStartTime: Date?
+    private let monitoringTimeout: TimeInterval = 10.0
+    private let pollingInterval: TimeInterval = 1.0
 
     var usernameLookupStatus = PublishSubject<LookupNameResponse>()
     private let disposeBag = DisposeBag()
+
+    static let notificationExtensionResponse = Notification.Name(Constants.appIdentifier + ".shareExtensionQueryGotResponseFromNotificationExtension.internal")
 
     init(withAdapter adapter: Adapter) {
         print("[ShareExtension] AdapterService init - setting up adapter and delegate")
@@ -33,7 +48,56 @@ public final class AdapterService: AdapterDelegate {
         print("[ShareExtension] AdapterService init completed")
     }
 
+    func startDaemon() {
+        guard let adapter = self.adapter else { return }
+        guard adapter.initDaemon() else { return }
+        
+        // Start daemon - returns NO if already initialized (doing nothing), 
+        // or YES if it actually started the daemon
+        if adapter.startDaemon() {
+            // Daemon was actually started so set accounts active
+            accountIsActive.store(true, ordering: .relaxed)
+        }
+    }
+    
+    /// Check if daemon can be started (waits up to 10 seconds for notification extension to become free)
+    /// Returns true if daemon can be started, false if notification extension is still active after timeout
+    func canStartDaemon() -> Bool {
+        // If notification extension doesn't have active account, we can proceed immediately
+        if !notificationExtensionHasActiveAccount() {
+            return true
+        }
+        
+        // Wait and poll for 10 seconds to see if notification extension becomes inactive
+        let semaphore = DispatchSemaphore(value: 0)
+        var canProceed = false
+        var pollCount = 0
+        let maxPolls = 10 // 10 seconds with 1-second intervals
+        
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            pollCount += 1
+            
+            if !self.notificationExtensionHasActiveAccount() {
+                // Notification extension became inactive, we can proceed
+                canProceed = true
+                timer.invalidate()
+                semaphore.signal()
+            } else if pollCount >= maxPolls {
+                // Timeout reached, notification extension still active
+                canProceed = false
+                timer.invalidate()
+                semaphore.signal()
+            }
+        }
+        
+        // Wait for either success or timeout
+        semaphore.wait()
+        return canProceed
+    }
+
     func removeDelegate() {
+        accountIsActive.store(false, ordering: .relaxed)
+        
         Adapter.delegate = nil
         adapter = nil
 
@@ -45,13 +109,46 @@ public final class AdapterService: AdapterDelegate {
 
     func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
         print("[ShareExtension] sendSwarmMessage - accountId: \(accountId), conversationId: \(conversationId), message: \(message), parentId: \(parentId)")
-        adapter?.setAccountActive(accountId, active: true)
+        setAccountActive(accountId, newValue: true)
         adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
         print("[ShareExtension] sendSwarmMessage completed")
     }
 
     func setAccountActive(_ accountId: String, newValue: Bool) {
-        adapter?.setAccountActive(accountId, active: newValue)
+        if newValue {
+            if accountIsActive.compareExchange(expected: false, desired: true, ordering: .relaxed).exchanged {
+                adapter?.setAccountActive(accountId, active: true)
+            }
+        } else {
+            adapter?.setAccountActive(accountId, active: false)
+        }
+    }
+    
+    func setAllAccountsInactive() {
+        let accounts = getAccountList()
+        for accountId in accounts {
+            adapter?.setAccountActive(accountId, active: false)
+        }
+        accountIsActive.store(false, ordering: .relaxed)
+    }
+
+    func pushNotificationReceived(data: [String: Any]) {
+        var notificationData = [String: String]()
+        for key in data.keys {
+            if let value = data[key] {
+                let valueString = String(describing: value)
+                let keyString = String(describing: key)
+                notificationData[keyString] = valueString
+            }
+        }
+        self.adapter?.pushNotificationReceived("", message: notificationData)
+    }
+
+
+    
+    /// Check if share extension has an active account
+    func hasActiveAccount() -> Bool {
+        return accountIsActive.load(ordering: .relaxed)
     }
 
     @discardableResult
@@ -100,7 +197,7 @@ public final class AdapterService: AdapterDelegate {
                 try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
                 print("[ShareExtension] File copied successfully")
 
-                self.adapter?.setAccountActive(accountId, active: true)
+                self.setAccountActive(accountId, newValue: true)
 
                 print("[ShareExtension] Calling adapter sendSwarmFile")
                 self.adapter?.sendSwarmFile(
@@ -423,6 +520,50 @@ public final class AdapterService: AdapterDelegate {
                 return (finalName, firstAvatar, avatarType)
             }
     }
+
+    private func notificationExtensionHasActiveAccount() -> Bool {
+        let group = DispatchGroup()
+        defer {
+            removeNotificationObserver()
+            group.leave()
+        }
+        var hasResponse = false
+        group.enter()
+
+        listenForNotificationResponse (completion:{ _ in
+            hasResponse = true
+        })
+
+        CFNotificationCenterPostNotification(notificationCenter, CFNotificationName(Constants.notificationExtensionQuery), nil, nil, true)
+
+        _ = group.wait(timeout: .now() + 0.3)
+
+        return hasResponse
+    }
+    
+    private func listenForNotificationResponse(completion: @escaping (Bool) -> Void) {
+        let observer = Unmanaged.passUnretained(self).toOpaque()
+
+        CFNotificationCenterAddObserver(notificationCenter,
+                                        observer, { (_, _, _, _, _) in
+            NotificationCenter.default.post(name: AdapterService.notificationExtensionResponse,
+                                            object: nil,
+                                            userInfo: nil)
+        },
+                                        Constants.notificationExtensionResponse,
+                                        nil,
+                                        .deliverImmediately)
+
+        NotificationCenter.default.addObserver(forName: AdapterService.notificationExtensionResponse, object: nil, queue: nil) { _ in
+            completion(true)
+        }
+    }
+    
+    private func removeNotificationObserver() {
+        let observer = Unmanaged.passUnretained(self).toOpaque()
+        CFNotificationCenterRemoveEveryObserver(notificationCenter, observer)
+        NotificationCenter.default.removeObserver(self, name: AdapterService.notificationExtensionResponse, object: nil)
+    }
 }
 
 enum UsernameValidationStatus {
@@ -434,3 +575,5 @@ enum AvatarType: String {
     case single
     case group
 }
+
+

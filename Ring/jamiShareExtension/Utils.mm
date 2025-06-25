@@ -67,5 +67,13 @@
     return resDictionnary;
 }
 
++ (std::map<std::string, std::string>)dictionnaryToMap:(NSDictionary*)dict {
+    std::map<std::string, std::string> resMap;
+    for (id key in dict)
+        resMap.insert(std::pair<std::string, std::string>(
+                                                          std::string([key UTF8String]),
+                                                          std::string([[dict objectForKey:key] UTF8String])));
+    return resMap;
+}
 
 @end
