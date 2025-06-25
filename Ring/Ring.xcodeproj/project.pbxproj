@@ -287,6 +287,7 @@
 		2625814E2B4DE40200314C42 /* MessagePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814D2B4DE40200314C42 /* MessagePanelView.swift */; };
 		262581502B4EF15D00314C42 /* MessagePanelVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */; };
 		262F1CFA2C88BBBC002BF597 /* LinkToAccountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262F1CF92C88BBBC002BF597 /* LinkToAccountVM.swift */; };
+		263289A42E16B965003D9DA8 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 263289A32E16B965003D9DA8 /* Atomics */; };
 		2632D2F12CA5A82F00E60096 /* ImportFromArchiveVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F02CA5A82F00E60096 /* ImportFromArchiveVM.swift */; };
 		2632D2F32CA5AF9100E60096 /* ConnectToManagerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F22CA5AF9100E60096 /* ConnectToManagerVM.swift */; };
 		2632D2F52CA5AFBB00E60096 /* ConnectSipVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F42CA5AFBB00E60096 /* ConnectSipVM.swift */; };
@@ -2054,6 +2055,7 @@
 				3D41817F2DDE3122001BAD76 /* libavutil.xcframework in Frameworks */,
 				3D4181912DDE3138001BAD76 /* libixml.xcframework in Frameworks */,
 				3D4181AB2DDE3159001BAD76 /* libpjmedia.xcframework in Frameworks */,
+				263289A42E16B965003D9DA8 /* Atomics in Frameworks */,
 				3D4181BF2DDE3172001BAD76 /* libsrtp.xcframework in Frameworks */,
 				3D41818B2DDE3131001BAD76 /* libgnutls.xcframework in Frameworks */,
 				3D4181742DDE2FEA001BAD76 /* libjami.xcframework in Frameworks */,
@@ -3937,6 +3939,7 @@
 			);
 			name = jamiShareExtension;
 			packageProductDependencies = (
+				263289A32E16B965003D9DA8 /* Atomics */,
 			);
 			productName = jamiShareExtension;
 			productReference = 3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */;
@@ -5780,6 +5783,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		263289A32E16B965003D9DA8 /* Atomics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 623196842BAE498900C2252C /* XCRemoteSwiftPackageReference "swift-atomics" */;
+			productName = Atomics;
+		};
 		5593D7D22B7FE00A00DA109C /* MCEmojiPicker */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5593D7D12B7FE00A00DA109C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;

@@ -240,7 +240,9 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
     
 }
 
-
+- (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data {
+    pushNotificationReceived(std::string([from UTF8String]), [Utils dictionnaryToMap:data]);
+}
 
 - (NSArray*)getSwarmConversationsForAccount:(NSString*) accountId {
     return [Utils vectorToArray: getConversations(std::string([accountId UTF8String]))];

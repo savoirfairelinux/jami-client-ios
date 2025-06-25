@@ -68,24 +68,29 @@ struct ShareView: View {
 
     var body: some View {
         ZStack {
-            NavigationView {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        AccountsSection(
-                            selectedAccountId: $selectedAccountId,
-                            viewModel: viewModel,
-                            sendAction: sendAllItems
-                        )
-
-                        if let selectedId = selectedAccountId {
-                            ConversationSection(
-                                selectedAccountId: selectedId,
+            if viewModel.isLoading {
+                LoadingStateView()
+            } else {
+                NavigationView {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 16) {
+                            AccountsSection(
+                                selectedAccountId: $selectedAccountId,
                                 viewModel: viewModel,
                                 sendAction: sendAllItems
                             )
-                        }
 
-                        Spacer()
+                            if let selectedId = selectedAccountId {
+                                ConversationSection(
+                                    selectedAccountId: selectedId,
+                                    viewModel: viewModel,
+                                    sendAction: sendAllItems
+                                )
+                            }
+
+                            Spacer()
+                        }
+                        .padding()
                     }
                     .padding()
                 }
@@ -137,6 +142,11 @@ struct ShareView: View {
             if !newValue.isEmpty {
                 isSending = false
                 viewModel.closeShareExtension()
+                closeAction()
+            }
+        }
+        .onChange(of: viewModel.shouldCloseExtension) { shouldClose in
+            if shouldClose {
                 closeAction()
             }
         }
@@ -463,4 +473,15 @@ func imageFromBase64(_ base64: String) -> UIImage? {
     guard let data = Data(base64Encoded: base64),
           let image = UIImage(data: data) else { return nil }
     return image
+}
+
+struct LoadingStateView: View {
+    var body: some View {
+        VStack(spacing: 20) {
+            ProgressView()
+                .scaleEffect(1.5)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.systemBackground))
+    }
 }

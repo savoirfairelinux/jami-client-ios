@@ -19,19 +19,113 @@
 import RxSwift
 import Foundation
 import Photos
+import Atomics
 
+// swiftlint:disable type_body_length
 public final class AdapterService: AdapterDelegate {
     private var adapter: Adapter?
 
+    private var accountIsActive = ManagedAtomic<Bool>(false)
+
+    private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
+
     var usernameLookupStatus = PublishSubject<LookupNameResponse>()
     private let disposeBag = DisposeBag()
+
+    static let notificationExtensionResponse = Notification.Name(Constants.appIdentifier + ".shareExtensionQueryGotResponseFromNotificationExtension.internal")
 
     init(withAdapter adapter: Adapter) {
         self.adapter = adapter
         Adapter.delegate = self
     }
 
+    func startDaemon() {
+        guard let adapter = self.adapter else { return }
+        guard adapter.initDaemon() else { return }
+
+        // Start daemon - returns NO if already initialized (doing nothing),
+        // or YES if it actually started the daemon
+        if adapter.startDaemon() {
+            // Daemon was actually started so set accounts active
+            accountIsActive.store(true, ordering: .relaxed)
+        }
+    }
+
+    func canStartDaemon() -> Bool {
+        return canStartDaemon(timeout: 10.0, pollInterval: 1.0)
+    }
+
+    private func canStartDaemon(timeout: TimeInterval, pollInterval: TimeInterval) -> Bool {
+        guard notificationExtensionHasActiveAccount() else {
+            return true
+        }
+
+        return waitForNotificationExtensionInactive(timeout: timeout, pollInterval: pollInterval)
+    }
+
+    private func waitForNotificationExtensionInactive(timeout: TimeInterval, pollInterval: TimeInterval) -> Bool {
+        let semaphore = DispatchSemaphore(value: 0)
+        let result = WaitResult()
+
+        let maxPolls = Int(timeout / pollInterval)
+        let timer = createPollingTimer(
+            pollInterval: pollInterval,
+            maxPolls: maxPolls,
+            result: result,
+            semaphore: semaphore
+        )
+
+        guard let timer = timer else {
+            return false
+        }
+
+        timer.resume()
+        semaphore.wait()
+
+        return result.success
+    }
+
+    private func createPollingTimer(
+        pollInterval: TimeInterval,
+        maxPolls: Int,
+        result: WaitResult,
+        semaphore: DispatchSemaphore
+    ) -> DispatchSourceTimer? {
+
+        let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .utility))
+        var pollCount = 0
+
+        timer.schedule(deadline: .now() + pollInterval, repeating: pollInterval)
+        timer.setEventHandler { [weak self] in
+            pollCount += 1
+
+            let shouldComplete: Bool
+            let success: Bool
+
+            if let self = self, !self.notificationExtensionHasActiveAccount() {
+                shouldComplete = true
+                success = true
+            } else if pollCount >= maxPolls {
+                shouldComplete = true
+                success = false
+            } else {
+                shouldComplete = false
+                success = false
+            }
+
+            if shouldComplete {
+                timer.cancel()
+                result.success = success
+                semaphore.signal()
+            }
+        }
+
+        return timer
+    }
+
     func removeDelegate() {
+        accountIsActive.store(false, ordering: .relaxed)
+
         Adapter.delegate = nil
         adapter = nil
 
@@ -42,12 +136,43 @@ public final class AdapterService: AdapterDelegate {
     }
 
     func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
-        adapter?.setAccountActive(accountId, active: true)
+        setAccountActive(accountId, newValue: true)
         adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
     }
 
     func setAccountActive(_ accountId: String, newValue: Bool) {
-        adapter?.setAccountActive(accountId, active: newValue)
+        if newValue {
+            if accountIsActive.compareExchange(expected: false, desired: true, ordering: .relaxed).exchanged {
+                adapter?.setAccountActive(accountId, active: true)
+            }
+        } else {
+            adapter?.setAccountActive(accountId, active: false)
+        }
+    }
+
+    func setAllAccountsInactive() {
+        let accounts = getAccountList()
+        for accountId in accounts {
+            adapter?.setAccountActive(accountId, active: false)
+        }
+        accountIsActive.store(false, ordering: .relaxed)
+    }
+
+    func pushNotificationReceived(data: [String: Any]) {
+        var notificationData = [String: String]()
+        for key in data.keys {
+            if let value = data[key] {
+                let valueString = String(describing: value)
+                let keyString = String(describing: key)
+                notificationData[keyString] = valueString
+            }
+        }
+        self.adapter?.pushNotificationReceived("", message: notificationData)
+    }
+
+    /// Check if share extension has an active account
+    func hasActiveAccount() -> Bool {
+        return accountIsActive.load(ordering: .relaxed)
     }
 
     func createFileUrlForSwarm(fileName: String, accountId: String, conversationId: String) -> URL? {
@@ -432,6 +557,79 @@ public final class AdapterService: AdapterDelegate {
                 let finalName = title?.isEmpty == false ? title! : names
                 return (finalName, firstAvatar, avatarType)
             }
+    }
+
+    private var darwinObserver: UnsafeMutableRawPointer?
+    private var notificationObserver: NSObjectProtocol?
+
+    private func notificationExtensionHasActiveAccount() -> Bool {
+        let group = DispatchGroup()
+        defer {
+            removeNotificationObserver()
+            group.leave()
+        }
+        var hasResponse = false
+        group.enter()
+
+        listenForNotificationResponse(completion: { _ in
+            hasResponse = true
+        })
+
+        CFNotificationCenterPostNotification(notificationCenter, CFNotificationName(Constants.notificationExtensionIsActive), nil, nil, true)
+
+        _ = group.wait(timeout: .now() + 0.3)
+
+        return hasResponse
+    }
+
+    private func listenForNotificationResponse(completion: @escaping (Bool) -> Void) {
+        removeNotificationObserver()
+
+        darwinObserver = Unmanaged.passRetained(self).toOpaque()
+
+        CFNotificationCenterAddObserver(notificationCenter,
+                                        darwinObserver, { (_, _, _, _, _) in
+                                            NotificationCenter.default.post(name: AdapterService.notificationExtensionResponse,
+                                                                            object: nil,
+                                                                            userInfo: nil)
+                                        },
+                                        Constants.notificationExtensionResponse,
+                                        nil,
+                                        .deliverImmediately)
+
+        notificationObserver = NotificationCenter.default.addObserver(forName: AdapterService.notificationExtensionResponse, object: nil, queue: nil) { _ in
+            completion(true)
+        }
+    }
+
+    private func removeNotificationObserver() {
+        if let observer = darwinObserver {
+            CFNotificationCenterRemoveEveryObserver(notificationCenter, observer)
+            Unmanaged<AdapterService>.fromOpaque(observer).release()
+            darwinObserver = nil
+        }
+        if let observer = notificationObserver {
+            NotificationCenter.default.removeObserver(observer)
+            notificationObserver = nil
+        }
+    }
+}
+
+private class WaitResult {
+    private let lock = NSLock()
+    private var _success: Bool = false
+
+    var success: Bool {
+        get {
+            lock.lock()
+            defer { lock.unlock() }
+            return _success
+        }
+        set {
+            lock.lock()
+            defer { lock.unlock() }
+            _success = newValue
+        }
     }
 }
 
