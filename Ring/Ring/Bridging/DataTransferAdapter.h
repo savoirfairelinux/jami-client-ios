@@ -18,58 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+#import "ObjcTypes.h"
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(UInt32, NSDataTransferEventCode)  {
-    invalid = 0,
-    created,
-    unsupported,
-    wait_peer_acceptance,
-    wait_host_acceptance,
-    ongoing,
-    finished,
-    closed_by_host,
-    closed_by_peer,
-    invalid_pathname,
-    unjoinable_peer
-};
-
-typedef NS_ENUM(UInt32, NSDataTransferError)  {
-    success = 0,
-    unknown,
-    io,
-    invalid_argument
-};
-
-typedef NS_ENUM(UInt32, NSDataTransferFlags)  {
-    direction = 0 // 0: outgoing, 1: incoming
-};
-
-@interface NSDataTransferInfo: NSObject
-{
-@public
-    NSString* accountId;
-    NSDataTransferEventCode lastEvent;
-    UInt32 flags;
-    int64_t totalSize;
-    int64_t bytesProgress;
-    NSString* peer;
-    NSString* displayName;
-    NSString* path;
-    NSString* mimetype;
-    NSString* conversationId;
-}
-@property (strong, nonatomic) NSString* accountId;
-@property (nonatomic) NSDataTransferEventCode lastEvent;
-@property (nonatomic) UInt32 flags;
-@property (nonatomic) int64_t totalSize;
-@property (nonatomic) int64_t bytesProgress;
-@property (strong, nonatomic) NSString* peer;
-@property (strong, nonatomic) NSString* displayName;
-@property (strong, nonatomic) NSString* path;
-@property (strong, nonatomic) NSString* conversationId;
-@property (strong, nonatomic) NSString* mimetype;
-@end
 
 @protocol DataTransferAdapterDelegate;
 

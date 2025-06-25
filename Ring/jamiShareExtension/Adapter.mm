@@ -19,11 +19,9 @@
 // Required before importing jamiShareExtension-Swift.h: Swift clas ShareViewController inherit from UIViewController
 #import <UIKit/UIKit.h>
 
-
 #import "jamiShareExtension-Swift.h"
 #import "Adapter.h"
 #import "Utils.h"
-
 
 #import "jami/jami.h"
 #import "jami/configurationmanager_interface.h"
@@ -73,7 +71,6 @@ static id<AdapterDelegate> _delegate;
 
 using namespace libjami;
 
-
 std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 
 - (void)registerSignals
@@ -109,7 +106,7 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
             [chDelegate messageStatusChanged:(MessageStatus)state for:messageId from:accountId to:jamiId in: conversationId];
         }
     }));
-    
+
     confHandlers
         .insert(exportable_callback<ConfigurationSignal::RegisteredNameFound>([&](const std::string& account_id,
                                                                                   const std::string& requested_name,
@@ -128,8 +125,6 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
             }
         }));
 
-
-    
     confHandlers
     .insert(exportable_callback<DataTransferSignal::DataTransferEvent>([&](const std::string& account_id,
                                                                            const std::string& conversation_id,
@@ -138,7 +133,7 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
                                                                            int eventCode) {
         
         __weak id<AdapterDelegate> chDelegate = Adapter.delegate;
-        
+
         if(chDelegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
             NSString* conversationId = [NSString stringWithUTF8String:conversation_id.c_str()];
@@ -153,7 +148,6 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
         }
     }));
 
-    
     registerSignalHandlers(confHandlers);
 }
 
@@ -167,13 +161,10 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
     _delegate = delegate;
 }
 
-
 - (id)init {
     self = [super init];
     return self;
 }
-
-
 
 - (BOOL)initDaemon {
 
@@ -194,9 +185,9 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 
 - (BOOL)initDaemonInternal {
 #if DEBUG
-    int flag = LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_SYSLOG | LIBJAMI_FLAG_NO_LOCAL_AUDIO;
+    int flag = LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_SYSLOG | LIBJAMI_FLAG_NO_LOCAL_MEDIA;
 #else
-    int flag = 0;
+    int flag = LIBJAMI_FLAG_NO_LOCAL_MEDIA;
 #endif
 
     BOOL result = init(static_cast<InitFlag>(flag));
@@ -217,7 +208,7 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
             return [self startDaemonInternal];
         }
     }
-    
+
     return NO;
 }
 
@@ -237,10 +228,11 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 - (void)setAccountActive:(NSString *)accountID
                   active:(bool)active {
     setAccountActive(std::string([accountID UTF8String]), active, true);
-    
 }
 
-
+- (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data {
+    pushNotificationReceived(std::string([from UTF8String]), [Utils dictionnaryToMap:data]);
+}
 
 - (NSArray*)getSwarmConversationsForAccount:(NSString*) accountId {
     return [Utils vectorToArray: getConversations(std::string([accountId UTF8String]))];
@@ -287,6 +279,5 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId {
     return [Utils vectorOfMapsToArray: getConversationMembers(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
 }
-
 
 @end

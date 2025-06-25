@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2018-2019 Savoir-faire Linux Inc.
- *
- *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
+ *  Copyright (C) 2018-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,15 +18,19 @@
 
 #import "VideoAdapter.h"
 #import "Utils.h"
-#import "jami/videomanager_interface.h"
-#import "jami/callmanager_interface.h"
+#import "MediaUtils.h"
+
 #import "Ring-Swift.h"
+
+#include <AVFoundation/AVFoundation.h>
+
 #include <pthread.h>
 #include <functional>
-#include <AVFoundation/AVFoundation.h>
 #include <mutex>
 #include <atomic>
-#import "Utils.h"
+
+#import "jami/videomanager_interface.h"
+#import "jami/callmanager_interface.h"
 
 using namespace libjami;
 
@@ -49,7 +51,7 @@ struct Renderer
                 return;
             }
             @autoreleasepool {
-                PixelBufferInfo info = [Utils getCVPixelBufferFromAVFrame:std::move(frame.get())];
+                PixelBufferInfo info = [MediaUtils getCVPixelBufferFromAVFrame:std::move(frame.get())];
                 if (info.pixelBuffer == NULL) {
                     return;
                 }
@@ -193,7 +195,7 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
         return;
     }
     auto avframe = frame->pointer();
-        [Utils configureFrame:(AVFrame*)avframe
+        [MediaUtils configureFrame:(AVFrame*)avframe
               fromImageBuffer:image
                         angle:(int) angle];
 
