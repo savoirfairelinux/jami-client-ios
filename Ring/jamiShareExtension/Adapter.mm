@@ -196,7 +196,7 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 #if DEBUG
     int flag = LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_SYSLOG | LIBJAMI_FLAG_NO_LOCAL_AUDIO;
 #else
-    int flag = 0;
+    int flag = LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_SYSLOG | LIBJAMI_FLAG_NO_LOCAL_AUDIO;
 #endif
 
     BOOL result = init(static_cast<InitFlag>(flag));
