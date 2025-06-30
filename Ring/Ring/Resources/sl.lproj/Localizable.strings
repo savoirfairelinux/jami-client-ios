@@ -70,20 +70,20 @@
 "swarm.muteConversation" = "Utišaj pogovor";
 "swarm.leaveConversation" = "Zapusti pogovor";
 "swarm.chooseColor" = "Barva pogovora";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Vrsta pogovora";
 "swarm.identifier" = "identifikator";
-"swarm.conversationId" = "Conversation ID";
+"swarm.conversationId" = "ID pogovora";
 "swarm.settings" = "Nastavitve";
 "swarm.members" = "Člani";
 "swarm.addDescription" = "Dodaj opis";
-"swarm.titlePlaceholder" = "Enter title";
-"swarm.titleAlertHeader" = "Edit group title";
-"swarm.descriptionAlertHeader" = "Edit group description";
-"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.titlePlaceholder" = "Vnesite naslov";
+"swarm.titleAlertHeader" = "Uredi naziv skupine";
+"swarm.descriptionAlertHeader" = "Uredi opis skupine";
+"swarm.descriptionPlaceholder" = "Vnesite naslov";
 "swarm.contactHeader" = "Kontakt";
-"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.showContactQRCode" = "Pokaži QR-kodo stika";
 "swarm.shareContactInfo" = "Share contact information";
-"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCode" = "QR-koda za stik";
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
@@ -118,7 +118,7 @@
 "smartlist.conversations" = "Pogovori";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "Nov stik";
-"smartlist.newGroup" = "New group";
+"smartlist.newGroup" = "Nova skupina";
 "smartlist.accounts" = "Računi";
 "smartlist.invitationReceived" = "Prejetih povabil";
 "smartlist.noResults" = "Ni zadetkov";
@@ -136,7 +136,7 @@
 "smartlist.inviteFriends" = "Povabi prijatelje";
 "smartlist.accounts" = "Računi";
 "smartlist.disableDonation" = "Ne zdaj";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
+"smartlist.donationExplanation" = "Če vam je Jami všeč in verjamete v naše poslanstvo - bi prispevali projektu?";
 "smartlist.inSynchronization" = "pogovor v usklajevanju";
 "smartlist.newMessage" = "Novo sporočilo";
 
@@ -148,7 +148,7 @@
 "conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
 "conversation.receivedRequest" = "%@ sent you a conversation invitation.";
 "conversation.incomingRequest" = "sent you a conversation invitation.";
-"conversation.requestMessage" = "Hello,\nDo you want to join the conversation?";
+"conversation.requestMessage" = "Pozdravljeni,\nse želite pridružiti pogovoru?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
@@ -197,15 +197,15 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Pridruži se Jami";
-"createAccount.lookingForUsernameAvailability" = "Checking username availability…";
+"createAccount.lookingForUsernameAvailability" = "Poteka preverjanje, ali je uporabniško ime na voljo ...";
 "createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
 "createAccount.usernameAlreadyTaken" = "Uporabniško ime je že oddano";
-"createAccount.usernameValid" = "The username is available.";
+"createAccount.usernameValid" = "Uporabniško ime je na voljo.";
 "createAccount.UsernameNotRegisteredTitle" = "Napaka na omrežju";
 "createAccount.UsernameNotRegisteredMessage" = "Račun je bil ustvarjen, vendar uporabniško ime ni bilo registrirano";
 "createAccount.timeoutTitle" = "Račun je ustvarjen";
 "createAccount.timeoutMessage" = "Registracija uporabniškega imena poteka ... Počakajte za trenutek.";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.sipConfigure" = "Nastavi obstoječi račun SIP";
 "createAccount.creatingAccount" = "Ustvarjanje računa";
 "createAccount.nameExplanation" = "Izberete lahko uporabniško ime in s tem pomagate drugim, da vas lažje poiščejo in najdejo na Jamiju.";
 "createAccount.newAccount" = "Nov račun";
@@ -228,7 +228,7 @@
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
 "linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
 "linkToAccount.exit" = "Izhod";
-"linkToAccount.shareMessage" = "Your code is: %@";
+"linkToAccount.shareMessage" = "Vaša koda: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
 "linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
@@ -240,7 +240,7 @@
 "importFromArchive.selectArchiveButton" = "Izberite arhivsko datoteko";
 
 // Link to Jami Account Management Server (JAMS) form
-"linkToAccountManager.signIn" = "Sign in";
+"linkToAccountManager.signIn" = "Prijava";
 "linkToAccountManager.title" = "Management server account";
 "linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
 "linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
@@ -263,7 +263,7 @@
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Izbriši pogovor";
 "alerts.noMediaPermissionsTitle" = "Dovoljenje za medij ni podano";
 "alerts.noLibraryPermissionsTitle" = "Dostop do fotoalbuma ni bil dodeljen";
 "alerts.noLocationPermissionsTitle" = "Dostop do lokacije ni odobren";
@@ -299,7 +299,7 @@
 "calls.setModerator" = "Nastavi moderatorja";
 "calls.removeModerator" = "Odstavi moderatorja";
 "calls.muteAudio" = "Izključi mikrofon";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "Vključi mikrofon";
 "calls.lowerHand" = "Spusti roko";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Klic je v teku. Ali se mu želite pridružiti?";
@@ -380,7 +380,7 @@
 "accountPage.manageAccount" = "Upravljanje računa";
 "accountPage.encryptAccount" = "Šifriraj račun z geslom";
 "accountPage.passwordExplanation" = "Račun Jami je ustvarjen in hranjen krajevno samo na tej napravi, kot arhiv, ki vsebuje ključe vašega računa. Dostop do arhiva lahko dodatno zaščitite z geslom.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordsDoNotMatch" = "Gesli se ne ujemata.";
 "accountPage.passwordCreated" = "Geslo ustvarjeno";
 "accountPage.passwordUpdated" = "Geslo posodobljeno";
 "accountPage.linkedDevices" = "Povezane naprave";
@@ -454,7 +454,7 @@
 // Link New Device
 "linkDevice.title" = "Poveži novo napravo";
 "linkDevice.networkError" = "Pri izvažanju računa je prišlo do omrežne napake.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
+"linkDevice.errorWrongPassword" = "Pri povezovanju naprave je prišlo do napake overjanja. Prevrite svoje poverilnice in poskusite znova.";
 "linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
 "linkDevice.errorTimeout" = "The operation timed out. Please try again.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
@@ -503,7 +503,7 @@
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
-"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.youJoined" = "Pridružili ste se pogovoru.";
 "generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Odhodni klic";
@@ -601,25 +601,25 @@
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
 "accessibility.call.lasted" = "Lasted %@";
 "accessibility.calls.default.toggleAudio" = "Izključi mikrofon";
-"accessibility.calls.default.toggleVideo" = "Start camera";
+"accessibility.calls.default.toggleVideo" = "Zaženi kamero";
 "accessibility.calls.default.pauseCall" = "Zadrži klic";
 "accessibility.calls.default.hangUpCall" = "Prekini";
 "accessibility.calls.default.addParticipant" = "Dodaj sodelujočega";
-"accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.switchCamera" = "Preklopi kamero";
+"accessibility.calls.default.toggleSpeaker" = "Vklopi zvočnik";
 "accessibility.calls.default.openConversation" = "Odpri pogovor";
-"accessibility.calls.default.showDialpad" = "Show dialpad";
+"accessibility.calls.default.showDialpad" = "Pokaži številčnico";
 "accessibility.calls.default.raiseHand" = "Dvigni roko";
 
-"accessibility.calls.alter.toggleAudio" = "Unmute microphone";
+"accessibility.calls.alter.toggleAudio" = "Vključi mikrofon";
 "accessibility.calls.alter.toggleVideo" = "Izklopi kamero";
 "accessibility.calls.alter.pauseCall" = "Nadaljuj klic";
 "accessibility.calls.alter.hangUpCall" = "Prekini";
 "accessibility.calls.alter.addParticipant" = "Dodaj sodelujočega";
-"accessibility.calls.alter.switchCamera" = "Switch camera";
-"accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
+"accessibility.calls.alter.switchCamera" = "Preklopi kamero";
+"accessibility.calls.alter.toggleSpeaker" = "Izklopi zvočnik";
 "accessibility.calls.alter.openConversation" = "Odpri pogovor";
-"accessibility.calls.alter.showDialpad" = "Show dialpad";
+"accessibility.calls.alter.showDialpad" = "Pokaži številčnico";
 "accessibility.calls.alter.raiseHand" = "Spusti roko";
 "accessibility.conference.minimize" = "Zmanjšaj";
 "accessibility.conference.maximize" = "Povečaj";

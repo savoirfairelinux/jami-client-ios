@@ -302,7 +302,7 @@
 "calls.unmuteAudio" = "Unmute microphone";
 "calls.lowerHand" = "নীচের হাত";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
-"calls.activeCallInConversation" = "A call is in progress. Do you want to join the call?";
+"calls.activeCallInConversation" = "একটা কল চলছে, তুমি কি যোগ দিতে চাও?";
 "calls.answerWithAudio" = "Answer with audio";
 "calls.answerWithVideo" = "Answer with video";
 
