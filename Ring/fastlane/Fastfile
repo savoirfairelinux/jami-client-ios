@@ -55,7 +55,8 @@ platform :ios do
     match(
       api_key: api_key,
       app_identifier: ["com.savoirfairelinux.ring", "com.savoirfairelinux.ring.jamiNotificationExtension"],
-      type: "appstore"
+      type: "appstore",
+      readonly: true
     )
     profile_path = ENV["sigh_com.savoirfairelinux.ring_appstore_profile-path"]
     profile_path_extension = ENV["sigh_com.savoirfairelinux.ring.jamiNotificationExtension_appstore_profile-path"]
