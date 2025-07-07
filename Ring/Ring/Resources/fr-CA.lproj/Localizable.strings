@@ -303,8 +303,8 @@
 "calls.lowerHand" = "Baisser la main";
 "calls.activeCallLabel" = "Un appel est en cours. Voulez-vous rejoindre l'appel ? Vous pourrez toujours l'appel plus tard à partir de la conversation.";
 "calls.activeCallInConversation" = "Un appel est en cours. Souhaitez-vous rejoindre l'appel ?";
-"calls.answerWithAudio" = "Répondre en audio";
-"calls.answerWithVideo" = "Répondre en vidéo";
+"calls.acceptWithAudio" = "Accepter en audio";
+"calls.acceptWithVideo" = "Accepter en vidéo";
 
 // Account Page
 "accountPage.devicesListHeader" = "Appareils";

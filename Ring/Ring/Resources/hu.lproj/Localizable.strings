@@ -303,8 +303,8 @@
 "calls.lowerHand" = "Kéz leengedése";
 "calls.activeCallLabel" = "Hívás folyamatban van. Szeretne csatlakozni a híváshoz? Később is csatlakozhatsz a híváshoz a beszélgetésből.";
 "calls.activeCallInConversation" = "Hívás folyamatban van. Szeretne csatlakozni a híváshoz?";
-"calls.answerWithAudio" = "Elfogadás hanggal";
-"calls.answerWithVideo" = "Elfogadás videóval";
+"calls.acceptWithAudio" = "Elfogadás hanggal";
+"calls.acceptWithVideo" = "Elfogadás videóval";
 
 // Account Page
 "accountPage.devicesListHeader" = "Eszközök";

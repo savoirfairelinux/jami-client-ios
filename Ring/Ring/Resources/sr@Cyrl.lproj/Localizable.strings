@@ -303,8 +303,8 @@
 "calls.lowerHand" = "Ниже руке";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Позив је у току.";
-"calls.answerWithAudio" = "Answer with audio";
-"calls.answerWithVideo" = "Answer with video";
+"calls.acceptWithAudio" = "Прихватите са звуком";
+"calls.acceptWithVideo" = "Accept with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Уреди";

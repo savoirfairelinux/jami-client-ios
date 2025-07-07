@@ -303,8 +303,8 @@
 "calls.lowerHand" = "Nuleisti ranką";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Prašome skambučio.";
-"calls.answerWithAudio" = "Answer with audio";
-"calls.answerWithVideo" = "Answer with video";
+"calls.acceptWithAudio" = "Atsiliepti su garsu";
+"calls.acceptWithVideo" = "Atsiliepti su vaizdu";
 
 // Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";

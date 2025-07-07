@@ -303,8 +303,8 @@
 "calls.lowerHand" = "دست پایین";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "يه تماس داره ادامه مده ميخواي به تماس برسي؟";
-"calls.answerWithAudio" = "Answer with audio";
-"calls.answerWithVideo" = "Answer with video";
+"calls.acceptWithAudio" = "پاسخ به صورت صوتی";
+"calls.acceptWithVideo" = "پاسخ به صورت ویدیویی";
 
 // Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";

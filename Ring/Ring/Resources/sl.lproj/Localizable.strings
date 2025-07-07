@@ -303,8 +303,8 @@
 "calls.lowerHand" = "Spusti roko";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Klic je v teku. Ali se mu želite pridružiti?";
-"calls.answerWithAudio" = "Answer with audio";
-"calls.answerWithVideo" = "Answer with video";
+"calls.acceptWithAudio" = "Sprejmi z zvokom";
+"calls.acceptWithVideo" = "Sprejmi z videosliko";
 
 // Account Page
 "accountPage.devicesListHeader" = "Naprave";

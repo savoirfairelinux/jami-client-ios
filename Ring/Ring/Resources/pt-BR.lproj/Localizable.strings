@@ -197,7 +197,7 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Junte-se a Jami";
-"createAccount.lookingForUsernameAvailability" = "Checking username availability…";
+"createAccount.lookingForUsernameAvailability" = "Verificando discponibilidade do nome de usuário...";
 "createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
 "createAccount.usernameAlreadyTaken" = "Nome de usuário já em uso";
 "createAccount.usernameValid" = "O nome de utilizador está disponível.";
@@ -216,7 +216,7 @@
 "createAccount.encryptExplanation" = "Uma conta Jami é criada e armazenada localmente apenas neste dispositivo como um arquivo que contém as suas chaves de conta. O acesso ao arquivo pode, opcionalmente, ser protegido com uma palavra-passe.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Importar conta";
 "linkToAccount.showQrCode" = "Código QR";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
@@ -303,8 +303,8 @@
 "calls.lowerHand" = "Abaixar a mão";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Uma chamada está em andamento. Deseja participar da chamada?";
-"calls.answerWithAudio" = "Answer with audio";
-"calls.answerWithVideo" = "Answer with video";
+"calls.acceptWithAudio" = "Aceitar com áudio";
+"calls.acceptWithVideo" = "Aceitar com em vídeo";
 
 // Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
@@ -465,11 +465,11 @@
 "linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Connecting to your new device…";
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
+"linkDevice.newDeviceIP" = "Endereço IP do novo dispositivo: %1@";
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "Conta importada com sucesso no novo dispositivo.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Iniciar chamada de áudio";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.hangUpCall" = "Desligar";
 "accessibility.calls.default.addParticipant" = "Adicionar participante";
 "accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.toggleSpeaker" = "Ligar auto-falante";
 "accessibility.calls.default.openConversation" = "Conversa em curso";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Levantar a mão";

@@ -303,8 +303,8 @@
 "calls.lowerHand" = "放下手";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "电话正在进行,你想加入电话吗?";
-"calls.answerWithAudio" = "Answer with audio";
-"calls.answerWithVideo" = "Answer with video";
+"calls.acceptWithAudio" = "Accept with audio";
+"calls.acceptWithVideo" = "Accept with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "裝置";

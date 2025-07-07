@@ -303,8 +303,8 @@
 "calls.lowerHand" = "निचला हाथ";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "एक कॉल चल रही है. क्या आप कॉल में शामिल होना चाहते हैं?";
-"calls.answerWithAudio" = "Answer with audio";
-"calls.answerWithVideo" = "Answer with video";
+"calls.acceptWithAudio" = "Accept with audio";
+"calls.acceptWithVideo" = "Accept with video";
 
 // Account Page
 "accountPage.devicesListHeader" = "उपकरण";

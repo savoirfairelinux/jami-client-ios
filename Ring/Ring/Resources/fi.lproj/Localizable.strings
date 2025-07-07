@@ -303,8 +303,8 @@
 "calls.lowerHand" = "Käsi alas";
 "calls.activeCallLabel" = "Puhelu on käynnissä. Haluatko liittyä puheluun? Voit liittyä puheluun myös myöhemmin keskustelusta.";
 "calls.activeCallInConversation" = "Puhelu on meneillään. Haluatko liittyä?";
-"calls.answerWithAudio" = "Vastaa äänellä";
-"calls.answerWithVideo" = "Vastaa videolla";
+"calls.acceptWithAudio" = "Hyväksy äänellä";
+"calls.acceptWithVideo" = "Hyväksy videolla";
 
 // Account Page
 "accountPage.devicesListHeader" = "Laitteet";

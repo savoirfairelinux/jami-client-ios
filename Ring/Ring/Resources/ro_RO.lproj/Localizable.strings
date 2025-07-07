@@ -303,8 +303,8 @@
 "calls.lowerHand" = "Coboară mâna";
 "calls.activeCallLabel" = "Un apel este în curs. Vrei să participi? Poți participa și mai târziu din conversație.";
 "calls.activeCallInConversation" = "Un apel este în curs. Vrei să participi?";
-"calls.answerWithAudio" = "Răspunde vocal";
-"calls.answerWithVideo" = "Răspunde video";
+"calls.acceptWithAudio" = "Răspunde vocal";
+"calls.acceptWithVideo" = "Răspunde video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Aparate";

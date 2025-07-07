@@ -303,8 +303,8 @@
 "calls.lowerHand" = "Lase käsi alla";
 "calls.activeCallLabel" = "Kõne on pooleli. Kas sa soovid sellega liituda? Sa saad temaga ka hiljem liituda vestlusest.";
 "calls.activeCallInConversation" = "Kõne on pooleli. Kas sa soovid sellega liituda?";
-"calls.answerWithAudio" = "Vasta häälkõnena";
-"calls.answerWithVideo" = "Vasta videokõnena";
+"calls.acceptWithAudio" = "Vasta häälkõnena";
+"calls.acceptWithVideo" = "Vasta videokõnena";
 
 // Account Page
 "accountPage.devicesListHeader" = "Seadmed";
