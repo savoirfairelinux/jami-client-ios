@@ -373,6 +373,7 @@ class ShareViewModel: ObservableObject {
 
     deinit {
         removeDarwinNotificationListener()
+        adapterService.removeDelegate()
     }
 }
 

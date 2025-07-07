@@ -128,6 +128,7 @@ typedef NS_ENUM(UInt32, NSDataTransferFlags)  {
 
 - (BOOL)initDaemon;
 - (BOOL)startDaemon;
+- (void)cleanup;
 
 - (NSArray *)getAccountList;
 - (void)setAccountActive:(NSString *)accountID

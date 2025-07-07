@@ -99,6 +99,9 @@ public final class AdapterService: AdapterDelegate {
     func removeDelegate() {
         accountIsActive.store(false, ordering: .relaxed)
 
+        // Clear signal handlers to prevent duplication on next extension launch
+        adapter?.cleanup()
+
         Adapter.delegate = nil
         adapter = nil
 
