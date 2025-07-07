@@ -84,63 +84,57 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
                 auto path = [Constants documentsPath];
                 ret->push_back(std::string([path.path UTF8String]));
             }
-        })); 
+        }));
 
-    confHandlers.insert(exportable_callback<ConversationSignal::SwarmMessageReceived>([&](const std::string& accountId, const std::string& conversationId, libjami::SwarmMessage message) {
-        __weak id<AdapterDelegate> chDelegate = Adapter.delegate;
-        if (chDelegate) {
+    confHandlers.insert(exportable_callback<ConversationSignal::SwarmMessageReceived>([weakDelegate = Adapter.delegate](const std::string& accountId, const std::string& conversationId, libjami::SwarmMessage message) {
+        if (weakDelegate) {
             NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
             NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
             SwarmMessageWrap *swarmMessage = [[SwarmMessageWrap alloc] initWithSwarmMessage: message];
-            [chDelegate newInteractionWithConversationId: convId accountId: account message: swarmMessage];
+            [weakDelegate newInteractionWithConversationId: convId accountId: account message: swarmMessage];
         }
     }));
 
-    confHandlers.insert(exportable_callback<ConfigurationSignal::AccountMessageStatusChanged>([&](const std::string& account_id, const std::string& conversation_id, const std::string& peer, const std::string message_id, int state) {
-        __weak id<AdapterDelegate> chDelegate = Adapter.delegate;
-        if (chDelegate) {
+    confHandlers.insert(exportable_callback<ConfigurationSignal::AccountMessageStatusChanged>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& conversation_id, const std::string& peer, const std::string message_id, int state) {
+        if (weakDelegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
             NSString* conversationId = [NSString stringWithUTF8String:conversation_id.c_str()];
             NSString* jamiId = [NSString stringWithUTF8String:peer.c_str()];
             NSString* messageId = [NSString stringWithUTF8String:message_id.c_str()];
-            [chDelegate messageStatusChanged:(MessageStatus)state for:messageId from:accountId to:jamiId in: conversationId];
+            [weakDelegate messageStatusChanged:(MessageStatus)state for:messageId from:accountId to:jamiId in: conversationId];
         }
     }));
 
     confHandlers
-        .insert(exportable_callback<ConfigurationSignal::RegisteredNameFound>([&](const std::string& account_id,
+        .insert(exportable_callback<ConfigurationSignal::RegisteredNameFound>([weakDelegate = Adapter.delegate](const std::string& account_id,
                                                                                   const std::string& requested_name,
                                                                                   int state,
                                                                                   const std::string address,
                                                                                   const std::string& name) {
-            __weak id<AdapterDelegate> chDelegate = Adapter.delegate;
-            if (chDelegate) {
+            if (weakDelegate) {
                 LookupNameResponse* response = [LookupNameResponse new];
                 response.accountId = [NSString stringWithUTF8String:account_id.c_str()];
                 response.state = (LookupNameState)state;
                 response.address = [NSString stringWithUTF8String:address.c_str()];
                 response.name = [NSString stringWithUTF8String:name.c_str()];
                 response.requestedName = [NSString stringWithUTF8String:requested_name.c_str()];
-                [chDelegate registeredNameFoundWith:response];
+                [weakDelegate registeredNameFoundWith:response];
             }
         }));
 
     confHandlers
-    .insert(exportable_callback<DataTransferSignal::DataTransferEvent>([&](const std::string& account_id,
+    .insert(exportable_callback<DataTransferSignal::DataTransferEvent>([weakDelegate = Adapter.delegate](const std::string& account_id,
                                                                            const std::string& conversation_id,
                                                                            const std::string& interaction_id,
                                                                            const std::string& file_id,
                                                                            int eventCode) {
-        
-        __weak id<AdapterDelegate> chDelegate = Adapter.delegate;
-
-        if(chDelegate) {
+        if(weakDelegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
             NSString* conversationId = [NSString stringWithUTF8String:conversation_id.c_str()];
             NSString* fileId = [NSString stringWithUTF8String:file_id.c_str()];
             NSString* interactionId = [NSString stringWithUTF8String:interaction_id.c_str()];
             
-            [chDelegate dataTransferEventWithFileId:fileId
+            [weakDelegate dataTransferEventWithFileId:fileId
                                             withEventCode:eventCode
                                                 accountId:accountId
                                            conversationId:conversationId
