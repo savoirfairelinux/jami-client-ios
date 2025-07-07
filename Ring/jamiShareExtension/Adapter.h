@@ -31,6 +31,7 @@
 
 - (BOOL)initDaemon;
 - (BOOL)startDaemon;
+- (void)cleanup;
 
 - (NSArray *)getAccountList;
 - (void)setAccountActive:(NSString *)accountID

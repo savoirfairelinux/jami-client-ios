@@ -217,6 +217,11 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
     return result;
 }
 
+- (void)cleanup {
+    unregisterSignalHandlers();
+    confHandlers.clear();
+}
+
 - (NSArray *)getAccountList {
     auto accountVector = libjami::getAccountList(); 
 
