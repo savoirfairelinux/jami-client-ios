@@ -36,6 +36,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f269fc37_9ac7aac5",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "036d3c0b_02d9252b",
+      "revId": "7d86020fb854c31042e5592c5680839f762824a3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19a12e84_9960fdfb",
@@ -64,6 +82,24 @@
         "id": 225
       },
       "writtenOn": "2025-06-13T19:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19a12e84_9960fdfb",
+      "revId": "7d86020fb854c31042e5592c5680839f762824a3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd6349f9_84657b1a",
+        "filename": "Ring/jamiShareExtension/ShareViewModel.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "19a12e84_9960fdfb",

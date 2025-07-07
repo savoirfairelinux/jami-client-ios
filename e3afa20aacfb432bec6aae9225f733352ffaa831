@@ -16,6 +16,24 @@
       "message": "keep original configuration",
       "revId": "e3afa20aacfb432bec6aae9225f733352ffaa831",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cdbfac7_26a39ed0",
+        "filename": "Ring/Ring.xcodeproj/xcshareddata/xcschemes/jamiNotificationExtension.xcscheme",
+        "patchSetId": 42
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "7b36dc5c_a2f4e942",
+      "revId": "e3afa20aacfb432bec6aae9225f733352ffaa831",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }

@@ -36,6 +36,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c928a787_08d2b0cf",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "199bfefa_55c91f99",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25701a3c_164dde8f",
@@ -64,6 +82,24 @@
         "id": 225
       },
       "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25701a3c_164dde8f",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ddba849_f213589c",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "25701a3c_164dde8f",
@@ -106,6 +142,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5a2a193_84259cf2",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e2da291_5c1ffa14",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd8aae9d_845dea4b",
@@ -134,6 +188,24 @@
         "id": 225
       },
       "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd8aae9d_845dea4b",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2410a323_355cee1d",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "cd8aae9d_845dea4b",
@@ -176,6 +248,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "682a74c2_b0ecc746",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7630f97_0407058a",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90e8d6a8_fe9abe58",
@@ -204,6 +294,24 @@
         "id": 225
       },
       "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90e8d6a8_fe9abe58",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36e95d2a_b1670efd",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "90e8d6a8_fe9abe58",
@@ -246,6 +354,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b1fce58_88fc850d",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2444f40e_65d526b3",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b76b8dc_6b37db5e",
@@ -274,6 +400,24 @@
         "id": 225
       },
       "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b76b8dc_6b37db5e",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae99651_774b7bae",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "7b76b8dc_6b37db5e",
@@ -316,6 +460,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf2395de_f52731ce",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "977b8e6a_671764a5",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b84ac720_2ce70a19",
@@ -344,6 +506,24 @@
         "id": 225
       },
       "writtenOn": "2025-06-18T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b84ac720_2ce70a19",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "358e5356_08d29158",
+        "filename": "Ring/jamiShareExtension/AdapterService.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "b84ac720_2ce70a19",
@@ -414,6 +594,24 @@
         "id": 225
       },
       "writtenOn": "2025-06-19T18:35:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4c7906d_6b427127",
+      "revId": "07edab7c8d44cd30fba4b312695a07901cc629fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0731747d_ae706616",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 27
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-07T20:10:16Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "f4c7906d_6b427127",
