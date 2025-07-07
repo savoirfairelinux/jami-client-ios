@@ -325,12 +325,15 @@ class ShareViewModel: ObservableObject {
     }
 
     func getDefaultAccount() -> String? {
-        if let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
-            if let selectedAccountID = sharedDefaults.string(forKey: Constants.selectedAccountID) {
-                return selectedAccountID
-            }
+        guard let sharedDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier),
+              let selectedAccountID = sharedDefaults.string(forKey: Constants.selectedAccountID) else {
+            return nil
         }
-        return nil
+        return selectedAccountID
+    }
+
+    deinit {
+        adapterService.removeDelegate()
     }
 }
 

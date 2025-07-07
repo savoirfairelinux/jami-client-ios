@@ -115,6 +115,8 @@ public final class AdapterService: AdapterDelegate {
         accountIsActive.store(false, ordering: .relaxed)
         self.removeDarwinNotificationListener()
 
+        adapter?.cleanup()
+
         Adapter.delegate = nil
         adapter = nil
 
@@ -437,10 +439,10 @@ extension AdapterService {
 
         CFNotificationCenterAddObserver(notificationCenter,
                                         observer, { (_, _, _, _, _) in
-            NotificationCenter.default.post(name: AdapterService.notificationExtensionResponse,
-                                            object: nil,
-                                            userInfo: nil)
-        },
+                                            NotificationCenter.default.post(name: AdapterService.notificationExtensionResponse,
+                                                                            object: nil,
+                                                                            userInfo: nil)
+                                        },
                                         Constants.notificationExtensionResponse,
                                         nil,
                                         .deliverImmediately)
