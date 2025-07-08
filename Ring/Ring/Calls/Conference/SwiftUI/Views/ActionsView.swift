@@ -175,12 +175,13 @@ struct BottomSheetContentView: View {
     @Binding var participants: [ParticipantViewModel]
     @Binding var pending: [PendingConferenceCall]
     let margin: CGFloat = 20
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
 
     private var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
 
     var body: some View {
         VStack(alignment: .center) {
-            if idiom == .pad {
+            if horizontalSizeClass == .regular {
                 createButtonRow(buttons: model.buttons)
                     .padding(.bottom, margin)
                     .padding(.top, margin * 0.5)
