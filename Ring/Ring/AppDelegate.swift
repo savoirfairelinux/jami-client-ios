@@ -113,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         signal(SIGPIPE, SIG_IGN)
         // swiftlint:enable nesting
 
-        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window = UIWindow()
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         if UserDefaults.standard.value(forKey: automaticDownloadFilesKey) == nil {

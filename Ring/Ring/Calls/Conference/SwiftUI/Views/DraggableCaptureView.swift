@@ -25,7 +25,7 @@ let height: CGFloat = 130
 
 var marginVertical: CGFloat = 100
 var marginHorizontal: CGFloat {
-    return UIDevice.current.orientation.isLandscape ? 50 : 20
+    ScreenDimensionsManager.shared.isLandscape ? 50 : 20
 }
 
 struct DraggablePositions {
@@ -56,15 +56,18 @@ struct DraggablePositions {
     }
 
     mutating func update() {
-        right = adaptiveScreenWidth - width * 0.5 - marginHorizontal
-        bottom = adaptiveScreenHeight - height
+        let screenWidth = ScreenDimensionsManager.shared.adaptiveWidth
+        let screenHeight = ScreenDimensionsManager.shared.adaptiveHeight
+
+        right = screenWidth - width * 0.5 - marginHorizontal
+        bottom = screenHeight - height
         topRight = CGPoint(x: right, y: marginVertical)
         topLeft = CGPoint(x: left, y: marginVertical)
         bottomRight = CGPoint(x: right, y: bottom)
         bottomLeft = CGPoint(x: left, y: bottom)
-        hiddenTopRight = CGPoint(x: adaptiveScreenWidth, y: marginVertical)
+        hiddenTopRight = CGPoint(x: screenWidth, y: marginVertical)
         hiddenTopLeft = CGPoint(x: 0, y: marginVertical)
-        hiddenBottomRight = CGPoint(x: adaptiveScreenWidth, y: bottom)
+        hiddenBottomRight = CGPoint(x: screenWidth, y: bottom)
         hiddenBottomLeft = CGPoint(x: 0, y: bottom)
     }
 
@@ -152,6 +155,8 @@ struct DragableCaptureView: View {
     @SwiftUI.State var hide: Bool = true
     let namespace: Namespace.ID
     let capturedVideoId = "capturedVideoId"
+
+    @ObservedObject private var dimensionsManager = ScreenDimensionsManager.shared
 
     var dragGesture: some Gesture {
         DragGesture()
@@ -253,7 +258,7 @@ struct DragableCaptureView: View {
             let postion = positions.getToggledPosition(location)
             self.animatePositionChange(to: postion)
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+        .onChange(of: dimensionsManager.isLandscape) { _ in
             togglePositionUpdate()
         }
     }

@@ -547,7 +547,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     var maxDimension: CGFloat {
-        let screenWidth = UIScreen.main.bounds.width
+        let screenWidth = ScreenDimensionsManager.shared.adaptiveWidth
         // iPhone 5 width
         if screenWidth <= 320 {
             return 200
