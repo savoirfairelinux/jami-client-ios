@@ -16,6 +16,125 @@
       "message": "Ensure that sharedDefaults is used consistently in all cases where the selected account is involved.",
       "revId": "798c4a70a3fc5addbcc6e8a62d76464c2d42cef2",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0480d6c9_5595fe8e",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 60
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-07-08T19:52:50Z",
+      "side": 1,
+      "message": "Ensure the text is translatable/localizable",
+      "revId": "798c4a70a3fc5addbcc6e8a62d76464c2d42cef2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ca79a53_148a8a0a",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 60
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-07-08T19:52:50Z",
+      "side": 1,
+      "message": "@ObservedObject",
+      "revId": "798c4a70a3fc5addbcc6e8a62d76464c2d42cef2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d052a9f_987ff700",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 60
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-07-08T19:52:50Z",
+      "side": 1,
+      "message": "use fixed font size, because we have fixed frames",
+      "revId": "798c4a70a3fc5addbcc6e8a62d76464c2d42cef2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a34e4ca_bb84b606",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 60
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-07-08T19:52:50Z",
+      "side": 1,
+      "message": ".truncationMode(.middle)\n.lineLimit(1)",
+      "revId": "798c4a70a3fc5addbcc6e8a62d76464c2d42cef2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd48f455_2d99d813",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 60
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-07-08T19:52:50Z",
+      "side": 1,
+      "message": "use fixed font size, because we have fixed frames",
+      "revId": "798c4a70a3fc5addbcc6e8a62d76464c2d42cef2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38b1d04b_5a4c86e6",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 60
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-07-08T19:52:50Z",
+      "side": 1,
+      "message": ".truncationMode(.middle)\n.lineLimit(1)",
+      "revId": "798c4a70a3fc5addbcc6e8a62d76464c2d42cef2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9faaaaf6_76b94d02",
+        "filename": "Ring/jamiShareExtension/ShareView.swift",
+        "patchSetId": 60
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-07-08T19:52:50Z",
+      "side": 1,
+      "message": ".truncationMode(.middle)\n.lineLimit(1)",
+      "revId": "798c4a70a3fc5addbcc6e8a62d76464c2d42cef2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
