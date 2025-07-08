@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Savoir-faire Linux Inc.
+ *  Copyright (C) 2023-2025 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -21,20 +21,102 @@
 import Foundation
 import SwiftUI
 
-var adaptiveScreenWidth: CGFloat {
-    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-        return screenWidth
-    }
+// MARK: - Screen Dimensions Manager
+class ScreenDimensionsManager: ObservableObject {
+    static let shared = ScreenDimensionsManager()
+    
+    @Published private(set) var adaptiveWidth: CGFloat = 0
+    @Published private(set) var adaptiveHeight: CGFloat = 0
+    @Published private(set) var avatarOffset: CGFloat = 0
+    @Published private(set) var isLandscape: Bool = false
 
-    return windowScene.interfaceOrientation.isLandscape ? screenHeight : screenWidth
+    private init() {
+        updateDimensions()
+        setupNotifications()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(orientationDidChange),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(sceneDidActivate),
+            name: UIScene.didActivateNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func orientationDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            self?.updateDimensions()
+        }
+    }
+    
+    @objc private func sceneDidActivate() {
+        DispatchQueue.main.async { [weak self] in
+            self?.updateDimensions()
+        }
+    }
+    
+    private func updateDimensions() {
+        guard let windowScene = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first(where: { $0.activationState == .foregroundActive }) ??
+            UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first else {
+            adaptiveWidth = UIScreen.main.bounds.width
+            adaptiveHeight = UIScreen.main.bounds.height
+            isLandscape = UIDevice.current.orientation.isLandscape
+            updateAvatarOffset()
+            return
+        }
+        
+        isLandscape = windowScene.interfaceOrientation.isLandscape
+
+
+        if let window = windowScene.windows.first {
+            let bounds = window.bounds
+            adaptiveWidth = bounds.width
+            adaptiveHeight = bounds.height
+        } else {
+            let bounds = UIScreen.main.bounds
+            adaptiveWidth = bounds.width
+            adaptiveHeight = bounds.height
+        }
+        updateAvatarOffset()
+    }
+    
+    private func updateAvatarOffset() {
+        let avatarSize: CGFloat = 160
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            avatarOffset = isLandscape
+                ? -(adaptiveHeight / 3) + avatarSize
+                : -(adaptiveHeight / 2.5) + avatarSize
+        } else {
+            avatarOffset = isLandscape
+                ? 0
+                : -(adaptiveHeight / 3) + avatarSize
+        }
+    }
+}
+
+var adaptiveScreenWidth: CGFloat {
+    ScreenDimensionsManager.shared.adaptiveWidth
 }
 
 var adaptiveScreenHeight: CGFloat {
-    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-        return screenHeight
-    }
-
-    return windowScene.interfaceOrientation.isLandscape ? screenWidth : screenHeight
+    ScreenDimensionsManager.shared.adaptiveHeight
 }
 
 struct Page: Equatable {
@@ -59,6 +141,7 @@ class MainGridViewModel: ObservableObject {
     @Published var firstParticipant: String = ""
 
     var count: Int = 0
+    private let dimensionsManager = ScreenDimensionsManager.shared
 
     var maxColumn: CGFloat {
         return UIDevice.current.orientation.isLandscape ? 4 : 3
@@ -69,7 +152,16 @@ class MainGridViewModel: ObservableObject {
     }
 
     init () {
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(dimensionsDidChange),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     func getPageLayoutForSinglePage(itemCount: Int) -> Page {
@@ -129,7 +221,10 @@ class MainGridViewModel: ObservableObject {
     }
 
     @objc
-    func rotated() {
-        self.pages = getPages(itemCount: count)
+    private func dimensionsDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.pages = self.getPages(itemCount: self.count)
+        }
     }
 }

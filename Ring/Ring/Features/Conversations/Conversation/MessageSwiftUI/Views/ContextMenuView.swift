@@ -68,7 +68,7 @@ struct ContextMenuView: View {
                     // emoji picker if short message, otherwise see below
                     if model.isShortMsg {
                         makeWithSpacers(elementForAlignment: makeEmojiBar())
-                            .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
+                            .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
                         Spacer()
                             .frame(height: model.emojiVerticalPadding)
                     }
@@ -85,11 +85,11 @@ struct ContextMenuView: View {
                                 .frame(width: 10)
                         }
                     }
-                    .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
+                    .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
                     // extra check for long messages to move reaction bar closer to the part of the screen where finger was last
                     if !model.isShortMsg {
                         makeWithSpacers(elementForAlignment: makeEmojiBar())
-                            .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
+                            .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
                     } else {
                         Spacer()
                             .frame(height: model.defaultVerticalPadding)
@@ -102,9 +102,9 @@ struct ContextMenuView: View {
                                             .scaleEffect(actionsScale, anchor: model.actionsAnchor)
                                             .frame(width: model.menuSize.width)
                         )
-                        .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
+                        .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
                     }
-                    .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
+                    .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
                 }
                 .padding(.trailing, 4)
             }

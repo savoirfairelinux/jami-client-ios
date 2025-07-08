@@ -680,7 +680,7 @@ class ConversationViewController: UIViewController,
            let statusBarManager = windowScene.statusBarManager {
             statusBarHeight = statusBarManager.statusBarFrame.height
         }
-        let screenSize = UIScreen.main.bounds
+        let screenSize = UIApplication.shared.windows.first?.bounds ?? UIScreen.main.bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         let newFrame = CGRect(x: 0, y: -statusBarHeight, width: screenWidth, height: screenHeight + statusBarHeight)
