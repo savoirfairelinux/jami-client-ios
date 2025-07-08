@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b87a51b_b7605d8d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-08T14:01:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d366c957_40d02f51",
+      "revId": "5a7bf12331fe847fdf3da2dfd37e10b32674a487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4b328ba_6642c832",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-14T14:18:35Z",
       "side": 1,
       "message": "Set typingStatus to false if the text is empty.",
+      "revId": "5a7bf12331fe847fdf3da2dfd37e10b32674a487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76bc45d5_1df260a1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagePanelVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-08T14:01:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4b328ba_6642c832",
       "revId": "5a7bf12331fe847fdf3da2dfd37e10b32674a487",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -70,6 +106,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbc9c97a_b1b91a0e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-08T14:01:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44226883_0e8f97bf",
+      "revId": "5a7bf12331fe847fdf3da2dfd37e10b32674a487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2363e2e_e5458ed4",
@@ -83,6 +137,24 @@
       "writtenOn": "2025-05-14T14:18:35Z",
       "side": 1,
       "message": "Add leading alignment to match incoming messages, and animate the dots so they appear one by one, mimicking typing.",
+      "revId": "5a7bf12331fe847fdf3da2dfd37e10b32674a487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80160762_dde22313",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-08T14:01:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2363e2e_e5458ed4",
       "revId": "5a7bf12331fe847fdf3da2dfd37e10b32674a487",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
