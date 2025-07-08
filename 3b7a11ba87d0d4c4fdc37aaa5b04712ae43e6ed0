@@ -33,6 +33,24 @@
       "message": "remove print output",
       "revId": "3b7a11ba87d0d4c4fdc37aaa5b04712ae43e6ed0",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c823d82_99157e8b",
+        "filename": "Ring/Ring/SwarmInfo.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-08T14:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32619f95_a78b3fda",
+      "revId": "3b7a11ba87d0d4c4fdc37aaa5b04712ae43e6ed0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
