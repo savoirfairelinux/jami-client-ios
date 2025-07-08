@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f4c82f0_c27b7b05",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-08T14:02:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a56294f1_2bdd8627",
+      "revId": "f3902a702ec939f0ca55c103f7b834770207acbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6539c522_83724de2",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-14T16:35:44Z",
       "side": 1,
       "message": "The title should be ‘Chats’.",
+      "revId": "f3902a702ec939f0ca55c103f7b834770207acbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5518165_b5cc1ad5",
+        "filename": "Ring/Ring/Features/Settings/Me/AccountSettingsViews.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1133
+      },
+      "writtenOn": "2025-07-08T14:02:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6539c522_83724de2",
       "revId": "f3902a702ec939f0ca55c103f7b834770207acbb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
