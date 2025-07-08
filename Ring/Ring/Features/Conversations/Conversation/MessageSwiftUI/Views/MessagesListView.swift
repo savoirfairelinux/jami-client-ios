@@ -49,7 +49,7 @@ struct MessagesListView: View {
     @ObservedObject var model: MessagesListVM
     @ObservedObject var callBannerViewModel: CallBannerViewModel
     @SwiftUI.State var showScrollToLatestButton = false
-    let scrollReserved = UIScreen.main.bounds.height * 1.5
+    let scrollReserved = ScreenDimensionsManager.shared.adaptiveHeight * 1.5
 
     // context menu
     @SwiftUI.State var contextMenuPresentingState: ContextMenuPresentingState = .none
@@ -61,6 +61,8 @@ struct MessagesListView: View {
     @SwiftUI.State private var shouldHideActiveKeyboard = false
     @SwiftUI.State var isMessageBarFocused: Bool = false
     @SwiftUI.State var keyboardHeight: CGFloat = 0
+
+    @ObservedObject private var dimensionsManager = ScreenDimensionsManager.shared
 
     // reactions
     @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
@@ -104,17 +106,17 @@ struct MessagesListView: View {
                     model.hideNavigationBar.accept(shouldHide)
                 }
                 // hide context menu overly when device is rotated
-                .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                .onChange(of: dimensionsManager.adaptiveHeight) { newHeight in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
-                            screenHeight = UIScreen.main.bounds.size.height
+                        if screenHeight != newHeight && screenHeight != 0 {
+                            screenHeight = newHeight
                             contextMenuPresentingState = .dismissed
                             self.shouldHideActiveKeyboard = false
                         }
                     }
                 }
                 .onAppear(perform: {
-                    screenHeight = UIScreen.main.bounds.size.height
+                    screenHeight = dimensionsManager.adaptiveHeight
                 })
 
                 .onChange(of: contextMenuPresentingState, perform: { state in

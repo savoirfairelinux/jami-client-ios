@@ -20,15 +20,11 @@
 
 import SwiftUI
 
-let maxButtonsWidgetHeight: CGFloat = screenHeight * 0.7
+let maxButtonsWidgetHeight: CGFloat = ScreenDimensionsManager.shared.adaptiveHeight * 0.7
 let avatarSize: CGFloat = 160
 
 var avatarOffset: CGFloat {
-    if UIDevice.current.userInterfaceIdiom == .pad {
-        return UIDevice.current.orientation.isLandscape ? -(screenHeight / 3) + avatarSize : -(screenHeight / 2.5) + avatarSize
-    } else {
-        return UIDevice.current.orientation.isLandscape ? 0 : -(screenHeight / 3) + avatarSize
-    }
+    ScreenDimensionsManager.shared.avatarOffset
 }
 
 struct Avatar: View {
@@ -126,8 +122,11 @@ struct ContainerView: View {
     @SwiftUI.State private var maxHeight = maxButtonsWidgetHeight
     @SwiftUI.State var buttonsVisible: Bool = true
     @SwiftUI.State var showInitialView: Bool = true
-    @SwiftUI.State var audioCallViewIdentifier = "audioCallView_"
+    @SwiftUI.State var audioCallViewIdentifier = "audioCallView_portrait"
     @Namespace var namespace
+
+    @ObservedObject private var dimensionsManager = ScreenDimensionsManager.shared
+
     let capturedVideoId = "capturedVideoId"
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -202,9 +201,8 @@ struct ContainerView: View {
                 }
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-            let orientation = UIDevice.current.orientation.isLandscape ? "landscape" : "portrait"
-            self.audioCallViewIdentifier = "audioCallView_" + orientation
+        .onChange(of: dimensionsManager.isLandscape) { isLandscape in
+            audioCallViewIdentifier = isLandscape ? "audioCallView_landscape" : "audioCallView_portrait"
         }
     }
 
@@ -221,7 +219,7 @@ struct ContainerView: View {
         .id(capturedVideoId)
         .matchedGeometryEffect(id: capturedVideoId, in: namespace)
         .transition(.scale(scale: 1))
-        .frame(maxWidth: adaptiveScreenWidth, maxHeight: adaptiveScreenHeight)
+        .frame(maxWidth: ScreenDimensionsManager.shared.adaptiveWidth, maxHeight: ScreenDimensionsManager.shared.adaptiveHeight)
         .ignoresSafeArea()
     }
 
@@ -258,7 +256,7 @@ struct ContainerView: View {
             .lineLimit(1)
             .foregroundColor(.white)
             .offset(y: avatarOffset)
-            .frame(maxWidth: adaptiveScreenWidth - 50)
+            .frame(maxWidth: ScreenDimensionsManager.shared.adaptiveWidth - 50)
     }
 
     @ViewBuilder

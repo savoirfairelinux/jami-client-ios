@@ -416,7 +416,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     // MARK: - Helpers
 
     private func shouldMinimizeTop() -> Bool {
-        return UIDevice.current.orientation.isLandscape &&
+        return ScreenDimensionsManager.shared.isLandscape &&
             UIDevice.current.userInterfaceIdiom == .phone
     }
 

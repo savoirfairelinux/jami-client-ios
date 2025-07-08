@@ -29,16 +29,22 @@ struct LocationSharingView: View {
     var viewCornerRadius: CGFloat = 15
     @Namespace private var animationNamespace
 
+    private var windowBounds: CGRect {
+        let width = ScreenDimensionsManager.shared.adaptiveWidth
+        let height = ScreenDimensionsManager.shared.adaptiveHeight
+        return CGRect(x: 0, y: 0, width: width, height: height)
+    }
+
     var navigationBarHeight: CGFloat {
         UINavigationController.navBarHeight() + ( UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0) + 80
     }
 
     var mapWidth: CGFloat {
-        return model.locationSharingiewModel.isMapOpened ? UIScreen.main.bounds.size.width : 250
+        return model.locationSharingiewModel.isMapOpened ? windowBounds.size.width : 250
     }
 
     var mapHeight: CGFloat {
-        return model.locationSharingiewModel.isMapOpened ? (UIScreen.main.bounds.size.height - navigationBarHeight) : 150
+        return model.locationSharingiewModel.isMapOpened ? (windowBounds.size.height - navigationBarHeight) : 150
     }
 
     var labelHeight: CGFloat {

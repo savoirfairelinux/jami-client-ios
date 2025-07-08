@@ -453,7 +453,9 @@ class ConversationViewController: UIViewController,
     }
 
     func setupNavTitle(profileImageData: Data?, displayName: String? = nil, username: String?) {
-        let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
+        let screenWidth = ScreenDimensionsManager.shared.adaptiveWidth
+        let screenHeight = ScreenDimensionsManager.shared.adaptiveHeight
+        let isPortrait = screenWidth < screenHeight
         let imageSize = isPortrait ? CGFloat(36.0) : CGFloat(32.0)
         let imageOffsetY = CGFloat(5.0)
         let infoPadding = CGFloat(8.0)
@@ -680,9 +682,8 @@ class ConversationViewController: UIViewController,
            let statusBarManager = windowScene.statusBarManager {
             statusBarHeight = statusBarManager.statusBarFrame.height
         }
-        let screenSize = UIScreen.main.bounds
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
+        let screenWidth = ScreenDimensionsManager.shared.adaptiveWidth
+        let screenHeight = ScreenDimensionsManager.shared.adaptiveHeight
         let newFrame = CGRect(x: 0, y: -statusBarHeight, width: screenWidth, height: screenHeight + statusBarHeight)
         let initialFrame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: screenHeight + statusBarHeight)
         contactPickerVC.view.frame = initialFrame
