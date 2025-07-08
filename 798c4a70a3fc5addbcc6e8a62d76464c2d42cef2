@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a1df04_6dc406a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 60
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-07-08T15:42:43Z",
+      "side": 1,
+      "message": "Ensure that sharedDefaults is used consistently in all cases where the selected account is involved.",
+      "revId": "798c4a70a3fc5addbcc6e8a62d76464c2d42cef2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
