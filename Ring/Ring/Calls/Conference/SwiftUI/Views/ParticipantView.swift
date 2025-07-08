@@ -145,7 +145,7 @@ struct ExpandableParticipantView: View {
         if showMainGridView || model.notActiveParticipant {
             return viewWidth
         } else {
-            return adaptiveScreenWidth
+            return ScreenDimensionsManager.shared.adaptiveWidth
         }
     }
 }

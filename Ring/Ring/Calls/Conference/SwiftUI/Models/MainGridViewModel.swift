@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Savoir-faire Linux Inc.
+ *  Copyright (C) 2023-2025 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -21,22 +21,6 @@
 import Foundation
 import SwiftUI
 
-var adaptiveScreenWidth: CGFloat {
-    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-        return screenWidth
-    }
-
-    return windowScene.interfaceOrientation.isLandscape ? screenHeight : screenWidth
-}
-
-var adaptiveScreenHeight: CGFloat {
-    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-        return screenHeight
-    }
-
-    return windowScene.interfaceOrientation.isLandscape ? screenWidth : screenHeight
-}
-
 struct Page: Equatable {
     let columns: Int
     let rows: Int
@@ -49,8 +33,8 @@ struct Page: Equatable {
         self.rows = rows
         let marginVertical: CGFloat = CGFloat(rows + 1) * padding
         let marginHorizontal: CGFloat = CGFloat(columns - 1) * padding
-        self.width = (adaptiveScreenWidth - marginHorizontal) / CGFloat(columns)
-        self.height = (adaptiveScreenHeight - marginVertical) / CGFloat(rows)
+        self.width = (ScreenDimensionsManager.shared.adaptiveWidth - marginHorizontal) / CGFloat(columns)
+        self.height = (ScreenDimensionsManager.shared.adaptiveHeight - marginVertical) / CGFloat(rows)
     }
 }
 
@@ -59,17 +43,33 @@ class MainGridViewModel: ObservableObject {
     @Published var firstParticipant: String = ""
 
     var count: Int = 0
+    @ObservedObject private var dimensionsManager = ScreenDimensionsManager.shared
 
     var maxColumn: CGFloat {
-        return UIDevice.current.orientation.isLandscape ? 4 : 3
+        return dimensionsManager.isLandscape ? 4 : 3
     }
 
     var maxRows: CGFloat {
-        return UIDevice.current.orientation.isLandscape ? 3 : 4
+        return dimensionsManager.isLandscape ? 3 : 4
     }
 
     init () {
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(dimensionsDidChange),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(dimensionsDidChange),
+            name: UIScene.didActivateNotification,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     func getPageLayoutForSinglePage(itemCount: Int) -> Page {
@@ -129,7 +129,10 @@ class MainGridViewModel: ObservableObject {
     }
 
     @objc
-    func rotated() {
-        self.pages = getPages(itemCount: count)
+    private func dimensionsDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.pages = self.getPages(itemCount: self.count)
+        }
     }
 }

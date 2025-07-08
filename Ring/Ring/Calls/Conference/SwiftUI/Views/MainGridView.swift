@@ -60,7 +60,8 @@ struct MainGridView: View {
                 })
                 .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
                     self.scrollPosition = value
-                    let newValue = abs(Int(self.scrollPosition.x / UIScreen.main.bounds.width))
+                    let screenWidth = ScreenDimensionsManager.shared.adaptiveWidth
+                    let newValue = abs(Int(self.scrollPosition.x / screenWidth))
                     if selectedPage != newValue {
                         withAnimation {
                             selectedPage = newValue

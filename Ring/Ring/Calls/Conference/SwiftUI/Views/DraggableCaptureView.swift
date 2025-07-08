@@ -25,7 +25,7 @@ let height: CGFloat = 130
 
 var marginVertical: CGFloat = 100
 var marginHorizontal: CGFloat {
-    return UIDevice.current.orientation.isLandscape ? 50 : 20
+    ScreenDimensionsManager.shared.isLandscape ? 50 : 20
 }
 
 struct DraggablePositions {
@@ -43,28 +43,31 @@ struct DraggablePositions {
 
     init() {
         left = marginHorizontal + width * 0.5
-        right = adaptiveScreenWidth - width * 0.5 - marginHorizontal
-        bottom = adaptiveScreenHeight - height
+        right = ScreenDimensionsManager.shared.adaptiveWidth - width * 0.5 - marginHorizontal
+        bottom = ScreenDimensionsManager.shared.adaptiveHeight - height
         topRight = CGPoint(x: right, y: marginVertical)
         topLeft = CGPoint(x: left, y: marginVertical)
         bottomRight = CGPoint(x: right, y: bottom)
         bottomLeft = CGPoint(x: left, y: bottom)
-        hiddenTopRight = CGPoint(x: adaptiveScreenWidth, y: marginVertical)
+        hiddenTopRight = CGPoint(x: ScreenDimensionsManager.shared.adaptiveWidth, y: marginVertical)
         hiddenTopLeft = CGPoint(x: 0, y: marginVertical)
-        hiddenBottomRight = CGPoint(x: adaptiveScreenWidth, y: bottom)
+        hiddenBottomRight = CGPoint(x: ScreenDimensionsManager.shared.adaptiveWidth, y: bottom)
         hiddenBottomLeft = CGPoint(x: 0, y: bottom)
     }
 
     mutating func update() {
-        right = adaptiveScreenWidth - width * 0.5 - marginHorizontal
-        bottom = adaptiveScreenHeight - height
+        let screenWidth = ScreenDimensionsManager.shared.adaptiveWidth
+        let screenHeight = ScreenDimensionsManager.shared.adaptiveHeight
+
+        right = screenWidth - width * 0.5 - marginHorizontal
+        bottom = screenHeight - height
         topRight = CGPoint(x: right, y: marginVertical)
         topLeft = CGPoint(x: left, y: marginVertical)
         bottomRight = CGPoint(x: right, y: bottom)
         bottomLeft = CGPoint(x: left, y: bottom)
-        hiddenTopRight = CGPoint(x: adaptiveScreenWidth, y: marginVertical)
+        hiddenTopRight = CGPoint(x: screenWidth, y: marginVertical)
         hiddenTopLeft = CGPoint(x: 0, y: marginVertical)
-        hiddenBottomRight = CGPoint(x: adaptiveScreenWidth, y: bottom)
+        hiddenBottomRight = CGPoint(x: screenWidth, y: bottom)
         hiddenBottomLeft = CGPoint(x: 0, y: bottom)
     }
 
@@ -142,7 +145,7 @@ struct DraggablePositions {
 
 struct DragableCaptureView: View {
 
-    @SwiftUI.State private var location: CGPoint = CGPoint(x: adaptiveScreenWidth - width * 0.5 - marginHorizontal, y: marginVertical)
+    @SwiftUI.State private var location: CGPoint = CGPoint(x: ScreenDimensionsManager.shared.adaptiveWidth - width * 0.5 - marginHorizontal, y: marginVertical)
     @GestureState private var currentLocation: CGPoint?
     @GestureState private var startLocation: CGPoint?
     @SwiftUI.State private var positions = DraggablePositions()
@@ -152,6 +155,8 @@ struct DragableCaptureView: View {
     @SwiftUI.State var hide: Bool = true
     let namespace: Namespace.ID
     let capturedVideoId = "capturedVideoId"
+
+    @ObservedObject private var dimensionsManager = ScreenDimensionsManager.shared
 
     var dragGesture: some Gesture {
         DragGesture()
@@ -202,19 +207,19 @@ struct DragableCaptureView: View {
     }
 
     func isOutsideVerticalBounds(_ point: CGPoint) -> Bool {
-        return point.y > adaptiveScreenHeight || point.y < 0
+        return point.y > ScreenDimensionsManager.shared.adaptiveHeight || point.y < 0
     }
 
     func isOutsideHorizontalBounds(_ point: CGPoint) -> Bool {
-        return point.x > adaptiveScreenWidth - (marginHorizontal * 1.5) || point.x < marginHorizontal * 1.5
+        return point.x > ScreenDimensionsManager.shared.adaptiveWidth - (marginHorizontal * 1.5) || point.x < marginHorizontal * 1.5
     }
 
     func isTop(_ point: CGPoint) -> Bool {
-        return point.y <= adaptiveScreenHeight / 2
+        return point.y <= ScreenDimensionsManager.shared.adaptiveHeight / 2
     }
 
     func isTrailing(_ point: CGPoint) -> Bool {
-        return point.x > adaptiveScreenWidth / 2
+        return point.x > ScreenDimensionsManager.shared.adaptiveWidth / 2
     }
 
     var body: some View {
@@ -253,7 +258,13 @@ struct DragableCaptureView: View {
             let postion = positions.getToggledPosition(location)
             self.animatePositionChange(to: postion)
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+        .onChange(of: dimensionsManager.isLandscape) { _ in
+            togglePositionUpdate()
+        }
+        .onChange(of: dimensionsManager.adaptiveWidth) { _ in
+            togglePositionUpdate()
+        }
+        .onChange(of: dimensionsManager.adaptiveHeight) { _ in
             togglePositionUpdate()
         }
     }

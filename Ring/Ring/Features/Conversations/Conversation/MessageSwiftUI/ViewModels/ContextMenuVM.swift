@@ -75,7 +75,9 @@ class ContextMenuVM: ObservableObject {
     // TODO remove this var and just use emojiBarHeight
     var emojiVerticalPadding: CGFloat = 6
     var emojiBarHeight: CGFloat = 68
-    var emojiBarMaxWidth: CGFloat = max(0, min(screenWidth - 20, 62 * 5))
+    var emojiBarMaxWidth: CGFloat {
+        return max(0, min(screenWidth - 20, 62 * 5))
+    }
 
     var isShortMsg: Bool = true
     var incomingMessageMarginSize: CGFloat = 58
@@ -87,6 +89,14 @@ class ContextMenuVM: ObservableObject {
 
     var currentJamiAccountId: String?
     var myAuthoredReactionIds: [String] = [] // list of MessageIds for local user's authored reactions
+
+    var screenWidth: CGFloat {
+        return ScreenDimensionsManager.shared.adaptiveWidth
+    }
+
+    var screenHeight: CGFloat {
+        return ScreenDimensionsManager.shared.adaptiveHeight
+    }
     var preferredUserReactions: [String] = [
         0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
     ].map { String(UnicodeScalar($0)!) }
@@ -105,14 +115,14 @@ class ContextMenuVM: ObservableObject {
                 width = newWidth
             }
         }
-        let newHeight: CGFloat = min(height, UIScreen.main.bounds.height - screenPadding)
-        let newWidth: CGFloat = min(width, UIScreen.main.bounds.width - screenPadding)
+        let newHeight: CGFloat = min(height, screenHeight - screenPadding)
+        let newWidth: CGFloat = min(width, screenWidth - screenPadding)
         menuSize = CGSize(width: newWidth, height: newHeight)
     }
 
     func updateSizes() {
         if messageFrame == CGRect.zero || menuSize == CGSize.zero { return }
-        let screenHeight = UIScreen.main.bounds.height
+        let screenHeight = self.screenHeight
         let navBarHeight = UINavigationController.navBarHeight() + ( UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0)
         let messageOffsetY = messageFrame.origin.y
         let maxMessageHeight = screenHeight - (menuSize.height + navBarHeight + 80)

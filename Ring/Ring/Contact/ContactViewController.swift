@@ -98,7 +98,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         })
         .disposed(by: self.disposeBag)
 
-        let maxLabelWidth = UIScreen.main.bounds.size.width * 0.90
+        let maxLabelWidth = ScreenDimensionsManager.shared.adaptiveWidth * 0.90
         self.stretchyHeader.jamiID.preferredMaxLayoutWidth = maxLabelWidth
         self.stretchyHeader.userName.preferredMaxLayoutWidth = maxLabelWidth
         self.stretchyHeader.displayName.preferredMaxLayoutWidth = maxLabelWidth
@@ -209,7 +209,7 @@ extension ContactViewController: UITableViewDelegate {
         let navigationHeight = self.navigationController?.navigationBar.bounds.height
         var size = self.view.bounds.size
         var titlViewThreshold: CGFloat = 0
-        let screenSize = UIScreen.main.bounds.size
+        let screenSize = CGSize(width: ScreenDimensionsManager.shared.adaptiveWidth, height: ScreenDimensionsManager.shared.adaptiveHeight)
         if let height = navigationHeight {
             // height for iphoneX
             if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone,

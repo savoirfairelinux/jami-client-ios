@@ -455,6 +455,7 @@
 		26EF35E928E3847100D97E14 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35E828E3847100D97E14 /* MessageContentView.swift */; };
 		26EF35EB28E38DA200D97E14 /* MessageContentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */; };
 		26EF35EF29075A5300D97E14 /* MessageStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EE29075A5300D97E14 /* MessageStackView.swift */; };
+		26EFD7B42E2D59BB00B63F74 /* ScreenDimensionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7B32E2D59B600B63F74 /* ScreenDimensionsManager.swift */; };
 		26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F5442C2C5815770069A7A4 /* WelcomeView.swift */; };
 		26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */; };
 		26F82D042D7A09AF00954A7B /* libnatpmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F82D032D7A09AE00954A7B /* libnatpmp.xcframework */; };
@@ -1055,6 +1056,7 @@
 		26EF35E828E3847100D97E14 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
 		26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentVM.swift; sourceTree = "<group>"; };
 		26EF35EE29075A5300D97E14 /* MessageStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStackView.swift; sourceTree = "<group>"; };
+		26EFD7B32E2D59B600B63F74 /* ScreenDimensionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDimensionsManager.swift; sourceTree = "<group>"; };
 		26F5442C2C5815770069A7A4 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-release.entitlements"; sourceTree = "<group>"; };
@@ -1844,6 +1846,7 @@
 		0E44B62D202B9DC40060F71B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				26EFD7B32E2D59B600B63F74 /* ScreenDimensionsManager.swift */,
 				263C16822D9DBCE6008E102C /* ThreadSafeQueueHelper.swift */,
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
 				BB6690032A99043200875848 /* SharedActionsPresenter.swift */,
@@ -3134,6 +3137,7 @@
 				26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */,
 				4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */,
 				0EC7808F2424FDAE000A04C5 /* CustomActionTextView.swift in Sources */,
+				26EFD7B42E2D59BB00B63F74 /* ScreenDimensionsManager.swift in Sources */,
 				56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */,
 				1A5DC0281F3564AA0075E8EF /* MessageModel.swift in Sources */,
 				265DFAF32929C01400834B97 /* MessageRowVM.swift in Sources */,
