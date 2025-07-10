@@ -20,6 +20,7 @@ import SwiftUI
 import RxSwift
 
 class ShareViewModel: ObservableObject {
+
     private let disposeBag = DisposeBag()
     private var adapter: Adapter
     private var adapterService: AdapterService
@@ -35,9 +36,10 @@ class ShareViewModel: ObservableObject {
     @Published var isLoading: Bool = true
     var transmissionStatus: [String: NewStatusIndicator] = [:]
 
-    init() {
-        self.adapter = Adapter()
-        self.adapterService = AdapterService(withAdapter: adapter)
+    init(adapter: Adapter, adapterService: AdapterService) {
+        NSLog("ShareViewModel init called")
+        self.adapter = adapter
+        self.adapterService = adapterService
 
         // Check if daemon can be started (waits up to 10 seconds for notification extension)
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
@@ -319,18 +321,13 @@ class ShareViewModel: ObservableObject {
         }
     }
 
-    func closeShareExtension() {
-        // Deactivate all accounts and set global state to false
-        adapterService.setAllAccountsInactive()
-
+    func cleanup() {
         removeDarwinNotificationListener()
 
         if let timer = stallTimer {
             timer.invalidate()
             stallTimer = nil
         }
-
-        adapterService.removeDelegate()
     }
 
     // MARK: Darwin Notification Handling
@@ -377,6 +374,7 @@ class ShareViewModel: ObservableObject {
     }
 
     deinit {
+        NSLog("ShareViewModel deinit called")
         removeDarwinNotificationListener()
         adapterService.removeDelegate()
     }
