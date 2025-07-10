@@ -141,7 +141,6 @@ struct ShareView: View {
         .onChange(of: viewModel.transmissionSummary) { newValue in
             if !newValue.isEmpty {
                 isSending = false
-                viewModel.closeShareExtension()
                 closeAction()
             }
         }

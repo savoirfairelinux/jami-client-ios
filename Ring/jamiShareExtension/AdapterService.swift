@@ -35,8 +35,13 @@ public final class AdapterService: AdapterDelegate {
     static let notificationExtensionResponse = Notification.Name(Constants.appIdentifier + ".shareExtensionQueryGotResponseFromNotificationExtension.internal")
 
     init(withAdapter adapter: Adapter) {
+        NSLog("AdapterService init called")
         self.adapter = adapter
         Adapter.delegate = self
+    }
+
+    deinit {
+        NSLog("AdapterService deinit called")
     }
 
     func startDaemon() {

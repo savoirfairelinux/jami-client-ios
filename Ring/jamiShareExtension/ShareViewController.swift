@@ -21,25 +21,57 @@ import SwiftUI
 import Social
 import RxSwift
 
-@objc class ShareViewController: UIViewController {
-    private var viewModel: ShareViewModel!
+@objc
+class ShareViewController: UIViewController {
+    private var hostingController: UIHostingController<ShareView>?
+    private var requestCompleted: Bool = false
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        NSLog("ShareViewController init")
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        NSLog("ShareViewController init(coder:)")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSLog("ShareViewController viewDidLoad")
+        ShareCoordinator.shared.registerController(self)
+    }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        NSLog("ShareViewController viewWillDisappear called")
+        closeShareExtension()
+        super.viewWillDisappear(animated)
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        NSLog("ShareViewController didReceiveMemoryWarning")
+    }
+
+    func setView(for viewModel: ShareViewModel?) {
+        NSLog("ShareViewController setView called")
+        guard let viewModel = viewModel else {
+            return
+        }
         let sharedItems = extensionContext?.inputItems as? [NSExtensionItem] ?? []
-        viewModel = ShareViewModel()
-
-        let hostingController = UIHostingController(
+        self.hostingController = UIHostingController(
             rootView: ShareView(
                 items: sharedItems,
                 viewModel: viewModel,
                 closeAction: { [weak self] in
-                    self?.viewModel.closeShareExtension()
-                    self?.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+                    self?.closeShareExtension()
                 }
             )
         )
+
+        guard let hostingController = hostingController else {
+            return
+        }
 
         addChild(hostingController)
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -57,8 +89,46 @@ import RxSwift
         hostingController.preferredContentSize = size
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.closeShareExtension()
+    func closeShareExtension() {
+        NSLog("ShareViewController closeShareExtension called")
+        cleanupUI()
+        ShareCoordinator.shared.performCleanup()
+        completeRequest()
+    }
+
+    func cleanupUI() {
+        NSLog("ShareViewController cleanupUI called")
+        guard let hostingController = hostingController else {
+            return
+        }
+        hostingController.willMove(toParent: nil)
+        hostingController.view.removeFromSuperview()
+        hostingController.removeFromParent()
+        self.hostingController = nil
+    }
+
+    func newControllerCreated() {
+        NSLog("ShareViewController newControllerCreated called")
+        self.cleanupUI()
+    }
+
+    func completeRequest(withError: Bool = false) {
+        NSLog("ShareViewController completeRequest, withError: %@", withError ? "true" : "false")
+        if requestCompleted {
+            return
+        }
+        requestCompleted = true
+        if withError {
+            let error = NSError(domain: "ShareExtensionError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Share extension cancelled"])
+            extensionContext?.cancelRequest(withError: error)
+        } else {
+            extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+        }
+    }
+
+    deinit {
+        NSLog("ShareViewController deinit")
+        cleanupUI()
+        completeRequest()
     }
 }
