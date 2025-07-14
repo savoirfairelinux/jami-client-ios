@@ -230,7 +230,7 @@
 "linkToAccount.exit" = "離開";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
-"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
+"linkToAccount.alertMessage" = "停止操作将取消导入账户操作。";
 
 // Import from Archive
 "importFromArchive.explanation" = "从本地档案文件导入Jami账户。";
@@ -242,7 +242,7 @@
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "登入";
 "linkToAccountManager.title" = "Management server account";
-"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerPlaceholder" = "管理服务器 URL";
 "linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
 "linkToAccountManager.jamsExplanation" = "Enter the management server URL";
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
@@ -388,7 +388,7 @@
 "accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
 "accountPage.pinExplanationTitle" = "在其他设备上";
-"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "安装并启动 Jami。选择“从其他设备导入”，并扫描二维码。或手动输入 PIN 码。";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "通知";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
@@ -412,7 +412,7 @@
 "accountPage.nameServer" = "名稱伺服器";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "类型指标";
-"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "显示消息正在输入中。";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
