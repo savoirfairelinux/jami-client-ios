@@ -30,9 +30,26 @@ public final class AdapterService: AdapterDelegate {
     private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
 
     var usernameLookupStatus = PublishSubject<LookupNameResponse>()
+
+    var accountRegistrationStatus = PublishSubject<AccountStatus>()
+    private var readyAccounts = Set<String>()
+    private let readyAccountsQueue = DispatchQueue(label: "jamiShareExtensionReadyAccounts", attributes: .concurrent)
+
     private let disposeBag = DisposeBag()
 
     static let notificationExtensionResponse = Notification.Name(Constants.appIdentifier + ".shareExtensionQueryGotResponseFromNotificationExtension.internal")
+
+    private func containsReadyAccount(_ accountId: String) -> Bool {
+        return readyAccountsQueue.sync {
+            return readyAccounts.contains(accountId)
+        }
+    }
+
+    private func insertReadyAccountSync(_ accountId: String) {
+        readyAccountsQueue.sync(flags: .barrier) {
+            _ = self.readyAccounts.insert(accountId)
+        }
+    }
 
     init(withAdapter adapter: Adapter) {
         self.adapter = adapter
@@ -126,9 +143,56 @@ public final class AdapterService: AdapterDelegate {
         messageStatusChangedSubject.onCompleted()
     }
 
-    func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
+    private func waitForAccountReady(accountId: String) -> Bool {
+        if containsReadyAccount(accountId) {
+            return true
+        }
+
+        let semaphore = DispatchSemaphore(value: 0)
+        var isReady = false
+
+        let subscription = accountRegistrationStatus
+            .filter { $0.accountId == accountId }
+            .timeout(.seconds(10), scheduler: MainScheduler.instance)
+            .subscribe(
+                onNext: { [weak self] status in
+                    guard let self = self else {
+                        semaphore.signal()
+                        return
+                    }
+                    let accountState = AccountState(rawValue: status.status)
+                    if accountState == .registered {
+                        self.insertReadyAccountSync(status.accountId)
+                        NSLog("[ShareExtension] Account \(accountId) is registered")
+                        isReady = true
+                        semaphore.signal()
+                    }
+                },
+                onError: { error in
+                    NSLog("[ShareExtension] Account registration status timeout or error: \(error)")
+                    semaphore.signal()
+                }
+            )
+
+        subscription.disposed(by: disposeBag)
         setAccountActive(accountId, newValue: true)
-        adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
+
+        let waitResult = semaphore.wait(timeout: .now() + 12)
+
+        subscription.dispose()
+        if waitResult == .timedOut {
+            return false
+        }
+
+        return isReady
+    }
+
+    func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
+        if waitForAccountReady(accountId: accountId) {
+            adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
+        } else {
+            NSLog("[ShareExtension] Failed to send swarm message - account \(accountId) not ready")
+        }
     }
 
     private func setAccountActive(_ accountId: String, newValue: Bool) {
@@ -177,22 +241,24 @@ public final class AdapterService: AdapterDelegate {
         let fileManager = FileManager.default
 
         do {
-
             try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
-
-            self.setAccountActive(accountId, newValue: true)
-
-            self.adapter?.sendSwarmFile(
-                withName: fileName,
-                accountId: accountId,
-                conversationId: conversationId,
-                withFilePath: duplicatedFilePath,
-                parent: parentId
-            )
-            return
+            if waitForAccountReady(accountId: accountId) {
+                NSLog("[ShareExtension] Account \(accountId) is ready, sending swarm file")
+                self.adapter?.sendSwarmFile(
+                    withName: fileName,
+                    accountId: accountId,
+                    conversationId: conversationId,
+                    withFilePath: duplicatedFilePath,
+                    parent: parentId
+                )
+                return
+            } else {
+                NSLog("[ShareExtension] Failed to send swarm file - account \(accountId) not ready")
+                return
+            }
 
         } catch {
-            print("[ShareExtension] sendSwarmFile failed with error: \(error.localizedDescription)")
+            NSLog("[ShareExtension] sendSwarmFile failed with error: \(error.localizedDescription)")
             return
         }
     }
@@ -404,6 +470,11 @@ public final class AdapterService: AdapterDelegate {
                 return (finalName, firstAvatar, avatarType)
             }
     }
+
+    func registrationStateChanged(for accountId: String, state: String) {
+        let status = AccountStatus(accountId: accountId, status: state)
+        accountRegistrationStatus.onNext(status)
+    }
 }
 
 extension AdapterService {
@@ -534,4 +605,9 @@ struct FileTransferStatus {
     let accountId: String
     let conversationId: String
     let interactionId: String
+}
+
+struct AccountStatus {
+    var accountId: String
+    var status: String
 }
