@@ -133,7 +133,7 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
             NSString* conversationId = [NSString stringWithUTF8String:conversation_id.c_str()];
             NSString* fileId = [NSString stringWithUTF8String:file_id.c_str()];
             NSString* interactionId = [NSString stringWithUTF8String:interaction_id.c_str()];
-            
+
             [weakDelegate dataTransferEventWithFileId:fileId
                                             withEventCode:eventCode
                                                 accountId:accountId
@@ -141,7 +141,13 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
                                            interactionId:interactionId];
         }
     }));
-
+    confHandlers.insert(exportable_callback<ConfigurationSignal::RegistrationStateChanged>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& state, int detailsCode, const std::string& detailsStr) {
+        if (weakDelegate) {
+            auto accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            auto stateStr = [NSString stringWithUTF8String:state.c_str()];
+            [weakDelegate registrationStateChangedFor:accountId state:stateStr];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 
