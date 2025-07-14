@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2025-2025 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -117,5 +117,46 @@ enum DataTransferEvent: UInt32 {
         default:
             return false
         }
+    }
+}
+
+/**
+ The different states that an account can have during time.
+
+ Contains :
+ - lifecycle account states
+ - errors concerning the state of the accounts
+ */
+enum AccountState: String {
+    case registered = "REGISTERED"
+    case ready = "READY"
+    case unregistered = "UNREGISTERED"
+    case trying = "TRYING"
+    case error = "ERROR"
+    case errorGeneric = "ERROR_GENERIC"
+    case errorAuth = "ERROR_AUTH"
+    case errorNetwork = "ERROR_NETWORK"
+    case errorHost = "ERROR_HOST"
+    case errorConfStun = "ERROR_CONF_STUN"
+    case errorExistStun = "ERROR_EXIST_STUN"
+    case errorServiceUnavailable = "ERROR_SERVICE_UNAVAILABLE"
+    case errorNotAcceptable = "ERROR_NOT_ACCEPTABLE"
+    case errorRequestTimeout = "Request Timeout"
+    case errorNeedMigration = "ERROR_NEED_MIGRATION"
+    case initializing = "INITIALIZING"
+
+    // check if error status
+    func isError() -> Bool {
+        return self == .error || self == .errorGeneric
+            || self == .errorAuth || self == .errorHost
+            || self == .errorConfStun || self == .errorExistStun
+            || self == .errorServiceUnavailable || self == .errorNotAcceptable
+            || self == .errorRequestTimeout || self == .errorNeedMigration
+            || self == .errorNetwork
+    }
+
+    // check if network error status
+    func isNetworkError() -> Bool {
+        return self == .errorNetwork
     }
 }
