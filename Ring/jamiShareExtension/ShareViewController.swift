@@ -124,6 +124,7 @@ class ShareViewController: UIViewController {
         } else {
             extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
         }
+        exit(0)
     }
 
     deinit {
