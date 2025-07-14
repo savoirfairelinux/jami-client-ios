@@ -148,6 +148,14 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
         }
     }));
 
+    confHandlers.insert(exportable_callback<ConfigurationSignal::RegistrationStateChanged>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& state, int detailsCode, const std::string& detailsStr) {
+        if (weakDelegate) {
+            auto accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            auto stateStr = [NSString stringWithUTF8String:state.c_str()];
+            [weakDelegate registrationStateChangedFor:accountId state:stateStr];
+        }
+    }));
+
     
     registerSignalHandlers(confHandlers);
 }

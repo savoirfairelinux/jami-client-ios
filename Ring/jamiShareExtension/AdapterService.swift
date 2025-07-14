@@ -17,6 +17,7 @@
  */
 
 import RxSwift
+import RxCocoa
 import Foundation
 import Photos
 import Atomics
@@ -30,9 +31,24 @@ public final class AdapterService: AdapterDelegate {
     private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
 
     var usernameLookupStatus = PublishSubject<LookupNameResponse>()
+    var accountRegistrationStatus = PublishSubject<AccountStatus>()
+    private var _readyAccounts = Set<String>()
+    private let readyAccountsQueue = DispatchQueue(label: "readyAccounts", attributes: .concurrent)
     private let disposeBag = DisposeBag()
 
     static let notificationExtensionResponse = Notification.Name(Constants.appIdentifier + ".shareExtensionQueryGotResponseFromNotificationExtension.internal")
+
+    private func containsReadyAccount(_ accountId: String) -> Bool {
+        return readyAccountsQueue.sync {
+            return _readyAccounts.contains(accountId)
+        }
+    }
+
+    private func insertReadyAccountSync(_ accountId: String) {
+        readyAccountsQueue.sync(flags: .barrier) {
+            _ = self._readyAccounts.insert(accountId)
+        }
+    }
 
     init(withAdapter adapter: Adapter) {
         NSLog("AdapterService init called")
@@ -143,9 +159,55 @@ public final class AdapterService: AdapterDelegate {
         messageStatusChangedSubject.onCompleted()
     }
 
-    func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
+    private func waitForAccountReady(accountId: String) -> Bool {
+        if containsReadyAccount(accountId) {
+            return true
+        }
+
+        let semaphore = DispatchSemaphore(value: 0)
+        var isReady = false
+
+        let subscription = accountRegistrationStatus
+            .filter { $0.accountId == accountId }
+            .timeout(.seconds(10), scheduler: MainScheduler.instance)
+            .subscribe(
+                onNext: { [weak self] status in
+                    guard let self = self else {
+                        semaphore.signal()
+                        return
+                    }
+                    let accountState = AccountState(rawValue: status.status)
+                    if accountState == .registered {
+                        self.insertReadyAccountSync(status.accountId)
+                        NSLog("[ShareExtension] Account \(accountId) is registered")
+                        isReady = true
+                        semaphore.signal()
+                    }
+                },
+                onError: { error in
+                    NSLog("[ShareExtension] Account registration status timeout or error: \(error)")
+                    semaphore.signal()
+                }
+            )
+
+        subscription.disposed(by: disposeBag)
         setAccountActive(accountId, newValue: true)
-        adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
+
+        let waitResult = semaphore.wait(timeout: .now() + 12)
+        if waitResult == .timedOut {
+            NSLog("[ShareExtension] Timeout waiting for account \(accountId) to be ready")
+            return false
+        }
+
+        return isReady
+    }
+
+    func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
+        if waitForAccountReady(accountId: accountId) {
+            adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
+        } else {
+            NSLog("[ShareExtension] Failed to send swarm message - account \(accountId) not ready")
+        }
     }
 
     func setAccountActive(_ accountId: String, newValue: Bool) {
@@ -227,23 +289,25 @@ public final class AdapterService: AdapterDelegate {
         let fileManager = FileManager.default
 
         do {
-
             try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
-
-            self.adapter?.setAccountActive(accountId, active: true)
-
-            self.adapter?.sendSwarmFile(
-                withName: fileName,
-                accountId: accountId,
-                conversationId: conversationId,
-                withFilePath: duplicatedFilePath,
-                parent: parentId
-            )
-            return duplicatedFilePath
+            if waitForAccountReady(accountId: accountId) {
+                NSLog("[ShareExtension] Account \(accountId) is ready, sending swarm file")
+                self.adapter?.sendSwarmFile(
+                    withName: fileName,
+                    accountId: accountId,
+                    conversationId: conversationId,
+                    withFilePath: duplicatedFilePath,
+                    parent: parentId
+                )
+                return duplicatedFilePath
+            } else {
+                NSLog("[ShareExtension] Failed to send swarm file - account \(accountId) not ready")
+                return nil
+            }
 
         } catch {
-            print("[ShareExtension] sendSwarmFile failed with error: \(error.localizedDescription)")
-            print("[ShareExtension] Error details: \(error)")
+            NSLog("[ShareExtension] sendSwarmFile failed with error: \(error.localizedDescription)")
+            NSLog("[ShareExtension] Error details: \(error)")
             return nil
         }
     }
@@ -621,6 +685,11 @@ public final class AdapterService: AdapterDelegate {
             notificationObserver = nil
         }
     }
+
+    func registrationStateChanged(for accountId: String, state: String) {
+        let status = AccountStatus(accountId: accountId, status: state)
+        accountRegistrationStatus.onNext(status)
+    }
 }
 
 private class WaitResult {
@@ -649,4 +718,28 @@ enum AvatarType: String {
     case jamiid
     case single
     case group
+}
+
+struct AccountStatus {
+    var accountId: String
+    var status: String
+}
+
+enum AccountState: String {
+    case registered = "REGISTERED"
+    case ready = "READY"
+    case unregistered = "UNREGISTERED"
+    case trying = "TRYING"
+    case error = "ERROR"
+    case errorGeneric = "ERROR_GENERIC"
+    case errorAuth = "ERROR_AUTH"
+    case errorNetwork = "ERROR_NETWORK"
+    case errorHost = "ERROR_HOST"
+    case errorConfStun = "ERROR_CONF_STUN"
+    case errorExistStun = "ERROR_EXIST_STUN"
+    case errorServiceUnavailable = "ERROR_SERVICE_UNAVAILABLE"
+    case errorNotAcceptable = "ERROR_NOT_ACCEPTABLE"
+    case errorRequestTimeout = "Request Timeout"
+    case errorNeedMigration = "ERROR_NEED_MIGRATION"
+    case initializing = "INITIALIZING"
 }

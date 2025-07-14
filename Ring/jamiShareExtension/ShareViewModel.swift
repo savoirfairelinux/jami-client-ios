@@ -307,7 +307,7 @@ class ShareViewModel: ObservableObject {
             var updatedAny = false
 
             for (key, indicator) in self.transmissionStatus {
-                if indicator.itemstatus == .ongoing, now.timeIntervalSince(indicator.lastUpdate) > 15 {
+                if indicator.itemstatus == .ongoing, now.timeIntervalSince(indicator.lastUpdate) > 35 {
 
                     var stalledIndicator = indicator
                     stalledIndicator.itemstatus = .stalled
