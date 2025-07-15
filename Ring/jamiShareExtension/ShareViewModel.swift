@@ -53,6 +53,7 @@ class ShareViewModel: ObservableObject {
                 guard let self = self else { return }
                 if canStart {
                     // Daemon can be started, proceed with initialization
+                    self.setupDarwinNotificationListener()
                     self.adapterService.startDaemon()
                     self.fetchAccountsAndConversations()
 
@@ -61,7 +62,6 @@ class ShareViewModel: ObservableObject {
                     self.subscribeToMessageStatusChanged()
 
                     self.startStallMonitoring()
-                    self.setupDarwinNotificationListener()
 
                     // Loading complete
                     self.isLoading = false
@@ -354,6 +354,7 @@ class ShareViewModel: ObservableObject {
     }
 
     private func handleAccountQuery() {
+        NSLog("******** share extnsion received query notification")
         let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
         CFNotificationCenterPostNotification(notificationCenter,
                                              CFNotificationName(Constants.notificationShareExtensionResponse),

@@ -50,6 +50,7 @@ class ConversationsManager {
         return UserDefaults.standard.integer(forKey: acceptTransferLimitKey) * 1024 * 1024
     }
     private let appState = BehaviorRelay<ServiceEventType>(value: .appEnterForeground)
+    private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
 
     // swiftlint:disable cyclomatic_complexity
     init(with conversationService: ConversationsService,
@@ -181,6 +182,14 @@ class ConversationsManager {
     }
 
     func updateForegroundState() {
+        // Send Darwin notification to signal notification extension that main app is active
+        // If notification extension is active, it should clean its state and set accounts to not active
+        CFNotificationCenterPostNotification(notificationCenter,
+                                             CFNotificationName(Constants.notificationAppBecomeActive),
+                                             nil,
+                                             nil,
+                                             true)
+
         guard let updatedConversations = self.getConversationData() else {
             self.accountsService.setAccountsActive(active: true)
             return

@@ -100,6 +100,7 @@ Marianne Forget
 public class Constants: NSObject {
     @objc public static let notificationReceived = "com.savoirfairelinux.notificationExtension.receivedNotification" as CFString
     @objc public static let notificationAppIsActive = "com.savoirfairelinux.jami.appActive" as CFString
+    @objc public static let notificationAppBecomeActive = "com.savoirfairelinux.jami.appBecomeActive" as CFString
     @objc public static let notificationShareExtensionIsActive = "com.savoirfairelinux.shareExtension.isActive" as CFString
     @objc public static let notificationShareExtensionResponse = "com.savoirfairelinux.shareExtension.response" as CFString
     @objc public static let notificationExtensionIsActive = "com.savoirfairelinux.notificationExtension.isActive" as CFString

@@ -257,6 +257,7 @@ class NotificationService: UNNotificationServiceExtension {
 
     // Entry point for processing incoming notification requests.
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        NSLog("******** notification extension started, accountIsActive is false")
         self.contentHandler = contentHandler
         setupNotificationExtensionQueryListener()
 
@@ -377,6 +378,7 @@ class NotificationService: UNNotificationServiceExtension {
                 let name = self.bestName(accountId: self.accountId, contactId: peerId)
                 // jami will be started. Set accounts to not active state
                 if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
+                    NSLog("******** set accountIsActive to false")
                     self.adapterService.stop(accountId: self.accountId)
                 }
                 info["displayName"] = name.isEmpty ? peerId : name
@@ -411,6 +413,7 @@ class NotificationService: UNNotificationServiceExtension {
             return false
         }
         self.accountIsActive.store(true, ordering: .relaxed)
+        NSLog("******** set accountIsActive to true")
         self.adapterService.startAccount(accountId: accountId, convId: "", loadAll: false)
         self.adapterService.pushNotificationReceived(accountId: accountId, data: data)
         // TODO: comment this a bit more
@@ -424,6 +427,8 @@ class NotificationService: UNNotificationServiceExtension {
         if self.accountIsActive.compareExchange(expected: false, desired: true, ordering: .relaxed).original {
             return
         }
+
+        NSLog("******** set accountIsActive to true")
 
         jamiTaskId = UUID().uuidString
         self.autoDispatchGroup.enter(id: jamiTaskId)
@@ -496,6 +501,7 @@ class NotificationService: UNNotificationServiceExtension {
     private func finish() {
         removeNotificationExtensionQueryListener()
         if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
+            NSLog("******** set accountIsActive to false")
             self.adapterService.stop(accountId: self.accountId)
         } else {
             self.adapterService.removeDelegate()
@@ -552,22 +558,40 @@ class NotificationService: UNNotificationServiceExtension {
                                         Constants.notificationExtensionIsActive,
                                         nil,
                                         .deliverImmediately)
+
+        // Listen for main app becoming active
+        CFNotificationCenterAddObserver(notificationCenter,
+                                        observer, { (_, observer, _, _, _) in
+                                            guard let observer = observer else { return }
+                                            let notificationService = Unmanaged<NotificationService>.fromOpaque(observer).takeUnretainedValue()
+                                            notificationService.handleMainAppActive()
+                                        },
+                                        Constants.notificationAppBecomeActive,
+                                        nil,
+                                        .deliverImmediately)
     }
 
     private func removeNotificationExtensionQueryListener() {
         let observer = Unmanaged.passUnretained(self).toOpaque()
         CFNotificationCenterRemoveObserver(notificationCenter, observer, CFNotificationName(Constants.notificationExtensionIsActive), nil)
+        CFNotificationCenterRemoveObserver(notificationCenter, observer, CFNotificationName(Constants.notificationAppBecomeActive), nil)
     }
 
     private func handleNotificationExtensionQuery() {
         // Respond if we have an active account
         if accountIsActive.load(ordering: .relaxed) {
+            NSLog("******** accountIsActive in notification extension query, responding")
             CFNotificationCenterPostNotification(notificationCenter,
                                                  CFNotificationName(Constants.notificationExtensionResponse),
                                                  nil,
                                                  nil,
                                                  true)
         }
+    }
+
+    private func handleMainAppActive() {
+        NSLog("******** Main app became active, cleaning up notification extension state")
+        self.finish()
     }
 
     private func saveDataIfNeeded(data: [String: String]) {
@@ -810,7 +834,7 @@ extension NotificationService: DarwinNotificationHandler {
 
         CFNotificationCenterPostNotification(notificationCenter, CFNotificationName(queryNotification), nil, nil, true)
 
-        _ = group.wait(timeout: .now() + 0.3)
+        _ = group.wait(timeout: .now() + 0.6)
 
         return hasResponse
     }

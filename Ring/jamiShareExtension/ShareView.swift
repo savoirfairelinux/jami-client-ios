@@ -469,8 +469,6 @@ func backgroundColor(for username: String) -> UIColor {
     return defaultAvatarColor
 }
 
-
-
 struct LoadingStateView: View {
     var body: some View {
         VStack(spacing: 20) {
