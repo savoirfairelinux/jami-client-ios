@@ -17,13 +17,19 @@
  */
 
 import RxSwift
+import UIKit
 
 class ConversationViewModel: ObservableObject, Identifiable, Equatable {
     let id: String
     let accountId: String
     @Published var name: String
-    @Published var avatar: String
+    @Published var avatar: String {
+        didSet {
+            updateProcessedAvatar()
+        }
+    }
     @Published var avatarType: AvatarType
+    @Published var processedAvatar: UIImage?
 
     private let adapterService: AdapterService
     private let disposeBag = DisposeBag()
@@ -35,11 +41,20 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
         self.name = initialName
         self.avatar = initialAvatar
         self.avatarType = initialAvatarType
+        updateProcessedAvatar()
         fetchConversationDetails()
     }
 
     static func == (lhs: ConversationViewModel, rhs: ConversationViewModel) -> Bool {
         lhs.id == rhs.id && lhs.accountId == rhs.accountId
+    }
+    
+    private func updateProcessedAvatar() {
+        guard !avatar.isEmpty else {
+            processedAvatar = nil
+            return
+        }
+        processedAvatar = ImageUtils().imageFromBase64(avatar, targetSize: CGSize(width: 40, height: 40))
     }
 
     private func fetchConversationDetails() {
@@ -52,5 +67,9 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
                 self?.avatarType = details.avatarType
             })
             .disposed(by: disposeBag)
+    }
+
+    deinit {
+        print("************** ConversationViewModel deinit")
     }
 }

@@ -17,12 +17,19 @@
  */
 
 import RxSwift
+import UIKit
+import ImageIO
 
 class AccountViewModel: ObservableObject, Identifiable, Equatable {
     let id: String
     @Published var name: String
     @Published var avatarType: AvatarType
-    @Published var avatar: String
+    @Published var avatar: String {
+        didSet {
+            updateProcessedAvatar()
+        }
+    }
+    @Published var processedAvatar: UIImage?
 
     private let adapterService: AdapterService
     private let disposeBag = DisposeBag()
@@ -33,11 +40,20 @@ class AccountViewModel: ObservableObject, Identifiable, Equatable {
         self.name = initialName
         self.avatar = initialAvatar
         self.avatarType = initialAvatarType
+        updateProcessedAvatar()
         fetchAccountDetails()
     }
 
     static func == (lhs: AccountViewModel, rhs: AccountViewModel) -> Bool {
         lhs.id == rhs.id
+    }
+    
+    private func updateProcessedAvatar() {
+        guard !avatar.isEmpty else {
+            processedAvatar = nil
+            return
+        }
+        processedAvatar = ImageUtils().imageFromBase64(avatar, targetSize: CGSize(width: 40, height: 40))
     }
 
     private func fetchAccountDetails() {
@@ -50,5 +66,45 @@ class AccountViewModel: ObservableObject, Identifiable, Equatable {
                 self?.avatarType = details.accountAvatarType
             })
             .disposed(by: disposeBag)
+    }
+}
+
+
+class ImageUtils {
+
+    func imageFromBase64(_ base64: String, targetSize: CGSize) -> UIImage? {
+        guard let data = Data(base64Encoded: base64) else { return nil }
+
+        return downsampleImage(from: data, to: targetSize)
+    }
+
+    private func downsampleImage(from imageData: Data, to targetSize: CGSize) -> UIImage? {
+        let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+        guard let imageSource = CGImageSourceCreateWithData(imageData as CFData, imageSourceOptions) else {
+            return UIImage(data: imageData)
+        }
+
+        let maxDimensionInPixels = max(targetSize.width, targetSize.height) * UIScreen.main.scale
+
+        let downsampleOptions = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceShouldCacheImmediately: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceThumbnailMaxPixelSize: maxDimensionInPixels
+        ] as CFDictionary
+
+        guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions) else {
+            guard let fullImage = UIImage(data: imageData) else { return nil }
+            return resizeImage(fullImage, to: targetSize)
+        }
+
+        return UIImage(cgImage: downsampledImage)
+    }
+
+    private func resizeImage(_ image: UIImage, to targetSize: CGSize) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        return renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
     }
 }

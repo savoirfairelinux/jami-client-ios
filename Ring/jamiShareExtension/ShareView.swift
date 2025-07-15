@@ -263,8 +263,7 @@ struct AccountRowView: View {
             let bgColor = Color(backgroundColor(for: account.name))
 
             if account.avatarType == .single {
-                if !account.avatar.isEmpty,
-                   let avatarImage = imageFromBase64(account.avatar) {
+                if let avatarImage = account.processedAvatar {
                     Image(uiImage: avatarImage)
                         .resizable()
                         .scaledToFill()
@@ -323,8 +322,7 @@ struct ConversationRowView: View {
                 let bgColor = Color(backgroundColor(for: conversation.name))
 
                 if conversation.avatarType == .single {
-                    if !conversation.avatar.isEmpty,
-                       let avatarImage = imageFromBase64(conversation.avatar) {
+                    if let avatarImage = conversation.processedAvatar {
                         Image(uiImage: avatarImage)
                             .resizable()
                             .scaledToFill()
@@ -468,11 +466,7 @@ func backgroundColor(for username: String) -> UIColor {
     return defaultAvatarColor
 }
 
-func imageFromBase64(_ base64: String) -> UIImage? {
-    guard let data = Data(base64Encoded: base64),
-          let image = UIImage(data: data) else { return nil }
-    return image
-}
+
 
 struct LoadingStateView: View {
     var body: some View {
