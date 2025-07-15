@@ -33,6 +33,7 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
 
     private let adapterService: AdapterService
     private let disposeBag = DisposeBag()
+    private var hasLoadedDetails = false
 
     init(id: String, accountId: String, adapterService: AdapterService, initialName: String = "", initialAvatar: String = "", initialAvatarType: AvatarType = .jamiid) {
         self.id = id
@@ -42,7 +43,6 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
         self.avatar = initialAvatar
         self.avatarType = initialAvatarType
         updateProcessedAvatar()
-        fetchConversationDetails()
     }
 
     static func == (lhs: ConversationViewModel, rhs: ConversationViewModel) -> Bool {
@@ -51,12 +51,29 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
     
     private func updateProcessedAvatar() {
         guard !avatar.isEmpty else {
-            processedAvatar = nil
+            DispatchQueue.main.async { [weak self] in
+                self?.processedAvatar = nil
+            }
             return
         }
-        processedAvatar = ImageUtils().imageFromBase64(avatar, targetSize: CGSize(width: 40, height: 40))
+        
+        let avatarString = avatar // Capture value
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let processedImage = ImageUtils().imageFromBase64(avatarString, targetSize: CGSize(width: 40, height: 40))
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self, self.avatar == avatarString else { return }
+                self.processedAvatar = processedImage
+            }
+        }
     }
 
+    func loadDetailsIfNeeded() {
+        guard !hasLoadedDetails else { return }
+        hasLoadedDetails = true
+        fetchConversationDetails()
+    }
+    
     private func fetchConversationDetails() {
         adapterService.getConversationInfo(accountId: accountId, conversationId: id)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
