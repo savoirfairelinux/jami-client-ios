@@ -377,16 +377,14 @@ public final class AdapterService: AdapterDelegate {
         return .just(("", .single))
     }
 
-    func resolveLocalAccountDetails(accountId: String) -> Single<AccountDetails> {
-        return resolveLocalAccountName(from: accountId)
-            .map { [weak self] name in
-                return AccountDetails(
-                    accountId: accountId,
-                    accountName: name.value,
-                    accountAvatarType: name.avatarType,
-                    accountAvatar: self?.contactProfileAvatar(accountId: accountId, contactId: accountId, type: "account") ?? ""
-                )
+    func resolveLocalAccountAvatar(accountId: String) -> Single<String> {
+        return Single.create { [weak self] observer in
+            DispatchQueue.global(qos: .background).async {
+                let avatar = self?.contactProfileAvatar(accountId: accountId, contactId: accountId, type: "account") ?? ""
+                observer(.success(avatar))
             }
+            return Disposables.create()
+        }
     }
 
     func registeredNameFound(with response: LookupNameResponse) {
@@ -411,21 +409,24 @@ public final class AdapterService: AdapterDelegate {
         }
     }
 
-    func getConversationInfo(accountId: String, conversationId: String) -> Single<(name: String, avatar: String?, avatarType: AvatarType)> {
+    func getConversationName(accountId: String, conversationId: String) -> Single<(name: String, avatarType: AvatarType)> {
         let conversationInfo = adapter?.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String]
         let title = conversationInfo?["title"]
-        let baseAvatar = conversationInfo?["avatar"]
+
+        if let title = title, !title.isEmpty {
+            return .just((title, .group))
+        }
 
         guard let members = adapter?.getConversationMembers(accountId, conversationId: conversationId),
               !members.isEmpty else {
-            let fallbackName = title ?? conversationId
-            return .just((fallbackName, baseAvatar, .jamiid))
+            let fallbackName = conversationId
+            return .just((fallbackName, .jamiid))
         }
 
         guard let accountDetails = adapter?.getAccountDetails(accountId),
               let username = accountDetails["Account.username"] as? String else {
-            let fallbackName = title ?? conversationId
-            return .just((fallbackName, baseAvatar, .jamiid))
+            let fallbackName = conversationId
+            return .just((fallbackName, .jamiid))
         }
 
         let jamiId = username.replacingOccurrences(of: "ring:", with: "")
@@ -434,41 +435,79 @@ public final class AdapterService: AdapterDelegate {
             return uri != jamiId
         }
 
-        let includeAvatar = filteredMembers.count == 1
-        let lookups: [Single<(String, String?, Bool)>] = filteredMembers.compactMap { [weak self] member in
+        let nameLookups: [Single<(String, Bool)>] = filteredMembers.compactMap { [weak self] member in
             guard let address = member["uri"] else { return nil }
+
+            let profileName = self?.contactProfileName(accountId: accountId, contactId: address, type: "conversation") ?? ""
+            if !profileName.isEmpty {
+                return .just((profileName, false))
+            }
+
             return self?.lookupUsername(accountId: accountId, address: address)
-                .map { [weak self] response in
-                    let profileName = self?.contactProfileName(accountId: accountId, contactId: address, type: "conversation") ?? ""
+                .map { response in
                     let nameFromLookup = (response.state == .found && !(response.name?.isEmpty ?? true)) ? response.name! : nil
-                    let resolvedName = !profileName.isEmpty ? profileName : (nameFromLookup ?? address)
+                    let resolvedName = nameFromLookup ?? address
                     let isAddress = resolvedName == address
-                    let avatar = includeAvatar ? self?.contactProfileAvatar(accountId: accountId, contactId: address, type: "conversation") : nil
-                    return (resolvedName, avatar, isAddress)
+                    return (resolvedName, isAddress)
                 }
         }
 
-        guard !lookups.isEmpty else {
-            let fallbackName = title ?? conversationId
-            return .just((fallbackName, baseAvatar, .jamiid))
+        guard !nameLookups.isEmpty else {
+            let fallbackName = conversationId
+            return .just((fallbackName, .jamiid))
         }
 
-        return Single.zip(lookups)
-            .map { nameAvatarFlagTriplets in
-                let names = nameAvatarFlagTriplets.map { $0.0 }.filter { !$0.isEmpty }.joined(separator: ", ")
-                let avatars = nameAvatarFlagTriplets.compactMap { $0.1 }
-                let firstAvatar = baseAvatar ?? avatars.first
+        return Single.zip(nameLookups)
+            .map { nameIsAddressPairs in
+                let names = nameIsAddressPairs.map { $0.0 }.filter { !$0.isEmpty }.joined(separator: ", ")
 
                 let avatarType: AvatarType
-                if nameAvatarFlagTriplets.count == 1 {
-                    avatarType = nameAvatarFlagTriplets.first!.2 ? .jamiid : .single
+                if nameIsAddressPairs.count == 1 {
+                    avatarType = nameIsAddressPairs.first!.1 ? .jamiid : .single
                 } else {
                     avatarType = .group
                 }
 
-                let finalName = title?.isEmpty == false ? title! : names
-                return (finalName, firstAvatar, avatarType)
+                return (names, avatarType)
             }
+    }
+
+    func getConversationAvatar(accountId: String, conversationId: String) -> Single<String?> {
+        let conversationInfo = adapter?.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String]
+        let baseAvatar = conversationInfo?["avatar"]
+
+        if let baseAvatar = baseAvatar, !baseAvatar.isEmpty {
+            return .just(baseAvatar)
+        }
+
+        guard let members = adapter?.getConversationMembers(accountId, conversationId: conversationId),
+              !members.isEmpty else {
+            return .just(nil)
+        }
+
+        guard let accountDetails = adapter?.getAccountDetails(accountId),
+              let username = accountDetails["Account.username"] as? String else {
+            return .just(nil)
+        }
+
+        let jamiId = username.replacingOccurrences(of: "ring:", with: "")
+        let filteredMembers = members.filter { member in
+            guard let uri = member["uri"] else { return false }
+            return uri != jamiId
+        }
+
+        guard filteredMembers.count == 1,
+              let address = filteredMembers.first?["uri"] else {
+            return .just(nil)
+        }
+
+        return Single.create { [weak self] observer in
+            DispatchQueue.global(qos: .background).async {
+                let avatar = self?.contactProfileAvatar(accountId: accountId, contactId: address, type: "conversation")
+                observer(.success(avatar))
+            }
+            return Disposables.create()
+        }
     }
 
     func registrationStateChanged(for accountId: String, state: String) {

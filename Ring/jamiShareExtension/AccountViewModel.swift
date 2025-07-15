@@ -60,7 +60,7 @@ class AccountViewModel: ObservableObject, Identifiable, Equatable {
         self.avatar = initialAvatar
         self.avatarType = initialAvatarType
         updateProcessedAvatar()
-        fetchAccountDetails()
+        self.fetchAccountDetails()
     }
 
     static func == (lhs: AccountViewModel, rhs: AccountViewModel) -> Bool {
@@ -69,20 +69,38 @@ class AccountViewModel: ObservableObject, Identifiable, Equatable {
 
     private func updateProcessedAvatar() {
         guard !avatar.isEmpty else {
-            processedAvatar = nil
+            DispatchQueue.main.async { [weak self] in
+                self?.processedAvatar = nil
+            }
             return
         }
-        processedAvatar = ImageUtils().imageFromBase64(avatar, targetSize: CGSize(width: 40, height: 40))
+
+        let avatarString = avatar
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let processedImage = ImageUtils().imageFromBase64(avatarString, targetSize: CGSize(width: 45, height: 45))
+
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self, self.avatar == avatarString else { return }
+                self.processedAvatar = processedImage
+            }
+        }
     }
 
     private func fetchAccountDetails() {
-        adapterService.resolveLocalAccountDetails(accountId: id)
+        adapterService.resolveLocalAccountName(from: id)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] details in
-                self?.name = details.accountName
-                self?.avatar = details.accountAvatar
-                self?.avatarType = details.accountAvatarType
+            .subscribe(onSuccess: { [weak self] nameInfo in
+                self?.name = nameInfo.value
+                self?.avatarType = nameInfo.avatarType
+            })
+            .disposed(by: disposeBag)
+
+        adapterService.resolveLocalAccountAvatar(accountId: id)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] avatarString in
+                self?.avatar = avatarString
             })
             .disposed(by: disposeBag)
     }

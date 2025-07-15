@@ -340,6 +340,9 @@ struct ConversationRowView: View {
             }
             .padding(.vertical, 8)
         }
+        .onAppear {
+            conversation.loadDetailsIfNeeded()
+        }
     }
 }
 
