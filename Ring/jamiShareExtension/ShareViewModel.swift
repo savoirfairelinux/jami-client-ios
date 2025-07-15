@@ -212,7 +212,7 @@ class ShareViewModel: ObservableObject {
 
             var conversationViewModels: [ConversationViewModel] = []
             for convoId in conversationIds {
-                let conversationViewModel = ConversationViewModel(id: convoId, accountId: accountId, adapterService: adapterService)
+                let conversationViewModel = ConversationViewModel(id: convoId, accountId: accountId, adapterService: adapterService, initialName: convoId)
                 conversationViewModels.append(conversationViewModel)
             }
 
