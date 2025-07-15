@@ -27,9 +27,13 @@ struct ShareView: View {
     @ObservedObject var viewModel: ShareViewModel
 
     @State private var showUnsupportedAlert: Bool = false
-    @State private var showNoAccountAlert: Bool = false
     @State private var selectedAccountId: String?
     @State private var isSending: Bool = false
+
+    let supportedTypes: [UTType] = [
+        .plainText, .image, .fileURL, .url,
+        .pdf, .rtf, .html, .audio, .movie, .zip
+    ]
 
     init(items: [NSExtensionItem], viewModel: ShareViewModel, closeAction: @escaping () -> Void) {
         self.items = items
@@ -38,116 +42,91 @@ struct ShareView: View {
     }
 
     private func handleOnAppear() {
-        if viewModel.accountList.isEmpty {
-            showNoAccountAlert = true
-        }
-
         for item in items {
-            if let attachments = item.attachments {
-                for provider in attachments {
-                    if !(
-                        provider.hasItemConformingToTypeIdentifier(UTType.plainText.identifier) ||
-                            provider.hasItemConformingToTypeIdentifier(UTType.image.identifier) ||
-                            provider.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) ||
-                            provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) ||
-                            provider.hasItemConformingToTypeIdentifier(UTType.pdf.identifier) ||
-                            provider.hasItemConformingToTypeIdentifier(UTType.rtf.identifier) ||
-                            provider.hasItemConformingToTypeIdentifier(UTType.html.identifier) ||
-                            provider.hasItemConformingToTypeIdentifier(UTType.audio.identifier) ||
-                            provider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) ||
-                            provider.hasItemConformingToTypeIdentifier(UTType.zip.identifier)
-                    ) {
-                        showUnsupportedAlert = true
-                        break
-                    }
+            guard let attachments = item.attachments else { continue }
+
+            for provider in attachments {
+                let isSupported = supportedTypes.contains {
+                    provider.hasItemConformingToTypeIdentifier($0.identifier)
+                }
+
+                if !isSupported {
+                    showUnsupportedAlert = true
+                    return
                 }
             }
         }
-
     }
 
     var body: some View {
-        ZStack {
-            if viewModel.isLoading {
-                LoadingStateView()
-            } else {
-                NavigationView {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 16) {
-                            AccountsSection(
-                                selectedAccountId: $selectedAccountId,
+        NavigationView {
+            ZStack {
+                if viewModel.isLoading {
+                    LoadingStateView()
+                } else {
+                    VStack(alignment: .leading, spacing: 16) {
+                        AccountsSection(
+                            selectedAccountId: $selectedAccountId,
+                            viewModel: viewModel,
+                            sendAction: sendAllItems
+                        )
+
+                        if let selectedId = selectedAccountId {
+                            ConversationSection(
+                                selectedAccountId: selectedId,
                                 viewModel: viewModel,
                                 sendAction: sendAllItems
                             )
-
-                            if let selectedId = selectedAccountId {
-                                ConversationSection(
-                                    selectedAccountId: selectedId,
-                                    viewModel: viewModel,
-                                    sendAction: sendAllItems
-                                )
-                            }
-
-                            Spacer()
                         }
-                        .padding()
+                        Spacer()
                     }
                     .padding()
                 }
-                .navigationTitle(L10n.ShareExtension.appName)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(L10n.Global.close) {
-                            closeAction()
-                        }
+                if isSending {
+                    Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.all)
+                        .overlay(
+                            ProgressView(L10n.ShareExtension.sending)
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.black.opacity(0.8))
+                                )
+                        )
+                }
+            }
+            .navigationTitle(L10n.ShareExtension.appName)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(L10n.Global.close) {
+                        closeAction()
                     }
                 }
-                .onAppear {
-                    handleOnAppear()
-                }
-                .alert(isPresented: $showNoAccountAlert) {
-                    Alert(
-                        title: Text(L10n.ShareExtension.NoAccount.title),
-                        message: Text(L10n.ShareExtension.NoAccount.description),
-                        dismissButton: .default(Text(L10n.Global.ok
-                        ), action: closeAction)
-                    )
-                }
-                .alert(isPresented: $showUnsupportedAlert) {
-                    Alert(
-                        title: Text(L10n.ShareExtension.UnsupportedType.title),
-                        message: Text(L10n.ShareExtension.UnsupportedType.description),
-                        dismissButton: .default(Text(L10n.Global.ok), action: closeAction)
-                    )
+            }
+            .navigationBarHidden(false)
+            .alert(isPresented: $showUnsupportedAlert) {
+                Alert(
+                    title: Text(L10n.ShareExtension.UnsupportedType.title),
+                    message: Text(L10n.ShareExtension.UnsupportedType.description),
+                    dismissButton: .default(Text(L10n.Global.ok), action: closeAction)
+                )
+            }
+            .onAppear {
+                handleOnAppear()
+            }
+            .onChange(of: viewModel.transmissionSummary) { newValue in
+                if !newValue.isEmpty {
+                    isSending = false
+                    closeAction()
                 }
             }
-
-            if isSending {
-                Color.black.opacity(0.4)
-                    .edgesIgnoringSafeArea(.all)
-                    .overlay(
-                        ProgressView(L10n.ShareExtension.sending)
-                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.black.opacity(0.8))
-                            )
-                    )
-            }
-        }
-        .onChange(of: viewModel.transmissionSummary) { newValue in
-            if !newValue.isEmpty {
-                isSending = false
-                viewModel.closeShareExtension()
-                closeAction()
-            }
-        }
-        .onChange(of: viewModel.shouldCloseExtension) { shouldClose in
-            if shouldClose {
-                closeAction()
+            .onChange(of: viewModel.shouldCloseExtension) { shouldClose in
+                if shouldClose {
+                    closeAction()
+                }
             }
         }
     }
@@ -157,7 +136,6 @@ struct ShareView: View {
 
         for item in items {
             guard let attachments = item.attachments else {
-                showUnsupportedAlert = true
                 continue
             }
 
@@ -185,7 +163,8 @@ struct ShareView: View {
 
     private func getSupportedTypes(convoId: String, accountId: String) -> [(UTType, (NSItemProvider, Any?) -> Void)] {
         return [
-            (UTType.plainText, { _, data in
+            (UTType.plainText, { [weak viewModel] _, data in
+                guard let viewModel else { return }
                 if let text = data as? String {
                     viewModel.sendMessage(accountId: accountId, conversationId: convoId, message: text)
                 } else {
@@ -194,7 +173,8 @@ struct ShareView: View {
             }),
             (UTType.image, handleFileURL(convoId: convoId, accountId: accountId)),
             (UTType.fileURL, handleFileURL(convoId: convoId, accountId: accountId)),
-            (UTType.url, { _, data in
+            (UTType.url, { [weak viewModel] _, data in
+                guard let viewModel else { return }
                 if let url = data as? URL {
                     viewModel.sendMessage(accountId: accountId, conversationId: convoId, message: url.absoluteString)
                 } else if let str = data as? String {
@@ -205,7 +185,8 @@ struct ShareView: View {
             }),
             (UTType.pdf, handleFileURL(convoId: convoId, accountId: accountId)),
             (UTType.rtf, handleFileURL(convoId: convoId, accountId: accountId)),
-            (UTType.html, { _, data in
+            (UTType.html, { [weak viewModel] _, data in
+                guard let viewModel else { return }
                 if let htmlString = data as? String {
                     viewModel.sendMessage(accountId: accountId, conversationId: convoId, message: htmlString)
                 } else {
@@ -219,7 +200,8 @@ struct ShareView: View {
     }
 
     private func handleFileURL(convoId: String, accountId: String) -> (NSItemProvider, Any?) -> Void {
-        return { _, data in
+        return { [weak viewModel] _, data in
+            guard let viewModel else { return }
             if let url = data as? URL {
                 let filename = url.lastPathComponent
                 viewModel.sendFile(accountId: accountId, conversationId: convoId, filePath: url, fileName: filename)
@@ -228,7 +210,6 @@ struct ShareView: View {
             }
         }
     }
-
 }
 
 struct ConversationSection: View {
@@ -241,9 +222,10 @@ struct ConversationSection: View {
             VStack(alignment: .leading, spacing: 12) {
                 Text(L10n.ShareExtension.conversations)
                     .font(.headline)
-
-                ForEach(conversations) { conversation in
-                    ConversationRowView(conversation: conversation, sendAction: sendAction)
+                ScrollView {
+                    ForEach(conversations) { conversation in
+                        ConversationRowView(conversation: conversation, sendAction: sendAction)
+                    }
                 }
             }
         } else {
@@ -260,21 +242,17 @@ struct AccountRowView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-
-            let bgColor = Color(backgroundColor(for: account.name))
-
             if account.avatarType == .single {
-                if !account.avatar.isEmpty,
-                   let avatarImage = imageFromBase64(account.avatar) {
+                if let avatarImage = account.processedAvatar {
                     Image(uiImage: avatarImage)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 40, height: 40)
+                        .frame(width: 45, height: 45)
                         .clipShape(Circle())
                 } else {
                     Circle()
-                        .fill(bgColor)
-                        .frame(width: 40, height: 40)
+                        .fill(account.bgColor)
+                        .frame(width: 45, height: 45)
                         .overlay(
                             Text(String(account.name.prefix(1)).uppercased())
                                 .font(.system(size: 16))
@@ -283,13 +261,13 @@ struct AccountRowView: View {
                 }
             } else {
                 Circle()
-                    .fill(bgColor)
-                    .frame(width: 40, height: 40)
+                    .fill(account.bgColor)
+                    .frame(width: 45, height: 45)
                     .overlay(
                         Image(systemName: "person")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 20, height: 20)
+                            .frame(width: 15, height: 15)
                             .foregroundColor(.white)
                     )
             }
@@ -320,37 +298,34 @@ struct ConversationRowView: View {
             sendAction(conversation.id, conversation.accountId)
         }) {
             HStack(spacing: 12) {
-
-                let bgColor = Color(backgroundColor(for: conversation.name))
-
                 if conversation.avatarType == .single {
-                    if !conversation.avatar.isEmpty,
-                       let avatarImage = imageFromBase64(conversation.avatar) {
+                    if let avatarImage = conversation.processedAvatar {
                         Image(uiImage: avatarImage)
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 40, height: 40)
+                            .frame(width: 45, height: 45)
                             .clipShape(Circle())
                     } else {
                         Circle()
-                            .fill(bgColor)
-                            .frame(width: 40, height: 40)
+                            .fill(conversation.bgColor)
+                            .frame(width: 45, height: 45)
                             .overlay(
                                 Text(String(conversation.name.prefix(1)).uppercased())
-                                    .font(.system(size: 16))
+                                    .font(.system(size: 18))
                                     .foregroundColor(.white)
                             )
                     }
                 } else {
                     let systemName = conversation.avatarType == .group ? "person.2" : "person"
+                    let imageSize: CGFloat = conversation.avatarType == .group ? 20 : 15
                     Circle()
-                        .fill(bgColor)
-                        .frame(width: 40, height: 40)
+                        .fill(conversation.bgColor)
+                        .frame(width: 45, height: 45)
                         .overlay(
                             Image(systemName: systemName)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 20, height: 20)
+                                .frame(width: imageSize, height: imageSize)
                                 .foregroundColor(.white)
                         )
                 }
@@ -362,7 +337,6 @@ struct ConversationRowView: View {
                     .lineLimit(1)
 
                 Spacer()
-
             }
             .padding(.vertical, 8)
         }
@@ -401,7 +375,8 @@ struct AccountsSection: View {
                     .padding()
             }
         }
-        .onAppear {
+        .onAppear { [weak viewModel] in
+            guard let viewModel = viewModel else { return }
             if selectedAccountId == nil, let firstAccount = viewModel.accountList.first {
                 selectedAccountId = firstAccount.id
             }
@@ -469,19 +444,12 @@ func backgroundColor(for username: String) -> UIColor {
     return defaultAvatarColor
 }
 
-func imageFromBase64(_ base64: String) -> UIImage? {
-    guard let data = Data(base64Encoded: base64),
-          let image = UIImage(data: data) else { return nil }
-    return image
-}
-
 struct LoadingStateView: View {
     var body: some View {
         VStack(spacing: 20) {
             ProgressView()
                 .scaleEffect(1.5)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.systemBackground))
     }
 }
