@@ -19,6 +19,98 @@
  */
 
 import SwiftUI
+import UIKit
+
+struct TextFieldWithDoneButton: UIViewRepresentable {
+    @Binding var text: String
+    var onEditingChanged: (Bool) -> Void
+    var onDone: () -> Void
+    var onCancel: () -> Void
+    var keyboardType: UIKeyboardType = .default
+    var textColor: UIColor = .label
+
+    func makeUIView(context: Context) -> UITextField {
+        let textField = UITextField()
+        textField.delegate = context.coordinator
+        textField.keyboardType = keyboardType
+        textField.textAlignment = .right
+        textField.textColor = textColor
+
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
+        doneButton.tintColor = UIColor.jamiButtonDark
+
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+        cancelButton.tintColor = UIColor.jamiButtonDark
+
+        doneButton.primaryAction = UIAction { [weak coordinator = context.coordinator] _ in
+            coordinator?.donePressed()
+        }
+        cancelButton.primaryAction = UIAction { [weak coordinator = context.coordinator] _ in
+            coordinator?.cancelPressed()
+        }
+
+        toolbar.items = [cancelButton, flexSpace, doneButton]
+        textField.inputAccessoryView = toolbar
+
+        return textField
+    }
+
+    func updateUIView(_ uiView: UITextField, context: Context) {
+        uiView.text = text
+        uiView.textColor = textColor
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, UITextFieldDelegate {
+        let parent: TextFieldWithDoneButton
+        private var originalValue: String = ""
+        private var shouldMoveCursorToEnd = false
+
+        init(_ parent: TextFieldWithDoneButton) {
+            self.parent = parent
+        }
+
+        func textFieldDidChangeSelection(_ textField: UITextField) {
+            parent.text = textField.text ?? ""
+
+            if shouldMoveCursorToEnd, let text = textField.text, !text.isEmpty {
+                shouldMoveCursorToEnd = false
+                let endPosition = textField.endOfDocument
+                textField.selectedTextRange = textField.textRange(from: endPosition, to: endPosition)
+            }
+        }
+
+        func textFieldDidBeginEditing(_ textField: UITextField) {
+            originalValue = textField.text ?? ""
+            shouldMoveCursorToEnd = true
+            parent.onEditingChanged(true)
+        }
+
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            parent.onEditingChanged(false)
+        }
+
+        @objc func donePressed() {
+            parent.onDone()
+        }
+
+        @objc func cancelPressed() {
+            let savedOriginalValue = originalValue
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.parent.text = savedOriginalValue
+                self.parent.onCancel()
+            }
+        }
+    }
+}
 
 struct FileTransferSettingsView: View {
     @StateObject var model: GeneralSettings
@@ -41,13 +133,19 @@ struct FileTransferSettingsView: View {
                             .font(.footnote)
                             .foregroundColor(Color(UIColor.secondaryLabel))
                         Spacer()
-                        TextField("", text: $model.downloadLimit, onCommit: {
-                            model.saveDownloadLimit()
-                        })
-                        .keyboardType(.numberPad)
-                        .multilineTextAlignment(.trailing)
-                        .disabled(!model.automaticlyDownloadIncomingFiles)
-                        .foregroundColor(model.automaticlyDownloadIncomingFiles ? .jamiColor : Color(UIColor.secondaryLabel))
+                        TextFieldWithDoneButton(
+                            text: $model.downloadLimit,
+                            onEditingChanged: { _ in },
+                            onDone: {
+                                model.saveDownloadLimit()
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            },
+                            onCancel: {
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            },
+                            keyboardType: .numberPad,
+                            textColor: model.automaticlyDownloadIncomingFiles ? UIColor(Color.jamiColor) : UIColor.secondaryLabel
+                        )
                     }
                     .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
                     .accessibilityLabel(L10n.GeneralSettings.acceptTransferLimit)
