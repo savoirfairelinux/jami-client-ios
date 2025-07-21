@@ -83,7 +83,7 @@
 "swarm.contactHeader" = "Contact";
 "swarm.showContactQRCode" = "Show contact QR code";
 "swarm.shareContactInfo" = "Share contact information";
-"swarm.accessibilityContactQRCode" = "QR code for contact";
+"swarm.accessibilityContactQRCode" = "Show contact QR code";
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
@@ -101,6 +101,9 @@
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "अज्ञात";
 "swarm.inviteMembers" = "Invite members";
+"swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteMembersSelected" = "Selected";
+"swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "जा";
 "swarm.newGroup" = "Create new group";
@@ -629,5 +632,32 @@
 "accessibility.conference.unmuteAudio" = "अनमूट ऑडिओ";
 "accessibility.conference.hangup" = "बंद करा";
 "accessibility.conference.lowerHand" = "खालचा हात";
-
 "accessibility.account.tokenQRcode" = "Token QR code";
+
+// Swarm Colors
+"swarmColors.vibrantPink" = "Vibrant Pink";
+"swarmColors.purple" = "Purple";
+"swarmColors.violet" = "Violet";
+"swarmColors.indigoBlue" = "Indigo Blue";
+"swarmColors.skyBlue" = "Sky Blue";
+"swarmColors.cyan" = "Cyan";
+"swarmColors.teal" = "Teal";
+"swarmColors.green" = "Green";
+"swarmColors.limeGreen" = "Lime Green";
+"swarmColors.mediumGray" = "Medium Gray";
+"swarmColors.yellowGreen" = "Yellow Green";
+"swarmColors.amber" = "Amber";
+"swarmColors.brightOrange" = "Bright Orange";
+"swarmColors.brown" = "Brown";
+"swarmColors.steelBlue" = "Steel Blue";
+
+// Share extension
+"shareExtension.appName" = "Jami";
+"shareExtension.noAccount.title" = "No account found";
+"shareExtension.noAccount.description" = "lease create an account in the main app to continue.";
+"shareExtension.unsupportedType.title" = "Unsupported content";
+"shareExtension.unsupportedType.description" = "Jami doesn't currently support the content you want to share.";
+"shareExtension.sending" = "Sending...";
+"shareExtension.conversations" = "चर्चा";
+"shareExtension.noConversation" = "No conversation available.";
+"shareExtension.selectAccount" = "Select an account.";

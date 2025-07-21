@@ -83,7 +83,7 @@
 "swarm.contactHeader" = "Yhteystieto";
 "swarm.showContactQRCode" = "Näytä henkilön QR-koodi";
 "swarm.shareContactInfo" = "Jaa yhteystiedot";
-"swarm.accessibilityContactQRCode" = "QR-koodi yhteydenotolle";
+"swarm.accessibilityContactQRCode" = "Näytä henkilön QR-koodi";
 "swarm.accessibilityContactQRCodeHint" = "Avaa näytön, jossa on henkilön QR-koodi";
 "swarm.accessibilityContactShareHint" = "Avaa yhteystietojen jakoasetukset";
 "swarm.accessibilityColorPicker" = "Keskustelun värivalitsin";
@@ -101,6 +101,9 @@
 "swarm.blocked" = "Estetty";
 "swarm.unknown" = "Tuntematon";
 "swarm.inviteMembers" = "Kutsu jäseniä";
+"swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteMembersSelected" = "Selected";
+"swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Haluatko poistua keskustelusta?";
 "swarm.Leave" = "Poistu";
 "swarm.newGroup" = "Luo uusi ryhmä";
@@ -629,5 +632,32 @@
 "accessibility.conference.unmuteAudio" = "Poista mykistys";
 "accessibility.conference.hangup" = "Katkaise puhelu";
 "accessibility.conference.lowerHand" = "Käsi alas";
-
 "accessibility.account.tokenQRcode" = "Token QR-koodi";
+
+// Swarm Colors
+"swarmColors.vibrantPink" = "Vibrant Pink";
+"swarmColors.purple" = "Purple";
+"swarmColors.violet" = "Violet";
+"swarmColors.indigoBlue" = "Indigo Blue";
+"swarmColors.skyBlue" = "Sky Blue";
+"swarmColors.cyan" = "Cyan";
+"swarmColors.teal" = "Teal";
+"swarmColors.green" = "Green";
+"swarmColors.limeGreen" = "Lime Green";
+"swarmColors.mediumGray" = "Medium Gray";
+"swarmColors.yellowGreen" = "Yellow Green";
+"swarmColors.amber" = "Amber";
+"swarmColors.brightOrange" = "Bright Orange";
+"swarmColors.brown" = "Brown";
+"swarmColors.steelBlue" = "Steel Blue";
+
+// Share extension
+"shareExtension.appName" = "Jami";
+"shareExtension.noAccount.title" = "No account found";
+"shareExtension.noAccount.description" = "lease create an account in the main app to continue.";
+"shareExtension.unsupportedType.title" = "Unsupported content";
+"shareExtension.unsupportedType.description" = "Jami doesn't currently support the content you want to share.";
+"shareExtension.sending" = "Sending...";
+"shareExtension.conversations" = "Keskustelu";
+"shareExtension.noConversation" = "No conversation available.";
+"shareExtension.selectAccount" = "Select an account.";

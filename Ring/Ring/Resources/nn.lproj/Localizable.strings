@@ -19,29 +19,29 @@
 // Global
 "global.accountSettings" = "Kontoinnstillingar";
 "global.username" = "Brukarnamn";
-"global.recommended" = "Tilrådeleg";
+"global.recommended" = "Tilrådd";
 "global.password" = "Passord";
-"global.registerAUsername" = "Registrer brukarnavn";
+"global.registerAUsername" = "Registrer brukarnamn";
 "global.enterPassword" = "Skriv inn passord";
 "global.enterUsername" = "Skriv inn brukarnamn";
 "global.cancel" = "Avbryt";
 "global.blockContact" = "Sperra kontakt";
 "global.removeAccount" = "Ta bort kontoen";
-"global.incomingCall" = "Innkommende samtal";
+"global.incomingCall" = "Innkomande samtale";
 "global.ok" = "OK, det er rett.";
 "global.close" = "Lukk";
 "global.share" = "Deling";
 "global.forward" = "Send vidare";
 "global.save" = "Ta vare på";
-"global.resend" = "Send tilbake";
-"global.preview" = "Forhandsvisning";
-"global.accept" = "Ta imot";
-"global.block" = "Block";
-"global.decline" = "Nedgang";
+"global.resend" = "Send om att";
+"global.preview" = "Førehandsvisning";
+"global.accept" = "Godta";
+"global.block" = "Blokker";
+"global.decline" = "Ikkje godta";
 "global.name" = "Namn";
-"global.copy" = "Kopiert";
+"global.copy" = "Kopier";
 "global.reply" = "Svar";
-"global.search" = "Sjå etter...";
+"global.search" = "Søkjer...";
 "global.donate" = "Doner";
 "global.deleteMessage" = "Ta bort meldinga";
 "global.deleteFile" = "Slett fil frå eining";
@@ -51,61 +51,64 @@
 "global.edit" = "Redigera";
 "global.remove" = "Ta bort";
 "global.call" = "Ring";
-"global.video" = "Videoen";
+"global.video" = "Video";
 "global.time" = "Tid";
 "global.editPassword" = "Endra passord";
-"global.confirmPassword" = "Godtjenn passord";
-"global.confirm" = "Bekreft";
+"global.confirmPassword" = "Godkjenn passord";
+"global.confirm" = "Stadfest";
 "global.cameraDisabled" = "Tilgjenge til kameraet er avslått. Slå det på i \"einingsinnstillingar\" for å bruka denne funksjonen";
-"global.confirm" = "Bekreft";
-"global.connect" = "Knytta";
+"global.confirm" = "Stadfest";
+"global.connect" = "Kopla til";
 
 // Scan
-"scan.badQrCode" = "Dåleg QR-kod";
+"scan.badQrCode" = "Dåleg QR-kode";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact…";
+"swarmcreation.searchBar" = "Leiter etter kontakt...";
 "swarmcreation.addDescription" = "Legg til skildring";
 // Swarm
-"swarm.muteConversation" = "Taus samtale";
-"swarm.leaveConversation" = "Lat samtalen vera";
-"swarm.chooseColor" = "Farge for samtal";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.muteConversation" = "Stilna samtale";
+"swarm.leaveConversation" = "Forlat samtale";
+"swarm.chooseColor" = "Samtalefarge";
+"swarm.typeOfSwarm" = "Samtaletype";
 "swarm.identifier" = "Identifikator";
-"swarm.conversationId" = "Conversation ID";
+"swarm.conversationId" = "Samtale ID";
 "swarm.settings" = "Innstillingar";
 "swarm.members" = "Medlemmar";
 "swarm.addDescription" = "Legg til skildring";
-"swarm.titlePlaceholder" = "Enter title";
-"swarm.titleAlertHeader" = "Edit group title";
-"swarm.descriptionAlertHeader" = "Edit group description";
-"swarm.descriptionPlaceholder" = "Enter title";
-"swarm.contactHeader" = "Contact";
-"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.titlePlaceholder" = "Skriv inn tittel";
+"swarm.titleAlertHeader" = "Redigera gruppetittel";
+"swarm.descriptionAlertHeader" = "Redigera gruppeskildring";
+"swarm.descriptionPlaceholder" = "Skriv inn tittel";
+"swarm.contactHeader" = "Kontakt";
+"swarm.showContactQRCode" = "Vis QR-kode for konkakten";
 "swarm.shareContactInfo" = "Share contact information";
-"swarm.accessibilityContactQRCode" = "QR code for contact";
-"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactQRCode" = "Vis QR-kode for konkakten";
+"swarm.accessibilityContactQRCodeHint" = "Opnar ein skjerm med QR-koden til kontakten";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
-"swarm.editTextHint" = "Double tap to edit";
+"swarm.editTextHint" = "Trykk to gonger for å redigera";
 "swarm.conversationHeader" = "Samtale";
-"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
+"swarm.shareContactMessage" = "Du kan leggja til denne kontakten, %1@, på den større Jami plattforma: https://jami.net";
 "swarm.oneToOne" = "Privat";
-"swarm.adminInvitesOnly" = "Privat gruppe (tilbud med begrensning)";
+"swarm.adminInvitesOnly" = "Privat gruppe (avgrensa innbydningar)";
 "swarm.invitesOnly" = "Privat gruppe";
 "swarm.publicChat" = "offentlege grupperingar";
 "swarm.others" = "Andre";
 "swarm.member" = "Medlem";
-"swarm.invited" = "Besta inn";
+"swarm.invited" = "Innbydde";
 "swarm.admin" = "Administrator";
-"swarm.blocked" = "Blocked";
+"swarm.blocked" = "Blokkerte";
 "swarm.unknown" = "Ukenne";
 "swarm.inviteMembers" = "Invite members";
-"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteMembersSelected" = "Selected";
+"swarm.inviteMembersNotSelected" = "Not selected";
+"swarm.confirmLeaveConversation" = "Vil du slutta av denne samtala?";
 "swarm.Leave" = "Gå bort";
 "swarm.newGroup" = "Lag ei ny gruppe";
 "swarm.namePlaceholder" = "Group name";
-"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.explanationText" = "Medlemmar kan bli innbydde når som helst etter at gruppa har blitt skipa.";
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
@@ -113,30 +116,30 @@
 
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.results" = "Publikumskreds";
+"smartlist.results" = "Fellesregister";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Samtal";
 "smartlist.noConversationsFound" = "No conversations match the search.";
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Rekontering";
-"smartlist.invitationReceived" = "Invitasjonar motteke";
+"smartlist.invitationReceived" = "Innbydingar motteke";
 "smartlist.noResults" = "Ingen resultat";
 "smartlist.noConversation" = "Ingen samtal";
 "smartlist.searchBarPlaceholder" = "Enter name…";
 "smartlist.searchBar" = "Søk etter";
 "smartlist.noNetworkConnectivity" = "Ingen nettverksanslutning";
-"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
+"smartlist.cellularAccess" = "Sørg for at mobilen har fått tilgjenge i innstillingane.";
 "smartlist.accountsTitle" = "Rekontering";
 "smartlist.addAccountButton" = "+ Legg til konto";
 "smartlist.noNumber" = "Velde kontakt har ikkje eit nummer";
 "smartlist.selectOneNumber" = "Velg ein av tallane";
 "smartlist.invitations" = "Invitasjonar";
 "smartlist.aboutJami" = "Om Jami";
-"smartlist.inviteFriends" = "Invite friends";
+"smartlist.inviteFriends" = "By inn vener";
 "smartlist.accounts" = "Rekontering";
 "smartlist.disableDonation" = "Ikkje no";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
+"smartlist.donationExplanation" = "Dersom du likar å bruka Jami og trur på saka vår, har du lyst til å donera?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New message";
 
@@ -170,9 +173,9 @@
 
 // Invitations
 "invitations.noInvitations" = "Ingen invitasjonar";
-"invitations.accepted" = "Aksept";
-"invitations.declined" = "Declined";
-"invitations.blocked" = "Blocked";
+"invitations.accepted" = "Godkjent";
+"invitations.declined" = "Ikkje godteke";
+"invitations.blocked" = "Blokkerte";
 "invitations.list" = "Invitasjonar motteke";
 
 // Walkthrough
@@ -336,7 +339,7 @@
 "accountPage.linkDeviceTitle" = "Legg ein annan enhet";
 "accountPage.other" = "Andre";
 "accountPage.removeAccountMessage" = "Dersom kontoen ikkje har ein backup eller lagt til ei anna eining, blir konten og det registrerte brukernamnet UGJENKALLELEG TAPT.";
-"accountPage.inviteFriends" = "Invite friends";
+"accountPage.inviteFriends" = "By inn vener";
 "accountPage.contactMeOnJamiTitle" = "Kontakt meg på Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Skriv inn kontopassord";
@@ -492,7 +495,7 @@
 "notifications.newFile" = "Ny arkiv";
 "notifications.locationSharingStarted" = "Innkomne plassering deling byrja";
 "notifications.locationSharingStopped" = "Inkommande plassering delt opp";
-"dataTransfer.readableStatusDecline" = "Nedgang";
+"dataTransfer.readableStatusDecline" = "Ikkje godta";
 "dataTransfer.readableStatusAccept" = "Ta imot";
 "dataTransfer.infoMessage" = "Tap to start recording";
 "dataTransfer.sendMessage" = "Send inn";
@@ -586,7 +589,7 @@
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Nekta invitasjon";
+"accessibility.pendingRequestsListRejectInvitation" = "Ikkje godta innbydinga";
 "accessibility.pendingRequestsListAcceptInvitation" = "Godta invitasjon";
 "accessibility.messageBubbleDeleted" = "Meldinga vart sletta";
 "accessibility.messageBubbleEdited" = "Redigert";
@@ -629,5 +632,32 @@
 "accessibility.conference.unmuteAudio" = "Skru på lyd";
 "accessibility.conference.hangup" = "Legg på";
 "accessibility.conference.lowerHand" = "Nedre hand";
-
 "accessibility.account.tokenQRcode" = "Token QR code";
+
+// Swarm Colors
+"swarmColors.vibrantPink" = "Vibrant Pink";
+"swarmColors.purple" = "Purple";
+"swarmColors.violet" = "Violet";
+"swarmColors.indigoBlue" = "Indigo Blue";
+"swarmColors.skyBlue" = "Sky Blue";
+"swarmColors.cyan" = "Cyan";
+"swarmColors.teal" = "Teal";
+"swarmColors.green" = "Green";
+"swarmColors.limeGreen" = "Lime Green";
+"swarmColors.mediumGray" = "Medium Gray";
+"swarmColors.yellowGreen" = "Yellow Green";
+"swarmColors.amber" = "Amber";
+"swarmColors.brightOrange" = "Bright Orange";
+"swarmColors.brown" = "Brown";
+"swarmColors.steelBlue" = "Steel Blue";
+
+// Share extension
+"shareExtension.appName" = "Jami";
+"shareExtension.noAccount.title" = "No account found";
+"shareExtension.noAccount.description" = "lease create an account in the main app to continue.";
+"shareExtension.unsupportedType.title" = "Unsupported content";
+"shareExtension.unsupportedType.description" = "Jami doesn't currently support the content you want to share.";
+"shareExtension.sending" = "Sending...";
+"shareExtension.conversations" = "Samtalar";
+"shareExtension.noConversation" = "No conversation available.";
+"shareExtension.selectAccount" = "Select an account.";
