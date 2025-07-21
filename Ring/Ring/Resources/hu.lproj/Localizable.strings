@@ -83,7 +83,7 @@
 "swarm.contactHeader" = "Kapcsolattartó";
 "swarm.showContactQRCode" = "Kapcsolattartói QR-kód megjelenítése";
 "swarm.shareContactInfo" = "Kapcsolattartó részletei megosztása";
-"swarm.accessibilityContactQRCode" = "Kapcsolattartó QR-kódja";
+"swarm.accessibilityContactQRCode" = "Kapcsolattartói QR-kód megjelenítése";
 "swarm.accessibilityContactQRCodeHint" = "Kapcsolattartó QR-kód képernyőjének megnyitása";
 "swarm.accessibilityContactShareHint" = "Megosztási lehetőség megnyitása a kapcsolattartói adatokhoz";
 "swarm.accessibilityColorPicker" = "Beszélgetés színválasztója";
@@ -101,6 +101,9 @@
 "swarm.blocked" = "Letiltva";
 "swarm.unknown" = "Ismeretlen";
 "swarm.inviteMembers" = "Tagok meghívása";
+"swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteMembersSelected" = "Selected";
+"swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Szeretne kilépni a beszélgetésből?";
 "swarm.Leave" = "Elhagyás";
 "swarm.newGroup" = "Új csoport létrehozása";
@@ -629,5 +632,32 @@
 "accessibility.conference.unmuteAudio" = "Mikrofon némítás feloldása";
 "accessibility.conference.hangup" = "Hívás befejezése";
 "accessibility.conference.lowerHand" = "Kéz leengedése";
-
 "accessibility.account.tokenQRcode" = "Jogkivonat QR-kód";
+
+// Swarm Colors
+"swarmColors.vibrantPink" = "Vibrant Pink";
+"swarmColors.purple" = "Purple";
+"swarmColors.violet" = "Violet";
+"swarmColors.indigoBlue" = "Indigo Blue";
+"swarmColors.skyBlue" = "Sky Blue";
+"swarmColors.cyan" = "Cyan";
+"swarmColors.teal" = "Teal";
+"swarmColors.green" = "Green";
+"swarmColors.limeGreen" = "Lime Green";
+"swarmColors.mediumGray" = "Medium Gray";
+"swarmColors.yellowGreen" = "Yellow Green";
+"swarmColors.amber" = "Amber";
+"swarmColors.brightOrange" = "Bright Orange";
+"swarmColors.brown" = "Brown";
+"swarmColors.steelBlue" = "Steel Blue";
+
+// Share extension
+"shareExtension.appName" = "Jami";
+"shareExtension.noAccount.title" = "No account found";
+"shareExtension.noAccount.description" = "lease create an account in the main app to continue.";
+"shareExtension.unsupportedType.title" = "Unsupported content";
+"shareExtension.unsupportedType.description" = "Jami doesn't currently support the content you want to share.";
+"shareExtension.sending" = "Sending...";
+"shareExtension.conversations" = "Beszélgetések";
+"shareExtension.noConversation" = "No conversation available.";
+"shareExtension.selectAccount" = "Select an account.";

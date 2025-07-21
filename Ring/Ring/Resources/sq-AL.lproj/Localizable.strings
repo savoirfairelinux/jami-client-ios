@@ -83,7 +83,7 @@
 "swarm.contactHeader" = "Kontakt";
 "swarm.showContactQRCode" = "Shfaq kod QR kontakti";
 "swarm.shareContactInfo" = "Jepni hollësi kontakti";
-"swarm.accessibilityContactQRCode" = "Kod QR për kontaktin";
+"swarm.accessibilityContactQRCode" = "Shfaq kod QR kontakti";
 "swarm.accessibilityContactQRCodeHint" = "Bën hapjen e një skene me kodin QR të kontaktit";
 "swarm.accessibilityContactShareHint" = "Bën hapjen e mundësive për ndarje me të tjerë të hollësive të kontaktit";
 "swarm.accessibilityColorPicker" = "Zgjedhës ngjyre bisede";
@@ -101,6 +101,9 @@
 "swarm.blocked" = "Bllokuar";
 "swarm.unknown" = "I panjohur";
 "swarm.inviteMembers" = "Ftoni anëtarë";
+"swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteMembersSelected" = "Selected";
+"swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Doni ta braktisni këtë bisedë?";
 "swarm.Leave" = "Braktise";
 "swarm.newGroup" = "Krijoni grup të ri";
@@ -629,5 +632,32 @@
 "accessibility.conference.unmuteAudio" = "Riktheji zërin";
 "accessibility.conference.hangup" = "Mbylle thirrjen";
 "accessibility.conference.lowerHand" = "Uleni dorën";
-
 "accessibility.account.tokenQRcode" = "Kod QR token-i";
+
+// Swarm Colors
+"swarmColors.vibrantPink" = "Vibrant Pink";
+"swarmColors.purple" = "Purple";
+"swarmColors.violet" = "Violet";
+"swarmColors.indigoBlue" = "Indigo Blue";
+"swarmColors.skyBlue" = "Sky Blue";
+"swarmColors.cyan" = "Cyan";
+"swarmColors.teal" = "Teal";
+"swarmColors.green" = "Green";
+"swarmColors.limeGreen" = "Lime Green";
+"swarmColors.mediumGray" = "Medium Gray";
+"swarmColors.yellowGreen" = "Yellow Green";
+"swarmColors.amber" = "Amber";
+"swarmColors.brightOrange" = "Bright Orange";
+"swarmColors.brown" = "Brown";
+"swarmColors.steelBlue" = "Steel Blue";
+
+// Share extension
+"shareExtension.appName" = "Jami";
+"shareExtension.noAccount.title" = "No account found";
+"shareExtension.noAccount.description" = "lease create an account in the main app to continue.";
+"shareExtension.unsupportedType.title" = "Unsupported content";
+"shareExtension.unsupportedType.description" = "Jami doesn't currently support the content you want to share.";
+"shareExtension.sending" = "Sending...";
+"shareExtension.conversations" = "Biseda";
+"shareExtension.noConversation" = "No conversation available.";
+"shareExtension.selectAccount" = "Select an account.";
