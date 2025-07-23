@@ -189,6 +189,7 @@ public final class AdapterService: AdapterDelegate {
 
     func sendSwarmMessage(accountId: String, conversationId: String, message: String, parentId: String) {
         if waitForAccountReady(accountId: accountId) {
+            CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: conversationId)
             adapter?.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
         } else {
             NSLog("[ShareExtension] Failed to send swarm message - account \(accountId) not ready")
@@ -242,6 +243,7 @@ public final class AdapterService: AdapterDelegate {
 
         do {
             try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
+            CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: conversationId)
             if waitForAccountReady(accountId: accountId) {
                 NSLog("[ShareExtension] Account \(accountId) is ready, sending swarm file")
                 self.adapter?.sendSwarmFile(
