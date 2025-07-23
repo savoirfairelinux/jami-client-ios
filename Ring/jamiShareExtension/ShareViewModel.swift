@@ -24,7 +24,7 @@ class ShareViewModel: ObservableObject {
     private var adapter: Adapter
     private var adapterService: AdapterService
     private var ongoingTransfersByAccount: [String: Set<String>] = [:]
-    private var stallTimer: Timer?
+    private var stallTimer: DispatchSourceTimer?
     private var didSetTransmissionSummary = false
 
     @Published var accountList: [AccountViewModel] = []
@@ -98,7 +98,6 @@ class ShareViewModel: ObservableObject {
                         var updatedIndicator = indicator
                         updatedIndicator.messageid = messageId
                         updatedIndicator.transferId = transferIdToAssign ?? updatedIndicator.transferId
-                        updatedIndicator.lastUpdate = Date()
                         self.transmissionStatus[key] = updatedIndicator
                         break
                     }
@@ -131,7 +130,6 @@ class ShareViewModel: ObservableObject {
                         updated.itemstatus = .failed
                     }
 
-                    updated.lastUpdate = Date()
                     self.transmissionStatus[key] = updated
 
                     let accountId = updated.accountid
@@ -187,7 +185,6 @@ class ShareViewModel: ObservableObject {
                         break
                     }
 
-                    updated.lastUpdate = Date()
                     self.transmissionStatus[key] = updated
                     self.checkAllItemsSent()
                 }
@@ -283,25 +280,21 @@ class ShareViewModel: ObservableObject {
                 🟡 Stalled: \(stalledCount)
                 🔴 Failed: \(failedCount)
             """
-
-            if let first = indicators.first {
-                CommonHelpers.setUpdatedConversations(accountId: first.accountid, conversationId: first.convid)
-            }
         }
     }
 
     private func startStallMonitoring() {
-        stallTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+        let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
+        timer.schedule(deadline: .now() + 2.0, repeating: 2.0)
+        timer.setEventHandler { [weak self] in
             guard let self = self else { return }
             let now = Date()
             var updatedAny = false
 
             for (key, indicator) in self.transmissionStatus {
                 if indicator.itemstatus == .ongoing, now.timeIntervalSince(indicator.lastUpdate) > 15 {
-
                     var stalledIndicator = indicator
                     stalledIndicator.itemstatus = .stalled
-                    stalledIndicator.lastUpdate = now
                     self.transmissionStatus[key] = stalledIndicator
                     updatedAny = true
                 }
@@ -311,13 +304,16 @@ class ShareViewModel: ObservableObject {
                 self.checkAllItemsSent()
             }
         }
+
+        stallTimer = timer
+        timer.resume()
     }
 
     func closeShareExtension() {
         adapterService.setAllAccountsInactive()
 
         if let timer = stallTimer {
-            timer.invalidate()
+            timer.cancel()
             stallTimer = nil
         }
 
