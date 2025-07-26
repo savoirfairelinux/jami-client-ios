@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da2d676f_028aa13e",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 4
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-07-26T09:10:19Z",
+      "side": 0,
+      "message": "Remove \"Jami\" for white labeling?",
+      "range": {
+        "startLine": 659,
+        "startChar": 48,
+        "endLine": 659,
+        "endChar": 52
+      },
+      "revId": "5c6c80c0761eed9f420f239af25afc1e383b8e7b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
