@@ -167,13 +167,13 @@ class ContactRequestsViewModel: Stateable, ViewModel {
 
         self.nameService.usernameLookupStatus.asObservable()
             .filter({ lookupNameResponse in
-                return lookupNameResponse.address == jamiId
+                return lookupNameResponse.requestedName == jamiId
             })
             .subscribe(onNext: { lookupNameResponse in
                 if lookupNameResponse.state == .found && !lookupNameResponse.name.isEmpty {
                     item.userName.accept(lookupNameResponse.name)
                 } else {
-                    item.userName.accept(lookupNameResponse.address)
+                    item.userName.accept(lookupNameResponse.requestedName)
                 }
             })
             .disposed(by: self.disposeBag)

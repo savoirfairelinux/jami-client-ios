@@ -101,7 +101,7 @@ class Contact {
     private func lookupName(nameService: NameService?, accountId: String) {
         nameService?.usernameLookupStatus.share()
             .filter { [weak self] response in
-                response.address == self?.hash
+                response.requestedName == self?.hash
             }
             .asObservable()
             .take(1)

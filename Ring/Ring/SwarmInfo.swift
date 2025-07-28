@@ -108,8 +108,8 @@ class ParticipantInfo: Equatable, Hashable {
         nameService.usernameLookupStatus.share()
             .filter({ [weak self] lookupNameResponse in
                 guard let self = self else { return false }
-                return lookupNameResponse.address != nil &&
-                    lookupNameResponse.address == self.jamiId
+                return lookupNameResponse.requestedName != nil &&
+                    lookupNameResponse.requestedName == self.jamiId
             })
             .asObservable()
             .take(1)

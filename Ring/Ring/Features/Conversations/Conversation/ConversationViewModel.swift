@@ -661,15 +661,15 @@ extension ConversationViewModel {
         self.nameService
             .usernameLookupStatus
             .filter({ [weak self] lookupNameResponse in
-                return lookupNameResponse.address != nil &&
-                    (lookupNameResponse.address == self?.conversation.getParticipants().first?.jamiId ||
-                        lookupNameResponse.address == self?.conversation.getParticipants().first?.jamiId)
+                return lookupNameResponse.requestedName != nil &&
+                    (lookupNameResponse.requestedName == self?.conversation.getParticipants().first?.jamiId ||
+                        lookupNameResponse.requestedName == self?.conversation.getParticipants().first?.jamiId)
             })
             .subscribe(onNext: { [weak self] lookupNameResponse in
                 if let name = lookupNameResponse.name, !name.isEmpty {
                     self?.userName.accept(name)
                     contact?.userName = name
-                } else if let address = lookupNameResponse.address {
+                } else if let address = lookupNameResponse.requestedName {
                     self?.userName.accept(address)
                 }
             })

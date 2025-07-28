@@ -93,13 +93,13 @@ class ContactViewModel: ViewModel, Stateable {
             if account.type == AccountType.ring && self.userName.value == jamiId {
                 self.nameService.usernameLookupStatus
                     .filter({lookupNameResponse in
-                        return lookupNameResponse.address != nil &&
-                            lookupNameResponse.address == jamiId
+                        return lookupNameResponse.requestedName != nil &&
+                            lookupNameResponse.requestedName == jamiId
                     })
                     .subscribe(onNext: { [weak self] lookupNameResponse in
                         if let name = lookupNameResponse.name, !name.isEmpty {
                             self?.userName.accept(name)
-                        } else if let address = lookupNameResponse.address {
+                        } else if let address = lookupNameResponse.requestedName {
                             self?.userName.accept(address)
                         }
                     })

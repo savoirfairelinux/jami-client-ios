@@ -1070,8 +1070,8 @@ class MessagesListVM: ObservableObject {
     private func nameLookup(id: String) {
         self.nameService.usernameLookupStatus
             .filter({ lookupNameResponse in
-                return lookupNameResponse.address != nil &&
-                    lookupNameResponse.address == id
+                return lookupNameResponse.requestedName != nil &&
+                    lookupNameResponse.requestedName == id
             })
             .asObservable()
             .take(1)

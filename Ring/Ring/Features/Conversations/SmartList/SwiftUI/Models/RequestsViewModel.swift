@@ -140,7 +140,7 @@ class RequestNameResolver: ObservableObject, Identifiable, Hashable {
     private func lookupUserName(jamiId: String) {
         nameService.usernameLookupStatus.asObservable()
             .filter { lookupNameResponse in
-                return lookupNameResponse.address == jamiId
+                return lookupNameResponse.requestedName == jamiId
             }
             .take(1)
             .subscribe(onNext: { lookupNameResponse in

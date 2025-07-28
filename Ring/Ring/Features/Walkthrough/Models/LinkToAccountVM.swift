@@ -180,7 +180,7 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
         guard let tempAccount = self.tempAccount else { return }
         self.nameService.usernameLookupStatus.asObservable()
             .filter({ response in
-                return response.address == jamiId
+                return response.requestedName == jamiId
             })
             .subscribe(onNext: { [weak self] response in
                 if response.state == .found && !response.name.isEmpty {

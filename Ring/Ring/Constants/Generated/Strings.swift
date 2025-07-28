@@ -1097,21 +1097,21 @@ internal enum L10n {
     internal static let appName = L10n.tr("Localizable", "shareExtension.appName", fallback: "Jami")
     /// Conversations
     internal static let conversations = L10n.tr("Localizable", "shareExtension.conversations", fallback: "Conversations")
-    /// No conversation available.
-    internal static let noConversation = L10n.tr("Localizable", "shareExtension.noConversation", fallback: "No conversation available.")
-    /// Select an account.
-    internal static let selectAccount = L10n.tr("Localizable", "shareExtension.selectAccount", fallback: "Select an account.")
-    /// Sending...
-    internal static let sending = L10n.tr("Localizable", "shareExtension.sending", fallback: "Sending...")
+    /// Conversation unavailable.
+    internal static let noConversation = L10n.tr("Localizable", "shareExtension.noConversation", fallback: "Conversation unavailable.")
+    /// Select account.
+    internal static let selectAccount = L10n.tr("Localizable", "shareExtension.selectAccount", fallback: "Select account.")
+    /// Sending…
+    internal static let sending = L10n.tr("Localizable", "shareExtension.sending", fallback: "Sending…")
     internal enum NoAccount {
-      /// lease create an account in the main app to continue.
-      internal static let description = L10n.tr("Localizable", "shareExtension.noAccount.description", fallback: "lease create an account in the main app to continue.")
-      /// No account found
-      internal static let title = L10n.tr("Localizable", "shareExtension.noAccount.title", fallback: "No account found")
+      /// To continue, create an account in the main application.
+      internal static let description = L10n.tr("Localizable", "shareExtension.noAccount.description", fallback: "To continue, create an account in the main application.")
+      /// Account not found
+      internal static let title = L10n.tr("Localizable", "shareExtension.noAccount.title", fallback: "Account not found")
     }
     internal enum UnsupportedType {
-      /// Jami doesn't currently support the content you want to share.
-      internal static let description = L10n.tr("Localizable", "shareExtension.unsupportedType.description", fallback: "Jami doesn't currently support the content you want to share.")
+      /// The sharing of the selected content is currently unsupported.
+      internal static let description = L10n.tr("Localizable", "shareExtension.unsupportedType.description", fallback: "The sharing of the selected content is currently unsupported.")
       /// Unsupported content
       internal static let title = L10n.tr("Localizable", "shareExtension.unsupportedType.title", fallback: "Unsupported content")
     }
@@ -1269,34 +1269,34 @@ internal enum L10n {
   internal enum SwarmColors {
     /// Amber
     internal static let amber = L10n.tr("Localizable", "swarmColors.amber", fallback: "Amber")
-    /// Bright Orange
-    internal static let brightOrange = L10n.tr("Localizable", "swarmColors.brightOrange", fallback: "Bright Orange")
+    /// Bright orange
+    internal static let brightOrange = L10n.tr("Localizable", "swarmColors.brightOrange", fallback: "Bright orange")
     /// Brown
     internal static let brown = L10n.tr("Localizable", "swarmColors.brown", fallback: "Brown")
     /// Cyan
     internal static let cyan = L10n.tr("Localizable", "swarmColors.cyan", fallback: "Cyan")
     /// Green
     internal static let green = L10n.tr("Localizable", "swarmColors.green", fallback: "Green")
-    /// Indigo Blue
-    internal static let indigoBlue = L10n.tr("Localizable", "swarmColors.indigoBlue", fallback: "Indigo Blue")
-    /// Lime Green
-    internal static let limeGreen = L10n.tr("Localizable", "swarmColors.limeGreen", fallback: "Lime Green")
-    /// Medium Gray
-    internal static let mediumGray = L10n.tr("Localizable", "swarmColors.mediumGray", fallback: "Medium Gray")
+    /// Indigo blue
+    internal static let indigoBlue = L10n.tr("Localizable", "swarmColors.indigoBlue", fallback: "Indigo blue")
+    /// Lime green
+    internal static let limeGreen = L10n.tr("Localizable", "swarmColors.limeGreen", fallback: "Lime green")
+    /// Medium gray
+    internal static let mediumGray = L10n.tr("Localizable", "swarmColors.mediumGray", fallback: "Medium gray")
     /// Purple
     internal static let purple = L10n.tr("Localizable", "swarmColors.purple", fallback: "Purple")
-    /// Sky Blue
-    internal static let skyBlue = L10n.tr("Localizable", "swarmColors.skyBlue", fallback: "Sky Blue")
-    /// Steel Blue
-    internal static let steelBlue = L10n.tr("Localizable", "swarmColors.steelBlue", fallback: "Steel Blue")
+    /// Sky blue
+    internal static let skyBlue = L10n.tr("Localizable", "swarmColors.skyBlue", fallback: "Sky blue")
+    /// Steel blue
+    internal static let steelBlue = L10n.tr("Localizable", "swarmColors.steelBlue", fallback: "Steel blue")
     /// Teal
     internal static let teal = L10n.tr("Localizable", "swarmColors.teal", fallback: "Teal")
-    /// Vibrant Pink
-    internal static let vibrantPink = L10n.tr("Localizable", "swarmColors.vibrantPink", fallback: "Vibrant Pink")
+    /// Vibrant pink
+    internal static let vibrantPink = L10n.tr("Localizable", "swarmColors.vibrantPink", fallback: "Vibrant pink")
     /// Violet
     internal static let violet = L10n.tr("Localizable", "swarmColors.violet", fallback: "Violet")
-    /// Yellow Green
-    internal static let yellowGreen = L10n.tr("Localizable", "swarmColors.yellowGreen", fallback: "Yellow Green")
+    /// Yellow-green
+    internal static let yellowGreen = L10n.tr("Localizable", "swarmColors.yellowGreen", fallback: "Yellow-green")
   }
   internal enum Swarmcreation {
     /// Add description

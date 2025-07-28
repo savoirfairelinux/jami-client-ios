@@ -413,8 +413,8 @@ extension ConversationsCoordinator {
         guard call.getDisplayName() == call.paricipantHash() else { return }
         self.nameService.usernameLookupStatus
             .filter({ [weak call] lookupNameResponse in
-                return lookupNameResponse.address != nil &&
-                    lookupNameResponse.address == call?.paricipantHash()
+                return lookupNameResponse.requestedName != nil &&
+                    lookupNameResponse.requestedName == call?.paricipantHash()
             })
             .asObservable()
             .take(1)

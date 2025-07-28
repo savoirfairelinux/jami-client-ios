@@ -88,8 +88,8 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
             self.nameService.usernameLookupStatus.single()
                 .filter({ [weak self] lookupNameResponse in
                     guard let self = self else { return false }
-                    return lookupNameResponse.address != nil &&
-                        lookupNameResponse.address == self.contact.hash
+                    return lookupNameResponse.requestedName != nil &&
+                        lookupNameResponse.requestedName == self.contact.hash
                 })
                 .subscribe(onNext: {[weak self] lookupNameResponse in
                     guard let self = self else { return }

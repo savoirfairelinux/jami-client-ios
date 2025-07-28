@@ -98,7 +98,7 @@ class ParticipantProfileInfo {
     func lookupName(nameService: NameService?, accountId: String) {
         nameService?.usernameLookupStatus.share()
             .filter { [weak self] response in
-                response.address == self?.participantId
+                response.requestedName == self?.participantId
             }
             .asObservable()
             .take(1)
