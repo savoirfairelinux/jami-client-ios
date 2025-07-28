@@ -635,29 +635,29 @@
 "accessibility.account.tokenQRcode" = "Codul QR";
 
 // Swarm Colors
-"swarmColors.vibrantPink" = "Vibrant Pink";
+"swarmColors.vibrantPink" = "Vibrant pink";
 "swarmColors.purple" = "Purple";
 "swarmColors.violet" = "Violet";
-"swarmColors.indigoBlue" = "Indigo Blue";
-"swarmColors.skyBlue" = "Sky Blue";
+"swarmColors.indigoBlue" = "Indigo blue";
+"swarmColors.skyBlue" = "Sky blue";
 "swarmColors.cyan" = "Cyan";
 "swarmColors.teal" = "Teal";
 "swarmColors.green" = "Green";
-"swarmColors.limeGreen" = "Lime Green";
-"swarmColors.mediumGray" = "Medium Gray";
-"swarmColors.yellowGreen" = "Yellow Green";
+"swarmColors.limeGreen" = "Lime green";
+"swarmColors.mediumGray" = "Medium gray";
+"swarmColors.yellowGreen" = "Yellow-green";
 "swarmColors.amber" = "Amber";
-"swarmColors.brightOrange" = "Bright Orange";
+"swarmColors.brightOrange" = "Bright orange";
 "swarmColors.brown" = "Brown";
-"swarmColors.steelBlue" = "Steel Blue";
+"swarmColors.steelBlue" = "Steel blue";
 
 // Share extension
 "shareExtension.appName" = "Jami";
-"shareExtension.noAccount.title" = "No account found";
-"shareExtension.noAccount.description" = "lease create an account in the main app to continue.";
+"shareExtension.noAccount.title" = "Account not found";
+"shareExtension.noAccount.description" = "To continue, create an account in the main application.";
 "shareExtension.unsupportedType.title" = "Unsupported content";
-"shareExtension.unsupportedType.description" = "Jami doesn't currently support the content you want to share.";
-"shareExtension.sending" = "Sending...";
+"shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
+"shareExtension.sending" = "Sending…";
 "shareExtension.conversations" = "Conversații";
-"shareExtension.noConversation" = "No conversation available.";
-"shareExtension.selectAccount" = "Select an account.";
+"shareExtension.noConversation" = "Conversation unavailable.";
+"shareExtension.selectAccount" = "Select account.";

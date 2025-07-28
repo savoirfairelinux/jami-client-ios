@@ -20,7 +20,7 @@
 "global.accountSettings" = "账户设置";
 "global.username" = "Username";
 "global.recommended" = "Recommended";
-"global.password" = "Password";
+"global.password" = "密码";
 "global.registerAUsername" = "注册用户名";
 "global.enterPassword" = "输入密码";
 "global.enterUsername" = "输入用户名";
@@ -29,7 +29,7 @@
 "global.removeAccount" = "Remove account";
 "global.incomingCall" = "来电";
 "global.ok" = "確定";
-"global.close" = "Close";
+"global.close" = "关闭";
 "global.share" = "Share";
 "global.forward" = "Forward";
 "global.save" = "Save";
@@ -39,9 +39,9 @@
 "global.block" = "Block";
 "global.decline" = "拒接";
 "global.name" = "Name";
-"global.copy" = "Copy";
+"global.copy" = "复制";
 "global.reply" = "Reply";
-"global.search" = "Searching…";
+"global.search" = "正在搜索…";
 "global.donate" = "捐助";
 "global.deleteMessage" = "删除消息";
 "global.deleteFile" = "从设备中删除文件";
@@ -71,7 +71,7 @@
 "swarm.leaveConversation" = "离开谈话";
 "swarm.chooseColor" = "对话框颜色";
 "swarm.typeOfSwarm" = "对话类型";
-"swarm.identifier" = "Identifier";
+"swarm.identifier" = "标识符";
 "swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "設定";
 "swarm.members" = "Members";
@@ -115,7 +115,7 @@
 "swarm.selectContacts" = "选择联系人";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
+"smartlist.yesterday" = "昨天";
 "smartlist.results" = "公共目录";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "会话";
@@ -127,14 +127,14 @@
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name…";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "搜索";
 "smartlist.noNetworkConnectivity" = "No network connectivity";
 "smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
 "smartlist.accountsTitle" = "Accounts";
 "smartlist.addAccountButton" = "+ Add account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Invitations";
+"smartlist.invitations" = "邀请";
 "smartlist.aboutJami" = "About Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "账户";
@@ -184,7 +184,7 @@
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
+"welcome.linkDevice" = "从其他设备导入";
 "welcome.linkBackup" = "從封存備份匯入";
 "welcome.createAccount" = "建立 Jami 帳號";
 "welcome.connectToJAMS" = "Connect to a management server";
@@ -342,15 +342,15 @@
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
-"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.passwordPlaceholder" = "输入账户密码";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "用户名不可用。";
 "accountPage.usernameRegistering" = "Registering";
-"accountPage.usernameRegisterAction" = "Register";
+"accountPage.usernameRegisterAction" = "注册";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check your password.";
 "accountPage.createPassword" = "加密账户";
-"accountPage.changePassword" = "Change password";
+"accountPage.changePassword" = "修改密码";
 "accountPage.currentPasswordPlaceholder" = "輸入目前密碼";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
@@ -367,8 +367,8 @@
 "accountPage.connectivityHeader" = "Connectivity";
 "accountPage.turnEnabled" = "Enable TURN";
 "accountPage.turnServer" = "TURN address";
-"accountPage.turnUsername" = "TURN username";
-"accountPage.turnPassword" = "TURN password";
+"accountPage.turnUsername" = "TURN 用户名";
+"accountPage.turnPassword" = "TURN 密码";
 "accountPage.turnRealm" = "TURN realm";
 "accountPage.upnpEnabled" = "Use UPnP";
 "accountPage.security" = "安全性";
@@ -433,8 +433,8 @@
 
 // Account
 "account.sipServer" = "服务器";
-"account.port" = "Port";
-"account.proxyServer" = "Proxy";
+"account.port" = "端口";
+"account.proxyServer" = "代理服务器";
 "account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "SIP Account";
 "account.configure" = "Configure";
@@ -445,11 +445,11 @@
 "account.enableAccount" = "Enable Account";
 "account.statusOnline" = "Online";
 "account.statusOffline" = "Offline";
-"account.statusConnecting" = "Connecting";
+"account.statusConnecting" = "正在连接";
 "account.statusUnknown" = "Unknown";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "Account requires migration.";
-"account.me" = "Me";
+"account.me" = "我";
 
 // Block List Page
 "blockListPage.noBlockedContacts" = "No blocked contacts";
@@ -635,29 +635,29 @@
 "accessibility.account.tokenQRcode" = "Token QR code";
 
 // Swarm Colors
-"swarmColors.vibrantPink" = "Vibrant Pink";
+"swarmColors.vibrantPink" = "Vibrant pink";
 "swarmColors.purple" = "Purple";
 "swarmColors.violet" = "Violet";
-"swarmColors.indigoBlue" = "Indigo Blue";
-"swarmColors.skyBlue" = "Sky Blue";
+"swarmColors.indigoBlue" = "Indigo blue";
+"swarmColors.skyBlue" = "Sky blue";
 "swarmColors.cyan" = "Cyan";
 "swarmColors.teal" = "Teal";
 "swarmColors.green" = "Green";
-"swarmColors.limeGreen" = "Lime Green";
-"swarmColors.mediumGray" = "Medium Gray";
-"swarmColors.yellowGreen" = "Yellow Green";
+"swarmColors.limeGreen" = "Lime green";
+"swarmColors.mediumGray" = "Medium gray";
+"swarmColors.yellowGreen" = "Yellow-green";
 "swarmColors.amber" = "Amber";
-"swarmColors.brightOrange" = "Bright Orange";
+"swarmColors.brightOrange" = "Bright orange";
 "swarmColors.brown" = "Brown";
-"swarmColors.steelBlue" = "Steel Blue";
+"swarmColors.steelBlue" = "Steel blue";
 
 // Share extension
 "shareExtension.appName" = "Jami";
-"shareExtension.noAccount.title" = "No account found";
-"shareExtension.noAccount.description" = "lease create an account in the main app to continue.";
+"shareExtension.noAccount.title" = "Account not found";
+"shareExtension.noAccount.description" = "To continue, create an account in the main application.";
 "shareExtension.unsupportedType.title" = "Unsupported content";
-"shareExtension.unsupportedType.description" = "Jami doesn't currently support the content you want to share.";
-"shareExtension.sending" = "Sending...";
+"shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
+"shareExtension.sending" = "Sending…";
 "shareExtension.conversations" = "会话";
-"shareExtension.noConversation" = "No conversation available.";
-"shareExtension.selectAccount" = "Select an account.";
+"shareExtension.noConversation" = "Conversation unavailable.";
+"shareExtension.selectAccount" = "Select account.";
