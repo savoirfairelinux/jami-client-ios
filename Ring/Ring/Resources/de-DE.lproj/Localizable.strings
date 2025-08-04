@@ -635,29 +635,29 @@
 "accessibility.account.tokenQRcode" = "Token-QR-Code";
 
 // Swarm Colors
-"swarmColors.vibrantPink" = "Vibrant pink";
+"swarmColors.vibrantPink" = "Lebendiges Rosa";
 "swarmColors.purple" = "Lila";
 "swarmColors.violet" = "Violett";
-"swarmColors.indigoBlue" = "Indigo blue";
-"swarmColors.skyBlue" = "Sky blue";
+"swarmColors.indigoBlue" = "Indigoblau";
+"swarmColors.skyBlue" = "Himmelblau";
 "swarmColors.cyan" = "Cyan";
 "swarmColors.teal" = "Blaugrün";
 "swarmColors.green" = "Grün";
-"swarmColors.limeGreen" = "Lime green";
-"swarmColors.mediumGray" = "Medium gray";
-"swarmColors.yellowGreen" = "Yellow-green";
+"swarmColors.limeGreen" = "Limettengrün";
+"swarmColors.mediumGray" = "Mittelgrau";
+"swarmColors.yellowGreen" = "Gelbgrün";
 "swarmColors.amber" = "Bernsteinfarbe";
-"swarmColors.brightOrange" = "Bright orange";
+"swarmColors.brightOrange" = "Leuchtendes Orange";
 "swarmColors.brown" = "Braun";
-"swarmColors.steelBlue" = "Steel blue";
+"swarmColors.steelBlue" = "Stahlblau";
 
 // Share extension
 "shareExtension.appName" = "Jami";
-"shareExtension.noAccount.title" = "Account not found";
-"shareExtension.noAccount.description" = "To continue, create an account in the main application.";
+"shareExtension.noAccount.title" = "Konto nicht gefunden";
+"shareExtension.noAccount.description" = "Um fortzufahren, erstellen Sie ein Konto in der Hauptanwendung.";
 "shareExtension.unsupportedType.title" = "Nicht unterstützter Inhalt";
-"shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
-"shareExtension.sending" = "Sending…";
+"shareExtension.unsupportedType.description" = "Das Teilen der ausgewählten Inhalte wird derzeit nicht unterstützt.";
+"shareExtension.sending" = "Senden…";
 "shareExtension.conversations" = "Gespräche";
-"shareExtension.noConversation" = "Conversation unavailable.";
-"shareExtension.selectAccount" = "Select account.";
+"shareExtension.noConversation" = "Unterhaltung nicht verfügbar.";
+"shareExtension.selectAccount" = "Konto auswählen.";
