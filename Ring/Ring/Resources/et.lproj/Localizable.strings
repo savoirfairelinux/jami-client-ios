@@ -635,29 +635,29 @@
 "accessibility.account.tokenQRcode" = "Tunnusloa QR-kood";
 
 // Swarm Colors
-"swarmColors.vibrantPink" = "Vibrant pink";
+"swarmColors.vibrantPink" = "Võnkuv roosa";
 "swarmColors.purple" = "Purpurpunane";
 "swarmColors.violet" = "Punakassinine";
-"swarmColors.indigoBlue" = "Indigo blue";
-"swarmColors.skyBlue" = "Sky blue";
+"swarmColors.indigoBlue" = "Indigosinine";
+"swarmColors.skyBlue" = "Taevasinine";
 "swarmColors.cyan" = "Rohekassinine";
 "swarmColors.teal" = "Sinakasroheline";
 "swarmColors.green" = "Roheline";
-"swarmColors.limeGreen" = "Lime green";
-"swarmColors.mediumGray" = "Medium gray";
-"swarmColors.yellowGreen" = "Yellow-green";
+"swarmColors.limeGreen" = "Laimiroheline";
+"swarmColors.mediumGray" = "Tavahall";
+"swarmColors.yellowGreen" = "Kollakasroheline";
 "swarmColors.amber" = "Merevaigukollane";
-"swarmColors.brightOrange" = "Bright orange";
+"swarmColors.brightOrange" = "Ereoranž";
 "swarmColors.brown" = "Pruun";
-"swarmColors.steelBlue" = "Steel blue";
+"swarmColors.steelBlue" = "Terassinine";
 
 // Share extension
 "shareExtension.appName" = "Jami";
-"shareExtension.noAccount.title" = "Account not found";
-"shareExtension.noAccount.description" = "To continue, create an account in the main application.";
+"shareExtension.noAccount.title" = "Kasutajakontot ei leidu";
+"shareExtension.noAccount.description" = "Jätkamiseks palun loo kasutajakonto põhirakenduses.";
 "shareExtension.unsupportedType.title" = "Mittetoetatud sisu";
-"shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
-"shareExtension.sending" = "Sending…";
+"shareExtension.unsupportedType.description" = "Valitud sisu jagamine pole hetkel toetatud.";
+"shareExtension.sending" = "Saadan…";
 "shareExtension.conversations" = "Vestlused";
-"shareExtension.noConversation" = "Conversation unavailable.";
-"shareExtension.selectAccount" = "Select account.";
+"shareExtension.noConversation" = "Vestlus pole saadaval.";
+"shareExtension.selectAccount" = "Vali kasutajakonto";
