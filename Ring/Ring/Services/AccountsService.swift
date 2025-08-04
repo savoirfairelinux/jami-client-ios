@@ -673,30 +673,37 @@ class AccountsService: AccountAdapterDelegate {
     // MARK: Push Notifications
 
     func setPushNotificationToken(token: String) {
-        if token.isEmpty {
-            self.accountAdapter.setPushNotificationToken(token)
-        } else {
-            var pushConfig = [String: String]()
-            pushConfig["token"] = token
-            pushConfig["platform"] = "ios"
-            let mutableDict = NSMutableDictionary(dictionary: pushConfig)
-            self.accountAdapter.setPushNotificationConfig(mutableDict)
-        }
-        // Set account details to force the DHT update to use the token.
-        for account in accounts {
-            // Use details from the daemon, as the token may be set immediately after account creation,
-            // meaning the client might not have the updated details.
-            guard let accountDetailsDict = accountAdapter.getAccountDetails(account.id) as? [String: String] else { continue }
-            let accountDetails = AccountConfigModel(withDetails: accountDetailsDict)
-            let model = ConfigKeyModel(withKey: .proxyEnabled)
-            if accountDetails.get(withConfigKeyModel: model) == "true" {
-                self.setAccountDetails(forAccountId: account.id, withDetails: accountDetails)
+        DispatchQueue.global(qos: .background).async {[weak self] in
+            guard let self = self else { return }
+
+            if token.isEmpty {
+                self.accountAdapter.setPushNotificationToken(token)
+            } else {
+                var pushConfig = [String: String]()
+                pushConfig["token"] = token
+                pushConfig["platform"] = "ios"
+                let mutableDict = NSMutableDictionary(dictionary: pushConfig)
+                self.accountAdapter.setPushNotificationConfig(mutableDict)
+            }
+            // Set account details to force the DHT update to use the token.
+            for account in accounts {
+                // Use details from the daemon, as the token may be set immediately after account creation,
+                // meaning the client might not have the updated details.
+                guard let accountDetailsDict = accountAdapter.getAccountDetails(account.id) as? [String: String] else { continue }
+                let accountDetails = AccountConfigModel(withDetails: accountDetailsDict)
+                let model = ConfigKeyModel(withKey: .proxyEnabled)
+                if accountDetails.get(withConfigKeyModel: model) == "true" {
+                    self.setAccountDetails(forAccountId: account.id, withDetails: accountDetails)
+                }
             }
         }
     }
 
     func setPushNotificationTopic(topic: String) {
-        self.accountAdapter.setPushNotificationTopic(topic)
+        DispatchQueue.global(qos: .background).async {[weak self] in
+            guard let self = self else { return }
+            self.accountAdapter.setPushNotificationTopic(topic)
+        }
     }
 
     func pushNotificationReceived(data: [String: Any]) {
