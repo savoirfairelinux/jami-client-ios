@@ -23,7 +23,9 @@ import RxSwift
 
 @objc
 class ShareViewController: UIViewController {
-    private var viewModel: ShareViewModel!
+    private var viewModel: ShareViewModel?
+
+    private var requestCompleted: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +33,18 @@ class ShareViewController: UIViewController {
         let sharedItems = extensionContext?.inputItems as? [NSExtensionItem] ?? []
         viewModel = ShareViewModel()
 
+        guard let viewModel = viewModel else {
+            completeRequest(withError: true)
+            return
+        }
+
         let hostingController = UIHostingController(
             rootView: ShareView(
                 items: sharedItems,
                 viewModel: viewModel,
                 closeAction: { [weak self] in
-                    self?.viewModel.closeShareExtension()
-                    self?.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+                    self?.viewModel?.closeShareExtension()
+                    self?.completeRequest()
                 }
             )
         )
@@ -60,6 +67,33 @@ class ShareViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.closeShareExtension()
+        viewModel?.closeShareExtension()
+        completeRequest()
+    }
+
+    func completeRequest(withError: Bool = false) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            NSLog("ShareViewController completeRequest, withError: %@", withError ? "true" : "false")
+            if self.requestCompleted {
+                return
+            }
+            self.requestCompleted = true
+            if withError {
+                let error = NSError(domain: "ShareExtensionError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Share extension cancelled"])
+                self.extensionContext?.cancelRequest(withError: error)
+            } else {
+                self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                exit(0)
+            }
+        }
+    }
+
+    deinit {
+        NSLog("ShareViewController deinit")
+        viewModel?.closeShareExtension()
+        completeRequest()
     }
 }
