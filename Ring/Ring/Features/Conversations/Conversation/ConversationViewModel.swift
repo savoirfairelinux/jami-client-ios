@@ -59,9 +59,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     func getDefaultAvatar() -> UIImage {
         if let conversation = self.conversation,
            !conversation.isDialog() {
-            return UIImage.createSwarmAvatar(convId: conversation.id, size: CGSize(width: 55, height: 55))
+            return UIImage.createSwarmAvatar(convId: conversation.id, size: CGSize(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize))
         }
-        return UIImage.createContactAvatar(username: (self.displayName.value?.isEmpty ?? true) ? self.userName.value : self.displayName.value!, size: CGSize(width: 55, height: 55))
+        return UIImage.createContactAvatar(username: (self.displayName.value?.isEmpty ?? true) ? self.userName.value : self.displayName.value!, size: CGSize(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize))
     }
 
     /// Logger
@@ -152,9 +152,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             .startWith(self.profileImageData.value)
             .subscribe(onNext: { [weak self] imageData in
                 if let imageData = imageData, !imageData.isEmpty {
-                    if let image = UIImage(data: imageData) {
-                        self?.avatar = image
-                    }
+                    let targetSize: CGFloat = Constants.defaultAvatarSize * 2
+                    let image = UIImage.resizeImage(from: imageData, targetSize: targetSize)
+                    self?.avatar = image
                 }
             })
             .disposed(by: self.disposeBag)
@@ -820,6 +820,7 @@ extension ConversationViewModel {
         }
         return participantJamiId == jamiId
     }
+
 }
 
 // swiftlint:enable type_body_length

@@ -171,13 +171,13 @@ struct ConversationRowView: View {
                         Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 55, height: 55, alignment: .center)
+                            .frame(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize, alignment: .center)
                             .clipShape(Circle())
                     } else {
                         Image(uiImage: model.getDefaultAvatar())
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 55, height: 55, alignment: .center)
+                            .frame(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize, alignment: .center)
                             .clipShape(Circle())
                     }
                     presenceIndicator
@@ -233,7 +233,7 @@ struct ConversationRowView: View {
             }
             if withSeparator {
                 Divider()
-                    .padding(.leading, 55)
+                    .padding(.leading, Constants.defaultAvatarSize)
             }
         }
         .transition(.opacity)

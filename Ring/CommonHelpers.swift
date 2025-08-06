@@ -16,6 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import UIKit
+
 /// A namespace for common helper functions shared across all targets: jami, share extension, notification extension.
 enum CommonHelpers {
     static func createFileUrlForSwarm(fileName: String, accountId: String, conversationId: String) -> URL? {
@@ -158,5 +160,32 @@ enum AccountState: String {
     // check if network error status
     func isNetworkError() -> Bool {
         return self == .errorNetwork
+    }
+}
+
+extension UIImage {
+    static func resizeImage(from imageData: Data, targetSize: CGFloat) -> UIImage? {
+        let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+        guard let imageSource = CGImageSourceCreateWithData(imageData as CFData, imageSourceOptions) else {
+            return UIImage(data: imageData)
+        }
+
+        let scaledSize = targetSize * UIScreen.main.scale
+        return createResizedImage(imageSource: imageSource, size: scaledSize) ?? UIImage(data: imageData)
+    }
+
+    static func createResizedImage(imageSource: CGImageSource, size: CGFloat) -> UIImage? {
+        let options: CFDictionary? = size == 0 ? nil : [
+            kCGImageSourceThumbnailMaxPixelSize: size,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceShouldCacheImmediately: true
+        ] as CFDictionary
+
+        guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options) else {
+            return nil
+        }
+
+        return UIImage(cgImage: downsampledImage)
     }
 }

@@ -494,17 +494,3 @@ extension UIImage {
         return normalizedImage ?? self
     }
 }
-
-func createResizedImage(imageSource: CGImageSource, size: CGFloat) -> UIImage? {
-    let options: CFDictionary? = size == 0 ? nil : [
-        kCGImageSourceThumbnailMaxPixelSize: size,
-        kCGImageSourceCreateThumbnailWithTransform: true,
-        kCGImageSourceCreateThumbnailFromImageAlways: true
-    ] as CFDictionary
-
-    guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options) else {
-        return nil
-    }
-
-    return UIImage(cgImage: downsampledImage)
-}

@@ -30,7 +30,7 @@ extension String {
             return nil
         }
         guard let imageSource = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
-        return Ring.createResizedImage(imageSource: imageSource, size: targetSize)
+        return UIImage.createResizedImage(imageSource: imageSource, size: targetSize)
     }
 
     func createImage(size: CGFloat) -> UIImage? {

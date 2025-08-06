@@ -173,7 +173,7 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
     @Published var receivedDate: String
     @Published var status: RequestStatus = .pending
     @Published var markedToRemove: Bool = false
-    let avatarSize: CGFloat = 55
+    let avatarSize: CGFloat = Constants.defaultAvatarSize
     let request: RequestModel
     let id: String
     let nameResolver: RequestNameResolver

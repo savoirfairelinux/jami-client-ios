@@ -77,7 +77,7 @@ class ParticipantInfo: Equatable, Hashable {
                 if !name.isEmpty {
                     self.profileLock.lock()
                     if !self.hasProfileAvatar {
-                        let backupAvatar = UIImage.createContactAvatar(username: name, size: CGSize(width: 55, height: 55))
+                        let backupAvatar = UIImage.createContactAvatar(username: name, size: CGSize(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize))
                         self.avatar.accept(backupAvatar)
                     }
                     self.profileLock.unlock()
@@ -133,7 +133,7 @@ class SwarmInfo: SwarmInfoProtocol {
     var participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
     var participantsAvatars: BehaviorRelay<[UIImage]> = BehaviorRelay(value: [UIImage()])
 
-    var avatarHeight: CGFloat = 55
+    var avatarHeight: CGFloat = Constants.defaultAvatarSize
     var avatarSpacing: CGFloat = 2
     lazy var id: String = {
         return conversation?.id ?? ""
@@ -147,7 +147,7 @@ class SwarmInfo: SwarmInfoProtocol {
             .combineLatest(self.avatar.asObservable().startWith(self.avatar.value),
                            self.participantsAvatars.asObservable().startWith(self.participantsAvatars.value)) { [weak self] (avatar: UIImage?, _: [UIImage]) -> UIImage in
                 guard let self = self else {
-                    return UIImage.createSwarmAvatar(convId: "", size: CGSize(width: 55, height: 55))
+                    return UIImage.createSwarmAvatar(convId: "", size: CGSize(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize))
                 }
                 if let avatar = avatar { return avatar }
                 return self.buildAvatar()
@@ -170,7 +170,7 @@ class SwarmInfo: SwarmInfoProtocol {
     private var tempBag = DisposeBag()
 
     // to get info during swarm creation
-    init(injectionBag: InjectionBag, accountId: String, avatarHeight: CGFloat = 55) {
+    init(injectionBag: InjectionBag, accountId: String, avatarHeight: CGFloat = Constants.defaultAvatarSize) {
         self.avatarHeight = avatarHeight
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
@@ -203,7 +203,7 @@ class SwarmInfo: SwarmInfoProtocol {
     }
 
     // to get info for existing swarm
-    convenience init(injectionBag: InjectionBag, conversation: ConversationModel, avatarHeight: CGFloat = 55) {
+    convenience init(injectionBag: InjectionBag, conversation: ConversationModel, avatarHeight: CGFloat = Constants.defaultAvatarSize) {
         self.init(injectionBag: injectionBag, accountId: conversation.accountId, avatarHeight: avatarHeight)
         self.conversation = conversation
         self.subscribeConversationEvents()

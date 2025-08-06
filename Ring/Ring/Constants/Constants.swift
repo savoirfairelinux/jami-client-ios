@@ -205,5 +205,7 @@ public class Constants: NSObject {
 
     public static let MAX_PROFILE_IMAGE_SIZE: CGFloat = 512
 
+    public static let defaultAvatarSize: CGFloat = 55
+
     public static let versionName = "Εἰρήνη"
 }

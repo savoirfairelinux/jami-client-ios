@@ -17,7 +17,6 @@
  */
 
 import UIKit
-import ImageIO
 import SwiftUI
 import RxSwift
 
@@ -77,8 +76,10 @@ class AccountViewModel: ObservableObject, Identifiable, Equatable {
 
         let avatarString = avatar
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            let processedImage = ImageUtils().imageFromBase64(avatarString, targetSize: CGSize(width: 45, height: 45))
-
+            guard let data = Data(base64Encoded: avatarString) else {
+                return
+            }
+            let processedImage = UIImage.resizeImage(from: data, targetSize: Constants.defaultAvatarSize)
             DispatchQueue.main.async { [weak self] in
                 guard let self = self, self.avatar == avatarString else { return }
                 self.processedAvatar = processedImage
@@ -103,44 +104,5 @@ class AccountViewModel: ObservableObject, Identifiable, Equatable {
                 self?.avatar = avatarString
             })
             .disposed(by: disposeBag)
-    }
-}
-
-class ImageUtils {
-
-    func imageFromBase64(_ base64: String, targetSize: CGSize) -> UIImage? {
-        guard let data = Data(base64Encoded: base64) else { return nil }
-
-        return downsampleImage(from: data, to: targetSize)
-    }
-
-    private func downsampleImage(from imageData: Data, to targetSize: CGSize) -> UIImage? {
-        let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
-        guard let imageSource = CGImageSourceCreateWithData(imageData as CFData, imageSourceOptions) else {
-            return UIImage(data: imageData)
-        }
-
-        let maxDimensionInPixels = max(targetSize.width, targetSize.height) * UIScreen.main.scale
-
-        let downsampleOptions = [
-            kCGImageSourceCreateThumbnailFromImageAlways: true,
-            kCGImageSourceShouldCacheImmediately: true,
-            kCGImageSourceCreateThumbnailWithTransform: true,
-            kCGImageSourceThumbnailMaxPixelSize: maxDimensionInPixels
-        ] as CFDictionary
-
-        guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions) else {
-            guard let fullImage = UIImage(data: imageData) else { return nil }
-            return resizeImage(fullImage, to: targetSize)
-        }
-
-        return UIImage(cgImage: downsampledImage)
-    }
-
-    private func resizeImage(_ image: UIImage, to targetSize: CGSize) -> UIImage? {
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        return renderer.image { _ in
-            image.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
     }
 }

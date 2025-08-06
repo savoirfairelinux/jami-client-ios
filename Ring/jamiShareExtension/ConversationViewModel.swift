@@ -65,8 +65,10 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
 
         let avatarString = avatar
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            let processedImage = ImageUtils().imageFromBase64(avatarString, targetSize: CGSize(width: 45, height: 45))
-
+            guard let data = Data(base64Encoded: avatarString) else {
+                return
+            }
+            let processedImage = UIImage.resizeImage(from: data, targetSize: Constants.defaultAvatarSize)
             DispatchQueue.main.async { [weak self] in
                 guard let self = self, self.avatar == avatarString else { return }
                 self.processedAvatar = processedImage

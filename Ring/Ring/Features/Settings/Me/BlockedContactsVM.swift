@@ -36,7 +36,7 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
     let contact: ContactModel
     let id: String
 
-    let avatarSize: CGFloat = 55
+    let avatarSize: CGFloat = Constants.defaultAvatarSize
 
     let disposeBag = DisposeBag()
 
