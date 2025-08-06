@@ -152,9 +152,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             .startWith(self.profileImageData.value)
             .subscribe(onNext: { [weak self] imageData in
                 if let imageData = imageData, !imageData.isEmpty {
-                    if let image = UIImage(data: imageData) {
-                        self?.avatar = image
-                    }
+                    let targetSize: CGFloat = 55
+                    let image = UIImage.resizeImage(from: imageData, targetSize: targetSize)
+                    self?.avatar = image
                 }
             })
             .disposed(by: self.disposeBag)
@@ -820,6 +820,8 @@ extension ConversationViewModel {
         }
         return participantJamiId == jamiId
     }
+
+
 }
 
 // swiftlint:enable type_body_length

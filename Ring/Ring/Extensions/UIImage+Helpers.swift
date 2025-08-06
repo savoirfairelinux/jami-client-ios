@@ -508,3 +508,15 @@ func createResizedImage(imageSource: CGImageSource, size: CGFloat) -> UIImage? {
 
     return UIImage(cgImage: downsampledImage)
 }
+
+extension UIImage {
+    static func resizeImage(from imageData: Data, targetSize: CGFloat) -> UIImage? {
+        let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+        guard let imageSource = CGImageSourceCreateWithData(imageData as CFData, imageSourceOptions) else {
+            return UIImage(data: imageData)
+        }
+
+        let scaledSize = targetSize * UIScreen.main.scale
+        return createResizedImage(imageSource: imageSource, size: scaledSize) ?? UIImage(data: imageData)
+    }
+}
