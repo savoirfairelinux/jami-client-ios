@@ -85,14 +85,18 @@ struct MessageRowView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
             } else if model.incoming {
                 HStack(alignment: .bottom) {
-                    if let avatar = model.avatarImage {
+                    if model.shouldDisplayAavatar {
                         Spacer()
                             .frame(width: 10)
-                        Image(uiImage: avatar)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 30, height: 30)
-                            .cornerRadius(15)
+//                        AvatarView(
+//                            source: AvatarSourceAdapter(
+//                                fromMessageAuthor: messageModel.stackViewModel.username,
+//                                avatarData: nil,
+//                                size: 30
+//                            ),
+//                            style: AvatarStyle(size: .s)
+//                        )
+                        .frame(width: 30, height: 30)
                         Spacer()
                             .frame(width: 10)
                     } else {

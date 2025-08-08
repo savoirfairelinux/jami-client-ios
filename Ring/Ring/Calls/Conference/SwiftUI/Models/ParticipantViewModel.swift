@@ -81,7 +81,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
         }
     }
     @Published var conferenceActions: [ButtonInfoWrapper]
-    @Published var avatar = UIImage()
+    //@Published var avatarData = Data()
     var mainDisplayLayer = AVSampleBufferDisplayLayer()
     var gridDisplayLayer = AVSampleBufferDisplayLayer()
     var info: ConferenceParticipant? {
@@ -120,7 +120,8 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
     let videoService: VideoService
     let injectionBag: InjectionBag
     let profileInfo: ParticipantProfileInfo
-
+    let avatarProvider: AvatarProvider
+    let bigAvatarProvider: AvatarProvider
     init(info: ConferenceParticipant, injectionBag: InjectionBag, conferenceState: PublishSubject<State>, mode: AVLayerVideoGravity) {
         self.id = info.sinkId
         self.injectionBag = injectionBag
@@ -129,17 +130,23 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
         self.gridDisplayLayer.videoGravity = .resizeAspectFill
         conferenceActions = [ButtonInfoWrapper]()
         self.profileInfo = ParticipantProfileInfo(injectionBag: injectionBag, info: info)
+        self.avatarProvider = AvatarProvider(profileService: injectionBag.profileService, size: Constants.defaultAvatarSize)
+        self.bigAvatarProvider = AvatarProvider(profileService: injectionBag.profileService, size: 150, textSize: 40)
         self.setAspectMode(mode: mode)
-        self.profileInfo.avatar
-            .observe(on: MainScheduler.instance)
-            .startWith(self.profileInfo.avatar.value)
-            .filter { $0 != nil }
-            .subscribe(onNext: { [weak self] avatar in
-                if let avatar = avatar {
-                    self?.avatar = avatar
-                }
-            })
-            .disposed(by: disposeBag)
+        self.avatarProvider.subscribeAvatar(observable: self.profileInfo.avatarData.asObservable())
+        self.avatarProvider.subscribeProfileName(observable: self.profileInfo.displayName.asObservable())
+        self.bigAvatarProvider.subscribeAvatar(observable: self.profileInfo.avatarData.asObservable())
+        self.bigAvatarProvider.subscribeProfileName(observable: self.profileInfo.displayName.asObservable())
+//        self.profileInfo.avatarData
+//            .observe(on: MainScheduler.instance)
+//            .startWith(self.profileInfo.avatarData.value)
+//            .filter { $0 != nil }
+//            .subscribe(onNext: { [weak self] avatar in
+//                if let avatar = avatar {
+//                    self?.avatarData = avatar
+//                }
+//            })
+//            .disposed(by: disposeBag)
         self.profileInfo.displayName
             .observe(on: MainScheduler.instance)
             .startWith(self.profileInfo.displayName.value)

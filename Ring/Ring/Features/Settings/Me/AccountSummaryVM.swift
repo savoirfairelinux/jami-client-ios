@@ -39,6 +39,10 @@ class AccountStatePublisher: Stateable {
 }
 
 class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
+    var profileImageData: Data?
+    
+    var size: CGFloat
+    
     let account: AccountModel
 
     // profile
@@ -61,12 +65,13 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
     let profileService: ProfilesService
     let injectionBag: InjectionBag
 
-    init(injectionBag: InjectionBag, account: AccountModel) {
+    init(injectionBag: InjectionBag, account: AccountModel, size: CGFloat) {
         self.account = account
         self.accountService = injectionBag.accountService
         self.profileService = injectionBag.profileService
         self.injectionBag = injectionBag
         self.jamiId = account.jamiId
+        self.size = size
 
         // account status
         if let details = account.details {

@@ -35,7 +35,7 @@ struct AccountSummaryView: View {
     init(injectionBag: InjectionBag, account: AccountModel) {
         _model = StateObject(wrappedValue:
                                 AccountSummaryVM(injectionBag: injectionBag,
-                                                 account: account))
+                                                 account: account, size: 44))
     }
 
     var body: some View {

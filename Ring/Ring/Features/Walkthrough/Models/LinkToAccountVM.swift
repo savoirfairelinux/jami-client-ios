@@ -66,7 +66,11 @@ enum AuthError: String {
 }
 
 class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
-    var profileImage: UIImage?
+    var profileImageData: Data?
+    
+    var size: CGFloat
+    
+   // var profileImage: UIImage?
     var profileName: String = ""
 
     @Published var username: String?
@@ -86,10 +90,11 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
 
     private var linkAction: (() -> Void)
 
-    init(with injectionBag: InjectionBag, linkAction: @escaping (() -> Void)) {
+    init(with injectionBag: InjectionBag, linkAction: @escaping (() -> Void), size: CGFloat) {
         self.linkAction = linkAction
         self.accountsService = injectionBag.accountService
         self.nameService = injectionBag.nameService
+        self.size = size
         self.start()
     }
 

@@ -21,10 +21,11 @@
 import SwiftUI
 
 protocol AvatarViewDataModel: ObservableObject {
-    var profileImage: UIImage? {get set }
+    var profileImageData: Data? {get set }
     var profileName: String {get set }
 
     var username: String? {get set }
+    var size: CGFloat {get set }
 
     func getProfileColor() -> UIColor
 }
@@ -46,41 +47,17 @@ struct AvatarImageView<Model>: View where Model: AvatarViewDataModel {
     @SwiftUI.State var width: CGFloat
     @SwiftUI.State var height: CGFloat
     var textSize: CGFloat = 24
+
     var body: some View {
-        if let image = model.profileImage {
-            Image(uiImage: image)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: width, height: height)
-                .clipShape(Circle())
-        } else if !model.profileName.isEmpty {
-            Circle()
-                .fill(Color(model.getProfileColor()))
-                .frame(width: width, height: height)
-                .overlay(
-                    Text(String(model.profileName.prefix(1)).uppercased())
-                        .font(.system(size: textSize))
-                        .foregroundColor(.white)
-                )
-        } else if let registeredName = model.username {
-            Circle()
-                .fill(Color(model.getProfileColor()))
-                .frame(width: width, height: height)
-                .overlay(
-                    Text(String(registeredName.prefix(1)).uppercased())
-                        .font(.system(size: textSize))
-                        .foregroundColor(.white)
-                )
-        } else {
-            Image(systemName: "person")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .padding(20)
-                .background(Color(model.getProfileColor()))
-                .foregroundColor(Color.white)
-                .frame(width: width, height: height)
-                .clipShape(Circle())
-        }
+        VStack{}
+//        let avatarSize = AvatarSize.allCases.first { $0.rawValue >= min(width, height) } ?? .m
+//        let style = AvatarStyle(size: avatarSize)
+//
+//        AvatarView(
+//            source: AvatarSourceAdapter(from: model),
+//            style: style
+//        )
+        .frame(width: width, height: height)
     }
 }
 

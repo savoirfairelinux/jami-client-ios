@@ -242,35 +242,11 @@ struct AccountRowView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            if account.avatarType == .single {
-                if let avatarImage = account.processedAvatar {
-                    Image(uiImage: avatarImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 45, height: 45)
-                        .clipShape(Circle())
-                } else {
-                    Circle()
-                        .fill(account.bgColor)
-                        .frame(width: 45, height: 45)
-                        .overlay(
-                            Text(String(account.name.prefix(1)).uppercased())
-                                .font(.system(size: 16))
-                                .foregroundColor(.white)
-                        )
-                }
-            } else {
-                Circle()
-                    .fill(account.bgColor)
-                    .frame(width: 45, height: 45)
-                    .overlay(
-                        Image(systemName: "person")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 15, height: 15)
-                            .foregroundColor(.white)
-                    )
-            }
+            //            AvatarView(
+            //                source: AvatarSourceAdapter(from: account),
+            //                style: AvatarStyle(size: .m)
+            //            )
+            //            .frame(width: 45, height: 45)
 
             Text(account.name)
                 .foregroundColor(.primary)
@@ -298,37 +274,11 @@ struct ConversationRowView: View {
             sendAction(conversation.id, conversation.accountId)
         }) {
             HStack(spacing: 12) {
-                if conversation.avatarType == .single {
-                    if let avatarImage = conversation.processedAvatar {
-                        Image(uiImage: avatarImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 45, height: 45)
-                            .clipShape(Circle())
-                    } else {
-                        Circle()
-                            .fill(conversation.bgColor)
-                            .frame(width: 45, height: 45)
-                            .overlay(
-                                Text(String(conversation.name.prefix(1)).uppercased())
-                                    .font(.system(size: 18))
-                                    .foregroundColor(.white)
-                            )
-                    }
-                } else {
-                    let systemName = conversation.avatarType == .group ? "person.2" : "person"
-                    let imageSize: CGFloat = conversation.avatarType == .group ? 20 : 15
-                    Circle()
-                        .fill(conversation.bgColor)
-                        .frame(width: 45, height: 45)
-                        .overlay(
-                            Image(systemName: systemName)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: imageSize, height: imageSize)
-                                .foregroundColor(.white)
-                        )
-                }
+                //                AvatarView(
+                //                    source: AvatarSourceAdapter(fromShareExtension: conversation),
+                //                    style: AvatarStyle(size: .m)
+                //                )
+                //                .frame(width: 45, height: 45)
 
                 Text(conversation.name)
                     .foregroundColor(.primary)

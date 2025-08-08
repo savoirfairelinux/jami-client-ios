@@ -22,6 +22,10 @@ import SwiftUI
 import UIKit
 
 class EditProfileVM: ObservableObject, AvatarViewDataModel {
+    var profileImageData: Data?
+    
+    var size: CGFloat
+    
     @Published var profileImage: UIImage?
     @Published var profileName: String = ""
 
@@ -39,6 +43,8 @@ class EditProfileVM: ObservableObject, AvatarViewDataModel {
         self.profileImage = profileImage
         self.profileName = profileName
         self.username = username
+        self.profileImageData = nil
+        self.size = 0
     }
 
     func updateProfile() {

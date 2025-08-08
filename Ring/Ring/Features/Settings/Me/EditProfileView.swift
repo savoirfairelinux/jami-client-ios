@@ -47,7 +47,7 @@ struct EditProfileView: View {
                     showingImagePicker = true
                 }, label: {
                     ZStack {
-                        AvatarImageView(model: model, width: avatarSize, height: avatarSize, textSize: 60)
+                       // AvatarImageView(model: model, width: avatarSize, height: avatarSize, textSize: 60)
                         Circle()
                             .fill(Color.black.opacity(0.5))
                             .frame(width: avatarSize, height: avatarSize)

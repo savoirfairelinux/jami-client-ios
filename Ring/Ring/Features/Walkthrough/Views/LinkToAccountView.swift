@@ -34,7 +34,7 @@ struct LinkToAccountView: View {
          linkAction: @escaping () -> Void) {
         _viewModel = StateObject(wrappedValue:
                                     LinkToAccountVM(with: injectionBag,
-                                                    linkAction: linkAction))
+                                                    linkAction: linkAction, size: 44))
     }
 
     var body: some View {

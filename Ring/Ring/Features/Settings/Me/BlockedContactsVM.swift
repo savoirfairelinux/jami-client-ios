@@ -23,6 +23,10 @@ import SwiftUI
 import RxSwift
 
 class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel {
+    var profileImageData: Data?
+    
+    var size: CGFloat
+    
 
     @Published var profileImage: UIImage?
     @Published var profileName = ""
@@ -40,7 +44,7 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
 
     let disposeBag = DisposeBag()
 
-    init(contact: ContactModel, account: AccountModel, injectionBag: InjectionBag) {
+    init(contact: ContactModel, account: AccountModel, injectionBag: InjectionBag, size: CGFloat) {
         self.profileService = injectionBag.profileService
         self.nameService = injectionBag.nameService
         self.contactsService = injectionBag.contactsService
@@ -48,6 +52,7 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
         self.account = account
         self.contact = contact
         self.id = contact.hash
+        self.size = size
 
         self.getProfile()
         self.getRegisteredName()
@@ -136,7 +141,7 @@ class BlockedContactsVM: ObservableObject {
                     guard let self = self, contact.banned else {
                         return nil
                     }
-                    return BlockedContactsRowVM(contact: contact, account: self.account, injectionBag: self.injectionBag)
+                    return BlockedContactsRowVM(contact: contact, account: self.account, injectionBag: self.injectionBag, size: 44)
                 }
             }
             .subscribe(onNext: { [weak self] blockedContactsRows in
@@ -158,7 +163,7 @@ class BlockedContactsVM: ObservableObject {
                     guard contact.banned else {
                         return nil
                     }
-                    return BlockedContactsRowVM(contact: contact, account: self.account, injectionBag: self.injectionBag)
+                    return BlockedContactsRowVM(contact: contact, account: self.account, injectionBag: self.injectionBag, size: 44)
                 }
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
