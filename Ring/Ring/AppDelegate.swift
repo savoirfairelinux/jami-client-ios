@@ -104,6 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let center = CFNotificationCenterGetDarwinNotifyCenter()
     private static let shouldHandleNotification = NSNotification.Name("com.savoirfairelinux.jami.shouldHandleNotification")
     private let backgrounTaskQueue = DispatchQueue(label: "backgrounTaskQueue")
+    private let pendingSharesKey = "pendingShares"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -200,6 +201,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             setenv("CA_ROOT_FILE", path, 1)
         }
         self.window?.backgroundColor = UIColor.systemBackground
+        self.processPendingSharesIfAny()
         return true
     }
 
@@ -449,9 +451,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             // If the app is running in the background and there are no waiting calls, the extension should handle the notification.
-            if UIApplication.shared.applicationState == .background && !self.presentingCallScreen && !self.callsProvider.hasActiveCalls() {
-                return
-            }
             // emit signal that app is active for notification extension
             CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFNotificationName(Constants.notificationAppIsActive), nil, nil, true)
 
@@ -514,6 +513,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 // MARK: notification actions
 extension AppDelegate {
+
+    // MARK: Share Extension Processing
+    private func processPendingSharesIfAny() {
+        guard let defaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else { return }
+        guard let pending = defaults.array(forKey: pendingSharesKey) as? [[String: String]], !pending.isEmpty else { return }
+
+        let items = pending
+        defaults.set([], forKey: pendingSharesKey)
+            for item in items {
+                guard let path = item["filePath"],
+                      let name = item["fileName"],
+                      let conversationId = item["conversationId"],
+                let accountId = item["accountId"] else { continue }
+
+                let fileURL = URL(fileURLWithPath: path)
+                if !FileManager.default.fileExists(atPath: fileURL.path) {
+                    print("****** file does not exists at the path")
+                    continue
+                }
+
+                if let conversation = self.conversationsService.getConversationForParticipant(jamiId: conversationId, accountId: accountId) {
+
+                    self.accountService.setAccountsActive(active: true)
+                    sleep(2)
+                    self.dataTransferService.sendFile(conversation: conversation,
+                                                      filePath: fileURL.path,
+                                                      displayName: name,
+                                                      localIdentifier: nil)
+                    sleep(4)
+                }
+            }
+    }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let data = response.notification.request.content.userInfo
@@ -664,8 +695,16 @@ extension AppDelegate {
         print(deviceTokenString)
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
             self.accountService.setPushNotificationTopic(topic: bundleIdentifier)
+            // Persist the topic for the share extension
+            if let defaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
+                defaults.set(bundleIdentifier, forKey: "APNsTopic")
+            }
         }
+        print("get device token \(deviceTokenString)")
         self.accountService.setPushNotificationToken(token: deviceTokenString)
+        if let defaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
+            defaults.set(deviceTokenString, forKey: "APNsToken")
+        }
     }
 
     func application(
@@ -680,6 +719,16 @@ extension AppDelegate {
                 let valueString = String(describing: value)
                 dictionary[keyString] = valueString
             }
+        }
+        let isShareStart: Bool = {
+            if let type = userInfo["type"] as? String, type == "share-start" { return true }
+            if let data = userInfo["data"] as? [AnyHashable: Any], let t = data["type"] as? String, t == "share-start" { return true }
+            if dictionary["type"] == "share-start" { return true }
+            return false
+        }()
+        if isShareStart {
+            print("[Push] didReceiveRemoteNotification called with userInfo: \(userInfo)")
+            self.processPendingSharesIfAny()
         }
         self.accountService.pushNotificationReceived(data: dictionary)
         completionHandler(.newData)

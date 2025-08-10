@@ -448,6 +448,7 @@
 		26E081222BC03AB3001B4C18 /* AccountLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081212BC03AB3001B4C18 /* AccountLists.swift */; };
 		26E081242BC07824001B4C18 /* RequestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081232BC07824001B4C18 /* RequestsViewModel.swift */; };
 		26E081262BC09534001B4C18 /* RequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081252BC09534001B4C18 /* RequestsView.swift */; };
+		26E4105E2E47DF9B005E08CD /* shareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 26E410542E47DF9B005E08CD /* shareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB61332B75724000183FF4 /* AccountCreationTest.swift */; };
 		26EEB19C2BD98CCA00B8B04B /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEB19B2BD98CCA00B8B04B /* SearchBar.swift */; };
 		26EEB19E2BDEDC0C00B8B04B /* UIControllersWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEB19D2BDEDC0C00B8B04B /* UIControllersWrappers.swift */; };
@@ -569,6 +570,13 @@
 			remoteGlobalIDString = 26A88C03266FFFC800888EED;
 			remoteInfo = jamiNotificationExtension;
 		};
+		26E4105C2E47DF9B005E08CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 26E410532E47DF9B005E08CD;
+			remoteInfo = shareExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -578,6 +586,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				26E4105E2E47DF9B005E08CD /* shareExtension.appex in Embed App Extensions */,
 				26A88C0B266FFFC800888EED /* jamiNotificationExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -1048,6 +1057,7 @@
 		26E081212BC03AB3001B4C18 /* AccountLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountLists.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/AccountLists.swift; sourceTree = SOURCE_ROOT; };
 		26E081232BC07824001B4C18 /* RequestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RequestsViewModel.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/RequestsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		26E081252BC09534001B4C18 /* RequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RequestsView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/RequestsView.swift; sourceTree = SOURCE_ROOT; };
+		26E410542E47DF9B005E08CD /* shareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = shareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		26EB61332B75724000183FF4 /* AccountCreationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationTest.swift; sourceTree = "<group>"; };
 		26EB61382B7675FB00183FF4 /* Embassy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Embassy.xcframework; path = Carthage/Build/Embassy.xcframework; sourceTree = "<group>"; };
 		26EEB19B2BD98CCA00B8B04B /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SearchBar.swift; sourceTree = SOURCE_ROOT; };
@@ -1220,7 +1230,18 @@
 		BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		26E410632E47DF9B005E08CD /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 26E410532E47DF9B005E08CD /* shareExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		26E410552E47DF9B005E08CD /* shareExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (26E410632E47DF9B005E08CD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = shareExtension; sourceTree = "<group>"; };
 		26EC6EF32DE0E7B9000BA551 /* ActiveCalls */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ActiveCalls; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -1381,6 +1402,13 @@
 				26F82D062D7A09C300954A7B /* libnatpmp.xcframework in Frameworks */,
 				26001CA02D78E3E6009A8E23 /* libpjsip-simple.xcframework in Frameworks */,
 				26001C982D78E3E6009A8E23 /* libpjmedia-codec.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26E410512E47DF9B005E08CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1707,6 +1735,7 @@
 				04399A0F1D1C2D9D00E99CD9 /* RingTests */,
 				04399A1A1D1C2D9D00E99CD9 /* RingUITests */,
 				26A88C05266FFFC800888EED /* jamiNotificationExtension */,
+				26E410552E47DF9B005E08CD /* shareExtension */,
 				043999F41D1C2D9D00E99CD9 /* Products */,
 				02AED8171DD4C4B000F740BA /* Frameworks */,
 			);
@@ -1719,6 +1748,7 @@
 				04399A0C1D1C2D9D00E99CD9 /* RingTests.xctest */,
 				04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */,
 				26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */,
+				26E410542E47DF9B005E08CD /* shareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2617,6 +2647,7 @@
 			);
 			dependencies = (
 				26A88C0A266FFFC800888EED /* PBXTargetDependency */,
+				26E4105D2E47DF9B005E08CD /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				26EC6EF32DE0E7B9000BA551 /* ActiveCalls */,
@@ -2685,6 +2716,28 @@
 			productReference = 26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		26E410532E47DF9B005E08CD /* shareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26E410642E47DF9B005E08CD /* Build configuration list for PBXNativeTarget "shareExtension" */;
+			buildPhases = (
+				26E410502E47DF9B005E08CD /* Sources */,
+				26E410512E47DF9B005E08CD /* Frameworks */,
+				26E410522E47DF9B005E08CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				26E410552E47DF9B005E08CD /* shareExtension */,
+			);
+			name = shareExtension;
+			packageProductDependencies = (
+			);
+			productName = shareExtension;
+			productReference = 26E410542E47DF9B005E08CD /* shareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2694,7 +2747,7 @@
 				KnownAssetTags = (
 					New,
 				);
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Savoir-faire Linux";
 				TargetAttributes = {
@@ -2735,6 +2788,9 @@
 						DevelopmentTeam = MSHYCBXK85;
 						LastSwiftMigration = 1250;
 						ProvisioningStyle = Manual;
+					};
+					26E410532E47DF9B005E08CD = {
+						CreatedOnToolsVersion = 16.2;
 					};
 					62366028200914C1002598C1 = {
 						CreatedOnToolsVersion = 9.2;
@@ -2795,6 +2851,7 @@
 				ru,
 				"zh-Hans-CN",
 				"zh-Hans",
+				Base,
 			);
 			mainGroup = 043999EA1D1C2D9D00E99CD9;
 			packageReferences = (
@@ -2810,6 +2867,7 @@
 				04399A161D1C2D9D00E99CD9 /* RingUITests */,
 				62366028200914C1002598C1 /* libring */,
 				26A88C03266FFFC800888EED /* jamiNotificationExtension */,
+				26E410532E47DF9B005E08CD /* shareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2867,6 +2925,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				449E736428D9F69E00CBF564 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26E410522E47DF9B005E08CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3300,6 +3365,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		26E410502E47DF9B005E08CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3317,6 +3389,11 @@
 			isa = PBXTargetDependency;
 			target = 26A88C03266FFFC800888EED /* jamiNotificationExtension */;
 			targetProxy = 26A88C09266FFFC800888EED /* PBXContainerItemProxy */;
+		};
+		26E4105D2E47DF9B005E08CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 26E410532E47DF9B005E08CD /* shareExtension */;
+			targetProxy = 26E4105C2E47DF9B005E08CD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4004,6 +4081,169 @@
 			};
 			name = Release;
 		};
+		26E4105F2E47DF9B005E08CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = shareExtension/shareExtensionDebug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = shareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = shareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.shareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		26E410602E47DF9B005E08CD /* Debug with lint */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = shareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = shareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.shareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug with lint";
+		};
+		26E410612E47DF9B005E08CD /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = shareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = shareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.shareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Development;
+		};
+		26E410622E47DF9B005E08CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = shareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = shareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.shareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		6229B5A51FCDB006006937DF /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4224,6 +4464,17 @@
 				265219D42B603FD700D1CAE9 /* Debug with lint */,
 				26A88C0E266FFFC800888EED /* Development */,
 				26A88C0F266FFFC800888EED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26E410642E47DF9B005E08CD /* Build configuration list for PBXNativeTarget "shareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26E4105F2E47DF9B005E08CD /* Debug */,
+				26E410602E47DF9B005E08CD /* Debug with lint */,
+				26E410612E47DF9B005E08CD /* Development */,
+				26E410622E47DF9B005E08CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
