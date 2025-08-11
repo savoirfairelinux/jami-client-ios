@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR-kód";
 "linkToAccount.showPinCode" = "Hitelesítési kód";
 "linkToAccount.actionRequired" = "Beavatkozás szükséges. Kérjük, erősítse meg a fiókot a forráseszközön.";
-"linkToAccount.allSet" = "A fiók importálása sikerült.";
+"linkToAccount.allSet" = "Megtörtént a fiók importálása.";
 "linkToAccount.goToAccounts" = "Ugrás az importált fiókra";
 "linkToAccount.exportInstructions" = "A forráseszközön indítsa el a fiók exportálásának műveletét.";
 "linkToAccount.exportInstructionsPath" = "Jelölje ki a Fiók → Fiókbeállítások → Új eszköz összekapcsolása lehetőséget.";
 "linkToAccount.scanQrCode" = "Ha készen áll, olvassa be a QR-kódot.";
 "linkToAccount.enterProvidedCode" = "Ha készen áll, adja meg a hitelesítési kódot.";
-"linkToAccount.accountLockedWithPassword" = "A fiók jelszóval van védve. A folytatáshoz adja meg a fiók jelszavát.";
+"linkToAccount.accountLockedWithPassword" = "A fiók jelszóval védett. A folytatáshoz adja meg a fiók jelszavát.";
 "linkToAccount.exit" = "Kilépés";
 "linkToAccount.shareMessage" = "A kód: %@";
 "linkToAccount.alertTile" = "Szeretné leállítani a fiók összekapcsolását?";
@@ -447,7 +447,7 @@
 "account.statusOffline" = "Nem elérhető";
 "account.statusConnecting" = "Kapcsolódás";
 "account.statusUnknown" = "Ismeretlen";
-"account.statusConnectionerror" = "Csatlakozási hiba";
+"account.statusConnectionerror" = "Kapcsolati hiba";
 "account.needMigration" = "Fiók áttelepítése szükséges.";
 "account.me" = "Én";
 
@@ -472,7 +472,7 @@
 "linkDevice.code" = "kód";
 "linkDevice.wrongEntry" = "Ismeretlen új eszközazonosító. Kérjük, kövesse a fenti utasításokat.";
 "linkDevice.exportInProgress" = "A fiók exportálási művelet az új eszközre folyamatban van. Kérjük, erősítse meg az importálást az új eszközön.";
-"linkDevice.completed" = "A fiók importálása sikerült az új eszközön.";
+"linkDevice.completed" = "Megtörtént a fiók importálása az új eszközön.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Hanghívás indítása";
