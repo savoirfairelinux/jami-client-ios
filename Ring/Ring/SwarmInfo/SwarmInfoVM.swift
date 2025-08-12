@@ -90,7 +90,7 @@ class SwarmInfoVM: ObservableObject {
 
     private func setupBindings() {
         Observable.combineLatest(
-            swarmInfo.finalAvatar,
+            swarmInfo.finalAvatarData,
             swarmInfo.finalTitle.startWith(swarmInfo.finalTitle.value),
             swarmInfo.description.startWith(swarmInfo.description.value),
             swarmInfo.color
@@ -99,7 +99,7 @@ class SwarmInfoVM: ObservableObject {
         .subscribe(onNext: { [weak self] (newAvatar, newTitle, newDescription, newColor) in
             guard let self = self else { return }
 
-            self.finalAvatar = newAvatar
+            //self.finalAvatar = newAvatar
 
             if self.title != newTitle {
                 self.title = newTitle

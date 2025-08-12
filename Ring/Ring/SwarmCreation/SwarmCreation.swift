@@ -23,7 +23,7 @@ import RxSwift
 
 class ParticipantRow: Identifiable, ObservableObject {
     @Published var id: String
-    @Published var imageDataFinal: UIImage = UIImage()
+    @Published var imageDataFinal: Data = Data()
     @Published var name: String = ""
 
     let disposeBag = DisposeBag()
@@ -41,9 +41,9 @@ class ParticipantRow: Identifiable, ObservableObject {
             }
             .disposed(by: self.disposeBag)
 
-        participantData.avatar
+        participantData.avatarData
             .observe(on: MainScheduler.instance)
-            .startWith(participantData.avatar.value)
+            .startWith(participantData.avatarData.value)
             .subscribe {[weak self] avatar in
                 guard let self = self, let avatar = avatar else { return }
                 self.imageDataFinal = avatar
