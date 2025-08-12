@@ -24,7 +24,8 @@ import RxSwift
 import RxRelay
 
 class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver, NameObserver {
-    @Published var avatarImage: UIImage?
+    
+    @Published var avatarData: Data?
     @Published var content: String {
         didSet {
             self.observableContent.accept(content)

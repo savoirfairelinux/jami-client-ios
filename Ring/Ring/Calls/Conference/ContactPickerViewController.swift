@@ -292,16 +292,16 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         cell.newMessagesLabel?.isHidden = true
         cell.lastMessageDateLabel?.isHidden = true
         cell.presenceIndicator?.isHidden = true
-        info.finalAvatar
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak cell]  avatar in
-                guard let cell = cell else { return }
-                cell.avatarView
-                    .addSubview(
-                        AvatarView(image: avatar, size: 40))
-            })
-            .disposed(by: self.disposeBag)
+//        info.finalAvatarData
+//            .asObservable()
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { [weak cell]  data in
+//                guard let cell = cell else { return }
+//                cell.avatarView
+//                    .addSubview(
+//                        AvatarView(ava: avatar, size: 40))
+//            })
+//            .disposed(by: self.disposeBag)
         info.finalTitle
             .asObservable()
             .observe(on: MainScheduler.instance)
@@ -332,14 +332,14 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         cell.nameLabel.text = contact.firstLine.value
         cell.lastMessagePreviewLabel?.isHidden = true
 
-        contact.imageData
-            .asObservable()
-            .subscribe(onNext: { [weak cell]  imageData in
-                cell?.avatarView
-                    .addSubview(
-                        AvatarView(profileImageData: imageData,
-                                   username: contact.firstLine.value, size: 40))
-            })
-            .disposed(by: self.disposeBag)
+//        contact.imageData
+//            .asObservable()
+//            .subscribe(onNext: { [weak cell]  imageData in
+//                cell?.avatarView
+//                    .addSubview(
+//                        AvatarView(profileImageData: imageData,
+//                                   username: contact.firstLine.value, size: 40))
+//            })
+//            .disposed(by: self.disposeBag)
     }
 }

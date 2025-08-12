@@ -177,7 +177,7 @@ class MessagesListVM: ObservableObject {
     var lastMessageBeforeScroll: String?
 
     var loading = true // to avoid a new loading while previous one still executing
-    var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: BehaviorRelay<UIImage?>]())
+    var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: BehaviorRelay<Data?>]())
     var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: String]())
     // last read
     // dictionary of participant id and last read message Id
@@ -1051,10 +1051,10 @@ class MessagesListVM: ObservableObject {
         }
     }
 
-    private func updateAvatar(image: UIImage, jamiId: String) {
+    private func updateAvatar(imageData: Data, jamiId: String) {
         // Update the avatar observable if it exists
-        if let avatarObservable = avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
-            avatarObservable.accept(image)
+        if let avatarObservable = avatars.get(key: jamiId) as? BehaviorRelay<Data?> {
+            avatarObservable.accept(imageData)
         }
 
         // Update the last read avatars if applicable
@@ -1062,9 +1062,11 @@ class MessagesListVM: ObservableObject {
               let lastReadAvatars = lastRead.get(key: lastReadMessageId) as? BehaviorRelay<[String: UIImage]> else {
             return
         }
-        var value = lastReadAvatars.value
-        value[jamiId] = image
-        lastReadAvatars.accept(value)
+        if let image = imageData.convertToImage(size: 15) {
+            var value = lastReadAvatars.value
+            value[jamiId] = image
+            lastReadAvatars.accept(value)
+        }
     }
 
     private func nameLookup(id: String) {
@@ -1084,7 +1086,7 @@ class MessagesListVM: ObservableObject {
                     self.updateName(name: id, jamiId: id)
                 }
                 // Create an avatar if it has not been set yet.
-                self.setAvatarIfNeededFor(jamiId: id, withDefault: true)
+               // self.setAvatarIfNeededFor(jamiId: id, withDefault: true)
             })
             .disposed(by: self.disposeBag)
         self.nameService.lookupAddress(withAccount: self.conversation.accountId, nameserver: "", address: id)
@@ -1111,14 +1113,12 @@ class MessagesListVM: ObservableObject {
                     if let profileName = profile.alias, !profileName.isEmpty {
                         self.updateName(name: profileName, jamiId: id)
                     }
-                    // Set avatar
-                    // The view has a max size 50. Create a larger image for better resolution.
-                    if let photo = profile.photo,
-                       let image = photo.createImage(size: 100) {
-                        self.updateAvatar(image: image, jamiId: id)
-                    } else {
-                        self.setAvatarIfNeededFor(jamiId: id, withDefault: false)
+                    if let photo = profile.photo, let data = Data(base64Encoded: photo) {
+                        self.updateAvatar(imageData: data, jamiId: id)
                     }
+//                    else {
+//                        self.setAvatarIfNeededFor(jamiId: id, withDefault: false)
+//                    }
                     // Perform a name lookup if the profile does not have a name
                     let name = (self.names.get(key: id) as? BehaviorRelay<String>)?.value
                     if name?.isEmpty ?? true {
@@ -1131,31 +1131,31 @@ class MessagesListVM: ObservableObject {
 
     private func setAvatarIfNeededFor(jamiId: String, withDefault: Bool) {
         // Attempt to retrieve the observable avatar and proceed only if it's nil (no image set yet).
-        guard let observableAvatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?>,
-              observableAvatar.value == nil else { return }
-
-        // Retrieve the name associated with the jamiId, defaulting to an empty string if not found.
-        let name = (self.names.get(key: jamiId) as? BehaviorRelay<String>)?.value ?? ""
-
-        // If the name is empty and a default avatar is not requested, exit early.
-        if name.isEmpty && !withDefault { return }
-
-        let avatarImage = UIImage.createContactAvatar(username: name, size: CGSize(width: 30, height: 30))
-        self.updateAvatar(image: avatarImage, jamiId: jamiId)
+//        guard let observableAvatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?>,
+//              observableAvatar.value == nil else { return }
+//
+//        // Retrieve the name associated with the jamiId, defaulting to an empty string if not found.
+//        let name = (self.names.get(key: jamiId) as? BehaviorRelay<String>)?.value ?? ""
+//
+//        // If the name is empty and a default avatar is not requested, exit early.
+//        if name.isEmpty && !withDefault { return }
+//
+//        let avatarImage = UIImage.createContactAvatar(username: name, size: CGSize(width: 30, height: 30))
+//        self.updateAvatar(image: avatarImage, jamiId: jamiId)
     }
 
     private func getAvatar(jamiId: String, message: AvatarImageObserver, messageId: String) {
         // check if we already have the avatar for a contact
-        if let avatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
+        if let avatar = self.avatars.get(key: jamiId) as? BehaviorRelay<Data?> {
             message.subscribeToAvatarObservable(avatar)
             // check if we need avatar for local account
         } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId, accountJamiId == jamiId {
-            message.subscribeToAvatarObservable(BehaviorRelay(value: self.currentAccountAvatar))
+          //  message.subscribeToAvatarObservable(BehaviorRelay(value: self.currentAccountAvatar))
         } else {
             // create entrance for participant and start contact fetching
             let imageObservable = BehaviorRelay<UIImage?>(value: nil)
             self.avatars.set(value: imageObservable, for: jamiId)
-            if let avatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
+            if let avatar = self.avatars.get(key: jamiId) as? BehaviorRelay<Data?> {
                 message.subscribeToAvatarObservable(avatar)
             }
             self.getInformationForContact(id: jamiId)

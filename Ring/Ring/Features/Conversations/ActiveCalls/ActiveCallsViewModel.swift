@@ -71,7 +71,7 @@ class ActiveCallsViewModel: ObservableObject, Stateable {
 
 class ActiveCallRowViewModel: ObservableObject, Equatable {
     @Published var title = ""
-    @Published var avatar: UIImage?
+    @Published var avatarData: Data?
     let call: ActiveCall
     private let stateSubject: PublishSubject<State>
     private let callService: CallsService
@@ -92,10 +92,10 @@ class ActiveCallRowViewModel: ObservableObject, Equatable {
             })
             .disposed(by: disposeBag)
 
-        swarmInfo.finalAvatar
+        swarmInfo.finalAvatarData
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] avatar in
-                self?.avatar = avatar
+                self?.avatarData = avatar
             })
             .disposed(by: disposeBag)
     }
@@ -116,7 +116,6 @@ class ActiveCallRowViewModel: ObservableObject, Equatable {
 
     static func == (lhs: ActiveCallRowViewModel, rhs: ActiveCallRowViewModel) -> Bool {
         return lhs.call.id == rhs.call.id &&
-            lhs.title == rhs.title &&
-            lhs.avatar == rhs.avatar
+            lhs.title == rhs.title
     }
 }

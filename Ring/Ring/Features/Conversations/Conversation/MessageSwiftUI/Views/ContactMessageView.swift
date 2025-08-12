@@ -24,13 +24,13 @@ struct ContactMessageView: View {
     @StateObject var model: ContactMessageVM
     var body: some View {
         HStack(alignment: .center) {
-            if let avatar = model.avatarImage {
-                Image(uiImage: avatar)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: model.avatarSize, height: model.avatarSize)
-                    .clipShape(Circle())
-            }
+//            if model.avatarData != nil || !model.content.isEmpty {
+//                AvatarView(
+//                    source: AvatarSourceAdapter(contactName: model.content, contactAvatarData: model.avatarData, size: model.avatarSize),
+//                    style: AvatarStyle(size: AvatarSize.allCases.first { $0.rawValue >= model.avatarSize } ?? .m)
+//                )
+//                .frame(width: model.avatarSize, height: model.avatarSize)
+//            }
             Spacer()
                 .frame(width: model.inset)
             Text(model.content)

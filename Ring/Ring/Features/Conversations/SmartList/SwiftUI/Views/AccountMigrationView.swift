@@ -28,7 +28,7 @@ struct AccountMigrationView: View {
     init(accountId: String, accountService: AccountsService, profileService: ProfilesService, onCompletion: ((Bool) -> Void)?) {
         _model = StateObject(wrappedValue: AccountMigrationModel(accountId: accountId,
                                                                  accountService: accountService,
-                                                                 profileService: profileService))
+                                                                 profileService: profileService, size: 44))
         self.onCompletion = onCompletion
     }
 
