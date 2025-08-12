@@ -26,13 +26,13 @@ struct ReactionRowView: View {
 
     var body: some View {
         HStack {
-            if let image = reaction.avatarImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 40, height: 40)
-                    .cornerRadius(20)
-            }
+//            if let image = reaction.avatarImage {
+//                Image(uiImage: image)
+//                    .resizable()
+//                    .scaledToFill()
+//                    .frame(width: 40, height: 40)
+//                    .cornerRadius(20)
+//            }
 
             Spacer()
                 .frame(width: padding)

@@ -23,7 +23,6 @@ import RxSwift
 import SwiftUI
 
 class PendingConferenceCall {
-    @Published var avatar = UIImage()
     @Published var name = ""
 
     let id: String
@@ -39,16 +38,6 @@ class PendingConferenceCall {
         self.profileInfo = ParticipantProfileInfo(
             injectionBag: injectionBag, info: info
         )
-        self.profileInfo.avatar
-            .observe(on: MainScheduler.instance)
-            .startWith(self.profileInfo.avatar.value)
-            .filter { $0 != nil }
-            .subscribe(onNext: { [weak self] avatar in
-                if let avatar = avatar {
-                    self?.avatar = avatar
-                }
-            })
-            .disposed(by: disposeBag)
         self.profileInfo.displayName
             .observe(on: MainScheduler.instance)
             .startWith(self.profileInfo.displayName.value)

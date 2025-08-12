@@ -292,16 +292,16 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         cell.newMessagesLabel?.isHidden = true
         cell.lastMessageDateLabel?.isHidden = true
         cell.presenceIndicator?.isHidden = true
-        info.finalAvatar
+        info.finalAvatarData
             .asObservable()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak cell]  avatar in
+            .subscribe(onNext: { [weak cell]  data in
                 guard let cell = cell else { return }
                 cell.avatarView
                     .addSubview(
-                        AvatarView(image: avatar, size: 40))
+                        AvatarView(profileImageData: data, username: info.finalTitle.value))
             })
-            .disposed(by: self.disposeBag)
+        .disposed(by: self.disposeBag)
         info.finalTitle
             .asObservable()
             .observe(on: MainScheduler.instance)

@@ -80,12 +80,11 @@ struct MemberItem: View {
 
     // MARK: - View Components
     private var profileImage: some View {
-        Image(uiImage: participant.avatar.value ?? UIImage(asset: Asset.fallbackAvatar)!)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 50, height: 50)
-            .clipShape(Circle())
-            .accessibilityHidden(true)
+        let avatarSource = AvatarProvider(profileService: participant.profileService, size: 55)
+        avatarSource.subscribeAvatar(observable: participant.avatarData.asObservable())
+        avatarSource.subscribeProfileName(observable: participant.profileName.asObservable())
+        avatarSource.subscribeRegisteredName(observable: participant.registeredName.asObservable())
+        return AvatarSwiftUIView(source: avatarSource)
     }
 
     private var nameLabel: some View {
