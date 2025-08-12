@@ -19,17 +19,34 @@
  */
 import Foundation
 import SwiftUI
+import RxRelay
 import RxSwift
 
 class ParticipantRow: Identifiable, ObservableObject {
     @Published var id: String
-    @Published var imageDataFinal: UIImage = UIImage()
+    @Published var imageDataFinal: Data = Data()
     @Published var name: String = ""
 
     let disposeBag = DisposeBag()
+    // Expose relays and services for avatar provider consumption
+    let profileService: ProfilesService
+    let avatarData: BehaviorRelay<Data?>
+    let registeredName: BehaviorRelay<String>
+    let finalName: BehaviorRelay<String>
+    lazy var avatarProvider: AvatarProvider = {
+        let provider = AvatarProvider(profileService: profileService, size: Constants.defaultAvatarSize)
+        provider.subscribeAvatar(observable: avatarData.asObservable())
+        provider.subscribeProfileName(observable: finalName.asObservable())
+        provider.subscribeRegisteredName(observable: registeredName.asObservable())
+        return provider
+    }()
 
     init(participantData: ParticipantInfo) {
         self.id = participantData.jamiId
+        self.profileService = participantData.profileService
+        self.avatarData = participantData.avatarData
+        self.registeredName = participantData.registeredName
+        self.finalName = participantData.finalName
         participantData.finalName
             .observe(on: MainScheduler.instance)
             .startWith(participantData.finalName.value)
@@ -41,9 +58,9 @@ class ParticipantRow: Identifiable, ObservableObject {
             }
             .disposed(by: self.disposeBag)
 
-        participantData.avatar
+        participantData.avatarData
             .observe(on: MainScheduler.instance)
-            .startWith(participantData.avatar.value)
+            .startWith(participantData.avatarData.value)
             .subscribe {[weak self] avatar in
                 guard let self = self, let avatar = avatar else { return }
                 self.imageDataFinal = avatar

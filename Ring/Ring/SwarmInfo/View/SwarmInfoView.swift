@@ -216,13 +216,31 @@ public struct SwarmInfoView: View, StateEmittingView {
     }
 
     private var avatarImage: some View {
-        Image(uiImage: viewModel.finalAvatar)
-            .renderingMode(.original)
-            .resizable()
-            .scaledToFill()
+        if let data = viewModel.swarmInfo.avatarData.value ?? nil {
+            AvatarSwiftUIView(
+                source: {
+                    let provider = AvatarProvider(profileService: viewModel.profileService, size: Layout.avatarSize)
+                    provider.subscribeAvatar(observable: viewModel.swarmInfo.finalAvatarData)
+                    provider.subscribeProfileName(observable: viewModel.swarmInfo.finalTitle.asObservable())
+                    return provider
+                }()
+            )
             .frame(width: Layout.avatarSize, height: Layout.avatarSize, alignment: .center)
             .clipShape(Circle())
             .accessibilityHidden(true)
+        } else {
+            AvatarSwiftUIView(
+                source: {
+                    let provider = AvatarProvider(profileService: viewModel.profileService, size: Layout.avatarSize)
+                    provider.subscribeAvatar(observable: viewModel.swarmInfo.finalAvatarData)
+                    provider.subscribeProfileName(observable: viewModel.swarmInfo.finalTitle.asObservable())
+                    return provider
+                }()
+            )
+            .frame(width: Layout.avatarSize, height: Layout.avatarSize, alignment: .center)
+            .clipShape(Circle())
+            .accessibilityHidden(true)
+        }
     }
 
     @ViewBuilder private var titleView: some View {

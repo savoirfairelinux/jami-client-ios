@@ -22,14 +22,13 @@ import SwiftUI
 
 struct ContactMessageView: View {
     @StateObject var model: ContactMessageVM
+    @Environment(\.avatarProviderFactory) var avatarFactory: AvatarProviderFactory?
     var body: some View {
         HStack(alignment: .center) {
-            if let avatar = model.avatarImage {
-                Image(uiImage: avatar)
-                    .resizable()
-                    .scaledToFill()
+            if let factory = avatarFactory {
+                let jamiId = model.message.uri.isEmpty ? model.message.authorId : model.message.uri
+                AvatarSwiftUIView(source: factory.provider(for: jamiId, size: model.avatarSize))
                     .frame(width: model.avatarSize, height: model.avatarSize)
-                    .clipShape(Circle())
             }
             Spacer()
                 .frame(width: model.inset)

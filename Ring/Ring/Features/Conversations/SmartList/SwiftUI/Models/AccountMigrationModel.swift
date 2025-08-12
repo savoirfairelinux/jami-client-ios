@@ -32,6 +32,10 @@ enum MigrationError: LocalizedError {
 }
 
 final class AccountMigrationModel: ObservableObject, AvatarViewDataModel {
+    var profileImageData: Data?
+    
+    var size: CGFloat
+    
     @Published var profileImage: UIImage?
     @Published var profileName: String = ""
     @Published var username: String?
@@ -50,11 +54,12 @@ final class AccountMigrationModel: ObservableObject, AvatarViewDataModel {
     private let disposeBag = DisposeBag()
     private let profileDisposeBag = DisposeBag()
 
-    init(accountId: String, accountService: AccountsService, profileService: ProfilesService) {
+    init(accountId: String, accountService: AccountsService, profileService: ProfilesService, size: CGFloat) {
         self.accountId = accountId
         self.selectedAccount = accountId
         self.accountService = accountService
         self.profileService = profileService
+        self.size = size
         self.updateAccountInfo()
     }
 
