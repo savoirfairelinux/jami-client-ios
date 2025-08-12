@@ -32,7 +32,7 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarI
 
     var styling: MessageStyling = MessageStyling()
 
-    @Published var avatarImage: UIImage?
+    @Published var avatarData: Data?
     @Published var inReplyTo = ""
 
     let imageMaxHeight: CGFloat = 100
