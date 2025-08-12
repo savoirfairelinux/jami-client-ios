@@ -20,8 +20,10 @@
 
 import Foundation
 import UIKit
+import SwiftUI
+import RxSwift
 
-class AvatarView: UIView {
+ class AvatarView: UIView {
     init(image: UIImage,
          size: CGFloat = 32.0) {
 
@@ -84,9 +86,10 @@ class AvatarView: UIView {
                     self.addSubview(initialLabel)
                 } else {
                     // ringId only, so fallback fallback avatar
-                    if let image = UIImage(asset: Asset.fallbackAvatar) {
+                    if let image = UIImage(systemName: "person.fill") {
                         (avatarImageView as UIImageView).image = image
                         avatarImageView.tintColor = UIColor.white
+                        avatarImageView.contentMode = .center
                         self.addSubview(avatarImageView)
                     }
                 }
@@ -96,5 +99,123 @@ class AvatarView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+ }
+
+// MARK: - Monogram Helper
+struct MonogramHelper {
+    static func extractFirstGraphemeCluster(from text: String?) -> String {
+        guard let text = text, !text.isEmpty else { return "" }
+
+        let firstGrapheme = String(text.prefix(1))
+        return firstGrapheme.uppercased()
+    }
+}
+
+class AvatarProvider: ObservableObject {
+    @Published var avatar: UIImage?
+    @Published var profileName: String = ""
+    @Published var registeredName: String = ""
+    @Published var isGroup: Bool = false
+    let size: CGFloat
+    let textSize: CGFloat
+
+    private let profileService: ProfilesService
+    private let disposeBag = DisposeBag()
+
+    init(profileService: ProfilesService, size: CGFloat, textSize: CGFloat = 22) {
+        self.size = size
+        self.profileService = profileService
+        self.textSize = textSize
+    }
+
+    func subscribeAvatar(observable: Observable<Data?>) {
+        observable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] data in
+                guard let self = self, let data = data else { return }
+                // Decode to a stable cached size to maximize cache hits, then render at desired size
+                let decodeSize = max(self.size * 2, AvatarSizing.primarySize * 2)
+                self.avatar = self.profileService.getAvatarFor(data, size: decodeSize)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    func subscribeProfileName(observable: Observable<String?>) {
+        observable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] name in
+                guard let self = self, let name = name else { return }
+                self.profileName = name
+            })
+            .disposed(by: disposeBag)
+    }
+
+    func subscribeProfileName(observable: Observable<String>) {
+        observable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] name in
+                guard let self = self else { return }
+                self.profileName = name
+            })
+            .disposed(by: disposeBag)
+    }
+
+
+    func subscribeRegisteredName(observable: Observable<String>) {
+        observable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] name in
+                guard let self = self else { return }
+                self.profileName = name
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+struct AvatarSwiftUIView: View {
+   @ObservedObject var source: AvatarProvider
+
+    var body: some View {
+        ZStack {
+            if let image = source.avatar {
+                Image(uiImage: image)
+                    .resizable()
+                    .interpolation(.none)
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                monogramView
+            }
+        }
+        .frame(width: source.size, height: source.size)
+        .clipShape(Circle())
+    }
+
+    @ViewBuilder
+    private var monogramView: some View {
+        // Choose display text: prefer profileName, fallback to registeredName
+        let displayText: String = !source.profileName.isEmpty ? source.profileName : (!source.registeredName.isEmpty ? source.registeredName : "")
+
+        // Derive a stable color index (fallback to 0 if parsing fails)
+        let hex = displayText.toMD5HexString().prefixString()
+        var idxValue: UInt64 = 0
+        let colorIndex = Scanner(string: hex).scanHexInt64(&idxValue) ? Int(idxValue) : 0
+        let bgColor = avatarColors[colorIndex]
+
+        ZStack {
+            Color(bgColor)
+
+            if !displayText.isSHA1() && !displayText.isEmpty {
+                Text(MonogramHelper.extractFirstGraphemeCluster(from: displayText))
+                    .font(.system(size: source.textSize, weight: .semibold))
+                    .foregroundColor(.white)
+            } else {
+                Image(systemName: source.isGroup ? "person.2.fill" : "person.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(source.size * 0.3)
+                    .foregroundColor(.white)
+            }
+        }
     }
 }

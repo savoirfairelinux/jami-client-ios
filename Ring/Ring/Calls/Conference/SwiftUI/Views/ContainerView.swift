@@ -27,19 +27,25 @@ var avatarOffset: CGFloat {
     ScreenDimensionsManager.shared.avatarOffset
 }
 
-struct Avatar: View {
-    var size: CGFloat = avatarSize
-    @ObservedObject var participant: ParticipantViewModel
-    var body: some View {
-        Image(uiImage: participant.avatar)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: size, height: size)
-            .clipShape(Circle())
-            .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-
-    }
-}
+//struct Avatar: View {
+//    var size: CGFloat = avatarSize
+//    @ObservedObject var participant: ParticipantViewModel
+//
+//    var body: some View {
+//        AvatarSwiftUIView(source: participant.bigAvatarProvider)
+////        let avatarSize = AvatarSize.allCases.first { $0.rawValue >= size } ?? .xl
+////        let style = AvatarStyle(size: avatarSize)
+////
+////        AvatarView(
+////            source: AvatarSourceAdapter(from: participant, size: size),
+////            style: style
+////
+////        )
+//        //VStack {}
+//        .frame(width: size, height: size)
+//        .accessibilityHidden(true)
+//    }
+//}
 
 struct PulsatingAvatarView: View {
     var size: CGFloat = avatarSize
@@ -68,8 +74,10 @@ struct PulsatingAvatarView: View {
                           maxScale: 2.2)
                 .frame(width: size, height: size)
 
+            AvatarSwiftUIView(source: participant.bigAvatarProvider)
+
             // The actual avatar
-            Avatar(participant: participant)
+            //Avatar(participant: participant)
         }
         .accessibilityHidden(true)
     }
@@ -267,7 +275,7 @@ struct ContainerView: View {
             if let participant = model.participants.first, model.participants.count == 1 {
                 VStack {
                     Spacer()
-                    Avatar(participant: participant)
+                    AvatarSwiftUIView(source: participant.bigAvatarProvider)
                         .offset(y: avatarOffset)
                     Spacer().frame(height: 50)
                     participantText(participant.name, font: .title)
