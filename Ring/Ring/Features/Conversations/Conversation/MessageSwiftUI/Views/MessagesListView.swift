@@ -154,6 +154,7 @@ struct MessagesListView: View {
                 temporaryConversationView()
             }
         }
+        .environment(\.avatarProviderFactory, model.makeAvatarFactory() as AvatarProviderFactory?)
         .onChange(of: model.screenTapped, perform: { _ in
             /* We cannot use SwiftUI's onTapGesture here because it would
              interfere with the interactions of the buttons in the player view.
@@ -233,8 +234,8 @@ struct MessagesListView: View {
                         model.scrolledToTargetReply()
                     }
                 })
-            }
-            .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
+        }
+        .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
                 DispatchQueue.main.async {
                     let scrollOffset = value ?? 0
                     let atTheBottom = scrollOffset < scrollReserved
