@@ -26,7 +26,7 @@ import RxSwift
 import SwiftUI
 
 class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObserver, AvatarImageObserver {
-    @Published var avatarImage: UIImage?
+    @Published var avatarData: Data?
     @Published var read: [UIImage]?
     @Published var timeString: String = ""
     @Published var topSpace: CGFloat = 0
@@ -56,16 +56,16 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
             if self.shouldDisplayAavatar {
                 self.requestAvatar(jamiId: jamiId)
             } else {
-                self.avatarImage = nil
+                self.avatarData = nil
             }
         }
     }
 
     func updateImage(image: UIImage, jamiId: String) {
-        let localId = message.uri.isEmpty ? message.authorId : message.uri
-        if jamiId == localId {
-            self.avatarImage = image
-        }
+//        let localId = message.uri.isEmpty ? message.authorId : message.uri
+//        if jamiId == localId {
+//            self.avatarData = image
+//        }
     }
 
     var sequencing: MessageSequencing = .unknown {

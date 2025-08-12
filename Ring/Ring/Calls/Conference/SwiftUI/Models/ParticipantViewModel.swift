@@ -81,7 +81,6 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
         }
     }
     @Published var conferenceActions: [ButtonInfoWrapper]
-    @Published var avatar = UIImage()
     var mainDisplayLayer = AVSampleBufferDisplayLayer()
     var gridDisplayLayer = AVSampleBufferDisplayLayer()
     var info: ConferenceParticipant? {
@@ -120,7 +119,8 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
     let videoService: VideoService
     let injectionBag: InjectionBag
     let profileInfo: ParticipantProfileInfo
-
+    let avatarProvider: AvatarProvider
+    let bigAvatarProvider: AvatarProvider
     init(info: ConferenceParticipant, injectionBag: InjectionBag, conferenceState: PublishSubject<State>, mode: AVLayerVideoGravity) {
         self.id = info.sinkId
         self.injectionBag = injectionBag
@@ -129,17 +129,23 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
         self.gridDisplayLayer.videoGravity = .resizeAspectFill
         conferenceActions = [ButtonInfoWrapper]()
         self.profileInfo = ParticipantProfileInfo(injectionBag: injectionBag, info: info)
+        self.avatarProvider = AvatarProvider(
+            profileService: injectionBag.profileService,
+            size: Constants.defaultAvatarSize,
+            avatar: self.profileInfo.avatarData.asObservable(),
+            displayName: self.profileInfo.displayName.asObservable(),
+            isGroup: false
+        )
+        self.bigAvatarProvider = AvatarProvider(
+            profileService: injectionBag.profileService,
+            size: 150,
+            avatar: self.profileInfo.avatarData.asObservable(),
+            displayName: self.profileInfo.displayName.asObservable(),
+            isGroup: false,
+            textSize: 40
+        )
         self.setAspectMode(mode: mode)
-        self.profileInfo.avatar
-            .observe(on: MainScheduler.instance)
-            .startWith(self.profileInfo.avatar.value)
-            .filter { $0 != nil }
-            .subscribe(onNext: { [weak self] avatar in
-                if let avatar = avatar {
-                    self?.avatar = avatar
-                }
-            })
-            .disposed(by: disposeBag)
+        
         self.profileInfo.displayName
             .observe(on: MainScheduler.instance)
             .startWith(self.profileInfo.displayName.value)

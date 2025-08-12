@@ -139,7 +139,7 @@ class ConversationsService {
         }
     }
 
-    func getSwarmMembers(conversationId: String, accountId: String, accountURI: String) -> [ParticipantInfo] {
+    func getSwarmMembers(conversationId: String, accountId: String, accountURI: String) -> [ParticipantData] {
         if let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
             return participantsInfo.compactMap({ info in
                 if let jamiId = info["uri"],
@@ -157,7 +157,7 @@ class ConversationsService {
                     default:
                         role = .unknown
                     }
-                    return ParticipantInfo(jamiId: jamiId, role: role)
+                    return ParticipantData(jamiId: jamiId, role: role)
                 }
                 return nil
             })

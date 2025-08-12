@@ -24,22 +24,22 @@ import RxSwift
 import RxRelay
 
 protocol AvatarImageObserver: AnyObject {
-    var avatarImage: UIImage? { get set }
+    var avatarData: Data? { get set }
     var disposeBag: DisposeBag { get }
     var infoState: PublishSubject<State>? { get set }
 
-    func subscribeToAvatarObservable(_ avatarObservable: BehaviorRelay<UIImage?>)
+    func subscribeToAvatarObservable(_ avatarObservable: BehaviorRelay<Data?>)
 
     func requestAvatar(jamiId: String)
 }
 
 extension AvatarImageObserver {
-    func subscribeToAvatarObservable(_ avatarObservable: BehaviorRelay<UIImage?>) {
+    func subscribeToAvatarObservable(_ avatarObservable: BehaviorRelay<Data?>) {
         avatarObservable
             .startWith(avatarObservable.value)
             .subscribe(onNext: { [weak self] newImage in
                 DispatchQueue.main.async {[weak self] in
-                    self?.avatarImage = newImage
+                    self?.avatarData = newImage
                 }
             })
             .disposed(by: disposeBag)
