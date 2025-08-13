@@ -23,7 +23,7 @@ import SwiftUI
 import RxSwift
 import Combine
 
-class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver, NameObserver {
+class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, NameObserver {
     @Published var username: String = "" {
         didSet {
             updateInReplyMessage()
@@ -32,7 +32,6 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarI
 
     var styling: MessageStyling = MessageStyling()
 
-    @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""
 
     let imageMaxHeight: CGFloat = 100

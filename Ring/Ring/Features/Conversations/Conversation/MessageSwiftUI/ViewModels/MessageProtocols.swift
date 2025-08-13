@@ -23,57 +23,26 @@ import SwiftUI
 import RxSwift
 import RxRelay
 
-protocol AvatarImageObserver: AnyObject {
-    var avatarImage: UIImage? { get set }
-    var disposeBag: DisposeBag { get }
-    var infoState: PublishSubject<State>? { get set }
-
-    func subscribeToAvatarObservable(_ avatarObservable: BehaviorRelay<UIImage?>)
-
-    func requestAvatar(jamiId: String)
-}
-
-extension AvatarImageObserver {
-    func subscribeToAvatarObservable(_ avatarObservable: BehaviorRelay<UIImage?>) {
-        avatarObservable
-            .startWith(avatarObservable.value)
-            .subscribe(onNext: { [weak self] newImage in
-                DispatchQueue.main.async {[weak self] in
-                    self?.avatarImage = newImage
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-
-    func requestAvatar(jamiId: String) {
-        DispatchQueue.global(qos: .background).async {[weak self] in
-            guard let self = self else { return }
-            self.infoState?.onNext(MessageInfo.updateAvatar(jamiId: jamiId, message: self))
-        }
-    }
-}
+// Removed legacy AvatarImageObserver in favor of using AvatarProvider for SwiftUI views
 
 protocol MessageReadObserver: AnyObject {
-    var read: [UIImage]? { get set }
+    var readIds: [String]? { get set }
     var readDisposeBag: DisposeBag { get  set }
     var infoState: PublishSubject<State>? { get set }
 
-    func subscribeToReadObservable(_ imagesObservable: BehaviorRelay<[String: UIImage]>)
+    func subscribeToReadObservable(_ idsObservable: BehaviorRelay<[String]>)
     func requestReadStatus(messageId: String)
 }
 
 extension MessageReadObserver {
-    func subscribeToReadObservable(_ imagesObservable: BehaviorRelay<[String: UIImage]>) {
+    func subscribeToReadObservable(_ idsObservable: BehaviorRelay<[String]>) {
         readDisposeBag = DisposeBag()
-        imagesObservable
-            .startWith(imagesObservable.value)
-            .subscribe(onNext: { [weak self] lastReadAvatars in
+        idsObservable
+            .startWith(idsObservable.value)
+            .subscribe(onNext: { [weak self] ids in
                 DispatchQueue.main.async {[weak self] in
-                    let values: [UIImage] = lastReadAvatars.map { value in
-                        return value.value
-                    }
-                    let newValue = values.isEmpty ? nil : values
-                    self?.read = newValue
+                    let newValue = ids.isEmpty ? nil : ids
+                    self?.readIds = newValue
                 }
             })
             .disposed(by: readDisposeBag)

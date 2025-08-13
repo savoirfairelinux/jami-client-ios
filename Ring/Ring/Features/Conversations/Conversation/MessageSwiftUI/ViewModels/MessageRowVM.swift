@@ -25,9 +25,8 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObserver, AvatarImageObserver {
-    @Published var avatarImage: UIImage?
-    @Published var read: [UIImage]?
+class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObserver {
+    @Published var readIds: [String]?
     @Published var timeString: String = ""
     @Published var topSpace: CGFloat = 0
     @Published var bottomSpace: CGFloat = 0
@@ -35,6 +34,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     @Published var readBorderColor: Color
     @Published var showSentIndicator: Bool = false
     @Published var showReciveIndicator: Bool = false
+    @Published var shouldDisplayAavatar = false
     var styling: MessageStyling = MessageStyling()
     var incoming: Bool
     var infoState: PublishSubject<State>?
@@ -47,24 +47,6 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
     var shouldShowTimeString = false {
         didSet {
             self.timeString = self.shouldShowTimeString ? self.message.receivedDate.getTimeLabelString() : ""
-        }
-    }
-
-    var shouldDisplayAavatar = false {
-        didSet {
-            let jamiId = message.uri.isEmpty ? message.authorId : message.uri
-            if self.shouldDisplayAavatar {
-                self.requestAvatar(jamiId: jamiId)
-            } else {
-                self.avatarImage = nil
-            }
-        }
-    }
-
-    func updateImage(image: UIImage, jamiId: String) {
-        let localId = message.uri.isEmpty ? message.authorId : message.uri
-        if jamiId == localId {
-            self.avatarImage = image
         }
     }
 
