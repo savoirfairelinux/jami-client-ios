@@ -45,16 +45,25 @@ struct ReplyHistory: View {
     var colorScheme
     @Environment(\.openURL)
     var openURL
+    @Environment(\.avatarProviderFactory) var avatarFactory: AvatarProviderFactory?
 
     var body: some View {
         VStack(alignment: model.alignment, spacing: 4) {
             if let target = self.target {
-                Text(model.inReplyTo)
-                    .font(model.styling.secondaryFont)
-                    .foregroundColor(model.styling.secondaryTextColor)
-                    .onAppear {
-                        target.onAppear()
+                HStack(spacing: 6) {
+                    if let factory = avatarFactory {
+                        let jamiId = target.message.authorId
+                        AvatarSwiftUIView(source: factory.provider(for: jamiId, size: 20))
+                            .frame(width: 20, height: 20)
+                            .clipShape(Circle())
                     }
+                    Text(model.inReplyTo)
+                        .font(model.styling.secondaryFont)
+                        .foregroundColor(model.styling.secondaryTextColor)
+                }
+                .onAppear {
+                    target.onAppear()
+                }
                 if target.type == .fileTransfer {
                     MediaView(message: target, onLongGesture: {}, minHeight: 20, maxHeight: 100, withPlayerControls: true, cornerRadius: 15)
                         .opacity(0.7)
