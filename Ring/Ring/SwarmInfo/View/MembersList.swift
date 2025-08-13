@@ -17,6 +17,7 @@
  */
 
 import SwiftUI
+import RxSwift
 
 struct MemberList: View {
     // MARK: - Properties
@@ -80,12 +81,14 @@ struct MemberItem: View {
 
     // MARK: - View Components
     private var profileImage: some View {
-        Image(uiImage: participant.avatar.value ?? UIImage(asset: Asset.fallbackAvatar)!)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 50, height: 50)
-            .clipShape(Circle())
-            .accessibilityHidden(true)
+        let provider = AvatarProvider(
+            profileService: participant.profileService,
+            size: 55,
+            avatar: participant.avatarData.asObservable(),
+            displayName: participant.finalName.asObservable(),
+            isGroup: false
+        )
+        return AvatarSwiftUIView(source: provider)
     }
 
     private var nameLabel: some View {

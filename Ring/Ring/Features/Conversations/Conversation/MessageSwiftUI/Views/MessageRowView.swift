@@ -64,11 +64,14 @@ extension View {
     }
 }
 
+import RxRelay
+
 struct MessageRowView: View {
     let messageModel: MessageContainerModel
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
     @ObservedObject var model: MessageRowVM
+    @Environment(\.avatarProviderFactory) var avatarFactory: AvatarProviderFactory?
     var body: some View {
         VStack(alignment: .leading) {
             if model.shouldShowTimeString {
@@ -85,14 +88,11 @@ struct MessageRowView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
             } else if model.incoming {
                 HStack(alignment: .bottom) {
-                    if let avatar = model.avatarImage {
+                    if model.shouldDisplayAavatar {
                         Spacer()
                             .frame(width: 10)
-                        Image(uiImage: avatar)
-                            .resizable()
-                            .scaledToFill()
+                        avatarSwiftUIView(size: 30)
                             .frame(width: 30, height: 30)
-                            .cornerRadius(15)
                         Spacer()
                             .frame(width: 10)
                     } else {
@@ -142,5 +142,16 @@ struct MessageRowView: View {
         .padding(.bottom, 1)
         .padding(.leading, 5)
         .padding(.trailing, 5)
+    }
+
+    @ViewBuilder
+    private func avatarSwiftUIView(size: CGFloat) -> some View {
+        if let factory = avatarFactory {
+            let jamiId = messageModel.message.uri.isEmpty ? messageModel.message.authorId : messageModel.message.uri
+            AvatarSwiftUIView(source: factory.provider(for: jamiId, size: size, textSize: 15))
+        } else {
+            // Fallback spacing to preserve layout if VM is not provided
+            Circle().fill(Color.clear)
+        }
     }
 }

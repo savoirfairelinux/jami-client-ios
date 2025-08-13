@@ -19,21 +19,22 @@
  */
 
 import SwiftUI
+import RxRelay
+import RxSwift
+
 
 struct ReactionRowView: View {
     @ObservedObject var reaction: ReactionsRowViewModel
+    @Environment(\.avatarProviderFactory) var avatarFactory: AvatarProviderFactory?
     let padding: CGFloat = 20
 
     var body: some View {
         HStack {
-            if let image = reaction.avatarImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
+            if let factory = avatarFactory {
+                 AvatarSwiftUIView(source: factory.provider(for: reaction.jamiId, size: 40, textSize: 15))
                     .frame(width: 40, height: 40)
-                    .cornerRadius(20)
+                    .clipShape(Circle())
             }
-
             Spacer()
                 .frame(width: padding)
 
@@ -60,3 +61,68 @@ struct ReactionRowView: View {
         .padding(.horizontal, padding)
     }
 }
+
+protocol AvatarRelayProviding: AnyObject {
+    func avatarRelay(for jamiId: String) -> BehaviorRelay<Data?>
+    func nameRelay(for jamiId: String) -> BehaviorRelay<String>
+}
+
+// ViewModel exposes a factory built on itself (the relay provider)
+//extension MessagesListVM: AvatarRelayProviding {
+//    func makeAvatarFactory() -> AvatarProviderFactory
+//}
+
+final class AvatarProviderFactory {
+    private let relayProvider: AvatarRelayProviding
+    private let profileService: ProfilesService
+    private var cache: [String: AvatarProvider] = [:] // key: "<jamiId>|<Int(size)>"
+
+    init(relayProvider: AvatarRelayProviding, profileService: ProfilesService) {
+        self.relayProvider = relayProvider
+        self.profileService = profileService
+    }
+
+    func provider(for jamiId: String, size: CGFloat, textSize: CGFloat) -> AvatarProvider {
+        let key = "\(jamiId)|\(Int(size))"
+        if let existing = cache[key] { return existing }
+        let provider = AvatarProvider(
+            profileService: profileService,
+            size: size,
+            avatar: relayProvider.avatarRelay(for: jamiId).asObservable(),
+            displayName: relayProvider.nameRelay(for: jamiId).asObservable(),
+            isGroup:false,
+            textSize: textSize
+        )
+        cache[key] = provider
+        return provider
+    }
+
+    // Stream-based static helper for non-identity contexts
+    static func provider(profileService: ProfilesService,
+                         size: CGFloat,
+                         textSize: CGFloat = 22,
+                         avatar: Observable<Data?>,
+                         displayName: Observable<String>,
+                         isGroup: Bool = false) -> AvatarProvider {
+        return AvatarProvider(
+            profileService: profileService,
+            size: size,
+            avatar: avatar,
+            displayName: displayName,
+            isGroup: isGroup,
+            textSize: textSize
+        )
+    }
+}
+
+private struct AvatarProviderFactoryKey: EnvironmentKey {
+    static let defaultValue: AvatarProviderFactory? = nil
+}
+
+extension EnvironmentValues {
+    var avatarProviderFactory: AvatarProviderFactory? {
+        get { self[AvatarProviderFactoryKey.self] }
+        set { self[AvatarProviderFactoryKey.self] = newValue }
+    }
+}
+
