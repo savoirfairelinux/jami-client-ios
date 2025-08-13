@@ -23,8 +23,9 @@ import SwiftUI
 import RxSwift
 import RxRelay
 
-class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver, NameObserver {
-    @Published var avatarImage: UIImage?
+class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, NameObserver {
+    
+    @Published var needAvatar: Bool = false
     @Published var content: String {
         didSet {
             self.observableContent.accept(content)
@@ -67,8 +68,9 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImage
     func setInfoState(state: PublishSubject<State>) {
         self.infoState = state
         if message.type.isContact && message.incoming {
+
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
-            requestAvatar(jamiId: jamiId)
+            needAvatar = true
             requestName(jamiId: jamiId)
         }
     }

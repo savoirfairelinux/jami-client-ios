@@ -22,18 +22,16 @@ import SwiftUI
 
 struct ReactionRowView: View {
     @ObservedObject var reaction: ReactionsRowViewModel
+    @Environment(\.avatarProviderFactory) var avatarFactory: AvatarProviderFactory?
     let padding: CGFloat = 20
 
     var body: some View {
         HStack {
-            if let image = reaction.avatarImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
+            if let factory = avatarFactory {
+                 AvatarSwiftUIView(source: factory.provider(for: reaction.jamiId, size: 40))
                     .frame(width: 40, height: 40)
-                    .cornerRadius(20)
+                    .clipShape(Circle())
             }
-
             Spacer()
                 .frame(width: padding)
 
