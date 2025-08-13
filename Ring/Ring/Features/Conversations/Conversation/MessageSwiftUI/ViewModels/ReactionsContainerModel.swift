@@ -24,7 +24,7 @@ import RxSwift
 class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver, NameObserver {
     let jamiId: String
     let messageId: String
-    @Published var avatarImage: UIImage?
+    @Published var avatarData: Data?
     @Published var username: String = ""
     @Published var content = [String: String]()
     var disposeBag = DisposeBag()
@@ -35,7 +35,6 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver
         self.jamiId = reaction.author
         self.username = self.jamiId
         self.messageId = reaction.id
-        self.avatarImage = UIImage()
         self.content[reaction.id] = reaction.content
     }
 

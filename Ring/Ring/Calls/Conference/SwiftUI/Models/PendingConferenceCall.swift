@@ -23,7 +23,6 @@ import RxSwift
 import SwiftUI
 
 class PendingConferenceCall {
-    @Published var avatar = UIImage()
     @Published var name = ""
 
     let id: String
@@ -31,6 +30,7 @@ class PendingConferenceCall {
     var info: ConferenceParticipant
     let disposeBag = DisposeBag()
     let callsService: CallsService
+    let avatarProvider: AvatarProvider
 
     init(info: ConferenceParticipant, injectionBag: InjectionBag) {
         self.info = info
@@ -39,16 +39,15 @@ class PendingConferenceCall {
         self.profileInfo = ParticipantProfileInfo(
             injectionBag: injectionBag, info: info
         )
-        self.profileInfo.avatar
-            .observe(on: MainScheduler.instance)
-            .startWith(self.profileInfo.avatar.value)
-            .filter { $0 != nil }
-            .subscribe(onNext: { [weak self] avatar in
-                if let avatar = avatar {
-                    self?.avatar = avatar
-                }
-            })
-            .disposed(by: disposeBag)
+        self.avatarProvider = AvatarProvider(
+            profileService: injectionBag.profileService,
+            size: Constants.defaultAvatarSize,
+            avatar: self.profileInfo.avatarData.asObservable(),
+            displayName: self.profileInfo.displayName.asObservable(),
+            isGroup: false
+        )
+
+        // name binding for row label remains
         self.profileInfo.displayName
             .observe(on: MainScheduler.instance)
             .startWith(self.profileInfo.displayName.value)
