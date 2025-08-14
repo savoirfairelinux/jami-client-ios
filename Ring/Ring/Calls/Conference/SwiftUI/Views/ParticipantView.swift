@@ -93,8 +93,8 @@ struct ExpandableParticipantView: View {
         return ZStack(alignment: .bottomLeading) {
             ZStack(alignment: .center) {
                 if isVideoMuted {
-                    Avatar(participant: model)
-                        .frame(width: layerWidth, height: layerHeight)
+                    let targetSize = quantizedAvatarSize(from: min(layerWidth, layerHeight))
+                    AvatarSwiftUIView(source: model.avatarProvider(for: targetSize))
                         .offset(x: offsetX)
                 } else {
                     DisplayLayerView(displayLayer: $model.mainDisplayLayer, layerWidth: $layerWidth, layerHeight: $layerHeight)
@@ -159,8 +159,8 @@ struct ParticipantView: View {
             ZStack(alignment: .bottomLeading) {
                 ZStack(alignment: .center) {
                     if model.isVideoMuted {
-                        let size = min(width, height) - 10
-                        Avatar(size: size, participant: model)
+                        let targetSize = quantizedAvatarSize(from: min(width, height))
+                        AvatarSwiftUIView(source: model.avatarProvider(for: targetSize))
                     } else {
                         DisplayLayerView(displayLayer: $model.gridDisplayLayer, layerWidth: $width, layerHeight: $height)
                             .frame(width: width, height: height)
@@ -175,6 +175,23 @@ struct ParticipantView: View {
             .padding(2)
         }
     }
+}
+
+private func quantizedAvatarSize(from edge: CGFloat) -> CGFloat {
+    // Choose a clean, efficient size that looks good and minimizes provider recreation
+    // Snap to canonical buckets with hysteresis to avoid churn on tiny changes
+    let buckets: [CGFloat] = [
+        Constants.AvatarSize.tiny.points,
+        Constants.AvatarSize.small.points,
+        Constants.AvatarSize.medium.points,
+        Constants.AvatarSize.large.points,
+        Constants.AvatarSize.default.points,
+        Constants.AvatarSize.xLarge.points
+    ]
+    // Prefer upscaling to nearest bucket not exceeding the edge
+    let candidate = buckets.last(where: { $0 <= edge }) ?? buckets.first!
+    // Ensure at least tiny size
+    return max(candidate, Constants.AvatarSize.tiny.points)
 }
 
 struct ParticipantInfoView: View {
