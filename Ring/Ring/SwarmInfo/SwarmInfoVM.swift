@@ -47,7 +47,7 @@ class SwarmInfoVM: ObservableObject {
 
     private let accountService: AccountsService
     private let nameService: NameService
-    private let profileService: ProfilesService
+    let profileService: ProfilesService
     private let conversationService: ConversationsService
     private let contactsService: ContactsService
     let injectionBag: InjectionBag
@@ -90,7 +90,7 @@ class SwarmInfoVM: ObservableObject {
 
     private func setupBindings() {
         Observable.combineLatest(
-            swarmInfo.finalAvatar,
+            swarmInfo.finalAvatarData,
             swarmInfo.finalTitle.startWith(swarmInfo.finalTitle.value),
             swarmInfo.description.startWith(swarmInfo.description.value),
             swarmInfo.color
@@ -98,8 +98,6 @@ class SwarmInfoVM: ObservableObject {
         .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] (newAvatar, newTitle, newDescription, newColor) in
             guard let self = self else { return }
-
-            self.finalAvatar = newAvatar
 
             if self.title != newTitle {
                 self.title = newTitle

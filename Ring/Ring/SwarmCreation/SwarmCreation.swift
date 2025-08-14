@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Binal Ahiya <binal.ahiya@savoirfairelinux.com>
+ *  Copyright (C) 2022 - 2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,19 +15,21 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
+
 import Foundation
 import SwiftUI
 import RxSwift
 
 class ParticipantRow: Identifiable, ObservableObject {
     @Published var id: String
-    @Published var imageDataFinal: UIImage = UIImage()
     @Published var name: String = ""
 
     let disposeBag = DisposeBag()
+    let avatarProvider: AvatarProvider
 
     init(participantData: ParticipantInfo) {
         self.id = participantData.jamiId
+        self.avatarProvider = AvatarProvider.from(participant: participantData, size: Constants.defaultAvatarSize)
         participantData.finalName
             .observe(on: MainScheduler.instance)
             .startWith(participantData.finalName.value)
@@ -40,18 +40,6 @@ class ParticipantRow: Identifiable, ObservableObject {
 
             }
             .disposed(by: self.disposeBag)
-
-        participantData.avatar
-            .observe(on: MainScheduler.instance)
-            .startWith(participantData.avatar.value)
-            .subscribe {[weak self] avatar in
-                guard let self = self, let avatar = avatar else { return }
-                self.imageDataFinal = avatar
-            } onError: { _ in
-
-            }
-            .disposed(by: self.disposeBag)
-
     }
     func match(string: String) -> Bool {
         return name.lowercased().contains(string.lowercased()) || id.lowercased().contains(string.lowercased())

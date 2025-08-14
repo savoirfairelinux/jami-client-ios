@@ -351,11 +351,8 @@ struct PendingInfoListView: View {
                             let participant = pending[index]
                             HStack(spacing: 10) {
                                 HStack(spacing: margin) {
-                                    Image(uiImage: participant.avatar)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 35, height: 35)
-                                        .clipShape(Circle())
+                                    AvatarSwiftUIView(source: participant.avatarProvider)
+                                        .frame(width: 40, height: 40)
 
                                     Text(participant.name)
                                         .font(.footnote)
@@ -407,11 +404,8 @@ struct ParticipantInfoRowView: View {
     var body: some View {
         HStack(spacing: 15) {
             HStack(spacing: margin) {
-                Image(uiImage: participant.avatar)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                AvatarSwiftUIView(source: participant.avatarProvider)
                     .frame(width: size, height: size)
-                    .clipShape(Circle())
 
                 Text(participant.name)
                     .font(.footnote)
