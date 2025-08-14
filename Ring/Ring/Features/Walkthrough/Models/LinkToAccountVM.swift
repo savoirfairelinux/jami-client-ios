@@ -65,11 +65,7 @@ enum AuthError: String {
     }
 }
 
-class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
-    var profileImage: UIImage?
-    var profileName: String = ""
-
-    @Published var username: String?
+class LinkToAccountVM: AvatarProvider {
     @Published var token: String = ""
     @Published var password: String = ""
     @Published var hasPassword: Bool = true
@@ -90,6 +86,7 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
         self.linkAction = linkAction
         self.accountsService = injectionBag.accountService
         self.nameService = injectionBag.nameService
+        super.init(profileService: injectionBag.profileService, size: Constants.AvatarSize.account60)
         self.start()
     }
 
@@ -170,7 +167,7 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
             return
         }
         self.jamiId = jamiId
-        if self.username == nil {
+        if self.registeredName.isEmpty {
             self.lookupUserName(jamiId: jamiId)
         }
         withAnimation { uiState = .authenticating }
@@ -184,7 +181,7 @@ class LinkToAccountVM: ObservableObject, AvatarViewDataModel {
             })
             .subscribe(onNext: { [weak self] response in
                 if response.state == .found && !response.name.isEmpty {
-                    DispatchQueue.main.async { self?.username = response.name }
+                    DispatchQueue.main.async { self?.registeredName = response.name }
                 }
             })
             .disposed(by: self.disposeBag)

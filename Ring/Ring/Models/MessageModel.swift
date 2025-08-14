@@ -19,6 +19,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import Foundation
+
 enum MessageAttributes: String {
     case interactionId = "id"
     case type = "type"
@@ -174,6 +176,7 @@ public class MessageModel {
     var editions = Set<MessageAction>()
     var statusForParticipant = [String: MessageStatus]()
     var accessibilityLabelValue: String = ""
+    private let statusAccessLock = NSLock()
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -200,7 +203,9 @@ public class MessageModel {
 
         for (key, value) in filteredStatus {
             if let status = MessageStatus(rawValue: value.int32Value) {
+                statusAccessLock.lock()
                 statusForParticipant[key] = status
+                statusAccessLock.unlock()
                 /*
                  The message status is set to 'displayed' if at least one participant
                  has seen the message, and it is set to 'sent' if at least one participant
@@ -359,10 +364,26 @@ public class MessageModel {
     }
 
     func messageStatusUpdated(status: MessageStatus, messageId: String, jamiId: String) {
+        statusAccessLock.lock()
         self.statusForParticipant[jamiId] = status
         if status.rawValue <= MessageStatus.displayed.rawValue && self.status.rawValue < status.rawValue {
             self.status = status
         }
+        statusAccessLock.unlock()
+    }
+
+    func statusForParticipantValue(_ jamiId: String) -> MessageStatus? {
+        statusAccessLock.lock()
+        let value = self.statusForParticipant[jamiId]
+        statusAccessLock.unlock()
+        return value
+    }
+
+    func statusForParticipantSnapshot() -> [String: MessageStatus] {
+        statusAccessLock.lock()
+        let snapshot = self.statusForParticipant
+        statusAccessLock.unlock()
+        return snapshot
     }
 
     func isSending() -> Bool {
