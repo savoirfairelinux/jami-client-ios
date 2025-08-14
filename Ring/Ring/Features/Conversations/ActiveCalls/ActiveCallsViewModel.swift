@@ -22,6 +22,7 @@ class ActiveCallsViewModel: ObservableObject, Stateable {
     @Published var callsByAccount: [String: [ActiveCallRowViewModel]] = [:]
 
     private let callService: CallsService
+    private let profileService: ProfilesService
     private let accountsService: AccountsService
     private let conversationsSource: ConversationDataSource
     private let disposeBag = DisposeBag()
@@ -33,6 +34,7 @@ class ActiveCallsViewModel: ObservableObject, Stateable {
 
     init(injectionBag: InjectionBag, conversationsSource: ConversationDataSource) {
         self.callService = injectionBag.callService
+        self.profileService = injectionBag.profileService
         self.accountsService = injectionBag.accountService
         self.conversationsSource = conversationsSource
         self.observeActiveCalls()
@@ -57,7 +59,8 @@ class ActiveCallsViewModel: ObservableObject, Stateable {
                         call: call,
                         stateSubject: stateSubject,
                         callService: callService,
-                        swarmInfo: swarmInfo
+                        swarmInfo: swarmInfo,
+                        profileService: self.profileService
                     )
                 }
             callsByAccount[accountId] = viewModels
@@ -71,16 +74,20 @@ class ActiveCallsViewModel: ObservableObject, Stateable {
 
 class ActiveCallRowViewModel: ObservableObject, Equatable {
     @Published var title = ""
-    @Published var avatar: UIImage?
+    @Published var avatarData: Data?
+    @Published var isGroup: Bool = false
     let call: ActiveCall
     private let stateSubject: PublishSubject<State>
     private let callService: CallsService
+    let profileService: ProfilesService
     private let disposeBag = DisposeBag()
 
-    init(call: ActiveCall, stateSubject: PublishSubject<State>, callService: CallsService, swarmInfo: SwarmInfoProtocol) {
+    init(call: ActiveCall, stateSubject: PublishSubject<State>, callService: CallsService, swarmInfo: SwarmInfoProtocol, profileService: ProfilesService) {
         self.call = call
+        self.profileService = profileService
         self.callService = callService
         self.stateSubject = stateSubject
+        self.isGroup = !(swarmInfo.conversation?.isDialog() ?? true)
         self.subscribeToSwarmInfo(swarmInfo: swarmInfo)
     }
 
@@ -92,10 +99,10 @@ class ActiveCallRowViewModel: ObservableObject, Equatable {
             })
             .disposed(by: disposeBag)
 
-        swarmInfo.finalAvatar
+        swarmInfo.finalAvatarData
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] avatar in
-                self?.avatar = avatar
+                self?.avatarData = avatar
             })
             .disposed(by: disposeBag)
     }
@@ -116,7 +123,6 @@ class ActiveCallRowViewModel: ObservableObject, Equatable {
 
     static func == (lhs: ActiveCallRowViewModel, rhs: ActiveCallRowViewModel) -> Bool {
         return lhs.call.id == rhs.call.id &&
-            lhs.title == rhs.title &&
-            lhs.avatar == rhs.avatar
+            lhs.title == rhs.title
     }
 }

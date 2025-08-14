@@ -216,10 +216,13 @@ public struct SwarmInfoView: View, StateEmittingView {
     }
 
     private var avatarImage: some View {
-        Image(uiImage: viewModel.finalAvatar)
-            .renderingMode(.original)
-            .resizable()
-            .scaledToFill()
+            AvatarSwiftUIView(
+                source: AvatarProvider.from(
+                    swarmInfo: viewModel.swarmInfo,
+                    profileService: viewModel.profileService,
+                    size: Layout.avatarSize
+                )
+            )
             .frame(width: Layout.avatarSize, height: Layout.avatarSize, alignment: .center)
             .clipShape(Circle())
             .accessibilityHidden(true)
