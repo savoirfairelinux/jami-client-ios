@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2022 - 2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,14 +20,14 @@ import SwiftUI
 
 struct ContactMessageView: View {
     @StateObject var model: ContactMessageVM
+    @Environment(\.avatarProviderFactory) var avatarFactory: AvatarProviderFactory?
     var body: some View {
         HStack(alignment: .center) {
-            if let avatar = model.avatarImage {
-                Image(uiImage: avatar)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: model.avatarSize, height: model.avatarSize)
-                    .clipShape(Circle())
+            if model.needAvatar {
+                if let factory = avatarFactory {
+                    let jamiId = model.message.uri.isEmpty ? model.message.authorId : model.message.uri
+                    AvatarSwiftUIView(source: factory.provider(for: jamiId, size: Constants.AvatarSize.conversation20))
+                }
             }
             Spacer()
                 .frame(width: model.inset)

@@ -249,9 +249,9 @@ struct LinkToAccountView: View {
 
     private var userInfoView: some View {
         VStack(spacing: 15) {
-            AvatarImageView(model: viewModel, width: 60, height: 60)
-            if let username = viewModel.username {
-                Text(username)
+            AvatarSwiftUIView(source: viewModel)
+            if !viewModel.registeredName.isEmpty {
+                Text(viewModel.registeredName)
             }
             Text(viewModel.jamiId).font(.callout)
         }

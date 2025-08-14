@@ -19,6 +19,7 @@
  */
 
 import Foundation
+import UIKit
 
 extension Data {
     var stringUTF8OrUTF16Encoding: String.Encoding? {
@@ -29,5 +30,13 @@ extension Data {
         guard case let value = NSString.stringEncoding(for: self, encodingOptions: options, convertedString: &string, usedLossyConversion: nil),
               value != 0 else { return nil }
         return .init(rawValue: value)
+    }
+
+    func convertToImage(size: CGFloat) -> UIImage? {
+        if let imageSource = CGImageSourceCreateWithData(self as CFData, nil) {
+            let scaledSize = size * UIScreen.main.scale
+            return UIImage.createResizedImage(imageSource: imageSource, size: scaledSize)
+        }
+        return nil
     }
 }

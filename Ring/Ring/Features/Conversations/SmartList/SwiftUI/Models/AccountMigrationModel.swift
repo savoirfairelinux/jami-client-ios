@@ -31,17 +31,12 @@ enum MigrationError: LocalizedError {
     }
 }
 
-final class AccountMigrationModel: ObservableObject, AvatarViewDataModel {
-    @Published var profileImage: UIImage?
-    @Published var profileName: String = ""
-    @Published var username: String?
+final class AccountMigrationModel: AvatarProvider {
     @Published var migrationCompleted: Bool = false
     @Published var error: String?
-    @Published var jamiId: String = ""
     @Published var needsPassword: Bool = false
     @Published var isLoading: Bool = false
 
-    let avatarSize: CGFloat = 150
     private(set) var selectedAccount: String?
 
     private let accountService: AccountsService
@@ -55,6 +50,7 @@ final class AccountMigrationModel: ObservableObject, AvatarViewDataModel {
         self.selectedAccount = accountId
         self.accountService = accountService
         self.profileService = profileService
+        super.init(profileService: profileService, size: Constants.AvatarSize.account100)
         self.updateAccountInfo()
     }
 
@@ -98,7 +94,7 @@ final class AccountMigrationModel: ObservableObject, AvatarViewDataModel {
 
         jamiId = account.jamiId
         needsPassword = AccountModelHelper(withAccount: account).hasPassword
-        username = extractUsername()
+        registeredName = extractUsername() ?? ""
         subscribeProfile()
     }
 
@@ -115,13 +111,19 @@ final class AccountMigrationModel: ObservableObject, AvatarViewDataModel {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
 
-            if let imageString = profile.photo,
-               let image = imageString.createImage(size: self.avatarSize * 2) {
-                self.profileImage = image
+            if let data = profile.photo?.toImageData(),
+               let image = self.profileService.getAvatarFor(data, size: self.size.points) {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.avatar = image
+                }
             }
 
             if let name = profile.alias {
-                self.profileName = name
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.profileName = name
+                }
             }
         }
     }

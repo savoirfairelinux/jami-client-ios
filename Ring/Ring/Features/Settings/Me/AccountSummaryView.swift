@@ -29,9 +29,6 @@ struct AccountSummaryView: View {
     @SwiftUI.State private var showEditPrpofile = false
     @SwiftUI.State private var showAccountRegistration = false
     @SwiftUI.State private var showQRcode = false
-
-    let avatarSize: CGFloat = 60
-
     init(injectionBag: InjectionBag, account: AccountModel) {
         _model = StateObject(wrappedValue:
                                 AccountSummaryVM(injectionBag: injectionBag,
@@ -152,7 +149,7 @@ struct AccountSummaryView: View {
     func profileSection() -> some View {
         Section(header: Text(L10n.AccountPage.profileHeader)) {
             HStack {
-                AvatarImageView(model: model, width: avatarSize, height: avatarSize)
+                AvatarSwiftUIView(source: model)
                 Spacer()
                     .frame(width: 15)
                 profileName()
@@ -204,13 +201,13 @@ struct AccountSummaryView: View {
     func usernameView() -> some View {
         if model.account.isJams {
             return AnyView(
-                Text(model.username ?? "")
+                Text(model.registeredName)
                     .conditionalTextSelection()
             )
         }
-        if let name = model.username {
+        if !model.registeredName.isEmpty {
             return AnyView(
-                Text(name)
+                Text(model.registeredName)
                     .conditionalTextSelection()
             )
         } else {

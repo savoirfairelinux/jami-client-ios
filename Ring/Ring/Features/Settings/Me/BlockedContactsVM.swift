@@ -22,11 +22,7 @@ import UIKit
 import SwiftUI
 import RxSwift
 
-class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel {
-
-    @Published var profileImage: UIImage?
-    @Published var profileName = ""
-    @Published var username: String?
+class BlockedContactsRowVM: AvatarProvider, Identifiable {
 
     let profileService: ProfilesService
     let nameService: NameService
@@ -35,8 +31,6 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
     let account: AccountModel
     let contact: ContactModel
     let id: String
-
-    let avatarSize: CGFloat = Constants.defaultAvatarSize
 
     let disposeBag = DisposeBag()
 
@@ -48,6 +42,7 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
         self.account = account
         self.contact = contact
         self.id = contact.hash
+        super.init(profileService: injectionBag.profileService, size: Constants.AvatarSize.default55)
 
         self.getProfile()
         self.getRegisteredName()
@@ -59,18 +54,19 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
                 .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { [weak self ](profile) in
                     guard let self = self else { return }
-                    // The view size is avatarSize. Create a larger image for better resolution.
-                    if let avatar = profile.photo,
-                       let image = avatar.createImage(size: self.avatarSize * 2) {
+                    let decodeSize = max(self.size.points * 2, Constants.defaultAvatarSize * 2)
+                    if let data = profile.photo?.toImageData(),
+                       let image = self.profileService.getAvatarFor(data, size: decodeSize) {
                         DispatchQueue.main.async { [weak self] in
                             guard let self = self else { return }
-                            self.profileImage = image
+                            self.avatar = image
                         }
                     }
-                    if let alias = profile.alias {
+
+                    if let name = profile.alias {
                         DispatchQueue.main.async { [weak self] in
                             guard let self = self else { return }
-                            self.profileName = alias
+                            self.profileName = name
                         }
                     }
                 })
@@ -82,7 +78,7 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
         if let registeredName = contact.userName, !registeredName.isEmpty {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.username = registeredName
+                self.registeredName = registeredName
             }
         } else {
             self.nameService.usernameLookupStatus.single()
@@ -96,7 +92,7 @@ class BlockedContactsRowVM: ObservableObject, Identifiable, AvatarViewDataModel 
                     if let name = lookupNameResponse.name, !name.isEmpty {
                         DispatchQueue.main.async { [weak self] in
                             guard let self = self else { return }
-                            self.username = name
+                            self.registeredName = name
                             contact.userName = name
                         }
                     }
