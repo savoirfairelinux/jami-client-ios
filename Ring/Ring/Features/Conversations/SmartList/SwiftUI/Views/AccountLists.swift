@@ -126,11 +126,7 @@ struct AccountRowView: View {
     let cornerRadius: CGFloat = 8
     var body: some View {
         HStack(spacing: 0) {
-            Image(uiImage: accountRow.avatar)
-                .resizable()
-                .scaledToFill()
-                .frame(width: accountRow.dimensions.imageSize, height: accountRow.dimensions.imageSize)
-                .clipShape(Circle())
+            AvatarSwiftUIView(source: accountRow)
             Spacer().frame(width: accountRow.dimensions.spacing)
             VStack(alignment: .leading) {
                 Text(accountRow.bestName)

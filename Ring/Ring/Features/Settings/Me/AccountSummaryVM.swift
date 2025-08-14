@@ -38,20 +38,13 @@ class AccountStatePublisher: Stateable {
     }
 }
 
-class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
+class AccountSummaryVM: AvatarProvider, AccountProfileObserver {
+
     let account: AccountModel
-
-    // profile
-    @Published var profileImage: UIImage?
-    @Published var profileName: String = ""
-
-    @Published var username: String?
 
     // account status
     @Published var accountStatus: String = ""
     @Published var accountEnabled: Bool
-
-    @Published var jamiId: String = ""
 
     let avatarSize: CGFloat = 100
 
@@ -61,12 +54,16 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
     let profileService: ProfilesService
     let injectionBag: InjectionBag
 
+    var bestName: String = ""
+    var profileDisposeBag = DisposeBag()
+    var selectedAccount: String?
+
     init(injectionBag: InjectionBag, account: AccountModel) {
         self.account = account
         self.accountService = injectionBag.accountService
         self.profileService = injectionBag.profileService
         self.injectionBag = injectionBag
-        self.jamiId = account.jamiId
+        self.selectedAccount = account.id
 
         // account status
         if let details = account.details {
@@ -75,23 +72,12 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
         } else {
             accountEnabled = false
         }
+        super.init(profileService: injectionBag.profileService, size: Constants.AvatarSize.account60)
+        self.jamiId = account.jamiId
         self.accountStatus = self.getAccountStatus(state: account.status)
         self.subscribeStatus()
-
-        self.subscribeProfile()
-        self.username = extractUsername()
-    }
-
-    func extractUsername() -> String? {
-        if !account.registeredName.isEmpty {
-            return account.registeredName
-        }
-        if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-           let accountName = userNameData[account.id] as? String,
-           !accountName.isEmpty {
-            return accountName
-        }
-        return nil
+        self.updateProfileDetails(account: account)
+        self.registeredName = resolveAccountName(from: self.account)
     }
 
     var accountInfoToShare: String {
@@ -101,7 +87,7 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
     func nameRegistered() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.username = self.extractUsername()
+            self.registeredName = resolveAccountName(from: self.account)
         }
     }
 
@@ -138,35 +124,6 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
             let accountId: String = remainingAccounts.first?.id ?? ""
             return ("", .needAccountMigration(accountId: accountId))
         }
-    }
-}
-
-// MARK: - Account Profile
-extension AccountSummaryVM {
-
-    func subscribeProfile() {
-        self.profileService.getAccountProfile(accountId: account.id)
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe { [weak self] profile in
-                guard let self = self else { return }
-                // The view size is avatarSize. Create a larger image for better resolution.
-                if let imageString = profile.photo,
-                   let image = imageString.createImage(size: self.avatarSize * 2) {
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else { return }
-                        self.profileImage = image
-                    }
-                }
-
-                if let name = profile.alias {
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else { return }
-                        self.profileName = name
-                    }
-                }
-
-            }
-            .disposed(by: disposeBag)
     }
 }
 

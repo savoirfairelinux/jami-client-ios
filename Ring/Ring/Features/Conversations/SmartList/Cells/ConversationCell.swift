@@ -104,7 +104,7 @@ class ConversationCell: UITableViewCell, NibReusable {
 
                 self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
                 self?.avatarView.addSubview(AvatarView(profileImageData: profileData.element?.0,
-                                                       username: data,
+                                                       username: data, isGroup: false,
                                                        size: self?.avatarSize ?? 50))
             })
             .disposed(by: self.disposeBag)

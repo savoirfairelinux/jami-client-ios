@@ -1,7 +1,6 @@
 /*
- *  Copyright (C) 2024 Savoir-faire Linux Inc.
+ *  Copyright (C) 2024 - 2025 Savoir-faire Linux Inc.
  *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

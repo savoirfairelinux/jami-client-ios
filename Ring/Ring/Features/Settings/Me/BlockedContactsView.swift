@@ -41,7 +41,7 @@ struct BlockedContactRowView: View {
 
     var body: some View {
         HStack {
-            AvatarImageView(model: model, width: model.avatarSize, height: model.avatarSize)
+            AvatarSwiftUIView(source: model)
 
             Spacer()
                 .frame(width: 15)
@@ -53,8 +53,8 @@ struct BlockedContactRowView: View {
                         .conditionalTextSelection()
                         .truncationMode(.middle)
                 }
-                if let username = model.username {
-                    Text(username)
+                if !model.registeredName.isEmpty {
+                    Text(model.registeredName)
                         .font(model.profileName.isEmpty ? .footnote : .body)
                         .lineLimit(1)
                         .conditionalTextSelection()

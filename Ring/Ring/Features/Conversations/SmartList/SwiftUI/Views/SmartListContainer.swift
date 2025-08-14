@@ -352,11 +352,7 @@ struct CurrentAccountButton: View {
     @ObservedObject var model: AccountsViewModel
     var body: some View {
         HStack(spacing: 0) {
-            Image(uiImage: model.avatar)
-                .resizable()
-                .scaledToFill()
-                .frame(width: model.dimensions.imageSize, height: model.dimensions.imageSize)
-                .clipShape(Circle())
+            AvatarSwiftUIView(source: model)
                 .accessibilityHidden(true) // Prevents duplicate announcements
 
             Spacer().frame(width: model.dimensions.spacing)
