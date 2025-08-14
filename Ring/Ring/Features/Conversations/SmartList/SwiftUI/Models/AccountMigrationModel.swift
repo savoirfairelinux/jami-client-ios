@@ -31,30 +31,28 @@ enum MigrationError: LocalizedError {
     }
 }
 
-final class AccountMigrationModel: ObservableObject, AvatarViewDataModel {
-    @Published var profileImage: UIImage?
-    @Published var profileName: String = ""
-    @Published var username: String?
+final class AccountMigrationModel: AvatarProvider, AccountProfileObserver {
+    var bestName: String = ""
+
     @Published var migrationCompleted: Bool = false
     @Published var error: String?
-    @Published var jamiId: String = ""
     @Published var needsPassword: Bool = false
     @Published var isLoading: Bool = false
 
-    let avatarSize: CGFloat = 150
     private(set) var selectedAccount: String?
 
     private let accountService: AccountsService
-    private let profileService: ProfilesService
+    internal let profileService: ProfilesService
     private let accountId: String
     private let disposeBag = DisposeBag()
-    private let profileDisposeBag = DisposeBag()
+    var profileDisposeBag = DisposeBag()
 
     init(accountId: String, accountService: AccountsService, profileService: ProfilesService) {
         self.accountId = accountId
         self.selectedAccount = accountId
         self.accountService = accountService
         self.profileService = profileService
+        super.init(profileService: profileService, size: Constants.AvatarSize.account100)
         self.updateAccountInfo()
     }
 
@@ -98,50 +96,15 @@ final class AccountMigrationModel: ObservableObject, AvatarViewDataModel {
 
         jamiId = account.jamiId
         needsPassword = AccountModelHelper(withAccount: account).hasPassword
-        username = extractUsername()
-        subscribeProfile()
-    }
-
-    private func subscribeProfile() {
-        profileService.getAccountProfile(accountId: accountId)
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe { [weak self] profile in
-                self?.updateProfileInfo(profile)
-            }
-            .disposed(by: profileDisposeBag)
-    }
-
-    private func updateProfileInfo(_ profile: Profile) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-
-            if let imageString = profile.photo,
-               let image = imageString.createImage(size: self.avatarSize * 2) {
-                self.profileImage = image
-            }
-
-            if let name = profile.alias {
-                self.profileName = name
-            }
-        }
+        self.updateProfileDetails(account: account)
+        registeredName = extractUsername() ?? ""
     }
 
     private func extractUsername() -> String? {
         guard let account = accountService.getAccount(fromAccountId: accountId) else {
             return nil
         }
-
-        if !account.registeredName.isEmpty {
-            return account.registeredName
-        }
-
-        if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-           let accountName = userNameData[account.id] as? String,
-           !accountName.isEmpty {
-            return accountName
-        }
-
-        return nil
+        return resolveAccountName(from: account)
     }
 
     private func handleMigrationResult(_ success: Bool) {

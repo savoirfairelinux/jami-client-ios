@@ -164,26 +164,14 @@ struct ConversationRowView: View {
     @ObservedObject var model: ConversationViewModel
     var withSeparator: Bool = true
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
                 ZStack(alignment: .bottomTrailing) {
-                    if let image = model.avatar {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize, alignment: .center)
-                            .clipShape(Circle())
-                    } else {
-                        Image(uiImage: model.getDefaultAvatar())
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize, alignment: .center)
-                            .clipShape(Circle())
-                    }
+                    AvatarSwiftUIView(source: model.avatarProvider)
                     presenceIndicator
                 }
                 Spacer()
-                    .frame(width: 15)
+                    .frame(width: 12)
                 VStack(alignment: .leading) {
                     Text(model.name)
                         .fontWeight(model.unreadMessages > 0 ? .bold : .regular)
