@@ -22,12 +22,12 @@ import Foundation
 
 // Colors from material.io
 let avatarColors = [
+    UIColor(hexString: "#2196f3")!, // Blue
     UIColor(hexString: "#f44336")!, // Red
     UIColor(hexString: "#e91e63")!, // Pink
     UIColor(hexString: "#9c27b0")!, // Purple
     UIColor(hexString: "#673ab7")!, // Deep Purple
     UIColor(hexString: "#3f51b5")!, // Indigo
-    UIColor(hexString: "#2196f3")!, // Blue
     UIColor(hexString: "#00bcd4")!, // Cyan
     UIColor(hexString: "#009688")!, // Teal
     UIColor(hexString: "#4caf50")!, // Green

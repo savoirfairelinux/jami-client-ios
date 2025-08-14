@@ -122,25 +122,65 @@ enum CallAction: State {
     var alterButtonInfo: ButtonInfo {
         switch self {
         case .toggleAudio:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "mic.slash", accessibilityLabelValue: L10n.Accessibility.Calls.Alter.toggleAudio, action: self)
+            return ButtonInfo(background: Color(UIColor.darkGray),
+                              stroke: Color(UIColor.darkGray),
+                              name: "mic.slash",
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.toggleAudio,
+                              action: self)
         case .toggleVideo:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "video.slash", accessibilityLabelValue: L10n.Accessibility.Calls.Alter.toggleVideo, action: self)
+            return ButtonInfo(background: Color(UIColor.darkGray),
+                              stroke: Color(UIColor.darkGray),
+                              name: "video.slash",
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.toggleVideo,
+                              action: self)
         case .pauseCall:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "play", accessibilityLabelValue: L10n.Accessibility.Calls.Alter.pauseCall, action: self)
+            return ButtonInfo(background: Color(UIColor.darkGray),
+                              stroke: Color(UIColor.darkGray),
+                              name: "play",
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.pauseCall,
+                              action: self)
         case .hangUpCall:
-            return ButtonInfo(background: .red, stroke: .red, name: "phone.down", accessibilityLabelValue: L10n.Accessibility.Calls.Alter.hangUpCall, action: self)
+            return ButtonInfo(background: .red,
+                              stroke: .red,
+                              name: "phone.down",
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.hangUpCall,
+                              action: self)
         case .addParticipant:
-            return ButtonInfo(background: .clear, stroke: .white, name: "person.fill.badge.plus", accessibilityLabelValue: L10n.Accessibility.Calls.Alter.addParticipant, action: self)
+            return ButtonInfo(background: .clear,
+                              stroke: .white,
+                              name: "person.fill.badge.plus",
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.addParticipant,
+                              action: self)
         case .switchCamera:
-            return ButtonInfo(background: .clear, stroke: .white, name: "arrow.triangle.2.circlepath.camera", accessibilityLabelValue: L10n.Accessibility.Calls.Alter.switchCamera, action: self)
+            return ButtonInfo(background: .clear,
+                              stroke: .white,
+                              name: "arrow.triangle.2.circlepath.camera",
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.switchCamera,
+                              action: self)
         case .toggleSpeaker:
-            return ButtonInfo(background: .clear, stroke: .white, name: "speaker.wave.3", accessibilityLabelValue: L10n.Accessibility.Calls.Alter.toggleSpeaker, action: self)
+            return ButtonInfo(background: .clear,
+                              stroke: .white,
+                              name: "speaker.wave.3",
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.toggleSpeaker,
+                              action: self)
         case .openConversation:
-            return ButtonInfo(background: .clear, stroke: .white, name: "message", accessibilityLabelValue: L10n.Accessibility.Calls.Alter.openConversation, action: self)
+            return ButtonInfo(background: .clear,
+                              stroke: .white,
+                              name: "message",
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.openConversation,
+                              action: self)
         case .showDialpad:
-            return ButtonInfo(background: .clear, stroke: .white, name: "dialpad", accessibilityLabelValue: L10n.Accessibility.Calls.Alter.showDialpad, action: self)
+            return ButtonInfo(background: .clear,
+                              stroke: .white,
+                              name: "dialpad",
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.showDialpad,
+                              action: self)
         case .raiseHand:
-            return ButtonInfo(background: Color(UIColor.darkGray), stroke: Color(UIColor.darkGray), name: "hand.raised", accessibilityLabelValue: L10n.Accessibility.Calls.Alter.raiseHand, action: self)
+            return ButtonInfo(background: Color(UIColor.darkGray),
+                              stroke: Color(UIColor.darkGray),
+                              name: "hand.raised",
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.raiseHand,
+                              action: self)
         }
     }
 }

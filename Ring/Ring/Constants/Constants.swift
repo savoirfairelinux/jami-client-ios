@@ -205,7 +205,21 @@ public class Constants: NSObject {
 
     public static let MAX_PROFILE_IMAGE_SIZE: CGFloat = 512
 
-    public static let defaultAvatarSize: CGFloat = 55
+    enum AvatarSize: CGFloat {
+        case conversation20 = 20
+        case conversation30 = 30
+        case medium40 = 40
+        case default55 = 55
+        case conversationInfo80 = 80
+        case call160 = 160
+        case account100 = 100
+        case account60 = 60
+        case account28 = 28
+
+        var points: CGFloat { rawValue }
+    }
+
+    public static let defaultAvatarSize: CGFloat = AvatarSize.default55.points
 
     public static let versionName = "Εἰρήνη"
 }

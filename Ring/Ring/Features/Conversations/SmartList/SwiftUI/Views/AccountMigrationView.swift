@@ -76,7 +76,7 @@ struct AccountMigrationView: View {
 
     private var profileSection: some View {
         VStack(spacing: 20) {
-            AvatarImageView(model: model, width: 100, height: 100, textSize: 48)
+            AvatarSwiftUIView(source: model)
             if !model.profileName.isEmpty {
                 Text(model.profileName)
                     .font(.headline)
@@ -86,11 +86,11 @@ struct AccountMigrationView: View {
 
     private var accountInfoSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            if let username = model.username {
+            if !model.registeredName.isEmpty {
                 HStack {
                     Text(L10n.Global.name + ":")
                         .fontWeight(.medium)
-                    Text(username)
+                    Text(model.registeredName)
                         .multilineTextAlignment(.leading)
                     Spacer()
                 }

@@ -25,8 +25,10 @@ struct MessageBubbleView: View {
     @StateObject var model: MessageContentVM
     @SwiftUI.State private var frame: CGRect = .zero
     @SwiftUI.State private var presentMenu = false
-    @Environment(\.openURL) var openURL
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.openURL)
+    var openURL
+    @Environment(\.colorScheme)
+    var colorScheme
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     let padding: CGFloat = 12
 
