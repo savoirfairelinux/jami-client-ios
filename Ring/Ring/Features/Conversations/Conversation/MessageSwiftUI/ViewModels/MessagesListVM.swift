@@ -1,11 +1,5 @@
 /*
- *  Copyright (C) 2017-2022 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
- *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
- *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
- *  Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,7 +24,6 @@ import SwiftUI
 import SwiftyBeaver
 
 enum MessageInfo: State {
-    case updateAvatar(jamiId: String, message: AvatarImageObserver)
     case updateRead(messageId: String, message: MessageReadObserver)
     case updateDisplayname(jamiId: String, message: NameObserver)
 }
@@ -91,7 +84,7 @@ enum MessagePanelState: State {
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class MessagesListVM: ObservableObject {
+class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     // view properties
     var contextMenuModel = ContextMenuVM()
@@ -154,6 +147,7 @@ class MessagesListVM: ObservableObject {
     var currentlyTypingUsers: Set<String> = []
     var callBannerViewModel: CallBannerViewModel
     private let injectionBag: InjectionBag
+    private var avatarFactory: AvatarProviderFactory?
 
     // state
     private let contextStateSubject = PublishSubject<State>()
@@ -177,15 +171,16 @@ class MessagesListVM: ObservableObject {
     var lastMessageBeforeScroll: String?
 
     var loading = true // to avoid a new loading while previous one still executing
-    var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: BehaviorRelay<UIImage?>]())
+    var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: BehaviorRelay<Data?>]())
     var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: String]())
     // last read
     // dictionary of participant id and last read message Id
     var lastReadMessageForParticipant = ConcurentDictionary(name: "com.ReadMessageForParticipantAccesDictionary",
                                                             dictionary: [String: String]())
     // dictionary of message id and array of participants for whom the message is last read
+    // Track last-read participant IDs per message; view will render providers for these IDs
     var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
-                                       dictionary: [String: BehaviorRelay<[String: UIImage]?>]())
+                                       dictionary: [String: BehaviorRelay<[String]>]())
     private let subscriptionQueue = DispatchQueue(label: "com.myapp.subscriptionQueue", qos: .userInitiated)
     var lastDelivered: MessageContainerModel? {
         didSet {
@@ -210,6 +205,34 @@ class MessagesListVM: ObservableObject {
             self.updateLastDisplayed()
             self.callBannerViewModel = CallBannerViewModel(injectionBag: self.injectionBag, conversation: self.conversation, state: self.messagePanelStateSubject)
         }
+    }
+
+    // MARK: - Avatar/Name relay accessors for SwiftUI views
+    func avatarRelay(for jamiId: String) -> BehaviorRelay<Data?> {
+        if let relay = self.avatars.get(key: jamiId) as? BehaviorRelay<Data?> {
+            return relay
+        }
+        let relay = BehaviorRelay<Data?>(value: nil)
+        self.avatars.set(value: relay, for: jamiId)
+        self.getInformationForContact(id: jamiId)
+        return relay
+    }
+
+    func nameRelay(for jamiId: String) -> BehaviorRelay<String> {
+        if let relay = self.names.get(key: jamiId) as? BehaviorRelay<String> {
+            return relay
+        }
+        let relay = BehaviorRelay<String>(value: "")
+        self.names.set(value: relay, for: jamiId)
+        self.getInformationForContact(id: jamiId)
+        return relay
+    }
+
+    func makeAvatarFactory() -> AvatarProviderFactory {
+        if let factory = avatarFactory { return factory }
+        let factory = AvatarProviderFactory(relayProvider: self, profileService: profileService)
+        avatarFactory = factory
+        return factory
     }
 
     func invalidateAndSetupConversationSubscriptions() {
@@ -672,7 +695,7 @@ class MessagesListVM: ObservableObject {
     }
 
     private func updateLastRead(message: MessageContainerModel, participantId: String) {
-        guard !message.message.incoming, message.message.status == .displayed,
+        guard !message.message.incoming, message.message.statusForParticipantValue(participantId) == .displayed,
               let newIndex = self.getMessageIndex(messageId: message.id) else { return }
         /*
          If there is no current last read message for the participant, set this
@@ -711,7 +734,7 @@ class MessagesListVM: ObservableObject {
     }
 
     private func updateLastRead(message: MessageContainerModel) {
-        for status in message.message.statusForParticipant {
+        for status in message.message.statusForParticipantSnapshot() {
             updateLastRead(message: message, participantId: status.key)
         }
     }
@@ -740,8 +763,6 @@ class MessagesListVM: ObservableObject {
         container.messageInfoState.subscribe { [weak self, weak container] state in
             guard let self = self, let container = container, let state = state as? MessageInfo else { return }
             switch state {
-            case .updateAvatar(let jamiId, let message):
-                self.getAvatar(jamiId: jamiId, message: message, messageId: container.id)
             case .updateRead(let messageId, let message):
                 self.getLastRead(message: message, messageId: messageId)
             case .updateDisplayname(let jamiId, let message):
@@ -1051,20 +1072,11 @@ class MessagesListVM: ObservableObject {
         }
     }
 
-    private func updateAvatar(image: UIImage, jamiId: String) {
+    private func updateAvatar(imageData: Data, jamiId: String) {
         // Update the avatar observable if it exists
-        if let avatarObservable = avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
-            avatarObservable.accept(image)
+        if let avatarObservable = avatars.get(key: jamiId) as? BehaviorRelay<Data?> {
+            avatarObservable.accept(imageData)
         }
-
-        // Update the last read avatars if applicable
-        guard let lastReadMessageId = lastReadMessageForParticipant.get(key: jamiId) as? String,
-              let lastReadAvatars = lastRead.get(key: lastReadMessageId) as? BehaviorRelay<[String: UIImage]> else {
-            return
-        }
-        var value = lastReadAvatars.value
-        value[jamiId] = image
-        lastReadAvatars.accept(value)
     }
 
     private func nameLookup(id: String) {
@@ -1083,8 +1095,6 @@ class MessagesListVM: ObservableObject {
                 } else {
                     self.updateName(name: id, jamiId: id)
                 }
-                // Create an avatar if it has not been set yet.
-                self.setAvatarIfNeededFor(jamiId: id, withDefault: true)
             })
             .disposed(by: self.disposeBag)
         self.nameService.lookupAddress(withAccount: self.conversation.accountId, nameserver: "", address: id)
@@ -1111,54 +1121,15 @@ class MessagesListVM: ObservableObject {
                     if let profileName = profile.alias, !profileName.isEmpty {
                         self.updateName(name: profileName, jamiId: id)
                     }
-                    // Set avatar
-                    // The view has a max size 50. Create a larger image for better resolution.
-                    if let photo = profile.photo,
-                       let image = photo.createImage(size: 100) {
-                        self.updateAvatar(image: image, jamiId: id)
-                    } else {
-                        self.setAvatarIfNeededFor(jamiId: id, withDefault: false)
+                    if let data = profile.photo?.toImageData() {
+                        self.updateAvatar(imageData: data, jamiId: id)
                     }
-                    // Perform a name lookup if the profile does not have a name
                     let name = (self.names.get(key: id) as? BehaviorRelay<String>)?.value
                     if name?.isEmpty ?? true {
                         self.nameLookup(id: id)
                     }
                 })
                 .disposed(by: self.disposeBag)
-        }
-    }
-
-    private func setAvatarIfNeededFor(jamiId: String, withDefault: Bool) {
-        // Attempt to retrieve the observable avatar and proceed only if it's nil (no image set yet).
-        guard let observableAvatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?>,
-              observableAvatar.value == nil else { return }
-
-        // Retrieve the name associated with the jamiId, defaulting to an empty string if not found.
-        let name = (self.names.get(key: jamiId) as? BehaviorRelay<String>)?.value ?? ""
-
-        // If the name is empty and a default avatar is not requested, exit early.
-        if name.isEmpty && !withDefault { return }
-
-        let avatarImage = UIImage.createContactAvatar(username: name, size: CGSize(width: 30, height: 30))
-        self.updateAvatar(image: avatarImage, jamiId: jamiId)
-    }
-
-    private func getAvatar(jamiId: String, message: AvatarImageObserver, messageId: String) {
-        // check if we already have the avatar for a contact
-        if let avatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
-            message.subscribeToAvatarObservable(avatar)
-            // check if we need avatar for local account
-        } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId, accountJamiId == jamiId {
-            message.subscribeToAvatarObservable(BehaviorRelay(value: self.currentAccountAvatar))
-        } else {
-            // create entrance for participant and start contact fetching
-            let imageObservable = BehaviorRelay<UIImage?>(value: nil)
-            self.avatars.set(value: imageObservable, for: jamiId)
-            if let avatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
-                message.subscribeToAvatarObservable(avatar)
-            }
-            self.getInformationForContact(id: jamiId)
         }
     }
 
@@ -1176,10 +1147,10 @@ class MessagesListVM: ObservableObject {
     }
 
     private func getLastRead(message: MessageReadObserver, messageId: String) {
-        if let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> {
-            message.subscribeToReadObservable(lastReadAvatars)
+        if let lastReadIds = self.lastRead.get(key: messageId) as? BehaviorRelay<[String]> {
+            message.subscribeToReadObservable(lastReadIds)
         } else {
-            let observableValue = BehaviorRelay(value: [String: UIImage]())
+            let observableValue = BehaviorRelay(value: [String]())
             self.lastRead.set(value: observableValue, for: messageId)
             message.subscribeToReadObservable(observableValue)
             self.updateSubscriptionLastRead(messageId: messageId)
@@ -1187,8 +1158,7 @@ class MessagesListVM: ObservableObject {
     }
 
     private func updateSubscriptionLastRead(messageId: String) {
-        // get avatar images for last read
-        var images = [String: UIImage]()
+        var ids = [String]()
 
         guard let participants = self.lastReadMessageForParticipant.filter({ participant in
             if let id = participant.value as? String {
@@ -1196,28 +1166,22 @@ class MessagesListVM: ObservableObject {
             }
             return false
         }) as? [String: String], !participants.isEmpty else {
-            if let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> {
-                lastReadAvatars.accept(images)
+            if let lastReadIds = self.lastRead.get(key: messageId) as? BehaviorRelay<[String]> {
+                lastReadIds.accept(ids)
             }
             return
         }
 
-        if self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> == nil {
-            let observableValue = BehaviorRelay(value: [String: UIImage]())
+        if self.lastRead.get(key: messageId) as? BehaviorRelay<[String]> == nil {
+            let observableValue = BehaviorRelay(value: [String]())
             self.lastRead.set(value: observableValue, for: messageId)
         }
-        guard let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> else { return }
+        guard let lastReadIds = self.lastRead.get(key: messageId) as? BehaviorRelay<[String]> else { return }
         for participant in participants {
-            if let avatar = self.avatars.get(key: participant.key) as? UIImage {
-                images[participant.key] = avatar
-            } else {
-                images[participant.key] = UIImage()
-                let imageObservable = BehaviorRelay<UIImage?>(value: nil)
-                self.avatars.set(value: imageObservable, for: participant.key)
-                self.getInformationForContact(id: participant.key)
-            }
+            let jamiId = participant.key
+            ids.append(jamiId)
         }
-        lastReadAvatars.accept(images)
+        lastReadIds.accept(ids)
     }
 }
 
@@ -1226,9 +1190,11 @@ extension MessagesListVM {
 
     func updateContacLocationSharingImage() {
         if let jamiId = self.conversation.getParticipants().first?.jamiId {
-            if let avatar = self.avatars.get(key: jamiId) as? UIImage {
+            if let dataRelay = self.avatars.get(key: jamiId) as? BehaviorRelay<Data?>,
+               let data = dataRelay.value,
+               let image = data.convertToImage(size: 16) {
                 DispatchQueue.main.async { [weak self] in
-                    self?.contactAvatar = avatar
+                    self?.contactAvatar = image
                     self?.updateCoordinatesList()
                 }
             }
