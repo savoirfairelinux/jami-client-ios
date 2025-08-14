@@ -33,6 +33,10 @@ extension String {
         return UIImage.createResizedImage(imageSource: imageSource, size: targetSize)
     }
 
+    func toImageData() -> Data? {
+        return Data(base64Encoded: self, options: .ignoreUnknownCharacters)
+    }
+
     func createImage(size: CGFloat) -> UIImage? {
         let scaledSize = UIScreen.main.scale * size
         return createResizedImage(targetSize: scaledSize)

@@ -93,8 +93,8 @@ struct ExpandableParticipantView: View {
         return ZStack(alignment: .bottomLeading) {
             ZStack(alignment: .center) {
                 if isVideoMuted {
-                    Avatar(participant: model)
-                        .frame(width: layerWidth, height: layerHeight)
+                    let targetSize = quantizedAvatarSize(from: min(layerWidth, layerHeight))
+                    AvatarSwiftUIView(source: model.avatarProvider(for: targetSize))
                         .offset(x: offsetX)
                 } else {
                     DisplayLayerView(displayLayer: $model.mainDisplayLayer, layerWidth: $layerWidth, layerHeight: $layerHeight)
@@ -159,8 +159,8 @@ struct ParticipantView: View {
             ZStack(alignment: .bottomLeading) {
                 ZStack(alignment: .center) {
                     if model.isVideoMuted {
-                        let size = min(width, height) - 10
-                        Avatar(size: size, participant: model)
+                        let targetSize = quantizedAvatarSize(from: min(width, height))
+                        AvatarSwiftUIView(source: model.avatarProvider(for: targetSize))
                     } else {
                         DisplayLayerView(displayLayer: $model.gridDisplayLayer, layerWidth: $width, layerHeight: $height)
                             .frame(width: width, height: height)
@@ -175,6 +175,18 @@ struct ParticipantView: View {
             .padding(2)
         }
     }
+}
+
+private func quantizedAvatarSize(from edge: CGFloat) -> Constants.AvatarSize {
+    let buckets: [Constants.AvatarSize] = [
+        Constants.AvatarSize.conversation20,
+        Constants.AvatarSize.conversation30,
+        Constants.AvatarSize.medium40,
+        Constants.AvatarSize.default55,
+        Constants.AvatarSize.call160
+    ]
+    let candidate = buckets.last(where: { $0.points <= edge }) ?? .conversation20
+    return candidate
 }
 
 struct ParticipantInfoView: View {

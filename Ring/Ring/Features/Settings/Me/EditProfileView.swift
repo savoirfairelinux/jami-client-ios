@@ -27,7 +27,7 @@ struct EditProfileView: View {
     @ObservedObject var accountModel: AccountSummaryVM
 
     init(accountModel: AccountSummaryVM, isPresented: Binding<Bool>) {
-        _model = StateObject(wrappedValue: EditProfileVM(injectionBag: accountModel.injectionBag, account: accountModel.account, profileImage: accountModel.profileImage, profileName: accountModel.profileName, username: accountModel.username))
+        _model = StateObject(wrappedValue: EditProfileVM(injectionBag: accountModel.injectionBag, account: accountModel.account, profileImage: accountModel.avatar, profileName: accountModel.profileName, username: accountModel.registeredName))
         self.accountModel = accountModel
         _isPresented = isPresented
         self.avatarSize = accountModel.avatarSize
@@ -47,7 +47,7 @@ struct EditProfileView: View {
                     showingImagePicker = true
                 }, label: {
                     ZStack {
-                        AvatarImageView(model: model, width: avatarSize, height: avatarSize, textSize: 60)
+                        AvatarSwiftUIView(source: model)
                         Circle()
                             .fill(Color.black.opacity(0.5))
                             .frame(width: avatarSize, height: avatarSize)
@@ -73,7 +73,7 @@ struct EditProfileView: View {
                 }
                 .sheet(item: $imagePickerType) { type in
                     let sourceType: UIImagePickerController.SourceType = type == .picture ? .camera : .photoLibrary
-                    ImagePicker(sourceType: sourceType, showingType: $imagePickerType, image: $model.profileImage)
+                    ImagePicker(sourceType: sourceType, showingType: $imagePickerType, image: $model.avatar)
                 }
 
                 Spacer()
@@ -102,7 +102,7 @@ struct EditProfileView: View {
                 }),
                 trailing: Button(action: {
                     model.updateProfile()
-                    accountModel.profileImage = model.profileImage
+                    accountModel.avatar = model.avatar
                     isPresented = false
                 }, label: {
                     Text(L10n.Global.save)

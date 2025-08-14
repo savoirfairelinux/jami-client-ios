@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2023 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2023 - 2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +21,7 @@ import SwiftUI
 import RxSwift
 import Combine
 
-class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver, NameObserver {
+class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, NameObserver {
     @Published var username: String = "" {
         didSet {
             updateInReplyMessage()
@@ -32,7 +30,6 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarI
 
     var styling: MessageStyling = MessageStyling()
 
-    @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""
 
     let imageMaxHeight: CGFloat = 100

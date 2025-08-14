@@ -30,7 +30,7 @@ class ParticipantProfileInfo {
     private let nameService: NameService
     private let disposeBag = DisposeBag()
 
-    let avatar = BehaviorRelay<UIImage?>(value: nil)
+    let avatarData = BehaviorRelay<Data?>(value: nil)
     let displayName = BehaviorRelay<String>(value: "")
     let avatarSize = CGSize(width: 40, height: 40)
 
@@ -57,8 +57,7 @@ class ParticipantProfileInfo {
                 guard let self = self else { return }
                 self.handleProfile(profile)
             } onError: { [weak self] _ in
-                guard let self = self else { return }
-                self.avatar.accept(UIImage.defaultJamiAvatarFor(profileName: "", account: account, size: self.avatarSize.width))
+                self?.handleProfileError()
             }
             .disposed(by: disposeBag)
     }
@@ -105,9 +104,6 @@ class ParticipantProfileInfo {
             .subscribe(onNext: { [weak self] response in
                 if let name = response.name, !name.isEmpty, self?.displayName.value != name {
                     self?.displayName.accept(name)
-                    if self?.avatar.value == nil {
-                        self?.avatar.accept(self?.createAvatar(for: name))
-                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -116,39 +112,42 @@ class ParticipantProfileInfo {
     }
 
     private func handleProfileError() {
-        if avatar.value == nil {
-            avatar.accept(self.createAvatar(for: self.participantUserName))
-        }
         if self.participantUserName.isEmpty {
             lookupNameAsync(accountId: self.accountService.currentAccount?.id ?? "")
         }
     }
 
     private func handleProfile(_ profile: Profile) {
-        guard let account = self.accountService.currentAccount else { return }
-        // The view has a size of avatarSize.width. Create a larger image for better resolution.
-        if let imageString = profile.photo, let image = imageString.createImage(size: avatarSize.width * 2) {
-            avatar.accept(image)
+        if let data = profile.photo?.toImageData() {
+            avatarData.accept(data)
         }
         if self.isLocalCall() {
-            if avatar.value == nil {
-                avatar.accept(UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: avatarSize.width))
-            }
-            self.displayName.accept(L10n.Account.me)
-        } else {
-            var displayName = self.participantUserName
-            if let name = profile.alias, !name.isEmpty {
-                displayName = name
-            }
-            if avatar.value == nil {
-                avatar.accept(self.createAvatar(for: displayName))
-            }
-            if displayName.isEmpty {
-                lookupNameAsync(accountId: account.id)
+            let name = resolveLocalAccountName(profile: profile)
+            if name.isEmpty {
+                self.displayName.accept(L10n.Account.me)
             } else {
-                self.displayName.accept(displayName)
+                self.displayName.accept("\(name) (" + L10n.Account.me + ")")
             }
+            return
         }
+
+        if let name = profile.alias, !name.isEmpty {
+            self.displayName.accept(name)
+        } else {
+            self.lookupNameAsync(accountId: self.accountService.currentAccount?.id ?? "")
+        }
+    }
+
+    private func resolveLocalAccountName(profile: Profile) -> String {
+        if let alias = profile.alias, !alias.isEmpty { return alias }
+        guard let account = self.accountService.currentAccount else { return "" }
+        if !account.registeredName.isEmpty { return account.registeredName }
+        if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+           let accountName = userNameData[account.id] as? String,
+           !accountName.isEmpty {
+            return accountName
+        }
+        return ""
     }
 
     private func createAvatar(for username: String) -> UIImage? {
