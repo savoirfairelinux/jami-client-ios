@@ -93,7 +93,8 @@ struct ExpandableParticipantView: View {
         return ZStack(alignment: .bottomLeading) {
             ZStack(alignment: .center) {
                 if isVideoMuted {
-                    Avatar(participant: model)
+                    AvatarSwiftUIView(source: model.avatarProvider)
+                    //Avatar(participant: model)
                         .frame(width: layerWidth, height: layerHeight)
                         .offset(x: offsetX)
                 } else {
@@ -160,7 +161,8 @@ struct ParticipantView: View {
                 ZStack(alignment: .center) {
                     if model.isVideoMuted {
                         let size = min(width, height) - 10
-                        Avatar(size: size, participant: model)
+                        AvatarSwiftUIView(source: model.avatarProvider)
+                        //Avatar(size: size, participant: model)
                     } else {
                         DisplayLayerView(displayLayer: $model.gridDisplayLayer, layerWidth: $width, layerHeight: $height)
                             .frame(width: width, height: height)
