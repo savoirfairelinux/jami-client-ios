@@ -77,9 +77,7 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
         accountView.idLabel.text = jamiId
         profile
             .map({ [weak self] accountProfile in
-                if let photo = accountProfile.photo,
-                   let data = NSData(base64Encoded: photo,
-                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?,
+                if let data = accountProfile.photo?.toImageData(),
                    let image = UIImage(data: data) {
                     return image
                 }

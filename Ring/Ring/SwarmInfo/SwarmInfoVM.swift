@@ -1,8 +1,6 @@
 /*
- * Copyright (C) 2022 Savoir-faire Linux Inc. *
+ * Copyright (C) 2022 - 2025 Savoir-faire Linux Inc. *
  *
- * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
- * Author: Binal Ahiya <binal.ahiya@savoirfairelinux.com>
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
@@ -26,7 +24,6 @@ class SwarmInfoVM: ObservableObject {
 
     @Published var participantsRows = [ParticipantRow]()
     @Published var selections: [String] = []
-    @Published var finalAvatar: UIImage = UIImage()
     @Published var title: String = ""
     @Published var description: String = ""
 
@@ -47,7 +44,7 @@ class SwarmInfoVM: ObservableObject {
 
     private let accountService: AccountsService
     private let nameService: NameService
-    private let profileService: ProfilesService
+    let profileService: ProfilesService
     private let conversationService: ConversationsService
     private let contactsService: ContactsService
     let injectionBag: InjectionBag
@@ -69,6 +66,8 @@ class SwarmInfoVM: ObservableObject {
         return members.filter({ $0.role == .admin }).contains(where: { $0.jamiId == jamiId })
     }
 
+    let provider: AvatarProvider
+
     // MARK: - Initialization
 
     init(with injectionBag: InjectionBag, swarmInfo: SwarmInfoProtocol) {
@@ -82,6 +81,7 @@ class SwarmInfoVM: ObservableObject {
 
         self.swarmInfo = swarmInfo
         self.conversation = swarmInfo.conversation
+        self.provider = AvatarProvider.from(swarmInfo: swarmInfo, profileService: self.profileService, size: SwarmInfoView.Layout.avatarSize)
 
         setupBindings()
     }
@@ -90,7 +90,7 @@ class SwarmInfoVM: ObservableObject {
 
     private func setupBindings() {
         Observable.combineLatest(
-            swarmInfo.finalAvatar,
+            swarmInfo.finalAvatarData,
             swarmInfo.finalTitle.startWith(swarmInfo.finalTitle.value),
             swarmInfo.description.startWith(swarmInfo.description.value),
             swarmInfo.color
@@ -98,8 +98,6 @@ class SwarmInfoVM: ObservableObject {
         .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] (newAvatar, newTitle, newDescription, newColor) in
             guard let self = self else { return }
-
-            self.finalAvatar = newAvatar
 
             if self.title != newTitle {
                 self.title = newTitle
@@ -199,7 +197,7 @@ class SwarmInfoVM: ObservableObject {
         var conversationInfo = conversationService.getConversationInfo(conversationId: conversationId, accountId: accountId)
         conversationInfo[ConversationAttributes.avatar.rawValue] = data.base64EncodedString()
         self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
-        self.finalAvatar = image
+        self.swarmInfo.avatarData.accept(data)
     }
 
     func updateSwarmColor(selectedColor: String) {

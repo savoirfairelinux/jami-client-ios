@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2022 - 2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -69,6 +67,7 @@ struct MessageRowView: View {
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
     @ObservedObject var model: MessageRowVM
+    @Environment(\.avatarProviderFactory) var avatarFactory: AvatarProviderFactory?
     var body: some View {
         VStack(alignment: .leading) {
             if model.shouldShowTimeString {
@@ -85,14 +84,12 @@ struct MessageRowView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
             } else if model.incoming {
                 HStack(alignment: .bottom) {
-                    if let avatar = model.avatarImage {
+                    if model.shouldDisplayAavatar,
+                       let factory = avatarFactory {
                         Spacer()
                             .frame(width: 10)
-                        Image(uiImage: avatar)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 30, height: 30)
-                            .cornerRadius(15)
+                            let jamiId = messageModel.message.uri.isEmpty ? messageModel.message.authorId : messageModel.message.uri
+                            AvatarSwiftUIView(source: factory.provider(for: jamiId, size: 30))
                         Spacer()
                             .frame(width: 10)
                     } else {
@@ -120,17 +117,15 @@ struct MessageRowView: View {
                     }
                 }.padding(.leading, 50)
             }
-            if let readImages = model.read, !readImages.isEmpty {
+            if let readIds = model.readIds, !readIds.isEmpty {
                 HStack(alignment: .top, spacing: -3) {
                     Spacer()
-                    ForEach(0..<readImages.count, id: \.self) { index in
-                        Image(uiImage: readImages[index])
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 20, height: 20)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(model.readBorderColor, lineWidth: 2))
-                            .zIndex(Double(readImages.count - index))
+                    ForEach(readIds.indices, id: \.self) { index in
+                        if let factory = avatarFactory {
+                            AvatarSwiftUIView(source: factory.provider(for: readIds[index], size: 20))
+                                .overlay(Circle().stroke(model.readBorderColor, lineWidth: 2))
+                                .zIndex(Double(readIds.count - index))
+                        }
                     }
                 }
                 .offset(x: 1)
