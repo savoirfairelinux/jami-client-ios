@@ -61,8 +61,8 @@ class RequestModel {
         self.participants = [ConversationParticipant(jamiId: jamiId)]
         self.receivedDate = receivedDate
         if let profile = VCardUtils.parseDataToProfile(data: payload) {
-            if let photo = profile.photo {
-                self.avatar = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data
+            if let data = profile.photo?.toImageData() {
+                self.avatar = data
             }
             if let name = profile.alias {
                 self.name = name
@@ -80,8 +80,8 @@ class RequestModel {
             if let vCardString = dictionary[RequestKey.payload.rawValue],
                let data = vCardString.data(using: String.Encoding.utf8), !data.isEmpty,
                let profile = VCardUtils.parseDataToProfile(data: data) {
-                if let photo = profile.photo {
-                    self.avatar = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data
+                if let data = profile.photo?.toImageData() {
+                    self.avatar = data
                 }
                 if let name = profile.alias {
                     self.name = name

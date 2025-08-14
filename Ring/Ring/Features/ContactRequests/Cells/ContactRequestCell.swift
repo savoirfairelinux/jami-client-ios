@@ -97,6 +97,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
                 .addSubview(
                     AvatarView(profileImageData: profileData.element?.0,
                                username: data,
+                               isGroup: false,
                                size: 50))
             return
         })

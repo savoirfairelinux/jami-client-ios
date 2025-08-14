@@ -53,6 +53,10 @@ class ContainerViewModel: ObservableObject {
     let callService: CallsService
     let accountService: AccountsService
     let injectionBag: InjectionBag
+    private let conferenceAvatarRelayProvider = ConferenceAvatarRelayProvider()
+    lazy var avatarProviderFactory: AvatarProviderFactory = {
+        AvatarProviderFactory(relayProvider: conferenceAvatarRelayProvider, profileService: injectionBag.profileService)
+    }()
 
     lazy var capturedFrame: Observable<UIImage?> = {
         return videoService.capturedVideoFrame.asObservable().map({ frame in
@@ -257,6 +261,9 @@ class ContainerViewModel: ObservableObject {
         let menu = self.getItemsForConferenceMenu(sinkId: info.sinkId)
         participant.setActions(items: menu)
         self.participants.append(participant)
+        // Register avatar/name relays for factory using a stable key
+        let key = participant.info?.uri?.filterOutHost() ?? extractBaseId(from: participant.id)
+        conferenceAvatarRelayProvider.register(id: key, avatar: participant.profileInfo.avatarData, name: participant.profileInfo.displayName)
         if self.participants.count == 1 {
             participant.videoRunning
                 .subscribe(onNext: { [weak self] hasVideo in

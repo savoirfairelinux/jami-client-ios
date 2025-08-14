@@ -167,19 +167,7 @@ struct ConversationRowView: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 ZStack(alignment: .bottomTrailing) {
-                    if let image = model.avatar {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize, alignment: .center)
-                            .clipShape(Circle())
-                    } else {
-                        Image(uiImage: model.getDefaultAvatar())
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize, alignment: .center)
-                            .clipShape(Circle())
-                    }
+                    AvatarSwiftUIView(source: model.avatarProvider)
                     presenceIndicator
                 }
                 Spacer()

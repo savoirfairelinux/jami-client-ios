@@ -81,7 +81,6 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
         }
     }
     @Published var conferenceActions: [ButtonInfoWrapper]
-    @Published var avatar = UIImage()
     var mainDisplayLayer = AVSampleBufferDisplayLayer()
     var gridDisplayLayer = AVSampleBufferDisplayLayer()
     var info: ConferenceParticipant? {
@@ -120,7 +119,6 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
     let videoService: VideoService
     let injectionBag: InjectionBag
     let profileInfo: ParticipantProfileInfo
-
     init(info: ConferenceParticipant, injectionBag: InjectionBag, conferenceState: PublishSubject<State>, mode: AVLayerVideoGravity) {
         self.id = info.sinkId
         self.injectionBag = injectionBag
@@ -130,16 +128,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
         conferenceActions = [ButtonInfoWrapper]()
         self.profileInfo = ParticipantProfileInfo(injectionBag: injectionBag, info: info)
         self.setAspectMode(mode: mode)
-        self.profileInfo.avatar
-            .observe(on: MainScheduler.instance)
-            .startWith(self.profileInfo.avatar.value)
-            .filter { $0 != nil }
-            .subscribe(onNext: { [weak self] avatar in
-                if let avatar = avatar {
-                    self?.avatar = avatar
-                }
-            })
-            .disposed(by: disposeBag)
+        
         self.profileInfo.displayName
             .observe(on: MainScheduler.instance)
             .startWith(self.profileInfo.displayName.value)
@@ -154,6 +143,8 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
         }
 
     }
+
+    
 
     func radians(from degrees: Int) -> CGFloat {
         return CGFloat(degrees) * .pi / 180.0
@@ -234,6 +225,13 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                 })
                 .disposed(by: self.disposeBag)
         }
+    }
+
+    var avatarProviderKey: String {
+        if let uri = self.info?.uri?.filterOutHost(), !uri.isEmpty {
+            return uri
+        }
+        return self.id.components(separatedBy: "_").first ?? self.id
     }
 
     func unsubscribe() {

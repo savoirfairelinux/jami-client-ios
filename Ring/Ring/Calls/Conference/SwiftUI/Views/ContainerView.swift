@@ -21,29 +21,15 @@
 import SwiftUI
 
 let maxButtonsWidgetHeight: CGFloat = ScreenDimensionsManager.shared.adaptiveHeight * 0.7
-let avatarSize: CGFloat = 160
 
 var avatarOffset: CGFloat {
     ScreenDimensionsManager.shared.avatarOffset
 }
 
-struct Avatar: View {
-    var size: CGFloat = avatarSize
-    @ObservedObject var participant: ParticipantViewModel
-    var body: some View {
-        Image(uiImage: participant.avatar)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: size, height: size)
-            .clipShape(Circle())
-            .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-
-    }
-}
-
 struct PulsatingAvatarView: View {
-    var size: CGFloat = avatarSize
+    var size: CGFloat = 160
     let participant: ParticipantViewModel
+    @Environment(\.avatarProviderFactory) var avatarFactory: AvatarProviderFactory?
 
     var body: some View {
         ZStack {
@@ -68,8 +54,9 @@ struct PulsatingAvatarView: View {
                           maxScale: 2.2)
                 .frame(width: size, height: size)
 
-            // The actual avatar
-            Avatar(participant: participant)
+            if let factory = avatarFactory {
+                AvatarSwiftUIView(source: factory.provider(for: participant.avatarProviderKey, size: Constants.AvatarSize.xLarge.points))
+            }
         }
         .accessibilityHidden(true)
     }
@@ -180,6 +167,7 @@ struct ContainerView: View {
         .background(Color.black)
         .ignoresSafeArea()
         .contentShape(Rectangle())
+        .environment(\.avatarProviderFactory, model.avatarProviderFactory)
         .onTapGesture {
             withAnimation {
                 buttonsVisible.toggle()
@@ -267,8 +255,10 @@ struct ContainerView: View {
             if let participant = model.participants.first, model.participants.count == 1 {
                 VStack {
                     Spacer()
-                    Avatar(participant: participant)
-                        .offset(y: avatarOffset)
+                    if let factory = model.avatarProviderFactory as AvatarProviderFactory? {
+                        AvatarSwiftUIView(source: factory.provider(for: participant.avatarProviderKey, size: Constants.AvatarSize.xLarge.points))
+                            .offset(y: avatarOffset)
+                    }
                     Spacer().frame(height: 50)
                     participantText(participant.name, font: .title)
                     Spacer()
