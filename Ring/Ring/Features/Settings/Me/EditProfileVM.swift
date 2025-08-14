@@ -21,11 +21,7 @@
 import SwiftUI
 import UIKit
 
-class EditProfileVM: ObservableObject, AvatarViewDataModel {
-    @Published var profileImage: UIImage?
-    @Published var profileName: String = ""
-
-    @Published var username: String?
+class EditProfileVM: AvatarProvider {
     @Published var jamiId: String = ""
 
     let account: AccountModel
@@ -36,9 +32,10 @@ class EditProfileVM: ObservableObject, AvatarViewDataModel {
         self.accountService = injectionBag.accountService
         self.profileService = injectionBag.profileService
         self.account = account
-        self.profileImage = profileImage
+        super.init(profileService: injectionBag.profileService, size: Constants.AvatarSize.account100)
+        self.avatar = profileImage
         self.profileName = profileName
-        self.username = username
+        self.registeredName = username ?? ""
     }
 
     func updateProfile() {
@@ -46,7 +43,7 @@ class EditProfileVM: ObservableObject, AvatarViewDataModel {
         Task {
             var photo: String?
 
-            if let image = self.profileImage?.fixOrientation(),
+            if let image = self.avatar?.fixOrientation(),
                let imageData = image.convertToData(ofMaxSize: 40000) {
                 photo = imageData.base64EncodedString()
             }

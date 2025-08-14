@@ -23,7 +23,7 @@ import SwiftUI
 import RxSwift
 
 protocol AccountProfileObserver: AnyObject {
-    var avatar: UIImage { get set }
+    var avatar: UIImage? { get set }
     var profileName: String { get set }
     var registeredName: String { get set }
     var bestName: String { get set }
@@ -39,8 +39,7 @@ extension AccountProfileObserver {
         profileService.getAccountProfile(accountId: account.id)
             .subscribe(onNext: { [weak self] profile in
                 guard let self = self else { return }
-                // The view size is avatarSize. Create a larger image for better resolution.
-                let avatar = profile.photo?.createImage(size: self.avatarSize * 2) ?? UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 17)
+                let avatar = profile.photo?.createImage(size: self.avatarSize * 2)
                 DispatchQueue.main.async { [weak self] in
                     /*
                      Profile updates might be received in a different order than
@@ -79,12 +78,9 @@ struct AccountRowSizes {
     let spacing: CGFloat = 15
 }
 
-class AccountRow: ObservableObject, Hashable, Identifiable, AccountProfileObserver {
+class AccountRow: AvatarProvider, Hashable, Identifiable, AccountProfileObserver {
     let id: String
 
-    @Published var avatar = UIImage()
-    @Published var profileName: String = ""
-    @Published var registeredName: String = ""
     @Published var bestName: String = ""
     @Published var needMigrate: String?
     var avatarSize: CGFloat
@@ -106,6 +102,7 @@ class AccountRow: ObservableObject, Hashable, Identifiable, AccountProfileObserv
         if account.status == .errorNeedMigration {
             needMigrate = L10n.Account.needMigration
         }
+        super.init(profileService: profileService, size: Constants.AvatarSize.account28)
 
         self.registeredName = resolveAccountName(from: account)
         updateProfileDetails(account: account)
@@ -120,10 +117,7 @@ class AccountRow: ObservableObject, Hashable, Identifiable, AccountProfileObserv
     }
 }
 
-class AccountsViewModel: ObservableObject, AccountProfileObserver {
-    @Published var avatar = UIImage()
-    @Published var profileName: String = ""
-    @Published var registeredName: String = ""
+class AccountsViewModel: AvatarProvider, AccountProfileObserver {
     @Published var bestName: String = ""
     var avatarSize: CGFloat
     @Published var selectedAccount: String?
@@ -149,6 +143,7 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
         self.nameService = nameService
         self.stateEmitter = stateEmitter
         self.avatarSize = self.dimensions.imageSize
+        super.init(profileService: profileService, size: Constants.AvatarSize.account28)
         self.subscribeToCurrentAccountUpdates()
         self.subscribeToRegisteredName()
     }

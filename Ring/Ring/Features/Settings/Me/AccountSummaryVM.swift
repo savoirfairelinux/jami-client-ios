@@ -38,14 +38,8 @@ class AccountStatePublisher: Stateable {
     }
 }
 
-class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
+class AccountSummaryVM: AvatarProvider {
     let account: AccountModel
-
-    // profile
-    @Published var profileImage: UIImage?
-    @Published var profileName: String = ""
-
-    @Published var username: String?
 
     // account status
     @Published var accountStatus: String = ""
@@ -75,11 +69,12 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
         } else {
             accountEnabled = false
         }
+        super.init(profileService: injectionBag.profileService, size: Constants.AvatarSize.account60)
         self.accountStatus = self.getAccountStatus(state: account.status)
         self.subscribeStatus()
 
         self.subscribeProfile()
-        self.username = extractUsername()
+        self.registeredName = extractUsername() ?? ""
     }
 
     func extractUsername() -> String? {
@@ -101,7 +96,7 @@ class AccountSummaryVM: ObservableObject, AvatarViewDataModel {
     func nameRegistered() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.username = self.extractUsername()
+            self.registeredName = self.extractUsername() ?? ""
         }
     }
 
@@ -149,12 +144,12 @@ extension AccountSummaryVM {
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak self] profile in
                 guard let self = self else { return }
-                // The view size is avatarSize. Create a larger image for better resolution.
-                if let imageString = profile.photo,
-                   let image = imageString.createImage(size: self.avatarSize * 2) {
+                let decodeSize = max(self.size.points * 2, Constants.defaultAvatarSize * 2)
+                if let data = profile.photo?.toImageData(),
+                    let image = self.profileService.getAvatarFor(data, size: decodeSize) {
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
-                        self.profileImage = image
+                        self.avatar = image
                     }
                 }
 
