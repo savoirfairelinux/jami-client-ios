@@ -1,8 +1,6 @@
 /*
  * Copyright (C) 2022 - 2025 Savoir-faire Linux Inc. *
  *
- * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
@@ -80,12 +78,8 @@ struct MemberItem: View {
 
     // MARK: - View Components
     private var profileImage: some View {
-        Image(uiImage: participant.avatar.value ?? UIImage(asset: Asset.fallbackAvatar)!)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 50, height: 50)
-            .clipShape(Circle())
-            .accessibilityHidden(true)
+        return AvatarSwiftUIView(source: participant.provider)
+            .frame(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize)
     }
 
     private var nameLabel: some View {

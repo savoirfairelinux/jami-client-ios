@@ -43,7 +43,7 @@ class ContactsUtils {
         let organization = dictionary["organization"] ?? ""
 
         let base64Encoded = dictionary["profilePicture"]
-        let imageData = base64Encoded.flatMap { NSData(base64Encoded: $0, options: .ignoreUnknownCharacters) as Data? }
+        let imageData = base64Encoded.flatMap { $0.toImageData() }
 
         return JamiSearchViewModel.JamsUserSearchModel(username: username,
                                                        firstName: firstName,

@@ -42,7 +42,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     typealias StateEmitterType = ConversationStatePublisher
 
     // MARK: - Constants
-    private enum Layout {
+    enum Layout {
         static let verticalMargin: CGFloat = 10
         static let generalMargin: CGFloat = 20
         static let avatarSize: CGFloat = 80
@@ -216,12 +216,8 @@ public struct SwarmInfoView: View, StateEmittingView {
     }
 
     private var avatarImage: some View {
-        Image(uiImage: viewModel.finalAvatar)
-            .renderingMode(.original)
-            .resizable()
-            .scaledToFill()
+            AvatarSwiftUIView(source: viewModel.provider)
             .frame(width: Layout.avatarSize, height: Layout.avatarSize, alignment: .center)
-            .clipShape(Circle())
             .accessibilityHidden(true)
     }
 
