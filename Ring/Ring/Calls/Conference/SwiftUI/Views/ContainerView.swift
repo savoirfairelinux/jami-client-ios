@@ -21,28 +21,13 @@
 import SwiftUI
 
 let maxButtonsWidgetHeight: CGFloat = ScreenDimensionsManager.shared.adaptiveHeight * 0.7
-let avatarSize: CGFloat = 160
 
 var avatarOffset: CGFloat {
     ScreenDimensionsManager.shared.avatarOffset
 }
 
-struct Avatar: View {
-    var size: CGFloat = avatarSize
-    @ObservedObject var participant: ParticipantViewModel
-    var body: some View {
-        Image(uiImage: participant.avatar)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: size, height: size)
-            .clipShape(Circle())
-            .accessibilityHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-
-    }
-}
-
 struct PulsatingAvatarView: View {
-    var size: CGFloat = avatarSize
+    var size: CGFloat = 160
     let participant: ParticipantViewModel
 
     var body: some View {
@@ -68,8 +53,7 @@ struct PulsatingAvatarView: View {
                           maxScale: 2.2)
                 .frame(width: size, height: size)
 
-            // The actual avatar
-            Avatar(participant: participant)
+            AvatarSwiftUIView(source: participant.bigAvatarProvider)
         }
         .accessibilityHidden(true)
     }
@@ -267,7 +251,7 @@ struct ContainerView: View {
             if let participant = model.participants.first, model.participants.count == 1 {
                 VStack {
                     Spacer()
-                    Avatar(participant: participant)
+                    AvatarSwiftUIView(source: participant.bigAvatarProvider)
                         .offset(y: avatarOffset)
                     Spacer().frame(height: 50)
                     participantText(participant.name, font: .title)

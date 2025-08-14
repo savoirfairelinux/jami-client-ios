@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,6 +20,7 @@
 
 import RxSwift
 import SwiftyBeaver
+import CryptoKit
 
 @objc protocol ProfilesAdapterDelegate {
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String)
@@ -43,6 +42,16 @@ struct Base64VCard {
     var partsReceived: Int
 }
 
+/// Avatar sizing policy used for decoding and caching profile images.
+///
+/// - `primarySize` is the most common avatar size used in UI (55 pt).
+/// - The image cache in `ProfilesService` stores only decodes whose requested size equals `primarySize * 2`.
+///   This means small avatars (e.g., 15, 30, 40, 50 pt) all reuse the same cached decode (110 pt),
+///   while larger one-off sizes (e.g., 150 pt → 300 pt decode) are not cached by default.
+enum AvatarSizing {
+    static let primarySize: CGFloat = 55   // mostly used default size
+}
+
 class ProfilesService {
 
     private let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
@@ -52,6 +61,8 @@ class ProfilesService {
 
     var profiles = ConcurentDictionary(name: "com.contactProfiles", dictionary: [String: ReplaySubject<Profile>]())
     var accountProfiles = ConcurentDictionary(name: "com.accountProfiles", dictionary: [String: ReplaySubject<Profile>]())
+
+    private let avatarsCache = NSCache<NSString, UIImage>()
 
     let dbManager: DBManager
 
@@ -66,6 +77,7 @@ class ProfilesService {
         NotificationCenter.default.addObserver(self, selector: #selector(self.contactAdded(_:)),
                                                name: NSNotification.Name(rawValue: ProfileNotifications.contactAdded.rawValue),
                                                object: nil)
+        avatarsCache.totalCostLimit = 8 * 1024 * 1024
     }
 
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
@@ -248,5 +260,34 @@ extension ProfilesService {
                                 accountId: accountId, accountURI: accountURI) {
             self.triggerAccountProfileSignal(accountId: accountId)
         }
+    }
+
+    func key(for data: Data, size: CGFloat) -> String {
+        let digest = SHA256.hash(data: data)
+        let hex = digest.compactMap { String(format: "%02x", $0) }.joined()
+        return "\(hex)|\(Int(size))"
+    }
+
+    subscript(_ key: String) -> UIImage? {
+        get { avatarsCache.object(forKey: key as NSString) }
+        set {
+            if let img = newValue {
+                let cost = Int(img.size.width * img.size.height * img.scale * img.scale * 4)
+                avatarsCache.setObject(img, forKey: key as NSString, cost: cost)
+            } else { avatarsCache.removeObject(forKey: key as NSString) }
+        }
+    }
+
+    func getAvatarFor(_ data: Data, size: CGFloat) -> UIImage? {
+        let key = key(for: data, size: size)
+        if let cached = self[key] {
+            return cached
+        }
+        let image: UIImage? = data.convertToImage(size: size)
+        if let image = image,
+           size == AvatarSizing.primarySize * 2 {
+                self[key] = image
+            }
+        return image
     }
 }

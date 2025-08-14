@@ -49,20 +49,11 @@ enum GeneratedMessageType: String {
 // swiftlint:disable file_length
 class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiable {
 
-    @Published var avatar: UIImage?
     @Published var name: String = ""
     @Published var lastMessage: String = ""
     @Published var lastMessageDate: String = ""
     @Published var unreadMessages: Int = 0
     @Published var presence: PresenceStatus = .offline
-
-    func getDefaultAvatar() -> UIImage {
-        if let conversation = self.conversation,
-           !conversation.isDialog() {
-            return UIImage.createSwarmAvatar(convId: conversation.id, size: CGSize(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize))
-        }
-        return UIImage.createContactAvatar(username: (self.displayName.value?.isEmpty ?? true) ? self.userName.value : self.displayName.value!, size: CGSize(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize))
-    }
 
     /// Logger
     private let log = SwiftyBeaver.self
@@ -110,11 +101,30 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                            })
     }()
 
-    /// Group's image data
     var profileImageData = BehaviorRelay<Data?>(value: nil)
 
     var contactPresence = BehaviorRelay<PresenceStatus>(value: .offline)
     var swarmInfo: SwarmInfoProtocol?
+
+    lazy var avatarProvider: AvatarProvider = {
+        if let conversation = self.conversation {
+            return AvatarProvider(
+                profileService: self.injectionBag.profileService,
+                size: Constants.defaultAvatarSize,
+                avatar: self.profileImageData.asObservable(),
+                displayName: self.bestName.asObservable(),
+                isGroup: !conversation.isDialog()
+            )
+        } else {
+            return AvatarProvider(
+                profileService: self.injectionBag.profileService,
+                size: Constants.defaultAvatarSize,
+                avatar: self.profileImageData.asObservable(),
+                displayName: self.bestName.asObservable(),
+                isGroup: false
+            )
+        }
+    }()
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -142,20 +152,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 guard !name.isEmpty else { return }
                 self?.name = name
                 self?.swiftUIModel.name = name
-            })
-            .disposed(by: self.disposeBag)
-
-        self.profileImageData
-            .share()
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .startWith(self.profileImageData.value)
-            .subscribe(onNext: { [weak self] imageData in
-                if let imageData = imageData, !imageData.isEmpty {
-                    let targetSize: CGFloat = Constants.defaultAvatarSize * 2
-                    let image = UIImage.resizeImage(from: imageData, targetSize: targetSize)
-                    self?.avatar = image
-                }
             })
             .disposed(by: self.disposeBag)
 
@@ -231,6 +227,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             }
             self.updateBlockedStatus()
             self.setupPresence()
+            self.avatarProvider.isGroup = !self.conversation.isDialog()
             if self.shouldCreateSwarmInfo() {
                 self.createSwarmInfo()
             } else {
@@ -303,9 +300,11 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     func createSwarmInfo() {
         self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation)
-        self.swarmInfo!.finalAvatar.share()
+        self.swarmInfo!.finalAvatarData.share()
             .subscribe { [weak self] image in
-                self?.profileImageData.accept(image.pngData())
+                if let image = image {
+                    self?.profileImageData.accept(image)
+                }
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
@@ -331,14 +330,11 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe {[weak self] profile in
                 guard let self = self else { return }
-                if let alias = profile.alias, let photo = profile.photo {
-                    if !alias.isEmpty {
-                        self.displayName.accept(alias)
-                    }
-                    if !photo.isEmpty {
-                        let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? // {
-                        self.profileImageData.accept(data)
-                    }
+                if let alias = profile.alias, !alias.isEmpty {
+                    self.displayName.accept(alias)
+                }
+                if let data = profile.photo?.toImageData() {
+                    self.profileImageData.accept(data)
                 }
             } onError: { _ in
             }

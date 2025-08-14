@@ -72,8 +72,7 @@ class Contact {
 
     private func processProfile(_ profile: Profile) {
         updateName(profile: profile)
-        if let photo = profile.photo,
-           let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+        if let data = profile.photo?.toImageData() {
             DispatchQueue.main.async { [weak self ] in
                 self?.imageData.accept(data)
             }
