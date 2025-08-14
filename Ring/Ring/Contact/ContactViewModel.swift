@@ -121,8 +121,7 @@ class ContactViewModel: ViewModel, Stateable {
                     if let alias = profile.alias, !alias.isEmpty {
                         self.displayName.accept(alias)
                     }
-                    if let photo = profile.photo,
-                       let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    if let data = profile.photo?.toImageData() {
                         self.profileImageData.accept(data)
                     }
                 })
