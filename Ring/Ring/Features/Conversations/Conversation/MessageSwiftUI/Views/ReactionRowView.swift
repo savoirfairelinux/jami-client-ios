@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2023-2024 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2023-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,18 +20,15 @@ import SwiftUI
 
 struct ReactionRowView: View {
     @ObservedObject var reaction: ReactionsRowViewModel
+    @Environment(\.avatarProviderFactory) var avatarFactory: AvatarProviderFactory?
     let padding: CGFloat = 20
 
     var body: some View {
         HStack {
-            if let image = reaction.avatarImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
+            if let factory = avatarFactory {
+                 AvatarSwiftUIView(source: factory.provider(for: reaction.jamiId, size: 40))
                     .frame(width: 40, height: 40)
-                    .cornerRadius(20)
             }
-
             Spacer()
                 .frame(width: padding)
 
