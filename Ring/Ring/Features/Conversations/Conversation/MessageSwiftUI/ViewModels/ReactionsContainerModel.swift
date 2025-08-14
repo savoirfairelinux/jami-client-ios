@@ -21,10 +21,9 @@
 import SwiftUI
 import RxSwift
 
-class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver, NameObserver {
+class ReactionsRowViewModel: Identifiable, ObservableObject, NameObserver {
     let jamiId: String
     let messageId: String
-    @Published var avatarImage: UIImage?
     @Published var username: String = ""
     @Published var content = [String: String]()
     var disposeBag = DisposeBag()
@@ -35,7 +34,6 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver
         self.jamiId = reaction.author
         self.username = self.jamiId
         self.messageId = reaction.id
-        self.avatarImage = UIImage()
         self.content[reaction.id] = reaction.content
     }
 
@@ -50,7 +48,6 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver
 
     func setInfoState(state: PublishSubject<State>) {
         self.infoState = state
-        requestAvatar(jamiId: jamiId)
         requestName(jamiId: jamiId)
     }
 }
