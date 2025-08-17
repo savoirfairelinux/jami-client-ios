@@ -149,6 +149,6 @@ extension UIColor {
 
     static let defaultSwarm = "#00BCD4"
     static let defaultSwarmColor = UIColor(hexString: "#00BCD4")!
-    static let availablePresenceColor = UIColor(hexString: "#E59028")!
-    static let onlinePresenceColor = UIColor(hexString: "#0B8271")!
+    static let availablePresenceColor = UIColor(hexString: "#FFB300")!
+    static let onlinePresenceColor = UIColor(hexString: "#4CAF50")!
 }
