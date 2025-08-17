@@ -263,7 +263,13 @@ struct AvatarSwiftUIView: View {
         let bgColor = avatarColors[colorIndex]
 
         ZStack {
-            Color(bgColor)
+            let startUIColor = bgColor.lighten(by: 5) ?? bgColor
+            let endUIColor = bgColor.darker(by: 5) ?? bgColor
+            LinearGradient(
+                gradient: Gradient(colors: [Color(startUIColor), Color(endUIColor)]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
             let borderUIColor = bgColor.darker(by: 1) ?? bgColor
             let borderLineWidth = min(max(source.size.points * 0.04, 1), 1)
             Circle()
