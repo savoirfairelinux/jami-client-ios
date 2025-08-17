@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
- *
- *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,24 +18,21 @@
 
 import Foundation
 
-// Colors from material.io
-let avatarColors = [
-    UIColor(hexString: "#2196f3")!, // Blue
-    UIColor(hexString: "#f44336")!, // Red
-    UIColor(hexString: "#e91e63")!, // Pink
-    UIColor(hexString: "#9c27b0")!, // Purple
-    UIColor(hexString: "#673ab7")!, // Deep Purple
-    UIColor(hexString: "#3f51b5")!, // Indigo
-    UIColor(hexString: "#00bcd4")!, // Cyan
-    UIColor(hexString: "#009688")!, // Teal
-    UIColor(hexString: "#4caf50")!, // Green
-    UIColor(hexString: "#8bc34a")!, // Light Green
-    UIColor(hexString: "#9e9e9e")!, // Grey
-    UIColor(hexString: "#cddc39")!, // Lime
-    UIColor(hexString: "#ffc107")!, // Amber
-    UIColor(hexString: "#ff5722")!, // Deep Orange
-    UIColor(hexString: "#795548")!, // Brown
-    UIColor(hexString: "#607d8b")!  // Blue Grey
-];
-
-let defaultAvatarColor = UIColor(hexString: "808080")!
+let avatarColors: [UIColor] = [
+    UIColor(hexString: "#64B5F6")!,
+    UIColor(hexString: "#EF9A9A")!,
+    UIColor(hexString: "#F48FB1")!,
+    UIColor(hexString: "#BA68C8")!,
+    UIColor(hexString: "#9575CD")!,
+    UIColor(hexString: "#7986CB")!,
+    UIColor(hexString: "#4DD0E1")!,
+    UIColor(hexString: "#4DB6AC")!,
+    UIColor(hexString: "#81C784")!,
+    UIColor(hexString: "#8BC34A")!,
+    UIColor(hexString: "#9E9E9E")!,
+    UIColor(hexString: "#AFB42B")!,
+    UIColor(hexString: "#FFCA28")!,
+    UIColor(hexString: "#FF8A65")!,
+    UIColor(hexString: "#A1887F")!,
+    UIColor(hexString: "#90A4AE")!
+]
