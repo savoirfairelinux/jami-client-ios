@@ -38,7 +38,8 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat?
 
     static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
-        value = value ?? nextValue()
+        let next = nextValue()
+        value = next ?? value
     }
 }
 
@@ -219,19 +220,28 @@ struct MessagesListView: View {
                 .listRowBackground(Color.clear)
                 .onReceive(model.$scrollToId, perform: { (scrollToId) in
                     guard scrollToId != nil else { return }
-                    scrollView.scrollTo("lastMessage")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        model.scrollToId = nil
+                    DispatchQueue.main.async {
+                        withAnimation(.easeOut) {
+                            scrollView.scrollTo("lastMessage", anchor: .bottom)
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            model.scrollToId = nil
+                        }
                     }
                 })
                 .onReceive(model.$scrollToReplyTarget, perform: { (scrollToReplyTarget) in
                     guard scrollToReplyTarget != nil else { return }
-                    scrollView.scrollTo(scrollToReplyTarget)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        model.scrolledToTargetReply()
+                    DispatchQueue.main.async {
+                        withAnimation {
+                            scrollView.scrollTo(scrollToReplyTarget, anchor: .center)
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            model.scrolledToTargetReply()
+                        }
                     }
                 })
             }
+            .coordinateSpace(name: "scroll")
             .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
                 DispatchQueue.main.async {
                     let scrollOffset = value ?? 0
