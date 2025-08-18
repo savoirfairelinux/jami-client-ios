@@ -117,11 +117,11 @@ struct SwarmProfile: View {
         Button(action: {
             self.hideKeyboard()
             showingImagePicker = true
-        }) {
+        }, label: {
             EditImageIcon(model: model, width: 100, height: 100)
                 .frame(width: 100, height: 100)
                 .scaleEffect(iconScale)
-        }
+        })
         .actionSheet(isPresented: $showingImagePicker) {
             ActionSheet(
                 title: Text(L10n.Swarm.changePicture),

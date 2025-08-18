@@ -1,8 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
- *  Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com
+ *  Copyright (C) 2022 - 2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -154,6 +151,7 @@ struct MessagesListView: View {
                 temporaryConversationView()
             }
         }
+        .environment(\.avatarProviderFactory, model.makeAvatarFactory() as AvatarProviderFactory?)
         .onChange(of: model.screenTapped, perform: { _ in
             /* We cannot use SwiftUI's onTapGesture here because it would
              interfere with the interactions of the buttons in the player view.
@@ -329,7 +327,7 @@ struct MessagesListView: View {
                 Spacer()
                 Button(action: {
                     model.sendRequest()
-                }) {
+                }, label: {
                     Text(L10n.Conversation.addToContactsButton)
                         .padding()
                         .frame(maxWidth: .infinity)
@@ -337,7 +335,7 @@ struct MessagesListView: View {
                         .foregroundColor(.white)
                         .cornerRadius(12)
                         .padding(.horizontal)
-                }
+                })
                 Spacer()
                     .frame(height: 20)
             }

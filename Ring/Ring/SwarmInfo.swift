@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2022 - 2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,13 +21,13 @@ import RxSwift
 import RxRelay
 
 protocol SwarmInfoProtocol {
-    var avatar: BehaviorRelay<UIImage?> { get set }
+    var avatarData: BehaviorRelay<Data?> { get set }
     var title: BehaviorRelay<String> { get set }
     var color: BehaviorRelay<String> { get set }
     var type: BehaviorRelay<ConversationType> { get set }
     var description: BehaviorRelay<String> { get set }
     var participantsNames: BehaviorRelay<[String]> { get set }
-    var participantsAvatars: BehaviorRelay<[UIImage]> { get set }
+    var participantsAvatars: BehaviorRelay<[Data]> { get set }
 
     var avatarHeight: CGFloat { get set }
     var avatarSpacing: CGFloat { get set }
@@ -37,7 +35,7 @@ protocol SwarmInfoProtocol {
     var finalTitle: BehaviorRelay<String> { get set }
     var participantsString: BehaviorRelay<String> { get set }
 
-    var finalAvatar: Observable<UIImage> { get set }
+    var finalAvatarData: Observable<Data?> { get set }
 
     var participants: BehaviorRelay<[ParticipantInfo]> { get set }
     var contacts: BehaviorRelay<[ParticipantInfo]> { get set }
@@ -49,42 +47,41 @@ protocol SwarmInfoProtocol {
     func contains(searchQuery: String) -> Bool
 }
 
+struct ParticipantData: Equatable, Hashable {
+    var jamiId: String
+    var role: ParticipantRole
+}
+
 class ParticipantInfo: Equatable, Hashable {
 
     var jamiId: String
     var role: ParticipantRole
-    var avatar: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
+    var avatarData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
     var registeredName = BehaviorRelay(value: "")
     var profileName = BehaviorRelay(value: "")
     var finalName = BehaviorRelay(value: "")
     let disposeBag = DisposeBag()
+    let profileService: ProfilesService
 
     var hasProfileAvatar = false
 
     let profileLock = NSLock()
 
-    init(jamiId: String, role: ParticipantRole) {
+    let provider: AvatarProvider
+
+    init(jamiId: String, role: ParticipantRole, profileService: ProfilesService) {
+        self.profileService = profileService
         self.jamiId = jamiId
         self.role = role
         self.finalName.accept(jamiId)
         self.registeredName.accept(jamiId)
-        self.finalName
-            .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe { [weak self] name in
-                guard let self = self else { return }
-
-                // Only create backup avatar if profile avatar set and name is available
-                if !name.isEmpty {
-                    self.profileLock.lock()
-                    if !self.hasProfileAvatar {
-                        let backupAvatar = UIImage.createContactAvatar(username: name, size: CGSize(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize))
-                        self.avatar.accept(backupAvatar)
-                    }
-                    self.profileLock.unlock()
-                }
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
+        provider = AvatarProvider(
+            profileService: profileService,
+            size: Constants.AvatarSize.default55,
+            avatar: avatarData.asObservable(),
+            displayName: finalName.asObservable(),
+            isGroup: false
+        )
         Observable.combineLatest(self.registeredName.asObservable(),
                                  self.profileName.asObservable())
             .subscribe {[weak self] (registeredName, profileName) in
@@ -125,13 +122,13 @@ class ParticipantInfo: Equatable, Hashable {
 }
 
 class SwarmInfo: SwarmInfoProtocol {
-    var avatar: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
+    var avatarData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
     var title = BehaviorRelay(value: "")
     var color = BehaviorRelay<String>(value: "")
     var type = BehaviorRelay(value: ConversationType.oneToOne)
     var description = BehaviorRelay(value: "")
     var participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
-    var participantsAvatars: BehaviorRelay<[UIImage]> = BehaviorRelay(value: [UIImage()])
+    var participantsAvatars: BehaviorRelay<[Data]> = BehaviorRelay(value: [Data()])
 
     var avatarHeight: CGFloat = Constants.defaultAvatarSize
     var avatarSpacing: CGFloat = 2
@@ -142,12 +139,12 @@ class SwarmInfo: SwarmInfoProtocol {
     var finalTitle = BehaviorRelay<String>(value: "")
     var participantsString = BehaviorRelay(value: "")
 
-    lazy var finalAvatar: Observable<UIImage> = {
+    lazy var finalAvatarData: Observable<Data?> = {
         return Observable
-            .combineLatest(self.avatar.asObservable().startWith(self.avatar.value),
-                           self.participantsAvatars.asObservable().startWith(self.participantsAvatars.value)) { [weak self] (avatar: UIImage?, _: [UIImage]) -> UIImage in
+            .combineLatest(self.avatarData.asObservable().startWith(self.avatarData.value),
+                           self.participantsAvatars.asObservable().startWith(self.participantsAvatars.value)) { [weak self] (avatar: Data?, _: [Data]) -> Data? in
                 guard let self = self else {
-                    return UIImage.createSwarmAvatar(convId: "", size: CGSize(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize))
+                    return nil
                 }
                 if let avatar = avatar { return avatar }
                 return self.buildAvatar()
@@ -283,12 +280,12 @@ class SwarmInfo: SwarmInfoProtocol {
         // Create a single shared observable for all participant data
         // swiftlint:disable large_tuple
         let participantData = Observable.combineLatest(
-            participants.value.map { participant -> Observable<(String, String, String, UIImage?)> in
+            participants.value.map { participant -> Observable<(String, String, String, Data?)> in
                 return Observable.combineLatest(
                     participant.finalName.asObservable(),
                     participant.registeredName.asObservable(),
                     participant.profileName.asObservable(),
-                    participant.avatar.asObservable()
+                    participant.avatarData.asObservable()
                 )
             }
         )
@@ -300,7 +297,6 @@ class SwarmInfo: SwarmInfoProtocol {
                 guard let self = self else { return }
 
                 let finalNames = data.map { $0.0 }.filter { !$0.isEmpty }
-                let registeredNames = data.map { $0.1 }.filter { !$0.isEmpty }
                 let profileNames = data.map { $0.2 }.filter { !$0.isEmpty }
                 let avatars = data.map { $0.3 }.compactMap { $0 }
 
@@ -369,9 +365,9 @@ class SwarmInfo: SwarmInfoProtocol {
     private func updateInfo() {
         guard let conversation = self.conversation else { return }
         let info = self.conversationsService.getConversationInfo(conversationId: conversation.id, accountId: self.accountId)
-        if let avatar = info[ConversationAttributes.avatar.rawValue] {
-            // The view has a size of avatarHeight. Create a larger image for better resolution.
-            self.avatar.accept(avatar.createImage(size: self.avatarHeight * 2))
+        if let avatar = info[ConversationAttributes.avatar.rawValue],
+           let imageData = avatar.toImageData() {
+            self.avatarData.accept(imageData)
         }
         if let title = info[ConversationAttributes.title.rawValue] {
             self.title.accept(title)
@@ -416,7 +412,7 @@ class SwarmInfo: SwarmInfoProtocol {
     }
 
     private func createParticipant(jamiId: String, role: ParticipantRole) -> ParticipantInfo? {
-        let participantInfo = ParticipantInfo(jamiId: jamiId, role: role)
+        let participantInfo = ParticipantInfo(jamiId: jamiId, role: role, profileService: self.profileService)
         let uri = JamiURI.init(schema: .ring, infoHash: jamiId)
         guard let uriString = uri.uriString else { return nil }
         // subscribe for profile updates for participant
@@ -426,10 +422,10 @@ class SwarmInfo: SwarmInfoProtocol {
             .subscribe { [weak participantInfo] profile in
                 guard let participantInfo = participantInfo else { return }
                 // The view has a size of avatarHeight. Create a larger image for better resolution.
-                if let imageString = profile.photo, let image = imageString.createImage(size: self.avatarHeight * 2) {
+                if let data = profile.photo?.toImageData() {
                     participantInfo.profileLock.lock()
                     participantInfo.hasProfileAvatar = true
-                    participantInfo.avatar.accept(image)
+                    participantInfo.avatarData.accept(data)
                     participantInfo.profileLock.unlock()
                 }
                 if let profileName = profile.alias, !profileName.isEmpty {
@@ -473,23 +469,19 @@ class SwarmInfo: SwarmInfoProtocol {
         self.participants.accept(currentValue)
     }
 
-    private func buildAvatar() -> UIImage {
+    private func buildAvatar() -> Data? {
         let participantsCount = self.participants.value.count
         // for conversation with one participant return contact avatar
-        if participantsCount == 1, let avatar = self.participants.value.first?.avatar.value {
+        if participantsCount == 1, let avatar = self.participants.value.first?.avatarData.value {
             return avatar
-        }
-        var convId = ""
-        if let conv = self.conversation {
-            convId = conv.id
         }
         if participantsCount == 2, let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId,
            let avatar = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
-           }).first?.avatar.value {
+           }).first?.avatarData.value {
             return avatar
         }
-        return UIImage.createSwarmAvatar(convId: convId, size: CGSize(width: self.avatarHeight, height: self.avatarHeight))
+        return nil
     }
 
     private func titleForDialog() -> String {

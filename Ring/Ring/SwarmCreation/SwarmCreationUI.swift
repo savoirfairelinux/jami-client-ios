@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Binal Ahiya <binal.ahiya@savoirfairelinux.com>
+ *  Copyright (C) 2022 - 2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,11 +34,7 @@ struct ParticipantListCell: View {
     @ViewBuilder var body: some View {
         Button(action: self.action) {
             HStack(alignment: .center, spacing: nil) {
-                Image(uiImage: participant.imageDataFinal)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize, alignment: .center)
-                    .clipShape(Circle())
+                AvatarSwiftUIView(source: participant.avatarProvider)
                 Text(participant.name)
                     .padding(.leading, 8.0)
                     .lineLimit(1)
@@ -70,11 +64,7 @@ struct SelectedParticipantItem: View {
         Button(action: self.action) {
             VStack(alignment: .center, spacing: nil) {
                 ZStack(alignment: .topTrailing) {
-                    Image(uiImage: participant.imageDataFinal)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: Constants.defaultAvatarSize, height: Constants.defaultAvatarSize, alignment: .center)
-                        .clipShape(Circle())
+                    AvatarSwiftUIView(source: participant.avatarProvider)
                     Image(systemName: "xmark")
                         .resizable()
                         .foregroundColor(Color(UIColor.label))

@@ -79,17 +79,7 @@ struct CallRowView: View {
     var body: some View {
         VStack(spacing: 12) {
             HStack(spacing: 12) {
-                if let avatar = viewModel.avatar {
-                    Image(uiImage: avatar)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                } else {
-                    Circle()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(width: 50, height: 50)
-                }
+                AvatarSwiftUIView(source: viewModel.avatarProvider)
 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(viewModel.title)
@@ -122,12 +112,12 @@ struct CallRowView: View {
 
                 Button(action: {
                     viewModel.rejectCall()
-                }) {
+                }, label: {
                     Image(systemName: "xmark")
                         .font(.system(size: 25))
                         .foregroundColor(.jamiColor)
                         .padding(10)
-                }
+                })
                 Spacer()
             }
         }

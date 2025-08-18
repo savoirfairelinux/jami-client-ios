@@ -65,7 +65,8 @@ struct PlayerSwiftUI: View {
     var ratio: CGFloat = 1
     var withControls: Bool
     var customCornerRadius: CGFloat = 0
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme)
+    var colorScheme
 
     var body: some View {
         ZStack(alignment: .center) {
