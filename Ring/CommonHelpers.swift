@@ -17,6 +17,7 @@
  */
 
 import UIKit
+import SwiftUI
 
 /// A namespace for common helper functions shared across all targets: jami, share extension, notification extension.
 enum CommonHelpers {
@@ -187,5 +188,17 @@ extension UIImage {
         }
 
         return UIImage(cgImage: downsampledImage)
+    }
+}
+
+struct VisualEffectView: UIViewRepresentable {
+    let effect: UIVisualEffect
+
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        return UIVisualEffectView(effect: effect)
+    }
+
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = effect
     }
 }
