@@ -42,18 +42,6 @@ struct ContentHeightKey: PreferenceKey {
     }
 }
 
-struct VisualEffectView: UIViewRepresentable {
-    var effect: UIVisualEffect?
-
-    func makeUIView(context: Context) -> UIVisualEffectView {
-        return UIVisualEffectView(effect: effect)
-    }
-
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-        uiView.effect = effect
-    }
-}
-
 struct ActionsView<Content: View>: View {
     @Binding var maxHeight: CGFloat
     @Binding var visible: Bool
