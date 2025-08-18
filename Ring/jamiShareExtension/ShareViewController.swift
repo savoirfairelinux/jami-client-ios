@@ -29,6 +29,7 @@ class ShareViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        isModalInPresentation = true
 
         let sharedItems = extensionContext?.inputItems as? [NSExtensionItem] ?? []
         viewModel = ShareViewModel()
