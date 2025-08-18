@@ -17,6 +17,7 @@
  */
 
 import SwiftUI
+import UIKit
 import UniformTypeIdentifiers
 import CryptoKit
 
@@ -29,6 +30,7 @@ struct ShareView: View {
     @State private var showUnsupportedAlert: Bool = false
     @State private var selectedAccountId: String?
     @State private var isSending: Bool = false
+    @State private var selectedConversationIds: Set<String> = []
 
     let supportedTypes: [UTType] = [
         .plainText, .image, .fileURL, .url,
@@ -59,28 +61,50 @@ struct ShareView: View {
     }
 
     var body: some View {
+        // swiftlint:disable:next closure_body_length
         NavigationView {
             ZStack {
-                if viewModel.isLoading {
-                    LoadingStateView()
-                } else {
-                    VStack(alignment: .leading, spacing: 16) {
-                        AccountsSection(
-                            selectedAccountId: $selectedAccountId,
-                            viewModel: viewModel,
-                            sendAction: sendAllItems
-                        )
+                VStack(alignment: .leading, spacing: 16) {
+                    AccountsSection(
+                        selectedAccountId: $selectedAccountId,
+                        viewModel: viewModel
+                    )
+
+                    ZStack(alignment: .bottom) {
 
                         if let selectedId = selectedAccountId {
                             ConversationSection(
                                 selectedAccountId: selectedId,
                                 viewModel: viewModel,
-                                sendAction: sendAllItems
+                                selectedConversationIds: $selectedConversationIds
                             )
                         }
                         Spacer()
+                        
+                        VStack {
+                            Button("Share file with \(selectedConversationIds.count) contacts") {
+                                UIAccessibility.post(notification: .announcement, argument: L10n.ShareExtension.sending)
+                                sendSelected()
+                            }
+                            .disabled(selectedConversationIds.isEmpty || isSending)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background((selectedConversationIds.isEmpty || isSending) ? Color.gray.opacity(0.3) : Color.accentColor)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            // .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.sendButton)
+                        }
+                        .padding()
+                        .background(
+                            VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                                .cornerRadius(10)
+                                .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: -2)
+                        )
                     }
-                    .padding()
+                    .padding(.horizontal)
+                }
+                if viewModel.isLoading {
+                    LoadingStateView()
                 }
                 if isSending {
                     Color.black.opacity(0.4)
@@ -94,16 +118,26 @@ struct ShareView: View {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(Color.black.opacity(0.8))
                                 )
+                                .accessibilityLabel(Text(L10n.ShareExtension.sending))
+                                .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.sendingProgress)
+                                .onAppear {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        UIAccessibility.post(notification: .announcement, argument: L10n.ShareExtension.sending)
+                                    }
+                                }
                         )
+                        .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.sendingOverlay)
                 }
             }
-            .navigationTitle(L10n.ShareExtension.appName)
+            .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.rootView)
             .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(L10n.ShareExtension.appName)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(L10n.Global.close) {
                         closeAction()
                     }
+                    .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.closeButton)
                 }
             }
             .navigationBarHidden(false)
@@ -161,6 +195,14 @@ struct ShareView: View {
         isSending = true
     }
 
+    private func sendSelected() {
+        guard let accountId = selectedAccountId else { return }
+        isSending = true
+        for convoId in selectedConversationIds {
+            sendAllItems(to: convoId, accountId: accountId)
+        }
+    }
+
     private func getSupportedTypes(convoId: String, accountId: String) -> [(UTType, (NSItemProvider, Any?) -> Void)] {
         return [
             (UTType.plainText, { [weak viewModel] _, data in
@@ -215,18 +257,30 @@ struct ShareView: View {
 struct ConversationSection: View {
     let selectedAccountId: String
     @ObservedObject var viewModel: ShareViewModel
-    let sendAction: (String, String) -> Void
+    @Binding var selectedConversationIds: Set<String>
 
     var body: some View {
         if let conversations = viewModel.conversationsByAccount[selectedAccountId], !conversations.isEmpty {
             VStack(alignment: .leading, spacing: 12) {
                 Text(L10n.ShareExtension.conversations)
                     .font(.headline)
-                ScrollView {
+                    .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.conversationsTitle)
+                ScrollView(showsIndicators: false) {
                     ForEach(conversations) { conversation in
-                        ConversationRowView(conversation: conversation, sendAction: sendAction)
+                        ConversationSelectableRow(
+                            conversation: conversation,
+                            isSelected: selectedConversationIds.contains(conversation.id),
+                            toggleAction: {
+                                if selectedConversationIds.contains(conversation.id) {
+                                    selectedConversationIds.remove(conversation.id)
+                                } else {
+                                    selectedConversationIds.insert(conversation.id)
+                                }
+                            }
+                        )
                     }
                 }
+                .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.conversationsList)
             }
         } else {
             Text(L10n.ShareExtension.noConversation)
@@ -249,6 +303,7 @@ struct AccountRowView: View {
                         .scaledToFill()
                         .frame(width: 45, height: 45)
                         .clipShape(Circle())
+                        .accessibilityHidden(true)
                 } else {
                     Circle()
                         .fill(account.bgColor)
@@ -258,6 +313,7 @@ struct AccountRowView: View {
                                 .font(.system(size: 16))
                                 .foregroundColor(.white)
                         )
+                        .accessibilityHidden(true)
                 }
             } else {
                 Circle()
@@ -270,6 +326,7 @@ struct AccountRowView: View {
                             .frame(width: 15, height: 15)
                             .foregroundColor(.white)
                     )
+                    .accessibilityHidden(true)
             }
 
             Text(account.name)
@@ -280,23 +337,24 @@ struct AccountRowView: View {
 
             Image(systemName: "chevron.down")
                 .foregroundColor(.gray)
+                .accessibilityHidden(true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 12)
         .padding(.horizontal)
         .background(Color.gray.opacity(0.1))
         .cornerRadius(8)
+        .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.selectedAccountRow)
     }
 }
 
-struct ConversationRowView: View {
+struct ConversationSelectableRow: View {
     @ObservedObject var conversation: ConversationViewModel
-    let sendAction: (String, String) -> Void
+    let isSelected: Bool
+    let toggleAction: () -> Void
 
     var body: some View {
-        Button(action: {
-            sendAction(conversation.id, conversation.accountId)
-        }) {
+        Button(action: toggleAction) {
             HStack(spacing: 12) {
                 if conversation.avatarType == .single {
                     if let avatarImage = conversation.processedAvatar {
@@ -335,11 +393,28 @@ struct ConversationRowView: View {
                     .multilineTextAlignment(.leading)
                     .truncationMode(.middle)
                     .lineLimit(1)
-
                 Spacer()
+
+                if isSelected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.accentColor)
+                        .accessibilityHidden(true)
+                } else {
+                    Image(systemName: "circle")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.secondary)
+                        .accessibilityHidden(true)
+                }
             }
             .padding(.vertical, 8)
         }
+        .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.conversationButtonPrefix + conversation.id)
+        .accessibilityLabel(Text(conversation.name))
+        .accessibilityHint("Double tap to select this conversation")
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
         .onAppear {
             conversation.loadDetailsIfNeeded()
         }
@@ -348,12 +423,11 @@ struct ConversationRowView: View {
 
 struct AccountsSection: View {
     @Binding var selectedAccountId: String?
-    let viewModel: ShareViewModel
-    let sendAction: (String, String) -> Void
+    @ObservedObject var viewModel: ShareViewModel
+    @State private var shouldFocusAccountMenu: Bool = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-
             if let selectedAccount = viewModel.accountList.first(where: { $0.id == selectedAccountId }) {
                 Menu {
                     Picker(L10n.ShareExtension.selectAccount, selection: $selectedAccountId) {
@@ -363,19 +437,17 @@ struct AccountsSection: View {
                                 .lineLimit(1)
                         }
                     }
+                    .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.accountPicker)
                 } label: {
-                    AccountRowView(account: selectedAccount)
+                    AccountMenuLabelView(account: selectedAccount)
                 }
+                .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.accountsSectionMenu)
             } else if viewModel.accountList.isEmpty {
                 Text(L10n.ShareExtension.NoAccount.title)
                     .foregroundColor(.gray)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding()
-            } else {
-                Text(L10n.ShareExtension.selectAccount)
-                    .foregroundColor(.gray)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding()
+                    .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.noAccountLabel)
             }
         }
         .onAppear { [weak viewModel] in
@@ -389,6 +461,16 @@ struct AccountsSection: View {
                 selectedAccountId = firstAccount.id
             }
         }
+    }
+}
+
+struct AccountMenuLabelView: View {
+    @ObservedObject var account: AccountViewModel
+    var body: some View {
+        AccountRowView(account: account)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text("selected account \(account.name)"))
+        // .accessibilityValue(Text(account.name))
     }
 }
 
@@ -449,10 +531,49 @@ func backgroundColor(for username: String) -> UIColor {
 
 struct LoadingStateView: View {
     var body: some View {
-        VStack(spacing: 20) {
+        ZStack {
+            Color(.systemBackground).ignoresSafeArea()
+
             ProgressView()
                 .scaleEffect(1.5)
+                .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.loadingProgress)
         }
-        .background(Color(.systemBackground))
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.loadingView)
+    }
+}
+
+struct ShareExtensionAccessibilityIdentifiers {
+    static let title = "share_title"
+    static let rootView = "share_root_view"
+    static let closeButton = "share_close_button"
+    static let sendingOverlay = "share_sending_overlay"
+    static let sendingProgress = "share_sending_progress"
+
+    static let accountsSectionMenu = "share_account_menu"
+    static let accountPicker = "share_account_picker"
+    static let selectedAccountRow = "share_selected_account_row"
+    static let noAccountLabel = "share_no_account_label"
+    static let selectAccountLabel = "share_select_account_label"
+
+    static let conversationsTitle = "share_conversations_title"
+    static let conversationsList = "share_conversation_list"
+    static let conversationRowPrefix = "share_conversation_row_"
+    static let conversationButtonPrefix = "share_conversation_button_"
+
+    static let loadingView = "share_loading_view"
+    static let loadingProgress = "share_loading_progress"
+}
+
+// MARK: - Visual Effect View
+struct VisualEffectView: UIViewRepresentable {
+    let effect: UIVisualEffect
+    
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        return UIVisualEffectView(effect: effect)
+    }
+    
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = effect
     }
 }
