@@ -17,6 +17,7 @@
  */
 
 import SwiftUI
+import UIKit
 import UniformTypeIdentifiers
 import CryptoKit
 
@@ -29,6 +30,10 @@ struct ShareView: View {
     @State private var showUnsupportedAlert: Bool = false
     @State private var selectedAccountId: String?
     @State private var isSending: Bool = false
+    @State private var selectedConversationIds: Set<String> = []
+    @State private var buttonHeight: CGFloat = 0
+    @State private var showingAccountPicker: Bool = false
+    @State private var searchText: String = ""
 
     let supportedTypes: [UTType] = [
         .plainText, .image, .fileURL, .url,
@@ -59,28 +64,30 @@ struct ShareView: View {
     }
 
     var body: some View {
+        // swiftlint:disable:next closure_body_length
         NavigationView {
-            ZStack {
+            ZStack(alignment: .top) {
+                if let selectedId = selectedAccountId {
+                        ConversationSection(
+                            selectedAccountId: selectedId,
+                            viewModel: viewModel,
+                            selectedConversationIds: $selectedConversationIds,
+                            buttonHeight: $buttonHeight,
+                            isSending: $isSending,
+                            searchText: $searchText,
+                            sendSelected: sendSelected
+                        )
+                }
+//                VStack {
+//                    AccountsSection(
+//                        selectedAccountId: $selectedAccountId,
+//                        viewModel: viewModel,
+//                        buttonHeight: $buttonHeight
+//                    )
+//                    Spacer()
+//                }
                 if viewModel.isLoading {
                     LoadingStateView()
-                } else {
-                    VStack(alignment: .leading, spacing: 16) {
-                        AccountsSection(
-                            selectedAccountId: $selectedAccountId,
-                            viewModel: viewModel,
-                            sendAction: sendAllItems
-                        )
-
-                        if let selectedId = selectedAccountId {
-                            ConversationSection(
-                                selectedAccountId: selectedId,
-                                viewModel: viewModel,
-                                sendAction: sendAllItems
-                            )
-                        }
-                        Spacer()
-                    }
-                    .padding()
                 }
                 if isSending {
                     Color.black.opacity(0.4)
@@ -94,19 +101,30 @@ struct ShareView: View {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(Color.black.opacity(0.8))
                                 )
+                                .accessibilityLabel(Text(L10n.ShareExtension.sending))
+                                .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.sendingProgress)
+                                .onAppear {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        UIAccessibility.post(notification: .announcement, argument: L10n.ShareExtension.sending)
+                                    }
+                                }
                         )
+                        .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.sendingOverlay)
                 }
             }
-            .navigationTitle(L10n.ShareExtension.appName)
+            .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.rootView)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(L10n.Global.close) {
-                        closeAction()
-                    }
+           // .navigationTitle(L10n.ShareExtension.appName)
+            .navigationBarItems(
+                leading: AccountNavigationButton(
+                    selectedAccountId: $selectedAccountId,
+                    viewModel: viewModel
+                ),
+                trailing: Button(L10n.Global.close) {
+                    closeAction()
                 }
-            }
-            .navigationBarHidden(false)
+            )
+            .modifier(SearchableModifier(searchText: $searchText))
             .alert(isPresented: $showUnsupportedAlert) {
                 Alert(
                     title: Text(L10n.ShareExtension.UnsupportedType.title),
@@ -126,6 +144,17 @@ struct ShareView: View {
             .onChange(of: viewModel.shouldCloseExtension) { shouldClose in
                 if shouldClose {
                     closeAction()
+                }
+            }
+            .onAppear { [weak viewModel] in
+                guard let viewModel = viewModel else { return }
+                if selectedAccountId == nil, let firstAccount = viewModel.accountList.first {
+                    selectedAccountId = firstAccount.id
+                }
+            }
+            .onChange(of: viewModel.accountList) { newAccountList in
+                if selectedAccountId == nil, let firstAccount = newAccountList.first {
+                    selectedAccountId = firstAccount.id
                 }
             }
         }
@@ -159,6 +188,14 @@ struct ShareView: View {
         }
 
         isSending = true
+    }
+
+    private func sendSelected() {
+        guard let accountId = selectedAccountId else { return }
+        isSending = true
+        for convoId in selectedConversationIds {
+            sendAllItems(to: convoId, accountId: accountId)
+        }
     }
 
     private func getSupportedTypes(convoId: String, accountId: String) -> [(UTType, (NSItemProvider, Any?) -> Void)] {
@@ -212,29 +249,242 @@ struct ShareView: View {
     }
 }
 
+struct AccountNavigationButton: View {
+    @Binding var selectedAccountId: String?
+    @ObservedObject var viewModel: ShareViewModel
+    @State private var showingAccountPicker: Bool = false
+    
+    var body: some View {
+        if let selectedAccountId = selectedAccountId, !selectedAccountId.isEmpty,
+        let selectedAccount = viewModel.accountList.first(where: { $0.id == selectedAccountId }) {
+            Button(action: {
+                showingAccountPicker = true
+            }) {
+                HStack(spacing: 8) {
+                    AccountAvatarView(account: selectedAccount, size: 24)
+                    
+                    Text(selectedAccount.name)
+                        .font(.callout)
+                       // .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.primary)
+                        .truncationMode(.middle)
+                        .lineLimit(1)
+                        .frame(maxWidth: 150)
+
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.secondary)
+                }
+                .padding(.horizontal, 4)
+//                .padding(.vertical, 4)
+//                .background(
+//                    RoundedRectangle(cornerRadius: 8)
+//                        .fill(Color(.systemGray6))
+//                )
+            }
+            .sheet(isPresented: $showingAccountPicker) {
+                AccountSelectionSheet(
+                    accounts: viewModel.accountList,
+                    selectedAccountId: $selectedAccountId,
+                    isPresented: $showingAccountPicker
+                )
+            }
+            .accessibilityLabel("Selected account: \(selectedAccount.name). Tap to change account.")
+            .accessibilityHint("Double tap to open account selection")
+        } else {
+            EmptyView()
+        }
+    }
+}
+
 struct ConversationSection: View {
     let selectedAccountId: String
     @ObservedObject var viewModel: ShareViewModel
-    let sendAction: (String, String) -> Void
-
-    var body: some View {
-        if let conversations = viewModel.conversationsByAccount[selectedAccountId], !conversations.isEmpty {
-            VStack(alignment: .leading, spacing: 12) {
-                Text(L10n.ShareExtension.conversations)
-                    .font(.headline)
-                ScrollView {
-                    ForEach(conversations) { conversation in
-                        ConversationRowView(conversation: conversation, sendAction: sendAction)
-                    }
-                }
-            }
-        } else {
-            Text(L10n.ShareExtension.noConversation)
-                .foregroundColor(.gray)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding()
+    @Binding var selectedConversationIds: Set<String>
+    @Binding var buttonHeight: CGFloat
+    @Binding var isSending: Bool
+    @Binding var searchText: String
+    let sendSelected: () -> Void
+    
+    private var filteredConversations: [ConversationViewModel] {
+        guard let conversations = viewModel.conversationsByAccount[selectedAccountId] else { return [] }
+        
+        if searchText.isEmpty {
+            return conversations
+        }
+        
+        return conversations.filter { conversation in
+            conversation.name.localizedCaseInsensitiveContains(searchText)
         }
     }
+
+    var body: some View {
+        if !filteredConversations.isEmpty {
+            ZStack(alignment: .bottom) {
+                ScrollView(showsIndicators: false) {
+//                    Spacer()
+//                        .frame(height: buttonHeight + 30)
+//                    Text(L10n.ShareExtension.conversations)
+//                        .font(.headline)
+//                        .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.conversationsTitle)
+                    ForEach(filteredConversations) { conversation in
+                        ConversationSelectableRow(
+                            conversation: conversation,
+                            isSelected: selectedConversationIds.contains(conversation.id),
+                            toggleAction: {
+                                if selectedConversationIds.contains(conversation.id) {
+                                    selectedConversationIds.remove(conversation.id)
+                                } else {
+                                    selectedConversationIds.insert(conversation.id)
+                                }
+                            }
+                        )
+                    }
+                }
+                .padding(.horizontal)
+                .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.conversationsList)
+                if !(selectedConversationIds.isEmpty || isSending) {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Button("Share file with \(selectedConversationIds.count) contacts") {
+                                UIAccessibility.post(notification: .announcement, argument: L10n.ShareExtension.sending)
+                                sendSelected()
+                            }
+                            .disabled(selectedConversationIds.isEmpty || isSending)
+                            .padding(.horizontal, 15)
+                            .padding(.vertical, 10)
+//                            .background(
+//                                ZStack {
+//                                    // Glass background
+//                                    VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
+//                                        .cornerRadius(35)
+//                                    
+//                                    // Liquid glass gradient overlay
+//                                    LinearGradient(
+//                                        gradient: Gradient(colors: [
+//                                            Color.accentColor.opacity(0.25),
+//                                            Color.accentColor.opacity(0.1),
+//                                            Color.clear,
+//                                            Color.accentColor.opacity(0.05)
+//                                        ]),
+//                                        startPoint: .topLeading,
+//                                        endPoint: .bottomTrailing
+//                                    )
+//                                    .cornerRadius(35)
+//                                    
+//                                    // Subtle inner glow
+//                                    RoundedRectangle(cornerRadius: 35)
+//                                        .stroke(
+//                                            LinearGradient(
+//                                                gradient: Gradient(colors: [
+//                                                    Color.accentColor.opacity(0.3),
+//                                                    Color.accentColor.opacity(0.1),
+//                                                    Color.clear
+//                                                ]),
+//                                                startPoint: .topLeading,
+//                                                endPoint: .bottomTrailing
+//                                            ),
+//                                            lineWidth: 1
+//                                        )
+//                                    
+//                                    // Disabled state overlay
+//                                    if selectedConversationIds.isEmpty || isSending {
+//                                        Color.black.opacity(0.3)
+//                                            .cornerRadius(35)
+//                                    }
+//                                }
+//                            )
+                            .background(
+                                ZStack {
+                                    // Blurred translucent background (works from iOS 14.0)
+//                                    VisualEffectView(effect: UIBlurEffect(style: .prominent))
+//                                        .clipShape(Capsule())
+                                    Color.accentColor
+                                       // .opacity(0.25)
+                                        .clipShape(Capsule())
+//                                    VisualEffectView(effect: UIBlurEffect(style: .prominent))
+//                                        .clipShape(Capsule())
+
+                                    // Subtle gradient overlay to enhance "liquid" feel
+//                                    LinearGradient(
+//                                        gradient: Gradient(colors: [
+//                                            Color.white.opacity(0.25),
+//                                            Color.white.opacity(0.10)
+//                                        ]),
+//                                        startPoint: .topLeading,
+//                                        endPoint: .bottomTrailing
+//                                    )
+//                                    .clipShape(Capsule())
+//                                    .overlay(
+//                                        Capsule()
+//                                            .stroke(Color.white.opacity(0.35), lineWidth: 1)
+//                                    )
+                                }
+                            )
+                            .foregroundColor(.white)
+                            .shadow(color: Color(.black).opacity(0.2), radius: 3, x: 0, y: 3)
+//                            .foregroundColor(selectedConversationIds.isEmpty || isSending ? .secondary : .primary)
+                            //.cornerRadius(35)
+                            //.shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
+//                            .scaleEffect(selectedConversationIds.isEmpty || isSending ? 0.98 : 1.0)
+//                            .animation(.easeInOut(duration: 0.2), value: selectedConversationIds.isEmpty || isSending)
+                            Spacer()
+                        }
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background (
+                        ZStack {
+                            VisualEffectView(effect: UIBlurEffect(style: .regular))
+                                .mask(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            Color(.systemBackground).opacity(0.7),
+                                            Color(.systemBackground).opacity(0.5),
+                                            Color(.systemBackground).opacity(0.1)
+                                        ]),
+                                        startPoint: .bottom,
+                                        endPoint: .top
+                                    )
+                                )
+                        }
+                            .ignoresSafeArea(edges: .bottom)
+                            .shadow(color: Color(.systemBackground), radius: 15, x: 0, y: 5)
+                    )
+                }
+//                .background(
+//                    VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+//                        .cornerRadius(10)
+//                        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: -2)
+//                )
+            }
+        } else {
+            VStack {
+                if searchText.isEmpty {
+                    Text(L10n.ShareExtension.noConversation)
+                        .foregroundColor(.gray)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding()
+                } else {
+                    VStack(spacing: 8) {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 32))
+                            .foregroundColor(.gray)
+                        Text("No conversations found")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                        Text("Try a different search term")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding()
+                }
+            }
+        }
+    }
+
 }
 
 struct AccountRowView: View {
@@ -249,6 +499,7 @@ struct AccountRowView: View {
                         .scaledToFill()
                         .frame(width: 45, height: 45)
                         .clipShape(Circle())
+                        .accessibilityHidden(true)
                 } else {
                     Circle()
                         .fill(account.bgColor)
@@ -258,6 +509,7 @@ struct AccountRowView: View {
                                 .font(.system(size: 16))
                                 .foregroundColor(.white)
                         )
+                        .accessibilityHidden(true)
                 }
             } else {
                 Circle()
@@ -270,6 +522,7 @@ struct AccountRowView: View {
                             .frame(width: 15, height: 15)
                             .foregroundColor(.white)
                     )
+                    .accessibilityHidden(true)
             }
 
             Text(account.name)
@@ -280,23 +533,24 @@ struct AccountRowView: View {
 
             Image(systemName: "chevron.down")
                 .foregroundColor(.gray)
+                .accessibilityHidden(true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 12)
         .padding(.horizontal)
         .background(Color.gray.opacity(0.1))
         .cornerRadius(8)
+        .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.selectedAccountRow)
     }
 }
 
-struct ConversationRowView: View {
+struct ConversationSelectableRow: View {
     @ObservedObject var conversation: ConversationViewModel
-    let sendAction: (String, String) -> Void
+    let isSelected: Bool
+    let toggleAction: () -> Void
 
     var body: some View {
-        Button(action: {
-            sendAction(conversation.id, conversation.accountId)
-        }) {
+        Button(action: toggleAction) {
             HStack(spacing: 12) {
                 if conversation.avatarType == .single {
                     if let avatarImage = conversation.processedAvatar {
@@ -335,11 +589,28 @@ struct ConversationRowView: View {
                     .multilineTextAlignment(.leading)
                     .truncationMode(.middle)
                     .lineLimit(1)
-
                 Spacer()
+
+                if isSelected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.accentColor)
+                        .accessibilityHidden(true)
+                } else {
+                    Image(systemName: "circle")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.secondary)
+                        .accessibilityHidden(true)
+                }
             }
             .padding(.vertical, 8)
         }
+        .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.conversationButtonPrefix + conversation.id)
+        .accessibilityLabel(Text(conversation.name))
+        .accessibilityHint("Double tap to select this conversation")
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
         .onAppear {
             conversation.loadDetailsIfNeeded()
         }
@@ -348,34 +619,73 @@ struct ConversationRowView: View {
 
 struct AccountsSection: View {
     @Binding var selectedAccountId: String?
-    let viewModel: ShareViewModel
-    let sendAction: (String, String) -> Void
+    @ObservedObject var viewModel: ShareViewModel
+    @Binding var buttonHeight: CGFloat
+    @State private var showingAccountPicker = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-
             if let selectedAccount = viewModel.accountList.first(where: { $0.id == selectedAccountId }) {
-                Menu {
-                    Picker(L10n.ShareExtension.selectAccount, selection: $selectedAccountId) {
-                        ForEach(viewModel.accountList) { account in
-                            Text(account.name).tag(account.id as String?)
-                                .truncationMode(.middle)
-                                .lineLimit(1)
+                    VStack {
+                        Button(action: {
+                            showingAccountPicker = true
+                        }) {
+                            AccountMenuLabelView(account: selectedAccount)
                         }
+                        .background(
+                            GeometryReader { geometry in
+                                Color.clear
+                                    .onAppear {
+                                        buttonHeight = geometry.size.height
+                                    }
+                            }
+                        )
+                        .sheet(isPresented: $showingAccountPicker) {
+                            AccountSelectionSheet(
+                                accounts: viewModel.accountList,
+                                selectedAccountId: $selectedAccountId,
+                                isPresented: $showingAccountPicker
+                            )
+                        }
+                        .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.accountsSectionMenu)
                     }
-                } label: {
-                    AccountRowView(account: selectedAccount)
-                }
+                    .background(Color.blue)
+//                    .padding(.bottom, 20)
+//                    .padding(.top, 10)
+//                    .background(
+//                        GeometryReader { geometry in
+//                            Color.clear
+//                                .onAppear {
+//                                    buttonHeight = geometry.size.height
+//                                }
+//                        }
+//                    )
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .background (
+//                        ZStack {
+//                            VisualEffectView(effect: UIBlurEffect(style: .regular))
+//                                .mask(
+//                                    LinearGradient(
+//                                        gradient: Gradient(colors: [
+//                                            Color(.systemBackground).opacity(0.7),
+//                                            Color(.systemBackground).opacity(0.5),
+//                                            Color(.systemBackground).opacity(0.1)
+//                                        ]),
+//                                        startPoint: .top,
+//                                        endPoint: .bottom
+//                                    )
+//                                )
+//                        }
+//                            .ignoresSafeArea(edges: .top)
+//                            .shadow(color: Color(.systemBackground), radius: 15, x: 0, y: 5)
+//                    )
             } else if viewModel.accountList.isEmpty {
-                Text(L10n.ShareExtension.NoAccount.title)
-                    .foregroundColor(.gray)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding()
-            } else {
-                Text(L10n.ShareExtension.selectAccount)
-                    .foregroundColor(.gray)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding()
+                VStack{}
+//                Text(L10n.ShareExtension.NoAccount.title)
+//                    .foregroundColor(.gray)
+//                    .frame(maxWidth: .infinity, alignment: .center)
+//                    .padding()
+//                    .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.noAccountLabel)
             }
         }
         .onAppear { [weak viewModel] in
@@ -389,6 +699,51 @@ struct AccountsSection: View {
                 selectedAccountId = firstAccount.id
             }
         }
+    }
+}
+
+struct AccountMenuLabelView: View {
+    @ObservedObject var account: AccountViewModel
+
+    var body: some View {
+        HStack(spacing: 12) {
+            AccountAvatarView(account: account, size: 30)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(account.name)
+                    .bold()
+                    .foregroundColor(.primary)
+                    .truncationMode(.middle)
+                    .lineLimit(1)
+                
+//                Text(L10n.ShareExtension.selectAccount)
+//                    .foregroundColor(.secondary)
+            }
+
+            Image(systemName: "chevron.up.chevron.down")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundColor(.secondary)
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
+//        .background(
+//            ZStack {
+//                VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
+//                    //.cornerRadius(35)
+//                    .clipShape(Capsule())
+//            }
+//        )
+////        .overlay(
+////            RoundedRectangle(cornerRadius: 35)
+////                .stroke(Color(.white).opacity(0.2), lineWidth: 1)
+////        )
+//        .clipShape(Capsule())
+//        //.cornerRadius(35)
+//        .shadow(color: Color(.black).opacity(0.1), radius: 3, x: 0, y: 3)
+//        .padding(.horizontal)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text("Selected account: \(account.name). Tap to change account."))
+        .accessibilityHint("Double tap to open account selection")
     }
 }
 
@@ -449,10 +804,185 @@ func backgroundColor(for username: String) -> UIColor {
 
 struct LoadingStateView: View {
     var body: some View {
-        VStack(spacing: 20) {
+        ZStack {
+            Color(.systemBackground).ignoresSafeArea()
+
             ProgressView()
                 .scaleEffect(1.5)
+                .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.loadingProgress)
         }
-        .background(Color(.systemBackground))
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityIdentifier(ShareExtensionAccessibilityIdentifiers.loadingView)
+    }
+}
+
+struct ShareExtensionAccessibilityIdentifiers {
+    static let title = "share_title"
+    static let rootView = "share_root_view"
+    static let closeButton = "share_close_button"
+    static let sendingOverlay = "share_sending_overlay"
+    static let sendingProgress = "share_sending_progress"
+
+    static let accountsSectionMenu = "share_account_menu"
+    static let accountPicker = "share_account_picker"
+    static let selectedAccountRow = "share_selected_account_row"
+    static let noAccountLabel = "share_no_account_label"
+    static let selectAccountLabel = "share_select_account_label"
+
+    static let conversationsTitle = "share_conversations_title"
+    static let conversationsList = "share_conversation_list"
+    static let conversationRowPrefix = "share_conversation_row_"
+    static let conversationButtonPrefix = "share_conversation_button_"
+
+    static let loadingView = "share_loading_view"
+    static let loadingProgress = "share_loading_progress"
+}
+
+// MARK: - Account Selection Sheet
+struct AccountSelectionSheet: View {
+    let accounts: [AccountViewModel]
+    @Binding var selectedAccountId: String?
+    @Binding var isPresented: Bool
+    
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(accounts) { account in
+                    AccountSelectionRowView(
+                        account: account,
+                        isSelected: account.id == selectedAccountId
+                    ) {
+                        selectedAccountId = account.id
+                        isPresented = false
+                    }
+                }
+            }
+            .navigationTitle(L10n.ShareExtension.selectAccount)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        isPresented = false
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct AccountSelectionRowView: View {
+    @ObservedObject var account: AccountViewModel
+    let isSelected: Bool
+    let onTap: () -> Void
+    
+    var body: some View {
+        Button(action: onTap) {
+            HStack(spacing: 12) {
+                AccountAvatarView(account: account, size: 45)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(account.name)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.primary)
+                        .truncationMode(.middle)
+                        .lineLimit(1)
+                        .multilineTextAlignment(.leading)
+                    
+                    Text("Account")
+                        .font(.system(size: 13))
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                if isSelected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.accentColor)
+                }
+            }
+            .padding(.vertical, 8)
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+}
+
+struct AccountAvatarView: View {
+    @ObservedObject var account: AccountViewModel
+    let size: CGFloat
+    
+    var body: some View {
+        if account.avatarType == .single {
+            if let avatarImage = account.processedAvatar {
+                Image(uiImage: avatarImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: size, height: size)
+                    .clipShape(Circle())
+            } else {
+                Circle()
+                    .fill(account.bgColor)
+                    .frame(width: size, height: size)
+                    .overlay(
+                        Text(String(account.name.prefix(1)).uppercased())
+                            .font(.system(size: size * 0.4, weight: .medium))
+                            .foregroundColor(.white)
+                    )
+            }
+        } else {
+            Circle()
+                .fill(account.bgColor)
+                .frame(width: size, height: size)
+                .overlay(
+                    Image(systemName: "person")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: size * 0.6, height: size * 0.6)
+                        .foregroundColor(.white)
+                )
+        }
+    }
+}
+
+// MARK: - Visual Effect View
+struct VisualEffectView: UIViewRepresentable {
+    let effect: UIVisualEffect
+    
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        return UIVisualEffectView(effect: effect)
+    }
+    
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = effect
+    }
+}
+
+// MARK: - Searchable Modifier with iOS Version Check
+struct SearchableModifier: ViewModifier {
+    @Binding var searchText: String
+    
+    func body(content: Content) -> some View {
+        if #available(iOS 15.0, *) {
+            content
+                .searchable(text: $searchText, prompt: "Search conversations")
+        } else {
+            // Fallback for iOS 14.5-14.9: Use a custom search bar
+            content
+                .overlay(
+                    VStack {
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                            TextField("Search conversations", text: $searchText)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        }
+                        .padding(.horizontal)
+                        .padding(.top, 8)
+                        Spacer()
+                    }
+                    .background(Color(.systemBackground))
+                )
+        }
     }
 }
