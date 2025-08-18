@@ -179,10 +179,6 @@ extension String {
             .replacingOccurrences(of: ")", with: "")
     }
 
-    func containsCaseInsensitive(string: String) -> Bool {
-        return self.range(of: string, options: .caseInsensitive) != nil
-    }
-
     func generateQRCode() -> UIImage? {
         let filter = CIFilter.qrCodeGenerator()
         let context = CIContext()
