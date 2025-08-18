@@ -449,6 +449,8 @@
 		26E081222BC03AB3001B4C18 /* AccountLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081212BC03AB3001B4C18 /* AccountLists.swift */; };
 		26E081242BC07824001B4C18 /* RequestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081232BC07824001B4C18 /* RequestsViewModel.swift */; };
 		26E081262BC09534001B4C18 /* RequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081252BC09534001B4C18 /* RequestsView.swift */; };
+		26EB3ADB2EAC42FB00ACE157 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DA1F0D915100D36361 /* Localizable.strings */; };
+		26EB3ADC2EAEA50B00ACE157 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
 		26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB61332B75724000183FF4 /* AccountCreationTest.swift */; };
 		26EEB19C2BD98CCA00B8B04B /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEB19B2BD98CCA00B8B04B /* SearchBar.swift */; };
 		26EEB19E2BDEDC0C00B8B04B /* UIControllersWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEB19D2BDEDC0C00B8B04B /* UIControllersWrappers.swift */; };
@@ -4159,6 +4161,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26EB3ADB2EAC42FB00ACE157 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4601,6 +4604,7 @@
 			files = (
 				26EFD7E52E2E944100B63F74 /* CommonHelpers.swift in Sources */,
 				3D0E69882DDCDBE70046FA3D /* ShareView.swift in Sources */,
+				26EB3ADC2EAEA50B00ACE157 /* AvatarsColors.swift in Sources */,
 				3D6E7C582DDD058800C6EB24 /* Strings.swift in Sources */,
 				3DAAC4732DDD1AC500D94B71 /* Adapter.mm in Sources */,
 				3D0E697A2DDCD9C80046FA3D /* ShareViewController.swift in Sources */,
