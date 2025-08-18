@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "ஜாமி மீது உங்களை எளிதாகக் கண்டுபிடித்து அடைய உதவும் பயனர் பெயரை நீங்கள் தேர்வு செய்யலாம்.";
 "createAccount.newAccount" = "New account";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "குறியாக்கம்";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "தனிப்பயனாக்க";
-"createAccount.encryptTitle" = "கடவுச்சொல் கொண்ட கணக்கை குறியாக்கம் செய்யவும்";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR குறியீடு";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Exit";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "உள்ளூர் காப்பக கோப்பிலிருந்து ஜாமி கணக்கை இறக்குமதி செய்யுங்கள்.";
-"importFromArchive.passwordExplanation" = "கணக்கு ஒரு கடவுச்சொல்லுடன் குறியாக்கம் செய்யப்பட்டிருந்தால், பின்வரும் புலத்தை நிரப்பவும்.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "இறக்குமதி";
 "importFromArchive.selectArchiveButton" = "காப்பக கோப்புகளைத் தேர்ந்தெடுக்கவும்";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "மீறல்";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "கணக்கு கடவுச்சொல்லை உள்ளிடவும்";
 "accountPage.deviceRevoked" = "சாதனத்தை திரும்பப் பெறுதல் நிறைவு";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "பதிவு";
 "accountPage.usernameRegisterAction" = "பதிவு";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "குறியாக்கம் கணக்கு";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "கடவுச்சொல்லை மாற்றவும்";
 "accountPage.currentPasswordPlaceholder" = "தற்போதைய கடவுச்சொல்லை உள்ளிடவும்";
 "accountPage.newPasswordPlaceholder" = "புதிய கடவுச்சொல்லை உள்ளிடவும்";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "தவறான கடவுச்சொல்";
 "accountPage.enableBoothMode" = "புத்து பயன்முறையை இயக்கு";
 "accountPage.disableBoothMode" = "புத் பயன்முறையை முடக்கு";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "ஸ்டேஷன் பயன்முறையில் உரையாடல் வரலாறு சேமிக்கப்படவில்லை மற்றும் ஜாமி செயல்பாடு புறப்படும் அழைப்புகளைச் செய்வதன் மூலம் வரையறுக்கப்பட்டுள்ளது. நீங்கள் ஸ்டேஷன் பயன்முறையை இயக்கும்போது உங்கள் உரையாடல்கள் அனைத்தும் நீக்கப்படும்.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "ஸ்டேஷன் பயன்முறையை இயக்கிய பிறகு உங்கள் உரையாடல்கள் அனைத்தும் நீக்கப்படும்.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "உள்ளூர் சகாக்களைக் கண்டறிவதை இயக்குதல்";
 "accountPage.peerDiscoveryExplanation" = "எங்கள் உள்ளூர் நெட்வொர்க்கில் விளம்பரப்படுத்தும் மற்ற DHT முனைகளுடன் இணைக்கவும்";
 "accountPage.autoRegistration" = "காலாவதிக்குப் பிறகு தானியங்கி பதிவு";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "கணக்கை நிர்வகிக்கவும்";
-"accountPage.encryptAccount" = "கடவுச்சொல்லுடன் கணக்கை குறியாக்கம் செய்யவும்";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "இணைக்கப்பட்ட சாதனங்கள்";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "ஆடியோ அழைப்பைத் தொடங்கவும்";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "மைக்ரோஃபோன் முடக்கப்பட்டது";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "இடைநிறுத்த அழைப்பு";
-"accessibility.calls.default.hangUpCall" = "மூடிடு";
+"accessibility.calls.default.hangUpCall" = "அழைப்பை முடித்திடுக";
 "accessibility.calls.default.addParticipant" = "பங்கேற்பாளரை சேர்க்கவும்";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "கேமரா நிறுத்த";
 "accessibility.calls.alter.pauseCall" = "அழைப்பைத் தொடங்குதல்";
-"accessibility.calls.alter.hangUpCall" = "மூடிடு";
+"accessibility.calls.alter.hangUpCall" = "அழைப்பை முடித்திடுக";
 "accessibility.calls.alter.addParticipant" = "பங்கேற்பாளரை சேர்க்கவும்";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "அமைக்கப்படாத மாடரேட்டர்";
 "accessibility.conference.muteAudio" = "மவுண்ட் ஆடியோ";
 "accessibility.conference.unmuteAudio" = "ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி";
-"accessibility.conference.hangup" = "மூடிடு";
+"accessibility.conference.hangup" = "அழைப்பை முடித்திடுக";
 "accessibility.conference.lowerHand" = "கீழ் கை";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

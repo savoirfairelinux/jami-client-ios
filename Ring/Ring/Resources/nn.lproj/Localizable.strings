@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Du kan velja ein brukernavn for å hjelpa andre til å finne deg på Jami.";
 "createAccount.newAccount" = "New account";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Kryptografert";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Tilpassa";
-"createAccount.encryptTitle" = "Krypter konto med passord";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "Ein Jami-konto blir oppretta og lagra lokalt på denne eininga, likt eit arkiv som inneheld nyklane til kontoen din. Tilgjenget til arkivet kan, heilt valfritt, bli verna med eit passord.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR-kode";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Exit";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Importar Jami-kontoen frå lokal arkivfil.";
-"importFromArchive.passwordExplanation" = "Dersom kontoen er kryptert med ein passord, bed å fylla i feltet som følger.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Import";
 "importFromArchive.selectArchiveButton" = "Velg arkivfil";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Avkalling";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Enter account password";
 "accountPage.deviceRevoked" = "Avkalling av utstyret fullført";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Registrering";
 "accountPage.usernameRegisterAction" = "Registrer";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "Kryptekonto";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Endra passord";
 "accountPage.currentPasswordPlaceholder" = "Skriv inn gjeldende passord";
 "accountPage.newPasswordPlaceholder" = "Skriv inn nytt passord";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Feil passord";
 "accountPage.enableBoothMode" = "Aktive brukstilstand";
 "accountPage.disableBoothMode" = "Deaktivera standstill";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "I stand-modus blir samtalshistoria ikkje lagd og funksjonaliteten til jami er begrenset av å gjera utgående samtal. Når du aktiverer stand-modus blir alle samtalene dine fjerna.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "Etter at du har aktivert stand-modus, blir alle samtalene dine fjernt.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "Legg til lag for lokal peer-oppdaging";
 "accountPage.peerDiscoveryExplanation" = "Knyt deg til andre DHT-knodar som annonserer på nettverket vårt";
 "accountPage.autoRegistration" = "Autoregistrering etter utløpet";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Ta styr på kontoen";
-"accountPage.encryptAccount" = "Kryptera konto med passord";
-"accountPage.passwordExplanation" = "Ein Jami-konto blir oppretta og lagra lokalt på denne eininga, likt eit arkiv som inneheld nyklane til kontoen din. Tilgjenget til arkivet kan, heilt valfritt, bli verna med eit passord.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passorda er ikkje like.";
 "accountPage.passwordCreated" = "Oppretta passord";
 "accountPage.passwordUpdated" = "Oppdaterte passord";
 "accountPage.linkedDevices" = "Kopplande utstyr";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "Kontoen er kryptert med eit passord, skriv inn eit passord for å generera ein PIN-kode";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Skriv inn passordet du brukte for å kryptera kontoen";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Start lydsamtale";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Døyva mikrofon";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pause ring";
-"accessibility.calls.default.hangUpCall" = "Henga opp";
+"accessibility.calls.default.hangUpCall" = "Avslutt samtale";
 "accessibility.calls.default.addParticipant" = "Legg til deltakar";
 "accessibility.calls.default.switchCamera" = "Byta kamera";
 "accessibility.calls.default.toggleSpeaker" = "Skru på høgtalar";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Stopp kamera";
 "accessibility.calls.alter.pauseCall" = "Fortsett samtala";
-"accessibility.calls.alter.hangUpCall" = "Legg på";
+"accessibility.calls.alter.hangUpCall" = "Avslutt samtale";
 "accessibility.calls.alter.addParticipant" = "Legg til deltakar";
 "accessibility.calls.alter.switchCamera" = "Byta kamera";
 "accessibility.calls.alter.toggleSpeaker" = "Skri av høgtalar";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Unset moderator";
 "accessibility.conference.muteAudio" = "Døyv lyd";
 "accessibility.conference.unmuteAudio" = "Skru på lyd";
-"accessibility.conference.hangup" = "Legg på";
+"accessibility.conference.hangup" = "Avslutt samtale";
 "accessibility.conference.lowerHand" = "Nedre hand";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

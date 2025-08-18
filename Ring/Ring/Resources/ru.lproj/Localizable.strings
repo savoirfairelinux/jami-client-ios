@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Создание аккаунта";
 "createAccount.nameExplanation" = "Вы можете выбрать имя пользователя, чтобы помочь другим найти и связаться с вами в Джами.";
 "createAccount.newAccount" = "Новый аккаунт";
-"createAccount.encryptionEnabled" = "Шифрование включено";
-"createAccount.encrypt" = "Зашифрованное";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Настроить";
-"createAccount.encryptTitle" = "Зашифровать аккаунт паролем";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "Аккаунт Джами создаётся локально и хранится только на этом устройстве в форме архива, содержащего ключи от вашей учётной записи. При желании доступ к архиву может быть защищён паролем.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR-код";
 "linkToAccount.showPinCode" = "Код аутентификации";
 "linkToAccount.actionRequired" = "Требуется действие.\nПодтвердите учетную запись на исходном устройстве.";
-"linkToAccount.allSet" = "Учетная запись успешно импортирована.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Перейти к импортированной учетной записи";
 "linkToAccount.exportInstructions" = "На исходном устройстве инициируйте экспорт.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "Когда будете готовы, отсканируйте QR-код.";
 "linkToAccount.enterProvidedCode" = "По готовности введите код аутентификации.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Выход";
 "linkToAccount.shareMessage" = "Ваш код:%@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Импортируйте аккаунт Джами из локального архивного файла.";
-"importFromArchive.passwordExplanation" = "Если аккаунт зашифрован паролем, заполните следующее поле.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Импорт из архива";
 "importFromArchive.buttonTitle" = "Импорт";
 "importFromArchive.selectArchiveButton" = "Выберите файл архива";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Удалить устройство";
 "accountPage.revokeDeviceMessage" = "Хотите удалить это устройство? Удаление нельзя будет отменить.";
 "accountPage.revokeDeviceButton" = "Отвязать";
-"accountPage.revokeDevicePlaceholder" = "Введите ваш пароль";
+"accountPage.revokeDevicePlaceholder" = "Enter account password";
 "accountPage.deviceRevoked" = "Отзыв устройства завершенно";
 "accountPage.deviceRevocationProgress" = "Удаление...";
 "accountPage.deviceRevocationSuccess" = "Устройство удалено";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Регистрация";
 "accountPage.usernameRegisterAction" = "Зарегистрировать";
 "accountPage.usernameRegistrationFailedTitle" = "Не удалось зарегистрироваться";
-"accountPage.usernameRegistrationFailed" = "Пожалуйста, проверьте пароль.";
-"accountPage.createPassword" = "Зашифровать аккаунт";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Изменить пароль";
 "accountPage.currentPasswordPlaceholder" = "Введите текущий пароль";
 "accountPage.newPasswordPlaceholder" = "Введите новый пароль";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Неверный пароль";
 "accountPage.enableBoothMode" = "Включить режим кабинки";
 "accountPage.disableBoothMode" = "Выключить режим кабинки";
-"accountPage.disableBoothModeExplanation" = "Пожалуйста, укажите пароль вашей учётной записи";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "В режиме кабинки история разговоров не сохраняется, а функциональность Джами ограничена исходящими звонками. Когда вы включите режим кабинки, все ваши разговоры будут удалены.";
-"accountPage.noBoothMode" = "Для включения режима кабинки необходимо сначала защитить ваш аккаунт паролем.";
-"accountPage.boothModeAlertMessage" = "После включения режима кабинки все ваши разговоры будут удалены.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "Включить обнаружение локальных пиров";
 "accountPage.peerDiscoveryExplanation" = "Подключаться к другим DHT узлам в локальной сети";
 "accountPage.autoRegistration" = "Автоматическая регистрация после истечения срока действия";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Введите имя профиля";
 "accountPage.editProfile" = "Редактировать профиль";
 "accountPage.manageAccount" = "Управление аккаунтом";
-"accountPage.encryptAccount" = "Зашифровать аккаунт с паролем";
-"accountPage.passwordExplanation" = "Аккаунт Джами создаётся локально и хранится только на этом устройстве в форме архива, содержащего ключи от вашей учётной записи. По желанию, доступ к архиву может быть защищён паролем.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Пароли не совпадают.";
 "accountPage.passwordCreated" = "Пароль создан";
 "accountPage.passwordUpdated" = "Пароль обновлен";
 "accountPage.linkedDevices" = "Привязанные устройства";
 "accountPage.unlink" = "Отвязать";
 "accountPage.generatingPin" = "Генерируется PIN-код...";
-"accountPage.passwordForPin" = "Этот аккаунт защищен паролем, введите пароль для создания PIN-кода";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "На другом устройстве";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "Ошибка при генерации ПИН-кода";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Создание резервной копии";
 "backupAccount.archiveName" = "Выберите имя для архива";
 "backupAccount.archiveNamePlaceholder" = "Имя архива";
-"backupAccount.passwordRequest" = "Введите пароль, используемый для шифрования учетной записи.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Резервная копия";
 "backupAccount.documentPickerButton" = "Открыть папку резервного копирования";
 "backupAccount.exportSuccess" = "Резервная копия создана";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "код";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Учетная запись успешно импортирована на новое устройство.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Начать голосовой вызов";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Выключить микрофон";
 "accessibility.calls.default.toggleVideo" = "Включить камеру";
 "accessibility.calls.default.pauseCall" = "Приостановить вызов";
-"accessibility.calls.default.hangUpCall" = "Повесить трубку";
+"accessibility.calls.default.hangUpCall" = "Завершить вызов";
 "accessibility.calls.default.addParticipant" = "Добавить участника";
 "accessibility.calls.default.switchCamera" = "Переключить камеру";
 "accessibility.calls.default.toggleSpeaker" = "Включить динамик";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Включить микрофон";
 "accessibility.calls.alter.toggleVideo" = "Остановить камеру";
 "accessibility.calls.alter.pauseCall" = "Возобновить вызов";
-"accessibility.calls.alter.hangUpCall" = "Повесить трубку";
+"accessibility.calls.alter.hangUpCall" = "Завершить вызов";
 "accessibility.calls.alter.addParticipant" = "Добавить участника";
 "accessibility.calls.alter.switchCamera" = "Переключить камеру";
 "accessibility.calls.alter.toggleSpeaker" = "Выключить динамик";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Отменить установку модератора";
 "accessibility.conference.muteAudio" = "Отключить звук";
 "accessibility.conference.unmuteAudio" = "Включить звук";
-"accessibility.conference.hangup" = "Повесить трубку";
+"accessibility.conference.hangup" = "Завершить вызов";
 "accessibility.conference.lowerHand" = "Опущенная рука";
 "accessibility.account.tokenQRcode" = "QR-код токена";
 

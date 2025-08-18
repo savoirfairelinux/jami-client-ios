@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Fiók létrehozása";
 "createAccount.nameExplanation" = "Regisztráljon felhasználónevet, hogy mások könnyebben megtalálják és elérjék Önt a Jamin.";
 "createAccount.newAccount" = "Új fiók";
-"createAccount.encryptionEnabled" = "Titkosítás engedélyezve";
-"createAccount.encrypt" = "Titkosítás";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Testreszabás";
-"createAccount.encryptTitle" = "Fiók titkosítása jelszóval";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami-fiók csak helyileg jön létre és tárolódik ezen az eszközön a fiókkulcsokat tartalmazó archívumként. Az archívumhoz való hozzáférés választható jelszóval védhető.";
 
 // Link To Account form
@@ -229,7 +229,7 @@
 "linkToAccount.exportInstructionsPath" = "Jelölje ki a Fiók → Fiókbeállítások → Új eszköz összekapcsolása lehetőséget.";
 "linkToAccount.scanQrCode" = "Ha készen áll, olvassa be a QR-kódot.";
 "linkToAccount.enterProvidedCode" = "Ha készen áll, adja meg a hitelesítési kódot.";
-"linkToAccount.accountLockedWithPassword" = "A fiók jelszóval védett. A folytatáshoz adja meg a fiók jelszavát.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Kilépés";
 "linkToAccount.shareMessage" = "A kód: %@";
 "linkToAccount.alertTile" = "Szeretné leállítani a fiók összekapcsolását?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Jami-fiók importálása a helyi archívfájlból.";
-"importFromArchive.passwordExplanation" = "Ha a fiók jelszóval van titkosítva, kérjük, írja be a következő mezőt.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Importálás az archívumból";
 "importFromArchive.buttonTitle" = "Importálás";
 "importFromArchive.selectArchiveButton" = "Archívfájl kijelölése";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Eszköz eltávolítása";
 "accountPage.revokeDeviceMessage" = "Szeretne eltávolítani ezt az eszközt? Ez a művelet nem vonható vissza.";
 "accountPage.revokeDeviceButton" = "Visszavon";
-"accountPage.revokeDevicePlaceholder" = "Jelszó megadása";
+"accountPage.revokeDevicePlaceholder" = "Enter account password";
 "accountPage.deviceRevoked" = "Az eszköz visszavonása befejeződött";
 "accountPage.deviceRevocationProgress" = "Az eszköz leválasztására vonatkozó kérés folyamatban van…";
 "accountPage.deviceRevocationSuccess" = "A kijelölt eszközt leválasztották erről a Jami-fiókról.";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Regisztráció…";
 "accountPage.usernameRegisterAction" = "Regisztráció";
 "accountPage.usernameRegistrationFailedTitle" = "Bejegyeztetés hiba";
-"accountPage.usernameRegistrationFailed" = "Kérjük, ellenőrizze a fiók jelszavát.";
-"accountPage.createPassword" = "Fiók titkosítása";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Jelszó megváltoztatása";
 "accountPage.currentPasswordPlaceholder" = "Jelenlegi jelszó megadása";
 "accountPage.newPasswordPlaceholder" = "Új jelszó megadása";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Hibás jelszó";
 "accountPage.enableBoothMode" = "Fülke üzemmód engedélyezése";
 "accountPage.disableBoothMode" = "Fülke üzemmód letiltása";
-"accountPage.disableBoothModeExplanation" = "Fiók jelszavának megadása";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "A fülke üzemmódban a beszélgetési előzmények nem kerülnek mentésre, és a Jami funkcionalitása korlátozott a kimenő hívások kezdeményezésekor. Ha a fülke üzemmód engedélyezve van, az összes beszélgetés törlődik.";
-"accountPage.noBoothMode" = "A fülke üzemmód engedélyezéséhez először titkosítsa a fiókot.";
-"accountPage.boothModeAlertMessage" = "A fülke üzemmód engedélyezése után az összes beszélgetés eltávolításra kerül.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "Helyi társ felderítése engedélyezése";
 "accountPage.peerDiscoveryExplanation" = "Csatlakozás más DHT-csomópontokhoz, amelyek a helyi hálózaton hirdetnek";
 "accountPage.autoRegistration" = "Önműködő bejegyzése a lejárat után";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Névjegynév megadása";
 "accountPage.editProfile" = "Névjegy szerkesztése";
 "accountPage.manageAccount" = "Fiókkezelés";
-"accountPage.encryptAccount" = "Fiók titkosítása jelszóval";
-"accountPage.passwordExplanation" = "A Jami-fiók csak helyileg jön létre és tárolódik ezen az eszközön a fiókkulcsokat tartalmazó archívumként. Az archívumhoz való hozzáférés választható jelszóval védhető.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "A jelszavak nem egyeznek.";
 "accountPage.passwordCreated" = "Jelszó létrehozva";
 "accountPage.passwordUpdated" = "Jelszó frissítve";
 "accountPage.linkedDevices" = "Összekapcsolt eszközök";
 "accountPage.unlink" = "Leválasztás";
 "accountPage.generatingPin" = "PIN-kód generálása folyamatban…";
-"accountPage.passwordForPin" = "Ez a fiók jelszóval titkosított. Kérjük, adja meg a jelszót a PIN-kód létrehozásához.";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "Másik eszközön";
 "accountPage.pinExplanationMessage" = "Telepítse és indítsa el a Jami alkalmazást. Válassza az „Importálás másik eszközről” lehetőséget, és olvassa be a QR-kódot. Vagy adja meg kézzel a PIN-kódot.";
 "accountPage.pinError" = "Hiba történt a PIN-kód generálása közben.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Biztonsági másolat készítése";
 "backupAccount.archiveName" = "Fiókarchívumnév megadása.";
 "backupAccount.archiveNamePlaceholder" = "Fiókarchívumnév";
-"backupAccount.passwordRequest" = "Adja meg a fiók titkosításához használt jelszót.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Biztonsági mentés";
 "backupAccount.documentPickerButton" = "Biztonsági mentés helyének megnyitása";
 "backupAccount.exportSuccess" = "Biztonsági másolat létrehozva";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Mikrofon némításának feloldása";
 "accessibility.calls.alter.toggleVideo" = "Fényképezőgép leállása";
 "accessibility.calls.alter.pauseCall" = "Hívás folytatása";
-"accessibility.calls.alter.hangUpCall" = "Hívás befejezése";
+"accessibility.calls.alter.hangUpCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Résztvevő hozzáadása";
 "accessibility.calls.alter.switchCamera" = "Fényképezőgépváltás";
 "accessibility.calls.alter.toggleSpeaker" = "Hangszóró kikapcsolása";

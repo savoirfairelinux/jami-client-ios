@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "ജാമി എന്ന സ്ഥലത്ത് നിങ്ങളെ കണ്ടെത്താനും എത്തിപ്പെടാനും മറ്റുള്ളവരെ സഹായിക്കുന്നതിന് നിങ്ങൾക്ക് ഒരു ഉപയോക്തൃനാമം തിരഞ്ഞെടുക്കാം.";
 "createAccount.newAccount" = "Akaun baharu";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "എൻക്രിപ്റ്റ് ചെയ്തവ";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "ക്രമീകരിക്കുക";
-"createAccount.encryptTitle" = "പാസ്വേഡ് ഉപയോഗിച്ച് അക്കൌണ്ട് എൻക്രിപ്റ്റ് ചെയ്യുക";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "ക്യുആർ കോഡ്";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Exit";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "ജാമി അക്കൌണ്ട് പ്രാദേശിക ആർക്കൈവ് ഫയലിൽ നിന്നും ഇറക്കുമതി ചെയ്യുക.";
-"importFromArchive.passwordExplanation" = "അക്കൌണ്ട് ഒരു പാസ്വേഡ് ഉപയോഗിച്ച് എൻക്രിപ്റ്റ് ചെയ്തിട്ടുണ്ടെങ്കിൽ താഴെ പറയുന്ന ഫീൽഡ് പൂരിപ്പിക്കുക.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "ഇറക്കുമതി";
 "importFromArchive.selectArchiveButton" = "ആർക്കൈവ് ഫയൽ തിരഞ്ഞെടുക്കുക";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "റദ്ദാക്കൽ";
-"accountPage.revokeDevicePlaceholder" = "Masukkan kata laluan anda";
+"accountPage.revokeDevicePlaceholder" = "Enter account password";
 "accountPage.deviceRevoked" = "ഉപകരണം പിൻവലിച്ചതിനു ശേഷം";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "രജിസ്ട്രേഷൻ";
 "accountPage.usernameRegisterAction" = "Daftar";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "എൻക്രിപ്റ്റ് ചെയ്ത അക്കൌണ്ട്";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "പാസ്വേഡ് മാറ്റുക";
 "accountPage.currentPasswordPlaceholder" = "നിലവിലെ പാസ്വേഡ് നൽകുക";
 "accountPage.newPasswordPlaceholder" = "പുതിയ പാസ്വേഡ് നൽകുക";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "തെറ്റായ പാസ്വേഡ്";
 "accountPage.enableBoothMode" = "ബൂത്ത് മോഡ് പ്രവർത്തനക്ഷമമാക്കുക";
 "accountPage.disableBoothMode" = "ബൂത്ത് മോഡ് പ്രവർത്തനരഹിതമാക്കുക";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "ബൂത്ത് മോഡിൽ സംഭാഷണ ചരിത്രം സംരക്ഷിക്കപ്പെടുന്നില്ല, പുറത്തെ കോളുകൾ വിളിക്കുന്നതിലൂടെ ജാമി പ്രവർത്തനം പരിമിതപ്പെടുത്തിയിരിക്കുന്നു. ബൂത്ത് മോഡ് പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ നിങ്ങളുടെ എല്ലാ സംഭാഷണങ്ങളും നീക്കംചെയ്യപ്പെടും.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "ബൂത്ത് മോഡ് പ്രവർത്തനക്ഷമമാക്കിയ ശേഷം നിങ്ങളുടെ എല്ലാ സംഭാഷണങ്ങളും നീക്കം ചെയ്യും.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "പ്രാദേശിക പീക്ക് ഡിസ്കവറി പ്രവർത്തനക്ഷമമാക്കുക";
 "accountPage.peerDiscoveryExplanation" = "നമ്മുടെ പ്രാദേശിക നെറ്റ് വർക്കിൽ പരസ്യം ചെയ്യുന്ന മറ്റ് ഡിഎച്ച്ടി നോഡുകളുമായി ബന്ധിപ്പിക്കുക";
 "accountPage.autoRegistration" = "കാലഹരണപ്പെട്ട ശേഷം ഓട്ടോ രജിസ്റ്റർ ചെയ്യുക";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "അക്കൌണ്ട് മാനേജുചെയ്യുക";
-"accountPage.encryptAccount" = "പാസ്വേഡുള്ള അക്കൌണ്ട് എൻക്രിപ്റ്റ് ചെയ്യുക";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "ബന്ധിപ്പിച്ച ഉപകരണങ്ങൾ";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "ഓഡിയോ കോൾ ആരംഭിക്കുക";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "മിണ്ടാത്ത മൈക്രോഫോൺ";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "ഇടവേള വിളി";
-"accessibility.calls.default.hangUpCall" = "Putuskan";
+"accessibility.calls.default.hangUpCall" = "Tamatkan panggilan";
 "accessibility.calls.default.addParticipant" = "പങ്കാളിയെ കൂട്ടിച്ചേർക്കുക";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "ക്യാമറ നിർത്തുക";
 "accessibility.calls.alter.pauseCall" = "പുനരാരംഭിക്കുക";
-"accessibility.calls.alter.hangUpCall" = "Putuskan";
+"accessibility.calls.alter.hangUpCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "പങ്കാളിയെ കൂട്ടിച്ചേർക്കുക";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "മോഡറേറ്റർ അൺസെറ്റ് ചെയ്യുക";
 "accessibility.conference.muteAudio" = "Matikan bunyi";
 "accessibility.conference.unmuteAudio" = "നിശബ്ദമായ ഓഡിയോ";
-"accessibility.conference.hangup" = "Putuskan";
+"accessibility.conference.hangup" = "Tamatkan panggilan";
 "accessibility.conference.lowerHand" = "താഴത്തെ കൈ";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

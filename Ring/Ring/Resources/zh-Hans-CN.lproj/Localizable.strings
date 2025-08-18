@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "您可以选择一个用户名，以便他人在 Jami 上找到并联系您。";
 "createAccount.newAccount" = "新账户";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "加密";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "自定义";
-"createAccount.encryptTitle" = "用密码加密账户";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "二维码";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "需要如下操作。\n请确认源设备上的帐户。";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "已成功导入帐户。";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "退出";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "从本地档案文件导入Jami账户。";
-"importFromArchive.passwordExplanation" = "如果帐户使用密码加密,请填写下面的字段.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "倒入";
 "importFromArchive.selectArchiveButton" = "选择归档文件";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "移除设备";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "吊销";
-"accountPage.revokeDevicePlaceholder" = "输入您的密码";
+"accountPage.revokeDevicePlaceholder" = "输入账户密码";
 "accountPage.deviceRevoked" = "设备吊销完成";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "注册中";
 "accountPage.usernameRegisterAction" = "注册";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "加密账户";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "更改密码";
 "accountPage.currentPasswordPlaceholder" = "输入当前密码";
 "accountPage.newPasswordPlaceholder" = "输入新密码";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "密码错误";
 "accountPage.enableBoothMode" = "启用话亭模式";
 "accountPage.disableBoothMode" = "禁用话亭模式";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "话亭模式中，不会保存会话历史，且 jami 的功能会受限为外拨电话。启用话亭模式后，现有会话将全部被删除。";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "启用话亭模式后，您的现有会话都将被删除。";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "启用本地对等方发现";
 "accountPage.peerDiscoveryExplanation" = "连接至在本地网络宣告的 DHT 节点";
 "accountPage.autoRegistration" = "过期后自动注册";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "管理账户";
-"accountPage.encryptAccount" = "通过密码加密帐户";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "密码不匹配。";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "关联设备";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "在其他设备上";
 "accountPage.pinExplanationMessage" = "安装并启动 Jami。选择“从其他设备导入”，并扫描二维码。或手动输入 PIN 码。";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "无法识别新设备标识符。请按照上述说明操作。";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "账户已成功导入新设备。";
+"linkDevice.completed" = "账户已成功导入到新设备。";
 
 // Contact Page
 "contactPage.startAudioCall" = "发起语音通话";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "关闭麦克风";
 "accessibility.calls.default.toggleVideo" = "启动摄像头";
 "accessibility.calls.default.pauseCall" = "暂停通话";
-"accessibility.calls.default.hangUpCall" = "挂断";
+"accessibility.calls.default.hangUpCall" = "结束通话";
 "accessibility.calls.default.addParticipant" = "添加参与者";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "打开扬声器";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "麦克风静音";
 "accessibility.calls.alter.toggleVideo" = "关闭摄像头";
 "accessibility.calls.alter.pauseCall" = "恢复通话";
-"accessibility.calls.alter.hangUpCall" = "挂断";
+"accessibility.calls.alter.hangUpCall" = "结束通话";
 "accessibility.calls.alter.addParticipant" = "添加参与者";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "取消设置管理员";
 "accessibility.conference.muteAudio" = "静音";
 "accessibility.conference.unmuteAudio" = "取消静音";
-"accessibility.conference.hangup" = "挂断";
+"accessibility.conference.hangup" = "结束通话";
 "accessibility.conference.lowerHand" = "放下手";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

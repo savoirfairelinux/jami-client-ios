@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "మీరు ఒక వినియోగదారు పేరును ఎంచుకోవచ్చు, దీని ద్వారా ఇతరులు మిమ్మల్ని జామిలో సులభంగా కనుగొని మిమ్మల్ని సంప్రదించవచ్చు.";
 "createAccount.newAccount" = "New account";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "గుప్తీకరించబడింది";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "అనుకూలీకరించు";
-"createAccount.encryptTitle" = "పాస్వర్డ్తో ఖాతాను గుప్తీకరించండి";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR కోడ్";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Exit";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "స్థానిక ఆర్కైవ్ ఫైల్ నుండి జామి ఖాతాను దిగుమతి చేయండి.";
-"importFromArchive.passwordExplanation" = "ఖాతాకు పాస్వర్డ్తో గుప్తీకరణ ఉంటే, దయచేసి ఈ క్రింది ఫీల్డ్ను పూరించండి.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "దిగుమతి";
 "importFromArchive.selectArchiveButton" = "ఆర్కైవ్ ఫైల్ను ఎంచుకోండి";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "రద్దు";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "ఖాతా పాస్వర్డ్ను నమోదు చేయండి";
 "accountPage.deviceRevoked" = "పరికరం రద్దు పూర్తయింది";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "నమోదు";
 "accountPage.usernameRegisterAction" = "నమోదు";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "ఎన్క్రిప్ట్ ఖాతా";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "పాస్వర్డ్ మార్చు";
 "accountPage.currentPasswordPlaceholder" = "ప్రస్తుత పాస్వర్డ్ను నమోదు చేయండి";
 "accountPage.newPasswordPlaceholder" = "కొత్త పాస్వర్డ్ను నమోదు చేయండి";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "తప్పు పాస్వర్డ్";
 "accountPage.enableBoothMode" = "బూత్ మోడ్ను ప్రారంభించండి";
 "accountPage.disableBoothMode" = "బూత్ మోడ్ను నిలిపివేయండి";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "బూత్ మోడ్లో సంభాషణ చరిత్ర సేవ్ చేయబడలేదు మరియు అవుట్గోయింగ్ కాల్స్ చేయడం ద్వారా Jami కార్యాచరణ పరిమితం చేయబడింది. మీరు బూత్ మోడ్ను ప్రారంభించినప్పుడు మీ సంభాషణలు తొలగించబడతాయి.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "బూత్ మోడ్ను ప్రారంభించిన తర్వాత మీ సంభాషణలన్నీ తొలగించబడతాయి.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "స్థానిక సహచరుల అన్వేషణను ప్రారంభించండి";
 "accountPage.peerDiscoveryExplanation" = "మా స్థానిక నెట్వర్క్లో ప్రకటనలు చేసే ఇతర DHT నోడ్లకు కనెక్ట్ అవ్వండి";
 "accountPage.autoRegistration" = "గడువు ముగిసిన తర్వాత ఆటో రిజిస్టర్";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "ఖాతాను నిర్వహించండి";
-"accountPage.encryptAccount" = "పాస్వర్డ్తో ఖాతాను గుప్తీకరించండి";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "లింక్ చేయబడిన పరికరాలు";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "ఆడియో కాల్ ప్రారంభించండి";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "మ్యూట్ మైక్రోఫోన్";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "విరామం కాల్";
-"accessibility.calls.default.hangUpCall" = "మూసివేయండి";
+"accessibility.calls.default.hangUpCall" = "కాల్‌ను ముగించు";
 "accessibility.calls.default.addParticipant" = "పాల్గొనేవారిని జోడించండి";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "స్టాప్ కెమెరా";
 "accessibility.calls.alter.pauseCall" = "పునఃప్రారంభం కాల్";
-"accessibility.calls.alter.hangUpCall" = "మూసివేయండి";
+"accessibility.calls.alter.hangUpCall" = "కాల్‌ను ముగించు";
 "accessibility.calls.alter.addParticipant" = "పాల్గొనేవారిని జోడించండి";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "సెట్టింగ్ను తొలగించు";
 "accessibility.conference.muteAudio" = "మూత ఆడియో";
 "accessibility.conference.unmuteAudio" = "నిశ్శబ్ద ఆడియో";
-"accessibility.conference.hangup" = "మూసివేయండి";
+"accessibility.conference.hangup" = "కాల్‌ను ముగించు";
 "accessibility.conference.lowerHand" = "దిగువ చేతి";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

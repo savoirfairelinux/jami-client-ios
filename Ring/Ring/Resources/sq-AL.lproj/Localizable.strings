@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Po krijohet llogari";
 "createAccount.nameExplanation" = "Mund të zgjidhni një emër përdoruesi, për t’i ndihmuar të tjerët t’ju gjejnë dhe të komunikojmë më lehtë me ju në Jami.";
 "createAccount.newAccount" = "Llogari e re";
-"createAccount.encryptionEnabled" = "Fshehtëzim i aktivizuar";
-"createAccount.encrypt" = "Fshehtëzoje";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Përshtateni";
-"createAccount.encryptTitle" = "Fshehtëzojeni llogarinë me fjalëkalim";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "Një llogari Jami krijohet dhe depozitohet lokalisht vetëm në këtë pajisje, si një arkiv që përmban kyçet e veta të llogarisë. Hyrja në arkiv, në daçi, mund të mbrohet me një fjalëkalimi.";
 
 // Link To Account form
@@ -229,7 +229,7 @@
 "linkToAccount.exportInstructionsPath" = "Përzgjidhni Llogari → Rregullime Llogarie → Lidhni pajisje të re.";
 "linkToAccount.scanQrCode" = "Kur të jeni gati, skanoni kodin QR.";
 "linkToAccount.enterProvidedCode" = "Kur të jeni gati, jepni kodin e mirëfilltësimit.";
-"linkToAccount.accountLockedWithPassword" = "Llogaria është e mbrojtur me një fjalëkalim. Që të vazhdohet, jepni fjalëkalimin e llogarisë.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Dalje";
 "linkToAccount.shareMessage" = "Kodi juaj është: %@";
 "linkToAccount.alertTile" = "Doni të reshtë lidhja e llogarisë?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Importo llogari Jami prej një kartele vendore arkiv";
-"importFromArchive.passwordExplanation" = "Nëse llogaria është fshehtëzuar me një fjalëkalim, ju lutemi, plotësoni fushën vijuese.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Importo prej arkive";
 "importFromArchive.buttonTitle" = "Importoje";
 "importFromArchive.selectArchiveButton" = "Përzgjidhni kartelë arkiv";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Hiqe pajisjen";
 "accountPage.revokeDeviceMessage" = "Doni të hiqet kjo pajisje? Veprimi s’mund të zhbëhet.";
 "accountPage.revokeDeviceButton" = "Shfuqizoje";
-"accountPage.revokeDevicePlaceholder" = "Jepni fjalëkalimin tuaj";
+"accountPage.revokeDevicePlaceholder" = "Jepni fjalëkalim llogarie";
 "accountPage.deviceRevoked" = "Shfuqizimi i pajisjes u plotësua";
 "accountPage.deviceRevocationProgress" = "Po hiqet…";
 "accountPage.deviceRevocationSuccess" = "Pajisja u hoq";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Regjistrim";
 "accountPage.usernameRegisterAction" = "Regjistrohuni";
 "accountPage.usernameRegistrationFailedTitle" = "Regjistrimi dështoi";
-"accountPage.usernameRegistrationFailed" = "Ju lutemi, kontrolloni fjalëkalimin tuaj.";
-"accountPage.createPassword" = "Fshehtëzoje llogarinë";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Ndryshoni fjalëkalimin";
 "accountPage.currentPasswordPlaceholder" = "Jepni fjalëkalimin e tanishëm";
 "accountPage.newPasswordPlaceholder" = "Jepni fjalëkalimin e ri";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Fjalëkalim i pasaktë";
 "accountPage.enableBoothMode" = "Aktivizo Mënyrën Kabinë";
 "accountPage.disableBoothMode" = "Çaktivizo Mënyrën Kabinë";
-"accountPage.disableBoothModeExplanation" = "Ju lutemi, jepni fjalëkalimin e llogarisë tuaj";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "Në mënyrën kabinë, historiku i bisedës s’ruhet dhe funksionet e Jami-t kufizohen në bërje thirrjesh. Kur aktivizoni mënyrën kabinë, krejt bisedat tuaja do të hiqen.";
-"accountPage.noBoothMode" = "Që të aktivizoni mënyrën Kabinë, së pari fshehtëzoni llogarinë tuaj.";
-"accountPage.boothModeAlertMessage" = "Pas aktivizimit të mënyrës Kabinë, krej bisedat tuaja do të hiqen.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "Aktivizo pikasje ortakësh vendorë";
 "accountPage.peerDiscoveryExplanation" = "Lidhu me nyje të tjera DHT që reklamohen në rrjetin tonë vendor";
 "accountPage.autoRegistration" = "Regjistrohu automatikisht pas skadimit";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Jepni emër profili";
 "accountPage.editProfile" = "Përpunoni Profil";
 "accountPage.manageAccount" = "Administroni llogari";
-"accountPage.encryptAccount" = "Fshehtëzoni llogarinë me një fjalëkalim";
-"accountPage.passwordExplanation" = "Një llogari Jami krijohet dhe depozitohet lokalisht vetëm në këtë pajisje, si një arkiv që përmban kyçet e veta të llogarisë. Hyrja në arkiv, në daçi, mund të mbrohet me një fjalëkalimi.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Fjalëkalimet nuk përputhen.";
 "accountPage.passwordCreated" = "U krijua fjalëkalim";
 "accountPage.passwordUpdated" = "U përditësua fjalëkalim";
 "accountPage.linkedDevices" = "Pajisje të lidhura";
 "accountPage.unlink" = "Hiqe lidhjen";
 "accountPage.generatingPin" = "Po prodhohet PIN…";
-"accountPage.passwordForPin" = "Kjo llogari mbrohet me fjalëkalim, jepni një fjalëkalim që të prodhohet një kod PIN";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "Në pajisjen tjetër";
 "accountPage.pinExplanationMessage" = "Instaloni dhe nisni Jami-n. Përzgjidhni “Importo prej pajisje tjetër” dhe skanoni kodin QR. Ndryshe jepeni kodin PIN dorazi.";
 "accountPage.pinError" = "Ndodhi një gabim teksa prodhohej kod PIN.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Po krijohet kopjeruajtje";
 "backupAccount.archiveName" = "Përzgjidhni një emër për arkivin.";
 "backupAccount.archiveNamePlaceholder" = "Emër arkivi";
-"backupAccount.passwordRequest" = "Jepni fjalëkalimin e përdorur për të fshehtëzuar llogarinë.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Kopjeruajtje";
 "backupAccount.documentPickerButton" = "Hap vendndodhje kopjeruajtjeje";
 "backupAccount.exportSuccess" = "Kopjeruajtja u krijua";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "kod";
 "linkDevice.wrongEntry" = "Identifikues i panjohur pajisjeje të re. Ju lutemi, ndiqni udhëzimet më sipër.";
 "linkDevice.exportInProgress" = "Veprimi i eksportimit të llogarisë te pajisja e re është në kryerje e sipër. Ju lutemi, ripohoni importimin te pajisja e re.";
-"linkDevice.completed" = "Llogaria u importua me sukses te pajisja e re.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Filloni thirrje audio";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Heshtoje mikrofonin";
 "accessibility.calls.default.toggleVideo" = "Vëre kamerë në punë";
 "accessibility.calls.default.pauseCall" = "Ndale thirren";
-"accessibility.calls.default.hangUpCall" = "Mbylle thirrjen";
+"accessibility.calls.default.hangUpCall" = "Përfundoje thirrjen";
 "accessibility.calls.default.addParticipant" = "Shtoni pjesëmarrës";
 "accessibility.calls.default.switchCamera" = "Ndërro kamerën";
 "accessibility.calls.default.toggleSpeaker" = "Hap altoparlantin";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Hiqi heshtimin mikrofonit";
 "accessibility.calls.alter.toggleVideo" = "Ndale kamerën";
 "accessibility.calls.alter.pauseCall" = "Rimerre thirrjen";
-"accessibility.calls.alter.hangUpCall" = "Mbylle thirrjen";
+"accessibility.calls.alter.hangUpCall" = "Përfundoje thirrjen";
 "accessibility.calls.alter.addParticipant" = "Shtoni pjesëmarrës";
 "accessibility.calls.alter.switchCamera" = "Ndërro kamerën";
 "accessibility.calls.alter.toggleSpeaker" = "Mbyll altoparlantin";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Hiqe nga moderator";
 "accessibility.conference.muteAudio" = "Mbylli zërin";
 "accessibility.conference.unmuteAudio" = "Riktheji zërin";
-"accessibility.conference.hangup" = "Mbylle thirrjen";
+"accessibility.conference.hangup" = "Përfundoje thirrjen";
 "accessibility.conference.lowerHand" = "Uleni dorën";
 "accessibility.account.tokenQRcode" = "Kod QR token-i";
 

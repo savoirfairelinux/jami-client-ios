@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Možete odabrati korisničko ime kako bi pomogli drugima lakše pronaći i doći do vas na Jamiju.";
 "createAccount.newAccount" = "Novi račun";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Kriptiran";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Prilagođivanje";
-"createAccount.encryptTitle" = "Kriptiraj račun s lozinkom";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR kod";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Potrebna je radnja.\nMolimo da potvrdite račun na izvornom uređaju.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Izađi";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Importiranje Jami računa iz lokalnog arhiva datoteka.";
-"importFromArchive.passwordExplanation" = "Ako je račun šifriran lozinom, molimo popunite sljedeće polje.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Uvezi";
 "importFromArchive.selectArchiveButton" = "Izberite arhiv datoteku";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Opozovi";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Enter account password";
 "accountPage.deviceRevoked" = "Ispunjeno povlačenje uređaja";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Uvod u registraciju";
 "accountPage.usernameRegisterAction" = "Registriraj";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "Kriptirani račun";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Promjena lozinke";
 "accountPage.currentPasswordPlaceholder" = "Ubaci trenutnu lozinku";
 "accountPage.newPasswordPlaceholder" = "Ubaci novu lozinku";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Neispravna lozinka";
 "accountPage.enableBoothMode" = "Aktivirajte režim stanice";
 "accountPage.disableBoothMode" = "Odričaj način štampa";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "U režimu kabine povijest razgovora nije spisana i funkcionalnost jami ograničena odlaska pozive.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "Nakon uključivanja stand modu, svi razgovori će biti uklonjeni.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "omogućiti lokalno otkrivanje vršnjaka";
 "accountPage.peerDiscoveryExplanation" = "Povežite se s drugim DHT čvorovima koji oglašavaju na našoj lokalnoj mreži";
 "accountPage.autoRegistration" = "Autoreski registr nakon isteka";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Upravljanje računom";
-"accountPage.encryptAccount" = "Kriptajte račun sa lozinkom";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Povezani uređaji";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "Na drugom uređaju";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Pokrenite audio poziv";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Utišaj mikrofon";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pauza poziv";
-"accessibility.calls.default.hangUpCall" = "Poklopi";
+"accessibility.calls.default.hangUpCall" = "Završi poziv";
 "accessibility.calls.default.addParticipant" = "Dodaj sugovornika";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Kamera za zaustavljanje";
 "accessibility.calls.alter.pauseCall" = "Nastavljanje poziva";
-"accessibility.calls.alter.hangUpCall" = "Poklopi";
+"accessibility.calls.alter.hangUpCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Dodaj sugovornika";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Nepripremljen moderator";
 "accessibility.conference.muteAudio" = "Neiskupljeni audio";
 "accessibility.conference.unmuteAudio" = "Neusmreni audio";
-"accessibility.conference.hangup" = "Poklopi";
+"accessibility.conference.hangup" = "Završi poziv";
 "accessibility.conference.lowerHand" = "Dolnja ruka";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

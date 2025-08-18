@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Loome kasutajakontot";
 "createAccount.nameExplanation" = "Selleks, et teised kasutajad saaksid sind kergemini Jami võrgus leida, võid valida endale kasutajanime.";
 "createAccount.newAccount" = "Uus kasutajakonto";
-"createAccount.encryptionEnabled" = "Krüptimine on kasutusel";
-"createAccount.encrypt" = "Krüpti";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Kohanda";
-"createAccount.encryptTitle" = "Kasuta konto krüptimisel salasõna";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "Jami kasutajakonto on registreeritud ja salvestatud vaid selles nutiseadmes ja olemuselt on tegemist arhiiviga, kus leiduvad sinu krüptovõtmed. Ligipääsu sellele arhiivile saad soovi korral turvata salasõnaga.";
 
 // Link To Account form
@@ -229,7 +229,7 @@
 "linkToAccount.exportInstructionsPath" = "Vali „Kasutajakonto“ → „Kasutajakonto seadistused“ → „Seo uus seade“. ";
 "linkToAccount.scanQrCode" = "Kui oled valmis, siis skaneeri QR-koodi";
 "linkToAccount.enterProvidedCode" = "Kui oled valmis, siis sisesta autentimiskood.";
-"linkToAccount.accountLockedWithPassword" = "See kasutajakonto on kaitstud salasõnaga. Jätkamiseks palun sisesta konto salasõna.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Välju";
 "linkToAccount.shareMessage" = "Sinu kood on: %@";
 "linkToAccount.alertTile" = "Kas sa soovid kontakti sidumise lõpetada?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Impordi Jami kasutajakonto kohaliku varukoopia arhiivifailist..";
-"importFromArchive.passwordExplanation" = "Kui konto on salasõnaga krüptitud, palun täida järgmine väli.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Impordi arhiivist";
 "importFromArchive.buttonTitle" = "Impordi";
 "importFromArchive.selectArchiveButton" = "Vali varukoopia arhiivfail";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Eemalda seade";
 "accountPage.revokeDeviceMessage" = "Kas sa oled kindel, et soovid selle seadme eemaldada? Seda tegevust ei saa tagasi pöörata.";
 "accountPage.revokeDeviceButton" = "Eemalda";
-"accountPage.revokeDevicePlaceholder" = "Sisesta oma salasõna";
+"accountPage.revokeDevicePlaceholder" = "Enter account password";
 "accountPage.deviceRevoked" = "Seadme eemaldamine on tehtud";
 "accountPage.deviceRevocationProgress" = "Eemaldame…";
 "accountPage.deviceRevocationSuccess" = "Seade on eemaldatud";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Registreerime";
 "accountPage.usernameRegisterAction" = "Registreeri";
 "accountPage.usernameRegistrationFailedTitle" = "Registreerumine ei õnnestunud";
-"accountPage.usernameRegistrationFailed" = "Palun kontrolli oma salasõna.";
-"accountPage.createPassword" = "Krüpti minu kasutajakonto";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Muuda salasõna";
 "accountPage.currentPasswordPlaceholder" = "Sisesta praegune salasõna";
 "accountPage.newPasswordPlaceholder" = "Sisesta uus salasõna";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Vigane salasõna";
 "accountPage.enableBoothMode" = "Lülita kioskirežiim sisse";
 "accountPage.disableBoothMode" = "Lülita kioskirežiim välja";
-"accountPage.disableBoothModeExplanation" = "Palun sisesta oma kasutajakonto salasõna";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "Kioskirežiimis vestluste ajalugu ei salvestata ja saad vaid välja helistada ning sinu vestlused eemaldatakse.";
-"accountPage.noBoothMode" = "Kioskirežiimi kasutamiseks palun esmalt krüpti oma kasutajakonto.";
-"accountPage.boothModeAlertMessage" = "Pärast kioskirežiimi aktiveerimist kustutatakse kõik sinu vestlused.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "Võimalda kohalikus võrgus võrdõigusvõrgu sõlmede tuvastamist";
 "accountPage.peerDiscoveryExplanation" = "Loo ühendus DHT-sõlmedega kohalikus võrgus";
 "accountPage.autoRegistration" = "Peale kehtivuse aegumist registreeri automaatselt uuesti";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Sisesta profiili nimi";
 "accountPage.editProfile" = "Muuda profiili";
 "accountPage.manageAccount" = "Halda kasutajakontot";
-"accountPage.encryptAccount" = "Krüpti kasutajakonto salasõnaga";
-"accountPage.passwordExplanation" = "Jami kasutajakonto on registreeritud ja salvestatud vaid selles nutiseadmes ja olemuselt on tegemist arhiiviga, kus leiduvad sinu krüptovõtmed. Ligipääsu sellele arhiivile saad soovi korral turvata salasõnaga.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Salasõnad ei klapi.";
 "accountPage.passwordCreated" = "Salasõna on loodud";
 "accountPage.passwordUpdated" = "Salasõna on uuendatud";
 "accountPage.linkedDevices" = "Seotud seadmed";
 "accountPage.unlink" = "Eemalda seotud seade";
 "accountPage.generatingPin" = "Loome PIN-koodi...";
-"accountPage.passwordForPin" = "Selle kasutajakonto andmed on krüptitud salasõnaga. PIN-koodi loomiseks palun sisesta oma salasõna.";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "Teises seadmes";
 "accountPage.pinExplanationMessage" = "Paigalda ja käivita Jami ning vali „Impordi teisest seadmest“ ning skaneeri QR-koodi. Alternatiivina võid PIN-koodi sisesta käsitsi.";
 "accountPage.pinError" = "PIN-koodi loomisel tekkis viga.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Loome varukoopiat";
 "backupAccount.archiveName" = "Sisesta nimi varukoopia arhiivifailile";
 "backupAccount.archiveNamePlaceholder" = "Varukoopia arhiivi nimi";
-"backupAccount.passwordRequest" = "Sisesta kasutajakonto krüptimisel lisatud salasõna.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Varundus";
 "backupAccount.documentPickerButton" = "Ava varukoopia asukoht";
 "backupAccount.exportSuccess" = "Varukoopia on loodud";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "kood";
 "linkDevice.wrongEntry" = "Tundmatu uue seadme tunnus. Palun järgi eeltoodud juhendit";
 "linkDevice.exportInProgress" = "Kasutajakonto eksportimine uude seadmesse on pooleli. Jätkamiseks palun kinnita importimine uues seadmes.";
-"linkDevice.completed" = "Kasutajakonto importimine sellesse seadmesse õnnestus. ";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Alusta häälkõnet";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Summuta mikrofon";
 "accessibility.calls.default.toggleVideo" = "Käivita kaamera";
 "accessibility.calls.default.pauseCall" = "Peata kõne";
-"accessibility.calls.default.hangUpCall" = "Lõpeta kõne";
+"accessibility.calls.default.hangUpCall" = "End call";
 "accessibility.calls.default.addParticipant" = "Lisa osaleja";
 "accessibility.calls.default.switchCamera" = "Vaheta kaamerat";
 "accessibility.calls.default.toggleSpeaker" = "Lülita valjuhääldi sisse";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Lõpeta mikrofoni summutamine";
 "accessibility.calls.alter.toggleVideo" = "Peata kaamera";
 "accessibility.calls.alter.pauseCall" = "Jätka kõnet";
-"accessibility.calls.alter.hangUpCall" = "Lõpeta kõne";
+"accessibility.calls.alter.hangUpCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Lisa osaleja";
 "accessibility.calls.alter.switchCamera" = "Vaheta kaamerat";
 "accessibility.calls.alter.toggleSpeaker" = "Lülita valjuhääldi välja";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Eemalda moderaator";
 "accessibility.conference.muteAudio" = "Summuta heli";
 "accessibility.conference.unmuteAudio" = "Lõpeta heli summutamine";
-"accessibility.conference.hangup" = "Lõpeta kõne";
+"accessibility.conference.hangup" = "End call";
 "accessibility.conference.lowerHand" = "Lase käsi alla";
 "accessibility.account.tokenQRcode" = "Tunnusloa QR-kood";
 

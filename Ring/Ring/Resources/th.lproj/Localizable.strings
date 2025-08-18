@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "คุณสามารถเลือกชื่อผู้ใช้ เพื่อช่วยให้คนอื่นได้หาและติดต่อกับคุณได้ง่ายขึ้นใน Jami";
 "createAccount.newAccount" = "New account";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "ลงรหัส";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "ปรับแต่ง";
-"createAccount.encryptTitle" = "เข้ารหัสบัญชีด้วยรหัสผ่าน";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "รหัส QR";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Exit";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "นําเข้าบัญชี Jami จากไฟล์อาร์คไฮเวอร์ท้องถิ่น";
-"importFromArchive.passwordExplanation" = "หากบัญชีถูกรหัสผ่านด้วยรหัสผ่าน โปรดเติมฟิลด์ที่ติดตามนี้";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "การนําเข้า";
 "importFromArchive.selectArchiveButton" = "เลือกไฟล์อาร์คไฮเวอร์";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "ยกเลิก";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "กรอกรหัสผ่านบัญชี";
 "accountPage.deviceRevoked" = "การยกเลิกอุปกรณ์เสร็จสิ้น";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "การลงทะเบียน";
 "accountPage.usernameRegisterAction" = "ลงทะเบียน";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "บัญชีรหัส";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "เปลี่ยนปัสผ่าน";
 "accountPage.currentPasswordPlaceholder" = "กรอกปัสผ่านปัจจุบัน";
 "accountPage.newPasswordPlaceholder" = "กรอกรหัสผ่านใหม่";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "ปรสิตผิด";
 "accountPage.enableBoothMode" = "เปิดโหมด Booth";
 "accountPage.disableBoothMode" = "ปิดโหมด Booth";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "ในโหมดบูธ ประวัติการพูดคุยไม่ได้บันทึก และการทํางานของ Jami มีขัดขวางโดยการทําการโทรออก เมื่อคุณเปิดโหมดบูธทั้งหมดการพูดคุยของคุณจะถูกลบ";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "หลังจากเปิดโหมดบูธแล้ว การพูดคุยทั้งหมดของคุณจะถูกลบ";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "เปิดใช้งานการค้นพบเพียร์ในพื้นที่";
 "accountPage.peerDiscoveryExplanation" = "เชื่อมต่อกับ DHT จอดอื่นที่ประกาศในเครือข่ายของเรา";
 "accountPage.autoRegistration" = "รีสเตอร์รถยนต์หลังหมดอายุ";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "จัดการบัญชี";
-"accountPage.encryptAccount" = "เคล็ดลับบัญชีด้วยรหัสผ่าน";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "อุปกรณ์ที่เชื่อมโยง";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "เริ่มการโทรเสียง";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "ปิดเสียงไมโครโฟน";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "การเรียกหยุด";
-"accessibility.calls.default.hangUpCall" = "วางสาย";
+"accessibility.calls.default.hangUpCall" = "สิ้นสุดการโทร";
 "accessibility.calls.default.addParticipant" = "เพิ่มผู้เข้าร่วม";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "กล้องหยุด";
 "accessibility.calls.alter.pauseCall" = "เริ่มการเรียก";
-"accessibility.calls.alter.hangUpCall" = "วางสาย";
+"accessibility.calls.alter.hangUpCall" = "สิ้นสุดการโทร";
 "accessibility.calls.alter.addParticipant" = "เพิ่มผู้เข้าร่วม";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "ปฏิทินไม่ตั้ง";
 "accessibility.conference.muteAudio" = "เสียงเงียบ";
 "accessibility.conference.unmuteAudio" = "เสียงไม่ปิด";
-"accessibility.conference.hangup" = "วางสาย";
+"accessibility.conference.hangup" = "สิ้นสุดการโทร";
 "accessibility.conference.lowerHand" = "มือต่ํา";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

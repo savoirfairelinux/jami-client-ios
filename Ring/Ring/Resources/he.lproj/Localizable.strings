@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "אתה יכול לבחור שם משתמש כדי לעזור לאחרים למצוא אותך בקלות יותר ולקשר אליך על ג'מי.";
 "createAccount.newAccount" = "חשבון חדש";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "מוצפן";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "אישית";
-"createAccount.encryptTitle" = "לחשוף חשבון עם סיסמה";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "קוד QR";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Exit";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "יבוא חשבון ג'מי מתיק הארכיון המקומי.";
-"importFromArchive.passwordExplanation" = "אם החשבון מוצפן באמצעות סיסמה, אנא מלאו את השדה הבא.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "יבוא";
 "importFromArchive.selectArchiveButton" = "בחר תיק ארכיון";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "ביטול";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Enter account password";
 "accountPage.deviceRevoked" = "ביטול המכשיר הושלם";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "רישום";
 "accountPage.usernameRegisterAction" = "הירשם";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "חשבון מוצפן";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "לשנות סיסמה";
 "accountPage.currentPasswordPlaceholder" = "הכניסו סיסמה הנוכחית";
 "accountPage.newPasswordPlaceholder" = "הכניסו סיסמה חדשה";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "סיסמה לא נכונה";
 "accountPage.enableBoothMode" = "תפעיל מצב קיר";
 "accountPage.disableBoothMode" = "תבטל מצב הדלת";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "במצב הקו לא נשמרת היסטוריית השיחה והפונקציונליות של ג'אמי מוגבלת על ידי שיחות יוצאות.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "לאחר שתפעיל את מצב הקו, כל השיחות שלך ימחקו.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "אפשרות גילוי עמיתי מקומי";
 "accountPage.peerDiscoveryExplanation" = "חיבור לנקודות DHT אחרות המפרסמים ברשת המקומית שלנו";
 "accountPage.autoRegistration" = "רישום אוטומטי לאחר תקופת הגבלת הפסקות";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "מנהל חשבון";
-"accountPage.encryptAccount" = "לחשוף חשבון עם סיסמה";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "מכשירים מחוברים";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "תחילת שיחת קול";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "מיקרופון שקט";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "הפסקת שיחת";
-"accessibility.calls.default.hangUpCall" = "   ניתוק";
+"accessibility.calls.default.hangUpCall" = "סיום השיחה";
 "accessibility.calls.default.addParticipant" = "הוסף משתתף";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "מצלמה עצירה";
 "accessibility.calls.alter.pauseCall" = "קם שוב";
-"accessibility.calls.alter.hangUpCall" = "   ניתוק";
+"accessibility.calls.alter.hangUpCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "הוסף משתתף";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "מתקן לא מתאים";
 "accessibility.conference.muteAudio" = "השתק אודיו";
 "accessibility.conference.unmuteAudio" = "אוודיו לא שקט";
-"accessibility.conference.hangup" = "   ניתוק";
+"accessibility.conference.hangup" = "סיום השיחה";
 "accessibility.conference.lowerHand" = "יד התחתונה";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

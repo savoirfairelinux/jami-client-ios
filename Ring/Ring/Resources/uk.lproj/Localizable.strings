@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Ви можете вибрати ім'я користувача, щоб іншим було легше знайти вас і зв'язатися з вами в Jami.";
 "createAccount.newAccount" = "Новий аккаунт";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Зашифровано";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Натомість";
-"createAccount.encryptTitle" = "Зашифрувати мій профіль за допомогою пароля";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR-код";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Вийти";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Імпортувати обліковий запис Jami з локального архівного файлу.";
-"importFromArchive.passwordExplanation" = "Якщо обліковий запис зашифрований паролем, заповніть наступне поле.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Імпортувати";
 "importFromArchive.selectArchiveButton" = "Виберіть файл архіва";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Відкликати";
-"accountPage.revokeDevicePlaceholder" = "Введіть ваш пароль";
+"accountPage.revokeDevicePlaceholder" = "Введіть пароль рахунку";
 "accountPage.deviceRevoked" = "Завершено скасування пристрою";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Реєстрація";
 "accountPage.usernameRegisterAction" = "Зареєструватися";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "Зашифрований рахунок";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Змінити пароль";
 "accountPage.currentPasswordPlaceholder" = "Введіть поточний пароль";
 "accountPage.newPasswordPlaceholder" = "Введіть новий пароль";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Неправильний пароль";
 "accountPage.enableBoothMode" = "Отримати режим бути";
 "accountPage.disableBoothMode" = "Виключити режим бути";
-"accountPage.disableBoothModeExplanation" = "Будь ласка, надайте свій пароль для облікового запису";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "У режимі кабіни історія розмов не збереглася і функціонал Jami обмежений виходячими дзвінками.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "Після включення режиму \"бути\" всі ваші розмови будуть видалені.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "Отримати локальне відкриття однолітків";
 "accountPage.peerDiscoveryExplanation" = "З'єднатися з іншими вузлами DHT, які рекламують на нашій локальній мережі";
 "accountPage.autoRegistration" = "Автореєстр після закінчення терміну дії";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Керувати акаунтом";
-"accountPage.encryptAccount" = "Зашифруйте обліковий запис паролем";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Паролі не збігаються.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Привʼязані пристрої";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "На іншому пристрої";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Обліковий запис успішно імпортовано на новий пристрій.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Розпочати аудіодзвінок";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Відключити мікрофон";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Призупинити дзвінок";
-"accessibility.calls.default.hangUpCall" = "Зупинити";
+"accessibility.calls.default.hangUpCall" = "Закінчити дзвінок";
 "accessibility.calls.default.addParticipant" = "Додати учасників";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Увімкнути гучномовець";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Зупинити камеру";
 "accessibility.calls.alter.pauseCall" = "Продовжити дзвінок";
-"accessibility.calls.alter.hangUpCall" = "Зупинити";
+"accessibility.calls.alter.hangUpCall" = "Закінчити дзвінок";
 "accessibility.calls.alter.addParticipant" = "Додати учасників";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Не встановлюється модератор";
 "accessibility.conference.muteAudio" = "Відключити звук";
 "accessibility.conference.unmuteAudio" = "Незаглушенний аудіо";
-"accessibility.conference.hangup" = "Зупинити";
+"accessibility.conference.hangup" = "Закінчити дзвінок";
 "accessibility.conference.lowerHand" = "Нижня рука";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

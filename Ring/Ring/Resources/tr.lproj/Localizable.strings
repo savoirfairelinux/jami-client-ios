@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Jami'de bulunmanı kolaylaştırmak için bir kullanıcı adı seçebilirsin.";
 "createAccount.newAccount" = "Yeni hesap";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Şifreli";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Özelleştir";
-"createAccount.encryptTitle" = "Hesabı parola ile şifrele";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR kodu";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Çıkış";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Jami hesabını yerel arşiv dosyasından içe aktar.";
-"importFromArchive.passwordExplanation" = "Hesap bir parola ile şifreli ise lütfen aşağıdaki alanı doldur.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "İçe aktar";
 "importFromArchive.selectArchiveButton" = "Arşiv dosyasını seç";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Aygıtı Kaldır";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Kaldır";
-"accountPage.revokeDevicePlaceholder" = "Parolanızı girin";
+"accountPage.revokeDevicePlaceholder" = "Hesap parolanızı girin";
 "accountPage.deviceRevoked" = "Aygıt iptali tamamlandı";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Kayıt ediliyor";
 "accountPage.usernameRegisterAction" = "Kaydol";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "Hesabı şifrele";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Parolayı değiştir";
 "accountPage.currentPasswordPlaceholder" = "Güncel parolayı gir";
 "accountPage.newPasswordPlaceholder" = "Yeni parolayı girin";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Geçersiz parola";
 "accountPage.enableBoothMode" = "Kabin Kipini Etkinleştir";
 "accountPage.disableBoothMode" = "Kabin Kipini Devre Dışı Bırak";
-"accountPage.disableBoothModeExplanation" = "Lütfen hesap parolanızı girin";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "Kabin kipinde konuşma geçmişiniz kaydedilmez ve jami'nin işlevleri giden aramalar ile kısıtlandırılır. Kabin kipini etkinleştirdiğinizde tüm konuşmalarınız kaldırılacaktır.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "Kabin kipini etkinleştirdikten sonra tüm konuşmalarınız kaldırılacaktır.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "Yerel bağlantı bulmayı etkinleştir";
 "accountPage.peerDiscoveryExplanation" = "Yerel ağımızda tanıtılan diğer DHT düğümlerine bağlan";
 "accountPage.autoRegistration" = "Geçerlilik bittiğinde kendiliğinden kaydol";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Hesabı yönet";
-"accountPage.encryptAccount" = "Hesabı parola ile şifrele";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Bağlı Aygıtlar";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "Diğer aygıtta";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Sesli arama başlat";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Mikrofon sessiz";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Çağrıyı duraklat";
-"accessibility.calls.default.hangUpCall" = "Kapat";
+"accessibility.calls.default.hangUpCall" = "Çağrıyı sonlandır";
 "accessibility.calls.default.addParticipant" = "Katılımcı ekle";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Kamerayı kapat";
 "accessibility.calls.alter.pauseCall" = "Çağrıyı sürdür";
-"accessibility.calls.alter.hangUpCall" = "Kapat";
+"accessibility.calls.alter.hangUpCall" = "Çağrıyı sonlandır";
 "accessibility.calls.alter.addParticipant" = "Katılımcı ekle";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Oturum başkanı ayarını kaldır";
 "accessibility.conference.muteAudio" = "Sesi kapat";
 "accessibility.conference.unmuteAudio" = "Sesi aç";
-"accessibility.conference.hangup" = "Kapat";
+"accessibility.conference.hangup" = "Çağrıyı sonlandır";
 "accessibility.conference.lowerHand" = "Elini indir";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

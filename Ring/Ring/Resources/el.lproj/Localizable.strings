@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Μπορείτε να επιλέξετε ένα όνομα χρήστη για να βοηθήσετε τους άλλους να σας βρουν και να σας φτάσουν πιο εύκολα στο Jami.";
 "createAccount.newAccount" = "Νέος Λογαριασμός";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Κρυπτογράφηση";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Προσαρμογή";
-"createAccount.encryptTitle" = "Κρυπτογράφηση λογαριασμού με κωδικό";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "Κώδικας QR";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Έξοδος";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Εισαγωγή λογαριασμού Jami από το τοπικό αρχείο αρχείου.";
-"importFromArchive.passwordExplanation" = "Εάν το λογαριασμό είναι κρυπτογραφημένο με κωδικό πρόσβασης, συμπληρώστε το ακόλουθο πεδίο.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Εισαγωγή";
 "importFromArchive.selectArchiveButton" = "Επιλέξτε αρχείο αρχείου";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Απαλλαγή";
-"accountPage.revokeDevicePlaceholder" = "Εισαγωγή κωδικού πρόσβασης";
+"accountPage.revokeDevicePlaceholder" = "Enter account password";
 "accountPage.deviceRevoked" = "Τελείωσε την ανάκληση της συσκευής";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Καταχώριση";
 "accountPage.usernameRegisterAction" = "Εγγραφή";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "Κρυπτογραφημένο λογαριασμό";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Αλλαγή κωδικού";
 "accountPage.currentPasswordPlaceholder" = "Εισάγετε τον τρέχοντα κωδικό πρόσβασης";
 "accountPage.newPasswordPlaceholder" = "Εισαγωγή νέου κωδικού";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Λάθος κωδικό πρόσβασης";
 "accountPage.enableBoothMode" = "Ενεργοποιήστε τη λειτουργία Booth";
 "accountPage.disableBoothMode" = "Απαλείψτε τη λειτουργία Booth";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "Στην κατάσταση του μπουθ, το ιστορικό συνομιλιών δεν έχει αποθηκευτεί και η λειτουργία του Jami περιορίζεται από τις εξόδους κλήσεων.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "Αφού ενεργοποιήσεις τη λειτουργία του θάλαμου, όλες οι συνομιλίες σου θα αφαιρεθούν.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "Επιτρέψτε την τοπική ανακάλυψη ομοτίμων";
 "accountPage.peerDiscoveryExplanation" = "Συνδέστε με άλλους κόμβους DHT που διαφημίζουν στο τοπικό μας δίκτυο";
 "accountPage.autoRegistration" = "Μητρώο αυτοκινήτου μετά την λήξη ισχύος";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Διαχείριση Λογαριασμού";
-"accountPage.encryptAccount" = "Κρυπτογράφηση λογαριασμού με κωδικό πρόσβασης";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Συνδεδεμένες συσκευές";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Ξεκινάτε την οχητική κλήση";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Σίγαση μικροφώνου";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Παύση κλήσης";
-"accessibility.calls.default.hangUpCall" = "Κλείσιμο";
+"accessibility.calls.default.hangUpCall" = "End call";
 "accessibility.calls.default.addParticipant" = "Προσθήκη συμμετέχοντος";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Διακοπή κάμερας";
 "accessibility.calls.alter.pauseCall" = "Επαναφέρετε την κλήση";
-"accessibility.calls.alter.hangUpCall" = "Κλείσιμο";
+"accessibility.calls.alter.hangUpCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Προσθήκη συμμετέχοντος";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Ανακατάσταση διαχειριστή";
 "accessibility.conference.muteAudio" = "Σίγαση ήχου";
 "accessibility.conference.unmuteAudio" = "Ανεκλειστικό ήχο";
-"accessibility.conference.hangup" = "Κλείσιμο";
+"accessibility.conference.hangup" = "End call";
 "accessibility.conference.lowerHand" = "Κάτω χέρι";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

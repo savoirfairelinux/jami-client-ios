@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "तपाईं आफ्नो प्रयोगकर्ता नाम चयन गर्न सक्नुहुन्छ ताकि अन्य व्यक्तिहरूले तपाईंलाई ज्यामीमा सजिलै भेट्न र पुग्न मद्दत गर्न सक्दछन्।";
 "createAccount.newAccount" = "New account";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "एन्क्रिप्टेड";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "अनुकूलन";
-"createAccount.encryptTitle" = "पासवर्डको साथ खाता गुप्तिकरण";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR कोड";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Exit";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "स्थानीय अभिलेख फाइलबाट जामी खाता आयात गर्नुहोस्।";
-"importFromArchive.passwordExplanation" = "यदि खाता पासवर्डको साथ एन्क्रिप्टेड छ भने, कृपया निम्न फिल्ड भर्नुहोस्।";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "आयात";
 "importFromArchive.selectArchiveButton" = "अभिलेख फाइल चयन गर्नुहोस्";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "रद्द";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Enter account password";
 "accountPage.deviceRevoked" = "उपकरण रद्द पूरा";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "दर्ता";
 "accountPage.usernameRegisterAction" = "दर्ता";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "खाता एन्क्रिप्टेड";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "पासवर्ड परिवर्तन गर्नुहोस्";
 "accountPage.currentPasswordPlaceholder" = "हालको पासवर्ड प्रविष्ट गर्नुहोस्";
 "accountPage.newPasswordPlaceholder" = "नयाँ पासवर्ड प्रविष्ट गर्नुहोस्";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "गलत पासवर्ड";
 "accountPage.enableBoothMode" = "बुथ मोड सक्षम गर्नुहोस्";
 "accountPage.disableBoothMode" = "बुथ मोड अक्षम गर्नुहोस्";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "बूथ मोडमा वार्तालाप इतिहास बचत गरिएको छैन र जमी कार्यक्षमता बाहिर जाने कलहरू गरेर सीमित छ। जब तपाईं बूथ मोड सक्षम गर्नुहुन्छ सबै तपाईंको कुराकानीहरू हटाइनेछ।";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "बूथ मोड सक्षम भएपछि सबै कुराकानी हटाइनेछ।";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "स्थानीय समकक्ष खोज सक्षम गर्नुहोस्";
 "accountPage.peerDiscoveryExplanation" = "हाम्रो स्थानीय नेटवर्कमा विज्ञापन गर्ने अन्य DHT नोडहरूमा जडान गर्नुहोस्";
 "accountPage.autoRegistration" = "म्याद सकिएपछि स्वतः दर्ता";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "खाता व्यवस्थापन";
-"accountPage.encryptAccount" = "पासवर्डको साथ खाता गुप्तिकरण";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "जोडिएका यन्त्रहरू";
 "accountPage.unlink" = "Unlink";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "This account is password encrypted, enter a password to generate PIN code";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "अडियो कल सुरु गर्नुहोस्";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "गहिरो माइक्रोफोन";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "विरामको लागि कल";
-"accessibility.calls.default.hangUpCall" = "बन्द गर";
+"accessibility.calls.default.hangUpCall" = "कल समाप्त पार्नुहोस्";
 "accessibility.calls.default.addParticipant" = "सहभागी थप";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "क्यामेरा रोक्नुहोस्";
 "accessibility.calls.alter.pauseCall" = "पुनः कल";
-"accessibility.calls.alter.hangUpCall" = "बन्द गर";
+"accessibility.calls.alter.hangUpCall" = "कल समाप्त पार्नुहोस्";
 "accessibility.calls.alter.addParticipant" = "सहभागी थप";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "अनसेट मोडरेटर";
 "accessibility.conference.muteAudio" = "अडियो बन्द";
 "accessibility.conference.unmuteAudio" = "अनमोल अडियो";
-"accessibility.conference.hangup" = "बन्द गर";
+"accessibility.conference.hangup" = "कल समाप्त पार्नुहोस्";
 "accessibility.conference.lowerHand" = "तलको हात";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

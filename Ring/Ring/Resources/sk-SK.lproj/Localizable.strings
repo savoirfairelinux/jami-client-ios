@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Môžete si vybrať uživatelské meno, ktoré pomôže iným ľahko nájsť a dostať sa k vám na Jami.";
 "createAccount.newAccount" = "Nový účet";
-"createAccount.encryptionEnabled" = "Encryption enabled";
-"createAccount.encrypt" = "Zšifrované";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Priemyselné";
-"createAccount.encryptTitle" = "Zšifrovať účet pomocou hesla";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR kód";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "Account imported successfully.";
+"linkToAccount.allSet" = "The account was imported successfully.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is protected with a password. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Odísť";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Importujte účet Jami z miestneho archívu.";
-"importFromArchive.passwordExplanation" = "Ak je účet šifrovaný heslom, vyplňte nasledujúce pole.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Import from archive";
 "importFromArchive.buttonTitle" = "Dovoz";
 "importFromArchive.selectArchiveButton" = "Vyberte súbor archívu";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Odstrániť zariadenie";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Odobrať";
-"accountPage.revokeDevicePlaceholder" = "Zadajte vaše heslo";
+"accountPage.revokeDevicePlaceholder" = "Zadajte heslo k účtu";
 "accountPage.deviceRevoked" = "Odobratie zariadenia dokončené";
 "accountPage.deviceRevocationProgress" = "Odstraňuje sa…";
 "accountPage.deviceRevocationSuccess" = "Zariadenie odstránené";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Registruje sa";
 "accountPage.usernameRegisterAction" = "Registrovať";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
-"accountPage.usernameRegistrationFailed" = "Please check your password.";
-"accountPage.createPassword" = "Zšifrovaný účet";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Zmeniť heslo";
 "accountPage.currentPasswordPlaceholder" = "Vložte súčasný heslo";
 "accountPage.newPasswordPlaceholder" = "Vložte nový heslo";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Nesprávne heslo";
 "accountPage.enableBoothMode" = "Umožniť režim kabíny";
 "accountPage.disableBoothMode" = "Zmazať režim kabíny";
-"accountPage.disableBoothModeExplanation" = "Prosím zadajte heslo svojho účtu";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "V režime kabíny nie je uložená historika konverzácií a funkcia Jami je obmedzená výstupnými hovormi.";
-"accountPage.noBoothMode" = "Ak chcete aktivovať režim Booth, najskôr zašifrujte svoj účet.";
-"accountPage.boothModeAlertMessage" = "Po spustení režimu stanky sa všetky vaše konverzácie odstránia.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "Povoliť lokálne vyhľadávanie peerov";
 "accountPage.peerDiscoveryExplanation" = "Pripojiť k iným DHT uzlom na rovnakej lokálnej sieti";
 "accountPage.autoRegistration" = "Autoregistrácia po uplynutí platnosti";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Zadajte používateľské meno";
 "accountPage.editProfile" = "Upraviť profil";
 "accountPage.manageAccount" = "Spravovať účet";
-"accountPage.encryptAccount" = "Zšifrovať účet heslom";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Heslo vytvorené";
 "accountPage.passwordUpdated" = "Heslo aktualizované";
 "accountPage.linkedDevices" = "Prepojené zariadenia";
 "accountPage.unlink" = "Odpojiť";
 "accountPage.generatingPin" = "Generating PIN code…";
-"accountPage.passwordForPin" = "Tento účet je zašifrovaný heslom, zadajte heslo na vygenerovanie PIN kódu";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "Na inom zariadení";
 "accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Creating backup";
 "backupAccount.archiveName" = "Select a name for the archive.";
 "backupAccount.archiveNamePlaceholder" = "Archive name";
-"backupAccount.passwordRequest" = "Enter the password used to encrypt the account.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Backup created";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "Account imported successfully on the new device.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Začať audio hovor";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Stlmiť mikrofón";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Závok na pauzu";
-"accessibility.calls.default.hangUpCall" = "Zložiť";
+"accessibility.calls.default.hangUpCall" = "Ukončiť hovor";
 "accessibility.calls.default.addParticipant" = "Pridať účastníka";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Zastavte kameru";
 "accessibility.calls.alter.pauseCall" = "Prepracovať hovor";
-"accessibility.calls.alter.hangUpCall" = "Zložiť";
+"accessibility.calls.alter.hangUpCall" = "Ukončiť hovor";
 "accessibility.calls.alter.addParticipant" = "Pridať účastníka";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Odstaviť moderátor";
 "accessibility.conference.muteAudio" = "Stlmiť zvuk";
 "accessibility.conference.unmuteAudio" = "Nevymazaný zvuk";
-"accessibility.conference.hangup" = "Zložiť";
+"accessibility.conference.hangup" = "Ukončiť hovor";
 "accessibility.conference.lowerHand" = "Dolná ruka";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

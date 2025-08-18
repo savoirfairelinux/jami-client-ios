@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Konto erstellen";
 "createAccount.nameExplanation" = "Sie können einen Benutzernamen wählen, damit andere Sie auf Jami leichter finden und erreichen können.";
 "createAccount.newAccount" = "Neues Konto";
-"createAccount.encryptionEnabled" = "Verschlüsselung aktiviert";
-"createAccount.encrypt" = "Verschlüsseln";
+"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Anpassen";
-"createAccount.encryptTitle" = "Konto mit Passwort verschlüsseln";
+"createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "Ein Jami-Konto wird nur auf diesem Gerät lokal erstellt und als Archiv mit seinen Kontoschlüsseln gespeichert. Der Zugriff auf das Archiv kann optional mit einem Passwort geschützt werden.";
 
 // Link To Account form
@@ -223,13 +223,13 @@
 "linkToAccount.showQrCode" = "QR-Code";
 "linkToAccount.showPinCode" = "Authentifizierungscode";
 "linkToAccount.actionRequired" = "Aktion erforderlich.\nBitte bestätigen Sie das Konto auf dem Quellgerät.";
-"linkToAccount.allSet" = "Konto erfolgreich importiert.";
+"linkToAccount.allSet" = "Das Konto wurde erfolgreich importiert.";
 "linkToAccount.goToAccounts" = "Zum importierten Konto gehen";
 "linkToAccount.exportInstructions" = "Starten Sie den Export auf dem Quellgerät.";
 "linkToAccount.exportInstructionsPath" = "Wählen Sie Konto → Kontoeinstellungen → Neues Gerät verknüpfen.";
 "linkToAccount.scanQrCode" = "Wenn Sie bereit sind, scannen Sie den QR-Code.";
 "linkToAccount.enterProvidedCode" = "Wenn Sie bereit sind, geben Sie den Authentifizierungscode ein.";
-"linkToAccount.accountLockedWithPassword" = "Das Konto ist mit einem Passwort geschützt. Geben Sie zum Fortfahren das Kontopasswort ein.";
+"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
 "linkToAccount.exit" = "Beenden";
 "linkToAccount.shareMessage" = "Ihr Code ist: %@";
 "linkToAccount.alertTile" = "Möchten Sie die Verknüpfung des Kontos beenden?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Ein Jami-Konto aus lokalen Archivdatei importieren.";
-"importFromArchive.passwordExplanation" = "Wenn das Konto mit einem Passwort verschlüsselt ist, füllen Sie bitte das folgende Feld aus.";
+"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
 "importFromArchive.title" = "Aus Archiv importieren";
 "importFromArchive.buttonTitle" = "Import";
 "importFromArchive.selectArchiveButton" = "Archivdatei auswählen";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Möchten Sie dieses Gerät entfernen? Diese Aktion kann nicht rückgängig gemacht werden.";
 "accountPage.revokeDeviceButton" = "Revoke";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Enter account password";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Entfernen…";
 "accountPage.deviceRevocationSuccess" = "Gerät wurde getrennt";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Register";
 "accountPage.usernameRegistrationFailedTitle" = "Registrierung fehlgeschlagen";
-"accountPage.usernameRegistrationFailed" = "Bitte überprüfen Sie Ihr Passwort.";
-"accountPage.createPassword" = "Encrypt account";
+"accountPage.usernameRegistrationFailed" = "Please check the account password.";
+"accountPage.createPassword" = "Password protect account";
 "accountPage.changePassword" = "Change password";
 "accountPage.currentPasswordPlaceholder" = "Aktuelles Passwort eingeben";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Falsches Passwort";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide the account password";
 "accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
+"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
 "accountPage.peerDiscovery" = "Entdeckung lokaler Gesprächspartner erlauben";
 "accountPage.peerDiscoveryExplanation" = "Mit anderen DHT-Knoten verbinden, die im lokalen Netzwerk zugänglich sind";
 "accountPage.autoRegistration" = "Auto register after expiration";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Profilnamen eingeben";
 "accountPage.editProfile" = "Profil bearbeiten";
 "accountPage.manageAccount" = "Konto verwalten";
-"accountPage.encryptAccount" = "Encrypt account with a password";
-"accountPage.passwordExplanation" = "Ein Jami-Konto wird nur auf diesem Gerät lokal erstellt und als Archiv mit seinen Kontoschlüsseln gespeichert. Der Zugriff auf das Archiv kann optional mit einem Passwort geschützt werden.";
+"accountPage.encryptAccount" = "Password protect account";
+"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Passwörter stimmen nicht überein.";
 "accountPage.passwordCreated" = "Passwort erstellt";
 "accountPage.passwordUpdated" = "Passwort aktualisiert";
 "accountPage.linkedDevices" = "Linked devices";
 "accountPage.unlink" = "Verknüpfung aufheben";
 "accountPage.generatingPin" = "PIN-Code wird generiert…";
-"accountPage.passwordForPin" = "Dieses Konto ist passwortverschlüsselt. Geben Sie das Passwort ein, um den PIN-Code zu generieren.";
+"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
 "accountPage.pinExplanationMessage" = "Installieren und starten Sie Jami. Wählen Sie „Von einem anderen Gerät importieren“ und scannen Sie den QR-Code. Alternativ können Sie den PIN-Code manuell eingeben.";
 "accountPage.pinError" = "Beim Generieren des PIN-Codes ist ein Fehler aufgetreten.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Backup erstellen";
 "backupAccount.archiveName" = "Wählen Sie einen Namen für das Archiv.";
 "backupAccount.archiveNamePlaceholder" = "Archivname";
-"backupAccount.passwordRequest" = "Geben Sie das Passwort ein, mit dem das Konto verschlüsselt wird.";
+"backupAccount.passwordRequest" = "Enter the account password.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Backup-Speicherort öffnen";
 "backupAccount.exportSuccess" = "Backup erstellt";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "Code";
 "linkDevice.wrongEntry" = "Unbekannte neue Gerätekennung. Bitte folgen Sie den obigen Anweisungen.";
 "linkDevice.exportInProgress" = "Der Kontoexport auf das neue Gerät ist im Gange. Bitte bestätigen Sie den Import auf dem neuen Gerät.";
-"linkDevice.completed" = "Konto erfolgreich auf das neue Gerät importiert.";
+"linkDevice.completed" = "The account was imported successfully on the new device.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Einen Audioanruf beginnen";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Mikrofon stummschalten";
 "accessibility.calls.default.toggleVideo" = "Kamera starten";
 "accessibility.calls.default.pauseCall" = "Gespräch Halten";
-"accessibility.calls.default.hangUpCall" = "Auflegen";
+"accessibility.calls.default.hangUpCall" = "End call";
 "accessibility.calls.default.addParticipant" = "Teilnehmer hinzufügen";
 "accessibility.calls.default.switchCamera" = "Kamera wechseln";
 "accessibility.calls.default.toggleSpeaker" = "Lautsprecher einschalten";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Mikrofon-Stummschaltung aufheben";
 "accessibility.calls.alter.toggleVideo" = "Kamera stoppen";
 "accessibility.calls.alter.pauseCall" = "Gespräch wieder aufnehmen";
-"accessibility.calls.alter.hangUpCall" = "Auflegen";
+"accessibility.calls.alter.hangUpCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Teilnehmer hinzufügen";
 "accessibility.calls.alter.switchCamera" = "Kamera wechseln";
 "accessibility.calls.alter.toggleSpeaker" = "Lautsprecher ausschalten";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Moderator freistellen";
 "accessibility.conference.muteAudio" = "Stummschalten";
 "accessibility.conference.unmuteAudio" = "Stummschaltung aufheben";
-"accessibility.conference.hangup" = "Auflegen";
+"accessibility.conference.hangup" = "End call";
 "accessibility.conference.lowerHand" = "Hand senken";
 "accessibility.account.tokenQRcode" = "Token-QR-Code";
 
