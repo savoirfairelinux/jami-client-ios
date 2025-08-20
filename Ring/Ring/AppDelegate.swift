@@ -1,19 +1,19 @@
 /*
- *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import UIKit
@@ -549,8 +549,8 @@ extension AppDelegate {
     }
 
     private func isCallAction(_ actionIdentifier: String) -> Bool {
-        return actionIdentifier == Constants.NotificationAction.answerVideo.rawValue ||
-            actionIdentifier == Constants.NotificationAction.answerAudio.rawValue
+        return actionIdentifier == Constants.NotificationAction.acceptVideo.rawValue ||
+            actionIdentifier == Constants.NotificationAction.acceptAudio.rawValue
     }
 
     private func handleCallNotification(data: [AnyHashable: Any], account: AccountModel, actionIdentifier: String) {
@@ -572,7 +572,7 @@ extension AppDelegate {
     private func handleCallAction(actionIdentifier: String, data: [AnyHashable: Any]) {
         guard let callURI = data[Constants.NotificationUserInfoKeys.callURI.rawValue] as? String else { return }
 
-        let isAudioOnly = actionIdentifier == Constants.NotificationAction.answerAudio.rawValue
+        let isAudioOnly = actionIdentifier == Constants.NotificationAction.acceptAudio.rawValue
         self.appCoordinator.joinCall(callURI: callURI, isAudioOnly: isAudioOnly)
     }
 
@@ -585,13 +585,13 @@ extension AppDelegate {
     }
 
     func findContactAndStartCall(hash: String, isVideo: Bool) {
-        // if saved jami hash
+        // if saved Jami hash
         if hash.isSHA1() {
             let contactUri = JamiURI(schema: URIType.ring, infoHash: hash)
             self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
             return
         }
-        // if saved jami registered name
+        // if saved Jami registered name
         self.nameService.usernameLookupStatus
             .observe(on: MainScheduler.instance)
             .filter({ usernameLookupStatus in
@@ -604,7 +604,7 @@ extension AppDelegate {
                     let contactUri = JamiURI(schema: URIType.ring, infoHash: address)
                     self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
                 } else {
-                    // if saved sip contact
+                    // if saved SIP contact
                     let contactUri = JamiURI(schema: URIType.sip, infoHash: hash)
                     self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.sip)
                 }
