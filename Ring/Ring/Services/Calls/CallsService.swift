@@ -381,7 +381,7 @@ class CallsService: CallsAdapterDelegate {
 
     func placeCall(withAccount account: AccountModel, toParticipantId participantId: String, userName: String, videoSource: String, isAudioOnly: Bool) -> Single<CallModel> {
         if participantId.contains("rdv:") {
-            self.activeCallsHelper.answerCall(participantId)
+            self.activeCallsHelper.acceptCall(participantId)
         }
         return callManagementService.placeCall(withAccount: account, toParticipantId: participantId, userName: userName, videoSource: videoSource, isAudioOnly: isAudioOnly)
     }
@@ -390,7 +390,7 @@ class CallsService: CallsAdapterDelegate {
         return self.activeCallsHelper.getActiveCall(conversationId: conversationId, accountId: accountId)
     }
 
-    func answerCall(call: CallModel) -> Bool {
+    func acceptCall(call: CallModel) -> Bool {
         return self.callsAdapter.acceptCall(withId: call.callId, accountId: call.accountId, withMedia: call.mediaList)
     }
 

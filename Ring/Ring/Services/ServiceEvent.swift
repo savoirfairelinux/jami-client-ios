@@ -44,8 +44,8 @@ enum ServiceEventType {
     case deviceRevocationEnded
     case newIncomingMessage
     case nameRegistrationEnded
-    case callProviderAnswerCall
-    case callProviderCancelCall
+    case callProviderAcceptCall
+    case callProviderDeclineCall
     case callProviderPreviewPendingCall
     case audioActivated
     case newOutgoingMessage

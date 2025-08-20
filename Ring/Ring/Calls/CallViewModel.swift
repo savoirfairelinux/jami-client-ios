@@ -311,7 +311,7 @@ extension CallViewModel {
         return conversation.getParticipants().count > 1
     }
 
-    func answerCall() -> Completable {
+    func acceptCall() -> Completable {
         return self.callService.accept(callId: call?.callId ?? "")
     }
 
