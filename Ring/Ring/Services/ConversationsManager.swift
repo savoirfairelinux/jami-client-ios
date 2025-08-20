@@ -1,23 +1,19 @@
 /*
- *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
- *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
- *  Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import Foundation
@@ -101,7 +97,7 @@ class ConversationsManager {
         /// calls events
         let callProviderEvents = callsProvider.sharedResponseStream
             .filter({ (event) in
-                return event.eventType == .callProviderCancelCall ||
+                return event.eventType == .callProviderDeclineCall ||
                     event.eventType == .callProviderPreviewPendingCall
             })
             .map { event in
@@ -139,7 +135,7 @@ class ConversationsManager {
                         let accountIds = extractAccountIds(from: updatedConversations)
                         self.reloadConversationsAndRequests(accountIds: accountIds)
                     }
-                case .callEnded, .callProviderCancelCall:
+                case .callEnded, .callProviderDeclineCall:
                     DispatchQueue.main.async {
                         let state = UIApplication.shared.applicationState
                         if state == .background {
@@ -277,8 +273,8 @@ class ConversationsManager {
     private func subscribeCallsProviderEvents() {
         callsProvider.sharedResponseStream
             .filter({serviceEvent in
-                guard serviceEvent.eventType == .callProviderAnswerCall ||
-                        serviceEvent.eventType == .callProviderCancelCall else {
+                guard serviceEvent.eventType == .callProviderAcceptCall ||
+                        serviceEvent.eventType == .callProviderDeclineCall else {
                     return false
                 }
                 return true
@@ -291,9 +287,9 @@ class ConversationsManager {
                       let call = self.callService.callByUUID(UUID: callUUID) else {
                     return
                 }
-                if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
+                if serviceEvent.eventType == ServiceEventType.callProviderAcceptCall {
                     os_log("call provider answer call %@", call.callId)
-                    if !self.callService.answerCall(call: call) {
+                    if !self.callService.acceptCall(call: call) {
                         self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
                     }
                 } else {
