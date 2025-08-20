@@ -1,19 +1,19 @@
 /*
- *  Copyright (C) 2021-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2021-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import UserNotifications
@@ -1031,42 +1031,42 @@ extension NotificationService {
     }
 
     private func configureCallActions(notification: LocalNotification, calls: [ActiveCall], info: inout [AnyHashable: Any]) {
-        let answerVideoAction: UNNotificationAction
-        let answerAudioAction: UNNotificationAction
+        let acceptVideoAction: UNNotificationAction
+        let acceptAudioAction: UNNotificationAction
 
         if #available(iOS 15.0, *) {
-            answerVideoAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.answerVideo.rawValue,
-                title: Constants.NotificationActionTitle.answerWithVideo.toString(),
+            acceptVideoAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.acceptVideo.rawValue,
+                title: Constants.NotificationActionTitle.acceptWithVideo.toString(),
                 options: [.foreground, .authenticationRequired],
                 icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.video.rawValue)
             )
 
-            answerAudioAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.answerAudio.rawValue,
-                title: Constants.NotificationActionTitle.answerWithAudio.toString(),
+            acceptAudioAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.acceptAudio.rawValue,
+                title: Constants.NotificationActionTitle.acceptWithAudio.toString(),
                 options: [.foreground, .authenticationRequired],
                 icon: UNNotificationActionIcon(systemImageName: Constants.NotificationActionIcon.audio.rawValue)
             )
 
             notification.content.interruptionLevel = .timeSensitive
         } else {
-            answerVideoAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.answerVideo.rawValue,
-                title: Constants.NotificationActionTitle.answerWithVideo.toString(),
+            acceptVideoAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.acceptVideo.rawValue,
+                title: Constants.NotificationActionTitle.acceptWithVideo.toString(),
                 options: [.foreground, .authenticationRequired]
             )
 
-            answerAudioAction = UNNotificationAction(
-                identifier: Constants.NotificationAction.answerAudio.rawValue,
-                title: Constants.NotificationActionTitle.answerWithAudio.toString(),
+            acceptAudioAction = UNNotificationAction(
+                identifier: Constants.NotificationAction.acceptAudio.rawValue,
+                title: Constants.NotificationActionTitle.acceptWithAudio.toString(),
                 options: [.foreground, .authenticationRequired]
             )
         }
 
         let callCategory = UNNotificationCategory(
             identifier: Constants.NotificationCategory.call.rawValue,
-            actions: [answerVideoAction, answerAudioAction],
+            actions: [acceptVideoAction, acceptAudioAction],
             intentIdentifiers: [],
             options: [.customDismissAction, .hiddenPreviewsShowTitle]
         )
