@@ -1233,6 +1233,8 @@ internal enum L10n {
     internal static let leave = L10n.tr("Localizable", "swarm.Leave", fallback: "Leave")
     /// Leave conversation
     internal static let leaveConversation = L10n.tr("Localizable", "swarm.leaveConversation", fallback: "Leave conversation")
+    /// Left
+    internal static let `left` = L10n.tr("Localizable", "swarm.left", fallback: "Left")
     /// Member
     internal static let member = L10n.tr("Localizable", "swarm.member", fallback: "Member")
     /// Members

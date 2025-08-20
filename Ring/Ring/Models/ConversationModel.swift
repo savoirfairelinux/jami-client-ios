@@ -81,10 +81,11 @@ enum ConversationPreferenceAttributes: String {
 }
 
 enum ParticipantRole: String {
-    case invited
     case admin
     case member
+    case invited
     case banned
+    case left
     case unknown
 
     var stringValue: String {
@@ -97,6 +98,8 @@ enum ParticipantRole: String {
             return L10n.Swarm.admin
         case .banned:
             return L10n.Swarm.blocked
+        case .left:
+            return L10n.Swarm.left
         case .unknown:
             return L10n.Swarm.unknown
         }

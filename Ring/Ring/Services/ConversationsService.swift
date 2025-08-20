@@ -144,19 +144,7 @@ class ConversationsService {
             return participantsInfo.compactMap({ info in
                 if let jamiId = info["uri"],
                    let roleText = info["role"] {
-                    var role = ParticipantRole.member
-                    switch roleText {
-                    case "admin":
-                        role = .admin
-                    case "member":
-                        role = .member
-                    case "invited":
-                        role = .invited
-                    case "banned":
-                        role = .banned
-                    default:
-                        role = .unknown
-                    }
+                    let role: ParticipantRole = ParticipantRole(rawValue: roleText) ?? .member
                     return ParticipantData(jamiId: jamiId, role: role)
                 }
                 return nil
