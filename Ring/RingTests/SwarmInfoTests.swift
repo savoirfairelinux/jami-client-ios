@@ -82,7 +82,7 @@ final class SwarmInfoTests: XCTestCase {
 
     func createParticipant(jamiId: String, role: ParticipantRole, registeredName: String,
                            profileName: String) -> ParticipantInfo {
-        let participant = ParticipantInfo(jamiId: jamiId, role: role)
+        let participant = ParticipantInfo(jamiId: jamiId, role: role, profileService: injectionBag.profileService)
         participant.registeredName.accept(registeredName)
         participant.profileName.accept(profileName)
         return participant

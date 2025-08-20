@@ -24,13 +24,13 @@ import RxSwift
 @testable import Ring
 
 class TestableSwarmInfo: SwarmInfoProtocol {
-    var avatar: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
+    var avatarData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
     var title = BehaviorRelay(value: "")
     var color = BehaviorRelay<String>(value: "")
     var type = BehaviorRelay(value: ConversationType.oneToOne)
     var description = BehaviorRelay(value: "")
     var participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
-    var participantsAvatars: BehaviorRelay<[UIImage]> = BehaviorRelay(value: [UIImage()])
+    var participantsAvatars: BehaviorRelay<[Data]> = BehaviorRelay(value: [Data()])
     var participantsString = BehaviorRelay<String>(value: "")
 
     var avatarHeight: CGFloat = Constants.defaultAvatarSize
@@ -40,7 +40,7 @@ class TestableSwarmInfo: SwarmInfoProtocol {
     }()
 
     var finalTitle = BehaviorRelay(value: "")
-    var finalAvatar: Observable<UIImage> = Observable.just(UIImage())
+    var finalAvatarData: Observable<Data?> = Observable.just(Data())
     var participants = BehaviorRelay(value: [ParticipantInfo]())
     var contacts = BehaviorRelay(value: [ParticipantInfo]())
     var conversation: ConversationModel?

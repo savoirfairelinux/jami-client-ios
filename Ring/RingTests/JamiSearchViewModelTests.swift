@@ -97,7 +97,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     }
 
     func createSwarmInfo(jamiId: String, name: String, containsSearchQuery: Bool, hasParticipantWithRegisteredName: Bool) -> TestableSwarmInfo {
-        let participant = ParticipantInfo(jamiId: jamiId, role: .admin)
+        let participant = ParticipantInfo(jamiId: jamiId, role: .admin, profileService: injectionBag.profileService)
         participant.registeredName.accept(name)
         let swarmInfo = TestableSwarmInfo(participants: [participant], containsSearchQuery: containsSearchQuery, hasParticipantWithRegisteredName: hasParticipantWithRegisteredName)
         return swarmInfo
