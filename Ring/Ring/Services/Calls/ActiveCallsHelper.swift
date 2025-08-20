@@ -1,19 +1,19 @@
 /*
- *  Copyright (C) 2025-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2025-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import Foundation
@@ -56,7 +56,7 @@ struct ActiveCall: Hashable {
 struct AccountCallTracker {
     private var calls: [String: [ActiveCall]] = [:]
     private var ignoredCalls: [String: Set<ActiveCall>] = [:]
-    private var answeredCalls: [String: Set<ActiveCall>] = [:]
+    private var acceptedCalls: [String: Set<ActiveCall>] = [:]
 
     var allConversationIds: [String] {
         Array(calls.keys)
@@ -66,7 +66,7 @@ struct AccountCallTracker {
         calls[conversationId] = newCalls
         if newCalls.isEmpty {
             ignoredCalls[conversationId] = []
-            answeredCalls[conversationId] = []
+            acceptedCalls[conversationId] = []
         }
     }
 
@@ -74,8 +74,8 @@ struct AccountCallTracker {
         ignoredCalls[call.conversationId, default: Set()].insert(call)
     }
 
-    mutating func answerCall(_ call: ActiveCall) {
-        answeredCalls[call.conversationId, default: Set()].insert(call)
+    mutating func acceptCall(_ call: ActiveCall) {
+        acceptedCalls[call.conversationId, default: Set()].insert(call)
     }
 
     func calls(for conversationId: String) -> [ActiveCall] {
@@ -86,32 +86,32 @@ struct AccountCallTracker {
         ignoredCalls[conversationId] ?? []
     }
 
-    func answeredCalls(for conversationId: String) -> Set<ActiveCall> {
-        answeredCalls[conversationId] ?? []
+    func acceptedCalls(for conversationId: String) -> Set<ActiveCall> {
+        acceptedCalls[conversationId] ?? []
     }
 
-    mutating func removeAnsweredCall(_ call: ActiveCall) {
-        answeredCalls[call.conversationId]?.remove(call)
+    mutating func removeAcceptedCall(_ call: ActiveCall) {
+        acceptedCalls[call.conversationId]?.remove(call)
     }
 
-    func notAnsweredCalls(for conversationId: String) -> [ActiveCall] {
-        calls(for: conversationId).filter { !answeredCalls(for: conversationId).contains($0) }
+    func notAcceptedCalls(for conversationId: String) -> [ActiveCall] {
+        calls(for: conversationId).filter { !acceptedCalls(for: conversationId).contains($0) }
     }
 
     func notIgnoredCalls(for conversationId: String) -> [ActiveCall] {
         calls(for: conversationId).filter { !ignoredCalls(for: conversationId).contains($0) }
     }
 
-    func incomingUnansweredCalls(for conversationId: String) -> [ActiveCall] {
-        return notAnsweredCalls(for: conversationId)
+    func incomingNotAcceptedCalls(for conversationId: String) -> [ActiveCall] {
+        return notAcceptedCalls(for: conversationId)
             .filter { !$0.isFromLocalDevice }
     }
 
-    func incomingUnansweredNotIgnoredCalls() -> [ActiveCall] {
+    func incomingNotAcceptedNotIgnoredCalls() -> [ActiveCall] {
         allConversationIds.flatMap { conversationId in
-            let answered = answeredCalls(for: conversationId)
+            let accepted = acceptedCalls(for: conversationId)
             return notIgnoredCalls(for: conversationId)
-                .filter { !$0.isFromLocalDevice && !answered.contains($0) }
+                .filter { !$0.isFromLocalDevice && !accepted.contains($0) }
         }
     }
 }
@@ -153,7 +153,7 @@ class ActiveCallsHelper {
         activeCalls.accept(calls)
     }
 
-    func answerCall(_ callURI: String) {
+    func acceptCall(_ callURI: String) {
         guard let parsed = ActiveCall.init(callURI),
               let (accountId, call) = findActiveCall(conversationId: parsed.conversationId, callId: parsed.id) else {
             return
@@ -161,7 +161,7 @@ class ActiveCallsHelper {
 
         var calls = activeCalls.value
         var callTracker = calls[call.accountId] ?? AccountCallTracker()
-        callTracker.answerCall(call)
+        callTracker.acceptCall(call)
         calls[accountId] = callTracker
         activeCalls.accept(calls)
     }
@@ -197,12 +197,12 @@ class ActiveCallsHelper {
             return
         }
 
-        /// Removes the call from answered calls list to allow rejoining,
+        /// Removes the call from accepted calls list to allow rejoining,
         /// and adds it to ignored calls to prevent call alerts from showing
         var calls = activeCalls.value
         var callTracker = calls[call.accountId] ?? AccountCallTracker()
         callTracker.ignoreCall(call)
-        callTracker.removeAnsweredCall(call)
+        callTracker.removeAcceptedCall(call)
         calls[accountId] = callTracker
         activeCalls.accept(calls)
     }
