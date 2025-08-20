@@ -507,14 +507,20 @@ internal enum L10n {
     internal static let accountNoNetworkTitle = L10n.tr("Localizable", "alerts.accountNoNetworkTitle", fallback: "Network error")
     /// Already sharing location with this user
     internal static let alreadylocationSharing = L10n.tr("Localizable", "alerts.alreadylocationSharing", fallback: "Already sharing location with this user")
+    /// Do you want to remove this contact? The existing history will be deleted.
+    internal static let confimRemoveContact = L10n.tr("Localizable", "alerts.confimRemoveContact", fallback: "Do you want to remove this contact? The existing history will be deleted.")
     /// Do you want to block this contact? The conversation history with this contact will also be deleted permanently.
     internal static let confirmBlockContact = L10n.tr("Localizable", "alerts.confirmBlockContact", fallback: "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.")
-    /// Do you want to delete this conversation permanently?
-    internal static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation", fallback: "Do you want to delete this conversation permanently?")
+    /// Do you want to remove this conversation permanently?
+    internal static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation", fallback: "Do you want to remove this conversation permanently?")
     /// Do you want to delete the conversation with this contact?
     internal static let confirmDeleteConversationFromContact = L10n.tr("Localizable", "alerts.confirmDeleteConversationFromContact", fallback: "Do you want to delete the conversation with this contact?")
     /// Delete conversation
     internal static let confirmDeleteConversationTitle = L10n.tr("Localizable", "alerts.confirmDeleteConversationTitle", fallback: "Delete conversation")
+    /// Do you want to leave this conversation?
+    internal static let confirmLeaveConversation = L10n.tr("Localizable", "alerts.confirmLeaveConversation", fallback: "Do you want to leave this conversation?")
+    /// Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.
+    internal static let confirmRemoveOneToOneConversation = L10n.tr("Localizable", "alerts.confirmRemoveOneToOneConversation", fallback: "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.")
     /// Please close application and try to open it again
     internal static let dbFailedMessage = L10n.tr("Localizable", "alerts.dbFailedMessage", fallback: "Please close application and try to open it again")
     /// An error happened when launching Jami
@@ -902,6 +908,8 @@ internal enum L10n {
     internal static let forward = L10n.tr("Localizable", "global.forward", fallback: "Forward")
     /// Incoming call
     internal static let incomingCall = L10n.tr("Localizable", "global.incomingCall", fallback: "Incoming call")
+    /// Leave
+    internal static let leave = L10n.tr("Localizable", "global.leave", fallback: "Leave")
     /// Name
     internal static let name = L10n.tr("Localizable", "global.name", fallback: "Name")
     /// OK
@@ -1245,6 +1253,10 @@ internal enum L10n {
     internal static let others = L10n.tr("Localizable", "swarm.others", fallback: "Others")
     /// Public group
     internal static let publicChat = L10n.tr("Localizable", "swarm.publicChat", fallback: "Public group")
+    /// Remove contact
+    internal static let removeContact = L10n.tr("Localizable", "swarm.removeContact", fallback: "Remove contact")
+    /// Remove conversation
+    internal static let removeConversation = L10n.tr("Localizable", "swarm.removeConversation", fallback: "Remove conversation")
     /// Select contacts
     internal static let selectContacts = L10n.tr("Localizable", "swarm.selectContacts", fallback: "Select contacts")
     /// Settings
