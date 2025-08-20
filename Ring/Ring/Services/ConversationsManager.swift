@@ -1,23 +1,19 @@
 /*
- *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
- *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
- *  Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import Foundation
@@ -93,15 +89,15 @@ class ConversationsManager {
         self.controlAccountsState()
     }
 
-    /// when application is not active, accounts also should be not active. Except when when handling incoming call.
+    // When the application is inactive, the accounts should also be inactive. Except when when handling incoming call.
     private func controlAccountsState() {
-        /// subscribe to app state changes
+        // Subscribe to app state changes
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        /// calls events
+        // calls events
         let callProviderEvents = callsProvider.sharedResponseStream
             .filter({ (event) in
-                return event.eventType == .callProviderCancelCall ||
+                return event.eventType == .callProviderDeclineCall ||
                     event.eventType == .callProviderPreviewPendingCall
             })
             .map { event in
@@ -131,7 +127,7 @@ class ConversationsManager {
                     }
                 case .callProviderPreviewPendingCall:
                     self.accountsService.setAccountsActive(active: true)
-                    // Reload conversations updated in the background if needed.
+                    // Reload conversations updated in the background if required.
                     DispatchQueue.global(qos: .background).async { [weak self] in
                         guard let self = self,
                               let updatedConversations = self.getConversationData() else { return }
@@ -139,7 +135,7 @@ class ConversationsManager {
                         let accountIds = extractAccountIds(from: updatedConversations)
                         self.reloadConversationsAndRequests(accountIds: accountIds)
                     }
-                case .callEnded, .callProviderCancelCall:
+                case .callEnded, .callProviderDeclineCall:
                     DispatchQueue.main.async {
                         let state = UIApplication.shared.applicationState
                         if state == .background {
@@ -277,8 +273,8 @@ class ConversationsManager {
     private func subscribeCallsProviderEvents() {
         callsProvider.sharedResponseStream
             .filter({serviceEvent in
-                guard serviceEvent.eventType == .callProviderAnswerCall ||
-                        serviceEvent.eventType == .callProviderCancelCall else {
+                guard serviceEvent.eventType == .callProviderAcceptCall ||
+                        serviceEvent.eventType == .callProviderDeclineCall else {
                     return false
                 }
                 return true
@@ -291,13 +287,13 @@ class ConversationsManager {
                       let call = self.callService.callByUUID(UUID: callUUID) else {
                     return
                 }
-                if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
-                    os_log("call provider answer call %@", call.callId)
-                    if !self.callService.answerCall(call: call) {
+                if serviceEvent.eventType == ServiceEventType.callProviderAcceptCall {
+                    os_log("call provider accept call %@", call.callId)
+                    if !self.callService.acceptCall(call: call) {
                         self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
                     }
                 } else {
-                    os_log("call provider cancel call")
+                    os_log("call provider decline call")
                     self.callService
                         .refuse(callId: call.callId)
                         .subscribe()
@@ -528,7 +524,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
     func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: Int) {
         guard let conversationEvent = ConversationMemberEvent(rawValue: event) else { return }
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        /// check if we leave conversation on another device. In this case remove conversation
+        // Check if we leave the conversation on another device. In this case remove conversation.
         if conversationEvent == .leave,
            account.jamiId == memberUri {
             self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
@@ -584,7 +580,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
 
     func messageLoaded(conversationId: String, accountId: String, messages: [[String: String]]) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        // convert array of dictionaries to messages
+        // Convert array of dictionaries to messages.
         let messagesModels = messages.map { dictionary -> MessageModel in
             let newMessage = MessageModel(withInfo: dictionary, localJamiId: account.jamiId)
             updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
@@ -596,7 +592,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
 
     func conversationLoaded(conversationId: String, accountId: String, messages: [SwarmMessageWrap], requestId: Int) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        // convert array of dictionaries to messages
+        // Convert array of dictionaries to messages.
         let messagesModels = messages.map { wrapInfo -> MessageModel in
             let newMessage = MessageModel(with: wrapInfo, localJamiId: account.jamiId)
             updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
