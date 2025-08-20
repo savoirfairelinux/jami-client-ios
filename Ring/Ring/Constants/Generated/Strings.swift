@@ -515,6 +515,8 @@ internal enum L10n {
     internal static let confirmDeleteConversationFromContact = L10n.tr("Localizable", "alerts.confirmDeleteConversationFromContact", fallback: "Do you want to delete the conversation with this contact?")
     /// Delete conversation
     internal static let confirmDeleteConversationTitle = L10n.tr("Localizable", "alerts.confirmDeleteConversationTitle", fallback: "Delete conversation")
+    /// Do you want to restart this conversation? The existing history will be removed and a new conversation will be started.
+    internal static let confirmRestartConversation = L10n.tr("Localizable", "alerts.confirmRestartConversation", fallback: "Do you want to restart this conversation? The existing history will be removed and a new conversation will be started.")
     /// Please close application and try to open it again
     internal static let dbFailedMessage = L10n.tr("Localizable", "alerts.dbFailedMessage", fallback: "Please close application and try to open it again")
     /// An error happened when launching Jami
@@ -922,6 +924,8 @@ internal enum L10n {
     internal static let reply = L10n.tr("Localizable", "global.reply", fallback: "Reply")
     /// Resend
     internal static let resend = L10n.tr("Localizable", "global.resend", fallback: "Resend")
+    /// Restart
+    internal static let restart = L10n.tr("Localizable", "global.restart", fallback: "Restart")
     /// Save
     internal static let save = L10n.tr("Localizable", "global.save", fallback: "Save")
     /// Searching…
@@ -1245,6 +1249,10 @@ internal enum L10n {
     internal static let others = L10n.tr("Localizable", "swarm.others", fallback: "Others")
     /// Public group
     internal static let publicChat = L10n.tr("Localizable", "swarm.publicChat", fallback: "Public group")
+    /// Remove conversation
+    internal static let removeConversation = L10n.tr("Localizable", "swarm.removeConversation", fallback: "Remove conversation")
+    /// Restart conversation
+    internal static let restartConversation = L10n.tr("Localizable", "swarm.restartConversation", fallback: "Restart conversation")
     /// Select contacts
     internal static let selectContacts = L10n.tr("Localizable", "swarm.selectContacts", fallback: "Select contacts")
     /// Settings

@@ -37,6 +37,7 @@ struct SettingsView: View {
     enum PresentingAlert: Identifiable {
         case removeConversation
         case blockContact
+        case clearConversation
 
         var id: Self { self }
     }
@@ -133,6 +134,9 @@ struct SettingsView: View {
             identifierView(label: L10n.Swarm.conversationId, value: viewmodel.swarmInfo.id)
             swarmTypeView
             colorPickerView
+            if viewmodel.isCoreDialog {
+                clearConversationButton
+            }
             leaveConversationButton
         }
     }
@@ -188,12 +192,28 @@ struct SettingsView: View {
                 Image(systemName: "arrow.right.circle")
                     .foregroundColor(Color(UIColor.jamiFailure))
                     .accessibility(hidden: true)
-                Text(L10n.Swarm.leaveConversation)
+                Text(viewmodel.removeConversationText)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color(UIColor.jamiFailure))
             }
         })
-        .accessibilityLabel(L10n.Swarm.leaveConversation)
+        .accessibilityLabel(viewmodel.removeConversationText)
+    }
+
+    private var clearConversationButton: some View {
+        Button(action: {
+            presentingAlert = .clearConversation
+        }, label: {
+            HStack {
+                Image(systemName: "arrow.clockwise")
+                    .foregroundColor(Color.jamiColor)
+                    .accessibility(hidden: true)
+                Text(L10n.Swarm.restartConversation)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color.jamiColor)
+            }
+        })
+        .accessibilityLabel(L10n.Swarm.restartConversation)
     }
 
     // MARK: - Helper Methods
@@ -212,6 +232,15 @@ struct SettingsView: View {
                 title: Text(L10n.Alerts.confirmBlockContact),
                 primaryButton: .destructive(Text(L10n.Global.block)) {
                     viewmodel.blockContact(stateEmitter: stateEmitter)
+                },
+                secondaryButton: .cancel()
+            )
+        case .clearConversation:
+            return Alert(
+                title: Text(L10n.Swarm.restartConversation),
+                message: Text(L10n.Alerts.confirmRestartConversation),
+                primaryButton: .destructive(Text(L10n.Global.restart)) {
+                    viewmodel.restartSwarm(stateEmitter: stateEmitter)
                 },
                 secondaryButton: .cancel()
             )

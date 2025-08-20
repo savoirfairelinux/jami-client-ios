@@ -68,6 +68,16 @@ class SwarmInfoVM: ObservableObject {
 
     let provider: AvatarProvider
 
+    var isCoreDialog: Bool {
+        return conversation?.isCoredialog() ?? false
+    }
+
+    var removeConversationText: String {
+        return conversation?.isDialog() ?? false
+            ? L10n.Swarm.removeConversation
+            : L10n.Swarm.leaveConversation
+    }
+
     // MARK: - Initialization
 
     init(with injectionBag: InjectionBag, swarmInfo: SwarmInfoProtocol) {
@@ -282,6 +292,17 @@ class SwarmInfoVM: ObservableObject {
             self.conversationService
                 .removeConversation(conversationId: conversationId, accountId: accountId)
         }
+        stateEmitter.emitState(ConversationState.conversationRemoved)
+    }
+
+    func restartSwarm(stateEmitter: ConversationStatePublisher) {
+        guard let conversation = self.conversation else { return }
+
+        let conversationId = conversation.id
+        let accountId = conversation.accountId
+
+        self.conversationService
+            .removeConversation(conversationId: conversationId, accountId: accountId)
         stateEmitter.emitState(ConversationState.conversationRemoved)
     }
 
