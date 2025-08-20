@@ -37,6 +37,7 @@ struct SettingsView: View {
     enum PresentingAlert: Identifiable {
         case removeConversation
         case blockContact
+        case removeContact
 
         var id: Self { self }
     }
@@ -64,6 +65,7 @@ struct SettingsView: View {
                 identifierView(label: L10n.Swarm.identifier, value: jamiId)
                 qrCodeButton(jamiId: jamiId)
                 shareContactButton(jamiId: jamiId)
+                removeContactButton()
                 blockContactButton()
             }
         }
@@ -133,7 +135,7 @@ struct SettingsView: View {
             identifierView(label: L10n.Swarm.conversationId, value: viewmodel.swarmInfo.id)
             swarmTypeView
             colorPickerView
-            leaveConversationButton
+            removeConversationButton
         }
     }
 
@@ -180,7 +182,7 @@ struct SettingsView: View {
         .accessibilityValue(viewmodel.finalColor)
     }
 
-    private var leaveConversationButton: some View {
+    private var removeConversationButton: some View {
         Button(action: {
             presentingAlert = .removeConversation
         }, label: {
@@ -188,12 +190,28 @@ struct SettingsView: View {
                 Image(systemName: "arrow.right.circle")
                     .foregroundColor(Color(UIColor.jamiFailure))
                     .accessibility(hidden: true)
-                Text(L10n.Swarm.leaveConversation)
+                Text(viewmodel.removeConversationText)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color(UIColor.jamiFailure))
             }
         })
-        .accessibilityLabel(L10n.Swarm.leaveConversation)
+        .accessibilityLabel(viewmodel.removeConversationText)
+    }
+
+    private func removeContactButton() -> some View {
+        Button(action: {
+            presentingAlert = .removeContact
+        }, label: {
+            HStack {
+                Image(systemName: "person.crop.circle.badge.minus")
+                    .foregroundColor(Color.jamiColor)
+                    .accessibility(hidden: true)
+                Text(L10n.Swarm.removeContact)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color.jamiColor)
+            }
+        })
+        .accessibilityLabel(L10n.Swarm.removeContact)
     }
 
     // MARK: - Helper Methods
@@ -201,17 +219,28 @@ struct SettingsView: View {
         switch alertType {
         case .removeConversation:
             return Alert(
-                title: Text(L10n.Swarm.confirmLeaveConversation),
-                primaryButton: .destructive(Text(L10n.Swarm.leave)) {
-                    viewmodel.leaveSwarm(stateEmitter: stateEmitter)
+                title: Text(viewmodel.removeConversationText),
+                message: Text(viewmodel.removeConversationConfirmation),
+                primaryButton: .destructive(Text(viewmodel.removeConversationAlertButton)) {
+                    viewmodel.removeConversation(stateEmitter: stateEmitter)
                 },
                 secondaryButton: .cancel()
             )
         case .blockContact:
             return Alert(
-                title: Text(L10n.Alerts.confirmBlockContact),
+                title: Text(L10n.Global.blockContact),
+                message: Text(L10n.Alerts.confirmBlockContact),
                 primaryButton: .destructive(Text(L10n.Global.block)) {
                     viewmodel.blockContact(stateEmitter: stateEmitter)
+                },
+                secondaryButton: .cancel()
+            )
+        case .removeContact:
+            return Alert(
+                title: Text(L10n.Swarm.removeContact),
+                message: Text(L10n.Alerts.confimRemoveContact),
+                primaryButton: .destructive(Text(L10n.Global.remove)) {
+                    viewmodel.removeContact(stateEmitter: stateEmitter)
                 },
                 secondaryButton: .cancel()
             )

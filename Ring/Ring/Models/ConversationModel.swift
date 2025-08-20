@@ -401,6 +401,12 @@ class ConversationModel: Equatable {
         }.count == 1
     }
 
+    func isOnlyLocalParticipant() -> Bool {
+        return self.participants.filter { participant in
+            !participant.isLocal
+        }.isEmpty
+    }
+
     func containsParticipant(participant: String) -> Bool {
         return self.getParticipants()
             .map { participant in
