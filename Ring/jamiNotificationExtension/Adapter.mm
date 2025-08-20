@@ -1,21 +1,19 @@
 /*
- *  Copyright (C) 2021-2022 Savoir-faire Linux Inc.
+ * Copyright (C) 2021-2025 Savoir-faire Linux Inc.
  *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 #import "Adapter.h"
@@ -49,9 +47,9 @@ struct PeerConnectionRequest : public dht::EncryptedValue<PeerConnectionRequest>
     static constexpr const char* key_prefix = "peer:";
     dht::Value::Id id = dht::Value::INVALID_ID;
     std::string ice_msg {};
-    bool isAnswer {false};
+    bool isAccept {false};
     std::string connType {};
-    MSGPACK_DEFINE_MAP(id, ice_msg, isAnswer, connType)
+    MSGPACK_DEFINE_MAP(id, ice_msg, isAccept, connType)
 };
 
 // Constants
@@ -630,12 +628,12 @@ utf8_make_valid(const std::string& name)
     strncpy(pos, remainder, remaining_bytes);
     pos += remaining_bytes;
 
-    std::string answer(str, pos - str);
-    assert(utf8_validate_c_str(answer.c_str(), -1, NULL));
+    std::string accept(str, pos - str);
+    assert(utf8_validate_c_str(accept.c_str(), -1, NULL));
 
     delete[] str;
 
-    return answer;
+    return accept;
 }
 
 bool
