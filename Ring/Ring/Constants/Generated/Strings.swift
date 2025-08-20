@@ -509,6 +509,8 @@ internal enum L10n {
     internal static let alreadylocationSharing = L10n.tr("Localizable", "alerts.alreadylocationSharing", fallback: "Already sharing location with this user")
     /// Do you want to block this contact? The conversation history with this contact will also be deleted permanently.
     internal static let confirmBlockContact = L10n.tr("Localizable", "alerts.confirmBlockContact", fallback: "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.")
+    /// Do you want to clear all messages from this conversation?
+    internal static let confirmClearConversation = L10n.tr("Localizable", "alerts.confirmClearConversation", fallback: "Do you want to clear all messages from this conversation?")
     /// Do you want to delete this conversation permanently?
     internal static let confirmDeleteConversation = L10n.tr("Localizable", "alerts.confirmDeleteConversation", fallback: "Do you want to delete this conversation permanently?")
     /// Do you want to delete the conversation with this contact?
@@ -866,6 +868,8 @@ internal enum L10n {
     internal static let cameraDisabled = L10n.tr("Localizable", "global.cameraDisabled", fallback: "Camera access is disabled. Enable it in device settings in order to use this feature.")
     /// Cancel
     internal static let cancel = L10n.tr("Localizable", "global.cancel", fallback: "Cancel")
+    /// Clear
+    internal static let clear = L10n.tr("Localizable", "global.clear", fallback: "Clear")
     /// Close
     internal static let close = L10n.tr("Localizable", "global.close", fallback: "Close")
     /// Confirm
@@ -1191,6 +1195,8 @@ internal enum L10n {
     internal static let changePicture = L10n.tr("Localizable", "swarm.changePicture", fallback: "Change group picture")
     /// Conversation color
     internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor", fallback: "Conversation color")
+    /// Clear conversation
+    internal static let clearConversation = L10n.tr("Localizable", "swarm.clearConversation", fallback: "Clear conversation")
     /// Do you want to leave this conversation?
     internal static let confirmLeaveConversation = L10n.tr("Localizable", "swarm.confirmLeaveConversation", fallback: "Do you want to leave this conversation?")
     /// Contact
@@ -1245,6 +1251,8 @@ internal enum L10n {
     internal static let others = L10n.tr("Localizable", "swarm.others", fallback: "Others")
     /// Public group
     internal static let publicChat = L10n.tr("Localizable", "swarm.publicChat", fallback: "Public group")
+    /// Remove conversation
+    internal static let removeConversation = L10n.tr("Localizable", "swarm.removeConversation", fallback: "Remove conversation")
     /// Select contacts
     internal static let selectContacts = L10n.tr("Localizable", "swarm.selectContacts", fallback: "Select contacts")
     /// Settings
