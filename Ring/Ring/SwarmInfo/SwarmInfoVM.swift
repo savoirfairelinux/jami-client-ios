@@ -68,6 +68,42 @@ class SwarmInfoVM: ObservableObject {
 
     let provider: AvatarProvider
 
+    var isCoreDialog: Bool {
+        return conversation?.isCoredialog() ?? false
+    }
+
+    var removeConversationText: String {
+        guard let conversation = self.conversation else {
+            return L10n.Swarm.removeConversation
+        }
+        return conversation.isDialog() || conversation.isOnlyLocalParticipant()
+            ? L10n.Swarm.removeConversation
+            : L10n.Swarm.leaveConversation
+    }
+
+    var removeConversationConfirmation: String {
+        guard let conversation = self.conversation else {
+            return L10n.Alerts.confirmLeaveConversation
+        }
+        if isCoreDialog {
+            return L10n.Alerts.confirmRemoveOneToOneConversation
+        }
+        if conversation.isDialog() || conversation.isOnlyLocalParticipant() {
+            return L10n.Alerts.confirmDeleteConversation
+        }
+        return L10n.Alerts.confirmLeaveConversation
+    }
+
+    var removeConversationAlertButton: String {
+        guard let conversation = self.conversation else {
+            return L10n.Global.remove
+        }
+        if conversation.isDialog() || conversation.isOnlyLocalParticipant() {
+            return L10n.Global.remove
+        }
+        return L10n.Global.leave
+    }
+
     // MARK: - Initialization
 
     init(with injectionBag: InjectionBag, swarmInfo: SwarmInfoProtocol) {
@@ -259,16 +295,12 @@ class SwarmInfoVM: ObservableObject {
         }
     }
 
-    func leaveSwarm(stateEmitter: ConversationStatePublisher) {
+    func removeContact(stateEmitter: ConversationStatePublisher) {
         guard let conversation = self.conversation else { return }
 
         let conversationId = conversation.id
         let accountId = conversation.accountId
 
-        /*
-         If it's a one-to-one conversation, remove the associated contact.
-         This action will also remove the conversation.
-         */
         if conversation.isCoredialog(),
            let participant = conversation.getParticipants().first {
             self.contactsService
@@ -278,10 +310,18 @@ class SwarmInfoVM: ObservableObject {
                 .asObservable()
                 .subscribe(onCompleted: {})
                 .disposed(by: self.disposeBag)
-        } else {
-            self.conversationService
-                .removeConversation(conversationId: conversationId, accountId: accountId)
         }
+        stateEmitter.emitState(ConversationState.conversationRemoved)
+    }
+
+    func removeConversation(stateEmitter: ConversationStatePublisher) {
+        guard let conversation = self.conversation else { return }
+
+        let conversationId = conversation.id
+        let accountId = conversation.accountId
+
+        self.conversationService
+            .removeConversation(conversationId: conversationId, accountId: accountId)
         stateEmitter.emitState(ConversationState.conversationRemoved)
     }
 
