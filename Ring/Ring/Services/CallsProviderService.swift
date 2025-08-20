@@ -1,21 +1,19 @@
 /*
- *  Copyright (C) 2019-2023 Savoir-faire Linux Inc.
+ * Copyright (C) 2019-2025 Savoir-faire Linux Inc.
  *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import AVFoundation
@@ -23,7 +21,7 @@ import CallKit
 import RxSwift
 
 enum UnhandeledCallState {
-    case answered
+    case accepted
     case declined
     case awaiting
 }
@@ -112,7 +110,7 @@ extension CallsProviderService {
             call.callUUID = unhandeledCall.uuid
             if unhandeledCall.state != .awaiting {
                 // CallKit already received user action before call received from the daemon. Notify call view about the action
-                let serviceEventType: ServiceEventType = unhandeledCall.state == .answered ? .callProviderAnswerCall : .callProviderCancelCall
+                let serviceEventType: ServiceEventType = unhandeledCall.state == .accepted ? .callProviderAcceptCall : .callProviderDeclineCall
                 var serviceEvent = ServiceEvent(withEventType: serviceEventType)
                 serviceEvent.addEventInput(.callUUID, value: call.callUUID.uuidString)
                 self.responseStream.onNext(serviceEvent)
@@ -285,10 +283,10 @@ extension CallsProviderService: CXProviderDelegate {
             action.fulfill()
         }
         if let call = getUnhandeledCall(UUID: action.callUUID) {
-            call.state = .answered
+            call.state = .accepted
             return
         }
-        let serviceEventType: ServiceEventType = .callProviderAnswerCall
+        let serviceEventType: ServiceEventType = .callProviderAcceptCall
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)
         self.responseStream.onNext(serviceEvent)
@@ -303,7 +301,7 @@ extension CallsProviderService: CXProviderDelegate {
             call.state = .declined
             return
         }
-        let serviceEventType: ServiceEventType = .callProviderCancelCall
+        let serviceEventType: ServiceEventType = .callProviderDeclineCall
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)
         self.responseStream.onNext(serviceEvent)
