@@ -116,6 +116,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     @Published var coordinates = [LocationSharingAnnotation]()
     @Published var locationSharingiewModel: LocationSharingViewModel = LocationSharingViewModel()
     @Published var isTemporary: Bool = false
+    @Published var isConversationEnded: Bool = false
     @Published var name: String = "" {
         didSet {
             updateSyncMessageIfNeeded()
