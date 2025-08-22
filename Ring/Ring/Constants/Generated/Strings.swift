@@ -1203,6 +1203,8 @@ internal enum L10n {
     internal static let confirmLeaveConversation = L10n.tr("Localizable", "swarm.confirmLeaveConversation", fallback: "Do you want to leave this conversation?")
     /// Contact
     internal static let contactHeader = L10n.tr("Localizable", "swarm.contactHeader", fallback: "Contact")
+    /// Conversation ended
+    internal static let conversationEnded = L10n.tr("Localizable", "swarm.conversationEnded", fallback: "Conversation ended")
     /// Conversation
     internal static let conversationHeader = L10n.tr("Localizable", "swarm.conversationHeader", fallback: "Conversation")
     /// Conversation ID
@@ -1259,6 +1261,8 @@ internal enum L10n {
     internal static let removeContact = L10n.tr("Localizable", "swarm.removeContact", fallback: "Remove contact")
     /// Remove conversation
     internal static let removeConversation = L10n.tr("Localizable", "swarm.removeConversation", fallback: "Remove conversation")
+    /// Restart conversation
+    internal static let restartConversation = L10n.tr("Localizable", "swarm.restartConversation", fallback: "Restart conversation")
     /// Select contacts
     internal static let selectContacts = L10n.tr("Localizable", "swarm.selectContacts", fallback: "Select contacts")
     /// Settings

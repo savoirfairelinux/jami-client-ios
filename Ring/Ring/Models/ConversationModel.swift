@@ -388,6 +388,12 @@ class ConversationModel: Equatable {
         }
     }
 
+    func getAllLocalParticipants() -> [ConversationParticipant] {
+        return self.participants.filter { participant in
+            participant.isLocal
+        }
+    }
+
     func getAllParticipants() -> [ConversationParticipant] {
         return self.participants
     }
