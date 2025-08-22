@@ -323,6 +323,13 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
+        self.swarmInfo!.conversationEnded
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] isEnded in
+                self?.swiftUIModel.isConversationEnded = isEnded
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
     }
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {

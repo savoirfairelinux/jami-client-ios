@@ -150,6 +150,10 @@ struct MessagesListView: View {
             if model.isTemporary {
                 temporaryConversationView()
             }
+
+            if model.isConversationEnded {
+                endedConversationView()
+            }
         }
         .environment(\.avatarProviderFactory, model.makeAvatarFactory() as AvatarProviderFactory?)
         .onChange(of: model.screenTapped, perform: { _ in
@@ -339,6 +343,19 @@ struct MessagesListView: View {
                 Spacer()
                     .frame(height: 20)
             }
+        }
+    }
+
+    func endedConversationView() -> some View {
+        VStack {
+            VStack {
+                Text("Conversation ended")
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+            }
+            .padding()
+            .background(Color(UIColor.secondarySystemBackground))
+            Spacer()
         }
     }
 

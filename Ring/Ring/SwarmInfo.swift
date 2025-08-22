@@ -40,6 +40,7 @@ protocol SwarmInfoProtocol {
     var participants: BehaviorRelay<[ParticipantInfo]> { get set }
     var contacts: BehaviorRelay<[ParticipantInfo]> { get set }
     var conversation: ConversationModel? { get set }
+    var conversationEnded: BehaviorRelay<Bool> { get set }
     var id: String { get set }
 
     func addContacts(contacts: [ContactModel])
@@ -129,6 +130,7 @@ class SwarmInfo: SwarmInfoProtocol {
     var description = BehaviorRelay(value: "")
     var participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
     var participantsAvatars: BehaviorRelay<[Data]> = BehaviorRelay(value: [Data()])
+    var conversationEnded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
     var avatarHeight: CGFloat = Constants.defaultAvatarSize
     var avatarSpacing: CGFloat = 2
@@ -203,10 +205,32 @@ class SwarmInfo: SwarmInfoProtocol {
     convenience init(injectionBag: InjectionBag, conversation: ConversationModel, avatarHeight: CGFloat = Constants.defaultAvatarSize) {
         self.init(injectionBag: injectionBag, accountId: conversation.accountId, avatarHeight: avatarHeight)
         self.conversation = conversation
+        self.conversationEnded.accept(self.isConversationEnded())
         self.subscribeConversationEvents()
         self.updateInfo()
         self.setParticipants()
         self.updateColorPreference()
+    }
+
+    func isConversationEnded() -> Bool {
+        guard let conversation = self.conversation else { return false }
+        if conversation.getAllParticipants().isEmpty { return false }
+
+        // If the local user is an admin, the conversation is never considered ended
+        if conversation.getLocalParticipants()?.role == .admin {
+            return false
+        }
+
+        let hasActiveOtherParticipants = conversation.getParticipants().contains { participant in
+            switch participant.role {
+            case .banned, .left:
+                return false
+            default:
+                return true
+            }
+        }
+
+        return !hasActiveOtherParticipants
     }
 
     func addContacts(contacts: [ContactModel]) {
@@ -408,6 +432,7 @@ class SwarmInfo: SwarmInfoProtocol {
             }
         }
         if participantsInfo.isEmpty { return }
+        self.conversationEnded.accept(self.isConversationEnded())
         self.insertAndSortParticipants(participants: participantsInfo)
     }
 
@@ -447,7 +472,7 @@ class SwarmInfo: SwarmInfoProtocol {
     private func insertAndSortParticipants(participants: [ParticipantInfo]) {
         var currentValue = [ParticipantInfo]()
         currentValue.append(contentsOf: participants)
-        currentValue = currentValue.filter({ [.invited, .member, .admin].contains($0.role) })
+        currentValue = currentValue.filter({ [.invited, .member, .admin, .left].contains($0.role) })
         currentValue.sort { participant1, participant2 in
             if participant1.role == participant2.role {
                 return participant1.finalName.value > participant2.finalName.value
