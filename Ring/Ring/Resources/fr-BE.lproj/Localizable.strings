@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Supprimer l'appareil";
 "accountPage.revokeDeviceMessage" = "Êtes-vous certain de vouloir révoquer l'appareil ? Cette opération est irréversible.";
 "accountPage.revokeDeviceButton" = "Révoquer";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Entrer le mot de passe de votre compte";
 "accountPage.deviceRevoked" = "La révocation de l'appareil a été effectuée";
 "accountPage.deviceRevocationProgress" = "En cours de suppression ...";
 "accountPage.deviceRevocationSuccess" = "Appareil supprimé";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Couper le microphone";
 "accessibility.calls.default.toggleVideo" = "Allumer la caméra";
 "accessibility.calls.default.pauseCall" = "Mettre l'appel en pause";
-"accessibility.calls.default.hangUpCall" = "End call";
+"accessibility.calls.default.hangUpCall" = "Fin d’appel";
 "accessibility.calls.default.addParticipant" = "Ajouter un participant";
 "accessibility.calls.default.switchCamera" = "Changer de caméra";
 "accessibility.calls.default.toggleSpeaker" = "Activer le haut-parleur";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Réouvrir le microphone";
 "accessibility.calls.alter.toggleVideo" = "Arrêt de la caméra";
 "accessibility.calls.alter.pauseCall" = "Reprendre l'appel";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "Fin d’appel";
 "accessibility.calls.alter.addParticipant" = "Ajouter un participant";
 "accessibility.calls.alter.switchCamera" = "Changer de caméra";
 "accessibility.calls.alter.toggleSpeaker" = "Fermer le haut-parleur";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Supprimer un modérateur";
 "accessibility.conference.muteAudio" = "Couper le micro";
 "accessibility.conference.unmuteAudio" = "Ouvrir le micro";
-"accessibility.conference.hangup" = "End call";
+"accessibility.conference.hangup" = "Fin d’appel";
 "accessibility.conference.lowerHand" = "Baisser la main";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

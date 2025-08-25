@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Intrekken";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Voer het account wachtwoord in";
 "accountPage.deviceRevoked" = "Intrekken van apparaat voltooid";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";

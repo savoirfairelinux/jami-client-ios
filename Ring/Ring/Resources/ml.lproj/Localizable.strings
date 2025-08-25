@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "ഡിവൈസ് ഒഴിവാക്കുക";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "റദ്ദാക്കൽ";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "അക്കൌണ്ട് പാസ്വേഡ് നൽകുക";
 "accountPage.deviceRevoked" = "ഉപകരണം പിൻവലിച്ചതിനു ശേഷം";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "മൈക്ക് അൺമ്യൂട്ട് ചെയ്യുക";
 "accessibility.calls.alter.toggleVideo" = "ക്യാമറ നിർത്തുക";
 "accessibility.calls.alter.pauseCall" = "പുനരാരംഭിക്കുക";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "കോൾ അവസാനിപ്പിക്കുക";
 "accessibility.calls.alter.addParticipant" = "പങ്കാളിയെ കൂട്ടിച്ചേർക്കുക";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";

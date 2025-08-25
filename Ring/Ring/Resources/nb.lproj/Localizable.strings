@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Fjern enhet";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Tilbakekall";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Tast inn kontopassord";
 "accountPage.deviceRevoked" = "Tilbakekallelse av enhet fullført";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";

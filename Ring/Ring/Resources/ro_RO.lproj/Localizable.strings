@@ -101,9 +101,9 @@
 "swarm.blocked" = "Blocat";
 "swarm.unknown" = "Necunoscut";
 "swarm.inviteMembers" = "Invită membri";
-"swarm.inviteSelectedMembers" = "Invite selected contacts";
-"swarm.inviteMembersSelected" = "Selected";
-"swarm.inviteMembersNotSelected" = "Not selected";
+"swarm.inviteSelectedMembers" = "Invită contactele alese";
+"swarm.inviteMembersSelected" = "Ales";
+"swarm.inviteMembersNotSelected" = "Nu este ales";
 "swarm.confirmLeaveConversation" = "Vrei să părăsești această conversație?";
 "swarm.Leave" = "Părăsește";
 "swarm.newGroup" = "Creează un grup nou";
@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Se creează contul";
 "createAccount.nameExplanation" = "Poți alege un nume de utilizator pentru a fi ușor de găsit și de contactat pe Jami.";
 "createAccount.newAccount" = "Cont nou";
-"createAccount.encryptionEnabled" = "Password protection enabled";
-"createAccount.encrypt" = "Password protect";
+"createAccount.encryptionEnabled" = "Protecția cu parolă e activată";
+"createAccount.encrypt" = "Protecție cu parolă";
 "createAccount.customize" = "Personalizează";
-"createAccount.encryptTitle" = "Password protect account";
+"createAccount.encryptTitle" = "Cont protejat cu parolă";
 "createAccount.encryptExplanation" = "Un cont Jami este creat și stocat local numai în acest aparat, sub forma unei arhive care conține cheile contului. Accesul la această arhivă poate fi protejat facultativ cu o parolă.";
 
 // Link To Account form
@@ -229,7 +229,7 @@
 "linkToAccount.exportInstructionsPath" = "Alege contul → Reglările contului → Asociază un nou aparat.";
 "linkToAccount.scanQrCode" = "Apoi, scanează codul QR";
 "linkToAccount.enterProvidedCode" = "Apoi, introdu codul de autentificare.";
-"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "Contul este protejat cu o parolă. Introdu parola, pentru a continua.";
 "linkToAccount.exit" = "Ieșire";
 "linkToAccount.shareMessage" = "Codul tău este: %@";
 "linkToAccount.alertTile" = "Vrei să oprești asocierea contului?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Importă contul Jami din fișierul arhivei.";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Dacă acest cont este protejat cu o parolă, completează următorul spațiu.";
 "importFromArchive.title" = "Importă din arhivă";
 "importFromArchive.buttonTitle" = "Importă";
 "importFromArchive.selectArchiveButton" = "Alege fișierul arhivei";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Elimină aparatul";
 "accountPage.revokeDeviceMessage" = "Vrei să elimini acest aparat? Această acțiune nu poate fi anulată.";
 "accountPage.revokeDeviceButton" = "Elimină";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Introdu parola contului";
 "accountPage.deviceRevoked" = "Eliminarea aparatului s-a terminat";
 "accountPage.deviceRevocationProgress" = "Se elimină…";
 "accountPage.deviceRevocationSuccess" = "Aparat eliminat";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Se înscrie";
 "accountPage.usernameRegisterAction" = "Înscrie-te";
 "accountPage.usernameRegistrationFailedTitle" = "Înscrierea nu a reușit";
-"accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.usernameRegistrationFailed" = "Verifică parola contului";
+"accountPage.createPassword" = "Cont protejat cu parolă";
 "accountPage.changePassword" = "Schimbă parola";
 "accountPage.currentPasswordPlaceholder" = "Introdu parola actuală";
 "accountPage.newPasswordPlaceholder" = "Introdu parola nouă";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Parolă greșită";
 "accountPage.enableBoothMode" = "Activează „Modul Cabină”";
 "accountPage.disableBoothMode" = "Dezactivează „Modul Cabină”";
-"accountPage.disableBoothModeExplanation" = "Please provide the account password";
+"accountPage.disableBoothModeExplanation" = "Introdu parola contului";
 "accountPage.boothModeExplanation" = "În „Modul Cabină” cronologia conversațiilor nu e salvată și Jami este limitat la efectuarea de apeluri. Dacă activezi „Modul Cabină”, toate conversațiile tale vor fi șterse.";
-"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
+"accountPage.noBoothMode" = "Protejează-ți contul înainte de a activa „Modul Cabină”.";
+"accountPage.boothModeAlertMessage" = "După activarea modului cabină, toate conversațiile vor fi șterse.";
 "accountPage.peerDiscovery" = "Activează descoperirea utilizatorilor locali";
 "accountPage.peerDiscoveryExplanation" = "Conectează-te la alte noduri DHT din rețeaua ta locală.";
 "accountPage.autoRegistration" = "Înscriere automată după expirare";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Introdu numele profilului";
 "accountPage.editProfile" = "Modifică profilul";
 "accountPage.manageAccount" = "Gestionează contul";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "Cont protejat cu parolă";
+"accountPage.passwordExplanation" = "Un cont Jami este creat și stocat local numai în acest aparat, sub forma unei arhive care conține cheile contului. Accesul la această arhivă poate fi protejat facultativ cu o parolă.";
 "accountPage.passwordsDoNotMatch" = "Parolele nu se potrivesc.";
 "accountPage.passwordCreated" = "Parolă creată";
 "accountPage.passwordUpdated" = "Parolă actualizată";
 "accountPage.linkedDevices" = "Aparate asociate";
 "accountPage.unlink" = "Elimină";
 "accountPage.generatingPin" = "Se generează codul PIN…";
-"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
+"accountPage.passwordForPin" = "Cont este protejat cu parolă, introdu parola pentru a genera codul PIN.";
 "accountPage.pinExplanationTitle" = "În alt aparat";
 "accountPage.pinExplanationMessage" = "Instalează și pornește Jami, alege „Importă din alt aparat” și scanează codul QR sau introdu manual codul PIN.";
 "accountPage.pinError" = "A apărut o eroare în timpul generării codului PIN.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Se creează copia de rezervă";
 "backupAccount.archiveName" = "Alege un nume pentru arhivă.";
 "backupAccount.archiveNamePlaceholder" = "Numele arhivei";
-"backupAccount.passwordRequest" = "Enter the account password.";
+"backupAccount.passwordRequest" = "Introdu parola contului";
 "backupAccount.backupButton" = "Copie de rezervă";
 "backupAccount.documentPickerButton" = "Deschide locul copiei de rezervă";
 "backupAccount.exportSuccess" = "Copie de rezervă creată";
@@ -635,29 +635,29 @@
 "accessibility.account.tokenQRcode" = "Codul QR";
 
 // Swarm Colors
-"swarmColors.vibrantPink" = "Vibrant pink";
-"swarmColors.purple" = "Purple";
+"swarmColors.vibrantPink" = "Roz strălucitor";
+"swarmColors.purple" = "Mov";
 "swarmColors.violet" = "Violet";
-"swarmColors.indigoBlue" = "Indigo blue";
-"swarmColors.skyBlue" = "Sky blue";
-"swarmColors.cyan" = "Cyan";
-"swarmColors.teal" = "Teal";
-"swarmColors.green" = "Green";
-"swarmColors.limeGreen" = "Lime green";
-"swarmColors.mediumGray" = "Medium gray";
-"swarmColors.yellowGreen" = "Yellow-green";
-"swarmColors.amber" = "Amber";
-"swarmColors.brightOrange" = "Bright orange";
-"swarmColors.brown" = "Brown";
-"swarmColors.steelBlue" = "Steel blue";
+"swarmColors.indigoBlue" = "Albastru indigo";
+"swarmColors.skyBlue" = "Albastru ceresc";
+"swarmColors.cyan" = "Turcoaz";
+"swarmColors.teal" = "Verde-albastru";
+"swarmColors.green" = "Verde";
+"swarmColors.limeGreen" = "Verde-lămâie";
+"swarmColors.mediumGray" = "Gri mediu";
+"swarmColors.yellowGreen" = "Verde-gălbui";
+"swarmColors.amber" = "Chihlimbar";
+"swarmColors.brightOrange" = "Portocaliu aprins";
+"swarmColors.brown" = "Maro";
+"swarmColors.steelBlue" = "Albastru metalic";
 
 // Share extension
 "shareExtension.appName" = "Jami";
-"shareExtension.noAccount.title" = "Account not found";
-"shareExtension.noAccount.description" = "To continue, create an account in the main application.";
-"shareExtension.unsupportedType.title" = "Unsupported content";
-"shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
-"shareExtension.sending" = "Sending…";
+"shareExtension.noAccount.title" = "Nu s-a găsit contul";
+"shareExtension.noAccount.description" = "Pentru a continua, creează un cont în aplicația principală.";
+"shareExtension.unsupportedType.title" = "Conținut neacceptat";
+"shareExtension.unsupportedType.description" = "Distribuirea conținutului ales nu este implementată.";
+"shareExtension.sending" = "Se trimite…";
 "shareExtension.conversations" = "Conversații";
-"shareExtension.noConversation" = "Conversation unavailable.";
-"shareExtension.selectAccount" = "Select account.";
+"shareExtension.noConversation" = "Conversație indisponibilă.";
+"shareExtension.selectAccount" = "Alege contul.";

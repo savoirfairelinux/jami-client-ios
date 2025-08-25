@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Tilbagekald";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Indtast password til kontoen";
 "accountPage.deviceRevoked" = "Enheden har fået fjernet sin adgang";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Sluk mikrofon";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pause-opkald";
-"accessibility.calls.default.hangUpCall" = "End call";
+"accessibility.calls.default.hangUpCall" = "Afslut opkald";
 "accessibility.calls.default.addParticipant" = "Tilføj deltager";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Stop kameraet";
 "accessibility.calls.alter.pauseCall" = "Opkaldet genoptages";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "Afslut opkald";
 "accessibility.calls.alter.addParticipant" = "Tilføj deltager";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Moderator";
 "accessibility.conference.muteAudio" = "Sluk Lyd";
 "accessibility.conference.unmuteAudio" = "Udybnet lyd";
-"accessibility.conference.hangup" = "End call";
+"accessibility.conference.hangup" = "Afslut opkald";
 "accessibility.conference.lowerHand" = "Nedre hånd";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

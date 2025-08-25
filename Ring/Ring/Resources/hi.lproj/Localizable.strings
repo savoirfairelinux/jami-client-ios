@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "निरस्त";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "खाता पासवर्ड दर्ज करें";
 "accountPage.deviceRevoked" = "डिवाइस निरस्त पूरा";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "कैमरा रोकें";
 "accessibility.calls.alter.pauseCall" = "पुनः कॉल";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "कॉल समाप्त करें";
 "accessibility.calls.alter.addParticipant" = "प्रतिभागी जोड़ें";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";

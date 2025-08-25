@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "취소";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "계정 비밀번호를 입력";
 "accountPage.deviceRevoked" = "장치 취소 완료";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "카메라를 멈추";
 "accessibility.calls.alter.pauseCall" = "다시 전화";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "통화 종료";
 "accessibility.calls.alter.addParticipant" = "참가자를 추가";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";

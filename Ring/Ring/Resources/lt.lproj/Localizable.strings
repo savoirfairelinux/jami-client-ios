@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Šalinti įrenginį";
 "accountPage.revokeDeviceMessage" = "Ar norite pašalinti šį įrenginį? Šio veiksmo neįmanoma bus atšaukti.";
 "accountPage.revokeDeviceButton" = "Panaikinti";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Įveskite paskyros slaptažodį";
 "accountPage.deviceRevoked" = "Įrenginio panaikinimas užbaigtas";
 "accountPage.deviceRevocationProgress" = "Šalinama…";
 "accountPage.deviceRevocationSuccess" = "Įrenginys pašalintas";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Stokkamera";
 "accessibility.calls.alter.pauseCall" = "Pratęsti skambutį";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "Baigti skambutį";
 "accessibility.calls.alter.addParticipant" = "Pridėti dalyvį";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";

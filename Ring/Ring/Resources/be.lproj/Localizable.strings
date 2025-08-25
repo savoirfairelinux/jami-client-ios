@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Адмена";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Увядзіце пароль рахунку";
 "accountPage.deviceRevoked" = "Завяршана адкліканне прылады";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Непаўны мікрафон";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Паза званок";
-"accessibility.calls.default.hangUpCall" = "End call";
+"accessibility.calls.default.hangUpCall" = "Скончыць выклік";
 "accessibility.calls.default.addParticipant" = "Дадаць удзельніка";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Спыніць камеру";
 "accessibility.calls.alter.pauseCall" = "Падключыць званок";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "Скончыць выклік";
 "accessibility.calls.alter.addParticipant" = "Дадаць удзельніка";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Адключыць модулятар";
 "accessibility.conference.muteAudio" = "Непаслухмяны аўдыё";
 "accessibility.conference.unmuteAudio" = "Неўключаны аўдыё";
-"accessibility.conference.hangup" = "End call";
+"accessibility.conference.hangup" = "Скончыць выклік";
 "accessibility.conference.lowerHand" = "Ніжняя рука";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

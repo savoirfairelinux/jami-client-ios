@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "ರದ್ದು";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "ಖಾತೆ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";
 "accountPage.deviceRevoked" = "ಸಾಧನವನ್ನು ಹಿಂತೆಗೆದುಕೊಳ್ಳುವುದು ಪೂರ್ಣಗೊಂಡಿದೆ";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "ಕ್ಯಾಮೆರಾ ನಿಲ್ಲಿಸಿ";
 "accessibility.calls.alter.pauseCall" = "ಪುನರಾರಂಭ ಕರೆ";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "ಕರೆ ಅಂತ್ಯಗೊಳಿಸು";
 "accessibility.calls.alter.addParticipant" = "ಭಾಗವಹಿಸುವವರನ್ನು ಸೇರಿಸುವುದು";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";

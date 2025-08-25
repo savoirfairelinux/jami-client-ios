@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "باطل کردن";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "گذرواژه حساب را وارد کنید";
 "accountPage.deviceRevoked" = "ابطال دستگاه تکمیل شد";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "قطع میکروفون";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "توقف تماس";
-"accessibility.calls.default.hangUpCall" = "End call";
+"accessibility.calls.default.hangUpCall" = "پایان دادن به تماس";
 "accessibility.calls.default.addParticipant" = "افزودن شرکت کننده";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "دوربین توقف";
 "accessibility.calls.alter.pauseCall" = "ازسرگیری تماس";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "پایان دادن به تماس";
 "accessibility.calls.alter.addParticipant" = "افزودن شرکت کننده";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "لغو میدیریت";
 "accessibility.conference.muteAudio" = "قطع صدا";
 "accessibility.conference.unmuteAudio" = "برقراری صدا";
-"accessibility.conference.hangup" = "End call";
+"accessibility.conference.hangup" = "پایان دادن به تماس";
 "accessibility.conference.lowerHand" = "دست پایین";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

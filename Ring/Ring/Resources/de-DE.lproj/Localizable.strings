@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Möchten Sie dieses Gerät entfernen? Diese Aktion kann nicht rückgängig gemacht werden.";
 "accountPage.revokeDeviceButton" = "Revoke";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Konto-Passwort eingeben";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Entfernen…";
 "accountPage.deviceRevocationSuccess" = "Gerät wurde getrennt";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "Code";
 "linkDevice.wrongEntry" = "Unbekannte neue Gerätekennung. Bitte folgen Sie den obigen Anweisungen.";
 "linkDevice.exportInProgress" = "Der Kontoexport auf das neue Gerät ist im Gange. Bitte bestätigen Sie den Import auf dem neuen Gerät.";
-"linkDevice.completed" = "The account was imported successfully on the new device.";
+"linkDevice.completed" = "Das Konto wurde erfolgreich auf das neue Gerät importiert.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Einen Audioanruf beginnen";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Mikrofon stummschalten";
 "accessibility.calls.default.toggleVideo" = "Kamera starten";
 "accessibility.calls.default.pauseCall" = "Gespräch Halten";
-"accessibility.calls.default.hangUpCall" = "End call";
+"accessibility.calls.default.hangUpCall" = "Anruf beenden";
 "accessibility.calls.default.addParticipant" = "Teilnehmer hinzufügen";
 "accessibility.calls.default.switchCamera" = "Kamera wechseln";
 "accessibility.calls.default.toggleSpeaker" = "Lautsprecher einschalten";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Mikrofon-Stummschaltung aufheben";
 "accessibility.calls.alter.toggleVideo" = "Kamera stoppen";
 "accessibility.calls.alter.pauseCall" = "Gespräch wieder aufnehmen";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "Anruf beenden";
 "accessibility.calls.alter.addParticipant" = "Teilnehmer hinzufügen";
 "accessibility.calls.alter.switchCamera" = "Kamera wechseln";
 "accessibility.calls.alter.toggleSpeaker" = "Lautsprecher ausschalten";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Moderator freistellen";
 "accessibility.conference.muteAudio" = "Stummschalten";
 "accessibility.conference.unmuteAudio" = "Stummschaltung aufheben";
-"accessibility.conference.hangup" = "End call";
+"accessibility.conference.hangup" = "Anruf beenden";
 "accessibility.conference.lowerHand" = "Hand senken";
 "accessibility.account.tokenQRcode" = "Token-QR-Code";
 

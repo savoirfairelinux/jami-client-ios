@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "رد";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "حساب رمزونو دن";
 "accountPage.deviceRevoked" = "آلنادا چکمه لری";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Mikrofonu səssiz et";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "توقف تماس";
-"accessibility.calls.default.hangUpCall" = "End call";
+"accessibility.calls.default.hangUpCall" = "Zəngi bitir";
 "accessibility.calls.default.addParticipant" = "شرکتچی قوش";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "دوربین ایست";
 "accessibility.calls.alter.pauseCall" = "تماسونو تکرار ائتمک";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "Zəngi bitir";
 "accessibility.calls.alter.addParticipant" = "شرکتچی قوش";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "مودئراتورون دَییشدیرمه سی";
 "accessibility.conference.muteAudio" = "سئلک آدیو";
 "accessibility.conference.unmuteAudio" = "سس لری بیز";
-"accessibility.conference.hangup" = "End call";
+"accessibility.conference.hangup" = "Zəngi bitir";
 "accessibility.conference.lowerHand" = "آلتی ال";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

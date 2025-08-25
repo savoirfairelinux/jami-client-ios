@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Do you want to remove this device? This action cannot be undone.";
 "accountPage.revokeDeviceButton" = "Revocación";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Entra contraseña de la cuenta";
 "accountPage.deviceRevoked" = "La revocación del dispositivu completada";
 "accountPage.deviceRevocationProgress" = "Removing…";
 "accountPage.deviceRevocationSuccess" = "Device removed";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Micrófonos silenciosos";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pausa llamada";
-"accessibility.calls.default.hangUpCall" = "End call";
+"accessibility.calls.default.hangUpCall" = "La llamada final";
 "accessibility.calls.default.addParticipant" = "Aúna de les partes";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "La cámara de detención";
 "accessibility.calls.alter.pauseCall" = "Reanudar la llamada";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "La llamada final";
 "accessibility.calls.alter.addParticipant" = "Aúna de les partes";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Moderador desactiváu";
 "accessibility.conference.muteAudio" = "El soníu mudo";
 "accessibility.conference.unmuteAudio" = "El soníu nun silenciáu";
-"accessibility.conference.hangup" = "End call";
+"accessibility.conference.hangup" = "La llamada final";
 "accessibility.conference.lowerHand" = "La mano inferior";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

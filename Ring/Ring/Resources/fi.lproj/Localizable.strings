@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Luodaan tiliä";
 "createAccount.nameExplanation" = "Voit valita käyttäjänimen helpottamaan muita löytämään sinut Jamista.";
 "createAccount.newAccount" = "Uusi tili";
-"createAccount.encryptionEnabled" = "Password protection enabled";
-"createAccount.encrypt" = "Password protect";
+"createAccount.encryptionEnabled" = "Salasanasuojaus käytössä";
+"createAccount.encrypt" = "Salasanasuojattu";
 "createAccount.customize" = "Mukauta";
-"createAccount.encryptTitle" = "Password protect account";
+"createAccount.encryptTitle" = "Salasanalla suojattu tili";
 "createAccount.encryptExplanation" = "Jami-tili luodaan ja tallennetaan paikallisesti vain tälle laitteelle. Tilin avain on pakattuna ja pääsy tähän voidaan valinnaisesti suojata salasanalla.";
 
 // Link To Account form
@@ -229,7 +229,7 @@
 "linkToAccount.exportInstructionsPath" = "Valitse Tili > Tiliasetukset > Linkitä uusi laite.";
 "linkToAccount.scanQrCode" = "Kun olet valmis, skannaa QR-koodi.";
 "linkToAccount.enterProvidedCode" = "Kun olet valmis, kirjoita todennuskoodi";
-"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "Tili on salasanasuojattu. Jatka antamalla salasana.";
 "linkToAccount.exit" = "Poistu";
 "linkToAccount.shareMessage" = "Koodisi on: %@";
 "linkToAccount.alertTile" = "Haluatko lopettaa tilin linkittämisen?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Tuo Jami-tili varmuuskopiosta";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Jos tili on suojattu salasanalla, täytä seuraava kenttä.";
 "importFromArchive.title" = "Tuo varmuuskopiosta";
 "importFromArchive.buttonTitle" = "Tuo";
 "importFromArchive.selectArchiveButton" = "Valitse pakattu tiedosto";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Poista laite";
 "accountPage.revokeDeviceMessage" = "Haluatko poistaa tämän laitteen? Toimintoa ei voi kumota.";
 "accountPage.revokeDeviceButton" = "Peruuta";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Anna tilin salasana";
 "accountPage.deviceRevoked" = "Laitteen peruminen valmis";
 "accountPage.deviceRevocationProgress" = "Poistetaan…";
 "accountPage.deviceRevocationSuccess" = "Laite poistettu";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Rekisteröidään";
 "accountPage.usernameRegisterAction" = "Rekistöröi";
 "accountPage.usernameRegistrationFailedTitle" = "Rekisteröinti epäonnistui";
-"accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.usernameRegistrationFailed" = "Tarkista tilin salasana.";
+"accountPage.createPassword" = "Salasanalla suojattu tili";
 "accountPage.changePassword" = "Vaihda salasana";
 "accountPage.currentPasswordPlaceholder" = "Anna nykyinen salasana";
 "accountPage.newPasswordPlaceholder" = "Anna uusi salasana";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Väärä salasana";
 "accountPage.enableBoothMode" = "Kioskitila käyttöön";
 "accountPage.disableBoothMode" = "Poista kioskitila";
-"accountPage.disableBoothModeExplanation" = "Please provide the account password";
+"accountPage.disableBoothModeExplanation" = "Anna tilin salasana";
 "accountPage.boothModeExplanation" = "Kioskitilassa keskusteluhistoriaa ei tallenneta ja jamin toimintoja rajoitettu lähtevien puheluiden osalta. Kun otat kioskitilan käyttöön, kaikki keskustelusi poistetaan.";
-"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
+"accountPage.noBoothMode" = "Ota Booth-tila käyttöön suojaamalla tili ensin salasanalla.";
+"accountPage.boothModeAlertMessage" = "Booth-tilan käyttöönoton jälkeen kaikki keskustelut poistetaan.";
 "accountPage.peerDiscovery" = "Salli paikallinen vertaisten haku";
 "accountPage.peerDiscoveryExplanation" = "Yhdistä muihin DHT-solmuihin, jotka ilmoittautuu paikallisessa verkossa";
 "accountPage.autoRegistration" = "Automaattinen rekisteröinti vanhentumisen jälkeen";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Anna profiilin nimi";
 "accountPage.editProfile" = "Muokkaa profiilia";
 "accountPage.manageAccount" = "Hallinnoi tiliä";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "Salasanalla suojattu tili";
+"accountPage.passwordExplanation" = "Jami-tili luodaan ja tallennetaan paikallisesti vain tähän laitteeseen. Tiliavain on pakattuna ja pääsy voidaan valinnaisesti suojata salasanalla.";
 "accountPage.passwordsDoNotMatch" = "Salasanat eivät täsmää.";
 "accountPage.passwordCreated" = "Salasana luotu";
 "accountPage.passwordUpdated" = "Salasana päivitetty";
 "accountPage.linkedDevices" = "Linkitetyt laitteet";
 "accountPage.unlink" = "Poista linkitys";
 "accountPage.generatingPin" = "Luodaan PIN-koodia…";
-"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
+"accountPage.passwordForPin" = "Tili on salasanasuojattu. Anna salasana ja luo pin-koodi.";
 "accountPage.pinExplanationTitle" = "Toisella laitteella";
 "accountPage.pinExplanationMessage" = "Asenna ja käynnistä Jami. Valitse \"Tuo toiselta laitteelta\" ja skannaa QR-koodi tai anna PIN-koodi käsin.";
 "accountPage.pinError" = "PIN-koodia luotaessa tapahtui virhe.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Luodaan varmuuskopio";
 "backupAccount.archiveName" = "Valitse varmuuskopiolle nimi.";
 "backupAccount.archiveNamePlaceholder" = "Arkiston nimi";
-"backupAccount.passwordRequest" = "Enter the account password.";
+"backupAccount.passwordRequest" = "Anna tilin salasana.";
 "backupAccount.backupButton" = "Varmista";
 "backupAccount.documentPickerButton" = "Avaa varmistuksen sijainti";
 "backupAccount.exportSuccess" = "Varmuuskopio luotu";
@@ -472,7 +472,7 @@
 "linkDevice.code" = "koodi";
 "linkDevice.wrongEntry" = "Tuntematon uusi laitetunniste. Noudata yllä olevia ohjeita.";
 "linkDevice.exportInProgress" = "Tilin vienti uuteen laitteeseen on käynnissä. Vahvista tuonti uudella laitteella.";
-"linkDevice.completed" = "The account was imported successfully on the new device.";
+"linkDevice.completed" = "Tilin tuonti uuteen laitteeseen onnistui.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Aloita äänipuhelu";
@@ -606,7 +606,7 @@
 "accessibility.calls.default.toggleAudio" = "Mykistä mikrofoni";
 "accessibility.calls.default.toggleVideo" = "Avaa kamera";
 "accessibility.calls.default.pauseCall" = "Puhelu pitoon";
-"accessibility.calls.default.hangUpCall" = "End call";
+"accessibility.calls.default.hangUpCall" = "Lopeta puhelu";
 "accessibility.calls.default.addParticipant" = "Lisää osannottaja";
 "accessibility.calls.default.switchCamera" = "Vaihda kamera";
 "accessibility.calls.default.toggleSpeaker" = "Kytke kaiutin";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Poista mikrofonin mykistys";
 "accessibility.calls.alter.toggleVideo" = "Sulje kamera";
 "accessibility.calls.alter.pauseCall" = "Jatka puhelua";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "Lopeta puhelu";
 "accessibility.calls.alter.addParticipant" = "Lisää osannottaja";
 "accessibility.calls.alter.switchCamera" = "Vaihda kamera";
 "accessibility.calls.alter.toggleSpeaker" = "Mykistä kaiutin";
@@ -630,7 +630,7 @@
 "accessibility.conference.unsetModerator" = "Poista valvoja";
 "accessibility.conference.muteAudio" = "Mykistä ääni";
 "accessibility.conference.unmuteAudio" = "Poista mykistys";
-"accessibility.conference.hangup" = "End call";
+"accessibility.conference.hangup" = "Lopeta puhelu";
 "accessibility.conference.lowerHand" = "Käsi alas";
 "accessibility.account.tokenQRcode" = "Token QR-koodi";
 

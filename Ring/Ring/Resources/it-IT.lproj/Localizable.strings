@@ -223,7 +223,7 @@
 "linkToAccount.showQrCode" = "Codice QR";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "The account was imported successfully.";
+"linkToAccount.allSet" = "L'account è stato importato correttamente.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Rimuovi dispositivo";
 "accountPage.revokeDeviceMessage" = "Vuoi rimuovere questo dispositivo? Questa azione non può essere annullata.";
 "accountPage.revokeDeviceButton" = "Revoca";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Inserire la password dell'account";
 "accountPage.deviceRevoked" = "Revoca del dispositico completata";
 "accountPage.deviceRevocationProgress" = "Rimozione…";
 "accountPage.deviceRevocationSuccess" = "Dispositivo rimosso";
@@ -617,7 +617,7 @@
 "accessibility.calls.alter.toggleAudio" = "Attiva microfono";
 "accessibility.calls.alter.toggleVideo" = "Stop camera";
 "accessibility.calls.alter.pauseCall" = "Riprendi la chiamata";
-"accessibility.calls.alter.hangUpCall" = "End call";
+"accessibility.calls.alter.hangUpCall" = "Termina chiamata";
 "accessibility.calls.alter.addParticipant" = "Aggiungi partecipante";
 "accessibility.calls.alter.switchCamera" = "Cambia fotocamera";
 "accessibility.calls.alter.toggleSpeaker" = "Spegni l'altoparlante";
