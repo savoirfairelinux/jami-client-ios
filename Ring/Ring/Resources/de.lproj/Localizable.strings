@@ -212,10 +212,10 @@
 "createAccount.creatingAccount" = "Konto erstellen";
 "createAccount.nameExplanation" = "Sie können einen Benutzernamen wählen, damit andere Sie auf Jami leichter finden und erreichen können.";
 "createAccount.newAccount" = "Neues Konto";
-"createAccount.encryptionEnabled" = "Password protection enabled";
-"createAccount.encrypt" = "Password protect";
+"createAccount.encryptionEnabled" = "Passwortschutz aktiviert";
+"createAccount.encrypt" = "Passwortschutz";
 "createAccount.customize" = "Anpassen";
-"createAccount.encryptTitle" = "Password protect account";
+"createAccount.encryptTitle" = "Passwort geschütztes Konto";
 "createAccount.encryptExplanation" = "Ein Jami-Konto wird nur auf diesem Gerät lokal erstellt und als Archiv mit seinen Kontoschlüsseln gespeichert. Der Zugriff auf das Archiv kann optional mit einem Passwort geschützt werden.";
 
 // Link To Account form
@@ -229,7 +229,7 @@
 "linkToAccount.exportInstructionsPath" = "Wählen Sie Konto → Kontoeinstellungen → Neues Gerät verknüpfen.";
 "linkToAccount.scanQrCode" = "Wenn Sie bereit sind, scannen Sie den QR-Code.";
 "linkToAccount.enterProvidedCode" = "Wenn Sie bereit sind, geben Sie den Authentifizierungscode ein.";
-"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "Das Konto ist passwortgeschützt. Geben Sie das Kontopasswort ein, um fortzufahren.";
 "linkToAccount.exit" = "Schliessen";
 "linkToAccount.shareMessage" = "Ihr Code ist: %@";
 "linkToAccount.alertTile" = "Möchten Sie die Verknüpfung des Kontos beenden?";
@@ -237,7 +237,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Ein Jami-Konto aus lokalen Archivdatei importieren.";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Wenn das Konto passwortgeschützt ist, füllen Sie bitte das folgende Feld aus.";
 "importFromArchive.title" = "Aus Archiv importieren";
 "importFromArchive.buttonTitle" = "Import";
 "importFromArchive.selectArchiveButton" = "Archivdatei auswählen";
@@ -348,8 +348,8 @@
 "accountPage.usernameRegistering" = "Benutzername wird registriert...";
 "accountPage.usernameRegisterAction" = "Registrieren";
 "accountPage.usernameRegistrationFailedTitle" = "Registrierung fehlgeschlagen";
-"accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.usernameRegistrationFailed" = "Bitte überprüfen Sie das Kontopasswort.";
+"accountPage.createPassword" = "Passwort geschütztes Konto";
 "accountPage.changePassword" = "Passwort ändern";
 "accountPage.currentPasswordPlaceholder" = "Aktuelles Passwort eingeben";
 "accountPage.newPasswordPlaceholder" = "Neues Passwort eingeben";
@@ -357,10 +357,10 @@
 "accountPage.changePasswordError" = "Falsches Passwort";
 "accountPage.enableBoothMode" = "Geheim-Modus aktivieren";
 "accountPage.disableBoothMode" = "Geheim-Modus deaktivieren";
-"accountPage.disableBoothModeExplanation" = "Please provide the account password";
+"accountPage.disableBoothModeExplanation" = "Bitte geben Sie das Kontopasswort ein";
 "accountPage.boothModeExplanation" = "Im Geheim-Modus wird der Gesprächsverlauf nicht gespeichert und die Jami-Funktionalität durch ausgehende Anrufe eingeschränkt. Wenn Sie den Geheim-Modus aktivieren, werden alle Ihre Gespräche entfernt.";
-"accountPage.noBoothMode" = "To enable Booth mode, password protect the account first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode, all the conversations will be removed.";
+"accountPage.noBoothMode" = "Um den Booth-Modus zu aktivieren, schützen Sie das Konto zunächst mit einem Passwort.";
+"accountPage.boothModeAlertMessage" = "Nach dem Aktivieren des Booth-Modus werden alle Konversationen entfernt.";
 "accountPage.peerDiscovery" = "Erlaube das Finden von lokalen Teilnehmern";
 "accountPage.peerDiscoveryExplanation" = "Verbinde zu anderen sich meldenden DHT Knoten in unserem lokalen Netzwerk";
 "accountPage.autoRegistration" = "Automatische Registrierung nach Ablauf";
@@ -381,15 +381,15 @@
 "accountPage.profileNamePlaceholder" = "Profilnamen eingeben";
 "accountPage.editProfile" = "Profil bearbeiten";
 "accountPage.manageAccount" = "Konto verwalten";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "Passwort geschütztes Konto";
+"accountPage.passwordExplanation" = "Ein Jami-Konto wird lokal nur auf diesem Gerät als Archiv mit den Kontoschlüsseln erstellt und gespeichert. Der Zugriff auf das Archiv kann optional mit einem Passwort geschützt werden.";
 "accountPage.passwordsDoNotMatch" = "Passwörter stimmen nicht überein.";
 "accountPage.passwordCreated" = "Passwort erstellt";
 "accountPage.passwordUpdated" = "Passwort aktualisiert";
 "accountPage.linkedDevices" = "Verbundene Geräte";
 "accountPage.unlink" = "Verknüpfung aufheben";
 "accountPage.generatingPin" = "PIN-Code wird generiert…";
-"accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
+"accountPage.passwordForPin" = "Das Konto ist passwortgeschützt. Geben Sie das Passwort ein, um einen PIN-Code zu generieren.";
 "accountPage.pinExplanationTitle" = "Auf einem anderen Gerät";
 "accountPage.pinExplanationMessage" = "Installieren und starten Sie Jami. Wählen Sie „Von einem anderen Gerät importieren“ und scannen Sie den QR-Code. Alternativ können Sie den PIN-Code manuell eingeben.";
 "accountPage.pinError" = "Beim Generieren des PIN-Codes ist ein Fehler aufgetreten.";
@@ -423,7 +423,7 @@
 "backupAccount.creating" = "Backup erstellen";
 "backupAccount.archiveName" = "Wählen Sie einen Namen für das Archiv.";
 "backupAccount.archiveNamePlaceholder" = "Archivname";
-"backupAccount.passwordRequest" = "Enter the account password.";
+"backupAccount.passwordRequest" = "Geben Sie das Kontopasswort ein.";
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Backup-Speicherort öffnen";
 "backupAccount.exportSuccess" = "Backup erstellt";
