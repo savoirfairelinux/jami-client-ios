@@ -205,7 +205,7 @@ struct AccountSummaryView: View {
                     .conditionalTextSelection()
             )
         }
-        if !model.registeredName.isEmpty {
+        if !model.registeredName.isEmpty && model.registeredName != model.jamiId {
             return AnyView(
                 Text(model.registeredName)
                     .conditionalTextSelection()
