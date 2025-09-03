@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2023-2024 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2023-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,6 +17,7 @@
  */
 
 import SwiftUI
+import UIKit
 
 struct MessageBubbleView: View {
     let messageModel: MessageContainerModel
@@ -77,7 +76,6 @@ struct MessageBubbleView: View {
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.deleteFile.toString(), action: { model.contextMenuSelect(item: .deleteFile) }), apply: model.menuItems.contains(.deleteFile))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.edit.toString(), action: { model.contextMenuSelect(item: .edit) }), apply: model.menuItems.contains(.edit))
         .accessibilityAddTraits(.isButton)
-
     }
 
     private func renderCallMessage() -> some View {
@@ -124,6 +122,7 @@ struct MessageBubbleView: View {
     private func receivedLongPress() -> (() -> Void) {
         return {
             if model.menuItems.isEmpty { return }
+            //if suppressLongPress { return }
             presentMenu = true
         }
     }
@@ -174,5 +173,14 @@ struct AccessibilityActionModifier: ViewModifier {
             .accessibilityAction(named: Text(actionName)) {
                 action()
             }
+    }
+}
+
+struct AccessibilityHintModifier: ViewModifier {
+    let hint: String
+
+    func body(content: Content) -> some View {
+        content
+            .accessibilityHint(Text(hint))
     }
 }
