@@ -24,7 +24,6 @@
 import Foundation
 import SwiftUI
 import RxSwift
-import LinkPresentation
 
 enum TransferAction: Identifiable {
     var id: Self { self }
@@ -307,22 +306,36 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     private func updateMenuitems() {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            if self.type == .text {
-                if self.isIncoming {
-                    self.menuItems = [.reply, .copy, .forward]
-                } else {
-                    self.menuItems = [.reply, .edit, .copy, .forward, .deleteMessage]
-                }
-            }
-            guard self.type == .fileTransfer else { return }
-            if self.url != nil {
-                self.menuItems = [.reply, .save, .forward, .preview, .share]
-            } else {
-                self.menuItems = [.reply, .forward, .preview, .share]
+            switch self.type {
+            case .text:
+                self.menuItems = self.textMenuItems()
+            case .fileTransfer:
+                self.menuItems = self.fileTransferMenuItems()
+            default:
+                break
             }
         }
+    }
+
+    private func textMenuItems() -> [ContextualMenuItem] {
+        if isIncoming {
+            return [.reply, .copy, .forward]
+        }
+        var items: [ContextualMenuItem] = [.reply]
+        if metadata == nil {
+            items.append(.edit)
+        }
+        items += [.copy, .forward, .deleteMessage]
+        return items
+    }
+
+    private func fileTransferMenuItems() -> [ContextualMenuItem] {
+        if url != nil {
+            return [.reply, .save, .forward, .preview, .share]
+        }
+        return [.reply, .forward, .preview, .share]
     }
 
     // MARK: file transfer

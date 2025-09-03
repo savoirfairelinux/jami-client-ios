@@ -96,6 +96,7 @@ struct MessageBubbleView: View {
             if let metadata = model.metadata {
                 URLPreview(metadata: metadata, maxDimension: model.maxDimension)
                     .modifier(MessageCornerRadius(model: model))
+                    .modifier(MessageLongPress(longPressCb: receivedLongPress()))
             } else if model.content.isValidURL, let url = model.getURL() {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.content)
