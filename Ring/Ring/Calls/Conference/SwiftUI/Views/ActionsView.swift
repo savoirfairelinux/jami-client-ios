@@ -243,6 +243,7 @@ struct CustomButtonView: View {
             CallButtonView(buttonInfo: buttonInfo)
         })
         .disabled(buttonInfo.disabled)
+        .buttonStyle(PlainButtonStyle())
         .accessibilityLabel(buttonInfo.accessibilityLabelValue)
     }
 }
