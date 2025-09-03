@@ -78,6 +78,11 @@ extension View {
     func applyMessageStyle(model: MessageContentVM) -> some View {
         modifier(MessageTextStyle(model: model))
     }
+
+    // MARK: - Long press suppression environment
+    func suppressLongPress(_ value: Bool) -> some View {
+        environment(\.suppressLongPress, value)
+    }
 }
 
 extension Animation {
@@ -342,5 +347,16 @@ struct ToggleCell: View {
             .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
         }
         .accessibilityElement(children: .combine)
+    }
+}
+
+private struct SuppressLongPressKey: EnvironmentKey {
+    static let defaultValue: Bool = false
+}
+
+extension EnvironmentValues {
+    var suppressLongPress: Bool {
+        get { self[SuppressLongPressKey.self] }
+        set { self[SuppressLongPressKey.self] = newValue }
     }
 }
