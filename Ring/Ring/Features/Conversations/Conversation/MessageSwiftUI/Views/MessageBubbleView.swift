@@ -19,6 +19,7 @@
  */
 
 import SwiftUI
+import UIKit
 
 struct MessageBubbleView: View {
     let messageModel: MessageContainerModel
@@ -29,6 +30,8 @@ struct MessageBubbleView: View {
     var openURL
     @Environment(\.colorScheme)
     var colorScheme
+    @Environment(\.layoutDirection)
+    var layoutDirection
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     let padding: CGFloat = 12
 
@@ -77,6 +80,8 @@ struct MessageBubbleView: View {
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.deleteFile.toString(), action: { model.contextMenuSelect(item: .deleteFile) }), apply: model.menuItems.contains(.deleteFile))
         .conditionalModifier(AccessibilityActionModifier(actionName: ContextualMenuItem.edit.toString(), action: { model.contextMenuSelect(item: .edit) }), apply: model.menuItems.contains(.edit))
         .accessibilityAddTraits(.isButton)
+        .conditionalModifier(AccessibilityHintModifier(hint: swipeReplyHint()), apply: model.menuItems.contains(.reply) && UIAccessibility.isVoiceOverRunning)
+        .highPriorityGesture(swipeToReplyGesture())
 
     }
 
@@ -127,6 +132,36 @@ struct MessageBubbleView: View {
             presentMenu = true
         }
     }
+
+    private func swipeToReplyGesture() -> some Gesture {
+        DragGesture(minimumDistance: 25, coordinateSpace: .local)
+            .onEnded { value in
+                let horizontal = value.translation.width
+                let vertical = value.translation.height
+                if abs(horizontal) > abs(vertical) {
+                    let isRight = horizontal < -25
+                    let isLeft = horizontal > 25
+                    let isLeadingSwipe = (layoutDirection == .leftToRight) ? isRight : isLeft
+                    let isTrailingSwipe = (layoutDirection == .leftToRight) ? isLeft : isRight
+
+                    let shouldTrigger = model.message.incoming ? isTrailingSwipe : isLeadingSwipe
+                    if shouldTrigger, model.menuItems.contains(.reply) {
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
+                        model.contextMenuSelect(item: .reply)
+                    }
+                }
+            }
+    }
+
+    private func swipeReplyHint() -> String {
+        let isLTR = (layoutDirection == .leftToRight)
+        if model.message.incoming {
+            return isLTR ? L10n.Accessibility.swipeLeftToReply : L10n.Accessibility.swipeRightToReply
+        } else {
+            return isLTR ? L10n.Accessibility.swipeRightToReply : L10n.Accessibility.swipeLeftToReply
+        }
+    }
 }
 
 struct MessageBubbleWithEditionWrapper<Content: View>: View {
@@ -174,5 +209,14 @@ struct AccessibilityActionModifier: ViewModifier {
             .accessibilityAction(named: Text(actionName)) {
                 action()
             }
+    }
+}
+
+struct AccessibilityHintModifier: ViewModifier {
+    let hint: String
+
+    func body(content: Content) -> some View {
+        content
+            .accessibilityHint(Text(hint))
     }
 }
