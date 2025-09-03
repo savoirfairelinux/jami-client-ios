@@ -117,6 +117,10 @@ internal enum L10n {
     internal static let smartListSwitchAccounts = L10n.tr("Localizable", "accessibility.smartListSwitchAccounts", fallback: "Switch account")
     /// Group picture
     internal static let swarmPicturePicker = L10n.tr("Localizable", "accessibility.swarmPicturePicker", fallback: "Group picture")
+    /// Swipe left to reply
+    internal static let swipeLeftToReply = L10n.tr("Localizable", "accessibility.swipeLeftToReply", fallback: "Swipe left to reply")
+    /// Swipe right to reply
+    internal static let swipeRightToReply = L10n.tr("Localizable", "accessibility.swipeRightToReply", fallback: "Swipe right to reply")
     /// Empty text message received on %@. This might not have been sent correctly.
     internal static func textNotAvailable(_ p1: Any) -> String {
       return L10n.tr("Localizable", "accessibility.textNotAvailable", String(describing: p1), fallback: "Empty text message received on %@. This might not have been sent correctly.")
