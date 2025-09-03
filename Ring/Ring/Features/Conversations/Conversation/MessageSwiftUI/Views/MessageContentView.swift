@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2022 - 2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -175,6 +173,32 @@ struct MessageContentView: View {
     @SwiftUI.State private var reactionsWidth: CGFloat = 0
     @SwiftUI.State private var emojiAlignment: Alignment = Alignment.bottomTrailing
 
+    // swipe to reply
+
+    @Environment(\.layoutDirection)
+    var layoutDirection
+    @SwiftUI.State private var bubbleWidth: CGFloat = 0
+    @SwiftUI.State private var bubbleDragOffset: CGFloat = 0
+    @SwiftUI.State private var dragHapticFired: Bool = false
+    @SwiftUI.State private var dragX: CGFloat = 0
+
+    private enum SwipeAxis { case horizontal, vertical }
+
+    @SwiftUI.State private var lockedAxis: SwipeAxis?
+    @SwiftUI.State private var suppressLongPress: Bool = false
+    @SwiftUI.State private var ringProgress: CGFloat = 0
+    private let replyActivationDistance: CGFloat = 70
+    private let minSwipeDistance: CGFloat = 10
+    private let swipeDominanceFactor: CGFloat = 1.5
+    private let maxVisualOffset: CGFloat = 80
+    private let replyArrowGap: CGFloat = 30
+    private let replyRingSize: CGFloat = 28
+    private let replyRingStrokeWidth: CGFloat = 1
+    private let replyArrowFontSize: CGFloat = 16
+    private let swipeResistance: CGFloat = 0.6
+    private let maxDrag: CGFloat = 90
+    private let lockThreshold: CGFloat = 12
+
     var body: some View {
         ZStack(alignment: emojiAlignment) {
             VStack(alignment: messageModel.replyTarget.alignment) {
@@ -206,6 +230,102 @@ struct MessageContentView: View {
         }
         .offset(y: messageModel.messageContent.isHistory ? padding : 0)
         .scaleEffect(model.scale)
+        .suppressLongPress(suppressLongPress)
+        .background(
+            GeometryReader { proxy in
+                Color.clear
+                    .preference(key: BubbleWidthKey.self, value: proxy.size.width)
+            }
+        )
+        .onPreferenceChange(BubbleWidthKey.self) { width in
+            if width > 0 { self.bubbleWidth = width }
+        }
+        .contentShape(Rectangle())
+        .offset(x: outwardSign() * dragX)
+        .if(model.menuItems.contains(.reply)) { view in
+            view
+                .overlay(replyIndicator().allowsHitTesting(false))
+                .simultaneousGesture(replySwipeGesture())
+        }
+    }
+
+    private func replyStartIsTrailing() -> Bool {
+        let isLTR = (layoutDirection == .leftToRight)
+        return isLTR ? !model.message.incoming : model.message.incoming
+    }
+    private func replyIndicatorProgress() -> CGFloat {
+        let projected = outwardSign() * (outwardSign() * dragX)
+        let distance = max(0, projected)
+        return min(1, distance / replyActivationDistance)
+    }
+    private func outwardSign() -> CGFloat {
+        let isLTR = (layoutDirection == .leftToRight)
+        return model.message.incoming ? (isLTR ? 1 : -1) : (isLTR ? -1 : 1)
+    }
+    private func replyIndicator() -> some View {
+        let progress = min(1, (dragX / swipeResistance) / replyActivationDistance)
+        let startIsTrailing = replyStartIsTrailing()
+        let iconName = startIsTrailing ? "arrowshape.turn.up.right" : "arrowshape.turn.up.left"
+        let edgeSign: CGFloat = startIsTrailing ? 1 : -1
+        let width = max(bubbleWidth, messageWidth)
+        let offsetX = edgeSign * (width / 2 + replyArrowGap) + outwardSign() * dragX
+        let screenScale = UIScreen.main.scale
+        let alignedOffsetX = (offsetX * screenScale).rounded() / screenScale
+        return ZStack {
+            if dragHapticFired {
+                Circle()
+                    .trim(from: 0, to: min(1, ringProgress))
+                    .rotation(Angle(degrees: -90))
+                    .stroke(Color(model.preferencesColor), style: StrokeStyle(lineWidth: replyRingStrokeWidth, lineCap: .round))
+                    .frame(width: replyRingSize, height: replyRingSize)
+                    .opacity(Double(progress))
+            }
+            Image(systemName: iconName)
+                .renderingMode(.template)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: replyArrowFontSize.rounded(.toNearestOrAwayFromZero), height: replyArrowFontSize.rounded(.toNearestOrAwayFromZero))
+                .foregroundColor(Color(model.preferencesColor))
+                .opacity(Double(progress))
+        }
+        .offset(x: alignedOffsetX)
+        .allowsHitTesting(false)
+    }
+    private func replySwipeGesture() -> some Gesture {
+        return DragGesture(minimumDistance: minSwipeDistance, coordinateSpace: .local)
+            .onChanged { value in
+                if lockedAxis == nil {
+                    let horizontal = abs(value.translation.width)
+                    let vertical = abs(value.translation.height)
+                    if horizontal > lockThreshold && horizontal > vertical { lockedAxis = .horizontal } else if vertical > lockThreshold { lockedAxis = .vertical }
+                }
+                guard lockedAxis == .horizontal, model.menuItems.contains(.reply) else { return }
+                suppressLongPress = true
+                let projected = outwardSign() * value.translation.width
+                let base = max(0, projected)
+                let clamped = min(base, maxDrag)
+                let visual = clamped * swipeResistance
+                dragX = visual
+                if !dragHapticFired && clamped >= replyActivationDistance {
+                    dragHapticFired = true
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.impactOccurred()
+                    ringProgress = 0
+                    withAnimation(.linear(duration: 0.25)) { ringProgress = 1 }
+                }
+            }
+            .onEnded { _ in
+                defer { lockedAxis = nil }
+                suppressLongPress = false
+                guard lockedAxis == .horizontal, model.menuItems.contains(.reply) else {
+                    withAnimation(.spring(response: 0.25, dampingFraction: 0.9)) { dragX = 0 }
+                    return
+                }
+                if (dragX / swipeResistance) > replyActivationDistance { model.contextMenuSelect(item: .reply) }
+                withAnimation(.spring(response: 0.25, dampingFraction: 0.9)) { dragX = 0 }
+                dragHapticFired = false
+                ringProgress = 0
+            }
     }
 
     private func updateAlignment() {
@@ -252,5 +372,13 @@ struct MessageContentView: View {
                 self.messageModel.reactionsModel.onAppear()
             }
             .padding(.bottom, 2)
+    }
+}
+
+private struct BubbleWidthKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
