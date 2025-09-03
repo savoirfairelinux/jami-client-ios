@@ -89,7 +89,8 @@ struct ReplyViewInMessagePanel: View {
                 }
             } else if messageToReply.type == .text,
                       let metadata = messageToReply.metadata {
-                URLPreview(metadata: metadata, maxDimension: 50)
+                URLPreview(metadata: metadata, maxDimension: 50, fixedSize: 50)
+                    .frame(width: 50, height: 50)
                     .cornerRadius(messageToReply.cornerRadius)
             }
         }

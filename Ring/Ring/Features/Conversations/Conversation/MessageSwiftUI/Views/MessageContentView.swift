@@ -22,22 +22,72 @@ import SwiftUI
 
 class CustomLinkView: LPLinkView {
     override var intrinsicContentSize: CGSize { CGSize(width: 0, height: super.intrinsicContentSize.height) }
+
+    override func addInteraction(_ interaction: UIInteraction) {
+        if interaction is UIContextMenuInteraction {
+            return
+        }
+        super.addInteraction(interaction)
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        stripSystemContextMenu(from: self)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        stripSystemContextMenu(from: self)
+    }
+
+    private func stripSystemContextMenu(from view: UIView) {
+        for interaction in view.interactions where interaction is UIContextMenuInteraction {
+            view.removeInteraction(interaction)
+        }
+        for subview in view.subviews {
+            stripSystemContextMenu(from: subview)
+        }
+    }
 }
 
 struct URLPreview: UIViewRepresentable {
-    typealias UIViewType = CustomLinkView
+    typealias UIViewType = UIView
 
     var metadata: LPLinkMetadata
     var maxDimension: CGFloat
+    var fixedSize: CGFloat?
 
-    func makeUIView(context: Context) -> CustomLinkView {
-        let view = CustomLinkView(metadata: metadata)
-        view.frame = CGRect(x: 0, y: 0, width: maxDimension, height: maxDimension)
-        view.contentMode = .scaleAspectFit
-        return view
+    func makeUIView(context: Context) -> UIView {
+        if let size = fixedSize {
+            let container = UIView()
+            container.translatesAutoresizingMaskIntoConstraints = false
+            container.clipsToBounds = false
+
+            let linkView = CustomLinkView(metadata: metadata)
+            linkView.translatesAutoresizingMaskIntoConstraints = false
+            linkView.contentMode = .scaleAspectFit
+
+            container.addSubview(linkView)
+
+            NSLayoutConstraint.activate([
+                container.widthAnchor.constraint(equalToConstant: size),
+                container.heightAnchor.constraint(equalToConstant: size),
+                linkView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+                linkView.topAnchor.constraint(equalTo: container.topAnchor),
+                linkView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+                linkView.bottomAnchor.constraint(equalTo: container.bottomAnchor)
+            ])
+
+            return container
+        } else {
+            let view = CustomLinkView(metadata: metadata)
+            view.frame = CGRect(x: 0, y: 0, width: maxDimension, height: maxDimension)
+            view.contentMode = .scaleAspectFit
+            return view
+        }
     }
 
-    func updateUIView(_ uiView: CustomLinkView, context: Context) {}
+    func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
 class ScaledImageView: UIImageView {
