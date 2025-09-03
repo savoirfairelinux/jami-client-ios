@@ -22,6 +22,37 @@ import SwiftUI
 
 class CustomLinkView: LPLinkView {
     override var intrinsicContentSize: CGSize { CGSize(width: 0, height: super.intrinsicContentSize.height) }
+
+    override func addInteraction(_ interaction: UIInteraction) {
+        if interaction is UIContextMenuInteraction {
+            return
+        }
+        super.addInteraction(interaction)
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        stripSystemContextMenu(from: self)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        stripSystemContextMenu(from: self)
+    }
+
+    private func stripSystemContextMenu(from view: UIView) {
+        for interaction in view.interactions where interaction is UIContextMenuInteraction {
+            view.removeInteraction(interaction)
+        }
+        if let recognizers = view.gestureRecognizers {
+            for recognizer in recognizers where recognizer is UILongPressGestureRecognizer {
+                view.removeGestureRecognizer(recognizer)
+            }
+        }
+        for subview in view.subviews {
+            stripSystemContextMenu(from: subview)
+        }
+    }
 }
 
 struct URLPreview: UIViewRepresentable {
