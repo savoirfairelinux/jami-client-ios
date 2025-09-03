@@ -633,6 +633,8 @@
 "accessibility.conference.hangup" = "End call";
 "accessibility.conference.lowerHand" = "Lower hand";
 "accessibility.account.tokenQRcode" = "Token QR code";
+"accessibility.swipeLeftToReply" = "Swipe left to reply";
+"accessibility.swipeRightToReply" = "Swipe right to reply";
 
 // Swarm Colors
 "swarmColors.vibrantPink" = "Vibrant pink";
