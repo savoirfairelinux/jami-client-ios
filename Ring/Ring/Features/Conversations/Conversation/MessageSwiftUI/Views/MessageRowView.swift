@@ -132,6 +132,7 @@ struct MessageRowView: View {
                     }
                 }
                 .offset(x: 1)
+                .accessibilityHidden(true)
             }
             Spacer()
                 .frame(height: model.bottomSpace)
