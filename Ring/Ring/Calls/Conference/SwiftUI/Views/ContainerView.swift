@@ -152,6 +152,7 @@ struct ContainerView: View {
                     initialVideoCallView()
                 } else if !model.isSwarmCall {
                     DragableCaptureView(image: $model.localImage, namespace: namespace)
+                        .zIndex(2)
                 }
             } else if showInitialView {
                 initialAudioCallView()

@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2023 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2023 - 2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -42,15 +40,16 @@ struct DraggablePositions {
     var hiddenBottomLeft: CGPoint
 
     init() {
-        left = marginHorizontal + width * 0.5
-        right = ScreenDimensionsManager.shared.adaptiveWidth - width * 0.5 - marginHorizontal
-        bottom = ScreenDimensionsManager.shared.adaptiveHeight - height
-        topRight = CGPoint(x: right, y: marginVertical)
-        topLeft = CGPoint(x: left, y: marginVertical)
+        let insets = ScreenDimensionsManager.shared.safeAreaInsets
+        left = marginHorizontal + width * 0.5 + insets.left
+        right = ScreenDimensionsManager.shared.adaptiveWidth - width * 0.5 - marginHorizontal - insets.right
+        bottom = ScreenDimensionsManager.shared.adaptiveHeight - height - insets.bottom
+        topRight = CGPoint(x: right, y: marginVertical + insets.top)
+        topLeft = CGPoint(x: left, y: marginVertical + insets.top)
         bottomRight = CGPoint(x: right, y: bottom)
         bottomLeft = CGPoint(x: left, y: bottom)
-        hiddenTopRight = CGPoint(x: ScreenDimensionsManager.shared.adaptiveWidth, y: marginVertical)
-        hiddenTopLeft = CGPoint(x: 0, y: marginVertical)
+        hiddenTopRight = CGPoint(x: ScreenDimensionsManager.shared.adaptiveWidth, y: marginVertical + insets.top)
+        hiddenTopLeft = CGPoint(x: 0, y: marginVertical + insets.top)
         hiddenBottomRight = CGPoint(x: ScreenDimensionsManager.shared.adaptiveWidth, y: bottom)
         hiddenBottomLeft = CGPoint(x: 0, y: bottom)
     }
@@ -58,15 +57,17 @@ struct DraggablePositions {
     mutating func update() {
         let screenWidth = ScreenDimensionsManager.shared.adaptiveWidth
         let screenHeight = ScreenDimensionsManager.shared.adaptiveHeight
+        let insets = ScreenDimensionsManager.shared.safeAreaInsets
 
-        right = screenWidth - width * 0.5 - marginHorizontal
-        bottom = screenHeight - height
-        topRight = CGPoint(x: right, y: marginVertical)
-        topLeft = CGPoint(x: left, y: marginVertical)
+        left = marginHorizontal + width * 0.5 + insets.left
+        right = screenWidth - width * 0.5 - marginHorizontal - insets.right
+        bottom = screenHeight - height - insets.bottom
+        topRight = CGPoint(x: right, y: marginVertical + insets.top)
+        topLeft = CGPoint(x: left, y: marginVertical + insets.top)
         bottomRight = CGPoint(x: right, y: bottom)
         bottomLeft = CGPoint(x: left, y: bottom)
-        hiddenTopRight = CGPoint(x: screenWidth, y: marginVertical)
-        hiddenTopLeft = CGPoint(x: 0, y: marginVertical)
+        hiddenTopRight = CGPoint(x: screenWidth, y: marginVertical + insets.top)
+        hiddenTopLeft = CGPoint(x: 0, y: marginVertical + insets.top)
         hiddenBottomRight = CGPoint(x: screenWidth, y: bottom)
         hiddenBottomLeft = CGPoint(x: 0, y: bottom)
     }
@@ -145,7 +146,10 @@ struct DraggablePositions {
 
 struct DragableCaptureView: View {
 
-    @SwiftUI.State private var location: CGPoint = CGPoint(x: ScreenDimensionsManager.shared.adaptiveWidth - width * 0.5 - marginHorizontal, y: marginVertical)
+    @SwiftUI.State private var location: CGPoint = CGPoint(
+        x: ScreenDimensionsManager.shared.adaptiveWidth - width * 0.5 - marginHorizontal - ScreenDimensionsManager.shared.safeAreaInsets.right,
+        y: marginVertical + ScreenDimensionsManager.shared.safeAreaInsets.top
+    )
     @GestureState private var currentLocation: CGPoint?
     @GestureState private var startLocation: CGPoint?
     @SwiftUI.State private var positions = DraggablePositions()
@@ -157,13 +161,14 @@ struct DragableCaptureView: View {
     let capturedVideoId = "capturedVideoId"
 
     @ObservedObject private var dimensionsManager = ScreenDimensionsManager.shared
+    private let dragResistanceFactor: CGFloat = 0.8
 
     var dragGesture: some Gesture {
         DragGesture()
             .onChanged { value in
                 var newLocation = startLocation ?? location // 3
-                newLocation.x += value.translation.width
-                newLocation.y += value.translation.height
+                newLocation.x += value.translation.width * dragResistanceFactor
+                newLocation.y += value.translation.height * dragResistanceFactor
 
                 let isOutsideVerticalBounds = isOutsideVerticalBounds(value.location)
                 let isOutsideHorizontalBounds = isOutsideHorizontalBounds(value.location)
@@ -207,11 +212,13 @@ struct DragableCaptureView: View {
     }
 
     func isOutsideVerticalBounds(_ point: CGPoint) -> Bool {
-        return point.y > ScreenDimensionsManager.shared.adaptiveHeight || point.y < 0
+        let insets = ScreenDimensionsManager.shared.safeAreaInsets
+        return point.y > ScreenDimensionsManager.shared.adaptiveHeight - insets.bottom || point.y < insets.top
     }
 
     func isOutsideHorizontalBounds(_ point: CGPoint) -> Bool {
-        return point.x > ScreenDimensionsManager.shared.adaptiveWidth - (marginHorizontal * 1.5) || point.x < marginHorizontal * 1.5
+        let insets = ScreenDimensionsManager.shared.safeAreaInsets
+        return point.x > ScreenDimensionsManager.shared.adaptiveWidth - (marginHorizontal * 1.5) - insets.right || point.x < marginHorizontal * 1.5 + insets.left
     }
 
     func isTop(_ point: CGPoint) -> Bool {

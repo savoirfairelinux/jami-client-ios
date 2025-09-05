@@ -25,6 +25,7 @@ class ScreenDimensionsManager: ObservableObject {
     @Published private(set) var adaptiveHeight: CGFloat = 0
     @Published private(set) var avatarOffset: CGFloat = 0
     @Published private(set) var isLandscape: Bool = false
+    @Published private(set) var safeAreaInsets: UIEdgeInsets = .zero
 
     private init() {
         updateDimensions()
@@ -68,6 +69,7 @@ class ScreenDimensionsManager: ObservableObject {
             adaptiveWidth = UIScreen.main.bounds.width
             adaptiveHeight = UIScreen.main.bounds.height
             isLandscape = UIDevice.current.orientation.isLandscape
+            safeAreaInsets = .zero
             updateAvatarOffset()
             return
         }
@@ -78,10 +80,12 @@ class ScreenDimensionsManager: ObservableObject {
             let bounds = window.bounds
             adaptiveWidth = bounds.width
             adaptiveHeight = bounds.height
+            safeAreaInsets = window.safeAreaInsets
         } else {
             let bounds = UIScreen.main.bounds
             adaptiveWidth = bounds.width
             adaptiveHeight = bounds.height
+            safeAreaInsets = .zero
         }
         updateAvatarOffset()
     }
