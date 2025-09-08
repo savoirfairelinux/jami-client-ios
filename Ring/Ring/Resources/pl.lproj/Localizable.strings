@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Usuń urządzenie";
 "accountPage.revokeDeviceMessage" = "Czy chcesz usunąć to urządzenie? Tego nie da się cofnąć.";
 "accountPage.revokeDeviceButton" = "Odwołaj";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Podaj hasło do konta";
 "accountPage.deviceRevoked" = "Odwoływanie urządzenia ukończone";
 "accountPage.deviceRevocationProgress" = "Usuwanie...";
 "accountPage.deviceRevocationSuccess" = "Urządzenie zostało usunięte";
