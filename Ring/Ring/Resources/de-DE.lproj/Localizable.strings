@@ -183,7 +183,7 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.haveAccount" = "I already have an account";
+"welcome.haveAccount" = "Ich habe bereits ein Konto";
 "welcome.linkDevice" = "Import from another device";
 "welcome.linkBackup" = "Importieren aus Archivsicherung";
 "welcome.createAccount" = "Erstellen Sie ein Jami-Konto";
