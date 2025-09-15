@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Excluir o dispositivo";
 "accountPage.revokeDeviceMessage" = "Quer remover este dispositivo? Esta ação não pode ser anulada.";
 "accountPage.revokeDeviceButton" = "Revogar";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Digite a senha da conta";
 "accountPage.deviceRevoked" = "Revogação de dispositivo completa";
 "accountPage.deviceRevocationProgress" = "A remover…";
 "accountPage.deviceRevocationSuccess" = "Dispositivo removido";

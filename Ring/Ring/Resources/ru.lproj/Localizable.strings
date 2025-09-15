@@ -328,7 +328,7 @@
 "accountPage.removeDeviceTitle" = "Удалить устройство";
 "accountPage.revokeDeviceMessage" = "Хотите удалить это устройство? Удаление нельзя будет отменить.";
 "accountPage.revokeDeviceButton" = "Отвязать";
-"accountPage.revokeDevicePlaceholder" = "Enter account password";
+"accountPage.revokeDevicePlaceholder" = "Введите пароль аккаунта";
 "accountPage.deviceRevoked" = "Отзыв устройства завершенно";
 "accountPage.deviceRevocationProgress" = "Удаление...";
 "accountPage.deviceRevocationSuccess" = "Устройство удалено";
