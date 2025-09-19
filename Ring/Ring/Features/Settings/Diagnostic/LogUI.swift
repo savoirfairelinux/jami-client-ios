@@ -127,11 +127,9 @@ struct LogUI: View {
         Button(action: {
             model.openShareWindow()
         }, label: {
-            if let uiImage = UIImage(systemName: "square.and.arrow.up") {
-                Image(uiImage: uiImage)
-                    .padding(5)
-                    .foregroundColor(Color.jamiColor)
-            }
+            Image(systemName: "square.and.arrow.up")
+                .padding(5)
+                .foregroundColor(Color.jamiColor)
         })
     }
 
@@ -139,11 +137,9 @@ struct LogUI: View {
         Button(action: {
             model.openDocumentBrowser()
         }, label: {
-            if let uiImage = UIImage(systemName: "arrow.down.circle") {
-                Image(uiImage: uiImage)
-                    .padding(5)
-                    .foregroundColor(Color.jamiColor)
-            }
+            Image(systemName: "arrow.down.circle")
+                .padding(5)
+                .foregroundColor(Color.jamiColor)
         })
     }
 
