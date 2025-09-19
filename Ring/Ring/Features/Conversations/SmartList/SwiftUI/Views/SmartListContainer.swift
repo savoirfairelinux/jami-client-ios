@@ -230,6 +230,7 @@ struct SmartListView: View, StateEmittingView {
             accountsButton
             settingsButton
             aboutJamiButton
+            supportButton
         } label: {
             Image(systemName: "ellipsis.circle")
                 .foregroundColor(Color.jamiColor)
@@ -295,13 +296,13 @@ struct SmartListView: View, StateEmittingView {
         })
     }
 
-    private var donateButton: some View {
+    private var supportButton: some View {
         Button(action: {[weak model] in
             isMenuOpen = false
             guard let model = model else { return }
             model.donate()
         }, label: {
-            Label(L10n.Global.donate, systemImage: "heart")
+            Label(L10n.Global.supportJami, systemImage: "heart")
         })
     }
 

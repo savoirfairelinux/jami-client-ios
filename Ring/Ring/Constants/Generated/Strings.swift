@@ -884,8 +884,6 @@ internal enum L10n {
     internal static let deleteFile = L10n.tr("Localizable", "global.deleteFile", fallback: "Delete file from device")
     /// Delete message
     internal static let deleteMessage = L10n.tr("Localizable", "global.deleteMessage", fallback: "Delete message")
-    /// Donate
-    internal static let donate = L10n.tr("Localizable", "global.donate", fallback: "Donate")
     /// Edit
     internal static let edit = L10n.tr("Localizable", "global.edit", fallback: "Edit")
     /// Editing
@@ -928,6 +926,8 @@ internal enum L10n {
     internal static let search = L10n.tr("Localizable", "global.search", fallback: "Searching…")
     /// Share
     internal static let share = L10n.tr("Localizable", "global.share", fallback: "Share")
+    /// Support Jami project
+    internal static let supportJami = L10n.tr("Localizable", "global.supportJami", fallback: "Support Jami project")
     /// Time
     internal static let time = L10n.tr("Localizable", "global.time", fallback: "Time")
     /// Username
