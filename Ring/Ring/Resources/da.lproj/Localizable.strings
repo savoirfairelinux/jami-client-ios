@@ -42,7 +42,7 @@
 "global.copy" = "Kopiér";
 "global.reply" = "Svar";
 "global.search" = "Søger…";
-"global.donate" = "Donate";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "Slet besked";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Redigere beskeden";

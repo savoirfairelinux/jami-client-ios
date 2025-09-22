@@ -42,7 +42,7 @@
 "global.copy" = "Tải";
 "global.reply" = "Trả lời";
 "global.search" = "Tìm kiếm...";
-"global.donate" = "Donate";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "Xóa thông báo";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "chỉnh sửa thông điệp";

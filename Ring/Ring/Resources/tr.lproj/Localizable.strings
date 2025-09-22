@@ -42,7 +42,7 @@
 "global.copy" = "Kopyala";
 "global.reply" = "Yanıtla";
 "global.search" = "Aranıyor…";
-"global.donate" = "Bağış";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "İletiyi sil";
 "global.deleteFile" = "Dosyayı aygıttan sil";
 "global.editMessage" = "İletiyi düzenle";

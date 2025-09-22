@@ -42,7 +42,7 @@
 "global.copy" = "Másolás";
 "global.reply" = "Válasz";
 "global.search" = "Keresés…";
-"global.donate" = "Adományozás";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "Üzenet törlése";
 "global.deleteFile" = "Fájl törlése az eszközről";
 "global.editMessage" = "Üzenet szerkesztése";
