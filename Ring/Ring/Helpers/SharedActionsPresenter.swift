@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2023 Savoir-faire Linux Inc.
- *
- *  Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
+ *  Copyright (C) 2023-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -52,7 +50,7 @@ class SharedActionsPresenter {
     }
 
     class func openDonationLink() {
-        if let url = URL(string: "https://jami.net/whydonate/") {
+        if let url = URL(string: "https://jami.net/donate/") {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
