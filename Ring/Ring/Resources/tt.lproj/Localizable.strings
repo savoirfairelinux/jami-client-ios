@@ -42,7 +42,7 @@
 "global.copy" = "Кушымта";
 "global.reply" = "Җавап";
 "global.search" = "Эзләү...";
-"global.donate" = "Donate";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "Хәбәрне бетерү";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Хәбәрне үзгәртү";

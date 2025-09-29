@@ -42,7 +42,7 @@
 "global.copy" = "कॉपी";
 "global.reply" = "उत्तर";
 "global.search" = "शोधत आहे.";
-"global.donate" = "Donate";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "मेसेज हटवा";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "संदेश संपादित करा";

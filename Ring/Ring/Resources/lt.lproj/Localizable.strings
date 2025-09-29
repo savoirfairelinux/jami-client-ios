@@ -42,7 +42,7 @@
 "global.copy" = "Kopijuoti";
 "global.reply" = "Atsakyti";
 "global.search" = "Ieškoma…";
-"global.donate" = "Donate";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "Ištrinti žinutę";
 "global.deleteFile" = "Ištrinti failą iš įrenginio";
 "global.editMessage" = "Taisyti žinutę";

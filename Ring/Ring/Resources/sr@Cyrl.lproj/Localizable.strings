@@ -42,7 +42,7 @@
 "global.copy" = "Копирај";
 "global.reply" = "Одговори";
 "global.search" = "Претрага...";
-"global.donate" = "Донирај";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "Избриши поруку";
 "global.deleteFile" = "Избриши датотеку са уређаја";
 "global.editMessage" = "Уреди поруку";

@@ -42,7 +42,7 @@
 "global.copy" = "复制";
 "global.reply" = "Reply";
 "global.search" = "正在搜索…";
-"global.donate" = "捐助";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "删除消息";
 "global.deleteFile" = "从设备中删除文件";
 "global.editMessage" = "编辑消息";

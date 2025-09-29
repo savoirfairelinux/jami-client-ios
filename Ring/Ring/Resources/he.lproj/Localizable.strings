@@ -42,7 +42,7 @@
 "global.copy" = "העתקה";
 "global.reply" = "תשובה";
 "global.search" = "בחיפוש...";
-"global.donate" = "Donate";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "למחוק הודעה";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "עורך הודעה";

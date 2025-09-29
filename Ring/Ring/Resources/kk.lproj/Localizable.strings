@@ -42,7 +42,7 @@
 "global.copy" = "Көшірме";
 "global.reply" = "Жауап беру";
 "global.search" = "іздеу...";
-"global.donate" = "Donate";
+"global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "Хатты өшіру";
 "global.deleteFile" = "Delete file from device";
 "global.editMessage" = "Хатты өңдеу";
