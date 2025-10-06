@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "Patvirtinti";
 "global.connect" = "Prisijungti";
-
+"global.leave" = "Išeiti";
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "Mute conversation";
 "swarm.leaveConversation" = "Išeiti iš pokalbio";
+"swarm.removeConversation" = "Šalinti pokalbį";
+"swarm.removeContact" = "Šalinti adresatą";
 "swarm.chooseColor" = "Pokalbio spalva";
 "swarm.typeOfSwarm" = "Pokalbio tipas";
 "swarm.identifier" = "Identifikatorius";
@@ -100,6 +102,7 @@
 "swarm.admin" = "Administratorius";
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Nežinomas";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "Vakar";
 "smartlist.results" = "Viešasis katalogas";
+"smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Pokalbiai";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "Paleidžiant Jami įvyko klaida";
 "alerts.dbFailedMessage" = "Prašome užverti programą ir bandyti ją atverti dar kartą";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Ar norite visiems laikams ištrinti šį pokalbį?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Ar norite ištrinti pokalbį su šiuo adresatu?";
 "alerts.confirmDeleteConversationTitle" = "Ištrinti pokalbį";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";

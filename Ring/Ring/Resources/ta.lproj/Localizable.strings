@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "உறுதிப்படுத்தவும்";
 "global.connect" = "இணைக்கவும்";
-
+"global.leave" = "வெளியேறு";
 // Scan
 "scan.badQrCode" = "கெட்ட QR குறியீடு";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "மௌனமான உரையாடல்";
 "swarm.leaveConversation" = "உரையாடலை விட்டுவிடுங்கள்";
+"swarm.removeConversation" = "உரையாடலை நீக்கு";
+"swarm.removeContact" = "தொடர்புகளை அகற்றவும்";
 "swarm.chooseColor" = "உரையாடல் நிறம்";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "அடையாளங்காட்டி";
@@ -100,6 +102,7 @@
 "swarm.admin" = "நிர்வாகி";
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "அறியப்படாதது";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "நேற்று";
 "smartlist.results" = "பொதுப் பட்டியல்";
+"smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "உரையாடல்கள்";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "தயவுசெய்து விண்ணப்பத்தை மூடிவிட்டு மீண்டும் திறக்க முயற்சிக்கவும்";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "ஊடக அனுமதி வழங்கப்படவில்லை";

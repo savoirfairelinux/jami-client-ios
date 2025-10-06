@@ -42,7 +42,7 @@
 "global.copy" = "Copiază";
 "global.reply" = "Răspunde";
 "global.search" = "Se caută...";
-"global.supportJami" = "Support Jami project";
+"global.supportJami" = "Susține proiectul Jami";
 "global.deleteMessage" = "Șterge mesajul";
 "global.deleteFile" = "Șterge fișierul din aparat";
 "global.editMessage" = "Modifică mesajul";
@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Accesul la cameră este dezactivat. Activează-l din reglări.";
 "global.confirm" = "Confirmă";
 "global.connect" = "Conectează";
-
+"global.leave" = "Părăsește";
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "Dezactivează notificările";
 "swarm.leaveConversation" = "Termină conversația";
+"swarm.removeConversation" = "Elimină conversația";
+"swarm.removeContact" = "Șterge contactul";
 "swarm.chooseColor" = "Culoarea conversației";
 "swarm.typeOfSwarm" = "Tipul conversației";
 "swarm.identifier" = "Identificator";
@@ -100,6 +102,7 @@
 "swarm.admin" = "Administrator";
 "swarm.blocked" = "Blocat";
 "swarm.unknown" = "Necunoscut";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Invită membri";
 "swarm.inviteSelectedMembers" = "Invită contactele alese";
 "swarm.inviteMembersSelected" = "Ales";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
+"smartlist.jamsResults" = "Rezultatele căutării";
 "smartlist.jamsResults" = "Rezultatele căutării";
 "smartlist.conversations" = "Conversații";
 "smartlist.noConversationsFound" = "Nicio conversație nu corespunde căutării.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "S-a produs o eroare la pornirea lui Jami";
 "alerts.dbFailedMessage" = "Închide aplicația și încearcă să o repornești";
 "alerts.confirmBlockContact" = "Vrei să blochezi acest contact? Conversația cu acest contact va fi ștearsă definitiv.";
-"alerts.confirmDeleteConversation" = "Vrei să ștergi definitiv această conversație?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Vrei să părăsești această conversație?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Vrei să ștergi conversația cu acest contact?";
 "alerts.confirmDeleteConversationTitle" = "Șterge conversația";
 "alerts.noMediaPermissionsTitle" = "Nu ai permis accesul la Media";

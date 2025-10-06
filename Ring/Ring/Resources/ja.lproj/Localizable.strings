@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "確認";
 "global.connect" = "接続";
-
+"global.leave" = "出て行こう";
 // Scan
 "scan.badQrCode" = "誤ったQRコード";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "会話をミュートする";
 "swarm.leaveConversation" = "話しをやめましょう";
+"swarm.removeConversation" = "会話を削除";
+"swarm.removeContact" = "連絡先を削除";
 "swarm.chooseColor" = "会話の色";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "識別子";
@@ -100,6 +102,7 @@
 "swarm.admin" = "管理者";
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "不明";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "昨日";
 "smartlist.results" = "公開台帳";
+"smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "会話";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "アプリケーションを終了し、起動し直してください";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "メディア許可が認められていない";

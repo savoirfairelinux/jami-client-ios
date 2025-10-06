@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Приступ камери је онемогућен. Омогућите га у подешавањима уређаја да бисте користили ову функцију.";
 "global.confirm" = "Потврди";
 "global.connect" = "Повежи се";
-
+"global.leave" = "Одлази";
 // Scan
 "scan.badQrCode" = "Лош QR код";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "Утишај разговор";
 "swarm.leaveConversation" = "Оставите разговор";
+"swarm.removeConversation" = "Убризи разговор";
+"swarm.removeContact" = "Избриши контакт";
 "swarm.chooseColor" = "Боја разговора";
 "swarm.typeOfSwarm" = "Врста разговора";
 "swarm.identifier" = "Идентификатор";
@@ -100,6 +102,7 @@
 "swarm.admin" = "Администратор";
 "swarm.blocked" = "Блокирано";
 "swarm.unknown" = "Непознат";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Позовите чланове";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "Јуче";
 "smartlist.results" = "Јавни именик";
+"smartlist.jamsResults" = "Резултат претраге";
 "smartlist.jamsResults" = "Резултат претраге";
 "smartlist.conversations" = "Разговори";
 "smartlist.noConversationsFound" = "Ниједна преписка не одговара претрази.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Молимо вас да затворите пријаву и покушате да је поново отворите.";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Да ли желите да напустите овај разговор?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Медијски дозволу није додељено";

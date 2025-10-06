@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "O acesso à câmara está desativado. Ative-o nas configurações do dispositivo para poder utilizar esta funcionalidade.";
 "global.confirm" = "Confirmar";
 "global.connect" = "Conectar";
-
+"global.leave" = "Sair";
 // Scan
 "scan.badQrCode" = "Código QR inválido";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "Silenciar conversa";
 "swarm.leaveConversation" = "Abandonar a conversa";
+"swarm.removeConversation" = "Remover conversação";
+"swarm.removeContact" = "Remover contacto";
 "swarm.chooseColor" = "Cor da conversação";
 "swarm.typeOfSwarm" = "Tipo de conversa";
 "swarm.identifier" = "Identificador";
@@ -100,6 +102,7 @@
 "swarm.admin" = "Administrador";
 "swarm.blocked" = "Bloqueado";
 "swarm.unknown" = "Desconhecido";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Convidar membros";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "Ontem";
 "smartlist.results" = "Diretório público";
+"smartlist.jamsResults" = "Resultado da pesquisa";
 "smartlist.jamsResults" = "Resultado da pesquisa";
 "smartlist.conversations" = "Conversas";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "Ocorreu um erro ao iniciar o Jami";
 "alerts.dbFailedMessage" = "Por favor feche o programa e tente abri-lo novamente";
 "alerts.confirmBlockContact" = "Quer bloquear este contacto? O histórico de conversas com este contacto também será eliminado de forma permanente.";
-"alerts.confirmDeleteConversation" = "Quer eliminar esta conversa permanentemente?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Quer deixar esta conversa?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Quer eliminar a conversa com este contacto?";
 "alerts.confirmDeleteConversationTitle" = "Eliminar conversa";
 "alerts.noMediaPermissionsTitle" = "Permissão de media não autorizada";

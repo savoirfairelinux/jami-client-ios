@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "സ്ഥിരീകരണം";
 "global.connect" = "ബന്ധിപ്പിക്കുക";
-
+"global.leave" = "പോകൂ";
 // Scan
 "scan.badQrCode" = "മോശം ക്യുആർ കോഡ്";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "നിശബ്ദ സംഭാഷണം";
 "swarm.leaveConversation" = "സംഭാഷണം ഉപേക്ഷിക്കുക";
+"swarm.removeConversation" = "സംഭാഷണം നീക്കം ചെയ്യുക";
+"swarm.removeContact" = "ബന്ധം നീക്കം ചെയ്യുക";
 "swarm.chooseColor" = "സംഭാഷണ നിറം";
 "swarm.typeOfSwarm" = "സംഭാഷണ ടൈപ്പ്";
 "swarm.identifier" = "ഐഡന്റിഫയർ";
@@ -100,6 +102,7 @@
 "swarm.admin" = "അഡ്മിനിസ്ട്രേറ്റർ";
 "swarm.blocked" = "തടഞ്ഞു";
 "swarm.unknown" = "അജ്ഞാതമായത്";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "അംഗങ്ങളെ ക്ഷണിക്കുക";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "ഇന്നലെ";
 "smartlist.results" = "പൊതുവായ ഡയറക്ടറി";
+"smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "സംഭാഷണങ്ങൾ";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "അപേക്ഷ അടച്ച് വീണ്ടും തുറക്കാൻ ശ്രമിക്കുക";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "ഈ സംഭാഷണത്തിൽ നിന്നും പോകണമോ?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "സംഭാഷണം മായിക്കുക";
 "alerts.noMediaPermissionsTitle" = "മാധ്യമങ്ങളുടെ അനുമതി അനുവദിച്ചിട്ടില്ല";

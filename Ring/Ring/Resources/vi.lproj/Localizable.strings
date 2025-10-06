@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "Đảm nhận";
 "global.connect" = "Kết nối";
-
+"global.leave" = "Đi đi";
 // Scan
 "scan.badQrCode" = "Mã QR xấu";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "Cuộc trò chuyện câm lặng";
 "swarm.leaveConversation" = "Để lại cuộc trò chuyện";
+"swarm.removeConversation" = "Tháo cuộc trò chuyện";
+"swarm.removeContact" = "Xóa liên lạc";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Định dạng";
@@ -100,6 +102,7 @@
 "swarm.admin" = "Trình quản lý";
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Không biết";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "Hôm qua";
 "smartlist.results" = "Public directory";
+"smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Các cuộc trò chuyện";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Vui lòng đóng đơn và cố gắng mở lại";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Phán phép truyền thông không được cấp";

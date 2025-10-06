@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "पुष्टी करा";
 "global.connect" = "कनेक्ट करा";
-
+"global.leave" = "जा";
 // Scan
 "scan.badQrCode" = "खराब क्यूआर कोड";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "गप्प बोलणे";
 "swarm.leaveConversation" = "संभाषण सोड";
+"swarm.removeConversation" = "संभाषण हटवा";
+"swarm.removeContact" = "संपर्क काढा";
 "swarm.chooseColor" = "संभाषण रंग";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "ओळखकर्ता";
@@ -100,6 +102,7 @@
 "swarm.admin" = "प्रशासक";
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "अज्ञात";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "काल";
 "smartlist.results" = "सार्वजनिक निर्देशिका";
+"smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "चर्चा";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "कृपया अर्ज बंद करा आणि पुन्हा ते उघडण्याचा प्रयत्न करा";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "माध्यमांना परवानगी नाही";

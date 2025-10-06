@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "ದೃಢೀಕರಿಸಿ";
 "global.connect" = "ಸಂಪರ್ಕ";
-
+"global.leave" = "ಹೊರಟುಹೋಗು";
 // Scan
 "scan.badQrCode" = "ಕೆಟ್ಟ QR ಕೋಡ್";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "ಮೂಕ ಸಂಭಾಷಣೆ";
 "swarm.leaveConversation" = "ಸಂಭಾಷಣೆಯನ್ನು ಬಿಟ್ಟುಬಿಡಿ";
+"swarm.removeConversation" = "ಸಂಭಾಷಣೆಯನ್ನು ತೆಗೆದುಹಾಕಿ";
+"swarm.removeContact" = "ಸಂಪರ್ಕವನ್ನು ತೆಗೆದುಹಾಕಿ";
 "swarm.chooseColor" = "ಸಂಭಾಷಣೆ ಬಣ್ಣ";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "ಗುರುತಿನ ಚೀಟಿ";
@@ -100,6 +102,7 @@
 "swarm.admin" = "ನಿರ್ವಾಹಕ";
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "ಅಜ್ಞಾತ";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "ನಿನ್ನೆ";
 "smartlist.results" = "ಸಾರ್ವಜನಿಕ ಡೈರೆಕ್ಟರಿ";
+"smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "ಸಂಭಾಷಣೆ";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "ದಯವಿಟ್ಟು ಅರ್ಜಿಯನ್ನು ಮುಚ್ಚಿ ಮತ್ತೆ ತೆರೆಯಲು ಪ್ರಯತ್ನಿಸಿ";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "ಮಾಧ್ಯಮ ಅನುಮತಿ ನೀಡಿಲ್ಲ";

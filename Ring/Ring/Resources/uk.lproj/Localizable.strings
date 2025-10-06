@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "Підтвердження";
 "global.connect" = "З'єднати";
-
+"global.leave" = "Піти";
 // Scan
 "scan.badQrCode" = "Неприйнятний QR-код";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "Немовний розмову";
 "swarm.leaveConversation" = "Не переконвайтеся";
+"swarm.removeConversation" = "Вилучити розмову";
+"swarm.removeContact" = "Видалити контакт";
 "swarm.chooseColor" = "Колір розмови";
 "swarm.typeOfSwarm" = "Тип розмови";
 "swarm.identifier" = "Ідентифікатор";
@@ -100,6 +102,7 @@
 "swarm.admin" = "Адміністратор";
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "Невідомий";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "Учора";
 "smartlist.results" = "Публічний каталог";
+"smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "Групові чати";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "Сталася помилка при запуску Jami";
 "alerts.dbFailedMessage" = "Будь ласка, закрийте заявку і спробуйте відкрити її знову";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "Звіленої інформації не надано дозволу";

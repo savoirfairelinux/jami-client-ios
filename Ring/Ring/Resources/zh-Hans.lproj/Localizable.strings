@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "確認";
 "global.connect" = "連線";
-
+"global.leave" = "离开";
 // Scan
 "scan.badQrCode" = "不正確的 QR code";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "静音对话";
 "swarm.leaveConversation" = "离开谈话";
+"swarm.removeConversation" = "移除對話";
+"swarm.removeContact" = "移除聯絡人";
 "swarm.chooseColor" = "對話色彩";
 "swarm.typeOfSwarm" = "对话类型";
 "swarm.identifier" = "識別碼";
@@ -100,6 +102,7 @@
 "swarm.admin" = "管理员";
 "swarm.blocked" = "已封鎖";
 "swarm.unknown" = "未知";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "邀请成员";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公開目錄";
+"smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "對話";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "請關閉應用程式並再次嘗試開啟它";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "您要退出对话吗？";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "删除对话";
 "alerts.noMediaPermissionsTitle" = "未給予媒體權限";

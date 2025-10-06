@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Доступ к камере отключен. Включите его в настройках устройства, чтобы использовать эту функцию.";
 "global.confirm" = "Подтвердить";
 "global.connect" = "Соединение...";
-
+"global.leave" = "Покинуть";
 // Scan
 "scan.badQrCode" = "Плохой QR-code";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "Отключить звук в беседе";
 "swarm.leaveConversation" = "Покинуть беседу";
+"swarm.removeConversation" = "Удалить диалог";
+"swarm.removeContact" = "Удалить контакт";
 "swarm.chooseColor" = "Цвет беседы";
 "swarm.typeOfSwarm" = "Тип беседы";
 "swarm.identifier" = "Идентификатор";
@@ -100,6 +102,7 @@
 "swarm.admin" = "Администратор";
 "swarm.blocked" = "Заблокирован";
 "swarm.unknown" = "Неизвестно";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Пригласить участников";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Публичный каталог";
+"smartlist.jamsResults" = "Результаты поиска";
 "smartlist.jamsResults" = "Результаты поиска";
 "smartlist.conversations" = "Разговоры";
 "smartlist.noConversationsFound" = "Нет бесед, соответствующих запросу.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "Произошла ошибка при запуске Jami";
 "alerts.dbFailedMessage" = "Пожалуйста, закройте приложение и попробуйте открыть его снова";
 "alerts.confirmBlockContact" = "Хотите заблокировать этот контакт? История бесед с этим контактом будет удалена навсегда.";
-"alerts.confirmDeleteConversation" = "Хотите удалить эту беседу навсегда?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Хотите покинуть эту беседу?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Хотите удалить беседу с этим контактом?";
 "alerts.confirmDeleteConversationTitle" = "Удалить беседу";
 "alerts.noMediaPermissionsTitle" = "Не прав доступа к медиа";

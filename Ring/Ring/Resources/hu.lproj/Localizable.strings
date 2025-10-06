@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "A fényképezőgép használati engedélye le van tiltva. A funkció használatát engedélyezze az eszköz beállításaiban.";
 "global.confirm" = "Megerősítés";
 "global.connect" = "Kapcsolódás";
-
+"global.leave" = "Elhagyás";
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "Beszélgetés elnémítása";
 "swarm.leaveConversation" = "Kilépés a beszélgetésből";
+"swarm.removeConversation" = "Beszélgetés törlése";
+"swarm.removeContact" = "Kapcsolat eltávolítása";
 "swarm.chooseColor" = "Beszélgetés színe";
 "swarm.typeOfSwarm" = "Beszélgetés típusa";
 "swarm.identifier" = "Azonosító";
@@ -100,6 +102,7 @@
 "swarm.admin" = "Rendszergazda";
 "swarm.blocked" = "Letiltva";
 "swarm.unknown" = "Ismeretlen";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Tagok meghívása";
 "swarm.inviteSelectedMembers" = "Kijelölt kapcsolattartók meghívása";
 "swarm.inviteMembersSelected" = "Kijelölt";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Nyilvános címtár";
+"smartlist.jamsResults" = "Keresési eredménye";
 "smartlist.jamsResults" = "Keresési eredménye";
 "smartlist.conversations" = "Beszélgetések";
 "smartlist.noConversationsFound" = "Nincsenek a keresési feltételeknek megfelelő beszélgetések.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "Hiba történt a Jami indításakor";
 "alerts.dbFailedMessage" = "Kérjük, hogy zárja be az alkalmazást és próbálja meg újra megnyitni";
 "alerts.confirmBlockContact" = "Szeretne letiltani ezt a kapcsolattartót? A beszélgetés előzményei a kapcsolattartóval együtt véglegesen törlésre kerülnek.";
-"alerts.confirmDeleteConversation" = "Szeretne véglegesen törölni ezt a beszélgetést?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Szeretne kilépni a beszélgetésből?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Szeretne törli a beszélgetést ezzel a kapcsolattartóval?";
 "alerts.confirmDeleteConversationTitle" = "Beszélgetés törlése";
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";

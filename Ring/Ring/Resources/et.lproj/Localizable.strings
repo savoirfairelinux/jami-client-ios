@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Puuduvad õigused kaamera kasutamiseks. Selle funktsionaalsuse jaoks anna nutiseadme seadistustest vastavad õigused.";
 "global.confirm" = "Kinnita";
 "global.connect" = "Ühenda";
-
+"global.leave" = "Leave";
 // Scan
 "scan.badQrCode" = "Vigane QR-kood";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "Summuta vestlus";
 "swarm.leaveConversation" = "Lahku vestlusest";
+"swarm.removeConversation" = "Kustuta vestlus";
+"swarm.removeContact" = "Eemalda kontakt";
 "swarm.chooseColor" = "Vestluse värv";
 "swarm.typeOfSwarm" = "Vestluse tüüp";
 "swarm.identifier" = "Tunnus";
@@ -100,6 +102,7 @@
 "swarm.admin" = "Peakasutaja";
 "swarm.blocked" = "Blokeeritud";
 "swarm.unknown" = "Pole teada";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Kutsu osalejaid";
 "swarm.inviteSelectedMembers" = "Saada kutse valitud kontaktidele";
 "swarm.inviteMembersSelected" = "Valitud";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "Eile";
 "smartlist.results" = "Avalik kataloog";
+"smartlist.jamsResults" = "Otsingutulemus";
 "smartlist.jamsResults" = "Otsingutulemus";
 "smartlist.conversations" = "Vestlused";
 "smartlist.noConversationsFound" = "Ühtegi vestlust ei vasta sinu otsingule.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "Jami käivitamisel tekkis viga";
 "alerts.dbFailedMessage" = "Palun sulge rakendus ja proovi ta siis uuesti avada";
 "alerts.confirmBlockContact" = "Kas sa oled kindel, et soovid selle kontakti blokeerida? Samaga kustutatakse jäädavalt kogu tema vestlusajalugu.";
-"alerts.confirmDeleteConversation" = "Kas sa oled kindel, et soovid selle vestluse lõplikult kustutada?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Kas soovid sellest vestlusest lahkuda?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Kas sa oled kindel, et soovid vestluse selle kontaktiga kustutada?";
 "alerts.confirmDeleteConversationTitle" = "Kustuta vestlus";
 "alerts.noMediaPermissionsTitle" = "Meedia kasutamiseks puudub luba";

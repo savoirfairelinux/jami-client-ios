@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "নিশ্চিত করুন";
 "global.connect" = "সংযুক্ত করুন";
-
+"global.leave" = "Leave";
 // Scan
 "scan.badQrCode" = "খারাপ QR কোড";
 
@@ -69,6 +69,8 @@
 // Swarm
 "swarm.muteConversation" = "নিঃশব্দ কথোপকথন";
 "swarm.leaveConversation" = "কথোপকথন ছেড়ে দিন";
+"swarm.removeConversation" = "Remove conversation";
+"swarm.removeContact" = "Remove contact";
 "swarm.chooseColor" = "কথোপকথনের রঙ";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "সনাক্তকরণ";
@@ -100,6 +102,7 @@
 "swarm.admin" = "প্রশাসক";
 "swarm.blocked" = "Blocked";
 "swarm.unknown" = "অজানা";
+"swarm.left" = "Left";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
@@ -117,6 +120,7 @@
 // Smartlist
 "smartlist.yesterday" = "গতকাল";
 "smartlist.results" = "পাবলিক ডিরেক্টরি";
+"smartlist.jamsResults" = "Search result";
 "smartlist.jamsResults" = "Search result";
 "smartlist.conversations" = "কথোপকথন";
 "smartlist.noConversationsFound" = "No conversations match the search.";
@@ -264,7 +268,10 @@
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "দয়া করে আবেদনটি বন্ধ করে আবার খুলতে চেষ্টা করুন।";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmDeleteConversation" = "Do you want to delete this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
+"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Delete conversation";
 "alerts.noMediaPermissionsTitle" = "মিডিয়া অনুমতি দেওয়া হয়নি";
