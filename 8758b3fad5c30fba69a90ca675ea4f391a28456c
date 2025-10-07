@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2065fa_f8a7c178",
+        "filename": "Ring/Ring/Services/CallsProviderService.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-07T20:16:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c338e3c_ba2f47de",
+      "revId": "8758b3fad5c30fba69a90ca675ea4f391a28456c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2abe8605_badf2661",
@@ -35,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1012e8e_7539b20e",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-07T20:16:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2abe8605_badf2661",
+      "revId": "8758b3fad5c30fba69a90ca675ea4f391a28456c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e28e73d3_84a9f143",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-10-07T14:48:54Z",
       "side": 1,
       "message": "should be isAnswer",
+      "revId": "8758b3fad5c30fba69a90ca675ea4f391a28456c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "042cdce5_a2536cc3",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-07T20:16:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e28e73d3_84a9f143",
       "revId": "8758b3fad5c30fba69a90ca675ea4f391a28456c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
