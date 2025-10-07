@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c338e3c_ba2f47de",
+        "filename": "Ring/Ring/Services/CallsProviderService.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-10-07T14:48:54Z",
+      "side": 1,
+      "message": "CXAnswerCallAction is defined by Apple",
+      "revId": "8758b3fad5c30fba69a90ca675ea4f391a28456c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2abe8605_badf2661",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-10-07T14:48:54Z",
+      "side": 1,
+      "message": "isAnswer is field from PeerConnectionRequest from dhtnet",
+      "revId": "8758b3fad5c30fba69a90ca675ea4f391a28456c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e28e73d3_84a9f143",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-10-07T14:48:54Z",
+      "side": 1,
+      "message": "should be isAnswer",
+      "revId": "8758b3fad5c30fba69a90ca675ea4f391a28456c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
