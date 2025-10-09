@@ -1,7 +1,5 @@
 /*
- * Copyright (C) 2024 Savoir-faire Linux Inc. *
- *
- * Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * Copyright (C) 2024-2025 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,7 +56,7 @@ struct AboutSwiftUIView: View {
                     Text(.init(model.mainUrlText))
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(model.createdLabel)
+                            Text(model.developersLabel)
                                 .bold()
                                 .font(.caption)
                             Spacer()
@@ -67,12 +65,12 @@ struct AboutSwiftUIView: View {
                                 .font(.caption)
                             Spacer()
                                 .frame(height: 10)
-                            Text(model.artworkLabel)
+                            Text(model.mediaLabel)
                                 .bold()
                                 .font(.caption)
                             Spacer()
                                 .frame(height: 10)
-                            Text(contributorsArts)
+                            Text(contributorsMedia)
                                 .font(.caption)
                         }
                         Spacer()
