@@ -21,8 +21,8 @@ import RxSwift
 
 class AboutSwiftUIVM {
     let declarationText = L10n.AboutJami.declaration1 + " [jami.net](https://jami.net) " + L10n.AboutJami.declaration2
-    let noWarrantyText = L10n.AboutJami.noWarranty1 + " [NU General Public License](https://www.gnu.org/licenses/gpl-3.0.html), " + L10n.AboutJami.noWarranty2
-    let mainUrlText = "© 2015-2024 [Savoir-Faire linux](https://savoirfairelinux.com)"
+    let noWarrantyText = L10n.AboutJami.noWarranty1 + " [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.html), " + L10n.AboutJami.noWarranty2
+    let mainUrlText = "Copyright © 2015–2025 [Savoir-faire Linux Inc.](https://savoirfairelinux.com)"
     let fullVersion: String = Constants.fullVersion ?? ""
     let contributeLabel: String = L10n.AboutJami.contribute
     let feedbackLabel: String = L10n.AboutJami.feedback
@@ -38,7 +38,7 @@ class AboutSwiftUIVM {
     func sendFeedback() {
         if let url = mailtoURL(email: "jami@gnu.org",
                                subject: "Feedback for the Jami",
-                               body: "Hello, I'd like to share some feedback...") {
+                               body: "Hello, I'd like to share some feedback…") {
             UIApplication.shared.open(url)
         }
     }
