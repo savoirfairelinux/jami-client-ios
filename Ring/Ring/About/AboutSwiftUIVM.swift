@@ -1,7 +1,5 @@
 /*
- * Copyright (C) 2024 Savoir-faire Linux Inc. *
- *
- * Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * Copyright (C) 2024-2025 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,13 +19,13 @@ import RxSwift
 
 class AboutSwiftUIVM {
     let declarationText = L10n.AboutJami.declaration1 + " [jami.net](https://jami.net) " + L10n.AboutJami.declaration2
-    let noWarrantyText = L10n.AboutJami.noWarranty1 + " [NU General Public License](https://www.gnu.org/licenses/gpl-3.0.html), " + L10n.AboutJami.noWarranty2
-    let mainUrlText = "© 2015-2024 [Savoir-Faire linux](https://savoirfairelinux.com)"
+    let noWarrantyText = L10n.AboutJami.noWarranty1 + " [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.html), " + L10n.AboutJami.noWarranty2
+    let mainUrlText = "Copyright © 2015–2025 [Savoir-faire Linux Inc.](https://savoirfairelinux.com)"
     let fullVersion: String = Constants.fullVersion ?? ""
     let contributeLabel: String = L10n.AboutJami.contribute
     let feedbackLabel: String = L10n.AboutJami.feedback
-    let createdLabel: String = L10n.AboutJami.createdBy
-    let artworkLabel: String = L10n.AboutJami.artworkBy
+    let developersLabel: String = L10n.AboutJami.developers
+    let mediaLabel: String = L10n.AboutJami.media
 
     func openContributeLink() {
         if let url = URL(string: "https://jami.net/contribute/") {
@@ -38,7 +36,7 @@ class AboutSwiftUIVM {
     func sendFeedback() {
         if let url = mailtoURL(email: "jami@gnu.org",
                                subject: "Feedback for the Jami",
-                               body: "Hello, I'd like to share some feedback...") {
+                               body: "Hello, I'd like to share some feedback…") {
             UIApplication.shared.open(url)
         }
     }
