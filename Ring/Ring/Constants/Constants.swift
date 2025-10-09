@@ -17,10 +17,12 @@
  */
 
 let contributorsDevelopers: String = """
+Abhishek Ojha
 Adrien Béraud
 Albert Babí
 Alexander Lussier-Cullen
 Alexandr Sergheev
+Alexandre Eberhardt
 Alexandre Lision
 Alexandre Viau
 Aline Bonnet
@@ -35,14 +37,14 @@ Brando Tovar
 Capucine Berthet
 Charles-Francis Damedey
 Christophe Villemer
-Charlotte Hoffmann
 Cyrille Béraud
 Dorina Mosku
 Eden Abitbol
-Edric Milaret
+Édric Milaret
 Éloi Bail
 Emma Falkiewitz
 Emmanuel Lepage-Vallée
+Eric Bjarstal
 Fadi Shehadeh
 Franck Laurent
 François-Simon Fauteux-Chapleau
@@ -51,18 +53,22 @@ Guillaume Heller
 Guillaume Roguez
 Hadrien De Sousa
 Hugo Lefeuvre
+Ilyas Erdogan
 Julien Grossholtz
+Julien Robert
 Kateryna Kostiuk
-Kessler Dupont-Teevin
+Kessler DuPont-Teevin
 Léo Banno-Cloutier
+Léopold Chappuis
 Liam Courdoson
 Loïc Siret
-Marianne Forget
+Louis Maillard
 Mathéo Joseph
 Michel Schmit
 Mingrui Zhang
 Mohamed Chibani
 Mohamed Amine Younes Bouacida
+Nghia Dam
 Nicolas Jäger
 Nicolas Reynaud
 Nicolas Vengeon
@@ -87,12 +93,13 @@ Stepan Salenikovich
 Thibault Wittemberg
 Thomas Ballasi
 Trevor Tabah
+Vitalii Nikitchyn
 Vsevolod Ivanov
 Xavier Jouslin de Noray
 Yang Wang
 """
 
-let contributorsArts: String = """
+let contributorsMedia: String = """
 Charlotte Hoffman
 Marianne Forget
 """
