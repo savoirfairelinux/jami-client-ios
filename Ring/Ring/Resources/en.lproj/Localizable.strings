@@ -563,8 +563,8 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "Contribute";
 "aboutJami.feedback" = "Feedback";
-"aboutJami.createdBy" = "Created by";
-"aboutJami.artworkBy" = "Artwork by";
+"aboutJami.developers" = "Developers";
+"aboutJami.media" = "Media";
 
 // Accessibility
 "accessibility.close" = "Close";
