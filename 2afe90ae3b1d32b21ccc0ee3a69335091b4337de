@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1ff1aa_38c4d38b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-10-10T15:54:55Z",
+      "side": 1,
+      "message": "Using usernames may result in the same user being added multiple times",
+      "revId": "2afe90ae3b1d32b21ccc0ee3a69335091b4337de",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d283813c_cddaf8fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-10-10T15:54:55Z",
+      "side": 1,
+      "message": "alexenderwt is username",
+      "revId": "2afe90ae3b1d32b21ccc0ee3a69335091b4337de",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
