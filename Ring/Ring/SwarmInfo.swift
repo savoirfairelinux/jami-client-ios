@@ -229,7 +229,7 @@ class SwarmInfo: SwarmInfoProtocol {
         }
         
         if hasActiveOtherParticipants {
-            return true
+            return false
         }
         
         if conversation.isCoredialog() {
