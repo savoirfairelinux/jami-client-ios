@@ -17,7 +17,6 @@
  */
 
 let contributorsDevelopers: String = """
-alexenderwt
 Abhishek Ojha
 Adrien Béraud
 Alassane Yattara
@@ -42,7 +41,6 @@ Capucine Berthet
 Charles-Francis Damedey
 Christophe Villemer
 Cyrille Béraud
-Dorina Mosku
 Eden Abitbol
 Édric Milaret
 Éloi Bail
@@ -119,6 +117,18 @@ Ziwei Wang
 let contributorsMedia: String = """
 Charlotte Hoffman
 Marianne Forget
+"""
+
+let contributorsCommunityManagement: String = """
+Dorina Mosku
+Cabrel Tambue
+Loïc Bogino
+"""
+
+let specialThanks: String = """
+Anna
+Elys
+VeroJeanLuc
 """
 
 public class Constants: NSObject {

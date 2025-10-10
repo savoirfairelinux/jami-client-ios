@@ -11,22 +11,30 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   internal enum AboutJami {
-    /// Artwork by
-    internal static let artworkBy = L10n.tr("Localizable", "aboutJami.artworkBy", fallback: "Artwork by")
+    /// Community Management
+    internal static let communityManagement = L10n.tr("Localizable", "aboutJami.communityManagement", fallback: "Community Management")
     /// Contribute
     internal static let contribute = L10n.tr("Localizable", "aboutJami.contribute", fallback: "Contribute")
-    /// Created by
-    internal static let createdBy = L10n.tr("Localizable", "aboutJami.createdBy", fallback: "Created by")
     /// Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit
     internal static let declaration1 = L10n.tr("Localizable", "aboutJami.declaration1", fallback: "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit")
     /// to learn more.
     internal static let declaration2 = L10n.tr("Localizable", "aboutJami.declaration2", fallback: "to learn more.")
+    /// Developers
+    internal static let developers = L10n.tr("Localizable", "aboutJami.developers", fallback: "Developers")
     /// Feedback
     internal static let feedback = L10n.tr("Localizable", "aboutJami.feedback", fallback: "Feedback")
+    /// We would like to thank our contributors, whose efforts over many years have made this software what it is.
+    internal static let header = L10n.tr("Localizable", "aboutJami.header", fallback: "We would like to thank our contributors, whose efforts over many years have made this software what it is.")
+    /// This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.
+    internal static let info = L10n.tr("Localizable", "aboutJami.info", fallback: "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.")
+    /// Media
+    internal static let media = L10n.tr("Localizable", "aboutJami.media", fallback: "Media")
     /// This program comes with absolutely no warranty. See the
     internal static let noWarranty1 = L10n.tr("Localizable", "aboutJami.noWarranty1", fallback: "This program comes with absolutely no warranty. See the")
     /// version 3 or later for details.
     internal static let noWarranty2 = L10n.tr("Localizable", "aboutJami.noWarranty2", fallback: "version 3 or later for details.")
+    /// Special thanks to
+    internal static let specialThanks = L10n.tr("Localizable", "aboutJami.specialThanks", fallback: "Special thanks to")
   }
   internal enum Accessibility {
     /// About Jami
