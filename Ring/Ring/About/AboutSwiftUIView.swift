@@ -20,6 +20,78 @@ struct AboutSwiftUIView: View {
     let model = AboutSwiftUIVM()
     let dismissHandler = DismissHandler()
     let padding: CGFloat = 20
+
+    private var aboutContentScrollView: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: padding) {
+                VStack(alignment: .center) {
+                    Text(Constants.versionName)
+                        .bold()
+                    Text("Version: \(model.fullVersion)")
+                        .font(.caption)
+                        .foregroundColor(Color(UIColor.secondaryLabel))
+                }
+                .frame(maxWidth: .infinity)
+                Text(.init(model.declarationText))
+                Text(.init(model.noWarrantyText))
+                Text(.init(model.mainUrlText))
+                HStack {
+                    VStack(alignment: .leading) {
+                        Spacer()
+                            .frame(height: 10)
+                        Text(model.header)
+                            .font(.caption)
+                        Spacer()
+                            .frame(height: 10)
+                        Text(model.developersLabel)
+                            .bold()
+                            .font(.caption)
+                        Spacer()
+                            .frame(height: 10)
+                        Text(contributorsDevelopers)
+                            .font(.caption)
+                        Spacer()
+                            .frame(height: 10)
+                        Text(model.mediaLabel)
+                            .bold()
+                            .font(.caption)
+                        Spacer()
+                            .frame(height: 10)
+                        Text(contributorsMedia)
+                            .font(.caption)
+                        Spacer()
+                            .frame(height: 10)
+                        Text(model.communityManagement)
+                            .bold()
+                            .font(.caption)
+                        Spacer()
+                            .frame(height: 10)
+                        Text(contributorsCommunityManagement)
+                            .font(.caption)
+                        Spacer()
+                            .frame(height: 10)
+                        Text(model.specialThanks)
+                            .bold()
+                            .font(.caption)
+                        Spacer()
+                            .frame(height: 10)
+                        Text(specialThanks)
+                            .font(.caption)
+                        Spacer()
+                            .frame(height: 20)
+                        Text(model.specialThanksInfo)
+                            .font(.caption)
+                    }
+                    Spacer()
+                }
+                .padding()
+                .background(Color(UIColor.systemGroupedBackground))
+                .cornerRadius(8)
+            }
+        }
+        .padding(.horizontal)
+    }
+
     var body: some View {
         VStack(spacing: padding) {
             ZStack {
@@ -41,46 +113,7 @@ struct AboutSwiftUIView: View {
                     .frame(maxWidth: .infinity, alignment: .center) // This will center the image horizontally
             }
 
-            ScrollView {
-                VStack(alignment: .leading, spacing: padding) {
-                    VStack(alignment: .center) {
-                        Text(Constants.versionName)
-                            .bold()
-                        Text("Version: \(model.fullVersion)")
-                            .font(.caption)
-                            .foregroundColor(Color(UIColor.secondaryLabel))
-                    }
-                    .frame(maxWidth: .infinity)
-                    Text(.init(model.declarationText))
-                    Text(.init(model.noWarrantyText))
-                    Text(.init(model.mainUrlText))
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(model.developersLabel)
-                                .bold()
-                                .font(.caption)
-                            Spacer()
-                                .frame(height: 10)
-                            Text(contributorsDevelopers)
-                                .font(.caption)
-                            Spacer()
-                                .frame(height: 10)
-                            Text(model.mediaLabel)
-                                .bold()
-                                .font(.caption)
-                            Spacer()
-                                .frame(height: 10)
-                            Text(contributorsMedia)
-                                .font(.caption)
-                        }
-                        Spacer()
-                    }
-                    .padding()
-                    .background(Color(UIColor.systemGroupedBackground))
-                    .cornerRadius(8)
-                }
-            }
-            .padding(.horizontal)
+            aboutContentScrollView
             HStack {
                 Spacer()
                 Button(action: {

@@ -26,6 +26,10 @@ class AboutSwiftUIVM {
     let feedbackLabel: String = L10n.AboutJami.feedback
     let developersLabel: String = L10n.AboutJami.developers
     let mediaLabel: String = L10n.AboutJami.media
+    let communityManagement: String = L10n.AboutJami.communityManagement
+    let specialThanks: String = L10n.AboutJami.specialThanks
+    let specialThanksInfo: String = L10n.AboutJami.info
+    let header: String = L10n.AboutJami.header
 
     func openContributeLink() {
         if let url = URL(string: "https://jami.net/contribute/") {
