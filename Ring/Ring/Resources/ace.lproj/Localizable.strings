@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "ڤڠاجرن";
 "global.connect" = "وصلكن";
-"global.leave" = "Leave";
+"global.leave" = "برلالو";
 // Scan
 "scan.badQrCode" = "كود QR يڠ براوسيا";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "مکالمن ساكيت";
 "swarm.leaveConversation" = "ترك ڤڠاجرن";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "مڠمبيل ڤڠاجرن";
+"swarm.removeContact" = "مڠهادڤکن ڤڠݢونا";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "ڤڠڬونا";

@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Nechaj rozhovor";
 "swarm.removeConversation" = "Odstrániť konverzáciu";
 "swarm.removeContact" = "Odstrániť kontakt";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Farba konverzácie";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifikátor";

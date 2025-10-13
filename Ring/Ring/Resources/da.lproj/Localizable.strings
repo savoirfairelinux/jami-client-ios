@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "- Det bekræfter jeg.";
 "global.connect" = "Køb";
-"global.leave" = "Leave";
+"global.leave" = "- Gå væk.";
 // Scan
 "scan.badQrCode" = "Ugyldigt QR-kode";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "Stemme samtaler";
 "swarm.leaveConversation" = "Lad samtalen være";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "Fjern samtalen";
+"swarm.removeContact" = "Fjern kontakt";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Samtalefarve";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifikator";

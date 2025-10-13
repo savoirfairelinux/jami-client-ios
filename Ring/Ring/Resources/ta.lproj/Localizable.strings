@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "உரையாடலை விட்டுவிடுங்கள்";
 "swarm.removeConversation" = "உரையாடலை நீக்கு";
 "swarm.removeContact" = "தொடர்புகளை அகற்றவும்";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "உரையாடல் நிறம்";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "அடையாளங்காட்டி";

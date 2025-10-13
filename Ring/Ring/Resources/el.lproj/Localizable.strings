@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "Επιβεβαίωση";
 "global.connect" = "Σύνδεση";
-"global.leave" = "Leave";
+"global.leave" = "Φύγε";
 // Scan
 "scan.badQrCode" = "Κακό QR κωδικό";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "Μείνε αθόρυβα.";
 "swarm.leaveConversation" = "Αφήστε τη συζήτηση";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "Διαγραφή συνομιλίας";
+"swarm.removeContact" = "Αποσύρουμε την επαφή";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Χρώμα συνομιλίας";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Ταυτοποιητής";

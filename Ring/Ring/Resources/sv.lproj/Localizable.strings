@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Lämna samtalet";
 "swarm.removeConversation" = "Ta bort konversationen";
 "swarm.removeContact" = "Ta bort kontakt";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Konversationsfärg";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "identifierare";

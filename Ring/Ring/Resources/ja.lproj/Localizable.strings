@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "話しをやめましょう";
 "swarm.removeConversation" = "会話を削除";
 "swarm.removeContact" = "連絡先を削除";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "会話の色";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "識別子";

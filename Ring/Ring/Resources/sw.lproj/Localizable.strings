@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Acha mazungumzo";
 "swarm.removeConversation" = "Ondoa mazungumzo";
 "swarm.removeContact" = "Ondoa mawasiliano";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Rangi ya mazungumzo";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Kitambulisho";

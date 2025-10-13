@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "ปล่อยการพูดคุย";
 "swarm.removeConversation" = "ยกเลิกการพูดคุย";
 "swarm.removeContact" = "ยกเลิกการติดต่อ";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "สีของการสนทนา";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "ตัวประจําตัว";

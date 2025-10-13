@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "مکالمه رو ترک کن";
 "swarm.removeConversation" = "حذف گفتگو";
 "swarm.removeContact" = "حذف مخاطب";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "رنگ گفتگو";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "شناسه";

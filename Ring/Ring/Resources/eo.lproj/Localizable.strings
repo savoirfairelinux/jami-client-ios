@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "Konfirmu";
 "global.connect" = "Konekti";
-"global.leave" = "Leave";
+"global.leave" = "Foriru";
 // Scan
 "scan.badQrCode" = "Malbona QR-kodo";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "Silenta konversacio";
 "swarm.leaveConversation" = "Lasu la konversacion";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "Forigu konversacion";
+"swarm.removeContact" = "Forigu kontakton";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Koloro de konversacio";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identigilo";

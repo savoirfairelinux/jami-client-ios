@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Termină conversația";
 "swarm.removeConversation" = "Elimină conversația";
 "swarm.removeContact" = "Șterge contactul";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Culoarea conversației";
 "swarm.typeOfSwarm" = "Tipul conversației";
 "swarm.identifier" = "Identificator";

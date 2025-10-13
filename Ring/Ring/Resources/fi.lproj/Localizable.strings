@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Poistu keskustelusta";
 "swarm.removeConversation" = "Poista keskustelu";
 "swarm.removeContact" = "Poista yhteystieto";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Keskustelun väri";
 "swarm.typeOfSwarm" = "Keskustelun tyyppi";
 "swarm.identifier" = "Tunniste";
@@ -102,7 +104,7 @@
 "swarm.admin" = "Hallinnoija";
 "swarm.blocked" = "Estetty";
 "swarm.unknown" = "Tuntematon";
-"swarm.left" = "Left";
+"swarm.left" = "Vasen";
 "swarm.inviteMembers" = "Kutsu jäseniä";
 "swarm.inviteSelectedMembers" = "Kutsu valitut henkilöt";
 "swarm.inviteMembersSelected" = "Valittu";
@@ -268,10 +270,10 @@
 "alerts.dbFailedTitle" = "Jamia käynnistettäessä tapahtui virhe";
 "alerts.dbFailedMessage" = "Sulje sovellus ja yritä avata se uudelleen";
 "alerts.confirmBlockContact" = "Haluatko estää tämän henkilön? Henkilön keskusteluhistoria myös poistetaan pysyvästi.";
-"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Haluatko poistaa tämän keskustelun pysyvästi?";
 "alerts.confirmLeaveConversation" = "Haluatko poistua keskustelusta?";
-"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
-"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
+"alerts.confirmRemoveOneToOneConversation" = "Haluatko poistaa tämän keskusteluhistorian?. Voit aloittaa uuden keskustelun tämän henkilön kanssa, jos haluat.";
+"alerts.confimRemoveContact" = "Haluatko poistaa tämän henkilön? Olemassa oleva historia poistetaan.";
 "alerts.confirmDeleteConversationFromContact" = "Haluatko poistaa keskustelun tämän henkilön kanssa?";
 "alerts.confirmDeleteConversationTitle" = "Poista keskustelu";
 "alerts.noMediaPermissionsTitle" = "Pääsyä mediaan ei ole myönnetty";

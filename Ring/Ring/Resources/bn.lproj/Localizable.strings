@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "নিশ্চিত করুন";
 "global.connect" = "সংযুক্ত করুন";
-"global.leave" = "Leave";
+"global.leave" = "চলে যাও";
 // Scan
 "scan.badQrCode" = "খারাপ QR কোড";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "নিঃশব্দ কথোপকথন";
 "swarm.leaveConversation" = "কথোপকথন ছেড়ে দিন";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "কথোপকথন মুছে ফেলুন";
+"swarm.removeContact" = "যোগাযোগ অপসারণ";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "কথোপকথনের রঙ";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "সনাক্তকরণ";

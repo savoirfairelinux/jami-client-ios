@@ -42,7 +42,7 @@
 "global.copy" = "Kopiraj";
 "global.reply" = "Odgovori";
 "global.search" = "Iskanje ...";
-"global.supportJami" = "Support Jami project";
+"global.supportJami" = "Podprite projekt Jami";
 "global.deleteMessage" = "Izbriši sporočilo";
 "global.deleteFile" = "Izbriši datoteko z naprave";
 "global.editMessage" = "Uredi sporočilo";
@@ -56,7 +56,7 @@
 "global.editPassword" = "Uredi geslo";
 "global.confirmPassword" = "Potrdite geslo";
 "global.confirm" = "Potrdi";
-"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
+"global.cameraDisabled" = "Dostop do kamere je onemogočen. Omogočite ga v nastavitvah naprave, če želite uporabljati to funkcijo.";
 "global.confirm" = "Potrdi";
 "global.connect" = "Poveži";
 "global.leave" = "Zapusti";
@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Zapusti pogovor";
 "swarm.removeConversation" = "Odstrani pogovor";
 "swarm.removeContact" = "Odstrani stik";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Barva pogovora";
 "swarm.typeOfSwarm" = "Vrsta pogovora";
 "swarm.identifier" = "identifikator";
@@ -84,11 +86,11 @@
 "swarm.descriptionPlaceholder" = "Vnesite naslov";
 "swarm.contactHeader" = "Kontakt";
 "swarm.showContactQRCode" = "Pokaži QR-kodo stika";
-"swarm.shareContactInfo" = "Share contact information";
+"swarm.shareContactInfo" = "Deli podatke o stiku";
 "swarm.accessibilityContactQRCode" = "Pokaži QR-kodo stika";
-"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
+"swarm.accessibilityContactQRCodeHint" = "Odpre zaslon s kodo QR stika";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
-"swarm.accessibilityColorPicker" = "Conversation color picker";
+"swarm.accessibilityColorPicker" = "Izbirnik barve pogovora";
 "swarm.editTextHint" = "Double tap to edit";
 "swarm.conversationHeader" = "Pogovor";
 "swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
@@ -104,14 +106,14 @@
 "swarm.unknown" = "Neznano";
 "swarm.left" = "Left";
 "swarm.inviteMembers" = "Povabi člane";
-"swarm.inviteSelectedMembers" = "Invite selected contacts";
+"swarm.inviteSelectedMembers" = "Povabi izbrane stike";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
-"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Ali želite zapustiti ta pogovor?";
 "swarm.Leave" = "Zapusti";
 "swarm.newGroup" = "Ustvari novo skupino";
 "swarm.namePlaceholder" = "Ime skupine";
-"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
+"swarm.explanationText" = "Kadarkoli po stvaritvi skupine lahko povabite člane";
 "swarm.customizeProfile" = "Prilagodi profil skupine";
 "swarm.changePicture" = "Spremeni sliko skupine";
 "swarm.customize" = "Prilagodi skupino";
@@ -123,7 +125,7 @@
 "smartlist.jamsResults" = "Rezultati iskanja";
 "smartlist.jamsResults" = "Rezultati iskanja";
 "smartlist.conversations" = "Pogovori";
-"smartlist.noConversationsFound" = "No conversations match the search.";
+"smartlist.noConversationsFound" = "Noben pogovor se ne ujema z vašim iskanim nizom.";
 "smartlist.newContact" = "Nov stik";
 "smartlist.newGroup" = "Nova skupina";
 "smartlist.accounts" = "Računi";
@@ -133,7 +135,7 @@
 "smartlist.searchBarPlaceholder" = "Vnesite ime ...";
 "smartlist.searchBar" = "Išči";
 "smartlist.noNetworkConnectivity" = "Ni omrežne povezave";
-"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
+"smartlist.cellularAccess" = "Prepričajte se, da je v nastavitvah dovoljen dostop do mobilnega omrežja.";
 "smartlist.accountsTitle" = "Računi";
 "smartlist.addAccountButton" = "+ Dodaj račun";
 "smartlist.noNumber" = "Izbrani stiki nimajo številke";
@@ -150,16 +152,16 @@
 // Conversation
 "conversation.addToContactsButton" = "Dodaj med stike";
 "conversation.addToContactsLabel" = "Dodam med stike?";
-"conversation.notContactLabel" = "%@ is not in the contact list";
+"conversation.notContactLabel" = "%@ ni na seznamu stikov.";
 "conversation.messagePlaceholder" = "Piši";
-"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
-"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.errorSavingImage" = "Pri shranjevanju datoteke v galerijo je prišlo do napake.";
+"conversation.receivedRequest" = "%@ vam je poslal(a) povabilo na pogovor.";
+"conversation.incomingRequest" = "vam je poslal(a) povabilo na pogovor.";
 "conversation.requestMessage" = "Pozdravljeni,\nse želite pridružiti pogovoru?";
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
-"conversation.sendRequestTitle" = "Send conversation invitation";
-"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
+"conversation.sendRequestTitle" = "Pošlji vabilo na pogovor";
+"conversation.synchronizationTitle" = "Sprejeli ste vabilo na pogovor.";
+"conversation.synchronizationMessage" = "Čakamo, da se %@ poveže, da sinhroniziramo pogovor ...";
 "conversation.inReplyTo" = "Kot odgovor";
 "conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Vi";
@@ -191,7 +193,7 @@
 "welcome.linkDevice" = "Uvozi z druge naprave";
 "welcome.linkBackup" = "Uvozi iz varnostne kopije arhiva";
 "welcome.createAccount" = "Ustvarite račun Jami";
-"welcome.connectToJAMS" = "Connect to a management server";
+"welcome.connectToJAMS" = "Povežite se na upravljalni strežnik";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Preskoči";
@@ -205,7 +207,7 @@
 // Create Account form
 "createAccount.createAccountFormTitle" = "Pridruži se Jami";
 "createAccount.lookingForUsernameAvailability" = "Poteka preverjanje, ali je uporabniško ime na voljo ...";
-"createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
+"createAccount.invalidUsername" = "Nepravilno uporabniško ime. Vnesite pravilno uporabniško ime.";
 "createAccount.usernameAlreadyTaken" = "Uporabniško ime je že oddano";
 "createAccount.usernameValid" = "Uporabniško ime je na voljo.";
 "createAccount.UsernameNotRegisteredTitle" = "Napaka na omrežju";
@@ -225,7 +227,7 @@
 // Link To Account form
 "linkToAccount.importAccount" = "Import account";
 "linkToAccount.showQrCode" = "QR-koda";
-"linkToAccount.showPinCode" = "Authentication code";
+"linkToAccount.showPinCode" = "Overitvena koda";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
 "linkToAccount.allSet" = "Račun je bil uspešno uvožen.";
 "linkToAccount.goToAccounts" = "Go to imported account";
@@ -269,7 +271,7 @@
 "alerts.dbFailedMessage" = "Zaprite program in ga ponovno zaženite";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
-"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmLeaveConversation" = "Ali želite zapustiti ta pogovor?";
 "alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
 "alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
@@ -345,7 +347,7 @@
 "accountPage.deviceRevocationError" = "Napaka pri odpoklicu naprave";
 "accountPage.linkDeviceTitle" = "Poveži še eno napravo";
 "accountPage.other" = "Drugo";
-"accountPage.removeAccountMessage" = "If the account has not been backed up or added to another device, the account and registered username will be IRREVOCABLY LOST.";
+"accountPage.removeAccountMessage" = "Če vaš račun ni bil varnostno kopiran ali dodan na drugo napravo, bosta račun in registrirano uporabniško ime NEPOVRATNO IZGUBLJENA.";
 "accountPage.inviteFriends" = "Povabi prijatelje";
 "accountPage.contactMeOnJamiTitle" = "Poišči me na Jami-ju!";
 "accountPage.contactMeOnJamiContant" = "Stopi v stik z menoj z uporabo »%s« na razpršeni komunikacijski platformi Jami: https://jami.net";
@@ -398,7 +400,7 @@
 "accountPage.generatingPin" = "Generiranje kode PIN ...";
 "accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "Na drugi napravi";
-"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Namestite in zaženite Jami, izberite uvoz iz druge naprave in optično preberite kodo QR. Lahko tudi ročno vnesete kodo PIN.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Obveščanje";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
@@ -420,7 +422,7 @@
 "accountPage.bootstrap" = "Začetni nalagalnik";
 "accountPage.dhtConfiguration" = "Nastavitve OpenDTH";
 "accountPage.nameServer" = "Imenski strežnik";
-"accountPage.chats" = "Chats";
+"accountPage.chats" = "Klepeti";
 "accountPage.typingIndicator" = "Pokazatelj tipkanja";
 "accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
 
@@ -430,7 +432,7 @@
 "backupAccount.creating" = "Ustvarjanje varnostne kopije";
 "backupAccount.archiveName" = "Izberite ime arhiva.";
 "backupAccount.archiveNamePlaceholder" = "Ime arhiva";
-"backupAccount.passwordRequest" = "Enter the account password.";
+"backupAccount.passwordRequest" = "Vnesite geslo računa.";
 "backupAccount.backupButton" = "Varnostno kopiraj";
 "backupAccount.documentPickerButton" = "Odpri mesto varnostnega kopiranja";
 "backupAccount.exportSuccess" = "Varnostna kopija ustvarjena";
@@ -455,7 +457,7 @@
 "account.statusConnecting" = "Povezovanje";
 "account.statusUnknown" = "Neznano";
 "account.statusConnectionerror" = "Napaka pri povezovanju";
-"account.needMigration" = "Account requires migration.";
+"account.needMigration" = "Račun zahteva selitev.";
 "account.me" = "Jaz";
 
 // Block List Page
@@ -473,9 +475,9 @@
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "When ready, scan the QR code.";
 "linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
-"linkDevice.connecting" = "Connecting to your new device…";
+"linkDevice.connecting" = "Povezovanje z vašo novo napravo ...";
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
+"linkDevice.newDeviceIP" = "Nov naslov IP naprave: %1@";
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
@@ -512,17 +514,17 @@
 "generatedMessage.contactAdded" = "Povabilo je prejeto";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
+"generatedMessage.invitationAccepted" = "%@ se je pridružil/a pogovoru.";
 "generatedMessage.youJoined" = "Pridružili ste se pogovoru.";
-"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ je blokiran/a v pogovoru.";
+"generatedMessage.contactUnblocked" = "%@ je odblokiran/a v pogovoru.";
 "generatedMessage.outgoingCall" = "Odhodni klic";
 "generatedMessage.missedOutgoingCall" = "Zgrešen odhodni klic";
 "generatedMessage.missedIncomingCall" = "Zgrešen dohodni klic";
 "generatedMessage.liveLocationSharing" = "Deljenje lokacije v živo";
-"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
-"generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
-"generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
+"generatedMessage.contactLeftConversation" = "%@ je zapustil/a pogovor.";
+"generatedMessage.nonSwarmInvitationReceived" = "Poslali ste povabilo.";
+"generatedMessage.nonSwarmInvitationAccepted" = "Vaše povabilo je sprejeto.";
 
 // General Settings
 "generalSettings.videoSettings" = "Nastavitve videa";
@@ -566,8 +568,8 @@
 
 // Accessibility
 "accessibility.close" = "Zapri";
-"accessibility.smartListSwitchAccounts" = "Switch account";
-"accessibility.smartListConnectedAs" = "The current account is %@";
+"accessibility.smartListSwitchAccounts" = "Preklopi med računi";
+"accessibility.smartListConnectedAs" = "Trenutni račun je %@";
 "accessibility.smartListAddAccount" = "Dodajanje računa";
 "accessibility.aboutJamiTitle" = "O programu Jami";
 "accessibility.welcomeToJamiTitle" = "Dobrodošli v Jami";
@@ -581,21 +583,21 @@
 "accessibility.accountSummaryEditSettingsButton" = "Nastavitve";
 "accessibility.conversationStartVoiceCall" = "Start audio call with %@";
 "accessibility.conversationStartVideoCall" = "Start video call with %@";
-"accessibility.conversationComposeMessage" = "Compose a message";
+"accessibility.conversationComposeMessage" = "Sestavi sporočilo";
 "accessibility.conversationShareMedia" = "Share media";
 "accessibility.conversationCameraHint" = "Double-tap to open camera";
 "accessibility.audioPlayerPlay" = "Predvajaj";
 "accessibility.audioPlayerPause" = "Premor";
 "accessibility.conversationRowUnreadCount" = "%@ unread messages.";
-"accessibility.conversationRowBlocked" = "Conversation blocked";
-"accessibility.conversationRowSyncing" = "Synchronization in progress";
-"accessibility.conversationRowLastMessage" = "Last message at %@";
+"accessibility.conversationRowBlocked" = "Pogovor je blokiran";
+"accessibility.conversationRowSyncing" = "Sinhronizacija poteka";
+"accessibility.conversationRowLastMessage" = "Zadnje sporočilo: %@";
 "accessibility.userPresenceOnline" = "Povezan";
 "accessibility.userPresenceAvailable" = "Na voljo";
 "accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
-"accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
+"accessibility.pendingRequestsListBlockUser" = "Blokiraj pošiljatelja povabila";
 "accessibility.pendingRequestsListRejectInvitation" = "Zavrni povabilo";
 "accessibility.pendingRequestsListAcceptInvitation" = "Sprejmi povabilo";
 "accessibility.messageBubbleDeleted" = "Message deleted";
@@ -643,28 +645,28 @@
 
 // Swarm Colors
 "swarmColors.vibrantPink" = "Vibrant pink";
-"swarmColors.purple" = "Purple";
-"swarmColors.violet" = "Violet";
+"swarmColors.purple" = "Škrlatna";
+"swarmColors.violet" = "Vijolična";
 "swarmColors.indigoBlue" = "Indigo blue";
 "swarmColors.skyBlue" = "Sky blue";
 "swarmColors.cyan" = "Cyan";
 "swarmColors.teal" = "Teal";
-"swarmColors.green" = "Green";
+"swarmColors.green" = "Zelena";
 "swarmColors.limeGreen" = "Lime green";
-"swarmColors.mediumGray" = "Medium gray";
+"swarmColors.mediumGray" = "Srednjesiva";
 "swarmColors.yellowGreen" = "Yellow-green";
 "swarmColors.amber" = "Amber";
 "swarmColors.brightOrange" = "Bright orange";
-"swarmColors.brown" = "Brown";
+"swarmColors.brown" = "Rjava";
 "swarmColors.steelBlue" = "Steel blue";
 
 // Share extension
 "shareExtension.appName" = "Jami";
-"shareExtension.noAccount.title" = "Account not found";
-"shareExtension.noAccount.description" = "To continue, create an account in the main application.";
-"shareExtension.unsupportedType.title" = "Unsupported content";
-"shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
-"shareExtension.sending" = "Sending…";
+"shareExtension.noAccount.title" = "Računa ni mogoče najti";
+"shareExtension.noAccount.description" = "Za nadaljevanje ustvarite račun v glavnem programu.";
+"shareExtension.unsupportedType.title" = "Nepodprta vsebina";
+"shareExtension.unsupportedType.description" = "Deljenje izbrane vsebine trenutno ni podprto.";
+"shareExtension.sending" = "Pošiljanje ...";
 "shareExtension.conversations" = "Pogovori";
-"shareExtension.noConversation" = "Conversation unavailable.";
-"shareExtension.selectAccount" = "Select account.";
+"shareExtension.noConversation" = "Pogovor ni na voljo.";
+"shareExtension.selectAccount" = "Izberite račun.";

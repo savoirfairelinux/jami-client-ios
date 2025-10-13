@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Braktise bisedën";
 "swarm.removeConversation" = "Hiqe bisedën";
 "swarm.removeContact" = "Hiqe kontaktin";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Ngjyrë bisede";
 "swarm.typeOfSwarm" = "Lloj bisede";
 "swarm.identifier" = "Identifikues";
@@ -102,7 +104,7 @@
 "swarm.admin" = "Përgjegjës";
 "swarm.blocked" = "Bllokuar";
 "swarm.unknown" = "I panjohur";
-"swarm.left" = "Left";
+"swarm.left" = "Iku";
 "swarm.inviteMembers" = "Ftoni anëtarë";
 "swarm.inviteSelectedMembers" = "Ftoni kontakte të përzgjedhur";
 "swarm.inviteMembersSelected" = "I përzgjedhur";
@@ -268,10 +270,10 @@
 "alerts.dbFailedTitle" = "Ndodhi një gabim gjatë nisjes së Jami-t";
 "alerts.dbFailedMessage" = "Ju lutemi, mbylleni aplikacionin dhe provoni ta rihapni";
 "alerts.confirmBlockContact" = "Doni të bllokohet ky kontakt? Edhe historiku i bisedës me këtë kontakt do të fshihet përgjithmonëy.";
-"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Doni të hiqet përgjithmonë kjo bisedë?";
 "alerts.confirmLeaveConversation" = "Doni ta braktisni këtë bisedë?";
-"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
-"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
+"alerts.confirmRemoveOneToOneConversation" = "Doni të hiqet kjo bisedë? Historiku ekzistues do të fshihet. Nëse s’keni biseda të tjera me këtë kontakt, mund të niset një bisedë e re.";
+"alerts.confimRemoveContact" = "Doni të hiqet ky kontakt? Historiku ekzistues do të fshihet.";
 "alerts.confirmDeleteConversationFromContact" = "Doni të fshihet biseda me këtë kontakt?";
 "alerts.confirmDeleteConversationTitle" = "Fshije bisedën";
 "alerts.noMediaPermissionsTitle" = "S'u akordua leje mbi media";

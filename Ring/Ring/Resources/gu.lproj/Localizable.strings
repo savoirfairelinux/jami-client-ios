@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "વાતચીત છોડી દો";
 "swarm.removeConversation" = "વાતચીત દૂર કરો";
 "swarm.removeContact" = "સંપર્ક દૂર કરો";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "વાતચીતનો રંગ";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "ઓળખકર્તા";

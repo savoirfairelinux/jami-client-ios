@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "Потвърди";
 "global.connect" = "Свържете се";
-"global.leave" = "Leave";
+"global.leave" = "Излезте.";
 // Scan
 "scan.badQrCode" = "Грешен QR-код";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "Мълчави разговори";
 "swarm.leaveConversation" = "Остави разговора.";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "Премахване на разговора";
+"swarm.removeContact" = "Изтриване на контакт";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Цвет на разговора";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Идентификатор";

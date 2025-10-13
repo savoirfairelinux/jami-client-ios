@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Cinnigh comhrá";
 "swarm.removeConversation" = "Scrios an comhrá";
 "swarm.removeContact" = "Criosadh Contacte";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Cluiche";

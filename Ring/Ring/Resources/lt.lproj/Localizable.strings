@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Išeiti iš pokalbio";
 "swarm.removeConversation" = "Šalinti pokalbį";
 "swarm.removeContact" = "Šalinti adresatą";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Pokalbio spalva";
 "swarm.typeOfSwarm" = "Pokalbio tipas";
 "swarm.identifier" = "Identifikatorius";

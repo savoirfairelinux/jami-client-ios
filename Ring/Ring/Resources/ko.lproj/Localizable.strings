@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "대화는 그만둬";
 "swarm.removeConversation" = "대화 를 삭제";
 "swarm.removeContact" = "접촉을 제거";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "대화 색상";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "식별자";

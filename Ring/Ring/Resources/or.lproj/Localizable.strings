@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "ବାର୍ତ୍ତାଳାପ ତ୍ୟାଗ କରନ୍ତୁ";
 "swarm.removeConversation" = "Remove conversation";
 "swarm.removeContact" = "Remove contact";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifier";
