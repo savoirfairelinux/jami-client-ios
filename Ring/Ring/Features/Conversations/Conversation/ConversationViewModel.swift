@@ -395,9 +395,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     private func prepareCallURI() -> String? {
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return nil }
-        var uri = self.conversation.isDialog() ? jamiId : "swarm:" + self.conversation.id
+        var uri = self.conversation.isCoredialog() ? jamiId : "swarm:" + self.conversation.id
 
-        if let activeCall = self.callService.getActiveCall(accountId: self.conversation.accountId, conversationId: self.conversation.id), !self.conversation.isDialog() {
+        if let activeCall = self.callService.getActiveCall(accountId: self.conversation.accountId, conversationId: self.conversation.id), !self.conversation.isCoredialog() {
             uri = activeCall.constructURI()
         }
 

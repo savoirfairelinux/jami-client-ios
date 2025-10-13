@@ -308,7 +308,7 @@ extension CallViewModel {
               let conversation = conversationService.getConversationForId(conversationId: call.conversationId, accountId: call.accountId) else {
             return false
         }
-        return conversation.getParticipants().count > 1
+        return !conversation.isCoredialog()
     }
 
     func answerCall() -> Completable {
