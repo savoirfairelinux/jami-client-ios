@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "Confirmar";
 "global.connect" = "Conectar";
-"global.leave" = "Leave";
+"global.leave" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
 // Scan
 "scan.badQrCode" = "Un codiciu QR malo";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "La conversación silenciosa";
 "swarm.leaveConversation" = "La conversación ye una conversación.";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "La conversación ye desactivada.";
+"swarm.removeContact" = "La distancia de contacto";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "El color de la conversación";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identificador";

@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Görüşmeden ayrıl";
 "swarm.removeConversation" = "Konuşma sil";
 "swarm.removeContact" = "Kişiyi kaldır";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Görüşme rengi";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Tanımlayıcı";

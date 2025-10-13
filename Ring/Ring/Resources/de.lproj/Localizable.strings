@@ -42,7 +42,7 @@
 "global.copy" = "Kopieren";
 "global.reply" = "Antworten";
 "global.search" = "Suchen…";
-"global.supportJami" = "Support Jami project";
+"global.supportJami" = "Das Jami-Projekt unterstützen";
 "global.deleteMessage" = "Nachricht löschen";
 "global.deleteFile" = "Datei vom Gerät löschen";
 "global.editMessage" = "Nachricht bearbeiten";
@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Der Kamerazugriff ist deaktiviert. Aktivieren Sie diesen in den Geräteeinstellungen, um diese Funktion zu nutzen.";
 "global.confirm" = "Bestätigen";
 "global.connect" = "Verbinden";
-"global.leave" = "Leave";
+"global.leave" = "Verlassen";
 // Scan
 "scan.badQrCode" = "QR-Code ungültig";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "Unterhaltung stummschalten";
 "swarm.leaveConversation" = "Unterhaltung verlassen";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "Unterhaltung entfernen";
+"swarm.removeContact" = "Entferne Kontakt";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Farbe der Unterhaltung";
 "swarm.typeOfSwarm" = "Unterhaltungstyp";
 "swarm.identifier" = "Identifikator";
@@ -102,7 +104,7 @@
 "swarm.admin" = "Administrator";
 "swarm.blocked" = "Blockiert";
 "swarm.unknown" = "Unbekannt";
-"swarm.left" = "Left";
+"swarm.left" = "Gegangen";
 "swarm.inviteMembers" = "Mitglieder einladen";
 "swarm.inviteSelectedMembers" = "Ausgewählte Kontakte einladen";
 "swarm.inviteMembersSelected" = "Ausgewählt";
@@ -268,10 +270,10 @@
 "alerts.dbFailedTitle" = "Beim Starten von Jami ist ein Fehler aufgetreten";
 "alerts.dbFailedMessage" = "Bitte schließen Sie die Anwendung und versuchen Sie, sie erneut zu öffnen";
 "alerts.confirmBlockContact" = "Möchten Sie diesen Kontakt blockieren? Der Unterhaltungsverlauf mit diesem Kontakt wird ebenfalls dauerhaft gelöscht.";
-"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Möchten Sie diese Unterhaltung dauerhaft entfernen?";
 "alerts.confirmLeaveConversation" = "Möchten Sie diese Unterhaltung verlassen?";
-"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
-"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
+"alerts.confirmRemoveOneToOneConversation" = "Möchten Sie diese Unterhaltung entfernen? Der bestehende Verlauf wird gelöscht. Eine neue Unterhaltung kann gestartet werden, wenn Sie keine anderen Unterhaltungen mit diesem Kontakt führen.";
+"alerts.confimRemoveContact" = "Möchten Sie diesen Kontakt entfernen? Der vorhandene Verlauf wird gelöscht.";
 "alerts.confirmDeleteConversationFromContact" = "Möchten Sie die Unterhaltung mit diesem Kontakt löschen?";
 "alerts.confirmDeleteConversationTitle" = "Unterhaltung löschen";
 "alerts.noMediaPermissionsTitle" = "Medienzugriff nicht gewährt";

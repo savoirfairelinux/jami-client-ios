@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Сөйләшүне калдырыгыз";
 "swarm.removeConversation" = "Әңгәмәне алып ташлау";
 "swarm.removeContact" = "Контакты алып ташлау";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Идентификатор";

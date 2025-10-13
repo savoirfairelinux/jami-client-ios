@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Deixar a conversa";
 "swarm.removeConversation" = "Eliminar conversa";
 "swarm.removeContact" = "Eliminar contacto";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Cor da conversa";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identificador";

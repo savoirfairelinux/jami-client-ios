@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Utzi elkarrizketa.";
 "swarm.removeConversation" = "Elkarrizketa ezabatu";
 "swarm.removeContact" = "Kendu kontaktua";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Elkarrizketaren kolorea";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifikatzailea";

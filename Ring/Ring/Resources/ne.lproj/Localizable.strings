@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "कुराकानी छोड्नुहोस्";
 "swarm.removeConversation" = "वार्तालाप हटाउनुहोस्";
 "swarm.removeContact" = "सम्पर्क हटाउनु";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "वार्तालापको रंग";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "पहिचानकर्ता";

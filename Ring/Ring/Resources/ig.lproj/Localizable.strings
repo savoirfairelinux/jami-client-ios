@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Hapụ mkparịta ụka ahụ";
 "swarm.removeConversation" = "Wepụ mkparịta ụka ahụ";
 "swarm.removeContact" = "Wepụ njikọ";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Ihe Nkọwapụta";

@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "עזוב את השיחה";
 "swarm.removeConversation" = "תבטל את השיחה";
 "swarm.removeContact" = "להסיר קשר";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "זיהוי";

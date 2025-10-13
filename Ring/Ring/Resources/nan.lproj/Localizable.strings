@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "离开谈话";
 "swarm.removeConversation" = "移除会话";
 "swarm.removeContact" = "移除聯絡人";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "对话框颜色";
 "swarm.typeOfSwarm" = "对话类型";
 "swarm.identifier" = "标识符";

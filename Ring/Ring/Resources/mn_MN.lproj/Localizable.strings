@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Хэлэлцүүлгийг орхи";
 "swarm.removeConversation" = "Хэлэлцүүлгийг устгах";
 "swarm.removeContact" = "Байрлагыг арилгаж";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Хэлэлцүүлгийн өнгө";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Төлөөлөгч";

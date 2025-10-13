@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Tinggalkan percakapan";
 "swarm.removeConversation" = "Buang percakapan";
 "swarm.removeContact" = "Buang kontak";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Warna percakapan";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Pengidentifikasi";

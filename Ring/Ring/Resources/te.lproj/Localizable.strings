@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "సంభాషణను వదిలివేయండి";
 "swarm.removeConversation" = "సంభాషణను తొలగించు";
 "swarm.removeContact" = "పరిచయాన్ని తొలగించు";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "సంభాషణ రంగు";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "గుర్తింపు";

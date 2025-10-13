@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Để lại cuộc trò chuyện";
 "swarm.removeConversation" = "Tháo cuộc trò chuyện";
 "swarm.removeContact" = "Xóa liên lạc";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Conversation color";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Định dạng";

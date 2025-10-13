@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "बातचीत छोड़ दें";
 "swarm.removeConversation" = "बातचीत को हटा दें";
 "swarm.removeContact" = "संपर्क हटाये";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "वार्तालाप का रंग";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "पहचानकर्ता";

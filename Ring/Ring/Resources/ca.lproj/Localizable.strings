@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "L'accés a la càmera està deshabilitat. Habiliteu-lo en la configuració del dispositiu per fer servir aquesta funció.";
 "global.confirm" = "Confirma";
 "global.connect" = "Connectar";
-"global.leave" = "Leave";
+"global.leave" = "Deixar";
 // Scan
 "scan.badQrCode" = "Mal codi QR";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "Conversació mudada";
 "swarm.leaveConversation" = "Deixar la conversa";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "Esborra conversa";
+"swarm.removeContact" = "Elimina el contacte";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Color de conversa";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identificador";

@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Leave conversation";
 "swarm.removeConversation" = "Remove conversation";
 "swarm.removeContact" = "Remove contact";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "ਗੱਲਬਾਤ ਦਾ ਰੰਗ";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifier";

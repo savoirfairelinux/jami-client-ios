@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Kilépés a beszélgetésből";
 "swarm.removeConversation" = "Beszélgetés törlése";
 "swarm.removeContact" = "Kapcsolat eltávolítása";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Beszélgetés színe";
 "swarm.typeOfSwarm" = "Beszélgetés típusa";
 "swarm.identifier" = "Azonosító";
@@ -102,7 +104,7 @@
 "swarm.admin" = "Rendszergazda";
 "swarm.blocked" = "Letiltva";
 "swarm.unknown" = "Ismeretlen";
-"swarm.left" = "Left";
+"swarm.left" = "Kilépett";
 "swarm.inviteMembers" = "Tagok meghívása";
 "swarm.inviteSelectedMembers" = "Kijelölt kapcsolattartók meghívása";
 "swarm.inviteMembersSelected" = "Kijelölt";
@@ -268,10 +270,10 @@
 "alerts.dbFailedTitle" = "Hiba történt a Jami indításakor";
 "alerts.dbFailedMessage" = "Kérjük, hogy zárja be az alkalmazást és próbálja meg újra megnyitni";
 "alerts.confirmBlockContact" = "Szeretne letiltani ezt a kapcsolattartót? A beszélgetés előzményei a kapcsolattartóval együtt véglegesen törlésre kerülnek.";
-"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Szeretné véglegesen eltávolítani ezt a beszélgetést?";
 "alerts.confirmLeaveConversation" = "Szeretne kilépni a beszélgetésből?";
-"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
-"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
+"alerts.confirmRemoveOneToOneConversation" = "Szeretné eltávolítani ezt a beszélgetést? A meglévő előzmények törlésre kerülnek. Új beszélgetés indítható, ha nincsenek további beszélgetései ezzel a kapcsolattartóval.";
+"alerts.confimRemoveContact" = "Szeretné eltávolítani ezt a kapcsolattartót? A meglévő előzmények törlésre kerülnek.";
 "alerts.confirmDeleteConversationFromContact" = "Szeretne törli a beszélgetést ezzel a kapcsolattartóval?";
 "alerts.confirmDeleteConversationTitle" = "Beszélgetés törlése";
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";

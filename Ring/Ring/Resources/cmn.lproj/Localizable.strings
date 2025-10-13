@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "確認";
 "global.connect" = "连接";
-"global.leave" = "Leave";
+"global.leave" = "离开";
 // Scan
 "scan.badQrCode" = "无效的二维码";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "静音对话";
 "swarm.leaveConversation" = "离开谈话";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "移除会话";
+"swarm.removeContact" = "移除聯絡人";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "对话框颜色";
 "swarm.typeOfSwarm" = "对话类型";
 "swarm.identifier" = "識別碼";
@@ -269,7 +271,7 @@
 "alerts.dbFailedMessage" = "请关闭应用，并尝试重新开启。";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
-"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmLeaveConversation" = "您要退出对话吗？";
 "alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
 "alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";

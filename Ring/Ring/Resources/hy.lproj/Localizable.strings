@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Թող խոսակցությունը";
 "swarm.removeConversation" = "Հեռացնել զրույցը";
 "swarm.removeContact" = "Հեռացնել շփումը";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Զրույցի գույնը";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Հնազեկիչ";

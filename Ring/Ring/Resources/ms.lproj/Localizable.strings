@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "സംഭാഷണം ഉപേക്ഷിക്കുക";
 "swarm.removeConversation" = "സംഭാഷണം നീക്കം ചെയ്യുക";
 "swarm.removeContact" = "ബന്ധം നീക്കം ചെയ്യുക";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "സംഭാഷണ നിറം";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "ഐഡന്റിഫയർ";

@@ -59,7 +59,7 @@
 "global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
 "global.confirm" = "تأكيد";
 "global.connect" = "إتصال";
-"global.leave" = "Leave";
+"global.leave" = "إرحل";
 // Scan
 "scan.badQrCode" = "رمز QR غير صالح";
 
@@ -69,8 +69,10 @@
 // Swarm
 "swarm.muteConversation" = "محادثة صامتة";
 "swarm.leaveConversation" = "أترك المحادثة";
-"swarm.removeConversation" = "Remove conversation";
-"swarm.removeContact" = "Remove contact";
+"swarm.removeConversation" = "إزالة المحادثة";
+"swarm.removeContact" = "إزالة الاتصال";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "لون المحادثة";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "المعرف";

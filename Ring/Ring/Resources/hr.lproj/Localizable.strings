@@ -71,6 +71,8 @@
 "swarm.leaveConversation" = "Ostavi razgovor";
 "swarm.removeConversation" = "Uklonite razgovor";
 "swarm.removeContact" = "Uklonite kontakt";
+"swarm.restartConversation" = "Restart conversation";
+"swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Boja razgovora";
 "swarm.typeOfSwarm" = "Conversation type";
 "swarm.identifier" = "Identifikacija";
