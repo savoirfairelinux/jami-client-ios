@@ -448,6 +448,7 @@
 		26E081222BC03AB3001B4C18 /* AccountLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081212BC03AB3001B4C18 /* AccountLists.swift */; };
 		26E081242BC07824001B4C18 /* RequestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081232BC07824001B4C18 /* RequestsViewModel.swift */; };
 		26E081262BC09534001B4C18 /* RequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081252BC09534001B4C18 /* RequestsView.swift */; };
+		26E731732E9D944D0063BBEC /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 26E731722E9D944D0063BBEC /* AppIcon.icon */; };
 		26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB61332B75724000183FF4 /* AccountCreationTest.swift */; };
 		26EEB19C2BD98CCA00B8B04B /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEB19B2BD98CCA00B8B04B /* SearchBar.swift */; };
 		26EEB19E2BDEDC0C00B8B04B /* UIControllersWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEB19D2BDEDC0C00B8B04B /* UIControllersWrappers.swift */; };
@@ -1125,6 +1126,7 @@
 		26E081212BC03AB3001B4C18 /* AccountLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountLists.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/AccountLists.swift; sourceTree = SOURCE_ROOT; };
 		26E081232BC07824001B4C18 /* RequestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RequestsViewModel.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/RequestsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		26E081252BC09534001B4C18 /* RequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RequestsView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/RequestsView.swift; sourceTree = SOURCE_ROOT; };
+		26E731722E9D944D0063BBEC /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		26EB61332B75724000183FF4 /* AccountCreationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationTest.swift; sourceTree = "<group>"; };
 		26EB61382B7675FB00183FF4 /* Embassy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Embassy.xcframework; path = Carthage/Build/Embassy.xcframework; sourceTree = "<group>"; };
 		26EEB19B2BD98CCA00B8B04B /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SearchBar.swift; sourceTree = SOURCE_ROOT; };
@@ -3293,6 +3295,7 @@
 		1ABE07C61F0D86B300D36361 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				26E731722E9D944D0063BBEC /* AppIcon.icon */,
 				26929FD125659E5F0052A601 /* cacert.pem */,
 				0EABD3842303600B00DE7ACF /* default.wav */,
 				1ABE07DA1F0D915100D36361 /* Localizable.strings */,
@@ -4100,6 +4103,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26E731732E9D944D0063BBEC /* AppIcon.icon in Resources */,
 				1A2D18FD1F292DAD00B2C785 /* SmartListCell.xib in Resources */,
 				0E320D50224ADF840070B515 /* DialpadViewController.storyboard in Resources */,
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
@@ -4811,6 +4815,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_OTHER_FLAGS = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
@@ -4851,6 +4856,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_OTHER_FLAGS = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
@@ -5037,6 +5043,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_OTHER_FLAGS = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
@@ -5599,6 +5606,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_OTHER_FLAGS = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
