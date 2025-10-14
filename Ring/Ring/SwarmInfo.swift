@@ -122,6 +122,7 @@ class ParticipantInfo: Equatable, Hashable {
     }
 }
 
+// swiftlint:disable type_body_length
 class SwarmInfo: SwarmInfoProtocol {
     var avatarData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
     var title = BehaviorRelay(value: "")
@@ -214,9 +215,9 @@ class SwarmInfo: SwarmInfoProtocol {
 
     func isConversationEnded() -> Bool {
         guard let conversation = self.conversation else { return false }
-        
-        if conversation.getAllParticipants().isEmpty { 
-            return false 
+
+        if conversation.getAllParticipants().isEmpty {
+            return false
         }
 
         let hasActiveOtherParticipants = conversation.getParticipants().contains { participant in
@@ -227,11 +228,11 @@ class SwarmInfo: SwarmInfoProtocol {
                 return true
             }
         }
-        
+
         if hasActiveOtherParticipants {
             return false
         }
-        
+
         if conversation.isCoredialog() {
             // check if conversation with self
             let localParticipants = conversation.getAllLocalParticipants()
