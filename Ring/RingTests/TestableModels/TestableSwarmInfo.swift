@@ -44,6 +44,7 @@ class TestableSwarmInfo: SwarmInfoProtocol {
     var participants = BehaviorRelay(value: [ParticipantInfo]())
     var contacts = BehaviorRelay(value: [ParticipantInfo]())
     var conversation: ConversationModel?
+    var conversationEnded = BehaviorRelay<Bool>(value: false)
 
     // parameters
     let containsSearchQuery: Bool
