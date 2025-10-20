@@ -1,19 +1,19 @@
 ﻿/*
- *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 // Global
@@ -71,8 +71,8 @@
 "swarm.leaveConversation" = "Termină conversația";
 "swarm.removeConversation" = "Elimină conversația";
 "swarm.removeContact" = "Șterge contactul";
-"swarm.restartConversation" = "Restart conversation";
-"swarm.conversationEnded" = "Conversation ended";
+"swarm.restartConversation" = "Reîncepe conversația";
+"swarm.conversationEnded" = "Conversație terminată";
 "swarm.chooseColor" = "Culoarea conversației";
 "swarm.typeOfSwarm" = "Tipul conversației";
 "swarm.identifier" = "Identificator";
@@ -104,7 +104,7 @@
 "swarm.admin" = "Administrator";
 "swarm.blocked" = "Blocat";
 "swarm.unknown" = "Necunoscut";
-"swarm.left" = "Left";
+"swarm.left" = "A ieșit";
 "swarm.inviteMembers" = "Invită membri";
 "swarm.inviteSelectedMembers" = "Invită contactele alese";
 "swarm.inviteMembersSelected" = "Ales";
@@ -270,10 +270,10 @@
 "alerts.dbFailedTitle" = "S-a produs o eroare la pornirea lui Jami";
 "alerts.dbFailedMessage" = "Închide aplicația și încearcă să o repornești";
 "alerts.confirmBlockContact" = "Vrei să blochezi acest contact? Conversația cu acest contact va fi ștearsă definitiv.";
-"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Vrei să ștergi definitiv această conversație?";
 "alerts.confirmLeaveConversation" = "Vrei să părăsești această conversație?";
-"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
-"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
+"alerts.confirmRemoveOneToOneConversation" = "Vrei să ștergi această conversație? Cronologia existentă va fi ștearsă. O conversație nouă poate fi începută dacă nu ai alte conversații cu acest contact.";
+"alerts.confimRemoveContact" = "Vrei să elimini acest contact? Cronologia existentă va fi ștearsă.";
 "alerts.confirmDeleteConversationFromContact" = "Vrei să ștergi conversația cu acest contact?";
 "alerts.confirmDeleteConversationTitle" = "Șterge conversația";
 "alerts.noMediaPermissionsTitle" = "Nu ai permis accesul la Media";
@@ -563,8 +563,12 @@
 "aboutJami.noWarranty2" = "versiunea 3 sau ulterioară.";
 "aboutJami.contribute" = "Contribuie";
 "aboutJami.feedback" = "Părere";
-"aboutJami.createdBy" = "Creat de";
-"aboutJami.artworkBy" = "Grafică de";
+"aboutJami.developers" = "Developers";
+"aboutJami.media" = "Media";
+"aboutJami.communityManagement" = "Community Management";
+"aboutJami.specialThanks" = "Special thanks to";
+"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
+"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
 
 // Accessibility
 "accessibility.close" = "Închide";

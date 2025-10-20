@@ -1,19 +1,19 @@
 ﻿/*
- *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 // Global
@@ -42,7 +42,7 @@
 "global.copy" = "Copia";
 "global.reply" = "Rispondi";
 "global.search" = "Ricerca in corso...";
-"global.supportJami" = "Support Jami project";
+"global.supportJami" = "Sostieni il progetto Jami";
 "global.deleteMessage" = "Elimina messaggio";
 "global.deleteFile" = "Elimina il file dal dispositivo";
 "global.editMessage" = "Modifica messaggio";
@@ -71,29 +71,29 @@
 "swarm.leaveConversation" = "Lascia la conversazione";
 "swarm.removeConversation" = "Rimuovi conversazione";
 "swarm.removeContact" = "Rimuovi contatto";
-"swarm.restartConversation" = "Restart conversation";
-"swarm.conversationEnded" = "Conversation ended";
+"swarm.restartConversation" = "Riavvia la conversazione";
+"swarm.conversationEnded" = "Conversazione terminata";
 "swarm.chooseColor" = "Colore della conversazione";
 "swarm.typeOfSwarm" = "Tipo di conversazione";
 "swarm.identifier" = "Identificatore";
-"swarm.conversationId" = "Conversation ID";
+"swarm.conversationId" = "ID conversazione";
 "swarm.settings" = "Impostazioni";
 "swarm.members" = "Membri";
 "swarm.addDescription" = "Aggiungi descrizione";
-"swarm.titlePlaceholder" = "Enter title";
+"swarm.titlePlaceholder" = "Inserire il titolo";
 "swarm.titleAlertHeader" = "Modifica il titolo del gruppo";
 "swarm.descriptionAlertHeader" = "Modifica la descrizione del gruppo";
-"swarm.descriptionPlaceholder" = "Enter title";
+"swarm.descriptionPlaceholder" = "Inserire il titolo";
 "swarm.contactHeader" = "Contatto";
-"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.showContactQRCode" = "Mostra il codice QR del contatto";
 "swarm.shareContactInfo" = "Condividi informazioni di contatto";
-"swarm.accessibilityContactQRCode" = "Show contact QR code";
-"swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
-"swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
-"swarm.accessibilityColorPicker" = "Conversation color picker";
-"swarm.editTextHint" = "Double tap to edit";
+"swarm.accessibilityContactQRCode" = "Mostra il codice QR del contatto";
+"swarm.accessibilityContactQRCodeHint" = "Apre una schermata con il codice QR del contatto";
+"swarm.accessibilityContactShareHint" = "Apre le opzioni di condivisione per le informazioni di contatto";
+"swarm.accessibilityColorPicker" = "Selettore colore";
+"swarm.editTextHint" = "Doppio tocco per modificare";
 "swarm.conversationHeader" = "Conversazione";
-"swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
+"swarm.shareContactMessage" = "È possibile aggiungere il contatto %1@ sulla piattaforma di comunicazione distribuita Jami: https://jami.net";
 "swarm.oneToOne" = "Privato";
 "swarm.adminInvitesOnly" = "Gruppo privato (inviti limitati)";
 "swarm.invitesOnly" = "Gruppo privato";
@@ -104,11 +104,11 @@
 "swarm.admin" = "Amministratore";
 "swarm.blocked" = "Bloccato";
 "swarm.unknown" = "Sconosciuto";
-"swarm.left" = "Left";
+"swarm.left" = "Uscito";
 "swarm.inviteMembers" = "Invita membri";
-"swarm.inviteSelectedMembers" = "Invite selected contacts";
-"swarm.inviteMembersSelected" = "Selected";
-"swarm.inviteMembersNotSelected" = "Not selected";
+"swarm.inviteSelectedMembers" = "Invita i contatti selezionati";
+"swarm.inviteMembersSelected" = "Selezionato";
+"swarm.inviteMembersNotSelected" = "Non selezionato";
 "swarm.confirmLeaveConversation" = "Vuoi abbandonare questa conversazione?";
 "swarm.Leave" = "Lascia";
 "swarm.newGroup" = "Crea un nuovo gruppo";
@@ -171,10 +171,10 @@
 // An ellipsis is not directly shown in the following typing indicator strings.
 // An ellipsis animation is shown when messages are being typed in the view.
 // An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
-"conversation.typingIndicatorOneUser" = "%@ is typing";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
+"conversation.typingIndicatorOneUser" = "%@ sta scrivendo";
+"conversation.typingIndicatorTwoUsers" = "%1@ e %2@ stanno scrivendo";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ e %3@ altro stanno scrivendo";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ e altri %3@ stanno scrivendo";
 
 
 // Invitations
@@ -193,7 +193,7 @@
 "welcome.linkDevice" = "Importa da un altro dispositivo";
 "welcome.linkBackup" = "Importa dal backup";
 "welcome.createAccount" = "Crea un account Jami";
-"welcome.connectToJAMS" = "Connect to a management server";
+"welcome.connectToJAMS" = "Connetti a un server di gestione";
 
 // Creation Profile Screen
 "createProfile.skipCreateProfile" = "Salta";
@@ -201,7 +201,7 @@
 "createProfile.title" = "Personalizza il tuo profilo";
 "createProfile.enterNameLabel" = "Inserire un nome da visualizzare";
 "createProfile.enterNamePlaceholder" = "Inserire il nome";
-"createProfile.subtitle" = "Your profile is only shared with your contacts. The profile can be changed at any time.";
+"createProfile.subtitle" = "Il tuo profilo è condiviso solo con i tuoi contatti. Puoi modificarlo in qualsiasi momento.";
 "createProfile.createProfilePicture" = "Foto profilo";
 
 // Create Account form
@@ -218,21 +218,21 @@
 "createAccount.creatingAccount" = "Creazione account";
 "createAccount.nameExplanation" = "Puoi scegliere un nome utente per essere facilmente trovato e contattato su Jami.";
 "createAccount.newAccount" = "Nuovo profilo";
-"createAccount.encryptionEnabled" = "Password protection enabled";
-"createAccount.encrypt" = "Password protect";
+"createAccount.encryptionEnabled" = "Protezione tramite password abilitata";
+"createAccount.encrypt" = "Protezione tramite password";
 "createAccount.customize" = "Personalizza";
-"createAccount.encryptTitle" = "Password protect account";
+"createAccount.encryptTitle" = "Account protetto con password";
 "createAccount.encryptExplanation" = "Un account Jami viene creato e memorizzato localmente solo su questo dispositivo, come archivio contenente le chiavi dell'account. L'accesso a questo archivio può essere protetto da una password.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Importa account";
 "linkToAccount.showQrCode" = "Codice QR";
-"linkToAccount.showPinCode" = "Authentication code";
-"linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
+"linkToAccount.showPinCode" = "Codice di autenticazione";
+"linkToAccount.actionRequired" = "Azione richiesta.\nConferma l'account sul dispositivo di origine.";
 "linkToAccount.allSet" = "L'account è stato importato correttamente.";
-"linkToAccount.goToAccounts" = "Go to imported account";
-"linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
-"linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
+"linkToAccount.goToAccounts" = "Vai all'account importato";
+"linkToAccount.exportInstructions" = "Sul dispositivo di origine, avviare l'esportazione.";
+"linkToAccount.exportInstructionsPath" = "Seleziona Account → Impostazioni account → Associa nuovo dispositivo.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
 "linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
@@ -358,7 +358,7 @@
 "accountPage.usernameRegisterAction" = "Registrati";
 "accountPage.usernameRegistrationFailedTitle" = "Registrazione fallita";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.createPassword" = "Account protetto con password";
 "accountPage.changePassword" = "Cambia password";
 "accountPage.currentPasswordPlaceholder" = "Inserire la password attuale";
 "accountPage.newPasswordPlaceholder" = "Inserire la nuova password";
@@ -390,7 +390,7 @@
 "accountPage.profileNamePlaceholder" = "Inserire il nome del profilo";
 "accountPage.editProfile" = "Modifica profilo";
 "accountPage.manageAccount" = "Gestisci account";
-"accountPage.encryptAccount" = "Password protect account";
+"accountPage.encryptAccount" = "Account protetto con password";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
 "accountPage.passwordsDoNotMatch" = "Le password non corrispondono.";
 "accountPage.passwordCreated" = "Password creata";
@@ -563,8 +563,12 @@
 "aboutJami.noWarranty2" = "versione 3 o successiva per i dettagli.";
 "aboutJami.contribute" = "Contribuisci";
 "aboutJami.feedback" = "Feedback";
-"aboutJami.createdBy" = "Creato da";
-"aboutJami.artworkBy" = "Grafica di";
+"aboutJami.developers" = "Developers";
+"aboutJami.media" = "Media";
+"aboutJami.communityManagement" = "Community Management";
+"aboutJami.specialThanks" = "Special thanks to";
+"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
+"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
 
 // Accessibility
 "accessibility.close" = "Chiudi";

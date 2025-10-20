@@ -1,19 +1,19 @@
 ﻿/*
- *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 // Global
@@ -42,7 +42,7 @@
 "global.copy" = "Copier";
 "global.reply" = "Répondre";
 "global.search" = "Recherche en cours ...";
-"global.supportJami" = "Support Jami project";
+"global.supportJami" = "Soutenez le projet Jami";
 "global.deleteMessage" = "Supprimer le message";
 "global.deleteFile" = "Supprime le fichier de l'appareil";
 "global.editMessage" = "Modifier le message";
@@ -71,8 +71,8 @@
 "swarm.leaveConversation" = "Quitter la conversation";
 "swarm.removeConversation" = "Supprimer la conversation";
 "swarm.removeContact" = "Retirer le contact";
-"swarm.restartConversation" = "Restart conversation";
-"swarm.conversationEnded" = "Conversation ended";
+"swarm.restartConversation" = "Redémarrer la conversation";
+"swarm.conversationEnded" = "Conversation terminée";
 "swarm.chooseColor" = "Couleur de conversation";
 "swarm.typeOfSwarm" = "Type de conversation";
 "swarm.identifier" = "Identifiant ";
@@ -104,7 +104,7 @@
 "swarm.admin" = "Administrateur";
 "swarm.blocked" = "Bloqué";
 "swarm.unknown" = "Inconnu";
-"swarm.left" = "Left";
+"swarm.left" = "Gauche";
 "swarm.inviteMembers" = "Inviter des membres";
 "swarm.inviteSelectedMembers" = "Inviter les contacts sélectionnés.";
 "swarm.inviteMembersSelected" = "Sélectionné";
@@ -270,10 +270,10 @@
 "alerts.dbFailedTitle" = "Une erreur s'est produite au démarrage de Jami";
 "alerts.dbFailedMessage" = "Veuillez fermer l'application et réessayez";
 "alerts.confirmBlockContact" = "Êtes-vous certain de vouloir bloquer ce contact ? L'historique des conversations avec ce contact sera supprimé définitivement.";
-"alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
+"alerts.confirmDeleteConversation" = "Voulez-vous supprimer définitivement cette conversation ?";
 "alerts.confirmLeaveConversation" = "Souhaitez-vous quitter cette conversation ?";
-"alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
-"alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
+"alerts.confirmRemoveOneToOneConversation" = "Voulez-vous supprimer cette conversation ? L'historique existant sera supprimé. Une nouvelle conversation peut être démarrée si vous n'avez pas d'autres conversations avec ce contact.";
+"alerts.confimRemoveContact" = "Voulez-vous supprimer ce contact ? L'historique existant sera supprimé.";
 "alerts.confirmDeleteConversationFromContact" = "Êtes-vous certain de vouloir effacer cette conversation avec ce contact ? ";
 "alerts.confirmDeleteConversationTitle" = "Supprimer cette conversation";
 "alerts.noMediaPermissionsTitle" = "L'accès au média non autorisé";
@@ -563,8 +563,12 @@
 "aboutJami.noWarranty2" = "version 3 ou supérieure pour plus de détails.";
 "aboutJami.contribute" = "Contribuez";
 "aboutJami.feedback" = "Commentaires";
-"aboutJami.createdBy" = "Créés par";
-"aboutJami.artworkBy" = "Création graphique";
+"aboutJami.developers" = "Developers";
+"aboutJami.media" = "Media";
+"aboutJami.communityManagement" = "Community Management";
+"aboutJami.specialThanks" = "Special thanks to";
+"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
+"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
 
 // Accessibility
 "accessibility.close" = "Fermer";
