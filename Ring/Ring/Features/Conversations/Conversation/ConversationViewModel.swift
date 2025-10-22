@@ -607,7 +607,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return false }
         guard let contact = self.contactsService.contact(withHash: jamiId) else { return false }
-        return contact.banned
+        return contact.blocked
     }
 }
 
@@ -621,8 +621,8 @@ extension ConversationViewModel {
 
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
         if let contact = self.contactsService.contact(withHash: jamiId) {
-            // Exit if the contact is banned
-            guard !contact.banned else { return }
+            // Exit if the contact is blocked
+            guard !contact.blocked else { return }
 
             // Subscribe to presence updates for the contact
             subscribePresence(contactId: jamiId)

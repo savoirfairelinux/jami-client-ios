@@ -269,7 +269,7 @@ class ConversationsManager {
                       account == currentAccount,
                       let contact = self.contactsService.contact(withHash: jamiId)
                 else { return }
-                if !contact.banned {
+                if !contact.blocked {
                     self.presenceService.subscribeBuddy(withAccountId: accountId, withJamiId: jamiId, withFlag: true)
                 }
                 guard account.isJams, !contact.conversationId.isEmpty else { return }

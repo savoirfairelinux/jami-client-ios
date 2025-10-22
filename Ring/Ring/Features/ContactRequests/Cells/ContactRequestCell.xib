@@ -128,7 +128,7 @@
             <connections>
                 <outlet property="acceptButton" destination="feR-9F-sZM" id="N3u-Ww-sE5"/>
                 <outlet property="avatarView" destination="9NG-xW-Y5g" id="aDt-m2-cB5"/>
-                <outlet property="banButton" destination="Pni-bm-rkr" id="v1p-37-zfP"/>
+                <outlet property="blockButton" destination="Pni-bm-rkr" id="v1p-37-zfP"/>
                 <outlet property="buttonsContainer" destination="klf-Xm-XH9" id="bik-xo-AVS"/>
                 <outlet property="discardButton" destination="fWB-HR-tae" id="ZMu-NC-hE4"/>
                 <outlet property="nameLabel" destination="Dla-OF-biH" id="tO5-og-I3P"/>

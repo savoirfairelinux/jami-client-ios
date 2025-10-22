@@ -1,23 +1,19 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
- *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import UIKit
@@ -30,7 +26,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var discardButton: UIButton!
-    @IBOutlet weak var banButton: UIButton!
+    @IBOutlet weak var blockButton: UIButton!
     @IBOutlet weak var buttonsContainer: UIStackView!
     var deletable = false
 
@@ -43,7 +39,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
 
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        drawBanButtonImage()
+        drawBlockButtonImage()
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
@@ -61,18 +57,18 @@ class ContactRequestCell: UITableViewCell, NibReusable {
         self.disposeBag = DisposeBag()
     }
 
-    func drawBanButtonImage() {
+    func drawBlockButtonImage() {
         let line = UIBezierPath()
-        line.move(to: CGPoint(x: banButton.bounds.width - 13, y: 13))
-        line.addLine(to: CGPoint(x: 13, y: banButton.bounds.height - 13))
+        line.move(to: CGPoint(x: blockButton.bounds.width - 13, y: 13))
+        line.addLine(to: CGPoint(x: 13, y: blockButton.bounds.height - 13))
         line.close()
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = line.cgPath
         shapeLayer.strokeColor = UIColor.red.cgColor
         shapeLayer.lineWidth = 2
-        banButton.layer.addSublayer(shapeLayer)
+        blockButton.layer.addSublayer(shapeLayer)
         acceptButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
-        banButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
+        blockButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
         discardButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
     }
 
