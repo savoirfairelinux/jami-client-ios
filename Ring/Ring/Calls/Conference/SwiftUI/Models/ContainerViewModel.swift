@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2023 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2023-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -431,7 +429,7 @@ class ContainerViewModel: ObservableObject {
                 switch state {
                 case .raiseHand:
                     guard let local = self.getLocal()?.info else { return }
-                    self.conferenceActionsModel.togleRaiseHand(state: !local.isHandRaised, conferenceId: self.callId, deviceId: local.device)
+                    self.conferenceActionsModel.toggleRaiseHand(state: !local.isHandRaised, conferenceId: self.callId, deviceId: local.device)
                 default:
                     break
                 }
