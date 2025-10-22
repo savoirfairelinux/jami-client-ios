@@ -1,21 +1,19 @@
 /*
- *  Copyright (C) 2023 Savoir-faire Linux Inc.
+ * Copyright (C) 2023-2025 Savoir-faire Linux Inc.
  *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import Foundation
@@ -55,7 +53,7 @@ class ButtonInfoWrapper: ObservableObject {
 }
 
 enum ParticipantAction: State {
-    case hangup(info: ConferenceParticipant)
+    case endCall(info: ConferenceParticipant)
     case minimize(info: ConferenceParticipant)
     case maximize(info: ConferenceParticipant)
     case setModerator(info: ConferenceParticipant)
@@ -82,7 +80,7 @@ enum CallAction: State {
     case toggleAudio
     case toggleVideo
     case pauseCall
-    case hangUpCall
+    case endCall
     case addParticipant
     case switchCamera
     case toggleSpeaker
@@ -102,8 +100,8 @@ enum CallAction: State {
             return ButtonInfo(background: .clear, stroke: .white, name: "video", accessibilityLabelValue: L10n.Accessibility.Calls.Default.toggleVideo, action: self)
         case .pauseCall:
             return ButtonInfo(background: .clear, stroke: .white, name: "pause.fill", accessibilityLabelValue: L10n.Accessibility.Calls.Default.pauseCall, action: self)
-        case .hangUpCall:
-            return ButtonInfo(background: .red, stroke: .red, name: "phone.down", accessibilityLabelValue: L10n.Accessibility.Calls.Default.hangUpCall, action: self)
+        case .endCall:
+            return ButtonInfo(background: .red, stroke: .red, name: "phone.down", accessibilityLabelValue: L10n.Accessibility.Calls.Default.endCall, action: self)
         case .addParticipant:
             return ButtonInfo(background: .clear, stroke: .white, name: "person.fill.badge.plus", accessibilityLabelValue: L10n.Accessibility.Calls.Default.addParticipant, action: self)
         case .switchCamera:
@@ -139,11 +137,11 @@ enum CallAction: State {
                               name: "play",
                               accessibilityLabelValue: L10n.Accessibility.Calls.Alter.pauseCall,
                               action: self)
-        case .hangUpCall:
+        case .endCall:
             return ButtonInfo(background: .red,
                               stroke: .red,
                               name: "phone.down",
-                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.hangUpCall,
+                              accessibilityLabelValue: L10n.Accessibility.Calls.Alter.endCall,
                               action: self)
         case .addParticipant:
             return ButtonInfo(background: .clear,
@@ -264,7 +262,7 @@ class ActionsViewModel {
         self.audioService = audioService
         self.micButton = ButtonInfoWrapper(info: CallAction.toggleAudio.defaultButtonInfo)
         self.videoButton = ButtonInfoWrapper(info: CallAction.toggleVideo.defaultButtonInfo)
-        self.stopCallButton = ButtonInfoWrapper(info: CallAction.hangUpCall.defaultButtonInfo)
+        self.stopCallButton = ButtonInfoWrapper(info: CallAction.endCall.defaultButtonInfo)
         self.switchCameraButton = ButtonInfoWrapper(info: CallAction.switchCamera.defaultButtonInfo)
         self.speakerButton = ButtonInfoWrapper(info: CallAction.toggleSpeaker.defaultButtonInfo)
         self.addParticipantButton = ButtonInfoWrapper(info: CallAction.addParticipant.defaultButtonInfo)

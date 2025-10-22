@@ -1,21 +1,19 @@
 /*
- *  Copyright (C) 2020-2023 Savoir-faire Linux Inc.
+ * Copyright (C) 2020-2025 Savoir-faire Linux Inc.
  *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import XCTest
@@ -116,7 +114,7 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let role = RoleInCall.host
         let active: Bool? = true
         let isHost = false
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) == [.hangup])
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) == [.endCall])
     }
 
     func testGetMenuItemsForRingingCall() {
@@ -127,7 +125,7 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let role = RoleInCall.host
         let active: Bool? = true
         let isHost = false
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) == [.hangup])
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) == [.endCall])
     }
 
     func testGetMenuItemsForHoldingCall() {
@@ -138,7 +136,7 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let role = RoleInCall.host
         let active: Bool? = true
         let isHost = false
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) == [.hangup])
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) == [.endCall])
     }
 
     func testGetMenuItemsForCallWithConferenceGridLayout() {
@@ -150,7 +148,7 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let role = RoleInCall.host
         let active: Bool? = true
         let isHost = false
-        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) == [.lowerHand, .maximize, .muteAudio, .setModerator, .hangup])
+        XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) == [.lowerHand, .maximize, .muteAudio, .setModerator, .endCall])
     }
 
     func testGetMenuItemsForActiveCallWithConferenceOneWithSmalLayout() {
@@ -163,7 +161,7 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let active: Bool? = true
         let isHost = false
         XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) ==
-                        [.lowerHand, .maximize, .minimize, .muteAudio, .setModerator, .hangup])
+                        [.lowerHand, .maximize, .minimize, .muteAudio, .setModerator, .endCall])
     }
 
     func testGetMenuItemsForNotActiveCallWithConferenceOneWithSmalLayout() {
@@ -176,7 +174,7 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let active: Bool? = false
         let isHost = false
         XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) ==
-                        [.lowerHand, .maximize, .muteAudio, .setModerator, .hangup])
+                        [.lowerHand, .maximize, .muteAudio, .setModerator, .endCall])
     }
 
     func testGetMenuItemsForActiveCallWithConferenceOneLayout() {
@@ -189,7 +187,7 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let active: Bool? = true
         let isHost = false
         XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) ==
-                        [.lowerHand, .minimize, .muteAudio, .setModerator, .hangup])
+                        [.lowerHand, .minimize, .muteAudio, .setModerator, .endCall])
     }
 
     func testGetMenuItemsForNotActiveCallWithConferenceOneLayout() {
@@ -202,6 +200,6 @@ class ConferenceMenuItemsManagerTest: XCTestCase {
         let active: Bool? = false
         let isHost = false
         XCTAssertTrue(manager.getMenuItemsFor(call: call, isHost: isHost, conference: conference, active: active, role: role, isHandRised: true) ==
-                        [.lowerHand, .maximize, .muteAudio, .setModerator, .hangup])
+                        [.lowerHand, .maximize, .muteAudio, .setModerator, .endCall])
     }
 }

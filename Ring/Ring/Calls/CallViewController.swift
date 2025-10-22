@@ -133,7 +133,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             viewModel.toggleMuteVideo()
         case .pauseCall:
             viewModel.togglePauseCall()
-        case .hangUpCall:
+        case .endCall:
             self.handleHangUpCall()
         case .addParticipant:
             self.handleAddParticipant()

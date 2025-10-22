@@ -1,21 +1,19 @@
 /*
- *  Copyright (C) 2023 Savoir-faire Linux Inc.
+ * Copyright (C) 2023-2025 Savoir-faire Linux Inc.
  *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import Foundation
@@ -295,12 +293,12 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                            action: ParticipantAction.muteAudio(info: info))
             button.imageColor = self.audioMuted ? .red : .white
             conferenceActions.append(ButtonInfoWrapper(info: button))
-        case .hangup:
+        case .endCall:
             let button = ButtonInfo(background: .clear,
                                     stroke: .clear,
                                     name: "slash.circle",
-                                    accessibilityLabelValue: L10n.Accessibility.Conference.hangup,
-                                    action: ParticipantAction.hangup(info: info))
+                                    accessibilityLabelValue: L10n.Accessibility.Conference.endCall,
+                                    action: ParticipantAction.endCall(info: info))
             conferenceActions.append(ButtonInfoWrapper(info: button))
         case .lowerHand:
             let button =
