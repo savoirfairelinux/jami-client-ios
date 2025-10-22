@@ -22,7 +22,7 @@ import RxRelay
 enum CallServiceError: Error, LocalizedError {
     case acceptCallFailed
     case declineCallFailed
-    case hangUpCallFailed
+    case endCallFailed
     case holdCallFailed
     case unholdCallFailed
     case placeCallFailed
@@ -35,8 +35,8 @@ enum CallServiceError: Error, LocalizedError {
             return "Failed to accept call"
         case .declineCallFailed:
             return "Failed to decline call"
-        case .hangUpCallFailed:
-            return "Failed to hang up call"
+        case .endCallFailed:
+            return "Failed to end call"
         case .holdCallFailed:
             return "Failed to hold call"
         case .unholdCallFailed:
@@ -104,10 +104,10 @@ class CallManagementService {
         }
     }
 
-    func hangUp(callId: String) -> Completable {
-        return createObservableAction(callId: callId, error: .hangUpCallFailed) { [weak self] call in
+    func endCall(callId: String) -> Completable {
+        return createObservableAction(callId: callId, error: .endCallFailed) { [weak self] call in
             guard let self = self else { return false }
-            return self.callsAdapter.hangUpCall(callId, accountId: call.accountId)
+            return self.callsAdapter.endCall(callId, accountId: call.accountId)
         }
     }
 

@@ -86,8 +86,8 @@ class ConferenceActionsModel {
         self.callService.setModeratorParticipant(confId: conferenceId, participantId: participantId, active: active)
     }
 
-    func hangupParticipant(participantId: String, device: String, conferenceId: String) {
-        self.callService.hangupParticipant(confId: conferenceId, participantId: participantId, device: device)
+    func disconnectParticipant(participantId: String, device: String, conferenceId: String) {
+        self.callService.disconnectParticipant(confId: conferenceId, participantId: participantId, device: device)
     }
 
     func lowerHandFor(participantId: String, conferenceId: String, deviceId: String) {
