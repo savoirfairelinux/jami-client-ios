@@ -380,7 +380,7 @@ extension ConversationsCoordinator {
             return
         }
         if self.accountService.boothMode() {
-            self.callService.refuse(callId: call.callId)
+            self.callService.decline(callId: call.callId)
                 .subscribe()
                 .disposed(by: self.disposeBag)
             return

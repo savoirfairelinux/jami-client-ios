@@ -34,7 +34,7 @@ enum NotificationName: String {
     case enablePushNotifications
     case disablePushNotifications
     case acceptCallFromNotifications
-    case refuseCallFromNotifications
+    case declineCallFromNotifications
     case nameRegistered
     case restoreDefaultVideoDevice
 }

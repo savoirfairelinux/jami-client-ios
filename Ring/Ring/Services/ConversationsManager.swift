@@ -295,7 +295,7 @@ class ConversationsManager {
                 } else {
                     os_log("call provider decline call")
                     self.callService
-                        .refuse(callId: call.callId)
+                        .decline(callId: call.callId)
                         .subscribe()
                         .disposed(by: self.disposeBag)
                 }
