@@ -26,7 +26,7 @@
 
 - (BOOL)acceptCallWithId:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList;
 - (BOOL)declineCallWithId:(NSString*)callId accountId:(NSString*)accountId;
-- (BOOL)hangUpCall:(NSString*)callId accountId:(NSString*)accountId;
+- (BOOL)endCall:(NSString*)callId accountId:(NSString*)accountId;
 - (BOOL)holdCallWithId:(NSString*)callId accountId:(NSString*)accountId;
 - (BOOL)unholdCallWithId:(NSString*)callId accountId:(NSString*)accountId;
 - (void)playDTMF:(NSString*)code;
@@ -43,11 +43,11 @@
 - (NSArray*)getConferenceInfo:(NSString*)conferenceId accountId:(NSString*)accountId;
 - (NSDictionary<NSString*,NSString*>*)getConferenceDetails:(NSString*)conferenceId accountId:(NSString*)accountId;
 - (NSArray<NSString*>*)getConferenceCalls:(NSString*)conferenceId accountId:(NSString*)accountId;
-- (BOOL)hangUpConference:(NSString*)conferenceId accountId:(NSString*)accountId;
+- (BOOL)endConference:(NSString*)conferenceId accountId:(NSString*)accountId;
 - (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId accountId:(NSString*)accountId;
 - (void)setConferenceLayout:(int)layout forConference:(NSString*)conferenceId accountId:(NSString*)accountId;
 - (void)setConferenceModerator:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId active:(BOOL)isActive;
-- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId;
+- (void)disconnectConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId;
 -(void)muteStream:(NSString*)participantId
     forConference:(NSString*)conferenceId
         accountId:(NSString*)accountId

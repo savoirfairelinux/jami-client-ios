@@ -106,15 +106,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *joinCallAccountId;
 @property (nonatomic, copy, nullable) NSString *joinCallAccount2Id;
 
-@property (nonatomic, assign) NSInteger hangUpCallCallCount;
-@property (nonatomic, copy, nullable) NSString *hangUpCallCallId;
-@property (nonatomic, copy, nullable) NSString *hangUpCallAccountId;
-@property (nonatomic, assign) BOOL hangUpCallReturnValue;
+@property (nonatomic, assign) NSInteger endCallCallCount;
+@property (nonatomic, copy, nullable) NSString *endCallCallId;
+@property (nonatomic, copy, nullable) NSString *endCallAccountId;
+@property (nonatomic, assign) BOOL endCallReturnValue;
 
-@property (nonatomic, assign) NSInteger hangUpConferenceCallCount;
-@property (nonatomic, copy, nullable) NSString *hangUpConferenceCallId;
-@property (nonatomic, copy, nullable) NSString *hangUpConferenceAccountId;
-@property (nonatomic, assign) BOOL hangUpConferenceReturnValue;
+@property (nonatomic, assign) NSInteger endConferenceCallCount;
+@property (nonatomic, copy, nullable) NSString *endConferenceCallId;
+@property (nonatomic, copy, nullable) NSString *endConferenceAccountId;
+@property (nonatomic, assign) BOOL endConferenceReturnValue;
 
 @property (nonatomic, assign) NSInteger setActiveParticipantCallCount;
 @property (nonatomic, copy, nullable) NSString *setActiveParticipantJamiId;
@@ -132,11 +132,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *setConferenceModeratorAccountId;
 @property (nonatomic, assign) BOOL setConferenceModeratorActive;
 
-@property (nonatomic, assign) NSInteger hangupConferenceParticipantCallCount;
-@property (nonatomic, copy, nullable) NSString *hangupConferenceParticipantParticipantId;
-@property (nonatomic, copy, nullable) NSString *hangupConferenceParticipantConferenceId;
-@property (nonatomic, copy, nullable) NSString *hangupConferenceParticipantAccountId;
-@property (nonatomic, copy, nullable) NSString *hangupConferenceParticipantDeviceId;
+@property (nonatomic, assign) NSInteger endConferenceParticipantCallCount;
+@property (nonatomic, copy, nullable) NSString *endConferenceParticipantParticipantId;
+@property (nonatomic, copy, nullable) NSString *endConferenceParticipantConferenceId;
+@property (nonatomic, copy, nullable) NSString *endConferenceParticipantAccountId;
+@property (nonatomic, copy, nullable) NSString *endConferenceParticipantDeviceId;
 
 @property (nonatomic, assign) NSInteger muteStreamCallCount;
 @property (nonatomic, copy, nullable) NSString *muteStreamParticipantId;
@@ -160,14 +160,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)joinConference:(NSString*)confID call:(NSString*)callID accountId:(NSString*)accountId account2Id:(NSString*)account2Id;
 - (BOOL)joinConferences:(NSString*)firstConf secondConference:(NSString*)secondConf accountId:(NSString*)accountId account2Id:(NSString*)account2Id;
 - (BOOL)joinCall:(NSString*)firstCall second:(NSString*)secondCall accountId:(NSString*)accountId account2Id:(NSString*)account2Id;
-- (BOOL)hangUpCall:(NSString*)callId accountId:(NSString*)accountId;
-- (BOOL)hangUpConference:(NSString*)conferenceId accountId:(NSString*)accountId;
+- (BOOL)endCall:(NSString*)callId accountId:(NSString*)accountId;
+- (BOOL)endConference:(NSString*)conferenceId accountId:(NSString*)accountId;
 - (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId accountId:(NSString*)accountId;
 - (void)setConferenceLayout:(int)layout forConference:(NSString*)conferenceId accountId:(NSString*)accountId;
 
 // Method declarations for Participant Management
 - (void)setConferenceModerator:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId active:(BOOL)isActive;
-- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId;
+- (void)endConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId;
 -(void)muteStream:(NSString*)participantId
     forConference:(NSString*)conferenceId
         accountId:(NSString*)accountId
