@@ -429,7 +429,7 @@ class ContainerViewModel: ObservableObject {
                 switch state {
                 case .raiseHand:
                     guard let local = self.getLocal()?.info else { return }
-                    self.conferenceActionsModel.togleRaiseHand(state: !local.isHandRaised, conferenceId: self.callId, deviceId: local.device)
+                    self.conferenceActionsModel.toggleRaiseHand(state: !local.isHandRaised, conferenceId: self.callId, deviceId: local.device)
                 default:
                     break
                 }
