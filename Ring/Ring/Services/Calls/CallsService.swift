@@ -307,8 +307,8 @@ class CallsService: CallsAdapterDelegate {
         return callManagementService.decline(callId: callId)
     }
 
-    func hangUp(callId: String) -> Completable {
-        return callManagementService.hangUp(callId: callId)
+    func endCall(callId: String) -> Completable {
+        return callManagementService.endCall(callId: callId)
     }
 
     func hold(callId: String) -> Completable {
@@ -392,7 +392,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func stopCall(call: CallModel) {
-        self.callsAdapter.hangUpCall(call.callId, accountId: call.accountId)
+        self.callsAdapter.endCall(call.callId, accountId: call.accountId)
     }
 
     func playDTMF(code: String) {
@@ -475,8 +475,8 @@ class CallsService: CallsAdapterDelegate {
             .disposed(by: self.disposeBag)
     }
 
-    func hangUpCallOrConference(callId: String, isSwarm: Bool, callURI: String) {
-        conferenceManagementService.hangUpCallOrConference(callId: callId, isSwarm: isSwarm)
+    func endCallOrDisconnectConference(callId: String, isSwarm: Bool, callURI: String) {
+        conferenceManagementService.endCallOrDisconnectConference(callId: callId, isSwarm: isSwarm)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .observe(on: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .subscribe(onCompleted: {
@@ -505,8 +505,8 @@ class CallsService: CallsAdapterDelegate {
         conferenceManagementService.setModeratorParticipant(confId: confId, participantId: participantId, active: active)
     }
 
-    func hangupParticipant(confId: String, participantId: String, device: String) {
-        conferenceManagementService.hangupParticipant(confId: confId, participantId: participantId, device: device)
+    func disconnectParticipant(confId: String, participantId: String, device: String) {
+        conferenceManagementService.disconnectParticipant(confId: confId, participantId: participantId, device: device)
     }
 
     func muteStream(confId: String, participantId: String, device: String, accountId: String, streamId: String, state: Bool) {

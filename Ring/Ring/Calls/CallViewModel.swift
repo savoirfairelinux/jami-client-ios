@@ -295,7 +295,7 @@ extension CallViewModel {
     func cancelCall() {
         guard let call = call else { return }
         self.callService
-            .hangUpCallOrConference(callId: self.conferenceId, isSwarm: isCallForSwarm(), callURI: call.callUri)
+            .endCallOrDisconnectConference(callId: self.conferenceId, isSwarm: isCallForSwarm(), callURI: call.callUri)
     }
 
     func isCallForSwarm() -> Bool {

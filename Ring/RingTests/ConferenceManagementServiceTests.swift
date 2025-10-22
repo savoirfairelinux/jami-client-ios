@@ -1,19 +1,19 @@
 /*
- *  Copyright (C) 2025-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2025-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import XCTest
@@ -342,87 +342,87 @@ class ConferenceManagementServiceTests: XCTestCase {
         XCTAssertEqual(conferenceId, TestConstants.conferenceId, "Call should be added to the expected pending conference")
     }
 
-    // MARK: - Hang Up Tests
-    func testHangUpCall() {
-        let expectation = XCTestExpectation(description: "Hang up call completed")
-        mockCallsAdapter.hangUpCallReturnValue = true
+    // MARK: - End Tests
+    func testEndCall() {
+        let expectation = XCTestExpectation(description: "End call completed")
+        mockCallsAdapter.endCallReturnValue = true
         setupCallWithSingleParticipant(CallTestConstants.callId)
 
-        let hangupCompletable = conferenceManagementService.hangUpCallOrConference(callId: CallTestConstants.callId, isSwarm: false)
+        let endCallCompletable = conferenceManagementService.endCallOrDisconnectConference(callId: CallTestConstants.callId, isSwarm: false)
 
-        hangupCompletable
+        endCallCompletable
             .subscribe(onCompleted: {
                 expectation.fulfill()
             }, onError: { error in
-                XCTFail("Hang up call should complete without error: \(error)")
+                XCTFail("End call should complete without error: \(error)")
             })
             .disposed(by: disposeBag)
 
         wait(for: [expectation], timeout: 1.0)
         verifyAdapter(
-            property: mockCallsAdapter.hangUpCallCallCount,
+            property: mockCallsAdapter.endCallCallCount,
             expectedValue: 1,
-            message: "Hang up call should be called once"
+            message: "End call should be called once"
         )
         verifyAdapter(
-            property: mockCallsAdapter.hangUpConferenceCallCount,
+            property: mockCallsAdapter.disconnectConferenceCallCount,
             expectedValue: 0,
-            message: "Hang up conference should not be called"
+            message: "Disconnect conference should not be called"
         )
         verifyAdapter(
-            property: mockCallsAdapter.hangUpCallCallId,
+            property: mockCallsAdapter.endCallCallId,
             expectedValue: CallTestConstants.callId,
             message: "Call ID should match"
         )
     }
 
-    func testHangUpConference() {
-        let expectation = XCTestExpectation(description: "Hang up conference completed")
-        mockCallsAdapter.hangUpConferenceReturnValue = true
+    func testDisconnectConference() {
+        let expectation = XCTestExpectation(description: "Disconnect conference completed")
+        mockCallsAdapter.disconnectConferenceReturnValue = true
         setupCallWithMultipleParticipants(
             TestConstants.conferenceId,
             participants: [CallTestConstants.callId, TestConstants.secondCallId]
         )
 
-        let hangupCompletable = conferenceManagementService.hangUpCallOrConference(callId: TestConstants.conferenceId, isSwarm: false)
+        let endCallCompletable = conferenceManagementService.endCallOrDisconnectConference(callId: TestConstants.conferenceId, isSwarm: false)
 
-        hangupCompletable
+        endCallCompletable
             .subscribe(onCompleted: {
                 expectation.fulfill()
             }, onError: { error in
-                XCTFail("Hang up conference should complete without error: \(error)")
+                XCTFail("Disconnect conference should complete without error: \(error)")
             })
             .disposed(by: disposeBag)
 
         wait(for: [expectation], timeout: 1.0)
         verifyAdapter(
-            property: mockCallsAdapter.hangUpCallCallCount,
+            property: mockCallsAdapter.endCallCallCount,
             expectedValue: 0,
-            message: "Hang up call should not be called"
+            message: "End call should not be called"
         )
         verifyAdapter(
-            property: mockCallsAdapter.hangUpConferenceCallCount,
+            property: mockCallsAdapter.disconnectConferenceCallCount,
             expectedValue: 1,
-            message: "Hang up conference should be called once"
+            message: "Disconnect conference should be called once"
         )
         verifyAdapter(
-            property: mockCallsAdapter.hangUpConferenceCallId,
+            property: mockCallsAdapter.disconnectConferenceCallId,
             expectedValue: TestConstants.conferenceId,
             message: "Conference ID should match"
         )
     }
 
-    func testHangUpCallFailure() {
-        let expectation = XCTestExpectation(description: "Hang up call failed")
-        mockCallsAdapter.hangUpCallReturnValue = false
+    func testEndCallFailure() {
+        let expectation = XCTestExpectation(description: "End call failed")
+        mockCallsAdapter.endCallReturnValue = false
 
-        let hangupCompletable = conferenceManagementService.hangUpCallOrConference(callId: CallTestConstants.callId, isSwarm: false)
+        let endCallCompletable = conferenceManagementService.endCallOrDisconnectConference(callId: CallTestConstants.callId, isSwarm: false)
 
-        hangupCompletable
+        endCallCompletable
             .subscribe(onCompleted: {
-                XCTFail("Hang up call should not complete")
+                XCTFail("End call should not complete")
             }, onError: { error in
-                if let callError = error as? CallServiceError, callError == CallServiceError.hangUpCallFailed {
+                if let callError = error as? CallServiceError, callError == CallServiceError.endCallFailed {
                     expectation.fulfill()
                 } else {
                     XCTFail("Unexpected error: \(error)")
@@ -432,9 +432,9 @@ class ConferenceManagementServiceTests: XCTestCase {
 
         wait(for: [expectation], timeout: 1.0)
         verifyAdapter(
-            property: mockCallsAdapter.hangUpCallCallCount,
+            property: mockCallsAdapter.endCallCallCount,
             expectedValue: 1,
-            message: "Hang up call should be called once"
+            message: "End call should be called once"
         )
     }
 
@@ -854,11 +854,11 @@ class ConferenceManagementServiceTests: XCTestCase {
         )
     }
 
-    func testHangupParticipant() {
-        let expectation = XCTestExpectation(description: "Hangup participant completed")
+    func testDisconnectParticipant() {
+        let expectation = XCTestExpectation(description: "Disconnect participant completed")
         setupCallWithSingleParticipant(TestConstants.conferenceId)
 
-        conferenceManagementService.hangupParticipant(
+        conferenceManagementService.disconnectParticipant(
             confId: TestConstants.conferenceId,
             participantId: TestConstants.participantURI,
             device: TestConstants.deviceId
@@ -868,22 +868,22 @@ class ConferenceManagementServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
 
         verifyAdapter(
-            property: mockCallsAdapter.hangupConferenceParticipantCallCount,
+            property: mockCallsAdapter.disconnectConferenceParticipantCallCount,
             expectedValue: 1,
-            message: "Hangup conference participant should be called"
+            message: "Disconnect conference participant should be called"
         )
         verifyAdapter(
-            property: mockCallsAdapter.hangupConferenceParticipantParticipantId,
+            property: mockCallsAdapter.disconnectConferenceParticipantParticipantId,
             expectedValue: TestConstants.participantURI,
             message: "Participant ID should match"
         )
         verifyAdapter(
-            property: mockCallsAdapter.hangupConferenceParticipantConferenceId,
+            property: mockCallsAdapter.disconnectConferenceParticipantConferenceId,
             expectedValue: TestConstants.conferenceId,
             message: "Conference ID should match"
         )
         verifyAdapter(
-            property: mockCallsAdapter.hangupConferenceParticipantDeviceId,
+            property: mockCallsAdapter.disconnectConferenceParticipantDeviceId,
             expectedValue: TestConstants.deviceId,
             message: "Device ID should match"
         )
