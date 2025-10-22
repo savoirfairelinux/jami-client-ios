@@ -303,8 +303,8 @@ class CallsService: CallsAdapterDelegate {
         return callManagementService.accept(callId: callId)
     }
 
-    func refuse(callId: String) -> Completable {
-        return callManagementService.refuse(callId: callId)
+    func decline(callId: String) -> Completable {
+        return callManagementService.decline(callId: callId)
     }
 
     func hangUp(callId: String) -> Completable {

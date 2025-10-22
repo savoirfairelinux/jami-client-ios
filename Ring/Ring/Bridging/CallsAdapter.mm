@@ -190,7 +190,7 @@ static id <CallsAdapterDelegate> _delegate;
     return acceptWithMedia(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
 }
 
-- (BOOL)refuseCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
+- (BOOL)declineCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
     return refuse(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 

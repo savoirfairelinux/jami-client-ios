@@ -1,19 +1,19 @@
 /*
- *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import RxSwift
@@ -21,7 +21,7 @@ import RxRelay
 
 enum CallServiceError: Error, LocalizedError {
     case acceptCallFailed
-    case refuseCallFailed
+    case declineCallFailed
     case hangUpCallFailed
     case holdCallFailed
     case unholdCallFailed
@@ -33,8 +33,8 @@ enum CallServiceError: Error, LocalizedError {
         switch self {
         case .acceptCallFailed:
             return "Failed to accept call"
-        case .refuseCallFailed:
-            return "Failed to refuse call"
+        case .declineCallFailed:
+            return "Failed to decline call"
         case .hangUpCallFailed:
             return "Failed to hang up call"
         case .holdCallFailed:
@@ -97,10 +97,10 @@ class CallManagementService {
         }
     }
 
-    func refuse(callId: String) -> Completable {
-        return createObservableAction(callId: callId, error: .refuseCallFailed) { [weak self] call in
+    func decline(callId: String) -> Completable {
+        return createObservableAction(callId: callId, error: .declineCallFailed) { [weak self] call in
             guard let self = self else { return false }
-            return self.callsAdapter.refuseCall(withId: callId, accountId: call.accountId)
+            return self.callsAdapter.declineCall(withId: callId, accountId: call.accountId)
         }
     }
 

@@ -1,19 +1,19 @@
 /*
- *  Copyright (C) 2025-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2025-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import XCTest
@@ -232,33 +232,33 @@ class CallManagementServiceTests: XCTestCase {
         XCTAssertEqual(mockCallsAdapter.acceptCallIdMediaList?.count, 1, "Media list should match")
     }
 
-    func testRefuse() {
+    func testDecline() {
         let call = CallModel.createTestCall()
 
         calls.update { calls in
             calls[CallTestConstants.callId] = call
         }
 
-        mockCallsAdapter.refuseCallReturnValue = true
+        mockCallsAdapter.declineCallReturnValue = true
 
-        let expectation = XCTestExpectation(description: "Refuse call completes")
+        let expectation = XCTestExpectation(description: "Decline call completes")
 
-        callManagementService.refuse(callId: CallTestConstants.callId)
+        callManagementService.decline(callId: CallTestConstants.callId)
             .subscribe(
                 onCompleted: {
                     expectation.fulfill()
                 },
                 onError: { error in
-                    XCTFail("Refuse call should not fail: \(error)")
+                    XCTFail("Decline call should not fail: \(error)")
                 }
             )
             .disposed(by: disposeBag)
 
         wait(for: [expectation], timeout: 1.0)
 
-        XCTAssertEqual(mockCallsAdapter.refuseCallIdCount, 1, "Refuse call should be called once")
-        XCTAssertEqual(mockCallsAdapter.refuseCallIdCallId, CallTestConstants.callId, "Call ID should match")
-        XCTAssertEqual(mockCallsAdapter.refuseCallIdAccountId, CallTestConstants.accountId, "Account ID should match")
+        XCTAssertEqual(mockCallsAdapter.declineCallIdCount, 1, "Decline call should be called once")
+        XCTAssertEqual(mockCallsAdapter.declineCallIdCallId, CallTestConstants.callId, "Call ID should match")
+        XCTAssertEqual(mockCallsAdapter.declineCallIdAccountId, CallTestConstants.accountId, "Account ID should match")
     }
 
     func testHangUp() {
@@ -356,16 +356,16 @@ extension ObjCMockCallsAdapter {
         return self.acceptCallWithIdMediaList as? [[String: String]]
     }
 
-    var refuseCallIdCount: Int {
-        return Int(self.refuseCallWithIdCount)
+    var declineCallIdCount: Int {
+        return Int(self.declineCallWithIdCount)
     }
 
-    var refuseCallIdCallId: String? {
-        return self.refuseCallWithIdCallId
+    var declineCallIdCallId: String? {
+        return self.declineCallWithIdCallId
     }
 
-    var refuseCallIdAccountId: String? {
-        return self.refuseCallWithIdAccountId
+    var declineCallIdAccountId: String? {
+        return self.declineCallWithIdAccountId
     }
 
     var placeCallAccountIdCount: Int {

@@ -39,11 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSArray *acceptCallWithIdMediaList;
 @property (nonatomic, assign) BOOL acceptCallReturnValue;
 
-// Refuse call
-@property (nonatomic, assign) NSInteger refuseCallWithIdCount;
-@property (nonatomic, copy, nullable) NSString *refuseCallWithIdCallId;
-@property (nonatomic, copy, nullable) NSString *refuseCallWithIdAccountId;
-@property (nonatomic, assign) BOOL refuseCallReturnValue;
+// Decline call
+@property (nonatomic, assign) NSInteger declineCallWithIdCount;
+@property (nonatomic, copy, nullable) NSString *declineCallWithIdCallId;
+@property (nonatomic, copy, nullable) NSString *declineCallWithIdAccountId;
+@property (nonatomic, assign) BOOL declineCallReturnValue;
 
 // Place call
 @property (nonatomic, assign) NSInteger placeCallWithAccountIdCount;
