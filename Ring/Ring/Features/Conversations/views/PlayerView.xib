@@ -32,8 +32,8 @@
                 <outlet property="progressSlider" destination="8XG-XX-SQd" id="TbR-WE-p5T"/>
                 <outlet property="progressSliderLeadingConstraint" destination="jMX-Ml-vVY" id="v2R-xg-liW"/>
                 <outlet property="togglePause" destination="sFU-4q-kSY" id="KVY-aj-HRG"/>
-                <outlet property="toglePauseHeightConstraint" destination="uRy-yt-VfB" id="zcE-DN-6Ju"/>
-                <outlet property="toglePauseWidthConstraint" destination="TYW-Hg-5PI" id="HTe-5M-XdM"/>
+                <outlet property="togglePauseHeightConstraint" destination="uRy-yt-VfB" id="zcE-DN-6Ju"/>
+                <outlet property="togglePauseWidthConstraint" destination="TYW-Hg-5PI" id="HTe-5M-XdM"/>
                 <outlet property="topConstraint" destination="lt1-5Z-xHX" id="LYS-xd-gg9"/>
                 <outlet property="topGradient" destination="4BH-wO-znU" id="7xx-7k-twS"/>
                 <outlet property="topGradientViewHeight" destination="1TB-KU-bWr" id="AOw-No-Y7s"/>
