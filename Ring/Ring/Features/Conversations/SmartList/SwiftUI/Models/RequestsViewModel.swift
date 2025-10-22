@@ -26,7 +26,7 @@ enum RequestStatus {
     case pending
     case accepted
     case declined
-    case banned
+    case blocked
 
     func toString() -> String {
         switch self {
@@ -36,7 +36,7 @@ enum RequestStatus {
             return L10n.Invitations.accepted
         case .declined:
             return L10n.Invitations.declined
-        case .banned:
+        case .blocked:
             return L10n.Invitations.blocked
         }
     }
@@ -49,7 +49,7 @@ enum RequestStatus {
             return Color(UIColor.systemGreen)
         case .declined:
             return Color(UIColor.orange)
-        case .banned:
+        case .blocked:
             return Color(UIColor.systemRed)
         }
     }
@@ -224,7 +224,7 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
     }
 
     func requestBlocked() {
-        self.status = .banned
+        self.status = .blocked
     }
 
     func hash(into hasher: inout Hasher) {
@@ -424,7 +424,7 @@ class RequestsViewModel: ObservableObject {
     func block(requestRow: RequestRowViewModel) {
         processRequest(requestRow, action: .block) {
             guard let jamiId = requestRow.request.participants.first?.jamiId else { return }
-            self.removeContactAndBan(jamiId: jamiId, accountId: requestRow.request.accountId)
+            self.removeContactAndBlock(jamiId: jamiId, accountId: requestRow.request.accountId)
         }
     }
 
@@ -453,8 +453,8 @@ class RequestsViewModel: ObservableObject {
             .disposed(by: disposeBag)
     }
 
-    private func removeContactAndBan(jamiId: String, accountId: String) {
-        contactsService.removeContact(withId: jamiId, ban: true, withAccountId: accountId)
+    private func removeContactAndBlock(jamiId: String, accountId: String) {
+        contactsService.removeContact(withId: jamiId, block: true, withAccountId: accountId)
             .subscribe()
             .disposed(by: disposeBag)
     }
