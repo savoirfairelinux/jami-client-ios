@@ -194,8 +194,8 @@ static id <CallsAdapterDelegate> _delegate;
     return refuse(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
-- (BOOL)hangUpCall:(NSString*)callId accountId:(NSString*)accountId  {
-    return hangUp(std::string([accountId UTF8String]), std::string([callId UTF8String]));
+- (BOOL)endCall:(NSString*)callId accountId:(NSString*)accountId  {
+    return end(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
 - (BOOL)holdCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
@@ -277,8 +277,8 @@ static id <CallsAdapterDelegate> _delegate;
     return [Utils vectorToArray:calls];
 }
 
-- (BOOL)hangUpConference:(NSString*)conferenceId accountId:(NSString*)accountId {
-    return hangUpConference(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]));
+- (BOOL)endConference:(NSString*)conferenceId accountId:(NSString*)accountId {
+    return endConference(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]));
 }
 
 - (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId accountId:(NSString*)accountId {
@@ -293,8 +293,8 @@ static id <CallsAdapterDelegate> _delegate;
     setModerator(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), isActive);
 }
 
-- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId {
-    hangupParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), std::string([deviceId UTF8String]));
+- (void)endConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId {
+    endParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), std::string([deviceId UTF8String]));
 }
 
 -(void)muteStream:(NSString*)participantId
