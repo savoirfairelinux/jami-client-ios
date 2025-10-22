@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,5 +18,5 @@
 
 @objc protocol ContactsAdapterDelegate {
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool)
-    func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool)
+    func contactRemoved(contact uri: String, withAccountId accountId: String, blocked: Bool)
 }
