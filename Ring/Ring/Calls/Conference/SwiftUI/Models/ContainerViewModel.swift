@@ -490,9 +490,9 @@ extension ContainerViewModel {
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ParticipantAction else { return }
                 switch state {
-                case .hangup(let info):
+                case .endCall(let info):
                     guard let uri = info.uri else { return }
-                    self.conferenceActionsModel.hangupParticipant(participantId: uri, device: info.device, conferenceId: self.callId)
+                    self.conferenceActionsModel.disconnectParticipant(participantId: uri, device: info.device, conferenceId: self.callId)
                 case .maximize(let info):
                     guard let uri = info.uri else { return }
                     self.conferenceActionsModel.setActiveParticipant(participantId: uri, maximize: true, conferenceId: self.callId)
