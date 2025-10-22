@@ -35,11 +35,11 @@
     return self.acceptCallReturnValue;
 }
 
-- (BOOL)refuseCallWithId:(NSString *)callId accountId:(NSString *)accountId {
-    self.refuseCallWithIdCount++;
-    self.refuseCallWithIdCallId = callId;
-    self.refuseCallWithIdAccountId = accountId;
-    return self.refuseCallReturnValue;
+- (BOOL)declineCallWithId:(NSString *)callId accountId:(NSString *)accountId {
+    self.declineCallWithIdCount++;
+    self.declineCallWithIdCallId = callId;
+    self.declineCallWithIdAccountId = accountId;
+    return self.declineCallReturnValue;
 }
 
 - (NSString *)placeCallWithAccountId:(NSString *)accountId toParticipantId:(NSString *)participantId withMedia:(NSArray *)mediaList {
