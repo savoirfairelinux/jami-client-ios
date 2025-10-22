@@ -150,7 +150,7 @@ internal enum L10n {
         /// Add participant
         internal static let addParticipant = L10n.tr("Localizable", "accessibility.calls.alter.addParticipant", fallback: "Add participant")
         /// End call
-        internal static let hangUpCall = L10n.tr("Localizable", "accessibility.calls.alter.hangUpCall", fallback: "End call")
+        internal static let endCall = L10n.tr("Localizable", "accessibility.calls.alter.endCall", fallback: "End call")
         /// Open conversation
         internal static let openConversation = L10n.tr("Localizable", "accessibility.calls.alter.openConversation", fallback: "Open conversation")
         /// Resume call
@@ -172,7 +172,7 @@ internal enum L10n {
         /// Add participant
         internal static let addParticipant = L10n.tr("Localizable", "accessibility.calls.default.addParticipant", fallback: "Add participant")
         /// End call
-        internal static let hangUpCall = L10n.tr("Localizable", "accessibility.calls.default.hangUpCall", fallback: "End call")
+        internal static let endCall = L10n.tr("Localizable", "accessibility.calls.default.endCall", fallback: "End call")
         /// Open conversation
         internal static let openConversation = L10n.tr("Localizable", "accessibility.calls.default.openConversation", fallback: "Open conversation")
         /// Pause call
@@ -193,7 +193,7 @@ internal enum L10n {
     }
     internal enum Conference {
       /// End call
-      internal static let hangup = L10n.tr("Localizable", "accessibility.conference.hangup", fallback: "End call")
+      internal static let endCall = L10n.tr("Localizable", "accessibility.conference.endCall", fallback: "End call")
       /// Lower hand
       internal static let lowerHand = L10n.tr("Localizable", "accessibility.conference.lowerHand", fallback: "Lower hand")
       /// Maximize

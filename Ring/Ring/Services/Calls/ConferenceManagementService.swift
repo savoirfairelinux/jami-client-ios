@@ -1,19 +1,19 @@
 /*
- *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import RxSwift
@@ -81,32 +81,32 @@ class ConferenceManagementService {
         self.inConferenceCalls.onNext(call)
     }
 
-    func hangUpCallOrConference(callId: String, isSwarm: Bool) -> Completable {
+    func endCallOrConference(callId: String, isSwarm: Bool) -> Completable {
         return Completable.create { [weak self] completable in
             guard let self = self,
                   let call = self.calls.get()[callId] else {
-                completable(.error(CallServiceError.hangUpCallFailed))
+                completable(.error(CallServiceError.endCallFailed))
                 return Disposables.create()
             }
 
-            let success = self.hangUpCall(callId: callId, call: call, isSwarm: isSwarm)
+            let success = self.endCall(callId: callId, call: call, isSwarm: isSwarm)
 
             if success {
                 completable(.completed)
             } else {
-                completable(.error(CallServiceError.hangUpCallFailed))
+                completable(.error(CallServiceError.endCallFailed))
             }
 
             return Disposables.create()
         }
     }
 
-    private func hangUpCall(callId: String, call: CallModel, isSwarm: Bool) -> Bool {
+    private func endCall(callId: String, call: CallModel, isSwarm: Bool) -> Bool {
         if call.participantsCallId.count >= 2 || isSwarm {
-            return callsAdapter.hangUpConference(callId, accountId: call.accountId) ||
-                callsAdapter.hangUpCall(callId, accountId: call.accountId)
+            return callsAdapter.disconnectConference(callId, accountId: call.accountId) ||
+                callsAdapter.endCall(callId, accountId: call.accountId)
         } else {
-            return callsAdapter.hangUpCall(callId, accountId: call.accountId)
+            return callsAdapter.endCall(callId, accountId: call.accountId)
         }
     }
 
@@ -166,9 +166,9 @@ class ConferenceManagementService {
         callsAdapter.setConferenceModerator(participantId, forConference: confId, accountId: conference.accountId, active: active)
     }
 
-    func hangupParticipant(confId: String, participantId: String, device: String) {
+    func disconnectParticipant(confId: String, participantId: String, device: String) {
         guard let conference = calls.get()[confId] else { return }
-        callsAdapter.hangupConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId, deviceId: device)
+        callsAdapter.disconnectConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId, deviceId: device)
     }
 
     func muteStream(confId: String, participantId: String, device: String, accountId: String, streamId: String, state: Bool) {
