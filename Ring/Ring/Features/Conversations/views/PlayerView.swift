@@ -1,21 +1,19 @@
 /*
- *  Copyright (C) 2020 Savoir-faire Linux Inc.
+ * Copyright (C) 2020-2025 Savoir-faire Linux Inc.
  *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import UIKit
@@ -72,8 +70,8 @@ class PlayerView: UIView {
     @IBOutlet weak var playButtonCenterY: NSLayoutConstraint!
     @IBOutlet weak var playButtonCenterX: NSLayoutConstraint!
 
-    @IBOutlet weak var toglePauseWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var toglePauseHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var togglePauseWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var togglePauseHeightConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var muteAudioWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var muteAudioHeightConstraint: NSLayoutConstraint!
@@ -247,7 +245,7 @@ class PlayerView: UIView {
             .disposed(by: self.disposeBag)
         self.togglePause.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.toglePause()
+                self?.viewModel.togglePause()
             })
             .disposed(by: self.disposeBag)
     }
@@ -282,8 +280,8 @@ class PlayerView: UIView {
             self.trailingConstraint.constant = MAXCONSTRAINT
             self.leadingConstraint.constant = MAXCONSTRAINT - 8
             self.progressSliderLeadingConstraint.constant = MAXCONSTRAINT
-            self.toglePauseWidthConstraint.constant = MAXSIZE
-            self.toglePauseHeightConstraint.constant = MAXSIZE
+            self.togglePauseWidthConstraint.constant = MAXSIZE
+            self.togglePauseHeightConstraint.constant = MAXSIZE
             self.muteAudioWidthConstraint.constant = MAXSIZE
             self.muteAudioHeightConstraint.constant = MAXSIZE
             self.bottomGradientViewHeight.constant = MAXBOTTOMGRADIENTSIZE
@@ -310,8 +308,8 @@ class PlayerView: UIView {
             self.trailingConstraint.constant = MINCONSTRAINT
             self.leadingConstraint.constant = MINCONSTRAINT
             self.progressSliderLeadingConstraint.constant = SLIDEBARLEADINGCONSTRAINT
-            self.toglePauseWidthConstraint.constant = MINSIZE
-            self.toglePauseHeightConstraint.constant = MINSIZE
+            self.togglePauseWidthConstraint.constant = MINSIZE
+            self.togglePauseHeightConstraint.constant = MINSIZE
             self.muteAudioWidthConstraint.constant = MINSIZE
             self.muteAudioHeightConstraint.constant = MINSIZE
             self.playButtonCenterY.constant = 1
