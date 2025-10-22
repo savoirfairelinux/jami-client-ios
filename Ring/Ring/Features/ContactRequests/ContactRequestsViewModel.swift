@@ -1,21 +1,19 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import RxSwift
@@ -128,12 +126,12 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         return self.requestsService.discardConverversationRequest(conversationId: item.request.conversationId, withAccount: item.request.accountId)
     }
 
-    func ban(withItem item: RequestItem) -> Observable<Void> {
+    func block(withItem item: RequestItem) -> Observable<Void> {
         guard let jamiId = item.request.participants.first?.jamiId else { return Observable.empty() }
         if item.request.type == .contact || (item.request.isDialog() && self.contactsService.contact(withHash: jamiId) == nil) {
             let discardCompleted = self.requestsService.discardContactRequest(jamiId: jamiId, withAccount: item.request.accountId)
             let removeCompleted = self.contactsService.removeContact(withId: jamiId,
-                                                                     ban: true,
+                                                                     block: true,
                                                                      withAccountId: item.request.accountId)
 
             return Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
@@ -149,7 +147,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
            let participantId = item.request.participants.first?.jamiId {
             self.contactsService
                 .removeContact(withId: participantId,
-                               ban: false,
+                               block: false,
                                withAccountId: accountId)
                 .asObservable()
                 .subscribe(onCompleted: { [weak self] in

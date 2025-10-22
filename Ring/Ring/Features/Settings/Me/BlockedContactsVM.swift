@@ -1,21 +1,19 @@
 /*
- *  Copyright (C) 2024 Savoir-faire Linux Inc.
+ * Copyright (C) 2024-2025 Savoir-faire Linux Inc.
  *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import UIKit
@@ -103,7 +101,7 @@ class BlockedContactsRowVM: AvatarProvider, Identifiable {
     }
 
     func unblock() {
-        self.contactsService.unbanContact(contact: contact, account: account)
+        self.contactsService.unblockContact(contact: contact, account: account)
         self.presenceService.subscribeBuddy(withAccountId: account.id,
                                             withJamiId: contact.hash,
                                             withFlag: true)
@@ -121,15 +119,15 @@ class BlockedContactsVM: ObservableObject {
         self.account = account
         self.injectionBag = injectionBag
         self.contactService = injectionBag.contactsService
-        self.loadBannedContacts()
+        self.loadBlockedContacts()
     }
 
-    func loadBannedContacts() {
+    func loadBlockedContacts() {
         self.contactService.contacts
             .startWith(self.contactService.contacts.value)
             .map { [weak self] contacts -> [BlockedContactsRowVM] in
                 contacts.compactMap { contact -> BlockedContactsRowVM? in
-                    guard let self = self, contact.banned else {
+                    guard let self = self, contact.blocked else {
                         return nil
                     }
                     return BlockedContactsRowVM(contact: contact, account: self.account, injectionBag: self.injectionBag)
@@ -150,15 +148,15 @@ class BlockedContactsVM: ObservableObject {
                       let accountId: String = event.getEventInput(.accountId),
                       self.account.id == accountId
                 else { return }
-                let bannedContacts = self.contactService.contacts.value.compactMap { contact -> BlockedContactsRowVM? in
-                    guard contact.banned else {
+                let blockedContacts = self.contactService.contacts.value.compactMap { contact -> BlockedContactsRowVM? in
+                    guard contact.blocked else {
                         return nil
                     }
                     return BlockedContactsRowVM(contact: contact, account: self.account, injectionBag: self.injectionBag)
                 }
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.blockedContacts = bannedContacts
+                    self.blockedContacts = blockedContacts
                 }
 
             })

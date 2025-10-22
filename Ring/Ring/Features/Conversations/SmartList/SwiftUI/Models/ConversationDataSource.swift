@@ -1,19 +1,19 @@
 /*
- *  Copyright (C) 2024 Savoir-faire Linux Inc.
+ * Copyright (C) 2024-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import Foundation
@@ -160,25 +160,25 @@ class ConversationDataSource: ObservableObject {
                       let account = self.accountsService.currentAccount,
                       account.id == accountId else { return }
 
-                // Contact removed; if the contact is banned, move or add the conversation to banned
-                if let contact = self.contactsService.contact(withHash: peerUri), contact.banned {
+                // Contact removed; if the contact is blocked, move or add the conversation to blocked
+                if let contact = self.contactsService.contact(withHash: peerUri), contact.blocked {
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
-                        self.moveOrAddConversationToBanned(jamiId: peerUri, accountId: accountId)
+                        self.moveOrAddConversationToBlocked(jamiId: peerUri, accountId: accountId)
                     }
                 }
             })
             .disposed(by: disposeBag)
     }
 
-    private func moveOrAddConversationToBanned(jamiId: String, accountId: String) {
+    private func moveOrAddConversationToBlocked(jamiId: String, accountId: String) {
         // Check if the conversation is already in active conversations
         if let index = self.conversationViewModels.firstIndex(where: { $0.isCoreConversationWith(jamiId: jamiId) }) {
             let conversationViewModel = self.conversationViewModels.remove(at: index)
             conversationViewModel.updateBlockedStatus()
             self.blockedConversation.append(conversationViewModel)
         } else {
-            // Ignore if already in the banned
+            // Ignore if already in the blocked
             if self.blockedConversation.contains(where: { $0.isCoreConversationWith(jamiId: jamiId) }) { return }
             // If not, check if the conversation exists in conversationsService
             if let conversationModel = self.conversationsService.getConversationForParticipant(jamiId: jamiId, accountId: accountId) {
@@ -214,6 +214,6 @@ class ConversationDataSource: ObservableObject {
               let contact = self.contactsService.contact(withHash: jamiId) else {
             return false
         }
-        return contact.banned
+        return contact.blocked
     }
 }
