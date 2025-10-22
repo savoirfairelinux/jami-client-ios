@@ -122,18 +122,18 @@
     return YES;
 }
 
-- (BOOL)hangUpCall:(NSString*)callId accountId:(NSString*)accountId {
-    self.hangUpCallCallCount++;
-    self.hangUpCallCallId = callId;
-    self.hangUpCallAccountId = accountId;
-    return self.hangUpCallReturnValue;
+- (BOOL)endCall:(NSString*)callId accountId:(NSString*)accountId {
+    self.endCallCallCount++;
+    self.endCallCallId = callId;
+    self.endCallAccountId = accountId;
+    return self.endCallReturnValue;
 }
 
-- (BOOL)hangUpConference:(NSString*)conferenceId accountId:(NSString*)accountId {
-    self.hangUpConferenceCallCount++;
-    self.hangUpConferenceCallId = conferenceId;
-    self.hangUpConferenceAccountId = accountId;
-    return self.hangUpConferenceReturnValue;
+- (BOOL)disconnectConference:(NSString*)conferenceId accountId:(NSString*)accountId {
+    self.disconnectConferenceCallCount++;
+    self.disconnectConferenceCallId = conferenceId;
+    self.disconnectConferenceAccountId = accountId;
+    return self.disconnectConferenceReturnValue;
 }
 
 - (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId accountId:(NSString*)accountId {
@@ -158,12 +158,12 @@
     self.setConferenceModeratorActive = isActive;
 }
 
-- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId {
-    self.hangupConferenceParticipantCallCount++;
-    self.hangupConferenceParticipantParticipantId = participantId;
-    self.hangupConferenceParticipantConferenceId = conferenceId;
-    self.hangupConferenceParticipantAccountId = accountId;
-    self.hangupConferenceParticipantDeviceId = deviceId;
+- (void)disconnectConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId {
+    self.disconnectConferenceParticipantCallCount++;
+    self.disconnectConferenceParticipantParticipantId = participantId;
+    self.disconnectConferenceParticipantConferenceId = conferenceId;
+    self.disconnectConferenceParticipantAccountId = accountId;
+    self.disconnectConferenceParticipantDeviceId = deviceId;
 }
 
 -(void)muteStream:(NSString*)participantId
