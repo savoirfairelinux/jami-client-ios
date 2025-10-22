@@ -308,7 +308,7 @@ class ConversationsManager {
                             .disposed(by: self.disposeBag)
                     } else {
                         self.callService
-                            .hangUp(callId: call.callId)
+                            .endCall(callId: call.callId)
                             .subscribe()
                             .disposed(by: self.disposeBag)
                     }
