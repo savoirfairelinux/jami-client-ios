@@ -1,22 +1,19 @@
 /*
- *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import Contacts
@@ -135,26 +132,26 @@ class ContactsService {
     func contactExists(withHash hash: String, accountId: String) -> Bool {
         loadJamiContacts(withAccountId: accountId)
         if let contact = self.contact(withHash: hash) {
-            return !contact.banned
+            return !contact.blocked
         }
         return false
     }
 
-    // MARK: contacts management unban/remove
+    // MARK: contacts management unblock/remove
 
-    func removeContact(withId jamiId: String, ban: Bool, withAccountId accountId: String) -> Observable<Void> {
+    func removeContact(withId jamiId: String, block: Bool, withAccountId accountId: String) -> Observable<Void> {
         return Observable.create { [weak self] observable in
             guard let self = self else { return Disposables.create { } }
-            self.contactsAdapter.removeContact(withURI: jamiId, accountId: accountId, ban: ban)
+            self.contactsAdapter.removeContact(withURI: jamiId, accountId: accountId, block: block)
             observable.on(.completed)
             return Disposables.create { }
         }
     }
 
-    func unbanContact(contact: ContactModel, account: AccountModel) {
+    func unblockContact(contact: ContactModel, account: AccountModel) {
         self.contactsAdapter.addContact(withURI: contact.hash, accountId: account.id)
         if let existingContact = self.contact(withUri: contact.uriString ?? "") {
-            existingContact.banned = false
+            existingContact.blocked = false
         } else {
             var values = self.contacts.value
             values.append(contact)
@@ -165,7 +162,7 @@ class ContactsService {
     func removeAllContacts(for accountId: String) {
         DispatchQueue.global(qos: .background).async {
             for contact in self.contacts.value {
-                self.contactsAdapter.removeContact(withURI: contact.hash, accountId: accountId, ban: false)
+                self.contactsAdapter.removeContact(withURI: contact.hash, accountId: accountId, block: false)
             }
             self.contacts.accept([])
             self.dbManager
@@ -219,18 +216,18 @@ extension ContactsService: ContactsAdapterDelegate {
         log.debug("Contact added: \(uri)")
     }
 
-    func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool) {
+    func contactRemoved(contact uri: String, withAccountId accountId: String, blocked: Bool) {
         var contactToRemove = self.contacts.value.first(where: { $0.hash == uri })
 
-        // If the contact is banned and not found, retrieve details and add it to track banned contacts
-        if contactToRemove == nil, banned, let contactDetails = self.contactsAdapter.contactDetails(withURI: uri, accountId: accountId) {
+        // If the contact is blocked and not found, retrieve details and add it to track blocked contacts
+        if contactToRemove == nil, blocked, let contactDetails = self.contactsAdapter.contactDetails(withURI: uri, accountId: accountId) {
             contactToRemove = ContactModel(withDictionary: contactDetails)
         }
 
         guard let contactToRemove = contactToRemove else { return }
-        contactToRemove.banned = banned
+        contactToRemove.blocked = blocked
 
-        if !banned {
+        if !blocked {
             var values = self.contacts.value
             values.removeAll { $0 == contactToRemove }
             self.contacts.accept(values)
