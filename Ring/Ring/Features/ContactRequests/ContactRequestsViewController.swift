@@ -1,22 +1,19 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import UIKit
@@ -100,11 +97,11 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     })
                     .disposed(by: cell.disposeBag)
 
-                // Ban button
-                cell.banButton.backgroundColor = UIColor.clear
-                cell.banButton.rx.tap
+                // Block button
+                cell.blockButton.backgroundColor = UIColor.clear
+                cell.blockButton.rx.tap
                     .subscribe(onNext: { [weak self] in
-                        self?.banButtonTapped(withItem: item)
+                        self?.blockButtonTapped(withItem: item)
                     })
                     .disposed(by: cell.disposeBag)
             }
@@ -150,12 +147,12 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             .disposed(by: self.disposeBag)
     }
 
-    func banButtonTapped(withItem item: RequestItem) {
-        viewModel.ban(withItem: item)
+    func blockButtonTapped(withItem item: RequestItem) {
+        viewModel.block(withItem: item)
             .subscribe(onError: { [weak self] _ in
-                self?.log.error("Ban trust request failed")
+                self?.log.error("Block failed")
             }, onCompleted: { [weak self] in
-                self?.log.info("Ban trust request done")
+                self?.log.info("Block done")
             })
             .disposed(by: self.disposeBag)
     }
