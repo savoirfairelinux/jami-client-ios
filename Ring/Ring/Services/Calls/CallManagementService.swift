@@ -35,8 +35,8 @@ enum CallServiceError: Error, LocalizedError {
             return "Failed to accept call"
         case .refuseCallFailed:
             return "Failed to refuse call"
-        case .hangUpCallFailed:
-            return "Failed to hang up call"
+        case .endCallFailed:
+            return "Failed to end call"
         case .holdCallFailed:
             return "Failed to hold call"
         case .unholdCallFailed:
