@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Savoir-faire Linux Inc.
+ * Copyright (C) 2023-2025 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -95,7 +95,7 @@ class ConferenceActionsModel {
         self.callService.setRaiseHand(confId: conferenceId, participantId: participantId, state: false, accountId: account.id, deviceId: deviceId)
     }
 
-    func togleRaiseHand(state: Bool, conferenceId: String, deviceId: String) {
+    func toggleRaiseHand(state: Bool, conferenceId: String, deviceId: String) {
         guard let account = self.accountService.currentAccount else { return }
         self.callService.setRaiseHand(confId: conferenceId, participantId: account.jamiId, state: state, accountId: account.id, deviceId: deviceId)
     }
