@@ -41,7 +41,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
             }
         }
     }
-    var handRased: Bool = false {
+    var handRaised: Bool = false {
         willSet {
             DispatchQueue.main.async { [weak self] in
                 self?.objectWillChange.send()
@@ -93,8 +93,8 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                 voiceActive = info.voiceActivity
             }
 
-            if info.isHandRaised != handRased {
-                handRased = info.isHandRaised
+            if info.isHandRaised != handRaised {
+                handRaised = info.isHandRaised
             }
 
             if info.isAudioMuted != audioMuted {
@@ -305,7 +305,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                 ButtonInfo(background: .clear,
                            stroke: .clear, name: "hand.raised",
                            accessibilityLabelValue: L10n.Accessibility.Conference.lowerHand,
-                           action: ParticipantAction.raseHand(info: info))
+                           action: ParticipantAction.raiseHand(info: info))
             conferenceActions.append(ButtonInfoWrapper(info: button))
         }
     }
