@@ -507,7 +507,7 @@ extension ContainerViewModel {
                 case .muteAudio(let info):
                     guard let uri = info.uri else { return }
                     self.conferenceActionsModel.muteParticipant(participantId: uri, active: !info.isAudioMuted, conferenceId: self.callId, device: info.device, streamId: info.sinkId)
-                case .raseHand(let info):
+                case .raiseHand(let info):
                     guard let uri = info.uri else { return }
                     self.conferenceActionsModel.lowerHandFor(participantId: uri, conferenceId: self.callId, deviceId: info.device)
                 }

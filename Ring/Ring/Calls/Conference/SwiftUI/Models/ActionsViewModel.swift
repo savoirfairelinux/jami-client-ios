@@ -60,7 +60,7 @@ enum ParticipantAction: State {
     case maximize(info: ConferenceParticipant)
     case setModerator(info: ConferenceParticipant)
     case muteAudio(info: ConferenceParticipant)
-    case raseHand(info: ConferenceParticipant)
+    case raiseHand(info: ConferenceParticipant)
 
     func performAction(actionsState: PublishSubject<State>) {
         actionsState.onNext(self)
