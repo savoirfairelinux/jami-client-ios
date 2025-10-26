@@ -19,6 +19,7 @@
  */
 
 import Foundation
+import UIKit
 
 // Colors from material.io
 let avatarColors = [
