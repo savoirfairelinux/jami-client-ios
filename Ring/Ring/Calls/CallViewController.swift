@@ -250,6 +250,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
 extension CallViewController: PictureInPictureManagerDelegate {
     func reopenCurrentCall() {
+        // Ensure we're on the main thread and the view controller is in a valid state
+        guard Thread.isMainThread,
+              !self.isBeingDismissed,
+              !self.isBeingPresented,
+              self.view.window == nil else {
+            return
+        }
+
         if self.navigationController?.topViewController != self {
             self.viewModel.reopenCall(viewControler: self)
         }

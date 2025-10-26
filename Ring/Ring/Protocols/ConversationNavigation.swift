@@ -194,6 +194,15 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
 
     func reopenCall(viewController: CallViewController) {
         guard let call = viewController.viewModel.call else { return }
+
+        // Check if the view controller is already being presented or is in an invalid state
+        if viewController.isBeingPresented ||
+            viewController.presentingViewController != nil ||
+            viewController.isBeingDismissed ||
+            viewController.view.window != nil {
+            return
+        }
+
         if self.tryPresentCallFromStack(call: call) {
             return
         }
@@ -225,7 +234,16 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
               !topController.isKind(of: CallViewController.self) else {
             return false
         }
-        topController.dismiss(animated: false, completion: nil)
+
+        // Check if the controller is already being dismissed
+        if topController.isBeingDismissed {
+            return false
+        }
+
+        // Use a completion handler to ensure dismissal is complete before proceeding
+        topController.dismiss(animated: false) {
+            // Dismissal completed
+        }
         return true
     }
 

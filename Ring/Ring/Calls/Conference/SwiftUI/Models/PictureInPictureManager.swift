@@ -28,6 +28,8 @@ class PictureInPictureManager: NSObject, AVPictureInPictureControllerDelegate {
 
     var pipController: AVPictureInPictureController! = nil
     let delegate: PictureInPictureManagerDelegate
+    private let serialQueue = DispatchQueue(label: "com.jami.pipmanager", qos: .userInitiated)
+    private var isRestoring = false
 
     init(delegate: PictureInPictureManagerDelegate) {
         self.delegate = delegate
@@ -51,7 +53,18 @@ class PictureInPictureManager: NSObject, AVPictureInPictureControllerDelegate {
         }
     }
     func pictureInPictureControllerWillStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        self.delegate.reopenCurrentCall()
+        serialQueue.async { [weak self] in
+            guard let self = self, !self.isRestoring else { return }
+            self.isRestoring = true
+
+            DispatchQueue.main.async {
+                self.delegate.reopenCurrentCall()
+                // Reset the flag after a delay to allow the presentation to complete
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.isRestoring = false
+                }
+            }
+        }
     }
 
     func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController,
@@ -61,18 +74,28 @@ class PictureInPictureManager: NSObject, AVPictureInPictureControllerDelegate {
     }
 
     func callStopped() {
-        if #available(iOS 15.0, *) {
-            if self.pipController != nil {
-                self.pipController.stopPictureInPicture()
-                self.pipController = nil
+        serialQueue.async { [weak self] in
+            guard let self = self else { return }
+            if #available(iOS 15.0, *) {
+                if self.pipController != nil {
+                    DispatchQueue.main.async {
+                        self.pipController.stopPictureInPicture()
+                        self.pipController = nil
+                    }
+                }
             }
         }
     }
 
     func showPiP() {
-        if #available(iOS 15.0, *) {
-            if self.pipController != nil {
-                self.pipController.startPictureInPicture()
+        serialQueue.async { [weak self] in
+            guard let self = self else { return }
+            if #available(iOS 15.0, *) {
+                if self.pipController != nil {
+                    DispatchQueue.main.async {
+                        self.pipController.startPictureInPicture()
+                    }
+                }
             }
         }
     }
