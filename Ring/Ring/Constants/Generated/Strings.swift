@@ -854,21 +854,21 @@ internal enum L10n {
   internal enum Global {
     /// Accept
     internal static let accept = L10n.tr("Localizable", "global.accept", fallback: "Accept")
-    /// *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+    /// * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
     ///  *
-    ///  *  This program is free software; you can redistribute it and/or modify
-    ///  *  it under the terms of the GNU General Public License as published by
-    ///  *  the Free Software Foundation; either version 3 of the License, or
-    ///  *  (at your option) any later version.
+    ///  * This program is free software; you can redistribute it and/or modify
+    ///  * it under the terms of the GNU General Public License as published by
+    ///  * the Free Software Foundation; either version 3 of the License, or
+    ///  * (at your option) any later version.
     ///  *
-    ///  *  This program is distributed in the hope that it will be useful,
-    ///  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    ///  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    ///  *  GNU General Public License for more details.
+    ///  * This program is distributed in the hope that it will be useful,
+    ///  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+    ///  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    ///  * GNU General Public License for more details.
     ///  *
-    ///  *  You should have received a copy of the GNU General Public License
-    ///  *  along with this program; if not, write to the Free Software
-    ///  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+    ///  * You should have received a copy of the GNU General Public License
+    ///  * along with this program; if not, write to the Free Software
+    ///  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
     internal static let accountSettings = L10n.tr("Localizable", "global.accountSettings", fallback: "Account Settings")
     /// Block
     internal static let block = L10n.tr("Localizable", "global.block", fallback: "Block")
@@ -1109,16 +1109,34 @@ internal enum L10n {
     internal static let badQrCode = L10n.tr("Localizable", "scan.badQrCode", fallback: "Bad QR code")
   }
   internal enum ShareExtension {
-    /// Jami
-    internal static let appName = L10n.tr("Localizable", "shareExtension.appName", fallback: "Jami")
-    /// Conversations
-    internal static let conversations = L10n.tr("Localizable", "shareExtension.conversations", fallback: "Conversations")
-    /// Conversation unavailable.
-    internal static let noConversation = L10n.tr("Localizable", "shareExtension.noConversation", fallback: "Conversation unavailable.")
-    /// Select account.
-    internal static let selectAccount = L10n.tr("Localizable", "shareExtension.selectAccount", fallback: "Select account.")
+    /// Double tap to select this account
+    internal static let accessibilitySelectAccount = L10n.tr("Localizable", "shareExtension.accessibilitySelectAccount", fallback: "Double tap to select this account")
+    /// Double tap to select this conversation
+    internal static let accessibilitySelectConversation = L10n.tr("Localizable", "shareExtension.accessibilitySelectConversation", fallback: "Double tap to select this conversation")
+    /// Selected account: %@. Double tap to change account.
+    internal static func accessibilitySelectedAccount(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "shareExtension.accessibilitySelectedAccount", String(describing: p1), fallback: "Selected account: %@. Double tap to change account.")
+    }
+    /// Double tap to send to selected conversations
+    internal static let accessibilitySendButton = L10n.tr("Localizable", "shareExtension.accessibilitySendButton", fallback: "Double tap to send to selected conversations")
+    /// No conversations match your search
+    internal static let noSearchResults = L10n.tr("Localizable", "shareExtension.noSearchResults", fallback: "No conversations match your search")
+    /// Search conversations
+    internal static let searchConversations = L10n.tr("Localizable", "shareExtension.searchConversations", fallback: "Search conversations")
+    /// Select account
+    internal static let selectAccountTitle = L10n.tr("Localizable", "shareExtension.selectAccountTitle", fallback: "Select account")
     /// Sending…
     internal static let sending = L10n.tr("Localizable", "shareExtension.sending", fallback: "Sending…")
+    /// Send to %d conversation
+    internal static func sendToConversation(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "shareExtension.sendToConversation", p1, fallback: "Send to %d conversation")
+    }
+    /// Send to %d conversations
+    internal static func sendToConversationsPlural(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "shareExtension.sendToConversationsPlural", p1, fallback: "Send to %d conversations")
+    }
+    /// Try a different filter
+    internal static let tryDifferentFilter = L10n.tr("Localizable", "shareExtension.tryDifferentFilter", fallback: "Try a different filter")
     internal enum NoAccount {
       /// To continue, create an account in the main application.
       internal static let description = L10n.tr("Localizable", "shareExtension.noAccount.description", fallback: "To continue, create an account in the main application.")

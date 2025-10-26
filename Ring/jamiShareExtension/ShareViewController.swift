@@ -29,6 +29,7 @@ class ShareViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        isModalInPresentation = true
 
         let sharedItems = extensionContext?.inputItems as? [NSExtensionItem] ?? []
         viewModel = ShareViewModel()
@@ -94,6 +95,9 @@ class ShareViewController: UIViewController {
     deinit {
         NSLog("ShareViewController deinit")
         viewModel?.closeShareExtension()
+        if self.requestCompleted {
+            return
+        }
         completeRequest()
     }
 }
