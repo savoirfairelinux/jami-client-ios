@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bec39c21_2121a5b2",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-10-27T17:01:17Z",
+      "side": 1,
+      "message": "This is an API call named refuse",
+      "revId": "9918c3e255cfaeddb7ad52f0ab8f71e84de20be4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
