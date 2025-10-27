@@ -71,8 +71,8 @@
 "swarm.leaveConversation" = "Unterhaltung verlassen";
 "swarm.removeConversation" = "Entferne Gespräch";
 "swarm.removeContact" = "Kontakt entfernen";
-"swarm.restartConversation" = "Restart conversation";
-"swarm.conversationEnded" = "Conversation ended";
+"swarm.restartConversation" = "Unterhaltung neu starten";
+"swarm.conversationEnded" = "Unterhaltung beendet";
 "swarm.chooseColor" = "Unterhaltungs Farbe";
 "swarm.typeOfSwarm" = "Unterhaltungstyp";
 "swarm.identifier" = "Identifier";
@@ -563,12 +563,12 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "Beitragen";
 "aboutJami.feedback" = "Feedback";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "Entwickler";
 "aboutJami.media" = "Media";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.communityManagement" = "Community-Management";
+"aboutJami.specialThanks" = "Besonderer Dank geht an";
+"aboutJami.info" = "Dies ist eine Liste von Personen, die viel Zeit und nützliche Ergebnisse in Jami investiert haben. Alle Mitwirkenden, die in die Liste aufgenommen werden möchten, sollten sich an uns wenden.";
+"aboutJami.header" = "Wir möchten uns bei unseren Mitwirkenden bedanken, deren langjähriger Einsatz diese Software zu dem gemacht hat, was sie ist.";
 
 // Accessibility
 "accessibility.close" = "Schließen";
@@ -665,12 +665,18 @@
 "swarmColors.steelBlue" = "Stahlblau";
 
 // Share extension
-"shareExtension.appName" = "Jami";
 "shareExtension.noAccount.title" = "Konto nicht gefunden";
 "shareExtension.noAccount.description" = "Um fortzufahren, erstellen Sie ein Konto in der Hauptanwendung.";
 "shareExtension.unsupportedType.title" = "Nicht unterstützter Inhalt";
 "shareExtension.unsupportedType.description" = "Das Teilen der ausgewählten Inhalte wird derzeit nicht unterstützt.";
 "shareExtension.sending" = "Senden…";
-"shareExtension.conversations" = "Gespräche";
-"shareExtension.noConversation" = "Unterhaltung nicht verfügbar.";
-"shareExtension.selectAccount" = "Konto auswählen.";
+"shareExtension.noSearchResults" = "Keine Unterhaltungen entsprechen Ihrer Suche";
+"shareExtension.tryDifferentFilter" = "Try a different filter";
+"shareExtension.sendToConversation" = "Send to %d conversation";
+"shareExtension.sendToConversationsPlural" = "Send to %d conversations";
+"shareExtension.selectAccountTitle" = "Konto auswählen";
+"shareExtension.searchConversations" = "Search conversations";
+"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";

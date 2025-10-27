@@ -563,12 +563,12 @@
 "aboutJami.noWarranty2" = "versiunea 3 sau ulterioară.";
 "aboutJami.contribute" = "Contribuie";
 "aboutJami.feedback" = "Părere";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "Programatori";
 "aboutJami.media" = "Media";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.communityManagement" = "Gestionarea comunității";
+"aboutJami.specialThanks" = "Mulțumiri speciale";
+"aboutJami.info" = "Aceasta este o listă de oameni care au făcut o investiție semnificativă de timp, cu rezultate utile, în Jami. Orice astfel de colaboratori care doresc să fie adăugați pe listă trebuie să ne contacteze.";
+"aboutJami.header" = "Mulțumim colaboratorilor noștri, ale căror eforturi de-a lungul multor ani au făcut din acest software ceea ce este.";
 
 // Accessibility
 "accessibility.close" = "Închide";
@@ -665,12 +665,18 @@
 "swarmColors.steelBlue" = "Albastru metalic";
 
 // Share extension
-"shareExtension.appName" = "Jami";
 "shareExtension.noAccount.title" = "Nu s-a găsit contul";
 "shareExtension.noAccount.description" = "Pentru a continua, creează un cont în aplicația principală.";
 "shareExtension.unsupportedType.title" = "Conținut neacceptat";
 "shareExtension.unsupportedType.description" = "Distribuirea conținutului ales nu este implementată.";
 "shareExtension.sending" = "Se trimite…";
-"shareExtension.conversations" = "Conversații";
-"shareExtension.noConversation" = "Conversație indisponibilă.";
-"shareExtension.selectAccount" = "Alege contul.";
+"shareExtension.noSearchResults" = "Nicio conversație nu corespunde căutării";
+"shareExtension.tryDifferentFilter" = "Try a different filter";
+"shareExtension.sendToConversation" = "Send to %d conversation";
+"shareExtension.sendToConversationsPlural" = "Send to %d conversations";
+"shareExtension.selectAccountTitle" = "Alege contul";
+"shareExtension.searchConversations" = "Search conversations";
+"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";

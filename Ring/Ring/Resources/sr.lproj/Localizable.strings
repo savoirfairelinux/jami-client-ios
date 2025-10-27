@@ -563,12 +563,12 @@
 "aboutJami.noWarranty2" = "verzija 3 ili novija za detalje.";
 "aboutJami.contribute" = "Doprinesi";
 "aboutJami.feedback" = "Povratna informacija";
-"aboutJami.developers" = "Developers";
-"aboutJami.media" = "Media";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
+"aboutJami.developers" = "Programeri";
+"aboutJami.media" = "Mediji";
+"aboutJami.communityManagement" = "Upravljanje zajednicama";
+"aboutJami.specialThanks" = "Posebno hvala";
 "aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.header" = "Želeli bismo da se zahvalimo našim saradnicima, čiji su napori tokom mnogo godina učinili ovaj softver onim što jeste.";
 
 // Accessibility
 "accessibility.close" = "Zatvori";
@@ -665,12 +665,18 @@
 "swarmColors.steelBlue" = "Steel blue";
 
 // Share extension
-"shareExtension.appName" = "Jami";
 "shareExtension.noAccount.title" = "Account not found";
 "shareExtension.noAccount.description" = "To continue, create an account in the main application.";
 "shareExtension.unsupportedType.title" = "Unsupported content";
 "shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
 "shareExtension.sending" = "Sending…";
-"shareExtension.conversations" = "Razgovori";
-"shareExtension.noConversation" = "Conversation unavailable.";
-"shareExtension.selectAccount" = "Select account.";
+"shareExtension.noSearchResults" = "Nijedna prepiska ne odgovara vašoj pretrazi";
+"shareExtension.tryDifferentFilter" = "Try a different filter";
+"shareExtension.sendToConversation" = "Send to %d conversation";
+"shareExtension.sendToConversationsPlural" = "Send to %d conversations";
+"shareExtension.selectAccountTitle" = "Izaberi nalog";
+"shareExtension.searchConversations" = "Search conversations";
+"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";

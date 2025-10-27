@@ -563,12 +563,12 @@
 "aboutJami.noWarranty2" = "versioonist 3 või uuemast.";
 "aboutJami.contribute" = "Osale kaastöös";
 "aboutJami.feedback" = "Tagasiside";
-"aboutJami.developers" = "Developers";
-"aboutJami.media" = "Media";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.developers" = "Arendajad";
+"aboutJami.media" = "Meedia";
+"aboutJami.communityManagement" = "Kogukonna haldus";
+"aboutJami.specialThanks" = "Eriline tänu:";
+"aboutJami.info" = "See on inimeste loend, kes on märgatava koguse oma aega tulemuslikult investeerinud Jamisse. Kui soovid loendit täiendada, siis võta ühendust Jami tiimiga.";
+"aboutJami.header" = "Soovime tänada meie kaasautoreid - tänu nende aastatepikkusele osalusele on see tarkvara täna just selline nagu ta täna on.";
 
 // Accessibility
 "accessibility.close" = "Sulge";
@@ -665,12 +665,18 @@
 "swarmColors.steelBlue" = "Terassinine";
 
 // Share extension
-"shareExtension.appName" = "Jami";
 "shareExtension.noAccount.title" = "Kasutajakontot ei leidu";
 "shareExtension.noAccount.description" = "Jätkamiseks palun loo kasutajakonto põhirakenduses.";
 "shareExtension.unsupportedType.title" = "Mittetoetatud sisu";
 "shareExtension.unsupportedType.description" = "Valitud sisu jagamine pole hetkel toetatud.";
 "shareExtension.sending" = "Saadan…";
-"shareExtension.conversations" = "Vestlused";
-"shareExtension.noConversation" = "Vestlus pole saadaval.";
-"shareExtension.selectAccount" = "Vali kasutajakonto";
+"shareExtension.noSearchResults" = "Ühtegi vestlust ei vasta sinu otsingule";
+"shareExtension.tryDifferentFilter" = "Try a different filter";
+"shareExtension.sendToConversation" = "Send to %d conversation";
+"shareExtension.sendToConversationsPlural" = "Send to %d conversations";
+"shareExtension.selectAccountTitle" = "Vali kasutajakonto";
+"shareExtension.searchConversations" = "Search conversations";
+"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";

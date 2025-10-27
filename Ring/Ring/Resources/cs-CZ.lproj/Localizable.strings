@@ -563,12 +563,12 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "Přispět";
 "aboutJami.feedback" = "Zpětná vazba";
-"aboutJami.developers" = "Developers";
-"aboutJami.media" = "Media";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.developers" = "Vývojáři";
+"aboutJami.media" = "Média";
+"aboutJami.communityManagement" = "Správa komunity";
+"aboutJami.specialThanks" = "Zvláštní poděkování";
+"aboutJami.info" = "Toto je seznam lidí, kteří do Jami významně investovali čas s užitečnými výsledky. Všichni tito přispěvatelé, kteří chtějí být přidáni do seznamu, by nás měli kontaktovat.";
+"aboutJami.header" = "Rádi bychom poděkovali našim přispěvatelům, jejichž úsilí po mnoho let učinilo tento software tím, čím je.";
 
 // Accessibility
 "accessibility.close" = "Zavřít";
@@ -665,12 +665,18 @@
 "swarmColors.steelBlue" = "Steel blue";
 
 // Share extension
-"shareExtension.appName" = "Jami";
 "shareExtension.noAccount.title" = "Account not found";
 "shareExtension.noAccount.description" = "To continue, create an account in the main application.";
 "shareExtension.unsupportedType.title" = "Unsupported content";
 "shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
 "shareExtension.sending" = "Sending…";
-"shareExtension.conversations" = "Konverzace";
-"shareExtension.noConversation" = "Conversation unavailable.";
-"shareExtension.selectAccount" = "Select account.";
+"shareExtension.noSearchResults" = "No conversations match your search";
+"shareExtension.tryDifferentFilter" = "Try a different filter";
+"shareExtension.sendToConversation" = "Send to %d conversation";
+"shareExtension.sendToConversationsPlural" = "Send to %d conversations";
+"shareExtension.selectAccountTitle" = "Vyberte účet";
+"shareExtension.searchConversations" = "Search conversations";
+"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";
