@@ -563,12 +563,12 @@
 "aboutJami.noWarranty2" = "version 3, ose të mëvonshëm.";
 "aboutJami.contribute" = "Kontribuoni";
 "aboutJami.feedback" = "Përshtypje";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "Zhvillues";
 "aboutJami.media" = "Media";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.communityManagement" = "Administrim Bashkësie";
+"aboutJami.specialThanks" = "Falënderime të posaçme për";
+"aboutJami.info" = "Kjo është një listë e personave që kanë bërë një investim thelbësor në kohë, me përfundime të dobishme, te Jami. Cilido kontribues i tillë që dëshiron të shtohet te lista duhet të lidhet me ne.";
+"aboutJami.header" = "Do të donim të falënderojmë kontribuesit tanë, përpjekjet e të cilëve përgjatë shumë vitesh e kanë bërë këtë program atë çka është.";
 
 // Accessibility
 "accessibility.close" = "Mbylle";
@@ -665,12 +665,18 @@
 "swarmColors.steelBlue" = "Blu e çeliktë";
 
 // Share extension
-"shareExtension.appName" = "Jami";
 "shareExtension.noAccount.title" = "Llogaria s’u gjet";
 "shareExtension.noAccount.description" = "Që të vazhdohet, krijoni një llogari te aplikacioni kryesor.";
 "shareExtension.unsupportedType.title" = "Lëndë që s’mbulohet";
 "shareExtension.unsupportedType.description" = "Aktualisht s’mbulohet ndarja me të tjerë e lëndës së përzgjedhur.";
 "shareExtension.sending" = "Po dërgohet…";
-"shareExtension.conversations" = "Biseda";
-"shareExtension.noConversation" = "Bisedë jo e passhme.";
-"shareExtension.selectAccount" = "Përzgjidhni llogari.";
+"shareExtension.noSearchResults" = "S’ka bisedë me përputhje me kërkimin tuaj";
+"shareExtension.tryDifferentFilter" = "Try a different filter";
+"shareExtension.sendToConversation" = "Send to %d conversation";
+"shareExtension.sendToConversationsPlural" = "Send to %d conversations";
+"shareExtension.selectAccountTitle" = "Përzgjidhni llogari";
+"shareExtension.searchConversations" = "Search conversations";
+"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";

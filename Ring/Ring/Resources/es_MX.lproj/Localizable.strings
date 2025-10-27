@@ -563,12 +563,12 @@
 "aboutJami.noWarranty2" = "versión 3 o posterior para más detalles.";
 "aboutJami.contribute" = "Contribuir";
 "aboutJami.feedback" = "Retroalimentación";
-"aboutJami.developers" = "Developers";
-"aboutJami.media" = "Media";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.developers" = "Desarrolladores";
+"aboutJami.media" = "Medios";
+"aboutJami.communityManagement" = "Gestor Comunitario";
+"aboutJami.specialThanks" = "Un agradecimiento especial a";
+"aboutJami.info" = "Esta es una lista de personas que han invertido una cantidad significativa de tiempo, con resultados útiles, en Jami. Cualquier colaborador que desee ser agregado a la lista debe contactarnos.";
+"aboutJami.header" = "Nos gustaría agradecer a nuestros colaboradores, cuyos esfuerzos durante muchos años han hecho de este software lo que es.";
 
 // Accessibility
 "accessibility.close" = "Cerrar";
@@ -665,12 +665,18 @@
 "swarmColors.steelBlue" = "Azul acero";
 
 // Share extension
-"shareExtension.appName" = "Jami";
 "shareExtension.noAccount.title" = "Cuenta no encontrada";
 "shareExtension.noAccount.description" = "Para continuar, crear una cuenta en la aplicación principal.";
 "shareExtension.unsupportedType.title" = "Contenido no admitido";
 "shareExtension.unsupportedType.description" = "Actualmente, no se admite el uso compartido del contenido seleccionado.";
 "shareExtension.sending" = "Enviando…";
-"shareExtension.conversations" = "Conversaciones";
-"shareExtension.noConversation" = "Conversación no disponible.";
-"shareExtension.selectAccount" = "Seleccionar cuenta.";
+"shareExtension.noSearchResults" = "No hay conversaciones que coincidan con su búsqueda";
+"shareExtension.tryDifferentFilter" = "Try a different filter";
+"shareExtension.sendToConversation" = "Send to %d conversation";
+"shareExtension.sendToConversationsPlural" = "Send to %d conversations";
+"shareExtension.selectAccountTitle" = "Seleccionar cuenta";
+"shareExtension.searchConversations" = "Search conversations";
+"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";
