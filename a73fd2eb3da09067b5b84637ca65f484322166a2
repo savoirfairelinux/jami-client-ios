@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5905dbef_05bcc68f",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-10-29T23:13:19Z",
+      "side": 1,
+      "message": "endCallOrConference",
+      "revId": "a73fd2eb3da09067b5b84637ca65f484322166a2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
