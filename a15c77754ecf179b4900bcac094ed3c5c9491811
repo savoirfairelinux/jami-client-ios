@@ -16,6 +16,24 @@
       "message": "dictionary contains key \"banned\"",
       "revId": "a15c77754ecf179b4900bcac094ed3c5c9491811",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bb1cd51_f69eedd5",
+        "filename": "Ring/Ring/Models/ContactModel.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-29T20:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6914d448_18208a5f",
+      "revId": "a15c77754ecf179b4900bcac094ed3c5c9491811",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
