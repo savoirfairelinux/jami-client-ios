@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4cbca6e_02d36e13",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-29T20:32:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb61e200_d619f9f9",
+      "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96e98865_d69914a4",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-29T15:43:43Z",
       "side": 1,
       "message": "hangUpConference is API call",
+      "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a58052e3_00fbb5d4",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-29T20:32:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96e98865_d69914a4",
       "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e01472_e38e0744",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-29T20:32:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43fd935f_2f3daa5b",
+      "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ae1ffe4_fe229721",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-10-29T15:43:43Z",
       "side": 1,
       "message": "Name `end` is too generic. Maybe leave hangup, or change to endCall?",
+      "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1267251_ed2e5cc3",
+        "filename": "Ring/Ring/Calls/Conference/SwiftUI/Models/ActionsViewModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-29T20:32:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ae1ffe4_fe229721",
       "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -86,6 +158,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14420ded_5d337fbc",
+        "filename": "Ring/Ring/Calls/Conference/SwiftUI/Models/ConferenceActionsModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-29T20:32:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbc996c2_a15c7b7f",
+      "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c41d95d6_c18ba652",
@@ -103,6 +193,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7427a443_806f3267",
+        "filename": "Ring/Ring/Calls/Conference/SwiftUI/Views/ActionsView.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-29T20:32:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c41d95d6_c18ba652",
+      "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70506952_dbc43f6f",
@@ -116,6 +224,24 @@
       "writtenOn": "2025-10-29T15:43:43Z",
       "side": 1,
       "message": "hangUp or endCall?",
+      "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7766b505_e66aebae",
+        "filename": "Ring/Ring/Services/Calls/CallManagementService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-29T20:32:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70506952_dbc43f6f",
       "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
