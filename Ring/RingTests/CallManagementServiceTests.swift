@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2025 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -290,23 +290,23 @@ class CallManagementServiceTests: XCTestCase {
         XCTAssertEqual(mockCallsAdapter.hangUpCallAccountId, CallTestConstants.accountId, "Account ID should match")
     }
 
-    func testPlaceCall_Success() {
+    func testStartCall_Success() {
         let account = AccountModel.createTestAccount()
         let participantId = CallTestConstants.participantUri
         let userName = CallTestConstants.displayName
         let videoSource = "camera"
 
-        mockCallsAdapter.placeCallReturnValue = CallTestConstants.callId
+        mockCallsAdapter.startCallReturnValue = CallTestConstants.callId
         mockCallsAdapter.callDetailsReturnValue = [
             CallDetailKey.displayNameKey.rawValue: userName,
             CallDetailKey.accountIdKey.rawValue: account.id
         ]
 
-        let expectation = XCTestExpectation(description: "Place call completes")
+        let expectation = XCTestExpectation(description: "Start call completes")
 
         var resultCall: CallModel?
 
-        callManagementService.placeCall(
+        callManagementService.startCall(
             withAccount: account,
             toParticipantId: participantId,
             userName: userName,
@@ -320,7 +320,7 @@ class CallManagementServiceTests: XCTestCase {
                 expectation.fulfill()
             },
             onFailure: { error in
-                XCTFail("Place call should not fail: \(error)")
+                XCTFail("Start call should not fail: \(error)")
             }
         )
         .disposed(by: disposeBag)
@@ -333,9 +333,9 @@ class CallManagementServiceTests: XCTestCase {
         XCTAssertEqual(resultCall?.accountId, account.id, "Account ID should match")
         XCTAssertEqual(resultCall?.callType, .outgoing, "Call type should be outgoing")
 
-        XCTAssertEqual(mockCallsAdapter.placeCallAccountIdCount, 1, "Place call should be called once")
-        XCTAssertEqual(mockCallsAdapter.placeCallAccountId, account.id, "Account ID should match")
-        XCTAssertEqual(mockCallsAdapter.placeCallParticipantId, participantId, "Participant ID should match")
+        XCTAssertEqual(mockCallsAdapter.startCallAccountIdCount, 1, "Start call should be called once")
+        XCTAssertEqual(mockCallsAdapter.startCallAccountId, account.id, "Account ID should match")
+        XCTAssertEqual(mockCallsAdapter.startCallParticipantId, participantId, "Participant ID should match")
     }
 }
 
@@ -368,15 +368,15 @@ extension ObjCMockCallsAdapter {
         return self.declineCallWithIdAccountId
     }
 
-    var placeCallAccountIdCount: Int {
-        return Int(self.placeCallWithAccountIdCount)
+    var startCallAccountIdCount: Int {
+        return Int(self.startCallWithAccountIdCount)
     }
 
-    var placeCallAccountId: String? {
-        return self.placeCallWithAccountIdAccountId
+    var startCallAccountId: String? {
+        return self.startCallWithAccountIdAccountId
     }
 
-    var placeCallParticipantId: String? {
-        return self.placeCallWithAccountIdToParticipantId
+    var startCallParticipantId: String? {
+        return self.startCallWithAccountIdToParticipantId
     }
 }
