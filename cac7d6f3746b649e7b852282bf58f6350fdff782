@@ -54,6 +54,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b861c8a_cd3596f6",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-30T04:23:38Z",
+      "side": 1,
+      "message": "Thank you for your valuable suggestion.\n\nFor calls, \"connect/disconnect\" seems correct, and \"attach/detach\" seems incorrect.\n\nPerhaps jami-daemon could be improved to change from detach to connect.\n\nSorry for the noise.",
+      "parentUuid": "d398da61_86795a62",
+      "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96e98865_d69914a4",
