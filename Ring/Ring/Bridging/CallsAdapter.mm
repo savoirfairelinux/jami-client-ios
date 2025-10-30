@@ -70,7 +70,7 @@ static id <CallsAdapterDelegate> _delegate;
         if (CallsAdapter.delegate) {
             NSString* callIdString = [NSString stringWithUTF8String:callId.c_str()];
             NSString* fromURIString = [NSString stringWithUTF8String:fromURI.c_str()];
-            NSDictionary* messageDict = [Utils mapToDictionnary:message];
+            NSDictionary* messageDict = [Utils mapToDictionary:message];
             [CallsAdapter.delegate didReceiveMessageWithCallId:callIdString
                                                        fromURI:fromURIString
                                                        message:messageDict];
@@ -187,7 +187,7 @@ static id <CallsAdapterDelegate> _delegate;
 
 - (BOOL)acceptCallWithId:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList {
     NSLog(@"acceptCallWithId %@", callId);
-    return acceptWithMedia(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
+    return acceptWithMedia(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils dictionaryArrayToMapVector: mediaList]);
 }
 
 - (BOOL)declineCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
@@ -211,18 +211,18 @@ static id <CallsAdapterDelegate> _delegate;
 }
 
 - (void)answerMediaChangeResquest:(NSString*)callId accountId:(NSString*)accountId withMedia: (NSArray*)mediaList {
-    answerMediaChangeRequest(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
+    answerMediaChangeRequest(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils dictionaryArrayToMapVector: mediaList]);
 }
 
 - (NSString*)placeCallWithAccountId:(NSString*)accountId toParticipantId:(NSString*)participantId withMedia:(NSArray*)mediaList {
     std::string callId;
-    callId = placeCallWithMedia(std::string([accountId UTF8String]), std::string([participantId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap:mediaList]);
+    callId = placeCallWithMedia(std::string([accountId UTF8String]), std::string([participantId UTF8String]), [Utils dictionaryArrayToMapVector:mediaList]);
     return [NSString stringWithUTF8String:callId.c_str()];
 }
 
 - (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId accountId:(NSString*)accountId {
     std::map<std::string, std::string> callDetails = getCallDetails(std::string([accountId UTF8String]), std::string([callId UTF8String]));
-    return [Utils mapToDictionnary:callDetails];
+    return [Utils mapToDictionary:callDetails];
 }
 
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getActiveCalls:(NSString*)conversationId accountId:(NSString*)accountId {
@@ -246,7 +246,7 @@ static id <CallsAdapterDelegate> _delegate;
 }
 
 - (void)sendTextMessageWithCallID:(NSString*)callId accountId:(NSString*)accountId message:(NSDictionary*)message from:(NSString*)jamiId isMixed:(bool)isMixed {
-    sendTextMessage(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils dictionnaryToMap:message], std::string([jamiId UTF8String]), isMixed);
+    sendTextMessage(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils dictionaryToMap:message], std::string([jamiId UTF8String]), isMixed);
 }
 
 - (BOOL)joinConference:(NSString*)confID call:(NSString*)callID accountId:(NSString*)accountId account2Id:(NSString*)account2Id {
@@ -269,7 +269,7 @@ static id <CallsAdapterDelegate> _delegate;
 
 - (NSDictionary<NSString*,NSString*>*)getConferenceDetails:(NSString*)conferenceId accountId:(NSString*)accountId {
     std::map<std::string, std::string> confDetails = getConferenceDetails(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]));
-    return [Utils mapToDictionnary:confDetails];
+    return [Utils mapToDictionary:confDetails];
 }
 
 - (NSArray<NSString*>*)getConferenceCalls:(NSString*)conferenceId accountId:(NSString*)accountId {
