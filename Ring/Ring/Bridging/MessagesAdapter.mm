@@ -1,21 +1,19 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 #import "MessagesAdapter.h"
@@ -50,7 +48,7 @@ static id <MessagesAdapterDelegate> _delegate;
                                                                                              const std::map<std::string,
                                                                                              std::string>& payloads) {
         if (MessagesAdapter.delegate) {
-            NSDictionary* message = [Utils mapToDictionnary:payloads];
+            NSDictionary* message = [Utils mapToDictionary:payloads];
             NSString* fromAccount = [NSString stringWithUTF8String:from.c_str()];
             NSString* toAccountId = [NSString stringWithUTF8String:account_id.c_str()];
             NSString* messageId = [NSString stringWithUTF8String:message_id.c_str()];
@@ -85,7 +83,7 @@ static id <MessagesAdapterDelegate> _delegate;
 
     return (NSUInteger) sendAccountTextMessage(std::string([accountId UTF8String]),
                            std::string([toAccountId UTF8String]),
-                           [Utils dictionnaryToMap:content]);
+                           [Utils dictionaryToMap:content]);
 }
 
 - (MessageStatus)statusForMessageId:(uint64_t)messageId {
