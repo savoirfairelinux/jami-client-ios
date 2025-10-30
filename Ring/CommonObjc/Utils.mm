@@ -1,21 +1,19 @@
 /*
- *  Copyright (C) 2016-2019 Savoir-faire Linux Inc.
+ * Copyright (C) 2016-2025 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
  * USA.
  */
 
@@ -32,34 +30,34 @@
     return resArray;
 }
 
-+ (NSMutableDictionary*)mapToDictionnary:
++ (NSMutableDictionary*)mapToDictionary:
 (const std::map<std::string, std::string>&)map {
-    NSMutableDictionary* resDictionnary = [NSMutableDictionary new];
+    NSMutableDictionary* resDictionary = [NSMutableDictionary new];
 
     std::for_each(
                   map.begin(), map.end(), ^(std::pair<std::string, std::string> keyValue) {
                       id key = [NSString stringWithUTF8String:keyValue.first.c_str()];
                       id value = [NSString stringWithUTF8String:keyValue.second.c_str()];
-                      [resDictionnary setObject:value forKey:key];
+                      [resDictionary setObject:value forKey:key];
                   });
 
-    return resDictionnary;
+    return resDictionary;
 }
 
-+ (NSMutableDictionary*)mapToDictionnaryWithInt:(const std::map<std::string, int32_t>&)map
++ (NSMutableDictionary*)mapToDictionaryWithInt:(const std::map<std::string, int32_t>&)map
 {
-    NSMutableDictionary* resDictionnary = [NSMutableDictionary new];
+    NSMutableDictionary* resDictionary = [NSMutableDictionary new];
 
     std::for_each(map.begin(), map.end(), ^(std::pair<std::string, int32_t> keyValue) {
         id key = [NSString stringWithUTF8String:keyValue.first.c_str()];
         id value = [NSNumber numberWithInt:keyValue.second];
-        [resDictionnary setObject:value forKey:key];
+        [resDictionary setObject:value forKey:key];
     });
 
-    return resDictionnary;
+    return resDictionary;
 }
 
-+ (std::map<std::string, std::string>)dictionnaryToMap:(NSDictionary*)dict {
++ (std::map<std::string, std::string>)dictionaryToMap:(NSDictionary*)dict {
     std::map<std::string, std::string> resMap;
     for (id key in dict)
         resMap.insert(std::pair<std::string, std::string>(
@@ -68,7 +66,7 @@
     return resMap;
 }
 
-+ (std::vector<std::map<std::string, std::string>>)arrayOfDictionnarisToVectorOfMap:(NSArray*)dictionaries {
++ (std::vector<std::map<std::string, std::string>>)arrayOfDictionariesToVectorOfMap:(NSArray*)dictionaries {
     std::vector<std::map<std::string, std::string>> resVector;
     for (NSDictionary* dictionary in dictionaries) {
         std::map<std::string, std::string> resMap;
@@ -89,7 +87,7 @@
 
     std::for_each(
                   vectorOfMaps.begin(), vectorOfMaps.end(), ^(std::map<std::string, std::string> map) {
-                      NSDictionary *dictionary = [Utils mapToDictionnary:map];
+                      NSDictionary *dictionary = [Utils mapToDictionary:map];
                       [array addObject:dictionary];
                   });
 
