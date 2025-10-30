@@ -337,15 +337,15 @@ extension CallViewModel {
         return self.callService.accept(callId: call?.callId ?? "")
     }
 
-    func placeCall(with uri: String, userName: String, account: AccountModel, isAudioOnly: Bool = false) {
+    func startCall(with uri: String, userName: String, account: AccountModel, isAudioOnly: Bool = false) {
         let isSwarm = uri.starts(with: "swarm:")
         let callObservable = isSwarm ?
-            self.callService.placeSwarmCall(withAccount: account,
+            self.callService.startSwarmCall(withAccount: account,
                                             uri: uri,
                                             userName: userName,
                                             videoSource: self.videoService.getVideoSource(),
                                             isAudioOnly: isAudioOnly) :
-            self.callService.placeCall(withAccount: account,
+            self.callService.startCall(withAccount: account,
                                        toParticipantId: uri,
                                        userName: userName,
                                        videoSource: self.videoService.getVideoSource(),
