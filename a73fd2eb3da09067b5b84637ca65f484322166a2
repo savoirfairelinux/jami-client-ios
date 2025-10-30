@@ -16,6 +16,24 @@
       "message": "endCallOrConference",
       "revId": "a73fd2eb3da09067b5b84637ca65f484322166a2",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9bf1798_78d55733",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-30T00:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5905dbef_05bcc68f",
+      "revId": "a73fd2eb3da09067b5b84637ca65f484322166a2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
