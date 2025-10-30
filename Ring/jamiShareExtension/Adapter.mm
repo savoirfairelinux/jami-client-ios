@@ -1,19 +1,19 @@
 /*
- *  Copyright (C) 2025-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2025-2025 Savoir-faire Linux Inc.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 // Required before importing jamiShareExtension-Swift.h: Swift clas ShareViewController inherit from UIViewController
@@ -55,10 +55,10 @@
         self.id = @(message.id.c_str());
         self.type = @(message.type.c_str());
         self.linearizedParent = @(message.linearizedParent.c_str());
-        self.body = [Utils mapToDictionnary: message.body];
+        self.body = [Utils mapToDictionary: message.body];
         self.reactions = [Utils vectorOfMapsToArray: message.reactions];
         self.editions = [Utils vectorOfMapsToArray: message.editions];
-        self.status = [Utils mapToDictionnaryWithInt: message.status];
+        self.status = [Utils mapToDictionaryWithInt: message.status];
     }
     return self;
 }
@@ -236,7 +236,7 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 }
 
 - (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data {
-    pushNotificationReceived(std::string([from UTF8String]), [Utils dictionnaryToMap:data]);
+    pushNotificationReceived(std::string([from UTF8String]), [Utils dictionaryToMap:data]);
 }
 
 - (NSArray*)getSwarmConversationsForAccount:(NSString*) accountId {
@@ -274,11 +274,11 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 
 - (NSDictionary *)getAccountDetails:(NSString *)accountID {
     auto accDetails = getAccountDetails(std::string([accountID UTF8String]));
-    return [Utils mapToDictionnary:accDetails];
+    return [Utils mapToDictionary:accDetails];
 }
 
 - (NSMutableDictionary<NSString*,NSString*>*)getConversationInfoForAccount:(NSString*) accountId conversationId:(NSString*) conversationId {
-    return [Utils mapToDictionnary: conversationInfos(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+    return [Utils mapToDictionary: conversationInfos(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
 }
 
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId {
