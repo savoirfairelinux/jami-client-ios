@@ -197,7 +197,7 @@ class CallsService: CallsAdapterDelegate {
     func conferenceCreated(conferenceId: String, conversationId: String, accountId: String) {
         if !conversationId.isEmpty && self.waitingSwarmCall.contains(conversationId) {
             // For swarm calls, we provide the confId, conversationId, and accountId
-            // to be picked up by the placeSwarmCall subscription
+            // to be picked up by the startSwarmCall subscription
             swarmCallCreated.onNext((confId: conferenceId, conversationId: conversationId, accountId: accountId))
         }
 
@@ -323,12 +323,12 @@ class CallsService: CallsAdapterDelegate {
         return callManagementService.resume(callId: callId)
     }
 
-    func placeSwarmCall(withAccount account: AccountModel, uri: String, userName: String, videoSource: String, isAudioOnly: Bool) -> Single<CallModel> {
+    func startSwarmCall(withAccount account: AccountModel, uri: String, userName: String, videoSource: String, isAudioOnly: Bool) -> Single<CallModel> {
         waitingSwarmCall = uri
         // When conference is created, conferenceCreated will be called. We need to wait for that and create a call after that.
         return Single.create { [weak self] single in
             guard let self = self else {
-                single(.failure(CallServiceError.placeCallFailed))
+                single(.failure(CallServiceError.startCallFailed))
                 return Disposables.create()
             }
 
@@ -336,7 +336,7 @@ class CallsService: CallsAdapterDelegate {
             let conversationId = uri.replacingOccurrences(of: "swarm:", with: "")
 
             let timeoutWorkItem = DispatchWorkItem {
-                single(.failure(CallServiceError.placeCallFailed))
+                single(.failure(CallServiceError.startCallFailed))
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 30.0, execute: timeoutWorkItem)
@@ -352,7 +352,7 @@ class CallsService: CallsAdapterDelegate {
                 })
 
             // Initiate the call process
-            let callDisposable = self.callManagementService.placeCall(
+            let callDisposable = self.callManagementService.startCall(
                 withAccount: account,
                 toParticipantId: uri,
                 userName: userName,
@@ -365,7 +365,7 @@ class CallsService: CallsAdapterDelegate {
                     // The actual call will be obtained via conference events
                 },
                 onFailure: { error in
-                    if error as? CallServiceError != CallServiceError.placeCallFailed {
+                    if error as? CallServiceError != CallServiceError.startCallFailed {
                         timeoutWorkItem.cancel()
                         single(.failure(error))
                     }
@@ -380,11 +380,11 @@ class CallsService: CallsAdapterDelegate {
         }
     }
 
-    func placeCall(withAccount account: AccountModel, toParticipantId participantId: String, userName: String, videoSource: String, isAudioOnly: Bool) -> Single<CallModel> {
+    func startCall(withAccount account: AccountModel, toParticipantId participantId: String, userName: String, videoSource: String, isAudioOnly: Bool) -> Single<CallModel> {
         if participantId.contains("rdv:") {
             self.activeCallsHelper.acceptCall(participantId)
         }
-        return callManagementService.placeCall(withAccount: account, toParticipantId: participantId, userName: userName, videoSource: videoSource, isAudioOnly: isAudioOnly)
+        return callManagementService.startCall(withAccount: account, toParticipantId: participantId, userName: userName, videoSource: videoSource, isAudioOnly: isAudioOnly)
     }
 
     func getActiveCall(accountId: String, conversationId: String) -> ActiveCall? {
@@ -466,7 +466,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func callAndAddParticipant(participant contactId: String, toCall callId: String, withAccount account: AccountModel, userName: String, videSource: String, isAudioOnly: Bool = false) {
-        self.placeCall(withAccount: account,
+        self.startCall(withAccount: account,
                        toParticipantId: contactId,
                        userName: userName,
                        videoSource: videSource,

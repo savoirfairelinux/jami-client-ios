@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2025 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,12 +42,12 @@
     return self.declineCallReturnValue;
 }
 
-- (NSString *)placeCallWithAccountId:(NSString *)accountId toParticipantId:(NSString *)participantId withMedia:(NSArray *)mediaList {
-    self.placeCallWithAccountIdCount++;
-    self.placeCallWithAccountIdAccountId = accountId;
-    self.placeCallWithAccountIdToParticipantId = participantId;
-    self.placeCallWithAccountIdMediaList = mediaList;
-    return self.placeCallReturnValue;
+- (NSString *)startCallWithAccountId:(NSString *)accountId toParticipantId:(NSString *)participantId withMedia:(NSArray *)mediaList {
+    self.startCallWithAccountIdCount++;
+    self.startCallWithAccountIdAccountId = accountId;
+    self.startCallWithAccountIdToParticipantId = participantId;
+    self.startCallWithAccountIdMediaList = mediaList;
+    return self.startCallReturnValue;
 }
 
 - (nullable NSArray<NSDictionary<NSString *, NSString *> *> *)currentMediaListWithCallId:(NSString *)callId accountId:(NSString *)accountId {
