@@ -1109,16 +1109,16 @@ internal enum L10n {
     internal static let badQrCode = L10n.tr("Localizable", "scan.badQrCode", fallback: "Bad QR code")
   }
   internal enum ShareExtension {
-    /// Double tap to select this account
-    internal static let accessibilitySelectAccount = L10n.tr("Localizable", "shareExtension.accessibilitySelectAccount", fallback: "Double tap to select this account")
-    /// Double tap to select this conversation
-    internal static let accessibilitySelectConversation = L10n.tr("Localizable", "shareExtension.accessibilitySelectConversation", fallback: "Double tap to select this conversation")
-    /// Selected account: %@. Double tap to change account.
+    /// Double-tap to select this account
+    internal static let accessibilitySelectAccount = L10n.tr("Localizable", "shareExtension.accessibilitySelectAccount", fallback: "Double-tap to select this account")
+    /// Double-tap to select this conversation
+    internal static let accessibilitySelectConversation = L10n.tr("Localizable", "shareExtension.accessibilitySelectConversation", fallback: "Double-tap to select this conversation")
+    /// Selected account: %@. Double-tap to change account.
     internal static func accessibilitySelectedAccount(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "shareExtension.accessibilitySelectedAccount", String(describing: p1), fallback: "Selected account: %@. Double tap to change account.")
+      return L10n.tr("Localizable", "shareExtension.accessibilitySelectedAccount", String(describing: p1), fallback: "Selected account: %@. Double-tap to change account.")
     }
-    /// Double tap to send to selected conversations
-    internal static let accessibilitySendButton = L10n.tr("Localizable", "shareExtension.accessibilitySendButton", fallback: "Double tap to send to selected conversations")
+    /// Double-tap to send to selected conversations
+    internal static let accessibilitySendButton = L10n.tr("Localizable", "shareExtension.accessibilitySendButton", fallback: "Double-tap to send to selected conversations")
     /// No conversations match your search
     internal static let noSearchResults = L10n.tr("Localizable", "shareExtension.noSearchResults", fallback: "No conversations match your search")
     /// Search conversations
@@ -1243,8 +1243,8 @@ internal enum L10n {
     internal static let descriptionAlertHeader = L10n.tr("Localizable", "swarm.descriptionAlertHeader", fallback: "Edit group description")
     /// Enter title
     internal static let descriptionPlaceholder = L10n.tr("Localizable", "swarm.descriptionPlaceholder", fallback: "Enter title")
-    /// Double tap to edit
-    internal static let editTextHint = L10n.tr("Localizable", "swarm.editTextHint", fallback: "Double tap to edit")
+    /// Double-tap to edit
+    internal static let editTextHint = L10n.tr("Localizable", "swarm.editTextHint", fallback: "Double-tap to edit")
     /// Members can be invited at any time after the group has been created.
     internal static let explanationText = L10n.tr("Localizable", "swarm.explanationText", fallback: "Members can be invited at any time after the group has been created.")
     /// Identifier
