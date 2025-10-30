@@ -1,22 +1,19 @@
 /*
- *  Copyright (C) 2016-2019 Savoir-faire Linux Inc.
+ * Copyright (C) 2016-2025 Savoir-faire Linux Inc.
  *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 #import "Ring-Swift.h"
@@ -57,7 +54,7 @@ static id <AccountAdapterDelegate> _delegate;
                                                                                             const std::map<std::string, std::string>& details) {
         if (AccountAdapter.delegate) {
             auto accountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSMutableDictionary* detailsDict = [Utils mapToDictionnary: details];
+            NSMutableDictionary* detailsDict = [Utils mapToDictionary: details];
             [AccountAdapter.delegate accountDetailsChangedWithAccountId: accountId details: detailsDict];
         }
     }));
@@ -66,7 +63,7 @@ static id <AccountAdapterDelegate> _delegate;
                                                                                              const std::map<std::string, std::string>& details) {
         if (AccountAdapter.delegate) {
             auto accountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSMutableDictionary* detailsDict = [Utils mapToDictionnary: details];
+            NSMutableDictionary* detailsDict = [Utils mapToDictionary: details];
             [AccountAdapter.delegate accountVoaltileDetailsChangedWithAccountId: accountId details: detailsDict];
         }
     }));
@@ -86,7 +83,7 @@ static id <AccountAdapterDelegate> _delegate;
                                                                                             const std::map<std::string, std::string>& detail) {
         if (AccountAdapter.delegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSMutableDictionary* detailsDict = [Utils mapToDictionnary:detail];
+            NSMutableDictionary* detailsDict = [Utils mapToDictionary:detail];
             [AccountAdapter.delegate addDeviceStateChangedWithAccountId:accountId
                                                                    opId:op_id
                                                                   state:state
@@ -99,7 +96,7 @@ static id <AccountAdapterDelegate> _delegate;
                                                                                              const std::map<std::string, std::string>& detail) {
         if (AccountAdapter.delegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSMutableDictionary* detailsDict = [Utils mapToDictionnary:detail];
+            NSMutableDictionary* detailsDict = [Utils mapToDictionary:detail];
             [AccountAdapter.delegate deviceAuthStateChangedWithAccountId:accountId
                                                                    state:state
                                                                  details:detailsDict];
@@ -109,7 +106,7 @@ static id <AccountAdapterDelegate> _delegate;
     confHandlers.insert(exportable_callback<ConfigurationSignal::KnownDevicesChanged>([&](const std::string& account_id, const std::map<std::string, std::string>& devices) {
         if (AccountAdapter.delegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSMutableDictionary* knDev = [Utils mapToDictionnary:devices];
+            NSMutableDictionary* knDev = [Utils mapToDictionary:devices];
             [AccountAdapter.delegate knownDevicesChangedFor:accountId devices:knDev];
         }
     }));
@@ -138,22 +135,22 @@ static id <AccountAdapterDelegate> _delegate;
 #pragma mark Accessors
 - (NSDictionary *)getAccountDetails:(NSString *)accountID {
     auto accDetails = getAccountDetails(std::string([accountID UTF8String]));
-    return [Utils mapToDictionnary:accDetails];
+    return [Utils mapToDictionary:accDetails];
 }
 
 - (NSDictionary *)getVolatileAccountDetails:(NSString *)accountID {
     auto volatileDetails = getVolatileAccountDetails(std::string([accountID UTF8String]));
-    return [Utils mapToDictionnary:volatileDetails];
+    return [Utils mapToDictionary:volatileDetails];
 }
 
 - (void)setAccountDetails:(NSString *)accountID
                   details:(NSDictionary *)details {
-    setAccountDetails(std::string([accountID UTF8String]),[Utils dictionnaryToMap:details]);
+    setAccountDetails(std::string([accountID UTF8String]),[Utils dictionaryToMap:details]);
 }
 
 - (void)setAccountCredentials:(NSString *)accountID
                   credentials:(NSArray*) credentials {
-    setCredentials(std::string([accountID UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap:credentials]);
+    setCredentials(std::string([accountID UTF8String]), [Utils arrayOfDictionariesToVectorOfMap:credentials]);
 }
 
 - (void)setAccountActive:(NSString *)accountID
@@ -167,7 +164,7 @@ static id <AccountAdapterDelegate> _delegate;
 }
 
 - (NSString *)addAccount:(NSDictionary *)details {
-    auto accountID = addAccount([Utils dictionnaryToMap:details]);
+    auto accountID = addAccount([Utils dictionaryToMap:details]);
     return [NSString stringWithUTF8String:accountID.c_str()];
 }
 
@@ -177,7 +174,7 @@ static id <AccountAdapterDelegate> _delegate;
 
 - (NSMutableDictionary *)getAccountTemplate:(NSString *)accountType {
     auto accountTemplate = getAccountTemplate(std::string([accountType UTF8String]));
-    return [Utils mapToDictionnary:accountTemplate];
+    return [Utils mapToDictionary:accountTemplate];
 }
 
 - (NSArray *)getCredentials:(NSString *)accountID {
@@ -187,7 +184,7 @@ static id <AccountAdapterDelegate> _delegate;
 
 - (NSDictionary *)getKnownRingDevices:(NSString *)accountID {
     auto ringDevices = getKnownRingDevices(std::string([accountID UTF8String]));
-    return [Utils mapToDictionnary:ringDevices];
+    return [Utils mapToDictionary:ringDevices];
 }
 
 - (bool)revokeDevice:(NSString *)accountID
@@ -240,14 +237,14 @@ static id <AccountAdapterDelegate> _delegate;
 }
 
 - (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data {
-    pushNotificationReceived(std::string([from UTF8String]), [Utils dictionnaryToMap:data]);
+    pushNotificationReceived(std::string([from UTF8String]), [Utils dictionaryToMap:data]);
 }
 - (void)setPushNotificationToken: (NSString*)token {
     setPushNotificationToken(std::string([token UTF8String]));
 }
 
 - (void)setPushNotificationConfig: (NSMutableDictionary *) config {
-    setPushNotificationConfig([Utils dictionnaryToMap:config]);
+    setPushNotificationConfig([Utils dictionaryToMap:config]);
 }
 
 - (void)setPushNotificationTopic:(NSString*)topic {
