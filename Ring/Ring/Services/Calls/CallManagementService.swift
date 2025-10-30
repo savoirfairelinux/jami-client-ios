@@ -25,7 +25,7 @@ enum CallServiceError: Error, LocalizedError {
     case endCallFailed
     case holdCallFailed
     case resumeCallFailed
-    case placeCallFailed
+    case startCallFailed
     case callNotFound
     case invalidUUID
 
@@ -41,8 +41,8 @@ enum CallServiceError: Error, LocalizedError {
             return "Failed to hold call"
         case .resumeCallFailed:
             return "Failed to resume call"
-        case .placeCallFailed:
-            return "Failed to place call"
+        case .startCallFailed:
+            return "Failed to start call"
         case .callNotFound:
             return "Call not found"
         case .invalidUUID:
@@ -125,7 +125,7 @@ class CallManagementService {
         }
     }
 
-    func placeCall(withAccount account: AccountModel,
+    func startCall(withAccount account: AccountModel,
                    toParticipantId participantId: String,
                    userName: String,
                    videoSource: String,
@@ -142,7 +142,7 @@ class CallManagementService {
         )
         .flatMap { [weak self] callModel -> Single<CallModel> in
             guard let self = self else {
-                return Single.error(CallServiceError.placeCallFailed)
+                return Single.error(CallServiceError.startCallFailed)
             }
             return self.executeCall(callModel: callModel, account: account, participantId: participantId)
         }
@@ -187,18 +187,18 @@ class CallManagementService {
     ) -> Single<CallModel> {
         return Single<CallModel>.create { [weak self] single in
             guard let self = self else {
-                single(.failure(CallServiceError.placeCallFailed))
+                single(.failure(CallServiceError.startCallFailed))
                 return Disposables.create()
             }
 
             let callId = self.initiateCall(account: account, participantId: participantId, mediaList: callModel.mediaList)
             if callId.isEmpty {
-                single(.failure(CallServiceError.placeCallFailed))
+                single(.failure(CallServiceError.startCallFailed))
                 return Disposables.create()
             }
 
             guard let callDictionary = self.getCallDetails(callId: callId, accountId: account.id) else {
-                single(.failure(CallServiceError.placeCallFailed))
+                single(.failure(CallServiceError.startCallFailed))
                 return Disposables.create()
             }
 
@@ -213,7 +213,7 @@ class CallManagementService {
     }
 
     private func initiateCall(account: AccountModel, participantId: String, mediaList: [[String: String]]) -> String {
-        guard let callId = self.callsAdapter.placeCall(
+        guard let callId = self.callsAdapter.startCall(
             withAccountId: account.id,
             toParticipantId: participantId,
             withMedia: mediaList
