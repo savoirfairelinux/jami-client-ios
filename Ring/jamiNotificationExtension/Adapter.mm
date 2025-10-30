@@ -89,7 +89,7 @@ std::map<std::string, std::string> nameServers;
                                                                                                                        if (delegate) {
                                                                                                                            NSString* convId = [NSString stringWithUTF8String:conversationId.c_str()];
                                                                                                                            NSString* account = [NSString stringWithUTF8String:accountId.c_str()];
-                                                                                                                           NSMutableDictionary* interaction = [Utils mapToDictionnary:message];
+                                                                                                                           NSMutableDictionary* interaction = [Utils mapToDictionary:message];
                                                                                                                            [delegate newInteractionWithConversationId:convId
                                                                                                                                                             accountId:account
                                                                                                                                                               message:interaction];
@@ -139,7 +139,7 @@ std::map<std::string, std::string> nameServers;
         if (delegate) {
             NSString* accountIdStr = [NSString stringWithUTF8String:accountId.c_str()];
             NSString* convIdStr = [NSString stringWithUTF8String:conversationId.c_str()];
-            NSMutableDictionary* info = [Utils mapToDictionnary: metadata];
+            NSMutableDictionary* info = [Utils mapToDictionary: metadata];
             [delegate receivedConversationRequestWithAccountId: accountIdStr conversationId: convIdStr metadata:info];
         }
     }));
@@ -231,11 +231,11 @@ std::map<std::string, std::string> nameServers;
 }
 
 - (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data {
-    pushNotificationReceived(std::string([from UTF8String]), [Utils dictionnaryToMap:data]);
+    pushNotificationReceived(std::string([from UTF8String]), [Utils dictionaryToMap:data]);
 }
 
 - (NSMutableDictionary<NSString*,NSString*>*)getConversationInfoForAccount:(NSString*) accountId conversationId:(NSString*) conversationId {
-    return [Utils mapToDictionnary: conversationInfos(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+    return [Utils mapToDictionary: conversationInfos(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
 }
 
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId {
@@ -244,7 +244,7 @@ std::map<std::string, std::string> nameServers;
 
 - (NSDictionary *)getAccountDetails:(NSString *)accountID {
     auto accDetails = getAccountDetails(std::string([accountID UTF8String]));
-    return [Utils mapToDictionnary:accDetails];
+    return [Utils mapToDictionary:accDetails];
 }
 
 - (NSDictionary<NSString*, NSString*>*)decrypt:(NSString*)keyPath
