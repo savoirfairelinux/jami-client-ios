@@ -83,7 +83,7 @@ static id <ContactsAdapterDelegate> _delegate;
 
 - (NSDictionary<NSString*,NSString*>*)contactDetailsWithURI:(NSString*)uri accountId:(NSString*)accountId {
     std::map<std::string,std::string> contactDetails = getContactDetails(std::string([accountId UTF8String]), std::string([uri UTF8String]));
-    return [Utils mapToDictionnary:contactDetails];
+    return [Utils mapToDictionary:contactDetails];
 }
 
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)contactsWithAccountId:(NSString*)accountId {

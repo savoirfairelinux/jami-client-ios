@@ -127,7 +127,7 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
     videoHandlers.insert(exportable_callback<MediaPlayerSignal::FileOpened>([&](const std::string& playerId, std::map<std::string, std::string> playerInfo) {
         if(VideoAdapter.videoDelegate) {
             NSString* player = @(playerId.c_str());
-            NSMutableDictionary* info = [Utils mapToDictionnary:playerInfo];
+            NSMutableDictionary* info = [Utils mapToDictionary:playerInfo];
             [VideoAdapter.videoDelegate fileOpenedFor:player fileInfo:info];
         }
     }));
@@ -204,7 +204,7 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
 
 - (void)addVideoDeviceWithName:(NSString*)deviceName withDevInfo:(NSDictionary*)deviceInfoDict {
     std::vector<std::map<std::string, std::string>> devInfo;
-    auto setting = [Utils dictionnaryToMap:deviceInfoDict];
+    auto setting = [Utils dictionaryToMap:deviceInfoDict];
     devInfo.emplace_back(setting);
     addVideoDevice(std::string([deviceName UTF8String]), devInfo);
 }
@@ -233,7 +233,7 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
 }
 
 - (BOOL)requestMediaChange:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList {
-    requestMediaChange(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
+    requestMediaChange(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils dictionaryArrayToMapVector: mediaList]);
     return false;
 }
 
