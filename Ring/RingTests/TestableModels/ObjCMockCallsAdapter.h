@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2025 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,12 +45,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *declineCallWithIdAccountId;
 @property (nonatomic, assign) BOOL declineCallReturnValue;
 
-// Place call
-@property (nonatomic, assign) NSInteger placeCallWithAccountIdCount;
-@property (nonatomic, copy, nullable) NSString *placeCallWithAccountIdAccountId;
-@property (nonatomic, copy, nullable) NSString *placeCallWithAccountIdToParticipantId;
-@property (nonatomic, copy, nullable) NSArray *placeCallWithAccountIdMediaList;
-@property (nonatomic, copy, nullable) NSString *placeCallReturnValue;
+// Start call
+@property (nonatomic, assign) NSInteger startCallWithAccountIdCount;
+@property (nonatomic, copy, nullable) NSString *startCallWithAccountIdAccountId;
+@property (nonatomic, copy, nullable) NSString *startCallWithAccountIdToParticipantId;
+@property (nonatomic, copy, nullable) NSArray *startCallWithAccountIdMediaList;
+@property (nonatomic, copy, nullable) NSString *startCallReturnValue;
 
 // Current media list
 @property (nonatomic, assign) NSInteger currentMediaListCallCount;

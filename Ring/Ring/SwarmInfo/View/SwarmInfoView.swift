@@ -147,13 +147,13 @@ public struct SwarmInfoView: View, StateEmittingView {
 
             callButton(
                 systemName: "phone",
-                action: placeAudioCall,
+                action: startAudioCall,
                 accessibilityLabel: L10n.Accessibility.conversationStartVoiceCall(viewModel.getContactDisplayName())
             )
 
             callButton(
                 systemName: "video",
-                action: placeVideoCall,
+                action: startVideoCall,
                 accessibilityLabel: L10n.Accessibility.conversationStartVideoCall(viewModel.getContactDisplayName())
             )
 
@@ -366,13 +366,13 @@ public struct SwarmInfoView: View, StateEmittingView {
 
     // MARK: - Actions
 
-    private func placeAudioCall() {
+    private func startAudioCall() {
         guard let jamiId = viewModel.getContactJamiId() else { return }
         let name = viewModel.getContactDisplayName()
         stateEmitter.emitState(.startAudioCall(contactRingId: jamiId, userName: name))
     }
 
-    private func placeVideoCall() {
+    private func startVideoCall() {
         guard let jamiId = viewModel.getContactJamiId() else { return }
         let name = viewModel.getContactDisplayName()
         stateEmitter.emitState(.startCall(contactRingId: jamiId, userName: name))
