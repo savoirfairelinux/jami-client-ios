@@ -572,7 +572,7 @@ class ConversationViewController: UIViewController,
         audioCallItem.accessibilityLabel = L10n.Accessibility.conversationStartVoiceCall(contactName)
         audioCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                self?.placeAudioOnlyCall()
+                self?.startAudioOnlyCall()
             })
             .disposed(by: self.disposeBag)
 
@@ -581,7 +581,7 @@ class ConversationViewController: UIViewController,
         videoCallItem.accessibilityLabel = L10n.Accessibility.conversationStartVideoCall(contactName)
         videoCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                self?.placeCall()
+                self?.startCall()
             })
             .disposed(by: self.disposeBag)
 
@@ -648,11 +648,11 @@ class ConversationViewController: UIViewController,
             .disposed(by: disposeBag)
     }
 
-    func placeCall() {
+    func startCall() {
         self.viewModel.startCall()
     }
 
-    func placeAudioOnlyCall() {
+    func startAudioOnlyCall() {
         self.viewModel.startAudioCall()
     }
 
