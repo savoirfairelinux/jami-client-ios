@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d398da61_86795a62",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-10-30T02:55:49Z",
+      "side": 1,
+      "message": "In `jami-daemon`, the `bin/dbus/cx.ring.Ring.CallManager.xml` file uses `detachParticipant`. Are they the same concept? If so, should `detach` be used instead of `disconnect`? Thank you",
+      "parentUuid": "e4cbca6e_02d36e13",
+      "revId": "cac7d6f3746b649e7b852282bf58f6350fdff782",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96e98865_d69914a4",
         "filename": "Ring/Ring/Bridging/CallsAdapter.mm",
         "patchSetId": 8
