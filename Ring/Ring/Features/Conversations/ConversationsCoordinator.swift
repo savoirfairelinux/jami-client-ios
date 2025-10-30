@@ -121,7 +121,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                 self.showIncomingCall(call: call)
             })
             .disposed(by: self.disposeBag)
-        self.callbackPlaceCall()
+        self.callbackStartCall()
         self.subscribeToActiveCalls()
         self.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
     }
@@ -500,7 +500,7 @@ extension ConversationsCoordinator {
                 withStyle: .fadeInOverFullScreen,
                 withAnimation: false,
                 withStateable: callViewController.viewModel)
-        callViewController.viewModel.placeCall(with: contactRingId,
+        callViewController.viewModel.startCall(with: contactRingId,
                                                userName: userName,
                                                account: account,
                                                isAudioOnly: isAudioOnly)

@@ -33,7 +33,7 @@
 
 - (void)answerMediaChangeResquest:(NSString*)callId accountId:(NSString*)accountId withMedia: (NSArray*)mediaList;
 
-- (NSString*)placeCallWithAccountId:(NSString*)accountId toParticipantId:(NSString*)participantId withMedia: (NSArray*)mediaList;
+- (NSString*)startCallWithAccountId:(NSString*)accountId toParticipantId:(NSString*)participantId withMedia: (NSArray*)mediaList;
 - (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId accountId:(NSString*)accountId;
 - (NSArray<NSString*>*)callsForAccountId:(NSString*)accountId;
 - (void)sendTextMessageWithCallID:(NSString*)callId accountId:(NSString*)accountId message:(NSDictionary*)message from:(NSString*)jamiId isMixed:(bool)isMixed;
