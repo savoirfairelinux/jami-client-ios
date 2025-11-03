@@ -514,7 +514,7 @@
 "generatedMessage.contactAdded" = "已收到邀請";
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@被邀请加入对话。";
-"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
+"generatedMessage.invitationAccepted" = "%@ 已加入对话。";
 "generatedMessage.youJoined" = "您加入了对话。";
 "generatedMessage.contactBlocked" = "%@被阻止参与对话。";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";

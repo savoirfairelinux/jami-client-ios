@@ -670,7 +670,7 @@
 "shareExtension.unsupportedType.title" = "Unsupported content";
 "shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
 "shareExtension.sending" = "Sending…";
-"shareExtension.noSearchResults" = "No conversations match your search";
+"shareExtension.noSearchResults" = "Cap conversa coincideix amb la cerca";
 "shareExtension.tryDifferentFilter" = "Try a different filter";
 "shareExtension.sendToConversation" = "Send to %d conversation";
 "shareExtension.sendToConversationsPlural" = "Send to %d conversations";

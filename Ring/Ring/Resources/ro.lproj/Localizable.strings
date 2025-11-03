@@ -458,7 +458,7 @@
 "account.statusUnknown" = "Necunoscut";
 "account.statusConnectionerror" = "Eroare de conectare";
 "account.needMigration" = "Contul trebuie transferat.";
-"account.me" = "Mine";
+"account.me" = "Eu";
 
 // Block List Page
 "blockListPage.noBlockedContacts" = "Niciun contact blocat";
@@ -671,12 +671,12 @@
 "shareExtension.unsupportedType.description" = "Distribuirea conținutului ales nu este implementată.";
 "shareExtension.sending" = "Se trimite…";
 "shareExtension.noSearchResults" = "Nicio conversație nu corespunde căutării";
-"shareExtension.tryDifferentFilter" = "Try a different filter";
-"shareExtension.sendToConversation" = "Send to %d conversation";
-"shareExtension.sendToConversationsPlural" = "Send to %d conversations";
+"shareExtension.tryDifferentFilter" = "Caută altfel";
+"shareExtension.sendToConversation" = "Trimite către %d conversație";
+"shareExtension.sendToConversationsPlural" = "Trimite către %d conversații";
 "shareExtension.selectAccountTitle" = "Alege contul";
-"shareExtension.searchConversations" = "Search conversations";
-"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
-"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
-"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
-"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";
+"shareExtension.searchConversations" = "Caută conversații";
+"shareExtension.accessibilitySelectConversation" = "Atinge de două ori pentru a selecționa această conversație";
+"shareExtension.accessibilitySelectedAccount" = "Contul ales: %@. Atinge de două ori pentru a schimba contul.";
+"shareExtension.accessibilitySendButton" = "Atinge de două ori pentru a trimite către conversațiile alese";
+"shareExtension.accessibilitySelectAccount" = "Atinge de două ori pentru a selecționa acest cont";
