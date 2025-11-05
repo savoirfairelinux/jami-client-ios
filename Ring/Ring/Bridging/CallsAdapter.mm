@@ -202,8 +202,8 @@ static id <CallsAdapterDelegate> _delegate;
     return hold(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
-- (BOOL)unholdCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
-    return unhold(std::string([accountId UTF8String]), std::string([callId UTF8String]));
+- (BOOL)resumeCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
+    return resume(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
 - (void)playDTMF:(NSString*)code {
