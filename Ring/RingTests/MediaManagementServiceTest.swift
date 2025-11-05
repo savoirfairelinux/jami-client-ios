@@ -280,12 +280,12 @@ class MediaManagementServiceTests: XCTestCase {
             .take(1)
             .subscribe(onNext: { call in
                 XCTAssertEqual(call.callId, self.testCall.callId)
-                XCTAssertTrue(call.peerHolding)
+                XCTAssertTrue(call.peerHold)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
 
-        await mediaManagementService.handleCallPlacedOnHold(callId: CallTestConstants.callId, holding: true)
+        await mediaManagementService.handleCallPlacedOnHold(callId: CallTestConstants.callId, hold: true)
 
         await fulfillment(of: [expectation], timeout: 1.0)
     }
