@@ -24,7 +24,7 @@ enum CallServiceError: Error, LocalizedError {
     case declineCallFailed
     case hangUpCallFailed
     case holdCallFailed
-    case unholdCallFailed
+    case resumeCallFailed
     case placeCallFailed
     case callNotFound
     case invalidUUID
@@ -39,8 +39,8 @@ enum CallServiceError: Error, LocalizedError {
             return "Failed to hang up call"
         case .holdCallFailed:
             return "Failed to hold call"
-        case .unholdCallFailed:
-            return "Failed to unhold call"
+        case .resumeCallFailed:
+            return "Failed to resume call"
         case .placeCallFailed:
             return "Failed to place call"
         case .callNotFound:
@@ -118,10 +118,10 @@ class CallManagementService {
         }
     }
 
-    func unhold(callId: String) -> Completable {
-        return createObservableAction(callId: callId, error: .unholdCallFailed) { [weak self] call in
+    func resume(callId: String) -> Completable {
+        return createObservableAction(callId: callId, error: .resumeCallFailed) { [weak self] call in
             guard let self = self else { return false }
-            return self.callsAdapter.unholdCall(withId: callId, accountId: call.accountId)
+            return self.callsAdapter.resumeCall(withId: callId, accountId: call.accountId)
         }
     }
 
