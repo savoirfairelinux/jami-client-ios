@@ -315,8 +315,8 @@ class CallsService: CallsAdapterDelegate {
         return callManagementService.hold(callId: callId)
     }
 
-    func unhold(callId: String) -> Completable {
-        return callManagementService.unhold(callId: callId)
+    func resume(callId: String) -> Completable {
+        return callManagementService.resume(callId: callId)
     }
 
     func placeSwarmCall(withAccount account: AccountModel, uri: String, userName: String, videoSource: String, isAudioOnly: Bool) -> Single<CallModel> {
