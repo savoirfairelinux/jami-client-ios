@@ -188,9 +188,9 @@ class CallsService: CallsAdapterDelegate {
         _ = self.callManagementService.addOrUpdateCall(callId: callId, callState: .incoming, callDictionary: callDictionary, mediaList: withMedia, notifyIncoming: true)
     }
 
-    func callPlacedOnHold(withCallId callId: String, holding: Bool) {
+    func callPlacedOnHold(withCallId callId: String, hold: Bool) {
         Task {
-            await mediaManagementService.handleCallPlacedOnHold(callId: callId, holding: holding)
+            await mediaManagementService.handleCallPlacedOnHold(callId: callId, hold: hold)
         }
     }
 
@@ -256,9 +256,9 @@ class CallsService: CallsAdapterDelegate {
         }
     }
 
-    func handleCallPlacedOnHold(callId: String, holding: Bool) {
+    func handleCallPlacedOnHold(callId: String, hold: Bool) {
         Task {
-            await mediaManagementService.handleCallPlacedOnHold(callId: callId, holding: holding)
+            await mediaManagementService.handleCallPlacedOnHold(callId: callId, hold: hold)
         }
     }
 
@@ -315,8 +315,8 @@ class CallsService: CallsAdapterDelegate {
         return callManagementService.hold(callId: callId)
     }
 
-    func unhold(callId: String) -> Completable {
-        return callManagementService.unhold(callId: callId)
+    func resume(callId: String) -> Completable {
+        return callManagementService.resume(callId: callId)
     }
 
     func placeSwarmCall(withAccount account: AccountModel, uri: String, userName: String, videoSource: String, isAudioOnly: Bool) -> Single<CallModel> {
