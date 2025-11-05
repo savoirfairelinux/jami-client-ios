@@ -120,10 +120,10 @@ static id <CallsAdapterDelegate> _delegate;
 
     //Peer place call on hold signal
     callHandlers.insert(exportable_callback<CallSignal::PeerHold>([&](const std::string& callId,
-                                                                      bool holding) {
+                                                                      bool hold) {
         if (CallsAdapter.delegate) {
             NSString* callIdString = [NSString stringWithUTF8String: callId.c_str()];
-            [CallsAdapter.delegate callPlacedOnHoldWithCallId:callIdString holding:holding];
+            [CallsAdapter.delegate callPlacedOnHoldWithCallId:callIdString hold:hold];
         }
     }));
 
@@ -202,8 +202,8 @@ static id <CallsAdapterDelegate> _delegate;
     return hold(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
-- (BOOL)unholdCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
-    return unhold(std::string([accountId UTF8String]), std::string([callId UTF8String]));
+- (BOOL)resumeCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
+    return resume(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
 - (void)playDTMF:(NSString*)code {
