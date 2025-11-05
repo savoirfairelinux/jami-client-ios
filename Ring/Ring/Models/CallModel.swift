@@ -1,22 +1,19 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 enum CallState: String {
@@ -28,7 +25,7 @@ enum CallState: String {
     case busy = "BUSY"
     case failure = "FAILURE"
     case hold = "HOLD"
-    case unhold = "UNHOLD"
+    case resume = "UNHOLD"
     case inactive = "INACTIVE"
     case over = "OVER"
     case unknown = "UNKNOWN"
@@ -53,7 +50,7 @@ enum CallState: String {
     }
 
     func isActive() -> Bool {
-        return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold || self == .unhold
+        return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold || self == .resume
     }
 }
 
@@ -70,7 +67,7 @@ enum CallDetailKey: String {
     case displayNameKey = "DISPLAY_NAME"
     case timeStampStartKey = "TIMESTAMP_START"
     case accountIdKey = "ACCOUNTID"
-    case peerHoldingKey = "PEER_HOLDING"
+    case peerHoldKey = "PEER_HOLDING"
     case audioMutedKey = "AUDIO_MUTED"
     case videoMutedKey = "VIDEO_MUTED"
     case videoSourceKey = "VIDEO_SOURCE"
@@ -86,7 +83,7 @@ enum MediaAttributeKey: String {
     case source = "SOURCE"
     case sourceType = "SOURCE_TYPE"
     case label = "LABEL"
-    case onHold = "ON_HOLD"
+    case hold = "ON_HOLD"
 }
 
 enum MediaAttributeValue: String {
@@ -130,7 +127,7 @@ public class CallModel {
     var audioMuted: Bool = false
     var callRecorded: Bool = false
     var videoMuted: Bool = false
-    var peerHolding: Bool = false
+    var peerHold: Bool = false
     var speakerActive: Bool = false
     var isAudioOnly: Bool = false
     var layout: CallLayout = .one
@@ -243,8 +240,8 @@ public class CallModel {
             self.accountId = accountId
         }
 
-        if let peerHolding = dictionary[CallDetailKey.peerHoldingKey.rawValue]?.toBool() {
-            self.peerHolding = peerHolding
+        if let peerHold = dictionary[CallDetailKey.peerHoldKey.rawValue]?.toBool() {
+            self.peerHold = peerHold
         }
     }
 
@@ -267,7 +264,7 @@ public class CallModel {
 
     func isCurrent() -> Bool {
         return self.state == .current || self.state == .hold ||
-            self.state == .unhold || self.state == .ringing
+            self.state == .resume || self.state == .ringing
     }
 
     func updateParticipantsCallId(callId: String) {
