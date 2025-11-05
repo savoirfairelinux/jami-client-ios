@@ -104,10 +104,10 @@ final class MediaManagementService {
         self.updateCall(call)
     }
 
-    func handleCallPlacedOnHold(callId: String, holding: Bool) async {
+    func handleCallPlacedOnHold(callId: String, hold: Bool) async {
         guard let call = self.getCall(with: callId) else { return }
 
-        call.peerHolding = holding
+        call.peerHold = hold
         self.updateCall(call)
     }
 
