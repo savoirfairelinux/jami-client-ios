@@ -430,7 +430,7 @@ extension CallViewModel {
                 })
                 .disposed(by: self.disposeBag)
         } else if call.state == .hold {
-            self.callService.unhold(callId: call.callId)
+            self.callService.resume(callId: call.callId)
                 .subscribe(onCompleted: { [weak self] in
                     self?.log.info("call unpaused")
                 }, onError: { [weak self](error) in
