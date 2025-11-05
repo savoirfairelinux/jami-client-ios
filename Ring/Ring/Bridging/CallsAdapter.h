@@ -28,7 +28,7 @@
 - (BOOL)declineCallWithId:(NSString*)callId accountId:(NSString*)accountId;
 - (BOOL)endCall:(NSString*)callId accountId:(NSString*)accountId;
 - (BOOL)holdCallWithId:(NSString*)callId accountId:(NSString*)accountId;
-- (BOOL)unholdCallWithId:(NSString*)callId accountId:(NSString*)accountId;
+- (BOOL)resumeCallWithId:(NSString*)callId accountId:(NSString*)accountId;
 - (void)playDTMF:(NSString*)code;
 
 - (void)answerMediaChangeResquest:(NSString*)callId accountId:(NSString*)accountId withMedia: (NSArray*)mediaList;
