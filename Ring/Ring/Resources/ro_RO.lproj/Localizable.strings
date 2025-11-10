@@ -69,7 +69,7 @@
 // Swarm
 "swarm.muteConversation" = "Dezactivează notificările";
 "swarm.leaveConversation" = "Termină conversația";
-"swarm.removeConversation" = "Elimină conversația";
+"swarm.removeConversation" = "Șterge conversația";
 "swarm.removeContact" = "Șterge contactul";
 "swarm.restartConversation" = "Reîncepe conversația";
 "swarm.conversationEnded" = "Conversație terminată";
@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Deschide o pagină cu codul QR al contactului";
 "swarm.accessibilityContactShareHint" = "Arată opțiunile de distribuire pentru informațiile de contact";
 "swarm.accessibilityColorPicker" = "Alege culoarea conversației";
-"swarm.editTextHint" = "Atinge de două ori pentru a modifica";
+"swarm.editTextHint" = "Double-tap to edit";
 "swarm.conversationHeader" = "Conversație";
 "swarm.shareContactMessage" = "Poți adăuga acest contact %1@ pe platforma de comunicare distribuită Jami: https://jami.net";
 "swarm.oneToOne" = "Privat";
@@ -676,7 +676,7 @@
 "shareExtension.sendToConversationsPlural" = "Trimite către %d conversații";
 "shareExtension.selectAccountTitle" = "Alege contul";
 "shareExtension.searchConversations" = "Caută conversații";
-"shareExtension.accessibilitySelectConversation" = "Atinge de două ori pentru a selecționa această conversație";
-"shareExtension.accessibilitySelectedAccount" = "Contul ales: %@. Atinge de două ori pentru a schimba contul.";
-"shareExtension.accessibilitySendButton" = "Atinge de două ori pentru a trimite către conversațiile alese";
-"shareExtension.accessibilitySelectAccount" = "Atinge de două ori pentru a selecționa acest cont";
+"shareExtension.accessibilitySelectConversation" = "Double-tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";

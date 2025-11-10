@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Abrir una pantalla con el código QR del contacto";
 "swarm.accessibilityContactShareHint" = "Abrir opciones para compartir información de contacto";
 "swarm.accessibilityColorPicker" = "Selector de color de conversación";
-"swarm.editTextHint" = "Toca dos veces para editar";
+"swarm.editTextHint" = "Double-tap to edit";
 "swarm.conversationHeader" = "Conversación";
 "swarm.shareContactMessage" = "Puede agregar este contacto, %1@, en la plataforma de comunicación distribuida: https://jami.net";
 "swarm.oneToOne" = "Privado";
@@ -676,7 +676,7 @@
 "shareExtension.sendToConversationsPlural" = "Enviar a %d conversaciones";
 "shareExtension.selectAccountTitle" = "Seleccionar cuenta";
 "shareExtension.searchConversations" = "Enviar a conversaciones";
-"shareExtension.accessibilitySelectConversation" = "Toca dos veces para seleccionar esta conversación";
-"shareExtension.accessibilitySelectedAccount" = "Cuenta seleccionada: %@. Toca dos veces para cambiar de cuenta.";
-"shareExtension.accessibilitySendButton" = "Toca dos veces para enviar a conversaciones seleccionadas";
-"shareExtension.accessibilitySelectAccount" = "Toque dos veces para seleccionar esta cuenta";
+"shareExtension.accessibilitySelectConversation" = "Double-tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";

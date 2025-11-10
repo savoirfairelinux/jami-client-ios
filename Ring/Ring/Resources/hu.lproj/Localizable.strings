@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Kapcsolattartó QR-kód képernyőjének megnyitása";
 "swarm.accessibilityContactShareHint" = "Megosztási lehetőség megnyitása a kapcsolattartói adatokhoz";
 "swarm.accessibilityColorPicker" = "Beszélgetés színválasztója";
-"swarm.editTextHint" = "Koppintson duplán a szerkesztéshez";
+"swarm.editTextHint" = "Double-tap to edit";
 "swarm.conversationHeader" = "Beszélgetés";
 "swarm.shareContactMessage" = "Ezt a kapcsolattartót, %1@, felveheti a Jami elosztott kommunikációs platformjára: https://jami.net";
 "swarm.oneToOne" = "Magánjellegű";
@@ -676,7 +676,7 @@
 "shareExtension.sendToConversationsPlural" = "Küldés %d beszélgetésbe";
 "shareExtension.selectAccountTitle" = "Fiók kijelölése";
 "shareExtension.searchConversations" = "Beszélgetések keresése";
-"shareExtension.accessibilitySelectConversation" = "Koppintson duplán a beszélgetés kijelöléséhez";
-"shareExtension.accessibilitySelectedAccount" = "Kijelölt fiók: %@. Koppintson duplán a fiókváltáshoz.";
-"shareExtension.accessibilitySendButton" = "Koppintson duplán a kijelölt beszélgetésekbe küldéshez";
-"shareExtension.accessibilitySelectAccount" = "Koppintson duplán a fiók kijelöléséhez";
+"shareExtension.accessibilitySelectConversation" = "Double-tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";

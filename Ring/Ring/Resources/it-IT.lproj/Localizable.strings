@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Apre una schermata con il codice QR del contatto";
 "swarm.accessibilityContactShareHint" = "Apre le opzioni di condivisione per le informazioni di contatto";
 "swarm.accessibilityColorPicker" = "Selettore colore";
-"swarm.editTextHint" = "Doppio tocco per modificare";
+"swarm.editTextHint" = "Double-tap to edit";
 "swarm.conversationHeader" = "Conversazione";
 "swarm.shareContactMessage" = "È possibile aggiungere il contatto %1@ sulla piattaforma di comunicazione distribuita Jami: https://jami.net";
 "swarm.oneToOne" = "Privato";
@@ -474,14 +474,14 @@
 "linkDevice.initialInfo" = "Sul nuovo dispositivo, iniziare un nuovo account.";
 "linkDevice.infoAddAccount" = "Seleziona Aggiungi account → Connetti da un altro dispositivo.";
 "linkDevice.infoQRCode" = "Quando si è pronti, scansionare il codice QR.";
-"linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
-"linkDevice.connecting" = "Connecting to your new device…";
-"linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
-"linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
-"linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "The account was imported successfully on the new device.";
+"linkDevice.infoCode" = "Quando sei pronto, inserisci il codice e tocca Connetti.";
+"linkDevice.connecting" = "Connessione al nuovo dispositivo…";
+"linkDevice.authenticationInfo" = "Nuovo dispositivo trovato al seguente indirizzo IP. Sei tu? Per continuare l'operazione di esportazione dell'account, tocca Conferma.";
+"linkDevice.newDeviceIP" = "Nuovo indirizzo IP del dispositivo: %1@";
+"linkDevice.code" = "codice";
+"linkDevice.wrongEntry" = "Identificativo del nuovo dispositivo non riconosciuto. Seguire le istruzioni sopra riportate.";
+"linkDevice.exportInProgress" = "L'operazione di esportazione dell'account nel nuovo dispositivo è in corso. Confermare l'importazione sul nuovo dispositivo.";
+"linkDevice.completed" = "L'account è stato importato correttamente nel nuovo dispositivo.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Avvia chiamata vocale";
@@ -506,7 +506,7 @@
 "notifications.locationSharingStopped" = "Condivisione della posizione in arrivo interrotta";
 "dataTransfer.readableStatusDecline" = "Rifiuta";
 "dataTransfer.readableStatusAccept" = "Accetta";
-"dataTransfer.infoMessage" = "Tap to start recording";
+"dataTransfer.infoMessage" = "Tocca per registrare";
 "dataTransfer.sendMessage" = "Invia";
 
 
@@ -551,7 +551,7 @@
 "migrateAccount.title" = "Migrazione account";
 "migrateAccount.migrateButton" = "Migrare l'account";
 "migrateAccount.explanation" = "È richiesta la migrazione dell'account.";
-"migrateAccount.passwordExplanation" = "To continue with the account migration, enter the account password.";
+"migrateAccount.passwordExplanation" = "Per continuare con la migrazione dell'account, inserire la password dell'account.";
 "migrateAccount.error" = "Si è verificato un errore durante la migrazione dell'account. Riprova o elimina l'account.";
 "migrateAccount.migrating" = "Migrazione…";
 "migrateAccount.migrateAnother" = "Migrare un altro account";
@@ -595,10 +595,10 @@
 "accessibility.conversationRowUnreadCount" = "%@ messaggi non letti.";
 "accessibility.conversationRowBlocked" = "Conversazione bloccata";
 "accessibility.conversationRowSyncing" = "Sincronizzazione in corso";
-"accessibility.conversationRowLastMessage" = "Last message at %@";
+"accessibility.conversationRowLastMessage" = "Ultimo messaggio alle %@";
 "accessibility.userPresenceOnline" = "Connesso";
 "accessibility.userPresenceAvailable" = "Disponibile";
-"accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
+"accessibility.pendingRequestsRowPlural" = "Inviti ricevuti: %@ inviti in attesa";
 "accessibility.pendingRequestsRowSingular" = "Invito ricevuto: %@ invito in attesa";
 "accessibility.pendingRequestsRowHint" = "Doppio tocco per rivedere e rispondere agli inviti che hai ricevuto";
 "accessibility.pendingRequestsListBlockUser" = "Blocca il mittente dell'invito";
@@ -608,14 +608,14 @@
 "accessibility.messageBubbleEdited" = "Modificato";
 "accessibility.messageBubbleRead" = "Letto";
 "accessibility.messageBubbleUnread" = "Non letto";
-"accessibility.textNotAvailable" = "Empty text message received on %@. This might not have been sent correctly.";
+"accessibility.textNotAvailable" = "Messaggio di testo vuoto ricevuto il %@. Potrebbe non essere stato inviato correttamente.";
 "accessibility.fileTransferNoName" = "File ricevuto il %@, nome non disponibile";
 "accessibility.inReply" = "In risposta al messaggio";
-"accessibility.text.receivedOn" = "%1@, message received on %2@";
-"accessibility.text.sentOn" = "%1@, message sent on %2@";
-"accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
-"accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.text.receivedOn" = "%1@, messaggio ricevuto il %2@";
+"accessibility.text.sentOn" = "%1@, messaggio inviato il %2@";
+"accessibility.fileTransfer.receivedOn" = "File: %1@ , ricevuto il %2@";
+"accessibility.fileTransfer.sentOn" = "File: %1@, inviato il %2@";
+"accessibility.call.lasted" = "Durata %@";
 "accessibility.calls.default.toggleAudio" = "Disattiva microfono";
 "accessibility.calls.default.toggleVideo" = "Avvia fotocamera";
 "accessibility.calls.default.pauseCall" = "Metti in pausa la chiamata";
@@ -645,38 +645,38 @@
 "accessibility.conference.unmuteAudio" = "Attiva microfono";
 "accessibility.conference.hangup" = "Termina chiamata";
 "accessibility.conference.lowerHand" = "Abbassa la mano";
-"accessibility.account.tokenQRcode" = "Token QR code";
+"accessibility.account.tokenQRcode" = "Codice QR del token";
 
 // Swarm Colors
-"swarmColors.vibrantPink" = "Vibrant pink";
-"swarmColors.purple" = "Purple";
-"swarmColors.violet" = "Violet";
-"swarmColors.indigoBlue" = "Indigo blue";
-"swarmColors.skyBlue" = "Sky blue";
-"swarmColors.cyan" = "Cyan";
-"swarmColors.teal" = "Teal";
-"swarmColors.green" = "Green";
-"swarmColors.limeGreen" = "Lime green";
-"swarmColors.mediumGray" = "Medium gray";
-"swarmColors.yellowGreen" = "Yellow-green";
-"swarmColors.amber" = "Amber";
-"swarmColors.brightOrange" = "Bright orange";
-"swarmColors.brown" = "Brown";
-"swarmColors.steelBlue" = "Steel blue";
+"swarmColors.vibrantPink" = "Rosa vibrante";
+"swarmColors.purple" = "Porpora";
+"swarmColors.violet" = "Viola";
+"swarmColors.indigoBlue" = "Blu indaco";
+"swarmColors.skyBlue" = "Celeste";
+"swarmColors.cyan" = "Ciano";
+"swarmColors.teal" = "Verde acqua";
+"swarmColors.green" = "Verde";
+"swarmColors.limeGreen" = "Verde lime";
+"swarmColors.mediumGray" = "Grigio medio";
+"swarmColors.yellowGreen" = "Giallo-verde";
+"swarmColors.amber" = "Ambra";
+"swarmColors.brightOrange" = "Arancione brillante";
+"swarmColors.brown" = "Marrone";
+"swarmColors.steelBlue" = "Blu acciaio";
 
 // Share extension
-"shareExtension.noAccount.title" = "Account not found";
-"shareExtension.noAccount.description" = "To continue, create an account in the main application.";
-"shareExtension.unsupportedType.title" = "Unsupported content";
-"shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
-"shareExtension.sending" = "Sending…";
+"shareExtension.noAccount.title" = "Account non trovato";
+"shareExtension.noAccount.description" = "Per continuare, crea un account nell'applicazione principale.";
+"shareExtension.unsupportedType.title" = "Contenuto non supportato";
+"shareExtension.unsupportedType.description" = "La condivisione del contenuto selezionato non è attualmente supportata.";
+"shareExtension.sending" = "Invio in corso…";
 "shareExtension.noSearchResults" = "Nessuna conversazione corrisponde";
-"shareExtension.tryDifferentFilter" = "Try a different filter";
-"shareExtension.sendToConversation" = "Send to %d conversation";
-"shareExtension.sendToConversationsPlural" = "Send to %d conversations";
+"shareExtension.tryDifferentFilter" = "Prova un filtro diverso";
+"shareExtension.sendToConversation" = "Invia a %d conversazione";
+"shareExtension.sendToConversationsPlural" = "Invia a %d conversazioni";
 "shareExtension.selectAccountTitle" = "Seleziona account";
-"shareExtension.searchConversations" = "Search conversations";
-"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
-"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
-"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
-"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";
+"shareExtension.searchConversations" = "Cerca conversazioni";
+"shareExtension.accessibilitySelectConversation" = "Double-tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";
