@@ -151,6 +151,7 @@ extension CallsProviderService {
     }
 
     func previewPendingCall(peerId: String, withVideo: Bool, displayName: String,
+                            pushNotificationPayload: [String: String]? = nil,
                             completion: ((Error?) -> Void)?) {
         let update = CXCallUpdate()
         let handleType = CXHandle.HandleType.phoneNumber
@@ -173,6 +174,9 @@ extension CallsProviderService {
         let serviceEventType: ServiceEventType = .callProviderPreviewPendingCall
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.callUUID, value: unhandeledCall.uuid.uuidString)
+        if let payload = pushNotificationPayload {
+            serviceEvent.addEventInput(.content, value: payload)
+        }
         self.responseStream.onNext(serviceEvent)
         startTimer(callUUID: unhandeledCall.uuid)
     }

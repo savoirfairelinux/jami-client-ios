@@ -705,7 +705,20 @@ extension AppDelegate: PKPushRegistryDelegate {
         let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
         let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
         let displayName = payload.dictionaryPayload["displayName"] as? String ?? ""
-        callsProvider.previewPendingCall(peerId: peerId, withVideo: hasVideo.boolValue, displayName: displayName) { error in
+
+        var dictionary = [String: String]()
+        for key in payload.dictionaryPayload.keys {
+            if let value = payload.dictionaryPayload[key] {
+                let keyString = String(describing: key)
+                let valueString = String(describing: value)
+                dictionary[keyString] = valueString
+            }
+        }
+
+        callsProvider.previewPendingCall(peerId: peerId,
+                                         withVideo: hasVideo.boolValue,
+                                         displayName: displayName,
+                                         pushNotificationPayload: dictionary) { error in
             if error != nil {
                 self.updateCallScreenState(presenting: false)
             }

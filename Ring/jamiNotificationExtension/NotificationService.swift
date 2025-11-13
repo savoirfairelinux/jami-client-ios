@@ -237,6 +237,7 @@ class NotificationService: UNNotificationServiceExtension {
     private var idsToProcess: Set<String> = []
     private var processAll: Bool = false
     private let taskPropertyQueue = DispatchQueue(label: Constants.appIdentifier + ".TaskProperty.queue")
+    private var originalNotificationData: [String: String] = [:]
     // The following describe scheduled events and will be synchronized with the DispatchQueue
     private var itemsToPresent = 0
     private var syncCompleted = false
@@ -296,6 +297,7 @@ class NotificationService: UNNotificationServiceExtension {
         log("Handling new notification (app in background)")
 
         self.accountId = accountId
+        self.originalNotificationData = requestData
         prepareAndStartStreaming(for: request, with: requestData)
     }
 
@@ -371,7 +373,12 @@ class NotificationService: UNNotificationServiceExtension {
                 guard let self = self else {
                     return
                 }
-                var info = userInfo
+                var info: [AnyHashable: Any] = [:]
+                // Include all original notification data fields
+                for (key, value) in self.originalNotificationData {
+                    info[key] = value
+                }
+                // Add call-specific fields
                 info["peerId"] = peerId
                 info["hasVideo"] = hasVideo
                 let name = self.bestName(accountId: self.accountId, contactId: peerId)
@@ -423,6 +430,10 @@ class NotificationService: UNNotificationServiceExtension {
         // If the account is already active, return, otherwise we set it to active and continue
         if self.accountIsActive.compareExchange(expected: false, desired: true, ordering: .relaxed).original {
             return
+        }
+
+        if !self.originalNotificationData.isEmpty {
+            self.adapterService.pushNotificationReceived(accountId: self.accountId, data: self.originalNotificationData)
         }
 
         jamiTaskId = UUID().uuidString

@@ -100,22 +100,14 @@ class ConversationsManager {
                 return event.eventType == .callProviderDeclineCall ||
                     event.eventType == .callProviderPreviewPendingCall
             })
-            .map { event in
-                event.eventType
-            }
         let callEndedEvents = self.callService.sharedResponseStream
             .filter({ (event) in
                 return  event.eventType == .callEnded
             })
-            .map { event in
-                event.eventType
-            }
-        Observable.of(callProviderEvents.asObservable(),
-                      callEndedEvents.asObservable(),
-                      appState
-                        .asObservable())
-            .merge()
-            .subscribe { [weak self] eventType in
+
+        appState
+            .asObservable()
+            .subscribe(onNext: { [weak self] eventType in
                 guard let self = self else { return }
                 switch eventType {
                 case .appEnterBackground:
@@ -125,8 +117,24 @@ class ConversationsManager {
                         guard let self = self else { return }
                         self.updateForegroundState()
                     }
+                default:
+                    break
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        Observable.of(callProviderEvents.asObservable(),
+                      callEndedEvents.asObservable())
+            .merge()
+            .subscribe(onNext: { [weak self] serviceEvent in
+                guard let self = self else { return }
+                switch serviceEvent.eventType {
                 case .callProviderPreviewPendingCall:
                     self.accountsService.setAccountsActive(active: true)
+                    if let payload: [String: String] = serviceEvent.getEventInput(.content),
+                       !payload.isEmpty {
+                        self.accountsService.pushNotificationReceived(data: payload)
+                    }
                     // Reload conversations updated in the background if required.
                     DispatchQueue.global(qos: .background).async { [weak self] in
                         guard let self = self,
@@ -145,8 +153,8 @@ class ConversationsManager {
                 default:
                     break
                 }
-            } onError: { _ in
-            }
+            }, onError: { _ in
+            })
             .disposed(by: self.disposeBag)
     }
 
