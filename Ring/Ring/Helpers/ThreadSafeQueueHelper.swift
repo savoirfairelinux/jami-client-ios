@@ -134,4 +134,12 @@ final class SynchronizedRelay<T> {
             self.relay.accept(value)
         }
     }
+
+    func updateSync(_ block: (inout T) -> Void) {
+        queueHelper.safeBarrierSync {
+            var value = self.relay.value
+            block(&value)
+            self.relay.accept(value)
+        }
+    }
 }

@@ -258,7 +258,7 @@ public class CallModel {
     }
 
     func isExists() -> Bool {
-        return self.state != .over && self.state != .inactive && self.state != .failure && self.state != .busy
+        return self.state != .over && self.state != .failure && self.state != .busy
     }
 
     func isActive() -> Bool {
