@@ -98,6 +98,30 @@ struct PulsatingRing: View {
     }
 }
 
+struct CallStateTextView: View {
+    let text: String
+    @SwiftUI.State private var opacity: Double = 1.0
+
+    var body: some View {
+        Text(text)
+            .font(.callout)
+            .lineLimit(1)
+            .foregroundColor(.white)
+            .opacity(opacity)
+            .onAppear {
+                if !text.isEmpty {
+                    withAnimation(
+                        Animation
+                            .easeInOut(duration: 1.5)
+                            .repeatForever(autoreverses: true)
+                    ) {
+                        opacity = 0.5
+                    }
+                }
+            }
+    }
+}
+
 struct ContainerView: View {
     @ObservedObject var model: ContainerViewModel
     @SwiftUI.State var isAnimatingTopMainGrid = false
@@ -229,7 +253,7 @@ struct ContainerView: View {
                 Spacer().frame(height: 50)
                 participantText(participant.name, font: .title)
                 Spacer().frame(height: 10)
-                participantText(model.callState, font: .callout)
+                callStateText(model.callState)
                 Spacer()
             }
         }
@@ -240,6 +264,12 @@ struct ContainerView: View {
             .font(font)
             .lineLimit(1)
             .foregroundColor(.white)
+            .offset(y: avatarOffset)
+            .frame(maxWidth: dimensionsManager.adaptiveWidth - 50)
+    }
+
+    private func callStateText(_ text: String) -> some View {
+        CallStateTextView(text: text)
             .offset(y: avatarOffset)
             .frame(maxWidth: dimensionsManager.adaptiveWidth - 50)
     }

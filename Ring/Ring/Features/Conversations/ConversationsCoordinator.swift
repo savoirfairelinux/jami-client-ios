@@ -121,9 +121,41 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                 self.showIncomingCall(call: call)
             })
             .disposed(by: self.disposeBag)
+
+        self.callsProvider.sharedResponseStream
+            .filter({ serviceEvent in
+                return serviceEvent.eventType == .callProviderAcceptUnhandeledCall
+            })
+            .subscribe(onNext: { [weak self] serviceEvent in
+                guard let self = self,
+                      let callUUID: String = serviceEvent.getEventInput(.callUUID),
+                      let peerId: String = serviceEvent.getEventInput(.peerUri),
+                      let accountId: String = serviceEvent.getEventInput(.accountId) else { return }
+
+                self.presentPendingCall(callUUID: callUUID, peerId: peerId, accountId: accountId)
+            })
+            .disposed(by: self.disposeBag)
         self.callbackPlaceCall()
         self.subscribeToActiveCalls()
         self.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
+    }
+
+    func presentPendingCall(callUUID: String, peerId: String, accountId: String) {
+        let controller = CallViewController.instantiate(with: self.injectionBag)
+        controller.viewModel.subscribePendingCall(callId: callUUID)
+        if let call = self.callService.createPlaceholderCallModel(
+            callUUID: UUID(uuidString: callUUID)!,
+            peerId: peerId,
+            accountId: accountId
+        ) {
+            controller.viewModel.call = call
+            self.present(viewController: controller,
+                         withStyle: .fadeInOverFullScreen,
+                         withAnimation: false,
+                         withStateable: controller.viewModel)
+        } else {
+            print("Do not need placeholder call, a call already exists")
+        }
     }
 
     func start() {
@@ -379,12 +411,6 @@ extension ConversationsCoordinator {
               !call.callId.isEmpty else {
             return
         }
-        if self.accountService.boothMode() {
-            self.callService.decline(callId: call.callId)
-                .subscribe()
-                .disposed(by: self.disposeBag)
-            return
-        }
         callsProvider.sharedResponseStream
             .filter({ [weak call] serviceEvent in
                 guard serviceEvent.eventType == .callProviderAcceptCall ||
@@ -402,6 +428,12 @@ extension ConversationsCoordinator {
                 guard let self = self,
                       let call = call else { return }
                 if serviceEvent.eventType == ServiceEventType.callProviderAcceptCall {
+                    // check if we have presented call screen for uuid
+                    if let topController = self.getTopController() as? CallViewController,
+                       topController.viewModel.call?.callUUID == call.callUUID {
+                        // Call screen for this UUID is already presented
+                        return
+                    }
                     self.presentCallScreen(call: call)
                 }
             })
@@ -424,7 +456,6 @@ extension ConversationsCoordinator {
             })
             .disposed(by: self.disposeBag)
         self.nameService.lookupAddress(withAccount: account.id, nameserver: "", address: call.callUri.filterOutHost())
-
     }
 
     func presentCallScreen(call: CallModel) {

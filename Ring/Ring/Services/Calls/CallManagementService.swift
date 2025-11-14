@@ -246,6 +246,28 @@ class CallManagementService {
         return call
     }
 
+    func createPlaceholderCallModel(callUUID: UUID, peerId: String, accountId: String) -> CallModel? {
+        var pendingCall: CallModel?
+        calls.updateSync { calls in
+            let existsByUUID = calls.values.contains(where: { $0.callUUID.uuidString == callUUID.uuidString })
+            let existsByParticipant = calls.values.contains(where: { $0.paricipantHash() == peerId && $0.accountId == accountId })
+
+            if !existsByUUID && !existsByParticipant {
+                pendingCall = CallModel()
+                pendingCall?.callUUID = callUUID
+                pendingCall?.callUri = peerId
+                pendingCall?.displayName = peerId
+                pendingCall?.accountId = accountId
+                pendingCall?.state = .connecting
+                pendingCall?.callType = .incoming
+                pendingCall?.callId = callUUID.uuidString
+                calls[callUUID.uuidString] = pendingCall!
+            }
+        }
+
+        return pendingCall
+    }
+
     func isCurrentCall() -> Bool {
         return calls.get().values.contains { $0.isCurrent() }
     }
@@ -254,19 +276,37 @@ class CallManagementService {
 
     func addOrUpdateCall(callId: String, callState: CallState, callDictionary: [String: String], mediaList: [[String: String]] = [[String: String]](), notifyIncoming: Bool = false) -> CallModel? {
         var call = self.calls.get()[callId]
-        // var isNewCall = false
-        // var previousState: CallState?
 
         if call == nil {
             if !callState.isActive() {
                 return nil
             }
-            call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
-            // isNewCall = true
-            call?.state = callState
-            updateCallsStore(call!, forId: callId)
+
+            // Check if there's a temporary call that we should replace
+            let peerUri = callDictionary[CallDetailKey.peerNumberKey.rawValue] ?? ""
+            let peerHash = peerUri.filterOutHost()
+            let accountId = callDictionary[CallDetailKey.accountIdKey.rawValue] ?? ""
+            if let existingCall = self.call(participantId: peerHash, accountId: accountId),
+               existingCall.state == .connecting {
+                call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
+                call!.callUUID = existingCall.callUUID
+                call!.state = callState
+                updateCallsStore(call!, forId: callId)
+                var event = ServiceEvent(withEventType: .pendingCallUpdated)
+                event.addEventInput(.peerUri, value: peerHash)
+                event.addEventInput(.callUUID, value: call!.callUUID.uuidString)
+                event.addEventInput(.accountId, value: call!.accountId)
+                event.addEventInput(.callId, value: call!.callId)
+                self.responseStream.onNext(event)
+                calls.update { calls in
+                    calls.removeValue(forKey: existingCall.callId)
+                }
+            } else {
+                call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
+                call?.state = callState
+                updateCallsStore(call!, forId: callId)
+            }
         } else {
-            // previousState = call?.state
             call?.update(withDictionary: callDictionary, withMedia: mediaList)
             call?.state = callState
         }

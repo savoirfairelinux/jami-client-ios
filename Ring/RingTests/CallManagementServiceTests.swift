@@ -164,7 +164,7 @@ class CallManagementServiceTests: XCTestCase {
             })
             .disposed(by: disposeBag)
 
-        await callManagementService.removeCall(callId: CallTestConstants.callId, callState: .over)
+        callManagementService.removeCall(callId: CallTestConstants.callId, callState: .over)
 
         XCTAssertEqual(calls.get().count, 0, "Call should be removed from store")
         XCTAssertNotNil(capturedEvent, "Event should be emitted")
@@ -179,7 +179,7 @@ class CallManagementServiceTests: XCTestCase {
         calls.update { calls in
             calls[CallTestConstants.callId] = call
         }
-        await callManagementService.removeCall(callId: "invalid-id", callState: .over)
+        callManagementService.removeCall(callId: "invalid-id", callState: .over)
         XCTAssertEqual(calls.get().count, 1, "Call store should remain 1")
     }
 
@@ -193,7 +193,7 @@ class CallManagementServiceTests: XCTestCase {
 
         let newUUIDString = UUID().uuidString
 
-        await callManagementService.updateCallUUID(callId: CallTestConstants.callId, callUUID: newUUIDString)
+        callManagementService.updateCallUUID(callId: CallTestConstants.callId, callUUID: newUUIDString)
 
         let updatedCall = calls.get()[CallTestConstants.callId]
         XCTAssertNotNil(updatedCall, "Call should still exist in store")
@@ -336,6 +336,82 @@ class CallManagementServiceTests: XCTestCase {
         XCTAssertEqual(mockCallsAdapter.placeCallAccountIdCount, 1, "Place call should be called once")
         XCTAssertEqual(mockCallsAdapter.placeCallAccountId, account.id, "Account ID should match")
         XCTAssertEqual(mockCallsAdapter.placeCallParticipantId, participantId, "Participant ID should match")
+    }
+
+    func testCreatePlaceholderCall_WhenCallAlreadyExists() {
+        let callId = CallTestConstants.callId
+
+        let callDictionary = [
+            CallDetailKey.peerNumberKey.rawValue: CallTestConstants.participantUri,
+            CallDetailKey.accountIdKey.rawValue: CallTestConstants.accountId,
+            CallDetailKey.displayNameKey.rawValue: CallTestConstants.displayName
+        ]
+
+        let realCall = callManagementService.addOrUpdateCall(
+            callId: callId,
+            callState: .ringing,
+            callDictionary: callDictionary
+        )
+        XCTAssertNotNil(realCall, "Real call should be created")
+        XCTAssertEqual(calls.get().count, 1, "Should have one real call")
+
+        let placeholderUUID = UUID()
+        let placeholderCall = callManagementService.createPlaceholderCallModel(
+            callUUID: placeholderUUID,
+            peerId: CallTestConstants.participantUri,
+            accountId: CallTestConstants.accountId
+        )
+
+        XCTAssertNil(placeholderCall, "Placeholder should not be created when real call already exists")
+        XCTAssertEqual(calls.get().count, 1, "Should still have only one call")
+        XCTAssertNotNil(calls.get()[callId], "Call should still exist")
+    }
+
+    func testPlaceholderCall_ReplacedByRealCall() {
+        let callUUID = UUID()
+        let realCallId = CallTestConstants.callId
+
+        let placeholder = callManagementService.createPlaceholderCallModel(
+            callUUID: callUUID,
+            peerId: CallTestConstants.participantUri,
+            accountId: CallTestConstants.accountId
+        )
+        XCTAssertNotNil(placeholder, "Placeholder should be created")
+        XCTAssertEqual(calls.get().count, 1, "Should have one call")
+
+        let callDictionary = [
+            CallDetailKey.peerNumberKey.rawValue: CallTestConstants.participantUri,
+            CallDetailKey.accountIdKey.rawValue: CallTestConstants.accountId,
+            CallDetailKey.displayNameKey.rawValue: CallTestConstants.displayName
+        ]
+
+        let eventExpectation = XCTestExpectation(description: "pendingCallUpdated event should be emitted")
+        var capturedEvent: ServiceEvent?
+
+        responseStream
+            .filter { $0.eventType == .pendingCallUpdated }
+            .take(1)
+            .subscribe(onNext: { event in
+                capturedEvent = event
+                eventExpectation.fulfill()
+            })
+            .disposed(by: disposeBag)
+
+        let realCall = callManagementService.addOrUpdateCall(
+            callId: realCallId,
+            callState: .ringing,
+            callDictionary: callDictionary
+        )
+
+        wait(for: [eventExpectation], timeout: 1.0)
+
+        XCTAssertEqual(calls.get().count, 1, "Should still have only one call")
+        XCTAssertNil(calls.get()[callUUID.uuidString], "Placeholder should be removed")
+        XCTAssertNotNil(calls.get()[realCallId], "Real call should be stored")
+
+        // Verify event was emitted
+        XCTAssertNotNil(capturedEvent, "Event should be emitted")
+        XCTAssertEqual(capturedEvent?.eventType, .pendingCallUpdated)
     }
 }
 

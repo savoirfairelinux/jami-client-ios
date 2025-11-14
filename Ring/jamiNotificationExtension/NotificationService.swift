@@ -381,6 +381,7 @@ class NotificationService: UNNotificationServiceExtension {
                 // Add call-specific fields
                 info["peerId"] = peerId
                 info["hasVideo"] = hasVideo
+                info["accountId"] = self.accountId
                 let name = self.bestName(accountId: self.accountId, contactId: peerId)
                 // jami will be started. Set accounts to not active state
                 if self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original {
