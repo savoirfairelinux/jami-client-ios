@@ -188,6 +188,27 @@ class CallViewModel: Stateable, ViewModel {
             .disposed(by: self.disposeBag)
     }
 
+    func subscribePendingCall(callId: String) {
+        self.callService.sharedResponseStream
+            .asObservable()
+            .filter({ event in
+                return event.eventType == .pendingCallUpdated
+            })
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { (event) in
+                guard  let callId: String = event.getEventInput(.callId),
+                       let call = self.callService.call(callID: callId),
+                       let callUUID: String = event.getEventInput(.callId),
+                       callId == callUUID
+                else { return }
+                self.call = call
+                self.conferenceId = call.callId
+                self.configureVideo()
+                self.observeConferenceEvents()
+            })
+            .disposed(by: self.disposeBag)
+    }
+
     static func formattedDurationFrom(interval: Int) -> String {
         let seconds = interval % 60
         let minutes = (interval / 60) % 60

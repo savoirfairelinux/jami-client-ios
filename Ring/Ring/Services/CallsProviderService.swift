@@ -29,10 +29,12 @@ enum UnhandeledCallState {
 class UnhandeledCall: Equatable, Hashable {
     let uuid = UUID()
     let peerId: String
+    let accountId: String
     var state: UnhandeledCallState = .awaiting
 
-    init (peerId: String) {
+    init (peerId: String, accountId: String) {
         self.peerId = peerId
+        self.accountId = accountId
     }
 
     func hash(into hasher: inout Hasher) {
@@ -49,7 +51,8 @@ class CallsProviderService: NSObject {
     private var callController: CXCallController
     private let disposeBag = DisposeBag()
     // Calls that were created from notification extension and waiting for daemon to connect.
-    var unhandeledCalls = Set<UnhandeledCall>()
+    private var unhandeledCalls = Set<UnhandeledCall>()
+    private let unhandeledCallsLock = NSLock()
     // Timer to stop pending unhandeled call if no information about call received from the daemon.
     private weak var timer: Timer?
     // Timeout in seconds to wait until unhandeled call should be stopped.
@@ -57,7 +60,8 @@ class CallsProviderService: NSObject {
 
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
-    var jamiCallUUIDs = Set<UUID>()
+    private var jamiCallUUIDs = Set<UUID>()
+    private let jamiCallUUIDsLock = NSLock()
 
     init(provider: CXProvider, controller: CXCallController) {
         self.sharedResponseStream = responseStream.share()
@@ -67,6 +71,61 @@ class CallsProviderService: NSObject {
         self.provider.setDelegate(self, queue: nil)
         self.responseStream.disposed(by: disposeBag)
     }
+
+    private func insertUnhandeledCall(_ call: UnhandeledCall) {
+        unhandeledCallsLock.lock()
+        defer { unhandeledCallsLock.unlock() }
+        unhandeledCalls.insert(call)
+    }
+
+    private func removeUnhandeledCall(_ call: UnhandeledCall) {
+        unhandeledCallsLock.lock()
+        defer { unhandeledCallsLock.unlock() }
+        unhandeledCalls.remove(call)
+    }
+
+    private func getUnhandeledCall(UUID: UUID) -> UnhandeledCall? {
+        unhandeledCallsLock.lock()
+        defer { unhandeledCallsLock.unlock() }
+        return unhandeledCalls.first { $0.uuid == UUID }
+    }
+
+    private func getUnhandeledCall(peerId: String) -> UnhandeledCall? {
+        unhandeledCallsLock.lock()
+        defer { unhandeledCallsLock.unlock() }
+        return unhandeledCalls.first { $0.peerId == peerId }
+    }
+
+    private func getUnhandeledCalls(peerId: String) -> [UnhandeledCall] {
+        unhandeledCallsLock.lock()
+        defer { unhandeledCallsLock.unlock() }
+        return unhandeledCalls.filter { $0.peerId == peerId }
+    }
+
+    private func forEachUnhandeledCall(_ body: (UnhandeledCall) -> Void) {
+        unhandeledCallsLock.lock()
+        let calls = unhandeledCalls
+        unhandeledCallsLock.unlock()
+        calls.forEach(body)
+    }
+
+    private func insertJamiCallUUID(_ uuid: UUID) {
+        jamiCallUUIDsLock.lock()
+        defer { jamiCallUUIDsLock.unlock() }
+        jamiCallUUIDs.insert(uuid)
+    }
+
+    private func removeJamiCallUUID(_ uuid: UUID) {
+        jamiCallUUIDsLock.lock()
+        defer { jamiCallUUIDsLock.unlock() }
+        jamiCallUUIDs.remove(uuid)
+    }
+
+    private func containsJamiCallUUID(_ uuid: UUID) -> Bool {
+        jamiCallUUIDsLock.lock()
+        defer { jamiCallUUIDsLock.unlock() }
+        return jamiCallUUIDs.contains(uuid)
+    }
 }
 
 extension CallsProviderService {
@@ -74,7 +133,7 @@ extension CallsProviderService {
         // Remove call from pending unhandeled calls. Get pending call by jamiId, because uuid could be different for unhandeled call and for incoming call.
         if let call = getUnhandeledCall(peerId: participant) {
             let unhandeledCallUUID = call.uuid
-            unhandeledCalls.remove(call)
+            removeUnhandeledCall(call)
             // If unhandeled calls uuid is different from requested callUUID stop it.
             if unhandeledCallUUID != callUUID {
                 let endCallAction = CXEndCallAction(call: unhandeledCallUUID)
@@ -82,7 +141,7 @@ extension CallsProviderService {
                 self.requestTransaction(transaction)
             }
         } else if let call = getUnhandeledCall(UUID: callUUID) {
-            unhandeledCalls.remove(call)
+            removeUnhandeledCall(call)
         }
         // Send request end call to CallKit.
         let endCallAction = CXEndCallAction(call: callUUID)
@@ -99,20 +158,21 @@ extension CallsProviderService {
     }
 
     func isJamiCall(_ call: CXCall) -> Bool {
-        return jamiCallUUIDs.contains(call.uuid)
+        return containsJamiCallUUID(call.uuid)
     }
 
     func handleIncomingCall(account: AccountModel, call: CallModel) {
         if let unhandeledCall = getUnhandeledCall(peerId: call.paricipantHash()) {
             defer {
-                unhandeledCalls.remove(unhandeledCall)
+                removeUnhandeledCall(unhandeledCall)
             }
-            call.callUUID = unhandeledCall.uuid
+             call.callUUID = unhandeledCall.uuid
             if unhandeledCall.state != .awaiting {
                 // CallKit already received user action before call received from the daemon. Notify call view about the action
                 let serviceEventType: ServiceEventType = unhandeledCall.state == .accepted ? .callProviderAcceptCall : .callProviderDeclineCall
                 var serviceEvent = ServiceEvent(withEventType: serviceEventType)
                 serviceEvent.addEventInput(.callUUID, value: call.callUUID.uuidString)
+                serviceEvent.addEventInput(.callId, value: call.callUUID.uuidString)
                 self.responseStream.onNext(serviceEvent)
             }
         } else {
@@ -132,7 +192,7 @@ extension CallsProviderService {
         self.provider.reportNewIncomingCall(with: call.callUUID,
                                             update: update) { [weak self] error in
             if error == nil {
-                self?.jamiCallUUIDs.insert(call.callUUID)
+                self?.insertJamiCallUUID(call.callUUID)
             }
             completion?(error)
         }
@@ -151,6 +211,7 @@ extension CallsProviderService {
     }
 
     func previewPendingCall(peerId: String, withVideo: Bool, displayName: String,
+                            accountId: String,
                             pushNotificationPayload: [String: String]? = nil,
                             completion: ((Error?) -> Void)?) {
         let update = CXCallUpdate()
@@ -162,12 +223,12 @@ extension CallsProviderService {
         if let existingUnhandeledCall = self.getUnhandeledCall(peerId: peerId) {
             self.stopCall(callUUID: existingUnhandeledCall.uuid, participant: existingUnhandeledCall.peerId)
         }
-        let unhandeledCall = UnhandeledCall(peerId: peerId)
-        unhandeledCalls.insert(unhandeledCall)
+        let unhandeledCall = UnhandeledCall(peerId: peerId, accountId: accountId)
+        insertUnhandeledCall(unhandeledCall)
         self.provider.reportNewIncomingCall(with: unhandeledCall.uuid,
                                             update: update) { [weak self] error in
             if error == nil {
-                self?.jamiCallUUIDs.insert(unhandeledCall.uuid)
+                self?.insertJamiCallUUID(unhandeledCall.uuid)
             }
             completion?(error)
         }
@@ -202,7 +263,7 @@ extension CallsProviderService {
     }
 
     func stopAllUnhandeledCalls() {
-        unhandeledCalls.forEach { call in
+        forEachUnhandeledCall { call in
             stopCall(callUUID: call.uuid, participant: call.peerId)
         }
     }
@@ -226,24 +287,6 @@ extension CallsProviderService {
             return ("", contactHandle)
         }
         return (name, contactHandle)
-    }
-
-    func getUnhandeledCall(UUID: UUID) -> UnhandeledCall? {
-        return self.unhandeledCalls.filter { call in
-            call.uuid == UUID
-        }.first
-    }
-
-    func getUnhandeledCall(peerId: String) -> UnhandeledCall? {
-        return self.unhandeledCalls.filter { call in
-            call.peerId == peerId
-        }.first
-    }
-
-    func getUnhandeledCalls(peerId: String) -> [UnhandeledCall]? {
-        return self.unhandeledCalls.filter { call in
-            call.peerId == peerId
-        }
     }
 
     private func requestTransaction(_ transaction: CXTransaction) {
@@ -288,6 +331,13 @@ extension CallsProviderService: CXProviderDelegate {
         }
         if let call = getUnhandeledCall(UUID: action.callUUID) {
             call.state = .accepted
+            // Emit event to show connecting screen for unhandled call
+            let serviceEventType: ServiceEventType = .callProviderAcceptUnhandeledCall
+            var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+            serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)
+            serviceEvent.addEventInput(.peerUri, value: call.peerId)
+            serviceEvent.addEventInput(.accountId, value: call.accountId)
+            self.responseStream.onNext(serviceEvent)
             return
         }
         let serviceEventType: ServiceEventType = .callProviderAcceptCall
@@ -300,7 +350,7 @@ extension CallsProviderService: CXProviderDelegate {
         defer {
             action.fulfill()
         }
-        jamiCallUUIDs.remove(action.callUUID)
+        removeJamiCallUUID(action.callUUID)
         if let call = getUnhandeledCall(UUID: action.callUUID) {
             call.state = .declined
             return
@@ -315,7 +365,7 @@ extension CallsProviderService: CXProviderDelegate {
         defer {
             action.fulfill()
         }
-        self.jamiCallUUIDs.insert(action.callUUID)
+        insertJamiCallUUID(action.callUUID)
         /*
          To display correct name in call history create an update and report
          it to the provider.
