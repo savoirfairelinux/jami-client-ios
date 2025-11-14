@@ -79,9 +79,9 @@ class ContainerViewModel: ObservableObject {
         self.accountService = injectionBag.accountService
         self.callService = injectionBag.callService
         self.currentCall = currentCall
-        self.callAnswered = incoming
 
         if let call = self.callService.call(callID: callId) {
+            self.callState = call.state.toString()
             if call.state == .current || call.state == .hold || !call.conversationId.isEmpty {
                 self.callAnswered = true
             }
@@ -117,9 +117,6 @@ class ContainerViewModel: ObservableObject {
             .disposed(by: self.disposeBag)
 
         currentCall
-            .filter({call in
-                return call.callType == .outgoing
-            })
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] call in
                 self?.callState = call.state.toString()

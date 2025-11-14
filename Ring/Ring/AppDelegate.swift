@@ -705,6 +705,7 @@ extension AppDelegate: PKPushRegistryDelegate {
         let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
         let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
         let displayName = payload.dictionaryPayload["displayName"] as? String ?? ""
+        let accountId = payload.dictionaryPayload["accountId"] as? String ?? ""
 
         var dictionary = [String: String]()
         for key in payload.dictionaryPayload.keys {
@@ -718,6 +719,7 @@ extension AppDelegate: PKPushRegistryDelegate {
         callsProvider.previewPendingCall(peerId: peerId,
                                          withVideo: hasVideo.boolValue,
                                          displayName: displayName,
+                                         accountId: accountId,
                                          pushNotificationPayload: dictionary) { error in
             if error != nil {
                 self.updateCallScreenState(presenting: false)
