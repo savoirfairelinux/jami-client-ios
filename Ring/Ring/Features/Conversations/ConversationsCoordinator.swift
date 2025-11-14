@@ -121,6 +121,27 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                 self.showIncomingCall(call: call)
             })
             .disposed(by: self.disposeBag)
+
+        self.callsProvider.sharedResponseStream
+            .filter({ serviceEvent in
+                return serviceEvent.eventType == .callProviderAcceptUnhandeledCall
+            })
+            .subscribe(onNext: { [weak self] serviceEvent in
+                guard let self = self,
+                      let callUUID: String = serviceEvent.getEventInput(.callUUID),
+                      let peerId: String = serviceEvent.getEventInput(.peerUri),
+                      let uuid = UUID(uuidString: callUUID),
+                      let account = self.accountService.currentAccount else { return }
+
+                let call = self.callService.createPlaceholderCallModel(
+                    callUUID: uuid,
+                    peerId: peerId,
+                    accountId: account.id
+                )
+
+                self.presentCallScreen(call: call)
+            })
+            .disposed(by: self.disposeBag)
         self.callbackPlaceCall()
         self.subscribeToActiveCalls()
         self.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
@@ -379,12 +400,6 @@ extension ConversationsCoordinator {
               !call.callId.isEmpty else {
             return
         }
-        if self.accountService.boothMode() {
-            self.callService.decline(callId: call.callId)
-                .subscribe()
-                .disposed(by: self.disposeBag)
-            return
-        }
         callsProvider.sharedResponseStream
             .filter({ [weak call] serviceEvent in
                 guard serviceEvent.eventType == .callProviderAcceptCall ||
@@ -402,7 +417,7 @@ extension ConversationsCoordinator {
                 guard let self = self,
                       let call = call else { return }
                 if serviceEvent.eventType == ServiceEventType.callProviderAcceptCall {
-                    self.presentCallScreen(call: call)
+                    //self.presentCallScreen(call: call)
                 }
             })
             .disposed(by: self.disposeBag)

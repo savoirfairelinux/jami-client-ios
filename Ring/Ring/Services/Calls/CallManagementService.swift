@@ -245,6 +245,23 @@ class CallManagementService {
 
         return call
     }
+    
+    func createPlaceholderCallModel(callUUID: UUID, peerId: String, accountId: String) -> CallModel {
+        let call = CallModel()
+        call.callUUID = callUUID
+        call.callUri = peerId
+        call.displayName = peerId
+        call.accountId = accountId
+        call.state = .connecting
+        call.callType = .incoming
+        call.callId = callUUID.uuidString
+        
+        calls.update { calls in
+            calls[call.callId] = call
+        }
+        
+        return call
+    }
 
     func isCurrentCall() -> Bool {
         return calls.get().values.contains { $0.isCurrent() }
@@ -254,19 +271,37 @@ class CallManagementService {
 
     func addOrUpdateCall(callId: String, callState: CallState, callDictionary: [String: String], mediaList: [[String: String]] = [[String: String]](), notifyIncoming: Bool = false) -> CallModel? {
         var call = self.calls.get()[callId]
-        // var isNewCall = false
-        // var previousState: CallState?
 
         if call == nil {
             if !callState.isActive() {
                 return nil
             }
-            call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
-            // isNewCall = true
-            call?.state = callState
-            updateCallsStore(call!, forId: callId)
+            
+            // Check if there's a placeholder call that we should replace
+            let peerUri = callDictionary[CallDetailKey.peerNumberKey.rawValue] ?? ""
+            let peerHash = peerUri.filterOutHost()
+            let existingPlaceholder = self.calls.get().values.first { existingCall in
+                // A placeholder has callId == UUID string and callUri matching the peer
+                existingCall.callId == existingCall.callUUID.uuidString &&
+                existingCall.paricipantHash() == peerHash &&
+                existingCall.state == .connecting
+            }
+            
+            if let placeholder = existingPlaceholder {
+                // Replace placeholder with real call, keeping the UUID
+                call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
+                call?.callUUID = placeholder.callUUID
+                call?.state = callState
+                calls.update { calls in
+                    calls.removeValue(forKey: placeholder.callId)
+                }
+                updateCallsStore(call!, forId: callId)
+            } else {
+                call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
+                call?.state = callState
+                updateCallsStore(call!, forId: callId)
+            }
         } else {
-            // previousState = call?.state
             call?.update(withDictionary: callDictionary, withMedia: mediaList)
             call?.state = callState
         }

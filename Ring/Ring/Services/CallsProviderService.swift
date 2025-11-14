@@ -288,6 +288,12 @@ extension CallsProviderService: CXProviderDelegate {
         }
         if let call = getUnhandeledCall(UUID: action.callUUID) {
             call.state = .accepted
+            // Emit event to show connecting screen for unhandled call
+            let serviceEventType: ServiceEventType = .callProviderAcceptUnhandeledCall
+            var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+            serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)
+            serviceEvent.addEventInput(.peerUri, value: call.peerId)
+            self.responseStream.onNext(serviceEvent)
             return
         }
         let serviceEventType: ServiceEventType = .callProviderAcceptCall

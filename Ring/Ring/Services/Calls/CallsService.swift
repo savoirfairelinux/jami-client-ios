@@ -291,6 +291,10 @@ class CallsService: CallsAdapterDelegate {
         return callManagementService.call(callId: callID)
     }
 
+    func createPlaceholderCallModel(callUUID: UUID, peerId: String, accountId: String) -> CallModel {
+        return callManagementService.createPlaceholderCallModel(callUUID: callUUID, peerId: peerId, accountId: accountId)
+    }
+
     func call(participantId: String, accountId: String) -> CallModel? {
         return callManagementService.call(participantId: participantId, accountId: accountId)
     }
