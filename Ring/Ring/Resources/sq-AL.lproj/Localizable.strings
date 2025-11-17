@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Bën hapjen e një skene me kodin QR të kontaktit";
 "swarm.accessibilityContactShareHint" = "Bën hapjen e mundësive për ndarje me të tjerë të hollësive të kontaktit";
 "swarm.accessibilityColorPicker" = "Zgjedhës ngjyre bisede";
-"swarm.editTextHint" = "Prekeni dy herë që ta përpunoni";
+"swarm.editTextHint" = "Që ta përpunoni, prekeni dy herë";
 "swarm.conversationHeader" = "Bisedë";
 "swarm.shareContactMessage" = "Mund ta shtoni këtë kontakt, %1@, te platforma e shpërndarë e komunikimeve Jami: https://jami.net";
 "swarm.oneToOne" = "Privat";
@@ -676,7 +676,7 @@
 "shareExtension.sendToConversationsPlural" = "Dërgoje te %d biseda";
 "shareExtension.selectAccountTitle" = "Përzgjidhni llogari";
 "shareExtension.searchConversations" = "Kërkoni te biseda";
-"shareExtension.accessibilitySelectConversation" = "Prekeni dy herë që të përzgjidhet kjo bisedë";
-"shareExtension.accessibilitySelectedAccount" = "Llogari e përzgjedhur: %@. Prekeni dy herë që të ndryshoni llogarinë.";
-"shareExtension.accessibilitySendButton" = "Prekeni dy herë që ta dërgoni te bisedat e përzgjedhura";
-"shareExtension.accessibilitySelectAccount" = "Prekeni dy herë që të përzgjidhet kjo llogari";
+"shareExtension.accessibilitySelectConversation" = "Që të përzgjidhni këtë bisedë, prekeni dy herë";
+"shareExtension.accessibilitySelectedAccount" = "Llogaria e përzgjedhur: %@. Që të ndryshoni llogari, prekeni dy herë.";
+"shareExtension.accessibilitySendButton" = "Që të dërgoni bisedat e përzgjedhura, prekeni dy herë";
+"shareExtension.accessibilitySelectAccount" = "Që të përzgjidhni këtë llogari, prekeni dy herë";

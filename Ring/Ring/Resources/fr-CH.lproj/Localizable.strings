@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Ouvre un écran avec le code QR du contact";
 "swarm.accessibilityContactShareHint" = "Ouvre les options de partage pour le contact";
 "swarm.accessibilityColorPicker" = "Sélecteur de couleur pour la conversation";
-"swarm.editTextHint" = "Double tapotement pour éditer";
+"swarm.editTextHint" = "Tapoter deux fois pour sélectionner ce compte";
 "swarm.conversationHeader" = "Conversation";
 "swarm.shareContactMessage" = "Vous pouvez ajouter ce contact, %1@, sur la plateforme de communication distribuée : https://jami.net";
 "swarm.oneToOne" = "Privé";

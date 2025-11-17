@@ -676,7 +676,7 @@
 "shareExtension.sendToConversationsPlural" = "Enviar a %d conversaciones";
 "shareExtension.selectAccountTitle" = "Seleccionar cuenta";
 "shareExtension.searchConversations" = "Enviar a conversaciones";
-"shareExtension.accessibilitySelectConversation" = "Toca dos veces para seleccionar esta conversación";
-"shareExtension.accessibilitySelectedAccount" = "Cuenta seleccionada: %@. Toca dos veces para cambiar de cuenta.";
-"shareExtension.accessibilitySendButton" = "Toca dos veces para enviar a conversaciones seleccionadas";
-"shareExtension.accessibilitySelectAccount" = "Toque dos veces para seleccionar esta cuenta";
+"shareExtension.accessibilitySelectConversation" = "Doble clic para seleccionar esta conversación";
+"shareExtension.accessibilitySelectedAccount" = "Cuenta seleccionada: %@. Doble clic para cambiar de cuenta.";
+"shareExtension.accessibilitySendButton" = "Doble clic para enviar a conversaciones seleccionadas";
+"shareExtension.accessibilitySelectAccount" = "Doble clic para seleccionar esta cuenta";

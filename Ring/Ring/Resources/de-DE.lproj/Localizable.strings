@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Öffnet einen Bildschirm mit dem QR-Code des Kontakts";
 "swarm.accessibilityContactShareHint" = "Öffnet die Optionen zum Teilen für Kontaktinformationen";
 "swarm.accessibilityColorPicker" = "Farbauswahl für Unterhaltungen";
-"swarm.editTextHint" = "Zum Bearbeiten doppeltippen";
+"swarm.editTextHint" = "Doppeltippen zum Bearbeiten";
 "swarm.conversationHeader" = "Unterhaltung";
 "swarm.shareContactMessage" = "Sie können diesen Kontakt - %1@ - auf der verteilten Kommunikationsplattform Jami hinzufügen: https://jami.net";
 "swarm.oneToOne" = "Privat";
@@ -677,6 +677,6 @@
 "shareExtension.selectAccountTitle" = "Konto auswählen";
 "shareExtension.searchConversations" = "Unterhaltung durchsuchen";
 "shareExtension.accessibilitySelectConversation" = "Doppeltippen, um diese Unterhaltung auszuwählen";
-"shareExtension.accessibilitySelectedAccount" = "Ausgewähltes Konto: %@. Doppeltippen, um das Konto zu ändern.";
+"shareExtension.accessibilitySelectedAccount" = "Ausgewähltes Konto: %@. Doppeltippen, um das Konto zu wechseln.";
 "shareExtension.accessibilitySendButton" = "Doppeltippen, um an ausgewählte Unterhaltungen zu senden";
-"shareExtension.accessibilitySelectAccount" = "Doppeltippen, um dieses Konto auszuwählen";
+"shareExtension.accessibilitySelectAccount" = "Doppeltippen, um dieses Konto auszuwählen.";

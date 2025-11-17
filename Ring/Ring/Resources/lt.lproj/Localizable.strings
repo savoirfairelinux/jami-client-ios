@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
-"swarm.editTextHint" = "Double tap to edit";
+"swarm.editTextHint" = "Double-tap to edit";
 "swarm.conversationHeader" = "Pokalbis";
 "swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "Privatus";
@@ -171,10 +171,10 @@
 // An ellipsis is not directly shown in the following typing indicator strings.
 // An ellipsis animation is shown when messages are being typed in the view.
 // An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
-"conversation.typingIndicatorOneUser" = "%@ is typing";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
+"conversation.typingIndicatorOneUser" = "%@ rašo";
+"conversation.typingIndicatorTwoUsers" = "%1@ ir %2@ rašo";
+"conversation.typingIndicatorOtherUsers" = "%1@, %2@ ir dar %3@ rašo";
+"conversation.typingIndicatorOthersUsers" = "%1@, %2@ ir dar %3@ rašo";
 
 
 // Invitations
@@ -235,7 +235,7 @@
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
 "linkToAccount.scanQrCode" = "When ready, scan the QR code.";
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
-"linkToAccount.accountLockedWithPassword" = "The account is password protected. To continue, enter the account password.";
+"linkToAccount.accountLockedWithPassword" = "Paskyra yra apsaugota slaptažodžiu. Norėdami tęsti, įveskite paskyros slaptažodį.";
 "linkToAccount.exit" = "Išeiti";
 "linkToAccount.shareMessage" = "Your code is: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
@@ -468,7 +468,7 @@
 "linkDevice.networkError" = "Eksportuojant paskyrą įvyko tinklo klaida.";
 "linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
 "linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorTimeout" = "Pasibaigė operacijai skirtas laikas. Bandykite dar kartą.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
@@ -572,7 +572,7 @@
 
 // Accessibility
 "accessibility.close" = "Užverti";
-"accessibility.smartListSwitchAccounts" = "Switch account";
+"accessibility.smartListSwitchAccounts" = "Perjungti paskyrą";
 "accessibility.smartListConnectedAs" = "The current account is %@";
 "accessibility.smartListAddAccount" = "Pridėti paskyrą";
 "accessibility.aboutJamiTitle" = "Apie Jami";
@@ -585,14 +585,14 @@
 "accessibility.accountSummaryQrCodeHint" = "Double-tap to view the account QR code";
 "accessibility.accountSummaryEditProfileHint" = "Double-tap to edit the profile";
 "accessibility.accountSummaryEditSettingsButton" = "Nustatymai";
-"accessibility.conversationStartVoiceCall" = "Start audio call with %@";
-"accessibility.conversationStartVideoCall" = "Start video call with %@";
-"accessibility.conversationComposeMessage" = "Compose a message";
+"accessibility.conversationStartVoiceCall" = "Pradėti garso skambutį su %@";
+"accessibility.conversationStartVideoCall" = "Pradėti vaizdo skambutį su %@";
+"accessibility.conversationComposeMessage" = "Rašyti žinutę";
 "accessibility.conversationShareMedia" = "Share media";
 "accessibility.conversationCameraHint" = "Double-tap to open camera";
 "accessibility.audioPlayerPlay" = "Atkurti";
 "accessibility.audioPlayerPause" = "Pristabdyti";
-"accessibility.conversationRowUnreadCount" = "%@ unread messages.";
+"accessibility.conversationRowUnreadCount" = "Neskaitytų žinučių: %@.";
 "accessibility.conversationRowBlocked" = "Conversation blocked";
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
 "accessibility.conversationRowLastMessage" = "Last message at %@";
@@ -621,8 +621,8 @@
 "accessibility.calls.default.pauseCall" = "Pristabdyti skambutį";
 "accessibility.calls.default.hangUpCall" = "Baigti skambutį";
 "accessibility.calls.default.addParticipant" = "Pridėti dalyvį";
-"accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.switchCamera" = "Perjungti kamerą";
+"accessibility.calls.default.toggleSpeaker" = "Įjungti garsiakalbį";
 "accessibility.calls.default.openConversation" = "Atverti pokalbį";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Pakelti ranką";
@@ -632,8 +632,8 @@
 "accessibility.calls.alter.pauseCall" = "Pratęsti skambutį";
 "accessibility.calls.alter.hangUpCall" = "Baigti skambutį";
 "accessibility.calls.alter.addParticipant" = "Pridėti dalyvį";
-"accessibility.calls.alter.switchCamera" = "Switch camera";
-"accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
+"accessibility.calls.alter.switchCamera" = "Perjungti kamerą";
+"accessibility.calls.alter.toggleSpeaker" = "Išjungti garsiakalbį";
 "accessibility.calls.alter.openConversation" = "Atverti pokalbį";
 "accessibility.calls.alter.showDialpad" = "Show dialpad";
 "accessibility.calls.alter.raiseHand" = "Nuleisti ranką";
@@ -665,18 +665,18 @@
 "swarmColors.steelBlue" = "Steel blue";
 
 // Share extension
-"shareExtension.noAccount.title" = "Account not found";
-"shareExtension.noAccount.description" = "To continue, create an account in the main application.";
-"shareExtension.unsupportedType.title" = "Unsupported content";
+"shareExtension.noAccount.title" = "Paskyra nerasta";
+"shareExtension.noAccount.description" = "Norėdami tęsti, sukurkite pagrindinėje programoje paskyrą.";
+"shareExtension.unsupportedType.title" = "Nepalaikomas turinys";
 "shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
-"shareExtension.sending" = "Sending…";
+"shareExtension.sending" = "Siunčiama…";
 "shareExtension.noSearchResults" = "No conversations match your search";
 "shareExtension.tryDifferentFilter" = "Try a different filter";
 "shareExtension.sendToConversation" = "Send to %d conversation";
 "shareExtension.sendToConversationsPlural" = "Send to %d conversations";
 "shareExtension.selectAccountTitle" = "Pasirinkite paskyrą";
-"shareExtension.searchConversations" = "Search conversations";
-"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
-"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
-"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
-"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";
+"shareExtension.searchConversations" = "Ieškoti pokalbių";
+"shareExtension.accessibilitySelectConversation" = "Double-tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";

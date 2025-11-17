@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Avaa näytön, jossa on henkilön QR-koodi";
 "swarm.accessibilityContactShareHint" = "Avaa yhteystietojen jakoasetukset";
 "swarm.accessibilityColorPicker" = "Keskustelun värivalitsin";
-"swarm.editTextHint" = "Kaksoisnapauta ja muokkaa";
+"swarm.editTextHint" = "Paina kahdesti ja muokkaa";
 "swarm.conversationHeader" = "Keskustelu";
 "swarm.shareContactMessage" = "Voit lisätä tämän henkilön, %1@, Jamin viestintäalustaan: https://jami.net";
 "swarm.oneToOne" = "Yksityinen";

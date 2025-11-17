@@ -69,7 +69,7 @@
 // Swarm
 "swarm.muteConversation" = "Dezactivează notificările";
 "swarm.leaveConversation" = "Termină conversația";
-"swarm.removeConversation" = "Elimină conversația";
+"swarm.removeConversation" = "Șterge conversația";
 "swarm.removeContact" = "Șterge contactul";
 "swarm.restartConversation" = "Reîncepe conversația";
 "swarm.conversationEnded" = "Conversație terminată";

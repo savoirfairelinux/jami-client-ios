@@ -672,8 +672,8 @@
 "shareExtension.sending" = "Se trimite…";
 "shareExtension.noSearchResults" = "Nicio conversație nu corespunde căutării";
 "shareExtension.tryDifferentFilter" = "Caută altfel";
-"shareExtension.sendToConversation" = "Trimite către %d conversație";
-"shareExtension.sendToConversationsPlural" = "Trimite către %d conversații";
+"shareExtension.sendToConversation" = "Trimite la %d conversație";
+"shareExtension.sendToConversationsPlural" = "Trimite la %d conversații";
 "shareExtension.selectAccountTitle" = "Alege contul";
 "shareExtension.searchConversations" = "Caută conversații";
 "shareExtension.accessibilitySelectConversation" = "Atinge de două ori pentru a selecționa această conversație";

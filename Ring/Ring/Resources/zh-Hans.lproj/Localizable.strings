@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
-"swarm.editTextHint" = "Double tap to edit";
+"swarm.editTextHint" = "Double-tap to edit";
 "swarm.conversationHeader" = "對話";
 "swarm.shareContactMessage" = "You can add this contact, %1@, on the Jami distributed communication platform: https://jami.net";
 "swarm.oneToOne" = "私人";
@@ -467,10 +467,10 @@
 "linkDevice.title" = "連結新裝置";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.errorWrongPassword" = "链接设备时出现身份验证错误。请检查凭据，然后重试。";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorNetwork" = "链接账户时发生网络错误。请检查网络连接后重试。";
+"linkDevice.errorTimeout" = "操作超时。请稍后重试。";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.errorWrongData" = "导出账户时发生错误。请稍后重试。";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "When ready, scan the QR code.";
@@ -676,7 +676,7 @@
 "shareExtension.sendToConversationsPlural" = "Send to %d conversations";
 "shareExtension.selectAccountTitle" = "选择帐户";
 "shareExtension.searchConversations" = "Search conversations";
-"shareExtension.accessibilitySelectConversation" = "Double tap to select this conversation";
-"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double tap to change account.";
-"shareExtension.accessibilitySendButton" = "Double tap to send to selected conversations";
-"shareExtension.accessibilitySelectAccount" = "Double tap to select this account";
+"shareExtension.accessibilitySelectConversation" = "Double-tap to select this conversation";
+"shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
+"shareExtension.accessibilitySendButton" = "Double-tap to send to selected conversations";
+"shareExtension.accessibilitySelectAccount" = "Double-tap to select this account";
