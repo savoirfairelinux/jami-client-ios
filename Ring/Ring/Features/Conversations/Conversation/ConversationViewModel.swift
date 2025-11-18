@@ -406,16 +406,25 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     func startCall() {
         guard let uri = prepareCallURI() else { return }
-        let name = self.conversation.isDialog() ? self.displayName.value ?? self.userName.value : ""
+        let name = getContactNameForCall()
         self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: uri, userName: name))
     }
 
     func startAudioCall() {
         guard let uri = prepareCallURI() else { return }
-        let name = self.conversation.isDialog() ? self.displayName.value ?? self.userName.value : ""
+        let name = getContactNameForCall()
         self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: uri, userName: name))
+    }
+
+    private func getContactNameForCall() -> String {
+        guard self.conversation.isDialog() else { return "" }
+
+        if let displayName = self.displayName.value, !displayName.isEmpty {
+            return displayName
+        }
+        return self.userName.value
     }
 
     func sendMessage(withContent content: String, parentId: String = "", contactURI: String? = nil, conversationModel: ConversationModel? = nil) {

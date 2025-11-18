@@ -46,6 +46,7 @@ enum ServiceEventType {
     case callProviderDeclineCall
     case callProviderPreviewPendingCall
     case callProviderAcceptUnhandeledCall
+    case callProviderSetMuted
     case audioActivated
     case newOutgoingMessage
     case migrationEnded
@@ -97,6 +98,7 @@ enum ServiceEventInput {
     case name
     case callUUID
     case callId
+    case muted
     case oldDisplayedMessage
     case newDisplayedMessage
 }
