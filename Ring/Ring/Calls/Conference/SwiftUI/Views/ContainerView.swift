@@ -184,6 +184,7 @@ struct ContainerView: View {
 
             ActionsView(maxHeight: $maxHeight, visible: $buttonsVisible) {
                 BottomSheetContentView(maxHeight: $maxHeight, model: model.actionsViewModel, participants: $model.participants, pending: $model.pending)
+                    .zIndex(2)
             }
         }
         .background(Color.black)
