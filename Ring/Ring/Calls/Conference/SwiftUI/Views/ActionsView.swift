@@ -193,6 +193,7 @@ struct BottomSheetContentView: View {
                 PendingInfoListView(pending: $pending)
             }
         }
+        .contentShape(Rectangle())
         .padding(.bottom, margin)
         .background(
             GeometryReader { innerGeometry in
