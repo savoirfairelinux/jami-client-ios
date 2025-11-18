@@ -35,6 +35,7 @@ struct SwarmCallRequest {
     let timestamp: Date
 }
 
+// swiftlint:disable type_body_length
 /// Main service responsible for coordinating all call-related operations
 class CallsService: CallsAdapterDelegate {
     // Service instances

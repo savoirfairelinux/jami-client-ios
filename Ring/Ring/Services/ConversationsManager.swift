@@ -301,12 +301,32 @@ class ConversationsManager {
                         self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
                     }
                 } else {
-                    os_log("call provider decline call")
-                    self.callService
-                        .decline(callId: call.callId)
-                        .subscribe()
-                        .disposed(by: self.disposeBag)
+                    if call.callType == .incoming {
+                        self.callService
+                            .decline(callId: call.callId)
+                            .subscribe()
+                            .disposed(by: self.disposeBag)
+                    } else {
+                        self.callService
+                            .hangUp(callId: call.callId)
+                            .subscribe()
+                            .disposed(by: self.disposeBag)
+                    }
                 }
+            })
+            .disposed(by: self.disposeBag)
+
+        callsProvider.sharedResponseStream
+            .filter({ $0.eventType == .callProviderSetMuted })
+            .subscribe(onNext: { [weak self] serviceEvent in
+                os_log("event from call provider: mute")
+                guard let self = self,
+                      let callUUID: String = serviceEvent.getEventInput(ServiceEventInput.callUUID),
+                      let isMuted: Bool = serviceEvent.getEventInput(ServiceEventInput.muted),
+                      let call = self.callService.callByUUID(UUID: callUUID) else {
+                    return
+                }
+                self.callService.setMuteAudio(callId: call.callId, accountId: call.accountId, mute: isMuted)
             })
             .disposed(by: self.disposeBag)
     }

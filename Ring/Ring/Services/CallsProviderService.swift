@@ -377,6 +377,17 @@ extension CallsProviderService: CXProviderDelegate {
         self.provider.reportCall(with: action.callUUID, updated: update)
     }
 
+    func provider(_ provider: CXProvider, perform action: CXSetMutedCallAction) {
+        defer {
+            action.fulfill()
+        }
+        let serviceEventType: ServiceEventType = .callProviderSetMuted
+        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)
+        serviceEvent.addEventInput(.muted, value: action.isMuted)
+        self.responseStream.onNext(serviceEvent)
+    }
+
     func provider(_ provider: CXProvider, didActivate audioSession: AVAudioSession) {
         let serviceEventType: ServiceEventType = .audioActivated
         let serviceEvent = ServiceEvent(withEventType: serviceEventType)
