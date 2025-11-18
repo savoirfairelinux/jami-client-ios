@@ -301,11 +301,17 @@ class ConversationsManager {
                         self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
                     }
                 } else {
-                    os_log("call provider decline call")
-                    self.callService
-                        .decline(callId: call.callId)
-                        .subscribe()
-                        .disposed(by: self.disposeBag)
+                    if call.callType == .incoming {
+                        self.callService
+                            .decline(callId: call.callId)
+                            .subscribe()
+                            .disposed(by: self.disposeBag)
+                    } else {
+                        self.callService
+                            .hangUp(callId: call.callId)
+                            .subscribe()
+                            .disposed(by: self.disposeBag)
+                    }
                 }
             })
             .disposed(by: self.disposeBag)

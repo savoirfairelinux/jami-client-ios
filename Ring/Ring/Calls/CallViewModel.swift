@@ -121,18 +121,6 @@ class CallViewModel: Stateable, ViewModel {
             })
     }()
 
-    lazy var contactName: Driver<String> = {
-        return currentCall
-            .startWith(self.call ?? CallModel())
-            .filter({ call in
-                return call.isExists()
-            })
-            .map({ call in
-                return call.getDisplayName()
-            })
-            .asDriver(onErrorJustReturn: "")
-    }()
-
     lazy var callDuration: Driver<String> = {
         let timer = Observable<Int>.interval(Durations.oneSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .take(until: currentCall
@@ -184,6 +172,23 @@ class CallViewModel: Stateable, ViewModel {
                 let overrideOutput = self.call?.callTypeValue == CallType.incoming.rawValue
                 self.audioService.setDefaultOutput(toSpeaker: !self.isAudioOnly,
                                                    override: overrideOutput)
+            })
+            .disposed(by: self.disposeBag)
+
+        callsProvider.sharedResponseStream
+            .filter({ $0.eventType == .callProviderSetMuted })
+            .subscribe(onNext: { [weak self] serviceEvent in
+                guard let self = self,
+                      let callUUID: String = serviceEvent.getEventInput(ServiceEventInput.callUUID),
+                      let isMuted: Bool = serviceEvent.getEventInput(ServiceEventInput.muted),
+                      let call = self.callService.callByUUID(UUID: callUUID) else {
+                    return
+                }
+                let device = self.videoService.getCurrentVideoSource()
+                Task {
+                    await self.callService.updateCallMediaIfNeeded(call: call)
+                }
+                self.videoService.requestMediaChange(call: call, mediaLabel: "audio_0", source: device)
             })
             .disposed(by: self.disposeBag)
     }
