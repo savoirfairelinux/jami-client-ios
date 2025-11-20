@@ -24,7 +24,7 @@ import ContactsUI
 import os
 
 // swiftlint:disable identifier_name type_body_length
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
     let dBManager = DBManager(profileHepler: ProfileDataHelper(),
@@ -97,6 +97,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return AppCoordinator(injectionBag: self.injectionBag)
     }()
 
+    // MARK: - Public Interface for SceneDelegate
+
+    var rootViewController: UIViewController {
+        return appCoordinator.rootViewController
+    }
+
+    func hasActiveCalls() -> Bool {
+        return callsProvider.hasActiveCalls()
+    }
+
     private let log = SwiftyBeaver.self
 
     private let disposeBag = DisposeBag()
@@ -105,6 +115,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private static let shouldHandleNotification = NSNotification.Name("com.savoirfairelinux.jami.shouldHandleNotification")
     private let backgrounTaskQueue = DispatchQueue(label: "backgrounTaskQueue")
 
+    // MARK: - UISceneSession Lifecycle
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let sceneConfig = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
+        sceneConfig.delegateClass = SceneDelegate.self
+        return sceneConfig
+    }
+
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+    }
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // ignore sigpipe
@@ -112,8 +133,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let SIG_IGN = unsafeBitCast(OpaquePointer(bitPattern: 1), to: SigHandler.self)
         signal(SIGPIPE, SIG_IGN)
         // swiftlint:enable nesting
-
-        self.window = UIWindow()
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         if UserDefaults.standard.value(forKey: automaticDownloadFilesKey) == nil {
@@ -181,8 +200,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         callsProvider: self.callsProvider, requestsService: self.requestsService, profileService: self.profileService,
                                                         presenceService: self.presenceService)
         self.videoManager = VideoManager(with: self.callService, videoService: self.videoService)
-        self.window?.rootViewController = self.appCoordinator.rootViewController
-        self.window?.makeKeyAndVisible()
 
         prepareVideoAcceleration()
         prepareAccounts()
@@ -199,7 +216,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let path = self.certificatePath() {
             setenv("CA_ROOT_FILE", path, 1)
         }
-        self.window?.backgroundColor = UIColor.systemBackground
         return true
     }
 
@@ -369,17 +385,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
+    // MARK: - Scene Lifecycle Methods (called from SceneDelegate)
+
+    func sceneDidEnterBackground() {
         self.log.warning("entering background")
         guard let account = self.accountService.currentAccount else { return }
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: false)
     }
 
-    func applicationWillEnterForeground(_ application: UIApplication) {
+    func sceneWillEnterForeground() {
         self.log.warning("entering foreground")
         self.updateNotificationAvailability()
         guard let account = self.accountService.currentAccount else { return }
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+    }
+
+    func sceneDidBecomeActive() {
+        self.clearBadgeNumber()
+        guard let account = self.accountService.currentAccount else { return }
+        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+    }
+
+    func sceneWillResignActive() {
+        guard let account = self.accountService.currentAccount else { return }
+        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: false)
+    }
+
+    // MARK: - App Lifecycle Methods
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        sceneDidEnterBackground()
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        sceneWillEnterForeground()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -389,14 +428,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        self.clearBadgeNumber()
-        guard let account = self.accountService.currentAccount else { return }
-        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+        sceneDidBecomeActive()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        guard let account = self.accountService.currentAccount else { return }
-        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: false)
+        sceneWillResignActive()
     }
 
     func prepareVideoAcceleration() {
