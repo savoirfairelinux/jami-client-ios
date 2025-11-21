@@ -236,8 +236,8 @@ class SwarmInfo: SwarmInfoProtocol {
         if conversation.isCoredialog() {
             // check if conversation with self
             let localParticipants = conversation.getAllLocalParticipants()
-            if localParticipants.count > 1 {
-                return conversation.getLocalParticipants()?.role == .left
+            if let participant = localParticipants.first {
+                return participant.role == .left
             }
 
             return true
