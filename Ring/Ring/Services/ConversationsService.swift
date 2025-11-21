@@ -434,23 +434,29 @@ class ConversationsService {
                                                   accountId: accountId)
         conversationModel.type = .jams
         conversationModel.id = conversationId
-        var conversations = self.conversations.value
-        conversations.append(conversationModel)
-        self.conversations.accept(conversations)
+        serialOperationQueue.async { [weak self] in
+            guard let self = self else { return }
+            var conversations = self.conversations.value
+            conversations.append(conversationModel)
+            self.conversations.accept(conversations)
+        }
     }
 
     func conversationRemoved(conversationId: String, accountId: String) {
-        guard let index = self.conversations.value.firstIndex(where: { conversationModel in
-            conversationModel.id == conversationId && conversationModel.accountId == accountId
-        }) else { return }
-        var conversations = self.conversations.value
-        conversations.remove(at: index)
-        self.conversations.accept(conversations)
-        let serviceEventType: ServiceEventType = .conversationRemoved
-        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-        serviceEvent.addEventInput(.conversationId, value: conversationId)
-        serviceEvent.addEventInput(.accountId, value: accountId)
-        self.responseStream.onNext(serviceEvent)
+        serialOperationQueue.async { [weak self] in
+            guard let self = self else { return }
+            guard let index = self.conversations.value.firstIndex(where: { conversationModel in
+                conversationModel.id == conversationId && conversationModel.accountId == accountId
+            }) else { return }
+            var conversations = self.conversations.value
+            conversations.remove(at: index)
+            self.conversations.accept(conversations)
+            let serviceEventType: ServiceEventType = .conversationRemoved
+            var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+            serviceEvent.addEventInput(.conversationId, value: conversationId)
+            serviceEvent.addEventInput(.accountId, value: accountId)
+            self.responseStream.onNext(serviceEvent)
+        }
     }
 
     func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: ConversationMemberEvent, accountURI: String) {
@@ -748,13 +754,16 @@ class ConversationsService {
     }
 
     func addSwarmConversationId(conversationId: String, accountId: String, jamiId: String) {
-        if self.getConversationForId(conversationId: conversationId, accountId: accountId) != nil { return }
-        var conversations = self.conversations.value
-        let conversation = ConversationModel(withId: conversationId, accountId: accountId)
-        conversation.type = .oneToOne
-        conversation.addParticipant(jamiId: jamiId)
-        conversations.append(conversation)
-        self.conversations.accept(conversations)
+        serialOperationQueue.async { [weak self] in
+            guard let self = self else { return }
+            if self.getConversationForId(conversationId: conversationId, accountId: accountId) != nil { return }
+            var conversations = self.conversations.value
+            let conversation = ConversationModel(withId: conversationId, accountId: accountId)
+            conversation.type = .oneToOne
+            conversation.addParticipant(jamiId: jamiId)
+            conversations.append(conversation)
+            self.conversations.accept(conversations)
+        }
     }
 
     // MARK: file transfer
