@@ -23,7 +23,7 @@
 "global.password" = "Awal n uɛeddi";
 "global.registerAUsername" = "Jerred isem n useqdac";
 "global.enterPassword" = "Sekcem awal n uɛeddi";
-"global.enterUsername" = "Enter username";
+"global.enterUsername" = "Sekcem isem n useqdac";
 "global.cancel" = "Sefsex";
 "global.blockContact" = "Sewḥel anermis";
 "global.removeAccount" = "Remove account";
@@ -103,7 +103,7 @@
 "swarm.invited" = "Invited";
 "swarm.admin" = "Administrator";
 "swarm.blocked" = "Blocked";
-"swarm.unknown" = "Unknown";
+"swarm.unknown" = "Arussin";
 "swarm.left" = "Left";
 "swarm.inviteMembers" = "Invite members";
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
@@ -208,12 +208,12 @@
 "createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.lookingForUsernameAvailability" = "Asefqed n yisem n useqdac...";
 "createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
-"createAccount.usernameAlreadyTaken" = "Username already taken";
+"createAccount.usernameAlreadyTaken" = "Isem n useqdac ittwaṭṭef yakan";
 "createAccount.usernameValid" = "Isem n useqdac yella.";
 "createAccount.UsernameNotRegisteredTitle" = "Tuccḍa deg uẓeṭṭa";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
+"createAccount.timeoutMessage" = "Ajerred n yisem n useqdac iteddu. Ttxil-k-m rǧu...";
 "createAccount.sipConfigure" = "Swel amiḍan SIP yellan";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
@@ -251,7 +251,7 @@
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "Management server account";
-"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerPlaceholder" = "Tansa URL n uqeddac n usefrek";
 "linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
 "linkToAccountManager.jamsExplanation" = "Enter the management server URL";
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
@@ -323,7 +323,7 @@
 "accountPage.settingsHeader" = "Iɣewwaṛen";
 "accountPage.notificationsHeader" = "Notifications";
 "accountPage.blockedContacts" = "Inermisen iwaḥlen";
-"accountPage.unblockContact" = "Unblock";
+"accountPage.unblockContact" = "Kkes asewḥel ";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "Proxy address";
@@ -373,7 +373,7 @@
 "accountPage.peerDiscovery" = "Rmed tifin n uyugan adigan";
 "accountPage.peerDiscoveryExplanation" = "Qqen ɣer tkerras-nniḍen n DHT deg uẓeṭṭa-nneɣ adigan";
 "accountPage.autoRegistration" = "Auto register after expiration";
-"accountPage.connectivityHeader" = "Connectivity";
+"accountPage.connectivityHeader" = " Tuqqna ";
 "accountPage.turnEnabled" = "Enable TURN";
 "accountPage.turnServer" = "TURN address";
 "accountPage.turnUsername" = "Isem n useqdac TURN";
@@ -400,7 +400,7 @@
 "accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Sebded u senker jami. Fren “ kter seg yibenk-nniḍen, ” sakin ḍumm tangalt QR. Neɣ akken nniḍen sekcem tangalt PIN s ufus.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Notifications";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
@@ -416,15 +416,15 @@
 "accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
 "accountPage.editSipExpirationTime" = "Expiration time";
 "accountPage.selectSipExpirationTime" = "Set time (in seconds) for registration expiration";
-"accountPage.thisDevice" = "This device";
+"accountPage.thisDevice" = "Ibenk-a";
 "accountPage.otherDevices" = "Other linked devices";
 "accountPage.accountIdentity" = "Account identity";
-"accountPage.bootstrap" = "Bootstrap";
+"accountPage.bootstrap" = "Asali";
 "accountPage.dhtConfiguration" = "OpenDHT configuration";
-"accountPage.nameServer" = "Name server";
+"accountPage.nameServer" = "Isem n uqeddac";
 "accountPage.chats" = "Chats";
-"accountPage.typingIndicator" = "Typing indicator";
-"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
+"accountPage.typingIndicator" = "Anamal n tira";
+"accountPage.typingIndicatorExplanation" = "Mmel-d ticki tella tira n yiznan.";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -452,10 +452,10 @@
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
-"account.statusConnecting" = "Connecting";
-"account.statusUnknown" = "Unknown";
+"account.statusOnline" = "yeqqen";
+"account.statusOffline" = "Ur iqqin ara";
+"account.statusConnecting" = "Tuqqna";
+"account.statusUnknown" = "Arussin";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "Account requires migration.";
 "account.me" = "Me";
@@ -540,10 +540,10 @@
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 // Log View
-"logView.title" = "Diagnostics";
-"logView.description" = "Open diagnostic log settings";
+"logView.title" = "Tesleḍt";
+"logView.description" = "Ldi iɣewwaṛen n yiɣmisen n tesleḍt";
 "logView.startLogging" = "Start logging";
-"logView.stopLogging" = "Stop logging";
+"logView.stopLogging" = "Ḥbes tuqqna ar umiḍan";
 "logView.saveError" = "An error occurred while saving the file.";
 "logView.shareError" = "Teḍra-d tuccḍa deg beṭṭu n ufaylu.";
 
@@ -596,7 +596,7 @@
 "accessibility.conversationRowBlocked" = "Conversation blocked";
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
 "accessibility.conversationRowLastMessage" = "Last message at %@";
-"accessibility.userPresenceOnline" = "Online";
+"accessibility.userPresenceOnline" = "yeqqen";
 "accessibility.userPresenceAvailable" = "Available";
 "accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
