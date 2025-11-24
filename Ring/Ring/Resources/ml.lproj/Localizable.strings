@@ -328,7 +328,7 @@
 "accountPage.noProxyExplanationLabel" = "Unable to receive notifications when proxy is disabled.";
 "accountPage.proxyPaceholder" = "പ്രോക്സി വിലാസം";
 "accountPage.useProxyList" = "Use proxy list";
-"accountPage.proxyListURL" = "Proxy list URL";
+"accountPage.proxyListURL" = "പ്രോക്സി ലിസ്റ്റ് URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "പ്രോക്സി";
 "accountPage.enableNotifications" = "അറിയിപ്പുകൾ പ്രവർത്തനക്ഷമമാക്കുക";
@@ -515,7 +515,7 @@
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
-"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.youJoined" = "താങ്കൾ സംഭാഷണത്തിൽ ചേർന്നിരിക്കുന്നു.";
 "generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "പുറപ്പെടുന്ന വിളി";
