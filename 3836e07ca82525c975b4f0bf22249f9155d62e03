@@ -34,6 +34,24 @@
       "parentUuid": "60efecca_43f58dc6",
       "revId": "3836e07ca82525c975b4f0bf22249f9155d62e03",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07216088_cb0433a6",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2025-11-30T23:54:18Z",
+      "side": 1,
+      "message": "Was the daemon API updated with one of the following patches?https://review.jami.net/q/project:jami-daemon+status:open+topic:%22unhold%22",
+      "parentUuid": "c4841488_334108c2",
+      "revId": "3836e07ca82525c975b4f0bf22249f9155d62e03",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
