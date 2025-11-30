@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60efecca_43f58dc6",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-11-30T23:42:32Z",
+      "side": 1,
+      "message": "unhold is daemon API",
+      "revId": "3836e07ca82525c975b4f0bf22249f9155d62e03",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
