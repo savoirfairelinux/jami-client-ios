@@ -52,6 +52,24 @@
       "parentUuid": "c4841488_334108c2",
       "revId": "3836e07ca82525c975b4f0bf22249f9155d62e03",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c82f142_80ef79fb",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2025-12-01T00:17:51Z",
+      "side": 1,
+      "message": "No, it is not merged yet",
+      "parentUuid": "07216088_cb0433a6",
+      "revId": "3836e07ca82525c975b4f0bf22249f9155d62e03",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
