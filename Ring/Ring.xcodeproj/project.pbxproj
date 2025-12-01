@@ -421,6 +421,9 @@
 		26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26AF9F3C2977126500C7069A /* LogViewController.storyboard */; };
 		26B37339263C439B00E2EE28 /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B37337263C439B00E2EE28 /* CustomSearchController.swift */; };
 		26B37342263C4B3700E2EE28 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */; };
+		26B4C49B2EDD225400273727 /* libsimdutf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B4C49A2EDD225400273727 /* libsimdutf.xcframework */; };
+		26B4C49C2EDD227000273727 /* libsimdutf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B4C49A2EDD225400273727 /* libsimdutf.xcframework */; };
+		26B4C49D2EDD228F00273727 /* libsimdutf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B4C49A2EDD225400273727 /* libsimdutf.xcframework */; };
 		26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B708FD253610B0003974F2 /* OpenURLLabel.swift */; };
 		26BB437D267013F600019CF6 /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB437C267013F100019CF6 /* libz.1.1.3.tbd */; };
 		26BB437E267013FB00019CF6 /* libz.1.2.11.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C7A26700C0500888EED /* libz.1.2.11.tbd */; };
@@ -1099,6 +1102,7 @@
 		26AF9F3C2977126500C7069A /* LogViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogViewController.storyboard; sourceTree = "<group>"; };
 		26B37337263C439B00E2EE28 /* CustomSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		26B4C49A2EDD225400273727 /* libsimdutf.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libsimdutf.xcframework; path = ../xcframework/libsimdutf.xcframework; sourceTree = "<group>"; };
 		26B708FD253610B0003974F2 /* OpenURLLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLLabel.swift; sourceTree = "<group>"; };
 		26BB437926700EEA00019CF6 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = ../DEPS/arm64/lib; sourceTree = "<group>"; };
 		26BB437C267013F100019CF6 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
@@ -1863,6 +1867,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26B4C49B2EDD225400273727 /* libsimdutf.xcframework in Frameworks */,
 				04399A981D1C2F6100E99CD9 /* libz.tbd in Frameworks */,
 				26001C122D78E1A1009A8E23 /* libnettle.xcframework in Frameworks */,
 				649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */,
@@ -1953,6 +1958,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26B4C49D2EDD228F00273727 /* libsimdutf.xcframework in Frameworks */,
 				26001CB62D78E3E7009A8E23 /* libswscale.xcframework in Frameworks */,
 				26BB43852670150E00019CF6 /* libbz2.tbd in Frameworks */,
 				26001CAA2D78E3E7009A8E23 /* libsecp256k1.xcframework in Frameworks */,
@@ -2022,6 +2028,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26B4C49C2EDD227000273727 /* libsimdutf.xcframework in Frameworks */,
 				3D4181892DDE312F001BAD76 /* libgmp.xcframework in Frameworks */,
 				3D4181B32DDE3163001BAD76 /* libpjsip.xcframework in Frameworks */,
 				3D4181C12DDE3174001BAD76 /* libssl.xcframework in Frameworks */,
@@ -2104,6 +2111,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26B4C49A2EDD225400273727 /* libsimdutf.xcframework */,
 				3D417D992DDE2846001BAD76 /* ~libswiftPencilKit.tbd */,
 				3D417E4A2DDE2879001BAD76 /* Accelerate.framework */,
 				3D417DD72DDE2857001BAD76 /* Accessibility.framework */,
