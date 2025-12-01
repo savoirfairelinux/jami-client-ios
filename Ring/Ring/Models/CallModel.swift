@@ -28,7 +28,7 @@ enum CallState: String {
     case busy = "BUSY"
     case failure = "FAILURE"
     case hold = "HOLD"
-    case unhold = "UNHOLD"
+    case resume = "UNHOLD"
     case inactive = "INACTIVE"
     case over = "OVER"
     case unknown = "UNKNOWN"
@@ -53,7 +53,7 @@ enum CallState: String {
     }
 
     func isActive() -> Bool {
-        return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold || self == .unhold
+        return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold || self == .resume
     }
 }
 
@@ -130,7 +130,7 @@ public class CallModel {
     var audioMuted: Bool = false
     var callRecorded: Bool = false
     var videoMuted: Bool = false
-    var peerHolding: Bool = false
+    var peerHold: Bool = false
     var speakerActive: Bool = false
     var isAudioOnly: Bool = false
     var layout: CallLayout = .one
@@ -243,8 +243,8 @@ public class CallModel {
             self.accountId = accountId
         }
 
-        if let peerHolding = dictionary[CallDetailKey.peerHoldingKey.rawValue]?.toBool() {
-            self.peerHolding = peerHolding
+        if let peerHold = dictionary[CallDetailKey.peerHoldingKey.rawValue]?.toBool() {
+            self.peerHold = peerHold
         }
     }
 
@@ -267,7 +267,7 @@ public class CallModel {
 
     func isCurrent() -> Bool {
         return self.state == .current || self.state == .hold ||
-            self.state == .unhold || self.state == .ringing
+            self.state == .resume || self.state == .ringing
     }
 
     func updateParticipantsCallId(callId: String) {

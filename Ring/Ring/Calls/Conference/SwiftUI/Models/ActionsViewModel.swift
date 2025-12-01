@@ -205,12 +205,12 @@ class ActionsViewModel {
         return currentCall
             .filter({ call in
                 (call.state == .hold ||
-                    call.state == .unhold ||
+                    call.state == .resume ||
                     call.state == .current)
             })
             .map({call in
                 if  call.state == .hold ||
-                        (call.state == .current && call.peerHolding) {
+                        (call.state == .current && call.peerHold) {
                     return true
                 }
                 return false
