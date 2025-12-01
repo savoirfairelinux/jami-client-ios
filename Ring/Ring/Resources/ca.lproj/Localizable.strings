@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Silencia el micròfon";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pausa de trucada";
-"accessibility.calls.default.hangUpCall" = "Finalitza la trucada";
+"accessibility.calls.default.endCall" = "End call";
 "accessibility.calls.default.addParticipant" = "Afegir participant";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Aparell de detenció";
 "accessibility.calls.alter.pauseCall" = "Reanudar la trucada";
-"accessibility.calls.alter.hangUpCall" = "Finalitza la trucada";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Afegir participant";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Moderador desactivat";
 "accessibility.conference.muteAudio" = "Silencia l'àudio";
 "accessibility.conference.unmuteAudio" = "Audió inmutat";
-"accessibility.conference.hangup" = "Finalitza la trucada";
+"accessibility.conference.endCall" = "End call";
 "accessibility.conference.lowerHand" = "Man baixa";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "ميكروفون خاموش";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "ڤڠاجين ڤڠاجين";
-"accessibility.calls.default.hangUpCall" = "ڤڠاجرن اخير";
+"accessibility.calls.default.endCall" = "End call";
 "accessibility.calls.default.addParticipant" = "مڠمبيل ڤڠوربان";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "كاميرا ڤڠهادڤن";
 "accessibility.calls.alter.pauseCall" = "ڤڠاجين ڤڠاجين";
-"accessibility.calls.alter.hangUpCall" = "ڤڠاجرن اخير";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "مڠمبيل ڤڠوربان";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "مودراتور دڤرچايا?? ي";
 "accessibility.conference.muteAudio" = "صوتي ساكن";
 "accessibility.conference.unmuteAudio" = "صوت غير محكم";
-"accessibility.conference.hangup" = "ڤڠاجرن اخير";
+"accessibility.conference.endCall" = "End call";
 "accessibility.conference.lowerHand" = "يڠ دالم لالو";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

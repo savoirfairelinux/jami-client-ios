@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "മിണ്ടാത്ത മൈക്രോഫോൺ";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "ഇടവേള വിളി";
-"accessibility.calls.default.hangUpCall" = "Tamatkan panggilan";
+"accessibility.calls.default.endCall" = "Tamatkan panggilan";
 "accessibility.calls.default.addParticipant" = "പങ്കാളിയെ കൂട്ടിച്ചേർക്കുക";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "ക്യാമറ നിർത്തുക";
 "accessibility.calls.alter.pauseCall" = "പുനരാരംഭിക്കുക";
-"accessibility.calls.alter.hangUpCall" = "Tamatkan panggilan";
+"accessibility.calls.alter.endCall" = "Tamatkan panggilan";
 "accessibility.calls.alter.addParticipant" = "പങ്കാളിയെ കൂട്ടിച്ചേർക്കുക";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "മോഡറേറ്റർ അൺസെറ്റ് ചെയ്യുക";
 "accessibility.conference.muteAudio" = "Matikan bunyi";
 "accessibility.conference.unmuteAudio" = "നിശബ്ദമായ ഓഡിയോ";
-"accessibility.conference.hangup" = "Tamatkan panggilan";
+"accessibility.conference.endCall" = "Tamatkan panggilan";
 "accessibility.conference.lowerHand" = "താഴത്തെ കൈ";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

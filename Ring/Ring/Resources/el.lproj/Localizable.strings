@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Σίγαση μικροφώνου";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Παύση κλήσης";
-"accessibility.calls.default.hangUpCall" = "Τερματισμός κλήσης";
+"accessibility.calls.default.endCall" = "End call";
 "accessibility.calls.default.addParticipant" = "Προσθήκη συμμετέχοντος";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Διακοπή κάμερας";
 "accessibility.calls.alter.pauseCall" = "Επαναφέρετε την κλήση";
-"accessibility.calls.alter.hangUpCall" = "Τερματισμός κλήσης";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Προσθήκη συμμετέχοντος";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Ανακατάσταση διαχειριστή";
 "accessibility.conference.muteAudio" = "Σίγαση ήχου";
 "accessibility.conference.unmuteAudio" = "Ανεκλειστικό ήχο";
-"accessibility.conference.hangup" = "Τερματισμός κλήσης";
+"accessibility.conference.endCall" = "End call";
 "accessibility.conference.lowerHand" = "Κάτω χέρι";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

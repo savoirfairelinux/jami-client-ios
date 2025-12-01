@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "गहिरो माइक्रोफोन";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "विरामको लागि कल";
-"accessibility.calls.default.hangUpCall" = "कल समाप्त पार्नुहोस्";
+"accessibility.calls.default.endCall" = "कल समाप्त पार्नुहोस्";
 "accessibility.calls.default.addParticipant" = "सहभागी थप";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "क्यामेरा रोक्नुहोस्";
 "accessibility.calls.alter.pauseCall" = "पुनः कल";
-"accessibility.calls.alter.hangUpCall" = "कल समाप्त पार्नुहोस्";
+"accessibility.calls.alter.endCall" = "कल समाप्त पार्नुहोस्";
 "accessibility.calls.alter.addParticipant" = "सहभागी थप";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "अनसेट मोडरेटर";
 "accessibility.conference.muteAudio" = "अडियो बन्द";
 "accessibility.conference.unmuteAudio" = "अनमोल अडियो";
-"accessibility.conference.hangup" = "कल समाप्त पार्नुहोस्";
+"accessibility.conference.endCall" = "कल समाप्त पार्नुहोस्";
 "accessibility.conference.lowerHand" = "तलको हात";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

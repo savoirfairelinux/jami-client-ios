@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Mikrofonu səssiz et";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "توقف تماس";
-"accessibility.calls.default.hangUpCall" = "Zəngi bitir";
+"accessibility.calls.default.endCall" = "End call";
 "accessibility.calls.default.addParticipant" = "شرکتچی قوش";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "دوربین ایست";
 "accessibility.calls.alter.pauseCall" = "تماسونو تکرار ائتمک";
-"accessibility.calls.alter.hangUpCall" = "Zəngi bitir";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "شرکتچی قوش";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "مودئراتورون دَییشدیرمه سی";
 "accessibility.conference.muteAudio" = "سئلک آدیو";
 "accessibility.conference.unmuteAudio" = "سس لری بیز";
-"accessibility.conference.hangup" = "Zəngi bitir";
+"accessibility.conference.endCall" = "End call";
 "accessibility.conference.lowerHand" = "آلتی ال";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

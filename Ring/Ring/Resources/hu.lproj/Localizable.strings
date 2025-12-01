@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Mikrofon elnémítása";
 "accessibility.calls.default.toggleVideo" = "Fényképezőgép indítása";
 "accessibility.calls.default.pauseCall" = "Hívás tartása";
-"accessibility.calls.default.hangUpCall" = "Hívás befejezése";
+"accessibility.calls.default.endCall" = "Hívás befejezése";
 "accessibility.calls.default.addParticipant" = "Résztvevő hozzáadása";
 "accessibility.calls.default.switchCamera" = "Fényképezőgépváltás";
 "accessibility.calls.default.toggleSpeaker" = "Hangszóró bekapcsolása";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Mikrofon némításának feloldása";
 "accessibility.calls.alter.toggleVideo" = "Fényképezőgép leállása";
 "accessibility.calls.alter.pauseCall" = "Hívás folytatása";
-"accessibility.calls.alter.hangUpCall" = "Hívás befejezése";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Résztvevő hozzáadása";
 "accessibility.calls.alter.switchCamera" = "Fényképezőgépváltás";
 "accessibility.calls.alter.toggleSpeaker" = "Hangszóró kikapcsolása";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Moderátor megszüntetése";
 "accessibility.conference.muteAudio" = "Mikrofon elnémítása";
 "accessibility.conference.unmuteAudio" = "Mikrofon némítás feloldása";
-"accessibility.conference.hangup" = "Hívás befejezése";
+"accessibility.conference.endCall" = "Hívás befejezése";
 "accessibility.conference.lowerHand" = "Kéz leengedése";
 "accessibility.account.tokenQRcode" = "Jogkivonat QR-kód";
 

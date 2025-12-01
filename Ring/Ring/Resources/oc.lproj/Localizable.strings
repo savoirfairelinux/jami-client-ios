@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Micròfon silenciós";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pausa de trucar";
-"accessibility.calls.default.hangUpCall" = "Terminar";
+"accessibility.calls.default.endCall" = "Terminar";
 "accessibility.calls.default.addParticipant" = "Ajustar participant";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Camèra d' arrestacion";
 "accessibility.calls.alter.pauseCall" = "Reviure l' apèl";
-"accessibility.calls.alter.hangUpCall" = "Terminar";
+"accessibility.calls.alter.endCall" = "Terminar";
 "accessibility.calls.alter.addParticipant" = "Ajustar participant";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Moderator desactivat";
 "accessibility.conference.muteAudio" = "Copar lo son";
 "accessibility.conference.unmuteAudio" = "Audio imut";
-"accessibility.conference.hangup" = "Terminar";
+"accessibility.conference.endCall" = "Terminar";
 "accessibility.conference.lowerHand" = "Man inferiora";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

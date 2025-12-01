@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "மைக்ரோஃபோன் முடக்கப்பட்டது";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "இடைநிறுத்த அழைப்பு";
-"accessibility.calls.default.hangUpCall" = "அழைப்பை முடித்திடுக";
+"accessibility.calls.default.endCall" = "அழைப்பை முடித்திடுக";
 "accessibility.calls.default.addParticipant" = "பங்கேற்பாளரை சேர்க்கவும்";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "கேமரா நிறுத்த";
 "accessibility.calls.alter.pauseCall" = "அழைப்பைத் தொடங்குதல்";
-"accessibility.calls.alter.hangUpCall" = "அழைப்பை முடித்திடுக";
+"accessibility.calls.alter.endCall" = "அழைப்பை முடித்திடுக";
 "accessibility.calls.alter.addParticipant" = "பங்கேற்பாளரை சேர்க்கவும்";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "அமைக்கப்படாத மாடரேட்டர்";
 "accessibility.conference.muteAudio" = "மவுண்ட் ஆடியோ";
 "accessibility.conference.unmuteAudio" = "ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி ஒலி";
-"accessibility.conference.hangup" = "அழைப்பை முடித்திடுக";
+"accessibility.conference.endCall" = "அழைப்பை முடித்திடுக";
 "accessibility.conference.lowerHand" = "கீழ் கை";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

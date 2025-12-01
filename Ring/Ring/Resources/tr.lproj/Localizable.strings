@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Mikrofon sessiz";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Çağrıyı duraklat";
-"accessibility.calls.default.hangUpCall" = "Çağrıyı sonlandır";
+"accessibility.calls.default.endCall" = "Çağrıyı sonlandır";
 "accessibility.calls.default.addParticipant" = "Katılımcı ekle";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Kamerayı kapat";
 "accessibility.calls.alter.pauseCall" = "Çağrıyı sürdür";
-"accessibility.calls.alter.hangUpCall" = "Çağrıyı sonlandır";
+"accessibility.calls.alter.endCall" = "Çağrıyı sonlandır";
 "accessibility.calls.alter.addParticipant" = "Katılımcı ekle";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Oturum başkanı ayarını kaldır";
 "accessibility.conference.muteAudio" = "Sesi kapat";
 "accessibility.conference.unmuteAudio" = "Sesi aç";
-"accessibility.conference.hangup" = "Çağrıyı sonlandır";
+"accessibility.conference.endCall" = "Çağrıyı sonlandır";
 "accessibility.conference.lowerHand" = "Elini indir";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

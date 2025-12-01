@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "ಮೂಕ ಮೈಕ್ರೊಫೋನ್";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "ವಿರಾಮ ಕರೆ";
-"accessibility.calls.default.hangUpCall" = "ಕರೆ ಅಂತ್ಯಗೊಳಿಸು";
+"accessibility.calls.default.endCall" = "ಕರೆ ಅಂತ್ಯಗೊಳಿಸು";
 "accessibility.calls.default.addParticipant" = "ಭಾಗವಹಿಸುವವರನ್ನು ಸೇರಿಸುವುದು";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "ಕ್ಯಾಮೆರಾ ನಿಲ್ಲಿಸಿ";
 "accessibility.calls.alter.pauseCall" = "ಪುನರಾರಂಭ ಕರೆ";
-"accessibility.calls.alter.hangUpCall" = "ಕರೆ ಅಂತ್ಯಗೊಳಿಸು";
+"accessibility.calls.alter.endCall" = "ಕರೆ ಅಂತ್ಯಗೊಳಿಸು";
 "accessibility.calls.alter.addParticipant" = "ಭಾಗವಹಿಸುವವರನ್ನು ಸೇರಿಸುವುದು";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "ಡಿಸ್ಇನ್ಸೆಟ್ ಮಾಡರೇಟರ್";
 "accessibility.conference.muteAudio" = "ಮೂಕ ಆಡಿಯೋ";
 "accessibility.conference.unmuteAudio" = "ಅನಿರ್ದಿಷ್ಟ ಆಡಿಯೋ";
-"accessibility.conference.hangup" = "ಕರೆ ಅಂತ್ಯಗೊಳಿಸು";
+"accessibility.conference.endCall" = "ಕರೆ ಅಂತ್ಯಗೊಳಿಸು";
 "accessibility.conference.lowerHand" = "ಕೆಳ ಕೈ";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

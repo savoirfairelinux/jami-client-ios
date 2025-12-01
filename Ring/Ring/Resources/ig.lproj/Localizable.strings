@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Igwe okwu na-adịghị arụ ọrụ";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Nkwupụta nkwụsịtụ";
-"accessibility.calls.default.hangUpCall" = "Kwụsị oku";
+"accessibility.calls.default.endCall" = "Kwụsị oku";
 "accessibility.calls.default.addParticipant" = "Tinye onye so";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Kwụsị igwefoto";
 "accessibility.calls.alter.pauseCall" = "Nchịkọta oku";
-"accessibility.calls.alter.hangUpCall" = "Kwụsị oku";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Tinye onye so";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Ịkwụsị ịhazi ihe";
 "accessibility.conference.muteAudio" = "Audio na-adịghị arụ ọrụ";
 "accessibility.conference.unmuteAudio" = "Ọkpụkpọ na-adịghị emechi emechi";
-"accessibility.conference.hangup" = "Kwụsị oku";
+"accessibility.conference.endCall" = "Kwụsị oku";
 "accessibility.conference.lowerHand" = "Aka ala";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

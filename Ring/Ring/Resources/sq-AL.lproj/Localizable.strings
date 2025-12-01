@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Heshtoje mikrofonin";
 "accessibility.calls.default.toggleVideo" = "Vëre kamerë në punë";
 "accessibility.calls.default.pauseCall" = "Ndale thirren";
-"accessibility.calls.default.hangUpCall" = "Përfundoje thirrjen";
+"accessibility.calls.default.endCall" = "Përfundoje thirrjen";
 "accessibility.calls.default.addParticipant" = "Shtoni pjesëmarrës";
 "accessibility.calls.default.switchCamera" = "Ndërro kamerën";
 "accessibility.calls.default.toggleSpeaker" = "Hap altoparlantin";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Hiqi heshtimin mikrofonit";
 "accessibility.calls.alter.toggleVideo" = "Ndale kamerën";
 "accessibility.calls.alter.pauseCall" = "Rimerre thirrjen";
-"accessibility.calls.alter.hangUpCall" = "Përfundoje thirrjen";
+"accessibility.calls.alter.endCall" = "Përfundoje thirrjen";
 "accessibility.calls.alter.addParticipant" = "Shtoni pjesëmarrës";
 "accessibility.calls.alter.switchCamera" = "Ndërro kamerën";
 "accessibility.calls.alter.toggleSpeaker" = "Mbyll altoparlantin";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Hiqe nga moderator";
 "accessibility.conference.muteAudio" = "Mbylli zërin";
 "accessibility.conference.unmuteAudio" = "Riktheji zërin";
-"accessibility.conference.hangup" = "Përfundoje thirrjen";
+"accessibility.conference.endCall" = "Përfundoje thirrjen";
 "accessibility.conference.lowerHand" = "Uleni dorën";
 "accessibility.account.tokenQRcode" = "Kod QR token-i";
 

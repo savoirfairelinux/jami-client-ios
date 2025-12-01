@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "मूक माइक्रोफोन";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "विराम कॉल";
-"accessibility.calls.default.hangUpCall" = "कॉल समाप्त करें";
+"accessibility.calls.default.endCall" = "कॉल समाप्त करें";
 "accessibility.calls.default.addParticipant" = "प्रतिभागी जोड़ें";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "कैमरा रोकें";
 "accessibility.calls.alter.pauseCall" = "पुनः कॉल";
-"accessibility.calls.alter.hangUpCall" = "कॉल समाप्त करें";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "प्रतिभागी जोड़ें";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "मॉडरेटर अनसेट करें";
 "accessibility.conference.muteAudio" = "मूक ऑडियो";
 "accessibility.conference.unmuteAudio" = "अमूत ऑडियो";
-"accessibility.conference.hangup" = "कॉल समाप्त करें";
+"accessibility.conference.endCall" = "कॉल समाप्त करें";
 "accessibility.conference.lowerHand" = "निचला हाथ";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
