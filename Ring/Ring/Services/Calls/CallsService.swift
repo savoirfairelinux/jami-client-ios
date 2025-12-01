@@ -188,9 +188,9 @@ class CallsService: CallsAdapterDelegate {
         _ = self.callManagementService.addOrUpdateCall(callId: callId, callState: .incoming, callDictionary: callDictionary, mediaList: withMedia, notifyIncoming: true)
     }
 
-    func callPlacedOnHold(withCallId callId: String, hold: Bool) {
+    func callPlacedOnHold(withCallId callId: String, holding: Bool) {
         Task {
-            await mediaManagementService.handleCallPlacedOnHold(callId: callId, hold: hold)
+            await mediaManagementService.handleCallPlacedOnHold(callId: callId, holding: holding)
         }
     }
 
@@ -256,9 +256,9 @@ class CallsService: CallsAdapterDelegate {
         }
     }
 
-    func handleCallPlacedOnHold(callId: String, hold: Bool) {
+    func handleCallPlacedOnHold(callId: String, holding: Bool) {
         Task {
-            await mediaManagementService.handleCallPlacedOnHold(callId: callId, hold: hold)
+            await mediaManagementService.handleCallPlacedOnHold(callId: callId, holding: holding)
         }
     }
 
