@@ -188,7 +188,7 @@ struct MessageContentView: View {
     @SwiftUI.State private var suppressLongPress: Bool = false
     @SwiftUI.State private var ringProgress: CGFloat = 0
     private let replyActivationDistance: CGFloat = 70
-    private let minSwipeDistance: CGFloat = 10
+    private let minSwipeDistance: CGFloat = 30
     private let swipeDominanceFactor: CGFloat = 1.5
     private let maxVisualOffset: CGFloat = 80
     private let replyArrowGap: CGFloat = 30
