@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Døyva mikrofon";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pause ring";
-"accessibility.calls.default.hangUpCall" = "Avslutt samtale";
+"accessibility.calls.default.endCall" = "Avslutt samtale";
 "accessibility.calls.default.addParticipant" = "Legg til deltakar";
 "accessibility.calls.default.switchCamera" = "Byta kamera";
 "accessibility.calls.default.toggleSpeaker" = "Skru på høgtalar";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Stopp kamera";
 "accessibility.calls.alter.pauseCall" = "Fortsett samtala";
-"accessibility.calls.alter.hangUpCall" = "Avslutt samtale";
+"accessibility.calls.alter.endCall" = "Avslutt samtale";
 "accessibility.calls.alter.addParticipant" = "Legg til deltakar";
 "accessibility.calls.alter.switchCamera" = "Byta kamera";
 "accessibility.calls.alter.toggleSpeaker" = "Skri av høgtalar";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Unset moderator";
 "accessibility.conference.muteAudio" = "Døyv lyd";
 "accessibility.conference.unmuteAudio" = "Skru på lyd";
-"accessibility.conference.hangup" = "Avslutt samtale";
+"accessibility.conference.endCall" = "Avslutt samtale";
 "accessibility.conference.lowerHand" = "Nedre hand";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

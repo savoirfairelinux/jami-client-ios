@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Тыныч микрофон";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Тәртибе";
-"accessibility.calls.default.hangUpCall" = "Шалтыратуны тәмамлау";
+"accessibility.calls.default.endCall" = "Шалтыратуны тәмамлау";
 "accessibility.calls.default.addParticipant" = "Катнашучыны өстәү";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Камераны туктатыгыз";
 "accessibility.calls.alter.pauseCall" = "Көйрәне дәвам итү";
-"accessibility.calls.alter.hangUpCall" = "Шалтыратуны тәмамлау";
+"accessibility.calls.alter.endCall" = "Шалтыратуны тәмамлау";
 "accessibility.calls.alter.addParticipant" = "Катнашучыны өстәү";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Модераторны урнаштырмау";
 "accessibility.conference.muteAudio" = "Тыныч тавыш";
 "accessibility.conference.unmuteAudio" = "Тыныч тавыш";
-"accessibility.conference.hangup" = "Шалтыратуны тәмамлау";
+"accessibility.conference.endCall" = "Шалтыратуны тәмамлау";
 "accessibility.conference.lowerHand" = "Түбән кул";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

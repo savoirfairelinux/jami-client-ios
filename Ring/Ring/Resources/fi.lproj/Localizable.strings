@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Mykistä mikrofoni";
 "accessibility.calls.default.toggleVideo" = "Avaa kamera";
 "accessibility.calls.default.pauseCall" = "Puhelu pitoon";
-"accessibility.calls.default.hangUpCall" = "Lopeta puhelu";
+"accessibility.calls.default.endCall" = "End call";
 "accessibility.calls.default.addParticipant" = "Lisää osannottaja";
 "accessibility.calls.default.switchCamera" = "Vaihda kamera";
 "accessibility.calls.default.toggleSpeaker" = "Kytke kaiutin";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Poista mikrofonin mykistys";
 "accessibility.calls.alter.toggleVideo" = "Sulje kamera";
 "accessibility.calls.alter.pauseCall" = "Jatka puhelua";
-"accessibility.calls.alter.hangUpCall" = "Lopeta puhelu";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Lisää osannottaja";
 "accessibility.calls.alter.switchCamera" = "Vaihda kamera";
 "accessibility.calls.alter.toggleSpeaker" = "Mykistä kaiutin";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Poista valvoja";
 "accessibility.conference.muteAudio" = "Mykistä ääni";
 "accessibility.conference.unmuteAudio" = "Poista mykistys";
-"accessibility.conference.hangup" = "Lopeta puhelu";
+"accessibility.conference.endCall" = "Lopeta puhelu";
 "accessibility.conference.lowerHand" = "Käsi alas";
 "accessibility.account.tokenQRcode" = "Token QR-koodi";
 

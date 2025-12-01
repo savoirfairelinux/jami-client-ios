@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Mute microphone";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pause call";
-"accessibility.calls.default.hangUpCall" = "ඇමතුම අවසන් කරන්න";
+"accessibility.calls.default.endCall" = "ඇමතුම අවසන් කරන්න";
 "accessibility.calls.default.addParticipant" = "Add participant";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Stop camera";
 "accessibility.calls.alter.pauseCall" = "Resume call";
-"accessibility.calls.alter.hangUpCall" = "ඇමතුම අවසන් කරන්න";
+"accessibility.calls.alter.endCall" = "ඇමතුම අවසන් කරන්න";
 "accessibility.calls.alter.addParticipant" = "Add participant";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Unset moderator";
 "accessibility.conference.muteAudio" = "Mute audio";
 "accessibility.conference.unmuteAudio" = "Unmute audio";
-"accessibility.conference.hangup" = "ඇමතුම අවසන් කරන්න";
+"accessibility.conference.endCall" = "ඇමතුම අවසන් කරන්න";
 "accessibility.conference.lowerHand" = "Lower hand";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

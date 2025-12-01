@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Isključi mikrofon";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pauzirajte poziv";
-"accessibility.calls.default.hangUpCall" = "Završi poziv";
+"accessibility.calls.default.endCall" = "Završi poziv";
 "accessibility.calls.default.addParticipant" = "Додајте учесника";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Стварајте камеру";
 "accessibility.calls.alter.pauseCall" = "Пронављање позива";
-"accessibility.calls.alter.hangUpCall" = "Završi poziv";
+"accessibility.calls.alter.endCall" = "Završi poziv";
 "accessibility.calls.alter.addParticipant" = "Додајте учесника";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Ukloni moderatora";
 "accessibility.conference.muteAudio" = "Isključi zvuk";
 "accessibility.conference.unmuteAudio" = "Uključi zvuk";
-"accessibility.conference.hangup" = "Završi poziv";
+"accessibility.conference.endCall" = "Završi poziv";
 "accessibility.conference.lowerHand" = "Spusti ruku";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

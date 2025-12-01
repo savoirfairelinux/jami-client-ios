@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Oprește microfonul";
 "accessibility.calls.default.toggleVideo" = "Pornește camera";
 "accessibility.calls.default.pauseCall" = "Pauză apel";
-"accessibility.calls.default.hangUpCall" = "Închide apelul";
+"accessibility.calls.default.endCall" = "Închide apelul";
 "accessibility.calls.default.addParticipant" = "Adaugă un participant";
 "accessibility.calls.default.switchCamera" = "Schimbă camera";
 "accessibility.calls.default.toggleSpeaker" = "Pornește difuzorul";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Pornește microfonul";
 "accessibility.calls.alter.toggleVideo" = "Stop camera";
 "accessibility.calls.alter.pauseCall" = "Reia apelul";
-"accessibility.calls.alter.hangUpCall" = "Închide apelul";
+"accessibility.calls.alter.endCall" = "Închide apelul";
 "accessibility.calls.alter.addParticipant" = "Adaugă un participant";
 "accessibility.calls.alter.switchCamera" = "Schimbă camera";
 "accessibility.calls.alter.toggleSpeaker" = "Oprește difuzorul";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Elimină moderatorul";
 "accessibility.conference.muteAudio" = "Oprește microfonul";
 "accessibility.conference.unmuteAudio" = "Pornește microfonul";
-"accessibility.conference.hangup" = "Închide apelul";
+"accessibility.conference.endCall" = "Închide apelul";
 "accessibility.conference.lowerHand" = "Coboară mîna";
 "accessibility.account.tokenQRcode" = "Codul QR";
 

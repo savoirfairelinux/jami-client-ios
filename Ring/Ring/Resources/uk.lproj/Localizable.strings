@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Відключити мікрофон";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Призупинити дзвінок";
-"accessibility.calls.default.hangUpCall" = "Закінчити дзвінок";
+"accessibility.calls.default.endCall" = "Закінчити дзвінок";
 "accessibility.calls.default.addParticipant" = "Додати учасників";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Увімкнути гучномовець";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Зупинити камеру";
 "accessibility.calls.alter.pauseCall" = "Продовжити дзвінок";
-"accessibility.calls.alter.hangUpCall" = "Закінчити дзвінок";
+"accessibility.calls.alter.endCall" = "Закінчити дзвінок";
 "accessibility.calls.alter.addParticipant" = "Додати учасників";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Не встановлюється модератор";
 "accessibility.conference.muteAudio" = "Відключити звук";
 "accessibility.conference.unmuteAudio" = "Незаглушенний аудіо";
-"accessibility.conference.hangup" = "Закінчити дзвінок";
+"accessibility.conference.endCall" = "Закінчити дзвінок";
 "accessibility.conference.lowerHand" = "Нижня рука";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

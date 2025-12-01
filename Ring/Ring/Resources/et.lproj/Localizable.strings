@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Summuta mikrofon";
 "accessibility.calls.default.toggleVideo" = "Käivita kaamera";
 "accessibility.calls.default.pauseCall" = "Peata kõne";
-"accessibility.calls.default.hangUpCall" = "Lõpeta kõne";
+"accessibility.calls.default.endCall" = "End call";
 "accessibility.calls.default.addParticipant" = "Lisa osaleja";
 "accessibility.calls.default.switchCamera" = "Vaheta kaamerat";
 "accessibility.calls.default.toggleSpeaker" = "Lülita valjuhääldi sisse";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Lõpeta mikrofoni summutamine";
 "accessibility.calls.alter.toggleVideo" = "Peata kaamera";
 "accessibility.calls.alter.pauseCall" = "Jätka kõnet";
-"accessibility.calls.alter.hangUpCall" = "Lõpeta kõne";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Lisa osaleja";
 "accessibility.calls.alter.switchCamera" = "Vaheta kaamerat";
 "accessibility.calls.alter.toggleSpeaker" = "Lülita valjuhääldi välja";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Eemalda moderaator";
 "accessibility.conference.muteAudio" = "Summuta heli";
 "accessibility.conference.unmuteAudio" = "Lõpeta heli summutamine";
-"accessibility.conference.hangup" = "Lõpeta kõne";
+"accessibility.conference.endCall" = "Lõpeta kõne";
 "accessibility.conference.lowerHand" = "Lase käsi alla";
 "accessibility.account.tokenQRcode" = "Tunnusloa QR-kood";
 

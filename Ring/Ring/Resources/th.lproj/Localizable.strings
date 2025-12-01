@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "ปิดเสียงไมโครโฟน";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "การเรียกหยุด";
-"accessibility.calls.default.hangUpCall" = "สิ้นสุดการโทร";
+"accessibility.calls.default.endCall" = "สิ้นสุดการโทร";
 "accessibility.calls.default.addParticipant" = "เพิ่มผู้เข้าร่วม";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "กล้องหยุด";
 "accessibility.calls.alter.pauseCall" = "เริ่มการเรียก";
-"accessibility.calls.alter.hangUpCall" = "สิ้นสุดการโทร";
+"accessibility.calls.alter.endCall" = "สิ้นสุดการโทร";
 "accessibility.calls.alter.addParticipant" = "เพิ่มผู้เข้าร่วม";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "ปฏิทินไม่ตั้ง";
 "accessibility.conference.muteAudio" = "เสียงเงียบ";
 "accessibility.conference.unmuteAudio" = "เสียงไม่ปิด";
-"accessibility.conference.hangup" = "สิ้นสุดการโทร";
+"accessibility.conference.endCall" = "สิ้นสุดการโทร";
 "accessibility.conference.lowerHand" = "มือต่ํา";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

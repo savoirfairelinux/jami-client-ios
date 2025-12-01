@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Microfoon dempen";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pauze oproep";
-"accessibility.calls.default.hangUpCall" = "Oproep beëindigen";
+"accessibility.calls.default.endCall" = "Oproep beëindigen";
 "accessibility.calls.default.addParticipant" = "Deelnemer toevoegen";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Stopcamera";
 "accessibility.calls.alter.pauseCall" = "Hervat het gesprek";
-"accessibility.calls.alter.hangUpCall" = "Oproep beëindigen";
+"accessibility.calls.alter.endCall" = "Oproep beëindigen";
 "accessibility.calls.alter.addParticipant" = "Deelnemer toevoegen";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "De moderator is niet ingesteld.";
 "accessibility.conference.muteAudio" = "Geluid dempen";
 "accessibility.conference.unmuteAudio" = "Niet-gemakkelijk geluid";
-"accessibility.conference.hangup" = "Oproep beëindigen";
+"accessibility.conference.endCall" = "Oproep beëindigen";
 "accessibility.conference.lowerHand" = "Onderaan hand";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

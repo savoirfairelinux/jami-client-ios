@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Улаан чимээгүй микрофон";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Халдааны зогсоол";
-"accessibility.calls.default.hangUpCall" = "Дуудлагыг дуусгах";
+"accessibility.calls.default.endCall" = "Дуудлагыг дуусгах";
 "accessibility.calls.default.addParticipant" = "Үүнд оролцогч нэмнэ";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Сэтгэлтэй камер";
 "accessibility.calls.alter.pauseCall" = "Зураг сурталчилгаа";
-"accessibility.calls.alter.hangUpCall" = "Дуудлагыг дуусгах";
+"accessibility.calls.alter.endCall" = "Дуудлагыг дуусгах";
 "accessibility.calls.alter.addParticipant" = "Үүнд оролцогч нэмнэ";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Улаанбаатар";
 "accessibility.conference.muteAudio" = "Улаан дуу";
 "accessibility.conference.unmuteAudio" = "Утасны үнэгүй";
-"accessibility.conference.hangup" = "Дуудлагыг дуусгах";
+"accessibility.conference.endCall" = "Дуудлагыг дуусгах";
 "accessibility.conference.lowerHand" = "Доод гар";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

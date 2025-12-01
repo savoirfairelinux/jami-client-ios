@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Išjungti mikrofoną";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pristabdyti skambutį";
-"accessibility.calls.default.hangUpCall" = "Baigti skambutį";
+"accessibility.calls.default.endCall" = "Baigti skambutį";
 "accessibility.calls.default.addParticipant" = "Pridėti dalyvį";
 "accessibility.calls.default.switchCamera" = "Perjungti kamerą";
 "accessibility.calls.default.toggleSpeaker" = "Įjungti garsiakalbį";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Stokkamera";
 "accessibility.calls.alter.pauseCall" = "Pratęsti skambutį";
-"accessibility.calls.alter.hangUpCall" = "Baigti skambutį";
+"accessibility.calls.alter.endCall" = "Baigti skambutį";
 "accessibility.calls.alter.addParticipant" = "Pridėti dalyvį";
 "accessibility.calls.alter.switchCamera" = "Perjungti kamerą";
 "accessibility.calls.alter.toggleSpeaker" = "Išjungti garsiakalbį";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Neįjungtas moderatorius";
 "accessibility.conference.muteAudio" = "Nutildyti garsą";
 "accessibility.conference.unmuteAudio" = "Nepaklausytas garso įrašas";
-"accessibility.conference.hangup" = "Baigti skambutį";
+"accessibility.conference.endCall" = "Baigti skambutį";
 "accessibility.conference.lowerHand" = "Nuleisti ranką";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

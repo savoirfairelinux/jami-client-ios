@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "మ్యూట్ మైక్రోఫోన్";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "విరామం కాల్";
-"accessibility.calls.default.hangUpCall" = "కాల్‌ను ముగించు";
+"accessibility.calls.default.endCall" = "కాల్‌ను ముగించు";
 "accessibility.calls.default.addParticipant" = "పాల్గొనేవారిని జోడించండి";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "స్టాప్ కెమెరా";
 "accessibility.calls.alter.pauseCall" = "పునఃప్రారంభం కాల్";
-"accessibility.calls.alter.hangUpCall" = "కాల్‌ను ముగించు";
+"accessibility.calls.alter.endCall" = "కాల్‌ను ముగించు";
 "accessibility.calls.alter.addParticipant" = "పాల్గొనేవారిని జోడించండి";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "సెట్టింగ్ను తొలగించు";
 "accessibility.conference.muteAudio" = "మూత ఆడియో";
 "accessibility.conference.unmuteAudio" = "నిశ్శబ్ద ఆడియో";
-"accessibility.conference.hangup" = "కాల్‌ను ముగించు";
+"accessibility.conference.endCall" = "కాల్‌ను ముగించు";
 "accessibility.conference.lowerHand" = "దిగువ చేతి";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

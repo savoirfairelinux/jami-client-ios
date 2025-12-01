@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Muta mikrofono";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Paŭzo alvoko";
-"accessibility.calls.default.hangUpCall" = "Finigi vokon";
+"accessibility.calls.default.endCall" = "End call";
 "accessibility.calls.default.addParticipant" = "Aldoni partoprenanton";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Haltu la fotilon";
 "accessibility.calls.alter.pauseCall" = "Reviziu la telefonvokon";
-"accessibility.calls.alter.hangUpCall" = "Finigi vokon";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Aldoni partoprenanton";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Malkonstruo moderilo";
 "accessibility.conference.muteAudio" = "Silentigi aŭdion";
 "accessibility.conference.unmuteAudio" = "Neŝaltita aŭdio";
-"accessibility.conference.hangup" = "Finigi vokon";
+"accessibility.conference.endCall" = "End call";
 "accessibility.conference.lowerHand" = "Malsupra mano";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

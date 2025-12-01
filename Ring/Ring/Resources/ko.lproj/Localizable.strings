@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "무음 마이크";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "휴식 통화";
-"accessibility.calls.default.hangUpCall" = "통화 종료";
+"accessibility.calls.default.endCall" = "통화 종료";
 "accessibility.calls.default.addParticipant" = "참가자를 추가";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "카메라를 멈추";
 "accessibility.calls.alter.pauseCall" = "다시 전화";
-"accessibility.calls.alter.hangUpCall" = "통화 종료";
+"accessibility.calls.alter.endCall" = "통화 종료";
 "accessibility.calls.alter.addParticipant" = "참가자를 추가";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "설정하지 않는 모더레이터";
 "accessibility.conference.muteAudio" = "음향이 무성";
 "accessibility.conference.unmuteAudio" = "무음 음향";
-"accessibility.conference.hangup" = "통화 종료";
+"accessibility.conference.endCall" = "통화 종료";
 "accessibility.conference.lowerHand" = "하위 손";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

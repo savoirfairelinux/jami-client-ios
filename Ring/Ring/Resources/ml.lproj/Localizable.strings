@@ -86,7 +86,7 @@
 "swarm.descriptionPlaceholder" = "Enter title";
 "swarm.contactHeader" = "കോണ്ടാക്ട്";
 "swarm.showContactQRCode" = "Show contact QR code";
-"swarm.shareContactInfo" = "Share contact information";
+"swarm.shareContactInfo" = "കോണ്ടാക്റ്റ് ചെയ്യാനുള്ള വിവരങ്ങൾ പങ്കിടുക";
 "swarm.accessibilityContactQRCode" = "Show contact QR code";
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
@@ -129,7 +129,7 @@
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
 "smartlist.accounts" = "അക്കൌണ്ടുകൾ";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "ക്ഷണങ്ങൾ വന്നിരിക്കുന്നു";
 "smartlist.noResults" = "ഫലങ്ങളില്ല";
 "smartlist.noConversation" = "സംഭാഷണം വേണ്ട";
 "smartlist.searchBarPlaceholder" = "Enter name…";
@@ -166,8 +166,8 @@
 "conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "നീ";
 "conversation.edited" = "പരിഷ്ക്കരിക്കുക";
-"conversation.deletedMessage" = "%@ deleted a message";
-"conversation.contactBlocked" = "Contact blocked";
+"conversation.deletedMessage" = "%@ ഒരു സന്ദേശം മായിച്ചു";
+"conversation.contactBlocked" = "കോണ്ടാക്ടിനെ തടഞ്ഞു";
 // An ellipsis is not directly shown in the following typing indicator strings.
 // An ellipsis animation is shown when messages are being typed in the view.
 // An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
@@ -182,7 +182,7 @@
 "invitations.accepted" = "അംഗീകരിച്ചു";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "തടഞ്ഞു";
-"invitations.list" = "Invitations received";
+"invitations.list" = "ക്ഷണങ്ങൾ വന്നിരിക്കുന്നു";
 
 // Walkthrough
 
@@ -386,7 +386,7 @@
 "accountPage.profileHeader" = "പ്രൊഫൈല്";
 "accountPage.profileNameNotSelected" = "Name not selected";
 "accountPage.accountHeader" = "അക്കൌണ്ട്";
-"accountPage.profileName" = "Profile name";
+"accountPage.profileName" = "പ്രൊഫൈൽ പേര്";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "അക്കൌണ്ട് മാനേജുചെയ്യുക";
@@ -467,10 +467,10 @@
 "linkDevice.title" = "പുതിയ ഉപകരണം ലിങ്ക് ചെയ്യുക";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
 "linkDevice.errorWrongPassword" = "ഈ ഡിവൈസുമായി ബന്ധിപ്പിക്കുമ്പോൾ ആധികാരികത സംബന്ധിച്ചുള്ള പ്രശ്നം വന്നിരിക്കുന്നു. ക്രഡെൻഷലുകൾ പരിശോധിച്ച് ദയവായി വീണ്ടും ശ്രമിക്കുക.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorNetwork" = "ഈ അക്കൗണ്ടുമായി ബന്ധിപ്പിക്കുമ്പോൾ നെറ്റ്‍വർക്കിനു പ്രശ്നം വന്നിരിക്കുന്നു. താങ്കളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിച്ച് ദയവായി വീണ്ടും ശ്രമിക്കുക.";
+"linkDevice.errorTimeout" = "ഓപ്പറേഷനുള്ള സമയം കഴിഞ്ഞു. ദയവായി വീണ്ടും ശ്രമിക്കുക.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.errorWrongData" = "അക്കൗണ്ട് എക്സ്പോർട്ടു ചെയ്യുമ്പോൾ ഒരു പ്രശ്നം വന്നിരിക്കുന്നു. ദയവായി വീണ്ടും ശ്രമിക്കുക.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "When ready, scan the QR code.";
@@ -479,7 +479,7 @@
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "New device IP address: %1@";
 "linkDevice.code" = "code";
-"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
+"linkDevice.wrongEntry" = "തിരിച്ചറിയാത്ത പുതിയ ഡിവൈസ് ഐഡന്റിഫയർ. മുകളിൽ കൊടുത്ത നിർദ്ദേശങ്ങൾ പിന്തുടരുക.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
 "linkDevice.completed" = "The account was imported successfully on the new device.";
 
@@ -513,16 +513,16 @@
 // Generated Message
 "generatedMessage.contactAdded" = "ക്ഷണം ലഭിച്ചത്";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ സംഭാഷണത്തിൽ ചേരാനായി ക്ഷണിക്കപ്പെട്ടിട്ടുണ്ട്.";
+"generatedMessage.invitationAccepted" = "%@ സംഭാഷണത്തിൽ ചേർന്നിരിക്കുന്നു.";
 "generatedMessage.youJoined" = "താങ്കൾ സംഭാഷണത്തിൽ ചേർന്നിരിക്കുന്നു.";
-"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ സംഭാഷണത്തിൽ നിന്നും തടയപ്പെട്ടു.";
+"generatedMessage.contactUnblocked" = "%@-ന്/ക്ക് സംഭാഷണത്തിൽ നിന്നുമുള്ള തടസം മാറ്റിയിരിക്കുന്നു.";
 "generatedMessage.outgoingCall" = "പുറപ്പെടുന്ന വിളി";
 "generatedMessage.missedOutgoingCall" = "നഷ്ടപ്പെട്ട വിളി";
 "generatedMessage.missedIncomingCall" = "നഷ്ടപ്പെട്ട കോൾ";
 "generatedMessage.liveLocationSharing" = "ലൈവ് ലൊക്കേഷൻ പങ്കിടൽ";
-"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ സംഭാഷണത്തിൽ നിന്നു പോയിരിക്കുന്നു.";
 "generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
 "generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
@@ -545,7 +545,7 @@
 "logView.startLogging" = "Start logging";
 "logView.stopLogging" = "മരം മുറിക്കുന്നത് നിർത്തുക";
 "logView.saveError" = "An error occurred while saving the file.";
-"logView.shareError" = "An error occurred while sharing the file.";
+"logView.shareError" = "ഫയൽ പങ്കിടുമ്പോൾ ഒരു പ്രശ്നം വന്നിരിക്കുന്നു.";
 
 // Migrate Account
 "migrateAccount.title" = "അക്കൌണ്ട് മൈഗ്രേഷൻ";
@@ -563,12 +563,12 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "സംഭാവന ചെയ്യുക";
 "aboutJami.feedback" = "പ്രതികരണങ്ങൾ";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "ഡവലപ്പർമാർ";
 "aboutJami.media" = "മാധ്യമങ്ങൾ";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
-"aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.communityManagement" = "കമ്മ്യൂണിറ്റി മാനേജ്മെന്റ്";
+"aboutJami.specialThanks" = "പ്രത്യേക നന്ദി";
+"aboutJami.info" = "ജാമിക്കു വേണ്ടി ഒരുപാടു സമയം ചിലവഴിക്കുകയും ഫലപ്രദമായ സംഭാവനകൾ ചെയ്യുകയും ചെയ്ത ആളുകളുടെ പട്ടികയാണിത്. ഈ പട്ടികയിലേക്കു ചേരണമെന്ന് ആഗ്രഹിക്കുന്ന ഇത്തരം കോൺട്രിബ്യൂട്ടർമാർ ഞങ്ങളുമായി ബന്ധപ്പെടേണ്ടതാണ്.";
+"aboutJami.header" = "ഈ സോഫ്റ്റ്‍വെയറിനെ ഇവിടെ വരെ എത്തിച്ച എല്ലാ കോൺട്രിബ്യൂട്ടർമാർക്കും ഞങ്ങളുടെ നന്ദി.";
 
 // Accessibility
 "accessibility.close" = "അടുത്തു";
@@ -615,14 +615,14 @@
 "accessibility.text.sentOn" = "%1@, message sent on %2@";
 "accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.call.lasted" = "%@ നീണ്ടുനിന്നു";
 "accessibility.calls.default.toggleAudio" = "മിണ്ടാത്ത മൈക്രോഫോൺ";
 "accessibility.calls.default.toggleVideo" = "ക്യാമറ തുടങ്ങുക";
 "accessibility.calls.default.pauseCall" = "ഇടവേള വിളി";
-"accessibility.calls.default.hangUpCall" = "കോൾ അവസാനിപ്പിക്കുക";
+"accessibility.calls.default.endCall" = "കോൾ അവസാനിപ്പിക്കുക";
 "accessibility.calls.default.addParticipant" = "പങ്കാളിയെ കൂട്ടിച്ചേർക്കുക";
 "accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.toggleSpeaker" = "സ്പീക്കർ ഓണാക്കുക";
 "accessibility.calls.default.openConversation" = "തുറന്ന സംഭാഷണം";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "കൈ ഉയര് ത്തുക";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "മൈക്ക് അൺമ്യൂട്ട് ചെയ്യുക";
 "accessibility.calls.alter.toggleVideo" = "ക്യാമറ നിർത്തുക";
 "accessibility.calls.alter.pauseCall" = "പുനരാരംഭിക്കുക";
-"accessibility.calls.alter.hangUpCall" = "കോൾ അവസാനിപ്പിക്കുക";
+"accessibility.calls.alter.endCall" = "കോൾ അവസാനിപ്പിക്കുക";
 "accessibility.calls.alter.addParticipant" = "പങ്കാളിയെ കൂട്ടിച്ചേർക്കുക";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "മോഡറേറ്റർ അൺസെറ്റ് ചെയ്യുക";
 "accessibility.conference.muteAudio" = "നിശബ്ദ ശബ്ദം";
 "accessibility.conference.unmuteAudio" = "നിശബ്ദമായ ഓഡിയോ";
-"accessibility.conference.hangup" = "കോൾ അവസാനിപ്പിക്കുക";
+"accessibility.conference.endCall" = "കോൾ അവസാനിപ്പിക്കുക";
 "accessibility.conference.lowerHand" = "താഴത്തെ കൈ";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

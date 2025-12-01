@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "マイクをミュート";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "通話を一時停止";
-"accessibility.calls.default.hangUpCall" = "通話を終了";
+"accessibility.calls.default.endCall" = "通話を終了";
 "accessibility.calls.default.addParticipant" = "参加者を追加";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "カメラを止める";
 "accessibility.calls.alter.pauseCall" = "通話を再開";
-"accessibility.calls.alter.hangUpCall" = "通話を終了";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "参加者を追加";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "調停者を取り消し";
 "accessibility.conference.muteAudio" = "音声を消音する";
 "accessibility.conference.unmuteAudio" = "音声無音";
-"accessibility.conference.hangup" = "通話を終了";
+"accessibility.conference.endCall" = "通話を終了";
 "accessibility.conference.lowerHand" = "手を下げる";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

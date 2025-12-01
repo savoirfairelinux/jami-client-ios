@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Mututu mikrofonoa";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Dei-pausa bat";
-"accessibility.calls.default.hangUpCall" = "Amaitu deia";
+"accessibility.calls.default.endCall" = "End call";
 "accessibility.calls.default.addParticipant" = "Partaide gehitu";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Geldi kamera";
 "accessibility.calls.alter.pauseCall" = "Deialdia berrikusi";
-"accessibility.calls.alter.hangUpCall" = "Amaitu deia";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Partaide gehitu";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Moderatzailea desfinkatu";
 "accessibility.conference.muteAudio" = "Isilarazi bideoa";
 "accessibility.conference.unmuteAudio" = "Audio itzalita";
-"accessibility.conference.hangup" = "Amaitu deia";
+"accessibility.conference.endCall" = "Amaitu deia";
 "accessibility.conference.lowerHand" = "Beheko eskua";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

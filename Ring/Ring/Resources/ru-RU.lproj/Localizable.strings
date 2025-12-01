@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Отключить микрофон";
 "accessibility.calls.default.toggleVideo" = "Включить камеру";
 "accessibility.calls.default.pauseCall" = "Приостановить звонок";
-"accessibility.calls.default.hangUpCall" = "Завершить вызов";
+"accessibility.calls.default.endCall" = "Завершить вызов";
 "accessibility.calls.default.addParticipant" = "Добавить участника";
 "accessibility.calls.default.switchCamera" = "Переключить камеру";
 "accessibility.calls.default.toggleSpeaker" = "Включить динамик";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Включить микрофон";
 "accessibility.calls.alter.toggleVideo" = "Остановить камеру";
 "accessibility.calls.alter.pauseCall" = "Продолжить звонок";
-"accessibility.calls.alter.hangUpCall" = "Завершить вызов";
+"accessibility.calls.alter.endCall" = "Завершить вызов";
 "accessibility.calls.alter.addParticipant" = "Добавить участника";
 "accessibility.calls.alter.switchCamera" = "Переключить камеру";
 "accessibility.calls.alter.toggleSpeaker" = "Выключить динамик";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Отменить установку модератора";
 "accessibility.conference.muteAudio" = "Отключить звук";
 "accessibility.conference.unmuteAudio" = "Включить звук";
-"accessibility.conference.hangup" = "Завершить вызов";
+"accessibility.conference.endCall" = "Завершить вызов";
 "accessibility.conference.lowerHand" = "Опущенная рука";
 "accessibility.account.tokenQRcode" = "QR-код токена";
 

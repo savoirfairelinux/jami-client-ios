@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Kipaza sauti";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Kuomba kwa muda";
-"accessibility.calls.default.hangUpCall" = "Maliza simu hii";
+"accessibility.calls.default.endCall" = "Maliza simu hii";
 "accessibility.calls.default.addParticipant" = "Ongeza mshiriki";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Stop kamera";
 "accessibility.calls.alter.pauseCall" = "Kuendelea wito";
-"accessibility.calls.alter.hangUpCall" = "Maliza simu hii";
+"accessibility.calls.alter.endCall" = "Maliza simu hii";
 "accessibility.calls.alter.addParticipant" = "Ongeza mshiriki";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Moderator kutoweka";
 "accessibility.conference.muteAudio" = "Sauti isiyo na sauti";
 "accessibility.conference.unmuteAudio" = "Sauti isiyo na sauti";
-"accessibility.conference.hangup" = "Maliza simu hii";
+"accessibility.conference.endCall" = "Maliza simu hii";
 "accessibility.conference.lowerHand" = "Mkono wa chini";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

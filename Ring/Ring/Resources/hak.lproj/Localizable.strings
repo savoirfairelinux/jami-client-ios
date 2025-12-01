@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "关闭麦克风";
 "accessibility.calls.default.toggleVideo" = "启动摄像头";
 "accessibility.calls.default.pauseCall" = "暫停通話";
-"accessibility.calls.default.hangUpCall" = "結束電話";
+"accessibility.calls.default.endCall" = "End call";
 "accessibility.calls.default.addParticipant" = "添加参与者";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "打开扬声器";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "麦克风静音";
 "accessibility.calls.alter.toggleVideo" = "关闭摄像头";
 "accessibility.calls.alter.pauseCall" = "恢复通话";
-"accessibility.calls.alter.hangUpCall" = "結束電話";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "添加参与者";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "取消設定主持人";
 "accessibility.conference.muteAudio" = "静音";
 "accessibility.conference.unmuteAudio" = "取消静音";
-"accessibility.conference.hangup" = "結束電話";
+"accessibility.conference.endCall" = "結束電話";
 "accessibility.conference.lowerHand" = "放下手";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

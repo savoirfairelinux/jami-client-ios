@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Senyapkan mikrofon";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Jeda panggilan";
-"accessibility.calls.default.hangUpCall" = "Akhiri panggilan";
+"accessibility.calls.default.endCall" = "Akhiri panggilan";
 "accessibility.calls.default.addParticipant" = "Tambah partisipan";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Hentikan kamera";
 "accessibility.calls.alter.pauseCall" = "Lanjutkan panggilan";
-"accessibility.calls.alter.hangUpCall" = "Akhiri panggilan";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Tambah partisipan";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Batal atur moderator";
 "accessibility.conference.muteAudio" = "Bisukan audio";
 "accessibility.conference.unmuteAudio" = "Bunyikan audio";
-"accessibility.conference.hangup" = "Akhiri panggilan";
+"accessibility.conference.endCall" = "Akhiri panggilan";
 "accessibility.conference.lowerHand" = "Turunkan tangan";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

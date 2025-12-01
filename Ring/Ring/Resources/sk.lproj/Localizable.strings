@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Stlmiť mikrofón";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Závok na pauzu";
-"accessibility.calls.default.hangUpCall" = "Ukončiť hovor";
+"accessibility.calls.default.endCall" = "Ukončiť hovor";
 "accessibility.calls.default.addParticipant" = "Pridať účastníka";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Zastavte kameru";
 "accessibility.calls.alter.pauseCall" = "Prepracovať hovor";
-"accessibility.calls.alter.hangUpCall" = "Ukončiť hovor";
+"accessibility.calls.alter.endCall" = "Ukončiť hovor";
 "accessibility.calls.alter.addParticipant" = "Pridať účastníka";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Odstaviť moderátor";
 "accessibility.conference.muteAudio" = "Stlmiť zvuk";
 "accessibility.conference.unmuteAudio" = "Nevymazaný zvuk";
-"accessibility.conference.hangup" = "Ukončiť hovor";
+"accessibility.conference.endCall" = "Ukončiť hovor";
 "accessibility.conference.lowerHand" = "Dolná ruka";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

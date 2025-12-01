@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Micrófón muinte";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Calla stop";
-"accessibility.calls.default.hangUpCall" = "Críochnaigh an glao";
+"accessibility.calls.default.endCall" = "End call";
 "accessibility.calls.default.addParticipant" = "Cuid a chur le rannpháirtí";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Stop ceamara";
 "accessibility.calls.alter.pauseCall" = "Déan athghníomhú glao";
-"accessibility.calls.alter.hangUpCall" = "Críochnaigh an glao";
+"accessibility.calls.alter.endCall" = "End call";
 "accessibility.calls.alter.addParticipant" = "Cuid a chur le rannpháirtí";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Modhálaí neamhghnách";
 "accessibility.conference.muteAudio" = "Audio Mute";
 "accessibility.conference.unmuteAudio" = "Audio neamhbhuailte";
-"accessibility.conference.hangup" = "Críochnaigh an glao";
+"accessibility.conference.endCall" = "Críochnaigh an glao";
 "accessibility.conference.lowerHand" = "lámh íochtarach";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

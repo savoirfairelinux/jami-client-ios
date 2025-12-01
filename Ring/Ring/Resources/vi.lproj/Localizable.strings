@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Tắt tiếng micrô";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Tiếng gọi tạm dừng";
-"accessibility.calls.default.hangUpCall" = "Kết thúc cuộc gọi";
+"accessibility.calls.default.endCall" = "Kết thúc cuộc gọi";
 "accessibility.calls.default.addParticipant" = "Thêm người tham gia";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Hình ảnh dừng";
 "accessibility.calls.alter.pauseCall" = "Đặt lại cuộc gọi";
-"accessibility.calls.alter.hangUpCall" = "Kết thúc cuộc gọi";
+"accessibility.calls.alter.endCall" = "Kết thúc cuộc gọi";
 "accessibility.calls.alter.addParticipant" = "Thêm người tham gia";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Moderator không cài đặt";
 "accessibility.conference.muteAudio" = "Âm thanh câm";
 "accessibility.conference.unmuteAudio" = "Đáp âm thanh không động";
-"accessibility.conference.hangup" = "Kết thúc cuộc gọi";
+"accessibility.conference.endCall" = "Kết thúc cuộc gọi";
 "accessibility.conference.lowerHand" = "Tay dưới";
 "accessibility.account.tokenQRcode" = "Token QR code";
 
