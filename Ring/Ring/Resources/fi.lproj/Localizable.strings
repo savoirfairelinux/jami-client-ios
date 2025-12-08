@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Mykistä mikrofoni";
 "accessibility.calls.default.toggleVideo" = "Avaa kamera";
 "accessibility.calls.default.pauseCall" = "Puhelu pitoon";
-"accessibility.calls.default.endCall" = "End call";
+"accessibility.calls.default.endCall" = "Lopeta puhelu";
 "accessibility.calls.default.addParticipant" = "Lisää osannottaja";
 "accessibility.calls.default.switchCamera" = "Vaihda kamera";
 "accessibility.calls.default.toggleSpeaker" = "Kytke kaiutin";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Poista mikrofonin mykistys";
 "accessibility.calls.alter.toggleVideo" = "Sulje kamera";
 "accessibility.calls.alter.pauseCall" = "Jatka puhelua";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "Lopeta puhelu";
 "accessibility.calls.alter.addParticipant" = "Lisää osannottaja";
 "accessibility.calls.alter.switchCamera" = "Vaihda kamera";
 "accessibility.calls.alter.toggleSpeaker" = "Mykistä kaiutin";

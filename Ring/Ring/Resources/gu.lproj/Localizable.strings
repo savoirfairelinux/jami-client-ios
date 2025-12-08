@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "મ્યૂટ માઇક્રોફોન";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "વિરામ કૉલ";
-"accessibility.calls.default.endCall" = "End call";
+"accessibility.calls.default.endCall" = "કૉલ સમાપ્ત કરો";
 "accessibility.calls.default.addParticipant" = "ઉમેરો સહભાગી";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "સ્ટોપ કેમેરા";
 "accessibility.calls.alter.pauseCall" = "કૉલ પુનઃ શરૂ કરો";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "કૉલ સમાપ્ત કરો";
 "accessibility.calls.alter.addParticipant" = "ઉમેરો સહભાગી";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";

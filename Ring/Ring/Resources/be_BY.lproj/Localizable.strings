@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Непаўны мікрафон";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Паза званок";
-"accessibility.calls.default.endCall" = "End call";
+"accessibility.calls.default.endCall" = "Скончыць выклік";
 "accessibility.calls.default.addParticipant" = "Дадаць удзельніка";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Спыніць камеру";
 "accessibility.calls.alter.pauseCall" = "Падключыць званок";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "Скончыць выклік";
 "accessibility.calls.alter.addParticipant" = "Дадаць удзельніка";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Адключыць модулятар";
 "accessibility.conference.muteAudio" = "Непаслухмяны аўдыё";
 "accessibility.conference.unmuteAudio" = "Неўключаны аўдыё";
-"accessibility.conference.endCall" = "End call";
+"accessibility.conference.endCall" = "Скончыць выклік";
 "accessibility.conference.lowerHand" = "Ніжняя рука";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

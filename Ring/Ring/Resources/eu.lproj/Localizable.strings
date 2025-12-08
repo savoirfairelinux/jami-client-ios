@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Mututu mikrofonoa";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Dei-pausa bat";
-"accessibility.calls.default.endCall" = "End call";
+"accessibility.calls.default.endCall" = "Amaitu deia";
 "accessibility.calls.default.addParticipant" = "Partaide gehitu";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Geldi kamera";
 "accessibility.calls.alter.pauseCall" = "Deialdia berrikusi";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "Amaitu deia";
 "accessibility.calls.alter.addParticipant" = "Partaide gehitu";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";

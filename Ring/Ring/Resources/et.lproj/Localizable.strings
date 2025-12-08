@@ -91,7 +91,7 @@
 "swarm.accessibilityContactQRCodeHint" = "Avab ekraanivaate kontakti QR-koodiga";
 "swarm.accessibilityContactShareHint" = "Avab kontaktandmete jagamise valikud";
 "swarm.accessibilityColorPicker" = "Vestluse värvivalija";
-"swarm.editTextHint" = "Muutmiseks topeltklõpsi";
+"swarm.editTextHint" = "Muutmiseks topeltklõpsa";
 "swarm.conversationHeader" = "Vestlus";
 "swarm.shareContactMessage" = "Sa võid selle „%1@“ kontakti lisada hajutatud suhtlusvõrgus Jami: https://jami.net";
 "swarm.oneToOne" = "Privaatne";
@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Summuta mikrofon";
 "accessibility.calls.default.toggleVideo" = "Käivita kaamera";
 "accessibility.calls.default.pauseCall" = "Peata kõne";
-"accessibility.calls.default.endCall" = "End call";
+"accessibility.calls.default.endCall" = "Lõpeta kõne";
 "accessibility.calls.default.addParticipant" = "Lisa osaleja";
 "accessibility.calls.default.switchCamera" = "Vaheta kaamerat";
 "accessibility.calls.default.toggleSpeaker" = "Lülita valjuhääldi sisse";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Lõpeta mikrofoni summutamine";
 "accessibility.calls.alter.toggleVideo" = "Peata kaamera";
 "accessibility.calls.alter.pauseCall" = "Jätka kõnet";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "Lõpeta kõne";
 "accessibility.calls.alter.addParticipant" = "Lisa osaleja";
 "accessibility.calls.alter.switchCamera" = "Vaheta kaamerat";
 "accessibility.calls.alter.toggleSpeaker" = "Lülita valjuhääldi välja";

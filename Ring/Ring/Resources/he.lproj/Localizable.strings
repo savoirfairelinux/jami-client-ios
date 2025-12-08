@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "מיקרופון שקט";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "הפסקת שיחת";
-"accessibility.calls.default.endCall" = "End call";
+"accessibility.calls.default.endCall" = "סיום השיחה";
 "accessibility.calls.default.addParticipant" = "הוסף משתתף";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "מצלמה עצירה";
 "accessibility.calls.alter.pauseCall" = "קם שוב";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "סיום השיחה";
 "accessibility.calls.alter.addParticipant" = "הוסף משתתף";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";

@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Apagar micrófono";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pausa chamada";
-"accessibility.calls.default.endCall" = "End call";
+"accessibility.calls.default.endCall" = "Finalizar chamada";
 "accessibility.calls.default.addParticipant" = "Engadir participante";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Parar cámara";
 "accessibility.calls.alter.pauseCall" = "Reanudar a chamada";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "Finalizar chamada";
 "accessibility.calls.alter.addParticipant" = "Engadir participante";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";

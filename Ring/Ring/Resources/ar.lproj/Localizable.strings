@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "كتم ميكروفون";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "وقفة المكالمة";
-"accessibility.calls.default.endCall" = "End call";
+"accessibility.calls.default.endCall" = "إنهاء المكالمة";
 "accessibility.calls.default.addParticipant" = "أضف مشارك";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "أوقف الكاميرا";
 "accessibility.calls.alter.pauseCall" = "استئناف المكالمة";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "إنهاء المكالمة";
 "accessibility.calls.alter.addParticipant" = "أضف مشارك";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "إزالة المدير";
 "accessibility.conference.muteAudio" = "كتم الصوت";
 "accessibility.conference.unmuteAudio" = "صوت غير محكم";
-"accessibility.conference.endCall" = "End call";
+"accessibility.conference.endCall" = "إنهاء المكالمة";
 "accessibility.conference.lowerHand" = "اليد السفلى";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

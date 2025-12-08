@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "নিঃশব্দ মাইক্রোফোন";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "বিরতি কল";
-"accessibility.calls.default.endCall" = "End call";
+"accessibility.calls.default.endCall" = "কল শেষ";
 "accessibility.calls.default.addParticipant" = "অংশগ্রহণকারী যোগ করুন";
 "accessibility.calls.default.switchCamera" = "Switch camera";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "স্টপ ক্যামেরা";
 "accessibility.calls.alter.pauseCall" = "পুনরায় কল";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "কল শেষ";
 "accessibility.calls.alter.addParticipant" = "অংশগ্রহণকারী যোগ করুন";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "অপসারণকারী";
 "accessibility.conference.muteAudio" = "নিঃশব্দ অডিও";
 "accessibility.conference.unmuteAudio" = "অডিও মুছে ফেলা";
-"accessibility.conference.endCall" = "End call";
+"accessibility.conference.endCall" = "কল শেষ";
 "accessibility.conference.lowerHand" = "নীচের হাত";
 "accessibility.account.tokenQRcode" = "Token QR code";
 

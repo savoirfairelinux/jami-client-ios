@@ -619,7 +619,7 @@
 "accessibility.calls.default.toggleAudio" = "Mikrofon stummschalten";
 "accessibility.calls.default.toggleVideo" = "Kamera starten";
 "accessibility.calls.default.pauseCall" = "Gespräch Halten";
-"accessibility.calls.default.endCall" = "End call";
+"accessibility.calls.default.endCall" = "Anruf beenden";
 "accessibility.calls.default.addParticipant" = "Teilnehmer hinzufügen";
 "accessibility.calls.default.switchCamera" = "Kamera wechseln";
 "accessibility.calls.default.toggleSpeaker" = "Lautsprecher einschalten";
@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Mikrofon-Stummschaltung aufheben";
 "accessibility.calls.alter.toggleVideo" = "Kamera stoppen";
 "accessibility.calls.alter.pauseCall" = "Gespräch wieder aufnehmen";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "Anruf beenden";
 "accessibility.calls.alter.addParticipant" = "Teilnehmer hinzufügen";
 "accessibility.calls.alter.switchCamera" = "Kamera wechseln";
 "accessibility.calls.alter.toggleSpeaker" = "Lautsprecher ausschalten";
@@ -643,7 +643,7 @@
 "accessibility.conference.unsetModerator" = "Moderator freistellen";
 "accessibility.conference.muteAudio" = "Stummschalten";
 "accessibility.conference.unmuteAudio" = "Stummschaltung aufheben";
-"accessibility.conference.endCall" = "End call";
+"accessibility.conference.endCall" = "Anruf beenden";
 "accessibility.conference.lowerHand" = "Hand senken";
 "accessibility.account.tokenQRcode" = "Token-QR-Code";
 
