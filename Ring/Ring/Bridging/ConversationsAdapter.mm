@@ -143,15 +143,6 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
                 }
     }));
 
-    confHandlers.insert(exportable_callback<ConversationSignal::ConversationLoaded>([&](uint32_t id, const std::string& accountId, const std::string& conversationId, std::vector<std::map<std::string, std::string>> messages) {
-            if (ConversationsAdapter.messagesDelegate) {
-                    NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
-                    NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
-                    NSArray* interactions = [Utils vectorOfMapsToArray: messages];
-                [ConversationsAdapter.messagesDelegate messageLoadedWithConversationId:convId accountId: account messages:interactions];
-            }
-        }));
-
     confHandlers.insert(exportable_callback<ConversationSignal::SwarmMessageReceived>([&](const std::string& accountId, const std::string& conversationId, libjami::SwarmMessage message) {
         if (ConversationsAdapter.messagesDelegate) {
             NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];

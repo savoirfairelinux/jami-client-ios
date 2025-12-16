@@ -77,7 +77,7 @@ static id <CallsAdapterDelegate> _delegate;
         }
     }));
 
-    callHandlers.insert(exportable_callback<CallSignal::IncomingCallWithMedia>([&](const std::string& accountId,
+    callHandlers.insert(exportable_callback<CallSignal::IncomingCall>([&](const std::string& accountId,
                                                                                    const std::string& callId,
                                                                                    const std::string& fromURI,
                                                                                    const std::vector<std::map<std::string, std::string>>& media) {

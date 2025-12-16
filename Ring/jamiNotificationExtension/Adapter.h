@@ -19,6 +19,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "ObjcTypes.h"
 
 @protocol AdapterDelegate;
 

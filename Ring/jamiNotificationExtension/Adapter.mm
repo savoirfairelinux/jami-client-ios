@@ -35,6 +35,24 @@
 #import "fstream"
 #import "charconv"
 
+@implementation SwarmMessageWrap
+
+- (instancetype)initWithSwarmMessage:(const libjami::SwarmMessage &)message {
+    self = [super init];
+    if (self) {
+        self.id = @(message.id.c_str());
+        self.type = @(message.type.c_str());
+        self.linearizedParent = @(message.linearizedParent.c_str());
+        self.body = [Utils mapToDictionary: message.body];
+        self.reactions = [Utils vectorOfMapsToArray: message.reactions];
+        self.editions = [Utils vectorOfMapsToArray: message.editions];
+        self.status = [Utils mapToDictionaryWithInt: message.status];
+    }
+    return self;
+}
+
+@end
+
 @implementation Adapter
 
 static id<AdapterDelegate> _delegate;
@@ -81,20 +99,18 @@ std::map<std::string, std::string> nameServers;
                                                                                      }
                                                                                  }));
 
-    confHandlers.insert(exportable_callback<ConversationSignal::MessageReceived>(
-                                                                                 [weakDelegate = Adapter.delegate](const std::string& accountId,
-                                                                                                                   const std::string& conversationId,
-                                                                                                                   std::map<std::string, std::string> message) {
-                                                                                                                       id<AdapterDelegate> delegate = weakDelegate;
-                                                                                                                       if (delegate) {
-                                                                                                                           NSString* convId = [NSString stringWithUTF8String:conversationId.c_str()];
-                                                                                                                           NSString* account = [NSString stringWithUTF8String:accountId.c_str()];
-                                                                                                                           NSMutableDictionary* interaction = [Utils mapToDictionary:message];
-                                                                                                                           [delegate newInteractionWithConversationId:convId
-                                                                                                                                                            accountId:account
-                                                                                                                                                              message:interaction];
-                                                                                                                       }
-                                                                                                                   }));
+    confHandlers.insert(exportable_callback<ConversationSignal::SwarmMessageReceived>([weakDelegate = Adapter.delegate](const std::string& accountId, const std::string& conversationId, libjami::SwarmMessage message) {
+        id<AdapterDelegate> delegate = weakDelegate;
+        if (delegate) {
+            NSString* convId = [NSString stringWithUTF8String:conversationId.c_str()];
+            NSString* account = [NSString stringWithUTF8String:accountId.c_str()];
+            SwarmMessageWrap *swarmMessage = [[SwarmMessageWrap alloc] initWithSwarmMessage: message];
+            [delegate newInteractionWithConversationId:convId
+                                             accountId:account
+                                               message:swarmMessage.body];
+        }
+    }));
+
 
     confHandlers.insert(exportable_callback<DataTransferSignal::DataTransferEvent>(
                                                                                    [weakDelegate = Adapter.delegate](const std::string& account_id,

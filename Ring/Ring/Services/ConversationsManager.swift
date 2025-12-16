@@ -592,18 +592,6 @@ extension  ConversationsManager: MessagesAdapterDelegate {
 
     }
 
-    func messageLoaded(conversationId: String, accountId: String, messages: [[String: String]]) {
-        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        // Convert array of dictionaries to messages.
-        let messagesModels = messages.map { dictionary -> MessageModel in
-            let newMessage = MessageModel(withInfo: dictionary, localJamiId: account.jamiId)
-            updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
-            return newMessage
-        }
-        _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: true)
-
-    }
-
     func conversationLoaded(conversationId: String, accountId: String, messages: [SwarmMessageWrap], requestId: Int) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         // Convert array of dictionaries to messages.
