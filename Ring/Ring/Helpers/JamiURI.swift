@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2019 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2019 - 2025 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,126 +16,156 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import Foundation
+
 enum URIType {
+    case jami
     case ring
     case sip
+    case unrecognized
 
     func getString() -> String {
         switch self {
+        case .jami:
+            return "jami"
         case .ring:
             return "ring"
         case .sip:
             return "sip"
+        case .unrecognized:
+            return ""
+        }
+    }
+
+    var isJamiType: Bool {
+        return self == .jami || self == .ring
+    }
+
+    init(from scheme: String?) {
+        guard let scheme = scheme?.lowercased().replacingOccurrences(of: ":", with: "") else {
+            self = .unrecognized
+            return
+        }
+        switch scheme {
+        case "jami": self = .jami
+        case "ring": self = .ring
+        case "sip": self = .sip
+        default: self = .unrecognized
         }
     }
 }
 
 class JamiURI {
+    private static let uriPattern = try? NSRegularExpression(
+        pattern: "^\\s*(\\w+:)?(?:([\\w.]+)@)?([\\d\\w.\\-]+)?(?::(\\d+))?\\s*$",
+        options: .caseInsensitive
+    )
+    private static let hexIdPattern = try? NSRegularExpression(
+        pattern: "^[0-9a-fA-F]{40}$",
+        options: .caseInsensitive
+    )
+
     var schema: URIType
     var userInfo: String = ""
     var hostname: String = ""
     var port: String = ""
+
+    // MARK: - Initializers
 
     init(schema: URIType) {
         self.schema = schema
     }
 
     init(schema: URIType, infoHash: String, account: AccountModel) {
+        let parsed = JamiURI(from: infoHash)
         self.schema = schema
-        self.parce(infoHash: infoHash, account: account)
+        self.userInfo = parsed.userInfo
+        self.hostname = parsed.hostname
+        self.port = parsed.port
+        if schema == .sip {
+            if self.hostname.isEmpty {
+                self.hostname = account.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountHostname)) ?? ""
+            }
+            if self.port.isEmpty {
+                self.port = account.details?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.localPort)) ?? ""
+            }
+        }
     }
 
     init(schema: URIType, infoHash: String) {
+        let parsed = JamiURI(from: infoHash)
         self.schema = schema
-        self.parce(infoHash: infoHash)
+        self.userInfo = parsed.userInfo
+        self.hostname = parsed.hostname
+        self.port = parsed.port
     }
 
     init(from uriString: String) {
-        let prefix = uriString
+        let normalizedUri = uriString
             .replacingOccurrences(of: "<", with: "")
             .replacingOccurrences(of: ">", with: "")
-            .prefix(3)
-        if prefix == URIType.sip.getString() {
-            self.schema = .sip
-        } else {
-            self.schema = .ring
-        }
-        self.parce(infoHash: uriString)
-    }
-
-    private func parce(infoHash: String, account: AccountModel) {
-        self.parce(infoHash: infoHash)
-        if self.schema == .ring || self.userInfo.isEmpty {
-            return
-        }
-        if self.hostname.isEmpty {
-            self.hostname = account.details?
-                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountHostname)) ?? ""
-        }
-        if self.port.isEmpty {
-            self.port = account.details?
-                .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.localPort)) ?? ""
-        }
-    }
-
-    private func parce(infoHash: String) {
-        var info = infoHash.replacingOccurrences(of: "ring:", with: "")
-            .replacingOccurrences(of: "sip:", with: "")
             .replacingOccurrences(of: "@ring.dht", with: "")
-            .replacingOccurrences(of: "<", with: "")
-            .replacingOccurrences(of: ">", with: "")
-        if self.schema == .ring {
-            userInfo = info
-            return
-        }
-        if info.isEmpty { return }
-        if info.firstIndex(of: "@") != nil {
-            userInfo = String(info.split(separator: "@").first!)
-            info = info.replacingOccurrences(of: userInfo + "@", with: "")
-        } else {
-            userInfo = info
-            return
-        }
-        if info.firstIndex(of: ":") != nil {
-            let parts = info.split(separator: ":")
-            hostname = String(parts.first!)
-            if parts.count == 2 {
-                port = String(info.split(separator: ":")[1])
+            .trimmingCharacters(in: .whitespaces)
+
+        let range = NSRange(location: 0, length: normalizedUri.utf16.count)
+
+        if let match = JamiURI.uriPattern?.firstMatch(in: normalizedUri, options: [], range: range) {
+            let scheme = JamiURI.group(match, 1, in: normalizedUri)
+            let user = JamiURI.group(match, 2, in: normalizedUri)
+            let host = JamiURI.group(match, 3, in: normalizedUri)
+            let port = JamiURI.group(match, 4, in: normalizedUri)
+
+            self.schema = URIType(from: scheme)
+            self.userInfo = user ?? ""
+            self.hostname = host ?? ""
+            self.port = port ?? ""
+
+            if self.schema.isJamiType && self.userInfo.isEmpty && !self.hostname.isEmpty {
+                self.userInfo = self.hostname
+                self.hostname = ""
+            }
+            if self.schema == .unrecognized && self.userInfo.isEmpty && !self.hostname.isEmpty {
+                self.userInfo = self.hostname
+                self.hostname = ""
             }
         } else {
-            hostname = info
+            self.schema = .unrecognized
+            self.userInfo = normalizedUri
         }
     }
 
-    lazy var uriString: String? = {
-        var infoString = self.schema.getString() + ":"
-        if self.userInfo.isEmpty {
-            return nil
-        }
-        if self.schema == .ring {
-            infoString += self.userInfo
-            return infoString
-        }
-        if self.hostname.isEmpty || self.port.isEmpty {
-            return nil
-        }
-        infoString += self.userInfo + "@" + self.hostname + ":" + self.port
-        return infoString
-    }()
+    private static func group(_ match: NSTextCheckingResult, _ index: Int, in string: String) -> String? {
+        guard match.range(at: index).location != NSNotFound,
+              let range = Range(match.range(at: index), in: string) else { return nil }
+        return String(string[range])
+    }
 
-    lazy var hash: String? = {
-        if self.userInfo.isEmpty {
-            return nil
-        }
-        return self.userInfo
-    }()
+    var isHexId: Bool {
+        let range = NSRange(location: 0, length: userInfo.utf16.count)
+        return JamiURI.hexIdPattern?.firstMatch(in: userInfo, options: [], range: range) != nil
+    }
 
-    lazy var isValid: Bool = {
-        if self.schema == .ring {
-            return !self.userInfo.isEmpty
+    var isJami: Bool {
+        return schema.isJamiType || (schema == .unrecognized && isHexId)
+    }
+
+    var hash: String? {
+        return userInfo.isEmpty ? nil : userInfo
+    }
+
+    var uriString: String? {
+        if userInfo.isEmpty { return nil }
+        if schema.isJamiType || (schema == .unrecognized && isHexId) {
+            return "jami:" + userInfo
         }
-        return !self.userInfo.isEmpty &&
-            !self.hostname.isEmpty &&
-            !self.port.isEmpty
-    }()
+        if schema == .sip {
+            var result = "sip:" + userInfo
+            if !hostname.isEmpty {
+                result += "@" + hostname
+                if !port.isEmpty { result += ":" + port }
+            }
+            return result
+        }
+        return nil
+    }
 }

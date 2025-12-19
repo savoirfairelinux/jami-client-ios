@@ -35,11 +35,13 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
     var onCodeScanned: ((String) -> Void)?
 
     // MARK: variables
+    private static let invalidScanMinTime: TimeInterval = 5
     let systemSoundId: SystemSoundID = 1016
 
     typealias VMType = ScanViewModel
 
     var scannedQrCode: Bool = false
+    var lastInvalidScanTime: Date?
     // captureSession manages capture activity and coordinates between input device and captures outputs
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
@@ -159,19 +161,19 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             // Those coordinates are assigned to our codeFrame
             codeFrame.frame = metaDataCoordinates.bounds
 
-            guard let jamiId = stringCodeValue.components(separatedBy: "http://").last else {
-                let alert = UIAlertController(title: L10n.Scan.badQrCode, message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
+            let jamiUri = JamiURI(from: stringCodeValue)
 
-            if jamiId.isSHA1() {
+            if jamiUri.isJami, let jamiId = jamiUri.hash {
                 AudioServicesPlayAlertSound(systemSoundId)
                 print("jamiId : " + jamiId)
                 onCodeScanned?(jamiId)
                 self.scannedQrCode = true
             } else {
+                if let lastTime = lastInvalidScanTime,
+                   Date().timeIntervalSince(lastTime) < Self.invalidScanMinTime {
+                    return
+                }
+                lastInvalidScanTime = Date()
                 let alert = UIAlertController(title: L10n.Scan.badQrCode, message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
