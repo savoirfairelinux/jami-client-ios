@@ -353,7 +353,7 @@ struct CurrentAccountButton: View {
     @ObservedObject var model: AccountsViewModel
     var body: some View {
         HStack(spacing: 0) {
-            AvatarSwiftUIView(source: model)
+            avatarWithStatus
                 .accessibilityHidden(true) // Prevents duplicate announcements
 
             Spacer().frame(width: model.dimensions.spacing)
@@ -374,6 +374,14 @@ struct CurrentAccountButton: View {
         .accessibilityHint(L10n.Accessibility.smartListConnectedAs(model.bestName))
         .transaction { transaction in
             transaction.animation = nil
+        }
+    }
+
+    private var avatarWithStatus: some View {
+        ZStack(alignment: .bottomTrailing) {
+            AvatarSwiftUIView(source: model)
+            AccountStatusIndicator(status: model.accountStatus, size: 8, borderWidth: 1, blurStyle: .systemChromeMaterial)
+                .offset(x: 1, y: 2)
         }
     }
 }

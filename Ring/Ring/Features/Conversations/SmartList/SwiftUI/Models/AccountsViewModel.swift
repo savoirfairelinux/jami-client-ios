@@ -82,6 +82,7 @@ class AccountRow: AvatarProvider, Hashable, Identifiable, AccountProfileObserver
 
     @Published var bestName: String = ""
     @Published var needMigrate: String?
+    @Published var accountStatus: AccountState
     var selectedAccount: String? // Not used. Added to conform to the AccountProfileObserver protocol.
 
     var dimensions = AccountRowSizes()
@@ -90,12 +91,15 @@ class AccountRow: AvatarProvider, Hashable, Identifiable, AccountProfileObserver
     var profileDisposeBag = DisposeBag()
     var profileService: ProfilesService
     var account: AccountModel
+    private let accountService: AccountsService
 
-    init(account: AccountModel, profileService: ProfilesService) {
+    init(account: AccountModel, profileService: ProfilesService, accountService: AccountsService) {
         self.id = account.id
         self.selectedAccount = account.id
         self.profileService = profileService
         self.account = account
+        self.accountService = accountService
+        self.accountStatus = account.status
         if account.status == .errorNeedMigration {
             needMigrate = L10n.Account.needMigration
         }
@@ -104,6 +108,24 @@ class AccountRow: AvatarProvider, Hashable, Identifiable, AccountProfileObserver
 
         self.registeredName = resolveAccountName(from: account)
         updateProfileDetails(account: account)
+        subscribeToStatusChanges()
+    }
+
+    private func subscribeToStatusChanges() {
+        accountService.sharedResponseStream
+            .filter { [weak self] event in
+                guard let self = self else { return false }
+                return event.eventType == .registrationStateChanged &&
+                    event.getEventInput(ServiceEventInput.accountId) == self.id
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let stateString: String = event.getEventInput(ServiceEventInput.registrationState),
+                      let newState = AccountState(rawValue: stateString) else { return }
+                self.accountStatus = newState
+            })
+            .disposed(by: disposeBag)
     }
 
     func hash(into hasher: inout Hasher) {
@@ -119,6 +141,7 @@ class AccountsViewModel: AvatarProvider, AccountProfileObserver {
     @Published var bestName: String = ""
     @Published var selectedAccount: String?
     @Published var accountsRows: [AccountRow] = []
+    @Published var accountStatus: AccountState = .unregistered
 
     @Published var migrationHandledWithSuccess: Bool?
 
@@ -140,8 +163,29 @@ class AccountsViewModel: AvatarProvider, AccountProfileObserver {
         self.nameService = nameService
         self.stateEmitter = stateEmitter
         super.init(profileService: profileService, size: Constants.AvatarSize.account28)
+        if let currentAccount = accountService.currentAccount {
+            self.accountStatus = currentAccount.status
+        }
         self.subscribeToCurrentAccountUpdates()
         self.subscribeToRegisteredName()
+        self.subscribeToStatusChanges()
+    }
+
+    private func subscribeToStatusChanges() {
+        accountService.sharedResponseStream
+            .filter { [weak self] event in
+                guard let self = self else { return false }
+                return event.eventType == .registrationStateChanged &&
+                    event.getEventInput(ServiceEventInput.accountId) == self.selectedAccount
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let stateString: String = event.getEventInput(ServiceEventInput.registrationState),
+                      let newState = AccountState(rawValue: stateString) else { return }
+                self.accountStatus = newState
+            })
+            .disposed(by: disposeBag)
     }
 
     func subscribeToCurrentAccountUpdates() {
@@ -153,6 +197,7 @@ class AccountsViewModel: AvatarProvider, AccountProfileObserver {
                     guard let self = self else { return }
                     self.selectedAccount = account.id
                     self.jamiId = account.jamiId
+                    self.accountStatus = account.status
                     self.registeredName = self.resolveAccountName(from: account)
                     DispatchQueue.global(qos: .background).async { [weak self] in
                         guard let self = self else { return }
@@ -187,7 +232,7 @@ class AccountsViewModel: AvatarProvider, AccountProfileObserver {
 
     func getAccountsRows() {
         accountsRows = self.accountService.accounts.map { accountModel in
-            return AccountRow(account: accountModel, profileService: self.profileService)
+            return AccountRow(account: accountModel, profileService: self.profileService, accountService: self.accountService)
         }
     }
 

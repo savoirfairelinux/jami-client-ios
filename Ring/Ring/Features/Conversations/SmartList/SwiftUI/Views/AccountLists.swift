@@ -20,6 +20,53 @@
 
 import SwiftUI
 
+struct AccountStatusIndicator: View {
+    let status: AccountState
+    let size: CGFloat
+    let borderWidth: CGFloat
+    let blurStyle: UIBlurEffect.Style
+
+    init(status: AccountState, size: CGFloat = 10, borderWidth: CGFloat = 1.2, blurStyle: UIBlurEffect.Style = .systemMaterial) {
+        self.status = status
+        self.size = size
+        self.borderWidth = borderWidth
+        self.blurStyle = blurStyle
+    }
+
+    var body: some View {
+        Circle()
+            .fill(statusColor)
+            .frame(width: size, height: size)
+            .padding(borderWidth)
+            .background(
+                VisualEffect(style: blurStyle, withVibrancy: false)
+                    .clipShape(Circle())
+            )
+    }
+
+    private var statusColor: Color {
+        switch status {
+        case .registered, .ready:
+            return Color.onlinePresenceColor
+        case .trying, .initializing:
+            return Color.availablePresenceColor
+        case .unregistered,
+             .error,
+             .errorGeneric,
+             .errorAuth,
+             .errorNetwork,
+             .errorHost,
+             .errorConfStun,
+             .errorExistStun,
+             .errorServiceUnavailable,
+             .errorNotAcceptable,
+             .errorRequestTimeout,
+             .errorNeedMigration:
+            return Color(UIColor.jamiFailure)
+        }
+    }
+}
+
 struct AccountLists: View {
     @ObservedObject var model: AccountsViewModel
     var createAccountCallback: (() -> Void)
@@ -127,7 +174,7 @@ struct AccountRowView: View {
     let cornerRadius: CGFloat = 8
     var body: some View {
         HStack(spacing: 0) {
-            AvatarSwiftUIView(source: accountRow)
+            avatarWithStatus
             Spacer().frame(width: accountRow.dimensions.spacing)
             VStack(alignment: .leading) {
                 Text(accountRow.bestName)
@@ -155,6 +202,14 @@ struct AccountRowView: View {
         }
         .accessibilityElement()
         .accessibilityLabel(accountRow.bestName)
+    }
+
+    private var avatarWithStatus: some View {
+        ZStack(alignment: .bottomTrailing) {
+            AvatarSwiftUIView(source: accountRow)
+            AccountStatusIndicator(status: accountRow.accountStatus, blurStyle: .systemMaterial)
+                .offset(x: -1, y: 2)
+        }
     }
 
     private var isSelectedAccount: Bool {
