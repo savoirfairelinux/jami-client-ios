@@ -424,7 +424,7 @@
 "accountPage.nameServer" = "Server de nume";
 "accountPage.chats" = "Discuții";
 "accountPage.typingIndicator" = "Indicator de scriere";
-"accountPage.typingIndicatorExplanation" = "Indică cînd se scrie un mesaj.";
+"accountPage.typingIndicatorExplanation" = "Arată că se scrie un mesaj.";
 
 // Backup Account
 "backupAccount.explanation" = "Acest cont Jami există doar în acest aparat. Contul va fi pierdut dacă acest aparat este pierdut sau dacă aplicația este dezinstalată. Se recomandă efectuarea unei copii de rezervă a contului.";
@@ -568,7 +568,7 @@
 "aboutJami.communityManagement" = "Gestionarea comunității";
 "aboutJami.specialThanks" = "Mulțumiri speciale";
 "aboutJami.info" = "Aceasta este o listă de oameni care au făcut o investiție semnificativă de timp, cu rezultate utile, în Jami. Orice astfel de colaboratori care doresc să fie adăugați pe listă trebuie să ne contacteze.";
-"aboutJami.header" = "Mulțumim colaboratorilor noștri, ale căror eforturi de-a lungul multor ani au făcut din acest software ceea ce este.";
+"aboutJami.header" = "Mulțumim colaboratorilor noștri, ale căror eforturi de-a lungul multor ani au făcut din acest program ceea ce este acum.";
 
 // Accessibility
 "accessibility.close" = "Închide";
@@ -576,9 +576,9 @@
 "accessibility.smartListConnectedAs" = "Contul actual este %@";
 "accessibility.smartListAddAccount" = "Adaugă un cont";
 "accessibility.aboutJamiTitle" = "Despre Jami";
-"accessibility.welcomeToJamiTitle" = "Bine ai venit pe Jami";
+"accessibility.welcomeToJamiTitle" = "Bun venit în Jami";
 "accessibility.createAccountVerifyUsernamePrompt" = "Introdu un nume de utilizator pentru a verifica dacă este disponibil.";
-"accessibility.profilePicturePicker" = "Poză de profil";
+"accessibility.profilePicturePicker" = "Poza de profil";
 "accessibility.profilePicturePickerHint" = "Atinge de două ori pentru a face o poză sau ca să alegi una din galerie";
 "accessibility.swarmPicturePicker" = "Poza grupului";
 "accessibility.accountSummaryQrCode" = "Cod QR";

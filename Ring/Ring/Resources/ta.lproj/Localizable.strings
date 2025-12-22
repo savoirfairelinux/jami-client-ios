@@ -111,7 +111,7 @@
 "swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "வெளியேறு";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "ஒரு புதிய குழுவை உருவாக்கவும்";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -129,7 +129,7 @@
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
 "smartlist.accounts" = "கணக்குகள்";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "அழைப்புகள் பெறப்பட்டன";
 "smartlist.noResults" = "முடிவுகள் இல்லை";
 "smartlist.noConversation" = "எந்த உரையாடலும் இல்லை";
 "smartlist.searchBarPlaceholder" = "Enter name…";
@@ -182,7 +182,7 @@
 "invitations.accepted" = "ஏற்றுக்கொள்ளப்பட்டது";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Blocked";
-"invitations.list" = "Invitations received";
+"invitations.list" = "அழைப்புகள் பெறப்பட்டன";
 
 // Walkthrough
 
@@ -315,8 +315,8 @@
 "calls.lowerHand" = "கீழ் கை";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "ஒரு அழைப்பு நடந்து வருகிறது. நீங்கள் அழைப்பு சேர விரும்புகிறீர்களா?";
-"calls.acceptWithAudio" = "Accept with audio";
-"calls.acceptWithVideo" = "Accept with video";
+"calls.acceptWithAudio" = "ஆடியோவுடன் ஏற்றுக்கொள்ளுங்கள்";
+"calls.acceptWithVideo" = "வீடியோவுடன் ஏற்றுக்கொள்ளுங்கள்";
 
 // Account Page
 "accountPage.devicesListHeader" = "சாதனங்கள்";
@@ -566,7 +566,7 @@
 "aboutJami.developers" = "Developers";
 "aboutJami.media" = "ஊடகங்கள்";
 "aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
+"aboutJami.specialThanks" = "சிறப்பு நன்றி";
 "aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
 "aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
 
@@ -622,7 +622,7 @@
 "accessibility.calls.default.endCall" = "அழைப்பை முடித்திடுக";
 "accessibility.calls.default.addParticipant" = "பங்கேற்பாளரை சேர்க்கவும்";
 "accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.toggleSpeaker" = "ஸ்பீக்கரை இயக்கவும்";
 "accessibility.calls.default.openConversation" = "திறந்த உரையாடல்";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "கை உயர்த்தி";

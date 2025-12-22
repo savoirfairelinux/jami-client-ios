@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Unmute microphone";
 "accessibility.calls.alter.toggleVideo" = "Стенд камерасы";
 "accessibility.calls.alter.pauseCall" = "Қайталау шақыру";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "Қоңырауды аяқтау";
 "accessibility.calls.alter.addParticipant" = "Қатысушыны қосу";
 "accessibility.calls.alter.switchCamera" = "Switch camera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";

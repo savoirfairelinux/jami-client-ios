@@ -630,7 +630,7 @@
 "accessibility.calls.alter.toggleAudio" = "Mikrofon némításának feloldása";
 "accessibility.calls.alter.toggleVideo" = "Fényképezőgép leállása";
 "accessibility.calls.alter.pauseCall" = "Hívás folytatása";
-"accessibility.calls.alter.endCall" = "End call";
+"accessibility.calls.alter.endCall" = "Hívás befejezése";
 "accessibility.calls.alter.addParticipant" = "Résztvevő hozzáadása";
 "accessibility.calls.alter.switchCamera" = "Fényképezőgépváltás";
 "accessibility.calls.alter.toggleSpeaker" = "Hangszóró kikapcsolása";
