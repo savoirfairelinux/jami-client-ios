@@ -48,6 +48,7 @@ struct AccountLists: View {
         }
         .accessibility(identifier: SmartListAccessibilityIdentifiers.accountListView)
         .padding(.horizontal, 5)
+        .padding(.bottom, 10)
     }
 
     @ViewBuilder
