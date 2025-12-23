@@ -301,7 +301,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                     .addSubview(
                         AvatarView(profileImageData: data,
                                    username: info.finalTitle.value,
-                                   isGroup: !(info.conversation?.isDialog() ?? true),
+                                   isGroup: !(info.conversation?.isDialog() ?? true || info.conversation?.isCoredialog() ?? true),
                                    size: 40))
             })
             .disposed(by: self.disposeBag)

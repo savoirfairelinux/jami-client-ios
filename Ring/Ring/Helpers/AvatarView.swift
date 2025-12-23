@@ -225,12 +225,13 @@ extension AvatarProvider {
     }
 
     static func from(swarmInfo: SwarmInfoProtocol, profileService: ProfilesService, size: Constants.AvatarSize) -> AvatarProvider {
+        let isOneToOne = swarmInfo.conversation.map { $0.isDialog() || $0.isCoredialog() } ?? false
         return AvatarProvider(
             profileService: profileService,
             size: size,
             avatar: swarmInfo.finalAvatarData,
             displayName: swarmInfo.finalTitle.asObservable(),
-            isGroup: !(swarmInfo.conversation?.isDialog() ?? false)
+            isGroup: !isOneToOne
         )
     }
 }

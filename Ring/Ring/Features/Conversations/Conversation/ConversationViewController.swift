@@ -477,7 +477,7 @@ class ConversationViewController: UIViewController,
         profileImageView.frame = CGRect.init(x: 0, y: 0, width: imageSize, height: imageSize)
         profileImageView.center = CGPoint.init(x: imageSize / 2, y: titleView.center.y)
         profileImageView.accessibilityElementsHidden = true
-        let isGroup = !self.viewModel.conversation.isDialog()
+        let isGroup = !(self.viewModel.conversation.isDialog() || self.viewModel.conversation.isCoredialog())
 
         if let profileName = displayName, !profileName.isEmpty {
             profileImageView.addSubview(AvatarView(profileImageData: profileImageData, username: profileName, isGroup: isGroup, size: 30))

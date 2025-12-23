@@ -165,6 +165,7 @@
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "You";
+"conversation.youSuffix" = "(you)";
 "conversation.edited" = "Edited";
 "conversation.deletedMessage" = "%@ deleted a message";
 "conversation.contactBlocked" = "Contact blocked";
