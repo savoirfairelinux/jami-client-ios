@@ -122,6 +122,13 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             updateSyncMessageIfNeeded()
         }
     }
+    var displayNameForTemporary: String {
+        let isSelfConversation = conversation.getParticipants().isEmpty
+        if isSelfConversation {
+            return "\(name) (\(L10n.Conversation.yourself))"
+        }
+        return name
+    }
     @Published var isSyncing: Bool = false
     @Published var isBlocked: Bool = false
     @Published var syncMessage = ""

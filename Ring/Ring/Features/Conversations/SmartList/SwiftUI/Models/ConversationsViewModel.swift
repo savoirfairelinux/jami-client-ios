@@ -303,8 +303,10 @@ class ConversationsViewModel: ObservableObject {
 
     private func createTemporarySwarmConversation(with hash: String, accountId: String) -> ConversationViewModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: hash)
+        let isSelf = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId == hash
         let conversation = ConversationModel(withParticipantUri: uri,
-                                             accountId: accountId)
+                                             accountId: accountId,
+                                             isLocal: isSelf)
         conversation.type = .oneToOne
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.userName.accept(hash)
