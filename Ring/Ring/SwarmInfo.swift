@@ -506,10 +506,11 @@ class SwarmInfo: SwarmInfoProtocol {
 
     private func buildAvatar() -> Data? {
         let participantsCount = self.participants.value.count
-        // for conversation with one participant return contact avatar
+        // for conversation with one participant (including self-conversation) return that participant's avatar
         if participantsCount == 1, let avatar = self.participants.value.first?.avatarData.value {
             return avatar
         }
+        // for one-to-one conversation, return the other participant's avatar
         if participantsCount == 2, let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId,
            let avatar = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
@@ -520,21 +521,35 @@ class SwarmInfo: SwarmInfoProtocol {
     }
 
     private func titleForDialog() -> String {
-        if let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
+        guard let localJamiId = self.localJamiId else { return "" }
+        // Try to get non-local participant's name first
+        if let name = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
-           }).first?.profileName.value {
+        }).first?.profileName.value, !name.isEmpty {
             return name
+        }
+        // For self-conversation, return local participant's name with "(you)" suffix
+        if let name = self.participants.value.filter({ info in
+            return info.jamiId == localJamiId
+        }).first?.profileName.value, !name.isEmpty {
+            return "\(name) \(L10n.Conversation.youSuffix)"
         }
         return ""
     }
 
     private func registeredNameForDialog() -> String {
-        if let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
+        guard let localJamiId = self.localJamiId else { return "" }
+        // Try to get non-local participant's registered name first
+        if let name = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
-           }).first?.registeredName.value {
+        }).first?.registeredName.value, !name.isEmpty {
             return name
+        }
+        // For self-conversation, return local participant's registered name with "(you)" suffix
+        if let name = self.participants.value.filter({ info in
+            return info.jamiId == localJamiId
+        }).first?.registeredName.value, !name.isEmpty {
+            return "\(name) \(L10n.Conversation.youSuffix)"
         }
         return ""
     }
@@ -542,17 +557,26 @@ class SwarmInfo: SwarmInfoProtocol {
     private func buildTitleFrom(names: [String]) -> String {
         // title format: "name1, name2, name3 + number of other participants"
         let participantsCount = self.participants.value.count
+        
+        guard let localJamiId = self.localJamiId else { return "" }
+        
+        // For self-conversation (only local participant), return the local participant's name with "(you)" suffix
+        let isSelfConversation = self.participants.value.allSatisfy { $0.jamiId == localJamiId }
+        if isSelfConversation, participantsCount == 1,
+           let name = self.participants.value.first?.finalName.value {
+            return "\(name) \(L10n.Conversation.youSuffix)"
+        }
+        
         // for one to one conversation return contact name
-        if participantsCount == 2, let localJamiId = self.localJamiId,
+        if participantsCount == 2,
            let name = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
            }).first?.finalName.value {
             return name
         }
-        // replaece local name with "me"
+        // replace local name with "me"
         var localName = ""
-        if let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
+        if let name = self.participants.value.filter({ info in
             return info.jamiId == localJamiId
            }).first?.finalName.value {
             localName = name

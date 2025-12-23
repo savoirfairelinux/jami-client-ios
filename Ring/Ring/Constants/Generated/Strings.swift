@@ -706,6 +706,8 @@ internal enum L10n {
     }
     /// You
     internal static let yourself = L10n.tr("Localizable", "conversation.yourself", fallback: "You")
+    /// (you)
+    internal static let youSuffix = L10n.tr("Localizable", "conversation.youSuffix", fallback: "(you)")
   }
   internal enum CreateAccount {
     /// Join Jami
