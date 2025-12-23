@@ -43,7 +43,12 @@ enum GeneratedMessageType: String {
 // swiftlint:disable file_length
 class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiable {
 
-    @Published var name: String = ""
+    @Published var name: String = "" {
+        didSet {
+            updateNameWithYouSuffix()
+        }
+    }
+    @Published var nameWithYouSuffix: String = ""
     @Published var lastMessage: String = ""
     @Published var lastMessageDate: String = ""
     @Published var unreadMessages: Int = 0
@@ -222,6 +227,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             self.updateBlockedStatus()
             self.setupPresence()
             self.avatarProvider.updateIsGroup(!self.conversation.isDialog())
+            self.updateNameWithYouSuffix()
 
             if self.shouldCreateSwarmInfo() {
                 self.createSwarmInfo()
@@ -345,6 +351,15 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     // Add the matches method to handle filtering logic
     func matches(_ searchQuery: String) -> Bool {
+        // When searching for self, only show self-conversation
+        let localJamiId = self.model().getLocalParticipants()?.jamiId ?? ""
+        let registeredName = self.accountService.currentAccount?.registeredName ?? ""
+        let matchesLocal = localJamiId.containsCaseInsensitive(string: searchQuery) ||
+            (!registeredName.isEmpty && registeredName.containsCaseInsensitive(string: searchQuery))
+        if matchesLocal {
+            return self.model().getParticipants().isEmpty
+        }
+
         if self.model().isSwarm() {
             guard let swarmInfo = self.swarmInfo else { return false }
             return swarmInfo.contains(searchQuery: searchQuery)
@@ -574,6 +589,19 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     func updateBlockedStatus() {
         self.swiftUIModel.updateBlockedStatus(blocked: isConversationForBlockedContact())
         self.updateNavigationBar.accept(true)
+    }
+
+    private func updateNameWithYouSuffix() {
+        guard let conversation = self.conversation else {
+            nameWithYouSuffix = name
+            return
+        }
+        let isSelfConversation = conversation.getParticipants().isEmpty
+        if isSelfConversation && !name.contains(L10n.Conversation.yourself) {
+            nameWithYouSuffix = "\(name) (\(L10n.Conversation.yourself))"
+        } else {
+            nameWithYouSuffix = name
+        }
     }
 
     func isConversationForBlockedContact() -> Bool {

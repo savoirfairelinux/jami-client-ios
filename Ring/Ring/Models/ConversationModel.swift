@@ -148,6 +148,11 @@ class ConversationParticipant: Equatable, Hashable {
         self.jamiId = jamiId.replacingOccurrences(of: "ring:", with: "")
     }
 
+    init (jamiId: String, isLocal: Bool) {
+        self.jamiId = jamiId.replacingOccurrences(of: "ring:", with: "")
+        self.isLocal = isLocal
+    }
+
     static func == (lhs: ConversationParticipant, rhs: ConversationParticipant) -> Bool {
         return lhs.jamiId == rhs.jamiId
     }
@@ -181,9 +186,9 @@ class ConversationModel: Equatable {
     let reactionsUpdated = PublishSubject<String>()
     let messageUpdated = PublishSubject<String>()
 
-    convenience init(withParticipantUri participantUri: JamiURI, accountId: String) {
+    convenience init(withParticipantUri participantUri: JamiURI, accountId: String, isLocal: Bool = false) {
         self.init()
-        self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "")]
+        self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "", isLocal: isLocal)]
         self.hash = participantUri.hash ?? ""
         self.accountId = accountId
         self.subscribeUnreadMessages()
@@ -405,9 +410,7 @@ class ConversationModel: Equatable {
     }
 
     func isDialog() -> Bool {
-        return self.participants.filter { participant in
-            !participant.isLocal
-        }.count == 1
+        return self.participants.count <= 2
     }
 
     func isOnlyLocalParticipant() -> Bool {

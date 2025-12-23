@@ -173,7 +173,7 @@ struct ConversationRowView: View {
                 Spacer()
                     .frame(width: 12)
                 VStack(alignment: .leading) {
-                    Text(model.name)
+                    Text(model.nameWithYouSuffix)
                         .fontWeight(model.unreadMessages > 0 ? .bold : .regular)
                         .lineLimit(1)
                     if model.swiftUIModel.isBlocked {
