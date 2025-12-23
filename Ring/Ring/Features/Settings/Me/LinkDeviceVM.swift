@@ -40,6 +40,11 @@ enum AddDeviceExportState {
 
 class LinkDeviceVM: ObservableObject {
     static let schema = "jami-auth://"
+    private static let validLengths: Set<Int> = [
+        schema.count + 47,  // 59 - standard
+        schema.count + 71   // 83 - long id
+    ]
+
     @Published var exportState: AddDeviceExportState = .initial()
     @Published var exportToken: String = "jami-auth://"
     @Published var entryError: String?
@@ -66,9 +71,9 @@ class LinkDeviceVM: ObservableObject {
         if codeProvided {
             return
         }
-        guard !jamiAuthentication.isEmpty,
-              jamiAuthentication.hasPrefix(LinkDeviceVM.schema),
-              jamiAuthentication.count == 59 else {
+
+        guard jamiAuthentication.hasPrefix(Self.schema),
+              Self.validLengths.contains(jamiAuthentication.count) else {
             entryError = L10n.LinkDevice.wrongEntry
             return
         }
