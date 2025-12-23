@@ -405,9 +405,7 @@ class ConversationModel: Equatable {
     }
 
     func isDialog() -> Bool {
-        return self.participants.filter { participant in
-            !participant.isLocal
-        }.count == 1
+        return self.participants.count <= 2
     }
 
     func isOnlyLocalParticipant() -> Bool {

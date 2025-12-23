@@ -201,10 +201,18 @@ class JamiSearchViewModel: ObservableObject {
         guard conversation.model().isCoredialog() else {
             return false
         }
+        // Check if this is a self-conversation (no non-local participants)
+        let isSelfConversation = conversation.model().getParticipants().isEmpty
         if searchQuery.isSHA1() {
+            if isSelfConversation {
+                return conversation.model().getLocalParticipants()?.jamiId == searchQuery
+            }
             return conversation.model().getParticipants().first?.jamiId == searchQuery
         }
         if conversation.model().isSwarm() {
+            if isSelfConversation {
+                return self.accountsService.currentAccount?.registeredName == searchQuery
+            }
             return conversation.swarmInfo?.hasParticipantWithRegisteredName(name: searchQuery) ?? false
         }
         return conversation.userName.value == searchQuery
@@ -376,10 +384,16 @@ class JamiSearchViewModel: ObservableObject {
                                              accountId: accountId)
         conversation.type = .oneToOne
         let newConversation = ConversationViewModel(with: self.injectionBag)
+
+        // Check if this is a self-conversation using the accountId to get the account
+        let account = self.accountsService.getAccount(fromAccountId: accountId)
+        let isSelf = account?.jamiId == hash
+        let youSuffix = isSelf ? " (\(L10n.Conversation.yourself))" : ""
+
         if let userName = userName {
-            newConversation.userName.accept(userName)
+            newConversation.userName.accept(userName + youSuffix)
         } else {
-            newConversation.userName.accept(hash)
+            newConversation.userName.accept(hash + youSuffix)
         }
         newConversation.conversation = conversation
         newConversation.swiftUIModel.isTemporary = true
@@ -407,6 +421,17 @@ class JamiSearchViewModel: ObservableObject {
                                                     conversation: conversation,
                                                     user: user)
         newConversation.swiftUIModel.isTemporary = true
+
+        // Check if this is a self-conversation and add "(you)" suffix
+        let account = self.accountsService.getAccount(fromAccountId: accountId)
+        if account?.jamiId == user.jamiId {
+            let currentUserName = newConversation.userName.value
+            newConversation.userName.accept("\(currentUserName) (\(L10n.Conversation.yourself))")
+            if let displayName = newConversation.displayName.value, !displayName.isEmpty {
+                newConversation.displayName.accept("\(displayName) (\(L10n.Conversation.yourself))")
+            }
+        }
+
         return newConversation
     }
 
