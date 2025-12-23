@@ -506,10 +506,11 @@ class SwarmInfo: SwarmInfoProtocol {
 
     private func buildAvatar() -> Data? {
         let participantsCount = self.participants.value.count
-        // for conversation with one participant return contact avatar
+        // for conversation with one participant return that participant's avatar
         if participantsCount == 1, let avatar = self.participants.value.first?.avatarData.value {
             return avatar
         }
+        // for one-to-one conversation, return the other participant's avatar
         if participantsCount == 2, let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId,
            let avatar = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
@@ -520,21 +521,32 @@ class SwarmInfo: SwarmInfoProtocol {
     }
 
     private func titleForDialog() -> String {
-        if let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
+        guard let localJamiId = self.localJamiId else { return "" }
+        if let name = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
-           }).first?.profileName.value {
+        }).first?.profileName.value, !name.isEmpty {
             return name
+        }
+        if let name = self.participants.value.filter({ info in
+            return info.jamiId == localJamiId
+        }).first?.profileName.value, !name.isEmpty {
+            return "\(name) (\(L10n.Conversation.yourself))"
         }
         return ""
     }
 
     private func registeredNameForDialog() -> String {
-        if let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
+        guard let localJamiId = self.localJamiId else { return "" }
+        // Try to get non-local participant's registered name first
+        if let name = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
-           }).first?.registeredName.value {
+        }).first?.registeredName.value, !name.isEmpty {
             return name
+        }
+        if let name = self.participants.value.filter({ info in
+            return info.jamiId == localJamiId
+        }).first?.registeredName.value, !name.isEmpty {
+            return "\(name) (\(L10n.Conversation.yourself))"
         }
         return ""
     }
@@ -542,46 +554,30 @@ class SwarmInfo: SwarmInfoProtocol {
     private func buildTitleFrom(names: [String]) -> String {
         // title format: "name1, name2, name3 + number of other participants"
         let participantsCount = self.participants.value.count
-        // for one to one conversation return contact name
+
+        // One-to-one conversation: return other participant's name
         if participantsCount == 2, let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
-            return info.jamiId != localJamiId
-           }).first?.finalName.value {
+           let name = self.participants.value.first(where: { $0.jamiId != localJamiId })?.finalName.value {
             return name
         }
-        // replaece local name with "me"
-        var localName = ""
-        if let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
-            return info.jamiId == localJamiId
-           }).first?.finalName.value {
-            localName = name
+
+        // Get local participant's name for replacement
+        let localName = self.localJamiId.flatMap { id in
+            self.participants.value.first(where: { $0.jamiId == id })?.finalName.value
         }
-        var namesVariable = names
-        if let index = namesVariable.firstIndex(where: { currentName in
-            currentName == localName
-        }), !localName.isEmpty {
-            namesVariable.remove(at: index)
-            namesVariable.append(L10n.Account.me)
+
+        let processedNames = names.map { name in
+            name == localName ? "\(name) (\(L10n.Conversation.yourself))" : name
         }
-        let sorted = namesVariable.sorted { name1, name2 in
-            name1.count < name2.count
-        }
-        let namesSet = Array(Set(sorted))
-        var finalTitle = ""
-        if namesSet.isEmpty { return finalTitle }
-        // maximum 3 names could be displayed
-        let numberOfDisplayedNames: Int = namesSet.count < 3 ? namesSet.count : 3
-        // number of participants not included in title
-        let otherParticipantsCount = participantsCount - numberOfDisplayedNames
-        let titleEnd = otherParticipantsCount > 0 ? ", + \(otherParticipantsCount)" : ""
-        finalTitle = namesSet[0]
-        if numberOfDisplayedNames != 1 {
-            for index in 1...(numberOfDisplayedNames - 1) {
-                finalTitle += ", " + namesSet[index]
-            }
-        }
-        finalTitle += titleEnd
-        return finalTitle
+        let uniqueNames = Array(Set(processedNames)).sorted { $0.count < $1.count }
+
+        guard !uniqueNames.isEmpty else { return "" }
+
+        // Show max 3 names + count of others
+        let displayCount = min(uniqueNames.count, 3)
+        let displayedNames = uniqueNames.prefix(displayCount).joined(separator: ", ")
+        let othersCount = participantsCount - displayCount
+
+        return othersCount > 0 ? "\(displayedNames), + \(othersCount)" : displayedNames
     }
 }

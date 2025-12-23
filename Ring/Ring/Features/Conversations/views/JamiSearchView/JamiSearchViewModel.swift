@@ -189,7 +189,7 @@ class JamiSearchViewModel: ObservableObject {
 
     func temporaryConversationExists(for jamiId: String) -> Bool {
         guard let temporaryConversation = self.temporaryConversation.value else { return false }
-        return temporaryConversation.model().getParticipants().first?.jamiId == jamiId
+        return temporaryConversation.model().getAllParticipants().first?.jamiId == jamiId
     }
 
     func blockedConversationExists(for jamiId: String) -> Bool {
@@ -201,10 +201,17 @@ class JamiSearchViewModel: ObservableObject {
         guard conversation.model().isCoredialog() else {
             return false
         }
+        let isSelfConversation = conversation.model().getParticipants().isEmpty
         if searchQuery.isSHA1() {
+            if isSelfConversation {
+                return conversation.model().getLocalParticipants()?.jamiId == searchQuery
+            }
             return conversation.model().getParticipants().first?.jamiId == searchQuery
         }
         if conversation.model().isSwarm() {
+            if isSelfConversation {
+                return self.accountsService.currentAccount?.registeredName == searchQuery
+            }
             return conversation.swarmInfo?.hasParticipantWithRegisteredName(name: searchQuery) ?? false
         }
         return conversation.userName.value == searchQuery
@@ -372,8 +379,10 @@ class JamiSearchViewModel: ObservableObject {
 
     private func createTemporarySwarmConversation(with hash: String, accountId: String, userName: String? = nil) -> ConversationViewModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: hash)
+        let isSelf = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId == hash
         let conversation = ConversationModel(withParticipantUri: uri,
-                                             accountId: accountId)
+                                             accountId: accountId,
+                                             isLocal: isSelf)
         conversation.type = .oneToOne
         let newConversation = ConversationViewModel(with: self.injectionBag)
         if let userName = userName {
@@ -401,7 +410,8 @@ class JamiSearchViewModel: ObservableObject {
 
     private func createTemporaryJamsConversation(with user: JamsUserSearchModel, accountId: String) -> ConversationViewModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: user.jamiId)
-        let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId)
+        let isSelf = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId == user.jamiId
+        let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId, isLocal: isSelf)
         conversation.type = .oneToOne
         let newConversation = ConversationViewModel(with: injectionBag,
                                                     conversation: conversation,
