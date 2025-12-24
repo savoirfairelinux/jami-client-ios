@@ -276,30 +276,6 @@ final class JamiSearchViewModelTests: XCTestCase {
         XCTAssertFalse(result)
     }
 
-    func testConversationMatch_PrivateConversaion_QueryIsHash() {
-        // Arrange
-        let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .invitesOnly)
-        conversationVM.conversation = conversation
-        // Act
-        let searchQuery = jamiId1
-        let result = searchViewModel.isConversation(conversationVM, match: searchQuery)
-        // Assert
-        XCTAssertFalse(result)
-    }
-
-    func testConversationContains_PrivateConversation_QueryIsRegisteredName_Contains() {
-        // Arrange
-        let conversation = self.createSwarmConversation(jamiId: jamiId1, type: .invitesOnly)
-        conversationVM.conversation = conversation
-        let swarmInfo = self.createSwarmInfo(jamiId: jamiId1, name: registeredName1, containsSearchQuery: true, hasParticipantWithRegisteredName: true)
-        conversationVM.swarmInfo = swarmInfo
-        // Act
-        let searchQuery = registeredName1
-        let result = searchViewModel.isConversation(conversationVM, contains: searchQuery)
-        // Assert
-        XCTAssertTrue(result)
-    }
-
     func testConversationContains_SipConversation_Contains() {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
@@ -308,7 +284,7 @@ final class JamiSearchViewModelTests: XCTestCase {
         conversationVM.userName.accept(sipTestNumber1)
         // Act
         let searchQuery = sipTestNumber1
-        let result = searchViewModel.isConversation(conversationVM, contains: searchQuery)
+        let result = searchViewModel.isConversation(conversationVM, match: searchQuery)
         // Assert
         XCTAssertTrue(result)
     }

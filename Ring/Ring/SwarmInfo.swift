@@ -155,6 +155,12 @@ class SwarmInfo: SwarmInfoProtocol {
     }()
 
     var participants = BehaviorRelay(value: [ParticipantInfo]()) // particiapnts already added to swarm
+    var nonLocalParticipants: [ParticipantInfo] {
+        return participants.value.filter { $0.jamiId != localJamiId }
+    }
+    var localParticipant: ParticipantInfo? {
+        return participants.value.first { $0.jamiId == localJamiId }
+    }
     var contacts = BehaviorRelay(value: [ParticipantInfo]()) // contacts that could be added to swarm
     var conversation: ConversationModel?
 
@@ -280,9 +286,9 @@ class SwarmInfo: SwarmInfoProtocol {
     }
 
     func hasParticipantWithRegisteredName(name: String) -> Bool {
-        return !self.participants.value.filter { participant in
-            participant.registeredName.value == name.lowercased()
-        }.isEmpty
+        return nonLocalParticipants.contains { participant in
+            participant.registeredName.value.lowercased() == name.lowercased()
+        }
     }
 
     func contains(searchQuery: String) -> Bool {
@@ -292,16 +298,11 @@ class SwarmInfo: SwarmInfoProtocol {
             return true
         }
 
-        return !self.participants.value.filter { participant in
-            participant.registeredName
-                .value.normalized()
-                .containsCaseInsensitive(string: normalizedQuery) ||
-                participant.profileName
-                .value.normalized()
-                .containsCaseInsensitive(string: normalizedQuery) ||
-                participant.jamiId.normalized()
-                .containsCaseInsensitive(string: normalizedQuery)
-        }.isEmpty
+        return nonLocalParticipants.contains { participant in
+            participant.registeredName.value.normalized().containsCaseInsensitive(string: normalizedQuery) ||
+                participant.profileName.value.normalized().containsCaseInsensitive(string: normalizedQuery) ||
+                participant.jamiId.normalized().containsCaseInsensitive(string: normalizedQuery)
+        }
     }
 
     private func subscribeParticipantsInfo() {
@@ -510,53 +511,28 @@ class SwarmInfo: SwarmInfoProtocol {
         if participantsCount == 1, let avatar = self.participants.value.first?.avatarData.value {
             return avatar
         }
-        if participantsCount == 2, let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId,
-           let avatar = self.participants.value.filter({ info in
-            return info.jamiId != localJamiId
-           }).first?.avatarData.value {
+        if participantsCount == 2, let avatar = nonLocalParticipants.first?.avatarData.value {
             return avatar
         }
         return nil
     }
 
     private func titleForDialog() -> String {
-        if let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
-            return info.jamiId != localJamiId
-           }).first?.profileName.value {
-            return name
-        }
-        return ""
+        return nonLocalParticipants.first?.profileName.value ?? ""
     }
 
     private func registeredNameForDialog() -> String {
-        if let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
-            return info.jamiId != localJamiId
-           }).first?.registeredName.value {
-            return name
-        }
-        return ""
+        return nonLocalParticipants.first?.registeredName.value ?? ""
     }
 
     private func buildTitleFrom(names: [String]) -> String {
         // title format: "name1, name2, name3 + number of other participants"
         let participantsCount = self.participants.value.count
         // for one to one conversation return contact name
-        if participantsCount == 2, let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
-            return info.jamiId != localJamiId
-           }).first?.finalName.value {
+        if participantsCount == 2, let name = nonLocalParticipants.first?.finalName.value {
             return name
         }
-        // replaece local name with "me"
-        var localName = ""
-        if let localJamiId = self.localJamiId,
-           let name = self.participants.value.filter({ info in
-            return info.jamiId == localJamiId
-           }).first?.finalName.value {
-            localName = name
-        }
+        let localName = localParticipant?.finalName.value ?? ""
         var namesVariable = names
         if let index = namesVariable.firstIndex(where: { currentName in
             currentName == localName
