@@ -21,6 +21,10 @@ struct MemberList: View {
     @StateObject var viewModel: SwarmInfoVM
     @SwiftUI.State private var editMode = EditMode.inactive
 
+    private var localJamiId: String {
+        viewModel.injectionBag.accountService.currentAccount?.jamiId ?? ""
+    }
+
     // MARK: - Body
     var body: some View {
         List {
@@ -28,7 +32,8 @@ struct MemberList: View {
                 ForEach(viewModel.swarmInfo.participants.value, id: \.self) { participant in
                     MemberItem(
                         participant: participant,
-                        isInvited: participant.role == .invited
+                        isInvited: participant.role == .invited,
+                        isLocalParticipant: participant.jamiId == localJamiId
                     )
                     .deleteDisabled(participant.role == .admin)
                 }
@@ -53,9 +58,11 @@ struct MemberItem: View {
     // MARK: - Properties
     let participant: ParticipantInfo
     let isInvited: Bool
+    let isLocalParticipant: Bool
 
     private var displayName: String {
-        participant.finalName.value.isEmpty ? participant.jamiId : participant.finalName.value
+        let name = participant.finalName.value.isEmpty ? participant.jamiId : participant.finalName.value
+        return isLocalParticipant ? name.withYourselfSuffix() : name
     }
 
     private var roleText: String {

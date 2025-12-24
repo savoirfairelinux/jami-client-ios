@@ -43,7 +43,14 @@ enum GeneratedMessageType: String {
 // swiftlint:disable file_length
 class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiable {
 
-    @Published var name: String = ""
+    @Published var name: String = "" {
+        didSet {
+            if conversation != nil {
+                updateName()
+            }
+        }
+    }
+    @Published var nameWithSuffix: String = ""
     @Published var lastMessage: String = ""
     @Published var lastMessageDate: String = ""
     @Published var unreadMessages: Int = 0
@@ -222,6 +229,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             self.updateBlockedStatus()
             self.setupPresence()
             self.avatarProvider.updateIsGroup(!self.conversation.isDialog())
+            self.updateName()
 
             if self.shouldCreateSwarmInfo() {
                 self.createSwarmInfo()
@@ -583,6 +591,14 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     func updateBlockedStatus() {
         self.swiftUIModel.updateBlockedStatus(blocked: isConversationForBlockedContact())
         self.updateNavigationBar.accept(true)
+    }
+
+    private func updateName() {
+        let isSelfConversation = conversation?.getParticipants().isEmpty ?? false
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.nameWithSuffix = isSelfConversation ? self.name.withYourselfSuffix() : self.name
+        }
     }
 
     func isConversationForBlockedContact() -> Bool {

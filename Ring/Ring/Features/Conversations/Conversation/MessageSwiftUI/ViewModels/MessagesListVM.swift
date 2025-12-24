@@ -122,6 +122,13 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             updateSyncMessageIfNeeded()
         }
     }
+    var displayNameForTemporary: String {
+        let isSelfConversation = conversation.getParticipants().isEmpty
+        if isSelfConversation {
+            return name.withYourselfSuffix()
+        }
+        return name
+    }
     @Published var isSyncing: Bool = false
     @Published var isBlocked: Bool = false
     @Published var syncMessage = ""
@@ -304,8 +311,16 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     func sendRequest() {
-        guard let conversation = self.conversation,
-              let jamiId = conversation.getParticipants().first?.jamiId else { return }
+        guard let conversation = self.conversation else { return }
+        let jamiId: String?
+        if let contactJamiId = conversation.getParticipants().first?.jamiId {
+            jamiId = contactJamiId
+        } else if conversation.isOnlyLocalParticipant() {
+            jamiId = conversation.getLocalParticipants()?.jamiId
+        } else {
+            jamiId = nil
+        }
+        guard let jamiId = jamiId else { return }
         var avatar: String?
         if let avatarData = self.jamsAvatarData {
             avatar = String(data: avatarData, encoding: .utf8)
