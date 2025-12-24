@@ -345,6 +345,15 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     // Add the matches method to handle filtering logic
     func matches(_ searchQuery: String) -> Bool {
+        // When searching for self, only show self-conversation
+        let localJamiId = self.model().getLocalParticipants()?.jamiId ?? ""
+        let registeredName = self.accountService.currentAccount?.registeredName ?? ""
+        let matchesLocal = localJamiId.containsCaseInsensitive(string: searchQuery) ||
+            (!registeredName.isEmpty && registeredName.containsCaseInsensitive(string: searchQuery))
+        if matchesLocal {
+            return self.model().getParticipants().isEmpty
+        }
+
         if self.model().isSwarm() {
             guard let swarmInfo = self.swarmInfo else { return false }
             return swarmInfo.contains(searchQuery: searchQuery)
