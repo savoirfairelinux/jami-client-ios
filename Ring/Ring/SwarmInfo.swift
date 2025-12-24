@@ -507,57 +507,64 @@ class SwarmInfo: SwarmInfoProtocol {
 
     private func buildAvatar() -> Data? {
         let participantsCount = self.participants.value.count
-        // for conversation with one participant return contact avatar
+        // for conversation with one participant return that participant's avatar
         if participantsCount == 1, let avatar = self.participants.value.first?.avatarData.value {
             return avatar
         }
-        if participantsCount == 2, let avatar = nonLocalParticipants.first?.avatarData.value {
+        if participantsCount == 2,
+           let avatar = nonLocalParticipants.first?.avatarData.value {
             return avatar
         }
         return nil
     }
 
     private func titleForDialog() -> String {
-        return nonLocalParticipants.first?.profileName.value ?? ""
+        if let name = nonLocalParticipants.first?.profileName.value,
+           !name.isEmpty {
+            return name
+        }
+        if let name = localParticipant?.profileName.value, !name.isEmpty {
+            return name.withYourselfSuffix()
+        }
+        return ""
     }
 
     private func registeredNameForDialog() -> String {
-        return nonLocalParticipants.first?.registeredName.value ?? ""
+        if let name = nonLocalParticipants.first?.registeredName.value, !name.isEmpty {
+            return name
+        }
+        if let name = localParticipant?.registeredName.value, !name.isEmpty {
+            return name.withYourselfSuffix()
+        }
+        return ""
     }
 
     private func buildTitleFrom(names: [String]) -> String {
         // title format: "name1, name2, name3 + number of other participants"
         let participantsCount = self.participants.value.count
-        // for one to one conversation return contact name
-        if participantsCount == 2, let name = nonLocalParticipants.first?.finalName.value {
+
+        // One-to-one conversation: return other participant's name
+        if participantsCount == 2, let name = nonLocalParticipants.first?.finalName.value, !name.isEmpty {
             return name
         }
-        let localName = localParticipant?.finalName.value ?? ""
-        var namesVariable = names
-        if let index = namesVariable.firstIndex(where: { currentName in
-            currentName == localName
-        }), !localName.isEmpty {
-            namesVariable.remove(at: index)
-            namesVariable.append(L10n.Account.me)
+
+        let localName = localParticipant?.finalName.value
+
+        let processedNames = names.map { name in
+            name == localName ? name.withYourselfSuffix() : name
         }
-        let sorted = namesVariable.sorted { name1, name2 in
-            name1.count < name2.count
-        }
-        let namesSet = Array(Set(sorted))
-        var finalTitle = ""
-        if namesSet.isEmpty { return finalTitle }
-        // maximum 3 names could be displayed
-        let numberOfDisplayedNames: Int = namesSet.count < 3 ? namesSet.count : 3
-        // number of participants not included in title
-        let otherParticipantsCount = participantsCount - numberOfDisplayedNames
-        let titleEnd = otherParticipantsCount > 0 ? ", + \(otherParticipantsCount)" : ""
-        finalTitle = namesSet[0]
-        if numberOfDisplayedNames != 1 {
-            for index in 1...(numberOfDisplayedNames - 1) {
-                finalTitle += ", " + namesSet[index]
-            }
-        }
-        finalTitle += titleEnd
-        return finalTitle
+
+        var uniqueSetNames = Set<String>()
+        let uniqueNames = processedNames.filter { uniqueSetNames.insert($0).inserted }
+            .sorted { $0.count < $1.count }
+
+        guard !uniqueNames.isEmpty else { return "" }
+
+        // Show max 3 names + count of others
+        let displayCount = min(uniqueNames.count, 3)
+        let displayedNames = uniqueNames.prefix(displayCount).joined(separator: ", ")
+        let othersCount = participantsCount - displayCount
+
+        return othersCount > 0 ? "\(displayedNames), + \(othersCount)" : displayedNames
     }
 }

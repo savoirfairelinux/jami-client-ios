@@ -156,17 +156,20 @@ class SwarmInfoVM: ObservableObject {
 
     func getContactJamiId() -> String? {
         guard let conversation = self.conversation,
-              conversation.isCoredialog(),
-              let participant = conversation.getParticipants().first else {
+              conversation.isCoredialog() else {
             return nil
         }
-        return participant.jamiId
+        // For regular conversations, return the first non-local participant
+        if let participant = conversation.getParticipants().first {
+            return participant.jamiId
+        }
+        // For self-conversation, return the local participant's jamiId
+        return conversation.getLocalParticipants()?.jamiId
     }
 
     func getContactDisplayName() -> String {
         guard let conversation = self.conversation,
-              conversation.isCoredialog(),
-              conversation.getParticipants().first != nil else {
+              conversation.isCoredialog() else {
             return ""
         }
         return title
