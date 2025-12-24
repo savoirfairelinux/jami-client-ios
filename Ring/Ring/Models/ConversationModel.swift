@@ -130,10 +130,16 @@ class ConversationParticipant: Equatable, Hashable {
     var lastDisplayed: String = ""
     var isLocal: Bool = false
 
+    private static func stripUriPrefix(_ uri: String) -> String {
+        return uri
+            .replacingOccurrences(of: "ring:", with: "")
+            .replacingOccurrences(of: "jami:", with: "")
+    }
+
     init (info: [String: String], isLocal: Bool) {
         self.isLocal = isLocal
         if let jamiId = info["uri"], !jamiId.isEmpty {
-            self.jamiId = jamiId.replacingOccurrences(of: "ring:", with: "")
+            self.jamiId = Self.stripUriPrefix(jamiId)
         }
         if let role = info["role"],
            let memberRole = ParticipantRole(rawValue: role) {
@@ -145,7 +151,12 @@ class ConversationParticipant: Equatable, Hashable {
     }
 
     init (jamiId: String) {
-        self.jamiId = jamiId.replacingOccurrences(of: "ring:", with: "")
+        self.jamiId = Self.stripUriPrefix(jamiId)
+    }
+
+    init (jamiId: String, isLocal: Bool) {
+        self.jamiId = Self.stripUriPrefix(jamiId)
+        self.isLocal = isLocal
     }
 
     static func == (lhs: ConversationParticipant, rhs: ConversationParticipant) -> Bool {
@@ -181,9 +192,9 @@ class ConversationModel: Equatable {
     let reactionsUpdated = PublishSubject<String>()
     let messageUpdated = PublishSubject<String>()
 
-    convenience init(withParticipantUri participantUri: JamiURI, accountId: String) {
+    convenience init(withParticipantUri participantUri: JamiURI, accountId: String, isLocal: Bool = false) {
         self.init()
-        self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "")]
+        self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "", isLocal: isLocal)]
         self.hash = participantUri.hash ?? ""
         self.accountId = accountId
         self.subscribeUnreadMessages()
@@ -405,9 +416,7 @@ class ConversationModel: Equatable {
     }
 
     func isDialog() -> Bool {
-        return self.participants.filter { participant in
-            !participant.isLocal
-        }.count == 1
+        return self.participants.count <= 2
     }
 
     func isOnlyLocalParticipant() -> Bool {
