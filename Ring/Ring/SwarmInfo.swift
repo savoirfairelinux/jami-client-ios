@@ -280,8 +280,11 @@ class SwarmInfo: SwarmInfoProtocol {
     }
 
     func hasParticipantWithRegisteredName(name: String) -> Bool {
-        return !self.participants.value.filter { participant in
-            participant.registeredName.value == name.lowercased()
+        let nonLocalParticipants = self.participants.value.filter { participant in
+            participant.jamiId != self.localJamiId
+        }
+        return !nonLocalParticipants.filter { participant in
+            participant.registeredName.value.lowercased() == name.lowercased()
         }.isEmpty
     }
 
@@ -292,7 +295,11 @@ class SwarmInfo: SwarmInfoProtocol {
             return true
         }
 
-        return !self.participants.value.filter { participant in
+        let nonLocalParticipants = self.participants.value.filter { participant in
+            participant.jamiId != self.localJamiId
+        }
+
+        return !nonLocalParticipants.filter { participant in
             participant.registeredName
                 .value.normalized()
                 .containsCaseInsensitive(string: normalizedQuery) ||
