@@ -203,4 +203,17 @@ extension String {
     var maskedPassword: String {
         return String(repeating: "•", count: self.count)
     }
+
+    private static var yourselfSuffix: String {
+        return " (\(L10n.Conversation.yourself))"
+    }
+
+    func withYourselfSuffix() -> String {
+        guard !self.hasSuffix(Self.yourselfSuffix) else { return self }
+        return self + Self.yourselfSuffix
+    }
+
+    var hasYourselfSuffix: Bool {
+        return self.hasSuffix(Self.yourselfSuffix)
+    }
 }
