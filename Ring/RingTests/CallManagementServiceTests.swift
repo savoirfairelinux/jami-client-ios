@@ -268,11 +268,11 @@ class CallManagementServiceTests: XCTestCase {
             calls[CallTestConstants.callId] = call
         }
 
-        mockCallsAdapter.hangUpCallReturnValue = true
+        mockCallsAdapter.endCallReturnValue = true
 
         let expectation = XCTestExpectation(description: "Hang up call completes")
 
-        callManagementService.hangUp(callId: CallTestConstants.callId)
+        callManagementService.endCall(callId: CallTestConstants.callId)
             .subscribe(
                 onCompleted: {
                     expectation.fulfill()
@@ -285,9 +285,9 @@ class CallManagementServiceTests: XCTestCase {
 
         wait(for: [expectation], timeout: 1.0)
 
-        XCTAssertEqual(mockCallsAdapter.hangUpCallCallCount, 1, "Hang up call should be called once")
-        XCTAssertEqual(mockCallsAdapter.hangUpCallCallId, CallTestConstants.callId, "Call ID should match")
-        XCTAssertEqual(mockCallsAdapter.hangUpCallAccountId, CallTestConstants.accountId, "Account ID should match")
+        XCTAssertEqual(mockCallsAdapter.endCallCallCount, 1, "Hang up call should be called once")
+        XCTAssertEqual(mockCallsAdapter.endCallCallId, CallTestConstants.callId, "Call ID should match")
+        XCTAssertEqual(mockCallsAdapter.endCallAccountId, CallTestConstants.accountId, "Account ID should match")
     }
 
     func testPlaceCall_Success() {
