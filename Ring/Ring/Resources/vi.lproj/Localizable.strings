@@ -23,7 +23,7 @@
 "global.password" = "Mật khẩu";
 "global.registerAUsername" = "Đăng ký tên người dùng";
 "global.enterPassword" = "Nhập mật khẩu";
-"global.enterUsername" = "Enter username";
+"global.enterUsername" = "Nhập tên người dùng";
 "global.cancel" = "Hủy bỏ";
 "global.blockContact" = "Chặn liên hệ";
 "global.removeAccount" = "Xóa tài khoản";
@@ -117,7 +117,7 @@
 "swarm.customizeProfile" = "Customize group profile";
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Customize group";
-"swarm.selectContacts" = "Select contacts";
+"swarm.selectContacts" = "Chọn liên hệ";
 
 // Smartlist
 "smartlist.yesterday" = "Hôm qua";
@@ -206,15 +206,15 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Tham gia Jami";
-"createAccount.lookingForUsernameAvailability" = "Checking username availability…";
+"createAccount.lookingForUsernameAvailability" = "Đang kiểm tra tính khả dụng của tên người dùng…";
 "createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
 "createAccount.usernameAlreadyTaken" = "Tên người dùng đã được lấy";
-"createAccount.usernameValid" = "The username is available.";
+"createAccount.usernameValid" = "Tên người dùng này khả dụng.";
 "createAccount.UsernameNotRegisteredTitle" = "Hầm mạng";
 "createAccount.UsernameNotRegisteredMessage" = "Tài khoản đã được tạo nhưng tên người dùng đã không được đăng ký";
 "createAccount.timeoutTitle" = "Tài khoản được tạo ra";
-"createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.timeoutMessage" = "Đang đăng ký tên người dùng. Vui lòng chờ…";
+"createAccount.sipConfigure" = "Cấu hình tài khoản SIP đã có";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Bạn có thể chọn một tên người dùng để giúp người khác dễ dàng tìm và tiếp cận bạn trên Jami.";
 "createAccount.newAccount" = "New account";
@@ -225,7 +225,7 @@
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Nhập tài khoản";
 "linkToAccount.showQrCode" = "Mã QR";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
@@ -251,19 +251,19 @@
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Sign in";
 "linkToAccountManager.title" = "Management server account";
-"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerPlaceholder" = "Quản lý URL máy chủ";
 "linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
 "linkToAccountManager.jamsExplanation" = "Enter the management server URL";
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Account error";
-"alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundTitle" = "Lỗi tài khoản";
+"alerts.accountCannotBeFoundMessage" = "Không tìm thấy tài khoản trên mạng lưới Jami. Hãy chắc chắn rằng tài khoản đã được xuất sang Jami từ thiết bị hiện có và thông tin đăng nhập được cung cấp là chính xác.";
 "alerts.accountAddedTitle" = "Account added";
 "alerts.accountNoNetworkTitle" = "Hầm mạng";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
-"alerts.accountDefaultErrorTitle" = "Account error";
-"alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
+"alerts.accountDefaultErrorTitle" = "Lỗi tài khoản";
+"alerts.accountDefaultErrorMessage" = "Xảy ra lỗi khi tạo tài khoản.";
 "alerts.profileTakePhoto" = "Tạo ảnh";
 "alerts.profileUploadPhoto" = "Lên ảnh";
 "alerts.accountLinkedTitle" = "Tài khoản liên kết";
@@ -353,7 +353,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Nhập mật khẩu tài khoản";
 "accountPage.usernamePlaceholder" = "Nhập tên người dùng mong muốn";
-"accountPage.registerNameErrorMessage" = "The username is unavailable.";
+"accountPage.registerNameErrorMessage" = "Tên người dùng không khả dụng.";
 "accountPage.usernameRegistering" = "Đăng ký";
 "accountPage.usernameRegisterAction" = "Register";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -383,16 +383,16 @@
 "accountPage.security" = "An ninh";
 "accountPage.enableSRTP" = "Các dòng truyền thông mã hóa (SRTP)";
 "accountPage.registerNameExplanation" = "Register a username to help others more easily find and reach you on Jami.";
-"accountPage.profileHeader" = "Tương tự";
+"accountPage.profileHeader" = "Hồ sơ";
 "accountPage.profileNameNotSelected" = "Name not selected";
 "accountPage.accountHeader" = "Tài khoản";
-"accountPage.profileName" = "Profile name";
-"accountPage.profileNamePlaceholder" = "Enter profile name";
-"accountPage.editProfile" = "Edit Profile";
+"accountPage.profileName" = "Tên hiển thị";
+"accountPage.profileNamePlaceholder" = "Nhập tên hiển thị";
+"accountPage.editProfile" = "Sửa hồ sơ";
 "accountPage.manageAccount" = "Quản lý tài khoản";
 "accountPage.encryptAccount" = "Password protect account";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordsDoNotMatch" = "Mật khẩu không khớp.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Các thiết bị liên kết";
@@ -400,7 +400,7 @@
 "accountPage.generatingPin" = "Generating PIN code…";
 "accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "On another device";
-"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Cài đặt và khởi động Jami. Chọn “Nhập từ thiết bị khác” và quét mã QR. Hoặc, nhập mã PIN thủ công.";
 "accountPage.pinError" = "An error occurred while generating the PIN code.";
 "accountPage.notificationTitle" = "Thông báo";
 "accountPage.notificationError" = "Notifications for Jami are disabled. Enable it in device settings in order to use this feature.";
@@ -447,13 +447,13 @@
 "account.createSipAccount" = "Configure SIP Account";
 "account.sipAccount" = "SIP Account";
 "account.configure" = "Configure";
-"account.advancedFeatures" = "Advanced Features";
+"account.advancedFeatures" = "Tính năng nâng cao";
 "account.serverLabel" = "Nhập địa chỉ";
 "account.portLabel" = "Nhập số cổng";
 "account.accountStatus" = "Tình trạng tài khoản";
 "account.enableAccount" = "Khả năng tài khoản";
-"account.statusOnline" = "Trên mạng";
-"account.statusOffline" = "Không liên kết";
+"account.statusOnline" = "Online";
+"account.statusOffline" = "Offline";
 "account.statusConnecting" = "Kết nối";
 "account.statusUnknown" = "Không biết";
 "account.statusConnectionerror" = "Hầm kết nối";
@@ -466,7 +466,7 @@
 // Link New Device
 "linkDevice.title" = "Kết nối thiết bị mới";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
+"linkDevice.errorWrongPassword" = "Có lỗi xác thực trong quá trình kết nối thiết bị. Vui lòng kiểm tra danh tính và thử lại.";
 "linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
 "linkDevice.errorTimeout" = "The operation timed out. Please try again.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
@@ -545,7 +545,7 @@
 "logView.startLogging" = "Start logging";
 "logView.stopLogging" = "Ngừng khai thác";
 "logView.saveError" = "An error occurred while saving the file.";
-"logView.shareError" = "An error occurred while sharing the file.";
+"logView.shareError" = "Xảy ra lỗi khi chia sẻ tệp.";
 
 // Migrate Account
 "migrateAccount.title" = "Di chuyển tài khoản";
@@ -596,7 +596,7 @@
 "accessibility.conversationRowBlocked" = "Conversation blocked";
 "accessibility.conversationRowSyncing" = "Synchronization in progress";
 "accessibility.conversationRowLastMessage" = "Last message at %@";
-"accessibility.userPresenceOnline" = "Trên mạng";
+"accessibility.userPresenceOnline" = "Online";
 "accessibility.userPresenceAvailable" = "Available";
 "accessibility.pendingRequestsRowPlural" = "Invitations received: %@ pending invitations";
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
@@ -615,7 +615,7 @@
 "accessibility.text.sentOn" = "%1@, message sent on %2@";
 "accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.call.lasted" = "Đã gọi %@";
 "accessibility.calls.default.toggleAudio" = "Tắt tiếng micrô";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Tiếng gọi tạm dừng";
@@ -674,7 +674,7 @@
 "shareExtension.tryDifferentFilter" = "Try a different filter";
 "shareExtension.sendToConversation" = "Send to %d conversation";
 "shareExtension.sendToConversationsPlural" = "Send to %d conversations";
-"shareExtension.selectAccountTitle" = "Select account";
+"shareExtension.selectAccountTitle" = "Chọn tài khoản";
 "shareExtension.searchConversations" = "Search conversations";
 "shareExtension.accessibilitySelectConversation" = "Double-tap to select this conversation";
 "shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
