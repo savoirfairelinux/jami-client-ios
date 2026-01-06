@@ -68,6 +68,15 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     private let navigationController = UINavigationController()
     let injectionBag: InjectionBag
 
+    private enum InitialState {
+        case notStarted
+        case started
+        case readyToDispatch
+        case completed
+    }
+
+    private var initialState: InitialState = .notStarted
+
     init(injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
         self.stateSubject
@@ -89,12 +98,17 @@ final class AppCoordinator: Coordinator, StateableResponsive {
             .disposed(by: self.disposeBag)
     }
 
-    /// Starts the coordinator
     func start () {
-        // ~ By default, always present the initial loading at start
         self.stateSubject.onNext(AppState.initialLoading)
-        // ~ Dispatch to the proper screen
-        self.dispatchApplication()
+
+        switch self.initialState {
+        case .notStarted:
+            self.initialState = .started
+        case .readyToDispatch:
+            self.dispatchApplication()
+        case .started, .completed:
+            break
+        }
     }
 
     func migrateAccount(accountId: String) {
@@ -106,8 +120,21 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         self.present(viewController: viewController, withStyle: .replaceNavigationStack, withAnimation: true, withStateable: view.stateEmitter)
     }
 
-    /// Handles switching between the smart list, welcome screen, and account migration
-    private func dispatchApplication() {
+    func initialLoadingCompleted() {
+        switch self.initialState {
+        case .notStarted:
+            self.initialState = .readyToDispatch
+        case .started:
+            self.dispatchApplication()
+        case .readyToDispatch, .completed:
+            break
+        }
+    }
+
+    func dispatchApplication() {
+        if self.initialState == .completed { return }
+        self.initialState = .completed
+
         let accountService = injectionBag.accountService
         if accountService.accounts.isEmpty {
             self.stateSubject.onNext(AppState.needToOnboard(animated: true, isFirstAccount: true))
