@@ -437,6 +437,8 @@ class NotificationService: UNNotificationServiceExtension {
             self.adapterService.pushNotificationReceived(accountId: self.accountId, data: self.originalNotificationData)
         }
 
+        let accountJamiId = self.adapterService.getAccountJamiId(accountId: self.accountId)
+
         jamiTaskId = UUID().uuidString
         self.autoDispatchGroup.enter(id: jamiTaskId)
         self.adapterService.startAccountsWithListener(accountId: self.accountId, convId: convId, loadAll: loadAll) { [weak self] event, eventData in
@@ -450,10 +452,17 @@ class NotificationService: UNNotificationServiceExtension {
             switch event {
             case .message:
                 CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
+                if accountJamiId == eventData.jamiId {
+                    return
+                }
                 self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
                 self.configureAndPresentNotification(config: notifConfig, type: LocalNotificationType.message)
             case .fileTransferDone:
                 CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
+                if accountJamiId == eventData.jamiId {
+                    self.verifyTasksStatus()
+                    return
+                }
                 // If the content is a URL then we have already downloaded the file and can present the notification,
                 // otherwise we need to download the file first, so add it to the items to present
                 if let url = URL(string: eventData.content) {
@@ -467,14 +476,21 @@ class NotificationService: UNNotificationServiceExtension {
                 self.taskPropertyQueue.sync { self.syncCompleted = true }
                 self.verifyTasksStatus()
             case .fileTransferInProgress:
+                if accountJamiId == eventData.jamiId {
+                    return
+                }
                 self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
             case .invitation:
                 CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
                 self.taskPropertyQueue.sync {
                     self.syncCompleted = true
-                    self.itemsToPresent += 1
+                    if accountJamiId != eventData.jamiId {
+                        self.itemsToPresent += 1
+                    }
                 }
-                self.configureAndPresentNotification(config: notifConfig, type: LocalNotificationType.message)
+                if accountJamiId != eventData.jamiId {
+                    self.configureAndPresentNotification(config: notifConfig, type: LocalNotificationType.message)
+                }
             case .conversationCloned:
                 self.taskPropertyQueue.sync { self.waitForCloning = false }
                 self.verifyTasksStatus()
