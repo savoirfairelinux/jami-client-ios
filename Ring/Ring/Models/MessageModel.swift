@@ -176,6 +176,7 @@ public class MessageModel {
     var editions = Set<MessageAction>()
     var statusForParticipant = [String: MessageStatus]()
     var accessibilityLabelValue: String = ""
+    var tid: String = ""
     private let statusAccessLock = NSLock()
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
@@ -226,7 +227,7 @@ public class MessageModel {
         if let interactionId = info[MessageAttributes.interactionId.rawValue] {
             self.id = interactionId
         }
-        if let author = info[MessageAttributes.author.rawValue], author != localJamiId {
+        if let author = info[MessageAttributes.author.rawValue] {
             self.authorId = author
         }
         if let uri = info[MessageAttributes.uri.rawValue] {
@@ -245,7 +246,7 @@ public class MessageModel {
         if let react = info[MessageAttributes.react.rawValue] {
             self.react = react
         }
-        incoming = self.uri.isEmpty ? !self.authorId.isEmpty : self.uri != localJamiId
+        incoming = self.uri.isEmpty ? self.authorId.isEmpty ? true : self.authorId != localJamiId : self.uri != localJamiId
         if let parent = info[MessageAttributes.parent.rawValue] {
             self.parentId = parent
         }
@@ -343,6 +344,9 @@ public class MessageModel {
     }
 
     func isMessageDeleted() -> Bool {
+        if self.type == .fileTransfer {
+            return self.tid.isEmpty && !self.editions.isEmpty
+        }
         return self.content.isEmpty && !self.editions.isEmpty
     }
 

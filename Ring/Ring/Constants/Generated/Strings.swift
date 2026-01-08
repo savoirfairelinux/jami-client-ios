@@ -661,6 +661,8 @@ internal enum L10n {
     internal static let incomingRequest = L10n.tr("Localizable", "conversation.incomingRequest", fallback: "sent you a conversation invitation.")
     /// In reply to
     internal static let inReplyTo = L10n.tr("Localizable", "conversation.inReplyTo", fallback: "In reply to")
+    /// (deleted message)
+    internal static let lastMessageDeleted = L10n.tr("Localizable", "conversation.lastMessageDeleted", fallback: "(deleted message)")
     /// Write to
     internal static let messagePlaceholder = L10n.tr("Localizable", "conversation.messagePlaceholder", fallback: "Write to")
     /// %@ is not in the contact list

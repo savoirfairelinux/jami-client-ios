@@ -144,7 +144,7 @@ struct MessageBubbleWithEditionWrapper<Content: View>: View {
         VStack(alignment: .leading, spacing: messageEditedPadding) {
             content
 
-            if model.messageEdited {
+            if model.messageEdited && !model.messageDeleted {
                 editingIndicator()
             }
         }

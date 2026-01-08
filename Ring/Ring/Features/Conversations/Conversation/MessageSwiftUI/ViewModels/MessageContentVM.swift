@@ -199,16 +199,16 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         self.transferStatus = message.transferStatus
         self.preferencesColor = preferencesColor
         self.updateMessageStyle()
-        if self.type == .fileTransfer {
-            self.fileName = message.content
-            self.updateTransferInfo()
-        }
-        self.updateMessageEditions()
         self.fetchMetadata()
     }
 
     func setInfoState(state: PublishSubject<State>) {
         self.infoState = state
+        if self.type == .fileTransfer {
+            self.fileName = message.content
+            self.updateTransferInfo()
+        }
+        self.updateMessageEditions()
     }
 
     private func updateMessageStyle() {
@@ -487,6 +487,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             self.accessibilityLabelValue = self.message.accessibilityLabelValue
             if self.messageDeleted || self.messageEdited {
                 self.updateMessageStyle()
+            }
+
+            if self.message.isMessageDeleted() {
+                self.messageDeletedText = L10n.Conversation.deletedMessage(self.username)
             }
         }
         if self.message.isMessageDeleted() {

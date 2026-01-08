@@ -85,7 +85,6 @@ enum MessagePanelState: State {
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class MessagesListVM: ObservableObject, AvatarRelayProviding {
-
     // view properties
     var contextMenuModel = ContextMenuVM()
     @Published var messagesModels = [MessageContainerModel]()
@@ -135,6 +134,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     private let log = SwiftyBeaver.self
     var contactAvatar: UIImage = UIImage()
     var currentAccountAvatar: UIImage = UIImage()
+    var accountProfileName: String = ""
     var myContactsLocation: CLLocationCoordinate2D?
     var myCoordinate: CLLocationCoordinate2D?
     // jams
@@ -437,6 +437,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 } else {
                     self.currentAccountAvatar = defaultAvatar
                 }
+                self.accountProfileName = profile.alias ?? ""
                 self.updateCoordinatesList()
             })
             .disposed(by: self.disposeBag)
@@ -638,7 +639,11 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.lastMessageDate.accept(lastMessage.receivedDate.conversationTimestamp())
 
         if !lastMessage.type.isContact {
-            self.lastMessage.accept(lastMessage.content)
+            if lastMessage.isMessageDeleted() {
+                self.lastMessage.accept(L10n.Conversation.lastMessageDeleted)
+            } else {
+                self.lastMessage.accept(lastMessage.content)
+            }
         } else {
             // For contact messages, update when the display name is available.
             lastMessageContainer.contactViewModel.observableContent
@@ -1152,14 +1157,30 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     private func getName(jamiId: String, message: NameObserver, messageId: String) {
         if let name = self.names.get(key: jamiId) as? BehaviorRelay<String> {
             message.subscribeToNameObservable(name)
-        } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId, accountJamiId == jamiId {
-            message.subscribeToNameObservable(BehaviorRelay(value: L10n.Account.me))
+        } else if let account = self.accountService.getAccount(fromAccountId: conversation.accountId),
+                  account.jamiId == jamiId {
+            let bestName = self.accountProfileName.isEmpty ? resolveAccountName(from: account) : self.accountProfileName
+            let nameObservable = BehaviorRelay(value: bestName.withYourselfSuffix())
+            self.names.set(value: nameObservable, for: jamiId)
+            message.subscribeToNameObservable(nameObservable)
         } else {
             let nameObservable = BehaviorRelay(value: "")
             self.names.set(value: nameObservable, for: jamiId)
             message.subscribeToNameObservable(nameObservable)
             self.getInformationForContact(id: jamiId)
         }
+    }
+
+    private func resolveAccountName(from account: AccountModel) -> String {
+        if !account.registeredName.isEmpty {
+            return account.registeredName
+        }
+        if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+           let accountName = userNameData[account.id] as? String,
+           !accountName.isEmpty {
+            return accountName
+        }
+        return account.jamiId
     }
 
     private func getLastRead(message: MessageReadObserver, messageId: String) {
