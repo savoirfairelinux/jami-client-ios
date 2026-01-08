@@ -317,6 +317,9 @@ public class MessageModel {
         if let content = info[MessageAttributes.body.rawValue], self.type == .text {
             self.content = content
         }
+        if let tid = info[MessageAttributes.tid.rawValue] {
+            self.tid = tid
+        }
         if let timestamp = info[MessageAttributes.timestamp.rawValue],
            let timestampDouble = Double(timestamp) {
             let receivedDate = Date.init(timeIntervalSince1970: timestampDouble)

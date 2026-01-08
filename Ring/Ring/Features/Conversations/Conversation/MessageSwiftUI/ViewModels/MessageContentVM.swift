@@ -332,10 +332,16 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     private func fileTransferMenuItems() -> [ContextualMenuItem] {
+        var items: [ContextualMenuItem]
         if url != nil {
-            return [.reply, .save, .forward, .preview, .share]
+            items = [.reply, .save, .forward, .preview, .share]
+        } else {
+            items = [.reply, .forward, .preview, .share]
         }
-        return [.reply, .forward, .preview, .share]
+        if !isIncoming {
+            items += [.deleteMessage]
+        }
+        return items
     }
 
     // MARK: file transfer
@@ -648,7 +654,7 @@ extension MessageContentVM {
     }
 
     func delete() {
-        if self.message.type == .text {
+        if self.message.type == .text || self.message.type == .fileTransfer {
             self.contextMenuState.onNext(ContextMenu.delete(message: self))
         }
     }

@@ -938,7 +938,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         DispatchQueue.global(qos: .userInitiated).async { [weak self, weak message] in
             guard let self = self, let message = message else { return }
             guard let container = self.getMessage(messageId: message.message.id) else { return }
-            if container.message.type == .text {
+            if container.message.type == .text || container.message.type == .fileTransfer {
                 self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: message.message.id)
             }
         }
