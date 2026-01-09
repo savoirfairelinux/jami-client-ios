@@ -161,12 +161,106 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         }
     }
 
-    func getURL() -> URL? {
-        var withPrefix = content
-        if !withPrefix.hasPrefix("http://") && !withPrefix.hasPrefix("https://") {
-            withPrefix = "http://" + withPrefix
+    private struct URLInfo {
+        let trimmedContent: String
+        let originalContent: String
+        let isFullURL: Bool
+        let parsedURL: URL?
+        let hasInlineLinks: Bool
+        let inlineLinkMatches: [NSTextCheckingResult]
+
+        init(content: String) {
+            self.originalContent = content
+            let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.trimmedContent = trimmed
+
+            guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else {
+                self.isFullURL = false
+                self.parsedURL = nil
+                self.hasInlineLinks = false
+                self.inlineLinkMatches = []
+                return
+            }
+
+            let matches = detector.matches(in: trimmed, options: [], range: NSRange(location: 0, length: trimmed.utf16.count))
+
+            // Check if entire content is a single URL
+            if let firstMatch = matches.first,
+               matches.count == 1,
+               firstMatch.range.length == trimmed.utf16.count {
+                self.isFullURL = true
+                // Try direct URL creation first, then with http:// prefix
+                if let url = URL(string: trimmed) {
+                    self.parsedURL = url
+                } else if !trimmed.hasPrefix("http://") && !trimmed.hasPrefix("https://") {
+                    self.parsedURL = URL(string: "http://" + trimmed)
+                } else {
+                    self.parsedURL = nil
+                }
+                self.hasInlineLinks = false
+                self.inlineLinkMatches = []
+            } else {
+                self.isFullURL = false
+                self.parsedURL = nil
+                let filteredMatches = matches.filter { match in
+                    guard let range = Range(match.range, in: trimmed) else { return false }
+                    let text = String(trimmed[range]).lowercased()
+                    return text.hasPrefix("http://") || text.hasPrefix("https://") || text.hasPrefix("www.")
+                }
+                self.hasInlineLinks = !filteredMatches.isEmpty
+                self.inlineLinkMatches = filteredMatches
+            }
         }
-        return URL(string: withPrefix)
+
+        @available(iOS 15.0, *)
+        func attributedStringWithInlineLinks(linkColor: UIColor) -> AttributedString? {
+            guard hasInlineLinks else { return nil }
+
+            var attributedString = AttributedString(originalContent)
+            for match in inlineLinkMatches {
+                guard let range = Range(match.range, in: originalContent),
+                      let url = match.url,
+                      let attributedRange = Range(range, in: attributedString) else { continue }
+
+                attributedString[attributedRange].link = url
+                attributedString[attributedRange].foregroundColor = Color(linkColor)
+                attributedString[attributedRange].underlineStyle = .single
+            }
+            return attributedString
+        }
+    }
+
+    private var cachedURLInfo: URLInfo?
+    private var lastContentForURLInfo: String = ""
+
+    /// Returns cached URL info, recomputing only when content changes.
+    private var urlInfo: URLInfo {
+        if let cached = cachedURLInfo, lastContentForURLInfo == content {
+            return cached
+        }
+        let info = URLInfo(content: content)
+        cachedURLInfo = info
+        lastContentForURLInfo = content
+        return info
+    }
+
+    var isFullURL: Bool {
+        return urlInfo.isFullURL
+    }
+
+    func getURL() -> URL? {
+        return urlInfo.parsedURL
+    }
+
+    var linkColor: UIColor {
+        let backgroundIsLight = backgroundColor.isLight(threshold: 0.8) ?? true
+        return backgroundIsLight ? .systemBlue : .white
+    }
+
+    /// Attributed content for inline links (nil if no inline links, full URL, or iOS < 15)
+    var attributedContent: Any? {
+        guard #available(iOS 15.0, *), !isFullURL, urlInfo.hasInlineLinks else { return nil }
+        return urlInfo.attributedStringWithInlineLinks(linkColor: linkColor)
     }
 
     @Published var username = "" {
@@ -286,13 +380,11 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     private func isLink() -> Bool {
-        return self.type == .text &&
-            self.content.isValidURL &&
-            URL(string: self.content) != nil
+        return self.type == .text && urlInfo.isFullURL && urlInfo.parsedURL != nil
     }
 
     private func fetchMetadata() {
-        guard self.type == .text, self.content.isValidURL, let url = URL(string: self.content) else { return }
+        guard self.type == .text, let url = urlInfo.parsedURL, urlInfo.isFullURL else { return }
         self.updateTextColor()
         LPMetadataProvider().startFetchingMetadata(for: url) {(metaDataObj, error) in
             DispatchQueue.main.async { [weak self, weak metaDataObj] in

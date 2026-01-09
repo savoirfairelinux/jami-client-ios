@@ -97,7 +97,7 @@ struct MessageBubbleView: View {
                 URLPreview(metadata: metadata, maxDimension: model.maxDimension)
                     .modifier(MessageCornerRadius(model: model))
                     .modifier(MessageLongPress(longPressCb: receivedLongPress()))
-            } else if model.content.isValidURL, let url = model.getURL() {
+            } else if model.isFullURL, let url = model.getURL() {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.content)
                         .font(model.styling.textFont)
@@ -107,17 +107,30 @@ struct MessageBubbleView: View {
                         }
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
-            } else {
+            } else if #available(iOS 15.0, *),
+                      let attributed = model.attributedContent as? AttributedString {
                 MessageBubbleWithEditionWrapper(model: model) {
-                    Text(model.content)
+                    Text(attributed)
                         .font(model.styling.textFont)
                         .lineLimit(nil)
-                        .onTapGesture {
-                            // Add an empty onTapGesture to keep the table view scrolling smooth
-                        }
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
+            } else {
+                renderPlainText()
             }
+        }
+    }
+
+    @ViewBuilder
+    private func renderPlainText() -> some View {
+        MessageBubbleWithEditionWrapper(model: model) {
+            Text(model.content)
+                .font(model.styling.textFont)
+                .lineLimit(nil)
+                .onTapGesture {
+                    // Add an empty onTapGesture to keep the table view scrolling smooth
+                }
+                .modifier(MessageLongPress(longPressCb: receivedLongPress()))
         }
     }
 
