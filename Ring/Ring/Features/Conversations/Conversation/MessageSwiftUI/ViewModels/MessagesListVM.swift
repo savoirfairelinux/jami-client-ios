@@ -445,6 +445,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     func subscribeReplyTarget() {
         self.conversationService.replyTargets
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] targets in
                 guard let self = self else { return }
                 for target in targets {

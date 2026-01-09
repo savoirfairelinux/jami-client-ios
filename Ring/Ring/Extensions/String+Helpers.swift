@@ -1,9 +1,5 @@
 /*
- *  Copyright (C) 2016-2018 Savoir-faire Linux Inc.
- *
- *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
- *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
- *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Copyright (C) 2016-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -71,20 +67,6 @@ extension String {
             return res.resultType == .phoneNumber &&
                 res.range.location == 0 &&
                 res.range.length == self.count
-        } catch {
-            return false
-        }
-    }
-
-    var isValidURL: Bool {
-        do {
-            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-            if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
-                // it is a link, if the match covers the whole string
-                return match.range.length == self.utf16.count
-            } else {
-                return false
-            }
         } catch {
             return false
         }
