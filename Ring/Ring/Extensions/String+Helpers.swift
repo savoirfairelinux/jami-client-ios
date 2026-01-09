@@ -23,6 +23,7 @@
 import Foundation
 import MobileCoreServices
 import CoreImage.CIFilterBuiltins
+import SwiftUI
 
 extension String {
     func createResizedImage(targetSize: CGFloat) -> UIImage? {
@@ -88,6 +89,33 @@ extension String {
         } catch {
             return false
         }
+    }
+
+    @available(iOS 15.0, *)
+    func attributedStringWithLinks(linkColor: UIColor) -> AttributedString? {
+        guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else { return nil }
+
+        let matches = detector.matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
+            .filter { match in
+                guard let range = Range(match.range, in: self) else { return false }
+                let text = String(self[range]).lowercased()
+                return text.hasPrefix("http://") || text.hasPrefix("https://") || text.hasPrefix("www.")
+            }
+
+        guard !matches.isEmpty else { return nil }
+
+        var attributedString = AttributedString(self)
+        for match in matches {
+            guard let range = Range(match.range, in: self),
+                  let url = match.url,
+                  let attributedRange = Range(range, in: attributedString) else { continue }
+
+            attributedString[attributedRange].link = url
+            attributedString[attributedRange].foregroundColor = Color(linkColor)
+            attributedString[attributedRange].underlineStyle = .single
+        }
+
+        return attributedString
     }
 
     func toMD5HexString() -> String {
