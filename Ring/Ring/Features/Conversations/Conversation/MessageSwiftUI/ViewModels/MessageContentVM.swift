@@ -161,8 +161,30 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         }
     }
 
+    private var trimmedContent: String {
+        return content.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    var isFullURL: Bool {
+        return trimmedContent.isValidURL
+    }
+
+    var hasInlineLinks: Bool {
+        return !isFullURL && trimmedContent.containsURL
+    }
+
+    var linkColor: UIColor {
+        let backgroundIsLight = backgroundColor.isLight(threshold: 0.8) ?? true
+        return backgroundIsLight ? .systemBlue : .white
+    }
+
+    @available(iOS 15.0, *)
+    var attributedContent: AttributedString {
+        return content.attributedStringWithLinks(linkColor: linkColor)
+    }
+
     func getURL() -> URL? {
-        var withPrefix = content
+        var withPrefix = trimmedContent
         if !withPrefix.hasPrefix("http://") && !withPrefix.hasPrefix("https://") {
             withPrefix = "http://" + withPrefix
         }
@@ -287,12 +309,12 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
 
     private func isLink() -> Bool {
         return self.type == .text &&
-            self.content.isValidURL &&
-            URL(string: self.content) != nil
+            trimmedContent.isValidURL &&
+            URL(string: trimmedContent) != nil
     }
 
     private func fetchMetadata() {
-        guard self.type == .text, self.content.isValidURL, let url = URL(string: self.content) else { return }
+        guard self.type == .text, trimmedContent.isValidURL, let url = URL(string: trimmedContent) else { return }
         self.updateTextColor()
         LPMetadataProvider().startFetchingMetadata(for: url) {(metaDataObj, error) in
             DispatchQueue.main.async { [weak self, weak metaDataObj] in

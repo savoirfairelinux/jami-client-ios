@@ -23,6 +23,7 @@
 import Foundation
 import MobileCoreServices
 import CoreImage.CIFilterBuiltins
+import SwiftUI
 
 extension String {
     func createResizedImage(targetSize: CGFloat) -> UIImage? {
@@ -88,6 +89,50 @@ extension String {
         } catch {
             return false
         }
+    }
+
+    var containsURL: Bool {
+        do {
+            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+            let matches = detector.matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
+            return matches.contains { match in
+                guard let range = Range(match.range, in: self) else { return false }
+                let matchedText = String(self[range]).lowercased()
+                return matchedText.hasPrefix("http://") ||
+                       matchedText.hasPrefix("https://") ||
+                       matchedText.hasPrefix("www.")
+            }
+        } catch {
+            return false
+        }
+    }
+
+    @available(iOS 15.0, *)
+    func attributedStringWithLinks(linkColor: UIColor) -> AttributedString {
+        var attributedString = AttributedString(self)
+
+        do {
+            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+            let matches = detector.matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
+
+            for match in matches {
+                guard let range = Range(match.range, in: self),
+                      let url = match.url,
+                      let attributedRange = Range(range, in: attributedString) else { continue }
+
+                let matchedText = String(self[range]).lowercased()
+                guard matchedText.hasPrefix("http://") ||
+                      matchedText.hasPrefix("https://") ||
+                      matchedText.hasPrefix("www.") else { continue }
+
+                attributedString[attributedRange].link = url
+                attributedString[attributedRange].foregroundColor = Color(linkColor)
+                attributedString[attributedRange].underlineStyle = .single
+            }
+        } catch {
+        }
+
+        return attributedString
     }
 
     func toMD5HexString() -> String {

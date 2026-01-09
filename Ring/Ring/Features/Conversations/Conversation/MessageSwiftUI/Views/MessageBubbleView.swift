@@ -97,7 +97,7 @@ struct MessageBubbleView: View {
                 URLPreview(metadata: metadata, maxDimension: model.maxDimension)
                     .modifier(MessageCornerRadius(model: model))
                     .modifier(MessageLongPress(longPressCb: receivedLongPress()))
-            } else if model.content.isValidURL, let url = model.getURL() {
+            } else if model.isFullURL, let url = model.getURL() {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.content)
                         .font(model.styling.textFont)
@@ -107,17 +107,33 @@ struct MessageBubbleView: View {
                         }
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
-            } else {
-                MessageBubbleWithEditionWrapper(model: model) {
-                    Text(model.content)
-                        .font(model.styling.textFont)
-                        .lineLimit(nil)
-                        .onTapGesture {
-                            // Add an empty onTapGesture to keep the table view scrolling smooth
-                        }
-                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+            } else if model.hasInlineLinks {
+                if #available(iOS 15.0, *) {
+                    MessageBubbleWithEditionWrapper(model: model) {
+                        Text(model.attributedContent)
+                            .font(model.styling.textFont)
+                            .lineLimit(nil)
+                            .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                    }
+                } else {
+                    renderPlainText()
                 }
+            } else {
+                renderPlainText()
             }
+        }
+    }
+
+    @ViewBuilder
+    private func renderPlainText() -> some View {
+        MessageBubbleWithEditionWrapper(model: model) {
+            Text(model.content)
+                .font(model.styling.textFont)
+                .lineLimit(nil)
+                .onTapGesture {
+                    // Add an empty onTapGesture to keep the table view scrolling smooth
+                }
+                .modifier(MessageLongPress(longPressCb: receivedLongPress()))
         }
     }
 
