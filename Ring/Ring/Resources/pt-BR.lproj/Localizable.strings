@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
-
+"conversation.lastMessageDeleted" = "(mensagem apagada)";
 
 // Invitations
 "invitations.noInvitations" = "Sem convites";

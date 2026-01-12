@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ dhe %2@ po shtypin";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ dhe %3@ të tjerë po shtypinng";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ dhe %3@ të tjerë po shtypin";
-
+"conversation.lastMessageDeleted" = "(mesazh i fshirë)";
 
 // Invitations
 "invitations.noInvitations" = "S’ka ftesa";
@@ -653,7 +653,7 @@
 "swarmColors.violet" = "Ngjyrë vjollcë";
 "swarmColors.indigoBlue" = "Blu indigo";
 "swarmColors.skyBlue" = "E kaltër";
-"swarmColors.cyan" = "Cyan";
+"swarmColors.cyan" = "Blu e gjelbër";
 "swarmColors.teal" = "Teal";
 "swarmColors.green" = "E gjelbër";
 "swarmColors.limeGreen" = "Lime green";

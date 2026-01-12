@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ ir %2@ rašo";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ ir dar %3@ rašo";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ ir dar %3@ rašo";
-
+"conversation.lastMessageDeleted" = "(deleted message)";
 
 // Invitations
 "invitations.noInvitations" = "Pakvietimų nėra";

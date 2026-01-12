@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ és %2@ éppen gépel";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ és %3@ további kapcsolattartó éppen gépel";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ és %3@ további kapcsolattartó éppen gépel";
-
+"conversation.lastMessageDeleted" = "(törölt üzenet)";
 
 // Invitations
 "invitations.noInvitations" = "Nincs meghívás";

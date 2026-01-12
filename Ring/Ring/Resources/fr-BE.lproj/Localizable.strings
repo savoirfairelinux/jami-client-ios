@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ et %2@ sont en train d'écrire…";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ et %3@ sont en train d'écrire…";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ et %3@ sont en train d'écrire…";
-
+"conversation.lastMessageDeleted" = "(message supprimé)";
 
 // Invitations
 "invitations.noInvitations" = "Aucune invitation";

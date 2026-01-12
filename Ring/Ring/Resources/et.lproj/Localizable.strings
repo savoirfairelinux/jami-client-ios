@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ ja %2@ kirjutavad";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ ja %3@ muu kasutaja kirjutavad";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ ja %3@ muud kasutajat kirjutavad";
-
+"conversation.lastMessageDeleted" = "(kustutatud sõnum)";
 
 // Invitations
 "invitations.noInvitations" = "Pole kutseid";

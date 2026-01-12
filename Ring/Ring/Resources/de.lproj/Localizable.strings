@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ und %2@ tippen";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ und %3@ andere tippen";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ und %3@ andere tippen";
-
+"conversation.lastMessageDeleted" = "(gelöschte Nachricht)";
 
 // Invitations
 "invitations.noInvitations" = "Keine Einladungen";
