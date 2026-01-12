@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ ja %2@ kirjoittavat";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ ja %3@ kirjoittavat";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@, %3@ ja muut kirjoittaa";
-
+"conversation.lastMessageDeleted" = "(poistettu viesti)";
 
 // Invitations
 "invitations.noInvitations" = "Ei kutsuja";

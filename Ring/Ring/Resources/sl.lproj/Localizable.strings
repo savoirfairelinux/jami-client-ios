@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@in %2@ pišeta";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ in %3@ drugi pišejo";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ in %3@ drugi pišejo";
-
+"conversation.lastMessageDeleted" = "(izbrisano sporočilo)";
 
 // Invitations
 "invitations.noInvitations" = "Ni povabil";

@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ și %2@ scriu";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ și %3@ altul scriu";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ și alți %3@ scriu";
-
+"conversation.lastMessageDeleted" = "(mesaj șters)";
 
 // Invitations
 "invitations.noInvitations" = "Nicio invitație";
