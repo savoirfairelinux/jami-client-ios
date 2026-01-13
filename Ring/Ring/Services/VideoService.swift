@@ -128,7 +128,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     func observeSystemPressureChanges(captureDevice: AVCaptureDevice) {
         // Restore normal framerate.
-        setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.high.rawValue, useRange: true)
+        setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.high.rawValue, useRange: false)
 
         // Observe system pressure.
         systemPressureObservation = captureDevice.observe(\.systemPressureState, options: .new) { [weak self, weak captureDevice] _, change in
@@ -137,7 +137,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
             switch systemPressureState {
             case .nominal:
-                self.setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.high.rawValue, useRange: true)
+                self.setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.high.rawValue, useRange: false)
             case .fair:
                 self.setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.medium.rawValue, useRange: false)
             case .serious, .critical:
@@ -160,18 +160,13 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         let formatDescription = captureDevice.activeFormat.formatDescription
         let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
-        var bestRate = 30.0
-        for vFormat in captureDevice.formats {
-            let ranges = vFormat.videoSupportedFrameRateRanges as [AVFrameRateRange]
-            let frameRates = ranges[0]
-            if frameRates.maxFrameRate > bestRate {
-                bestRate = frameRates.maxFrameRate
-            }
-        }
+
+        let captureRate = Int(Framerates.high.rawValue)
+
         let devInfo: DeviceInfo = ["format": "BGRA",
                                    "width": String(dimensions.width),
                                    "height": String(dimensions.height),
-                                   "rate": String(bestRate)]
+                                   "rate": String(captureRate)]
         return devInfo
     }
 
