@@ -128,9 +128,16 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     }
 
     func dispatchApplication() {
-        if self.initialState == .completed { return }
+        if self.initialState == .completed {
+            return
+        }
+
         self.initialState = .completed
 
+        self.checkAccounts()
+    }
+
+    private func checkAccounts() {
         let accountService = injectionBag.accountService
         if accountService.accounts.isEmpty {
             self.stateSubject.onNext(AppState.needToOnboard(animated: true, isFirstAccount: true))
@@ -176,7 +183,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
             .subscribe(onNext: { [weak self, weak walkthroughCoordinator] (_) in
                 walkthroughCoordinator?.stateSubject.dispose()
                 self?.removeChildCoordinator(childCoordinator: walkthroughCoordinator)
-                self?.dispatchApplication()
+                self?.checkAccounts()
             })
             .disposed(by: self.disposeBag)
     }
