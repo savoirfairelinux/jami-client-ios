@@ -204,55 +204,49 @@ do
   cd ../..
   echo "Building daemon"
 
-  CFLAGS="-arch $ARCH -isysroot $SDKROOT"
+  CMAKE_BUILD_DIR="$DAEMON_DIR/build-ios-$BUILD_DIR"
+  INSTALL_PREFIX="$IOS_TOP_DIR/DEPS/$BUILD_DIR"
+
   if [ "$IOS_TARGET_PLATFORM" = "iPhoneOS" ]
   then
-    CFLAGS+=" -miphoneos-version-min=$MIN_IOS_VERSION -fembed-bitcode"
+    SDK=iphoneos
+    DEPLOY_FLAG="-miphoneos-version-min=$MIN_IOS_VERSION"
+    BITCODE_FLAG="-fembed-bitcode"
   else
-    CFLAGS+=" -mios-simulator-version-min=$MIN_IOS_VERSION"
+    SDK=iphonesimulator
+    DEPLOY_FLAG="-mios-simulator-version-min=$MIN_IOS_VERSION"
+    BITCODE_FLAG=""
   fi
 
   if [ "$RELEASE" = "1" ]
   then
-    CFLAGS+=" -O3"
+    BUILD_TYPE="Release"
+  else
+    BUILD_TYPE="Debug"
   fi
 
-  CXXFLAGS="-stdlib=libc++ -std=c++17 $CFLAGS"
-  LDFLAGS="$CFLAGS"
+  # Ensure pkg-config finds contrib packages built earlier
+  export PKG_CONFIG_PATH="$CONTRIB_FOLDER/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-  ./autogen.sh || exit 1
-  mkdir -p "build-ios-$BUILD_DIR"
-  cd "build-ios-$BUILD_DIR"
+  cmake -S "$DAEMON_DIR" -B "$CMAKE_BUILD_DIR" \
+    -DCMAKE_SYSTEM_NAME=iOS \
+    -DCMAKE_OSX_SYSROOT="$SDKROOT" \
+    -DCMAKE_OSX_ARCHITECTURES="$ARCH" \
+    -DCMAKE_OSX_DEPLOYMENT_TARGET="$MIN_IOS_VERSION" \
+    -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" \
+    -DCMAKE_C_FLAGS="$DEPLOY_FLAG $BITCODE_FLAG" \
+    -DCMAKE_CXX_FLAGS="$DEPLOY_FLAG $BITCODE_FLAG" \
+    -DCMAKE_FIND_ROOT_PATH="$CONTRIB_FOLDER" \
+    -DCMAKE_PREFIX_PATH="$CONTRIB_FOLDER" \
+    -DBUILD_SHARED_LIBS=OFF \
+    -DBUILD_TESTING=OFF \
+    -DJAMI_DBUS=OFF \
+    -DJAMI_PLUGIN=OFF \
+    -DBUILD_CONTRIB=OFF \
+    -DCMAKE_BUILD_TYPE="$BUILD_TYPE" || exit 1
 
-  JAMI_CONF="--host=$HOST \
-             --without-dbus \
-             --disable-plugin \
-             --disable-libarchive \
-             --enable-static \
-             --without-natpmp \
-             --disable-shared \
-             --prefix=$IOS_TOP_DIR/DEPS/$BUILD_DIR \
-             --with-contrib=$CONTRIB_FOLDER"
-
-  if [ "$RELEASE" = "0" ]
-  then
-    JAMI_CONF+=" --enable-debug"
-  fi
-
-  "$DAEMON_DIR"/configure $JAMI_CONF \
-                        CC="$CC $CFLAGS" \
-                        CXX="$CXX $CXXFLAGS" \
-                        OBJCXX="$CXX $CXXFLAGS" \
-                        LD="$LD" \
-                        CFLAGS="$CFLAGS" \
-                        CXXFLAGS="$CXXFLAGS" \
-                        LDFLAGS="$LDFLAGS" || exit 1
-
-  # We need to copy this file or else it's just an empty file
-  rsync -a "$DAEMON_DIR/src/buildinfo.cpp" ./src/buildinfo.cpp
-
-  make -j"$NPROC" || exit 1
-  make install || exit 1
+  cmake --build "$CMAKE_BUILD_DIR" --parallel "$NPROC" || exit 1
+  cmake --install "$CMAKE_BUILD_DIR" || exit 1
 
   # Use the specified contrib folder for copying libraries and headers
   rsync -ar "$CONTRIB_FOLDER/lib/"*.a "$IOS_TOP_DIR/DEPS/$BUILD_DIR/lib/"
