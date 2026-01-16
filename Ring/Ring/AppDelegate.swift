@@ -134,6 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if UserDefaults.standard.value(forKey: automaticDownloadFilesKey) == nil {
             UserDefaults.standard.set(true, forKey: automaticDownloadFilesKey)
         }
+        UserDefaults.standard.setValue(true, forKey: "usingGroupConatiner")
         UNUserNotificationCenter.current().delegate = self
         // initialize log format
         let console = ConsoleDestination()
