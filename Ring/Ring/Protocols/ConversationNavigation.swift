@@ -197,13 +197,13 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         if self.tryPresentCallFromStack(call: call) {
             return
         }
-        if !dismissTopCallViewControllerIfNeeded() {
-            return
+        dismissTopCallViewControllerIfNeeded { [weak self] shouldPresent in
+            guard let self = self, shouldPresent else { return }
+            self.present(viewController: viewController,
+                         withStyle: .fadeInOverFullScreen,
+                         withAnimation: false,
+                         withStateable: viewController.viewModel)
         }
-        self.present(viewController: viewController,
-                     withStyle: .fadeInOverFullScreen,
-                     withAnimation: false,
-                     withStateable: viewController.viewModel)
     }
 
     func tryPresentCallFromStack(call: CallModel) -> Bool {
@@ -220,29 +220,31 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         return false
     }
 
-    func dismissTopCallViewControllerIfNeeded() -> Bool {
+    func dismissTopCallViewControllerIfNeeded(completion: ((Bool) -> Void)? = nil) {
         guard let topController = getTopController(),
               !topController.isKind(of: CallViewController.self) else {
-            return false
+            completion?(false)
+            return
         }
-        topController.dismiss(animated: false, completion: nil)
-        return true
+        topController.dismiss(animated: false) {
+            completion?(true)
+        }
     }
 
     func navigateToCall(call: CallModel) {
         if self.tryPresentCallFromStack(call: call) {
             return
         }
-        if !dismissTopCallViewControllerIfNeeded() {
-            return
+        dismissTopCallViewControllerIfNeeded { [weak self] shouldPresent in
+            guard let self = self, shouldPresent else { return }
+            let callViewController = CallViewController
+                .instantiate(with: self.injectionBag)
+            callViewController.viewModel.call = call
+            self.present(viewController: callViewController,
+                         withStyle: .fadeInOverFullScreen,
+                         withAnimation: false,
+                         withStateable: callViewController.viewModel)
         }
-        let callViewController = CallViewController
-            .instantiate(with: self.injectionBag)
-        callViewController.viewModel.call = call
-        self.present(viewController: callViewController,
-                     withStyle: .fadeInOverFullScreen,
-                     withAnimation: false,
-                     withStateable: callViewController.viewModel)
     }
 
     func dismissAllModals(completion: @escaping () -> Void) {
