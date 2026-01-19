@@ -231,21 +231,27 @@ class ConversationViewController: UIViewController,
     }
 
     private func showNoPermissionsAlert(title: String) {
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (_: UIAlertAction!) in }
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: L10n.Global.ok, style: .default) { (_: UIAlertAction!) in }
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
     // MARK: photo library
 
     private func presentBackgroundRecordingAlert() {
-        let alert = UIAlertController(title: nil, message: L10n.DataTransfer.recordInBackgroundWarning, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: { [weak self] _ in
-            UserDefaults.standard.setValue(true, forKey: fileRecordingLimitationInBackgroundKey)
-            self?.recordVideoFile()
-        }))
-        self.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: nil, message: L10n.DataTransfer.recordInBackgroundWarning, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: { [weak self] _ in
+                UserDefaults.standard.setValue(true, forKey: fileRecordingLimitationInBackgroundKey)
+                self?.recordVideoFile()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
     private func canRecordVideoFile() -> Bool {
@@ -299,7 +305,8 @@ class ConversationViewController: UIViewController,
                     if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
                         self.recordVideoFile()
                     } else {
-                        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) in
+                        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { [weak self] (granted: Bool) in
+                            guard let self = self else { return }
                             if granted == true {
                                 self.recordVideoFile()
                             } else {
