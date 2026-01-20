@@ -168,7 +168,6 @@
 		26001C342D78E1A2009A8E23 /* libx264.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF32D78E19B009A8E23 /* libx264.xcframework */; };
 		26001C362D78E1A2009A8E23 /* libpjsip-simple.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF42D78E19B009A8E23 /* libpjsip-simple.xcframework */; };
 		26001C382D78E1A2009A8E23 /* libopendht.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF52D78E19C009A8E23 /* libopendht.xcframework */; };
-		26001C3A2D78E1A3009A8E23 /* libjami.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF62D78E19C009A8E23 /* libjami.xcframework */; };
 		26001C3C2D78E1A3009A8E23 /* libpjmedia-audiodev.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF72D78E19C009A8E23 /* libpjmedia-audiodev.xcframework */; };
 		26001C3E2D78E1A3009A8E23 /* libpjlib-util.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF82D78E19C009A8E23 /* libpjlib-util.xcframework */; };
 		26001C402D78E1A3009A8E23 /* libargon2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF92D78E19C009A8E23 /* libargon2.xcframework */; };
@@ -207,7 +206,6 @@
 		26001C802D78E3E5009A8E23 /* libhogweed.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEC2D78E19A009A8E23 /* libhogweed.xcframework */; };
 		26001C822D78E3E5009A8E23 /* libhttp_parser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFB2D78E19C009A8E23 /* libhttp_parser.xcframework */; };
 		26001C842D78E3E5009A8E23 /* libixml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE92D78E19A009A8E23 /* libixml.xcframework */; };
-		26001C862D78E3E5009A8E23 /* libjami.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF62D78E19C009A8E23 /* libjami.xcframework */; };
 		26001C882D78E3E6009A8E23 /* libjsoncpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFE2D78E19D009A8E23 /* libjsoncpp.xcframework */; };
 		26001C8A2D78E3E6009A8E23 /* libllhttp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C0A2D78E1A1009A8E23 /* libllhttp.xcframework */; };
 		26001C8C2D78E3E6009A8E23 /* libnettle.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE22D78E199009A8E23 /* libnettle.xcframework */; };
@@ -283,6 +281,10 @@
 		261190B62A2928FB00CAE7F8 /* ParticipantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261190B52A2928FB00CAE7F8 /* ParticipantView.swift */; };
 		2617A1212C493BC5002CFD4A /* AccountsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617A1202C493BC5002CFD4A /* AccountsServiceTest.swift */; };
 		2617A1232C493FB7002CFD4A /* MockAccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617A1222C493FB7002CFD4A /* MockAccountsService.swift */; };
+		261A90842F1FF75C00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
+		261A90862F1FF77D00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
+		261A90892F1FF7AD00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
+		261A908A2F1FF7AD00438171 /* libjami-core.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		261E4EF229F8191300ABB37C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E4EF129F8191300ABB37C /* LoadingView.swift */; };
 		2625814E2B4DE40200314C42 /* MessagePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814D2B4DE40200314C42 /* MessagePanelView.swift */; };
 		262581502B4EF15D00314C42 /* MessagePanelVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */; };
@@ -483,7 +485,6 @@
 		3D0E69882DDCDBE70046FA3D /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E69872DDCDBE70046FA3D /* ShareView.swift */; };
 		3D1D839A2DE60E9B00D4BD9E /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D83992DE60E9B00D4BD9E /* ShareViewModel.swift */; };
 		3D3E68CB2DEF657200E6203F /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
-		3D4181742DDE2FEA001BAD76 /* libjami.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF62D78E19C009A8E23 /* libjami.xcframework */; settings = {ATTRIBUTES = (Required, ); }; };
 		3D4181752DDE3116001BAD76 /* libargon2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF92D78E19C009A8E23 /* libargon2.xcframework */; };
 		3D4181772DDE3119001BAD76 /* libavcodec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF12D78E19B009A8E23 /* libavcodec.xcframework */; };
 		3D4181792DDE311B001BAD76 /* libavdevice.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C072D78E1A0009A8E23 /* libavdevice.xcframework */; };
@@ -499,7 +500,6 @@
 		3D41818D2DDE3133001BAD76 /* libhogweed.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BEC2D78E19A009A8E23 /* libhogweed.xcframework */; };
 		3D41818F2DDE3136001BAD76 /* libhttp_parser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFB2D78E19C009A8E23 /* libhttp_parser.xcframework */; };
 		3D4181912DDE3138001BAD76 /* libixml.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE92D78E19A009A8E23 /* libixml.xcframework */; };
-		3D4181932DDE313B001BAD76 /* libjami.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BF62D78E19C009A8E23 /* libjami.xcframework */; };
 		3D4181952DDE313D001BAD76 /* libjsoncpp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BFE2D78E19D009A8E23 /* libjsoncpp.xcframework */; };
 		3D4181972DDE3140001BAD76 /* libllhttp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001C0A2D78E1A1009A8E23 /* libllhttp.xcframework */; };
 		3D4181992DDE3142001BAD76 /* libnatpmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F82D032D7A09AE00954A7B /* libnatpmp.xcframework */; };
@@ -658,6 +658,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		261A908B2F1FF7AD00438171 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				261A908A2F1FF7AD00438171 /* libjami-core.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		26A88C0C266FFFC800888EED /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -925,6 +936,7 @@
 		261190B52A2928FB00CAE7F8 /* ParticipantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantView.swift; sourceTree = "<group>"; };
 		2617A1202C493BC5002CFD4A /* AccountsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsServiceTest.swift; sourceTree = "<group>"; };
 		2617A1222C493FB7002CFD4A /* MockAccountsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountsService.swift; sourceTree = "<group>"; };
+		261A90832F1FF75B00438171 /* libjami-core.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libjami-core.xcframework"; path = "../xcframework/libjami-core.xcframework"; sourceTree = "<group>"; };
 		261E4EF129F8191300ABB37C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		2625814D2B4DE40200314C42 /* MessagePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePanelView.swift; sourceTree = "<group>"; };
 		2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePanelVM.swift; sourceTree = "<group>"; };
@@ -1875,7 +1887,6 @@
 				649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */,
 				26001C262D78E1A2009A8E23 /* libhogweed.xcframework in Frameworks */,
 				26001CCF2D79248E009A8E23 /* RxDataSources.xcframework in Frameworks */,
-				26001C3A2D78E1A3009A8E23 /* libjami.xcframework in Frameworks */,
 				6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */,
 				26001C1A2D78E1A1009A8E23 /* libavutil.xcframework in Frameworks */,
 				26001C1C2D78E1A1009A8E23 /* libpjsua2.xcframework in Frameworks */,
@@ -1883,6 +1894,7 @@
 				26001C202D78E1A2009A8E23 /* libixml.xcframework in Frameworks */,
 				44DFB3AC288704900023878C /* GSKStretchyHeaderView.xcframework in Frameworks */,
 				0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */,
+				261A90842F1FF75C00438171 /* libjami-core.xcframework in Frameworks */,
 				26001C1E2D78E1A2009A8E23 /* libpjnath.xcframework in Frameworks */,
 				0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */,
 				26001C482D78E1A3009A8E23 /* libdhtnet.xcframework in Frameworks */,
@@ -1966,6 +1978,7 @@
 				26001CAA2D78E3E7009A8E23 /* libsecp256k1.xcframework in Frameworks */,
 				26001C882D78E3E6009A8E23 /* libjsoncpp.xcframework in Frameworks */,
 				26001CC02D78E3E8009A8E23 /* libyuv.xcframework in Frameworks */,
+				261A90862F1FF77D00438171 /* libjami-core.xcframework in Frameworks */,
 				26BB43842670144800019CF6 /* libz.1.2.8.tbd in Frameworks */,
 				26001C942D78E3E6009A8E23 /* libpjlib-util.xcframework in Frameworks */,
 				26001CAC2D78E3E7009A8E23 /* libspeex.xcframework in Frameworks */,
@@ -1986,7 +1999,6 @@
 				26BB437E267013FB00019CF6 /* libz.1.2.11.tbd in Frameworks */,
 				26001C782D78E3E5009A8E23 /* libfmt.xcframework in Frameworks */,
 				26BB437D267013F600019CF6 /* libz.1.1.3.tbd in Frameworks */,
-				26001C862D78E3E5009A8E23 /* libjami.xcframework in Frameworks */,
 				26001CBC2D78E3E8009A8E23 /* libx264.xcframework in Frameworks */,
 				26001C6A2D78E3E5009A8E23 /* libavcodec.xcframework in Frameworks */,
 				26001C702D78E3E5009A8E23 /* libavformat.xcframework in Frameworks */,
@@ -2045,6 +2057,7 @@
 				3D41817D2DDE3120001BAD76 /* libavformat.xcframework in Frameworks */,
 				3D41819D2DDE3147001BAD76 /* libopendht.xcframework in Frameworks */,
 				3D4181AF2DDE315E001BAD76 /* libpjsip-simple.xcframework in Frameworks */,
+				261A90892F1FF7AD00438171 /* libjami-core.xcframework in Frameworks */,
 				26EFD7E62E2E9F6B00B63F74 /* VideoToolbox.framework in Frameworks */,
 				3D4181C92DDE317E001BAD76 /* libupnp.xcframework in Frameworks */,
 				3D4181B92DDE316A001BAD76 /* libsecp256k1.xcframework in Frameworks */,
@@ -2069,7 +2082,6 @@
 				3D4181CB2DDE3181001BAD76 /* libvpx.xcframework in Frameworks */,
 				3D4181812DDE3125001BAD76 /* libcrypto.xcframework in Frameworks */,
 				3D4181CF2DDE3186001BAD76 /* libyaml-cpp.xcframework in Frameworks */,
-				3D4181932DDE313B001BAD76 /* libjami.xcframework in Frameworks */,
 				3D4181A92DDE3156001BAD76 /* libpjmedia-videodev.xcframework in Frameworks */,
 				3D4181A52DDE3151001BAD76 /* libpjmedia-audiodev.xcframework in Frameworks */,
 				3D41817B2DDE311D001BAD76 /* libavfilter.xcframework in Frameworks */,
@@ -2079,7 +2091,6 @@
 				263289A42E16B965003D9DA8 /* Atomics in Frameworks */,
 				3D4181BF2DDE3172001BAD76 /* libsrtp.xcframework in Frameworks */,
 				3D41818B2DDE3131001BAD76 /* libgnutls.xcframework in Frameworks */,
-				3D4181742DDE2FEA001BAD76 /* libjami.xcframework in Frameworks */,
 				3D4181972DDE3140001BAD76 /* libllhttp.xcframework in Frameworks */,
 				3D4181832DDE3127001BAD76 /* libdhtnet.xcframework in Frameworks */,
 				3D4181C52DDE3179001BAD76 /* libswscale.xcframework in Frameworks */,
@@ -2113,6 +2124,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				261A90832F1FF75B00438171 /* libjami-core.xcframework */,
 				26B4C49A2EDD225400273727 /* libsimdutf.xcframework */,
 				3D417D992DDE2846001BAD76 /* ~libswiftPencilKit.tbd */,
 				3D417E4A2DDE2879001BAD76 /* Accelerate.framework */,
@@ -3974,6 +3986,7 @@
 				3D0E69732DDCD9C70046FA3D /* Sources */,
 				3D0E69742DDCD9C70046FA3D /* Frameworks */,
 				3D0E69752DDCD9C70046FA3D /* Resources */,
+				261A908B2F1FF7AD00438171 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4857,7 +4870,10 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4897,7 +4913,10 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4925,7 +4944,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4950,7 +4972,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -5090,7 +5115,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -5119,7 +5147,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -5190,7 +5221,10 @@
 					"DEBUG=1",
 					"OPENDHT_JSONCPP=1",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -5240,7 +5274,10 @@
 					"DEBUG=1",
 					"OPENDHT_JSONCPP=1",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -5290,7 +5327,10 @@
 					"$(inherited)",
 					"OPENDHT_JSONCPP=1",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -5334,7 +5374,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "OPENDHT_JSONCPP=1";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -5379,7 +5422,10 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = jamiShareExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = jamiShareExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
@@ -5433,7 +5479,10 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = jamiShareExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = jamiShareExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
@@ -5487,7 +5536,10 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = jamiShareExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = jamiShareExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
@@ -5542,7 +5594,10 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = jamiShareExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = jamiShareExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
@@ -5648,7 +5703,10 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = Ring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -5677,7 +5735,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../xcframework/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
