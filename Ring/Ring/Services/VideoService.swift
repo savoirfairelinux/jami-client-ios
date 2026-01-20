@@ -423,14 +423,22 @@ class VideoService: FrameExtractorDelegate {
 
     func setupInputs() {
         self.camera.permissionGrantedObservable
-            .subscribe(onNext: { granted in
-                if granted {
-                    self.enumerateVideoInputDevices()
-                }
+            .observe(on: ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .subscribe(onNext: { [weak self] granted in
+                guard let self = self, granted else { return }
+                self.enumerateVideoInputDevices()
             })
             .disposed(by: self.disposeBag)
         // Will trigger enumerateVideoInputDevices once permission is granted
         camera.checkPermission()
+    }
+
+    private func prepareInitialVideoAcceleration() {
+        // we want enable hardware acceleration by default so if key does not exists,
+        // means it was not disabled by user
+        let keyExists = UserDefaults.standard.object(forKey: hardareAccelerationKey) != nil
+        let enable = keyExists ? UserDefaults.standard.bool(forKey: hardareAccelerationKey) : true
+        self.setHardwareAccelerated(withState: enable)
     }
 
     func getVideoSource() -> String {
@@ -455,12 +463,7 @@ class VideoService: FrameExtractorDelegate {
                                         withDevInfo: mediumDevice)
             videoAdapter.addVideoDevice(withName: camera.highResolutionCamera,
                                         withDevInfo: highResolutionDevice)
-            let accelerated = self.videoAdapter.getEncodingAccelerated()
-            if accelerated {
-                self.videoAdapter.setDefaultDevice(camera.highResolutionCamera)
-            } else {
-                self.videoAdapter.setDefaultDevice(camera.mediumCamera)
-            }
+            self.prepareInitialVideoAcceleration()
             self.currentDeviceId = self.videoAdapter.getDefaultDevice()
         } catch let e as VideoError {
             self.log.error("An error occurred while capturing device enumeration: \(e)")
