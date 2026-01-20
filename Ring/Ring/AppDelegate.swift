@@ -188,7 +188,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         presenceService: self.presenceService)
         self.videoManager = VideoManager(with: self.callService, videoService: self.videoService)
 
-        prepareVideoAcceleration()
         prepareAccounts()
         self.voipRegistry.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(registerNotifications),
@@ -364,14 +363,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.callsProvider.stopAllUnhandeledCalls()
         self.cleanTestDataIfNeed()
         self.stopDaemon()
-    }
-
-    func prepareVideoAcceleration() {
-        // we want enable hardware acceleration by default so if key does not exists,
-        // means it was not disabled by user
-        let keyExists = UserDefaults.standard.object(forKey: hardareAccelerationKey) != nil
-        let enable = keyExists ? UserDefaults.standard.bool(forKey: hardareAccelerationKey) : true
-        self.videoService.setHardwareAccelerated(withState: enable)
     }
 
     // MARK: - Ring Daemon
