@@ -31,7 +31,6 @@ class SmartListViewPage {
     var backgroundCover: XCUIElement { app.otherElements[SmartListAccessibilityIdentifiers.backgroundCover] }
     var accountListView: XCUIElement { app.otherElements[SmartListAccessibilityIdentifiers.accountListView] }
     var menuButton: XCUIElement { app.images[SmartListAccessibilityIdentifiers.openMenuInSmartList] }
-    var overlay: XCUIElement { app.otherElements[SmartListAccessibilityIdentifiers.overlay] }
     var bookButton: XCUIElement { app.buttons[SmartListAccessibilityIdentifiers.bookButton] }
     var contactPicker: XCUIElement { app.buttons[SmartListAccessibilityIdentifiers.contactPicker] }
 }

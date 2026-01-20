@@ -66,7 +66,6 @@ struct SmartListView: View, StateEmittingView {
     @SwiftUI.State private var isSearchBarActive = false
     @SwiftUI.State private var showingPicker = false
     @SwiftUI.State private var isSharing = false
-    @SwiftUI.State private var isMenuOpen = false
     @SwiftUI.State private var isNavigatingToSettings = false
 
     let maxCoverBackgroundOpacity: CGFloat = 0.09
@@ -108,22 +107,10 @@ struct SmartListView: View, StateEmittingView {
         .onChange(of: isSearchBarActive) { _ in
             showAccountList = false
         }
-        .overlay(isMenuOpen ? makeOverlay() : nil)
-    }
-
-    func makeOverlay() -> some View {
-        return Color.white.opacity(0.001)
-            .ignoresSafeArea()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onTapGesture {
-                isMenuOpen = false
-            }
-            .accessibility(identifier: SmartListAccessibilityIdentifiers.overlay)
     }
 
     private var leadingBarItems: some View {
         Button(action: {
-            isMenuOpen = false
             toggleAccountList()
         }, label: {
             CurrentAccountButton(model: model.accountsModel)
@@ -197,7 +184,6 @@ struct SmartListView: View, StateEmittingView {
 
     private var bookButton: some View {
         Button(action: {
-            isMenuOpen = false
             showingPicker.toggle()
         }, label: {
             if let uiImage = UIImage(asset: Asset.phoneBook) {
@@ -210,7 +196,6 @@ struct SmartListView: View, StateEmittingView {
 
     private var diapladButton: some View {
         Button(action: { [weak stateEmitter] in
-            isMenuOpen = false
             guard let stateEmitter = stateEmitter else { return }
             stateEmitter.showDialpad()
         }, label: {
@@ -236,14 +221,10 @@ struct SmartListView: View, StateEmittingView {
                 .foregroundColor(Color.jamiColor)
                 .accessibility(identifier: SmartListAccessibilityIdentifiers.openMenuInSmartList)
         }
-        .onTapGesture {
-            isMenuOpen = true
-        }
     }
 
     private var composeButton: some View {
         Button(action: { [weak stateEmitter] in
-            isMenuOpen = false
             guard let stateEmitter = stateEmitter else { return }
             stateEmitter.openNewMessagesWindow()
         }, label: {
@@ -254,7 +235,6 @@ struct SmartListView: View, StateEmittingView {
 
     private var createSwarmButton: some View {
         Button(action: { [weak stateEmitter] in
-            isMenuOpen = false
             guard let stateEmitter = stateEmitter else { return }
             stateEmitter.createSwarm()
         }, label: {
@@ -270,15 +250,11 @@ struct SmartListView: View, StateEmittingView {
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(8)
-                .onTapGesture {
-                    isMenuOpen = false
-                }
         }
     }
 
     private var accountsButton: some View {
         Button(action: {
-            isMenuOpen = false
             toggleAccountList()
         }, label: {
             Label(L10n.Smartlist.accounts, systemImage: "list.bullet")
@@ -287,7 +263,6 @@ struct SmartListView: View, StateEmittingView {
 
     private var settingsButton: some View {
         Button(action: {[weak model, weak stateEmitter] in
-            isMenuOpen = false
             guard let model = model,
                   let stateEmitter = stateEmitter else { return }
             model.showAccount(publisher: stateEmitter)
@@ -298,7 +273,6 @@ struct SmartListView: View, StateEmittingView {
 
     private var supportButton: some View {
         Button(action: {[weak model] in
-            isMenuOpen = false
             guard let model = model else { return }
             model.donate()
         }, label: {
@@ -308,7 +282,6 @@ struct SmartListView: View, StateEmittingView {
 
     private var aboutJamiButton: some View {
         Button(action: {[weak stateEmitter] in
-            isMenuOpen = false
             guard let stateEmitter = stateEmitter else { return }
             stateEmitter.openAboutJami()
         }, label: {

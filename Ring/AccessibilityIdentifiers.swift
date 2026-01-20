@@ -41,7 +41,6 @@ struct SmartListAccessibilityIdentifiers {
     static let conversationView = "conversationView"
     static let backgroundCover = "backgroundCover"
     static let accountListView = "accountListView"
-    static let overlay = "overlay"
     static let bookButton = "bookButtonIdentifier"
     static let searchBarTextField = "searchBarTextField"
     static let contactPicker = "contactPicker"
