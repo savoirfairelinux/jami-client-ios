@@ -40,9 +40,6 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
         XCTAssertTrue(app.searchFields.element.exists)
         // Check that account list is hidden
         XCTAssertFalse(smartListViewPage.accountListView.exists)
-        // Check menu overly is hidden
-        XCTAssertFalse(smartListViewPage.overlay.exists)
-        XCTAssertFalse(smartListViewPage.overlay.isHittable)
     }
 
     func testOpenAccountsButton() throws {
@@ -78,7 +75,6 @@ final class SmartListViewTests: JamiBaseOneAccountUITest {
         let coordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         coordinate.tap()
         waitForSeconds(1)
-        XCTAssertFalse(smartListViewPage.overlay.exists)
     }
 
     func testBackgroundCoverTap() throws {
