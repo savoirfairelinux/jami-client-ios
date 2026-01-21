@@ -208,22 +208,30 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
 // MARK: - open conversation from notification
 extension AppCoordinator {
+
+    private var conversationsCoordinator: ConversationsCoordinator? {
+        return self.childCoordinators.first(where: { $0 is ConversationsCoordinator }) as? ConversationsCoordinator
+    }
+
     func openConversation(participantID: String, accountId: String) {
-        if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
-            conversationCoordinator.openConversationFromNotificationFor(participantId: participantID, accountId: accountId)
+        guard let conversationCoordinator = conversationsCoordinator else {
+            return
         }
+        conversationCoordinator.openConversationFromNotificationFor(participantId: participantID, accountId: accountId)
     }
 
     func joinCall(callURI: String, isAudioOnly: Bool) {
-        if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
-            conversationCoordinator.startOutgoingCall(contactRingId: callURI, userName: "", isAudioOnly: isAudioOnly)
+        guard let conversationCoordinator = conversationsCoordinator else {
+            return
         }
+        conversationCoordinator.startOutgoingCall(contactRingId: callURI, userName: "", isAudioOnly: isAudioOnly)
     }
 
     func openConversation(conversationId: String, accountId: String) {
-        if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
-            conversationCoordinator.openConversationFromNotification(conversationId: conversationId, accountId: accountId)
+        guard let conversationCoordinator = conversationsCoordinator else {
+            return
         }
+        conversationCoordinator.openConversationFromNotification(conversationId: conversationId, accountId: accountId)
     }
 }
 
