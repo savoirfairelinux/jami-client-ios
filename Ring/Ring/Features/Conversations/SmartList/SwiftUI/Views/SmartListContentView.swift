@@ -96,8 +96,9 @@ struct SmartListContentView: View {
     }
 
     @ViewBuilder private var smartListTopView: some View {
-        if requestsModel.unreadRequests > 0 || model.connectionState == .none {
-            VStack {
+        VStack(spacing: 10) {
+            autoMessageControls
+            if requestsModel.unreadRequests > 0 || model.connectionState == .none {
                 if model.connectionState == .none {
                     networkSettingsButton()
                 }
@@ -108,9 +109,83 @@ struct SmartListContentView: View {
                         }
                 }
             }
-            .padding(.bottom)
-            .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 5, trailing: 15))
-            .hideRowSeparator()
+        }
+        .padding(.bottom)
+        .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 5, trailing: 15))
+        .hideRowSeparator()
+    }
+
+    @ViewBuilder private var autoMessageControls: some View {
+        HStack(spacing: 10) {
+            Menu {
+                ForEach(model.filteredConversations.prefix(10), id: \.id) { conversation in
+                    Button(action: {
+                        let conversationId = conversation.conversation.id.isEmpty
+                            ? (conversation.conversation.getParticipants().first?.jamiId ?? "")
+                            : conversation.conversation.id
+                        model.autoMessageConversationId = conversationId
+                        model.autoMessageAccountId = conversation.conversation.accountId
+                    }, label: {
+                        HStack {
+                            Text(conversation.name)
+                            let currentId = conversation.conversation.id.isEmpty
+                                ? (conversation.conversation.getParticipants().first?.jamiId ?? "")
+                                : conversation.conversation.id
+                            if model.autoMessageConversationId == currentId {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    })
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "message")
+                    Text(model.autoMessageConversationId == nil ? "Select" : "Selected")
+                        .font(.callout)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(Color.jamiTertiaryControl)
+                .cornerRadius(8)
+            }
+
+            Button(action: {
+                if model.autoMessageIsRunning {
+                    model.stopAutoMessage()
+                } else {
+                    guard let conversationId = model.autoMessageConversationId,
+                          let accountId = model.autoMessageAccountId else { return }
+                    model.startAutoMessage(conversationId: conversationId, accountId: accountId)
+                }
+            }, label: {
+                HStack {
+                    Image(systemName: model.autoMessageIsRunning ? "stop.circle.fill" : "play.circle.fill")
+                    Text(model.autoMessageIsRunning ? "Stop" : "Start")
+                        .font(.callout)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(model.autoMessageIsRunning ? Color.red.opacity(0.2) : Color.green.opacity(0.2))
+                .foregroundColor(model.autoMessageIsRunning ? .red : .green)
+                .cornerRadius(8)
+            })
+            .disabled(model.autoMessageConversationId == nil)
+
+            Button(action: {
+                model.sendAutoMessageNow()
+            }, label: {
+                HStack {
+                    Image(systemName: "paperplane.fill")
+                    Text("Send")
+                        .font(.callout)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(Color.jamiColor.opacity(0.2))
+                .foregroundColor(.jamiColor)
+                .cornerRadius(8)
+            })
+            .disabled(model.autoMessageConversationId == nil)
         }
     }
 

@@ -117,6 +117,11 @@ class ConversationsViewModel: ObservableObject {
 
     let stateEmitter: ConversationStatePublisher
 
+    @Published var autoMessageConversationId: String?
+    @Published var autoMessageAccountId: String?
+    @Published var autoMessageIsRunning: Bool = false
+    private var autoMessageTimer: Timer?
+
     required init(with injectionBag: InjectionBag, conversationsSource: ConversationDataSource, stateEmitter: ConversationStatePublisher) {
         self.injectionBag = injectionBag
         self.conversationsService = injectionBag.conversationsService
@@ -469,6 +474,45 @@ class ConversationsViewModel: ObservableObject {
         conversationsSource.conversationViewModels.forEach { conversationModel in
             conversationModel.closeAllPlayers()
         }
+    }
+
+    func startAutoMessage(conversationId: String, accountId: String) {
+        stopAutoMessage()
+        autoMessageConversationId = conversationId
+        autoMessageAccountId = accountId
+        autoMessageIsRunning = true
+        sendAutoMessage()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.autoMessageTimer = Timer.scheduledTimer(withTimeInterval: 30 * 60, repeats: true) { [weak self] _ in
+                self?.sendAutoMessage()
+            }
+            if let timer = self.autoMessageTimer {
+                RunLoop.current.add(timer, forMode: .common)
+            }
+        }
+    }
+
+    func stopAutoMessage() {
+        autoMessageTimer?.invalidate()
+        autoMessageTimer = nil
+        autoMessageIsRunning = false
+    }
+
+    func sendAutoMessageNow() {
+        sendAutoMessage()
+    }
+
+    private func sendAutoMessage() {
+        guard let conversationId = autoMessageConversationId,
+              let accountId = autoMessageAccountId else { return }
+
+        let messages = ["Hello! 👋", "How are you?", "Hope you're well!", "Just checking in! 😊", "Have a great day!"]
+        let messageContent = messages.randomElement() ?? "Hello!"
+        
+        print("[AutoMessage] Sending message to conversationId: \(conversationId), accountId: \(accountId), content: \(messageContent)")
+        
+        conversationsService.sendSwarmMessage(conversationId: conversationId, accountId: accountId, message: messageContent, parentId: "")
     }
 }
 // swiftlint:enable type_body_length
