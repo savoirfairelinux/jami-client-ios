@@ -565,6 +565,8 @@ internal enum L10n {
     internal static let recordAudioMessage = L10n.tr("Localizable", "alerts.recordAudioMessage", fallback: "Record audio message")
     /// Record video message
     internal static let recordVideoMessage = L10n.tr("Localizable", "alerts.recordVideoMessage", fallback: "Record video message")
+    /// Send photo
+    internal static let sendPhoto = L10n.tr("Localizable", "alerts.sendPhoto", fallback: "Send photo")
     /// Send file
     internal static let uploadFile = L10n.tr("Localizable", "alerts.uploadFile", fallback: "Send file")
     /// Open gallery

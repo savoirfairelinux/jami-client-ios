@@ -67,13 +67,14 @@ struct UITextViewWrapper: UIViewRepresentable {
         textView.isScrollEnabled = true
         textView.textAlignment = .left
         textView.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .callout).pointSize)
-        textView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        textView.textContainerInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         if withBackground {
-            textView.backgroundColor = UIColor.secondarySystemBackground
-            textView.layer.cornerRadius = 18
+            textView.backgroundColor = .clear
+            textView.layer.cornerRadius = 0
         }
         textView.clipsToBounds = true
         textView.delegate = context.coordinator
+
         return textView
     }
 

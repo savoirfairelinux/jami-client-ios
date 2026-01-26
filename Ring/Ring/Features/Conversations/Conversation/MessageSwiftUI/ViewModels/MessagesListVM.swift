@@ -57,7 +57,7 @@ enum MessagePanelState: State {
         case .sendFile:
             return L10n.Alerts.uploadFile
         case .sendPhoto:
-            return "send photo"
+            return L10n.Alerts.sendPhoto
         default:
             return ""
         }
@@ -75,6 +75,8 @@ enum MessagePanelState: State {
             return "camera"
         case .sendFile:
             return "doc"
+        case .sendPhoto:
+            return "camera"
         default:
             return ""
         }
