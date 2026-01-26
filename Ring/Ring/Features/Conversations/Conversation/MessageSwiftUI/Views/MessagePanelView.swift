@@ -126,7 +126,7 @@ struct MessagePanelView: View {
     @StateObject var model: MessagePanelVM
     @Binding var isFocused: Bool
     @SwiftUI.State private var text: String = ""
-    @SwiftUI.State private var textHeight: CGFloat = 0
+    @SwiftUI.State private var textHeight: CGFloat = 42
     let padding: CGFloat = 10
     let defaultControlSize: CGFloat = 42
 
@@ -150,8 +150,85 @@ struct MessagePanelView: View {
         }
     }
 
+    @ViewBuilder
+    private func moreActionsButton() -> some View {
+        Menu(content: menuContent, label: {
+            Group {
+                if #available(iOS 26.0, *) {
+                    Image(systemName: "plus")
+                        .font(.system(size: 22, weight: .light))
+                        .foregroundColor(model.styling.secondaryTextColor)
+                        .frame(width: defaultControlSize, height: defaultControlSize)
+                        .glassEffect(in: .circle)
+                } else {
+                    ZStack {
+                        VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false)
+                        Image(systemName: "plus")
+                            .font(.system(size: 22, weight: .light))
+                            .foregroundColor(model.styling.secondaryTextColor)
+                    }
+                    .frame(width: defaultControlSize, height: defaultControlSize)
+                    .clipShape(Circle())
+                    .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 1)
+                }
+            }
+        })
+        .accessibilityLabel(L10n.Accessibility.conversationShareMedia)
+        .accessibilityRemoveTraits(.isButton)
+    }
+
+    @ViewBuilder
+    private func messageTextField() -> some View {
+        Group {
+            if #available(iOS 26.0, *) {
+                UITextViewWrapper(withBackground: true, text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
+                    .frame(minHeight: textHeight, maxHeight: textHeight)
+                    .glassEffect(in: .capsule)
+            } else {
+                UITextViewWrapper(withBackground: true, text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
+                    .background(
+                        VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false)
+                            .clipShape(Capsule())
+                    )
+                    .frame(minHeight: textHeight, maxHeight: textHeight)
+                    .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 1)
+            }
+        }
+        .accessibilityLabel(L10n.Accessibility.conversationComposeMessage)
+        .placeholder(when: text.isEmpty, alignment: .leading) {
+            Text(model.placeholder)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 12)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .font(model.styling.textFont)
+                .foregroundColor(model.styling.secondaryTextColor)
+                .accessibilityHidden(true)
+        }
+        .onChange(of: text) { _ in
+            model.handleTyping(message: text)
+        }
+    }
+
+    @ViewBuilder
+    private func sendEmojiButton() -> some View {
+        Button(action: {
+            self.model.sendMessage(text: text)
+            cleanState()
+        }, label: {
+            if text.isEmpty {
+                Text(model.defaultEmoji)
+                    .font(.system(size: 30))
+                    .frame(width: defaultControlSize, height: defaultControlSize)
+            } else {
+                MessagePanelImageButton(model: model, systemName: "paperplane", width: defaultControlSize, height: defaultControlSize)
+            }
+        })
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: text.isEmpty)
+    }
+
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             if let message = model.messageToReply {
                 ReplyViewInMessagePanel(messageToReply: message, model: model)
             } else if let editMesage = model.messageToEdit {
@@ -160,63 +237,15 @@ struct MessagePanelView: View {
                         text = editMesage.content
                     }
             }
-            HStack(alignment: .bottom, spacing: 1) {
-                Menu(content: menuContent, label: {
-                    MessagePanelImageButton(model: model, systemName: "plus.circle", width: defaultControlSize, height: defaultControlSize)
-                })
-                .accessibilityLabel(L10n.Accessibility.conversationShareMedia)
-                .accessibilityRemoveTraits(.isButton)
 
-                Button(action: {
-                    self.model.sendPhoto()
-                }, label: {
-                    MessagePanelImageButton(model: model, systemName: "camera", width: 44, height: defaultControlSize)
-                })
-                .accessibilityHint(L10n.Accessibility.conversationCameraHint)
-
-                Spacer()
-                    .frame(width: 5)
-                UITextViewWrapper(withBackground: true, text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
-                    .frame(minHeight: textHeight, maxHeight: textHeight)
-                    .cornerRadius(18)
-                    .accessibilityLabel(L10n.Accessibility.conversationComposeMessage)
-                    .placeholder(when: text.isEmpty, alignment: .leading) {
-                        Text(model.placeholder)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
-                            .font(model.styling.textFont)
-                            .foregroundColor(model.styling.secondaryTextColor)
-                            .cornerRadius(18)
-                            .accessibilityHidden(true)
-                    }
-                    .onChange(of: text) { _ in
-                        model.handleTyping(message: text)
-                    }
-                Spacer()
-                    .frame(width: 10)
-                Button(action: {
-                    self.model.sendMessage(text: text)
-                    cleanState()
-                }, label: {
-                    if text.isEmpty {
-                        Text(model.defaultEmoji)
-                            .font(.system(size: 27))
-                            .frame(width: defaultControlSize, height: 40)
-                            .padding(.bottom, 2)
-                    } else {
-                        MessagePanelImageButton(model: model, systemName: "paperplane", width: defaultControlSize, height: defaultControlSize)
-                    }
-                })
-                .animation(.default, value: text.isEmpty)
+            HStack(alignment: .bottom, spacing: 8) {
+                moreActionsButton()
+                messageTextField()
+                sendEmojiButton()
             }
+            .padding(.horizontal, padding)
+            .padding(.vertical, padding)
         }
-        .padding(padding)
-        .background(
-            VisualEffect(style: .regular, withVibrancy: false)
-                .ignoresSafeArea(edges: [.leading, .trailing, .bottom])
-        )
         .onChange(of: model.isEdit) { _ in
             isFocused = model.isEdit
         }
@@ -249,6 +278,13 @@ struct MessagePanelView: View {
             }) {
                 Label(MessagePanelState.openGalery.toString(), systemImage: MessagePanelState.openGalery.imageName())
             }
+            Button(action: {
+                self.model.sendPhoto()
+            }, label: {
+                Label(MessagePanelState.sendPhoto.toString(), systemImage: MessagePanelState.sendPhoto.imageName())
+            })
+            .accessibilityHint(L10n.Accessibility.conversationCameraHint)
+
         }
     }
 
