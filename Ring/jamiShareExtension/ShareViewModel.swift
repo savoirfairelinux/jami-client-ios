@@ -239,7 +239,7 @@ class ShareViewModel: ObservableObject {
         )
     }
 
-    func sendFile(accountId: String, conversationId: String, filePath: URL, fileName: String, parentId: String? = nil) {
+    func sendFile(accountId: String, conversationId: String, filePath: URL? = nil, fileData: Data? = nil, fileName: String, parentId: String? = nil) {
         let key = NewStatusIndicator.makeKey(accountId: accountId, convid: conversationId, itemIdentifier: fileName)
 
         transmissionStatus[key] = NewStatusIndicator(
@@ -255,6 +255,7 @@ class ShareViewModel: ObservableObject {
             accountId: accountId,
             conversationId: conversationId,
             filePath: filePath,
+            fileData: fileData,
             fileName: fileName,
             parentId: parentId ?? ""
         )

@@ -155,13 +155,25 @@ struct ShareView: View {
             for provider in attachments {
                 var handled = false
 
-                for (type, handler) in supportedTypes {
-                    if provider.hasItemConformingToTypeIdentifier(type.identifier) {
-                        provider.loadItem(forTypeIdentifier: type.identifier, options: nil) { data, _ in
-                            handler(provider, data)
+                // Check if data is image
+                if provider.canLoadObject(ofClass: UIImage.self) && provider.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
+                    provider.loadObject(ofClass: UIImage.self) { [weak viewModel] object, error in
+                        guard let viewModel = viewModel else { return }
+
+                        if let image = object as? UIImage {
+                            self.handleUIImage(image: image, convoId: convoId, accountId: accountId, viewModel: viewModel)
+                            handled = true
                         }
-                        handled = true
-                        break
+                    }
+                } else {
+                    for (type, handler) in supportedTypes {
+                        if provider.hasItemConformingToTypeIdentifier(type.identifier) {
+                            provider.loadItem(forTypeIdentifier: type.identifier, options: nil) { data, _ in
+                                handler(provider, data)
+                            }
+                            handled = true
+                            break
+                        }
                     }
                 }
 
@@ -172,6 +184,19 @@ struct ShareView: View {
         }
 
         isSending = true
+    }
+
+    private func handleUIImage(image: UIImage, convoId: String, accountId: String, viewModel: ShareViewModel) {
+        // Convert UIImage to JPEG data and send directly
+        let fileName = "screenshot_\(UUID().uuidString).jpeg"
+
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            DispatchQueue.main.async {
+                self.showUnsupportedAlert = true
+            }
+            return
+        }
+        viewModel.sendFile(accountId: accountId, conversationId: convoId, fileData: imageData, fileName: fileName)
     }
 
     private func sendSelected() {

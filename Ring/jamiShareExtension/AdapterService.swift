@@ -226,38 +226,42 @@ public final class AdapterService: AdapterDelegate {
         self.adapter?.pushNotificationReceived("", message: notificationData)
     }
 
-    func sendSwarmFile(accountId: String, conversationId: String, filePath: URL, fileName: String, parentId: String) {
-        guard filePath.startAccessingSecurityScopedResource() else {
+    func sendSwarmFile(accountId: String, conversationId: String, filePath: URL?, fileData: Data?, fileName: String, parentId: String) {
+        guard let destinationURL = CommonHelpers.createFileUrlForSwarm(fileName: fileName, accountId: accountId, conversationId: conversationId) else {
             return
         }
-
-        defer {
-            filePath.stopAccessingSecurityScopedResource()
-        }
-
-        guard let duplicatedFilePath = CommonHelpers.createFileUrlForSwarm(fileName: fileName, accountId: accountId, conversationId: conversationId)?.path else {
-            return
-        }
-
-        let fileManager = FileManager.default
 
         do {
-            try fileManager.copyItem(at: filePath, to: URL(fileURLWithPath: duplicatedFilePath))
-            CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: conversationId)
-            if waitForAccountReady(accountId: accountId) {
-                NSLog("[ShareExtension] Account \(accountId) is ready, sending swarm file")
-                self.adapter?.sendSwarmFile(
-                    withName: fileName,
-                    accountId: accountId,
-                    conversationId: conversationId,
-                    withFilePath: duplicatedFilePath,
-                    parent: parentId
-                )
-                return
+            // Write file data or copy from source URL
+            if let fileData = fileData {
+                try fileData.write(to: destinationURL, options: .atomic)
+            } else if let filePath = filePath {
+                guard filePath.startAccessingSecurityScopedResource() else {
+                    return
+                }
+                defer {
+                    filePath.stopAccessingSecurityScopedResource()
+                }
+                try FileManager.default.copyItem(at: filePath, to: destinationURL)
             } else {
+                return
+            }
+
+            CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: conversationId)
+
+            guard waitForAccountReady(accountId: accountId) else {
                 NSLog("[ShareExtension] Failed to send swarm file - account \(accountId) not ready")
                 return
             }
+
+            NSLog("[ShareExtension] Account \(accountId) is ready, sending swarm file")
+            self.adapter?.sendSwarmFile(
+                withName: fileName,
+                accountId: accountId,
+                conversationId: conversationId,
+                withFilePath: destinationURL.path,
+                parent: parentId
+            )
 
         } catch {
             NSLog("[ShareExtension] sendSwarmFile failed with error: \(error.localizedDescription)")
