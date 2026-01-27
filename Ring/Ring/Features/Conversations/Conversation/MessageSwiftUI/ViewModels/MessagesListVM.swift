@@ -1036,9 +1036,11 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         let differentAuthor = message.authorId != secondMessage.authorId
         let isReplyCheck = message.isReply() || secondMessage.isReply()
         let hasReactions = !message.reactions.isEmpty || !secondMessage.reactions.isEmpty
+        let isEmojiOnlyMessage = (message.type == .text && message.content.containsOnlyEmoji && !message.isMessageDeleted() && !message.isMessageEdited()) ||
+                                 (secondMessage.type == .text && secondMessage.content.containsOnlyEmoji && !secondMessage.isMessageDeleted() && !secondMessage.isMessageEdited())
 
         return differentUri || messageTypeCheck || differentAuthor ||
-            isReplyCheck || hasReactions
+            isReplyCheck || hasReactions || isEmojiOnlyMessage
     }
 
     private func shouldDisplayContactInfo(message: MessageContainerModel) -> Bool {
