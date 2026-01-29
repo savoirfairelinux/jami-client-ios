@@ -81,6 +81,7 @@
 		0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E99F19F22417A0400CF8BD6 /* JamiURI.swift */; };
 		0EABD3852303600B00DE7ACF /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0EABD3842303600B00DE7ACF /* default.wav */; };
 		0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72A82034F44200D88F46 /* ProfilesService.swift */; };
+		0EBB72AD2034F44600D88F46 /* SystemContactsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB72AC2034F44600D88F46 /* SystemContactsHelper.swift */; };
 		0EC7808F2424FDAE000A04C5 /* CustomActionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */; };
 		0ECB4E2822B2D4840097CD7B /* CallsProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB4E2722B2D4840097CD7B /* CallsProviderService.swift */; };
 		0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */; };
@@ -790,6 +791,7 @@
 		0EABD3842303600B00DE7ACF /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
 		0EB12451224AB1030025F8CA /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		0EBB72A82034F44200D88F46 /* ProfilesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesService.swift; sourceTree = "<group>"; };
+		0EBB72AC2034F44600D88F46 /* SystemContactsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemContactsHelper.swift; sourceTree = "<group>"; };
 		0EC7808E2424FDAE000A04C5 /* CustomActionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionTextView.swift; sourceTree = "<group>"; };
 		0ECB4E2722B2D4840097CD7B /* CallsProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsProviderService.swift; sourceTree = "<group>"; };
 		0ECB4E2922B2D4BB0097CD7B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
@@ -3102,6 +3104,7 @@
 		0E44B62D202B9DC40060F71B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0EBB72AC2034F44600D88F46 /* SystemContactsHelper.swift */,
 				26EFD7B32E2D59B600B63F74 /* ScreenDimensionsManager.swift */,
 				263C16822D9DBCE6008E102C /* ThreadSafeQueueHelper.swift */,
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
@@ -4356,6 +4359,7 @@
 				1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */,
 				261E4EF229F8191300ABB37C /* LoadingView.swift in Sources */,
 				0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */,
+				0EBB72AD2034F44600D88F46 /* SystemContactsHelper.swift in Sources */,
 				0E13A91C22B844B100A12A54 /* NSUserActivity+Call.swift in Sources */,
 				1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */,
 				26E081262BC09534001B4C18 /* RequestsView.swift in Sources */,

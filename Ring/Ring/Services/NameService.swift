@@ -129,6 +129,20 @@ class NameService {
             }
     }
 
+    @discardableResult
+    func lookupAddress(forAddress address: String, accountId: String, nameserver: String = "", callback: @escaping (String?) -> Void) -> Disposable {
+        let subscription = usernameLookupStatus
+            .filter { $0.requestedName == address }
+            .take(1)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { response in
+                let name = response.name.flatMap { $0.isEmpty ? nil : $0 }
+                callback(name)
+            })
+        lookupAddress(withAccount: accountId, nameserver: nameserver, address: address)
+        return subscription
+    }
+
     /// Make a user search request to the daemon
     func searchUser(withAccount account: String, query: String) {
         self.nameRegistrationAdapter.searchUser(withAccount: account, query: query)

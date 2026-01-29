@@ -183,11 +183,8 @@ extension CallsProviderService {
     private func reportIncomingCall(account: AccountModel, call: CallModel,
                                     completion: ((Error?) -> Void)?) {
         let update = CXCallUpdate()
-        let isJamiAccount = account.type == AccountType.ring
         guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
-        let handleType = (isJamiAccount
-                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
-        update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
+        update.remoteHandle = CXHandle(type: .phoneNumber, value: handleInfo.handle)
         self.setUpCallUpdate(update: update, localizedCallerName: handleInfo.displayName, videoFlag: !call.isAudioOnly)
         self.provider.reportNewIncomingCall(with: call.callUUID,
                                             update: update) { [weak self] error in
@@ -200,12 +197,9 @@ extension CallsProviderService {
 
     func updateRegisteredName(account: AccountModel, call: CallModel) {
         let update = CXCallUpdate()
-        let isJamiAccount = account.type == AccountType.ring
         guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
-        let handleType = (isJamiAccount
-                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
 
-        update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
+        update.remoteHandle = CXHandle(type: .phoneNumber, value: handleInfo.handle)
         self.setUpCallUpdate(update: update, localizedCallerName: call.registeredName, videoFlag: !call.isAudioOnly)
         self.provider.reportCall(with: call.callUUID, updated: update)
     }
@@ -250,11 +244,8 @@ extension CallsProviderService {
     }
 
     func startCall(account: AccountModel, call: CallModel) {
-        let isJamiAccount = account.type == AccountType.ring
         guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
-        let handleType = (isJamiAccount
-                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
-        let contactHandle = CXHandle(type: handleType, value: handleInfo.handle)
+        let contactHandle = CXHandle(type: .phoneNumber, value: handleInfo.handle)
         let startCallAction = CXStartCallAction(call: call.callUUID, handle: contactHandle)
         startCallAction.isVideo = !call.isAudioOnly
         startCallAction.contactIdentifier = handleInfo.displayName
@@ -281,12 +272,10 @@ extension CallsProviderService {
             }
         }
         let name = !call.displayName.isEmpty ? call.displayName : !call.registeredName.isEmpty ? call.registeredName : handle
-        let contactHandle = (account.type == AccountType.sip
-                                || call.registeredName.isEmpty) ? handle : call.registeredName
-        if name == contactHandle {
-            return ("", contactHandle)
+        if name == handle {
+            return ("", handle)
         }
-        return (name, contactHandle)
+        return (name, handle)
     }
 
     private func requestTransaction(_ transaction: CXTransaction) {

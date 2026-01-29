@@ -43,6 +43,8 @@
 	<string>Used to save selected images</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to select a profile picture and share photos with contacts</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Save your Jami contacts to your iPhone contacts.</string>
 	<key>NSUbiquitousContainers</key>
 	<dict>
 		<key>iCloud.com.savoirfairelinux.ring</key>

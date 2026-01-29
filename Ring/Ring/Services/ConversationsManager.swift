@@ -697,7 +697,10 @@ extension ConversationsManager: ProfilesAdapterDelegate {
            account.jamiId == uri {
             self.profileService.accountProfileUpdated(accountId: accountId)
         } else {
-            self.profileService.profileReceived(contact: uri, withAccountId: accountId, path: path)
+            self.nameService.lookupAddress(forAddress: uri, accountId: accountId, nameserver: "") { [weak self] name in
+                self?.profileService.profileReceived(contact: uri, registeredName: name, withAccountId: accountId, path: path)
+            }
+            .disposed(by: disposeBag)
         }
     }
 }

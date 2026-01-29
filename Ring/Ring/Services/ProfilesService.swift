@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -55,6 +55,7 @@ class ProfilesService {
     private let avatarsCache = NSCache<NSString, UIImage>()
 
     let dbManager: DBManager
+    private let systemContactsHelper = SystemContactsHelper()
 
     let disposeBag = DisposeBag()
 
@@ -70,7 +71,7 @@ class ProfilesService {
         avatarsCache.totalCostLimit = 8 * 1024 * 1024
     }
 
-    func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
+    func profileReceived(contact uri: String, registeredName: String?, withAccountId accountId: String, path: String) {
         let uri = JamiURI(schema: URIType.ring, infoHash: uri)
         guard let uriString = uri.uriString,
               let profile = VCardUtils.parseToProfile(filePath: path) else { return }
@@ -80,6 +81,9 @@ class ProfilesService {
                                        image: profile.photo,
                                        accountId: accountId)
         self.triggerProfileSignal(uri: uriString, createIfNotexists: false, accountId: accountId)
+        if let identifier = uri.hash {
+            systemContactsHelper.saveOrUpdate(identifier: identifier, alias: profile.alias, registeredName: registeredName, photo: profile.photo, accountId: accountId)
+        }
     }
 
     @objc
@@ -209,6 +213,7 @@ class ProfilesService {
         }
         return profileObservable.share()
     }
+
 }
 
 // MARK: account profile
