@@ -189,6 +189,8 @@ do
   DEVPATH=$(xcrun --sdk $SDK --show-sdk-platform-path)/Developer
   export DEVPATH
   export MIN_IOS
+  export AUTOPOINT=true
+  export GTKDOCIZE=true
 
   # Print DEVPATH and MIN_IOS
   echo "DEVPATH: $DEVPATH"
