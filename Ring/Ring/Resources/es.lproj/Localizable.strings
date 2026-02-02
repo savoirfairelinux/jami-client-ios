@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Grabar mensaje de audio";
 "alerts.uploadFile" = "Enviar archivo";
 "alerts.uploadPhoto" = "Galeria abierta";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Activar el \"Servicios de ubicación\" para permitir que \"Jami\" determine la ubicación del dispositivo.";
 "alerts.locationSharing" = "Compartir mi ubicación";
 "alerts.alreadylocationSharing" = "Ya se está compartiendo la ubicación con este usuario";

@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "파일 보내기";
 "alerts.uploadPhoto" = "개장 갤러리";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "내 위치를 공유";
 "alerts.alreadylocationSharing" = "이미 이 사용자와 위치를 공유";

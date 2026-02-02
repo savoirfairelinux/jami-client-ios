@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Înregistrează un mesaj vocal";
 "alerts.uploadFile" = "Trimite un fișier";
 "alerts.uploadPhoto" = "Deschide galeria";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Activează „Localizarea” pentru ca Jami să poată stabili poziția ta.";
 "alerts.locationSharing" = "Trimite poziția mea";
 "alerts.alreadylocationSharing" = "Se trimite deja poziția către acest utilizator";

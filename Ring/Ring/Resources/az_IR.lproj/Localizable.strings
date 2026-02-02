@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "فایل گؤندر";
 "alerts.uploadPhoto" = "گالری آچیق";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "مکانیمی بؤلوم";
 "alerts.alreadylocationSharing" = "بو ایستیفاده چیله یئرلشمه یه چالیشمیش";

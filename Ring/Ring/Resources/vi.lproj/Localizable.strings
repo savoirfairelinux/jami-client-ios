@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "Gửi tập tin";
 "alerts.uploadPhoto" = "Open gallery";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Chia sẻ vị trí của tôi";
 "alerts.alreadylocationSharing" = "Đã chia sẻ vị trí với người dùng này";

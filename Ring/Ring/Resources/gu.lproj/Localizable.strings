@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "ફાઇલ મોકલો";
 "alerts.uploadPhoto" = "ખુલ્લી ગેલેરી";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "મારું સ્થાન શેર કરો";
 "alerts.alreadylocationSharing" = "પહેલેથી જ આ વપરાશકર્તા સાથે સ્થાન શેર";

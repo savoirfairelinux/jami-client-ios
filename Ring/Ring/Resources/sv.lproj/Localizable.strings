@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Spela in ljudmeddelande";
 "alerts.uploadFile" = "Skicka fil";
 "alerts.uploadPhoto" = "Öppet galleri";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Dela min plats";
 "alerts.alreadylocationSharing" = "Du delar redan platsinformation med denna användare";

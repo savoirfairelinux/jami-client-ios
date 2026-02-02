@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "Comhad a sheoladh";
 "alerts.uploadPhoto" = "Open gallery";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Comhroinn mo shuíomh";
 "alerts.alreadylocationSharing" = "Ag roinnt suíomh cheana féin leis an úsáideoir seo";

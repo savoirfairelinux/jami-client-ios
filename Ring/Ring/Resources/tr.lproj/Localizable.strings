@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Ses iletisini kaydet";
 "alerts.uploadFile" = "Dosya gönder";
 "alerts.uploadPhoto" = "Galeriyi aç";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Konumumu paylaş";
 "alerts.alreadylocationSharing" = "Bu kullanıcıyla hâlihazırda konum paylaşılıyor";

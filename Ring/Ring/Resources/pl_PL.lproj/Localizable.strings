@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Nagraj wiadomość głosową";
 "alerts.uploadFile" = "Wyślij plik";
 "alerts.uploadPhoto" = "Otwarta galeria";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Włącz lokalizację, aby pozwolić Jami określić lokalizację urządzenia.";
 "alerts.locationSharing" = "Udostępnij moją lokalizację";
 "alerts.alreadylocationSharing" = "Już udostępniasz lokalizację temu użytkownikowi";

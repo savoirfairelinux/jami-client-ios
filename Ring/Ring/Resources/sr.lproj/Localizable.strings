@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "Pošalji datoteku";
 "alerts.uploadPhoto" = "Otvori galeriju";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Podeli moju lokaciju";
 "alerts.alreadylocationSharing" = "Već delite lokaciju sa ovim korisnikom";

@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "Файл илгээх";
 "alerts.uploadPhoto" = "Нээлттэй галерея";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Миний байр суурийг хуваалцаарай";
 "alerts.alreadylocationSharing" = "Энэ хэрэглэгчийн байр суурийг хэдийнээ хуваалцаж байна";

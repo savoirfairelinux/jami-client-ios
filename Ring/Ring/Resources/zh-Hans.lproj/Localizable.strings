@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "錄製音訊訊息";
 "alerts.uploadFile" = "傳送檔案";
 "alerts.uploadPhoto" = "開啟相簿";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "分享我的位置";
 "alerts.alreadylocationSharing" = "已與此使用者分享位置";

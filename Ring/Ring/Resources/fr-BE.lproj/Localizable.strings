@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Enregistrer un message vocal";
 "alerts.uploadFile" = "Envoyer fichier";
 "alerts.uploadPhoto" = "Ouvrir la galerie";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Activez le service de géolocalisation pour permettre à Jami de déterminer votre localisation.";
 "alerts.locationSharing" = "Partager votre position";
 "alerts.alreadylocationSharing" = "Vous partagez déjà votre position avec cet utilisateur";
