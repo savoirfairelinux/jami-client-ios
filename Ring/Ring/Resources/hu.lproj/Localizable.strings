@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Hangüzenet felvétele";
 "alerts.uploadFile" = "Fájl küldése";
 "alerts.uploadPhoto" = "Gyűjtemény megnyitása";
+"alerts.sendPhoto" = "Fénykép küldése";
 "alerts.locationServiceIsDisabled" = "Helymeghatározási szolgáltatások bekapcsolása, hogy a Jami meghatározhassa az eszköz tartózkodási helyét.";
 "alerts.locationSharing" = "Tartózkodási hely megosztása";
 "alerts.alreadylocationSharing" = "Tartózkodási hely már megosztva ezzel a felhasználóval.";
@@ -642,7 +643,7 @@
 "accessibility.conference.setModerator" = "Moderátor beállítása";
 "accessibility.conference.unsetModerator" = "Moderátor megszüntetése";
 "accessibility.conference.muteAudio" = "Mikrofon elnémítása";
-"accessibility.conference.unmuteAudio" = "Mikrofon némítás feloldása";
+"accessibility.conference.unmuteAudio" = "Mikrofon némításának feloldása";
 "accessibility.conference.endCall" = "Hívás befejezése";
 "accessibility.conference.lowerHand" = "Kéz leengedése";
 "accessibility.account.tokenQRcode" = "Jogkivonat QR-kód";

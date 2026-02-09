@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Tallenna ääniviesti";
 "alerts.uploadFile" = "Lähetä tiedosto";
 "alerts.uploadPhoto" = "Avaa valokuvat";
+"alerts.sendPhoto" = "Lähetä kuva";
 "alerts.locationServiceIsDisabled" = "Ota \"sijaintipalvelut\" käyttöön, jotta \"Jami\" voi määrittää laitteen sijainnin.";
 "alerts.locationSharing" = "Jaa minun sijainti";
 "alerts.alreadylocationSharing" = "Jaat jo sijaintia tämän käyttäjän kanssa";

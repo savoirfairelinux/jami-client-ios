@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Записать голосовое сообщение";
 "alerts.uploadFile" = "Отправить файл";
 "alerts.uploadPhoto" = "Открыть галерею";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Включите \"Службы местоположения\", чтобы предоставить \"Jami\" доступ к местоположению вашего устройства.";
 "alerts.locationSharing" = "Транслировать мое местоположение";
 "alerts.alreadylocationSharing" = "Местоположением с этим пользователем уже поделился";

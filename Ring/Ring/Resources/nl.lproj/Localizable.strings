@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Geluidsbericht opnemen";
 "alerts.uploadFile" = "Bestand verzenden";
 "alerts.uploadPhoto" = "Open galerij";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Deel mijn locatie";
 "alerts.alreadylocationSharing" = "Al met deze gebruiker delen";
@@ -315,8 +316,8 @@
 "calls.lowerHand" = "Onderaan hand";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Een gesprek is aan het gang.";
-"calls.acceptWithAudio" = "Accept with audio";
-"calls.acceptWithVideo" = "Accept with video";
+"calls.acceptWithAudio" = "Accepteren met audio";
+"calls.acceptWithVideo" = "Accepteer met video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Apparaten";
@@ -563,12 +564,12 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "Bijdragen";
 "aboutJami.feedback" = "Terugkoppeling";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "Ontwikkelaars";
 "aboutJami.media" = "Media";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
+"aboutJami.communityManagement" = "Gemeenschapsbeheer";
+"aboutJami.specialThanks" = "Met uitzonderlijke dank aan";
 "aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.header" = "We willen onze medewerkers bedanken, wier inspanningen gedurende vele jaren deze software hebben gemaakt tot wat hij nu is.";
 
 // Accessibility
 "accessibility.close" = "Sluiten";
@@ -622,7 +623,7 @@
 "accessibility.calls.default.endCall" = "Oproep beëindigen";
 "accessibility.calls.default.addParticipant" = "Deelnemer toevoegen";
 "accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.toggleSpeaker" = "Luidspreker inschakelen";
 "accessibility.calls.default.openConversation" = "Gesprek openen";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Hand opsteken";

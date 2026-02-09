@@ -229,7 +229,7 @@
 "linkToAccount.showQrCode" = "Kod QR";
 "linkToAccount.showPinCode" = "Kod uwierzytelnienia";
 "linkToAccount.actionRequired" = "Wymagane wykonanie akcji\nProszę potwierdź konto na urządzeniu źródłowym.";
-"linkToAccount.allSet" = "The account was imported successfully.";
+"linkToAccount.allSet" = "Konto zostało zaimportowane pomyślnie.";
 "linkToAccount.goToAccounts" = "Idź do zaimportowanego konta";
 "linkToAccount.exportInstructions" = "Rozpocznij eksportowanie w urządzeniu źródłowym.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
@@ -239,7 +239,7 @@
 "linkToAccount.exit" = "Zakończ";
 "linkToAccount.shareMessage" = "Twój kod to: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
-"linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
+"linkToAccount.alertMessage" = "Zatrzymanie anuluje operację importu konta.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importuj konto Jami z lokalnego archiwum.";
@@ -251,7 +251,7 @@
 // Link to Jami Account Management Server (JAMS) form
 "linkToAccountManager.signIn" = "Zaloguj się";
 "linkToAccountManager.title" = "Management server account";
-"linkToAccountManager.accountManagerPlaceholder" = "Management server URL";
+"linkToAccountManager.accountManagerPlaceholder" = "Zarządzaj URL serwera";
 "linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
 "linkToAccountManager.jamsExplanation" = "Enter the management server URL";
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Nagraj wiadomość głosową";
 "alerts.uploadFile" = "Wyślij plik";
 "alerts.uploadPhoto" = "Otwarta galeria";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Włącz lokalizację, aby pozwolić Jami określić lokalizację urządzenia.";
 "alerts.locationSharing" = "Udostępnij moją lokalizację";
 "alerts.alreadylocationSharing" = "Już udostępniasz lokalizację temu użytkownikowi";
@@ -400,7 +401,7 @@
 "accountPage.generatingPin" = "Tworzenie kodu PIN…";
 "accountPage.passwordForPin" = "The account is password protected. Enter the password to generate a PIN code.";
 "accountPage.pinExplanationTitle" = "Na innym urządzeniu";
-"accountPage.pinExplanationMessage" = "Install and launch Jami. Select “Import from another device,” and scan the QR code. Alternatively, enter the PIN code manually.";
+"accountPage.pinExplanationMessage" = "Zainstaluj i uruchom Jami. Wybierz \"Importuj z innego urządzenia\" i skanuj kod QR. Alternatywnie należy ręcznie wprowadzić kod PIN.";
 "accountPage.pinError" = "Błąd podczas generacji nowego kodu PIN.";
 "accountPage.notificationTitle" = "Powiadomienia";
 "accountPage.notificationError" = "Powiadomenia od Jami są wyłączone. Włącz je w ustawieniach urządzenia, jeśli chcesz je otrzymywać.";
@@ -466,12 +467,12 @@
 // Link New Device
 "linkDevice.title" = "Połącz nowe urządzenie";
 "linkDevice.networkError" = "Błąd sieci podczas eksportu konta.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
+"linkDevice.errorWrongPassword" = "Podczas łączenia urządzenia wystąpił błąd uwierzytelniania. Proszę sprawdzić dane logowania i spróbować ponownie.";
 "linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
 "linkDevice.errorTimeout" = "The operation timed out. Please try again.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
 "linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
-"linkDevice.initialInfo" = "On the new device, initiate a new account.";
+"linkDevice.initialInfo" = "Na nowym urządzeniu, uruchom nowe konto.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "Zeskanuj kod QR";
 "linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
@@ -479,9 +480,9 @@
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
 "linkDevice.newDeviceIP" = "Nowy adres IP urządzenia: %1@";
 "linkDevice.code" = "kod";
-"linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
+"linkDevice.wrongEntry" = "Nierozpoznany nowy identyfikator urządzenia. Należy postępować zgodnie z powyższymi instrukcjami.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "The account was imported successfully on the new device.";
+"linkDevice.completed" = "Konto zostało z powodzeniem zaimportowane na nowe urządzenie.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Rozpocznij połączenie głosowe";

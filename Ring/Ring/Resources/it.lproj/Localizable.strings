@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Registra messaggio vocale";
 "alerts.uploadFile" = "Invia file";
 "alerts.uploadPhoto" = "Apri Galleria";
+"alerts.sendPhoto" = "Invia foto";
 "alerts.locationServiceIsDisabled" = "Attiva \"Servizi di localizzazione\" per consentire a \"Jami\" di determinare la tua posizione.";
 "alerts.locationSharing" = "Condividi la mia posizione";
 "alerts.alreadylocationSharing" = "Condividi già la posizione con questo utente";
@@ -295,7 +296,7 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Scopri di più";
 
 // Actions
-"actions.deleteAction" = "Cancella";
+"actions.deleteAction" = "Elimina";
 "actions.backAction" = "Indietro";
 "actions.doneAction" = "Fatto";
 "actions.goToSettings" = "Vai alle impostazioni";

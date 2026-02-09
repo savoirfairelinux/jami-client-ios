@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "Файлларны җибәрү";
 "alerts.uploadPhoto" = "Open gallery";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Минем урынымны уртаклашыгыз.";
 "alerts.alreadylocationSharing" = "Әлеге кулланучы белән инде урынны уртаклашу";

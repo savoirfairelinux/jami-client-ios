@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Salvesta häälsõnum";
 "alerts.uploadFile" = "Saada fail";
 "alerts.uploadPhoto" = "Ava galerii";
+"alerts.sendPhoto" = "Saada foto";
 "alerts.locationServiceIsDisabled" = "Et Jami saaks su asukoha tuvastada, palun lülita „Asukohateenused“ sisse.";
 "alerts.locationSharing" = "Jaga minu asukohta";
 "alerts.alreadylocationSharing" = "Juba jagad asukohta selle kasutajaga";

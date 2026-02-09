@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Incizo mesazh audio";
 "alerts.uploadFile" = "Dërgo kartelë";
 "alerts.uploadPhoto" = "Hap galerinë";
+"alerts.sendPhoto" = "Dërgoni foto";
 "alerts.locationServiceIsDisabled" = "Që të përcaktohet vendndodhje pajisjeje, aktivizoni “Shërbime Vendndodhjeje”.";
 "alerts.locationSharing" = "Jepua vendndodhjen time";
 "alerts.alreadylocationSharing" = "Ia keni dhënë tashmë vendndodhjen këtij përdoruesi";

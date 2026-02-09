@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Nahrať audio správu";
 "alerts.uploadFile" = "Odoslať súbor";
 "alerts.uploadPhoto" = "Otvorená galéria";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Zdieľajte moju polohu";
 "alerts.alreadylocationSharing" = "Už zdieľanie polohy s týmto používateľom";

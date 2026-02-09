@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "音声メッセージを録音";
 "alerts.uploadFile" = "ファイルの送信";
 "alerts.uploadPhoto" = "ギャラリーを開く";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "私の位置をシェア";
 "alerts.alreadylocationSharing" = "このユーザーと既に位置情報を共有済みです";

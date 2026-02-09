@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "إرسال ملف";
 "alerts.uploadPhoto" = "معرض مفتوح";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "شارك موقعي";
 "alerts.alreadylocationSharing" = "مشاركة الموقع مع هذا المستخدم";

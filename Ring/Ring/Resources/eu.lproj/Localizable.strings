@@ -284,6 +284,7 @@
 "alerts.recordAudioMessage" = "Record audio message";
 "alerts.uploadFile" = "Bidali fitxategia";
 "alerts.uploadPhoto" = "Galeria irekia";
+"alerts.sendPhoto" = "Send photo";
 "alerts.locationServiceIsDisabled" = "Turn on “Location Services” to allow “Jami” to determine device location.";
 "alerts.locationSharing" = "Nire kokapena partekatu.";
 "alerts.alreadylocationSharing" = "Jada erabiltzaile honekin kokapena partekatzea";
