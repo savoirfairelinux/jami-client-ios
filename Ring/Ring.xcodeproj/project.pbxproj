@@ -284,7 +284,6 @@
 		261A90842F1FF75C00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
 		261A90862F1FF77D00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
 		261A90892F1FF7AD00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
-		261A908A2F1FF7AD00438171 /* libjami-core.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		261E4EF229F8191300ABB37C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261E4EF129F8191300ABB37C /* LoadingView.swift */; };
 		2625814E2B4DE40200314C42 /* MessagePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814D2B4DE40200314C42 /* MessagePanelView.swift */; };
 		262581502B4EF15D00314C42 /* MessagePanelVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */; };
@@ -658,17 +657,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		261A908B2F1FF7AD00438171 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				261A908A2F1FF7AD00438171 /* libjami-core.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		26A88C0C266FFFC800888EED /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3986,7 +3974,6 @@
 				3D0E69732DDCD9C70046FA3D /* Sources */,
 				3D0E69742DDCD9C70046FA3D /* Frameworks */,
 				3D0E69752DDCD9C70046FA3D /* Resources */,
-				261A908B2F1FF7AD00438171 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
