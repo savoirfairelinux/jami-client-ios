@@ -74,7 +74,7 @@
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Görüşme rengi";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Görüşme tipi";
 "swarm.identifier" = "Tanımlayıcı";
 "swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Ayarlar";
@@ -86,7 +86,7 @@
 "swarm.descriptionPlaceholder" = "Enter title";
 "swarm.contactHeader" = "Kişi";
 "swarm.showContactQRCode" = "Show contact QR code";
-"swarm.shareContactInfo" = "Share contact information";
+"swarm.shareContactInfo" = "İletişim bilgilerini paylaş";
 "swarm.accessibilityContactQRCode" = "Show contact QR code";
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
@@ -166,7 +166,7 @@
 "conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "Siz";
 "conversation.edited" = "Düzenlendi";
-"conversation.deletedMessage" = "%@ deleted a message";
+"conversation.deletedMessage" = "%@ mesajı sildi";
 "conversation.contactBlocked" = "Contact blocked";
 // An ellipsis is not directly shown in the following typing indicator strings.
 // An ellipsis animation is shown when messages are being typed in the view.
@@ -316,8 +316,8 @@
 "calls.lowerHand" = "Elini indir";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Bir çağrı sürüyor. Görüşmeye katılmak istiyor musun?";
-"calls.acceptWithAudio" = "Accept with audio";
-"calls.acceptWithVideo" = "Accept with video";
+"calls.acceptWithAudio" = "Sesli kabul et";
+"calls.acceptWithVideo" = "Görüntülü kabul et";
 
 // Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";
@@ -467,7 +467,7 @@
 // Link New Device
 "linkDevice.title" = "Yeni aygıt bağla";
 "linkDevice.networkError" = "A network error occurred while exporting the account.";
-"linkDevice.errorWrongPassword" = "An authentication error occurred while linking the device. Please check credentials and try again.";
+"linkDevice.errorWrongPassword" = "Cihaz bağlanırken bir kimlik doğrulama hatası oluştu. Lütfen kimlik bilgilerini kontrol et ve tekrar dene.";
 "linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
 "linkDevice.errorTimeout" = "The operation timed out. Please try again.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
@@ -514,16 +514,16 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Davetiye alındı";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ görüşmeye katılmaya davet edildi.";
+"generatedMessage.invitationAccepted" = "%@ görüşme katıldı.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ görüşmeye katılması engellendi.";
+"generatedMessage.contactUnblocked" = "%@ görüşmeye erişim engeli kaldırıldı.";
 "generatedMessage.outgoingCall" = "Giden çağrı";
 "generatedMessage.missedOutgoingCall" = "Cevapsız giden çağrı";
 "generatedMessage.missedIncomingCall" = "Cevapsız gelen çağrı";
 "generatedMessage.liveLocationSharing" = "Canlı konum paylaşımı";
-"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ görüşmeden ayrıldı.";
 "generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
 "generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
@@ -566,8 +566,8 @@
 "aboutJami.feedback" = "Geri bildirim";
 "aboutJami.developers" = "Geliştiriciler";
 "aboutJami.media" = "Ortam";
-"aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
+"aboutJami.communityManagement" = "Topluluk Yönetimi";
+"aboutJami.specialThanks" = "Özel teşekkürler";
 "aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
 "aboutJami.header" = "Bu yazılımın bu hale gelmesinde şimdiye kadar yardımı dokunan herkese teşekkür ediyoruz.";
 
@@ -622,7 +622,7 @@
 "accessibility.calls.default.pauseCall" = "Çağrıyı duraklat";
 "accessibility.calls.default.endCall" = "Çağrıyı sonlandır";
 "accessibility.calls.default.addParticipant" = "Katılımcı ekle";
-"accessibility.calls.default.switchCamera" = "Switch camera";
+"accessibility.calls.default.switchCamera" = "Kamerayı çevir";
 "accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
 "accessibility.calls.default.openConversation" = "Konuşma aç";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
@@ -633,7 +633,7 @@
 "accessibility.calls.alter.pauseCall" = "Çağrıyı sürdür";
 "accessibility.calls.alter.endCall" = "Çağrıyı sonlandır";
 "accessibility.calls.alter.addParticipant" = "Katılımcı ekle";
-"accessibility.calls.alter.switchCamera" = "Switch camera";
+"accessibility.calls.alter.switchCamera" = "Kamerayı çevir";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
 "accessibility.calls.alter.openConversation" = "Konuşma aç";
 "accessibility.calls.alter.showDialpad" = "Show dialpad";

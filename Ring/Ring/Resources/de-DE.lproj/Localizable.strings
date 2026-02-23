@@ -380,7 +380,7 @@
 "accountPage.turnUsername" = "TURN username";
 "accountPage.turnPassword" = "TURN password";
 "accountPage.turnRealm" = "TURN realm";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "UPnP verwenden";
 "accountPage.security" = "Security";
 "accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
 "accountPage.registerNameExplanation" = "Registrieren Sie einen Benutzernamen, damit andere Sie auf Jami leichter finden und erreichen können.";
@@ -411,14 +411,14 @@
 "accountPage.appSettingsExplanation" = "Diese Einstellungen gelten für die gesamte Anwendung.";
 "accountPage.connectivityAndConfiguration" = "Verbindungen und Konfigurationen";
 "accountPage.sipExpirationTime" = "Registration expiration time (seconds)";
-"accountPage.tlsVerifyServerCertificates" = "Verify server TLS certificates";
+"accountPage.tlsVerifyServerCertificates" = "Server-TLS-Zertifikate prüfen";
 "accountPage.tlsVerifyClientCertificates" = "Client-TLS-Zertifikate überprüfen";
 "accountPage.tlsRequireTlsCertificate" = "Require a certificate for incoming TLS connections";
 "accountPage.tlsDisableSecureDlgCheck" = "Disable secure dialog check for incoming TLS data";
 "accountPage.editSipExpirationTime" = "Ablaufzeit";
 "accountPage.selectSipExpirationTime" = "Zeit (in Sekunden) für den Ablauf der Registrierung festlegen";
 "accountPage.thisDevice" = "This device";
-"accountPage.otherDevices" = "Other linked devices";
+"accountPage.otherDevices" = "Andere verknüpfte Geräte";
 "accountPage.accountIdentity" = "Kontoidentität";
 "accountPage.bootstrap" = "Bootstrap";
 "accountPage.dhtConfiguration" = "Konfiguration von OpenDHT";

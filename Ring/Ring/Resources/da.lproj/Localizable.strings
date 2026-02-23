@@ -65,7 +65,7 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.addDescription" = "Add description";
+"swarmcreation.addDescription" = "Tilføj beskrivelse";
 // Swarm
 "swarm.muteConversation" = "Stemme samtaler";
 "swarm.leaveConversation" = "Lad samtalen være";
@@ -79,14 +79,14 @@
 "swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Indstillinger";
 "swarm.members" = "Medlemmer";
-"swarm.addDescription" = "Add description";
+"swarm.addDescription" = "Tilføj beskrivelse";
 "swarm.titlePlaceholder" = "Enter title";
-"swarm.titleAlertHeader" = "Edit group title";
-"swarm.descriptionAlertHeader" = "Edit group description";
+"swarm.titleAlertHeader" = "Rediger gruppetitel";
+"swarm.descriptionAlertHeader" = "Rediger gruppebeskrivelse";
 "swarm.descriptionPlaceholder" = "Enter title";
 "swarm.contactHeader" = "Kontakt";
 "swarm.showContactQRCode" = "Show contact QR code";
-"swarm.shareContactInfo" = "Share contact information";
+"swarm.shareContactInfo" = "Del kontaktinformation";
 "swarm.accessibilityContactQRCode" = "Show contact QR code";
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
@@ -111,7 +111,7 @@
 "swarm.inviteMembersNotSelected" = "Not selected";
 "swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
 "swarm.Leave" = "- Gå væk.";
-"swarm.newGroup" = "Create new group";
+"swarm.newGroup" = "Opret ny gruppe";
 "swarm.namePlaceholder" = "Group name";
 "swarm.explanationText" = "Members can be invited at any time after the group has been created.";
 "swarm.customizeProfile" = "Customize group profile";
@@ -129,7 +129,7 @@
 "smartlist.newContact" = "New contact";
 "smartlist.newGroup" = "New group";
 "smartlist.accounts" = "Konti";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "Invitationer modtaget";
 "smartlist.noResults" = "Ingen resultater";
 "smartlist.noConversation" = "Ingen samtaler";
 "smartlist.searchBarPlaceholder" = "Enter name…";
@@ -166,8 +166,8 @@
 "conversation.repliedTo" = "%@ replied to %@";
 "conversation.yourself" = "- Du er...";
 "conversation.edited" = "Udfærdiget";
-"conversation.deletedMessage" = "%@ deleted a message";
-"conversation.contactBlocked" = "Contact blocked";
+"conversation.deletedMessage" = "%@ slettede en besked";
+"conversation.contactBlocked" = "Kontakt blokeret";
 // An ellipsis is not directly shown in the following typing indicator strings.
 // An ellipsis animation is shown when messages are being typed in the view.
 // An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
@@ -182,7 +182,7 @@
 "invitations.accepted" = "Akcepteret";
 "invitations.declined" = "Declined";
 "invitations.blocked" = "Blocked";
-"invitations.list" = "Invitations received";
+"invitations.list" = "Invitationer modtaget";
 
 // Walkthrough
 
@@ -209,7 +209,7 @@
 "createAccount.lookingForUsernameAvailability" = "Checking username availability…";
 "createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
 "createAccount.usernameAlreadyTaken" = "Brugernavn er allerede taget";
-"createAccount.usernameValid" = "The username is available.";
+"createAccount.usernameValid" = "Brugernavnet er tilgængeligt.";
 "createAccount.UsernameNotRegisteredTitle" = "Netværksfejl";
 "createAccount.UsernameNotRegisteredMessage" = "Kontoen blev oprettet men brugernavnet blev ikke registreret.";
 "createAccount.timeoutTitle" = "Konto Oprettet";
@@ -225,7 +225,7 @@
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Importer konto";
 "linkToAccount.showQrCode" = "QR-kode";
 "linkToAccount.showPinCode" = "Authentication code";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
@@ -316,8 +316,8 @@
 "calls.lowerHand" = "Nedre hånd";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "- Vil du være med?";
-"calls.acceptWithAudio" = "Accept with audio";
-"calls.acceptWithVideo" = "Accept with video";
+"calls.acceptWithAudio" = "Besvar opkald med lyd";
+"calls.acceptWithVideo" = "Besvar opkald med video";
 
 // Account Page
 "accountPage.devicesListHeader" = "Enheder";
@@ -354,7 +354,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using “%s” on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Indtast password til kontoen";
 "accountPage.usernamePlaceholder" = "Indtaster ønskede brugernavn";
-"accountPage.registerNameErrorMessage" = "The username is unavailable.";
+"accountPage.registerNameErrorMessage" = "Brugernavnet er ikke tilgængeligt.";
 "accountPage.usernameRegistering" = "Registrering";
 "accountPage.usernameRegisterAction" = "Registrér";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
@@ -387,7 +387,7 @@
 "accountPage.profileHeader" = "Profil";
 "accountPage.profileNameNotSelected" = "Name not selected";
 "accountPage.accountHeader" = "Konto";
-"accountPage.profileName" = "Profile name";
+"accountPage.profileName" = "Profilnavn";
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Håndter konto";
@@ -425,7 +425,7 @@
 "accountPage.nameServer" = "Navneserver";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "Indikator til indtydning";
-"accountPage.typingIndicatorExplanation" = "Indicate when messages are being typed.";
+"accountPage.typingIndicatorExplanation" = "Viser når der bliver indtastet beskeder.";
 
 // Backup Account
 "backupAccount.explanation" = "This Jami account exists only on this device. The account will be lost if this device is lost or if the application is uninstalled. It is recommended to make a backup of this account.";
@@ -514,16 +514,16 @@
 // Generated Message
 "generatedMessage.contactAdded" = "Invitation modtaget";
 "generatedMessage.swarmCreated" = "Conversation created";
-"generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
-"generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
+"generatedMessage.invitationReceived" = "%@ blev inviteret til samtalen.";
+"generatedMessage.invitationAccepted" = "%@ deltager nu i samtalen.";
 "generatedMessage.youJoined" = "You joined the conversation.";
-"generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
-"generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
+"generatedMessage.contactBlocked" = "%@ blev blokeret fra samtalen.";
+"generatedMessage.contactUnblocked" = "%@ er ikke længere blokeret fra samtalen.";
 "generatedMessage.outgoingCall" = "Udgående opkald";
 "generatedMessage.missedOutgoingCall" = "Ubesvarede udgående opkald";
 "generatedMessage.missedIncomingCall" = "Ubesvarede indgående opkald";
 "generatedMessage.liveLocationSharing" = "Live placeringsholding";
-"generatedMessage.contactLeftConversation" = "%@ has left the conversation.";
+"generatedMessage.contactLeftConversation" = "%@ har forladt samtalen.";
 "generatedMessage.nonSwarmInvitationReceived" = "You sent an invitation.";
 "generatedMessage.nonSwarmInvitationAccepted" = "Your invitation was accepted.";
 
@@ -564,12 +564,12 @@
 "aboutJami.noWarranty2" = "version 3 or later for details.";
 "aboutJami.contribute" = "Bidrag";
 "aboutJami.feedback" = "Tilbagemelding";
-"aboutJami.developers" = "Developers";
+"aboutJami.developers" = "Udviklere";
 "aboutJami.media" = "Medier";
 "aboutJami.communityManagement" = "Community Management";
-"aboutJami.specialThanks" = "Special thanks to";
+"aboutJami.specialThanks" = "Særlig tak til";
 "aboutJami.info" = "This is a list of people who have made a significant investment of time, with useful results, into Jami. Any such contributors who want to be added to the list should contact us.";
-"aboutJami.header" = "We would like to thank our contributors, whose efforts over many years have made this software what it is.";
+"aboutJami.header" = "Vi vil gerne takke vores bidragsydere, hvis indsats gennem mange år har gjort dette software til det, det er i dag.";
 
 // Accessibility
 "accessibility.close" = "Luk";
@@ -603,8 +603,8 @@
 "accessibility.pendingRequestsRowSingular" = "Invitation received: %@ pending invitation";
 "accessibility.pendingRequestsRowHint" = "Double-tap to review and reply to invitations you received";
 "accessibility.pendingRequestsListBlockUser" = "Block invitation sender";
-"accessibility.pendingRequestsListRejectInvitation" = "Decline invitation";
-"accessibility.pendingRequestsListAcceptInvitation" = "Accept invitation";
+"accessibility.pendingRequestsListRejectInvitation" = "Afvis invitation";
+"accessibility.pendingRequestsListAcceptInvitation" = "Accepter invitation";
 "accessibility.messageBubbleDeleted" = "Message deleted";
 "accessibility.messageBubbleEdited" = "Udfærdiget";
 "accessibility.messageBubbleRead" = "Read";
@@ -616,14 +616,14 @@
 "accessibility.text.sentOn" = "%1@, message sent on %2@";
 "accessibility.fileTransfer.receivedOn" = "File: %1@ , received on %2@";
 "accessibility.fileTransfer.sentOn" = "File: %1@, sent on %2@";
-"accessibility.call.lasted" = "Lasted %@";
+"accessibility.call.lasted" = "Varede %@";
 "accessibility.calls.default.toggleAudio" = "Sluk mikrofon";
 "accessibility.calls.default.toggleVideo" = "Start camera";
 "accessibility.calls.default.pauseCall" = "Pause-opkald";
 "accessibility.calls.default.endCall" = "Afslut opkald";
 "accessibility.calls.default.addParticipant" = "Tilføj deltager";
-"accessibility.calls.default.switchCamera" = "Switch camera";
-"accessibility.calls.default.toggleSpeaker" = "Turn on speaker";
+"accessibility.calls.default.switchCamera" = "Skift kamera";
+"accessibility.calls.default.toggleSpeaker" = "Tænd højttaler";
 "accessibility.calls.default.openConversation" = "Åbn samtale";
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Løft hånden.";
@@ -633,7 +633,7 @@
 "accessibility.calls.alter.pauseCall" = "Opkaldet genoptages";
 "accessibility.calls.alter.endCall" = "Afslut opkald";
 "accessibility.calls.alter.addParticipant" = "Tilføj deltager";
-"accessibility.calls.alter.switchCamera" = "Switch camera";
+"accessibility.calls.alter.switchCamera" = "Skift kamera";
 "accessibility.calls.alter.toggleSpeaker" = "Turn off speaker";
 "accessibility.calls.alter.openConversation" = "Åbn samtale";
 "accessibility.calls.alter.showDialpad" = "Show dialpad";
