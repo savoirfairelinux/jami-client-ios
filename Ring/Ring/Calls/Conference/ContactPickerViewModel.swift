@@ -219,7 +219,7 @@ extension ContactPickerViewModel {
                 call.callId == self.currentCallId {
                 return
             }
-            if call.state != .current && call.state != .hold && call.state != .resume {
+            if call.state != .current && call.state != .hold {
                 return
             }
             let contact = Contact(contactUri: uriString,

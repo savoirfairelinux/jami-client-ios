@@ -205,7 +205,6 @@ class ActionsViewModel {
         return currentCall
             .filter({ call in
                 (call.state == .hold ||
-                    call.state == .resume ||
                     call.state == .current)
             })
             .map({call in

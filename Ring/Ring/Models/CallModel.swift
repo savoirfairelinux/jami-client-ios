@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@ enum CallState: String {
     case busy = "BUSY"
     case failure = "FAILURE"
     case hold = "HOLD"
-    case resume = "UNHOLD"
     case inactive = "INACTIVE"
     case over = "OVER"
     case unknown = "UNKNOWN"
@@ -50,7 +49,7 @@ enum CallState: String {
     }
 
     func isActive() -> Bool {
-        return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold || self == .resume
+        return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold
     }
 }
 
@@ -67,7 +66,7 @@ enum CallDetailKey: String {
     case displayNameKey = "DISPLAY_NAME"
     case timeStampStartKey = "TIMESTAMP_START"
     case accountIdKey = "ACCOUNTID"
-    case peerHoldKey = "PEER_HOLDING"
+    case peerHoldKey = "PEER_HOLD"
     case audioMutedKey = "AUDIO_MUTED"
     case videoMutedKey = "VIDEO_MUTED"
     case videoSourceKey = "VIDEO_SOURCE"
@@ -83,7 +82,7 @@ enum MediaAttributeKey: String {
     case source = "SOURCE"
     case sourceType = "SOURCE_TYPE"
     case label = "LABEL"
-    case hold = "ON_HOLD"
+    case hold = "HOLD"
 }
 
 enum MediaAttributeValue: String {
@@ -264,7 +263,7 @@ public class CallModel {
 
     func isCurrent() -> Bool {
         return self.state == .current || self.state == .hold ||
-            self.state == .resume || self.state == .ringing
+            self.state == .ringing
     }
 
     func updateParticipantsCallId(callId: String) {
