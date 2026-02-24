@@ -37,8 +37,5 @@ using namespace libjami;
 - (void)setAudioRingtoneDevice:(NSInteger)index {
     setAudioRingtoneDevice((int32_t)index);
 }
-- (void)startAudio {
-    startAudio();
-}
 
 @end
