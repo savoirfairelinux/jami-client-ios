@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -203,7 +203,7 @@ static id <CallsAdapterDelegate> _delegate;
 }
 
 - (BOOL)resumeCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
-    return unhold(std::string([accountId UTF8String]), std::string([callId UTF8String]));
+    return resume(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
 - (void)playDTMF:(NSString*)code {

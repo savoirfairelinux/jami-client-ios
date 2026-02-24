@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@ enum CallState: String {
     case busy = "BUSY"
     case failure = "FAILURE"
     case hold = "HOLD"
-    case resume = "UNHOLD"
     case inactive = "INACTIVE"
     case over = "OVER"
     case unknown = "UNKNOWN"
@@ -67,7 +66,7 @@ enum CallDetailKey: String {
     case displayNameKey = "DISPLAY_NAME"
     case timeStampStartKey = "TIMESTAMP_START"
     case accountIdKey = "ACCOUNTID"
-    case peerHoldKey = "PEER_HOLDING"
+    case peerHoldKey = "PEER_HOLD"
     case audioMutedKey = "AUDIO_MUTED"
     case videoMutedKey = "VIDEO_MUTED"
     case videoSourceKey = "VIDEO_SOURCE"
