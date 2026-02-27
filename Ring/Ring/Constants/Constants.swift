@@ -255,5 +255,5 @@ public class Constants: NSObject {
 
     public static let defaultAvatarSize: CGFloat = AvatarSize.default55.points
 
-    public static let versionName = "Atlas"
+    public static let versionName = "Euclid"
 }
