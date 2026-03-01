@@ -237,7 +237,7 @@ public class Constants: NSObject {
         "#607D8B": L10n.SwarmColors.steelBlue
     ]
 
-    public static let MAX_PROFILE_IMAGE_SIZE: CGFloat = 512
+    public static let maxProfileImageSize: CGFloat = 512
 
     enum AvatarSize: CGFloat {
         case conversation20 = 20

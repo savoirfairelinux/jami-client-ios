@@ -470,8 +470,8 @@ extension UIImage {
         )
         let squareImage = cropImage(to: squareRect) ?? self
         // Resize if the cropped square is larger than the max size
-        if sideLength > Constants.MAX_PROFILE_IMAGE_SIZE {
-            return resizeImageWith(newSize: CGSize(width: Constants.MAX_PROFILE_IMAGE_SIZE, height: Constants.MAX_PROFILE_IMAGE_SIZE))
+        if sideLength > Constants.maxProfileImageSize {
+            return resizeImageWith(newSize: CGSize(width: Constants.maxProfileImageSize, height: Constants.maxProfileImageSize))
         }
         return squareImage
     }

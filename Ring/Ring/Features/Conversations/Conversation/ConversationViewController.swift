@@ -127,24 +127,6 @@ class ConversationViewController: UIViewController,
 
     // swiftlint:disable cyclomatic_complexity
     private func addSwiftUIView() {
-        self.viewModel.swiftUIModel.hideNavigationBar
-            .subscribe(onNext: { [weak self] (hide) in
-                guard let self = self else { return }
-                if self.navigationItem.rightBarButtonItems?.isEmpty == hide { return }
-                if hide {
-                    self.navigationItem.titleView = UIView()
-                    self.navigationItem.rightBarButtonItems = []
-                    self.navigationItem.setHidesBackButton(true, animated: false)
-                } else {
-                    self.setRightNavigationButtons()
-                    self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
-                                       displayName: self.viewModel.displayName.value,
-                                       username: self.viewModel.userName.value)
-                    self.updateNavigationBarShadow()
-                }
-            })
-            .disposed(by: self.disposeBag)
-
         self.viewModel.swiftUIModel.subscribeScreenTapped(screenTapped: tapAction.asObservable())
 
         self.viewModel.swiftUIModel.messagePanelState

@@ -174,7 +174,6 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var lastMessageDate = BehaviorRelay<String>(value: "")
     var lastMessageDisposeBag = DisposeBag()
 
-    var hideNavigationBar = BehaviorRelay(value: false)
     var conversationDisposeBag = DisposeBag()
     let disposeBag = DisposeBag()
 
@@ -1037,7 +1036,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         let isReplyCheck = message.isReply() || secondMessage.isReply()
         let hasReactions = !message.reactions.isEmpty || !secondMessage.reactions.isEmpty
         let isEmojiOnlyMessage = (message.type == .text && message.content.containsOnlyEmoji && !message.isMessageDeleted() && !message.isMessageEdited()) ||
-                                 (secondMessage.type == .text && secondMessage.content.containsOnlyEmoji && !secondMessage.isMessageDeleted() && !secondMessage.isMessageEdited())
+            (secondMessage.type == .text && secondMessage.content.containsOnlyEmoji && !secondMessage.isMessageDeleted() && !secondMessage.isMessageEdited())
 
         return differentUri || messageTypeCheck || differentAuthor ||
             isReplyCheck || hasReactions || isEmojiOnlyMessage
