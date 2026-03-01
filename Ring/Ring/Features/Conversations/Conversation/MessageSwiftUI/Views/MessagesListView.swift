@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2022 - 2025 Savoir-faire Linux Inc.
+ *  Copyright (C) 2022 - 2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -55,9 +55,9 @@ struct MessagesListView: View {
     @SwiftUI.State private var messageFrame: CGRect?
     @SwiftUI.State private var screenHeight: CGFloat = 0
     @SwiftUI.State private var messageContainerHeight: CGFloat = 0
-    @SwiftUI.State private var shouldHideActiveKeyboard = false
     @SwiftUI.State var isMessageBarFocused: Bool = false
     @SwiftUI.State var keyboardHeight: CGFloat = 0
+    @SwiftUI.State private var keyboardWasActiveBeforeMenu: Bool = false
 
     @ObservedObject private var dimensionsManager = ScreenDimensionsManager.shared
 
@@ -85,7 +85,7 @@ struct MessagesListView: View {
                         }
                     }
                     .layoutPriority(1)
-                    .padding(.bottom, shouldHideActiveKeyboard ? keyboardHeight : messageContainerHeight - 30)
+                    .padding(.bottom, messageContainerHeight - 30)
                     if !model.isBlocked {
                         MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
                             .alignmentGuide(VerticalAlignment.center) { dimensions in
@@ -96,19 +96,19 @@ struct MessagesListView: View {
                             }
                     }
                 }
-                .overlay(contextMenuPresentingState == .shouldPresent && model.contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
-                // hide navigation bar when presenting context menu
-                .onChange(of: contextMenuPresentingState) { newValue in
-                    let shouldHide = newValue == .shouldPresent
-                    model.hideNavigationBar.accept(shouldHide)
-                }
-                // hide context menu overly when device is rotated
+                .background(
+                    ContextMenuSnapshotWindowCoordinator(
+                        snapshot: currentSnapshot,
+                        presentingState: contextMenuPresentingState,
+                        model: model.contextMenuModel,
+                        presentingStateBinding: $contextMenuPresentingState
+                    )
+                )
                 .onChange(of: dimensionsManager.adaptiveHeight) { newHeight in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         if screenHeight != newHeight && screenHeight != 0 {
                             screenHeight = newHeight
                             contextMenuPresentingState = .dismissed
-                            self.shouldHideActiveKeyboard = false
                         }
                     }
                 }
@@ -169,10 +169,6 @@ struct MessagesListView: View {
                 model.screenTapped = false
             }
         })
-    }
-
-    func makeOverlay() -> some View {
-        return ContextMenuView(model: model.contextMenuModel, presentingState: $contextMenuPresentingState)
     }
 
     private func createMessagesStackView() -> some View {
@@ -255,18 +251,21 @@ struct MessagesListView: View {
             if contextMenuPresentingState != .dismissed && contextMenuPresentingState != .none {
                 return
             }
-            model.hideNavigationBar.accept(true)
-            model.contextMenuModel.presentingMessage = message
+            guard let snapshot = captureKeyWindowSnapshot(erasingRect: frame) else { return }
             model.contextMenuModel.messageFrame = frame
-            /*
-             If the keyboard is open, it should be closed.
-             Once the context menu is removed, the keyboard
-             should be shown again.
-             */
-            if keyboardHeight > 0 {
-                hideKeyboardIfNeed()
-            }
+            model.contextMenuModel.configure(with: message)
+            currentSnapshot = snapshot
             contextMenuPresentingState = .shouldPresent
+
+            if keyboardHeight > 0 {
+                keyboardWasActiveBeforeMenu = true
+                isMessageBarFocused = false
+                DispatchQueue.main.async {
+                    UIView.performWithoutAnimation {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+                }
+            }
         }, showReactionsView: {message in
             reactionsForMessage = message
             showReactionsView.toggle()
@@ -397,28 +396,9 @@ struct MessagesListView: View {
         .background(VisualEffect(style: .systemThickMaterial, withVibrancy: true).allowsHitTesting(false))
     }
 
-    private func hideKeyboardIfNeed() {
-        if keyboardHeight > 0 {
-            withAnimation {
-                self.shouldHideActiveKeyboard = true
-            }
-            self.hideKeyboard()
-            self.isMessageBarFocused = false
-        }
-    }
-
     private func handleKeyboardHeightChange(_ height: CGFloat) {
-        /*
-         If shouldHideActiveKeyboard is true, we don't track the
-         keyboard height, as the keyboard is temporarily hidden
-         and expected to reappear once the context menu is removed.
-         */
-        if !shouldHideActiveKeyboard {
-            DispatchQueue.main.async {
-                withAnimation {
-                    keyboardHeight = height
-                }
-            }
+        DispatchQueue.main.async {
+            keyboardHeight = height
         }
     }
 
@@ -432,20 +412,20 @@ struct MessagesListView: View {
          */
         switch state {
         case .willDismissWithoutAction, .willDismissWithAction:
-            if shouldHideActiveKeyboard {
+            if keyboardWasActiveBeforeMenu {
                 isMessageBarFocused = true
-                withAnimation {
-                    shouldHideActiveKeyboard = false
-                }
+                keyboardWasActiveBeforeMenu = false
             }
-        case .none, .shouldPresent, .dismissed:
-            break
         case .willDismissWithTextEditingAction:
-            if shouldHideActiveKeyboard {
-                withAnimation {
-                    shouldHideActiveKeyboard = false
-                }
+            keyboardWasActiveBeforeMenu = false
+        case .dismissed:
+            keyboardWasActiveBeforeMenu = false
+            currentSnapshot = nil
+            DispatchQueue.main.async {
+                contextMenuPresentingState = .none
             }
+        case .none, .shouldPresent:
+            break
         }
     }
 }
