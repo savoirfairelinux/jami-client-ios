@@ -365,6 +365,7 @@
 		2673D63225267785000C56CB /* ConferenceLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */; };
 		2679E42C29328352007E4639 /* ConcurrentDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679E42B29328352007E4639 /* ConcurrentDictionary.swift */; };
 		267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267AD77D252B979F00047593 /* ConferenceParticipant.swift */; };
+		267B53FE2F54D94400565A0E /* ContextMenuSnapshotWindowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B53FD2F54D93D00565A0E /* ContextMenuSnapshotWindowCoordinator.swift */; };
 		267B956A2C20C99A00353B01 /* EditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B95692C20C99A00353B01 /* EditProfileVM.swift */; };
 		267B956C2C233DD800353B01 /* AccountSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B956B2C233DD800353B01 /* AccountSettings.swift */; };
 		267B956E2C233E2600353B01 /* GeneralSettingsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B956D2C233E2600353B01 /* GeneralSettingsViews.swift */; };
@@ -1006,6 +1007,7 @@
 		2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceLayoutHelper.swift; sourceTree = "<group>"; };
 		2679E42B29328352007E4639 /* ConcurrentDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentDictionary.swift; sourceTree = "<group>"; };
 		267AD77D252B979F00047593 /* ConferenceParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceParticipant.swift; sourceTree = "<group>"; };
+		267B53FD2F54D93D00565A0E /* ContextMenuSnapshotWindowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuSnapshotWindowCoordinator.swift; sourceTree = "<group>"; };
 		267B95692C20C99A00353B01 /* EditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVM.swift; sourceTree = "<group>"; };
 		267B956B2C233DD800353B01 /* AccountSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettings.swift; sourceTree = "<group>"; };
 		267B956D2C233E2600353B01 /* GeneralSettingsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViews.swift; sourceTree = "<group>"; };
@@ -3496,6 +3498,7 @@
 		265DFB04292F060800834B97 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				267B53FD2F54D93D00565A0E /* ContextMenuSnapshotWindowCoordinator.swift */,
 				2637E5622DDE274E00ACCF91 /* CallBannerView.swift */,
 				26EF35EE29075A5300D97E14 /* MessageStackView.swift */,
 				269DA09C28E23F57007D51D6 /* MessagesListView.swift */,
@@ -4266,6 +4269,7 @@
 				26E0731C2A918F7A006B6F03 /* SwiftUIViews.swift in Sources */,
 				264EA8862977089C00B6FB6F /* LogViewController.swift in Sources */,
 				1D4EE84D29252AD000ED2010 /* SwarmCreationUIModel.swift in Sources */,
+				267B53FE2F54D94400565A0E /* ContextMenuSnapshotWindowCoordinator.swift in Sources */,
 				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,
 				0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */,
 				2607176E2CAC454E00494875 /* ComposeNewMessageCoordinator.swift in Sources */,
