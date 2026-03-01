@@ -57,7 +57,7 @@ class ContextMenuVM: ObservableObject {
     let menuImageSize: CGFloat = 18
     let menuItemFont = Font.callout
     let screenPadding: CGFloat = 100
-    let menuCornerRadius: CGFloat = 3
+    let menuCornerRadius: CGFloat = 14
     let defaultVerticalPadding: CGFloat = 6
     let maxScaleFactor: CGFloat = 1.1
     var bottomOffset: CGFloat = 0 // move message up

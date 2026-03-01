@@ -77,6 +77,15 @@ enum ContextualMenuItem: Identifiable {
         }
     }
 
+    var isDestructive: Bool {
+        switch self {
+        case .deleteMessage, .deleteFile:
+            return true
+        default:
+            return false
+        }
+    }
+
     func image() -> String {
         switch self {
         case .preview:

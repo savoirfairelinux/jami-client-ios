@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2022 - 2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -47,8 +45,6 @@ struct ContextMenuView: View {
     @SwiftUI.StateObject var model: ContextMenuVM
     @Binding var presentingState: ContextMenuPresentingState
     // animations
-    @SwiftUI.State private var blurAmount = 0.0
-    @SwiftUI.State private var backgroundScale: CGFloat = 1.00
     @SwiftUI.State private var actionsScale: CGFloat = 0.00
     @SwiftUI.State private var messageScale: CGFloat = 1.00
     @SwiftUI.State private var messageShadow: CGFloat = 0.00
@@ -57,6 +53,8 @@ struct ContextMenuView: View {
     @SwiftUI.State private var messageOffsetDiff: CGFloat = 0
     @SwiftUI.State private var cornerRadius: CGFloat = 0
     @SwiftUI.State private var scrollViewHeight: CGFloat = 0
+    @SwiftUI.State private var emojiBarOpacity: CGFloat = 0
+    @SwiftUI.State private var messageOpacity: CGFloat = 1
     @SwiftUI.GestureState private var isLongPressingEmojiBar = false
 
     var body: some View {
@@ -69,6 +67,7 @@ struct ContextMenuView: View {
                     if model.isShortMsg {
                         makeWithSpacers(elementForAlignment: makeEmojiBar())
                             .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                            .opacity(emojiBarOpacity)
                         Spacer()
                             .frame(height: model.emojiVerticalPadding)
                     }
@@ -80,6 +79,7 @@ struct ContextMenuView: View {
                                 .frame(width: model.incomingMessageMarginSize)
                         }
                         tappableMessageBody()
+                            .opacity(messageOpacity)
                         if model.isOurMsg! {
                             Spacer()
                                 .frame(width: 10)
@@ -90,6 +90,7 @@ struct ContextMenuView: View {
                     if !model.isShortMsg {
                         makeWithSpacers(elementForAlignment: makeEmojiBar())
                             .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                            .opacity(emojiBarOpacity)
                     } else {
                         Spacer()
                             .frame(height: model.defaultVerticalPadding)
@@ -117,10 +118,8 @@ struct ContextMenuView: View {
         .background(makeBackground())
         .onTapGesture {
             presentingState = .willDismissWithoutAction
-            withAnimation(Animation.easeOut(duration: 0.1)) {
+            withAnimation(Animation.easeOut(duration: 0.2)) {
                 scrollViewHeight = model.messageFrame.height
-                blurAmount = 0
-                backgroundScale = 1.00
                 messageScale = 1
                 actionsScale = 0.00
                 actionsOpacity = 0
@@ -128,30 +127,33 @@ struct ContextMenuView: View {
                 backgroundOpacity = 0
                 messageOffsetDiff = 0
                 cornerRadius = 0
+                emojiBarOpacity = 0
+                messageOpacity = 0
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.42) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 model.isEmojiPickerPresented = false
                 presentingState = .dismissed
             }
         }
         .onAppear(perform: {
             scrollViewHeight = model.messageFrame.height
-            withAnimation(.easeOut(duration: 0.3)) {
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
+
+            withAnimation(.easeOut(duration: 0.25)) {
                 messageScale = model.scaleMessageUp ? model.maxScaleFactor : 1.0
-                messageShadow = 4
-            }
-            withAnimation(.easeIn(duration: 0.2).delay(0.15)) {
-                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                impactMed.impactOccurred()
-                blurAmount = 10
-                backgroundScale = 0.96
+                messageShadow = 6
                 backgroundOpacity = 0.3
-                actionsOpacity = 1
                 scrollViewHeight = model.messageHeight
                 messageOffsetDiff = model.bottomOffset
                 cornerRadius = model.menuCornerRadius
             }
-            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(0.15)) {
+
+            withAnimation(.easeOut(duration: 0.2).delay(0.15)) {
+                emojiBarOpacity = 1
+                actionsOpacity = 1
+            }
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.7, blendDuration: 0).delay(0.15)) {
                 actionsScale = 1
             }
         })
@@ -185,10 +187,8 @@ struct ContextMenuView: View {
                 )
                 .onTapGesture {
                     presentingState = .willDismissWithoutAction
-                    withAnimation(Animation.easeOut(duration: 0.1)) {
+                    withAnimation(Animation.easeOut(duration: 0.2)) {
                         scrollViewHeight = model.messageFrame.height
-                        blurAmount = 0
-                        backgroundScale = 1.00
                         messageScale = 1
                         actionsScale = 0.00
                         actionsOpacity = 0
@@ -196,8 +196,10 @@ struct ContextMenuView: View {
                         backgroundOpacity = 0
                         messageOffsetDiff = 0
                         cornerRadius = 0
+                        emojiBarOpacity = 0
+                        messageOpacity = 0
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                         model.isEmojiPickerPresented = false
                         presentingState = .dismissed
                     }
@@ -208,15 +210,11 @@ struct ContextMenuView: View {
     }
 
     func makeBackground() -> some View {
-        ZStack {
-            Color(UIColor.systemBackground)
-                .opacity(backgroundOpacity)
-            Color(UIColor.systemBackground)
-                .frame(width: model.messageFrame.width, height: model.messageFrame.height)
-                .position(x: model.messageFrame.midX, y: model.messageFrame.midY)
-            VisualEffect(style: .regular, withVibrancy: false)
-            Color(UIColor.tertiaryLabel)
-                .opacity(backgroundOpacity)
+        let progress = backgroundOpacity / 0.3  // 0→1
+        return ZStack {
+            VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false)
+                .opacity(progress)
+            Color.black.opacity(progress * 0.1)
         }
         .edgesIgnoringSafeArea(.all)
     }
@@ -230,38 +228,43 @@ struct ContextMenuView: View {
                         let state: ContextMenuPresentingState = shouldShowKeyboard ? .willDismissWithAction : .willDismissWithTextEditingAction
                         model.isEmojiPickerPresented = false
                         presentingState = state
+                        withAnimation(Animation.easeOut(duration: 0.2)) {
+                            actionsOpacity = 0
+                            actionsScale = 0
+                            emojiBarOpacity = 0
+                            messageOpacity = 0
+                            backgroundOpacity = 0
+                            messageScale = 1
+                            messageShadow = 0
+                        }
                         model.presentingMessage.model.contextMenuSelect(item: item)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             presentingState = .dismissed
                         }
                     } label: {
                         HStack {
-                            Spacer()
-                                .frame(width: model.menuPadding)
                             Text(item.toString())
-                                .font(.callout)
-                                .fontWeight(.light)
-                                .foregroundColor(Color(UIColor.label))
+                                .font(.body)
+                                .foregroundColor(item.isDestructive ? .red : Color(UIColor.label))
                             Spacer()
-
                             Image(systemName: item.image())
-                                .foregroundColor(Color(UIColor.label))
-                                .font(Font.callout.weight(.light))
-                                .frame(maxHeight: model.menuImageSize)
-                            Spacer()
-                                .frame(width: model.menuPadding)
+                                .foregroundColor(item.isDestructive ? .red : Color(UIColor.secondaryLabel))
+                                .font(.body)
+                                .frame(width: model.menuImageSize, alignment: .center)
                         }
+                        .padding(.horizontal, model.menuPadding)
                         .frame(height: model.itemHeight)
+                        .contentShape(Rectangle())
                     }
+                    .buttonStyle(ContextMenuButtonStyle())
                     if model.menuItems.last != item {
                         Divider()
+                            .padding(.leading, model.menuPadding)
                     }
                 }
             }
         }
-        .background(VisualEffect(style: .systemUltraThinMaterial, withVibrancy: true))
-        .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
-        .cornerRadius(radius: model.menuCornerRadius, corners: .allCorners)
+        .modifier(GlassModifier(shape: RoundedRectangle(cornerRadius: model.menuCornerRadius, style: .continuous)))
     }
 
     func makeWithSpacers(elementForAlignment: some View) -> some View {
@@ -285,11 +288,10 @@ struct ContextMenuView: View {
 
 struct EmojiBarView: View {
     @SwiftUI.StateObject var cxModel: ContextMenuVM
-    @SwiftUI.State private var backgroundOpacity: CGFloat = 0.0
-    @Binding var presentingState: ContextMenuPresentingState
     @SwiftUI.State private var messageShadow: CGFloat = 0.00
     @SwiftUI.State private var emojiPaletteButtonOpacity: Double = 0
     @SwiftUI.State private var emojiPaletteButtonOffset: Double = -12
+    @Binding var presentingState: ContextMenuPresentingState
 
     var emojipalette: some View {
         ZStack {
@@ -358,11 +360,9 @@ struct EmojiBarView: View {
             .frame(height: cxModel.emojiBarHeight)
         }
         .frame(width: cxModel.emojiBarMaxWidth, height: cxModel.emojiBarHeight)
-        .opacity(1.0)
         .padding(.vertical, 1)
         .padding(.horizontal, 8)
-        .background(Color(UIColor.secondarySystemBackground))
-        .cornerRadius(radius: 32, corners: .allCorners)
+        .modifier(GlassModifier(shape: Capsule()))
         .shadow(color: Color(cxModel.shadowColor), radius: messageShadow)
         .onAppear(perform: {
             withAnimation(.easeOut(duration: 0.3)) {
@@ -431,4 +431,39 @@ struct EmojiBarItemView: View {
         }
     }
 
+}
+
+// MARK: - view modifiers
+
+private struct GlassModifier<S: InsettableShape>: ViewModifier {
+    let shape: S
+
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content
+                .glassEffect(in: shape)
+        } else {
+            content
+                .background(
+                    ZStack {
+                        VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false)
+                        Color.white.opacity(0.08)
+                    }
+                    .clipShape(shape)
+                )
+                .overlay(
+                    shape
+                        .strokeBorder(Color.white.opacity(0.25), lineWidth: 0.5)
+                )
+                .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 6)
+                .clipShape(shape)
+        }
+    }
+}
+
+private struct ContextMenuButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(configuration.isPressed ? Color(UIColor.systemGray4).opacity(0.5) : Color.clear)
+    }
 }
