@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2022 - 2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,8 +29,8 @@ enum ContextMenuPresentingState {
 }
 
 struct VisualEffect: UIViewRepresentable {
-    @SwiftUI.State var style: UIBlurEffect.Style
-    var withVibrancy: Bool
+    let style: UIBlurEffect.Style
+    let withVibrancy: Bool
 
     func makeUIView(context: Context) -> UIVisualEffectView {
         let blurEffect = UIBlurEffect(style: style)
@@ -47,8 +45,6 @@ struct ContextMenuView: View {
     @SwiftUI.StateObject var model: ContextMenuVM
     @Binding var presentingState: ContextMenuPresentingState
     // animations
-    @SwiftUI.State private var blurAmount = 0.0
-    @SwiftUI.State private var backgroundScale: CGFloat = 1.00
     @SwiftUI.State private var actionsScale: CGFloat = 0.00
     @SwiftUI.State private var messageScale: CGFloat = 1.00
     @SwiftUI.State private var messageShadow: CGFloat = 0.00
@@ -57,111 +53,125 @@ struct ContextMenuView: View {
     @SwiftUI.State private var messageOffsetDiff: CGFloat = 0
     @SwiftUI.State private var cornerRadius: CGFloat = 0
     @SwiftUI.State private var scrollViewHeight: CGFloat = 0
-    @SwiftUI.GestureState private var isLongPressingEmojiBar = false
+    @SwiftUI.State private var emojiBarOpacity: CGFloat = 0
+    @SwiftUI.State private var messageOpacity: CGFloat = 1
+    @SwiftUI.State private var scrollEnabled: Bool = false
 
     var body: some View {
         ZStack {
-            GeometryReader { _ in
-                VStack(alignment: .leading) {
-                    Spacer()
-                        .frame(height: model.defaultVerticalPadding)
-                    // emoji picker if short message, otherwise see below
-                    if model.isShortMsg {
-                        makeWithSpacers(elementForAlignment: makeEmojiBar())
-                            .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+            GeometryReader { geo in
+                let topOffset = max(0, model.messageFrame.origin.y + messageOffsetDiff - (model.isShortMsg ? model.emojiBarHeight : 0))
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        // top spacing to position message at its original Y
                         Spacer()
-                            .frame(height: model.emojiVerticalPadding)
-                    }
-                    // message body in scrollable view
-                    // message + tappable area
-                    HStack {
-                        if !model.isOurMsg! {
-                            Spacer()
-                                .frame(width: model.incomingMessageMarginSize)
-                        }
-                        tappableMessageBody()
-                        if model.isOurMsg! {
-                            Spacer()
-                                .frame(width: 10)
-                        }
-                    }
-                    .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
-                    // extra check for long messages to move reaction bar closer to the part of the screen where finger was last
-                    if !model.isShortMsg {
-                        makeWithSpacers(elementForAlignment: makeEmojiBar())
-                            .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
-                    } else {
+                            .frame(height: topOffset)
                         Spacer()
                             .frame(height: model.defaultVerticalPadding)
-                    }
+                        // emoji picker if short message, otherwise see below
+                        if model.isShortMsg {
+                            makeWithSpacers(elementForAlignment: makeEmojiBar())
+                                .frame(width: model.screenWidth, alignment: model.isOurMsg ? .trailing : .leading)
+                                .opacity(emojiBarOpacity)
+                            Spacer()
+                                .frame(height: model.emojiVerticalPadding)
+                        }
+                        // message + tappable area
+                        HStack {
+                            if !model.isOurMsg {
+                                Spacer()
+                                    .frame(width: model.incomingMessageMarginSize)
+                            }
+                            tappableMessageBody()
+                                .opacity(messageOpacity)
+                            if model.isOurMsg {
+                                Spacer()
+                                    .frame(width: model.outgoingMessageTrailingMargin)
+                            }
+                        }
+                        .frame(width: model.screenWidth, alignment: model.isOurMsg ? .trailing : .leading)
+                        // emoji bar below message for long messages
+                        if !model.isShortMsg {
+                            makeWithSpacers(elementForAlignment: makeEmojiBar())
+                                .frame(width: model.screenWidth, alignment: model.isOurMsg ? .trailing : .leading)
+                                .opacity(emojiBarOpacity)
+                        } else {
+                            Spacer()
+                                .frame(height: model.defaultVerticalPadding)
+                        }
 
-                    ZStack {
-                        // actions (reply, fwd, etc.)
-                        makeWithSpacers(elementForAlignment: makeActions()
-                                            .opacity(actionsOpacity)
-                                            .scaleEffect(actionsScale, anchor: model.actionsAnchor)
-                                            .frame(width: model.menuSize.width)
-                        )
-                        .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                        ZStack {
+                            // actions (reply, fwd, etc.)
+                            makeWithSpacers(elementForAlignment: makeActions()
+                                                .opacity(actionsOpacity)
+                                                .scaleEffect(actionsScale, anchor: model.actionsAnchor)
+                                                .frame(width: model.menuSize.width)
+                            )
+                            .frame(width: model.screenWidth, alignment: model.isOurMsg ? .trailing : .leading)
+                        }
+                        .frame(width: model.screenWidth, alignment: model.isOurMsg ? .trailing : .leading)
                     }
-                    .frame(width: model.screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                    .padding(.trailing, 4)
                 }
-                .padding(.trailing, 4)
+                .applyScrollDisabled(!scrollEnabled)
+                .onChange(of: messageOffsetDiff) { _ in
+                    updateScrollEnabled(availableHeight: geo.size.height)
+                }
+                .onAppear {
+                    updateScrollEnabled(availableHeight: geo.size.height)
+                }
             }
-            .offset( // offset vstack
-                x: 0,
-                y: max(0, model.messageFrame.origin.y + messageOffsetDiff - (model.isShortMsg ? model.emojiBarHeight : 0))
-            )
-
         }
         .background(makeBackground())
         .onTapGesture {
-            presentingState = .willDismissWithoutAction
-            withAnimation(Animation.easeOut(duration: 0.1)) {
-                scrollViewHeight = model.messageFrame.height
-                blurAmount = 0
-                backgroundScale = 1.00
-                messageScale = 1
-                actionsScale = 0.00
-                actionsOpacity = 0
-                messageShadow = 0
-                backgroundOpacity = 0
-                messageOffsetDiff = 0
-                cornerRadius = 0
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.42) {
-                model.isEmojiPickerPresented = false
-                presentingState = .dismissed
-            }
+            animateDismiss(state: .willDismissWithoutAction)
         }
         .onAppear(perform: {
             scrollViewHeight = model.messageFrame.height
-            withAnimation(.easeOut(duration: 0.3)) {
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.prepare()
+            impactMed.impactOccurred()
+
+            withAnimation(.easeOut(duration: 0.25)) {
                 messageScale = model.scaleMessageUp ? model.maxScaleFactor : 1.0
-                messageShadow = 4
-            }
-            withAnimation(.easeIn(duration: 0.2).delay(0.15)) {
-                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                impactMed.impactOccurred()
-                blurAmount = 10
-                backgroundScale = 0.96
+                messageShadow = 6
                 backgroundOpacity = 0.3
-                actionsOpacity = 1
                 scrollViewHeight = model.messageHeight
                 messageOffsetDiff = model.bottomOffset
                 cornerRadius = model.menuCornerRadius
             }
-            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(0.15)) {
+
+            withAnimation(.easeOut(duration: 0.2).delay(0.15)) {
+                emojiBarOpacity = 1
+                actionsOpacity = 1
+            }
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.7, blendDuration: 0).delay(0.15)) {
                 actionsScale = 1
             }
         })
         .edgesIgnoringSafeArea(.all)
     }
 
+    /// Enable scrolling only when content exceeds available space.
+    private func updateScrollEnabled(availableHeight: CGFloat) {
+        let topOffset = max(0, model.messageFrame.origin.y + messageOffsetDiff - (model.isShortMsg ? model.emojiBarHeight : 0))
+        var contentHeight: CGFloat = topOffset + model.defaultVerticalPadding
+        contentHeight += model.emojiBarHeight
+        if model.isShortMsg {
+            contentHeight += model.emojiVerticalPadding + model.defaultVerticalPadding
+        }
+        contentHeight += scrollViewHeight
+        contentHeight += model.menuSize.height
+        let needs = contentHeight > availableHeight
+        if needs != scrollEnabled {
+            scrollEnabled = needs
+        }
+    }
+
     func tappableMessageBody() -> some View {
         ZStack {
             ScrollView {
-                model.presentingMessage
+                model.presentingMessageView
                     .frame(
                         width: model.messageFrame.width,
                         height: model.messageFrame.height
@@ -184,23 +194,7 @@ struct ContextMenuView: View {
                     height: scrollViewHeight
                 )
                 .onTapGesture {
-                    presentingState = .willDismissWithoutAction
-                    withAnimation(Animation.easeOut(duration: 0.1)) {
-                        scrollViewHeight = model.messageFrame.height
-                        blurAmount = 0
-                        backgroundScale = 1.00
-                        messageScale = 1
-                        actionsScale = 0.00
-                        actionsOpacity = 0
-                        messageShadow = 0
-                        backgroundOpacity = 0
-                        messageOffsetDiff = 0
-                        cornerRadius = 0
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        model.isEmojiPickerPresented = false
-                        presentingState = .dismissed
-                    }
+                    animateDismiss(state: .willDismissWithoutAction)
                 }
                 .foregroundColor(Color.clear) // Make the Rectangle transparent
                 .contentShape(Rectangle())
@@ -208,15 +202,11 @@ struct ContextMenuView: View {
     }
 
     func makeBackground() -> some View {
-        ZStack {
-            Color(UIColor.systemBackground)
-                .opacity(backgroundOpacity)
-            Color(UIColor.systemBackground)
-                .frame(width: model.messageFrame.width, height: model.messageFrame.height)
-                .position(x: model.messageFrame.midX, y: model.messageFrame.midY)
-            VisualEffect(style: .regular, withVibrancy: false)
-            Color(UIColor.tertiaryLabel)
-                .opacity(backgroundOpacity)
+        let progress = backgroundOpacity / 0.3  // 0→1
+        return ZStack {
+            VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false)
+                .opacity(progress)
+            Color.black.opacity(progress * 0.1)
         }
         .edgesIgnoringSafeArea(.all)
     }
@@ -228,52 +218,44 @@ struct ContextMenuView: View {
                     Button {
                         let shouldShowKeyboard = item == .copy || item == .deleteMessage
                         let state: ContextMenuPresentingState = shouldShowKeyboard ? .willDismissWithAction : .willDismissWithTextEditingAction
-                        model.isEmojiPickerPresented = false
-                        presentingState = state
-                        model.presentingMessage.model.contextMenuSelect(item: item)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            presentingState = .dismissed
-                        }
+                        model.contentVM?.contextMenuSelect(item: item)
+                        animateDismiss(state: state, delay: 0.1)
                     } label: {
                         HStack {
-                            Spacer()
-                                .frame(width: model.menuPadding)
                             Text(item.toString())
-                                .font(.callout)
-                                .fontWeight(.light)
-                                .foregroundColor(Color(UIColor.label))
+                                .font(.body)
+                                .foregroundColor(item.isDestructive ? .red : Color(UIColor.label))
                             Spacer()
-
                             Image(systemName: item.image())
-                                .foregroundColor(Color(UIColor.label))
-                                .font(Font.callout.weight(.light))
-                                .frame(maxHeight: model.menuImageSize)
-                            Spacer()
-                                .frame(width: model.menuPadding)
+                                .foregroundColor(item.isDestructive ? .red : Color(UIColor.secondaryLabel))
+                                .font(.body)
+                                .frame(width: model.menuImageSize, alignment: .center)
                         }
-                        .frame(height: model.itemHeight)
+                        .padding(.horizontal, model.menuPadding)
+                        .frame(minHeight: model.itemHeight)
+                        .contentShape(Rectangle())
                     }
+                    .buttonStyle(ContextMenuButtonStyle())
                     if model.menuItems.last != item {
                         Divider()
+                            .padding(.leading, model.menuPadding)
                     }
                 }
             }
         }
-        .background(VisualEffect(style: .systemUltraThinMaterial, withVibrancy: true))
-        .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
-        .cornerRadius(radius: model.menuCornerRadius, corners: .allCorners)
+        .modifier(GlassModifier(shape: RoundedRectangle(cornerRadius: model.menuCornerRadius, style: .continuous)))
     }
 
     func makeWithSpacers(elementForAlignment: some View) -> some View {
         HStack {
-            if !model.isOurMsg! {
+            if !model.isOurMsg {
                 Spacer()
                     .frame(width: model.incomingMessageMarginSize)
             }
             elementForAlignment
-            if model.isOurMsg! {
+            if model.isOurMsg {
                 Spacer()
-                    .frame(width: 10)
+                    .frame(width: model.outgoingMessageTrailingMargin)
             }
         }
     }
@@ -281,15 +263,35 @@ struct ContextMenuView: View {
     func makeEmojiBar() -> some View {
         EmojiBarView(cxModel: model, presentingState: $presentingState)
     }
+
+    private func animateDismiss(state: ContextMenuPresentingState, delay: Double = 0.25) {
+        presentingState = state
+        model.isEmojiPickerPresented = false
+        scrollEnabled = false
+        withAnimation(Animation.easeOut(duration: 0.2)) {
+            scrollViewHeight = model.messageFrame.height
+            messageScale = 1
+            actionsScale = 0
+            actionsOpacity = 0
+            messageShadow = 0
+            backgroundOpacity = 0
+            messageOffsetDiff = 0
+            cornerRadius = 0
+            emojiBarOpacity = 0
+            messageOpacity = 0
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            presentingState = .dismissed
+        }
+    }
 }
 
 struct EmojiBarView: View {
-    @SwiftUI.StateObject var cxModel: ContextMenuVM
-    @SwiftUI.State private var backgroundOpacity: CGFloat = 0.0
-    @Binding var presentingState: ContextMenuPresentingState
+    @ObservedObject var cxModel: ContextMenuVM
     @SwiftUI.State private var messageShadow: CGFloat = 0.00
     @SwiftUI.State private var emojiPaletteButtonOpacity: Double = 0
     @SwiftUI.State private var emojiPaletteButtonOffset: Double = -12
+    @Binding var presentingState: ContextMenuPresentingState
 
     var emojipalette: some View {
         ZStack {
@@ -298,7 +300,7 @@ struct EmojiBarView: View {
             }) {
                 Image(systemName: "plus.circle.fill")
                     .font(.largeTitle)
-                    .foregroundColor(Color(cxModel.presentingMessage.model.preferencesColor))
+                    .foregroundColor(Color(cxModel.preferencesColor))
             }.emojiPicker(
                 isPresented: $cxModel.isEmojiPickerPresented,
                 selectedEmoji: $cxModel.selectedEmoji
@@ -314,8 +316,8 @@ struct EmojiBarView: View {
                 emojiPaletteButtonOpacity = 1
             })
         })
-        .onChange(of: cxModel.selectedEmoji, perform: { newValue in
-            if newValue != "" {
+        .onChange(of: cxModel.selectedEmoji) { newValue in
+            if !newValue.isEmpty {
                 cxModel.handleUpdatedReaction()
                 cxModel.isEmojiPickerPresented = false
                 presentingState = .willDismissWithAction
@@ -323,7 +325,7 @@ struct EmojiBarView: View {
                     presentingState = .dismissed
                 }
             }
-        })
+        }
     }
 
     var body: some View {
@@ -337,9 +339,9 @@ struct EmojiBarView: View {
                         cxModel: cxModel,
                         emoji: cxModel.preferredUserReactions[index],
                         presentingState: $presentingState,
-                        elementOpacity: 1.0 as CGFloat,
+                        initialOpacity: 1.0,
                         delayIn: min(2.0, 0.03 * Double(index)),
-                        elementRotation: Angle(degrees: 45)
+                        initialRotation: Angle(degrees: 45)
                     )
                 }
                 // then add scrollable revokes not in the defaults
@@ -348,9 +350,9 @@ struct EmojiBarView: View {
                         cxModel: cxModel,
                         emoji: cxModel.uniqueAuthoredReactions[index],
                         presentingState: $presentingState,
-                        elementOpacity: 1.0 as CGFloat,
+                        initialOpacity: 1.0,
                         delayIn: min(2.0, 0.03 * Double(index)),
-                        elementRotation: Angle(degrees: 45)
+                        initialRotation: Angle(degrees: 45)
                     )
                 }
                 Spacer().frame(width: 2)
@@ -358,11 +360,9 @@ struct EmojiBarView: View {
             .frame(height: cxModel.emojiBarHeight)
         }
         .frame(width: cxModel.emojiBarMaxWidth, height: cxModel.emojiBarHeight)
-        .opacity(1.0)
         .padding(.vertical, 1)
         .padding(.horizontal, 8)
-        .background(Color(UIColor.secondarySystemBackground))
-        .cornerRadius(radius: 32, corners: .allCorners)
+        .modifier(GlassModifier(shape: Capsule()))
         .shadow(color: Color(cxModel.shadowColor), radius: messageShadow)
         .onAppear(perform: {
             withAnimation(.easeOut(duration: 0.3)) {
@@ -373,12 +373,14 @@ struct EmojiBarView: View {
 }
 
 struct EmojiBarItemView: View {
-    var cxModel: ContextMenuVM
-    var emoji: String
+    let cxModel: ContextMenuVM
+    let emoji: String
     @Binding var presentingState: ContextMenuPresentingState
-    @SwiftUI.State var elementOpacity: CGFloat
-    @SwiftUI.State var delayIn: Double
-    @SwiftUI.State var elementRotation: Angle
+    let initialOpacity: CGFloat
+    let delayIn: Double
+    let initialRotation: Angle
+    @SwiftUI.State private var elementOpacity: CGFloat = 0
+    @SwiftUI.State private var elementRotation: Angle = Angle(degrees: 45)
     @SwiftUI.State private var enabledNotifierLength: CGFloat = 0
     @SwiftUI.State private var enabledNotifierHeight: CGFloat = 0
     @SwiftUI.State private var fontSize: CGFloat = 0.0
@@ -408,7 +410,7 @@ struct EmojiBarItemView: View {
                     }
                 )
             Rectangle()
-                .fill(Color(cxModel.presentingMessage.model.preferencesColor))
+                .fill(Color(cxModel.preferencesColor))
                 .opacity(emojiActive ? elementOpacity : 0)
                 .frame(width: enabledNotifierLength, height: enabledNotifierHeight, alignment: .center)
                 .cornerRadius(8)
@@ -419,11 +421,13 @@ struct EmojiBarItemView: View {
                 cxModel.selectedEmoji = emoji
             }))
         .onAppear {
+            elementOpacity = initialOpacity
+            elementRotation = initialRotation
             withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(delayIn)) {
                 elementOpacity = 1
             }
             withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.3).delay(delayIn)) {
-                elementRotation = Angle(degrees: elementRotation.degrees / -2)
+                elementRotation = Angle(degrees: initialRotation.degrees / -2)
             }
             withAnimation(.spring(response: 0.2, dampingFraction: 0.3, blendDuration: 0.5).delay(delayIn + 0.3)) {
                 elementRotation = Angle(degrees: 0)
@@ -431,4 +435,52 @@ struct EmojiBarItemView: View {
         }
     }
 
+}
+
+// MARK: - scroll disable compatibility
+
+private extension View {
+    @ViewBuilder
+    func applyScrollDisabled(_ disabled: Bool) -> some View {
+        if #available(iOS 16.0, *) {
+            self.scrollDisabled(disabled)
+        } else {
+            self
+        }
+    }
+}
+
+// MARK: - view modifiers
+
+private struct GlassModifier<S: InsettableShape>: ViewModifier {
+    let shape: S
+
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content
+                .glassEffect(in: shape)
+        } else {
+            content
+                .background(
+                    ZStack {
+                        VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false)
+                        Color.white.opacity(0.08)
+                    }
+                    .clipShape(shape)
+                )
+                .overlay(
+                    shape
+                        .strokeBorder(Color.white.opacity(0.25), lineWidth: 0.5)
+                )
+                .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 6)
+                .clipShape(shape)
+        }
+    }
+}
+
+private struct ContextMenuButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(configuration.isPressed ? Color(UIColor.systemGray4).opacity(0.5) : Color.clear)
+    }
 }

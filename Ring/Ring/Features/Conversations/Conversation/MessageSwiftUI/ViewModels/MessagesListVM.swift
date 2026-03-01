@@ -174,7 +174,6 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var lastMessageDate = BehaviorRelay<String>(value: "")
     var lastMessageDisposeBag = DisposeBag()
 
-    var hideNavigationBar = BehaviorRelay(value: false)
     var conversationDisposeBag = DisposeBag()
     let disposeBag = DisposeBag()
 
