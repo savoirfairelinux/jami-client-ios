@@ -58,11 +58,9 @@ struct MessageBubbleView: View {
                         if !presentMenu {
                             return
                         }
-                        DispatchQueue.main.async {
-                            let frame = proxy.frame(in: .global)
-                            presentMenu = false
-                            onLongPress(frame, self)
-                        }
+                        let frame = proxy.frame(in: .global)
+                        presentMenu = false
+                        onLongPress(frame, self)
                     })
             }
         )
@@ -127,9 +125,6 @@ struct MessageBubbleView: View {
             Text(model.content)
                 .font(model.styling.textFont)
                 .lineLimit(nil)
-                .onTapGesture {
-                    // Add an empty onTapGesture to keep the table view scrolling smooth
-                }
                 .modifier(MessageLongPress(longPressCb: receivedLongPress()))
         }
     }
