@@ -145,7 +145,51 @@ struct MessageLongPress: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onLongPressGesture(minimumDuration: 0.2, perform: longPressCb)
+            .overlay(
+                LongPressOverlay(minimumDuration: 0.15, onLongPress: longPressCb)
+            )
+    }
+}
+
+/// Uses a UIKit long-press gesture recognizer so that the gesture does not
+/// conflict with SwiftUI scroll gestures and does not require an empty
+/// onTapGesture workaround.
+private struct LongPressOverlay: UIViewRepresentable {
+    let minimumDuration: TimeInterval
+    let onLongPress: () -> Void
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(onLongPress: onLongPress)
+    }
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.backgroundColor = .clear
+        let recognizer = UILongPressGestureRecognizer(
+            target: context.coordinator,
+            action: #selector(Coordinator.handleLongPress(_:))
+        )
+        recognizer.minimumPressDuration = minimumDuration
+        view.addGestureRecognizer(recognizer)
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        context.coordinator.onLongPress = onLongPress
+    }
+
+    class Coordinator {
+        var onLongPress: () -> Void
+
+        init(onLongPress: @escaping () -> Void) {
+            self.onLongPress = onLongPress
+        }
+
+        @objc func handleLongPress(_ recognizer: UILongPressGestureRecognizer) {
+            if recognizer.state == .began {
+                onLongPress()
+            }
+        }
     }
 }
 

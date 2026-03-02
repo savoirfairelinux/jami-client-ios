@@ -123,7 +123,9 @@ func captureKeyWindowSnapshot(erasingRect: CGRect? = nil) -> UIImage? {
         keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
     }
     guard let window = keyWindow else { return nil }
-    let renderer = UIGraphicsImageRenderer(bounds: window.bounds)
+    let format = UIGraphicsImageRendererFormat()
+    format.scale = 1
+    let renderer = UIGraphicsImageRenderer(bounds: window.bounds, format: format)
     return renderer.image { ctx in
         window.drawHierarchy(in: window.bounds, afterScreenUpdates: false)
         if let rect = erasingRect {
