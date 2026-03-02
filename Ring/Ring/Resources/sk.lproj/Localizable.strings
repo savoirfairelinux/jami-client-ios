@@ -42,7 +42,7 @@
 "global.copy" = "Kopírovať";
 "global.reply" = "Odpovedať";
 "global.search" = "Vyhľadávanie...";
-"global.supportJami" = "Support Jami project";
+"global.supportJami" = "Podporte projekt Jami";
 "global.deleteMessage" = "Vymazať správu";
 "global.deleteFile" = "Vymazať zo zariadenia";
 "global.editMessage" = "Zobraziť správu";
@@ -56,7 +56,7 @@
 "global.editPassword" = "Zmeniť heslo";
 "global.confirmPassword" = "Potvrďte heslo";
 "global.confirm" = "Potvrdiť";
-"global.cameraDisabled" = "Camera access is disabled. Enable it in device settings in order to use this feature.";
+"global.cameraDisabled" = "Prístup ku kamere je zakázaný. Ak chcete použiť túto funkciu, povoľte prístup v nastaveniach zariadenia.";
 "global.confirm" = "Potvrdiť";
 "global.connect" = "Pripojiť";
 "global.leave" = "Odchádzam";
@@ -64,22 +64,22 @@
 "scan.badQrCode" = "Zlý QR kód";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact…";
-"swarmcreation.addDescription" = "Add description";
+"swarmcreation.searchBar" = "Nájsť kontakt…";
+"swarmcreation.addDescription" = "Pridať popis";
 // Swarm
 "swarm.muteConversation" = "Mlčité rozhovory";
 "swarm.leaveConversation" = "Nechaj rozhovor";
 "swarm.removeConversation" = "Odstrániť konverzáciu";
 "swarm.removeContact" = "Odstrániť kontakt";
-"swarm.restartConversation" = "Restart conversation";
-"swarm.conversationEnded" = "Conversation ended";
+"swarm.restartConversation" = "Reštartovať konverzáciu";
+"swarm.conversationEnded" = "Konverzácia skončila";
 "swarm.chooseColor" = "Farba konverzácie";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Typ konverzácie";
 "swarm.identifier" = "Identifikátor";
-"swarm.conversationId" = "Conversation ID";
+"swarm.conversationId" = "ID konverzácie";
 "swarm.settings" = "Nastavenia";
 "swarm.members" = "Členovia";
-"swarm.addDescription" = "Add description";
+"swarm.addDescription" = "Pridať popis";
 "swarm.titlePlaceholder" = "Enter title";
 "swarm.titleAlertHeader" = "Edit group title";
 "swarm.descriptionAlertHeader" = "Edit group description";

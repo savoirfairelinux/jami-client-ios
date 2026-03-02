@@ -399,7 +399,7 @@
 "accountPage.linkedDevices" = "Aparate asociate";
 "accountPage.unlink" = "Elimină";
 "accountPage.generatingPin" = "Se generează codul PIN…";
-"accountPage.passwordForPin" = "Cont este protejat cu parolă, introdu parola pentru a genera codul PIN.";
+"accountPage.passwordForPin" = "Contul este protejat cu parolă. Introdu parola pentru a genera codul PIN.";
 "accountPage.pinExplanationTitle" = "În alt aparat";
 "accountPage.pinExplanationMessage" = "Instalează și pornește Jami, alege „Importă din alt aparat” și scanează codul QR sau introdu manual codul PIN.";
 "accountPage.pinError" = "A apărut o eroare în timpul generării codului PIN.";
