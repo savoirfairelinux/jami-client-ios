@@ -22,6 +22,7 @@ import RxRelay
 import RxCocoa
 import SwiftUI
 import SwiftyBeaver
+import Combine
 
 enum MessageInfo: State {
     case updateRead(messageId: String, message: MessageReadObserver)
@@ -91,6 +92,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var contextMenuModel = ContextMenuVM()
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
+    @Published var scrollToAfterLoadMore: String? // message id to preserve scroll position after loading history
     @Published var scrollToReplyTarget: String? // message id of a reply target that we should scroll
     var temporaryReplyTarget: String? // used to keep a message id of a reply target that we should scroll if this message not loaded yet. ScrollToReplyTarget should be updated after messages loaded
     @Published var swarmColor = UIColor.defaultSwarmColor {
@@ -174,12 +176,17 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var lastMessageDate = BehaviorRelay<String>(value: "")
     var lastMessageDisposeBag = DisposeBag()
 
+    private var isInitialLoad = true
+
     var conversationDisposeBag = DisposeBag()
     let disposeBag = DisposeBag()
+    private var cancellables = Set<AnyCancellable>()
 
     var lastMessageBeforeScroll: String?
+    private var messageIdBeforeLoadMore: String?
 
     var loading = true // to avoid a new loading while previous one still executing
+    @Published var oldestMessageVisible = false
     var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: BehaviorRelay<Data?>]())
     var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: String]())
     // last read
@@ -277,6 +284,19 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.subscribeMessagesActions()
         self.subscribeContextMenu()
         self.subscribeToTypingStatus()
+        self.subscribeOldestMessageVisibility()
+    }
+
+    private func subscribeOldestMessageVisibility() {
+        // When the sentinel at the top becomes visible, load more.
+        // Also retry when loading finishes while sentinel is still visible.
+        $oldestMessageVisible
+            .removeDuplicates()
+            .filter { $0 }
+            .sink { [weak self] _ in
+                self?.loadMore()
+            }
+            .store(in: &cancellables)
     }
 
     func subscribeScreenTapped(screenTapped: Observable<Bool>) {
@@ -508,16 +528,35 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                     self.messagesModels = [MessageContainerModel]()
                     return
                 }
+                let fromHistory = messages.fromHistory
                 let insertionCount: Int = self.insert(messages: messages.messages,
-                                                      fromHistory: messages.fromHistory)
+                                                      fromHistory: fromHistory)
                 if insertionCount == 0 {
                     return
                 }
                 self.computeSequencing()
                 self.updateNumberOfNewMessages()
+                // auto-scroll to bottom on initial load or when new messages arrive while at bottom
+                if self.isInitialLoad {
+                    self.isInitialLoad = false
+                    // Delay initial scroll to allow ScrollView to lay out content
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+                        self?.scrollToTheBottom()
+                    }
+                } else if fromHistory, let anchorId = self.messageIdBeforeLoadMore {
+                    // Preserve scroll position after loading older messages
+                    self.messageIdBeforeLoadMore = nil
+                    self.scrollToAfterLoadMore = anchorId
+                } else if !fromHistory && self.atTheBottom {
+                    self.scrollToTheBottom()
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
                     guard let self = self else {return }
                     self.loading = false
+                    // If sentinel is still visible after loading, load more
+                    if self.oldestMessageVisible {
+                        self.loadMore()
+                    }
                     // check if we have reply target to scroll to.
                     if let tempTarget = self.temporaryReplyTarget,
                        self.getMessage(messageId: tempTarget) != nil {
@@ -977,12 +1016,14 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         if self.loading || allLoaded() {
             return
         }
+        self.loading = true
         if let messageId = self.messagesModels.last?.id {
+            // Save the current oldest message ID so we can preserve scroll position after loading
+            self.messageIdBeforeLoadMore = messageId
             self.conversationService
                 .loadConversationMessages(conversationId: self.conversation.id,
                                           accountId: self.conversation.accountId,
                                           from: messageId)
-            self.loading = true
         }
     }
 
