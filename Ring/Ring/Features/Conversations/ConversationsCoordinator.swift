@@ -191,7 +191,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
                        let conversationId = accountCalls.first?.value.incomingNotAcceptedNotIgnoredCalls().first?.conversationId,
                        let navigationController = self.rootViewController as? UINavigationController,
                        let conversationModel = self.getConversationViewModelForId(conversationId: conversationId),
-                       let conversationController = navigationController.topViewController as? ConversationViewController,
+                       let conversationController = navigationController.topViewController as? ConversationHostingViewController,
                        conversationController.viewModel == conversationModel {
                         return
                     }
@@ -380,8 +380,8 @@ extension ConversationsCoordinator {
         guard let navigationController = self.rootViewController as? UINavigationController else { return }
         let controllers = navigationController.children
         for controller in controllers
-        where controller.isKind(of: (ConversationViewController).self) {
-            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation == conversationModel {
+        where controller.isKind(of: (ConversationHostingViewController).self) {
+            if let conversationController = controller as? ConversationHostingViewController, conversationController.viewModel.conversation == conversationModel {
                 navigationController.popToViewController(conversationController, animated: true)
                 conversationController.becomeFirstResponder()
                 return
