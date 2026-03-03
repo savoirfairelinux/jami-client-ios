@@ -157,7 +157,7 @@ struct ShareView: View {
 
                 // Check if data is image
                 if provider.canLoadObject(ofClass: UIImage.self) && provider.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
-                    provider.loadObject(ofClass: UIImage.self) { [weak viewModel] object, error in
+                    provider.loadObject(ofClass: UIImage.self) { [weak viewModel] object, _ in
                         guard let viewModel = viewModel else { return }
 
                         if let image = object as? UIImage {

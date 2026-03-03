@@ -55,6 +55,8 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     @Published var lastMessageDate: String = ""
     @Published var unreadMessages: Int = 0
     @Published var presence: PresenceStatus = .offline
+    @Published var navUserName: String = ""
+    @Published var navIsBlocked: Bool = false
 
     /// Logger
     private let log = SwiftyBeaver.self
@@ -80,7 +82,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     let showIncomingLocationSharing = BehaviorRelay<Bool>(value: false)
     let showOutgoingLocationSharing = BehaviorRelay<Bool>(value: false)
-    let updateNavigationBar = BehaviorRelay<Bool>(value: false)
 
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
@@ -107,25 +108,19 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     var contactPresence = BehaviorRelay<PresenceStatus>(value: .offline)
     var swarmInfo: SwarmInfoProtocol?
 
-    lazy var avatarProvider: AvatarProvider = {
-        if let conversation = self.conversation {
-            return AvatarProvider(
-                profileService: self.injectionBag.profileService,
-                size: Constants.AvatarSize.default55,
-                avatar: self.profileImageData.asObservable(),
-                displayName: self.bestName.asObservable(),
-                isGroup: !conversation.isDialog()
-            )
-        } else {
-            return AvatarProvider(
-                profileService: self.injectionBag.profileService,
-                size: Constants.AvatarSize.default55,
-                avatar: self.profileImageData.asObservable(),
-                displayName: self.bestName.asObservable(),
-                isGroup: false
-            )
-        }
-    }()
+    private func makeAvatarProvider(size: Constants.AvatarSize) -> AvatarProvider {
+        return AvatarProvider(
+            profileService: self.injectionBag.profileService,
+            size: size,
+            avatar: self.profileImageData.asObservable(),
+            displayName: self.bestName.asObservable(),
+            isGroup: conversation?.isDialog() == false
+        )
+    }
+
+    lazy var avatarProvider: AvatarProvider = makeAvatarProvider(size: .default55)
+
+    lazy var navBarAvatarProvider: AvatarProvider = makeAvatarProvider(size: .conversation30)
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -166,9 +161,8 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             })
             .disposed(by: self.disposeBag)
 
-        self.lastMessageDateObservable
+        self.swiftUIModel.lastMessageDate.asObservable()
             .share()
-            .asObservable()
             .observe(on: MainScheduler.instance)
             .startWith(swiftUIModel.lastMessageDate.value)
             .subscribe(onNext: { [weak self] mesageDate in
@@ -185,6 +179,14 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
+
+        self.userName.asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] name in
+                self?.navUserName = name
+            })
+            .disposed(by: self.disposeBag)
+
     }
 
     private func setConversation(_ conversation: ConversationModel) {
@@ -205,10 +207,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     var lastMessageObservable: Observable <String> {
         return swiftUIModel.lastMessage.asObservable()
-    }
-
-    var lastMessageDateObservable: Observable <String> {
-        return swiftUIModel.lastMessageDate.asObservable()
     }
 
     func cleanMessages() {
@@ -524,48 +522,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         return self.callService.call(participantId: jamiId, accountId: self.conversation.accountId) != nil
     }
 
-    lazy var showCallButton: Observable<Bool> = {
-        return self.callService
-            .callUpdates
-            .share()
-            .asObservable()
-            .filter({ [weak self] (call) -> Bool in
-                guard let self = self else { return false }
-                if !self.conversation.isDialog() {
-                    return false
-                }
-                guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return false }
-                return call.paricipantHash() == jamiId
-                    && call.accountId == self.conversation.accountId
-            })
-            .map({ [weak self]  call in
-                guard let self = self else { return false }
-                let show = self.shouldShowCallButton(call: call)
-                self.currentCallId.accept(show ? call.callId : "")
-                return show
-            })
-    }()
-
-    let currentCallId = BehaviorRelay<String>(value: "")
-
-    func callIsValid(call: CallModel) -> Bool {
-        return call.stateValue == CallState.hold.rawValue ||
-            call.stateValue == CallState.current.rawValue ||
-            call.stateValue == CallState.ringing.rawValue ||
-            call.stateValue == CallState.connecting.rawValue
-    }
-
-    func shouldShowCallButton(call: CallModel) -> Bool {
-        // From iOS 15 picture in picture is supported and it will take care of presenting the video call.
-        if #available(iOS 15.0, *) {
-            if call.isAudioOnly {
-                return callIsValid(call: call)
-            }
-            return call.stateValue == CallState.ringing.rawValue || call.stateValue == CallState.connecting.rawValue
-        }
-        return callIsValid(call: call)
-    }
-
     func openCall() {
         guard let call = self.callService
                 .call(participantId: self.conversation.getParticipants().first?.jamiId ?? "",
@@ -578,7 +534,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.closeAllPlayers()
     }
 
-    var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
     let shouldDismiss = BehaviorRelay<Bool>(value: false)
 
     func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
@@ -588,8 +543,12 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     var conversationCreated = BehaviorRelay(value: true)
 
     func updateBlockedStatus() {
-        self.swiftUIModel.updateBlockedStatus(blocked: isConversationForBlockedContact())
-        self.updateNavigationBar.accept(true)
+        let blocked = isConversationForBlockedContact()
+        self.swiftUIModel.updateBlockedStatus(blocked: blocked)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.navIsBlocked = blocked
+        }
     }
 
     private func updateName() {
@@ -673,16 +632,6 @@ extension ConversationViewModel {
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
-    }
-
-    private func subscribePresence() {
-        guard let jamiId = self.conversation.getParticipants().first?.jamiId, self.conversation.isDialog() else { return }
-        if let contactPresence = self.presenceService
-            .getSubscriptionsForContact(contactId: jamiId) {
-            self.contactPresence = contactPresence
-        } else {
-            self.contactPresence.accept(.offline)
-        }
     }
 
     private func subscribeUserServiceLookupStatus() {
