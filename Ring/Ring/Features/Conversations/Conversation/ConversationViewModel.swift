@@ -55,6 +55,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     @Published var lastMessageDate: String = ""
     @Published var unreadMessages: Int = 0
     @Published var presence: PresenceStatus = .offline
+    @Published var navUserName: String = ""
+    @Published var navProfileImageData: Data?
+    @Published var navIsBlocked: Bool = false
 
     /// Logger
     private let log = SwiftyBeaver.self
@@ -127,6 +130,26 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         }
     }()
 
+    lazy var navBarAvatarProvider: AvatarProvider = {
+        if let conversation = self.conversation {
+            return AvatarProvider(
+                profileService: self.injectionBag.profileService,
+                size: Constants.AvatarSize.conversation30,
+                avatar: self.profileImageData.asObservable(),
+                displayName: self.bestName.asObservable(),
+                isGroup: !conversation.isDialog()
+            )
+        } else {
+            return AvatarProvider(
+                profileService: self.injectionBag.profileService,
+                size: Constants.AvatarSize.conversation30,
+                avatar: self.profileImageData.asObservable(),
+                displayName: self.bestName.asObservable(),
+                isGroup: false
+            )
+        }
+    }()
+
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
         self.accountService = injectionBag.accountService
@@ -184,6 +207,20 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 }
             } onError: { _ in
             }
+            .disposed(by: self.disposeBag)
+
+        self.userName.asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] name in
+                self?.navUserName = name
+            })
+            .disposed(by: self.disposeBag)
+
+        self.profileImageData.asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] data in
+                self?.navProfileImageData = data
+            })
             .disposed(by: self.disposeBag)
     }
 
@@ -588,7 +625,12 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     var conversationCreated = BehaviorRelay(value: true)
 
     func updateBlockedStatus() {
-        self.swiftUIModel.updateBlockedStatus(blocked: isConversationForBlockedContact())
+        let blocked = isConversationForBlockedContact()
+        self.swiftUIModel.updateBlockedStatus(blocked: blocked)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.navIsBlocked = blocked
+        }
         self.updateNavigationBar.accept(true)
     }
 
