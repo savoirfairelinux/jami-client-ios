@@ -174,6 +174,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var lastMessageDate = BehaviorRelay<String>(value: "")
     var lastMessageDisposeBag = DisposeBag()
 
+    private var isInitialLoad = true
+
     var conversationDisposeBag = DisposeBag()
     let disposeBag = DisposeBag()
 
@@ -508,13 +510,21 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                     self.messagesModels = [MessageContainerModel]()
                     return
                 }
+                let fromHistory = messages.fromHistory
                 let insertionCount: Int = self.insert(messages: messages.messages,
-                                                      fromHistory: messages.fromHistory)
+                                                      fromHistory: fromHistory)
                 if insertionCount == 0 {
                     return
                 }
                 self.computeSequencing()
                 self.updateNumberOfNewMessages()
+                // auto-scroll to bottom on initial load or when new messages arrive while at bottom
+                if self.isInitialLoad {
+                    self.isInitialLoad = false
+                    self.scrollToTheBottom()
+                } else if !fromHistory && self.atTheBottom {
+                    self.scrollToTheBottom()
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
                     guard let self = self else {return }
                     self.loading = false

@@ -20,25 +20,22 @@ import SwiftUI
 import UIKit
 import Combine
 
-struct Flipped: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .rotationEffect(.radians(Double.pi))
-            .scaleEffect(x: -1, y: 1, anchor: .center)
-    }
-}
-
-extension View {
-    func flipped() -> some View {
-        modifier(Flipped())
-    }
-}
-
 struct ScrollViewOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat?
 
     static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
         value = value ?? nextValue()
+    }
+}
+
+/// Applies `.defaultScrollAnchor(.bottom)` on iOS 17+, no-op on older versions.
+struct DefaultScrollAnchorModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 17.0, *) {
+            content.defaultScrollAnchor(.bottom)
+        } else {
+            content
+        }
     }
 }
 
@@ -79,13 +76,12 @@ struct MessagesListView: View {
                 ZStack(alignment: .bottom) {
                     ZStack(alignment: .bottomTrailing) {
                         createMessagesStackView()
-                            .flipped()
                         if !model.atTheBottom {
                             createScrollToBottmView()
                         }
                     }
                     .layoutPriority(1)
-                    .padding(.bottom, messageContainerHeight - 30)
+                    .padding(.bottom, messageContainerHeight)
                     if !model.isBlocked {
                         MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
                             .alignmentGuide(VerticalAlignment.center) { dimensions in
@@ -174,15 +170,20 @@ struct MessagesListView: View {
     private func createMessagesStackView() -> some View {
         ScrollViewReader { scrollView in
             ScrollView(showsIndicators: false) {
-                // update scroll offset
-                GeometryReader { proxy in
-                    let offset = proxy.frame(in: .named("scroll")).minY
-                    Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
-                }
                 LazyVStack(spacing: 0) {
-                    // scroll to the bottom
-                    Text("")
-                        .id("lastMessage")
+                    // messages in chronological order (oldest first)
+                    ForEach(model.messagesModels.reversed()) { message in
+                        createMessageRowView(for: message)
+                            .id(message.id)
+                            // load more when the oldest message appears
+                            .onAppear(perform: {
+                                if message == self.model.messagesModels.last {
+                                    DispatchQueue.global(qos: .background).async {
+                                        self.model.loadMore()
+                                    }
+                                }
+                            })
+                    }
                     if !model.typingIndicatorText.isEmpty {
                         HStack {
                             Text("\(model.typingIndicatorText)\(String(repeating: ".", count: dotCount))")
@@ -190,7 +191,6 @@ struct MessagesListView: View {
                                 .foregroundColor(Color(UIColor.secondaryLabel))
                             Spacer()
                         }
-                        .flipped()
                         .padding(.horizontal)
                         .padding(.vertical, 5)
                         .accessibilityElement()
@@ -201,41 +201,47 @@ struct MessagesListView: View {
                             dotCount = (dotCount + 1) % 4
                         }
                     }
-                    // messages
-                    ForEach(model.messagesModels) { message in
-                        createMessageRowView(for: message)
-                            .id(message.id)
-                            // lazy loading
-                            .onAppear(perform: {
-                                if message == self.model.messagesModels.last {
-                                    DispatchQueue.global(qos: .background).async {
-                                        self.model.loadMore()
-                                    }
-                                }
-                            })
-                    }
-                    .flipped()
+                    // anchor at the bottom for scrolling
+                    Color.clear
+                        .frame(height: 1)
+                        .id("lastMessage")
                 }
                 .listRowBackground(Color.clear)
+                // track scroll position to detect if user is at bottom
+                .background(
+                    GeometryReader { contentGeometry in
+                        Color.clear.preference(
+                            key: ScrollViewOffsetPreferenceKey.self,
+                            value: contentGeometry.frame(in: .named("messagesScroll")).maxY
+                        )
+                    }
+                )
                 .onReceive(model.$scrollToId, perform: { (scrollToId) in
                     guard scrollToId != nil else { return }
-                    scrollView.scrollTo("lastMessage")
+                    withAnimation {
+                        scrollView.scrollTo("lastMessage", anchor: .bottom)
+                    }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         model.scrollToId = nil
                     }
                 })
                 .onReceive(model.$scrollToReplyTarget, perform: { (scrollToReplyTarget) in
                     guard scrollToReplyTarget != nil else { return }
-                    scrollView.scrollTo(scrollToReplyTarget)
+                    withAnimation {
+                        scrollView.scrollTo(scrollToReplyTarget, anchor: .center)
+                    }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         model.scrolledToTargetReply()
                     }
                 })
             }
+            .modifier(DefaultScrollAnchorModifier())
+            .coordinateSpace(name: "messagesScroll")
             .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
                 DispatchQueue.main.async {
-                    let scrollOffset = value ?? 0
-                    let atTheBottom = scrollOffset < scrollReserved
+                    guard let contentMaxY = value else { return }
+                    let threshold: CGFloat = 50
+                    let atTheBottom = contentMaxY < (dimensionsManager.adaptiveHeight + threshold)
                     if atTheBottom != model.atTheBottom {
                         withAnimation {
                             model.atTheBottom = atTheBottom
