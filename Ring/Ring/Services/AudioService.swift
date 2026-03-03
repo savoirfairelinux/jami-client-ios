@@ -156,8 +156,4 @@ class AudioService {
     func setAudioRingtoneDevice(port: OutputPortType) {
         self.audioAdapter.setAudioRingtoneDevice(port.rawValue)
     }
-
-    func startAudio() {
-        self.audioAdapter.startAudio()
-    }
 }
