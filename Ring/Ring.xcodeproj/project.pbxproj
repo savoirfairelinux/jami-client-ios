@@ -329,6 +329,7 @@
 		2657CBA82B858CF20078D6B1 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */; };
 		2657CBAA2B8596290078D6B1 /* XCTestCase + Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2657CBA92B8595F80078D6B1 /* XCTestCase + Helpers.swift */; };
 		265807202B0FBE2900CDE196 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */; };
+		2659B6262F5B591A0065547A /* ContactPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659B6252F5B591A0065547A /* ContactPickerView.swift */; };
 		2659F65827483656009107F1 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65727483656009107F1 /* VideoManager.swift */; };
 		2659F65C27483A27009107F1 /* DecodingAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */; };
 		265B759F2DCBAB1A00CB1622 /* AccountMigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265B759E2DCBAB1900CB1622 /* AccountMigrationView.swift */; };
@@ -372,7 +373,6 @@
 		267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		267CFD6F2ACCDCD70066FE15 /* SmartListNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CFD6E2ACCDCD70066FE15 /* SmartListNavigationBar.swift */; };
 		267D55402E9EB2A8006BA9BE /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 267D553F2E9EB2A8006BA9BE /* AppIcon.icon */; };
-		2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */; };
 		2685F90E2A1698B400BFCDA3 /* VideoInputsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2685F90D2A1698B400BFCDA3 /* VideoInputsManager.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
 		268C87E42C1793E300593D7C /* NameRegistrationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C87E32C1793E300593D7C /* NameRegistrationVM.swift */; };
@@ -537,8 +537,6 @@
 		3DAAC4712DDD1AC500D94B71 /* AdapterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAC46C2DDD1AC500D94B71 /* AdapterService.swift */; };
 		3DAAC4732DDD1AC500D94B71 /* Adapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAC46E2DDD1AC500D94B71 /* Adapter.mm */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
-		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
-		4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66E236CBC6900747177 /* ContactPickerViewController.swift */; };
 		4430A671236CBC7A00747177 /* ContactPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A670236CBC7A00747177 /* ContactPickerViewModel.swift */; };
 		446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 446FAF182373424700519C4F /* SendFileViewController.storyboard */; };
 		446FAF1B2373425E00519C4F /* SendFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446FAF1A2373425E00519C4F /* SendFileViewController.swift */; };
@@ -963,6 +961,7 @@
 		2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		2657CBA92B8595F80078D6B1 /* XCTestCase + Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase + Helpers.swift"; sourceTree = "<group>"; };
 		2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
+		2659B6252F5B591A0065547A /* ContactPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerView.swift; sourceTree = "<group>"; };
 		2659F65727483656009107F1 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingAdapterDelegate.swift; sourceTree = "<group>"; };
 		265B759E2DCBAB1900CB1622 /* AccountMigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountMigrationView.swift; path = ../../../SmartList/SwiftUI/Views/AccountMigrationView.swift; sourceTree = "<group>"; };
@@ -1005,7 +1004,6 @@
 		267B95FA2C2B5FFA00353B01 /* RevocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevocationView.swift; sourceTree = "<group>"; };
 		267CFD6E2ACCDCD70066FE15 /* SmartListNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListNavigationBar.swift; sourceTree = "<group>"; };
 		267D553F2E9EB2A8006BA9BE /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
-		2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerDelegate.swift; sourceTree = "<group>"; };
 		2685F90D2A1698B400BFCDA3 /* VideoInputsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInputsManager.swift; sourceTree = "<group>"; };
 		268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
 		268C87E32C1793E300593D7C /* NameRegistrationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRegistrationVM.swift; sourceTree = "<group>"; };
@@ -1695,8 +1693,6 @@
 		3DAAC46E2DDD1AC500D94B71 /* Adapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Adapter.mm; sourceTree = "<group>"; };
 		3DD777512E046A3000023295 /* jamiShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = jamiShareExtension.entitlements; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
-		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
-		4430A66E236CBC6900747177 /* ContactPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerViewController.swift; sourceTree = "<group>"; };
 		4430A670236CBC7A00747177 /* ContactPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerViewModel.swift; sourceTree = "<group>"; };
 		446FAF182373424700519C4F /* SendFileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SendFileViewController.storyboard; sourceTree = "<group>"; };
 		446FAF1A2373425E00519C4F /* SendFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFileViewController.swift; sourceTree = "<group>"; };
@@ -3177,7 +3173,6 @@
 				1A20418C1F1EABCC00C08435 /* StateableResponsive.swift */,
 				1A20418E1F1EAC0E00C08435 /* Coordinator.swift */,
 				0E68571020238546008B0717 /* ConversationNavigation.swift */,
-				2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -3741,12 +3736,11 @@
 			children = (
 				261190A72A29267300CAE7F8 /* SwiftUI */,
 				4430A66A236CBA7D00747177 /* ContactPickerSection.swift */,
-				4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */,
-				4430A66E236CBC6900747177 /* ContactPickerViewController.swift */,
 				4430A670236CBC7A00747177 /* ContactPickerViewModel.swift */,
 				2673D62D252624AB000C56CB /* ConferenceMenuItemsManager.swift */,
 				2673D62F252657B0000C56CB /* ConferenceLayout.swift */,
 				2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */,
+				2659B6252F5B591A0065547A /* ContactPickerView.swift */,
 			);
 			path = Conference;
 			sourceTree = "<group>";
@@ -4116,7 +4110,6 @@
 				446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */,
 				26454FB92B7FDCE400CFF06C /* AboutViewController.storyboard in Resources */,
 				0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */,
-				4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */,
 				BB0AB9932A8FC4340033061F /* Colors.xcassets in Resources */,
 				1DE93594291B119900E426CF /* SwarmCreationViewController.storyboard in Resources */,
 			);
@@ -4286,6 +4279,7 @@
 				0E4909701FEAC1C6005CAA50 /* CallModel.swift in Sources */,
 				0E3BD4282044784000A50DDF /* ContactViewController.swift in Sources */,
 				62006E04203F4DD6003C3197 /* UITextField+Helpers.swift in Sources */,
+				2659B6262F5B591A0065547A /* ContactPickerView.swift in Sources */,
 				4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */,
 				1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */,
 				1A5DC01E1F355DA70075E8EF /* ContactsAdapterDelegate.swift in Sources */,
@@ -4419,7 +4413,6 @@
 				268C87FD2C1E6C7600593D7C /* SettingsSummaryView.swift in Sources */,
 				0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */,
 				26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */,
-				4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */,
 				0EC7808F2424FDAE000A04C5 /* CustomActionTextView.swift in Sources */,
 				26EFD7B42E2D59BB00B63F74 /* ScreenDimensionsManager.swift in Sources */,
 				56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */,
@@ -4480,7 +4473,6 @@
 				268C87EA2C1BA1F700593D7C /* BlockedContactsView.swift in Sources */,
 				26454FBF2B7FDEE900CFF06C /* AboutSwiftUIVM.swift in Sources */,
 				267B54222F57A32000565A0E /* ConversationViewController.swift in Sources */,
-				2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */,
 				26EFD7E42E2E944100B63F74 /* CommonHelpers.swift in Sources */,
 				0E320D52224ADF930070B515 /* DialpadViewController.swift in Sources */,
 				BB6690042A99043200875848 /* SharedActionsPresenter.swift in Sources */,

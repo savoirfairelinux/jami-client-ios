@@ -18,9 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxDataSources
 import RxSwift
-import RxCocoa
+import RxRelay
 
 class Contact {
     var uri: String
@@ -146,32 +145,19 @@ class Contact {
     }
 }
 
-struct ConferencableItem {
+struct ConferencableItem: Identifiable {
     var conferenceID: String
     var contacts: [Contact]
+    var avatarProvider: AvatarProvider
+
+    var id: String {
+        !conferenceID.isEmpty ? conferenceID : (contacts.first?.uri ?? "")
+    }
 }
 
-struct ContactPickerSection {
+struct ContactPickerSection: Identifiable {
     var header: String
     var items: [ConferencableItem]
-}
 
-extension ContactPickerSection: SectionModelType {
-    typealias Item = ConferencableItem
-    init(original: ContactPickerSection, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
-
-struct ConversationPickerSection {
-    var items: [Item]
-}
-
-extension ConversationPickerSection: SectionModelType {
-    typealias Item = SwarmInfo
-    init(original: ConversationPickerSection, items: [SwarmInfo]) {
-        self = original
-        self.items = items
-    }
+    var id: String { header }
 }
