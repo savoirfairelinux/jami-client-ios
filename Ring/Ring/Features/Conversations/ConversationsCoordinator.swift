@@ -285,14 +285,24 @@ extension ConversationsCoordinator {
     }
 
     func showContactPicker(callId: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)? = nil, conversationSelectedCB: ((_ conversationIds: [String]) -> Void)? = nil) {
-        let contactPickerViewController = ContactPickerViewController.instantiate(with: self.injectionBag)
-        contactPickerViewController.type = callId.isEmpty ? .forConversation : .forCall
-        contactPickerViewController.viewModel.currentCallId = callId
-        contactPickerViewController.viewModel.contactSelectedCB = contactSelectedCB
-        contactPickerViewController.viewModel.conversationSelectedCB = conversationSelectedCB
-        if let controller = self.navigationController.visibleViewController as? ContactPickerDelegate {
-            controller.presentContactPicker(contactPickerVC: contactPickerViewController)
-        }
+        guard let presenter = self.navigationController.visibleViewController else { return }
+
+        let vm = ContactPickerViewModel(with: self.injectionBag)
+        vm.type = callId.isEmpty ? .forConversation : .forCall
+        vm.currentCallId = callId
+        vm.contactSelectedCB = contactSelectedCB
+        vm.conversationSelectedCB = conversationSelectedCB
+        vm.bind()
+
+        let pickerView = ContactPickerView(
+            viewModel: vm,
+            onDismissed: { [weak presenter] in
+                (presenter as? ContactPickerDismissHandler)?.contactPickerDidDismiss()
+            }
+        )
+        let pickerVC = createHostingVC(pickerView)
+        pickerVC.modalPresentationStyle = .pageSheet
+        presenter.present(pickerVC, animated: true)
     }
 
     func openAboutJami() {
