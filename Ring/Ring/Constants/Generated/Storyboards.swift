@@ -61,21 +61,12 @@ internal enum StoryboardScene {
 
       internal static let initialScene = InitialSceneType<Ring.SwarmCreationViewController>(storyboard: SwarmCreationViewController.self)
     }
-  internal enum ContactRequestsViewController: StoryboardType {
-    internal static let storyboardName = "ContactRequestsViewController"
-
-    internal static let initialScene = InitialSceneType<Ring.ContactRequestsViewController>(storyboard: ContactRequestsViewController.self)
-  }
   internal enum ContactViewController: StoryboardType {
     internal static let storyboardName = "ContactViewController"
 
     internal static let initialScene = InitialSceneType<Ring.ContactViewController>(storyboard: ContactViewController.self)
   }
-//  internal enum ConversationViewController: StoryboardType {
-//    internal static let storyboardName = "ConversationViewController"
-//
-//    internal static let initialScene = InitialSceneType<Ring.ConversationViewController>(storyboard: ConversationViewController.self)
-//  }
+
   internal enum InitialLoadingViewController: StoryboardType {
     internal static let storyboardName = "InitialLoadingViewController"
 

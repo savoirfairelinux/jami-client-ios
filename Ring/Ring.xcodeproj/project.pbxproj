@@ -120,12 +120,6 @@
 		1A5DC0281F3564AA0075E8EF /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC0271F3564AA0075E8EF /* MessageModel.swift */; };
 		1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC02D1F3565640075E8EF /* ConversationViewModel.swift */; };
 		1A5DC0321F3566140075E8EF /* ConversationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC0311F3566140075E8EF /* ConversationSection.swift */; };
-		1A5DC0371F35675E0075E8EF /* ContactRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC0351F35675E0075E8EF /* ContactRequestCell.swift */; };
-		1A5DC0381F35675E0075E8EF /* ContactRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A5DC0361F35675E0075E8EF /* ContactRequestCell.xib */; };
-		1A5DC03D1F35678D0075E8EF /* RequestItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC0391F35678D0075E8EF /* RequestItem.swift */; };
-		1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A5DC03A1F35678D0075E8EF /* ContactRequestsViewController.storyboard */; };
-		1A5DC03F1F35678D0075E8EF /* ContactRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC03B1F35678D0075E8EF /* ContactRequestsViewController.swift */; };
-		1A5DC0401F35678D0075E8EF /* ContactRequestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC03C1F35678D0075E8EF /* ContactRequestsViewModel.swift */; };
 		1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */; };
 		1ABE07D21F0D8FE800D36361 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07D01F0D8FE800D36361 /* Images.swift */; };
 		1ABE07D31F0D8FE800D36361 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07D11F0D8FE800D36361 /* Storyboards.swift */; };
@@ -823,12 +817,6 @@
 		1A5DC0271F3564AA0075E8EF /* MessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		1A5DC02D1F3565640075E8EF /* ConversationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
 		1A5DC0311F3566140075E8EF /* ConversationSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationSection.swift; path = Ring/Features/Conversations/SmartList/ConversationSection.swift; sourceTree = SOURCE_ROOT; };
-		1A5DC0351F35675E0075E8EF /* ContactRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactRequestCell.swift; sourceTree = "<group>"; };
-		1A5DC0361F35675E0075E8EF /* ContactRequestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactRequestCell.xib; sourceTree = "<group>"; };
-		1A5DC0391F35678D0075E8EF /* RequestItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestItem.swift; sourceTree = "<group>"; };
-		1A5DC03A1F35678D0075E8EF /* ContactRequestsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ContactRequestsViewController.storyboard; sourceTree = "<group>"; };
-		1A5DC03B1F35678D0075E8EF /* ContactRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactRequestsViewController.swift; sourceTree = "<group>"; };
-		1A5DC03C1F35678D0075E8EF /* ContactRequestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactRequestsViewModel.swift; sourceTree = "<group>"; };
 		1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ring.swift"; sourceTree = "<group>"; };
 		1ABE07D01F0D8FE800D36361 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		1ABE07D11F0D8FE800D36361 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
@@ -3156,7 +3144,6 @@
 				1A0C4EBD1F1D48DD00550433 /* Walkthrough */,
 				1D4EE840291EF98800ED2010 /* SwarmCreation */,
 				1A2D18A71F290FAA00B2C785 /* Conversations */,
-				1A5DC0331F3567080075E8EF /* ContactRequests */,
 				1A2D18A81F290FBF00B2C785 /* Settings */,
 			);
 			name = Features;
@@ -3274,28 +3261,6 @@
 			);
 			name = Cells;
 			path = ../SmartList/Cells;
-			sourceTree = "<group>";
-		};
-		1A5DC0331F3567080075E8EF /* ContactRequests */ = {
-			isa = PBXGroup;
-			children = (
-				1A5DC0341F3567360075E8EF /* Cells */,
-				1A5DC03A1F35678D0075E8EF /* ContactRequestsViewController.storyboard */,
-				1A5DC03B1F35678D0075E8EF /* ContactRequestsViewController.swift */,
-				1A5DC03C1F35678D0075E8EF /* ContactRequestsViewModel.swift */,
-				1A5DC0391F35678D0075E8EF /* RequestItem.swift */,
-			);
-			name = ContactRequests;
-			path = Features/ContactRequests;
-			sourceTree = "<group>";
-		};
-		1A5DC0341F3567360075E8EF /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				1A5DC0351F35675E0075E8EF /* ContactRequestCell.swift */,
-				1A5DC0361F35675E0075E8EF /* ContactRequestCell.xib */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		1ABE07C51F0D862D00D36361 /* Generated */ = {
@@ -4147,9 +4112,7 @@
 				26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */,
 				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
-				1A5DC0381F35675E0075E8EF /* ContactRequestCell.xib in Resources */,
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
-				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
 				446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */,
 				26454FB92B7FDCE400CFF06C /* AboutViewController.storyboard in Resources */,
 				0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */,
@@ -4321,7 +4284,6 @@
 				267B956E2C233E2600353B01 /* GeneralSettingsViews.swift in Sources */,
 				1A5DC0241F3564360075E8EF /* RequestModel.swift in Sources */,
 				0E4909701FEAC1C6005CAA50 /* CallModel.swift in Sources */,
-				1A5DC03F1F35678D0075E8EF /* ContactRequestsViewController.swift in Sources */,
 				0E3BD4282044784000A50DDF /* ContactViewController.swift in Sources */,
 				62006E04203F4DD6003C3197 /* UITextField+Helpers.swift in Sources */,
 				4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */,
@@ -4397,11 +4359,9 @@
 				26E081222BC03AB3001B4C18 /* AccountLists.swift in Sources */,
 				264EA87E2977080300B6FB6F /* LogViewModel.swift in Sources */,
 				62B60AF92048A40D001BEACF /* DataTransferAdapter.mm in Sources */,
-				1A5DC0371F35675E0075E8EF /* ContactRequestCell.swift in Sources */,
 				1A20417C1F1E56FF00C08435 /* WelcomeVM.swift in Sources */,
 				265DFB09292FD25000834B97 /* DefaultTransferView.swift in Sources */,
 				263C16832D9DBCE6008E102C /* ThreadSafeQueueHelper.swift in Sources */,
-				1A5DC03D1F35678D0075E8EF /* RequestItem.swift in Sources */,
 				267B54202F57A29800565A0E /* ConversationContainerView.swift in Sources */,
 				2659F65827483656009107F1 /* VideoManager.swift in Sources */,
 				26EFD7F92E2EB38300B63F74 /* VideoUtils.mm in Sources */,
@@ -4536,7 +4496,6 @@
 				62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */,
 				BB06BD8129D491F80064F0FC /* CustomAnnotationModel.swift in Sources */,
 				645BDD8124B74BCB009129B1 /* LocationSharingService.swift in Sources */,
-				1A5DC0401F35678D0075E8EF /* ContactRequestsViewModel.swift in Sources */,
 				56BBC9A21ED714DF00CDAF8B /* MessagesAdapterDelegate.swift in Sources */,
 				BB1E8C7529159DFC005AE1D6 /* SettingsView.swift in Sources */,
 				26FDF43D2C1353A9009D036B /* AccountSummaryView.swift in Sources */,

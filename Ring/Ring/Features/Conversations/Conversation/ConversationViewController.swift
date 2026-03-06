@@ -47,10 +47,10 @@ enum ContextMenu: State {
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
 class ConversationViewController: UIHostingController<ConversationContainerView>,
-                                         UIImagePickerControllerDelegate,
-                                         UINavigationControllerDelegate,
-                                         ContactPickerDelegate,
-                                         PHPickerViewControllerDelegate {
+                                  UIImagePickerControllerDelegate,
+                                  UINavigationControllerDelegate,
+                                  ContactPickerDelegate,
+                                  PHPickerViewControllerDelegate {
 
     let disposeBag = DisposeBag()
     let log = SwiftyBeaver.self
