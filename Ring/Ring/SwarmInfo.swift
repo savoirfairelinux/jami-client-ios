@@ -123,7 +123,7 @@ class ParticipantInfo: Equatable, Hashable {
 }
 
 // swiftlint:disable type_body_length
-class SwarmInfo: SwarmInfoProtocol {
+class SwarmInfo: SwarmInfoProtocol, Identifiable {
     var avatarData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
     var title = BehaviorRelay(value: "")
     var color = BehaviorRelay<String>(value: "")
