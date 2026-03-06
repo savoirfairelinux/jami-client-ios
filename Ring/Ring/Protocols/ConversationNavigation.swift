@@ -162,14 +162,12 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
             return
         }
-        // TODO: move to hosting controller with full implementation in swiftUI
         self.presentingVC[VCType.conversation.rawValue] = true
-        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
-        conversationViewController.viewModel = conversationViewModel
-        self.present(viewController: conversationViewController,
+        let conversationHostingVC = ConversationViewController(viewModel: conversationViewModel)
+        self.present(viewController: conversationHostingVC,
                      withStyle: .push,
                      withAnimation: withAnimation,
-                     withStateable: conversationViewController.viewModel,
+                     withStateable: conversationViewModel,
                      lockWhilePresenting: VCType.conversation.rawValue)
     }
 
