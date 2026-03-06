@@ -26,7 +26,7 @@ import Reusable
 import SwiftyBeaver
 import SwiftUI
 
-class CallViewController: UIViewController, StoryboardBased, ViewModelBased, ContactPickerDelegate {
+class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     var viewModel: CallViewModel!
     private var videoContainerViewModel: ContainerViewModel!
@@ -156,7 +156,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     }
 
     private func handleAddParticipant() {
-        if children.contains(where: { $0.isKind(of: ContactPickerViewController.self) }) {
+        if presentedViewController != nil {
             return
         }
         viewModel.showContactPickerVC()
@@ -233,19 +233,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         super.viewWillTransition(to: size, with: coordinator)
     }
 
-    // MARK: ContactPickerDelegate
-    func presentContactPicker(contactPickerVC: ContactPickerViewController) {
-        self.addChild(contactPickerVC)
-        let newFrame = CGRect(x: 0, y: self.view.frame.size.height * 0.3, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
-        let initialFrame = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.7)
-        contactPickerVC.view.frame = initialFrame
-        self.view.addSubview(contactPickerVC.view)
-        contactPickerVC.didMove(toParent: self)
-        UIView.animate(withDuration: 0.2, animations: {
-            contactPickerVC.view.frame = newFrame
-        }, completion: {  _ in
-        })
-    }
 }
 
 extension CallViewController: PictureInPictureManagerDelegate {
