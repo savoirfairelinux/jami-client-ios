@@ -644,6 +644,12 @@ internal enum L10n {
     /// Start video call
     internal static let startVideoCall = L10n.tr("Localizable", "contactPage.startVideoCall", fallback: "Start video call")
   }
+  internal enum ContactPicker {
+    /// Calls
+    internal static let calls = L10n.tr("Localizable", "contactPicker.calls", fallback: "Calls")
+    /// Contacts
+    internal static let contacts = L10n.tr("Localizable", "contactPicker.contacts", fallback: "Contacts")
+  }
   internal enum Conversation {
     /// Add to Contacts
     internal static let addToContactsButton = L10n.tr("Localizable", "conversation.addToContactsButton", fallback: "Add to Contacts")
