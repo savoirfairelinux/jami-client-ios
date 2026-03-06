@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2025 Savoir-faire Linux Inc.
+ * Copyright (C) 2019-2026 Savoir-faire Linux Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,135 +17,45 @@
  */
 
 import RxSwift
-import SwiftyBeaver
 import RxRelay
+import Combine
 
-class ContactPickerViewModel: ViewModel {
-    private let log = SwiftyBeaver.self
+final class ContactPickerViewModel: ObservableObject, ViewModel {
 
-    private var contactsOnly: Bool { self.currentCallId.isEmpty }
-    var contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?
-    var loading = BehaviorRelay(value: true)
-    var conversationSelectedCB: ((_ conversaionIds: [String]) -> Void)?
+    // MARK: - Published State
+
+    @Published var searchText: String = ""
+    @Published var contactSections: [ContactPickerSection] = []
+    @Published var conversationSections: [ConversationPickerSection] = []
+    @Published var isLoading: Bool = true
+    @Published var selectedConversationIds: Set<String> = []
+
+    // MARK: - Configuration
+
+    var type: ContactPickerType = .forCall
+    var currentCallId = ""
+    var contactSelectedCB: (([ConferencableItem]) -> Void)?
+    var conversationSelectedCB: (([String]) -> Void)?
     let injectionBag: InjectionBag
 
-    var currentCallId = ""
-    lazy var conferensableItems: Observable<[ContactPickerSection]> = {
-        if contactsOnly {
-            return self.contactsService.contacts
-                .asObservable()
-                .map { [weak self] contacts in
-                    var sections = [ContactPickerSection]()
-                    self?.addContactsToContactPickerSections(contacts: contacts, sections: &sections)
-                    self?.loading.accept(false)
-                    return sections
-                }
-        }
-        return Observable
-            .combineLatest(self.contactsService.contacts.asObservable(),
-                           self.callService.calls.observable) {[weak self] (contacts, calls) -> [ContactPickerSection] in
-                var sections = [ContactPickerSection]()
-                guard let self = self else { return sections }
-                guard let currentCall = self.callService.call(callID: self.currentCallId) else { return sections }
-                let callURIs = self.addCallsToContactPickerSections(calls: calls, sections: &sections)
-                self.addContactsToContactPickerSections(contacts: contacts, sections: &sections, urlToExclude: callURIs)
-                self.loading.accept(false)
-                return sections
-            }
-    }()
+    // MARK: - Private
 
-    lazy var searchResultItems: Observable<[ContactPickerSection]> = {
-        return Observable
-            .combineLatest(search
-                            .startWith("")
-                            .distinctUntilChanged(), self.conferensableItems) { (search, targets) in (search, targets) }
-            .map({ (arg) -> [ContactPickerSection] in
-                var (search, targets) = arg
-                if search.isEmpty {
-                    return targets
-                }
-                let result = targets.map {(section: ContactPickerSection) -> ContactPickerSection in
-                    var sectionVariable = section
-                    let newItems = section.items.map { (item: ConferencableItem) -> ConferencableItem in
-                        var mutabeItem = item
-                        let newContacts = item.contacts.filter { contact in
-                            var mutableContact = contact
-                            let searchLowercased = search.lowercased()
-                            return mutableContact.firstLine.value.lowercased().contains(searchLowercased) ||
-                                mutableContact.secondLine.lowercased()
-                                .contains(searchLowercased) ||
-                                mutableContact.hash.lowercased()
-                                .contains(searchLowercased)
-                        }
-                        mutabeItem.contacts = newContacts
-                        return mutabeItem
-                    }
-                    .filter { (item: ConferencableItem) -> Bool in
-                        return !item.contacts.isEmpty
-                    }
-                    sectionVariable.items = newItems
-                    return sectionVariable
-                }
-                .filter { (section: ContactPickerSection) -> Bool in
-                    return !section.items.isEmpty
-                }
-                return result
-            })
-    }()
-
-    lazy var conversationsSearchResultItems: Observable<[ConversationPickerSection]> = {
-        return Observable
-            .combineLatest(search
-                            .startWith("")
-                            .distinctUntilChanged(), self.conversations) { (search, targets) in (search, targets) }
-            .map({ (arg) -> [ConversationPickerSection] in
-                var (search, targets) = arg
-                if search.isEmpty {
-                    return targets
-                }
-                let result = targets.map {(section: ConversationPickerSection) -> ConversationPickerSection in
-                    var sectionVariable = section
-                    let newItems = section.items.filter { item in
-                        item.contains(searchQuery: search)
-                    }
-                    sectionVariable.items = newItems
-                    return sectionVariable
-                }
-                .filter { (section: ConversationPickerSection) -> Bool in
-                    return !section.items.isEmpty
-                }
-                return result
-            })
-    }()
-
-    lazy var conversations: Observable<[ConversationPickerSection]> = { [weak self] in
-        guard let self = self else { return Observable.empty() }
-        var conversationInfos = self.conversationsService
-            .conversations
-            .value
-            .compactMap({ conversationModel in
-                return SwarmInfo(injectionBag: self.injectionBag,
-                                 conversation: conversationModel)
-            })
-        if conversationInfos.isEmpty {
-            conversationInfos = [SwarmInfo]()
-        }
-        self.loading.accept(false)
-        let section = ConversationPickerSection(items: conversationInfos)
-        return Observable.just([section])
-    }()
-
-    let search = PublishSubject<String>()
+    private var unfilteredContactSections: [ContactPickerSection] = []
+    private(set) var conversationAvatarProviders: [String: AvatarProvider] = [:]
+    /// Presence trackers for 1:1 conversations, keyed by conversation id.
+    private(set) var conversationPresenceTrackers: [String: PresenceTracker] = [:]
     private let disposeBag = DisposeBag()
+    private var cancellables = Set<AnyCancellable>()
 
     private let contactsService: ContactsService
     private let conversationsService: ConversationsService
     private let callService: CallsService
-    private let profileService: ProfilesService
+    let profileService: ProfilesService
     private let accountService: AccountsService
-    private let presenceService: PresenceService
-    private let videoService: VideoService
+    let presenceService: PresenceService
     private let nameService: NameService
+
+    // MARK: - Init
 
     required init(with injectionBag: InjectionBag) {
         self.contactsService = injectionBag.contactsService
@@ -153,101 +63,252 @@ class ContactPickerViewModel: ViewModel {
         self.profileService = injectionBag.profileService
         self.accountService = injectionBag.accountService
         self.presenceService = injectionBag.presenceService
-        self.videoService = injectionBag.videoService
         self.nameService = injectionBag.nameService
         self.conversationsService = injectionBag.conversationsService
         self.injectionBag = injectionBag
     }
 
-    func contactSelected(contacts: [ConferencableItem]) {
-        if contacts.isEmpty { return }
-        if contactSelectedCB != nil {
-            contactSelectedCB!(contacts)
+    func bind() {
+        switch type {
+        case .forCall:
+            bindContactSections()
+        case .forConversation:
+            bindConversationSections()
         }
     }
 
-    func conversationSelected(conversaionIds: [String]) {
-        if conversaionIds.isEmpty { return }
-        if conversationSelectedCB != nil {
-            conversationSelectedCB!(conversaionIds)
+    private func bindContactSections() {
+        // Combine contacts with active calls to show both sections.
+        let contactsObservable = Observable
+            .combineLatest(
+                contactsService.contacts.asObservable(),
+                callService.calls.observable
+            ) { [weak self] contacts, calls -> [ContactPickerSection] in
+                guard let self = self else { return [] }
+                return self.buildContactAndCallSections(contacts: contacts, calls: calls)
+            }
+
+        contactsObservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] sections in
+                guard let self = self else { return }
+                self.unfilteredContactSections = sections
+                self.contactSections = self.filterContactSections(sections, query: self.searchText)
+                self.isLoading = false
+            })
+            .disposed(by: disposeBag)
+
+        // Re-filter when search text changes.
+        $searchText
+            .removeDuplicates()
+            .dropFirst()
+            .sink { [weak self] query in
+                guard let self = self else { return }
+                self.contactSections = self.filterContactSections(self.unfilteredContactSections, query: query)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func bindConversationSections() {
+        let conversations = conversationsService.conversations.value
+            .compactMap { SwarmInfo(injectionBag: self.injectionBag, conversation: $0) }
+
+        for swarmInfo in conversations {
+            conversationAvatarProviders[swarmInfo.id] = AvatarProvider.from(
+                swarmInfo: swarmInfo,
+                profileService: profileService,
+                size: .medium45
+            )
+            // Track presence for 1:1 (dialog) conversations.
+            if let conversation = swarmInfo.conversation, conversation.isDialog(),
+               let peerJamiId = swarmInfo.nonLocalParticipants.first?.jamiId {
+                conversationPresenceTrackers[swarmInfo.id] = PresenceTracker(
+                    jamiId: peerJamiId,
+                    presenceService: presenceService
+                )
+            }
+        }
+
+        let section = ConversationPickerSection(items: conversations)
+        conversationSections = [section]
+        isLoading = false
+
+        // Filter when search text changes.
+        $searchText
+            .removeDuplicates()
+            .sink { [weak self, allSections = [section]] query in
+                guard let self = self else { return }
+                self.conversationSections = self.filterConversationSections(allSections, query: query)
+            }
+            .store(in: &cancellables)
+    }
+
+    // MARK: - Filtering
+
+    private func filterContactSections(_ sections: [ContactPickerSection], query: String) -> [ContactPickerSection] {
+        guard !query.isEmpty else { return sections }
+        let lowered = query.lowercased()
+        return sections.compactMap { section in
+            let filtered = section.items.compactMap { item -> ConferencableItem? in
+                var copy = item
+                copy.contacts = item.contacts.filter { contact in
+                    contact.firstLine.value.lowercased().contains(lowered)
+                        || contact.secondLine.lowercased().contains(lowered)
+                        || contact.hash.lowercased().contains(lowered)
+                }
+                return copy.contacts.isEmpty ? nil : copy
+            }
+            guard !filtered.isEmpty else { return nil }
+            return ContactPickerSection(header: section.header, items: filtered)
+        }
+    }
+
+    private func filterConversationSections(_ sections: [ConversationPickerSection], query: String) -> [ConversationPickerSection] {
+        guard !query.isEmpty else { return sections }
+        return sections.compactMap { section in
+            let filtered = section.items.filter { $0.contains(searchQuery: query) }
+            guard !filtered.isEmpty else { return nil }
+            return ConversationPickerSection(items: filtered)
+        }
+    }
+
+    // MARK: - Actions
+
+    func selectContact(_ item: ConferencableItem) {
+        contactSelectedCB?([item])
+    }
+
+    func toggleConversationSelection(_ id: String) {
+        if selectedConversationIds.contains(id) {
+            selectedConversationIds.remove(id)
+        } else {
+            selectedConversationIds.insert(id)
+        }
+    }
+
+    func confirmConversationSelection() {
+        conversationSelectedCB?(Array(selectedConversationIds))
+    }
+
+    // MARK: - Computed Properties
+
+    var isSearchActive: Bool {
+        !searchText.isEmpty
+    }
+
+    var hasNoResults: Bool {
+        guard !isLoading else { return false }
+        switch type {
+        case .forCall:
+            return contactSections.allSatisfy { $0.items.isEmpty }
+        case .forConversation:
+            return conversationSections.allSatisfy { $0.items.isEmpty }
         }
     }
 }
 
-// MARK: - ContactPickerSections
-extension ContactPickerViewModel {
-    func addContactsToContactPickerSections(contacts: [ContactModel], sections: inout [ContactPickerSection], urlToExclude: [String] = [String]()) {
-        guard let currentAccount = self.accountService.currentAccount else {
-            return
-        }
-        var contactItems = [ConferencableItem]()
-        contacts.forEach { contact in
-            guard let contactUri = contact.uriString else { return }
-            if urlToExclude.contains(contactUri) {
-                return
-            }
-            let contactToAdd = Contact(contactUri: contactUri,
-                                       accountId: currentAccount.id,
-                                       registeredName: contact.userName ?? "",
-                                       presService: self.presenceService,
-                                       nameService: self.nameService,
-                                       hash: contact.hash,
-                                       profileService: self.profileService)
-            let contactItem = ConferencableItem(conferenceID: "", contacts: [contactToAdd])
-            contactItems.append(contactItem)
-        }
+// MARK: - Section Builders
+
+private extension ContactPickerViewModel {
+
+    func buildContactAndCallSections(contacts: [ContactModel], calls: [String: CallModel]) -> [ContactPickerSection] {
+        guard callService.call(callID: currentCallId) != nil else { return [] }
+        var sections = [ContactPickerSection]()
+        let callURIs = appendCallSection(from: calls, to: &sections)
+        let contactItems = buildContactItems(from: contacts, excluding: callURIs)
         if !contactItems.isEmpty {
             sections.append(ContactPickerSection(header: "contacts", items: contactItems))
         }
+        return sections
     }
 
-    func addCallsToContactPickerSections(calls: [String: CallModel], sections: inout [ContactPickerSection]) -> [String] {
-        var callURIs = [String]()
-        guard let currentCall = self.callService.call(callID: self.currentCallId) else {
-            return callURIs
+    func buildContactItems(from contacts: [ContactModel], excluding uris: [String] = []) -> [ConferencableItem] {
+        guard let currentAccount = accountService.currentAccount else { return [] }
+        let excludeSet = Set(uris)
+        return contacts.compactMap { contact in
+            guard let contactUri = contact.uriString, !excludeSet.contains(contactUri) else { return nil }
+            let contactObj = Contact(
+                contactUri: contactUri,
+                accountId: currentAccount.id,
+                registeredName: contact.userName ?? "",
+                presService: presenceService,
+                nameService: nameService,
+                hash: contact.hash,
+                profileService: profileService
+            )
+            let avatar = AvatarProvider(
+                profileService: profileService,
+                size: .medium45,
+                avatar: contactObj.imageData.asObservable(),
+                displayName: contactObj.firstLine.asObservable(),
+                isGroup: false
+            )
+            return ConferencableItem(conferenceID: "", contacts: [contactObj], avatarProvider: avatar)
         }
+    }
+
+    func appendCallSection(from calls: [String: CallModel], to sections: inout [ContactPickerSection]) -> [String] {
+        guard let currentCall = callService.call(callID: currentCallId) else { return [] }
+        var callURIs = [String]()
         var callItems = [ConferencableItem]()
         var conferences = [String: [Contact]]()
-        calls.values.forEach { call in
-            guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else { return }
-            let type = account.type == AccountType.ring ? URIType.ring : URIType.sip
-            let uri = JamiURI.init(schema: type, infoHash: call.callUri, account: account)
-            guard let uriString = uri.uriString else { return }
-            guard let hashString = uri.hash else { return }
+
+        for call in calls.values {
+            guard let account = accountService.getAccount(fromAccountId: call.accountId) else { continue }
+            let uriType: URIType = account.type == AccountType.ring ? .ring : .sip
+            let uri = JamiURI(schema: uriType, infoHash: call.callUri, account: account)
+            guard let uriString = uri.uriString, let hashString = uri.hash else { continue }
+
             callURIs.append(uriString)
-            if currentCall.participantsCallId.contains(call.callId) ||
-                call.callId == self.currentCallId {
-                return
+
+            // Skip calls already in the current conference or the current call itself.
+            if currentCall.participantsCallId.contains(call.callId) || call.callId == currentCallId {
+                continue
             }
-            if call.state != .current && call.state != .hold {
-                return
-            }
-            let contact = Contact(contactUri: uriString,
-                                  accountId: call.accountId, registeredName: call.registeredName,
-                                  presService: self.presenceService,
-                                  nameService: self.nameService,
-                                  hash: hashString,
-                                  profileService: self.profileService)
+            guard call.state == .current || call.state == .hold else { continue }
+
+            let contact = Contact(
+                contactUri: uriString,
+                accountId: call.accountId,
+                registeredName: call.registeredName,
+                presService: presenceService,
+                nameService: nameService,
+                hash: hashString,
+                profileService: profileService
+            )
+
             if call.participantsCallId.count == 1 {
-                let confItem = ConferencableItem(conferenceID: call.callId, contacts: [contact])
-                callItems.append(confItem)
-            } else if var conf = conferences[call.callId] {
-                conf.append(contact)
+                let avatar = AvatarProvider(
+                    profileService: profileService,
+                    size: .medium45,
+                    avatar: contact.imageData.asObservable(),
+                    displayName: contact.firstLine.asObservable(),
+                    isGroup: false
+                )
+                callItems.append(ConferencableItem(conferenceID: call.callId, contacts: [contact], avatarProvider: avatar))
             } else {
-                var contacts = [Contact]()
-                contacts.append(contact)
-                conferences[call.callId] = contacts
+                conferences[call.callId, default: []].append(contact)
             }
         }
-        conferences.keys.forEach { conferenceID in
-            guard let confContacts = conferences[conferenceID] else { return }
-            let conferenceItem = ConferencableItem(conferenceID: conferenceID, contacts: confContacts)
-            callItems.append(conferenceItem)
+
+        for (conferenceID, contacts) in conferences {
+            // Combine all participant names reactively for the display name.
+            let nameStreams = contacts.map { $0.firstLine.asObservable() }
+            let combinedName = Observable.combineLatest(nameStreams) { names in
+                names.joined(separator: ", ")
+            }
+            let avatar = AvatarProvider(
+                profileService: profileService,
+                size: .medium45,
+                avatar: contacts[0].imageData.asObservable(),
+                displayName: combinedName,
+                isGroup: true
+            )
+            callItems.append(ConferencableItem(conferenceID: conferenceID, contacts: contacts, avatarProvider: avatar))
         }
+
         if !callItems.isEmpty {
-            callItems.sort(by: { (first, second) -> Bool in
-                return first.contacts.count > second.contacts.count
-            })
+            callItems.sort { $0.contacts.count > $1.contacts.count }
             sections.append(ContactPickerSection(header: "calls", items: callItems))
         }
         return callURIs
