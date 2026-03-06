@@ -243,6 +243,8 @@ public class Constants: NSObject {
         case conversation20 = 20
         case conversation30 = 30
         case medium40 = 40
+        case medium45 = 45
+        case medium50 = 50
         case default55 = 55
         case conversationInfo80 = 80
         case call160 = 160

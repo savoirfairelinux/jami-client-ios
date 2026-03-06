@@ -49,7 +49,6 @@ enum ContextMenu: State {
 class ConversationViewController: UIHostingController<ConversationContainerView>,
                                   UIImagePickerControllerDelegate,
                                   UINavigationControllerDelegate,
-                                  ContactPickerDelegate,
                                   PHPickerViewControllerDelegate {
 
     let disposeBag = DisposeBag()
@@ -418,28 +417,6 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
     }
     // swiftlint:enable cyclomatic_complexity
 
-    // MARK: - ContactPickerDelegate
-
-    func presentContactPicker(contactPickerVC: ContactPickerViewController) {
-        addChild(contactPickerVC)
-        var statusBarHeight: CGFloat = 0
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let statusBarManager = windowScene.statusBarManager {
-            statusBarHeight = statusBarManager.statusBarFrame.height
-        }
-        let screenWidth = ScreenDimensionsManager.shared.adaptiveWidth
-        let screenHeight = ScreenDimensionsManager.shared.adaptiveHeight
-        let newFrame = CGRect(x: 0, y: -statusBarHeight, width: screenWidth, height: screenHeight + statusBarHeight)
-        let initialFrame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: screenHeight + statusBarHeight)
-        contactPickerVC.view.frame = initialFrame
-        view.addSubview(contactPickerVC.view)
-        contactPickerVC.didMove(toParent: self)
-        UIView.animate(withDuration: 0.2, animations: { [weak contactPickerVC] in
-            guard let contactPickerVC = contactPickerVC else { return }
-            contactPickerVC.view.frame = newFrame
-        }, completion: { _ in
-        })
-    }
 }
 
 // MARK: - Location sharing
@@ -489,9 +466,9 @@ extension ConversationViewController {
     }
 }
 
-// MARK: - ContactPickerViewControllerDelegate
-extension ConversationViewController: ContactPickerViewControllerDelegate {
-    func contactPickerDismissed() {
+// MARK: - ContactPickerDismissHandler
+extension ConversationViewController: ContactPickerDismissHandler {
+    func contactPickerDidDismiss() {
         view.addGestureRecognizer(screenTapRecognizer)
     }
 }
