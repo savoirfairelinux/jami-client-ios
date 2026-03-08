@@ -66,6 +66,7 @@ struct ContactPickerView: View {
                             presentationMode.wrappedValue.dismiss()
                         }
                         .foregroundColor(.jamiColor)
+                        .font(.body.weight(.semibold))
                         .opacity(viewModel.selectedConversationIds.isEmpty ? 0.35 : 1.0)
                         .disabled(viewModel.selectedConversationIds.isEmpty)
                     }
@@ -155,9 +156,9 @@ struct ContactPickerView: View {
         List {
             ForEach(viewModel.contactSections) { section in
                 Section(header: Text(section.header)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .textCase(nil)
+//                    .font(.subheadline)
+//                    .foregroundColor(.secondary)
+//                    .textCase(nil)
                 ) {
                     ForEach(section.items) { item in
                         Button {
@@ -188,7 +189,9 @@ struct ContactPickerView: View {
                         ContactPickerConversationRow(
                             isSelected: viewModel.selectedConversationIds.contains(swarmInfo.id),
                             avatarSource: viewModel.conversationAvatarProviders[swarmInfo.id]
-                                ?? AvatarProvider(profileService: viewModel.profileService, size: .medium45)
+                                ?? AvatarProvider(profileService: viewModel.profileService, size: .medium45),
+                            presenceTracker: viewModel.conversationPresenceTrackers[swarmInfo.id]
+                                ?? ConversationPresenceTracker(jamiId: "", presenceService: viewModel.presenceService)
                         )
                     }
                     .buttonStyle(.plain)
@@ -216,7 +219,12 @@ private struct ContactRowView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            AvatarSwiftUIView(source: avatarSource)
+            ZStack(alignment: .bottomTrailing) {
+                AvatarSwiftUIView(source: avatarSource)
+                if item.contacts.count == 1 {
+                    presenceIndicator
+                }
+            }
 
             Text(avatarSource.profileName)
                 .foregroundColor(.primary)
@@ -224,15 +232,31 @@ private struct ContactRowView: View {
                 .truncationMode(.middle)
 
             Spacer()
-
-            if item.contacts.count == 1, presenceTracker.isOnline {
-                Circle()
-                    .fill(Color(presenceTracker.presenceColor))
-                    .frame(width: 10, height: 10)
-            }
         }
         .padding(.vertical, 8)
         .contentShape(Rectangle())
+    }
+
+    @ViewBuilder
+    private var presenceIndicator: some View {
+        switch presenceTracker.presenceStatus {
+        case .connected:
+            presenceCircle(color: .onlinePresenceColor)
+        case .available:
+            presenceCircle(color: .availablePresenceColor)
+        default:
+            EmptyView()
+        }
+    }
+
+    private func presenceCircle(color: Color) -> some View {
+        Circle()
+            .fill(color)
+            .frame(width: 12, height: 12)
+            .overlay(
+                Circle().stroke(Color(UIColor.systemBackground), lineWidth: 1)
+            )
+            .offset(x: -1, y: 0)
     }
 }
 
@@ -241,15 +265,20 @@ private struct ContactRowView: View {
 private struct ContactPickerConversationRow: View {
     let isSelected: Bool
     @ObservedObject private var avatarSource: AvatarProvider
+    @ObservedObject private var presenceTracker: ConversationPresenceTracker
 
-    init(isSelected: Bool, avatarSource: AvatarProvider) {
+    init(isSelected: Bool, avatarSource: AvatarProvider, presenceTracker: ConversationPresenceTracker) {
         self.isSelected = isSelected
         self.avatarSource = avatarSource
+        self.presenceTracker = presenceTracker
     }
 
     var body: some View {
         HStack(spacing: 12) {
-            AvatarSwiftUIView(source: avatarSource)
+            ZStack(alignment: .bottomTrailing) {
+                AvatarSwiftUIView(source: avatarSource)
+                presenceIndicator
+            }
 
             Text(avatarSource.profileName)
                 .foregroundColor(.primary)
@@ -274,34 +303,60 @@ private struct ContactPickerConversationRow: View {
         .padding(.vertical, 8)
         .contentShape(Rectangle())
     }
+
+    @ViewBuilder
+    private var presenceIndicator: some View {
+        switch presenceTracker.presenceStatus {
+        case .connected:
+            presenceCircle(color: .onlinePresenceColor)
+        case .available:
+            presenceCircle(color: .availablePresenceColor)
+        default:
+            EmptyView()
+        }
+    }
+
+    private func presenceCircle(color: Color) -> some View {
+        Circle()
+            .fill(color)
+            .frame(width: 12, height: 12)
+            .overlay(
+                Circle().stroke(Color(UIColor.systemBackground), lineWidth: 1)
+            )
+            .offset(x: -1, y: 0)
+    }
 }
 
 // MARK: - Presence Tracker
 
 private final class ContactPresenceTracker: ObservableObject {
-    @Published var isOnline = false
-    @Published var presenceColor: UIColor = .clear
+    @Published var presenceStatus: PresenceStatus = .offline
 
     private var disposeBag = DisposeBag()
 
     init(contact: Contact) {
-        subscribe(to: contact.presenceStatus)
-    }
-
-    private func subscribe(to relay: BehaviorRelay<PresenceStatus>?) {
-        guard let relay = relay else { return }
+        guard let relay = contact.presenceStatus else { return }
         relay
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] status in
-                self?.isOnline = status != .offline
-                switch status {
-                case .connected:
-                    self?.presenceColor = .onlinePresenceColor
-                case .available:
-                    self?.presenceColor = .availablePresenceColor
-                default:
-                    self?.presenceColor = .clear
-                }
+                self?.presenceStatus = status
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+/// Presence tracker for a conversation's peer, used in conversation rows.
+final class ConversationPresenceTracker: ObservableObject {
+    @Published var presenceStatus: PresenceStatus = .offline
+
+    private var disposeBag = DisposeBag()
+
+    init(jamiId: String, presenceService: PresenceService) {
+        guard let relay = presenceService.getSubscriptionsForContact(contactId: jamiId) else { return }
+        relay
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] status in
+                self?.presenceStatus = status
             })
             .disposed(by: disposeBag)
     }
