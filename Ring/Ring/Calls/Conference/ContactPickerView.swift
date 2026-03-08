@@ -66,6 +66,7 @@ struct ContactPickerView: View {
                             presentationMode.wrappedValue.dismiss()
                         }
                         .foregroundColor(.jamiColor)
+                        .font(.body.weight(.semibold))
                         .opacity(viewModel.selectedConversationIds.isEmpty ? 0.35 : 1.0)
                         .disabled(viewModel.selectedConversationIds.isEmpty)
                     }
@@ -155,9 +156,6 @@ struct ContactPickerView: View {
         List {
             ForEach(viewModel.contactSections) { section in
                 Section(header: Text(section.header)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .textCase(nil)
                 ) {
                     ForEach(section.items) { item in
                         Button {
@@ -166,9 +164,7 @@ struct ContactPickerView: View {
                         } label: {
                             ContactRowView(item: item)
                         }
-                        .buttonStyle(.plain)
-                        .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
-                        .hideRowSeparator()
+                        .pickerRowStyle()
                     }
                 }
             }
@@ -188,16 +184,48 @@ struct ContactPickerView: View {
                         ContactPickerConversationRow(
                             isSelected: viewModel.selectedConversationIds.contains(swarmInfo.id),
                             avatarSource: viewModel.conversationAvatarProviders[swarmInfo.id]
-                                ?? AvatarProvider(profileService: viewModel.profileService, size: .medium45)
+                                ?? AvatarProvider(profileService: viewModel.profileService, size: .medium45),
+                            presenceTracker: viewModel.conversationPresenceTrackers[swarmInfo.id]
+                                ?? PresenceTracker(relay: nil)
                         )
                     }
-                    .buttonStyle(.plain)
-                    .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
-                    .hideRowSeparator()
+                    .pickerRowStyle()
                 }
             }
         }
         .listStyle(.plain)
+    }
+}
+
+// MARK: - Avatar with Presence
+
+/// Combines avatar image with an overlapping presence indicator.
+private struct AvatarWithPresence: View {
+    @ObservedObject var avatarSource: AvatarProvider
+    @ObservedObject var presenceTracker: PresenceTracker
+
+    var body: some View {
+        ZStack(alignment: .bottomTrailing) {
+            AvatarSwiftUIView(source: avatarSource)
+            switch presenceTracker.status {
+            case .connected:
+                presenceCircle(color: .onlinePresenceColor)
+            case .available:
+                presenceCircle(color: .availablePresenceColor)
+            default:
+                EmptyView()
+            }
+        }
+    }
+
+    private func presenceCircle(color: Color) -> some View {
+        Circle()
+            .fill(color)
+            .frame(width: 12, height: 12)
+            .overlay(
+                Circle().stroke(Color(UIColor.systemBackground), lineWidth: 1)
+            )
+            .offset(x: -1, y: 0)
     }
 }
 
@@ -206,17 +234,21 @@ struct ContactPickerView: View {
 private struct ContactRowView: View {
     let item: ConferencableItem
     @ObservedObject private var avatarSource: AvatarProvider
-    @StateObject private var presenceTracker: ContactPresenceTracker
+    @StateObject private var presenceTracker: PresenceTracker
 
     init(item: ConferencableItem) {
         self.item = item
         self.avatarSource = item.avatarProvider
-        _presenceTracker = StateObject(wrappedValue: ContactPresenceTracker(contact: item.contacts[0]))
+        _presenceTracker = StateObject(wrappedValue: PresenceTracker(contact: item.contacts[0]))
     }
 
     var body: some View {
         HStack(spacing: 12) {
-            AvatarSwiftUIView(source: avatarSource)
+            if item.contacts.count == 1 {
+                AvatarWithPresence(avatarSource: avatarSource, presenceTracker: presenceTracker)
+            } else {
+                AvatarSwiftUIView(source: avatarSource)
+            }
 
             Text(avatarSource.profileName)
                 .foregroundColor(.primary)
@@ -224,12 +256,6 @@ private struct ContactRowView: View {
                 .truncationMode(.middle)
 
             Spacer()
-
-            if item.contacts.count == 1, presenceTracker.isOnline {
-                Circle()
-                    .fill(Color(presenceTracker.presenceColor))
-                    .frame(width: 10, height: 10)
-            }
         }
         .padding(.vertical, 8)
         .contentShape(Rectangle())
@@ -241,35 +267,29 @@ private struct ContactRowView: View {
 private struct ContactPickerConversationRow: View {
     let isSelected: Bool
     @ObservedObject private var avatarSource: AvatarProvider
+    @ObservedObject private var presenceTracker: PresenceTracker
 
-    init(isSelected: Bool, avatarSource: AvatarProvider) {
+    init(isSelected: Bool, avatarSource: AvatarProvider, presenceTracker: PresenceTracker) {
         self.isSelected = isSelected
         self.avatarSource = avatarSource
+        self.presenceTracker = presenceTracker
     }
 
     var body: some View {
         HStack(spacing: 12) {
-            AvatarSwiftUIView(source: avatarSource)
+            AvatarWithPresence(avatarSource: avatarSource, presenceTracker: presenceTracker)
 
             Text(avatarSource.profileName)
                 .foregroundColor(.primary)
-                .multilineTextAlignment(.leading)
-                .truncationMode(.middle)
                 .lineLimit(1)
+                .truncationMode(.middle)
 
             Spacer()
 
-            if isSelected {
-                Image(systemName: "checkmark.circle.fill")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(.jamiColor)
-            } else {
-                Image(systemName: "circle")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(.secondary)
-            }
+            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .foregroundColor(isSelected ? .jamiColor : .secondary)
         }
         .padding(.vertical, 8)
         .contentShape(Rectangle())
@@ -278,38 +298,40 @@ private struct ContactPickerConversationRow: View {
 
 // MARK: - Presence Tracker
 
-private final class ContactPresenceTracker: ObservableObject {
-    @Published var isOnline = false
-    @Published var presenceColor: UIColor = .clear
+final class PresenceTracker: ObservableObject {
+    @Published var status: PresenceStatus = .offline
 
     private var disposeBag = DisposeBag()
 
-    init(contact: Contact) {
-        subscribe(to: contact.presenceStatus)
-    }
-
-    private func subscribe(to relay: BehaviorRelay<PresenceStatus>?) {
+    init(relay: BehaviorRelay<PresenceStatus>?) {
         guard let relay = relay else { return }
         relay
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] status in
-                self?.isOnline = status != .offline
-                switch status {
-                case .connected:
-                    self?.presenceColor = .onlinePresenceColor
-                case .available:
-                    self?.presenceColor = .availablePresenceColor
-                default:
-                    self?.presenceColor = .clear
-                }
+                self?.status = status
             })
             .disposed(by: disposeBag)
     }
+
+    convenience init(contact: Contact) {
+        self.init(relay: contact.presenceStatus)
+    }
+
+    convenience init(jamiId: String, presenceService: PresenceService) {
+        self.init(relay: presenceService.getSubscriptionsForContact(contactId: jamiId))
+    }
 }
 
-// MARK: - Searchable Compatibility
+// MARK: - View Modifiers
 
 private extension View {
+    func pickerRowStyle() -> some View {
+        self
+            .buttonStyle(.plain)
+            .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
+            .hideRowSeparator()
+    }
+
     @ViewBuilder
     func applySearchable(text: Binding<String>) -> some View {
         if #available(iOS 15.0, *) {
