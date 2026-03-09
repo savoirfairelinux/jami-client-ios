@@ -20,9 +20,19 @@ import SwiftUI
 
 struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
+    @SwiftUI.State private var containerWidth: CGFloat = UIScreen.main.bounds.width
 
     var body: some View {
         MessagesListView(model: viewModel.swiftUIModel)
+            .background(
+                GeometryReader { geometry in
+                    Color.clear
+                        .onAppear { containerWidth = geometry.size.width }
+                        .onChange(of: geometry.size.width) { newWidth in
+                            containerWidth = newWidth
+                        }
+                }
+            )
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -66,7 +76,7 @@ struct ConversationContainerView: View {
                         .truncationMode(.tail)
                 }
             }
-            .frame(maxWidth: reservedTitleWidth, alignment: .leading)
+            .frame(maxWidth: titleMaxWidth, alignment: .leading)
         }
     }
 
@@ -100,8 +110,7 @@ struct ConversationContainerView: View {
 
     // MARK: - Helpers
 
-    private var reservedTitleWidth: CGFloat {
-        let screenWidth = UIScreen.main.bounds.width
+    private var titleMaxWidth: CGFloat {
         let backButtonReserve: CGFloat = 60
         let sidePaddingReserve: CGFloat = 30
         let trailingButtonReserve: CGFloat = 60
@@ -111,6 +120,6 @@ struct ConversationContainerView: View {
         let totalReserved = backButtonReserve + (sidePaddingReserve * 2) +
             (trailingButtonReserve * CGFloat(trailingCount)) + avatarWidthReserve
 
-        return screenWidth - totalReserved
+        return max(0, containerWidth - totalReserved)
     }
 }
