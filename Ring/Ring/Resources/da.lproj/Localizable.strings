@@ -44,7 +44,7 @@
 "global.search" = "Søger…";
 "global.supportJami" = "Support Jami project";
 "global.deleteMessage" = "Slet besked";
-"global.deleteFile" = "Delete file from device";
+"global.deleteFile" = "Slet fil fra enhed";
 "global.editMessage" = "Redigere beskeden";
 "global.editing" = "Editing";
 "global.create" = "Opret";
@@ -74,7 +74,7 @@
 "swarm.restartConversation" = "Restart conversation";
 "swarm.conversationEnded" = "Conversation ended";
 "swarm.chooseColor" = "Samtalefarve";
-"swarm.typeOfSwarm" = "Conversation type";
+"swarm.typeOfSwarm" = "Samtaletype";
 "swarm.identifier" = "Identifikator";
 "swarm.conversationId" = "Conversation ID";
 "swarm.settings" = "Indstillinger";
@@ -175,7 +175,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
-"conversation.lastMessageDeleted" = "(deleted message)";
+"conversation.lastMessageDeleted" = "(slettet besked)";
 
 // Invitations
 "invitations.noInvitations" = "Ingen invitationer";
@@ -206,7 +206,7 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Gå med Jami";
-"createAccount.lookingForUsernameAvailability" = "Checking username availability…";
+"createAccount.lookingForUsernameAvailability" = "Tjekker om brugernavnet er ledigt…";
 "createAccount.invalidUsername" = "Invalid username. Please enter the correct username.";
 "createAccount.usernameAlreadyTaken" = "Brugernavn er allerede taget";
 "createAccount.usernameValid" = "Brugernavnet er tilgængeligt.";
@@ -214,7 +214,7 @@
 "createAccount.UsernameNotRegisteredMessage" = "Kontoen blev oprettet men brugernavnet blev ikke registreret.";
 "createAccount.timeoutTitle" = "Konto Oprettet";
 "createAccount.timeoutMessage" = "Username registration is in progress. Please wait…";
-"createAccount.sipConfigure" = "Configure existing SIP account";
+"createAccount.sipConfigure" = "Konfigurer eksisterende SIP konto";
 "createAccount.creatingAccount" = "Creating account";
 "createAccount.nameExplanation" = "Du kan vælge et brugernavn for at hjælpe andre med at finde og nå dig på Jami.";
 "createAccount.newAccount" = "New account";
@@ -257,12 +257,12 @@
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
-"alerts.accountCannotBeFoundTitle" = "Account error";
+"alerts.accountCannotBeFoundTitle" = "Kontofejl";
 "alerts.accountCannotBeFoundMessage" = "Unable to find account on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account added";
 "alerts.accountNoNetworkTitle" = "Netværksfejl";
 "alerts.accountNoNetworkMessage" = "A connectivity error occurred while adding Jami account to the distributed network. Please try again. If the problem persists, contact your system administrator.";
-"alerts.accountDefaultErrorTitle" = "Account error";
+"alerts.accountDefaultErrorTitle" = "Kontofejl";
 "alerts.accountDefaultErrorMessage" = "An error occurred while creating the account.";
 "alerts.profileTakePhoto" = "Tag billede";
 "alerts.profileUploadPhoto" = "Upload foto";
@@ -275,7 +275,7 @@
 "alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
 "alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Do you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete conversation";
+"alerts.confirmDeleteConversationTitle" = "Slet samtale";
 "alerts.noMediaPermissionsTitle" = "Medietilladelse er ikke givet";
 "alerts.noLibraryPermissionsTitle" = "Har ikke adgang til foto-biblioteket";
 "alerts.noLocationPermissionsTitle" = "Har ikke adgang til lokation";
@@ -393,7 +393,7 @@
 "accountPage.manageAccount" = "Håndter konto";
 "accountPage.encryptAccount" = "Password protect account";
 "accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
-"accountPage.passwordsDoNotMatch" = "Passwords do not match.";
+"accountPage.passwordsDoNotMatch" = "Adgangskoderne er ikke ens.";
 "accountPage.passwordCreated" = "Password created";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Sammenkædede enheder";
@@ -675,7 +675,7 @@
 "shareExtension.tryDifferentFilter" = "Try a different filter";
 "shareExtension.sendToConversation" = "Send to %d conversation";
 "shareExtension.sendToConversationsPlural" = "Send to %d conversations";
-"shareExtension.selectAccountTitle" = "Select account";
+"shareExtension.selectAccountTitle" = "Vælg konto";
 "shareExtension.searchConversations" = "Search conversations";
 "shareExtension.accessibilitySelectConversation" = "Double-tap to select this conversation";
 "shareExtension.accessibilitySelectedAccount" = "Selected account: %@. Double-tap to change account.";
