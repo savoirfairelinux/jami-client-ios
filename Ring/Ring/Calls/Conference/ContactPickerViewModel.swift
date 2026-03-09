@@ -42,6 +42,8 @@ final class ContactPickerViewModel: ObservableObject, ViewModel {
 
     private var unfilteredContactSections: [ContactPickerSection] = []
     private(set) var conversationAvatarProviders: [String: AvatarProvider] = [:]
+    /// Presence trackers for 1:1 conversations, keyed by conversation id.
+    private(set) var conversationPresenceTrackers: [String: PresenceTracker] = [:]
     private let disposeBag = DisposeBag()
     private var cancellables = Set<AnyCancellable>()
 
@@ -50,7 +52,7 @@ final class ContactPickerViewModel: ObservableObject, ViewModel {
     private let callService: CallsService
     let profileService: ProfilesService
     private let accountService: AccountsService
-    private let presenceService: PresenceService
+    let presenceService: PresenceService
     private let nameService: NameService
 
     // MARK: - Init
@@ -117,6 +119,14 @@ final class ContactPickerViewModel: ObservableObject, ViewModel {
                 profileService: profileService,
                 size: .medium45
             )
+            // Track presence for 1:1 (dialog) conversations.
+            if let conversation = swarmInfo.conversation, conversation.isDialog(),
+               let peerJamiId = swarmInfo.nonLocalParticipants.first?.jamiId {
+                conversationPresenceTrackers[swarmInfo.id] = PresenceTracker(
+                    jamiId: peerJamiId,
+                    presenceService: presenceService
+                )
+            }
         }
 
         let section = ConversationPickerSection(items: conversations)
