@@ -19,6 +19,7 @@
  */
 
 import UIKit
+import SwiftUI
 import Reusable
 import RxSwift
 
@@ -36,7 +37,7 @@ protocol PreviewViewControllerDelegate: AnyObject {
 
 class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
     // MARK: - outlets
-    @IBOutlet weak var playerView: PlayerView!
+    @IBOutlet weak var playerContainerView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet private weak var hideButton: UIButton!
     @IBOutlet weak var imageLeadingConstraint: NSLayoutConstraint!
@@ -54,13 +55,13 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
     // MARK: - members
     let disposeBag = DisposeBag()
     var viewModel: PreviewControllerModel!
-    var tapGestureRecognizer: UITapGestureRecognizer!
     var type: PrevewType = .player
     weak var delegate: PreviewViewControllerDelegate?
+    private var hostingController: UIHostingController<PlayerView>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.playerView.isHidden = self.type == .image
+        self.playerContainerView.isHidden = self.type == .image
         self.gradientView.layoutIfNeeded()
         self.gradientView.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 1), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
         NotificationCenter.default.rx
@@ -78,8 +79,8 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
                 self?.removeChildController()
             })
             .disposed(by: self.disposeBag)
-        self.hideButton.centerYAnchor.constraint(equalTo: self.playerView.muteAudio.centerYAnchor, constant: 0).isActive = true
         self.hideButton.setTitle(L10n.Global.close, for: .normal)
+        self.hideButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
         self.shareButton.isUserInteractionEnabled = self.type == .image
         self.deleteButton.isUserInteractionEnabled = self.type == .image
         self.forwardButton.isUserInteractionEnabled = self.type == .image
@@ -117,10 +118,25 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
                 .disposed(by: self.disposeBag)
             return
         }
-        guard let model = self.viewModel.playerViewModel, let playerView = playerView else { return }
-        playerView.viewModel = model
-        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
-        self.view.addGestureRecognizer(tapGestureRecognizer)
+        guard let model = self.viewModel.playerViewModel else { return }
+        embedPlayerView(viewModel: model)
+    }
+
+    private func embedPlayerView(viewModel: PlayerViewModel) {
+        let playerView = PlayerView(viewModel: viewModel, sizeMode: .fullScreen, withControls: true)
+        let hosting = UIHostingController(rootView: playerView)
+        hosting.view.backgroundColor = .clear
+        hosting.view.translatesAutoresizingMaskIntoConstraints = false
+        addChild(hosting)
+        playerContainerView.addSubview(hosting.view)
+        NSLayoutConstraint.activate([
+            hosting.view.leadingAnchor.constraint(equalTo: playerContainerView.leadingAnchor),
+            hosting.view.trailingAnchor.constraint(equalTo: playerContainerView.trailingAnchor),
+            hosting.view.topAnchor.constraint(equalTo: playerContainerView.topAnchor),
+            hosting.view.bottomAnchor.constraint(equalTo: playerContainerView.bottomAnchor)
+        ])
+        hosting.didMove(toParent: self)
+        self.hostingController = hosting
     }
 
     @objc
@@ -141,14 +157,16 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    @objc
-    func screenTapped() {
-        self.playerView.changeControlsVisibility()
-    }
-
     override func resizeFrom(initialFrame: CGRect) {
         if self.type == .player {
-            self.playerView.resizeFrom(frame: initialFrame)
+            // Animate the player container from the initial frame to full screen
+            backgroundView.alpha = 0
+            UIView.animate(withDuration: 0.2,
+                           delay: 0.0,
+                           options: [.curveEaseInOut],
+                           animations: { [weak self] in
+                            self?.backgroundView.alpha = 1
+                           }, completion: nil)
             return
         }
         let leftConstraint: CGFloat = initialFrame.origin.x

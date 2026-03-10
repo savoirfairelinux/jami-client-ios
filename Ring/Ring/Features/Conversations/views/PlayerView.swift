@@ -16,349 +16,485 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
-import Reusable
+import SwiftUI
 import RxSwift
+import AVFoundation
 
 enum PlayerMode {
     case fullScreen
     case inConversationMessage
 }
 
-class PlayerView: UIView {
+// MARK: - Player State Coordinator
 
-    let MAXCONSTRAINT: CGFloat = 30
-    let MINCONSTRAINT: CGFloat = 10
-    let MAXTOPGRADIENTSIZE: CGFloat = 100
-    let MINTOPGRADIENTSIZE: CGFloat = 50
-    let MAXBOTTOMGRADIENTSIZE: CGFloat = 160
-    let MINBOTTOMGRADIENTSIZE: CGFloat = 80
-    let PLAYBUTTONBOTTOMCONSTRAINT: CGFloat = 55
-    let SLIDEBARLEADINGCONSTRAINT: CGFloat = 50
-    let MAXSIZE: CGFloat = 60
-    let MINSIZE: CGFloat = 40
+/// Manages the AVSampleBufferDisplayLayer and RxSwift subscriptions.
+/// Using a class with @StateObject ensures these survive SwiftUI view re-creation.
+class PlayerCoordinator: ObservableObject {
+    let displayLayer = AVSampleBufferDisplayLayer()
+    private var disposeBag = DisposeBag()
+    private weak var boundViewModel: PlayerViewModel?
 
-    var withControls: Bool = true {
-        didSet {
-            togglePause.isHidden = !withControls
-            muteAudio.isHidden = !withControls
-            progressSlider.isHidden = !withControls
-            durationLabel.isHidden = !withControls
-        }
+    @Published var isPaused: Bool = true
+    @Published var isMuted: Bool = true
+    @Published var progress: Float = 0
+    @Published var duration: Float = 0
+    @Published var hasVideo: Bool = true
+    @Published var controlsVisible: Bool = true
+
+    var isSeeking: Bool = false
+
+    init() {
+        displayLayer.videoGravity = .resizeAspect
+        displayLayer.isOpaque = true
     }
 
-    @IBOutlet var containerView: UIView!
-    @IBOutlet weak var incomingVideo: UIView!
-    @IBOutlet weak var togglePause: UIButton!
-    @IBOutlet weak var muteAudio: UIButton!
-    @IBOutlet weak var progressSlider: UISlider!
-    @IBOutlet weak var durationLabel: UILabel!
-
-    @IBOutlet weak var topGradient: UIView!
-    @IBOutlet weak var bottomGradient: UIView!
-
-    @IBOutlet weak var backgroundView: UIView!
-
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var trailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var buttonsAllignmentConstraint: NSLayoutConstraint!
-    @IBOutlet weak var progressSliderLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomGradientViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var topGradientViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var playButtonCenterY: NSLayoutConstraint!
-    @IBOutlet weak var playButtonCenterX: NSLayoutConstraint!
-
-    @IBOutlet weak var togglePauseWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var togglePauseHeightConstraint: NSLayoutConstraint!
-
-    @IBOutlet weak var muteAudioWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var muteAudioHeightConstraint: NSLayoutConstraint!
-
-    @IBOutlet weak var imageLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
-
-    var viewModel: PlayerViewModel!
-    var incomingVideoLayer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
-    let disposeBag = DisposeBag()
-    var sliderDisposeBag = DisposeBag()
-
-    var sizeMode: PlayerMode = .inConversationMessage {
-        didSet {
-            self.sizeChanged()
+    /// Called from onAppear. Safe to call multiple times — mirrors the old
+    /// willMove(toWindow:) behavior that fired each time the UIView appeared.
+    func bind(to viewModel: PlayerViewModel) {
+        if boundViewModel === viewModel {
+            // Already bound to this VM — just re-trigger createPlayer
+            // which re-emits firstFrame if player already exists (old behavior).
+            viewModel.createPlayer()
+            return
         }
-    }
 
-    @IBAction func startSeekFrame(_ sender: Any) {
-        sliderDisposeBag = DisposeBag()
-        self.viewModel.userStartSeeking()
-        progressSlider.rx.value
-            .subscribe(onNext: { [weak self] (value) in
-                self?.viewModel.seekTimeVariable.accept(Float(value))
+        // New view model — reset subscriptions
+        disposeBag = DisposeBag()
+        boundViewModel = viewModel
+
+        viewModel.playBackFrame
+            .subscribe(onNext: { [weak self] buffer in
+                guard let self = self, let buffer = buffer else { return }
+                DispatchQueue.main.async {
+                    self.displayLayer.enqueue(buffer)
+                }
             })
-            .disposed(by: self.sliderDisposeBag)
+            .disposed(by: disposeBag)
+
+        viewModel.playerPosition
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] position in
+                guard let self = self else { return }
+                if !self.isSeeking {
+                    self.progress = position
+                }
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.playerDuration
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] value in
+                self?.duration = value
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.pause
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] value in
+                self?.isPaused = value
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.audioMuted
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] value in
+                self?.isMuted = value
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.hasVideo
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] value in
+                self?.hasVideo = value
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.createPlayer()
+    }
+}
+
+// MARK: - Video Layer View
+
+/// Renders video frames via AVSampleBufferDisplayLayer.
+struct VideoLayerView: UIViewRepresentable {
+    let displayLayer: AVSampleBufferDisplayLayer
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.layer.addSublayer(displayLayer)
+        return view
     }
 
-    @IBAction func stopSeekFrame(_ sender: UISlider) {
-        sliderDisposeBag = DisposeBag()
-        self.viewModel.userStopSeeking()
+    func updateUIView(_ uiView: UIView, context: Context) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        displayLayer.frame = uiView.bounds
+        CATransaction.commit()
+    }
+}
+
+// MARK: - PlayerView
+
+struct PlayerView: View {
+
+    enum Layout {
+        static let maxPadding: CGFloat = 30
+        static let minPadding: CGFloat = 10
+        static let maxButtonSize: CGFloat = 60
+        static let minButtonSize: CGFloat = 40
+        static let maxTopGradient: CGFloat = 100
+        static let minTopGradient: CGFloat = 50
+        static let maxBottomGradient: CGFloat = 160
+        static let minBottomGradient: CGFloat = 80
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.commonInit()
-    }
+    var viewModel: PlayerViewModel
+    var sizeMode: PlayerMode
+    var withControls: Bool
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.commonInit()
-    }
+    @StateObject private var coordinator = PlayerCoordinator()
 
-    func commonInit() {
-        Bundle.main.loadNibNamed("PlayerView", owner: self, options: nil)
-        addSubview(containerView)
-        containerView.frame = self.bounds
-        let circleImage = makeCircleWith(size: CGSize(width: 15, height: 15),
-                                         backgroundColor: UIColor.white)
-        progressSlider.setThumbImage(circleImage, for: .normal)
-        progressSlider.setThumbImage(circleImage, for: .highlighted)
-    }
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                backgroundColor
+                    .ignoresSafeArea(edges: sizeMode == .fullScreen ? .all : [])
 
-    func frameUpdated() {
-        if containerView.frame != self.bounds {
-            containerView.frame = self.bounds
-            containerView.setNeedsDisplay()
-            updateLayerSize()
+                VideoLayerView(displayLayer: coordinator.displayLayer)
+
+                if withControls {
+                    controlsOverlay(in: geometry)
+                }
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if sizeMode == .fullScreen {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        coordinator.controlsVisible.toggle()
+                    }
+                }
+            }
+        }
+        .onAppear {
+            coordinator.bind(to: viewModel)
         }
     }
 
-    func updateLayerSize() {
-        if self.incomingVideoLayer.frame != self.containerView.bounds {
-            CATransaction.begin()
-            CATransaction.setDisableActions(true)
-            self.incomingVideoLayer.frame = self.containerView.bounds
-            CATransaction.commit()
+    // MARK: - Background
+
+    private var backgroundColor: Color {
+        if sizeMode == .fullScreen {
+            return Color.black
+        }
+        return coordinator.hasVideo ? Color(UIColor.placeholderText) : Color(UIColor.secondarySystemBackground)
+    }
+
+    // MARK: - Controls Overlay
+
+    @ViewBuilder
+    private func controlsOverlay(in geometry: GeometryProxy) -> some View {
+        let isFullScreen = sizeMode == .fullScreen
+        ZStack(alignment: .bottom) {
+            VStack {
+                topGradient(isFullScreen: isFullScreen)
+                Spacer()
+            }
+            .opacity(coordinator.controlsVisible ? 1 : 0)
+
+            VStack(spacing: 0) {
+                Spacer()
+                bottomGradient(isFullScreen: isFullScreen)
+            }
+            .opacity(coordinator.controlsVisible ? 1 : 0)
+
+            controlsContent(isFullScreen: isFullScreen)
+                .opacity(coordinator.controlsVisible ? 1 : 0)
         }
     }
 
-    private func makeCircleWith(size: CGSize, backgroundColor: UIColor) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(backgroundColor.cgColor)
-        context?.setStrokeColor(UIColor.clear.cgColor)
-        let bounds = CGRect(origin: .zero, size: size)
-        context?.addEllipse(in: bounds)
-        context?.drawPath(using: .fill)
+    @ViewBuilder
+    private func controlsContent(isFullScreen: Bool) -> some View {
+        let padding = isFullScreen ? Layout.maxPadding : Layout.minPadding
+        let buttonSize = isFullScreen ? Layout.maxButtonSize : Layout.minButtonSize
+        let controlColor = coordinator.hasVideo ? Color.white : Color(UIColor.label.lighten(by: 50) ?? UIColor.label)
+
+        if isFullScreen {
+            fullScreenControls(padding: padding, buttonSize: buttonSize, controlColor: controlColor)
+        } else {
+            messageControls(padding: padding, buttonSize: buttonSize, controlColor: controlColor)
+        }
+    }
+
+    // MARK: - Full Screen Controls
+
+    @ViewBuilder
+    private func fullScreenControls(padding: CGFloat, buttonSize: CGFloat, controlColor: Color) -> some View {
+        VStack(spacing: 8) {
+            Spacer()
+
+            Button(action: { viewModel.togglePause() }) {
+                Image(systemName: coordinator.isPaused ? "play.fill" : "pause.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: buttonSize * 0.5, height: buttonSize * 0.5)
+                    .foregroundColor(controlColor)
+            }
+            .frame(width: buttonSize, height: buttonSize)
+
+            Spacer()
+
+            HStack(spacing: 12) {
+                if coordinator.hasVideo {
+                    Button(action: { viewModel.muteAudio() }) {
+                        Image(uiImage: coordinator.isMuted ? UIImage(asset: Asset.audioOff) ?? UIImage() : UIImage(asset: Asset.audioOn) ?? UIImage())
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: buttonSize * 0.4, height: buttonSize * 0.4)
+                            .foregroundColor(controlColor)
+                    }
+                }
+
+                PlayerSlider(
+                    value: Binding(
+                        get: { coordinator.progress },
+                        set: { coordinator.progress = $0 }
+                    ),
+                    trackColor: controlColor,
+                    thumbSize: 15,
+                    onEditingChanged: { editing in
+                        if editing {
+                            coordinator.isSeeking = true
+                            viewModel.userStartSeeking()
+                            viewModel.seekTimeVariable.accept(coordinator.progress)
+                        } else {
+                            coordinator.isSeeking = false
+                            viewModel.seekTimeVariable.accept(coordinator.progress)
+                            viewModel.userStopSeeking()
+                        }
+                    },
+                    onValueChanged: { newValue in
+                        if coordinator.isSeeking {
+                            viewModel.seekTimeVariable.accept(newValue)
+                        }
+                    }
+                )
+
+                Text(durationString(microsec: coordinator.duration))
+                    .font(.system(.caption, design: .monospaced))
+                    .foregroundColor(controlColor)
+            }
+            .padding(.horizontal, padding)
+            .padding(.bottom, padding)
+        }
+    }
+
+    // MARK: - In-Message Controls
+
+    @ViewBuilder
+    private func messageControls(padding: CGFloat, buttonSize: CGFloat, controlColor: Color) -> some View {
+        VStack(spacing: 4) {
+            Spacer()
+
+            HStack(spacing: 8) {
+                Button(action: { viewModel.togglePause() }) {
+                    Image(systemName: coordinator.isPaused ? "play.fill" : "pause.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: buttonSize * 0.4, height: buttonSize * 0.4)
+                        .foregroundColor(controlColor)
+                }
+                .frame(width: buttonSize, height: buttonSize)
+
+                PlayerSlider(
+                    value: Binding(
+                        get: { coordinator.progress },
+                        set: { coordinator.progress = $0 }
+                    ),
+                    trackColor: controlColor,
+                    thumbSize: 10,
+                    onEditingChanged: { editing in
+                        if editing {
+                            coordinator.isSeeking = true
+                            viewModel.userStartSeeking()
+                            viewModel.seekTimeVariable.accept(coordinator.progress)
+                        } else {
+                            coordinator.isSeeking = false
+                            viewModel.seekTimeVariable.accept(coordinator.progress)
+                            viewModel.userStopSeeking()
+                        }
+                    },
+                    onValueChanged: { newValue in
+                        if coordinator.isSeeking {
+                            viewModel.seekTimeVariable.accept(newValue)
+                        }
+                    }
+                )
+
+                Text(durationString(microsec: coordinator.duration))
+                    .font(.system(.caption2, design: .monospaced))
+                    .foregroundColor(controlColor)
+
+                if coordinator.hasVideo {
+                    Button(action: { viewModel.muteAudio() }) {
+                        Image(uiImage: coordinator.isMuted ? UIImage(asset: Asset.audioOff) ?? UIImage() : UIImage(asset: Asset.audioOn) ?? UIImage())
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: buttonSize * 0.3, height: buttonSize * 0.3)
+                            .foregroundColor(controlColor)
+                    }
+                }
+            }
+            .padding(.horizontal, padding)
+            .padding(.bottom, padding)
+        }
+    }
+
+    // MARK: - Gradients
+
+    @ViewBuilder
+    private func topGradient(isFullScreen: Bool) -> some View {
+        let height = isFullScreen ? Layout.maxTopGradient : Layout.minTopGradient
+        let opacity = isFullScreen ? 1.0 : 0.2
+        LinearGradient(
+            gradient: Gradient(colors: [
+                Color.black.opacity(opacity),
+                Color.black.opacity(0)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .frame(height: height)
+    }
+
+    @ViewBuilder
+    private func bottomGradient(isFullScreen: Bool) -> some View {
+        let height = isFullScreen ? Layout.maxBottomGradient : Layout.minBottomGradient
+        let opacity = isFullScreen ? 1.0 : 0.2
+        LinearGradient(
+            gradient: Gradient(colors: [
+                Color.black.opacity(0),
+                Color.black.opacity(opacity)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .frame(height: height)
+    }
+
+    // MARK: - Helpers
+
+    private func durationString(microsec: Float) -> String {
+        if microsec == 0 { return "" }
+        let durationInSec = Int(microsec / 1_000_000)
+        let seconds = durationInSec % 60
+        let minutes = (durationInSec / 60) % 60
+        let hours = durationInSec / 3600
+        if hours > 0 {
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        }
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+}
+
+// MARK: - Custom Slider
+
+/// A custom slider that matches the original PlayerView's circle-thumb style.
+struct PlayerSlider: UIViewRepresentable {
+    @Binding var value: Float
+    var trackColor: Color
+    var thumbSize: CGFloat
+    var onEditingChanged: (Bool) -> Void
+    var onValueChanged: (Float) -> Void
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+
+    func makeUIView(context: Context) -> UISlider {
+        let slider = UISlider()
+        slider.minimumValue = 0
+        slider.maximumValue = 1
+        slider.value = value
+
+        let coordinator = context.coordinator
+        coordinator.onValueChanged = { [self] newValue in
+            self.value = newValue
+            self.onValueChanged(newValue)
+        }
+        coordinator.onEditingChanged = onEditingChanged
+
+        let uiColor = UIColor(trackColor)
+        applyStyle(to: slider, color: uiColor)
+        slider.addTarget(coordinator, action: #selector(Coordinator.valueChanged(_:)), for: .valueChanged)
+        slider.addTarget(coordinator, action: #selector(Coordinator.touchDown(_:)), for: .touchDown)
+        slider.addTarget(coordinator, action: #selector(Coordinator.touchUp(_:)), for: [.touchUpInside, .touchUpOutside])
+        return slider
+    }
+
+    func updateUIView(_ slider: UISlider, context: Context) {
+        let coordinator = context.coordinator
+        coordinator.onValueChanged = { [self] newValue in
+            self.value = newValue
+            self.onValueChanged(newValue)
+        }
+        coordinator.onEditingChanged = onEditingChanged
+
+        if !coordinator.isEditing {
+            slider.value = value
+        }
+
+        let uiColor = UIColor(trackColor)
+        guard coordinator.lastColor != uiColor || coordinator.lastThumbSize != thumbSize else { return }
+        applyStyle(to: slider, color: uiColor)
+        coordinator.lastColor = uiColor
+        coordinator.lastThumbSize = thumbSize
+    }
+
+    private func applyStyle(to slider: UISlider, color: UIColor) {
+        slider.minimumTrackTintColor = color
+        slider.maximumTrackTintColor = color
+        slider.thumbTintColor = color
+        let circleImage = Self.makeCircle(size: thumbSize, color: color)
+        slider.setThumbImage(circleImage, for: .normal)
+        slider.setThumbImage(circleImage, for: .highlighted)
+    }
+
+    private static func makeCircle(size: CGFloat, color: UIColor) -> UIImage? {
+        let cgSize = CGSize(width: size, height: size)
+        UIGraphicsBeginImageContextWithOptions(cgSize, false, 0.0)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        context.setFillColor(color.cgColor)
+        context.addEllipse(in: CGRect(origin: .zero, size: cgSize))
+        context.drawPath(using: .fill)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
     }
 
-    override func willMove(toWindow newWindow: UIWindow?) {
-        super.willMove(toWindow: newWindow)
-        if self.viewModel == nil { return }
-        bindViews()
-        viewModel.createPlayer()
-    }
+    class Coordinator: NSObject {
+        var isEditing = false
+        var onValueChanged: ((Float) -> Void)?
+        var onEditingChanged: ((Bool) -> Void)?
+        var lastColor: UIColor?
+        var lastThumbSize: CGFloat = 0
 
-    func bindViews() {
-        self.incomingVideo.layer.addSublayer(self.incomingVideoLayer)
-        self.incomingVideoLayer.isOpaque = true
-        self.incomingVideoLayer.videoGravity = .resizeAspect
-        self.viewModel.playBackFrame
-            .subscribe(onNext: { [weak self] buffer in
-                guard let self = self else { return }
-                if let buffer = buffer {
-                    DispatchQueue.main.async {
-                        self.updateLayerSize()
-                        self.incomingVideoLayer.enqueue(buffer)
-                    }
-                }
-            })
-            .disposed(by: self.disposeBag)
-        self.viewModel.playerPosition
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] position in
-                self?.progressSlider.value = position
-            })
-            .disposed(by: self.disposeBag)
-        self.viewModel.playerDuration
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] duration in
-                let durationString = self?.durationString(microcec: duration) ?? ""
-                self?.durationLabel.text = durationString
-            })
-            .disposed(by: self.disposeBag)
-        self.viewModel.pause
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] pause in
-                var image = UIImage(systemName: "pause.fill")
-                if pause {
-                    image = UIImage(systemName: "play.fill")
-                }
-                self?.togglePause.setImage(image, for: .normal)
-            })
-            .disposed(by: self.disposeBag)
-
-        self.viewModel.audioMuted
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] muted in
-                var image = UIImage(asset: Asset.audioOn)
-                if muted {
-                    image = UIImage(asset: Asset.audioOff)
-                }
-                self?.muteAudio.setImage(image, for: .normal)
-            })
-            .disposed(by: self.disposeBag)
-
-        self.viewModel.hasVideo
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] hasVideo in
-                guard let self = self else { return }
-                self.muteAudio.isHidden = !hasVideo || !self.withControls
-                self.backgroundView.backgroundColor = hasVideo ? UIColor.placeholderText : UIColor.secondarySystemBackground
-                self.incomingVideo.backgroundColor = hasVideo ? UIColor.black : UIColor.secondarySystemBackground
-                let color = hasVideo ? UIColor.white : (UIColor.label.lighten(by: 50) ?? UIColor.label)
-                self.togglePause.tintColor = color
-                self.durationLabel.textColor = color
-                self.progressSlider.minimumTrackTintColor = color
-                self.progressSlider.maximumTrackTintColor = color
-                self.progressSlider.thumbTintColor = color
-                let size = self.sizeMode == .fullScreen ? 15 : 10
-                let circleImage = self.makeCircleWith(size: CGSize(width: size, height: size),
-                                                      backgroundColor: color)
-                self.progressSlider.setThumbImage(circleImage, for: .normal)
-                self.progressSlider.setThumbImage(circleImage, for: .highlighted)
-            })
-            .disposed(by: self.disposeBag)
-        self.muteAudio.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.muteAudio()
-            })
-            .disposed(by: self.disposeBag)
-        self.togglePause.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.togglePause()
-            })
-            .disposed(by: self.disposeBag)
-    }
-
-    func durationString(microcec: Float) -> String {
-        if microcec == 0 {
-            return ""
+        @objc func valueChanged(_ sender: UISlider) {
+            onValueChanged?(sender.value)
         }
-        let durationInSec = Int(microcec / 1000000)
-        let seconds = durationInSec % 60
-        let minutes = (durationInSec / 60) % 60
-        let hours = (durationInSec / 3600)
-        switch hours {
-        case 0:
-            return String(format: "%02d:%02d", minutes, seconds)
-        default:
-            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+
+        @objc func touchDown(_ sender: UISlider) {
+            isEditing = true
+            onEditingChanged?(true)
         }
-    }
 
-    func sizeChanged() {
-        switch self.sizeMode {
-        case .fullScreen:
-            self.backgroundView.backgroundColor = UIColor.black
-            let circleImage = makeCircleWith(size: CGSize(width: 15, height: 15),
-                                             backgroundColor: UIColor.white)
-            self.progressSlider.setThumbImage(circleImage, for: .normal)
-            self.progressSlider.setThumbImage(circleImage, for: .highlighted)
-            let topAjust: CGFloat = UIDevice.current.hasNotch ? 10 : -8
-            self.topConstraint.constant = MAXCONSTRAINT + topAjust
-            self.bottomConstraint.constant = MAXCONSTRAINT
-            self.trailingConstraint.constant = MAXCONSTRAINT
-            self.leadingConstraint.constant = MAXCONSTRAINT - 8
-            self.progressSliderLeadingConstraint.constant = MAXCONSTRAINT
-            self.togglePauseWidthConstraint.constant = MAXSIZE
-            self.togglePauseHeightConstraint.constant = MAXSIZE
-            self.muteAudioWidthConstraint.constant = MAXSIZE
-            self.muteAudioHeightConstraint.constant = MAXSIZE
-            self.bottomGradientViewHeight.constant = MAXBOTTOMGRADIENTSIZE
-            self.topGradientViewHeight.constant = MAXTOPGRADIENTSIZE
-            self.playButtonCenterY.constant = PLAYBUTTONBOTTOMCONSTRAINT
-            self.playButtonCenterX.priority = UILayoutPriority(rawValue: 999)
-            self.buttonsAllignmentConstraint.priority = UILayoutPriority(rawValue: 250)
-            self.topGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 1), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
-            self.bottomGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0), UIColor(red: 0, green: 0, blue: 0, alpha: 1)], gradient: .vertical)
-            self.topGradient.layoutIfNeeded()
-            self.bottomGradient.layoutIfNeeded()
-            self.bottomGradient.updateGradientFrame()
-            self.topGradient.updateGradientFrame()
-        case .inConversationMessage:
-            let circleImage = makeCircleWith(size: CGSize(width: 10, height: 10),
-                                             backgroundColor: UIColor.white)
-            self.progressSlider.setThumbImage(circleImage, for: .normal)
-            self.progressSlider.setThumbImage(circleImage, for: .highlighted)
-            self.backgroundView.backgroundColor = UIColor.placeholderText
-            self.bottomGradientViewHeight.constant = MINBOTTOMGRADIENTSIZE
-            self.topGradientViewHeight.constant = MINTOPGRADIENTSIZE
-            self.topConstraint.constant = MINCONSTRAINT
-            self.bottomConstraint.constant = MINCONSTRAINT
-            self.trailingConstraint.constant = MINCONSTRAINT
-            self.leadingConstraint.constant = MINCONSTRAINT
-            self.progressSliderLeadingConstraint.constant = SLIDEBARLEADINGCONSTRAINT
-            self.togglePauseWidthConstraint.constant = MINSIZE
-            self.togglePauseHeightConstraint.constant = MINSIZE
-            self.muteAudioWidthConstraint.constant = MINSIZE
-            self.muteAudioHeightConstraint.constant = MINSIZE
-            self.playButtonCenterY.constant = 1
-            self.playButtonCenterX.priority = UILayoutPriority(rawValue: 250)
-            self.buttonsAllignmentConstraint.priority = UILayoutPriority(rawValue: 999)
-            self.topGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0.2), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
-            self.bottomGradient.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 0), UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)], gradient: .vertical)
-            self.topGradient.layoutIfNeeded()
-            self.bottomGradient.layoutIfNeeded()
-            self.bottomGradient.updateGradientFrame()
-            self.topGradient.updateGradientFrame()
+        @objc func touchUp(_ sender: UISlider) {
+            isEditing = false
+            onEditingChanged?(false)
         }
-    }
-
-    func changeControlsVisibility() {
-        let alpha = bottomGradient.alpha == 0 ? 1 : 0
-        UIView.animate(withDuration: 0.5, animations: { [weak self] in
-            guard let self = self else { return }
-            self.bottomGradient.alpha = CGFloat(alpha)
-            self.topGradient.alpha = CGFloat(alpha)
-        })
-    }
-
-    func resizeFrom(frame: CGRect) {
-        let leftConstraint: CGFloat = frame.origin.x
-        let topConstraint: CGFloat = frame.origin.y
-        let rightConstraint: CGFloat = self.frame.width - frame.origin.x - frame.size.width
-        let bottomConstraint: CGFloat = self.frame.height - frame.origin.y - frame.size.height
-        self.imageLeadingConstraint.constant = leftConstraint
-        self.imageTrailingConstraint.constant = rightConstraint
-        self.imageTopConstraint.constant = topConstraint
-        self.imageBottomConstraint.constant = bottomConstraint
-        self.bottomGradient.alpha = 0
-        self.topGradient.alpha = 0
-        self.backgroundView.alpha = 0
-        self.layoutIfNeeded()
-        UIView.animate(withDuration: 0.2,
-                       delay: 0.0,
-                       options: [.curveEaseInOut],
-                       animations: { [weak self] in
-                        guard let self = self else { return }
-                        self.imageLeadingConstraint.constant = 0
-                        self.imageTrailingConstraint.constant = 0
-                        self.imageTopConstraint.constant = 0
-                        self.imageBottomConstraint.constant = 0
-                        self.bottomGradient.alpha = 1
-                        self.topGradient.alpha = 1
-                        self.backgroundView.alpha = 1
-                        self.layoutIfNeeded()
-                       }, completion: nil)
     }
 }
