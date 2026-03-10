@@ -66,10 +66,10 @@
                                     <constraint firstAttribute="height" constant="80" id="58H-q7-Pq6"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" id="Jga-0U-qXG" customClass="PlayerView" customModule="Ring" customModuleProvider="target">
+                            <view contentMode="scaleToFill" id="Jga-0U-qXG">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0z-cK-ISY">
                                 <rect key="frame" x="341" y="44" width="48" height="35"/>
@@ -117,7 +117,7 @@
                         <outlet property="imageTopConstraint" destination="dfd-jX-3gc" id="ijp-lj-77W"/>
                         <outlet property="imageTrailingConstraint" destination="Zxa-bY-zaY" id="gac-QR-lKz"/>
                         <outlet property="imageView" destination="kNJ-67-zFf" id="rTG-bA-Gz6"/>
-                        <outlet property="playerView" destination="Jga-0U-qXG" id="nNg-vJ-wZp"/>
+                        <outlet property="playerContainerView" destination="Jga-0U-qXG" id="nNg-vJ-wZp"/>
                         <outlet property="saveButton" destination="5q1-cC-MI7" id="QG0-Vq-ETD"/>
                         <outlet property="shareButton" destination="Gvs-6O-5Fs" id="FNx-Hm-Hav"/>
                     </connections>

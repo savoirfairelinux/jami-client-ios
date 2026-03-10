@@ -150,20 +150,17 @@ class PlayerViewModel {
     }
 
     func invalidateTimer() {
-        if self.progressTimer != nil {
-            self.progressTimer?.invalidate()
-        }
-        self.progressTimer = nil
+        progressTimer?.invalidate()
+        progressTimer = nil
     }
 
     func startTimer() {
-        DispatchQueue.main.async {
-            self.progressTimer =
-                Timer.scheduledTimer(timeInterval: 0.1,
-                                     target: self,
-                                     selector: #selector(self.updateTimer),
-                                     userInfo: nil,
-                                     repeats: true)
+        invalidateTimer()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.progressTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+                self?.timerFired()
+            }
         }
     }
 
@@ -187,19 +184,16 @@ class PlayerViewModel {
 
     var currentTime: Int64 = 0
 
-    @objc
-    func updateTimer(timer: Timer) {
-        let time = self.videoService.getPlayerPosition(playerId: self.playerId)
-        if time < 0 {
-            return
-        }
-        let progress = Float(time) / self.playerDuration.value
-        self.playerPosition.onNext(progress)
-        // if new time less than previous file is finished
+    private func timerFired() {
+        let time = videoService.getPlayerPosition(playerId: playerId)
+        if time < 0 { return }
+        let progress = Float(time) / playerDuration.value
+        playerPosition.onNext(progress)
+        // if new time less than previous, file playback has finished
         if time < currentTime {
             pause.accept(true)
-            if let image = self.firstFrame {
-                self.playBackFrame.onNext(image)
+            if let frame = firstFrame {
+                playBackFrame.onNext(frame)
             }
         }
         currentTime = time
