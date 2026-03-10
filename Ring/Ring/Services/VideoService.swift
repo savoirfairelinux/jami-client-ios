@@ -398,6 +398,9 @@ class VideoService: FrameExtractorDelegate {
 
     let mutedCamera = "mutedCamera"
 
+    private var fpsFrameCount: Int = 0
+    private var fpsLastLogTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
+
     private let disposeBag = DisposeBag()
 
     init(withVideoAdapter videoAdapter: VideoAdapter) {
@@ -679,6 +682,21 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func captured(imageBuffer: CVImageBuffer?, image: UIImage) {
+        fpsFrameCount += 1
+        let now = CFAbsoluteTimeGetCurrent()
+        let elapsed = now - fpsLastLogTime
+        if elapsed >= 2.0 {
+            let fps = Double(fpsFrameCount) / elapsed
+            if let buf = imageBuffer {
+                let w = CVPixelBufferGetWidth(buf)
+                let h = CVPixelBufferGetHeight(buf)
+                print("[VideoService] Sending \(String(format: "%.1f", fps)) fps, resolution: \(w)x\(h)")
+            } else {
+                print("[VideoService] Sending \(String(format: "%.1f", fps)) fps, no buffer")
+            }
+            fpsFrameCount = 0
+            fpsLastLogTime = now
+        }
         if let cgImage = image.cgImage {
             self.capturedVideoFrame
                 .onNext(UIImage(cgImage: cgImage,
