@@ -19,43 +19,6 @@
 import SwiftUI
 import RxSwift
 
-struct PlayerViewWrapper: UIViewRepresentable {
-    typealias UIViewType = PlayerView
-
-    var viewModel: PlayerViewModel
-    var width: CGFloat
-    var height: CGFloat
-    let onLongGesture: () -> Void
-    var withControls: Bool
-    let disposeBag = DisposeBag()
-    let longGestureRecognizer = UILongPressGestureRecognizer()
-
-    func makeUIView(context: Context) -> PlayerView {
-        let frame = CGRect(x: 0, y: 0, width: width, height: height)
-        let player = PlayerView(frame: frame)
-        player.withControls = withControls
-        player.viewModel = viewModel
-        longGestureRecognizer.rx
-            .event
-            .filter({ event in
-                event.state == UIGestureRecognizer.State.began
-            })
-            .bind(onNext: { _ in
-                self.onLongGesture()
-            })
-            .disposed(by: self.disposeBag)
-        longGestureRecognizer.minimumPressDuration = 0.2
-        player.addGestureRecognizer(longGestureRecognizer)
-        return player
-    }
-
-    func updateUIView(_ uiView: PlayerView, context: Context) {
-        let newFrame = CGRect(x: 0, y: 0, width: width, height: height)
-        uiView.frame = newFrame
-        uiView.frameUpdated()
-    }
-}
-
 struct PlayerSwiftUI: View {
     @StateObject var model: MessageContentVM
     var player: PlayerViewModel
@@ -74,13 +37,14 @@ struct PlayerSwiftUI: View {
                     .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                     .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
             }
-            PlayerViewWrapper(viewModel: player, width: model.playerWidth * ratio, height: model.playerHeight * ratio, onLongGesture: onLongGesture, withControls: withControls)
+            PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls)
                 .frame(height: model.playerHeight * ratio)
                 .frame(width: model.playerWidth * ratio)
                 .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
+                .modifier(MessageLongPress(longPressCb: onLongGesture))
         }
-        .accessibilityElement(children: .ignore) // Make it one element
+        .accessibilityElement(children: .ignore)
         .accessibilityLabel(player.pause.value ? L10n.Accessibility.audioPlayerPlay : L10n.Accessibility.audioPlayerPause)
         .accessibilityAddTraits(.isButton)
         .conditionalModifier(AccessibilityGestureModifier(action: player.togglePause), apply: UIAccessibility.isVoiceOverRunning)
