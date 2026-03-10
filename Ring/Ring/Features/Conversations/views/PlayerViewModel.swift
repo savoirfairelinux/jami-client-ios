@@ -25,7 +25,20 @@ protocol PlayerDelegate: AnyObject {
     func extractedVideoFrame(with height: CGFloat)
 }
 
+// MARK: - Player State
+
+enum PlayerState: Equatable {
+    case idle
+    case extractingFirstFrame
+    case ready                      // paused, showing first/last frame
+    case playing
+    case seeking(wasPlaying: Bool)  // remembers whether to resume after seek
+    case finished                   // playback ended, showing first frame
+}
+
 class PlayerViewModel {
+
+    // MARK: - Public Rx interface
 
     var hasVideo = BehaviorRelay<Bool>(value: true)
     var playerDuration = BehaviorRelay<Float>(value: 0)
@@ -40,6 +53,8 @@ class PlayerViewModel {
 
     var firstFrame: CMSampleBuffer?
 
+    // MARK: - Private state
+
     private let disposeBag = DisposeBag()
     private var playBackDisposeBag = DisposeBag()
 
@@ -48,128 +63,161 @@ class PlayerViewModel {
     private var playerId = ""
     private var progressTimer: Timer?
 
+    private var state: PlayerState = .idle
+    private var currentTime: Int64 = 0
+    private var endDetectionCount: Int = 0
+    private let endThreshold: Float = 0.95
+
+    // MARK: - Init
+
     init(injectionBag: InjectionBag, path: String) {
         self.videoService = injectionBag.videoService
         filePath = path
     }
 
-    func createPlayer() {
-        self.playerReady.accept(false)
-        let fname = "file://" + filePath
-        if !self.playerId.isEmpty {
-            if let frame = firstFrame {
-                self.playBackFrame.onNext(frame)
+    // MARK: - State Machine
+
+    private func transition(to newState: PlayerState) {
+        state = newState
+        switch newState {
+        case .idle:
+            invalidateTimer()
+            pause.accept(true)
+
+        case .extractingFirstFrame:
+            // Unpause daemon to produce video frames.
+            // Keep `pause` relay true so UI shows paused state during extraction.
+            videoService.pausePlayer(playerId: playerId, pause: false)
+
+        case .ready:
+            invalidateTimer()
+            pause.accept(true)
+            videoService.pausePlayer(playerId: playerId, pause: true)
+
+        case .playing:
+            endDetectionCount = 0
+            currentTime = 0
+            pause.accept(false)
+            videoService.pausePlayer(playerId: playerId, pause: false)
+            startTimer()
+
+        case .seeking:
+            invalidateTimer()
+            if !pause.value {
+                pause.accept(true)
+                videoService.pausePlayer(playerId: playerId, pause: true)
             }
-            self.playerReady.accept(true)
+
+        case .finished:
+            invalidateTimer()
+            pause.accept(true)
+            videoService.pausePlayer(playerId: playerId, pause: true)
+            playerPosition.onNext(0)
+            if let frame = firstFrame {
+                playBackFrame.onNext(frame)
+            }
+        }
+    }
+
+    // MARK: - Public API
+
+    func createPlayer() {
+        playerReady.accept(false)
+        let fname = "file://" + filePath
+
+        // Re-entry: player already exists, just re-emit first frame
+        if !playerId.isEmpty {
+            if let frame = firstFrame {
+                playBackFrame.onNext(frame)
+            }
+            playerReady.accept(true)
             return
         }
-        invalidateTimer()
-        self.playerId = self.videoService.createPlayer(path: fname)
-        self.pause.accept(true)
-        self.playerPosition.onNext(0)
-        // subscribe for frame playback
-        // get first frame, pause player and seek back to first frame
-        self.playBackDisposeBag = DisposeBag()
-        self.incomingFrame.filter {  [weak self] (render) -> Bool in
-            render.sinkId == self?.playerId
-        }
-        .take(1)
-        .map({[weak self] (renderer) -> Observable<VideoFrameInfo>  in
-            self?.firstFrame = renderer.sampleBuffer
-            self?.playerPosition.onNext(0)
-            self?.togglePause()
-            self?.muteAudio()
-            self?.seekToTime(time: 0)
-            self?.startTimer()
-            self?.playerReady.accept(true)
-            self?.playBackFrame.onNext(self?.firstFrame)
-            if let sampleBuffer = renderer.sampleBuffer,
-               let image = UIImage.createFrom(sampleBuffer: sampleBuffer) {
-                DispatchQueue.main.async {
-                    self?.delegate?.extractedVideoFrame(with: image.size.height)
-                }
-            }
-            return self?.incomingFrame.filter {  [weak self] (render) -> Bool in
-                render.sinkId == self?.playerId
-            } ?? Observable.just(renderer)
-        })
-        .merge()
-        .subscribe(onNext: {  [weak self] (renderer) in
-            self?.playBackFrame.onNext(renderer.sampleBuffer)
-        })
-        .disposed(by: self.playBackDisposeBag)
 
-        // subscribe for fileInfo
-        self.videoService.playerInfo
+        transition(to: .idle)
+        playerId = videoService.createPlayer(path: fname)
+        playerPosition.onNext(0)
+
+        playBackDisposeBag = DisposeBag()
+        let playerFrames = incomingFrame
+            .filter { [weak self] render in
+                render.sinkId == self?.playerId
+            }
+            .share()
+
+        // Subscription A: first-frame setup (fires once)
+        playerFrames
+            .take(1)
+            .subscribe(onNext: { [weak self] renderer in
+                guard let self = self else { return }
+                self.firstFrame = renderer.sampleBuffer
+                self.playerPosition.onNext(0)
+                self.pausePlayback()
+                self.setMuted(true)
+                self.seekToTime(time: 0)
+                self.transition(to: .ready)
+                self.playerReady.accept(true)
+                self.playBackFrame.onNext(self.firstFrame)
+                if let sampleBuffer = renderer.sampleBuffer,
+                   let image = UIImage.createFrom(sampleBuffer: sampleBuffer) {
+                    DispatchQueue.main.async {
+                        self.delegate?.extractedVideoFrame(with: image.size.height)
+                    }
+                }
+            })
+            .disposed(by: playBackDisposeBag)
+
+        // Subscription B: continuous frame relay (all frames including first)
+        playerFrames
+            .subscribe(onNext: { [weak self] renderer in
+                self?.playBackFrame.onNext(renderer.sampleBuffer)
+            })
+            .disposed(by: playBackDisposeBag)
+
+        // Subscription C: player info (duration, audio/video streams)
+        videoService.playerInfo
             .asObservable()
-            .filter {  [weak self] (player) -> Bool in
+            .filter { [weak self] player in
                 self?.playerId.contains(player.playerId) ?? false
             }
             .take(1)
-            .subscribe(onNext: {  [weak self] player in
+            .subscribe(onNext: { [weak self] player in
+                guard let self = self else { return }
                 guard let duration = Float(player.duration),
                       duration > 0 else {
                     DispatchQueue.main.async {
-                        self?.videoService.closePlayer(playerId: self?.playerId ?? "")
+                        self.videoService.closePlayer(playerId: self.playerId)
                     }
                     return
                 }
-                self?.playerDuration.accept(duration)
-                self?.hasVideo.accept(player.hasVideo)
+                self.playerDuration.accept(duration)
+                self.hasVideo.accept(player.hasVideo)
                 if !player.hasVideo {
-                    self?.startTimer()
-                    self?.audioMuted.accept(false)
-                    self?.playerReady.accept(true)
+                    // Audio-only: no first-frame extraction needed
+                    self.audioMuted.accept(false)
+                    self.playerReady.accept(true)
+                    self.transition(to: .ready)
                     return
                 }
-                // mute audio so it is not played when extracting first frame
-                self?.audioMuted.accept(true)
-                self?.videoService.mutePlayerAudio(playerId: player.playerId,
-                                                   mute: self?.audioMuted.value ?? true)
-                // unpause player to get first video frame
-                self?.togglePause()
+                // Video: mute audio and unpause to extract first frame
+                self.setMuted(true)
+                self.transition(to: .extractingFirstFrame)
             })
-            .disposed(by: self.playBackDisposeBag)
-    }
-
-    func userStartSeeking() {
-        invalidateTimer()
-        if pause.value {
-            return
-        }
-        pause.accept(true)
-        videoService.pausePlayer(playerId: playerId, pause: pause.value)
-    }
-
-    func userStopSeeking() {
-        let time = Int(self.playerDuration.value * seekTimeVariable.value)
-        self.videoService.seekToTime(time: time, playerId: playerId)
-        pause.accept(false)
-        videoService.pausePlayer(playerId: playerId, pause: pause.value)
-        startTimer()
-    }
-
-    func invalidateTimer() {
-        if self.progressTimer != nil {
-            self.progressTimer?.invalidate()
-        }
-        self.progressTimer = nil
-    }
-
-    func startTimer() {
-        DispatchQueue.main.async {
-            self.progressTimer =
-                Timer.scheduledTimer(timeInterval: 0.1,
-                                     target: self,
-                                     selector: #selector(self.updateTimer),
-                                     userInfo: nil,
-                                     repeats: true)
-        }
+            .disposed(by: playBackDisposeBag)
     }
 
     func togglePause() {
-        pause.accept(!pause.value)
-        videoService.pausePlayer(playerId: playerId, pause: pause.value)
+        switch state {
+        case .ready:
+            transition(to: .playing)
+        case .finished:
+            seekToTime(time: 0)
+            transition(to: .playing)
+        case .playing:
+            transition(to: .ready)
+        case .idle, .extractingFirstFrame, .seeking:
+            break
+        }
     }
 
     func muteAudio() {
@@ -177,40 +225,102 @@ class PlayerViewModel {
         videoService.mutePlayerAudio(playerId: playerId, mute: audioMuted.value)
     }
 
+    func userStartSeeking() {
+        let wasPlaying = (state == .playing)
+        transition(to: .seeking(wasPlaying: wasPlaying))
+    }
+
+    func userStopSeeking() {
+        let time = Int(playerDuration.value * seekTimeVariable.value)
+        videoService.seekToTime(time: time, playerId: playerId)
+        endDetectionCount = 0
+        currentTime = Int64(time)
+        if case .seeking(let wasPlaying) = state, wasPlaying {
+            transition(to: .playing)
+        } else {
+            transition(to: .ready)
+        }
+    }
+
     func seekToTime(time: Int) {
         videoService.seekToTime(time: time, playerId: playerId)
+    }
+
+    func closePlayer() {
+        transition(to: .idle)
+        videoService.closePlayer(playerId: playerId)
+    }
+
+    // MARK: - Private helpers
+
+    /// Pause the daemon player directly, without going through the state machine.
+    /// Used during first-frame extraction to pause after receiving the frame.
+    private func pausePlayback() {
+        videoService.pausePlayer(playerId: playerId, pause: true)
+    }
+
+    /// Set mute to a specific value (not toggle). Used internally during setup.
+    private func setMuted(_ muted: Bool) {
+        audioMuted.accept(muted)
+        videoService.mutePlayerAudio(playerId: playerId, mute: muted)
+    }
+
+    private func invalidateTimer() {
+        progressTimer?.invalidate()
+        progressTimer = nil
+    }
+
+    private func startTimer() {
+        invalidateTimer()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.progressTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+                self?.timerFired()
+            }
+        }
     }
 
     lazy var incomingFrame: Observable<VideoFrameInfo> = {
         return videoService.videoInputManager.frameSubject.asObservable()
     }()
 
-    var currentTime: Int64 = 0
+    // MARK: - Progress & End Detection
 
-    @objc
-    func updateTimer(timer: Timer) {
-        let time = self.videoService.getPlayerPosition(playerId: self.playerId)
-        if time < 0 {
+    private func timerFired() {
+        guard state == .playing else { return }
+
+        let time = videoService.getPlayerPosition(playerId: playerId)
+        if time < 0 { return }
+        guard playerDuration.value > 0 else { return }
+
+        let progress = Float(time) / playerDuration.value
+        playerPosition.onNext(progress)
+
+        let previousProgress = Float(currentTime) / playerDuration.value
+
+        // Detect playback end: backwards jump near end, or reached 99.9%
+        if time < currentTime && previousProgress > endThreshold {
+            endDetectionCount += 1
+        } else if progress >= 0.999 {
+            endDetectionCount += 1
+        } else {
+            endDetectionCount = 0
+        }
+
+        // Require 2 consecutive ticks to confirm end (filters glitches)
+        if endDetectionCount >= 2 {
+            currentTime = time
+            transition(to: .finished)
+            endDetectionCount = 0
             return
         }
-        let progress = Float(time) / self.playerDuration.value
-        self.playerPosition.onNext(progress)
-        // if new time less than previous file is finished
-        if time < currentTime {
-            pause.accept(true)
-            if let image = self.firstFrame {
-                self.playBackFrame.onNext(image)
-            }
-        }
+
         currentTime = time
     }
 
+    // MARK: - Deinit
+
     deinit {
         closePlayer()
-    }
-
-    func closePlayer() {
-        self.invalidateTimer()
-        videoService.closePlayer(playerId: playerId)
     }
 }
