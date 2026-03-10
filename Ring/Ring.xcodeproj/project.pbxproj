@@ -69,7 +69,6 @@
 		0E49097C1FEACA4B005CAA50 /* CallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49097B1FEACA4B005CAA50 /* CallViewModel.swift */; };
 		0E5806F323BE42EC007D1F5D /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5806F223BE42EC007D1F5D /* PlayerView.swift */; };
 		0E5806F523BE4307007D1F5D /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5806F423BE4307007D1F5D /* PlayerViewModel.swift */; };
-		0E5806F723BE4325007D1F5D /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5806F623BE4325007D1F5D /* PlayerView.xib */; };
 		0E5A668322F0B1F100AA6820 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5A668222F0B1F100AA6820 /* ProgressView.swift */; };
 		0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E68571020238546008B0717 /* ConversationNavigation.swift */; };
 		0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E72374920460320006B0C7D /* ProfileHeaderView.xib */; };
@@ -745,7 +744,6 @@
 		0E49097B1FEACA4B005CAA50 /* CallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewModel.swift; sourceTree = "<group>"; };
 		0E5806F223BE42EC007D1F5D /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		0E5806F423BE4307007D1F5D /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
-		0E5806F623BE4325007D1F5D /* PlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerView.xib; sourceTree = "<group>"; };
 		0E5A668222F0B1F100AA6820 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		0E639459224AB32200C0890A /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		0E63F1F3202907090001F248 /* Ring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ring.entitlements; sourceTree = "<group>"; };
@@ -3089,7 +3087,6 @@
 				2662FC77246B1DD600FA7782 /* JamiSearchView */,
 				0E5806F223BE42EC007D1F5D /* PlayerView.swift */,
 				0E5806F423BE4307007D1F5D /* PlayerViewModel.swift */,
-				0E5806F623BE4325007D1F5D /* PlayerView.xib */,
 				268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */,
 			);
 			path = views;
@@ -4054,7 +4051,6 @@
 				623660AA20092081002598C1 /* src in Resources */,
 				26929FD425659E5F0052A601 /* cacert.pem in Resources */,
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
-				0E5806F723BE4325007D1F5D /* PlayerView.xib in Resources */,
 				26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
 				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
