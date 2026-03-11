@@ -45,6 +45,8 @@ class PlayerViewModel {
     var playerPosition = PublishSubject<Float>()
     let seekTimeVariable = BehaviorRelay<Float>(value: 0)
     let playBackFrame = PublishSubject<CMSampleBuffer?>()
+    /// Most recent video rotation in degrees (from display matrix metadata).
+    private(set) var lastRotation: Int = 0
 
     let pause = BehaviorRelay<Bool>(value: true)
     let audioMuted = BehaviorRelay<Bool>(value: true)
@@ -151,6 +153,7 @@ class PlayerViewModel {
             .subscribe(onNext: { [weak self] renderer in
                 guard let self = self else { return }
                 self.firstFrame = renderer.sampleBuffer
+                self.lastRotation = renderer.rotation
                 self.playerPosition.onNext(0)
                 self.pausePlayback()
                 self.setMuted(true)
@@ -170,6 +173,7 @@ class PlayerViewModel {
         // continuous frame relay (all frames including first)
         playerFrames
             .subscribe(onNext: { [weak self] renderer in
+                self?.lastRotation = renderer.rotation
                 self?.playBackFrame.onNext(renderer.sampleBuffer)
             })
             .disposed(by: playBackDisposeBag)
