@@ -32,8 +32,6 @@ class PlayerCoordinator: ObservableObject {
     let displayLayer = AVSampleBufferDisplayLayer()
     private var disposeBag = DisposeBag()
     private weak var boundViewModel: PlayerViewModel?
-    /// The view model to bind to, set from PlayerView and used by
-    /// VideoLayerUIView.didMoveToWindow for reliable binding in lazy containers.
     weak var pendingViewModel: PlayerViewModel?
 
     @Published var isPaused: Bool = true
@@ -72,6 +70,10 @@ class PlayerCoordinator: ObservableObject {
         displayLayer.isOpaque = true
     }
 
+    func configureForFullScreen() {
+        displayLayer.videoGravity = .resizeAspectFill
+    }
+
     func enqueueBuffer(_ buffer: CMSampleBuffer) {
         lastBuffer = buffer
         if displayLayer.status == .failed {
@@ -86,8 +88,6 @@ class PlayerCoordinator: ObservableObject {
         displayLayer.enqueue(buffer)
     }
 
-    /// Called from didMoveToWindow — reliable UIKit lifecycle callback that
-    /// fires every time the view appears on screen, even in lazy containers.
     func bindIfNeeded() {
         guard let viewModel = pendingViewModel else { return }
         bind(to: viewModel)
@@ -225,39 +225,64 @@ struct PlayerView: View {
     var viewModel: PlayerViewModel
     var sizeMode: PlayerMode
     var withControls: Bool
+    var externalControlsVisible: Binding<Bool>?
 
     @StateObject private var coordinator = PlayerCoordinator()
 
-    var body: some View {
-        GeometryReader { _ in
-            ZStack {
-                backgroundColor
-                    .ignoresSafeArea(edges: sizeMode == .fullScreen ? .all : [])
+    private var controlsVisible: Bool {
+        externalControlsVisible?.wrappedValue ?? coordinator.controlsVisible
+    }
 
-                VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
-
-                if withControls {
-                    controlsOverlay
-                }
+    private func toggleControls() {
+        if let binding = externalControlsVisible {
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                binding.wrappedValue.toggle()
             }
-            .applyFullScreenTapGesture(
-                isFullScreen: sizeMode == .fullScreen,
-                coordinator: coordinator
-            )
+        } else {
+            withAnimation(.easeInOut(duration: 0.25)) {
+                coordinator.controlsVisible.toggle()
+            }
+            if coordinator.controlsVisible {
+                coordinator.scheduleAutoHide()
+            }
         }
+    }
+
+    var body: some View {
+        ZStack {
+            backgroundColor
+                .ignoresSafeArea(edges: sizeMode == .fullScreen ? .all : [])
+
+            VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            if withControls {
+                controlsOverlay
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .applyFullScreenTapGesture(
+            isFullScreen: sizeMode == .fullScreen,
+            onTap: toggleControls
+        )
         .onAppear {
+            if sizeMode == .fullScreen {
+                coordinator.configureForFullScreen()
+            }
             coordinator.pendingViewModel = viewModel
             coordinator.bind(to: viewModel)
-            if sizeMode == .fullScreen {
+            if sizeMode == .fullScreen && externalControlsVisible == nil {
                 coordinator.scheduleAutoHide()
             }
         }
         .onDisappear {
             coordinator.cancelAutoHide()
         }
+        .onChange(of: externalControlsVisible?.wrappedValue) { newValue in
+            guard let newValue else { return }
+            coordinator.controlsVisible = newValue
+        }
     }
-
-    // MARK: - Background
 
     private var backgroundColor: Color {
         if sizeMode == .fullScreen {
@@ -280,13 +305,11 @@ struct PlayerView: View {
                     fullScreenBottomBar
                 }
             }
-            .opacity(coordinator.controlsVisible ? 1 : 0)
+            .opacity(controlsVisible ? 1 : 0)
         } else {
             messageControls
         }
     }
-
-    // MARK: - Center Play Button (Full Screen)
 
     @ViewBuilder private var centerPlayButton: some View {
         Button(action: {
@@ -300,8 +323,6 @@ struct PlayerView: View {
         })
         .applyGlassButtonBackground()
     }
-
-    // MARK: - Full Screen Bottom Bar
 
     @ViewBuilder private var fullScreenBottomBar: some View {
         HStack(spacing: 12) {
@@ -524,18 +545,11 @@ struct PlayerView: View {
 
 private extension View {
     @ViewBuilder
-    func applyFullScreenTapGesture(isFullScreen: Bool, coordinator: PlayerCoordinator) -> some View {
+    func applyFullScreenTapGesture(isFullScreen: Bool, onTap: @escaping () -> Void) -> some View {
         if isFullScreen {
             self
                 .contentShape(Rectangle())
-                .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.25)) {
-                        coordinator.controlsVisible.toggle()
-                    }
-                    if coordinator.controlsVisible {
-                        coordinator.scheduleAutoHide()
-                    }
-                }
+                .onTapGesture(perform: onTap)
         } else {
             self
         }

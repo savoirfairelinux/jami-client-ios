@@ -111,7 +111,7 @@ enum ContextualMenuItem: Identifiable {
 }
 
 // swiftlint:disable type_body_length
-class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
+class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
 
     @Published var content = ""
     @Published var accessibilityLabelValue = ""
@@ -730,7 +730,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 }
 
-extension MessageContentVM {
+extension MessageContentVM: MediaPreviewActionsDelegate {
     func deleteFile() {}
 
     func shareFile() {
