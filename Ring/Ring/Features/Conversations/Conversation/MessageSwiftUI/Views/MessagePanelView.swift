@@ -202,14 +202,16 @@ struct MessagePanelView: View {
                 .padding(.trailing, padding)
         }
 
+        let cornerRadius = defaultControlSize / 2
+
         if #available(iOS 26.0, *) {
             hstack
-                .glassEffect(in: .capsule)
+                .glassEffect(in: .rect(cornerRadius: cornerRadius))
         } else {
             hstack
                 .background(
                     VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false)
-                        .clipShape(Capsule())
+                        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                 )
                 .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 1)
         }
