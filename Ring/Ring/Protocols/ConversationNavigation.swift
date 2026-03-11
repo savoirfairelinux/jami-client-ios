@@ -38,7 +38,7 @@ enum ConversationState: State {
     case openConversationFromCall(conversation: ConversationModel)
     case needAccountMigration(accountId: String)
     case accountModeChanged
-    case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate)
+    case openFullScreenPreview(viewModel: PlayerViewModel?, image: UIImage?, message: MessageContentVM)
     case openIncomingInvitationView(displayName: String, request: RequestModel, parentView: UIViewController, invitationHandeledCB: ((_ conversationId: String) -> Void))
     case conversationRemoved
     case needToOnboard
@@ -84,8 +84,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.navigateToCall(call: call)
                 case .needAccountMigration(let accountId):
                     self.migrateAccount(accountId: accountId)
-                case .openFullScreenPreview(let parentView, let viewModel, let image, let initialFrame, let delegate):
-                    self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate)
+                case .openFullScreenPreview(let viewModel, let image, let message):
+                    self.openFullScreenPreview(viewModel: viewModel, image: image, message: message)
                 case .reopenCall(let viewController):
                     self.reopenCall(viewController: viewController)
                 case .showAccountSettings(let account):
@@ -113,18 +113,24 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStateable: recordFileViewController.viewModel)
     }
 
-    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
-        if viewModel == nil && image == nil { return }
-        let previewController = PreviewViewController.instantiate(with: self.injectionBag)
-        previewController.delegate = delegate
+    func openFullScreenPreview(viewModel: PlayerViewModel?, image: UIImage?, message: MessageContentVM) {
+        let content: MediaPreviewContent
         if let viewModel = viewModel {
-            previewController.viewModel.playerViewModel = viewModel
-            previewController.type = .player
+            content = .player(viewModel)
         } else if let image = image {
-            previewController.viewModel.image = image
-            previewController.type = .image
+            content = .image(image)
+        } else {
+            return
         }
-        parentView.addChildController(previewController, initialFrame: initialFrame)
+        let model = MediaPreviewModel(content: content, delegate: message)
+        let previewView = MediaPreviewView(model: model)
+        let hostingController = createHostingVC(previewView)
+        hostingController.overrideUserInterfaceStyle = .dark
+        hostingController.view.backgroundColor = .black
+        self.present(viewController: hostingController,
+                     withStyle: .fadeInOverFullScreen,
+                     withAnimation: true,
+                     disposeBag: self.disposeBag)
     }
 
     func openQRCode () {
