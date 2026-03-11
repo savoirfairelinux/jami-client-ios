@@ -79,18 +79,41 @@ class PlayerCoordinator: ObservableObject {
         displayLayer.isOpaque = true
     }
 
+    func configureForFullScreen() {
+        displayLayer.videoGravity = .resizeAspectFill
+    }
+
     /// Enqueue a sample buffer on the display layer, handling flush/error recovery.
-    func enqueueBuffer(_ buffer: CMSampleBuffer) {
+    func enqueueBuffer(_ buffer: CMSampleBuffer, rotation: Int = 0) {
         lastBuffer = buffer
+        applyRotation(rotation)
         if displayLayer.status == .failed {
             displayLayer.flush()
         }
         displayLayer.enqueue(buffer)
     }
 
+    /// Apply rotation degrees to the display layer transform.
+    private func applyRotation(_ degrees: Int) {
+        guard degrees != currentRotation else { return }
+        currentRotation = degrees
+        let radians = CGFloat(degrees) * .pi / 180
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        displayLayer.setAffineTransform(CGAffineTransform(rotationAngle: radians))
+        CATransaction.commit()
+    }
+
+    private var currentRotation: Int = 0
+
     /// Re-enqueue the last buffer (e.g. after the layer is laid out for the first time).
     func redisplayLastBuffer() {
         guard let buffer = lastBuffer else { return }
+        let radians = CGFloat(currentRotation) * .pi / 180
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        displayLayer.setAffineTransform(CGAffineTransform(rotationAngle: radians))
+        CATransaction.commit()
         displayLayer.flush()
         displayLayer.enqueue(buffer)
     }
@@ -116,10 +139,11 @@ class PlayerCoordinator: ObservableObject {
         boundViewModel = viewModel
 
         viewModel.playBackFrame
-            .subscribe(onNext: { [weak self] buffer in
+            .subscribe(onNext: { [weak self, weak viewModel] buffer in
                 guard let self = self, let buffer = buffer else { return }
+                let rotation = viewModel?.lastRotation ?? 0  // read before main-queue hop
                 DispatchQueue.main.async {
-                    self.enqueueBuffer(buffer)
+                    self.enqueueBuffer(buffer, rotation: rotation)
                 }
             })
             .disposed(by: disposeBag)
@@ -240,35 +264,65 @@ struct PlayerView: View {
     var viewModel: PlayerViewModel
     var sizeMode: PlayerMode
     var withControls: Bool
+    /// When provided, this binding is the single source of truth for controls
+    /// visibility. The caller (e.g. MediaPreviewView) owns the state and drives
+    /// both its own overlay and the player controls in sync.
+    var externalControlsVisible: Binding<Bool>?
 
     @StateObject private var coordinator = PlayerCoordinator()
 
-    var body: some View {
-        GeometryReader { _ in
-            ZStack {
-                backgroundColor
-                    .ignoresSafeArea(edges: sizeMode == .fullScreen ? .all : [])
+    private var controlsVisible: Bool {
+        externalControlsVisible?.wrappedValue ?? coordinator.controlsVisible
+    }
 
-                VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
-
-                if withControls {
-                    controlsOverlay
-                }
+    private func toggleControls() {
+        if let binding = externalControlsVisible {
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                binding.wrappedValue.toggle()
             }
-            .applyFullScreenTapGesture(
-                isFullScreen: sizeMode == .fullScreen,
-                coordinator: coordinator
-            )
+        } else {
+            withAnimation(.easeInOut(duration: 0.25)) {
+                coordinator.controlsVisible.toggle()
+            }
+            if coordinator.controlsVisible {
+                coordinator.scheduleAutoHide()
+            }
         }
+    }
+
+    var body: some View {
+        ZStack {
+            backgroundColor
+                .ignoresSafeArea(edges: sizeMode == .fullScreen ? .all : [])
+
+            VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            if withControls {
+                controlsOverlay
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .applyFullScreenTapGesture(
+            isFullScreen: sizeMode == .fullScreen,
+            onTap: toggleControls
+        )
         .onAppear {
+            if sizeMode == .fullScreen {
+                coordinator.configureForFullScreen()
+            }
             coordinator.pendingViewModel = viewModel
             coordinator.bind(to: viewModel)
-            if sizeMode == .fullScreen {
+            if sizeMode == .fullScreen && externalControlsVisible == nil {
                 coordinator.scheduleAutoHide()
             }
         }
         .onDisappear {
             coordinator.cancelAutoHide()
+        }
+        .onChange(of: externalControlsVisible?.wrappedValue) { newValue in
+            guard let newValue else { return }
+            coordinator.controlsVisible = newValue
         }
     }
 
@@ -295,7 +349,7 @@ struct PlayerView: View {
                     fullScreenBottomBar
                 }
             }
-            .opacity(coordinator.controlsVisible ? 1 : 0)
+            .opacity(controlsVisible ? 1 : 0)
         } else {
             messageControls
         }
@@ -475,18 +529,11 @@ private extension View {
     /// Only attaches a full-area tap gesture in full-screen mode.
     /// In message mode, no gesture is added so buttons remain tappable.
     @ViewBuilder
-    func applyFullScreenTapGesture(isFullScreen: Bool, coordinator: PlayerCoordinator) -> some View {
+    func applyFullScreenTapGesture(isFullScreen: Bool, onTap: @escaping () -> Void) -> some View {
         if isFullScreen {
             self
                 .contentShape(Rectangle())
-                .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.25)) {
-                        coordinator.controlsVisible.toggle()
-                    }
-                    if coordinator.controlsVisible {
-                        coordinator.scheduleAutoHide()
-                    }
-                }
+                .onTapGesture(perform: onTap)
         } else {
             self
         }

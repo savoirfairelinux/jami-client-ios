@@ -111,7 +111,7 @@ enum ContextualMenuItem: Identifiable {
 }
 
 // swiftlint:disable type_body_length
-class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
+class MessageContentVM: ObservableObject, MediaPreviewDelegate, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
 
     @Published var content = ""
     @Published var accessibilityLabelValue = ""

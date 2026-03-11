@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2020 Savoir-faire Linux Inc.
+ *  Copyright (C) 2020-2025 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -18,202 +18,240 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import UIKit
 import SwiftUI
-import Reusable
-import RxSwift
 
-enum PrevewType {
-    case player
-    case image
+struct MediaPreviewView: View {
+    let model: MediaPreviewModel
+    private let doubleTapZoomScale: CGFloat = 3
+    @SwiftUI.State private var imageScale: CGFloat = 1
+    @SwiftUI.State private var lastScale: CGFloat = 1
+    @SwiftUI.State private var imageOffset: CGSize = .zero
+    @SwiftUI.State private var lastOffset: CGSize = .zero
+    @SwiftUI.State private var controlsVisible: Bool = true
+    // Stored as a plain class-reference wrapper to avoid @State semantics misuse
+    @SwiftUI.State private var hideTaskHolder = HideTaskHolder()
+
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                Color.black
+                contentView
+                overlayControls(safeArea: geometry.safeAreaInsets)
+            }
+            .ignoresSafeArea()
+        }
+        .statusBarHidden(!controlsVisible)
+        .onAppear {
+            scheduleAutoHide()
+        }
+        .onChange(of: controlsVisible) { _ in
+            if controlsVisible {
+                scheduleAutoHide()
+            } else {
+                hideTaskHolder.task?.cancel()
+            }
+        }
+    }
+
+    // MARK: - Content
+
+    @ViewBuilder
+    private var contentView: some View {
+        switch model.content {
+        case .player(let viewModel):
+            PlayerView(viewModel: viewModel, sizeMode: .fullScreen, withControls: true,
+                       externalControlsVisible: $controlsVisible)
+        case .image(let image):
+            zoomableImage(image)
+        }
+    }
+
+    @ViewBuilder
+    private func zoomableImage(_ image: UIImage) -> some View {
+        GeometryReader { geo in
+            Image(uiImage: image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .scaleEffect(imageScale)
+                .offset(imageOffset)
+                .frame(width: geo.size.width, height: geo.size.height)
+                .gesture(magnificationGesture)
+                .gesture(dragGesture)
+                // Double-tap takes priority; single-tap is subordinate to avoid conflict
+                .gesture(
+                    TapGesture(count: 2)
+                        .onEnded {
+                            withAnimation(.easeInOut(duration: 0.25)) {
+                                if imageScale > 1 {
+                                    imageScale = 1
+                                    lastScale = 1
+                                    imageOffset = .zero
+                                    lastOffset = .zero
+                                } else {
+                                    imageScale = doubleTapZoomScale
+                                    lastScale = doubleTapZoomScale
+                                }
+                            }
+                        }
+                        .exclusively(before: TapGesture(count: 1)
+                            .onEnded { toggleControls() }
+                        )
+                )
+        }
+    }
+
+    // MARK: - Gestures
+
+    private var magnificationGesture: some Gesture {
+        MagnificationGesture()
+            .onChanged { value in
+                let newScale = lastScale * value
+                imageScale = max(1, newScale)
+            }
+            .onEnded { value in
+                lastScale = max(1, lastScale * value)
+                imageScale = lastScale
+                if imageScale <= 1 {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        imageOffset = .zero
+                        lastOffset = .zero
+                    }
+                }
+            }
+    }
+
+    private var dragGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                guard imageScale > 1 else { return }
+                imageOffset = CGSize(
+                    width: lastOffset.width + value.translation.width,
+                    height: lastOffset.height + value.translation.height
+                )
+            }
+            .onEnded { _ in
+                guard imageScale > 1 else { return }
+                lastOffset = imageOffset
+            }
+    }
+
+    // MARK: - Actions
+
+    private func dismiss() {
+        model.onDismiss?()
+    }
 }
 
-protocol PreviewViewControllerDelegate: AnyObject {
-    func deleteFile()
-    func shareFile()
-    func forwardFile()
-    func saveFile()
+// MARK: - HideTaskHolder
+
+/// Reference-type wrapper so the Task can be mutated without @State value-type semantics.
+private final class HideTaskHolder {
+    var task: Task<Void, Never>?
 }
 
-class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
-    // MARK: - outlets
-    @IBOutlet weak var playerContainerView: UIView!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet private weak var hideButton: UIButton!
-    @IBOutlet weak var imageLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var gradientView: UIView!
-    @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var forwardButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var buttonsContainer: UIStackView!
+// MARK: - Overlay Controls
 
-    // MARK: - members
-    let disposeBag = DisposeBag()
-    var viewModel: PreviewControllerModel!
-    var type: PrevewType = .player
-    weak var delegate: PreviewViewControllerDelegate?
-    private var hostingController: UIHostingController<PlayerView>?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.playerContainerView.isHidden = self.type == .image
-        self.gradientView.layoutIfNeeded()
-        self.gradientView.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 1), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
-        NotificationCenter.default.rx
-            .notification(UIDevice.orientationDidChangeNotification)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (_) in
-                guard UIDevice.current.portraitOrLandscape else { return }
-                self?.gradientView.layoutIfNeeded()
-                self?.gradientView.updateGradientFrame()
-            })
-            .disposed(by: self.disposeBag)
-        self.hideButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.parent?.inputAccessoryView?.isHidden = false
-                self?.removeChildController()
-            })
-            .disposed(by: self.disposeBag)
-        self.hideButton.setTitle(L10n.Global.close, for: .normal)
-        self.hideButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
-        self.shareButton.isUserInteractionEnabled = self.type == .image
-        self.deleteButton.isUserInteractionEnabled = self.type == .image
-        self.forwardButton.isUserInteractionEnabled = self.type == .image
-        buttonsContainer.isHidden = self.type != .image
-        if self.type == .image, let image = self.viewModel.image {
-            self.imageView.image = image
-            let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(startZooming(_:)))
-            imageView.isUserInteractionEnabled = true
-            imageView.addGestureRecognizer(pinchGesture)
-            self.shareButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    self?.share()
-                })
-                .disposed(by: self.disposeBag)
-            self.deleteButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    self?.parent?.inputAccessoryView?.isHidden = false
-                    self?.removeChildController()
-                    self?.delete()
-                })
-                .disposed(by: self.disposeBag)
-            self.forwardButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    self?.forward()
-                    self?.parent?.inputAccessoryView?.isHidden = false
-                    self?.removeChildController()
-                })
-                .disposed(by: self.disposeBag)
-            self.saveButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    self?.parent?.inputAccessoryView?.isHidden = false
-                    self?.removeChildController()
-                    self?.save()
-                })
-                .disposed(by: self.disposeBag)
-            return
+extension MediaPreviewView {
+    @ViewBuilder
+    private func overlayControls(safeArea: EdgeInsets) -> some View {
+        VStack {
+            if controlsVisible {
+                topBar
+                    .padding(.top, safeArea.top)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+            }
+            Spacer()
+            if controlsVisible && model.isImagePreview {
+                bottomBar
+                    .padding(.bottom, safeArea.bottom)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
         }
-        guard let model = self.viewModel.playerViewModel else { return }
-        embedPlayerView(viewModel: model)
+        .allowsHitTesting(controlsVisible)
     }
 
-    private func embedPlayerView(viewModel: PlayerViewModel) {
-        let playerView = PlayerView(viewModel: viewModel, sizeMode: .fullScreen, withControls: true)
-        let hosting = UIHostingController(rootView: playerView)
-        hosting.view.backgroundColor = .clear
-        hosting.view.translatesAutoresizingMaskIntoConstraints = false
-        addChild(hosting)
-        // Add to self.view (not playerContainerView) to keep
-        // the view hierarchy aligned with the child VC relationship
-        // and avoid _UIReparentingView warnings.
-        view.insertSubview(hosting.view, aboveSubview: playerContainerView)
-        NSLayoutConstraint.activate([
-            hosting.view.leadingAnchor.constraint(equalTo: playerContainerView.leadingAnchor),
-            hosting.view.trailingAnchor.constraint(equalTo: playerContainerView.trailingAnchor),
-            hosting.view.topAnchor.constraint(equalTo: playerContainerView.topAnchor),
-            hosting.view.bottomAnchor.constraint(equalTo: playerContainerView.bottomAnchor)
-        ])
-        hosting.didMove(toParent: self)
-        self.hostingController = hosting
-    }
+    private var topBar: some View {
+        HStack {
+            Button(action: dismiss) {
+                Text(L10n.Global.close)
+                    .font(.system(size: 17, weight: .regular))
+                    .foregroundColor(.white)
+                    .frame(height: 44)
+                    .padding(.horizontal, 14)
+            }
+            .background(glassBackground(shape: Capsule()))
 
-    @objc
-    private func startZooming(_ sender: UIPinchGestureRecognizer) {
-        let scaleResult = sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale)
-        guard let scale = scaleResult, scale.a > 1, scale.d > 1 else { return }
-        sender.view?.transform = scale
-        sender.scale = 1
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-
-    override func resizeFrom(initialFrame: CGRect) {
-        if self.type == .player {
-            // Animate the player container from the initial frame to full screen
-            backgroundView.alpha = 0
-            UIView.animate(withDuration: 0.2,
-                           delay: 0.0,
-                           options: [.curveEaseInOut],
-                           animations: { [weak self] in
-                            self?.backgroundView.alpha = 1
-                           }, completion: nil)
-            return
+            Spacer()
         }
-        let leftConstraint: CGFloat = initialFrame.origin.x
-        let topConstraint: CGFloat = initialFrame.origin.y
-        let rightConstraint: CGFloat = self.view.frame.width - initialFrame.origin.x - initialFrame.size.width
-        let bottomConstraint: CGFloat = self.view.frame.height - initialFrame.origin.y - initialFrame.size.height
-        imageLeadingConstraint.constant = leftConstraint
-        imageTrailingConstraint.constant = -rightConstraint
-        imageTopConstraint.constant = topConstraint
-        imageBottomConstraint.constant = bottomConstraint
-        self.view.layoutIfNeeded()
-        backgroundView.alpha = 0
-        UIView.animate(withDuration: 0.2,
-                       delay: 0.0,
-                       options: [.curveEaseInOut],
-                       animations: { [weak self] in
-                        guard let self = self else { return }
-                        self.imageLeadingConstraint.constant = 0
-                        self.imageTrailingConstraint.constant = 0
-                        self.imageTopConstraint.constant = 0
-                        self.imageBottomConstraint.constant = 0
-                        self.backgroundView.alpha = 1
-                        self.view.layoutIfNeeded()
-                       }, completion: nil)
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
     }
-    func share() {
-        if let delegate = self.delegate {
-            delegate.shareFile()
+
+    private var bottomBar: some View {
+        HStack(spacing: 24) {
+            glassButton(icon: "square.and.arrow.up") {
+                model.delegate?.shareFile()
+            }
+            glassButton(icon: "arrowshape.turn.up.right") {
+                model.delegate?.forwardFile()
+            }
+            glassButton(icon: "square.and.arrow.down") {
+                model.delegate?.saveFile()
+            }
+            glassButton(icon: "trash") {
+                model.delegate?.deleteFile()
+                dismiss()
+            }
         }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 4)
+        .background(glassBackground(shape: Capsule()))
+        .padding(.bottom, 16)
     }
-    func delete() {
-        if let delegate = self.delegate {
-            delegate.deleteFile()
-        }
-    }
-    func forward() {
-        if let delegate = self.delegate {
-            delegate.forwardFile()
+
+    private func glassButton(icon: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: icon)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(.white)
+                .frame(width: 44, height: 44)
         }
     }
 
-    func save() {
-        if let delegate = self.delegate {
-            delegate.saveFile()
+    private func glassBackground<S: Shape>(shape: S) -> some View {
+        ZStack {
+            VisualEffectView(effect: UIBlurEffect(style: .dark))
+            LinearGradient(
+                colors: [
+                    Color.black.opacity(0.05),
+                    Color.black.opacity(0.2)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .opacity(0.5)
+        }
+        .clipShape(shape)
+        .overlay(
+            shape.stroke(Color.white.opacity(0.2), lineWidth: 0.5)
+        )
+    }
+
+    private func toggleControls() {
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+            controlsVisible.toggle()
+        }
+    }
+
+    private func scheduleAutoHide() {
+        hideTaskHolder.task?.cancel()
+        hideTaskHolder.task = Task {
+            try? await Task.sleep(nanoseconds: 5_000_000_000)
+            await MainActor.run {
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                    controlsVisible = false
+                }
+            }
         }
     }
 }

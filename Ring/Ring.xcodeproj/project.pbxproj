@@ -242,7 +242,6 @@
 		260717722CADB36A00494875 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260717712CADB36A00494875 /* SettingsCoordinator.swift */; };
 		26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* PreviewViewController.swift */; };
 		26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */; };
-		26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */; };
 		260AE62529B65A4B00D66D5E /* ContactsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62429B65A4B00D66D5E /* ContactsUtils.swift */; };
 		260AE62729B8E89300D66D5E /* JamiSearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */; };
 		260AE62929B8ECA400D66D5E /* TestableFilteredDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */; };
@@ -866,7 +865,6 @@
 		260717712CADB36A00494875 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		26074FD824F7FF9500374570 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContollerModel.swift; sourceTree = "<group>"; };
-		26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewViewController.storyboard; sourceTree = "<group>"; };
 		260AE62429B65A4B00D66D5E /* ContactsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUtils.swift; sourceTree = "<group>"; };
 		260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiSearchViewModelTests.swift; sourceTree = "<group>"; };
 		260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableFilteredDataSource.swift; sourceTree = "<group>"; };
@@ -3256,7 +3254,6 @@
 			children = (
 				26074FD824F7FF9500374570 /* PreviewViewController.swift */,
 				26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */,
-				26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */,
 			);
 			path = Preview;
 			sourceTree = "<group>";
@@ -4051,7 +4048,6 @@
 				623660AA20092081002598C1 /* src in Resources */,
 				26929FD425659E5F0052A601 /* cacert.pem in Resources */,
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
-				26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
 				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
 				26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */,
