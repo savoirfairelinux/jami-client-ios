@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2020 Savoir-faire Linux Inc.
+ *  Copyright (C) 2020-2025 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -18,13 +18,33 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RxSwift
+import SwiftUI
 
-class PreviewControllerModel: ViewModel {
+enum MediaPreviewContent {
+    case player(PlayerViewModel)
+    case image(UIImage)
+}
 
-    var playerViewModel: PlayerViewModel?
-    var image: UIImage?
+protocol MediaPreviewDelegate: AnyObject {
+    func deleteFile()
+    func shareFile()
+    func forwardFile()
+    func saveFile()
+}
 
-    required init (with injectionBag: InjectionBag) {
+class MediaPreviewModel: ObservableObject {
+    let content: MediaPreviewContent
+    weak var delegate: MediaPreviewDelegate?
+    var onDismiss: (() -> Void)?
+
+    var isImagePreview: Bool {
+        if case .image = content { return true }
+        return false
+    }
+
+    init(content: MediaPreviewContent, delegate: MediaPreviewDelegate? = nil, onDismiss: (() -> Void)? = nil) {
+        self.content = content
+        self.delegate = delegate
+        self.onDismiss = onDismiss
     }
 }
