@@ -240,8 +240,31 @@ struct PlayerView: View {
     var viewModel: PlayerViewModel
     var sizeMode: PlayerMode
     var withControls: Bool
+    /// When provided, this binding is the single source of truth for controls
+    /// visibility. The caller (e.g. MediaPreviewView) owns the state and drives
+    /// both its own overlay and the player controls in sync.
+    var externalControlsVisible: Binding<Bool>?
 
     @StateObject private var coordinator = PlayerCoordinator()
+
+    private var controlsVisible: Bool {
+        externalControlsVisible?.wrappedValue ?? coordinator.controlsVisible
+    }
+
+    private func toggleControls() {
+        if let binding = externalControlsVisible {
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                binding.wrappedValue.toggle()
+            }
+        } else {
+            withAnimation(.easeInOut(duration: 0.25)) {
+                coordinator.controlsVisible.toggle()
+            }
+            if coordinator.controlsVisible {
+                coordinator.scheduleAutoHide()
+            }
+        }
+    }
 
     var body: some View {
         GeometryReader { _ in
@@ -257,18 +280,22 @@ struct PlayerView: View {
             }
             .applyFullScreenTapGesture(
                 isFullScreen: sizeMode == .fullScreen,
-                coordinator: coordinator
+                onTap: toggleControls
             )
         }
         .onAppear {
             coordinator.pendingViewModel = viewModel
             coordinator.bind(to: viewModel)
-            if sizeMode == .fullScreen {
+            if sizeMode == .fullScreen && externalControlsVisible == nil {
                 coordinator.scheduleAutoHide()
             }
         }
         .onDisappear {
             coordinator.cancelAutoHide()
+        }
+        .onChange(of: externalControlsVisible?.wrappedValue) { newValue in
+            guard let newValue else { return }
+            coordinator.controlsVisible = newValue
         }
     }
 
@@ -295,7 +322,7 @@ struct PlayerView: View {
                     fullScreenBottomBar
                 }
             }
-            .opacity(coordinator.controlsVisible ? 1 : 0)
+            .opacity(controlsVisible ? 1 : 0)
         } else {
             messageControls
         }
@@ -475,18 +502,11 @@ private extension View {
     /// Only attaches a full-area tap gesture in full-screen mode.
     /// In message mode, no gesture is added so buttons remain tappable.
     @ViewBuilder
-    func applyFullScreenTapGesture(isFullScreen: Bool, coordinator: PlayerCoordinator) -> some View {
+    func applyFullScreenTapGesture(isFullScreen: Bool, onTap: @escaping () -> Void) -> some View {
         if isFullScreen {
             self
                 .contentShape(Rectangle())
-                .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.25)) {
-                        coordinator.controlsVisible.toggle()
-                    }
-                    if coordinator.controlsVisible {
-                        coordinator.scheduleAutoHide()
-                    }
-                }
+                .onTapGesture(perform: onTap)
         } else {
             self
         }

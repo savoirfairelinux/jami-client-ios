@@ -518,6 +518,9 @@ extension ConversationViewController {
         guard let url = message.url else { return }
         if message.player != nil {
             presentPlayer(message: message)
+        } else if url.pathExtension.isImageExtension(),
+                  let image = message.getImage(maxSize: 0) {
+            viewModel.openFullScreenPreview(parentView: self, viewModel: nil, image: image, delegate: message)
         } else {
             openDocument(url: url)
         }
@@ -570,7 +573,7 @@ extension ConversationViewController {
     }
 
     func presentPlayer(message: MessageContentVM) {
-        viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: nil, initialFrame: CGRect.zero, delegate: message)
+        viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: nil, delegate: message)
     }
 
     func openDocument(url: URL) {
