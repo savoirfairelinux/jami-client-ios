@@ -610,8 +610,8 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
     let shouldDismiss = BehaviorRelay<Bool>(value: false)
 
-    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
-        self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate))
+    func openFullScreenPreview(viewModel: PlayerViewModel?, image: UIImage?, message: MessageContentVM) {
+        self.stateSubject.onNext(ConversationState.openFullScreenPreview(viewModel: viewModel, image: image, message: message))
     }
 
     var conversationCreated = BehaviorRelay(value: true)

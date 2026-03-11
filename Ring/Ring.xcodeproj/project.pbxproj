@@ -240,9 +240,8 @@
 		2607176E2CAC454E00494875 /* ComposeNewMessageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */; };
 		260717702CAD901D00494875 /* ConversationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176F2CAD901D00494875 /* ConversationDataSource.swift */; };
 		260717722CADB36A00494875 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260717712CADB36A00494875 /* SettingsCoordinator.swift */; };
-		26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* PreviewViewController.swift */; };
-		26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */; };
-		26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */; };
+		26074FD924F7FF9500374570 /* MediaPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* MediaPreviewView.swift */; };
+		26074FDB24F7FFC100374570 /* MediaPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* MediaPreviewModel.swift */; };
 		260AE62529B65A4B00D66D5E /* ContactsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62429B65A4B00D66D5E /* ContactsUtils.swift */; };
 		260AE62729B8E89300D66D5E /* JamiSearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */; };
 		260AE62929B8ECA400D66D5E /* TestableFilteredDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */; };
@@ -864,9 +863,8 @@
 		2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComposeNewMessageCoordinator.swift; path = Ring/Features/Conversations/ComposeNewMessageCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		2607176F2CAD901D00494875 /* ConversationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationDataSource.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ConversationDataSource.swift; sourceTree = SOURCE_ROOT; };
 		260717712CADB36A00494875 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
-		26074FD824F7FF9500374570 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
-		26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContollerModel.swift; sourceTree = "<group>"; };
-		26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewViewController.storyboard; sourceTree = "<group>"; };
+		26074FD824F7FF9500374570 /* MediaPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewView.swift; sourceTree = "<group>"; };
+		26074FDA24F7FFC100374570 /* MediaPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewModel.swift; sourceTree = "<group>"; };
 		260AE62429B65A4B00D66D5E /* ContactsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUtils.swift; sourceTree = "<group>"; };
 		260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiSearchViewModelTests.swift; sourceTree = "<group>"; };
 		260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableFilteredDataSource.swift; sourceTree = "<group>"; };
@@ -3254,9 +3252,8 @@
 		26074FD524F7FF5B00374570 /* Preview */ = {
 			isa = PBXGroup;
 			children = (
-				26074FD824F7FF9500374570 /* PreviewViewController.swift */,
-				26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */,
-				26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */,
+				26074FD824F7FF9500374570 /* MediaPreviewView.swift */,
+				26074FDA24F7FFC100374570 /* MediaPreviewModel.swift */,
 			);
 			path = Preview;
 			sourceTree = "<group>";
@@ -4051,7 +4048,6 @@
 				623660AA20092081002598C1 /* src in Resources */,
 				26929FD425659E5F0052A601 /* cacert.pem in Resources */,
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
-				26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
 				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
 				26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */,
@@ -4355,10 +4351,10 @@
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
 				26625BB92BA9FEFC009D2DDB /* SmartListContentView.swift in Sources */,
 				26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */,
-				26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */,
+				26074FD924F7FF9500374570 /* MediaPreviewView.swift in Sources */,
 				268C87FD2C1E6C7600593D7C /* SettingsSummaryView.swift in Sources */,
 				0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */,
-				26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */,
+				26074FDB24F7FFC100374570 /* MediaPreviewModel.swift in Sources */,
 				0EC7808F2424FDAE000A04C5 /* CustomActionTextView.swift in Sources */,
 				26EFD7B42E2D59BB00B63F74 /* ScreenDimensionsManager.swift in Sources */,
 				56C715FF1F0D36C600770048 /* ContactsAdapter.mm in Sources */,
