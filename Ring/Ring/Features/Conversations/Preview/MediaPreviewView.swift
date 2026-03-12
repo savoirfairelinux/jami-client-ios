@@ -168,15 +168,7 @@ extension MediaPreviewView {
 
     private var topBar: some View {
         HStack {
-            Button(action: dismiss) {
-                Text(L10n.Global.close)
-                    .font(.system(size: 17, weight: .regular))
-                    .foregroundColor(.white)
-                    .frame(height: 44)
-                    .padding(.horizontal, 14)
-            }
-            .background(glassBackground(shape: Capsule()))
-
+            glassLabelButton(text: L10n.Global.close, action: dismiss)
             Spacer()
         }
         .padding(.horizontal, 16)
@@ -185,52 +177,18 @@ extension MediaPreviewView {
 
     private var bottomBar: some View {
         HStack(spacing: 24) {
-            glassButton(icon: "square.and.arrow.up") {
-                model.share()
-            }
-            glassButton(icon: "arrowshape.turn.up.right") {
-                model.forward()
-            }
-            glassButton(icon: "square.and.arrow.down") {
-                model.save()
-            }
-            glassButton(icon: "trash") {
+            glassIconButton(systemName: "square.and.arrow.up") { model.share() }
+            glassIconButton(systemName: "arrowshape.turn.up.right") { model.forward() }
+            glassIconButton(systemName: "square.and.arrow.down") { model.save() }
+            glassIconButton(systemName: "trash") {
                 model.delete()
                 dismiss()
             }
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 4)
-        .background(glassBackground(shape: Capsule()))
+        .glassCapsuleBackground()
         .padding(.bottom, 16)
-    }
-
-    private func glassButton(icon: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Image(systemName: icon)
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(.white)
-                .frame(width: 44, height: 44)
-        }
-    }
-
-    private func glassBackground<S: Shape>(shape: S) -> some View {
-        ZStack {
-            VisualEffectView(effect: UIBlurEffect(style: .dark))
-            LinearGradient(
-                colors: [
-                    Color.black.opacity(0.05),
-                    Color.black.opacity(0.2)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .opacity(0.5)
-        }
-        .clipShape(shape)
-        .overlay(
-            shape.stroke(Color.white.opacity(0.2), lineWidth: 0.5)
-        )
     }
 
     private func toggleControls() {
