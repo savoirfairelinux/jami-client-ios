@@ -22,6 +22,7 @@
 import RxSwift
 import RxRelay
 import SwiftUI
+import Combine
 
 enum ConversationState: State {
     case startCall(contactRingId: String, userName: String)
@@ -54,6 +55,10 @@ enum ConversationState: State {
     case openAboutJami
     case compose
     case showAccountSettings(account: AccountModel)
+}
+
+private enum AssociatedKeys {
+    static var cancellable: UInt8 = 0
 }
 
 protocol ConversationNavigation: AnyObject {
@@ -105,13 +110,30 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func openRecordFile(conversation: ConversationModel, audioOnly: Bool) {
-        let recordFileViewController = SendFileViewController.instantiate(with: self.injectionBag)
-        recordFileViewController.viewModel.conversation = conversation
-        recordFileViewController.viewModel.audioOnly = audioOnly
-        self.present(viewController: recordFileViewController,
+        let viewModel = MediaRecordViewModel(with: self.injectionBag)
+        viewModel.conversation = conversation
+        viewModel.audioOnly = audioOnly
+        viewModel.setup()
+        let sendFileView = MediaRecordView(viewModel: viewModel)
+        let hostingController = UIHostingController(rootView: sendFileView)
+        hostingController.modalPresentationStyle = .overFullScreen
+        hostingController.modalTransitionStyle = audioOnly ? .coverVertical : .crossDissolve
+        hostingController.view.backgroundColor = .clear
+        // Observe dismissal via the @Published property.
+        // The cancellable is captured by the closure so it stays alive until fired.
+        // Keep the cancellable alive by storing it on the hosting controller via objc association.
+        let cancellable = viewModel.$isDismissed
+            .filter { $0 }
+            .first()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak hostingController] _ in
+                hostingController?.dismiss(animated: !audioOnly)
+            }
+        objc_setAssociatedObject(hostingController, &AssociatedKeys.cancellable, cancellable, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        self.present(viewController: hostingController,
                      withStyle: .overCurrentContext,
                      withAnimation: !audioOnly,
-                     withStateable: recordFileViewController.viewModel)
+                     withStateable: viewModel)
     }
 
     func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, delegate: MediaPreviewDelegate) {
