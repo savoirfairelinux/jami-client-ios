@@ -17,9 +17,8 @@
  */
 
 import RxSwift
-import SwiftyBeaver
-import Contacts
 import RxCocoa
+import SwiftyBeaver
 
 enum RecordingState {
     case initial
@@ -28,301 +27,264 @@ enum RecordingState {
     case sent
 }
 
-class SendFileViewModel: Stateable, ViewModel {
-    // stateable
+class SendFileViewModel: ObservableObject, Stateable, ViewModel {
+
+    // MARK: - Stateable (coordinator navigation)
+
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
-    private let recordingState = BehaviorRelay<RecordingState>(value: .initial)
 
-    lazy var hideVideoControls: Observable<Bool> = {
-        Observable.just(audioOnly)
-    }()
+    // MARK: - Published UI state
 
-    lazy var finished: Observable<Bool> = {
-        recordingState
-            .asObservable()
-            .map({ state in
-                state == .sent
-            })
-            .share()
-    }()
+    @Published var previewImage: UIImage?
+    @Published var isRecording: Bool = false
+    @Published var isReadyToSend: Bool = false
+    @Published var showPlayerControls: Bool = false
+    @Published var recordDuration: String = ""
+    @Published var playerPosition: Float = 0
+    @Published var playerDuration: Float = 0
+    @Published var isPaused: Bool = true
+    @Published var isAudioMuted: Bool = true
+    @Published var hideInfo: Bool = false
+    @Published private(set) var isDismissed: Bool = false
 
-    lazy var hideInfo: Driver<Bool> = {
-        recordingState
-            .asObservable()
-            .map({ [weak self] state in
-                state != .initial || !(self?.audioOnly ?? true)
-            })
-            .share()
-            .asDriver(onErrorJustReturn: false)
-    }()
-
-    lazy var readyToSend: Driver<Bool> = {
-        recordingState
-            .asObservable()
-            .map({ state in
-                state == .recorded
-            })
-            .share()
-            .asDriver(onErrorJustReturn: false)
-    }()
-
-    lazy var recording: Observable<Bool> = {
-        recordingState
-            .asObservable()
-            .map({ state in
-                state == .recording
-            })
-            .share()
-    }()
-
-    lazy var recordDuration: Driver<String> = {
-        let emptyString = Observable.just("")
-        let durationTimer = Observable<Int>
-            .interval(Durations.oneSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .take(until: self.recordingState
-                    .asObservable()
-                    .filter { state in
-                        return state == .recorded
-                    })
-            .map({ interval -> String in
-                let seconds = interval % 60
-                let minutes = (interval / 60) % 60
-                let hours = (interval / 3600)
-                switch hours {
-                case 0:
-                    return String(format: "%02d:%02d", minutes, seconds)
-                default:
-                    return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-                }
-            })
-            .share()
-        return self.recordingState
-            .asObservable()
-            .filter({ state in
-                return (state == .recording || state == .recorded)
-            })
-            .flatMap({ (state) -> Observable<String>  in
-                if state == .recording {
-                    return durationTimer
-                } else {
-                    return emptyString
-                }
-            })
-            .asDriver(onErrorJustReturn: "")
-    }()
+    // MARK: - Configuration (set by coordinator before setup())
 
     var audioOnly: Bool = false
+    var conversation: ConversationModel!
+
+    // MARK: - Private
+
     private let videoService: VideoService
     private let accountService: AccountsService
     private let fileTransferService: DataTransferService
-    var fileName = ""
+    let injectionBag: InjectionBag
 
-    var conversation: ConversationModel!
+    private(set) var fileName = ""
+    private(set) var player: PlayerViewModel?
+
+    private var playBackDisposeBag = DisposeBag()
+    private var playerDisposeBag = DisposeBag()
+    private var recordingTimer: Timer?
+    private var recordingSeconds: Int = 0
+
+    // Raw frame stream consumed by the background layer
+    let playBackFrame = PublishSubject<UIImage?>()
+
+    // MARK: - Init
 
     required init(with injectionBag: InjectionBag) {
         self.videoService = injectionBag.videoService
         self.accountService = injectionBag.accountService
         self.fileTransferService = injectionBag.dataTransferService
         self.injectionBag = injectionBag
+    }
+
+    // MARK: - Setup
+
+    /// Must be called after setting `conversation` and `audioOnly`.
+    func setup() {
         if !audioOnly {
             videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
             videoService.startMediumCamera()
         }
-        videoService.capturedVideoFrame.asObservable()
-            .subscribe(onNext: { [weak self] frame in
-                self?.playBackFrame.onNext(frame)
-            })
-            .disposed(by: playBackDisposeBag)
+        subscribeCameraFrames()
     }
 
+    func setCameraOrientation(orientation: UIDeviceOrientation) {
+        videoService.setCameraOrientation(orientation: orientation)
+    }
+
+    // MARK: - Recording
+
     func triggerRecording() {
-        if recordingState.value == .recording {
-            self.stopRecording()
-            return
+        if isRecording {
+            stopRecording()
+        } else {
+            startRecording()
         }
-        startRecording()
     }
 
     func startRecording() {
         player?.closePlayer()
         player = nil
         playBackDisposeBag = DisposeBag()
-        videoService.capturedVideoFrame.asObservable()
-            .subscribe(onNext: { [weak self] frame in
-                self?.playBackFrame.onNext(frame)
-            })
-            .disposed(by: playBackDisposeBag)
-        let dateFormatter: DateFormatter = DateFormatter()
+        subscribeCameraFrames()
+
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd_HH:mm:ss"
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
-        let random = String(UInt64.random(in: 0 ... 9999))
-        let nameForRecordingFile = dateString + "_" + random
-        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile,
-                                                                          accountID: conversation.accountId,
-                                                                          conversationID: conversation.id,
-                                                                          isSwarm: self.conversation.isSwarm()) else { return }
-        guard let name = self.videoService
-                .startLocalRecorder(audioOnly: audioOnly, path: url.path) else {
-            return
-        }
-        recordingState.accept(.recording)
+        let nameForRecordingFile = dateFormatter.string(from: Date()) + "_" + String(UInt64.random(in: 0...9999))
+        guard let url = fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile,
+                                                                     accountID: conversation.accountId,
+                                                                     conversationID: conversation.id,
+                                                                     isSwarm: conversation.isSwarm()) else { return }
+        guard let name = videoService.startLocalRecorder(audioOnly: audioOnly, path: url.path) else { return }
         fileName = name
+        transition(to: .recording)
     }
 
-    lazy var showPlayerControls: Observable<Bool> = {
-        return Observable
-            .combineLatest(playerReady.asObservable(),
-                           readyToSend.asObservable()) {(playerReady, fileReady) in
-                return (playerReady && fileReady)
-            }
-    }()
-
     func stopRecording() {
-        self.videoService.stopLocalRecorder(path: fileName)
-        recordingState.accept(.recorded)
-        // create player after delay so recording could be finished
-        DispatchQueue.main.asyncAfter(deadline: (.now() + 1)) { [weak self] in
+        videoService.stopLocalRecorder(path: fileName)
+        transition(to: .recorded)
+        // Allow the recording file to finish writing before creating the player.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.createPlayer()
         }
     }
 
-    let injectionBag: InjectionBag
-
-    lazy var incomingFrame: Observable<VideoFrameInfo> = {
-        return videoService.videoInputManager.frameSubject.asObservable()
-    }()
+    // MARK: - Send / Cancel
 
     func sendFile() {
-        guard let fileUrl = URL(string: fileName) else {
-            return
-        }
+        guard !fileName.isEmpty else { return }
+        let name = URL(fileURLWithPath: fileName).lastPathComponent
         player?.closePlayer()
-        self.player = nil
-        let name = fileUrl.lastPathComponent
-        self.fileTransferService.sendFile(conversation: self.conversation, filePath: self.fileName, displayName: name, localIdentifier: nil)
-        self.videoService.videRecordingFinished()
-        self.recordingState.accept(.sent)
+        player = nil
+        fileTransferService.sendFile(conversation: conversation, filePath: fileName, displayName: name, localIdentifier: nil)
+        videoService.videRecordingFinished()
+        transition(to: .sent)
     }
 
     func cancel() {
-        if recordingState.value == .recording {
-            self.stopRecording()
-        }
+        if isRecording { stopRecording() }
         player?.closePlayer()
-        self.player = nil
-        self.videoService.videRecordingFinished()
-        recordingState.accept(.sent)
-        if fileName.isEmpty {
-            return
+        player = nil
+        videoService.videRecordingFinished()
+        if !fileName.isEmpty {
+            try? FileManager.default.removeItem(atPath: fileName)
         }
-        try? FileManager.default.removeItem(atPath: fileName)
+        transition(to: .sent)
     }
+
+    // MARK: - Camera
 
     func switchCamera() {
-        self.videoService.switchCamera()
+        videoService.switchCamera()
     }
 
-    // player
-    var player: PlayerViewModel?
+    // MARK: - Playback controls
 
-    var playerDuration = BehaviorRelay<Float>(value: 0)
-    var playerPosition = PublishSubject<Float>()
+    func togglePause() { player?.togglePause() }
+    func muteAudio() { player?.muteAudio() }
+    func userStartSeeking() { player?.userStartSeeking() }
+    func userStopSeeking() { player?.userStopSeeking() }
+    func seek(to value: Float) { player?.seekTimeVariable.accept(value) }
 
-    var seekTimeVariable = BehaviorRelay<Float>(value: 0) // player position set by user
-    let playBackFrame = PublishSubject<UIImage?>()
+    // MARK: - Private helpers
 
-    var pause = BehaviorRelay<Bool>(value: true)
-    var audioMuted = BehaviorRelay<Bool>(value: true)
-    var playerReady = BehaviorRelay<Bool>(value: false)
-    var playBackDisposeBag = DisposeBag()
-}
-
-// MARK: media player
-
-extension SendFileViewModel {
-    func userStartSeeking() {
-        self.player?.userStartSeeking()
-    }
-
-    func userStopSeeking() {
-        self.player?.userStopSeeking()
-    }
-
-    func togglePause() {
-        self.player?.togglePause()
-    }
-
-    func muteAudio() {
-        self.player?.muteAudio()
-    }
-
-    func seekToTime(time: Int) {
-        self.player?.seekToTime(time: time)
-    }
-
-    func createPlayer() {
-        player = PlayerViewModel(injectionBag: injectionBag, path: fileName)
-        player?.createPlayer()
-        player?.playerReady.asObservable()
-            .filter({ (ready) -> Bool in
-                return ready
-            })
-            .take(1)
-            .subscribe(onNext: { [weak self] ready in
-                self?.playerReady.accept(ready)
-                self?.playBackDisposeBag = DisposeBag()
-                self?.subscribePlayerControls()
+    private func subscribeCameraFrames() {
+        videoService.capturedVideoFrame.asObservable()
+            .subscribe(onNext: { [weak self] frame in
+                self?.playBackFrame.onNext(frame)
+                DispatchQueue.main.async { self?.previewImage = frame }
             })
             .disposed(by: playBackDisposeBag)
     }
 
-    func subscribePlayerControls() {
-        player?.audioMuted.asObservable()
-            .subscribe(onNext: { [weak self] muted in
-                self?.audioMuted.accept(muted)
-            })
-            .disposed(by: playBackDisposeBag)
+    private func transition(to state: RecordingState) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            switch state {
+            case .initial:
+                self.isRecording = false
+                self.isReadyToSend = false
+                self.hideInfo = !self.audioOnly
+                self.stopTimer()
+                self.recordDuration = ""
+            case .recording:
+                self.isRecording = true
+                self.isReadyToSend = false
+                self.hideInfo = true
+                self.showPlayerControls = false
+                self.startTimer()
+            case .recorded:
+                self.isRecording = false
+                self.isReadyToSend = true
+                self.hideInfo = true
+                self.stopTimer()
+                self.recordDuration = ""
+            case .sent:
+                self.isRecording = false
+                self.isReadyToSend = false
+                self.isDismissed = true
+                self.stopTimer()
+            }
+        }
+    }
 
-        player?.pause.asObservable()
-            .subscribe(onNext: { [weak self] pause in
-                self?.pause.accept(pause)
-            })
-            .disposed(by: playBackDisposeBag)
+    // MARK: - Timer
 
-        player?.playerDuration.asObservable()
-            .subscribe(onNext: { [weak self] duration in
-                self?.playerDuration.accept(duration)
-            })
-            .disposed(by: playBackDisposeBag)
+    private func startTimer() {
+        recordingSeconds = 0
+        recordDuration = "00:00"
+        recordingTimer?.invalidate()
+        recordingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            self.recordingSeconds += 1
+            let s = self.recordingSeconds % 60
+            let m = (self.recordingSeconds / 60) % 60
+            let h = self.recordingSeconds / 3600
+            self.recordDuration = h > 0
+                ? String(format: "%02d:%02d:%02d", h, m, s)
+                : String(format: "%02d:%02d", m, s)
+        }
+    }
 
-        player?.playerPosition.asObservable()
-            .subscribe(onNext: { [weak self] position in
-                self?.playerPosition.onNext(position)
-            })
-            .disposed(by: playBackDisposeBag)
+    private func stopTimer() {
+        recordingTimer?.invalidate()
+        recordingTimer = nil
+    }
 
-        player?.playBackFrame.asObservable()
+    // MARK: - Player
+
+    private func createPlayer() {
+        // Drop camera/previous player frames before binding to the new player.
+        playBackDisposeBag = DisposeBag()
+        playerDisposeBag = DisposeBag()
+
+        let newPlayer = PlayerViewModel(injectionBag: injectionBag, path: fileName)
+        newPlayer.createPlayer()
+        player = newPlayer
+
+        // Pipe player frames into the shared frame subject for the background layer.
+        newPlayer.playBackFrame.asObservable()
             .subscribe(onNext: { [weak self] buffer in
-                guard let self = self else { return }
-                if let buffer = buffer,
-                   let image = UIImage.createFrom(sampleBuffer: buffer) {
-                    self.playBackFrame.onNext(image)
-                }
+                guard let self = self,
+                      let buffer = buffer,
+                      let image = UIImage.createFrom(sampleBuffer: buffer) else { return }
+                self.playBackFrame.onNext(image)
+                DispatchQueue.main.async { self.previewImage = image }
             })
             .disposed(by: playBackDisposeBag)
 
-        seekTimeVariable.asObservable()
-            .subscribe(onNext: { [weak self](position) in
-                self?.player?.seekTimeVariable.accept(position)
+        newPlayer.playerReady.asObservable()
+            .filter { $0 }
+            .take(1)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.showPlayerControls = true
             })
-            .disposed(by: playBackDisposeBag)
-    }
+            .disposed(by: playerDisposeBag)
 
-    func setCameraOrientation(orientation: UIDeviceOrientation) {
-        videoService.setCameraOrientation(orientation: orientation)
+        newPlayer.pause.asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] paused in self?.isPaused = paused })
+            .disposed(by: playerDisposeBag)
+
+        newPlayer.audioMuted.asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] muted in self?.isAudioMuted = muted })
+            .disposed(by: playerDisposeBag)
+
+        newPlayer.playerDuration.asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] duration in self?.playerDuration = duration })
+            .disposed(by: playerDisposeBag)
+
+        newPlayer.playerPosition.asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] position in self?.playerPosition = position })
+            .disposed(by: playerDisposeBag)
     }
 }
