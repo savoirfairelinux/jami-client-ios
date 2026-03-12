@@ -104,13 +104,16 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func openRecordFile(conversation: ConversationModel, audioOnly: Bool) {
-        let recordFileViewController = SendFileViewController.instantiate(with: self.injectionBag)
-        recordFileViewController.viewModel.conversation = conversation
-        recordFileViewController.viewModel.audioOnly = audioOnly
-        self.present(viewController: recordFileViewController,
+        let viewModel = MediaRecordViewModel(with: self.injectionBag)
+        viewModel.conversation = conversation
+        viewModel.audioOnly = audioOnly
+        viewModel.setup()
+        let hostingController = createDismissableVC(MediaRecordView(viewModel: viewModel),
+                                                    dismissible: viewModel.dismissHandler)
+        self.present(viewController: hostingController,
                      withStyle: .overCurrentContext,
                      withAnimation: !audioOnly,
-                     withStateable: recordFileViewController.viewModel)
+                     withStateable: viewModel)
     }
 
     func openFullScreenPreview(viewModel: PlayerViewModel?, image: UIImage?, message: MessageContentVM) {
