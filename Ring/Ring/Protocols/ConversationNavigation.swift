@@ -105,13 +105,30 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
     }
 
     func openRecordFile(conversation: ConversationModel, audioOnly: Bool) {
-        let recordFileViewController = SendFileViewController.instantiate(with: self.injectionBag)
-        recordFileViewController.viewModel.conversation = conversation
-        recordFileViewController.viewModel.audioOnly = audioOnly
-        self.present(viewController: recordFileViewController,
+        let viewModel = SendFileViewModel(with: self.injectionBag)
+        viewModel.conversation = conversation
+        viewModel.audioOnly = audioOnly
+        viewModel.setup()
+        let observableModel = SendFileObservableModel(viewModel: viewModel)
+        let sendFileView = SendFileView(model: observableModel)
+        let hostingController = UIHostingController(rootView: sendFileView)
+        hostingController.modalPresentationStyle = .overFullScreen
+        hostingController.modalTransitionStyle = audioOnly ? .coverVertical : .crossDissolve
+        hostingController.view.backgroundColor = .clear
+        // Observe dismissal from the view model state
+        viewModel.recordingState
+            .asObservable()
+            .filter { $0 == .sent }
+            .take(1)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak hostingController] _ in
+                hostingController?.dismiss(animated: !audioOnly)
+            })
+            .disposed(by: self.disposeBag)
+        self.present(viewController: hostingController,
                      withStyle: .overCurrentContext,
                      withAnimation: !audioOnly,
-                     withStateable: recordFileViewController.viewModel)
+                     withStateable: viewModel)
     }
 
     func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, delegate: MediaPreviewDelegate) {
