@@ -542,22 +542,28 @@ private extension View {
 
 // MARK: - Controls Background Helpers
 
+private func playerControlBackground<S: Shape>(shape: S) -> some View {
+    ZStack {
+        VisualEffectView(effect: UIBlurEffect(style: .dark))
+        LinearGradient(
+            colors: [Color.black.opacity(0.05), Color.black.opacity(0.2)],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .opacity(0.5)
+    }
+    .clipShape(shape)
+    .overlay(shape.stroke(Color.white.opacity(0.2), lineWidth: 0.5))
+}
+
 private extension View {
-    /// Dark semi-transparent rounded background for the controls bar.
     func applyControlsBarBackground(isFullScreen: Bool) -> some View {
         let cornerRadius: CGFloat = isFullScreen ? 20 : 14
-        return self.background(
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color.black.opacity(0.55))
-        )
+        return self.background(playerControlBackground(shape: RoundedRectangle(cornerRadius: cornerRadius)))
     }
 
-    /// Dark semi-transparent circular background for the center play button.
     func applyGlassButtonBackground() -> some View {
-        self.background(
-            Circle()
-                .fill(Color.black.opacity(0.55))
-        )
+        self.background(playerControlBackground(shape: Circle()))
     }
 }
 
