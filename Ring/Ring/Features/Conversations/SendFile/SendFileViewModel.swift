@@ -127,6 +127,12 @@ class SendFileViewModel: Stateable, ViewModel {
         self.accountService = injectionBag.accountService
         self.fileTransferService = injectionBag.dataTransferService
         self.injectionBag = injectionBag
+        // audioOnly is set after init by the caller, so video service
+        // setup is deferred to setup(audioOnly:)
+    }
+
+    /// Must be called after setting conversation and audioOnly.
+    func setup() {
         if !audioOnly {
             videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
             videoService.startMediumCamera()
@@ -197,12 +203,10 @@ class SendFileViewModel: Stateable, ViewModel {
     }()
 
     func sendFile() {
-        guard let fileUrl = URL(string: fileName) else {
-            return
-        }
+        guard !fileName.isEmpty else { return }
+        let name = URL(fileURLWithPath: fileName).lastPathComponent
         player?.closePlayer()
         self.player = nil
-        let name = fileUrl.lastPathComponent
         self.fileTransferService.sendFile(conversation: self.conversation, filePath: self.fileName, displayName: name, localIdentifier: nil)
         self.videoService.videRecordingFinished()
         self.recordingState.accept(.sent)
