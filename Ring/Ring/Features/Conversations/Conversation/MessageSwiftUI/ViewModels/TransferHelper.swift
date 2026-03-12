@@ -46,13 +46,8 @@ class TransferHelper {
     func setPlayer(messageID: String, player: PlayerViewModel) { players[messageID] = player }
 
     func closeAllPlayers() {
-        let queue = DispatchQueue.global(qos: .default)
-        queue.sync {
-            self.players.values.forEach { (player) in
-                player.closePlayer()
-            }
-            self.players.removeAll()
-        }
+        players.values.forEach { $0.closePlayer() }
+        players.removeAll()
     }
 
     init (injectionBag: InjectionBag) {

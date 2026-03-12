@@ -91,6 +91,15 @@ extension String {
         return String(self.prefix(1))
     }
 
+    static func durationFormatted(seconds: Int) -> String {
+        let sec = seconds % 60
+        let min = (seconds / 60) % 60
+        let hours = seconds / 3600
+        return hours > 0
+            ? String(format: "%02d:%02d:%02d", hours, min, sec)
+            : String(format: "%02d:%02d", min, sec)
+    }
+
     func convertToSeconds() -> Int64 {
         let hourMinSec: [String] = self.components(separatedBy: ":")
         switch hourMinSec.count {

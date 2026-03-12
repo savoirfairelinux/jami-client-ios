@@ -422,6 +422,8 @@
 		26BCBBD52A965EFC0001EE38 /* PictureInPictureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BCBBD42A965EFC0001EE38 /* PictureInPictureManager.swift */; };
 		26C4D07E2C62730100B1218C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C4D07D2C62730100B1218C /* ProfileView.swift */; };
 		26C6A2602927EC4E007786B8 /* SwarmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */; };
+		26CCEE372F6346CF007856A2 /* MediaRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CCEE362F6346CF007856A2 /* MediaRecordView.swift */; };
+		26CCEE392F644C8E007856A2 /* MediaViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CCEE382F644C8E007856A2 /* MediaViewHelpers.swift */; };
 		26D08AB9269628F400E37574 /* RequestsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08AB8269628F400E37574 /* RequestsService.swift */; };
 		26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */; };
 		26D08ABE2696296300E37574 /* RequestsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABD2696296300E37574 /* RequestsAdapter.mm */; };
@@ -525,9 +527,7 @@
 		3DAAC4732DDD1AC500D94B71 /* Adapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAC46E2DDD1AC500D94B71 /* Adapter.mm */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A671236CBC7A00747177 /* ContactPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A670236CBC7A00747177 /* ContactPickerViewModel.swift */; };
-		446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 446FAF182373424700519C4F /* SendFileViewController.storyboard */; };
-		446FAF1B2373425E00519C4F /* SendFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446FAF1A2373425E00519C4F /* SendFileViewController.swift */; };
-		446FAF1D2373427100519C4F /* SendFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446FAF1C2373427100519C4F /* SendFileViewModel.swift */; };
+		446FAF1D2373427100519C4F /* MediaRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446FAF1C2373427100519C4F /* MediaRecordViewModel.swift */; };
 		449E736428D9F69E00CBF564 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DA1F0D915100D36361 /* Localizable.strings */; };
 		449E736728D9F86A00CBF564 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07E11F0D924700D36361 /* Strings.swift */; };
 		44DFB3A8288704900023878C /* Differentiator.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB391288704690023878C /* Differentiator.xcframework */; };
@@ -1082,6 +1082,8 @@
 		26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfo.swift; sourceTree = "<group>"; };
 		26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationPrefixHeader.pch; sourceTree = "<group>"; };
 		26CA4C562AB23A9200AEF8F5 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		26CCEE362F6346CF007856A2 /* MediaRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRecordView.swift; sourceTree = "<group>"; };
+		26CCEE382F644C8E007856A2 /* MediaViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewHelpers.swift; sourceTree = "<group>"; };
 		26D08AB8269628F400E37574 /* RequestsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsService.swift; sourceTree = "<group>"; };
 		26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsAdapterDelegate.swift; sourceTree = "<group>"; };
 		26D08ABC2696296300E37574 /* RequestsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestsAdapter.h; sourceTree = "<group>"; };
@@ -1668,9 +1670,7 @@
 		3DD777512E046A3000023295 /* jamiShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = jamiShareExtension.entitlements; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A670236CBC7A00747177 /* ContactPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerViewModel.swift; sourceTree = "<group>"; };
-		446FAF182373424700519C4F /* SendFileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SendFileViewController.storyboard; sourceTree = "<group>"; };
-		446FAF1A2373425E00519C4F /* SendFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFileViewController.swift; sourceTree = "<group>"; };
-		446FAF1C2373427100519C4F /* SendFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFileViewModel.swift; sourceTree = "<group>"; };
+		446FAF1C2373427100519C4F /* MediaRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRecordViewModel.swift; sourceTree = "<group>"; };
 		44DFB38A2887044A0023878C /* PKHUD.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PKHUD.xcframework; path = Carthage/Build/PKHUD.xcframework; sourceTree = "<group>"; };
 		44DFB38B2887044E0023878C /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
 		44DFB38C288704530023878C /* SwiftyBeaver.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftyBeaver.xcframework; path = Carthage/Build/SwiftyBeaver.xcframework; sourceTree = "<group>"; };
@@ -3086,6 +3086,7 @@
 				0E5806F223BE42EC007D1F5D /* PlayerView.swift */,
 				0E5806F423BE4307007D1F5D /* PlayerViewModel.swift */,
 				268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */,
+				26CCEE382F644C8E007856A2 /* MediaViewHelpers.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3155,7 +3156,7 @@
 				26EC6EF32DE0E7B9000BA551 /* ActiveCalls */,
 				26074FD524F7FF5B00374570 /* Preview */,
 				0E5806F123BE42C8007D1F5D /* views */,
-				446FAF172373421500519C4F /* SendFile */,
+				446FAF172373421500519C4F /* MediaRecord */,
 				1A2D18AE1F29153F00B2C785 /* Conversation */,
 				1A2D18AD1F29151E00B2C785 /* Smartlist */,
 				2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */,
@@ -3697,14 +3698,13 @@
 			path = Conference;
 			sourceTree = "<group>";
 		};
-		446FAF172373421500519C4F /* SendFile */ = {
+		446FAF172373421500519C4F /* MediaRecord */ = {
 			isa = PBXGroup;
 			children = (
-				446FAF182373424700519C4F /* SendFileViewController.storyboard */,
-				446FAF1A2373425E00519C4F /* SendFileViewController.swift */,
-				446FAF1C2373427100519C4F /* SendFileViewModel.swift */,
+				446FAF1C2373427100519C4F /* MediaRecordViewModel.swift */,
+				26CCEE362F6346CF007856A2 /* MediaRecordView.swift */,
 			);
-			path = SendFile;
+			path = MediaRecord;
 			sourceTree = "<group>";
 		};
 		563AEC731EA6627F003A5641 /* NameRegistration */ = {
@@ -4054,7 +4054,6 @@
 				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
 				1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */,
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
-				446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */,
 				26454FB92B7FDCE400CFF06C /* AboutViewController.storyboard in Resources */,
 				0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */,
 				BB0AB9932A8FC4340033061F /* Colors.xcassets in Resources */,
@@ -4165,7 +4164,6 @@
 				2637E5662DDE662200ACCF91 /* Constants.swift in Sources */,
 				26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */,
 				269DA09D28E23F57007D51D6 /* MessagesListView.swift in Sources */,
-				446FAF1B2373425E00519C4F /* SendFileViewController.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				26E0731C2A918F7A006B6F03 /* SwiftUIViews.swift in Sources */,
 				264EA8862977089C00B6FB6F /* LogViewController.swift in Sources */,
@@ -4277,6 +4275,7 @@
 				1ABE07E21F0D924700D36361 /* Strings.swift in Sources */,
 				265807202B0FBE2900CDE196 /* PreferencesManager.swift in Sources */,
 				1DE93595291B119900E426CF /* SwarmCreationViewController.swift in Sources */,
+				26CCEE392F644C8E007856A2 /* MediaViewHelpers.swift in Sources */,
 				BBD3D751297B4CA00098DB02 /* SwarmInfoView.swift in Sources */,
 				260AE64329C8F58800D66D5E /* Data+Helpers.swift in Sources */,
 				56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */,
@@ -4340,7 +4339,7 @@
 				268C88012C1E6E7900593D7C /* AccountSettingsViews.swift in Sources */,
 				2662FC7B246B216B00FA7782 /* JamiSearchViewModel.swift in Sources */,
 				263F61762B45BBA100240AEE /* ReactionsContainerModel.swift in Sources */,
-				446FAF1D2373427100519C4F /* SendFileViewModel.swift in Sources */,
+				446FAF1D2373427100519C4F /* MediaRecordViewModel.swift in Sources */,
 				260C73F129196B66005C513F /* MessageReplyTargetVM.swift in Sources */,
 				268C87F82C1CCB4700593D7C /* LinkedDevicesView.swift in Sources */,
 				2673D62E252624AB000C56CB /* ConferenceMenuItemsManager.swift in Sources */,
@@ -4382,6 +4381,7 @@
 				1A2D18C41F29180700B2C785 /* ConfigKeyModel.swift in Sources */,
 				62B60AFB2048A437001BEACF /* DataTransferAdapterDelegate.swift in Sources */,
 				1DE93593291B119900E426CF /* SwarmCreationUI.swift in Sources */,
+				26CCEE372F6346CF007856A2 /* MediaRecordView.swift in Sources */,
 				2657CBA72B858CF20078D6B1 /* AccessibilityIdentifiers.swift in Sources */,
 				62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */,
 				627F11F120348FBF006560B5 /* AvatarView.swift in Sources */,

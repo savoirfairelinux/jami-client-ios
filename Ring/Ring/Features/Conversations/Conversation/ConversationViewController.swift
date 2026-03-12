@@ -573,7 +573,8 @@ extension ConversationViewController {
     }
 
     func presentPlayer(message: MessageContentVM) {
-        viewModel.openFullScreenPreview(viewModel: message.player, image: nil, message: message)
+        guard let player = message.player, player.hasVideo.value else { return }
+        viewModel.openFullScreenPreview(viewModel: player, image: nil, message: message)
     }
 
     func openDocument(url: URL) {

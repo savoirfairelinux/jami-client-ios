@@ -434,9 +434,10 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     private func fileTransferMenuItems() -> [ContextualMenuItem] {
+        let isAudioOnly = player?.hasVideo.value == false
         var items: [ContextualMenuItem]
         if url != nil {
-            items = [.reply, .save, .forward, .preview, .share]
+            items = isAudioOnly ? [.reply, .save, .forward, .share] : [.reply, .save, .forward, .preview, .share]
         } else {
             items = [.reply, .forward, .preview, .share]
         }
@@ -556,6 +557,10 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
                 self.playerHeight = height
             }
         }
+    }
+
+    func playerDidBecomeReady() {
+        updateMenuitems()
     }
 
     func updatePlayer(player: PlayerViewModel?) {
