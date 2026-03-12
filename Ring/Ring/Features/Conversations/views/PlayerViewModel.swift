@@ -66,7 +66,6 @@ class PlayerViewModel {
     private var state: PlayerState = .idle
     private var currentTime: Int64 = 0
     private var endDetectionCount: Int = 0
-    private let endThreshold: Float = 0.95
 
     // MARK: - Init
 
@@ -214,7 +213,11 @@ class PlayerViewModel {
             transition(to: .playing)
         case .playing:
             transition(to: .ready)
-        case .idle, .extractingFirstFrame, .seeking:
+        case .idle:
+            // Daemon player was closed (e.g. before a call) but the VM still
+            // holds firstFrame for the preview. Reinitialize transparently.
+            reinitialize()
+        case .extractingFirstFrame, .seeking:
             break
         }
     }
@@ -247,7 +250,50 @@ class PlayerViewModel {
 
     func closePlayer() {
         transition(to: .idle)
-        videoService.closePlayer(playerId: playerId)
+        let idToClose = playerId
+        playerId = ""
+        playBackDisposeBag = DisposeBag()
+        DispatchQueue.global(qos: .utility).async { [weak videoService] in
+            videoService?.closePlayer(playerId: idToClose)
+        }
+    }
+
+    // MARK: - Private helpers
+
+    /// Recreate the daemon player after it was closed externally (e.g. before a call).
+    /// firstFrame is already available so we skip extraction and go straight to playing.
+    private func reinitialize() {
+        let fname = "file://" + filePath
+        playerId = videoService.createPlayer(path: fname)
+        playBackDisposeBag = DisposeBag()
+
+        // Subscribe to continuous frames for this new playerId.
+        incomingFrame
+            .filter { [weak self] render in render.sinkId == self?.playerId }
+            .subscribe(onNext: { [weak self] renderer in
+                self?.playBackFrame.onNext(renderer.sampleBuffer)
+            })
+            .disposed(by: playBackDisposeBag)
+
+        // Wait for FileOpened, then start playing immediately.
+        videoService.playerInfo
+            .asObservable()
+            .filter { [weak self] player in
+                self?.playerId.contains(player.playerId) ?? false
+            }
+            .take(1)
+            .subscribe(onNext: { [weak self] player in
+                guard let self = self else { return }
+                guard let duration = Float(player.duration), duration > 0 else {
+                    DispatchQueue.main.async { self.videoService.closePlayer(playerId: self.playerId) }
+                    return
+                }
+                self.playerDuration.accept(duration)
+                self.hasVideo.accept(player.hasVideo)
+                self.videoService.mutePlayerAudio(playerId: self.playerId, mute: self.audioMuted.value)
+                self.transition(to: .playing)
+            })
+            .disposed(by: playBackDisposeBag)
     }
 
     private func pausePlayback() {
@@ -290,11 +336,16 @@ class PlayerViewModel {
         let progress = Float(time) / playerDuration.value
         playerPosition.onNext(progress)
 
-        let previousProgress = Float(currentTime) / playerDuration.value
+        // Detect end: daemon resets position to 0 after playback finishes.
+        // Seeking is always paused via userStartSeeking(), so time==0 with a
+        // non-zero previous position can only mean the file ended.
+        if time == 0 && currentTime > 0 {
+            currentTime = 0
+            transition(to: .finished)
+            return
+        }
 
-        if time < currentTime && previousProgress > endThreshold {
-            endDetectionCount += 1
-        } else if progress >= 0.999 {
+        if progress >= 0.999 {
             endDetectionCount += 1
         } else {
             endDetectionCount = 0
