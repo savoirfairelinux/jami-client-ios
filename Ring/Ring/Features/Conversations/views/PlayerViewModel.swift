@@ -219,7 +219,11 @@ class PlayerViewModel {
             transition(to: .playing)
         case .playing:
             transition(to: .ready)
-        case .idle, .extractingFirstFrame, .seeking:
+        case .idle:
+            // Daemon player was closed (e.g. before a call) but the VM still
+            // holds firstFrame for the preview. Reinitialize transparently.
+            reinitialize()
+        case .extractingFirstFrame, .seeking:
             break
         }
     }
@@ -252,10 +256,52 @@ class PlayerViewModel {
 
     func closePlayer() {
         transition(to: .idle)
-        videoService.closePlayer(playerId: playerId)
+        let idToClose = playerId
+        playerId = ""
+        playBackDisposeBag = DisposeBag()
+        DispatchQueue.global(qos: .utility).async { [weak videoService] in
+            videoService?.closePlayer(playerId: idToClose)
+        }
     }
 
     // MARK: - Private helpers
+
+    /// Recreate the daemon player after it was closed externally (e.g. before a call).
+    /// firstFrame is already available so we skip extraction and go straight to playing.
+    private func reinitialize() {
+        let fname = "file://" + filePath
+        playerId = videoService.createPlayer(path: fname)
+        playBackDisposeBag = DisposeBag()
+
+        // Subscribe to continuous frames for this new playerId.
+        incomingFrame
+            .filter { [weak self] render in render.sinkId == self?.playerId }
+            .subscribe(onNext: { [weak self] renderer in
+                self?.lastRotation = renderer.rotation
+                self?.playBackFrame.onNext(renderer.sampleBuffer)
+            })
+            .disposed(by: playBackDisposeBag)
+
+        // Wait for FileOpened, then start playing immediately.
+        videoService.playerInfo
+            .asObservable()
+            .filter { [weak self] player in
+                self?.playerId.contains(player.playerId) ?? false
+            }
+            .take(1)
+            .subscribe(onNext: { [weak self] player in
+                guard let self = self else { return }
+                guard let duration = Float(player.duration), duration > 0 else {
+                    DispatchQueue.main.async { self.videoService.closePlayer(playerId: self.playerId) }
+                    return
+                }
+                self.playerDuration.accept(duration)
+                self.hasVideo.accept(player.hasVideo)
+                self.videoService.mutePlayerAudio(playerId: self.playerId, mute: self.audioMuted.value)
+                self.transition(to: .playing)
+            })
+            .disposed(by: playBackDisposeBag)
+    }
 
     /// Pause the daemon player directly, without going through the state machine.
     /// Used during first-frame extraction to pause after receiving the frame.
