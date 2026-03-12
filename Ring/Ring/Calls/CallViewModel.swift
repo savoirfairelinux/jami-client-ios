@@ -132,7 +132,7 @@ class CallViewModel: Stateable, ViewModel {
                 if let startTime = self?.call?.dateReceived {
                     time = Int(Date().timeIntervalSince1970 - startTime.timeIntervalSince1970)
                 }
-                return CallViewModel.formattedDurationFrom(interval: time)
+                return String.durationFormatted(seconds: time)
             })
             .share()
         return currentCall
@@ -211,18 +211,6 @@ class CallViewModel: Stateable, ViewModel {
                 self.observeConferenceEvents()
             })
             .disposed(by: self.disposeBag)
-    }
-
-    static func formattedDurationFrom(interval: Int) -> String {
-        let seconds = interval % 60
-        let minutes = (interval / 60) % 60
-        let hours = (interval / 3600)
-        switch hours {
-        case 0:
-            return String(format: "%02d:%02d", minutes, seconds)
-        default:
-            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-        }
     }
 
     func isBoothMode() -> Bool {
