@@ -29,21 +29,6 @@ extension Date {
         return dateFormatter.string(from: self)
     }
 
-    static func convertSecondsToTimeString(seconds: Double) -> String {
-        var string = ""
-        var reminderSeconds = seconds
-        let hours = Int(seconds / 3600)
-        if hours > 0 {
-            reminderSeconds = seconds.truncatingRemainder(dividingBy: 3600)
-            string += String(format: "%02d", hours) + ":"
-
-        }
-        let min = Int(reminderSeconds / 60)
-        let sec = reminderSeconds.truncatingRemainder(dividingBy: 60)
-        string += String(format: "%02d:%02d", min, Int(sec))
-        return string
-    }
-
     func conversationTimestamp() -> String {
         var dateFormatter: DateFormatter = {
             let formatter = DateFormatter()

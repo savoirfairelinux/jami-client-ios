@@ -44,7 +44,7 @@ enum GeneratedMessage: Int {
         }
     }
     func toMessage(with duration: Int) -> String {
-        let time = Date.convertSecondsToTimeString(seconds: Double(duration))
+        let time = String.durationFormatted(seconds: duration)
         switch self {
         case .contactAdded:
             return L10n.GeneratedMessage.contactAdded

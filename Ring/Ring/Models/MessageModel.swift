@@ -281,7 +281,7 @@ public class MessageModel {
                     self.content = self.incoming ? L10n.Global.incomingCall : L10n.GeneratedMessage.outgoingCall
                 } else {
                     let durationSeconds = durationDouble * 0.001
-                    let time = Date.convertSecondsToTimeString(seconds: durationSeconds)
+                    let time = String.durationFormatted(seconds: Int(durationSeconds))
                     self.content = self.incoming ? L10n.Global.incomingCall + " - " + time : L10n.GeneratedMessage.outgoingCall + " - " + time
                 }
             } else {
