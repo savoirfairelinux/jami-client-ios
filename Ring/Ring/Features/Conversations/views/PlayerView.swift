@@ -369,6 +369,7 @@ struct PlayerView: View {
                 .frame(width: 72, height: 72)
         }
         .applyGlassButtonBackground()
+        .buttonStyle(ScaleButtonStyle())
     }
 
     // MARK: - Full Screen Bottom Bar
@@ -376,35 +377,29 @@ struct PlayerView: View {
     @ViewBuilder
     private var fullScreenBottomBar: some View {
         HStack(spacing: 12) {
-            PlayerSlider(
-                value: Binding(
-                    get: { coordinator.progress },
-                    set: { coordinator.progress = $0 }
-                ),
-                trackColor: .white,
-                thumbSize: 14,
-                playerCoordinator: coordinator,
-                onEditingChanged: { editing in
-                    if editing {
-                        coordinator.cancelAutoHide()
-                        coordinator.isSeeking = true
-                        viewModel.userStartSeeking()
-                        viewModel.seekTimeVariable.accept(coordinator.progress)
-                    } else {
-                        coordinator.isSeeking = false
-                        viewModel.seekTimeVariable.accept(coordinator.progress)
-                        viewModel.userStopSeeking()
-                        coordinator.scheduleAutoHide()
-                    }
+            MediaSeekSlider(
+                onRegister: { sink in coordinator.sliderUpdate = sink },
+                onSeekStart: {
+                    coordinator.cancelAutoHide()
+                    coordinator.isSeeking = true
+                    viewModel.userStartSeeking()
+                    viewModel.seekTimeVariable.accept(coordinator.progress)
                 },
-                onValueChanged: { newValue in
+                onSeekChange: { newValue in
+                    coordinator.progress = newValue
                     if coordinator.isSeeking {
                         viewModel.seekTimeVariable.accept(newValue)
                     }
+                },
+                onSeekEnd: {
+                    coordinator.isSeeking = false
+                    viewModel.seekTimeVariable.accept(coordinator.progress)
+                    viewModel.userStopSeeking()
+                    coordinator.scheduleAutoHide()
                 }
             )
 
-            Text(durationString(microsec: coordinator.duration))
+            Text(coordinator.duration.durationString)
                 .font(.system(.caption, design: .monospaced))
                 .foregroundColor(.white.opacity(0.85))
 
@@ -454,13 +449,14 @@ struct PlayerView: View {
                     .frame(width: 52, height: 52)
             }
             .applyGlassButtonBackground()
+            .buttonStyle(ScaleButtonStyle())
 
             // Bottom controls: duration + mute + slider
             VStack(spacing: 2) {
                 Spacer()
 
                 HStack(alignment: .center) {
-                    Text(durationString(microsec: coordinator.duration))
+                    Text(coordinator.duration.durationString)
                         .font(.system(.caption, design: .monospaced))
                         .foregroundColor(.white)
 
@@ -476,29 +472,23 @@ struct PlayerView: View {
                     }
                 }
 
-                PlayerSlider(
-                    value: Binding(
-                        get: { coordinator.progress },
-                        set: { coordinator.progress = $0 }
-                    ),
-                    trackColor: .white,
-                    thumbSize: 14,
-                    playerCoordinator: coordinator,
-                    onEditingChanged: { editing in
-                        if editing {
-                            coordinator.isSeeking = true
-                            viewModel.userStartSeeking()
-                            viewModel.seekTimeVariable.accept(coordinator.progress)
-                        } else {
-                            coordinator.isSeeking = false
-                            viewModel.seekTimeVariable.accept(coordinator.progress)
-                            viewModel.userStopSeeking()
-                        }
+                MediaSeekSlider(
+                    onRegister: { sink in coordinator.sliderUpdate = sink },
+                    onSeekStart: {
+                        coordinator.isSeeking = true
+                        viewModel.userStartSeeking()
+                        viewModel.seekTimeVariable.accept(coordinator.progress)
                     },
-                    onValueChanged: { newValue in
+                    onSeekChange: { newValue in
+                        coordinator.progress = newValue
                         if coordinator.isSeeking {
                             viewModel.seekTimeVariable.accept(newValue)
                         }
+                    },
+                    onSeekEnd: {
+                        coordinator.isSeeking = false
+                        viewModel.seekTimeVariable.accept(coordinator.progress)
+                        viewModel.userStopSeeking()
                     }
                 )
                 .frame(height: 24)
@@ -508,19 +498,6 @@ struct PlayerView: View {
         }
     }
 
-    // MARK: - Helpers
-
-    private func durationString(microsec: Float) -> String {
-        if microsec == 0 { return "" }
-        let durationInSec = Int(microsec / 1_000_000)
-        let seconds = durationInSec % 60
-        let minutes = (durationInSec / 60) % 60
-        let hours = durationInSec / 3600
-        if hours > 0 {
-            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-        }
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
 }
 
 // MARK: - View Helpers
@@ -543,128 +520,14 @@ private extension View {
 // MARK: - Controls Background Helpers
 
 private extension View {
-    /// Dark semi-transparent rounded background for the controls bar.
     func applyControlsBarBackground(isFullScreen: Bool) -> some View {
         let cornerRadius: CGFloat = isFullScreen ? 20 : 14
-        return self.background(
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color.black.opacity(0.55))
-        )
+        return glassRoundedBackground(cornerRadius: cornerRadius)
     }
 
-    /// Dark semi-transparent circular background for the center play button.
     func applyGlassButtonBackground() -> some View {
-        self.background(
-            Circle()
-                .fill(Color.black.opacity(0.55))
-        )
+        glassCircleBackground()
     }
 }
 
-// MARK: - Custom Slider
 
-/// UISlider wrapper used instead of SwiftUI Slider because the player updates
-/// progress ~10x/sec. A SwiftUI Slider binding would re-evaluate `body` on every
-/// tick; the UISlider is updated directly via `sliderUpdate` closure, bypassing
-/// SwiftUI's render cycle entirely. Also allows a custom circular thumb image.
-struct PlayerSlider: UIViewRepresentable {
-    @Binding var value: Float
-    var trackColor: Color
-    var thumbSize: CGFloat
-    var playerCoordinator: PlayerCoordinator
-    var onEditingChanged: (Bool) -> Void
-    var onValueChanged: (Float) -> Void
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
-    }
-
-    func makeUIView(context: Context) -> UISlider {
-        let slider = UISlider()
-        slider.minimumValue = 0
-        slider.maximumValue = 1
-        slider.value = value
-
-        let coordinator = context.coordinator
-        coordinator.onValueChanged = { [self] newValue in
-            self.value = newValue
-            self.onValueChanged(newValue)
-        }
-        coordinator.onEditingChanged = onEditingChanged
-
-        // Register for direct progress updates, bypassing SwiftUI re-renders
-        playerCoordinator.sliderUpdate = { [weak slider, weak coordinator] newValue in
-            guard let slider = slider, coordinator?.isEditing != true else { return }
-            slider.value = newValue
-        }
-
-        let uiColor = UIColor(trackColor)
-        applyStyle(to: slider, color: uiColor)
-        slider.addTarget(coordinator, action: #selector(Coordinator.valueChanged(_:)), for: .valueChanged)
-        slider.addTarget(coordinator, action: #selector(Coordinator.touchDown(_:)), for: .touchDown)
-        slider.addTarget(coordinator, action: #selector(Coordinator.touchUp(_:)), for: [.touchUpInside, .touchUpOutside])
-        return slider
-    }
-
-    func updateUIView(_ slider: UISlider, context: Context) {
-        let coordinator = context.coordinator
-        coordinator.onValueChanged = { [self] newValue in
-            self.value = newValue
-            self.onValueChanged(newValue)
-        }
-        coordinator.onEditingChanged = onEditingChanged
-
-        if !coordinator.isEditing {
-            slider.value = value
-        }
-
-        let uiColor = UIColor(trackColor)
-        guard coordinator.lastColor != uiColor || coordinator.lastThumbSize != thumbSize else { return }
-        applyStyle(to: slider, color: uiColor)
-        coordinator.lastColor = uiColor
-        coordinator.lastThumbSize = thumbSize
-    }
-
-    private func applyStyle(to slider: UISlider, color: UIColor) {
-        slider.minimumTrackTintColor = color
-        slider.maximumTrackTintColor = color
-        slider.thumbTintColor = color
-        let circleImage = Self.makeCircle(size: thumbSize, color: color)
-        slider.setThumbImage(circleImage, for: .normal)
-        slider.setThumbImage(circleImage, for: .highlighted)
-    }
-
-    private static func makeCircle(size: CGFloat, color: UIColor) -> UIImage? {
-        let cgSize = CGSize(width: size, height: size)
-        UIGraphicsBeginImageContextWithOptions(cgSize, false, 0.0)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        context.setFillColor(color.cgColor)
-        context.addEllipse(in: CGRect(origin: .zero, size: cgSize))
-        context.drawPath(using: .fill)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-
-    class Coordinator: NSObject {
-        var isEditing = false
-        var onValueChanged: ((Float) -> Void)?
-        var onEditingChanged: ((Bool) -> Void)?
-        var lastColor: UIColor?
-        var lastThumbSize: CGFloat = 0
-
-        @objc func valueChanged(_ sender: UISlider) {
-            onValueChanged?(sender.value)
-        }
-
-        @objc func touchDown(_ sender: UISlider) {
-            isEditing = true
-            onEditingChanged?(true)
-        }
-
-        @objc func touchUp(_ sender: UISlider) {
-            isEditing = false
-            onEditingChanged?(false)
-        }
-    }
-}
