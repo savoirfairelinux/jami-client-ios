@@ -125,7 +125,6 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             previewController.type = .image
         }
         parentView.addChildController(previewController, initialFrame: initialFrame)
-        previewController.playerView?.sizeMode = .fullScreen
     }
 
     func openQRCode () {

@@ -123,7 +123,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     @Published var fileProgress: CGFloat = 0
     @Published var transferActions = [TransferAction]()
     @Published var showProgress: Bool = true
-    @Published var playerHeight: CGFloat = 80
+    @Published var playerHeight: CGFloat = 64
     @Published var playerWidth: CGFloat = 250
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
@@ -301,6 +301,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         self.accessibilityLabelValue = message.accessibilityLabelValue
         self.transferStatus = message.transferStatus
         self.preferencesColor = preferencesColor
+        self.playerWidth = maxDimension
         self.updateMessageStyle()
         self.fetchMetadata()
     }
