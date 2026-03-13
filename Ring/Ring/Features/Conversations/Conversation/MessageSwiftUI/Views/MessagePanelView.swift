@@ -82,7 +82,7 @@ struct ReplyViewInMessagePanel: View {
             Spacer()
                 .frame(width: padding)
             if messageToReply.type == .fileTransfer {
-                if let player = messageToReply.player, player.hasVideo.value {
+                if let player = messageToReply.player, player.hasVideoRelay.value {
                     PlayerSwiftUI(model: messageToReply, player: player, onLongGesture: {}, ratio: 0.4, withControls: false, customCornerRadius: 10)
                 } else if let image = messageToReply.finalImage {
                     ImageOrGifView(message: messageToReply, image: image, onLongGesture: {}, minHeight: 20, maxHeight: 50, customCornerRadius: 10)

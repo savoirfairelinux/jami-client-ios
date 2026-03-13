@@ -260,10 +260,6 @@ extension SendFileViewModel {
         self.player?.muteAudio()
     }
 
-    func seekToTime(time: Int) {
-        self.player?.seekToTime(time: time)
-    }
-
     func createPlayer() {
         player = PlayerViewModel(injectionBag: injectionBag, path: fileName)
         player?.createPlayer()
