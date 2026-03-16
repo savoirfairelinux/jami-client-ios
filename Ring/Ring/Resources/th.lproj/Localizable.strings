@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "เลือกติดต่อ";
 
+// Contact Picker
+"contactPicker.calls" = "โทร";
+"contactPicker.contacts" = "ติดต่อ";
+
 // Smartlist
 "smartlist.yesterday" = "เมื่อวาน";
 "smartlist.results" = "ไดเรกทอรีสาธารณะ";

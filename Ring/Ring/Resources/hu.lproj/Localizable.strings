@@ -119,6 +119,10 @@
 "swarm.customize" = "Csoport testreszabása";
 "swarm.selectContacts" = "Kapcsolattartók kijelölése";
 
+// Contact Picker
+"contactPicker.calls" = "Hívások";
+"contactPicker.contacts" = "Kapcsolattartók";
+
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Nyilvános címtár";

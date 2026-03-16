@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Fren inermisen";
 
+// Contact Picker
+"contactPicker.calls" = "Tiɣriwin";
+"contactPicker.contacts" = "Inermisen";
+
 // Smartlist
 "smartlist.yesterday" = "Iḍelli";
 "smartlist.results" = "Akaram azayez";

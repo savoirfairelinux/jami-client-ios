@@ -119,6 +119,10 @@
 "swarm.customize" = "Muokkaa ryhmää";
 "swarm.selectContacts" = "Valitse henkilöt";
 
+// Contact Picker
+"contactPicker.calls" = "Puhelut";
+"contactPicker.contacts" = "Yhteystiedot";
+
 // Smartlist
 "smartlist.yesterday" = "Eilen";
 "smartlist.results" = "Julkinen kansio";

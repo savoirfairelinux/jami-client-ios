@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "تماس لارین سئچیلماسی";
 
+// Contact Picker
+"contactPicker.calls" = "Calls";
+"contactPicker.contacts" = "Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "دونن";
 "smartlist.results" = "عمومی دایرکتوری";

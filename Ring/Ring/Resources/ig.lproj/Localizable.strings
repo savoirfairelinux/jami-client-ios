@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Select contacts";
 
+// Contact Picker
+"contactPicker.calls" = "Ọ na-akpọ";
+"contactPicker.contacts" = "Ndị a na-akpọtụrụ";
+
 // Smartlist
 "smartlist.yesterday" = "N'ụbọchị gara aga";
 "smartlist.results" = "Public directory";

@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Vyberte kontakty";
 
+// Contact Picker
+"contactPicker.calls" = "Hovory";
+"contactPicker.contacts" = "Kontakty";
+
 // Smartlist
 "smartlist.yesterday" = "Včera";
 "smartlist.results" = "Verejný adresár";

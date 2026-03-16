@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Vælg kontakter";
 
+// Contact Picker
+"contactPicker.calls" = "Calls";
+"contactPicker.contacts" = "Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Offentlig mappe";

@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Chagua mawasiliano";
 
+// Contact Picker
+"contactPicker.calls" = "Mawasiliano";
+"contactPicker.contacts" = "Mawasiliano";
+
 // Smartlist
 "smartlist.yesterday" = "Jana";
 "smartlist.results" = "Orodha ya umma";

@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Kişi seç";
 
+// Contact Picker
+"contactPicker.calls" = "Çağrılar";
+"contactPicker.contacts" = "Kişiler";
+
 // Smartlist
 "smartlist.yesterday" = "Dün";
 "smartlist.results" = "Aleni dizin";

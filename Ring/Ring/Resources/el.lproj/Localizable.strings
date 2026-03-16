@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Επιλέξτε επαφές";
 
+// Contact Picker
+"contactPicker.calls" = "Calls";
+"contactPicker.contacts" = "Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Χθες";
 "smartlist.results" = "Δημόσιος κατάλογος";

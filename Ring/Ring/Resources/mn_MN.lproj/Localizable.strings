@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Байрлагуудыг сонго";
 
+// Contact Picker
+"contactPicker.calls" = "Зудлага";
+"contactPicker.contacts" = "Байлцаагч";
+
 // Smartlist
 "smartlist.yesterday" = "Өчигдөр";
 "smartlist.results" = "Нийтийн захиалг";

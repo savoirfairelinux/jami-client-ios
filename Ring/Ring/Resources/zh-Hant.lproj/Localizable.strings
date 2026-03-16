@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "选择联系人";
 
+// Contact Picker
+"contactPicker.calls" = "通话";
+"contactPicker.contacts" = "联系人";
+
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公共目录";

@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Seleccionar contactos";
 
+// Contact Picker
+"contactPicker.calls" = "Calls";
+"contactPicker.contacts" = "Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "En xineru de 2011";
 "smartlist.results" = "El directoriu públicu";

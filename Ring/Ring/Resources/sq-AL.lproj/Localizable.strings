@@ -119,6 +119,10 @@
 "swarm.customize" = "Përshtatni grupin";
 "swarm.selectContacts" = "Përzgjidhni kontake";
 
+// Contact Picker
+"contactPicker.calls" = "Thirrje";
+"contactPicker.contacts" = "Kontakte";
+
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori publike";

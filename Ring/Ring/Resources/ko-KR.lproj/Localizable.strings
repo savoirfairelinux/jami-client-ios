@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "연락처를 선택";
 
+// Contact Picker
+"contactPicker.calls" = "전화";
+"contactPicker.contacts" = "연락처";
+
 // Smartlist
 "smartlist.yesterday" = "어제";
 "smartlist.results" = "공공 디렉토리";

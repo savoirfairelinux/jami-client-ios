@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "পরিচিতি নির্বাচন করুন";
 
+// Contact Picker
+"contactPicker.calls" = "Calls";
+"contactPicker.contacts" = "Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "গতকাল";
 "smartlist.results" = "পাবলিক ডিরেক্টরি";

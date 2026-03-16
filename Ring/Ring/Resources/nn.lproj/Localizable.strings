@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Velg kontakt";
 
+// Contact Picker
+"contactPicker.calls" = "Samtalar";
+"contactPicker.contacts" = "Kontakt";
+
 // Smartlist
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Fellesregister";

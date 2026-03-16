@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Pilih kontak";
 
+// Contact Picker
+"contactPicker.calls" = "Panggilan";
+"contactPicker.contacts" = "Kontak";
+
 // Smartlist
 "smartlist.yesterday" = "Kemarin";
 "smartlist.results" = "Direktori publik";

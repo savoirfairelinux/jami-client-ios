@@ -119,6 +119,10 @@
 "swarm.customize" = "Dostosuj grupę";
 "swarm.selectContacts" = "Wybierz kontakty";
 
+// Contact Picker
+"contactPicker.calls" = "Rozmowy";
+"contactPicker.contacts" = "Kontakty";
+
 // Smartlist
 "smartlist.yesterday" = "Wczoraj";
 "smartlist.results" = "Publiczny katalog";
@@ -243,7 +247,7 @@
 
 // Import from Archive
 "importFromArchive.explanation" = "Importuj konto Jami z lokalnego archiwum.";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Jeśli konto jest chronione hasłem, proszę wypełnić poniższe pole.";
 "importFromArchive.title" = "Importuj z archiwum";
 "importFromArchive.buttonTitle" = "Importuj";
 "importFromArchive.selectArchiveButton" = "Wybierz plik archiwum";
@@ -252,8 +256,8 @@
 "linkToAccountManager.signIn" = "Zaloguj się";
 "linkToAccountManager.title" = "Management server account";
 "linkToAccountManager.accountManagerPlaceholder" = "Zarządzaj URL serwera";
-"linkToAccountManager.accountManagerLabel" = "Enter the management server URL";
-"linkToAccountManager.jamsExplanation" = "Enter the management server URL";
+"linkToAccountManager.accountManagerLabel" = "Wprowadź adres URL serwera zarządzającego.";
+"linkToAccountManager.jamsExplanation" = "Wprowadź adres URL serwera zarządzającego.";
 "linkToAccountManager.enterCredentials" = "Enter the management server credentials";
 
 // Alerts
@@ -468,10 +472,10 @@
 "linkDevice.title" = "Połącz nowe urządzenie";
 "linkDevice.networkError" = "Błąd sieci podczas eksportu konta.";
 "linkDevice.errorWrongPassword" = "Podczas łączenia urządzenia wystąpił błąd uwierzytelniania. Proszę sprawdzić dane logowania i spróbować ponownie.";
-"linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
-"linkDevice.errorTimeout" = "The operation timed out. Please try again.";
+"linkDevice.errorNetwork" = "Podczas łączenia konta wystąpił błąd sieciowy. Sprawdź połączenie i spróbuj ponownie.";
+"linkDevice.errorTimeout" = "Operacja przekroczyła limit czasu. Spróbuj ponownie.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.errorWrongData" = "Wystąpił błąd podczas eksportowania konta. Spróbuj ponownie.";
 "linkDevice.initialInfo" = "Na nowym urządzeniu, uruchom nowe konto.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "Zeskanuj kod QR";

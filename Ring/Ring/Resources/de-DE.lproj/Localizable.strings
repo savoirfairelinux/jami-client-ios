@@ -119,6 +119,10 @@
 "swarm.customize" = "Gruppe anpassen";
 "swarm.selectContacts" = "Kontakte auswählen";
 
+// Contact Picker
+"contactPicker.calls" = "Calls";
+"contactPicker.contacts" = "Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Öffentlich einsehbares Verzeichnis";

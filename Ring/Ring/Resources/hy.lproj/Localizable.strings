@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Ընտրեք կոնտակտները";
 
+// Contact Picker
+"contactPicker.calls" = "Զանգահարություններ";
+"contactPicker.contacts" = "Կոնտակտներ";
+
 // Smartlist
 "smartlist.yesterday" = "Երեկ";
 "smartlist.results" = "Հանրային ցուցակ";

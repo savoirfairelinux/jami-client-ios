@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "పరిచయాలను ఎంచుకోండి";
 
+// Contact Picker
+"contactPicker.calls" = "కాల్స్";
+"contactPicker.contacts" = "పరిచయాలు";
+
 // Smartlist
 "smartlist.yesterday" = "నిన్న";
 "smartlist.results" = "పబ్లిక్ డైరెక్టరీ";

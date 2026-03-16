@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Elexir conctactos";
 
+// Contact Picker
+"contactPicker.calls" = "Chamadas";
+"contactPicker.contacts" = "Contactos";
+
 // Smartlist
 "smartlist.yesterday" = "Onte";
 "smartlist.results" = "Directorio público";

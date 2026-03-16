@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Chọn liên hệ";
 
+// Contact Picker
+"contactPicker.calls" = "Cuộc gọi";
+"contactPicker.contacts" = "Danh bạ";
+
 // Smartlist
 "smartlist.yesterday" = "Hôm qua";
 "smartlist.results" = "Public directory";

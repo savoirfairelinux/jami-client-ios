@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "انتخاب مخاطب";
 
+// Contact Picker
+"contactPicker.calls" = "تماس‌ها";
+"contactPicker.contacts" = "مخاطبان";
+
 // Smartlist
 "smartlist.yesterday" = "دیروز";
 "smartlist.results" = "دایرکتوری عمومی";

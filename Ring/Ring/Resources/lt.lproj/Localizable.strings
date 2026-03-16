@@ -85,9 +85,9 @@
 "swarm.descriptionAlertHeader" = "Taisyti grupės aprašą";
 "swarm.descriptionPlaceholder" = "Enter title";
 "swarm.contactHeader" = "Adresatas";
-"swarm.showContactQRCode" = "Show contact QR code";
+"swarm.showContactQRCode" = "Rodyti adresato QR kodą";
 "swarm.shareContactInfo" = "Bendrinti kontaktinę informaciją";
-"swarm.accessibilityContactQRCode" = "Show contact QR code";
+"swarm.accessibilityContactQRCode" = "Rodyti adresato QR kodą";
 "swarm.accessibilityContactQRCodeHint" = "Opens a screen with contact's QR code";
 "swarm.accessibilityContactShareHint" = "Opens sharing options for contact information";
 "swarm.accessibilityColorPicker" = "Conversation color picker";
@@ -109,7 +109,7 @@
 "swarm.inviteSelectedMembers" = "Invite selected contacts";
 "swarm.inviteMembersSelected" = "Selected";
 "swarm.inviteMembersNotSelected" = "Not selected";
-"swarm.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"swarm.confirmLeaveConversation" = "Ar norite išeiti iš šio pokalbio?";
 "swarm.Leave" = "Išeiti";
 "swarm.newGroup" = "Sukurti naują grupę";
 "swarm.namePlaceholder" = "Grupės pavadinimas";
@@ -118,6 +118,10 @@
 "swarm.changePicture" = "Change group picture";
 "swarm.customize" = "Tinkinti grupę";
 "swarm.selectContacts" = "Select contacts";
+
+// Contact Picker
+"contactPicker.calls" = "Skambučiai";
+"contactPicker.contacts" = "Adresatai";
 
 // Smartlist
 "smartlist.yesterday" = "Vakar";
@@ -175,7 +179,7 @@
 "conversation.typingIndicatorTwoUsers" = "%1@ ir %2@ rašo";
 "conversation.typingIndicatorOtherUsers" = "%1@, %2@ ir dar %3@ rašo";
 "conversation.typingIndicatorOthersUsers" = "%1@, %2@ ir dar %3@ rašo";
-"conversation.lastMessageDeleted" = "(deleted message)";
+"conversation.lastMessageDeleted" = "(ištrinta žinutė)";
 
 // Invitations
 "invitations.noInvitations" = "Pakvietimų nėra";
@@ -216,20 +220,20 @@
 "createAccount.timeoutMessage" = "Vyksta naudotojo vardo registracija. Palaukite…";
 "createAccount.sipConfigure" = "Configure existing SIP account";
 "createAccount.creatingAccount" = "Creating account";
-"createAccount.nameExplanation" = "You can choose a username to help others more easily find and reach you on Jami.";
+"createAccount.nameExplanation" = "Galite pasirinkti naudotojo vardą, kad padėtumėte kitiems lengvai jus rasti ir pasiekti per Jami.";
 "createAccount.newAccount" = "Nauja paskyra";
-"createAccount.encryptionEnabled" = "Password protection enabled";
+"createAccount.encryptionEnabled" = "Apsauga slaptažodžiu įjungta";
 "createAccount.encrypt" = "Password protect";
 "createAccount.customize" = "Tinkinti";
 "createAccount.encryptTitle" = "Password protect account";
 "createAccount.encryptExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be protected with a password.";
 
 // Link To Account form
-"linkToAccount.importAccount" = "Import account";
+"linkToAccount.importAccount" = "Importuoti paskyrą";
 "linkToAccount.showQrCode" = "QR kodas";
-"linkToAccount.showPinCode" = "Authentication code";
+"linkToAccount.showPinCode" = "Tapatybės nustatymo kodas";
 "linkToAccount.actionRequired" = "Action required.\nPlease confirm account on the source device.";
-"linkToAccount.allSet" = "The account was imported successfully.";
+"linkToAccount.allSet" = "Paskyra buvo sėkmingai importuota.";
 "linkToAccount.goToAccounts" = "Go to imported account";
 "linkToAccount.exportInstructions" = "On the source device, initiate the exportation.";
 "linkToAccount.exportInstructionsPath" = "Select Account → Account Settings → Link new device.";
@@ -237,13 +241,13 @@
 "linkToAccount.enterProvidedCode" = "When ready, enter the authentication code.";
 "linkToAccount.accountLockedWithPassword" = "Paskyra yra apsaugota slaptažodžiu. Norėdami tęsti, įveskite paskyros slaptažodį.";
 "linkToAccount.exit" = "Išeiti";
-"linkToAccount.shareMessage" = "Your code is: %@";
+"linkToAccount.shareMessage" = "Jūsų kodas yra: %@";
 "linkToAccount.alertTile" = "Do you want to stop linking the account?";
 "linkToAccount.alertMessage" = "Stopping will cancel the import account operation.";
 
 // Import from Archive
 "importFromArchive.explanation" = "Importuoti Jami paskyrą iš vietinio archyvo failo.";
-"importFromArchive.passwordExplanation" = "If the account is password protected, please fill the following field.";
+"importFromArchive.passwordExplanation" = "Jei paskyra yra apsaugota slaptažodžiu, įrašykite jį į šį lauką.";
 "importFromArchive.title" = "Importuoti iš archyvo";
 "importFromArchive.buttonTitle" = "Importuoti";
 "importFromArchive.selectArchiveButton" = "Pasirinkti archyvo failą";
@@ -271,7 +275,7 @@
 "alerts.dbFailedMessage" = "Prašome užverti programą ir bandyti ją atverti dar kartą";
 "alerts.confirmBlockContact" = "Do you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Do you want to remove this conversation permanently?";
-"alerts.confirmLeaveConversation" = "Do you want to leave this conversation?";
+"alerts.confirmLeaveConversation" = "Ar norite išeiti iš šio pokalbio?";
 "alerts.confirmRemoveOneToOneConversation" = "Do you want to remove this conversation? The existing history will be deleted. A new conversation may be started if you do not have other conversations with this contact.";
 "alerts.confimRemoveContact" = "Do you want to remove this contact? The existing history will be deleted.";
 "alerts.confirmDeleteConversationFromContact" = "Ar norite ištrinti pokalbį su šiuo adresatu?";
@@ -299,7 +303,7 @@
 "actions.deleteAction" = "Ištrinti";
 "actions.backAction" = "Atgal";
 "actions.doneAction" = "Atlikta";
-"actions.goToSettings" = "Go to Settings";
+"actions.goToSettings" = "Eiti į nustatymus";
 "actions.stopLocationSharing" = "Stop sharing";
 
 // Calls
@@ -312,7 +316,7 @@
 "calls.setModerator" = "Set moderator";
 "calls.removeModerator" = "Unset moderator";
 "calls.muteAudio" = "Išjungti mikrofoną";
-"calls.unmuteAudio" = "Unmute microphone";
+"calls.unmuteAudio" = "Įjungti mikrofoną";
 "calls.lowerHand" = "Nuleisti ranką";
 "calls.activeCallLabel" = "A call is in progress. Do you want to join the call? You can also join the call later from the conversation.";
 "calls.activeCallInConversation" = "Prašome skambučio.";
@@ -437,7 +441,7 @@
 "backupAccount.backupButton" = "Backup";
 "backupAccount.documentPickerButton" = "Open backup location";
 "backupAccount.exportSuccess" = "Atsarginė kopija sukurta";
-"backupAccount.errorWrongLocation" = "The selected file path is invalid. Please choose a different location.";
+"backupAccount.errorWrongLocation" = "Pasirinktas failo kelias yra neteisingas. Pasirinkite kitą vietą.";
 "backupAccount.errorAccessDenied" = "Access to the selected location was denied.";
 "backupAccount.errorFailed" = "Eksportuojant paskyrą įvyko klaida.";
 
@@ -471,7 +475,7 @@
 "linkDevice.errorNetwork" = "A network error occurred while linking the account. Please verify your connection and try again.";
 "linkDevice.errorTimeout" = "Pasibaigė operacijai skirtas laikas. Bandykite dar kartą.";
 "linkDevice.errorCode" = "An error occurred while generating the code. Please try again.";
-"linkDevice.errorWrongData" = "An error occurred while exporting the account. Please try again.";
+"linkDevice.errorWrongData" = "Eksportuojant paskyrą įvyko klaida. Bandykite dar kartą.";
 "linkDevice.initialInfo" = "On the new device, initiate a new account.";
 "linkDevice.infoAddAccount" = "Select Add Account → Connect from another device.";
 "linkDevice.infoQRCode" = "When ready, scan the QR code.";
@@ -516,7 +520,7 @@
 "generatedMessage.swarmCreated" = "Conversation created";
 "generatedMessage.invitationReceived" = "%@ was invited to join the conversation.";
 "generatedMessage.invitationAccepted" = "%@ has joined the conversation.";
-"generatedMessage.youJoined" = "You joined the conversation.";
+"generatedMessage.youJoined" = "Jūs prisijungėte prie pokalbio.";
 "generatedMessage.contactBlocked" = "%@ was blocked from the conversation.";
 "generatedMessage.contactUnblocked" = "%@ was unblocked from the conversation.";
 "generatedMessage.outgoingCall" = "Išsiunčiamasis skambutis";
@@ -628,7 +632,7 @@
 "accessibility.calls.default.showDialpad" = "Show dialpad";
 "accessibility.calls.default.raiseHand" = "Pakelti ranką";
 
-"accessibility.calls.alter.toggleAudio" = "Unmute microphone";
+"accessibility.calls.alter.toggleAudio" = "Įjungti mikrofoną";
 "accessibility.calls.alter.toggleVideo" = "Stokkamera";
 "accessibility.calls.alter.pauseCall" = "Pratęsti skambutį";
 "accessibility.calls.alter.endCall" = "Baigti skambutį";
@@ -669,7 +673,7 @@
 "shareExtension.noAccount.title" = "Paskyra nerasta";
 "shareExtension.noAccount.description" = "Norėdami tęsti, sukurkite pagrindinėje programoje paskyrą.";
 "shareExtension.unsupportedType.title" = "Nepalaikomas turinys";
-"shareExtension.unsupportedType.description" = "The sharing of the selected content is currently unsupported.";
+"shareExtension.unsupportedType.description" = "Pasirinkto turinio bendrinimas šiuo metu yra nepalaikomas.";
 "shareExtension.sending" = "Siunčiama…";
 "shareExtension.noSearchResults" = "No conversations match your search";
 "shareExtension.tryDifferentFilter" = "Try a different filter";

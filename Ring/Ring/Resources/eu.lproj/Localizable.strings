@@ -119,6 +119,10 @@
 "swarm.customize" = "Customize group";
 "swarm.selectContacts" = "Kontaktua hautatu";
 
+// Contact Picker
+"contactPicker.calls" = "Deiak";
+"contactPicker.contacts" = "Kontaktuak";
+
 // Smartlist
 "smartlist.yesterday" = "Atzo";
 "smartlist.results" = "Zerrenda publikoa";

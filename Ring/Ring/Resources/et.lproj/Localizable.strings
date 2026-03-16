@@ -119,6 +119,10 @@
 "swarm.customize" = "Kohanda gruppi";
 "swarm.selectContacts" = "Vali kontaktid";
 
+// Contact Picker
+"contactPicker.calls" = "Helistamised";
+"contactPicker.contacts" = "Kontaktid";
+
 // Smartlist
 "smartlist.yesterday" = "Eile";
 "smartlist.results" = "Avalik kataloog";
