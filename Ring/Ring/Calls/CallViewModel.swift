@@ -200,10 +200,10 @@ class CallViewModel: Stateable, ViewModel {
             })
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (event) in
-                guard  let callId: String = event.getEventInput(.callId),
-                       let call = self.callService.call(callID: callId),
-                       let callUUID: String = event.getEventInput(.callId),
-                       callId == callUUID
+                guard let daemonCallId: String = event.getEventInput(.callId),
+                      let call = self.callService.call(callID: daemonCallId),
+                      let eventCallUUID: String = event.getEventInput(.callUUID),
+                      eventCallUUID == callId
                 else { return }
                 self.call = call
                 self.conferenceId = call.callId
