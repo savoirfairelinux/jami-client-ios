@@ -112,7 +112,18 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
     }
     let disposeBag = DisposeBag()
     var videoDisposeBag = DisposeBag()
-    var id: String
+    var id: String {
+        didSet {
+            guard id != oldValue else { return }
+            // The sinkId changed (placeholder UUID → real daemon callId after early answer).
+            // Tear down the old subscription and re-subscribe with the new sinkId so that
+            // incoming video frames are matched correctly.
+            videoService.removeListener(withsinkId: oldValue)
+            subscribed = false
+            videoDisposeBag = DisposeBag()
+            subscribe()
+        }
+    }
 
     let videoService: VideoService
     let injectionBag: InjectionBag
