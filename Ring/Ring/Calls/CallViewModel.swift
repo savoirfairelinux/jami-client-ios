@@ -61,6 +61,7 @@ class CallViewModel: Stateable, ViewModel {
     var isHost: Bool?
     var callFailed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var callStarted: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    let pendingCallResolved = PublishSubject<CallModel>()
     var callCompleted = false
 
     func callURI() -> String? {
@@ -209,6 +210,7 @@ class CallViewModel: Stateable, ViewModel {
                 self.conferenceId = call.callId
                 self.configureVideo()
                 self.observeConferenceEvents()
+                self.pendingCallResolved.onNext(call)
             })
             .disposed(by: self.disposeBag)
     }

@@ -83,7 +83,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased {
                                   currentCall: viewModel.currentCall.share(),
                                   hasVideo: properties.hasVideo,
                                   incoming: properties.incoming,
-                                  callId: properties.callId)
+                                  callId: properties.callId,
+                                  pendingCallResolved: viewModel.pendingCallResolved.asObservable())
     }
 
     private func updateParticipant(uri: String) {
