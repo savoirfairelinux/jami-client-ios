@@ -30,11 +30,14 @@ struct VideoFrameInfo {
 class VideoInputsManager {
 
     var listeners = [String: Int]()
+    // Maps daemon sinkId -> placeholder sinkId so frames are delivered under the placeholder identity
+    var sinkIdAliases = [String: String]()
 
     var frameSubject = PublishSubject<VideoFrameInfo>()
 
     func stop(sinkId: String) {
-        let frameInfo = VideoFrameInfo(sampleBuffer: nil, rotation: 0, sinkId: sinkId)
+        let effectiveSinkId = sinkIdAliases[sinkId] ?? sinkId
+        let frameInfo = VideoFrameInfo(sampleBuffer: nil, rotation: 0, sinkId: effectiveSinkId)
         frameSubject.onNext(frameInfo)
     }
 
@@ -65,7 +68,8 @@ class VideoInputsManager {
             return
         }
         self.setSampleBufferAttachments(sampleBuffer)
-        let frameInfo = VideoFrameInfo(sampleBuffer: sampleBuffer, rotation: rotation, sinkId: sinkId)
+        let effectiveSinkId = sinkIdAliases[sinkId] ?? sinkId
+        let frameInfo = VideoFrameInfo(sampleBuffer: sampleBuffer, rotation: rotation, sinkId: effectiveSinkId)
         frameSubject.onNext(frameInfo)
     }
 

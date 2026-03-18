@@ -606,6 +606,14 @@ extension VideoService: VideoAdapterDelegate {
         return self.videoInputManager.hasListener(sinkId: sinkId)
     }
 
+    func registerSinkIdAlias(daemonSinkId: String, aliasSinkId: String) {
+        self.videoInputManager.sinkIdAliases[daemonSinkId] = aliasSinkId
+    }
+
+    func removeSinkIdAlias(daemonSinkId: String) {
+        self.videoInputManager.sinkIdAliases.removeValue(forKey: daemonSinkId)
+    }
+
     func removeListener(withsinkId sinkId: String) {
         self.videoInputManager.removeListener(sinkId: sinkId)
         let hasListeners = self.videoInputManager.hasListener(sinkId: sinkId)

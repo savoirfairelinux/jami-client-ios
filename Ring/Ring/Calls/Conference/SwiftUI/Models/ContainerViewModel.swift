@@ -43,6 +43,7 @@ class ContainerViewModel: ObservableObject {
     var callId: String
     let currentCall: Observable<CallModel>
     var pending: [PendingConferenceCall] = []
+    private var registeredAliasSinkId: String?
 
     let disposeBag = DisposeBag()
     var videoRunningBag = DisposeBag()
@@ -69,7 +70,7 @@ class ContainerViewModel: ObservableObject {
         return self.conferenceStateSubject.asObservable()
     }()
 
-    init(localId: String, delegate: PictureInPictureManagerDelegate, injectionBag: InjectionBag, currentCall: Observable<CallModel>, hasVideo: Bool, incoming: Bool, callId: String) {
+    init(localId: String, delegate: PictureInPictureManagerDelegate, injectionBag: InjectionBag, currentCall: Observable<CallModel>, hasVideo: Bool, incoming: Bool, callId: String, pendingCallResolved: Observable<CallModel>? = nil) {
         self.hasLocalVideo = hasVideo
         self.hasIncomingVideo = hasVideo
         self.localId = localId
@@ -149,6 +150,7 @@ class ContainerViewModel: ObservableObject {
 
         self.observeRaiseHand()
         self.observeConferenceActions()
+        self.subscribePendingCallResolved(pendingCallResolved)
     }
 
     private func handlePendingCall(_ call: CallModel) {
@@ -398,7 +400,32 @@ class ContainerViewModel: ObservableObject {
         }
     }
 
+    private func subscribePendingCallResolved(_ pendingCallResolved: Observable<CallModel>?) {
+        guard let pendingCallResolved = pendingCallResolved else { return }
+        let placeholderCallId = self.callId
+        pendingCallResolved
+            .take(1)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] call in
+                guard let self = self else { return }
+                let daemonSinkId = call.callId
+                self.callId = daemonSinkId
+                self.videoService.registerSinkIdAlias(
+                    daemonSinkId: daemonSinkId,
+                    aliasSinkId: placeholderCallId
+                )
+                self.videoService.addListener(withsinkId: daemonSinkId)
+                self.registeredAliasSinkId = daemonSinkId
+            })
+            .disposed(by: self.disposeBag)
+    }
+
     func callStopped() {
+        if let aliasSinkId = self.registeredAliasSinkId {
+            self.videoService.removeSinkIdAlias(daemonSinkId: aliasSinkId)
+            self.videoService.removeListener(withsinkId: aliasSinkId)
+            self.registeredAliasSinkId = nil
+        }
         self.pipManager?.callStopped()
         self.pipManager = nil
     }

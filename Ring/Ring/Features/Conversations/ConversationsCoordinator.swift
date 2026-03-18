@@ -26,6 +26,7 @@ import SwiftUI
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
 class ConversationsCoordinator: RootCoordinator, StateableResponsive, ConversationNavigation {
     var presentingVC = [String: Bool]()
+    var pendingCallUUIDs = Set<String>()
 
     var rootViewController: UIViewController {
         return self.navigationController
@@ -141,6 +142,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
     }
 
     func presentPendingCall(callUUID: String, peerId: String, accountId: String) {
+        pendingCallUUIDs.insert(callUUID)
         let controller = CallViewController.instantiate(with: self.injectionBag)
         controller.viewModel.subscribePendingCall(callId: callUUID)
         if let call = self.callService.createPlaceholderCallModel(
@@ -437,11 +439,14 @@ extension ConversationsCoordinator {
             .subscribe(onNext: { [weak self, weak call] serviceEvent in
                 guard let self = self,
                       let call = call else { return }
+                let uuidString = call.callUUID.uuidString
+                let hasPendingVC = self.pendingCallUUIDs.remove(uuidString) != nil
                 if serviceEvent.eventType == ServiceEventType.callProviderAcceptCall {
+                    // A pending call VC already handles this call
+                    if hasPendingVC { return }
                     // check if we have presented call screen for uuid
                     if let topController = self.getTopController() as? CallViewController,
                        topController.viewModel.call?.callUUID == call.callUUID {
-                        // Call screen for this UUID is already presented
                         return
                     }
                     self.presentCallScreen(call: call)
