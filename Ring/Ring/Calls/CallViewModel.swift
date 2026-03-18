@@ -61,6 +61,7 @@ class CallViewModel: Stateable, ViewModel {
     var isHost: Bool?
     var callFailed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var callStarted: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    let pendingCallResolved = PublishSubject<CallModel>()
     var callCompleted = false
 
     func callURI() -> String? {
@@ -199,16 +200,18 @@ class CallViewModel: Stateable, ViewModel {
                 return event.eventType == .pendingCallUpdated
             })
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { (event) in
-                guard  let callId: String = event.getEventInput(.callId),
-                       let call = self.callService.call(callID: callId),
-                       let callUUID: String = event.getEventInput(.callId),
-                       callId == callUUID
+            .subscribe(onNext: { [weak self] (event) in
+                guard let self = self,
+                      let eventCallUUID: String = event.getEventInput(.callUUID),
+                      eventCallUUID == callId,
+                      let daemonCallId: String = event.getEventInput(.callId),
+                      let call = self.callService.call(callID: daemonCallId)
                 else { return }
                 self.call = call
                 self.conferenceId = call.callId
                 self.configureVideo()
                 self.observeConferenceEvents()
+                self.pendingCallResolved.onNext(call)
             })
             .disposed(by: self.disposeBag)
     }

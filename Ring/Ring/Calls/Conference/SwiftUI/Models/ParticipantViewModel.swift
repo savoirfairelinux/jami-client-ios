@@ -189,7 +189,6 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
     var videoRunning = BehaviorRelay<Bool>(value: false)
 
     func subscribe() {
-
         self.videoService.addListener(withsinkId: self.id)
 
         // For swarm calls, sinkId might be in a different format, try to extract the base ID
@@ -201,12 +200,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
 
             self.videoService.videoInputManager.frameSubject
                 .filter({ result in
-                    let baseIdMatch = result.sinkId.components(separatedBy: "_").first == baseSinkId
-
-                    if baseIdMatch {
-                        return true
-                    }
-                    return false
+                    return result.sinkId.components(separatedBy: "_").first == baseSinkId
                 })
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] info in
@@ -232,12 +226,18 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                                 CATransaction.commit()
                             }
                         }
+                        if self.mainDisplayLayer.status == .failed {
+                            self.mainDisplayLayer.flush()
+                        }
+                        if self.gridDisplayLayer.status == .failed {
+                            self.gridDisplayLayer.flush()
+                        }
                         self.mainDisplayLayer.enqueue(image)
                         self.gridDisplayLayer.enqueue(image)
                         self.videoRunning.accept(true)
                     }
                 })
-                .disposed(by: self.disposeBag)
+                .disposed(by: self.videoDisposeBag)
         }
     }
 
