@@ -183,7 +183,7 @@ struct MediaRecordView: View {
     }
 
     private var switchCameraButton: some View {
-        glassIconButton(systemName: "arrow.triangle.2.circlepath.camera") { viewModel.switchCamera() }
+        glassIconButton(systemName: "arrow.triangle.2.circlepath.camera", accessibilityLabel: L10n.Accessibility.Calls.Default.switchCamera) { viewModel.switchCamera() }
     }
 
     // MARK: - Audio-only Content

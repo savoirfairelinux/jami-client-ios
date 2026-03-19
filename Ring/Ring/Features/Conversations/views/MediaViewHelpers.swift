@@ -112,16 +112,13 @@ struct MediaSeekSlider: UIViewRepresentable {
         slider.setThumbImage(thumb, for: .highlighted)
     }
 
-    private static func makeCircle(size: CGFloat, color: UIColor) -> UIImage? {
+    private static func makeCircle(size: CGFloat, color: UIColor) -> UIImage {
         let cgSize = CGSize(width: size, height: size)
-        UIGraphicsBeginImageContextWithOptions(cgSize, false, 0.0)
-        guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
-        ctx.setFillColor(color.cgColor)
-        ctx.addEllipse(in: CGRect(origin: .zero, size: cgSize))
-        ctx.drawPath(using: .fill)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
+        let renderer = UIGraphicsImageRenderer(size: cgSize)
+        return renderer.image { ctx in
+            color.setFill()
+            ctx.cgContext.fillEllipse(in: CGRect(origin: .zero, size: cgSize))
+        }
     }
 
     final class Coordinator: NSObject {
@@ -161,7 +158,7 @@ struct ScaleButtonStyle: ButtonStyle {
 
 extension View {
     /// A 44×44 icon button with a circular glass background.
-    func glassIconButton(systemName: String, size: CGFloat = 20, action: @escaping () -> Void) -> some View {
+    func glassIconButton(systemName: String, accessibilityLabel: String, size: CGFloat = 20, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: systemName)
                 .font(.system(size: size, weight: .semibold))
@@ -169,6 +166,7 @@ extension View {
                 .frame(width: 44, height: 44)
                 .glassCircleBackground()
         }
+        .accessibilityLabel(accessibilityLabel)
         .buttonStyle(ScaleButtonStyle())
     }
 
