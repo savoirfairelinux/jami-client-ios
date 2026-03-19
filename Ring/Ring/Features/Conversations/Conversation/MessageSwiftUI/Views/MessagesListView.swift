@@ -42,6 +42,14 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
     }
 }
 
+struct MessagePanelTopPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat?
+
+    static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
+        value = value ?? nextValue()
+    }
+}
+
 struct MessagesListView: View {
     @ObservedObject var model: MessagesListVM
     @ObservedObject var callBannerViewModel: CallBannerViewModel
@@ -80,6 +88,7 @@ struct MessagesListView: View {
                     ZStack(alignment: .bottomTrailing) {
                         createMessagesStackView()
                             .flipped()
+                            .contextMenuActive(contextMenuPresentingState != .none)
                         if !model.atTheBottom {
                             createScrollToBottmView()
                         }
@@ -94,6 +103,14 @@ struct MessagesListView: View {
                                 }
                                 return dimensions[VerticalAlignment.center]
                             }
+                            .background(
+                                GeometryReader { proxy in
+                                    Color.clear.preference(
+                                        key: MessagePanelTopPreferenceKey.self,
+                                        value: proxy.frame(in: .global).minY
+                                    )
+                                }
+                            )
                     }
                 }
                 .background(

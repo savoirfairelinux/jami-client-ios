@@ -25,6 +25,54 @@ import Foundation
 import SwiftUI
 import RxSwift
 
+final class MessageActionHandler {
+    var presentMediaPreview: ((MediaPreviewModel, CGRect, (() -> CGRect)?) -> Void)?
+    let injectionBag: InjectionBag
+    var forwardMessage: ((MessageContentVM, [String]) -> Void)?
+
+    init(injectionBag: InjectionBag) {
+        self.injectionBag = injectionBag
+    }
+
+    /// Builds a MediaPreviewModel from the message's state and presents it.
+    /// Handles async image loading for image files; video files are presented synchronously.
+    func handleMediaPreview(for message: MessageContentVM, sourceFrame: CGRect, sourceFrameProvider: (() -> CGRect)?) {
+        guard let url = message.url else { return }
+        let allowDelete = !message.isIncoming
+        if let player = message.player, player.hasVideo.value {
+            let content = MediaPreviewContent.player(player)
+            let model = makePreviewModel(content: content, fileURL: url, canDelete: allowDelete, delegate: message)
+            presentMediaPreview?(model, sourceFrame, sourceFrameProvider)
+        } else if url.pathExtension.isImageExtension() {
+            let isGif = message.isGifImage()
+            DispatchQueue.global(qos: .userInitiated).async { [weak self, weak message] in
+                let image = isGif
+                    ? UIImage.gifImageWithUrl(url, maxSize: 0)
+                    : UIImage.getImagefromURL(fileURL: url, maxSize: 0)
+                guard let self = self, let message = message, let image = image else { return }
+                DispatchQueue.main.async { [weak self, weak message] in
+                    guard let self = self, let message = message else { return }
+                    let content = MediaPreviewContent.image(image)
+                    let model = self.makePreviewModel(content: content, fileURL: url, canDelete: allowDelete, delegate: message)
+                    self.presentMediaPreview?(model, sourceFrame, sourceFrameProvider)
+                }
+            }
+        }
+    }
+
+    private func makePreviewModel(content: MediaPreviewContent, fileURL: URL, canDelete: Bool, delegate: MediaPreviewActionsDelegate) -> MediaPreviewModel {
+        let model = MediaPreviewModel(content: content, delegate: delegate, fileURL: fileURL, canDelete: canDelete)
+        model.injectionBag = injectionBag
+        if let forwardMessage = forwardMessage {
+            model.forwardCallback = { [weak delegate] conversations in
+                guard let delegate = delegate as? MessageContentVM else { return }
+                forwardMessage(delegate, conversations)
+            }
+        }
+        return model
+    }
+}
+
 enum TransferAction: Identifiable {
     var id: Self { self }
 
@@ -123,7 +171,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var fileProgress: CGFloat = 0
     @Published var transferActions = [TransferAction]()
     @Published var showProgress: Bool = true
-    @Published var playerHeight: CGFloat = 64
+    @Published var playerHeight: CGFloat = 80
     @Published var playerWidth: CGFloat = 250
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
@@ -285,6 +333,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
     var infoState: PublishSubject<State>?
+    weak var actionHandler: MessageActionHandler?
     var preferencesColor: UIColor
 
     required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, isHistory: Bool, preferencesColor: UIColor) {
@@ -439,7 +488,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         if url != nil {
             items = isAudioOnly ? [.reply, .save, .forward, .share] : [.reply, .save, .forward, .preview, .share]
         } else {
-            items = [.reply, .forward, .preview, .share]
+            items = [.reply, .forward, .share]
         }
         if !isIncoming {
             items += [.deleteMessage]
@@ -716,7 +765,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         case .copy:
             UIPasteboard.general.string = self.content
         case .preview:
-            self.contextMenuState.onNext(ContextMenu.preview(message: self))
+            presentMediaPreview()
         case .forward:
             forwardFile()
         case .share:
@@ -733,18 +782,34 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             edit()
         }
     }
+
+    /// Opens a full-screen media preview for this message's content.
+    /// Videos and images are delegated to the action handler; other file types
+    /// fall back to UIDocumentInteractionController via contextMenuState.
+    func presentMediaPreview(sourceFrame: CGRect = .zero, sourceFrameProvider: (() -> CGRect)? = nil) {
+        guard let url = self.url, let handler = actionHandler else { return }
+        let isVideo = player?.hasVideo.value == true
+        let isImage = url.pathExtension.isImageExtension()
+        if isVideo || isImage {
+            handler.handleMediaPreview(for: self, sourceFrame: sourceFrame, sourceFrameProvider: sourceFrameProvider)
+        } else {
+            self.contextMenuState.onNext(ContextMenu.openDocument(url: url))
+        }
+    }
 }
 
 extension MessageContentVM: MediaPreviewActionsDelegate {
-    func deleteFile() {}
+    func deleteMessage() {
+        delete()
+    }
+}
 
+// MARK: - Context Menu Actions (used by contextMenuState routing)
+
+extension MessageContentVM {
     func shareFile() {
         guard let url = self.url else { return }
-        let item: Any? = url
-        guard let item = item else {
-            return
-        }
-        self.contextMenuState.onNext(ContextMenu.share(items: [item]))
+        self.contextMenuState.onNext(ContextMenu.share(items: [url as Any]))
     }
 
     func forwardFile() {

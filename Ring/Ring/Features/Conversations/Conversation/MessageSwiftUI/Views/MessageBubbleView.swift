@@ -94,7 +94,7 @@ struct MessageBubbleView: View {
             if let metadata = model.metadata {
                 URLPreview(metadata: metadata, maxDimension: model.maxDimension)
                     .modifier(MessageCornerRadius(model: model))
-                    .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                    .messageGesture(onLongPress: receivedLongPress())
             } else if model.isFullURL, let url = model.getURL() {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.content)
@@ -103,7 +103,7 @@ struct MessageBubbleView: View {
                         .onTapGesture {
                             openURL(url)
                         }
-                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                        .messageGesture(onLongPress: receivedLongPress())
                 }
             } else if #available(iOS 15.0, *),
                       let attributed = model.attributedContent as? AttributedString {
@@ -111,7 +111,7 @@ struct MessageBubbleView: View {
                     Text(attributed)
                         .font(model.styling.textFont)
                         .lineLimit(nil)
-                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                        .messageGesture(onLongPress: receivedLongPress())
                 }
             } else {
                 renderPlainText()
@@ -125,7 +125,7 @@ struct MessageBubbleView: View {
             Text(model.content)
                 .font(model.styling.textFont)
                 .lineLimit(nil)
-                .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                .messageGesture(onLongPress: receivedLongPress())
         }
     }
 

@@ -20,7 +20,8 @@ import SwiftUI
 
 struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
-    @SwiftUI.State private var containerWidth: CGFloat = UIScreen.main.bounds.width
+    @StateObject private var mediaPreviewPresenter = MediaPreviewPresenter()
+    @SwiftUI.State private var containerWidth: CGFloat = 0
 
     var body: some View {
         MessagesListView(model: viewModel.swiftUIModel)
@@ -33,6 +34,17 @@ struct ConversationContainerView: View {
                         }
                 }
             )
+            .onPreferenceChange(MessagePanelTopPreferenceKey.self) { value in
+                if let top = value {
+                    mediaPreviewPresenter.messagePanelTopY = top
+                }
+            }
+            .onAppear {
+                let presenter = mediaPreviewPresenter
+                viewModel.swiftUIModel.actionHandler.presentMediaPreview = { [weak presenter] model, frame, provider in
+                    presenter?.present(model: model, sourceFrame: frame, sourceFrameProvider: provider)
+                }
+            }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
