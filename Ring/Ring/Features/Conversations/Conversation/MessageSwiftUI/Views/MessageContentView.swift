@@ -140,15 +140,66 @@ struct MessageTextStyle: ViewModifier {
     }
 }
 
-struct MessageLongPress: ViewModifier {
-    var longPressCb: (() -> Void)
+/// Unified long press (and optional tap) gesture handler for all message types.
+/// Reads `suppressLongPress` from the environment so that swipe-to-reply
+/// correctly suppresses long press on every message type, not just text.
+/// Reads `contextMenuActive` to suppress taps while the context menu is
+/// presenting or dismissing, preventing accidental full-screen preview.
+struct MessageGestureHandler: ViewModifier {
+    /// Called on long press. Required for all message types.
+    var onLongPress: () -> Void
+    /// Called on tap with the view's global frame. When non-nil the modifier
+    /// adds a tap gesture and a guard that prevents the tap from firing
+    /// immediately after a long press. Used by images and videos.
+    var onTap: ((CGRect) -> Void)?
+
+    private let longPressDuration: Double = 0.2
+
+    @Environment(\.suppressLongPress) private var suppressLongPress
+    @Environment(\.contextMenuActive) private var contextMenuActive
 
     func body(content: Content) -> some View {
-        content
-            .simultaneousGesture(
-                LongPressGesture(minimumDuration: 0.15)
-                    .onEnded { _ in longPressCb() }
-            )
+        if onTap != nil {
+            content
+                .overlay(
+                    GeometryReader { proxy in
+                        Color.clear
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                guard !contextMenuActive else { return }
+                                onTap?(proxy.frame(in: .global))
+                            }
+                            .simultaneousGesture(
+                                LongPressGesture(minimumDuration: longPressDuration)
+                                    .onEnded { _ in
+                                        guard !suppressLongPress else { return }
+                                        onLongPress()
+                                    }
+                            )
+                            .accessibilityAction(named: L10n.Global.preview) {
+                                onTap?(proxy.frame(in: .global))
+                            }
+                    }
+                )
+        } else {
+            content
+                .simultaneousGesture(
+                    LongPressGesture(minimumDuration: longPressDuration)
+                        .onEnded { _ in
+                            guard !suppressLongPress else { return }
+                            onLongPress()
+                        }
+                )
+        }
+    }
+}
+
+extension View {
+    func messageGesture(
+        onLongPress: @escaping () -> Void,
+        onTap: ((CGRect) -> Void)? = nil
+    ) -> some View {
+        modifier(MessageGestureHandler(onLongPress: onLongPress, onTap: onTap))
     }
 }
 
@@ -192,7 +243,11 @@ struct MessageContentView: View {
     @SwiftUI.State private var ringProgress: CGFloat = 0
     private let replyActivationDistance: CGFloat = 70
     private let minSwipeDistance: CGFloat = 30
-    private let swipeDominanceFactor: CGFloat = 1.5
+
+    private var hasPlayer: Bool {
+        model.type == .fileTransfer
+            && (model.content as NSString).pathExtension.isMediaExtension()
+    }
     private let maxVisualOffset: CGFloat = 80
     private let replyArrowGap: CGFloat = 30
     private let replyRingSize: CGFloat = 28
@@ -300,7 +355,28 @@ struct MessageContentView: View {
                 if lockedAxis == nil {
                     let horizontal = abs(value.translation.width)
                     let vertical = abs(value.translation.height)
-                    if horizontal > lockThreshold && horizontal > vertical { lockedAxis = .horizontal } else if vertical > lockThreshold { lockedAxis = .vertical }
+                    // For player messages, reject drags that start in the bottom
+                    // portion of the bubble where the seek slider lives, so that
+                    // slider interaction does not trigger swipe-to-reply.
+                    if hasPlayer {
+                        let sliderZoneHeight: CGFloat = 30
+                        let viewHeight = max(model.playerHeight, 80)
+                        let startedInSliderZone =
+                            value.startLocation.y > viewHeight - sliderZoneHeight
+                        if startedInSliderZone {
+                            lockedAxis = .vertical
+                        } else if horizontal > lockThreshold && horizontal > vertical {
+                            lockedAxis = .horizontal
+                        } else if vertical > lockThreshold {
+                            lockedAxis = .vertical
+                        }
+                    } else {
+                        if horizontal > lockThreshold && horizontal > vertical {
+                            lockedAxis = .horizontal
+                        } else if vertical > lockThreshold {
+                            lockedAxis = .vertical
+                        }
+                    }
                 }
                 guard lockedAxis == .horizontal, model.menuItems.contains(.reply) else { return }
                 suppressLongPress = true
@@ -368,7 +444,7 @@ struct MessageContentView: View {
             .padding(.leading, 30)
             .shadowForConversation()
             .measureSize()
-            .onLongPressGesture(minimumDuration: 0.5) {
+            .onLongPressGesture(minimumDuration: 0.1) {
                 self.showReactionsView(reactionsModel)
             }
             .onAppear {
