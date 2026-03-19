@@ -80,6 +80,7 @@ struct MessagesListView: View {
                     ZStack(alignment: .bottomTrailing) {
                         createMessagesStackView()
                             .flipped()
+                            .contextMenuActive(contextMenuPresentingState != .none)
                         if !model.atTheBottom {
                             createScrollToBottmView()
                         }
