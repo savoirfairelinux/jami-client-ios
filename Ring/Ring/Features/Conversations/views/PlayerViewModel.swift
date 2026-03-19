@@ -20,6 +20,7 @@ import RxSwift
 import RxCocoa
 import CoreVideo
 import AVFoundation
+import UniformTypeIdentifiers
 
 protocol PlayerDelegate: AnyObject {
     func extractedVideoFrame(with height: CGFloat)
@@ -73,6 +74,12 @@ class PlayerViewModel {
     init(injectionBag: InjectionBag, path: String) {
         self.videoService = injectionBag.videoService
         filePath = path
+        // Seed hasVideo from the file extension so the UI shows the
+        // correct layout immediately instead of flashing as video first.
+        let ext = (path as NSString).pathExtension
+        if let utType = UTType(filenameExtension: ext), utType.conforms(to: .audio) {
+            hasVideo = BehaviorRelay<Bool>(value: false)
+        }
     }
 
     // MARK: - State Machine

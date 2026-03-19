@@ -37,12 +37,13 @@ struct PlayerSwiftUI: View {
                     .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                     .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
             }
-            PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls)
+            PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls,
+                       onVideoTap: { frame in model.presentMediaPreview(sourceFrame: frame) },
+                       onVideoLongPress: onLongGesture)
                 .frame(height: model.playerHeight * ratio)
                 .frame(width: model.playerWidth * ratio)
                 .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
-                .modifier(MessageLongPress(longPressCb: onLongGesture))
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(player.pause.value ? L10n.Accessibility.audioPlayerPlay : L10n.Accessibility.audioPlayerPause)
@@ -59,22 +60,27 @@ struct ImageOrGifView: View {
     let minHeight: CGFloat
     let maxHeight: CGFloat
     var customCornerRadius: CGFloat = 0
+
     var body: some View {
+        mediaContent
+            .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
+            .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
+            .modifier(PreviewTapOverlay(onTap: { frame in
+                message.presentMediaPreview(sourceFrame: frame)
+            }, onLongPress: onLongGesture))
+    }
+
+    @ViewBuilder
+    private var mediaContent: some View {
         if !message.isGifImage() {
             Image(uiImage: image)
                 .resizable()
                 .scaledToFit()
                 .frame(minHeight: minHeight, maxHeight: maxHeight)
-                .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
-                .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
-                .modifier(MessageLongPress(longPressCb: onLongGesture))
         } else {
             ScaledImageViewWrapper(imageToShow: image, maxHeight: maxHeight, maxWidth: maxHeight)
                 .scaledToFit()
                 .frame(maxHeight: maxHeight)
-                .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
-                .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
-                .modifier(MessageLongPress(longPressCb: onLongGesture))
         }
     }
 }

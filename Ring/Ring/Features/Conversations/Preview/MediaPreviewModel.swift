@@ -22,7 +22,7 @@ protocol MediaPreviewActionsDelegate: AnyObject {
     func shareFile()
     func forwardFile()
     func saveFile()
-    func deleteFile()
+    func deleteMessage()
 }
 
 enum MediaPreviewContent {
@@ -32,6 +32,7 @@ enum MediaPreviewContent {
 
 class MediaPreviewModel: ObservableObject {
     let content: MediaPreviewContent
+    let canDelete: Bool
     private weak var delegate: MediaPreviewActionsDelegate?
 
     var isImagePreview: Bool {
@@ -39,13 +40,14 @@ class MediaPreviewModel: ObservableObject {
         return false
     }
 
-    init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate) {
+    init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate, canDelete: Bool = false) {
         self.content = content
         self.delegate = delegate
+        self.canDelete = canDelete
     }
 
     func share() { delegate?.shareFile() }
     func forward() { delegate?.forwardFile() }
     func save() { delegate?.saveFile() }
-    func delete() { delegate?.deleteFile() }
+    func delete() { delegate?.deleteMessage() }
 }

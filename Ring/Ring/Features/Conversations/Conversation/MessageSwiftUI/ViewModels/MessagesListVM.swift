@@ -159,6 +159,17 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     private let injectionBag: InjectionBag
     private var avatarFactory: AvatarProviderFactory?
 
+    /// Set by ConversationContainerView so MessageContentVMs can present
+    /// the full-screen media preview without going through the VC.
+    weak var mediaPreviewOverlayState: MediaPreviewState? {
+        didSet {
+            // Propagate to any already-created message content VMs.
+            for container in messagesModels {
+                container.messageContent.mediaPreviewOverlayState = mediaPreviewOverlayState
+            }
+        }
+    }
+
     // state
     private let contextStateSubject = PublishSubject<State>()
     lazy var contextMenuState: Observable<State> = {
@@ -590,6 +601,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 localJamiId: localJamiId,
                 preferencesColor: self.conversation.preferences.getColor()
             )
+            container.messageContent.mediaPreviewOverlayState = self.mediaPreviewOverlayState
 
             self.subscribeMessage(container: container)
             self.updateLastRead(message: container)

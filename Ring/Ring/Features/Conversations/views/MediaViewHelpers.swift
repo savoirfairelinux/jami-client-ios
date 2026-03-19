@@ -185,6 +185,46 @@ extension View {
     }
 }
 
+// MARK: - Preview Tap Overlay
+
+/// Handles both tap-to-preview and long-press-for-context-menu on media views.
+/// Both gestures live on the same Color.clear overlay so the overlay does not
+/// block touches from reaching the long press handler.
+/// A shared flag prevents the tap from firing after a long press is dismissed.
+struct PreviewTapOverlay: ViewModifier {
+    let onTap: (CGRect) -> Void
+    let onLongPress: () -> Void
+
+    @SwiftUI.State private var longPressActive = false
+
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                GeometryReader { proxy in
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            guard !longPressActive else { return }
+                            onTap(proxy.frame(in: .global))
+                        }
+                        .simultaneousGesture(
+                            LongPressGesture(minimumDuration: 0.3)
+                                .onEnded { _ in
+                                    longPressActive = true
+                                    onLongPress()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        longPressActive = false
+                                    }
+                                }
+                        )
+                        .accessibilityAction(named: L10n.Global.preview) {
+                            onTap(proxy.frame(in: .global))
+                        }
+                }
+            )
+    }
+}
+
 // MARK: - Duration Formatting
 
 extension Float {
