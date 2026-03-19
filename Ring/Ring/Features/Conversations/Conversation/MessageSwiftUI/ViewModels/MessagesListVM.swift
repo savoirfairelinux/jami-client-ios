@@ -159,6 +159,8 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     private let injectionBag: InjectionBag
     private var avatarFactory: AvatarProviderFactory?
 
+    let actionHandler: MessageActionHandler
+
     // state
     private let contextStateSubject = PublishSubject<State>()
     lazy var contextMenuState: Observable<State> = {
@@ -255,6 +257,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
         self.injectionBag = injectionBag
+        self.actionHandler = MessageActionHandler(injectionBag: injectionBag)
         self.requestsService = injectionBag.requestsService
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
@@ -590,6 +593,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 localJamiId: localJamiId,
                 preferencesColor: self.conversation.preferences.getColor()
             )
+            container.messageContent.actionHandler = self.actionHandler
 
             self.subscribeMessage(container: container)
             self.updateLastRead(message: container)
