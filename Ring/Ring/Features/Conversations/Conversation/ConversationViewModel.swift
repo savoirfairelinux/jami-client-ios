@@ -164,6 +164,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
         swiftUIModel = MessagesListVM(injectionBag: self.injectionBag,
                                       transferHelper: transferHelper)
+        swiftUIModel.actionHandler.forwardMessage = { [weak self] message, conversations in
+            self?.shareMessage(message: message, with: conversations)
+        }
         swiftUIModel.subscribeBestName(bestName: self.bestName)
         self.bestName
             .share()
@@ -610,10 +613,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
     let shouldDismiss = BehaviorRelay<Bool>(value: false)
 
-    func openFullScreenPreview(viewModel: PlayerViewModel?, image: UIImage?, message: MessageContentVM) {
-        self.stateSubject.onNext(ConversationState.openFullScreenPreview(viewModel: viewModel, image: image, message: message))
-    }
-
     var conversationCreated = BehaviorRelay(value: true)
 
     func updateBlockedStatus() {
@@ -833,7 +832,7 @@ extension ConversationViewModel {
         }
     }
 
-    private func shareMessage(message: MessageContentVM, with selectedConversations: [String]) {
+    func shareMessage(message: MessageContentVM, with selectedConversations: [String]) {
         // to send file we need to have file url or image
         let url = message.url
         var fileName = message.content

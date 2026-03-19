@@ -287,7 +287,7 @@ extension ConversationsCoordinator {
     }
 
     func showContactPicker(callId: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)? = nil, conversationSelectedCB: ((_ conversationIds: [String]) -> Void)? = nil) {
-        guard let presenter = self.navigationController.visibleViewController else { return }
+        guard let conversationVC = self.navigationController.visibleViewController else { return }
 
         let viewModel = ContactPickerViewModel(with: self.injectionBag)
         viewModel.type = callId.isEmpty ? .forConversation : .forCall
@@ -298,13 +298,13 @@ extension ConversationsCoordinator {
 
         let pickerView = ContactPickerView(
             viewModel: viewModel,
-            onDismissed: { [weak presenter] in
-                (presenter as? ContactPickerDismissHandler)?.contactPickerDidDismiss()
+            onDismissed: { [weak conversationVC] in
+                (conversationVC as? ContactPickerDismissHandler)?.contactPickerDidDismiss()
             }
         )
         let pickerVC = createHostingVC(pickerView)
         pickerVC.modalPresentationStyle = .pageSheet
-        presenter.present(pickerVC, animated: true)
+        conversationVC.present(pickerVC, animated: true)
     }
 
     func openAboutJami() {
