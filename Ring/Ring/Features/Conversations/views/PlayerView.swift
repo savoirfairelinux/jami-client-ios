@@ -102,6 +102,12 @@ class PlayerCoordinator: ObservableObject {
         disposeBag = DisposeBag()
         boundViewModel = viewModel
 
+        // Seed coordinator state from the view model's current values
+        // so the UI shows the correct layout immediately.
+        hasVideo = viewModel.hasVideo.value
+        isPaused = viewModel.pause.value
+        isMuted = viewModel.audioMuted.value
+
         viewModel.playBackFrame
             .subscribe(onNext: { [weak self] buffer in
                 guard let self = self, let buffer = buffer else { return }
@@ -124,33 +130,29 @@ class PlayerCoordinator: ObservableObject {
 
         viewModel.playerDuration
             .asObservable()
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] value in
-                self?.duration = value
+                DispatchQueue.main.async { self?.duration = value }
             })
             .disposed(by: disposeBag)
 
         viewModel.pause
             .asObservable()
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] value in
-                self?.isPaused = value
+                DispatchQueue.main.async { self?.isPaused = value }
             })
             .disposed(by: disposeBag)
 
         viewModel.audioMuted
             .asObservable()
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] value in
-                self?.isMuted = value
+                DispatchQueue.main.async { self?.isMuted = value }
             })
             .disposed(by: disposeBag)
 
         viewModel.hasVideo
             .asObservable()
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] value in
-                self?.hasVideo = value
+                DispatchQueue.main.async { self?.hasVideo = value }
             })
             .disposed(by: disposeBag)
 
@@ -226,8 +228,14 @@ struct PlayerView: View {
     var sizeMode: PlayerMode
     var withControls: Bool
     var externalControlsVisible: Binding<Bool>?
+    /// Called when the video area (not a control) is tapped in message mode.
+    /// Receives the view's global frame for the expand animation.
+    var onVideoTap: ((CGRect) -> Void)?
+    /// Called on long press in the video area (e.g. to show context menu).
+    var onVideoLongPress: (() -> Void)?
 
     @StateObject private var coordinator = PlayerCoordinator()
+    @SwiftUI.State private var longPressActive = false
 
     private var controlsVisible: Bool {
         externalControlsVisible?.wrappedValue ?? coordinator.controlsVisible
@@ -255,6 +263,34 @@ struct PlayerView: View {
 
             VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            // Tap target behind controls — taps that land on a button or
+            // slider are consumed by the control; taps on the video area
+            // reach this layer and trigger the callback.
+            // Long press is also captured here with a shared flag to
+            // prevent the tap from firing after a long press is dismissed.
+            // Only shown when there is video content; for audio-only players
+            // the entire area is interactive controls, so this layer is skipped.
+            if let onVideoTap = onVideoTap, coordinator.hasVideo {
+                GeometryReader { proxy in
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            guard !longPressActive else { return }
+                            onVideoTap(proxy.frame(in: .global))
+                        }
+                        .simultaneousGesture(
+                            LongPressGesture(minimumDuration: 0.15)
+                                .onEnded { _ in
+                                    longPressActive = true
+                                    onVideoLongPress?()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        longPressActive = false
+                                    }
+                                }
+                        )
+                }
+            }
 
             if withControls {
                 controlsOverlay
@@ -285,13 +321,7 @@ struct PlayerView: View {
     }
 
     private var backgroundColor: Color {
-        if sizeMode == .fullScreen {
-            return Color.black
-        }
-        if coordinator.hasVideo {
-            return Color(UIColor.placeholderText)
-        }
-        return Color(UIColor.placeholderText)
+        sizeMode == .fullScreen ? .black : Color(UIColor.placeholderText)
     }
 
     // MARK: - Controls Overlay
@@ -306,6 +336,7 @@ struct PlayerView: View {
                 }
             }
             .opacity(controlsVisible ? 1 : 0)
+            .animation(.easeInOut(duration: 0.3), value: controlsVisible)
         } else {
             messageControls
         }
@@ -379,6 +410,7 @@ struct PlayerView: View {
             videoMessageControls
         } else {
             audioMessageControls
+                .applyLongPressGesture(onLongPress: onVideoLongPress)
         }
     }
 
@@ -467,15 +499,15 @@ struct PlayerView: View {
     private var audioMessageControls: some View {
         HStack(spacing: 10) {
             Image(systemName: "waveform")
-                .font(.system(size: 18, weight: .medium))
+                .font(.system(size: 20, weight: .medium))
                 .foregroundColor(.white.opacity(0.5))
-                .frame(width: 24)
+                .frame(width: 28)
 
             Button(action: { viewModel.togglePause() }, label: {
                 Image(systemName: coordinator.isPaused ? "play.fill" : "pause.fill")
-                    .font(.system(size: 18, weight: .medium))
+                    .font(.system(size: 22, weight: .medium))
                     .foregroundColor(.white)
-                    .frame(width: 36, height: 36)
+                    .frame(width: 44, height: 44)
             })
             .applyGlassButtonBackground()
             .buttonStyle(ScaleButtonStyle())
@@ -524,6 +556,18 @@ private extension View {
             self
                 .contentShape(Rectangle())
                 .onTapGesture(perform: onTap)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func applyLongPressGesture(onLongPress: (() -> Void)?) -> some View {
+        if let onLongPress = onLongPress {
+            self.simultaneousGesture(
+                LongPressGesture(minimumDuration: 0.5)
+                    .onEnded { _ in onLongPress() }
+            )
         } else {
             self
         }

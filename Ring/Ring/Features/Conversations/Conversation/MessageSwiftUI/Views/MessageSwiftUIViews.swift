@@ -28,6 +28,8 @@ struct PlayerSwiftUI: View {
     var customCornerRadius: CGFloat = 0
     @Environment(\.colorScheme)
     var colorScheme
+    @Environment(\.mediaPreviewOverlayState)
+    private var overlayState: MediaPreviewState?
 
     var body: some View {
         ZStack(alignment: .center) {
@@ -37,17 +39,25 @@ struct PlayerSwiftUI: View {
                     .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                     .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
             }
-            PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls)
+            PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls,
+                       onVideoTap: { frame in openPreview(sourceFrame: frame) },
+                       onVideoLongPress: onLongGesture)
                 .frame(height: model.playerHeight * ratio)
                 .frame(width: model.playerWidth * ratio)
                 .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
-                .modifier(MessageLongPress(longPressCb: onLongGesture))
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(player.pause.value ? L10n.Accessibility.audioPlayerPlay : L10n.Accessibility.audioPlayerPause)
         .accessibilityAddTraits(.isButton)
         .conditionalModifier(AccessibilityGestureModifier(action: player.togglePause), apply: UIAccessibility.isVoiceOverRunning)
+    }
+
+    private func openPreview(sourceFrame: CGRect) {
+        guard let overlayState = overlayState, player.hasVideo.value else { return }
+        let content = MediaPreviewContent.player(player)
+        let previewModel = MediaPreviewModel(content: content, delegate: model)
+        overlayState.present(model: previewModel, sourceFrame: sourceFrame)
     }
 }
 
@@ -59,23 +69,39 @@ struct ImageOrGifView: View {
     let minHeight: CGFloat
     let maxHeight: CGFloat
     var customCornerRadius: CGFloat = 0
+
+    @Environment(\.mediaPreviewOverlayState)
+    private var overlayState: MediaPreviewState?
+
     var body: some View {
+        mediaContent
+            .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
+            .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
+            .modifier(PreviewTapOverlay(onTap: { frame in
+                openPreview(sourceFrame: frame)
+            }, onLongPress: onLongGesture))
+    }
+
+    @ViewBuilder
+    private var mediaContent: some View {
         if !message.isGifImage() {
             Image(uiImage: image)
                 .resizable()
                 .scaledToFit()
                 .frame(minHeight: minHeight, maxHeight: maxHeight)
-                .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
-                .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
-                .modifier(MessageLongPress(longPressCb: onLongGesture))
         } else {
             ScaledImageViewWrapper(imageToShow: image, maxHeight: maxHeight, maxWidth: maxHeight)
                 .scaledToFit()
                 .frame(maxHeight: maxHeight)
-                .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
-                .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
-                .modifier(MessageLongPress(longPressCb: onLongGesture))
         }
+    }
+
+    private func openPreview(sourceFrame: CGRect) {
+        guard let overlayState = overlayState else { return }
+        guard let fullImage = message.getImage(maxSize: 0) else { return }
+        let content = MediaPreviewContent.image(fullImage)
+        let model = MediaPreviewModel(content: content, delegate: message)
+        overlayState.present(model: model, sourceFrame: sourceFrame)
     }
 }
 
@@ -100,6 +126,7 @@ struct MediaView: View {
     }
 }
 
+
 struct AccessibilityGestureModifier: ViewModifier {
     var action: () -> Void
 
@@ -109,3 +136,4 @@ struct AccessibilityGestureModifier: ViewModifier {
         }
     }
 }
+

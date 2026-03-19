@@ -123,7 +123,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var fileProgress: CGFloat = 0
     @Published var transferActions = [TransferAction]()
     @Published var showProgress: Bool = true
-    @Published var playerHeight: CGFloat = 64
+    @Published var playerHeight: CGFloat = 80
     @Published var playerWidth: CGFloat = 250
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
@@ -285,6 +285,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
     var infoState: PublishSubject<State>?
+    weak var mediaPreviewOverlayState: MediaPreviewState?
     var preferencesColor: UIColor
 
     required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, isHistory: Bool, preferencesColor: UIColor) {
@@ -716,7 +717,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         case .copy:
             UIPasteboard.general.string = self.content
         case .preview:
-            self.contextMenuState.onNext(ContextMenu.preview(message: self))
+            presentMediaPreview()
         case .forward:
             forwardFile()
         case .share:
@@ -731,6 +732,25 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             delete()
         case .edit:
             edit()
+        }
+    }
+
+    /// Opens a full-screen media preview for this message's content.
+    /// Images and videos are shown in the overlay; other file types
+    /// fall back to UIDocumentInteractionController via contextMenuState.
+    private func presentMediaPreview() {
+        guard let url = self.url else { return }
+        if let player = self.player, player.hasVideo.value {
+            let content = MediaPreviewContent.player(player)
+            let model = MediaPreviewModel(content: content, delegate: self)
+            mediaPreviewOverlayState?.present(model: model)
+        } else if url.pathExtension.isImageExtension(),
+                  let image = getImage(maxSize: 0) {
+            let content = MediaPreviewContent.image(image)
+            let model = MediaPreviewModel(content: content, delegate: self)
+            mediaPreviewOverlayState?.present(model: model)
+        } else {
+            self.contextMenuState.onNext(ContextMenu.openDocument(url: url))
         }
     }
 }
