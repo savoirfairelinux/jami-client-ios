@@ -159,6 +159,42 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     private let injectionBag: InjectionBag
     private var avatarFactory: AvatarProviderFactory?
 
+    /// Closure that presents a media preview overlay. Set by the view layer
+    /// once the presenter is available. Setting this rebuilds and propagates
+    /// `messageActionDependencies` to all existing MessageContentVMs.
+    var presentMediaPreview: ((MediaPreviewModel, CGRect, (() -> CGRect)?) -> Void)? {
+        didSet { rebuildActionDependencies() }
+    }
+
+    /// Callback for forwarding a message to selected conversations.
+    /// Set by ConversationViewModel to wire the forward action through coordinators.
+    var forwardHandler: ((MessageContentVM, [String]) -> Void)? {
+        didSet { rebuildActionDependencies() }
+    }
+
+    /// Rebuilt whenever `presentMediaPreview` or `forwardHandler` changes.
+    private(set) var messageActionDependencies: MessageActionDependencies?
+
+    private func rebuildActionDependencies() {
+        guard let presentMediaPreview = presentMediaPreview else {
+            messageActionDependencies = nil
+            propagateActionDependencies()
+            return
+        }
+        messageActionDependencies = MessageActionDependencies(
+            presentMediaPreview: presentMediaPreview,
+            injectionBag: injectionBag,
+            forwardMessage: forwardHandler
+        )
+        propagateActionDependencies()
+    }
+
+    private func propagateActionDependencies() {
+        for container in messagesModels {
+            container.messageContent.actionDependencies = messageActionDependencies
+        }
+    }
+
     // state
     private let contextStateSubject = PublishSubject<State>()
     lazy var contextMenuState: Observable<State> = {
@@ -590,6 +626,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 localJamiId: localJamiId,
                 preferencesColor: self.conversation.preferences.getColor()
             )
+            container.messageContent.actionDependencies = self.messageActionDependencies
 
             self.subscribeMessage(container: container)
             self.updateLastRead(message: container)

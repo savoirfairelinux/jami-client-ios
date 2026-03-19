@@ -112,6 +112,7 @@ class MessageContainerModel: Identifiable, Equatable {
     func setReplyTarget(message: MessageModel) {
         let target = MessageContentVM(message: message, contextMenuState: PublishSubject<State>(), transferState: self.transferSubject, isHistory: false, preferencesColor: preferencesColor)
         target.setInfoState(state: self.infoSubject)
+        target.actionDependencies = self.messageContent.actionDependencies
         self.replyTarget.target = target
     }
 

@@ -240,7 +240,6 @@
 		2607176E2CAC454E00494875 /* ComposeNewMessageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */; };
 		260717702CAD901D00494875 /* ConversationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2607176F2CAD901D00494875 /* ConversationDataSource.swift */; };
 		260717722CADB36A00494875 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260717712CADB36A00494875 /* SettingsCoordinator.swift */; };
-		26074FD924F7FF9500374570 /* MediaPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* MediaPreviewView.swift */; };
 		26074FDB24F7FFC100374570 /* MediaPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* MediaPreviewModel.swift */; };
 		260AE62529B65A4B00D66D5E /* ContactsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62429B65A4B00D66D5E /* ContactsUtils.swift */; };
 		260AE62729B8E89300D66D5E /* JamiSearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */; };
@@ -360,6 +359,8 @@
 		267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		267CFD6F2ACCDCD70066FE15 /* SmartListNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CFD6E2ACCDCD70066FE15 /* SmartListNavigationBar.swift */; };
 		267D55402E9EB2A8006BA9BE /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 267D553F2E9EB2A8006BA9BE /* AppIcon.icon */; };
+		268309682F6ADAB800B1AA8A /* MediaPreviewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268309672F6ADAB800B1AA8A /* MediaPreviewState.swift */; };
+		2683096A2F6ADADE00B1AA8A /* MediaPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268309692F6ADADE00B1AA8A /* MediaPreviewView.swift */; };
 		2685F90E2A1698B400BFCDA3 /* VideoInputsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2685F90D2A1698B400BFCDA3 /* VideoInputsManager.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
 		268C87E42C1793E300593D7C /* NameRegistrationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C87E32C1793E300593D7C /* NameRegistrationVM.swift */; };
@@ -863,7 +864,6 @@
 		2607176D2CAC454E00494875 /* ComposeNewMessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComposeNewMessageCoordinator.swift; path = Ring/Features/Conversations/ComposeNewMessageCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		2607176F2CAD901D00494875 /* ConversationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationDataSource.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ConversationDataSource.swift; sourceTree = SOURCE_ROOT; };
 		260717712CADB36A00494875 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
-		26074FD824F7FF9500374570 /* MediaPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewView.swift; sourceTree = "<group>"; };
 		26074FDA24F7FFC100374570 /* MediaPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewModel.swift; sourceTree = "<group>"; };
 		260AE62429B65A4B00D66D5E /* ContactsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUtils.swift; sourceTree = "<group>"; };
 		260AE62629B8E89300D66D5E /* JamiSearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiSearchViewModelTests.swift; sourceTree = "<group>"; };
@@ -978,6 +978,8 @@
 		267B95FA2C2B5FFA00353B01 /* RevocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevocationView.swift; sourceTree = "<group>"; };
 		267CFD6E2ACCDCD70066FE15 /* SmartListNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListNavigationBar.swift; sourceTree = "<group>"; };
 		267D553F2E9EB2A8006BA9BE /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		268309672F6ADAB800B1AA8A /* MediaPreviewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewState.swift; sourceTree = "<group>"; };
+		268309692F6ADADE00B1AA8A /* MediaPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewView.swift; sourceTree = "<group>"; };
 		2685F90D2A1698B400BFCDA3 /* VideoInputsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInputsManager.swift; sourceTree = "<group>"; };
 		268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
 		268C87E32C1793E300593D7C /* NameRegistrationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRegistrationVM.swift; sourceTree = "<group>"; };
@@ -3253,8 +3255,9 @@
 		26074FD524F7FF5B00374570 /* Preview */ = {
 			isa = PBXGroup;
 			children = (
-				26074FD824F7FF9500374570 /* MediaPreviewView.swift */,
 				26074FDA24F7FFC100374570 /* MediaPreviewModel.swift */,
+				268309672F6ADAB800B1AA8A /* MediaPreviewState.swift */,
+				268309692F6ADADE00B1AA8A /* MediaPreviewView.swift */,
 			);
 			path = Preview;
 			sourceTree = "<group>";
@@ -4174,6 +4177,7 @@
 				2607176E2CAC454E00494875 /* ComposeNewMessageCoordinator.swift in Sources */,
 				2685F90E2A1698B400BFCDA3 /* VideoInputsManager.swift in Sources */,
 				267B95FB2C2B5FFA00353B01 /* RevocationView.swift in Sources */,
+				268309682F6ADAB800B1AA8A /* MediaPreviewState.swift in Sources */,
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
 				267B958C2C24793500353B01 /* ManageSipAccountView.swift in Sources */,
 				1A5DC0201F355DCF0075E8EF /* ContactsService.swift in Sources */,
@@ -4213,6 +4217,7 @@
 				268C87F02C1BA78E00593D7C /* UtilitiesViews.swift in Sources */,
 				26A34ED52C6E83D500A41DD4 /* ImportFromArchiveView.swift in Sources */,
 				BB3B0A412971AEE30083CAD8 /* LocationSharingView.swift in Sources */,
+				2683096A2F6ADADE00B1AA8A /* MediaPreviewView.swift in Sources */,
 				262F1CFA2C88BBBC002BF597 /* LinkToAccountVM.swift in Sources */,
 				267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */,
 				268C87EC2C1BA28A00593D7C /* ManageAccountView.swift in Sources */,
@@ -4350,7 +4355,6 @@
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
 				26625BB92BA9FEFC009D2DDB /* SmartListContentView.swift in Sources */,
 				26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */,
-				26074FD924F7FF9500374570 /* MediaPreviewView.swift in Sources */,
 				268C87FD2C1E6C7600593D7C /* SettingsSummaryView.swift in Sources */,
 				0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */,
 				26074FDB24F7FFC100374570 /* MediaPreviewModel.swift in Sources */,
