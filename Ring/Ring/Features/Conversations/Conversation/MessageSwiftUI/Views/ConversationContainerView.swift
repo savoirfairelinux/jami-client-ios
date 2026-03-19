@@ -20,6 +20,7 @@ import SwiftUI
 
 struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
+    @StateObject private var mediaPreviewPresenter = MediaPreviewPresenter()
     @SwiftUI.State private var containerWidth: CGFloat = UIScreen.main.bounds.width
 
     var body: some View {
@@ -33,6 +34,17 @@ struct ConversationContainerView: View {
                         }
                 }
             )
+            .onPreferenceChange(MessagePanelTopPreferenceKey.self) { value in
+                if let top = value {
+                    mediaPreviewPresenter.messagePanelTopY = top
+                }
+            }
+            .onAppear {
+                let presenter = mediaPreviewPresenter
+                viewModel.swiftUIModel.actionHandler.presentMediaPreview = { [weak presenter] model, frame, provider in
+                    presenter?.present(model: model, sourceFrame: frame, sourceFrameProvider: provider)
+                }
+            }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -46,8 +58,7 @@ struct ConversationContainerView: View {
 
     // MARK: - Title View
 
-    @ViewBuilder
-    private var conversationTitleView: some View {
+    @ViewBuilder private var conversationTitleView: some View {
         Button(action: viewModel.showContactInfo) {
             titleViewContent
         }
@@ -82,8 +93,7 @@ struct ConversationContainerView: View {
 
     // MARK: - Trailing Buttons
 
-    @ViewBuilder
-    private var trailingButtons: some View {
+    @ViewBuilder private var trailingButtons: some View {
         if !viewModel.isBlocked {
             audioCallButton
             if !viewModel.isAccountSip {

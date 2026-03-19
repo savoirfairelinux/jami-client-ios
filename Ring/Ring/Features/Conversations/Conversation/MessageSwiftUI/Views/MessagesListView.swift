@@ -42,6 +42,14 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
     }
 }
 
+struct MessagePanelTopPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat?
+
+    static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
+        value = value ?? nextValue()
+    }
+}
+
 struct MessagesListView: View {
     @ObservedObject var model: MessagesListVM
     @ObservedObject var callBannerViewModel: CallBannerViewModel
@@ -75,69 +83,7 @@ struct MessagesListView: View {
 
     var body: some View {
         ZStack {
-            ZStack(alignment: .top) {
-                ZStack(alignment: .bottom) {
-                    ZStack(alignment: .bottomTrailing) {
-                        createMessagesStackView()
-                            .flipped()
-                        if !model.atTheBottom {
-                            createScrollToBottmView()
-                        }
-                    }
-                    .layoutPriority(1)
-                    .padding(.bottom, messageContainerHeight - 30)
-                    if !model.isBlocked {
-                        MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
-                            .alignmentGuide(VerticalAlignment.center) { dimensions in
-                                DispatchQueue.main.async {
-                                    self.messageContainerHeight = dimensions.height
-                                }
-                                return dimensions[VerticalAlignment.center]
-                            }
-                    }
-                }
-                .background(
-                    ContextMenuSnapshotWindowCoordinator(
-                        snapshot: currentSnapshot,
-                        presentingState: contextMenuPresentingState,
-                        model: model.contextMenuModel,
-                        presentingStateBinding: $contextMenuPresentingState
-                    )
-                )
-                .onChange(of: dimensionsManager.adaptiveHeight) { newHeight in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        if screenHeight != newHeight && screenHeight != 0 {
-                            screenHeight = newHeight
-                            contextMenuPresentingState = .dismissed
-                        }
-                    }
-                }
-                .onAppear(perform: {
-                    screenHeight = dimensionsManager.adaptiveHeight
-                })
-
-                .onChange(of: contextMenuPresentingState, perform: { state in
-                    contextMenuPresentingStateChanged(state)
-                })
-                .onReceive(Publishers.keyboardHeight) { height in
-                    handleKeyboardHeightChange(height)
-                }
-                if model.shouldShowMap {
-                    LocationSharingView(model: model)
-                }
-
-                if model.isSyncing {
-                    syncView()
-                }
-
-                if model.isBlocked {
-                    blockView()
-                }
-
-                if callBannerViewModel.isVisible {
-                    CallBannerView(viewModel: callBannerViewModel)
-                }
-            }
+            conversationContentView()
             if showReactionsView {
                 if let reactions = reactionsForMessage {
                     ReactionsView(model: reactions)
@@ -169,6 +115,81 @@ struct MessagesListView: View {
                 model.screenTapped = false
             }
         })
+    }
+
+    private func conversationContentView() -> some View {
+        ZStack(alignment: .top) {
+            ZStack(alignment: .bottom) {
+                ZStack(alignment: .bottomTrailing) {
+                    createMessagesStackView()
+                        .flipped()
+                        .contextMenuActive(contextMenuPresentingState != .none)
+                    if !model.atTheBottom {
+                        createScrollToBottmView()
+                    }
+                }
+                .layoutPriority(1)
+                .padding(.bottom, messageContainerHeight - 30)
+                if !model.isBlocked {
+                    MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
+                        .alignmentGuide(VerticalAlignment.center) { dimensions in
+                            DispatchQueue.main.async {
+                                self.messageContainerHeight = dimensions.height
+                            }
+                            return dimensions[VerticalAlignment.center]
+                        }
+                        .background(
+                            GeometryReader { proxy in
+                                Color.clear.preference(
+                                    key: MessagePanelTopPreferenceKey.self,
+                                    value: proxy.frame(in: .global).minY
+                                )
+                            }
+                        )
+                }
+            }
+            .background(
+                ContextMenuSnapshotWindowCoordinator(
+                    snapshot: currentSnapshot,
+                    presentingState: contextMenuPresentingState,
+                    model: model.contextMenuModel,
+                    presentingStateBinding: $contextMenuPresentingState
+                )
+            )
+            .onChange(of: dimensionsManager.adaptiveHeight) { newHeight in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    if screenHeight != newHeight && screenHeight != 0 {
+                        screenHeight = newHeight
+                        contextMenuPresentingState = .dismissed
+                    }
+                }
+            }
+            .onAppear(perform: {
+                screenHeight = dimensionsManager.adaptiveHeight
+            })
+
+            .onChange(of: contextMenuPresentingState, perform: { state in
+                contextMenuPresentingStateChanged(state)
+            })
+            .onReceive(Publishers.keyboardHeight) { height in
+                handleKeyboardHeightChange(height)
+            }
+            if model.shouldShowMap {
+                LocationSharingView(model: model)
+            }
+
+            if model.isSyncing {
+                syncView()
+            }
+
+            if model.isBlocked {
+                blockView()
+            }
+
+            if callBannerViewModel.isVisible {
+                CallBannerView(viewModel: callBannerViewModel)
+            }
+        }
     }
 
     private func createMessagesStackView() -> some View {

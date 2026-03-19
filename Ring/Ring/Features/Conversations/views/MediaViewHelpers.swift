@@ -112,16 +112,13 @@ struct MediaSeekSlider: UIViewRepresentable {
         slider.setThumbImage(thumb, for: .highlighted)
     }
 
-    private static func makeCircle(size: CGFloat, color: UIColor) -> UIImage? {
+    private static func makeCircle(size: CGFloat, color: UIColor) -> UIImage {
         let cgSize = CGSize(width: size, height: size)
-        UIGraphicsBeginImageContextWithOptions(cgSize, false, 0.0)
-        guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
-        ctx.setFillColor(color.cgColor)
-        ctx.addEllipse(in: CGRect(origin: .zero, size: cgSize))
-        ctx.drawPath(using: .fill)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
+        let renderer = UIGraphicsImageRenderer(size: cgSize)
+        return renderer.image { ctx in
+            color.setFill()
+            ctx.cgContext.fillEllipse(in: CGRect(origin: .zero, size: cgSize))
+        }
     }
 
     final class Coordinator: NSObject {
@@ -132,14 +129,17 @@ struct MediaSeekSlider: UIViewRepresentable {
         var lastColor: UIColor?
         var lastThumbSize: CGFloat = 0
 
-        @objc func touchDown(_ slider: UISlider) {
+        @objc
+        func touchDown(_ slider: UISlider) {
             isSeeking = true
             onSeekStart()
         }
-        @objc func valueChanged(_ slider: UISlider) {
+        @objc
+        func valueChanged(_ slider: UISlider) {
             onSeekChange(slider.value)
         }
-        @objc func touchUp(_ slider: UISlider) {
+        @objc
+        func touchUp(_ slider: UISlider) {
             onSeekChange(slider.value)
             onSeekEnd()
             isSeeking = false
@@ -161,7 +161,7 @@ struct ScaleButtonStyle: ButtonStyle {
 
 extension View {
     /// A 44×44 icon button with a circular glass background.
-    func glassIconButton(systemName: String, size: CGFloat = 20, action: @escaping () -> Void) -> some View {
+    func glassIconButton(systemName: String, accessibilityLabel: String, size: CGFloat = 20, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: systemName)
                 .font(.system(size: size, weight: .semibold))
@@ -169,6 +169,7 @@ extension View {
                 .frame(width: 44, height: 44)
                 .glassCircleBackground()
         }
+        .accessibilityLabel(accessibilityLabel)
         .buttonStyle(ScaleButtonStyle())
     }
 
@@ -191,5 +192,54 @@ extension Float {
     var durationString: String {
         guard self > 0 else { return "" }
         return String.durationFormatted(seconds: Int(self / 1_000_000))
+    }
+}
+
+final class MessageActionHandler {
+    var presentMediaPreview: ((MediaPreviewModel, CGRect, (() -> CGRect)?) -> Void)?
+    let injectionBag: InjectionBag
+    var forwardMessage: ((MessageContentVM, [String]) -> Void)?
+
+    init(injectionBag: InjectionBag) {
+        self.injectionBag = injectionBag
+    }
+
+    /// Builds a MediaPreviewModel from the message's state and presents it.
+    /// Handles async image loading for image files; video files are presented synchronously.
+    func handleMediaPreview(for message: MessageContentVM, sourceFrame: CGRect, sourceFrameProvider: (() -> CGRect)?) {
+        guard let url = message.url else { return }
+        let allowDelete = !message.isIncoming
+        if let player = message.player, player.hasVideo.value {
+            let content = MediaPreviewContent.player(player)
+            let model = makePreviewModel(content: content, fileURL: url, canDelete: allowDelete, delegate: message)
+            presentMediaPreview?(model, sourceFrame, sourceFrameProvider)
+        } else if url.pathExtension.isImageExtension() {
+            let isGif = message.isGifImage()
+            DispatchQueue.global(qos: .userInitiated).async { [weak self, weak message] in
+                let image = isGif
+                    ? UIImage.gifImageWithUrl(url, maxSize: 0)
+                    : UIImage.getImagefromURL(fileURL: url, maxSize: 0)
+                guard let self = self, let message = message, let image = image else { return }
+                DispatchQueue.main.async { [weak self, weak message] in
+                    guard let self = self, let message = message else { return }
+                    let currentFrame = sourceFrameProvider?() ?? sourceFrame
+                    let content = MediaPreviewContent.image(image)
+                    let model = self.makePreviewModel(content: content, fileURL: url, canDelete: allowDelete, delegate: message)
+                    self.presentMediaPreview?(model, currentFrame, sourceFrameProvider)
+                }
+            }
+        }
+    }
+
+    private func makePreviewModel(content: MediaPreviewContent, fileURL: URL, canDelete: Bool, delegate: MediaPreviewActionsDelegate) -> MediaPreviewModel {
+        let model = MediaPreviewModel(content: content, delegate: delegate, fileURL: fileURL, canDelete: canDelete)
+        model.injectionBag = injectionBag
+        if let forwardMessage = forwardMessage {
+            model.forwardCallback = { [weak delegate] conversations in
+                guard let delegate = delegate as? MessageContentVM else { return }
+                forwardMessage(delegate, conversations)
+            }
+        }
+        return model
     }
 }

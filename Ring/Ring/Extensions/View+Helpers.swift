@@ -77,9 +77,13 @@ extension View {
         modifier(MessageTextStyle(model: model))
     }
 
-    // MARK: - Long press suppression environment
+    // MARK: - Gesture suppression environment
     func suppressLongPress(_ value: Bool) -> some View {
         environment(\.suppressLongPress, value)
+    }
+
+    func contextMenuActive(_ value: Bool) -> some View {
+        environment(\.contextMenuActive, value)
     }
 }
 
@@ -352,9 +356,18 @@ private struct SuppressLongPressKey: EnvironmentKey {
     static let defaultValue: Bool = false
 }
 
+private struct ContextMenuActiveKey: EnvironmentKey {
+    static let defaultValue: Bool = false
+}
+
 extension EnvironmentValues {
     var suppressLongPress: Bool {
         get { self[SuppressLongPressKey.self] }
         set { self[SuppressLongPressKey.self] = newValue }
+    }
+
+    var contextMenuActive: Bool {
+        get { self[ContextMenuActiveKey.self] }
+        set { self[ContextMenuActiveKey.self] = newValue }
     }
 }

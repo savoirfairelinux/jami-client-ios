@@ -17,35 +17,108 @@
  */
 
 import SwiftUI
+import Photos
 
 protocol MediaPreviewActionsDelegate: AnyObject {
-    func shareFile()
-    func forwardFile()
-    func saveFile()
-    func deleteFile()
+    func deleteMessage()
 }
+
+/// Identifies which sheet to present from MediaPreviewView.
+enum MediaPreviewSheet: Identifiable {
+    case share(url: URL)
+    case forward(injectionBag: InjectionBag, callback: ([String]) -> Void)
+
+    var id: String {
+        switch self {
+        case .share: return "share"
+        case .forward: return "forward"
+        }
+    }
+}
+
+// MARK: - Content
 
 enum MediaPreviewContent {
     case player(PlayerViewModel)
     case image(UIImage)
 }
 
+// MARK: - Model
+
 class MediaPreviewModel: ObservableObject {
     let content: MediaPreviewContent
+    let canDelete: Bool
+    let fileURL: URL?
     private weak var delegate: MediaPreviewActionsDelegate?
+
+    var injectionBag: InjectionBag?
+    var forwardCallback: (([String]) -> Void)?
+
+    @Published var activeSheet: MediaPreviewSheet?
+    @Published var saveError: String?
 
     var isImagePreview: Bool {
         if case .image = content { return true }
         return false
     }
 
-    init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate) {
+    init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate, fileURL: URL? = nil, canDelete: Bool = false) {
         self.content = content
         self.delegate = delegate
+        self.fileURL = fileURL
+        self.canDelete = canDelete
     }
 
-    func share() { delegate?.shareFile() }
-    func forward() { delegate?.forwardFile() }
-    func save() { delegate?.saveFile() }
-    func delete() { delegate?.deleteFile() }
+    func share() {
+        guard let url = fileURL else { return }
+        activeSheet = .share(url: url)
+    }
+
+    func forward() {
+        guard let bag = injectionBag, let callback = forwardCallback else { return }
+        activeSheet = .forward(injectionBag: bag, callback: callback)
+    }
+
+    func save() {
+        guard let url = fileURL else { return }
+        if url.pathExtension.isImageExtension() {
+            saveImageToPhotos(url: url)
+        }
+    }
+
+    func delete() { delegate?.deleteMessage() }
+
+    private func saveImageToPhotos(url: URL) {
+        let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+        switch status {
+        case .authorized, .limited:
+            performPhotoSave(url: url)
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { [weak self] newStatus in
+                guard newStatus == .authorized || newStatus == .limited else {
+                    DispatchQueue.main.async {
+                        self?.saveError = L10n.Conversation.errorSavingImage
+                    }
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.performPhotoSave(url: url)
+                }
+            }
+        default:
+            saveError = L10n.Conversation.errorSavingImage
+        }
+    }
+
+    private func performPhotoSave(url: URL) {
+        PHPhotoLibrary.shared().performChanges({
+            let request = PHAssetCreationRequest.forAsset()
+            request.addResource(with: .photo, fileURL: url, options: nil)
+        }, completionHandler: { [weak self] _, error in
+            guard let error = error else { return }
+            DispatchQueue.main.async {
+                self?.saveError = error.localizedDescription
+            }
+        })
+    }
 }
