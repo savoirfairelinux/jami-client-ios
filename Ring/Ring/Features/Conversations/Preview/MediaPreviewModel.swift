@@ -17,35 +17,91 @@
  */
 
 import SwiftUI
+import Photos
+
+// MARK: - Delegate (only delete still routes through UIKit)
 
 protocol MediaPreviewActionsDelegate: AnyObject {
-    func shareFile()
-    func forwardFile()
-    func saveFile()
-    func deleteFile()
+    func deleteMessage()
 }
+
+// MARK: - Sheet enum
+
+/// Identifies which sheet to present from MediaPreviewView.
+enum MediaPreviewSheet: Identifiable {
+    case share(url: URL)
+    case forward(injectionBag: InjectionBag, callback: ([String]) -> Void)
+    case saveToFiles(url: URL)
+
+    var id: String {
+        switch self {
+        case .share: return "share"
+        case .forward: return "forward"
+        case .saveToFiles: return "saveToFiles"
+        }
+    }
+}
+
+// MARK: - Content
 
 enum MediaPreviewContent {
     case player(PlayerViewModel)
     case image(UIImage)
 }
 
+// MARK: - Model
+
 class MediaPreviewModel: ObservableObject {
     let content: MediaPreviewContent
+    let canDelete: Bool
+    let fileURL: URL?
     private weak var delegate: MediaPreviewActionsDelegate?
+
+    /// Dependencies for presenting forward picker directly from SwiftUI.
+    var injectionBag: InjectionBag?
+    var forwardCallback: (([String]) -> Void)?
+
+    @Published var activeSheet: MediaPreviewSheet?
 
     var isImagePreview: Bool {
         if case .image = content { return true }
         return false
     }
 
-    init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate) {
+    init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate, fileURL: URL? = nil, canDelete: Bool = false) {
         self.content = content
         self.delegate = delegate
+        self.fileURL = fileURL
+        self.canDelete = canDelete
     }
 
-    func share() { delegate?.shareFile() }
-    func forward() { delegate?.forwardFile() }
-    func save() { delegate?.saveFile() }
-    func delete() { delegate?.deleteFile() }
+    func share() {
+        guard let url = fileURL else { return }
+        activeSheet = .share(url: url)
+    }
+
+    func forward() {
+        guard let bag = injectionBag, let callback = forwardCallback else { return }
+        activeSheet = .forward(injectionBag: bag, callback: callback)
+    }
+
+    func save() {
+        guard let url = fileURL else { return }
+        if url.pathExtension.isImageExtension() {
+            saveImageToPhotos(url: url)
+        } else {
+            activeSheet = .saveToFiles(url: url)
+        }
+    }
+
+    func delete() { delegate?.deleteMessage() }
+
+    // MARK: - Private
+
+    private func saveImageToPhotos(url: URL) {
+        PHPhotoLibrary.shared().performChanges({
+            let request = PHAssetCreationRequest.forAsset()
+            request.addResource(with: .photo, fileURL: url, options: nil)
+        }, completionHandler: nil)
+    }
 }
