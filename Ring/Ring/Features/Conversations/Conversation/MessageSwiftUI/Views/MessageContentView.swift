@@ -146,7 +146,7 @@ struct MessageLongPress: ViewModifier {
     func body(content: Content) -> some View {
         content
             .simultaneousGesture(
-                LongPressGesture(minimumDuration: 0.15)
+                LongPressGesture(minimumDuration: 0.3)
                     .onEnded { _ in longPressCb() }
             )
     }
