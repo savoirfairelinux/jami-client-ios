@@ -20,6 +20,7 @@ import SwiftUI
 
 struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
+    @StateObject private var mediaPreviewOverlayState = MediaPreviewState()
     @SwiftUI.State private var containerWidth: CGFloat = UIScreen.main.bounds.width
 
     var body: some View {
@@ -33,15 +34,19 @@ struct ConversationContainerView: View {
                         }
                 }
             )
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    conversationTitleView
-                }
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    trailingButtons
-                }
+            .environment(\.mediaPreviewOverlayState, mediaPreviewOverlayState)
+            .onAppear {
+                viewModel.swiftUIModel.mediaPreviewOverlayState = mediaPreviewOverlayState
             }
+            .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                conversationTitleView
+            }
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                trailingButtons
+            }
+        }
     }
 
     // MARK: - Title View

@@ -34,10 +34,10 @@ enum DocumentPickerMode {
 }
 
 enum ContextMenu: State {
-    case preview(message: MessageContentVM)
     case forward(message: MessageContentVM)
     case share(items: [Any])
     case saveFile(url: URL)
+    case openDocument(url: URL)
     case reply(message: MessageContentVM)
     case delete(message: MessageContentVM)
     case edit(message: MessageContentVM)
@@ -158,8 +158,6 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ContextMenu else { return }
                 switch state {
-                case .preview(let message):
-                    self.presentPreview(message: message)
                 case .forward(let message):
                     /*
                      Remove the tap gesture to ensure the contact selector
@@ -172,6 +170,8 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                     self.presentActivityControllerWithItems(items: items)
                 case .saveFile(let url):
                     self.saveFile(url: url)
+                case .openDocument(let url):
+                    self.openDocument(url: url)
                 default:
                     break
                 }
@@ -514,17 +514,6 @@ extension ConversationViewController {
         }
     }
 
-    func presentPreview(message: MessageContentVM) {
-        guard let url = message.url else { return }
-        if message.player != nil {
-            presentPlayer(message: message)
-        } else if url.pathExtension.isImageExtension(),
-                  let image = message.getImage(maxSize: 0) {
-            viewModel.openFullScreenPreview(viewModel: nil, image: image, message: message)
-        } else {
-            openDocument(url: url)
-        }
-    }
 
     func presentActivityControllerWithItems(items: [Any]) {
         let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
@@ -572,10 +561,6 @@ extension ConversationViewController {
         self.present(documentPicker, animated: true, completion: nil)
     }
 
-    func presentPlayer(message: MessageContentVM) {
-        guard let player = message.player, player.hasVideo.value else { return }
-        viewModel.openFullScreenPreview(viewModel: player, image: nil, message: message)
-    }
 
     func openDocument(url: URL) {
         DispatchQueue.main.async {

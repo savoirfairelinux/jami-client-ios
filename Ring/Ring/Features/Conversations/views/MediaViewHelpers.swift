@@ -185,6 +185,133 @@ extension View {
     }
 }
 
+// MARK: - Zoomable Image
+
+/// Reusable zoomable image with pinch-to-zoom, pan, and double-tap toggle.
+/// Used by MediaPreviewView for full-screen image preview.
+struct ZoomableImageView: View {
+    let image: UIImage
+    /// Optional single-tap callback (e.g. to toggle controls). Nil disables single-tap.
+    var onSingleTap: (() -> Void)?
+
+    private let doubleTapZoomScale: CGFloat = 3
+    @SwiftUI.State private var imageScale: CGFloat = 1
+    @SwiftUI.State private var lastScale: CGFloat = 1
+    @SwiftUI.State private var imageOffset: CGSize = .zero
+    @SwiftUI.State private var lastOffset: CGSize = .zero
+
+    /// Whether the image is currently zoomed in (scale > 1).
+    var isZoomed: Bool { imageScale > 1 }
+
+    var body: some View {
+        imageView
+            .scaleEffect(imageScale)
+            .offset(imageOffset)
+            .gesture(magnificationGesture)
+            .gesture(panGesture)
+            .contentShape(Rectangle())
+            .onTapGesture(count: 2) { toggleZoom() }
+    }
+
+    func resetZoom() {
+        imageScale = 1
+        lastScale = 1
+        imageOffset = .zero
+        lastOffset = .zero
+    }
+
+    private var imageView: some View {
+        Image(uiImage: image)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+    }
+
+    // MARK: - Gestures
+
+    private var magnificationGesture: some Gesture {
+        MagnificationGesture()
+            .onChanged { value in
+                imageScale = max(1, lastScale * value)
+            }
+            .onEnded { value in
+                lastScale = max(1, lastScale * value)
+                imageScale = lastScale
+                if imageScale <= 1 {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        imageOffset = .zero
+                        lastOffset = .zero
+                    }
+                }
+            }
+    }
+
+    private var panGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                guard imageScale > 1 else { return }
+                imageOffset = CGSize(
+                    width: lastOffset.width + value.translation.width,
+                    height: lastOffset.height + value.translation.height
+                )
+            }
+            .onEnded { _ in
+                guard imageScale > 1 else { return }
+                lastOffset = imageOffset
+            }
+    }
+
+    private func toggleZoom() {
+        withAnimation(.easeInOut(duration: 0.25)) {
+            if imageScale > 1 {
+                imageScale = 1
+                lastScale = 1
+                imageOffset = .zero
+                lastOffset = .zero
+            } else {
+                imageScale = doubleTapZoomScale
+                lastScale = doubleTapZoomScale
+            }
+        }
+    }
+}
+
+// MARK: - Preview Tap Overlay
+
+/// Handles both tap-to-preview and long-press-for-context-menu on media views.
+/// Both gestures live on the same Color.clear overlay so the overlay does not
+/// block touches from reaching the long press handler.
+/// A shared flag prevents the tap from firing after a long press is dismissed.
+struct PreviewTapOverlay: ViewModifier {
+    let onTap: (CGRect) -> Void
+    let onLongPress: () -> Void
+
+    @SwiftUI.State private var longPressActive = false
+
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                GeometryReader { proxy in
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            guard !longPressActive else { return }
+                            onTap(proxy.frame(in: .global))
+                        }
+                        .simultaneousGesture(
+                            LongPressGesture(minimumDuration: 0.15)
+                                .onEnded { _ in
+                                    longPressActive = true
+                                    onLongPress()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        longPressActive = false
+                                    }
+                                }
+                        )
+                }
+            )
+    }
+}
+
 // MARK: - Duration Formatting
 
 extension Float {

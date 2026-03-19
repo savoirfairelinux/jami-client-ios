@@ -102,6 +102,12 @@ class PlayerCoordinator: ObservableObject {
         disposeBag = DisposeBag()
         boundViewModel = viewModel
 
+        // Seed coordinator state from the view model's current values
+        // so the UI shows the correct layout immediately.
+        hasVideo = viewModel.hasVideo.value
+        isPaused = viewModel.pause.value
+        isMuted = viewModel.audioMuted.value
+
         viewModel.playBackFrame
             .subscribe(onNext: { [weak self] buffer in
                 guard let self = self, let buffer = buffer else { return }
@@ -124,33 +130,29 @@ class PlayerCoordinator: ObservableObject {
 
         viewModel.playerDuration
             .asObservable()
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] value in
-                self?.duration = value
+                DispatchQueue.main.async { self?.duration = value }
             })
             .disposed(by: disposeBag)
 
         viewModel.pause
             .asObservable()
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] value in
-                self?.isPaused = value
+                DispatchQueue.main.async { self?.isPaused = value }
             })
             .disposed(by: disposeBag)
 
         viewModel.audioMuted
             .asObservable()
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] value in
-                self?.isMuted = value
+                DispatchQueue.main.async { self?.isMuted = value }
             })
             .disposed(by: disposeBag)
 
         viewModel.hasVideo
             .asObservable()
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] value in
-                self?.hasVideo = value
+                DispatchQueue.main.async { self?.hasVideo = value }
             })
             .disposed(by: disposeBag)
 
@@ -226,8 +228,14 @@ struct PlayerView: View {
     var sizeMode: PlayerMode
     var withControls: Bool
     var externalControlsVisible: Binding<Bool>?
+    /// Called when the video area (not a control) is tapped in message mode.
+    /// Receives the view's global frame for the expand animation.
+    var onVideoTap: ((CGRect) -> Void)?
+    /// Called on long press in the video area (e.g. to show context menu).
+    var onVideoLongPress: (() -> Void)?
 
     @StateObject private var coordinator = PlayerCoordinator()
+    @SwiftUI.State private var longPressActive = false
 
     private var controlsVisible: Bool {
         externalControlsVisible?.wrappedValue ?? coordinator.controlsVisible
@@ -255,6 +263,8 @@ struct PlayerView: View {
 
             VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            videoTapLayer
 
             if withControls {
                 controlsOverlay
@@ -285,13 +295,30 @@ struct PlayerView: View {
     }
 
     private var backgroundColor: Color {
-        if sizeMode == .fullScreen {
-            return Color.black
+        sizeMode == .fullScreen ? .black : Color(UIColor.placeholderText)
+    }
+
+    @ViewBuilder private var videoTapLayer: some View {
+        if let onVideoTap = onVideoTap, coordinator.hasVideo {
+            GeometryReader { proxy in
+                Color.clear
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        guard !longPressActive else { return }
+                        onVideoTap(proxy.frame(in: .global))
+                    }
+                    .simultaneousGesture(
+                        LongPressGesture(minimumDuration: 0.15)
+                            .onEnded { _ in
+                                longPressActive = true
+                                onVideoLongPress?()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    longPressActive = false
+                                }
+                            }
+                    )
+            }
         }
-        if coordinator.hasVideo {
-            return Color(UIColor.placeholderText)
-        }
-        return Color(UIColor.placeholderText)
     }
 
     // MARK: - Controls Overlay
@@ -306,6 +333,7 @@ struct PlayerView: View {
                 }
             }
             .opacity(controlsVisible ? 1 : 0)
+            .animation(.easeInOut(duration: 0.3), value: controlsVisible)
         } else {
             messageControls
         }
@@ -327,27 +355,7 @@ struct PlayerView: View {
 
     @ViewBuilder private var fullScreenBottomBar: some View {
         HStack(spacing: 12) {
-            MediaSeekSlider(
-                onRegister: { sink in coordinator.sliderUpdate = sink },
-                onSeekStart: {
-                    coordinator.cancelAutoHide()
-                    coordinator.isSeeking = true
-                    viewModel.userStartSeeking()
-                    viewModel.seekTimeVariable.accept(coordinator.progress)
-                },
-                onSeekChange: { newValue in
-                    coordinator.progress = newValue
-                    if coordinator.isSeeking {
-                        viewModel.seekTimeVariable.accept(newValue)
-                    }
-                },
-                onSeekEnd: {
-                    coordinator.isSeeking = false
-                    viewModel.seekTimeVariable.accept(coordinator.progress)
-                    viewModel.userStopSeeking()
-                    coordinator.scheduleAutoHide()
-                }
-            )
+            seekSlider(autoHide: true)
 
             Text(coordinator.duration.durationString)
                 .font(.system(.caption, design: .monospaced))
@@ -372,9 +380,36 @@ struct PlayerView: View {
         .padding(.bottom, 12)
     }
 
-    // MARK: - In-Message Controls
+    private func seekSlider(autoHide: Bool) -> some View {
+        MediaSeekSlider(
+            onRegister: { sink in coordinator.sliderUpdate = sink },
+            onSeekStart: {
+                if autoHide { coordinator.cancelAutoHide() }
+                coordinator.isSeeking = true
+                viewModel.userStartSeeking()
+                viewModel.seekTimeVariable.accept(coordinator.progress)
+            },
+            onSeekChange: { newValue in
+                coordinator.progress = newValue
+                if coordinator.isSeeking {
+                    viewModel.seekTimeVariable.accept(newValue)
+                }
+            },
+            onSeekEnd: {
+                coordinator.isSeeking = false
+                viewModel.seekTimeVariable.accept(coordinator.progress)
+                viewModel.userStopSeeking()
+                if autoHide { coordinator.scheduleAutoHide() }
+            }
+        )
+    }
 
-    @ViewBuilder private var messageControls: some View {
+}
+
+// MARK: - In-Message Controls
+
+extension PlayerView {
+    @ViewBuilder var messageControls: some View {
         if coordinator.hasVideo {
             videoMessageControls
         } else {
@@ -382,7 +417,7 @@ struct PlayerView: View {
         }
     }
 
-    // MARK: - Video In-Message Controls
+    // MARK: Video In-Message Controls
 
     private var videoMessageControls: some View {
         ZStack {
@@ -439,80 +474,52 @@ struct PlayerView: View {
     }
 
     private var videoMessageSlider: some View {
-        MediaSeekSlider(
-            onRegister: { sink in coordinator.sliderUpdate = sink },
-            onSeekStart: {
-                coordinator.cancelAutoHide()
-                coordinator.isSeeking = true
-                viewModel.userStartSeeking()
-                viewModel.seekTimeVariable.accept(coordinator.progress)
-            },
-            onSeekChange: { newValue in
-                coordinator.progress = newValue
-                if coordinator.isSeeking {
-                    viewModel.seekTimeVariable.accept(newValue)
-                }
-            },
-            onSeekEnd: {
-                coordinator.isSeeking = false
-                viewModel.seekTimeVariable.accept(coordinator.progress)
-                viewModel.userStopSeeking()
-                coordinator.scheduleAutoHide()
-            }
-        )
+        seekSlider(autoHide: true)
     }
 
-    // MARK: - Audio-Only In-Message Controls
+    // MARK: Audio-Only In-Message Controls
 
     private var audioMessageControls: some View {
-        HStack(spacing: 10) {
-            Image(systemName: "waveform")
-                .font(.system(size: 18, weight: .medium))
-                .foregroundColor(.white.opacity(0.5))
-                .frame(width: 24)
-
-            Button(action: { viewModel.togglePause() }, label: {
-                Image(systemName: coordinator.isPaused ? "play.fill" : "pause.fill")
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(.white)
-                    .frame(width: 36, height: 36)
-            })
-            .applyGlassButtonBackground()
-            .buttonStyle(ScaleButtonStyle())
-
-            VStack(alignment: .trailing, spacing: 4) {
-                Text(coordinator.duration.durationString)
-                    .font(.system(.caption, design: .monospaced))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-
-                MediaSeekSlider(
-                    onRegister: { sink in coordinator.sliderUpdate = sink },
-                    onSeekStart: {
-                        coordinator.isSeeking = true
-                        viewModel.userStartSeeking()
-                        viewModel.seekTimeVariable.accept(coordinator.progress)
-                    },
-                    onSeekChange: { newValue in
-                        coordinator.progress = newValue
-                        if coordinator.isSeeking {
-                            viewModel.seekTimeVariable.accept(newValue)
-                        }
-                    },
-                    onSeekEnd: {
-                        coordinator.isSeeking = false
-                        viewModel.seekTimeVariable.accept(coordinator.progress)
-                        viewModel.userStopSeeking()
-                    }
-                )
-                .frame(height: 22)
+        ZStack {
+            if let onVideoLongPress = onVideoLongPress {
+                Color.clear
+                    .contentShape(Rectangle())
+                    .simultaneousGesture(
+                        LongPressGesture(minimumDuration: 0.15)
+                            .onEnded { _ in onVideoLongPress() }
+                    )
             }
-            .frame(maxWidth: .infinity)
+
+            HStack(spacing: 10) {
+                Image(systemName: "waveform")
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundColor(.white.opacity(0.5))
+                    .frame(width: 28)
+
+                Button(action: { viewModel.togglePause() }, label: {
+                    Image(systemName: coordinator.isPaused ? "play.fill" : "pause.fill")
+                        .font(.system(size: 20, weight: .medium))
+                        .foregroundColor(.white)
+                        .frame(width: 40, height: 40)
+                        .contentShape(Circle())
+                })
+                .applyGlassButtonBackground()
+
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text(coordinator.duration.durationString)
+                        .font(.system(.caption, design: .monospaced))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+
+                    seekSlider(autoHide: false)
+                        .frame(height: 22)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .padding(.horizontal, 12)
         }
-        .padding(.horizontal, 12)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-
 }
 
 // MARK: - View Helpers
@@ -528,6 +535,7 @@ private extension View {
             self
         }
     }
+
 }
 
 // MARK: - Controls Background Helpers
