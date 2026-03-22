@@ -62,6 +62,12 @@ class PlayerViewModel {
 
     private let videoService: VideoService
     private let filePath: String
+
+    /// The display name of the file being played (e.g. "recording.m4a").
+    var fileName: String {
+        return (filePath as NSString).lastPathComponent
+    }
+
     private var playerId = ""
     private var progressTimer: Timer?
 
@@ -273,7 +279,6 @@ class PlayerViewModel {
     }
 
     /// Recreate the daemon player after it was closed externally (e.g. before a call).
-    /// firstFrame is already available so we skip extraction and go straight to playing.
     private func reinitialize() {
         let fname = "file://" + filePath
         playerId = videoService.createPlayer(path: fname)
@@ -287,7 +292,7 @@ class PlayerViewModel {
             })
             .disposed(by: playBackDisposeBag)
 
-        // Wait for FileOpened, then start playing immediately.
+        // Wait for FileOpened, then initialize and start playing.
         videoService.playerInfo
             .asObservable()
             .filter { [weak self] player in
@@ -302,7 +307,12 @@ class PlayerViewModel {
                 }
                 self.playerDuration.accept(duration)
                 self.hasVideo.accept(player.hasVideo)
+                if !player.hasVideo {
+                    self.audioMuted.accept(false)
+                }
                 self.videoService.mutePlayerAudio(playerId: self.playerId, mute: self.audioMuted.value)
+                // Pause first so the daemon initializes its pipeline, then play.
+                self.transition(to: .ready)
                 self.transition(to: .playing)
             })
             .disposed(by: playBackDisposeBag)

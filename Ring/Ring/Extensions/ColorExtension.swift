@@ -122,6 +122,7 @@ extension Color {
     static let jamiMessageCellTimeText = Color(UIColor.jamiMessageCellTimeText)
     static let jamiMessageBackground = Color(UIColor.jamiMessageBackground)
     static let jamiMessageTextFieldBorder = Color(UIColor.jamiMessageTextFieldBorder)
+    static let audioPlayerBackground = Color(UIColor.audioPlayerBackground)
     static let unreadMessageText = Color(UIColor.unreadMessageText)
     static let unreadMessageBackground = Color(UIColor.unreadMessageBackground)
 

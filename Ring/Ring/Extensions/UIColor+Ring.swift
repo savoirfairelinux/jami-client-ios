@@ -120,6 +120,7 @@ extension UIColor {
         return UIColor(named: "messageBackgroundColor") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
     }
     static let jamiMessageTextFieldBorder = UIColor(red: 220, green: 220, blue: 220, alpha: 1.0)
+    static let audioPlayerBackground = UIColor(named: "audioPlayerBackground")!
     static let unreadMessageText = UIColor(hexString: "CC0022")!
     static let unreadMessageBackground = UIColor(hexString: "EED4D8")!
 
