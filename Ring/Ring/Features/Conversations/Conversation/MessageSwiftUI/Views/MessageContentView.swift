@@ -353,11 +353,11 @@ struct MessageContentView: View {
                 if lockedAxis == nil {
                     let horizontal = abs(value.translation.width)
                     let vertical = abs(value.translation.height)
-                    // For player messages, reject drags that start in the bottom
-                    // portion of the bubble where the seek slider lives, so that
-                    // slider interaction does not trigger swipe-to-reply.
+                    // For player messages, reject drags that start in the
+                    // seek slider zone so horizontal slider drags do not
+                    // trigger swipe-to-reply.
                     if hasPlayer {
-                        let sliderZoneHeight: CGFloat = 30
+                        let sliderZoneHeight: CGFloat = 40
                         let viewHeight = max(model.playerHeight, 80)
                         let startedInSliderZone =
                             value.startLocation.y > viewHeight - sliderZoneHeight

@@ -37,11 +37,65 @@ func glassBackground<S: Shape>(shape: S) -> some View {
     .overlay(shape.stroke(Color.white.opacity(0.2), lineWidth: 0.5))
 }
 
+/// A clear, adaptive glass background that uses the system thin material.
+/// Suitable for use on light or tinted surfaces (e.g. audio player controls).
+func clearGlassBackground<S: Shape>(shape: S) -> some View {
+    ZStack {
+        VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
+    }
+    .clipShape(shape)
+    .overlay(shape.stroke(Color.primary.opacity(0.1), lineWidth: 0.5))
+}
+
+/// A clear glass background with a subtle top-edge highlight for a modern
+/// floating-glass feel. On iOS 26+ this is unused in favor of the native
+/// `.glassEffect()` API — see `liquidGlassCircleBackground()`.
+func clearGlassHighlightBackground<S: Shape>(shape: S) -> some View {
+    ZStack {
+        VisualEffectView(effect: UIBlurEffect(style: .systemThinMaterial))
+        // Subtle top-edge inner glow for depth
+        LinearGradient(
+            colors: [Color.white.opacity(0.25), Color.white.opacity(0.0)],
+            startPoint: .top,
+            endPoint: .center
+        )
+    }
+    .clipShape(shape)
+    .overlay(shape.stroke(Color.white.opacity(0.18), lineWidth: 0.5))
+    .shadow(color: Color.black.opacity(0.08), radius: 4, x: 0, y: 2)
+}
+
 // MARK: - View Modifier Helpers
 
 extension View {
     func glassCircleBackground() -> some View {
         background(glassBackground(shape: Circle()))
+    }
+
+    func clearGlassCircleBackground() -> some View {
+        background(clearGlassBackground(shape: Circle()))
+    }
+
+    /// Applies a liquid glass effect using the given shape on iOS 26+ with a
+    /// polished clear-glass fallback on older versions.
+    /// Use this for floating controls over content.
+    @ViewBuilder
+    func jamiGlassEffect(
+        in shape: some Shape = Circle(),
+        interactive: Bool = false
+    ) -> some View {
+        if #available(iOS 26.0, *) {
+            let glass: Glass = interactive ? Glass.clear.interactive() : .clear
+            self.glassEffect(glass, in: shape)
+        } else {
+            self.background(clearGlassHighlightBackground(shape: shape))
+        }
+    }
+
+    /// Convenience for a circular liquid glass background.
+    @ViewBuilder
+    func liquidGlassCircleBackground() -> some View {
+        self.jamiGlassEffect(in: Circle(), interactive: true)
     }
 
     func glassCapsuleBackground() -> some View {
@@ -83,6 +137,7 @@ struct MediaSeekSlider: UIViewRepresentable {
         }
 
         applyStyle(to: slider, color: UIColor(trackColor), thumbSize: thumbSize)
+        slider.accessibilityLabel = NSLocalizedString("accessibility.audioPlayerSeek", comment: "")
         slider.addTarget(coordinator, action: #selector(Coordinator.touchDown(_:)), for: .touchDown)
         slider.addTarget(coordinator, action: #selector(Coordinator.valueChanged(_:)), for: .valueChanged)
         slider.addTarget(coordinator, action: #selector(Coordinator.touchUp(_:)),
@@ -190,8 +245,16 @@ extension View {
 
 extension Float {
     var durationString: String {
-        guard self > 0 else { return "" }
+        guard self > 0 else { return "00:00" }
         return String.durationFormatted(seconds: Int(self / 1_000_000))
+    }
+
+    /// Returns the elapsed time string for a given progress (0..1) and total duration (microseconds).
+    static func elapsedString(progress: Float, duration: Float) -> String {
+        guard duration > 0 else { return "00:00" }
+        let totalSeconds = Int(duration / 1_000_000)
+        let elapsed = Int(Float(totalSeconds) * min(max(progress, 0), 1))
+        return String.durationFormatted(seconds: elapsed)
     }
 }
 

@@ -598,6 +598,9 @@
 "accessibility.conversationCameraHint" = "Double-tap to open camera";
 "accessibility.audioPlayerPlay" = "Play";
 "accessibility.audioPlayerPause" = "Pause";
+"accessibility.audioPlayerMute" = "Mute";
+"accessibility.audioPlayerUnmute" = "Unmute";
+"accessibility.audioPlayerSeek" = "Seek";
 "accessibility.conversationRowUnreadCount" = "%@ unread messages.";
 "accessibility.conversationRowBlocked" = "Conversation blocked";
 "accessibility.conversationRowSyncing" = "Synchronization in progress";

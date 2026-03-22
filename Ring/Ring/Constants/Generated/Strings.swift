@@ -47,10 +47,16 @@ internal enum L10n {
     internal static let accountSummaryQrCode = L10n.tr("Localizable", "accessibility.accountSummaryQrCode", fallback: "QR Code")
     /// Double-tap to view the account QR code
     internal static let accountSummaryQrCodeHint = L10n.tr("Localizable", "accessibility.accountSummaryQrCodeHint", fallback: "Double-tap to view the account QR code")
+    /// Mute
+    internal static let audioPlayerMute = L10n.tr("Localizable", "accessibility.audioPlayerMute", fallback: "Mute")
     /// Pause
     internal static let audioPlayerPause = L10n.tr("Localizable", "accessibility.audioPlayerPause", fallback: "Pause")
     /// Play
     internal static let audioPlayerPlay = L10n.tr("Localizable", "accessibility.audioPlayerPlay", fallback: "Play")
+    /// Seek
+    internal static let audioPlayerSeek = L10n.tr("Localizable", "accessibility.audioPlayerSeek", fallback: "Seek")
+    /// Unmute
+    internal static let audioPlayerUnmute = L10n.tr("Localizable", "accessibility.audioPlayerUnmute", fallback: "Unmute")
     /// Close
     internal static let close = L10n.tr("Localizable", "accessibility.close", fallback: "Close")
     /// Double-tap to open camera
