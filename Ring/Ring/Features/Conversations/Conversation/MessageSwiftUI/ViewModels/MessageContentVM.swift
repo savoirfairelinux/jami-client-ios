@@ -132,6 +132,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var showProgress: Bool = true
     @Published var playerHeight: CGFloat = 80
     @Published var playerWidth: CGFloat = 250
+    private let audioPlayerHeight: CGFloat = 56
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
@@ -625,7 +626,18 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     func playerDidBecomeReady() {
+        if player?.hasVideo.value == false {
+            playerHeight = audioPlayerHeight
+        }
         updateMenuitems()
+    }
+
+    var audioPlayerColors: AudioMessageColors {
+        let control = isIncoming ? Color(preferencesColor) : styling.textColor
+        return AudioMessageColors(background: backgroundColor,
+                                  foreground: styling.textColor,
+                                  control: control,
+                                  controlBackground: control.opacity(isIncoming ? 0.15 : 0.22))
     }
 
     func updatePlayer(player: PlayerViewModel?) {
@@ -637,6 +649,8 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
             playerSize = frameSize
             playerHeight = frameSize.height
             playerWidth = frameSize.width
+        } else if !player.hasVideo.value {
+            playerSize.height = audioPlayerHeight
         }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }

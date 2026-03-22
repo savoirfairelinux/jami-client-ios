@@ -31,7 +31,7 @@ struct PlayerSwiftUI: View {
 
     var body: some View {
         ZStack(alignment: .center) {
-            if colorScheme == .dark {
+            if colorScheme == .dark && player.hasVideo.value {
                 model.borderColor
                     .frame(width: model.playerWidth * ratio + 2, height: model.playerHeight * ratio + 2)
                     .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
@@ -39,7 +39,8 @@ struct PlayerSwiftUI: View {
             }
             PlayerView(viewModel: player, sizeMode: .inConversationMessage, withControls: withControls,
                        onVideoTap: { frame, frameProvider in model.presentMediaPreview(sourceFrame: frame, sourceFrameProvider: frameProvider) },
-                       onVideoLongPress: onLongGesture)
+                       onVideoLongPress: onLongGesture,
+                       audioColors: model.audioPlayerColors)
                 .frame(height: model.playerHeight * ratio)
                 .frame(width: model.playerWidth * ratio)
                 .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
