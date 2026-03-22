@@ -100,4 +100,5 @@ extension Color {
     static let networkAlertBackground = Color(UIColor(red: 245, green: 110, blue: 88, alpha: 1))
     static let requestBadgeForeground = Color("requestBadgeForeground")
     static let requestsBadgeBackground = Color("requestsBadgeBackground")
+
 }

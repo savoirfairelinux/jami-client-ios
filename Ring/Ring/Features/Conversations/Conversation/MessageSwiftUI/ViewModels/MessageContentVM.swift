@@ -561,6 +561,9 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     }
 
     func playerDidBecomeReady() {
+        if player?.hasVideo.value == false {
+            playerHeight = 120
+        }
         updateMenuitems()
     }
 
