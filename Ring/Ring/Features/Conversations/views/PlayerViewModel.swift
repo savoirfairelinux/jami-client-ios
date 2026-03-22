@@ -51,6 +51,7 @@ class PlayerViewModel {
     let pause = BehaviorRelay<Bool>(value: true)
     let audioMuted = BehaviorRelay<Bool>(value: true)
     let playerReady = BehaviorRelay<Bool>(value: false)
+    let playbackFailed = BehaviorRelay<Bool>(value: false)
     weak var delegate: PlayerDelegate?
 
     var firstFrame: CMSampleBuffer?
@@ -191,6 +192,7 @@ class PlayerViewModel {
                 guard let self = self else { return }
                 guard let duration = Float(player.duration),
                       duration > 0 else {
+                    self.playbackFailed.accept(true)
                     DispatchQueue.main.async {
                         self.videoService.closePlayer(playerId: self.playerId)
                     }
@@ -214,6 +216,7 @@ class PlayerViewModel {
     }
 
     func togglePause() {
+        guard !playbackFailed.value else { return }
         switch state {
         case .ready:
             transition(to: .playing)
@@ -229,6 +232,11 @@ class PlayerViewModel {
         case .extractingFirstFrame, .seeking:
             break
         }
+    }
+
+    func pauseIfPlaying() {
+        guard state == .playing else { return }
+        transition(to: .ready)
     }
 
     func muteAudio() {
@@ -273,7 +281,6 @@ class PlayerViewModel {
     }
 
     /// Recreate the daemon player after it was closed externally (e.g. before a call).
-    /// firstFrame is already available so we skip extraction and go straight to playing.
     private func reinitialize() {
         let fname = "file://" + filePath
         playerId = videoService.createPlayer(path: fname)
@@ -287,7 +294,7 @@ class PlayerViewModel {
             })
             .disposed(by: playBackDisposeBag)
 
-        // Wait for FileOpened, then start playing immediately.
+        // Wait for FileOpened, then initialize and start playing.
         videoService.playerInfo
             .asObservable()
             .filter { [weak self] player in
@@ -297,12 +304,18 @@ class PlayerViewModel {
             .subscribe(onNext: { [weak self] player in
                 guard let self = self else { return }
                 guard let duration = Float(player.duration), duration > 0 else {
+                    self.playbackFailed.accept(true)
                     DispatchQueue.main.async { self.videoService.closePlayer(playerId: self.playerId) }
                     return
                 }
                 self.playerDuration.accept(duration)
                 self.hasVideo.accept(player.hasVideo)
+                if !player.hasVideo {
+                    self.audioMuted.accept(false)
+                }
                 self.videoService.mutePlayerAudio(playerId: self.playerId, mute: self.audioMuted.value)
+                // Pause first so the daemon initializes its pipeline, then play.
+                self.transition(to: .ready)
                 self.transition(to: .playing)
             })
             .disposed(by: playBackDisposeBag)

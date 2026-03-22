@@ -83,6 +83,7 @@ struct MediaSeekSlider: UIViewRepresentable {
         }
 
         applyStyle(to: slider, color: UIColor(trackColor), thumbSize: thumbSize)
+        slider.accessibilityLabel = L10n.Accessibility.audioPlayerSeek
         slider.addTarget(coordinator, action: #selector(Coordinator.touchDown(_:)), for: .touchDown)
         slider.addTarget(coordinator, action: #selector(Coordinator.valueChanged(_:)), for: .valueChanged)
         slider.addTarget(coordinator, action: #selector(Coordinator.touchUp(_:)),
@@ -190,8 +191,16 @@ extension View {
 
 extension Float {
     var durationString: String {
-        guard self > 0 else { return "" }
+        guard self > 0 else { return "00:00" }
         return String.durationFormatted(seconds: Int(self / 1_000_000))
+    }
+
+    /// Returns the elapsed time string for a given progress (0..1) and total duration (microseconds).
+    static func elapsedString(progress: Float, duration: Float) -> String {
+        guard duration > 0 else { return "00:00" }
+        let totalSeconds = Int(duration / 1_000_000)
+        let elapsed = Int(Float(totalSeconds) * min(max(progress, 0), 1))
+        return String.durationFormatted(seconds: elapsed)
     }
 }
 

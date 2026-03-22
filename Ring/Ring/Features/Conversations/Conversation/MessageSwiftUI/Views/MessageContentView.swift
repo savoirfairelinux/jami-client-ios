@@ -353,15 +353,11 @@ struct MessageContentView: View {
                 if lockedAxis == nil {
                     let horizontal = abs(value.translation.width)
                     let vertical = abs(value.translation.height)
-                    // For player messages, reject drags that start in the bottom
-                    // portion of the bubble where the seek slider lives, so that
-                    // slider interaction does not trigger swipe-to-reply.
+                    // For player messages, reject drags that start in the
+                    // seek slider zone so horizontal slider drags do not
+                    // trigger swipe-to-reply.
                     if hasPlayer {
-                        let sliderZoneHeight: CGFloat = 30
-                        let viewHeight = max(model.playerHeight, 80)
-                        let startedInSliderZone =
-                            value.startLocation.y > viewHeight - sliderZoneHeight
-                        if startedInSliderZone {
+                        if isInSeekZone(value.startLocation) {
                             lockedAxis = .vertical
                         } else if horizontal > lockThreshold && horizontal > vertical {
                             lockedAxis = .horizontal
@@ -403,6 +399,25 @@ struct MessageContentView: View {
                 dragHapticFired = false
                 ringProgress = 0
             }
+    }
+
+    private func isInSeekZone(_ location: CGPoint) -> Bool {
+        model.player?.hasVideo.value == false
+            ? isInAudioSeekZone(location)
+            : isInVideoSeekZone(location)
+    }
+
+    private func isInVideoSeekZone(_ location: CGPoint) -> Bool {
+        let sliderZoneHeight: CGFloat = 40
+        let viewHeight = max(model.playerHeight, 80)
+        return location.y > viewHeight - sliderZoneHeight
+    }
+
+    private func isInAudioSeekZone(_ location: CGPoint) -> Bool {
+        let controlsInset: CGFloat = 60
+        return location.y < model.playerHeight
+            && location.x > controlsInset
+            && location.x < bubbleWidth - controlsInset
     }
 
     private func updateAlignment() {

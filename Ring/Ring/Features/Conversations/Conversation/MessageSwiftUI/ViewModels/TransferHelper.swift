@@ -38,16 +38,33 @@ class TransferHelper {
     let dataTransferService: DataTransferService
 
     private var players = [String: PlayerViewModel]()
+    private var playbackDisposeBag = DisposeBag()
 
     func getPlayer(messageID: String) -> PlayerViewModel? {
         return players[messageID]
     }
 
-    func setPlayer(messageID: String, player: PlayerViewModel) { players[messageID] = player }
+    func setPlayer(messageID: String, player: PlayerViewModel) {
+        players[messageID] = player
+        player.pause
+            .filter { !$0 }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak player] _ in
+                self?.pauseOtherPlayers(than: player)
+            })
+            .disposed(by: playbackDisposeBag)
+    }
 
     func closeAllPlayers() {
         players.values.forEach { $0.closePlayer() }
         players.removeAll()
+        playbackDisposeBag = DisposeBag()
+    }
+
+    private func pauseOtherPlayers(than player: PlayerViewModel?) {
+        players.values
+            .filter { $0 !== player }
+            .forEach { $0.pauseIfPlaying() }
     }
 
     init (injectionBag: InjectionBag) {

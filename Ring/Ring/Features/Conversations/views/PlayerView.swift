@@ -25,6 +25,36 @@ enum PlayerMode {
     case inConversationMessage
 }
 
+enum PlayButtonStyle {
+    case fullScreen
+    case videoMessage
+
+    var iconSize: CGFloat {
+        switch self {
+        case .fullScreen: return 48
+        case .videoMessage: return 28
+        }
+    }
+
+    var buttonSize: CGFloat {
+        switch self {
+        case .fullScreen: return 84
+        case .videoMessage: return 52
+        }
+    }
+
+    var autoHide: Bool {
+        self == .fullScreen
+    }
+}
+
+struct AudioMessageColors {
+    let background: Color
+    let foreground: Color
+    let control: Color
+    let controlBackground: Color
+}
+
 // MARK: - Player State Coordinator
 
 /// Manages the AVSampleBufferDisplayLayer and RxSwift subscriptions.
@@ -39,6 +69,7 @@ class PlayerCoordinator: ObservableObject {
     @Published var duration: Float = 0
     @Published var hasVideo: Bool = true
     @Published var controlsVisible: Bool = true
+    @Published var playbackFailed: Bool = false
 
     private var autoHideTask: DispatchWorkItem?
 
@@ -60,6 +91,7 @@ class PlayerCoordinator: ObservableObject {
     }
 
     var progress: Float = 0
+    @Published var elapsedTimeString: String = "00:00"
     var sliderUpdate: ((Float) -> Void)?
 
     private var lastBuffer: CMSampleBuffer?
@@ -72,6 +104,18 @@ class PlayerCoordinator: ObservableObject {
 
     func configureForFullScreen() {
         displayLayer.videoGravity = .resizeAspectFill
+    }
+
+    func updateElapsedTime() {
+        let newString = Float.elapsedString(progress: progress, duration: duration)
+        if newString != elapsedTimeString {
+            elapsedTimeString = newString
+        }
+    }
+
+    var audioTimeString: String {
+        guard duration > 0 else { return "--:--" }
+        return isPaused && progress == 0 ? duration.durationString : elapsedTimeString
     }
 
     func enqueueBuffer(_ buffer: CMSampleBuffer) {
@@ -107,6 +151,7 @@ class PlayerCoordinator: ObservableObject {
         hasVideo = viewModel.hasVideo.value
         isPaused = viewModel.pause.value
         isMuted = viewModel.audioMuted.value
+        playbackFailed = viewModel.playbackFailed.value
 
         viewModel.playBackFrame
             .observe(on: MainScheduler.instance)
@@ -123,6 +168,7 @@ class PlayerCoordinator: ObservableObject {
                 if !self.isSeeking {
                     self.progress = position
                     self.sliderUpdate?(position)
+                    self.updateElapsedTime()
                 }
             })
             .disposed(by: disposeBag)
@@ -156,6 +202,14 @@ class PlayerCoordinator: ObservableObject {
             .observe(on: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] value in
                 self?.hasVideo = value
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.playbackFailed
+            .asObservable()
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] value in
+                self?.playbackFailed = value
             })
             .disposed(by: disposeBag)
 
@@ -233,6 +287,10 @@ struct PlayerView: View {
     var externalControlsVisible: Binding<Bool>?
     var onVideoTap: ((_ frame: CGRect, _ frameProvider: @escaping () -> CGRect) -> Void)?
     var onVideoLongPress: (() -> Void)?
+    var audioColors = AudioMessageColors(background: Color(UIColor.placeholderText),
+                                         foreground: .white,
+                                         control: .white,
+                                         controlBackground: Color.white.opacity(0.22))
 
     @StateObject private var coordinator = PlayerCoordinator()
 
@@ -260,8 +318,10 @@ struct PlayerView: View {
             backgroundColor
                 .ignoresSafeArea(edges: sizeMode == .fullScreen ? .all : [])
 
-            VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            if coordinator.hasVideo {
+                VideoLayerView(displayLayer: coordinator.displayLayer, coordinator: coordinator)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
 
             videoTapLayer
 
@@ -297,7 +357,8 @@ struct PlayerView: View {
     }
 
     private var backgroundColor: Color {
-        sizeMode == .fullScreen ? .black : Color(UIColor.placeholderText)
+        if sizeMode == .fullScreen { return .black }
+        return coordinator.hasVideo ? Color(UIColor.placeholderText) : audioColors.background
     }
 
     @ViewBuilder private var videoTapLayer: some View {
@@ -315,64 +376,109 @@ struct PlayerView: View {
 
     @ViewBuilder private var controlsOverlay: some View {
         if sizeMode == .fullScreen {
-            ZStack {
-                centerPlayButton
-                VStack {
-                    Spacer()
-                    fullScreenBottomBar
-                }
-            }
-            .opacity(controlsVisible ? 1 : 0)
-            .allowsHitTesting(controlsVisible)
-            .animation(.easeInOut(duration: 0.3), value: controlsVisible)
+            fullScreenControls
+                .opacity(controlsVisible ? 1 : 0)
+                .allowsHitTesting(controlsVisible)
+                .animation(.easeInOut(duration: 0.3), value: controlsVisible)
         } else {
             messageControls
         }
     }
 
-    @ViewBuilder private var centerPlayButton: some View {
-        Button(action: {
+    private var fullScreenControls: some View {
+        ZStack {
+            centerPlayButton
+            VStack {
+                Spacer()
+                fullScreenBottomBar
+            }
+        }
+    }
+
+    // MARK: - Unified Play/Pause Button
+
+    @ViewBuilder
+    private func playPauseButton(_ style: PlayButtonStyle) -> some View {
+        let button = Button(action: {
             viewModel.togglePause()
-            coordinator.scheduleAutoHide()
+            if style.autoHide { coordinator.scheduleAutoHide() }
         }, label: {
-            Image(systemName: coordinator.isPaused ? "play.fill" : "pause.fill")
-                .font(.system(size: 44, weight: .medium))
+            Image(systemName: playPauseIcon)
+                .font(.system(size: style.iconSize, weight: .medium))
                 .foregroundColor(.white)
-                .frame(width: 72, height: 72)
+                .frame(width: style.buttonSize, height: style.buttonSize)
+                .contentShape(Circle())
         })
-        .applyGlassButtonBackground()
-        .buttonStyle(ScaleButtonStyle())
+        .accessibilityLabel(playPauseAccessibilityLabel)
+        if #available(iOS 26, *) {
+            button.glassEffect(.clear.interactive(), in: .circle)
+        } else {
+            button
+                .glassCircleBackground()
+                .buttonStyle(ScaleButtonStyle())
+        }
+    }
+
+    private var playPauseIcon: String {
+        coordinator.isPaused ? "play.fill" : "pause.fill"
+    }
+
+    private var playPauseAccessibilityLabel: String {
+        coordinator.isPaused ? L10n.Accessibility.audioPlayerPlay : L10n.Accessibility.audioPlayerPause
+    }
+
+    private var muteIcon: String {
+        coordinator.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill"
+    }
+
+    private var muteAccessibilityLabel: String {
+        coordinator.isMuted ? L10n.Accessibility.audioPlayerUnmute : L10n.Accessibility.audioPlayerMute
+    }
+
+    private var centerPlayButton: some View {
+        playPauseButton(.fullScreen)
     }
 
     @ViewBuilder private var fullScreenBottomBar: some View {
-        HStack(spacing: 12) {
-            seekSlider(autoHide: true)
+        VStack(spacing: 10) {
+            // Row 1: Time capsule + audio circle button
+            HStack(spacing: 10) {
+                Text("\(coordinator.elapsedTimeString) / \(coordinator.duration.durationString)")
+                    .font(.system(.callout, design: .monospaced))
+                    .foregroundColor(.white.opacity(0.9))
+                    .padding(.horizontal, 16)
+                    .frame(height: 44)
+                    .glassCapsuleBackground()
 
-            Text(coordinator.duration.durationString)
-                .font(.system(.caption, design: .monospaced))
-                .foregroundColor(.white.opacity(0.85))
+                Spacer()
 
-            if coordinator.hasVideo {
                 Button(action: {
                     viewModel.muteAudio()
                     coordinator.scheduleAutoHide()
                 }, label: {
-                    Image(systemName: coordinator.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
-                        .font(.system(size: 16, weight: .medium))
+                    Image(systemName: muteIcon)
+                        .font(.system(size: 18, weight: .medium))
                         .foregroundColor(.white)
                         .frame(width: 44, height: 44)
                 })
+                .glassCircleBackground()
+                .accessibilityLabel(muteAccessibilityLabel)
             }
+
+            // Row 2: Slider in capsule
+            seekSlider(autoHide: true, thumbSize: 18)
+                .padding(.horizontal, 16)
+                .frame(height: 60)
+                .glassCapsuleBackground()
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
-        .applyControlsBarBackground(isFullScreen: true)
-        .padding(.horizontal, 16)
-        .padding(.bottom, 12)
+        .padding(.horizontal, 20)
+        .padding(.bottom, 16)
     }
 
-    private func seekSlider(autoHide: Bool) -> some View {
+    private func seekSlider(autoHide: Bool, trackColor: Color = .white, thumbSize: CGFloat = 14) -> some View {
         MediaSeekSlider(
+            trackColor: trackColor,
+            thumbSize: thumbSize,
             onRegister: { sink in coordinator.sliderUpdate = sink },
             onSeekStart: {
                 if autoHide { coordinator.cancelAutoHide() }
@@ -382,6 +488,7 @@ struct PlayerView: View {
             },
             onSeekChange: { newValue in
                 coordinator.progress = newValue
+                coordinator.updateElapsedTime()
                 if coordinator.isSeeking {
                     viewModel.seekTimeVariable.accept(newValue)
                 }
@@ -414,58 +521,61 @@ extension PlayerView {
         ZStack {
             videoMessageGradient
             videoMessagePlayButton
+            videoMessageTopBar
             videoMessageBottomBar
         }
     }
 
     private var videoMessageGradient: some View {
         VStack {
-            Spacer()
             LinearGradient(
-                gradient: Gradient(colors: [
-                    Color.black.opacity(0),
-                    Color.black.opacity(0.75)
-                ]),
+                colors: [Color.black.opacity(0.6), Color.black.opacity(0)],
                 startPoint: .top,
                 endPoint: .bottom
             )
-            .allowsHitTesting(false)
+            .frame(height: 48)
+            Spacer()
+            LinearGradient(
+                colors: [Color.black.opacity(0), Color.black.opacity(0.75)],
+                startPoint: .top,
+                endPoint: .bottom
+            )
         }
+        .allowsHitTesting(false)
     }
 
     private var videoMessagePlayButton: some View {
-        Button(action: { viewModel.togglePause() }, label: {
-            Image(systemName: coordinator.isPaused ? "play.fill" : "pause.fill")
-                .font(.system(size: 28, weight: .medium))
-                .foregroundColor(.white)
-                .frame(width: 52, height: 52)
-        })
-        .applyGlassButtonBackground()
+        playPauseButton(.videoMessage)
     }
 
-    private var videoMessageBottomBar: some View {
-        VStack(spacing: 2) {
-            Spacer()
+    private var videoMessageTopBar: some View {
+        VStack {
             HStack(alignment: .center) {
-                Text(coordinator.duration.durationString)
+                Text("\(coordinator.elapsedTimeString) / \(coordinator.duration.durationString)")
                     .font(.system(.caption, design: .monospaced))
                     .foregroundColor(.white)
                 Spacer()
                 Button(action: { viewModel.muteAudio() }, label: {
-                    Image(systemName: coordinator.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                    Image(systemName: muteIcon)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.white)
-                        .frame(width: 36, height: 36)
+                        .frame(width: 44, height: 44)
                 })
+                .accessibilityLabel(muteAccessibilityLabel)
             }
-            videoMessageSlider
+            .padding(.horizontal, 10)
+            .padding(.top, 2)
+            Spacer()
         }
-        .padding(.horizontal, 10)
-        .padding(.bottom, 6)
     }
 
-    private var videoMessageSlider: some View {
-        seekSlider(autoHide: true)
+    private var videoMessageBottomBar: some View {
+        VStack {
+            Spacer()
+            seekSlider(autoHide: true)
+                .padding(.horizontal, 10)
+                .padding(.bottom, 6)
+        }
     }
 
     // MARK: Audio-Only In-Message Controls
@@ -477,50 +587,39 @@ extension PlayerView {
                     .contentShape(Rectangle())
                     .messageGesture(onLongPress: onVideoLongPress)
             }
-
             HStack(spacing: 10) {
-                Image(systemName: "waveform")
-                    .font(.system(size: 20, weight: .medium))
-                    .foregroundColor(.white.opacity(0.5))
-                    .frame(width: 28)
-
-                Button(action: { viewModel.togglePause() }, label: {
-                    Image(systemName: coordinator.isPaused ? "play.fill" : "pause.fill")
-                        .font(.system(size: 20, weight: .medium))
-                        .foregroundColor(.white)
-                        .frame(width: 40, height: 40)
-                        .contentShape(Circle())
-                })
-                .applyGlassButtonBackground()
-
-                VStack(alignment: .trailing, spacing: 4) {
-                    Text(coordinator.duration.durationString)
-                        .font(.system(.caption, design: .monospaced))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-
-                    seekSlider(autoHide: false)
-                        .frame(height: 22)
-                }
-                .frame(maxWidth: .infinity)
+                audioPlayPauseButton
+                seekSlider(autoHide: false, trackColor: audioColors.control, thumbSize: 12)
+                    .frame(height: 44)
+                    .disabled(coordinator.playbackFailed)
+                Text(coordinator.audioTimeString)
+                    .font(.footnote.monospacedDigit())
+                    .fontWeight(.medium)
+                    .foregroundColor(audioColors.foreground.opacity(0.85))
+                    .lineLimit(1)
+                    .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+                    .frame(minWidth: 34, alignment: .trailing)
             }
-            .padding(.horizontal, 12)
+            .padding(.leading, 6)
+            .padding(.trailing, 14)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-}
-
-// MARK: - View Helpers
-
-// MARK: - Controls Background Helpers
-
-private extension View {
-    func applyControlsBarBackground(isFullScreen: Bool) -> some View {
-        let cornerRadius: CGFloat = isFullScreen ? 20 : 14
-        return glassRoundedBackground(cornerRadius: cornerRadius)
     }
 
-    func applyGlassButtonBackground() -> some View {
-        glassCircleBackground()
+    private var audioPlayPauseButton: some View {
+        Button(action: { viewModel.togglePause() }, label: {
+            Image(systemName: audioButtonIcon)
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundColor(audioColors.control)
+                .frame(width: 44, height: 44)
+                .background(Circle().fill(audioColors.controlBackground))
+                .contentShape(Circle())
+        })
+        .buttonStyle(ScaleButtonStyle())
+        .disabled(coordinator.playbackFailed)
     }
+
+    private var audioButtonIcon: String {
+        coordinator.playbackFailed ? "exclamationmark" : playPauseIcon
+    }
+
 }
