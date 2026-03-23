@@ -92,6 +92,10 @@ struct NotificationsSettingsView: View {
                         setAction: { newValue in model.enableProxyList(enable: newValue) }
                     )
 
+                    if model.proxyListEnabled, !model.currentProxy.isEmpty {
+                        FieldRowView(label: L10n.AccountPage.currentProxy, value: model.currentProxy)
+                    }
+
                     if model.proxyListEnabled {
                         NavigationLink(destination: EditableFieldView(value: $model.proxyListUrl, title: L10n.AccountPage.proxyListURL, placeholder: L10n.AccountPage.proxyListURL, onDisappearAction: {
                             model.saveProxyListUrl()

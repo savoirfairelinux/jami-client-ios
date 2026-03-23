@@ -311,6 +311,8 @@ internal enum L10n {
     internal static let createPassword = L10n.tr("Localizable", "accountPage.createPassword", fallback: "Password protect account")
     /// Enter current password
     internal static let currentPasswordPlaceholder = L10n.tr("Localizable", "accountPage.currentPasswordPlaceholder", fallback: "Enter current password")
+    /// Current proxy
+    internal static let currentProxy = L10n.tr("Localizable", "accountPage.currentProxy", fallback: "Current proxy")
     /// Device revocation error
     internal static let deviceRevocationError = L10n.tr("Localizable", "accountPage.deviceRevocationError", fallback: "Device revocation error")
     /// Removing…

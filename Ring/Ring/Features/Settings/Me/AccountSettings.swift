@@ -45,6 +45,7 @@ class AccountSettings: ObservableObject {
 
     @Published var proxyAddress = ""
     @Published var proxyListUrl = ""
+    @Published var currentProxy = ""
 
     @Published var bootstrap = ""
 
@@ -118,12 +119,14 @@ extension AccountSettings {
         self.proxyListUrl = self.getStringState(for: ConfigKey.dhtProxyListUrl)
         self.bootstrap = self.getStringState(for: ConfigKey.accountHostname)
         self.proxyListEnabled = self.getBoolState(for: ConfigKey.proxyListEnabled)
-        self.proxyAddress = self.account.proxy
+        self.proxyAddress = self.getStringState(for: ConfigKey.proxyServer)
+        self.currentProxy = self.account.proxy
         self.callsFromUnknownContacts = self.getBoolState(for: ConfigKey.dhtPublicIn)
         self.peerDiscovery = self.getBoolState(for: ConfigKey.dhtPeerDiscovery)
         self.typingIndicator = self.getBoolState(for: ConfigKey.typingIndicator)
         self.verifyNotificationPermissionStatus()
         observeNotificationPermissionChanges()
+        observeCurrentProxy()
     }
 
     func enableCallsFromUnknownContacts(enable: Bool) {
@@ -193,6 +196,22 @@ extension AccountSettings {
                     self.notificationsPermitted = enable
                     self.verifyNotificationPermissionStatus()
                 }
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func observeCurrentProxy() {
+        self.accountService.sharedResponseStream
+            .filter { [weak self] serviceEvent in
+                guard let self = self else { return false }
+                if serviceEvent.eventType != .registrationStateChanged { return false }
+                guard let eventAccountId: String = serviceEvent.getEventInput(.accountId) else { return false }
+                return eventAccountId == self.account.id
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.currentProxy = self.account.proxy
             })
             .disposed(by: self.disposeBag)
     }
