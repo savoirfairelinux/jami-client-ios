@@ -45,6 +45,7 @@ class AccountSettings: ObservableObject {
 
     @Published var proxyAddress = ""
     @Published var proxyListUrl = ""
+    @Published var currentProxy = ""
 
     @Published var bootstrap = ""
 
@@ -119,6 +120,7 @@ extension AccountSettings {
         self.bootstrap = self.getStringState(for: ConfigKey.accountHostname)
         self.proxyListEnabled = self.getBoolState(for: ConfigKey.proxyListEnabled)
         self.proxyAddress = self.account.proxy
+        self.currentProxy = self.account.proxy
         self.callsFromUnknownContacts = self.getBoolState(for: ConfigKey.dhtPublicIn)
         self.peerDiscovery = self.getBoolState(for: ConfigKey.dhtPeerDiscovery)
         self.typingIndicator = self.getBoolState(for: ConfigKey.typingIndicator)
