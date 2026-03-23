@@ -120,8 +120,8 @@
 "swarm.selectContacts" = "Seleccionar contactos";
 
 // Contact Picker
-"contactPicker.calls" = "Calls";
-"contactPicker.contacts" = "Contacts";
+"contactPicker.calls" = "Les llamadas";
+"contactPicker.contacts" = "Contactos";
 
 // Smartlist
 "smartlist.yesterday" = "En xineru de 2011";

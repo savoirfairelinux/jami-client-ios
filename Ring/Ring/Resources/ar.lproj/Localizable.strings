@@ -120,8 +120,8 @@
 "swarm.selectContacts" = "إختيار جهات الاتصال";
 
 // Contact Picker
-"contactPicker.calls" = "Calls";
-"contactPicker.contacts" = "Contacts";
+"contactPicker.calls" = "مكالمات";
+"contactPicker.contacts" = "جهات الاتصال";
 
 // Smartlist
 "smartlist.yesterday" = "البارحة";

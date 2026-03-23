@@ -120,8 +120,8 @@
 "swarm.selectContacts" = "تماس لارین سئچیلماسی";
 
 // Contact Picker
-"contactPicker.calls" = "Calls";
-"contactPicker.contacts" = "Contacts";
+"contactPicker.calls" = "تماس";
+"contactPicker.contacts" = "تماس";
 
 // Smartlist
 "smartlist.yesterday" = "دونن";

@@ -120,8 +120,8 @@
 "swarm.selectContacts" = "Select contacts";
 
 // Contact Picker
-"contactPicker.calls" = "Calls";
-"contactPicker.contacts" = "Contacts";
+"contactPicker.calls" = "Званкі";
+"contactPicker.contacts" = "Кантакты";
 
 // Smartlist
 "smartlist.yesterday" = "Учора";
