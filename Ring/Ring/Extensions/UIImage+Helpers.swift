@@ -450,12 +450,12 @@ extension UIImage {
         return result
     }
 
-    class func createFrom(sampleBuffer: CMSampleBuffer) -> UIImage? {
+    class func createFrom(sampleBuffer: CMSampleBuffer, orientation: UIImage.Orientation = .up) -> UIImage? {
         let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         let ciimage = CIImage(cvPixelBuffer: imageBuffer)
         let context = CIContext(options: nil)
-        let cgImage = context.createCGImage(ciimage, from: ciimage.extent)!
-        let image = UIImage(cgImage: cgImage)
+        guard let cgImage = context.createCGImage(ciimage, from: ciimage.extent) else { return nil }
+        let image = UIImage(cgImage: cgImage, scale: 1.0, orientation: orientation)
         return image
     }
 

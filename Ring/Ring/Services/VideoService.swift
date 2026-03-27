@@ -49,7 +49,7 @@ enum VideoCodecs: String {
 }
 
 protocol FrameExtractorDelegate: AnyObject {
-    func captured(imageBuffer: CVImageBuffer?, image: UIImage)
+    func captured(imageBuffer: CVImageBuffer?, sampleBuffer: CMSampleBuffer)
     func updateDevicePosition(position: AVCaptureDevice.Position)
 }
 
@@ -85,7 +85,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     private let sessionQueue = DispatchQueue(label: "session queue")
     private let captureSession = AVCaptureSession()
-    private let context = CIContext()
     private var systemPressureObservation: NSKeyValueObservation?
 
     weak var delegate: FrameExtractorDelegate?
@@ -361,18 +360,9 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         return true
     }
 
-    // MARK: Sample buffer to UIImage conversion
-    private func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
-        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
-        let ciImage = CIImage(cvPixelBuffer: imageBuffer)
-        guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
-        return UIImage(cgImage: cgImage)
-    }
-
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
-        self.delegate?.captured(imageBuffer: imageBuffer, image: uiImage)
+        self.delegate?.captured(imageBuffer: imageBuffer, sampleBuffer: sampleBuffer)
     }
 }
 
@@ -384,11 +374,15 @@ class VideoService: FrameExtractorDelegate {
     private let camera = FrameExtractor()
 
     var cameraPosition = AVCaptureDevice.Position.front
-    let capturedVideoFrame = PublishSubject<UIImage?>()
+    let capturedVideoFrame = PublishSubject<LocalFrameInfo?>()
     let playerInfo = PublishSubject<Player>()
     var renderStarted = BehaviorRelay(value: "")
     var renderStopped = BehaviorRelay(value: "")
     var currentOrientation: AVCaptureVideoOrientation
+
+    /// Cached orientation data, recomputed only on rotation or camera switch.
+    private(set) var cachedLayerTransform = CGAffineTransform.identity
+    private var cachedImageOrientation = UIImage.Orientation.up
 
     private let log = SwiftyBeaver.self
     var angle: Int = 0
@@ -400,9 +394,16 @@ class VideoService: FrameExtractorDelegate {
 
     private let disposeBag = DisposeBag()
 
+    private func updateCachedOrientation() {
+        let mirrored = cameraPosition == .front
+        cachedLayerTransform = currentOrientation.localPreviewTransform(mirrored: mirrored)
+        cachedImageOrientation = currentOrientation.imageOrientation(mirrored: mirrored)
+    }
+
     init(withVideoAdapter videoAdapter: VideoAdapter) {
         self.videoAdapter = videoAdapter
         currentOrientation = camera.getOrientation
+        updateCachedOrientation()
         VideoAdapter.videoDelegate = self
         camera.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.restoreDefaultDevice),
@@ -500,6 +501,7 @@ class VideoService: FrameExtractorDelegate {
         }
         self.angle = self.mapDeviceOrientation(orientation: newOrientation)
         self.currentOrientation = newOrientation
+        self.updateCachedOrientation()
     }
 
     func mapDeviceOrientation(orientation: AVCaptureVideoOrientation) -> Int {
@@ -666,39 +668,20 @@ extension VideoService: VideoAdapterDelegate {
         }
     }
 
-    func getImageOrienation() -> UIImage.Orientation {
-        let shouldMirror = cameraPosition == AVCaptureDevice.Position.front
-        switch self.currentOrientation {
-        case AVCaptureVideoOrientation.portrait:
-            return shouldMirror ? UIImage.Orientation.leftMirrored :
-                UIImage.Orientation.left
-        case AVCaptureVideoOrientation.portraitUpsideDown:
-            return shouldMirror ? UIImage.Orientation.rightMirrored :
-                UIImage.Orientation.right
-        case AVCaptureVideoOrientation.landscapeRight:
-            return shouldMirror ? UIImage.Orientation.upMirrored :
-                UIImage.Orientation.up
-        case AVCaptureVideoOrientation.landscapeLeft:
-            return shouldMirror ? UIImage.Orientation.downMirrored :
-                UIImage.Orientation.down
-        @unknown default:
-            return UIImage.Orientation.up
-        }
-    }
-
-    func captured(imageBuffer: CVImageBuffer?, image: UIImage) {
-        if let cgImage = image.cgImage {
-            self.capturedVideoFrame
-                .onNext(UIImage(cgImage: cgImage,
-                                scale: 1.0,
-                                orientation: self.getImageOrienation()))
-        }
+    func captured(imageBuffer: CVImageBuffer?, sampleBuffer: CMSampleBuffer) {
+        let frameInfo = LocalFrameInfo(
+            sampleBuffer: sampleBuffer,
+            layerTransform: cachedLayerTransform,
+            imageOrientation: cachedImageOrientation
+        )
+        self.capturedVideoFrame.onNext(frameInfo)
         videoAdapter.writeOutgoingFrame(with: imageBuffer, angle: Int32(self.angle), videoInputId: self.getVideoSource())
     }
 
     func updateDevicePosition(position: AVCaptureDevice.Position) {
         self.cameraPosition = position
         self.angle = self.mapDeviceOrientation(orientation: self.currentOrientation)
+        self.updateCachedOrientation()
     }
 
     func stopAudioDevice() {

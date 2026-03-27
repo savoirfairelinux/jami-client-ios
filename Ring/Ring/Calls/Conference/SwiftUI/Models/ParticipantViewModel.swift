@@ -160,11 +160,7 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
         return provider
     }
 
-    func radians(from degrees: Int) -> CGFloat {
-        return CGFloat(degrees) * .pi / 180.0
-    }
-
-    var currentRadiants: CGFloat = 0
+    var currentTransform = CGAffineTransform.identity
 
     func setAspectMode(mode: AVLayerVideoGravity) {
         self.mainDisplayLayer.videoGravity = mode
@@ -212,11 +208,9 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                     }
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
-                        let radiansValue = self.radians(from: info.rotation)
-                        if self.currentRadiants != radiansValue {
-                            self.currentRadiants = radiansValue
-                            var transform = CGAffineTransform.identity
-                            transform = transform.rotated(by: radiansValue)
+                        let transform = CGAffineTransform.rotation(degrees: info.rotation)
+                        if self.currentTransform != transform {
+                            self.currentTransform = transform
                             self.gridDisplayLayer.setAffineTransform(transform)
                             self.mainDisplayLayer.setAffineTransform(transform)
                             if let container = self.mainDisplayLayer.superlayer?.delegate as? UIView, container.bounds != self.mainDisplayLayer.frame {

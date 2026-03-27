@@ -43,6 +43,48 @@ struct DisplayLayerView: UIViewRepresentable {
     }
 }
 
+struct LocalVideoLayerView: UIViewRepresentable {
+
+    let displayLayer: AVSampleBufferDisplayLayer
+
+    func makeUIView(context: Context) -> LayerHostView {
+        return LayerHostView(displayLayer: displayLayer)
+    }
+
+    func updateUIView(_ uiView: LayerHostView, context: Context) {
+        uiView.updateLayerFrame()
+    }
+}
+
+/// A UIView that hosts an AVSampleBufferDisplayLayer and keeps its
+/// frame synchronised with the view bounds on every layout pass.
+class LayerHostView: UIView {
+    private let displayLayer: AVSampleBufferDisplayLayer
+
+    init(displayLayer: AVSampleBufferDisplayLayer) {
+        self.displayLayer = displayLayer
+        super.init(frame: .zero)
+        layer.addSublayer(displayLayer)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) { fatalError() }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLayerFrame()
+    }
+
+    func updateLayerFrame() {
+        if displayLayer.frame != bounds {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            displayLayer.frame = bounds
+            CATransaction.commit()
+        }
+    }
+}
+
 struct ExpandableParticipantView: View {
     @ObservedObject var model: ParticipantViewModel
     @Binding var isAnimatingTopMainGrid: Bool

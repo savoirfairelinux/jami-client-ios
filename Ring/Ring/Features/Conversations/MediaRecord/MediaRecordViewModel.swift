@@ -181,9 +181,11 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
 
     private func subscribeCameraFrames() {
         videoService.capturedVideoFrame.asObservable()
-            .subscribe(onNext: { [weak self] frame in
-                self?.playBackFrame.onNext(frame)
-                DispatchQueue.main.async { self?.previewImage = frame }
+            .subscribe(onNext: { [weak self] frameInfo in
+                guard let frameInfo = frameInfo,
+                      let image = UIImage.createFrom(sampleBuffer: frameInfo.sampleBuffer, orientation: frameInfo.imageOrientation) else { return }
+                self?.playBackFrame.onNext(image)
+                DispatchQueue.main.async { self?.previewImage = image }
             })
             .disposed(by: cameraDisposeBag)
     }
