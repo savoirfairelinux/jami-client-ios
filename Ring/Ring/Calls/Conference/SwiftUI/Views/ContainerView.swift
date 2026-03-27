@@ -175,7 +175,7 @@ struct ContainerView: View {
                 if showInitialView {
                     initialVideoCallView()
                 } else if !model.isSwarmCall {
-                    DragableCaptureView(image: $model.localImage, namespace: namespace)
+                    DragableCaptureView(displayLayer: $model.localDisplayLayer, namespace: namespace)
                         .zIndex(2)
                 }
             } else if showInitialView {
@@ -219,9 +219,8 @@ struct ContainerView: View {
     @ViewBuilder
     func initialVideoCallView() -> some View {
         ZStack {
-            Image(uiImage: model.localImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
+            LocalVideoLayerView(displayLayer: model.localDisplayLayer)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             VisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))
                 .opacity(0.6)
             participantView()

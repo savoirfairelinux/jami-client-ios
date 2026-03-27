@@ -17,9 +17,10 @@
  */
 
 import SwiftUI
+import AVFoundation
 
 let width: CGFloat = 100
-let height: CGFloat = 130
+let height: CGFloat = 175
 
 var marginVertical: CGFloat = 100
 var marginHorizontal: CGFloat {
@@ -155,7 +156,7 @@ struct DragableCaptureView: View {
     @SwiftUI.State private var positions = DraggablePositions()
     @SwiftUI.State private var alignment: Alignment = .leading
     @SwiftUI.State private var showIndicator: Bool = false
-    @Binding var image: UIImage
+    @Binding var displayLayer: AVSampleBufferDisplayLayer
     @SwiftUI.State var hide: Bool = true
     let namespace: Namespace.ID
     let capturedVideoId = "capturedVideoId"
@@ -231,9 +232,7 @@ struct DragableCaptureView: View {
 
     var body: some View {
         ZStack {
-            Image(uiImage: image)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
+            LocalVideoLayerView(displayLayer: displayLayer)
                 .cornerRadius(15)
             ZStack(alignment: alignment) {
                 VisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))

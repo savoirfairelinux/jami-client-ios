@@ -18,6 +18,7 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
 import RxSwift
 
 class ContainerViewModel: ObservableObject {
@@ -25,7 +26,12 @@ class ContainerViewModel: ObservableObject {
     @Published var layout: CallLayout = .grid
     @Published var hasLocalVideo: Bool = false
     @Published var hasIncomingVideo: Bool = false
-    @Published var localImage = UIImage()
+    @Published var localVideoRunning: Bool = false
+    var localDisplayLayer: AVSampleBufferDisplayLayer = {
+        let layer = AVSampleBufferDisplayLayer()
+        layer.videoGravity = .resizeAspectFill
+        return layer
+    }()
     @Published var callAnswered = false
     @Published var callState = ""
     @Published var isSwarmCall: Bool = false
@@ -47,16 +53,15 @@ class ContainerViewModel: ObservableObject {
 
     let disposeBag = DisposeBag()
     var videoRunningBag = DisposeBag()
+    private var currentLocalTransform = CGAffineTransform.identity
 
     let videoService: VideoService
     let callService: CallsService
     let accountService: AccountsService
     let injectionBag: InjectionBag
 
-    lazy var capturedFrame: Observable<UIImage?> = {
-        return videoService.capturedVideoFrame.asObservable().map({ frame in
-            return frame
-        })
+    lazy var capturedFrame: Observable<LocalFrameInfo?> = {
+        return videoService.capturedVideoFrame.asObservable()
     }()
 
     // state
@@ -92,17 +97,22 @@ class ContainerViewModel: ObservableObject {
             }
         }
 
+        let initialTransform = injectionBag.videoService.cachedLayerTransform
+        self.currentLocalTransform = initialTransform
+        self.localDisplayLayer.setAffineTransform(initialTransform)
+
         self.actionsViewModel = ActionsViewModel(actionsState: self.actionsStateSubject, currentCall: currentCall, audioService: injectionBag.audioService)
         self.conferenceActionsModel = ConferenceActionsModel(injectionBag: injectionBag)
 
         self.pipManager = PictureInPictureManager(delegate: delegate)
         self.capturedFrame
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] frame in
-                if let image = frame {
-                    DispatchQueue.main.async {
-                        self?.localImage = image
-                    }
+            .subscribe(onNext: { [weak self] frameInfo in
+                guard let self = self, let frameInfo = frameInfo else { return }
+                self.videoService.videoInputManager.setSampleBufferAttachments(frameInfo.sampleBuffer)
+                self.localDisplayLayer.enqueue(frameInfo.sampleBuffer, transform: frameInfo.layerTransform, currentTransform: &self.currentLocalTransform)
+                if !self.localVideoRunning {
+                    self.localVideoRunning = true
                 }
             })
             .disposed(by: self.disposeBag)
