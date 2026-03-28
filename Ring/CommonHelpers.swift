@@ -176,12 +176,15 @@ extension UIImage {
     }
 
     static func createResizedImage(imageSource: CGImageSource, size: CGFloat) -> UIImage? {
-        let options: CFDictionary? = size == 0 ? nil : [
-            kCGImageSourceThumbnailMaxPixelSize: size,
+        var dict: [CFString: Any] = [
             kCGImageSourceCreateThumbnailWithTransform: true,
             kCGImageSourceCreateThumbnailFromImageAlways: true,
             kCGImageSourceShouldCacheImmediately: true
-        ] as CFDictionary
+        ]
+        if size > 0 {
+            dict[kCGImageSourceThumbnailMaxPixelSize] = size
+        }
+        let options = dict as CFDictionary
 
         guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options) else {
             return nil
