@@ -21,6 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		AA0001020000000000000001 /* PhotoLibrarySaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001010000000000000001 /* PhotoLibrarySaving.swift */; };
+		AA0002020000000000000002 /* MockPhotoLibrarySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */; };
+		AA0003020000000000000003 /* MediaPreviewModelSaveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */; };
 		024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */; };
 		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */; };
 		024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */; };
@@ -674,6 +677,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AA0001010000000000000001 /* PhotoLibrarySaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrarySaving.swift; sourceTree = "<group>"; };
+		AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoLibrarySaver.swift; sourceTree = "<group>"; };
+		AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewModelSaveTests.swift; sourceTree = "<group>"; };
 		024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonServiceTests.swift; sourceTree = "<group>"; };
 		024B612D1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailInitDRingAdapter.h; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.h; sourceTree = "<group>"; };
 		024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailInitDRingAdapter.mm; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.mm; sourceTree = "<group>"; };
@@ -2793,6 +2799,7 @@
 				2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */,
 				264FB66129775B1C00BEFBBF /* SystemService.swift */,
 				264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */,
+				AA0001010000000000000001 /* PhotoLibrarySaving.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2969,6 +2976,7 @@
 				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
 				04399A121D1C2D9D00E99CD9 /* Info.plist */,
 				260AE64129C266B300D66D5E /* CallsTests */,
+				AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */,
 			);
 			path = RingTests;
 			sourceTree = "<group>";
@@ -3282,6 +3290,7 @@
 				2617A1222C493FB7002CFD4A /* MockAccountsService.swift */,
 				263C16762D9702F2008E102C /* ObjCMockCallsAdapter.h */,
 				263C16772D9702F2008E102C /* ObjCMockCallsAdapter.m */,
+				AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */,
 			);
 			path = TestableModels;
 			sourceTree = "<group>";
@@ -4447,6 +4456,7 @@
 				26DD506F2A86CFF20074E55F /* ActionsViewModel.swift in Sources */,
 				0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */,
 				264FB66629775B9B00BEFBBF /* SystemAdapterDelegate.swift in Sources */,
+				AA0001020000000000000001 /* PhotoLibrarySaving.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4482,6 +4492,8 @@
 				260AE63E29C2305800D66D5E /* MockCalls.swift in Sources */,
 				2617A1232C493FB7002CFD4A /* MockAccountsService.swift in Sources */,
 				263C16782D9702F2008E102C /* ObjCMockCallsAdapter.m in Sources */,
+				AA0002020000000000000002 /* MockPhotoLibrarySaver.swift in Sources */,
+				AA0003020000000000000003 /* MediaPreviewModelSaveTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

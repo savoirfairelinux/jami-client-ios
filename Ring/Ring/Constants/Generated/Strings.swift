@@ -665,8 +665,12 @@ internal enum L10n {
     }
     /// Edited
     internal static let edited = L10n.tr("Localizable", "conversation.edited", fallback: "Edited")
-    /// An error occurred while saving the image to the gallery.
-    internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "An error occurred while saving the image to the gallery.")
+    /// Could not save image
+    internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "Could not save image")
+    /// An error occurred while saving the image to the photo library.
+    internal static let errorSavingImageMessage = L10n.tr("Localizable", "conversation.errorSavingImageMessage", fallback: "An error occurred while saving the image to the photo library.")
+    /// Saved
+    internal static let imageSaved = L10n.tr("Localizable", "conversation.imageSaved", fallback: "Saved")
     /// sent you a conversation invitation.
     internal static let incomingRequest = L10n.tr("Localizable", "conversation.incomingRequest", fallback: "sent you a conversation invitation.")
     /// In reply to
@@ -679,6 +683,8 @@ internal enum L10n {
     internal static func notContactLabel(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.notContactLabel", String(describing: p1), fallback: "%@ is not in the contact list")
     }
+    /// Jami needs access to your photo library to save images. You can enable this in Settings.
+    internal static let photoAccessRequiredMessage = L10n.tr("Localizable", "conversation.photoAccessRequiredMessage", fallback: "Jami needs access to your photo library to save images. You can enable this in Settings.")
     /// %@ sent you a conversation invitation.
     internal static func receivedRequest(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.receivedRequest", String(describing: p1), fallback: "%@ sent you a conversation invitation.")

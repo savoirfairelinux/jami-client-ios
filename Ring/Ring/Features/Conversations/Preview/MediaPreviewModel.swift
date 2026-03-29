@@ -50,23 +50,27 @@ class MediaPreviewModel: ObservableObject {
     let canDelete: Bool
     let fileURL: URL?
     private weak var delegate: MediaPreviewActionsDelegate?
+    private let photoSaver: PhotoLibrarySaving
 
     var injectionBag: InjectionBag?
     var forwardCallback: (([String]) -> Void)?
 
     @Published var activeSheet: MediaPreviewSheet?
     @Published var saveError: String?
+    @Published var saveSuccess: Bool = false
+    @Published var needsPhotoPermission: Bool = false
 
     var isImagePreview: Bool {
         if case .image = content { return true }
         return false
     }
 
-    init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate, fileURL: URL? = nil, canDelete: Bool = false) {
+    init(content: MediaPreviewContent, delegate: MediaPreviewActionsDelegate, fileURL: URL? = nil, canDelete: Bool = false, photoSaver: PhotoLibrarySaving = SystemPhotoLibrarySaver()) {
         self.content = content
         self.delegate = delegate
         self.fileURL = fileURL
         self.canDelete = canDelete
+        self.photoSaver = photoSaver
     }
 
     func share() {
@@ -82,43 +86,27 @@ class MediaPreviewModel: ObservableObject {
     func save() {
         guard let url = fileURL else { return }
         if url.pathExtension.isImageExtension() {
-            saveImageToPhotos(url: url)
+            photoSaver.saveImageWithAuthCheck(
+                url: url,
+                onSuccess: { [weak self] in
+                    DispatchQueue.main.async {
+                        UINotificationFeedbackGenerator().notificationOccurred(.success)
+                        self?.saveSuccess = true
+                    }
+                },
+                onError: { [weak self] message in
+                    DispatchQueue.main.async {
+                        self?.saveError = message
+                    }
+                },
+                onAccessDenied: { [weak self] in
+                    DispatchQueue.main.async {
+                        self?.needsPhotoPermission = true
+                    }
+                }
+            )
         }
     }
 
     func delete() { delegate?.deleteMessage() }
-
-    private func saveImageToPhotos(url: URL) {
-        let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
-        switch status {
-        case .authorized, .limited:
-            performPhotoSave(url: url)
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization(for: .addOnly) { [weak self] newStatus in
-                guard newStatus == .authorized || newStatus == .limited else {
-                    DispatchQueue.main.async {
-                        self?.saveError = L10n.Conversation.errorSavingImage
-                    }
-                    return
-                }
-                DispatchQueue.main.async {
-                    self?.performPhotoSave(url: url)
-                }
-            }
-        default:
-            saveError = L10n.Conversation.errorSavingImage
-        }
-    }
-
-    private func performPhotoSave(url: URL) {
-        PHPhotoLibrary.shared().performChanges({
-            let request = PHAssetCreationRequest.forAsset()
-            request.addResource(with: .photo, fileURL: url, options: nil)
-        }, completionHandler: { [weak self] _, error in
-            guard let error = error else { return }
-            DispatchQueue.main.async {
-                self?.saveError = error.localizedDescription
-            }
-        })
-    }
 }
