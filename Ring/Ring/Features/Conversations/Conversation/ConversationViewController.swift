@@ -44,7 +44,6 @@ enum ContextMenu: State {
     case scrollToReplyTarget(messageId: String)
 }
 
-// swiftlint:disable file_length
 // swiftlint:disable type_body_length
 class ConversationViewController: UIHostingController<ConversationContainerView>,
                                   UIImagePickerControllerDelegate,
@@ -53,6 +52,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
 
     let disposeBag = DisposeBag()
     let log = SwiftyBeaver.self
+    let photoSaver: PhotoLibrarySaving = SystemPhotoLibrarySaver()
 
     var viewModel: ConversationViewModel!
     var currentDocumentPickerMode: DocumentPickerMode = .none
@@ -104,7 +104,8 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
         viewModel.swiftUIModel.subscribeScreenTapped(screenTapped: tapAction.asObservable())
     }
 
-    @objc func screenTapped() {
+    @objc
+    func screenTapped() {
         tapAction.accept(true)
     }
 
@@ -523,16 +524,22 @@ extension ConversationViewController {
     }
 
     func saveGIFOrImage(url: URL) {
-        PHPhotoLibrary.shared().performChanges({
-            let request = PHAssetCreationRequest.forAsset()
-            request.addResource(with: .photo, fileURL: url, options: nil)
-        }, completionHandler: { _, error in
-            guard let error = error else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.showAlert(error: error)
+        photoSaver.saveImageWithAuthCheck(
+            url: url,
+            onSuccess: { UINotificationFeedbackGenerator().notificationOccurred(.success) },
+            onError: { [weak self] message in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    let error = NSError(domain: "PhotoSave", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
+                    self.showAlert(error: error)
+                }
+            },
+            onAccessDenied: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.showPhotoAccessAlert()
+                }
             }
-        })
+        )
     }
 
     @objc
@@ -543,8 +550,27 @@ extension ConversationViewController {
     }
 
     func showAlert(error: Error) {
-        let alert = UIAlertController(title: L10n.Conversation.errorSavingImage, message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(
+            title: L10n.Conversation.errorSavingImage,
+            message: L10n.Conversation.errorSavingImageMessage,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default))
+        self.present(alert, animated: true)
+    }
+
+    private func showPhotoAccessAlert() {
+        let alert = UIAlertController(
+            title: L10n.Alerts.noLibraryPermissionsTitle,
+            message: L10n.Conversation.photoAccessRequiredMessage,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: L10n.Actions.goToSettings, style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+        })
+        alert.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel))
         self.present(alert, animated: true)
     }
 
@@ -569,4 +595,3 @@ extension ConversationViewController {
     }
 }
 // swiftlint:enable type_body_length
-// swiftlint:enable file_length
