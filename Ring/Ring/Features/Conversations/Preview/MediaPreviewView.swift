@@ -101,14 +101,45 @@ private struct MediaPreviewContentView: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityAddTraits(.isModal)
+        .overlay(
+            Group {
+                if model.saveSuccess {
+                    SavedToast()
+                        .transition(.scale.combined(with: .opacity))
+                }
+            }
+        )
+        .onChange(of: model.saveSuccess) { success in
+            guard success else { return }
+            UIAccessibility.post(notification: .announcement, argument: L10n.Conversation.imageSaved)
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 2_000_000_000)
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                    model.saveSuccess = false
+                }
+            }
+        }
+        .animation(.spring(response: 0.35, dampingFraction: 0.8), value: model.saveSuccess)
         .alert(isPresented: Binding<Bool>(
             get: { model.saveError != nil },
             set: { if !$0 { model.saveError = nil } }
         )) {
             Alert(
                 title: Text(L10n.Conversation.errorSavingImage),
-                message: model.saveError.map { Text($0) },
+                message: Text(L10n.Conversation.errorSavingImageMessage),
                 dismissButton: .default(Text(L10n.Global.ok))
+            )
+        }
+        .alert(isPresented: $model.needsPhotoPermission) {
+            Alert(
+                title: Text(L10n.Alerts.noLibraryPermissionsTitle),
+                message: Text(L10n.Conversation.photoAccessRequiredMessage),
+                primaryButton: .default(Text(L10n.Actions.goToSettings)) {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url)
+                    }
+                },
+                secondaryButton: .cancel(Text(L10n.Global.cancel))
             )
         }
         .sheet(item: $model.activeSheet) { sheet in
@@ -369,6 +400,24 @@ private struct MediaPreviewBottomBar: View {
         .padding(.vertical, 10)
         .glassCapsuleBackground()
         .padding(.bottom, safeArea.bottom)
+    }
+}
+
+// MARK: - Saved Toast
+
+private struct SavedToast: View {
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "checkmark")
+                .font(.system(size: 14, weight: .semibold))
+            Text(L10n.Conversation.imageSaved)
+                .font(.system(size: 15, weight: .medium))
+        }
+        .foregroundColor(.white)
+        .padding(.horizontal, 16)
+        .frame(height: 40)
+        .glassCapsuleBackground()
+        .accessibilityElement(children: .combine)
     }
 }
 
