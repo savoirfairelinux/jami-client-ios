@@ -14,39 +14,42 @@ This repository contains the iOS client implementation of Jami.
 Supported archs are: arm64 for iPhoneOS and arm64, x86_64 for iPhoneSimulator
 Minimum supported version is: 14.5
 
-1. Clone the project
+### Standalone (recommended)
+
+1. Clone the repository with the daemon submodule
 
 ```bash
-git clone https://review.jami.net/jami-project
+git clone --recurse-submodules https://review.jami.net/jami-client-ios
+cd jami-client-ios
 ```
 
-2. Initialize repositories
+If you already cloned without `--recurse-submodules`:
 
 ```bash
-cd jami-project && ./build.py --init
+git submodule update --init
 ```
 
-3. Install dependencies
+2. Install dependencies
 
 ```bash
-./build.py --dependencies --distribution IOS
+brew install carthage
 ```
 
-4. Build daemon and contributions (choose one option):
+3. Build daemon and contributions (choose one option):
 
    **Option A: For iPhone device only**
    ```bash
-   cd client-ios && ./compile-ios.sh --platform=iPhoneOS
+   ./compile-ios.sh --platform=iPhoneOS
    ```
 
    **Option B: For simulator only**
    ```bash
-   cd client-ios && ./compile-ios.sh --platform=iPhoneSimulator
+   ./compile-ios.sh --platform=iPhoneSimulator
    ```
 
    **Option C: For both iPhone device and simulator**
    ```bash
-   cd client-ios && ./compile-ios.sh --platform=all
+   ./compile-ios.sh --platform=all
    ```
 
    **Additional options:**
@@ -57,11 +60,37 @@ cd jami-project && ./build.py --init
    --help            Display detailed help information
    ```
 
-5. Build client dependencies
+4. Build client dependencies
 
 ```bash
 cd Ring && ./fetch-dependencies.sh
 ```
+
+### Using jami-project (alternative)
+
+You can also build client-ios as part of the jami-project monorepo:
+
+1. Clone and initialize jami-project
+
+```bash
+git clone https://review.jami.net/jami-project
+cd jami-project && ./build.py --init
+```
+
+2. Install dependencies
+
+```bash
+./build.py --dependencies --distribution IOS
+```
+
+3. Build daemon and client
+
+```bash
+cd client-ios && ./compile-ios.sh --platform=all
+cd Ring && ./fetch-dependencies.sh
+```
+
+The build script automatically detects whether daemon is available as a local submodule (`./daemon`) or as a sibling directory (`../daemon`). You can also set `DAEMON_DIR` explicitly to point to any jami-daemon checkout.
 
 ## XCFrameworks
 

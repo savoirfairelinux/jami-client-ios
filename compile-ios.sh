@@ -105,11 +105,21 @@ fi
 IOS_TOP_DIR="$(pwd)"
 
 if [ -z "$DAEMON_DIR" ]; then
-  DAEMON_DIR="$(pwd)/../daemon"
-  echo "DAEMON_DIR not provided attempting to find it in $DAEMON_DIR"
+  if [ -d "$(pwd)/daemon" ]; then
+    DAEMON_DIR="$(pwd)/daemon"
+    echo "DAEMON_DIR not provided, using local submodule at $DAEMON_DIR"
+  elif [ -d "$(pwd)/../daemon" ]; then
+    DAEMON_DIR="$(pwd)/../daemon"
+    echo "DAEMON_DIR not provided, using sibling directory at $DAEMON_DIR"
+  else
+    echo "Daemon not found. Either:"
+    echo "  1. Initialize the daemon submodule: git submodule update --init"
+    echo "  2. Set DAEMON_DIR to point to your jami-daemon checkout"
+    exit 1
+  fi
 fi
 if [ ! -d "$DAEMON_DIR" ]; then
-  echo 'Daemon not found.'
+  echo "Daemon directory not found at $DAEMON_DIR"
   exit 1
 fi
 
