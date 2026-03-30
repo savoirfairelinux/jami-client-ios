@@ -59,6 +59,9 @@ class MockCall {
 
 class MockCXProvider: CXProvider {
     var systemCalls: MocSystemCalls
+    var reportedEndedCalls = [(uuid: UUID, reason: CXCallEndedReason)]()
+    var reportedOutgoingConnecting = [UUID]()
+    var reportedOutgoingConnected = [UUID]()
 
     init(systemCalls: MocSystemCalls) {
         self.systemCalls = systemCalls
@@ -70,12 +73,27 @@ class MockCXProvider: CXProvider {
             let call = MockCall(uuid: UUID, jamiId: handle.value)
             self.systemCalls.reportCall(call: call)
         }
+        completion?(nil)
+    }
+
+    override func reportCall(with UUID: UUID, endedAt dateEnded: Date?, reason endedReason: CXCallEndedReason) {
+        reportedEndedCalls.append((uuid: UUID, reason: endedReason))
+        systemCalls.removeCall(uuid: UUID)
+    }
+
+    override func reportOutgoingCall(with UUID: UUID, startedConnectingAt dateStartedConnecting: Date?) {
+        reportedOutgoingConnecting.append(UUID)
+    }
+
+    override func reportOutgoingCall(with UUID: UUID, connectedAt dateConnected: Date?) {
+        reportedOutgoingConnected.append(UUID)
     }
 }
 
 class MockCallController: CXCallController {
 
     var systemCalls: MocSystemCalls
+    var shouldFailNextRequest = false
 
     init(systemCalls: MocSystemCalls) {
         self.systemCalls = systemCalls
@@ -83,6 +101,11 @@ class MockCallController: CXCallController {
     }
 
     override func request(_ transaction: CXTransaction, completion: @escaping (Error?) -> Void) {
+        if shouldFailNextRequest {
+            shouldFailNextRequest = false
+            completion(NSError(domain: "CXErrorDomain", code: 2, userInfo: nil))
+            return
+        }
         for action in transaction.actions {
             if let startCallAction = action as? CXStartCallAction {
                 let uuid = startCallAction.callUUID

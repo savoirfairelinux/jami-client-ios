@@ -82,6 +82,7 @@ class ConversationsManager {
         self.cleanConversationData()
         self.subscribeFileTransferEvents()
         self.subscribeCallsEvents()
+        self.subscribeOutgoingCallLifecycle()
         self.subscribeContactsEvents()
         self.subscribeLocationSharingEvent()
         self.subscribeCallsProviderEvents()
@@ -355,7 +356,7 @@ class ConversationsManager {
                 guard let self = self else { return }
                 guard let peerId: String = event.getEventInput(ServiceEventInput.peerUri),
                       let uuidString: String = event.getEventInput(ServiceEventInput.callUUID) else { return }
-                self.callsProvider.stopCall(callUUID: UUID(uuidString: uuidString)!, participant: peerId.filterOutHost())
+                self.callsProvider.stopCall(callUUID: UUID(uuidString: uuidString)!, participant: peerId.filterOutHost(), isRemoteEnd: true)
             })
             .disposed(by: disposeBag)
         self.callService.newMessage
@@ -407,6 +408,24 @@ class ConversationsManager {
             })
             .disposed(by: disposeBag)
     }
+
+    private func subscribeOutgoingCallLifecycle() {
+        self.callService.callUpdates
+            .filter { $0.callType == .outgoing }
+            .subscribe(onNext: { [weak self] call in
+                guard let self = self else { return }
+                switch call.state {
+                case .ringing:
+                    self.callsProvider.reportOutgoingCallConnecting(callUUID: call.callUUID)
+                case .current:
+                    self.callsProvider.reportOutgoingCallConnected(callUUID: call.callUUID)
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
     private func subscribeFileTransferEvents() {
         self.dataTransferService
             .sharedResponseStream
