@@ -129,24 +129,29 @@ class CallsProviderService: NSObject {
 }
 
 extension CallsProviderService {
-    func stopCall(callUUID: UUID, participant: String) {
-        // Remove call from pending unhandeled calls. Get pending call by jamiId, because uuid could be different for unhandeled call and for incoming call.
+    func stopCall(callUUID: UUID, participant: String, isRemoteEnd: Bool = false) {
         if let call = getUnhandeledCall(peerId: participant) {
             let unhandeledCallUUID = call.uuid
             removeUnhandeledCall(call)
-            // If unhandeled calls uuid is different from requested callUUID stop it.
             if unhandeledCallUUID != callUUID {
-                let endCallAction = CXEndCallAction(call: unhandeledCallUUID)
-                let transaction = CXTransaction(action: endCallAction)
-                self.requestTransaction(transaction)
+                endCallInCallKit(callUUID: unhandeledCallUUID, isRemoteEnd: isRemoteEnd)
             }
         } else if let call = getUnhandeledCall(UUID: callUUID) {
             removeUnhandeledCall(call)
         }
-        // Send request end call to CallKit.
-        let endCallAction = CXEndCallAction(call: callUUID)
-        let transaction = CXTransaction(action: endCallAction)
-        self.requestTransaction(transaction)
+        guard containsJamiCallUUID(callUUID) else { return }
+        endCallInCallKit(callUUID: callUUID, isRemoteEnd: isRemoteEnd)
+    }
+
+    private func endCallInCallKit(callUUID: UUID, isRemoteEnd: Bool) {
+        if isRemoteEnd {
+            self.provider.reportCall(with: callUUID, endedAt: Date(), reason: .remoteEnded)
+            removeJamiCallUUID(callUUID)
+        } else {
+            let endCallAction = CXEndCallAction(call: callUUID)
+            let transaction = CXTransaction(action: endCallAction)
+            self.requestTransaction(transaction)
+        }
     }
 
     func hasActiveCalls() -> Bool {
@@ -392,5 +397,9 @@ extension CallsProviderService: CXProviderDelegate {
         let serviceEventType: ServiceEventType = .audioActivated
         let serviceEvent = ServiceEvent(withEventType: serviceEventType)
         self.responseStream.onNext(serviceEvent)
+    }
+
+    func provider(_ provider: CXProvider, didDeactivate audioSession: AVAudioSession) {
+        try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
     }
 }

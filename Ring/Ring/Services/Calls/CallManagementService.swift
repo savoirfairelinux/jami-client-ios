@@ -335,15 +335,14 @@ class CallManagementService {
         }
 
         finishedCall.state = callState
-
         let callDuration = self.calculateCallDuration(finishedCall)
-        self.emitCallEnded(call: finishedCall, duration: callDuration)
 
-        self.callUpdates.onNext(finishedCall)
-
-        self.calls.update { calls in
+        self.calls.updateSync { calls in
             calls[callId] = nil
         }
+
+        self.emitCallEnded(call: finishedCall, duration: callDuration)
+        self.callUpdates.onNext(finishedCall)
     }
 
     func updateCallUUID(callId: String, callUUID: String) {
