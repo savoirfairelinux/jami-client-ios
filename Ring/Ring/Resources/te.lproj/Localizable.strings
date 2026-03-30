@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "ప్రాక్సీ";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "నోటిఫికేషన్లను ప్రారంభించండి";
 "accountPage.proxyDisabledAlertTitle" = "ప్రాక్సీ సర్వర్ డిసేబుల్";
 "accountPage.proxyDisabledAlertBody" = "నోటిఫికేషన్లను స్వీకరించడానికి, దయచేసి ప్రాక్సీని ప్రారంభించండి";

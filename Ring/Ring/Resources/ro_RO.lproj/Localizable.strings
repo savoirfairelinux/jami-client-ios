@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "URL-ul listei de proxy";
 "accountPage.proxyExplanation" = "Notificările sunt transmise prin intermediul unui proxy. Poți utiliza proxy-ul prestabilit, introduce o adresă proxy personală sau furniza o adresă URL cu o listă de proxy.";
 "accountPage.proxyHeader" = "Proxy";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Activează notificările";
 "accountPage.proxyDisabledAlertTitle" = "Serverul Proxy e dezactivat";
 "accountPage.proxyDisabledAlertBody" = "Activează serverul Proxy, ca să primești notificările";

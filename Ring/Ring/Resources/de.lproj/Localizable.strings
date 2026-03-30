@@ -41,7 +41,7 @@
 "global.name" = "Name";
 "global.copy" = "Kopieren";
 "global.reply" = "Antworten";
-"global.search" = "Suche…";
+"global.search" = "Suche...";
 "global.supportJami" = "Das Jami-Projekt unterstützen";
 "global.deleteMessage" = "Nachricht löschen";
 "global.deleteFile" = "Datei vom Gerät löschen";
@@ -56,7 +56,7 @@
 "global.editPassword" = "Passwort bearbeiten";
 "global.confirmPassword" = "Passwort bestätigen";
 "global.confirm" = "Bestätigen";
-"global.cameraDisabled" = "Der Kamerazugriff ist deaktiviert. Aktivieren Sie diesen in den Geräteeinstellungen, um diese Funktion zu nutzen.";
+"global.cameraDisabled" = "Der Kamerazugriff ist deaktiviert. Aktivieren Sie diesen in den Geräteeinstellungen, um diese Funktion zu verwenden.";
 "global.confirm" = "Bestätigen";
 "global.connect" = "Verbinden";
 "global.leave" = "Verlassen";
@@ -95,7 +95,7 @@
 "swarm.conversationHeader" = "Unterhaltung";
 "swarm.shareContactMessage" = "Sie können diesen Kontakt - %1@ - auf der verteilten Kommunikationsplattform Jami hinzufügen: https://jami.net";
 "swarm.oneToOne" = "Privat";
-"swarm.adminInvitesOnly" = "Private Gruppe (Einladungen beschränkt)";
+"swarm.adminInvitesOnly" = "Private Gruppe (Einladungen reglementiert)";
 "swarm.invitesOnly" = "private Gruppe";
 "swarm.publicChat" = "öffentliche Gruppe";
 "swarm.others" = "Andere";
@@ -186,7 +186,7 @@
 "invitations.accepted" = "Angenommen";
 "invitations.declined" = "Abgelehnt";
 "invitations.blocked" = "Blockiert";
-"invitations.list" = "Empfangene Einladungen";
+"invitations.list" = "Einladungen erhalten";
 
 // Walkthrough
 
@@ -307,8 +307,8 @@
 "actions.stopLocationSharing" = "Freigabe beenden";
 
 // Calls
-"calls.ringing" = "Klingelt…";
-"calls.connecting" = "Verbinde…";
+"calls.ringing" = "Klingelt...";
+"calls.connecting" = "Verbindet...";
 "calls.callFinished" = "Anruf beendet";
 "calls.currentCallWith" = "Anrufen mit";
 "calls.maximize" = "Maximieren";
@@ -333,15 +333,16 @@
 "accountPage.noProxyExplanationLabel" = "Benachrichtigungen können nicht empfangen werden, wenn der Proxy deaktiviert ist.";
 "accountPage.proxyPaceholder" = "Proxy-Adresse";
 "accountPage.useProxyList" = "Proxy-Liste verwenden";
-"accountPage.proxyListURL" = "URL der Proxy-Liste";
+"accountPage.proxyListURL" = "Proxy-Listen-URL";
 "accountPage.proxyExplanation" = "Benachrichtigungen werden über einen Proxy geleitet. Sie können entweder den Standard-Proxy verwenden, eine benutzerdefinierte Proxy-Adresse eingeben oder eine URL mit einer Liste von Proxys angeben.";
 "accountPage.proxyHeader" = "Proxy";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Benachrichtigungen aktivieren";
 "accountPage.proxyDisabledAlertTitle" = "Proxy-Server deaktiviert";
 "accountPage.proxyDisabledAlertBody" = "Um Benachrichtigungen zu erhalten, aktivieren Sie bitte den Proxy.";
 "accountPage.removeDeviceTitle" = "Gerät entfernen";
 "accountPage.revokeDeviceMessage" = "Möchten Sie dieses Gerät entfernen? Diese Aktion kann nicht rückgängig gemacht werden.";
-"accountPage.revokeDeviceButton" = "Trennen";
+"accountPage.revokeDeviceButton" = "Widerrufen";
 "accountPage.revokeDevicePlaceholder" = "Geben Sie ihr Kontopasswort ein";
 "accountPage.deviceRevoked" = "Trennung des Gerätes abgeschlossen";
 "accountPage.deviceRevocationProgress" = "Entfernen…";
@@ -376,7 +377,7 @@
 "accountPage.noBoothMode" = "Um den Booth-Modus zu aktivieren, schützen Sie das Konto zunächst mit einem Passwort.";
 "accountPage.boothModeAlertMessage" = "Nach dem Aktivieren des Booth-Modus werden alle Unterhaltungen entfernt.";
 "accountPage.peerDiscovery" = "Lokale Teilnehmer-Erkennung aktivieren";
-"accountPage.peerDiscoveryExplanation" = "Mit anderen DHT-Knoten verbinden, die in unserem lokalen Netzwerk werben.";
+"accountPage.peerDiscoveryExplanation" = "Mit anderen DHT-Knoten verbinden, die sich in Ihrem lokalen Netzwerk ankündigen.";
 "accountPage.autoRegistration" = "Automatische Registrierung nach Ablauf";
 "accountPage.connectivityHeader" = "Verbindung";
 "accountPage.turnEnabled" = "TURN aktivieren";
@@ -408,7 +409,7 @@
 "accountPage.pinExplanationMessage" = "Installieren und starten Sie Jami. Wählen Sie ‚Von einem anderen Gerät importieren‘ und scannen Sie den QR-Code. Alternativ können Sie den PIN-Code manuell eingeben.";
 "accountPage.pinError" = "Beim Generieren des PIN-Codes ist ein Fehler aufgetreten.";
 "accountPage.notificationTitle" = "Benachrichtigungen";
-"accountPage.notificationError" = "Benachrichtigungen für Jami sind deaktiviert. Aktivieren Sie sie in den Geräteeinstellungen, um diese Funktion nutzen zu können.";
+"accountPage.notificationError" = "Benachrichtigungen für Jami sind deaktiviert. Aktivieren Sie sie in den Geräteeinstellungen, um diese Funktion verwenden zu können.";
 "accountPage.callsFromUnknownContacts" = "Anrufe von unbekannten Kontakten erlauben.";
 "accountPage.accountSettingsExplanation" = "Diese Einstellungen gelten nur für dieses Konto.";
 "accountPage.appSettings" = "App-Einstellungen";
@@ -428,7 +429,7 @@
 "accountPage.dhtConfiguration" = "OpenDHT-Konfiguration";
 "accountPage.nameServer" = "Namensserver";
 "accountPage.chats" = "Chats";
-"accountPage.typingIndicator" = "Tipp-Indikatoren";
+"accountPage.typingIndicator" = "Tipp-Indikator";
 "accountPage.typingIndicatorExplanation" = "Anzeigen wenn Nachrichten getippt werden.";
 
 // Backup Account
@@ -459,7 +460,7 @@
 "account.enableAccount" = "Konto aktivieren";
 "account.statusOnline" = "Online";
 "account.statusOffline" = "Offline";
-"account.statusConnecting" = "Verbindet…";
+"account.statusConnecting" = "Verbindung wird hergestellt";
 "account.statusUnknown" = "Unbekannt";
 "account.statusConnectionerror" = "Verbindungsfehler";
 "account.needMigration" = "Konto erfordert Migration.";
@@ -603,10 +604,10 @@
 "accessibility.conversationRowLastMessage" = "Letzte Nachricht um %@";
 "accessibility.userPresenceOnline" = "Online";
 "accessibility.userPresenceAvailable" = "Verfügbar";
-"accessibility.pendingRequestsRowPlural" = "Empfangene Einladungen: %@ ausstehende Einladungen";
+"accessibility.pendingRequestsRowPlural" = "Einladungen erhalten: %@ ausstehende Einladungen";
 "accessibility.pendingRequestsRowSingular" = "Einladung erhalten: %@ ausstehende Einladung";
 "accessibility.pendingRequestsRowHint" = "Doppeltippen, um die erhaltenen Einladungen zu überprüfen und zu beantworten";
-"accessibility.pendingRequestsListBlockUser" = "Einladenden blockieren";
+"accessibility.pendingRequestsListBlockUser" = "Absender der Einladung blockieren";
 "accessibility.pendingRequestsListRejectInvitation" = "Einladung ablehnen";
 "accessibility.pendingRequestsListAcceptInvitation" = "Einladung annehmen";
 "accessibility.messageBubbleDeleted" = "Nachricht gelöscht";

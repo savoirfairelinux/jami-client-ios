@@ -307,8 +307,8 @@
 "actions.stopLocationSharing" = "Teilen beenden";
 
 // Calls
-"calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
+"calls.ringing" = "Klingelt...";
+"calls.connecting" = "Verbinden…";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.maximize" = "Maximale Größe";
@@ -336,12 +336,13 @@
 "accountPage.proxyListURL" = "Proxy-Listen-URL";
 "accountPage.proxyExplanation" = "Benachrichtigungen werden über einen Proxy weitergeleitet. Sie können entweder den Standard-Proxy verwenden, eine benutzerdefinierte Proxy-Adresse eingeben oder eine URL mit einer Liste von Proxys angeben.";
 "accountPage.proxyHeader" = "Proxy";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Benachrichtigungen einschalten";
 "accountPage.proxyDisabledAlertTitle" = "Proxy-Server deaktiviert";
 "accountPage.proxyDisabledAlertBody" = "Um Benachrichtigungen zu erhalten, aktivieren Sie bitte den Proxy.";
 "accountPage.removeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Möchten Sie dieses Gerät entfernen? Diese Aktion kann nicht rückgängig gemacht werden.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceButton" = "Widerrufen";
 "accountPage.revokeDevicePlaceholder" = "Konto-Passwort eingeben";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Entfernen…";

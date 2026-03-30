@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Wakala wa kuwakilisha";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Kuwezesha taarifa";
 "accountPage.proxyDisabledAlertTitle" = "Seva ya Proxy Imelemazwa";
 "accountPage.proxyDisabledAlertBody" = "Ili kupokea taarifa, tafadhali kuwezesha proxy";

@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "프록시";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "알람 사용하기";
 "accountPage.proxyDisabledAlertTitle" = "프록시 서버 비활성화";
 "accountPage.proxyDisabledAlertBody" = "알림을 받기 위해 프록시를 활성화하십시오";

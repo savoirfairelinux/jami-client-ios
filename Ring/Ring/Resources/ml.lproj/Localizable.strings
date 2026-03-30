@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "പ്രോക്സി ലിസ്റ്റ് URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "പ്രോക്സി";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "അറിയിപ്പുകൾ പ്രവർത്തനക്ഷമമാക്കുക";
 "accountPage.proxyDisabledAlertTitle" = "പ്രോക്സി സെർവർ പ്രവർത്തനരഹിതമാക്കി";
 "accountPage.proxyDisabledAlertBody" = "അറിയിപ്പുകൾ സ്വീകരിക്കുന്നതിന്, ദയവായി പ്രോക്സി പ്രവർത്തനക്ഷമമാക്കുക";

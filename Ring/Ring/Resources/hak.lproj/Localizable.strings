@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "代理服务器列表 URL";
 "accountPage.proxyExplanation" = "通知須透過代理伺服器發送。你可以使用預設的代理伺服器，或者輸入自定義的代理伺服器地址，又或者輸入代理伺服器列表的URL。";
 "accountPage.proxyHeader" = "代理服務器";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "启用通知";
 "accountPage.proxyDisabledAlertTitle" = "代理服务器已禁用";
 "accountPage.proxyDisabledAlertBody" = "为了接受通知，请开启代理";

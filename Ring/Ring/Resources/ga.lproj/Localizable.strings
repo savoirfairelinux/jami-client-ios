@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Cláir";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Cuir in iúl fógraí";
 "accountPage.proxyDisabledAlertTitle" = "Seirbhísí Proxy A Díchíchíchumas";
 "accountPage.proxyDisabledAlertBody" = "Chun fógraí a fháil, déan iarracht proxy a chumasú";

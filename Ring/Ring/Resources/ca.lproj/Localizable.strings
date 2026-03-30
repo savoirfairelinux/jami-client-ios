@@ -120,8 +120,8 @@
 "swarm.selectContacts" = "Seleccionar els contactes";
 
 // Contact Picker
-"contactPicker.calls" = "Calls";
-"contactPicker.contacts" = "Contacts";
+"contactPicker.calls" = "Trucades";
+"contactPicker.contacts" = "Contactes";
 
 // Smartlist
 "smartlist.yesterday" = "Ahir";
@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Intermediari";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Abilitar notificacions";
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy desactivat";
 "accountPage.proxyDisabledAlertBody" = "Per rebre notificacions, per favor, habiliteu el proxy";

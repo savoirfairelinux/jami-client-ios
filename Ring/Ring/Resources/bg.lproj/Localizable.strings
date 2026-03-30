@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Посредник";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Осигуряване на уведомленията";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сървър деактивиран";
 "accountPage.proxyDisabledAlertBody" = "За да получите уведомления, моля, включете прокси";

@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "פרוקסי";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "אפשרות להודיע";
 "accountPage.proxyDisabledAlertTitle" = "שרת פרוקסי מופחת";
 "accountPage.proxyDisabledAlertBody" = "כדי לקבל הודעות, אנא פעל פרוקסי";

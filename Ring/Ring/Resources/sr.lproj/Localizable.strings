@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Obaveštenja se rutiraju preko proksija. Možete da koristite podrazumevani proksi, unesete prilagođenu proksi adresu ili navedete URL sa listom proksija.";
 "accountPage.proxyHeader" = "Proxy";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Omogući obaveštenja";
 "accountPage.proxyDisabledAlertTitle" = "Proksi server je onemogućen";
 "accountPage.proxyDisabledAlertBody" = "Da biste primali obaveštenja, omogućite proksi";

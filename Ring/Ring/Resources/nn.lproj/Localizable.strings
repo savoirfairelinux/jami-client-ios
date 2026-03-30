@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Styrkemann";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Legg til bruk meldingar";
 "accountPage.proxyDisabledAlertTitle" = "Proxy server funksjonshemma";
 "accountPage.proxyDisabledAlertBody" = "For å motta meldingar, bed du aktivera proxy";

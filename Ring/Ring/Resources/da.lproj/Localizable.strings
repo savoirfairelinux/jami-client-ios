@@ -120,8 +120,8 @@
 "swarm.selectContacts" = "Vælg kontakter";
 
 // Contact Picker
-"contactPicker.calls" = "Calls";
-"contactPicker.contacts" = "Contacts";
+"contactPicker.calls" = "Opkald";
+"contactPicker.contacts" = "Kontakter";
 
 // Smartlist
 "smartlist.yesterday" = "I går";
@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Stedfortræder";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Aktiver notifikationer";
 "accountPage.proxyDisabledAlertTitle" = "Proxy-server deaktiveret";
 "accountPage.proxyDisabledAlertBody" = "Aktivér venligst proxy, for at modtage notifikationer";

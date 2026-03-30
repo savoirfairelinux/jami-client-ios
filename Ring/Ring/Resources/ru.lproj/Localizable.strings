@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "URL списка прокси";
 "accountPage.proxyExplanation" = "Уведомления направляются через прокси. Вы можете использовать прокси по умолчанию, ввести свой собственный адрес прокси или указать URL со списком прокси.";
 "accountPage.proxyHeader" = "Прокси";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Включить уведомления";
 "accountPage.proxyDisabledAlertTitle" = "Прокси-сервер выключен";
 "accountPage.proxyDisabledAlertBody" = "Для получения уведомлений, пожалуйста, включите прокси";

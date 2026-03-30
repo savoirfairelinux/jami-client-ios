@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "প্রক্সি";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "বিজ্ঞপ্তি সক্ষম করুন";
 "accountPage.proxyDisabledAlertTitle" = "প্রক্সি সার্ভার অক্ষম";
 "accountPage.proxyDisabledAlertBody" = "বিজ্ঞপ্তি পেতে, প্রক্সি সক্ষম করুন";

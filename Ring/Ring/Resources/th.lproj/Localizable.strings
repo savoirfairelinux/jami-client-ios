@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "พอร์กส";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "เปิดให้มีการแจ้ง";
 "accountPage.proxyDisabledAlertTitle" = "พรอক্ซี่เซอร์เวอร์ปิด";
 "accountPage.proxyDisabledAlertBody" = "เพื่อรับแจ้งความโปรดเปิดตัวแทน";

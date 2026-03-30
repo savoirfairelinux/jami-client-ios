@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proksiserverite loendi võrguaadress";
 "accountPage.proxyExplanation" = "Teavitused saabuvad läbi proksiserveri. Sa võid kasutada vaikimisi proksiserverit, sisestada sulle meeldiva proksiserveri aadressi või lisada võrguaadressi, kus on proksiserverite loend.";
 "accountPage.proxyHeader" = "Proksiserver";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Võta teavitused kasutusele";
 "accountPage.proxyDisabledAlertTitle" = "Proksiserver pole kasutusel";
 "accountPage.proxyDisabledAlertBody" = "Teavituste saamiseks palun võta proksiserver kasutusele";

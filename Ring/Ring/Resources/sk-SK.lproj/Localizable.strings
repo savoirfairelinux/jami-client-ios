@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "URL zoznamu proxy";
 "accountPage.proxyExplanation" = "Upozornenia sú smerované cez proxy. Môžete použiť predvolený server proxy, zadať vlastnú adresu servera proxy alebo poskytnúť adresu URL so zoznamom serverov proxy";
 "accountPage.proxyHeader" = "Proxy";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Umožniť oznámenie";
 "accountPage.proxyDisabledAlertTitle" = "Proxy server zakázaný";
 "accountPage.proxyDisabledAlertBody" = "Ak chcete dostávať upozornenia, povoľte prosím proxy.";

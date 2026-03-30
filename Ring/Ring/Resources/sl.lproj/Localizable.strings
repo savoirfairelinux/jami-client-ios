@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "URL posredniškega strežnika";
 "accountPage.proxyExplanation" = "Obvestila so usmerjena prek posredniškega strežnika. Uporabite lahko privzeti posredni strežnika, vnesete naslov posrednega strežnika po meri ali podate URL s seznamom posrednih strežnikov.";
 "accountPage.proxyHeader" = "Posredniški strežnik";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Omogoči obvestila";
 "accountPage.proxyDisabledAlertTitle" = "Posredniški strežnik je onemogočen";
 "accountPage.proxyDisabledAlertBody" = "Če želite prejemati obvestila, omogočite posredniški strežnik";

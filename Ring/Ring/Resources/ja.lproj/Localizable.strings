@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "プロキシ";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "通知を有効にする";
 "accountPage.proxyDisabledAlertTitle" = "プロキシサーバーが無効";
 "accountPage.proxyDisabledAlertBody" = "通知を有効にするため、プロキシを有効にしてください。";

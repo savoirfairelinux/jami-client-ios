@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "URL da lista de proxies";
 "accountPage.proxyExplanation" = "As notificações são encaminhadas através de um proxy. Pode utilizar o proxy predefinido, introduzir um endereço proxy personalizado ou fornecer um URL com uma lista de proxies.";
 "accountPage.proxyHeader" = "Proxy";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Ativar notificações";
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy desativado";
 "accountPage.proxyDisabledAlertBody" = "Para receber as notificações, favor ativar o proxy";

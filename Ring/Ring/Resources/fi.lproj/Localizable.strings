@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Välityspalvelinlistan URL";
 "accountPage.proxyExplanation" = "Ilmoitukset reititetään välityspalvelimen kautta. Voit joko käyttää oletusvälityspalvelinta, kirjoittaa mukautetun osoitteen tai antaa URL-osoitteen, jossa on luettelo välityspalvelimista.";
 "accountPage.proxyHeader" = "Välityspalvelin";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Ilmoitukset käyttöön";
 "accountPage.proxyDisabledAlertTitle" = "Välityspalvelin poistettu käytöstä";
 "accountPage.proxyDisabledAlertBody" = "Jotta voit vastaanottaa ilmoituksia, käytä välityspalvelinta";

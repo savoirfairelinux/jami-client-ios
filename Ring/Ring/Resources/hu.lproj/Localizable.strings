@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Meghatalmazáslista URL-címe";
 "accountPage.proxyExplanation" = "Az értesítések meghatalmazáson keresztül kerülnek továbbításra. Használhatja az alapértelmezett meghatalmazást, megadhat egyéni meghatalmazási címet, vagy megadhat egy URL-címet a meghatalmazások listájával.";
 "accountPage.proxyHeader" = "Meghatalmazás";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Értesítések engedélyezése";
 "accountPage.proxyDisabledAlertTitle" = "Meghatalmazott-kiszolgáló letiltva";
 "accountPage.proxyDisabledAlertBody" = "Annak érdekében, hogy értesítéseket kaphasson kérjük, hogy engedélyezze a meghatalmazott használatát";

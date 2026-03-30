@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Adres URL listy serwerów proxy";
 "accountPage.proxyExplanation" = "Powiadomienia są kierowane przez serwer proxy. Można użyć domyślnego serwera proxy, wprowadzić niestandardowy adres serwera proxy lub podać adres URL z listą serwerów proxy.";
 "accountPage.proxyHeader" = "Pełnomocnik";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Aktywuj powiadomienia";
 "accountPage.proxyDisabledAlertTitle" = "Serwer proxy wyłączony";
 "accountPage.proxyDisabledAlertBody" = "Włącz proxy, by otrzymywać powiadomienia";

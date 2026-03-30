@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "ಪ್ರಾಕ್ಸಿ";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "ಅಧಿಸೂಚನೆಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ";
 "accountPage.proxyDisabledAlertTitle" = "ಪ್ರಾಕ್ಸಿ ಸರ್ವರ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ";
 "accountPage.proxyDisabledAlertBody" = "ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವೀಕರಿಸಲು, ದಯವಿಟ್ಟು ಪ್ರಾಕ್ಸಿ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ";

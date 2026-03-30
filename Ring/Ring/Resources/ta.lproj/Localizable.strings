@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy list URL";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "பிரதிநிதி";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "அறிவிப்புகளை இயக்குதல்";
 "accountPage.proxyDisabledAlertTitle" = "ப்ராக்ஸி சேவையகம் செயலிழக்கப்பட்டது";
 "accountPage.proxyDisabledAlertBody" = "அறிவிப்புகளைப் பெற, ப்ராக்ஸி இயக்கு";

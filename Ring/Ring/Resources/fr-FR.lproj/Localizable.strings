@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "URL de la liste des serveurs mandataires DHT";
 "accountPage.proxyExplanation" = "Les notifications sont acheminées par un serveur mandataire. Vous pouvez soit utiliser la valeur par défaut ou bien fournir l'adresse d'un mandataire, ou bien l'URL d'une liste de serveurs mandataires.";
 "accountPage.proxyHeader" = "Proxy";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Activer les notifications";
 "accountPage.proxyDisabledAlertTitle" = "Nœud délégataire désactivé ";
 "accountPage.proxyDisabledAlertBody" = "Pour recevoir des notifications, veuillez activer le serveur mandataire ";

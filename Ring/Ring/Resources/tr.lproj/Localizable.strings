@@ -336,6 +336,7 @@
 "accountPage.proxyListURL" = "Proxy listesi bağlantısı";
 "accountPage.proxyExplanation" = "Notifications are routed through a proxy. You can either use the default proxy, enter a custom proxy address, or provide a URL with a list of proxies.";
 "accountPage.proxyHeader" = "Vekil";
+"accountPage.currentProxy" = "Current proxy";
 "accountPage.enableNotifications" = "Bildirimleri etkinleştir";
 "accountPage.proxyDisabledAlertTitle" = "Vekil Sunucu Devre dışı";
 "accountPage.proxyDisabledAlertBody" = "Bildirimleri almak için lütfen vekil sunucuyu etkinleştirin";
