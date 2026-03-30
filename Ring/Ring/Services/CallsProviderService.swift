@@ -129,24 +129,40 @@ class CallsProviderService: NSObject {
 }
 
 extension CallsProviderService {
-    func stopCall(callUUID: UUID, participant: String) {
-        // Remove call from pending unhandeled calls. Get pending call by jamiId, because uuid could be different for unhandeled call and for incoming call.
+    func stopCall(callUUID: UUID, participant: String, isRemoteEnd: Bool = false) {
         if let call = getUnhandeledCall(peerId: participant) {
             let unhandeledCallUUID = call.uuid
             removeUnhandeledCall(call)
-            // If unhandeled calls uuid is different from requested callUUID stop it.
             if unhandeledCallUUID != callUUID {
-                let endCallAction = CXEndCallAction(call: unhandeledCallUUID)
-                let transaction = CXTransaction(action: endCallAction)
-                self.requestTransaction(transaction)
+                endCallInCallKit(callUUID: unhandeledCallUUID, isRemoteEnd: isRemoteEnd)
             }
         } else if let call = getUnhandeledCall(UUID: callUUID) {
             removeUnhandeledCall(call)
         }
-        // Send request end call to CallKit.
-        let endCallAction = CXEndCallAction(call: callUUID)
-        let transaction = CXTransaction(action: endCallAction)
-        self.requestTransaction(transaction)
+        guard containsJamiCallUUID(callUUID) else { return }
+        endCallInCallKit(callUUID: callUUID, isRemoteEnd: isRemoteEnd)
+    }
+
+    private func endCallInCallKit(callUUID: UUID, isRemoteEnd: Bool) {
+        let isOutgoing = self.callController.callObserver.calls.first(where: { $0.uuid == callUUID })?.isOutgoing ?? false
+        if isRemoteEnd && !isOutgoing {
+            self.provider.reportCall(with: callUUID, endedAt: Date(), reason: .remoteEnded)
+            removeJamiCallUUID(callUUID)
+        } else {
+            let endCallAction = CXEndCallAction(call: callUUID)
+            let transaction = CXTransaction(action: endCallAction)
+            self.requestTransaction(transaction)
+        }
+    }
+
+    func reportOutgoingCallConnecting(callUUID: UUID) {
+        guard containsJamiCallUUID(callUUID) else { return }
+        self.provider.reportOutgoingCall(with: callUUID, startedConnectingAt: Date())
+    }
+
+    func reportOutgoingCallConnected(callUUID: UUID) {
+        guard containsJamiCallUUID(callUUID) else { return }
+        self.provider.reportOutgoingCall(with: callUUID, connectedAt: Date())
     }
 
     func hasActiveCalls() -> Bool {
@@ -258,8 +274,17 @@ extension CallsProviderService {
         let startCallAction = CXStartCallAction(call: call.callUUID, handle: contactHandle)
         startCallAction.isVideo = !call.isAudioOnly
         startCallAction.contactIdentifier = handleInfo.displayName
+        let callUUID = call.callUUID
+        insertJamiCallUUID(callUUID)
         let transaction = CXTransaction(action: startCallAction)
-        requestTransaction(transaction)
+        callController.request(transaction) { [weak self] error in
+            if let error = error {
+                self?.removeJamiCallUUID(callUUID)
+                print("An error occurred while requesting transaction: \(error)")
+            } else {
+                self?.provider.reportOutgoingCall(with: callUUID, startedConnectingAt: Date())
+            }
+        }
     }
 
     func stopAllUnhandeledCalls() {
@@ -392,5 +417,9 @@ extension CallsProviderService: CXProviderDelegate {
         let serviceEventType: ServiceEventType = .audioActivated
         let serviceEvent = ServiceEvent(withEventType: serviceEventType)
         self.responseStream.onNext(serviceEvent)
+    }
+
+    func provider(_ provider: CXProvider, didDeactivate audioSession: AVAudioSession) {
+        try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
     }
 }
