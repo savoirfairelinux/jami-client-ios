@@ -129,24 +129,36 @@ class CallsProviderService: NSObject {
 }
 
 extension CallsProviderService {
-    func stopCall(callUUID: UUID, participant: String) {
+    func stopCall(callUUID: UUID, participant: String, isRemoteEnd: Bool = false) {
         // Remove call from pending unhandeled calls. Get pending call by jamiId, because uuid could be different for unhandeled call and for incoming call.
         if let call = getUnhandeledCall(peerId: participant) {
             let unhandeledCallUUID = call.uuid
             removeUnhandeledCall(call)
             // If unhandeled calls uuid is different from requested callUUID stop it.
             if unhandeledCallUUID != callUUID {
-                let endCallAction = CXEndCallAction(call: unhandeledCallUUID)
-                let transaction = CXTransaction(action: endCallAction)
-                self.requestTransaction(transaction)
+                if isRemoteEnd {
+                    self.provider.reportCall(with: unhandeledCallUUID, endedAt: Date(), reason: .remoteEnded)
+                    removeJamiCallUUID(unhandeledCallUUID)
+                } else {
+                    let endCallAction = CXEndCallAction(call: unhandeledCallUUID)
+                    let transaction = CXTransaction(action: endCallAction)
+                    self.requestTransaction(transaction)
+                }
             }
         } else if let call = getUnhandeledCall(UUID: callUUID) {
             removeUnhandeledCall(call)
         }
-        // Send request end call to CallKit.
-        let endCallAction = CXEndCallAction(call: callUUID)
-        let transaction = CXTransaction(action: endCallAction)
-        self.requestTransaction(transaction)
+        if isRemoteEnd {
+            // For remote-ended calls, use reportCall instead of CXEndCallAction
+            // to avoid circular event flow and ensure proper CallKit cleanup on iOS 15+
+            self.provider.reportCall(with: callUUID, endedAt: Date(), reason: .remoteEnded)
+            removeJamiCallUUID(callUUID)
+        } else {
+            // For user-initiated hangups, use CXEndCallAction
+            let endCallAction = CXEndCallAction(call: callUUID)
+            let transaction = CXTransaction(action: endCallAction)
+            self.requestTransaction(transaction)
+        }
     }
 
     func hasActiveCalls() -> Bool {
@@ -392,5 +404,9 @@ extension CallsProviderService: CXProviderDelegate {
         let serviceEventType: ServiceEventType = .audioActivated
         let serviceEvent = ServiceEvent(withEventType: serviceEventType)
         self.responseStream.onNext(serviceEvent)
+    }
+
+    func provider(_ provider: CXProvider, didDeactivate audioSession: AVAudioSession) {
+        try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
     }
 }

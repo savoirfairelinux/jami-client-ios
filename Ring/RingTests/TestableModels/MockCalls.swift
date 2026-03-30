@@ -59,6 +59,7 @@ class MockCall {
 
 class MockCXProvider: CXProvider {
     var systemCalls: MocSystemCalls
+    var reportedEndedCalls = [(uuid: UUID, reason: CXCallEndedReason)]()
 
     init(systemCalls: MocSystemCalls) {
         self.systemCalls = systemCalls
@@ -70,6 +71,11 @@ class MockCXProvider: CXProvider {
             let call = MockCall(uuid: UUID, jamiId: handle.value)
             self.systemCalls.reportCall(call: call)
         }
+    }
+
+    override func reportCall(with UUID: UUID, endedAt dateEnded: Date?, reason endedReason: CXCallEndedReason) {
+        reportedEndedCalls.append((uuid: UUID, reason: endedReason))
+        systemCalls.removeCall(uuid: UUID)
     }
 }
 

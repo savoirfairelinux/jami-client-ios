@@ -355,7 +355,7 @@ class ConversationsManager {
                 guard let self = self else { return }
                 guard let peerId: String = event.getEventInput(ServiceEventInput.peerUri),
                       let uuidString: String = event.getEventInput(ServiceEventInput.callUUID) else { return }
-                self.callsProvider.stopCall(callUUID: UUID(uuidString: uuidString)!, participant: peerId.filterOutHost())
+                self.callsProvider.stopCall(callUUID: UUID(uuidString: uuidString)!, participant: peerId.filterOutHost(), isRemoteEnd: true)
             })
             .disposed(by: disposeBag)
         self.callService.newMessage

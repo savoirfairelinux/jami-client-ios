@@ -171,6 +171,32 @@ class CallManagementServiceTests: XCTestCase {
         XCTAssertEqual(capturedEvent!.eventType, .callEnded, "Event type should be callEnded")
     }
 
+    func testRemoveCall_CallsCountIsZeroWhenEventEmitted() {
+        // When a .callEnded event is emitted, subscribers (e.g. VideoManager)
+        // check calls.get().count to decide whether to stop the camera.
+        // The call must be removed from the dictionary BEFORE the event fires.
+        let call = CallModel.createTestCall()
+        call.state = .current
+        call.dateReceived = Date(timeIntervalSinceNow: -60)
+
+        calls.updateSync { calls in
+            calls[CallTestConstants.callId] = call
+        }
+
+        var callsCountAtEventTime: Int = -1
+        responseStream
+            .filter { $0.eventType == .callEnded }
+            .take(1)
+            .subscribe(onNext: { [weak self] _ in
+                callsCountAtEventTime = self?.calls.get().count ?? -1
+            })
+            .disposed(by: disposeBag)
+
+        callManagementService.removeCall(callId: CallTestConstants.callId, callState: .over)
+
+        XCTAssertEqual(callsCountAtEventTime, 0, "Calls dictionary should be empty when .callEnded event is received")
+    }
+
     func testRemoveCall_WithInvalidCallId() async {
         let call = CallModel.createTestCall()
         call.state = .current
