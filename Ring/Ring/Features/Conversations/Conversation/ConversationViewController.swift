@@ -339,11 +339,10 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
                     self.viewModel.sendAndSaveFile(displayName: imageFileName + ".gif", imageData: data)
                 }
             case .image:
-                provider.loadObject(ofClass: UIImage.self) { [weak self] (object, _) in
+                provider.loadDataRepresentation(forTypeIdentifier: UTType.jpeg.identifier) { [weak self] (data, _) in
                     guard let self = self,
-                          let image = object as? UIImage,
-                          let imageData = image.jpegData(compressionQuality: 0.5) else { return }
-                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".jpeg", imageData: imageData)
+                          let data = data else { return }
+                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".jpeg", imageData: data)
                 }
             case .video:
                 provider.loadDataRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] (data, _) in
