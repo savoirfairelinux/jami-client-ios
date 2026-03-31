@@ -49,8 +49,9 @@ class ProfilesService {
     private let log = SwiftyBeaver.self
     private let profilesAdapter: ProfilesAdapter
 
-    var profiles = ConcurentDictionary(name: "com.contactProfiles", dictionary: [String: ReplaySubject<Profile>]())
-    var accountProfiles = ConcurentDictionary(name: "com.accountProfiles", dictionary: [String: ReplaySubject<Profile>]())
+    private let profilesLock = NSLock()
+    var profiles: ThreadSafeDictionary<String, ReplaySubject<Profile>>
+    var accountProfiles: ThreadSafeDictionary<String, ReplaySubject<Profile>>
 
     private let avatarsCache = NSCache<NSString, UIImage>()
 
@@ -59,6 +60,8 @@ class ProfilesService {
     let disposeBag = DisposeBag()
 
     init(withProfilesAdapter adapter: ProfilesAdapter, dbManager: DBManager) {
+        self.profiles = ThreadSafeDictionary(lock: profilesLock)
+        self.accountProfiles = ThreadSafeDictionary(lock: profilesLock)
         profilesAdapter = adapter
         self.dbManager = dbManager
         NotificationCenter.default.addObserver(self, selector: #selector(self.messageReceived(_:)),
@@ -182,7 +185,7 @@ class ProfilesService {
     }
 
     private func triggerProfileSignal(uri: String, createIfNotexists: Bool, accountId: String) {
-        guard let profileObservable = self.profiles.get(key: uri) as? ReplaySubject<Profile> else {
+        guard let profileObservable = self.profiles[uri] else {
             return
         }
         self.dbManager
@@ -197,36 +200,36 @@ class ProfilesService {
     }
 
     func getProfile(uri: String, createIfNotexists: Bool, accountId: String) -> Observable<Profile> {
-        if let profile = self.profiles.get(key: uri) as? ReplaySubject<Profile> {
-            return profile.asObservable().share()
+        let (subject, inserted) = profiles.getOrInsert(key: uri) {
+            ReplaySubject<Profile>.create(bufferSize: 1)
         }
-        let profileObservable = ReplaySubject<Profile>.create(bufferSize: 1)
-        self.profiles.set(value: profileObservable, for: uri)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.triggerProfileSignal(uri: uri,
-                                       createIfNotexists: createIfNotexists,
-                                       accountId: accountId)
+        if inserted {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                self?.triggerProfileSignal(uri: uri,
+                                           createIfNotexists: createIfNotexists,
+                                           accountId: accountId)
+            }
         }
-        return profileObservable.share()
+        return subject.asObservable().share()
     }
 }
 
 // MARK: account profile
 extension ProfilesService {
     func getAccountProfile(accountId: String) -> Observable<Profile> {
-        if let profile = self.accountProfiles.get(key: accountId) as? ReplaySubject<Profile> {
-            return profile.asObservable().share()
+        let (subject, inserted) = accountProfiles.getOrInsert(key: accountId) {
+            ReplaySubject<Profile>.create(bufferSize: 1)
         }
-        let profileObservable = ReplaySubject<Profile>.create(bufferSize: 1)
-        self.accountProfiles.set(value: profileObservable, for: accountId)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.triggerAccountProfileSignal(accountId: accountId)
+        if inserted {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                self?.triggerAccountProfileSignal(accountId: accountId)
+            }
         }
-        return profileObservable.share()
+        return subject.asObservable().share()
     }
 
     private func triggerAccountProfileSignal(accountId: String) {
-        guard let profileObservable = self.accountProfiles.get(key: accountId) as? ReplaySubject<Profile> else {
+        guard let profileObservable = self.accountProfiles[accountId] else {
             return
         }
         self.dbManager
