@@ -72,6 +72,7 @@
 		0E5A668322F0B1F100AA6820 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5A668222F0B1F100AA6820 /* ProgressView.swift */; };
 		0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E68571020238546008B0717 /* ConversationNavigation.swift */; };
 		0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E72374920460320006B0C7D /* ProfileHeaderView.xib */; };
+		0E79DD394CD244799BE7250B /* TraceIdParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1082257BBE4D4C0687DA9F2E /* TraceIdParser.swift */; };
 		0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E9A0420483E1200DA8E8B /* TitleView.swift */; };
 		0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E983E6D1FC77C3E0082103E /* ConversationModel.swift */; };
 		0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E99F19F22417A0400CF8BD6 /* JamiURI.swift */; };
@@ -113,6 +114,7 @@
 		1A5DC0241F3564360075E8EF /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC0231F3564360075E8EF /* RequestModel.swift */; };
 		1A5DC0281F3564AA0075E8EF /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC0271F3564AA0075E8EF /* MessageModel.swift */; };
 		1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DC02D1F3565640075E8EF /* ConversationViewModel.swift */; };
+		3DAB00012E1000000DEB0001 /* ConversationViewModel+DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB00022E1000000DEB0002 /* ConversationViewModel+DebugTools.swift */; };
 		1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */; };
 		1ABE07D21F0D8FE800D36361 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07D01F0D8FE800D36361 /* Images.swift */; };
 		1ABE07D31F0D8FE800D36361 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07D11F0D8FE800D36361 /* Storyboards.swift */; };
@@ -129,6 +131,7 @@
 		1DF75AC2296E09240055EA87 /* Button+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC1296E09240055EA87 /* Button+Helpers.swift */; };
 		1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC3296E0A940055EA87 /* View+Helpers.swift */; };
 		1DF75AC6296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */; };
+		1DF7692291504CB181623D32 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A59B402FE848F88F975ABD /* Logger.swift */; };
 		26001BDB2D6FF5F6009A8E23 /* Video+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26001BDA2D6FF5F6009A8E23 /* Video+Helpers.swift */; };
 		26001C0C2D78E1A1009A8E23 /* libpjsua.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BDF2D78E198009A8E23 /* libpjsua.xcframework */; };
 		26001C0E2D78E1A1009A8E23 /* libsrtp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26001BE02D78E198009A8E23 /* libsrtp.xcframework */; };
@@ -464,6 +467,7 @@
 		26FDF4192C1101C2009D036B /* JamiBaseUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF4182C1101C2009D036B /* JamiBaseUITest.swift */; };
 		26FDF43D2C1353A9009D036B /* AccountSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF43C2C1353A9009D036B /* AccountSummaryView.swift */; };
 		26FDF43F2C1353BA009D036B /* AccountSummaryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF43E2C1353BA009D036B /* AccountSummaryVM.swift */; };
+		300F6F549C694A199DB0A050 /* DebugTools.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCABA90337445F891CF2E09 /* DebugTools.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3D0E697A2DDCD9C80046FA3D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E69792DDCD9C80046FA3D /* ShareViewController.swift */; };
 		3D0E69812DDCD9C80046FA3D /* jamiShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3D0E69882DDCDBE70046FA3D /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E69872DDCDBE70046FA3D /* ShareView.swift */; };
@@ -541,6 +545,7 @@
 		5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */; };
 		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
 		5593D7D32B7FE00A00DA109C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5593D7D22B7FE00A00DA109C /* MCEmojiPicker */; };
+		55BF95025C0746ED9407B0EA /* IntervalSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D11E883DB7A430E8986A5E9 /* IntervalSender.swift */; };
 		56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56308BA61EA00E5700660275 /* NameRegistrationResponse.m */; };
 		563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 563AEC761EA664C0003A5641 /* RegistrationResponse.m */; };
 		564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C445A1E8EA44E000F92B1 /* Durations.swift */; };
@@ -586,6 +591,10 @@
 		6661C73A216D2EA300E48D94 /* Gif+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6661C739216D2EA300E48D94 /* Gif+Helpers.swift */; };
 		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
 		66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F295DD2166A5930044ED6F /* Devices+Helpers.swift */; };
+		785444169CC44DFAB5B9A81C /* NotificationTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78CF26A24774B48AB5AC705 /* NotificationTesting.swift */; };
+		7A6611169CC44DFAB5B9A82D /* NotificationTestingConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DEAD6A24774B48AB5AC706 /* NotificationTestingConfigView.swift */; };
+		79C958A7AC7E407E8BB434E3 /* DebugTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCABA90337445F891CF2E09 /* DebugTools.framework */; };
+		7A4F14205EDE4990A4795840 /* DebugTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA14BE2F65140AABB4C4B11 /* DebugTools.swift */; };
 		AA0001020000000000000001 /* PhotoLibrarySaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001010000000000000001 /* PhotoLibrarySaving.swift */; };
 		AA0002020000000000000002 /* MockPhotoLibrarySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */; };
 		AA0003020000000000000003 /* MediaPreviewModelSaveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */; };
@@ -606,6 +615,7 @@
 		BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB91FAA9292EA26900BB41C1 /* EventData.swift */; };
 		BBB76E412966062C00A42DF5 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB76E402966062C00A42DF5 /* MapView.swift */; };
 		BBD3D751297B4CA00098DB02 /* SwarmInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */; };
+		CB797FF0F25A44818BFBCA35 /* DebugTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCABA90337445F891CF2E09 /* DebugTools.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -630,12 +640,26 @@
 			remoteGlobalIDString = 26A88C03266FFFC800888EED;
 			remoteInfo = jamiNotificationExtension;
 		};
+		37B31662D8B14AAF9C23E467 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDE1FD856CF742B5A9766BDF;
+			remoteInfo = DebugTools;
+		};
 		3D0E697F2DDCD9C80046FA3D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3D0E69762DDCD9C70046FA3D;
 			remoteInfo = jamiShareExtension;
+		};
+		D908467B39EB4F829EB2C66A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDE1FD856CF742B5A9766BDF;
+			remoteInfo = DebugTools;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -669,6 +693,7 @@
 				26001CD42D792492009A8E23 /* RxBlocking.xcframework in Embed Frameworks */,
 				26001CCE2D79248D009A8E23 /* RxRelay.xcframework in Embed Frameworks */,
 				26001CD62D792494009A8E23 /* Reusable.xcframework in Embed Frameworks */,
+				300F6F549C694A199DB0A050 /* DebugTools.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -767,6 +792,7 @@
 		0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsecp256k1.a; path = ../DEPS/arm64/lib/libsecp256k1.a; sourceTree = "<group>"; };
 		0EF49AA023828CBC0064CD98 /* ParticipantProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileInfo.swift; sourceTree = "<group>"; };
 		0EF78DE21FD0AE3000FC6966 /* ConversationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsManager.swift; sourceTree = "<group>"; };
+		1082257BBE4D4C0687DA9F2E /* TraceIdParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TraceIdParser.swift; path = DebugTools/Sources/NotificationTesting/Internal/TraceIdParser.swift; sourceTree = SOURCE_ROOT; };
 		1A0C4EE21F1D673600550433 /* InjectionBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionBag.swift; sourceTree = "<group>"; };
 		1A0C4EE41F1D67DF00550433 /* WalkthroughCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughCoordinator.swift; sourceTree = "<group>"; };
 		1A1E476C1F0E808500EA9A36 /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
@@ -798,6 +824,7 @@
 		1A5DC0231F3564360075E8EF /* RequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		1A5DC0271F3564AA0075E8EF /* MessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		1A5DC02D1F3565640075E8EF /* ConversationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
+		3DAB00022E1000000DEB0002 /* ConversationViewModel+DebugTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationViewModel+DebugTools.swift"; sourceTree = "<group>"; };
 		1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ring.swift"; sourceTree = "<group>"; };
 		1ABE07D01F0D8FE800D36361 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		1ABE07D11F0D8FE800D36361 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
@@ -1691,6 +1718,7 @@
 		44DFB397288704820023878C /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
 		44DFB398288704860023878C /* SQLite.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SQLite.xcframework; path = Carthage/Build/SQLite.xcframework; sourceTree = "<group>"; };
 		44DFB3992887048A0023878C /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
+		4CCABA90337445F891CF2E09 /* DebugTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DebugTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModelHelper.swift; sourceTree = "<group>"; };
 		5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModelHelperTests.swift; sourceTree = "<group>"; };
 		557086501E8ADB9D001A7CE4 /* SystemAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemAdapter.h; sourceTree = "<group>"; };
@@ -1721,6 +1749,7 @@
 		5C093F001FB495830011D90E /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
 		5CE66F731FBF769B00EE9291 /* InitialLoadingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InitialLoadingViewController.storyboard; sourceTree = "<group>"; };
 		5CE66F741FBF769B00EE9291 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
+		5D11E883DB7A430E8986A5E9 /* IntervalSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntervalSender.swift; path = DebugTools/Sources/NotificationTesting/Internal/IntervalSender.swift; sourceTree = SOURCE_ROOT; };
 		62006E03203F4DD6003C3197 /* UITextField+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Helpers.swift"; sourceTree = "<group>"; };
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
 		623660A920092081002598C1 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../daemon/src; sourceTree = "<group>"; };
@@ -1805,6 +1834,7 @@
 		6661C739216D2EA300E48D94 /* Gif+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gif+Helpers.swift"; sourceTree = "<group>"; };
 		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
+		A4A59B402FE848F88F975ABD /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = DebugTools/Sources/NotificationTesting/Internal/Logger.swift; sourceTree = SOURCE_ROOT; };
 		AA0001010000000000000001 /* PhotoLibrarySaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrarySaving.swift; sourceTree = "<group>"; };
 		AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoLibrarySaver.swift; sourceTree = "<group>"; };
 		AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewModelSaveTests.swift; sourceTree = "<group>"; };
@@ -1825,6 +1855,9 @@
 		BB91FAA9292EA26900BB41C1 /* EventData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
 		BBB76E402966062C00A42DF5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmInfoView.swift; sourceTree = "<group>"; };
+		C78CF26A24774B48AB5AC705 /* NotificationTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationTesting.swift; path = DebugTools/Sources/NotificationTesting/Public/NotificationTesting.swift; sourceTree = SOURCE_ROOT; };
+		C7DEAD6A24774B48AB5AC706 /* NotificationTestingConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationTestingConfigView.swift; path = DebugTools/Sources/NotificationTesting/Public/NotificationTestingConfigView.swift; sourceTree = SOURCE_ROOT; };
+		ECA14BE2F65140AABB4C4B11 /* DebugTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DebugTools.swift; path = DebugTools/Sources/DebugTools.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -1906,6 +1939,7 @@
 				26001C502D78E1A3009A8E23 /* libspeex.xcframework in Frameworks */,
 				26001C362D78E1A2009A8E23 /* libpjsip-simple.xcframework in Frameworks */,
 				04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */,
+				79C958A7AC7E407E8BB434E3 /* DebugTools.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1990,6 +2024,7 @@
 				26F82D062D7A09C300954A7B /* libnatpmp.xcframework in Frameworks */,
 				26001CA02D78E3E6009A8E23 /* libpjsip-simple.xcframework in Frameworks */,
 				26001C982D78E3E6009A8E23 /* libpjmedia-codec.xcframework in Frameworks */,
+				CB797FF0F25A44818BFBCA35 /* DebugTools.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2051,6 +2086,13 @@
 				3D4181C52DDE3179001BAD76 /* libswscale.xcframework in Frameworks */,
 				3D4181852DDE312A001BAD76 /* libfmt.xcframework in Frameworks */,
 				3D4181D52DDE33BF001BAD76 /* libz.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB10572DB30F47878917ACDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2904,6 +2946,7 @@
 		043999EA1D1C2D9D00E99CD9 = {
 			isa = PBXGroup;
 			children = (
+				DEF476E84BEE4AE0B8443E29 /* DebugTools */,
 				26EFD7FA2E2EB9EE00B63F74 /* CommonObjc */,
 				26EFD7E22E2E943500B63F74 /* CommonHelpers.swift */,
 				2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */,
@@ -2930,6 +2973,7 @@
 				04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */,
 				26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */,
 				3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */,
+				4CCABA90337445F891CF2E09 /* DebugTools.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3199,6 +3243,7 @@
 			children = (
 				265DFAFF292EB91F00834B97 /* MessageSwiftUI */,
 				1A5DC02D1F3565640075E8EF /* ConversationViewModel.swift */,
+				3DAB00022E1000000DEB0002 /* ConversationViewModel+DebugTools.swift */,
 				267B54212F57A32000565A0E /* ConversationViewController.swift */,
 			);
 			path = Conversation;
@@ -3695,6 +3740,15 @@
 			path = jamiShareExtension;
 			sourceTree = "<group>";
 		};
+		3F9A44D917A7455B9FFDBC75 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				ECA14BE2F65140AABB4C4B11 /* DebugTools.swift */,
+				80C69579CD6041C4963B0306 /* NotificationTesting */,
+			);
+			path = Sources;
+			sourceTree = "\"<group>\"";
+		};
 		4430A669236CB9F600747177 /* Conference */ = {
 			isa = PBXGroup;
 			children = (
@@ -3783,6 +3837,25 @@
 			path = QRCode;
 			sourceTree = "<group>";
 		};
+		77DC71E09F7845CAB35B7C13 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				A4A59B402FE848F88F975ABD /* Logger.swift */,
+				5D11E883DB7A430E8986A5E9 /* IntervalSender.swift */,
+				1082257BBE4D4C0687DA9F2E /* TraceIdParser.swift */,
+			);
+			path = Internal;
+			sourceTree = "\"<group>\"";
+		};
+		80C69579CD6041C4963B0306 /* NotificationTesting */ = {
+			isa = PBXGroup;
+			children = (
+				BEFA288DFD0946A0A014B3AA /* Public */,
+				77DC71E09F7845CAB35B7C13 /* Internal */,
+			);
+			path = NotificationTesting;
+			sourceTree = "\"<group>\"";
+		};
 		BB1E8C6B29159DDE005AE1D6 /* SwarmInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -3804,6 +3877,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		BEFA288DFD0946A0A014B3AA /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				C78CF26A24774B48AB5AC705 /* NotificationTesting.swift */,
+				C7DEAD6A24774B48AB5AC706 /* NotificationTestingConfigView.swift */,
+			);
+			path = Public;
+			sourceTree = "\"<group>\"";
+		};
+		DEF476E84BEE4AE0B8443E29 /* DebugTools */ = {
+			isa = PBXGroup;
+			children = (
+				3F9A44D917A7455B9FFDBC75 /* Sources */,
+			);
+			path = DebugTools;
+			sourceTree = "\"<group>\"";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3824,6 +3914,7 @@
 			dependencies = (
 				26A88C0A266FFFC800888EED /* PBXTargetDependency */,
 				3D0E69802DDCD9C80046FA3D /* PBXTargetDependency */,
+				679BFEA779B14EE4B6FB32EB /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				26EC6EF32DE0E7B9000BA551 /* ActiveCalls */,
@@ -3883,6 +3974,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A897DA0169EF4DD78D57F9E2 /* PBXTargetDependency */,
 			);
 			name = jamiNotificationExtension;
 			packageProductDependencies = (
@@ -3911,6 +4003,23 @@
 			productName = jamiShareExtension;
 			productReference = 3D0E69772DDCD9C80046FA3D /* jamiShareExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		DDE1FD856CF742B5A9766BDF /* DebugTools */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 698A3CE9EE494D4283ECA465 /* Build configuration list for PBXNativeTarget "DebugTools" */;
+			buildPhases = (
+				EB79E16165DA4504AF66F85E /* Sources */,
+				FB10572DB30F47878917ACDE /* Frameworks */,
+				6076748FBE07468493F1E15A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DebugTools;
+			productName = DebugTools;
+			productReference = 4CCABA90337445F891CF2E09 /* DebugTools.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -4043,6 +4152,7 @@
 				62366028200914C1002598C1 /* libring */,
 				26A88C03266FFFC800888EED /* jamiNotificationExtension */,
 				3D0E69762DDCD9C70046FA3D /* jamiShareExtension */,
+				DDE1FD856CF742B5A9766BDF /* DebugTools */,
 			);
 		};
 /* End PBXProject section */
@@ -4099,6 +4209,13 @@
 			files = (
 				26EB3AE82EAEAF3A00ACE157 /* Assets.xcassets in Resources */,
 				26EB3ADB2EAC42FB00ACE157 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6076748FBE07468493F1E15A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4255,6 +4372,7 @@
 				264FB66229775B1C00BEFBBF /* SystemService.swift in Sources */,
 				0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */,
 				1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */,
+				3DAB00012E1000000DEB0001 /* ConversationViewModel+DebugTools.swift in Sources */,
 				0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */,
 				0E13A91C22B844B100A12A54 /* NSUserActivity+Call.swift in Sources */,
 				1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */,
@@ -4551,6 +4669,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB79E16165DA4504AF66F85E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A4F14205EDE4990A4795840 /* DebugTools.swift in Sources */,
+				785444169CC44DFAB5B9A81C /* NotificationTesting.swift in Sources */,
+				7A6611169CC44DFAB5B9A82D /* NotificationTestingConfigView.swift in Sources */,
+				1DF7692291504CB181623D32 /* Logger.swift in Sources */,
+				55BF95025C0746ED9407B0EA /* IntervalSender.swift in Sources */,
+				0E79DD394CD244799BE7250B /* TraceIdParser.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -4573,6 +4704,16 @@
 			isa = PBXTargetDependency;
 			target = 3D0E69762DDCD9C70046FA3D /* jamiShareExtension */;
 			targetProxy = 3D0E697F2DDCD9C80046FA3D /* PBXContainerItemProxy */;
+		};
+		679BFEA779B14EE4B6FB32EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDE1FD856CF742B5A9766BDF /* DebugTools */;
+			targetProxy = 37B31662D8B14AAF9C23E467 /* PBXContainerItemProxy */;
+		};
+		A897DA0169EF4DD78D57F9E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDE1FD856CF742B5A9766BDF /* DebugTools */;
+			targetProxy = D908467B39EB4F829EB2C66A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4926,6 +5067,60 @@
 				TEST_TARGET_NAME = Ring;
 			};
 			name = Release;
+		};
+		228CFC4A60214B2489397443 /* Debug Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "jamiNotificationExtension/NotificationService-debug.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MSHYCBXK85;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG_TOOLS_ENABLED=1",
+					"DEBUG=1",
+					"OPENDHT_JSONCPP=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
+				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				NEW_SETTING = "";
+				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiNotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = iOS_filtering_notifications;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = iOS_filtering_notifications;
+				SKIP_INSTALL = YES;
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = "DEBUG DEBUG_TOOLS_ENABLED";
+				SWIFT_OBJC_BRIDGING_HEADER = "jamiNotificationExtension/jamiNotificationExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Testing";
 		};
 		265219CF2B603FD700D1CAE9 /* Debug with lint */ = {
 			isa = XCBuildConfiguration;
@@ -5293,6 +5488,39 @@
 			};
 			name = Release;
 		};
+		2B3033B8B20E436BA18FC548 /* Debug Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.jami.DebugTools;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUG_TOOLS_ENABLED $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Testing";
+		};
 		3D0E69822DDCD9CA0046FA3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5310,6 +5538,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MSHYCBXK85;
+				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5338,6 +5567,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "$(inherited) -Wl,-undefined,dynamic_lookup";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -5395,6 +5625,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "$(inherited) -Wl,-undefined,dynamic_lookup";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -5452,6 +5683,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "$(inherited) -Wl,-undefined,dynamic_lookup";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5509,6 +5741,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "$(inherited) -Wl,-undefined,dynamic_lookup";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5519,6 +5752,110 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		45184171EE5148F0ADC34CD2 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "NotificationTesting.swift NotificationTestingConfigView.swift Logger.swift IntervalSender.swift TraceIdParser.swift";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.jami.DebugTools;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Development;
+		};
+		4DF0F4131C854BAAB9EAB057 /* Debug Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
+				INFOPLIST_FILE = RingTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ringTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/RingTests/RingTests-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ring.app/Ring";
+			};
+			name = "Debug Testing";
+		};
+		5A79CD038A474ADE9BB8EE7F /* Debug Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Debug Testing";
+		};
+		5D4F11B29D2A4166879A3004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "NotificationTesting.swift NotificationTestingConfigView.swift Logger.swift IntervalSender.swift TraceIdParser.swift";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.jami.DebugTools;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		6229B5A51FCDB006006937DF /* Development */ = {
 			isa = XCBuildConfiguration;
@@ -5693,6 +6030,256 @@
 			};
 			name = Release;
 		};
+		7374E81B2D3C4A7AB6333297 /* Debug Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG_TOOLS_ENABLED=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUG_TOOLS_ENABLED";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Testing";
+		};
+		7BCC4ABD1FEE4AFFBFF3DBD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "NotificationTesting.swift NotificationTestingConfigView.swift Logger.swift IntervalSender.swift TraceIdParser.swift";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.jami.DebugTools;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DBE72C2190ED4BD48FEE8315 /* Debug with lint */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "NotificationTesting.swift NotificationTestingConfigView.swift Logger.swift IntervalSender.swift TraceIdParser.swift";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.jami.DebugTools;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug with lint";
+		};
+		DEF4C48882C2489D8370C984 /* Debug Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				INFOPLIST_FILE = RingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = Ring;
+			};
+			name = "Debug Testing";
+		};
+		E40087CBCD2A4A3887D3203E /* Debug Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = jamiShareExtension/jamiShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift/playgrounds",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
+				INFOPLIST_FILE = jamiShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = jamiShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "$(inherited) -Wl,-undefined,dynamic_lookup";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUG_TOOLS_ENABLED $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "jamiShareExtension/jamiShareExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Testing";
+		};
+		F96437283B9B49339EE910BA /* Debug Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_OTHER_FLAGS = "";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Ring/Debug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../xcframework/include",
+					"$(SRCROOT)/../xcframework/include/jami",
+				);
+				INFOPLIST_FILE = Ring/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				MARKETING_VERSION = 4.09;
+				OTHER_CFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Ring/Bridging/Ring-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "";
+			};
+			name = "Debug Testing";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5700,6 +6287,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04399A1E1D1C2D9D00E99CD9 /* Debug */,
+				7374E81B2D3C4A7AB6333297 /* Debug Testing */,
 				265219CF2B603FD700D1CAE9 /* Debug with lint */,
 				6229B5A51FCDB006006937DF /* Development */,
 				04399A1F1D1C2D9D00E99CD9 /* Release */,
@@ -5711,6 +6299,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04399A211D1C2D9D00E99CD9 /* Debug */,
+				F96437283B9B49339EE910BA /* Debug Testing */,
 				265219D02B603FD700D1CAE9 /* Debug with lint */,
 				6229B5A61FCDB006006937DF /* Development */,
 				04399A221D1C2D9D00E99CD9 /* Release */,
@@ -5722,6 +6311,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04399A241D1C2D9D00E99CD9 /* Debug */,
+				4DF0F4131C854BAAB9EAB057 /* Debug Testing */,
 				265219D12B603FD700D1CAE9 /* Debug with lint */,
 				6229B5A71FCDB006006937DF /* Development */,
 				04399A251D1C2D9D00E99CD9 /* Release */,
@@ -5733,6 +6323,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04399A271D1C2D9D00E99CD9 /* Debug */,
+				DEF4C48882C2489D8370C984 /* Debug Testing */,
 				265219D22B603FD700D1CAE9 /* Debug with lint */,
 				6229B5A81FCDB006006937DF /* Development */,
 				04399A281D1C2D9D00E99CD9 /* Release */,
@@ -5744,6 +6335,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26A88C0D266FFFC800888EED /* Debug */,
+				228CFC4A60214B2489397443 /* Debug Testing */,
 				265219D42B603FD700D1CAE9 /* Debug with lint */,
 				26A88C0E266FFFC800888EED /* Development */,
 				26A88C0F266FFFC800888EED /* Release */,
@@ -5755,6 +6347,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3D0E69822DDCD9CA0046FA3D /* Debug */,
+				E40087CBCD2A4A3887D3203E /* Debug Testing */,
 				3D0E69832DDCD9CA0046FA3D /* Debug with lint */,
 				3D0E69842DDCD9CA0046FA3D /* Development */,
 				3D0E69852DDCD9CA0046FA3D /* Release */,
@@ -5766,9 +6359,22 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6236602A200914C1002598C1 /* Debug */,
+				5A79CD038A474ADE9BB8EE7F /* Debug Testing */,
 				265219D32B603FD700D1CAE9 /* Debug with lint */,
 				6236602B200914C1002598C1 /* Development */,
 				6236602C200914C1002598C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		698A3CE9EE494D4283ECA465 /* Build configuration list for PBXNativeTarget "DebugTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D4F11B29D2A4166879A3004 /* Debug */,
+				2B3033B8B20E436BA18FC548 /* Debug Testing */,
+				DBE72C2190ED4BD48FEE8315 /* Debug with lint */,
+				45184171EE5148F0ADC34CD2 /* Development */,
+				7BCC4ABD1FEE4AFFBFF3DBD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

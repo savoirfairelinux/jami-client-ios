@@ -20,6 +20,10 @@
 #import "Utils.h"
 #import "jamiNotificationExtension-Swift.h"
 
+#if defined(DEBUG_TOOLS_ENABLED) && DEBUG_TOOLS_ENABLED && !defined(DEBUG)
+#error "DEBUG_TOOLS_ENABLED must never be enabled in a non-DEBUG build configuration."
+#endif
+
 #import "jami/jami.h"
 #import "jami/configurationmanager_interface.h"
 #import "jami/callmanager_interface.h"
@@ -160,6 +164,17 @@ std::map<std::string, std::string> nameServers;
         }
     }));
 
+#if DEBUG_TOOLS_ENABLED
+    confHandlers.insert(exportable_callback<ConfigurationSignal::MessageSend>(
+       [weakDelegate = Adapter.delegate](const std::string& message) {
+           id<AdapterDelegate> delegate = weakDelegate;
+           if (delegate) {
+               NSString* messageStr = [NSString stringWithUTF8String:message.c_str()];
+               [delegate daemonLogReceivedWithMessage:messageStr];
+           }
+    }));
+#endif
+
     confHandlers.insert(exportable_callback<ConfigurationSignal::ActiveCallsChanged>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& conversation_id, const std::vector<std::map<std::string, std::string>>& activeCalls) {
         id<AdapterDelegate> delegate = weakDelegate;
         if (delegate) {
@@ -212,6 +227,9 @@ std::map<std::string, std::string> nameServers;
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (init(static_cast<InitFlag>(flag))) {
                 success = start({});
+#if DEBUG_TOOLS_ENABLED
+                monitor(true);
+#endif
             } else {
                 success = false;
             }
@@ -222,6 +240,9 @@ std::map<std::string, std::string> nameServers;
         bool success = false;
         if (init(static_cast<InitFlag>(flag))) {
             success = start({});
+#if DEBUG_TOOLS_ENABLED
+            monitor(true);
+#endif
         }
         loadAccountAndConversation(std::string([accountId UTF8String]), loadAll, std::string([convId UTF8String]));
         return success;
