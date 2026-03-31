@@ -182,16 +182,15 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     var lastMessageBeforeScroll: String?
 
     var loading = true // to avoid a new loading while previous one still executing
-    var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: BehaviorRelay<Data?>]())
-    var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: String]())
+    private let cacheLock = NSLock()
+    var avatars: ThreadSafeDictionary<String, BehaviorRelay<Data?>>
+    var names: ThreadSafeDictionary<String, BehaviorRelay<String>>
     // last read
     // dictionary of participant id and last read message Id
-    var lastReadMessageForParticipant = ConcurentDictionary(name: "com.ReadMessageForParticipantAccesDictionary",
-                                                            dictionary: [String: String]())
+    var lastReadMessageForParticipant: ThreadSafeDictionary<String, String>
     // dictionary of message id and array of participants for whom the message is last read
     // Track last-read participant IDs per message; view will render providers for these IDs
-    var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
-                                       dictionary: [String: BehaviorRelay<[String]>]())
+    var lastRead: ThreadSafeDictionary<String, BehaviorRelay<[String]>>
     private let subscriptionQueue = DispatchQueue(label: "com.myapp.subscriptionQueue", qos: .userInitiated)
     var lastDelivered: MessageContainerModel? {
         didSet {
@@ -220,21 +219,21 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     // MARK: - Avatar/Name relay accessors for SwiftUI views
     func avatarRelay(for jamiId: String) -> BehaviorRelay<Data?> {
-        if let relay = self.avatars.get(key: jamiId) as? BehaviorRelay<Data?> {
+        if let relay = self.avatars[jamiId] {
             return relay
         }
         let relay = BehaviorRelay<Data?>(value: nil)
-        self.avatars.set(value: relay, for: jamiId)
+        self.avatars[jamiId] = relay
         self.getInformationForContact(id: jamiId)
         return relay
     }
 
     func nameRelay(for jamiId: String) -> BehaviorRelay<String> {
-        if let relay = self.names.get(key: jamiId) as? BehaviorRelay<String> {
+        if let relay = self.names[jamiId] {
             return relay
         }
         let relay = BehaviorRelay<String>(value: "")
-        self.names.set(value: relay, for: jamiId)
+        self.names[jamiId] = relay
         self.getInformationForContact(id: jamiId)
         return relay
     }
@@ -257,6 +256,10 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
         self.injectionBag = injectionBag
+        self.avatars = ThreadSafeDictionary(lock: cacheLock)
+        self.names = ThreadSafeDictionary(lock: cacheLock)
+        self.lastReadMessageForParticipant = ThreadSafeDictionary(lock: cacheLock)
+        self.lastRead = ThreadSafeDictionary(lock: cacheLock)
         self.actionHandler = MessageActionHandler(injectionBag: injectionBag)
         self.requestsService = injectionBag.requestsService
         self.conversation = ConversationModel()
@@ -664,7 +667,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     func getLastReadIndices() -> [Int]? {
         var lastReadIndices: [Int]?
 
-        let lastReadMessages = self.lastReadMessageForParticipant.values().compactMap({ $0 as? String }).filter({ !$0.isEmpty })
+        let lastReadMessages = self.lastReadMessageForParticipant.values.filter { !$0.isEmpty }
         lastReadIndices = lastReadMessages.compactMap { messageId in
             self.messagesModels.firstIndex { $0.id == messageId }
         }
@@ -731,16 +734,16 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
          and update it accordingly.
          */
 
-        guard let currentLastReadMessageId = self.lastReadMessageForParticipant.get(key: participantId) as? String,
+        guard let currentLastReadMessageId = self.lastReadMessageForParticipant[participantId],
               let currentIndex = self.getMessageIndex(messageId: currentLastReadMessageId) else {
-            self.lastReadMessageForParticipant.set(value: message.id, for: participantId)
+            self.lastReadMessageForParticipant[participantId] = message.id
             self.updateSubscriptionLastRead(messageId: message.id)
             self.removeDeliveredStatusIfNeed()
             return
         }
 
         if newIndex < currentIndex {
-            self.lastReadMessageForParticipant.set(value: message.id, for: participantId)
+            self.lastReadMessageForParticipant[participantId] = message.id
             // remove last read indicator from previous last read message
             self.updateSubscriptionLastRead(messageId: currentLastReadMessageId)
             // add last read indicator to new last read message
@@ -874,7 +877,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
                 var typerName = status.from
 
-                if let nameObservable = self.names.get(key: status.from) as? BehaviorRelay<String> {
+                if let nameObservable = self.names[status.from] {
                     typerName = nameObservable.value
                 }
 
@@ -959,7 +962,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             self.messagePanel.updateUsername(name: L10n.Conversation.yourself, jamiId: jamiId)
             return
         }
-        if let name = self.names.get(key: jamiId) as? BehaviorRelay<String> {
+        if let name = self.names[jamiId] {
             self.messagePanel.updateUsername(name: name.value, jamiId: jamiId)
         }
     }
@@ -968,7 +971,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     private func updateLastDisplayed() {
         for participant in self.conversation.getParticipants() {
-            self.lastReadMessageForParticipant.set(value: participant.lastDisplayed, for: participant.jamiId)
+            self.lastReadMessageForParticipant[participant.jamiId] = participant.lastDisplayed
         }
     }
 
@@ -1096,14 +1099,13 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     // MARK: participant information
 
     private func updateName(name: String, jamiId: String) {
-        if let nameObservable = self.names.get(key: jamiId) as? BehaviorRelay<String> {
+        if let nameObservable = self.names[jamiId] {
             nameObservable.accept(name)
         }
     }
 
     private func updateAvatar(imageData: Data, jamiId: String) {
-        // Update the avatar observable if it exists
-        if let avatarObservable = avatars.get(key: jamiId) as? BehaviorRelay<Data?> {
+        if let avatarObservable = avatars[jamiId] {
             avatarObservable.accept(imageData)
         }
     }
@@ -1134,8 +1136,10 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             guard let self = self else { return }
             guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
             if self.contactsService.contact(withHash: id) == nil {
-                self.updateName(name: id, jamiId: id)
-                self.nameLookup(id: id)
+                DispatchQueue.main.async { [weak self] in
+                    self?.updateName(name: id, jamiId: id)
+                    self?.nameLookup(id: id)
+                }
                 return
             }
             let schema: URIType = account.type == .sip ? .sip : .ring
@@ -1144,16 +1148,16 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 .getProfile(uri: contactURI,
                             createIfNotexists: false,
                             accountId: account.id)
+                .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] profile in
                     guard let self = self else { return }
-                    // Set name
                     if let profileName = profile.alias, !profileName.isEmpty {
                         self.updateName(name: profileName, jamiId: id)
                     }
                     if let data = profile.photo?.toImageData() {
                         self.updateAvatar(imageData: data, jamiId: id)
                     }
-                    let name = (self.names.get(key: id) as? BehaviorRelay<String>)?.value
+                    let name = self.names[id]?.value
                     if name?.isEmpty ?? true {
                         self.nameLookup(id: id)
                     }
@@ -1163,17 +1167,17 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     private func getName(jamiId: String, message: NameObserver, messageId: String) {
-        if let name = self.names.get(key: jamiId) as? BehaviorRelay<String> {
+        if let name = self.names[jamiId] {
             message.subscribeToNameObservable(name)
         } else if let account = self.accountService.getAccount(fromAccountId: conversation.accountId),
                   account.jamiId == jamiId {
             let bestName = self.accountProfileName.isEmpty ? resolveAccountName(from: account) : self.accountProfileName
             let nameObservable = BehaviorRelay(value: bestName.withYourselfSuffix())
-            self.names.set(value: nameObservable, for: jamiId)
+            self.names[jamiId] = nameObservable
             message.subscribeToNameObservable(nameObservable)
         } else {
             let nameObservable = BehaviorRelay(value: "")
-            self.names.set(value: nameObservable, for: jamiId)
+            self.names[jamiId] = nameObservable
             message.subscribeToNameObservable(nameObservable)
             self.getInformationForContact(id: jamiId)
         }
@@ -1192,11 +1196,11 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
 
     private func getLastRead(message: MessageReadObserver, messageId: String) {
-        if let lastReadIds = self.lastRead.get(key: messageId) as? BehaviorRelay<[String]> {
+        if let lastReadIds = self.lastRead[messageId] {
             message.subscribeToReadObservable(lastReadIds)
         } else {
             let observableValue = BehaviorRelay(value: [String]())
-            self.lastRead.set(value: observableValue, for: messageId)
+            self.lastRead[messageId] = observableValue
             message.subscribeToReadObservable(observableValue)
             self.updateSubscriptionLastRead(messageId: messageId)
         }
@@ -1205,26 +1209,23 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     private func updateSubscriptionLastRead(messageId: String) {
         var ids = [String]()
 
-        guard let participants = self.lastReadMessageForParticipant.filter({ participant in
-            if let id = participant.value as? String {
-                return id == messageId
-            }
-            return false
-        }) as? [String: String], !participants.isEmpty else {
-            if let lastReadIds = self.lastRead.get(key: messageId) as? BehaviorRelay<[String]> {
+        let participants = self.lastReadMessageForParticipant.filter { _, value in
+            return value == messageId
+        }
+        guard !participants.isEmpty else {
+            if let lastReadIds = self.lastRead[messageId] {
                 lastReadIds.accept(ids)
             }
             return
         }
 
-        if self.lastRead.get(key: messageId) as? BehaviorRelay<[String]> == nil {
+        if self.lastRead[messageId] == nil {
             let observableValue = BehaviorRelay(value: [String]())
-            self.lastRead.set(value: observableValue, for: messageId)
+            self.lastRead[messageId] = observableValue
         }
-        guard let lastReadIds = self.lastRead.get(key: messageId) as? BehaviorRelay<[String]> else { return }
+        guard let lastReadIds = self.lastRead[messageId] else { return }
         for participant in participants {
-            let jamiId = participant.key
-            ids.append(jamiId)
+            ids.append(participant.key)
         }
         lastReadIds.accept(ids)
     }
@@ -1235,7 +1236,7 @@ extension MessagesListVM {
 
     func updateContacLocationSharingImage() {
         if let jamiId = self.conversation.getParticipants().first?.jamiId {
-            if let dataRelay = self.avatars.get(key: jamiId) as? BehaviorRelay<Data?>,
+            if let dataRelay = self.avatars[jamiId],
                let data = dataRelay.value,
                let image = data.convertToImage(size: 16) {
                 DispatchQueue.main.async { [weak self] in

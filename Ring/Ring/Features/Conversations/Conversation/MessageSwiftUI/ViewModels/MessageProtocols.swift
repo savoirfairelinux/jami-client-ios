@@ -45,10 +45,7 @@ extension MessageReadObserver {
     }
 
     func requestReadStatus(messageId: String) {
-        DispatchQueue.global(qos: .background).async {[weak self] in
-            guard let self = self else { return }
-            self.infoState?.onNext(MessageInfo.updateRead(messageId: messageId, message: self))
-        }
+        self.infoState?.onNext(MessageInfo.updateRead(messageId: messageId, message: self))
     }
 }
 
@@ -74,10 +71,7 @@ extension NameObserver {
     }
 
     func requestName(jamiId: String) {
-        DispatchQueue.global(qos: .background).async {[weak self] in
-            guard let self = self else { return }
-            self.infoState?.onNext(MessageInfo.updateDisplayname(jamiId: jamiId, message: self))
-        }
+        self.infoState?.onNext(MessageInfo.updateDisplayname(jamiId: jamiId, message: self))
     }
 }
 

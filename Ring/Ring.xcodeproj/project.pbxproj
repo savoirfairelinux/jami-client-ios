@@ -290,6 +290,8 @@
 		263C167D2D98C957008E102C /* CallTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C167C2D98C957008E102C /* CallTestUtils.swift */; };
 		263C167F2D999356008E102C /* ConferenceManagementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C167E2D999348008E102C /* ConferenceManagementServiceTests.swift */; };
 		263C16832D9DBCE6008E102C /* ThreadSafeQueueHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C16822D9DBCE6008E102C /* ThreadSafeQueueHelper.swift */; };
+		26A1B2C3D4E5F60800AABB01 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */; };
+		26A1B2C3D4E5F60A00AABB02 /* ThreadSafeDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */; };
 		263C16852D9EE3F9008E102C /* CallManagementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C16842D9EE3F9008E102C /* CallManagementServiceTests.swift */; };
 		263C16872D9EF75E008E102C /* CallsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C16862D9EF75E008E102C /* CallsServiceTests.swift */; };
 		263D92DA2C10FC0A00C6EB9D /* TestEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454F7B2B7E770900CFF06C /* TestEnvironment.swift */; };
@@ -342,7 +344,7 @@
 		2673D62E252624AB000C56CB /* ConferenceMenuItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D62D252624AB000C56CB /* ConferenceMenuItemsManager.swift */; };
 		2673D630252657B0000C56CB /* ConferenceLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D62F252657B0000C56CB /* ConferenceLayout.swift */; };
 		2673D63225267785000C56CB /* ConferenceLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */; };
-		2679E42C29328352007E4639 /* ConcurrentDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679E42B29328352007E4639 /* ConcurrentDictionary.swift */; };
+
 		267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267AD77D252B979F00047593 /* ConferenceParticipant.swift */; };
 		267B53FE2F54D94400565A0E /* ContextMenuSnapshotWindowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B53FD2F54D93D00565A0E /* ContextMenuSnapshotWindowCoordinator.swift */; };
 		267B54202F57A29800565A0E /* ConversationContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267B541F2F57A29800565A0E /* ConversationContainerView.swift */; };
@@ -914,6 +916,8 @@
 		263C167C2D98C957008E102C /* CallTestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallTestUtils.swift; sourceTree = "<group>"; };
 		263C167E2D999348008E102C /* ConferenceManagementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceManagementServiceTests.swift; sourceTree = "<group>"; };
 		263C16822D9DBCE6008E102C /* ThreadSafeQueueHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeQueueHelper.swift; sourceTree = "<group>"; };
+		26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionary.swift; sourceTree = "<group>"; };
+		26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionaryTests.swift; sourceTree = "<group>"; };
 		263C16842D9EE3F9008E102C /* CallManagementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManagementServiceTests.swift; sourceTree = "<group>"; };
 		263C16862D9EF75E008E102C /* CallsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsServiceTests.swift; sourceTree = "<group>"; };
 		263F61712B4460A400240AEE /* ReactionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionRowView.swift; sourceTree = "<group>"; };
@@ -966,7 +970,7 @@
 		2673D62D252624AB000C56CB /* ConferenceMenuItemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceMenuItemsManager.swift; sourceTree = "<group>"; };
 		2673D62F252657B0000C56CB /* ConferenceLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceLayout.swift; sourceTree = "<group>"; };
 		2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceLayoutHelper.swift; sourceTree = "<group>"; };
-		2679E42B29328352007E4639 /* ConcurrentDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentDictionary.swift; sourceTree = "<group>"; };
+
 		267AD77D252B979F00047593 /* ConferenceParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceParticipant.swift; sourceTree = "<group>"; };
 		267B53FD2F54D93D00565A0E /* ContextMenuSnapshotWindowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuSnapshotWindowCoordinator.swift; sourceTree = "<group>"; };
 		267B541F2F57A29800565A0E /* ConversationContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationContainerView.swift; sourceTree = "<group>"; };
@@ -2973,6 +2977,7 @@
 				028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */,
 				028568231DF60E5C003A8D8D /* Fixtures */,
 				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
+				26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */,
 				04399A121D1C2D9D00E99CD9 /* Info.plist */,
 				260AE64129C266B300D66D5E /* CallsTests */,
 				AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */,
@@ -3061,6 +3066,7 @@
 			children = (
 				26EFD7B32E2D59B600B63F74 /* ScreenDimensionsManager.swift */,
 				263C16822D9DBCE6008E102C /* ThreadSafeQueueHelper.swift */,
+				26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */,
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
 				BB6690032A99043200875848 /* SharedActionsPresenter.swift */,
 				0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */,
@@ -3456,7 +3462,7 @@
 				265DFB02292EB94B00834B97 /* MessageContainerModel.swift */,
 				265DFB06292FBC4200834B97 /* TransferHelper.swift */,
 				26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */,
-				2679E42B29328352007E4639 /* ConcurrentDictionary.swift */,
+
 				26A072FC295A7145006D8163 /* ContextMenuVM.swift */,
 				BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */,
 				BB06BD8029D491F80064F0FC /* CustomAnnotationModel.swift */,
@@ -4273,7 +4279,7 @@
 				62AA15CA1FFD3D7E0064A063 /* VideoService.swift in Sources */,
 				26D08AB9269628F400E37574 /* RequestsService.swift in Sources */,
 				1DE93596291B119900E426CF /* SwarmCreationViewModel.swift in Sources */,
-				2679E42C29328352007E4639 /* ConcurrentDictionary.swift in Sources */,
+
 				26A072F92959F461006D8163 /* ContextMenuView.swift in Sources */,
 				62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */,
 				0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */,
@@ -4309,6 +4315,7 @@
 				1A20417C1F1E56FF00C08435 /* WelcomeVM.swift in Sources */,
 				265DFB09292FD25000834B97 /* DefaultTransferView.swift in Sources */,
 				263C16832D9DBCE6008E102C /* ThreadSafeQueueHelper.swift in Sources */,
+				26A1B2C3D4E5F60800AABB01 /* ThreadSafeDictionary.swift in Sources */,
 				267B54202F57A29800565A0E /* ConversationContainerView.swift in Sources */,
 				2659F65827483656009107F1 /* VideoManager.swift in Sources */,
 				26EFD7F92E2EB38300B63F74 /* VideoUtils.mm in Sources */,
@@ -4492,6 +4499,7 @@
 				263C16782D9702F2008E102C /* ObjCMockCallsAdapter.m in Sources */,
 				AA0002020000000000000002 /* MockPhotoLibrarySaver.swift in Sources */,
 				AA0003020000000000000003 /* MediaPreviewModelSaveTests.swift in Sources */,
+				26A1B2C3D4E5F60A00AABB02 /* ThreadSafeDictionaryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
