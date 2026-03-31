@@ -23,6 +23,9 @@ import UIKit
 import MobileCoreServices
 import Photos
 import os
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 struct ActiveCall: Hashable {
     let id: String
@@ -303,6 +306,12 @@ extension AdapterService: AdapterDelegate {
 
     func getAccountJamiId(accountId: String) -> String? {
         return getAccountDetails(accountId: accountId)?["Account.username"]?.replacingOccurrences(of: "ring:", with: "")
+    }
+
+    func daemonLogReceived(message: String) {
+        #if DEBUG_TOOLS_ENABLED
+        NotificationTesting.logEvent(.daemonLog, message: message)
+        #endif
     }
 
 }

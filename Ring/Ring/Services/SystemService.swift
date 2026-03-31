@@ -20,6 +20,9 @@
 
 import Foundation
 import RxRelay
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 class SystemService: SystemAdapterDelegate {
 
@@ -31,6 +34,17 @@ class SystemService: SystemAdapterDelegate {
     init(withSystemAdapter systemAdapter: SystemAdapter) {
         self.systemAdapter = systemAdapter
         SystemAdapter.delegate = self
+        #if DEBUG_TOOLS_ENABLED
+        // Configure the DebugTools logger once per process, then start daemon
+        // log streaming so it receives every JAMI_LOG line. The collector URL
+        // is discovered automatically by NotificationTesting — scheme launch
+        // argument → shared App Group defaults → simulator localhost fallback.
+        // References NotificationTesting (a DebugTools-only symbol) so this
+        // gate cascades through an excluded file in non-test configs.
+        NotificationTesting.configureLogger(appGroupIdentifier: Constants.appGroupIdentifier)
+        isMonitoring.accept(true)
+        systemAdapter.triggerLog(true)
+        #endif
     }
 
     func triggerLog() {
@@ -47,6 +61,9 @@ class SystemService: SystemAdapterDelegate {
 
     @objc
     func messageReceived(message: String) {
+        #if DEBUG_TOOLS_ENABLED
+        NotificationTesting.logEvent(.daemonLog, message: message)
+        #endif
         guard isMonitoring.value else { return }
         currentLog += "\n" + message
         newMessage.accept(message)

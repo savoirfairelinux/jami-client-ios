@@ -21,6 +21,9 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 import SwiftUI
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 enum MessageSequencing {
     case singleMessage
@@ -642,6 +645,29 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         guard let contact = self.contactsService.contact(withHash: jamiId) else { return false }
         return contact.banned
     }
+
+    #if DEBUG_TOOLS_ENABLED
+    // Test-only API. Co-located in a single #if block so the gate cascades
+    // through `NotificationTesting` (a DebugTools symbol physically excluded
+    // from non-test build configurations — see `EXCLUDED_SOURCE_FILE_NAMES`
+    // on the DebugTools target).
+    //
+    // The view layer drives all notification-testing UI through
+    // `NotificationTestingConfigView`; this method just hands it the closure
+    // it needs to actually push messages into the conversation, keeping
+    // DebugTools independent of host-target types.
+    func makeDebugToolsSendClosure() -> (String, String, String, String) -> Void {
+        let conversationsService = self.conversationsService
+        return { convId, accId, message, parentId in
+            conversationsService.sendSwarmMessage(
+                conversationId: convId,
+                accountId: accId,
+                message: message,
+                parentId: parentId
+            )
+        }
+    }
+    #endif
 }
 
 // MARK: Conversation didSet functions
