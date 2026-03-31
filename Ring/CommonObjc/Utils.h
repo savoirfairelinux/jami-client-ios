@@ -23,6 +23,19 @@
 #import <string>
 #import <vector>
 
+#if defined(__cplusplus) && DEBUG_TOOLS_ENABLED
+#include <memory>
+#include <vector>
+
+#include <opentelemetry/sdk/trace/span_data.h>
+
+namespace jami_ios_telemetry {
+/// JSON array matching daemon `RingBufferSpanExporter::toJson()` for Swift `ingestDaemonSpans`.
+std::string spansToJson(
+    std::vector<std::unique_ptr<::opentelemetry::sdk::trace::SpanData>> spans);
+}
+#endif
+
 @interface Utils : NSObject
 
 + (NSArray*)vectorToArray:(const std::vector<std::string>&)vector;

@@ -118,4 +118,10 @@ class DaemonService {
         self.dRingAdaptor.connectivityChanged()
     }
 
+    #if DEBUG_TOOLS_ENABLED
+    func drainSpans() -> String {
+        return dRingAdaptor.drainSpans()
+    }
+    #endif
+
 }

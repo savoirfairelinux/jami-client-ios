@@ -22,6 +22,9 @@ import RxSwift
 import PushKit
 import ContactsUI
 import os
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 // swiftlint:disable identifier_name type_body_length
 @main
@@ -360,15 +363,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        #if DEBUG_TOOLS_ENABLED
+        spanDrainTimer?.cancel()
+        spanDrainTimer = nil
+        let json = self.daemonService.drainSpans()
+        if json != "[]" {
+            NotificationTesting.ingestDaemonSpans(json: json)
+        }
+        NotificationTesting.flushPendingSpans(timeout: 2.0)
+        #endif
         self.callsProvider.stopAllUnhandeledCalls()
         self.cleanTestDataIfNeed()
         self.stopDaemon()
     }
 
+    #if DEBUG_TOOLS_ENABLED
+    private var spanDrainTimer: DispatchSourceTimer?
+
+    private func startSpanDrainTimer() {
+        let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .utility))
+        timer.schedule(deadline: .now() + 5, repeating: 5)
+        timer.setEventHandler { [weak self] in
+            guard let self = self else { return }
+            let json = self.daemonService.drainSpans()
+            if json != "[]" {
+                NotificationTesting.ingestDaemonSpans(json: json)
+            }
+        }
+        spanDrainTimer = timer
+        timer.resume()
+    }
+
+    #endif
+
     // MARK: - Ring Daemon
     private func startDaemon() {
         do {
             try self.daemonService.startDaemon()
+            #if DEBUG_TOOLS_ENABLED
+            startSpanDrainTimer()
+            #endif
         } catch StartDaemonError.initializationFailure {
             log.error("Daemon failed to initialize.")
         } catch StartDaemonError.startFailure {
@@ -631,6 +665,18 @@ extension AppDelegate {
                 dictionary[keyString] = valueString
             }
         }
+        #if DEBUG_TOOLS_ENABLED
+        let traceparent = NotificationTesting.traceparent(from: userInfo)
+        NotificationTesting.emitInstantSpan(
+            name: "push.receive-in-app",
+            parentTraceparent: traceparent,
+            attributes: [
+                "push.result": "received-in-app",
+                "app.state": String(application.applicationState.rawValue)
+            ]
+        )
+        NotificationTesting.flushPendingSpans(timeout: 2.0)
+        #endif
         self.accountService.pushNotificationReceived(data: dictionary)
         completionHandler(.newData)
     }
@@ -642,6 +688,9 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        #if DEBUG_TOOLS_ENABLED
+        NotificationTesting.emitInstantSpan(name: "push.voip.received", attributes: ["push.type": type.rawValue])
+        #endif
         self.updateCallScreenState(presenting: true)
         let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
         let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"

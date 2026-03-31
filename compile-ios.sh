@@ -266,6 +266,8 @@ do
   rsync -ar "$CONTRIB_FOLDER/include/yaml-cpp" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
   rsync -ar "$CONTRIB_FOLDER/include/libavutil" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
   rsync -ar "$CONTRIB_FOLDER/include/fmt" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
+  rsync -ar "$CONTRIB_FOLDER/include/opentelemetry" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
+  rsync -ar "$CONTRIB_FOLDER/include/absl" "$IOS_TOP_DIR/DEPS/$BUILD_DIR/include/"
   cd "$IOS_TOP_DIR/DEPS/$BUILD_DIR/lib/"
   for i in *.a ; do mv "$i" "${i/-$HOST.a/.a}" ; done
 
@@ -389,6 +391,41 @@ create_framework() {
 
   printf "%s" "-framework $PLATFORM_DIR/$FRAMEWORK_NAME.framework"
 }
+
+# Merge OTel component libs into one so the xcframework pipeline produces
+# a single libopentelemetry.xcframework instead of one per component.
+OTEL_COMPONENT_LIBS=(
+  libopentelemetry_common.a
+  libopentelemetry_trace.a
+  libopentelemetry_logs.a
+  libopentelemetry_resources.a
+  libopentelemetry_exporter_in_memory.a
+  libopentelemetry_version.a
+  libopentelemetry_metrics.a
+  libopentelemetry_exporter_ostream_span.a
+  libopentelemetry_exporter_ostream_logs.a
+  libopentelemetry_exporter_ostream_metrics.a
+  libopentelemetry_exporter_in_memory_metric.a
+)
+
+for BUILD_DIR in "${BUILD_DIRS[@]}"; do
+  LIB_DIR="$IOS_TOP_DIR/DEPS/$BUILD_DIR/lib"
+  MERGE_INPUTS=()
+  for olib in "${OTEL_COMPONENT_LIBS[@]}"; do
+    if [ -f "$LIB_DIR/$olib" ]; then
+      MERGE_INPUTS+=("$LIB_DIR/$olib")
+    fi
+  done
+  if [ ${#MERGE_INPUTS[@]} -gt 0 ]; then
+    echo "Merging ${#MERGE_INPUTS[@]} OTel libs into libopentelemetry.a for $BUILD_DIR..."
+    libtool -static -o "$LIB_DIR/libopentelemetry.a.tmp" "${MERGE_INPUTS[@]}" \
+      || { rm -f "$LIB_DIR/libopentelemetry.a.tmp"; exit 1; }
+    mv "$LIB_DIR/libopentelemetry.a.tmp" "$LIB_DIR/libopentelemetry.a"
+    for olib in "${OTEL_COMPONENT_LIBS[@]}"; do
+      rm -f "$LIB_DIR/$olib"
+    done
+  fi
+done
 
 # Process each library
 LIBFILES="$IOS_TOP_DIR/DEPS/${BUILD_DIRS[0]}/lib/"*.a
