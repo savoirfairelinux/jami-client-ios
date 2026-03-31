@@ -393,6 +393,7 @@
 		26A34EDC2C6EBCD600A41DD4 /* BackupAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34EDB2C6EBCD600A41DD4 /* BackupAccountModel.swift */; };
 		26A5CE3B26BD00E700E147EA /* Array+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5CE3826BD00E700E147EA /* Array+Helper.swift */; };
 		26A88C07266FFFC800888EED /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A88C06266FFFC800888EED /* NotificationService.swift */; };
+		978E137C2CAF48C2966B8B89 /* NotificationLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA801727EDAC4971AD7804D0 /* NotificationLogger.swift */; };
 		26A88C0B266FFFC800888EED /* jamiNotificationExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		26A88C1A267000F000888EED /* Adapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26A88C19267000F000888EED /* Adapter.mm */; };
 		26A88C702670098D00888EED /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A291D1C2DE300E99CD9 /* CoreMedia.framework */; };
@@ -1017,6 +1018,7 @@
 		26A5CE3826BD00E700E147EA /* Array+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Helper.swift"; sourceTree = "<group>"; };
 		26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = jamiNotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		26A88C06266FFFC800888EED /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		BA801727EDAC4971AD7804D0 /* NotificationLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationLogger.swift; sourceTree = "<group>"; };
 		26A88C08266FFFC800888EED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26A88C132670002800888EED /* libring.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libring.la; path = ../DEPS/arm64/lib/libring.la; sourceTree = "<group>"; };
 		26A88C152670007400888EED /* libring.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libring.a; path = ../DEPS/arm64/lib/libring.a; sourceTree = "<group>"; };
@@ -3562,6 +3564,7 @@
 			children = (
 				265E976226E8F610008801C0 /* NotificationService-debug.entitlements */,
 				26A88C06266FFFC800888EED /* NotificationService.swift */,
+				BA801727EDAC4971AD7804D0 /* NotificationLogger.swift */,
 				26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */,
 				26A88C08266FFFC800888EED /* Info.plist */,
 				26A88C18267000F000888EED /* Adapter.h */,
@@ -4519,6 +4522,7 @@
 				2637E5692DDE662200ACCF91 /* Constants.swift in Sources */,
 				26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */,
 				26A88C07266FFFC800888EED /* NotificationService.swift in Sources */,
+				978E137C2CAF48C2966B8B89 /* NotificationLogger.swift in Sources */,
 				26A88C1A267000F000888EED /* Adapter.mm in Sources */,
 				26EFD7E32E2E944100B63F74 /* CommonHelpers.swift in Sources */,
 				267CC6FC29D5B27600505E56 /* Data+Helpers.swift in Sources */,
@@ -5137,6 +5141,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = iOS_filtering_notifications;
 				SKIP_INSTALL = YES;
 				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = DEBUG;
+				NOTIFICATION_LOG_SERVER_URL = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "jamiNotificationExtension/jamiNotificationExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -5190,6 +5195,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = iOS_filtering_notifications;
 				SKIP_INSTALL = YES;
 				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = DEBUG;
+				NOTIFICATION_LOG_SERVER_URL = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "jamiNotificationExtension/jamiNotificationExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -5242,6 +5248,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = iOS_filtering_notifications;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				NOTIFICATION_LOG_SERVER_URL = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "jamiNotificationExtension/jamiNotificationExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -5287,6 +5294,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = iOS_filtering_notifications;
 				SKIP_INSTALL = YES;
+				NOTIFICATION_LOG_SERVER_URL = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "jamiNotificationExtension/jamiNotificationExtension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -256,8 +256,15 @@ class NotificationService: UNNotificationServiceExtension {
         httpStreamHandler.invalidateAndCancelSession()
     }
 
+    #if DEBUG
+    private let startTime = Date()
+    #endif
+
     // Entry point for processing incoming notification requests.
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        #if DEBUG
+        NotificationLogger.shared.log(.received, message: "didReceive entry")
+        #endif
         self.contentHandler = contentHandler
         setupNotificationExtensionQueryListener()
 
@@ -281,16 +288,25 @@ class NotificationService: UNNotificationServiceExtension {
         saveDataIfNeeded(data: requestData)
         guard !appIsActive() else {
             log("App is in foreground")
+            #if DEBUG
+            NotificationLogger.shared.log(.appIsActive, message: "App in foreground, skipping")
+            #endif
             return
         }
 
         guard !shareExtensionHasAccountActive(accountId: accountId) else {
             log("Share extension has this account active")
+            #if DEBUG
+            NotificationLogger.shared.log(.shareExtensionActive, message: "Share extension active for account")
+            #endif
             return
         }
 
         guard !isResubscribe(accountId: accountId, data: requestData) else {
             log("This is a resubscribe notification")
+            #if DEBUG
+            NotificationLogger.shared.log(.resubscribe, message: "Resubscribe for account \(accountId)")
+            #endif
             return
         }
 
@@ -321,6 +337,9 @@ class NotificationService: UNNotificationServiceExtension {
 
     // Starts streaming data from a specified URL and processes received lines.
     private func startStreaming(from url: URL, for request: UNNotificationRequest, keyURL: URL, treatedMessagesURL: URL) {
+        #if DEBUG
+        NotificationLogger.shared.log(.streamStarted, message: url.absoluteString)
+        #endif
         let taskId = UUID().uuidString
         autoDispatchGroup.enter(id: taskId)
 
@@ -353,6 +372,9 @@ class NotificationService: UNNotificationServiceExtension {
             }
 
             log("Processing ID: \(id)")
+            #if DEBUG
+            NotificationLogger.shared.log(.lineReceived, message: "id=\(id)")
+            #endif
             idsToProcess.remove(id)
             processMap(map: map, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL, userInfo: request.content.userInfo)
             if !processAll && idsToProcess.isEmpty {
@@ -367,6 +389,18 @@ class NotificationService: UNNotificationServiceExtension {
     private func processMap(map: [String: Any], keyURL: URL, treatedMessagesURL: URL, userInfo: [AnyHashable: Any]) {
         let result = adapterService.decrypt(keyPath: keyURL.path, accountId: self.accountId, messagesPath: treatedMessagesURL.path, value: map)
         log("Notification type: \(result)")
+        #if DEBUG
+        switch result {
+        case .call(let peerId, _):
+            NotificationLogger.shared.log(.decryptedCall, message: "peerId=\(peerId)")
+        case .gitMessage(let convId):
+            NotificationLogger.shared.log(.decryptedGitMessage, message: "convId=\(convId)")
+        case .clone:
+            NotificationLogger.shared.log(.decryptedClone)
+        case .unknown:
+            NotificationLogger.shared.log(.decryptedUnknown)
+        }
+        #endif
         switch result {
         case .call(let peerId, let hasVideo):
             ({ [weak self] (peerId, hasVideo) in
@@ -410,6 +444,9 @@ class NotificationService: UNNotificationServiceExtension {
 
     override func serviceExtensionTimeWillExpire() {
         log("Notification handling timeout")
+        #if DEBUG
+        NotificationLogger.shared.log(.timeout, message: "25s timeout reached")
+        #endif
         finish()
     }
 
@@ -440,6 +477,9 @@ class NotificationService: UNNotificationServiceExtension {
         let accountJamiId = self.adapterService.getAccountJamiId(accountId: self.accountId)
 
         jamiTaskId = UUID().uuidString
+        #if DEBUG
+        NotificationLogger.shared.log(.backendStarted, message: "convId=\(convId) loadAll=\(loadAll)")
+        #endif
         self.autoDispatchGroup.enter(id: jamiTaskId)
         self.adapterService.startAccountsWithListener(accountId: self.accountId, convId: convId, loadAll: loadAll) { [weak self] event, eventData in
             guard let self = self else {
@@ -448,6 +488,22 @@ class NotificationService: UNNotificationServiceExtension {
 
             var notifConfig = NotificationConfig(from: eventData.jamiId, url: nil, body: eventData.content,
                                                  conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
+
+            #if DEBUG
+            do {
+                let logEvent: NotificationEvent
+                switch event {
+                case .message: logEvent = .eventMessage
+                case .fileTransferDone: logEvent = .eventFileTransferDone
+                case .fileTransferInProgress: logEvent = .eventFileTransferInProgress
+                case .syncCompleted: logEvent = .eventSyncCompleted
+                case .conversationCloned: logEvent = .eventConversationCloned
+                case .invitation: logEvent = .eventInvitation
+                case .activeCall: logEvent = .eventActiveCall
+                }
+                NotificationLogger.shared.log(logEvent, message: "conv=\(eventData.conversationId) from=\(eventData.jamiId)")
+            }
+            #endif
 
             switch event {
             case .message:
@@ -542,6 +598,11 @@ class NotificationService: UNNotificationServiceExtension {
             }
         }
         self.httpStreamHandler.cancelStreaming()
+        #if DEBUG
+        let durationMs = Int(Date().timeIntervalSince(startTime) * 1000)
+        NotificationLogger.shared.log(.finished, message: "durationMs=\(durationMs)")
+        NotificationLogger.shared.shipLogs()
+        #endif
         if let contentHandler = contentHandler {
             contentHandler(self.bestAttemptContent)
         }
@@ -942,6 +1003,9 @@ extension NotificationService {
     }
 
     private func presentLocalNotification(notification: LocalNotification) {
+        #if DEBUG
+        NotificationLogger.shared.log(.notificationPresented, message: "type=\(notification.type.rawValue) title=\(notification.content.title)")
+        #endif
         let content = notification.content
         setNotificationCount(notification: content)
         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
@@ -957,6 +1021,9 @@ extension NotificationService {
     }
 
     private func presentCall(info: [AnyHashable: Any]) {
+        #if DEBUG
+        NotificationLogger.shared.log(.callReported, message: "peerId=\(info["peerId"] ?? "unknown")")
+        #endif
         // TODO: see if this should sync after daemon stop
         CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
             log("NotificationService", "Did report voip notification, error: \(String(describing: error))")

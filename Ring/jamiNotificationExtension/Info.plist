@@ -27,6 +27,8 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).NotificationService</string>
 	</dict>
+    <key>NotificationLogServerURL</key>
+    <string>$(NOTIFICATION_LOG_SERVER_URL)</string>
     <key>NSAppTransportSecurity</key>
     <dict>
       <key>NSAllowsArbitraryLoads</key>

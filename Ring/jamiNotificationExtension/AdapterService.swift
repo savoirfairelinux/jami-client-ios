@@ -305,4 +305,10 @@ extension AdapterService: AdapterDelegate {
         return getAccountDetails(accountId: accountId)?["Account.username"]?.replacingOccurrences(of: "ring:", with: "")
     }
 
+    func daemonLogReceived(message: String) {
+        #if DEBUG
+        NotificationLogger.shared.log(.daemonLog, message: message)
+        #endif
+    }
+
 }

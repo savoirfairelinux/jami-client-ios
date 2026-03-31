@@ -160,6 +160,17 @@ std::map<std::string, std::string> nameServers;
         }
     }));
 
+#if DEBUG
+    confHandlers.insert(exportable_callback<ConfigurationSignal::MessageSend>(
+       [weakDelegate = Adapter.delegate](const std::string& message) {
+           id<AdapterDelegate> delegate = weakDelegate;
+           if (delegate && [delegate respondsToSelector:@selector(daemonLogReceivedWithMessage:)]) {
+               NSString* messageStr = [NSString stringWithUTF8String:message.c_str()];
+               [delegate daemonLogReceivedWithMessage:messageStr];
+           }
+    }));
+#endif
+
     confHandlers.insert(exportable_callback<ConfigurationSignal::ActiveCallsChanged>([weakDelegate = Adapter.delegate](const std::string& account_id, const std::string& conversation_id, const std::vector<std::map<std::string, std::string>>& activeCalls) {
         id<AdapterDelegate> delegate = weakDelegate;
         if (delegate) {
@@ -212,6 +223,9 @@ std::map<std::string, std::string> nameServers;
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (init(static_cast<InitFlag>(flag))) {
                 success = start({});
+#if DEBUG
+                monitor(true);
+#endif
             } else {
                 success = false;
             }
@@ -222,6 +236,9 @@ std::map<std::string, std::string> nameServers;
         bool success = false;
         if (init(static_cast<InitFlag>(flag))) {
             success = start({});
+#if DEBUG
+            monitor(true);
+#endif
         }
         loadAccountAndConversation(std::string([accountId UTF8String]), loadAll, std::string([convId UTF8String]));
         return success;
