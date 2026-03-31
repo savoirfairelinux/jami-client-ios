@@ -20,6 +20,9 @@
 
 import Foundation
 import RxRelay
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 class SystemService: SystemAdapterDelegate {
 
@@ -31,6 +34,16 @@ class SystemService: SystemAdapterDelegate {
     init(withSystemAdapter systemAdapter: SystemAdapter) {
         self.systemAdapter = systemAdapter
         SystemAdapter.delegate = self
+        #if DEBUG_TOOLS_ENABLED
+        NotificationTesting.configureLogger(appGroupIdentifier: Constants.appGroupIdentifier)
+        NotificationTesting.emitInstantSpan(
+            name: "app.launch",
+            attributes: ["process": "main", "build": Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "?"]
+        )
+        NotificationTesting.flushPendingSpans(timeout: 2.0)
+        isMonitoring.accept(true)
+        systemAdapter.triggerLog(true)
+        #endif
     }
 
     func triggerLog() {
@@ -47,6 +60,9 @@ class SystemService: SystemAdapterDelegate {
 
     @objc
     func messageReceived(message: String) {
+        #if DEBUG_TOOLS_ENABLED
+        NotificationTesting.forwardDaemonLog(message)
+        #endif
         guard isMonitoring.value else { return }
         currentLog += "\n" + message
         newMessage.accept(message)

@@ -17,6 +17,9 @@
  */
 
 import SwiftUI
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
@@ -25,6 +28,9 @@ struct ConversationContainerView: View {
     @SwiftUI.State private var peerSharingVM: PeerSharingViewModel?
 
     private enum TrailingButton: Hashable {
+        #if DEBUG_TOOLS_ENABLED
+        case debugTools
+        #endif
         case peerSharing
         case audioCall
         case videoCall
@@ -33,6 +39,9 @@ struct ConversationContainerView: View {
     private var visibleTrailingButtons: [TrailingButton] {
         guard !viewModel.isBlocked else { return [] }
         var buttons: [TrailingButton] = []
+        #if DEBUG_TOOLS_ENABLED
+        buttons.append(.debugTools)
+        #endif
         if viewModel.hasPeerSharing { buttons.append(.peerSharing) }
         buttons.append(.audioCall)
         if !viewModel.isAccountSip { buttons.append(.videoCall) }
@@ -46,6 +55,10 @@ struct ConversationContainerView: View {
             isPad: UIDevice.current.userInterfaceIdiom == .pad
         )
     }
+
+    #if DEBUG_TOOLS_ENABLED
+    @SwiftUI.State private var showDebugTools: Bool = false
+    #endif
 
     var body: some View {
         MessagesListView(model: viewModel.swiftUIModel)
@@ -71,6 +84,11 @@ struct ConversationContainerView: View {
                     PeerSharingSheet(viewModel: peerVM)
                 }
             }
+            #if DEBUG_TOOLS_ENABLED
+            .sheet(isPresented: $showDebugTools) {
+                debugToolsSheet
+            }
+        #endif
     }
 
     // MARK: - Title View
@@ -114,6 +132,11 @@ struct ConversationContainerView: View {
     @ViewBuilder private var trailingButtons: some View {
         let buttons = visibleTrailingButtons
         HStack(spacing: 0) {
+            #if DEBUG_TOOLS_ENABLED
+            if buttons.contains(.debugTools) {
+                debugToolsButton
+            }
+            #endif
             if buttons.contains(.peerSharing) {
                 peerServicesButton
             }
@@ -138,6 +161,26 @@ struct ConversationContainerView: View {
         })
         .accessibilityLabel(L10n.PeerServices.title)
     }
+
+    #if DEBUG_TOOLS_ENABLED
+    private var debugToolsButton: some View {
+        Button(action: { showDebugTools = true }) {
+            Image(systemName: "ladybug.fill")
+                .navBarIconStyle()
+        }
+        .foregroundColor(.purple)
+    }
+
+    @ViewBuilder private var debugToolsSheet: some View {
+        if let conversation = viewModel.conversation {
+            NotificationTestingConfigView(
+                conversationId: conversation.id,
+                accountId: conversation.accountId,
+                send: viewModel.makeDebugToolsSendClosure()
+            )
+        }
+    }
+    #endif
 
     private var audioCallButton: some View {
         Button(action: viewModel.startAudioCall, label: {

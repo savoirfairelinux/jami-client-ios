@@ -27,4 +27,10 @@
 - (void)fini;
 - (void)connectivityChanged;
 - (nonnull NSString*)getVersion;
+#if DEBUG_TOOLS_ENABLED
+- (void)initTelemetry;
+- (void)shutdownTelemetry;
+- (nonnull NSString*)drainSpans;
+- (NSUInteger)spanCount;
+#endif
 @end
