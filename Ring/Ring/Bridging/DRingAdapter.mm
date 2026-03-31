@@ -49,6 +49,9 @@ using namespace libjami;
 #else
     int flag = 0;
 #endif
+#if DEBUG_TOOLS_ENABLED
+    setenv("JAMI_LOG_DHT", "1", 1);
+#endif
     return init(static_cast<InitFlag>(flag));
 }
 

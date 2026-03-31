@@ -22,6 +22,9 @@ import RxSwift
 import PushKit
 import ContactsUI
 import os
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 // swiftlint:disable identifier_name type_body_length
 @main
@@ -631,6 +634,9 @@ extension AppDelegate {
                 dictionary[keyString] = valueString
             }
         }
+        #if DEBUG_TOOLS_ENABLED
+        NotificationTesting.logEvent(.pushReceivedInApp, message: "state=\(application.applicationState.rawValue)")
+        #endif
         self.accountService.pushNotificationReceived(data: dictionary)
         completionHandler(.newData)
     }
@@ -642,6 +648,9 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        #if DEBUG_TOOLS_ENABLED
+        NotificationTesting.logEvent(.voipPushReceived, message: "type=\(type.rawValue)")
+        #endif
         self.updateCallScreenState(presenting: true)
         let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
         let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"

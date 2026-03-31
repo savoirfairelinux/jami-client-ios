@@ -62,7 +62,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     private let log = SwiftyBeaver.self
 
     // Services
-    private let conversationsService: ConversationsService
+    let conversationsService: ConversationsService
     private let accountService: AccountsService
     private let nameService: NameService
     private let contactsService: ContactsService
@@ -642,6 +642,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         guard let contact = self.contactsService.contact(withHash: jamiId) else { return false }
         return contact.banned
     }
+
 }
 
 // MARK: Conversation didSet functions

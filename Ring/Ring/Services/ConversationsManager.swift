@@ -21,6 +21,9 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 import os
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 // swiftlint:disable type_body_length
 class ConversationsManager {
@@ -650,6 +653,12 @@ extension  ConversationsManager: MessagesAdapterDelegate {
 
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+        #if DEBUG_TOOLS_ENABLED
+        // Logs the decrypted body so the Logger can auto-extract any
+        // `[TRACE:<uuid>]` prefix the sender embedded in the message body.
+        let body = (message.body[MessageAttributes.body.rawValue] as? String) ?? ""
+        NotificationTesting.logEvent(.eventMessage, message: body)
+        #endif
         let newMessage = MessageModel(with: message, localJamiId: account.jamiId)
         if newMessage.type == .fileTransfer {
             newMessage.transferStatus = newMessage.incoming ? .awaiting : .success

@@ -17,11 +17,18 @@
  */
 
 import SwiftUI
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 struct ConversationContainerView: View {
     @ObservedObject var viewModel: ConversationViewModel
     @StateObject private var mediaPreviewPresenter = MediaPreviewPresenter()
     @SwiftUI.State private var containerWidth: CGFloat = UIScreen.main.bounds.width
+
+    #if DEBUG_TOOLS_ENABLED
+    @SwiftUI.State private var showDebugTools: Bool = false
+    #endif
 
     var body: some View {
         MessagesListView(model: viewModel.swiftUIModel)
@@ -54,6 +61,11 @@ struct ConversationContainerView: View {
                     trailingButtons
                 }
             }
+            #if DEBUG_TOOLS_ENABLED
+            .sheet(isPresented: $showDebugTools) {
+                debugToolsSheet
+            }
+            #endif
     }
 
     // MARK: - Title View
@@ -95,12 +107,34 @@ struct ConversationContainerView: View {
 
     @ViewBuilder private var trailingButtons: some View {
         if !viewModel.isBlocked {
+            #if DEBUG_TOOLS_ENABLED
+            debugToolsButton
+            #endif
             audioCallButton
             if !viewModel.isAccountSip {
                 videoCallButton
             }
         }
     }
+
+    #if DEBUG_TOOLS_ENABLED
+    private var debugToolsButton: some View {
+        Button(action: { showDebugTools = true }) {
+            Image(systemName: "ladybug.fill")
+        }
+        .foregroundColor(.purple)
+    }
+
+    @ViewBuilder private var debugToolsSheet: some View {
+        if let conversation = viewModel.conversation {
+            NotificationTestingConfigView(
+                conversationId: conversation.id,
+                accountId: conversation.accountId,
+                send: viewModel.makeDebugToolsSendClosure()
+            )
+        }
+    }
+    #endif
 
     private var audioCallButton: some View {
         Button(action: viewModel.startAudioCall) {
