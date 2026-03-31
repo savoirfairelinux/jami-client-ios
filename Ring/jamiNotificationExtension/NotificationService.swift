@@ -25,6 +25,9 @@ import os
 import Darwin
 import Contacts
 import Atomics
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 /*
  * This class is responsible for handling incoming notifications from the DHT proxy server.
@@ -300,8 +303,63 @@ class NotificationService: UNNotificationServiceExtension {
         valueFetcher.invalidateAndCancelSession()
     }
 
+    #if DEBUG_TOOLS_ENABLED
+    // Anchor the gate to NotificationLogger (an excluded file in non-test builds)
+    // so that removing this #if also fails to compile.
+    private let startTime: Date = {
+        // Anchor the gate to NotificationTesting (a DebugTools symbol that is
+        // physically excluded from non-test builds), so that removing this #if
+        // also fails to compile.
+        _ = NotificationTesting.self
+        return Date()
+    }()
+    // W3C traceparent lifted from the incoming APNs payload (stamped by
+    // dhtproxy in opendht's DhtProxyServer::sendPushNotification). Nil when
+    // the proxy did not stamp one — the terminal span then starts a fresh
+    // trace.
+    private var otelTraceparent: String?
+    private var senderTraceparent: String?
+    private var bufferedSpans: [(name: String, attrs: [String: String])] = []
+    private var pushResult: String = "presented"
+
+    private func bufferSpan(name: String, attributes: [String: String] = [:]) {
+        bufferedSpans.append((name: name, attrs: attributes))
+    }
+
+    private func flushBufferedSpans() {
+        let traceparent = senderTraceparent ?? otelTraceparent
+        let senderHex = traceparent.flatMap { NotificationTesting.traceIdHex(from: $0) }
+        for span in bufferedSpans {
+            var merged = span.attrs
+            if let senderHex {
+                merged["sender.trace.id"] = senderHex
+            }
+            NotificationTesting.emitInstantSpan(
+                name: span.name,
+                parentTraceparent: traceparent,
+                attributes: merged
+            )
+        }
+        bufferedSpans.removeAll()
+    }
+    #endif
+
     // Entry point for processing incoming notification requests.
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        #if DEBUG_TOOLS_ENABLED
+        // Configure DebugTools logger once per process. Idempotent — second
+        // and subsequent calls are no-ops. The collector URL is resolved via
+        // three-tier lookup (see NotificationTesting.configureLogger docs);
+        // on a real device this reads from the App Group shared defaults,
+        // populated by the main app's last launch.
+        NotificationTesting.configureLogger(appGroupIdentifier: Constants.appGroupIdentifier)
+        self.otelTraceparent = NotificationTesting.traceparent(from: request.content.userInfo)
+        let payload = request.content.userInfo
+            .filter { String(describing: $0.key) != "aps" }
+            .map { "\(String(describing: $0.key))=\(String(describing: $0.value))" }
+            .joined(separator: " ")
+        bufferSpan(name: "push.received", attributes: ["payload": payload, "process": "extension"])
+        #endif
         self.contentHandler = contentHandler
         self.receivedAt = Date()
         setupNotificationExtensionQueryListener()
@@ -326,16 +384,25 @@ class NotificationService: UNNotificationServiceExtension {
         saveDataIfNeeded(data: requestData)
         guard !appIsActive() else {
             logRequestExit(.appActive, data: requestData)
+            #if DEBUG_TOOLS_ENABLED
+            bufferSpan(name: "push.skipped", attributes: ["reason": "app_foreground"])
+            #endif
             return
         }
 
         guard !shareExtensionHasAccountActive(accountId: accountId) else {
             logRequestExit(.shareExtensionActive, data: requestData)
+            #if DEBUG_TOOLS_ENABLED
+            bufferSpan(name: "push.skipped", attributes: ["reason": "share_extension_active"])
+            #endif
             return
         }
 
         guard !isResubscribe(accountId: accountId, data: requestData) else {
             logRequestExit(.resubscribed, data: requestData)
+            #if DEBUG_TOOLS_ENABLED
+            bufferSpan(name: "push.resubscribe", attributes: ["account.id": accountId])
+            #endif
             return
         }
 
@@ -380,6 +447,9 @@ class NotificationService: UNNotificationServiceExtension {
 
     // Starts streaming data from a specified URL and processes received lines.
     private func startStreaming(from url: URL, for request: UNNotificationRequest, keyURL: URL, treatedMessagesURL: URL) {
+        #if DEBUG_TOOLS_ENABLED
+        bufferSpan(name: "push.stream.started", attributes: ["url": url.absoluteString])
+        #endif
         let taskId = UUID().uuidString
         autoDispatchGroup.enter(id: taskId)
         let startedAt = Date()
@@ -387,19 +457,33 @@ class NotificationService: UNNotificationServiceExtension {
         let task = Task { [weak self] in
             guard let self = self else { return }
             defer { self.autoDispatchGroup.leave(id: taskId) }
+            #if DEBUG_TOOLS_ENABLED
+            var linesReceived = 0
+            #endif
             do {
                 let deadline = self.receivedAt.addingTimeInterval(self.streamDeadline)
                 let attempts = try await self.valueFetcher.fetch(from: url, deadline: deadline, onLine: { line in
-                    self.processStreamLine(line, with: request, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL)
+                    #if DEBUG_TOOLS_ENABLED
+                    linesReceived += 1
+                    #endif
+                    return self.processStreamLine(line, with: request, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL)
                 }, missingValues: {
                     self.didFinish.load(ordering: .relaxed) || self.processAll ? 0 : self.idsToProcess.count
                 })
                 self.logStreamingExit("completed attempts: \(attempts)", startedAt: startedAt)
+                #if DEBUG_TOOLS_ENABLED
+                if linesReceived == 0 {
+                    self.bufferSpan(name: "push.stream.empty")
+                }
+                #endif
             } catch {
                 if Task.isCancelled || (error as? URLError)?.code == .cancelled {
                     self.logStreamingExit("cancelled", startedAt: startedAt)
                 } else {
                     self.logStreamingExit(ProxyValueFetcher.failureDescription(error), startedAt: startedAt)
+                    #if DEBUG_TOOLS_ENABLED
+                    self.bufferSpan(name: "push.stream.error", attributes: ["error": ProxyValueFetcher.failureDescription(error)])
+                    #endif
                 }
             }
         }
@@ -428,6 +512,9 @@ class NotificationService: UNNotificationServiceExtension {
             }
 
             log("Processing ID: \(id)")
+            #if DEBUG_TOOLS_ENABLED
+            bufferSpan(name: "push.line.received", attributes: ["line.id": id])
+            #endif
             idsToProcess.remove(id)
             processMap(map: map, keyURL: keyURL, treatedMessagesURL: treatedMessagesURL, userInfo: request.content.userInfo)
             if didFinish.load(ordering: .relaxed) {
@@ -446,6 +533,18 @@ class NotificationService: UNNotificationServiceExtension {
     private func processMap(map: [String: Any], keyURL: URL, treatedMessagesURL: URL, userInfo: [AnyHashable: Any]) {
         let result = adapterService.decrypt(keyPath: keyURL.path, accountId: self.accountId, messagesPath: treatedMessagesURL.path, value: map)
         log("Notification type: \(result)")
+        #if DEBUG_TOOLS_ENABLED
+        switch result {
+        case .call(let peerId, _):
+            bufferSpan(name: "push.decrypted", attributes: ["type": "call", "peer.id": peerId])
+        case .gitMessage(let convId):
+            bufferSpan(name: "push.decrypted", attributes: ["type": "git_message", "conversation.id": convId])
+        case .clone:
+            bufferSpan(name: "push.decrypted", attributes: ["type": "clone"])
+        case .unknown:
+            bufferSpan(name: "push.decrypted", attributes: ["type": "unknown"])
+        }
+        #endif
         switch result {
         case .call(let peerId, let hasVideo):
             guard self.shouldAcceptIncomingCall(peerId: peerId) else {
@@ -489,6 +588,10 @@ class NotificationService: UNNotificationServiceExtension {
     }
 
     override func serviceExtensionTimeWillExpire() {
+        #if DEBUG_TOOLS_ENABLED
+        bufferSpan(name: "push.timeout", attributes: ["error": "time limit reached"])
+        self.pushResult = "expired"
+        #endif
         finish(reason: .systemExpiry)
     }
 
@@ -518,67 +621,18 @@ class NotificationService: UNNotificationServiceExtension {
         let accountJamiId = self.adapterService.getAccountJamiId(accountId: self.accountId)
 
         jamiTaskId = UUID().uuidString
+        #if DEBUG_TOOLS_ENABLED
+        bufferSpan(name: "push.backend.started", attributes: ["conversation.id": convId, "loadAll": String(loadAll)])
+        #endif
         self.autoDispatchGroup.enter(id: jamiTaskId)
         self.adapterService.startAccountsWithListener(accountId: self.accountId, convId: convId, loadAll: loadAll) { [weak self] event, eventData in
-            guard let self = self else {
-                return
-            }
+            guard let self = self else { return }
 
-            // Plain-text stripping only; avoid MessageMarkdown (SwiftUI bubble rendering) in this extension target.
-            var notifConfig = NotificationConfig(from: eventData.jamiId, url: nil, body: MessageMarkdownPlainText.display(from: eventData.content),
-                                                 conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
+            #if DEBUG_TOOLS_ENABLED
+            self.bufferBackendEventSpan(event: event, eventData: eventData)
+            #endif
 
-            switch event {
-            case .message:
-                CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
-                if accountJamiId == eventData.jamiId {
-                    return
-                }
-                self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
-                self.configureAndPresentNotification(config: notifConfig, type: LocalNotificationType.message)
-            case .fileTransferDone:
-                CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
-                if accountJamiId == eventData.jamiId {
-                    self.verifyTasksStatus()
-                    return
-                }
-                // If the content is a URL then we have already downloaded the file and can present the notification,
-                // otherwise we need to download the file first, so add it to the items to present
-                if let url = URL(string: eventData.content) {
-                    notifConfig.url = url
-                    self.configureAndPresentNotification(config: notifConfig, type: LocalNotificationType.file)
-                } else {
-                    self.taskPropertyQueue.sync { self.itemsToPresent -= 1 }
-                    self.verifyTasksStatus()
-                }
-            case .syncCompleted:
-                self.taskPropertyQueue.sync { self.syncCompleted = true }
-                self.verifyTasksStatus()
-            case .fileTransferInProgress:
-                if accountJamiId == eventData.jamiId {
-                    return
-                }
-                self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
-            case .invitation:
-                CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
-                self.taskPropertyQueue.sync {
-                    self.syncCompleted = true
-                    if accountJamiId != eventData.jamiId {
-                        self.itemsToPresent += 1
-                    }
-                }
-                if accountJamiId != eventData.jamiId {
-                    self.configureAndPresentNotification(config: notifConfig, type: LocalNotificationType.message)
-                }
-            case .conversationCloned:
-                self.taskPropertyQueue.sync { self.waitForCloning = false }
-                self.verifyTasksStatus()
-            case .activeCall:
-                guard let calls = eventData.calls, !calls.isEmpty else { return }
-                CommonHelpers.setUpdatedConversations(accountId: self.accountId, conversationId: eventData.conversationId)
-                self.taskPropertyQueue.sync { self.itemsToPresent += 1 }
-                self.configureAndPresentCallNotification(config: notifConfig, calls: calls, accountId: eventData.accountId)
-            }
+            self.handleBackendEvent(event: event, eventData: eventData, accountJamiId: accountJamiId)
         }
     }
 
@@ -612,6 +666,22 @@ class NotificationService: UNNotificationServiceExtension {
             return
         }
         self.taskPropertyQueue.sync { self.streamTask }?.cancel()
+        #if DEBUG_TOOLS_ENABLED
+        let durationMs = Int(Date().timeIntervalSince(startTime) * 1000)
+        bufferSpan(name: "push.finished", attributes: [
+            "push.result": self.pushResult,
+            "finish.reason": reason.rawValue,
+            "duration_ms": String(durationMs)
+        ])
+        // Flush all buffered spans using the sender's traceparent if
+        // discovered, otherwise the proxy's traceparent from the push payload.
+        flushBufferedSpans()
+        let daemonJson = adapterService.drainSpans()
+        if daemonJson != "[]" {
+            NotificationTesting.ingestDaemonSpans(json: daemonJson)
+        }
+        NotificationTesting.flushPendingSpans(timeout: 2.0)
+        #endif
         removeNotificationExtensionQueryListener()
         let accountWasActive = self.accountIsActive.compareExchange(expected: true, desired: false, ordering: .relaxed).original
         if accountWasActive {
@@ -721,6 +791,115 @@ class NotificationService: UNNotificationServiceExtension {
         }
         return dictionary
     }
+}
+
+// MARK: Backend events
+extension NotificationService {
+    private func notificationConfig(from eventData: EventData) -> NotificationConfig {
+        return NotificationConfig(
+            from: eventData.jamiId,
+            url: nil,
+            // Plain-text stripping only; avoid MessageMarkdown (SwiftUI bubble rendering) in this extension target.
+            body: MessageMarkdownPlainText.display(from: eventData.content),
+            conversationId: eventData.conversationId,
+            groupTitle: eventData.groupTitle
+        )
+    }
+
+    private func handleBackendEvent(event: AdapterService.EventType, eventData: EventData, accountJamiId: String?) {
+        switch event {
+        case .message:
+            handleMessageEvent(eventData: eventData, accountJamiId: accountJamiId)
+        case .fileTransferDone:
+            handleFileTransferDoneEvent(eventData: eventData, accountJamiId: accountJamiId)
+        case .syncCompleted:
+            taskPropertyQueue.sync { syncCompleted = true }
+            verifyTasksStatus()
+        case .fileTransferInProgress:
+            handleFileTransferInProgressEvent(eventData: eventData, accountJamiId: accountJamiId)
+        case .invitation:
+            handleInvitationEvent(eventData: eventData, accountJamiId: accountJamiId)
+        case .conversationCloned:
+            taskPropertyQueue.sync { waitForCloning = false }
+            verifyTasksStatus()
+        case .activeCall:
+            handleActiveCallEvent(eventData: eventData)
+        }
+    }
+
+    private func handleMessageEvent(eventData: EventData, accountJamiId: String?) {
+        CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: eventData.conversationId)
+        guard accountJamiId != eventData.jamiId else { return }
+        taskPropertyQueue.sync { itemsToPresent += 1 }
+        configureAndPresentNotification(config: notificationConfig(from: eventData), type: LocalNotificationType.message)
+    }
+
+    private func handleFileTransferDoneEvent(eventData: EventData, accountJamiId: String?) {
+        CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: eventData.conversationId)
+        guard accountJamiId != eventData.jamiId else {
+            verifyTasksStatus()
+            return
+        }
+        guard let url = URL(string: eventData.content) else {
+            taskPropertyQueue.sync { itemsToPresent -= 1 }
+            verifyTasksStatus()
+            return
+        }
+        var config = notificationConfig(from: eventData)
+        config.url = url
+        configureAndPresentNotification(config: config, type: LocalNotificationType.file)
+    }
+
+    private func handleFileTransferInProgressEvent(eventData: EventData, accountJamiId: String?) {
+        guard accountJamiId != eventData.jamiId else { return }
+        taskPropertyQueue.sync { itemsToPresent += 1 }
+    }
+
+    private func handleInvitationEvent(eventData: EventData, accountJamiId: String?) {
+        CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: eventData.conversationId)
+        let shouldPresent = accountJamiId != eventData.jamiId
+        taskPropertyQueue.sync {
+            syncCompleted = true
+            if shouldPresent {
+                itemsToPresent += 1
+            }
+        }
+        if shouldPresent {
+            configureAndPresentNotification(config: notificationConfig(from: eventData), type: LocalNotificationType.message)
+        }
+    }
+
+    private func handleActiveCallEvent(eventData: EventData) {
+        guard let calls = eventData.calls, !calls.isEmpty else { return }
+        CommonHelpers.setUpdatedConversations(accountId: accountId, conversationId: eventData.conversationId)
+        taskPropertyQueue.sync { itemsToPresent += 1 }
+        configureAndPresentCallNotification(config: notificationConfig(from: eventData), calls: calls, accountId: eventData.accountId)
+    }
+
+    #if DEBUG_TOOLS_ENABLED
+    private func bufferBackendEventSpan(event: AdapterService.EventType, eventData: EventData) {
+        if event == .message, senderTraceparent == nil,
+           let traceparent = NotificationTesting.extractTraceparent(from: eventData.content) {
+            senderTraceparent = traceparent
+        }
+        bufferSpan(
+            name: "push.event.\(debugEventName(for: event))",
+            attributes: ["conversation.id": eventData.conversationId, "from": eventData.jamiId]
+        )
+    }
+
+    private func debugEventName(for event: AdapterService.EventType) -> String {
+        switch event {
+        case .message: return "message"
+        case .fileTransferDone: return "file_transfer_done"
+        case .fileTransferInProgress: return "file_transfer_in_progress"
+        case .syncCompleted: return "sync_completed"
+        case .conversationCloned: return "conversation_cloned"
+        case .invitation: return "invitation"
+        case .activeCall: return "active_call"
+        }
+    }
+    #endif
 }
 
 // MARK: Name retrieval
@@ -1029,6 +1208,9 @@ extension NotificationService {
     }
 
     private func presentLocalNotification(notification: LocalNotification) {
+        #if DEBUG_TOOLS_ENABLED
+        bufferSpan(name: "push.notification.presented", attributes: ["type": notification.type.rawValue, "title": notification.content.title])
+        #endif
         let content = notification.content
         setNotificationCount(notification: content)
         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
@@ -1044,6 +1226,9 @@ extension NotificationService {
     }
 
     private func presentCall(info: [AnyHashable: Any]) {
+        #if DEBUG_TOOLS_ENABLED
+        bufferSpan(name: "push.call.reported", attributes: ["peer.id": "\(info["peerId"] ?? "unknown")"])
+        #endif
         CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
             if let error = error as NSError? {
                 notificationLogger.notice("VoIP handoff error domain: \(error.domain, privacy: .public) code: \(error.code, privacy: .public)")

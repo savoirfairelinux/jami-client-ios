@@ -41,6 +41,10 @@
 - (NSMutableDictionary<NSString*,NSString*>*)getConversationInfoForAccount:(NSString*) accountId conversationId:(NSString*) conversationId;
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId;
 - (NSDictionary *)getAccountDetails:(NSString *)accountID;
+#if DEBUG_TOOLS_ENABLED
+- (nonnull NSString*)drainSpans;
+- (NSUInteger)spanCount;
+#endif
 
 - (BOOL)allowsIncomingCallsFromUnknownFor:(NSString*)accountId;
 
