@@ -21,9 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		AA0001020000000000000001 /* PhotoLibrarySaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001010000000000000001 /* PhotoLibrarySaving.swift */; };
-		AA0002020000000000000002 /* MockPhotoLibrarySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */; };
-		AA0003020000000000000003 /* MediaPreviewModelSaveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */; };
 		024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */; };
 		024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */; };
 		024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024B61301DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm */; };
@@ -562,7 +559,6 @@
 		62006E04203F4DD6003C3197 /* UITextField+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62006E03203F4DD6003C3197 /* UITextField+Helpers.swift */; };
 		621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231F81F880EDF009B86F0 /* UILabel+Ring.swift */; };
 		623196862BAE498900C2252C /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 623196852BAE498900C2252C /* Atomics */; };
-
 		627F11F120348FBF006560B5 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627F11F020348FBF006560B5 /* AvatarView.swift */; };
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
 		62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */; };
@@ -590,6 +586,9 @@
 		6661C73A216D2EA300E48D94 /* Gif+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6661C739216D2EA300E48D94 /* Gif+Helpers.swift */; };
 		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
 		66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F295DD2166A5930044ED6F /* Devices+Helpers.swift */; };
+		AA0001020000000000000001 /* PhotoLibrarySaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001010000000000000001 /* PhotoLibrarySaving.swift */; };
+		AA0002020000000000000002 /* MockPhotoLibrarySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */; };
+		AA0003020000000000000003 /* MediaPreviewModelSaveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */; };
 		BB06BD8129D491F80064F0FC /* CustomAnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06BD8029D491F80064F0FC /* CustomAnnotationModel.swift */; };
 		BB06BD8329D492AA0064F0FC /* LocationSharingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */; };
 		BB06BD8529D4C1210064F0FC /* DurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06BD8429D4C1210064F0FC /* DurationPicker.swift */; };
@@ -677,9 +676,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AA0001010000000000000001 /* PhotoLibrarySaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrarySaving.swift; sourceTree = "<group>"; };
-		AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoLibrarySaver.swift; sourceTree = "<group>"; };
-		AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewModelSaveTests.swift; sourceTree = "<group>"; };
 		024B612B1DF7654F00C4F9DE /* DaemonServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonServiceTests.swift; sourceTree = "<group>"; };
 		024B612D1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureFailInitDRingAdapter.h; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.h; sourceTree = "<group>"; };
 		024B612E1DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FixtureFailInitDRingAdapter.mm; path = Fixtures/DRingAdaptor/FixtureFailInitDRingAdapter.mm; sourceTree = "<group>"; };
@@ -1727,7 +1723,7 @@
 		5CE66F741FBF769B00EE9291 /* InitialLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadingViewController.swift; sourceTree = "<group>"; };
 		62006E03203F4DD6003C3197 /* UITextField+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Helpers.swift"; sourceTree = "<group>"; };
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
-
+		623660A920092081002598C1 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../daemon/src; sourceTree = "<group>"; };
 		627F11F020348FBF006560B5 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenceAdapter.h; sourceTree = "<group>"; };
 		62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceAdapterDelegate.swift; sourceTree = "<group>"; };
@@ -1809,6 +1805,9 @@
 		6661C739216D2EA300E48D94 /* Gif+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gif+Helpers.swift"; sourceTree = "<group>"; };
 		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
+		AA0001010000000000000001 /* PhotoLibrarySaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrarySaving.swift; sourceTree = "<group>"; };
+		AA0002010000000000000002 /* MockPhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoLibrarySaver.swift; sourceTree = "<group>"; };
+		AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewModelSaveTests.swift; sourceTree = "<group>"; };
 		BB06BD8029D491F80064F0FC /* CustomAnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationModel.swift; sourceTree = "<group>"; };
 		BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingVM.swift; sourceTree = "<group>"; };
 		BB06BD8429D4C1210064F0FC /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
@@ -1826,7 +1825,6 @@
 		BB91FAA9292EA26900BB41C1 /* EventData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
 		BBB76E402966062C00A42DF5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmInfoView.swift; sourceTree = "<group>"; };
-		623660A920092081002598C1 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../daemon/src; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -3767,7 +3765,14 @@
 			path = Features/InitialLoading;
 			sourceTree = "<group>";
 		};
-
+		6236602520091425002598C1 /* daemon */ = {
+			isa = PBXGroup;
+			children = (
+				623660A920092081002598C1 /* src */,
+			);
+			name = daemon;
+			sourceTree = "<group>";
+		};
 		6613A610214AF8B100B497D1 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -3797,14 +3802,6 @@
 				1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		6236602520091425002598C1 /* daemon */ = {
-			isa = PBXGroup;
-			children = (
-				623660A920092081002598C1 /* src */,
-			);
-			name = daemon;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4043,7 +4040,6 @@
 				043999F21D1C2D9D00E99CD9 /* Ring */,
 				04399A0B1D1C2D9D00E99CD9 /* RingTests */,
 				04399A161D1C2D9D00E99CD9 /* RingUITests */,
-
 				62366028200914C1002598C1 /* libring */,
 				26A88C03266FFFC800888EED /* jamiNotificationExtension */,
 				3D0E69762DDCD9C70046FA3D /* jamiShareExtension */,
@@ -4060,7 +4056,6 @@
 				267D55402E9EB2A8006BA9BE /* AppIcon.icon in Resources */,
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
 				0E3BD4242044776300A50DDF /* ContactViewController.storyboard in Resources */,
-
 				26929FD425659E5F0052A601 /* cacert.pem in Resources */,
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
@@ -4138,7 +4133,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n${PROJECT_DIR}/swiftgen/swiftgen.sh\n";
 		};
-
 		6236602D200914C9002598C1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4765,7 +4759,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -4809,7 +4803,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -5005,7 +4999,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -5089,7 +5083,14 @@
 			};
 			name = "Debug with lint";
 		};
-
+		265219D32B603FD700D1CAE9 /* Debug with lint */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Debug with lint";
+		};
 		265219D42B603FD700D1CAE9 /* Debug with lint */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5591,7 +5592,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -5668,7 +5669,6 @@
 			};
 			name = Development;
 		};
-
 		6236602A200914C1002598C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5676,14 +5676,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
-		};
-		265219D32B603FD700D1CAE9 /* Debug with lint */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = "Debug with lint";
 		};
 		6236602B200914C1002598C1 /* Development */ = {
 			isa = XCBuildConfiguration;
@@ -5770,7 +5762,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-
 		62366029200914C1002598C1 /* Build configuration list for PBXAggregateTarget "libring" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
