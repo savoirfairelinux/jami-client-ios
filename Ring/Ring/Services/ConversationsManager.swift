@@ -21,6 +21,9 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 import os
+#if DEBUG_TOOLS_ENABLED
+import DebugTools
+#endif
 
 // swiftlint:disable type_body_length
 class ConversationsManager {
@@ -650,6 +653,18 @@ extension  ConversationsManager: MessagesAdapterDelegate {
 
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+        #if DEBUG_TOOLS_ENABLED
+        let body = (message.body[MessageAttributes.body.rawValue] as? String) ?? ""
+        if let traceparent = NotificationTesting.extractTraceparent(from: body) {
+            var attrs: [String: String] = ["conversation.id": conversationId]
+            if let hex = NotificationTesting.traceIdHex(from: traceparent) {
+                attrs["sender.trace.id"] = hex
+            }
+            NotificationTesting.emitInstantSpan(name: "message.received", parentTraceparent: traceparent, attributes: attrs)
+        } else if let traceId = NotificationTesting.extractTraceId(from: body), !traceId.isEmpty {
+            NotificationTesting.emitInstantSpan(name: "message.received", attributes: ["trace.id": traceId, "conversation.id": conversationId])
+        }
+        #endif
         let newMessage = MessageModel(with: message, localJamiId: account.jamiId)
         if newMessage.type == .fileTransfer {
             newMessage.transferStatus = newMessage.incoming ? .awaiting : .success

@@ -23,8 +23,12 @@
 
 #import "DRingAdapter.h"
 
+#import "Utils.h"
 #import "jami/jami.h"
 #import "jami/configurationmanager_interface.h"
+#if DEBUG_TOOLS_ENABLED
+#include "jami/telemetry.h"
+#endif
 
 @implementation DRingAdapter
 
@@ -49,7 +53,16 @@ using namespace libjami;
 #else
     int flag = 0;
 #endif
-    return init(static_cast<InitFlag>(flag));
+#if DEBUG_TOOLS_ENABLED
+    setenv("JAMI_LOG_DHT", "1", 1);
+#endif
+    bool success = init(static_cast<InitFlag>(flag));
+#if DEBUG_TOOLS_ENABLED
+    if (success) {
+        [self initTelemetry];
+    }
+#endif
+    return success;
 }
 
 - (BOOL)startDaemon {
@@ -70,6 +83,9 @@ using namespace libjami;
 }
 
 - (void)fini {
+#if DEBUG_TOOLS_ENABLED
+    [self shutdownTelemetry];
+#endif
     if (![[NSThread currentThread] isMainThread]) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             fini();
@@ -103,5 +119,26 @@ using namespace libjami;
         return [NSString stringWithUTF8String:version()];
     }
 }
+
+#if DEBUG_TOOLS_ENABLED
+- (void)initTelemetry {
+    NSString *version = [NSString stringWithUTF8String:libjami::version()];
+    jami::telemetry::initTelemetry("jami.ios.daemon", [version UTF8String]);
+}
+
+- (void)shutdownTelemetry {
+    jami::telemetry::shutdownTelemetry();
+}
+
+- (NSString*)drainSpans {
+    auto spans = jami::telemetry::drainSpans();
+    auto json = jami_ios_telemetry::spansToJson(std::move(spans));
+    return [NSString stringWithUTF8String:json.c_str()];
+}
+
+- (NSUInteger)spanCount {
+    return static_cast<NSUInteger>(jami::telemetry::spanCount());
+}
+#endif
 
 @end
