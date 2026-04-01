@@ -148,18 +148,9 @@ class CallsService: CallsAdapterDelegate {
     }
 
     private func processCallStateChange(call: CallModel, callId: String, accountId: String) {
-        if shouldSendVCard(for: call) {
-            self.messageHandlingService.sendVCard(callID: callId, accountID: call.accountId)
-        }
-
         if call.state == .current {
             self.joinConferenceIfNeeded(callId: callId, accountId: accountId)
         }
-    }
-
-    private func shouldSendVCard(for call: CallModel) -> Bool {
-        return (call.state == .ringing && call.callType == .outgoing) ||
-            (call.state == .current && call.callType == .incoming)
     }
 
     func didChangeMediaNegotiationStatus(withCallId callId: String, event: String, withMedia: [[String: String]]) {
