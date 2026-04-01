@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -90,6 +90,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     // view properties
     var contextMenuModel = ContextMenuVM()
     @Published var messagesModels = [MessageContainerModel]()
+    private var containerIndex = [String: Int]()
     @Published var scrollToId: String?
     @Published var scrollToReplyTarget: String? // message id of a reply target that we should scroll
     var temporaryReplyTarget: String? // used to keep a message id of a reply target that we should scroll if this message not loaded yet. ScrollToReplyTarget should be updated after messages loaded
@@ -508,6 +509,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
                 guard let self = self else { return }
                 if self.conversation.messages.isEmpty {
                     self.messagesModels = [MessageContainerModel]()
+                    self.containerIndex = [String: Int]()
                     return
                 }
                 let insertionCount: Int = self.insert(messages: messages.messages,
@@ -605,16 +607,55 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             return container
         }
 
-        if fromHistory {
-            self.messagesModels.append(contentsOf: newContainers)
-        } else {
-            self.messagesModels.insert(contentsOf: newContainers, at: 0)
+        for container in newContainers {
+            insertContainerByParent(container)
         }
 
         updateLastMessageIfNeeded(fromHistory: fromHistory,
                                   newContainers: newContainers)
 
         return newContainers.count
+    }
+
+    // MARK: - Newest-first parent-based insertion (for flipped scroll view)
+
+    private func insertContainerByParent(_ container: MessageContainerModel) {
+        let msgId = container.message.id
+        let parentId = container.message.parentId
+
+        guard containerIndex[msgId] == nil else { return }
+
+        // Fast path: parent is first (newest) or list empty → insert at 0
+        if messagesModels.isEmpty || messagesModels.first?.message.id == parentId {
+            messagesModels.insert(container, at: 0)
+            rebuildContainerIndex(from: 0)
+            return
+        }
+
+        // Case 2: this message is parent of existing child → insert AFTER child
+        for (_, idx) in containerIndex where messagesModels[idx].message.parentId == msgId {
+            let insertIdx = idx + 1
+            messagesModels.insert(container, at: insertIdx)
+            rebuildContainerIndex(from: insertIdx)
+            return
+        }
+
+        // Case 3: parent found → insert AT parent index (child before parent)
+        if let parentIdx = containerIndex[parentId] {
+            messagesModels.insert(container, at: parentIdx)
+            rebuildContainerIndex(from: parentIdx)
+            return
+        }
+
+        // Fallback: parent unknown → append (oldest position = top of screen)
+        containerIndex[msgId] = messagesModels.count
+        messagesModels.append(container)
+    }
+
+    private func rebuildContainerIndex(from start: Int) {
+        for idx in start..<messagesModels.count {
+            containerIndex[messagesModels[idx].message.id] = idx
+        }
     }
 
     private func updateLastMessageIfNeeded(fromHistory: Bool, newContainers: [MessageContainerModel]) {
@@ -708,6 +749,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     func cleanMessages() {
         self.messagesModels = [MessageContainerModel]()
+        self.containerIndex = [String: Int]()
     }
 
     func updateBlockedStatus(blocked: Bool) {

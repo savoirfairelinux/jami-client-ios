@@ -1,8 +1,5 @@
 /*
- *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -177,6 +174,7 @@ class ConversationModel: Equatable {
     var newMessages = BehaviorRelay<LoadedMessages>(value: LoadedMessages(messages: [MessageModel](), fromHistory: false))
     private var participants = [ConversationParticipant]()
     var messages = [MessageModel]()
+    private var messageIndex = [String: Int]()
     var hash = ""/// contact hash for dialog, conversation title for multiparticipants
     var accountId: String = ""
     var id: String = ""
@@ -310,9 +308,8 @@ class ConversationModel: Equatable {
     }
 
     func getMessage(messageId: String) -> MessageModel? {
-        return self.messages.filter({ message in
-            return message.id == messageId
-        }).first
+        guard let idx = messageIndex[messageId], idx < messages.count else { return nil }
+        return messages[idx]
     }
 
     func getLastReadMessage() -> String? {
@@ -447,6 +444,7 @@ class ConversationModel: Equatable {
     }
 
     func appendNonSwarm(message: MessageModel) {
+        messageIndex[message.id] = messages.count
         self.messages.append(message)
         self.newMessages.accept(LoadedMessages(messages: [message], fromHistory: false))
     }
@@ -457,9 +455,87 @@ class ConversationModel: Equatable {
 
     func clearMessages() {
         messages = [MessageModel]()
+        messageIndex = [String: Int]()
         newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false))
         lastMessage = nil
         numberOfUnreadMessages.accept(0)
+    }
+
+    // MARK: - Parent-based message insertion
+
+    @discardableResult
+    func insertByParent(_ message: MessageModel) -> Int {
+        guard messageIndex[message.id] == nil else { return -1 }
+
+        // Fast path: parent is last message or list is empty (linear chain, most common)
+        if messages.isEmpty || messages.last?.id == message.parentId {
+            let idx = messages.count
+            messages.append(message)
+            messageIndex[message.id] = idx
+            relocateOrphanedChild(of: message.id, afterIndex: idx)
+            return idx
+        }
+
+        // Case 2: this message is a parent of an existing child → insert before that child
+        for (_, idx) in messageIndex where messages[idx].parentId == message.id {
+            messages.insert(message, at: idx)
+            rebuildIndex(from: idx)
+            return idx
+        }
+
+        // Case 3: parent exists in list → insert after parent
+        if let parentIdx = messageIndex[message.parentId] {
+            let insertIdx = parentIdx + 1
+            messages.insert(message, at: insertIdx)
+            rebuildIndex(from: insertIdx)
+            relocateOrphanedChild(of: message.id, afterIndex: insertIdx)
+            return insertIdx
+        }
+
+        // Fallback: parent not found, append
+        let idx = messages.count
+        messages.append(message)
+        messageIndex[message.id] = idx
+        return idx
+    }
+
+    func moveMessage(messageId: String, newParentId: String) {
+        guard let currentIdx = messageIndex[messageId] else { return }
+        let message = messages[currentIdx]
+        messages.remove(at: currentIdx)
+        messageIndex.removeValue(forKey: messageId)
+        message.parentId = newParentId
+        rebuildIndex(from: 0)
+        insertByParent(message)
+    }
+
+    /// After inserting a message, check if an existing message claims it as parent
+    /// but is not in the position right after it. If so, relocate the child.
+    private func relocateOrphanedChild(of parentId: String, afterIndex parentIdx: Int) {
+        guard let parentPos = messageIndex[parentId] else { return }
+        // Find child that claims this parent but is not immediately after
+        let childEntry = messageIndex.first { (_, idx) in
+            idx != parentPos + 1 && messages[idx].parentId == parentId
+        }
+        guard let (childId, childIdx) = childEntry else { return }
+        let child = messages[childIdx]
+        messages.remove(at: childIdx)
+        messageIndex.removeValue(forKey: childId)
+        rebuildIndex(from: min(parentPos, childIdx))
+        // Re-insert after parent
+        if let newParentPos = messageIndex[parentId] {
+            let insertIdx = newParentPos + 1
+            messages.insert(child, at: insertIdx)
+            rebuildIndex(from: insertIdx)
+            // Recursively check if this child also has orphans
+            relocateOrphanedChild(of: childId, afterIndex: insertIdx)
+        }
+    }
+
+    private func rebuildIndex(from start: Int) {
+        for idx in start..<messages.count {
+            messageIndex[messages[idx].id] = idx
+        }
     }
 
     func reactionAdded(messageId: String, reaction: [String: String]) {
@@ -476,7 +552,11 @@ class ConversationModel: Equatable {
 
     func messageUpdated(swarmMessage: SwarmMessageWrap, localJamiId: String) {
         guard let message = self.getMessage(messageId: swarmMessage.id) else { return }
+        let oldParentId = message.parentId
         message.messageUpdated(message: swarmMessage, localJamiId: localJamiId)
+        if message.parentId != oldParentId {
+            moveMessage(messageId: swarmMessage.id, newParentId: message.parentId)
+        }
         messageUpdated.onNext(swarmMessage.id)
     }
 

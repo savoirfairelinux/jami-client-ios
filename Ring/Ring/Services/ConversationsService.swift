@@ -1,10 +1,5 @@
 /*
- *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
- *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
- *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -155,7 +150,6 @@ class ConversationsService {
 
     func updateConversationMessages(conversationId: String) {
         for conversation in self.conversations.value where conversation.id == conversationId {
-            conversation.clearMessages()
             self.conversationsAdapter.loadConversationMessages(conversation.accountId, conversationId: conversationId, from: "", size: 40)
         }
     }
@@ -332,10 +326,8 @@ class ConversationsService {
                 }
             }
 
-            if fromLoaded {
-                conversation.messages.append(contentsOf: newMessages)
-            } else {
-                conversation.messages.insert(contentsOf: newMessages, at: 0)
+            newMessages.forEach { message in
+                conversation.insertByParent(message)
             }
 
             self.sortIfNeeded()
