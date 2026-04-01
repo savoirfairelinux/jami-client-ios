@@ -288,6 +288,8 @@
 		263C16782D9702F2008E102C /* ObjCMockCallsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 263C16772D9702F2008E102C /* ObjCMockCallsAdapter.m */; };
 		263C167B2D9723A5008E102C /* MessageHandlingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C167A2D972394008E102C /* MessageHandlingServiceTests.swift */; };
 		263C167D2D98C957008E102C /* CallTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C167C2D98C957008E102C /* CallTestUtils.swift */; };
+		61D6FAF357D64F7CAFF48DF7 /* VideoFrameRotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5819EA179F1346E3A398EF17 /* VideoFrameRotationTests.swift */; };
+		A1B2C3D400000001ABCD0001 /* MessageOrderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000001ABCD0002 /* MessageOrderingTests.swift */; };
 		263C167F2D999356008E102C /* ConferenceManagementServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C167E2D999348008E102C /* ConferenceManagementServiceTests.swift */; };
 		263C16832D9DBCE6008E102C /* ThreadSafeQueueHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C16822D9DBCE6008E102C /* ThreadSafeQueueHelper.swift */; };
 		26A1B2C3D4E5F60800AABB01 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */; };
@@ -914,6 +916,8 @@
 		263C16772D9702F2008E102C /* ObjCMockCallsAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockCallsAdapter.m; sourceTree = "<group>"; };
 		263C167A2D972394008E102C /* MessageHandlingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandlingServiceTests.swift; sourceTree = "<group>"; };
 		263C167C2D98C957008E102C /* CallTestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallTestUtils.swift; sourceTree = "<group>"; };
+		5819EA179F1346E3A398EF17 /* VideoFrameRotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFrameRotationTests.swift; sourceTree = "<group>"; };
+		A1B2C3D400000001ABCD0002 /* MessageOrderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageOrderingTests.swift; sourceTree = "<group>"; };
 		263C167E2D999348008E102C /* ConferenceManagementServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceManagementServiceTests.swift; sourceTree = "<group>"; };
 		263C16822D9DBCE6008E102C /* ThreadSafeQueueHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeQueueHelper.swift; sourceTree = "<group>"; };
 		26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionary.swift; sourceTree = "<group>"; };
@@ -3317,6 +3321,8 @@
 				263C16842D9EE3F9008E102C /* CallManagementServiceTests.swift */,
 				263C167E2D999348008E102C /* ConferenceManagementServiceTests.swift */,
 				263C167C2D98C957008E102C /* CallTestUtils.swift */,
+				5819EA179F1346E3A398EF17 /* VideoFrameRotationTests.swift */,
+				A1B2C3D400000001ABCD0002 /* MessageOrderingTests.swift */,
 				263C167A2D972394008E102C /* MessageHandlingServiceTests.swift */,
 				263C16742D96F469008E102C /* MediaManagementServiceTest.swift */,
 				2673D62925261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift */,
@@ -4483,6 +4489,8 @@
 				260AE63A29C0C81300D66D5E /* CallProviderDelegateTests.swift in Sources */,
 				260AE62B29B8F97300D66D5E /* TestableSwarmInfo.swift in Sources */,
 				263C167D2D98C957008E102C /* CallTestUtils.swift in Sources */,
+				61D6FAF357D64F7CAFF48DF7 /* VideoFrameRotationTests.swift in Sources */,
+				A1B2C3D400000001ABCD0001 /* MessageOrderingTests.swift in Sources */,
 				5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */,
 				04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */,
 				260AE63529BE00F100D66D5E /* Constants.swift in Sources */,

@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2025 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -113,6 +113,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     }
     @Published var numberOfNewMessages: Int = 0
     @Published var screenTapped: Bool = false
+    var messagePanelTopY: CGFloat = 0
     @Published var shouldShowMap: Bool = false
     @Published var coordinates = [LocationSharingAnnotation]()
     @Published var locationSharingiewModel: LocationSharingViewModel = LocationSharingViewModel()
@@ -575,12 +576,9 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             return 0
         }
 
-        // Filter out messages that already exist in messagesModels to avoid duplicates
-        let newMessages = messages.filter { newMessage in
-            !self.messagesModels.contains(where: { messageModel in
-                messageModel.message.id == newMessage.id
-            })
-        }
+        // Filter out messages that already have containers
+        let existingIds = Set(messagesModels.map { $0.message.id })
+        let newMessages = messages.filter { !existingIds.contains($0.id) }
 
         let newContainers = newMessages.map { newMessage -> MessageContainerModel in
 
@@ -606,15 +604,29 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         }
 
         if fromHistory {
-            self.messagesModels.append(contentsOf: newContainers)
+            for container in newContainers {
+                insertByModelOrder(container)
+            }
         } else {
-            self.messagesModels.insert(contentsOf: newContainers, at: 0)
+            messagesModels.insert(contentsOf: newContainers, at: 0)
         }
 
         updateLastMessageIfNeeded(fromHistory: fromHistory,
                                   newContainers: newContainers)
 
         return newContainers.count
+    }
+
+    private func insertByModelOrder(_ container: MessageContainerModel) {
+        guard let modelIdx = conversation.indexOfMessage(container.message.id) else {
+            messagesModels.insert(container, at: 0)
+            return
+        }
+        let insertIdx = messagesModels.firstIndex { existing in
+            guard let existingIdx = conversation.indexOfMessage(existing.message.id) else { return false }
+            return existingIdx < modelIdx
+        } ?? messagesModels.count
+        messagesModels.insert(container, at: insertIdx)
     }
 
     private func updateLastMessageIfNeeded(fromHistory: Bool, newContainers: [MessageContainerModel]) {

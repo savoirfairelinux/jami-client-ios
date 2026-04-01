@@ -190,6 +190,9 @@ public class MessageModel {
 
     convenience init (with swarmMessage: SwarmMessageWrap, localJamiId: String) {
         self.init(withInfo: swarmMessage.body, localJamiId: localJamiId)
+        if !swarmMessage.linearizedParent.isEmpty {
+            self.parentId = swarmMessage.linearizedParent
+        }
         for reaction in swarmMessage.reactions {
             self.reactions.insert(MessageAction(withInfo: reaction))
         }
