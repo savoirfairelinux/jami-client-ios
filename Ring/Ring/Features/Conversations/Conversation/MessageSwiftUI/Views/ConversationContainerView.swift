@@ -37,6 +37,7 @@ struct ConversationContainerView: View {
             .onPreferenceChange(MessagePanelTopPreferenceKey.self) { value in
                 if let top = value {
                     mediaPreviewPresenter.messagePanelTopY = top
+                    viewModel.swiftUIModel.messagePanelTopY = top
                 }
             }
             .onAppear {
