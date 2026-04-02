@@ -223,17 +223,20 @@ struct MessagePanelView: View {
             self.model.sendMessage(text: text)
             cleanState()
         }, label: {
-            if text.isEmpty {
-                Text(model.defaultEmoji)
-                    .font(.system(size: 26))
-                    .bold()
-                    .frame(width: 25, height: 25)
-            } else {
-                Image(systemName: "paperplane")
-                    .resizable()
-                    .frame(width: 25, height: 25)
-                    .foregroundColor(model.styling.secondaryTextColor)
+            Group {
+                if text.isEmpty {
+                    Text(model.defaultEmoji)
+                        .font(.system(size: 26))
+                        .bold()
+                } else {
+                    Image(systemName: "paperplane")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(model.styling.secondaryTextColor)
+                }
             }
+            .frame(width: defaultControlSize, height: defaultControlSize)
+            .contentShape(Rectangle())
         })
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: text.isEmpty)
     }

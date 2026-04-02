@@ -100,6 +100,7 @@ class ConversationViewController: UIHostingController<ConversationContainerView>
     private func setupScreenTap() {
         screenTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         screenTapRecognizer.cancelsTouchesInView = false
+        screenTapRecognizer.delegate = self
         view.addGestureRecognizer(screenTapRecognizer)
         viewModel.swiftUIModel.subscribeScreenTapped(screenTapped: tapAction.asObservable())
     }
@@ -464,6 +465,18 @@ extension ConversationViewController {
         @unknown default: break
         }
         return false
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension ConversationViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let location = gestureRecognizer.location(in: nil)
+        let panelTopY = viewModel.swiftUIModel.messagePanelTopY
+        if panelTopY > 0 && location.y >= panelTopY {
+            return false
+        }
+        return true
     }
 }
 
