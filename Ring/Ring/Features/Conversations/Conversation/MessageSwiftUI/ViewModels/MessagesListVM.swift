@@ -133,6 +133,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
     @Published var isSyncing: Bool = false
     @Published var isBlocked: Bool = false
     @Published var syncMessage = ""
+    var messagePanelTopY: CGFloat = 0
     private let log = SwiftyBeaver.self
     var contactAvatar: UIImage = UIImage()
     var currentAccountAvatar: UIImage = UIImage()
