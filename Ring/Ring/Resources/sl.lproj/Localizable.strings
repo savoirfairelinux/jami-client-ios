@@ -158,7 +158,10 @@
 "conversation.addToContactsLabel" = "Dodam med stike?";
 "conversation.notContactLabel" = "%@ ni na seznamu stikov.";
 "conversation.messagePlaceholder" = "Piši";
-"conversation.errorSavingImage" = "Pri shranjevanju datoteke v galerijo je prišlo do napake.";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ vam je poslal(a) povabilo na pogovor.";
 "conversation.incomingRequest" = "vam je poslal(a) povabilo na pogovor.";
 "conversation.requestMessage" = "Pozdravljeni,\nse želite pridružiti pogovoru?";

@@ -158,7 +158,10 @@
 "conversation.addToContactsLabel" = "Adaugi la contacte?";
 "conversation.notContactLabel" = "%@ nu este în contactele tale";
 "conversation.messagePlaceholder" = "Scrie pentru";
-"conversation.errorSavingImage" = "A apărut o eroare în timpul salvării imaginii.";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ ți-a trimis o invitație la conversație.";
 "conversation.incomingRequest" = "ți-a trimis o invitație la conversație.";
 "conversation.requestMessage" = "Vrei să participi la conversație?";
@@ -336,7 +339,7 @@
 "accountPage.proxyListURL" = "URL-ul listei de proxy";
 "accountPage.proxyExplanation" = "Notificările sînt transmise prin intermediul unui proxy. Poți utiliza proxy-ul prestabilit, introduce o adresă proxy personală sau furniza o adresă URL cu o listă de proxy.";
 "accountPage.proxyHeader" = "Proxy";
-"accountPage.currentProxy" = "Current proxy";
+"accountPage.currentProxy" = "Proxy actual";
 "accountPage.enableNotifications" = "Activează notificările";
 "accountPage.proxyDisabledAlertTitle" = "Serverul Proxy e dezactivat";
 "accountPage.proxyDisabledAlertBody" = "Activează serverul Proxy, ca să primești notificările";

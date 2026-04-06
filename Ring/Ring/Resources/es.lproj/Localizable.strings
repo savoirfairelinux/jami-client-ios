@@ -158,7 +158,10 @@
 "conversation.addToContactsLabel" = "¿Añadir a contactos?";
 "conversation.notContactLabel" = "%@ no está en la lista de contactos";
 "conversation.messagePlaceholder" = "Escribir a";
-"conversation.errorSavingImage" = "Se produjo un error al guardar la imagen en la galería.";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ te envió una invitación de conversación.";
 "conversation.incomingRequest" = "te envié una invitación de conversación.";
 "conversation.requestMessage" = "Hola,\n¿Quieres unirte a la conversación?";
@@ -336,7 +339,7 @@
 "accountPage.proxyListURL" = "URL de la lista de proxy";
 "accountPage.proxyExplanation" = "Las notificaciones se enrutan a través de un proxy. Se puede usar el proxy predeterminado, ingresar una dirección proxy personalizada o proporcionar una URL con una lista de servidores proxy.";
 "accountPage.proxyHeader" = "Proxy";
-"accountPage.currentProxy" = "Current proxy";
+"accountPage.currentProxy" = "Proxy actual";
 "accountPage.enableNotifications" = "Habilitar notificaciones";
 "accountPage.proxyDisabledAlertTitle" = "Servidor proxy deshabilitado";
 "accountPage.proxyDisabledAlertBody" = "Habilite la proxy para recibir notificaciones.";

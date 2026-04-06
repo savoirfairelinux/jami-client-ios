@@ -158,7 +158,10 @@
 "conversation.addToContactsLabel" = "新增到聯絡人？";
 "conversation.notContactLabel" = "";
 "conversation.messagePlaceholder" = "";
-"conversation.errorSavingImage" = "";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "";
 "conversation.incomingRequest" = "";
 "conversation.requestMessage" = "您好，您想加入通話嗎？";
@@ -336,7 +339,7 @@
 "accountPage.proxyListURL" = "代理伺服器列表 URL";
 "accountPage.proxyExplanation" = "通知須透過代理伺服器發送。你可以使用預設的代理伺服器，或者輸入自訂的代理伺服器地址，又或者輸入代理伺服器列表的URL。";
 "accountPage.proxyHeader" = "代理伺服器";
-"accountPage.currentProxy" = "Current proxy";
+"accountPage.currentProxy" = "当前使用的代理";
 "accountPage.enableNotifications" = "啟用通知";
 "accountPage.proxyDisabledAlertTitle" = "代理伺服器已停用";
 "accountPage.proxyDisabledAlertBody" = "為了收到通知，請啟用代理伺服器";

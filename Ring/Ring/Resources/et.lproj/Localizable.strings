@@ -158,7 +158,10 @@
 "conversation.addToContactsLabel" = "Kas lisame kontaktina?";
 "conversation.notContactLabel" = "%@ pole sinu kontaktide loendis";
 "conversation.messagePlaceholder" = "Kirjuta kasutajale";
-"conversation.errorSavingImage" = "Pildi salvestamisel galeriisse tekkis viga.";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ saatis sulle vestluskutse.";
 "conversation.incomingRequest" = "saatis sulle vestluskutse.";
 "conversation.requestMessage" = "Hei,\nKas sa sooviksid liituda vestlusega?";
@@ -336,7 +339,7 @@
 "accountPage.proxyListURL" = "Proksiserverite loendi võrguaadress";
 "accountPage.proxyExplanation" = "Teavitused saabuvad läbi proksiserveri. Sa võid kasutada vaikimisi proksiserverit, sisestada sulle meeldiva proksiserveri aadressi või lisada võrguaadressi, kus on proksiserverite loend.";
 "accountPage.proxyHeader" = "Proksiserver";
-"accountPage.currentProxy" = "Current proxy";
+"accountPage.currentProxy" = "Praegune proksi";
 "accountPage.enableNotifications" = "Võta teavitused kasutusele";
 "accountPage.proxyDisabledAlertTitle" = "Proksiserver pole kasutusel";
 "accountPage.proxyDisabledAlertBody" = "Teavituste saamiseks palun võta proksiserver kasutusele";

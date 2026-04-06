@@ -158,7 +158,10 @@
 "conversation.addToContactsLabel" = "Lisätäänkö yhteystietoihin?";
 "conversation.notContactLabel" = "%@ ei ole yhteystiedoissa";
 "conversation.messagePlaceholder" = "Kirjoita...";
-"conversation.errorSavingImage" = "Virhe tallennettaessa kuvaa galleriaan.";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ lähetti sinulle keskustelukutsun.";
 "conversation.incomingRequest" = "lähetti sinulle keskustelukutsun.";
 "conversation.requestMessage" = "Hei,\nHaluatko liittyä keskusteluun?";
@@ -329,17 +332,17 @@
 "accountPage.notificationsHeader" = "Ilmoitukset";
 "accountPage.blockedContacts" = "Estetyt henkilöt";
 "accountPage.unblockContact" = "Poista esto";
-"accountPage.proxyAddressAlert" = "Anna välityspalvelimen osoite";
-"accountPage.noProxyExplanationLabel" = "Ei voi saada ilmoituksia, jos välityspalvelin on poistettu käytöstä.";
+"accountPage.proxyAddressAlert" = "Anna proxy osoite";
+"accountPage.noProxyExplanationLabel" = "Ei voi saada ilmoituksia, jos proxy on poistettu käytöstä.";
 "accountPage.proxyPaceholder" = "Proxy osoite";
-"accountPage.useProxyList" = "Käytä välityspalvelinlistaa";
-"accountPage.proxyListURL" = "Välityspalvelinlistan URL";
-"accountPage.proxyExplanation" = "Ilmoitukset reititetään välityspalvelimen kautta. Voit joko käyttää oletusvälityspalvelinta, kirjoittaa mukautetun osoitteen tai antaa URL-osoitteen, jossa on luettelo välityspalvelimista.";
-"accountPage.proxyHeader" = "Välityspalvelin";
-"accountPage.currentProxy" = "Current proxy";
+"accountPage.useProxyList" = "Käytä proxy-palvelinlistaa";
+"accountPage.proxyListURL" = "Proxy-palvelinlistan URL";
+"accountPage.proxyExplanation" = "Ilmoitukset reititetään proxypalvelimen kautta. Voit joko käyttää oletuspalvelinta, kirjoittaa oman osoitteen tai antaa URL-osoitteen, jossa on lista palvelimista.";
+"accountPage.proxyHeader" = "Proxy";
+"accountPage.currentProxy" = "Nykyinen proxy-palvelin";
 "accountPage.enableNotifications" = "Ilmoitukset käyttöön";
-"accountPage.proxyDisabledAlertTitle" = "Välityspalvelin poistettu käytöstä";
-"accountPage.proxyDisabledAlertBody" = "Jotta voit vastaanottaa ilmoituksia, käytä välityspalvelinta";
+"accountPage.proxyDisabledAlertTitle" = "Proxy palvelin poistettu käytöstä";
+"accountPage.proxyDisabledAlertBody" = "Jotta voit vastaanottaa ilmoituksia, käytä proxy palvelinta";
 "accountPage.removeDeviceTitle" = "Poista laite";
 "accountPage.revokeDeviceMessage" = "Haluatko poistaa tämän laitteen? Toimintoa ei voi kumota.";
 "accountPage.revokeDeviceButton" = "Peruuta";
@@ -449,7 +452,7 @@
 // Account
 "account.sipServer" = "Palvelin";
 "account.port" = "Portti";
-"account.proxyServer" = "Välityspalvelin";
+"account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Määritä SIP-tili";
 "account.sipAccount" = "SIP-tili";
 "account.configure" = "Määritä";

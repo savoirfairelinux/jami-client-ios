@@ -158,7 +158,10 @@
 "conversation.addToContactsLabel" = "Adicionar aos contatos?";
 "conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Escrever para";
-"conversation.errorSavingImage" = "Ocorreu um erro ao guardar a imagem na galeria.";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ enviou-lhe um convite para uma conversa.";
 "conversation.incomingRequest" = "enviou-lhe um convite para uma conversa.";
 "conversation.requestMessage" = "Olá,\ngostaria de participar da conversa?";

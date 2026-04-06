@@ -113,10 +113,10 @@
 "swarm.Leave" = "离开";
 "swarm.newGroup" = "建立新群組";
 "swarm.namePlaceholder" = "群名";
-"swarm.explanationText" = "Members can be invited at any time after the group has been created.";
-"swarm.customizeProfile" = "Customize group profile";
-"swarm.changePicture" = "Change group picture";
-"swarm.customize" = "Customize group";
+"swarm.explanationText" = "成员可在建群后任何时间被邀请入群";
+"swarm.customizeProfile" = "自定义群概况";
+"swarm.changePicture" = "更改群图片";
+"swarm.customize" = "自定义群组";
 "swarm.selectContacts" = "选择联系人";
 
 // Contact Picker
@@ -126,22 +126,22 @@
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公共目录";
-"smartlist.jamsResults" = "Search result";
-"smartlist.jamsResults" = "Search result";
+"smartlist.jamsResults" = "搜索结果";
+"smartlist.jamsResults" = "搜索结果";
 "smartlist.conversations" = "對話";
-"smartlist.noConversationsFound" = "No conversations match the search.";
-"smartlist.newContact" = "New contact";
-"smartlist.newGroup" = "New group";
+"smartlist.noConversationsFound" = "无匹配的对话。";
+"smartlist.newContact" = "新联系人";
+"smartlist.newGroup" = "新群组";
 "smartlist.accounts" = "账户";
 "smartlist.invitationReceived" = "邀请已发送";
 "smartlist.noResults" = "无结果";
 "smartlist.noConversation" = "沒有對話";
-"smartlist.searchBarPlaceholder" = "Enter name…";
+"smartlist.searchBarPlaceholder" = "输入名字…";
 "smartlist.searchBar" = "搜尋";
 "smartlist.noNetworkConnectivity" = "无网络连接";
-"smartlist.cellularAccess" = "Ensure cellular access is granted in the settings.";
+"smartlist.cellularAccess" = "请确保蜂窝移动网络权限已开启。";
 "smartlist.accountsTitle" = "账户";
-"smartlist.addAccountButton" = "+ Add account";
+"smartlist.addAccountButton" = "+ 添加账户";
 "smartlist.noNumber" = "选定的连接没有任何数字";
 "smartlist.selectOneNumber" = "選取其中一個號碼";
 "smartlist.invitations" = "邀請";
@@ -150,24 +150,27 @@
 "smartlist.accounts" = "账户";
 "smartlist.disableDonation" = "现在不要";
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
-"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.inSynchronization" = "对话正同步";
 "smartlist.newMessage" = "新消息";
 
 // Conversation
-"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsButton" = "添加到联系人";
 "conversation.addToContactsLabel" = "添加至通讯录吗？";
-"conversation.notContactLabel" = "%@ is not in the contact list";
-"conversation.messagePlaceholder" = "Write to";
-"conversation.errorSavingImage" = "An error occurred while saving the image to the gallery.";
-"conversation.receivedRequest" = "%@ sent you a conversation invitation.";
-"conversation.incomingRequest" = "sent you a conversation invitation.";
+"conversation.notContactLabel" = "%@ 不在联系人列表中";
+"conversation.messagePlaceholder" = "写消息至";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
+"conversation.receivedRequest" = "1%@ 向您发送了对话邀请。";
+"conversation.incomingRequest" = "向您发送了对话邀请。";
 "conversation.requestMessage" = "您好，您想加入通话吗？";
-"conversation.sendRequest" = "Send them an invitation to be able converse.";
-"conversation.sendRequestTitle" = "Send conversation invitation";
-"conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
-"conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
+"conversation.sendRequest" = "给他们发送邀请，以便能够进行对话。";
+"conversation.sendRequestTitle" = "发送对话邀请";
+"conversation.synchronizationTitle" = "您已接受邀请。";
+"conversation.synchronizationMessage" = "正等待 1%@ 连接以同步对话…";
 "conversation.inReplyTo" = "在回复中";
-"conversation.repliedTo" = "%@ replied to %@";
+"conversation.repliedTo" = "%@ 回复给 %@";
 "conversation.yourself" = "您";
 "conversation.edited" = "已编辑";
 "conversation.deletedMessage" = "%@刪除了一條消息";
@@ -175,10 +178,10 @@
 // An ellipsis is not directly shown in the following typing indicator strings.
 // An ellipsis animation is shown when messages are being typed in the view.
 // An ellipsis "…" is visually displayed as ".", "..", or "..." using a timer.
-"conversation.typingIndicatorOneUser" = "%@ is typing";
-"conversation.typingIndicatorTwoUsers" = "%1@ and %2@ are typing";
-"conversation.typingIndicatorOtherUsers" = "%1@, %2@ and %3@ other are typing";
-"conversation.typingIndicatorOthersUsers" = "%1@, %2@ and %3@ others are typing";
+"conversation.typingIndicatorOneUser" = "%@ 正在输入";
+"conversation.typingIndicatorTwoUsers" = "%1@ 与 %2@ 正在输入";
+"conversation.typingIndicatorOtherUsers" = "%1@、%2@ 与 %3@ 正在输入";
+"conversation.typingIndicatorOthersUsers" = "%1@、%2@ 与其他%3@人正在输入…";
 "conversation.lastMessageDeleted" = "（已删除邮件）";
 
 // Invitations
@@ -336,7 +339,7 @@
 "accountPage.proxyListURL" = "代理服务器列表 URL";
 "accountPage.proxyExplanation" = "通知須透過代理伺服器發送。你可以使用預設的代理伺服器，或者輸入自定義的代理伺服器地址，又或者輸入代理伺服器列表的URL。";
 "accountPage.proxyHeader" = "代理服務器";
-"accountPage.currentProxy" = "Current proxy";
+"accountPage.currentProxy" = "当前使用的代理";
 "accountPage.enableNotifications" = "启用通知";
 "accountPage.proxyDisabledAlertTitle" = "代理服务器已禁用";
 "accountPage.proxyDisabledAlertBody" = "为了接受通知，请开启代理";

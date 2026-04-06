@@ -158,7 +158,10 @@
 "conversation.addToContactsLabel" = "Zu Kontakten hinzufügen?";
 "conversation.notContactLabel" = "%@ ist nicht in der Kontaktliste";
 "conversation.messagePlaceholder" = "Write to";
-"conversation.errorSavingImage" = "Beim Speichern des Bildes in der Galerie ist ein Fehler aufgetreten.";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@hat Ihnen eine Unterhaltungseinladung geschickt.";
 "conversation.incomingRequest" = "hat Ihnen eine Unterhaltungseinladung gesendet.";
 "conversation.requestMessage" = "Hallo,\nMöchten Sie an der Unterhaltung teilnehmen?";
@@ -336,7 +339,7 @@
 "accountPage.proxyListURL" = "Proxy-Listen-URL";
 "accountPage.proxyExplanation" = "Benachrichtigungen werden über einen Proxy weitergeleitet. Sie können entweder den Standard-Proxy verwenden, eine benutzerdefinierte Proxy-Adresse eingeben oder eine URL mit einer Liste von Proxys angeben.";
 "accountPage.proxyHeader" = "Proxy";
-"accountPage.currentProxy" = "Current proxy";
+"accountPage.currentProxy" = "Aktueller Proxy";
 "accountPage.enableNotifications" = "Benachrichtigungen einschalten";
 "accountPage.proxyDisabledAlertTitle" = "Proxy-Server deaktiviert";
 "accountPage.proxyDisabledAlertBody" = "Um Benachrichtigungen zu erhalten, aktivieren Sie bitte den Proxy.";
@@ -496,7 +499,7 @@
 "contactPage.leaveConversation" = "Unterhaltung verlassen";
 
 // DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Wird initialisiert …";
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Ausstehend…";
 "dataTransfer.readableStatusOngoing" = "Transferring";

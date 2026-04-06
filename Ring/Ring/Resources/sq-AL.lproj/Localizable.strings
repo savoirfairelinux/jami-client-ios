@@ -158,7 +158,10 @@
 "conversation.addToContactsLabel" = "Të shtohet te kontaktet?";
 "conversation.notContactLabel" = "%@ s’gjendet te lista e kontakteve";
 "conversation.messagePlaceholder" = "Shkruajini";
-"conversation.errorSavingImage" = "Ndodhi një gabim teksa ruhej figura te galeria.";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ ju dërgoi një ftesë bisede.";
 "conversation.incomingRequest" = "ju dërgoi një ftesë për bisedë.";
 "conversation.requestMessage" = "Tungjatjeta,\nDoni  të merrni pjesë te biseda?";
@@ -336,7 +339,7 @@
 "accountPage.proxyListURL" = "URL liste ndërmjetësish";
 "accountPage.proxyExplanation" = "Njoftimet kalohen përmes një ndërmjetësi. Mund të përdorni ose ndërmjetësin parazgjedhje, të jepni një adresë ndërmjetësi vetjak, ose një URL me një listë ndërmjetësish.";
 "accountPage.proxyHeader" = "Ndërmjetës";
-"accountPage.currentProxy" = "Current proxy";
+"accountPage.currentProxy" = "Ndërmjetës i tanishëm";
 "accountPage.enableNotifications" = "Aktivizo njoftime";
 "accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
 "accountPage.proxyDisabledAlertBody" = "Që të mund të merrni njoftime, ju lutemi, aktivizoni ndërmjetësin";

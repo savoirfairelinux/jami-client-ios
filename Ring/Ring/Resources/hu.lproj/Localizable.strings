@@ -158,7 +158,10 @@
 "conversation.addToContactsLabel" = "Hozzáadás a kapcsolattartók közé?";
 "conversation.notContactLabel" = "%@ nem szerepel a kapcsolattartólistáján";
 "conversation.messagePlaceholder" = "Írás a következő(k)nek:";
-"conversation.errorSavingImage" = "Hiba történt a kép gyűjteménybe történő mentése közben.";
+"conversation.imageSaved" = "Saved";
+"conversation.errorSavingImage" = "Could not save image";
+"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
+"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
 "conversation.receivedRequest" = "%@ beszélgetésre szóló meghívót küldött Önnek.";
 "conversation.incomingRequest" = "beszélgetésre szóló meghívót küldött Önnek.";
 "conversation.requestMessage" = "Üdvözlöm!\nSzeretne csatlakozni a beszélgetésbe?";
