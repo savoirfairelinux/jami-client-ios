@@ -105,7 +105,7 @@ struct MessageRowView: View {
                     Spacer()
                     MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
                     if model.showReciveIndicator {
-                        Image("message_sent_indicator")
+                        Image("messageSentIndicator")
                             .resizable()
                             .frame(width: 13, height: 13)
                     } else if model.showSentIndicator {

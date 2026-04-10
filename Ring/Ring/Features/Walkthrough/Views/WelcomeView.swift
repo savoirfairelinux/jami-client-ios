@@ -211,7 +211,7 @@ struct PortraitView: View {
 struct HeaderView: View {
     var body: some View {
         VStack {
-            Image("jami_gnupackage")
+            Image("jamiGnupackage")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 80)
@@ -344,7 +344,7 @@ struct AboutButton: View {
 extension View {
     func applyJamiBackground() -> some View {
         self.background(
-            Image("background_login")
+            Image("backgroundLogin")
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()

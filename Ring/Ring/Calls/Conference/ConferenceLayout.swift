@@ -103,7 +103,7 @@ class ConferenceLayout: UIView {
             return
         }
         let raisedHandImage = UIButton(frame: CGRect(x: origX + width - self.controlSize, y: origY + height - self.controlSize, width: self.controlSize, height: self.controlSize))
-        let image = UIImage(asset: Asset.raiseHand)?.withRenderingMode(.alwaysTemplate)
+        let image = UIImage(systemName: "hand.raised.fill")?.withRenderingMode(.alwaysTemplate)
         raisedHandImage.setImage(image, for: .normal)
         raisedHandImage.tintColor = UIColor.white
         raisedHandImage.backgroundColor = UIColor.conferenceRaiseHand

@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login" translatesAutoresizingMaskIntoConstraints="NO" id="5w4-lf-PEm">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundLogin" translatesAutoresizingMaskIntoConstraints="NO" id="5w4-lf-PEm">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jamiIcon" translatesAutoresizingMaskIntoConstraints="NO" id="kP1-oe-ZEx">
@@ -47,7 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background_login" width="786" height="1704"/>
+        <image name="backgroundLogin" width="786" height="1704"/>
         <image name="jamiIcon" width="66.666664123535156" height="63.333332061767578"/>
     </resources>
 </document>
