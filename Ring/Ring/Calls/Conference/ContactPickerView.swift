@@ -56,7 +56,6 @@ struct ContactPickerView: View {
                     Button(L10n.Global.cancel) {
                         presentationMode.wrappedValue.dismiss()
                     }
-                    .foregroundColor(Color(UIColor.label))
                 }
                 ToolbarItem(placement: .primaryAction) {
                     if viewModel.type == .forConversation {
@@ -64,7 +63,6 @@ struct ContactPickerView: View {
                             viewModel.confirmConversationSelection()
                             presentationMode.wrappedValue.dismiss()
                         }
-                        .foregroundColor(.jamiColor)
                         .font(.body.weight(.semibold))
                         .opacity(viewModel.selectedConversationIds.isEmpty ? 0.35 : 1.0)
                         .disabled(viewModel.selectedConversationIds.isEmpty)
@@ -73,6 +71,7 @@ struct ContactPickerView: View {
             }
         }
         .navigationViewStyle(.stack)
+        .accentColor(.jamiColor)
         .onDisappear { onDismissed?() }
     }
 

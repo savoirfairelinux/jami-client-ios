@@ -25,7 +25,7 @@ class AboutViewController: UIViewController, StoryboardBased {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = L10n.Smartlist.aboutJami
-        self.configureNavigationBar(isTransparent: true)
+        self.configureNavigationBar()
         let swiftUIView = AboutSwiftUIView()
         let contentView = UIHostingController(rootView: swiftUIView)
         addChild(contentView)

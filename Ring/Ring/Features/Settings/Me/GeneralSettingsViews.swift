@@ -41,10 +41,10 @@ struct TextFieldWithDoneButton: UIViewRepresentable {
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         let doneButton = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
-        doneButton.tintColor = UIColor.jamiButtonDark
+        doneButton.tintColor = UIColor.jami
 
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
-        cancelButton.tintColor = UIColor.jamiButtonDark
+        cancelButton.tintColor = UIColor.jami
 
         doneButton.primaryAction = UIAction { [weak coordinator = context.coordinator] _ in
             coordinator?.donePressed()

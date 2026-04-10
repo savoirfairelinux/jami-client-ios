@@ -123,9 +123,9 @@ struct QRCodePresenter: View {
                     isPresented = false
                 }) {
                     Text(L10n.Global.cancel)
-                        .foregroundColor(.jamiColor)
                 })
         }
+        .accentColor(.jamiColor)
         .onTapGesture {
             isPresented = false
         }

@@ -98,7 +98,6 @@ struct EditProfileView: View {
                     isPresented = false
                 }, label: {
                     Text(L10n.Global.cancel)
-                        .foregroundColor(Color(UIColor.label))
                 }),
                 trailing: Button(action: {
                     model.updateProfile()
@@ -106,9 +105,9 @@ struct EditProfileView: View {
                     isPresented = false
                 }, label: {
                     Text(L10n.Global.save)
-                        .foregroundColor(.jamiColor)
                 })
             )
         }
+        .accentColor(.jamiColor)
     }
 }

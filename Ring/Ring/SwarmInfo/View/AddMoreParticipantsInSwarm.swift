@@ -75,10 +75,10 @@ struct AddMoreParticipantsInSwarm: View {
                         Button(L10n.Global.cancel) {
                             showAddMember = false
                         }
-                        .foregroundColor(.jamiColor)
                     }
                 }
             }
+            .accentColor(.jamiColor)
         })
     }
 

@@ -315,9 +315,9 @@ struct AccessibleCustomColorPicker: View {
                 isPresented = false
             }, label: {
                 Text(L10n.Global.cancel)
-                    .foregroundColor(.jamiColor)
             }))
         }
+        .accentColor(.jamiColor)
         .optionalMediumPresentationDetents()
         .accessibilityAutoFocusOnAppear()
     }
