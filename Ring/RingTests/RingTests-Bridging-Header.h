@@ -28,3 +28,4 @@
 #import "FixtureFailInitDRingAdapter.h"
 #import "FixtureFailStartDRingAdapter.h"
 #import "ObjCMockCallsAdapter.h"
+#import "ObjCMockVideoAdapter.h"
