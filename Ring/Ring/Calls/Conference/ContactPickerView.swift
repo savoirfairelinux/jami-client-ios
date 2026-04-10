@@ -56,7 +56,7 @@ struct ContactPickerView: View {
                     Button(L10n.Global.cancel) {
                         presentationMode.wrappedValue.dismiss()
                     }
-                    .foregroundColor(Color(UIColor.label))
+                    .foregroundColor(.jamiColor)
                 }
                 ToolbarItem(placement: .primaryAction) {
                     if viewModel.type == .forConversation {

@@ -266,7 +266,7 @@ struct BackButton: View {
                 Image(systemName: "chevron.left")
                 Text(L10n.Actions.backAction)
             }
-            .foregroundColor(Color(UIColor.jamiButtonDark))
+            .foregroundColor(.jamiColor)
         }
     }
 }
