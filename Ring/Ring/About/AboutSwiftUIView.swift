@@ -105,7 +105,7 @@ struct AboutSwiftUIView: View {
                     )
                 }
 
-                Image("jami_gnupackage")
+                Image("jamiGnupackage")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 30)

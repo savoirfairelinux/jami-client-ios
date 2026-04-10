@@ -41,7 +41,7 @@ struct ParticipantListCell: View {
                     .truncationMode(.tail)
                 Spacer()
                 if isSelected {
-                    Image("message_sent_indicator")
+                    Image("messageSentIndicator")
                         .resizable()
                         .background(Circle().fill(Color.clear))
                         .frame(width: 15, height: 15)
@@ -87,7 +87,6 @@ struct SelectedParticipantItem: View {
 struct SwarmCreationUI: View {
     @ObservedObject var list: SwarmCreationUIModel
     @SwiftUI.State private var showingType: PhotoSheetType?
-    @SwiftUI.State private var swarmImage: UIImage = UIImage(asset: Asset.editSwarmImage)!
     @SwiftUI.State private var isPresentingProfile = false
 
     var body: some View {
