@@ -93,6 +93,7 @@ extension UIColor {
     static let jamiSecondary = UIColor(hex: 0x1F4971, alpha: 1.0)
     static let jamiButtonLight = UIColor(named: "jamiButtonLight")!
     static let jamiButtonDark = UIColor(named: "jamiButtonDark")!
+    static let jami = UIColor(named: "jami")!
     static let jamiButtonWithOpacity = UIColor(named: "jamiButtonWithOpacity")!
     static let jamiFormBackgroundColor = UIColor(named: "jamiFormBackgroundColor")!
     static let jamiMsgCellSent = UIColor(hex: 0x367BC1, alpha: 1.0)

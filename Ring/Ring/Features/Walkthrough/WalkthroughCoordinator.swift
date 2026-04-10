@@ -76,7 +76,7 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
                 }
             })
             .disposed(by: self.disposeBag)
-        self.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
+        self.navigationController.navigationBar.tintColor = UIColor.jami
     }
 
     func showAccountCreation(createAction: @escaping (String, String, String, UIImage?) -> Void) {

@@ -157,7 +157,7 @@ extension UIViewController {
     }
 
     func configureNavigationBar(isTransparent: Bool = false, backgroundColor: UIColor = .systemBackground) {
-        navigationController?.navigationBar.tintColor = UIColor.jamiButtonDark
+        navigationController?.navigationBar.tintColor = UIColor.jami
         navigationController?.navigationBar.prefersLargeTitles = false
     }
 
