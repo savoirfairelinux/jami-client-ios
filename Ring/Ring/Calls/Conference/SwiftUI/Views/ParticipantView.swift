@@ -33,13 +33,14 @@ struct DisplayLayerView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {
-        var frame = displayLayer.frame
         let size = CGSize(width: layerWidth, height: layerHeight)
-        frame.origin = CGPoint.zero
-        if frame.size != size {
-            frame.size = size
+        let newFrame = CGRect(origin: .zero, size: size)
+        if displayLayer.frame != newFrame {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            displayLayer.frame = newFrame
+            CATransaction.commit()
         }
-        displayLayer.frame = frame
     }
 }
 

@@ -206,30 +206,27 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                         self.videoRunning.accept(false)
                         return
                     }
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else { return }
-                        let transform = CGAffineTransform.rotation(degrees: info.rotation)
-                        if self.currentTransform != transform {
-                            self.currentTransform = transform
-                            self.gridDisplayLayer.setAffineTransform(transform)
-                            self.mainDisplayLayer.setAffineTransform(transform)
-                            if let container = self.mainDisplayLayer.superlayer?.delegate as? UIView, container.bounds != self.mainDisplayLayer.frame {
-                                CATransaction.begin()
-                                CATransaction.setDisableActions(true)
-                                self.mainDisplayLayer.frame = container.bounds
-                                CATransaction.commit()
-                            }
+                    let transform = CGAffineTransform.rotation(degrees: info.rotation)
+                    if self.currentTransform != transform {
+                        self.currentTransform = transform
+                        CATransaction.begin()
+                        CATransaction.setDisableActions(true)
+                        self.gridDisplayLayer.setAffineTransform(transform)
+                        self.mainDisplayLayer.setAffineTransform(transform)
+                        if let container = self.mainDisplayLayer.superlayer?.delegate as? UIView, container.bounds != self.mainDisplayLayer.frame {
+                            self.mainDisplayLayer.frame = container.bounds
                         }
-                        if self.mainDisplayLayer.status == .failed {
-                            self.mainDisplayLayer.flush()
-                        }
-                        if self.gridDisplayLayer.status == .failed {
-                            self.gridDisplayLayer.flush()
-                        }
-                        self.mainDisplayLayer.enqueue(image)
-                        self.gridDisplayLayer.enqueue(image)
-                        self.videoRunning.accept(true)
+                        CATransaction.commit()
                     }
+                    if self.mainDisplayLayer.status == .failed {
+                        self.mainDisplayLayer.flush()
+                    }
+                    if self.gridDisplayLayer.status == .failed {
+                        self.gridDisplayLayer.flush()
+                    }
+                    self.mainDisplayLayer.enqueue(image)
+                    self.gridDisplayLayer.enqueue(image)
+                    self.videoRunning.accept(true)
                 })
                 .disposed(by: self.videoDisposeBag)
         }
