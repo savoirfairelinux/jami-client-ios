@@ -350,7 +350,7 @@ extension UIImage {
 
     class func createContactAvatar(username: String, size: CGSize) -> UIImage {
         let config = UIImage.SymbolConfiguration(scale: .large)
-        let image = UIImage(systemName: "person", withConfiguration: config)!
+        let image = UIImage(systemName: "person.fill", withConfiguration: config)!
         let scanner = Scanner(string: username.toMD5HexString().prefixString())
         var index: UInt64 = 0
         if scanner.scanHexInt64(&index) {
@@ -367,7 +367,7 @@ extension UIImage {
     }
 
     class func createSwarmAvatar(convId: String, size: CGSize) -> UIImage {
-        let image = UIImage(systemName: "person.2")!
+        let image = UIImage(systemName: "person.2.fill")!
         let scanner = Scanner(string: convId.toMD5HexString().prefixString())
         var index: UInt64 = 0
         if scanner.scanHexInt64(&index) {
@@ -375,25 +375,6 @@ extension UIImage {
             return image.fillBackgroundColor(color: fbaBGColor, inset: 10)
         }
         return image
-    }
-
-    class func createGroupAvatar(username: String, size: CGSize) -> UIImage {
-        let scanner = Scanner(string: username.toMD5HexString().prefixString())
-        var index: UInt64 = 0
-        if scanner.scanHexInt64(&index) {
-            let fbaBGColor = avatarColors[Int(index)]
-            if !username.isSHA1() && !username.isEmpty {
-                if let avatar = UIImage().drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: size) {
-                    return avatar
-                }
-            } else {
-                if let image = UIImage(asset: Asset.fallbackAvatar)?.withColor(.white),
-                   let masked = image.maskWithColor(color: fbaBGColor, size: size) {
-                    return masked
-                }
-            }
-        }
-        return UIImage()
     }
 
     func withColor(_ color: UIColor) -> UIImage? {
@@ -406,21 +387,6 @@ extension UIImage {
         let tintedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return tintedImage!
-    }
-
-    func maskWithColor(color: UIColor, size: CGSize) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, true, scale)
-
-        guard let ctx = UIGraphicsGetCurrentContext(), let image = cgImage else { return self }
-        defer { UIGraphicsEndImageContext() }
-
-        let rect = CGRect(origin: .zero, size: size)
-        ctx.setFillColor(color.cgColor)
-        ctx.fill(rect)
-        ctx.concatenate(CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: size.height))
-        ctx.draw(image, in: rect)
-
-        return UIGraphicsGetImageFromCurrentImageContext() ?? self
     }
 
     class func makeSnapshot(from view: UIView) -> UIImage? {

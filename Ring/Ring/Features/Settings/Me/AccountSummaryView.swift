@@ -105,7 +105,7 @@ struct AccountSummaryView: View {
         }),
         trailing:
             NavigationLink(destination: SettingsSummaryView(model: model)) {
-                Image(systemName: "gearshape.fill")
+                Image(systemName: "gearshape")
                     .foregroundColor(.jamiColor)
                     .accessibilityLabel(L10n.Accessibility.accountSummaryEditSettingsButton)
             })

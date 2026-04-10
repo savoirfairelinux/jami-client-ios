@@ -141,9 +141,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                 let model = dataSource.sectionModels
                 if model[indexPath.section].model == self.cellIdentifier {
                     let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier)
-                    let image = UIImage(asset: conversationItem.image)
-                    let tintedImage = image?.withRenderingMode(.alwaysTemplate)
-                    cell?.imageView?.image = tintedImage
+                    cell?.imageView?.image = conversationItem.image.withRenderingMode(.alwaysTemplate)
                     cell?.imageView?.tintColor = UIColor.jamiSecondary
                     cell?.textLabel?.text = conversationItem.title
                     return cell!

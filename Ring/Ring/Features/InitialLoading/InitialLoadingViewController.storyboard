@@ -19,10 +19,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login" translatesAutoresizingMaskIntoConstraints="NO" id="2rh-pr-8T7">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundLogin" translatesAutoresizingMaskIntoConstraints="NO" id="2rh-pr-8T7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jami_gnupackage" translatesAutoresizingMaskIntoConstraints="NO" id="noP-kw-7tM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jamiGnupackage" translatesAutoresizingMaskIntoConstraints="NO" id="noP-kw-7tM">
                                 <rect key="frame" x="-641.66666666666663" y="281" width="1658.3333333333333" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -46,7 +46,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background_login" width="786" height="1704"/>
-        <image name="jami_gnupackage" width="1658.4000244140625" height="552.79998779296875"/>
+        <image name="backgroundLogin" width="786" height="1704"/>
+        <image name="jamiGnupackage" width="1658.4000244140625" height="552.79998779296875"/>
     </resources>
 </document>
