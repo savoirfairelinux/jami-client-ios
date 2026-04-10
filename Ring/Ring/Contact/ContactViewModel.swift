@@ -26,7 +26,7 @@ import RxDataSources
 
 struct ContactActions {
     let title: String
-    let image: ImageAsset
+    let image: UIImage
 }
 
 class ContactViewModel: ViewModel, Stateable {
@@ -45,13 +45,13 @@ class ContactViewModel: ViewModel, Stateable {
         let jamiSettings =
             [SectionModel(model: "ProfileInfoCell",
                           items:
-                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
-                              ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
-                              ContactActions(title: L10n.ContactPage.send, image: Asset.conversationIcon)])]
+                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: UIImage(systemName: "phone")!),
+                              ContactActions(title: L10n.ContactPage.startVideoCall, image: UIImage(systemName: "video")!),
+                              ContactActions(title: L10n.ContactPage.send, image: UIImage(systemName: "message")!)])]
         let sipSettings =
             [SectionModel(model: "ProfileInfoCell",
                           items:
-                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton)])]
+                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: UIImage(systemName: "phone")!)])]
         guard let account = self.accountService.currentAccount,
               account.type == AccountType.ring else {
             return Observable<[SectionModel<String, ContactActions>]>
@@ -75,17 +75,17 @@ class ContactViewModel: ViewModel, Stateable {
                     self.tableSection = Observable<[SectionModel<String, ContactActions>]>
                         .just([SectionModel(model: "ProfileInfoCell",
                                             items:
-                                                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
-                                                  ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
-                                                  ContactActions(title: L10n.ContactPage.send, image: Asset.conversationIcon),
-                                                  ContactActions(title: L10n.ContactPage.leaveConversation, image: Asset.icConversationLeave),
-                                                  ContactActions(title: L10n.Global.blockContact, image: Asset.blockIcon)])])
+                                                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: UIImage(systemName: "phone")!),
+                                                  ContactActions(title: L10n.ContactPage.startVideoCall, image: UIImage(systemName: "video")!),
+                                                  ContactActions(title: L10n.ContactPage.send, image: UIImage(systemName: "message")!),
+                                                  ContactActions(title: L10n.ContactPage.leaveConversation, image: UIImage(systemName: "rectangle.portrait.and.arrow.right")!),
+                                                  ContactActions(title: L10n.Global.blockContact, image: UIImage(systemName: "nosign")!)])])
                 } else {
                     self.tableSection = Observable<[SectionModel<String, ContactActions>]>
                         .just([SectionModel(model: "ProfileInfoCell",
                                             items:
-                                                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
-                                                  ContactActions(title: L10n.ContactPage.leaveConversation, image: Asset.icConversationLeave)])])
+                                                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: UIImage(systemName: "phone")!),
+                                                  ContactActions(title: L10n.ContactPage.leaveConversation, image: UIImage(systemName: "rectangle.portrait.and.arrow.right")!)])])
                 }
             } else {
                 self.userName.accept(jamiId)

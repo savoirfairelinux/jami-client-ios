@@ -99,11 +99,11 @@ enum CallAction: State {
         case .toggleVideo:
             return ButtonInfo(background: .clear, stroke: .white, name: "video", accessibilityLabelValue: L10n.Accessibility.Calls.Default.toggleVideo, action: self)
         case .pauseCall:
-            return ButtonInfo(background: .clear, stroke: .white, name: "pause.fill", accessibilityLabelValue: L10n.Accessibility.Calls.Default.pauseCall, action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "pause", accessibilityLabelValue: L10n.Accessibility.Calls.Default.pauseCall, action: self)
         case .endCall:
             return ButtonInfo(background: .red, stroke: .red, name: "phone.down", accessibilityLabelValue: L10n.Accessibility.Calls.Default.endCall, action: self)
         case .addParticipant:
-            return ButtonInfo(background: .clear, stroke: .white, name: "person.fill.badge.plus", accessibilityLabelValue: L10n.Accessibility.Calls.Default.addParticipant, action: self)
+            return ButtonInfo(background: .clear, stroke: .white, name: "person.badge.plus", accessibilityLabelValue: L10n.Accessibility.Calls.Default.addParticipant, action: self)
         case .switchCamera:
             return ButtonInfo(background: .clear, stroke: .white, name: "arrow.triangle.2.circlepath.camera", accessibilityLabelValue: L10n.Accessibility.Calls.Default.switchCamera, action: self)
         case .toggleSpeaker:
@@ -146,7 +146,7 @@ enum CallAction: State {
         case .addParticipant:
             return ButtonInfo(background: .clear,
                               stroke: .white,
-                              name: "person.fill.badge.plus",
+                              name: "person.badge.plus",
                               accessibilityLabelValue: L10n.Accessibility.Calls.Alter.addParticipant,
                               action: self)
         case .switchCamera:

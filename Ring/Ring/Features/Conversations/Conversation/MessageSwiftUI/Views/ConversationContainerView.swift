@@ -105,7 +105,7 @@ struct ConversationContainerView: View {
 
     private var audioCallButton: some View {
         Button(action: viewModel.startAudioCall) {
-            Asset.callButton.swiftUIImage
+            Image(systemName: "phone")
         }
         .foregroundColor(Color(UIColor.jamiButtonDark))
         .accessibilityLabel(L10n.Accessibility.conversationStartVoiceCall(viewModel.name))
@@ -113,7 +113,7 @@ struct ConversationContainerView: View {
 
     private var videoCallButton: some View {
         Button(action: viewModel.startCall) {
-            Asset.videoRunning.swiftUIImage
+            Image(systemName: "video")
         }
         .foregroundColor(Color(UIColor.jamiButtonDark))
         .accessibilityLabel(L10n.Accessibility.conversationStartVideoCall(viewModel.name))
