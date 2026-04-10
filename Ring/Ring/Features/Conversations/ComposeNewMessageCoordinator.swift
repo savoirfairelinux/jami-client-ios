@@ -59,7 +59,7 @@ class ComposeNewMessageCoordinator: Coordinator, StateableResponsive, Conversati
             })
             .disposed(by: self.disposeBag)
         self.callbackPlaceCall()
-        self.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
+        self.navigationController.navigationBar.tintColor = UIColor.jami
     }
 
     func start() {

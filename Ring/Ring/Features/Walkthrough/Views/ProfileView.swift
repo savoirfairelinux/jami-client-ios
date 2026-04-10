@@ -116,7 +116,7 @@ struct ProfileView: View {
                     isPresented = false
                 }, label: {
                     Text(L10n.Global.cancel)
-                        .foregroundColor(Color(UIColor.label))
+                        .foregroundColor(.jamiColor)
                 }),
                 trailing: Button(action: {
                     saveProfile(profileName, takenImage)

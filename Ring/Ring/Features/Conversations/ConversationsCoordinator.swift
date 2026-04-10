@@ -138,7 +138,7 @@ class ConversationsCoordinator: RootCoordinator, StateableResponsive, Conversati
             .disposed(by: self.disposeBag)
         self.callbackPlaceCall()
         self.subscribeToActiveCalls()
-        self.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
+        self.navigationController.navigationBar.tintColor = UIColor.jami
     }
 
     func presentPendingCall(callUUID: String, peerId: String, accountId: String) {
@@ -237,7 +237,7 @@ extension ConversationsCoordinator {
             .disposed(by: disposeBag)
         viewController.rx.viewWillDisappear
             .subscribe(onNext: { [weak self] _ in
-                self?.navigationController.navigationBar.tintColor = UIColor.jamiButtonDark
+                self?.navigationController.navigationBar.tintColor = UIColor.jami
             })
             .disposed(by: disposeBag)
         self.present(viewController: viewController, withStyle: .show, withAnimation: true, withStateable: view.stateEmitter)
