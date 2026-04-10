@@ -199,7 +199,7 @@ struct SmartListView: View, StateEmittingView {
             guard let stateEmitter = stateEmitter else { return }
             stateEmitter.showDialpad()
         }, label: {
-            Image(systemName: "square.grid.3x3.topleft.filled")
+            Image(systemName: "dialpad")
                 .foregroundColor(Color.jamiColor)
         })
     }

@@ -34,7 +34,7 @@
                                             <constraint firstAttribute="height" constant="25" id="fj4-rY-8ot"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="cross"/>
+                                        <state key="normal" image="xmark" catalog="system"/>
                                         <connections>
                                             <action selector="closeScan:" destination="lq1-ve-3Zo" eventType="touchUpInside" id="viv-qs-bWn"/>
                                         </connections>
@@ -83,7 +83,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cross" width="40" height="40"/>
         <image name="scan" width="256" height="256"/>
+        <image name="xmark" catalog="system" width="32" height="28"/>
     </resources>
 </document>
