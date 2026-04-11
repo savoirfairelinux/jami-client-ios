@@ -97,37 +97,19 @@ extension UIColor {
     static let jamiFormBackgroundColor = UIColor(named: "jamiFormBackgroundColor")!
     static let jamiMsgCellSent = UIColor(hex: 0x367BC1, alpha: 1.0)
     static var jamiMsgCellReceived: UIColor {
-        return UIColor(named: "background_msg_received") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
-    }
-
-    static var jamiTextBlue: UIColor {
-        return UIColor(named: "text_blue_color") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
-    }
-
-    static var jamiTextSecondary: UIColor {
-        return UIColor(named: "text_secondary_color") ?? UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-    }
-
-    static var jamiInputTextBackground: UIColor {
-        return UIColor(named: "background_input_text") ?? UIColor(red: 255, green: 255, blue: 255, alpha: 0.57)
+        return UIColor(named: "backgroundMsgReceived") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
     }
 
     static let jamiMsgCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
     static let jamiMsgCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
 
     static var jamiMsgBackground: UIColor {
-        return UIColor(named: "message_background_color") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
+        return UIColor(named: "messageBackgroundColor") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
     }
 
-    static var jamiMsgTextFieldBackground: UIColor {
-        return UIColor(named: "text_field_background_color") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 0)
-    }
     static let jamiMsgTextFieldBorder = UIColor(red: 220, green: 220, blue: 220, alpha: 1.0)
-    static var jamiUITableViewCellSelection: UIColor {
-        return UIColor(named: "row_selected") ?? UIColor(red: 209, green: 210, blue: 210, alpha: 1.0)
-    }
     static var jamiNavigationBarShadow: UIColor {
-        return UIColor(named: "shadow_color") ?? UIColor.black
+        return UIColor(named: "shadowColor") ?? UIColor.black
     }
 
     static var jamiBackgroundColor: UIColor {
