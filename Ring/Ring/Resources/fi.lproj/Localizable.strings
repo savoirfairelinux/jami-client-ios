@@ -158,10 +158,10 @@
 "conversation.addToContactsLabel" = "Lisätäänkö yhteystietoihin?";
 "conversation.notContactLabel" = "%@ ei ole yhteystiedoissa";
 "conversation.messagePlaceholder" = "Kirjoita...";
-"conversation.imageSaved" = "Saved";
-"conversation.errorSavingImage" = "Could not save image";
-"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
-"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
+"conversation.imageSaved" = "Tallennettu";
+"conversation.errorSavingImage" = "Kuvan tallennus epäonnistui";
+"conversation.errorSavingImageMessage" = "Virhe tallennettaessa kuvaa valokuviin.";
+"conversation.photoAccessRequiredMessage" = "Jami tarvitsee oikeuden tallentaa kuvia valokuviin. Voit ottaa tämän käyttöön asetuksissa.";
 "conversation.receivedRequest" = "%@ lähetti sinulle keskustelukutsun.";
 "conversation.incomingRequest" = "lähetti sinulle keskustelukutsun.";
 "conversation.requestMessage" = "Hei,\nHaluatko liittyä keskusteluun?";
@@ -588,7 +588,7 @@
 "accessibility.welcomeToJamiTitle" = "Tervetuloa Jamiin";
 "accessibility.createAccountVerifyUsernamePrompt" = "Tarkista saatavuus kirjoittamalla tunnus.";
 "accessibility.profilePicturePicker" = "Profiilikuva";
-"accessibility.profilePicturePickerHint" = "Ota kuva napauttamalla tai valitse kuva kirjastosta";
+"accessibility.profilePicturePickerHint" = "Ota kuva napauttamalla tai valitse kuva valokuvista";
 "accessibility.swarmPicturePicker" = "Ryhmäkuva";
 "accessibility.accountSummaryQrCode" = "QR-koodi";
 "accessibility.accountSummaryQrCodeHint" = "Näet tilin QR-koodin napauttamalla";

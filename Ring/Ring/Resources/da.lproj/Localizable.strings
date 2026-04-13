@@ -102,7 +102,7 @@
 "swarm.member" = "Medlem";
 "swarm.invited" = "Indbydes";
 "swarm.admin" = "Administrator";
-"swarm.blocked" = "Blocked";
+"swarm.blocked" = "Blokeret";
 "swarm.unknown" = "Ukendt";
 "swarm.left" = "Left";
 "swarm.inviteMembers" = "Invite members";
@@ -188,7 +188,7 @@
 "invitations.noInvitations" = "Ingen invitationer";
 "invitations.accepted" = "Akcepteret";
 "invitations.declined" = "Declined";
-"invitations.blocked" = "Blocked";
+"invitations.blocked" = "Blokeret";
 "invitations.list" = "Invitationer modtaget";
 
 // Walkthrough
@@ -287,7 +287,7 @@
 "alerts.noLibraryPermissionsTitle" = "Har ikke adgang til foto-biblioteket";
 "alerts.noLocationPermissionsTitle" = "Har ikke adgang til lokation";
 "alerts.errorWrongCredentials" = "An error occurred while connecting to the management server. Please try again. If the problem persists, contact your system administrator.";
-"alerts.recordVideoMessage" = "Record video message";
+"alerts.recordVideoMessage" = "Optag videobesked";
 "alerts.recordAudioMessage" = "Optag lydmeddelelse";
 "alerts.uploadFile" = "Send fil";
 "alerts.uploadPhoto" = "Åben galleri";

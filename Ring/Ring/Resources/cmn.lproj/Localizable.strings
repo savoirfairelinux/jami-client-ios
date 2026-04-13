@@ -158,10 +158,10 @@
 "conversation.addToContactsLabel" = "添加至通讯录吗？";
 "conversation.notContactLabel" = "%@ 不在联系人列表中";
 "conversation.messagePlaceholder" = "写消息至";
-"conversation.imageSaved" = "Saved";
-"conversation.errorSavingImage" = "Could not save image";
-"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
-"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
+"conversation.imageSaved" = "已保存";
+"conversation.errorSavingImage" = "无法保存图像";
+"conversation.errorSavingImageMessage" = "将图像保存到照片库时出错。";
+"conversation.photoAccessRequiredMessage" = "Jami需要访问您的照片库以保存图像。您可以在“设置”中启用此功能。";
 "conversation.receivedRequest" = "1%@ 向您发送了对话邀请。";
 "conversation.incomingRequest" = "向您发送了对话邀请。";
 "conversation.requestMessage" = "您好，您想加入通话吗？";

@@ -158,10 +158,10 @@
 "conversation.addToContactsLabel" = "添加至通讯录吗？";
 "conversation.notContactLabel" = "%@ 不在联系人列表中";
 "conversation.messagePlaceholder" = "写消息至";
-"conversation.imageSaved" = "Saved";
-"conversation.errorSavingImage" = "Could not save image";
-"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
-"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
+"conversation.imageSaved" = "已保存";
+"conversation.errorSavingImage" = "无法保存图像";
+"conversation.errorSavingImageMessage" = "将图像保存到照片库时出错。";
+"conversation.photoAccessRequiredMessage" = "Jami需要访问您的照片库以保存图像。您可以在“设置”中启用此功能。";
 "conversation.receivedRequest" = "1%@ 向您发送了对话邀请。";
 "conversation.incomingRequest" = "向您发送了对话邀请。";
 "conversation.requestMessage" = "您好，您想加入通话吗？";
@@ -185,7 +185,7 @@
 "conversation.lastMessageDeleted" = "（已删除邮件）";
 
 // Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "无邀请";
 "invitations.accepted" = "已接受";
 "invitations.declined" = "已拒絕<br>";
 "invitations.blocked" = "已封鎖";
@@ -206,7 +206,7 @@
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Next";
 "createProfile.title" = "自定義您的個人資料";
-"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.enterNameLabel" = "选择一个显示名称";
 "createProfile.enterNamePlaceholder" = "Enter name";
 "createProfile.subtitle" = "您的個人資料僅與您的聯絡人共享。您可以隨時定製您的個人資料。";
 "createProfile.createProfilePicture" = "新增個人照片";
@@ -275,7 +275,7 @@
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "當啟動 Jami 時發生錯誤";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.dbFailedMessage" = "请关闭并重新打开应用。";
 "alerts.confirmBlockContact" = "要封鎖此聯絡人嗎？與此聯絡人的所有對話將被刪除。";
 "alerts.confirmDeleteConversation" = "您確定您想要永久刪除此對話嗎？";
 "alerts.confirmLeaveConversation" = "您要退出对话吗？";
@@ -342,7 +342,7 @@
 "accountPage.currentProxy" = "当前使用的代理";
 "accountPage.enableNotifications" = "启用通知";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertBody" = "为了接收通知，请开启代理";
 "accountPage.removeDeviceTitle" = "移除设备";
 "accountPage.revokeDeviceMessage" = "你想要撤銷此裝置嗎？這個動作無法復原。";
 "accountPage.revokeDeviceButton" = "Revoke";
@@ -376,7 +376,7 @@
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
 "accountPage.disableBoothModeExplanation" = "請提供您的帳號密碼";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
+"accountPage.boothModeExplanation" = "话亭模式不会保存聊天历史，并且仅允许外拨电话。启用话亭模式后，现有聊天将全部被删除。";
 "accountPage.noBoothMode" = "要啟用藍牙模式，您必須先建立帳號密碼。";
 "accountPage.boothModeAlertMessage" = "在啟用展示模式後，所有的對話都會被移除。";
 "accountPage.peerDiscovery" = "启用本地对等方发现";
@@ -501,8 +501,8 @@
 // DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
 "dataTransfer.readableStatusError" = "Error";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusAwaiting" = "验证中…";
+"dataTransfer.readableStatusOngoing" = "传送中";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "發送時出現問題。";
 "dataTransfer.readableStatusSuccess" = "Complete";

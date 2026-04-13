@@ -158,10 +158,10 @@
 "conversation.addToContactsLabel" = "Të shtohet te kontaktet?";
 "conversation.notContactLabel" = "%@ s’gjendet te lista e kontakteve";
 "conversation.messagePlaceholder" = "Shkruajini";
-"conversation.imageSaved" = "Saved";
-"conversation.errorSavingImage" = "Could not save image";
-"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
-"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
+"conversation.imageSaved" = "U ruajt";
+"conversation.errorSavingImage" = "S’u ruajt dot figurë";
+"conversation.errorSavingImageMessage" = "Ndodhi një gabim teksa ruhej figura te  fototeka.";
+"conversation.photoAccessRequiredMessage" = "Jami lyp hyrje te fototeka juaj që të ruajë figura. Këtë mund ta aktivizoni te Rregullimet.";
 "conversation.receivedRequest" = "%@ ju dërgoi një ftesë bisede.";
 "conversation.incomingRequest" = "ju dërgoi një ftesë për bisedë.";
 "conversation.requestMessage" = "Tungjatjeta,\nDoni  të merrni pjesë te biseda?";

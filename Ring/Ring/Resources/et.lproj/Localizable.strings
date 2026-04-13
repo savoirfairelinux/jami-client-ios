@@ -158,10 +158,10 @@
 "conversation.addToContactsLabel" = "Kas lisame kontaktina?";
 "conversation.notContactLabel" = "%@ pole sinu kontaktide loendis";
 "conversation.messagePlaceholder" = "Kirjuta kasutajale";
-"conversation.imageSaved" = "Saved";
-"conversation.errorSavingImage" = "Could not save image";
-"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
-"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
+"conversation.imageSaved" = "Salvestatud";
+"conversation.errorSavingImage" = "Pildi salvestamine ei õnnestunud";
+"conversation.errorSavingImageMessage" = "Pildi salvestamisel fotode kogusse tekkis viga.";
+"conversation.photoAccessRequiredMessage" = "Piltide salvestamiseks vajab Jami ligipääsu sinu fotode kogule. Saad seda lubada seadistustes.";
 "conversation.receivedRequest" = "%@ saatis sulle vestluskutse.";
 "conversation.incomingRequest" = "saatis sulle vestluskutse.";
 "conversation.requestMessage" = "Hei,\nKas sa sooviksid liituda vestlusega?";
