@@ -254,9 +254,14 @@ final class CallProviderDelegateTests: XCTestCase {
 
         callProviderService.startCall(account: account, call: call)
 
+        let initialConnectingReports = mockProvider.reportedOutgoingConnecting.count
         callProviderService.reportOutgoingCallConnecting(callUUID: call.callUUID)
-        XCTAssertEqual(mockProvider.reportedOutgoingConnecting.count, 1, "Should report outgoing call connecting")
-        XCTAssertEqual(mockProvider.reportedOutgoingConnecting.first, call.callUUID)
+        XCTAssertEqual(
+            mockProvider.reportedOutgoingConnecting.count,
+            initialConnectingReports + 1,
+            "Should report outgoing call connecting exactly once for this call"
+        )
+        XCTAssertEqual(mockProvider.reportedOutgoingConnecting.last, call.callUUID)
     }
 
     func testReportOutgoingCallConnected_ReportsToCallKit() {

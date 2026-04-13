@@ -19,22 +19,18 @@
 import XCTest
 
 final class AccountCreationTest: JamiBaseNoAccountUITest {
-
-    private static var isAppLaunched = false
-
     override func setUpWithError() throws {
         try super.setUpWithError()
 
-        if !AccountCreationTest.isAppLaunched {
-            if let serverAddress = ProcessInfo.processInfo.environment["TEST_SERVER_ADDRESS"] {
-                app.launchEnvironment["SERVER_ADDRESS"] = serverAddress
-            } else {
-                app.launchEnvironment["SERVER_ADDRESS"] = "https://ns-test.jami.net"
-            }
-
-            app.launch()
-            AccountCreationTest.isAppLaunched = true
+        if let serverAddress = ProcessInfo.processInfo.environment["TEST_SERVER_ADDRESS"] {
+            app.launchEnvironment["SERVER_ADDRESS"] = serverAddress
+        } else {
+            app.launchEnvironment["SERVER_ADDRESS"] = "https://ns-test.jami.net"
         }
+
+        // Launch fresh app state for each UI test to avoid cross-test leakage.
+        app.terminate()
+        app.launch()
     }
 
     func openWelcomeViewFromConversation() {
@@ -47,25 +43,24 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
         if !conversationWindow.exists {
             return
         }
-        let accountsButton = XCUIApplication().navigationBars.buttons[SmartListAccessibilityIdentifiers.openAccountsButton]
+        let accountsButton = app.navigationBars.buttons[SmartListAccessibilityIdentifiers.openAccountsButton]
+        XCTAssertTrue(accountsButton.waitForExistence(timeout: 5), "openAccountsButton did not appear in time")
         accountsButton.tap()
-
-        waitForSeconds(2)
 
         // Try to find the add account button by identifier first
         let addAccount = app.buttons[SmartListAccessibilityIdentifiers.addAccountButton]
 
-        if addAccount.exists {
+        if addAccount.waitForExistence(timeout: 5) {
             addAccount.tap()
         } else {
             // Fallback to finding by exact label if identifier doesn't work
             let addAccountByLabel = app.buttons[L10n.Smartlist.addAccountButton]
-            if addAccountByLabel.exists {
+            if addAccountByLabel.waitForExistence(timeout: 3) {
                 addAccountByLabel.tap()
             } else {
                 // Try by accessibility label
                 let addAccountByAccessibilityLabel = app.buttons[L10n.Accessibility.smartListAddAccount]
-                if addAccountByAccessibilityLabel.exists {
+                if addAccountByAccessibilityLabel.waitForExistence(timeout: 3) {
                     addAccountByAccessibilityLabel.tap()
                 } else {
                     XCTFail("addAccount button did not appear in time")
@@ -76,10 +71,18 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
 
     func openAccountCreation() {
         openWelcomeViewFromConversation()
-        app.buttons[AccessibilityIdentifiers.joinJamiButton].tap()
 
+        // In logged-in flow, tapping "Add account" can open create account directly.
         let createAccountWindow = app.staticTexts[AccessibilityIdentifiers.createAccountTitle]
-        waitForElementToAppear(createAccountWindow)
+        if createAccountWindow.waitForExistence(timeout: 3) {
+            return
+        }
+
+        let joinJamiButton = app.buttons[AccessibilityIdentifiers.joinJamiButton]
+        XCTAssertTrue(joinJamiButton.waitForExistence(timeout: 10), "joinJamiButton did not appear in time")
+        joinJamiButton.tap()
+
+        waitForElementToAppear(createAccountWindow, timeout: 10)
     }
 
     func closeAccountCreationView() {
@@ -89,9 +92,8 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
         }
         cancelButton.tap()
         waitForSeconds(2)
-        // Verify that welcome view is presented
-        let welcomeWindow = app.images[AccessibilityIdentifiers.welcomeWindow]
-        XCTAssertTrue(welcomeWindow.exists)
+        let createAccountWindow = app.otherElements[AccessibilityIdentifiers.createAccountView]
+        XCTAssertFalse(createAccountWindow.exists, "Create account view should be dismissed")
     }
 
     func getRandomName() -> String {
@@ -207,7 +209,8 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
         XCTAssertEqual(label.label, expectedText, "Explanation label is incorrect")
 
         // Verify the state of the "Join" button
-        XCTAssertFalse(joinButton.isEnabled, "The Join button is enabled")
+        let secondJoinButton = app.buttons[AccessibilityIdentifiers.joinButton]
+        XCTAssertFalse(secondJoinButton.isEnabled, "The Join button is enabled")
         closeAccountCreationView()
     }
 

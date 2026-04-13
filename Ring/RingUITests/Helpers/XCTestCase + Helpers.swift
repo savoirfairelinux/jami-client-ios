@@ -23,9 +23,7 @@ import XCTest
 extension XCTestCase {
 
     func waitForElementToAppear(_ element: XCUIElement, timeout: TimeInterval = 5) {
-        let exists = NSPredicate(format: "exists == true")
-        expectation(for: exists, evaluatedWith: element, handler: nil)
-        waitForExpectations(timeout: timeout, handler: nil)
+        XCTAssertTrue(element.waitForExistence(timeout: timeout), "Element did not appear within \(timeout) seconds")
     }
 
     func waitForSeconds(_ seconds: TimeInterval) {
