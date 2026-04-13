@@ -98,17 +98,17 @@ class MessageHandlingServiceTests: XCTestCase {
     func testSendVCard_WithValidData_CallsDBManager() {
         let profile = Profile.createTestProfile()
         mockDBManager.accountVCardResult = profile
+        let accountVCardExpectation = expectation(description: "DBManager accountVCard called")
+        mockDBManager.onAccountVCardCalled = { receivedAccountId in
+            XCTAssertEqual(receivedAccountId, CallTestConstants.accountId, "DBManager accountVCard should be called with correct accountId")
+            accountVCardExpectation.fulfill()
+        }
 
         service.sendVCard(callID: CallTestConstants.callId, accountID: CallTestConstants.accountId)
 
-        let expectation = XCTestExpectation(description: "VCard sent")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 0.2)
+        wait(for: [accountVCardExpectation], timeout: 1.0)
 
         XCTAssertTrue(mockDBManager.accountVCardCalled, "DBManager accountVCard method should be called")
-        XCTAssertEqual(mockDBManager.accountVCardId, CallTestConstants.accountId, "DBManager accountVCard should be called with correct accountId")
         XCTAssertEqual(mockDBManager.accountVCardResult?.uri, CallTestConstants.profileUri, "The correct profile should be retrieved")
     }
 
@@ -252,10 +252,12 @@ class MockDBManager: DBManager {
     var accountVCardCalled = false
     var accountVCardId: String?
     var accountVCardResult: Profile?
+    var onAccountVCardCalled: ((String) -> Void)?
 
     override func accountVCard(for accountId: String) -> Profile? {
         accountVCardCalled = true
         accountVCardId = accountId
+        onAccountVCardCalled?(accountId)
         return accountVCardResult
     }
 }
