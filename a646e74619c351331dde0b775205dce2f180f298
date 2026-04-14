@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50120f44_ccc314c7",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1035
+      },
+      "writtenOn": "2026-04-14T18:23:13Z",
+      "side": 1,
+      "message": "What\u0027s the reason for not always using `insertByModelOrder` (similar to how you changed `insertMessages` in `ConversationsService.swift` to always use `insertByParent` instead of branching on `fromLoaded`)?",
+      "range": {
+        "startLine": 606,
+        "startChar": 8,
+        "endLine": 612,
+        "endChar": 9
+      },
+      "revId": "a646e74619c351331dde0b775205dce2f180f298",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cddd3add_3c52d777",
+        "filename": "Ring/Ring/Models/ConversationModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1035
+      },
+      "writtenOn": "2026-04-14T18:23:13Z",
+      "side": 1,
+      "message": "Do you have an example scenario where relocating an orphan is needed? This feels like a daemon bug, I don\u0027t think the clients should have to do this if they got the correct signals in the right order.",
+      "range": {
+        "startLine": 517,
+        "startChar": 4,
+        "endLine": 519,
+        "endChar": 61
+      },
+      "revId": "a646e74619c351331dde0b775205dce2f180f298",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
