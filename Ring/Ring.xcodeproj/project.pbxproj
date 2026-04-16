@@ -276,6 +276,7 @@
 		2632D2F52CA5AFBB00E60096 /* ConnectSipVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F42CA5AFBB00E60096 /* ConnectSipVM.swift */; };
 		2637E55F2DD95FE600ACCF91 /* ActiveCallsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E55E2DD95FE400ACCF91 /* ActiveCallsHelper.swift */; };
 		2637E5612DD96BE000ACCF91 /* ActiveCallsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E5602DD96BE000ACCF91 /* ActiveCallsHelperTests.swift */; };
+		26A2B0522E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */; };
 		2637E5632DDE274E00ACCF91 /* CallBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E5622DDE274E00ACCF91 /* CallBannerView.swift */; };
 		2637E5652DDE27B600ACCF91 /* CallBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E5642DDE27B600ACCF91 /* CallBannerViewModel.swift */; };
 		2637E5662DDE662200ACCF91 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C436C2862561700B4BE73 /* Constants.swift */; };
@@ -904,6 +905,7 @@
 		26376721245315E600CDC51F /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		2637E55E2DD95FE400ACCF91 /* ActiveCallsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsHelper.swift; sourceTree = "<group>"; };
 		2637E5602DD96BE000ACCF91 /* ActiveCallsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsHelperTests.swift; sourceTree = "<group>"; };
+		26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsViewModelTests.swift; sourceTree = "<group>"; };
 		2637E5622DDE274E00ACCF91 /* CallBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBannerView.swift; sourceTree = "<group>"; };
 		2637E5642DDE27B600ACCF91 /* CallBannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBannerViewModel.swift; sourceTree = "<group>"; };
 		263C16652D94E1B3008E102C /* CallManagementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManagementService.swift; sourceTree = "<group>"; };
@@ -3319,6 +3321,7 @@
 			isa = PBXGroup;
 			children = (
 				2637E5602DD96BE000ACCF91 /* ActiveCallsHelperTests.swift */,
+				26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */,
 				263C16862D9EF75E008E102C /* CallsServiceTests.swift */,
 				263C16842D9EE3F9008E102C /* CallManagementServiceTests.swift */,
 				263C167E2D999348008E102C /* ConferenceManagementServiceTests.swift */,
@@ -4483,6 +4486,7 @@
 				024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */,
 				260AE62F29BA3B6900D66D5E /* ConversationModelTests.swift in Sources */,
 				2637E5612DD96BE000ACCF91 /* ActiveCallsHelperTests.swift in Sources */,
+				26A2B0522E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift in Sources */,
 				260AE63729BE177000D66D5E /* ContactUtilsTests.swift in Sources */,
 				260AE63A29C0C81300D66D5E /* CallProviderDelegateTests.swift in Sources */,
 				260AE62B29B8F97300D66D5E /* TestableSwarmInfo.swift in Sources */,
