@@ -146,33 +146,28 @@ class ActiveCallsHelper {
     }
 
     func ignoreCall(_ call: ActiveCall) {
+        // Always ignore on the origin account, even when its tracker is not
+        // yet in `activeCalls`. Then fan out to every sibling tracker that
+        // mirrors the same remote call, otherwise the popup re-surfaces from
+        // the sibling on the next emission.
         var calls = activeCalls.value
-        var callTracker = calls[call.accountId] ?? AccountCallTracker()
-        callTracker.ignoreCall(call)
-        calls[call.accountId] = callTracker
+        var originTracker = calls[call.accountId] ?? AccountCallTracker()
+        originTracker.ignoreCall(call)
+        calls[call.accountId] = originTracker
+
+        for (accountId, var tracker) in calls where accountId != call.accountId {
+            guard let match = tracker.calls(for: call.conversationId).first(where: { sameRemoteCall($0, as: call) }) else { continue }
+            tracker.ignoreCall(match)
+            calls[accountId] = tracker
+        }
         activeCalls.accept(calls)
     }
 
     func acceptCall(_ callURI: String) {
-        guard let parsed = ActiveCall.init(callURI),
-              let (accountId, call) = findActiveCall(conversationId: parsed.conversationId, callId: parsed.id) else {
-            return
+        guard let parsed = ActiveCall.init(callURI) else { return }
+        applyToAllTrackersHolding(matching: parsed) { tracker, ownCall in
+            tracker.acceptCall(ownCall)
         }
-
-        var calls = activeCalls.value
-        var callTracker = calls[call.accountId] ?? AccountCallTracker()
-        callTracker.acceptCall(call)
-        calls[accountId] = callTracker
-        activeCalls.accept(calls)
-    }
-
-    private func findActiveCall(conversationId: String, callId: String) -> (accountId: String, call: ActiveCall)? {
-        for (accountId, state) in activeCalls.value {
-            if let call = state.calls(for: conversationId).first(where: { $0.id == callId }) {
-                return (accountId, call)
-            }
-        }
-        return nil
     }
 
     func getActiveCall(conversationId: String, accountId: String) -> ActiveCall? {
@@ -192,18 +187,46 @@ class ActiveCallsHelper {
     }
 
     func activeCallHangedUp(callURI: String) {
-        guard let parsed = ActiveCall.init(callURI),
-              let (accountId, call) = findActiveCall(conversationId: parsed.conversationId, callId: parsed.id) else {
-            return
-        }
+        guard let parsed = ActiveCall.init(callURI) else { return }
 
-        /// Removes the call from accepted calls list to allow rejoining,
-        /// and adds it to ignored calls to prevent call alerts from showing
+        // Removes the call from accepted calls list to allow rejoining,
+        // and adds it to ignored calls to prevent call alerts from showing.
+        applyToAllTrackersHolding(matching: parsed) { tracker, ownCall in
+            tracker.ignoreCall(ownCall)
+            tracker.removeAcceptedCall(ownCall)
+        }
+    }
+
+    // Compares the fields that identify a call on the wire. `accountId` and
+    // `isFromLocalDevice` are excluded because they are local bookkeeping
+    // and differ across trackers that mirror the same remote call.
+    private func sameRemoteCall(_ lhs: ActiveCall, as rhs: ActiveCall) -> Bool {
+        return lhs.conversationId == rhs.conversationId &&
+            lhs.id == rhs.id &&
+            lhs.uri == rhs.uri &&
+            lhs.device == rhs.device
+    }
+
+    // Applies `mutation` to every tracker holding a call that matches
+    // `template` on the remote identity. The tracker-local `ActiveCall`
+    // instance must be passed through: accepted/ignored sets hash the full
+    // struct (including `accountId`), so a stranger instance would not
+    // deduplicate.
+    private func applyToAllTrackersHolding(matching template: ActiveCall,
+                                           mutation: (inout AccountCallTracker, ActiveCall) -> Void) {
         var calls = activeCalls.value
-        var callTracker = calls[call.accountId] ?? AccountCallTracker()
-        callTracker.ignoreCall(call)
-        callTracker.removeAcceptedCall(call)
-        calls[accountId] = callTracker
-        activeCalls.accept(calls)
+        var changed = false
+        for (accountId, var tracker) in calls {
+            let matches = tracker.calls(for: template.conversationId).filter { sameRemoteCall($0, as: template) }
+            guard !matches.isEmpty else { continue }
+            for ownCall in matches {
+                mutation(&tracker, ownCall)
+            }
+            calls[accountId] = tracker
+            changed = true
+        }
+        if changed {
+            activeCalls.accept(calls)
+        }
     }
 }
