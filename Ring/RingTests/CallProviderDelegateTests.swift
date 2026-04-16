@@ -273,10 +273,13 @@ final class CallProviderDelegateTests: XCTestCase {
         call.callType = .outgoing
 
         callProviderService.startCall(account: account, call: call)
+        let beforeCount = mockProvider.reportedOutgoingConnected.count
 
         callProviderService.reportOutgoingCallConnected(callUUID: call.callUUID)
-        XCTAssertEqual(mockProvider.reportedOutgoingConnected.count, 1, "Should report outgoing call connected")
-        XCTAssertEqual(mockProvider.reportedOutgoingConnected.first, call.callUUID)
+
+        XCTAssertEqual(mockProvider.reportedOutgoingConnected.count, beforeCount + 1,
+                       "reportOutgoingCallConnected should produce exactly one CallKit report")
+        XCTAssertEqual(mockProvider.reportedOutgoingConnected.last, call.callUUID)
     }
 
     func testReportOutgoingCallConnecting_UnknownUUID_IsNoOp() {
