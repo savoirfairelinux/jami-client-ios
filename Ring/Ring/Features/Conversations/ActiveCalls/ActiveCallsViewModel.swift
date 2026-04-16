@@ -50,21 +50,38 @@ class ActiveCallsViewModel: ObservableObject, Stateable {
     }
 
     private func updateCallViewModels(from trackersByAccount: [String: AccountCallTracker]) {
-        for (accountId, tracker) in trackersByAccount {
-            let viewModels: [ActiveCallRowViewModel] = tracker.incomingNotAcceptedNotIgnoredCalls()
-                .compactMap { call in
-                    guard let conversation = findConversation(for: call),
-                          let swarmInfo = conversation.swarmInfo else { return nil }
-                    return ActiveCallRowViewModel(
-                        call: call,
-                        stateSubject: stateSubject,
-                        callService: callService,
-                        swarmInfo: swarmInfo,
-                        profileService: self.profileService
-                    )
-                }
-            callsByAccount[accountId] = viewModels
+        // Linked accounts sharing a swarm receive the same call in each
+        // tracker. Dedup by remote identity; iterate the current account
+        // first so the remaining row belongs to it.
+        let currentId = accountsService.currentAccount?.id
+        let orderedAccountIds: [String] = {
+            let ids = Array(trackersByAccount.keys)
+            if let currentId = currentId {
+                return [currentId] + ids.filter { $0 != currentId }
+            }
+            return ids
+        }()
+
+        var seen = Set<RemoteCallIdentity>()
+        var grouped: [String: [ActiveCallRowViewModel]] = [:]
+        for accountId in orderedAccountIds {
+            guard let tracker = trackersByAccount[accountId] else { continue }
+            for call in tracker.incomingNotAcceptedNotIgnoredCalls() {
+                if seen.contains(call.remoteIdentity) { continue }
+                guard let conversation = findConversation(for: call),
+                      let swarmInfo = conversation.swarmInfo else { continue }
+                seen.insert(call.remoteIdentity)
+                let row = ActiveCallRowViewModel(
+                    call: call,
+                    stateSubject: stateSubject,
+                    callService: callService,
+                    swarmInfo: swarmInfo,
+                    profileService: self.profileService
+                )
+                grouped[accountId, default: []].append(row)
+            }
         }
+        callsByAccount = grouped
     }
 
     private func findConversation(for call: ActiveCall) -> ConversationViewModel? {

@@ -121,6 +121,105 @@ final class ActiveCallsHelperTests: XCTestCase {
         XCTAssertEqual(calls2[0].id, "call2")
     }
 
+    // MARK: - Shared swarm across multiple linked accounts
+
+    private struct SharedCallSetup {
+        let account1: AccountModel
+        let account2: AccountModel
+        let conversationId: String
+    }
+
+    private func registerSharedCallAcrossTwoAccounts() -> SharedCallSetup {
+        let callDict: [String: String] = ["id": "callA", "uri": "remoteUri", "device": "remoteDevice"]
+
+        let account1 = AccountModel(withAccountId: accountId1)
+        let account2 = AccountModel(withAccountId: accountId2)
+
+        activeCallsHelper.updateActiveCalls(conversationId: conversationId1, calls: [callDict], account: account1)
+        activeCallsHelper.updateActiveCalls(conversationId: conversationId1, calls: [callDict], account: account2)
+
+        return SharedCallSetup(account1: account1, account2: account2, conversationId: conversationId1)
+    }
+
+    func testIgnoreCall_PropagatesAcrossAccountsForSharedSwarm() {
+        let setup = registerSharedCallAcrossTwoAccounts()
+
+        let trackerCall = activeCallsHelper.activeCalls.value[setup.account1.id]!
+            .calls(for: setup.conversationId).first!
+        activeCallsHelper.ignoreCall(trackerCall)
+
+        let trackers = activeCallsHelper.activeCalls.value
+        XCTAssertTrue(trackers[setup.account1.id]!.incomingNotAcceptedNotIgnoredCalls().isEmpty)
+        XCTAssertTrue(trackers[setup.account2.id]!.incomingNotAcceptedNotIgnoredCalls().isEmpty,
+                      "ignore must propagate to every tracker mirroring the same remote call")
+    }
+
+    func testAcceptCall_PropagatesAcrossAccountsForSharedSwarm() {
+        let setup = registerSharedCallAcrossTwoAccounts()
+
+        let trackerCall = activeCallsHelper.activeCalls.value[setup.account1.id]!
+            .calls(for: setup.conversationId).first!
+        activeCallsHelper.acceptCall(trackerCall.constructURI())
+
+        let trackers = activeCallsHelper.activeCalls.value
+        XCTAssertTrue(trackers[setup.account1.id]!.notAcceptedCalls(for: setup.conversationId).isEmpty)
+        XCTAssertTrue(trackers[setup.account2.id]!.notAcceptedCalls(for: setup.conversationId).isEmpty,
+                      "accept must propagate to every tracker mirroring the same remote call")
+    }
+
+    func testActiveCallHangedUp_PropagatesAcrossAccountsForSharedSwarm() {
+        let setup = registerSharedCallAcrossTwoAccounts()
+        let trackerCall = activeCallsHelper.activeCalls.value[setup.account1.id]!
+            .calls(for: setup.conversationId).first!
+        activeCallsHelper.acceptCall(trackerCall.constructURI())
+
+        activeCallsHelper.activeCallHangedUp(callURI: trackerCall.constructURI())
+
+        let trackers = activeCallsHelper.activeCalls.value
+        for accountId in [setup.account1.id, setup.account2.id] {
+            let tracker = trackers[accountId]!
+            XCTAssertTrue(tracker.acceptedCalls(for: setup.conversationId).isEmpty,
+                          "hangup must clear accepted on \(accountId)")
+            XCTAssertEqual(tracker.ignoredCalls(for: setup.conversationId).count, 1,
+                           "hangup must mark the call ignored on \(accountId) so the popup does not re-appear")
+        }
+    }
+
+    // MARK: - RemoteCallIdentity
+
+    func testRemoteIdentity_EqualAcrossLocalBookkeeping() {
+        let base = ActiveCall(id: "call1", uri: "uri1", device: "device1",
+                              conversationId: conversationId1, accountId: accountId1,
+                              isFromLocalDevice: false)
+        let mirrored = ActiveCall(id: "call1", uri: "uri1", device: "device1",
+                                  conversationId: conversationId1, accountId: accountId2,
+                                  isFromLocalDevice: true)
+        XCTAssertEqual(base.remoteIdentity, mirrored.remoteIdentity,
+                       "accountId and isFromLocalDevice must not affect remote identity")
+    }
+
+    func testRemoteIdentity_DiffersWhenAnyWireFieldChanges() {
+        let base = ActiveCall(id: "call1", uri: "uri1", device: "device1",
+                              conversationId: conversationId1, accountId: accountId1,
+                              isFromLocalDevice: false)
+        let differentId = ActiveCall(id: "call2", uri: "uri1", device: "device1",
+                                     conversationId: conversationId1, accountId: accountId1,
+                                     isFromLocalDevice: false)
+        let differentURI = ActiveCall(id: "call1", uri: "uri2", device: "device1",
+                                      conversationId: conversationId1, accountId: accountId1,
+                                      isFromLocalDevice: false)
+        let differentDevice = ActiveCall(id: "call1", uri: "uri1", device: "device2",
+                                         conversationId: conversationId1, accountId: accountId1,
+                                         isFromLocalDevice: false)
+        let differentConversation = ActiveCall(id: "call1", uri: "uri1", device: "device1",
+                                               conversationId: conversationId2, accountId: accountId1,
+                                               isFromLocalDevice: false)
+        XCTAssertNotEqual(base.remoteIdentity, differentId.remoteIdentity)
+        XCTAssertNotEqual(base.remoteIdentity, differentURI.remoteIdentity)
+        XCTAssertNotEqual(base.remoteIdentity, differentDevice.remoteIdentity)
+        XCTAssertNotEqual(base.remoteIdentity, differentConversation.remoteIdentity)
+    }
+
     func testActiveCallsChanged_UpdatesMultipleAccounts() {
         let accountId1 = "account1"
         let accountId2 = "account2"
