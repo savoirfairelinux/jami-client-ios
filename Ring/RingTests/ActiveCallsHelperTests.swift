@@ -121,6 +121,67 @@ final class ActiveCallsHelperTests: XCTestCase {
         XCTAssertEqual(calls2[0].id, "call2")
     }
 
+    // MARK: - Shared swarm across multiple linked accounts
+
+    private func registerSharedCallAcrossTwoAccounts() -> (account1: AccountModel, account2: AccountModel, conversationId: String, callId: String) {
+        let accountId1 = "account1"
+        let accountId2 = "account2"
+        let conversationId = "swarm-xyz"
+        let callDict: [String: String] = ["id": "callA", "uri": "remoteUri", "device": "remoteDevice"]
+
+        let account1 = AccountModel(withAccountId: accountId1)
+        let account2 = AccountModel(withAccountId: accountId2)
+
+        activeCallsHelper.updateActiveCalls(conversationId: conversationId, calls: [callDict], account: account1)
+        activeCallsHelper.updateActiveCalls(conversationId: conversationId, calls: [callDict], account: account2)
+
+        return (account1, account2, conversationId, "callA")
+    }
+
+    func testIgnoreCall_PropagatesAcrossAccountsForSharedSwarm() {
+        let setup = registerSharedCallAcrossTwoAccounts()
+
+        let trackerCall = activeCallsHelper.activeCalls.value[setup.account1.id]!
+            .calls(for: setup.conversationId).first!
+        activeCallsHelper.ignoreCall(trackerCall)
+
+        let trackers = activeCallsHelper.activeCalls.value
+        XCTAssertTrue(trackers[setup.account1.id]!.incomingNotAcceptedNotIgnoredCalls().isEmpty)
+        XCTAssertTrue(trackers[setup.account2.id]!.incomingNotAcceptedNotIgnoredCalls().isEmpty,
+                      "ignore must propagate to every tracker mirroring the same remote call")
+    }
+
+    func testAcceptCall_PropagatesAcrossAccountsForSharedSwarm() {
+        let setup = registerSharedCallAcrossTwoAccounts()
+
+        let trackerCall = activeCallsHelper.activeCalls.value[setup.account1.id]!
+            .calls(for: setup.conversationId).first!
+        activeCallsHelper.acceptCall(trackerCall.constructURI())
+
+        let trackers = activeCallsHelper.activeCalls.value
+        XCTAssertTrue(trackers[setup.account1.id]!.notAcceptedCalls(for: setup.conversationId).isEmpty)
+        XCTAssertTrue(trackers[setup.account2.id]!.notAcceptedCalls(for: setup.conversationId).isEmpty,
+                      "accept must propagate to every tracker mirroring the same remote call")
+    }
+
+    func testActiveCallHangedUp_PropagatesAcrossAccountsForSharedSwarm() {
+        let setup = registerSharedCallAcrossTwoAccounts()
+        let trackerCall = activeCallsHelper.activeCalls.value[setup.account1.id]!
+            .calls(for: setup.conversationId).first!
+        activeCallsHelper.acceptCall(trackerCall.constructURI())
+
+        activeCallsHelper.activeCallHangedUp(callURI: trackerCall.constructURI())
+
+        let trackers = activeCallsHelper.activeCalls.value
+        for accountId in [setup.account1.id, setup.account2.id] {
+            let tracker = trackers[accountId]!
+            XCTAssertTrue(tracker.acceptedCalls(for: setup.conversationId).isEmpty,
+                          "hangup must clear accepted on \(accountId)")
+            XCTAssertEqual(tracker.ignoredCalls(for: setup.conversationId).count, 1,
+                           "hangup must mark the call ignored on \(accountId) so the popup does not re-appear")
+        }
+    }
+
     func testActiveCallsChanged_UpdatesMultipleAccounts() {
         let accountId1 = "account1"
         let accountId2 = "account2"
