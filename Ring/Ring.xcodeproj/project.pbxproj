@@ -276,7 +276,6 @@
 		2632D2F52CA5AFBB00E60096 /* ConnectSipVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F42CA5AFBB00E60096 /* ConnectSipVM.swift */; };
 		2637E55F2DD95FE600ACCF91 /* ActiveCallsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E55E2DD95FE400ACCF91 /* ActiveCallsHelper.swift */; };
 		2637E5612DD96BE000ACCF91 /* ActiveCallsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E5602DD96BE000ACCF91 /* ActiveCallsHelperTests.swift */; };
-		26A2B0522E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */; };
 		2637E5632DDE274E00ACCF91 /* CallBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E5622DDE274E00ACCF91 /* CallBannerView.swift */; };
 		2637E5652DDE27B600ACCF91 /* CallBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E5642DDE27B600ACCF91 /* CallBannerViewModel.swift */; };
 		2637E5662DDE662200ACCF91 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C436C2862561700B4BE73 /* Constants.swift */; };
@@ -391,6 +390,7 @@
 		26A072FD295A7145006D8163 /* ContextMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072FC295A7145006D8163 /* ContextMenuVM.swift */; };
 		26A1B2C3D4E5F60800AABB01 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */; };
 		26A1B2C3D4E5F60A00AABB02 /* ThreadSafeDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */; };
+		26A2B0522E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */; };
 		26A34ED52C6E83D500A41DD4 /* ImportFromArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED42C6E83D500A41DD4 /* ImportFromArchiveView.swift */; };
 		26A34ED82C6EAE9A00A41DD4 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED72C6EAE9A00A41DD4 /* DocumentPicker.swift */; };
 		26A34EDA2C6EB7C800A41DD4 /* BackupAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED92C6EB7C800A41DD4 /* BackupAccount.swift */; };
@@ -414,6 +414,7 @@
 		26B4C49C2EDD227000273727 /* libsimdutf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B4C49A2EDD225400273727 /* libsimdutf.xcframework */; };
 		26B4C49D2EDD228F00273727 /* libsimdutf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B4C49A2EDD225400273727 /* libsimdutf.xcframework */; };
 		26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B708FD253610B0003974F2 /* OpenURLLabel.swift */; };
+		26BA01010000000000000001 /* ProfilesServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA01010000000000000002 /* ProfilesServiceTests.swift */; };
 		26BB437D267013F600019CF6 /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB437C267013F100019CF6 /* libz.1.1.3.tbd */; };
 		26BB437E267013FB00019CF6 /* libz.1.2.11.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C7A26700C0500888EED /* libz.1.2.11.tbd */; };
 		26BB43802670140600019CF6 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB437F2670140200019CF6 /* libz.1.2.5.tbd */; };
@@ -905,7 +906,6 @@
 		26376721245315E600CDC51F /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		2637E55E2DD95FE400ACCF91 /* ActiveCallsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsHelper.swift; sourceTree = "<group>"; };
 		2637E5602DD96BE000ACCF91 /* ActiveCallsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsHelperTests.swift; sourceTree = "<group>"; };
-		26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsViewModelTests.swift; sourceTree = "<group>"; };
 		2637E5622DDE274E00ACCF91 /* CallBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBannerView.swift; sourceTree = "<group>"; };
 		2637E5642DDE27B600ACCF91 /* CallBannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBannerViewModel.swift; sourceTree = "<group>"; };
 		263C16652D94E1B3008E102C /* CallManagementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManagementService.swift; sourceTree = "<group>"; };
@@ -1019,6 +1019,7 @@
 		26A072FC295A7145006D8163 /* ContextMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuVM.swift; sourceTree = "<group>"; };
 		26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionary.swift; sourceTree = "<group>"; };
 		26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionaryTests.swift; sourceTree = "<group>"; };
+		26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsViewModelTests.swift; sourceTree = "<group>"; };
 		26A34ED42C6E83D500A41DD4 /* ImportFromArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromArchiveView.swift; sourceTree = "<group>"; };
 		26A34ED72C6EAE9A00A41DD4 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		26A34ED92C6EB7C800A41DD4 /* BackupAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupAccount.swift; sourceTree = "<group>"; };
@@ -1081,6 +1082,7 @@
 		26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		26B4C49A2EDD225400273727 /* libsimdutf.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libsimdutf.xcframework; path = ../xcframework/libsimdutf.xcframework; sourceTree = "<group>"; };
 		26B708FD253610B0003974F2 /* OpenURLLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLLabel.swift; sourceTree = "<group>"; };
+		26BA01010000000000000002 /* ProfilesServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesServiceTests.swift; sourceTree = "<group>"; };
 		26BB437926700EEA00019CF6 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = ../DEPS/arm64/lib; sourceTree = "<group>"; };
 		26BB437C267013F100019CF6 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		26BB437F2670140200019CF6 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
@@ -2984,6 +2986,7 @@
 				028568231DF60E5C003A8D8D /* Fixtures */,
 				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
 				26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */,
+				26BA01010000000000000002 /* ProfilesServiceTests.swift */,
 				04399A121D1C2D9D00E99CD9 /* Info.plist */,
 				260AE64129C266B300D66D5E /* CallsTests */,
 				AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */,
@@ -4477,6 +4480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				260AE63329BA5DF600D66D5E /* SwarmInfoTests.swift in Sources */,
+				26BA01010000000000000001 /* ProfilesServiceTests.swift in Sources */,
 				263C167B2D9723A5008E102C /* MessageHandlingServiceTests.swift in Sources */,
 				263C16852D9EE3F9008E102C /* CallManagementServiceTests.swift in Sources */,
 				2617A1212C493BC5002CFD4A /* AccountsServiceTest.swift in Sources */,
