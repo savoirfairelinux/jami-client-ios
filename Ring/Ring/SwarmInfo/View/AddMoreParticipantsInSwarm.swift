@@ -35,7 +35,7 @@ struct AddMoreParticipantsInSwarm: View {
                 .resizable()
                 .renderingMode(.template)
                 .aspectRatio(contentMode: .fill)
-                .foregroundColor(Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiButtonDark) : Color.white)
+                .foregroundColor(Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color.jamiButtonPrimary : Color.white)
                 .frame(width: 30, height: 30, alignment: .center)
         })
         .frame(width: 50, height: 50, alignment: .center)
@@ -78,7 +78,7 @@ struct AddMoreParticipantsInSwarm: View {
                     }
                 }
             }
-            .accentColor(.jamiColor)
+            .accentColor(.jami)
         })
     }
 

@@ -76,7 +76,7 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
-                                    NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor]
+                                    NSAttributedString.Key.foregroundColor: UIColor.label]
     }
 
     override func viewWillDisappear(_ animated: Bool) {

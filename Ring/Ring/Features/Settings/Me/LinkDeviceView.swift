@@ -254,7 +254,7 @@ struct LinkDeviceView: View {
                 .cornerRadius(10)
             Text(model.entryError ?? "")
                 .font(.footnote)
-                .foregroundColor(Color(UIColor.jamiFailure))
+                .foregroundColor(Color.jamiFailure)
                 .multilineTextAlignment(.center)
             connectButton()
                 .padding(.top)

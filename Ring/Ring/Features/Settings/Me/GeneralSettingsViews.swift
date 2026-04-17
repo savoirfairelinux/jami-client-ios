@@ -144,7 +144,7 @@ struct FileTransferSettingsView: View {
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             },
                             keyboardType: .numberPad,
-                            textColor: model.automaticlyDownloadIncomingFiles ? UIColor(Color.jamiColor) : UIColor.secondaryLabel
+                            textColor: model.automaticlyDownloadIncomingFiles ? UIColor(Color.jami) : UIColor.secondaryLabel
                         )
                     }
                     .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)

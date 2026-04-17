@@ -81,7 +81,7 @@ struct BackupAccount: View {
     @ViewBuilder
     private func errorView(_ message: String) -> some View {
         Text(message)
-            .foregroundColor(Color(UIColor.jamiFailure))
+            .foregroundColor(Color.jamiFailure)
             .transition(.scale)
     }
 
@@ -92,10 +92,10 @@ struct BackupAccount: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 40)
-                .foregroundColor(Color(UIColor.jamiSuccess))
+                .foregroundColor(Color.jamiSuccess)
             Text(message)
                 .font(.title)
-                .foregroundColor(Color(UIColor.jamiSuccess))
+                .foregroundColor(Color.jamiSuccess)
         }
         .transition(.scale)
     }

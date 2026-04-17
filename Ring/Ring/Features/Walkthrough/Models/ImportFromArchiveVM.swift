@@ -32,7 +32,7 @@ class ImportFromArchiveVM: ObservableObject {
     }
 
     var importButtonColor: Color {
-        return isImportButtonDisabled ? Color(UIColor.secondaryLabel) : .jamiColor
+        return isImportButtonDisabled ? Color(UIColor.secondaryLabel) : .jami
     }
 
     var selectedFileText: String {

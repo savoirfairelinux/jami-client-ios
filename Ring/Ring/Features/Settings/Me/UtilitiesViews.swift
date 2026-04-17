@@ -125,7 +125,7 @@ struct QRCodePresenter: View {
                     Text(L10n.Global.cancel)
                 })
         }
-        .accentColor(.jamiColor)
+        .accentColor(.jami)
         .onTapGesture {
             isPresented = false
         }
@@ -296,7 +296,7 @@ struct DurationPickerView: View {
                     }
                 }, label: {
                     Text(L10n.Global.close)
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                 })
             }
             DurationPickerWrapper(duration: $duration, maxHours: maxHours)

@@ -49,7 +49,7 @@ struct AccountSummaryView: View {
                             set: { newValue in model.enableAccount(enable: newValue) }
                         ))
                         .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
+                        .toggleStyle(SwitchToggleStyle(tint: Color.jami))
                     }
                     .accessibilityElement(children: .combine)
                 }
@@ -82,7 +82,7 @@ struct AccountSummaryView: View {
                                         .padding(.trailing, 5)
                                     Text(L10n.Smartlist.inviteFriends)
                                 }
-                                .foregroundColor(.jamiColor)
+                                .foregroundColor(.jami)
                                 Spacer()
                             }
                         }
@@ -101,12 +101,12 @@ struct AccountSummaryView: View {
             state?.dismiss()
         }, label: {
             Text(L10n.Global.close)
-                .foregroundColor(.jamiColor)
+                .foregroundColor(.jami)
         }),
         trailing:
             NavigationLink(destination: SettingsSummaryView(model: model)) {
                 Image(systemName: "gearshape")
-                    .foregroundColor(.jamiColor)
+                    .foregroundColor(.jami)
                     .accessibilityLabel(L10n.Accessibility.accountSummaryEditSettingsButton)
             })
     }
@@ -133,7 +133,7 @@ struct AccountSummaryView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 18, height: 18)
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                 })
                 .sheet(isPresented: $showQRcode) {
                     QRCodePresenter(isPresented: $showQRcode, jamiId: model.jamiId, accessibilityLabel: L10n.Accessibility.accountSummaryQrCode)
@@ -222,7 +222,7 @@ struct AccountSummaryView: View {
                             Image(systemName: "person.crop.circle.badge.checkmark")
                             Text(L10n.Global.registerAUsername)
                         }
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                     }
                 })
             )

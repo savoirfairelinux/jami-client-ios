@@ -107,7 +107,7 @@ enum ParticipantRole: String {
 }
 
 struct ConversationPreferences {
-    var color: String = UIColor.defaultSwarm
+    var color: String = UIColor.defaultSwarmColorHex
     var ignoreNotifications: Bool = false
 
     mutating func update(info: [String: String]) {

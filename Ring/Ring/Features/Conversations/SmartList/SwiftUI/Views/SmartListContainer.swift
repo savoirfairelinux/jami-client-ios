@@ -51,7 +51,7 @@ struct NewMessageView: View, StateEmittingView {
             stateEmitter?.closeComposingMessage()
         }, label: {
             Text(L10n.Global.cancel)
-                .foregroundColor(Color.jamiColor)
+                .foregroundColor(Color.jami)
         })
     }
 }
@@ -188,7 +188,7 @@ struct SmartListView: View, StateEmittingView {
         }, label: {
             if let uiImage = UIImage(asset: Asset.phoneBook) {
                 Image(uiImage: uiImage)
-                    .foregroundColor(Color.jamiColor)
+                    .foregroundColor(Color.jami)
             }
         })
         .accessibility(identifier: SmartListAccessibilityIdentifiers.bookButton)
@@ -200,7 +200,7 @@ struct SmartListView: View, StateEmittingView {
             stateEmitter.showDialpad()
         }, label: {
             Image(systemName: "dialpad")
-                .foregroundColor(Color.jamiColor)
+                .foregroundColor(Color.jami)
         })
     }
 
@@ -218,7 +218,7 @@ struct SmartListView: View, StateEmittingView {
             supportButton
         } label: {
             Image(systemName: "ellipsis.circle")
-                .foregroundColor(Color.jamiColor)
+                .foregroundColor(Color.jami)
                 .accessibility(identifier: SmartListAccessibilityIdentifiers.openMenuInSmartList)
         }
     }
@@ -229,7 +229,7 @@ struct SmartListView: View, StateEmittingView {
             stateEmitter.openNewMessagesWindow()
         }, label: {
             Image(systemName: "square.and.pencil")
-                .foregroundColor(Color.jamiColor)
+                .foregroundColor(Color.jami)
         })
     }
 
@@ -335,7 +335,7 @@ struct CurrentAccountButton: View {
                 Text(model.bestName)
                     .bold()
                     .lineLimit(1)
-                    .foregroundColor(Color.jamiColor)
+                    .foregroundColor(Color.jami)
                     .frame(maxWidth: 150, alignment: .leading)
                     .accessibilityHidden(true) // Hides redundant VoiceOver announcements
             }

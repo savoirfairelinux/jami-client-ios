@@ -22,13 +22,12 @@
 import Foundation
 import UIKit
 
-// swiftlint:disable identifier_name
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat) {
-        let red_ = CGFloat(red) / 255.0
-        let green_ = CGFloat(green) / 255.0
-        let blue_ = CGFloat(blue) / 255.0
-        self.init(red: red_, green: green_, blue: blue_, alpha: alpha)
+        let redFloat = CGFloat(red) / 255.0
+        let greenFloat = CGFloat(green) / 255.0
+        let blueFloat = CGFloat(blue) / 255.0
+        self.init(red: redFloat, green: greenFloat, blue: blueFloat, alpha: alpha)
     }
 
     convenience init(hex: Int, alpha: CGFloat) {
@@ -78,60 +77,75 @@ extension UIColor {
         var color: UInt64 = 0
         scanner.scanHexInt64(&color)
         let mask = 0x000000FF
-        let r = Int(color >> 16) & mask
-        let g = Int(color >> 8) & mask
-        let b = Int(color) & mask
-        let red = CGFloat(r) / 255.0
-        let green = CGFloat(g) / 255.0
-        let blue = CGFloat(b) / 255.0
+        let redInt = Int(color >> 16) & mask
+        let greenInt = Int(color >> 8) & mask
+        let blueInt = Int(color) & mask
+        let red = CGFloat(redInt) / 255.0
+        let green = CGFloat(greenInt) / 255.0
+        let blue = CGFloat(blueInt) / 255.0
         self.init(red: red, green: green, blue: blue, alpha: 1)
     }
 
-    static let jamiMain = UIColor(red: 0, green: 86, blue: 153, alpha: 1.0)
-    static let jamiDonation = UIColor(red: 255, green: 0, blue: 69, alpha: 1.0)
-    static let conferenceRaiseHand = UIColor(red: 0, green: 184, blue: 255, alpha: 1.0)
-    static let jamiSecondary = UIColor(hex: 0x1F4971, alpha: 1.0)
-    static let jamiButtonLight = UIColor(named: "jamiButtonLight")!
-    static let jamiButtonDark = UIColor(named: "jamiButtonDark")!
+    // MARK: - Brand
     static let jami = UIColor(named: "jami")!
+    static let jamiSecondary = UIColor(hex: 0x1F4971, alpha: 1.0)
+
+    // MARK: - Buttons
+    static let jamiButtonPrimary = UIColor(named: "jamiButtonPrimary")!
+    static let jamiButtonSecondary = UIColor(named: "jamiButtonSecondary")!
     static let jamiButtonWithOpacity = UIColor(named: "jamiButtonWithOpacity")!
-    static let jamiFormBackgroundColor = UIColor(named: "jamiFormBackgroundColor")!
-    static let jamiMsgCellSent = UIColor(hex: 0x367BC1, alpha: 1.0)
-    static var jamiMsgCellReceived: UIColor {
-        return UIColor(named: "backgroundMsgReceived") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
-    }
 
-    static let jamiMsgCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
-    static let jamiMsgCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
+    // MARK: - Controls
+    static let jamiPrimaryControl = UIColor(named: "jamiPrimaryControl")!
+    static let jamiSecondaryControl = UIColor(named: "jamiSecondaryControl")!
+    static let jamiTertiaryControl = UIColor(named: "jamiTertiaryControl")!
 
-    static var jamiMsgBackground: UIColor {
-        return UIColor(named: "messageBackgroundColor") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
-    }
+    // MARK: - Forms
+    static let jamiFormBackground = UIColor(named: "jamiFormBackground")!
 
-    static let jamiMsgTextFieldBorder = UIColor(red: 220, green: 220, blue: 220, alpha: 1.0)
-    static var jamiNavigationBarShadow: UIColor {
-        return UIColor(named: "shadowColor") ?? UIColor.black
-    }
-
-    static var jamiBackgroundColor: UIColor {
-        return UIColor.systemBackground
-    }
-
-    static var jamiBackgroundSecondaryColor: UIColor {
-        return UIColor.secondarySystemBackground
-    }
-
-    static var jamiLabelColor: UIColor {
-        return UIColor.label
-    }
+    // MARK: - Feature accents
+    static let jamiDonation = UIColor(red: 255, green: 0, blue: 69, alpha: 1.0)
+    static let jamiRaiseHand = UIColor(red: 0, green: 184, blue: 255, alpha: 1.0)
     static let jamiCallPulse = UIColor(hex: 0x039FDF, alpha: 1.0)
     static let jamiDefaultAvatar = UIColor(hex: 0x039FDF, alpha: 1.0)
+
+    // MARK: - Status
     static let jamiSuccess = UIColor(hex: 0x00b20b, alpha: 1.0)
     static let jamiFailure = UIColor(hex: 0xf00000, alpha: 1.0)
     static let jamiWarning = UIColor.orange
 
-    static let defaultSwarm = "#00BCD4"
+    // MARK: - Messages
+    static let jamiMessageCellSent = UIColor(hex: 0x367BC1, alpha: 1.0)
+    static var jamiMessageCellReceived: UIColor {
+        return UIColor(named: "backgroundMsgReceived") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
+    }
+    static let jamiMessageCellReceivedText = UIColor(red: 48, green: 48, blue: 48, alpha: 1.0)
+    static let jamiMessageCellTimeText = UIColor(red: 128, green: 128, blue: 128, alpha: 1.0)
+    static var jamiMessageBackground: UIColor {
+        return UIColor(named: "messageBackgroundColor") ?? UIColor(red: 252, green: 252, blue: 252, alpha: 1.0)
+    }
+    static let jamiMessageTextFieldBorder = UIColor(red: 220, green: 220, blue: 220, alpha: 1.0)
+    static let unreadMessageText = UIColor(hexString: "CC0022")!
+    static let unreadMessageBackground = UIColor(hexString: "EED4D8")!
+
+    // MARK: - Requests
+    static let jamiRequestsBackground = UIColor(named: "jamiRequestsBackground")!
+    static let requestsBadgeForeground = UIColor(named: "requestsBadgeForeground")!
+    static let requestsBadgeBackground = UIColor(named: "requestsBadgeBackground")!
+
+    // MARK: - Alerts
+    static let networkAlertBackground = UIColor(red: 245, green: 110, blue: 88, alpha: 1)
+
+    // MARK: - Navigation
+    static var jamiNavigationBarShadow: UIColor {
+        return UIColor(named: "shadowColor") ?? UIColor.black
+    }
+
+    // MARK: - Swarm
+    static let defaultSwarmColorHex = "#00BCD4"
     static let defaultSwarmColor = UIColor(hexString: "#00BCD4")!
-    static let availablePresenceColor = UIColor(hexString: "#E59028")!
-    static let onlinePresenceColor = UIColor(hexString: "#0B8271")!
+
+    // MARK: - Presence
+    static let availablePresence = UIColor(hexString: "#E59028")!
+    static let onlinePresence = UIColor(hexString: "#0B8271")!
 }

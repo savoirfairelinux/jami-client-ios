@@ -38,7 +38,7 @@ extension View {
     func menuItemStyle() -> some View {
         self
             .frame(width: 22, height: 22)
-            .foregroundColor(Color(UIColor.jamiButtonLight))
+            .foregroundColor(Color.jamiButtonSecondary)
     }
 
     func measureSize() -> some View {
@@ -114,12 +114,12 @@ struct PlatformAdaptiveNavView<Content: View>: View {
             NavigationStack {
                 content()
             }
-            .accentColor(.jamiColor)
+            .accentColor(.jami)
         } else {
             NavigationView {
                 content()
             }
-            .accentColor(.jamiColor)
+            .accentColor(.jami)
             .navigationViewStyle(StackNavigationViewStyle())
         }
     }
@@ -346,7 +346,7 @@ struct ToggleCell: View {
                 set: { newValue in setAction(newValue) }
             ))
             .labelsHidden()
-            .toggleStyle(SwitchToggleStyle(tint: Color.jamiColor))
+            .toggleStyle(SwitchToggleStyle(tint: Color.jami))
         }
         .accessibilityElement(children: .combine)
     }

@@ -144,12 +144,12 @@ struct SwarmCreationUI: View {
                 } else {
                     Image(systemName: "person")
                         .resizable()
-                        .foregroundColor(Color.jamiColor)
+                        .foregroundColor(Color.jami)
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 10, height: 10, alignment: .center)
                         .padding(4)
                         .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.jamiColor, lineWidth: 1))
+                        .overlay(Circle().stroke(Color.jami, lineWidth: 1))
                 }
                 Spacer()
                     .frame(width: 12)
@@ -158,7 +158,7 @@ struct SwarmCreationUI: View {
                 Spacer()
                 Image(systemName: "pencil")
                     .resizable()
-                    .foregroundColor(Color.jamiColor)
+                    .foregroundColor(Color.jami)
                     .frame(width: 18, height: 18, alignment: .center)
             }
             .padding(.horizontal, 15)

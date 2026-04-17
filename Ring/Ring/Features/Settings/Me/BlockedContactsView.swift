@@ -77,7 +77,7 @@ struct BlockedContactRowView: View {
                 model.unblock()
             }, label: {
                 Text(L10n.AccountPage.unblockContact)
-                    .foregroundColor(.jamiColor)
+                    .foregroundColor(.jami)
             })
         }
     }

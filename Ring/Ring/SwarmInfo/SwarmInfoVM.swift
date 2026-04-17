@@ -27,7 +27,7 @@ class SwarmInfoVM: ObservableObject {
     @Published var title: String = ""
     @Published var description: String = ""
 
-    @Published var finalColor: String = UIColor.defaultSwarm
+    @Published var finalColor: String = UIColor.defaultSwarmColorHex
     @Published var selectedColor: String = String()
 
     @Published var editableTitle: String = ""

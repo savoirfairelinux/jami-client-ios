@@ -141,7 +141,7 @@ struct WelcomeView: View, StateEmittingView {
                 viewModel.finish(stateHandler: stateEmitter)
             }, label: {
                 Text(L10n.Global.cancel)
-                    .foregroundColor(Color.jamiColor)
+                    .foregroundColor(Color.jami)
             })
         }
     }
@@ -290,7 +290,7 @@ struct ButtonsView: View {
             Text(title)
                 .padding(12)
                 .frame(maxWidth: 500)
-                .background(Color(UIColor.jamiButtonDark))
+                .background(Color.jamiButtonPrimary)
                 .foregroundColor(Color(UIColor.systemBackground))
                 .cornerRadius(12)
         }
@@ -302,14 +302,14 @@ struct ButtonsView: View {
             Text(title)
                 .padding(12)
                 .frame(maxWidth: 500)
-                .background(Color(UIColor.jamiButtonWithOpacity))
-                .foregroundColor(Color(UIColor.jamiButtonDark))
+                .background(Color.jamiButtonWithOpacity)
+                .foregroundColor(Color.jamiButtonPrimary)
                 .frame(maxWidth: 500)
                 .cornerRadius(12)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
                         .inset(by: 1)
-                        .stroke(Color(UIColor.jamiButtonDark), lineWidth: 1)
+                        .stroke(Color.jamiButtonPrimary, lineWidth: 1)
                 )
         }
     }
@@ -320,7 +320,7 @@ struct ButtonsView: View {
             Text(title)
                 .padding(12)
                 .frame(maxWidth: 500)
-                .foregroundColor(Color.jamiColor)
+                .foregroundColor(Color.jami)
         }
     }
 }
@@ -336,7 +336,7 @@ struct AboutButton: View {
         }, label: {
             Text(L10n.Smartlist.aboutJami)
                 .padding(12)
-                .foregroundColor(.jamiColor)
+                .foregroundColor(.jami)
         })
     }
 }

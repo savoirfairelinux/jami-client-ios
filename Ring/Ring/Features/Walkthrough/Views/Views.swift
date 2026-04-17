@@ -146,7 +146,7 @@ struct AlertFactory {
                 Spacer()
                 Button(action: action, label: {
                     Text(L10n.Global.ok)
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                         .padding(.horizontal)
                 })
             }
@@ -206,7 +206,7 @@ struct SuccessStateView: View {
     var body: some View {
         VStack {
             Image(systemName: "checkmark.circle.fill")
-                .foregroundColor(Color(UIColor.jamiSuccess))
+                .foregroundColor(Color.jamiSuccess)
                 .font(.system(size: 50))
             Text(message)
                 .multilineTextAlignment(.center)
@@ -226,7 +226,7 @@ struct ErrorStateView: View {
     var body: some View {
         VStack {
             Image(systemName: "exclamationmark.circle.fill")
-                .foregroundColor(Color(UIColor.jamiFailure))
+                .foregroundColor(Color.jamiFailure)
                 .font(.system(size: 50))
             Text(message)
                 .multilineTextAlignment(.center)
@@ -266,7 +266,7 @@ struct BackButton: View {
                 Image(systemName: "chevron.left")
                 Text(L10n.Actions.backAction)
             }
-            .foregroundColor(.jamiColor)
+            .foregroundColor(.jami)
         }
     }
 }

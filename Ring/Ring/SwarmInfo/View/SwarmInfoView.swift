@@ -73,7 +73,7 @@ public struct SwarmInfoView: View, StateEmittingView {
 
     private var lightOrDarkColor: Color {
         let isLight = Color(hex: viewModel.finalColor)?.isLight(threshold: 0.8) ?? true
-        return isLight ? Color(UIColor.jamiMain) : Color.white
+        return isLight ? Color.jami : Color.white
     }
 
     // MARK: - Body
@@ -348,7 +348,7 @@ public struct SwarmInfoView: View, StateEmittingView {
                         isShowing.wrappedValue = false
                     }, label: {
                         Text(L10n.Global.cancel)
-                            .foregroundColor(.jamiColor)
+                            .foregroundColor(.jami)
                     })
 
                     Spacer()
@@ -357,7 +357,7 @@ public struct SwarmInfoView: View, StateEmittingView {
                         onSave()
                     }, label: {
                         Text(L10n.Global.save)
-                            .foregroundColor(.jamiColor)
+                            .foregroundColor(.jami)
                     })
                 }
             }

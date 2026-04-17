@@ -48,7 +48,7 @@ struct RevocationView: View {
             HStack {
                 Spacer()
                 Text(errorMessage)
-                    .foregroundColor(Color(UIColor.jamiFailure))
+                    .foregroundColor(Color.jamiFailure)
                 Spacer()
             }
             HStack {
@@ -59,7 +59,7 @@ struct RevocationView: View {
                     }
                 }, label: {
                     Text(L10n.Global.ok)
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                 })
             }
         }
@@ -78,7 +78,7 @@ struct RevocationView: View {
                         .padding(.trailing, 5)
                     Text(successMessage)
                 }
-                .foregroundColor(Color(UIColor.jamiSuccess))
+                .foregroundColor(Color.jamiSuccess)
                 Spacer()
             }
             HStack {
@@ -89,7 +89,7 @@ struct RevocationView: View {
                     }
                 }, label: {
                     Text(L10n.Global.ok)
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                 })
             }
         }
@@ -137,7 +137,7 @@ struct RevocationView: View {
                     deviceToRevoke = nil
                 }, label: {
                     Text(L10n.Global.remove)
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                 })
                 .disabled(model.hasPassword() && password.isEmpty)
                 .opacity(model.hasPassword() && password.isEmpty ? 0.5 : 1)

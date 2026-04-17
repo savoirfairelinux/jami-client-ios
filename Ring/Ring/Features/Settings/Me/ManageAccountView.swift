@@ -55,7 +55,7 @@ struct ManageAccountView: View {
                         HStack {
                             Spacer()
                             Text(L10n.Global.removeAccount)
-                                .foregroundColor(Color(UIColor.jamiFailure))
+                                .foregroundColor(Color.jamiFailure)
                             Spacer()
                         }
                     }
@@ -95,7 +95,7 @@ struct ManageAccountView: View {
                     model.removeAccount(statePublisher: self.state)
                 }, label: {
                     Text(L10n.Global.remove)
-                        .foregroundColor(Color(UIColor.jamiFailure))
+                        .foregroundColor(Color.jamiFailure)
                 })
             }
         }

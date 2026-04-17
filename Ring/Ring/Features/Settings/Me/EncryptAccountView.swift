@@ -144,7 +144,7 @@ struct ErrorMessageView: View {
         HStack {
             Spacer()
             Text(errorMessage)
-                .foregroundColor(Color(UIColor.jamiFailure))
+                .foregroundColor(Color.jamiFailure)
                 .font(.caption)
             Spacer()
         }
@@ -168,7 +168,7 @@ struct SuccessMessageView: View {
                 Text(successMessage)
                     .font(.caption)
             }
-            .foregroundColor(Color(UIColor.jamiSuccess))
+            .foregroundColor(Color.jamiSuccess)
             Spacer()
         }
         .listRowInsets(EdgeInsets())

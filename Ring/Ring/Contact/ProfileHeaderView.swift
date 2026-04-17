@@ -29,8 +29,8 @@ class ProfileHeaderView: GSKStretchyHeaderView {
 
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        self.backgroundColor = UIColor.jamiBackgroundColor
-        self.background.backgroundColor = UIColor.jamiBackgroundColor
+        self.backgroundColor = UIColor.systemBackground
+        self.background.backgroundColor = UIColor.systemBackground
     }
 
     override func didChangeStretchFactor(_ stretchFactor: CGFloat) {

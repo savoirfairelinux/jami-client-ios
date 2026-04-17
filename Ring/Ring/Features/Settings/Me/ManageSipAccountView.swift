@@ -75,7 +75,7 @@ struct ManageSipAccountView: View {
                     HStack {
                         Spacer()
                         Text(L10n.Global.removeAccount)
-                            .foregroundColor(Color(UIColor.jamiFailure))
+                            .foregroundColor(Color.jamiFailure)
                         Spacer()
                     }
                 }

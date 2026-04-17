@@ -71,7 +71,7 @@ struct ContactPickerView: View {
             }
         }
         .navigationViewStyle(.stack)
-        .accentColor(.jamiColor)
+        .accentColor(.jami)
         .onDisappear { onDismissed?() }
     }
 
@@ -205,9 +205,9 @@ private struct AvatarWithPresence: View {
             AvatarSwiftUIView(source: avatarSource)
             switch presenceTracker.status {
             case .connected:
-                presenceCircle(color: .onlinePresenceColor)
+                presenceCircle(color: .onlinePresence)
             case .available:
-                presenceCircle(color: .availablePresenceColor)
+                presenceCircle(color: .availablePresence)
             default:
                 EmptyView()
             }
@@ -285,7 +285,7 @@ private struct ContactPickerConversationRow: View {
             Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                 .resizable()
                 .frame(width: 20, height: 20)
-                .foregroundColor(isSelected ? .jamiColor : .secondary)
+                .foregroundColor(isSelected ? .jami : .secondary)
         }
         .padding(.vertical, 8)
         .contentShape(Rectangle())

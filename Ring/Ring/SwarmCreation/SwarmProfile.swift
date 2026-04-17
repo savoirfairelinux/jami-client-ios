@@ -57,7 +57,7 @@ struct SwarmProfile: View {
             isPresentingProfile = false
         }) {
             Text(L10n.Global.save)
-                .foregroundColor(Color.jamiColor)
+                .foregroundColor(Color.jami)
         }
     }
 
@@ -67,7 +67,7 @@ struct SwarmProfile: View {
             isPresentingProfile = false
         }) {
             Text(L10n.Global.cancel)
-                .foregroundColor(Color.jamiColor)
+                .foregroundColor(Color.jami)
         }
     }
 
@@ -163,7 +163,7 @@ struct EditImageIcon: View {
 
             Image(systemName: "pencil")
                 .resizable()
-                .foregroundColor(Color.jamiColor)
+                .foregroundColor(Color.jami)
                 .frame(width: 12, height: 12)
                 .padding(6)
                 .background(Color(UIColor.systemBackground))

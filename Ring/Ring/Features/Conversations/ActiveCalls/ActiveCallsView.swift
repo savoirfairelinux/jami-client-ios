@@ -96,7 +96,7 @@ struct CallRowView: View {
                 }, label: {
                     Image(systemName: "video")
                         .font(.system(size: 25))
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                         .padding(10)
                 })
                 Spacer()
@@ -105,7 +105,7 @@ struct CallRowView: View {
                 }, label: {
                     Image(systemName: "phone")
                         .font(.system(size: 25))
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                         .padding(10)
                 })
                 Spacer()
@@ -115,7 +115,7 @@ struct CallRowView: View {
                 }, label: {
                     Image(systemName: "xmark")
                         .font(.system(size: 25))
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                         .padding(10)
                 })
                 Spacer()

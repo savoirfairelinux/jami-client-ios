@@ -74,7 +74,7 @@ class ConfirmationAlert {
         alert.addTextField {(textField) in
             textField.text = ""
             textField.isUserInteractionEnabled = false
-            textField.textColor = UIColor.jamiLabelColor
+            textField.textColor = UIColor.label
             textField.textAlignment = .center
             textField.borderStyle = .none
             textField.backgroundColor = UIColor.clear

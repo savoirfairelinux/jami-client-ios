@@ -369,7 +369,7 @@ private struct WaveformBar: View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: 3)
-            .fill(Color.jamiColor)
+            .fill(Color.jami)
             .frame(width: 4, height: height)
             .onAppear {
                 if isAnimating { startAnimation() }

@@ -39,8 +39,8 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         super.viewDidLoad()
         self.addHeaderView()
         self.setUpTableView()
-        view.backgroundColor = UIColor.jamiBackgroundColor
-        tableView.backgroundColor = UIColor.jamiBackgroundColor
+        view.backgroundColor = UIColor.systemBackground
+        tableView.backgroundColor = UIColor.systemBackground
         navigationItem.titleView = titleView
     }
 

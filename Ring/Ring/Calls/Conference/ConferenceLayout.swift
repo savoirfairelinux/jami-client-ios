@@ -106,7 +106,7 @@ class ConferenceLayout: UIView {
         let image = UIImage(systemName: "hand.raised.fill")?.withRenderingMode(.alwaysTemplate)
         raisedHandImage.setImage(image, for: .normal)
         raisedHandImage.tintColor = UIColor.white
-        raisedHandImage.backgroundColor = UIColor.conferenceRaiseHand
+        raisedHandImage.backgroundColor = UIColor.jamiRaiseHand
         raisedHandImage.layer.cornerRadius = 4
         raisedHandImage.layer.maskedCorners = [.layerMinXMinYCorner]
         self.addSubview(raisedHandImage)

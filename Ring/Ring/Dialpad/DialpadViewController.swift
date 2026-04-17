@@ -40,8 +40,8 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.jamiBackgroundColor
-        collectionView.backgroundColor = UIColor.jamiBackgroundColor
+        view.backgroundColor = UIColor.systemBackground
+        collectionView.backgroundColor = UIColor.systemBackground
         self.applyL10n()
         let device = UIDevice.modelName
         if device == "iPhone 5" || device == "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {

@@ -108,6 +108,6 @@ struct EditProfileView: View {
                 })
             )
         }
-        .accentColor(.jamiColor)
+        .accentColor(.jami)
     }
 }

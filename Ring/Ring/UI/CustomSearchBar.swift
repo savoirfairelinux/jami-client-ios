@@ -93,7 +93,7 @@ class CustomSearchBar: UISearchBar {
         rightButton = UIButton(frame: CGRect(x: (buttonSize * position) - buttonSize, y: 0, width: buttonSize, height: buttonSize))
         rightButton.imageEdgeInsets = UIEdgeInsets(top: 12, left: position == 2 ? 8 : 16, bottom: 12, right: position == 2 ? 16 : 8)
         rightButton.setImage(buttonImage, for: .normal)
-        rightButton.tintColor = UIColor.jamiMain
+        rightButton.tintColor = UIColor.jami
         buttonView.addSubview(rightButton)
         self.addSubview(buttonView)
         rightButton.translatesAutoresizingMaskIntoConstraints = true

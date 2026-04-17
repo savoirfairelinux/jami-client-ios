@@ -84,10 +84,10 @@ struct SettingsView: View {
         }, label: {
             HStack {
                 Image(systemName: "qrcode")
-                    .foregroundColor(Color.jamiColor)
+                    .foregroundColor(Color.jami)
                     .accessibility(hidden: true)
                 Text(L10n.Swarm.showContactQRCode)
-                    .foregroundColor(Color.jamiColor)
+                    .foregroundColor(Color.jami)
             }
         })
         .buttonStyle(PlainButtonStyle())
@@ -102,10 +102,10 @@ struct SettingsView: View {
         ShareButtonView(infoToShare: viewmodel.createShareInfo(for: jamiId)) {
             HStack {
                 Image(systemName: "square.and.arrow.up")
-                    .foregroundColor(Color.jamiColor)
+                    .foregroundColor(Color.jami)
                     .accessibility(hidden: true)
                 Text(L10n.Swarm.shareContactInfo)
-                    .foregroundColor(Color.jamiColor)
+                    .foregroundColor(Color.jami)
             }
         }
         .buttonStyle(PlainButtonStyle())
@@ -119,11 +119,11 @@ struct SettingsView: View {
         }, label: {
             HStack {
                 Image(systemName: "person.crop.circle.badge.xmark")
-                    .foregroundColor(Color(UIColor.jamiFailure))
+                    .foregroundColor(Color.jamiFailure)
                     .accessibility(hidden: true)
                 Text(L10n.Global.blockContact)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color(UIColor.jamiFailure))
+                    .foregroundColor(Color.jamiFailure)
             }
         })
         .accessibilityLabel(L10n.Global.blockContact)
@@ -188,11 +188,11 @@ struct SettingsView: View {
         }, label: {
             HStack {
                 Image(systemName: "arrow.right.circle")
-                    .foregroundColor(Color(UIColor.jamiFailure))
+                    .foregroundColor(Color.jamiFailure)
                     .accessibility(hidden: true)
                 Text(viewmodel.removeConversationText)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color(UIColor.jamiFailure))
+                    .foregroundColor(Color.jamiFailure)
             }
         })
         .accessibilityLabel(viewmodel.removeConversationText)
@@ -204,11 +204,11 @@ struct SettingsView: View {
         }, label: {
             HStack {
                 Image(systemName: "person.crop.circle.badge.minus")
-                    .foregroundColor(Color.jamiColor)
+                    .foregroundColor(Color.jami)
                     .accessibility(hidden: true)
                 Text(L10n.Swarm.removeContact)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color.jamiColor)
+                    .foregroundColor(Color.jami)
             }
         })
         .accessibilityLabel(L10n.Swarm.removeContact)
@@ -317,7 +317,7 @@ struct AccessibleCustomColorPicker: View {
                 Text(L10n.Global.cancel)
             }))
         }
-        .accentColor(.jamiColor)
+        .accentColor(.jami)
         .optionalMediumPresentationDetents()
         .accessibilityAutoFocusOnAppear()
     }

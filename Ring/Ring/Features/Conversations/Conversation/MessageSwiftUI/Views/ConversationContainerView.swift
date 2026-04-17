@@ -74,7 +74,7 @@ struct ConversationContainerView: View {
                 if !viewModel.name.isEmpty {
                     Text(viewModel.name)
                         .bold()
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                         .lineLimit(1)
                         .truncationMode(.tail)
                 }
@@ -83,7 +83,7 @@ struct ConversationContainerView: View {
                    viewModel.navUserName != viewModel.name {
                     Text(viewModel.navUserName)
                         .font(.footnote)
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                         .lineLimit(1)
                         .truncationMode(.tail)
                 }
@@ -107,7 +107,7 @@ struct ConversationContainerView: View {
         Button(action: viewModel.startAudioCall) {
             Image(systemName: "phone")
         }
-        .foregroundColor(.jamiColor)
+        .foregroundColor(.jami)
         .accessibilityLabel(L10n.Accessibility.conversationStartVoiceCall(viewModel.name))
     }
 
@@ -115,7 +115,7 @@ struct ConversationContainerView: View {
         Button(action: viewModel.startCall) {
             Image(systemName: "video")
         }
-        .foregroundColor(.jamiColor)
+        .foregroundColor(.jami)
         .accessibilityLabel(L10n.Accessibility.conversationStartVideoCall(viewModel.name))
     }
 

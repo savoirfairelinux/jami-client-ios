@@ -141,7 +141,7 @@ struct AccountMigrationView: View {
             Text(L10n.MigrateAccount.migrateButton)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 12)
-                .background(Color.jamiColor)
+                .background(Color.jami)
                 .foregroundColor(.white)
                 .cornerRadius(12)
         })

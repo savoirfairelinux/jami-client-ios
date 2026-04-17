@@ -87,17 +87,51 @@ extension Color: RawRepresentable {
     }
 }
 
+// SwiftUI mirrors of UIColor+Ring. Values live in UIColor+Ring (and the
+// asset catalog); this extension only bridges UIColor → Color so both APIs
+// expose every constant with the same name.
 extension Color {
-    static let jamiPrimaryControl = Color("jamiPrimaryControl")
-    static let jamiSecondaryControl = Color("jamiSecondaryControl")
-    static let jamiTertiaryControl = Color("jamiTertiaryControl")
-    static let jamiRequestsColor = Color("jamiRequestsColor")
-    static let jamiColor = Color("jami")
-    static let availablePresenceColor = Color(UIColor.availablePresenceColor)
-    static let onlinePresenceColor = Color(UIColor.onlinePresenceColor)
-    static let unreadMessageColorText = Color(UIColor(hexString: "CC0022")!)
-    static let unreadMessageBackground = Color(UIColor(hexString: "EED4D8")!)
-    static let networkAlertBackground = Color(UIColor(red: 245, green: 110, blue: 88, alpha: 1))
-    static let requestBadgeForeground = Color("requestBadgeForeground")
-    static let requestsBadgeBackground = Color("requestsBadgeBackground")
+    static let jami = Color(UIColor.jami)
+    static let jamiSecondary = Color(UIColor.jamiSecondary)
+
+    static let jamiButtonPrimary = Color(UIColor.jamiButtonPrimary)
+    static let jamiButtonSecondary = Color(UIColor.jamiButtonSecondary)
+    static let jamiButtonWithOpacity = Color(UIColor.jamiButtonWithOpacity)
+
+    static let jamiPrimaryControl = Color(UIColor.jamiPrimaryControl)
+    static let jamiSecondaryControl = Color(UIColor.jamiSecondaryControl)
+    static let jamiTertiaryControl = Color(UIColor.jamiTertiaryControl)
+
+    static let jamiFormBackground = Color(UIColor.jamiFormBackground)
+
+    static let jamiDonation = Color(UIColor.jamiDonation)
+    static let jamiRaiseHand = Color(UIColor.jamiRaiseHand)
+    static let jamiCallPulse = Color(UIColor.jamiCallPulse)
+    static let jamiDefaultAvatar = Color(UIColor.jamiDefaultAvatar)
+
+    static let jamiSuccess = Color(UIColor.jamiSuccess)
+    static let jamiFailure = Color(UIColor.jamiFailure)
+    static let jamiWarning = Color(UIColor.jamiWarning)
+
+    static let jamiMessageCellSent = Color(UIColor.jamiMessageCellSent)
+    static let jamiMessageCellReceived = Color(UIColor.jamiMessageCellReceived)
+    static let jamiMessageCellReceivedText = Color(UIColor.jamiMessageCellReceivedText)
+    static let jamiMessageCellTimeText = Color(UIColor.jamiMessageCellTimeText)
+    static let jamiMessageBackground = Color(UIColor.jamiMessageBackground)
+    static let jamiMessageTextFieldBorder = Color(UIColor.jamiMessageTextFieldBorder)
+    static let unreadMessageText = Color(UIColor.unreadMessageText)
+    static let unreadMessageBackground = Color(UIColor.unreadMessageBackground)
+
+    static let jamiRequestsBackground = Color(UIColor.jamiRequestsBackground)
+    static let requestsBadgeForeground = Color(UIColor.requestsBadgeForeground)
+    static let requestsBadgeBackground = Color(UIColor.requestsBadgeBackground)
+
+    static let networkAlertBackground = Color(UIColor.networkAlertBackground)
+
+    static let jamiNavigationBarShadow = Color(UIColor.jamiNavigationBarShadow)
+
+    static let defaultSwarmColor = Color(UIColor.defaultSwarmColor)
+
+    static let availablePresence = Color(UIColor.availablePresence)
+    static let onlinePresence = Color(UIColor.onlinePresence)
 }

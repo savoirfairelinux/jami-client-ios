@@ -241,7 +241,7 @@ struct LinkToAccountView: View {
             if let error = viewModel.authError {
                 Text(error)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(Color(UIColor.jamiFailure))
+                    .foregroundColor(Color.jamiFailure)
                     .font(.footnote)
             }
         }

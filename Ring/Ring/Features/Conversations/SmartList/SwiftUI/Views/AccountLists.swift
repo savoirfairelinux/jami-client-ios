@@ -47,9 +47,9 @@ struct AccountStatusIndicator: View {
     private var statusColor: Color {
         switch status {
         case .registered, .ready:
-            return Color.onlinePresenceColor
+            return Color.onlinePresence
         case .trying, .initializing:
-            return Color.availablePresenceColor
+            return Color.availablePresence
         case .unregistered,
              .error,
              .errorGeneric,
@@ -62,7 +62,7 @@ struct AccountStatusIndicator: View {
              .errorNotAcceptable,
              .errorRequestTimeout,
              .errorNeedMigration:
-            return Color(UIColor.jamiFailure)
+            return Color.jamiFailure
         }
     }
 }
@@ -140,7 +140,7 @@ struct AccountLists: View {
             createAccountCallback()
         }, label: {
             Text(L10n.Smartlist.addAccountButton)
-                .foregroundColor(Color(UIColor.jamiButtonDark))
+                .foregroundColor(Color.jamiButtonPrimary)
                 .lineLimit(1)
                 .padding()
                 .frame(maxWidth: .infinity)

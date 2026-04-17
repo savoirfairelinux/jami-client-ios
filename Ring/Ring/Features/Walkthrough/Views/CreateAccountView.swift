@@ -102,10 +102,10 @@ struct CreateAccountView: View {
     private var encryptionStatus: some View {
         HStack {
             Image(systemName: "checkmark.circle.fill")
-                .foregroundColor(Color(UIColor.jamiSuccess))
+                .foregroundColor(Color.jamiSuccess)
             Text(L10n.CreateAccount.encryptionEnabled)
                 .font(.footnote)
-                .foregroundColor(Color(UIColor.jamiSuccess))
+                .foregroundColor(Color.jamiSuccess)
                 .padding(.horizontal, 5)
             Spacer()
         }
@@ -196,7 +196,7 @@ struct CreateAccountView: View {
             Text(L10n.Global.create)
                 .foregroundColor(viewModel.isJoinButtonDisabled ?
                                     Color(UIColor.secondaryLabel) :
-                                    .jamiColor)
+                                    .jami)
         })
         .disabled(viewModel.isJoinButtonDisabled)
         .accessibilityIdentifier(AccessibilityIdentifiers.joinButton)
@@ -212,7 +212,7 @@ struct CreateAccountView: View {
             Text(encryptionEnabled ?
                     L10n.AccountPage.changePassword :
                     L10n.CreateAccount.encrypt)
-                .foregroundColor(.jamiColor)
+                .foregroundColor(.jami)
                 .padding()
         })
     }
@@ -224,7 +224,7 @@ struct CreateAccountView: View {
             }
         }, label: {
             Text(L10n.CreateAccount.customize)
-                .foregroundColor(.jamiColor)
+                .foregroundColor(.jami)
         })
     }
 
@@ -274,7 +274,7 @@ struct CreateAccountView: View {
                 }
             }, label: {
                 Text(L10n.Global.cancel)
-                    .foregroundColor(.jamiColor)
+                    .foregroundColor(.jami)
             })
 
             Spacer()
@@ -286,7 +286,7 @@ struct CreateAccountView: View {
                 }
             }, label: {
                 Text(L10n.Global.save)
-                    .foregroundColor(.jamiColor)
+                    .foregroundColor(.jami)
             })
             .disabled(!passwordValidated)
             .opacity(passwordValidated ? 1 : 0.5)

@@ -75,7 +75,7 @@ struct SIPConfigurationView: View {
             model?.connect()
         }, label: {
             Text(L10n.Account.configure)
-                .foregroundColor(.jamiColor)
+                .foregroundColor(.jami)
         })
     }
 

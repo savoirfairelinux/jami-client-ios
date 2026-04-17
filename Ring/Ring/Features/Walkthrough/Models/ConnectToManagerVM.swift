@@ -33,7 +33,7 @@ class ConnectToManagerVM: ObservableObject {
     }
 
     var signInButtonColor: Color {
-        return isSignInDisabled ? Color(UIColor.secondaryLabel) : .jamiColor
+        return isSignInDisabled ? Color(UIColor.secondaryLabel) : .jami
     }
 
     init(with injectionBag: InjectionBag, connectAction: @escaping ((_ username: String, _ password: String, _ server: String) -> Void)) {

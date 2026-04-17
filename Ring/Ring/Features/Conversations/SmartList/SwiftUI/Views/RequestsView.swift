@@ -41,7 +41,7 @@ struct RequestsIndicatorView: View {
             unreadCounter
         }
         .frame(maxWidth: .infinity)
-        .background(Color.jamiRequestsColor)
+        .background(Color.jamiRequestsBackground)
         .cornerRadius(cornerRadius)
         .accessibilityElement(children: /*@START_MENU_TOKEN@*/.ignore/*@END_MENU_TOKEN@*/)
         .accessibilityLabel(model.unreadRequestsAccessibilityLabel)
@@ -73,7 +73,7 @@ struct RequestsIndicatorView: View {
         Text("\(model.unreadRequests)")
             .font(.footnote)
             .fontWeight(.semibold)
-            .foregroundColor(Color.requestBadgeForeground)
+            .foregroundColor(Color.requestsBadgeForeground)
             .padding(.horizontal, badgePadding)
             .padding(.vertical, 4)
             .background(Color.requestsBadgeBackground)
@@ -109,7 +109,7 @@ struct RequestsView: View {
 
                 requestsList
             }
-            .background(Color.jamiRequestsColor.ignoresSafeArea())
+            .background(Color.jamiRequestsBackground.ignoresSafeArea())
         }
     }
 
@@ -122,7 +122,7 @@ struct RequestsView: View {
             }
             .hideRowSeparator()
             .edgesIgnoringSafeArea(.all)
-            .background(Color.jamiRequestsColor)
+            .background(Color.jamiRequestsBackground)
         }
     }
 }
@@ -179,7 +179,7 @@ struct RequestsRowView: View {
     }
 
     private var backgroundView: some View {
-        Color.jamiRequestsColor
+        Color.jamiRequestsBackground
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .shadow(color: .black.opacity(requestRow.markedToRemove ? 0.9 : 0), radius: requestRow.markedToRemove ? 2 : 0)
     }
@@ -258,7 +258,7 @@ struct RequestsRowView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: actionIconSize, height: actionIconSize)
-            .foregroundColor(Color.requestBadgeForeground)
+            .foregroundColor(Color.requestsBadgeForeground)
             .padding(.horizontal, buttonPadding)
             .padding(.vertical, buttonPadding)
             .frame(maxWidth: .infinity)

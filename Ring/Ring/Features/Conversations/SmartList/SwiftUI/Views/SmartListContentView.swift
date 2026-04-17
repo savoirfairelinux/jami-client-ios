@@ -177,7 +177,7 @@ struct SmartListContentView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 18, height: 18)
-                .foregroundColor(.jamiColor)
+                .foregroundColor(.jami)
             Text(title)
                 .font(.callout)
         }

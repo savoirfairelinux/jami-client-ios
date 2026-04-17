@@ -149,7 +149,7 @@ struct ActiveCallIndicator: View {
     var body: some View {
         Image(systemName: "phone")
             .font(.system(size: 18, weight: .semibold))
-            .foregroundColor(.jamiColor)
+            .foregroundColor(.jami)
             .padding(.horizontal)
             .opacity(isAnimating ? 0.4 : 1.0)
             .onAppear {
@@ -214,7 +214,7 @@ struct ConversationRowView: View {
                         .font(.footnote)
                         .padding(.vertical, 4)
                         .padding(.horizontal, 8)
-                        .foregroundColor(Color.unreadMessageColorText)
+                        .foregroundColor(Color.unreadMessageText)
                         .background(Color.unreadMessageBackground)
                         .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                 }
@@ -234,9 +234,9 @@ struct ConversationRowView: View {
         Group {
             switch model.presence {
             case .connected:
-                presenceCircle(color: Color.onlinePresenceColor)
+                presenceCircle(color: Color.onlinePresence)
             case .available:
-                presenceCircle(color: Color.availablePresenceColor)
+                presenceCircle(color: Color.availablePresence)
             default:
                 EmptyView()
             }

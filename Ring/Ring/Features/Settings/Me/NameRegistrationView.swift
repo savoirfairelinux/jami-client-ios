@@ -70,7 +70,7 @@ struct NameRegistrationView: View {
                     }
                 }, label: {
                     Text(L10n.Global.ok)
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                         .padding(.horizontal)
                 })
             }
@@ -132,7 +132,7 @@ struct NameRegistrationView: View {
                     Text( L10n.AccountPage.usernameRegisterAction)
                         .foregroundColor(!model.registerButtonAvailable ?
                                             Color(UIColor.secondaryLabel) :
-                                            .jamiColor)
+                                            .jami)
                 })
                 .disabled(!model.registerButtonAvailable)
             }

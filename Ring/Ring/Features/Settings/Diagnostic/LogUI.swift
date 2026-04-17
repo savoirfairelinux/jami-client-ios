@@ -129,7 +129,7 @@ struct LogUI: View {
         }, label: {
             Image(systemName: "square.and.arrow.up")
                 .padding(5)
-                .foregroundColor(Color.jamiColor)
+                .foregroundColor(Color.jami)
         })
     }
 
@@ -139,7 +139,7 @@ struct LogUI: View {
         }, label: {
             Image(systemName: "arrow.down.circle")
                 .padding(5)
-                .foregroundColor(Color.jamiColor)
+                .foregroundColor(Color.jami)
         })
     }
 

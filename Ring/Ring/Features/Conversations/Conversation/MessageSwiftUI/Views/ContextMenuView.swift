@@ -210,7 +210,7 @@ struct ContextMenuView: View {
         return ZStack {
             VisualEffect(style: .systemUltraThinMaterial, withVibrancy: false)
                 .opacity(progress)
-            Color.jamiColor.opacity(progress * 0.1)
+            Color.jami.opacity(progress * 0.1)
         }
         .edgesIgnoringSafeArea(.all)
     }

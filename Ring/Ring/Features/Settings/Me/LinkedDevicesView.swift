@@ -101,7 +101,7 @@ struct LinkedDevicesView: View {
             Spacer()
             if !device.isCurrent {
                 Text(L10n.Global.remove)
-                    .foregroundColor(.jamiColor)
+                    .foregroundColor(.jami)
                     .onTapGesture {
                         deviceToRevoke = device
                         withAnimation {
@@ -110,7 +110,7 @@ struct LinkedDevicesView: View {
                     }
             } else {
                 Text(editingDevice == device.deviceId ? L10n.Global.save : L10n.Global.edit)
-                    .foregroundColor(.jamiColor)
+                    .foregroundColor(.jami)
                     .onTapGesture {
                         handleButtonAction(device: device)
                     }

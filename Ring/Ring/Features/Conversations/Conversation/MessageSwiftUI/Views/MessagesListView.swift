@@ -402,7 +402,7 @@ struct MessagesListView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 18, height: 18)
-                        .foregroundColor(.jamiColor)
+                        .foregroundColor(.jami)
                     Text(L10n.AccountPage.unblockContact)
                         .foregroundColor(Color(UIColor.label))
                 }

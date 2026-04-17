@@ -123,7 +123,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
-    @Published var backgroundColor: Color = Color(.jamiMsgCellReceived)
+    @Published var backgroundColor: Color = Color.jamiMessageCellReceived
     @Published var finalImage: UIImage?
     @Published var messageDeleted = false
     @Published var messageEdited = false
@@ -342,7 +342,7 @@ class MessageContentVM: ObservableObject, PlayerDelegate, MessageAppearanceProto
         if self.type.isContact || self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
             self.backgroundColor = .clear
         } else {
-            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
+            self.backgroundColor = isIncoming ? Color.jamiMessageCellReceived : Color(preferencesColor)
         }
     }
 

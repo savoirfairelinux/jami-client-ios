@@ -67,7 +67,7 @@ extension UIImage {
         context?.saveGState()
         path.addClip()
         self.draw(in: bounds)
-        UIColor.jamiMsgBackground.setStroke()
+        UIColor.jamiMessageBackground.setStroke()
         path.lineWidth = offset * 2
         path.stroke()
         let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -247,7 +247,7 @@ extension UIImage {
     }
 
     func fillJamiBackgroundColor(inset: CGFloat) -> UIImage {
-        let color = UIColor.jamiMain
+        let color = UIColor.jami
         return self.fillBackgroundColor(color: color, inset: inset)
     }
 

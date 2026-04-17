@@ -125,6 +125,6 @@ struct ProfileView: View {
                 })
             )
         }
-        .accentColor(.jamiColor)
+        .accentColor(.jami)
     }
 }
