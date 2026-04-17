@@ -42,6 +42,11 @@ struct Base64VCard {
     var partsReceived: Int
 }
 
+private struct ProfileKey: Hashable {
+    let accountId: String
+    let uri: String
+}
+
 class ProfilesService {
 
     private let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
@@ -50,7 +55,7 @@ class ProfilesService {
     private let profilesAdapter: ProfilesAdapter
 
     private let profilesLock = NSLock()
-    var profiles: ThreadSafeDictionary<String, ReplaySubject<Profile>>
+    private var profiles: ThreadSafeDictionary<ProfileKey, ReplaySubject<Profile>>
     var accountProfiles: ThreadSafeDictionary<String, ReplaySubject<Profile>>
 
     private let avatarsCache = NSCache<NSString, UIImage>()
@@ -185,7 +190,7 @@ class ProfilesService {
     }
 
     private func triggerProfileSignal(uri: String, createIfNotexists: Bool, accountId: String) {
-        guard let profileObservable = self.profiles[uri] else {
+        guard let profileObservable = self.profiles[ProfileKey(accountId: accountId, uri: uri)] else {
             return
         }
         self.dbManager
@@ -200,7 +205,7 @@ class ProfilesService {
     }
 
     func getProfile(uri: String, createIfNotexists: Bool, accountId: String) -> Observable<Profile> {
-        let (subject, inserted) = profiles.getOrInsert(key: uri) {
+        let (subject, inserted) = profiles.getOrInsert(key: ProfileKey(accountId: accountId, uri: uri)) {
             ReplaySubject<Profile>.create(bufferSize: 1)
         }
         if inserted {
