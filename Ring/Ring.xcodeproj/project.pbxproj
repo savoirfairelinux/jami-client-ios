@@ -276,7 +276,6 @@
 		2632D2F52CA5AFBB00E60096 /* ConnectSipVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632D2F42CA5AFBB00E60096 /* ConnectSipVM.swift */; };
 		2637E55F2DD95FE600ACCF91 /* ActiveCallsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E55E2DD95FE400ACCF91 /* ActiveCallsHelper.swift */; };
 		2637E5612DD96BE000ACCF91 /* ActiveCallsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E5602DD96BE000ACCF91 /* ActiveCallsHelperTests.swift */; };
-		26A2B0522E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */; };
 		2637E5632DDE274E00ACCF91 /* CallBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E5622DDE274E00ACCF91 /* CallBannerView.swift */; };
 		2637E5652DDE27B600ACCF91 /* CallBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2637E5642DDE27B600ACCF91 /* CallBannerViewModel.swift */; };
 		2637E5662DDE662200ACCF91 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C436C2862561700B4BE73 /* Constants.swift */; };
@@ -391,6 +390,7 @@
 		26A072FD295A7145006D8163 /* ContextMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072FC295A7145006D8163 /* ContextMenuVM.swift */; };
 		26A1B2C3D4E5F60800AABB01 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */; };
 		26A1B2C3D4E5F60A00AABB02 /* ThreadSafeDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */; };
+		26A2B0522E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */; };
 		26A34ED52C6E83D500A41DD4 /* ImportFromArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED42C6E83D500A41DD4 /* ImportFromArchiveView.swift */; };
 		26A34ED82C6EAE9A00A41DD4 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED72C6EAE9A00A41DD4 /* DocumentPicker.swift */; };
 		26A34EDA2C6EB7C800A41DD4 /* BackupAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A34ED92C6EB7C800A41DD4 /* BackupAccount.swift */; };
@@ -905,7 +905,6 @@
 		26376721245315E600CDC51F /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		2637E55E2DD95FE400ACCF91 /* ActiveCallsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsHelper.swift; sourceTree = "<group>"; };
 		2637E5602DD96BE000ACCF91 /* ActiveCallsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsHelperTests.swift; sourceTree = "<group>"; };
-		26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsViewModelTests.swift; sourceTree = "<group>"; };
 		2637E5622DDE274E00ACCF91 /* CallBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBannerView.swift; sourceTree = "<group>"; };
 		2637E5642DDE27B600ACCF91 /* CallBannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBannerViewModel.swift; sourceTree = "<group>"; };
 		263C16652D94E1B3008E102C /* CallManagementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManagementService.swift; sourceTree = "<group>"; };
@@ -1019,6 +1018,7 @@
 		26A072FC295A7145006D8163 /* ContextMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuVM.swift; sourceTree = "<group>"; };
 		26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionary.swift; sourceTree = "<group>"; };
 		26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionaryTests.swift; sourceTree = "<group>"; };
+		26A2B0512E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallsViewModelTests.swift; sourceTree = "<group>"; };
 		26A34ED42C6E83D500A41DD4 /* ImportFromArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromArchiveView.swift; sourceTree = "<group>"; };
 		26A34ED72C6EAE9A00A41DD4 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		26A34ED92C6EB7C800A41DD4 /* BackupAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupAccount.swift; sourceTree = "<group>"; };
@@ -4777,7 +4777,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -4794,7 +4794,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 4.09;
+				MARKETING_VERSION = 4.10;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4821,7 +4821,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4837,7 +4837,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 4.09;
+				MARKETING_VERSION = 4.10;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5017,7 +5017,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -5039,7 +5039,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 4.09;
+				MARKETING_VERSION = 4.10;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5610,7 +5610,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -5627,7 +5627,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 4.09;
+				MARKETING_VERSION = 4.10;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
