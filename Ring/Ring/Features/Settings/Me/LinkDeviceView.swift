@@ -119,7 +119,11 @@ struct LinkDeviceView: View {
     @ViewBuilder private var tokenView: some View {
         ModeSelectorView(selectedMode: $entryMode, isLinkToAccount: false)
             .onChange(of: entryMode) { _ in
-                model.cleanState()
+                var transaction = Transaction()
+                transaction.disablesAnimations = true
+                withTransaction(transaction) {
+                    model.cleanState()
+                }
             }
         tokenContent
     }
@@ -227,9 +231,34 @@ struct LinkDeviceView: View {
     }
 
     private var qrCodeView: some View {
-        ScanQRCodeView(width: 250, height: 200) { jamiAuthentication in
-            model.handleAuthenticationUri(jamiAuthentication)
+        VStack(spacing: 8) {
+            ScanQRCodeView(width: 250, height: 200) { jamiAuthentication in
+                model.handleAuthenticationUri(jamiAuthentication)
+            }
+            errorSlot(model.entryError)
         }
+        .animation(.easeInOut(duration: 0.25), value: model.entryError)
+    }
+
+    private func errorSlot(_ message: String?) -> some View {
+        ZStack(alignment: .top) {
+            if let message {
+                errorText(message)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .transition(.opacity)
+            }
+        }
+        .frame(minHeight: 32, alignment: .top)
+    }
+
+    private func errorText(_ message: String) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 6) {
+            Image(systemName: "exclamationmark.triangle.fill")
+            Text(message)
+        }
+        .font(.footnote)
+        .foregroundColor(Color.jamiFailure)
+        .multilineTextAlignment(.center)
     }
 
     func connectButton() -> some View {
@@ -252,13 +281,11 @@ struct LinkDeviceView: View {
                 .autocapitalization(.none)
                 .background(Color(UIColor.systemGroupedBackground))
                 .cornerRadius(10)
-            Text(model.entryError ?? "")
-                .font(.footnote)
-                .foregroundColor(Color.jamiFailure)
-                .multilineTextAlignment(.center)
+            errorSlot(model.entryError)
             connectButton()
                 .padding(.top)
         }
+        .animation(.easeInOut(duration: 0.25), value: model.entryError)
     }
 
     func cancelRequested() {

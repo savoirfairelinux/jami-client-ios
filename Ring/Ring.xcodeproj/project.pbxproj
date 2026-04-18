@@ -263,6 +263,7 @@
 		261190B42A2928D000CAE7F8 /* ParticipantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261190B32A2928D000CAE7F8 /* ParticipantViewModel.swift */; };
 		261190B62A2928FB00CAE7F8 /* ParticipantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261190B52A2928FB00CAE7F8 /* ParticipantView.swift */; };
 		2617A1212C493BC5002CFD4A /* AccountsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617A1202C493BC5002CFD4A /* AccountsServiceTest.swift */; };
+		2E95DB7F67AC7C0D12E4014B /* LinkDeviceVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CC8DA55AF00F04FF329D3D /* LinkDeviceVMTests.swift */; };
 		2617A1232C493FB7002CFD4A /* MockAccountsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2617A1222C493FB7002CFD4A /* MockAccountsService.swift */; };
 		261A90842F1FF75C00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
 		261A90862F1FF77D00438171 /* libjami-core.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261A90832F1FF75B00438171 /* libjami-core.xcframework */; };
@@ -894,6 +895,7 @@
 		261190B32A2928D000CAE7F8 /* ParticipantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantViewModel.swift; sourceTree = "<group>"; };
 		261190B52A2928FB00CAE7F8 /* ParticipantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantView.swift; sourceTree = "<group>"; };
 		2617A1202C493BC5002CFD4A /* AccountsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsServiceTest.swift; sourceTree = "<group>"; };
+		63CC8DA55AF00F04FF329D3D /* LinkDeviceVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkDeviceVMTests.swift; sourceTree = "<group>"; };
 		2617A1222C493FB7002CFD4A /* MockAccountsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountsService.swift; sourceTree = "<group>"; };
 		261A90832F1FF75B00438171 /* libjami-core.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libjami-core.xcframework"; path = "../xcframework/libjami-core.xcframework"; sourceTree = "<group>"; };
 		2625814D2B4DE40200314C42 /* MessagePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePanelView.swift; sourceTree = "<group>"; };
@@ -3379,6 +3381,7 @@
 			children = (
 				5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */,
 				2617A1202C493BC5002CFD4A /* AccountsServiceTest.swift */,
+				63CC8DA55AF00F04FF329D3D /* LinkDeviceVMTests.swift */,
 			);
 			name = AccountsTests;
 			sourceTree = "<group>";
@@ -4484,6 +4487,7 @@
 				263C167B2D9723A5008E102C /* MessageHandlingServiceTests.swift in Sources */,
 				263C16852D9EE3F9008E102C /* CallManagementServiceTests.swift in Sources */,
 				2617A1212C493BC5002CFD4A /* AccountsServiceTest.swift in Sources */,
+				2E95DB7F67AC7C0D12E4014B /* LinkDeviceVMTests.swift in Sources */,
 				BB8BBCA329F04DA1007228BA /* LocationSharingServiceTests.swift in Sources */,
 				260AE64529C8FD2500D66D5E /* VCardUtilsTests.swift in Sources */,
 				2673D62A25261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift in Sources */,
