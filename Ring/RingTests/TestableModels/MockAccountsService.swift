@@ -20,8 +20,15 @@ import Foundation
 
 class MockAccountsService: AccountsService {
     var mockAccountsId: [String]?
+    var addDeviceCalls: [(accountId: String, token: String)] = []
+    var addDeviceOperationId: UInt32 = 1
 
     override func getAccountsId() -> [String]? {
         return mockAccountsId
+    }
+
+    override func addDevice(accountId: String, token: String) -> UInt32 {
+        addDeviceCalls.append((accountId, token))
+        return addDeviceOperationId
     }
 }

@@ -115,6 +115,7 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
 
     class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         var parent: QRCodeScannerView
+        private var lastScannedCode: String?
 
         init(parent: QRCodeScannerView) {
             self.parent = parent
@@ -123,12 +124,17 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
         func metadataOutput(_ output: AVCaptureMetadataOutput,
                             didOutput metadataObjects: [AVMetadataObject],
                             from connection: AVCaptureConnection) {
-            if let metadataObject = metadataObjects.first,
-               let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject,
-               let stringValue = readableObject.stringValue {
-                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                parent.didFindCode(stringValue)
+            guard let metadataObject = metadataObjects.first,
+                  let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject,
+                  let stringValue = readableObject.stringValue else {
+                return
             }
+
+            guard stringValue != lastScannedCode else { return }
+            lastScannedCode = stringValue
+
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            parent.didFindCode(stringValue)
         }
     }
 

@@ -40,7 +40,7 @@ enum AddDeviceExportState {
 
 class LinkDeviceVM: ObservableObject {
     static let schema = "jami-auth://"
-    private static let validLengths: Set<Int> = [
+    static let validLengths: Set<Int> = [
         schema.count + 47,  // 59 - standard
         schema.count + 71   // 83 - long id
     ]
