@@ -238,6 +238,10 @@ class AccountsService: AccountAdapterDelegate {
         return self.accountAdapter.getAccountList() as? [String]
     }
 
+    func addDevice(accountId: String, token: String) -> UInt32 {
+        return accountAdapter.addDevice(accountId, token: token)
+    }
+
     func initialAccountsLoading() -> Completable {
         return Completable.create { [weak self] completable in
             guard let self = self else { return Disposables.create {} }
@@ -933,10 +937,6 @@ extension AccountsService {
 
     func provideAccountAuthentication(accountId: String, password: String) {
         self.accountAdapter.provideAccountAuthentication(accountId, password: password)
-    }
-
-    func addDevice(accountId: String, token: String) -> UInt32 {
-        return accountAdapter.addDevice(accountId, token: token)
     }
 
     func confirmAddDevice(accountId: String, operationId: UInt32) {
