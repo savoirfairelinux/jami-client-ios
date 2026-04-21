@@ -25,6 +25,9 @@ enum TestEnvironmentConst: String {
     case isRunningTest
     case createFirstAccount
     case createSecondAccount
+    #if DEBUG
+    case seedTestContacts
+    #endif
 }
 
 class TestEnvironment {
@@ -37,6 +40,10 @@ class TestEnvironment {
     var createFirstAccount: Bool = false
 
     var createSecondAccount: Bool = false
+
+    #if DEBUG
+    var seedTestContacts: Bool = false
+    #endif
 
     var firstAccountId: String?
 
@@ -60,6 +67,13 @@ class TestEnvironment {
                let createSecondAccountBool = Bool(createSecondAccountString), createSecondAccountBool {
                 createSecondAccount = true
             }
+
+            #if DEBUG
+            if let seedTestContactsString = ProcessInfo.processInfo.environment[TestEnvironmentConst.seedTestContacts.rawValue],
+               let seedTestContactsBool = Bool(seedTestContactsString), seedTestContactsBool {
+                seedTestContacts = true
+            }
+            #endif
         }
     }
 }

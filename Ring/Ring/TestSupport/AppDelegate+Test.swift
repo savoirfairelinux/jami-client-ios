@@ -15,8 +15,16 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
+
+#if DEBUG
+
 import Foundation
+import UIKit
 import RxSwift
+
+private enum TestSupportTag {
+    static let contactsFormatCheckResult = 0x0D1F7
+}
 
 extension AppDelegate {
 
@@ -48,6 +56,38 @@ extension AppDelegate {
         addAccount(createFlag: TestEnvironment.shared.createSecondAccount) { id in
             TestEnvironment.shared.secondAccountId = id
         }
+
+        runContactsFormatCheckIfNeeded()
+    }
+
+    private func runContactsFormatCheckIfNeeded() {
+        guard TestEnvironment.shared.seedTestContacts,
+              let accountId = TestEnvironment.shared.firstAccountId else { return }
+        let adapter = ContactsAdapter()
+        let peerA = "abc0000000000000000000000000000000000001"
+        let peerB = "def0000000000000000000000000000000000002"
+        adapter.addContact(withURI: peerA, accountId: accountId)
+        adapter.addContact(withURI: peerB, accountId: accountId)
+        adapter.removeContact(withURI: peerB, accountId: accountId, ban: true)
+        let result = ContactsFormatCheck.run(forAccount: accountId, peerA: peerA, peerB: peerB)
+        publishContactsFormatCheckResult(result)
+    }
+
+    private func publishContactsFormatCheckResult(_ result: String) {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.connectedScenes
+                    .compactMap({ ($0 as? UIWindowScene)?.windows.first(where: { $0.isKeyWindow }) })
+                    .first else { return }
+            let existing = window.viewWithTag(TestSupportTag.contactsFormatCheckResult) as? UIView
+            let view = existing ?? UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+            view.tag = TestSupportTag.contactsFormatCheckResult
+            view.isAccessibilityElement = true
+            view.accessibilityIdentifier = TestSupportAccessibilityIdentifiers.contactsFormatCheckResult
+            view.accessibilityLabel = result
+            if existing == nil {
+                window.addSubview(view)
+            }
+        }
     }
 
     func cleanTestDataIfNeed() {
@@ -74,3 +114,5 @@ extension AppDelegate {
         }
     }
 }
+
+#endif

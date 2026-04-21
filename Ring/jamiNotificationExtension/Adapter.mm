@@ -19,6 +19,7 @@
 #import "Adapter.h"
 #import "Utils.h"
 #import "jamiNotificationExtension-Swift.h"
+#import "ContactShallow.h"
 
 #import "jami/jami.h"
 #import "jami/configurationmanager_interface.h"
@@ -34,6 +35,8 @@
 #import "json/json.h"
 #import "fstream"
 #import "charconv"
+#import "filesystem"
+#import "thread"
 
 @implementation SwarmMessageWrap
 
@@ -79,6 +82,7 @@ NSString* const nameCache = @"namecache";
 NSString* const defaultNameServer = @"ns.jami.net";
 std::string const nameServerConfiguration = "RingNS.uri";
 NSString* const accountConfig = @"config.yml";
+NSString* const contactsFile = @"contacts";
 constexpr auto ID_TIMEOUT = std::chrono::hours(24);
 
 std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
@@ -261,6 +265,46 @@ std::map<std::string, std::string> nameServers;
 - (NSDictionary *)getAccountDetails:(NSString *)accountID {
     auto accDetails = getAccountDetails(std::string([accountID UTF8String]));
     return [Utils mapToDictionary:accDetails];
+}
+
+- (BOOL)allowsIncomingCallsFromUnknownFor:(NSString*)accountId {
+    // Daemon default is YES (jamiaccount_config.h: dhtPublicInCalls {true}).
+    auto path = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:accountConfig].path.UTF8String;
+    std::ifstream file(path, std::ios_base::in);
+    if (!file.is_open()) return YES;
+    try {
+        YAML::Node node = YAML::Load(file);
+        file.close();
+        auto v = node[[FilterKeys.publicInCalls UTF8String]];
+        if (!v) return YES;
+        return v.as<std::string>() != "false";
+    } catch (const std::exception& e) {
+        NSLog(@"allowsIncomingCallsFromUnknownFor: YAML parse failed for account %@: %s", accountId, e.what());
+        return YES;
+    }
+}
+
+- (NSArray<NSDictionary<NSString*, NSString*>*>*)getContactsFromStorage:(NSString*)accountId {
+    NSMutableArray<NSDictionary<NSString*, NSString*>*>* result = [NSMutableArray array];
+    auto path = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:contactsFile].path.UTF8String;
+    auto contacts = jami_ios::readContactsMap(path);
+    if (contacts.empty()) {
+        std::error_code ec;
+        auto size = std::filesystem::file_size(path, ec);
+        if (!ec && size == 0) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            // retry once
+            contacts = jami_ios::readContactsMap(path);
+        }
+    }
+    for (const auto& pair : contacts) {
+        if (pair.second.banned) continue;
+        if (pair.second.added <= pair.second.removed) continue;
+        NSMutableDictionary<NSString*, NSString*>* dict = [NSMutableDictionary dictionary];
+        dict[FilterKeys.contactId] = @(pair.first.toString().c_str());
+        [result addObject:dict];
+    }
+    return result;
 }
 
 - (NSDictionary<NSString*, NSString*>*)decrypt:(NSString*)keyPath

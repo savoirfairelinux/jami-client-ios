@@ -34,6 +34,15 @@ struct AccessibilityIdentifiers {
     static let welcomeWindow = "welcomeWindow"
 }
 
+#if DEBUG
+/// Identifiers exposed by test-support UI hooks. The main app only sets these
+/// when `TestEnvironment.shared.isRunningTest` is true; UI tests read them.
+/// Stripped from Release builds.
+struct TestSupportAccessibilityIdentifiers {
+    static let contactsFormatCheckResult = "contactsFormatCheckResult"
+}
+#endif
+
 struct SmartListAccessibilityIdentifiers {
     static let openAccountsButton = "accountsInformationIdentifier"
     static let addAccountButton = "addAccountButtonIdentifier"
