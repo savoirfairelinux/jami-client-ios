@@ -369,6 +369,10 @@ class NotificationService: UNNotificationServiceExtension {
         log("Notification type: \(result)")
         switch result {
         case .call(let peerId, let hasVideo):
+            guard self.shouldAcceptIncomingCall(peerId: peerId) else {
+                log("Dropping call from \(peerId): account rejects unknown callers and peer is not a contact")
+                return
+            }
             ({ [weak self] (peerId, hasVideo) in
                 guard let self = self else {
                     return
@@ -406,6 +410,16 @@ class NotificationService: UNNotificationServiceExtension {
         case .unknown:
             break
         }
+    }
+
+    private func shouldAcceptIncomingCall(peerId: String) -> Bool {
+        let accountDetails = self.adapterService.getAccountConfigFromDisk(accountId: self.accountId)
+        if IncomingCallFilter.parseAllowFromUnknown(accountDetails: accountDetails) {
+            return true
+        }
+        let contacts = self.adapterService.getContactsFromDisk(accountId: self.accountId)
+        let filter = IncomingCallFilter(allowFromUnknown: false, contactDetails: contacts)
+        return filter.shouldAccept(peerId: peerId)
     }
 
     override func serviceExtensionTimeWillExpire() {
