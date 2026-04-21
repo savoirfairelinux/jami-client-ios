@@ -19,7 +19,7 @@
 import Foundation
 
 let jamiId1 = "b48cf0140bea12734db05ebcdb012f1d265bed84"
-let jamiId2 = "e5ghj8140bea12734db05ebcdb012f1d2634dv56"
+let jamiId2 = "e5cfa8140bea12734db05ebcdb012f1d2634df56"
 let accountId1 = "accountId1"
 let accountId2 = "accountId2"
 let conversationId1 = "conversationId1"
