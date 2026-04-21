@@ -20,7 +20,8 @@
 
 import Foundation
 
-@objc protocol AdapterDelegate {
+@objc
+protocol AdapterDelegate {
 
     func didReceiveMessage(_ message: [String: String],
                            from senderAccount: String,
