@@ -42,4 +42,9 @@
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId;
 - (NSDictionary *)getAccountDetails:(NSString *)accountID;
 
+NS_ASSUME_NONNULL_BEGIN
+- (nullable NSString*)getAllowCallsFromUnknownFor:(NSString*)accountId;
+- (NSArray<NSDictionary<NSString*, NSString*>*>*)getContactsFromStorage:(NSString*)accountId;
+NS_ASSUME_NONNULL_END
+
 @end
