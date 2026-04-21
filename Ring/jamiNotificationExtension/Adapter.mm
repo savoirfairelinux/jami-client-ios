@@ -19,6 +19,7 @@
 #import "Adapter.h"
 #import "Utils.h"
 #import "jamiNotificationExtension-Swift.h"
+#import "ContactsFileReader.h"
 
 #import "jami/jami.h"
 #import "jami/configurationmanager_interface.h"
@@ -261,6 +262,27 @@ std::map<std::string, std::string> nameServers;
 - (NSDictionary *)getAccountDetails:(NSString *)accountID {
     auto accDetails = getAccountDetails(std::string([accountID UTF8String]));
     return [Utils mapToDictionary:accDetails];
+}
+
+- (BOOL)allowsIncomingCallsFromUnknownFor:(NSString*)accountId {
+    // Daemon default is YES (jamiaccount_config.h: dhtPublicInCalls {true}).
+    auto path = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:accountConfig].path.UTF8String;
+    std::ifstream file(path, std::ios_base::in);
+    if (!file.is_open()) return YES;
+    try {
+        YAML::Node node = YAML::Load(file);
+        file.close();
+        auto v = node[[FilterKeys.publicInCalls UTF8String]];
+        if (!v) return YES;
+        return v.as<std::string>() != "false";
+    } catch (const std::exception& e) {
+        NSLog(@"allowsIncomingCallsFromUnknownFor: YAML parse failed for account %@: %s", accountId, e.what());
+        return YES;
+    }
+}
+
+- (NSArray<NSDictionary<NSString*, NSString*>*>*)getContactsFromStorage:(NSString*)accountId {
+    return [ContactsFileReader activeContactURIsForAccount:accountId];
 }
 
 - (NSDictionary<NSString*, NSString*>*)decrypt:(NSString*)keyPath

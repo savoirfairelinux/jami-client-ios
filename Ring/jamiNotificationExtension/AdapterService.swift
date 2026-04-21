@@ -160,6 +160,14 @@ class AdapterService {
         return adapter.nameServer(forAccountId: accountId)
     }
 
+    func allowsIncomingCallsFromUnknown(accountId: String) -> Bool {
+        return adapter.allowsIncomingCallsFromUnknown(for: accountId)
+    }
+
+    func getContacts(accountId: String) -> [[String: String]] {
+        return adapter.getContactsFromStorage(accountId)
+    }
+
     private func fileAlreadyDownloaded(fileName: String, accountId: String, conversationId: String) -> Bool {
         guard let url = getFileUrlFor(fileName: fileName, accountId: accountId, conversationId: conversationId) else {
             return false
