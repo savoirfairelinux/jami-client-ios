@@ -152,7 +152,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // starts the daemon
         self.startDaemon()
 
+        #if DEBUG
         self.setUpTestDataIfNeed()
+        #endif
 
         // requests permission to use the camera
         // will enumerate and add devices once permission has been granted
@@ -361,7 +363,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationWillTerminate(_ application: UIApplication) {
         self.callsProvider.stopAllUnhandeledCalls()
+        #if DEBUG
         self.cleanTestDataIfNeed()
+        #endif
         self.stopDaemon()
     }
 
