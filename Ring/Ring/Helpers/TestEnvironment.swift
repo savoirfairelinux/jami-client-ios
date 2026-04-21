@@ -25,6 +25,9 @@ enum TestEnvironmentConst: String {
     case isRunningTest
     case createFirstAccount
     case createSecondAccount
+    #if DEBUG
+    case seedTestContacts
+    #endif
 }
 
 class TestEnvironment {
@@ -37,6 +40,14 @@ class TestEnvironment {
     var createFirstAccount: Bool = false
 
     var createSecondAccount: Bool = false
+
+    #if DEBUG
+    var seedTestContacts: Bool = false
+
+    // 40-char hex matches the dht::InfoHash format the daemon expects.
+    let activeContactPeerId = "abc0000000000000000000000000000000000001"
+    let bannedContactPeerId = "def0000000000000000000000000000000000002"
+    #endif
 
     var firstAccountId: String?
 
@@ -60,6 +71,13 @@ class TestEnvironment {
                let createSecondAccountBool = Bool(createSecondAccountString), createSecondAccountBool {
                 createSecondAccount = true
             }
+
+            #if DEBUG
+            if let seedTestContactsString = ProcessInfo.processInfo.environment[TestEnvironmentConst.seedTestContacts.rawValue],
+               let seedTestContactsBool = Bool(seedTestContactsString), seedTestContactsBool {
+                seedTestContacts = true
+            }
+            #endif
         }
     }
 }

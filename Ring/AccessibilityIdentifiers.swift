@@ -34,6 +34,12 @@ struct AccessibilityIdentifiers {
     static let welcomeWindow = "welcomeWindow"
 }
 
+#if DEBUG
+struct TestSupportAccessibilityIdentifiers {
+    static let contactsFormatCheckResult = "contactsFormatCheckResult"
+}
+#endif
+
 struct SmartListAccessibilityIdentifiers {
     static let openAccountsButton = "accountsInformationIdentifier"
     static let addAccountButton = "addAccountButtonIdentifier"

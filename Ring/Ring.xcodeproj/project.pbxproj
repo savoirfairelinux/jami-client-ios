@@ -43,6 +43,8 @@
 		04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AA61D1C304300E99CD9 /* AccountAdapter.mm */; };
 		04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AA81D1C304300E99CD9 /* DRingAdapter.mm */; };
 		04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
+		AA01CAFE000000000000FF23 /* ContactsFormatCheck.mm in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF22 /* ContactsFormatCheck.mm */; };
+		AA01CAFE000000000000FF25 /* ContactsFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF24 /* ContactsFormatTests.swift */; };
 		0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0586C94A1F684DF600613517 /* UIImage+Helpers.swift */; };
 		0E0FF1AA1FC3843E003898C2 /* DBContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1A91FC3843E003898C2 /* DBContainer.swift */; };
 		0E0FF1AF1FC38CBC003898C2 /* ProfileDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */; };
@@ -424,6 +426,9 @@
 		26BB43852670150E00019CF6 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A951D1C2F6100E99CD9 /* libbz2.tbd */; };
 		26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438A2670191E00019CF6 /* AdapterDelegate.swift */; };
 		26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438C267019FC00019CF6 /* AdapterService.swift */; };
+		AA01CAFE000000000000FF02 /* IncomingCallFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */; };
+		AA01CAFE000000000000FF03 /* IncomingCallFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */; };
+		AA01CAFE000000000000FF05 /* IncomingCallFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01CAFE000000000000FF04 /* IncomingCallFilterTests.swift */; };
 		26BC15EE29302B00003FC8D1 /* ContactMessageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */; };
 		26BCBBD32A964ABC0001EE38 /* ConferenceActionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BCBBD22A964ABC0001EE38 /* ConferenceActionsModel.swift */; };
 		26BCBBD52A965EFC0001EE38 /* PictureInPictureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BCBBD42A965EFC0001EE38 /* PictureInPictureManager.swift */; };
@@ -723,6 +728,10 @@
 		04399AA91D1C304300E99CD9 /* Ring-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ring-Bridging-Header.h"; sourceTree = "<group>"; };
 		04399AAA1D1C304300E99CD9 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		04399AAB1D1C304300E99CD9 /* Utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
+		AA01CAFE000000000000FF20 /* StoredContact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoredContact.h; sourceTree = "<group>"; };
+		AA01CAFE000000000000FF21 /* ContactsFormatCheck.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsFormatCheck.h; sourceTree = "<group>"; };
+		AA01CAFE000000000000FF22 /* ContactsFormatCheck.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ContactsFormatCheck.mm; sourceTree = "<group>"; };
+		AA01CAFE000000000000FF24 /* ContactsFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsFormatTests.swift; sourceTree = "<group>"; };
 		0586C94A1F684DF600613517 /* UIImage+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Helpers.swift"; sourceTree = "<group>"; };
 		0E0FF1A61FC38070003898C2 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		0E0FF1A91FC3843E003898C2 /* DBContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBContainer.swift; sourceTree = "<group>"; };
@@ -1092,6 +1101,8 @@
 		26BB43832670144500019CF6 /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
 		26BB438A2670191E00019CF6 /* AdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterDelegate.swift; sourceTree = "<group>"; };
 		26BB438C267019FC00019CF6 /* AdapterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterService.swift; sourceTree = "<group>"; };
+		AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallFilter.swift; sourceTree = "<group>"; };
+		AA01CAFE000000000000FF04 /* IncomingCallFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallFilterTests.swift; sourceTree = "<group>"; };
 		26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageVM.swift; sourceTree = "<group>"; };
 		26BCBBD22A964ABC0001EE38 /* ConferenceActionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceActionsModel.swift; sourceTree = "<group>"; };
 		26BCBBD42A965EFC0001EE38 /* PictureInPictureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureInPictureManager.swift; sourceTree = "<group>"; };
@@ -2909,7 +2920,6 @@
 				1DF75AC1296E09240055EA87 /* Button+Helpers.swift */,
 				1DF75AC3296E0A940055EA87 /* View+Helpers.swift */,
 				260AE64229C8F58800D66D5E /* Data+Helpers.swift */,
-				266BC7572C4825C3006590AC /* AppDelegate+Test.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2960,6 +2970,7 @@
 				1A2D18B81F2916BA00B2C785 /* Models */,
 				564C44571E8D7F68000F92B1 /* Constants */,
 				043866391D2307C000E06CE2 /* Extensions */,
+				AA01CAFE000000000000FF30 /* TestSupport */,
 				1A2041891F1EA51E00C08435 /* Protocols */,
 				1A0C4EDF1F1D624100550433 /* Coordinators */,
 				1A0C4EBC1F1D48AA00550433 /* Features */,
@@ -3004,6 +3015,7 @@
 				04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */,
 				04399A1D1D1C2D9D00E99CD9 /* Info.plist */,
 				26EB61332B75724000183FF4 /* AccountCreationTest.swift */,
+				AA01CAFE000000000000FF24 /* ContactsFormatTests.swift */,
 			);
 			path = RingUITests;
 			sourceTree = "<group>";
@@ -3381,6 +3393,7 @@
 			children = (
 				5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */,
 				2617A1202C493BC5002CFD4A /* AccountsServiceTest.swift */,
+				AA01CAFE000000000000FF04 /* IncomingCallFilterTests.swift */,
 				63CC8DA55AF00F04FF329D3D /* LinkDeviceVMTests.swift */,
 			);
 			name = AccountsTests;
@@ -3589,6 +3602,7 @@
 				26A88C17267000F000888EED /* JamiNotificationExtension-Bridging-Header.h */,
 				26BB438A2670191E00019CF6 /* AdapterDelegate.swift */,
 				26BB438C267019FC00019CF6 /* AdapterService.swift */,
+				AA01CAFE000000000000FF01 /* IncomingCallFilter.swift */,
 				BB91FAA9292EA26900BB41C1 /* EventData.swift */,
 				26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */,
 			);
@@ -3631,8 +3645,19 @@
 				04399AAA1D1C304300E99CD9 /* Utils.h */,
 				04399AAB1D1C304300E99CD9 /* Utils.mm */,
 				26EFD8012E2ED72400B63F74 /* ObjcTypes.h */,
+				AA01CAFE000000000000FF20 /* StoredContact.h */,
 			);
 			path = CommonObjc;
+			sourceTree = "<group>";
+		};
+		AA01CAFE000000000000FF30 /* TestSupport */ = {
+			isa = PBXGroup;
+			children = (
+				266BC7572C4825C3006590AC /* AppDelegate+Test.swift */,
+				AA01CAFE000000000000FF21 /* ContactsFormatCheck.h */,
+				AA01CAFE000000000000FF22 /* ContactsFormatCheck.mm */,
+			);
+			path = TestSupport;
 			sourceTree = "<group>";
 		};
 		26F5442B2C5815640069A7A4 /* Views */ = {
@@ -4356,6 +4381,7 @@
 				265B75A12DCBBB0500CB1622 /* AccountMigrationModel.swift in Sources */,
 				2692557A2C5D1E1200F85A1E /* JamsConnectView.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
+				AA01CAFE000000000000FF23 /* ContactsFormatCheck.mm in Sources */,
 				26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */,
 				261190B22A2928A600CAE7F8 /* MainGridView.swift in Sources */,
 				56BBC9A31ED714DF00CDAF8B /* ConversationsService.swift in Sources */,
@@ -4487,6 +4513,8 @@
 				263C167B2D9723A5008E102C /* MessageHandlingServiceTests.swift in Sources */,
 				263C16852D9EE3F9008E102C /* CallManagementServiceTests.swift in Sources */,
 				2617A1212C493BC5002CFD4A /* AccountsServiceTest.swift in Sources */,
+				AA01CAFE000000000000FF03 /* IncomingCallFilter.swift in Sources */,
+				AA01CAFE000000000000FF05 /* IncomingCallFilterTests.swift in Sources */,
 				2E95DB7F67AC7C0D12E4014B /* LinkDeviceVMTests.swift in Sources */,
 				BB8BBCA329F04DA1007228BA /* LocationSharingServiceTests.swift in Sources */,
 				260AE64529C8FD2500D66D5E /* VCardUtilsTests.swift in Sources */,
@@ -4528,6 +4556,7 @@
 				263D92DA2C10FC0A00C6EB9D /* TestEnvironment.swift in Sources */,
 				26FDF4192C1101C2009D036B /* JamiBaseUITest.swift in Sources */,
 				26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */,
+				AA01CAFE000000000000FF25 /* ContactsFormatTests.swift in Sources */,
 				26455C242C0620040000BA3F /* SmartListViewTests.swift in Sources */,
 				2657CBAA2B8596290078D6B1 /* XCTestCase + Helpers.swift in Sources */,
 				04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */,
@@ -4549,6 +4578,7 @@
 				26EFD7E32E2E944100B63F74 /* CommonHelpers.swift in Sources */,
 				267CC6FC29D5B27600505E56 /* Data+Helpers.swift in Sources */,
 				26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */,
+				AA01CAFE000000000000FF02 /* IncomingCallFilter.swift in Sources */,
 				267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */,
 				BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */,
 				26EFD7FB2E2EBA4500B63F74 /* Utils.mm in Sources */,

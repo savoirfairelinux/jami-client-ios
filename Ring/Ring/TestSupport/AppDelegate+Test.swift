@@ -15,7 +15,11 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
+
+#if DEBUG
+
 import Foundation
+import UIKit
 import RxSwift
 
 extension AppDelegate {
@@ -48,6 +52,38 @@ extension AppDelegate {
         addAccount(createFlag: TestEnvironment.shared.createSecondAccount) { id in
             TestEnvironment.shared.secondAccountId = id
         }
+
+        runContactsFormatCheckIfNeeded()
+    }
+
+    private func runContactsFormatCheckIfNeeded() {
+        guard TestEnvironment.shared.seedTestContacts,
+              let accountId = TestEnvironment.shared.firstAccountId else { return }
+        let adapter = ContactsAdapter()
+        let active = TestEnvironment.shared.activeContactPeerId
+        let banned = TestEnvironment.shared.bannedContactPeerId
+        adapter.addContact(withURI: active, accountId: accountId)
+        adapter.addContact(withURI: banned, accountId: accountId)
+        adapter.removeContact(withURI: banned, accountId: accountId, ban: true)
+        let result = ContactsFormatCheck.run(forAccount: accountId, peerA: active, peerB: banned)
+        publishContactsFormatCheckResult(result)
+    }
+
+    private func publishContactsFormatCheckResult(_ result: String) {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.connectedScenes
+                    .compactMap({ ($0 as? UIWindowScene)?.windows.first(where: { $0.isKeyWindow }) })
+                    .first else { return }
+            let identifier = TestSupportAccessibilityIdentifiers.contactsFormatCheckResult
+            let existing = window.subviews.first { $0.accessibilityIdentifier == identifier }
+            let view = existing ?? UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+            view.isAccessibilityElement = true
+            view.accessibilityIdentifier = identifier
+            view.accessibilityLabel = result
+            if existing == nil {
+                window.addSubview(view)
+            }
+        }
     }
 
     func cleanTestDataIfNeed() {
@@ -74,3 +110,5 @@ extension AppDelegate {
         }
     }
 }
+
+#endif
