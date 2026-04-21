@@ -19,6 +19,7 @@
 #import "Adapter.h"
 #import "Utils.h"
 #import "jamiNotificationExtension-Swift.h"
+#import "ContactShallow.h"
 
 #import "jami/jami.h"
 #import "jami/configurationmanager_interface.h"
@@ -79,6 +80,7 @@ NSString* const nameCache = @"namecache";
 NSString* const defaultNameServer = @"ns.jami.net";
 std::string const nameServerConfiguration = "RingNS.uri";
 NSString* const accountConfig = @"config.yml";
+NSString* const contactsFile = @"contacts";
 constexpr auto ID_TIMEOUT = std::chrono::hours(24);
 
 std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
@@ -261,6 +263,48 @@ std::map<std::string, std::string> nameServers;
 - (NSDictionary *)getAccountDetails:(NSString *)accountID {
     auto accDetails = getAccountDetails(std::string([accountID UTF8String]));
     return [Utils mapToDictionary:accDetails];
+}
+
+- (NSDictionary<NSString*, NSString*>*)getAccountConfigFromDisk:(NSString*)accountId {
+    NSMutableDictionary<NSString*, NSString*>* result = [NSMutableDictionary dictionary];
+    auto path = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:accountConfig].path.UTF8String;
+    try {
+        std::ifstream file(path, std::ios_base::in);
+        if (!file.is_open()) {
+            return result;
+        }
+        YAML::Node node = YAML::Load(file);
+        file.close();
+        NSString* key = FilterKeys.publicInCalls;
+        if (auto v = node[[key UTF8String]]) {
+            try {
+                result[key] = @(v.as<std::string>().c_str());
+            } catch (...) {}
+        }
+    } catch (const std::exception& e) {
+        NSLog(@"getAccountConfigFromDisk: %s", e.what());
+    }
+    return result;
+}
+
+- (NSArray<NSDictionary<NSString*, NSString*>*>*)getContactsFromDisk:(NSString*)accountId {
+    NSMutableArray<NSDictionary<NSString*, NSString*>*>* result = [NSMutableArray array];
+    auto path = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:contactsFile].path.UTF8String;
+    auto contacts = jami_ios::readContactsMap(path);
+    for (const auto& pair : contacts) {
+        bool isActive = pair.second.added > pair.second.removed;
+        if (!isActive && !pair.second.banned) {
+            // fully removed — not in the allow-set
+            continue;
+        }
+        NSMutableDictionary<NSString*, NSString*>* dict = [NSMutableDictionary dictionary];
+        dict[FilterKeys.contactId] = @(pair.first.toString().c_str());
+        if (!isActive) {
+            dict[FilterKeys.contactBanned] = FilterKeys.daemonTrue;
+        }
+        [result addObject:dict];
+    }
+    return result;
 }
 
 - (NSDictionary<NSString*, NSString*>*)decrypt:(NSString*)keyPath

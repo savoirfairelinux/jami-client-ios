@@ -16,6 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 import Foundation
+import UIKit
 import RxSwift
 
 extension AppDelegate {
@@ -47,6 +48,38 @@ extension AppDelegate {
 
         addAccount(createFlag: TestEnvironment.shared.createSecondAccount) { id in
             TestEnvironment.shared.secondAccountId = id
+        }
+
+        seedDriftTestContactsIfNeeded()
+    }
+
+    private func seedDriftTestContactsIfNeeded() {
+        guard TestEnvironment.shared.seedDriftContacts,
+              let accountId = TestEnvironment.shared.firstAccountId else { return }
+        let adapter = ContactsAdapter()
+        let peerA = "abc0000000000000000000000000000000000001"
+        let peerB = "def0000000000000000000000000000000000002"
+        adapter.addContact(withURI: peerA, accountId: accountId)
+        adapter.addContact(withURI: peerB, accountId: accountId)
+        adapter.removeContact(withURI: peerB, accountId: accountId, ban: true)
+        let result = DriftCheck.run(forAccount: accountId, peerA: peerA, peerB: peerB)
+        publishDriftResultForUITest(result)
+    }
+
+    private func publishDriftResultForUITest(_ result: String) {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.connectedScenes
+                .compactMap({ ($0 as? UIWindowScene)?.windows.first(where: { $0.isKeyWindow }) })
+                .first else { return }
+            let existing = window.viewWithTag(0x0D1F7) as? UIView
+            let view = existing ?? UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+            view.tag = 0x0D1F7
+            view.isAccessibilityElement = true
+            view.accessibilityIdentifier = "driftTestResult"
+            view.accessibilityLabel = result
+            if existing == nil {
+                window.addSubview(view)
+            }
         }
     }
 

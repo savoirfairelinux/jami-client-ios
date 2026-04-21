@@ -41,5 +41,7 @@
 - (NSMutableDictionary<NSString*,NSString*>*)getConversationInfoForAccount:(NSString*) accountId conversationId:(NSString*) conversationId;
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId;
 - (NSDictionary *)getAccountDetails:(NSString *)accountID;
+- (NSDictionary<NSString*, NSString*>*)getAccountConfigFromDisk:(NSString*)accountId;
+- (NSArray<NSDictionary<NSString*, NSString*>*>*)getContactsFromDisk:(NSString*)accountId;
 
 @end
