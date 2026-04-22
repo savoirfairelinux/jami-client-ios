@@ -108,8 +108,8 @@ struct LinkToAccountView: View {
                     Text(L10n.LinkToAccount.importAccount)
                         .commonButtonStyle()
                 })
-                .disabled(viewModel.hasPassword && viewModel.password.isEmpty)
-                .opacity((viewModel.hasPassword && viewModel.password.isEmpty) ? 0.5 : 1)
+                .disabled(viewModel.isImportButtonDisabled)
+                .opacity(viewModel.isImportButtonDisabled ? 0.5 : 1)
                 Spacer()
             }
             .padding(.horizontal)

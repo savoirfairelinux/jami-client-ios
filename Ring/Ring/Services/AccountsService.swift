@@ -725,6 +725,25 @@ class AccountsService: AccountAdapterDelegate {
     func setAccountActive(active: Bool, accountId: String) {
         self.accountAdapter.setAccountActive(accountId, active: active)
     }
+
+    func provideAccountAuthentication(accountId: String, password: String) {
+        self.accountAdapter.provideAccountAuthentication(accountId, password: password)
+    }
+
+    func createTemporaryAccount() async throws -> String {
+        var details = try getJamiInitialAccountDetails()
+        details[ConfigKey.proxyEnabled.rawValue] = "true"
+        details.updateValue("jami-auth", forKey: ConfigKey.archiveURL.rawValue)
+
+        if let testServer = TestEnvironment.shared.nameServerURI {
+            details[ConfigKey.ringNsURI.rawValue] = testServer
+        }
+
+        guard let accountId = accountAdapter.addAccount(details) else {
+            throw AccountCreationError.unknown
+        }
+        return accountId
+    }
 }
 
 // MARK: - Private daemon wrappers
@@ -933,10 +952,6 @@ extension AccountsService {
                 return account.devices
             })
         return accountDevices.concat(newDevice)
-    }
-
-    func provideAccountAuthentication(accountId: String, password: String) {
-        self.accountAdapter.provideAccountAuthentication(accountId, password: password)
     }
 
     func confirmAddDevice(accountId: String, operationId: UInt32) {
@@ -1165,20 +1180,5 @@ extension AccountsService {
                 return !response.accountId.isEmpty ? response : nil
             }
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-    }
-
-    func createTemporaryAccount() async throws -> String {
-        var details = try getJamiInitialAccountDetails()
-        details[ConfigKey.proxyEnabled.rawValue] = "true"
-        details.updateValue("jami-auth", forKey: ConfigKey.archiveURL.rawValue)
-
-        if let testServer = TestEnvironment.shared.nameServerURI {
-            details[ConfigKey.ringNsURI.rawValue] = testServer
-        }
-
-        guard let accountId = accountAdapter.addAccount(details) else {
-            throw AccountCreationError.unknown
-        }
-        return accountId
     }
 }

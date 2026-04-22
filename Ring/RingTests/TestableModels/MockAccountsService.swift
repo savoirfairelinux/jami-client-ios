@@ -23,6 +23,9 @@ class MockAccountsService: AccountsService {
     var addDeviceCalls: [(accountId: String, token: String)] = []
     var addDeviceOperationId: UInt32 = 1
 
+    var provideAccountAuthenticationCalls: [(accountId: String, password: String)] = []
+    var temporaryAccountId: String = "temp-account-id"
+
     override func getAccountsId() -> [String]? {
         return mockAccountsId
     }
@@ -30,5 +33,13 @@ class MockAccountsService: AccountsService {
     override func addDevice(accountId: String, token: String) -> UInt32 {
         addDeviceCalls.append((accountId, token))
         return addDeviceOperationId
+    }
+
+    override func provideAccountAuthentication(accountId: String, password: String) {
+        provideAccountAuthenticationCalls.append((accountId, password))
+    }
+
+    override func createTemporaryAccount() async throws -> String {
+        return temporaryAccountId
     }
 }
