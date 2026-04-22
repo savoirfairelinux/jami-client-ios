@@ -72,6 +72,10 @@ class LinkToAccountVM: AvatarProvider {
     @Published var authError: String?
     @Published private(set) var uiState: LinkDeviceUIState = .initial
 
+    var isImportButtonDisabled: Bool {
+        return uiState != .authenticating
+    }
+
     private var tempAccount: String?
 
     private var accountsService: AccountsService
