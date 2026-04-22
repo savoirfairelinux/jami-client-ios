@@ -246,6 +246,18 @@ class CallManagementService {
         return call
     }
 
+    // Attaches a conversationId to the already-stored call model (the one
+    // `executeCall` created from the daemon's real SIPCall callId). Used by
+    // `placeSwarmCall` when the device joins an existing hosted conference as
+    // a participant — the daemon never emits ConferenceCreated in that case,
+    // so we have to plumb the swarm context in manually.
+    func attachConversationId(callId: String, conversationId: String) {
+        guard let call = self.call(callId: callId) else { return }
+        call.conversationId = conversationId
+        updateCallsStore(call, forId: callId)
+        callUpdates.onNext(call)
+    }
+
     func createPlaceholderCallModel(callUUID: UUID, peerId: String, accountId: String) -> CallModel? {
         var pendingCall: CallModel?
         calls.updateSync { calls in

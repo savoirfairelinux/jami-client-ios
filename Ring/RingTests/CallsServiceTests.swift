@@ -291,4 +291,146 @@ class CallsServiceTests: XCTestCase {
         XCTAssertEqual(resultCall?.displayName, userName, "Display name should match")
         XCTAssertEqual(resultCall?.callType, .outgoing, "Call type should be outgoing")
     }
+
+    // MARK: - placeSwarmCall
+
+    // Participant path: when the iPhone joins an existing hosted swarm conference,
+    // the daemon creates a regular outgoing SIPCall and never emits ConferenceCreated.
+    // placeSwarmCall must still resolve, using the inner placeCall's model with the
+    // conversationId attached. This is the bug case from the "[Conference] Joining
+    // call causes black screen" issue.
+    func testPlaceSwarmCall_ParticipantPath_ResolvesWithConversationId() {
+        let account = AccountModel.createTestAccount()
+        let conversationId = "conv-xyz"
+        let uri = "swarm:" + conversationId
+        let daemonCallId = "daemon-call-1"
+
+        mockCallsAdapter.placeCallReturnValue = daemonCallId
+        mockCallsAdapter.callDetailsReturnValue = [
+            CallDetailKey.displayNameKey.rawValue: CallTestConstants.displayName,
+            CallDetailKey.accountIdKey.rawValue: account.id
+        ]
+
+        let expectation = XCTestExpectation(description: "placeSwarmCall resolves via participant path")
+        var resultCall: CallModel?
+
+        callsService.placeSwarmCall(
+            withAccount: account,
+            uri: uri,
+            userName: CallTestConstants.displayName,
+            videoSource: "camera",
+            isAudioOnly: false,
+            timeout: .milliseconds(500)
+        )
+        .subscribe(
+            onSuccess: { call in
+                resultCall = call
+                expectation.fulfill()
+            },
+            onFailure: { error in
+                XCTFail("placeSwarmCall should not fail: \(error)")
+            }
+        )
+        .disposed(by: disposeBag)
+
+        // Intentionally do NOT call callsService.conferenceCreated(...) — this simulates
+        // the daemon routing the call to an existing host as a plain SIPCall.
+        wait(for: [expectation], timeout: 2.0)
+
+        XCTAssertNotNil(resultCall)
+        XCTAssertEqual(resultCall?.callId, daemonCallId, "Call id should be the daemon's SIPCall id")
+        XCTAssertEqual(resultCall?.conversationId, conversationId, "conversationId should be attached")
+        XCTAssertEqual(callsService.calls.get()[daemonCallId]?.conversationId, conversationId,
+                       "Stored CallModel should also carry the conversationId")
+    }
+
+    // Host path: when the daemon becomes the swarm host, it emits ConferenceCreated
+    // synchronously and placeCall returns an empty callId (→ .placeCallFailed).
+    // placeSwarmCall must resolve via the ConferenceCreated signal.
+    func testPlaceSwarmCall_HostPath_ResolvesWithConferenceId() {
+        let account = AccountModel.createTestAccount()
+        let conversationId = "conv-host"
+        let uri = "swarm:" + conversationId
+        let confId = "conf-1"
+
+        // Simulate "daemon became host" by having placeCall return empty (so the
+        // inner Single fails with .placeCallFailed), then synchronously driving
+        // the ConferenceCreated delegate callback.
+        mockCallsAdapter.placeCallReturnValue = ""
+        mockCallsAdapter.callDetailsReturnValue = [:]
+
+        let expectation = XCTestExpectation(description: "placeSwarmCall resolves via host path")
+        var resultCall: CallModel?
+
+        // Drive ConferenceCreated as soon as waitingSwarmCalls contains our conversationId.
+        // Observing callUpdates isn't sufficient for timing here — we just fire it
+        // asynchronously on main, which matches the daemon's behaviour closely enough.
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.callsService.conferenceCreated(conferenceId: confId, conversationId: conversationId, accountId: account.id)
+        }
+
+        callsService.placeSwarmCall(
+            withAccount: account,
+            uri: uri,
+            userName: CallTestConstants.displayName,
+            videoSource: "camera",
+            isAudioOnly: false,
+            timeout: .seconds(2)
+        )
+        .subscribe(
+            onSuccess: { call in
+                resultCall = call
+                expectation.fulfill()
+            },
+            onFailure: { error in
+                XCTFail("placeSwarmCall should not fail: \(error)")
+            }
+        )
+        .disposed(by: disposeBag)
+
+        wait(for: [expectation], timeout: 3.0)
+
+        XCTAssertNotNil(resultCall)
+        XCTAssertEqual(resultCall?.callId, confId, "Call id should be the conferenceId from the host path")
+        XCTAssertEqual(resultCall?.conversationId, conversationId)
+    }
+
+    // Neither signal fires → the Rx timeout path must emit placeCallFailed.
+    func testPlaceSwarmCall_NeitherPath_TimesOut() {
+        let account = AccountModel.createTestAccount()
+        let uri = "swarm:conv-nothing"
+
+        // Empty placeCall return → inner Single fails with .placeCallFailed (swallowed).
+        // No conferenceCreated callback → hostDisposable never fires.
+        mockCallsAdapter.placeCallReturnValue = ""
+        mockCallsAdapter.callDetailsReturnValue = [:]
+
+        let expectation = XCTestExpectation(description: "placeSwarmCall times out")
+        var resultError: Error?
+
+        callsService.placeSwarmCall(
+            withAccount: account,
+            uri: uri,
+            userName: CallTestConstants.displayName,
+            videoSource: "camera",
+            isAudioOnly: false,
+            timeout: .milliseconds(300)
+        )
+        .subscribe(
+            onSuccess: { _ in
+                XCTFail("placeSwarmCall should not succeed")
+            },
+            onFailure: { error in
+                resultError = error
+                expectation.fulfill()
+            }
+        )
+        .disposed(by: disposeBag)
+
+        wait(for: [expectation], timeout: 2.0)
+
+        XCTAssertNotNil(resultError)
+        XCTAssertEqual(resultError as? CallServiceError, CallServiceError.placeCallFailed)
+    }
 }

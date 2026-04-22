@@ -66,7 +66,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     private let swarmCallCreated = PublishSubject<(confId: String, conversationId: String, accountId: String)>()
-    private var waitingSwarmCall = ""
+    private var waitingSwarmCalls = Set<String>()
 
     init(withCallsAdapter callsAdapter: CallsAdapter, dbManager: DBManager) {
         self.callsAdapter = callsAdapter
@@ -186,7 +186,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func conferenceCreated(conferenceId: String, conversationId: String, accountId: String) {
-        if !conversationId.isEmpty && self.waitingSwarmCall.contains(conversationId) {
+        if !conversationId.isEmpty && self.waitingSwarmCalls.contains(conversationId) {
             // For swarm calls, we provide the confId, conversationId, and accountId
             // to be picked up by the placeSwarmCall subscription
             swarmCallCreated.onNext((confId: conferenceId, conversationId: conversationId, accountId: accountId))
@@ -314,35 +314,53 @@ class CallsService: CallsAdapterDelegate {
         return callManagementService.resume(callId: callId)
     }
 
-    func placeSwarmCall(withAccount account: AccountModel, uri: String, userName: String, videoSource: String, isAudioOnly: Bool) -> Single<CallModel> {
-        waitingSwarmCall = uri
-        // When conference is created, conferenceCreated will be called. We need to wait for that and create a call after that.
-        return Single.create { [weak self] single in
+    func placeSwarmCall(withAccount account: AccountModel, uri: String, userName: String, videoSource: String, isAudioOnly: Bool, timeout: RxTimeInterval = .seconds(30)) -> Single<CallModel> {
+        // Two daemon outcomes are possible:
+        //  - Host path: this device becomes the swarm's conference host. The daemon
+        //    emits ConferenceCreated(conversationId, confId) synchronously from
+        //    placeCall, and the SIPCall returned by placeCall is empty (.placeCallFailed).
+        //  - Participant path: an existing host is already in the conversation. The
+        //    daemon creates a plain outgoing SIPCall routed to that host and does NOT
+        //    emit ConferenceCreated. placeCall succeeds with a real call model.
+        // Resolve on whichever arrives first so the participant case doesn't stall
+        // on a ConferenceCreated that never comes (issue: [Conference] Joining call
+        // causes black screen).
+        return Single<CallModel>.create { [weak self] single in
             guard let self = self else {
                 single(.failure(CallServiceError.placeCallFailed))
                 return Disposables.create()
             }
 
-            // Extract the conversation ID from the swarm URI
             let conversationId = uri.replacingOccurrences(of: "swarm:", with: "")
+            self.waitingSwarmCalls.insert(conversationId)
 
-            let timeoutWorkItem = DispatchWorkItem {
-                single(.failure(CallServiceError.placeCallFailed))
-            }
+            let resolved = PublishSubject<CallModel>()
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 30.0, execute: timeoutWorkItem)
+            let resolveDisposable = resolved
+                .take(1)
+                .timeout(timeout, scheduler: MainScheduler.instance)
+                .subscribe(
+                    onNext: { call in single(.success(call)) },
+                    onError: { _ in single(.failure(CallServiceError.placeCallFailed)) }
+                )
 
-            // Create a subscription to monitor conference creation
-            let subscription = self.swarmCallCreated
+            // Host path: wait for the ConferenceCreated signal that the daemon fires
+            // from hostConference(). Must be subscribed before placeCall is called,
+            // because the daemon may emit synchronously from inside placeCall.
+            let hostDisposable = self.swarmCallCreated
                 .filter { $0.conversationId == conversationId }
                 .take(1)
-                .subscribe(onNext: { conference in
+                .subscribe(onNext: { [weak self] conference in
+                    guard let self = self else { return }
                     let call = self.callManagementService.createSwarmCallModel(conference: conference, isAudioOnly: isAudioOnly)
-                    timeoutWorkItem.cancel()
-                    single(.success(call))
+                    resolved.onNext(call)
                 })
 
-            // Initiate the call process
+            // Participant path: the inner placeCall gives us the real SIPCall model.
+            // Attach conversationId so the UI treats it as a swarm call
+            // (CallViewModel.isCallForSwarm, PiP, etc.). If it fails with
+            // .placeCallFailed we're on the host path — swallow the failure and let
+            // hostDisposable resolve. Other errors are genuine failures.
             let callDisposable = self.callManagementService.placeCall(
                 withAccount: account,
                 toParticipantId: uri,
@@ -351,21 +369,22 @@ class CallsService: CallsAdapterDelegate {
                 isAudioOnly: isAudioOnly
             )
             .subscribe(
-                onSuccess: { _ in
-                    // We don't expect this to succeed with a call model for swarm calls
-                    // The actual call will be obtained via conference events
+                onSuccess: { [weak self] callModel in
+                    guard let self = self else { return }
+                    self.callManagementService.attachConversationId(callId: callModel.callId, conversationId: conversationId)
+                    resolved.onNext(callModel)
                 },
                 onFailure: { error in
                     if error as? CallServiceError != CallServiceError.placeCallFailed {
-                        timeoutWorkItem.cancel()
-                        single(.failure(error))
+                        resolved.onError(error)
                     }
                 }
             )
 
-            return Disposables.create {
-                timeoutWorkItem.cancel()
-                subscription.dispose()
+            return Disposables.create { [weak self] in
+                self?.waitingSwarmCalls.remove(conversationId)
+                resolveDisposable.dispose()
+                hostDisposable.dispose()
                 callDisposable.dispose()
             }
         }
