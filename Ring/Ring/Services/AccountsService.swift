@@ -425,7 +425,8 @@ class AccountsService: AccountAdapterDelegate {
      */
     private func getJamiInitialAccountDetails() throws -> [String: String] {
         do {
-            let defaultDetails = try getInitialAccountDetails(accountType: AccountType.ring.rawValue)
+            var defaultDetails = try getInitialAccountDetails(accountType: AccountType.ring.rawValue)
+            defaultDetails[ConfigKey.dhtPublicIn.rawValue] = "false"
             return defaultDetails
         } catch {
             throw error
