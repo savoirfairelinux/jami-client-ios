@@ -522,8 +522,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             return
         }
         self.closeAllPlayers()
-        let isSwarmConversation = conversation.type != .nonSwarm && conversation.type != .sip
-        if isSwarmConversation {
+        if conversation.routesToSwarmInfo() {
             if let swarmInfo = self.swarmInfo {
                 self.stateSubject.onNext(ConversationState.presentSwarmInfo(swarmInfo: swarmInfo))
             }

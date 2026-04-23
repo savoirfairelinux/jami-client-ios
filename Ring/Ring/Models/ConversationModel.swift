@@ -181,7 +181,7 @@ class ConversationModel: Equatable {
     var accountId: String = ""
     var id: String = ""
     var lastMessage: MessageModel?
-    var type: ConversationType = .nonSwarm
+    var type: ConversationType?
     let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
     let disposeBag = DisposeBag()
     var avatar: String = ""
@@ -453,6 +453,14 @@ class ConversationModel: Equatable {
 
     func isSwarm() -> Bool {
         return self.type != .nonSwarm && self.type != .sip && self.type != .jams
+    }
+
+    var isClassified: Bool {
+        return self.type != nil
+    }
+
+    func routesToSwarmInfo() -> Bool {
+        return self.type != .nonSwarm && self.type != .sip
     }
 
     func clearMessages() {

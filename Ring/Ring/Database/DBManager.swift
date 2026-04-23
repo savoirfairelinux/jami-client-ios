@@ -625,9 +625,7 @@ class DBManager {
             let uri = JamiURI.init(schema: type, infoHash: participant)
             let conversationModel = ConversationModel(withParticipantUri: uri,
                                                       accountId: accountId)
-            if type == .sip {
-                conversationModel.type = .sip
-            }
+            conversationModel.type = type == .sip ? .sip : .nonSwarm
             conversationModel.id = String(conversationID)
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler

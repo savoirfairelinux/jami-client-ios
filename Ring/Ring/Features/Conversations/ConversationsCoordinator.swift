@@ -368,6 +368,7 @@ extension ConversationsCoordinator {
         }
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: account.id)
+        conversation.type = .oneToOne
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.conversation = conversation
         self.showConversation(withConversationViewModel: newConversation)

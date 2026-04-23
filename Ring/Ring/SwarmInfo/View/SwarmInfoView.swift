@@ -174,7 +174,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     }
 
     @ViewBuilder private var avatarView: some View {
-        if viewModel.isAdmin {
+        if viewModel.canPerformAdminActions {
             editableAvatar
         } else {
             avatarImage
@@ -221,7 +221,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     }
 
     @ViewBuilder private var titleView: some View {
-        if viewModel.isAdmin {
+        if viewModel.canPerformAdminActions {
             titleLabel
                 .onTapGesture {
                     viewModel.presentTitleEditView()
@@ -244,7 +244,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     }
 
     @ViewBuilder private var descriptionView: some View {
-        if viewModel.isAdmin {
+        if viewModel.canPerformAdminActions {
             editableDescriptionText
                 .padding(.bottom, Layout.verticalMargin)
         } else if !viewModel.description.isEmpty {
@@ -299,7 +299,7 @@ public struct SwarmInfoView: View, StateEmittingView {
     }
 
     @ViewBuilder private var addParticipantsButton: some View {
-        if !(viewModel.conversation?.isCoredialog() ?? true) {
+        if viewModel.canAddParticipants {
             AddMoreParticipantsInSwarm(viewmodel: viewModel)
         }
     }
