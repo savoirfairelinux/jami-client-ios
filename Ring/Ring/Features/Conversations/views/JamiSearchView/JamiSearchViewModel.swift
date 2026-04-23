@@ -180,7 +180,7 @@ class JamiSearchViewModel: ObservableObject {
         if searchQuery.isSHA1() {
             return conversation.model().getParticipants().first?.jamiId == searchQuery
         }
-        if conversation.model().isSwarm() {
+        if conversation.model().isSwarmBacked() {
             return conversation.swarmInfo?.hasParticipantWithRegisteredName(name: searchQuery) ?? false
         }
         return conversation.userName.value.lowercased() == searchQuery.lowercased()

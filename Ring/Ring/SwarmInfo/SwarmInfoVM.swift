@@ -68,8 +68,20 @@ class SwarmInfoVM: ObservableObject {
 
     let provider: AvatarProvider
 
+    var isClassified: Bool {
+        return conversation?.isClassified ?? false
+    }
+
+    var canPerformAdminActions: Bool {
+        return isAdmin && isClassified
+    }
+
     var isCoreDialog: Bool {
         return conversation?.isCoredialog() ?? false
+    }
+
+    var canAddParticipants: Bool {
+        return !isCoreDialog && isClassified
     }
 
     var removeConversationText: String {

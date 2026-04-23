@@ -34,6 +34,7 @@
 		043999F71D1C2D9D00E99CD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043999F61D1C2D9D00E99CD9 /* AppDelegate.swift */; };
 		04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04399A021D1C2D9D00E99CD9 /* Images.xcassets */; };
 		04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A101D1C2D9D00E99CD9 /* RingTests.swift */; };
+		26F1A9012FF1000100A1B2C3 /* RequestModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1A9002FF1000100A1B2C3 /* RequestModelTests.swift */; };
 		04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */; };
 		04399A2A1D1C2DE300E99CD9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A291D1C2DE300E99CD9 /* CoreMedia.framework */; };
 		04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A2B1D1C2DE900E99CD9 /* AVFoundation.framework */; };
@@ -714,6 +715,7 @@
 		04399A071D1C2D9D00E99CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04399A0C1D1C2D9D00E99CD9 /* RingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04399A101D1C2D9D00E99CD9 /* RingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingTests.swift; sourceTree = "<group>"; };
+		26F1A9002FF1000100A1B2C3 /* RequestModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModelTests.swift; sourceTree = "<group>"; };
 		04399A121D1C2D9D00E99CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingUITests.swift; sourceTree = "<group>"; };
@@ -3000,6 +3002,7 @@
 				028568301DF610A9003A8D8D /* RingTests-Bridging-Header.h */,
 				028568231DF60E5C003A8D8D /* Fixtures */,
 				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
+				26F1A9002FF1000100A1B2C3 /* RequestModelTests.swift */,
 				26A1B2C3D4E5F60900AABB02 /* ThreadSafeDictionaryTests.swift */,
 				26BA01010000000000000002 /* ProfilesServiceTests.swift */,
 				04399A121D1C2D9D00E99CD9 /* Info.plist */,
@@ -4533,6 +4536,7 @@
 				263C167D2D98C957008E102C /* CallTestUtils.swift in Sources */,
 				5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */,
 				04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */,
+				26F1A9012FF1000100A1B2C3 /* RequestModelTests.swift in Sources */,
 				260AE63529BE00F100D66D5E /* Constants.swift in Sources */,
 				2681AC712F893D8E00550A4F /* ObjCMockVideoAdapter.m in Sources */,
 				2681AC732F893DFD00550A4F /* VideoServiceMediaChangeTests.swift in Sources */,
