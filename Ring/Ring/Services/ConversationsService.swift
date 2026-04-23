@@ -98,7 +98,7 @@ class ConversationsService {
                     self?.serialOperationQueue.async {
                         guard let self = self else { return }
                         let oneToOne = currentConversations.filter { conv in
-                            conv.type == .oneToOne || conv.type == .nonSwarm
+                            conv.isCoredialog() || (!conv.isClassified && conv.isDialog())
                         }
                         .map { conv in
                             return conv.getParticipants().first?.jamiId
@@ -862,7 +862,7 @@ class ConversationsService {
         serviceEvent.addEventInput(.state, value: transferStatus)
         self.responseStream.onNext(serviceEvent)
         /// for non swarm conversationId is empty. Update status in db
-        if !conversation.isSwarm() {
+        if !conversation.shouldUseSwarmConversationPath() {
             self.dbManager
                 .updateTransferStatus(daemonID: String(transferId),
                                       withStatus: transferStatus,
@@ -880,7 +880,7 @@ class ConversationsService {
 
             var lastUnreadMessageId: String?
 
-            if conversation.isSwarm() {
+            if conversation.shouldUseSwarmConversationPath() {
                 let lastMessage = conversation.messages.first
                 lastUnreadMessageId = lastMessage?.id
             } else {

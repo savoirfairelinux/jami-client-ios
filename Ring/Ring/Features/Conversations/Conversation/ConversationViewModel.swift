@@ -330,7 +330,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     func shouldCreateSwarmInfo() -> Bool {
-        return self.conversation.isSwarm() && self.swarmInfo == nil && !self.conversation.id.isEmpty
+        return self.conversation.shouldUseSwarmConversationPath() && self.swarmInfo == nil && !self.conversation.id.isEmpty
     }
 
     func createSwarmInfo() {
@@ -393,7 +393,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 (!registeredName.isEmpty && registeredName.containsCaseInsensitive(string: searchQuery))
         }
 
-        if self.model().isSwarm() {
+        if self.model().shouldUseSwarmConversationPath() {
             guard let swarmInfo = self.swarmInfo else { return false }
             return swarmInfo.contains(searchQuery: searchQuery)
         } else {
@@ -473,7 +473,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     func sendMessage(withContent content: String, parentId: String = "", contactURI: String? = nil, conversationModel: ConversationModel? = nil) {
         let conversation = conversationModel ?? self.conversation
         guard let conversation = conversation else { return }
-        if !conversation.isSwarm() {
+        if !conversation.shouldUseSwarmConversationPath() {
             /// send not swarm message
             guard let participantJamiId = conversation.getParticipants().first?.jamiId,
                   let account = self.accountService.currentAccount else { return }
@@ -522,8 +522,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             return
         }
         self.closeAllPlayers()
-        let isSwarmConversation = conversation.type != .nonSwarm && conversation.type != .sip
-        if isSwarmConversation {
+        if conversation.routesToSwarmInfo() {
             if let swarmInfo = self.swarmInfo {
                 self.stateSubject.onNext(ConversationState.presentSwarmInfo(swarmInfo: swarmInfo))
             }

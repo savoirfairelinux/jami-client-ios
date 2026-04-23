@@ -254,6 +254,7 @@ final class JamiSearchViewModelTests: XCTestCase {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
         let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1)
+        conversation.type = .sip
         conversationVM.conversation = conversation
         conversationVM.userName.accept(sipTestNumber1)
         // Act
@@ -267,6 +268,7 @@ final class JamiSearchViewModelTests: XCTestCase {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
         let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1)
+        conversation.type = .sip
         conversationVM.conversation = conversation
         conversationVM.userName.accept(sipTestNumber1)
         // Act
@@ -280,6 +282,7 @@ final class JamiSearchViewModelTests: XCTestCase {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
         let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1)
+        conversation.type = .sip
         conversationVM.conversation = conversation
         conversationVM.userName.accept(sipTestNumber1)
         // Act

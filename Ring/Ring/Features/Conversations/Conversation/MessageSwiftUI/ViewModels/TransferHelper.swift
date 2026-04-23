@@ -66,7 +66,7 @@ class TransferHelper {
     }
 
     func getTransferProgress(conversation: ConversationModel, message: MessageModel) -> Float? {
-        let progress = self.dataTransferService.getTransferProgress(withId: message.daemonId, accountId: conversation.accountId, conversationId: conversation.id, isSwarm: conversation.isSwarm())
+        let progress = self.dataTransferService.getTransferProgress(withId: message.daemonId, accountId: conversation.accountId, conversationId: conversation.id, isSwarm: conversation.shouldUseSwarmConversationPath())
         return message.totalSize > 0 ? Float(progress) / Float(message.totalSize) : Float(progress)
     }
 
@@ -74,7 +74,7 @@ class TransferHelper {
         guard let info = self.dataTransferService.dataTransferInfo(withId: message.daemonId,
                                                                    accountId: conversation.accountId,
                                                                    conversationId: conversation.id,
-                                                                   isSwarm: conversation.isSwarm()) else { return nil }
+                                                                   isSwarm: conversation.shouldUseSwarmConversationPath()) else { return nil }
         return info.totalSize
     }
 
@@ -83,7 +83,7 @@ class TransferHelper {
             return nil
         }
         let transferInfo = self.getTransferFileData(content: message.content)
-        if conversation.isSwarm() {
+        if conversation.shouldUseSwarmConversationPath() {
             return self.dataTransferService.getFileUrlForSwarm(fileName: message.daemonId, accountID: conversation.accountId, conversationID: conversation.id)
         }
         if message.incoming {
@@ -116,12 +116,12 @@ class TransferHelper {
             return playerModel
         }
         let transferInfo = self.getTransferFileData(content: message.content)
-        let name = conversation.isSwarm() ? message.daemonId : transferInfo.fileName
+        let name = conversation.shouldUseSwarmConversationPath() ? message.daemonId : transferInfo.fileName
         guard let fileExtension = NSURL(fileURLWithPath: name).pathExtension else {
             return nil
         }
         if fileExtension.isMediaExtension() {
-            if conversation.isSwarm() {
+            if conversation.shouldUseSwarmConversationPath() {
                 let path = self.dataTransferService
                     .getFileUrlForSwarm(fileName: message.daemonId,
                                         accountID: conversation.accountId,

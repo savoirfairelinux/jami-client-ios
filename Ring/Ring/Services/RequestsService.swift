@@ -179,7 +179,7 @@ class RequestsService {
     }
 
     private func hasConversationRequestForParticipant(partisipant: ConversationParticipant?) -> Bool {
-        let requests = self.requests.value.filter({ $0.participants.first == partisipant && $0.type == .conversation && $0.conversationType == .oneToOne })
+        let requests = self.requests.value.filter({ $0.participants.first == partisipant && $0.isConversationRequest() })
         return !requests.isEmpty
     }
 
@@ -235,8 +235,7 @@ class RequestsService {
             guard let self = self else { return Disposables.create { } }
             let request = self.getRequest(withId: conversationId, accountId: accountId)
             if let request = request,
-               request.conversationType == .oneToOne ||
-                request.conversationType == .nonSwarm,
+               request.isCoredialog() || (request.isUnclassifiedConversationRequest() && request.isDialog()),
                let jamiId = request.participants.first?.jamiId {
                 /// save profile
                 let photo = (request.avatar != nil) ? request.avatar!.base64EncodedString() : ""

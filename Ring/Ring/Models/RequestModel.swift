@@ -27,7 +27,7 @@ class RequestModel {
     var receivedDate: Date = Date()
     var avatar: Data?
     var participants = [ConversationParticipant]()
-    var conversationType: ConversationType = .nonSwarm
+    var conversationType: ConversationType?
     var type: RequestType
 
     enum RequestKey: String {
@@ -106,14 +106,14 @@ class RequestModel {
             self.conversationType = conversationType
         }
 
-        if self.conversationType == .nonSwarm {
-            self.type = .contact
-        }
         if let conversationId = dictionary[RequestKey.conversationId.rawValue] {
             self.conversationId = conversationId
         }
         if let from = dictionary[RequestKey.from.rawValue] {
-            self.participants.append(ConversationParticipant(jamiId: from))
+            let participant = ConversationParticipant(jamiId: from)
+            if !self.participants.contains(participant) {
+                self.participants.append(participant)
+            }
         }
         if let title = dictionary[RequestKey.title.rawValue] {
             self.name = title
@@ -144,6 +144,14 @@ class RequestModel {
 
     func isCoredialog() -> Bool {
         return self.conversationType == .nonSwarm || self.conversationType == .oneToOne
+    }
+
+    func isConversationRequest() -> Bool {
+        return self.type == .conversation
+    }
+
+    func isUnclassifiedConversationRequest() -> Bool {
+        return isConversationRequest() && conversationType == nil
     }
 
     func isDialog() -> Bool {

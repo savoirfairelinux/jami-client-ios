@@ -181,9 +181,14 @@ class ConversationModel: Equatable {
     var accountId: String = ""
     var id: String = ""
     var lastMessage: MessageModel?
-    var type: ConversationType = .nonSwarm
+    var type: ConversationType? {
+        didSet {
+            self.subscribeUnreadMessagesIfNeeded()
+        }
+    }
     let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
     let disposeBag = DisposeBag()
+    private var isSubscribedToUnreadMessages = false
     var avatar: String = ""
     var title: String = ""
     var description: String = ""
@@ -197,7 +202,7 @@ class ConversationModel: Equatable {
         self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "", isLocal: isLocal)]
         self.hash = participantUri.hash ?? ""
         self.accountId = accountId
-        self.subscribeUnreadMessages()
+        self.subscribeUnreadMessagesIfNeeded()
     }
 
     convenience init (withParticipantUri participantUri: JamiURI, accountId: String, hash: String) {
@@ -205,14 +210,14 @@ class ConversationModel: Equatable {
         self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "")]
         self.hash = hash
         self.accountId = accountId
-        self.subscribeUnreadMessages()
+        self.subscribeUnreadMessagesIfNeeded()
     }
 
     convenience init (withId conversationId: String, accountId: String) {
         self.init()
         self.id = conversationId
         self.accountId = accountId
-        self.subscribeUnreadMessages()
+        self.subscribeUnreadMessagesIfNeeded()
     }
 
     convenience init (request: RequestModel) {
@@ -223,7 +228,7 @@ class ConversationModel: Equatable {
         self.type = request.conversationType
         self.avatar = request.avatar?.base64EncodedString() ?? ""
         self.title = request.name
-        self.subscribeUnreadMessages()
+        self.subscribeUnreadMessagesIfNeeded()
     }
 
     convenience init (withId conversationId: String, accountId: String, info: [String: String]) {
@@ -232,7 +237,7 @@ class ConversationModel: Equatable {
         self.accountId = accountId
         self.updateInfo(info: info)
         updateProfile(profile: info)
-        self.subscribeUnreadMessages()
+        self.subscribeUnreadMessagesIfNeeded()
     }
 
     func addParticipant(jamiId: String) {
@@ -281,7 +286,7 @@ class ConversationModel: Equatable {
          conversation. For non swarm conversations and for temporary swarm
          conversations check participant and accountId.
          */
-        if !lhs.isSwarm() && !rhs.isSwarm() || lhs.id.isEmpty || rhs.id.isEmpty {
+        if !lhs.shouldUseSwarmConversationPath() && !rhs.shouldUseSwarmConversationPath() || lhs.id.isEmpty || rhs.id.isEmpty {
             if let rParticipant = rhs.getParticipants().first, let lParticipant = lhs.getParticipants().first {
                 return (lParticipant == rParticipant && lhs.accountId == rhs.accountId)
             }
@@ -290,12 +295,15 @@ class ConversationModel: Equatable {
         return lhs.id == rhs.id
     }
 
-    private func subscribeUnreadMessages() {
-        if self.isSwarm() { return }
+    private func subscribeUnreadMessagesIfNeeded() {
+        guard !self.isSubscribedToUnreadMessages else { return }
+        if self.shouldUseSwarmConversationPath() { return }
+        self.isSubscribedToUnreadMessages = true
         self.newMessages.asObservable()
             .share()
             .subscribe { [weak self] _ in
                 guard let self = self else { return }
+                guard !self.shouldUseSwarmConversationPath() else { return }
                 let number = self.messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
                 self.numberOfUnreadMessages.accept(number)
             } onError: { _ in
@@ -355,7 +363,7 @@ class ConversationModel: Equatable {
         }).first {
             message.status = .displayed
         }
-        if !self.isSwarm() {
+        if !self.shouldUseSwarmConversationPath() {
             let number = self.messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
             self.numberOfUnreadMessages.accept(number)
         }
@@ -391,6 +399,17 @@ class ConversationModel: Equatable {
         return self.isCoredialog() &&
             conversation.isCoredialog() &&
             self.getParticipants().first == conversation.getParticipants().first
+    }
+
+    func matchesTemporaryCoreDialog(conversation: ConversationModel) -> Bool {
+        guard self.accountId == conversation.accountId else { return false }
+        guard self.isDialog(), conversation.isDialog() else { return false }
+        // Only a temporary, locally created core dialog should use this reconciliation path.
+        guard self.id.isEmpty, self.isCoredialog() else { return false }
+        // The real conversation may already be classified as a core dialog, or may still be unclassified
+        // while we wait for mode to arrive from the daemon.
+        guard conversation.isCoredialog() || !conversation.isClassified else { return false }
+        return self.getParticipants().first == conversation.getParticipants().first
     }
 
     func getParticipants() -> [ConversationParticipant] {
@@ -452,7 +471,20 @@ class ConversationModel: Equatable {
     }
 
     func isSwarm() -> Bool {
-        return self.type != .nonSwarm && self.type != .sip && self.type != .jams
+        guard let type else { return false }
+        return type != .nonSwarm && type != .sip && type != .jams
+    }
+
+    var isClassified: Bool {
+        return self.type != nil
+    }
+
+    func shouldUseSwarmConversationPath() -> Bool {
+        return self.type == nil || self.isSwarm()
+    }
+
+    func routesToSwarmInfo() -> Bool {
+        return self.type == nil || self.isSwarm() || self.type == .jams
     }
 
     func clearMessages() {
