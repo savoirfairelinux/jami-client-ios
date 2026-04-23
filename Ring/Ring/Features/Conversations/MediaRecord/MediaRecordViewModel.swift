@@ -122,7 +122,7 @@ class MediaRecordViewModel: ObservableObject, Stateable, ViewModel {
         guard let url = fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile,
                                                                      accountID: conversation.accountId,
                                                                      conversationID: conversation.id,
-                                                                     isSwarm: conversation.isSwarm()) else { return }
+                                                                     isSwarm: conversation.isSwarmBacked()) else { return }
         guard let name = videoService.startLocalRecorder(audioOnly: audioOnly, path: url.path) else { return }
         fileName = name
         fileDisplayName = URL(fileURLWithPath: name).lastPathComponent

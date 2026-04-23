@@ -1,7 +1,5 @@
 /*
- *  Copyright (C) 2023 Savoir-faire Linux Inc.
- *
- *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Copyright (C) 2023 - 2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +21,7 @@ import XCTest
 
 final class ConversationModelTests: XCTestCase {
 
-    func createConversation(conversationId: String, jamiId: String, type: ConversationType, accountId: String) -> ConversationModel {
+    func createConversation(conversationId: String, jamiId: String, type: ConversationType?, accountId: String) -> ConversationModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: jamiId)
         let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId)
         conversation.type = type
@@ -91,5 +89,87 @@ final class ConversationModelTests: XCTestCase {
         let result = conversation1 == conversation2
         // Assert
         XCTAssertTrue(result)
+    }
+
+    func testUpdateInfo_ValidMode_SetsType() {
+        // Arrange
+        let conversation = ConversationModel(withId: conversationId1, accountId: accountId1)
+        let info = [ConversationAttributes.mode.rawValue: String(ConversationType.invitesOnly.rawValue)]
+        // Act
+        conversation.updateInfo(info: info)
+        // Assert
+        XCTAssertEqual(conversation.type, .invitesOnly)
+    }
+
+    func testUpdateInfo_MissingMode_DoesNotOverwriteKnownType() {
+        // Arrange
+        let conversation = createConversation(conversationId: conversationId1, jamiId: jamiId1, type: .nonSwarm, accountId: accountId1)
+        // Act
+        conversation.updateInfo(info: ["syncing": "true"])
+        // Assert
+        XCTAssertEqual(conversation.type, .nonSwarm)
+    }
+
+    func testUpdateInfo_InvalidMode_DoesNotOverwriteKnownType() {
+        // Arrange
+        let conversation = createConversation(conversationId: conversationId1, jamiId: jamiId1, type: .oneToOne, accountId: accountId1)
+        // Act
+        conversation.updateInfo(info: [ConversationAttributes.mode.rawValue: "notAnInt"])
+        // Assert
+        XCTAssertEqual(conversation.type, .oneToOne)
+    }
+
+    func testRoutesToSwarmInfo_UnclassifiedConversation_ReturnsTrue() {
+        // Arrange
+        let conversation = createConversation(conversationId: conversationId1, jamiId: jamiId1, type: nil, accountId: accountId1)
+        // Act
+        let result = conversation.routesToSwarmInfo()
+        // Assert
+        XCTAssertTrue(result)
+    }
+
+    func testIsSwarm_UnclassifiedConversation_ReturnsFalse() {
+        // Arrange
+        let conversation = createConversation(conversationId: conversationId1, jamiId: jamiId1, type: nil, accountId: accountId1)
+        // Act
+        let result = conversation.isSwarm()
+        // Assert
+        XCTAssertFalse(result)
+    }
+
+    func testIsSwarmBacked_UnclassifiedConversation_ReturnsTrue() {
+        // Arrange
+        let conversation = createConversation(conversationId: conversationId1, jamiId: jamiId1, type: nil, accountId: accountId1)
+        // Act
+        let result = conversation.isSwarmBacked()
+        // Assert
+        XCTAssertTrue(result)
+    }
+
+    func testRoutesToSwarmInfo_JamsConversation_ReturnsTrue() {
+        // Arrange
+        let conversation = createConversation(conversationId: conversationId1, jamiId: jamiId1, type: .jams, accountId: accountId1)
+        // Act
+        let result = conversation.routesToSwarmInfo()
+        // Assert
+        XCTAssertTrue(result)
+    }
+
+    func testRoutesToSwarmInfo_NonSwarmConversation_ReturnsFalse() {
+        // Arrange
+        let conversation = createConversation(conversationId: conversationId1, jamiId: jamiId1, type: .nonSwarm, accountId: accountId1)
+        // Act
+        let result = conversation.routesToSwarmInfo()
+        // Assert
+        XCTAssertFalse(result)
+    }
+
+    func testRoutesToSwarmInfo_SipConversation_ReturnsFalse() {
+        // Arrange
+        let conversation = createConversation(conversationId: conversationId1, jamiId: jamiId1, type: .sip, accountId: accountId1)
+        // Act
+        let result = conversation.routesToSwarmInfo()
+        // Assert
+        XCTAssertFalse(result)
     }
 }

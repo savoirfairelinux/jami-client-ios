@@ -862,7 +862,7 @@ class ConversationsService {
         serviceEvent.addEventInput(.state, value: transferStatus)
         self.responseStream.onNext(serviceEvent)
         /// for non swarm conversationId is empty. Update status in db
-        if !conversation.isSwarm() {
+        if !conversation.isSwarmBacked() {
             self.dbManager
                 .updateTransferStatus(daemonID: String(transferId),
                                       withStatus: transferStatus,
@@ -880,7 +880,7 @@ class ConversationsService {
 
             var lastUnreadMessageId: String?
 
-            if conversation.isSwarm() {
+            if conversation.isSwarmBacked() {
                 let lastMessage = conversation.messages.first
                 lastUnreadMessageId = lastMessage?.id
             } else {
