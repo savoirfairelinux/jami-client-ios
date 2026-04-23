@@ -162,7 +162,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                          conversation: ConversationModel,
                          imageData: Data) {
         var fileUrl: URL?
-        if !conversation.isSwarm() {
+        if !conversation.isSwarmBacked() {
             fileUrl = self.getFilePathForTransfer(forFile: displayName, accountID: conversation.accountId, conversationID: conversation.id)
         } else {
             fileUrl = CommonHelpers.createFileUrlForSwarm(fileName: displayName, accountId: conversation.accountId, conversationId: conversation.id)

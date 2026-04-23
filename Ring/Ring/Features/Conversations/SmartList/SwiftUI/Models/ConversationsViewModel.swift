@@ -226,10 +226,11 @@ class ConversationsViewModel: ObservableObject {
     }
 
     private func findMatchingTemporaryConversation(for conversation: ConversationModel) -> ConversationViewModel? {
-        if let tempConversation = temporaryConversation, tempConversation.conversation.isCoreDialogMatch(conversation: conversation) {
+        if let tempConversation = temporaryConversation,
+           tempConversation.conversation.matchesTemporaryCoreDialog(conversation: conversation) {
             return tempConversation
         }
-        return jamsSearchResult.first { $0.conversation.isCoreDialogMatch(conversation: conversation) }
+        return jamsSearchResult.first { $0.conversation.matchesTemporaryCoreDialog(conversation: conversation) }
     }
 
     func conversationFromTemporaryCreated(conversation: ConversationModel) {

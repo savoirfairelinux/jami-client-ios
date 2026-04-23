@@ -131,7 +131,7 @@ class GeneratedInteractionsManager {
 
                 if account.type != .sip {
                     // we should generate messages only for non swarm conversations
-                    guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId.filterOutHost(), accountId: accountID), !conversation.isSwarm() else { return }
+                    guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId.filterOutHost(), accountId: accountID), !conversation.isSwarmBacked() else { return }
                 } else {
                     // ensure sip conversation exists
                     guard let uri = JamiURI.init(schema: .sip, infoHash: jamiId, account: account).uriString else {
