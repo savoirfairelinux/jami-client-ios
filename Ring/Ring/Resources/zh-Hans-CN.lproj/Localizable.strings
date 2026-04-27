@@ -107,7 +107,7 @@
 "swarm.left" = "左边";
 "swarm.inviteMembers" = "邀请成员";
 "swarm.inviteSelectedMembers" = "邀请选中的联络人<br>";
-"swarm.inviteMembersSelected" = "已選擇";
+"swarm.inviteMembersSelected" = "已选择";
 "swarm.inviteMembersNotSelected" = "未选择";
 "swarm.confirmLeaveConversation" = "离开此聊天？";
 "swarm.Leave" = "离开";

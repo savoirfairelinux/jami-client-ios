@@ -158,10 +158,10 @@
 "conversation.addToContactsLabel" = "Adaugi la contacte?";
 "conversation.notContactLabel" = "%@ nu este în contactele tale";
 "conversation.messagePlaceholder" = "Scrie pentru";
-"conversation.imageSaved" = "Saved";
-"conversation.errorSavingImage" = "Could not save image";
-"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
-"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
+"conversation.imageSaved" = "Salvată";
+"conversation.errorSavingImage" = "Nu s-a putut salva imaginea";
+"conversation.errorSavingImageMessage" = "A apărut o eroare la salvarea imaginii în galerie.";
+"conversation.photoAccessRequiredMessage" = "Jami are nevoie de acces la galeria de fotografii pentru a salva imagini.";
 "conversation.receivedRequest" = "%@ ți-a trimis o invitație la conversație.";
 "conversation.incomingRequest" = "ți-a trimis o invitație la conversație.";
 "conversation.requestMessage" = "Vrei să participi la conversație?";

@@ -433,7 +433,7 @@
 "accountPage.nameServer" = "Namensserver";
 "accountPage.chats" = "Chats";
 "accountPage.typingIndicator" = "Tipp-Indikator";
-"accountPage.typingIndicatorExplanation" = "Anzeigen wenn Nachrichten getippt werden.";
+"accountPage.typingIndicatorExplanation" = "Anzeigen, wenn Nachrichten getippt werden.";
 
 // Backup Account
 "backupAccount.explanation" = "Dieses Jami-Konto existiert nur auf diesem Gerät. Das Konto geht verloren, wenn dieses Gerät verloren geht oder die Anwendung deinstalliert wird. Es wird empfohlen, eine Sicherung dieses Kontos zu erstellen.";

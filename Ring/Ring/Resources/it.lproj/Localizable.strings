@@ -158,10 +158,10 @@
 "conversation.addToContactsLabel" = "Aggiungere ai contatti?";
 "conversation.notContactLabel" = "%@ non è nei tuoi contatti";
 "conversation.messagePlaceholder" = "Scrivi a";
-"conversation.imageSaved" = "Saved";
-"conversation.errorSavingImage" = "Could not save image";
-"conversation.errorSavingImageMessage" = "An error occurred while saving the image to the photo library.";
-"conversation.photoAccessRequiredMessage" = "Jami needs access to your photo library to save images. You can enable this in Settings.";
+"conversation.imageSaved" = "Salvata";
+"conversation.errorSavingImage" = "Impossibile salvare l'immagine";
+"conversation.errorSavingImageMessage" = "Si è verificato un errore durante il salvataggio dell'immagine nella galleria fotografica.";
+"conversation.photoAccessRequiredMessage" = "Jami ha bisogno di accedere alla galleria fotografica per salvare le immagini. Puoi abilitarlo nelle Impostazioni.";
 "conversation.receivedRequest" = "%@ ti ha mandato un invito alla conversazione.";
 "conversation.incomingRequest" = "ti ha mandato un invito alla conversazione.";
 "conversation.requestMessage" = "Ciao,\nvuoi partecipare alla conversazione?";
