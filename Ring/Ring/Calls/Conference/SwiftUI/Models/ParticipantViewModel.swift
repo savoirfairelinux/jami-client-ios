@@ -204,6 +204,9 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
 
                     guard let image = info.sampleBuffer else {
                         self.videoRunning.accept(false)
+                        if !self.isVideoMuted {
+                            self.isVideoMuted = true
+                        }
                         return
                     }
                     let transform = CGAffineTransform.rotation(degrees: info.rotation)
@@ -223,6 +226,9 @@ class ParticipantViewModel: Identifiable, ObservableObject, Equatable, Hashable 
                     }
                     if self.gridDisplayLayer.status == .failed {
                         self.gridDisplayLayer.flush()
+                    }
+                    if self.isVideoMuted {
+                        self.isVideoMuted = false
                     }
                     self.mainDisplayLayer.enqueue(image)
                     self.gridDisplayLayer.enqueue(image)
