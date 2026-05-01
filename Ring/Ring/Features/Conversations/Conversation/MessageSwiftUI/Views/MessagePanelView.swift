@@ -130,6 +130,16 @@ struct MessagePanelView: View {
     let padding: CGFloat = 10
     let defaultControlSize: CGFloat = 42
     let paddingGorizontal: CGFloat = 20
+    let textContainerLeadingInset: CGFloat = 14
+    let sendIconSize: CGFloat = 25
+
+    private var buttonVisualSidePadding: CGFloat {
+        (defaultControlSize - sendIconSize) / 2
+    }
+
+    private var compactTextInputInset: CGFloat {
+        max(0, textContainerLeadingInset - buttonVisualSidePadding)
+    }
 
     struct MessagePanelImageButton: View {
         let model: MessagePanelVM
@@ -181,7 +191,15 @@ struct MessagePanelView: View {
     @ViewBuilder
     private func messageTextField() -> some View {
         let hstack = HStack(alignment: .center, spacing: 0) {
-            UITextViewWrapper(withBackground: true, placeholder: model.placeholder, text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
+            UITextViewWrapper(
+                withBackground: true,
+                placeholder: model.placeholder,
+                leadingInset: textContainerLeadingInset,
+                trailingInset: compactTextInputInset,
+                text: $text,
+                isFocused: $isFocused,
+                dynamicHeight: $textHeight
+            )
                 .frame(minHeight: textHeight, maxHeight: textHeight)
                 .accessibilityLabel(L10n.Accessibility.conversationComposeMessage)
                 .onChange(of: text) { _ in
@@ -189,7 +207,7 @@ struct MessagePanelView: View {
                 }
 
             sendEmojiButton()
-                .padding(.trailing, padding)
+                .padding(.trailing, compactTextInputInset)
         }
 
         let cornerRadius = defaultControlSize / 2
@@ -213,7 +231,7 @@ struct MessagePanelView: View {
             self.model.sendMessage(text: text)
             cleanState()
         }, label: {
-            Group {
+            ZStack {
                 if text.isEmpty {
                     Text(model.defaultEmoji)
                         .font(.system(size: 26))
@@ -221,13 +239,14 @@ struct MessagePanelView: View {
                 } else {
                     Image(systemName: "paperplane")
                         .resizable()
-                        .frame(width: 25, height: 25)
+                        .frame(width: sendIconSize, height: sendIconSize)
                         .foregroundColor(model.styling.secondaryTextColor)
                 }
             }
             .frame(width: defaultControlSize, height: defaultControlSize)
             .contentShape(Rectangle())
         })
+        .buttonStyle(.plain)
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: text.isEmpty)
     }
 
@@ -242,11 +261,12 @@ struct MessagePanelView: View {
                     }
             }
 
-            HStack(alignment: .bottom, spacing: paddingGorizontal) {
+            HStack(alignment: .bottom, spacing: textContainerLeadingInset) {
                 moreActionsButton()
                 messageTextField()
             }
-            .padding(.vertical, padding)
+            .padding(.top, padding)
+            .padding(.bottom, isFocused ? padding : 0)
         }
         .onChange(of: model.isEdit) { _ in
             isFocused = model.isEdit

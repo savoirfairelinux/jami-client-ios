@@ -58,6 +58,8 @@ struct MeasureSizeModifier: ViewModifier {
 struct UITextViewWrapper: UIViewRepresentable {
     let withBackground: Bool
     let placeholder: String
+    let leadingInset: CGFloat
+    let trailingInset: CGFloat
     @Binding var text: String
     @Binding var isFocused: Bool
     @Binding var dynamicHeight: CGFloat
@@ -68,7 +70,7 @@ struct UITextViewWrapper: UIViewRepresentable {
         textView.isScrollEnabled = true
         textView.textAlignment = .left
         textView.font = UIFont.preferredFont(forTextStyle: .callout)
-        textView.textContainerInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        textView.textContainerInset = UIEdgeInsets(top: 12, left: leadingInset, bottom: 12, right: trailingInset)
         textView.textContainer.lineFragmentPadding = 0
         textView.adjustsFontForContentSizeCategory = true
         if withBackground {
