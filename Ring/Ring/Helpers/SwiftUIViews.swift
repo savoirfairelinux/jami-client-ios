@@ -57,6 +57,7 @@ struct MeasureSizeModifier: ViewModifier {
 
 struct UITextViewWrapper: UIViewRepresentable {
     let withBackground: Bool
+    let placeholder: String
     @Binding var text: String
     @Binding var isFocused: Bool
     @Binding var dynamicHeight: CGFloat
@@ -66,24 +67,32 @@ struct UITextViewWrapper: UIViewRepresentable {
         let textView = UITextView()
         textView.isScrollEnabled = true
         textView.textAlignment = .left
-        textView.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .callout).pointSize)
+        textView.font = UIFont.preferredFont(forTextStyle: .callout)
         textView.textContainerInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        textView.textContainer.lineFragmentPadding = 0
+        textView.adjustsFontForContentSizeCategory = true
         if withBackground {
             textView.backgroundColor = .clear
             textView.layer.cornerRadius = 0
         }
         textView.clipsToBounds = true
         textView.delegate = context.coordinator
+        context.coordinator.configurePlaceholder(in: textView)
 
         return textView
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.text = text
+        if uiView.text != text {
+            uiView.text = text
+        }
+        context.coordinator.updatePlaceholder(in: uiView)
 
         DispatchQueue.main.async {
             if self.isFocused && !uiView.isFirstResponder {
                 uiView.becomeFirstResponder()
+            } else if !self.isFocused && uiView.isFirstResponder {
+                uiView.resignFirstResponder()
             }
             dynamicHeight = min(uiView.sizeThatFits(CGSize(width: uiView.frame.size.width, height: .infinity)).height, maxHeight)
         }
@@ -95,13 +104,55 @@ struct UITextViewWrapper: UIViewRepresentable {
 
     class Coordinator: NSObject, UITextViewDelegate {
         var parent: UITextViewWrapper
+        private let placeholderLabel = UILabel()
 
         init(_ textViewWrapper: UITextViewWrapper) {
             self.parent = textViewWrapper
         }
 
+        func configurePlaceholder(in textView: UITextView) {
+            placeholderLabel.numberOfLines = 1
+            placeholderLabel.lineBreakMode = .byTruncatingTail
+            placeholderLabel.adjustsFontForContentSizeCategory = true
+            placeholderLabel.isUserInteractionEnabled = false
+            textView.addSubview(placeholderLabel)
+            updatePlaceholder(in: textView)
+        }
+
+        func updatePlaceholder(in textView: UITextView) {
+            placeholderLabel.text = parent.placeholder
+            placeholderLabel.font = textView.font
+            placeholderLabel.textColor = .placeholderText
+            placeholderLabel.isHidden = !textView.text.isEmpty
+
+            let linePadding = textView.textContainer.lineFragmentPadding
+            let textStartX = textView.textContainerInset.left + linePadding
+            let yPosition = textView.textContainerInset.top
+            let maxWidth = textView.bounds.width
+                - textStartX
+                - textView.textContainerInset.right
+                - linePadding
+            placeholderLabel.frame = CGRect(
+                x: textStartX,
+                y: yPosition,
+                width: max(0, maxWidth),
+                height: placeholderLabel.intrinsicContentSize.height
+            )
+        }
+
         func textViewDidChange(_ textView: UITextView) {
             self.parent.text = textView.text
+            updatePlaceholder(in: textView)
+        }
+
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            parent.isFocused = true
+            updatePlaceholder(in: textView)
+        }
+
+        func textViewDidEndEditing(_ textView: UITextView) {
+            parent.isFocused = false
+            updatePlaceholder(in: textView)
         }
     }
 }
