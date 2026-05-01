@@ -181,19 +181,9 @@ struct MessagePanelView: View {
     @ViewBuilder
     private func messageTextField() -> some View {
         let hstack = HStack(alignment: .center, spacing: 0) {
-            UITextViewWrapper(withBackground: true, text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
+            UITextViewWrapper(withBackground: true, placeholder: model.placeholder, text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
                 .frame(minHeight: textHeight, maxHeight: textHeight)
                 .accessibilityLabel(L10n.Accessibility.conversationComposeMessage)
-                .placeholder(when: text.isEmpty, alignment: .leading) {
-                    Text(model.placeholder)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 12)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                        .font(model.styling.textFont)
-                        .foregroundColor(model.styling.secondaryTextColor)
-                        .accessibilityHidden(true)
-                }
                 .onChange(of: text) { _ in
                     model.handleTyping(message: text)
                 }
