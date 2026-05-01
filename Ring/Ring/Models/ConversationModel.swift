@@ -30,7 +30,6 @@ enum ConversationType: Int {
     case publicChat
     case nonSwarm
     case sip
-    case jams
 
     var stringValue: String {
         switch self {
@@ -384,7 +383,7 @@ class ConversationModel: Equatable {
 
     func isCoredialog() -> Bool {
         if self.participants.count > 2 { return false }
-        return self.type == .nonSwarm || self.type == .oneToOne || self.type == .sip || self.type == .jams
+        return self.type == .nonSwarm || self.type == .oneToOne || self.type == .sip
     }
 
     func isCoreDialogMatch(conversation: ConversationModel) -> Bool {
@@ -452,7 +451,7 @@ class ConversationModel: Equatable {
     }
 
     func isSwarm() -> Bool {
-        return self.type != .nonSwarm && self.type != .sip && self.type != .jams
+        return self.type != .nonSwarm && self.type != .sip
     }
 
     func clearMessages() {
