@@ -199,7 +199,8 @@ static id <AccountAdapterDelegate> _delegate;
 }
 
 - (void)provideAccountAuthentication:(NSString *)accountId password:(NSString *)password {
-    provideAccountAuthentication(std::string([accountId UTF8String]), std::string([password UTF8String]), "password");
+    std::string scheme = (password.length > 0) ? "password" : "";
+    provideAccountAuthentication(std::string([accountId UTF8String]), std::string([password UTF8String]), scheme);
 }
 
 #pragma mark -
