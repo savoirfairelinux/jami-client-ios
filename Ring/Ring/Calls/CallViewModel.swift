@@ -187,8 +187,8 @@ class CallViewModel: Stateable, ViewModel {
                 let device = self.videoService.getCurrentVideoSource()
                 Task {
                     await self.callService.updateCallMediaIfNeeded(call: call)
+                    self.videoService.requestMediaChange(call: call, mediaLabel: "audio_0", source: device)
                 }
-                self.videoService.requestMediaChange(call: call, mediaLabel: "audio_0", source: device)
             })
             .disposed(by: self.disposeBag)
     }
@@ -437,9 +437,9 @@ extension CallViewModel {
         let device = self.videoService.getCurrentVideoSource()
         Task {
             await self.callService.updateCallMediaIfNeeded(call: callToMute)
+            self.videoService.requestMediaChange(call: callToMute, mediaLabel: "audio_0", source: device)
+            self.updateCallStateForConferenceHost()
         }
-        self.videoService.requestMediaChange(call: callToMute, mediaLabel: "audio_0", source: device)
-        updateCallStateForConferenceHost()
     }
 
     func toggleMuteVideo() {
@@ -449,9 +449,9 @@ extension CallViewModel {
         let device = self.videoService.getCurrentVideoSource()
         Task {
             await self.callService.updateCallMediaIfNeeded(call: callToMute)
+            self.videoService.requestMediaChange(call: callToMute, mediaLabel: "video_0", source: device)
+            self.updateCallStateForConferenceHost()
         }
-        self.videoService.requestMediaChange(call: callToMute, mediaLabel: "video_0", source: device)
-        updateCallStateForConferenceHost()
     }
 
     func updateCallStateForConferenceHost() {
