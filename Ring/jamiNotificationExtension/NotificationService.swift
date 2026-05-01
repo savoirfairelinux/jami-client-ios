@@ -782,9 +782,9 @@ extension NotificationService {
 
     private func contactProfileName(accountId: String, contactId: String) -> String? {
         guard let documents = Constants.documentsPath else { return nil }
-        let uri = "ring:" + contactId
-        let path = documents.path + "/" + "\(accountId)" + "/profiles/" + "\(Data(uri.utf8).base64EncodedString()).vcf"
-        if !FileManager.default.fileExists(atPath: path) { return nil }
+        guard let path = ProfilePathHelper.existingContactProfilePath(accountId: accountId,
+                                                                      contactId: contactId,
+                                                                      documents: documents) else { return nil }
 
         return VCardUtils.getNameFromVCard(filePath: path)
     }

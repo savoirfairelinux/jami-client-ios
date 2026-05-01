@@ -91,7 +91,7 @@ final class DBContainer {
 
     private func accountFolderPath(accountId: String) -> String? {
         guard let documents = Constants.documentsPath else { return nil }
-        return documents.path + "/" + "\(accountId)" + "/"
+        return ProfilePathHelper.accountFolderPath(accountId: accountId, documents: documents)
     }
 
     private func accountDbPath(accountId: String) -> String? {
@@ -100,19 +100,10 @@ final class DBContainer {
     }
 
     func contactsPath(accountId: String, createIfNotExists: Bool) -> String? {
-        guard let accountFolder = accountFolderPath(accountId: accountId) else { return nil }
-        let profilesFolder = accountFolder + "profiles/"
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: profilesFolder) { return profilesFolder }
-        if !createIfNotExists { return nil }
-        do {
-            try fileManager.createDirectory(atPath: profilesFolder,
-                                            withIntermediateDirectories: true,
-                                            attributes: nil)
-        } catch {
-            return nil
-        }
-        return fileManager.fileExists(atPath: profilesFolder) ? profilesFolder : nil
+        guard let documents = Constants.documentsPath else { return nil }
+        return ProfilePathHelper.contactsPath(accountId: accountId,
+                                              documents: documents,
+                                              createIfNotExists: createIfNotExists)
     }
 
     private func isDbExists(accountId: String) -> Bool {
@@ -129,14 +120,16 @@ final class DBContainer {
     }
 
     func contactProfilePath(accountId: String, profileURI: String, createifNotExists: Bool) -> String? {
-        guard let profilesFolder = contactsPath(accountId: accountId,
-                                                createIfNotExists: createifNotExists) else { return nil }
-        return profilesFolder + "\(profileURI.toBase64()).vcf"
+        guard let documents = Constants.documentsPath else { return nil }
+        return ProfilePathHelper.contactProfilePath(accountId: accountId,
+                                                    profileURI: profileURI,
+                                                    documents: documents,
+                                                    createIfNotExists: createifNotExists)
     }
 
     func accountProfilePath(accountId: String) -> String? {
-        guard let accountFolder = accountFolderPath(accountId: accountId) else { return nil }
-        return accountFolder + "profile.vcf"
+        guard let documents = Constants.documentsPath else { return nil }
+        return ProfilePathHelper.accountProfilePath(accountId: accountId, documents: documents)
     }
 
     func isAccountProfileExists(accountId: String) -> Bool {
