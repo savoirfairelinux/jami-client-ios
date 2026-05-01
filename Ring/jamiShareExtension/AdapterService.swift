@@ -357,11 +357,9 @@ public final class AdapterService: AdapterDelegate {
 
         switch type {
         case "account":
-            return documents.path + "/" + accountId + "/profile.vcf"
+            return ProfilePathHelper.accountProfilePath(accountId: accountId, documents: documents)
         case "conversation":
-            let uri = "ring:" + contactId
-            let encoded = Data(uri.utf8).base64EncodedString()
-            return documents.path + "/" + accountId + "/profiles/" + encoded + ".vcf"
+            return ProfilePathHelper.existingContactProfilePath(accountId: accountId, contactId: contactId, documents: documents)
         default:
             return nil
         }
@@ -374,7 +372,7 @@ public final class AdapterService: AdapterDelegate {
         }
 
         if let username = adapter?.getAccountDetails(accountId)["Account.username"] as? String {
-            let jamiId = username.replacingOccurrences(of: "ring:", with: "")
+            let jamiId = ProfilePathHelper.jamiHash(from: username)
             return lookupUsername(accountId: accountId, address: jamiId)
                 .map { response in
                     (response.state == .found && !(response.name?.isEmpty ?? true)) ? (response.name!, .single) : (jamiId, .jamiid)
@@ -435,10 +433,10 @@ public final class AdapterService: AdapterDelegate {
             return .just((fallbackName, .jamiid))
         }
 
-        let jamiId = username.replacingOccurrences(of: "ring:", with: "")
+        let jamiId = ProfilePathHelper.jamiHash(from: username)
         let filteredMembers = members.filter { member in
             guard let uri = member["uri"] else { return false }
-            return uri != jamiId
+            return ProfilePathHelper.jamiHash(from: uri) != jamiId
         }
 
         let nameLookups: [Single<(String, Bool)>] = filteredMembers.compactMap { [weak self] member in
@@ -496,10 +494,10 @@ public final class AdapterService: AdapterDelegate {
             return .just(nil)
         }
 
-        let jamiId = username.replacingOccurrences(of: "ring:", with: "")
+        let jamiId = ProfilePathHelper.jamiHash(from: username)
         let filteredMembers = members.filter { member in
             guard let uri = member["uri"] else { return false }
-            return uri != jamiId
+            return ProfilePathHelper.jamiHash(from: uri) != jamiId
         }
 
         guard filteredMembers.count == 1,

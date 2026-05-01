@@ -73,6 +73,79 @@ enum CommonHelpers {
     }
 }
 
+enum ProfilePathHelper {
+    static func jamiHash(from uri: String) -> String {
+        return uri
+            .replacingOccurrences(of: "<", with: "")
+            .replacingOccurrences(of: ">", with: "")
+            .replacingOccurrences(of: "@ring.dht", with: "")
+            .replacingOccurrences(of: "ring:", with: "")
+            .replacingOccurrences(of: "jami:", with: "")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    static func profileURICandidates(for contactId: String) -> [String] {
+        let hash = jamiHash(from: contactId)
+        guard !hash.isEmpty else { return [] }
+
+        return ["jami:" + hash, "ring:" + hash]
+    }
+
+    static func accountFolderPath(accountId: String, documents: URL) -> String {
+        return documents.appendingPathComponent(accountId, isDirectory: true).path + "/"
+    }
+
+    static func contactsPath(accountId: String, documents: URL, createIfNotExists: Bool) -> String? {
+        let profilesFolder = documents
+            .appendingPathComponent(accountId, isDirectory: true)
+            .appendingPathComponent("profiles", isDirectory: true)
+            .path + "/"
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: profilesFolder) { return profilesFolder }
+        if !createIfNotExists { return nil }
+        do {
+            try fileManager.createDirectory(atPath: profilesFolder,
+                                            withIntermediateDirectories: true,
+                                            attributes: nil)
+        } catch {
+            return nil
+        }
+        return fileManager.fileExists(atPath: profilesFolder) ? profilesFolder : nil
+    }
+
+    static func contactProfilePath(accountId: String,
+                                   profileURI: String,
+                                   documents: URL,
+                                   createIfNotExists: Bool) -> String? {
+        guard let profilesFolder = contactsPath(accountId: accountId,
+                                                documents: documents,
+                                                createIfNotExists: createIfNotExists) else { return nil }
+        let encoded = Data(profileURI.utf8).base64EncodedString()
+        return profilesFolder + "\(encoded).vcf"
+    }
+
+    static func existingContactProfilePath(accountId: String, contactId: String, documents: URL) -> String? {
+        for profileURI in profileURICandidates(for: contactId) {
+            guard let path = contactProfilePath(accountId: accountId,
+                                                profileURI: profileURI,
+                                                documents: documents,
+                                                createIfNotExists: false),
+                  FileManager.default.fileExists(atPath: path) else {
+                continue
+            }
+            return path
+        }
+        return nil
+    }
+
+    static func accountProfilePath(accountId: String, documents: URL) -> String {
+        return documents
+            .appendingPathComponent(accountId, isDirectory: true)
+            .appendingPathComponent("profile.vcf")
+            .path
+    }
+}
+
 /**
  Represents the status of a username validation request when the user is typing his username
  */
