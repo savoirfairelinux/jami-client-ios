@@ -293,7 +293,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
 
     func unblock() {
         guard let account = accountService.currentAccount,
-              conversation.isDialog(),
+              conversation.isCoredialog(),
               let jamiId = conversation.getParticipants().first?.jamiId,
               let contact = contactsService.contact(withHash: jamiId) else {
             return
@@ -337,7 +337,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
             .subscribe(onCompleted: { [weak self, weak conversation] in
                 guard let self = self,
                       let conversation = conversation else { return }
-                if conversation.isDialog() {
+                if conversation.isCoredialog() {
                     self.presenceService.subscribeBuddy(withAccountId: conversation.accountId,
                                                         withJamiId: jamiId,
                                                         withFlag: true)
