@@ -351,8 +351,8 @@ class JamiSearchViewModel: ObservableObject {
         let isSelf = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId == hash
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: accountId,
+                                             type: .oneToOne,
                                              isLocal: isSelf)
-        conversation.type = .oneToOne
         let newConversation = ConversationViewModel(with: self.injectionBag)
         if let userName = userName {
             newConversation.userName.accept(userName)
@@ -369,8 +369,8 @@ class JamiSearchViewModel: ObservableObject {
         let uri = JamiURI.init(schema: URIType.sip, infoHash: trimmed, account: account)
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: account.id,
-                                             hash: trimmed)
-        conversation.type = .sip
+                                             hash: trimmed,
+                                             type: .sip)
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.userName.accept(trimmed)
         newConversation.conversation = conversation
@@ -380,8 +380,7 @@ class JamiSearchViewModel: ObservableObject {
     private func createTemporaryJamsConversation(with user: JamsUserSearchModel, accountId: String) -> ConversationViewModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: user.jamiId)
         let isSelf = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId == user.jamiId
-        let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId, isLocal: isSelf)
-        conversation.type = .oneToOne
+        let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId, type: .oneToOne, isLocal: isSelf)
         let newConversation = ConversationViewModel(with: injectionBag,
                                                     conversation: conversation,
                                                     user: user)

@@ -259,7 +259,7 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         self.lastRead = ThreadSafeDictionary(lock: cacheLock)
         self.actionHandler = MessageActionHandler(injectionBag: injectionBag)
         self.requestsService = injectionBag.requestsService
-        self.conversation = ConversationModel()
+        self.conversation = ConversationModel(type: .invitesOnly)
         self.accountService = injectionBag.accountService
         self.profileService = injectionBag.profileService
         self.dataTransferService = injectionBag.dataTransferService

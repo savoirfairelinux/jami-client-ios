@@ -46,15 +46,7 @@ class RequestModel {
         case conversation
     }
 
-    init(conversation: ConversationModel) {
-        self.conversationId = conversation.id
-        self.accountId = conversation.accountId
-        self.conversationType = conversation.type
-        self.type = .conversation
-        self.participants = conversation.getParticipants()
-    }
-
-    init (with jamiId: String, accountId: String, withPayload payload: Data, receivedDate: Date, type: RequestType, conversationId: String) {
+    init(with jamiId: String, accountId: String, withPayload payload: Data, receivedDate: Date, type: RequestType, conversationId: String) {
         self.accountId = accountId
         self.conversationId = conversationId
         self.type = type
