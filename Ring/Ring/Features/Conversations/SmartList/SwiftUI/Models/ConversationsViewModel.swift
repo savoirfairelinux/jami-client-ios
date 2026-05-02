@@ -270,7 +270,7 @@ class ConversationsViewModel: ObservableObject {
 
         // Attempt to find an existing one-to-one conversation with the specified jamiId
         if let existingConversation = conversationsSource.conversationViewModels.first(where: {
-            $0.conversation.type == .oneToOne && $0.conversation.getParticipants().first?.jamiId == jamiId
+            $0.conversation.isCoredialog() && $0.conversation.getParticipants().first?.jamiId == jamiId
         }) {
             // Update and show the existing conversation
             presentedConversation.updatePresentedConversation(conversationViewModel: existingConversation)
@@ -306,8 +306,8 @@ class ConversationsViewModel: ObservableObject {
         let isSelf = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId == hash
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: accountId,
+                                             type: .oneToOne,
                                              isLocal: isSelf)
-        conversation.type = .oneToOne
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.userName.accept(hash)
         newConversation.conversation = conversation
@@ -331,8 +331,8 @@ class ConversationsViewModel: ObservableObject {
                                account: account)
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: account.id,
-                                             hash: number)
-        conversation.type = .sip
+                                             hash: number,
+                                             type: .sip)
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.conversation = conversation
         let state = ConversationState

@@ -235,8 +235,7 @@ class RequestsService {
             guard let self = self else { return Disposables.create { } }
             let request = self.getRequest(withId: conversationId, accountId: accountId)
             if let request = request,
-               request.conversationType == .oneToOne ||
-                request.conversationType == .nonSwarm,
+               request.isCoredialog(),
                let jamiId = request.participants.first?.jamiId {
                 /// save profile
                 let photo = (request.avatar != nil) ? request.avatar!.base64EncodedString() : ""

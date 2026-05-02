@@ -621,13 +621,11 @@ class DBManager {
                   let participant = participants.first else {
                 continue
             }
-            let type = participant.contains("ring:") ? URIType.ring : URIType.sip
-            let uri = JamiURI.init(schema: type, infoHash: participant)
+            let uriType = participant.contains("ring:") ? URIType.ring : URIType.sip
+            let uri = JamiURI.init(schema: uriType, infoHash: participant)
             let conversationModel = ConversationModel(withParticipantUri: uri,
-                                                      accountId: accountId)
-            if type == .sip {
-                conversationModel.type = .sip
-            }
+                                                      accountId: accountId,
+                                                      type: uriType == .sip ? .sip : .nonSwarm)
             conversationModel.id = String(conversationID)
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler

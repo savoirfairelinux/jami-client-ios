@@ -180,7 +180,7 @@ class ConversationModel: Equatable {
     var accountId: String = ""
     var id: String = ""
     var lastMessage: MessageModel?
-    var type: ConversationType = .nonSwarm
+    private var type: ConversationType = .nonSwarm
     let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
     let disposeBag = DisposeBag()
     var avatar: String = ""
@@ -191,26 +191,29 @@ class ConversationModel: Equatable {
     let reactionsUpdated = PublishSubject<String>()
     let messageUpdated = PublishSubject<String>()
 
-    convenience init(withParticipantUri participantUri: JamiURI, accountId: String, isLocal: Bool = false) {
+    convenience init(withParticipantUri participantUri: JamiURI, accountId: String, type: ConversationType = .nonSwarm, isLocal: Bool = false) {
         self.init()
         self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "", isLocal: isLocal)]
         self.hash = participantUri.hash ?? ""
         self.accountId = accountId
+        self.type = type
         self.subscribeUnreadMessages()
     }
 
-    convenience init (withParticipantUri participantUri: JamiURI, accountId: String, hash: String) {
+    convenience init (withParticipantUri participantUri: JamiURI, accountId: String, hash: String, type: ConversationType = .nonSwarm) {
         self.init()
         self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "")]
         self.hash = hash
         self.accountId = accountId
+        self.type = type
         self.subscribeUnreadMessages()
     }
 
-    convenience init (withId conversationId: String, accountId: String) {
+    convenience init (withId conversationId: String, accountId: String, type: ConversationType = .nonSwarm) {
         self.init()
         self.id = conversationId
         self.accountId = accountId
+        self.type = type
         self.subscribeUnreadMessages()
     }
 
@@ -452,6 +455,10 @@ class ConversationModel: Equatable {
 
     func isSwarm() -> Bool {
         return self.type != .nonSwarm && self.type != .sip
+    }
+
+    func isSip() -> Bool {
+        return self.type == .sip
     }
 
     func clearMessages() {
