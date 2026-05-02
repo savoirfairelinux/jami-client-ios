@@ -75,7 +75,7 @@ final class JamiSearchViewModelTests: XCTestCase {
                                     withRequestsService: requestsService,
                                     withSystemService: systemService)
         conversationVM = ConversationViewModel(with: injectionBag)
-        conversationVM.conversation = ConversationModel()
+        conversationVM.conversation = ConversationModel(type: .oneToOne)
         dataSource = TestableFilteredDataSource(conversations: [conversationVM], injectionBag: injectionBag)
         searchViewModel = JamiSearchViewModel(with: injectionBag, source: dataSource, searchOnlyExistingConversations: false)
     }
@@ -89,8 +89,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     }
 
     func createSwarmConversation(jamiId: String, type: ConversationType) -> ConversationModel {
-        let conversation = ConversationModel(withId: "", accountId: "", info: [:])
-        conversation.type = type
+        let conversation = ConversationModel(withId: "", accountId: "", type: type)
         let participants = [["uri": jamiId]]
         conversation.addParticipantsFromArray(participantsInfo: participants, accountURI: "")
         return conversation
@@ -253,7 +252,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationMatch_SipConversation_Match() {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
-        let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1)
+        let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1, type: .sip)
         conversationVM.conversation = conversation
         conversationVM.userName.accept(sipTestNumber1)
         // Act
@@ -266,7 +265,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationMatch_SipConversation_DoesNotMatch() {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
-        let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1)
+        let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1, type: .sip)
         conversationVM.conversation = conversation
         conversationVM.userName.accept(sipTestNumber1)
         // Act
@@ -279,7 +278,7 @@ final class JamiSearchViewModelTests: XCTestCase {
     func testConversationContains_SipConversation_Contains() {
         // Arrange
         let uri = JamiURI(schema: .sip, infoHash: sipTestNumber1)
-        let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1)
+        let conversation = ConversationModel(withParticipantUri: uri, accountId: "", hash: sipTestNumber1, type: .sip)
         conversationVM.conversation = conversation
         conversationVM.userName.accept(sipTestNumber1)
         // Act

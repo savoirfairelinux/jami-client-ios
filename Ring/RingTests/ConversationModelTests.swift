@@ -25,8 +25,7 @@ final class ConversationModelTests: XCTestCase {
 
     func createConversation(conversationId: String, jamiId: String, type: ConversationType, accountId: String) -> ConversationModel {
         let uri = JamiURI.init(schema: URIType.ring, infoHash: jamiId)
-        let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId)
-        conversation.type = type
+        let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId, type: type)
         conversation.id = conversationId
         return conversation
     }

@@ -72,8 +72,7 @@ final class ActiveCallsViewModelTests: XCTestCase {
                                     withSystemService: systemService)
 
         conversationVM = ConversationViewModel(with: injectionBag)
-        let conversation = ConversationModel(withId: conversationId1, accountId: accountId1, info: [:])
-        conversation.type = .publicChat
+        let conversation = ConversationModel(withId: conversationId1, accountId: accountId1, type: .publicChat)
         conversationVM.conversation = conversation
 
         let participant = ParticipantInfo(jamiId: jamiId1, role: .admin, profileService: injectionBag.profileService)

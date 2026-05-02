@@ -98,7 +98,7 @@ class ConversationsService {
                     self?.serialOperationQueue.async {
                         guard let self = self else { return }
                         let oneToOne = currentConversations.filter { conv in
-                            conv.type == .oneToOne || conv.type == .nonSwarm
+                            conv.isCoredialog()
                         }
                         .map { conv in
                             return conv.getParticipants().first?.jamiId
@@ -664,7 +664,7 @@ class ConversationsService {
 
     func removeConversationFromDB(conversation: ConversationModel, keepConversation: Bool) {
         guard let jamiId = conversation.getParticipants().first?.jamiId else { return }
-        let schema: URIType = conversation.type == .sip ? .sip : .ring
+        let schema: URIType = conversation.isSip() ? .sip : .ring
         guard let uri = JamiURI(schema: schema, infoHash: jamiId).uriString else { return }
         self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: uri, keepConversation: keepConversation)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -739,8 +739,7 @@ class ConversationsService {
             guard let self = self else { return }
             if self.getConversationForId(conversationId: conversationId, accountId: accountId) != nil { return }
             var conversations = self.conversations.value
-            let conversation = ConversationModel(withId: conversationId, accountId: accountId)
-            conversation.type = .oneToOne
+            let conversation = ConversationModel(withId: conversationId, accountId: accountId, type: .oneToOne)
             conversation.addParticipant(jamiId: jamiId)
             conversations.append(conversation)
             self.conversations.accept(conversations)
