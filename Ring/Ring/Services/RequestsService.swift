@@ -113,7 +113,7 @@ class RequestsService {
                 if !currentRequests.filter({ $0.conversationId == contactRequest.conversationId && $0.accountId == contactRequest.accountId }).isEmpty {
                     continue
                 }
-                if !currentRequests.filter({ $0.participants == contactRequest.participants && $0.accountId == accountId && $0.participants.count == 1 }).isEmpty {
+                if !currentRequests.filter({ $0.participants == contactRequest.participants && $0.accountId == accountId && $0.isDialog() }).isEmpty {
                     continue
                 }
                 /// check if contact request already accepted
@@ -154,7 +154,7 @@ class RequestsService {
     // MARK: Private helpers
 
     private func getRequest(withJamiId participantId: String, accountId: String) -> RequestModel? {
-        guard let request = self.requests.value.filter({ $0.participants.first?.jamiId == participantId && $0.accountId == accountId && $0.participants.count == 1 }).first else {
+        guard let request = self.requests.value.filter({ $0.participants.first?.jamiId == participantId && $0.accountId == accountId && $0.isDialog() }).first else {
             return nil
         }
         return request
