@@ -180,7 +180,7 @@ class ConversationModel: Equatable {
     var accountId: String = ""
     var id: String = ""
     var lastMessage: MessageModel?
-    var type: ConversationType = .nonSwarm
+    private var type: ConversationType
     let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
     let disposeBag = DisposeBag()
     var avatar: String = ""
@@ -191,47 +191,59 @@ class ConversationModel: Equatable {
     let reactionsUpdated = PublishSubject<String>()
     let messageUpdated = PublishSubject<String>()
 
-    convenience init(withParticipantUri participantUri: JamiURI, accountId: String, isLocal: Bool = false) {
-        self.init()
+    init(type: ConversationType) {
+        self.type = type
+    }
+
+    convenience init(withParticipantUri participantUri: JamiURI, accountId: String, type: ConversationType, isLocal: Bool = false) {
+        self.init(type: type)
         self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "", isLocal: isLocal)]
         self.hash = participantUri.hash ?? ""
         self.accountId = accountId
         self.subscribeUnreadMessages()
     }
 
-    convenience init (withParticipantUri participantUri: JamiURI, accountId: String, hash: String) {
-        self.init()
+    convenience init (withParticipantUri participantUri: JamiURI, accountId: String, hash: String, type: ConversationType) {
+        self.init(type: type)
         self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "")]
         self.hash = hash
         self.accountId = accountId
         self.subscribeUnreadMessages()
     }
 
-    convenience init (withId conversationId: String, accountId: String) {
-        self.init()
+    convenience init (withId conversationId: String, accountId: String, type: ConversationType) {
+        self.init(type: type)
         self.id = conversationId
         self.accountId = accountId
         self.subscribeUnreadMessages()
     }
 
     convenience init (request: RequestModel) {
-        self.init()
+        self.init(type: request.conversationType)
         self.id = request.conversationId
         self.accountId = request.accountId
         self.participants = request.participants
-        self.type = request.conversationType
         self.avatar = request.avatar?.base64EncodedString() ?? ""
         self.title = request.name
         self.subscribeUnreadMessages()
     }
 
     convenience init (withId conversationId: String, accountId: String, info: [String: String]) {
-        self.init()
+        self.init(type: ConversationModel.parseType(from: info))
         self.id = conversationId
         self.accountId = accountId
         self.updateInfo(info: info)
         updateProfile(profile: info)
         self.subscribeUnreadMessages()
+    }
+
+    static func parseType(from info: [String: String]) -> ConversationType {
+        if let mode = info[ConversationAttributes.mode.rawValue],
+           let modeInt = Int(mode),
+           let type = ConversationType(rawValue: modeInt) {
+            return type
+        }
+        return .invitesOnly
     }
 
     func addParticipant(jamiId: String) {
@@ -452,6 +464,10 @@ class ConversationModel: Equatable {
 
     func isSwarm() -> Bool {
         return self.type != .nonSwarm && self.type != .sip
+    }
+
+    func isSip() -> Bool {
+        return self.type == .sip
     }
 
     func clearMessages() {
