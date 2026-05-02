@@ -724,7 +724,7 @@ class ConversationsService {
 
     func getConversationForParticipant(jamiId: String, accountId: String) -> ConversationModel? {
         return self.conversations.value.filter { conversation in
-            conversation.getParticipants().first?.jamiId == jamiId && conversation.isDialog() && conversation.accountId == accountId
+            conversation.getParticipants().first?.jamiId == jamiId && conversation.isCoredialog() && conversation.accountId == accountId
         }.first
     }
 
