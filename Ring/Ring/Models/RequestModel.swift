@@ -27,7 +27,7 @@ class RequestModel {
     var receivedDate: Date = Date()
     var avatar: Data?
     var participants = [ConversationParticipant]()
-    var conversationType: ConversationType = .nonSwarm
+    var conversationType: ConversationType = .oneToOne
     var type: RequestType
 
     enum RequestKey: String {
@@ -98,7 +98,7 @@ class RequestModel {
             self.conversationType = conversationType
         }
 
-        if self.conversationType == .nonSwarm {
+        if self.conversationType == .oneToOne {
             self.type = .contact
         }
         if let conversationId = dictionary[RequestKey.conversationId.rawValue] {
