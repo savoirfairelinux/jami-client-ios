@@ -41,7 +41,7 @@
 "global.name" = "Name";
 "global.copy" = "Kopieren";
 "global.reply" = "Antworten";
-"global.search" = "Suchlauf ...";
+"global.search" = "Suche läuft…";
 "global.supportJami" = "Das Jami-Projekt unterstützen";
 "global.deleteMessage" = "Nachricht löschen";
 "global.deleteFile" = "Datei vom Gerät löschen";
@@ -64,7 +64,7 @@
 "scan.badQrCode" = "QR-Code ungültig";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Nach Kontakt suchen …";
+"swarmcreation.searchBar" = "Nach Kontakt suchen…";
 "swarmcreation.addDescription" = "Beschreibung hinzufügen";
 // Swarm
 "swarm.muteConversation" = "Unterhaltung stummschalten";
@@ -136,7 +136,7 @@
 "smartlist.invitationReceived" = "Einladungen erhalten";
 "smartlist.noResults" = "Keine Ergebnisse";
 "smartlist.noConversation" = "Keine Unterhaltungen";
-"smartlist.searchBarPlaceholder" = "Namen eingeben …";
+"smartlist.searchBarPlaceholder" = "Namen eingeben…";
 "smartlist.searchBar" = "Suchen";
 "smartlist.noNetworkConnectivity" = "Keine Netzwerkverbindung";
 "smartlist.cellularAccess" = "Stellen Sie sicher, dass der mobile Zugriff in den Einstellungen erlaubt ist.";
@@ -168,7 +168,7 @@
 "conversation.sendRequest" = "Senden Sie ihnen eine Einladung, um kommunizieren zu können.";
 "conversation.sendRequestTitle" = "Einladung zur Unterhaltung senden";
 "conversation.synchronizationTitle" = "Sie haben die Einladung zur Unterhaltung angenommen.";
-"conversation.synchronizationMessage" = "Warten auf Verbindung von %@ zur Synchronisierung der Unterhaltung…";
+"conversation.synchronizationMessage" = "Auf Verbindung von %@ zur Synchronisierung der Unterhaltung wird gewartet…";
 "conversation.inReplyTo" = "Als Antwort auf";
 "conversation.repliedTo" = "%@antwortete an %@";
 "conversation.yourself" = "Sie";
@@ -213,14 +213,14 @@
 
 // Create Account form
 "createAccount.createAccountFormTitle" = "Jami beitreten";
-"createAccount.lookingForUsernameAvailability" = "Verfügbarkeit des Benutzernamens wird geprüft …";
+"createAccount.lookingForUsernameAvailability" = "Verfügbarkeit des Benutzernamens wird geprüft…";
 "createAccount.invalidUsername" = "Ungültiger Benutzername. Bitte geben Sie den korrekten Benutzernamen ein.";
 "createAccount.usernameAlreadyTaken" = "Benutzername bereits vergeben";
 "createAccount.usernameValid" = "Der Benutzername ist verfügbar.";
 "createAccount.UsernameNotRegisteredTitle" = "Netzwerkfehler";
 "createAccount.UsernameNotRegisteredMessage" = "Konto wurde erstellt, aber der Benutzername wurde nicht registriert";
 "createAccount.timeoutTitle" = "Konto erstellt";
-"createAccount.timeoutMessage" = "Die Registrierung des Benutzernamens ist im Gange. Bitte warten …";
+"createAccount.timeoutMessage" = "Die Registrierung des Benutzernamens ist im Gange. Bitte warten…";
 "createAccount.sipConfigure" = "Vorhandenes SIP-Konto konfigurieren";
 "createAccount.creatingAccount" = "Konto erstellen";
 "createAccount.nameExplanation" = "Sie können einen Benutzernamen wählen, damit andere Sie auf Jami leichter finden und erreichen können.";
@@ -310,8 +310,8 @@
 "actions.stopLocationSharing" = "Freigabe beenden";
 
 // Calls
-"calls.ringing" = "Es klingelt …";
-"calls.connecting" = "Verbindung wird hergestellt …";
+"calls.ringing" = "Es klingelt…";
+"calls.connecting" = "Verbindung wird hergestellt…";
 "calls.callFinished" = "Anruf beendet";
 "calls.currentCallWith" = "Anrufen mit";
 "calls.maximize" = "Maximieren";
@@ -348,7 +348,7 @@
 "accountPage.revokeDeviceButton" = "Widerrufen";
 "accountPage.revokeDevicePlaceholder" = "Geben Sie ihr Kontopasswort ein";
 "accountPage.deviceRevoked" = "Trennung des Gerätes abgeschlossen";
-"accountPage.deviceRevocationProgress" = "Wird entfernt …";
+"accountPage.deviceRevocationProgress" = "Wird entfernt…";
 "accountPage.deviceRevocationSuccess" = "Gerät entfernt";
 "accountPage.deviceRevocationTryAgain" = "Nochmal versuchen";
 "accountPage.deviceRevocationWrongPassword" = "Falsches Passwort";
@@ -406,7 +406,7 @@
 "accountPage.passwordUpdated" = "Passwort aktualisiert";
 "accountPage.linkedDevices" = "Verknüpfte Geräte";
 "accountPage.unlink" = "Verknüpfung aufheben";
-"accountPage.generatingPin" = "PIN-Code wird generiert …";
+"accountPage.generatingPin" = "PIN-Code wird generiert…";
 "accountPage.passwordForPin" = "Das Konto ist passwortgeschützt. Geben Sie das Passwort ein, um einen PIN-Code zu generieren.";
 "accountPage.pinExplanationTitle" = "Auf einem anderen Gerät";
 "accountPage.pinExplanationMessage" = "Installieren und starten Sie Jami. Wählen Sie ‚Von einem anderen Gerät importieren‘ und scannen Sie den QR-Code. Alternativ können Sie den PIN-Code manuell eingeben.";
@@ -484,7 +484,7 @@
 "linkDevice.infoAddAccount" = "Wählen Sie Konto hinzufügen → Von einem anderen Gerät verbinden.";
 "linkDevice.infoQRCode" = "Wenn Sie bereit sind, scannen Sie den QR-Code.";
 "linkDevice.infoCode" = "Wenn Sie bereit sind, geben Sie den Code ein und tippen Sie auf „Verbinden“.";
-"linkDevice.connecting" = "Verbindung zu Ihrem neuen Gerät wird hergestellt …";
+"linkDevice.connecting" = "Verbindung zu Ihrem neuen Gerät wird hergestellt…";
 "linkDevice.authenticationInfo" = "Neues Gerät unter der folgenden IP-Adresse gefunden. Sind Sie das? Um den Vorgang zum Export des Kontos fortzusetzen, tippen Sie auf Bestätigen.";
 "linkDevice.newDeviceIP" = "Neue Geräte-IP-Adresse: %1@";
 "linkDevice.code" = "Code";
@@ -499,10 +499,10 @@
 "contactPage.leaveConversation" = "Unterhaltung verlassen";
 
 // DataTransfer
-"dataTransfer.readableStatusCreated" = "Wird initialisiert …";
+"dataTransfer.readableStatusCreated" = "Wird initialisiert…";
 "dataTransfer.readableStatusError" = "Fehler";
-"dataTransfer.readableStatusAwaiting" = "Ausstehend …";
-"dataTransfer.readableStatusOngoing" = "Übertrage";
+"dataTransfer.readableStatusAwaiting" = "Ausstehend…";
+"dataTransfer.readableStatusOngoing" = "Wird übertragen";
 "dataTransfer.readableStatusCanceled" = "Abgebrochen";
 "dataTransfer.sendingFailed" = "Beim Senden ist ein Fehler aufgetreten.";
 "dataTransfer.readableStatusSuccess" = "Abgeschlossen";
@@ -562,7 +562,7 @@
 "migrateAccount.explanation" = "Kontomigration erforderlich.";
 "migrateAccount.passwordExplanation" = "Um mit der Kontomigration fortzufahren, geben Sie das Kontopasswort ein.";
 "migrateAccount.error" = "Beim Migrieren des Kontos ist ein Fehler aufgetreten. Versuchen Sie es erneut oder löschen Sie das Konto.";
-"migrateAccount.migrating" = "Wird migriert …";
+"migrateAccount.migrating" = "Wird migriert…";
 "migrateAccount.migrateAnother" = "Anderes Konto migrieren";
 
 // About Jami
@@ -678,7 +678,7 @@
 "shareExtension.noAccount.description" = "Um fortzufahren, erstellen Sie ein Konto in der Hauptanwendung.";
 "shareExtension.unsupportedType.title" = "Nicht unterstützter Inhalt";
 "shareExtension.unsupportedType.description" = "Das Teilen der ausgewählten Inhalte wird derzeit nicht unterstützt.";
-"shareExtension.sending" = "Wird gesendet …";
+"shareExtension.sending" = "Wird gesendet…";
 "shareExtension.noSearchResults" = "Keine Unterhaltungen entsprechen Ihrer Suche";
 "shareExtension.tryDifferentFilter" = "Anderen Filter ausprobieren";
 "shareExtension.sendToConversation" = "An %d Unterhaltung senden";

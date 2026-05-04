@@ -502,7 +502,7 @@
 "dataTransfer.readableStatusCreated" = "Wird initialisiert …";
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Ausstehend…";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "Wird übertragen";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "Beim Senden ist ein Fehler aufgetreten.";
 "dataTransfer.readableStatusSuccess" = "Complete";

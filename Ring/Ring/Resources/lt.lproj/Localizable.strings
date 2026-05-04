@@ -486,11 +486,11 @@
 "linkDevice.infoCode" = "When ready, enter the code and tap Connect.";
 "linkDevice.connecting" = "Jungiamasi prie naujo įrenginio…";
 "linkDevice.authenticationInfo" = "New device found at the following IP address. Is that you? To continue the export account operation, tap Confirm.";
-"linkDevice.newDeviceIP" = "New device IP address: %1@";
+"linkDevice.newDeviceIP" = "Naujo įrenginio IP adresas: %1@";
 "linkDevice.code" = "code";
 "linkDevice.wrongEntry" = "Unrecognized new device identifier. Please follow the instructions above.";
 "linkDevice.exportInProgress" = "The export account operation to the new device is in progress. Please confirm import on the new device.";
-"linkDevice.completed" = "The account was imported successfully on the new device.";
+"linkDevice.completed" = "Paskyra buvo sėkmingai importuota naujame įrenginyje.";
 
 // Contact Page
 "contactPage.startAudioCall" = "Pradėti garso skambutį";
