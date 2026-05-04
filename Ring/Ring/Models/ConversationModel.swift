@@ -255,6 +255,8 @@ class ConversationModel: Equatable {
     func updateInfo(info: [String: String]) {
         if let syncing = info["syncing"], syncing == "true" {
             self.synchronizing.accept(true)
+        } else if info[ConversationAttributes.mode.rawValue] == nil {
+            self.synchronizing.accept(true)
         } else {
             self.synchronizing.accept(false)
         }
