@@ -230,7 +230,7 @@ extension AvatarProvider {
             size: size,
             avatar: swarmInfo.finalAvatarData,
             displayName: swarmInfo.finalTitle.asObservable(),
-            isGroup: !(swarmInfo.conversation?.isDialog() ?? false)
+            isGroup: !(swarmInfo.conversation?.isCoredialog() ?? false)
         )
     }
 }
