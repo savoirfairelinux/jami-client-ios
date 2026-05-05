@@ -260,7 +260,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             }
             self.updateBlockedStatus()
             self.setupPresence()
-            self.avatarProvider.updateIsGroup(!self.conversation.isCoredialog())
             self.updateName()
 
             if self.shouldCreateSwarmInfo() {
@@ -334,8 +333,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     func createSwarmInfo() {
-        self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation)
-        self.swarmInfo!.finalAvatarData.share()
+        let newSwarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation)
+        self.swarmInfo = newSwarmInfo
+        newSwarmInfo.finalAvatarData.share()
             .subscribe { [weak self] image in
                 if let image = image {
                     self?.profileImageData.accept(image)
@@ -343,27 +343,38 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
-        self.swarmInfo!.title.share()
+        newSwarmInfo.title.share()
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] name in
                 self?.displayName.accept(name)
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
-        self.swarmInfo!.participantsString.share()
+        newSwarmInfo.participantsString.share()
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] name in
                 self?.userName.accept(name)
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
-        self.swarmInfo!.conversationEnded
+        newSwarmInfo.conversationEnded
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] isEnded in
                 self?.swiftUIModel.isConversationEnded = isEnded
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
+        self.avatarProvider = AvatarProvider.from(
+            swarmInfo: newSwarmInfo,
+            profileService: self.injectionBag.profileService,
+            size: .default55
+        )
+        self.navBarAvatarProvider = AvatarProvider.from(
+            swarmInfo: newSwarmInfo,
+            profileService: self.injectionBag.profileService,
+            size: .conversation30
+        )
+        self.objectWillChange.send()
     }
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {
