@@ -88,8 +88,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                                 profileData.element?.0,
                                username: data,
                                isGroup: false,
-                               size: 100,
-                               labelFontSize: 44))
+                               size: 100))
             self?.titleView.avatarImage =
                 AvatarView(profileImageData: profileData.element?.0,
                            username: data,
