@@ -208,7 +208,7 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
     private func createAvatar() -> UIImage {
         if let avatarData = nameResolver.request.avatar, let image = UIImage(data: avatarData) {
             return image
-        } else if request.type == .contact {
+        } else if request.isCoredialog() {
             return UIImage.createContactAvatar(username: nameResolver.bestName, size: CGSize(width: avatarSize, height: avatarSize))
         } else {
             return UIImage.createSwarmAvatar(convId: nameResolver.request.conversationId, size: CGSize(width: avatarSize, height: avatarSize))
