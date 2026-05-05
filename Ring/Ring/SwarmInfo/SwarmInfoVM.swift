@@ -67,6 +67,7 @@ class SwarmInfoVM: ObservableObject {
     }
 
     let provider: AvatarProvider
+    var groupAvatarProvider: GroupAvatarProvider?
 
     var isCoreDialog: Bool {
         return conversation?.isCoredialog() ?? false
@@ -118,6 +119,12 @@ class SwarmInfoVM: ObservableObject {
         self.swarmInfo = swarmInfo
         self.conversation = swarmInfo.conversation
         self.provider = AvatarProvider.from(swarmInfo: swarmInfo, profileService: self.profileService, size: Constants.AvatarSize.conversationInfo80)
+        if !(swarmInfo.conversation?.isCoredialog() ?? false) {
+            self.groupAvatarProvider = GroupAvatarProvider(
+                swarmInfo: swarmInfo,
+                totalSize: Constants.AvatarSize.conversationInfo80.points
+            )
+        }
 
         setupBindings()
     }
