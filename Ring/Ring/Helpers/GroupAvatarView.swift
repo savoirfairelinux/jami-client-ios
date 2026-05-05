@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2025 Savoir-faire Linux Inc.
+ *  Copyright (C) 2026 - 2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,50 +25,81 @@ struct GroupAvatarView: View {
         let totalSize = provider.totalSize
         let participants = provider.displayParticipants
         let count = participants.count
+        let overflowCount = provider.overflowCount
 
         ZStack {
-            if count == 1 {
-                singleLayout(participant: participants[0], totalSize: totalSize)
+            if count == 1 && overflowCount == 0 {
+                MiniAvatarView(source: participants[0].provider, size: totalSize)
             } else if count >= 2 {
-                multiLayout(participants: participants, totalSize: totalSize)
+                clusterView(
+                    participants: participants,
+                    overflowCount: overflowCount,
+                    totalSize: totalSize
+                )
             } else {
                 emptyPlaceholder(totalSize: totalSize)
-            }
-
-            if provider.overflowCount > 0 {
-                OverflowBadge(count: provider.overflowCount, size: totalSize * 0.38)
-                    .offset(
-                        x: totalSize * 0.32,
-                        y: totalSize * 0.32
-                    )
             }
         }
         .frame(width: totalSize, height: totalSize)
     }
 
-    @ViewBuilder
-    private func singleLayout(participant: ParticipantInfo, totalSize: CGFloat) -> some View {
-        MiniAvatarView(source: participant.provider, size: totalSize)
-    }
+    // MARK: - Cluster
 
     @ViewBuilder
-    private func multiLayout(participants: [ParticipantInfo], totalSize: CGFloat) -> some View {
-        let miniSize = totalSize * 0.62
-        let overlap = miniSize * 0.3
-        let step = miniSize - overlap
-        let visibleCount = CGFloat(participants.count)
-        let totalWidth = miniSize + step * (visibleCount - 1)
-        let startX = -totalWidth / 2 + miniSize / 2
+    private func clusterView(
+        participants: [ParticipantInfo],
+        overflowCount: Int,
+        totalSize: CGFloat
+    ) -> some View {
+        let border: CGFloat = max(totalSize * 0.035, 1.5)
+        let hasThird = participants.count > 2 || overflowCount > 0
 
-        ForEach(Array(participants.enumerated().reversed()), id: \.element.jamiId) { index, participant in
-            MiniAvatarView(source: participant.provider, size: miniSize)
-                .overlay(
-                    Circle()
-                        .stroke(Color(UIColor.systemBackground), lineWidth: 2)
-                )
-                .offset(x: startX + step * CGFloat(index))
+        let adminSize = totalSize * (hasThird ? 0.44 : 0.46)
+        let otherSize = totalSize * (hasThird ? 0.34 : 0.36)
+
+        let layout: [(x: CGFloat, y: CGFloat)] = hasThird
+            ? [
+                (x: totalSize * -0.06, y: totalSize * -0.14),
+                (x: totalSize * 0.20, y: totalSize * 0.02),
+                (x: totalSize * -0.08, y: totalSize * 0.20)
+            ]
+            : [
+                (x: totalSize * -0.10, y: totalSize * -0.12),
+                (x: totalSize * 0.14, y: totalSize * 0.16)
+            ]
+
+        ZStack {
+            Circle().fill(Color(UIColor.systemGray5))
+
+            if hasThird {
+                if overflowCount > 0 {
+                    OverflowBadge(count: overflowCount, size: otherSize)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color(UIColor.systemGray5), lineWidth: border))
+                        .offset(x: layout[2].x, y: layout[2].y)
+                } else if participants.count > 2 {
+                    borderedMini(provider: participants[2].provider, size: otherSize, border: border)
+                        .offset(x: layout[2].x, y: layout[2].y)
+                }
+            }
+
+            if participants.count > 1 {
+                borderedMini(provider: participants[1].provider, size: otherSize, border: border)
+                    .offset(x: layout[1].x, y: layout[1].y)
+            }
+
+            borderedMini(provider: participants[0].provider, size: adminSize, border: border)
+                .offset(x: layout[0].x, y: layout[0].y)
         }
+        .clipShape(Circle())
     }
+
+    private func borderedMini(provider: AvatarProvider, size: CGFloat, border: CGFloat) -> some View {
+        MiniAvatarView(source: provider, size: size)
+            .overlay(Circle().stroke(Color(UIColor.systemGray5), lineWidth: border))
+    }
+
+    // MARK: - Empty
 
     @ViewBuilder
     private func emptyPlaceholder(totalSize: CGFloat) -> some View {
@@ -85,6 +116,8 @@ struct GroupAvatarView: View {
         .clipShape(Circle())
     }
 }
+
+// MARK: - Mini Avatar
 
 struct MiniAvatarView: View {
     @ObservedObject var source: AvatarProvider
@@ -117,15 +150,9 @@ struct MiniAvatarView: View {
 
         ZStack {
             Color(bgColor)
-            let borderUIColor = bgColor.darker(by: 1) ?? bgColor
-            let borderLineWidth = min(max(size * 0.04, 1), 1)
-            Circle()
-                .stroke(Color(borderUIColor), lineWidth: borderLineWidth)
 
             if !displayText.isSHA1() && !displayText.isEmpty {
-                let factor: CGFloat = 0.44
-                let raw = size * factor
-                let fontSize = min(max(raw.rounded(), 8), 50)
+                let fontSize = min(max((size * 0.44).rounded(), 8), 50)
                 Text(MonogramHelper.extractFirstGraphemeCluster(from: displayText))
                     .font(.system(size: fontSize, weight: .semibold))
                     .foregroundColor(.white)
@@ -139,22 +166,19 @@ struct MiniAvatarView: View {
     }
 }
 
+// MARK: - Overflow Badge
+
 struct OverflowBadge: View {
     let count: Int
     let size: CGFloat
 
     var body: some View {
         ZStack {
-            Color(UIColor.systemGray)
+            Color(UIColor.systemGray3)
             Text("+\(count)")
-                .font(.system(size: size * 0.50, weight: .semibold))
+                .font(.system(size: size * 0.44, weight: .semibold))
                 .foregroundColor(.white)
         }
         .frame(width: size, height: size)
-        .clipShape(Circle())
-        .overlay(
-            Circle()
-                .stroke(Color(UIColor.systemBackground), lineWidth: 1.5)
-        )
     }
 }

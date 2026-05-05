@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2025 Savoir-faire Linux Inc.
+ *  Copyright (C) 2026 - 2026 Savoir-faire Linux Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,12 +26,10 @@ class GroupAvatarProvider: ObservableObject {
     @Published var hasCustomAvatar: Bool = false
 
     let totalSize: CGFloat
-    private let maxVisible: Int
     private let disposeBag = DisposeBag()
 
     init(swarmInfo: SwarmInfoProtocol, totalSize: CGFloat) {
         self.totalSize = totalSize
-        self.maxVisible = totalSize >= 80 ? 3 : 2
 
         swarmInfo.avatarData.asObservable()
             .observe(on: MainScheduler.instance)
@@ -40,15 +38,39 @@ class GroupAvatarProvider: ObservableObject {
             })
             .disposed(by: disposeBag)
 
-        swarmInfo.participants.asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] participants in
-                guard let self = self else { return }
-                let active = participants.filter { [.admin, .member, .invited].contains($0.role) }
-                let visible = Array(active.prefix(self.maxVisible))
-                self.displayParticipants = visible
-                self.overflowCount = max(active.count - visible.count, 0)
-            })
-            .disposed(by: disposeBag)
+        Observable.combineLatest(
+            swarmInfo.participants.asObservable(),
+            swarmInfo.participantsAvatars.asObservable()
+        )
+        .observe(on: MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (participants, _) in
+            self?.updateDisplay(participants: participants)
+        })
+        .disposed(by: disposeBag)
+    }
+
+    private func updateDisplay(participants: [ParticipantInfo]) {
+        let active = participants.filter { [.admin, .member, .invited].contains($0.role) }
+        let maxAvatars = active.count <= 3 ? active.count : 2
+
+        let admin = active.first { $0.role == .admin }
+        let others = active.filter { $0 != admin }
+        let sortedOthers = others.sorted { avatarPriority($0) > avatarPriority($1) }
+
+        var visible: [ParticipantInfo] = []
+        if let admin = admin {
+            visible.append(admin)
+        }
+        visible.append(contentsOf: sortedOthers.prefix(maxAvatars - visible.count))
+
+        self.displayParticipants = visible
+        self.overflowCount = max(active.count - visible.count, 0)
+    }
+
+    private func avatarPriority(_ participant: ParticipantInfo) -> Int {
+        if participant.avatarData.value != nil { return 2 }
+        let name = participant.finalName.value
+        if !name.isSHA1() && !name.isEmpty { return 1 }
+        return 0
     }
 }
