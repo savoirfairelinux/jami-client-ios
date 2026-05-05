@@ -35,7 +35,7 @@ struct SmartListContentView: View {
         return ZStack {
             if isSearchBarActive {
                 ScrollView {
-                    VStack(alignment: .leading) {
+                    LazyVStack(alignment: .leading) {
                         publicDirectorySearchView
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .contentShape(Rectangle())
@@ -50,7 +50,7 @@ struct SmartListContentView: View {
                 .transition(.opacity)
             } else {
                 ScrollView {
-                    VStack(alignment: .leading) {
+                    LazyVStack(alignment: .leading) {
                         if mode == .smartList {
                             smartListTopView
                                 .frame(maxWidth: .infinity, alignment: .leading)
