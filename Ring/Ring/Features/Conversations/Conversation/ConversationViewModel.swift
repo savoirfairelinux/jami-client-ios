@@ -108,6 +108,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     var contactPresence = BehaviorRelay<PresenceStatus>(value: .offline)
     var swarmInfo: SwarmInfoProtocol?
+    var groupAvatarProvider: GroupAvatarProvider?
 
     lazy var avatarProvider: AvatarProvider = {
         if let conversation = self.conversation {
@@ -364,6 +365,12 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
+        if !self.conversation.isCoredialog() {
+            self.groupAvatarProvider = GroupAvatarProvider(
+                swarmInfo: self.swarmInfo!,
+                totalSize: Constants.AvatarSize.default55.points
+            )
+        }
     }
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {
