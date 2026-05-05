@@ -200,11 +200,11 @@ struct MessagePanelView: View {
                 isFocused: $isFocused,
                 dynamicHeight: $textHeight
             )
-                .frame(minHeight: textHeight, maxHeight: textHeight)
-                .accessibilityLabel(L10n.Accessibility.conversationComposeMessage)
-                .onChange(of: text) { _ in
-                    model.handleTyping(message: text)
-                }
+            .frame(minHeight: textHeight, maxHeight: textHeight)
+            .accessibilityLabel(L10n.Accessibility.conversationComposeMessage)
+            .onChange(of: text) { _ in
+                model.handleTyping(message: text)
+            }
 
             sendEmojiButton()
                 .padding(.trailing, compactTextInputInset)

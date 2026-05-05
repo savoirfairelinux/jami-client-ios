@@ -364,6 +364,16 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
+        self.avatarProvider = AvatarProvider.from(
+            swarmInfo: self.swarmInfo!,
+            profileService: self.injectionBag.profileService,
+            size: .default55
+        )
+        self.navBarAvatarProvider = AvatarProvider.from(
+            swarmInfo: self.swarmInfo!,
+            profileService: self.injectionBag.profileService,
+            size: .conversation30
+        )
     }
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {
