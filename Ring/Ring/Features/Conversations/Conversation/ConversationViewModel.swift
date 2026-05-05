@@ -364,6 +364,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
+        if !self.conversation.isCoredialog() {
+            self.avatarProvider.subscribeGroupParticipants(swarmInfo: self.swarmInfo!)
+        }
     }
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {

@@ -119,6 +119,9 @@ class AvatarProvider: ObservableObject {
     @Published var registeredName: String = ""
     @Published private(set) var isGroup: Bool = false
     @Published var jamiId: String = ""
+    @Published var displayParticipants: [ParticipantInfo] = []
+    @Published var overflowCount: Int = 0
+    @Published var hasCustomAvatar: Bool = false
     let size: Constants.AvatarSize
 
     private let profileService: ProfilesService
@@ -205,6 +208,50 @@ class AvatarProvider: ObservableObject {
             .disposed(by: disposeBag)
     }
 
+    func subscribeGroupParticipants(swarmInfo: SwarmInfoProtocol) {
+        swarmInfo.avatarData.asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] data in
+                self?.hasCustomAvatar = data != nil
+            })
+            .disposed(by: disposeBag)
+
+        Observable.combineLatest(
+            swarmInfo.participants.asObservable(),
+            swarmInfo.participantsAvatars.asObservable()
+        )
+        .observe(on: MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (participants, _) in
+            self?.updateDisplay(participants: participants)
+        })
+        .disposed(by: disposeBag)
+    }
+
+    private func updateDisplay(participants: [ParticipantInfo]) {
+        let active = participants.filter { [.admin, .member, .invited].contains($0.role) }
+        let maxAvatars = active.count <= 3 ? active.count : 2
+
+        let admin = active.first { $0.role == .admin }
+        let others = active.filter { $0 != admin }
+        let sortedOthers = others.sorted { avatarPriority($0) > avatarPriority($1) }
+
+        var visible: [ParticipantInfo] = []
+        if let admin = admin {
+            visible.append(admin)
+        }
+        visible.append(contentsOf: sortedOthers.prefix(maxAvatars - visible.count))
+
+        self.displayParticipants = visible
+        self.overflowCount = max(active.count - visible.count, 0)
+    }
+
+    private func avatarPriority(_ participant: ParticipantInfo) -> Int {
+        if participant.avatarData.value != nil { return 2 }
+        let name = participant.finalName.value
+        if !name.isSHA1() && !name.isEmpty { return 1 }
+        return 0
+    }
+
     func updateIsGroup(_ isGroup: Bool) {
         DispatchQueue.main.async {[weak self] in
             self?.isGroup = isGroup
@@ -225,20 +272,36 @@ extension AvatarProvider {
     }
 
     static func from(swarmInfo: SwarmInfoProtocol, profileService: ProfilesService, size: Constants.AvatarSize) -> AvatarProvider {
-        return AvatarProvider(
+        let isGroup = !(swarmInfo.conversation?.isCoredialog() ?? false)
+        let provider = AvatarProvider(
             profileService: profileService,
             size: size,
             avatar: swarmInfo.finalAvatarData,
             displayName: swarmInfo.finalTitle.asObservable(),
-            isGroup: !(swarmInfo.conversation?.isCoredialog() ?? false)
+            isGroup: isGroup
         )
+        if isGroup {
+            provider.subscribeGroupParticipants(swarmInfo: swarmInfo)
+        }
+        return provider
     }
 }
 
 struct AvatarSwiftUIView: View {
     @ObservedObject var source: AvatarProvider
+    var sizeOverride: CGFloat?
+
+    private var effectiveSize: CGFloat { sizeOverride ?? source.size.points }
 
     var body: some View {
+        if source.isGroup && !source.hasCustomAvatar && !source.displayParticipants.isEmpty {
+            GroupAvatarView(source: source)
+        } else {
+            singleAvatarView
+        }
+    }
+
+    private var singleAvatarView: some View {
         ZStack {
             if let image = source.avatar {
                 Image(uiImage: image)
@@ -249,7 +312,7 @@ struct AvatarSwiftUIView: View {
                 monogramView
             }
         }
-        .frame(width: source.size.points, height: source.size.points)
+        .frame(width: effectiveSize, height: effectiveSize)
         .clipShape(Circle())
         .fixedSize()
     }
@@ -265,17 +328,17 @@ struct AvatarSwiftUIView: View {
         ZStack {
             Color(bgColor)
             let borderUIColor = bgColor.darker(by: 1) ?? bgColor
-            let borderLineWidth = min(max(source.size.points * 0.04, 1), 1)
+            let borderLineWidth = min(max(effectiveSize * 0.04, 1), 1)
             Circle()
                 .stroke(Color(borderUIColor), lineWidth: borderLineWidth)
 
             if !displayText.isSHA1() && !displayText.isEmpty && !source.isGroup {
-                let computedFontSize = monogramFontSize(for: source.size.points)
+                let computedFontSize = monogramFontSize(for: effectiveSize)
                 Text(MonogramHelper.extractFirstGraphemeCluster(from: displayText))
                     .font(.system(size: computedFontSize, weight: .semibold))
                     .foregroundColor(.white)
             } else {
-                let iconFontSize = max((source.size.points * 0.40).rounded(), 6)
+                let iconFontSize = max((effectiveSize * 0.40).rounded(), 6)
                 Image(systemName: source.isGroup ? "person.2.fill" : "person.fill")
                     .font(.system(size: iconFontSize, weight: .semibold))
                     .foregroundColor(.white)
@@ -283,8 +346,6 @@ struct AvatarSwiftUIView: View {
         }
     }
 
-    // Keep a consistent letter-to-circle ratio across sizes using a single multiplier.
-    // Using ~0.44x maintains similar proportions across 30, 40, 55, and 150 sizes.
     private func monogramFontSize(for avatarSize: CGFloat) -> CGFloat {
         let factor: CGFloat = 0.44
         let raw = avatarSize * factor
