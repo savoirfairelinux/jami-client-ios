@@ -215,9 +215,14 @@ public struct SwarmInfoView: View, StateEmittingView {
         }
     }
 
-    private var avatarImage: some View {
-        AvatarSwiftUIView(source: viewModel.provider)
-            .accessibilityHidden(true)
+    @ViewBuilder private var avatarImage: some View {
+        if viewModel.provider.isGroup && !viewModel.provider.hasCustomAvatar {
+            GroupAvatarView(source: viewModel.provider)
+                .accessibilityHidden(true)
+        } else {
+            AvatarSwiftUIView(source: viewModel.provider)
+                .accessibilityHidden(true)
+        }
     }
 
     @ViewBuilder private var titleView: some View {

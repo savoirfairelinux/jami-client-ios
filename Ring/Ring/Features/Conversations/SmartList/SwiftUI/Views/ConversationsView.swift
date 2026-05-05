@@ -167,7 +167,11 @@ struct ConversationRowView: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 ZStack(alignment: .bottomTrailing) {
-                    AvatarSwiftUIView(source: model.avatarProvider)
+                    if model.avatarProvider.isGroup && !model.avatarProvider.hasCustomAvatar {
+                        GroupAvatarView(source: model.avatarProvider)
+                    } else {
+                        AvatarSwiftUIView(source: model.avatarProvider)
+                    }
                     presenceIndicator
                 }
                 Spacer()
