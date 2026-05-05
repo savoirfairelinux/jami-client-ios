@@ -567,6 +567,8 @@
 		621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231F81F880EDF009B86F0 /* UILabel+Ring.swift */; };
 		623196862BAE498900C2252C /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 623196852BAE498900C2252C /* Atomics */; };
 		627F11F120348FBF006560B5 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627F11F020348FBF006560B5 /* AvatarView.swift */; };
+		9E790A06DE8789FCD6EBD853 /* GroupAvatarProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9FEA9F0FB8A6460D7FA19 /* GroupAvatarProvider.swift */; };
+		BAED8D7E402B9788A53F618C /* GroupAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4877A977B2E0BA1B0F91AFC4 /* GroupAvatarView.swift */; };
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
 		62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */; };
 		62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */; };
@@ -1744,6 +1746,8 @@
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
 		623660A920092081002598C1 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../daemon/src; sourceTree = "<group>"; };
 		627F11F020348FBF006560B5 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		EEA9FEA9F0FB8A6460D7FA19 /* GroupAvatarProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAvatarProvider.swift; sourceTree = "<group>"; };
+		4877A977B2E0BA1B0F91AFC4 /* GroupAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAvatarView.swift; sourceTree = "<group>"; };
 		62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenceAdapter.h; sourceTree = "<group>"; };
 		62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceAdapterDelegate.swift; sourceTree = "<group>"; };
 		62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PresenceAdapter.mm; sourceTree = "<group>"; };
@@ -3092,6 +3096,8 @@
 				263C16822D9DBCE6008E102C /* ThreadSafeQueueHelper.swift */,
 				26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */,
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
+				EEA9FEA9F0FB8A6460D7FA19 /* GroupAvatarProvider.swift */,
+				4877A977B2E0BA1B0F91AFC4 /* GroupAvatarView.swift */,
 				BB6690032A99043200875848 /* SharedActionsPresenter.swift */,
 				0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */,
 				0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */,
@@ -4444,6 +4450,8 @@
 				2657CBA72B858CF20078D6B1 /* AccessibilityIdentifiers.swift in Sources */,
 				62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */,
 				627F11F120348FBF006560B5 /* AvatarView.swift in Sources */,
+				9E790A06DE8789FCD6EBD853 /* GroupAvatarProvider.swift in Sources */,
+				BAED8D7E402B9788A53F618C /* GroupAvatarView.swift in Sources */,
 				26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,
 				269DA09F28E244F1007D51D6 /* MessagesListVM.swift in Sources */,

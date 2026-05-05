@@ -310,7 +310,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
 
         guard !participants.value.isEmpty else { return }
 
-        let isDialog = conversation?.isDialog() ?? false
+        let isDialog = conversation?.isCoredialog() ?? false
 
         // Create a single shared observable for all participant data
         // swiftlint:disable large_tuple
@@ -511,10 +511,6 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
         if participantsCount == 1, let avatar = self.participants.value.first?.avatarData.value {
             return avatar
         }
-        if participantsCount == 2,
-           let avatar = nonLocalParticipants.first?.avatarData.value {
-            return avatar
-        }
         return nil
     }
 
@@ -542,11 +538,6 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     private func buildTitleFrom(names: [String]) -> String {
         // title format: "name1, name2, name3 + number of other participants"
         let participantsCount = self.participants.value.count
-
-        // One-to-one conversation: return other participant's name
-        if participantsCount == 2, let name = nonLocalParticipants.first?.finalName.value, !name.isEmpty {
-            return name
-        }
 
         let localName = localParticipant?.finalName.value
 
