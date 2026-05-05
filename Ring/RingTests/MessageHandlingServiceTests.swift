@@ -30,7 +30,6 @@ class MessageHandlingServiceTests: XCTestCase {
 
     private var service: MessageHandlingService!
     private var mockCallsAdapter: ObjCMockCallsAdapter!
-    private var mockDBManager: MockDBManager!
     private var calls: SynchronizedRelay<CallsDictionary>!
     private var messagesStream: PublishSubject<ServiceEvent>!
     private var disposeBag: DisposeBag!
@@ -47,7 +46,6 @@ class MessageHandlingServiceTests: XCTestCase {
     override func tearDown() {
         service = nil
         mockCallsAdapter = nil
-        mockDBManager = nil
         calls = nil
         messagesStream = nil
         disposeBag = nil
@@ -58,10 +56,6 @@ class MessageHandlingServiceTests: XCTestCase {
 
     private func setupMocks() {
         mockCallsAdapter = ObjCMockCallsAdapter()
-        mockDBManager = MockDBManager(profileHepler: ProfileDataHelper(),
-                                      conversationHelper: ConversationDataHelper(),
-                                      interactionHepler: InteractionDataHelper(),
-                                      dbConnections: DBContainer())
         queueHelper = ThreadSafeQueueHelper(label: "com.ring.callsManagementTest", qos: .userInitiated)
         calls = SynchronizedRelay<CallsDictionary>(initialValue: [:], queueHelper: queueHelper)
         messagesStream = PublishSubject<ServiceEvent>()
@@ -72,7 +66,6 @@ class MessageHandlingServiceTests: XCTestCase {
     private func setupService() {
         service = MessageHandlingService(
             callsAdapter: mockCallsAdapter,
-            dbManager: mockDBManager,
             calls: calls,
             newMessagesStream: messagesStream
         )
@@ -91,37 +84,6 @@ class MessageHandlingServiceTests: XCTestCase {
         calls.update { calls in
             calls[callId] = call
         }
-    }
-
-    // MARK: - VCard Tests
-
-    func testSendVCard_WithValidData_CallsDBManager() {
-        let profile = Profile.createTestProfile()
-        mockDBManager.accountVCardResult = profile
-        let accountVCardExpectation = expectation(description: "DBManager accountVCard called")
-        mockDBManager.onAccountVCardCalled = { receivedAccountId in
-            XCTAssertEqual(receivedAccountId, CallTestConstants.accountId, "DBManager accountVCard should be called with correct accountId")
-            accountVCardExpectation.fulfill()
-        }
-
-        service.sendVCard(callID: CallTestConstants.callId, accountID: CallTestConstants.accountId)
-
-        wait(for: [accountVCardExpectation], timeout: 1.0)
-
-        XCTAssertTrue(mockDBManager.accountVCardCalled, "DBManager accountVCard method should be called")
-        XCTAssertEqual(mockDBManager.accountVCardResult?.uri, CallTestConstants.profileUri, "The correct profile should be retrieved")
-    }
-
-    func testSendVCard_WithEmptyCallId_DoesNothing() {
-        service.sendVCard(callID: "", accountID: CallTestConstants.accountId)
-
-        XCTAssertFalse(mockDBManager.accountVCardCalled, "DBManager accountVCard should not be called with empty callId")
-    }
-
-    func testSendVCard_WithEmptyAccountId_DoesNothing() {
-        service.sendVCard(callID: CallTestConstants.callId, accountID: "")
-
-        XCTAssertFalse(mockDBManager.accountVCardCalled, "DBManager accountVCard should not be called with empty accountId")
     }
 
     // MARK: - In-Call Message Tests
@@ -243,21 +205,5 @@ class MessageHandlingServiceTests: XCTestCase {
         service.handleIncomingMessage(callId: CallTestConstants.invalidCallId, fromURI: CallTestConstants.profileUri, message: textMessage)
 
         XCTAssertEqual(messageEvents.count, 0, "No events should be created for invalid call ID")
-    }
-}
-
-// MARK: - Mock Classes
-
-class MockDBManager: DBManager {
-    var accountVCardCalled = false
-    var accountVCardId: String?
-    var accountVCardResult: Profile?
-    var onAccountVCardCalled: ((String) -> Void)?
-
-    override func accountVCard(for accountId: String) -> Profile? {
-        accountVCardCalled = true
-        accountVCardId = accountId
-        onAccountVCardCalled?(accountId)
-        return accountVCardResult
     }
 }

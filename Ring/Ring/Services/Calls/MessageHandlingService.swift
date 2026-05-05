@@ -19,10 +19,9 @@
 import RxSwift
 import RxRelay
 
-protocol MessageHandling: VCardSender {
+protocol MessageHandling {
     func sendInCallMessage(callID: String, message: String, accountId: AccountModel)
     func handleIncomingMessage(callId: String, fromURI: String, message: [String: String])
-    func sendChunk(callID: String, message: [String: String], accountId: String, from: String)
 }
 
 final class MessageHandlingService: MessageHandling {
@@ -33,36 +32,17 @@ final class MessageHandlingService: MessageHandling {
     }
 
     private let callsAdapter: CallsAdapter
-    private let dbManager: DBManager
     private let calls: SynchronizedRelay<[String: CallModel]>
     private let newMessagesStream: PublishSubject<ServiceEvent>
 
     init(
         callsAdapter: CallsAdapter,
-        dbManager: DBManager,
         calls: SynchronizedRelay<[String: CallModel]>,
         newMessagesStream: PublishSubject<ServiceEvent>
     ) {
         self.callsAdapter = callsAdapter
-        self.dbManager = dbManager
         self.calls = calls
         self.newMessagesStream = newMessagesStream
-    }
-
-    func sendVCard(callID: String, accountID: String) {
-        guard !accountID.isEmpty, !callID.isEmpty else { return }
-
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self,
-                  let profile = self.dbManager.accountVCard(for: accountID) else { return }
-
-            let jamiId = profile.uri
-            VCardUtils.sendVCard(card: profile,
-                                 callID: callID,
-                                 accountID: accountID,
-                                 sender: self,
-                                 from: jamiId)
-        }
     }
 
     func sendInCallMessage(callID: String, message: String, accountId: AccountModel) {
@@ -76,14 +56,6 @@ final class MessageHandlingService: MessageHandling {
                                      isMixed: true)
 
         notifyOutgoingMessage(message: message, call: call, accountId: accountId)
-    }
-
-    func sendChunk(callID: String, message: [String: String], accountId: String, from: String) {
-        callsAdapter.sendTextMessage(withCallID: callID,
-                                     accountId: accountId,
-                                     message: message,
-                                     from: from,
-                                     isMixed: true)
     }
 
     func handleIncomingMessage(callId: String, fromURI: String, message: [String: String]) {

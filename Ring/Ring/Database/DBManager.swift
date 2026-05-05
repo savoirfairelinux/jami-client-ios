@@ -566,11 +566,6 @@ class DBManager {
         return self.getProfileFromPath(path: path)
     }
 
-    func accountVCard(for accountId: String) -> Profile? {
-        guard let path = self.dbConnections.accountProfilePath(accountId: accountId) else { return nil }
-        return VCardUtils.parseToProfile(filePath: path)
-    }
-
     func createOrUpdateRingProfile(profileUri: String, alias: String?, image: String?, accountId: String) -> Bool {
         let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
         if type == ProfileType.sip {

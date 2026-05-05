@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private var interactionsManager: GeneratedInteractionsManager?
     private var videoManager: VideoManager?
     private lazy var callService: CallsService = {
-        CallsService(withCallsAdapter: CallsAdapter(), dbManager: self.dBManager)
+        CallsService(withCallsAdapter: CallsAdapter())
     }()
     internal lazy var accountService: AccountsService = {
         AccountsService(withAccountAdapter: AccountAdapter(), dbManager: self.dBManager)

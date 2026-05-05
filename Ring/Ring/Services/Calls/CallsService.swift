@@ -45,7 +45,6 @@ class CallsService: CallsAdapterDelegate {
     private let activeCallsHelper = ActiveCallsHelper()
 
     private let callsAdapter: CallsAdapter
-    let dbManager: DBManager
     private let disposeBag = DisposeBag()
     private let queueHelper: ThreadSafeQueueHelper
 
@@ -68,9 +67,8 @@ class CallsService: CallsAdapterDelegate {
     private let swarmCallCreated = PublishSubject<(confId: String, conversationId: String, accountId: String)>()
     private var waitingSwarmCall = ""
 
-    init(withCallsAdapter callsAdapter: CallsAdapter, dbManager: DBManager) {
+    init(withCallsAdapter callsAdapter: CallsAdapter) {
         self.callsAdapter = callsAdapter
-        self.dbManager = dbManager
 
         self.queueHelper = ThreadSafeQueueHelper(label: "com.ring.callsManagement", qos: .userInitiated)
 
@@ -102,7 +100,6 @@ class CallsService: CallsAdapterDelegate {
 
         self.messageHandlingService = MessageHandlingService(
             callsAdapter: callsAdapter,
-            dbManager: dbManager,
             calls: calls,
             newMessagesStream: newMessagesStream
         )
@@ -528,15 +525,7 @@ class CallsService: CallsAdapterDelegate {
 
     // MARK: - MessageHandling implementation (delegating to MessageHandlingService)
 
-    func sendVCard(callID: String, accountID: String) {
-        messageHandlingService.sendVCard(callID: callID, accountID: accountID)
-    }
-
     func sendInCallMessage(callID: String, message: String, accountId: AccountModel) {
         messageHandlingService.sendInCallMessage(callID: callID, message: message, accountId: accountId)
-    }
-
-    func sendChunk(callID: String, message: [String: String], accountId: String, from: String) {
-        messageHandlingService.sendChunk(callID: callID, message: message, accountId: accountId, from: from)
     }
 }

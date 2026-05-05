@@ -52,9 +52,6 @@ enum ProfileType: String {
     case sip = "SIP"
 }
 
-protocol VCardSender {
-    func sendChunk(callID: String, message: [String: String], accountId: String, from: String)
-}
 class VCardUtils {
 
     class func getName(from vCard: CNContact?) -> String {
@@ -74,41 +71,6 @@ class VCardUtils {
             name += vCard.familyName
         }
         return name
-    }
-
-    class func sendVCard(card: Profile, callID: String, accountID: String, sender: VCardSender, from: String) {
-        do {
-            guard let vCardData = try VCardUtils.dataWithImageAndUUID(from: card),
-                  var vCardString = String(data: vCardData, encoding: String.Encoding.utf8) else {
-                return
-            }
-            var vcardLength = vCardString.count
-            let chunkSize = 1024
-            let idKey = UInt64.random(in: 0 ... 10000000)
-            let total = vcardLength / chunkSize + (((vcardLength % chunkSize) == 0) ? 0 : 1)
-            var i = 1
-            while vcardLength > 0 {
-                var chunk = [String: String]()
-                let id = "id=" + "\(idKey)" + ","
-                let part = "part=" + "\(i)" + ","
-                let of = "of=" + "\(total)"
-                let key = "x-ring/ring.profile.vcard;" + id + part + of
-                if vcardLength >= chunkSize {
-                    let body = String(vCardString.prefix(chunkSize))
-                    let index = vCardString.index(vCardString.startIndex, offsetBy: (chunkSize))
-                    vCardString = String(vCardString.suffix(from: index))
-                    vcardLength = vCardString.count
-                    chunk[key] = body
-                } else {
-                    vcardLength = 0
-                    chunk[key] = vCardString
-                }
-                i += 1
-                sender.sendChunk(callID: callID, message: chunk, accountId: accountID, from: from)
-            }
-        } catch {
-            print(error)
-        }
     }
 
     class func dataWithImageAndUUID(from profile: Profile) throws -> Data? {

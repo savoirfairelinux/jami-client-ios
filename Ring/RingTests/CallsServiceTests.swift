@@ -25,26 +25,20 @@ class CallsServiceTests: XCTestCase {
 
     private var callsService: CallsService!
     private var mockCallsAdapter: ObjCMockCallsAdapter!
-    private var mockDBManager: DBManager!
     private var disposeBag: DisposeBag!
 
     override func setUp() {
         super.setUp()
         mockCallsAdapter = ObjCMockCallsAdapter()
-        mockDBManager = DBManager(profileHepler: ProfileDataHelper(),
-                                  conversationHelper: ConversationDataHelper(),
-                                  interactionHepler: InteractionDataHelper(),
-                                  dbConnections: DBContainer())
         disposeBag = DisposeBag()
 
-        callsService = CallsService(withCallsAdapter: mockCallsAdapter, dbManager: mockDBManager)
+        callsService = CallsService(withCallsAdapter: mockCallsAdapter)
     }
 
     override func tearDown() {
         disposeBag = nil
         callsService = nil
         mockCallsAdapter = nil
-        mockDBManager = nil
         super.tearDown()
     }
 

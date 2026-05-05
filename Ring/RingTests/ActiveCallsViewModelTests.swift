@@ -45,7 +45,7 @@ final class ActiveCallsViewModelTests: XCTestCase {
             provider: CXProvider(configuration: CallsHelpers.providerConfiguration()),
             controller: CXCallController()
         )
-        let callService: CallsService = CallsService(withCallsAdapter: CallsAdapter(), dbManager: dBManager)
+        let callService: CallsService = CallsService(withCallsAdapter: CallsAdapter())
         let accountService: AccountsService = AccountsService(withAccountAdapter: AccountAdapter(), dbManager: dBManager)
         let contactsService: ContactsService = ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: dBManager)
         let profileService: ProfilesService = ProfilesService(withProfilesAdapter: ProfilesAdapter(), dbManager: dBManager)
