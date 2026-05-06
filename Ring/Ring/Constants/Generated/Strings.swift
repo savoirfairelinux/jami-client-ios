@@ -307,8 +307,8 @@ internal enum L10n {
     }
     /// Contact me on Jami!
     internal static let contactMeOnJamiTitle = L10n.tr("Localizable", "accountPage.contactMeOnJamiTitle", fallback: "Contact me on Jami!")
-    /// Password protect account
-    internal static let createPassword = L10n.tr("Localizable", "accountPage.createPassword", fallback: "Password protect account")
+    /// Set password
+    internal static let createPassword = L10n.tr("Localizable", "accountPage.createPassword", fallback: "Set password")
     /// Enter current password
     internal static let currentPasswordPlaceholder = L10n.tr("Localizable", "accountPage.currentPasswordPlaceholder", fallback: "Enter current password")
     /// Current proxy
@@ -345,8 +345,8 @@ internal enum L10n {
     internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications", fallback: "Enable notifications")
     /// Encrypt media streams (SRTP)
     internal static let enableSRTP = L10n.tr("Localizable", "accountPage.enableSRTP", fallback: "Encrypt media streams (SRTP)")
-    /// Password protect account
-    internal static let encryptAccount = L10n.tr("Localizable", "accountPage.encryptAccount", fallback: "Password protect account")
+    /// Password
+    internal static let encryptAccount = L10n.tr("Localizable", "accountPage.encryptAccount", fallback: "Password")
     /// Generating PIN code…
     internal static let generatingPin = L10n.tr("Localizable", "accountPage.generatingPin", fallback: "Generating PIN code…")
     /// Invite friends
@@ -377,10 +377,10 @@ internal enum L10n {
     internal static let other = L10n.tr("Localizable", "accountPage.other", fallback: "Other")
     /// Other linked devices
     internal static let otherDevices = L10n.tr("Localizable", "accountPage.otherDevices", fallback: "Other linked devices")
-    /// Password created
-    internal static let passwordCreated = L10n.tr("Localizable", "accountPage.passwordCreated", fallback: "Password created")
-    /// A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.
-    internal static let passwordExplanation = L10n.tr("Localizable", "accountPage.passwordExplanation", fallback: "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.")
+    /// Password set
+    internal static let passwordCreated = L10n.tr("Localizable", "accountPage.passwordCreated", fallback: "Password set")
+    /// Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.
+    internal static let passwordExplanation = L10n.tr("Localizable", "accountPage.passwordExplanation", fallback: "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.")
     /// The account is password protected. Enter the password to generate a PIN code.
     internal static let passwordForPin = L10n.tr("Localizable", "accountPage.passwordForPin", fallback: "The account is password protected. Enter the password to generate a PIN code.")
     /// Enter account password

@@ -22,156 +22,133 @@ import SwiftUI
 
 struct EncryptAccount: View {
     @StateObject var model: EncryptAccountVM
-
-    private let cornerRadius: CGFloat = 10
-    private let shadowRadius: CGFloat = 1
-    private let horizontalPadding: CGFloat = 10
-    private let verticalPadding: CGFloat = 12
+    @SwiftUI.State private var showToast = false
 
     init(account: AccountModel, accountService: AccountsService) {
         _model = StateObject(wrappedValue: EncryptAccountVM(account: account, accountService: accountService))
     }
 
     var body: some View {
-        List {
-            if model.hasPassword() {
-                PasswordFieldContainer(
-                    text: $model.currentPassword,
-                    placeholder: L10n.AccountPage.currentPasswordPlaceholder)
-                    .padding(.bottom, 20)
-            }
+        ZStack(alignment: .top) {
+            List {
+                if model.hasPassword() {
+                    Section(header: explanationHeader, footer: errorFooter) {
+                        PasswordFieldView(
+                            text: $model.currentPassword,
+                            placeholder: L10n.AccountPage.currentPasswordPlaceholder
+                        )
+                    }
 
-            PasswordFieldContainer(
-                text: $model.newPassword,
-                placeholder: L10n.AccountPage.newPasswordPlaceholder)
-                .listRowBackground(Color.clear)
-                .optionalRowSeparator(hidden: true)
-                .padding(.vertical, 2)
+                    Section(footer: validationFooter) {
+                        PasswordFieldView(
+                            text: $model.newPassword,
+                            placeholder: L10n.AccountPage.newPasswordPlaceholder
+                        )
+                        PasswordFieldView(
+                            text: $model.confirmPassword,
+                            placeholder: L10n.AccountPage.newPasswordConfirmPlaceholder
+                        )
+                    }
+                } else {
+                    Section(header: explanationHeader, footer: validationFooter) {
+                        PasswordFieldView(
+                            text: $model.newPassword,
+                            placeholder: L10n.AccountPage.newPasswordPlaceholder
+                        )
+                        PasswordFieldView(
+                            text: $model.confirmPassword,
+                            placeholder: L10n.AccountPage.newPasswordConfirmPlaceholder
+                        )
+                    }
+                }
 
-            PasswordFieldContainer(
-                text: $model.confirmPassword,
-                placeholder: L10n.AccountPage.newPasswordConfirmPlaceholder)
-                .listRowBackground(Color.clear)
-                .optionalRowSeparator(hidden: true)
-
-                .padding(.vertical, 2)
-
-            if let errorMessage = model.validationError {
-                ErrorMessageView(errorMessage: errorMessage)
-            }
-            Text(L10n.AccountPage.passwordExplanation)
-                .font(.footnote)
-                .foregroundColor(.gray)
-                .listRowBackground(Color.clear)
-                .optionalRowSeparator(hidden: true)
-                .listRowInsets(EdgeInsets(top: model.validationError == nil ? 15 : 5, leading: 0, bottom: 0, trailing: 0))
-                .accessibilityAutoFocusOnAppear()
-
-            if let errorMessage = model.encryptError {
-                ErrorMessageView(errorMessage: errorMessage)
-                    .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
-            }
-            if model.savingPasswordInProgress {
-                SwiftUI.ProgressView()
+                if model.savingPasswordInProgress {
+                    HStack {
+                        Spacer()
+                        SwiftUI.ProgressView()
+                        Spacer()
+                    }
+                    .listRowBackground(Color.clear)
+                } else {
+                    Button(action: {
+                        model.savingPasswordInProgress = true
+                        model.changePassword()
+                        hideKeyboard()
+                    }) {
+                        Text(model.hasPassword()
+                             ? L10n.AccountPage.changePassword
+                             : L10n.AccountPage.createPassword)
+                            .foregroundColor(Color(UIColor.label))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 12)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.jamiTertiaryControl)
+                            .cornerRadius(10)
+                    }
+                    .disabled(!model.buttonEnabled)
+                    .opacity(model.buttonEnabled ? 1 : 0.5)
+                    .listRowBackground(Color.clear)
+                    .optionalRowSeparator(hidden: true)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                }
             }
+            .listStyle(InsetGroupedListStyle())
 
-            if let successMessage = model.successMessage {
-                SuccessMessageView(successMessage: successMessage)
-                    .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
+            if showToast, let message = model.successMessage {
+                HStack(spacing: 6) {
+                    Image(systemName: "checkmark.circle.fill")
+                    Text(message)
+                }
+                .font(.subheadline)
+                .foregroundColor(.white)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(Color.jamiSuccess)
+                .cornerRadius(20)
+                .shadow(radius: 4)
+                .padding(.top, 8)
+                .transition(.move(edge: .top).combined(with: .opacity))
             }
-            updatePasswordButton()
         }
-        .ignoresSafeArea(edges: [.bottom])
         .navigationTitle(L10n.AccountPage.encryptAccount)
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: model.newPassword) { _ in model.validatePasswords() }
         .onChange(of: model.confirmPassword) { _ in model.validatePasswords() }
         .onChange(of: model.currentPassword) { _ in model.validatePasswords() }
-    }
-
-    func updatePasswordButton() -> some View {
-        Button(action: {
-            model.savingPasswordInProgress = true
-            model.changePassword()
-            hideKeyboard()
-        }, label: {
-            Text(L10n.Global.save)
-                .foregroundColor(Color(UIColor.label))
-                .padding(.horizontal, horizontalPadding)
-                .padding(.vertical, verticalPadding)
-                .frame(maxWidth: .infinity)
-                .background(Color.jamiTertiaryControl)
-                .cornerRadius(cornerRadius)
-        })
-        .disabled(!model.buttonEnabled)
-        .opacity(model.buttonEnabled ? 1 : 0.6)
-        .listRowBackground(Color.clear)
-        .optionalRowSeparator(hidden: true)
-        .listRowInsets(EdgeInsets(top: model.encryptError == nil && model.successMessage == nil ? 40 : 20, leading: 0, bottom: 0, trailing: 0))
-    }
-}
-
-struct PasswordFieldContainer: View {
-    @Binding var text: String
-    let placeholder: String
-
-    private let cornerRadius: CGFloat = 10
-    private let shadowRadius: CGFloat = 1
-    private let horizontalPadding: CGFloat = 10
-    private let verticalPadding: CGFloat = 12
-
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .foregroundColor(Color(UIColor.secondarySystemGroupedBackground))
-                .shadow(radius: shadowRadius)
-            PasswordFieldView(text: $text, placeholder: placeholder)
-                .padding(.horizontal, horizontalPadding)
-                .padding(.vertical, verticalPadding)
-        }
-        .listRowInsets(EdgeInsets())
-        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-        .listRowBackground(Color.clear)
-        .optionalRowSeparator(hidden: true)
-    }
-}
-
-struct ErrorMessageView: View {
-    let errorMessage: String
-
-    var body: some View {
-        HStack {
-            Spacer()
-            Text(errorMessage)
-                .foregroundColor(Color.jamiFailure)
-                .font(.caption)
-            Spacer()
-        }
-        .listRowInsets(EdgeInsets())
-        .listRowBackground(Color.clear)
-    }
-}
-
-struct SuccessMessageView: View {
-    let successMessage: String
-
-    var body: some View {
-        HStack {
-            Spacer()
-            Group {
-                Image(systemName: "checkmark")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 15, height: 15)
-                    .padding(.trailing, 5)
-                Text(successMessage)
-                    .font(.caption)
+        .onChange(of: model.successMessage) { message in
+            if message != nil {
+                withAnimation {
+                    showToast = true
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation {
+                        showToast = false
+                    }
+                }
             }
-            .foregroundColor(Color.jamiSuccess)
-            Spacer()
         }
-        .listRowInsets(EdgeInsets())
-        .listRowBackground(Color.clear)
+    }
+
+    var explanationHeader: some View {
+        Text(L10n.AccountPage.passwordExplanation)
+            .font(.footnote)
+            .foregroundColor(.gray)
+            .textCase(nil)
+    }
+
+    @ViewBuilder
+    var errorFooter: some View {
+        if let error = model.encryptError {
+            Text(error)
+                .foregroundColor(Color.jamiFailure)
+        }
+    }
+
+    @ViewBuilder
+    var validationFooter: some View {
+        if let error = model.validationError {
+            Text(error)
+                .foregroundColor(Color.jamiFailure)
+        }
     }
 }
