@@ -33,8 +33,7 @@ struct ManageAccountView: View {
                             Text(L10n.AccountPage.blockedContacts)
                         }
                     }
-                    NavigationLink(destination: EncryptAccount(account: model.account, accountService: model.accountService)
-                                    .background(Color(UIColor.systemGroupedBackground))) {
+                    NavigationLink(destination: EncryptAccount(account: model.account, accountService: model.accountService)) {
                         HStack {
                             Text(L10n.AccountPage.encryptAccount)
                         }
