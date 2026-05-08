@@ -72,7 +72,7 @@ struct LinkToAccountView: View {
     private var loadingView: some View {
         VStack(spacing: 30) {
             info
-            SwiftUI.ProgressView()
+            ProgressView()
             Spacer()
         }
     }
@@ -120,7 +120,7 @@ struct LinkToAccountView: View {
         HStack {
             Spacer()
             VStack {
-                SwiftUI.ProgressView()
+                ProgressView()
                 Spacer()
             }
             Spacer()

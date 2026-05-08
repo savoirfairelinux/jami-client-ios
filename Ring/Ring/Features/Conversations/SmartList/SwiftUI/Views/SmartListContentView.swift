@@ -258,7 +258,7 @@ struct SmartListContentView: View {
         VStack {
             HStack {
                 Spacer()
-                SwiftUI.ProgressView()
+                ProgressView()
                 Spacer()
             }
         }

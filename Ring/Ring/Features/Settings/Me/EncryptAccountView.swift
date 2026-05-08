@@ -65,7 +65,7 @@ struct EncryptAccount: View {
                 if model.savingPasswordInProgress {
                     HStack {
                         Spacer()
-                        SwiftUI.ProgressView()
+                        ProgressView()
                         Spacer()
                     }
                     .listRowBackground(Color.clear)
@@ -76,8 +76,8 @@ struct EncryptAccount: View {
                         hideKeyboard()
                     }) {
                         Text(model.hasPassword()
-                             ? L10n.AccountPage.changePassword
-                             : L10n.AccountPage.createPassword)
+                                ? L10n.AccountPage.changePassword
+                                : L10n.AccountPage.createPassword)
                             .foregroundColor(Color(UIColor.label))
                             .padding(.horizontal, 10)
                             .padding(.vertical, 12)

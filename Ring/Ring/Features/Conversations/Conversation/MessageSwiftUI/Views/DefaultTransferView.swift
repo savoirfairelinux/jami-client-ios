@@ -52,7 +52,7 @@ struct DefaultTransferView: View {
                     if model.showProgress {
                         Spacer()
                             .frame(height: 15)
-                        SwiftUI.ProgressView(value: model.fileProgress, total: 1)
+                        ProgressView(value: model.fileProgress, total: 1)
                         Spacer()
                             .frame(height: 10)
                     }

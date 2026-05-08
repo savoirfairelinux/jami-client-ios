@@ -158,7 +158,7 @@ struct AlertFactory {
             Text(L10n.CreateAccount.creatingAccount)
                 .font(.headline)
                 .padding()
-            SwiftUI.ProgressView()
+            ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
                 .scaleEffect(2)
                 .padding(.bottom, 30)
@@ -279,7 +279,7 @@ struct LoadingStateView: View {
         VStack {
             Text(message)
                 .multilineTextAlignment(.center)
-            SwiftUI.ProgressView()
+            ProgressView()
                 .padding()
             Spacer()
         }

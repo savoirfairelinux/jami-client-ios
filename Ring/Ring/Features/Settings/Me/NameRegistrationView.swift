@@ -83,7 +83,7 @@ struct NameRegistrationView: View {
             Text(L10n.AccountPage.usernameRegistering)
                 .font(.headline)
                 .padding()
-            SwiftUI.ProgressView()
+            ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
                 .scaleEffect(2)
                 .padding(.bottom, 30)
@@ -105,7 +105,7 @@ struct NameRegistrationView: View {
                     .textFieldStyleInAlert()
 
                 if model.usernameValidationState.isVerifying {
-                    SwiftUI.ProgressView()
+                    ProgressView()
                 } else if !model.usernameValidationState.message.isEmpty {
                     Text(model.usernameValidationState.message)
                         .font(.footnote)

@@ -170,7 +170,7 @@ struct AccountMigrationView: View {
                 Color.black.opacity(0.4)
                     .ignoresSafeArea()
                     .overlay(
-                        SwiftUI.ProgressView()
+                        ProgressView()
                             .progressViewStyle(CircularProgressViewStyle(tint: .white))
                     )
             }

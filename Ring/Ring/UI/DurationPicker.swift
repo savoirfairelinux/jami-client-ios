@@ -20,7 +20,7 @@
 
 import Foundation
 
-class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
+ class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
     var hours: [Int] = []
     var minutes: [Int] = []
     var duration: Int = 0 {
@@ -90,4 +90,4 @@ class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         self.selectRow(currentHour, inComponent: 0, animated: false)
         self.selectRow(currentMinute, inComponent: 1, animated: false)
     }
-}
+ }

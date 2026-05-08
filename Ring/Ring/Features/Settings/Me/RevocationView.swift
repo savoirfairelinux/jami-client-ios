@@ -98,7 +98,7 @@ struct RevocationView: View {
 
     func loadingView() -> some View {
         VStack {
-            SwiftUI.ProgressView(L10n.AccountPage.deviceRevocationProgress)
+            ProgressView(L10n.AccountPage.deviceRevocationProgress)
                 .padding()
                 .accessibilityAutoFocusOnAppear()
         }

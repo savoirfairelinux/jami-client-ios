@@ -71,7 +71,7 @@ struct BackupAccount: View {
             Text(L10n.BackupAccount.creating)
                 .font(.headline)
                 .padding()
-            SwiftUI.ProgressView()
+            ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
                 .scaleEffect(2)
                 .padding(.bottom, 30)

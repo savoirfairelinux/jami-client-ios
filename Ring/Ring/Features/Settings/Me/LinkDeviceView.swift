@@ -149,7 +149,7 @@ struct LinkDeviceView: View {
                 .multilineTextAlignment(.center)
                 .font(.callout)
                 .lineSpacing(4)
-            SwiftUI.ProgressView()
+            ProgressView()
                 .padding()
             Spacer()
         }
@@ -206,7 +206,7 @@ struct LinkDeviceView: View {
                 .multilineTextAlignment(.center)
                 .font(.callout)
                 .lineSpacing(4)
-            SwiftUI.ProgressView()
+            ProgressView()
                 .padding()
             Spacer()
         }

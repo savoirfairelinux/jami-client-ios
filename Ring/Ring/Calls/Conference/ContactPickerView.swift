@@ -98,7 +98,7 @@ struct ContactPickerView: View {
         ZStack {
             Color.black.opacity(0.08)
                 .ignoresSafeArea()
-            SwiftUI.ProgressView()
+            ProgressView()
                 .scaleEffect(1.2)
                 .padding(24)
                 .background(
