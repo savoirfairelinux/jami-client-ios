@@ -37,7 +37,7 @@ class AccountViewModel: ObservableObject, Identifiable, Equatable {
     let id: String
     @Published var name: String {
         didSet {
-            bgColor = Color(backgroundColor(for: name))
+            bgColor = Color(avatarBackgroundColor(for: name))
         }
     }
     @Published var avatarType: AvatarType

@@ -149,6 +149,33 @@ enum ProfilePathHelper {
 /**
  Represents the status of a username validation request when the user is typing his username
  */
+enum ParticipantRole: String {
+    case admin
+    case member
+    case invited
+    case banned
+    case left
+    case unknown
+
+    var isActive: Bool {
+        switch self {
+        case .admin, .member, .invited: return true
+        case .banned, .left, .unknown: return false
+        }
+    }
+
+    var stringValue: String {
+        switch self {
+        case .member:  return L10n.Swarm.member
+        case .invited: return L10n.Swarm.invited
+        case .admin:   return L10n.Swarm.admin
+        case .banned:  return L10n.Swarm.blocked
+        case .left:    return L10n.Swarm.left
+        case .unknown: return L10n.Swarm.unknown
+        }
+    }
+}
+
 enum UsernameValidationStatus {
     case empty
     case lookingUp

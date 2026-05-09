@@ -88,6 +88,32 @@ final class SwarmInfoTests: XCTestCase {
         return participant
     }
 
+    func testParticipantsString_ExcludesInactiveParticipantsFromGeneratedTitle() {
+        // Arrange
+        let activeAdmin = createParticipant(jamiId: jamiId1, role: .admin, registeredName: "",
+                                            profileName: "Eli")
+        let activeMember = createParticipant(jamiId: jamiId2, role: .member, registeredName: "",
+                                             profileName: "Dana")
+        let activeInvited = createParticipant(jamiId: jamiId3, role: .invited, registeredName: "",
+                                              profileName: "Mariah")
+        let activeOverflow = createParticipant(jamiId: jamiId4, role: .member, registeredName: "",
+                                               profileName: "Christine")
+        let inactiveBanned = createParticipant(jamiId: "inactiveBanned", role: .banned, registeredName: "",
+                                               profileName: "Al")
+        let inactiveLeft = createParticipant(jamiId: "inactiveLeft", role: .left, registeredName: "",
+                                             profileName: "Bo")
+
+        // Act
+        swarmInfo.participants.accept([activeAdmin, activeMember, activeInvited, activeOverflow,
+                                       inactiveBanned, inactiveLeft])
+
+        // Assert
+        XCTAssertEqual(swarmInfo.participantsString.value, "Eli, Dana, Mariah, + 1")
+        XCTAssertEqual(Set(swarmInfo.participantsNames.value), Set(["Eli", "Dana", "Mariah", "Christine"]))
+        XCTAssertFalse(swarmInfo.participantsString.value.contains("Al"))
+        XCTAssertFalse(swarmInfo.participantsString.value.contains("Bo"))
+    }
+
     func testHasParticipantWithRegisteredName_True() {
         // Arrange
         let participant = createParticipant(jamiId: jamiId1, role: .admin, registeredName: registeredName1,
