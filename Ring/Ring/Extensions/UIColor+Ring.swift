@@ -34,25 +34,6 @@ extension UIColor {
         self.init(red: (hex >> 16) & 0xff, green: (hex >> 8) & 0xff, blue: hex & 0xff, alpha: alpha)
     }
 
-    func lighten(by percentage: CGFloat = 30.0) -> UIColor? {
-        return self.adjust(by: abs(percentage) )
-    }
-
-    func darker(by percentage: CGFloat) -> UIColor? {
-        return self.adjust(by: -1 * abs(percentage) )
-    }
-
-    func adjust(by percentage: CGFloat = 30.0) -> UIColor? {
-        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
-        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
-            return UIColor(red: min(red + percentage / 100, 1.0),
-                           green: min(green + percentage / 100, 1.0),
-                           blue: min(blue + percentage / 100, 1.0),
-                           alpha: alpha)
-        } else {
-            return nil
-        }
-    }
     func isLight(threshold: Float) -> Bool? {
         let originalCGColor = self.cgColor
 

@@ -141,6 +141,7 @@ class RequestNameResolver: ObservableObject, Identifiable, Hashable {
                 return lookupNameResponse.requestedName == jamiId
             }
             .take(1)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { lookupNameResponse in
                 if lookupNameResponse.state == .found && !lookupNameResponse.name.isEmpty {
                     self.registeredNames[jamiId] = lookupNameResponse.name
@@ -176,32 +177,94 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
     let id: String
     let nameResolver: RequestNameResolver
     let disposeBag = DisposeBag()
+    private let profilesService: ProfilesService
+    private var senderMember: GroupAvatarMember?
+    private var selfMember: GroupAvatarMember?
+    private let renderSubject = PublishSubject<Void>()
 
-    init(request: RequestModel, nameResolver: RequestNameResolver) {
+    init(request: RequestModel, nameResolver: RequestNameResolver,
+         profilesService: ProfilesService, sharedSelfMember: BehaviorRelay<GroupAvatarMember?>) {
         self.nameResolver = nameResolver
         self.id = request.getIdentifier()
         self.request = request
+        self.profilesService = profilesService
         self.receivedDate = request.receivedDate.conversationTimestamp()
         self.setAvatar()
-        self.nameResolver.nameResolved
-            .startWith(self.nameResolver.nameResolved.value)
-            .subscribe(onNext: { [weak self] resolved in
-                if resolved {
-                    self?.setAvatar()
-                }
+
+        if !request.isCoredialog() {
+            Observable.merge(
+                nameResolver.nameResolved
+                    .filter { $0 }
+                    .map { _ in () }
+                    .observe(on: MainScheduler.instance),
+                renderSubject.asObservable()
+            )
+            .debounce(.milliseconds(50), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.updateSenderMemberName()
+                self?.setAvatar()
+            })
+            .disposed(by: disposeBag)
+            subscribeSenderProfile()
+            subscribeSharedSelfProfile(sharedSelfMember: sharedSelfMember)
+        } else {
+            nameResolver.nameResolved
+                .startWith(nameResolver.nameResolved.value)
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: { [weak self] resolved in
+                    if resolved {
+                        self?.updateSenderMemberName()
+                        self?.setAvatar()
+                    }
+                })
+                .disposed(by: disposeBag)
+        }
+    }
+
+    private func subscribeSenderProfile() {
+        guard let jamiId = request.participants.first?.jamiId else { return }
+        let profileUri = "jami:" + jamiId
+        profilesService.getProfile(uri: profileUri, createIfNotexists: false, accountId: request.accountId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] profile in
+                guard let self = self else { return }
+                let newMember = GroupAvatarMember.resolve(
+                    profilePhoto: profile.photo,
+                    profileName: profile.alias,
+                    registeredName: self.nameResolver.bestName,
+                    jamiId: jamiId
+                )
+                guard newMember != self.senderMember else { return }
+                self.senderMember = newMember
+                self.renderSubject.onNext(())
             })
             .disposed(by: disposeBag)
     }
 
-    private func setAvatar() {
-        let newAvatar = createAvatar()
-        updateAvatarOnMainThread(with: newAvatar)
+    private func subscribeSharedSelfProfile(sharedSelfMember: BehaviorRelay<GroupAvatarMember?>) {
+        sharedSelfMember
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] newMember in
+                guard let self = self else { return }
+                guard newMember != self.selfMember else { return }
+                self.selfMember = newMember
+                self.renderSubject.onNext(())
+            })
+            .disposed(by: disposeBag)
     }
 
-    private func updateAvatarOnMainThread(with image: UIImage) {
+    private func updateSenderMemberName() {
+        guard let current = senderMember else { return }
+        let updated = GroupAvatarMember(image: current.image, name: nameResolver.bestName)
+        guard updated != current else { return }
+        senderMember = updated
+    }
+
+    private func setAvatar() {
+        let newAvatar = createAvatar()
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.avatar = image
+            self?.avatar = newAvatar
         }
     }
 
@@ -211,7 +274,8 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
         } else if request.isCoredialog() {
             return UIImage.createContactAvatar(username: nameResolver.bestName, size: CGSize(width: avatarSize, height: avatarSize))
         } else {
-            return UIImage.createSwarmAvatar(convId: nameResolver.request.conversationId, size: CGSize(width: avatarSize, height: avatarSize))
+            let members = [senderMember, selfMember].compactMap { $0 }
+            return GroupAvatarRenderer.render(members: members, totalSize: avatarSize)
         }
     }
 
@@ -237,6 +301,8 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
 }
 
 class RequestsViewModel: ObservableObject {
+    private let sharedSelfGroupMember = BehaviorRelay<GroupAvatarMember?>(value: nil)
+
     @Published var requestsRow = [RequestRowViewModel]()
     @Published var requestNames = ""
     @Published var unreadRequests = 0 {
@@ -269,6 +335,36 @@ class RequestsViewModel: ObservableObject {
         self.presenceService = injectionBag.presenceService
         self.injectionBar = injectionBag
         self.subscribeToNewRequests()
+        self.bindSharedGroupRequestSelfAvatar()
+    }
+
+    private func bindSharedGroupRequestSelfAvatar() {
+        let profileService = injectionBar.profileService
+        Observable.merge(
+            Observable.just(accountService.currentAccount),
+            accountService.currentAccountChanged.asObservable()
+        )
+        .observe(on: MainScheduler.instance)
+        .flatMapLatest { account -> Observable<GroupAvatarMember?> in
+            guard let account = account else {
+                return Observable.just(nil)
+            }
+            return profileService.getAccountProfile(accountId: account.id)
+                .map { profile in
+                    GroupAvatarMember.resolve(
+                        profilePhoto: profile.photo,
+                        profileName: profile.alias,
+                        registeredName: account.registeredName,
+                        jamiId: account.jamiId
+                    )
+                }
+                .map { Optional($0) }
+        }
+        .distinctUntilChanged()
+        .subscribe(onNext: { [weak self] member in
+            self?.sharedSelfGroupMember.accept(member)
+        })
+        .disposed(by: disposeBag)
     }
 
     func subscribeToNewRequests() {
@@ -364,7 +460,7 @@ class RequestsViewModel: ObservableObject {
         self.requestsNameResolvers.append(contentsOf: newViewModels)
         if requestViewOpened {
             for nameResolver in newViewModels {
-                requestsRow.append(RequestRowViewModel(request: nameResolver.request, nameResolver: nameResolver))
+                requestsRow.append(makeRowViewModel(nameResolver: nameResolver))
             }
         }
     }
@@ -403,8 +499,17 @@ class RequestsViewModel: ObservableObject {
     func generateRequestRows() {
         requestsRow = [RequestRowViewModel]()
         for nameResolver in requestsNameResolvers {
-            requestsRow.append(RequestRowViewModel(request: nameResolver.request, nameResolver: nameResolver))
+            requestsRow.append(makeRowViewModel(nameResolver: nameResolver))
         }
+    }
+
+    private func makeRowViewModel(nameResolver: RequestNameResolver) -> RequestRowViewModel {
+        return RequestRowViewModel(
+            request: nameResolver.request,
+            nameResolver: nameResolver,
+            profilesService: injectionBar.profileService,
+            sharedSelfMember: sharedSelfGroupMember
+        )
     }
 
     // MARK: - request actions

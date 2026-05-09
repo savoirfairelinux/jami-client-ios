@@ -19,7 +19,6 @@
 import SwiftUI
 import UIKit
 import UniformTypeIdentifiers
-import CryptoKit
 
 struct ShareView: View {
 
@@ -640,38 +639,6 @@ extension UIColor {
 
         self.init(red: red, green: green, blue: blue, alpha: 1.0)
     }
-
-    func darker(by percentage: CGFloat) -> UIColor? {
-        return self.adjust(by: -1 * abs(percentage))
-    }
-
-    func adjust(by percentage: CGFloat = 30.0) -> UIColor? {
-        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
-        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
-            return UIColor(red: min(red + percentage / 100, 1.0),
-                           green: min(green + percentage / 100, 1.0),
-                           blue: min(blue + percentage / 100, 1.0),
-                           alpha: alpha)
-        } else {
-            return nil
-        }
-    }
-}
-
-func backgroundColor(for username: String) -> UIColor {
-
-    let md5Data = Insecure.MD5.hash(data: Data(username.utf8))
-    let md5HexString = md5Data.map { String(format: "%02hhx", $0) }.joined()
-
-    let prefix = String(md5HexString.prefix(1))
-    var index: UInt64 = 0
-    let scanner = Scanner(string: prefix)
-    if scanner.scanHexInt64(&index) {
-        let colorIndex = Int(index) % avatarColors.count
-        return avatarColors[colorIndex]
-    }
-
-    return defaultAvatarColor
 }
 
 struct LoadingStateView: View {
@@ -786,35 +753,20 @@ struct UnifiedAvatarView: View {
         ZStack {
             bgColor
             let borderUIColor = UIColor(bgColor).darker(by: 1) ?? UIColor(bgColor)
-            let borderLineWidth = min(max(size * 0.04, 1), 1)
             Circle()
-                .stroke(Color(borderUIColor), lineWidth: borderLineWidth)
+                .stroke(Color(borderUIColor), lineWidth: AvatarMetrics.borderWidth)
 
             if avatarType == .single {
-                let computedFontSize = monogramFontSize(for: size)
-                Text(extractFirstGraphemeCluster(from: name))
-                    .font(.system(size: computedFontSize, weight: .semibold))
+                Text(String(name.prefix(1)).uppercased())
+                    .font(.system(size: AvatarMetrics.monogramFontSize(for: size), weight: .semibold))
                     .foregroundColor(.white)
             } else {
-                let iconFontSize = max((size * 0.40).rounded(), 6)
                 let systemName = avatarType == .group ? "person.2.fill" : "person.fill"
                 Image(systemName: systemName)
-                    .font(.system(size: iconFontSize, weight: .semibold))
+                    .font(.system(size: AvatarMetrics.iconSize(for: size), weight: .semibold))
                     .foregroundColor(.white)
             }
         }
-    }
-
-    private func monogramFontSize(for avatarSize: CGFloat) -> CGFloat {
-        let factor: CGFloat = 0.44
-        let raw = avatarSize * factor
-        return min(max(raw.rounded(), 8), 50)
-    }
-
-    private func extractFirstGraphemeCluster(from text: String?) -> String {
-        guard let text = text, !text.isEmpty else { return "" }
-        let firstGrapheme = String(text.prefix(1))
-        return firstGrapheme.uppercased()
     }
 }
 
@@ -838,13 +790,34 @@ struct ConversationAvatarView: View {
     let size: CGFloat
 
     var body: some View {
-        UnifiedAvatarView(
-            name: conversation.name,
-            avatarType: conversation.avatarType,
-            processedAvatar: conversation.processedAvatar,
-            bgColor: conversation.bgColor,
-            size: size
-        )
+        if let avatarImage = conversation.processedAvatar {
+            Image(uiImage: avatarImage)
+                .resizable()
+                .interpolation(.high)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: size, height: size)
+                .clipShape(Circle())
+                .fixedSize()
+                .transition(.identity)
+        } else if let groupImage = conversation.groupAvatarImage {
+            Image(uiImage: groupImage)
+                .resizable()
+                .interpolation(.high)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: size, height: size)
+                .clipShape(Circle())
+                .fixedSize()
+                .transition(.identity)
+        } else {
+            UnifiedAvatarView(
+                name: conversation.name,
+                avatarType: conversation.avatarType,
+                processedAvatar: conversation.processedAvatar,
+                bgColor: conversation.bgColor,
+                size: size
+            )
+            .transition(.identity)
+        }
     }
 }
 
