@@ -315,12 +315,17 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
         // Create a single shared observable for all participant data
         // swiftlint:disable large_tuple
         let participantData = Observable.combineLatest(
-            participants.value.map { participant -> Observable<(String, String, String, Data?)> in
+            participants.value.map { participant -> Observable<(role: ParticipantRole, finalName: String, profileName: String,
+                                                                 avatarData: Data?)> in
+                let role = participant.role
                 return Observable.combineLatest(
                     participant.finalName.asObservable(),
                     participant.registeredName.asObservable(),
                     participant.profileName.asObservable(),
-                    participant.avatarData.asObservable()
+                    participant.avatarData.asObservable(),
+                    resultSelector: { finalName, _, profileName, avatarData in
+                        (role: role, finalName: finalName, profileName: profileName, avatarData: avatarData)
+                    }
                 )
             }
         )
@@ -331,9 +336,9 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
             .subscribe(onNext: { [weak self] data in
                 guard let self = self else { return }
 
-                let finalNames = data.map { $0.0 }.filter { !$0.isEmpty }
-                let profileNames = data.map { $0.2 }.filter { !$0.isEmpty }
-                let avatars = data.map { $0.3 }.compactMap { $0 }
+                let finalNames = data.map(\.finalName).filter { !$0.isEmpty }
+                let profileNames = data.map(\.profileName).filter { !$0.isEmpty }
+                let avatars = data.map(\.avatarData).compactMap { $0 }
 
                 self.participantsAvatars.accept(avatars)
 
@@ -345,7 +350,11 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
                         self.title.accept(titleForDialog())
                     }
                 } else {
-                    let uniqueNames = Array(Set(finalNames))
+                    let activeFinalNames = data
+                        .filter { $0.role.isActive }
+                        .map(\.finalName)
+                        .filter { !$0.isEmpty }
+                    let uniqueNames = Array(Set(activeFinalNames))
                     self.participantsNames.accept(uniqueNames)
                     self.participantsString.accept(self.buildTitleFrom(names: uniqueNames))
                 }
@@ -451,13 +460,17 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
         let participantInfo = ParticipantInfo(jamiId: jamiId, role: role, profileService: self.profileService)
         let uri = JamiURI.init(schema: .ring, infoHash: jamiId)
         guard let uriString = uri.uriString else { return nil }
-        // subscribe for profile updates for participant
-        self.profileService
-            .getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
+        let isSelf = jamiId == localJamiId
+        let profileObservable: Observable<Profile>
+        if isSelf {
+            profileObservable = self.profileService.getAccountProfile(accountId: accountId)
+        } else {
+            profileObservable = self.profileService.getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
+        }
+        profileObservable
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak participantInfo] profile in
                 guard let participantInfo = participantInfo else { return }
-                // The view has a size of avatarHeight. Create a larger image for better resolution.
                 if let data = profile.photo?.toImageData() {
                     participantInfo.profileLock.lock()
                     participantInfo.hasProfileAvatar = true
@@ -535,31 +548,13 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
     }
 
     private func buildTitleFrom(names: [String]) -> String {
-        // title format: "name1, name2, name3 + number of other participants"
-        let participantsCount = self.participants.value.count
-
         if conversation?.isCoredialog() ?? false,
            let name = nonLocalParticipants.first?.finalName.value, !name.isEmpty {
             return name
         }
-
         let localName = localParticipant?.finalName.value
-
-        let processedNames = names.map { name in
-            name == localName ? name.withYourselfSuffix() : name
-        }
-
-        var uniqueSetNames = Set<String>()
-        let uniqueNames = processedNames.filter { uniqueSetNames.insert($0).inserted }
-            .sorted { $0.count < $1.count }
-
-        guard !uniqueNames.isEmpty else { return "" }
-
-        // Show max 3 names + count of others
-        let displayCount = min(uniqueNames.count, 3)
-        let displayedNames = uniqueNames.prefix(displayCount).joined(separator: ", ")
-        let othersCount = participantsCount - displayCount
-
-        return othersCount > 0 ? "\(displayedNames), + \(othersCount)" : displayedNames
+        let processedNames = names.map { $0 == localName ? $0.withYourselfSuffix() : $0 }
+        let activeCount = participants.value.filter { $0.role.isActive }.count
+        return buildGroupTitle(resolvedNames: processedNames, totalActiveCount: activeCount)
     }
 }

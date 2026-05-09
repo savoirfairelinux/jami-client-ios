@@ -79,32 +79,6 @@ enum ConversationPreferenceAttributes: String {
     case ignoreNotifications
 }
 
-enum ParticipantRole: String {
-    case admin
-    case member
-    case invited
-    case banned
-    case left
-    case unknown
-
-    var stringValue: String {
-        switch self {
-        case .member:
-            return L10n.Swarm.member
-        case .invited:
-            return L10n.Swarm.invited
-        case .admin:
-            return L10n.Swarm.admin
-        case .banned:
-            return L10n.Swarm.blocked
-        case .left:
-            return L10n.Swarm.left
-        case .unknown:
-            return L10n.Swarm.unknown
-        }
-    }
-}
-
 struct ConversationPreferences {
     var color: String = UIColor.defaultSwarmColorHex
     var ignoreNotifications: Bool = false
