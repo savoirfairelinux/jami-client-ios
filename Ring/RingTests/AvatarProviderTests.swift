@@ -326,27 +326,6 @@ final class AvatarProviderTests: XCTestCase {
         XCTAssertFalse(provider.groupAvatarSnapshot === initialSnapshot)
     }
 
-    func testDisplayParticipants_PrioritizesAvatarOverName() {
-        // Arrange
-        let swarmInfo = TestableSwarmInfo(participants: [], containsSearchQuery: false, hasParticipantWithRegisteredName: false)
-        let provider = createGroupProvider(swarmInfo: swarmInfo)
-        let admin = createParticipant(jamiId: jamiId1, role: .admin, registeredName: registeredName1,
-                                      profileName: profileName1)
-        let memberWithName = createParticipant(jamiId: jamiId2, role: .member, registeredName: registeredName2,
-                                               profileName: profileName2)
-        let memberWithAvatar = createParticipant(jamiId: jamiId3, role: .member, registeredName: "",
-                                                  profileName: profileName3)
-        memberWithAvatar.avatarData.accept(createTestImageData())
-        let memberNameOnly = createParticipant(jamiId: jamiId4, role: .member, registeredName: "",
-                                               profileName: profileName4)
-        // Act — 4 participants triggers overflow, only admin + 1 other shown
-        setParticipants([admin, memberNameOnly, memberWithAvatar, memberWithName], on: swarmInfo)
-        waitForMainScheduler()
-        // Assert — memberWithAvatar (priority 2) should be chosen over name-only members (priority 1)
-        XCTAssertEqual(provider.displayParticipants.count, 2)
-        XCTAssertEqual(provider.displayParticipants[0].jamiId, jamiId1)
-        XCTAssertEqual(provider.displayParticipants[1].jamiId, jamiId3)
-    }
 
     func testSnapshotCreated_SingleParticipant() {
         // Arrange

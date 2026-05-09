@@ -242,6 +242,7 @@
 		260AE62F29BA3B6900D66D5E /* ConversationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */; };
 		260AE63329BA5DF600D66D5E /* SwarmInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */; };
 		26AVATAR0129BA000000000001 /* AvatarProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AVATAR0029BA000000000001 /* AvatarProviderTests.swift */; };
+		26GRPAVT0129BA000000000001 /* GroupAvatarRendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26GRPAVT0029BA000000000001 /* GroupAvatarRendererTests.swift */; };
 		260AE63529BE00F100D66D5E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63429BE00F100D66D5E /* Constants.swift */; };
 		260AE63729BE177000D66D5E /* ContactUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63629BE177000D66D5E /* ContactUtilsTests.swift */; };
 		260AE63A29C0C81300D66D5E /* CallProviderDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE63929C0C81300D66D5E /* CallProviderDelegateTests.swift */; };
@@ -559,6 +560,10 @@
 		621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231F81F880EDF009B86F0 /* UILabel+Ring.swift */; };
 		623196862BAE498900C2252C /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 623196852BAE498900C2252C /* Atomics */; };
 		627F11F120348FBF006560B5 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627F11F020348FBF006560B5 /* AvatarView.swift */; };
+		E8ACE0B8E94AB3DEABA30A1A /* AvatarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD989EC28085426384411E8 /* AvatarHelpers.swift */; };
+		5F155B7C688A2B472956FDC0 /* AvatarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD989EC28085426384411E8 /* AvatarHelpers.swift */; };
+		9F5F2102C5C96402A066ADA0 /* GroupAvatarRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */; };
+		7C583E15A5920A5D661FE768 /* GroupAvatarRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */; };
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
 		62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */; };
 		62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D3A1F6C3ACC00F8AB18 /* PresenceService.swift */; };
@@ -872,6 +877,7 @@
 		260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModelTests.swift; sourceTree = "<group>"; };
 		260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoTests.swift; sourceTree = "<group>"; };
 		26AVATAR0029BA000000000001 /* AvatarProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarProviderTests.swift; sourceTree = "<group>"; };
+		26GRPAVT0029BA000000000001 /* GroupAvatarRendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAvatarRendererTests.swift; sourceTree = "<group>"; };
 		260AE63429BE00F100D66D5E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		260AE63629BE177000D66D5E /* ContactUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUtilsTests.swift; sourceTree = "<group>"; };
 		260AE63929C0C81300D66D5E /* CallProviderDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallProviderDelegateTests.swift; sourceTree = "<group>"; };
@@ -1727,6 +1733,8 @@
 		621231F81F880EDF009B86F0 /* UILabel+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Ring.swift"; sourceTree = "<group>"; };
 		623660A920092081002598C1 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../daemon/src; sourceTree = "<group>"; };
 		627F11F020348FBF006560B5 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		AFD989EC28085426384411E8 /* AvatarHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarHelpers.swift; sourceTree = "<group>"; };
+		5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAvatarRenderer.swift; sourceTree = "<group>"; };
 		62A88D351F6C2E5F00F8AB18 /* PresenceAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenceAdapter.h; sourceTree = "<group>"; };
 		62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceAdapterDelegate.swift; sourceTree = "<group>"; };
 		62A88D381F6C323500F8AB18 /* PresenceAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PresenceAdapter.mm; sourceTree = "<group>"; };
@@ -3064,6 +3072,8 @@
 				263C16822D9DBCE6008E102C /* ThreadSafeQueueHelper.swift */,
 				26A1B2C3D4E5F60700AABB01 /* ThreadSafeDictionary.swift */,
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
+				AFD989EC28085426384411E8 /* AvatarHelpers.swift */,
+				5FE00A4B452D77EC0CA26ED4 /* GroupAvatarRenderer.swift */,
 				BB6690032A99043200875848 /* SharedActionsPresenter.swift */,
 				0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */,
 				0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */,
@@ -3278,6 +3288,7 @@
 				260AE62E29BA3B6900D66D5E /* ConversationModelTests.swift */,
 				260AE63229BA5DF600D66D5E /* SwarmInfoTests.swift */,
 				26AVATAR0029BA000000000001 /* AvatarProviderTests.swift */,
+				26GRPAVT0029BA000000000001 /* GroupAvatarRendererTests.swift */,
 				BB8BBCA229F04DA1007228BA /* LocationSharingServiceTests.swift */,
 			);
 			name = ConversationsTests;
@@ -4189,7 +4200,6 @@
 				26625BB52BA9DF67009D2DDB /* ConversationsView.swift in Sources */,
 				BB4C6E2629229131001C901A /* ColorExtension.swift in Sources */,
 				269DA09928E23D37007D51D6 /* MessageRowView.swift in Sources */,
-				648AF76D24ED7CA90004D727 /* UITextView+Helpers.swift in Sources */,
 				2637E5662DDE662200ACCF91 /* Constants.swift in Sources */,
 				26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */,
 				269DA09D28E23F57007D51D6 /* MessagesListView.swift in Sources */,
@@ -4205,6 +4215,7 @@
 				267B95FB2C2B5FFA00353B01 /* RevocationView.swift in Sources */,
 				268309682F6ADAB800B1AA8A /* MediaPreviewState.swift in Sources */,
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
+				648AF76D24ED7CA90004D727 /* UITextView+Helpers.swift in Sources */,
 				267B958C2C24793500353B01 /* ManageSipAccountView.swift in Sources */,
 				1A5DC0201F355DCF0075E8EF /* ContactsService.swift in Sources */,
 				26A5CE3B26BD00E700E147EA /* Array+Helper.swift in Sources */,
@@ -4408,6 +4419,8 @@
 				2657CBA72B858CF20078D6B1 /* AccessibilityIdentifiers.swift in Sources */,
 				62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */,
 				627F11F120348FBF006560B5 /* AvatarView.swift in Sources */,
+				E8ACE0B8E94AB3DEABA30A1A /* AvatarHelpers.swift in Sources */,
+				9F5F2102C5C96402A066ADA0 /* GroupAvatarRenderer.swift in Sources */,
 				26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,
 				269DA09F28E244F1007D51D6 /* MessagesListVM.swift in Sources */,
@@ -4457,7 +4470,6 @@
 				26BCBBD32A964ABC0001EE38 /* ConferenceActionsModel.swift in Sources */,
 				26EEB19C2BD98CCA00B8B04B /* SearchBar.swift in Sources */,
 				2632D2F12CA5A82F00E60096 /* ImportFromArchiveVM.swift in Sources */,
-				0EF49AA123828CBC0064CD98 /* ParticipantProfileInfo.swift in Sources */,
 				260717722CADB36A00494875 /* SettingsCoordinator.swift in Sources */,
 				BB68E6602AB1F03000F02AB7 /* ScreenHelper.swift in Sources */,
 				0EF49AA123828CBC0064CD98 /* ParticipantProfileInfo.swift in Sources */,
@@ -4475,6 +4487,7 @@
 			files = (
 				260AE63329BA5DF600D66D5E /* SwarmInfoTests.swift in Sources */,
 				26AVATAR0129BA000000000001 /* AvatarProviderTests.swift in Sources */,
+				26GRPAVT0129BA000000000001 /* GroupAvatarRendererTests.swift in Sources */,
 				26BA01010000000000000001 /* ProfilesServiceTests.swift in Sources */,
 				263C167B2D9723A5008E102C /* MessageHandlingServiceTests.swift in Sources */,
 				263C16852D9EE3F9008E102C /* CallManagementServiceTests.swift in Sources */,
@@ -4537,7 +4550,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				265C436B286254C900B4BE73 /* Constants.swift in Sources */,
 				2637E5692DDE662200ACCF91 /* Constants.swift in Sources */,
 				26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */,
 				26A88C07266FFFC800888EED /* NotificationService.swift in Sources */,
@@ -4561,6 +4573,8 @@
 				26EFD7E52E2E944100B63F74 /* CommonHelpers.swift in Sources */,
 				3D0E69882DDCDBE70046FA3D /* ShareView.swift in Sources */,
 				26EB3ADC2EAEA50B00ACE157 /* AvatarsColors.swift in Sources */,
+				5F155B7C688A2B472956FDC0 /* AvatarHelpers.swift in Sources */,
+				7C583E15A5920A5D661FE768 /* GroupAvatarRenderer.swift in Sources */,
 				3D6E7C582DDD058800C6EB24 /* Strings.swift in Sources */,
 				3DAAC4732DDD1AC500D94B71 /* Adapter.mm in Sources */,
 				3D0E697A2DDCD9C80046FA3D /* ShareViewController.swift in Sources */,

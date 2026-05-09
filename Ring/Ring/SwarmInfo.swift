@@ -451,13 +451,17 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
         let participantInfo = ParticipantInfo(jamiId: jamiId, role: role, profileService: self.profileService)
         let uri = JamiURI.init(schema: .ring, infoHash: jamiId)
         guard let uriString = uri.uriString else { return nil }
-        // subscribe for profile updates for participant
-        self.profileService
-            .getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
+        let isSelf = jamiId == localJamiId
+        let profileObservable: Observable<Profile>
+        if isSelf {
+            profileObservable = self.profileService.getAccountProfile(accountId: accountId)
+        } else {
+            profileObservable = self.profileService.getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
+        }
+        profileObservable
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak participantInfo] profile in
                 guard let participantInfo = participantInfo else { return }
-                // The view has a size of avatarHeight. Create a larger image for better resolution.
                 if let data = profile.photo?.toImageData() {
                     participantInfo.profileLock.lock()
                     participantInfo.hasProfileAvatar = true
