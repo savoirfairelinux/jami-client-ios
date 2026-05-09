@@ -335,7 +335,7 @@ final class AvatarProviderTests: XCTestCase {
         let memberWithName = createParticipant(jamiId: jamiId2, role: .member, registeredName: registeredName2,
                                                profileName: profileName2)
         let memberWithAvatar = createParticipant(jamiId: jamiId3, role: .member, registeredName: "",
-                                                  profileName: profileName3)
+                                                 profileName: profileName3)
         memberWithAvatar.avatarData.accept(createTestImageData())
         let memberNameOnly = createParticipant(jamiId: jamiId4, role: .member, registeredName: "",
                                                profileName: profileName4)
