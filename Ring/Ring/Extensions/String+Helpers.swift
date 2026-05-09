@@ -50,13 +50,7 @@ extension String {
     }
 
     func isSHA1() -> Bool {
-        let sha1Regex = try? NSRegularExpression(pattern: "(ring:)?([0-9a-f]{40})", options: [])
-        if sha1Regex?.firstMatch(in: self,
-                                 options: NSRegularExpression.MatchingOptions.reportCompletion,
-                                 range: NSRange(location: 0, length: self.count)) != nil {
-            return true
-        }
-        return false
+        return isJamiHashId(self)
     }
 
     var isPhoneNumber: Bool {

@@ -25,7 +25,7 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
     let accountId: String
     @Published var name: String {
         didSet {
-            bgColor = Color(backgroundColor(for: name))
+            bgColor = Color(avatarBackgroundColor(for: name))
         }
     }
     @Published var avatar: String {
@@ -35,6 +35,7 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
     }
     @Published var avatarType: AvatarType
     @Published var processedAvatar: UIImage?
+    @Published var groupAvatarImage: UIImage?
     @Published var bgColor = Color(UIColor(hexString: "808080")!)
 
     private let adapterService: AdapterService
@@ -89,6 +90,7 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
             .subscribe(onSuccess: { [weak self] nameInfo in
                 self?.name = nameInfo.name
                 self?.avatarType = nameInfo.avatarType
+                self?.loadGroupAvatarIfNeeded()
             })
             .disposed(by: disposeBag)
 
@@ -97,6 +99,20 @@ class ConversationViewModel: ObservableObject, Identifiable, Equatable {
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] avatarString in
                 self?.avatar = avatarString ?? ""
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func loadGroupAvatarIfNeeded() {
+        guard avatarType == .group else { return }
+        adapterService.getGroupMemberProfiles(accountId: accountId, conversationId: id)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .map { result -> UIImage in
+                GroupAvatarRenderer.render(members: result.members, overflowCount: result.overflowCount, totalSize: Constants.defaultAvatarSize)
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] image in
+                self?.groupAvatarImage = image
             })
             .disposed(by: disposeBag)
     }

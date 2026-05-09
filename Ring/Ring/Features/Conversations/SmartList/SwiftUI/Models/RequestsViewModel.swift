@@ -176,11 +176,19 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
     let id: String
     let nameResolver: RequestNameResolver
     let disposeBag = DisposeBag()
+    private let profilesService: ProfilesService
+    private let accountsService: AccountsService
+    private var senderMember: GroupAvatarMember?
+    private var selfMember: GroupAvatarMember?
+    private let renderSubject = PublishSubject<Void>()
 
-    init(request: RequestModel, nameResolver: RequestNameResolver) {
+    init(request: RequestModel, nameResolver: RequestNameResolver,
+         profilesService: ProfilesService, accountsService: AccountsService) {
         self.nameResolver = nameResolver
         self.id = request.getIdentifier()
         self.request = request
+        self.profilesService = profilesService
+        self.accountsService = accountsService
         self.receivedDate = request.receivedDate.conversationTimestamp()
         self.setAvatar()
         self.nameResolver.nameResolved
@@ -191,17 +199,61 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
                 }
             })
             .disposed(by: disposeBag)
+
+        if !request.isCoredialog() {
+            renderSubject
+                .debounce(.milliseconds(50), scheduler: MainScheduler.instance)
+                .subscribe(onNext: { [weak self] in
+                    self?.setAvatar()
+                })
+                .disposed(by: disposeBag)
+            subscribeSenderProfile()
+            subscribeSelfProfile()
+        }
+    }
+
+    private func subscribeSenderProfile() {
+        guard let jamiId = request.participants.first?.jamiId else { return }
+        profilesService.getProfile(uri: jamiId, createIfNotexists: false, accountId: request.accountId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] profile in
+                guard let self = self else { return }
+                let newMember = GroupAvatarMember.resolve(
+                    profilePhoto: profile.photo,
+                    profileName: profile.alias,
+                    registeredName: self.nameResolver.bestName,
+                    jamiId: jamiId
+                )
+                guard newMember != self.senderMember else { return }
+                self.senderMember = newMember
+                self.renderSubject.onNext(())
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func subscribeSelfProfile() {
+        guard let account = accountsService.currentAccount else { return }
+        profilesService.getAccountProfile(accountId: account.id)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] profile in
+                guard let self = self else { return }
+                let newMember = GroupAvatarMember.resolve(
+                    profilePhoto: profile.photo,
+                    profileName: profile.alias,
+                    registeredName: account.registeredName,
+                    jamiId: account.jamiId
+                )
+                guard newMember != self.selfMember else { return }
+                self.selfMember = newMember
+                self.renderSubject.onNext(())
+            })
+            .disposed(by: disposeBag)
     }
 
     private func setAvatar() {
         let newAvatar = createAvatar()
-        updateAvatarOnMainThread(with: newAvatar)
-    }
-
-    private func updateAvatarOnMainThread(with image: UIImage) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.avatar = image
+            self?.avatar = newAvatar
         }
     }
 
@@ -211,7 +263,8 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
         } else if request.isCoredialog() {
             return UIImage.createContactAvatar(username: nameResolver.bestName, size: CGSize(width: avatarSize, height: avatarSize))
         } else {
-            return UIImage.createSwarmAvatar(convId: nameResolver.request.conversationId, size: CGSize(width: avatarSize, height: avatarSize))
+            let members = [senderMember, selfMember].compactMap { $0 }
+            return GroupAvatarRenderer.render(members: members, totalSize: avatarSize)
         }
     }
 
@@ -364,7 +417,7 @@ class RequestsViewModel: ObservableObject {
         self.requestsNameResolvers.append(contentsOf: newViewModels)
         if requestViewOpened {
             for nameResolver in newViewModels {
-                requestsRow.append(RequestRowViewModel(request: nameResolver.request, nameResolver: nameResolver))
+                requestsRow.append(makeRowViewModel(nameResolver: nameResolver))
             }
         }
     }
@@ -403,8 +456,17 @@ class RequestsViewModel: ObservableObject {
     func generateRequestRows() {
         requestsRow = [RequestRowViewModel]()
         for nameResolver in requestsNameResolvers {
-            requestsRow.append(RequestRowViewModel(request: nameResolver.request, nameResolver: nameResolver))
+            requestsRow.append(makeRowViewModel(nameResolver: nameResolver))
         }
+    }
+
+    private func makeRowViewModel(nameResolver: RequestNameResolver) -> RequestRowViewModel {
+        return RequestRowViewModel(
+            request: nameResolver.request,
+            nameResolver: nameResolver,
+            profilesService: injectionBar.profileService,
+            accountsService: accountService
+        )
     }
 
     // MARK: - request actions
