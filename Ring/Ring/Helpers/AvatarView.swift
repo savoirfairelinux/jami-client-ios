@@ -21,56 +21,6 @@ import SwiftUI
 import RxSwift
 import RxRelay
 
-private enum AvatarMetrics {
-
-    struct LayoutPreset {
-        let directions: [(x: CGFloat, y: CGFloat)]
-
-        func offsets(margin: CGFloat) -> [(x: CGFloat, y: CGFloat)] {
-            directions.enumerated().map { index, dir in
-                let radius = (index == 0 ? AvatarMetrics.adminDiameterRatio : AvatarMetrics.secondaryDiameterRatio) / 2
-                let dist = 0.5 - radius - margin
-                let len = sqrt(dir.x * dir.x + dir.y * dir.y)
-                return (x: dist * dir.x / len, y: dist * dir.y / len)
-            }
-        }
-    }
-
-    static let edgeMarginRatio: CGFloat = 0.07
-    static let adminDiameterRatio: CGFloat = 0.46
-    static let secondaryDiameterRatio: CGFloat = 0.34
-
-    static let twoCircle = LayoutPreset(
-        directions: [(-1, -1),
-                     ( 1,  1)]
-    )
-    static let threeCircle = LayoutPreset(
-        directions: [(-7, -8),
-                     ( 1,  0),
-                     (-1,  6)]
-    )
-
-    static let shadowOffsetYRatio: CGFloat = 0.015
-    static let shadowBlurRatio: CGFloat = shadowOffsetYRatio * 2
-    static let shadowAlpha: CGFloat = 0.18
-
-    static let monogramFontRatio: CGFloat = 0.44
-    static let iconSizeRatio: CGFloat = 0.40
-    static let minMonogramFontSize: CGFloat = 8
-    static let maxMonogramFontSize: CGFloat = 50
-    static let minIconSize: CGFloat = 6
-
-    static let borderWidth: CGFloat = 1
-
-    static func monogramFontSize(for diameter: CGFloat) -> CGFloat {
-        min(max((diameter * monogramFontRatio).rounded(), minMonogramFontSize), maxMonogramFontSize)
-    }
-
-    static func iconSize(for diameter: CGFloat) -> CGFloat {
-        max((diameter * iconSizeRatio).rounded(), minIconSize)
-    }
-}
-
 class AvatarView: UIView {
     init(profileImageData: Data?,
          username: String,
@@ -127,16 +77,6 @@ class AvatarView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-}
-
-// MARK: - Avatar Helpers
-
-/// Returns the avatar background color for a given display name.
-private func avatarBackgroundColor(for name: String) -> UIColor {
-    let hex = name.toMD5HexString().prefixString()
-    var idxValue: UInt64 = 0
-    Scanner(string: hex).scanHexInt64(&idxValue)
-    return avatarColors[Int(idxValue)]
 }
 
 class AvatarProvider: ObservableObject {
@@ -269,212 +209,15 @@ class AvatarProvider: ObservableObject {
 
     func renderGroupSnapshot() {
         dispatchPrecondition(condition: .onQueue(.main))
-        let totalSize = size.points
-        let participants = displayParticipants
-        let count = participants.count
-        let overflow = overflowCount
-
-        guard !participants.isEmpty else {
-            groupAvatarSnapshot = renderEmptyGroupIcon(totalSize: totalSize)
-            return
+        let members = displayParticipants.map { participant in
+            GroupAvatarMember(image: participant.provider.avatar,
+                              name: participant.finalName.value)
         }
-
-        let renderer = UIGraphicsImageRenderer(size: CGSize(width: totalSize, height: totalSize))
-        groupAvatarSnapshot = renderer.image { ctx in
-            let context = ctx.cgContext
-            let bounds = CGRect(x: 0, y: 0, width: totalSize, height: totalSize)
-            let center = CGPoint(x: totalSize / 2, y: totalSize / 2)
-
-            context.saveGState()
-            UIBezierPath(ovalIn: bounds).addClip()
-
-            if count == 1 && overflow == 0 {
-                drawParticipantCircle(in: context, participant: participants[0],
-                                      center: center, diameter: totalSize,
-                                      shadowRadius: 0, shadowY: 0)
-            } else {
-                drawBackgroundGradient(in: context, center: center, radius: totalSize / 2)
-                drawMultiParticipantLayout(in: context, center: center, totalSize: totalSize,
-                                           participants: participants, overflow: overflow)
-            }
-
-            context.restoreGState()
-        }
-    }
-
-    private func drawBackgroundGradient(in context: CGContext, center: CGPoint, radius: CGFloat) {
-        let baseColor = UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor.systemGray6.lighten(by: 2) ?? .systemGray6
-                : UIColor.systemGray6.darker(by: 2) ?? .systemGray6
-        }
-        let centerColor = baseColor.lighten(by: 1) ?? baseColor
-        let edgeColor = baseColor.darker(by: 2) ?? baseColor
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        if let gradient = CGGradient(colorsSpace: colorSpace,
-                                     colors: [centerColor.cgColor, edgeColor.cgColor] as CFArray,
-                                     locations: [0, 1]) {
-            context.drawRadialGradient(gradient,
-                                       startCenter: center, startRadius: 0,
-                                       endCenter: center, endRadius: radius,
-                                       options: .drawsAfterEndLocation)
-        }
-    }
-
-    private func drawMultiParticipantLayout(in context: CGContext, center: CGPoint, totalSize: CGFloat,
-                                            participants: [ParticipantInfo], overflow: Int) {
-        let count = participants.count
-        let hasThird = count > 2 || overflow > 0
-        let preset = hasThird ? AvatarMetrics.threeCircle : AvatarMetrics.twoCircle
-        let adminSize = totalSize * AvatarMetrics.adminDiameterRatio
-        let otherSize = totalSize * AvatarMetrics.secondaryDiameterRatio
-        let shadowRadius = totalSize * AvatarMetrics.shadowBlurRatio
-        let shadowY = totalSize * AvatarMetrics.shadowOffsetYRatio
-
-        let offsets = preset.offsets(margin: AvatarMetrics.edgeMarginRatio)
-            .map { (x: totalSize * $0.x, y: totalSize * $0.y) }
-
-        if hasThird {
-            let pos = CGPoint(x: center.x + offsets[2].x, y: center.y + offsets[2].y)
-            if overflow > 0 {
-                drawOverflowBadge(in: context, center: pos, size: otherSize,
-                                  count: overflow, shadowRadius: shadowRadius, shadowY: shadowY)
-            } else if count > 2 {
-                drawParticipantCircle(in: context, participant: participants[2],
-                                      center: pos, diameter: otherSize,
-                                      shadowRadius: shadowRadius, shadowY: shadowY)
-            }
-        }
-
-        if count > 1 {
-            let pos = CGPoint(x: center.x + offsets[1].x, y: center.y + offsets[1].y)
-            drawParticipantCircle(in: context, participant: participants[1],
-                                  center: pos, diameter: otherSize,
-                                  shadowRadius: shadowRadius, shadowY: shadowY)
-        }
-
-        let pos0 = CGPoint(x: center.x + offsets[0].x, y: center.y + offsets[0].y)
-        drawParticipantCircle(in: context, participant: participants[0],
-                              center: pos0, diameter: adminSize,
-                              shadowRadius: shadowRadius, shadowY: shadowY)
-    }
-
-    private func drawParticipantCircle(in context: CGContext, participant: ParticipantInfo,
-                                       center: CGPoint, diameter: CGFloat,
-                                       shadowRadius: CGFloat, shadowY: CGFloat) {
-        let rect = CGRect(x: center.x - diameter / 2, y: center.y - diameter / 2,
-                          width: diameter, height: diameter)
-        let path = UIBezierPath(ovalIn: rect)
-
-        context.saveGState()
-        if shadowRadius > 0 {
-            context.setShadow(offset: CGSize(width: 0, height: shadowY), blur: shadowRadius,
-                         color: UIColor.black.withAlphaComponent(AvatarMetrics.shadowAlpha).cgColor)
-        }
-
-        if let avatarImage = participant.provider.avatar {
-            drawPhotoCircle(in: context, image: avatarImage, rect: rect, path: path)
-        } else {
-            let name = participant.finalName.value
-            drawMonogramCircle(in: context, name: name, center: center,
-                               diameter: diameter, rect: rect)
-        }
-        context.restoreGState()
-    }
-
-    private func drawPhotoCircle(in context: CGContext, image: UIImage,
-                                 rect: CGRect, path: UIBezierPath) {
-        UIColor.white.setFill()
-        path.fill()
-        context.setShadow(offset: .zero, blur: 0)
-        context.saveGState()
-        path.addClip()
-        image.draw(in: rect)
-        context.restoreGState()
-    }
-
-    private func drawMonogramCircle(in context: CGContext, name: String,
-                                    center: CGPoint, diameter: CGFloat, rect: CGRect) {
-        let bgColor = avatarBackgroundColor(for: name)
-
-        let inset = AvatarMetrics.borderWidth / 2
-        let insetRect = rect.insetBy(dx: inset, dy: inset)
-        let insetPath = UIBezierPath(ovalIn: insetRect)
-
-        bgColor.setFill()
-        insetPath.fill()
-        context.setShadow(offset: .zero, blur: 0)
-
-        if let borderColor = bgColor.darker(by: 1) {
-            borderColor.setStroke()
-            insetPath.lineWidth = AvatarMetrics.borderWidth
-            insetPath.stroke()
-        }
-
-        if !name.isSHA1() && !name.isEmpty {
-            let fontSize = AvatarMetrics.monogramFontSize(for: diameter)
-            let letter = String(name.prefix(1)).uppercased()
-            let font = UIFont.systemFont(ofSize: fontSize, weight: .semibold)
-            let attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.white]
-            let textSize = letter.size(withAttributes: attrs)
-            letter.draw(at: CGPoint(x: center.x - textSize.width / 2,
-                                    y: center.y - textSize.height / 2),
-                        withAttributes: attrs)
-        } else {
-            let iconSize = AvatarMetrics.iconSize(for: diameter)
-            let config = UIImage.SymbolConfiguration(pointSize: iconSize, weight: .semibold)
-            if let icon = UIImage(systemName: "person.fill", withConfiguration: config)?
-                .withTintColor(.white, renderingMode: .alwaysOriginal) {
-                icon.draw(at: CGPoint(x: center.x - icon.size.width / 2,
-                                      y: center.y - icon.size.height / 2))
-            }
-        }
-    }
-
-    private func drawOverflowBadge(in context: CGContext, center: CGPoint, size: CGFloat,
-                                   count: Int, shadowRadius: CGFloat, shadowY: CGFloat) {
-        let rect = CGRect(x: center.x - size / 2, y: center.y - size / 2, width: size, height: size)
-        let path = UIBezierPath(ovalIn: rect)
-
-        context.saveGState()
-        context.setShadow(offset: CGSize(width: 0, height: shadowY), blur: shadowRadius,
-                     color: UIColor.black.withAlphaComponent(AvatarMetrics.shadowAlpha).cgColor)
-        UIColor.systemGray3.setFill()
-        path.fill()
-        context.setShadow(offset: .zero, blur: 0)
-
-        let text = "+\(count)"
-        let font = UIFont.systemFont(ofSize: AvatarMetrics.monogramFontSize(for: size), weight: .semibold)
-        let attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.white]
-        let textSize = text.size(withAttributes: attrs)
-        text.draw(at: CGPoint(x: center.x - textSize.width / 2,
-                              y: center.y - textSize.height / 2),
-                  withAttributes: attrs)
-        context.restoreGState()
-    }
-
-    private func renderEmptyGroupIcon(totalSize: CGFloat) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: CGSize(width: totalSize, height: totalSize))
-        return renderer.image { _ in
-            let bounds = CGRect(x: 0, y: 0, width: totalSize, height: totalSize)
-            let center = CGPoint(x: totalSize / 2, y: totalSize / 2)
-            let path = UIBezierPath(ovalIn: bounds)
-
-            avatarColors[0].setFill()
-            path.fill()
-            if let borderColor = avatarColors[0].darker(by: 1) {
-                borderColor.setStroke()
-                path.lineWidth = AvatarMetrics.borderWidth
-                path.stroke()
-            }
-
-            let config = UIImage.SymbolConfiguration(pointSize: AvatarMetrics.iconSize(for: totalSize), weight: .semibold)
-            if let icon = UIImage(systemName: "person.2.fill", withConfiguration: config)?
-                .withTintColor(.white, renderingMode: .alwaysOriginal) {
-                icon.draw(at: CGPoint(x: center.x - icon.size.width / 2,
-                                      y: center.y - icon.size.height / 2))
-            }
-        }
+        groupAvatarSnapshot = GroupAvatarRenderer.render(
+            members: members,
+            overflowCount: overflowCount,
+            totalSize: size.points
+        )
     }
 
     private func avatarPriority(_ participant: ParticipantInfo) -> Int {
