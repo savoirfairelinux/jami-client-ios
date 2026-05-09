@@ -423,56 +423,93 @@ public final class AdapterService: AdapterDelegate {
 
         guard let members = adapter?.getConversationMembers(accountId, conversationId: conversationId),
               !members.isEmpty else {
-            let fallbackName = conversationId
-            return .just((fallbackName, .jamiid))
+            return .just((conversationId, .jamiid))
         }
 
         guard let accountDetails = adapter?.getAccountDetails(accountId),
               let username = accountDetails["Account.username"] as? String else {
-            let fallbackName = conversationId
-            return .just((fallbackName, .jamiid))
+            return .just((conversationId, .jamiid))
         }
 
-        let jamiId = ProfilePathHelper.jamiHash(from: username)
-        let filteredMembers = members.filter { member in
+        let selfJamiId = ProfilePathHelper.jamiHash(from: username)
+        let mode = conversationInfo?["mode"].flatMap { Int($0) } ?? 0
+        let isGroup = mode > 0
+
+        if !isGroup {
+            return buildCoreDialogName(members: members, selfJamiId: selfJamiId, accountId: accountId)
+        }
+
+        return buildGroupName(members: members, selfJamiId: selfJamiId, accountId: accountId, totalMemberCount: members.count)
+    }
+
+    private func buildCoreDialogName(members: [[String: String]], selfJamiId: String, accountId: String) -> Single<(name: String, avatarType: AvatarType)> {
+        guard let otherMember = members.first(where: { member in
             guard let uri = member["uri"] else { return false }
-            return ProfilePathHelper.jamiHash(from: uri) != jamiId
+            return ProfilePathHelper.jamiHash(from: uri) != selfJamiId
+        }), let address = otherMember["uri"] else {
+            return .just((selfJamiId, .jamiid))
         }
 
-        let nameLookups: [Single<(String, Bool)>] = filteredMembers.compactMap { [weak self] member in
+        let profileName = contactProfileName(accountId: accountId, contactId: address, type: "conversation") ?? ""
+        if !profileName.isEmpty {
+            return .just((profileName, .single))
+        }
+
+        return lookupUsername(accountId: accountId, address: address)
+            .map { response in
+                let name = (response.state == .found && !(response.name?.isEmpty ?? true)) ? response.name! : address
+                let isAddress = name == address
+                return (name, isAddress ? .jamiid : .single)
+            }
+    }
+
+    private func buildGroupName(members: [[String: String]], selfJamiId: String, accountId: String, totalMemberCount: Int) -> Single<(name: String, avatarType: AvatarType)> {
+        let selfSuffix = " (\(L10n.Conversation.yourself))"
+
+        let nameLookups: [Single<String>] = members.compactMap { [weak self] member in
             guard let address = member["uri"] else { return nil }
+            let isSelf = ProfilePathHelper.jamiHash(from: address) == selfJamiId
+
+            if isSelf {
+                let selfName = self?.contactProfileName(accountId: accountId, contactId: accountId, type: "account") ?? ""
+                if !selfName.isEmpty {
+                    return .just(selfName + selfSuffix)
+                }
+                return self?.lookupUsername(accountId: accountId, address: address)
+                    .map { response in
+                        let name = (response.state == .found && !(response.name?.isEmpty ?? true)) ? response.name! : address
+                        return name + selfSuffix
+                    }
+            }
 
             let profileName = self?.contactProfileName(accountId: accountId, contactId: address, type: "conversation") ?? ""
             if !profileName.isEmpty {
-                return .just((profileName, false))
+                return .just(profileName)
             }
 
             return self?.lookupUsername(accountId: accountId, address: address)
                 .map { response in
-                    let nameFromLookup = (response.state == .found && !(response.name?.isEmpty ?? true)) ? response.name! : nil
-                    let resolvedName = nameFromLookup ?? address
-                    let isAddress = resolvedName == address
-                    return (resolvedName, isAddress)
+                    (response.state == .found && !(response.name?.isEmpty ?? true)) ? response.name! : address
                 }
         }
 
         guard !nameLookups.isEmpty else {
-            let fallbackName = conversationId
-            return .just((fallbackName, .jamiid))
+            return .just(("", .group))
         }
 
         return Single.zip(nameLookups)
-            .map { nameIsAddressPairs in
-                let names = nameIsAddressPairs.map { $0.0 }.filter { !$0.isEmpty }.joined(separator: ", ")
+            .map { names in
+                var uniqueSet = Set<String>()
+                let uniqueNames = names
+                    .filter { !$0.isEmpty && uniqueSet.insert($0).inserted }
+                    .sorted { $0.count < $1.count }
 
-                let avatarType: AvatarType
-                if nameIsAddressPairs.count == 1 {
-                    avatarType = nameIsAddressPairs.first!.1 ? .jamiid : .single
-                } else {
-                    avatarType = .group
-                }
+                let displayCount = min(uniqueNames.count, 3)
+                let displayedNames = uniqueNames.prefix(displayCount).joined(separator: ", ")
+                let othersCount = max(totalMemberCount - displayCount, 0)
+                let name = othersCount > 0 ? "\(displayedNames), + \(othersCount)" : displayedNames
 
-                return (names, avatarType)
+                return (name, AvatarType.group)
             }
     }
 
@@ -483,6 +520,9 @@ public final class AdapterService: AdapterDelegate {
         if let baseAvatar = baseAvatar, !baseAvatar.isEmpty {
             return .just(baseAvatar)
         }
+
+        let mode = conversationInfo?["mode"].flatMap { Int($0) } ?? 0
+        guard mode == 0 else { return .just(nil) }
 
         guard let members = adapter?.getConversationMembers(accountId, conversationId: conversationId),
               !members.isEmpty else {
@@ -495,13 +535,12 @@ public final class AdapterService: AdapterDelegate {
         }
 
         let jamiId = ProfilePathHelper.jamiHash(from: username)
-        let filteredMembers = members.filter { member in
+        let otherMember = members.first { member in
             guard let uri = member["uri"] else { return false }
             return ProfilePathHelper.jamiHash(from: uri) != jamiId
         }
 
-        guard filteredMembers.count == 1,
-              let address = filteredMembers.first?["uri"] else {
+        guard let address = otherMember?["uri"] else {
             return .just(nil)
         }
 
@@ -512,6 +551,81 @@ public final class AdapterService: AdapterDelegate {
             }
             return Disposables.create()
         }
+    }
+
+    func getGroupMemberProfiles(accountId: String, conversationId: String) -> Single<(members: [GroupAvatarMember], overflowCount: Int)> {
+        let conversationInfo = adapter?.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String]
+        let mode = conversationInfo?["mode"].flatMap { Int($0) } ?? 0
+        guard mode > 0 else { return .just(([], 0)) }
+
+        guard let members = adapter?.getConversationMembers(accountId, conversationId: conversationId),
+              !members.isEmpty else {
+            return .just(([], 0))
+        }
+
+        guard let accountDetails = adapter?.getAccountDetails(accountId),
+              let username = accountDetails["Account.username"] as? String else {
+            return .just(([], 0))
+        }
+
+        let selfJamiId = ProfilePathHelper.jamiHash(from: username)
+
+        struct MemberProfile {
+            let address: String
+            let role: String?
+            let isSelf: Bool
+            let photo: String?
+            let name: String?
+        }
+
+        let profiles: [MemberProfile] = members.compactMap { member in
+            guard let address = member["uri"] else { return nil }
+            let isSelf = ProfilePathHelper.jamiHash(from: address) == selfJamiId
+            let type = isSelf ? "account" : "conversation"
+            let contactId = isSelf ? accountId : address
+            let photo = self.contactProfileAvatar(accountId: accountId, contactId: contactId, type: type)
+            let name = self.contactProfileName(accountId: accountId, contactId: contactId, type: type)
+            return MemberProfile(address: address, role: member["role"], isSelf: isSelf, photo: photo, name: name)
+        }
+
+        let candidates = profiles.map { profile in
+            GroupAvatarCandidate(
+                member: GroupAvatarMember.resolve(
+                    profilePhoto: profile.photo,
+                    profileName: profile.name,
+                    registeredName: nil,
+                    jamiId: profile.address
+                ),
+                role: profile.role
+            )
+        }
+        let selection = GroupAvatarRenderer.selectForDisplay(from: candidates)
+
+        let selectedProfiles = selection.selectedIndices.map { profiles[$0] }
+
+        let memberLookups: [Single<GroupAvatarMember>] = zip(selectedProfiles, selection.members).map { [weak self] profile, member in
+            if member.image != nil || (!isJamiHashId(member.name) && !member.name.isEmpty) {
+                return .just(member)
+            }
+
+            guard let self = self else {
+                return .just(member)
+            }
+            return self.lookupUsername(accountId: accountId, address: profile.address)
+                .map { response in
+                    let registeredName = (response.state == .found && !(response.name?.isEmpty ?? true)) ? response.name : nil
+                    return GroupAvatarMember.resolve(
+                        profilePhoto: profile.photo,
+                        profileName: profile.name,
+                        registeredName: registeredName,
+                        jamiId: profile.address
+                    )
+                }
+        }
+
+        let overflowCount = selection.overflowCount
+        guard !memberLookups.isEmpty else { return .just(([], 0)) }
+        return Single.zip(memberLookups).map { (members: $0, overflowCount: overflowCount) }
     }
 
     func registrationStateChanged(for accountId: String, state: String) {
