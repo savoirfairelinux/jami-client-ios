@@ -76,6 +76,8 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     internal let disposeBag = DisposeBag()
 
+    private var conversationBindingsDisposeBag = DisposeBag()
+
     func closeAllPlayers() {
         self.swiftUIModel.transferHelper.closeAllPlayers()
     }
@@ -249,6 +251,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     var conversation: ConversationModel! {
         didSet {
+            conversationBindingsDisposeBag = DisposeBag()
+            swarmInfo = nil
+
             self.subscribeUnreadMessages()
             self.swiftUIModel.conversation = conversation
 
@@ -307,7 +312,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 }
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
     }
 
     private func subscribeConversationReady() {
@@ -325,7 +330,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 }
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
     }
 
     func shouldCreateSwarmInfo() -> Bool {
@@ -342,28 +347,28 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 }
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
         newSwarmInfo.title.share()
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] name in
                 self?.displayName.accept(name)
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
         newSwarmInfo.participantsString.share()
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] name in
                 self?.userName.accept(name)
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
         newSwarmInfo.conversationEnded
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] isEnded in
                 self?.swiftUIModel.isConversationEnded = isEnded
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
         self.avatarProvider = AvatarProvider.from(
             swarmInfo: newSwarmInfo,
             profileService: self.injectionBag.profileService,
@@ -391,7 +396,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 }
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
     }
 
     // Add the matches method to handle filtering logic
@@ -688,14 +693,16 @@ extension ConversationViewModel {
                         print("Error observing presence updates: \(error)")
                     }
                 )
-                .disposed(by: self.disposeBag)
+                .disposed(by: conversationBindingsDisposeBag)
         }
     }
 
     private func subscribeToContactAdded() {
         self.contactsService.sharedResponseStream
-            .filter { $0.eventType == .contactAdded &&
-                $0.getEventInput(.conversationId) == self.conversation.id
+            .filter { [weak self] event in
+                guard let self = self else { return false }
+                return event.eventType == .contactAdded &&
+                    event.getEventInput(.conversationId) == self.conversation.id
             }
             .take(1)
             .subscribe(onNext: { [weak self] event in
@@ -704,7 +711,7 @@ extension ConversationViewModel {
                       self.isCoreConversationWith(jamiId: peerUri) else { return }
                 self.setupPresence()
             })
-            .disposed(by: disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
     }
 
     private func subscribeUnreadMessages() {
@@ -715,7 +722,7 @@ extension ConversationViewModel {
                 self.unreadMessages = unreadMessages
             } onError: { _ in
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
     }
 
     private func subscribePresence() {
@@ -747,7 +754,7 @@ extension ConversationViewModel {
                     self?.userName.accept(address)
                 }
             })
-            .disposed(by: disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
     }
 }
 
@@ -799,7 +806,7 @@ extension ConversationViewModel {
                     self.showIncomingLocationSharing.accept(false)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
 
         self.locationSharingService.currentLocation
             .subscribe(onNext: { [weak self] myCurrentLocation in
@@ -811,7 +818,7 @@ extension ConversationViewModel {
                     self.showOutgoingLocationSharing.accept(false)
                 }
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: conversationBindingsDisposeBag)
     }
 }
 
