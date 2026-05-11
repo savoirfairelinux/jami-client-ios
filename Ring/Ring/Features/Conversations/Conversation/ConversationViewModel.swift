@@ -663,7 +663,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 extension ConversationViewModel {
 
     private func setupPresence() {
-        if !self.conversation.isDialog() {
+        if !self.conversation.isCoredialog() {
             return
         }
 
@@ -723,16 +723,6 @@ extension ConversationViewModel {
             } onError: { _ in
             }
             .disposed(by: conversationBindingsDisposeBag)
-    }
-
-    private func subscribePresence() {
-        guard let jamiId = self.conversation.getParticipants().first?.jamiId, self.conversation.isDialog() else { return }
-        if let contactPresence = self.presenceService
-            .getSubscriptionsForContact(contactId: jamiId) {
-            self.contactPresence = contactPresence
-        } else {
-            self.contactPresence.accept(.offline)
-        }
     }
 
     private func subscribeUserServiceLookupStatus() {

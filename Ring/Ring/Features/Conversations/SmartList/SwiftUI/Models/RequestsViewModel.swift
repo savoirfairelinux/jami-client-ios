@@ -557,7 +557,7 @@ class RequestsViewModel: ObservableObject {
 
     func accept(requestRow: RequestRowViewModel) {
         processRequest(requestRow, action: .accept) {
-            if requestRow.request.isDialog(), let jamiId = requestRow.request.participants.first?.jamiId {
+            if requestRow.request.isCoredialog(), let jamiId = requestRow.request.participants.first?.jamiId {
                 self.presenceService.subscribeBuddy(withAccountId: requestRow.request.accountId, withJamiId: jamiId, withFlag: true)
             }
         }
