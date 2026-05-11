@@ -404,6 +404,17 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
+
+        self.conversationsService
+            .conversationReady
+            .filter { [weak self] id in !id.isEmpty && id == self?.conversation?.id }
+            .subscribe { [weak self] _ in
+                DispatchQueue.global(qos: .background).async {
+                    self?.updateParticipants()
+                }
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
     }
 
     private func updateInfo() {
