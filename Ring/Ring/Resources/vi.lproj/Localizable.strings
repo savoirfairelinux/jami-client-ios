@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Register";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.createPassword" = "Set password";
 "accountPage.changePassword" = "Thay đổi mật khẩu";
 "accountPage.currentPasswordPlaceholder" = "Nhập mật khẩu hiện tại";
 "accountPage.newPasswordPlaceholder" = "Nhập mật khẩu mới";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Nhập tên hiển thị";
 "accountPage.editProfile" = "Sửa hồ sơ";
 "accountPage.manageAccount" = "Quản lý tài khoản";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "Mật khẩu";
+"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Mật khẩu không khớp.";
-"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Các thiết bị liên kết";
 "accountPage.unlink" = "Unlink";

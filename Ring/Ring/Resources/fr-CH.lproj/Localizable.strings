@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Enregistrer";
 "accountPage.usernameRegistrationFailedTitle" = "L'enregistrement a échoué";
 "accountPage.usernameRegistrationFailed" = "Vérifier votre mot de passe.";
-"accountPage.createPassword" = "Protéger le compte par mot de passe";
+"accountPage.createPassword" = "Définir un mot de passe";
 "accountPage.changePassword" = "Changer mot de passe";
 "accountPage.currentPasswordPlaceholder" = "Entrez le mot de passe actuel";
 "accountPage.newPasswordPlaceholder" = "Entrer le nouveau mot de passe";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Entrer le nom du profile";
 "accountPage.editProfile" = "Éditer votre profile";
 "accountPage.manageAccount" = "Gérer votre compte";
-"accountPage.encryptAccount" = "Protéger le compte par mot de passe";
-"accountPage.passwordExplanation" = "Un compte Jami est créé et stocké localement uniquement sur cet appareil, sous la forme d'une archive contenant les clés de votre compte. L'accès à cette archive peut éventuellement être protégé par un mot de passe.";
+"accountPage.encryptAccount" = "Mot de passe";
+"accountPage.passwordExplanation" = "Votre compte Jami est enregistré uniquement sur cet appareil en tant qu'archive contenant les clés de votre compte. L'accès à cette archive peut être protégé par un mot de passe.";
 "accountPage.passwordsDoNotMatch" = "Les mots de passe ne correspondent pas.";
-"accountPage.passwordCreated" = "Mot de passe créé";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Mot de passe modifié";
 "accountPage.linkedDevices" = "Appareils liés";
 "accountPage.unlink" = "Déassocier";

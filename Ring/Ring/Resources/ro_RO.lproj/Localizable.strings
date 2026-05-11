@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Înscrie-te";
 "accountPage.usernameRegistrationFailedTitle" = "Înscrierea nu a reușit";
 "accountPage.usernameRegistrationFailed" = "Verifică parola contului";
-"accountPage.createPassword" = "Cont protejat cu parolă";
+"accountPage.createPassword" = "Alege parola";
 "accountPage.changePassword" = "Schimbă parola";
 "accountPage.currentPasswordPlaceholder" = "Introdu parola actuală";
 "accountPage.newPasswordPlaceholder" = "Introdu parola nouă";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Introdu numele profilului";
 "accountPage.editProfile" = "Modifică profilul";
 "accountPage.manageAccount" = "Gestionează contul";
-"accountPage.encryptAccount" = "Cont protejat cu parolă";
-"accountPage.passwordExplanation" = "Un cont Jami este creat și stocat local numai în acest aparat, sub forma unei arhive care conține cheile contului. Accesul la această arhivă poate fi protejat facultativ cu o parolă.";
+"accountPage.encryptAccount" = "Parola";
+"accountPage.passwordExplanation" = "Contul tău Jami este înregistrat doar în acest aparat ca o arhivă care conține cheile contului tău. Accesul la această arhivă poate fi protejat cu o parolă.";
 "accountPage.passwordsDoNotMatch" = "Parolele nu se potrivesc.";
-"accountPage.passwordCreated" = "Parolă creată";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Parolă actualizată";
 "accountPage.linkedDevices" = "Aparate asociate";
 "accountPage.unlink" = "Elimină";

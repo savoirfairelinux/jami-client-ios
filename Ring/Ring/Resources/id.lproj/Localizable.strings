@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Daftar";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.createPassword" = "Atur kata sandi";
 "accountPage.changePassword" = "Ubah kata sandi";
 "accountPage.currentPasswordPlaceholder" = "Masukkan kata sandi saat ini";
 "accountPage.newPasswordPlaceholder" = "Masukan kata sandi baru";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Mengelola akun";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "Kata sandi";
+"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
-"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Perangkat yang terhubung";
 "accountPage.unlink" = "Unlink";

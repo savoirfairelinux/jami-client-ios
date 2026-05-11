@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Registruoti";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.createPassword" = "Nustatyti slaptažodį";
 "accountPage.changePassword" = "Pakeisti slaptažodį";
 "accountPage.currentPasswordPlaceholder" = "Įveskite dabartinį slaptažodį";
 "accountPage.newPasswordPlaceholder" = "Įveskite naują slaptažodį";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Įveskite profilio pavadinimą";
 "accountPage.editProfile" = "Taisyti profilį";
 "accountPage.manageAccount" = "Tvarkyti paskyrą";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "Slaptažodis";
+"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Slaptažodžiai nesutampa.";
-"accountPage.passwordCreated" = "Slaptažodis sukurtas";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Slaptažodis atnaujintas";
 "accountPage.linkedDevices" = "Susieti įrenginiai";
 "accountPage.unlink" = "Atsieti";

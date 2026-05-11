@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Registrer";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.createPassword" = "Set password";
 "accountPage.changePassword" = "Endra passord";
 "accountPage.currentPasswordPlaceholder" = "Skriv inn gjeldende passord";
 "accountPage.newPasswordPlaceholder" = "Skriv inn nytt passord";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Ta styr på kontoen";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "Passord";
+"accountPage.passwordExplanation" = "Kontoen din på Jami er berre registrert på denne eininga, likt eit arkiv som inneheld nyklane til kontoen din. Tilgjenge til dette arkivet kan ein verna med eit passord.";
 "accountPage.passwordsDoNotMatch" = "Passorda er ikkje like.";
-"accountPage.passwordCreated" = "Oppretta passord";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Oppdaterte passord";
 "accountPage.linkedDevices" = "Kopplande utstyr";
 "accountPage.unlink" = "Unlink";

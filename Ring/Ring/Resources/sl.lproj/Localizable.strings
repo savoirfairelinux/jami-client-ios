@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Registriraj";
 "accountPage.usernameRegistrationFailedTitle" = "Registracija je spodletela";
 "accountPage.usernameRegistrationFailed" = "Preverite geslo računa.";
-"accountPage.createPassword" = "Zaščitite račun z geslom";
+"accountPage.createPassword" = "Določi geslo";
 "accountPage.changePassword" = "Spremeni geslo";
 "accountPage.currentPasswordPlaceholder" = "Vnesite trenutno geslo";
 "accountPage.newPasswordPlaceholder" = "Vnesite novo geslo";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Vnesite ime profila";
 "accountPage.editProfile" = "Uredi profil";
 "accountPage.manageAccount" = "Upravljanje računa";
-"accountPage.encryptAccount" = "Zaščitite račun z geslom";
-"accountPage.passwordExplanation" = "Račun Jami je ustvarjen in hranjen krajevno samo na tej napravi, kot arhiv, ki vsebuje ključe vašega računa. Dostop do arhiva lahko dodatno zaščitite z geslom.";
+"accountPage.encryptAccount" = "Geslo";
+"accountPage.passwordExplanation" = "Vaš račun Jami je registriran samo na tej napravi kot arhiv, ki vsebuje ključe vašega računa. Dostop do tega arhiva lahko zaščitite z geslom.";
 "accountPage.passwordsDoNotMatch" = "Gesli se ne ujemata.";
-"accountPage.passwordCreated" = "Geslo ustvarjeno";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Geslo posodobljeno";
 "accountPage.linkedDevices" = "Povezane naprave";
 "accountPage.unlink" = "Odstrani povezavo";

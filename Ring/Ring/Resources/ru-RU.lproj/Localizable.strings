@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Зарегистрировать";
 "accountPage.usernameRegistrationFailedTitle" = "Не удалось зарегистрироваться";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.createPassword" = "Задать пароль";
 "accountPage.changePassword" = "Изменить пароль";
 "accountPage.currentPasswordPlaceholder" = "Введите текущий пароль";
 "accountPage.newPasswordPlaceholder" = "Введите новый пароль";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Введите имя профиля";
 "accountPage.editProfile" = "Редактировать профиль";
 "accountPage.manageAccount" = "Учетные записи";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "Пароль";
+"accountPage.passwordExplanation" = "Ваш аккаунт Jami зарегистрирован только на этом устройстве как архив, содержащий ключи вашего аккаунта. Доступ к этому архиву можно защитить паролем.";
 "accountPage.passwordsDoNotMatch" = "Пароли не совпадают.";
-"accountPage.passwordCreated" = "Пароль создан";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Пароль обновлен";
 "accountPage.linkedDevices" = "Привязанные устройства";
 "accountPage.unlink" = "Отвязать";

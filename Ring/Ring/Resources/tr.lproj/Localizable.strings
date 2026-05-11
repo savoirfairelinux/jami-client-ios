@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Kaydol";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Lütfen hesap parolanı kontrol ed.";
-"accountPage.createPassword" = "Parola korumalı hesap";
+"accountPage.createPassword" = "Parola ayarla";
 "accountPage.changePassword" = "Parolayı değiştir";
 "accountPage.currentPasswordPlaceholder" = "Güncel parolayı gir";
 "accountPage.newPasswordPlaceholder" = "Yeni parolayı gir";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Hesabı yönet";
-"accountPage.encryptAccount" = "Parola korumalı hesap";
-"accountPage.passwordExplanation" = "Jami hesabı, hesap anahtarlarını içeren bir arşiv olarak yalnızca bu aygıtta yerel olarak oluşturulur ve saklanır. Bu arşive erişim isteğe bağlı olarak parola ile korunabilir.";
+"accountPage.encryptAccount" = "Parola";
+"accountPage.passwordExplanation" = "Jami hesabı yalnızca bu aygıtta hesabının anahtarlarını içeren bir arşiv olarak kayıtlı. Bu arşive erişim parola ile korunabilir.";
 "accountPage.passwordsDoNotMatch" = "Parolalar eşleşmiyor";
-"accountPage.passwordCreated" = "Parola oluşturuldu";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Parola güncellendi";
 "accountPage.linkedDevices" = "Bağlı Aygıtlar";
 "accountPage.unlink" = "Unlink";

@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Regisztráció";
 "accountPage.usernameRegistrationFailedTitle" = "Bejegyeztetés hiba";
 "accountPage.usernameRegistrationFailed" = "Kérjük, ellenőrizze a fiók jelszavát.";
-"accountPage.createPassword" = "Jelszóval védett fiók";
+"accountPage.createPassword" = "Jelszó beállítása";
 "accountPage.changePassword" = "Jelszó megváltoztatása";
 "accountPage.currentPasswordPlaceholder" = "Jelenlegi jelszó megadása";
 "accountPage.newPasswordPlaceholder" = "Új jelszó megadása";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Névjegynév megadása";
 "accountPage.editProfile" = "Névjegy szerkesztése";
 "accountPage.manageAccount" = "Fiókkezelés";
-"accountPage.encryptAccount" = "Jelszóval védett fiók";
-"accountPage.passwordExplanation" = "A Jami-fiók csak helyileg jön létre és tárolódik ezen az eszközön a fiókkulcsokat tartalmazó archívumként. Az archívumhoz való hozzáférés választható jelszóval védhető.";
+"accountPage.encryptAccount" = "Jelszó";
+"accountPage.passwordExplanation" = "Ez a Jami-fiók csak ezen az eszközön van regisztrálva a fiók kulcsait tartalmazó archívumként. Az archívumhoz való hozzáférés jelszóval védhető.";
 "accountPage.passwordsDoNotMatch" = "A jelszavak nem egyeznek.";
-"accountPage.passwordCreated" = "Jelszó létrehozva";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Jelszó frissítve";
 "accountPage.linkedDevices" = "Összekapcsolt eszközök";
 "accountPage.unlink" = "Leválasztás";

@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "నమోదు";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.createPassword" = "Set password";
 "accountPage.changePassword" = "పాస్వర్డ్ మార్చు";
 "accountPage.currentPasswordPlaceholder" = "ప్రస్తుత పాస్వర్డ్ను నమోదు చేయండి";
 "accountPage.newPasswordPlaceholder" = "కొత్త పాస్వర్డ్ను నమోదు చేయండి";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "ఖాతాను నిర్వహించండి";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "పాస్వర్డ్";
+"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
-"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "లింక్ చేయబడిన పరికరాలు";
 "accountPage.unlink" = "Unlink";

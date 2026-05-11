@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Regjistrohuni";
 "accountPage.usernameRegistrationFailedTitle" = "Regjistrimi dështoi";
 "accountPage.usernameRegistrationFailed" = "Ju lutemi, kontrolloni fjalëkalimin e llogarisë.";
-"accountPage.createPassword" = "Llogari e mbrojtur me fjalëkalim";
+"accountPage.createPassword" = "Caktoni fjalëkalimin";
 "accountPage.changePassword" = "Ndryshoni fjalëkalimin";
 "accountPage.currentPasswordPlaceholder" = "Jepni fjalëkalimin e tanishëm";
 "accountPage.newPasswordPlaceholder" = "Jepni fjalëkalimin e ri";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Jepni emër profili";
 "accountPage.editProfile" = "Përpunoni Profil";
 "accountPage.manageAccount" = "Administroni llogari";
-"accountPage.encryptAccount" = "Llogari e mbrojtur me fjalëkalim";
-"accountPage.passwordExplanation" = "Një llogari Jami krijohet dhe depozitohet lokalisht vetëm në këtë pajisje, si një arkiv që përmban kyçet e veta të llogarisë. Hyrja në arkiv, në daçi, mund të mbrohet me fjalëkalim.";
+"accountPage.encryptAccount" = "Fjalëkalim";
+"accountPage.passwordExplanation" = "Llogaria juaj Jami është regjistruar vetëm në këtë pajisje si një arkiv që përmban kyçet për llogarinë tuaj. Hyrja te ky arkiv mund të mbrohet me një fjalëkalim.";
 "accountPage.passwordsDoNotMatch" = "Fjalëkalimet nuk përputhen.";
-"accountPage.passwordCreated" = "U krijua fjalëkalim";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "U përditësua fjalëkalim";
 "accountPage.linkedDevices" = "Pajisje të lidhura";
 "accountPage.unlink" = "Hiqe lidhjen";

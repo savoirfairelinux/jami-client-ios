@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "注册";
 "accountPage.usernameRegistrationFailedTitle" = "注册失败";
 "accountPage.usernameRegistrationFailed" = "请检查您的账户密码。";
-"accountPage.createPassword" = "密码保护账户";
+"accountPage.createPassword" = "设置密码";
 "accountPage.changePassword" = "更改密码";
 "accountPage.currentPasswordPlaceholder" = "输入当前密码";
 "accountPage.newPasswordPlaceholder" = "输入新密码";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "输入账户名";
 "accountPage.editProfile" = "编辑个人资料";
 "accountPage.manageAccount" = "管理账户";
-"accountPage.encryptAccount" = "密码保护账户";
-"accountPage.passwordExplanation" = "新建的 Jami 账户与其密钥仅作为一个归档存储在此设备上。可以选用密码来保护对该归档的访问。";
+"accountPage.encryptAccount" = "密码";
+"accountPage.passwordExplanation" = "您的 Jami 帐户仅在此设备上注册，作为包含帐户密钥的存档。可以使用密码保护对该存档的访问。";
 "accountPage.passwordsDoNotMatch" = "密码不匹配。";
-"accountPage.passwordCreated" = "密码已设置";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "密码已更新<br>";
 "accountPage.linkedDevices" = "关联设备";
 "accountPage.unlink" = "取消关联";

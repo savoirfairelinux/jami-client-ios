@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Registreeri";
 "accountPage.usernameRegistrationFailedTitle" = "Registreerumine ei õnnestunud";
 "accountPage.usernameRegistrationFailed" = "Palun kontrolli oma kasutajakonto salasõna õigsust";
-"accountPage.createPassword" = "Kaitse kasutajakontot salasõnaga";
+"accountPage.createPassword" = "Sisesta salasõna";
 "accountPage.changePassword" = "Muuda salasõna";
 "accountPage.currentPasswordPlaceholder" = "Sisesta praegune salasõna";
 "accountPage.newPasswordPlaceholder" = "Sisesta uus salasõna";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Sisesta profiili nimi";
 "accountPage.editProfile" = "Muuda profiili";
 "accountPage.manageAccount" = "Halda kasutajakontot";
-"accountPage.encryptAccount" = "Kaitse kasutajakontot salasõnaga";
-"accountPage.passwordExplanation" = "Jami kasutajakonto on registreeritud ja salvestatud vaid selles nutiseadmes ja olemuselt on tegemist arhiiviga, kus leiduvad sinu krüptovõtmed. Ligipääsu sellele arhiivile saad soovi korral turvata salasõnaga.";
+"accountPage.encryptAccount" = "Password";
+"accountPage.passwordExplanation" = "Sinu Jami kasutajakonto on registreeritud vaid selles nutiseadmes ja olemuselt on tegemist arhiiviga, kus leiduvad sinu krüptovõtmed. Ligipääsu sellele arhiivile saad turvata salasõnaga.";
 "accountPage.passwordsDoNotMatch" = "Salasõnad ei klapi.";
-"accountPage.passwordCreated" = "Salasõna on loodud";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Salasõna on uuendatud";
 "accountPage.linkedDevices" = "Seotud seadmed";
 "accountPage.unlink" = "Eemalda seotud seade";

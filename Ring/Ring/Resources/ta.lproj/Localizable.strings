@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "பதிவு";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.createPassword" = "Set password";
 "accountPage.changePassword" = "கடவுச்சொல்லை மாற்றவும்";
 "accountPage.currentPasswordPlaceholder" = "தற்போதைய கடவுச்சொல்லை உள்ளிடவும்";
 "accountPage.newPasswordPlaceholder" = "புதிய கடவுச்சொல்லை உள்ளிடவும்";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "கணக்கை நிர்வகிக்கவும்";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "கடவுச்சொல்";
+"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
-"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "இணைக்கப்பட்ட சாதனங்கள்";
 "accountPage.unlink" = "Unlink";

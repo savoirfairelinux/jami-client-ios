@@ -367,7 +367,7 @@
 "accountPage.usernameRegisterAction" = "Registruj se";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Password protect account";
+"accountPage.createPassword" = "Set password";
 "accountPage.changePassword" = "Promeni lozinku";
 "accountPage.currentPasswordPlaceholder" = "Unesi trenutnu lozinku";
 "accountPage.newPasswordPlaceholder" = "Unesi novu lozinku";
@@ -399,10 +399,10 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Upravljajte nalogom";
-"accountPage.encryptAccount" = "Password protect account";
-"accountPage.passwordExplanation" = "A Jami account is created and stored locally only on this device as an archive containing its account keys. Access to the archive can optionally be password protected.";
+"accountPage.encryptAccount" = "Lozinka";
+"accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Лозинке се не поклапају.";
-"accountPage.passwordCreated" = "Lozinka kreirana";
+"accountPage.passwordCreated" = "Password set";
 "accountPage.passwordUpdated" = "Password updated";
 "accountPage.linkedDevices" = "Povezani uređaji";
 "accountPage.unlink" = "Unlink";
