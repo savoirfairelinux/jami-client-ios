@@ -74,6 +74,7 @@ struct MessagesListView: View {
     @SwiftUI.State private var showReactionsView = false
 
     @SwiftUI.State private var dotCount = 0
+    @SwiftUI.State private var syncPhase = 0
     private let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
 
     init(model: MessagesListVM) {
@@ -179,9 +180,8 @@ struct MessagesListView: View {
             }
 
             if model.isSyncing {
-                syncView()
+                syncEmptyStateView()
             }
-
             if model.isBlocked {
                 blockView()
             }
@@ -379,14 +379,53 @@ struct MessagesListView: View {
         }
     }
 
-    func syncView() -> some View {
-        VStack {
-            Text(model.syncMessage)
-                .frame(maxWidth: .infinity)
-                .multilineTextAlignment(.center)
+    private func syncEmptyStateView() -> some View {
+        let iconSize: CGFloat = 60
+        let symbolSize: CGFloat = 26
+        let outerSpacing: CGFloat = 16
+        let textSpacing: CGFloat = 7
+        let dotSize: CGFloat = 7
+        let dotSpacing: CGFloat = 6
+        let dotsPadding: CGFloat = 4
+        let textHPadding: CGFloat = 48
+        let dotOpacities: [Double] = [1.0, 0.55, 0.25]
+        return VStack(spacing: outerSpacing) {
+            Spacer()
+            Circle()
+                .fill(Color.jami)
+                .frame(width: iconSize, height: iconSize)
+                .overlay(
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                        .font(.system(size: symbolSize))
+                        .foregroundColor(.white)
+                )
+            VStack(spacing: textSpacing) {
+                Text(L10n.Conversation.syncingTitle)
+                    .font(.body.weight(.semibold))
+                    .foregroundColor(Color(UIColor.label))
+                Text(model.syncMessage)
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.horizontal, textHPadding)
+            HStack(spacing: dotSpacing) {
+                ForEach(0..<3, id: \.self) { index in
+                    Circle()
+                        .fill(Color.jami)
+                        .frame(width: dotSize, height: dotSize)
+                        .opacity(dotOpacities[(index - syncPhase + 3) % 3])
+                        .animation(.easeInOut(duration: 0.4), value: syncPhase)
+                }
+            }
+            .padding(.top, dotsPadding)
+            Spacer()
         }
-        .padding()
-        .background(Color(UIColor.secondarySystemBackground))
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(UIColor.systemBackground))
+        .onReceive(timer) { _ in
+            syncPhase = (syncPhase + 1) % 3
+        }
     }
 
     func blockView() -> some View {

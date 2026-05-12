@@ -706,6 +706,8 @@ internal enum L10n {
     }
     /// You have accepted the conversation invitation.
     internal static let synchronizationTitle = L10n.tr("Localizable", "conversation.synchronizationTitle", fallback: "You have accepted the conversation invitation.")
+    /// Syncing conversation
+    internal static let syncingTitle = L10n.tr("Localizable", "conversation.syncingTitle", fallback: "Syncing conversation")
     /// %@ is typing
     internal static func typingIndicatorOneUser(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.typingIndicatorOneUser", String(describing: p1), fallback: "%@ is typing")
@@ -1185,8 +1187,8 @@ internal enum L10n {
     internal static let disableDonation = L10n.tr("Localizable", "smartlist.disableDonation", fallback: "Not now")
     /// If you enjoy using Jami and believe in our mission, do you want to make a donation?
     internal static let donationExplanation = L10n.tr("Localizable", "smartlist.donationExplanation", fallback: "If you enjoy using Jami and believe in our mission, do you want to make a donation?")
-    /// conversation in synchronization
-    internal static let inSynchronization = L10n.tr("Localizable", "smartlist.inSynchronization", fallback: "conversation in synchronization")
+    /// Syncing…
+    internal static let inSynchronization = L10n.tr("Localizable", "smartlist.inSynchronization", fallback: "Syncing…")
     /// Invitations received
     internal static let invitationReceived = L10n.tr("Localizable", "smartlist.invitationReceived", fallback: "Invitations received")
     /// Invitations
