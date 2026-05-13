@@ -326,7 +326,6 @@ final class AvatarProviderTests: XCTestCase {
         XCTAssertFalse(provider.groupAvatarSnapshot === initialSnapshot)
     }
 
-
     func testSnapshotCreated_SingleParticipant() {
         // Arrange
         let swarmInfo = TestableSwarmInfo(participants: [], containsSearchQuery: false, hasParticipantWithRegisteredName: false)

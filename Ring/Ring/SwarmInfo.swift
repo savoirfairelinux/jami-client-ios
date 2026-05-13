@@ -316,7 +316,7 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
         // swiftlint:disable large_tuple
         let participantData = Observable.combineLatest(
             participants.value.map { participant -> Observable<(role: ParticipantRole, finalName: String, profileName: String,
-                                                                 avatarData: Data?)> in
+                                                                avatarData: Data?)> in
                 let role = participant.role
                 return Observable.combineLatest(
                     participant.finalName.asObservable(),
