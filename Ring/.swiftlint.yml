@@ -31,6 +31,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
   - Ring/Constants
   - WhirlyGlobeMaply
+  - build
 
 force_cast: warning # implicitly
 force_try:
