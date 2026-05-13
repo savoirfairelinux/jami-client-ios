@@ -272,7 +272,8 @@ struct SearchableConversationsView: View {
         SmartListContentView(model: model,
                              stateEmitter: stateEmitter,
                              requestsModel: model.requestsModel,
-                             onRestoreSearch: { activateSearch = true })
+                             onRestoreSearch: { activateSearch = true },
+                             onAddContact: { activateSearch = true })
             .navigationBarSearch(searchTextBinding,
                                  isActive: searchActiveBinding,
                                  isSearchBarDisabled: searchBarDisabledBinding,

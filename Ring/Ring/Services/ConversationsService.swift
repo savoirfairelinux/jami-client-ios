@@ -58,6 +58,9 @@ class ConversationsService {
     var currentConversations: [ConversationModel] {
         return store.currentConversations
     }
+    var loadedConversationsAccountId: Observable<String?> {
+        return store.loadedAccountIdStream
+    }
     var conversationReady: Observable<String> {
         return store.conversationReadyStream
     }
