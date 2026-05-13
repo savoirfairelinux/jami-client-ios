@@ -130,6 +130,11 @@ class MessagesListVM: ObservableObject, AvatarRelayProviding {
         }
         return name
     }
+
+    var firstParticipantJamiId: String? {
+        return conversation.getParticipants().first?.jamiId
+    }
+
     @Published var isSyncing: Bool = false
     @Published var isBlocked: Bool = false
     @Published var syncMessage = ""
