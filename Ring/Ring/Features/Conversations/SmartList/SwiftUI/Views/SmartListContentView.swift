@@ -27,6 +27,8 @@ struct SmartListContentView: View {
     /// Called (in `.list` mode) to re-open search when returning to a conversation
     /// that was opened from search results.
     var onRestoreSearch: (() -> Void)?
+    var onAddContact: (() -> Void)?
+    @Environment(\.sizeCategory) private var sizeCategory
 
     private var conversationsView: ConversationsView {
         ConversationsView(model: model, stateEmitter: stateEmitter)
@@ -46,6 +48,11 @@ struct SmartListContentView: View {
             }
         }
         .listStyle(.plain)
+        .overlay {
+            if showsNoConversations {
+                noConversationsView()
+            }
+        }
         .id(model.currentAccountId)
         .onAppear { [weak model] in
             guard let model = model else { return }
@@ -56,6 +63,15 @@ struct SmartListContentView: View {
         .sheet(isPresented: $requestsModel.requestViewOpened) {
             RequestsView(model: requestsModel)
         }
+    }
+
+    private var showsNoConversations: Bool {
+        !model.searchFlow.isActive
+            && model.conversationsLoaded
+            && model.filteredConversations.isEmpty
+            && model.searchQuery.isEmpty
+            && requestsModel.unreadRequests == 0
+            && model.connectionState != .none
     }
 
     @ViewBuilder private var smartListTopView: some View {
@@ -113,5 +129,68 @@ struct SmartListContentView: View {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, completionHandler: nil)
         }
+    }
+
+    private func noConversationsView() -> some View {
+        let emptyStateSpacing: CGFloat = 16
+        let textSpacing: CGFloat = 7
+        let iconSize: CGFloat = 40
+        let buttonIconSize: CGFloat = 18
+        let buttonSpacing: CGFloat = 8
+        let textHorizontalPadding: CGFloat = sizeCategory.isAccessibilityCategory ? 16 : 48
+        return VStack(spacing: emptyStateSpacing) {
+            Spacer()
+            Image(systemName: "bubble.left.and.bubble.right")
+                .font(.system(size: iconSize))
+                .foregroundColor(Color.jami)
+                .accessibilityHidden(true)
+            VStack(spacing: textSpacing) {
+                Text(L10n.Smartlist.noConversations)
+                    .font(.body.weight(.semibold))
+                    .foregroundColor(Color(UIColor.label))
+                Text(model.isSipAccount() ? L10n.Smartlist.noConversationsSubtitleSip : L10n.Smartlist.noConversationsSubtitle)
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.horizontal, textHorizontalPadding)
+            HStack(spacing: buttonSpacing) {
+                Button(action: { onAddContact?() }) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "plus")
+                            .frame(width: buttonIconSize, height: buttonIconSize)
+                            .foregroundColor(.jami)
+                            .accessibilityHidden(true)
+                        Text(L10n.Smartlist.addContact)
+                            .font(.callout)
+                            .foregroundColor(Color(UIColor.label))
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 10)
+                    .background(Color.jamiTertiaryControl)
+                    .cornerRadius(12)
+                }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(L10n.Smartlist.addContact)
+                .accessibilityAddTraits(.isButton)
+                if !model.isSipAccount() {
+                    ShareButtonView(infoToShare: model.accountInfoToShare) {
+                        Image(systemName: "square.and.arrow.up")
+                            .frame(width: buttonIconSize, height: buttonIconSize)
+                            .foregroundColor(.jami)
+                            .padding(.horizontal, 12)
+                            .frame(maxHeight: .infinity)
+                            .background(Color.jamiTertiaryControl)
+                            .cornerRadius(12)
+                            .accessibilityLabel(L10n.Smartlist.shareJamiId)
+                    }
+                }
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            Spacer()
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(UIColor.systemBackground))
     }
 }
