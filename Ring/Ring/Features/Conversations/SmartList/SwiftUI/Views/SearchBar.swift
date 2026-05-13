@@ -47,6 +47,11 @@ private struct SearchBar: UIViewControllerRepresentable {
         controller.searchController = context.coordinator.searchController
         if self.isSearchBarDisabled {
             controller.searchController?.isActive = false
+        } else if self.isActive && !(context.coordinator.searchController.isActive) {
+            DispatchQueue.main.async {
+                context.coordinator.searchController.isActive = true
+                context.coordinator.searchController.searchBar.becomeFirstResponder()
+            }
         }
     }
 

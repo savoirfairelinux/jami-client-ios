@@ -28,6 +28,7 @@ struct SmartListContentView: View {
     @Binding var isSearchBarActive: Bool
     @SwiftUI.State var currentSearchBarStatus: Bool = false
     @SwiftUI.State var isShowingScanner: Bool = false
+    @Environment(\.sizeCategory) private var sizeCategory
 
     var body: some View {
         let conversationsView = ConversationsView(model: model, stateEmitter: stateEmitter)
@@ -49,23 +50,33 @@ struct SmartListContentView: View {
                 }
                 .transition(.opacity)
             } else {
-                ScrollView {
-                    LazyVStack(alignment: .leading) {
-                        if mode == .smartList {
-                            smartListTopView
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
-                        } else {
-                            newMessageTopView
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
+                if model.filteredConversations.isEmpty
+                    && model.searchQuery.isEmpty
+                    && mode == .smartList
+                    && requestsModel.unreadRequests == 0
+                    && model.connectionState != .none {
+                    noConversationsView()
+                        .transition(.opacity)
+                        .animation(nil, value: isSearchBarActive)
+                } else {
+                    ScrollView {
+                        LazyVStack(alignment: .leading) {
+                            if mode == .smartList {
+                                smartListTopView
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .contentShape(Rectangle())
+                            } else {
+                                newMessageTopView
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .contentShape(Rectangle())
+                            }
+                            conversationsView
                         }
-                        conversationsView
+                        .padding(.horizontal, 15)
                     }
-                    .padding(.horizontal, 15)
+                    .transition(.identity)
+                    .animation(nil, value: isSearchBarActive)
                 }
-                .transition(.identity)
-                .animation(nil, value: isSearchBarActive)
             }
         }
         .animation(isSearchBarActive ? .easeIn(duration: 0.3) : nil, value: isSearchBarActive)
@@ -299,5 +310,51 @@ struct SmartListContentView: View {
             Text(model.searchStatus.toString())
                 .font(.callout)
         }
+    }
+
+    private func noConversationsView() -> some View {
+        let emptyStateSpacing: CGFloat = 16
+        let textSpacing: CGFloat = 7
+        let iconSize: CGFloat = 40
+        let buttonIconSize: CGFloat = 18
+        let textHorizontalPadding: CGFloat = sizeCategory.isAccessibilityCategory ? 16 : 48
+        return VStack(spacing: emptyStateSpacing) {
+            Spacer()
+            Image(systemName: "bubble.left.and.bubble.right")
+                .font(.system(size: iconSize))
+                .foregroundColor(Color.jami)
+                .accessibilityHidden(true)
+            VStack(spacing: textSpacing) {
+                Text(L10n.Smartlist.noConversations)
+                    .font(.body.weight(.semibold))
+                    .foregroundColor(Color(UIColor.label))
+                Text(L10n.Smartlist.noConversationsSubtitle)
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.horizontal, textHorizontalPadding)
+            Button(action: { isSearchBarActive = true }) {
+                HStack(spacing: 6) {
+                    Image(systemName: "plus")
+                        .frame(width: buttonIconSize, height: buttonIconSize)
+                        .foregroundColor(.jami)
+                        .accessibilityHidden(true)
+                    Text(L10n.Smartlist.addContact)
+                        .foregroundColor(Color(UIColor.label))
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 10)
+                .background(Color.jamiTertiaryControl)
+                .cornerRadius(12)
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(L10n.Smartlist.addContact)
+            .accessibilityAddTraits(.isButton)
+            Spacer()
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(UIColor.systemBackground))
     }
 }

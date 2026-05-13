@@ -152,6 +152,9 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
 "smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "New message";
+"smartlist.noConversations" = "No conversations yet";
+"smartlist.noConversationsSubtitle" = "Search for a username or share your Jami ID to get started";
+"smartlist.addContact" = "Add contact";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";

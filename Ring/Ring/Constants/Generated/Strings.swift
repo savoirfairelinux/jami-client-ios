@@ -1181,6 +1181,8 @@ internal enum L10n {
     internal static let accountsTitle = L10n.tr("Localizable", "smartlist.accountsTitle", fallback: "Accounts")
     /// + Add account
     internal static let addAccountButton = L10n.tr("Localizable", "smartlist.addAccountButton", fallback: "+ Add account")
+    /// Add contact
+    internal static let addContact = L10n.tr("Localizable", "smartlist.addContact", fallback: "Add contact")
     /// Ensure cellular access is granted in the settings.
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess", fallback: "Ensure cellular access is granted in the settings.")
     /// Conversations
@@ -1207,8 +1209,12 @@ internal enum L10n {
     internal static let newMessage = L10n.tr("Localizable", "smartlist.newMessage", fallback: "New message")
     /// No conversations
     internal static let noConversation = L10n.tr("Localizable", "smartlist.noConversation", fallback: "No conversations")
+    /// No conversations yet
+    internal static let noConversations = L10n.tr("Localizable", "smartlist.noConversations", fallback: "No conversations yet")
     /// No conversations match the search.
     internal static let noConversationsFound = L10n.tr("Localizable", "smartlist.noConversationsFound", fallback: "No conversations match the search.")
+    /// Search for a username or share your Jami ID to get started
+    internal static let noConversationsSubtitle = L10n.tr("Localizable", "smartlist.noConversationsSubtitle", fallback: "Search for a username or share your Jami ID to get started")
     /// No network connectivity
     internal static let noNetworkConnectivity = L10n.tr("Localizable", "smartlist.noNetworkConnectivity", fallback: "No network connectivity")
     /// Selected contact does not have any number
