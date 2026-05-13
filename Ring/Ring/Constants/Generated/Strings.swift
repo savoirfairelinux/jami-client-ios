@@ -696,6 +696,8 @@ internal enum L10n {
     /// Hello,
     /// Do you want to join the conversation?
     internal static let requestMessage = L10n.tr("Localizable", "conversation.requestMessage", fallback: "Hello,\nDo you want to join the conversation?")
+    /// Send Invitation
+    internal static let sendInvitationButton = L10n.tr("Localizable", "conversation.sendInvitationButton", fallback: "Send Invitation")
     /// Send them an invitation to be able converse.
     internal static let sendRequest = L10n.tr("Localizable", "conversation.sendRequest", fallback: "Send them an invitation to be able converse.")
     /// Send conversation invitation

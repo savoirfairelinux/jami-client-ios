@@ -75,7 +75,17 @@ struct MessagesListView: View {
 
     @SwiftUI.State private var dotCount = 0
     @SwiftUI.State private var syncPhase = 0
+
+    @SwiftUI.State private var envAppeared = false
     private let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.sizeCategory) private var sizeCategory
+
+    private let emptyStateSpacing: CGFloat = 16
+    private var textHorizontalPadding: CGFloat {
+        sizeCategory.isAccessibilityCategory ? 16 : 48
+    }
 
     init(model: MessagesListVM) {
         self.model = model
@@ -180,7 +190,7 @@ struct MessagesListView: View {
             }
 
             if model.isSyncing {
-                syncEmptyStateView()
+                syncingConversationView()
             }
             if model.isBlocked {
                 blockView()
@@ -336,32 +346,68 @@ struct MessagesListView: View {
         .shadowForConversation()
     }
 
-    func temporaryConversationView() -> some View {
-        ZStack {
+    private func temporaryConversationView() -> some View {
+        let buttonIconSpacing: CGFloat = 6
+        let buttonIconSize: CGFloat = 18
+        let buttonVPadding: CGFloat = 10
+        let factory = model.makeAvatarFactory()
+        return ZStack {
             Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
-            VStack {
-                VStack {
-                    Text(L10n.Conversation.notContactLabel(model.displayNameForTemporary))
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.center)
-                    Text(L10n.Conversation.addToContactsLabel)
-                }
-                .padding()
-                .background(Color(UIColor.secondarySystemBackground))
+            VStack(spacing: emptyStateSpacing) {
                 Spacer()
+                Group {
+                    if let jamiId = model.firstParticipantJamiId {
+                        AvatarSwiftUIView(source: factory.provider(for: jamiId, size: .conversationInfo80))
+                            .accessibilityHidden(true)
+                    } else {
+                        Image(systemName: "person.crop.circle.fill")
+                            .font(.system(size: 80))
+                            .foregroundColor(Color.jami)
+                            .accessibilityHidden(true)
+                    }
+                }
+                .scaleEffect(envAppeared ? 1.0 : 0.85)
+                .opacity(envAppeared ? 1.0 : 0.0)
+                .onAppear {
+                    if reduceMotion {
+                        envAppeared = true
+                    } else {
+                        withAnimation(.spring(response: 0.45, dampingFraction: 0.7)) {
+                            envAppeared = true
+                        }
+                    }
+                }
+                .onDisappear {
+                    envAppeared = false
+                }
+                Text(L10n.Conversation.notContactLabel(model.displayNameForTemporary))
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, textHorizontalPadding)
                 Button(action: {
                     model.sendRequest()
                 }, label: {
-                    Text(L10n.Conversation.addToContactsButton)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
-                        .padding(.horizontal)
+                    HStack(spacing: buttonIconSpacing) {
+                        Image(systemName: "paperplane.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: buttonIconSize, height: buttonIconSize)
+                            .foregroundColor(.jami)
+                            .accessibilityHidden(true)
+                        Text(L10n.Conversation.sendInvitationButton)
+                            .font(.callout)
+                            .foregroundColor(Color(UIColor.label))
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, buttonVPadding)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.jamiTertiaryControl)
+                    .cornerRadius(12)
                 })
+                .padding(.horizontal, textHorizontalPadding)
                 Spacer()
-                    .frame(height: 20)
+                Spacer()
             }
         }
     }
@@ -379,26 +425,18 @@ struct MessagesListView: View {
         }
     }
 
-    private func syncEmptyStateView() -> some View {
-        let iconSize: CGFloat = 60
-        let symbolSize: CGFloat = 26
-        let outerSpacing: CGFloat = 16
+    private func syncingConversationView() -> some View {
         let textSpacing: CGFloat = 7
         let dotSize: CGFloat = 7
         let dotSpacing: CGFloat = 6
         let dotsPadding: CGFloat = 4
-        let textHPadding: CGFloat = 48
         let dotOpacities: [Double] = [1.0, 0.55, 0.25]
-        return VStack(spacing: outerSpacing) {
+        return VStack(spacing: emptyStateSpacing) {
             Spacer()
-            Circle()
-                .fill(Color.jami)
-                .frame(width: iconSize, height: iconSize)
-                .overlay(
-                    Image(systemName: "arrow.triangle.2.circlepath")
-                        .font(.system(size: symbolSize))
-                        .foregroundColor(.white)
-                )
+            Image(systemName: "arrow.triangle.2.circlepath")
+                .font(.system(size: 40))
+                .foregroundColor(Color.jami)
+                .accessibilityHidden(true)
             VStack(spacing: textSpacing) {
                 Text(L10n.Conversation.syncingTitle)
                     .font(.body.weight(.semibold))
@@ -408,23 +446,27 @@ struct MessagesListView: View {
                     .foregroundColor(Color(UIColor.secondaryLabel))
                     .multilineTextAlignment(.center)
             }
-            .padding(.horizontal, textHPadding)
+            .padding(.horizontal, textHorizontalPadding)
             HStack(spacing: dotSpacing) {
                 ForEach(0..<3, id: \.self) { index in
                     Circle()
                         .fill(Color.jami)
                         .frame(width: dotSize, height: dotSize)
-                        .opacity(dotOpacities[(index - syncPhase + 3) % 3])
-                        .animation(.easeInOut(duration: 0.4), value: syncPhase)
+                        .opacity(reduceMotion ? 1.0 : dotOpacities[(index - syncPhase + 3) % 3])
+                        .animation(reduceMotion ? nil : .easeInOut(duration: 0.4), value: syncPhase)
                 }
             }
+            .accessibilityHidden(true)
             .padding(.top, dotsPadding)
+            Spacer()
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor.systemBackground))
         .onReceive(timer) { _ in
-            syncPhase = (syncPhase + 1) % 3
+            if !reduceMotion {
+                syncPhase = (syncPhase + 1) % 3
+            }
         }
     }
 
