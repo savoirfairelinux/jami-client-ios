@@ -76,6 +76,7 @@ class ConversationsViewModel: ObservableObject {
     private let conversationsSource: ConversationDataSource
 
     @Published var filteredConversations: [ConversationRowVM] = []
+    @Published private(set) var conversationsLoaded = false
 
     /// Identity of the conversations `List`. Changing this (on account switch)
     /// forces SwiftUI to discard and rebuild the entire list, releasing the
@@ -141,6 +142,12 @@ class ConversationsViewModel: ObservableObject {
                 }
             }
             .assign(to: &$filteredConversations)
+
+        conversationsSource.$loadedAccountId
+            .combineLatest($currentAccountId)
+            .map { loadedAccountId, currentAccountId in loadedAccountId == currentAccountId }
+            .removeDuplicates()
+            .assign(to: &$conversationsLoaded)
     }
 
     private func observeSearchModelUpdates() {

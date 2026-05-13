@@ -23,6 +23,7 @@ import RxRelay
 
 class ConversationDataSource: ObservableObject {
     @Published var rows = [ConversationRowVM]()
+    @Published private(set) var loadedAccountId: String?
     var blockedRows = [ConversationRowVM]()
     let conversationsService: ConversationsService
     let contactsService: ContactsService
@@ -46,11 +47,13 @@ class ConversationDataSource: ObservableObject {
     }
 
     private func subscribeToConversations() {
-        self.conversationsService.conversations
+        Observable.combineLatest(self.conversationsService.conversations,
+                                 self.conversationsService.loadedConversationsAccountId)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] conversations in
+            .subscribe(onNext: { [weak self] conversations, loadedAccountId in
                 guard let self = self else { return }
                 self.rows = self.mapConversationsToRows(conversations)
+                self.loadedAccountId = loadedAccountId
             })
             .disposed(by: disposeBag)
     }

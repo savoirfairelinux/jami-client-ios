@@ -159,6 +159,7 @@ private final class ConversationRecord {
 final class ConversationStore {
 
     private let records = BehaviorRelay(value: [ConversationRecord]())
+    private let loadedAccountId = BehaviorRelay<String?>(value: nil)
     private var loadGeneration = 0
     private let conversationReady = BehaviorRelay(value: "")
     let typingStatus = ReplaySubject<TypingStatus>.create(bufferSize: 1)
@@ -193,6 +194,10 @@ final class ConversationStore {
         return records.value.map { $0.conversation }
     }
 
+    var loadedAccountIdStream: Observable<String?> {
+        return loadedAccountId.asObservable()
+    }
+
     var conversationReadyStream: Observable<String> {
         return conversationReady.asObservable()
     }
@@ -213,6 +218,7 @@ final class ConversationStore {
         let previousRecords = self.records.value
         self.loadGeneration += 1
         let generation = self.loadGeneration
+        self.loadedAccountId.accept(nil)
         self.records.accept(currentRecords)
         var conversationToLoad = [String]() // list of swarm conversation we need to load first message
         // get swarms conversations
@@ -225,6 +231,7 @@ final class ConversationStore {
         }
         guard isSip else {
             self.sortAndUpdate(records: &currentRecords)
+            self.loadedAccountId.accept(accountId)
             self.loadLatestMessages(swarmIds: conversationToLoad, accountId: accountId)
             self.scheduleUnreadCounts(for: currentRecords.map { $0.conversation }, accountId: accountId)
             return
@@ -237,6 +244,7 @@ final class ConversationStore {
                     guard let self = self, generation == self.loadGeneration else { return }
                     currentRecords.append(contentsOf: storedConversations.map { self.makeSipRecord(from: $0, reusing: previousRecords) })
                     self.sortAndUpdate(records: &currentRecords)
+                    self.loadedAccountId.accept(accountId)
                     self.loadLatestMessages(swarmIds: conversationToLoad, accountId: accountId)
                     self.scheduleUnreadCounts(for: currentRecords.map { $0.conversation }, accountId: accountId)
                 }
@@ -244,6 +252,7 @@ final class ConversationStore {
                 self?.queue.async {
                     guard let self = self, generation == self.loadGeneration else { return }
                     self.records.accept(currentRecords)
+                    self.loadedAccountId.accept(accountId)
                     self.loadLatestMessages(swarmIds: conversationToLoad, accountId: accountId)
                     self.scheduleUnreadCounts(for: currentRecords.map { $0.conversation }, accountId: accountId)
                 }
