@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Účty";
 "smartlist.disableDonation" = "Teď ne";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
-"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Nová zpráva";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
+"conversation.sendInvitationButton" = "Send Invitation";
 "conversation.addToContactsLabel" = "Přidat do kontaktů?";
 "conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Write to";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "V odpovědi na";
 "conversation.repliedTo" = "%@ replied to %@";
@@ -367,7 +369,7 @@
 "accountPage.usernameRegisterAction" = "Zaregistrovat";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Set password";
+"accountPage.createPassword" = "Nastavit heslo";
 "accountPage.changePassword" = "Změnit heslo";
 "accountPage.currentPasswordPlaceholder" = "Zadejte současné heslo";
 "accountPage.newPasswordPlaceholder" = "Zadejte nové heslo.";
@@ -399,7 +401,7 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Spravovat účet";
-"accountPage.encryptAccount" = "Password";
+"accountPage.encryptAccount" = "Heslo";
 "accountPage.passwordExplanation" = "Váš účet Jami je registrován pouze na tomto zařízení jako archiv obsahující klíče vašeho účtu. Přístup do tohoto archivu lze chránit heslem.";
 "accountPage.passwordsDoNotMatch" = "Hesla se neshodují.";
 "accountPage.passwordCreated" = "Password set";

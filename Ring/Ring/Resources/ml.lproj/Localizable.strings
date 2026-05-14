@@ -150,11 +150,12 @@
 "smartlist.accounts" = "അക്കൌണ്ടുകൾ";
 "smartlist.disableDonation" = "ഇപ്പോൾ വേണ്ട";
 "smartlist.donationExplanation" = "താങ്കൾ ജാമി ഉപയോഗിക്കാൻ ഇഷ്ടപ്പെടുന്നുണ്ടെങ്കിൽ, ഞങ്ങളുടെ ദൗത്യത്തിൽ വിശ്വസിക്കുന്നുണ്ടെങ്കിൽ, ഈ സംരഭത്തിലേക്കു സംഭാവന ചെയ്യുവാൻ താത്പര്യമുണ്ടോ?";
-"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
+"conversation.sendInvitationButton" = "Send Invitation";
 "conversation.addToContactsLabel" = "ബന്ധുക്കളെ കൂട്ടിച്ചേർക്കണോ?";
 "conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Write to";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "ഇതിന് മറുപടിയായി";
 "conversation.repliedTo" = "%@ replied to %@";

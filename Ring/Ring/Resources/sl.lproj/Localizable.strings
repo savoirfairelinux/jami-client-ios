@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Računi";
 "smartlist.disableDonation" = "Ne zdaj";
 "smartlist.donationExplanation" = "Če vam je Jami všeč in verjamete v naše poslanstvo - bi prispevali projektu?";
-"smartlist.inSynchronization" = "pogovor v usklajevanju";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Novo sporočilo";
 
 // Conversation
 "conversation.addToContactsButton" = "Dodaj med stike";
+"conversation.sendInvitationButton" = "Pošlji vabilo";
 "conversation.addToContactsLabel" = "Dodam med stike?";
 "conversation.notContactLabel" = "%@ ni na seznamu stikov.";
 "conversation.messagePlaceholder" = "Piši";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Pošljite jim povabilo, da se boste lahko pogovarjali.";
 "conversation.sendRequestTitle" = "Pošlji vabilo na pogovor";
 "conversation.synchronizationTitle" = "Sprejeli ste vabilo na pogovor.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Čakamo, da se %@ poveže, da sinhroniziramo pogovor ...";
 "conversation.inReplyTo" = "Kot odgovor";
 "conversation.repliedTo" = "%@ je odgovoril_a %@";

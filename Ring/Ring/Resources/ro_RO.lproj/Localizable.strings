@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Conturi";
 "smartlist.disableDonation" = "Nu acum";
 "smartlist.donationExplanation" = "Dacă îți place să folosești Jami și crezi că misiunea noastră este importantă, vrei să faci o donație?";
-"smartlist.inSynchronization" = "se sincronizează conversația";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Mesaj nou";
 
 // Conversation
 "conversation.addToContactsButton" = "Adaugă la contacte";
+"conversation.sendInvitationButton" = "Trimite invitația";
 "conversation.addToContactsLabel" = "Adaugi la contacte?";
 "conversation.notContactLabel" = "%@ nu este în contactele tale";
 "conversation.messagePlaceholder" = "Scrie pentru";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Trimite o invitație pentru a putea conversa.";
 "conversation.sendRequestTitle" = "Trimite o invitație la conversație";
 "conversation.synchronizationTitle" = "Ai acceptat invitația la conversație.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Se așteaptă ca %@ să se conecteze pentru a sincroniza conversația…";
 "conversation.inReplyTo" = "Răspuns pentru";
 "conversation.repliedTo" = "%@ a răspuns pentru %@";

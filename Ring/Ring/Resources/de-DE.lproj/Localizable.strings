@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Accounts";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "Wenn Sie gerne Jami nutzen und an unsere Mission glauben, möchten Sie eine Spende leisten?";
-"smartlist.inSynchronization" = "Unterhaltung wird synchronisiert";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Neue Nachricht";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
+"conversation.sendInvitationButton" = "Einladung senden";
 "conversation.addToContactsLabel" = "Zu Kontakten hinzufügen?";
 "conversation.notContactLabel" = "%@ ist nicht in der Kontaktliste";
 "conversation.messagePlaceholder" = "Write to";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Senden Sie ihnen eine Einladung, um sich unterhalten zu können.";
 "conversation.sendRequestTitle" = "Unterhaltungseinladung senden";
 "conversation.synchronizationTitle" = "Sie haben die Unterhaltungseinladung angenommen.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Warten auf %@sich zu verbinden um die Unterhaltung zu synchronisieren …";
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "%@antwortete an %@";
@@ -399,10 +401,10 @@
 "accountPage.profileNamePlaceholder" = "Profilnamen eingeben";
 "accountPage.editProfile" = "Profil bearbeiten";
 "accountPage.manageAccount" = "Konto verwalten";
-"accountPage.encryptAccount" = "Password";
+"accountPage.encryptAccount" = "Passwort";
 "accountPage.passwordExplanation" = "Ihr Jami-Konto ist nur auf diesem Gerät als Archiv registriert, das die Schlüssel Ihres Kontos enthält. Der Zugriff auf dieses Archiv kann mit einem Passwort geschützt werden.";
 "accountPage.passwordsDoNotMatch" = "Passwörter stimmen nicht überein.";
-"accountPage.passwordCreated" = "Password set";
+"accountPage.passwordCreated" = "Passwort festgelegt";
 "accountPage.passwordUpdated" = "Passwort aktualisiert";
 "accountPage.linkedDevices" = "Verknüpfte Geräte";
 "accountPage.unlink" = "Verknüpfung aufheben";

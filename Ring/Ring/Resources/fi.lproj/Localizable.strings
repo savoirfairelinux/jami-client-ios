@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Tilit";
 "smartlist.disableDonation" = "Ei nyt";
 "smartlist.donationExplanation" = "Jos pidät Jamista ja uskot tehtäväämme, Haluatko tehdä lahjoituksen?";
-"smartlist.inSynchronization" = "keskustelu synkronoituna";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Uusi viesti";
 
 // Conversation
 "conversation.addToContactsButton" = "Lisää yhteystietoihin";
+"conversation.sendInvitationButton" = "Lähetä kutsu";
 "conversation.addToContactsLabel" = "Lisätäänkö yhteystietoihin?";
 "conversation.notContactLabel" = "%@ ei ole yhteystiedoissa";
 "conversation.messagePlaceholder" = "Kirjoita...";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Lähetä kutsu, jotta he voivat keskustella.";
 "conversation.sendRequestTitle" = "Lähetä keskustelukutsu";
 "conversation.synchronizationTitle" = "Olet hyväksynyt keskustelukutsun.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Odotetaan, että %@ synkronoi keskustelun…";
 "conversation.inReplyTo" = "Vastauksena";
 "conversation.repliedTo" = "%@ vastasi %@:lle";
@@ -399,7 +401,7 @@
 "accountPage.profileNamePlaceholder" = "Anna profiilin nimi";
 "accountPage.editProfile" = "Muokkaa profiilia";
 "accountPage.manageAccount" = "Hallinnoi tiliä";
-"accountPage.encryptAccount" = "Password";
+"accountPage.encryptAccount" = "Salasana";
 "accountPage.passwordExplanation" = "Jami-tilisi on rekisteröity vain tälle laitteelle sisältäen pakatun tiedoston, joka sisältää tilisi avaimet. Pääsy tähän pakettiin voidaan suojata salasanalla.";
 "accountPage.passwordsDoNotMatch" = "Salasanat eivät täsmää.";
 "accountPage.passwordCreated" = "Password set";

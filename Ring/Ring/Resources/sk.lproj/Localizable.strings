@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Účty";
 "smartlist.disableDonation" = "Teraz nie";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
-"smartlist.inSynchronization" = "konverzácia sa synchronizuje";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Nová správa";
 
 // Conversation
 "conversation.addToContactsButton" = "Pridať do kontaktov";
+"conversation.sendInvitationButton" = "Poslať pozvánku";
 "conversation.addToContactsLabel" = "Pridať do kontaktov?";
 "conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Písať";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "V odpovedi na";
 "conversation.repliedTo" = "%@ replied to %@";

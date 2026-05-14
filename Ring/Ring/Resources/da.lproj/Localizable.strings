@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Konti";
 "smartlist.disableDonation" = "Ikke nu";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
-"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Ny besked";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
+"conversation.sendInvitationButton" = "Send Invitation";
 "conversation.addToContactsLabel" = "Tilføj til kontakter?";
 "conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Write to";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "I svar på";
 "conversation.repliedTo" = "%@ replied to %@";
@@ -367,7 +369,7 @@
 "accountPage.usernameRegisterAction" = "Registrér";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Set password";
+"accountPage.createPassword" = "Indstil adgangskode";
 "accountPage.changePassword" = "Skift adgangskode";
 "accountPage.currentPasswordPlaceholder" = "Indtaster det aktuelle adgangskode";
 "accountPage.newPasswordPlaceholder" = "Indtaster nyt adgangskode";
@@ -399,7 +401,7 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Håndter konto";
-"accountPage.encryptAccount" = "Password";
+"accountPage.encryptAccount" = "Adgangskode";
 "accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Adgangskoderne er ikke ens.";
 "accountPage.passwordCreated" = "Password set";

@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Comptes";
 "smartlist.disableDonation" = "Ara no";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
-"smartlist.inSynchronization" = "conversa en sincronització";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Nou missatge";
 
 // Conversation
 "conversation.addToContactsButton" = "Afegeix als contactes";
+"conversation.sendInvitationButton" = "Send Invitation";
 "conversation.addToContactsLabel" = "Afegir als contactes?";
 "conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Escriu a";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "En resposta a";
 "conversation.repliedTo" = "%@ replied to %@";
@@ -367,7 +369,7 @@
 "accountPage.usernameRegisterAction" = "Registra";
 "accountPage.usernameRegistrationFailedTitle" = "Registration failed";
 "accountPage.usernameRegistrationFailed" = "Please check the account password.";
-"accountPage.createPassword" = "Set password";
+"accountPage.createPassword" = "Estableix contrasenya";
 "accountPage.changePassword" = "Canvia la contrasenya";
 "accountPage.currentPasswordPlaceholder" = "Introdueix la contrasenya actual";
 "accountPage.newPasswordPlaceholder" = "Introdueix una nova contrasenya";
@@ -399,7 +401,7 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Administració del compte";
-"accountPage.encryptAccount" = "Password";
+"accountPage.encryptAccount" = "Contrasenya";
 "accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password set";

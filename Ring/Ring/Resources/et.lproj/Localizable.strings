@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Kasutajakontod";
 "smartlist.disableDonation" = "Mitte praegu";
 "smartlist.donationExplanation" = "Kui sulle Jami meeldib ja sa usud meie visiooni, siis kas sa oleksid nõus meid rahaliselt toetama?";
-"smartlist.inSynchronization" = "vestlus on sünkroniseerimisel";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Uus sõnum";
 
 // Conversation
 "conversation.addToContactsButton" = "Lisa kontaktitele";
+"conversation.sendInvitationButton" = "Send Invitation";
 "conversation.addToContactsLabel" = "Kas lisame kontaktina?";
 "conversation.notContactLabel" = "%@ pole sinu kontaktide loendis";
 "conversation.messagePlaceholder" = "Kirjuta kasutajale";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Vestlemaks saada talle kutse.";
 "conversation.sendRequestTitle" = "Kutsu osalema vestluses";
 "conversation.synchronizationTitle" = "Sa oled nõustunud vestluskutsega.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Vestluse sünkroniseerimiseks ootame kasutaja %@ ühendust.";
 "conversation.inReplyTo" = "Vastuseks kasutajale";
 "conversation.repliedTo" = "%@ vastas kasutajale %@";
@@ -399,10 +401,10 @@
 "accountPage.profileNamePlaceholder" = "Sisesta profiili nimi";
 "accountPage.editProfile" = "Muuda profiili";
 "accountPage.manageAccount" = "Halda kasutajakontot";
-"accountPage.encryptAccount" = "Password";
+"accountPage.encryptAccount" = "Salasõna";
 "accountPage.passwordExplanation" = "Sinu Jami kasutajakonto on registreeritud vaid selles nutiseadmes ja olemuselt on tegemist arhiiviga, kus leiduvad sinu krüptovõtmed. Ligipääsu sellele arhiivile saad turvata salasõnaga.";
 "accountPage.passwordsDoNotMatch" = "Salasõnad ei klapi.";
-"accountPage.passwordCreated" = "Password set";
+"accountPage.passwordCreated" = "Salasõna on sisestatud";
 "accountPage.passwordUpdated" = "Salasõna on uuendatud";
 "accountPage.linkedDevices" = "Seotud seadmed";
 "accountPage.unlink" = "Eemalda seotud seade";

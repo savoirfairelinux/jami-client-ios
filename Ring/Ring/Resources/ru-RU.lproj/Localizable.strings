@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Учетные записи";
 "smartlist.disableDonation" = "Не сейчас";
 "smartlist.donationExplanation" = "Если вам нравится использовать Jami и вы верите в нашу миссию, не хотите ли сделать пожертвование?";
-"smartlist.inSynchronization" = "беседа в синхронизации";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Новое сообщение";
 
 // Conversation
 "conversation.addToContactsButton" = "Добавить в контакты";
+"conversation.sendInvitationButton" = "Отправить приглашение";
 "conversation.addToContactsLabel" = "Добавить в контакты? ";
 "conversation.notContactLabel" = "%@нет в списке контактов";
 "conversation.messagePlaceholder" = "Написать сообщение";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Отправьте им приглашение для общения.";
 "conversation.sendRequestTitle" = "Отправить приглашение для беседы";
 "conversation.synchronizationTitle" = "Вы приняли приглашение для беседы.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Ждем %@ для подключения к синхронизации беседы…";
 "conversation.inReplyTo" = "В ответ на";
 "conversation.repliedTo" = "%@ответил(а) к %@";

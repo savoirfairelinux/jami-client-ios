@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Налози";
 "smartlist.disableDonation" = "Не сада";
 "smartlist.donationExplanation" = "Ако уживате у коришћењу Јами-ја и верујете у нашу мисију, да ли желите да дате донацију?";
-"smartlist.inSynchronization" = "разговор у синхронизацији";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Нова порука";
 
 // Conversation
 "conversation.addToContactsButton" = "Додај у контакте";
+"conversation.sendInvitationButton" = "Send Invitation";
 "conversation.addToContactsLabel" = "Додај у контакте?";
 "conversation.notContactLabel" = "%@ није на листи контаката";
 "conversation.messagePlaceholder" = "Пишите";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Пошаљите им позивницу да бисте могли разговарати.";
 "conversation.sendRequestTitle" = "Пошаљите позивницу за разговор";
 "conversation.synchronizationTitle" = "Прихватили сте позивницу за разговор.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Чека се %@ да се повеже ради синхронизације разговора…";
 "conversation.inReplyTo" = "У одговору на";
 "conversation.repliedTo" = "%@ одговорио на %@";

@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Llogari";
 "smartlist.disableDonation" = "Jo tani";
 "smartlist.donationExplanation" = "Nëse ju shijon të përdorni Jami-n dhe besoni në misionin tonë, doni të bëni një dhurim?";
-"smartlist.inSynchronization" = "bisedë në njëkohësim e sipër";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Mesazh i ri";
 
 // Conversation
 "conversation.addToContactsButton" = "Shtoje te Kontaktet";
+"conversation.sendInvitationButton" = "Dërgoni Ftesë";
 "conversation.addToContactsLabel" = "Të shtohet te kontaktet?";
 "conversation.notContactLabel" = "%@ s’gjendet te lista e kontakteve";
 "conversation.messagePlaceholder" = "Shkruajini";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Dërgojuni një ftesë, që të jeni në gjendje të bisedoni.";
 "conversation.sendRequestTitle" = "Dërgoni ftesë bisede";
 "conversation.synchronizationTitle" = "Keni pranuar ftesën e bisedës.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Po pritet që %@ të lidhet, që të njëkohësohet biseda…";
 "conversation.inReplyTo" = "Në përgjigje të";
 "conversation.repliedTo" = "%@ iu përgjigj %@";
@@ -402,7 +404,7 @@
 "accountPage.encryptAccount" = "Fjalëkalim";
 "accountPage.passwordExplanation" = "Llogaria juaj Jami është regjistruar vetëm në këtë pajisje si një arkiv që përmban kyçet për llogarinë tuaj. Hyrja te ky arkiv mund të mbrohet me një fjalëkalim.";
 "accountPage.passwordsDoNotMatch" = "Fjalëkalimet nuk përputhen.";
-"accountPage.passwordCreated" = "Password set";
+"accountPage.passwordCreated" = "Fjalëkalimi u caktua";
 "accountPage.passwordUpdated" = "U përditësua fjalëkalim";
 "accountPage.linkedDevices" = "Pajisje të lidhura";
 "accountPage.unlink" = "Hiqe lidhjen";

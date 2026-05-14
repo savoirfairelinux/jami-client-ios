@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Kontoer";
 "smartlist.disableDonation" = "Ikke nå";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
-"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Ny melding";
 
 // Conversation
 "conversation.addToContactsButton" = "Legg til kontakter";
+"conversation.sendInvitationButton" = "Send invitasjon";
 "conversation.addToContactsLabel" = "Legg til kontakter?";
 "conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Skriv til";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "I svar til";
 "conversation.repliedTo" = "%@ replied to %@";

@@ -150,11 +150,12 @@
 "smartlist.accounts" = "账户";
 "smartlist.disableDonation" = "时机未到";
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
-"smartlist.inSynchronization" = "聊天正同步";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "新消息";
 
 // Conversation
 "conversation.addToContactsButton" = "添加到联系人";
+"conversation.sendInvitationButton" = "发送邀请";
 "conversation.addToContactsLabel" = "添加至通讯录吗？";
 "conversation.notContactLabel" = "%@ 不在联系人列表中";
 "conversation.messagePlaceholder" = "写消息至";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "发送联系人请求以开始聊天。";
 "conversation.sendRequestTitle" = "发送聊天邀请";
 "conversation.synchronizationTitle" = "您已接受邀请。";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "正等待 %@ 连接以同步聊天…";
 "conversation.inReplyTo" = "在回复中";
 "conversation.repliedTo" = "%@ 回复给 %@";
@@ -402,7 +404,7 @@
 "accountPage.encryptAccount" = "密码";
 "accountPage.passwordExplanation" = "您的 Jami 帐户仅在此设备上注册，作为包含帐户密钥的存档。可以使用密码保护对该存档的访问。";
 "accountPage.passwordsDoNotMatch" = "密码不匹配。";
-"accountPage.passwordCreated" = "Password set";
+"accountPage.passwordCreated" = "密码已设置";
 "accountPage.passwordUpdated" = "密码已更新<br>";
 "accountPage.linkedDevices" = "关联设备";
 "accountPage.unlink" = "取消关联";

@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Fiókok";
 "smartlist.disableDonation" = "Máskor";
 "smartlist.donationExplanation" = "Ha értékeli a Jami használatát, és hisz a küldetésünkben, szeretne adományozni?";
-"smartlist.inSynchronization" = "beszélgetés összehangolásában";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Új üzenet";
 
 // Conversation
 "conversation.addToContactsButton" = "Hozzáadás a kapcsolattartók közé";
+"conversation.sendInvitationButton" = "Meghívás küldése";
 "conversation.addToContactsLabel" = "Hozzáadás a kapcsolattartók közé?";
 "conversation.notContactLabel" = "%@ nem szerepel a kapcsolattartólistáján";
 "conversation.messagePlaceholder" = "Írás a következő(k)nek:";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Meghívó küldése a beszélgetés engedélyezéséhez.";
 "conversation.sendRequestTitle" = "Beszélgetési meghívó küldése";
 "conversation.synchronizationTitle" = "Ön elfogadott a beszélgetési meghívást.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Várakozás a(z) %@ csatlakozásra a beszélgetés összehangolásához…";
 "conversation.inReplyTo" = "Válaszul erre:";
 "conversation.repliedTo" = "%@ válaszolt %@ résztvevőnek";
