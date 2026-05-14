@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Comptes";
 "smartlist.disableDonation" = "Pas maintenant";
 "smartlist.donationExplanation" = "Si vous appréciez Jami et que vous croyez à notre mission, feriez-vous un don ?";
-"smartlist.inSynchronization" = "conversation en cours de synchronisation";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Nouveau message";
 
 // Conversation
 "conversation.addToContactsButton" = "Ajouter aux contcats";
+"conversation.sendInvitationButton" = "Envoyer une invitation";
 "conversation.addToContactsLabel" = "Ajouter au contacts ?";
 "conversation.notContactLabel" = " %@ ne fait pas partie de vos contacts.";
 "conversation.messagePlaceholder" = "Écrire à";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Envoyer leur une invitation afin de discuter";
 "conversation.sendRequestTitle" = "Envoyer une invitation";
 "conversation.synchronizationTitle" = "Vous avez accepté la demande de conversation";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Nous attendons que %@ se connecte afin de synchroniser la conversation.";
 "conversation.inReplyTo" = "En réponse à";
 "conversation.repliedTo" = "%@ a répondu à %@";

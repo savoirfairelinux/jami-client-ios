@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Λογαριασμοί";
 "smartlist.disableDonation" = "Όχι τώρα";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, do you want to make a donation?";
-"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "New message";
 
 // Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
+"conversation.sendInvitationButton" = "Send Invitation";
 "conversation.addToContactsLabel" = "Προσθήκη στις επαφές;";
 "conversation.notContactLabel" = "%@ is not in the contact list";
 "conversation.messagePlaceholder" = "Write to";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Send them an invitation to be able converse.";
 "conversation.sendRequestTitle" = "Send conversation invitation";
 "conversation.synchronizationTitle" = "You have accepted the conversation invitation.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Waiting for %@ to connect to synchronize the conversation…";
 "conversation.inReplyTo" = "Απαντώντας";
 "conversation.repliedTo" = "%@ replied to %@";
@@ -399,7 +401,7 @@
 "accountPage.profileNamePlaceholder" = "Enter profile name";
 "accountPage.editProfile" = "Edit Profile";
 "accountPage.manageAccount" = "Διαχείριση Λογαριασμού";
-"accountPage.encryptAccount" = "Password";
+"accountPage.encryptAccount" = "Κωδικός";
 "accountPage.passwordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected with a password.";
 "accountPage.passwordsDoNotMatch" = "Passwords do not match.";
 "accountPage.passwordCreated" = "Password set";

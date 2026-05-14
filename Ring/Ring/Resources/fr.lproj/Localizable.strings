@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Comptes";
 "smartlist.disableDonation" = "Pas maintenant";
 "smartlist.donationExplanation" = "Si vous appréciez Jami et que vous croyez à notre mission, feriez-vous un don ?";
-"smartlist.inSynchronization" = "conversation en cours de synchronisation";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Nouveau message";
 
 // Conversation
 "conversation.addToContactsButton" = "Ajouter aux contacts";
+"conversation.sendInvitationButton" = "Envoyer une invitation";
 "conversation.addToContactsLabel" = "Ajouter aux contacts ?";
 "conversation.notContactLabel" = " %@ ne fait pas partie de vos contacts.";
 "conversation.messagePlaceholder" = "Écrire à";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Envoyer leur une invitation afin de discuter";
 "conversation.sendRequestTitle" = "Envoyer une invitation";
 "conversation.synchronizationTitle" = "Vous avez accepté la demande de conversation.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Nous attendons que %@ se connecte afin de synchroniser la conversation.";
 "conversation.inReplyTo" = "En réponse à";
 "conversation.repliedTo" = "%@ a répondu à %@";
@@ -399,7 +401,7 @@
 "accountPage.profileNamePlaceholder" = "Entrer le nom du profile";
 "accountPage.editProfile" = "Éditer votre profile";
 "accountPage.manageAccount" = "Gestion du compte";
-"accountPage.encryptAccount" = "Password";
+"accountPage.encryptAccount" = "Mot de passe";
 "accountPage.passwordExplanation" = "Votre compte Jami est enregistré uniquement sur cet appareil en tant qu'archive contenant les clés de votre compte. L'accès à cette archive peut être protégé par un mot de passe.";
 "accountPage.passwordsDoNotMatch" = "Les mots de passe ne correspondent pas.";
 "accountPage.passwordCreated" = "Password set";

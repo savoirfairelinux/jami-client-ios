@@ -150,11 +150,12 @@
 "smartlist.accounts" = "Konten";
 "smartlist.disableDonation" = "Nicht jetzt";
 "smartlist.donationExplanation" = "Wenn Sie gerne Jami nutzen und an unsere Mission glauben, möchten Sie eine Spende tätigen?";
-"smartlist.inSynchronization" = "Unterhaltung wird synchronisiert";
+"smartlist.inSynchronization" = "Syncing…";
 "smartlist.newMessage" = "Neue Nachricht";
 
 // Conversation
 "conversation.addToContactsButton" = "Zu Kontakten hinzufügen";
+"conversation.sendInvitationButton" = "Sende Einladung";
 "conversation.addToContactsLabel" = "Zu Kontakten hinzufügen?";
 "conversation.notContactLabel" = "%@ ist nicht in der Kontaktliste";
 "conversation.messagePlaceholder" = "Schreiben an";
@@ -168,6 +169,7 @@
 "conversation.sendRequest" = "Senden Sie ihnen eine Einladung, um kommunizieren zu können.";
 "conversation.sendRequestTitle" = "Einladung zur Unterhaltung senden";
 "conversation.synchronizationTitle" = "Sie haben die Einladung zur Unterhaltung angenommen.";
+"conversation.syncingTitle" = "Syncing conversation";
 "conversation.synchronizationMessage" = "Auf Verbindung von %@ zur Synchronisierung der Unterhaltung wird gewartet…";
 "conversation.inReplyTo" = "Als Antwort auf";
 "conversation.repliedTo" = "%@antwortete an %@";
@@ -399,10 +401,10 @@
 "accountPage.profileNamePlaceholder" = "Profilnamen eingeben";
 "accountPage.editProfile" = "Profil bearbeiten";
 "accountPage.manageAccount" = "Konto verwalten";
-"accountPage.encryptAccount" = "Password";
+"accountPage.encryptAccount" = "Passwort";
 "accountPage.passwordExplanation" = "Ihr Jami-Konto ist nur auf diesem Gerät als Archiv registriert, das die Schlüssel Ihres Kontos enthält. Der Zugriff auf dieses Archiv kann mit einem Passwort geschützt werden.";
 "accountPage.passwordsDoNotMatch" = "Passwörter stimmen nicht überein.";
-"accountPage.passwordCreated" = "Password set";
+"accountPage.passwordCreated" = "Passwort festgelegt";
 "accountPage.passwordUpdated" = "Passwort aktualisiert";
 "accountPage.linkedDevices" = "Verknüpfte Geräte";
 "accountPage.unlink" = "Verknüpfung aufheben";
