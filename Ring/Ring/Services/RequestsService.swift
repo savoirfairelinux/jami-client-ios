@@ -223,10 +223,11 @@ class RequestsService {
         }
     }
 
-    func requestAccepted(conversationId: String, withAccount accountId: String) {
+    func requestAccepted(conversationId: String, withAccount accountId: String, conversationType: ConversationType) {
         var event = ServiceEvent(withEventType: .requestAccepted)
         event.addEventInput(.accountId, value: accountId)
         event.addEventInput(.conversationId, value: conversationId)
+        event.addEventInput(.conversationType, value: conversationType)
         self.responseStream.onNext(event)
     }
 
@@ -234,6 +235,7 @@ class RequestsService {
         return Observable.create { [weak self] observable in
             guard let self = self else { return Disposables.create { } }
             let request = self.getRequest(withId: conversationId, accountId: accountId)
+            let type = request?.conversationType ?? .invitesOnly
             if let request = request,
                request.isCoredialog(),
                let jamiId = request.participants.first?.jamiId {
@@ -244,7 +246,7 @@ class RequestsService {
             }
             self.requestsAdapter.acceptConversationRequest(accountId, conversationId: conversationId)
             self.removeRequest(with: conversationId, accountId: accountId)
-            self.requestAccepted(conversationId: conversationId, withAccount: accountId)
+            self.requestAccepted(conversationId: conversationId, withAccount: accountId, conversationType: type)
             observable.on(.completed)
             return Disposables.create { }
         }

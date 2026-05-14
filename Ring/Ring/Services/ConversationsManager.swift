@@ -253,7 +253,8 @@ class ConversationsManager {
                       let conversationId: String = event.getEventInput(.conversationId),
                       let account = self.accountsService.getAccount(fromAccountId: accountId)
                 else { return }
-                self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
+                let type: ConversationType = event.getEventInput(.conversationType) ?? .invitesOnly
+                self.conversationService.addConversationFromAcceptedRequest(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId, type: type)
             })
             .disposed(by: self.disposeBag)
     }

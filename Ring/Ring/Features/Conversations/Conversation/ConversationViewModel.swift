@@ -317,6 +317,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
 
     private func subscribeConversationReady() {
         self.conversationsService.conversationReady
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] conversationId in
                 guard let self = self else { return }
                 /*
@@ -326,6 +327,20 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 if conversationId == self.conversation.id {
                     if self.shouldCreateSwarmInfo() {
                         self.createSwarmInfo()
+                    } else if let swarmInfo = self.swarmInfo,
+                              self.avatarProvider.isGroup != !self.conversation.isCoredialog() {
+                        // Conversation type changed after update -- rebuild providers
+                        self.avatarProvider = AvatarProvider.from(
+                            swarmInfo: swarmInfo,
+                            profileService: self.injectionBag.profileService,
+                            size: .default55
+                        )
+                        self.navBarAvatarProvider = AvatarProvider.from(
+                            swarmInfo: swarmInfo,
+                            profileService: self.injectionBag.profileService,
+                            size: .conversation30
+                        )
+                        self.objectWillChange.send()
                     }
                 }
             } onError: { _ in
@@ -379,7 +394,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             profileService: self.injectionBag.profileService,
             size: .conversation30
         )
-        self.objectWillChange.send()
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
     }
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {
