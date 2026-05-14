@@ -101,6 +101,7 @@ enum ServiceEventInput {
     case muted
     case oldDisplayedMessage
     case newDisplayedMessage
+    case conversationType
 }
 
 /**

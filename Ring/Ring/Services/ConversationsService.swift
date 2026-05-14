@@ -168,14 +168,57 @@ class ConversationsService {
         if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
            let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
             let conversation = ConversationModel(withId: conversationId, accountId: accountId, info: info)
-            if let prefsInfo = getConversationPreferences(accountId: accountId, conversationId: conversationId) {
-                conversation.updatePreferences(preferences: prefsInfo)
-            }
-            conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-            conversation.updateLastDisplayedMessage(participantsInfo: participantsInfo)
-            self.updateUnreadMessages(conversation: conversation, accountId: accountId)
+            self.configureConversation(conversation, accountId: accountId, conversationId: conversationId, participantsInfo: participantsInfo, accountURI: accountURI)
             conversations.append(conversation)
         }
+    }
+
+    func addConversationFromAcceptedRequest(conversationId: String, accountId: String, accountURI: String, type: ConversationType) {
+        serialOperationQueue.async { [weak self] in
+            guard let self = self else { return }
+            if self.getConversationForId(conversationId: conversationId, accountId: accountId) != nil {
+                return
+            }
+
+            guard let info = self.conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
+                  let participantsInfo = self.conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) else {
+                // Adapter data not ready yet; daemon's conversationReady will handle it later
+                return
+            }
+
+            let conversation = ConversationModel(withId: conversationId, accountId: accountId, type: type)
+            conversation.updateInfo(info: info)
+            conversation.updateProfile(profile: info)
+            self.configureConversation(conversation, accountId: accountId, conversationId: conversationId, participantsInfo: participantsInfo, accountURI: accountURI)
+
+            var currentConversations = self.conversations.value
+            currentConversations.append(conversation)
+            self.publishNewConversation(conversationId: conversationId, accountId: accountId, conversations: &currentConversations)
+        }
+    }
+
+    private func configureConversation(_ conversation: ConversationModel, accountId: String, conversationId: String, participantsInfo: [[String: String]], accountURI: String) {
+        if let prefsInfo = getConversationPreferences(accountId: accountId, conversationId: conversationId) {
+            conversation.updatePreferences(preferences: prefsInfo)
+        }
+        conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
+        conversation.updateLastDisplayedMessage(participantsInfo: participantsInfo)
+        self.updateUnreadMessages(conversation: conversation, accountId: accountId)
+    }
+
+    private func publishNewConversation(conversationId: String, accountId: String, conversations: inout [ConversationModel]) {
+        self.sortAndUpdate(conversations: &conversations)
+
+        DispatchQueue.main.async {
+            var data = [String: Any]()
+            data[ConversationNotificationsKeys.conversationId.rawValue] = conversationId
+            data[ConversationNotificationsKeys.accountId.rawValue] = accountId
+            NotificationCenter.default.post(name: NSNotification.Name(ConversationNotifications.conversationReady.rawValue), object: nil, userInfo: data)
+        }
+
+        self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: "", size: 2)
+        self.sortIfNeeded()
+        self.conversationReady.accept(conversationId)
     }
     /**
      Sort conversations and emit updates for conversations
@@ -382,24 +425,12 @@ class ConversationsService {
     func conversationReady(conversationId: String, accountId: String, accountURI: String) {
         serialOperationQueue.async { [weak self] in
             guard let self = self else { return }
-            // Process the conversation
             let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId)
 
             if conversation == nil {
                 var currentConversations = self.conversations.value
                 self.addSwarm(conversationId: conversationId, accountId: accountId, accountURI: accountURI, to: &currentConversations)
-                self.sortAndUpdate(conversations: &currentConversations)
-
-                DispatchQueue.main.async {
-                    var data = [String: Any]()
-                    data[ConversationNotificationsKeys.conversationId.rawValue] = conversationId
-                    data[ConversationNotificationsKeys.accountId.rawValue] = accountId
-                    NotificationCenter.default.post(name: NSNotification.Name(ConversationNotifications.conversationReady.rawValue), object: nil, userInfo: data)
-                }
-
-                self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: "", size: 2)
-                self.sortIfNeeded()
-                self.conversationReady.accept(conversationId)
+                self.publishNewConversation(conversationId: conversationId, accountId: accountId, conversations: &currentConversations)
                 return
             }
 
