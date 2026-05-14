@@ -542,18 +542,12 @@ class SwarmInfo: SwarmInfoProtocol, Identifiable {
            !name.isEmpty {
             return name
         }
-        if let name = localParticipant?.profileName.value, !name.isEmpty {
-            return name.withYourselfSuffix()
-        }
         return ""
     }
 
     private func registeredNameForDialog() -> String {
         if let name = nonLocalParticipants.first?.registeredName.value, !name.isEmpty {
             return name
-        }
-        if let name = localParticipant?.registeredName.value, !name.isEmpty {
-            return name.withYourselfSuffix()
         }
         return ""
     }
