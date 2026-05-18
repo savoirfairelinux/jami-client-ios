@@ -150,7 +150,7 @@
 "smartlist.accounts" = "账户";
 "smartlist.disableDonation" = "时机未到";
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
-"smartlist.inSynchronization" = "Syncing…";
+"smartlist.inSynchronization" = "同步中…";
 "smartlist.newMessage" = "新消息";
 
 // Conversation
@@ -169,7 +169,7 @@
 "conversation.sendRequest" = "发送联系人请求以开始聊天。";
 "conversation.sendRequestTitle" = "发送聊天邀请";
 "conversation.synchronizationTitle" = "您已接受邀请。";
-"conversation.syncingTitle" = "Syncing conversation";
+"conversation.syncingTitle" = "同步对话";
 "conversation.synchronizationMessage" = "正等待 %@ 连接以同步聊天…";
 "conversation.inReplyTo" = "在回复中";
 "conversation.repliedTo" = "%@ 回复给 %@";

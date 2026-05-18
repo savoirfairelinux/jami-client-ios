@@ -150,7 +150,7 @@
 "smartlist.accounts" = "Llogari";
 "smartlist.disableDonation" = "Jo tani";
 "smartlist.donationExplanation" = "Nëse ju shijon të përdorni Jami-n dhe besoni në misionin tonë, doni të bëni një dhurim?";
-"smartlist.inSynchronization" = "Syncing…";
+"smartlist.inSynchronization" = "Po bëhet njëkohësim…";
 "smartlist.newMessage" = "Mesazh i ri";
 
 // Conversation
@@ -169,7 +169,7 @@
 "conversation.sendRequest" = "Dërgojuni një ftesë, që të jeni në gjendje të bisedoni.";
 "conversation.sendRequestTitle" = "Dërgoni ftesë bisede";
 "conversation.synchronizationTitle" = "Keni pranuar ftesën e bisedës.";
-"conversation.syncingTitle" = "Syncing conversation";
+"conversation.syncingTitle" = "Po bëhet njëkohësim i bisedës";
 "conversation.synchronizationMessage" = "Po pritet që %@ të lidhet, që të njëkohësohet biseda…";
 "conversation.inReplyTo" = "Në përgjigje të";
 "conversation.repliedTo" = "%@ iu përgjigj %@";

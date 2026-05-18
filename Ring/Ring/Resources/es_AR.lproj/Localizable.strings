@@ -150,7 +150,7 @@
 "smartlist.accounts" = "Cuentas";
 "smartlist.disableDonation" = "Ahora no";
 "smartlist.donationExplanation" = "Si disfrutas usando Jami y crees en nuestra misión, ¿quieres hacer una donación?";
-"smartlist.inSynchronization" = "Syncing…";
+"smartlist.inSynchronization" = "Sincronizando…";
 "smartlist.newMessage" = "Nuevo mensaje";
 
 // Conversation
@@ -169,7 +169,7 @@
 "conversation.sendRequest" = "Envíales una invitación para poder conversar.";
 "conversation.sendRequestTitle" = "Enviar invitación de conversación";
 "conversation.synchronizationTitle" = "Has aceptado la invitación a la conversación.";
-"conversation.syncingTitle" = "Syncing conversation";
+"conversation.syncingTitle" = "Sincronizar conversación";
 "conversation.synchronizationMessage" = "Esperando a que %@ se conecte para sincronizar la conversación…";
 "conversation.inReplyTo" = "En respuesta a";
 "conversation.repliedTo" = "%@ respondió a %@";

@@ -150,12 +150,12 @@
 "smartlist.accounts" = "Kasutajakontod";
 "smartlist.disableDonation" = "Mitte praegu";
 "smartlist.donationExplanation" = "Kui sulle Jami meeldib ja sa usud meie visiooni, siis kas sa oleksid nõus meid rahaliselt toetama?";
-"smartlist.inSynchronization" = "Syncing…";
+"smartlist.inSynchronization" = "Sünkroonin andmeid...";
 "smartlist.newMessage" = "Uus sõnum";
 
 // Conversation
 "conversation.addToContactsButton" = "Lisa kontaktitele";
-"conversation.sendInvitationButton" = "Send Invitation";
+"conversation.sendInvitationButton" = "Saada kutse";
 "conversation.addToContactsLabel" = "Kas lisame kontaktina?";
 "conversation.notContactLabel" = "%@ pole sinu kontaktide loendis";
 "conversation.messagePlaceholder" = "Kirjuta kasutajale";
@@ -169,7 +169,7 @@
 "conversation.sendRequest" = "Vestlemaks saada talle kutse.";
 "conversation.sendRequestTitle" = "Kutsu osalema vestluses";
 "conversation.synchronizationTitle" = "Sa oled nõustunud vestluskutsega.";
-"conversation.syncingTitle" = "Syncing conversation";
+"conversation.syncingTitle" = "Sünkroonin vestlust";
 "conversation.synchronizationMessage" = "Vestluse sünkroniseerimiseks ootame kasutaja %@ ühendust.";
 "conversation.inReplyTo" = "Vastuseks kasutajale";
 "conversation.repliedTo" = "%@ vastas kasutajale %@";
