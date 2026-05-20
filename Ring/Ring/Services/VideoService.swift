@@ -280,6 +280,12 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             throw VideoError.unsupportedParameter
         }
 
+        // Pin mirroring state so the buffer orientation is deterministic
+        // across camera switches. Visual mirroring for the front-facing
+        // preview is handled by the affine transform in
+        // `AVCaptureVideoOrientation.localPreviewTransform(mirrored:)`.
+        connection.automaticallyAdjustsVideoMirroring = false
+        connection.isVideoMirrored = false
         connection.videoOrientation = orientation
     }
 
@@ -356,6 +362,12 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             return false
         }
 
+        // Pin mirroring state so the buffer orientation is deterministic
+        // across camera switches. Without this the connection's automatic
+        // mirroring carries over from the previous input on some iOS
+        // versions, producing an inverted local preview after a switch.
+        connection.automaticallyAdjustsVideoMirroring = false
+        connection.isVideoMirrored = false
         connection.videoOrientation = orientation
         return true
     }
