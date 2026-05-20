@@ -50,17 +50,17 @@ extension AVCaptureVideoOrientation {
 
     /// Returns the affine transform needed to orient a local camera preview
     /// whose capture connection is fixed at `.landscapeLeft`.
-    /// - Parameter mirrored: `true` for front camera (applies horizontal flip).
-    func localPreviewTransform(mirrored: Bool) -> CGAffineTransform {
+    func localPreviewTransform(cameraPosition: AVCaptureDevice.Position) -> CGAffineTransform {
         var transform = CGAffineTransform.identity
+        let mirrored = cameraPosition == .front
         if mirrored {
             transform = transform.scaledBy(x: -1, y: 1)
         }
         switch self {
         case .portrait:
-            transform = transform.rotated(by: .pi / 2)
+            transform = transform.rotated(by: cameraPosition == .back ? -.pi / 2 : .pi / 2)
         case .portraitUpsideDown:
-            transform = transform.rotated(by: -.pi / 2)
+            transform = transform.rotated(by: cameraPosition == .back ? .pi / 2 : -.pi / 2)
         case .landscapeRight:
             break
         case .landscapeLeft:

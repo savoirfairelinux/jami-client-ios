@@ -400,7 +400,7 @@ class VideoService: FrameExtractorDelegate {
 
     private func updateCachedOrientation() {
         let mirrored = cameraPosition == .front
-        cachedLayerTransform = currentOrientation.localPreviewTransform(mirrored: mirrored)
+        cachedLayerTransform = currentOrientation.localPreviewTransform(cameraPosition: cameraPosition)
         cachedImageOrientation = currentOrientation.imageOrientation(mirrored: mirrored)
     }
 
