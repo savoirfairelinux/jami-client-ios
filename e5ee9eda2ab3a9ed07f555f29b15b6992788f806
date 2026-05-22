@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4191796_c76432b7",
+        "filename": "Ring/Ring/Services/VideoService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-22T15:11:16Z",
+      "side": 1,
+      "message": "[Major] Line 526: The cached cameraPosition is set to .front before the switch succeeds and is never restored on failure. If switching fails, the service state says the front camera is active while the capture session may still be using the previous camera, which can break later orientation/device-position decisions. Update cached state only after switchCamera(toPosition:) completes successfully, or roll it back in onError.\n```suggestion\nself.camera.switchCamera(toPosition: .front)\n    .subscribe(onCompleted: { [weak self] in\n        self?.cameraPosition \u003d .front\n        self?.updateCachedOrientation()\n    }, onError: { error in\n        print(error)\n    })\n    .disposed(by: self.disposeBag)\n```",
+      "revId": "e5ee9eda2ab3a9ed07f555f29b15b6992788f806",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb6d6469_940b2f08",
+        "filename": "Ring/Ring/Services/VideoService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-22T15:11:16Z",
+      "side": 1,
+      "message": "[Major] Line 695: resetCameraToFrontForCapture() updates cameraPosition/orientation and starts an asynchronous camera switch, but startCapture() immediately continues to start capture. This can expose stale state or start capture before the front-camera switch has completed if startCapturing() is not strictly serialized behind the same sessionQueue work. Move the capture start into the switch completion path, or return a Completable from resetCameraToFrontForCapture() and chain the quality/orientation/start logic after it completes.\n```suggestion\nprivate func resetCameraToFrontForCapture() -\u003e Completable {\n    self.cameraPosition \u003d .front\n    self.updateCachedOrientation()\n    return self.camera.switchCamera(toPosition: .front)\n}\n```\nThen call camera.startCapturing() from the subscription\u0027s onCompleted handler.",
+      "revId": "e5ee9eda2ab3a9ed07f555f29b15b6992788f806",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
