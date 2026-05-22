@@ -307,7 +307,21 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
 
-    private func performSwitchCamera(completable: @escaping (CompletableEvent) -> Void) {
+    func switchCamera(toPosition position: AVCaptureDevice.Position) -> Completable {
+        return Completable.create { [weak self] completable in
+            self?.sessionQueue.async { [weak self] in
+                guard let self = self else {
+                    completable(.error(VideoError.switchCameraFailed))
+                    return
+                }
+                self.performSwitchCamera(toPosition: position, completable: completable)
+            }
+            return Disposables.create()
+        }
+    }
+
+    private func performSwitchCamera(toPosition position: AVCaptureDevice.Position? = nil,
+                                     completable: @escaping (CompletableEvent) -> Void) {
         self.captureSession.beginConfiguration()
         defer { self.captureSession.commitConfiguration() }
 
@@ -316,8 +330,19 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             return
         }
 
+        if let position = position, currentCameraInput.device.position == position {
+            delegate?.updateDevicePosition(position: position)
+            guard configureOutputConnection() else {
+                completable(.error(VideoError.switchCameraFailed))
+                return
+            }
+            completable(.completed)
+            return
+        }
+
         self.captureSession.removeInput(currentCameraInput)
-        guard let newCamera = selectNewCamera(currentCameraInput: currentCameraInput) else {
+        guard let newCamera = selectNewCamera(currentCameraInput: currentCameraInput,
+                                             targetPosition: position) else {
             completable(.error(VideoError.switchCameraFailed))
             return
         }
@@ -347,7 +372,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         completable(.completed)
     }
 
-    private func selectNewCamera(currentCameraInput: AVCaptureDeviceInput) -> AVCaptureDevice? {
+    private func selectNewCamera(currentCameraInput: AVCaptureDeviceInput,
+                                 targetPosition: AVCaptureDevice.Position? = nil) -> AVCaptureDevice? {
+        if let targetPosition = targetPosition {
+            return selectCaptureDevice(withPosition: targetPosition)
+        }
         if currentCameraInput.device.position == .back {
             return selectCaptureDevice(withPosition: .front)
         } else {
@@ -492,6 +521,18 @@ class VideoService: FrameExtractorDelegate {
         self.camera.switchCamera()
             .subscribe(onCompleted: {
                 print("Camera switched successfully.")
+            }, onError: { error in
+                print(error)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func resetCameraToFrontForCapture() {
+        self.cameraPosition = .front
+        self.updateCachedOrientation()
+        self.camera.switchCamera(toPosition: .front)
+            .subscribe(onCompleted: {
+                print("Camera reset to front successfully.")
             }, onError: { error in
                 print(error)
             })
@@ -651,7 +692,12 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startCapture(withDevice device: String) {
+        self.startCapture(device: device)
+    }
+
+    private func startCapture(device: String? = nil) {
         self.log.debug("Capture started…")
+        self.resetCameraToFrontForCapture()
         if device == camera.highResolutionCamera && self.camera.quality == AVCaptureSession.Preset.medium {
             self.camera.setQuality(quality: AVCaptureSession.Preset.high)
         } else if device == camera.mediumCamera && self.camera.quality == AVCaptureSession.Preset.high {
@@ -662,7 +708,7 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startVideoCaptureBeforeCall() {
-        self.camera.startCapturing()
+        self.startCapture()
     }
 
     func startMediumCamera() {
