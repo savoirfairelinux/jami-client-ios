@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e926f415_e946f41e",
+        "filename": "Ring/Ring/Services/VideoService.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-22T14:28:55Z",
+      "side": 1,
+      "message": "[🔴 Critical Issues] Line 340: Moving `updateDevicePosition` after `configureOutputConnection()` leaves the delegate with the old camera position if `configureOutputConnection()` fails after the session input has already been switched. That can make preview mirroring/rotation state inconsistent with the actual active camera even though the session was mutated. Either roll back the input on failure or update the delegate to match the actual session state before returning the error. For example:\n```suggestion\n        guard configureOutputConnection() else {\n            delegate?.updateDevicePosition(position: newCamera.position)\n            completable(.error(VideoError.switchCameraFailed))\n            return\n        }\n\n        delegate?.updateDevicePosition(position: newCamera.position)\n```",
+      "revId": "bd20097c0510e4b9d318d33985eedbe5028bbbe6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
