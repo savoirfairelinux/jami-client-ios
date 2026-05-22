@@ -323,7 +323,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
 
         observeSystemPressureChanges(captureDevice: newCamera)
-        delegate?.updateDevicePosition(position: newCamera.position)
 
         do {
             let newVideoInput = try AVCaptureDeviceInput(device: newCamera)
@@ -343,6 +342,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             return
         }
 
+        delegate?.updateDevicePosition(position: newCamera.position)
         completable(.completed)
     }
 
