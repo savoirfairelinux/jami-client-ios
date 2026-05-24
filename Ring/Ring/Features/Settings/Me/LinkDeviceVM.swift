@@ -80,6 +80,11 @@ class LinkDeviceVM: ObservableObject {
 
         codeProvided = true
 
+        // Assign operationId first so the filter below matches events from this very
+        // addDevice() call. Subscribing after the call avoids the race where an early
+        // auth signal arrives before the filter predicate knows which operationId to keep.
+        operationId = self.accountService.addDevice(accountId: account.id, token: jamiAuthentication)
+
         self.accountService.authStateSubject
             .filter { [weak self] authResult in
                 guard let self = self else { return false }
@@ -91,8 +96,6 @@ class LinkDeviceVM: ObservableObject {
                 self?.handleAuthResult(authResult)
             })
             .disposed(by: disposeBag)
-
-        operationId = self.accountService.addDevice(accountId: account.id, token: jamiAuthentication)
     }
 
     private func handleAuthResult(_ result: AuthResult) {

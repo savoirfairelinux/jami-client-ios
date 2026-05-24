@@ -232,9 +232,12 @@ class LinkToAccountVM: AvatarProvider {
 
     func start() {
         uiState = .initial
-        setupDeviceAuthObserver()
+        // Create the temporary account first so that tempAccount is assigned before
+        // the observer starts filtering events. This avoids the race where an early
+        // TOKEN_AVAILABLE signal arrives before the filter predicate can match.
         Task {
             tempAccount = try await accountsService.createTemporaryAccount()
+            setupDeviceAuthObserver()
         }
     }
 }
