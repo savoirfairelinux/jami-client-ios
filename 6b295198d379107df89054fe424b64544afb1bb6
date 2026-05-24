@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a90017d1_e640406a",
+        "filename": "Ring/Ring/Features/Settings/Me/LinkDeviceVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:03:54Z",
+      "side": 1,
+      "message": "Line 85: The subscription is installed every time provideCode() reaches this path and is tied only to the view model\u0027s disposeBag. codeProvided prevents the common duplicate path, but if the flow is reused/reset without deallocation, old subscriptions remain active and can process future auth callbacks for the same account, including stale buffered state. Keep a dedicated disposable for the active add-device operation and dispose it before installing a new observer or when the operation reaches a terminal state.\n```suggestion\nprivate let authOperationDisposeBag \u003d SerialDisposable()\n\nlet disposable \u003d self.accountService.authStateSubject\n    .filter { [weak self] authResult in\n        guard let self \u003d self else { return false }\n        return authResult.accountId \u003d\u003d self.account.id\n    }\n    .observe(on: MainScheduler.instance)\n    .subscribe(onNext: { [weak self] authResult in\n        guard let self \u003d self else { return }\n        if self.operationId \u003d\u003d 0 {\n            self.pendingAuthResults.append(authResult)\n        } else if authResult.operationId \u003d\u003d self.operationId {\n            self.handleAuthResult(authResult)\n        }\n    })\nauthOperationDisposeBag.disposable \u003d disposable\n```",
+      "revId": "6b295198d379107df89054fe424b64544afb1bb6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7abecf4f_9d1210ce",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:03:54Z",
+      "side": 1,
+      "message": "[Critical] Line 252: start() now resets tempAccount and pendingAuthResults but does not cancel or disambiguate an already-running createTemporaryAccount() Task. If start() is invoked again before the previous Task completes, the older completion can later overwrite tempAccount and drain auth events for the wrong temporary account, reintroducing a race and potentially driving the UI with stale auth state. Track a generation/token or store and cancel the Task before starting a new one, then ignore completions that are no longer current.\n```suggestion\nprivate var startGeneration \u003d 0\nprivate var createAccountTask: Task\u003cVoid, Never\u003e?\n\nfunc start() {\n    uiState \u003d .initial\n    startGeneration +\u003d 1\n    let generation \u003d startGeneration\n    createAccountTask?.cancel()\n    tempAccount \u003d nil\n    pendingAuthResults.removeAll()\n    setupDeviceAuthObserver()\n\n    createAccountTask \u003d Task { [weak self] in\n        guard let self \u003d self else { return }\n        do {\n            let account \u003d try await self.accountsService.createTemporaryAccount()\n            await MainActor.run {\n                guard generation \u003d\u003d self.startGeneration else { return }\n                self.tempAccount \u003d account\n                let bufferedResults \u003d self.pendingAuthResults\n                self.pendingAuthResults.removeAll()\n                for result in bufferedResults where result.accountId \u003d\u003d account {\n                    self.updateDeviceAuthState(result: result)\n                }\n            }\n        } catch {\n            await MainActor.run {\n                guard generation \u003d\u003d self.startGeneration else { return }\n                withAnimation { self.uiState \u003d .error(message: LinkDeviceError.networkError) }\n            }\n        }\n    }\n}\n```",
+      "revId": "6b295198d379107df89054fe424b64544afb1bb6",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
