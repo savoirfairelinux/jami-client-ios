@@ -80,9 +80,15 @@ class LinkDeviceVM: ObservableObject {
 
         codeProvided = true
 
+        // Subscribe before calling addDevice() so we never miss an early auth signal
+        // (authStateSubject is a PublishSubject — no replay). The filter defers the
+        // operationId check via the instance property which is assigned right after.
         self.accountService.authStateSubject
             .filter { [weak self] authResult in
                 guard let self = self else { return false }
+                // operationId is 0 only until addDevice() returns below;
+                // any real callback arrives later via the serial queue.
+                guard self.operationId != 0 else { return false }
                 return authResult.accountId == self.account.id &&
                     authResult.operationId == self.operationId
             }

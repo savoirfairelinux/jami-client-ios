@@ -118,6 +118,11 @@ class AccountsService: AccountAdapterDelegate {
     let currentWillChange = PublishSubject<AccountModel?>()
     let authStateSubject = PublishSubject<AuthResult>()
 
+    // Serial queue for all account-lifecycle and auth-state callbacks coming from the daemon thread.
+    // Using a single serial queue guarantees that accountsChanged, deviceAuthStateChanged and
+    // addDeviceStateChanged are always processed in arrival order and never race each other.
+    private let accountCallbackQueue = DispatchQueue(label: "net.jami.accountCallbacks", qos: .userInitiated)
+
     /**
      Public shared stream forwarding the events of the responseStream.
      External observers must subscribe to this stream to get results.
@@ -546,7 +551,7 @@ class AccountsService: AccountAdapterDelegate {
     private let accountListLock = NSLock()
 
     func accountsChanged() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
+        accountCallbackQueue.async { [weak self] in
             guard let self = self else { return }
             self.handleAccountsChanged()
         }
@@ -658,14 +663,14 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func addDeviceStateChanged(accountId: String, opId: UInt32, state: Int32, details: [String: String]) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
+        accountCallbackQueue.async { [weak self] in
             guard let self = self else { return }
             self.handleAuthStateChange(accountId: accountId, opId: opId, state: state, details: details)
         }
     }
 
     func deviceAuthStateChanged(accountId: String, state: Int32, details: [String: String]) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
+        accountCallbackQueue.async { [weak self] in
             guard let self = self else { return }
             self.handleAuthStateChange(accountId: accountId, opId: 0, state: state, details: details)
         }

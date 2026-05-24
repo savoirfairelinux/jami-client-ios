@@ -232,6 +232,11 @@ class LinkToAccountVM: AvatarProvider {
 
     func start() {
         uiState = .initial
+        // Install the observer before account creation so no auth event is missed.
+        // The filter predicate is tolerant of tempAccount being nil (returns false
+        // until assigned) — in practice the daemon always emits accountsChanged
+        // before any auth signal, and both are serialized on accountCallbackQueue,
+        // so tempAccount will be set before the first real auth event is processed.
         setupDeviceAuthObserver()
         Task {
             tempAccount = try await accountsService.createTemporaryAccount()
