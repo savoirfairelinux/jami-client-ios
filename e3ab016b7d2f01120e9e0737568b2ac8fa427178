@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf26ab8_4a16e81f",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:03:53Z",
+      "side": 1,
+      "message": "[Critical] Line 506: 🔴 Critical Issues - `startOutgoingCall` no longer switches to the main queue before instantiating `CallViewController` and touching its view model. The previous implementation guaranteed all UIKit/view-model presentation work ran on the main thread; this version can execute from whatever thread invokes `startOutgoingCall`, causing UIKit main-thread violations and racy state updates. Keep the latency improvement, but perform the eager call setup from the main queue before dismissing modals.\n```suggestion\nDispatchQueue.main.async { [weak self] in\n    guard let self \u003d self else { return }\n    let callViewController \u003d CallViewController.instantiate(with: self.injectionBag)\n    callViewController.viewModel.placeCall(with: contactRingId,\n                                           userName: userName,\n                                           account: account,\n                                           isAudioOnly: isAudioOnly)\n\n    self.dismissAllModals { [weak self] in\n        guard let self \u003d self else { return }\n        self.popToSmartList()\n        self.navigateToConversationIfNeeded(for: contactRingId, account: account)\n        self.present(viewController: callViewController,\n                     withStyle: .fadeInOverFullScreen,\n                     withAnimation: false,\n                     withStateable: callViewController.viewModel)\n    }\n}\n```",
+      "revId": "e3ab016b7d2f01120e9e0737568b2ac8fa427178",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "756ebcd9_37496eb9",
+        "filename": "Ring/Ring/Services/Calls/CallsService.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:03:53Z",
+      "side": 1,
+      "message": "Line 174: 🟡 Suggestions - Moving `callDetails` into the async barrier means incoming-call notification now waits behind every previously queued barrier task. If this queue is shared with slower call/media mutations, the incoming call UI and ringing path can still be delayed, which works against the stated latency goal. Prefer fetching the daemon details immediately, then enqueue only the model mutation/notification work if `callDetails` is safe on this callback thread.\n```suggestion\nguard let callDictionary \u003d self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) else { return }\nqueueHelper.barrierAsync { [weak self] in\n    guard let self \u003d self else { return }\n    _ \u003d self.callManagementService.addOrUpdateCall(callId: callId,\n                                                   callState: .incoming,\n                                                   callDictionary: callDictionary,\n                                                   mediaList: withMedia,\n                                                   notifyIncoming: true)\n}\n```",
+      "revId": "e3ab016b7d2f01120e9e0737568b2ac8fa427178",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
