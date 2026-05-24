@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33dd243e_67e0833b",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:27:46Z",
+      "side": 1,
+      "message": "[Critical] Line 523: 🔴 Critical Issues - `dismissAllModals` is now called after presenting the call UI. If `dismissAllModals` dismisses from the coordinator/root presented stack, it can immediately dismiss the newly presented `CallViewController` or race with the presentation, causing the outgoing call UI to disappear. Keep modal cleanup before presentation, but register the state observer before placing the daemon call. Suggested shape:\n```suggestion\nself.dismissAllModals {\n    self.popToSmartList()\n    self.navigateToConversationIfNeeded(for: contactRingId, account: account)\n\n    let callViewController \u003d CallViewController.instantiate(with: self.injectionBag)\n    self.present(viewController: callViewController,\n                 withStyle: .fadeInOverFullScreen,\n                 withAnimation: false,\n                 withStateable: callViewController.viewModel)\n    callViewController.viewModel.placeCall(with: contactRingId,\n                                           userName: userName,\n                                           account: account,\n                                           isAudioOnly: isAudioOnly)\n}\n```",
+      "revId": "7823d7b460df8d702d154b5174f026aa9ed5f0ab",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b83872f_f6957098",
+        "filename": "Ring/Ring/Services/Calls/CallsService.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:27:46Z",
+      "side": 1,
+      "message": "[Major] Line 179: 🟡 Suggestions - The async closure revalidates that the call still exists, but then applies the stale `callDictionary` captured before dispatch. If the daemon updates the call details/state between the callback and the barrier block, this can overwrite newer data or trigger an incoming notification for a call that is no longer incoming. Re-fetch the details used for the mutation inside the serialized block, or explicitly verify the state is still incoming before notifying.\n```suggestion\nguard let latestCallDictionary \u003d self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) else { return }\n_ \u003d self.callManagementService.addOrUpdateCall(callId: callId,\n                                               callState: .incoming,\n                                               callDictionary: latestCallDictionary,\n                                               mediaList: withMedia,\n                                               notifyIncoming: true)\n```",
+      "revId": "7823d7b460df8d702d154b5174f026aa9ed5f0ab",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
