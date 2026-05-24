@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "201e5464_5c637f77",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T19:51:15Z",
+      "side": 1,
+      "message": "[🔴 Critical] Line 506: This method no longer guarantees execution on the main thread before instantiating and using `CallViewController`. The previous implementation wrapped the whole flow in `DispatchQueue.main.async`; after this change, any caller invoking `startOutgoingCall` from a background callback can create UIKit objects and mutate presentation-related state off-main, which can crash or cause racey UI behavior. Keep the early `placeCall` optimization, but preserve the main-thread boundary for view-controller creation and presentation.\n\n```suggestion\nDispatchQueue.main.async { [weak self] in\n    guard let self \u003d self else { return }\n\n    let callViewController \u003d CallViewController.instantiate(with: self.injectionBag)\n    callViewController.viewModel.placeCall(with: contactRingId,\n                                           userName: userName,\n                                           account: account,\n                                           isAudioOnly: isAudioOnly)\n\n    self.dismissAllModals { [weak self] in\n        guard let self \u003d self else { return }\n        self.popToSmartList()\n        self.navigateToConversationIfNeeded(for: contactRingId, account: account)\n        self.present(viewController: callViewController,\n                     withStyle: .fadeInOverFullScreen,\n                     withAnimation: false,\n                     withStateable: callViewController.viewModel)\n    }\n}\n```",
+      "revId": "e52effb131a6c55696235821a89d5698e8c03c0d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07dd5a1e_841e84bd",
+        "filename": "Ring/Ring/Services/Calls/CallsService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T19:51:15Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 173: Deferring the incoming-call state update asynchronously can reorder this signal behind later call-state callbacks on other queues. For example, an `currentCallStateChanged`/hangup/update event that is already dispatched through another path may be processed before the `.incoming` call is inserted, leading to missed updates or an incoming-call notification for a call that has already changed state. To safely unblock the daemon thread, enqueue all call lifecycle callbacks through the same serialized path, or capture the daemon details synchronously and only defer the expensive notification/UI work while preserving event order.\n\n```suggestion\nguard let callDictionary \u003d self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) else { return }\nqueueHelper.barrierAsync { [weak self] in\n    guard let self \u003d self else { return }\n    _ \u003d self.callManagementService.addOrUpdateCall(callId: callId,\n                                                   callState: .incoming,\n                                                   callDictionary: callDictionary,\n                                                   mediaList: withMedia,\n                                                   notifyIncoming: true)\n}\n```",
+      "revId": "e52effb131a6c55696235821a89d5698e8c03c0d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
