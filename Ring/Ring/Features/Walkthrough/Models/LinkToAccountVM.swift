@@ -77,6 +77,7 @@ class LinkToAccountVM: AvatarProvider {
     }
 
     private var tempAccount: String?
+    private var pendingAuthResults = [AuthResult]()
 
     private var accountsService: AccountsService
     private var nameService: NameService
@@ -108,12 +109,27 @@ class LinkToAccountVM: AvatarProvider {
         return L10n.LinkToAccount.shareMessage(info)
     }
 
+    private var authObserverInstalled = false
+
     private func setupDeviceAuthObserver() {
+        // Guard against duplicate subscriptions if start() is called multiple times.
+        guard !authObserverInstalled else { return }
+        authObserverInstalled = true
+
+        // Subscribe without filtering by accountId initially; events arriving before
+        // tempAccount is assigned are buffered and replayed once the account exists.
+        // This eliminates the lost-event race on PublishSubject when the daemon emits
+        // TOKEN_AVAILABLE before createTemporaryAccount() completes.
         accountsService.authStateSubject
-            .filter { [weak self] in $0.accountId == self?.tempAccount }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
-                self?.updateDeviceAuthState(result: result)
+                guard let self = self else { return }
+                guard let accountId = self.tempAccount else {
+                    self.pendingAuthResults.append(result)
+                    return
+                }
+                guard result.accountId == accountId else { return }
+                self.updateDeviceAuthState(result: result)
             })
             .disposed(by: disposeBag)
     }
@@ -232,9 +248,21 @@ class LinkToAccountVM: AvatarProvider {
 
     func start() {
         uiState = .initial
+        // Install observer first so it captures events during account creation.
         setupDeviceAuthObserver()
-        Task {
-            tempAccount = try await accountsService.createTemporaryAccount()
+        Task { @MainActor in
+            do {
+                tempAccount = try await accountsService.createTemporaryAccount()
+                // Drain any auth events that arrived before tempAccount was assigned.
+                // Clear buffer first to avoid stale replays on re-entry.
+                let bufferedResults = pendingAuthResults
+                pendingAuthResults.removeAll()
+                for result in bufferedResults where result.accountId == tempAccount {
+                    updateDeviceAuthState(result: result)
+                }
+            } catch {
+                withAnimation { uiState = .error(message: LinkDeviceError.networkError) }
+            }
         }
     }
 }
