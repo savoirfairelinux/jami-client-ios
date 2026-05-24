@@ -254,18 +254,24 @@ class LinkToAccountVM: AvatarProvider {
         pendingAuthResults.removeAll()
         // Install observer first so it captures events during account creation.
         setupDeviceAuthObserver()
-        Task { @MainActor in
+        Task {
             do {
-                tempAccount = try await accountsService.createTemporaryAccount()
-                // Drain any auth events that arrived before tempAccount was assigned.
-                // Clear buffer first to avoid stale replays on re-entry.
-                let bufferedResults = pendingAuthResults
-                pendingAuthResults.removeAll()
-                for result in bufferedResults where result.accountId == tempAccount {
-                    updateDeviceAuthState(result: result)
+                let accountId = try await accountsService.createTemporaryAccount()
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.tempAccount = accountId
+                    // Drain any auth events that arrived before tempAccount was assigned.
+                    // Clear buffer first to avoid stale replays on re-entry.
+                    let bufferedResults = self.pendingAuthResults
+                    self.pendingAuthResults.removeAll()
+                    for result in bufferedResults where result.accountId == accountId {
+                        self.updateDeviceAuthState(result: result)
+                    }
                 }
             } catch {
-                withAnimation { uiState = .error(message: LinkDeviceError.networkError) }
+                DispatchQueue.main.async { [weak self] in
+                    withAnimation { self?.uiState = .error(message: LinkDeviceError.networkError) }
+                }
             }
         }
     }

@@ -171,9 +171,13 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String, withMedia: [[String: String]]) {
-        guard let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) else { return }
-
-        _ = self.callManagementService.addOrUpdateCall(callId: callId, callState: .incoming, callDictionary: callDictionary, mediaList: withMedia, notifyIncoming: true)
+        // Dispatch off the daemon thread immediately to avoid blocking other daemon signals.
+        // Uses barrier to serialize with other call state mutations.
+        queueHelper.barrierAsync { [weak self] in
+            guard let self = self else { return }
+            guard let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) else { return }
+            _ = self.callManagementService.addOrUpdateCall(callId: callId, callState: .incoming, callDictionary: callDictionary, mediaList: withMedia, notifyIncoming: true)
+        }
     }
 
     func callPlacedOnHold(withCallId callId: String, hold: Bool) {
