@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90594aaa_51775a4c",
+        "filename": "Ring/Ring/Features/Settings/Me/LinkDeviceVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T14:22:24Z",
+      "side": 1,
+      "message": "[🔴 Critical] Line 84: This still can miss the early auth signal it is trying to protect against. The subscription is installed before addDevice(), but the predicate drops every event while operationId is 0; if addDeviceStateChanged is delivered on accountCallbackQueue before addDevice() returns and assigns operationId on this object, the PublishSubject event is discarded permanently. The serial daemon callback queue does not serialize access to this view-model property. Buffer account-matching auth events until operationId is known, or perform the operationId assignment and callback consumption on a single serialized path. For example:\n```suggestion\n// Subscribe before addDevice(), but do not discard account events while the op id is pending.\nvar pendingAuthResults \u003d [AuthResult]()\n\nself.accountService.authStateSubject\n    .filter { [weak self] authResult in\n        authResult.accountId \u003d\u003d self?.account.id\n    }\n    .observe(on: MainScheduler.instance)\n    .subscribe(onNext: { [weak self] authResult in\n        guard let self \u003d self else { return }\n        guard self.operationId !\u003d 0 else {\n            pendingAuthResults.append(authResult)\n            return\n        }\n        guard authResult.operationId \u003d\u003d self.operationId else { return }\n        // existing handling\n    })\n    .disposed(by: disposeBag)\n```",
+      "revId": "405fb486c2c9ce2ce05d388abcc5ee5814adacb1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40410bd_a26355b7",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T14:22:24Z",
+      "side": 1,
+      "message": "[🔴 Critical] Line 236: The new ordering still depends on an assumption that is not enforced by this code: setupDeviceAuthObserver() ignores auth events while tempAccount is nil, but tempAccount is assigned later from an unstructured Task. Even if daemon callbacks are serialized internally, the Task continuation and this property assignment are not serialized with authStateSubject delivery, so an early auth event can still be dropped by the observer. Make the observer buffer account-auth events until tempAccount exists, or create the temporary account first and subscribe using a replaying/stateful stream that cannot lose already-emitted auth state.\n```suggestion\nsetupDeviceAuthObserver(bufferUntilAccountIsAvailable: true)\nTask {\n    let account \u003d try await accountsService.createTemporaryAccount()\n    await MainActor.run {\n        tempAccount \u003d account\n        processBufferedAuthEvents(for: account.id)\n    }\n}\n```",
+      "revId": "405fb486c2c9ce2ce05d388abcc5ee5814adacb1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
