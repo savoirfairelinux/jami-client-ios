@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f8ea148_812d0b70",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:20:06Z",
+      "side": 1,
+      "message": "[Critical] Line 503: This removes the previous DispatchQueue.main.async boundary, but the new code instantiates a UIViewController and then performs modal/navigation work. If startOutgoingCall is invoked off the main thread, this can touch UIKit from a background thread and crash or create intermittent UI corruption. Keep the new ordering, but execute it on the main queue.\n```suggestion\n        DispatchQueue.main.async { [weak self] in\n            guard let self \u003d self else { return }\n\n            let callViewController \u003d CallViewController.instantiate(with: self.injectionBag)\n            callViewController.viewModel.placeCall(with: contactRingId,\n                                                   userName: userName,\n                                                   account: account,\n                                                   isAudioOnly: isAudioOnly)\n\n            self.dismissAllModals { [weak self] in\n                guard let self \u003d self else { return }\n                self.popToSmartList()\n                self.navigateToConversationIfNeeded(for: contactRingId, account: account)\n                self.present(viewController: callViewController,\n                             withStyle: .fadeInOverFullScreen,\n                             withAnimation: false,\n                             withStateable: callViewController.viewModel)\n            }\n        }\n```",
+      "revId": "cffc2c574eeea7033edf986514f0942a53910b72",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1fb4c7_a8d07f4c",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:20:06Z",
+      "side": 1,
+      "message": "[Critical] Line 507: placeCall now runs before the call view model is passed to present(...withStateable:). If placeCall can fail or transition state quickly, the coordinator may miss lifecycle/state callbacks that were previously registered before the daemon call started, leaving the call UI unpresented or cleanup unhandled. Preserve the early daemon call only after the stateable/lifecycle observer is registered, or add an explicit pre-registration API before placeCall.\n```suggestion\n        let callViewController \u003d CallViewController.instantiate(with: injectionBag)\n        registerStateable(callViewController.viewModel)\n        callViewController.viewModel.placeCall(with: contactRingId,\n                                               userName: userName,\n                                               account: account,\n                                               isAudioOnly: isAudioOnly)\n```",
+      "revId": "cffc2c574eeea7033edf986514f0942a53910b72",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
