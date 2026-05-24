@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8805009a_996cb8e0",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T19:58:47Z",
+      "side": 1,
+      "message": "[🔴 Critical] Line 506: This method no longer guarantees main-thread execution before instantiating `CallViewController` and touching its view model. The previous implementation explicitly dispatched to the main queue before doing UI work; if `startOutgoingCall` is invoked from a daemon/service callback or any background path, this can create UIKit objects off the main thread and cause intermittent crashes. Keep the latency improvement, but preserve the main-thread boundary around UI creation/presentation.\n```suggestion\nDispatchQueue.main.async { [weak self] in\n    guard let self \u003d self else { return }\n    let callViewController \u003d CallViewController.instantiate(with: self.injectionBag)\n    callViewController.viewModel.placeCall(with: contactRingId,\n                                           userName: userName,\n                                           account: account,\n                                           isAudioOnly: isAudioOnly)\n\n    self.dismissAllModals { [weak self] in\n        guard let self \u003d self else { return }\n        self.popToSmartList()\n        self.navigateToConversationIfNeeded(for: contactRingId, account: account)\n        self.present(viewController: callViewController,\n                     withStyle: .fadeInOverFullScreen,\n                     withAnimation: false,\n                     withStateable: callViewController.viewModel)\n    }\n}\n```",
+      "revId": "e8a9405d35a34b55f0ace6b110dcf81065eae974",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00117698_47951ee3",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T19:58:47Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 255: Changing `Task { @MainActor in ... }` to an unisolated `Task` and then manually dispatching back to the main queue weakens actor/thread-safety for this view model. The continuation after `await` now runs off-main until the dispatch, and future edits in this block can easily mutate `tempAccount`, `pendingAuthResults`, or `uiState` from the wrong executor. Since this is UI state, keep the task isolated to `MainActor`; the awaited account creation will still suspend without blocking the main thread.\n```suggestion\nTask { @MainActor in\n    do {\n        tempAccount \u003d try await accountsService.createTemporaryAccount()\n        let bufferedResults \u003d pendingAuthResults\n        pendingAuthResults.removeAll()\n        for result in bufferedResults where result.accountId \u003d\u003d tempAccount {\n            updateDeviceAuthState(result: result)\n        }\n    } catch {\n        withAnimation { uiState \u003d .error(message: LinkDeviceError.networkError) }\n    }\n}\n```",
+      "revId": "e8a9405d35a34b55f0ace6b110dcf81065eae974",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9ebe150_94a5f68a",
+        "filename": "Ring/Ring/Services/Calls/CallsService.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T19:58:47Z",
+      "side": 1,
+      "message": "[🔴 Critical] Line 175: Deferring `callDetails(withCallId:accountId:)` to an async barrier can race with subsequent daemon state changes before the incoming call is registered. If the daemon updates or removes the call before this closure runs, the initial incoming notification may be dropped by the `guard`, which is especially risky for the latency-sensitive path being changed. Capture the daemon-provided details synchronously, then move only the state mutation/notification work onto the serialized queue.\n```suggestion\nguard let callDictionary \u003d self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) else { return }\nqueueHelper.barrierAsync { [weak self] in\n    guard let self \u003d self else { return }\n    _ \u003d self.callManagementService.addOrUpdateCall(callId: callId,\n                                                   callState: .incoming,\n                                                   callDictionary: callDictionary,\n                                                   mediaList: withMedia,\n                                                   notifyIncoming: true)\n}\n```",
+      "revId": "e8a9405d35a34b55f0ace6b110dcf81065eae974",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
