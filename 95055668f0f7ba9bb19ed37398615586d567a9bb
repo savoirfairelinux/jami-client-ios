@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19544a33_77fd6843",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T14:33:21Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 116: The observer buffers every auth event while tempAccount is nil, because the initial filter by accountId was removed. During slow account creation this can retain unrelated auth events from all accounts and then scan them later. This is probably small in normal use, but it unnecessarily broadens the data captured by this view model. Consider bounding the buffer to only states that can belong to temporary account creation, or replacing the PublishSubject race fix with a replaying service-level stream keyed by account id.",
+      "revId": "95055668f0f7ba9bb19ed37398615586d567a9bb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd989793_8b02f4e5",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T14:33:21Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 255: start() can now be called multiple times without installing duplicate observers, but overlapping createTemporaryAccount() tasks are still allowed. A slower previous task can complete after a newer start(), overwrite tempAccount with a stale account id, drain pendingAuthResults for the wrong session, and route subsequent auth callbacks to the wrong temporary account. Track a generation token or cancel the previous task before starting a new one.\n```suggestion\nprivate var startGeneration \u003d 0\n\nfunc start() {\n    startGeneration +\u003d 1\n    let generation \u003d startGeneration\n    uiState \u003d .initial\n    tempAccount \u003d nil\n    pendingAuthResults.removeAll()\n    setupDeviceAuthObserver()\n    Task { @MainActor in\n        do {\n            let account \u003d try await accountsService.createTemporaryAccount()\n            guard generation \u003d\u003d startGeneration else { return }\n            tempAccount \u003d account\n            let bufferedResults \u003d pendingAuthResults\n            pendingAuthResults.removeAll()\n            for result in bufferedResults where result.accountId \u003d\u003d account {\n                updateDeviceAuthState(result: result)\n            }\n        } catch {\n            guard generation \u003d\u003d startGeneration else { return }\n            withAnimation { uiState \u003d .error(message: LinkDeviceError.networkError) }\n        }\n    }\n}\n```",
+      "revId": "95055668f0f7ba9bb19ed37398615586d567a9bb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
