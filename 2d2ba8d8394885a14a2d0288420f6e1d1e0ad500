@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9c03033_8797085b",
+        "filename": "Ring/Ring/Features/Settings/Me/LinkDeviceVM.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:35:37Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 86: The subscription buffers same-account auth events before operationId is known, but it never handles addDevice returning 0 or another invalid operation id. In that case operationId remains 0 and the observer will keep appending future auth results for the account indefinitely. Check the returned operation id immediately and dispose/reset state on failure.\n```suggestion\nlet newOperationId \u003d self.accountService.addDevice(accountId: account.id, token: jamiAuthentication)\nguard newOperationId !\u003d 0 else {\n    authOperationDisposable.disposable \u003d Disposables.create()\n    pendingAuthResults.removeAll()\n    withAnimation { exportState \u003d .error }\n    return\n}\noperationId \u003d newOperationId\n```",
+      "revId": "2d2ba8d8394885a14a2d0288420f6e1d1e0ad500",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10944248_8d8dc2c2",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:35:37Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 113: The observer now buffers every auth event while tempAccount is nil. If unrelated accounts emit auth callbacks before createTemporaryAccount() completes or if account creation hangs/fails, pendingAuthResults can grow without bound and retain stale events across the view model lifetime. Filter to only states relevant to temporary account linking, or cap/clear the buffer on failure/cancellation. For example:\n```suggestion\naccountsService.authStateSubject\n    .filter { result in result.state \u003d\u003d .tokenAvailable || result.state \u003d\u003d .connecting || result.state \u003d\u003d .done || result.state \u003d\u003d .error }\n    .observe(on: MainScheduler.instance)\n```\nAlso clear pendingAuthResults in the cancellation/failure path before setting the error state.",
+      "revId": "2d2ba8d8394885a14a2d0288420f6e1d1e0ad500",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14ca0735_e3589e01",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:35:37Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 121: Using one serial queue preserves callback ordering, which is good, but the new queue is qos .userInitiated while accountsChanged can perform account-list refresh work that was previously explicitly backgrounded. This can unnecessarily compete with UI work during daemon churn. Prefer keeping this queue at .utility or .background unless these callbacks must block visible user interaction.\n```suggestion\nprivate let accountCallbackQueue \u003d DispatchQueue(label: \"net.jami.accountCallbacks\", qos: .utility)\n```",
+      "revId": "2d2ba8d8394885a14a2d0288420f6e1d1e0ad500",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
