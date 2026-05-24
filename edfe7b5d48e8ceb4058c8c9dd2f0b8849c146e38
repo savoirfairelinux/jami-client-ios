@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50239834_aaadc17d",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:09:49Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 509: `placeCall` now runs before the call view controller is presented/registered via `present(... withStateable:)`. If `placeCall` emits synchronous or very early state changes, the UI/stateable observer can miss the initial call state or failure state. A safer latency optimization is to register/present the stateable first, then start the daemon call before modal dismissal/navigation work, or ensure the view model buffers and replays the current state when presentation completes.",
+      "revId": "edfe7b5d48e8ceb4058c8c9dd2f0b8849c146e38",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c297f31d_24c3d123",
+        "filename": "Ring/Ring/Services/Calls/CallsService.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:09:49Z",
+      "side": 1,
+      "message": "[🔴 Critical] Line 176: Dispatching `addOrUpdateCall(... notifyIncoming: true)` asynchronously can make the incoming-call notification race with later call-state callbacks. If the caller cancels quickly, a subsequent ended/removed event may be processed before this closure, and then this delayed closure can re-create or notify an incoming call that is already gone. Keep the state transition ordered on the same serialization path used by the other call-state mutations, or re-check that the call is still active/incoming before notifying inside the barrier.",
+      "revId": "edfe7b5d48e8ceb4058c8c9dd2f0b8849c146e38",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
