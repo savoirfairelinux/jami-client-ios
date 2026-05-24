@@ -927,15 +927,18 @@ class ConversationsService {
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
                               to jamiId: String, in conversationId: String) {
-        guard let conversation = self.conversations.value.filter({ conversation in
-            if !conversationId.isEmpty {
-                return  conversation.id == conversationId &&
+        serialOperationQueue.async { [weak self] in
+            guard let self = self else { return }
+            guard let conversation = self.conversations.value.filter({ conversation in
+                if !conversationId.isEmpty {
+                    return  conversation.id == conversationId &&
+                        conversation.accountId == accountId
+                }
+                return conversation.getParticipants().first?.jamiId == jamiId &&
                     conversation.accountId == accountId
-            }
-            return conversation.getParticipants().first?.jamiId == jamiId &&
-                conversation.accountId == accountId
-        }).first else { return }
-        conversation.messageStatusUpdated(status: status, messageId: messageId, jamiId: jamiId)
+            }).first else { return }
+            conversation.messageStatusUpdated(status: status, messageId: messageId, jamiId: jamiId)
+        }
     }
 
     func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {
