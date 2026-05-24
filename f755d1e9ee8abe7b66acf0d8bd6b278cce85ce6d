@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e831c215_f3ae8063",
+        "filename": "Ring/Ring/Features/Settings/Me/LinkDeviceVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T14:17:09Z",
+      "side": 1,
+      "message": "[Critical] Line 83: This still has a lost-event race: `authStateSubject` is a `PublishSubject`, so any auth callback emitted by `addDevice()` before this subscription is installed is dropped permanently. The previous code had the opposite race with `operationId`, but moving the subscription after the call does not make the flow safe. Subscribe first and defer filtering by operation id until it has been assigned, or use a replay/buffered per-operation stream from `AccountsService`.\n```suggestion\nvar expectedOperationId: UInt32?\n\nlet disposable \u003d self.accountService.authStateSubject\n    .filter { [weak self] authResult in\n        guard let self \u003d self,\n              let operationId \u003d expectedOperationId else { return false }\n        return authResult.accountId \u003d\u003d self.account.id \u0026\u0026\n            authResult.operationId \u003d\u003d operationId\n    }\n    .observe(on: MainScheduler.instance)\n    .subscribe(onNext: { [weak self] authResult in\n        self?.handleAuthResult(authResult)\n    })\n\ndisposable.disposed(by: disposeBag)\nexpectedOperationId \u003d self.accountService.addDevice(accountId: account.id, token: jamiAuthentication)\n```",
+      "revId": "f755d1e9ee8abe7b66acf0d8bd6b278cce85ce6d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d007e1a_863c16bd",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T14:17:09Z",
+      "side": 1,
+      "message": "[Critical] Line 236: Installing the device-auth observer only after `createTemporaryAccount()` completes can miss an early `TOKEN_AVAILABLE`/auth-state signal emitted during account creation, because the underlying subject is not replaying events. This reintroduces the same class of race the change is trying to fix. Keep the observer active before starting account creation, but make its predicate tolerant of `tempAccount` being assigned asynchronously, or have `createTemporaryAccount()` return enough information to subscribe to a buffered account-specific auth stream before daemon callbacks can fire.\n```suggestion\nsetupDeviceAuthObserver()\nTask {\n    tempAccount \u003d try await accountsService.createTemporaryAccount()\n}\n```",
+      "revId": "f755d1e9ee8abe7b66acf0d8bd6b278cce85ce6d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
