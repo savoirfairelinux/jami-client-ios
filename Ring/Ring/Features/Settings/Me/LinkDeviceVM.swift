@@ -52,9 +52,11 @@ class LinkDeviceVM: ObservableObject {
     let accountService: AccountsService
 
     let disposeBag = DisposeBag()
+    private let authOperationDisposable = SerialDisposable()
     var codeProvided = false
 
     private var operationId: UInt32 = 0
+    private var pendingAuthResults = [AuthResult]()
 
     init(account: AccountModel, accountService: AccountsService) {
         self.account = account
@@ -80,19 +82,39 @@ class LinkDeviceVM: ObservableObject {
 
         codeProvided = true
 
-        self.accountService.authStateSubject
+        // Reset per-operation state so buffering works correctly on retry/reuse.
+        operationId = 0
+        pendingAuthResults.removeAll()
+
+        // Subscribe before addDevice() so no event from the PublishSubject is missed.
+        // Events arriving before operationId is known are buffered and replayed once
+        // addDevice() returns. This eliminates the race window where an early auth
+        // callback could be discarded because operationId was still 0.
+        // Use SerialDisposable so any previous subscription is disposed on reuse.
+        authOperationDisposable.disposable = self.accountService.authStateSubject
             .filter { [weak self] authResult in
                 guard let self = self else { return false }
-                return authResult.accountId == self.account.id &&
-                    authResult.operationId == self.operationId
+                return authResult.accountId == self.account.id
             }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] authResult in
-                self?.handleAuthResult(authResult)
+                guard let self = self else { return }
+                if self.operationId == 0 {
+                    self.pendingAuthResults.append(authResult)
+                } else if authResult.operationId == self.operationId {
+                    self.handleAuthResult(authResult)
+                }
             })
-            .disposed(by: disposeBag)
 
         operationId = self.accountService.addDevice(accountId: account.id, token: jamiAuthentication)
+
+        // Drain buffered events now that operationId is known.
+        // Clear buffer first to avoid stale replays if handleAuthResult re-enters.
+        let bufferedResults = pendingAuthResults
+        pendingAuthResults.removeAll()
+        for result in bufferedResults where result.operationId == operationId {
+            handleAuthResult(result)
+        }
     }
 
     private func handleAuthResult(_ result: AuthResult) {
