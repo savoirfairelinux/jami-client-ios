@@ -499,21 +499,32 @@ extension ConversationsCoordinator {
             return
         }
 
-        DispatchQueue.main.async { [weak self] in
-            self?.handleOutgoingCall(contactRingId: contactRingId,
-                                     userName: userName,
-                                     account: account,
-                                     isAudioOnly: isAudioOnly)
-        }
-    }
-
-    private func handleOutgoingCall(contactRingId: String, userName: String, account: AccountModel, isAudioOnly: Bool) {
-        dismissAllModals { [weak self] in
+        // Ensure UIKit work is on the main thread (callers may invoke from background).
+        let work = { [weak self] in
             guard let self = self else { return }
+            // Dismiss modals first, then present call VC and place the daemon call.
+            // placeCall is fired after present() so the stateable observer is registered
+            // and captures any immediate state changes.
+            self.dismissAllModals {
+                self.popToSmartList()
+                self.navigateToConversationIfNeeded(for: contactRingId, account: account)
 
-            self.popToSmartList()
-            self.navigateToConversationIfNeeded(for: contactRingId, account: account)
-            self.presentCallViewController(contactRingId: contactRingId, userName: userName, account: account, isAudioOnly: isAudioOnly)
+                let callViewController = CallViewController.instantiate(with: self.injectionBag)
+                self.present(viewController: callViewController,
+                             withStyle: .fadeInOverFullScreen,
+                             withAnimation: false,
+                             withStateable: callViewController.viewModel)
+                callViewController.viewModel.placeCall(with: contactRingId,
+                                                       userName: userName,
+                                                       account: account,
+                                                       isAudioOnly: isAudioOnly)
+            }
+        }
+
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.async(execute: work)
         }
     }
 
@@ -541,15 +552,4 @@ extension ConversationsCoordinator {
         return nil
     }
 
-    private func presentCallViewController(contactRingId: String, userName: String, account: AccountModel, isAudioOnly: Bool) {
-        let callViewController = CallViewController.instantiate(with: injectionBag)
-        present(viewController: callViewController,
-                withStyle: .fadeInOverFullScreen,
-                withAnimation: false,
-                withStateable: callViewController.viewModel)
-        callViewController.viewModel.placeCall(with: contactRingId,
-                                               userName: userName,
-                                               account: account,
-                                               isAudioOnly: isAudioOnly)
-    }
 }
