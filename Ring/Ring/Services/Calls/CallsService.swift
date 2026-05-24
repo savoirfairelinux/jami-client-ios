@@ -171,9 +171,17 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String, withMedia: [[String: String]]) {
+        // Fetch call details immediately on the daemon thread (fast C++ bridge call)
+        // to avoid a race where the call is removed before the async closure runs.
         guard let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) else { return }
-
-        _ = self.callManagementService.addOrUpdateCall(callId: callId, callState: .incoming, callDictionary: callDictionary, mediaList: withMedia, notifyIncoming: true)
+        // Dispatch only the model mutation off the daemon thread to avoid blocking signals.
+        queueHelper.barrierAsync { [weak self] in
+            guard let self = self else { return }
+            // Re-verify the call is still active — a quick cancel/hangup between the
+            // daemon callback and this closure could have already removed it.
+            guard self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) != nil else { return }
+            _ = self.callManagementService.addOrUpdateCall(callId: callId, callState: .incoming, callDictionary: callDictionary, mediaList: withMedia, notifyIncoming: true)
+        }
     }
 
     func callPlacedOnHold(withCallId callId: String, hold: Bool) {
