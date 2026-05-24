@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c64ab34f_01e82ec4",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T14:31:38Z",
+      "side": 1,
+      "message": "[Critical] Line 249: 🔴 Critical Issues - `start()` can still drop the early auth callback on any retry/restart because `tempAccount` is not reset before creating the new temporary account. With `authObserverInstalled` preventing a fresh subscription, callbacks emitted during the second `createTemporaryAccount()` will be compared against the previous account id and discarded instead of buffered. Reset the temporary account and pending buffer before starting creation so pre-assignment events are buffered for the new account.\n\n```suggestion\n    func start() {\n        uiState \u003d .initial\n        tempAccount \u003d nil\n        pendingAuthResults.removeAll()\n        // Install observer first so it captures events during account creation.\n        setupDeviceAuthObserver()\n        Task { @MainActor in\n```\n",
+      "revId": "572976ccbfd3b2e6fef908ce9744d78f35b53d6a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
