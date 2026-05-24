@@ -499,21 +499,24 @@ extension ConversationsCoordinator {
             return
         }
 
-        DispatchQueue.main.async { [weak self] in
-            self?.handleOutgoingCall(contactRingId: contactRingId,
-                                     userName: userName,
-                                     account: account,
-                                     isAudioOnly: isAudioOnly)
-        }
-    }
+        // Instantiate the call view controller and fire the daemon call IMMEDIATELY,
+        // before any modal dismissal or navigation. This starts the network signaling
+        // as early as possible — UI transitions happen in parallel.
+        let callViewController = CallViewController.instantiate(with: injectionBag)
+        callViewController.viewModel.placeCall(with: contactRingId,
+                                               userName: userName,
+                                               account: account,
+                                               isAudioOnly: isAudioOnly)
 
-    private func handleOutgoingCall(contactRingId: String, userName: String, account: AccountModel, isAudioOnly: Bool) {
+        // Now handle UI: dismiss modals, navigate, then present the already-calling VC.
         dismissAllModals { [weak self] in
             guard let self = self else { return }
-
             self.popToSmartList()
             self.navigateToConversationIfNeeded(for: contactRingId, account: account)
-            self.presentCallViewController(contactRingId: contactRingId, userName: userName, account: account, isAudioOnly: isAudioOnly)
+            self.present(viewController: callViewController,
+                         withStyle: .fadeInOverFullScreen,
+                         withAnimation: false,
+                         withStateable: callViewController.viewModel)
         }
     }
 
@@ -541,15 +544,4 @@ extension ConversationsCoordinator {
         return nil
     }
 
-    private func presentCallViewController(contactRingId: String, userName: String, account: AccountModel, isAudioOnly: Bool) {
-        let callViewController = CallViewController.instantiate(with: injectionBag)
-        present(viewController: callViewController,
-                withStyle: .fadeInOverFullScreen,
-                withAnimation: false,
-                withStateable: callViewController.viewModel)
-        callViewController.viewModel.placeCall(with: contactRingId,
-                                               userName: userName,
-                                               account: account,
-                                               isAudioOnly: isAudioOnly)
-    }
 }
