@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73be909a_1ee85a35",
+        "filename": "Ring/Ring/Features/Settings/Me/LinkDeviceVM.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:08:44Z",
+      "side": 1,
+      "message": "[🔴 Critical Issues] Line 91: The new buffering path only works when `operationId \u003d\u003d 0`, but `sendAuthentication()` does not reset `operationId` before installing the next subscription. On a retry/reuse, `operationId` still contains the previous operation id while `addDevice()` is running, so an early callback for the new operation is not buffered and is discarded because it does not match the stale id. Reset the per-operation state before subscribing/calling `addDevice()`.\n```suggestion\n        codeProvided \u003d true\n        operationId \u003d 0\n        pendingAuthResults.removeAll()\n\n        authOperationDisposable.disposable \u003d self.accountService.authStateSubject\n```",
+      "revId": "c88fb1713d1e74a404a2ba2595546c74101d8b7b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
