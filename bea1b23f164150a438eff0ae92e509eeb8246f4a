@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c390b45a_0eff8fbe",
+        "filename": "Ring/Ring/Features/Settings/Me/LinkDeviceVM.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T14:26:32Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 100: Buffered auth results are drained without clearing the buffer if `handleAuthResult` triggers side effects that re-enter this flow or if future changes make it throw/return early. Prefer taking and clearing the buffer before handling matched results to avoid stale replay risk and make the lifecycle explicit:\n```suggestion\nlet bufferedResults \u003d pendingAuthResults\npendingAuthResults.removeAll()\nfor result in bufferedResults where result.operationId \u003d\u003d operationId {\n    handleAuthResult(result)\n}\n```",
+      "revId": "bea1b23f164150a438eff0ae92e509eeb8246f4a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da59bbcb_c42ec04e",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T14:26:32Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 110: `setupDeviceAuthObserver()` subscribes every time `start()` is called, and the new buffering logic means duplicate subscriptions can now append and replay the same auth result multiple times. If this view model can be restarted or the view lifecycle calls `start()` more than once, auth state transitions may be duplicated or rejected as invalid. Make observer installation idempotent, or reset/dispose the previous subscription before installing a new one.",
+      "revId": "bea1b23f164150a438eff0ae92e509eeb8246f4a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f6ff73b_d125c350",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T14:26:32Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 245: The Task now runs on the MainActor, but `try await accountsService.createTemporaryAccount()` is not handled. If account creation throws, the task fails silently and the UI remains in `.initial` with an installed auth observer and no user-visible error. Please catch the error and transition to the existing failure/error state used by this flow. For example:\n```suggestion\nTask { @MainActor in\n    do {\n        tempAccount \u003d try await accountsService.createTemporaryAccount()\n        let matched \u003d pendingAuthResults.filter { $0.accountId \u003d\u003d tempAccount }\n        pendingAuthResults.removeAll()\n        for result in matched {\n            updateDeviceAuthState(result: result)\n        }\n    } catch {\n        pendingAuthResults.removeAll()\n        uiState \u003d .error\n    }\n}\n```",
+      "revId": "bea1b23f164150a438eff0ae92e509eeb8246f4a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
