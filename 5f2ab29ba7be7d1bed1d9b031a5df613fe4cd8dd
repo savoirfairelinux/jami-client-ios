@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9702f1d7_d721dfcb",
+        "filename": "Ring/Ring/Features/Settings/Me/LinkDeviceVM.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:27:42Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 94: The buffering still does not reliably cover the race this patch is trying to fix. Because `observe(on: MainScheduler.instance)` is applied before the subscription closure, an auth event emitted while `addDevice()` is running is queued to the main scheduler and the closure may not execute until after `operationId` has already been assigned. In that case it skips the buffer path and handles the result directly, which is fine for matching op ids, but the explicit drain of `pendingAuthResults` is not a reliable replay mechanism and state mutation is split across scheduler timing. Move the operation-id/buffering decision before `observe(on:)`, or serialize `operationId` assignment and event processing on one queue/actor so the decision is made in emission order.",
+      "revId": "5f2ab29ba7be7d1bed1d9b031a5df613fe4cd8dd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "751b4e05_105397d7",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:27:42Z",
+      "side": 1,
+      "message": "[🟡 Suggestion] Line 128: While `tempAccount` is nil, every auth event from every account is appended to `pendingAuthResults`. On an app with active account/device activity, this can grow unnecessarily and retains unrelated callback details until temporary account creation finishes. Prefer filtering to only device-auth events relevant to this flow if possible, or bound/clear the buffer on terminal states and cancellation. For example, buffer only states expected before the temporary account id is known and discard unrelated terminal/error events once `startGeneration` changes.",
+      "revId": "5f2ab29ba7be7d1bed1d9b031a5df613fe4cd8dd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85d7688f_07d12a0c",
+        "filename": "Ring/Ring/Features/Walkthrough/Models/LinkToAccountVM.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:27:42Z",
+      "side": 1,
+      "message": "[🔴 Critical] Line 252: `createAccountTask?.cancel()` does not cancel the underlying `createTemporaryAccount()` operation unless that API cooperatively checks cancellation. A stale temporary account can still be created in the daemon and then ignored by the generation guard, potentially leaking an unused temporary account. If the service has a delete/remove temporary account API, clean up stale results when `generation !\u003d startGeneration`; otherwise make `createTemporaryAccount()` cancellation-aware.",
+      "revId": "5f2ab29ba7be7d1bed1d9b031a5df613fe4cd8dd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba5b1dac_313176d3",
+        "filename": "Ring/Ring/Services/AccountsService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1193
+      },
+      "writtenOn": "2026-05-24T20:27:42Z",
+      "side": 1,
+      "message": "[🟢 Good Practice] Line 119: Using one serial callback queue for account and auth callbacks is a good direction and should remove the prior cross-callback ordering race. Please ensure every access to shared account lifecycle state touched by `handleAccountsChanged()` and `handleAuthStateChange()` is consistently confined to this queue or protected by existing locks; otherwise this only serializes delegate entry points and not necessarily all readers/writers.",
+      "revId": "5f2ab29ba7be7d1bed1d9b031a5df613fe4cd8dd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
