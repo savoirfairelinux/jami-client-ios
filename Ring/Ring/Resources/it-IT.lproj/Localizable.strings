@@ -150,7 +150,7 @@
 "smartlist.accounts" = "Account";
 "smartlist.disableDonation" = "Non adesso";
 "smartlist.donationExplanation" = "Se ti piace usare Jami e pensi che la nostra missione sia importante, vuoi fare una donazione?";
-"smartlist.inSynchronization" = "Syncing…";
+"smartlist.inSynchronization" = "Sincronizzazione…";
 "smartlist.newMessage" = "Nuovo messaggio";
 
 // Conversation
@@ -169,7 +169,7 @@
 "conversation.sendRequest" = "Manda un invito per poter conversare.";
 "conversation.sendRequestTitle" = "Manda invito alla conversazione";
 "conversation.synchronizationTitle" = "Hai accettato l'invito alla conversazione.";
-"conversation.syncingTitle" = "Syncing conversation";
+"conversation.syncingTitle" = "Sincronizzazione conversazione";
 "conversation.synchronizationMessage" = "In attesa che %@ si connetta per sincronizzare la conversazione…";
 "conversation.inReplyTo" = "In risposta a";
 "conversation.repliedTo" = "%@ ha risposto a %@";
@@ -404,7 +404,7 @@
 "accountPage.encryptAccount" = "Password";
 "accountPage.passwordExplanation" = "Il tuo account Jami è registrato solo su questo dispositivo come archivio contenente le chiavi del proprio account. L'accesso a questo archivio può essere protetto con una password.";
 "accountPage.passwordsDoNotMatch" = "Le password non corrispondono.";
-"accountPage.passwordCreated" = "Password set";
+"accountPage.passwordCreated" = "Password creata";
 "accountPage.passwordUpdated" = "Password aggiornata";
 "accountPage.linkedDevices" = "Dispositivi associati";
 "accountPage.unlink" = "Dissocia";

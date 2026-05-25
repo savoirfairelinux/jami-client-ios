@@ -150,7 +150,7 @@
 "smartlist.accounts" = "Conturi";
 "smartlist.disableDonation" = "Nu acum";
 "smartlist.donationExplanation" = "Dacă îți place să folosești Jami și crezi că misiunea noastră este importantă, vrei să faci o donație?";
-"smartlist.inSynchronization" = "Syncing…";
+"smartlist.inSynchronization" = "Sincronizare…";
 "smartlist.newMessage" = "Mesaj nou";
 
 // Conversation
@@ -169,7 +169,7 @@
 "conversation.sendRequest" = "Trimite o invitație pentru a putea conversa.";
 "conversation.sendRequestTitle" = "Trimite o invitație la conversație";
 "conversation.synchronizationTitle" = "Ai acceptat invitația la conversație.";
-"conversation.syncingTitle" = "Syncing conversation";
+"conversation.syncingTitle" = "Sincronizarea conversației";
 "conversation.synchronizationMessage" = "Se așteaptă ca %@ să se conecteze pentru a sincroniza conversația…";
 "conversation.inReplyTo" = "Răspuns pentru";
 "conversation.repliedTo" = "%@ a răspuns pentru %@";
@@ -404,7 +404,7 @@
 "accountPage.encryptAccount" = "Parola";
 "accountPage.passwordExplanation" = "Contul tău Jami este înregistrat doar în acest aparat ca o arhivă care conține cheile contului tău. Accesul la această arhivă poate fi protejat cu o parolă.";
 "accountPage.passwordsDoNotMatch" = "Parolele nu se potrivesc.";
-"accountPage.passwordCreated" = "Password set";
+"accountPage.passwordCreated" = "Parolă creată";
 "accountPage.passwordUpdated" = "Parolă actualizată";
 "accountPage.linkedDevices" = "Aparate asociate";
 "accountPage.unlink" = "Elimină";

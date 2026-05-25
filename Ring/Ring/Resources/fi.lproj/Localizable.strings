@@ -150,7 +150,7 @@
 "smartlist.accounts" = "Tilit";
 "smartlist.disableDonation" = "Ei nyt";
 "smartlist.donationExplanation" = "Jos pidät Jamista ja uskot tehtäväämme, Haluatko tehdä lahjoituksen?";
-"smartlist.inSynchronization" = "Syncing…";
+"smartlist.inSynchronization" = "Synkronoidaan...";
 "smartlist.newMessage" = "Uusi viesti";
 
 // Conversation
@@ -169,7 +169,7 @@
 "conversation.sendRequest" = "Lähetä kutsu, jotta he voivat keskustella.";
 "conversation.sendRequestTitle" = "Lähetä keskustelukutsu";
 "conversation.synchronizationTitle" = "Olet hyväksynyt keskustelukutsun.";
-"conversation.syncingTitle" = "Syncing conversation";
+"conversation.syncingTitle" = "Keskustelun synkronointi";
 "conversation.synchronizationMessage" = "Odotetaan, että %@ synkronoi keskustelun…";
 "conversation.inReplyTo" = "Vastauksena";
 "conversation.repliedTo" = "%@ vastasi %@:lle";
@@ -404,7 +404,7 @@
 "accountPage.encryptAccount" = "Salasana";
 "accountPage.passwordExplanation" = "Jami-tilisi on rekisteröity vain tälle laitteelle sisältäen pakatun tiedoston, joka sisältää tilisi avaimet. Pääsy tähän pakettiin voidaan suojata salasanalla.";
 "accountPage.passwordsDoNotMatch" = "Salasanat eivät täsmää.";
-"accountPage.passwordCreated" = "Password set";
+"accountPage.passwordCreated" = "Salasana asetettu";
 "accountPage.passwordUpdated" = "Salasana päivitetty";
 "accountPage.linkedDevices" = "Linkitetyt laitteet";
 "accountPage.unlink" = "Poista linkitys";

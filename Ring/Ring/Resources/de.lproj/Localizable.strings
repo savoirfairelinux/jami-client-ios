@@ -313,7 +313,7 @@
 
 // Calls
 "calls.ringing" = "Es klingelt…";
-"calls.connecting" = "Verbindung wird hergestellt…";
+"calls.connecting" = "Verbindungsaufbau…";
 "calls.callFinished" = "Anruf beendet";
 "calls.currentCallWith" = "Anrufen mit";
 "calls.maximize" = "Maximieren";
