@@ -459,4 +459,19 @@ extension UIImage {
 
         return normalizedImage ?? self
     }
+
+    func aspectFillRect(in rect: CGRect) -> CGRect {
+        guard size.width > 0, size.height > 0 else { return rect }
+        let imageAspect = size.width / size.height
+        let rectAspect = rect.width / rect.height
+        if imageAspect > rectAspect {
+            let drawWidth = rect.height * imageAspect
+            return CGRect(x: rect.midX - drawWidth / 2, y: rect.minY,
+                          width: drawWidth, height: rect.height)
+        } else {
+            let drawHeight = rect.width / imageAspect
+            return CGRect(x: rect.minX, y: rect.midY - drawHeight / 2,
+                          width: rect.width, height: drawHeight)
+        }
+    }
 }

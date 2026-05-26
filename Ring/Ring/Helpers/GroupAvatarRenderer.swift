@@ -216,7 +216,7 @@ enum GroupAvatarRenderer {
         context.setShadow(offset: .zero, blur: 0)
         context.saveGState()
         path.addClip()
-        image.draw(in: rect)
+        image.draw(in: image.aspectFillRect(in: rect))
         context.restoreGState()
     }
 
