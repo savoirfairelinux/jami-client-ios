@@ -170,7 +170,7 @@ struct AccountModelHelper {
 
     var uri: String? {
         guard let details = self.account.details else { return nil }
-        if self.account.type == AccountType.sip {
+        if self.isAccountSip() || self.account.type == AccountType.sip {
             let name = details
                 .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountUsername))
             let server = details

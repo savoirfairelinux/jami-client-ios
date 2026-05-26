@@ -219,11 +219,13 @@ struct SmartListContentView: View {
                     .animation(nil, value: isSearchBarActive)
             }
             if !model.searchQuery.isEmpty {
-                Text(model.publicDirectoryTitle)
-                    .fontWeight(.semibold)
-                    .hideRowSeparator()
-                    .padding(.top)
-                    .animation(nil, value: isSearchBarActive)
+                if !model.isSipAccount() {
+                    Text(model.publicDirectoryTitle)
+                        .fontWeight(.semibold)
+                        .hideRowSeparator()
+                        .padding(.top)
+                        .animation(nil, value: isSearchBarActive)
+                }
                 searchResultView
                     .hideRowSeparator()
                     .padding(.bottom)

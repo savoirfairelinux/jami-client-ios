@@ -196,12 +196,10 @@ class JamiSearchViewModel: ObservableObject {
     }
 
     private func createTemporaryConversation(searchQuery: String, account: AccountModel) -> ConversationViewModel {
-        switch account.type {
-        case .sip:
+        if isSipAccount(account) {
             return self.createTemporarySipConversation(with: searchQuery, account: account)
-        case .ring:
-            return self.createTemporarySwarmConversation(with: searchQuery, accountId: account.id)
         }
+        return self.createTemporarySwarmConversation(with: searchQuery, accountId: account.id)
     }
 
     // Filter existing conversations, perform name lookup and create temporary conversations.
@@ -212,7 +210,7 @@ class JamiSearchViewModel: ObservableObject {
             return
         }
         guard let account = self.accountsService.currentAccount else { return }
-        if searchQuery.count < 3 && !account.isJams {
+        if searchQuery.count < 3 && !account.isJams && !isSipAccount(account) {
             self.searchStatus.onNext(.invalidId)
             return
         }
@@ -254,12 +252,16 @@ class JamiSearchViewModel: ObservableObject {
          hash(not SHA1 format) and return because temporary conversation will be
          added when lookup ended.
          */
-        if currentAccount.type == .ring && !searchQuery.isSHA1() {
+        if !isSipAccount(currentAccount) && !searchQuery.isSHA1() {
             self.performLookup(searchQuery: searchQuery, accounId: currentAccount.id, isJams: false)
             return
         }
         let tempConversation = self.createTemporaryConversation(searchQuery: searchQuery, account: currentAccount)
         self.temporaryConversationCreated(tempConversation: tempConversation)
+    }
+
+    private func isSipAccount(_ account: AccountModel) -> Bool {
+        return AccountModelHelper(withAccount: account).isAccountSip() || account.type == .sip
     }
 
     private func performLookup(searchQuery: String, accounId: String, isJams: Bool) {

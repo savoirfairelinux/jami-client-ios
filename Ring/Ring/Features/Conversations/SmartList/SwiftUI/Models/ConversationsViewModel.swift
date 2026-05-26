@@ -317,7 +317,7 @@ class ConversationsViewModel: ObservableObject {
 
     func isSipAccount() -> Bool {
         guard let account = self.accountsService.currentAccount else { return false }
-        return account.type == .sip
+        return AccountModelHelper(withAccount: account).isAccountSip() || account.type == .sip
     }
 
     func showSipConversation(withNumber number: String,
@@ -438,7 +438,7 @@ class ConversationsViewModel: ObservableObject {
 
     private func updateSearchStatusIfNeeded() {
         guard let account = self.accountsService.currentAccount else { return }
-        if searchQuery.count > 2 || account.isJams {
+        if searchQuery.count > 2 || account.isJams || isSipAccount() {
             evaluateSearchResults()
         } else {
             searchStatus = .invalidId
