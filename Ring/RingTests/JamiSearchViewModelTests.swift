@@ -20,6 +20,7 @@
 
 import XCTest
 import RxRelay
+import RxSwift
 @testable import Ring
 
 final class JamiSearchViewModelTests: XCTestCase {
@@ -100,6 +101,16 @@ final class JamiSearchViewModelTests: XCTestCase {
         participant.registeredName.accept(name)
         let swarmInfo = TestableSwarmInfo(participants: [participant], containsSearchQuery: containsSearchQuery, hasParticipantWithRegisteredName: hasParticipantWithRegisteredName)
         return swarmInfo
+    }
+
+    func createSipAccount() -> AccountModel {
+        let account = AccountModel(withAccountId: "sip-account")
+        account.details = AccountConfigModel(withDetails: [
+            ConfigKey.accountType.rawValue: AccountType.sip.rawValue,
+            ConfigKey.accountUsername.rawValue: "user",
+            ConfigKey.accountHostname.rawValue: "sip.example.org"
+        ])
+        return account
     }
 
     func testConversationExists_ForOneToOneConversation_QueryIsHash_Exists() {
@@ -286,6 +297,33 @@ final class JamiSearchViewModelTests: XCTestCase {
         let result = searchViewModel.isConversation(conversationVM, match: searchQuery)
         // Assert
         XCTAssertTrue(result)
+    }
+
+    func testSearch_SipAccount_CreatesSipTemporaryConversationForShortNumber() {
+        // Arrange
+        let account = createSipAccount()
+        injectionBag.accountService.setAccountList([account])
+        let creationExpectation = expectation(description: "SIP temporary conversation created")
+        var temporaryConversation: ConversationViewModel?
+        let disposable = searchViewModel.temporaryConversation
+            .skip(1)
+            .compactMap { $0 }
+            .subscribe(onNext: { conversation in
+                temporaryConversation = conversation
+                creationExpectation.fulfill()
+            })
+        defer { disposable.dispose() }
+
+        // Act
+        searchViewModel.searchBarText.accept("12")
+
+        // Assert
+        waitForExpectations(timeout: 2)
+        XCTAssertEqual(temporaryConversation?.conversation.accountId, account.id)
+        XCTAssertEqual(temporaryConversation?.conversation.hash, "12")
+        XCTAssertEqual(temporaryConversation?.conversation.getAllParticipants().first?.jamiId, "12")
+        XCTAssertEqual(temporaryConversation?.conversation.isCoredialog(), true)
+        XCTAssertEqual(temporaryConversation?.conversation.isSwarm(), false)
     }
 
     func testTemporaryConversationExist_True() {

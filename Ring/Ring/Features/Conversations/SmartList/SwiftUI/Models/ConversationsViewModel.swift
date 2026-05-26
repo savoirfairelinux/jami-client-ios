@@ -438,7 +438,7 @@ class ConversationsViewModel: ObservableObject {
 
     private func updateSearchStatusIfNeeded() {
         guard let account = self.accountsService.currentAccount else { return }
-        if searchQuery.count > 2 || account.isJams {
+        if searchQuery.count > 2 || account.isJams || isSipAccount() {
             evaluateSearchResults()
         } else {
             searchStatus = .invalidId
