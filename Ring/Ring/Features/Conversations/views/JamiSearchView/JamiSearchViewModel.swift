@@ -212,7 +212,7 @@ class JamiSearchViewModel: ObservableObject {
             return
         }
         guard let account = self.accountsService.currentAccount else { return }
-        if searchQuery.count < 3 && !account.isJams {
+        if searchQuery.count < 3 && !account.isJams && account.type != .sip {
             self.searchStatus.onNext(.invalidId)
             return
         }
