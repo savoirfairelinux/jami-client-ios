@@ -216,8 +216,25 @@ enum GroupAvatarRenderer {
         context.setShadow(offset: .zero, blur: 0)
         context.saveGState()
         path.addClip()
-        image.draw(in: rect)
+        image.draw(in: aspectFillRect(for: image, in: rect))
         context.restoreGState()
+    }
+
+    private static func aspectFillRect(for image: UIImage, in rect: CGRect) -> CGRect {
+        guard image.size.width > 0, image.size.height > 0,
+              rect.width > 0, rect.height > 0 else { return rect }
+
+        let imageAspect = image.size.width / image.size.height
+        let rectAspect = rect.width / rect.height
+        if imageAspect > rectAspect {
+            let drawWidth = rect.height * imageAspect
+            return CGRect(x: rect.midX - drawWidth / 2, y: rect.minY,
+                          width: drawWidth, height: rect.height)
+        }
+
+        let drawHeight = rect.width / imageAspect
+        return CGRect(x: rect.minX, y: rect.midY - drawHeight / 2,
+                      width: rect.width, height: drawHeight)
     }
 
     private static func drawMonogramCircle(in context: CGContext, name: String,
