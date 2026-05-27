@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
     private let systemService = SystemService(withSystemAdapter: SystemAdapter())
     private let networkService = NetworkService()
+    private let peerSharingService = PeerSharingService(withPeerServicesAdapter: PeerServicesAdapter())
     private let callsProvider: CallsProviderService = CallsProviderService(provider: CXProvider(configuration: CallsHelpers.providerConfiguration()), controller: CXCallController())
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
@@ -91,7 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withCallsProvider: self.callsProvider,
                             withLocationSharingService: self.locationSharingService,
                             withRequestsService: self.requestsService,
-                            withSystemService: self.systemService)
+                            withSystemService: self.systemService,
+                            withPeerSharingService: self.peerSharingService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(injectionBag: self.injectionBag)
@@ -340,6 +342,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // MARK: - Scene Lifecycle Methods
 
     func sceneDidEnterBackground() {
+        self.peerSharingService.closeAllTunnels()
         guard let account = self.accountService.currentAccount else { return }
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: false)
     }

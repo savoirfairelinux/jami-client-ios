@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger closeServiceTunnelCallCount;
 @property (nonatomic, copy, nullable) NSString *lastClosedTunnelId;
+@property (nonatomic, assign) NSInteger openServiceTunnelCallCount;
 
 @end
 
