@@ -47,6 +47,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import <GSKStretchyHeaderView/GSKStretchyHeaderView.h>
 #import "DataTransferAdapter.h"
+#import "PeerServicesAdapter.h"
 #import "ObjCHandler.h"
 #import "ContactsFileReader.h"
 #import <CoreLocation/CoreLocation.h>
