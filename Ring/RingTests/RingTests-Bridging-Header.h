@@ -29,3 +29,4 @@
 #import "FixtureFailStartDRingAdapter.h"
 #import "ObjCMockCallsAdapter.h"
 #import "ObjCMockVideoAdapter.h"
+#import "ObjCMockPeerServicesAdapter.h"

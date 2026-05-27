@@ -454,6 +454,11 @@
 		26EFD7F92E2EB38300B63F74 /* VideoUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26EFD7F82E2EB38300B63F74 /* VideoUtils.mm */; };
 		26EFD7FB2E2EBA4500B63F74 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
 		26EFD7FC2E2EBA4500B63F74 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04399AAB1D1C304300E99CD9 /* Utils.mm */; };
+		26F1D8E22FC73C39002AA754 /* PeerServicesAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E02FC73C39002AA754 /* PeerServicesAdapterDelegate.swift */; };
+		26F1D8E32FC73C39002AA754 /* PeerSharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E12FC73C39002AA754 /* PeerSharingService.swift */; };
+		26F1D8E62FC73C6E002AA754 /* PeerServicesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8E52FC73C6E002AA754 /* PeerServicesAdapter.mm */; };
+		26F1D8F02FC76A78002AA754 /* PeerSharingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */; };
+		26F1D8F32FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */; };
 		26F5442D2C5815770069A7A4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F5442C2C5815770069A7A4 /* WelcomeView.swift */; };
 		26F544A32C5AABD20069A7A4 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */; };
 		26F82D042D7A09AF00954A7B /* libnatpmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F82D032D7A09AE00954A7B /* libnatpmp.xcframework */; };
@@ -1134,6 +1139,13 @@
 		26EFD7F72E2EB35200B63F74 /* MediaUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaUtils.h; sourceTree = "<group>"; };
 		26EFD7F82E2EB38300B63F74 /* VideoUtils.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = VideoUtils.mm; sourceTree = "<group>"; };
 		26EFD8012E2ED72400B63F74 /* ObjcTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcTypes.h; sourceTree = "<group>"; };
+		26F1D8E02FC73C39002AA754 /* PeerServicesAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerServicesAdapterDelegate.swift; sourceTree = "<group>"; };
+		26F1D8E12FC73C39002AA754 /* PeerSharingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingService.swift; sourceTree = "<group>"; };
+		26F1D8E42FC73C6E002AA754 /* PeerServicesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeerServicesAdapter.h; sourceTree = "<group>"; };
+		26F1D8E52FC73C6E002AA754 /* PeerServicesAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PeerServicesAdapter.mm; sourceTree = "<group>"; };
+		26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerSharingServiceTests.swift; sourceTree = "<group>"; };
+		26F1D8F12FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCMockPeerServicesAdapter.h; sourceTree = "<group>"; };
+		26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCMockPeerServicesAdapter.m; sourceTree = "<group>"; };
 		26F5442C2C5815770069A7A4 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		26F544A22C5AABD20069A7A4 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-release.entitlements"; sourceTree = "<group>"; };
@@ -2801,6 +2813,8 @@
 				263C16642D94E1A6008E102C /* Calls */,
 				56BBC9A01ED714DF00CDAF8B /* MessagesAdapterDelegate.swift */,
 				56BBC9A11ED714DF00CDAF8B /* ConversationsService.swift */,
+				26F1D8E02FC73C39002AA754 /* PeerServicesAdapterDelegate.swift */,
+				26F1D8E12FC73C39002AA754 /* PeerSharingService.swift */,
 				02B22E081DF7585F000358C9 /* DaemonService.swift */,
 				02B22DFE1DF755DB000358C9 /* AccountsService.swift */,
 				0273C2FE1E0C438F00CF00BA /* AccountAdapterDelegate.swift */,
@@ -2874,6 +2888,8 @@
 				26D08ABD2696296300E37574 /* RequestsAdapter.mm */,
 				26EFD7F72E2EB35200B63F74 /* MediaUtils.h */,
 				26EFD7F82E2EB38300B63F74 /* VideoUtils.mm */,
+				26F1D8E42FC73C6E002AA754 /* PeerServicesAdapter.h */,
+				26F1D8E52FC73C6E002AA754 /* PeerServicesAdapter.mm */,
 			);
 			path = Bridging;
 			sourceTree = "<group>";
@@ -3001,6 +3017,7 @@
 				04399A121D1C2D9D00E99CD9 /* Info.plist */,
 				260AE64129C266B300D66D5E /* CallsTests */,
 				AA0003010000000000000003 /* MediaPreviewModelSaveTests.swift */,
+				26F1D8EF2FC76A78002AA754 /* PeerSharingServiceTests.swift */,
 			);
 			path = RingTests;
 			sourceTree = "<group>";
@@ -3314,6 +3331,8 @@
 		260AE63129BA5BB500D66D5E /* TestableModels */ = {
 			isa = PBXGroup;
 			children = (
+				26F1D8F12FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.h */,
+				26F1D8F22FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m */,
 				2681AC6F2F893D8E00550A4F /* ObjCMockVideoAdapter.h */,
 				2681AC702F893D8E00550A4F /* ObjCMockVideoAdapter.m */,
 				260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */,
@@ -4230,6 +4249,7 @@
 				26625BB52BA9DF67009D2DDB /* ConversationsView.swift in Sources */,
 				BB4C6E2629229131001C901A /* ColorExtension.swift in Sources */,
 				269DA09928E23D37007D51D6 /* MessageRowView.swift in Sources */,
+				26F1D8E62FC73C6E002AA754 /* PeerServicesAdapter.mm in Sources */,
 				2637E5662DDE662200ACCF91 /* Constants.swift in Sources */,
 				26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */,
 				269DA09D28E23F57007D51D6 /* MessagesListView.swift in Sources */,
@@ -4490,6 +4510,8 @@
 				267B95F92C2B5FB000353B01 /* LinkDeviceView.swift in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
 				1A2D18A41F27EF5200B2C785 /* AppCoordinator.swift in Sources */,
+				26F1D8E22FC73C39002AA754 /* PeerServicesAdapterDelegate.swift in Sources */,
+				26F1D8E32FC73C39002AA754 /* PeerSharingService.swift in Sources */,
 				26D87CEB2BBB4A5F0086E4AA /* AccountsViewModel.swift in Sources */,
 				1A2D18C31F29180700B2C785 /* AccountModel.swift in Sources */,
 				62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */,
@@ -4540,6 +4562,7 @@
 				2637E5612DD96BE000ACCF91 /* ActiveCallsHelperTests.swift in Sources */,
 				26A2B0522E8DC59E00A3E1B2 /* ActiveCallsViewModelTests.swift in Sources */,
 				260AE63729BE177000D66D5E /* ContactUtilsTests.swift in Sources */,
+				26F1D8F02FC76A78002AA754 /* PeerSharingServiceTests.swift in Sources */,
 				260AE63A29C0C81300D66D5E /* CallProviderDelegateTests.swift in Sources */,
 				260AE62B29B8F97300D66D5E /* TestableSwarmInfo.swift in Sources */,
 				263C167D2D98C957008E102C /* CallTestUtils.swift in Sources */,
@@ -4550,6 +4573,7 @@
 				260AE63529BE00F100D66D5E /* Constants.swift in Sources */,
 				2681AC712F893D8E00550A4F /* ObjCMockVideoAdapter.m in Sources */,
 				2681AC732F893DFD00550A4F /* VideoServiceMediaChangeTests.swift in Sources */,
+				26F1D8F32FC76A8B002AA754 /* ObjCMockPeerServicesAdapter.m in Sources */,
 				029CE9D71E1D8C860000C8E1 /* ServiceEventTests.swift in Sources */,
 				263C16872D9EF75E008E102C /* CallsServiceTests.swift in Sources */,
 				260AE62929B8ECA400D66D5E /* TestableFilteredDataSource.swift in Sources */,
