@@ -78,7 +78,8 @@ final class LinkToAccountVMTests: XCTestCase {
                                     withCallsProvider: callsProvider,
                                     withLocationSharingService: locationSharingService,
                                     withRequestsService: requestsService,
-                                    withSystemService: systemService)
+                                    withSystemService: systemService,
+                                    withPeerSharingService: TestPeerSharingFactory.createService())
         viewModel = LinkToAccountVM(with: injectionBag, linkAction: {})
     }
 

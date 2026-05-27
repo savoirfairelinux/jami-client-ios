@@ -70,7 +70,8 @@ final class SwarmInfoTests: XCTestCase {
                                     withCallsProvider: callsProvider,
                                     withLocationSharingService: locationSharingService,
                                     withRequestsService: requestsService,
-                                    withSystemService: systemService)
+                                    withSystemService: systemService,
+                                    withPeerSharingService: TestPeerSharingFactory.createService())
         swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: "")
     }
 
