@@ -29,8 +29,8 @@ enum CallTestConstants {
     static let invalidCallId = "invalid-call-id"
     static let profileUri = "test-uri"
     static let participantUri = "test-participant"
-    static let displayName = "John Doe"
-    static let registeredName = "john"
+    static let displayName = "Test User"
+    static let registeredName = "test-user"
     static let messageContent = "test message"
 }
 
@@ -126,5 +126,13 @@ struct TestMediaFactory {
             MediaAttributeKey.enabled.rawValue: enabled ? "true" : "false",
             MediaAttributeKey.source.rawValue: source
         ]
+    }
+}
+
+// MARK: - Peer Sharing Helpers
+
+enum TestPeerSharingFactory {
+    static func createService() -> PeerSharingService {
+        PeerSharingService(withPeerServicesAdapter: ObjCMockPeerServicesAdapter())
     }
 }
